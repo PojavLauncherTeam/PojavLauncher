@@ -12,4 +12,4 @@ Not yet, this repository currently for bug tracking.
 ## Probelm after switching to
 - Low performance.
 - No mouse pointer.
-- Can't compatible with some devices running Android 10 and above. [Reason?](https://issuetracker.google.com/issues/128554619).
+- Can't compatible with some devices running Android 10 and above. [Reason?](https://issuetracker.google.com/issues/128554619)
