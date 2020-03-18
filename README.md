@@ -5,7 +5,7 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 Not yet, this repository currently for bug tracking.
 
 # Planning
-- ~~If [exagear_windows_emulator](https://github.com/khanhduytran0/exagear_windows_emulator) repository is runnable then I will make PojavLauncher v3.~~
+- ~~If [exagear_windows_emulator](https://github.com/khanhduytran0/exagear_windows_emulator) repository is runnable then I will make PojavLauncher v3.~~ There are too many probelms when switching to Exagear Windows Emulator code, read below.
 - Adding custom version.
 ## Probelms before switching to
 - Source code not working.
