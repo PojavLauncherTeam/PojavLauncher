@@ -80,7 +80,7 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center">No</td>
 		  <td align="center">???</td>
 		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/1#issuecomment-600732970"><b>Yes</b></a></td>
-		  <td align="center">Not yet</td>
+		  <td align="center">Partial</td>
 		</tr>
 		<tr>
 		  <td>10.0</td>
