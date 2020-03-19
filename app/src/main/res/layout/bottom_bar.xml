@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="#000000"
+	android:layout_width="fill_parent"
+	android:layout_height="49.5px"
+	android:layout_alignParentBottom="true">
+
+	<TextView
+		android:gravity="center_vertical"
+		android:id="@+id/bottombar_version_view"
+		android:paddingLeft="15px"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:text="version"
+		android:textColor="#FFFFFF"/>
+
+	<ImageView
+		android:layout_width="225px"
+		android:layout_height="match_parent"
+		android:src="@drawable/mojang_logo"
+		android:layout_alignParentRight="true"
+		android:padding="9px"
+		android:background="#000000"
+		android:id="@+id/bottombar_author_logo"/>
+
+</RelativeLayout>
+

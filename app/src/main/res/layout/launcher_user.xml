@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:gravity="center">
+
+	<EditText
+		android:imeOptions="flagNoExtractUi"
+		android:layout_width="264dp"
+		android:layout_height="wrap_content"
+		android:hint="Username"
+		android:id="@+id/launcherAccUsername"
+		android:inputType="text"
+		android:maxLength="16"
+		android:layout_marginBottom="5dp"/>
+
+	<TextView
+		android:layout_width="264dp"
+		android:layout_height="30dp"
+		android:text="Register"
+		android:onClick="loginFree"
+		android:background="@drawable/mcbutton"
+		android:layout_marginBottom="5dp"
+		android:gravity="center"/>
+
+</LinearLayout>
+

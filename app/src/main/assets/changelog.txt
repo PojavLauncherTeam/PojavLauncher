@@ -1,0 +1,56 @@
+# 1.0 ALPHA (private):
+ • Initial release.
+
+# 1.2 ALPHA:
+ • Changes:
+  - Added 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted versions.
+  - Added Tab, Screenshot, Force close buttons.
+
+# 1.4 (Lost source code and APK before release)
+  - Added Download version option.
+  - Added virtual mouse (but better than 2.0 mouse rewrite)
+
+# v2.0 BETA:
+ • Changes:
+  - (Partial) New design (copy of 2017 MCPC launcher)
+  - Changed how users load/save.
+  - Added Menu: for more options to select.
+  - Added virtual mouse: helper for touching small objects! Styled PC mouse.
+  
+ • Fixed:
+  - Max progress -1 when converting.
+  - Verification failed when run some versions (by patch the client file)
+
+# v2.1 BETA release:
+ • Changes:
+  - Added Changelog button!
+  - Custom versions now visible in the list (not implemented for user)
+  - In-app Update now got fuctionally.
+  - Replaced glshim with GL4ES for OpenGL 2.0 renderer.
+  
+# v2.2 BETA (private):
+ • Changes:
+  - Added busybox.
+  - Added OpenJDK for converter ARM64 only.
+  - Added more AWT functions.
+  - Screenshot (and F2 key) now capture using directly API (javax.imageio).
+  
+# v2.3 BETA release:
+ • Changes:
+  - Changed some code in update function.
+  
+# v2.3.1 BETA release:
+ • Changes:
+  - Added text selection on OpenJDK install log.
+  - Fixed devices can't be installed OpenJDK but able to hide the dialog.
+  
+# v2.4 RELEASE:
+ • Remember: If your device is Android higher or equals to 7.0, use VMOS app. This app install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed out of Play Store, you must install it manually)
+  
+ • Changes:
+  - Removed OpenJDK and busybox.
+  
+# Not fixed:
+  - In some devices, app will gone or crash if it run in background.
+  - Some version under 1.7 may not smoothly due to AWT from OpenJDK.
+  - Virtual mouse is stick to scroll screens.

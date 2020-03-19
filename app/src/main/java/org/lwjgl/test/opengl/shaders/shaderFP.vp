@@ -1,0 +1,37 @@
+!!ARBvp1.0
+
+ATTRIB iPos             = vertex.position;
+ATTRIB iNormal          = vertex.normal;
+
+PARAM mvp[4]            = { state.matrix.mvp };
+PARAM mvIT[4]          	= { state.matrix.modelview.invtrans };
+
+PARAM lightDir     	= state.light[0].position;
+PARAM halfDir      	= state.light[0].half;
+
+PARAM UNIFORMS		= program.local[0];
+
+TEMP normal, dots;
+
+OUTPUT oPos		= result.position;
+OUTPUT oDots	        = result.texcoord[0];
+
+# Transform the vertex to clip coordinates.
+DP4	oPos.x, mvp[0], iPos;
+DP4	oPos.y, mvp[1], iPos;
+DP4	oPos.z, mvp[2], iPos;
+DP4	oPos.w, mvp[3], iPos;
+
+# Transform the normal to eye coordinates.
+DP3	normal.x, mvIT[0], iNormal;
+DP3	normal.y, mvIT[1], iNormal;
+DP3	normal.z, mvIT[2], iNormal;
+        
+# Compute diffuse and specular dot products and clamp them.
+DP3	dots.x, normal, lightDir;
+MAX	oDots.x, dots.x, 0.0;
+
+DP3	dots.y, normal, halfDir;
+MAX	oDots.y, dots.y, 0.0;
+
+END

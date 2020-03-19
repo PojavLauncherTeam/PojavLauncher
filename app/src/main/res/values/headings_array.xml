@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="mcl_options">
+		<item>@string/mcl_option_modmgr</item>
+		<item>@string/mcl_option_checkupdate</item>
+		<item>@string/mcl_option_about</item>
+	</string-array>
+</resources>

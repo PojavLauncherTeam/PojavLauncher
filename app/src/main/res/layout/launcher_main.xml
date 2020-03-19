@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<RelativeLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center_horizontal">
+
+		<LinearLayout
+			android:id="@+id/launchermainFragmentTabView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"
+			android:orientation="vertical">
+
+			<android.support.design.widget.TabLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/launchermainTabLayout"/>
+
+			<android.support.v4.view.ViewPager
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:id="@+id/launchermainTabPager"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_alignParentBottom="true"
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="#EEEEEE"
+			android:gravity="center_horizontal">
+
+			<ProgressBar
+				android:id="@+id/progressDownloadBar"
+				android:layout_width="match_parent"
+				style="?android:attr/progressBarStyleHorizontal"
+				android:layout_height="10dp"
+				android:layout_above="@id/launchermainFragmentTabView"
+				android:visibility="gone"/>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="20dp"
+				android:layout_below="@id/progressDownloadBar"
+				android:gravity="center_horizontal"
+				android:text="Looks like you are stucking on it. Restart the launcher to fix."
+				android:id="@+id/progressDownloadText"
+				android:visibility="gone"/>
+
+			<LinearLayout
+				android:layout_alignParentBottom="true"
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="80dp"
+				android:gravity="center_horizontal">
+
+				<LinearLayout
+					android:id="@+id/launcherMainLeftLayout"
+					android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="80dp"
+					android:layout_alignParentBottom="true"
+					android:gravity="center_horizontal"
+					android:layout_alignParentLeft="true">
+
+					<LinearLayout
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_height="match_parent"
+							android:text="Version:"
+							android:textAppearance="?android:attr/textAppearanceMedium"
+							android:id="@+id/lMTVVer"
+							android:gravity="center"
+							android:textSize="12sp"
+							android:layout_width="wrap_content"/>
+
+						<Spinner
+							android:layout_width="match_parent"
+							android:layout_height="40dp"
+							android:id="@+id/launcherMainSelectVersion"/>
+
+					</LinearLayout>
+
+					<Button
+						android:layout_width="match_parent"
+						android:layout_height="40dp"
+						android:text="Options"
+						android:onClick="launcherMenu"
+						style="?android:attr/buttonBarButtonStyle"/>
+
+				</LinearLayout>
+
+				<com.kdt.mcgui.MineButton
+					android:layout_toRightOf="@id/lMTVVer"
+					android:layout_toLeftOf="@id/launcherMainLeftLayout"
+					android:layout_width="wrap_content"
+					android:layout_height="80dp"
+					android:text="Play"
+					android:layout_alignParentBottom="true"
+					android:onClick="launchGame"
+					android:id="@+id/launcherMainPlayButton"
+					android:layout_margin="5dp"/>
+
+				<LinearLayout
+					android:id="@+id/launcherMainRightLayout"
+					android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="80dp"
+					android:layout_alignParentBottom="true"
+					android:gravity="center_horizontal"
+					android:layout_alignParentRight="true">
+
+					<LinearLayout
+						android:orientation="horizontal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="20dp"
+							android:text="Welcome,"
+							android:layout_marginRight="4dp"
+							android:textSize="12sp"
+							android:gravity="center"/>
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="20dp"
+							android:text="guest"
+							android:id="@+id/launcherMainUsernameView"
+							android:textStyle="bold"
+							android:textSize="12sp"
+							android:gravity="center"/>
+
+					</LinearLayout>
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="20dp"
+						android:text="Please log in to continue!"
+						android:id="@+id/launcherMainVersionView"
+						android:textSize="12sp"
+						android:gravity="center"/>
+
+					<LinearLayout
+						android:id="@+id/launcherMainExitbtns"
+						android:orientation="horizontal"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<Button
+							android:layout_width="88dp"
+							android:layout_height="40dp"
+							android:text="Info (DEV)"
+							android:textSize="10sp"
+							android:onClick="mcaccSwitchUser"
+							style="?android:attr/buttonBarButtonStyle"/>
+
+						<Button
+							android:layout_width="match_parent"
+							android:layout_height="40dp"
+							android:text="Switch user"
+							android:textSize="10sp"
+							android:onClick="mcaccLogout"
+							style="?android:attr/buttonBarButtonStyle"/>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</RelativeLayout>
+
+</LinearLayout>
+

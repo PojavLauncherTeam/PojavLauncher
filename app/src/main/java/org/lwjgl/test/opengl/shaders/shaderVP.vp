@@ -1,0 +1,59 @@
+!!ARBvp1.0
+
+ATTRIB iPos             = vertex.position;
+ATTRIB iNormal          = vertex.normal;
+
+PARAM mvp[4]            = { state.matrix.mvp };
+PARAM mvIT[4]          	= { state.matrix.modelview.invtrans };
+
+PARAM ambience		= state.lightmodel.ambient;
+
+PARAM lightDir     	= state.light[0].position;
+PARAM halfDir      	= state.light[0].half;
+PARAM diffuseColor      = state.light[0].diffuse;
+PARAM specularColor     = state.light[0].specular;
+
+PARAM UNIFORMS		= program.local[0];
+
+TEMP temp, temp2, normal, dots;
+
+OUTPUT oPos		= result.position;
+OUTPUT oColor	        = result.color;
+
+# Transform the vertex to clip coordinates.
+DP4	oPos.x, mvp[0], iPos;
+DP4	oPos.y, mvp[1], iPos;
+DP4	oPos.z, mvp[2], iPos;
+DP4	oPos.w, mvp[3], iPos;
+
+# Transform the normal to eye coordinates.
+DP3	normal.x, mvIT[0], iNormal;
+DP3	normal.y, mvIT[1], iNormal;
+DP3	normal.z, mvIT[2], iNormal;
+        
+# Compute diffuse and specular dot products and use LIT to compute
+# lighting coefficients.
+DP3	dots.x, normal, lightDir;
+DP3	dots.y, normal, halfDir;
+MOV	dots.w, UNIFORMS.y;
+LIT	dots, dots;
+
+# Normalize position, to get a {-1..1} value for each vertex.
+DP3	temp.w, iPos, iPos;
+RSQ	temp.w, temp.w;
+MUL	temp.xyz, iPos, temp.w;
+
+# Multiply with current sin.
+MUL	temp.xyz, temp, UNIFORMS.x;
+# {-1..1} => {0..1}
+MAD	temp.xyz, temp, 0.5, 0.5;
+# Intensify colors.
+MUL	temp.xyz, temp, 2.0;
+
+# Accumulate color contributions.
+MAD   temp.xyz, dots.y, temp, ambience;
+MAD   oColor.xyz, dots.z, specularColor, temp;
+MOV   oColor.w, 1.0;
+
+
+END

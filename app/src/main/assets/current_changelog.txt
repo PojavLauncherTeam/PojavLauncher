@@ -1,0 +1,28 @@
+Version 2.4.1
+
+* Changed (user):
+- Translate is easier than before.
+- UI layout now fit to the big screen.
+- Fixed click event triggered after touch screen.
+
+* Changed (development):
+- Redesigned partially of UI.
+- Added 'Do not show again' to warning to unsupported Android version.
+- Moved strings to /res/values/strings.xml for easy translating.
+- Fixed touch event trigger as click on LWJGL (exist from Boardwalk)
+
+* The first as '#' for FIXED or DID IT.
+* Or as '$' for PARTIAL '#'.
+
+* Know issuses from 2.4 affect in Android 9 devices.
+- Cannot find class 'com.google.guava.?' (#E0402)
+
+* TODO of the launcher:
+# Clean unused AWT classes.
+# Optimize more performance of AWT classes.
+$ Fill in all missing classes.
+$ Redesign user interface.
+$ Run without VMOS (VMOS takes ~500MB for secondary Android system).
+- External mouse tracker.
+- Make LWJGL3 and GLFW translator code to LWJGL2.
+- Support client 1.13 and above.

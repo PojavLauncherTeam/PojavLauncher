@@ -1,0 +1,32 @@
+ - multidoj is a modified version of dx.jar (dexer tool).
+ - It creates raw dex files and a resources.jar in multidoj folder, make the RAM usage is fewer than dx.
+ - multidoj implements multidex and process listener for embedding to an app.
+
+NOTE: multidoj24 is unstable on Android 7.0 and up. So may not support...
+ 
+How to use multidoj:
+ - For embedding to your app:
+  + Make sure you have added these import:
+   // Begin code
+   import com.android.dx.observer.ObserverStatus;
+   // End code
+  + Next, set the listener when processing files:
+   // Begin code
+   ObserverStatus.setListener(new ObserverStatus.ProcessListener(){
+       @Override
+       public void onProcess(String msg, int max, int current) {
+           // Implements your code here
+       }
+   });
+   // End code
+  + Finally, convert a file:
+   // Begin code
+   String INPUT_FILE = "(your input file path)";
+   String OUTPUT_FILE = "(your output file path)";
+   
+   com.android.dx.command.Main.main(
+    "--dex", "--output", OUTPUT_FILE, INPUT_FILE
+   );
+   // End code
+ - For load via JarClassLoader
+ NOTE: Only dexer feature has observer.

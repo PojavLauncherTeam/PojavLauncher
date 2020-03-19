@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+		android:id="@+id/nav_forceclose"
+		android:title="@string/control_forceclose" />
+	<item
+		android:id="@+id/nav_viewlog"
+		android:title="@string/control_viewout" />
+	<item
+		android:id="@+id/nav_viewcanvas"
+		android:title="@string/control_more2" />
+	<item
+		android:id="@+id/nav_more3"
+		android:title="@string/control_more3" />
+</menu>
