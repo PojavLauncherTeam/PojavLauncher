@@ -735,47 +735,32 @@ public class MainActivity extends Activity implements OnTouchListener
 		appendToLog(text + "\n");
 	}
 	
-	private boolean isLogAllowed = false;
-	private boolean isFirstLog = true;
 	private void appendToLog(final String text) {
-		new Thread(new Runnable(){
-
-				@Override
-				public void run()
-				{
-					while (!isLogAllowed) {
-						try {
-							if (isFirstLog) {
-								isFirstLog = false;
-								Thread.sleep(5000);
-								isLogAllowed = true;
-							}
-							
-							Thread.sleep(100);
-						} catch (InterruptedException e) {}
+		// test skip
+		if (true) return;
+		
+		
+		
+		
+			textLog.post(new Runnable(){
+					private String allText;
+					@Override
+					public void run()
+					{
+						textLog.append(text);
+						if (toggleScrollLog.isChecked()) {
+							contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
+						}
 					}
-					
-					textLog.post(new Runnable(){
-							private String allText;
-							@Override
-							public void run()
-							{
-								textLog.append(text);
-								if (toggleScrollLog.isChecked()) {
-									contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
-								}
-							}
-						});
-					textLogBehindGL.post(new Runnable(){
+				});
+			textLogBehindGL.post(new Runnable(){
 
-							@Override
-							public void run()
-							{
-								textLogBehindGL.append(text);
-							}
-						});
-				}
-			}, "PojavLoggerThread").start();
+					@Override
+					public void run()
+					{
+						textLogBehindGL.append(text);
+					}
+				});
 	}
 	
 	public void handleMessage(Message msg) {

@@ -292,7 +292,7 @@ public final class Tools
 		mainLoader.loadClass("com.android.dx.observer.ObserverStatus").getMethod("setReceiver", String.class).invoke(null, receiveMethod);
 		Class mainClass = mainLoader.loadClass("com.android.dx.command.Main");
 		Method mainMethod = mainClass.getMethod("main", new String[]{}.getClass());
-		mainMethod.invoke(null, new Object[]{new String[]{"--dex",  "--output", newFileOut.getAbsolutePath(), fileIn}});
+		mainMethod.invoke(null, new Object[]{new String[]{"--dex", "--no-optimize", "--min-sdk-version=" + Build.VERSION.SDK_INT, "--output", newFileOut.getAbsolutePath(), fileIn}});
 		//com.android.dx.mod.Main.dexTheJar(fileIn, fileOut, ctx.getCacheDir().getAbsolutePath(), listener);
 		
 		

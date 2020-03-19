@@ -22,9 +22,10 @@ public class DownloadUtils {
         InputStream is = null;
         byte[] buf; // 16384
         try {
+			// System.out.println("Connecting: " + url.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
-			conn.setConnectTimeout(2000);
+			conn.setConnectTimeout(10000);
             conn.setDoInput(true);
             conn.connect();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
