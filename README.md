@@ -14,13 +14,13 @@ Not yet, this repository currently for bug tracking.
 - No mouse pointer.
 - Can't compatible with some devices running Android 10 and above. [Reason?](https://issuetracker.google.com/issues/128554619)
 
-# What Minecraft versions worked?
+# Minecraft versions worked in PojavLauncher 2.4
 
 <table>
 	  <thead>
 		<tr>
 		  <th></th>
-		  <th align="center" colspan="6">Minecraft version</th>
+		  <th align="center" colspan="7">Minecraft version</th>
 		</tr>
 		<tr>
 		  <th>Android</th>
@@ -30,6 +30,7 @@ Not yet, this repository currently for bug tracking.
 		  <th align="center">1.10</th>
 		  <th align="center">1.11</th>
 		  <th align="center">1.12</th>
+		  <th align="center">1.12.2</th>
 		</tr>
 	  </thead>
 	  <tbody>
@@ -38,6 +39,7 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
+		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
@@ -50,11 +52,13 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
+		  <td align="center">???</td>
 		</tr>
 	  </tbody>
 	  <tbody>
 		<tr>
 		  <td>7.x</td>
+		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
@@ -70,6 +74,7 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
+		  <td align="center">???</td>
 		</tr>
 	  </tbody>
 	  <tbody>
@@ -80,10 +85,12 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center">No</td>
 		  <td align="center">???</td>
 		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/1#issuecomment-600732970"><b>Yes</b></a></td>
+		  <td align="center">???</td>
 		  <td align="center">Partial</td>
 		</tr>
 		<tr>
 		  <td>10.0</td>
+		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
