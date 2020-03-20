@@ -69,8 +69,8 @@ Not yet, this repository currently for bug tracking.
 		<tr>
 		  <td>8.x</td>
 		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
