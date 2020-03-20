@@ -298,7 +298,7 @@ public class PojavLoginActivity extends MineActivity
 			
 			Tools.copyAssetOptional(this, "options.txt", Tools.MAIN_PATH + "/gamedir");
 			//Tools.copyAssetToFolderIfNonExist(this, "dx-f" + (isAndroid7() ? "7" : "4")  + ".0.jar", Tools.worksDir, "dx.jar");
-			Tools.copyAssetOptional(this, "multidoj.dex", Tools.worksDir);
+			Tools.copyAssetOptional(this, "pojavdx.dex", Tools.worksDir);
 			
 			// Copy ZIP!!!
 			

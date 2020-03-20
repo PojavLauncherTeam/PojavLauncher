@@ -52,52 +52,7 @@ public final class Tools
 	}
 
 	public static String getPatchedFile(String version) {
-		return versnDir + "/" + version + "/multidoj/patched" + version + ".jar";
-	}
-
-	/*
-	 * Implements to get multidoj dexed folder
-	 */
-	//private static boolean isPatched = false;
-	public static String returnMultidojOrFile(String jarPath, final boolean isClient)
-	{
-		//isPatched = false;
-
-		if (new File(jarPath).exists()) {
-			// Check if jar file is exists
-			return ":" + jarPath;// + ":";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		File file = new File(jarPath.substring(0, jarPath.lastIndexOf("/")) + "/multidoj");
-
-		File[] classes = file.listFiles(new FilenameFilter(){
-
-				@Override
-				public boolean accept(File dir, String name)
-				{
-					if (isClient) {
-						if (name.endsWith(".dex") || name.startsWith("patched")) {
-							return true;
-						}
-					} else {
-						if (name.endsWith(".dex") || name.endsWith(".jar")) {
-							return true;
-						}
-					}
-
-					return false;
-				}
-			});
-		try {
-			for (File f : classes) {
-				sb.append(":" + f.getAbsolutePath());// + ":");
-			}
-		} catch (Exception e) {
-			// skip broken library
-			return "";
-		}
-		return ":" + sb.toString();
+		return versnDir + "/" + version + "/" + version + ".jar";
 	}
 
 	// May useless
@@ -111,10 +66,9 @@ public final class Tools
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 		String[] classpath = Tools.generateLibClasspath(Tools.getVersionInfo(version).libraries);
 
-		libStr.append(returnMultidojOrFile(versnDir + "/" + version + "/" + version + ".jar", true).substring(1));
-		//libStr.append(getPatchedFile(version));
-		for (String perclass : classpath) {
-			libStr.append(returnMultidojOrFile(perclass, false));
+		libStr.append(versnDir + "/" + version + "/" + version + ".jar");
+		for (String perJar : classpath) {
+			libStr.append(":" + perJar);
 		}
 
 		return libStr.toString();
@@ -275,24 +229,19 @@ public final class Tools
 		return libDir.toArray(new String[0]);
 	}
 	
-	public static void runDx(final Activity ctx, String fileIn, String fileOut, MultidojManager.Listen listener) throws Exception
+	public static void runDx(final Activity ctx, String fileIn, String fileOut, PojavDXManager.Listen listener) throws Exception
 	{
-		MultidojManager.setListener(listener);
+		PojavDXManager.setListener(listener);
 		
 		File optDir = ctx.getDir("dalvik-cache", 0);
 		optDir.mkdirs();
 		
-		File out = new File(fileOut);
-		File newFileOut = new File(out.getParent() + File.separator + "multidoj" + File.separator + "resources" + (System.currentTimeMillis()) + ".jar");
-		newFileOut.getParentFile().mkdirs();
 		//Class
-		DexClassLoader mainLoader = new DexClassLoader(Tools.worksDir + "/multidoj.dex", optDir.getAbsolutePath(), ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).applicationInfo.nativeLibraryDir, MainActivity.class.getClassLoader());
+		DexClassLoader mainLoader = new DexClassLoader(Tools.worksDir + "/pojavdx.dex", optDir.getAbsolutePath(), ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).applicationInfo.nativeLibraryDir, MainActivity.class.getClassLoader());
 		
-		String receiveMethod = "net.kdt.pojavlaunch.MultidojManager->call(message:String, max:Integer, current:Integer)";
-		mainLoader.loadClass("com.android.dx.observer.ObserverStatus").getMethod("setReceiver", String.class).invoke(null, receiveMethod);
 		Class mainClass = mainLoader.loadClass("com.android.dx.command.Main");
-		Method mainMethod = mainClass.getMethod("main", new String[]{}.getClass());
-		mainMethod.invoke(null, new Object[]{new String[]{"--dex", "--no-optimize", "--min-sdk-version=" + Build.VERSION.SDK_INT, "--output", newFileOut.getAbsolutePath(), fileIn}});
+		Method mainMethod = mainClass.getMethod("main", String[].class);
+		mainMethod.invoke(null, new Object[]{new String[]{"--dex", "--min-sdk-version=" + Build.VERSION.SDK_INT, "--no-optimize", "--output", fileOut, fileIn}});
 		//com.android.dx.mod.Main.dexTheJar(fileIn, fileOut, ctx.getCacheDir().getAbsolutePath(), listener);
 		
 		

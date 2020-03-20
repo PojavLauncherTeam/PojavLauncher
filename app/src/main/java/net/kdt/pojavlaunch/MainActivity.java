@@ -31,6 +31,7 @@ import org.lwjgl.util.glu.tessellation.*;
 import android.graphics.drawable.Drawable;
 import android.view.GestureDetector.*;
 import java.util.concurrent.locks.*;
+import com.kdt.pointer.*;
 public class MainActivity extends Activity implements OnTouchListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
@@ -76,8 +77,11 @@ public class MainActivity extends Activity implements OnTouchListener
 	private TextView textLog, textLogBehindGL;
 	private ScrollView contentScroll;
 	private ToggleButton toggleScrollLog;
-	
 	private GestureDetector gestureDetector;
+	
+	private PointerOreoWrapper pointerSurface;
+	
+	private StringBuilder mQueueText = new StringBuilder();
 	
 	/*
 	private LinearLayout contentCanvas;
@@ -86,6 +90,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	private boolean lastEnabled = false;
 	private boolean lastGrab = false;
 	private boolean isExited = false;
+	private boolean isLogAllow = false;
 	
 	private String getStr(int id) {
 		return getResources().getString(id);
@@ -211,8 +216,9 @@ public class MainActivity extends Activity implements OnTouchListener
 			this.textLog = (TextView) contentScroll.getChildAt(0);
 			this.toggleScrollLog = (ToggleButton) findViewById(R.id.content_log_toggle_scrolldown);
 			this.toggleScrollLog.setChecked(true);
-			this.textLogBehindGL = findViewById(R.id.main_log_behind_GL);
+			this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
 			this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
+			
 			
 			/*
 			this.contentCanvas = (LinearLayout) findViewById(R.id.content_canvas_layout);
@@ -263,11 +269,11 @@ public class MainActivity extends Activity implements OnTouchListener
 										
 										if (isPointerCaptureSupported()) {
 											if (!AndroidDisplay.grab && isCapturing) {
-												glSurfaceView.releasePointerCapture();
+												pointerSurface.releaseCapture(); // glSurfaceView.releasePointerCapture();
 												isCapturing = false;
 											} else if (AndroidDisplay.grab && !isCapturing) {
 												glSurfaceView.requestFocus();
-												glSurfaceView.requestPointerCapture();
+												pointerSurface.requestCapture(); // glSurfaceView.requestPointerCapture();
 												isCapturing = true;
 											}
 										}
@@ -362,6 +368,7 @@ public class MainActivity extends Activity implements OnTouchListener
 		
 
 		this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
+		
 		glSurfaceView.setEGLContextClientVersion(2);
 		
 		final View.OnTouchListener glTouchListener = new OnTouchListener(){
@@ -431,6 +438,19 @@ public class MainActivity extends Activity implements OnTouchListener
 				// If onClick fail with false, change back to true
 			}
 		};
+		
+		if (isPointerCaptureSupported()) {
+			this.pointerSurface = new PointerOreoWrapper(glSurfaceView);
+			this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
+
+					@Override
+					public boolean onCapturedPointer(View view, MotionEvent event)
+					{
+						return glTouchListener.onTouch(view, event);
+					}
+				});
+		}
+		
 		glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
 
 				@Override
@@ -496,6 +516,22 @@ public class MainActivity extends Activity implements OnTouchListener
 		glSurfaceView.setPreserveEGLContextOnPause(true);
 		glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
 		glSurfaceView.requestRender();
+		/*
+		new Thread(new Runnable(){
+
+				@Override
+				public void run()
+				{
+					try {
+						Thread.sleep(5000);
+						isLogAllow = true;
+						appendToLog("");
+					} catch (InterruptedException e) {}
+				}
+			}).start();
+		*/
+		
+		
 		
 		// Mirror video of OpenGL view.
 		/*
@@ -656,9 +692,9 @@ public class MainActivity extends Activity implements OnTouchListener
 		LoggerJava.OnCharPrintListener printLog = new LoggerJava.OnCharPrintListener(){
 
 			@Override
-			public void onCharPrint(char c)
+			public void onCharPrint(String s)
 			{
-				appendToLog(Character.toString(c));
+				appendToLog(s);
 			}
 		};
 		
@@ -669,9 +705,11 @@ public class MainActivity extends Activity implements OnTouchListener
 		System.setErr(theStreamErr);
 
 		String classpath = Tools.generate(mProfile.getVersion());
+		/*
 		System.out.println("> Running Minecraft with classpath:");
 		System.out.println(classpath);
 		System.out.println();
+		*/
 		
 		LaunchClassLoaderAgruments.putAll(classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir);
 		
@@ -736,14 +774,14 @@ public class MainActivity extends Activity implements OnTouchListener
 	}
 	
 	private void appendToLog(final String text) {
-		// test skip
-		if (true) return;
+		// mQueueText.append(text);
 		
+		if (!isLogAllow) {
+			return;
+		}
 		
-		
-		
+		try {
 			textLog.post(new Runnable(){
-					private String allText;
 					@Override
 					public void run()
 					{
@@ -761,6 +799,9 @@ public class MainActivity extends Activity implements OnTouchListener
 						textLogBehindGL.append(text);
 					}
 				});
+		} finally {
+			mQueueText.setLength(0);
+		}
 	}
 	
 	public void handleMessage(Message msg) {

@@ -461,16 +461,16 @@ public class MCLauncherActivity extends AppCompatActivity
 				final StringBuilder currentLog = new StringBuilder();
 				LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnCharPrintListener(){
 						@Override
-						public void onCharPrint(char c)
+						public void onCharPrint(String s)
 						{
-							currentLog.append(c);
+							currentLog.append(s);
 						}
 					});
 				LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnCharPrintListener(){
 						@Override
-						public void onCharPrint(char c)
+						public void onCharPrint(String s)
 						{
-							currentLog.append(c);
+							currentLog.append(s);
 						}
 					});
 				System.setOut(new PrintStream(logOut));
@@ -480,8 +480,8 @@ public class MCLauncherActivity extends AppCompatActivity
 				
 				//Downloading libraries
 				String inputPath = Tools.versnDir + downVName + "_orig.jar";
-				String multidojClientPath = Tools.versnDir + "/" + p1[0] + "/multidoj";
-				String patchedFile = multidojClientPath + "/patched" + p1[0] + ".jar";
+				String unpatchedPath = Tools.versnDir + downVName + "_unpatched.jar";
+				String patchedFile = Tools.versnDir + downVName + ".jar";
 
 				try {
 					//com.android.dx.mod.Main.debug = true;
@@ -506,7 +506,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					setMax(libList.length * 2 + 5);
 
 					String libPathURL;
-					File outUndexLib, outDexedLib, outFinishConvert;
+					File outUndexLib, outDexedLib, outUnpatchedConvert;
 
 					for (final DependentLibrary libItem: libList) {
 
@@ -526,8 +526,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							outUndexLib.getParentFile().mkdirs();
 							//if (!oker) throw new RuntimeException(".thehell: " + outUndexLib.getParent());
 							outDexedLib = new File(Tools.libraries + "/" + Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2])); // Don't add ".jar"
-							outFinishConvert = new File(outDexedLib.getParentFile(), "multidoj/finish");
-							if (!outFinishConvert.exists()) {
+							if (!outDexedLib.exists()) {
 								libPathURL = libItem.downloads.artifact.url;
 								Log.d(Tools.APP_NAME, "Downloading " + libPathURL + " TO FILE " + outUndexLib.getAbsolutePath());
 								publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
@@ -545,7 +544,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								convertStr = getStr(R.string.mcl_launch_convert_lib, libItem.name);
 								publishProgress("1", convertStr);
 								
-								Tools.runDx(MCLauncherActivity.this, outUndexLib.getAbsolutePath(), outDexedLib.getAbsolutePath(), new MultidojManager.Listen(){
+								Tools.runDx(MCLauncherActivity.this, outUndexLib.getAbsolutePath(), outDexedLib.getAbsolutePath(), new PojavDXManager.Listen(){
 
 										@Override
 										public void onReceived(String step, int maxProg, int currProg)
@@ -562,10 +561,10 @@ public class MCLauncherActivity extends AppCompatActivity
 								}
 								*/
 								
-								if (!outFinishConvert.exists()) {
-									Error dxError = new Error("DX Error log recorded:\n" + currentLog.toString());
+								if (!outDexedLib.exists()) {
+									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib) + "\n" + currentLog.toString());
 									dxError.setStackTrace(new StackTraceElement[0]);
-									throw new RuntimeException(getStr(R.string.error_convert_lib, libItem.name)).initCause(dxError);
+									
 								}
 
 								outUndexLib.delete();
@@ -574,13 +573,12 @@ public class MCLauncherActivity extends AppCompatActivity
 					}
 
 					publishProgress("5", getStr(R.string.mcl_launch_download_client) + p1[0]);
-					outFinishConvert = new File(multidojClientPath, "finish");
+					outUnpatchedConvert = new File(unpatchedPath);
 					if (!new File(patchedFile).exists()) {
 						// publishProgress("-1", "DEBUG: PatchedFile=" + patchedPath + ";NonExists!");
-						multidojClientPath = findUnpatch(multidojClientPath);
-						File outFile = new File(multidojClientPath);
-						if (!outFile.exists() || !outFinishConvert.exists()) {
-							// publishProgress("-1", "DEBUG: OutFile=" + outFile + ", OutFinish=" + outFinishConvert + ";NonExists!");
+						File findUnpatchedConvert = new File(findUnpatch(unpatchedPath));
+						if (!findUnpatchedConvert.exists()) {
+							// publishProgress("-1", "DEBUG: OutFile=" + outFile + ", OutFinish=" + outUnpatchedConvert + ";NonExists!");
 							if (!new File(inputPath).exists()) {
 								currentLog.setLength(0);
 								
@@ -593,7 +591,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								convertStr = getStr(R.string.mcl_launch_convert_client, p1[0]);
 								publishProgress("5", convertStr);
 								addProgress = 0;
-								Tools.runDx(MCLauncherActivity.this, inputPath, new File(multidojClientPath).getParent(), new MultidojManager.Listen(){
+								Tools.runDx(MCLauncherActivity.this, inputPath, outUnpatchedConvert.getAbsolutePath(), new PojavDXManager.Listen(){
 
 										@Override
 										public void onReceived(String step, int maxProg, int currProg)
@@ -603,18 +601,20 @@ public class MCLauncherActivity extends AppCompatActivity
 											publishProgress("0", convertStr + " (" + currProg + "/" + maxProg + ") " + step, "");
 										}
 									});
-								if (!outFinishConvert.exists()) {
+								if (!outUnpatchedConvert.exists()) {
 									Error dxError = new Error("DX Error log recorded:\n" + currentLog.toString());
 									dxError.setStackTrace(new StackTraceElement[0]);
 									throw new RuntimeException(getStr(R.string.error_convert_client, p1[0])).initCause(dxError);
 								}
 								
-								multidojClientPath = findUnpatch(outFile.getParent());
-								
-								patchAndCleanJar(p1[0], multidojClientPath, patchedFile);
+								outUnpatchedConvert = new File(findUnpatch(findUnpatchedConvert.getParent()));
+								patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
+								outUnpatchedConvert.delete();
 							}
 						} else {
-							patchAndCleanJar(p1[0], multidojClientPath, patchedFile);
+							outUnpatchedConvert = findUnpatchedConvert;
+							patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
+							outUnpatchedConvert.delete();
 						}
 					}
 				} catch (Exception e) {
@@ -624,7 +624,6 @@ public class MCLauncherActivity extends AppCompatActivity
 				
 				publishProgress("7", getStr(R.string.mcl_launch_cleancache));
 				new File(inputPath).delete();
-				new File(multidojClientPath).delete();
 
 				File unsignedFile = new File(inputPath);
 				unsignedFile.delete();
