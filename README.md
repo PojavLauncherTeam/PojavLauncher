@@ -102,19 +102,20 @@ Not yet, this repository currently for bug tracking.
 	</table>
 
 
+
+
 # Minecraft versions ***might*** worked in PojavLauncher 2.4.2
 
 <table>
 	  <thead>
 		<tr>
 		  <th></th>
-		  <th align="center" colspan="8">Minecraft version</th>
+		  <th align="center" colspan="7">Minecraft version</th>
 		</tr>
 		<tr>
 		  <th>Android</th>
 		  <th align="center">1.7.10</th>
 		  <th align="center">1.8</th>
-		  <th align="center">1.8.8</th>
 		  <th align="center">1.9</th>
 		  <th align="center">1.10</th>
 		  <th align="center">1.11</th>
@@ -128,22 +129,20 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
 		</tr>
 		<tr>
 		  <td>6.0</td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
 		</tr>
 	  </tbody>
 	  <tbody>
@@ -154,20 +153,18 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
 		</tr>
 		<tr>
 		  <td>8.x</td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		</tr>
 	  </tbody>
 	  <tbody>
@@ -175,12 +172,11 @@ Not yet, this repository currently for bug tracking.
 		  <td>9.0</td>
 		  <td align="center">No</td>
 		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
 		  <td align="center">No</td>
 		  <td align="center">???</td>
-		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/1#issuecomment-600732970"><b>Yes</b></a></td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		</tr>
 		<tr>
 		  <td>10.0</td>
@@ -189,9 +185,9 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center">???</td>
 		  <td align="center">???</td>
 		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		</tr>
 	  </tbody>
 	</table>
+
