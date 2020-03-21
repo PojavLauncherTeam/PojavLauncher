@@ -102,13 +102,13 @@ Not yet, this repository currently for bug tracking.
 	</table>
 
 
-# Minecraft versions worked in PojavLauncher 2.4.2
+# Minecraft versions ***might*** worked in PojavLauncher 2.4.2
 
 <table>
 	  <thead>
 		<tr>
 		  <th></th>
-		  <th align="center" colspan="7">Minecraft version</th>
+		  <th align="center" colspan="8">Minecraft version</th>
 		</tr>
 		<tr>
 		  <th>Android</th>
@@ -180,7 +180,7 @@ Not yet, this repository currently for bug tracking.
 		  <td align="center">???</td>
 		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/1#issuecomment-600732970"><b>Yes</b></a></td>
 		  <td align="center">???</td>
-		  <td align="center">Partial</td>
+		  <td align="center">???</td>
 		</tr>
 		<tr>
 		  <td>10.0</td>
