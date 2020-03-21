@@ -51,7 +51,7 @@ public class BitIntSet implements IntSet {
         if (value >= Bits.getMax(bits)) {
             int[] newBits = Bits.makeBitSet(
                     Math.max(value + 1, 2 * Bits.getMax(bits)));
-            System.arraycopy(bits, 0, newBits, 0, bits.length);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(bits, 0, newBits, 0, bits.length);
             bits = newBits;
         }
     }

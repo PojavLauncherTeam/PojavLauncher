@@ -93,7 +93,7 @@ public class Main {
                     }
                 } else {
                     files = new String[argArray.length - i];
-                    System.arraycopy(argArray, i, files, 0, files.length);
+                    net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(argArray, i, files, 0, files.length);
                     break;
                 }
             }

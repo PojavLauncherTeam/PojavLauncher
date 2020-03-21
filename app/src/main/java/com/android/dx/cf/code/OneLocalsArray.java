@@ -50,7 +50,7 @@ public class OneLocalsArray extends LocalsArray {
     public OneLocalsArray copy() {
         OneLocalsArray result = new OneLocalsArray(locals.length);
 
-        System.arraycopy(locals, 0, result.locals, 0, locals.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(locals, 0, result.locals, 0, locals.length);
 
         return result;
     }

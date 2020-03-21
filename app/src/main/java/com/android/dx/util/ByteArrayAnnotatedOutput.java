@@ -140,7 +140,7 @@ public final class ByteArrayAnnotatedOutput
      */
     public byte[] toByteArray() {
         byte[] result = new byte[cursor];
-        System.arraycopy(data, 0, result, 0, cursor);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, result, 0, cursor);
         return result;
     }
 
@@ -303,7 +303,7 @@ public final class ByteArrayAnnotatedOutput
             return;
         }
 
-        System.arraycopy(bytes, offset, data, writeAt, length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(bytes, offset, data, writeAt, length);
         cursor = end;
     }
 
@@ -559,7 +559,7 @@ public final class ByteArrayAnnotatedOutput
     private void ensureCapacity(int desiredSize) {
         if (data.length < desiredSize) {
             byte[] newData = new byte[desiredSize * 2 + 1000];
-            System.arraycopy(data, 0, newData, 0, cursor);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, newData, 0, cursor);
             data = newData;
         }
     }

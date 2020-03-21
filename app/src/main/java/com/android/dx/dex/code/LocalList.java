@@ -515,7 +515,7 @@ public final class LocalList extends FixedSizeList {
 
                 if (!first) {
                     newRegs.putAll(regs);
-                    System.arraycopy(endIndices, 0, newEnds, 0,
+                    net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(endIndices, 0, newEnds, 0,
                             endIndices.length);
                 }
 

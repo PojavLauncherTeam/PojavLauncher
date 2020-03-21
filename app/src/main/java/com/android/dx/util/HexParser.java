@@ -136,7 +136,7 @@ public final class HexParser {
 
         if (outAt < result.length) {
             byte[] newr = new byte[outAt];
-            System.arraycopy(result, 0, newr, 0, outAt);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(result, 0, newr, 0, outAt);
             result = newr;
         }
 

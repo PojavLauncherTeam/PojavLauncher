@@ -1424,7 +1424,7 @@ public class Main {
                 int n = arguments.length - index;
                 String[] remaining = new String[n];
                 if (n > 0) {
-                    System.arraycopy(arguments, index, remaining, 0, n);
+                    net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(arguments, index, remaining, 0, n);
                 }
                 return remaining;
             }

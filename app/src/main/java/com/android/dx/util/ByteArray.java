@@ -206,7 +206,7 @@ public final class ByteArray {
                                                 "size()");
         }
 
-        System.arraycopy(bytes, start, out, offset, size);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(bytes, start, out, offset, size);
     }
 
     /**
@@ -320,7 +320,7 @@ public final class ByteArray {
                 length = maxLength;
             }
 
-            System.arraycopy(bytes, cursor + start, arr, offset, length);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(bytes, cursor + start, arr, offset, length);
             cursor += length;
             return length;
         }

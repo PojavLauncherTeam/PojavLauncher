@@ -66,7 +66,7 @@ public final class CstString extends TypedConstant {
         }
 
         byte[] result = new byte[outAt];
-        System.arraycopy(bytes, 0, result, 0, outAt);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(bytes, 0, result, 0, outAt);
         return result;
     }
 

@@ -780,7 +780,7 @@ public class GLTextureView
              */
             int len = configSpec.length;
             int[] newConfigSpec = new int[len + 2];
-            // System.arraycopy(configSpec, 0, newConfigSpec, 0, len-1);
+            // net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(configSpec, 0, newConfigSpec, 0, len-1);
 			for (int i = 0; i < len; i++) {
 				newConfigSpec[i] = configSpec[i];
 			}

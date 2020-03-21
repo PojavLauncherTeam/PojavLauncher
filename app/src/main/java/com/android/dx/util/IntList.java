@@ -239,7 +239,7 @@ public final class IntList extends MutabilityControl {
 
         growIfNeeded();
 
-        System.arraycopy (values, n, values, n+1, size - n);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy (values, n, values, n+1, size - n);
         values[n] = value;
         size++;
 
@@ -259,7 +259,7 @@ public final class IntList extends MutabilityControl {
             throw new IndexOutOfBoundsException("n >= size()");
         }
 
-        System.arraycopy (values, n + 1, values, n, size - n - 1);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy (values, n + 1, values, n, size - n - 1);
         size--;
 
         // sort status is unchanged
@@ -272,7 +272,7 @@ public final class IntList extends MutabilityControl {
         if (size == values.length) {
             // Resize.
             int[] newv = new int[size * 3 / 2 + 10];
-            System.arraycopy(values, 0, newv, 0, size);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(values, 0, newv, 0, size);
             values = newv;
         }
     }

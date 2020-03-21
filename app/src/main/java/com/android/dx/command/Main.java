@@ -171,8 +171,8 @@ public class Main {
     private static String[] without(String[] orig, int n) {
         int len = orig.length - 1;
         String[] newa = new String[len];
-        System.arraycopy(orig, 0, newa, 0, n);
-        System.arraycopy(orig, n + 1, newa, n, len - n);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(orig, 0, newa, 0, n);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(orig, n + 1, newa, n, len - n);
         return newa;
     }
 }

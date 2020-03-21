@@ -200,7 +200,7 @@ public class SsaRenamer implements Runnable {
     private static  RegisterSpec[] dupArray(RegisterSpec[] orig) {
         RegisterSpec[] copy = new RegisterSpec[orig.length];
 
-        System.arraycopy(orig, 0, copy, 0, orig.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(orig, 0, copy, 0, orig.length);
 
         return copy;
     }

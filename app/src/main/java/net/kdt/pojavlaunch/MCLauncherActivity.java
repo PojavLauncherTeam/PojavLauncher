@@ -463,14 +463,14 @@ public class MCLauncherActivity extends AppCompatActivity
 						@Override
 						public void onCharPrint(String s)
 						{
-							currentLog.append(s);
+							currentLog.append(s + "\n");
 						}
 					});
 				LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
 						@Override
 						public void onCharPrint(String s)
 						{
-							currentLog.append(s);
+							currentLog.append(s + "\n");
 						}
 					});
 				System.setOut(new PrintStream(logOut));

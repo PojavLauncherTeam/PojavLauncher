@@ -859,7 +859,7 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         int j = i;
         i += 2;
         int[] newtemp = new int[j + 2*(pLen-i) + 2];
-        System.arraycopy(temp, 0, newtemp, 0, j);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(temp, 0, newtemp, 0, j);
 
         boolean inQuote = true;
         while (i < pLen) {
@@ -1478,7 +1478,7 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     private void append(int ch, int len) {
         if (len >= buffer.length) {
             int[] tmp = new int[len+len];
-            System.arraycopy(buffer, 0, tmp, 0, len);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(buffer, 0, tmp, 0, len);
             buffer = tmp;
         }
         buffer[len] = ch;
@@ -3763,7 +3763,7 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         void add(Node node) {
             if (size >= atoms.length) {
                 Node[] tmp = new Node[atoms.length*2];
-                System.arraycopy(atoms, 0, tmp, 0, atoms.length);
+                net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(atoms, 0, tmp, 0, atoms.length);
                 atoms = tmp;
             }
             atoms[size++] = node;

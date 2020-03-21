@@ -65,8 +65,8 @@ public final class ExecutionStack extends MutabilityControl {
     public ExecutionStack copy() {
         ExecutionStack result = new ExecutionStack(stack.length);
 
-        System.arraycopy(stack, 0, result.stack, 0, stack.length);
-        System.arraycopy(local, 0, result.local, 0, local.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(stack, 0, result.stack, 0, stack.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(local, 0, result.local, 0, local.length);
         result.stackPtr = stackPtr;
 
         return result;

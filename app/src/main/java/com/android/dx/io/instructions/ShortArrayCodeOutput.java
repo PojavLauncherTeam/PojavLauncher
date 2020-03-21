@@ -49,7 +49,7 @@ public final class ShortArrayCodeOutput extends BaseCodeCursor
         }
 
         short[] result = new short[cursor];
-        System.arraycopy(array, 0, result, 0, cursor);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(array, 0, result, 0, cursor);
         return result;
     }
 

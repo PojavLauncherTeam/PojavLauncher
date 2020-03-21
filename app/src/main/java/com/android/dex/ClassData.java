@@ -48,15 +48,15 @@ public final class ClassData {
 
     public Field[] allFields() {
         Field[] result = new Field[staticFields.length + instanceFields.length];
-        System.arraycopy(staticFields, 0, result, 0, staticFields.length);
-        System.arraycopy(instanceFields, 0, result, staticFields.length, instanceFields.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(staticFields, 0, result, 0, staticFields.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(instanceFields, 0, result, staticFields.length, instanceFields.length);
         return result;
     }
 
     public Method[] allMethods() {
         Method[] result = new Method[directMethods.length + virtualMethods.length];
-        System.arraycopy(directMethods, 0, result, 0, directMethods.length);
-        System.arraycopy(virtualMethods, 0, result, directMethods.length, virtualMethods.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(directMethods, 0, result, 0, directMethods.length);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(virtualMethods, 0, result, directMethods.length, virtualMethods.length);
         return result;
     }
 
