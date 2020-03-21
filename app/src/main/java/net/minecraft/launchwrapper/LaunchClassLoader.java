@@ -228,6 +228,7 @@ public class LaunchClassLoader extends DexClassLoader {
 				return clazz;
 			} catch (Throwable th) {
 				// MODDING HERE!
+				// System.out.println("CLAZZ=" + name);
 				Class<?> clazz = loadClassAnyway(name);
 				this.cachedClasses.put(transformedName, clazz);
 				return clazz;
@@ -245,30 +246,6 @@ public class LaunchClassLoader extends DexClassLoader {
 	// Mod:
 	private Class<?> loadClassAnyway(String pkg) {
 		try {
-			return Class.forName(pkg);
-		} catch (Throwable th) {}
-		
-		try {
-			return super.findClass(pkg);
-		} catch (Throwable th) {}
-
-		try {
-			return super.loadClass(pkg, true);
-		} catch (Throwable th) {}
-		
-		try {
-			return getClass().forName(pkg);
-		} catch (Throwable th) {}
-		
-		try {
-			return getParent().loadClass(pkg);
-		} catch (Throwable th) {}
-		
-		try {
-			return getSystemClassLoader().loadClass(pkg);
-		} catch (Throwable th) {}
-		
-		try {
 			return getClass().getClassLoader().loadClass(pkg);
 		} catch (Throwable th) {}
 
@@ -276,7 +253,7 @@ public class LaunchClassLoader extends DexClassLoader {
 			return Thread.currentThread().getContextClassLoader().loadClass(pkg);
 		} catch (Throwable th) {}
 		
-		throw new RuntimeException("Unable to find class, out of 9 times");
+		throw new RuntimeException("Unable to find class, out of 2 times");
 	}
 	
     private void saveTransformedClass(byte[] data, String transformedName) {

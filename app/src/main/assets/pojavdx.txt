@@ -1,4 +1,0 @@
-PojavDX is an open source modified version of dx tool 1.16.
-
-Features:
-- Enable multidex if not enough memory for memory dex files.

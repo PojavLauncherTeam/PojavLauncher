@@ -689,7 +689,7 @@ public class MainActivity extends Activity implements OnTouchListener
 		File optDir = getDir("dalvik-cache", 0);
 		optDir.mkdirs();
 		
-		LoggerJava.OnCharPrintListener printLog = new LoggerJava.OnCharPrintListener(){
+		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 
 			@Override
 			public void onCharPrint(String s)
@@ -705,15 +705,17 @@ public class MainActivity extends Activity implements OnTouchListener
 		System.setErr(theStreamErr);
 
 		String classpath = Tools.generate(mProfile.getVersion());
-		/*
+		
 		System.out.println("> Running Minecraft with classpath:");
 		System.out.println(classpath);
 		System.out.println();
-		*/
+		
 		
 		LaunchClassLoaderAgruments.putAll(classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir);
 		
-		LaunchClassLoader loader = new LaunchClassLoader(); // classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
+		ClassLoader loader;
+		loader = new DexClassLoader(classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
+		// loader = new LaunchClassLoader(); // classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
 		Class mainClass = loader.loadClass(LibrariesManager.getVersionInfo(Tools.versnDir + "/" + mProfile.getVersion() + "/" + mProfile.getVersion() + ".json").mainClass);
 		Method mainMethod = mainClass.getMethod("main", String[].class);
 		mainMethod.setAccessible(true);

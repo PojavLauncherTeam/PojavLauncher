@@ -459,14 +459,14 @@ public class MCLauncherActivity extends AppCompatActivity
 			//Version name
 			try {
 				final StringBuilder currentLog = new StringBuilder();
-				LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnCharPrintListener(){
+				LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnStringPrintListener(){
 						@Override
 						public void onCharPrint(String s)
 						{
 							currentLog.append(s);
 						}
 					});
-				LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnCharPrintListener(){
+				LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
 						@Override
 						public void onCharPrint(String s)
 						{
@@ -564,7 +564,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								if (!outDexedLib.exists()) {
 									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib) + "\n" + currentLog.toString());
 									dxError.setStackTrace(new StackTraceElement[0]);
-									
+									throw dxError;
 								}
 
 								outUndexLib.delete();
@@ -576,8 +576,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					outUnpatchedConvert = new File(unpatchedPath);
 					if (!new File(patchedFile).exists()) {
 						// publishProgress("-1", "DEBUG: PatchedFile=" + patchedPath + ";NonExists!");
-						File findUnpatchedConvert = new File(findUnpatch(unpatchedPath));
-						if (!findUnpatchedConvert.exists()) {
+						if (!outUnpatchedConvert.exists()) {
 							// publishProgress("-1", "DEBUG: OutFile=" + outFile + ", OutFinish=" + outUnpatchedConvert + ";NonExists!");
 							if (!new File(inputPath).exists()) {
 								currentLog.setLength(0);
@@ -602,17 +601,15 @@ public class MCLauncherActivity extends AppCompatActivity
 										}
 									});
 								if (!outUnpatchedConvert.exists()) {
-									Error dxError = new Error("DX Error log recorded:\n" + currentLog.toString());
+									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_client) + "\n" + currentLog.toString());
 									dxError.setStackTrace(new StackTraceElement[0]);
-									throw new RuntimeException(getStr(R.string.error_convert_client, p1[0])).initCause(dxError);
+									throw dxError;
 								}
 								
-								outUnpatchedConvert = new File(findUnpatch(findUnpatchedConvert.getParent()));
 								patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
 								outUnpatchedConvert.delete();
 							}
 						} else {
-							outUnpatchedConvert = findUnpatchedConvert;
 							patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
 							outUnpatchedConvert.delete();
 						}
@@ -678,21 +675,6 @@ public class MCLauncherActivity extends AppCompatActivity
 				});
 		}
 
-		private String findUnpatch(String path) {
-			// publishProgress("-1", "DEBUG: FindmultidojClientPath=" + path + ", ORIG=" + orig + ";NonExists!");
-			File[] fcp = new File(path).listFiles(new FilenameFilter(){
-					@Override
-					public boolean accept(File f, String name)
-					{
-						// publishProgress("-1", "DEBUG: FindUnpatch=" + f);
-						return name.startsWith("resources") && name.endsWith(".jar");
-					}
-				});
-			return (fcp != null && fcp.length > 0 && fcp[0] != null) ? 
-				fcp[0].getAbsolutePath() :
-				path + "/null";
-		}
-		
 		private void patchAndCleanJar(String version, String in, String out) throws Exception {
 			publishProgress("1", getStr(R.string.mcl_launch_patch_client, version));
 			JarSigner.sign(in, out);
@@ -890,7 +872,7 @@ public class MCLauncherActivity extends AppCompatActivity
 												  " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
 												  //" • Boardwalk memory manager (not used now).\n" +
 												  " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-												  " • dx: tool to convert java bytecode to dex.\n" +
+												  " • PojavDX (dx 1.16): tool to convert java bytecode to dex.\n" +
 												  " • Java AWT Implementation includes:\n" +
 												  "  - Boardwalk's makeshift.\n" +
 												  "  - OpenJDK 7 codes implementation.\n" +
@@ -967,8 +949,8 @@ public class MCLauncherActivity extends AppCompatActivity
 
 										String isNewVerAvailable =
 											isAvailable ?
-											"New version available!\nSee changelog at 'Launcher News' tab." :
-											"This is the latest version!";
+											"A new version is available!\nSee changelog at Launcher News tab." :
+											"This launcher is up-to-date!";
 
 										if (myVer > newVer) {
 											isNewVerAvailable = "This is an unreleased version or unofficial version?";
@@ -990,14 +972,14 @@ public class MCLauncherActivity extends AppCompatActivity
 										}
 									}
 									else{
-										alUp.setMessage("Failed to check for update. Reason: No internet connection");
+										alUp.setMessage("Failed to check for update. Reason: No Internet connection");
 									}
 									alUp.setNegativeButton(android.R.string.cancel, null);
 									alUp.show();
 								}
 							});
 					} catch (final Exception e) {
-						Log.d(Tools.APP_NAME + ".CheckUpdateError", e.getMessage());
+						Log.e(Tools.APP_NAME + ".CheckUpdateError", e.getMessage());
 						e.printStackTrace();
 
 						runOnUiThread(new Runnable(){

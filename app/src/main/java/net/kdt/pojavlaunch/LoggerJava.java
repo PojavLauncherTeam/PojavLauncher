@@ -4,9 +4,8 @@ import java.io.*;
 public class LoggerJava
 {
 	public static class LoggerDXPrintStream extends PrintStream {
-		private OnCharPrintListener mListener;
-		private StringBuilder mCurrText = new StringBuilder();
-        public LoggerDXPrintStream(OutputStream out, OnCharPrintListener listener)
+		private OnStringPrintListener mListener;
+        public LoggerDXPrintStream(OutputStream out, OnStringPrintListener listener)
         {
             super(out);
 			mListener = listener;
@@ -27,14 +26,14 @@ public class LoggerJava
 		}
 	}
 	
-	public static interface OnCharPrintListener {
+	public static interface OnStringPrintListener {
 		public void onCharPrint(String s);
 	}
 	
 	public static class LoggerOutputStream extends FilterOutputStream
     {
-		private OnCharPrintListener mListener;
-        public LoggerOutputStream(OutputStream out, OnCharPrintListener listener)
+		private OnStringPrintListener mListener;
+        public LoggerOutputStream(OutputStream out, OnStringPrintListener listener)
         {
             super(out);
 			mListener = listener;
@@ -46,6 +45,14 @@ public class LoggerJava
             super.write(charCode);
 			mListener.onCharPrint(Character.toString((char) charCode));
         }
+/*
+		@Override
+		public void write(byte[] b) throws IOException
+		{
+			super.write(b);
+			mListener.onCharPrint(
+		}
+*/
     }
 	
 }

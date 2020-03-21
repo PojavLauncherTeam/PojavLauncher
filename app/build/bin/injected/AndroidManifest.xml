@@ -2,8 +2,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="net.kdt.pojavlaunch"
-	android:versionCode="156185"
-	android:versionName="2.4.3_6341b_20200225">
+	android:versionCode="156189"
+	android:versionName="2.4.2_6345b_20200321">
 
 	<uses-sdk
 		android:minSdkVersion="21"

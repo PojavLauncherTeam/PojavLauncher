@@ -31,7 +31,7 @@ public final class Tools
 	public static String mhomeUrl = "http://mineup.eu5.net"; // "http://kdtjavacraft.eu5.net";
 	public static String mainpath = "/data/data/net.kdt.pojavlaunch";
 	public static String worksDir = mainpath + "/app_working_dir";
-	public static String versnDir = worksDir + "/version";
+	public static String versnDir = worksDir + "/versions";
 	public static String libraries = worksDir + "/libraries";
 	public static String mpProfiles = mainpath + "/Users";
 	public static String crashPath = Tools.MAIN_PATH + "/gamedir/crash-reports";
@@ -58,15 +58,15 @@ public final class Tools
 	// May useless
 	public static boolean isOptifineInstalled(String version)
 	{
-		return new File(versnDir + "/" + version + "/multidoj/optifine.jar").exists();
+		return new File(versnDir + "/" + version + "/optifine.jar").exists();
 	}
 
 	public static String generate(String version) throws IOException
 	{
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
-		String[] classpath = Tools.generateLibClasspath(Tools.getVersionInfo(version).libraries);
+		String[] classpath = generateLibClasspath(Tools.getVersionInfo(version).libraries);
 
-		libStr.append(versnDir + "/" + version + "/" + version + ".jar");
+		libStr.append(getPatchedFile(version));
 		for (String perJar : classpath) {
 			libStr.append(":" + perJar);
 		}
@@ -229,6 +229,19 @@ public final class Tools
 		return libDir.toArray(new String[0]);
 	}
 	
+	private static int selectCompatibleSdkInt() {
+		int currSdkInt = Build.VERSION.SDK_INT;
+		if (currSdkInt < 23) {
+			return 13;
+		} else if (currSdkInt < 26) {
+			return 24;
+		} else if (currSdkInt < 28) {
+			return 26;
+		} else {
+			return currSdkInt;
+		}
+	}
+	
 	public static void runDx(final Activity ctx, String fileIn, String fileOut, PojavDXManager.Listen listener) throws Exception
 	{
 		PojavDXManager.setListener(listener);
@@ -236,14 +249,7 @@ public final class Tools
 		File optDir = ctx.getDir("dalvik-cache", 0);
 		optDir.mkdirs();
 		
-		//Class
-		DexClassLoader mainLoader = new DexClassLoader(Tools.worksDir + "/pojavdx.dex", optDir.getAbsolutePath(), ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).applicationInfo.nativeLibraryDir, MainActivity.class.getClassLoader());
-		
-		Class mainClass = mainLoader.loadClass("com.android.dx.command.Main");
-		Method mainMethod = mainClass.getMethod("main", String[].class);
-		mainMethod.invoke(null, new Object[]{new String[]{"--dex", "--min-sdk-version=" + Build.VERSION.SDK_INT, "--no-optimize", "--output", fileOut, fileIn}});
-		//com.android.dx.mod.Main.dexTheJar(fileIn, fileOut, ctx.getCacheDir().getAbsolutePath(), listener);
-		
+		com.android.dx.command.Main.main(new String[]{"--dex", "--verbose", "--min-sdk-version=" + selectCompatibleSdkInt() , "--multi-dex", "--no-optimize", "--num-threads=4", "--output", fileOut, fileIn});
 		
 		//return Runtime.getRuntime().exec("echo IN:" + fileIn + ";OUT:" + fileOut);
 	}
