@@ -367,7 +367,7 @@ import java.util.ArrayList;
             return;
         }
 
-        TypeBearer destType = (dest != null) ? dest : Type.VOID;
+        TypeBearer destType = (dest != null) ? (TypeBearer) dest : Type.VOID;
         Constant cst = getAuxCst();
         int ropOpcode;
         Rop rop;

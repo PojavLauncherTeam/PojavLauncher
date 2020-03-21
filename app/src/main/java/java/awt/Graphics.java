@@ -1,10 +1,9 @@
 package java.awt;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
+import android.graphics.*;
+import java.awt.image.*;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
 
 public class Graphics {
 	private Paint androidPaint;
@@ -33,10 +32,24 @@ public class Graphics {
     }
 
     public boolean drawImage(Image image, int x, int y, ImageObserver observer) {
-        if (image instanceof BufferedImage) {
-            this.androidCanvas.drawBitmap(((BufferedImage) image).getAndroidBitmap(), (float) x, (float) y, null);
-        }
-        return true;
+		return false;
+	}
+	
+	public boolean drawImage(Image image, ImageObserver observer) {
+		return drawImage(image, 0, 0, observer);
+	}
+	
+	public boolean drawImage(Image image, int x, int y, int width, int height, ImageObserver observer) {
+        return drawImage(image, x ,y ,x + width, y + height, observer);
     }
+	
+	public boolean drawImage(Image image, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, ImageObserver observer) {
+		if (image instanceof BufferedImage) {
+			((BufferedImage) image).getAndroidBitmap().reconfigure(dx2 - dx1, dy2 - dy1, Bitmap.Config.ARGB_8888);
+            this.androidCanvas.drawBitmap(((BufferedImage) image).getAndroidBitmap(), (float) dx1, (float) dy1, null);
+			return true;
+        }
+        return false;
+	}
 }
 

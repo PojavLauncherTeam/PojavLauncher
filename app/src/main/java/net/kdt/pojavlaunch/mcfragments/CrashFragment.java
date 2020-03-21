@@ -52,21 +52,20 @@ public class CrashFragment extends Fragment
 		try {
 			if(!resetCrashLog){
 				File crashLog = Tools.lastFileModified(Tools.crashPath);
-			
+		
 				if (isNewCrash(crashLog)) {
 					crashContent = Tools.read(crashLog.getAbsolutePath());
 					Tools.write(crashLog.getAbsolutePath(), "\n" + crashContent);
-					lastCrashSaved = crashLog.getName();
+					lastCrashSaved = crashLog.getAbsolutePath();
 					crashView.setText(crashContent);
-				} else if(crashLog.getName().equals(lastCrashSaved)){
+				} else if(lastCrashSaved != null) {
 					crashView.setText(crashContent);
-				}
-				else throw new Exception();
-			}
-			else throw new Exception();
+				} else throw new Exception();
+			} else throw new Exception();
 		} catch (Exception e) {
 			// Can't find crash or no NEW crashes
 			crashView.setText(""/*Log.getStackTraceString(e)*/);
+			lastCrashSaved = null;
 		}
 	}
 }
