@@ -100,3 +100,98 @@ Not yet, this repository currently for bug tracking.
 		</tr>
 	  </tbody>
 	</table>
+
+
+# Minecraft versions worked in PojavLauncher 2.4.2
+
+<table>
+	  <thead>
+		<tr>
+		  <th></th>
+		  <th align="center" colspan="7">Minecraft version</th>
+		</tr>
+		<tr>
+		  <th>Android</th>
+		  <th align="center">1.7.10</th>
+		  <th align="center">1.8</th>
+		  <th align="center">1.8.8</th>
+		  <th align="center">1.9</th>
+		  <th align="center">1.10</th>
+		  <th align="center">1.11</th>
+		  <th align="center">1.12</th>
+		  <th align="center">1.12.2</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  <td>5.x</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		</tr>
+		<tr>
+		  <td>6.0</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center">???</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		</tr>
+	  </tbody>
+	  <tbody>
+		<tr>
+		  <td>7.x</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		</tr>
+		<tr>
+		  <td>8.x</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center">???</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		</tr>
+	  </tbody>
+	  <tbody>
+		<tr>
+		  <td>9.0</td>
+		  <td align="center">No</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center">???</td>
+		  <td align="center">No</td>
+		  <td align="center">???</td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/1#issuecomment-600732970"><b>Yes</b></a></td>
+		  <td align="center">???</td>
+		  <td align="center">Partial</td>
+		</tr>
+		<tr>
+		  <td>10.0</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		  <td align="center">???</td>
+		</tr>
+	  </tbody>
+	</table>
