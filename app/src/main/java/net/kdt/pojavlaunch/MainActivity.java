@@ -32,6 +32,8 @@ import android.graphics.drawable.Drawable;
 import android.view.GestureDetector.*;
 import java.util.concurrent.locks.*;
 import com.kdt.pointer.*;
+import net.kdt.pojavlaunch.value.*;
+import java.net.*;
 public class MainActivity extends Activity implements OnTouchListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
@@ -78,10 +80,12 @@ public class MainActivity extends Activity implements OnTouchListener
 	private ScrollView contentScroll;
 	private ToggleButton toggleScrollLog;
 	private GestureDetector gestureDetector;
-	
+
 	private PointerOreoWrapper pointerSurface;
 	
 	private StringBuilder mQueueText = new StringBuilder();
+	
+	private MinecraftVersion mVersionInfo;
 	
 	/*
 	private LinearLayout contentCanvas;
@@ -119,8 +123,7 @@ public class MainActivity extends Activity implements OnTouchListener
 							
 							try {
 								File crashLog = Tools.lastFileModified(Tools.crashPath);
-								String crashContent = Tools.read(crashLog.getAbsolutePath());
-								if(crashLog != null && crashContent.startsWith("---- Minecraft Crash Report ----")){
+								if(crashLog != null && Tools.read(crashLog.getAbsolutePath()).startsWith("---- Minecraft Crash Report ----")){
 									d.setMessage(R.string.mcn_exit_crash);
 								} else {
 									fullyExit();
@@ -151,7 +154,8 @@ public class MainActivity extends Activity implements OnTouchListener
 			}
 			
 			mProfile = PojavProfile.getCurrentProfileContent(this);
-
+			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
+			
 			initEnvs();
 			System.loadLibrary("gl04es");
 			//System.loadLibrary("gl4es");
@@ -667,19 +671,42 @@ public class MainActivity extends Activity implements OnTouchListener
 		String mcAssetsDir = Tools.ASSETS_PATH;
 		String userType = "mojang";
 		
-		File gameDir = new File(Tools.MAIN_PATH + "/gamedir");
+		File gameDir = new File(Tools.MAIN_PATH);
 		gameDir.mkdirs();
-		String[] args = {
-			"--username", username,
-			"--version", versionName,
-			"--gameDir", gameDir.getAbsolutePath(),
-			"--assetsDir", mcAssetsDir,
-			"--assetIndex", versionName,
-			"--uuid", mProfile.getProfileID(),
-			"--accessToken", mProfile.getAccessToken(),
-			"--userProperties", "{}",
-			"--userType", userType
-		};
+		
+		Map<String, String> varArgMap = new ArrayMap<String, String>();
+		varArgMap.put("auth_player_name", username);
+		varArgMap.put("version_name", versionName);
+		varArgMap.put("game_directory", gameDir.getAbsolutePath());
+		varArgMap.put("assets_root", mcAssetsDir);
+		varArgMap.put("assets_index_name", versionName);
+		varArgMap.put("auth_uuid", mProfile.getProfileID());
+		varArgMap.put("auth_access_token", mProfile.getAccessToken());
+		varArgMap.put("user_properties", "{}");
+		varArgMap.put("user_type", userType);
+		
+		String[] argsFromJson = insertVariableArgument(mVersionInfo.minecraftArguments.split(" "), varArgMap);
+		return argsFromJson;
+	}
+	
+	private String[] insertVariableArgument(String[] args, Map<String, String> keyValueMap) {
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i];
+			String argVar = null;
+			if (arg.startsWith("${") && arg.endsWith("}")) {
+				argVar = arg.substring(2, arg.length() - 2);
+				for (Map.Entry<String, String> keyValue : keyValueMap.entrySet()) {
+					if (argVar.equals(keyValue.getKey())) {
+						args[i] = keyValue.getValue();
+					}
+				}
+			}
+			
+			// Check again
+			if (arg.startsWith("${") && arg.endsWith("}")) {
+				System.out.println("Warning: Can't find variable \"" + argVar + "\".");
+			}
+		}
 		return args;
 	}
 	
@@ -692,9 +719,9 @@ public class MainActivity extends Activity implements OnTouchListener
 		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 
 			@Override
-			public void onCharPrint(String s)
+			public void onCharPrint(char c)
 			{
-				appendToLog(s);
+				appendToLog(Character.toString(c));
 			}
 		};
 		
@@ -715,8 +742,19 @@ public class MainActivity extends Activity implements OnTouchListener
 		
 		ClassLoader loader;
 		loader = new DexClassLoader(classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
-		// loader = new LaunchClassLoader(); // classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
-		Class mainClass = loader.loadClass(LibrariesManager.getVersionInfo(Tools.versnDir + "/" + mProfile.getVersion() + "/" + mProfile.getVersion() + ".json").mainClass);
+		
+		// BEGIN URL
+		/*
+		List<URL> urlList = new ArrayList<URL>();
+		for (String perJar : classpath.split(":")) {
+			if (perJar.isEmpty()) continue;
+			urlList.add(new File(perJar).toURI().toURL());
+		}
+		
+		loader = new URLClassLoader(urlList.toArray(new URL[0]));
+		*/
+		// END URL
+		Class mainClass = loader.loadClass(mVersionInfo.mainClass);
 		Method mainMethod = mainClass.getMethod("main", String[].class);
 		mainMethod.setAccessible(true);
 		mainMethod.invoke(null, new Object[]{getMCArgs()});

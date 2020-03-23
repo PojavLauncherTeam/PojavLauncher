@@ -7,6 +7,9 @@ public class DependentLibrary {
 	public static class MDownloads
 	{
 		public MinecraftLibraryArtifact artifact;
+		public MDownloads(MinecraftLibraryArtifact artifact) {
+			this.artifact = artifact;
+		}
 	}
 }
 

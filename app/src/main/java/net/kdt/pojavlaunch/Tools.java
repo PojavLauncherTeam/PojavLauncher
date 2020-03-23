@@ -24,21 +24,29 @@ public final class Tools
 	
 	public static String APP_NAME = "null";
 	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/minecraft";
-	public static String ASSETS_PATH = MAIN_PATH + "/gamedir/assets";
+	public static String ASSETS_PATH = MAIN_PATH + "/assets";
 
 	public static int usingVerCode = 1;
 	public static String usingVerName = "2.0";
 	public static String mhomeUrl = "http://mineup.eu5.net"; // "http://kdtjavacraft.eu5.net";
-	public static String mainpath = "/data/data/net.kdt.pojavlaunch";
-	public static String worksDir = mainpath + "/app_working_dir";
-	public static String versnDir = worksDir + "/versions";
-	public static String libraries = worksDir + "/libraries";
-	public static String mpProfiles = mainpath + "/Users";
-	public static String crashPath = Tools.MAIN_PATH + "/gamedir/crash-reports";
+	public static String datapath = "/data/data/net.kdt.pojavlaunch";
+	public static String worksDir = datapath + "/app_working_dir";
+	
+	// New since 2.4.2
+	public static String versnDir = MAIN_PATH + "/versions";
+	public static String libraries = MAIN_PATH + "/libraries";
+	
+	// Old since 2.4.2
+	public static String oldGameDir = MAIN_PATH + "/gamedir";
+	public static String oldVersionDir = worksDir + "/versions";
+	public static String oldLibrariesDir = worksDir + "/libraries";
+	
+	public static String mpProfiles = datapath + "/Users";
+	public static String crashPath = MAIN_PATH + "/crash-reports";
 
-	public static String mpModEnable = mainpath + "/ModsManager/✅Enabled";
-	public static String mpModDisable = mainpath + "/ModsManager/❌Disabled";
-	public static String mpModAddNewMo = mainpath + "/ModsManager/➕Add mod";
+	public static String mpModEnable = datapath + "/ModsManager/✅Enabled";
+	public static String mpModDisable = datapath + "/ModsManager/❌Disabled";
+	public static String mpModAddNewMo = datapath + "/ModsManager/➕Add mod";
 
 	public static String[] versionList = {
 		"1.7.3",
@@ -183,6 +191,32 @@ public final class Tools
 				}
 			});
 
+	}
+	
+	public static void moveInside(String from, String to) {
+		File fromFile = new File(from);
+		for (File fromInside : fromFile.listFiles()) {
+			moveRecursive(fromInside.getAbsolutePath(), to);
+		}
+		fromFile.delete();
+	}
+	
+	public static void moveRecursive(String from, String to) {
+		moveRecursive(new File(from), new File(to));
+	}
+	
+	public static void moveRecursive(File from, File to) {
+		File toFrom = new File(to, from.getName());
+		try {
+			if (from.isDirectory()) {
+				for (File child : from.listFiles()) {
+					moveRecursive(child, toFrom);
+				}
+			}
+		} finally {
+			from.getParentFile().mkdirs();
+			from.renameTo(toFrom);
+		}
 	}
 	
 	public static void openURL(Activity act, String url) {

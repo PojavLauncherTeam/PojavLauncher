@@ -3,31 +3,8 @@ import java.io.*;
 
 public class LoggerJava
 {
-	public static class LoggerDXPrintStream extends PrintStream {
-		private OnStringPrintListener mListener;
-        public LoggerDXPrintStream(OutputStream out, OnStringPrintListener listener)
-        {
-            super(out);
-			mListener = listener;
-        }
-
-		@Override
-		public void print(String s)
-		{
-			super.print(s);
-			if (mListener != null) mListener.onCharPrint(s);
-		}
-		
-		@Override
-		public void println(String s)
-		{
-			super.println(s);
-			if (mListener != null) mListener.onCharPrint(s + "\n");
-		}
-	}
-	
 	public static interface OnStringPrintListener {
-		public void onCharPrint(String s);
+		public void onCharPrint(char c);
 	}
 	
 	public static class LoggerOutputStream extends FilterOutputStream
@@ -43,7 +20,7 @@ public class LoggerJava
         public void write(final int charCode) throws IOException
         {
             super.write(charCode);
-			mListener.onCharPrint(Character.toString((char) charCode));
+			mListener.onCharPrint((char) charCode);
         }
 /*
 		@Override

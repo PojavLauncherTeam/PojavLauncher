@@ -461,16 +461,16 @@ public class MCLauncherActivity extends AppCompatActivity
 				final StringBuilder currentLog = new StringBuilder();
 				LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnStringPrintListener(){
 						@Override
-						public void onCharPrint(String s)
+						public void onCharPrint(char c)
 						{
-							currentLog.append(s + "\n");
+							currentLog.append(c);
 						}
 					});
 				LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
 						@Override
-						public void onCharPrint(String s)
+						public void onCharPrint(char c)
 						{
-							currentLog.append(s + "\n");
+							currentLog.append(c);
 						}
 					});
 				System.setOut(new PrintStream(logOut));
@@ -522,23 +522,39 @@ public class MCLauncherActivity extends AppCompatActivity
 							currentLog.setLength(0);
 
 							String[] libInfo = libItem.name.split(":");
-							outUndexLib = new File(Tools.libraries + "/" + Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]).replace(".jar", "_orig.jar"));
+							String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
+							outUndexLib = new File(Tools.libraries + "/" + libArtifact.replace(".jar", "_orig.jar"));
 							outUndexLib.getParentFile().mkdirs();
 							//if (!oker) throw new RuntimeException(".thehell: " + outUndexLib.getParent());
-							outDexedLib = new File(Tools.libraries + "/" + Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2])); // Don't add ".jar"
+							outDexedLib = new File(Tools.libraries + "/" + libArtifact); // Don't add ".jar"
 							if (!outDexedLib.exists()) {
-								libPathURL = libItem.downloads.artifact.url;
-								Log.d(Tools.APP_NAME, "Downloading " + libPathURL + " TO FILE " + outUndexLib.getAbsolutePath());
 								publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
-
-
-								if (!outUndexLib.exists()) {
-									//toast(outUndexLib.getAbsolutePath());
-									Tools.downloadFile(
-										libPathURL,
-										outUndexLib.getAbsolutePath(),
-										true
-									);
+								
+								boolean skipIfFailed = false;
+								
+								if (libItem.downloads == null) {
+									MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
+									artifact.url = "https://libraries.minecraft.net/" + libArtifact;
+									libItem.downloads = new DependentLibrary.MDownloads(artifact);
+									
+									skipIfFailed = true;
+								}
+								try {
+									libPathURL = libItem.downloads.artifact.url;
+									if (!outUndexLib.exists()) {
+										//toast(outUndexLib.getAbsolutePath());
+										Tools.downloadFile(
+											libPathURL,
+											outUndexLib.getAbsolutePath(),
+											true
+										);
+									}
+								} catch (Throwable th) {
+									if (!skipIfFailed) {
+										throw th;
+									} else {
+										th.printStackTrace();
+									}
 								}
 								
 								convertStr = getStr(R.string.mcl_launch_convert_lib, libItem.name);
@@ -562,7 +578,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								*/
 								
 								if (!outDexedLib.exists()) {
-									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib) + "\n" + currentLog.toString());
+									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib, libItem.name) + "\n" + currentLog.toString());
 									dxError.setStackTrace(new StackTraceElement[0]);
 									throw dxError;
 								}
@@ -808,7 +824,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		AlertDialog dialog = builder.create();
 
 		MFileListView flv = new MFileListView(this, dialog);
-		flv.listFileAt(Tools.mainpath + "/ModsManager");
+		flv.listFileAt(Tools.datapath + "/ModsManager");
 		flv.setFileSelectedListener(new MFileSelectedListener(){
 
 				@Override
@@ -872,6 +888,7 @@ public class MCLauncherActivity extends AppCompatActivity
 												  " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
 												  //" • Boardwalk memory manager (not used now).\n" +
 												  " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+												  " • openal_soft: OpenAL port for Android devices by apportable.\n" +
 												  " • PojavDX (dx 1.16): tool to convert java bytecode to dex.\n" +
 												  " • Java AWT Implementation includes:\n" +
 												  "  - Boardwalk's makeshift.\n" +

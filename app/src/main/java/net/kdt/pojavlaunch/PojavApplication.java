@@ -18,7 +18,7 @@ public class PojavApplication extends Application
 			
 			Tools.usingVerName = thisApp.versionName;
 			Tools.usingVerCode = thisApp.versionCode;
-			Tools.mainpath = getDir("files", MODE_PRIVATE).getParent();
+			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

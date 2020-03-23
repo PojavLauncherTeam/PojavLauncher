@@ -1,15 +1,14 @@
 package java.awt.mod;
 
+import android.app.*;
 import android.graphics.*;
-import android.util.*;
 import java.awt.image.*;
 import java.lang.reflect.*;
 import java.util.*;
-import net.kdt.pojavlaunch.*;
 
 public class ModdingKit
 {
-	public static MainActivity getCurrentActivity()
+	public static Activity getCurrentActivity()
 	{
 		try {
 			Class activityThreadClass = Class.forName("android.app.ActivityThread");
@@ -27,7 +26,7 @@ public class ModdingKit
 				if (!pausedField.getBoolean(activityRecord)) {
 					Field activityField = activityRecordClass.getDeclaredField("activity");
 					activityField.setAccessible(true);
-					MainActivity activity = (MainActivity) activityField.get(activityRecord);
+					Activity activity = (Activity) activityField.get(activityRecord);
 					return activity;
 				}
 			}

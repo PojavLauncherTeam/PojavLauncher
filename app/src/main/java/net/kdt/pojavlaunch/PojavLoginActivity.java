@@ -21,6 +21,7 @@ import android.text.method.*;
 import android.system.*;
 import android.net.*;
 import static android.view.ViewGroup.LayoutParams.*;
+import net.kdt.pojavlaunch.update.*;
 
 public class PojavLoginActivity extends MineActivity
 {
@@ -281,6 +282,10 @@ public class PojavLoginActivity extends MineActivity
 	
 	private void initMain()
 	{
+		mkdirs(Tools.worksDir);
+		mkdirs(Tools.versnDir);
+		mkdirs(Tools.libraries);
+		
 		File file0 = new File(Tools.mpProfiles);
 		File file1 = new File(Tools.mpModEnable);
 		File file2 = new File(Tools.mpModDisable);
@@ -296,7 +301,7 @@ public class PojavLoginActivity extends MineActivity
 		try {
 			mkdirs(Tools.MAIN_PATH);
 			
-			Tools.copyAssetOptional(this, "options.txt", Tools.MAIN_PATH + "/gamedir");
+			Tools.copyAssetOptional(this, "options.txt", Tools.MAIN_PATH);
 			//Tools.copyAssetToFolderIfNonExist(this, "dx-f" + (isAndroid7() ? "7" : "4")  + ".0.jar", Tools.worksDir, "dx.jar");
 			Tools.copyAssetOptional(this, "pojavdx.dex", Tools.worksDir);
 			
@@ -308,13 +313,13 @@ public class PojavLoginActivity extends MineActivity
 			
 			// Extract libraries
 			if (!isLibrariesExtracted()) {
-				mkdirs(Tools.worksDir);
-				mkdirs(Tools.versnDir);
 				
-				Tools.extractAssetFolder(this, "libraries", Tools.worksDir);
+				Tools.extractAssetFolder(this, "libraries", Tools.MAIN_PATH);
 				
 				setPref(PREF_IS_INSTALLED_LIBRARIES, true);
 			}
+
+			UpdateDataChanger.changeDataAuto("2.4", "2.4.2");
 		}
 		catch(Exception e){
 			Tools.showError(this, e);

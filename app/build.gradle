@@ -8,8 +8,8 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 156189
-        versionName "2.4.2_6345b_20200321"
+        versionCode 156191
+        versionName "2.4.2pre4_6347b_20200323"
     }
     buildTypes {
         release {
@@ -30,4 +30,3 @@ dependencies {
 
 	compile fileTree(dir: 'libs', include: ['*.jar'])
 }
-	
