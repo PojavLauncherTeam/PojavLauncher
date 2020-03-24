@@ -885,7 +885,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								aboutB.setTitle(R.string.mcl_option_about);
 								try
 								{
-									aboutB.setMessage(String.format(getAssetManager().loadAsset("about_en.txt"),
+									aboutB.setMessage(String.format(Tools.read(getAssets().open("about_en.txt")),
 										Tools.APP_NAME,
 										Tools.usingVerName,
 										org.lwjgl.Sys.getVersion())

@@ -361,6 +361,11 @@ public final class Tools
 
 		return bytes;
 	}
+
+	public static String read(InputStream is) throws Exception
+	{
+		return new String(getByteArray(is));
+	}
 	
 	public static String read(String path) throws Exception
 	{
