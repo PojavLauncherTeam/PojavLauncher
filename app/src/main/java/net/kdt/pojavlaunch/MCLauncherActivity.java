@@ -12,7 +12,6 @@ import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 import com.google.gson.*;
-// import com.kdt.crackactivity.floatingact.*;
 import com.kdt.filerapi.*;
 import com.kdt.filermod.*;
 import java.io.*;
@@ -20,15 +19,15 @@ import java.nio.charset.*;
 import java.util.*;
 import net.kdt.pojavlaunch.libs.*;
 import net.kdt.pojavlaunch.mcfragments.*;
+import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.signer.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
+import org.lwjgl.opengl.*;
 
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import org.lwjgl.opengl.*;
-import java.lang.management.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -365,7 +364,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			}).start();
 			
 			File lastCrashFile = Tools.lastFileModified(Tools.crashPath);
-			if(CrashFragment.isNewCrash(lastCrashFile) || !CrashFragment.lastCrashSaved.isEmpty()){
+			if(CrashFragment.isNewCrash(lastCrashFile) || !crashView.getLastCrash().isEmpty()){
 				crashView.resetCrashLog = false;
 				selectTabPage(2);
 			} else throw new Exception();
@@ -484,7 +483,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				String patchedFile = Tools.versnDir + downVName + ".jar";
 
 				try {
-					//com.android.dx.mod.Main.debug = true;
+					//com.pojavdx.dx.mod.Main.debug = true;
 
 					String verJsonDir = Tools.versnDir + downVName + ".json";
 
@@ -726,7 +725,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				Tools.showError(MCLauncherActivity.this, p1);
 			}
 			if(!launchWithError) {
-				CrashFragment.lastCrashSaved = null;
+				crashView.setLastCrash("");
 				
 				try {
 					/*
@@ -734,7 +733,10 @@ public class MCLauncherActivity extends AppCompatActivity
 					jvmArgs.add("-Xms128M");
 					jvmArgs.add("-Xmx1G");
 					*/
-					startActivity(new Intent(MCLauncherActivity.this, MainActivity.class));
+					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
+					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+					startActivity(mainIntent);
 				}
 				catch (Throwable e) {
 					Tools.showError(MCLauncherActivity.this, e);
@@ -836,18 +838,17 @@ public class MCLauncherActivity extends AppCompatActivity
 				public void onFileSelected(File file, String path, String nane, String extension)
 				{
 					// TODO: Implement this method
-					if(extension.equals(".jar")){
+					if(extension.equals(".jar")) {
 
-					}
-					else{
-						openSelect();
+					} else {
+						openSelectMod();
 					}
 				}
 			});
 		dialog.setView(flv);
 		dialog.show();
 	}
-	public void openSelect()
+	public void openSelectMod()
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Select a mod to add");
@@ -855,7 +856,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 		AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(this);
-
+		
 		dialog.setView(flv);
 		dialog.show();
 	}
@@ -876,32 +877,22 @@ public class MCLauncherActivity extends AppCompatActivity
 						case 1:{ // Check update
 								checkUpdate();
 							} break;
-						case 2:{ // About
+						case 2:{ // Settings
+								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
+							} break;
+						case 3:{ // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
 								aboutB.setTitle(R.string.mcl_option_about);
-								aboutB.setMessage("" +
-											
-												  Tools.APP_NAME + " BETA (Minecraft Java launcher for Android), version " + Tools.usingVerName + "\n" +
-												  " - by Tran Khanh Duy (based from \"Boardwalk\" app)\n" +
-												  //"© 2019 Khanh Duy Tran\n" + 
-												  "Using libraries:\n" +
-												  " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-												  //" • Boardwalk memory manager (not used now).\n" +
-												  " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-												  " • openal_soft: OpenAL port for Android devices by apportable.\n" +
-												  " • PojavDX (dx 1.16): tool to convert java bytecode to dex.\n" +
-												  " • Java AWT Implementation includes:\n" +
-												  "  - Boardwalk's makeshift.\n" +
-												  "  - OpenJDK 7 codes implementation.\n" +
-												  "  - Developer codes (copy text, open browser,...)\n" +
-												  "\n" +
-												  "* Notes:\n" +
-												  " - This app is under development and will not be stable.\n" +
-												  //"* This app will unstable on Android 7.0 or higher devices.\n" +
-												  " - This app only use LWJGL2 and didn't have a JRE8 desugar so 1.13 or above versions will not supported.\n" +
-												  " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n"
-											
-												  );
+								try
+								{
+									aboutB.setMessage(String.format(getAssetManager().loadAsset("about_en.txt"),
+										Tools.APP_NAME,
+										Tools.usingVerName,
+										org.lwjgl.Sys.getVersion())
+									);
+								} catch (Exception e) {
+									throw new RuntimeException(e);
+								}
 								aboutB.setPositiveButton(android.R.string.ok, null);
 								aboutB.show();
 							} break;

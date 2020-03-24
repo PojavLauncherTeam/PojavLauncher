@@ -2,8 +2,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="net.kdt.pojavlaunch"
-	android:versionCode="156191"
-	android:versionName="2.4.2pre4_6347b_20200323">
+	android:versionCode="156199"
+	android:versionName="2.4.2pre5_6355b_20200324">
 
 	<uses-sdk
 		android:minSdkVersion="21"
@@ -32,9 +32,9 @@
 		android:resizeableActivity="true">
 
 		<activity
+			android:screenOrientation="sensorLandscape"
 			android:label="@string/app_short_name"
 			android:name=".PojavLoginActivity"
-			android:screenOrientation="sensorLandscape"
 			android:configChanges="keyboardHidden|orientation|screenSize">
 
 			<intent-filter>
@@ -50,33 +50,27 @@
 		</activity>
 
 		<activity
+			android:screenOrientation="sensorLandscape"
 			android:name=".MCLauncherActivity"
-			android:screenOrientation="sensorLandscape"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 
 		<activity
+			android:launchMode="standard"
+			android:screenOrientation="sensorLandscape"
 			android:theme="@style/RunTheme"
-			android:excludeFromRecents="false"
 			android:name=".MainActivity"
-			android:screenOrientation="sensorLandscape"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 
 		<activity
+			android:screenOrientation="sensorLandscape"
 			android:label="@string/update_console"
 			android:name=".UpdateAppActivity"
-			android:screenOrientation="sensorLandscape"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 
 		<activity
-			android:process=":second"
-			android:name="com.kdt.crackactivity.MainActivity"
 			android:screenOrientation="sensorLandscape"
+			android:name=".prefs.PojavPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
-
-		<service
-			android:name="com.kdt.crackactivity.floatingact.FloatingActivityService"
-			android:enabled="true"
-			android:exported="false"/>
 
 	</application>
 

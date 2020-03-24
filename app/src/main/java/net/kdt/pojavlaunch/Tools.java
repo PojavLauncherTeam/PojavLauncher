@@ -283,7 +283,7 @@ public final class Tools
 		File optDir = ctx.getDir("dalvik-cache", 0);
 		optDir.mkdirs();
 		
-		com.android.dx.command.Main.main(new String[]{"--dex", "--verbose", "--min-sdk-version=" + selectCompatibleSdkInt() , "--multi-dex", "--no-optimize", "--num-threads=4", "--output", fileOut, fileIn});
+		com.pojavdx.dx.command.Main.main(new String[]{"--dex", "--verbose", "--min-sdk-version=" + selectCompatibleSdkInt() , "--multi-dex", "--no-optimize", "--num-threads=4", "--output", fileOut, fileIn});
 		
 		//return Runtime.getRuntime().exec("echo IN:" + fileIn + ";OUT:" + fileOut);
 	}

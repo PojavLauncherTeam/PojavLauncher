@@ -9,25 +9,35 @@ import java.io.*;
 import net.kdt.pojavlaunch.*;
 import android.util.*;
 import android.graphics.*;
+import android.content.*;
+import android.support.v4.os.*;
 
 public class CrashFragment extends Fragment
 {
-	public static String lastCrashSaved = "";
+	public static String lastCrashFile = Tools.worksDir + "/lastcrash.txt";
+	
 	private String crashContent;
+	private TextView crashView;
+	
 	public boolean resetCrashLog = false;
 	
-	private TextView crashView;
+	public static boolean isNewCrash(File crashLog) throws Exception {
+		String content = Tools.read(crashLog.getAbsolutePath());
+		return crashLog != null && content.startsWith("---- Minecraft Crash Report ----");
+	}
+	
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.lmaintab_crashlog, container, false);
-		
+
 		return view;
     }
 	
 	@Override
-	public void onActivityCreated(Bundle p1)
+	public void onActivityCreated(Bundle b)
 	{
-		super.onActivityCreated(p1);
+		super.onActivityCreated(b);
+		
 		crashView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogCrashTextView);
 		crashView.setTypeface(Typeface.MONOSPACE);
 		crashView.setHint("No crash detected.");
@@ -42,30 +52,42 @@ public class CrashFragment extends Fragment
 		refreshCrashFile();
 	}
 	
-	public static boolean isNewCrash(File crashLog) throws Exception {
-		String content = Tools.read(crashLog.getAbsolutePath());
-		return crashLog != null && content.startsWith("---- Minecraft Crash Report ----");
-	}
-	
 	public void refreshCrashFile()
 	{
 		try {
 			if(!resetCrashLog){
 				File crashLog = Tools.lastFileModified(Tools.crashPath);
-		
+				String lastCrash = getLastCrash();
 				if (isNewCrash(crashLog)) {
 					crashContent = Tools.read(crashLog.getAbsolutePath());
 					Tools.write(crashLog.getAbsolutePath(), "\n" + crashContent);
-					lastCrashSaved = crashLog.getAbsolutePath();
+					setLastCrash(crashLog.getAbsolutePath());
 					crashView.setText(crashContent);
-				} else if(lastCrashSaved != null) {
+				} else if(!lastCrash.isEmpty()) {
+					crashContent = Tools.read(lastCrash);
 					crashView.setText(crashContent);
 				} else throw new Exception();
 			} else throw new Exception();
 		} catch (Exception e) {
 			// Can't find crash or no NEW crashes
 			crashView.setText(""/*Log.getStackTraceString(e)*/);
-			lastCrashSaved = null;
+			setLastCrash("");
+		}
+	}
+	
+	public void setLastCrash(String newValue) {
+		try {
+			Tools.write(lastCrashFile, newValue);
+		} catch (Throwable th) {
+			throw new RuntimeException(th);
+		}
+	}
+	
+	public String getLastCrash() {
+		try {
+			return Tools.read(lastCrashFile);
+		} catch (Throwable th) {
+			return "";
 		}
 	}
 }

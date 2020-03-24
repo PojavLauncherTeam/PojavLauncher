@@ -17,9 +17,9 @@
 		android:resizeableActivity="true">
 		
 		<activity
+			android:screenOrientation="sensorLandscape"
 			android:label="@string/app_short_name"
 			android:name=".PojavLoginActivity"
-			android:screenOrientation="sensorLandscape"
 			android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,34 +29,27 @@
 		</activity>
 		
 		<activity
-			android:name=".MCLauncherActivity"
 			android:screenOrientation="sensorLandscape"
+			android:name=".MCLauncherActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
         <activity
-			android:theme="@style/RunTheme"
-			android:excludeFromRecents="false"
-            android:name=".MainActivity"
+			android:launchMode="standard"
 			android:screenOrientation="sensorLandscape"
+			android:theme="@style/RunTheme"
+            android:name=".MainActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
 		<activity
+			android:screenOrientation="sensorLandscape"
 			android:label="@string/update_console"
 			android:name=".UpdateAppActivity"
-			android:screenOrientation="sensorLandscape"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
-		
 
 		<activity
-			android:process=":second"
-			android:name="com.kdt.crackactivity.MainActivity"
 			android:screenOrientation="sensorLandscape"
+			android:name=".prefs.PojavPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
-
-        <service
-			android:name="com.kdt.crackactivity.floatingact.FloatingActivityService"
-            android:enabled="true"
-            android:exported="false" />
     </application>
 
 </manifest>

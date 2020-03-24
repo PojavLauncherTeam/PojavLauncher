@@ -2634,10 +2634,10 @@ containing a value of this type.
         public static final int middle=0x7f060036;
         public static final int mini=0x7f060022;
         public static final int multiply=0x7f06002f;
-        public static final int nav_forceclose=0x7f0600c0;
-        public static final int nav_more3=0x7f0600c3;
-        public static final int nav_viewcanvas=0x7f0600c2;
-        public static final int nav_viewlog=0x7f0600c1;
+        public static final int nav_forceclose=0x7f0600c2;
+        public static final int nav_more3=0x7f0600c5;
+        public static final int nav_viewcanvas=0x7f0600c4;
+        public static final int nav_viewlog=0x7f0600c3;
         public static final int navigation_header_container=0x7f060072;
         public static final int never=0x7f06003a;
         public static final int none=0x7f06001a;
@@ -2668,6 +2668,8 @@ containing a value of this type.
         public static final int search_src_text=0x7f060066;
         public static final int search_voice_btn=0x7f06006a;
         public static final int select_dialog_listview=0x7f06006b;
+        public static final int setting_seektext_progress=0x7f0600b9;
+        public static final int settings_seekbar_setmaxdxref=0x7f0600b8;
         public static final int shortcut=0x7f060055;
         public static final int showCustom=0x7f06002a;
         public static final int showHome=0x7f06002b;
@@ -2681,8 +2683,8 @@ containing a value of this type.
         public static final int src_in=0x7f060032;
         public static final int src_over=0x7f060033;
         public static final int start=0x7f060018;
-        public static final int startscreenLinearLayout1=0x7f0600b8;
-        public static final int startscreenProgress=0x7f0600b9;
+        public static final int startscreenLinearLayout1=0x7f0600ba;
+        public static final int startscreenProgress=0x7f0600bb;
         public static final int status_bar_latest_event_content=0x7f06009d;
         public static final int submenuarrow=0x7f060057;
         public static final int submit_area=0x7f060068;
@@ -2695,19 +2697,19 @@ containing a value of this type.
         public static final int title_template=0x7f06004a;
         public static final int top=0x7f060019;
         public static final int topPanel=0x7f060049;
-        public static final int topbar_earth_icon=0x7f0600ba;
-        public static final int topbar_help_text=0x7f0600bc;
-        public static final int topbar_language_text=0x7f0600bb;
-        public static final int topbar_logo=0x7f0600bd;
-        public static final int topbar_navmenu_icon=0x7f0600be;
-        public static final int topbar_undertop_view=0x7f0600bf;
+        public static final int topbar_earth_icon=0x7f0600bc;
+        public static final int topbar_help_text=0x7f0600be;
+        public static final int topbar_language_text=0x7f0600bd;
+        public static final int topbar_logo=0x7f0600bf;
+        public static final int topbar_navmenu_icon=0x7f0600c0;
+        public static final int topbar_undertop_view=0x7f0600c1;
         public static final int touch_outside=0x7f06006e;
         public static final int up=0x7f06000a;
         public static final int useLogo=0x7f06002d;
+        public static final int ver_clone=0x7f0600c6;
+        public static final int ver_edit=0x7f0600c7;
+        public static final int ver_remove=0x7f0600c8;
         public static final int view_offset_helper=0x7f060001;
-        public static final int vso_clone=0x7f0600c4;
-        public static final int vso_edit=0x7f0600c5;
-        public static final int vso_remove=0x7f0600c6;
         public static final int withText=0x7f06003b;
         public static final int wrap_content=0x7f060034;
     }
@@ -2779,9 +2781,10 @@ containing a value of this type.
         public static final int select_dialog_item_material=0x7f030038;
         public static final int select_dialog_multichoice_material=0x7f030039;
         public static final int select_dialog_singlechoice_material=0x7f03003a;
-        public static final int start_screen=0x7f03003b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03003c;
-        public static final int top_bar=0x7f03003d;
+        public static final int settings=0x7f03003b;
+        public static final int start_screen=0x7f03003c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03003d;
+        public static final int top_bar=0x7f03003e;
     }
     public static final class menu {
         public static final int menu_runopt=0x7f0d0000;
@@ -2829,33 +2832,33 @@ containing a value of this type.
         public static final int appbar_scrolling_view_behavior=0x7f0a0000;
         public static final int bottom_sheet_behavior=0x7f0a0001;
         public static final int character_counter_pattern=0x7f0a0002;
-        public static final int control_chat=0x7f0a0061;
-        public static final int control_debug=0x7f0a0062;
-        public static final int control_down=0x7f0a006c;
+        public static final int control_chat=0x7f0a0062;
+        public static final int control_debug=0x7f0a0063;
+        public static final int control_down=0x7f0a006d;
         /**  MainActivity: Menu advanced controls 
          */
-        public static final int control_forceclose=0x7f0a0072;
-        public static final int control_inventory=0x7f0a0068;
-        public static final int control_jump=0x7f0a006d;
+        public static final int control_forceclose=0x7f0a0073;
+        public static final int control_inventory=0x7f0a0069;
+        public static final int control_jump=0x7f0a006e;
         /**  MainActivity: Control buttons 
          */
-        public static final int control_keyboard=0x7f0a0060;
-        public static final int control_left=0x7f0a006a;
-        public static final int control_listplayers=0x7f0a006f;
-        public static final int control_more2=0x7f0a0074;
-        public static final int control_more3=0x7f0a0075;
-        public static final int control_more4=0x7f0a0076;
-        public static final int control_mouseoff=0x7f0a0070;
-        public static final int control_mouseon=0x7f0a0071;
-        public static final int control_primary=0x7f0a0065;
-        public static final int control_right=0x7f0a006b;
-        public static final int control_screenshot=0x7f0a0063;
-        public static final int control_secondary=0x7f0a0066;
-        public static final int control_shift=0x7f0a0067;
-        public static final int control_thirdperson=0x7f0a006e;
-        public static final int control_up=0x7f0a0069;
-        public static final int control_viewout=0x7f0a0073;
-        public static final int controls=0x7f0a0064;
+        public static final int control_keyboard=0x7f0a0061;
+        public static final int control_left=0x7f0a006b;
+        public static final int control_listplayers=0x7f0a0070;
+        public static final int control_more2=0x7f0a0075;
+        public static final int control_more3=0x7f0a0076;
+        public static final int control_more4=0x7f0a0077;
+        public static final int control_mouseoff=0x7f0a0071;
+        public static final int control_mouseon=0x7f0a0072;
+        public static final int control_primary=0x7f0a0066;
+        public static final int control_right=0x7f0a006c;
+        public static final int control_screenshot=0x7f0a0064;
+        public static final int control_secondary=0x7f0a0067;
+        public static final int control_shift=0x7f0a0068;
+        public static final int control_thirdperson=0x7f0a006f;
+        public static final int control_up=0x7f0a006a;
+        public static final int control_viewout=0x7f0a0074;
+        public static final int controls=0x7f0a0065;
         /**  Error messages 
          */
         public static final int error_checklog=0x7f0a003e;
@@ -2899,9 +2902,10 @@ containing a value of this type.
         public static final int mcl_launch_download_lib=0x7f0a004e;
         public static final int mcl_launch_downloading=0x7f0a004d;
         public static final int mcl_launch_patch_client=0x7f0a0052;
-        public static final int mcl_option_about=0x7f0a0057;
+        public static final int mcl_option_about=0x7f0a0058;
         public static final int mcl_option_checkupdate=0x7f0a0056;
         public static final int mcl_option_modmgr=0x7f0a0055;
+        public static final int mcl_option_settings=0x7f0a0057;
         public static final int mcl_options=0x7f0a0054;
         public static final int mcl_tab_console=0x7f0a0049;
         public static final int mcl_tab_crash=0x7f0a004a;
@@ -2912,16 +2916,16 @@ containing a value of this type.
  MCLauncherActivity: Tabs 
          */
         public static final int mcl_tab_news=0x7f0a0048;
-        public static final int mcl_version_clone=0x7f0a0058;
-        public static final int mcl_version_edit=0x7f0a0059;
+        public static final int mcl_version_clone=0x7f0a0059;
+        public static final int mcl_version_edit=0x7f0a005a;
         /**  MCLauncherActivity: Strings 
          */
         public static final int mcl_version_msg=0x7f0a004b;
-        public static final int mcl_version_remove=0x7f0a005a;
-        public static final int mcn_exit_call=0x7f0a005c;
-        public static final int mcn_exit_confirm=0x7f0a005f;
-        public static final int mcn_exit_crash=0x7f0a005d;
-        public static final int mcn_exit_errcrash=0x7f0a005e;
+        public static final int mcl_version_remove=0x7f0a005b;
+        public static final int mcn_exit_call=0x7f0a005d;
+        public static final int mcn_exit_confirm=0x7f0a0060;
+        public static final int mcn_exit_crash=0x7f0a005e;
+        public static final int mcn_exit_errcrash=0x7f0a005f;
         /** 
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -2947,7 +2951,7 @@ containing a value of this type.
 
  MainActivity: strings 
          */
-        public static final int mcn_exit_title=0x7f0a005b;
+        public static final int mcn_exit_title=0x7f0a005c;
         public static final int status_bar_notification_info_overflow=0x7f0a0016;
         public static final int toast_login_error=0x7f0a0047;
         /**  Toast messages 
@@ -2955,7 +2959,7 @@ containing a value of this type.
         public static final int toast_permission_denied=0x7f0a0046;
         /**  Update part (unused now) 
          */
-        public static final int update_console=0x7f0a0077;
+        public static final int update_console=0x7f0a0078;
         public static final int warning_action_exit=0x7f0a003c;
         public static final int warning_action_install=0x7f0a003a;
         public static final int warning_action_tryanyway=0x7f0a003b;

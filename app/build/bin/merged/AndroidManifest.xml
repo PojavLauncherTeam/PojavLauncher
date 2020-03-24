@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.kdt.pojavlaunch"
-    android:versionCode="156191"
-    android:versionName="2.4.2pre4_6347b_20200323" >
+    android:versionCode="156199"
+    android:versionName="2.4.2pre5_6355b_20200324" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -41,7 +41,7 @@
         <activity
             android:name="net.kdt.pojavlaunch.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:excludeFromRecents="false"
+            android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/RunTheme" />
         <activity
@@ -50,15 +50,9 @@
             android:label="@string/update_console"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name="com.kdt.crackactivity.MainActivity"
+            android:name="net.kdt.pojavlaunch.prefs.PojavPreferenceActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:process=":second"
             android:screenOrientation="sensorLandscape" />
-
-        <service
-            android:name="com.kdt.crackactivity.floatingact.FloatingActivityService"
-            android:enabled="true"
-            android:exported="false" />
     </application>
 
 </manifest>

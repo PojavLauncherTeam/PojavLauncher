@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch;
 import android.util.*;
-import com.android.dx.command.dexer.*;
+import com.pojavdx.dx.command.dexer.*;
 
 public class PojavDXManager
 {

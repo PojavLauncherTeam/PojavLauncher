@@ -694,7 +694,7 @@ public class MainActivity extends Activity implements OnTouchListener
 			String arg = args[i];
 			String argVar = null;
 			if (arg.startsWith("${") && arg.endsWith("}")) {
-				argVar = arg.substring(2, arg.length() - 2);
+				argVar = arg.substring(2, arg.length() - 1);
 				for (Map.Entry<String, String> keyValue : keyValueMap.entrySet()) {
 					if (argVar.equals(keyValue.getKey())) {
 						args[i] = keyValue.getValue();

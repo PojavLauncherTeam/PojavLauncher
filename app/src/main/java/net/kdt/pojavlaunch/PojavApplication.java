@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.*;
 import android.content.pm.PackageManager.*;
 import android.content.pm.*;
+import net.kdt.pojavlaunch.prefs.*;
 
 public class PojavApplication extends Application
 {
@@ -19,6 +20,8 @@ public class PojavApplication extends Application
 			Tools.usingVerName = thisApp.versionName;
 			Tools.usingVerCode = thisApp.versionCode;
 			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
+			
+			PojavPreferenceActivity.loadPreferences(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
