@@ -514,7 +514,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							libItem.name.startsWith("com.mojang:realms") ||
 							libItem.name.startsWith("net.java.jinput") ||
 							libItem.name.startsWith("tv.twitch")
-						) { // They are a blacklist!!!
+						) { // Black list
 							publishProgress("2", "Ignored " + libItem.name);
 							//Thread.sleep(100);
 						} else {
@@ -524,7 +524,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
 							outUndexLib = new File(Tools.libraries + "/" + libArtifact.replace(".jar", "_orig.jar"));
 							outUndexLib.getParentFile().mkdirs();
-							//if (!oker) throw new RuntimeException(".thehell: " + outUndexLib.getParent());
+							
 							outDexedLib = new File(Tools.libraries + "/" + libArtifact); // Don't add ".jar"
 							if (!outDexedLib.exists()) {
 								publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
@@ -635,11 +635,8 @@ public class MCLauncherActivity extends AppCompatActivity
 				}
 				
 				publishProgress("7", getStr(R.string.mcl_launch_cleancache));
-				new File(inputPath).delete();
+				// new File(inputPath).delete();
 
-				File unsignedFile = new File(inputPath);
-				unsignedFile.delete();
-				
 				for (File f : new File(Tools.versnDir).listFiles()) {
 					if(f.getName().endsWith(".part")) {
 						Log.d(Tools.APP_NAME, "Cleaning cache: " + f);

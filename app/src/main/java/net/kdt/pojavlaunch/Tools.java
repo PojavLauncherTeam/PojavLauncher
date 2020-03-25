@@ -253,12 +253,7 @@ public final class Tools
 		List<String> libDir = new ArrayList<String>();
 		for (DependentLibrary libItem: libs) {
 			String[] libInfos = libItem.name.split(":");
-			if (libItem.name.equals("net.minecraft:launchwrapper:1.5")) {
-				libInfos[2] = "1.6";
-				libDir.add(Tools.libraries + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
-			} else {
-				libDir.add(Tools.libraries + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
-			}
+			libDir.add(Tools.libraries + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
 		}
 		return libDir.toArray(new String[0]);
 	}

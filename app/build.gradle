@@ -7,9 +7,9 @@ android {
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
-        targetSdkVersion 24
-        versionCode 156199
-        versionName "2.4.2pre5_6355b_20200324"
+        targetSdkVersion 26
+        versionCode 156203
+        versionName "2.4.2pre6_6359b_20200325"
     }
     buildTypes {
         release {

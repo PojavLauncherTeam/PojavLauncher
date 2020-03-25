@@ -22,7 +22,7 @@ import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
 import net.kdt.pojavlaunch.libs.*;
-import net.minecraft.launchwrapper.*;
+// import net.minecraft.launchwrapper.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.applet.*;
@@ -34,6 +34,7 @@ import java.util.concurrent.locks.*;
 import com.kdt.pointer.*;
 import net.kdt.pojavlaunch.value.*;
 import java.net.*;
+import net.kdt.lw.*;
 public class MainActivity extends Activity implements OnTouchListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
@@ -78,12 +79,12 @@ public class MainActivity extends Activity implements OnTouchListener
 	private LinearLayout contentLog;
 	private TextView textLog, textLogBehindGL;
 	private ScrollView contentScroll;
-	private ToggleButton toggleScrollLog;
+	private ToggleButton toggleLog;
 	private GestureDetector gestureDetector;
 
 	private PointerOreoWrapper pointerSurface;
 	
-	private StringBuilder mQueueText = new StringBuilder();
+	private String mQueueText = new String();
 	
 	private MinecraftVersion mVersionInfo;
 	
@@ -156,8 +157,9 @@ public class MainActivity extends Activity implements OnTouchListener
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 			
+			setTitle("Minecraft " + mProfile.getVersion());
+			
 			initEnvs();
-			System.loadLibrary("gl04es");
 			//System.loadLibrary("gl4es");
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 			
@@ -218,31 +220,22 @@ public class MainActivity extends Activity implements OnTouchListener
 			this.contentLog = (LinearLayout) findViewById(R.id.content_log_layout);
 			this.contentScroll = (ScrollView) findViewById(R.id.content_log_scroll);
 			this.textLog = (TextView) contentScroll.getChildAt(0);
-			this.toggleScrollLog = (ToggleButton) findViewById(R.id.content_log_toggle_scrolldown);
-			this.toggleScrollLog.setChecked(true);
+			this.toggleLog = (ToggleButton) findViewById(R.id.content_log_toggle_log);
+			this.toggleLog.setChecked(false);
 			this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
 			this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
 			
-			
-			/*
-			this.contentCanvas = (LinearLayout) findViewById(R.id.content_canvas_layout);
-			this.contentCanvasView = (AWTSurfaceView) findViewById(R.id.content_canvas_view);
-			this.contentCanvasView.startAWTThread(displayMetrics.widthPixels, displayMetrics.heightPixels);
-			*/
-			
-			// this.mirrorView = (ImageView) findViewById(R.id.mainGameSecondRenderView);
-			
 			this.textLog.setTypeface(Typeface.MONOSPACE);
-			
-			LogWrapper.setAndroidLogReceiver(new LogWrapper.AndroidLogger(){
+			this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
 
 					@Override
-					public void onPrint(String time, String name, String level, String message)
+					public void onCheckedChanged(CompoundButton button, boolean isChecked)
 					{
-						appendlnToLog("[" + time + "] [main/" + level + "]: [" + name + "] " + message);
+						isLogAllow = isChecked;
+						appendToLog("");
 					}
 				});
-
+			
 			toggleGui(null);
 
 			this.drawerLayout.closeDrawers();
@@ -482,26 +475,23 @@ public class MainActivity extends Activity implements OnTouchListener
 					AndroidContextImplementation.theEgl = egl10;
 					AndroidContextImplementation.context = egl10.eglGetCurrentContext();
 					AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
-					AndroidContextImplementation.read = egl10.eglGetCurrentSurface(12378);
-					AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(12377);
+					AndroidContextImplementation.read = egl10.eglGetCurrentSurface(EGL10.EGL_READ);
+					AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
 					egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 					System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
+
+					System.loadLibrary("gl04es");
 					
 					new Thread(new Runnable(){
 
 							@Override
 							public void run()
 							{
-								synchronized (MainActivity.this) {
-									try
-									{
-										Thread.sleep(200);
-										runCraft();
-									}
-									catch (Throwable e)
-									{
-										Tools.showError(MainActivity.this, e, true);
-									}
+								try {
+									Thread.sleep(200);
+									runCraft();
+								} catch (Throwable e) {
+									Tools.showError(MainActivity.this, e, true);
 								}
 							}
 						}).start();
@@ -520,22 +510,6 @@ public class MainActivity extends Activity implements OnTouchListener
 		glSurfaceView.setPreserveEGLContextOnPause(true);
 		glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
 		glSurfaceView.requestRender();
-		/*
-		new Thread(new Runnable(){
-
-				@Override
-				public void run()
-				{
-					try {
-						Thread.sleep(5000);
-						isLogAllow = true;
-						appendToLog("");
-					} catch (InterruptedException e) {}
-				}
-			}).start();
-		*/
-		
-		
 		
 		// Mirror video of OpenGL view.
 		/*
@@ -608,24 +582,11 @@ public class MainActivity extends Activity implements OnTouchListener
 		}
 		super.onPause();
 	}
-
+	
 	public static void fullyExit() {
 		ExitManager.stopExitLoop();
 	}
-	/*
-	private void fillCanvasGL() {
-		//bit.eraseColor(Color.TRANSPARENT);
-		//Canvas c = ;
-		int measuredWidth = View.MeasureSpec.makeMeasureSpec(AndroidDisplay.windowWidth, View.MeasureSpec.EXACTLY);
-		int measuredHeight = View.MeasureSpec.makeMeasureSpec(AndroidDisplay.windowHeight, View.MeasureSpec.EXACTLY);
-
-		//Cause the view to re-layout
-		glSurfaceView.measure(measuredWidth, measuredHeight);
-		glSurfaceView.layout(0, 0, measuredWidth, measuredHeight);
-		
-		glSurfaceView.draw(new Canvas(bit));
-	}
-	*/
+	
     public void forceUserHome(String s) throws Exception {
         Properties props = System.getProperties();
         Class clazz = props.getClass();
@@ -701,11 +662,6 @@ public class MainActivity extends Activity implements OnTouchListener
 					}
 				}
 			}
-			
-			// Check again
-			if (arg.startsWith("${") && arg.endsWith("}")) {
-				System.out.println("Warning: Can't find variable \"" + argVar + "\".");
-			}
 		}
 		return args;
 	}
@@ -741,7 +697,7 @@ public class MainActivity extends Activity implements OnTouchListener
 		LaunchClassLoaderAgruments.putAll(classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir);
 		
 		ClassLoader loader;
-		loader = new DexClassLoader(classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
+		loader = new PClassLoader(classpath); //, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
 		
 		// BEGIN URL
 		/*
@@ -814,7 +770,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	}
 	
 	private void appendToLog(final String text) {
-		// mQueueText.append(text);
+		mQueueText += text;
 		
 		if (!isLogAllow) {
 			return;
@@ -825,22 +781,22 @@ public class MainActivity extends Activity implements OnTouchListener
 					@Override
 					public void run()
 					{
-						textLog.append(text);
-						if (toggleScrollLog.isChecked()) {
-							contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
-						}
+						textLog.append(mQueueText);
+						contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
 					}
 				});
+			/*
 			textLogBehindGL.post(new Runnable(){
 
 					@Override
 					public void run()
 					{
-						textLogBehindGL.append(text);
+						textLogBehindGL.append(mQueueText.toString());
 					}
 				});
+			*/
 		} finally {
-			mQueueText.setLength(0);
+			mQueueText = "";
 		}
 	}
 	

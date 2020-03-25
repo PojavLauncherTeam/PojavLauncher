@@ -19,7 +19,6 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Text"
 				android:id="@+id/main_log_behind_GL"
 				android:maxLines="100"/>
 
@@ -96,8 +95,7 @@
 					android:layout_height="wrap_content"
 					android:layout_width="wrap_content"
 					android:layout_toLeftOf="@id/content_log_close_button"
-					android:text="Auto Scroll down (not working)"
-					android:id="@+id/content_log_toggle_scrolldown"/>
+					android:id="@+id/content_log_toggle_log"/>
 
 			</RelativeLayout>
 

@@ -21,6 +21,10 @@ public class ImageIO {
     }
 
     public static BufferedImage read(File input) throws IOException {
+		if (!input.exists()) {
+			throw new FileNotFoundException(input.getAbsolutePath());
+		}
+		System.out.println(input.getAbsolutePath());
         return makeBufferedImage(BitmapFactory.decodeFile(input.getAbsolutePath()));
     }
 

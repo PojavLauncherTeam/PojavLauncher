@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.kdt.pojavlaunch"
-    android:versionCode="156199"
-    android:versionName="2.4.2pre5_6355b_20200324" >
+    android:versionCode="156203"
+    android:versionName="2.4.2pre6_6359b_20200325" >
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="24" />
+        android:targetSdkVersion="26" />
 
     <uses-feature android:glEsVersion="0x00020000" />
 

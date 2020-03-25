@@ -2550,7 +2550,7 @@ containing a value of this type.
         public static final int content_log_close_button=0x7f060097;
         public static final int content_log_layout=0x7f060096;
         public static final int content_log_scroll=0x7f060099;
-        public static final int content_log_toggle_scrolldown=0x7f060098;
+        public static final int content_log_toggle_log=0x7f060098;
         public static final int control_debug=0x7f0600a8;
         public static final int control_down=0x7f0600ae;
         public static final int control_inventory=0x7f0600b6;
