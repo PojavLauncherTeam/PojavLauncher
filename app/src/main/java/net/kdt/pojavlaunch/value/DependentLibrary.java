@@ -2,12 +2,12 @@ package net.kdt.pojavlaunch.value;
 
 public class DependentLibrary {
     public String name;
-	public MDownloads downloads;
+	public LibraryDownloads downloads;
 	
-	public static class MDownloads
+	public static class LibraryDownloads
 	{
 		public MinecraftLibraryArtifact artifact;
-		public MDownloads(MinecraftLibraryArtifact artifact) {
+		public LibraryDownloads(MinecraftLibraryArtifact artifact) {
 			this.artifact = artifact;
 		}
 	}

@@ -8,7 +8,6 @@ import dalvik.system.*;
 import java.io.*;
 import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.libs.*;
 import android.util.*;
 
 public class UpdateAppActivity extends Activity

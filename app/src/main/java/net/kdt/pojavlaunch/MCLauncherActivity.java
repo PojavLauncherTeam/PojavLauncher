@@ -17,7 +17,6 @@ import com.kdt.filermod.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
-import net.kdt.pojavlaunch.libs.*;
 import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.signer.*;
@@ -28,6 +27,7 @@ import org.lwjgl.opengl.*;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import libcore.util.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -53,6 +53,8 @@ public class MCLauncherActivity extends AppCompatActivity
 	private ViewGroup leftView, rightView;
 	private Button playButton;
 	
+	private Gson gson;
+	
 	private JMinecraftVersionList versionList;
 	private static volatile boolean isAssetsProcessing = false;
 	
@@ -60,6 +62,9 @@ public class MCLauncherActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
+		gson = new Gson();
+		
 		DisplayMetrics dm = Tools.getDisplayMetrics(this);
 		AndroidDisplay.windowWidth = dm.widthPixels;
 		AndroidDisplay.windowHeight = dm.heightPixels;
@@ -144,7 +149,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			protected ArrayList<String> doInBackground(Void[] p1)
 			{
 				try{
-					versionList = new Gson().fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
+					versionList = gson.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
 					ArrayList<String> versionStringList = filter(versionList.versions, fVers.listFiles());
 
 					return versionStringList;
@@ -244,7 +249,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		return leftRightWidth;
 	}
 	
-	private JMinecraftVersionList.OfflineVersion findVersion(String version) {
+	private JMinecraftVersionList.Version findVersion(String version) {
 		if (versionList != null) {
 			for (JMinecraftVersionList.Version valueVer: versionList.versions) {
 				if (valueVer.id.equals(version)) {
@@ -253,12 +258,8 @@ public class MCLauncherActivity extends AppCompatActivity
 			}
 		}
 
-		// If offline or custom version.
-		try {
-			return new Gson().fromJson(Tools.read(Tools.versnDir + "/" + version + "/" + version + ".json"), JMinecraftVersionList.OfflineVersion.class);
-		} catch (Exception e) {
-			throw new RuntimeException(getStr(R.string.error_load_version) + version);
-		}
+		// Custom version, inherits from base.
+		return Tools.getVersionInfo(version);
 	}
 
 	private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {
@@ -487,12 +488,12 @@ public class MCLauncherActivity extends AppCompatActivity
 
 					String verJsonDir = Tools.versnDir + downVName + ".json";
 
-					JMinecraftVersionList.OfflineVersion verInfo = findVersion(p1[0]);
+					JMinecraftVersionList.Version verInfo = findVersion(p1[0]);
 
-					if (verInfo instanceof JMinecraftVersionList.Version) {
-						publishProgress("6", "Downloading " + p1[0] + " configuration...");
+					if (verInfo.url != null) {
+						publishProgress("5", "Downloading " + p1[0] + " configuration...");
 						Tools.downloadFile(
-							((JMinecraftVersionList.Version) verInfo).url,
+							verInfo.url,
 							verJsonDir,
 							true
 						);
@@ -500,8 +501,9 @@ public class MCLauncherActivity extends AppCompatActivity
 
 					zeroProgress();
 
-					MinecraftVersion verFile = LibrariesManager.getVersionInfo(verJsonDir);
-					DependentLibrary[] libList = verFile.libraries;
+					verInfo = Tools.getVersionInfo(p1[0]);
+					
+					DependentLibrary[] libList = verInfo.libraries;
 					setMax(libList.length * 2 + 5);
 
 					String libPathURL;
@@ -510,12 +512,13 @@ public class MCLauncherActivity extends AppCompatActivity
 					for (final DependentLibrary libItem: libList) {
 
 						if (libItem.name.startsWith("com.google.code.gson:gson") ||
-							libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
 							libItem.name.startsWith("com.mojang:realms") ||
 							libItem.name.startsWith("net.java.jinput") ||
+							libItem.name.startsWith("net.minecraft.launchwrapper") ||
+							libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
 							libItem.name.startsWith("tv.twitch")
 						) { // Black list
-							publishProgress("2", "Ignored " + libItem.name);
+							publishProgress("1", "Ignored " + libItem.name);
 							//Thread.sleep(100);
 						} else {
 							currentLog.setLength(0);
@@ -534,7 +537,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								if (libItem.downloads == null) {
 									MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
 									artifact.url = "https://libraries.minecraft.net/" + libArtifact;
-									libItem.downloads = new DependentLibrary.MDownloads(artifact);
+									libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
 									
 									skipIfFailed = true;
 								}
@@ -597,7 +600,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								currentLog.setLength(0);
 								
 								Tools.downloadFile(
-									verFile.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
+									verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
 									inputPath,
 									true
 								);
@@ -748,7 +751,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			mTask = null;
 		}
 
-		private Gson gsonss = new Gson();
+		private Gson gsonss = gson;
 		public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
 
 		public JAssets downloadIndex(String versionName, File output) throws Exception {

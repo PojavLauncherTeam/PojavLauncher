@@ -1,6 +1,8 @@
 package net.kdt.pojavlaunch;
 
 import java.util.Map;
+import net.kdt.pojavlaunch.value.*;
+import java.util.*;
 
 public class JMinecraftVersionList {
     public static final String TYPE_OLD_ALPHA = "old_alpha";
@@ -10,15 +12,19 @@ public class JMinecraftVersionList {
     public Map<String, String> latest;
     public Version[] versions;
 
-    public static class Version extends OfflineVersion {
-        public String url;
-    }
-	
-	public static class OfflineVersion {
+    public static class Version {
+        public String assets;
+		public Map<String, MinecraftClientInfo> downloads;
         public String id;
+		public String inheritsFrom;
+		public DependentLibrary[] libraries;
+		public String mainClass;
+		public String minecraftArguments;
+		public int minimumLauncherVersion;
         public String releaseTime;
         public String time;
         public String type;
+		public String url;
     }
 }
 

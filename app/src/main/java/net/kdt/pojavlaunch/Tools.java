@@ -72,7 +72,7 @@ public final class Tools
 	public static String generate(String version) throws IOException
 	{
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
-		String[] classpath = generateLibClasspath(Tools.getVersionInfo(version).libraries);
+		String[] classpath = generateLibClasspath(getVersionInfo(version).libraries);
 
 		libStr.append(getPatchedFile(version));
 		for (String perJar : classpath) {
@@ -283,18 +283,35 @@ public final class Tools
 		//return Runtime.getRuntime().exec("echo IN:" + fileIn + ";OUT:" + fileOut);
 	}
 	
-	public static MinecraftVersion getVersionInfo(String versionName) throws IOException {
-        File versionFile = new File(Tools.versnDir + "/" + versionName + "/" + versionName + ".json");
-		/*
-        if (!versionFile.exists()) {
-            return downloadVersionInfo(versionName);
-        }
-		*/
-        byte[] versionDat = new byte[((int) versionFile.length())];
-        FileInputStream is = new FileInputStream(versionFile);
-        is.read(versionDat);
-        is.close();
-        return new Gson().fromJson(new String(versionDat, Charset.forName("UTF-8")), MinecraftVersion.class);
+	public static JMinecraftVersionList.Version getVersionInfo(String versionName) {
+        try {
+			JMinecraftVersionList.Version customVer = new Gson().fromJson(read(versnDir + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
+			if (customVer.inheritsFrom == null) {
+				return customVer;
+			} else {
+				JMinecraftVersionList.Version inheritsVer = new Gson().fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
+
+				inheritsVer.id = customVer.id;
+				inheritsVer.mainClass = customVer.mainClass;
+				inheritsVer.minecraftArguments = customVer.minecraftArguments;
+				inheritsVer.releaseTime = customVer.releaseTime;
+				inheritsVer.time = customVer.time;
+				inheritsVer.type = customVer.type;
+
+				List<DependentLibrary> libList = new ArrayList<DependentLibrary>(Arrays.asList(inheritsVer.libraries));
+				try {
+					for (DependentLibrary lib : customVer.libraries) {
+						libList.add(lib);
+					}
+				} finally {
+					inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
+				}
+
+				return inheritsVer;
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
     }
 	
 	public static String convertStream(InputStream inputStream, Charset charset) throws IOException {

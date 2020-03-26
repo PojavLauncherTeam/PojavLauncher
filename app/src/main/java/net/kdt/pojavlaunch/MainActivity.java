@@ -21,7 +21,6 @@ import java.util.*;
 import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
-import net.kdt.pojavlaunch.libs.*;
 // import net.minecraft.launchwrapper.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
@@ -34,7 +33,7 @@ import java.util.concurrent.locks.*;
 import com.kdt.pointer.*;
 import net.kdt.pojavlaunch.value.*;
 import java.net.*;
-import net.kdt.lw.*;
+
 public class MainActivity extends Activity implements OnTouchListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
@@ -51,7 +50,23 @@ public class MainActivity extends Activity implements OnTouchListener
     private int initialY;
 	private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
 	private static boolean triggeredLeftMouseButton = false;
-	private Handler theHandler = new Handler();
+	private Handler theHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case MSG_LEFT_MOUSE_BUTTON_CHECK: {
+						int x = AndroidDisplay.mouseX;
+						int y = AndroidDisplay.mouseY;
+						if (AndroidDisplay.grab &&
+							Math.abs(initialX - x) < fingerStillThreshold &&
+							Math.abs(initialY - y) < fingerStillThreshold) {
+							triggeredLeftMouseButton = true;
+							sendMouseButton(0, true);
+						}
+						break;
+					}
+			}
+		}
+	};
 	private MinecraftGLView glSurfaceView;
 	private int guiScale;
 	private DisplayMetrics displayMetrics;
@@ -86,7 +101,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	
 	private String mQueueText = new String();
 	
-	private MinecraftVersion mVersionInfo;
+	private JMinecraftVersionList.Version mVersionInfo;
 	
 	/*
 	private LinearLayout contentCanvas;
@@ -363,9 +378,9 @@ public class MainActivity extends Activity implements OnTouchListener
 			Tools.showError(this, e, true);
 		}
 		
-
-		this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
+		System.loadLibrary("gl04es");
 		
+		this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 		glSurfaceView.setEGLContextClientVersion(2);
 		
 		final View.OnTouchListener glTouchListener = new OnTouchListener(){
@@ -480,8 +495,6 @@ public class MainActivity extends Activity implements OnTouchListener
 					egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 					System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
-					System.loadLibrary("gl04es");
-					
 					new Thread(new Runnable(){
 
 							@Override
@@ -614,6 +627,10 @@ public class MainActivity extends Activity implements OnTouchListener
             }
             System.setProperty("org.apache.logging.log4j.level", "INFO");
             System.setProperty("org.apache.logging.log4j.simplelog.level", "INFO");
+			
+			// Disable javax management for smaller launcher.
+			System.setProperty("log4j2.disable.jmx", "true");
+			
             //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.level", "INFO");
             //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.simplelog.level", "INFO");
         } catch (Exception e) {
@@ -666,54 +683,50 @@ public class MainActivity extends Activity implements OnTouchListener
 		return args;
 	}
 	
+	public static String launchClassPath;
+	public static String launchOptimizedDirectory;
+	public static String launchLibrarySearchPath;
 	private void runCraft() throws Throwable
 	{
-		// BEGIN KEEPUP
+		String[] launchArgs = getMCArgs();
+		
 		File optDir = getDir("dalvik-cache", 0);
 		optDir.mkdirs();
-		
-		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 
-			@Override
-			public void onCharPrint(char c)
-			{
-				appendToLog(Character.toString(c));
-			}
-		};
+		launchClassPath = Tools.generate(mProfile.getVersion());
+		launchOptimizedDirectory = optDir.getAbsolutePath();
+		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
 		
-		PrintStream theStreamOut = new PrintStream( new LoggerJava.LoggerOutputStream(System.out, printLog));
-		System.setOut(theStreamOut);
+		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
+			net.minecraft.launchwrapper.Launch.main(launchArgs);
+		} else {
+			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 
-		PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
-		System.setErr(theStreamErr);
+				@Override
+				public void onCharPrint(char c)
+				{
+					appendToLog(Character.toString(c));
+				}
+			};
 
-		String classpath = Tools.generate(mProfile.getVersion());
-		
-		System.out.println("> Running Minecraft with classpath:");
-		System.out.println(classpath);
-		System.out.println();
-		
-		
-		LaunchClassLoaderAgruments.putAll(classpath, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir);
-		
-		ClassLoader loader;
-		loader = new PClassLoader(classpath); //, optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClassLoader());
-		
-		// BEGIN URL
-		/*
-		List<URL> urlList = new ArrayList<URL>();
-		for (String perJar : classpath.split(":")) {
-			if (perJar.isEmpty()) continue;
-			urlList.add(new File(perJar).toURI().toURL());
+			PrintStream theStreamOut = new PrintStream( new LoggerJava.LoggerOutputStream(System.out, printLog));
+			System.setOut(theStreamOut);
+
+			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
+			System.setErr(theStreamErr);
+
+			System.out.println("> Running Minecraft with classpath:");
+			System.out.println(launchClassPath);
+			System.out.println();
+
+			ClassLoader launchBaseLoader;
+			launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
+
+			Class mainClass = launchBaseLoader.loadClass(mVersionInfo.mainClass);
+			Method mainMethod = mainClass.getMethod("main", String[].class);
+			mainMethod.setAccessible(true);
+			mainMethod.invoke(null, new Object[]{launchArgs});
 		}
-		
-		loader = new URLClassLoader(urlList.toArray(new URL[0]));
-		*/
-		// END URL
-		Class mainClass = loader.loadClass(mVersionInfo.mainClass);
-		Method mainMethod = mainClass.getMethod("main", String[].class);
-		mainMethod.setAccessible(true);
-		mainMethod.invoke(null, new Object[]{getMCArgs()});
 		
 		// Method v6:
 		
@@ -984,6 +997,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	
 	public void sendMouseButton(int button, boolean status) {
         AndroidDisplay.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
+		new Throwable("MouseRecord").printStackTrace();
     }
 	
 	public void calculateMcScale() {

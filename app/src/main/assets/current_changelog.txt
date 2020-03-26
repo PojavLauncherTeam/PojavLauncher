@@ -5,6 +5,7 @@ Version 2.4.2
 - UI layout now fit to the big screen.
 - Fixed click event triggered after touch screen.
 - Migrated libraries, versions, gamedir folders to /sdcard/games/minecraft
+- Added option set max DX references.
 
 * Changed (development):
 - Redesigned partially of UI.
