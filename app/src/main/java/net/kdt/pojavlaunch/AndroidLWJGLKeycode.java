@@ -117,22 +117,24 @@ public class AndroidLWJGLKeycode {
 	}
 	
     public static void execKey(MainActivity mainActivity, KeyEvent keyEvent, int i, boolean isDown) {
-        for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
+		try {
+			// Old method works without dead chars:
+			/*
+			if (isDown) {
+				mainActivity.sendKeyPress((char) keyEvent.getUnicodeChar());
+			}
+			*/
+			System.out.println("Sending key as char: " + ((char) keyEvent.getUnicodeChar()));
+			mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
+		} catch (Throwable th) {
+			th.printStackTrace();
+		}
+		
+		for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
 			if (perKey.getKey() == i) {
 				mainActivity.sendKeyPress(perKey.getValue(), isDown);
 			}
 		}
-		
-		if (!AndroidDisplay.grab) {
-			try {
-				// Old method works without dead chars:
-				if (isDown) {
-					mainActivity.sendKeyPress((char) keyEvent.getUnicodeChar());
-				}
-			} catch (Throwable th) {
-				th.printStackTrace();
-			}
-        }
     }
 }
 

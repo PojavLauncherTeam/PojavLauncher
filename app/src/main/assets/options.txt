@@ -30,7 +30,7 @@ hideServerAddress:false
 advancedItemTooltips:false
 pauseOnLostFocus:true
 showCape:true
-touchscreen:true
+touchscreen:false
 overrideWidth:0
 overrideHeight:0
 heldItemTooltips:true

@@ -10,18 +10,23 @@ public class LoggerJava
 	public static class LoggerOutputStream extends FilterOutputStream
     {
 		private OnStringPrintListener mListener;
-        public LoggerOutputStream(OutputStream out, OnStringPrintListener listener)
-        {
+		private PrintStream mPrinter;
+        public LoggerOutputStream(PrintStream out, OnStringPrintListener listener) {
             super(out);
+			mPrinter = out;
 			mListener = listener;
         }
 
         @Override
-        public void write(final int charCode) throws IOException
-        {
+        public void write(final int charCode) throws IOException {
             super.write(charCode);
 			mListener.onCharPrint((char) charCode);
         }
+		
+		public PrintStream getRootStream() {
+			return mPrinter;
+		}
+		
 /*
 		@Override
 		public void write(byte[] b) throws IOException

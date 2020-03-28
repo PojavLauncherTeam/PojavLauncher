@@ -28,6 +28,9 @@ import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import libcore.util.*;
+import dalvik.system.*;
+import java.lang.reflect.*;
+import net.kdt.pojavlaunch.patcher.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -143,80 +146,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		versionSelector = (Spinner) findId(R.id.launcherMainSelectVersion);
 		versionSelector.setAdapter(adapter);
 
-		new AsyncTask<Void, Void, ArrayList<String>>(){
-
-			@Override
-			protected ArrayList<String> doInBackground(Void[] p1)
-			{
-				try{
-					versionList = gson.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
-					ArrayList<String> versionStringList = filter(versionList.versions, fVers.listFiles());
-
-					return versionStringList;
-				} catch (Exception e){
-					e.printStackTrace();
-				}
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(ArrayList<String> result)
-			{
-				super.onPostExecute(result);
-
-				final PopupMenu popup = new PopupMenu(MCLauncherActivity.this, versionSelector);  
-                popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());  
-
-				if(result != null && result.size() > 0) {
-					ArrayAdapter<String> adapter = new ArrayAdapter<String>(MCLauncherActivity.this, android.R.layout.simple_spinner_item, result);
-					adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-					versionSelector.setAdapter(adapter);
-					versionSelector.setSelection(selectAt(result.toArray(new String[0]), profile.getVersion()));
-				} else {
-					versionSelector.setSelection(selectAt(availableVersions, profile.getVersion()));
-				}
-				versionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
-
-						@Override
-						public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-						{
-							String version = p1.getItemAtPosition(p3).toString();
-							profile.setVersion(version);
-
-							PojavProfile.setCurrentProfile(MCLauncherActivity.this, profile);
-							if (PojavProfile.isFileType(MCLauncherActivity.this)) {
-								PojavProfile.setCurrentProfile(MCLauncherActivity.this, MCProfile.build(profile));
-							}
-
-							tvVersion.setText(getStr(R.string.mcl_version_msg, version));
-						}
-
-						@Override
-						public void onNothingSelected(AdapterView<?> p1)
-						{
-							// TODO: Implement this method
-						}
-					});
-				versionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-						@Override
-						public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
-						{
-							// Implement copy, remove, reinstall,...
-							popup.show();
-							return true;
-						}
-					});
-					
-				popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
-						public boolean onMenuItemClick(MenuItem item) {  
-							return true;  
-						}  
-					});  
-					
-				tvVersion.setText(getStr(R.string.mcl_version_msg) + versionSelector.getSelectedItem());
-			}
-		}.execute();
-		
+		new RefreshVersionListTask().execute();
 		
 		launchProgress = (ProgressBar) findId(R.id.progressDownloadBar);
 		launchTextStatus = (TextView) findId(R.id.progressDownloadText);
@@ -231,6 +161,80 @@ public class MCLauncherActivity extends AppCompatActivity
 		statusIsLaunching(false);
 	}
 
+	public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<String>>{
+
+	@Override
+	protected ArrayList<String> doInBackground(Void[] p1)
+	{
+		try{
+			versionList = gson.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
+			ArrayList<String> versionStringList = filter(versionList.versions, new File(Tools.versnDir).listFiles());
+
+			return versionStringList;
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	protected void onPostExecute(ArrayList<String> result)
+	{
+		super.onPostExecute(result);
+
+		final PopupMenu popup = new PopupMenu(MCLauncherActivity.this, versionSelector);  
+		popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());  
+
+		if(result != null && result.size() > 0) {
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(MCLauncherActivity.this, android.R.layout.simple_spinner_item, result);
+			adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+			versionSelector.setAdapter(adapter);
+			versionSelector.setSelection(selectAt(result.toArray(new String[0]), profile.getVersion()));
+		} else {
+			versionSelector.setSelection(selectAt(availableVersions, profile.getVersion()));
+		}
+		versionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+				@Override
+				public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
+				{
+					String version = p1.getItemAtPosition(p3).toString();
+					profile.setVersion(version);
+
+					PojavProfile.setCurrentProfile(MCLauncherActivity.this, profile);
+					if (PojavProfile.isFileType(MCLauncherActivity.this)) {
+						PojavProfile.setCurrentProfile(MCLauncherActivity.this, MCProfile.build(profile));
+					}
+
+					tvVersion.setText(getStr(R.string.mcl_version_msg, version));
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> p1)
+				{
+					// TODO: Implement this method
+				}
+			});
+		versionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+				@Override
+				public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
+				{
+					// Implement copy, remove, reinstall,...
+					popup.show();
+					return true;
+				}
+			});
+
+		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
+				public boolean onMenuItemClick(MenuItem item) {  
+					return true;  
+				}  
+			});  
+
+		tvVersion.setText(getStr(R.string.mcl_version_msg) + versionSelector.getSelectedItem());
+	}
+}
+	
 	@Override
 	protected void onPostResume()
 	{
@@ -456,26 +460,26 @@ public class MCLauncherActivity extends AppCompatActivity
 		@Override
 		protected Throwable doInBackground(final String[] p1)
 		{
-			//Version name
+			Throwable throwable = null;
+			final StringBuilder currentLog = new StringBuilder();
+			LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnStringPrintListener(){
+					@Override
+					public void onCharPrint(char c)
+					{
+						currentLog.append(c);
+					}
+				});
+			LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
+					@Override
+					public void onCharPrint(char c)
+					{
+						currentLog.append(c);
+					}
+				});
+			System.setOut(new PrintStream(logOut));
+			System.setErr(new PrintStream(logErr));
+			
 			try {
-				final StringBuilder currentLog = new StringBuilder();
-				LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnStringPrintListener(){
-						@Override
-						public void onCharPrint(char c)
-						{
-							currentLog.append(c);
-						}
-					});
-				LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
-						@Override
-						public void onCharPrint(char c)
-						{
-							currentLog.append(c);
-						}
-					});
-				System.setOut(new PrintStream(logOut));
-				System.setErr(new PrintStream(logErr));
-				
 				final String downVName = "/" + p1[0] + "/" + p1[0];
 				
 				//Downloading libraries
@@ -562,7 +566,8 @@ public class MCLauncherActivity extends AppCompatActivity
 								convertStr = getStr(R.string.mcl_launch_convert_lib, libItem.name);
 								publishProgress("1", convertStr);
 								
-								Tools.runDx(MCLauncherActivity.this, outUndexLib.getAbsolutePath(), outDexedLib.getAbsolutePath(), new PojavDXManager.Listen(){
+								boolean isOptifine = libItem.name.startsWith(Tools.optifineLib);
+								Tools.runDx(MCLauncherActivity.this, outUndexLib.getAbsolutePath(), outDexedLib.getAbsolutePath(), isOptifine , new PojavDXManager.Listen(){
 
 										@Override
 										public void onReceived(String step, int maxProg, int currProg)
@@ -632,9 +637,9 @@ public class MCLauncherActivity extends AppCompatActivity
 							outUnpatchedConvert.delete();
 						}
 					}
-				} catch (Exception e) {
+				} catch (Throwable e) {
 					launchWithError = true;
-					return e;
+					throw e;
 				}
 				
 				publishProgress("7", getStr(R.string.mcl_launch_cleancache));
@@ -666,10 +671,13 @@ public class MCLauncherActivity extends AppCompatActivity
 				} finally {
 					isAssetsProcessing = false;
 				}
-			} catch(Throwable th){
-				return th;
+			} catch (Throwable th){
+				throwable = th;
+			} finally {
+				System.setErr(logErr.getRootStream());
+				System.setOut(logOut.getRootStream());
+				return throwable;
 			}
-			return null;
 		}
 		private int addProgress = 0; // 34
 
@@ -695,7 +703,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			JarSigner.sign(in, out);
 			new File(in).delete();
 			
-			Tools.clearDuplicateFiles(new File(out).getParentFile());
+			// Tools.clearDuplicateFiles(new File(out).getParentFile());
 		}
 
 		@Override
@@ -807,6 +815,50 @@ public class MCLauncherActivity extends AppCompatActivity
 			});
 	}
 
+	public void launcherMenu(View view)
+	{
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.mcl_options);
+		builder.setItems(R.array.mcl_options, new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface p1, int p2)
+				{
+					switch(p2){
+						case 0:{ // Mods manager
+								modManager();
+							} break;
+						case 1:{ // OptiFine installer
+								installOptiFine();
+							} break;
+						case 2:{ // Check update
+								checkUpdate();
+							} break;
+						case 3:{ // Settings
+								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
+							} break;
+						case 4:{ // About
+								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
+								aboutB.setTitle(R.string.mcl_option_about);
+								try
+								{
+									aboutB.setMessage(String.format(Tools.read(getAssets().open("about_en.txt")),
+										Tools.APP_NAME,
+										Tools.usingVerName,
+										org.lwjgl.Sys.getVersion())
+									);
+								} catch (Exception e) {
+									throw new RuntimeException(e);
+								}
+								aboutB.setPositiveButton(android.R.string.ok, null);
+								aboutB.show();
+							} break;
+					}
+				}
+			});
+		builder.show();
+	}
+
 	public void modManager()
 	{
 		File file1 = new File(Tools.mpModEnable);
@@ -848,6 +900,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		dialog.setView(flv);
 		dialog.show();
 	}
+
 	public void openSelectMod()
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -856,52 +909,154 @@ public class MCLauncherActivity extends AppCompatActivity
 
 		AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(this);
-		
+
+		dialog.setView(flv);
+		dialog.show();
+	}
+
+	private void installOptiFine() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select OptiFine jar file");
+		builder.setPositiveButton(android.R.string.cancel, null);
+
+		final AlertDialog dialog = builder.create();
+		FileListView flv = new FileListView(this);
+		flv.setFileSelectedListener(new FileSelectedListener(){
+
+				@Override
+				public void onFileSelected(File file, String path, String name) {
+					if (name.endsWith(".jar")) {
+						doInstallOptiFine(file);
+						dialog.dismiss();
+					}
+				}
+			});
 		dialog.setView(flv);
 		dialog.show();
 	}
 	
-	public void launcherMenu(View view)
-	{
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.mcl_options);
-		builder.setItems(R.array.mcl_options, new DialogInterface.OnClickListener(){
-
-				@Override
-				public void onClick(DialogInterface p1, int p2)
-				{
-					switch(p2){
-						case 0:{ // Mods manager
-								modManager();
-							} break;
-						case 1:{ // Check update
-								checkUpdate();
-							} break;
-						case 2:{ // Settings
-								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
-							} break;
-						case 3:{ // About
-								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
-								aboutB.setTitle(R.string.mcl_option_about);
-								try
-								{
-									aboutB.setMessage(String.format(Tools.read(getAssets().open("about_en.txt")),
-										Tools.APP_NAME,
-										Tools.usingVerName,
-										org.lwjgl.Sys.getVersion())
-									);
-								} catch (Exception e) {
-									throw new RuntimeException(e);
-								}
-								aboutB.setPositiveButton(android.R.string.ok, null);
-								aboutB.show();
-							} break;
-					}
-				}
-			});
-		builder.show();
+	private void doInstallOptiFine(File optifineFile) {
+		new OptiFineInstaller().execute(optifineFile);
 	}
+	
+	private class OptiFineInstaller extends AsyncTask<File, String, Throwable>
+	{
+		private ProgressDialog dialog;
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			dialog = new ProgressDialog(MCLauncherActivity.this);
+			dialog.setTitle("Installing OptiFine");
+			dialog.setMessage("Prepaping");
+			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			dialog.setCancelable(false);
+			dialog.show();
+		}
 
+		@Override
+		protected Throwable doInBackground(File[] file) {
+			final StringBuilder currentLog = new StringBuilder();
+			LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnStringPrintListener(){
+					@Override
+					public void onCharPrint(char c)
+					{
+						currentLog.append(c);
+					}
+				});
+			LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
+					@Override
+					public void onCharPrint(char c)
+					{
+						currentLog.append(c);
+					}
+				});
+			Throwable throwable = null;
+			File convertedFile = null;
+			try {
+				String origMd5 = OptiFinePatcher.calculateMD5(file[0]);
+				convertedFile = new File(Tools.optifineDir, origMd5 + ".jar");
+				if (!convertedFile.exists()) {
+					publishProgress("(1/5) Patching OptiFine Installer");
+					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
+					File patchedFile = new File(output[1]);
+
+					publishProgress("(2/5) Converting OptiFine");
+
+					System.setOut(new PrintStream(logOut));
+					System.setErr(new PrintStream(logErr));
+
+					Tools.runDx(MCLauncherActivity.this, patchedFile.getAbsolutePath(), convertedFile.getAbsolutePath(), true, null);
+
+					if (!convertedFile.exists()) {
+						RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib, "OptiFine") + "\n" + currentLog.toString());
+						dxError.setStackTrace(new StackTraceElement[0]);
+						throw dxError;
+					}
+					
+					patchedFile.delete();
+				}
+
+				publishProgress("(3/5) Launching OptiFine installer");
+				
+				File optDir = getDir("dalvik-cache", 0);
+				optDir.mkdir();
+				
+				DexClassLoader loader = new DexClassLoader(convertedFile.getAbsolutePath(), optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClass().getClassLoader());
+				Tools.insertOptiFinePath(loader, convertedFile.getAbsolutePath());
+				
+				Class installerClass = loader.loadClass("optifine.AndroidInstaller");
+				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
+				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
+
+				publishProgress("(4/5) Patching OptiFine Tweaker");
+				
+				String optifineCurr = ((String) fromConfig(loader, "MC_VERSION")) + "_" + ((String) fromConfig(loader, "OF_EDITION"));
+				
+				new OptiFinePatcher(new File(Tools.libraries, "optifine/OptiFine/" + optifineCurr + "/OptiFine-" + optifineCurr + "_orig.jar")).saveTweaker();
+				
+				publishProgress("(5/5) Done!");
+				Thread.sleep(500);
+			} catch (Throwable th) {
+				throwable = th;
+			} finally {
+				System.setOut(logOut.getRootStream());
+				System.setErr(logErr.getRootStream());
+				/*
+				if (throwable != null && convertedFile != null) {
+					convertedFile.delete();
+				}
+				*/
+				return throwable;
+			}
+		}
+
+		private Object fromConfig(DexClassLoader loader, String name) throws ReflectiveOperationException {
+			Field f = loader.loadClass("Config").getDeclaredField(name);
+			f.setAccessible(true);
+			return f.get(null);
+		}
+		
+		@Override
+		protected void onProgressUpdate(String[] text) {
+			super.onProgressUpdate(text);
+			dialog.setMessage(text[0]);
+		}
+
+		@Override
+		protected void onPostExecute(Throwable th) {
+			super.onPostExecute(th);
+			dialog.dismiss();
+
+			new RefreshVersionListTask().execute();
+			
+			if (th == null) {
+				Toast.makeText(MCLauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
+			} else {
+				Tools.showError(MCLauncherActivity.this, th);
+			}
+		}
+	}
+	
 	public void updateAppProcess(final String ver)
 	{
 		new Thread(new Runnable(){
@@ -922,8 +1077,8 @@ public class MCLauncherActivity extends AppCompatActivity
 				}
 			}).start();
 	}
-	public void checkUpdate()
-	{
+	
+	public void checkUpdate() {
 		final ProgressDialog progUp = new ProgressDialog(this);
 		progUp.setMessage(getStr(R.string.mcl_option_checkupdate));
 		progUp.setCancelable(false);

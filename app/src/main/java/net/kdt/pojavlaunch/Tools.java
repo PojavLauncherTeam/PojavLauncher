@@ -6,17 +6,20 @@ import android.content.res.*;
 import android.net.*;
 import android.os.*;
 import android.util.*;
+import android.widget.*;
 import com.google.gson.*;
-import dalvik.system.*;
 import java.io.*;
-import java.lang.reflect.*;
 import java.nio.charset.*;
 import java.util.*;
+import java.util.jar.*;
 import java.util.zip.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
 import org.apache.commons.codec.digest.*;
-import android.widget.*;
+import libcore.util.*;
+import net.kdt.pojavlaunch.patcher.*;
+import java.lang.reflect.*;
+import dalvik.system.*;
 
 public final class Tools
 {
@@ -35,6 +38,7 @@ public final class Tools
 	// New since 2.4.2
 	public static String versnDir = MAIN_PATH + "/versions";
 	public static String libraries = MAIN_PATH + "/libraries";
+	public static String optifineDir = MAIN_PATH + "/optifine";
 	
 	// Old since 2.4.2
 	public static String oldGameDir = MAIN_PATH + "/gamedir";
@@ -48,6 +52,8 @@ public final class Tools
 	public static String mpModDisable = datapath + "/ModsManager/❌Disabled";
 	public static String mpModAddNewMo = datapath + "/ModsManager/➕Add mod";
 
+	public static String optifineLib = "optifine:OptiFine";
+	
 	public static String[] versionList = {
 		"1.7.3",
 		"1.7.10",
@@ -69,16 +75,22 @@ public final class Tools
 		return new File(versnDir + "/" + version + "/optifine.jar").exists();
 	}
 
+	private static boolean isClientFirst = false;
 	public static String generate(String version) throws IOException
 	{
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 		String[] classpath = generateLibClasspath(getVersionInfo(version).libraries);
 
-		libStr.append(getPatchedFile(version));
-		for (String perJar : classpath) {
-			libStr.append(":" + perJar);
+		if (isClientFirst) {
+			libStr.append(getPatchedFile(version));
 		}
-
+		for (String perJar : classpath) {
+			libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
+		}
+		if (!isClientFirst) {
+			libStr.append(getPatchedFile(version));
+		}
+		
 		return libStr.toString();
 	}
 	
@@ -110,6 +122,13 @@ public final class Tools
 		}
 	}
 
+	public static void insertOptiFinePath(DexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
+		Class optifineClass = loader.loadClass("optifine.AndroidOptiFineUtilities");
+		Field optifinePathField = optifineClass.getDeclaredField("originalOptifineJar");
+		optifinePathField.setAccessible(true);
+		optifinePathField.set(null, optifineJar);
+	}
+	
 	/*
 	 public static void extractLibraries(Activity ctx) throws Exception
 	 {
@@ -223,7 +242,7 @@ public final class Tools
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		act.startActivity(browserIntent);
 	}
-	
+	/*
 	public static void clearDuplicateFiles(File f) throws IOException {
 		List<File> list = Arrays.asList(f.listFiles());
 		for (File file : list) {
@@ -233,7 +252,7 @@ public final class Tools
 				continue;
 			}
 			
-			String md5 = DigestUtils.md5Hex(new FileInputStream(file));
+			String md5 = Md5Crypt.md5Crypt(read(file));
 			list.remove(file);
 			clearDuplicateFilesByMD5(list.toArray(new File[0]), md5);
 		}
@@ -247,7 +266,7 @@ public final class Tools
 			}
 		}
 	}
-	
+	*/
 	public static String[] generateLibClasspath(DependentLibrary[] libs)
 	{
 		List<String> libDir = new ArrayList<String>();
@@ -256,6 +275,17 @@ public final class Tools
 			libDir.add(Tools.libraries + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
 		}
 		return libDir.toArray(new String[0]);
+	}
+	
+	public static String[] patchOptifineInstaller(Activity ctx, File inFile) throws Exception {
+		File optifineDirFile = new File(optifineDir);
+		optifineDirFile.mkdir();
+		
+		// Extract patch files
+		extractAssetFolder(ctx, "optifine_patch", optifineDir);
+		
+		// Patch OptiFine!
+		return new OptiFinePatcher(inFile).saveInstaller(optifineDirFile);
 	}
 	
 	private static int selectCompatibleSdkInt() {
@@ -273,12 +303,17 @@ public final class Tools
 	
 	public static void runDx(final Activity ctx, String fileIn, String fileOut, PojavDXManager.Listen listener) throws Exception
 	{
+		runDx(ctx, fileIn, fileOut, false, listener);
+	}
+	
+	public static void runDx(final Activity ctx, String fileIn, String fileOut, boolean keepClass, PojavDXManager.Listen listener) throws Exception
+	{
 		PojavDXManager.setListener(listener);
 		
 		File optDir = ctx.getDir("dalvik-cache", 0);
 		optDir.mkdirs();
 		
-		com.pojavdx.dx.command.Main.main(new String[]{"--dex", "--verbose", "--min-sdk-version=" + selectCompatibleSdkInt() , "--multi-dex", "--no-optimize", "--num-threads=4", "--output", fileOut, fileIn});
+		com.pojavdx.dx.command.Main.main(new String[]{"--dex", (keepClass ? "--keep-classes" : "--verbose"), "--verbose", "--min-sdk-version=" + selectCompatibleSdkInt() , "--multi-dex", "--no-optimize", "--num-threads=4", "--output", fileOut, fileIn});
 		
 		//return Runtime.getRuntime().exec("echo IN:" + fileIn + ";OUT:" + fileOut);
 	}
@@ -286,6 +321,12 @@ public final class Tools
 	public static JMinecraftVersionList.Version getVersionInfo(String versionName) {
         try {
 			JMinecraftVersionList.Version customVer = new Gson().fromJson(read(versnDir + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
+			for (DependentLibrary lib : customVer.libraries) {
+				if (lib.name.startsWith(optifineLib)) {
+					customVer.optifineLib = lib;
+					break;
+				}
+			}
 			if (customVer.inheritsFrom == null) {
 				return customVer;
 			} else {
@@ -294,6 +335,7 @@ public final class Tools
 				inheritsVer.id = customVer.id;
 				inheritsVer.mainClass = customVer.mainClass;
 				inheritsVer.minecraftArguments = customVer.minecraftArguments;
+				inheritsVer.optifineLib = customVer.optifineLib;
 				inheritsVer.releaseTime = customVer.releaseTime;
 				inheritsVer.time = customVer.time;
 				inheritsVer.type = customVer.type;

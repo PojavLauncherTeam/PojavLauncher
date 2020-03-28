@@ -319,9 +319,9 @@ public class MainActivity extends Activity implements OnTouchListener
 						float mouseY = mousePointer.getTranslationY();
 						
 						if (gestureDetector.onTouchEvent(event)) {
-							AndroidDisplay.putMouseEventWithCoords(MainActivity.this.rightOverride ? (byte) 1 : (byte) 0, (byte) 0, (int) mouseX, (int) (AndroidDisplay.windowHeight - mouseY), 0, System.nanoTime());
-							AndroidDisplay.putMouseEventWithCoords(MainActivity.this.rightOverride ? (byte) 1 : (byte) 0, (byte) 1, (int) mouseX, (int) (AndroidDisplay.windowHeight - mouseY), 0, System.nanoTime());
-							if (!MainActivity.this.rightOverride) {
+							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, (int) mouseX, (int) (AndroidDisplay.windowHeight - mouseY), 0, System.nanoTime());
+							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, (int) mouseX, (int) (AndroidDisplay.windowHeight - mouseY), 0, System.nanoTime());
+							if (!rightOverride) {
 								AndroidDisplay.mouseLeft = true;
 							}
 							
@@ -342,7 +342,7 @@ public class MainActivity extends Activity implements OnTouchListener
 								case MotionEvent.ACTION_UP: // 1
 								case MotionEvent.ACTION_CANCEL: // 3
 								case MotionEvent.ACTION_POINTER_UP: // 6
-									if (!MainActivity.this.rightOverride) {
+									if (!rightOverride) {
 										AndroidDisplay.mouseLeft = false;
 									}
 									break;
@@ -388,14 +388,14 @@ public class MainActivity extends Activity implements OnTouchListener
 			@Override
 			public boolean onTouch(View p1, MotionEvent e)
 			{
-				int x = ((int) e.getX()) / MainActivity.this.scaleFactor;
-				int y = (MainActivity.this.glSurfaceView.getHeight() - ((int) e.getY())) / MainActivity.this.scaleFactor;
-				if (MainActivity.this.handleGuiBar(x, y, e)) {
+				int x = ((int) e.getX()) / scaleFactor;
+				int y = (glSurfaceView.getHeight() - ((int) e.getY())) / scaleFactor;
+				if (handleGuiBar(x, y, e)) {
 					return true;
 				} else if (!AndroidDisplay.grab && gestureDetector.onTouchEvent(e)) {
-					AndroidDisplay.putMouseEventWithCoords(MainActivity.this.rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
-					AndroidDisplay.putMouseEventWithCoords(MainActivity.this.rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
-					if (!MainActivity.this.rightOverride) {
+					AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+					AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+					if (!rightOverride) {
 						AndroidDisplay.mouseLeft = true;
 					}
 					return true;
@@ -405,15 +405,15 @@ public class MainActivity extends Activity implements OnTouchListener
 					switch (e.getActionMasked()) {
 						case e.ACTION_DOWN: // 0
 						case e.ACTION_POINTER_DOWN: // 5
-							if (!MainActivity.this.rightOverride) {
+							if (!rightOverride) {
 								AndroidDisplay.mouseLeft = true;
 							}
 
 							if (AndroidDisplay.grab) {
-								AndroidDisplay.putMouseEventWithCoords(MainActivity.this.rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
-								MainActivity.this.initialX = x;
-								MainActivity.this.initialY = y;
-								MainActivity.this.theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+								AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+								initialX = x;
+								initialY = y;
+								theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
 								break;
 							}
 							break;
@@ -421,25 +421,28 @@ public class MainActivity extends Activity implements OnTouchListener
 						case e.ACTION_UP: // 1
 						case e.ACTION_CANCEL: // 3
 						case e.ACTION_POINTER_UP: // 6
-							AndroidDisplay.putMouseEventWithCoords(MainActivity.this.rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
-							if (!MainActivity.this.rightOverride) {
+							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+							if (!rightOverride) {
 								AndroidDisplay.mouseLeft = false;
 							}
 
 							if (AndroidDisplay.grab) {
-								MainActivity.this.initialX = x;
-								MainActivity.this.initialY = y;
-								MainActivity.this.theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
-
-								if (!MainActivity.this.triggeredLeftMouseButton && Math.abs(MainActivity.this.initialX - x) < MainActivity.this.fingerStillThreshold && Math.abs(MainActivity.this.initialY - y) < MainActivity.this.fingerStillThreshold) {
-									MainActivity.this.sendMouseButton(1, true);
-									MainActivity.this.sendMouseButton(1, false);
+								/*
+								initialX = x;
+								initialY = y;
+								
+								theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+								*/
+								
+								if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+									sendMouseButton(1, true);
+									sendMouseButton(1, false);
 								}
-								if (MainActivity.this.triggeredLeftMouseButton) {
-									MainActivity.this.sendMouseButton(0, false);
+								if (triggeredLeftMouseButton) {
+									sendMouseButton(0, false);
 								}
-								MainActivity.this.triggeredLeftMouseButton = false;
-								MainActivity.this.theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+								triggeredLeftMouseButton = false;
+								theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
 								break;
 							}
 							break;
@@ -484,7 +487,7 @@ public class MainActivity extends Activity implements OnTouchListener
 				@Override
 				public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig p2)
 				{
-					MainActivity.this.calculateMcScale();
+					calculateMcScale();
 					
 					EGL10 egl10 = (EGL10) EGLContext.getEGL();
 					AndroidContextImplementation.theEgl = egl10;
@@ -516,8 +519,8 @@ public class MainActivity extends Activity implements OnTouchListener
 				}
 				@Override
 				public void onSurfaceChanged(GL10 gl, int width, int height) {
-					AndroidDisplay.windowWidth = width / MainActivity.this.scaleFactor;
-					AndroidDisplay.windowHeight = height / MainActivity.this.scaleFactor;
+					AndroidDisplay.windowWidth = width / scaleFactor;
+					AndroidDisplay.windowHeight = height / scaleFactor;
 				}
 			});
 		glSurfaceView.setPreserveEGLContextOnPause(true);
@@ -591,7 +594,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	protected void onPause()
 	{
 		if (AndroidDisplay.grab){
-			onBackPressed();
+			sendKeyPress(Keyboard.KEY_ESCAPE);
 		}
 		super.onPause();
 	}
@@ -718,10 +721,19 @@ public class MainActivity extends Activity implements OnTouchListener
 			System.out.println("> Running Minecraft with classpath:");
 			System.out.println(launchClassPath);
 			System.out.println();
+			
+			// Load classpath
+			DexClassLoader launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
+			
+			// Setup OptiFine
+			if (mVersionInfo.optifineLib != null) {
+				String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
+				String optifineJar = Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
 
-			ClassLoader launchBaseLoader;
-			launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
-
+				Tools.insertOptiFinePath(launchBaseLoader, optifineJar);
+			}
+			
+			// Launch Minecraft
 			Class mainClass = launchBaseLoader.loadClass(mVersionInfo.mainClass);
 			Method mainMethod = mainClass.getMethod("main", String[].class);
 			mainMethod.setAccessible(true);
@@ -818,9 +830,9 @@ public class MainActivity extends Activity implements OnTouchListener
 			case MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK /*1028*/:
 				int x = AndroidDisplay.mouseX;
 				int y = AndroidDisplay.mouseY;
-				if (AndroidDisplay.grab && Math.abs(MainActivity.this.initialX - x) < MainActivity.this.fingerStillThreshold && Math.abs(MainActivity.this.initialY - y) < MainActivity.this.fingerStillThreshold) {
-					MainActivity.this.triggeredLeftMouseButton = true;
-					MainActivity.this.sendMouseButton(0, true);
+				if (AndroidDisplay.grab && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+					triggeredLeftMouseButton = true;
+					sendMouseButton(0, true);
 					return;
 				}
 				return;
@@ -954,7 +966,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	
 	@Override
 	public void onBackPressed() {
-		sendKeyPress(Keyboard.KEY_ESCAPE);
+		// Prevent back
 	}
 	
 	public void hideKeyboard() {
@@ -997,7 +1009,6 @@ public class MainActivity extends Activity implements OnTouchListener
 	
 	public void sendMouseButton(int button, boolean status) {
         AndroidDisplay.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
-		new Throwable("MouseRecord").printStackTrace();
     }
 	
 	public void calculateMcScale() {

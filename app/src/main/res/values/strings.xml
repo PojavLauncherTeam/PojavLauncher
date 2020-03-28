@@ -57,8 +57,8 @@
 	<!-- Toast messages -->
 	<string name="toast_permission_denied">The read/write to storage permission is required!</string>
 	<string name="toast_login_error">Something went wrong after login. Please feedback to the developer.\nError: %s</string>
+	<string name="toast_optifine_success">Install successful</string>
 	<!--
-	<string name="toast_2">Exit</string>
 	<string name="toast_3">Exit</string>
 	-->
 	
@@ -80,6 +80,7 @@
 	
 	<string name="mcl_options">Options</string>
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
+	<string name="mcl_option_optifineinstall">Install OptiFine</string>
 	<string name="mcl_option_checkupdate">Check for update</string>
 	<string name="mcl_option_settings">Settings</string>
 	<string name="mcl_option_about">About</string>

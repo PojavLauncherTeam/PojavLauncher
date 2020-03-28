@@ -2832,33 +2832,33 @@ containing a value of this type.
         public static final int appbar_scrolling_view_behavior=0x7f0a0000;
         public static final int bottom_sheet_behavior=0x7f0a0001;
         public static final int character_counter_pattern=0x7f0a0002;
-        public static final int control_chat=0x7f0a0062;
-        public static final int control_debug=0x7f0a0063;
-        public static final int control_down=0x7f0a006d;
+        public static final int control_chat=0x7f0a0064;
+        public static final int control_debug=0x7f0a0065;
+        public static final int control_down=0x7f0a006f;
         /**  MainActivity: Menu advanced controls 
          */
-        public static final int control_forceclose=0x7f0a0073;
-        public static final int control_inventory=0x7f0a0069;
-        public static final int control_jump=0x7f0a006e;
+        public static final int control_forceclose=0x7f0a0075;
+        public static final int control_inventory=0x7f0a006b;
+        public static final int control_jump=0x7f0a0070;
         /**  MainActivity: Control buttons 
          */
-        public static final int control_keyboard=0x7f0a0061;
-        public static final int control_left=0x7f0a006b;
-        public static final int control_listplayers=0x7f0a0070;
-        public static final int control_more2=0x7f0a0075;
-        public static final int control_more3=0x7f0a0076;
-        public static final int control_more4=0x7f0a0077;
-        public static final int control_mouseoff=0x7f0a0071;
-        public static final int control_mouseon=0x7f0a0072;
-        public static final int control_primary=0x7f0a0066;
-        public static final int control_right=0x7f0a006c;
-        public static final int control_screenshot=0x7f0a0064;
-        public static final int control_secondary=0x7f0a0067;
-        public static final int control_shift=0x7f0a0068;
-        public static final int control_thirdperson=0x7f0a006f;
-        public static final int control_up=0x7f0a006a;
-        public static final int control_viewout=0x7f0a0074;
-        public static final int controls=0x7f0a0065;
+        public static final int control_keyboard=0x7f0a0063;
+        public static final int control_left=0x7f0a006d;
+        public static final int control_listplayers=0x7f0a0072;
+        public static final int control_more2=0x7f0a0077;
+        public static final int control_more3=0x7f0a0078;
+        public static final int control_more4=0x7f0a0079;
+        public static final int control_mouseoff=0x7f0a0073;
+        public static final int control_mouseon=0x7f0a0074;
+        public static final int control_primary=0x7f0a0068;
+        public static final int control_right=0x7f0a006e;
+        public static final int control_screenshot=0x7f0a0066;
+        public static final int control_secondary=0x7f0a0069;
+        public static final int control_shift=0x7f0a006a;
+        public static final int control_thirdperson=0x7f0a0071;
+        public static final int control_up=0x7f0a006c;
+        public static final int control_viewout=0x7f0a0076;
+        public static final int controls=0x7f0a0067;
         /**  Error messages 
          */
         public static final int error_checklog=0x7f0a003e;
@@ -2894,38 +2894,38 @@ containing a value of this type.
         public static final int login_online_username_hint=0x7f0a0028;
         public static final int login_online_username_question=0x7f0a0029;
         public static final int login_select_account=0x7f0a0035;
-        public static final int mcl_launch_cleancache=0x7f0a004c;
-        public static final int mcl_launch_convert_client=0x7f0a0051;
-        public static final int mcl_launch_convert_lib=0x7f0a0050;
-        public static final int mcl_launch_download_assets=0x7f0a0053;
-        public static final int mcl_launch_download_client=0x7f0a004f;
-        public static final int mcl_launch_download_lib=0x7f0a004e;
-        public static final int mcl_launch_downloading=0x7f0a004d;
-        public static final int mcl_launch_patch_client=0x7f0a0052;
-        public static final int mcl_option_about=0x7f0a0058;
-        public static final int mcl_option_checkupdate=0x7f0a0056;
-        public static final int mcl_option_modmgr=0x7f0a0055;
-        public static final int mcl_option_settings=0x7f0a0057;
-        public static final int mcl_options=0x7f0a0054;
-        public static final int mcl_tab_console=0x7f0a0049;
-        public static final int mcl_tab_crash=0x7f0a004a;
+        public static final int mcl_launch_cleancache=0x7f0a004d;
+        public static final int mcl_launch_convert_client=0x7f0a0052;
+        public static final int mcl_launch_convert_lib=0x7f0a0051;
+        public static final int mcl_launch_download_assets=0x7f0a0054;
+        public static final int mcl_launch_download_client=0x7f0a0050;
+        public static final int mcl_launch_download_lib=0x7f0a004f;
+        public static final int mcl_launch_downloading=0x7f0a004e;
+        public static final int mcl_launch_patch_client=0x7f0a0053;
+        public static final int mcl_option_about=0x7f0a005a;
+        public static final int mcl_option_checkupdate=0x7f0a0058;
+        public static final int mcl_option_modmgr=0x7f0a0056;
+        public static final int mcl_option_optifineinstall=0x7f0a0057;
+        public static final int mcl_option_settings=0x7f0a0059;
+        public static final int mcl_options=0x7f0a0055;
+        public static final int mcl_tab_console=0x7f0a004a;
+        public static final int mcl_tab_crash=0x7f0a004b;
         /** 
-	<string name="toast_2">Exit</string>
 	<string name="toast_3">Exit</string>
 	
  MCLauncherActivity: Tabs 
          */
-        public static final int mcl_tab_news=0x7f0a0048;
-        public static final int mcl_version_clone=0x7f0a0059;
-        public static final int mcl_version_edit=0x7f0a005a;
+        public static final int mcl_tab_news=0x7f0a0049;
+        public static final int mcl_version_clone=0x7f0a005b;
+        public static final int mcl_version_edit=0x7f0a005c;
         /**  MCLauncherActivity: Strings 
          */
-        public static final int mcl_version_msg=0x7f0a004b;
-        public static final int mcl_version_remove=0x7f0a005b;
-        public static final int mcn_exit_call=0x7f0a005d;
-        public static final int mcn_exit_confirm=0x7f0a0060;
-        public static final int mcn_exit_crash=0x7f0a005e;
-        public static final int mcn_exit_errcrash=0x7f0a005f;
+        public static final int mcl_version_msg=0x7f0a004c;
+        public static final int mcl_version_remove=0x7f0a005d;
+        public static final int mcn_exit_call=0x7f0a005f;
+        public static final int mcn_exit_confirm=0x7f0a0062;
+        public static final int mcn_exit_crash=0x7f0a0060;
+        public static final int mcn_exit_errcrash=0x7f0a0061;
         /** 
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -2951,15 +2951,16 @@ containing a value of this type.
 
  MainActivity: strings 
          */
-        public static final int mcn_exit_title=0x7f0a005c;
+        public static final int mcn_exit_title=0x7f0a005e;
         public static final int status_bar_notification_info_overflow=0x7f0a0016;
         public static final int toast_login_error=0x7f0a0047;
+        public static final int toast_optifine_success=0x7f0a0048;
         /**  Toast messages 
          */
         public static final int toast_permission_denied=0x7f0a0046;
         /**  Update part (unused now) 
          */
-        public static final int update_console=0x7f0a0078;
+        public static final int update_console=0x7f0a007a;
         public static final int warning_action_exit=0x7f0a003c;
         public static final int warning_action_install=0x7f0a003a;
         public static final int warning_action_tryanyway=0x7f0a003b;

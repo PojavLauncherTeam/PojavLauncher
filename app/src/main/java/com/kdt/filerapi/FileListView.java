@@ -125,8 +125,8 @@ public class FileListView extends LinearLayout
 				}
 				else{
 					String name = mainPath.getName();
-					String extension = getExtension(path);
-					listener.onFileSelected(mainPath, path, name, extension);
+					// String extension = getExtension(path);
+					listener.onFileSelected(mainPath, path, name);
 				}
 			}
 			else{

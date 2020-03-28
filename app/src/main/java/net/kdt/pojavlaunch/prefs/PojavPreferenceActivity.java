@@ -46,7 +46,7 @@ public class PojavPreferenceActivity extends MineActivity
 					mainPrefEdit.commit();
 				}
 			});
-		viewSeekProgress.setText(viewSeekDxRef.getProgress() + "/" + 0xFFFF);
+		viewSeekProgress.setText((viewSeekDxRef.getProgress() + 0xFFF) + "/" + 0xFFFF);
 	}
 
 	@Override

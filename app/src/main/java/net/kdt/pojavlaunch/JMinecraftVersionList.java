@@ -21,6 +21,7 @@ public class JMinecraftVersionList {
 		public String mainClass;
 		public String minecraftArguments;
 		public int minimumLauncherVersion;
+		public DependentLibrary optifineLib;
         public String releaseTime;
         public String time;
         public String type;

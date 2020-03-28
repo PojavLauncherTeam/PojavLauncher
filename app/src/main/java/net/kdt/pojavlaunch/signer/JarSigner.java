@@ -13,9 +13,9 @@ public class JarSigner
 {
 	private static final String DEX_IN_JAR_NAME = "classes.dex";
 	private static final String MANIFEST_PATH = "META-INF/MANIFEST.MF";
-	
+
 	private TreeMap<String, byte[]> outputResources = new TreeMap<String, byte[]>();
-	
+
 	public static void sign(String inputJar, String outputJar) throws Exception
 	{
 		new JarSigner(inputJar, outputJar);
@@ -24,7 +24,7 @@ public class JarSigner
 	{
 		ZipFile jarFile = new ZipFile(inputJar);
 		Enumeration<? extends ZipEntry> entries = jarFile.entries();
-		
+
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
 			outputResources.put(entry.getName(), Tools.getByteArray(jarFile.getInputStream(entry)));
@@ -33,13 +33,13 @@ public class JarSigner
 	}
 	private byte[] makeManifest() {
         StringBuilder baos = new StringBuilder();
-		
+
 		// First, put some general information:
 		baos.append("Manifest-Version: 1.0\n");
         baos.append("Created-By: " + Tools.usingVerName + " (" + Tools.APP_NAME + ": JarSigner)\n");
 		baos.append("Build-Jdk: 1.6.0_29");
         baos.append("Dex-Location: " + DEX_IN_JAR_NAME + "\n");
-		
+
         return baos.toString().getBytes();
     }
 	private boolean createJar(String fileName) {
@@ -62,14 +62,14 @@ public class JarSigner
                     int length = contents.length;
 					entry.setSize(length);
 					/*
-                    if (args.verbose) {
-                        context.out.println("writing " + name + "; size " + length + "...");
-                    }
-					*/
+					 if (args.verbose) {
+					 context.out.println("writing " + name + "; size " + length + "...");
+					 }
+					 */
 					if (name.endsWith(".SF") ||
 						name.endsWith(".RSA")) {
-							// Remove these files.
-							continue;
+						// Remove these files.
+						continue;
 					} else if (name.endsWith(MANIFEST_PATH)) {
 						length = manifest.length;
 						jarOut.putNextEntry(entry);
@@ -80,7 +80,7 @@ public class JarSigner
 						jarOut.write(contents);
 						jarOut.closeEntry();
 					}
-					
+
                 }
             } finally {
                 jarOut.finish();
