@@ -27,7 +27,6 @@ import org.lwjgl.opengl.*;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import libcore.util.*;
 import dalvik.system.*;
 import java.lang.reflect.*;
 import net.kdt.pojavlaunch.patcher.*;

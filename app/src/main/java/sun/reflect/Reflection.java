@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import dalvik.system.VMStack;
+// import dalvik.system.VMStack;
 
 /** Common utility routines used by both java.lang and
     java.lang.reflect */
@@ -74,7 +74,11 @@ public class Reflection {
     public static Class<?> getCallerClass() {
         // This method (getCallerClass()) constitutes another stack frame,
         // so we need to call getStackClass2() rather than getStackClass1().
-        return VMStack.getStackClass2();
+        try {
+			return (Class<?>) Class.forName("dalvik.system.VMStack").getMethod("getStackClass2").invoke(null);
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		}
     }
     // END Android-changed: getCallerClass() reimplementation.
 

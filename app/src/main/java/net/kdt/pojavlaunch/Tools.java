@@ -16,7 +16,6 @@ import java.util.zip.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
 import org.apache.commons.codec.digest.*;
-import libcore.util.*;
 import net.kdt.pojavlaunch.patcher.*;
 import java.lang.reflect.*;
 import dalvik.system.*;
