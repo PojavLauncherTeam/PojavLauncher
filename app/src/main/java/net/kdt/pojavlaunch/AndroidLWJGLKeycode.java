@@ -7,7 +7,7 @@ import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 
 public class AndroidLWJGLKeycode {
-	// public static boolean isSendChar;
+	public static boolean isBackspaceAfterChar;
 	private static final Map<Integer, Integer> androidToLwjglMap;
 	static {
 		androidToLwjglMap = new ArrayMap<Integer, Integer>();
@@ -119,15 +119,8 @@ public class AndroidLWJGLKeycode {
 	
     public static void execKey(MainActivity mainActivity, KeyEvent keyEvent, int i, boolean isDown) {
 		try {
-			// Old method works without dead chars:
-			/*
-			if (isDown) {
-				mainActivity.sendKeyPress((char) keyEvent.getUnicodeChar());
-			}
-			*/
 			System.out.println("Sending key as char: " + ((char) keyEvent.getUnicodeChar()));
-			// if (isSendChar)
-				mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
+			mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
@@ -136,6 +129,10 @@ public class AndroidLWJGLKeycode {
 			if (perKey.getKey() == i) {
 				mainActivity.sendKeyPress(perKey.getValue(), isDown);
 			}
+		}
+		
+		if (isBackspaceAfterChar) {
+			mainActivity.sendKeyPress(Keyboard.KEY_BACK, isDown);
 		}
     }
 }

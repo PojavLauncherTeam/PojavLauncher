@@ -744,7 +744,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					jvmArgs.add("-Xmx1G");
 					*/
 					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
-					mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
+					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 					if (PojavPreferenceActivity.PREF_FREEFORM) {
