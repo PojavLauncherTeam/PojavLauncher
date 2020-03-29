@@ -258,7 +258,7 @@ public class MainActivity extends Activity implements OnTouchListener
 
 			this.drawerLayout.closeDrawers();
 			
-			AndroidLWJGLKeycode.isSendChar = mVersionInfo.minimumLauncherVersion < 18;
+			// AndroidLWJGLKeycode.isSendChar = mVersionInfo.minimumLauncherVersion < 18;
 			
 			placeMouseAt(AndroidDisplay.windowWidth / 2, AndroidDisplay.windowHeight / 2);
 			new Thread(new Runnable(){

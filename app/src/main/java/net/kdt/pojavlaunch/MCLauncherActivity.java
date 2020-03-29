@@ -32,6 +32,7 @@ import java.lang.reflect.*;
 import net.kdt.pojavlaunch.patcher.*;
 import android.graphics.*;
 import android.content.pm.*;
+import optifine.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -992,6 +993,8 @@ public class MCLauncherActivity extends AppCompatActivity
 					
 					Tools.extractAssetFolder(MCLauncherActivity.this, "optifine_patch", Tools.optifineDir, true);
 					
+					new File(Tools.optifineDir + "/optifine_patch/AndroidOptiFineUtilities.class.patch").delete();
+					
 					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
 					File patchedFile = new File(output[1]);
 
@@ -1017,14 +1020,14 @@ public class MCLauncherActivity extends AppCompatActivity
 				optDir.mkdir();
 				
 				DexClassLoader loader = new DexClassLoader(convertedFile.getAbsolutePath(), optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClass().getClassLoader());
-				Class utilitiesClass = Tools.insertOptiFinePath(loader, convertedFile.getAbsolutePath());
+				Tools.insertOptiFinePath(loader, convertedFile.getAbsolutePath());
 				
 				Class installerClass = loader.loadClass("optifine.AndroidInstaller");
 				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
 				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
 
 				publishProgress("(4/5) Patching OptiFine Tweaker");
-				File optifineLibFile = new File((String) utilitiesClass.getDeclaredField("optifineOutputJar").get(null));
+				File optifineLibFile = new File(AndroidOptiFineUtilities.optifineOutputJar);
 				new OptiFinePatcher(optifineLibFile).saveTweaker();
 				
 				publishProgress("(5/5) Done!");

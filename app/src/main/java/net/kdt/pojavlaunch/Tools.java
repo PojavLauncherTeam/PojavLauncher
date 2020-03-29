@@ -19,6 +19,7 @@ import org.apache.commons.codec.digest.*;
 import net.kdt.pojavlaunch.patcher.*;
 import java.lang.reflect.*;
 import dalvik.system.*;
+import optifine.*;
 
 public final class Tools
 {
@@ -110,9 +111,8 @@ public final class Tools
 		try {
 			File file = new File(output);
 			if(!file.exists()) file.mkdirs();
-			File file2 = new File(output + "/" + outputName);
+			File file2 = new File(output, outputName);
 			if(!file2.exists() || overwrite){
-				file2.createNewFile(); // throw new RuntimeException("Unable to write " + output + "/" + outputName);
 				write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
 			}
 		} catch (Throwable th) {
@@ -144,13 +144,8 @@ public final class Tools
 		}
 	}
 
-	public static Class insertOptiFinePath(BaseDexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
-		Class optifineClass = loader.loadClass("optifine.AndroidOptiFineUtilities");
-		Field optifinePathField = optifineClass.getDeclaredField("originalOptifineJar");
-		optifinePathField.setAccessible(true);
-		optifinePathField.set(null, optifineJar);
-		
-		return optifineClass;
+	public static void insertOptiFinePath(BaseDexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
+		AndroidOptiFineUtilities.originalOptifineJar = optifineJar;
 	}
 	
 	/*
