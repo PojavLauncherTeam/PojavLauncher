@@ -5,6 +5,7 @@ Using libraries:
  • openal_soft: OpenAL port for Android devices by apportable.
  • javax.sound.midi backport for Android by kshoji.
  • PojavDX (dx 1.16): tool to convert java bytecode to dex.
+ • LegacyLauncher: Open source Minecraft LaunchWrapper by Mojang.
  • Java AWT Implementation includes:
   - Boardwalk's makeshift.
   - OpenJDK 7 codes implementation.

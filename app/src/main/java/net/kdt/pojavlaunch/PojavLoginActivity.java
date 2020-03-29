@@ -301,9 +301,9 @@ public class PojavLoginActivity extends MineActivity
 		try {
 			mkdirs(Tools.MAIN_PATH);
 			
-			Tools.copyAssetOptional(this, "options.txt", Tools.MAIN_PATH);
+			Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
 			//Tools.copyAssetToFolderIfNonExist(this, "dx-f" + (isAndroid7() ? "7" : "4")  + ".0.jar", Tools.worksDir, "dx.jar");
-			Tools.copyAssetOptional(this, "pojavdx.dex", Tools.worksDir);
+			Tools.copyAssetFile(this, "pojavdx.dex", Tools.worksDir, true);
 			
 			// Copy ZIP!!!
 			
@@ -313,9 +313,7 @@ public class PojavLoginActivity extends MineActivity
 			
 			// Extract libraries
 			if (!isLibrariesExtracted()) {
-				
 				Tools.extractAssetFolder(this, "libraries", Tools.MAIN_PATH);
-				
 				setPref(PREF_IS_INSTALLED_LIBRARIES, true);
 			}
 

@@ -100,21 +100,45 @@ public final class Tools
 		return displayMetrics;
 	}
 	
-	public static void extractAssetFolder(Activity ctx, String path, String output) throws Exception
+
+	public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws Exception
 	{
+		copyAssetFile(ctx, fileName, output, fileName, overwrite);
+	}
+
+	public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws Exception
+	{
+		try {
+			File file = new File(output);
+			if(!file.exists()) file.mkdirs();
+			File file2 = new File(output + "/" + outputName);
+			if(!file2.exists() || overwrite){
+				if (!file2.createNewFile()) throw new RuntimeException("Unable to write " + output + "/" + outputName);
+				write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
+			}
+		} catch (Throwable th) {
+			throw new RuntimeException("Unable to copy " + fileName + " to " + output + "/" + outputName, th);
+		}
+	}
+	
+	public static void extractAssetFolder(Activity ctx, String path, String output) throws Exception {
+		extractAssetFolder(ctx, path, output, false);
+	}
+	
+	public static void extractAssetFolder(Activity ctx, String path, String output, boolean overwrite) throws Exception {
 		AssetManager assetManager = ctx.getAssets();
 		String assets[] = null;
 		try {
 			assets = assetManager.list(path);
 			if (assets.length == 0) {
-				Tools.copyAssetOptional(ctx, path, output);
+				Tools.copyAssetFile(ctx, path, output, overwrite);
 			} else {
 				String fullPath = output + "/" + path;
 				File dir = new File(fullPath);
 				if (!dir.exists())
 					dir.mkdir();
 				for (String sub : assets) {
-					extractAssetFolder(ctx, path + "/" + sub, output);
+					extractAssetFolder(ctx, path + "/" + sub, output, overwrite);
 				}
 			}
 		} catch (Exception e) {
@@ -122,11 +146,13 @@ public final class Tools
 		}
 	}
 
-	public static void insertOptiFinePath(DexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
+	public static Class insertOptiFinePath(DexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
 		Class optifineClass = loader.loadClass("optifine.AndroidOptiFineUtilities");
 		Field optifinePathField = optifineClass.getDeclaredField("originalOptifineJar");
 		optifinePathField.setAccessible(true);
 		optifinePathField.set(null, optifineJar);
+		
+		return optifineClass;
 	}
 	
 	/*
@@ -162,7 +188,8 @@ public final class Tools
 							@Override
 							public void onClick(DialogInterface p1, int p2)
 							{
-								if(exitIfOk) MainActivity.fullyExit();
+								if(exitIfOk) // MainActivity.fullyExit();
+								ctx.finish();
 							}
 						})
 						.setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, new DialogInterface.OnClickListener(){
@@ -184,7 +211,8 @@ public final class Tools
 								
 								Toast.makeText(ctx, "Copied to clipboard", Toast.LENGTH_SHORT).show();
 								
-								if(exitIfOk) MainActivity.fullyExit();
+								if(exitIfOk) // MainActivity.fullyExit();
+								ctx.finish();
 							}
 						})
 						//.setNegativeButton("Report (not available)", null)
@@ -281,10 +309,6 @@ public final class Tools
 		File optifineDirFile = new File(optifineDir);
 		optifineDirFile.mkdir();
 		
-		// Extract patch files
-		extractAssetFolder(ctx, "optifine_patch", optifineDir);
-		
-		// Patch OptiFine!
 		return new OptiFinePatcher(inFile).saveInstaller(optifineDirFile);
 	}
 	
@@ -456,25 +480,6 @@ public final class Tools
 		return tContents;
 	}
 	
-	public static void copyAssetOptional(Context ctx, String fileName, String output) throws Exception
-	{
-		copyAssetOptional(ctx, fileName, output, fileName);
-	}
-	
-	public static void copyAssetOptional(Context ctx, String fileName, String output, String outputName) throws Exception
-	{
-		try {
-			File file = new File(output);
-			if(!file.exists()) file.mkdirs();
-			File file2 = new File(output + "/" + outputName);
-			if(!file2.exists()){
-				if (!file2.createNewFile()) throw new RuntimeException("Unable to write " + output + "/" + outputName);
-				write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
-			}
-		} catch (Throwable th) {
-			throw new RuntimeException("Unable to copy " + fileName + " to " + output + "/" + outputName, th);
-		}
-	}
 	public static void downloadFile(String urlInput, String nameOutput, boolean requireNonExist) throws Throwable
 	{
 		File fileDDD = new File(nameOutput);

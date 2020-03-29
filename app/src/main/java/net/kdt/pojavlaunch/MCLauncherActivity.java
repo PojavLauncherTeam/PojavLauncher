@@ -31,6 +31,8 @@ import libcore.util.*;
 import dalvik.system.*;
 import java.lang.reflect.*;
 import net.kdt.pojavlaunch.patcher.*;
+import android.graphics.*;
+import android.content.pm.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -744,7 +746,14 @@ public class MCLauncherActivity extends AppCompatActivity
 					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-					startActivity(mainIntent);
+					if (PojavPreferenceActivity.PREF_FREEFORM) {
+						ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
+						Rect freeformRect = (Rect) PackageManager.class.getDeclaredField("FEATURE_FREEFORM_WINDOW_MANAGEMENT").get(null);
+						options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
+						startActivity(mainIntent, options.toBundle());
+					} else {
+						startActivity(mainIntent);
+					}
 				}
 				catch (Throwable e) {
 					Tools.showError(MCLauncherActivity.this, e);
@@ -977,6 +986,9 @@ public class MCLauncherActivity extends AppCompatActivity
 				convertedFile = new File(Tools.optifineDir, origMd5 + ".jar");
 				if (!convertedFile.exists()) {
 					publishProgress("(1/5) Patching OptiFine Installer");
+					
+					Tools.extractAssetFolder(MCLauncherActivity.this, "optifine_patch", Tools.optifineDir, true);
+					
 					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
 					File patchedFile = new File(output[1]);
 
@@ -1002,17 +1014,15 @@ public class MCLauncherActivity extends AppCompatActivity
 				optDir.mkdir();
 				
 				DexClassLoader loader = new DexClassLoader(convertedFile.getAbsolutePath(), optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClass().getClassLoader());
-				Tools.insertOptiFinePath(loader, convertedFile.getAbsolutePath());
+				Class utilitiesClass = Tools.insertOptiFinePath(loader, convertedFile.getAbsolutePath());
 				
 				Class installerClass = loader.loadClass("optifine.AndroidInstaller");
 				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
 				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
 
 				publishProgress("(4/5) Patching OptiFine Tweaker");
-				
-				String optifineCurr = ((String) fromConfig(loader, "MC_VERSION")) + "_" + ((String) fromConfig(loader, "OF_EDITION"));
-				
-				new OptiFinePatcher(new File(Tools.libraries, "optifine/OptiFine/" + optifineCurr + "/OptiFine-" + optifineCurr + "_orig.jar")).saveTweaker();
+				File optifineLibFile = new File((String) utilitiesClass.getDeclaredField("optifineOutputJar").get(null));
+				new OptiFinePatcher(optifineLibFile).saveTweaker();
 				
 				publishProgress("(5/5) Done!");
 				Thread.sleep(500);

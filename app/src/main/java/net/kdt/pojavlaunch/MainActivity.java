@@ -241,6 +241,9 @@ public class MainActivity extends Activity implements OnTouchListener
 			this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
 			
 			this.textLog.setTypeface(Typeface.MONOSPACE);
+			
+			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
+			
 			this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
 
 					@Override
@@ -373,159 +376,161 @@ public class MainActivity extends Activity implements OnTouchListener
 						return true;
 					}
 				});
+
+			System.loadLibrary("gl04es");
+
+			glSurfaceView.setFocusable(true);
+			glSurfaceView.setFocusableInTouchMode(true);
+			glSurfaceView.setEGLContextClientVersion(2);
+
+			final View.OnTouchListener glTouchListener = new OnTouchListener(){
+
+				@Override
+				public boolean onTouch(View p1, MotionEvent e)
+				{
+					int x = ((int) e.getX()) / scaleFactor;
+					int y = (glSurfaceView.getHeight() - ((int) e.getY())) / scaleFactor;
+					if (handleGuiBar(x, y, e)) {
+						return true;
+					} else if (!AndroidDisplay.grab && gestureDetector.onTouchEvent(e)) {
+						AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+						AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+						if (!rightOverride) {
+							AndroidDisplay.mouseLeft = true;
+						}
+						return true;
+					} else {
+						AndroidDisplay.mouseX = x;
+						AndroidDisplay.mouseY = y;
+						switch (e.getActionMasked()) {
+							case e.ACTION_DOWN: // 0
+							case e.ACTION_POINTER_DOWN: // 5
+								if (!rightOverride) {
+									AndroidDisplay.mouseLeft = true;
+								}
+
+								if (AndroidDisplay.grab) {
+									AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+									initialX = x;
+									initialY = y;
+									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+									break;
+								}
+								break;
+
+							case e.ACTION_UP: // 1
+							case e.ACTION_CANCEL: // 3
+							case e.ACTION_POINTER_UP: // 6
+								AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+								if (!rightOverride) {
+									AndroidDisplay.mouseLeft = false;
+								}
+
+								if (AndroidDisplay.grab) {
+									/*
+									 initialX = x;
+									 initialY = y;
+
+									 theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+									 */
+
+									if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+										sendMouseButton(1, true);
+										sendMouseButton(1, false);
+									}
+									if (triggeredLeftMouseButton) {
+										sendMouseButton(0, false);
+									}
+									triggeredLeftMouseButton = false;
+									theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+									break;
+								}
+								break;
+						}
+					}
+
+					return true;
+					// If onClick fail with false, change back to true
+				}
+			};
+
+			if (isPointerCaptureSupported()) {
+				this.pointerSurface = new PointerOreoWrapper(glSurfaceView);
+				this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
+
+						@Override
+						public boolean onCapturedPointer(View view, MotionEvent event)
+						{
+							return glTouchListener.onTouch(view, event);
+						}
+					});
+			}
+
+			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
+
+					@Override
+					public boolean onHover(View p1, MotionEvent p2)
+					{
+						if (!AndroidDisplay.grab) {
+							return glTouchListener.onTouch(p1, p2);
+						}
+						return true;
+					}
+				});
+			glSurfaceView.setOnTouchListener(glTouchListener);
+			glSurfaceView.setRenderer(new GLTextureView.Renderer() {
+					@Override
+					public void onSurfaceDestroyed(GL10 gl) {
+						Log.d(Tools.APP_NAME, "Surface destroyed.");
+					}
+
+					@Override
+					public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig p2)
+					{
+						calculateMcScale();
+
+						EGL10 egl10 = (EGL10) EGLContext.getEGL();
+						AndroidContextImplementation.theEgl = egl10;
+						AndroidContextImplementation.context = egl10.eglGetCurrentContext();
+						AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
+						AndroidContextImplementation.read = egl10.eglGetCurrentSurface(EGL10.EGL_READ);
+						AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
+						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
+						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
+
+						new Thread(new Runnable(){
+
+								@Override
+								public void run()
+								{
+									try {
+										Thread.sleep(200);
+										runCraft();
+									} catch (Throwable e) {
+										Tools.showError(MainActivity.this, e, true);
+									}
+								}
+							}).start();
+					}
+					@Override
+					public void onDrawFrame(GL10 gl) {
+						//mkToast("onDrawFrame");
+
+					}
+					@Override
+					public void onSurfaceChanged(GL10 gl, int width, int height) {
+						AndroidDisplay.windowWidth = width / scaleFactor;
+						AndroidDisplay.windowHeight = height / scaleFactor;
+					}
+				});
+			glSurfaceView.setPreserveEGLContextOnPause(true);
+			glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
+			glSurfaceView.requestRender();
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			Tools.showError(this, e, true);
 		}
-		
-		System.loadLibrary("gl04es");
-		
-		this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
-		glSurfaceView.setEGLContextClientVersion(2);
-		
-		final View.OnTouchListener glTouchListener = new OnTouchListener(){
-
-			@Override
-			public boolean onTouch(View p1, MotionEvent e)
-			{
-				int x = ((int) e.getX()) / scaleFactor;
-				int y = (glSurfaceView.getHeight() - ((int) e.getY())) / scaleFactor;
-				if (handleGuiBar(x, y, e)) {
-					return true;
-				} else if (!AndroidDisplay.grab && gestureDetector.onTouchEvent(e)) {
-					AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
-					AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
-					if (!rightOverride) {
-						AndroidDisplay.mouseLeft = true;
-					}
-					return true;
-				} else {
-					AndroidDisplay.mouseX = x;
-					AndroidDisplay.mouseY = y;
-					switch (e.getActionMasked()) {
-						case e.ACTION_DOWN: // 0
-						case e.ACTION_POINTER_DOWN: // 5
-							if (!rightOverride) {
-								AndroidDisplay.mouseLeft = true;
-							}
-
-							if (AndroidDisplay.grab) {
-								AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
-								initialX = x;
-								initialY = y;
-								theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
-								break;
-							}
-							break;
-
-						case e.ACTION_UP: // 1
-						case e.ACTION_CANCEL: // 3
-						case e.ACTION_POINTER_UP: // 6
-							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
-							if (!rightOverride) {
-								AndroidDisplay.mouseLeft = false;
-							}
-
-							if (AndroidDisplay.grab) {
-								/*
-								initialX = x;
-								initialY = y;
-								
-								theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
-								*/
-								
-								if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-									sendMouseButton(1, true);
-									sendMouseButton(1, false);
-								}
-								if (triggeredLeftMouseButton) {
-									sendMouseButton(0, false);
-								}
-								triggeredLeftMouseButton = false;
-								theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-								break;
-							}
-							break;
-					}
-				}
-
-				return true;
-				// If onClick fail with false, change back to true
-			}
-		};
-		
-		if (isPointerCaptureSupported()) {
-			this.pointerSurface = new PointerOreoWrapper(glSurfaceView);
-			this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
-
-					@Override
-					public boolean onCapturedPointer(View view, MotionEvent event)
-					{
-						return glTouchListener.onTouch(view, event);
-					}
-				});
-		}
-		
-		glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
-
-				@Override
-				public boolean onHover(View p1, MotionEvent p2)
-				{
-					if (!AndroidDisplay.grab) {
-						return glTouchListener.onTouch(p1, p2);
-					}
-					return true;
-				}
-			});
-		glSurfaceView.setOnTouchListener(glTouchListener);
-		glSurfaceView.setRenderer(new GLTextureView.Renderer() {
-				@Override
-				public void onSurfaceDestroyed(GL10 gl) {
-					Log.d(Tools.APP_NAME, "Surface destroyed.");
-				}
-			
-				@Override
-				public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig p2)
-				{
-					calculateMcScale();
-					
-					EGL10 egl10 = (EGL10) EGLContext.getEGL();
-					AndroidContextImplementation.theEgl = egl10;
-					AndroidContextImplementation.context = egl10.eglGetCurrentContext();
-					AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
-					AndroidContextImplementation.read = egl10.eglGetCurrentSurface(EGL10.EGL_READ);
-					AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
-					egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
-					System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
-
-					new Thread(new Runnable(){
-
-							@Override
-							public void run()
-							{
-								try {
-									Thread.sleep(200);
-									runCraft();
-								} catch (Throwable e) {
-									Tools.showError(MainActivity.this, e, true);
-								}
-							}
-						}).start();
-				}
-				@Override
-				public void onDrawFrame(GL10 gl) {
-					//mkToast("onDrawFrame");
-					
-				}
-				@Override
-				public void onSurfaceChanged(GL10 gl, int width, int height) {
-					AndroidDisplay.windowWidth = width / scaleFactor;
-					AndroidDisplay.windowHeight = height / scaleFactor;
-				}
-			});
-		glSurfaceView.setPreserveEGLContextOnPause(true);
-		glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
-		glSurfaceView.requestRender();
 		
 		// Mirror video of OpenGL view.
 		/*
@@ -599,8 +604,9 @@ public class MainActivity extends Activity implements OnTouchListener
 		super.onPause();
 	}
 	
-	public static void fullyExit() {
-		ExitManager.stopExitLoop();
+	public void fullyExit() {
+		// ExitManager.stopExitLoop();
+		finish();
 	}
 	
     public void forceUserHome(String s) throws Exception {
@@ -665,6 +671,8 @@ public class MainActivity extends Activity implements OnTouchListener
 		varArgMap.put("auth_access_token", mProfile.getAccessToken());
 		varArgMap.put("user_properties", "{}");
 		varArgMap.put("user_type", userType);
+		varArgMap.put("version_type", mVersionInfo.type);
+		varArgMap.put("game_assets", Tools.ASSETS_PATH);
 		
 		String[] argsFromJson = insertVariableArgument(mVersionInfo.minecraftArguments.split(" "), varArgMap);
 		return argsFromJson;
@@ -982,6 +990,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	
 	public void showKeyboard() {
 		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+		glSurfaceView.requestFocus();
 	}
 	
 	private void setRightOverride(boolean val) {

@@ -3,44 +3,70 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical"
-	android:padding="10dp">
-
-	<TextView
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:text="Set max DX references"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:textStyle="bold"/>
-
-	<TextView
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:text="Increase If an error happend while converting, contains: 'Too many ... reference. You may try multi-dex...'"/>
+	android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:orientation="horizontal"
-		android:gravity="center_vertical">
-
-		<SeekBar
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			android:id="@+id/settings_seekbar_setmaxdxref"
-			android:layout_weight="1.0"/>
+		android:orientation="vertical"
+		android:layout_margin="10dp">
 
 		<TextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:text="4600/65535"
-			android:id="@+id/setting_seektext_progress"/>
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:textStyle="bold"
+			android:text="@string/mcl_setting_title_setmaxdxref"/>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/mcl_setting_subtitle_setmaxdxref"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+
+			<SeekBar
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:id="@+id/settings_seekbar_setmaxdxref"
+				android:layout_weight="1.0"/>
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="4600/65535"
+				android:id="@+id/setting_seektext_progress"/>
+
+		</LinearLayout>
 
 	</LinearLayout>
 
 	<View
 		android:background="?android:attr/dividerVertical"
-		android:layout_height="1dp"
+		android:layout_height="2dp"
+		android:layout_width="match_parent"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_margin="10dp">
+
+		<Switch
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:id="@+id/settings_switch_enablefreeform"
+			android:text="@string/mcl_setting_enablefreeform"/>
+
+	</LinearLayout>
+
+	<View
+		android:background="?android:attr/dividerVertical"
+		android:layout_height="2dp"
 		android:layout_width="match_parent"/>
 
 </LinearLayout>

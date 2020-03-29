@@ -22,17 +22,11 @@ public class FontChanger
     public ViewGroup replaceFonts(ViewGroup viewTree)
     {
         View child;
-        for(int i = 0; i < viewTree.getChildCount(); ++i)
-        {
+        for(int i = 0; i < viewTree.getChildCount(); ++i) {
             child = viewTree.getChildAt(i);
-            if(child instanceof ViewGroup)
-            {
-                // recursive call
+            if (child instanceof ViewGroup) {
                 replaceFonts((ViewGroup)child);
-            }
-            else if(child instanceof TextView)
-            {
-                // base case
+            } else if (child instanceof TextView) {
                 replaceFont((TextView) child);
             }
         }
