@@ -7,8 +7,8 @@
 		android:id="@+id/nav_viewlog"
 		android:title="@string/control_viewout" />
 	<item
-		android:id="@+id/nav_viewcanvas"
-		android:title="@string/control_more2" />
+		android:id="@+id/nav_fixdoubleletters"
+		android:title="@string/control_fixdoubleletters" />
 	<item
 		android:id="@+id/nav_more3"
 		android:title="@string/control_more3" />

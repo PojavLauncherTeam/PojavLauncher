@@ -743,11 +743,15 @@ public class MCLauncherActivity extends AppCompatActivity
 					jvmArgs.add("-Xmx1G");
 					*/
 					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
+					mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 					if (PojavPreferenceActivity.PREF_FREEFORM) {
+						DisplayMetrics dm = new DisplayMetrics();
+						getWindowManager().getDefaultDisplay().getMetrics(dm);
+						
 						ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
-						Rect freeformRect = (Rect) PackageManager.class.getDeclaredField("FEATURE_FREEFORM_WINDOW_MANAGEMENT").get(null);
+						Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
 						options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
 						startActivity(mainIntent, options.toBundle());
 					} else {

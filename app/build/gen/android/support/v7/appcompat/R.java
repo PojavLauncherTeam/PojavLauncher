@@ -2634,9 +2634,9 @@ containing a value of this type.
         public static final int middle=0x7f060036;
         public static final int mini=0x7f060022;
         public static final int multiply=0x7f06002f;
+        public static final int nav_fixdoubleletters=0x7f0600c5;
         public static final int nav_forceclose=0x7f0600c3;
         public static final int nav_more3=0x7f0600c6;
-        public static final int nav_viewcanvas=0x7f0600c5;
         public static final int nav_viewlog=0x7f0600c4;
         public static final int navigation_header_container=0x7f060072;
         public static final int never=0x7f06003a;
@@ -2836,6 +2836,7 @@ containing a value of this type.
         public static final int control_chat=0x7f0a0067;
         public static final int control_debug=0x7f0a0068;
         public static final int control_down=0x7f0a0072;
+        public static final int control_fixdoubleletters=0x7f0a007a;
         /**  MainActivity: Menu advanced controls 
          */
         public static final int control_forceclose=0x7f0a0078;
@@ -2846,7 +2847,6 @@ containing a value of this type.
         public static final int control_keyboard=0x7f0a0066;
         public static final int control_left=0x7f0a0070;
         public static final int control_listplayers=0x7f0a0075;
-        public static final int control_more2=0x7f0a007a;
         public static final int control_more3=0x7f0a007b;
         public static final int control_more4=0x7f0a007c;
         public static final int control_mouseoff=0x7f0a0076;

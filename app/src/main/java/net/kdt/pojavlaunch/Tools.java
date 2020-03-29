@@ -112,7 +112,7 @@ public final class Tools
 			if(!file.exists()) file.mkdirs();
 			File file2 = new File(output + "/" + outputName);
 			if(!file2.exists() || overwrite){
-				if (!file2.createNewFile()) throw new RuntimeException("Unable to write " + output + "/" + outputName);
+				file2.createNewFile(); // throw new RuntimeException("Unable to write " + output + "/" + outputName);
 				write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
 			}
 		} catch (Throwable th) {
@@ -132,10 +132,9 @@ public final class Tools
 			if (assets.length == 0) {
 				Tools.copyAssetFile(ctx, path, output, overwrite);
 			} else {
-				String fullPath = output + "/" + path;
-				File dir = new File(fullPath);
+				File dir = new File(output, path);
 				if (!dir.exists())
-					dir.mkdir();
+					dir.mkdirs();
 				for (String sub : assets) {
 					extractAssetFolder(ctx, path + "/" + sub, output, overwrite);
 				}
@@ -145,7 +144,7 @@ public final class Tools
 		}
 	}
 
-	public static Class insertOptiFinePath(DexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
+	public static Class insertOptiFinePath(BaseDexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
 		Class optifineClass = loader.loadClass("optifine.AndroidOptiFineUtilities");
 		Field optifinePathField = optifineClass.getDeclaredField("originalOptifineJar");
 		optifinePathField.setAccessible(true);

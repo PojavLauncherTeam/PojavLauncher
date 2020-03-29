@@ -7,6 +7,7 @@ import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 
 public class AndroidLWJGLKeycode {
+	public static boolean isSendChar;
 	private static final Map<Integer, Integer> androidToLwjglMap;
 	static {
 		androidToLwjglMap = new ArrayMap<Integer, Integer>();
@@ -125,7 +126,7 @@ public class AndroidLWJGLKeycode {
 			}
 			*/
 			System.out.println("Sending key as char: " + ((char) keyEvent.getUnicodeChar()));
-			mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
+			if (isSendChar) mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}

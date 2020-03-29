@@ -197,7 +197,7 @@ public class MainActivity extends Activity implements OnTouchListener
 								break;
 							case R.id.nav_viewlog: openLogOutput();
 								break;
-							case R.id.nav_viewcanvas: //openCanvasOutput();
+							case R.id.nav_fixdoubleletters: //openCanvasOutput();
 						}
 						//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
 
@@ -257,7 +257,9 @@ public class MainActivity extends Activity implements OnTouchListener
 			toggleGui(null);
 
 			this.drawerLayout.closeDrawers();
-
+			
+			AndroidLWJGLKeycode.isSendChar = mVersionInfo.minimumLauncherVersion < 18;
+			
 			placeMouseAt(AndroidDisplay.windowWidth / 2, AndroidDisplay.windowHeight / 2);
 			new Thread(new Runnable(){
 

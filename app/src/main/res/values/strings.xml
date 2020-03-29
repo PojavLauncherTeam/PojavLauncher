@@ -146,9 +146,9 @@
 	<!-- MainActivity: Menu advanced controls -->
 	<string name="control_forceclose">Force close</string>
 	<string name="control_viewout">Log output</string>
-	<string name="control_more2">Empty</string>
-	<string name="control_more3">Empty</string>
-	<string name="control_more4">Empty</string>
+	<string name="control_fixdoubleletters"></string>
+	<string name="control_more3"></string>
+	<string name="control_more4"></string>
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Update console</string>

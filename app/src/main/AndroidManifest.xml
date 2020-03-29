@@ -35,6 +35,7 @@
 		
         <activity
 			android:launchMode="standard"
+			android:multiprocess="true"
 			android:screenOrientation="sensorLandscape"
 			android:theme="@style/RunTheme"
             android:name=".MainActivity"
