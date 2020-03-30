@@ -8,8 +8,8 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 156216
-        versionName "2.4.2pre7.1_6378b_20200329"
+        versionCode 156218
+        versionName "2.4.2pre7b3_6380b_20200330"
     }
     buildTypes {
         release {
@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-	
+	compile 'commons-codec:commons-codec:1.14'
 	compile 'com.wu-man:android-bsf-api:3.1.3'
 	compile 'com.android.support:support-v4:24.0.0'
 	compile 'com.android.support:appcompat-v7:24.0.0'

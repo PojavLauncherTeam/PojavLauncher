@@ -255,7 +255,6 @@ public class MainActivity extends Activity implements OnTouchListener
 				});
 			
 			toggleGui(null);
-
 			this.drawerLayout.closeDrawers();
 			
 			AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
@@ -607,8 +606,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	}
 	
 	public void fullyExit() {
-		// ExitManager.stopExitLoop();
-		finish();
+		ExitManager.stopExitLoop();
 	}
 	
     public void forceUserHome(String s) throws Exception {
@@ -805,34 +803,15 @@ public class MainActivity extends Activity implements OnTouchListener
 	}
 	
 	private void appendToLog(final String text) {
-		mQueueText += text;
-		
-		if (!isLogAllow) {
-			return;
-		}
-		
-		try {
-			textLog.post(new Runnable(){
-					@Override
-					public void run()
-					{
-						textLog.append(mQueueText);
-						contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
-					}
-				});
-			/*
-			textLogBehindGL.post(new Runnable(){
-
-					@Override
-					public void run()
-					{
-						textLogBehindGL.append(mQueueText.toString());
-					}
-				});
-			*/
-		} finally {
-			mQueueText = "";
-		}
+		if (!isLogAllow) return;
+		textLog.post(new Runnable(){
+				@Override
+				public void run()
+				{
+					textLog.append(text);
+					contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
+				}
+			});
 	}
 	
 	public void handleMessage(Message msg) {

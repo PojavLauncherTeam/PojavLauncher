@@ -2508,7 +2508,8 @@ containing a value of this type.
         public static final int menu_hamburger=0x7f02005d;
         public static final int mojang_logo=0x7f02005e;
         public static final int mouse_pointer=0x7f02005f;
-        public static final int notification_template_icon_bg=0x7f020060;
+        public static final int notification_template_icon_bg=0x7f020061;
+        public static final int toggle_log=0x7f020060;
     }
     public static final class id {
         public static final int action0=0x7f06009b;

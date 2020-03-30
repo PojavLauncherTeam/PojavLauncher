@@ -131,7 +131,7 @@ public class AndroidLWJGLKeycode {
 			}
 		}
 		
-		if (isBackspaceAfterChar) {
+		if (isBackspaceAfterChar && !AndroidDisplay.grab && i != KeyEvent.KEYCODE_DEL) {
 			mainActivity.sendKeyPress(Keyboard.KEY_BACK, isDown);
 		}
     }
