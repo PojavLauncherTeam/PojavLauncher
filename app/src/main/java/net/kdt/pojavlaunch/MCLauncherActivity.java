@@ -57,27 +57,27 @@ public class MCLauncherActivity extends AppCompatActivity
 	private Button switchUsrBtn, logoutBtn; // MineButtons
 	private ViewGroup leftView, rightView;
 	private Button playButton;
-	
+
 	private Gson gson;
-	
+
 	private JMinecraftVersionList versionList;
 	private static volatile boolean isAssetsProcessing = false;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+
 		gson = new Gson();
-		
+
 		DisplayMetrics dm = Tools.getDisplayMetrics(this);
 		AndroidDisplay.windowWidth = dm.widthPixels;
 		AndroidDisplay.windowHeight = dm.heightPixels;
 		viewInit();
 	}
-		// DEBUG
-		//new android.support.design.widget.NavigationView(this);
-		
+	// DEBUG
+	//new android.support.design.widget.NavigationView(this);
+
 	private String getStr(int id, Object... val) {
 		if (val != null && val.length > 0) {
 			return getResources().getString(id, val);
@@ -85,10 +85,10 @@ public class MCLauncherActivity extends AppCompatActivity
 			return getResources().getString(id);
 		}
 	}
-	
+
 	private void viewInit() {
 		setContentView(R.layout.launcher_main);
-		
+
 		fullTab = (LinearLayout) findViewById(R.id.launchermainFragmentTabView);
 		tabLayout = (TabLayout) findViewById(R.id.launchermainTabLayout);
 		viewPager = (ViewPager) findViewById(R.id.launchermainTabPager);
@@ -101,7 +101,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		viewPageAdapter.addFragment(new LauncherFragment(), getStr(R.string.mcl_tab_news));
 		viewPageAdapter.addFragment(consoleView, getStr(R.string.mcl_tab_console));
 		viewPageAdapter.addFragment(crashView, getStr(R.string.mcl_tab_crash));
-		
+
 		viewPager.setAdapter(viewPageAdapter);
 		tabLayout.setupWithViewPager(viewPager);
 
@@ -136,7 +136,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		} catch (Exception e) {
 			versions.add(getStr(R.string.error_title) + ":");
 			versions.add(e.getMessage());
-			
+
 		} finally {
 			availableVersions = versions.toArray(new String[0]);
 		}
@@ -149,100 +149,100 @@ public class MCLauncherActivity extends AppCompatActivity
 		versionSelector.setAdapter(adapter);
 
 		new RefreshVersionListTask().execute();
-		
+
 		launchProgress = (ProgressBar) findId(R.id.progressDownloadBar);
 		launchTextStatus = (TextView) findId(R.id.progressDownloadText);
 		LinearLayout exitLayout = (LinearLayout) findId(R.id.launcherMainExitbtns);
 		switchUsrBtn = (Button) exitLayout.getChildAt(0);
 		logoutBtn = (Button) exitLayout.getChildAt(1);
-		
+
 		leftView = (LinearLayout) findId(R.id.launcherMainLeftLayout);
 		playButton = (Button) findId(R.id.launcherMainPlayButton);
 		rightView = (ViewGroup) findId(R.id.launcherMainRightLayout);
-		
+
 		statusIsLaunching(false);
 	}
 
 	public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<String>>{
 
-	@Override
-	protected ArrayList<String> doInBackground(Void[] p1)
-	{
-		try{
-			versionList = gson.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
-			ArrayList<String> versionStringList = filter(versionList.versions, new File(Tools.versnDir).listFiles());
+		@Override
+		protected ArrayList<String> doInBackground(Void[] p1)
+		{
+			try{
+				versionList = gson.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
+				ArrayList<String> versionStringList = filter(versionList.versions, new File(Tools.versnDir).listFiles());
 
-			return versionStringList;
-		} catch (Exception e){
-			e.printStackTrace();
+				return versionStringList;
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
 		}
-		return null;
-	}
 
-	@Override
-	protected void onPostExecute(ArrayList<String> result)
-	{
-		super.onPostExecute(result);
+		@Override
+		protected void onPostExecute(ArrayList<String> result)
+		{
+			super.onPostExecute(result);
 
-		final PopupMenu popup = new PopupMenu(MCLauncherActivity.this, versionSelector);  
-		popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());  
+			final PopupMenu popup = new PopupMenu(MCLauncherActivity.this, versionSelector);  
+			popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());  
 
-		if(result != null && result.size() > 0) {
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(MCLauncherActivity.this, android.R.layout.simple_spinner_item, result);
-			adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-			versionSelector.setAdapter(adapter);
-			versionSelector.setSelection(selectAt(result.toArray(new String[0]), profile.getVersion()));
-		} else {
-			versionSelector.setSelection(selectAt(availableVersions, profile.getVersion()));
-		}
-		versionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
+			if(result != null && result.size() > 0) {
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(MCLauncherActivity.this, android.R.layout.simple_spinner_item, result);
+				adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+				versionSelector.setAdapter(adapter);
+				versionSelector.setSelection(selectAt(result.toArray(new String[0]), profile.getVersion()));
+			} else {
+				versionSelector.setSelection(selectAt(availableVersions, profile.getVersion()));
+			}
+			versionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
 
-				@Override
-				public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-				{
-					String version = p1.getItemAtPosition(p3).toString();
-					profile.setVersion(version);
+					@Override
+					public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
+					{
+						String version = p1.getItemAtPosition(p3).toString();
+						profile.setVersion(version);
 
-					PojavProfile.setCurrentProfile(MCLauncherActivity.this, profile);
-					if (PojavProfile.isFileType(MCLauncherActivity.this)) {
-						PojavProfile.setCurrentProfile(MCLauncherActivity.this, MCProfile.build(profile));
+						PojavProfile.setCurrentProfile(MCLauncherActivity.this, profile);
+						if (PojavProfile.isFileType(MCLauncherActivity.this)) {
+							PojavProfile.setCurrentProfile(MCLauncherActivity.this, MCProfile.build(profile));
+						}
+
+						tvVersion.setText(getStr(R.string.mcl_version_msg, version));
 					}
 
-					tvVersion.setText(getStr(R.string.mcl_version_msg, version));
-				}
+					@Override
+					public void onNothingSelected(AdapterView<?> p1)
+					{
+						// TODO: Implement this method
+					}
+				});
+			versionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+					@Override
+					public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
+					{
+						// Implement copy, remove, reinstall,...
+						popup.show();
+						return true;
+					}
+				});
 
-				@Override
-				public void onNothingSelected(AdapterView<?> p1)
-				{
-					// TODO: Implement this method
-				}
-			});
-		versionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-				@Override
-				public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
-				{
-					// Implement copy, remove, reinstall,...
-					popup.show();
-					return true;
-				}
-			});
+			popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
+					public boolean onMenuItemClick(MenuItem item) {  
+						return true;  
+					}  
+				});  
 
-		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
-				public boolean onMenuItemClick(MenuItem item) {  
-					return true;  
-				}  
-			});  
-
-		tvVersion.setText(getStr(R.string.mcl_version_msg) + versionSelector.getSelectedItem());
+			tvVersion.setText(getStr(R.string.mcl_version_msg) + versionSelector.getSelectedItem());
+		}
 	}
-}
-	
+
 	@Override
 	protected void onPostResume()
 	{
 		super.onPostResume();
 	}
-	
+
 	private float updateWidthHeight() {
 		float leftRightWidth = (float) AndroidDisplay.windowWidth / 100f * 32f;
 		float playButtonWidth = AndroidDisplay.windowWidth - leftRightWidth * 2f;
@@ -251,10 +251,10 @@ public class MCLauncherActivity extends AppCompatActivity
 		leftView.setLayoutParams(leftRightParams);
 		rightView.setLayoutParams(leftRightParams);
 		playButton.setLayoutParams(playButtonParams);
-		
+
 		return leftRightWidth;
 	}
-	
+
 	private JMinecraftVersionList.Version findVersion(String version) {
 		if (versionList != null) {
 			for (JMinecraftVersionList.Version valueVer: versionList.versions) {
@@ -338,38 +338,38 @@ public class MCLauncherActivity extends AppCompatActivity
 			barrier.setProgressStyle(barrier.STYLE_SPINNER);
 			barrier.setCancelable(false);
 			barrier.show();
-			
+
 			new Thread(new Runnable(){
 
-				@Override
-				public void run()
-				{
-					while (consoleView == null) {
-						try {
-							Thread.sleep(20);
-						} catch (Throwable th) {}
-					}
-					
-					try {
-						Thread.sleep(100);
-					} catch (Throwable th) {}
-					
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run()
-						{
+					@Override
+					public void run()
+					{
+						while (consoleView == null) {
 							try {
-								consoleView.putLog("");
-								barrier.dismiss();
-							} catch (Throwable th) {
-								startActivity(getIntent());
-								finish();
-							}
+								Thread.sleep(20);
+							} catch (Throwable th) {}
 						}
-					});
-				}
-			}).start();
-			
+
+						try {
+							Thread.sleep(100);
+						} catch (Throwable th) {}
+
+						runOnUiThread(new Runnable() {
+								@Override
+								public void run()
+								{
+									try {
+										consoleView.putLog("");
+										barrier.dismiss();
+									} catch (Throwable th) {
+										startActivity(getIntent());
+										finish();
+									}
+								}
+							});
+					}
+				}).start();
+
 			File lastCrashFile = Tools.lastFileModified(Tools.crashPath);
 			if(CrashFragment.isNewCrash(lastCrashFile) || !crashView.getLastCrash().isEmpty()){
 				crashView.resetCrashLog = false;
@@ -416,7 +416,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		launchTextStatus.setVisibility(launchVisibility);
 		lmainTabParam.bottomMargin = reparam.height;
 		leftView.setLayoutParams(reparam);
-		
+
 		switchUsrBtn.setEnabled(!isLaunching);
 		logoutBtn.setEnabled(!isLaunching);
 		versionSelector.setEnabled(!isLaunching);
@@ -449,14 +449,14 @@ public class MCLauncherActivity extends AppCompatActivity
 	{
 		private String convertStr;
 		private boolean launchWithError = false;
-		
+
 		@Override
 		protected void onPreExecute()
 		{
 			launchProgress.setMax(39);
 			statusIsLaunching(true);
 		}
-		
+
 		private int maxSubProgress = 1;
 		private int valSubProgress = 1;
 		@Override
@@ -480,10 +480,10 @@ public class MCLauncherActivity extends AppCompatActivity
 				});
 			System.setOut(new PrintStream(logOut));
 			System.setErr(new PrintStream(logErr));
-			
+
 			try {
 				final String downVName = "/" + p1[0] + "/" + p1[0];
-				
+
 				//Downloading libraries
 				String inputPath = Tools.versnDir + downVName + "_orig.jar";
 				String unpatchedPath = Tools.versnDir + downVName + "_unpatched.jar";
@@ -508,7 +508,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					zeroProgress();
 
 					verInfo = Tools.getVersionInfo(p1[0]);
-					
+
 					DependentLibrary[] libList = verInfo.libraries;
 					setMax(libList.length * 2 + 5);
 
@@ -523,7 +523,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							libItem.name.startsWith("net.minecraft.launchwrapper") ||
 							libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
 							libItem.name.startsWith("tv.twitch")
-						) { // Black list
+							) { // Black list
 							publishProgress("1", "Ignored " + libItem.name);
 							//Thread.sleep(100);
 						} else {
@@ -533,18 +533,18 @@ public class MCLauncherActivity extends AppCompatActivity
 							String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
 							outUndexLib = new File(Tools.libraries + "/" + libArtifact.replace(".jar", "_orig.jar"));
 							outUndexLib.getParentFile().mkdirs();
-							
+
 							outDexedLib = new File(Tools.libraries + "/" + libArtifact); // Don't add ".jar"
 							if (!outDexedLib.exists()) {
 								publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
-								
+
 								boolean skipIfFailed = false;
-								
+
 								if (libItem.downloads == null) {
 									MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
 									artifact.url = "https://libraries.minecraft.net/" + libArtifact;
 									libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
-									
+
 									skipIfFailed = true;
 								}
 								try {
@@ -564,10 +564,10 @@ public class MCLauncherActivity extends AppCompatActivity
 										th.printStackTrace();
 									}
 								}
-								
+
 								convertStr = getStr(R.string.mcl_launch_convert_lib, libItem.name);
 								publishProgress("1", convertStr);
-								
+
 								boolean isOptifine = libItem.name.startsWith(Tools.optifineLib);
 								Tools.runDx(MCLauncherActivity.this, outUndexLib.getAbsolutePath(), outDexedLib.getAbsolutePath(), isOptifine , new PojavDXManager.Listen(){
 
@@ -579,13 +579,13 @@ public class MCLauncherActivity extends AppCompatActivity
 											publishProgress("0", convertStr + ": (" + currProg + "/" + maxProg + ") " + step, "");
 										}
 									});
-									/*
-								if (!new File(outDexedLib + "/finish").exists()) {
-									toast("Unable to convert library " + libItem.name + " but still continue. Is it a wrong check?");
-									//throw new RuntimeException("Unable to convert library " + libItem.name);
-								}
-								*/
-								
+								/*
+								 if (!new File(outDexedLib + "/finish").exists()) {
+								 toast("Unable to convert library " + libItem.name + " but still continue. Is it a wrong check?");
+								 //throw new RuntimeException("Unable to convert library " + libItem.name);
+								 }
+								 */
+
 								if (!outDexedLib.exists()) {
 									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib, libItem.name) + "\n" + currentLog.toString());
 									dxError.setStackTrace(new StackTraceElement[0]);
@@ -600,42 +600,39 @@ public class MCLauncherActivity extends AppCompatActivity
 					publishProgress("5", getStr(R.string.mcl_launch_download_client) + p1[0]);
 					outUnpatchedConvert = new File(unpatchedPath);
 					boolean patchedExist = new File(patchedFile).exists();
-					System.out.println("PATCHED:" + patchedFile + ",exist:" + Boolean.toString(patchedExist));
 					if (!patchedExist) {
-						System.out.println("UNPATCHED:" + outUnpatchedConvert + ",exist:" + Boolean.toString(outUnpatchedConvert.exists()));
 						if (!outUnpatchedConvert.exists()) {
-							System.out.println("INPUT:" + inputPath + ",exist:" + Boolean.toString(new File(inputPath).exists()));
 							if (!new File(inputPath).exists()) {
 								currentLog.setLength(0);
-								
+
 								Tools.downloadFile(
 									verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
 									inputPath,
 									true
 								);
-
-								convertStr = getStr(R.string.mcl_launch_convert_client, p1[0]);
-								publishProgress("5", convertStr);
-								addProgress = 0;
-								Tools.runDx(MCLauncherActivity.this, inputPath, outUnpatchedConvert.getAbsolutePath(), new PojavDXManager.Listen(){
-
-										@Override
-										public void onReceived(String step, int maxProg, int currProg)
-										{
-											maxSubProgress = maxProg;
-											valSubProgress = currProg;
-											publishProgress("0", convertStr + " (" + currProg + "/" + maxProg + ") " + step, "");
-										}
-									});
-								if (!outUnpatchedConvert.exists()) {
-									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_client) + "\n" + currentLog.toString());
-									dxError.setStackTrace(new StackTraceElement[0]);
-									throw dxError;
-								}
-								
-								patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
-								outUnpatchedConvert.delete();
 							}
+
+							convertStr = getStr(R.string.mcl_launch_convert_client, p1[0]);
+							publishProgress("5", convertStr);
+							addProgress = 0;
+							Tools.runDx(MCLauncherActivity.this, inputPath, outUnpatchedConvert.getAbsolutePath(), new PojavDXManager.Listen(){
+
+									@Override
+									public void onReceived(String step, int maxProg, int currProg)
+									{
+										maxSubProgress = maxProg;
+										valSubProgress = currProg;
+										publishProgress("0", convertStr + " (" + currProg + "/" + maxProg + ") " + step, "");
+									}
+								});
+							if (!outUnpatchedConvert.exists()) {
+								RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_client) + "\n" + currentLog.toString());
+								dxError.setStackTrace(new StackTraceElement[0]);
+								throw dxError;
+							}
+
+							patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
+							outUnpatchedConvert.delete();
 						} else {
 							patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
 							outUnpatchedConvert.delete();
@@ -645,7 +642,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					launchWithError = true;
 					throw e;
 				}
-				
+
 				publishProgress("7", getStr(R.string.mcl_launch_cleancache));
 				// new File(inputPath).delete();
 
@@ -706,7 +703,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			publishProgress("1", getStr(R.string.mcl_launch_patch_client, version));
 			JarSigner.sign(in, out);
 			new File(in).delete();
-			
+
 			// Tools.clearDuplicateFiles(new File(out).getParentFile());
 		}
 
@@ -717,13 +714,13 @@ public class MCLauncherActivity extends AppCompatActivity
 			if (addedProg != -1) {
 				addProgress = addProgress + addedProg;
 				launchProgress.setProgress(addProgress);
-				
+
 				launchTextStatus.setText(p1[1]);
 			}
-			
+
 			if (p1.length < 3) consoleView.putLog(p1[1] + (p1.length < 3 ? "\n" : ""));
 		}
-		
+
 		@Override
 		protected void onPostExecute(Throwable p1)
 		{
@@ -738,13 +735,13 @@ public class MCLauncherActivity extends AppCompatActivity
 			}
 			if(!launchWithError) {
 				crashView.setLastCrash("");
-				
+
 				try {
 					/*
-					List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
-					jvmArgs.add("-Xms128M");
-					jvmArgs.add("-Xmx1G");
-					*/
+					 List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
+					 jvmArgs.add("-Xms128M");
+					 jvmArgs.add("-Xmx1G");
+					 */
 					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
 					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
@@ -752,7 +749,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					if (PojavPreferenceActivity.PREF_FREEFORM) {
 						DisplayMetrics dm = new DisplayMetrics();
 						getWindowManager().getDefaultDisplay().getMetrics(dm);
-						
+
 						ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
 						Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
 						options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
@@ -765,10 +762,10 @@ public class MCLauncherActivity extends AppCompatActivity
 					Tools.showError(MCLauncherActivity.this, e);
 				}
 
-			/*
-				FloatingIntent maini = new FloatingIntent(MCLauncherActivity.this, MainActivity.class);
-				maini.startFloatingActivity();
-			*/
+				/*
+				 FloatingIntent maini = new FloatingIntent(MCLauncherActivity.this, MainActivity.class);
+				 maini.startFloatingActivity();
+				 */
 			}
 
 			mTask = null;
@@ -858,10 +855,10 @@ public class MCLauncherActivity extends AppCompatActivity
 								try
 								{
 									aboutB.setMessage(String.format(Tools.read(getAssets().open("about_en.txt")),
-										Tools.APP_NAME,
-										Tools.usingVerName,
-										org.lwjgl.Sys.getVersion())
-									);
+																	Tools.APP_NAME,
+																	Tools.usingVerName,
+																	org.lwjgl.Sys.getVersion())
+													  );
 								} catch (Exception e) {
 									throw new RuntimeException(e);
 								}
@@ -949,11 +946,11 @@ public class MCLauncherActivity extends AppCompatActivity
 		dialog.setView(flv);
 		dialog.show();
 	}
-	
+
 	private void doInstallOptiFine(File optifineFile) {
 		new OptiFineInstaller().execute(optifineFile);
 	}
-	
+
 	private class OptiFineInstaller extends AsyncTask<File, String, Throwable>
 	{
 		private ProgressDialog dialog;
@@ -992,11 +989,11 @@ public class MCLauncherActivity extends AppCompatActivity
 				convertedFile = new File(Tools.optifineDir, origMd5 + ".jar");
 				if (!convertedFile.exists()) {
 					publishProgress("(1/5) Patching OptiFine Installer");
-					
+
 					Tools.extractAssetFolder(MCLauncherActivity.this, "optifine_patch", Tools.optifineDir, true);
-					
+
 					new File(Tools.optifineDir + "/optifine_patch/AndroidOptiFineUtilities.class.patch").delete();
-					
+
 					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
 					File patchedFile = new File(output[1]);
 
@@ -1012,18 +1009,18 @@ public class MCLauncherActivity extends AppCompatActivity
 						dxError.setStackTrace(new StackTraceElement[0]);
 						throw dxError;
 					}
-					
+
 					patchedFile.delete();
 				}
 
 				publishProgress("(3/5) Launching OptiFine installer");
-				
+
 				File optDir = getDir("dalvik-cache", 0);
 				optDir.mkdir();
-				
+
 				DexClassLoader loader = new DexClassLoader(convertedFile.getAbsolutePath(), optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClass().getClassLoader());
 				Tools.insertOptiFinePath(loader, convertedFile.getAbsolutePath());
-				
+
 				Class installerClass = loader.loadClass("optifine.AndroidInstaller");
 				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
 				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
@@ -1031,7 +1028,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				publishProgress("(4/5) Patching OptiFine Tweaker");
 				File optifineLibFile = new File(AndroidOptiFineUtilities.optifineOutputJar);
 				new OptiFinePatcher(optifineLibFile).saveTweaker();
-				
+
 				publishProgress("(5/5) Done!");
 				Thread.sleep(500);
 			} catch (Throwable th) {
@@ -1040,10 +1037,10 @@ public class MCLauncherActivity extends AppCompatActivity
 				System.setOut(logOut.getRootStream());
 				System.setErr(logErr.getRootStream());
 				/*
-				if (throwable != null && convertedFile != null) {
-					convertedFile.delete();
-				}
-				*/
+				 if (throwable != null && convertedFile != null) {
+				 convertedFile.delete();
+				 }
+				 */
 				return throwable;
 			}
 		}
@@ -1053,7 +1050,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			f.setAccessible(true);
 			return f.get(null);
 		}
-		
+
 		@Override
 		protected void onProgressUpdate(String[] text) {
 			super.onProgressUpdate(text);
@@ -1066,7 +1063,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			dialog.dismiss();
 
 			new RefreshVersionListTask().execute();
-			
+
 			if (th == null) {
 				Toast.makeText(MCLauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
 			} else {
@@ -1074,7 +1071,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			}
 		}
 	}
-	
+
 	public void updateAppProcess(final String ver)
 	{
 		new Thread(new Runnable(){
@@ -1095,7 +1092,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				}
 			}).start();
 	}
-	
+
 	public void checkUpdate() {
 		final ProgressDialog progUp = new ProgressDialog(this);
 		progUp.setMessage(getStr(R.string.mcl_option_checkupdate));
@@ -1215,12 +1212,12 @@ public class MCLauncherActivity extends AppCompatActivity
 			fragmentList.add(fragment);
 			fragmentTitles.add(name);
 		}
-		
+
 		public void setFragment(int index, Fragment fragment, String name) {
 			fragmentList.set(index, fragment);
 			fragmentTitles.set(index, name);
 		}
-		
+
 		public void removeFragment(int index) {
 			fragmentList.remove(index);
 			fragmentTitles.remove(index);
