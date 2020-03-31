@@ -599,10 +599,12 @@ public class MCLauncherActivity extends AppCompatActivity
 
 					publishProgress("5", getStr(R.string.mcl_launch_download_client) + p1[0]);
 					outUnpatchedConvert = new File(unpatchedPath);
-					if (!new File(patchedFile).exists()) {
-						// publishProgress("-1", "DEBUG: PatchedFile=" + patchedPath + ";NonExists!");
+					boolean patchedExist = new File(patchedFile).exists();
+					System.out.println("PATCHED:" + patchedFile + ",exist:" + Boolean.toString(patchedExist));
+					if (!patchedExist) {
+						System.out.println("UNPATCHED:" + outUnpatchedConvert + ",exist:" + Boolean.toString(outUnpatchedConvert.exists()));
 						if (!outUnpatchedConvert.exists()) {
-							// publishProgress("-1", "DEBUG: OutFile=" + outFile + ", OutFinish=" + outUnpatchedConvert + ";NonExists!");
+							System.out.println("INPUT:" + inputPath + ",exist:" + Boolean.toString(new File(inputPath).exists()));
 							if (!new File(inputPath).exists()) {
 								currentLog.setLength(0);
 								

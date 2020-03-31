@@ -39,28 +39,32 @@ public class ImageIO {
         return new BufferedImage(bmp);
     }
 
-	public static boolean write(RenderedImage renderedImage, String str, File file) throws IOException {
-		// MOD: Modified to fix blank image result and compatible with Android.
+	public static boolean write(RenderedImage renderedImage, String type, File file) throws IOException {
 		System.out.println("ImageIO.write stub " + file);
-		
+
 		if (file == null) {
             throw new IllegalArgumentException("output cannot be NULL");
         }
         if (file.exists()) {
             file.delete();
         }
+		
+		if (file.getParentFile() == null || !file.getParentFile().exists()) {
+			file = new File(System.getProperty("user.home", Tools.MAIN_PATH), file.getAbsolutePath());
+		}
+		return write(renderedImage, type, new FileOutputStream(file));
+	}
+	
+	public static boolean write(RenderedImage renderedImage, String type, OutputStream out) throws IOException {
+		// MOD: Modified to fix blank image result and compatible with Android.
         if (renderedImage instanceof BufferedImage) {
             try {
-				if (file.getParentFile() == null || !file.getParentFile().exists()) {
-					file = new File(System.getProperty("user.home", Tools.MAIN_PATH), file.getAbsolutePath());
-				}
-                FileOutputStream fileOutputStream = new FileOutputStream(file);
 				Bitmap.CompressFormat format = null;
-				if (str.equalsIgnoreCase("jpg")) format = Bitmap.CompressFormat.JPEG;
-				if (str.equalsIgnoreCase("png")) format = Bitmap.CompressFormat.PNG;
+				if (type.equalsIgnoreCase("jpg")) format = Bitmap.CompressFormat.JPEG;
+				if (type.equalsIgnoreCase("png")) format = Bitmap.CompressFormat.PNG;
 				// if (str.equalsIgnoreCase("gif")) format = Bitmap.CompressFormat.GIF;
-             	boolean rt = ModdingKit.bufferToBitmap((BufferedImage) renderedImage).compress(format, 100, fileOutputStream);
-				fileOutputStream.close();
+             	boolean rt = ModdingKit.bufferToBitmap((BufferedImage) renderedImage).compress(format, 100, out);
+				out.close();
                 return rt;
             } catch (Exception e) {
                 e.printStackTrace();

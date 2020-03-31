@@ -8,8 +8,8 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 156218
-        versionName "2.4.2pre7b3_6380b_20200330"
+        versionCode 156220
+        versionName "2.4.2pre8b1_6382b_20200331"
     }
     buildTypes {
         release {
