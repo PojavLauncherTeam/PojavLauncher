@@ -104,8 +104,8 @@ Not yet, this repository currently for bug tracking.
 
 
 # OptiFine worked in PojavLauncher 2.4.2
-|Android version  |  ??? |???|???|Tested in Android 10| ??? |
+|Android version  |  9.0 |???|???|Tested in Android 10| ??? |
 |-----------------|------|---|---|-----|-----|
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
-|OptiFine         |Any versions|???|???|OptiFine_1.10_HD_U_H5| ??? |
-|Status           |Show splash screen then crash|???|???|[Worked (manually)](https://github.com/khanhduytran0/PojavLauncher/issues/27#issuecomment-607037705)|???
+|OptiFine         |OptiFine 1.7.10 HD U E7|???|???|OptiFine_1.10_HD_U_H5| ??? |
+|Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://github.com/khanhduytran0/PojavLauncher/issues/27#issuecomment-607037705)|???
