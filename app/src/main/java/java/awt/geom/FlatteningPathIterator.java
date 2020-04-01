@@ -233,7 +233,7 @@ public class FlatteningPathIterator implements PathIterator {
                     bufIndex -= 6;
                     buf[bufIndex + 0] = px;
                     buf[bufIndex + 1] = py;
-                    net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(coords, 0, buf, bufIndex + 2, 4);
+                    System.arraycopy(coords, 0, buf, bufIndex + 2, 4);
                     bufSubdiv = 0;
                 }
 
@@ -245,7 +245,7 @@ public class FlatteningPathIterator implements PathIterator {
                     // Realloc buffer
                     if (bufIndex <= 4) {
                         double tmp[] = new double[bufSize + BUFFER_CAPACITY];
-                        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(buf, bufIndex, tmp, bufIndex + BUFFER_CAPACITY, bufSize
+                        System.arraycopy(buf, bufIndex, tmp, bufIndex + BUFFER_CAPACITY, bufSize
                                 - bufIndex);
                         buf = tmp;
                         bufSize += BUFFER_CAPACITY;
@@ -275,7 +275,7 @@ public class FlatteningPathIterator implements PathIterator {
                     bufIndex -= 8;
                     buf[bufIndex + 0] = px;
                     buf[bufIndex + 1] = py;
-                    net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(coords, 0, buf, bufIndex + 2, 6);
+                    System.arraycopy(coords, 0, buf, bufIndex + 2, 6);
                     bufSubdiv = 0;
                 }
 
@@ -287,7 +287,7 @@ public class FlatteningPathIterator implements PathIterator {
                     // Realloc buffer
                     if (bufIndex <= 6) {
                         double tmp[] = new double[bufSize + BUFFER_CAPACITY];
-                        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(buf, bufIndex, tmp, bufIndex + BUFFER_CAPACITY, bufSize
+                        System.arraycopy(buf, bufIndex, tmp, bufIndex + BUFFER_CAPACITY, bufSize
                                 - bufIndex);
                         buf = tmp;
                         bufSize += BUFFER_CAPACITY;

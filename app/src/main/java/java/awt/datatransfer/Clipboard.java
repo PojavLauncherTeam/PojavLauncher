@@ -20,7 +20,7 @@ public class Clipboard extends Object
 				public void run()
 				{
 					ClipboardManager clipboard = (ClipboardManager) act.getSystemService(Context.CLIPBOARD_SERVICE); 
-					ClipData clip = ClipData.newPlainText("Minecraft", ((StringSelection) contents).getString());
+					ClipData clip = ClipData.newPlainText("Copied text", ((StringSelection) contents).getString());
 					clipboard.setPrimaryClip(clip);
 
 					Toast.makeText(act, "Copied to clipboard!", Toast.LENGTH_SHORT).show();
@@ -30,15 +30,4 @@ public class Clipboard extends Object
 			e.printStackTrace();
 		}
     }
-	
-	public synchronized Transferable getContents(Object requestor) {
-        try {
-			final Activity act = ModdingKit.getCurrentActivity();
-			ClipboardManager clipboard = (ClipboardManager) act.getSystemService(Context.CLIPBOARD_SERVICE); 
-			return new StringSelection(clipboard.getText().toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

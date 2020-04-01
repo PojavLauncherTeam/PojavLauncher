@@ -181,7 +181,7 @@ public final class GeneralPath implements Shape, Cloneable {
             }
             int type = p.types[typeIndex];
             int count = GeneralPath.pointShift[type];
-            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(p.points, pointIndex, coords, 0, count);
+            System.arraycopy(p.points, pointIndex, coords, 0, count);
             if (t != null) {
                 t.transform(coords, 0, coords, 0, count / 2);
             }
@@ -290,12 +290,12 @@ public final class GeneralPath implements Shape, Cloneable {
         }
         if (typeSize == types.length) {
             byte tmp[] = new byte[typeSize + BUFFER_CAPACITY];
-            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(types, 0, tmp, 0, typeSize);
+            System.arraycopy(types, 0, tmp, 0, typeSize);
             types = tmp;
         }
         if (pointSize + pointCount > points.length) {
             float tmp[] = new float[pointSize + Math.max(BUFFER_CAPACITY * 2, pointCount)];
-            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(points, 0, tmp, 0, pointSize);
+            System.arraycopy(points, 0, tmp, 0, pointSize);
             points = tmp;
         }
     }

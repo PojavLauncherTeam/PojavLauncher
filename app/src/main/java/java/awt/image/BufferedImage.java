@@ -14,7 +14,6 @@ public class BufferedImage extends Image implements RenderedImage {
 	private Bitmap mkBitmap(int width, int height, Config mode) {
 		return Bitmap.createBitmap(width, height, mode);
 	}
-	
     public BufferedImage(Bitmap bitmap) {
 		if (bitmap != null) {
 			this.bitmap = bitmap;
