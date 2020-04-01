@@ -108,4 +108,4 @@ Not yet, this repository currently for bug tracking.
 |-----------------|------|---|---|-----|-----|
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
 |OptiFine         |Any versions|???|???|OptiFine_1.10_HD_U_H5| ??? |
-|Status           |Show splash screen then crash|???|???|[Worked](https://github.com/khanhduytran0/PojavLauncher/issues/27#issuecomment-607037705)|???
+|Status           |Show splash screen then crash|???|???|[Worked (manually)](https://github.com/khanhduytran0/PojavLauncher/issues/27#issuecomment-607037705)|???
