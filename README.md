@@ -104,8 +104,8 @@ Not yet, this repository currently for bug tracking.
 
 
 # OptiFine worked in PojavLauncher 2.4.2
-|Android version  |  9.0 |???|???|Tested in Android 10| ??? |
+|Android version  |  9.0 |???|???|Manually Android 10|9.0|
 |-----------------|------|---|---|-----|-----|
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
-|OptiFine         |OptiFine 1.7.10 HD U E7|???|???|OptiFine_1.10_HD_U_H5| ??? |
-|Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://youtu.be/TJeJcPFgzcI)|???
+|OptiFine         |OptiFine 1.7.10 HD U E7|???|???|OptiFine_1.10_HD_U_H5|Latest|
+|Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://youtu.be/TJeJcPFgzcI)|[Worked](https://youtu.be/eIawM9UmQ88)
