@@ -14,6 +14,10 @@ Not yet, this repository currently for bug tracking.
 - No mouse pointer.
 - Can't compatible with some devices running Android 10 and above. [Reason?](https://issuetracker.google.com/issues/128554619)
 
+# Got some bugs?
+### - Unable to drag item in inventory?
+Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mode: Toggle to OFF.
+
 
 # Minecraft versions worked in PojavLauncher 2.4.2
 
