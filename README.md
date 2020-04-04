@@ -15,9 +15,11 @@ Not yet, this repository currently for bug tracking.
 - Can't compatible with some devices running Android 10 and above. [Reason?](https://issuetracker.google.com/issues/128554619)
 
 # Got some bugs?
-### - Unable to drag item in inventory?
+### • Unable to drag item in inventory?
 Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mode: Toggle to OFF.
 
+### • Unable to install Minecraft 1.9 or above, can't convert library `net.java.dev.jna`
+Increase max DX references. Launcher Options -> Settings -> Increase max DX references to 8k.
 
 # Minecraft versions worked in PojavLauncher 2.4.2
 
