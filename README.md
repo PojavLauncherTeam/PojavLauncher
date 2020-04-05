@@ -66,10 +66,10 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 		<tr>
 		  <td>7.x</td>
 		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
 		</tr>
