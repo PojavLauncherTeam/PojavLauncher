@@ -1,30 +1,30 @@
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.12
 
-# Source code
+## Source code
 Not yet, this repository currently for bug tracking.
 
-# Planning
+## Planning
 - There's no planning.
 
-# iOS version?
+## iOS version?
 - I have that idea but unfortunately, I don't have any Mac OS devices to create a demo IPA.
 - I see GL4ES has build instruction for iOS.
 
-# Installing OptiFine?
+## Installing OptiFine?
 Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
 
-# Installing Forge?
+## Installing Forge?
 Not implemented yet.
 
-# Got some bugs?
+## Got some bugs?
 ### • Unable to drag item in inventory?
 Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mode: Toggle to OFF.
 
 ### • Unable to install Minecraft 1.9 or above, can't convert library `net.java.dev.jna`
 Increase max DX references. Launcher Options -> Settings -> Increase max DX references to 8k.
 
-# Minecraft versions worked in PojavLauncher 2.4.2
+## Minecraft versions worked in PojavLauncher 2.4.2
 
 <table>
 	  <thead>
@@ -112,7 +112,7 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 	</table>
 
 
-# OptiFine worked in PojavLauncher 2.4.2
+## OptiFine worked in PojavLauncher 2.4.2
 |Android version  |  9.0 |???|???|Manually Android 10|9.0|
 |-----------------|------|---|---|-----|-----|
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
