@@ -8,8 +8,10 @@ Not yet, this repository currently for bug tracking.
 - There's no planning.
 
 ## iOS version?
-- I have that idea but unfortunately, I don't have any Mac OS devices to create a demo IPA.
-- I see GL4ES has build instruction for iOS.
+- I have that idea but unfortunately, I don't have any Mac OS X devices to create a demo app.
+- GL4ES has build instruction for iOS.
+- LWJGL 2 is not yet ported to iOS.
+- MobiVM fork of RoboVM.
 
 ## Installing OptiFine?
 Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
