@@ -21,6 +21,12 @@ Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mod
 ### • Unable to install Minecraft 1.9 or above, can't convert library `net.java.dev.jna`
 Increase max DX references. Launcher Options -> Settings -> Increase max DX references to 8k.
 
+# Installing OptiFine?
+Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
+
+# Installing Forge?
+Not implemented yet.
+
 # Minecraft versions worked in PojavLauncher 2.4.2
 
 <table>
