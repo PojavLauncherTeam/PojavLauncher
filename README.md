@@ -5,14 +5,17 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 Not yet, this repository currently for bug tracking.
 
 # Planning
-- ~~If [exagear_windows_emulator](https://github.com/khanhduytran0/exagear_windows_emulator) repository is runnable then I will make PojavLauncher v3.~~ There are too many probelms when switching to Exagear Windows Emulator code, read below.
-- Adding custom version.
-## Problem before switching to
-- Source code not working.
-## Problem after switching to
-- Low performance.
-- No mouse pointer.
-- Can't compatible with some devices running Android 10 and above. [Reason?](https://issuetracker.google.com/issues/128554619)
+- There's no planning.
+
+# iOS version?
+- I have that idea but unfortunately, I don't have any Mac OS devices.
+- I see GL4ES has build instruction for iOS.
+
+# Installing OptiFine?
+Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
+
+# Installing Forge?
+Not implemented yet.
 
 # Got some bugs?
 ### • Unable to drag item in inventory?
@@ -20,12 +23,6 @@ Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mod
 
 ### • Unable to install Minecraft 1.9 or above, can't convert library `net.java.dev.jna`
 Increase max DX references. Launcher Options -> Settings -> Increase max DX references to 8k.
-
-# Installing OptiFine?
-Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
-
-# Installing Forge?
-Not implemented yet.
 
 # Minecraft versions worked in PojavLauncher 2.4.2
 
