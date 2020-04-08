@@ -9,10 +9,10 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 - There's no planning.
 
 ## iOS version?
-- I have that idea but unfortunately, I don't have any Mac OS X devices to create a demo app.
-- GL4ES has build instruction for iOS.
-- LWJGL 2 is not yet ported to iOS.
-- MobiVM fork of RoboVM.
+- [ ] I have that idea but unfortunately, I don't have any Mac OS X devices to create a demo app.
+- [x] GL4ES has build instruction for iOS.
+- [ ] LWJGL 2 port for iOS.
+- [x] MobiVM fork of RoboVM.
 
 ## Installing OptiFine?
 Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
@@ -20,12 +20,23 @@ Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-
 ## Installing Forge?
 Not implemented yet.
 
+## Known issues
+- Some Huawei devices can't run Minecraft or OptiFine.
+- Can't run multiple versions at same time.
+
 ## Got some bugs?
 ### • Unable to drag item in inventory?
 Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mode: Toggle to OFF.
 
 ### • Unable to install Minecraft 1.9 or above, can't convert library `net.java.dev.jna`
 Increase max DX references. Launcher Options -> Settings -> Increase max DX references to 8k.
+
+### • Other bugs or still not working?
+#### Report an issue with:
+- Full error log: press **Show more** and copy.
+#### If it isn't a Minecraft crash:
+- Device name
+- Android version 
 
 ## Minecraft versions worked in PojavLauncher 2.4.2
 
