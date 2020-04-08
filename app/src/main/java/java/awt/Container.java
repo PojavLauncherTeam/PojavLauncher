@@ -2,6 +2,18 @@ package java.awt;
 
 public class Container extends Component
 {
+
+	@Override
+	public void remove(MenuComponent c)
+	{
+	}
+
+	@Override
+	public Font getFont()
+	{
+		return Font.decode(null);
+	}
+	
 	private java.util.List<Component> component = new java.util.ArrayList<Component>();
     LayoutManager layoutMgr;
 	
@@ -144,11 +156,9 @@ public class Container extends Component
 		while (!component.isEmpty()) {
 			Component comp = component.remove(component.size()-1);
 
-			/*
-			 if (peer != null) {
-			 comp.removeNotify();
-			 }
-			 */
+			if (getPeer() != null) {
+				comp.removeNotify();
+			}
 			if (layoutMgr != null) {
 				layoutMgr.removeLayoutComponent(comp);
 			}
@@ -174,8 +184,9 @@ public class Container extends Component
 		 if (peer != null && layoutMgr == null && isVisible()) {
 		 updateCursorImmediately();
 		 }
-		 */
+		 
 		invalidateIfValid();
+		*/
     }
 	
 	public void remove(Component comp) {

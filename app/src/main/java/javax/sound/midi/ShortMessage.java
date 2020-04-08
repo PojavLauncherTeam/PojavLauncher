@@ -199,7 +199,7 @@ public class ShortMessage extends MidiMessage {
 	@Override
 	public Object clone() {
 		final byte[] result = new byte[data.length];
-		System.arraycopy(data, 0, result, 0, result.length);
+		net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, result, 0, result.length);
 		return new ShortMessage(result);
 	}
 

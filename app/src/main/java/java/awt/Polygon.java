@@ -198,8 +198,8 @@ public class Polygon implements Shape, Serializable {
         this.npoints = npoints;
         this.xpoints = new int[npoints];
         this.ypoints = new int[npoints];
-        System.arraycopy(xpoints, 0, this.xpoints, 0, npoints);
-        System.arraycopy(ypoints, 0, this.ypoints, 0, npoints);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(xpoints, 0, this.xpoints, 0, npoints);
+        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(ypoints, 0, this.ypoints, 0, npoints);
     }
 
     /**
@@ -235,11 +235,11 @@ public class Polygon implements Shape, Serializable {
             int[] tmp;
 
             tmp = new int[xpoints.length + BUFFER_CAPACITY];
-            System.arraycopy(xpoints, 0, tmp, 0, xpoints.length);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(xpoints, 0, tmp, 0, xpoints.length);
             xpoints = tmp;
 
             tmp = new int[ypoints.length + BUFFER_CAPACITY];
-            System.arraycopy(ypoints, 0, tmp, 0, ypoints.length);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(ypoints, 0, tmp, 0, ypoints.length);
             ypoints = tmp;
         }
 

@@ -418,12 +418,12 @@ public class LaunchClassLoader extends BaseDexClassLoader {
                     totalLength += read;
                     if (totalLength >= buffer.length - 1) {
                         byte[] newBuffer = new byte[(buffer.length + BUFFER_SIZE)];
-                        System.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
+                        net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
                         buffer = newBuffer;
                     }
                 } else {
                     byte[] result = new byte[totalLength];
-                    System.arraycopy(buffer, 0, result, 0, totalLength);
+                    net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(buffer, 0, result, 0, totalLength);
                     return result;
                 }
             }

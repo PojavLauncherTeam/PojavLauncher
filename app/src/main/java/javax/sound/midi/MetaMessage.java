@@ -100,7 +100,7 @@ public class MetaMessage extends MidiMessage {
 
         // Write data
 		if (newData.length > 0) {
-			System.arraycopy(newData, 0, this.data, headerLength, newData.length);
+			net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(newData, 0, this.data, headerLength, newData.length);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class MetaMessage extends MidiMessage {
 		}
 
 		final byte[] returnedArray = new byte[dataLength];
-		System.arraycopy(data, data.length - dataLength, returnedArray, 0, dataLength);
+		net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, data.length - dataLength, returnedArray, 0, dataLength);
 		return returnedArray;
 	}
 
@@ -140,7 +140,7 @@ public class MetaMessage extends MidiMessage {
 			return new MetaMessage(emptyData);
 		}
 		final byte[] result = new byte[data.length];
-		System.arraycopy(data, 0, result, 0, data.length);
+		net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, result, 0, data.length);
 		return new MetaMessage(result);
 	}
 

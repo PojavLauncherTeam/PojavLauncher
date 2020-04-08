@@ -25,7 +25,7 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-// import org.apache.harmony.awt.gl.MultiRectArea;
+import org.apache.harmony.awt.gl.MultiRectArea;
 
 
 /**
@@ -216,5 +216,5 @@ public interface NativeWindow {
      */
     void setIMStyle();
 
-    // MultiRectArea getObscuredRegion(Rectangle part);
+    MultiRectArea getObscuredRegion(Rectangle part);
 }

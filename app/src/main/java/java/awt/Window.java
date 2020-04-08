@@ -56,14 +56,13 @@ public class Window extends Container
         }
         if (oldAlwaysOnTop != alwaysOnTop ) {
             if (isAlwaysOnTopSupported()) {
-				/*
+				
                 WindowPeer peer = (WindowPeer)this.peer;
                 synchronized(getTreeLock()) {
                     if (peer != null) {
-                        //peer.setAlwaysOnTop(alwaysOnTop);
+                        // peer.setAlwaysOnTop(alwaysOnTop);
                     }
                 }
-				*/
             }
             firePropertyChange("alwaysOnTop", oldAlwaysOnTop, alwaysOnTop);
         }

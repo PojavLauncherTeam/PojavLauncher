@@ -83,7 +83,7 @@ public class SysexMessage extends MidiMessage {
 
 		this.data[0] = (byte) (status & 0xff);
 		if (data.length > 0) {
-			System.arraycopy(data, 0, this.data, 1, data.length);
+			net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, this.data, 1, data.length);
 		}
 	}
 
@@ -95,7 +95,7 @@ public class SysexMessage extends MidiMessage {
     @NonNull
     public byte[] getData() {
 		final byte[] result = new byte[data.length];
-		System.arraycopy(data, 0, result, 0, result.length);
+		net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, result, 0, result.length);
 		return result;
 	}
 

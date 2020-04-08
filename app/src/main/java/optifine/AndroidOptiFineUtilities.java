@@ -2,5 +2,8 @@ package optifine;
 
 public class AndroidOptiFineUtilities
 {
-	public static String originalOptifineJar, optifineOutputJar;
+	public static volatile String originalOptifineJar;
+	public static volatile String optifineOutputJar;
+	
+	// public sta
 }

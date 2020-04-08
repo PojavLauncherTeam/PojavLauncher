@@ -7,14 +7,13 @@ import java.util.logging.*;
 import joptsimple.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.value.*;
+import optifine.*;
 
 public class Launch {
     private static final String DEFAULT_TWEAK = "net.minecraft.launchwrapper.VanillaTweaker";
     public static File minecraftHome;
     public static File assetsDir;
     public static Map<String,Object> blackboard;
-	
-	public static DependentLibrary optifineLib;
 
     public static void main(String[] args) {
         new Launch().launch(args);
@@ -25,17 +24,6 @@ public class Launch {
     private Launch() {
         // final URLClassLoader ucl = (URLClassLoader) getClass().getClassLoader();
         classLoader = new LaunchClassLoader(); // (getClass().getClassLoader());
-		
-		if (optifineLib != null) {
-			String[] optifineInfo = optifineLib.name.split(":");
-			String optifineJar = Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
-
-			try {
-				Tools.insertOptiFinePath(classLoader, optifineJar);
-			} catch (Throwable th) {
-				throw new RuntimeException(th);
-			}
-		}
 		
         blackboard = new HashMap<String,Object>();
         Thread.currentThread().setContextClassLoader(classLoader);

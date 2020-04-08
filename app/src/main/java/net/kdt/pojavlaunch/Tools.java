@@ -20,6 +20,10 @@ import net.kdt.pojavlaunch.patcher.*;
 import java.lang.reflect.*;
 import dalvik.system.*;
 import optifine.*;
+import android.text.*;
+import java.awt.*;
+import javax.xml.transform.*;
+import java.awt.datatransfer.*;
 
 public final class Tools
 {
@@ -30,7 +34,7 @@ public final class Tools
 	public static String ASSETS_PATH = MAIN_PATH + "/assets";
 
 	public static int usingVerCode = 1;
-	public static String usingVerName = "2.0";
+	public static String usingVerName = "2.4.2";
 	public static String mhomeUrl = "http://mineup.eu5.net"; // "http://kdtjavacraft.eu5.net";
 	public static String datapath = "/data/data/net.kdt.pojavlaunch";
 	public static String worksDir = datapath + "/app_working_dir";
@@ -143,10 +147,6 @@ public final class Tools
 			showError(ctx, e);
 		}
 	}
-
-	public static void insertOptiFinePath(BaseDexClassLoader loader, String optifineJar) throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
-		AndroidOptiFineUtilities.originalOptifineJar = optifineJar;
-	}
 	
 	/*
 	 public static void extractLibraries(Activity ctx) throws Exception
@@ -181,8 +181,13 @@ public final class Tools
 							@Override
 							public void onClick(DialogInterface p1, int p2)
 							{
-								if(exitIfOk) // MainActivity.fullyExit();
-								ctx.finish();
+								if(exitIfOk) {
+									if (ctx instanceof MainActivity) {
+										MainActivity.fullyExit();
+									} else {
+										ctx.finish();
+									}
+								}
 							}
 						})
 						.setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, new DialogInterface.OnClickListener(){
@@ -198,14 +203,16 @@ public final class Tools
 							@Override
 							public void onClick(DialogInterface p1, int p2)
 							{
-								ClipboardManager clipboard = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE); 
-								ClipData clip = ClipData.newPlainText("Error", errMsg);
-								clipboard.setPrimaryClip(clip);
+								StringSelection errData = new StringSelection(errMsg);
+								Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
 								
-								Toast.makeText(ctx, "Copied to clipboard", Toast.LENGTH_SHORT).show();
-								
-								if(exitIfOk) // MainActivity.fullyExit();
-								ctx.finish();
+								if(exitIfOk) {
+									if (ctx instanceof MainActivity) {
+										MainActivity.fullyExit();
+									} else {
+										ctx.finish();
+									}
+								}
 							}
 						})
 						//.setNegativeButton("Report (not available)", null)
@@ -456,21 +463,20 @@ public final class Tools
 	}
 	
 	public static byte[] loadFromAssetToByte(Context ctx, String inFile) {
-        byte[] tContents = {};
+        byte[] buffer = null;
 
 		try {
 			InputStream stream = ctx.getAssets().open(inFile);
 
 			int size = stream.available();
-			byte[] buffer = new byte[size];
+			buffer = new byte[size];
 			stream.read(buffer);
 			stream.close();
-			tContents = buffer;
 		} catch (IOException e) {
 			// Handle exceptions here
 			e.printStackTrace();
 		}
-		return tContents;
+		return buffer;
 	}
 	
 	public static void downloadFile(String urlInput, String nameOutput, boolean requireNonExist) throws Throwable

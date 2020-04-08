@@ -13,52 +13,45 @@ import java.awt.mod.*;
 
 public class Desktop
 {
-	private MainActivity currentActivity;
+	private Activity currentActivity;
 	public enum Action
 	{
 		BROWSE, EDIT, MAIL, OPEN, PRINT
 	}
-	private DesktopPeer peer;
+	// private DesktopPeer peer;
 	public Desktop()
 	{
-		peer = Toolkit.getDefaultToolkit().createDesktopPeer();
-		try
-		{
+		// peer = Toolkit.getDefaultToolkit().createDesktopPeer();
+		try {
 			if (currentActivity == null) currentActivity = ModdingKit.getCurrentActivity();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
-	public static Desktop getDesktop()
-	{
+	public static Desktop getDesktop() {
 		return new Desktop();
 	}
 	
-	public static boolean isDesktopSupported()
-	{
+	public static boolean isDesktopSupported() {
 		return true;
 	}
 	
-	public boolean isSupported(Action action)
-	{
+	public boolean isSupported(Action action) {
         return true;
     }
 	
-	public void browse(URI uri)
-	{
+	public void browse(URI uri) {
         try {
             URL url = uri.toURL();
 			if(url.toString().startsWith("file:")){
 				String fPath = url.toString().replace("file:", "");
-				Log.d("MineDebug:java.awt.Desktop", "Browse folder: " + fPath);
+				System.out.println("PojavLauncher:java.awt.Desktop: Browse folder: " + fPath);
 				
 				// Current not implemented
 			}
 			else{
-				Log.d("MineDebug:java.awt.Desktop", "Browse URL: " + url.toString());
+				System.out.println("PojavLauncher:java.awt.Desktop: Browse URL: " + url.toString());
 				if (!url.toString().startsWith("http://") && !url.toString().startsWith("https://")){
 					url = new URL("http://" + url.toString());
 				}

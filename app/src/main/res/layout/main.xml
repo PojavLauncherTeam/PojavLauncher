@@ -115,6 +115,13 @@
 
 		</LinearLayout>
 
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="PointerCapture debug"
+			android:id="@+id/content_text_debug"
+			android:visibility="gone"/>
+
 	</FrameLayout>
 
 	<android.support.design.widget.NavigationView

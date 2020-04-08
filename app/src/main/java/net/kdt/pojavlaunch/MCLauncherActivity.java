@@ -489,12 +489,14 @@ public class MCLauncherActivity extends AppCompatActivity
 				String unpatchedPath = Tools.versnDir + downVName + "_unpatched.jar";
 				String patchedFile = Tools.versnDir + downVName + ".jar";
 
+				JMinecraftVersionList.Version verInfo;
+				
 				try {
 					//com.pojavdx.dx.mod.Main.debug = true;
 
 					String verJsonDir = Tools.versnDir + downVName + ".json";
 
-					JMinecraftVersionList.Version verInfo = findVersion(p1[0]);
+					verInfo = findVersion(p1[0]);
 
 					if (verInfo.url != null) {
 						publishProgress("5", "Downloading " + p1[0] + " configuration...");
@@ -615,7 +617,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							convertStr = getStr(R.string.mcl_launch_convert_client, p1[0]);
 							publishProgress("5", convertStr);
 							addProgress = 0;
-							Tools.runDx(MCLauncherActivity.this, inputPath, outUnpatchedConvert.getAbsolutePath(), new PojavDXManager.Listen(){
+							Tools.runDx(MCLauncherActivity.this, inputPath, outUnpatchedConvert.getAbsolutePath(), true, new PojavDXManager.Listen(){
 
 									@Override
 									public void onReceived(String step, int maxProg, int currProg)
@@ -665,7 +667,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					});
 				publishProgress("9", getStr(R.string.mcl_launch_download_assets));
 				try {
-					downloadAssets(p1[0], new File(Tools.ASSETS_PATH));
+					downloadAssets(verInfo.assets, new File(Tools.ASSETS_PATH));
 				} catch (Exception e) {
 					// Ignore it
 					launchWithError = false;
@@ -873,6 +875,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 	public void modManager()
 	{
+		/*
 		File file1 = new File(Tools.mpModEnable);
 		File file2 = new File(Tools.mpModDisable);
 		File file3 = new File(Tools.mpModAddNewMo);
@@ -911,6 +914,9 @@ public class MCLauncherActivity extends AppCompatActivity
 			});
 		dialog.setView(flv);
 		dialog.show();
+		*/
+		
+		Tools.dialogOnUiThread(this, "Mods manager", "This feature is not yet supported!");
 	}
 
 	public void openSelectMod()
@@ -960,7 +966,8 @@ public class MCLauncherActivity extends AppCompatActivity
 			dialog = new ProgressDialog(MCLauncherActivity.this);
 			dialog.setTitle("Installing OptiFine");
 			dialog.setMessage("Prepaping");
-			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			dialog.setMax(5);
 			dialog.setCancelable(false);
 			dialog.show();
 		}
@@ -985,10 +992,12 @@ public class MCLauncherActivity extends AppCompatActivity
 			Throwable throwable = null;
 			File convertedFile = null;
 			try {
+				publishProgress("Prepaping", "5");
+				
 				String origMd5 = OptiFinePatcher.calculateMD5(file[0]);
 				convertedFile = new File(Tools.optifineDir, origMd5 + ".jar");
 				if (!convertedFile.exists()) {
-					publishProgress("(1/5) Patching OptiFine Installer");
+					publishProgress("Patching OptiFine Installer", null, "1", "ADD");
 
 					Tools.extractAssetFolder(MCLauncherActivity.this, "optifine_patch", Tools.optifineDir, true);
 
@@ -997,12 +1006,18 @@ public class MCLauncherActivity extends AppCompatActivity
 					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
 					File patchedFile = new File(output[1]);
 
-					publishProgress("(2/5) Converting OptiFine");
+					publishProgress("Converting OptiFine", null, "1", "ADD");
 
 					System.setOut(new PrintStream(logOut));
 					System.setErr(new PrintStream(logErr));
 
-					Tools.runDx(MCLauncherActivity.this, patchedFile.getAbsolutePath(), convertedFile.getAbsolutePath(), true, null);
+					Tools.runDx(MCLauncherActivity.this, patchedFile.getAbsolutePath(), convertedFile.getAbsolutePath(), true, new PojavDXManager.Listen(){
+							@Override
+							public void onReceived(String msg, int max, int current)
+							{
+								publishProgress("Converting OptiFine: " + msg, Integer.toString(max), Integer.toString(current), "SET");
+							}
+					});
 
 					if (!convertedFile.exists()) {
 						RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib, "OptiFine") + "\n" + currentLog.toString());
@@ -1013,23 +1028,23 @@ public class MCLauncherActivity extends AppCompatActivity
 					patchedFile.delete();
 				}
 
-				publishProgress("(3/5) Launching OptiFine installer");
+				publishProgress("Launching OptiFine installer", null, "1", "ADD");
 
 				File optDir = getDir("dalvik-cache", 0);
 				optDir.mkdir();
 
 				DexClassLoader loader = new DexClassLoader(convertedFile.getAbsolutePath(), optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClass().getClassLoader());
-				Tools.insertOptiFinePath(loader, convertedFile.getAbsolutePath());
+				AndroidOptiFineUtilities.originalOptifineJar = convertedFile.getAbsolutePath();
 
 				Class installerClass = loader.loadClass("optifine.AndroidInstaller");
 				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
 				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
 
-				publishProgress("(4/5) Patching OptiFine Tweaker");
+				publishProgress("(4/5) Patching OptiFine Tweaker", null, "1", "ADD");
 				File optifineLibFile = new File(AndroidOptiFineUtilities.optifineOutputJar);
 				new OptiFinePatcher(optifineLibFile).saveTweaker();
-
-				publishProgress("(5/5) Done!");
+				
+				publishProgress("(5/5) Done!", null, "1", "ADD");
 				Thread.sleep(500);
 			} catch (Throwable th) {
 				throwable = th;
@@ -1044,17 +1059,26 @@ public class MCLauncherActivity extends AppCompatActivity
 				return throwable;
 			}
 		}
-
+/*
 		private Object fromConfig(DexClassLoader loader, String name) throws ReflectiveOperationException {
 			Field f = loader.loadClass("Config").getDeclaredField(name);
 			f.setAccessible(true);
 			return f.get(null);
 		}
-
+*/
 		@Override
 		protected void onProgressUpdate(String[] text) {
 			super.onProgressUpdate(text);
 			dialog.setMessage(text[0]);
+			if (text.length >= 2 && text[1] != null) {
+				dialog.setMax(Integer.valueOf(text[1]));
+			} if (text.length >= 4) {
+				if (text[3].equals("ADD")) {
+					dialog.setProgress(dialog.getProgress() + Integer.valueOf(text[2]));
+				} else if (text[3].equals("SET")) {
+					dialog.setProgress(7 + Integer.valueOf(text[2]));
+				}
+			}
 		}
 
 		@Override

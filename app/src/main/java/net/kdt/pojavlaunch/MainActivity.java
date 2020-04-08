@@ -10,29 +10,31 @@ import android.support.v4.widget.*;
 import android.system.*;
 import android.util.*;
 import android.view.*;
+import android.view.GestureDetector.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
+import com.android.internal.awt.*;
 import com.kdt.glsupport.*;
+import com.kdt.pointer.*;
 import dalvik.system.*;
 import java.io.*;
 import java.lang.reflect.*;
+import java.security.*;
 import java.util.*;
+import javax.crypto.*;
 import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
-// import net.minecraft.launchwrapper.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.applet.*;
 import org.lwjgl.util.glu.tessellation.*;
 
 import android.graphics.drawable.Drawable;
-import android.view.GestureDetector.*;
-import java.util.concurrent.locks.*;
-import com.kdt.pointer.*;
-import net.kdt.pojavlaunch.value.*;
-import java.net.*;
+import java.security.Provider.*;
+import org.apache.harmony.security.fortress.*;
+import optifine.*;
 
 public class MainActivity extends Activity implements OnTouchListener
 {
@@ -49,6 +51,7 @@ public class MainActivity extends Activity implements OnTouchListener
 	private int initialX;
     private int initialY;
 	private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
+	private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
 	private static boolean triggeredLeftMouseButton = false;
 	private Handler theHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -62,8 +65,10 @@ public class MainActivity extends Activity implements OnTouchListener
 							triggeredLeftMouseButton = true;
 							sendMouseButton(0, true);
 						}
-						break;
-					}
+					} break;
+				case MSG_DROP_ITEM_BUTTON_CHECK: {
+					sendKeyPress(Keyboard.KEY_Q, true);
+				} break;
 			}
 		}
 	};
@@ -96,12 +101,17 @@ public class MainActivity extends Activity implements OnTouchListener
 	private ScrollView contentScroll;
 	private ToggleButton toggleLog;
 	private GestureDetector gestureDetector;
+	
+	private TextView debugText;
 
 	private PointerOreoWrapper pointerSurface;
+	private View.OnTouchListener pointerCaptureListener;
 	
-	private String mQueueText = new String();
+	// private String mQueueText = new String();
 	
 	private JMinecraftVersionList.Version mVersionInfo;
+	
+	private View.OnTouchListener glTouchListener;
 	
 	/*
 	private LinearLayout contentCanvas;
@@ -111,6 +121,8 @@ public class MainActivity extends Activity implements OnTouchListener
 	private boolean lastGrab = false;
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
+
+	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 	
 	private String getStr(int id) {
 		return getResources().getString(id);
@@ -197,7 +209,9 @@ public class MainActivity extends Activity implements OnTouchListener
 								break;
 							case R.id.nav_viewlog: openLogOutput();
 								break;
-							case R.id.nav_fixdoubleletters: //openCanvasOutput();
+							case R.id.nav_debug: toggleDebug();
+								break;
+							case R.id.nav_customkey: dialogSendCustomKey();
 						}
 						//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
 
@@ -239,11 +253,8 @@ public class MainActivity extends Activity implements OnTouchListener
 			this.toggleLog.setChecked(false);
 			this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
 			this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
-			
+	
 			this.textLog.setTypeface(Typeface.MONOSPACE);
-			
-			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
-			
 			this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
 
 					@Override
@@ -253,6 +264,11 @@ public class MainActivity extends Activity implements OnTouchListener
 						appendToLog("");
 					}
 				});
+			
+			this.debugText = (TextView) findViewById(R.id.content_text_debug);
+				
+			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
+			
 			
 			toggleGui(null);
 			this.drawerLayout.closeDrawers();
@@ -305,7 +321,7 @@ public class MainActivity extends Activity implements OnTouchListener
 					}
 				}).start();
 
-			// Touch pad
+			// ORIGINAL Touch pad
 			touchPad.setOnTouchListener(new OnTouchListener(){
 				private float prevX, prevY;
 					@Override
@@ -331,18 +347,6 @@ public class MainActivity extends Activity implements OnTouchListener
 							
 						} else {
 							switch (action) {
-								/*
-								case MotionEvent.ACTION_DOWN: // 0
-								case MotionEvent.ACTION_POINTER_DOWN: // 5
-									if (mVelocityTracker == null) {
-										mVelocityTracker = VelocityTracker.obtain();
-									}
-									else {
-										mVelocityTracker.clear();
-									}
-									mVelocityTracker.addMovement(event);
-									break;
-								*/
 								case MotionEvent.ACTION_UP: // 1
 								case MotionEvent.ACTION_CANCEL: // 3
 								case MotionEvent.ACTION_POINTER_UP: // 6
@@ -377,77 +381,187 @@ public class MainActivity extends Activity implements OnTouchListener
 						return true;
 					}
 				});
-
+				
 			System.loadLibrary("gl04es");
 
+			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
+			AndroidGraphics2D.getInstance(this, new Canvas(awtGraphics), null);
+			
 			glSurfaceView.setFocusable(true);
 			glSurfaceView.setFocusableInTouchMode(true);
 			glSurfaceView.setEGLContextClientVersion(2);
 
-			final View.OnTouchListener glTouchListener = new OnTouchListener(){
-
+			glTouchListener = new OnTouchListener(){
+				private boolean isTouchInHotbar = false;
+				private int hotbarX, hotbarY;
 				@Override
 				public boolean onTouch(View p1, MotionEvent e)
 				{
+					// System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
+					
 					int x = ((int) e.getX()) / scaleFactor;
 					int y = (glSurfaceView.getHeight() - ((int) e.getY())) / scaleFactor;
-					if (handleGuiBar(x, y, e)) {
-						return true;
-					} else if (!AndroidDisplay.grab && gestureDetector.onTouchEvent(e)) {
-						AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
-						AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
-						if (!rightOverride) {
-							AndroidDisplay.mouseLeft = true;
+					int hudKeyHandled = handleGuiBar(x, y, e);
+					if (!AndroidDisplay.grab && gestureDetector.onTouchEvent(e)) {
+						if (hudKeyHandled != -1) {
+							sendKeyPress(hudKeyHandled);
+						} else {
+							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+							if (!rightOverride) {
+								AndroidDisplay.mouseLeft = true;
+							}
 						}
-						return true;
 					} else {
-						AndroidDisplay.mouseX = x;
-						AndroidDisplay.mouseY = y;
 						switch (e.getActionMasked()) {
 							case e.ACTION_DOWN: // 0
 							case e.ACTION_POINTER_DOWN: // 5
-								if (!rightOverride) {
-									AndroidDisplay.mouseLeft = true;
-								}
-
-								if (AndroidDisplay.grab) {
-									AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
-									initialX = x;
-									initialY = y;
-									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
-									break;
+								isTouchInHotbar = hudKeyHandled != -1;
+								if (isTouchInHotbar) {
+									sendKeyPress(hudKeyHandled, true);
+									hotbarX = x;
+									hotbarY = y;
+									
+									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, 500);
+								} else {
+									AndroidDisplay.mouseX = x;
+									AndroidDisplay.mouseY = y;
+									if (!rightOverride) {
+										AndroidDisplay.mouseLeft = true;
+									}
+									if (AndroidDisplay.grab) {
+										AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+										initialX = x;
+										initialY = y;
+										theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+									}
 								}
 								break;
-
 							case e.ACTION_UP: // 1
 							case e.ACTION_CANCEL: // 3
 							case e.ACTION_POINTER_UP: // 6
-								AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
-								if (!rightOverride) {
-									AndroidDisplay.mouseLeft = false;
-								}
-
+								if (!isTouchInHotbar) {
+									AndroidDisplay.mouseX = x;
+									AndroidDisplay.mouseY = y;
+							
+									AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+									if (!rightOverride) {
+										AndroidDisplay.mouseLeft = false;
+									}
+								} 
+								
 								if (AndroidDisplay.grab) {
-									/*
-									 initialX = x;
-									 initialY = y;
-
-									 theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
-									 */
-
-									if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+									// System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
+									// System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
+									if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
+										sendKeyPress(hudKeyHandled, false);
+									} else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
 										sendMouseButton(1, true);
 										sendMouseButton(1, false);
 									}
-									if (triggeredLeftMouseButton) {
-										sendMouseButton(0, false);
+									if (!isTouchInHotbar) {
+										if (triggeredLeftMouseButton) {
+											sendMouseButton(0, false);
+										}
+										triggeredLeftMouseButton = false;
+										theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+									} else {
+										sendKeyPress(Keyboard.KEY_Q, false);
+										theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
 									}
-									triggeredLeftMouseButton = false;
-									theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-									break;
+								}
+								break;
+								
+							default:
+								if (!isTouchInHotbar) {
+									AndroidDisplay.mouseX = x;
+									AndroidDisplay.mouseY = y;
 								}
 								break;
 						}
+					}
+
+					// System.out.println("Post touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
+					
+					return true;
+					// If onClick fail with false, change back to true
+				}
+			};
+
+			pointerCaptureListener = new OnTouchListener(){
+				private int x, y;
+				
+				private String getMoving(int pos, boolean xOrY) {
+					if (pos == 0) {
+						return "STOPPED";
+					} else if (pos > 0) {
+						return xOrY ? "RIGHT" : "DOWN";
+					} else { // if (pos3 < 0) {
+						return xOrY ? "LEFT" : "UP";
+					}
+				}
+				
+				@Override
+				public boolean onTouch(View p1, MotionEvent e)
+				{
+					StringBuilder builder = new StringBuilder();
+					builder.append("PointerCapture debug\n");
+					builder.append("MotionEvent=" + e.getActionMasked() + "\n\n");
+					
+					builder.append("PointerX=" + e.getX() + "\n");
+					builder.append("PointerY=" + e.getY() + "\n");
+					builder.append("RawX=" + e.getRawX() + "\n");
+					builder.append("RawY=" + e.getRawY() + "\n\n");
+					
+					x += ((int) e.getX()) / scaleFactor;
+					y -= ((int) e.getY()) / scaleFactor;
+					
+					builder.append("XPos=" + x + "\n");
+					builder.append("YPos=" + y + "\n\n");
+					builder.append("MovingX=" + getMoving(x, true) + "\n");
+					builder.append("MovingY=" + getMoving(y, false) + "\n");
+					
+					debugText.setText(builder.toString());
+					
+					AndroidDisplay.mouseX = x;
+					AndroidDisplay.mouseY = y;
+					
+					switch (e.getButtonState()) {
+						case MotionEvent.BUTTON_PRIMARY: AndroidDisplay.mouseLeft = true;
+							break;
+						case MotionEvent.BUTTON_SECONDARY: AndroidDisplay.mouseLeft = false;
+							break;
+					}
+					
+					switch (e.getActionMasked()) {
+						case e.ACTION_DOWN: // 0
+						case e.ACTION_POINTER_DOWN: // 5
+							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+							initialX = x;
+							initialY = y;
+							theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+							break;
+
+						case e.ACTION_UP: // 1
+						case e.ACTION_CANCEL: // 3
+						case e.ACTION_POINTER_UP: // 6
+							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+							/*
+							if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+								sendMouseButton(1, true);
+								sendMouseButton(1, false);
+							}
+							if (triggeredLeftMouseButton) {
+								sendMouseButton(0, false);
+							}
+							*/
+							
+							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, true);
+							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, false);
+							
+							// triggeredLeftMouseButton = false;
+							theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+							break;
 					}
 
 					return true;
@@ -458,20 +572,16 @@ public class MainActivity extends Activity implements OnTouchListener
 			if (isPointerCaptureSupported()) {
 				this.pointerSurface = new PointerOreoWrapper(glSurfaceView);
 				this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
-
-						@Override
-						public boolean onCapturedPointer(View view, MotionEvent event)
-						{
-							return glTouchListener.onTouch(view, event);
-						}
-					});
+					@Override
+					public boolean onCapturedPointer(View view, MotionEvent event) {
+						return pointerCaptureListener.onTouch(view, event);
+					}
+				});
 			}
 
 			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
-
 					@Override
-					public boolean onHover(View p1, MotionEvent p2)
-					{
+					public boolean onHover(View p1, MotionEvent p2) {
 						if (!AndroidDisplay.grab) {
 							return glTouchListener.onTouch(p1, p2);
 						}
@@ -605,7 +715,7 @@ public class MainActivity extends Activity implements OnTouchListener
 		super.onPause();
 	}
 	
-	public void fullyExit() {
+	public static void fullyExit() {
 		ExitManager.stopExitLoop();
 	}
 	
@@ -639,9 +749,12 @@ public class MainActivity extends Activity implements OnTouchListener
 			
 			// Disable javax management for smaller launcher.
 			System.setProperty("log4j2.disable.jmx", "true");
-			
+
             //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.level", "INFO");
             //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.simplelog.level", "INFO");
+			
+			// Change info for useful dump
+			System.setProperty("java.vm.info", Build.MANUFACTURER + " " + Build.MODEL + " [Android " + Build.VERSION.SDK_INT + "]");
         } catch (Exception e) {
             Tools.showError(MainActivity.this, e, true);
         }
@@ -666,7 +779,7 @@ public class MainActivity extends Activity implements OnTouchListener
 		varArgMap.put("version_name", versionName);
 		varArgMap.put("game_directory", gameDir.getAbsolutePath());
 		varArgMap.put("assets_root", mcAssetsDir);
-		varArgMap.put("assets_index_name", versionName);
+		varArgMap.put("assets_index_name", mVersionInfo.assets);
 		varArgMap.put("auth_uuid", mProfile.getProfileID());
 		varArgMap.put("auth_access_token", mProfile.getAccessToken());
 		varArgMap.put("user_properties", "{}");
@@ -674,8 +787,20 @@ public class MainActivity extends Activity implements OnTouchListener
 		varArgMap.put("version_type", mVersionInfo.type);
 		varArgMap.put("game_assets", Tools.ASSETS_PATH);
 		
-		String[] argsFromJson = insertVariableArgument(mVersionInfo.minecraftArguments.split(" "), varArgMap);
+		String[] argsFromJson = insertVariableArgument(splitAndFilterEmpty(mVersionInfo.minecraftArguments), varArgMap);
+		// Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
 		return argsFromJson;
+	}
+	
+	private String[] splitAndFilterEmpty(String argStr) {
+		List<String> strList = new ArrayList<String>();
+		strList.add("--fullscreen");
+		for (String arg : argStr.split(" ")) {
+			if (!arg.isEmpty()) {
+				strList.add(arg);
+			}
+		}
+		return strList.toArray(new String[0]);
 	}
 	
 	private String[] insertVariableArgument(String[] args, Map<String, String> keyValueMap) {
@@ -701,6 +826,14 @@ public class MainActivity extends Activity implements OnTouchListener
 	{
 		String[] launchArgs = getMCArgs();
 		
+		// Setup OptiFine
+		if (mVersionInfo.optifineLib != null) {
+			String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
+			String optifineJar = Tools.libraries + "/" + Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
+
+			AndroidOptiFineUtilities.originalOptifineJar = optifineJar;
+		}
+		
 		File optDir = getDir("dalvik-cache", 0);
 		optDir.mkdirs();
 
@@ -725,6 +858,8 @@ public class MainActivity extends Activity implements OnTouchListener
 
 			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
 			System.setErr(theStreamErr);
+			
+			fixRSAPadding();
 
 			System.out.println("> Running Minecraft with classpath:");
 			System.out.println(launchClassPath);
@@ -732,14 +867,6 @@ public class MainActivity extends Activity implements OnTouchListener
 			
 			// Load classpath
 			DexClassLoader launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
-			
-			// Setup OptiFine
-			if (mVersionInfo.optifineLib != null) {
-				String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
-				String optifineJar = Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
-
-				Tools.insertOptiFinePath(launchBaseLoader, optifineJar);
-			}
 			
 			// Launch Minecraft
 			Class mainClass = launchBaseLoader.loadClass(mVersionInfo.mainClass);
@@ -758,6 +885,46 @@ public class MainActivity extends Activity implements OnTouchListener
 		 * [2] = classpath (eg. "mc.jar:lib1.jar:...")
 		 * [3] = mainclass (eg. "net.minecraft.client.Minecraft")
 		 */
+	}
+
+	public void fixRSAPadding() throws Exception {
+		// welcome to the territory of YOLO; I'll be your tour guide for today.
+		
+		try {
+			System.out.println(Cipher.getInstance("RSA"));
+			System.out.println(Cipher.getInstance("RSA/ECB/PKCS1Padding"));
+			if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
+				// return; // FUUUUU I DON'T KNOW FIXME
+			}
+
+			ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
+			ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
+
+			rsaList.clear();
+			rsaList.addAll(rsaPkcs1List);
+		} catch (Throwable th) {
+			// Tools.dialogOnUiThread(MainActivity.this, "Warning: can't fix RSA Padding", Log.getStackTraceString(th));
+			th.printStackTrace();
+			
+			runOnUiThread(new Runnable(){
+
+					@Override
+					public void run()
+					{
+						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. You can't play premium servers", Toast.LENGTH_LONG).show();
+					}
+				});
+		}
+		
+		
+		//System.out.println("After: " + KeyFactory.getInstance("RSA") + ":" + KeyFactory.getInstance("RSA").getProvider());
+
+		/*		Provider provider = KeyFactory.getInstance("RSA").getProvider();
+		 System.out.println("Before: " + provider.getService("KeyService", "RSA"));
+		 Provider.Service service = provider.getService("KeyService", "RSA/ECB/PKCS5Padding");
+		 System.out.println(service);
+		 provider.putService(service);
+		 System.out.println("After: " + provider.getService("KeyService", "RSA"));*/
 	}
 	
 	public void printStream(InputStream stream) {
@@ -778,6 +945,23 @@ public class MainActivity extends Activity implements OnTouchListener
 			s = s + " " + exec;
 		}
 		return s;
+	}
+	
+	private void toggleDebug() {
+		debugText.setVisibility(debugText.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+	}
+	
+	private void dialogSendCustomKey() {
+		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+		dialog.setTitle(R.string.control_customkey);
+		dialog.setItems(AndroidLWJGLKeycode.generateKeyName(), new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dInterface, int position) {
+					AndroidLWJGLKeycode.execKeyIndex(MainActivity.this, position);
+				}
+			});
+		dialog.show();
 	}
 	
 	private void openLogOutput() {
@@ -829,6 +1013,22 @@ public class MainActivity extends Activity implements OnTouchListener
 				return;
 		}
 	}
+	
+	public String getMinecraftOption(String key) {
+		try {
+			String[] options = Tools.read(Tools.MAIN_PATH + "/options.txt").split("\n");
+			for (String option : options) {
+				String[] optionKeyValue = option.split(":");
+				if (optionKeyValue[0].equals(key)) {
+					return optionKeyValue[1];
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 	public int mcscale(int input) {
         return this.guiScale * input;
     }
@@ -915,7 +1115,8 @@ public class MainActivity extends Activity implements OnTouchListener
             default:
                 return false;
         }
-        if (v == this.upButton) {
+		
+		if (v == this.upButton) {
             sendKeyPress(Keyboard.KEY_W, isDown);
         } else if (v == this.downButton) {
             sendKeyPress(Keyboard.KEY_S, isDown);
@@ -1011,34 +1212,20 @@ public class MainActivity extends Activity implements OnTouchListener
         this.guiScale = scale;
     }
 	
-	public boolean handleGuiBar(int x, int y, MotionEvent e) {
+	public int handleGuiBar(int x, int y, MotionEvent e) {
         if (!AndroidDisplay.grab) {
-            return false;
+            return -1;
         }
-        boolean isDown;
-        switch (e.getActionMasked()) {
-            case 0:
-            case 5:
-                isDown = true;
-                break;
-            case 1:
-            case 3:
-            case 6:
-                isDown = false;
-                break;
-            default:
-                return false;
-        }
+        
         int screenWidth = AndroidDisplay.windowWidth;
         int screenHeight = AndroidDisplay.windowHeight;
         int barheight = mcscale(20);
         int barwidth = mcscale(180);
         int barx = (screenWidth / 2) - (barwidth / 2);
         if (x < barx || x >= barx + barwidth || y < 0 || y >= 0 + barheight) {
-            return false;
+            return -1;
         }
-        sendKeyPress(hotbarKeys[((x - barx) / mcscale(20)) % 9], isDown);
-        return true;
+        return hotbarKeys[((x - barx) / mcscale(20)) % 9];
     }
 	
 	private class SingleTapConfirm extends SimpleOnGestureListener

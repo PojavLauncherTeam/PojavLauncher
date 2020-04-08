@@ -45,7 +45,7 @@ public abstract class MidiMessage implements Cloneable {
             }
 
             this.length = data.length;
-            System.arraycopy(data, 0, this.data, 0, data.length);
+            net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, this.data, 0, data.length);
         }
 	}
 
@@ -61,7 +61,7 @@ public abstract class MidiMessage implements Cloneable {
 		}
 
 		final byte[] resultArray = new byte[data.length];
-		System.arraycopy(data, 0, resultArray, 0, data.length);
+		net.kdt.pojavlaunch.SystemCrackResolver.arraycopy(data, 0, resultArray, 0, data.length);
 		return resultArray;
 	}
 

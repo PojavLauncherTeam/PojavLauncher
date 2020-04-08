@@ -130,11 +130,11 @@ public class Cursor implements Serializable {
      * The Constant predefinedNames.
      */
     static final String[] predefinedNames = {
-		"Default", "Crosshair", "Text", "Wait", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		"Southwest Resize", "Southeast Resize", //$NON-NLS-1$ //$NON-NLS-2$
-		"Northwest Resize", "Northeast Resize", //$NON-NLS-1$ //$NON-NLS-2$
-		"North Resize", "South Resize", "West Resize", "East Resize", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		"Hand", "Move" //$NON-NLS-1$ //$NON-NLS-2$
+            "Default", "Crosshair", "Text", "Wait", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+            "Southwest Resize", "Southeast Resize", //$NON-NLS-1$ //$NON-NLS-2$
+            "Northwest Resize", "Northeast Resize", //$NON-NLS-1$ //$NON-NLS-2$
+            "North Resize", "South Resize", "West Resize", "East Resize", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+            "Hand", "Move" //$NON-NLS-1$ //$NON-NLS-2$
 
     };
 
@@ -142,8 +142,8 @@ public class Cursor implements Serializable {
      * The predefined set of cursors.
      */
     protected static Cursor[] predefined = {
-		new Cursor(DEFAULT_CURSOR), null, null, null, null, null, null, null, null, null, null,
-		null, null, null
+            new Cursor(DEFAULT_CURSOR), null, null, null, null, null, null, null, null, null, null,
+            null, null, null
     };
 
     /**
@@ -165,7 +165,7 @@ public class Cursor implements Serializable {
     /**
      * The native cursor.
      */
-	private transient NativeCursor nativeCursor;
+    private transient NativeCursor nativeCursor;
 
     /**
      * The exact point on the cursor image that indicates which point the cursor
@@ -363,7 +363,7 @@ public class Cursor implements Serializable {
         String sep = File.separator;
         String cursorsDir = "lib" + sep + "images" + sep + "cursors"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         String cursorsAbsDir = System.getProperty("java.home") + sep + //$NON-NLS-1$
-			cursorsDir;
+                cursorsDir;
         String cursorPropsFileName = "cursors.properties"; //$NON-NLS-1$
         String cursorPropsFullFileName = (cursorsAbsDir + sep + cursorPropsFileName);
         cursorProps = new Properties();
@@ -372,9 +372,9 @@ public class Cursor implements Serializable {
         } catch (FileNotFoundException e) {
             // awt.142=Exception: class {0} {1} occurred while loading: {2}
             throw new AWTException(Messages.getString("awt.142",//$NON-NLS-1$
-													  new Object[] {
-														  e.getClass(), e.getMessage(), cursorPropsFullFileName
-													  }));
+                    new Object[] {
+                            e.getClass(), e.getMessage(), cursorPropsFullFileName
+                    }));
         } catch (IOException e) {
             throw new AWTException(e.getMessage());
         }
@@ -405,13 +405,13 @@ public class Cursor implements Serializable {
     NativeCursor getNativeCursor() {
         if (nativeCursor != null) {
             return nativeCursor;
-        }/*
-		 Toolkit toolkit = Toolkit.getDefaultToolkit();
-		 if (type != CUSTOM_CURSOR) {
-		 nativeCursor = toolkit.createNativeCursor(type);
-		 } else {
-		 nativeCursor = toolkit.createCustomNativeCursor(image, hotSpot, name);
-		 }*/
+        }
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        if (type != CUSTOM_CURSOR) {
+            nativeCursor = toolkit.createNativeCursor(type);
+        } else {
+            nativeCursor = toolkit.createCustomNativeCursor(image, hotSpot, name);
+        }
         return nativeCursor;
     }
 

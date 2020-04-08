@@ -302,8 +302,8 @@ public class PojavLoginActivity extends MineActivity
 			mkdirs(Tools.MAIN_PATH);
 			
 			Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
-			//Tools.copyAssetToFolderIfNonExist(this, "dx-f" + (isAndroid7() ? "7" : "4")  + ".0.jar", Tools.worksDir, "dx.jar");
-			Tools.copyAssetFile(this, "pojavdx.dex", Tools.worksDir, true);
+			// Tools.copyAssetToFolderIfNonExist(this, "dx-f" + (isAndroid7() ? "7" : "4")  + ".0.jar", Tools.worksDir, "dx.jar");
+			// Tools.copyAssetFile(this, "pojavdx.dex", Tools.worksDir, true);
 			
 			// Copy ZIP!!!
 			

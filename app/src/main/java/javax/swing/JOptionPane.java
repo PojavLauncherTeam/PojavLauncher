@@ -8,9 +8,10 @@ import android.content.*;
 
 public class JOptionPane
 {
+
 	private static boolean isOk;
-	public static void showMessageDialog(Component parentComponent, final Object title, final String message, int messageType) {
-		Log.w("JOptionPane", "[" + message + "] " + title.toString());
+	public static void showMessageDialog(Component parentComponent, final Object message, final String title, int messageType) {
+		Log.w("JOptionPane", "[" + title + "] " + message.toString());
 
 		isOk = false;
 		final Activity act = ModdingKit.getCurrentActivity();
@@ -20,8 +21,8 @@ public class JOptionPane
 				public void run()
 				{
 					AlertDialog.Builder dialog = new AlertDialog.Builder(act);
-					dialog.setTitle(title.toString());
-					dialog.setMessage(message);
+					dialog.setTitle(title);
+					dialog.setMessage(message.toString());
 					dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 							@Override
