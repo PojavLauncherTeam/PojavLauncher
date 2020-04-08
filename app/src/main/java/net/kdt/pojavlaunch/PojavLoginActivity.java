@@ -419,7 +419,7 @@ public class PojavLoginActivity extends MineActivity
 				{
 					try
 					{
-						if(MCProfile.load(path).isAccount()){
+						if(MCProfile.load(path).isMojangAccount()){
 							MCProfile.updateTokens(PojavLoginActivity.this, path, new RefreshListener(){
 
 									@Override

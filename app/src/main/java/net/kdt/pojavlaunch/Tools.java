@@ -356,14 +356,12 @@ public final class Tools
 			} else {
 				JMinecraftVersionList.Version inheritsVer = new Gson().fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
 
-				inheritsVer.id = customVer.id;
-				inheritsVer.mainClass = customVer.mainClass;
-				inheritsVer.minecraftArguments = customVer.minecraftArguments;
-				inheritsVer.optifineLib = customVer.optifineLib;
-				inheritsVer.releaseTime = customVer.releaseTime;
-				inheritsVer.time = customVer.time;
-				inheritsVer.type = customVer.type;
-
+				insertSafety(inheritsVer, customVer,
+							 "assetIndex", "assets",
+					"id", "mainClass", "minecraftArguments",
+					"optifineLib", "releaseTime", "time", "type"
+				);
+				
 				List<DependentLibrary> libList = new ArrayList<DependentLibrary>(Arrays.asList(inheritsVer.libraries));
 				try {
 					for (DependentLibrary lib : customVer.libraries) {
@@ -379,6 +377,24 @@ public final class Tools
 			throw new RuntimeException(e);
 		}
     }
+	
+	// Prevent NullPointerException
+	private static void insertSafety(JMinecraftVersionList.Version inheritsVer, JMinecraftVersionList.Version theVer, String... keyArr) {
+		for (String key : keyArr) {
+			Object value = null;
+			try {
+				Field fieldA = theVer.getClass().getDeclaredField(key);
+				value = fieldA.get(theVer);
+				if (value != null || ((value instanceof String) && !((String) value).isEmpty())) {
+					Field fieldB = inheritsVer.getClass().getDeclaredField(key);
+					fieldB.set(inheritsVer, value);
+				}
+			} catch (Throwable th) {
+				System.err.println("Unable to insert " + key + "=" + value);
+				th.printStackTrace();
+			}
+		}
+	}
 	
 	public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
 

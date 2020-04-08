@@ -95,15 +95,13 @@ public class MCProfile
 	}
 	
 	public static String toString(MCProfile.Builder builder) {
-		//System.out.println("TOSTRING THE VER = " + builder.getVersion());
-		
 		return
 			builder.getClientID() + ":" +
 			builder.getProfileID() + ":" +
 			builder.getAccessToken() + ":" +
 			builder.getUsername() + ":" +
 			builder.getVersion() + ":" +
-			Boolean.toString(builder.isAccount());
+			Boolean.toString(builder.isMojangAccount());
 	}
 	
 	public static class Builder implements Serializable
@@ -114,13 +112,12 @@ public class MCProfile
 		public Builder()
 		{
 			fullArgs = emptyBuilder;
-			String[] fakeTokens = FakeAccount.generate();
-			setClientID(fakeTokens[0]);
-			setProfileID(FakeAccount.generate()[0].replace("-", ""));
-			setAccessToken(fakeTokens[1]);
+			setClientID("0");
+			setProfileID("00000000-0000-0000-0000-000000000000");
+			setAccessToken("0");
 		}
 		
-		public boolean isAccount()
+		public boolean isMojangAccount()
 		{
 			return isAccount;
 		}

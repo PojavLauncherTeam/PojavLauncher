@@ -7,11 +7,15 @@ import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 
 public class AndroidLWJGLKeycode {
+	// Fix double letters on MC 1.9 and above
 	public static boolean isBackspaceAfterChar;
 	private static final ArrayMap<Integer, Integer> androidToLwjglMap;
 	private static String[] androidKeyNameArray;
 	static {
-		// Mapping Android Key to LWJGL Key from scratch
+		// OOPS I waste my time to map this, but already have another.
+		
+		
+		// Mapping Android Keycodes to LWJGL Keycodes
 		androidToLwjglMap = new ArrayMap<Integer, Integer>();
 		
 		// 0-9 keys
@@ -162,7 +166,9 @@ public class AndroidLWJGLKeycode {
 		for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
 			if (perKey.getKey() == i) {
 				if (i == KeyEvent.KEYCODE_BACK && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
-					// mainActivity.sendMo
+					// Right mouse detection
+					mainActivity.sendMouseButton(1, true);
+					mainActivity.sendMouseButton(1, false);
 				} else {
 					mainActivity.sendKeyPress(perKey.getValue(), isDown);
 				}
