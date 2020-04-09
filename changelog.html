@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>PojavLauncher - Launcher news, changelog</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=3.0" name="viewport" />
+    <style type="text/css">
+	    body {
+		  margin: 0;
+		  padding: 0;
+		  background-color: #fdfdff;
+		  
+		  box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+		  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+	  
+		.changelog {
+		  padding: 10px;
+		  background-color: #f0f0f2;
+		  background-image: url('bg_wool_dark.png');
+		  color: white;
+		}
+		
+		a:link, a:visited {
+		  color: #2198bf;
+		}
+		
+		@media (max-width: 700px) {
+		  div {
+		    margin: 0 auto;
+			width: auto;
+		  }
+	    }
+    </style>
+    <script>
+      var i = 0;
+      function changeSubText(){
+	    var subText = document.getElementById("subText");
+	    var verText = document.getElementById("verText");
+		if (i == 0) {
+		  subText.style.textShadow = "2px 2px 2px green";
+		  verText.style.textShadow = "2px 2px 2px orange";
+		  i = 1;
+	    } else {
+		  subText.style.textShadow = "2px 2px 2px transparent";
+		  verText.style.textShadow = "2px 2px 2px transparent";
+		  i = 0;
+	    }
+	  }
+	  
+	  window.setInterval(changeSubText, 100);
+    </script>
+  </head>
+  <body>
+<!--
+	<h3 style="padding-left: 20px;">Pojav Launcher</h3>
+-->
+	<div class="changelog">
+<!--
+	  <h2># v2.5??? BETA release:</h2>
+	  <b>• Changes:</b><br>
+	  - TextHere.<br>
+	  - Text2Here.<br>
+	  - Text3.<br>
+	  <br>
+-->
+
+
+	  <h2>⚫ The Developer</h2>
+	  <b>• Original: Zhuowei Zhang (Boardwalk).</b><br>
+	  <b>• Author/Designer: Tran Khanh Duy at Vietnam.</b><br>
+	  <b>• <a href="https://www.youtube.com/channel/UCVCvOxYOpEHrc1NjFg423Jw">Youtube Channel</a> (<font color="green" id="subText">Subscribe and Enable Notification</font> for the latest update and other).</b><br>
+	  <b>• <a href="https://paypal.me/TranKhanhDuy">Donate me</a>.</b><br>
+	  <b>• <a href="https://github.com/khanhduytran0/PojavLauncher/issues">Bug report</a>, <a href="https://github.com/khanhduytran0/PojavLauncher">What's supported?</a></b><br>
+	  <b>• <a href="https://github.com/khanhduytran0/PojavLauncher/releases"><font color="orange" id="verText">Download latest preview or release.</font></a></b><br>
+
+	  <h2>▶ v2.4.2 preview</h2>
+	  <b>• Good news: Any Android 7.0+ devices now can run Minecraft normally.</b><br>
+	  <b>• Changes:</b><br>
+	  - <font color="green">Added OptiFine installer!</font><br>
+	  - Support for external mouse (Android 8.0+) and keyboard. (Mouse in-game didn't work, can't detect left or right mouse event).<br>
+	  - Launcher UI should fit correctly in big screen.<br>
+	  - Freeform mode worked now.<br>
+	  - Added version options, load custom client... (not yet)<br>
+	  - Virtual mouse now work properly.<br>
+	  - <strike>Now can run multiple versions.</strike><br>
+	  - Replaced multdoj7 with PojavDX (dx 1.16) for better converter (thanks to <a href="https://github.com/artdeell">artdeell</a> for suggesting).<br>
+	  <b>• Fixes:</b><br>
+	  - Touch event triggered as click event, this bug exist from Boardwalk.<br>
+	  - In game, mouse event got triggered after move camera.<br>
+
+	  <br>
+
+	  <h2>▶ v2.4 BETA release</h2>
+	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
+	  <br>
+
+	  <b>• Changes:</b><br>
+	  - Removed OpenJDK and busybox.<br>
+	  - Re-added ARM 64bit native libraries.<br>
+	  <br>
+
+	  <b>• Fixes:</b><br>
+	  - Fixed an error that prevent users launch Minecraft without internet connection.<br>
+	  <br>
+
+	  <h2>▶ v2.3.1 BETA release</h2>
+	  <b>• Changes:</b><br>
+	  - Added text selection on OpenJDK install log.<br>
+	  <b>• Fixes:</b><br>
+	  - Devices can't install OpenJDK but able to hide the error.<br>
+	  <br>
+
+	  <h2>▶ v2.3 BETA release</h2>
+	  <b>• Changes:</b><br>
+	  - Changed some code in update function.<br>
+	  <br>
+	  
+	  <h2>▶ v2.2 BETA (private)</h2>
+	  <b>• Changes:</b><br>
+	  - Added busybox.<br>
+	  - Added OpenJDK for converter (ARM 64bit only).<br>
+	  - Added more AWT functions.<br>
+	  - Screenshot (and F2 key) now capture using directly API (javax.imageio).<br>
+	  <br>
+		
+	  <h2>▶ v2.1 BETA release</h2>
+	  <b>• Changes:</b><br>
+	  - Added Changelog button!<br>
+	  - Custom versions now visible in the list (not implemented for user)<br>
+	  - In-app Update now usable.<br>
+	  - Replaced glshim with GL4ES for partial OpenGL 2.0 and better performance.<br>
+	  <br>
+
+	  <h2>▶ v2.0 BETA</h2>
+	  <b>• Changes:</b><br>
+	  - [Partial] New design (copy of 2017 original Minecraft Launcher)<br>
+	  - Changed how users load/save.<br>
+	  - Added Menu for more options to select.<br>
+	  - Added virtual mouse for styling PC mouse.<br>
+
+	  <br>
+	  <b>• Fixes:</b><br>
+	  - Max progress -1 when converting.<br>
+	  - Verification failed when run some versions (by patch the client file)<br>
+	  <br>
+
+	  <h2>▶ v1.0.4 (Lost source code and APK before release)</h2>
+	  - Added Download version option.<br>
+	  - Added virtual mouse (but better than 2.0 rewrite)<br>
+
+	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
+	  <b>• Changes:</b><br>
+	  - Added 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted versions.<br>
+	  - Added Tab, Screenshot, Force close buttons.<br>
+	  <br>
+	  
+	  <h2>▶ v1.0 ALPHA</h2>
+	  <b>• Initial release. Name as Minecraft Launcher</b><br>
+	  <b>• Only pre-converted 1.9 version is added.</b>
+
+	  <h2># Review this launcher?</h2>
+	  <b>• Don't re-upload the APK.</b><br>
+	  <b>• Leave credits in desciption/comment and you will be appreciated.</b>
+	</div>
+  </body>
+</html>
