@@ -510,24 +510,26 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 				@Override
 				public boolean onTouch(View p1, MotionEvent e)
 				{
-					StringBuilder builder = new StringBuilder();
-					builder.append("PointerCapture debug\n");
-					builder.append("MotionEvent=" + e.getActionMasked() + "\n\n");
-					
-					builder.append("PointerX=" + e.getX() + "\n");
-					builder.append("PointerY=" + e.getY() + "\n");
-					builder.append("RawX=" + e.getRawX() + "\n");
-					builder.append("RawY=" + e.getRawY() + "\n\n");
-					
 					x += ((int) e.getX()) / scaleFactor;
 					y -= ((int) e.getY()) / scaleFactor;
 					
-					builder.append("XPos=" + x + "\n");
-					builder.append("YPos=" + y + "\n\n");
-					builder.append("MovingX=" + getMoving(x, true) + "\n");
-					builder.append("MovingY=" + getMoving(y, false) + "\n");
+					if (debugText.getVisibility() == View.VISIBLE) {
+						StringBuilder builder = new StringBuilder();
+						builder.append("PointerCapture debug\n");
+						builder.append("MotionEvent=" + e.getActionMasked() + "\n\n");
 					
-					debugText.setText(builder.toString());
+						builder.append("PointerX=" + e.getX() + "\n");
+						builder.append("PointerY=" + e.getY() + "\n");
+						builder.append("RawX=" + e.getRawX() + "\n");
+						builder.append("RawY=" + e.getRawY() + "\n\n");
+					
+						builder.append("XPos=" + x + "\n");
+						builder.append("YPos=" + y + "\n\n");
+						builder.append("MovingX=" + getMoving(x, true) + "\n");
+						builder.append("MovingY=" + getMoving(y, false) + "\n");
+						
+						debugText.setText(builder.toString());
+					}
 					
 					AndroidDisplay.mouseX = x;
 					AndroidDisplay.mouseY = y;
