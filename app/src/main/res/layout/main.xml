@@ -53,7 +53,7 @@
 				android:background="@drawable/control_button"
 				android:layout_width="50dp"
 				android:layout_height="50dp"
-				android:text="⬆"
+				android:text="GUI"
 				android:layout_marginBottom="14dp"
 				android:layout_marginLeft="14dp"
 				android:layout_gravity="bottom"

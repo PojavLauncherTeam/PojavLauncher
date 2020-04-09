@@ -939,6 +939,8 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 		}
 	}
 
+	
+	
 	public void fixRSAPadding() throws Exception {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 		
@@ -950,13 +952,13 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 			if (true) { // android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
 				// FUUUUU I DON'T KNOW FIXME
 				Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-				Cipher.getInstance("RSA", rsaPkcs1Cipher.getProvider());
+				// Cipher.getInstance("RSA", rsaPkcs1Cipher.getProvider());
 				
 				Cipher newRSACipher = Cipher.getInstance("RSA");
 				
 				Field fieldPKCS1 = Provider.class.getDeclaredField("serviceMap");
 				fieldPKCS1.setAccessible(true);
-				Map /* <Provider.ServerKey, Provider.Service> */ mapPKCS1 = (Map) fieldPKCS1.get(newRSACipher.getProvider());
+				Map /* <Provider.ServerKey, Provider.Service> */ mapPKCS1 = (Map) fieldPKCS1.get(rsaPkcs1Cipher.getProvider());
 				
 				Field fieldRSA = Provider.class.getDeclaredField("serviceMap");
 				fieldRSA.setAccessible(true);
