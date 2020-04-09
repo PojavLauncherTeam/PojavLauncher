@@ -9,10 +9,7 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 - There's no planning.
 
 ## iOS version?
-- [ ] I have that idea but unfortunately, I don't have any Mac OS X devices to create a demo app.
-- [x] GL4ES has build instruction for iOS.
-- [ ] LWJGL 2 port for iOS.
-- [x] MobiVM fork of RoboVM.
+- Impossible for directly run. RoboVM is AOT Compiler. You could also try UTM with Android-x86.
 
 ## Installing OptiFine?
 Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
