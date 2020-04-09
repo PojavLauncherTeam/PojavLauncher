@@ -1133,11 +1133,11 @@ public class MCLauncherActivity extends AppCompatActivity
 
 					try {
 						final int myVer = Tools.usingVerCode;
-						final String myChamVer = Tools.usingVerName;
+						// final String currVerName = Tools.usingVerName;
 
-						String[] totalNewVer = DownloadUtils.downloadString(Tools.mhomeUrl + "/minever.txt").split(";");
+						String[] totalNewVer = DownloadUtils.downloadString(Tools.mhomeUrl + "/update.txt").split(";");
 						final int newVer = Integer.parseInt(totalNewVer[1]);
-						final String newChamVer = totalNewVer[0];
+						final String newVerName = totalNewVer[0];
 
 						//int myVer = 102;
 
@@ -1159,8 +1159,7 @@ public class MCLauncherActivity extends AppCompatActivity
 										}
 
 										alUp.setMessage(
-											"Current version: " + myChamVer  + "\n" + 
-											"Latest version: " + newChamVer + "\n" +
+											"Received version " + newVerName + "\n" +
 											isNewVerAvailable
 										);
 										if(isAvailable){
@@ -1168,7 +1167,7 @@ public class MCLauncherActivity extends AppCompatActivity
 													@Override
 													public void onClick(DialogInterface p1, int p2)
 													{
-														updateAppProcess(newChamVer);
+														updateAppProcess(newVerName);
 													}
 												});
 										}

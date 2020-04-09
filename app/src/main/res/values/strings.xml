@@ -88,6 +88,7 @@
 	<string name="mcl_setting_title_setmaxdxref">Set max DX references</string>
 	<string name="mcl_setting_subtitle_setmaxdxref">Increase If an error happend while converting: Too many ... references. You may try multi-dex option.</string>
 	<string name="mcl_setting_enablefreeform">Enable Freeform mode for launch Minecraft (Android 7.0+)</string>
+	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
 	
 	<string name="mcl_version_clone">Clone</string>
 	<string name="mcl_version_edit">Edit</string>
@@ -149,7 +150,7 @@
 	<string name="control_adebug">PointerCapture Debug</string>
 	<string name="control_customkey">Send custom keycode</string>
 	
-		<!--PointerCapture debug</string>-->
+	<!--PointerCapture debug</string>-->
 	<string name="control_more3"></string>
 	<string name="control_more4"></string>
 	

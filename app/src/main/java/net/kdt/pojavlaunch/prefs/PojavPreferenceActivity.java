@@ -11,9 +11,10 @@ import com.kdt.mcgui.app.*;
 public class PojavPreferenceActivity extends MineActivity
 {
 	public static boolean PREF_FREEFORM = false;
+	public static float PREF_BUTTONSIZE = 1.0f;
 	
-	private SeekBar viewSeekDxRef;
-	private TextView viewSeekProgress;
+	private SeekBar viewSeekDxRef, viewSeekControlSize;
+	private TextView viewSeekProgressDxRef, viewSeekProgressControl;
 	private Switch viewSwitchFreeform;
 	
 	private SharedPreferences mainPreference;
@@ -21,16 +22,21 @@ public class PojavPreferenceActivity extends MineActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
+		
+		/* Unable to setting to PreferenceActivity:
+		 *
+		 * - Unable to set custom Views.
+		 * - Having trouble setting.
+		 */
 
 		PojavPreferenceActivity.loadPreferences(this);
 		
 		mainPreference = getSharedPreferences("pojav_preferences", MODE_PRIVATE);
 		final SharedPreferences.Editor mainPrefEdit = mainPreference.edit();
 		
+		// DX Refs
 		viewSeekDxRef = (SeekBar) findViewById(R.id.settings_seekbar_setmaxdxref);
-		viewSeekProgress = (TextView) findViewById(R.id.setting_seektext_progress);
-		viewSwitchFreeform = (Switch) findViewById(R.id.settings_switch_enablefreeform);
-		
+		viewSeekProgressDxRef = (TextView) findViewById(R.id.setting_progressseek_maxdxref);
 		viewSeekDxRef.setMax(0xFFFF - 0xFFF);
 		viewSeekDxRef.setProgress(DexFormat.MAX_MEMBER_IDX - 0xFFF);
 		viewSeekDxRef.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
@@ -38,7 +44,7 @@ public class PojavPreferenceActivity extends MineActivity
 				@Override
 				public void onProgressChanged(SeekBar bar, int progress, boolean p3) {
 					currProgress = 0xFFF + progress;
-					viewSeekProgress.setText(currProgress + "/" + 0xFFFF);
+					viewSeekProgressDxRef.setText(currProgress + "/" + 0xFFFF);
 				}
 
 				@Override
@@ -52,8 +58,38 @@ public class PojavPreferenceActivity extends MineActivity
 					mainPrefEdit.commit();
 				}
 			});
-		viewSeekProgress.setText((viewSeekDxRef.getProgress() + 0xFFF) + "/" + 0xFFFF);
+		viewSeekProgressDxRef.setText((viewSeekDxRef.getProgress() + 0xFFF) + "/" + 0xFFFF);
+
+		// Control size
+		viewSeekControlSize = (SeekBar) findViewById(R.id.settings_seekbar_controlsize);
+		viewSeekProgressControl = (TextView) findViewById(R.id.setting_progressseek_control);
+		viewSeekControlSize.setMax(200);
+		viewSeekControlSize.setProgress((int) (PREF_BUTTONSIZE * 100));
+		viewSeekControlSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+				private float currProgress = 1.0f;
+				@Override
+				public void onProgressChanged(SeekBar bar, int progress, boolean p3) {
+					currProgress = (float) progress / 100;
+					String progressStr = Float.toString(currProgress);
+					if (progressStr.length() == 3) progressStr = progressStr + "0";
+					viewSeekProgressControl.setText(currProgress + "/2.00");
+				}
+
+				@Override
+				public void onStartTrackingTouch(SeekBar bar) {
+					// Unused
+				}
+
+				@Override
+				public void onStopTrackingTouch(SeekBar bar) {
+					mainPrefEdit.putFloat("controlSize", currProgress);
+					mainPrefEdit.commit();
+				}
+			});
+		viewSeekProgressControl.setText(((float) viewSeekControlSize.getProgress() / 100f) + "/2");
 		
+		// Freeform mode
+		viewSwitchFreeform = (Switch) findViewById(R.id.settings_switch_enablefreeform);
 		viewSwitchFreeform.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener(){
 
 				@Override
@@ -80,6 +116,7 @@ public class PojavPreferenceActivity extends MineActivity
 		DexFormat.MAX_MEMBER_IDX = maxDxPref;
 		DexFormat.MAX_TYPE_IDX = maxDxPref;
 		
+		PREF_BUTTONSIZE = mainPreference.getFloat("controlSize", 1f);
 		PREF_FREEFORM = mainPreference.getBoolean("freeform", false);
 	}
 }

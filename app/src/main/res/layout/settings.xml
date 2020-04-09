@@ -39,7 +39,45 @@
 				android:layout_height="wrap_content"
 				android:layout_width="wrap_content"
 				android:text="4600/65535"
-				android:id="@+id/setting_seektext_progress"/>
+				android:id="@+id/setting_progressseek_maxdxref"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<View
+		android:background="?android:attr/dividerVertical"
+		android:layout_height="2dp"
+		android:layout_width="match_parent"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_margin="10dp">
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/mcl_setting_title_controlsize"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+
+			<SeekBar
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:id="@+id/settings_seekbar_controlsize"
+				android:layout_weight="1.0"/>
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="1/2"
+				android:id="@+id/setting_progressseek_control"/>
 
 		</LinearLayout>
 

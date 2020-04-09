@@ -74,7 +74,7 @@ public class MCProfile
 		builder.setAccessToken(acct);
 		builder.setUsername(name);
 		builder.setVersion(vers);
-		builder.setIsAccount(Boolean.parseBoolean(isAc));
+		builder.setIsMojangAccount(Boolean.parseBoolean(isAc));
 
 		return builder;
 	}
@@ -107,7 +107,7 @@ public class MCProfile
 	public static class Builder implements Serializable
 	{
 		private String[] fullArgs = new String[6];
-		private boolean isAccount = true;
+		private boolean isMojangAccount = true;
 		
 		public Builder()
 		{
@@ -119,7 +119,7 @@ public class MCProfile
 		
 		public boolean isMojangAccount()
 		{
-			return isAccount;
+			return isMojangAccount;
 		}
 		
 		public String getVersion()
@@ -147,9 +147,9 @@ public class MCProfile
 			return fullArgs[4];
 		}
 		
-		public void setIsAccount(boolean value)
+		public void setIsMojangAccount(boolean value)
 		{
-			isAccount = value;
+			isMojangAccount = value;
 		}
 		
 		public void setVersion(String value)

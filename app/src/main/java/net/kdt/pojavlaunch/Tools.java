@@ -35,7 +35,7 @@ public final class Tools
 
 	public static int usingVerCode = 1;
 	public static String usingVerName = "2.4.2";
-	public static String mhomeUrl = "http://mineup.eu5.net"; // "http://kdtjavacraft.eu5.net";
+	public static String mhomeUrl = "https://khanhduytran0.github.io/PojavLauncher"; // "http://kdtjavacraft.eu5.net";
 	public static String datapath = "/data/data/net.kdt.pojavlaunch";
 	public static String worksDir = datapath + "/app_working_dir";
 	
@@ -222,8 +222,7 @@ public final class Tools
 			});
 	}
 
-	public static void dialogOnUiThread(final Activity ctx, final CharSequence title, final CharSequence message)
-	{
+	public static void dialogOnUiThread(final Activity ctx, final CharSequence title, final CharSequence message) {
 		ctx.runOnUiThread(new Runnable(){
 
 				@Override

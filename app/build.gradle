@@ -9,13 +9,21 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156230
-        versionName "2.4.2_preview10b2_6392b_20200405"
+        versionName "2.4.2_preview10b2_6392b_20200409"
     }
+	
     buildTypes {
         release {
+			// Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+	
+	// Keep the following configuration in order to target Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

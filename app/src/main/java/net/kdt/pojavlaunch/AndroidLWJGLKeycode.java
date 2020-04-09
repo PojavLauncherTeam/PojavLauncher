@@ -12,7 +12,11 @@ public class AndroidLWJGLKeycode {
 	private static final ArrayMap<Integer, Integer> androidToLwjglMap;
 	private static String[] androidKeyNameArray;
 	static {
-		// OOPS I waste my time to map this, but already have another.
+		/*
+		 * There are already have mapped in
+		 * org.lwjgl.opengl.AndroidKeyCodes
+		 * but this key map is more than.
+		 */
 		
 		
 		// Mapping Android Keycodes to LWJGL Keycodes

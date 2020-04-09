@@ -35,8 +35,9 @@ import android.graphics.drawable.Drawable;
 import java.security.Provider.*;
 import org.apache.harmony.security.fortress.*;
 import optifine.*;
+import net.kdt.pojavlaunch.prefs.*;
 
-public class MainActivity extends Activity implements OnTouchListener
+public class MainActivity extends Activity implements OnTouchListener, OnClickListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
 
@@ -84,7 +85,8 @@ public class MainActivity extends Activity implements OnTouchListener
 				   debugButton, shiftButton,
 				   keyboardButton, inventoryButton,
 				   talkButton, thirdPersonButton,
-				   screenshotButton, listPlayersButton;
+				   screenshotButton, listPlayersButton,
+				   toggleControlButton;
 	private LinearLayout touchPad;
 	private ImageView mousePointer;
 	//private EditText hiddenEditor;
@@ -235,9 +237,10 @@ public class MainActivity extends Activity implements OnTouchListener
 			this.thirdPersonButton = findButton(R.id.control_thirdperson);
 			this.screenshotButton = findButton(R.id.control_screenshot);
 			this.listPlayersButton = findButton(R.id.control_listplayers);
+			this.toggleControlButton = findButton(R.id.control_togglecontrol);
 			this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
 			this.secondaryButtonDefaultBackground = this.secondaryButton.getBackground();
-			this.secondaryButtonColorBackground = new ColorDrawable(-65536);
+			this.secondaryButtonColorBackground = new ColorDrawable(-65536 /* color ??? */);
 
 			//this.hiddenEditor = findViewById(R.id.hiddenTextbox);
 
@@ -267,10 +270,13 @@ public class MainActivity extends Activity implements OnTouchListener
 			
 			this.debugText = (TextView) findViewById(R.id.content_text_debug);
 				
+			this.toggleControlButton.setOnClickListener(this);
+			
 			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 			
-			
-			toggleGui(null);
+
+			// toggleGui(null);
+			onClick(toggleControlButton);
 			this.drawerLayout.closeDrawers();
 			
 			AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
@@ -714,6 +720,61 @@ public class MainActivity extends Activity implements OnTouchListener
 		}
 		super.onPause();
 	}
+
+	@Override
+	public void onClick(View view) {
+		switch (view.getId()) {
+			case R.id.control_togglecontrol: {
+				switch(overlayView.getVisibility()){
+					case View.VISIBLE: overlayView.setVisibility(View.GONE);
+						break;
+					case View.GONE: overlayView.setVisibility(View.VISIBLE);
+				}
+			}
+		}
+	}
+	
+    public boolean onTouch(View v, MotionEvent e) {
+        boolean isDown;
+        switch (e.getActionMasked()) {
+            case TessState.T_DORMANT /*0*/:
+            case AppletLoader.STATE_CHECKING_FOR_UPDATES /*5*/:
+                isDown = true;
+                break;
+            case TessState.T_IN_POLYGON /*1*/:
+            case AppletLoader.STATE_DETERMINING_PACKAGES /*3*/:
+            case AppletLoader.STATE_DOWNLOADING /*6*/:
+                isDown = false;
+                break;
+            default:
+                return false;
+        }
+		
+		switch (v.getId()) {
+			case R.id.control_up: sendKeyPress(Keyboard.KEY_W, isDown); break;
+			case R.id.control_left: sendKeyPress(Keyboard.KEY_A, isDown); break;
+			case R.id.control_down: sendKeyPress(Keyboard.KEY_S, isDown); break;
+			case R.id.control_right: sendKeyPress(Keyboard.KEY_D, isDown); break;
+			case R.id.control_jump: sendKeyPress(Keyboard.KEY_SPACE, isDown); break;
+			case R.id.control_primary: sendMouseButton(0, isDown); break;
+			case R.id.control_secondary:
+				if (AndroidDisplay.grab) {
+					sendMouseButton(1, isDown);
+				} else {
+					setRightOverride(isDown);
+				} break;
+			case R.id.control_debug: sendKeyPress(Keyboard.KEY_F3, isDown); break;
+			case R.id.control_shift: sendKeyPress(Keyboard.KEY_LSHIFT, isDown); break;
+			case R.id.control_inventory: sendKeyPress(Keyboard.KEY_E, isDown); break;
+			case R.id.control_talk: sendKeyPress(Keyboard.KEY_T, isDown); break;
+			case R.id.control_keyboard: showKeyboard(); break;
+			case R.id.control_thirdperson: sendKeyPress(Keyboard.KEY_F5, isDown); break;
+			case R.id.control_screenshot: sendKeyPress(Keyboard.KEY_F2, isDown); break;
+			case R.id.control_listplayers: sendKeyPress(Keyboard.KEY_TAB, isDown); break;
+		}
+		
+        return false;
+    }
 	
 	public static void fullyExit() {
 		ExitManager.stopExitLoop();
@@ -874,34 +935,38 @@ public class MainActivity extends Activity implements OnTouchListener
 			mainMethod.setAccessible(true);
 			mainMethod.invoke(null, new Object[]{launchArgs});
 		}
-		
-		// Method v6:
-		
-		/**
-		 * Pojav Execute arguments.
-		 *
-		 * [0] = argOptdir (eg. "/dir")
-		 * [1] = argNative (eg. "/dir/lib/arm64")
-		 * [2] = classpath (eg. "mc.jar:lib1.jar:...")
-		 * [3] = mainclass (eg. "net.minecraft.client.Minecraft")
-		 */
 	}
 
 	public void fixRSAPadding() throws Exception {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 		
 		try {
+/*
 			System.out.println(Cipher.getInstance("RSA"));
 			System.out.println(Cipher.getInstance("RSA/ECB/PKCS1Padding"));
-			if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
-				// return; // FUUUUU I DON'T KNOW FIXME
+*/
+			if (true) { // android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
+				// FUUUUU I DON'T KNOW FIXME
+				Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+				Cipher.getInstance("RSA", rsaPkcs1Cipher.getProvider());
+				
+				Cipher newRSACipher = Cipher.getInstance("RSA");
+				
+				Field fieldPKCS1 = Provider.class.getDeclaredField("serviceMap");
+				fieldPKCS1.setAccessible(true);
+				Map /* <Provider.ServerKey, Provider.Service> */ mapPKCS1 = (Map) fieldPKCS1.get(newRSACipher.getProvider());
+				
+				Field fieldRSA = Provider.class.getDeclaredField("serviceMap");
+				fieldRSA.setAccessible(true);
+				Map /* <Provider.ServerKey, Provider.Service> */ mapRSA = (Map) fieldRSA.get(newRSACipher.getProvider());
+				mapRSA.clear();
+				mapRSA.putAll(mapPKCS1);
+			} else {
+				ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
+				ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
+				rsaList.clear();
+				rsaList.addAll(rsaPkcs1List);
 			}
-
-			ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
-			ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
-
-			rsaList.clear();
-			rsaList.addAll(rsaPkcs1List);
 		} catch (Throwable th) {
 			// Tools.dialogOnUiThread(MainActivity.this, "Warning: can't fix RSA Padding", Log.getStackTraceString(th));
 			th.printStackTrace();
@@ -1053,14 +1118,6 @@ public class MainActivity extends Activity implements OnTouchListener
 		this.mousePointer.setTranslationY(y);
 	}
 	
-	public void toggleGui(View view) {
-		switch(overlayView.getVisibility()){
-			case View.VISIBLE: overlayView.setVisibility(View.GONE);
-				break;
-			case View.GONE: overlayView.setVisibility(View.VISIBLE);
-		}
-	}
-	
 	public void toggleMouse(View view) {
 		if (AndroidDisplay.grab) return;
 		
@@ -1096,64 +1153,12 @@ public class MainActivity extends Activity implements OnTouchListener
 	
 	private Button findButton(int id) {
         Button button = (Button) findViewById(id);
+		button.setWidth((int) (button.getWidth() * PojavPreferenceActivity.PREF_BUTTONSIZE));
+		button.setHeight((int) (button.getHeight() * PojavPreferenceActivity.PREF_BUTTONSIZE));
         button.setOnTouchListener(this);
         return button;
     }
 
-    public boolean onTouch(View v, MotionEvent e) {
-        boolean isDown;
-        switch (e.getActionMasked()) {
-            case TessState.T_DORMANT /*0*/:
-            case AppletLoader.STATE_CHECKING_FOR_UPDATES /*5*/:
-                isDown = true;
-                break;
-            case TessState.T_IN_POLYGON /*1*/:
-            case AppletLoader.STATE_DETERMINING_PACKAGES /*3*/:
-            case AppletLoader.STATE_DOWNLOADING /*6*/:
-                isDown = false;
-                break;
-            default:
-                return false;
-        }
-		
-		if (v == this.upButton) {
-            sendKeyPress(Keyboard.KEY_W, isDown);
-        } else if (v == this.downButton) {
-            sendKeyPress(Keyboard.KEY_S, isDown);
-        } else if (v == this.leftButton) {
-            sendKeyPress(Keyboard.KEY_A, isDown);
-        } else if (v == this.rightButton) {
-            sendKeyPress(Keyboard.KEY_D, isDown);
-        } else if (v == this.jumpButton) {
-            sendKeyPress(Keyboard.KEY_SPACE, isDown);
-        } else if (v == this.primaryButton) {
-            sendMouseButton(0, isDown);
-        } else if (v == this.secondaryButton) {
-            if (AndroidDisplay.grab) {
-                sendMouseButton(1, isDown);
-            } else {
-                setRightOverride(isDown);
-            }
-        } else if (v == debugButton) {
-			sendKeyPress(Keyboard.KEY_F3, isDown);
-		} else if (v == shiftButton) {
-			sendKeyPress(Keyboard.KEY_LSHIFT, isDown);
-		} else if (v == inventoryButton) {
-			sendKeyPress(Keyboard.KEY_E, isDown);
-		} else if (v == talkButton) {
-			sendKeyPress(Keyboard.KEY_T, isDown);
-		} else if (v == keyboardButton) {
-			showKeyboard();
-		} else if (v == thirdPersonButton) {
-			sendKeyPress(Keyboard.KEY_F5, isDown);
-		} else if (v == this.screenshotButton) {
-			sendKeyPress(Keyboard.KEY_F2, isDown);
-		} else if (v == this.listPlayersButton) {
-			sendKeyPress(Keyboard.KEY_TAB, isDown);
-		}
-        return false;
-    }
-	
 	@Override
 	public void onBackPressed() {
 		// Prevent back

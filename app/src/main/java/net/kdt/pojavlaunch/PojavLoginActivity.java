@@ -466,7 +466,7 @@ public class PojavLoginActivity extends MineActivity
 			edit2.setError(getResources().getString(R.string.login_error_exist_username));
 		} else{
 			MCProfile.Builder builder = new MCProfile.Builder();
-			builder.setIsAccount(false);
+			builder.setIsMojangAccount(false);
 			builder.setUsername(text);
 			
 			return builder;
@@ -545,13 +545,8 @@ public class PojavLoginActivity extends MineActivity
 					{
 						// TODO: Implement this method
 						if(result[0].equals("ERROR")){
-							new AlertDialog.Builder(PojavLoginActivity.this)
-								.setTitle(R.string.error_title)
-								.setMessage(strArrToString(result))
-								.setPositiveButton(android.R.string.ok, null)
-								.show();
-						}
-						else{
+							Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(R.string.error_title), strArrToString(result));
+						} else{
 							MCProfile.Builder builder = new MCProfile.Builder();
 							builder.setAccessToken(result[1]);
 							builder.setClientID(result[2]);
