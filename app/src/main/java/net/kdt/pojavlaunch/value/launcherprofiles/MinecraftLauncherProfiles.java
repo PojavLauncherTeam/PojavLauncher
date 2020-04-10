@@ -2,7 +2,12 @@ package net.kdt.pojavlaunch.value.launcherprofiles;
 
 public class MinecraftLauncherProfiles
 {
-	public static MinecraftProfile[] profiles;
-	public static String clientToken;
-	public static MinecraftAuthenticationDatabase authenticationDatabase;
+	public MinecraftProfile[] profiles;
+	public String clientToken;
+	public MinecraftAuthenticationDatabase[] authenticationDatabase;
+	// public Map launcherVersion;
+	public MinecraftLauncherSettings settings;
+	// public Map analyticsToken;
+	public int analyticsFailcount;
+	public MinecraftSelectedUser selectedUser;
 }

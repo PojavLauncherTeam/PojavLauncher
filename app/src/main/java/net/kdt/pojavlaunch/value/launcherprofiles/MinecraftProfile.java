@@ -2,16 +2,16 @@ package net.kdt.pojavlaunch.value.launcherprofiles;
 
 public class MinecraftProfile
 {
-	public static String name;
-	public static String type;
-	public static String created;
-	public static String lastUsed;
-	public static String icon;
-	public static String lastVersionId;
-	public static String gameDir;
-	public static String javaDir;
-	public static String javaArgs;
-	public static String logConfig;
-	public static boolean logConfigIsXML;
-	public static MinecraftResolution[]resolution;
+	public String name;
+	public String type;
+	public String created;
+	public String lastUsed;
+	public String icon;
+	public String lastVersionId;
+	public String gameDir;
+	public String javaDir;
+	public String javaArgs;
+	public String logConfig;
+	public boolean logConfigIsXML;
+	public MinecraftResolution[] resolution;
 }
