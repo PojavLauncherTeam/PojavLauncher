@@ -37,11 +37,15 @@ public class PojavLoginActivity extends MineActivity
 	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
 	
+	private boolean isInitCalled = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState, false);
-		init();
+		if (!isInitCalled) {
+			init();
+			isInitCalled = true;
+		}
 	}
 	
 	private void init() {
@@ -302,11 +306,12 @@ public class PojavLoginActivity extends MineActivity
 			mkdirs(Tools.MAIN_PATH);
 			
 			Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
-			// Tools.copyAssetToFolderIfNonExist(this, "dx-f" + (isAndroid7() ? "7" : "4")  + ".0.jar", Tools.worksDir, "dx.jar");
-			// Tools.copyAssetFile(this, "pojavdx.dex", Tools.worksDir, true);
 			
-			// Copy ZIP!!!
+			// Extract launcher_profiles.json
+			// TODO: Remove after implement.
+			Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
 			
+			// Yep, the codebase from v1.0.3:
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.0.jar", Tools.versnDir + "/1.0");
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.3.jar", Tools.versnDir + "/1.7.3");
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
