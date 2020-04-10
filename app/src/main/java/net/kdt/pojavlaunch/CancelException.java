@@ -5,6 +5,7 @@ public class CancelException extends RuntimeException
 	@Override
 	public CancelException() {
 		super();
+		// org.lwjgl.c
 	}
 	
 	@Override

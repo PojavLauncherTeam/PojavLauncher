@@ -16,14 +16,14 @@ public class LauncherProfiles
 			} else {
 				mainProfileJson = new MinecraftLauncherProfiles();
 			}
-			insertMissing();
+			// insertMissing();
 			return mainProfileJson;
 		} catch (Throwable th) {
 			throw new RuntimeException(th);
 		}
 	}
-	
-	public static String insert
+	/*
+	public static String insert;
 	
 	private static void insertMissing() {
 		if (mainProfileJson.authenticationDatabase == null) {
@@ -31,4 +31,5 @@ public class LauncherProfiles
 			mainProfileJson.authenticationDatabase = mad;
 		}
 	}
+	*/
 }

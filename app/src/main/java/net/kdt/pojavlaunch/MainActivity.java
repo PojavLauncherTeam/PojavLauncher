@@ -388,6 +388,7 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 					}
 				});
 				
+			// System.loadLibrary("gl04es");
 			System.loadLibrary("gl04es");
 
 			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
