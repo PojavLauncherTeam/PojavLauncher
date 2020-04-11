@@ -19,14 +19,13 @@
 	<string name="login_online_password_hint">Password</string>
 	<string name="login_online_password_question">Forgot password?</string>
 	<string name="login_online_remember">Remember me?</string>
-	<string name="login_online_login_label">Save</string>
+	<string name="login_online_login_label">Login</string>
 	<string name="login_online_create_account">(Create new account?)</string>
 	
 	<string name="login_offline_switch">Offline account?</string>
 	<string name="login_offline_warning_1">You are logging in by an offline account, but if you don\'t save it, your data may be reset in your worlds/multiplayers/servers. We recommend you to save it.</string>
 	<string name="login_offline_alert_skip">Skip</string>
 	
-	<string name="login_error_empty_username">Username can\'t be empty</string>
 	<string name="login_error_short_username">Username must be at least 3 characters</string>
 	<string name="login_error_exist_username">This username already exist</string>
 	
@@ -92,8 +91,13 @@
 	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
 	
 	<string name="mcl_version_clone">Clone</string>
-	<string name="mcl_version_edit">Edit</string>
-	<string name="mcl_version_remove">Remove</string>
+	
+	<!-- Global strings -->
+	<string name="global_add">Add</string>
+	<string name="global_edit">Edit</string>
+	<string name="global_remove">Remove</string>
+	<string name="global_save">Save</string>
+	<string name="global_error_field_empty">This field can\'t be empty</string>
 	
 <!--
 	<string name="mcl_about">

@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.value.customcontrols;
+import java.util.*;
 
 public class CustomControls
 {
-	public ControlButton[] button = new ControlButton[]{};
+	public List<ControlButton> button = new ArrayList<ControlButton>();
 }

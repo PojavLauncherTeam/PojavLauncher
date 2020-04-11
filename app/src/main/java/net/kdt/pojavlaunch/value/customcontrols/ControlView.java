@@ -21,7 +21,8 @@ public class ControlView extends Button implements OnTouchListener
 		
 		mGestureDetector = new GestureDetector(ctx, new SingleTapConfirm());
 		mProperties = properties;
-		
+		// com.android.internal.R.string.delete
+		// android.R.string.
 		setText(properties.name);
 		setTranslationX(moveX = properties.x);
 		setTranslationY(moveY = properties.y);

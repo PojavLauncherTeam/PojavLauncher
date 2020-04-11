@@ -23,8 +23,14 @@ public class ControlsLayout extends FrameLayout
 		for (ControlButton button : controlLayout.button) {
 			ControlView view = new ControlView(getContext(), button);
 			view.setCanMove(mCanMove);
+			view.setLayoutParams(new LayoutParams((int) Tools.dpToPx(getContext(), 50), (int) Tools.dpToPx(getContext(), 50)));
 			addView(view);
 		}
+	}
+	
+	public void refreshLayout() {
+		removeAllViews();
+		loadLayout(mLayout);
 	}
 	
 	public void saveLayout(String path) throws Exception {

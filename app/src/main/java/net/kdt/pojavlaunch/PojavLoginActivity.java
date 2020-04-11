@@ -464,7 +464,7 @@ public class PojavLoginActivity extends MineActivity
 		
 		String text = edit2.getText().toString();
 		if(text.isEmpty()){
-			edit2.setError(getResources().getString(R.string.login_error_empty_username));
+			edit2.setError(getResources().getString(R.string.global_error_field_empty));
 		} else if(text.length() <= 2){
 			edit2.setError(getResources().getString(R.string.login_error_short_username));
 		} else if(new File(Tools.mpProfiles + "/" + text).exists()){

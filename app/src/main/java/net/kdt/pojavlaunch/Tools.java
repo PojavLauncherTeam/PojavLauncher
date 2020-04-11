@@ -32,7 +32,8 @@ public final class Tools
 	public static String APP_NAME = "null";
 	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/minecraft";
 	public static String ASSETS_PATH = MAIN_PATH + "/assets";
-
+	public static String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
+	
 	public static int usingVerCode = 1;
 	public static String usingVerName = "2.4.2";
 	public static String mhomeUrl = "https://khanhduytran0.github.io/PojavLauncher"; // "http://kdtjavacraft.eu5.net";
