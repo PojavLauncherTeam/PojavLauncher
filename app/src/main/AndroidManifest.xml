@@ -32,6 +32,11 @@
 			android:screenOrientation="sensorLandscape"
 			android:name=".MCLauncherActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name=".CustomControlsActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
         <activity
 			android:launchMode="standard"

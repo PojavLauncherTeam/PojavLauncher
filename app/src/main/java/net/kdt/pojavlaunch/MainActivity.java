@@ -7,10 +7,10 @@ import android.graphics.drawable.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.widget.*;
+import android.support.v7.app.*;
 import android.system.*;
 import android.util.*;
 import android.view.*;
-import android.view.GestureDetector.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
@@ -26,18 +26,18 @@ import javax.crypto.*;
 import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
+import net.kdt.pojavlaunch.prefs.*;
+import optifine.*;
+import org.apache.harmony.security.fortress.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.applet.*;
 import org.lwjgl.util.glu.tessellation.*;
 
+import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
-import java.security.Provider.*;
-import org.apache.harmony.security.fortress.*;
-import optifine.*;
-import net.kdt.pojavlaunch.prefs.*;
 
-public class MainActivity extends Activity implements OnTouchListener, OnClickListener
+public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
 
@@ -498,7 +498,7 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 			pointerCaptureListener = new OnTouchListener(){
 				private int x, y;
 				
-				private String getMoving(int pos, boolean xOrY) {
+				private String getMoving(float pos, boolean xOrY) {
 					if (pos == 0) {
 						return "STOPPED";
 					} else if (pos > 0) {
@@ -526,8 +526,8 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 					
 						builder.append("XPos=" + x + "\n");
 						builder.append("YPos=" + y + "\n\n");
-						builder.append("MovingX=" + getMoving(x, true) + "\n");
-						builder.append("MovingY=" + getMoving(y, false) + "\n");
+						builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
+						builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
 						
 						debugText.setText(builder.toString());
 					}
@@ -1244,13 +1244,5 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
             return -1;
         }
         return hotbarKeys[((x - barx) / mcscale(20)) % 9];
-    }
-	
-	private class SingleTapConfirm extends SimpleOnGestureListener
-	{
-        @Override
-        public boolean onSingleTapUp(MotionEvent event) {
-            return true;
-        }
     }
 }
