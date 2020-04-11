@@ -21,7 +21,8 @@ public class CustomControlsActivity extends AppCompatActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setContentView(R.layout.control_mapping);
+		
 		// Menu
 		drawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
 
@@ -63,8 +64,6 @@ public class CustomControlsActivity extends AppCompatActivity
 		ControlsLayout ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.loadLayout(mCtrl);
 		ctrlLayout.setCanMove(true);
-		
-		setContentView(R.layout.control_mapping);
 	}
 
 	@Override
