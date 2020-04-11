@@ -104,6 +104,13 @@ public final class Tools
 		return displayMetrics;
 	}
 	
+	public static float pxToDp(Context ctx, float px) {
+		return (px / ctx.getResources().getDisplayMetrics().density);
+	}
+
+	public static float dpToPx(Context ctx, float dp) {
+		return (dp * ctx.getResources().getDisplayMetrics().density);
+	}
 
 	public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws Exception
 	{

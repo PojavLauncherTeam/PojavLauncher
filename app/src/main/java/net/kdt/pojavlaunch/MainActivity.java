@@ -1156,18 +1156,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			.show();
 	}
 	
-	private float pxToDp(float px) {
-		return (px / getResources().getDisplayMetrics().density);
-	}
-
-	private float dpToPx(float dp) {
-		return (dp * getResources().getDisplayMetrics().density);
-	}
-	
 	private Button findButton(int id) {
         Button button = (Button) findViewById(id);
-		button.setWidth((int) dpToPx(pxToDp(button.getWidth()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
-		button.setHeight((int) dpToPx(pxToDp(button.getHeight()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
+		button.setWidth((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getWidth()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
+		button.setHeight((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getHeight()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
         button.setOnTouchListener(this);
         return button;
     }

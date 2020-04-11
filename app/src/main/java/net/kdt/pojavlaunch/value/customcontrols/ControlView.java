@@ -16,7 +16,9 @@ public class ControlView extends Button implements OnTouchListener
 	public ControlView(Context ctx, ControlButton properties) {
 		super(ctx);
 		
+		setBackgroundResource(R.drawable.control_button);
 		setOnTouchListener(this);
+		
 		mGestureDetector = new GestureDetector(ctx, new SingleTapConfirm());
 		mProperties = properties;
 		
@@ -43,7 +45,7 @@ public class ControlView extends Button implements OnTouchListener
 	@Override
 	public boolean onTouch(View view, MotionEvent event) {
 		if (mGestureDetector.onTouchEvent(event)) {
-			mClickListener.onClick(view);
+			if (mClickListener != null) mClickListener.onClick(view);
 			return true;
 		} else if (!mCanMove) {
 			return false;

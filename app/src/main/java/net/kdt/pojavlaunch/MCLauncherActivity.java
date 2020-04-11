@@ -246,8 +246,8 @@ public class MCLauncherActivity extends AppCompatActivity
 	private float updateWidthHeight() {
 		float leftRightWidth = (float) AndroidDisplay.windowWidth / 100f * 32f;
 		float playButtonWidth = AndroidDisplay.windowWidth - leftRightWidth * 2f;
-		LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, dpToPixel(AndroidDisplay.windowHeight / 9));
-		LinearLayout.LayoutParams playButtonParams = new LinearLayout.LayoutParams((int) playButtonWidth, dpToPixel(AndroidDisplay.windowHeight / 9));
+		LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(this, AndroidDisplay.windowHeight / 9));
+		LinearLayout.LayoutParams playButtonParams = new LinearLayout.LayoutParams((int) playButtonWidth, (int) Tools.dpToPx(this, AndroidDisplay.windowHeight / 9));
 		leftView.setLayoutParams(leftRightParams);
 		rightView.setLayoutParams(leftRightParams);
 		playButton.setLayoutParams(playButtonParams);
@@ -400,12 +400,6 @@ public class MCLauncherActivity extends AppCompatActivity
 		super.onResume();
 	}
 
-	private int dpToPixel(int sizeInDP)
-	{
-		return (int) TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, sizeInDP, getResources()
-			.getDisplayMetrics());
-	}
 	private boolean canBack = false;
 	private void statusIsLaunching(boolean isLaunching)
 	{
@@ -848,10 +842,13 @@ public class MCLauncherActivity extends AppCompatActivity
 						case 2:{ // Check update
 								checkUpdate();
 							} break;
-						case 3:{ // Settings
+						case 3:{ // Custom controls
+								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
+							} break;
+						case 4:{ // Settings
 								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
 							} break;
-						case 4:{ // About
+						case 5:{ // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
 								aboutB.setTitle(R.string.mcl_option_about);
 								try

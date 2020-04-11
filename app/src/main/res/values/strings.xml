@@ -82,6 +82,7 @@
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
 	<string name="mcl_option_optifineinstall">Install OptiFine</string>
 	<string name="mcl_option_checkupdate">Check for update</string>
+	<string name="mcl_option_customcontrol">Custom controls</string>
 	<string name="mcl_option_settings">Settings</string>
 	<string name="mcl_option_about">About</string>
 	
