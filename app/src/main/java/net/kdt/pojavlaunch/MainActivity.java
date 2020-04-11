@@ -85,7 +85,7 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 				   debugButton, shiftButton,
 				   keyboardButton, inventoryButton,
 				   talkButton, thirdPersonButton,
-				   screenshotButton, listPlayersButton,
+				   zoomButton, listPlayersButton,
 				   toggleControlButton;
 	private LinearLayout touchPad;
 	private ImageView mousePointer;
@@ -235,7 +235,7 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 			this.inventoryButton = findButton(R.id.control_inventory);
 			this.talkButton = findButton(R.id.control_talk);
 			this.thirdPersonButton = findButton(R.id.control_thirdperson);
-			this.screenshotButton = findButton(R.id.control_screenshot);
+			this.zoomButton = findButton(R.id.control_zoom);
 			this.listPlayersButton = findButton(R.id.control_listplayers);
 			this.toggleControlButton = findButton(R.id.control_togglecontrol);
 			this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
@@ -271,6 +271,7 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 			this.debugText = (TextView) findViewById(R.id.content_text_debug);
 				
 			this.toggleControlButton.setOnClickListener(this);
+			this.zoomButton.setVisibility(mVersionInfo.optifineLib == null ? View.GONE : View.VISIBLE);
 			
 			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 			
@@ -388,7 +389,6 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 					}
 				});
 				
-			// System.loadLibrary("gl04es");
 			System.loadLibrary("gl04es");
 
 			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
@@ -772,7 +772,7 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 			case R.id.control_talk: sendKeyPress(Keyboard.KEY_T, isDown); break;
 			case R.id.control_keyboard: showKeyboard(); break;
 			case R.id.control_thirdperson: sendKeyPress(Keyboard.KEY_F5, isDown); break;
-			case R.id.control_screenshot: sendKeyPress(Keyboard.KEY_F2, isDown); break;
+			case R.id.control_zoom: sendKeyPress(Keyboard.KEY_C, isDown); break;
 			case R.id.control_listplayers: sendKeyPress(Keyboard.KEY_TAB, isDown); break;
 		}
 		
@@ -1156,10 +1156,18 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
 			.show();
 	}
 	
+	private float pxToDp(float px) {
+		return (px / getResources().getDisplayMetrics().density);
+	}
+
+	private float dpToPx(float dp) {
+		return (dp * getResources().getDisplayMetrics().density);
+	}
+	
 	private Button findButton(int id) {
         Button button = (Button) findViewById(id);
-		button.setWidth((int) (button.getWidth() * PojavPreferenceActivity.PREF_BUTTONSIZE));
-		button.setHeight((int) (button.getHeight() * PojavPreferenceActivity.PREF_BUTTONSIZE));
+		button.setWidth((int) dpToPx(pxToDp(button.getWidth()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
+		button.setHeight((int) dpToPx(pxToDp(button.getHeight()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
         button.setOnTouchListener(this);
         return button;
     }

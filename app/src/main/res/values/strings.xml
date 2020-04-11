@@ -125,11 +125,11 @@
 	<string name="mcn_exit_confirm">Are you sure want to force exit?</string>
 	
 	<!-- MainActivity: Control buttons -->
+	<string name="controls">Controls</string>
 	<string name="control_keyboard">Keyboard</string>
 	<string name="control_chat">Chat</string>
 	<string name="control_debug">Debug</string>
-	<string name="control_screenshot">Screenshot</string>
-	<string name="controls">Controls</string>
+	<string name="control_zoom">Zoom (C)</string>
 	<string name="control_primary">Pri</string>
 	<string name="control_secondary">Sec</string>
 	<string name="control_shift">◇</string>

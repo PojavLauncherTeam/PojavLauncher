@@ -56,10 +56,10 @@
 		android:layout_height="30.0dip"
 		android:layout_marginTop="2.0dip"
 		android:layout_marginRight="2.0dip"
-		android:text="@string/control_screenshot"
+		android:text="@string/control_zoom"
 		android:layout_below="@id/control_talk"
 		android:layout_toRightOf="@id/control_thirdperson"
-		android:id="@+id/control_screenshot"/>
+		android:id="@+id/control_zoom"/>
 
 	<Button
 		android:background="@drawable/control_button"
