@@ -11,6 +11,7 @@ public class ControlView extends Button implements OnTouchListener
 	private GestureDetector mGestureDetector;
 	private View.OnClickListener mClickListener;
 	private ControlButton mProperties;
+	private boolean mCanMove = false;
 	
 	public ControlView(Context ctx, ControlButton properties) {
 		super(ctx);
@@ -44,6 +45,8 @@ public class ControlView extends Button implements OnTouchListener
 		if (mGestureDetector.onTouchEvent(event)) {
 			mClickListener.onClick(view);
 			return true;
+		} else if (!mCanMove) {
+			return false;
 		}
 		
 		switch (event.getActionMasked()) {
@@ -69,5 +72,9 @@ public class ControlView extends Button implements OnTouchListener
 		// super.setOnClickListener(p1);
 		
 		mClickListener = l;
+	}
+	
+	public void setCanMove(boolean z) {
+		mCanMove = z;
 	}
 }
