@@ -105,7 +105,7 @@ public class LaunchClassLoader extends BaseDexClassLoader {
 		//super(launchDexPath, launchOptimizedDirectory, launchLibrarySearchPath, parentClassLoader);
 		//System.out.println("MinecraftLaunchWrapper: How did Minecraft generated it: " + LaunchClassLoaderAgruments.launchDexPath);
 		
-        this.sources = new ArrayList<URL>(Arrays.asList(sources));
+        this.sources = new ArrayList<URL>(); // Arrays.asList(sources));
         Thread.currentThread().setContextClassLoader(this);
         addClassLoaderExclusion("java.");
         addClassLoaderExclusion("sun.");
