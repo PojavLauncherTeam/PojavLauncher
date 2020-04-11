@@ -1073,7 +1073,7 @@ public class AndroidGraphics2D extends Graphics2D {
                 mP = new Paint();
             }
             Paint.Style tmp = mP.getStyle();
-            mC.save(Canvas.CLIP_SAVE_FLAG);
+            mC.save(); // (CLIP_SAVE_FLAG);
 
             mP.setStyle(Paint.Style.FILL);
 

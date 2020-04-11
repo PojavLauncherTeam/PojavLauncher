@@ -33,7 +33,7 @@ public class VanillaTweakInjector implements IClassTransformer {
         ClassNode classNode = new ClassNode();
         new ClassReader(bytes).accept(classNode, 8);
         MethodNode mainMethod = null;
-        for (MethodNode methodNode : classNode.methods) {
+        for (MethodNode methodNode : (List<MethodNode>) classNode.methods) {
             if ("main".equals(methodNode.name)) {
                 mainMethod = methodNode;
                 break;
@@ -43,7 +43,7 @@ public class VanillaTweakInjector implements IClassTransformer {
             return bytes;
         }
         FieldNode workDirNode = null;
-        for (FieldNode fieldNode : classNode.fields) {
+        for (FieldNode fieldNode : (List<FieldNode>) classNode.fields) {
             if (Type.getDescriptor(File.class).equals(fieldNode.desc) && (fieldNode.access & 8) == 8) {
                 workDirNode = fieldNode;
                 break;

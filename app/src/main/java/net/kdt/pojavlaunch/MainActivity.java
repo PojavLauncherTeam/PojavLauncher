@@ -421,8 +421,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						}
 					} else {
 						switch (e.getActionMasked()) {
-							case e.ACTION_DOWN: // 0
-							case e.ACTION_POINTER_DOWN: // 5
+							case MotionEvent.ACTION_DOWN: // 0
+							case MotionEvent.ACTION_POINTER_DOWN: // 5
 								isTouchInHotbar = hudKeyHandled != -1;
 								if (isTouchInHotbar) {
 									sendKeyPress(hudKeyHandled, true);
@@ -444,9 +444,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									}
 								}
 								break;
-							case e.ACTION_UP: // 1
-							case e.ACTION_CANCEL: // 3
-							case e.ACTION_POINTER_UP: // 6
+							case MotionEvent.ACTION_UP: // 1
+							case MotionEvent.ACTION_CANCEL: // 3
+							case MotionEvent.ACTION_POINTER_UP: // 6
 								if (!isTouchInHotbar) {
 									AndroidDisplay.mouseX = x;
 									AndroidDisplay.mouseY = y;
@@ -543,17 +543,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 					
 					switch (e.getActionMasked()) {
-						case e.ACTION_DOWN: // 0
-						case e.ACTION_POINTER_DOWN: // 5
+						case MotionEvent.ACTION_DOWN: // 0
+						case MotionEvent.ACTION_POINTER_DOWN: // 5
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
 							initialX = x;
 							initialY = y;
 							theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
 							break;
 
-						case e.ACTION_UP: // 1
-						case e.ACTION_CANCEL: // 3
-						case e.ACTION_POINTER_UP: // 6
+						case MotionEvent.ACTION_UP: // 1
+						case MotionEvent.ACTION_CANCEL: // 3
+						case MotionEvent.ACTION_POINTER_UP: // 6
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 							/*
 							if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
@@ -740,13 +740,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onTouch(View v, MotionEvent e) {
         boolean isDown;
         switch (e.getActionMasked()) {
-            case TessState.T_DORMANT /*0*/:
-            case AppletLoader.STATE_CHECKING_FOR_UPDATES /*5*/:
+			case MotionEvent.ACTION_DOWN: // 0
+			case MotionEvent.ACTION_POINTER_DOWN: // 5
                 isDown = true;
                 break;
-            case TessState.T_IN_POLYGON /*1*/:
-            case AppletLoader.STATE_DETERMINING_PACKAGES /*3*/:
-            case AppletLoader.STATE_DOWNLOADING /*6*/:
+			case MotionEvent.ACTION_UP: // 1
+			case MotionEvent.ACTION_CANCEL: // 3
+			case MotionEvent.ACTION_POINTER_UP: // 6
                 isDown = false;
                 break;
             default:

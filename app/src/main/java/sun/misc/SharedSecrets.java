@@ -44,7 +44,7 @@ import java.security.AccessController;
  for this purpose, namely the loss of compile-time checking. */
 
 public class SharedSecrets {
-    private static final FakeUnsafe FakeUnsafe = FakeUnsafe.getUnsafe();
+    private static final FakeUnsafe fakeUnsafe = sun.misc.FakeUnsafe.getUnsafe();
     private static JavaUtilJarAccess javaUtilJarAccess;
     //private static JavaLangAccess javaLangAccess;
     private static JavaIOAccess javaIOAccess;
@@ -61,7 +61,7 @@ public class SharedSecrets {
         if (javaUtilJarAccess == null) {
             // Ensure JarFile is initialized; we know that that class
             // provides the shared secret
-            FakeUnsafe.ensureClassInitialized(JarFile.class);
+            fakeUnsafe.ensureClassInitialized(JarFile.class);
         }
         return javaUtilJarAccess;
     }
@@ -92,7 +92,7 @@ public class SharedSecrets {
 
     public static JavaNetHttpCookieAccess getJavaNetHttpCookieAccess() {
         if (javaNetHttpCookieAccess == null)
-            FakeUnsafe.ensureClassInitialized(java.net.HttpCookie.class);
+            fakeUnsafe.ensureClassInitialized(java.net.HttpCookie.class);
         return javaNetHttpCookieAccess;
     }
 
@@ -105,7 +105,7 @@ public class SharedSecrets {
             // Ensure java.nio.ByteOrder is initialized; we know that
             // this class initializes java.nio.Bits that provides the
             // shared secret.
-            FakeUnsafe.ensureClassInitialized(java.nio.ByteOrder.class);
+            fakeUnsafe.ensureClassInitialized(java.nio.ByteOrder.class);
         }
         return javaNioAccess;
     }
@@ -116,7 +116,7 @@ public class SharedSecrets {
 
     public static JavaIOAccess getJavaIOAccess() {
         if (javaIOAccess == null) {
-            FakeUnsafe.ensureClassInitialized(Console.class);
+            fakeUnsafe.ensureClassInitialized(Console.class);
         }
         return javaIOAccess;
     }
@@ -127,7 +127,7 @@ public class SharedSecrets {
 
     public static JavaIOFileDescriptorAccess getJavaIOFileDescriptorAccess() {
         if (javaIOFileDescriptorAccess == null)
-            FakeUnsafe.ensureClassInitialized(FileDescriptor.class);
+            fakeUnsafe.ensureClassInitialized(FileDescriptor.class);
 
         return javaIOFileDescriptorAccess;
     }
@@ -140,7 +140,7 @@ public class SharedSecrets {
     public static JavaSecurityProtectionDomainAccess
 	getJavaSecurityProtectionDomainAccess() {
 		if (javaSecurityProtectionDomainAccess == null)
-			FakeUnsafe.ensureClassInitialized(ProtectionDomain.class);
+			fakeUnsafe.ensureClassInitialized(ProtectionDomain.class);
 		return javaSecurityProtectionDomainAccess;
     }
 /*
@@ -173,7 +173,7 @@ public class SharedSecrets {
 
     public static JavaUtilZipAccess getJavaUtilZipAccess() {
         if (javaUtilZipAccess == null) {
-            FakeUnsafe.ensureClassInitialized(Adler32.class);
+            fakeUnsafe.ensureClassInitialized(Adler32.class);
         }
         return javaUtilZipAccess;
     }

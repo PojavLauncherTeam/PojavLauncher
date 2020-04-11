@@ -16,7 +16,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
 
 	private Context ctx;
 	private ProgressDialog build;
-	@Override
+
 	public RefreshTokenTask(Context ctx, RefreshListener listener) {
 		this.ctx = ctx;
 		this.listener = listener;
