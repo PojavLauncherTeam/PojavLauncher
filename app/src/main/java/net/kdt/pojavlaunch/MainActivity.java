@@ -389,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				});
 				
-			System.loadLibrary("gl04es");
+			System.loadLibrary("Regal");
 
 			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
 			AndroidGraphics2D.getInstance(this, new Canvas(awtGraphics), null);
@@ -950,7 +950,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			System.out.println(Cipher.getInstance("RSA"));
 			System.out.println(Cipher.getInstance("RSA/ECB/PKCS1Padding"));
 */
-			if (true) { // android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
+			if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
 				// FUUUUU I DON'T KNOW FIXME
 				Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 				// Cipher.getInstance("RSA", rsaPkcs1Cipher.getProvider());
