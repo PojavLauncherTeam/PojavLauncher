@@ -69,6 +69,10 @@ public class ControlView extends Button implements OnTouchListener
 		
 		return false;
 	}
+	
+	public View.OnClickListener getOnClickListener() {
+		return mClickListener;
+	}
 
 	@Override
 	public void setOnClickListener(View.OnClickListener l) {

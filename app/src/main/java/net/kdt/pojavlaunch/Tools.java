@@ -475,6 +475,10 @@ public final class Tools
 	
 	public static void write(String path, byte[] content) throws Exception
 	{
+		File outPath = new File(path);
+		outPath.getParentFile().mkdirs();
+		outPath.createNewFile();
+		
 		FileOutputStream fos = new FileOutputStream(path);
 		fos.write(content);
 		fos.close();
