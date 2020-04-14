@@ -646,7 +646,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			glSurfaceView.setPreserveEGLContextOnPause(true);
 			glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
 			glSurfaceView.requestRender();
-			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			Tools.showError(this, e, true);
@@ -818,7 +817,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.simplelog.level", "INFO");
 			
 			// Change info for useful dump
-			System.setProperty("java.vm.info", Build.MANUFACTURER + " " + Build.MODEL + " [Android " + Build.VERSION.SDK_INT + "]");
+			System.setProperty("java.vm.info", Build.MANUFACTURER + " " + Build.MODEL + ", Android " + Build.VERSION.RELEASE);
+			
+			GLContext.getCapabilities();
+			
+			ContextCapabilities cc = new ContextCapabilities();
         } catch (Exception e) {
             Tools.showError(MainActivity.this, e, true);
         }
