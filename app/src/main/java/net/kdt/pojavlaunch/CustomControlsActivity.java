@@ -44,8 +44,7 @@ public class CustomControlsActivity extends AppCompatActivity
 							ctrlBtn.name = "New";
 							ctrlBtn.x = 100;
 							ctrlBtn.y = 100;
-							mCtrl.button.add(ctrlBtn);
-							ctrlLayout.refreshLayout();
+							ctrlLayout.addControlButton(ctrlBtn);
 							break;
 						case R.id.menu_ctrl_edit: // openLogOutput();
 							break;
@@ -60,14 +59,14 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		
 		mCtrl = new CustomControls();
-		
+		/*
 		ControlButton ctrlEx = new ControlButton();
 		ctrlEx.name = "Test";
 		ctrlEx.x = 100;
 		ctrlEx.y = 100;
 		
 		mCtrl.button.add(ctrlEx);
-		
+		*/
 		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.loadLayout(mCtrl);
 		ctrlLayout.setCanMove(true);

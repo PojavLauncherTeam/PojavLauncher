@@ -21,6 +21,7 @@ public class ControlsLayout extends FrameLayout
 	
 	public void loadLayout(CustomControls controlLayout) {
 		mLayout = controlLayout;
+		removeAllViews();
 		for (ControlButton button : controlLayout.button) {
 			final ControlView view = new ControlView(getContext(), button);
 			view.setOnClickListener(new View.OnClickListener(){
@@ -39,9 +40,22 @@ public class ControlsLayout extends FrameLayout
 		}
 	}
 	
-	public void refreshLayout(/* CustomControls controlLayout */) {
-		removeAllViews();
-		loadLayout(mLayout);
+	public void addControlButton(ControlButton controlButton) {
+		mLayout.button.add(controlButton);
+		
+		final ControlView view = new ControlView(getContext(), controlButton);
+		view.setOnClickListener(new View.OnClickListener(){
+
+				@Override
+				public void onClick(View p1) {
+					AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+					alert.setTitle(getResources().getString(R.string.global_edit) + " " + view.getText());
+					// alert.setView(edit);
+					alert.show();
+				}
+			});
+		view.setCanMove(mCanMove);
+		addView(view);
 		
 		// loadLayout(controlLayout);
 	}

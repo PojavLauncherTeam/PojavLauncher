@@ -26,6 +26,8 @@ public class ControlView extends Button implements OnTouchListener
 		setText(properties.name);
 		setTranslationX(moveX = properties.x);
 		setTranslationY(moveY = properties.y);
+		
+		setLayoutParams(new FrameLayout.LayoutParams(properties.width, properties.height));
 	}
 
 	@Override

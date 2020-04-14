@@ -33,6 +33,7 @@
 	
 	<!-- Hint -->
 	<string name="hint_select_account">To select, click it. To delete an account, hold it.</string>
+	<string name="hint_control_mapping">Swipe from right to left to open menu\n◀</string>
 	
 	<!-- Warning -->
 	<string name="warning_title">Warning</string>
@@ -95,6 +96,7 @@
 	<!-- Global strings -->
 	<string name="global_add">Add</string>
 	<string name="global_edit">Edit</string>
+	<string name="global_name">Name</string>
 	<string name="global_remove">Remove</string>
 	<string name="global_save">Save</string>
 	<string name="global_error_field_empty">This field can\'t be empty</string>
@@ -131,6 +133,7 @@
 	
 	<!-- MainActivity: Control buttons -->
 	<string name="controls">Controls</string>
+	<string name="control_toggle">GUI</string>
 	<string name="control_keyboard">Keyboard</string>
 	<string name="control_chat">Chat</string>
 	<string name="control_debug">Debug</string>
@@ -154,10 +157,12 @@
 	<string name="control_viewout">Log output</string>
 	<string name="control_adebug">PointerCapture Debug</string>
 	<string name="control_customkey">Send custom keycode</string>
-	
-	<!--PointerCapture debug</string>-->
+
 	<string name="control_more3"></string>
 	<string name="control_more4"></string>
+	
+	<string name="customctrl_keyname">LWJGL Keycode</string>
+	<string name="customctrl_hidden">Hidden</string>
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Update console</string>

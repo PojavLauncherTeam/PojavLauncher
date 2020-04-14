@@ -36,6 +36,7 @@ import org.lwjgl.util.glu.tessellation.*;
 
 import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -275,6 +276,27 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			
 			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 			
+			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+			specialButtons[0].specialButtonListener = new View.OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					showKeyboard(); 
+				}
+			};
+			specialButtons[1].specialButtonListener = new View.OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					switch(overlayView.getVisibility()){
+						case View.VISIBLE: overlayView.setVisibility(View.GONE);
+							break;
+						case View.GONE: overlayView.setVisibility(View.VISIBLE);
+					}
+				}
+			};
 
 			// toggleGui(null);
 			onClick(toggleControlButton);
