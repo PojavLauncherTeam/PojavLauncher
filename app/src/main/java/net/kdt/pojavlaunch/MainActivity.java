@@ -412,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				});
 				
-			System.loadLibrary("gl04es");
+			// System.loadLibrary("Regal");
 
 			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
 			AndroidGraphics2D.getInstance(this, new Canvas(awtGraphics), null);
