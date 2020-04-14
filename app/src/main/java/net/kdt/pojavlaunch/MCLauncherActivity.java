@@ -843,7 +843,9 @@ public class MCLauncherActivity extends AppCompatActivity
 								checkUpdate();
 							} break;
 						case 3:{ // Custom controls
-								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
+								if (Tools.enableDevFeatures) {
+									startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
+								}
 							} break;
 						case 4:{ // Settings
 								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
@@ -919,7 +921,7 @@ public class MCLauncherActivity extends AppCompatActivity
 	public void openSelectMod()
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select a mod to add");
+		builder.setTitle(R.string.alerttitle_installmod);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		AlertDialog dialog = builder.create();
@@ -931,7 +933,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 	private void installOptiFine() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select OptiFine jar file");
+		builder.setTitle(R.string.alerttitle_installoptifine);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();

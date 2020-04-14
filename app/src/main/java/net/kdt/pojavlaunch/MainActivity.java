@@ -91,9 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private LinearLayout touchPad;
 	private ImageView mousePointer;
 	//private EditText hiddenEditor;
-	private ViewGroup overlayView;
-	private Drawable secondaryButtonColorBackground;
-    private Drawable secondaryButtonDefaultBackground;
+	// private ViewGroup overlayView;
 	private MCProfile.Builder mProfile;
 	
 	private DrawerLayout drawerLayout;
@@ -115,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private JMinecraftVersionList.Version mVersionInfo;
 	
 	private View.OnTouchListener glTouchListener;
+	
+	private Button[] controlButtons;
 	
 	/*
 	private LinearLayout contentCanvas;
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					@Override
 					public boolean onNavigationItemSelected(MenuItem menuItem) {
 						switch (menuItem.getItemId()) {
-							case R.id.nav_forceclose: forceCloseSure();
+							case R.id.nav_forceclose: dialogForceClose();
 								break;
 							case R.id.nav_viewlog: openLogOutput();
 								break;
@@ -239,10 +239,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			this.zoomButton = findButton(R.id.control_zoom);
 			this.listPlayersButton = findButton(R.id.control_listplayers);
 			this.toggleControlButton = findButton(R.id.control_togglecontrol);
-			this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
-			this.secondaryButtonDefaultBackground = this.secondaryButton.getBackground();
-			this.secondaryButtonColorBackground = new ColorDrawable(-65536 /* color ??? */);
-
+			this.controlButtons = new Button[]{
+				upButton, downButton, leftButton, rightButton,
+				jumpButton, primaryButton, secondaryButton,
+				debugButton, shiftButton, keyboardButton,
+				inventoryButton, talkButton, thirdPersonButton,
+				listPlayersButton
+			};
+			// this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
+			
 			//this.hiddenEditor = findViewById(R.id.hiddenTextbox);
 
 			// Mouse pointer part
@@ -288,13 +293,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			specialButtons[1].specialButtonListener = new View.OnClickListener(){
 
 				@Override
-				public void onClick(View p1)
+				public void onClick(View view)
 				{
-					switch(overlayView.getVisibility()){
-						case View.VISIBLE: overlayView.setVisibility(View.GONE);
-							break;
-						case View.GONE: overlayView.setVisibility(View.VISIBLE);
-					}
+					MainActivity.this.onClick(toggleControlButton);
 				}
 			};
 
@@ -458,6 +459,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									if (!rightOverride) {
 										AndroidDisplay.mouseLeft = true;
 									}
+									
 									if (AndroidDisplay.grab) {
 										AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
 										initialX = x;
@@ -473,7 +475,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									AndroidDisplay.mouseX = x;
 									AndroidDisplay.mouseY = y;
 							
-									AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+									// TODO uncomment after fix wrong trigger
+									// AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 									if (!rightOverride) {
 										AndroidDisplay.mouseLeft = false;
 									}
@@ -509,11 +512,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								break;
 						}
 					}
-
-					// System.out.println("Post touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
 					
 					return true;
-					// If onClick fail with false, change back to true
+					// return !AndroidDisplay.grab;
 				}
 			};
 
@@ -613,7 +614,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
 					@Override
 					public boolean onHover(View p1, MotionEvent p2) {
-						if (!AndroidDisplay.grab) {
+						if (!AndroidDisplay.grab && isResumed()) {
 							return glTouchListener.onTouch(p1, p2);
 						}
 						return true;
@@ -749,11 +750,19 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.control_togglecontrol: {
+				/*
 				switch(overlayView.getVisibility()){
 					case View.VISIBLE: overlayView.setVisibility(View.GONE);
 						break;
 					case View.GONE: overlayView.setVisibility(View.VISIBLE);
 				}
+				*/
+				
+				for (Button button : controlButtons) {
+					button.setVisibility(button.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+				}
+				
+				zoomButton.setVisibility((zoomButton.getVisibility() == View.GONE && mVersionInfo.optifineLib != null) ? View.VISIBLE : View.GONE);
 			}
 		}
 	}
@@ -785,6 +794,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				if (AndroidDisplay.grab) {
 					sendMouseButton(1, isDown);
 				} else {
+					AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, ((byte) (isDown ? 1 : 0)), AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
 					setRightOverride(isDown);
 				} break;
 			case R.id.control_debug: sendKeyPress(Keyboard.KEY_F3, isDown); break;
@@ -1152,7 +1162,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		((Button) view).setText(isVis ? R.string.control_mouseoff: R.string.control_mouseon);
 	}
 	
-	public void forceCloseSure()
+	public void dialogForceClose()
 	{
 		new AlertDialog.Builder(this)
 			.setMessage(R.string.mcn_exit_confirm)
@@ -1208,7 +1218,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	
 	private void setRightOverride(boolean val) {
         this.rightOverride = val;
-        this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
+        // this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
     }
 	
 	public void sendKeyPress(int keyCode, boolean status) {

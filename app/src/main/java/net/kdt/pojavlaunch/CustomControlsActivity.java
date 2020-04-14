@@ -8,6 +8,8 @@ import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
 import com.google.gson.*;
+import com.kdt.filerapi.*;
+import java.io.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 
 public class CustomControlsActivity extends AppCompatActivity
@@ -39,6 +41,9 @@ public class CustomControlsActivity extends AppCompatActivity
 				@Override
 				public boolean onNavigationItemSelected(MenuItem menuItem) {
 					switch (menuItem.getItemId()) {
+						case R.id.menu_ctrl_load:
+							actionLoad();
+							break;
 						case R.id.menu_ctrl_add:
 							ControlButton ctrlBtn = new ControlButton();
 							ctrlBtn.name = "New";
@@ -119,5 +124,26 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		dialog.show();
 		
+	}
+	
+	private void actionLoad() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select OptiFine jar file");
+		builder.setPositiveButton(android.R.string.cancel, null);
+
+		final AlertDialog dialog = builder.create();
+		FileListView flv = new FileListView(this);
+		flv.setFileSelectedListener(new FileSelectedListener(){
+
+				@Override
+				public void onFileSelected(File file, String path, String name) {
+					if (name.endsWith(".json")) {
+						// doInstallOptiFine(file);
+						dialog.dismiss();
+					}
+				}
+			});
+		dialog.setView(flv);
+		dialog.show();
 	}
 }
