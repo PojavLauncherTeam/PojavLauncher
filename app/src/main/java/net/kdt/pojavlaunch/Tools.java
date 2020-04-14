@@ -27,7 +27,7 @@ import java.awt.datatransfer.*;
 
 public final class Tools
 {
-	public static boolean enableDevFeatures = true;
+	public static boolean enableDevFeatures = BuildConfig.DEBUG;
 	
 	public static String APP_NAME = "null";
 	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/minecraft";
@@ -475,6 +475,10 @@ public final class Tools
 	
 	public static void write(String path, byte[] content) throws Exception
 	{
+		File outPath = new File(path);
+		outPath.getParentFile().mkdirs();
+		outPath.createNewFile();
+		
 		FileOutputStream fos = new FileOutputStream(path);
 		fos.write(content);
 		fos.close();

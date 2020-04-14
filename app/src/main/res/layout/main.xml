@@ -42,18 +42,199 @@
 
 			</LinearLayout>
 
-			<include
-				android:id="@+id/main_control_overlay"
-				android:layout_width="match_parent"
-				android:layout_height="fill_parent"
-				android:alpha="0.7"
-				layout="@layout/overlay"/>
+
+			<Button
+				android:id="@+id/control_debug"
+				android:background="@drawable/control_button"
+				android:layout_width="wrap_content"
+				android:layout_height="30.0dip"
+				android:layout_marginLeft="2.0dip"
+				android:layout_marginTop="2.0dip"
+				android:text="@string/control_debug"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentTop="true"
+				android:layout_marginRight="2dp"/>
+
+			<Button
+				android:id="@+id/control_talk"
+				android:background="@drawable/control_button"
+				android:layout_width="wrap_content"
+				android:layout_height="30.0dip"
+				android:layout_marginTop="2.0dip"
+				android:layout_marginRight="2.0dip"
+				android:text="@string/control_chat"
+				android:layout_toRightOf="@id/control_debug"
+				android:layout_alignParentTop="true"/>
+
+			<Button
+				android:id="@+id/control_keyboard"
+				android:background="@drawable/control_button"
+				android:layout_width="wrap_content"
+				android:layout_height="30.0dip"
+				android:layout_marginTop="2.0dip"
+				android:layout_marginRight="2.0dip"
+				android:text="@string/control_keyboard"
+				android:layout_toRightOf="@id/control_talk"
+				android:layout_alignParentTop="true"/>
+
+			<Button
+				android:id="@+id/control_thirdperson"
+				android:background="@drawable/control_button"
+				android:layout_width="wrap_content"
+				android:layout_height="30.0dip"
+				android:layout_marginLeft="2.0dip"
+				android:layout_marginTop="2.0dip"
+				android:layout_marginRight="2.0dip"
+				android:text="@string/control_thirdperson"
+				android:layout_below="@id/control_debug"
+				android:layout_alignParentLeft="true"/>
+
+			<Button
+				android:background="@drawable/control_button"
+				android:layout_width="wrap_content"
+				android:layout_height="30.0dip"
+				android:layout_marginTop="2.0dip"
+				android:layout_marginRight="2.0dip"
+				android:text="@string/control_zoom"
+				android:layout_below="@id/control_talk"
+				android:layout_toRightOf="@id/control_thirdperson"
+				android:id="@+id/control_zoom"/>
+
+			<Button
+				android:background="@drawable/control_button"
+				android:layout_width="wrap_content"
+				android:layout_height="30.0dip"
+				android:layout_marginTop="2.0dip"
+				android:layout_marginRight="2.0dip"
+				android:text="@string/control_listplayers"
+				android:layout_toRightOf="@id/control_keyboard"
+				android:id="@+id/control_listplayers"/>
+
+			<Button
+				android:textSize="32.0sp"
+				android:id="@+id/control_down"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="68.0dip"
+				android:layout_marginBottom="14.0dip"
+				android:text="@string/control_down"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:textSize="32.0sp"
+				android:id="@+id/control_up"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="68.0dip"
+				android:layout_marginBottom="122.0dip"
+				android:text="@string/control_up"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:textSize="32.0sp"
+				android:id="@+id/control_left"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="14.0dip"
+				android:layout_marginBottom="68.0dip"
+				android:text="@string/control_left"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:textSize="32.0sp"
+				android:id="@+id/control_right"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="122.0dip"
+				android:layout_marginBottom="68.0dip"
+				android:text="@string/control_right"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:id="@+id/control_jump"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginRight="68.0dip"
+				android:layout_marginBottom="68.0dip"
+				android:text="@string/control_jump"
+				android:layout_alignParentBottom="true"
+				android:layout_alignParentRight="true"/>
+
+			<Button
+				android:textSize="16.0sp"
+				android:id="@+id/control_primary"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="14.0dip"
+				android:layout_marginBottom="122.0dip"
+				android:text="@string/control_primary"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:textSize="16.0sp"
+				android:id="@+id/control_secondary"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="122.0dip"
+				android:layout_marginBottom="122.0dip"
+				android:text="@string/control_secondary"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:textSize="20.0sp"
+				android:id="@+id/control_shift"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="68.0dip"
+				android:layout_marginBottom="68.0dip"
+				android:text="@string/control_shift"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:textSize="16.0sp"
+				android:id="@+id/control_inventory"
+				android:background="@drawable/control_button"
+				android:layout_width="50.0dip"
+				android:layout_height="50.0dip"
+				android:layout_marginLeft="122.0dip"
+				android:layout_marginBottom="14.0dip"
+				android:text="@string/control_inventory"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true"/>
+
+			<Button
+				android:layout_height="30dp"
+				android:layout_width="wrap_content"
+				android:text="@string/control_mouseoff"
+				android:layout_below="@id/control_debug"
+				android:layout_alignParentRight="true"
+				android:background="@drawable/control_button"
+				android:layout_marginRight="2dp"
+				android:layout_marginTop="2dp"
+				android:onClick="toggleMouse"
+				android:layout_alignParentTop="true"
+				android:id="@+id/control_mouse_toggle"/>
 
 			<Button
 				android:background="@drawable/control_button"
 				android:layout_width="50dp"
 				android:layout_height="50dp"
-				android:text="GUI"
+				android:text="@string/control_toggle"
 				android:layout_marginBottom="14dp"
 				android:layout_marginLeft="14dp"
 				android:layout_gravity="bottom"

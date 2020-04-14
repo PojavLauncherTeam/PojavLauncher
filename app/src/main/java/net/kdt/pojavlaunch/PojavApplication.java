@@ -5,6 +5,7 @@ import android.os.*;
 import android.content.pm.PackageManager.*;
 import android.content.pm.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 
 public class PojavApplication extends Application
 {
@@ -22,6 +23,11 @@ public class PojavApplication extends Application
 			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
 			
 			PojavPreferenceActivity.loadPreferences(this);
+			
+			ControlButton.pixelOf50dp = (int) Tools.dpToPx(this, 50);
+			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+			specialButtons[0].name = getString(R.string.control_keyboard);
+			specialButtons[1].name = getString(R.string.control_toggle);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -33,6 +33,7 @@
 	
 	<!-- Hint -->
 	<string name="hint_select_account">To select, click it. To delete an account, hold it.</string>
+	<string name="hint_control_mapping">Swipe from right to left to open menu\n◀</string>
 	
 	<!-- Warning -->
 	<string name="warning_title">Warning</string>
@@ -42,6 +43,11 @@
 	<string name="warning_action_tryanyway">Try anyway</string>
 	<string name="warning_action_exit">Exit</string>
 	<string name="warning_remove_account">This account will be removed!</string>
+	
+	<!-- AlertDialog title -->
+	<string name="alerttitle_selectkeymap">Select a keymap json</string>
+	<string name="alerttitle_installmod">Select a mod to add</string>
+	<string name="alerttitle_installoptifine">Select OptiFine jar file</string>
 	
 	<!-- Error messages -->
 	<string name="error_checklog">Error! Please check the log below: %s</string>
@@ -95,6 +101,8 @@
 	<!-- Global strings -->
 	<string name="global_add">Add</string>
 	<string name="global_edit">Edit</string>
+	<string name="global_load">Load</string>
+	<string name="global_name">Name</string>
 	<string name="global_remove">Remove</string>
 	<string name="global_save">Save</string>
 	<string name="global_error_field_empty">This field can\'t be empty</string>
@@ -131,6 +139,7 @@
 	
 	<!-- MainActivity: Control buttons -->
 	<string name="controls">Controls</string>
+	<string name="control_toggle">GUI</string>
 	<string name="control_keyboard">Keyboard</string>
 	<string name="control_chat">Chat</string>
 	<string name="control_debug">Debug</string>
@@ -154,10 +163,12 @@
 	<string name="control_viewout">Log output</string>
 	<string name="control_adebug">PointerCapture Debug</string>
 	<string name="control_customkey">Send custom keycode</string>
-	
-	<!--PointerCapture debug</string>-->
+
 	<string name="control_more3"></string>
 	<string name="control_more4"></string>
+	
+	<string name="customctrl_keyname">LWJGL Keycode</string>
+	<string name="customctrl_hidden">Hidden</string>
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Update console</string>

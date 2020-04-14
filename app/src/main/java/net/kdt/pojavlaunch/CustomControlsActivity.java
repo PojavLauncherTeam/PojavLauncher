@@ -8,20 +8,29 @@ import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
 import com.google.gson.*;
+import com.kdt.filerapi.*;
+import java.io.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 
 public class CustomControlsActivity extends AppCompatActivity
 {
 	private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
+
+	private ControlsLayout ctrlLayout;
 	
 	private String selectedName = "";
 
 	private CustomControls mCtrl;
+	
+	private Gson gson;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.control_mapping);
+		
+		gson = new GsonBuilder().setPrettyPrinting().create();
 		
 		// Menu
 		drawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
@@ -32,13 +41,15 @@ public class CustomControlsActivity extends AppCompatActivity
 				@Override
 				public boolean onNavigationItemSelected(MenuItem menuItem) {
 					switch (menuItem.getItemId()) {
+						case R.id.menu_ctrl_load:
+							actionLoad();
+							break;
 						case R.id.menu_ctrl_add:
 							ControlButton ctrlBtn = new ControlButton();
 							ctrlBtn.name = "New";
 							ctrlBtn.x = 100;
 							ctrlBtn.y = 100;
-							mCtrl.button.add(ctrlBtn);
-							
+							ctrlLayout.addControlButton(ctrlBtn);
 							break;
 						case R.id.menu_ctrl_edit: // openLogOutput();
 							break;
@@ -53,15 +64,15 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		
 		mCtrl = new CustomControls();
-		
+		/*
 		ControlButton ctrlEx = new ControlButton();
 		ctrlEx.name = "Test";
 		ctrlEx.x = 100;
 		ctrlEx.y = 100;
 		
 		mCtrl.button.add(ctrlEx);
-		
-		ControlsLayout ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
+		*/
+		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.loadLayout(mCtrl);
 		ctrlLayout.setCanMove(true);
 	}
@@ -77,6 +88,14 @@ public class CustomControlsActivity extends AppCompatActivity
 		builder.setView(edit);
 		builder.setPositiveButton(android.R.string.ok, null);
 		builder.setNegativeButton(android.R.string.cancel, null);
+		builder.setNeutralButton("Exit without save", new AlertDialog.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface p1, int p2)
+				{
+					CustomControlsActivity.super.onBackPressed();
+				}
+			});
 		final AlertDialog dialog = builder.create();
 		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
 
@@ -92,8 +111,9 @@ public class CustomControlsActivity extends AppCompatActivity
 									edit.setError(getResources().getString(R.string.global_error_field_empty));
 								} else {
 									try {
-										Tools.write(Tools.CTRLMAP_PATH + "/" + edit.getText().toString(), new Gson().toJson(mCtrl));
+										Tools.write(Tools.CTRLMAP_PATH + "/" + edit.getText().toString() + ".json", gson.toJson(mCtrl));
 										dialog.dismiss();
+										CustomControlsActivity.super.onBackPressed();
 									} catch (Throwable th) {
 										Tools.showError(CustomControlsActivity.this, th);
 									}
@@ -104,6 +124,26 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		dialog.show();
 		
-		super.onBackPressed();
+	}
+	
+	private void actionLoad() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select OptiFine jar file");
+		builder.setPositiveButton(android.R.string.cancel, null);
+
+		final AlertDialog dialog = builder.create();
+		FileListView flv = new FileListView(this);
+		flv.setFileSelectedListener(new FileSelectedListener(){
+
+				@Override
+				public void onFileSelected(File file, String path, String name) {
+					if (name.endsWith(".json")) {
+						// doInstallOptiFine(file);
+						dialog.dismiss();
+					}
+				}
+			});
+		dialog.setView(flv);
+		dialog.show();
 	}
 }

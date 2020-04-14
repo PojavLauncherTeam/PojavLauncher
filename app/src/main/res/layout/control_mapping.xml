@@ -7,12 +7,24 @@
 	android:layout_alignParentRight="true"
 	android:id="@+id/customctrl_drawerlayout">
 
-	<net.kdt.pojavlaunch.value.customcontrols.ControlsLayout
-		android:id="@+id/customctrl_controllayout"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+	<RelativeLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content">
 
-	</net.kdt.pojavlaunch.value.customcontrols.ControlsLayout>
+		<TextView
+			android:text="@string/hint_control_mapping"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_alignParentRight="true"/>
+
+		<net.kdt.pojavlaunch.value.customcontrols.ControlsLayout
+			android:id="@+id/customctrl_controllayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+		</net.kdt.pojavlaunch.value.customcontrols.ControlsLayout>
+
+	</RelativeLayout>
 
 	<android.support.design.widget.NavigationView
 		android:layout_width="200dp"
@@ -21,6 +33,6 @@
 		android:fitsSystemWindows="true"
 		app:menu="@menu/menu_customctrl"
 		android:id="@+id/customctrl_navigation_view"/>
-
+	
 </android.support.v4.widget.DrawerLayout>
 
