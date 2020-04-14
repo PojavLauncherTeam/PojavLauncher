@@ -818,10 +818,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			
 			// Change info for useful dump
 			System.setProperty("java.vm.info", Build.MANUFACTURER + " " + Build.MODEL + ", Android " + Build.VERSION.RELEASE);
-			
-			GLContext.getCapabilities();
-			
-			ContextCapabilities cc = new ContextCapabilities();
         } catch (Exception e) {
             Tools.showError(MainActivity.this, e, true);
         }

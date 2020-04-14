@@ -225,10 +225,15 @@ public final class GLContext {
 	static int getSupportedExtensions(final Set<String> supported_extensions) {
 		// Detect OpenGL version first
 
-		final String version = "1.3";/*glGetString(GL_VERSION);*/
-		if ( version == null )
-			throw new IllegalStateException("glGetString(GL_VERSION) returned null - possibly caused by missing current context.");
-
+		/* final */ String version = glGetString(GL_VERSION);
+		
+		if (version == null) {
+			// throw new IllegalStateException("glGetString(GL_VERSION) returned null - possibly caused by missing current context.");
+			
+			System.err.println("Unable to get real OpenGL version, inserting OpenGL 2.0.");
+			version = "2.0";
+		}
+		
 		final StringTokenizer version_tokenizer = new StringTokenizer(version, ". ");
 		final String major_string = version_tokenizer.nextToken();
 		final String minor_string = version_tokenizer.nextToken();
@@ -270,7 +275,7 @@ public final class GLContext {
 				supported_extensions.add(tokenizer.nextToken());
 		} else {
 			// Use forward compatible indexed EXTENSIONS
-			final int extensionCount = glGetInteger(GL_NUM_EXTENSIONS);
+			final int extensionCount = GL11.glGetInteger(GL_NUM_EXTENSIONS);
 
 			for ( int i = 0; i < extensionCount; i++ )
 				supported_extensions.add(glGetStringi(GL_EXTENSIONS, i));
@@ -280,7 +285,7 @@ public final class GLContext {
 				Util.checkGLError(); // Make sure we have no errors up to this point
 
 				try {
-					profileMask = glGetInteger(GL_CONTEXT_PROFILE_MASK);
+					profileMask = GL11.glGetInteger(GL_CONTEXT_PROFILE_MASK);
 					// Retrieving GL_CONTEXT_PROFILE_MASK may generate an INVALID_OPERATION error on certain implementations, ignore.
 					// Happens on pre10.1 ATI drivers, when ContextAttribs.withProfileCompatibility is not used
 					Util.checkGLError();
