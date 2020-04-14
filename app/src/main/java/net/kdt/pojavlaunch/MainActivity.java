@@ -949,7 +949,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			System.out.println(Cipher.getInstance("RSA"));
 			System.out.println(Cipher.getInstance("RSA/ECB/PKCS1Padding"));
 */
-			if (true) { // android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
+			if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
 				// FUUUUU I DON'T KNOW FIXME
 				Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 				// Cipher.getInstance("RSA", rsaPkcs1Cipher.getProvider());

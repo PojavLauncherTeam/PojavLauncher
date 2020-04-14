@@ -843,7 +843,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								checkUpdate();
 							} break;
 						case 3:{ // Custom controls
-								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
+								// startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
 							} break;
 						case 4:{ // Settings
 								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
