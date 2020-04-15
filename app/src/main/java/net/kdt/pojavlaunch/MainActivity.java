@@ -926,7 +926,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
 			String optifineJar = Tools.libraries + "/" + Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
 
-			AndroidOptiFineUtilities.originalOptifineJar = optifineJar;
+			AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
 		}
 		
 		File optDir = getDir("dalvik-cache", 0);

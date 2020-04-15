@@ -107,5 +107,31 @@
 		android:layout_height="2dp"
 		android:layout_width="match_parent"/>
 
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_margin="10dp">
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:text="@string/mcl_setting_title_forgetoptifpath"
+			android:textStyle="bold"/>
+
+		<Switch
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:id="@+id/settings_switch_forgetoptifpath"
+			android:text="@string/mcl_setting_subtitle_forgetoptifpath"/>
+
+	</LinearLayout>
+
+	<View
+		android:background="?android:attr/dividerVertical"
+		android:layout_height="2dp"
+		android:layout_width="match_parent"/>
+	
 </LinearLayout>
 
