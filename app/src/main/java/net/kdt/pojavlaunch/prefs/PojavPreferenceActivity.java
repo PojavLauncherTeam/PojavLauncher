@@ -11,11 +11,12 @@ import com.kdt.mcgui.app.*;
 public class PojavPreferenceActivity extends MineActivity
 {
 	public static boolean PREF_FREEFORM = false;
+	public static boolean PREF_FORGETOF = false;
 	public static float PREF_BUTTONSIZE = 1.0f;
 	
 	private SeekBar viewSeekDxRef, viewSeekControlSize;
 	private TextView viewSeekProgressDxRef, viewSeekProgressControl;
-	private Switch viewSwitchFreeform;
+	private Switch viewSwitchFreeform, viewSwitchForgetOF;
 	
 	private SharedPreferences mainPreference;
 	@Override
@@ -101,6 +102,19 @@ public class PojavPreferenceActivity extends MineActivity
 			});
 		viewSwitchFreeform.setChecked(PREF_FREEFORM);
 		viewSwitchFreeform.setEnabled(Build.VERSION.SDK_INT >= 24);
+		
+		// Forget OptiFine path
+		viewSwitchForgetOF = (Switch) findViewById(R.id.settings_switch_forgetoptifpath);
+		viewSwitchForgetOF.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener(){
+
+				@Override
+				public void onCheckedChanged(CompoundButton b, boolean z)
+				{
+					mainPrefEdit.putBoolean("forgetOptifinePath", z);
+					mainPrefEdit.commit();
+				}
+			});
+		viewSwitchForgetOF.setChecked(PREF_FORGETOF);
 	}
 
 	@Override
@@ -118,5 +132,6 @@ public class PojavPreferenceActivity extends MineActivity
 		
 		PREF_BUTTONSIZE = mainPreference.getFloat("controlSize", 1f);
 		PREF_FREEFORM = mainPreference.getBoolean("freeform", false);
+		PREF_FORGETOF = mainPreference.getBoolean("forgetOptifinePath", false);
 	}
 }

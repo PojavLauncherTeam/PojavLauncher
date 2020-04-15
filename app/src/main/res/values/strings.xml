@@ -95,7 +95,9 @@
 	<string name="mcl_setting_subtitle_setmaxdxref">Increase If an error happend while converting: Too many ... references. You may try multi-dex option.</string>
 	<string name="mcl_setting_enablefreeform">Enable Freeform mode for launch Minecraft (Android 7.0+)</string>
 	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
-	
+	<string name="mcl_setting_title_forgetoptifpath">Make OptiFine unable to locate itself</string>
+	<string name="mcl_setting_subtitle_forgetoptifpath">Useful for making OptiFine launchable on some devices</string>
+		
 	<string name="mcl_version_clone">Clone</string>
 	
 	<!-- Global strings -->
