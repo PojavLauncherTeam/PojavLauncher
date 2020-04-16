@@ -37,6 +37,10 @@ import android.graphics.*;
 import java.awt.image.*;
 import javax.imageio.stream.*;
 import java.io.*;
+import libcore.net.url.*;
+import java.lang.reflect.*;
+import java.util.jar.*;
+import java.util.zip.*;
 
 /**
  * The ImageIO class provides static methods to perform reading and writing
@@ -428,7 +432,26 @@ public final class ImageIO {
         if (input == null) {
             throw new IllegalArgumentException("input == null!");
         }
-
+		
+		// DEBUG
+		/*
+		if (input.getClass().getName().equals("libcore.net.url.JarURLConnectionImpl$JarURLConnectionInputStream")) {
+			try {
+				Field f = input.getClass().getDeclaredField("jarFile");
+				f.setAccessible(true);
+				JarFile jf = (JarFile) f.get(input);
+				Field f2 = input.getClass().getField("fileName");
+				f2.setAccessible(true);
+				System.out.println("Found JarFile = " + f2.get(jf).toString());
+			} catch (Throwable th) {
+				System.err.println("Unable to get jarFile.");
+				System.err.println("__________ BEGIN ERR");
+				th.printStackTrace();
+				System.err.println("__________ ENDED ERR");
+			}
+		}
+		*/
+		
         ImageInputStream stream = createImageInputStream(input);
         return read(stream);
     }

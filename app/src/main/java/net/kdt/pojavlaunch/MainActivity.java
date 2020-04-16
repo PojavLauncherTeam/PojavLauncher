@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			
 			setTitle("Minecraft " + mProfile.getVersion());
 			
-			initEnvs();
 			//System.loadLibrary("gl4es");
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 			
@@ -778,47 +777,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         return false;
     }
 	
-    public void forceUserHome(String s) throws Exception {
-        Properties props = System.getProperties();
-        Class clazz = props.getClass();
-        Field f = null;
-        while (clazz != null) {
-            try {
-                f = clazz.getDeclaredField("defaults");
-                break;
-            } catch (Exception e) {
-                clazz = clazz.getSuperclass();
-            }
-        }
-        if (f != null) {
-            f.setAccessible(true);
-            ((Properties) f.get(props)).put("user.home", s);
-        }
-    }
-
-    public void initEnvs() {
-        try {
-            Os.setenv("LIBGL_MIPMAP", "3", true);
-            System.setProperty("user.home", Tools.MAIN_PATH);
-            if (!System.getProperty("user.home", "/").equals(Tools.MAIN_PATH)) {
-                forceUserHome(Tools.MAIN_PATH);
-            }
-            System.setProperty("org.apache.logging.log4j.level", "INFO");
-            System.setProperty("org.apache.logging.log4j.simplelog.level", "INFO");
-			
-			// Disable javax management for smaller launcher.
-			System.setProperty("log4j2.disable.jmx", "true");
-
-            //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.level", "INFO");
-            //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.simplelog.level", "INFO");
-			
-			// Change info for useful dump
-			System.setProperty("java.vm.info", Build.MANUFACTURER + " " + Build.MODEL + ", Android " + Build.VERSION.RELEASE);
-        } catch (Exception e) {
-            Tools.showError(MainActivity.this, e, true);
-        }
-    }
-	
 	private boolean isPointerCaptureSupported() {
 		return Build.VERSION.SDK_INT >= 26; 
 	}
@@ -900,84 +858,60 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		launchOptimizedDirectory = optDir.getAbsolutePath();
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
 		
-		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
-			net.minecraft.launchwrapper.Launch.main(launchArgs);
-		} else {
-			/*
-			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
+		fixRSAPadding();
+
+		System.out.println("> Running Minecraft with classpath:");
+		System.out.println(launchClassPath);
+		System.out.println();
+		
+		ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
 				@Override
-				public void onCharPrint(char c)
-				{
-					appendToLog(Character.toString(c));
+				public void onPrintLine(String text) {
+					appendToLog(text);
 				}
-			};
-
-			PrintStream theStreamOut = new PrintStream( new LoggerJava.LoggerOutputStream(System.out, printLog));
-			System.setOut(theStreamOut);
-
-			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
-			System.setErr(theStreamErr);
-			*/
+			});
+		shell.initInputStream(this);
 			
-			fixRSAPadding();
-
-			System.out.println("> Running Minecraft with classpath:");
-			System.out.println(launchClassPath);
-			System.out.println();
-			
-			List<String> dalvikArgs = new ArrayList<String>();
-			dalvikArgs.add("dalvikvm32");
-			dalvikArgs.add("-Dorg.apache.logging.log4j.level=INFO");
-            dalvikArgs.add("-Dorg.apache.logging.log4j.simplelog.level=INFO");
-			dalvikArgs.add("-Dlog4j2.disable.jmx=true");
-			dalvikArgs.add("-Xmx512M"); // Max heap
-			dalvikArgs.add("-Djava.library.path=/system/lib:" + getApplicationInfo().nativeLibraryDir);
-			dalvikArgs.add("-cp");
-			dalvikArgs.add(getApplicationInfo().publicSourceDir + ":" + launchClassPath);
-			
-			dalvikArgs.add("com.kdt.minecraftegl.MinecraftEGLInitializer");
-			dalvikArgs.add(Long.toString(eglContext));
-			dalvikArgs.add(mVersionInfo.mainClass);
-			dalvikArgs.addAll(Arrays.asList(launchArgs));
-			
-			java.lang.Process process = Runtime.getRuntime().exec(dalvikArgs.toArray(new String[0]));
-			
-			BufferedReader bis1 = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String read1;
-			while((read1 = bis1.readLine()) != null) {
-        		appendlnToLog(read1);
-			}
-
-			BufferedReader bis2 = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-			String read2;
-			while((read2 = bis2.readLine()) != null) {
-        		appendlnToLog(read2);
-			}
-			
-			final int waitFor = process.waitFor();
-			
-			runOnUiThread(new Runnable(){
-
-					@Override
-					public void run()
-					{
-						AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
-						d.setTitle(R.string.mcn_exit_title);
-						d.setMessage("Exited with code " + waitFor);
-						d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-								@Override
-								public void onClick(DialogInterface p1, int p2)
-								{
-									// finish();
-								}
-							});
-						d.setCancelable(false);
-						d.show();
-					}
-				});
+		shell.writeToProcess("base=/system");
+		shell.writeToProcess("export CLASSPATH=" + getApplicationInfo().publicSourceDir); // ":" + launchClassPath + "\n");
+		String argStr = "";
+		for (String arg : launchArgs) {
+			argStr = argStr + " " + arg;
 		}
+		String execAppProcessStr = (
+			"exec app_process32 " +
+			"-Xmx512M " +
+			"-Djava.library.path=/system/lib:" + getApplicationInfo().nativeLibraryDir + " " +
+			"$base/bin com.kdt.minecraftegl.MinecraftEGLInitializer " +
+			launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
+			this.mVersionInfo.mainClass + argStr
+		);
+		System.out.println(execAppProcessStr);
+		shell.writeToProcess(execAppProcessStr);
+		
+		final int waitFor = shell.waitFor();
+
+		runOnUiThread(new Runnable(){
+
+				@Override
+				public void run()
+				{
+					AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
+					d.setTitle(R.string.mcn_exit_title);
+					d.setMessage("Exited with code " + waitFor);
+					d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+							@Override
+							public void onClick(DialogInterface p1, int p2)
+							{
+								// finish();
+							}
+						});
+					d.setCancelable(false);
+					d.show();
+				}
+			});
 	}
 
 	private void createEGLHackStuff() {
