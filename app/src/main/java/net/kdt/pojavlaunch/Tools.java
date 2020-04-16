@@ -190,11 +190,14 @@ public final class Tools
 							public void onClick(DialogInterface p1, int p2)
 							{
 								if(exitIfOk) {
+									/*
 									if (ctx instanceof MainActivity) {
 										MainActivity.fullyExit();
 									} else {
 										ctx.finish();
 									}
+									*/
+									ctx.finish();
 								}
 							}
 						})
@@ -215,11 +218,15 @@ public final class Tools
 								Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
 								
 								if(exitIfOk) {
+									/*
 									if (ctx instanceof MainActivity) {
 										MainActivity.fullyExit();
 									} else {
 										ctx.finish();
 									}
+									*/
+									
+									ctx.finish();
 								}
 							}
 						})

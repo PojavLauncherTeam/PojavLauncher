@@ -37,6 +37,7 @@ import org.lwjgl.util.glu.tessellation.*;
 import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
 import net.kdt.pojavlaunch.value.customcontrols.*;
+import com.google.android.gles_jni.*;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -138,52 +139,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setContentView(R.layout.main);
 
 		try {
-			ExitManager.setExitTrappedListener(new ExitManager.ExitTrappedListener(){
-				@Override
-				public void onExitTrapped()
-				{
-					runOnUiThread(new Runnable(){
-
-						@Override
-						public void run()
-						{
-							isExited = true;
-							
-							AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
-							d.setTitle(R.string.mcn_exit_title);
-							
-							try {
-								File crashLog = Tools.lastFileModified(Tools.crashPath);
-								if(crashLog != null && Tools.read(crashLog.getAbsolutePath()).startsWith("---- Minecraft Crash Report ----")){
-									d.setMessage(R.string.mcn_exit_crash);
-								} else {
-									fullyExit();
-									return;
-								}
-							} catch (Throwable th) {
-								d.setMessage(getStr(R.string.mcn_exit_errcrash) + "\n" + Log.getStackTraceString(th));
-							}
-							d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-									@Override
-									public void onClick(DialogInterface p1, int p2)
-									{
-										fullyExit();
-									}
-								});
-							d.setCancelable(false);
-							d.show();
-						}
-					});
-				}
-			});
-			
-			try {
-				ExitManager.disableSystemExit();
-			} catch (Throwable th) {
-				Log.w(Tools.APP_NAME, "Could not disable System.exit() method!", th);
-			}
-			
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 			
@@ -622,6 +577,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 			glSurfaceView.setOnTouchListener(glTouchListener);
 			glSurfaceView.setRenderer(new GLTextureView.Renderer() {
+					private volatile long eglContext = 0l;
 					@Override
 					public void onSurfaceDestroyed(GL10 gl) {
 						Log.d(Tools.APP_NAME, "Surface destroyed.");
@@ -633,6 +589,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						calculateMcScale();
 
 						EGL10 egl10 = (EGL10) EGLContext.getEGL();
+						
+						/*
 						AndroidContextImplementation.theEgl = egl10;
 						AndroidContextImplementation.context = egl10.eglGetCurrentContext();
 						AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
@@ -640,7 +598,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
 						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
-
+						*/
+						
+						EGLContextImpl eglContextImpl = (EGLContextImpl) egl10.eglGetCurrentContext();
+						try {
+							Field eglContextField = eglContextImpl.getClass().getDeclaredField("mEGLContext");
+							eglContextField.setAccessible(true);
+							eglContext = eglContextField.get(eglContextImpl);
+						} catch (Throwable th) {
+							Tools.showError(MainActivity.this, th, true);
+						}
+						
 						new Thread(new Runnable(){
 
 								@Override
@@ -648,7 +616,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								{
 									try {
 										Thread.sleep(200);
-										runCraft();
+										runCraft(eglContext);
 									} catch (Throwable e) {
 										Tools.showError(MainActivity.this, e, true);
 									}
@@ -810,10 +778,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         return false;
     }
 	
-	public static void fullyExit() {
-		ExitManager.stopExitLoop();
-	}
-	
     public void forceUserHome(String s) throws Exception {
         Properties props = System.getProperties();
         Class clazz = props.getClass();
@@ -917,7 +881,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public static String launchClassPath;
 	public static String launchOptimizedDirectory;
 	public static String launchLibrarySearchPath;
-	private void runCraft() throws Throwable
+	private void runCraft(long eglContext) throws Throwable
 	{
 		String[] launchArgs = getMCArgs();
 		
@@ -939,6 +903,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
 			net.minecraft.launchwrapper.Launch.main(launchArgs);
 		} else {
+			/*
 			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 
 				@Override
@@ -953,6 +918,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
 			System.setErr(theStreamErr);
+			*/
 			
 			fixRSAPadding();
 
@@ -960,18 +926,63 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			System.out.println(launchClassPath);
 			System.out.println();
 			
-			// Load classpath
-			DexClassLoader launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
+			List<String> dalvikArgs = new ArrayList<String>();
+			dalvikArgs.add("dalvikvm32");
+			dalvikArgs.add("-Dorg.apache.logging.log4j.level=INFO");
+            dalvikArgs.add("-Dorg.apache.logging.log4j.simplelog.level=INFO");
+			dalvikArgs.add("-Dlog4j2.disable.jmx=true");
+			dalvikArgs.add("-Xmx512M"); // Max heap
+			dalvikArgs.add("-Djava.library.path=/system/lib:" + getApplicationInfo().nativeLibraryDir);
+			dalvikArgs.add("-cp");
+			dalvikArgs.add(getApplicationInfo().publicSourceDir + ":" + launchClassPath);
 			
-			// Launch Minecraft
-			Class mainClass = launchBaseLoader.loadClass(mVersionInfo.mainClass);
-			Method mainMethod = mainClass.getMethod("main", String[].class);
-			mainMethod.setAccessible(true);
-			mainMethod.invoke(null, new Object[]{launchArgs});
+			dalvikArgs.add("com.kdt.minecraftegl.MinecraftEGLInitializer");
+			dalvikArgs.add(Long.toString(eglContext));
+			dalvikArgs.add(mVersionInfo.mainClass);
+			dalvikArgs.addAll(Arrays.asList(launchArgs));
+			
+			java.lang.Process process = Runtime.getRuntime().exec(dalvikArgs.toArray(new String[0]));
+			
+			BufferedReader bis1 = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String read1;
+			while((read1 = bis1.readLine()) != null) {
+        		appendlnToLog(read1);
+			}
+
+			BufferedReader bis2 = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			String read2;
+			while((read2 = bis2.readLine()) != null) {
+        		appendlnToLog(read2);
+			}
+			
+			final int waitFor = process.waitFor();
+			
+			runOnUiThread(new Runnable(){
+
+					@Override
+					public void run()
+					{
+						AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
+						d.setTitle(R.string.mcn_exit_title);
+						d.setMessage("Exited with code " + waitFor);
+						d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+								@Override
+								public void onClick(DialogInterface p1, int p2)
+								{
+									// finish();
+								}
+							});
+						d.setCancelable(false);
+						d.show();
+					}
+				});
 		}
 	}
 
-	
+	private void createEGLHackStuff() {
+		 
+	}
 	
 	public void fixRSAPadding() throws Exception {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
@@ -1088,7 +1099,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 	
 	private void appendToLog(final String text) {
-		if (!isLogAllow) return;
+		// if (!isLogAllow) return;
 		textLog.post(new Runnable(){
 				@Override
 				public void run()
@@ -1182,6 +1193,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					android.os.Process.killProcess(android.os.Process.myPid());
 					
 					// Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();
+				}
+
+				private void fullyExit()
+				{
+					// TODO: Implement this method
 				}
 			})
 			.show();
