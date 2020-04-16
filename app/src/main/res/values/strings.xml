@@ -97,6 +97,11 @@
 	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
 	<string name="mcl_setting_title_forgetoptifpath">Make OptiFine unable to locate itself</string>
 	<string name="mcl_setting_subtitle_forgetoptifpath">Useful for making OptiFine launchable on some devices</string>
+	<string name="mcl_setting_title_veroption">Version type will be in version list</string>
+	<string name="mcl_setting_veroption_release">Release</string>
+	<string name="mcl_setting_veroption_snapshot">Snapshot</string>
+	<string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+	<string name="mcl_setting_veroption_oldbeta">Old-beta</string>
 		
 	<string name="mcl_version_clone">Clone</string>
 	

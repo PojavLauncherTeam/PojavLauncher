@@ -137,6 +137,56 @@
 			android:layout_height="2dp"
 			android:layout_width="match_parent"/>
 
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="vertical"
+			android:layout_margin="10dp">
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:layout_width="wrap_content"
+				android:text="@string/mcl_setting_title_veroption"
+				android:textStyle="bold"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:orientation="horizontal">
+
+				<CheckBox
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:text="@string/mcl_setting_veroption_release"
+					android:layout_weight="1.0"
+					android:id="@+id/settings_checkbox_vertype_release"/>
+
+				<CheckBox
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:text="@string/mcl_setting_veroption_snapshot"
+					android:layout_weight="1.0"
+					android:id="@+id/settings_checkbox_vertype_snapshot"/>
+
+				<CheckBox
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:text="@string/mcl_setting_veroption_oldalpha"
+					android:layout_weight="1.0"
+					android:id="@+id/settings_checkbox_vertype_oldalpha"/>
+
+				<CheckBox
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:text="@string/mcl_setting_veroption_oldbeta"
+					android:layout_weight="1.0"
+					android:id="@+id/settings_checkbox_vertype_oldbeta"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
 	</LinearLayout>
 
 </ScrollView>
