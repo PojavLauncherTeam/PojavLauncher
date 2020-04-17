@@ -452,7 +452,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									hotbarX = x;
 									hotbarY = y;
 									
-									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, 500);
+									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 								} else {
 									AndroidDisplay.mouseX = x;
 									AndroidDisplay.mouseY = y;
@@ -464,7 +464,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 										AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
 										initialX = x;
 										initialY = y;
-										theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+										theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 									}
 								}
 								break;
@@ -571,7 +571,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
 							initialX = x;
 							initialY = y;
-							theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+							theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 							break;
 
 						case MotionEvent.ACTION_UP: // 1
@@ -794,7 +794,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				if (AndroidDisplay.grab) {
 					sendMouseButton(1, isDown);
 				} else {
-					AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, ((byte) (isDown ? 1 : 0)), AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+					if (!isDown) {
+						AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, (byte) 0, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+						AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, (byte) 1, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+					}
 					setRightOverride(isDown);
 				} break;
 			case R.id.control_debug: sendKeyPress(Keyboard.KEY_F3, isDown); break;

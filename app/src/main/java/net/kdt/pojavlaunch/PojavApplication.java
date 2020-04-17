@@ -22,7 +22,7 @@ public class PojavApplication extends Application
 			Tools.usingVerCode = thisApp.versionCode;
 			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
 			
-			PojavPreferenceActivity.loadPreferences(this);
+			LauncherPreferences.loadPreferences(this);
 			
 			ControlButton.pixelOf50dp = (int) Tools.dpToPx(this, 50);
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();

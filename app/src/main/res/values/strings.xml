@@ -93,11 +93,15 @@
 	
 	<string name="mcl_setting_title_setmaxdxref">Set max DX references</string>
 	<string name="mcl_setting_subtitle_setmaxdxref">Increase If an error happend while converting: Too many ... references. You may try multi-dex option.</string>
-	<string name="mcl_setting_enablefreeform">Enable Freeform mode for launch Minecraft (Android 7.0+)</string>
+	<string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
+	<string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
+	<string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
+	<string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
 	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
 	<string name="mcl_setting_title_forgetoptifpath">Make OptiFine unable to locate itself</string>
-	<string name="mcl_setting_subtitle_forgetoptifpath">Useful for making OptiFine launchable on some devices</string>
-	<string name="mcl_setting_title_veroption">Version type will be in version list</string>
+	<string name="mcl_setting_subtitle_forgetoptifpath">Useful for making OptiFine launchable on some devices.</string>
+	<string name="mcl_setting_category_general">General settings</string>
+	<string name="mcl_setting_category_veroption">Version type will be in version list</string>
 	<string name="mcl_setting_veroption_release">Release</string>
 	<string name="mcl_setting_veroption_snapshot">Snapshot</string>
 	<string name="mcl_setting_veroption_oldalpha">Old-alpha</string>

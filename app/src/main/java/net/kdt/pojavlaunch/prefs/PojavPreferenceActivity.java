@@ -5,11 +5,13 @@ import android.os.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
+import android.widget.SeekBar.*;
 import com.kdt.mcgui.app.*;
 import com.pojavdx.dex.*;
+import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
 
-public class PojavPreferenceActivity extends MineActivity implements OnCheckedChangeListener
+public class PojavPreferenceActivity extends MineActivity implements OnCheckedChangeListener, OnSeekBarChangeListener
 {
 	public static boolean PREF_FREEFORM = false;
 	public static boolean PREF_FORGETOF = false;
@@ -32,7 +34,7 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 		 * - Having trouble setting.
 		 */
 
-		PojavPreferenceActivity.loadPreferences(this);
+		LauncherPreferences.loadPreferences(this);
 		
 		mainPreference = getSharedPreferences("pojav_preferences", MODE_PRIVATE);
 		final SharedPreferences.Editor mainPrefEdit = mainPreference.edit();
@@ -109,7 +111,7 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		PojavPreferenceActivity.loadPreferences(this);
+		LauncherPreferences.loadPreferences(this);
 	}
 
 	@Override
@@ -117,6 +119,7 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 		String prefName = null;
 		switch (btn.getId()) {
 			case R.id.settings_switch_enablefreeform:
+				
 				prefName = "freeform";
 				break;
 			case R.id.settings_switch_forgetoptifpath:
@@ -140,6 +143,30 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 			.putBoolean(prefName, isChecked)
 			.commit();
 	}
+
+	@Override
+	public void onProgressChanged(SeekBar p1, int p2, boolean p3) {
+		// Unused
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar bar) {
+		// Unused
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar bar) {
+		float currProgress = (float) bar.getProgress() / 100;
+		String progressStr = Float.toString(currProgress);
+		if (progressStr.length() == 3) progressStr = progressStr + "0";
+		
+		try {
+			Field field = R.id.class.getDeclaredField(getId(bar.getId()).replace("seekbar", "progressseek"));
+			((TextView) findViewById(field.get(null))).setText(currProgress + "/" + bar.getMax());
+		} catch (Throwable th) {
+			throw new RuntimeException(th);
+		}
+	}
 	
 	public View findView(int id) {
 		View view = findView(id);
@@ -149,14 +176,9 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 		return view;
 	}
 	
-	public static void loadPreferences(Context ctx) {
-		SharedPreferences mainPreference = ctx.getSharedPreferences("pojav_preferences", MODE_PRIVATE);
-		int maxDxPref = mainPreference.getInt("maxDxRefs", 0xFFF);
-		DexFormat.MAX_MEMBER_IDX = maxDxPref;
-		DexFormat.MAX_TYPE_IDX = maxDxPref;
-		
-		PREF_BUTTONSIZE = mainPreference.getFloat("controlSize", 1f);
-		PREF_FREEFORM = mainPreference.getBoolean("freeform", false);
-		PREF_FORGETOF = mainPreference.getBoolean("forgetOptifinePath", false);
+	private String getId(int id) {
+		if (id == View.NO_ID) return "unknown";
+		else return getResources().getResourceEntryName(id);
 	}
+	
 }

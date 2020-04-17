@@ -102,7 +102,7 @@
 				android:layout_height="wrap_content"
 				android:layout_width="match_parent"
 				android:id="@+id/settings_switch_enablefreeform"
-				android:text="@string/mcl_setting_enablefreeform"/>
+				android:text="@string/mcl_setting_title_freeform"/>
 
 		</LinearLayout>
 
@@ -147,7 +147,7 @@
 				android:layout_height="wrap_content"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:layout_width="wrap_content"
-				android:text="@string/mcl_setting_title_veroption"
+				android:text="@string/mcl_setting_category_veroption"
 				android:textStyle="bold"/>
 
 			<LinearLayout

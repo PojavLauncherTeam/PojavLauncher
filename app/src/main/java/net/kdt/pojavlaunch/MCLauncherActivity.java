@@ -148,8 +148,6 @@ public class MCLauncherActivity extends AppCompatActivity
 		versionSelector = (Spinner) findId(R.id.launcherMainSelectVersion);
 		versionSelector.setAdapter(adapter);
 
-		new RefreshVersionListTask().execute();
-
 		launchProgress = (ProgressBar) findId(R.id.progressDownloadBar);
 		launchTextStatus = (TextView) findId(R.id.progressDownloadText);
 		LinearLayout exitLayout = (LinearLayout) findId(R.id.launcherMainExitbtns);
@@ -272,7 +270,12 @@ public class MCLauncherActivity extends AppCompatActivity
 		ArrayList<String> output = new ArrayList<String>();
 
 		for (JMinecraftVersionList.Version value1: list1) {
-			output.add(value1.id);
+			if ((value1.type.equals("release") && LauncherPreferences.PREF_VERTYPE_RELEASE) ||
+				(value1.type.equals("snapshot") && LauncherPreferences.PREF_VERTYPE_SNAPSHOT) ||
+				(value1.type.equals("old_alpha") && LauncherPreferences.PREF_VERTYPE_OLDALPHA) ||
+				(value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA)) {
+					output.add(value1.id);
+			}
 		}
 
 		for (File value2: list2) {
@@ -332,6 +335,8 @@ public class MCLauncherActivity extends AppCompatActivity
 	protected void onResumeFragments()
 	{
 		super.onResumeFragments();
+		new RefreshVersionListTask().execute();
+		
 		try{
 			final ProgressDialog barrier = new ProgressDialog(this);
 			barrier.setMessage("Waiting");
@@ -848,7 +853,7 @@ public class MCLauncherActivity extends AppCompatActivity
 								}
 							} break;
 						case 4:{ // Settings
-								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
+								startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
 							} break;
 						case 5:{ // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
