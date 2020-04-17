@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "2.5.0_preview14_6397b_20200417"
+        versionName "2.5.0_preview1_6397b_20200417"
     }
 	
     buildTypes {
@@ -22,7 +22,7 @@ android {
         }
     }
 	
-	// Keep the following configuration in order to target Java 8.
+	// Keep the following configuration in order to might make Minecraft 1.12 support.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
