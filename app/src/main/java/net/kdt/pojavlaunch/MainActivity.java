@@ -38,6 +38,7 @@ import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import com.google.android.gles_jni.*;
+import com.kdt.minecraftegl.*;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -870,21 +871,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				public void onPrintLine(String text) {
 					appendToLog(text);
 				}
-			});
+			}, "sh");
 		shell.initInputStream(this);
 			
 		shell.writeToProcess("base=/system");
 		shell.writeToProcess("export CLASSPATH=" + getApplicationInfo().publicSourceDir); // ":" + launchClassPath + "\n");
+		shell.writeToProcess("export HOME=" + Tools.MAIN_PATH);
 		String argStr = "";
 		for (String arg : launchArgs) {
 			argStr = argStr + " " + arg;
 		}
+		// app_process32 because this app is 32-bit only.
 		String execAppProcessStr = (
 			"exec app_process32 " +
-			"-Xmx512M " +
+			"-Xmx512M " + // Max heap
 			"-Djava.library.path=/system/lib:" + getApplicationInfo().nativeLibraryDir + " " +
 			"$base/bin com.kdt.minecraftegl.MinecraftEGLInitializer " +
-			launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
+			/* Long.toString(SurfaceUtils.getSurfaceAddress(((SurfaceView) glSurfaceView).getHolder().getSurface())) + "" + */ launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
 			this.mVersionInfo.mainClass + argStr
 		);
 		System.out.println(execAppProcessStr);

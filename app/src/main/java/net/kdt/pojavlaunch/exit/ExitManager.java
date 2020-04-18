@@ -50,8 +50,11 @@ public class ExitManager {
 	{
 		// changeRuntimeExitDisabled(false);
 		
-		
-		Runtime.getRuntime().removeShutdownHook(exitTrappedHook);
+		try {
+			Runtime.getRuntime().removeShutdownHook(exitTrappedHook);
+		} catch (Throwable th) {
+			stopExitLoop();
+		}
 	}
 	
 	// It's not safe. Add/Remove shutdown hooks will cause error.

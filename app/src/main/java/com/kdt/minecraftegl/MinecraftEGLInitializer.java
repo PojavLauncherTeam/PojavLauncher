@@ -9,13 +9,19 @@ import javax.microedition.khronos.egl.*;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.opengl.*;
 import dalvik.system.*;
+import static org.lwjgl.opengl.AndroidContextImplementation.*;
+import android.view.*;
+import net.kdt.pojavlaunch.exit.*;
 
 public class MinecraftEGLInitializer
 {
 	public static void main(String[] args) throws Throwable {
 		try {
-			// long eglAddress = Long.parseLong(args[0]);
-
+			// long surfaceAddress = Long.parseLong(args[0]);
+			
+			// Disable for testing
+			// ExitManager.disableSystemExit();
+			
 			MainActivity.launchClassPath = args[0];
 			MainActivity.launchOptimizedDirectory = args[1];
 			MainActivity.launchLibrarySearchPath = args[2];
@@ -24,7 +30,7 @@ public class MinecraftEGLInitializer
 
 			String minecraftMainClass = args[3];
 			List<String> minecraftArgs = new ArrayList<String>();
-			for (int i = 4; i < args.length; i++) {
+			for (int i = 5; i < args.length; i++) {
 				if (args[i] != null && !args[i].isEmpty())
 					minecraftArgs.add(args[i]);
 			}
@@ -32,15 +38,28 @@ public class MinecraftEGLInitializer
 			initEnvs();
 
 			EGL10 egl;
-			AndroidContextImplementation.theEgl = egl = (EGL10) EGLContext.getEGL(); // AndroidContextImplementation.context.getEGL();
-			AndroidContextImplementation.context = egl.eglGetCurrentContext(); // new EGLContextImpl(eglAddress);
-			AndroidContextImplementation.display = egl.eglGetCurrentDisplay();
-			AndroidContextImplementation.read = egl.eglGetCurrentSurface(EGL10.EGL_READ);
-			AndroidContextImplementation.draw = egl.eglGetCurrentSurface(EGL10.EGL_DRAW);
+			theEgl = egl = (EGL10) EGLContext.getEGL(); // context.getEGL();
+			context = egl.eglGetCurrentContext(); // new EGLContextImpl(eglAddress);
+			display = egl.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
+			read = egl.eglGetCurrentSurface(EGL10.EGL_READ);
+			draw = egl.eglGetCurrentSurface(EGL10.EGL_DRAW);
 			
-			boolean makeCurrBool = AndroidContextImplementation.theEgl.eglMakeCurrent(AndroidContextImplementation.display, AndroidContextImplementation.read, AndroidContextImplementation.draw, AndroidContextImplementation.context);
-			System.out.println("Gave up context: " + AndroidContextImplementation.context + ", makeCurrent: " + Boolean.toString(makeCurrBool));
-			System.out.println("eglGetError: " + Integer.toString(egl.eglGetError()));
+			int[] attribs = {
+				EGL10.EGL_RED_SIZE,   8,
+				EGL10.EGL_GREEN_SIZE, 8,
+				EGL10.EGL_BLUE_SIZE,  8,
+				EGL10.EGL_DEPTH_SIZE, 16, // 0
+				EGL10.EGL_NONE
+			};
+			
+			egl.eglInitialize(display, new int[]{0, 0});
+			EGLConfig config = getEglConfig(egl, display, attribs);
+			// egl.eglCreateWindowSurface(display, config, SurfaceUtils.createSurfaceByAddress(surfaceAddress), null);
+			
+			boolean makeCurrBool = theEgl.eglMakeCurrent(display, read, draw, context);
+			System.out.println("Gave up context: " + context + ", makeCurrent: " + Boolean.toString(makeCurrBool));
+			int eglGetError = egl.eglGetError();
+			System.out.println("eglGetError: " + Integer.toString(eglGetError) + ", success: " + Boolean.toString(eglGetError == EGL10.EGL_SUCCESS));
 			System.out.println("user.home: " + System.getProperty("user.home"));
 			
 			DexClassLoader classLoader = new DexClassLoader(args[0], args[1], args[2], MinecraftEGLInitializer.class.getClassLoader());
@@ -53,6 +72,22 @@ public class MinecraftEGLInitializer
 		}
 	}
 	
+	private static EGLConfig getEglConfig(EGL10 egl, EGLDisplay eglDisplay, int[] configAttributes) {
+		EGLConfig[] configs = new EGLConfig[1];
+		int[] numConfigs = new int[1];
+		if (!egl.eglChooseConfig(eglDisplay, configAttributes, configs, configs.length, numConfigs)) {
+			throw new RuntimeException(
+				"eglChooseConfig failed: 0x" + Integer.toHexString(egl.eglGetError()));
+		}
+		if (numConfigs[0] <= 0) {
+			throw new RuntimeException("Unable to find any matching EGL config");
+		}
+		final EGLConfig eglConfig = configs[0];
+		if (eglConfig == null) {
+			throw new RuntimeException("eglChooseConfig returned null");
+		}
+		return eglConfig;
+	}
 	
     public static void forceUserHome(String s) throws Exception {
         Properties props = System.getProperties();
