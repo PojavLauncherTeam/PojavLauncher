@@ -1,14 +1,9 @@
 package javax.sound.midi.spi;
 
-import android.support.annotation.NonNull;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.Soundbank;
+import androidx.annotation.*;
+import java.io.*;
+import java.net.*;
+import javax.sound.midi.*;
 
 /**
  * Abstract class for Soundbank Reader

@@ -3,7 +3,6 @@ package com.kdt.filerapi;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
-import android.support.annotation.*;
 import android.util.*;
 import android.view.*;
 import android.widget.*;

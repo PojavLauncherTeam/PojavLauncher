@@ -3,18 +3,17 @@ package net.kdt.pojavlaunch;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
 import android.os.*;
-import android.support.design.widget.*;
-import android.support.v4.widget.*;
-import android.support.v7.app.*;
 import android.system.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
+import androidx.appcompat.app.*;
+import androidx.drawerlayout.widget.*;
 import com.android.internal.awt.*;
+import com.google.android.material.navigation.*;
 import com.kdt.glsupport.*;
 import com.kdt.pointer.*;
 import dalvik.system.*;
@@ -27,16 +26,14 @@ import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 import optifine.*;
 import org.apache.harmony.security.fortress.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
-import org.lwjgl.util.applet.*;
-import org.lwjgl.util.glu.tessellation.*;
 
 import android.app.AlertDialog;
-import android.graphics.drawable.Drawable;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import androidx.appcompat.app.*;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {

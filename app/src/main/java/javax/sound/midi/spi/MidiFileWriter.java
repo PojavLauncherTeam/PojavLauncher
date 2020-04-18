@@ -1,12 +1,8 @@
 package javax.sound.midi.spi;
 
-import android.support.annotation.NonNull;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import javax.sound.midi.Sequence;
+import androidx.annotation.*;
+import java.io.*;
+import javax.sound.midi.*;
 
 /**
  * Abstract class for MIDI File Writer

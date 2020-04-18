@@ -1,6 +1,6 @@
 package javax.sound.midi;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.*;
 
 /**
  * Interface for MIDI Transmitter.

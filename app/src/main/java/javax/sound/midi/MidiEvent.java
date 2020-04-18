@@ -1,6 +1,6 @@
 package javax.sound.midi;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.*;
 
 /**
  * Represents MIDI Event

@@ -2,9 +2,9 @@ package com.kdt.mcgui.app;
 
 import android.content.pm.*;
 import android.os.*;
-import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
+import androidx.appcompat.app.*;
 import net.kdt.pojavlaunch.*;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener

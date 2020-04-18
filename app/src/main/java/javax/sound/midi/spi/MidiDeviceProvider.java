@@ -1,9 +1,7 @@
 package javax.sound.midi.spi;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import javax.sound.midi.MidiDevice;
+import androidx.annotation.*;
+import javax.sound.midi.*;
 
 /**
  * Abstract class for MIDI Device Provider

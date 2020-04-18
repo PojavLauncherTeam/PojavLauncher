@@ -1,14 +1,12 @@
 package net.kdt.pojavlaunch.mcfragments;
 
+import android.graphics.*;
 import android.os.*;
-import android.support.annotation.*;
-import android.support.v4.app.*;
 import android.view.*;
 import android.widget.*;
-import java.io.*;
+import androidx.annotation.*;
+import androidx.fragment.app.*;
 import net.kdt.pojavlaunch.*;
-import android.util.*;
-import android.graphics.*;
 
 public class ConsoleFragment extends Fragment
 {

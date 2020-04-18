@@ -1,11 +1,11 @@
 package net.kdt.pojavlaunch.value.customcontrols;
-import android.widget.*;
 import android.content.*;
 import android.util.*;
 import android.view.*;
+import android.widget.*;
+import androidx.appcompat.app.*;
 import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
-import android.support.v7.app.*;
 
 public class ControlsLayout extends FrameLayout
 {

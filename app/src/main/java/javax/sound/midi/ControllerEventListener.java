@@ -1,8 +1,7 @@
 package javax.sound.midi;
 
-import android.support.annotation.NonNull;
-
-import java.util.EventListener;
+import androidx.annotation.*;
+import java.util.*;
 
 /**
  * {@link EventListener} for MIDI Control Change messages.

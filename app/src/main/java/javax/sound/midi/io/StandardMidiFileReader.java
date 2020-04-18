@@ -1,29 +1,12 @@
 package javax.sound.midi.io;
 
-import android.content.res.AssetManager.AssetInputStream;
-import android.support.annotation.NonNull;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MetaMessage;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiFileFormat;
-import javax.sound.midi.MidiMessage;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.ShortMessage;
-import javax.sound.midi.SysexMessage;
-import javax.sound.midi.Track;
-import javax.sound.midi.Track.TrackUtils;
-import javax.sound.midi.spi.MidiFileReader;
+import android.content.res.AssetManager.*;
+import androidx.annotation.*;
+import java.io.*;
+import java.net.*;
+import javax.sound.midi.*;
+import javax.sound.midi.Track.*;
+import javax.sound.midi.spi.*;
 
 /**
  * The implementation SMF reader

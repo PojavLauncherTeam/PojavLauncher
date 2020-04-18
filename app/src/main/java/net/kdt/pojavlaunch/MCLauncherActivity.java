@@ -1,40 +1,33 @@
 package net.kdt.pojavlaunch;
 
-import android.app.*;
 import android.content.*;
+import android.graphics.*;
 import android.os.*;
-import android.support.design.widget.*;
-import android.support.v4.app.*;
-import android.support.v4.view.*;
-import android.support.v7.app.*;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
+import androidx.appcompat.app.*;
+import androidx.core.app.*;
+import androidx.fragment.app.*;
+import androidx.viewpager.widget.*;
+import com.google.android.material.tabs.*;
 import com.google.gson.*;
 import com.kdt.filerapi.*;
-import com.kdt.filermod.*;
+import com.kdt.mcgui.*;
+import dalvik.system.*;
 import java.io.*;
+import java.lang.reflect.*;
 import java.nio.charset.*;
 import java.util.*;
 import net.kdt.pojavlaunch.mcfragments.*;
+import net.kdt.pojavlaunch.patcher.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.signer.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
-import org.lwjgl.opengl.*;
-
-import android.app.AlertDialog;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import dalvik.system.*;
-import java.lang.reflect.*;
-import net.kdt.pojavlaunch.patcher.*;
-import android.graphics.*;
-import android.content.pm.*;
 import optifine.*;
-//import android.support.v7.view.menu.*;
-//import net.zhuoweizhang.boardwalk.downloader.*;
+import org.lwjgl.opengl.*;
 
 public class MCLauncherActivity extends AppCompatActivity
 {
@@ -338,10 +331,11 @@ public class MCLauncherActivity extends AppCompatActivity
 		new RefreshVersionListTask().execute();
 		
 		try{
-			final ProgressDialog barrier = new ProgressDialog(this);
-			barrier.setMessage("Waiting");
-			barrier.setProgressStyle(barrier.STYLE_SPINNER);
-			barrier.setCancelable(false);
+			final AlertDialog.Builder barrierBuilder = new AlertDialog.Builder(this);
+			barrierBuilder.setMessage("Waiting");
+			// barrier.setProgressStyle(barrier.STYLE_SPINNER);
+			barrierBuilder.setCancelable(false);
+			final AlertDialog barrier = barrierBuilder.create();
 			barrier.show();
 
 			new Thread(new Runnable(){
@@ -751,9 +745,9 @@ public class MCLauncherActivity extends AppCompatActivity
 						DisplayMetrics dm = new DisplayMetrics();
 						getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-						ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
+						ActivityOptionsCompat options = ActivityOptionsCompat.makeBasic();
 						Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
-						options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
+						options.setLaunchBounds(freeformRect);
 						startActivity(mainIntent, options.toBundle());
 					} else {
 						startActivity(mainIntent);
@@ -963,14 +957,14 @@ public class MCLauncherActivity extends AppCompatActivity
 
 	private class OptiFineInstaller extends AsyncTask<File, String, Throwable>
 	{
-		private ProgressDialog dialog;
+		private ProgressDialogCompat dialog;
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = new ProgressDialog(MCLauncherActivity.this);
+			dialog = new ProgressDialogCompat(MCLauncherActivity.this);
 			dialog.setTitle("Installing OptiFine");
 			dialog.setMessage("Prepaping");
-			dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			dialog.setProgressStyle(ProgressDialogCompat.STYLE_HORIZONTAL);
 			dialog.setMax(5);
 			dialog.setCancelable(false);
 			dialog.show();
@@ -1122,7 +1116,7 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	public void checkUpdate() {
-		final ProgressDialog progUp = new ProgressDialog(this);
+		final ProgressDialogCompat progUp = new ProgressDialogCompat(this);
 		progUp.setMessage(getStr(R.string.mcl_option_checkupdate));
 		progUp.setCancelable(false);
 		progUp.show();

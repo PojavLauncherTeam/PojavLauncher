@@ -1,11 +1,7 @@
 package javax.sound.midi;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.EventListener;
+import androidx.annotation.*;
+import java.io.*;
 
 /**
  * Interface for MIDI Sequencer

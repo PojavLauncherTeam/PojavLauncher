@@ -1,39 +1,13 @@
 package javax.sound.midi.impl;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.SparseArray;
-import android.util.SparseBooleanArray;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.sound.midi.ControllerEventListener;
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MetaEventListener;
-import javax.sound.midi.MetaMessage;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiMessage;
-import javax.sound.midi.MidiSystem.MidiSystemUtils;
-import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Receiver;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Sequencer;
-import javax.sound.midi.ShortMessage;
-import javax.sound.midi.SysexMessage;
-import javax.sound.midi.Track;
-import javax.sound.midi.Track.TrackUtils;
-import javax.sound.midi.Transmitter;
-import javax.sound.midi.io.StandardMidiFileReader;
+import android.util.*;
+import androidx.annotation.*;
+import java.io.*;
+import java.util.*;
+import javax.sound.midi.*;
+import javax.sound.midi.MidiSystem.*;
+import javax.sound.midi.Track.*;
+import javax.sound.midi.io.*;
 
 /**
  * {@link javax.sound.midi.Sequencer} implementation

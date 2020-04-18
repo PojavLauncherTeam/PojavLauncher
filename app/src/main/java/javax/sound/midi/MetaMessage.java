@@ -1,9 +1,7 @@
 package javax.sound.midi;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.Arrays;
+import androidx.annotation.*;
+import java.util.*;
 
 /**
  * Represents MIDI Meta Message

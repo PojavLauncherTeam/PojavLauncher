@@ -1,9 +1,8 @@
 package com.kdt.mcgui.app;
 
-import android.support.v7.app.*;
 import android.os.*;
-import android.support.v4.app.*;
 import android.widget.*;
+import androidx.fragment.app.*;
 
 public class MinePrefActivity extends MineActivity
 {

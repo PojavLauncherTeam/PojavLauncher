@@ -1,12 +1,7 @@
 package javax.sound.midi;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.AbstractMap;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import androidx.annotation.*;
+import java.util.*;
 
 /**
  * Represents MIDI File Format

@@ -1,15 +1,10 @@
 package net.kdt.pojavlaunch.mcfragments;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import android.webkit.WebView;
-import android.webkit.WebChromeClient;
-
-import net.kdt.pojavlaunch.R;
+import android.os.*;
+import android.view.*;
+import android.webkit.*;
+import androidx.annotation.*;
+import androidx.fragment.app.*;
 import net.kdt.pojavlaunch.*;
 
 public class LauncherFragment extends Fragment

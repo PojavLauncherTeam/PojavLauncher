@@ -1,22 +1,12 @@
 package javax.sound.midi;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
-import javax.sound.midi.MidiDevice.Info;
-import javax.sound.midi.impl.SequencerImpl;
-import javax.sound.midi.io.StandardMidiFileReader;
-import javax.sound.midi.io.StandardMidiFileWriter;
+import androidx.annotation.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import javax.sound.midi.MidiDevice.*;
+import javax.sound.midi.impl.*;
+import javax.sound.midi.io.*;
 
 /**
  * MidiSystem porting for Android

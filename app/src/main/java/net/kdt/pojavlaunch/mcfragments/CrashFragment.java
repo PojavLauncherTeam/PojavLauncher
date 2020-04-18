@@ -1,16 +1,13 @@
 package net.kdt.pojavlaunch.mcfragments;
 
+import android.graphics.*;
 import android.os.*;
-import android.support.annotation.*;
-import android.support.v4.app.*;
 import android.view.*;
 import android.widget.*;
+import androidx.annotation.*;
+import androidx.fragment.app.*;
 import java.io.*;
 import net.kdt.pojavlaunch.*;
-import android.util.*;
-import android.graphics.*;
-import android.content.*;
-import android.support.v4.os.*;
 
 public class CrashFragment extends Fragment
 {

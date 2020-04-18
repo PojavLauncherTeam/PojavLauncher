@@ -6,7 +6,7 @@ import com.google.gson.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import com.kdt.mojangauth.yggdrasil.*;
-import android.app.*;
+import com.kdt.mcgui.*;
 
 public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
 	private YggdrasilAuthenticator authenticator = new YggdrasilAuthenticator();
@@ -15,7 +15,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
 	private MCProfile.Builder profilePath;
 
 	private Context ctx;
-	private ProgressDialog build;
+	private ProgressDialogCompat build;
 
 	public RefreshTokenTask(Context ctx, RefreshListener listener) {
 		this.ctx = ctx;
@@ -24,9 +24,9 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
 
 	@Override
 	public void onPreExecute() {
-		build = new ProgressDialog(ctx);
+		build = new ProgressDialogCompat(ctx);
 		build.setMessage("Refreshing");
-		build.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		build.setProgressStyle(ProgressDialogCompat.STYLE_SPINNER);
 		build.setCancelable(false);
 		build.show();
 	}

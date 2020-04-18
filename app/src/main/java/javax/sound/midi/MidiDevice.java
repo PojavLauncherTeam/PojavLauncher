@@ -1,8 +1,7 @@
 package javax.sound.midi;
 
-import android.support.annotation.NonNull;
-
-import java.util.List;
+import androidx.annotation.*;
+import java.util.*;
 
 /**
  * Interface for MIDI Device

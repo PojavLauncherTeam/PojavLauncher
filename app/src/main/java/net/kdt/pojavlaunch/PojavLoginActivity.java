@@ -4,24 +4,22 @@ import android.*;
 import android.app.*;
 import android.content.*;
 import android.content.pm.*;
+import android.net.*;
 import android.os.*;
-import android.support.annotation.*;
-import android.support.v4.app.*;
-import android.support.v4.content.*;
-import android.util.*;
 import android.view.*;
 import android.widget.*;
+import android.widget.CompoundButton.*;
+import androidx.annotation.*;
+import androidx.core.app.*;
+import androidx.core.content.*;
 import com.kdt.filermod.*;
 import com.kdt.mcgui.app.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
-import android.widget.CompoundButton.*;
-import android.text.method.*;
-import android.system.*;
-import android.net.*;
-import static android.view.ViewGroup.LayoutParams.*;
 import net.kdt.pojavlaunch.update.*;
+
+import static android.view.ViewGroup.LayoutParams.*;
 
 public class PojavLoginActivity extends MineActivity
 {

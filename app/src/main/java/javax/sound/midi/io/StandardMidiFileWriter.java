@@ -1,19 +1,9 @@
 package javax.sound.midi.io;
 
-import android.support.annotation.NonNull;
-
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import javax.sound.midi.MetaMessage;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiFileFormat;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Track;
-import javax.sound.midi.spi.MidiFileWriter;
+import androidx.annotation.*;
+import java.io.*;
+import javax.sound.midi.*;
+import javax.sound.midi.spi.*;
 
 /**
  * The implementation SMF writer
