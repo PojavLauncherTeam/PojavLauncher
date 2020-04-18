@@ -129,3 +129,8 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
 |OptiFine         |OptiFine_1.7.10_HD_U_E7|???|???|OptiFine_1.10_HD_U_H5|OptiFine_1.11_HD_U_F5|
 |Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://youtu.be/TJeJcPFgzcI)|[Worked (with 1 hack)](https://youtu.be/eIawM9UmQ88)
+
+## Credits
+- [BoardwalkApp](https://github.com/BoardwalkApp) for original code.
+- pTitSeb and lunixbochs for [gl4es](https://github.com/pTitSeb/gl4es).
+- ...more (in-app).
