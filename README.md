@@ -1,10 +1,6 @@
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11
 
-## Source code
-- This repository currently for bug tracking.
-- There are some open source parts used in this launcher.
-
 ## Planning
 - There's no planning.
 
