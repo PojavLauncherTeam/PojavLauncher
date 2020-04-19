@@ -1,8 +1,8 @@
 package net.kdt.pojavlaunch.prefs;
 
 import android.os.*;
-import android.support.v7.preference.*;
 import net.kdt.pojavlaunch.*;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
 public class LauncherPreferenceFragment extends PreferenceFragmentCompat
 {
