@@ -1,18 +1,18 @@
 package com.kdt.minecraftegl;
 
+import android.app.*;
+import android.content.*;
 import android.os.*;
 import android.system.*;
-import com.google.android.gles_jni.*;
+import dalvik.system.*;
 import java.lang.reflect.*;
 import java.util.*;
 import javax.microedition.khronos.egl.*;
 import net.kdt.pojavlaunch.*;
-import org.lwjgl.opengl.*;
-import dalvik.system.*;
-import static org.lwjgl.opengl.AndroidContextImplementation.*;
-import android.view.*;
 import net.kdt.pojavlaunch.exit.*;
-import javax.microedition.khronos.opengles.*;
+
+import static org.lwjgl.opengl.AndroidContextImplementation.*;
+import android.content.pm.*;
 
 public class MinecraftEGLInitializer
 {
@@ -51,11 +51,14 @@ public class MinecraftEGLInitializer
 			System.out.println("eglGetError: " + Integer.toString(eglGetError) + ", success: " + Boolean.toString(eglGetError == EGL10.EGL_SUCCESS));
 			System.out.println("user.home: " + System.getProperty("user.home"));
 			
+			ActivityThread.currentActivityThread().getSystemContext().startActivity(new Intent().setComponent(new ComponentName("net.kdt.pojavlaunch", ".CustomControlsActivity")));
+			
+/*
 			GL10 gl = ((GL10) context.getGL());
 			gl.glColor4f(0.5f, 0.5f, 0.5f, 0.5f);
 			gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 			int glErr = gl.glGetError();
-			
+*/
 			DexClassLoader classLoader = new DexClassLoader(args[0], args[1], args[2], MinecraftEGLInitializer.class.getClassLoader());
 			Class minecraftClass = classLoader.loadClass(minecraftMainClass);
 			Method minecraftMethod = minecraftClass.getMethod("main", String[].class);

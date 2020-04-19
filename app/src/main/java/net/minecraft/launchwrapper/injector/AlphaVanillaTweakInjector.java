@@ -26,6 +26,7 @@ public class AlphaVanillaTweakInjector implements IClassTransformer {
 
         public LauncherFake(Map map) {
             this.map = map;
+			this.map.put("fullscreen", "true");
         }
 
         public void appletResize(int width, int height) {
