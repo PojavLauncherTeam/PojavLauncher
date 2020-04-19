@@ -4,4 +4,4 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 
 ## About this branch
 - This branch attempt to migrate AndroidX to the launcher.
-- Unable to build after migrate.
+- Status: Unable to build after migrate.
