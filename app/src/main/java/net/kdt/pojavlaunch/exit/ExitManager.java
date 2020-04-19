@@ -7,7 +7,7 @@ public class ExitManager {
 	
 	private static ExitTrappedListener listener;
 	private static Thread exitTrappedHook = new Thread(new Runnable(){
-		
+		private boolean isFirst = true;
 		@Override
 		public void run()
 		{
@@ -16,6 +16,11 @@ public class ExitManager {
 			// if (stopLoop) stopLoop = false;
 			
 			while (true) {
+				if (isFirst) {
+					isFirst = false;
+					System.out.println("Program attempt to exit!");
+				}
+				
 				if (stopLoop) {
 					stopLoop = false;
 					break;

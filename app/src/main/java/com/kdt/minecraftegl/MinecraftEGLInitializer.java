@@ -12,6 +12,7 @@ import dalvik.system.*;
 import static org.lwjgl.opengl.AndroidContextImplementation.*;
 import android.view.*;
 import net.kdt.pojavlaunch.exit.*;
+import javax.microedition.khronos.opengles.*;
 
 public class MinecraftEGLInitializer
 {
@@ -20,7 +21,7 @@ public class MinecraftEGLInitializer
 			// long surfaceAddress = Long.parseLong(args[0]);
 			
 			// Disable for testing
-			// ExitManager.disableSystemExit();
+			ExitManager.disableSystemExit();
 			
 			MainActivity.launchClassPath = args[0];
 			MainActivity.launchOptimizedDirectory = args[1];
@@ -44,29 +45,23 @@ public class MinecraftEGLInitializer
 			read = egl.eglGetCurrentSurface(EGL10.EGL_READ);
 			draw = egl.eglGetCurrentSurface(EGL10.EGL_DRAW);
 			
-			int[] attribs = {
-				EGL10.EGL_RED_SIZE,   8,
-				EGL10.EGL_GREEN_SIZE, 8,
-				EGL10.EGL_BLUE_SIZE,  8,
-				EGL10.EGL_DEPTH_SIZE, 16, // 0
-				EGL10.EGL_NONE
-			};
-			
-			egl.eglInitialize(display, new int[]{0, 0});
-			EGLConfig config = getEglConfig(egl, display, attribs);
-			// egl.eglCreateWindowSurface(display, config, SurfaceUtils.createSurfaceByAddress(surfaceAddress), null);
-			
 			boolean makeCurrBool = theEgl.eglMakeCurrent(display, read, draw, context);
 			System.out.println("Gave up context: " + context + ", makeCurrent: " + Boolean.toString(makeCurrBool));
 			int eglGetError = egl.eglGetError();
 			System.out.println("eglGetError: " + Integer.toString(eglGetError) + ", success: " + Boolean.toString(eglGetError == EGL10.EGL_SUCCESS));
 			System.out.println("user.home: " + System.getProperty("user.home"));
 			
+			GL10 gl = ((GL10) context.getGL());
+			gl.glColor4f(0.5f, 0.5f, 0.5f, 0.5f);
+			gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+			int glErr = gl.glGetError();
+			
 			DexClassLoader classLoader = new DexClassLoader(args[0], args[1], args[2], MinecraftEGLInitializer.class.getClassLoader());
 			Class minecraftClass = classLoader.loadClass(minecraftMainClass);
 			Method minecraftMethod = minecraftClass.getMethod("main", String[].class);
 			minecraftMethod.invoke(null, new Object[]{minecraftArgs.toArray(new String[0])});
 		} catch (Throwable th) {
+			System.err.println("UNEXCEPTED SHUTTING DOWN");
 			th.printStackTrace();
 			System.exit(1);
 		}
