@@ -9,20 +9,12 @@
         <android.support.v7.preference.SeekBarPreference
             android:key="maxDxRefs"
             android:title="@string/mcl_setting_title_setmaxdxref"
-            android:summary="@string/mcl_setting_subtitle_setmaxdxref"
-            android:defaultValue="4095"
-            android:max="65535"
-            app:min="4095"
-			app:showSeekBarValue="true" />
-
+            android:summary="@string/mcl_setting_subtitle_setmaxdxref" />
+		
         <android.support.v7.preference.SeekBarPreference
             android:key="timeLongPressTrigger"
             android:title="@string/mcl_setting_title_longpresstrigger"
-            android:summary="@string/mcl_setting_subtitle_longpresstrigger"
-            android:defaultValue="500"
-            android:max="1000"
-            app:min="100"
-			app:showSeekBarValue="true" />
+            android:summary="@string/mcl_setting_subtitle_longpresstrigger" />
 		
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="false"
