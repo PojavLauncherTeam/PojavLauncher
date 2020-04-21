@@ -163,71 +163,77 @@ public final class Tools
 	 }
 	 */
 
-	public static void showError(Activity ctx, Throwable e)
+	public static void showError(Context ctx, Throwable e)
 	{
 		showError(ctx, e, false);
 	}
 
-	public static void showError(final Activity ctx, final Throwable e, final boolean exitIfOk)
+	public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk)
 	{
 		showError(ctx, e, exitIfOk, false);
 	}
 
-	private static void showError(final Activity ctx, final Throwable e, final boolean exitIfOk, final boolean showMore)
+	private static void showError(final Context ctx, final Throwable e, final boolean exitIfOk, final boolean showMore)
 	{
-		ctx.runOnUiThread(new Runnable(){
+		Runnable runnable = new Runnable(){
 
-				@Override
-				public void run()
-				{
-					final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
-					new AlertDialog.Builder((Context) ctx)
-						.setTitle(R.string.error_title)
-						.setMessage(errMsg)
-						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+			@Override
+			public void run()
+			{
+				final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
+				new AlertDialog.Builder((Context) ctx)
+					.setTitle(com.android.internal.R.string.dlg_error_title)
+					.setMessage(errMsg)
+					.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								if(exitIfOk) {
-									if (ctx instanceof MainActivity) {
-										MainActivity.fullyExit();
-									} else {
-										ctx.finish();
-									}
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							if(exitIfOk) {
+								if (ctx instanceof MainActivity) {
+									MainActivity.fullyExit();
+								} else if (ctx instanceof Activity) {
+									((Activity) ctx).finish();
 								}
 							}
-						})
-						.setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, new DialogInterface.OnClickListener(){
+						}
+					})
+					.setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, new DialogInterface.OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								showError(ctx, e, exitIfOk, !showMore);
-							}
-						})
-						.setNeutralButton(android.R.string.copy, new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							showError(ctx, e, exitIfOk, !showMore);
+						}
+					})
+					.setNeutralButton(android.R.string.copy, new DialogInterface.OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								StringSelection errData = new StringSelection(errMsg);
-								Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
-								
-								if(exitIfOk) {
-									if (ctx instanceof MainActivity) {
-										MainActivity.fullyExit();
-									} else {
-										ctx.finish();
-									}
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							StringSelection errData = new StringSelection(errMsg);
+							Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
+
+							if(exitIfOk) {
+								if (ctx instanceof MainActivity) {
+									MainActivity.fullyExit();
+								} else {
+									((Activity) ctx).finish();
 								}
 							}
-						})
-						//.setNegativeButton("Report (not available)", null)
-						.setCancelable(!exitIfOk)
-						.show();
-				}
-			});
+						}
+					})
+					//.setNegativeButton("Report (not available)", null)
+					.setCancelable(!exitIfOk)
+					.show();
+			}
+		};
+		
+		if (ctx instanceof Activity) {
+			((Activity) ctx).runOnUiThread(runnable);
+		} else {
+			runnable.run();
+		}
 	}
 
 	public static void dialogOnUiThread(final Activity ctx, final CharSequence title, final CharSequence message) {

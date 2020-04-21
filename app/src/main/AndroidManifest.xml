@@ -48,12 +48,6 @@
 		
 		<activity
 			android:screenOrientation="sensorLandscape"
-			android:label="@string/update_console"
-			android:name=".UpdateAppActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
-
-		<activity
-			android:screenOrientation="sensorLandscape"
 			android:name=".prefs.LauncherPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		

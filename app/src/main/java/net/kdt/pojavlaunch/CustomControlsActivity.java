@@ -102,7 +102,7 @@ public class CustomControlsActivity extends AppCompatActivity
 				@Override
 				public void onShow(DialogInterface dialogInterface) {
 
-					Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+					Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 					button.setOnClickListener(new View.OnClickListener() {
 
 							@Override
@@ -128,18 +128,24 @@ public class CustomControlsActivity extends AppCompatActivity
 	
 	private void actionLoad() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select OptiFine jar file");
+		builder.setTitle("Select control json file");
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(this);
+		flv.listFileAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
 				public void onFileSelected(File file, String path, String name) {
 					if (name.endsWith(".json")) {
-						// doInstallOptiFine(file);
-						dialog.dismiss();
+						try {
+							mCtrl = gson.fromJson(Tools.read(path), CustomControls.class);
+							ctrlLayout.loadLayout(mCtrl);
+							dialog.dismiss();
+						} catch (Exception e) {
+							Tools.showError(CustomControlsActivity.this, e);
+						}
 					}
 				}
 			});

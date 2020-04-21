@@ -203,7 +203,22 @@ public class AndroidLWJGLKeycode {
     }
 
 	public static void execKeyIndex(MainActivity mainActivity, int index) {
-		mainActivity.sendKeyPress(androidToLwjglMap.valueAt(index));
+		mainActivity.sendKeyPress(getKeyIndex(index));
+	}
+	
+	public static int getKeyIndex(int index) {
+		return androidToLwjglMap.valueAt(index);
+	}
+
+	public static int getIndexByLWJGLKey(int lwjglKey) {
+		for (int i = 0; i < androidToLwjglMap.size(); i++) {
+			int currKey = androidToLwjglMap.valueAt(i);
+			if (currKey == lwjglKey) {
+				return i;
+			}
+		}
+		
+		return 0;
 	}
 }
 

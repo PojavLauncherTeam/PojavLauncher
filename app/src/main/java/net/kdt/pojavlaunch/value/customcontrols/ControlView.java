@@ -20,16 +20,31 @@ public class ControlView extends Button implements OnTouchListener
 		setOnTouchListener(this);
 		
 		mGestureDetector = new GestureDetector(ctx, new SingleTapConfirm());
+		
+		setProperties(properties);
+	}
+
+	public ControlButton getProperties() {
+		return mProperties;
+	}
+	
+	public void setProperties(ControlButton properties) {
+		setProperties(properties, true);
+	}
+	
+	public void setProperties(ControlButton properties, boolean changePos) {
 		mProperties = properties;
 		// com.android.internal.R.string.delete
 		// android.R.string.
 		setText(properties.name);
-		setTranslationX(moveX = properties.x);
-		setTranslationY(moveY = properties.y);
-		
+		if (changePos) {
+			setTranslationX(moveX = properties.x);
+			setTranslationY(moveY = properties.y);
+		}
+
 		setLayoutParams(new FrameLayout.LayoutParams(properties.width, properties.height));
 	}
-
+	
 	@Override
 	public void setTranslationX(float x)
 	{
@@ -41,6 +56,10 @@ public class ControlView extends Button implements OnTouchListener
 	public void setTranslationY(float y) {
 		super.setTranslationY(y);
 		mProperties.y = y;
+	}
+	
+	public void updateProperties() {
+		setProperties(mProperties);
 	}
 	
 	private float moveX, moveY;

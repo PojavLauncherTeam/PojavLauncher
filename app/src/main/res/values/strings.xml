@@ -51,7 +51,6 @@
 	
 	<!-- Error messages -->
 	<string name="error_checklog">Error! Please check the log below: %s</string>
-	<string name="error_title">Error</string>
 	<string name="error_no_version">No version!</string>
 	<string name="error_load_version">Unable to load version %s</string>
 	<string name="error_convert_lib">Unable to convert library %s</string>
@@ -92,7 +91,7 @@
 	<string name="mcl_option_about">About</string>
 	
 	<string name="mcl_setting_title_setmaxdxref">Set max DX references</string>
-	<string name="mcl_setting_subtitle_setmaxdxref">Increase If an error happend while converting: Too many ... references. You may try multi-dex option.</string>
+	<string name="mcl_setting_subtitle_setmaxdxref">Increase If an error happend while converting: Too many ... references. You may try multi-dex option. Recommended: 4096 or 8192.</string>
 	<string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
 	<string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
 	<string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
@@ -146,7 +145,7 @@
 	<string name="mcn_exit_call">Exit</string>
 	<string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
 	<string name="mcn_exit_errcrash">Unable to locate crash!</string>
-	<string name="mcn_exit_confirm">Are you sure want to force exit?</string>
+	<string name="mcn_exit_confirm">Are you sure want to %s ?</string>
 	
 	<!-- MainActivity: Control buttons -->
 	<string name="controls">Controls</string>
@@ -170,7 +169,6 @@
 	<string name="control_mouseon">Mouse: on </string>
 	
 	<!-- MainActivity: Menu advanced controls -->
-	<string name="control_forceclose">Force close</string>
 	<string name="control_viewout">Log output</string>
 	<string name="control_adebug">PointerCapture Debug</string>
 	<string name="control_customkey">Send custom keycode</string>
@@ -179,6 +177,7 @@
 	<string name="control_more4"></string>
 	
 	<string name="customctrl_keyname">LWJGL Keycode</string>
+	<string name="customctrl_specialkey">Special Key</string>
 	<string name="customctrl_hidden">Hidden</string>
 	
 	<!-- Update part (unused now) -->

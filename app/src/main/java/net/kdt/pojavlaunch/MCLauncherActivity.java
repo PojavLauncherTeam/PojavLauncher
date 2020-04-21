@@ -134,7 +134,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				versions.add(fVer.getName());
 			}
 		} catch (Exception e) {
-			versions.add(getStr(R.string.error_title) + ":");
+			versions.add(getStr(com.android.internal.R.string.dlg_error_title) + ":");
 			versions.add(e.getMessage());
 
 		} finally {
@@ -844,18 +844,15 @@ public class MCLauncherActivity extends AppCompatActivity
 						case 1:{ // OptiFine installer
 								installOptiFine();
 							} break;
-						case 2:{ // Check update
-								checkUpdate();
-							} break;
-						case 3:{ // Custom controls
+						case 2:{ // Custom controls
 								if (Tools.enableDevFeatures) {
 									startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
 								}
 							} break;
-						case 4:{ // Settings
+						case 3:{ // Settings
 								startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
 							} break;
-						case 5:{ // About
+						case 4:{ // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
 								aboutB.setTitle(R.string.mcl_option_about);
 								try
@@ -970,7 +967,6 @@ public class MCLauncherActivity extends AppCompatActivity
 			dialog = new ProgressDialog(MCLauncherActivity.this);
 			dialog.setTitle("Installing OptiFine");
 			dialog.setMessage("Prepaping");
-			dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			dialog.setMax(5);
 			dialog.setCancelable(false);
 			dialog.show();
@@ -1010,7 +1006,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
 					File patchedFile = new File(output[1]);
 
-					publishProgress("Converting OptiFine", null, "1", "ADD");
+					publishProgress("Converting OptiFine", null, null, Integer.toString(ProgressDialog.STYLE_SPINNER));
 
 					System.setOut(new PrintStream(logOut));
 					System.setErr(new PrintStream(logErr));
@@ -1019,7 +1015,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							@Override
 							public void onReceived(String msg, int max, int current)
 							{
-								publishProgress("Converting OptiFine: " + msg, Integer.toString(max), Integer.toString(current), "SET");
+								publishProgress("Converting OptiFine: " + msg, Integer.toString(max), null);
 							}
 					});
 
@@ -1032,7 +1028,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					patchedFile.delete();
 				}
 
-				publishProgress("Launching OptiFine installer", null, "1", "ADD");
+				publishProgress("Launching OptiFine installer", null, null, Integer.toString(ProgressDialog.STYLE_SPINNER));
 
 				File optDir = getDir("dalvik-cache", 0);
 				optDir.mkdir();
@@ -1044,11 +1040,15 @@ public class MCLauncherActivity extends AppCompatActivity
 				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
 				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
 
-				publishProgress("(4/5) Patching OptiFine Tweaker", null, "1", "ADD");
+				publishProgress("(4/5) Patching OptiFine Tweaker", null, null);
 				File optifineLibFile = new File(AndroidOptiFineUtilities.optifineOutputJar);
+				if (!optifineLibFile.exists()) {
+					throw new FileNotFoundException(optifineLibFile.getAbsolutePath() + "\n\n--- OptiFine installer log ---\n" + currentLog.toString());
+				}
 				new OptiFinePatcher(optifineLibFile).saveTweaker();
+				convertedFile.delete();
 				
-				publishProgress("(5/5) Done!", null, "1", "ADD");
+				publishProgress("(5/5) Done!", null, null);
 				Thread.sleep(500);
 			} catch (Throwable th) {
 				throwable = th;
@@ -1076,12 +1076,10 @@ public class MCLauncherActivity extends AppCompatActivity
 			dialog.setMessage(text[0]);
 			if (text.length >= 2 && text[1] != null) {
 				dialog.setMax(Integer.valueOf(text[1]));
+			} if (text.length >= 3) {
+				dialog.setProgress(dialog.getProgress() + 1);
 			} if (text.length >= 4) {
-				if (text[3].equals("ADD")) {
-					dialog.setProgress(dialog.getProgress() + Integer.valueOf(text[2]));
-				} else if (text[3].equals("SET")) {
-					dialog.setProgress(7 + Integer.valueOf(text[2]));
-				}
+				dialog.setProgressStyle(Integer.parseInt(text[3]));
 			}
 		}
 
@@ -1098,117 +1096,6 @@ public class MCLauncherActivity extends AppCompatActivity
 				Tools.showError(MCLauncherActivity.this, th);
 			}
 		}
-	}
-
-	public void updateAppProcess(final String ver)
-	{
-		new Thread(new Runnable(){
-
-				@Override
-				public void run()
-				{
-					try
-					{
-						DownloadUtils.downloadFile(Tools.mhomeUrl + "/installer_" + ver + ".jar", new File(Tools.worksDir + "/installer.jar"));
-						startActivity(new Intent(MCLauncherActivity.this, UpdateAppActivity.class));
-					}
-					catch (Throwable e)
-					{
-						e.printStackTrace();
-						mkToast("Download failed: " + e.getMessage());
-					}
-				}
-			}).start();
-	}
-
-	public void checkUpdate() {
-		final ProgressDialog progUp = new ProgressDialog(this);
-		progUp.setMessage(getStr(R.string.mcl_option_checkupdate));
-		progUp.setCancelable(false);
-		progUp.show();
-
-		new Thread(new Runnable(){
-
-				@Override
-				public void run()
-				{
-					final AlertDialog.Builder alUp = new AlertDialog.Builder(MCLauncherActivity.this);
-					alUp.setTitle(R.string.mcl_option_checkupdate);
-
-					try {
-						final int myVer = Tools.usingVerCode;
-						// final String currVerName = Tools.usingVerName;
-
-						String[] totalNewVer = DownloadUtils.downloadString(Tools.mhomeUrl + "/update.txt").split(";");
-						final int newVer = Integer.parseInt(totalNewVer[1]);
-						final String newVerName = totalNewVer[0];
-
-						//int myVer = 102;
-
-						runOnUiThread(new Runnable(){
-
-								@Override
-								public void run()
-								{
-									if(newVer != -1){
-										boolean isAvailable = myVer < newVer;
-
-										String isNewVerAvailable =
-											isAvailable ?
-											"A new version is available!\nSee changelog at Launcher News tab." :
-											"This launcher is up-to-date!";
-
-										if (myVer > newVer) {
-											isNewVerAvailable = "This is an unreleased version or unofficial version?";
-										}
-
-										alUp.setMessage(
-											"Received version " + newVerName + "\n" +
-											isNewVerAvailable
-										);
-										if(isAvailable){
-											alUp.setPositiveButton("Update", new DialogInterface.OnClickListener(){
-													@Override
-													public void onClick(DialogInterface p1, int p2)
-													{
-														updateAppProcess(newVerName);
-													}
-												});
-										}
-									}
-									else{
-										alUp.setMessage("Failed to check for update. Reason: No Internet connection");
-									}
-									alUp.setNegativeButton(android.R.string.cancel, null);
-									alUp.show();
-								}
-							});
-					} catch (final Exception e) {
-						Log.e(Tools.APP_NAME + ".CheckUpdateError", e.getMessage());
-						e.printStackTrace();
-
-						runOnUiThread(new Runnable(){
-
-								@Override
-								public void run()
-								{
-									alUp.setMessage("Failed to check for update. Reason: " + e.getMessage());
-									alUp.show();
-								}
-							});
-					} finally {
-						runOnUiThread(new Runnable(){
-
-								@Override
-								public void run()
-								{
-									progUp.dismiss();
-								}
-							});
-
-					}
-				}
-			}).start();
 	}
 
 	private class ViewPagerAdapter extends FragmentPagerAdapter {

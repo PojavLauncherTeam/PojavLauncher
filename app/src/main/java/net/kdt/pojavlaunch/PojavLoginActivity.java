@@ -52,6 +52,8 @@ public class PojavLoginActivity extends MineActivity
 		firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
 		new File(Tools.mpProfiles).mkdir();
 		
+		// Remove vmos warning???
+		/*
 		if (isAndroid7() && !firstLaunchPrefs.getBoolean(PREF_IS_DONOTSHOWAGAIN_WARN, false)) {
 			AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this);
 			startDlg.setTitle(R.string.warning_title);
@@ -109,8 +111,9 @@ public class PojavLoginActivity extends MineActivity
 				
 			startDlg.show();
 		} else {
+		*/
 			new InitTask().execute();
-		}
+		// }
 	}
 
 	private class InitTask extends AsyncTask<Void, String, Integer>{
@@ -550,7 +553,7 @@ public class PojavLoginActivity extends MineActivity
 					{
 						// TODO: Implement this method
 						if(result[0].equals("ERROR")){
-							Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(R.string.error_title), strArrToString(result));
+							Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(com.android.internal.R.string.dlg_error_title), strArrToString(result));
 						} else{
 							MCProfile.Builder builder = new MCProfile.Builder();
 							builder.setAccessToken(result[1]);

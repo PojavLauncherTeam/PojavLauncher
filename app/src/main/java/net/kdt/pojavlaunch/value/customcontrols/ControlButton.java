@@ -1,6 +1,8 @@
 package net.kdt.pojavlaunch.value.customcontrols;
 import net.kdt.pojavlaunch.*;
 import android.view.*;
+import java.util.*;
+import android.content.*;
 
 public class ControlButton
 {
@@ -10,11 +12,15 @@ public class ControlButton
 	public static int SPECIALBTN_TOGGLECTRL = 1;
 	
 	private static ControlButton[] SPECIAL_BUTTONS;
+	private static String[] SPECIAL_BUTTON_NAME_ARRAY;
 	
 	public static ControlButton[] getSpecialButtons(){
 		if (SPECIAL_BUTTONS == null) {
 			ControlButton keyboardBtn = new ControlButton();
+			keyboardBtn.lwjglKeycode = -1;
+			
 			ControlButton toggleCtrlBtn = new ControlButton();
+			toggleCtrlBtn.lwjglKeycode = -2;
 
 			SPECIAL_BUTTONS = new ControlButton[]{
 				keyboardBtn,
@@ -25,6 +31,18 @@ public class ControlButton
 		return SPECIAL_BUTTONS;
 	}
 	
+	public static String[] buildSpecialButtonArray() {
+		if (SPECIAL_BUTTON_NAME_ARRAY == null) {
+			List<String> nameList = new ArrayList<String>();
+			for (ControlButton btn : getSpecialButtons()) {
+				nameList.add(btn.name);
+			}
+			SPECIAL_BUTTON_NAME_ARRAY = nameList.toArray(new String[0]);
+		}
+		
+		return SPECIAL_BUTTON_NAME_ARRAY;
+	}
+	
 	// Concept...
 	public String name;
 	public float x;
@@ -32,6 +50,7 @@ public class ControlButton
 	public int width = pixelOf50dp;
 	public int height = pixelOf50dp;
 	public int lwjglKeycode;
+	public boolean hidden;
 	public boolean holdCtrl;
 	public boolean holdAlt;
 	public boolean holdShift;

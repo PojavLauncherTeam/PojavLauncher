@@ -1069,13 +1069,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 	
 	private void openLogOutput() {
-		WindowAnimation.fadeIn(contentLog, 500);
+		contentLog.setVisibility(View.VISIBLE);
 	}
 
 	public void closeLogOutput(View view) {
-		//scrollLog.setVisibility(View.GONE);
-
-		WindowAnimation.fadeOut(contentLog, 500);
+		contentLog.setVisibility(View.GONE);
 	}
 /*
 	private void openCanvasOutput() {
@@ -1168,7 +1166,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void dialogForceClose()
 	{
 		new AlertDialog.Builder(this)
-			.setMessage(R.string.mcn_exit_confirm)
+			.setMessage(getResources().getString(R.string.mcn_exit_confirm, getResources().getString(com.android.internal.R.string.force_close)))
 			.setNegativeButton(android.R.string.cancel, null)
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
@@ -1181,7 +1179,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
 					}
 					
-					// If we are unable to enable exit, use method: kill myself.
+					// If unable to enable exit, use method: kill self process.
 					android.os.Process.killProcess(android.os.Process.myPid());
 					
 					// Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();

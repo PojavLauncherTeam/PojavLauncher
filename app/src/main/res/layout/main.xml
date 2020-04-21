@@ -244,6 +244,7 @@
 		</RelativeLayout>
 
 		<LinearLayout
+			android:animateLayoutChanges="true"
 			android:id="@+id/content_log_layout"
 			android:layout_height="match_parent"
 			android:layout_width="match_parent"
