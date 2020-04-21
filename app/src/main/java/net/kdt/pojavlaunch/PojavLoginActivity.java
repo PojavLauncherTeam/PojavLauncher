@@ -34,7 +34,7 @@ public class PojavLoginActivity extends MineActivity
 	// private boolean isPermGranted = false;
 	
 	private SharedPreferences firstLaunchPrefs;
-	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
+	// private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
 	
 	private boolean isInitCalled = false;
@@ -553,7 +553,7 @@ public class PojavLoginActivity extends MineActivity
 					{
 						// TODO: Implement this method
 						if(result[0].equals("ERROR")){
-							Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(com.android.internal.R.string.dlg_error_title), strArrToString(result));
+							Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(R.string.global_error), strArrToString(result));
 						} else{
 							MCProfile.Builder builder = new MCProfile.Builder();
 							builder.setAccessToken(result[1]);

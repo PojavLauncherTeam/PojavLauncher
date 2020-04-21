@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 	<item
 		android:id="@+id/nav_forceclose"
-		android:title="@*android:string/force_close" />
+		android:title="@string/control_forceclose" />
 	<item
 		android:id="@+id/nav_viewlog"
 		android:title="@string/control_viewout" />

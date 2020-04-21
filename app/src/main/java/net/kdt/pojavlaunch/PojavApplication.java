@@ -23,8 +23,11 @@ public class PojavApplication extends Application
 			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
 			
 			LauncherPreferences.loadPreferences(this);
-			
+
+			ControlButton.pixelOf2dp = (int) Tools.dpToPx(this, 2);
+			ControlButton.pixelOf30dp = (int) Tools.dpToPx(this, 30);
 			ControlButton.pixelOf50dp = (int) Tools.dpToPx(this, 50);
+			ControlButton.pixelOf80dp = (int) Tools.dpToPx(this, 80);
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 			specialButtons[0].name = getString(R.string.control_keyboard);
 			specialButtons[1].name = getString(R.string.control_toggle);

@@ -3,28 +3,27 @@ import net.kdt.pojavlaunch.*;
 import android.view.*;
 import java.util.*;
 import android.content.*;
+import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
 
 public class ControlButton
 {
+	public static int pixelOf2dp;
+	public static int pixelOf30dp;
 	public static int pixelOf50dp;
+	public static int pixelOf80dp;
 	
-	public static int SPECIALBTN_KEYBOARD = 0;
-	public static int SPECIALBTN_TOGGLECTRL = 1;
+	public static final int SPECIALBTN_KEYBOARD = 0;
+	public static final int SPECIALBTN_TOGGLECTRL = 1;
 	
 	private static ControlButton[] SPECIAL_BUTTONS;
 	private static String[] SPECIAL_BUTTON_NAME_ARRAY;
 	
 	public static ControlButton[] getSpecialButtons(){
 		if (SPECIAL_BUTTONS == null) {
-			ControlButton keyboardBtn = new ControlButton();
-			keyboardBtn.lwjglKeycode = -1;
-			
-			ControlButton toggleCtrlBtn = new ControlButton();
-			toggleCtrlBtn.lwjglKeycode = -2;
-
 			SPECIAL_BUTTONS = new ControlButton[]{
-				keyboardBtn,
-				toggleCtrlBtn
+				new ControlButton("Keyboard", -1, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, pixelOf80dp, pixelOf30dp),
+				new ControlButton("GUI", -2, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf2dp - pixelOf50dp)
 			};
 		}
 		
@@ -43,7 +42,6 @@ public class ControlButton
 		return SPECIAL_BUTTON_NAME_ARRAY;
 	}
 	
-	// Concept...
 	public String name;
 	public float x;
 	public float y;
@@ -56,6 +54,35 @@ public class ControlButton
 	public boolean holdShift;
 	public View.OnClickListener specialButtonListener;
 	// public boolean hold
+	
+	public ControlButton() {
+		this("", Keyboard.CHAR_NONE, 0, 0);
+	}
+
+	public ControlButton(String name, int lwjglKeycode) {
+		this(name, lwjglKeycode, 0, 0);
+	}
+	
+	public ControlButton(String name, int lwjglKeycode, float x, float y) {
+		this(name, lwjglKeycode, x, y, pixelOf50dp, pixelOf50dp);
+	}
+
+	public ControlButton(android.content.Context ctx, int resId, int lwjglKeycode, float x, float y, boolean isSquare) {
+		this(ctx.getResources().getString(resId), lwjglKeycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
+	}
+	
+	public ControlButton(String name, int lwjglKeycode, float x, float y, boolean isSquare) {
+		this(name, lwjglKeycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
+	}
+	
+	public ControlButton(String name, int lwjglKeycode, float x, float y, int width, int height) {
+		this.name = name;
+		this.lwjglKeycode = lwjglKeycode;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
 	
 	public void execute(MainActivity act, boolean isDown) {
 		act.sendKeyPress(lwjglKeycode, isDown);

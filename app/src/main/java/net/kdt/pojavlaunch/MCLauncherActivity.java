@@ -134,7 +134,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				versions.add(fVer.getName());
 			}
 		} catch (Exception e) {
-			versions.add(getStr(com.android.internal.R.string.dlg_error_title) + ":");
+			versions.add(getStr(R.string.global_error) + ":");
 			versions.add(e.getMessage());
 
 		} finally {

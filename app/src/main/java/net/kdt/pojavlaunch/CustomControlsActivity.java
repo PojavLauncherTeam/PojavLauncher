@@ -10,7 +10,9 @@ import android.widget.*;
 import com.google.gson.*;
 import com.kdt.filerapi.*;
 import java.io.*;
+import java.util.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
+import org.lwjgl.input.*;
 
 public class CustomControlsActivity extends AppCompatActivity
 {
@@ -45,15 +47,7 @@ public class CustomControlsActivity extends AppCompatActivity
 							actionLoad();
 							break;
 						case R.id.menu_ctrl_add:
-							ControlButton ctrlBtn = new ControlButton();
-							ctrlBtn.name = "New";
-							ctrlBtn.x = 100;
-							ctrlBtn.y = 100;
-							ctrlLayout.addControlButton(ctrlBtn);
-							break;
-						case R.id.menu_ctrl_edit: // openLogOutput();
-							break;
-						case R.id.menu_ctrl_remove: // toggleDebug();
+							ctrlLayout.addControlButton(new ControlButton("New", Keyboard.CHAR_NONE, 100, 100));
 							break;
 					}
 					//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
@@ -64,14 +58,8 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		
 		mCtrl = new CustomControls();
-		/*
-		ControlButton ctrlEx = new ControlButton();
-		ctrlEx.name = "Test";
-		ctrlEx.x = 100;
-		ctrlEx.y = 100;
+		generateDefaultControlMap();
 		
-		mCtrl.button.add(ctrlEx);
-		*/
 		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.loadLayout(mCtrl);
 		ctrlLayout.setCanMove(true);
@@ -151,5 +139,20 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		dialog.setView(flv);
 		dialog.show();
+	}
+	
+	private float dpToPx(float dp) {
+		return Tools.dpToPx(this, dp);
+	}
+	
+	private void generateDefaultControlMap() {
+		List<ControlButton> btn = mCtrl.button;
+		btn.add(ControlButton.getSpecialButtons()[0]); // Keyboard
+		btn.add(ControlButton.getSpecialButtons()[1]); // GUI
+		// btn.add(ControlButton.getSpecialButtons()[2]); // Toggle mouse
+		btn.add(new ControlButton(this, R.string.control_debug, Keyboard.KEY_F3, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
+		btn.add(new ControlButton(this, R.string.control_chat, Keyboard.KEY_T, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf80dp, ControlButton.pixelOf2dp, false)); 
+		btn.add(new ControlButton(this, R.string.control_listplayers, Keyboard.KEY_TAB, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf80dp * 2, ControlButton.pixelOf2dp, false));
+		btn.add(new ControlButton(this, R.string.control_thirdperson, Keyboard.KEY_F5, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
 	}
 }

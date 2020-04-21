@@ -6,12 +6,4 @@
     <item
         android:id="@+id/menu_ctrl_add"
         android:title="@string/global_add"/>
-	
-    <item
-        android:id="@+id/menu_ctrl_edit"
-        android:title="@string/global_edit"/>
-	
-    <item
-        android:id="@+id/menu_ctrl_remove"
-        android:title="@string/global_remove"/>
 </menu>

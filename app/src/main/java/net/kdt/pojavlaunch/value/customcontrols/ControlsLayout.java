@@ -26,25 +26,19 @@ public class ControlsLayout extends FrameLayout
 		alert.setView(R.layout.control_setting);
 		alert.setPositiveButton(android.R.string.ok, null);
 		alert.setNegativeButton(android.R.string.cancel, null);
-		alert.setNeutralButton(com.android.internal.R.string.delete, new DialogInterface.OnClickListener(){
+		String deleteText = "Delete";
+		try {
+			// Try to get non-public delete text, which translated to multiple languages.
+			deleteText = getResources().getString((int) com.android.internal.R.string.class.getDeclaredField("deleteText").get(null));
+		} catch (Throwable unused) {
+		}
+		
+		alert.setNeutralButton(deleteText, new DialogInterface.OnClickListener(){
 
 				@Override
 				public void onClick(DialogInterface p1, int p2)
 				{
-					ControlButton.getSpecialButtons();
-					
-					AlertDialog.Builder alert2 = new AlertDialog.Builder(getContext());
-					alert2.setCancelable(false);
-					alert2.setTitle(R.string.customctrl_specialkey);
-					alert2.setItems(ControlButton.buildSpecialButtonArray(), new DialogInterface.OnClickListener(){
-
-							@Override
-							public void onClick(DialogInterface dInterface, int position) {
-								view.setProperties(ControlButton.getSpecialButtons()[position], false);
-							}
-						});
-					alert2.setPositiveButton(android.R.string.cancel, null);
-					alert2.show();
+					removeControlButton(view);
 				}
 			});
 		final AlertDialog dialog = alert.create();
@@ -63,22 +57,26 @@ public class ControlsLayout extends FrameLayout
 					final Spinner spinnerKeycode = dialog.findViewById(R.id.controlsetting_spinner_lwjglkeycode);
 					ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
 					
-					String[] specialArr = ControlButton.buildSpecialButtonArray();
+					String[] oldSpecialArr = ControlButton.buildSpecialButtonArray();
+					String[] specialArr = new String[oldSpecialArr.length];
 					for (int i = 0; i < specialArr.length; i++) {
-						specialArr[i] = "SPECIAL_" + specialArr[i];
+						specialArr[i] = "SPECIAL_" + oldSpecialArr[i];
 					}
 					
 					adapter.addAll(specialArr);
 					adapter.addAll(AndroidLWJGLKeycode.generateKeyName());
 					adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 					spinnerKeycode.setAdapter(adapter);
-					spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.lwjglKeycode) + 2);
+					if (properties.lwjglKeycode < 0) {
+						spinnerKeycode.setSelection(properties.lwjglKeycode + 2);
+					} else {
+						spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.lwjglKeycode + 2));
+					}
 					spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
 							@Override
 							public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
 								normalBtnLayout.setVisibility(id < 2 ? View.GONE : View.VISIBLE);
-								
 							}
 
 							@Override
@@ -118,38 +116,31 @@ public class ControlsLayout extends FrameLayout
 		mLayout = controlLayout;
 		removeAllViews();
 		for (ControlButton button : controlLayout.button) {
-			final ControlView view = new ControlView(getContext(), button);
-			view.setOnClickListener(new View.OnClickListener(){
-
-					@Override
-					public void onClick(View p1) {
-						showCtrlOption(view);
-					}
-				});
-			view.setCanMove(mCanMove);
-			view.setLayoutParams(new LayoutParams((int) Tools.dpToPx(getContext(), 50), (int) Tools.dpToPx(getContext(), 50)));
-			addView(view);
+			addControlView(button);
 		}
 	}
 	
 	public void addControlButton(ControlButton controlButton) {
 		mLayout.button.add(controlButton);
-		
+		addControlView(controlButton);
+	}
+	
+	private void addControlView(ControlButton controlButton) {
 		final ControlView view = new ControlView(getContext(), controlButton);
 		view.setOnClickListener(new View.OnClickListener(){
 
 				@Override
 				public void onClick(View p1) {
-					AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-					alert.setTitle(getResources().getString(R.string.global_edit) + " " + view.getText());
-					// alert.setView(edit);
-					alert.show();
+					showCtrlOption(view);
 				}
 			});
 		view.setCanMove(mCanMove);
 		addView(view);
-		
-		// loadLayout(controlLayout);
+	}
+	
+	public void removeControlButton(ControlView controlButton) {
+		mLayout.button.remove(controlButton.getProperties());
+		removeView(controlButton);
 	}
 	
 	public void saveLayout(String path) throws Exception {

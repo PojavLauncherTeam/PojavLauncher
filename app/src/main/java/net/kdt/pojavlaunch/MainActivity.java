@@ -1166,7 +1166,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void dialogForceClose()
 	{
 		new AlertDialog.Builder(this)
-			.setMessage(getResources().getString(R.string.mcn_exit_confirm, getResources().getString(com.android.internal.R.string.force_close)))
+			.setMessage(R.string.mcn_exit_confirm)
 			.setNegativeButton(android.R.string.cancel, null)
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 

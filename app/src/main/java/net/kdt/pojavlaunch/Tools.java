@@ -182,7 +182,7 @@ public final class Tools
 			{
 				final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
 				new AlertDialog.Builder((Context) ctx)
-					.setTitle(com.android.internal.R.string.dlg_error_title)
+					.setTitle(R.string.global_error)
 					.setMessage(errMsg)
 					.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
