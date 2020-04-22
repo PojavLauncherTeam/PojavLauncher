@@ -1,23 +1,21 @@
 # PojavLauncher
-A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11
-
-## Planning
-- There's no planning.
+A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11.<br>
+`gl4es` branch is the current development.
 
 ## iOS version?
 - Impossible for directly run. RoboVM is AOT Compiler. You could also try UTM with Android-x86.
-
-## Installing OptiFine?
-Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
-
-## Installing Forge?
-Not implemented yet.
 
 ## Known issues
 - Some Huawei devices can't run Minecraft or OptiFine.
 - Can't run multiple versions at same time.
 
-## Got some bugs?
+## FAQ:
+### Installing OptiFine?
+Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
+
+### Installing Forge?
+Not implemented yet.
+
 ### • Unable to drag item in inventory?
 Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mode: Toggle to OFF.
 
