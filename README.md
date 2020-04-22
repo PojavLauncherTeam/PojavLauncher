@@ -10,10 +10,10 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 - Can't run multiple versions at same time.
 
 ## FAQ:
-### Installing OptiFine?
+### • Installing OptiFine?
 Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
 
-### Installing Forge?
+### • Installing Forge?
 Not implemented yet.
 
 ### • Unable to drag item in inventory?
