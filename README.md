@@ -23,9 +23,9 @@ Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mod
 Increase max DX references. Launcher Options -> Settings -> Increase max DX references to 8k.
 
 ### • Other bugs or still not working?
-#### Report an issue with:
+#### Report an issue with
 - Full error log: press **Show more** and copy.
-#### If it isn't a Minecraft crash:
+#### If it isn't a Minecraft crash
 - Device name
 - Android version 
 
