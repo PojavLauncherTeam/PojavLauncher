@@ -9,7 +9,7 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 - Some Huawei devices can't run Minecraft or OptiFine.
 - Can't run multiple versions at same time.
 
-## FAQ:
+## FAQ
 ### • Installing OptiFine?
 Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
 
