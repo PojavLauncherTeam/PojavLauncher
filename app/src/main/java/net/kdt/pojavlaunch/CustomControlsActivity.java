@@ -62,7 +62,7 @@ public class CustomControlsActivity extends AppCompatActivity
 		
 		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.loadLayout(mCtrl);
-		ctrlLayout.setCanMove(true);
+		ctrlLayout.setModifiable(true);
 	}
 
 	@Override
