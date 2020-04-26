@@ -23,8 +23,8 @@ public class IoUtil {
 	
     private IoUtil() {
     }
-
-    public static void pipe( /*PojavLauncherActivity activity,*/ InputStream is, OutputStream out, byte[] buf) throws IOException {
+	
+    public static void pipe(InputStream is, OutputStream out, byte[] buf) throws IOException {
         while (true) {
 			//if (cancel) throw new CancelException();
 			

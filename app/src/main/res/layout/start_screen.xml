@@ -5,7 +5,7 @@
 	android:layout_height="fill_parent"
 	android:orientation="vertical"
 	android:gravity="center"
-	android:id="@+id/startscreenLinearLayout1">
+	android:id="@+id/start_screen_layout">
 
 	<TextView
 		android:layout_width="wrap_content"
@@ -17,14 +17,19 @@
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
-		android:text="@string/app_motd"/>
+		android:text="@string/app_motd"
+		android:id="@+id/start_screen_sub_text"/>
 
 	<ProgressBar
 		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_marginTop="20dp"
-		android:id="@+id/startscreenProgress"
-		android:visibility="invisible"/>
+		android:id="@+id/start_screen_progress"
+		android:visibility="visible"
+		android:indeterminate="true"
+		style="?android:attr/progressBarStyleHorizontal"
+		android:layout_marginLeft="100dp"
+		android:layout_marginRight="100dp"/>
 
 </LinearLayout>
 

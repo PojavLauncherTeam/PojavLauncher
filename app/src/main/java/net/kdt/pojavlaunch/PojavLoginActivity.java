@@ -22,6 +22,8 @@ import android.system.*;
 import android.net.*;
 import static android.view.ViewGroup.LayoutParams.*;
 import net.kdt.pojavlaunch.update.*;
+import net.kdt.pojavlaunch.util.*;
+import java.net.*;
 
 public class PojavLoginActivity extends MineActivity
 {
@@ -36,6 +38,7 @@ public class PojavLoginActivity extends MineActivity
 	private SharedPreferences firstLaunchPrefs;
 	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
+	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKInstalled";
 	
 	private boolean isInitCalled = false;
 	@Override
@@ -105,7 +108,8 @@ public class PojavLoginActivity extends MineActivity
 		private ProgressBar progress;
 
 		private ProgressBar progressSpin;
-		private EditText progressLog;
+		private TextView startSubText;
+		// private EditText progressLog;
 		private AlertDialog progDlg;
 
 		@Override
@@ -113,10 +117,11 @@ public class PojavLoginActivity extends MineActivity
 		{
 			LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
 			LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
-
+			startSubText = (TextView) startScr.findViewById(R.id.start_screen_sub_text);
+			
 			replaceFonts(startScr);
 
-			progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
+			progress = (ProgressBar) startScr.findViewById(R.id.start_screen_progress);
 			//startScr.addView(progress);
 
 			AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this, R.style.AppTheme);
@@ -157,7 +162,60 @@ public class PojavLoginActivity extends MineActivity
 					
 				} catch (InterruptedException e) {}
 			}
+			
+			if (!firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_OPENJDK, false)) {
+				// Install OpenJDK
+				runOnUiThread(new Runnable(){
 
+						@Override
+						public void run()
+						{
+							startSubText.setText(R.string.openjdk_install_download);
+						}
+					});
+				publishProgress("i0");
+				File openjdkZip = new File(Tools.MAIN_PATH, "OpenJDK.zip");
+				File oldOpenjdkFolder = new File(Tools.datapath, "openjdk");
+				File newOpenjdkFolder = new File(Tools.datapath, "jre");
+				try {
+					// BEGIN download file
+					URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.0-preview1/net.kdt.pojavlaunch.openjdk.zip");
+					URLConnection connection = url.openConnection();
+					connection.connect();
+					int fileLength = connection.getContentLength();
+					InputStream input = new BufferedInputStream(url.openStream());
+					OutputStream output = new FileOutputStream(openjdkZip);
+					byte data[] = new byte[1024];
+					long total = 0;
+					int count;
+					while ((count = input.read(data)) != -1) {
+						total += count;
+						publishProgress("+", null, Integer.toString((int) (total * 100 / fileLength)));
+						output.write(data, 0, count);
+					}
+					output.flush();
+					output.close();
+					input.close();
+					// END download file
+					
+					runOnUiThread(new Runnable(){
+
+							@Override
+							public void run()
+							{
+								startSubText.setText(R.string.openjdk_install_unpack);
+							}
+						});
+					publishProgress("i1");
+					Tools.ZipTool.unzip(openjdkZip, new File(Tools.datapath));
+					oldOpenjdkFolder.renameTo(newOpenjdkFolder);
+					
+					Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
+				} catch (Throwable e) {
+					Tools.showError(PojavLoginActivity.this, e, true);
+				}
+			}
+			
 			initMain();
 
 			return 0;
@@ -166,12 +224,25 @@ public class PojavLoginActivity extends MineActivity
 		@Override
 		protected void onProgressUpdate(String... obj)
 		{
-
-			if (obj[0].equals("visible")) {
-				progress.setVisibility(View.VISIBLE);
-			} else if (obj.length == 2 && obj[1] != null) {
+			if (obj[0] != null) {
+				if (obj[0].equals("visible")) {
+					progress.setVisibility(View.VISIBLE);
+				}
+				
+				if (obj[0].equals("i0")) {
+					progress.setIndeterminate(false);
+				} else if (obj[0].equals("i1")) {
+					progress.setIndeterminate(true);
+				} else if (obj[0].equals("+")) {
+					progress.setMax(Integer.parseInt(obj[2].substring(1)));
+					progress.setProgress(progress.getProgress() + 1);
+				}
+			}
+			/*
+			if (obj.length > 1 && obj[1] != null) {
 				progressLog.append(obj[1]);
 			}
+			*/
 		}
 
 		@Override
@@ -181,9 +252,9 @@ public class PojavLoginActivity extends MineActivity
 			if (obj == 0) {
 				if (progDlg != null) progDlg.dismiss();
 				uiInit();
-			} else if (progressLog != null) {
+			} /* else if (progressLog != null) {
 				progressLog.setText(getResources().getString(R.string.error_checklog, "\n\n" + progressLog.getText()));
-			}
+			} */
 
 		}
 /*
@@ -294,8 +365,6 @@ public class PojavLoginActivity extends MineActivity
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.3.jar", Tools.versnDir + "/1.7.3");
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
 			
-			// Download and install OpenJDK
-			// https://github.com/khanhduytran0/PojavLauncher/releases/download/untagged-eb8f813f9739ae4472cf/net.kdt.pojavlaunch.openjdk.zip
 		}
 		catch(Exception e){
 			Tools.showError(this, e);

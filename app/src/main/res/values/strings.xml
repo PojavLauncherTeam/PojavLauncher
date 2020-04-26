@@ -13,7 +13,7 @@
 
 	<!-- Logging output -->
 	<string name="log_title">Log output</string>
-	
+
 	<!-- Login strings -->
 	<string name="login_online_username_hint">Email or username</string>
 	<string name="login_online_username_question">(Which do I use?)</string>
@@ -31,6 +31,10 @@
 	<string name="login_error_exist_username">This username already exist</string>
 	
 	<string name="login_select_account">Select account</string>
+
+	<!-- OpenJDK -->
+	<string name="openjdk_install_download">Downloading OpenJDK</string>
+	<string name="openjdk_install_unpack">Unpacking OpenJDK</string>
 	
 	<!-- Hint -->
 	<string name="hint_select_account">To select, click it. To delete an account, hold it.</string>
