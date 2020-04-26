@@ -38,9 +38,8 @@
 	
 	<!-- Warning -->
 	<string name="warning_title">Warning</string>
-	<string name="warning_msg">This app may not compatible with your Android version (above or equals than Android 7.0). You can use VMOS then install this app to VMOS instead. But VMOS is removed by Play Store, you must install it manually.</string>
+	<string name="warning_msg">This v3 is experimental and may not worked. If you are not a developer, go back to v2!</string>
 	<string name="warning_noshowagain">Don\'t show again</string>
-	<string name="warning_action_install">Install VMOS</string>
 	<string name="warning_action_tryanyway">Try anyway</string>
 	<string name="warning_action_exit">Exit</string>
 	<string name="warning_remove_account">This account will be removed!</string>

@@ -33,7 +33,8 @@ public class MainConsoleActivity extends AppCompatActivity
 		mConsoleView.setLayoutParams(new ScrollView.LayoutParams(ScrollView.LayoutParams.WRAP_CONTENT, ScrollView.LayoutParams.WRAP_CONTENT));
 		mConsoleView.setTypeface(Typeface.MONOSPACE);
 		mConsoleView.setGravity(Gravity.TOP);
-		mConsoleView.setTextSize(15);
+		mConsoleView.setTextSize(12);
+		mConsoleView.setTextIsSelectable(true);
 		
 		mConsoleScroll = new ScrollView(this);
 		mConsoleScroll.addView(mConsoleView);
@@ -80,13 +81,16 @@ public class MainConsoleActivity extends AppCompatActivity
 			mcJreArgs.add(mVersionInfo.mainClass);
 			mcJreArgs.addAll(Arrays.asList(getMCArgs()));
 			
-			ShellProcessOperation process = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+			SimpleShellProcess process = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
 				@Override
 				public void onPrintLine(String text) {
 					log(text);
 				}
 			}, "sh " + Tools.homeJreDir + "/usr/bin/jre.sh");
 			process.initInputStream(this);
+			
+			process.writeToProcess("unset LD_PRELOAD");
+			process.writeToProcess("cd " + Tools.MAIN_PATH);
 			process.writeToProcess(mcJreArgs.toArray(new String[0]));
 		} catch (Throwable th) {
 			th.printStackTrace();

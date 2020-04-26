@@ -32,6 +32,7 @@ import java.lang.reflect.*;
 import net.kdt.pojavlaunch.patcher.*;
 import android.graphics.*;
 import android.content.pm.*;
+import android.text.*;
 
 public class MCLauncherActivity extends AppCompatActivity
 {
@@ -726,9 +727,9 @@ public class MCLauncherActivity extends AppCompatActivity
 								installOptiFine();
 							} break;
 						case 2:{ // Custom controls
-								if (Tools.enableDevFeatures) {
-									startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
-								}
+								// if (Tools.enableDevFeatures) {
+								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
+								// }
 							} break;
 						case 3:{ // Settings
 								startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
@@ -738,10 +739,9 @@ public class MCLauncherActivity extends AppCompatActivity
 								aboutB.setTitle(R.string.mcl_option_about);
 								try
 								{
-									aboutB.setMessage(String.format(Tools.read(getAssets().open("about_en.txt")),
+									aboutB.setMessage(htmlTextView(String.format(Tools.read(getAssets().open("about_en.txt")),
 																	Tools.APP_NAME,
-																	Tools.usingVerName,
-																	org.lwjgl.Sys.getVersion())
+																	Tools.usingVerName))
 													  );
 								} catch (Exception e) {
 									throw new RuntimeException(e);
@@ -755,6 +755,17 @@ public class MCLauncherActivity extends AppCompatActivity
 		builder.show();
 	}
 
+	private Spanned htmlTextView(String str) {
+		if (Build.VERSION.SDK_INT >= 24) {
+    		try {
+				return (Spanned) Html.class.getDeclaredMethod("fromHtml", String.class, int.class).invoke(null, str, 63);
+			} catch (Throwable th) {
+				th.printStackTrace();
+			}
+		}
+    	return Html.fromHtml(str);
+	}
+	
 	public void modManager()
 	{
 		/*
@@ -798,7 +809,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		dialog.show();
 		*/
 		
-		Tools.dialogOnUiThread(this, "Mods manager", "This feature is not yet supported!");
+		Tools.dialogOnUiThread(this, "Mods manager", "V3 may support this but not yet now!");
 	}
 
 	public void openSelectMod()

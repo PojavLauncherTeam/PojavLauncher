@@ -3,17 +3,17 @@ package net.kdt.pojavlaunch;
 import java.io.*;
 import android.app.*;
 
-public class ShellProcessOperation
+public class SimpleShellProcess
 {
 	private OnPrintListener listener;
 	private Process process;
 
-	public ShellProcessOperation(OnPrintListener listener) throws IOException {
+	public SimpleShellProcess(OnPrintListener listener) throws IOException {
 		this.listener = listener;
 		process = Runtime.getRuntime().exec("/system/bin/sh");
 	}
 	
-	public ShellProcessOperation(OnPrintListener listener, String command) throws IOException {
+	public SimpleShellProcess(OnPrintListener listener, String command) throws IOException {
 		this.listener = listener;
 		process = Runtime.getRuntime().exec(
 			command

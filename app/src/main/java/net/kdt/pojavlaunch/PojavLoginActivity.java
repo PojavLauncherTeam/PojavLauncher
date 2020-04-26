@@ -34,7 +34,7 @@ public class PojavLoginActivity extends MineActivity
 	// private boolean isPermGranted = false;
 	
 	private SharedPreferences firstLaunchPrefs;
-	// private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
+	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
 	
 	private boolean isInitCalled = false;
@@ -52,9 +52,7 @@ public class PojavLoginActivity extends MineActivity
 		firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
 		new File(Tools.mpProfiles).mkdir();
 		
-		// Remove vmos warning???
-		/*
-		if (isAndroid7() && !firstLaunchPrefs.getBoolean(PREF_IS_DONOTSHOWAGAIN_WARN, false)) {
+		if (!firstLaunchPrefs.getBoolean(PREF_IS_DONOTSHOWAGAIN_WARN, false)) {
 			AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this);
 			startDlg.setTitle(R.string.warning_title);
 			
@@ -75,20 +73,7 @@ public class PojavLoginActivity extends MineActivity
 			
 			startDlg.setView(conLay);
 			startDlg.setCancelable(false);
-			startDlg.setPositiveButton(R.string.warning_action_install, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						setPref(PREF_IS_DONOTSHOWAGAIN_WARN, conCheck.isChecked());
-						
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse("market://details?id=com.vmos.glb"));
-						startActivity(intent);
-					}
-				});
-				
-			startDlg.setNegativeButton(R.string.warning_action_tryanyway, new DialogInterface.OnClickListener(){
+			startDlg.setPositiveButton(R.string.warning_action_tryanyway, new DialogInterface.OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface p1, int p2)
@@ -100,7 +85,7 @@ public class PojavLoginActivity extends MineActivity
 				});
 			
 
-			startDlg.setNeutralButton(R.string.warning_action_exit, new DialogInterface.OnClickListener(){
+			startDlg.setNegativeButton(R.string.warning_action_exit, new DialogInterface.OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface p1, int p2)
@@ -111,9 +96,8 @@ public class PojavLoginActivity extends MineActivity
 				
 			startDlg.show();
 		} else {
-		*/
 			new InitTask().execute();
-		// }
+		}
 	}
 
 	private class InitTask extends AsyncTask<Void, String, Integer>{
@@ -294,17 +278,8 @@ public class PojavLoginActivity extends MineActivity
 		mkdirs(Tools.libraries);
 		
 		File file0 = new File(Tools.mpProfiles);
-		File file1 = new File(Tools.mpModEnable);
-		File file2 = new File(Tools.mpModDisable);
-		File file3 = new File(Tools.mpModAddNewMo);
 		
 		file0.mkdir();
-		file1.mkdirs();
-		file2.mkdir();
-		try {
-			file3.createNewFile();
-		} catch (IOException e){}
-		
 		try {
 			mkdirs(Tools.MAIN_PATH);
 			
@@ -319,13 +294,7 @@ public class PojavLoginActivity extends MineActivity
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.3.jar", Tools.versnDir + "/1.7.3");
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
 			
-			// Extract libraries
-			if (!isLibrariesExtracted()) {
-				Tools.extractAssetFolder(this, "libraries", Tools.MAIN_PATH);
-				setPref(PREF_IS_INSTALLED_LIBRARIES, true);
-			}
-
-			UpdateDataChanger.changeDataAuto("2.4", "2.4.2");
+			// Download and install OpenJDK
 		}
 		catch(Exception e){
 			Tools.showError(this, e);
