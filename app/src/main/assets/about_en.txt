@@ -7,6 +7,7 @@ Using libraries:
  • LWJGL %s.
  • openal_soft: OpenAL port for Android devices by apportable.
  • PojavDX (dx 1.16): tool to convert java bytecode to dex.
+ • Android HandleView of EditText for easy resize for custom controls.
  • Java AWT Implementation includes:
   - Boardwalk's makeshift.
   - OpenJDK 7 codes implementation.
