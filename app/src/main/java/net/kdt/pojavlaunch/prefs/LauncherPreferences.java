@@ -1,8 +1,6 @@
 package net.kdt.pojavlaunch.prefs;
 
 import android.content.*;
-import com.pojavdx.dex.*;
-
 public class LauncherPreferences
 {
 	public static boolean PREF_VERTYPE_RELEASE = true;
@@ -17,9 +15,7 @@ public class LauncherPreferences
 	public static void loadPreferences(Context ctx) {
 		SharedPreferences mainPreference = ctx.getSharedPreferences(ctx.getPackageName() + "_preferences", Context.MODE_PRIVATE);
 		int maxDxPref = mainPreference.getInt("maxDxRefs", 0xFFF);
-		DexFormat.MAX_MEMBER_IDX = maxDxPref;
-		DexFormat.MAX_TYPE_IDX = maxDxPref;
-
+		
 		PREF_BUTTONSIZE = mainPreference.getFloat("controlSize", 1f);
 		PREF_FREEFORM = mainPreference.getBoolean("freeform", false);
 		PREF_FORGETOF = mainPreference.getBoolean("forgetOptifinePath", false);

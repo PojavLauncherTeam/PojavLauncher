@@ -14,7 +14,7 @@ import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
-import com.android.internal.awt.*;
+// import com.android.internal.awt.*;
 import com.kdt.glsupport.*;
 import com.kdt.pointer.*;
 import dalvik.system.*;
@@ -27,7 +27,7 @@ import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
 import net.kdt.pojavlaunch.prefs.*;
-import optifine.*;
+// import optifine.*;
 import org.apache.harmony.security.fortress.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
@@ -415,7 +415,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			// System.loadLibrary("Regal");
 
 			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
-			AndroidGraphics2D.getInstance(this, new Canvas(awtGraphics), null);
+			// AndroidGraphics2D.getInstance(this, new Canvas(awtGraphics), null);
 			
 			glSurfaceView.setFocusable(true);
 			glSurfaceView.setFocusableInTouchMode(true);
@@ -929,7 +929,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
 			String optifineJar = Tools.libraries + "/" + Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
 
-			AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
+			// AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
 		}
 		
 		File optDir = getDir("dalvik-cache", 0);
@@ -940,7 +940,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
 		
 		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
-			net.minecraft.launchwrapper.Launch.main(launchArgs);
+			// net.minecraft.launchwrapper.Launch.main(launchArgs);
 		} else {
 			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 

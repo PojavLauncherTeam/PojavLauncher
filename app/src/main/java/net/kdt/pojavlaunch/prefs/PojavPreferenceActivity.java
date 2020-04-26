@@ -7,7 +7,6 @@ import android.widget.*;
 import android.widget.CompoundButton.*;
 import android.widget.SeekBar.*;
 import com.kdt.mcgui.app.*;
-import com.pojavdx.dex.*;
 import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
 
@@ -39,30 +38,6 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 		mainPreference = getSharedPreferences("pojav_preferences", MODE_PRIVATE);
 		final SharedPreferences.Editor mainPrefEdit = mainPreference.edit();
 		
-		// DX Refs
-		viewSeekDxRef = (SeekBar) findView(R.id.settings_seekbar_setmaxdxref);
-		viewSeekProgressDxRef = (TextView) findView(R.id.setting_progressseek_maxdxref);
-		viewSeekDxRef.setMax(0xFFFF - 0xFFF);
-		viewSeekDxRef.setProgress(DexFormat.MAX_MEMBER_IDX - 0xFFF);
-		viewSeekDxRef.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-			private int currProgress = 0;
-				@Override
-				public void onProgressChanged(SeekBar bar, int progress, boolean p3) {
-					currProgress = 0xFFF + progress;
-					viewSeekProgressDxRef.setText(currProgress + "/" + 0xFFFF);
-				}
-
-				@Override
-				public void onStartTrackingTouch(SeekBar bar) {
-					// Unused
-				}
-
-				@Override
-				public void onStopTrackingTouch(SeekBar bar) {
-					mainPrefEdit.putInt("maxDxRefs", currProgress);
-					mainPrefEdit.commit();
-				}
-			});
 		viewSeekProgressDxRef.setText((viewSeekDxRef.getProgress() + 0xFFF) + "/" + 0xFFFF);
 
 		// Control size

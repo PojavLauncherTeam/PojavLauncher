@@ -19,6 +19,18 @@ public class ShellProcessOperation
 			command
 		); //"/system/bin/sh -c \"" + command + "\"");
 	}
+
+	public void writeToProcess(String[] args) throws IOException {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < args.length; i++) {
+			builder.append(args[i]);
+			if (i < args.length - 1) {
+				builder.append(" ");
+			}
+		}
+		
+		writeToProcess(builder.toString());
+	}
 	
 	public void writeToProcess(String cmd) throws IOException {
 		DataOutputStream os = new DataOutputStream(process.getOutputStream());

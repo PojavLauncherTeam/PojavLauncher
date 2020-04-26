@@ -19,18 +19,18 @@ import org.apache.commons.codec.digest.*;
 import net.kdt.pojavlaunch.patcher.*;
 import java.lang.reflect.*;
 import dalvik.system.*;
-import optifine.*;
+// import optifine.*;
 import android.text.*;
 import java.awt.*;
 import javax.xml.transform.*;
-import java.awt.datatransfer.*;
+// import java.awt.datatransfer.*;
 
 public final class Tools
 {
 	public static boolean enableDevFeatures = BuildConfig.DEBUG;
 	
 	public static String APP_NAME = "null";
-	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/minecraft";
+	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
 	public static String ASSETS_PATH = MAIN_PATH + "/assets";
 	public static String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
 	
@@ -39,6 +39,9 @@ public final class Tools
 	public static String mhomeUrl = "https://khanhduytran0.github.io/PojavLauncher"; // "http://kdtjavacraft.eu5.net";
 	public static String datapath = "/data/data/net.kdt.pojavlaunch";
 	public static String worksDir = datapath + "/app_working_dir";
+	
+	// New since v3
+	public static String homeJreDir = datapath + "/jre";
 	
 	// New since 2.4.2
 	public static String versnDir = MAIN_PATH + "/versions";
@@ -211,9 +214,8 @@ public final class Tools
 						@Override
 						public void onClick(DialogInterface p1, int p2)
 						{
-							StringSelection errData = new StringSelection(errMsg);
-							Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
-
+							((android.content.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE)).setText(Log.getStackTraceString(e));
+							
 							if(exitIfOk) {
 								if (ctx instanceof MainActivity) {
 									MainActivity.fullyExit();
@@ -224,7 +226,7 @@ public final class Tools
 						}
 					})
 					//.setNegativeButton("Report (not available)", null)
-					.setCancelable(!exitIfOk)
+					.setCancelable(false)
 					.show();
 			}
 		};
@@ -323,36 +325,6 @@ public final class Tools
 		optifineDirFile.mkdir();
 		
 		return new OptiFinePatcher(inFile).saveInstaller(optifineDirFile);
-	}
-	
-	private static int selectCompatibleSdkInt() {
-		int currSdkInt = Build.VERSION.SDK_INT;
-		if (currSdkInt < 23) {
-			return 13;
-		} else if (currSdkInt < 26) {
-			return 24;
-		} else if (currSdkInt < 28) {
-			return 26;
-		} else {
-			return currSdkInt;
-		}
-	}
-	
-	public static void runDx(final Activity ctx, String fileIn, String fileOut, PojavDXManager.Listen listener) throws Exception
-	{
-		runDx(ctx, fileIn, fileOut, false, listener);
-	}
-	
-	public static void runDx(final Activity ctx, String fileIn, String fileOut, boolean keepClass, PojavDXManager.Listen listener) throws Exception
-	{
-		PojavDXManager.setListener(listener);
-		
-		File optDir = ctx.getDir("dalvik-cache", 0);
-		optDir.mkdirs();
-		
-		com.pojavdx.dx.command.Main.main(new String[]{"--dex", (keepClass ? "--keep-classes" : "--verbose"), "--verbose", "--min-sdk-version=" + selectCompatibleSdkInt() , "--multi-dex", "--no-optimize", "--num-threads=4", "--output", fileOut, fileIn});
-		
-		//return Runtime.getRuntime().exec("echo IN:" + fileIn + ";OUT:" + fileOut);
 	}
 	
 	public static JMinecraftVersionList.Version getVersionInfo(String versionName) {

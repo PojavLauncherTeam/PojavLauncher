@@ -32,9 +32,6 @@ import java.lang.reflect.*;
 import net.kdt.pojavlaunch.patcher.*;
 import android.graphics.*;
 import android.content.pm.*;
-import optifine.*;
-//import android.support.v7.view.menu.*;
-//import net.zhuoweizhang.boardwalk.downloader.*;
 
 public class MCLauncherActivity extends AppCompatActivity
 {
@@ -461,33 +458,12 @@ public class MCLauncherActivity extends AppCompatActivity
 		@Override
 		protected Throwable doInBackground(final String[] p1)
 		{
-			Throwable throwable = null;
-			final StringBuilder currentLog = new StringBuilder();
-			LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnStringPrintListener(){
-					@Override
-					public void onCharPrint(char c)
-					{
-						currentLog.append(c);
-					}
-				});
-			LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
-					@Override
-					public void onCharPrint(char c)
-					{
-						currentLog.append(c);
-					}
-				});
-			System.setOut(new PrintStream(logOut));
-			System.setErr(new PrintStream(logErr));
-
 			try {
 				final String downVName = "/" + p1[0] + "/" + p1[0];
 
 				//Downloading libraries
-				String inputPath = Tools.versnDir + downVName + "_orig.jar";
-				String unpatchedPath = Tools.versnDir + downVName + "_unpatched.jar";
-				String patchedFile = Tools.versnDir + downVName + ".jar";
-
+				String inputPath = Tools.versnDir + downVName + ".jar";
+				
 				JMinecraftVersionList.Version verInfo;
 				
 				try {
@@ -514,131 +490,46 @@ public class MCLauncherActivity extends AppCompatActivity
 					setMax(libList.length * 2 + 5);
 
 					String libPathURL;
-					File outUndexLib, outDexedLib, outUnpatchedConvert;
+					File fileOutLib;
 
 					for (final DependentLibrary libItem: libList) {
 
-						if (libItem.name.startsWith("com.google.code.gson:gson") ||
-							libItem.name.startsWith("com.mojang:realms") ||
-							libItem.name.startsWith("net.java.jinput") ||
-							libItem.name.startsWith("net.minecraft.launchwrapper") ||
-							libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
-							libItem.name.startsWith("tv.twitch")
-							) { // Black list
-							publishProgress("1", "Ignored " + libItem.name);
-							//Thread.sleep(100);
-						} else {
-							currentLog.setLength(0);
-
-							String[] libInfo = libItem.name.split(":");
-							String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
-							outUndexLib = new File(Tools.libraries + "/" + libArtifact.replace(".jar", "_orig.jar"));
-							outUndexLib.getParentFile().mkdirs();
-
-							outDexedLib = new File(Tools.libraries + "/" + libArtifact); // Don't add ".jar"
-							if (!outDexedLib.exists()) {
-								publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
-
-								boolean skipIfFailed = false;
-
-								if (libItem.downloads == null) {
-									MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
-									artifact.url = "https://libraries.minecraft.net/" + libArtifact;
-									libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
-
-									skipIfFailed = true;
-								}
-								try {
-									libPathURL = libItem.downloads.artifact.url;
-									if (!outUndexLib.exists()) {
-										//toast(outUndexLib.getAbsolutePath());
-										Tools.downloadFile(
-											libPathURL,
-											outUndexLib.getAbsolutePath(),
-											true
-										);
-									}
-								} catch (Throwable th) {
-									if (!skipIfFailed) {
-										throw th;
-									} else {
-										th.printStackTrace();
-									}
-								}
-
-								convertStr = getStr(R.string.mcl_launch_convert_lib, libItem.name);
-								publishProgress("1", convertStr);
-
-								boolean isOptifine = libItem.name.startsWith(Tools.optifineLib);
-								Tools.runDx(MCLauncherActivity.this, outUndexLib.getAbsolutePath(), outDexedLib.getAbsolutePath(), isOptifine , new PojavDXManager.Listen(){
-
-										@Override
-										public void onReceived(String step, int maxProg, int currProg)
-										{
-											maxSubProgress = maxProg;
-											valSubProgress = currProg;
-											publishProgress("0", convertStr + ": (" + currProg + "/" + maxProg + ") " + step, "");
-										}
-									});
-								/*
-								 if (!new File(outDexedLib + "/finish").exists()) {
-								 toast("Unable to convert library " + libItem.name + " but still continue. Is it a wrong check?");
-								 //throw new RuntimeException("Unable to convert library " + libItem.name);
-								 }
-								 */
-
-								if (!outDexedLib.exists()) {
-									RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib, libItem.name) + "\n" + currentLog.toString());
-									dxError.setStackTrace(new StackTraceElement[0]);
-									throw dxError;
-								}
-
-								outUndexLib.delete();
-							}
+						String[] libInfo = libItem.name.split(":");
+						String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
+						fileOutLib = new File(Tools.libraries + "/" + libArtifact);
+						fileOutLib.getParentFile().mkdirs();
+						if (libItem.downloads == null) {
+							MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
+							artifact.url = "https://libraries.minecraft.net/" + libArtifact;
+							libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
 						}
-					}
-
-					publishProgress("5", getStr(R.string.mcl_launch_download_client) + p1[0]);
-					outUnpatchedConvert = new File(unpatchedPath);
-					boolean patchedExist = new File(patchedFile).exists();
-					if (!patchedExist) {
-						if (!outUnpatchedConvert.exists()) {
-							if (!new File(inputPath).exists()) {
-								currentLog.setLength(0);
-
+						try {
+							publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
+							
+							libPathURL = libItem.downloads.artifact.url;
+							if (!fileOutLib.exists()) {
+								//toast(fileOutLib.getAbsolutePath());
 								Tools.downloadFile(
-									verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
-									inputPath,
+									libPathURL,
+									fileOutLib.getAbsolutePath(),
 									true
 								);
 							}
-
-							convertStr = getStr(R.string.mcl_launch_convert_client, p1[0]);
-							publishProgress("5", convertStr);
-							addProgress = 0;
-							Tools.runDx(MCLauncherActivity.this, inputPath, outUnpatchedConvert.getAbsolutePath(), true, new PojavDXManager.Listen(){
-
-									@Override
-									public void onReceived(String step, int maxProg, int currProg)
-									{
-										maxSubProgress = maxProg;
-										valSubProgress = currProg;
-										publishProgress("0", convertStr + " (" + currProg + "/" + maxProg + ") " + step, "");
-									}
-								});
-							if (!outUnpatchedConvert.exists()) {
-								RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_client) + "\n" + currentLog.toString());
-								dxError.setStackTrace(new StackTraceElement[0]);
-								throw dxError;
-							}
-
-							patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
-							outUnpatchedConvert.delete();
-						} else {
-							patchAndCleanJar(p1[0], outUnpatchedConvert.getAbsolutePath(), patchedFile);
-							outUnpatchedConvert.delete();
+						} catch (Throwable th) {
+							th.printStackTrace();
+							publishProgress("0", "Error: " + th.getMessage());
 						}
 					}
+
+					publishProgress("5", getStr(R.string.mcl_launch_download_client, p1[0]));
+					if (!new File(inputPath).exists()) {
+						Tools.downloadFile(
+							verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
+							inputPath,
+							true
+						);
+					}
+					
 				} catch (Throwable e) {
 					launchWithError = true;
 					throw e;
@@ -673,13 +564,11 @@ public class MCLauncherActivity extends AppCompatActivity
 				} finally {
 					isAssetsProcessing = false;
 				}
-			} catch (Throwable th){
-				throwable = th;
-			} finally {
-				System.setErr(logErr.getRootStream());
-				System.setOut(logOut.getRootStream());
-				return throwable;
+			} catch (Throwable th) {
+				return th;
 			}
+			
+			return null;
 		}
 		private int addProgress = 0; // 34
 
@@ -698,14 +587,6 @@ public class MCLauncherActivity extends AppCompatActivity
 						launchProgress.setMax(value);
 					}
 				});
-		}
-
-		private void patchAndCleanJar(String version, String in, String out) throws Exception {
-			publishProgress("1", getStr(R.string.mcl_launch_patch_client, version));
-			JarSigner.sign(in, out);
-			new File(in).delete();
-
-			// Tools.clearDuplicateFiles(new File(out).getParentFile());
 		}
 
 		@Override
@@ -743,7 +624,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					 jvmArgs.add("-Xms128M");
 					 jvmArgs.add("-Xmx1G");
 					 */
-					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
+					Intent mainIntent = new Intent(MCLauncherActivity.this, MainConsoleActivity.class);
 					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
@@ -955,9 +836,15 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	private void doInstallOptiFine(File optifineFile) {
-		new OptiFineInstaller().execute(optifineFile);
+		// new OptiFineInstaller().execute(optifineFile);
+		
+		
+		AlertDialog.Builder dialog = new AlertDialog.Builder(MCLauncherActivity.this);
+		dialog.setTitle("Install OptiFine");
+		dialog.setMessage("Disabled feature due to v3 wip");
+		dialog.setPositiveButton(android.R.string.ok, null);
 	}
-
+/*
 	private class OptiFineInstaller extends AsyncTask<File, String, Throwable>
 	{
 		private ProgressDialog dialog;
@@ -1008,24 +895,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 					publishProgress("Converting OptiFine", null, null, Integer.toString(ProgressDialog.STYLE_SPINNER));
 
-					System.setOut(new PrintStream(logOut));
-					System.setErr(new PrintStream(logErr));
 
-					Tools.runDx(MCLauncherActivity.this, patchedFile.getAbsolutePath(), convertedFile.getAbsolutePath(), true, new PojavDXManager.Listen(){
-							@Override
-							public void onReceived(String msg, int max, int current)
-							{
-								publishProgress("Converting OptiFine: " + msg, Integer.toString(max), null);
-							}
-					});
-
-					if (!convertedFile.exists()) {
-						RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib, "OptiFine") + "\n" + currentLog.toString());
-						dxError.setStackTrace(new StackTraceElement[0]);
-						throw dxError;
-					}
-
-					patchedFile.delete();
 				}
 
 				publishProgress("Launching OptiFine installer", null, null, Integer.toString(ProgressDialog.STYLE_SPINNER));
@@ -1055,21 +925,11 @@ public class MCLauncherActivity extends AppCompatActivity
 			} finally {
 				System.setOut(logOut.getRootStream());
 				System.setErr(logErr.getRootStream());
-				/*
-				 if (throwable != null && convertedFile != null) {
-				 convertedFile.delete();
-				 }
-				 */
+				
 				return throwable;
 			}
 		}
-/*
-		private Object fromConfig(DexClassLoader loader, String name) throws ReflectiveOperationException {
-			Field f = loader.loadClass("Config").getDeclaredField(name);
-			f.setAccessible(true);
-			return f.get(null);
-		}
-*/
+		
 		@Override
 		protected void onProgressUpdate(String[] text) {
 			super.onProgressUpdate(text);
@@ -1097,7 +957,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			}
 		}
 	}
-
+*/
 	private class ViewPagerAdapter extends FragmentPagerAdapter {
 
 		List<Fragment> fragmentList = new ArrayList<>();
