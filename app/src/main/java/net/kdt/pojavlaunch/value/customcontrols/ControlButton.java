@@ -1,4 +1,5 @@
 package net.kdt.pojavlaunch.value.customcontrols;
+
 import net.kdt.pojavlaunch.*;
 import android.view.*;
 import java.util.*;
@@ -6,7 +7,7 @@ import android.content.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 
-public class ControlButton
+public class ControlButton implements Cloneable
 {
 	public static int pixelOf2dp;
 	public static int pixelOf30dp;
@@ -23,7 +24,7 @@ public class ControlButton
 		if (SPECIAL_BUTTONS == null) {
 			SPECIAL_BUTTONS = new ControlButton[]{
 				new ControlButton("Keyboard", -1, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, pixelOf80dp, pixelOf30dp),
-				new ControlButton("GUI", -2, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf2dp - pixelOf50dp)
+				new ControlButton("GUI", -2, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf2dp - pixelOf50dp * 2)
 			};
 		}
 		
@@ -86,5 +87,9 @@ public class ControlButton
 	
 	public void execute(MainActivity act, boolean isDown) {
 		act.sendKeyPress(lwjglKeycode, isDown);
+	}
+	
+	public ControlButton clone() {
+		return new ControlButton(name, lwjglKeycode, x, y, width, height);
 	}
 }

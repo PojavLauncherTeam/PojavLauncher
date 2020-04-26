@@ -8,11 +8,13 @@ import net.kdt.pojavlaunch.*;
 import com.kdt.handleview.*;
 import android.view.ViewGroup.*;
 
-public class ControlView extends Button implements OnLongClickListener, OnTouchListener
+public class ControlView extends Button implements OnLongClickListener, OnTouchListener, Cloneable
 {
 	private GestureDetector mGestureDetector;
 	private ControlButton mProperties;
 	private SelectionEndHandleView mHandleView;
+	
+	public CustomControlsActivity mActivity;
 	
 	private boolean mCanModify = false;
 	private boolean mCanTriggerLongClick = true;
@@ -40,6 +42,14 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 		return mProperties;
 	}
 	
+	public void setActivity(CustomControlsActivity activity) {
+		mActivity = activity;
+	}
+
+	public void setModified(boolean z) {
+		if (mActivity != null) mActivity.isModified = z;
+	}
+	
 	public void setProperties(ControlButton properties) {
 		setProperties(properties, true);
 	}
@@ -64,6 +74,8 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 		
 		mProperties.width = params.width;
 		mProperties.height = params.height;
+		
+		setModified(true);
 	}
 	
 	@Override
@@ -122,6 +134,8 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 				
 				setTranslationX(moveX);
 				setTranslationY(moveY);
+				
+				setModified(true);
 				break;
 		}
 		
@@ -130,5 +144,15 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 	
 	public void setModifiable(boolean z) {
 		mCanModify = z;
+	}
+	
+	public ControlView clone() {
+		ControlView cloneObj = new ControlView(getContext(), mProperties);
+		cloneObj.setTranslationX(getTranslationX());
+		cloneObj.setTranslationY(getTranslationY());
+		cloneObj.setTranslationZ(getTranslationZ());
+		cloneObj.mCanModify = mCanModify;
+		cloneObj.mCanTriggerLongClick = mCanTriggerLongClick;
+		return cloneObj;
 	}
 }

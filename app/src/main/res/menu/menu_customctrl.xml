@@ -1,9 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_ctrl_load"
-        android:title="@string/global_load"/>
+        android:id="@+id/menu_ctrl_add"
+        android:title="@string/customctrl_addbutton"/>
 	
     <item
-        android:id="@+id/menu_ctrl_add"
-        android:title="@string/global_add"/>
+        android:id="@+id/menu_ctrl_load"
+        android:title="@string/global_load"/>
+
+    <item
+        android:id="@+id/menu_ctrl_save"
+        android:title="@string/global_save"/>
+	
+    <item
+        android:id="@+id/menu_ctrl_selectdefault"
+        android:title="@string/customctrl_seleftdefault"/>
 </menu>

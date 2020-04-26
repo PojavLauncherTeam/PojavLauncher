@@ -171,10 +171,14 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									} else {
 										properties.lwjglKeycode = AndroidLWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 2;
 										properties.name = editName.getText().toString();
+										if (properties.lwjglKeycode < 0) {
+											properties.name = ControlButton.getSpecialButtons()[properties.lwjglKeycode + 2].name;
+										}
 										properties.hidden = checkHidden.isChecked();
 
 										mHandleView.mView.updateProperties();
-
+										mHandleView.mView.setModified(true);
+										
 										dialog.dismiss();
 									}
 								}
@@ -192,6 +196,8 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 					{
 						ControlsLayout layout = ((ControlsLayout) mHandleView.mView.getParent());
 						layout.removeControlButton(mHandleView.mView);
+						
+						mHandleView.mView.setModified(true);
 					}
 				});
 			alert.setNegativeButton(android.R.string.cancel, null);

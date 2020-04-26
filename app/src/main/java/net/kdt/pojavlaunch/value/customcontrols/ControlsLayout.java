@@ -11,6 +11,7 @@ public class ControlsLayout extends FrameLayout
 {
 	private boolean mCanModify;
 	private CustomControls mLayout;
+	private CustomControlsActivity mActivity;
 	public ControlsLayout(Context ctx) {
 		super(ctx);
 	}
@@ -34,6 +35,8 @@ public class ControlsLayout extends FrameLayout
 		for (ControlButton button : controlLayout.button) {
 			addControlView(button);
 		}
+
+		setModified(false);
 	}
 	
 	public void addControlButton(ControlButton controlButton) {
@@ -45,16 +48,25 @@ public class ControlsLayout extends FrameLayout
 		final ControlView view = new ControlView(getContext(), controlButton);
 		view.setModifiable(mCanModify);
 		addView(view);
+
+		setModified(true);
 	}
 	
 	public void removeControlButton(ControlView controlButton) {
 		mLayout.button.remove(controlButton.getProperties());
 		controlButton.setVisibility(View.GONE);
 		removeView(controlButton);
+		
+		setModified(true);
 	}
 	
 	public void saveLayout(String path) throws Exception {
 		Tools.write(path, new Gson().toJson(mLayout));
+		setModified(false);
+	}
+	
+	public void setActivity(CustomControlsActivity activity) {
+		mActivity = activity;
 	}
 	
 	public void setModifiable(boolean z) {
@@ -65,5 +77,9 @@ public class ControlsLayout extends FrameLayout
 				((ControlView) v).setModifiable(z);
 			}
 		}
+	}
+	
+	private void setModified(boolean z) {
+		if (mActivity != null) mActivity.isModified = z;
 	}
 }

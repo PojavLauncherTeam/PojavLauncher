@@ -182,6 +182,8 @@
 	<string name="customctrl_keyname">LWJGL Keycode</string>
 	<string name="customctrl_specialkey">Special Key</string>
 	<string name="customctrl_hidden">Hidden</string>
+	<string name="customctrl_addbutton">Add button</string>
+	<string name="customctrl_seleftdefault">Select default Control json</string>
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Update console</string>
