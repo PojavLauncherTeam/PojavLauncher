@@ -33,6 +33,7 @@ import net.kdt.pojavlaunch.patcher.*;
 import android.graphics.*;
 import android.content.pm.*;
 import android.text.*;
+import com.kdt.mcgui.*;
 
 public class MCLauncherActivity extends AppCompatActivity
 {
@@ -336,7 +337,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		new RefreshVersionListTask().execute();
 		
 		try{
-			final ProgressDialog barrier = new ProgressDialog(this);
+			final ProgressDialogCompat barrier = new ProgressDialogCompat(this);
 			barrier.setMessage("Waiting");
 			barrier.setProgressStyle(barrier.STYLE_SPINNER);
 			barrier.setCancelable(false);

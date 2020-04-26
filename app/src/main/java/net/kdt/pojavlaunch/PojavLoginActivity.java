@@ -295,6 +295,7 @@ public class PojavLoginActivity extends MineActivity
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
 			
 			// Download and install OpenJDK
+			// https://github.com/khanhduytran0/PojavLauncher/releases/download/untagged-eb8f813f9739ae4472cf/net.kdt.pojavlaunch.openjdk.zip
 		}
 		catch(Exception e){
 			Tools.showError(this, e);
