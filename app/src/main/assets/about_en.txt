@@ -1,17 +1,21 @@
-%s BETA (Minecraft Java launcher for Android), version %s by Tran Khanh Duy (based from "Boardwalk" app)
-* Using libraries:
- • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.
- • LegacyLauncher: Open source Minecraft LaunchWrapper by Mojang.
- • OpenJDK JRE 10 for Android by dongfangxunlei.
- • LWJGL.
-* License:
- • This application is licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">Apache License 2.0</a>.
-* Third party licenses:
- • gl4es: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.
- • LegacyLauncher: (unknown).
- • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPL License</a>.
- • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's license</a>.
-* Notes:
- - This app is under development and will not be stable.
- - This app is not yet supported Minecraft 1.13 or above.
+%s BETA (Minecraft Java launcher for Android), version %s by Tran Khanh Duy (based from "Boardwalk" app)<br>
+* Using libraries:<br>
+ • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.<br>
+ • LegacyLauncher: Open source Minecraft LaunchWrapper by Mojang.<br>
+ • OpenJDK JRE 10 for Android by dongfangxunlei.<br>
+ • LWJGL.<br>
+ • BusyBox.<br>
+ • PRoot.<br>
+* License:<br>
+ • This application is licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">Apache License 2.0</a>.<br>
+* Third party licenses:<br>
+ • gl4es: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.<br>
+ • LegacyLauncher: (unknown license).<br>
+ • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPL License</a>.<br>
+ • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's license</a>.<br>
+ • BusyBox: <a href"https://busybox.net/license.html">GNU GPL License</a><br>
+ • PRoot: (unknown license).<br>
+* Notes:<br>
+ - This app is under development and will not be stable.<br>
+ - This app is not yet supported Minecraft 1.13 or above.<br>
  - This app is not affiliated with Minecraft, Mojang or Microsoft.

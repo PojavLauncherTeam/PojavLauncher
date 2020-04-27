@@ -24,6 +24,7 @@ public class MainConsoleActivity extends AppCompatActivity
 	
 	private MCProfile.Builder mProfile;
 	private JMinecraftVersionList.Version mVersionInfo;
+	
 	@Override
 	protected void onCreate(Bundle b)
 	{
@@ -44,12 +45,14 @@ public class MainConsoleActivity extends AppCompatActivity
 		mProfile = PojavProfile.getCurrentProfileContent(this);
 		mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 		
+		final String modPath = getIntent().getExtras().getString("launchJar", "");
+		
 		new Thread(new Runnable(){
 
 				@Override
 				public void run()
 				{
-					launchMinecraft();
+					launchJava(modPath);
 				}
 			}).start();
 	}
@@ -70,16 +73,22 @@ public class MainConsoleActivity extends AppCompatActivity
 			});
 	}
 	
-	private void launchMinecraft() {
+	private void launchJava(String modPath) {
 		try {
-			List<String> mcJreArgs = new ArrayList<String>();
-			mcJreArgs.add("java");
-			mcJreArgs.add("-Duser.home=" + Tools.MAIN_PATH);
-			mcJreArgs.add("-Xmx512M");
-			mcJreArgs.add("-classpath");
-			mcJreArgs.add(Tools.generate(mProfile.getVersion()));
-			mcJreArgs.add(mVersionInfo.mainClass);
-			mcJreArgs.addAll(Arrays.asList(getMCArgs()));
+			List<String> mJreArgs = new ArrayList<String>();
+			mJreArgs.add("java");
+			mJreArgs.add("-Duser.home=" + Tools.MAIN_PATH);
+			mJreArgs.add("-Xmx512M");
+			
+			if (modPath.isEmpty()) {
+				mJreArgs.add("-classpath");
+				mJreArgs.add(Tools.generate(mProfile.getVersion()));
+				mJreArgs.add(mVersionInfo.mainClass);
+				mJreArgs.addAll(Arrays.asList(getMCArgs()));
+			} else {
+				mJreArgs.add("-jar");
+				mJreArgs.add(modPath);
+			}
 			
 			SimpleShellProcess process = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
 				@Override
@@ -91,13 +100,13 @@ public class MainConsoleActivity extends AppCompatActivity
 			
 			process.writeToProcess("unset LD_PRELOAD");
 			process.writeToProcess("cd " + Tools.MAIN_PATH);
-			process.writeToProcess(mcJreArgs.toArray(new String[0]));
+			process.writeToProcess(mJreArgs.toArray(new String[0]));
 		} catch (Throwable th) {
 			th.printStackTrace();
 			Tools.showError(this, th);
 		}
 	}
-
+	
 	private String[] getMCArgs() {
 		String username = mProfile.getUsername();
 		String versionName = mProfile.getVersion();

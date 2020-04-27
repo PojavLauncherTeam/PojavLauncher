@@ -41,6 +41,7 @@ public class PojavLoginActivity extends MineActivity
 	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
 	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKInstalled";
+	private String PREF_OPENJDK_PATCH_VERSION = "latestOpenjdkPatchVersion";
 	
 	private boolean isInitCalled = false;
 	@Override
@@ -136,7 +137,7 @@ public class PojavLoginActivity extends MineActivity
 		}
 		
 		private int revokeCount = -1;
-		
+		private File oldOpenjdkFolder, newOpenjdkFolder;
 		@Override
 		protected Integer doInBackground(Void[] p1)
 		{
@@ -162,12 +163,14 @@ public class PojavLoginActivity extends MineActivity
 				} catch (InterruptedException e) {}
 			}
 			
+			File openjdkZip = new File(Tools.MAIN_PATH, "OpenJDK.zip");
+		
+			oldOpenjdkFolder = new File(Tools.datapath, "openjdk");
+			newOpenjdkFolder = new File(Tools.datapath, "jre");
+			
 			if (!firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_OPENJDK, false)) {
 				// Install OpenJDK
-				publishProgress(null, getString(R.string.openjdk_install_download));
-				File openjdkZip = new File(Tools.MAIN_PATH, "OpenJDK.zip");
-				File oldOpenjdkFolder = new File(Tools.datapath, "openjdk");
-				File newOpenjdkFolder = new File(Tools.datapath, "jre");
+				publishProgress(null);
 				try {
 					try {
 						Tools.deleteRecursive(oldOpenjdkFolder);
@@ -183,7 +186,7 @@ public class PojavLoginActivity extends MineActivity
 					int fileLength = connection.getContentLength();
 					int count = 0;
 					
-					publishProgress("i0", getString(R.string.openjdk_install_download), Integer.toString(fileLength));
+					publishProgress("i0", getString(R.string.openjdk_install_download_main), Integer.toString(fileLength));
 					if (!openjdkZip.exists() || openjdkZip.length() != fileLength) {
 						InputStream input = new BufferedInputStream(url.openStream());
 						OutputStream output = new FileOutputStream(openjdkZip);
@@ -201,58 +204,98 @@ public class PojavLoginActivity extends MineActivity
 					}
 					// END download openjdk
 					
-					publishProgress("i1", getString(R.string.openjdk_install_unpack));
+					publishProgress("i1", getString(R.string.openjdk_install_unpack_main));
 					
-					// BEGIN unzip openjdk
-					ZipFile zis = new ZipFile(openjdkZip);
-					try {
-						count = 0;
-						publishProgress("i0", null, Integer.toString(zis.size()));
-						Enumeration<? extends ZipEntry> zipEntries = zis.entries();
-						while (zipEntries.hasMoreElements()) {
-							ZipEntry ze = zipEntries.nextElement();
-							count++;
-							publishProgress(null, getString(R.string.openjdk_install_unpack) + ": " + ze.getName(), null, Integer.toString(count));
-							
-							File file = new File(Tools.datapath, ze.getName());
-							File dir = ze.isDirectory() ? file : file.getParentFile();
-							if (!dir.isDirectory() && !dir.mkdirs())
-								throw new FileNotFoundException("Failed to ensure directory: " +
-																dir.getAbsolutePath());
-							if (
-								ze.isDirectory() ||
-								file.exists() && file.length() == ze.getSize()
-							) {
-								continue;
-							}
-							
-							BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(file));
-							try {
-								byte[] byteArr = Tools.getByteArray(zis.getInputStream(ze));
-								fout.write(byteArr,  0, byteArr.length);
-							} finally {
-								fout.close();
-							}
-							long time = ze.getTime();
-							if (time > 0) file.setLastModified(time);
-						}
-					} finally {
-						zis.close();
-					}
-					// END unzip openjdk
-					oldOpenjdkFolder.renameTo(newOpenjdkFolder);
-					Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
+					unpackOpenJDK(openjdkZip, false);
 					openjdkZip.delete();
 					
-					firstLaunchPrefs.edit().putBoolean(PREF_IS_INSTALLED_OPENJDK, true).commit();
+					setPref(PREF_IS_INSTALLED_OPENJDK, true);
 				} catch (Throwable e) {
 					Tools.showError(PojavLoginActivity.this, e, true);
 				}
 			}
 			
+			// Patch OpenJDK
+			try {
+				Thread.sleep(500);
+				
+				String patchUrl = DownloadUtils.downloadString(Tools.mhomeUrl + "/openjdk_patch.txt");
+				if (!patchUrl.equals("null")) {
+					// Next if a patch is available.
+					publishProgress("i1", getString(R.string.openjdk_install_download_patch));
+					
+					openjdkZip = new File(Tools.MAIN_PATH, "OpenJDK_patch.zip");
+					
+					String latestOpenjdkPatchVer = patchUrl.replace(Tools.mhomeUrl + "/openjdk_patches/openjdk_patch", "");
+					int latestOpenjdkPatchVerInt = Integer.parseInt(latestOpenjdkPatchVer.substring(0, latestOpenjdkPatchVer.indexOf("_")));
+					
+					if (firstLaunchPrefs.getInt(PREF_OPENJDK_PATCH_VERSION, -1) < latestOpenjdkPatchVerInt) {
+						// Auto download new OpenJDK patch
+						DownloadUtils.downloadFile(patchUrl, openjdkZip);
+
+						unpackOpenJDK(openjdkZip, true);
+						openjdkZip.delete();
+						firstLaunchPrefs.edit().putInt(PREF_OPENJDK_PATCH_VERSION, latestOpenjdkPatchVerInt).commit();
+					}
+				}
+
+				// Grant execute permission
+				Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
+			} catch (Throwable th) {
+				Tools.showError(PojavLoginActivity.this, th, true);
+			}
+			
 			initMain();
 
 			return 0;
+		}
+		
+		private void unpackOpenJDK(File openjdkZip, boolean isPatch) throws Throwable {
+			ZipFile zis = new ZipFile(openjdkZip);
+			try {
+				int count = 0;
+				publishProgress("i0", null, Integer.toString(zis.size()));
+				Enumeration<? extends ZipEntry> zipEntries = zis.entries();
+				while (zipEntries.hasMoreElements()) {
+					ZipEntry ze = zipEntries.nextElement();
+					count++;
+					publishProgress(null, getString(isPatch ? R.string.openjdk_install_unpack_patch : R.string.openjdk_install_unpack_main) + ": " + ze.getName(), null, Integer.toString(count));
+
+					File file = new File(Tools.datapath, ze.getName());
+					File dir = ze.isDirectory() ? file : file.getParentFile();
+					if (!dir.isDirectory() && !dir.mkdirs())
+						throw new FileNotFoundException("Failed to ensure directory: " + dir.getAbsolutePath());
+					if (
+						ze.isDirectory() ||
+						file.exists() && file.length() == ze.getSize()
+						) {
+						continue;
+					}
+
+					byte[] byteArr = Tools.getByteArray(zis.getInputStream(ze));
+					String firstMd5 = Tools.calculateMD5(file);
+					if (firstMd5 != null && byteArr.length > 0 && firstMd5.equals(Tools.calculateMD5(byteArr))) {
+						continue;
+					}
+					
+					BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(file));
+					try {
+						fout.write(byteArr,  0, byteArr.length);
+					} finally {
+						fout.close();
+					}
+					long time = ze.getTime();
+					if (time > 0) file.setLastModified(time);
+				}
+			} finally {
+				zis.close();
+			}
+			
+			try {
+				oldOpenjdkFolder.renameTo(newOpenjdkFolder);
+			} catch (Throwable th) {
+				// Ignore because may change to jre folder!
+			}
 		}
 
 		@Override
@@ -580,7 +623,7 @@ public class PojavLoginActivity extends MineActivity
 					}
 				});
 			
-			alert.setNegativeButton(R.string.login_offline_alert_skip, new DialogInterface.OnClickListener(){
+			alert.setNegativeButton(R.string.global_skip, new DialogInterface.OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface p1, int p2)

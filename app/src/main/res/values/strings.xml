@@ -25,7 +25,6 @@
 	
 	<string name="login_offline_switch">Offline account?</string>
 	<string name="login_offline_warning_1">You are logging in by an offline account, but if you don\'t save it, your data may be reset in your worlds/multiplayers/servers. We recommend you to save it.</string>
-	<string name="login_offline_alert_skip">Skip</string>
 	
 	<string name="login_error_short_username">Username must be at least 3 characters</string>
 	<string name="login_error_exist_username">This username already exist</string>
@@ -33,8 +32,10 @@
 	<string name="login_select_account">Select account</string>
 
 	<!-- OpenJDK -->
-	<string name="openjdk_install_download">Downloading OpenJDK</string>
-	<string name="openjdk_install_unpack">Unpacking OpenJDK</string>
+	<string name="openjdk_install_download_main">Downloading OpenJDK</string>
+	<string name="openjdk_install_unpack_main">Unpacking OpenJDK</string>
+	<string name="openjdk_install_download_patch">A patch is available. Downloading OpenJDK Patch.</string>
+	<string name="openjdk_install_unpack_patch">A patch is available. Unpacking OpenJDK Patch.</string>
 	
 	<!-- Hint -->
 	<string name="hint_select_account">To select, click it. To delete an account, hold it.</string>
@@ -88,7 +89,7 @@
 	
 	<string name="mcl_options">Options</string>
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
-	<string name="mcl_option_optifineinstall">Install OptiFine</string>
+	<string name="mcl_option_installmod">Install mod (Forge, OptiFine, LabyMod,...)</string>
 	<string name="mcl_option_checkupdate">Check for update</string>
 	<string name="mcl_option_customcontrol">Custom controls</string>
 	<string name="mcl_option_settings">Settings</string>
@@ -121,6 +122,8 @@
 	<string name="global_remove">Remove</string>
 	<string name="global_save">Save</string>
 	<string name="global_error_field_empty">This field can\'t be empty</string>
+	<string name="global_play">Play</string>
+	<string name="global_skip">Skip</string>
 	
 <!--
 	<string name="mcl_about">

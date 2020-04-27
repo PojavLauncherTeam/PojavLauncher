@@ -23,6 +23,8 @@ import dalvik.system.*;
 import android.text.*;
 import java.awt.*;
 import javax.xml.transform.*;
+import java.math.*;
+import java.security.*;
 // import java.awt.datatransfer.*;
 
 public final class Tools
@@ -133,6 +135,65 @@ public final class Tools
 		} catch (Throwable th) {
 			throw new RuntimeException("Unable to copy " + fileName + " to " + output + "/" + outputName, th);
 		}
+	}
+	
+	public static String calculateMD5(File updateFile) {
+        MessageDigest digest;
+		String TAG = "MD5Check";
+        try {
+            digest = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "Exception while getting digest", e);
+            return null;
+        }
+
+        InputStream is;
+        try {
+            is = new FileInputStream(updateFile);
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, "Exception while getting FileInputStream", e);
+            return null;
+        }
+
+        byte[] buffer = new byte[8192];
+        int read;
+        try {
+            while ((read = is.read(buffer)) > 0) {
+                digest.update(buffer, 0, read);
+            }
+            byte[] md5sum = digest.digest();
+            BigInteger bigInt = new BigInteger(1, md5sum);
+            String output = bigInt.toString(16);
+            // Fill to 32 chars
+            output = String.format("%32s", output).replace(' ', '0');
+            return output;
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to process file for MD5", e);
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Exception on closing MD5 input stream", e);
+            }
+        }
+	}
+	
+	public static String calculateMD5(byte[] buffer) {
+        MessageDigest digest;
+		String TAG = "MD5Check";
+        try {
+            digest = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "Exception while getting digest", e);
+            return null;
+        }
+        digest.update(buffer, 0, buffer.length);
+		byte[] md5sum = digest.digest();
+		BigInteger bigInt = new BigInteger(1, md5sum);
+        String output = bigInt.toString(16);
+		// Fill to 32 chars
+		output = String.format("%32s", output).replace(' ', '0');
+		return output;
 	}
 	
 	public static void extractAssetFolder(Activity ctx, String path, String output) throws Exception {

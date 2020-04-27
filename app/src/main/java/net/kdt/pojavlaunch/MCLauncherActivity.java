@@ -445,7 +445,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 	public class GameRunnerTask extends AsyncTask<String, String, Throwable>
 	{
-		private String convertStr;
+		// private String convertStr;
 		private boolean launchWithError = false;
 
 		@Override
@@ -455,8 +455,8 @@ public class MCLauncherActivity extends AppCompatActivity
 			statusIsLaunching(true);
 		}
 
-		private int maxSubProgress = 1;
-		private int valSubProgress = 1;
+		// private int maxSubProgress = 1;
+		// private int valSubProgress = 1;
 		@Override
 		protected Throwable doInBackground(final String[] p1)
 		{
@@ -553,7 +553,7 @@ public class MCLauncherActivity extends AppCompatActivity
 						@Override
 						public void run()
 						{
-							playButton.setText("Skip");
+							playButton.setText(R.string.global_skip);
 							playButton.setEnabled(true);
 						}
 					});
@@ -574,8 +574,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		}
 		private int addProgress = 0; // 34
 
-		public void zeroProgress()
-		{
+		public void zeroProgress() {
 			addProgress = 0;
 		}
 
@@ -608,7 +607,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		@Override
 		protected void onPostExecute(Throwable p1)
 		{
-			playButton.setText("Play");
+			playButton.setText(R.string.global_play);
 			playButton.setEnabled(true);
 			launchProgress.setMax(100);
 			launchProgress.setProgress(0);
@@ -724,8 +723,8 @@ public class MCLauncherActivity extends AppCompatActivity
 						case 0:{ // Mods manager
 								modManager();
 							} break;
-						case 1:{ // OptiFine installer
-								installOptiFine();
+						case 1:{ // Launch mod installer
+								dialogModInstaller();
 							} break;
 						case 2:{ // Custom controls
 								// if (Tools.enableDevFeatures) {
@@ -826,9 +825,9 @@ public class MCLauncherActivity extends AppCompatActivity
 		dialog.show();
 	}
 
-	private void installOptiFine() {
+	private void dialogModInstaller() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.alerttitle_installoptifine);
+		builder.setTitle(R.string.alerttitle_installmod);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
@@ -838,7 +837,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				@Override
 				public void onFileSelected(File file, String path, String name) {
 					if (name.endsWith(".jar")) {
-						doInstallOptiFine(file);
+						launchModInstaller(file);
 						dialog.dismiss();
 					}
 				}
@@ -847,14 +846,10 @@ public class MCLauncherActivity extends AppCompatActivity
 		dialog.show();
 	}
 
-	private void doInstallOptiFine(File optifineFile) {
-		// new OptiFineInstaller().execute(optifineFile);
-		
-		
-		AlertDialog.Builder dialog = new AlertDialog.Builder(MCLauncherActivity.this);
-		dialog.setTitle("Install OptiFine");
-		dialog.setMessage("Disabled feature due to v3 wip");
-		dialog.setPositiveButton(android.R.string.ok, null);
+	private void launchModInstaller(File modFile) {
+		Intent mainIntent = new Intent(MCLauncherActivity.this, MainConsoleActivity.class);
+		mainIntent.putExtra("launchJar", modFile.getAbsolutePath());
+		startActivity(mainIntent);
 	}
 /*
 	private class OptiFineInstaller extends AsyncTask<File, String, Throwable>
