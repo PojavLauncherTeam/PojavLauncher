@@ -1,1 +1,1 @@
-https://github.com/khanhduytran0/PojavLauncher/raw/master/openjdk_patches/openjdk_patch0_badsyscall.zip
+https://khanhduytran0.github.io/PojavLauncher/openjdk_patches/openjdk_patch1_badsyscall.zip
