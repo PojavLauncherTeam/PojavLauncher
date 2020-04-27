@@ -281,6 +281,10 @@ public class ProgressDialogCompat extends AlertDialog {
         mHasStarted = false;
     }
 
+	public void setProgressVisibility(int visibility) {
+		mProgress.setVisibility(visibility);
+	}
+	
     /**
      * Sets the current progress.
      *

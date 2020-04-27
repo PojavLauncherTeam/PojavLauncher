@@ -527,6 +527,7 @@ public final class Tools
 				out.close();
 			}
 		}
+		
 		public static void unzip(File zipFile, File targetDirectory) throws IOException {
 			final int BUFFER_SIZE = 1024;
 			ZipInputStream zis = new ZipInputStream(
@@ -550,11 +551,8 @@ public final class Tools
 					} finally {
 						fout.close();
 					}
-					/* if time should be restored as well
-					 long time = ze.getTime();
-					 if (time > 0)
-					 file.setLastModified(time);
-					 */
+					long time = ze.getTime();
+					if (time > 0) file.setLastModified(time);
 				}
 			} finally {
 				zis.close();

@@ -24,6 +24,8 @@ import static android.view.ViewGroup.LayoutParams.*;
 import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.util.*;
 import java.net.*;
+import com.kdt.mcgui.*;
+import java.util.zip.*;
 
 public class PojavLoginActivity extends MineActivity
 {
@@ -104,36 +106,33 @@ public class PojavLoginActivity extends MineActivity
 	}
 
 	private class InitTask extends AsyncTask<Void, String, Integer>{
-		private AlertDialog startAle;
-		private ProgressBar progress;
-
-		private ProgressBar progressSpin;
-		private TextView startSubText;
+		private ProgressDialog startAle;
+		// private TextView startSubText;
 		// private EditText progressLog;
-		private AlertDialog progDlg;
+		// private AlertDialog progDlg;
 
 		@Override
 		protected void onPreExecute()
 		{
-			LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
-			LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
-			startSubText = (TextView) startScr.findViewById(R.id.start_screen_sub_text);
+			// LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
+			// LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
+			// startSubText = (TextView) startScr.findViewById(R.id.start_screen_sub_text);
 			
-			replaceFonts(startScr);
+			// replaceFonts(startScr);
 
-			progress = (ProgressBar) startScr.findViewById(R.id.start_screen_progress);
-			//startScr.addView(progress);
-
-			AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this, R.style.AppTheme);
-			startDlg.setView(startScr);
-			startDlg.setCancelable(false);
-
-			startAle = startDlg.create();
+			startAle = new ProgressDialog(PojavLoginActivity.this, R.style.AppTheme);
+			startAle.setTitle(R.string.app_short_name);
+			startAle.setMessage(getString(R.string.app_motd));
+			startAle.setProgressStyle(ProgressDialogCompat.STYLE_HORIZONTAL);
+			startAle.setCancelable(false);
 			startAle.show();
+			
 			startAle.getWindow().setLayout(
-				WindowManager.LayoutParams.MATCH_PARENT,
+				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT
 			);
+			
+			startAle.getWindow().setGravity(Gravity.CENTER);
 		}
 		
 		private int revokeCount = -1;
@@ -165,52 +164,87 @@ public class PojavLoginActivity extends MineActivity
 			
 			if (!firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_OPENJDK, false)) {
 				// Install OpenJDK
-				runOnUiThread(new Runnable(){
-
-						@Override
-						public void run()
-						{
-							startSubText.setText(R.string.openjdk_install_download);
-						}
-					});
-				publishProgress("i0");
+				publishProgress(null, getString(R.string.openjdk_install_download));
 				File openjdkZip = new File(Tools.MAIN_PATH, "OpenJDK.zip");
 				File oldOpenjdkFolder = new File(Tools.datapath, "openjdk");
 				File newOpenjdkFolder = new File(Tools.datapath, "jre");
 				try {
-					// BEGIN download file
+					try {
+						Tools.deleteRecursive(oldOpenjdkFolder);
+						Tools.deleteRecursive(newOpenjdkFolder);
+					} catch (Throwable th) {
+						// Nothing wrong if can't delete OpenJDK folders.
+					}
+					
+					// BEGIN download openjdk
 					URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.0-preview1/net.kdt.pojavlaunch.openjdk.zip");
 					URLConnection connection = url.openConnection();
 					connection.connect();
 					int fileLength = connection.getContentLength();
-					InputStream input = new BufferedInputStream(url.openStream());
-					OutputStream output = new FileOutputStream(openjdkZip);
-					byte data[] = new byte[1024];
-					long total = 0;
-					int count;
-					while ((count = input.read(data)) != -1) {
-						total += count;
-						publishProgress("+", null, Integer.toString((int) (total * 100 / fileLength)));
-						output.write(data, 0, count);
-					}
-					output.flush();
-					output.close();
-					input.close();
-					// END download file
+					int count = 0;
 					
-					runOnUiThread(new Runnable(){
+					publishProgress("i0", getString(R.string.openjdk_install_download), Integer.toString(fileLength));
+					if (!openjdkZip.exists() || openjdkZip.length() != fileLength) {
+						InputStream input = new BufferedInputStream(url.openStream());
+						OutputStream output = new FileOutputStream(openjdkZip);
+						byte data[] = new byte[1024];
+						long total = 0;
 
-							@Override
-							public void run()
-							{
-								startSubText.setText(R.string.openjdk_install_unpack);
-							}
-						});
-					publishProgress("i1");
-					Tools.ZipTool.unzip(openjdkZip, new File(Tools.datapath));
-					oldOpenjdkFolder.renameTo(newOpenjdkFolder);
+						while ((count = input.read(data)) != -1) {
+							total += count;
+							publishProgress(null, null, null, Long.toString(total));
+							output.write(data, 0, count);
+						}
+						output.flush();
+						output.close();
+						input.close();
+					}
+					// END download openjdk
 					
+					publishProgress("i1", getString(R.string.openjdk_install_unpack));
+					
+					// BEGIN unzip openjdk
+					ZipFile zis = new ZipFile(openjdkZip);
+					try {
+						count = 0;
+						publishProgress("i0", null, Integer.toString(zis.size()));
+						Enumeration<? extends ZipEntry> zipEntries = zis.entries();
+						while (zipEntries.hasMoreElements()) {
+							ZipEntry ze = zipEntries.nextElement();
+							count++;
+							publishProgress(null, getString(R.string.openjdk_install_unpack) + ": " + ze.getName(), null, Integer.toString(count));
+							
+							File file = new File(Tools.datapath, ze.getName());
+							File dir = ze.isDirectory() ? file : file.getParentFile();
+							if (!dir.isDirectory() && !dir.mkdirs())
+								throw new FileNotFoundException("Failed to ensure directory: " +
+																dir.getAbsolutePath());
+							if (
+								ze.isDirectory() ||
+								file.exists() && file.length() == ze.getSize()
+							) {
+								continue;
+							}
+							
+							BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(file));
+							try {
+								byte[] byteArr = Tools.getByteArray(zis.getInputStream(ze));
+								fout.write(byteArr,  0, byteArr.length);
+							} finally {
+								fout.close();
+							}
+							long time = ze.getTime();
+							if (time > 0) file.setLastModified(time);
+						}
+					} finally {
+						zis.close();
+					}
+					// END unzip openjdk
+					oldOpenjdkFolder.renameTo(newOpenjdkFolder);
 					Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
+					openjdkZip.delete();
+					
+					firstLaunchPrefs.edit().putBoolean(PREF_IS_INSTALLED_OPENJDK, true).commit();
 				} catch (Throwable e) {
 					Tools.showError(PojavLoginActivity.this, e, true);
 				}
@@ -226,18 +260,20 @@ public class PojavLoginActivity extends MineActivity
 		{
 			if (obj[0] != null) {
 				if (obj[0].equals("visible")) {
-					progress.setVisibility(View.VISIBLE);
+					// startAle.setProgressVisibility(View.VISIBLE);
+				} else if (obj[0].startsWith("i")) {
+					startAle.setIndeterminate(obj[0].charAt(1) == '1');
 				}
-				
-				if (obj[0].equals("i0")) {
-					progress.setIndeterminate(false);
-				} else if (obj[0].equals("i1")) {
-					progress.setIndeterminate(true);
-				} else if (obj[0].equals("+")) {
-					progress.setMax(Integer.parseInt(obj[2].substring(1)));
-					progress.setProgress(progress.getProgress() + 1);
-				}
+			} if (obj.length > 1 && obj[1] != null) {
+				startAle.setMessage(obj[1]);
+			} if (obj.length > 2 && obj[2] != null) {
+				startAle.setMax(Integer.parseInt(obj[2]));
+			} if (obj.length > 3 && obj[3] != null) {
+				startAle.setProgress(Integer.parseInt(obj[3]));
 			}
+			
+			
+
 			/*
 			if (obj.length > 1 && obj[1] != null) {
 				progressLog.append(obj[1]);
@@ -248,9 +284,8 @@ public class PojavLoginActivity extends MineActivity
 		@Override
 		protected void onPostExecute(Integer obj) {
 			startAle.dismiss();
-			if (progressSpin != null) progressSpin.setVisibility(View.GONE);
 			if (obj == 0) {
-				if (progDlg != null) progDlg.dismiss();
+				// if (progDlg != null) progDlg.dismiss();
 				uiInit();
 			} /* else if (progressLog != null) {
 				progressLog.setText(getResources().getString(R.string.error_checklog, "\n\n" + progressLog.getText()));
