@@ -32,7 +32,8 @@ public class DownloadUtils {
                 throw new RuntimeException("Server returned HTTP " + conn.getResponseCode()
 					+ ": " + conn.getResponseMessage());
             }
-			buf = new byte[conn.getContentLength()];
+			int contentLength = conn.getContentLength();
+			buf = new byte[contentLength < 1 ? 8192 : contentLength];
             is = conn.getInputStream();
             IoUtil.pipe(is, os, buf);
         } finally {

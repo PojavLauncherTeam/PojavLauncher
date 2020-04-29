@@ -45,7 +45,14 @@ public class MainConsoleActivity extends AppCompatActivity
 		mProfile = PojavProfile.getCurrentProfileContent(this);
 		mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 		
-		final String modPath = getIntent().getExtras().getString("launchJar", "");
+		Bundle extras = getIntent().getExtras();
+		final String modPath;
+		
+		if (extras != null) {
+			modPath = extras.getString("launchJar", "");
+		} else {
+			modPath = null;
+		}
 		
 		new Thread(new Runnable(){
 
@@ -80,7 +87,7 @@ public class MainConsoleActivity extends AppCompatActivity
 			mJreArgs.add("-Duser.home=" + Tools.MAIN_PATH);
 			mJreArgs.add("-Xmx512M");
 			
-			if (modPath.isEmpty()) {
+			if (modPath == null) {
 				mJreArgs.add("-classpath");
 				mJreArgs.add(Tools.generate(mProfile.getVersion()));
 				mJreArgs.add(mVersionInfo.mainClass);
@@ -97,7 +104,6 @@ public class MainConsoleActivity extends AppCompatActivity
 				}
 			}, "sh " + Tools.homeJreDir + "/usr/bin/jre.sh");
 			process.initInputStream(this);
-			
 			process.writeToProcess("unset LD_PRELOAD");
 			process.writeToProcess("cd " + Tools.MAIN_PATH);
 			process.writeToProcess(mJreArgs.toArray(new String[0]));
@@ -128,10 +134,38 @@ public class MainConsoleActivity extends AppCompatActivity
 		varArgMap.put("user_type", userType);
 		varArgMap.put("version_type", mVersionInfo.type);
 		varArgMap.put("game_assets", Tools.ASSETS_PATH);
-
-		String[] argsFromJson = insertVariableArgument(splitAndFilterEmpty(mVersionInfo.minecraftArguments), varArgMap);
+		
+		List<String> minecraftArgs = new ArrayList<String>();
+		for (JMinecraftVersionList.Arguments.ArgValue arg : mVersionInfo.arguments.game) {
+			if (arg.rules == null) {
+				minecraftArgs.add(arg.value);
+			} else {
+				for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
+					// rule.action = allow
+					// TODO implement this
+				}
+			}
+		}
+		
+		String[] argsFromJson = insertVariableArgument(
+			splitAndFilterEmpty(
+				mVersionInfo.minecraftArguments == null ?
+				fromStringArray(minecraftArgs.toArray(new String[0])):
+				mVersionInfo.minecraftArguments
+			), varArgMap
+		);
 		// Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
 		return argsFromJson;
+	}
+	
+	private String fromStringArray(String[] strArr) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < strArr.length; i++) {
+			if (i > 0) builder.append(" ");
+			builder.append(strArr[i]);
+		}
+		
+		return builder.toString();
 	}
 
 	private String[] splitAndFilterEmpty(String argStr) {

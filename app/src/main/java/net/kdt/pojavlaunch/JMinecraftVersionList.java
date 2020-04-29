@@ -13,6 +13,9 @@ public class JMinecraftVersionList {
     public Version[] versions;
 
     public static class Version {
+		// Since 1.13
+		public Arguments arguments;
+		
         public String assets;
 		public Map<String, MinecraftClientInfo> downloads;
         public String id;
@@ -27,5 +30,21 @@ public class JMinecraftVersionList {
         public String type;
 		public String url;
     }
+	
+	// Since 1.13
+	public static class Arguments {
+		public ArgValue[] game;
+		public ArgValue[] jvm;
+
+		public static class ArgValue {
+			public ArgRules[] rules;
+			public String value;
+
+			public static class ArgRules {
+				public String action;
+				public String features;
+			}
+		}
+	}
 }
 

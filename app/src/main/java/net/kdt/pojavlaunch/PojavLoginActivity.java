@@ -211,7 +211,9 @@ public class PojavLoginActivity extends MineActivity
 					
 					setPref(PREF_IS_INSTALLED_OPENJDK, true);
 				} catch (Throwable e) {
-					Tools.showError(PojavLoginActivity.this, e, true);
+					// Ignore if no internet...
+					
+					// Tools.showError(PojavLoginActivity.this, e, true);
 				}
 			}
 			
@@ -241,8 +243,16 @@ public class PojavLoginActivity extends MineActivity
 
 				// Grant execute permission
 				Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
-			} catch (Throwable th) {
-				Tools.showError(PojavLoginActivity.this, th, true);
+			} catch (final Throwable th) {
+				// Tools.showError(PojavLoginActivity.this, th);
+				runOnUiThread(new Runnable(){
+
+						@Override
+						public void run()
+						{
+							Toast.makeText(PojavLoginActivity.this, "Warning: [" + th.getClass().getName() + "] " + th.getMessage(), Toast.LENGTH_LONG).show();
+						}
+					});
 			}
 			
 			initMain();
@@ -373,10 +383,9 @@ public class PojavLoginActivity extends MineActivity
 		sOffline.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 				@Override
-				public void onCheckedChanged(CompoundButton p1, boolean p2)
+				public void onCheckedChanged(CompoundButton p1, boolean checked)
 				{
-					// May delete later
-					edit3.setEnabled(!p2);
+					edit3.setEnabled(!checked);
 				}
 			});
 	}
@@ -437,6 +446,8 @@ public class PojavLoginActivity extends MineActivity
 			// Extract launcher_profiles.json
 			// TODO: Remove after implement.
 			Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
+			
+			Tools.copyAssetFile(this, "ClassWrapper.jar", Tools.libraries, true);
 			
 			// Yep, the codebase from v1.0.3:
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.0.jar", Tools.versnDir + "/1.0");

@@ -51,8 +51,7 @@
 	
 	<!-- AlertDialog title -->
 	<string name="alerttitle_selectkeymap">Select a keymap json</string>
-	<string name="alerttitle_installmod">Select a mod to add</string>
-	<string name="alerttitle_installoptifine">Select OptiFine jar file</string>
+	<string name="alerttitle_installmod">Select a mod installer</string>
 	
 	<!-- Error messages -->
 	<string name="error_checklog">Error! Please check the log below: %s</string>
