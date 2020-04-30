@@ -40,7 +40,7 @@ public class PojavLoginActivity extends MineActivity
 	private SharedPreferences firstLaunchPrefs;
 	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
-	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKInstalled";
+	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKV2Installed";
 	private String PREF_OPENJDK_PATCH_VERSION = "latestOpenjdkPatchVersion";
 	
 	private boolean isInitCalled = false;
@@ -180,7 +180,7 @@ public class PojavLoginActivity extends MineActivity
 					}
 					
 					// BEGIN download openjdk
-					URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.0-preview1/net.kdt.pojavlaunch.openjdk.zip");
+					URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.0-preview1/net.kdt.pojavlaunch.openjdkv2.zip");
 					URLConnection connection = url.openConnection();
 					connection.connect();
 					int fileLength = connection.getContentLength();
@@ -211,8 +211,7 @@ public class PojavLoginActivity extends MineActivity
 					
 					setPref(PREF_IS_INSTALLED_OPENJDK, true);
 				} catch (Throwable e) {
-					// Ignore if no internet...
-					
+					Tools.dialogOnUiThread(PojavLoginActivity.this, "Error! Check your internet connection", Log.getStackTraceString(e));
 					// Tools.showError(PojavLoginActivity.this, e, true);
 				}
 			}
@@ -222,7 +221,7 @@ public class PojavLoginActivity extends MineActivity
 				Thread.sleep(500);
 				
 				String patchUrl = DownloadUtils.downloadString(Tools.mhomeUrl + "/openjdk_patch.txt");
-				if (!patchUrl.equals("null")) {
+				if (!patchUrl.startsWith("null")) {
 					// Next if a patch is available.
 					publishProgress("i1", getString(R.string.openjdk_install_download_patch));
 					
@@ -250,7 +249,7 @@ public class PojavLoginActivity extends MineActivity
 						@Override
 						public void run()
 						{
-							Toast.makeText(PojavLoginActivity.this, "Warning: [" + th.getClass().getName() + "] " + th.getMessage(), Toast.LENGTH_LONG).show();
+							Toast.makeText(PojavLoginActivity.this, "Warning: " + th.getMessage(), Toast.LENGTH_LONG).show();
 						}
 					});
 			}

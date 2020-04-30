@@ -88,7 +88,8 @@ public class MainConsoleActivity extends AppCompatActivity
 			mJreArgs.add("-Xmx512M");
 			
 			if (modPath == null) {
-				mJreArgs.add("-classpath");
+				mJreArgs.add("-jar");
+				mJreArgs.add(Tools.libraries + "/ClassWrapper.jar");
 				mJreArgs.add(Tools.generate(mProfile.getVersion()));
 				mJreArgs.add(mVersionInfo.mainClass);
 				mJreArgs.addAll(Arrays.asList(getMCArgs()));
@@ -136,17 +137,21 @@ public class MainConsoleActivity extends AppCompatActivity
 		varArgMap.put("game_assets", Tools.ASSETS_PATH);
 		
 		List<String> minecraftArgs = new ArrayList<String>();
-		for (JMinecraftVersionList.Arguments.ArgValue arg : mVersionInfo.arguments.game) {
-			if (arg.rules == null) {
-				minecraftArgs.add(arg.value);
-			} else {
-				for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
-					// rule.action = allow
-					// TODO implement this
+		if (mVersionInfo.arguments != null) {
+			for (Object arg : mVersionInfo.arguments.game) {
+				if (arg instanceof String) {
+					minecraftArgs.add((String) arg);
+				} else {
+					/*
+					for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
+						// rule.action = allow
+						// TODO implement this
+					}
+					*/
 				}
 			}
 		}
-		
+	
 		String[] argsFromJson = insertVariableArgument(
 			splitAndFilterEmpty(
 				mVersionInfo.minecraftArguments == null ?

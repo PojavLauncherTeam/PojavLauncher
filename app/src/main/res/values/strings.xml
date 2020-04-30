@@ -32,8 +32,8 @@
 	<string name="login_select_account">Select account</string>
 
 	<!-- OpenJDK -->
-	<string name="openjdk_install_download_main">Downloading OpenJDK</string>
-	<string name="openjdk_install_unpack_main">Unpacking OpenJDK</string>
+	<string name="openjdk_install_download_main">Downloading OpenJDK v2</string>
+	<string name="openjdk_install_unpack_main">Unpacking OpenJDK v2</string>
 	<string name="openjdk_install_download_patch">A patch is available. Downloading OpenJDK Patch.</string>
 	<string name="openjdk_install_unpack_patch">A patch is available. Unpacking OpenJDK Patch.</string>
 	

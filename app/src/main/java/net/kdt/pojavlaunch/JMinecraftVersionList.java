@@ -33,8 +33,8 @@ public class JMinecraftVersionList {
 	
 	// Since 1.13
 	public static class Arguments {
-		public ArgValue[] game;
-		public ArgValue[] jvm;
+		public Object[] game;
+		public Object[] jvm;
 
 		public static class ArgValue {
 			public ArgRules[] rules;
