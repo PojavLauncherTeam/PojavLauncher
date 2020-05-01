@@ -629,7 +629,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-					if (PojavPreferenceActivity.PREF_FREEFORM) {
+					if (LauncherPreferences.PREF_FREEFORM) {
 						DisplayMetrics dm = new DisplayMetrics();
 						getWindowManager().getDefaultDisplay().getMetrics(dm);
 

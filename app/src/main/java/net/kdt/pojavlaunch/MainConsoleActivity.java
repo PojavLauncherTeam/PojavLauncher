@@ -16,6 +16,7 @@ import android.widget.*;
 import android.graphics.*;
 import android.view.*;
 import android.text.method.*;
+import net.kdt.pojavlaunch.prefs.*;
 
 public class MainConsoleActivity extends AppCompatActivity
 {
@@ -103,9 +104,12 @@ public class MainConsoleActivity extends AppCompatActivity
 				public void onPrintLine(String text) {
 					log(text);
 				}
-			}, "sh " + Tools.homeJreDir + "/usr/bin/jre.sh");
+			}, LauncherPreferences.PREF_RUNASROOT ? "su" : "sh" + " " + Tools.homeJreDir + "/usr/bin/jre.sh");
 			process.initInputStream(this);
 			process.writeToProcess("unset LD_PRELOAD");
+			/* To prevent Permission Denied, chmod again.
+			 * Useful if enable root mode */
+			process.writeToProcess("chmod -R 700 " + Tools.homeJreDir);
 			process.writeToProcess("cd " + Tools.MAIN_PATH);
 			process.writeToProcess(mJreArgs.toArray(new String[0]));
 		} catch (Throwable th) {

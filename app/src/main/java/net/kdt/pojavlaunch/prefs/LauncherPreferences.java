@@ -8,17 +8,15 @@ public class LauncherPreferences
 	public static boolean PREF_VERTYPE_OLDALPHA = false;
 	public static boolean PREF_VERTYPE_OLDBETA = false;
 	public static boolean PREF_FREEFORM = false;
-	public static boolean PREF_FORGETOF = false;
+	public static boolean PREF_RUNASROOT = false;
 	public static float PREF_BUTTONSIZE = 1.0f;
 	public static int PREF_LONGPRESS_TRIGGER = 500;
 	
 	public static void loadPreferences(Context ctx) {
 		SharedPreferences mainPreference = ctx.getSharedPreferences(ctx.getPackageName() + "_preferences", Context.MODE_PRIVATE);
-		int maxDxPref = mainPreference.getInt("maxDxRefs", 0xFFF);
-		
 		PREF_BUTTONSIZE = mainPreference.getFloat("controlSize", 1f);
 		PREF_FREEFORM = mainPreference.getBoolean("freeform", false);
-		PREF_FORGETOF = mainPreference.getBoolean("forgetOptifinePath", false);
+		PREF_RUNASROOT = mainPreference.getBoolean("runAsRoot", false);
 		PREF_VERTYPE_RELEASE = mainPreference.getBoolean("vertype_release", true);
 		PREF_VERTYPE_SNAPSHOT = mainPreference.getBoolean("vertype_snapshot", false);
 		PREF_VERTYPE_OLDALPHA = mainPreference.getBoolean("vertype_oldalpha", false);

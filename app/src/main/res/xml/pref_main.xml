@@ -7,20 +7,15 @@
 		android:title="@string/mcl_setting_category_general">
 		
         <android.support.v7.preference.SeekBarPreference
-            android:key="maxDxRefs"
-            android:title="@string/mcl_setting_title_setmaxdxref"
-            android:summary="@string/mcl_setting_subtitle_setmaxdxref" />
-		
-        <android.support.v7.preference.SeekBarPreference
             android:key="timeLongPressTrigger"
             android:title="@string/mcl_setting_title_longpresstrigger"
             android:summary="@string/mcl_setting_subtitle_longpresstrigger" />
 		
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="false"
-            android:key="forgetOptifinePath"
-			android:title="@string/mcl_setting_title_forgetoptifpath"
-			android:summary="@string/mcl_setting_subtitle_forgetoptifpath"/>
+            android:key="runAsRoot"
+			android:title="@string/mcl_setting_title_runasroot"
+			android:summary="@string/mcl_setting_subtitle_runasroot"/>
 		
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="false"

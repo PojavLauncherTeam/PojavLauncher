@@ -101,8 +101,8 @@
 	<string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
 	<string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
 	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
-	<string name="mcl_setting_title_forgetoptifpath">Make OptiFine unable to locate itself</string>
-	<string name="mcl_setting_subtitle_forgetoptifpath">Useful for making OptiFine launchable on some devices.</string>
+	<string name="mcl_setting_title_runasroot">Run Minecraft as root</string>
+	<string name="mcl_setting_subtitle_runasroot">Useful for fixing Bad system call or Permission Denied in some devices and VMOS.</string>
 	<string name="mcl_setting_category_general">General settings</string>
 	<string name="mcl_setting_category_veroption">Version type will be in version list</string>
 	<string name="mcl_setting_veroption_release">Release</string>
