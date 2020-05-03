@@ -17,6 +17,7 @@ import android.graphics.*;
 import android.view.*;
 import android.text.method.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.value.*;
 
 public class MainConsoleActivity extends AppCompatActivity
 {
@@ -83,6 +84,13 @@ public class MainConsoleActivity extends AppCompatActivity
 	
 	private void launchJava(String modPath) {
 		try {
+			/*
+			 * 17w43a and above change Minecraf arguments from
+			 * `minecraftArguments` to `arguments` so check if
+			 * selected version requires LWJGL 3 or not is easy.
+			 */
+			boolean isLwjgl3 = mVersionInfo.arguments != null;
+			
 			List<String> mJreArgs = new ArrayList<String>();
 			mJreArgs.add("java");
 			mJreArgs.add("-Duser.home=" + Tools.MAIN_PATH);
@@ -111,6 +119,7 @@ public class MainConsoleActivity extends AppCompatActivity
 			 * Useful if enable root mode */
 			process.writeToProcess("chmod -R 700 " + Tools.homeJreDir);
 			process.writeToProcess("cd " + Tools.MAIN_PATH);
+			process.writeToProcess("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/minecraft_lib/lwjgl" + (isLwjgl3 ? "3" : "2"));
 			process.writeToProcess(mJreArgs.toArray(new String[0]));
 		} catch (Throwable th) {
 			th.printStackTrace();

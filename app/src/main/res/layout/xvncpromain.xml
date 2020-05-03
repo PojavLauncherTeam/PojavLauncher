@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+ 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dip"
+        android:text="@string/xvncpro_subject" />
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <Button android:text="@string/launchx"
+            android:id="@+id/connectionStartButton"
+            android:layout_width="150dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="75dip"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dip"
+            android:contentDescription="@string/xvncpro_icon_text"
+            android:src="@drawable/ic_xvnc" />
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <Button android:text="@string/stopx"
+            android:id="@+id/stopButton"
+            android:layout_width="150dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="75dip"/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+       <EditText
+           android:text="@string/xresolution"
+           android:id="@+id/editText1"
+           android:layout_width="74dip"
+           android:layout_height="fill_parent"
+           android:layout_marginLeft="75dip"
+           android:digits="0123456789"
+           android:inputType="number" /> 
+       <EditText
+           android:text="@string/yresolution"
+           android:id="@+id/editText2"
+           android:layout_width="74dip"
+           android:layout_height="fill_parent"
+           android:digits="0123456789"
+           android:inputType="number" /> 
+       <CheckBox
+            android:id="@+id/toggleForceResolutionButton"
+            android:layout_width="120dip"
+            android:layout_height="wrap_content"
+            android:text="@string/resolution_forced" 
+            android:layout_gravity="center_vertical"/>
+<!--       <ToggleButton
+           android:text="@string/resolution_forced"
+           android:id="@+id/toggleForceResolutionButton"
+           android:layout_width="120dip"
+           android:layout_height="wrap_content"
+           android:textOff="@string/resolution_auto"
+           android:textOn="@string/resolution_forced"
+           android:layout_gravity="center_vertical"/> 
+           -->
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+        <ToggleButton
+            android:id="@+id/vncChoiceButton"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="75dip"
+            android:text="@string/vncclientChoice"
+            android:textOff="@string/pocketview_vnc_viewer"
+            android:textOn="@string/android_vnc_viewer" />
+<!-- 
+        <ToggleButton
+           android:text="@string/keepxserver_on_disconnect"
+           android:id="@+id/stopOnVncDisconnectButton"
+           android:layout_width="120dip"
+           android:layout_height="wrap_content"
+           android:textOff="@string/stop_x_on_disconnect"
+           android:textOn="@string/keep_x_running"
+           android:layout_gravity="center_vertical"/> 
+            -->
+       <CheckBox
+            android:id="@+id/stopOnVncDisconnectButton"
+            android:layout_width="120dip"
+            android:layout_height="wrap_content"
+            android:text="@string/keep_x_running" 
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+       <!-- 
+       <ToggleButton
+           android:text="@string/remoteVncConnectionChoice"
+           android:id="@+id/allowRemoteVNCButton"
+           android:layout_width="150dip"
+           android:layout_marginLeft="75dip"
+           android:layout_height="wrap_content"
+           android:textOff="@string/noRemoteVncConnection"
+           android:textOn="@string/allowRemoteVncConnection"
+           android:layout_gravity="center_vertical"/> 
+           -->
+       <CheckBox
+            android:id="@+id/allowRemoteVNCButton"
+            android:layout_width="200dip"
+            android:layout_marginLeft="75dip"
+            android:layout_height="wrap_content"
+            android:text="@string/remoteVncConnectionChoice" 
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+        <CheckBox
+            android:id="@+id/renderButton"
+            android:layout_width="200dip"
+            android:layout_marginLeft="75dip"
+            android:layout_height="wrap_content"
+            android:text="@string/renderChoice" 
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+        <CheckBox
+            android:id="@+id/xineramaButton"
+            android:layout_width="200dip"
+            android:layout_marginLeft="75dip"
+            android:layout_height="wrap_content"
+            android:text="@string/xineramaChoice" 
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/consoletext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dip" />
+    <ProgressBar
+        android:text="@string/copyprogress"
+        android:id="@+id/progressbar1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+</LinearLayout>
+</ScrollView>

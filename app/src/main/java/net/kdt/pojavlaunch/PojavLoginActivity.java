@@ -445,8 +445,11 @@ public class PojavLoginActivity extends MineActivity
 			// Extract launcher_profiles.json
 			// TODO: Remove after implement.
 			Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
-			
 			Tools.copyAssetFile(this, "ClassWrapper.jar", Tools.libraries, true);
+			
+			try {
+				Os.symlink(Tools.homeJreDir, Tools.datapath + "/xvncfiles");
+			} catch (Throwable ignored) {}
 			
 			// Yep, the codebase from v1.0.3:
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.0.jar", Tools.versnDir + "/1.0");

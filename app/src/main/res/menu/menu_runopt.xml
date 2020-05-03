@@ -12,4 +12,47 @@
 	<item
 		android:id="@+id/nav_customkey"
 		android:title="@string/control_customkey" />
+	<item android:numericShortcut="1" android:alphabeticShortcut="s" android:id="@+id/itemSpecialKeys" android:title="@string/special_keys" android:icon="@android:drawable/ic_dialog_dialer"/>
+    <item android:numericShortcut="2" android:alphabeticShortcut="m" android:id="@+id/itemCenterMouse" android:title="@string/center_mouse" android:icon="@android:drawable/ic_menu_mylocation"/>
+    <item android:id="@+id/itemEnterText" android:alphabeticShortcut="e" android:title="@string/enter_text" android:icon="@android:drawable/ic_menu_edit" />
+    <item android:numericShortcut="5" android:alphabeticShortcut="p" android:id="@+id/itemInputMode" android:title="@string/input_mode" android:icon="@android:drawable/ic_input_get">
+    	<menu>
+	    	<group android:checkableBehavior="single">
+	    		<item android:id="@+id/itemInputTouchPanZoomMouse" android:title="@string/input_mode_touch_pan_zoom_mouse"/>
+	    		<item android:id="@+id/itemInputTouchpad" android:title="@string/input_mode_touchpad"></item><item android:id="@+id/itemInputFitToScreen" android:checked="true" android:title="@string/input_mode_fit_to_screen"/>
+	    		<item android:id="@+id/itemInputPan" android:title="@string/input_mode_panning"/>
+	    		<item android:id="@+id/itemInputMouse" android:title="@string/input_mode_mouse"/>
+	    		<item android:id="@+id/itemInputTouchPanTrackballMouse" android:title="@string/input_mode_touchpad_pan_trackball_mouse"/>
+	    		<item android:id="@+id/itemInputDPadPanTouchMouse" android:title="@string/input_mode_dpad_pan_touchpad_mouse"/>
+
+			</group>
+	    </menu>
+    </item>
+    <item android:numericShortcut="7" android:alphabeticShortcut="d" android:id="@+id/itemDisconnect" android:title="@string/disconnect" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
+    <group android:checkableBehavior="all">
+    	<item android:numericShortcut="6" android:alphabeticShortcut="f" android:id="@+id/itemFollowMouse" android:title="@string/pan_follow_mouse"/>
+    	<item android:title="@string/mouse_follow_pan" android:id="@+id/itemFollowPan"/>
+    </group>
+    <item android:numericShortcut="3" android:alphabeticShortcut="c" android:id="@+id/itemColorMode" android:title="@string/color_mode" android:icon="@android:drawable/ic_menu_preferences"></item>
+    <item android:numericShortcut="4" android:alphabeticShortcut="z" android:id="@+id/itemScaling" android:title="@string/scaling" android:icon="@android:drawable/ic_menu_zoom">
+    	<menu>
+	    	<group android:id="@+id/groupScaling" android:checkableBehavior="single">
+	    		<item android:id="@+id/itemZoomable" android:title="@string/scaling_zoomable" />
+	    		<item android:id="@+id/itemOneToOne" android:title="@string/one_to_one"/>
+	    		<item android:id="@+id/itemFitToScreen" android:title="@string/fit_to_screen" android:checked="true"/>
+	    	</group>
+    	</menu>
+    </item>
+    <item android:numericShortcut="8" android:alphabeticShortcut="a" android:id="@+id/itemCtrlAltDel" android:title="@string/ctrl_alt_del" android:icon="@android:drawable/ic_menu_share"/>
+    <item android:numericShortcut="9" android:alphabeticShortcut="i" android:id="@+id/itemInfo" android:title="@string/info" android:icon="@android:drawable/ic_menu_info_details"></item>
+    <item android:alphabeticShortcut="g" android:id="@+id/itemSendKeyAgain" android:title="@string/send_key_again"/>
+    <item android:alphabeticShortcut="h" android:id="@+id/itemArrowLeft" android:title="@string/arrow_left"/>
+    <item android:alphabeticShortcut="j" android:id="@+id/itemArrowDown" android:title="@string/arrow_down"/>
+    <item android:alphabeticShortcut="k" android:id="@+id/itemArrowUp" android:title="@string/arrow_up"/>
+    <item android:alphabeticShortcut="l" android:id="@+id/itemArrowRight" android:title="@string/arrow_right"></item>
+    <item android:id="@+id/itemOpenDoc" android:title="@string/open_doc" android:icon="@android:drawable/ic_menu_help"/>
+
+
+
+	
 </menu>

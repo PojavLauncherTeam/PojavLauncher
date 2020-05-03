@@ -20,6 +20,10 @@ public class SimpleShellProcess
 		); //"/system/bin/sh -c \"" + command + "\"");
 	}
 
+	public void terminate() {
+		process.destroy();
+	}
+
 	public void writeToProcess(String[] args) throws IOException {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < args.length; i++) {

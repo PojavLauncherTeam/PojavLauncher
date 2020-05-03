@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:numericShortcut="1" android:alphabeticShortcut="h" android:id="@+id/itemOpenDoc" android:title="@string/open_doc" android:icon="@android:drawable/ic_menu_help"/>
+    <item android:numericShortcut="2" android:alphabeticShortcut="d" android:id="@+id/itemDontShowAgain" android:title="@string/intro_dont_show" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
+    <item android:numericShortcut="3" android:alphabeticShortcut="c" android:id="@+id/itemClose" android:title="@string/close" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
+</menu>

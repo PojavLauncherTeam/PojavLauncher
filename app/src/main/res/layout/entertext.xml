@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:padding="10dip"
+	android:orientation="vertical"
+		>
+
+	<EditText
+		android:id="@+id/textEnterText"
+		android:layout_width="fill_parent"
+		android:minEms="18"
+		android:layout_height="wrap_content"
+		android:lines="2"
+		/>
+	<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+		<Button android:text="@string/button_send_text" android:id="@+id/buttonSendText" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+		<LinearLayout android:gravity="right" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+			<ImageButton android:gravity="right|center_vertical" android:id="@+id/buttonPreviousEntry" android:src="@android:drawable/arrow_up_float" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<ImageButton android:gravity="right|center_vertical" android:id="@+id/buttonNextEntry" android:src="@android:drawable/arrow_down_float" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="12dp"/>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="bottom" android:orientation="horizontal">
+		<Button android:text="@string/button_send_without_saving" android:id="@+id/buttonSendWithoutSaving" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="right|center_vertical">
+			<ImageButton android:id="@+id/buttonTextDelete" android:src="@android:drawable/ic_menu_delete" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		</LinearLayout>
+	</LinearLayout>
+
+</LinearLayout>

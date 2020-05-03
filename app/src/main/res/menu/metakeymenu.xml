@@ -1,0 +1,4 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:numericShortcut="1" android:alphabeticShortcut="d" android:id="@+id/itemDeleteKeyList" android:title="@string/delete_key_list" android:icon="@android:drawable/ic_menu_delete"></item>
+    <item android:numericShortcut="2" android:alphabeticShortcut="k" android:id="@+id/itemDeleteKey" android:title="@string/delete_key" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
+</menu>

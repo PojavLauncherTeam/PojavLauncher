@@ -55,6 +55,12 @@
 			android:screenOrientation="sensorLandscape"
 			android:name=".prefs.LauncherPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
+		
+		<!-- VNC Activity -->
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name="android.androidVNC.VncCanvasActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"/>
     </application>
 
 </manifest>

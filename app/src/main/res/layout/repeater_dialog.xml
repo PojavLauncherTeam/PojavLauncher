@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:padding="5dip"
+  android:orientation="vertical"
+  >
+  <TextView
+  	android:id="@+id/textRepeaterCaption"
+  	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content"
+  	android:text="@string/repeater_caption"
+  	/>
+	<EditText android:id="@+id/textRepeaterInfo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1" />
+	<LinearLayout
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:padding="5dip"
+	  android:orientation="horizontal"
+	  >
+	  <Button
+	    android:id="@+id/buttonSaveRepeater"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/repeater_save"
+	    android:gravity="left|center_vertical"
+	    />
+	  <Button
+	    android:id="@+id/buttonClearRepeater"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/repeater_clear"
+	    android:gravity="right|center_vertical"
+	    />
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/helpitem" android:title="@string/xvncpro_help"></item>
+    <item android:id="@+id/aboutitem" android:title="@string/xvncpro_about"></item>
+    <item android:id="@+id/changelogitem" android:title="@string/xvncpro_changelogtitle"></item>
+    <item android:id="@+id/exititem" android:title="@string/xvncpro_exit"></item>
+</menu>

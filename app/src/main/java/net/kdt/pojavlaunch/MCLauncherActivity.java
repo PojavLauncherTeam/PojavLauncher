@@ -7,7 +7,8 @@ import android.support.design.widget.*;
 import android.support.v4.app.*;
 import android.support.v4.view.*;
 import android.support.v7.app.*;
-import android.util.*;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
@@ -34,6 +35,8 @@ import android.graphics.*;
 import android.content.pm.*;
 import android.text.*;
 import com.kdt.mcgui.*;
+import com.theqvd.android.xpro.*;
+import android.net.*;
 
 public class MCLauncherActivity extends AppCompatActivity
 {
@@ -620,26 +623,29 @@ public class MCLauncherActivity extends AppCompatActivity
 				crashView.setLastCrash("");
 
 				try {
-					/*
-					 List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
-					 jvmArgs.add("-Xms128M");
-					 jvmArgs.add("-Xmx1G");
-					 */
-					Intent mainIntent = new Intent(MCLauncherActivity.this, MainConsoleActivity.class);
-					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
-					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+					Intent vncIntent = new Intent(MCLauncherActivity.this, android.androidVNC.VncCanvasActivity.class);
+					vncIntent.putExtra("x11", Uri.parse(Config.vnccmd));
+
+					// multiple tasks
+					vncIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+					vncIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+					
 					if (LauncherPreferences.PREF_FREEFORM) {
 						DisplayMetrics dm = new DisplayMetrics();
 						getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-						ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
+						ActivityOptionsCompat options = ActivityOptionsCompat.makeBasic();
 						Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
-						options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
-						startActivity(mainIntent, options.toBundle());
+						options.setLaunchBounds(freeformRect);
+						startActivityForResult(vncIntent, Config.vncActivityRequestCode, options.toBundle());
 					} else {
-						startActivity(mainIntent);
+						startActivityForResult(vncIntent, Config.vncActivityRequestCode);
 					}
+					 
+					// Intent mainIntent = new Intent(MCLauncherActivity.this, MainConsoleActivity.class);
+					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
+					
+					
 				}
 				catch (Throwable e) {
 					Tools.showError(MCLauncherActivity.this, e);
@@ -654,12 +660,11 @@ public class MCLauncherActivity extends AppCompatActivity
 			mTask = null;
 		}
 
-		private Gson gsonss = gson;
 		public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
 
 		public JAssets downloadIndex(String versionName, File output) throws Exception {
 			String versionJson = DownloadUtils.downloadString("http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json");
-			JAssets version = gsonss.fromJson(versionJson, JAssets.class);
+			JAssets version = gson.fromJson(versionJson, JAssets.class);
 			output.getParentFile().mkdirs();
 			Tools.write(output.getAbsolutePath(), versionJson.getBytes(Charset.forName("UTF-8")));
 			return version;

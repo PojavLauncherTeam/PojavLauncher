@@ -1,0 +1,5 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:numericShortcut="1" android:alphabeticShortcut="c" android:id="@+id/itemSaveAsCopy" android:title="@string/save_as_copy" android:icon="@android:drawable/ic_menu_add"/>
+    <item android:numericShortcut="2" android:alphabeticShortcut="d" android:id="@+id/itemDeleteConnection" android:title="@string/delete_connection" android:icon="@android:drawable/ic_menu_delete"></item>
+    <item android:numericShortcut="3" android:alphabeticShortcut="h" android:id="@+id/itemOpenDoc" android:title="@string/open_doc" android:icon="@android:drawable/ic_menu_help"/>
+</menu>

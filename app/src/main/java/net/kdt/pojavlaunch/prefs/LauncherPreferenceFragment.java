@@ -14,11 +14,6 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
 		// Disable freeform mode in Android 6.0 or below.
 		findPreference("freeform").setEnabled(Build.VERSION.SDK_INT >= 24);
 		
-		SeekBarPreference seek1 = (SeekBarPreference) findPreference("maxDxRefs");
-		seek1.setMin(0xFFF);
-		seek1.setMax(0xFFFF);
-		seek1.setValue(0xFFF);
-		
 		SeekBarPreference seek2 = (SeekBarPreference) findPreference("timeLongPressTrigger");
 		seek2.setMin(100);
 		seek2.setMax(1000);
