@@ -37,6 +37,7 @@ import android.text.*;
 import com.kdt.mcgui.*;
 import com.theqvd.android.xpro.*;
 import android.net.*;
+import android.androidVNC.*;
 
 public class MCLauncherActivity extends AppCompatActivity
 {
@@ -624,7 +625,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 				try {
 					Intent vncIntent = new Intent(MCLauncherActivity.this, android.androidVNC.VncCanvasActivity.class);
-					vncIntent.putExtra("x11", Uri.parse(Config.vnccmd));
+					// vncIntent.putExtra("x11", Uri.parse(Config.vnccmd));
 
 					// multiple tasks
 					vncIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
@@ -852,7 +853,7 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	private void launchModInstaller(File modFile) {
-		Intent mainIntent = new Intent(MCLauncherActivity.this, MainConsoleActivity.class);
+		Intent mainIntent = new Intent(MCLauncherActivity.this, VncCanvasActivity.class);
 		mainIntent.putExtra("launchJar", modFile.getAbsolutePath());
 		startActivity(mainIntent);
 	}

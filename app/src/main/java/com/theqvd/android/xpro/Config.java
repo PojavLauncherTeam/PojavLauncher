@@ -195,6 +195,9 @@ public class Config {
 		// appConfig_force_x_geometry = true;
 		// appConfig_keep_x_running = true;
 		
+		appConfig_render = false;
+		appConfig_xinerama = true;
+		
 		/*
 		SharedPreferences prefsPrivate;
 		prefsPrivate = context.getSharedPreferences("PREFS_PRIVATE", Context.MODE_PRIVATE);

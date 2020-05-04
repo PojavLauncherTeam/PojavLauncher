@@ -48,452 +48,9 @@ import com.theqvd.android.xpro.Config;
 
 public class VncCanvasActivity extends AppCompatActivity
 {
-
 	private NavigationView navDrawer;
-
 	private DrawerLayout drawerLayout;
 
-	/**
-	 * @author Michael A. MacDonald
-	 */
-	class ZoomInputHandler extends AbstractGestureInputHandler {
-
-		/**
-		 * In drag mode (entered with long press) you process mouse events
-		 * without sending them through the gesture detector
-		 */
-		private boolean dragMode;
-		
-		/**
-		 * Key handler delegate that handles DPad-based mouse motion
-		 */
-		private DPadMouseKeyHandler keyHandler;
-
-		/**
-		 * @param c
-		 */
-		ZoomInputHandler() {
-			super(VncCanvasActivity.this);
-			keyHandler = new DPadMouseKeyHandler(VncCanvasActivity.this,vncCanvas.handler);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractInputHandler#getHandlerDescription()
-		 */
-		@Override
-		public CharSequence getHandlerDescription() {
-			return getResources().getString(
-					R.string.input_mode_touch_pan_zoom_mouse);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractInputHandler#getName()
-		 */
-		@Override
-		public String getName() {
-			return TOUCH_ZOOM_MODE;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.VncCanvasActivity.ZoomInputHandler#onKeyDown(int,
-		 *      android.view.KeyEvent)
-		 */
-		@Override
-		public boolean onKeyDown(int keyCode, KeyEvent evt) {
-			return keyHandler.onKeyDown(keyCode, evt);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.VncCanvasActivity.ZoomInputHandler#onKeyUp(int,
-		 *      android.view.KeyEvent)
-		 */
-		@Override
-		public boolean onKeyUp(int keyCode, KeyEvent evt) {
-			return keyHandler.onKeyUp(keyCode, evt);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractInputHandler#onTrackballEvent(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onTrackballEvent(MotionEvent evt) {
-			return trackballMouse(evt);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onDown(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onDown(MotionEvent e) {
-			panner.stop();
-			return true;
-		}
-
-		/**
-		 * Divide stated fling velocity by this amount to get initial velocity
-		 * per pan interval
-		 */
-		static final float FLING_FACTOR = 8;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onFling(android.view.MotionEvent,
-		 *      android.view.MotionEvent, float, float)
-		 */
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-				float velocityY) {
-			showZoomer(false);
-			panner.start(-(velocityX / FLING_FACTOR),
-					-(velocityY / FLING_FACTOR), new Panner.VelocityUpdater() {
-
-						/*
-						 * (non-Javadoc)
-						 * 
-						 * @see android.androidVNC.Panner.VelocityUpdater#updateVelocity(android.graphics.Point,
-						 *      long)
-						 */
-						@Override
-						public boolean updateVelocity(PointF p, long interval) {
-							double scale = Math.pow(0.8, interval / 50.0);
-							p.x *= scale;
-							p.y *= scale;
-							return (Math.abs(p.x) > 0.5 || Math.abs(p.y) > 0.5);
-						}
-
-					});
-			return true;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractGestureInputHandler#onTouchEvent(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onTouchEvent(MotionEvent e) {
-			if (dragMode) {
-				vncCanvas.changeTouchCoordinatesToFullFrame(e);
-				if (e.getAction() == MotionEvent.ACTION_UP)
-					dragMode = false;
-				return vncCanvas.processPointerEvent(e, true);
-			} else
-				return super.onTouchEvent(e);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onLongPress(android.view.MotionEvent)
-		 */
-		@Override
-		public void onLongPress(MotionEvent e) {
-			showZoomer(true);
-			BCFactory.getInstance().getBCHaptic().performLongPressHaptic(
-					vncCanvas);
-			dragMode = true;
-			vncCanvas.processPointerEvent(vncCanvas
-					.changeTouchCoordinatesToFullFrame(e), true);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onScroll(android.view.MotionEvent,
-		 *      android.view.MotionEvent, float, float)
-		 */
-		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2,
-				float distanceX, float distanceY) {
-			if (inScaling)
-				return false;
-			showZoomer(false);
-			return vncCanvas.pan((int) distanceX, (int) distanceY);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onSingleTapConfirmed(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onSingleTapConfirmed(MotionEvent e) {
-			vncCanvas.changeTouchCoordinatesToFullFrame(e);
-			vncCanvas.processPointerEvent(e, true);
-			e.setAction(MotionEvent.ACTION_UP);
-			return vncCanvas.processPointerEvent(e, false);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onDoubleTap(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onDoubleTap(MotionEvent e) {
-			vncCanvas.changeTouchCoordinatesToFullFrame(e);
-			vncCanvas.processPointerEvent(e, true, true);
-			e.setAction(MotionEvent.ACTION_UP);
-			return vncCanvas.processPointerEvent(e, false, true);
-		}
-
-	}
-
-	public class TouchpadInputHandler extends AbstractGestureInputHandler {
-		/**
-		 * In drag mode (entered with long press) you process mouse events
-		 * without sending them through the gesture detector
-		 */
-		private boolean dragMode;
-		float dragX, dragY;
-		
-		/**
-		 * Key handler delegate that handles DPad-based mouse motion
-		 */
-		private DPadMouseKeyHandler keyHandler;
-
-		TouchpadInputHandler() {
-			super(VncCanvasActivity.this);
-			keyHandler = new DPadMouseKeyHandler(VncCanvasActivity.this,vncCanvas.handler); 
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractInputHandler#getHandlerDescription()
-		 */
-		@Override
-		public CharSequence getHandlerDescription() {
-			return getResources().getString(
-					R.string.input_mode_touchpad);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractInputHandler#getName()
-		 */
-		@Override
-		public String getName() {
-			// TOUCHPAD_MODE is default
-			return TOUCHPAD_MODE;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.VncCanvasActivity.ZoomInputHandler#onKeyDown(int,
-		 *      android.view.KeyEvent)
-		 */
-		@Override
-		public boolean onKeyDown(int keyCode, KeyEvent evt) {
-			return keyHandler.onKeyDown(keyCode, evt);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.VncCanvasActivity.ZoomInputHandler#onKeyUp(int,
-		 *      android.view.KeyEvent)
-		 */
-		@Override
-		public boolean onKeyUp(int keyCode, KeyEvent evt) {
-			return keyHandler.onKeyUp(keyCode, evt);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractInputHandler#onTrackballEvent(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onTrackballEvent(MotionEvent evt) {
-			return trackballMouse(evt);
-		}
-
-		/**
-		 * scale down delta when it is small. This will allow finer control
-		 * when user is making a small movement on touch screen.
-		 * Scale up delta when delta is big. This allows fast mouse movement when
-		 * user is flinging.
-		 * @param deltaX
-		 * @return
-		 */
-		private float fineCtrlScale(float delta) {
-			float sign = (delta>0) ? 1 : -1;
-			delta = Math.abs(delta);
-			if (delta>=1 && delta <=3) {
-				delta = 1;
-			}else if (delta <= 10) {
-				delta *= 0.34;
-			} else if (delta <= 30 ) {
-				delta *= delta/30;
-			} else if (delta <= 90) {
-				delta *=  (delta/30);
-			} else {
-				delta *= 3.0;
-			}
-			return sign * delta;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onLongPress(android.view.MotionEvent)
-		 */
-		@Override
-		public void onLongPress(MotionEvent e) {
-			
-			
-			showZoomer(true);
-			BCFactory.getInstance().getBCHaptic().performLongPressHaptic(
-					vncCanvas);
-			dragMode = true;
-			dragX = e.getX();
-			dragY = e.getY();
-			// send a mouse down event to the remote without moving the mouse.
-			remoteMouseStayPut(e);
-			vncCanvas.processPointerEvent(e, true);
-			
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onScroll(android.view.MotionEvent,
-		 *      android.view.MotionEvent, float, float)
-		 */
-		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2,
-				float distanceX, float distanceY) {
-			
-			if (BCFactory.getInstance().getBCMotionEvent().getPointerCount(e2) > 1)
-			{
-				if (inScaling)
-					return false;
-				showZoomer(false);
-				return vncCanvas.pan((int) distanceX, (int) distanceY);			
-			}
-			else
-			{
-				// compute the relative movement offset on the remote screen.
-				float deltaX = -distanceX *vncCanvas.getScale();
-				float deltaY = -distanceY *vncCanvas.getScale();
-				deltaX = fineCtrlScale(deltaX);
-				deltaY = fineCtrlScale(deltaY);
-	
-				// compute the absolution new mouse pos on the remote site.
-				float newRemoteX = vncCanvas.mouseX + deltaX;
-				float newRemoteY = vncCanvas.mouseY + deltaY;
-	
-	
-				if (dragMode) {
-					if (e2.getAction() == MotionEvent.ACTION_UP)
-						dragMode = false;
-					dragX = e2.getX();
-					dragY = e2.getY();
-					e2.setLocation(newRemoteX, newRemoteY);
-					return vncCanvas.processPointerEvent(e2, true);
-				} else {
-						e2.setLocation(newRemoteX, newRemoteY);
-						vncCanvas.processPointerEvent(e2, false);
-				}
-			}
-			return true;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.androidVNC.AbstractGestureInputHandler#onTouchEvent(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onTouchEvent(MotionEvent e) {
-			if (dragMode) {
-				// compute the relative movement offset on the remote screen.
-				float deltaX = (e.getX() - dragX) *vncCanvas.getScale();
-				float deltaY = (e.getY() - dragY) *vncCanvas.getScale();
-				dragX = e.getX();
-				dragY = e.getY();
-				deltaX = fineCtrlScale(deltaX);
-				deltaY = fineCtrlScale(deltaY);
-
-				// compute the absolution new mouse pos on the remote site.
-				float newRemoteX = vncCanvas.mouseX + deltaX;
-				float newRemoteY = vncCanvas.mouseY + deltaY;
-
-
-				if (e.getAction() == MotionEvent.ACTION_UP)
-					dragMode = false;
-				e.setLocation(newRemoteX, newRemoteY);
-				return vncCanvas.processPointerEvent(e, true);
-			} else
-				return super.onTouchEvent(e);
-		}
-
-		/**
-		 * Modify the event so that it does not move the mouse on the
-		 * remote server.
-		 * @param e
-		 */
-		private void remoteMouseStayPut(MotionEvent e) {
-			e.setLocation(vncCanvas.mouseX, vncCanvas.mouseY);
-			
-		}
-		/*
-		 * (non-Javadoc)
-		 * confirmed single tap: do a single mouse click on remote without moving the mouse.
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onSingleTapConfirmed(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onSingleTapConfirmed(MotionEvent e) {
-			boolean multiTouch = (BCFactory.getInstance().getBCMotionEvent().getPointerCount(e) > 1);
-			remoteMouseStayPut(e);
-            
-			vncCanvas.processPointerEvent(e, true, multiTouch||vncCanvas.cameraButtonDown);
-			e.setAction(MotionEvent.ACTION_UP);
-			return vncCanvas.processPointerEvent(e, false, multiTouch||vncCanvas.cameraButtonDown);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * double tap: do two  left mouse right mouse clicks on remote without moving the mouse.
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onDoubleTap(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onDoubleTap(MotionEvent e) {
-			remoteMouseStayPut(e);
-			vncCanvas.processPointerEvent(e, true, true);
-			e.setAction(MotionEvent.ACTION_UP);
-			return vncCanvas.processPointerEvent(e, false, true);			
-		}
-		
-		
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onDown(android.view.MotionEvent)
-		 */
-		@Override
-		public boolean onDown(MotionEvent e) {
-			panner.stop();
-			return true;
-		}
-	}
-	
 	private final static String TAG = "VncCanvasActivity";
 
 	AbstractInputHandler inputHandler;
@@ -520,6 +77,8 @@ public class VncCanvasActivity extends AppCompatActivity
 	JMinecraftVersionList.Version mVersionInfo;
 	SimpleShellProcess mJavaProcess, mXVNCProcess;
 
+	public volatile boolean ignoreDisconnect = false;
+	
 	private LinearLayout contentLog;
 	private TextView textLog;
 	private ScrollView contentScroll;
@@ -545,6 +104,7 @@ public class VncCanvasActivity extends AppCompatActivity
 		contentLog = (LinearLayout) findViewById(R.id.content_log_layout);
 		contentScroll = (ScrollView) findViewById(R.id.content_log_scroll);
 		textLog = (TextView) contentScroll.getChildAt(0);
+		textLog.setTypeface(Typeface.MONOSPACE);
 		toggleLog = (ToggleButton) findViewById(R.id.content_log_toggle_log);
 		toggleLog.setChecked(true);
 
@@ -561,21 +121,20 @@ public class VncCanvasActivity extends AppCompatActivity
 				public boolean onNavigationItemSelected(MenuItem item) {
 					switch (item.getItemId()) {
 						case R.id.nav_forceclose: dialogForceClose();
-							break;
+							return true;
 						case R.id.nav_viewlog: openLogOutput();
 							break;
-							// case R.id.nav_debug: toggleDebug();
-							// break;
-							// case R.id.nav_customkey: dialogSendCustomKey();
 						case R.id.itemInfo:
 							vncCanvas.showConnectionInfo();
 							return true;
 						case R.id.itemSpecialKeys:
 							showDialog(R.layout.metakey);
-							return true;
+							break;
+							// return true;
 						case R.id.itemColorMode:
 							selectColorModel();
-							return true;
+							break;
+							// return true;
 							// Following sets one of the scaling options
 						case R.id.itemZoomable:
 						case R.id.itemOneToOne:
@@ -583,17 +142,15 @@ public class VncCanvasActivity extends AppCompatActivity
 							AbstractScaling.getById(item.getItemId()).setScaleTypeForActivity(VncCanvasActivity.this);
 							item.setChecked(true);
 							showPanningState();
-							return true;
+							break;
+							// return true;
 						case R.id.itemCenterMouse:
 							vncCanvas.warpMouse(vncCanvas.absoluteXPosition
 												+ vncCanvas.getVisibleWidth() / 2,
 												vncCanvas.absoluteYPosition + vncCanvas.getVisibleHeight()
 												/ 2);
-							return true;
-						case R.id.itemDisconnect:
-							vncCanvas.closeConnection();
-							finish();
-							return true;
+							break;
+							// return true;
 						case R.id.itemEnterText:
 							showDialog(R.layout.entertext);
 							return true;
@@ -679,7 +236,8 @@ public class VncCanvasActivity extends AppCompatActivity
 				{
 					String cmd = Config.xvnccmd + " -geometry "+ config.get_width_pixels() + "x"  + config.get_height_pixels();
 					cmd += config.isAppConfig_remote_vnc_allowed() ? "" : " " + Config.notAllowRemoteVncConns;
-					cmd += config.isAppConfig_render() ? " +render" : "";
+					// Not enable XRender because a Java X11 connection cause XVnc server to crash.
+					// cmd += config.isAppConfig_render() ? " +render" : "";
 					cmd += config.isAppConfig_xinerama() ? " +xinerama" : "";
 					Log.i("VncCanvasActivity", "Launching: "+cmd);
 					
@@ -705,6 +263,23 @@ public class VncCanvasActivity extends AppCompatActivity
 						}
 						
 						launchJava(modPath);
+						int javaResultCode = mJavaProcess.waitFor();
+						
+						// Kill XVnc server before exit
+						ignoreDisconnect = true;
+						mXVNCProcess.terminate();
+						
+						if (javaResultCode == 0) {
+							runOnUiThread(new Runnable(){
+								@Override
+								public void run() {
+									Toast.makeText(VncCanvasActivity.this, R.string.mcn_exit_title, Toast.LENGTH_SHORT).show();
+									finish();
+								}
+							});
+						} else {
+							Tools.dialogOnUiThread(VncCanvasActivity.this, getString(R.string.mcn_exit_title), getString(R.string.mcn_exit_crash, javaResultCode));
+						}
 					} catch (Throwable th) {
 						Tools.showError(VncCanvasActivity.this, th);
 					}
@@ -717,7 +292,7 @@ public class VncCanvasActivity extends AppCompatActivity
 				public void run()
 				{
 
-					Uri data = extras.getParcelable("x11");
+					Uri data = Uri.parse(Config.vnccmd); // extras.getParcelable("x11");
 					if ((data != null) && (data.getScheme().equals("vnc"))) {
 						String host = data.getHost();
 						// This should not happen according to Uri contract, but bug introduced in Froyo (2.2)
@@ -786,7 +361,7 @@ public class VncCanvasActivity extends AppCompatActivity
 						}
 					}
 					
-					vncCanvas.initializeVncCanvas(connection, new Runnable() {
+					vncCanvas.initializeVncCanvas(VncCanvasActivity.this, connection, new Runnable() {
 							public void run() {
 								setModes();
 							}
@@ -822,22 +397,11 @@ public class VncCanvasActivity extends AppCompatActivity
 							}
 
 						});
-					
-					/*
-					 zoomer.setOnZoomKeyboardClickListener(new View.OnClickListener() {
-					 @Override
-					 public void onClick(View v) {
-					 InputMethodManager inputMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					 inputMgr.toggleSoftInput(0, 0);
-					 }
-
-					 });
-					 */
+				
 					panner = new Panner(VncCanvasActivity.this, vncCanvas.handler);
-
 					inputHandler = getInputHandlerById(R.id.itemInputMouse);
 				}
-			}, 1000);
+			}, 200);
 	}
 
 	private void openLogOutput() {
@@ -858,19 +422,10 @@ public class VncCanvasActivity extends AppCompatActivity
 				@Override
 				public void onClick(DialogInterface p1, int p2)
 				{
-					try {
-						mXServerProcess.destroy();
-						mJavaProcess.terminate();
-						
-						System.exit(0);
-					} catch (Throwable th) {
-						Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
-					}
+					mXServerProcess.destroy();
+					mJavaProcess.terminate();
 
-					// If unable to enable exit, use method: kill self process.
-					android.os.Process.killProcess(android.os.Process.myPid());
-
-					// Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();
+					finish();
 				}
 			})
 			.show();
@@ -897,9 +452,9 @@ public class VncCanvasActivity extends AppCompatActivity
 	private void launchJava(String modPath) {
 		try {
 			/*
-			 * 17w43a and above change Minecraf arguments from
-			 * `minecraftArguments` to `arguments` so check if
-			 * selected version requires LWJGL 3 or not is easy.
+			 * 17w43a and above change Minecraft arguments tag from
+			 * `minecraftArguments` to `arguments` so easily to check
+			 * if the selected version requires LWJGL 3 or not.
 			 */
 			boolean isLwjgl3 = mVersionInfo.arguments != null;
 
@@ -907,7 +462,7 @@ public class VncCanvasActivity extends AppCompatActivity
 			mJreArgs.add("java");
 			mJreArgs.add("-Duser.home=" + Tools.MAIN_PATH);
 			mJreArgs.add("-Xmx512M");
-
+			
 			if (modPath == null) {
 				mJreArgs.add("-jar");
 				mJreArgs.add(Tools.libraries + "/ClassWrapper.jar");
@@ -932,6 +487,7 @@ public class VncCanvasActivity extends AppCompatActivity
 			mJavaProcess.writeToProcess("chmod -R 700 " + Tools.homeJreDir);
 			mJavaProcess.writeToProcess("cd " + Tools.MAIN_PATH);
 			mJavaProcess.writeToProcess("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/minecraft_lib/lwjgl" + (isLwjgl3 ? "3" : "2"));
+			mJavaProcess.writeToProcess("echo \"Running Minecraft: " + fromStringArray(mJreArgs.toArray(new String[0])) + "\"");
 			mJavaProcess.writeToProcess(mJreArgs.toArray(new String[0]));
 		} catch (Throwable th) {
 			th.printStackTrace();
@@ -963,6 +519,7 @@ public class VncCanvasActivity extends AppCompatActivity
 
 		List<String> minecraftArgs = new ArrayList<String>();
 		if (mVersionInfo.arguments != null) {
+			// Support Minecraft 1.13
 			for (Object arg : mVersionInfo.arguments.game) {
 				if (arg instanceof String) {
 					minecraftArgs.add((String) arg);
@@ -1087,29 +644,6 @@ public class VncCanvasActivity extends AppCompatActivity
 		super.onRestart();
 	}
 
-	/** {@inheritDoc} */
-/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.vnccanvasactivitymenu, menu);
-
-		if (vncCanvas.scaling != null)
-			menu.findItem(vncCanvas.scaling.getId()).setChecked(true);
-
-		Menu inputMenu = menu.findItem(R.id.itemInputMode).getSubMenu();
-
-		inputModeMenuItems = new MenuItem[inputModeIds.length];
-		for (int i = 0; i < inputModeIds.length; i++) {
-			inputModeMenuItems[i] = inputMenu.findItem(inputModeIds[i]);
-		}
-		updateInputMenu();
-		menu.findItem(R.id.itemFollowMouse).setChecked(
-				connection.getFollowMouse());
-		menu.findItem(R.id.itemFollowPan).setChecked(connection.getFollowPan());
-		return true;
-	}
-*/
-
 	/**
 	 * Change the input mode sub-menu to reflect change in scaling
 	 */
@@ -1155,10 +689,10 @@ public class VncCanvasActivity extends AppCompatActivity
 						inputModeHandlers[i] = new DPadPanTouchMouseMode();
 						break;
 					case R.id.itemInputTouchPanZoomMouse:
-						inputModeHandlers[i] = new ZoomInputHandler();
+						inputModeHandlers[i] = vncCanvas.new ZoomInputHandler();
 						break;
 					case R.id.itemInputTouchpad:
-						inputModeHandlers[i] = new TouchpadInputHandler();
+						inputModeHandlers[i] = vncCanvas.new TouchpadInputHandler();
 						break;
 					}
 				}
@@ -1383,7 +917,7 @@ public class VncCanvasActivity extends AppCompatActivity
 	static final long ZOOM_HIDE_DELAY_MS = 2500;
 	HideZoomRunnable hideZoomInstance = new HideZoomRunnable();
 
-	private void showZoomer(boolean force) {
+	public void showZoomer(boolean force) {
 		if (force || zoomer.getVisibility() != View.VISIBLE) {
 			zoomer.show();
 			hideZoomAfterMs = SystemClock.uptimeMillis() + ZOOM_HIDE_DELAY_MS;
@@ -1609,7 +1143,6 @@ public class VncCanvasActivity extends AppCompatActivity
 	static final String FIT_SCREEN_NAME = "FIT_SCREEN";
 	/** Internal name for default input mode with Zoom scaling */
 	static final String TOUCH_ZOOM_MODE = "TOUCH_ZOOM_MODE";
-	
 	static final String TOUCHPAD_MODE = "TOUCHPAD_MODE";
 
 	/**

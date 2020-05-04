@@ -2,16 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 	<item
 		android:id="@+id/nav_forceclose"
-		android:title="@string/control_forceclose" />
+		android:title="@string/control_forceclose"
+		android:icon="@android:drawable/ic_menu_close_clear_cancel" />
 	<item
 		android:id="@+id/nav_viewlog"
 		android:title="@string/control_viewout" />
-	<item
-		android:id="@+id/nav_debug"
-		android:title="@string/control_adebug" />
-	<item
-		android:id="@+id/nav_customkey"
-		android:title="@string/control_customkey" />
 	<item android:numericShortcut="1" android:alphabeticShortcut="s" android:id="@+id/itemSpecialKeys" android:title="@string/special_keys" android:icon="@android:drawable/ic_dialog_dialer"/>
     <item android:numericShortcut="2" android:alphabeticShortcut="m" android:id="@+id/itemCenterMouse" android:title="@string/center_mouse" android:icon="@android:drawable/ic_menu_mylocation"/>
     <item android:id="@+id/itemEnterText" android:alphabeticShortcut="e" android:title="@string/enter_text" android:icon="@android:drawable/ic_menu_edit" />
@@ -28,7 +23,6 @@
 			</group>
 	    </menu>
     </item>
-    <item android:numericShortcut="7" android:alphabeticShortcut="d" android:id="@+id/itemDisconnect" android:title="@string/disconnect" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
     <group android:checkableBehavior="all">
     	<item android:numericShortcut="6" android:alphabeticShortcut="f" android:id="@+id/itemFollowMouse" android:title="@string/pan_follow_mouse"/>
     	<item android:title="@string/mouse_follow_pan" android:id="@+id/itemFollowPan"/>

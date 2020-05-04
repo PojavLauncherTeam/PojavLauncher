@@ -211,10 +211,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							case R.id.nav_forceclose: dialogForceClose();
 								break;
 							case R.id.nav_viewlog: openLogOutput();
-								break;
+								break; /*
 							case R.id.nav_debug: toggleDebug();
 								break;
 							case R.id.nav_customkey: dialogSendCustomKey();
+							*/
 						}
 						//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
 

@@ -18,7 +18,7 @@ import com.antlersoft.android.bc.OnScaleGestureListener;
 abstract class AbstractGestureInputHandler extends GestureDetector.SimpleOnGestureListener implements AbstractInputHandler, OnScaleGestureListener {
 	protected GestureDetector gestures;
 	protected IBCScaleGestureDetector scaleGestures;
-	private VncCanvasActivity activity;
+	VncCanvasActivity activity;
 	
 	float xInitialFocus;
 	float yInitialFocus;

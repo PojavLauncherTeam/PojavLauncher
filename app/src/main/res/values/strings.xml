@@ -148,9 +148,9 @@
 	</string>
 -->
 	<!-- MainActivity: strings -->
-	<string name="mcn_exit_title">Game exited</string>
+	<string name="mcn_exit_title">Java Application exited</string>
 	<string name="mcn_exit_call">Exit</string>
-	<string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
+	<string name="mcn_exit_crash">Java Application exited with error code %d! This may caused by a corrupted OpenJDK install, an invalid Java App, a Minecraft crash,... See Log output for more details.</string>
 	<string name="mcn_exit_errcrash">Unable to locate crash!</string>
 	<string name="mcn_exit_confirm">Are you sure want to force close?</string>
 	
