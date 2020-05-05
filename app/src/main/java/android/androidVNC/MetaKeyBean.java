@@ -3,40 +3,41 @@
  */
 package android.androidVNC;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.antlersoft.android.dbimpl.NewInstance;
-
-import android.view.KeyEvent;
+import android.util.*;
+import android.view.*;
+import com.antlersoft.android.dbimpl.*;
+import java.util.*;
 
 /**
  * @author Michael A. MacDonald
  *
  */
-class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean> {
-	static final ArrayList<MetaKeyBase> allKeys;
-	static final String[] allKeysNames;
-	static final HashMap<Integer,MetaKeyBase> keysByKeyCode;
-	static final HashMap<Integer,MetaKeyBase> keysByMouseButton;
-	static final HashMap<Integer,MetaKeyBase> keysByKeySym;
-	static final MetaKeyBean keyCtrlAltDel;
-	static final MetaKeyBean keyArrowLeft;
-	static final MetaKeyBean keyArrowRight;
-	static final MetaKeyBean keyArrowUp;
-	static final MetaKeyBean keyArrowDown;
+public class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean> {
+	static ArrayList<MetaKeyBase> allKeys;
+	static String[] allKeysNames;
+	public static ArrayMap<Integer,MetaKeyBase> keysByKeyCode;
+	static ArrayMap<Integer,MetaKeyBase> keysByMouseButton;
+	static MetaKeyBean keyCtrlAltDel;
+	static MetaKeyBean keyArrowLeft;
+	static MetaKeyBean keyArrowRight;
+	static MetaKeyBean keyArrowUp;
+	static MetaKeyBean keyArrowDown;
 	
-	static final NewInstance<MetaKeyBean> NEW;
+	static NewInstance<MetaKeyBean> NEW;
 	
 	static {
+		initStatic();
+	}
+	
+	public static void initStatic() {
 		allKeys = new ArrayList<MetaKeyBase>();
 
 		allKeys.add(new MetaKeyBase("Hangul", 0xff31));
 		allKeys.add(new MetaKeyBase("Hangul_Start", 0xff32));
 		allKeys.add(new MetaKeyBase("Hangul_End", 0xff33));
 		allKeys.add(new MetaKeyBase("Hangul_Hanja", 0xff34));
-		allKeys.add(new MetaKeyBase("Kana_Shift", 0xff2e));
-		allKeys.add(new MetaKeyBase("Right_Alt", 0xffea));
+		allKeys.add(new MetaKeyBase("Kana_Shift", 0xff2e, KeyEvent.KEYCODE_KANA));
+		allKeys.add(new MetaKeyBase("Right_Alt", 0xffea, KeyEvent.KEYCODE_ALT_RIGHT));
 		
 		allKeys.add(new MetaKeyBase(VncCanvas.MOUSE_BUTTON_LEFT,"Mouse Left"));
 		allKeys.add(new MetaKeyBase(VncCanvas.MOUSE_BUTTON_MIDDLE,"Mouse Middle"));
@@ -44,24 +45,24 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 		allKeys.add(new MetaKeyBase(VncCanvas.MOUSE_BUTTON_SCROLL_DOWN, "Mouse Scroll Down"));
 		allKeys.add(new MetaKeyBase(VncCanvas.MOUSE_BUTTON_SCROLL_UP, "Mouse Scroll Up"));
 		
-		allKeys.add(new MetaKeyBase("Home", 0xFF50));
-		allKeys.add(new MetaKeyBase("Arrow Left", 0xFF51));
-		allKeys.add(new MetaKeyBase("Arrow Up", 0xFF52));
-		allKeys.add(new MetaKeyBase("Arrow Right", 0xFF53));
-		allKeys.add(new MetaKeyBase("Arrow Down", 0xFF54));
-		allKeys.add(new MetaKeyBase("Page Up", 0xFF55));
-		allKeys.add(new MetaKeyBase("Page Down", 0xFF56));
-		allKeys.add(new MetaKeyBase("End", 0xFF57));
-		allKeys.add(new MetaKeyBase("Insert", 0xFF63));
+		allKeys.add(new MetaKeyBase("Home", 0xFF50, KeyEvent.KEYCODE_HOME));
+		allKeys.add(new MetaKeyBase("Arrow Left", 0xFF51, KeyEvent.KEYCODE_DPAD_LEFT));
+		allKeys.add(new MetaKeyBase("Arrow Up", 0xFF52, KeyEvent.KEYCODE_DPAD_UP));
+		allKeys.add(new MetaKeyBase("Arrow Right", 0xFF53, KeyEvent.KEYCODE_DPAD_RIGHT));
+		allKeys.add(new MetaKeyBase("Arrow Down", 0xFF54, KeyEvent.KEYCODE_DPAD_DOWN));
+		allKeys.add(new MetaKeyBase("Page Up", 0xFF55, KeyEvent.KEYCODE_PAGE_UP));
+		allKeys.add(new MetaKeyBase("Page Down", 0xFF56, KeyEvent.KEYCODE_PAGE_DOWN));
+		allKeys.add(new MetaKeyBase("End", 0xFF57 /* ??? HELPME */));
+		allKeys.add(new MetaKeyBase("Insert", 0xFF63, KeyEvent.KEYCODE_INSERT));
 		allKeys.add(new MetaKeyBase("Delete", 0xFFFF, KeyEvent.KEYCODE_DEL));
-		allKeys.add(new MetaKeyBase("Num Lock", 0xFF7F));
-		allKeys.add(new MetaKeyBase("Break", 0xFF6b));
-		allKeys.add(new MetaKeyBase("Scroll Lock", 0xFF14));
-		allKeys.add(new MetaKeyBase("Print Scrn", 0xFF15));
-		allKeys.add(new MetaKeyBase("Escape", 0xFF1B));
+		allKeys.add(new MetaKeyBase("Num Lock", 0xFF7F, KeyEvent.KEYCODE_NUM_LOCK));
+		allKeys.add(new MetaKeyBase("Break", 0xFF6b, KeyEvent.KEYCODE_BREAK));
+		allKeys.add(new MetaKeyBase("Scroll Lock", 0xFF14, KeyEvent.KEYCODE_SCROLL_LOCK));
+		allKeys.add(new MetaKeyBase("Print Scrn", 0xFF15 /* ??? HELPME */));
+		allKeys.add(new MetaKeyBase("Escape", 0xFF1B, KeyEvent.KEYCODE_ESCAPE));
 		allKeys.add(new MetaKeyBase("Enter", 0xFF0D, KeyEvent.KEYCODE_ENTER));
 		allKeys.add(new MetaKeyBase("Tab", 0xFF09, KeyEvent.KEYCODE_TAB));
-		allKeys.add(new MetaKeyBase("BackSpace", 0xFF08));
+		allKeys.add(new MetaKeyBase("BackSpace", 0xFF08, KeyEvent.KEYCODE_ESCAPE));
 		allKeys.add(new MetaKeyBase("Space", 0x020, KeyEvent.KEYCODE_SPACE));
 		
 		StringBuilder sb = new StringBuilder(" ");
@@ -84,14 +85,13 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 			if (i<9)
 				sb.append(' ');
 			sb.append(Integer.toString(i+1));
-			allKeys.add(new MetaKeyBase(sb.toString(), 0xFFBE + i));
+			allKeys.add(new MetaKeyBase(sb.toString(), 0xFFBE + i, KeyEvent.KEYCODE_F1 + i));
 		}
 		
 		java.util.Collections.sort(allKeys);
 		allKeysNames = new String[allKeys.size()];
-		keysByKeyCode = new HashMap<Integer,MetaKeyBase>();
-		keysByMouseButton = new HashMap<Integer,MetaKeyBase>();
-		keysByKeySym = new HashMap<Integer,MetaKeyBase>();
+		keysByKeyCode = new ArrayMap<Integer,MetaKeyBase>();
+		keysByMouseButton = new ArrayMap<Integer,MetaKeyBase>();
 		for (int i=0; i<allKeysNames.length; ++i)
 		{
 			MetaKeyBase b=allKeys.get(i);
@@ -100,8 +100,8 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 				keysByKeyCode.put(b.keyEvent,b);
 			if (b.isMouse)
 				keysByMouseButton.put(b.mouseButtons,b);
-			else
-				keysByKeySym.put(b.keySym,b);
+			// else
+				// keysByKeySym.put(b.keySym,b);
 		}
 		NEW = new NewInstance<MetaKeyBean>() {
 
@@ -114,10 +114,10 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 				}
 			};
 		keyCtrlAltDel = new MetaKeyBean(0,VncCanvas.CTRL_MASK|VncCanvas.ALT_MASK,keysByKeyCode.get(KeyEvent.KEYCODE_DEL));
-		keyArrowLeft = new MetaKeyBean(0,0,keysByKeySym.get(0xFF51));
-		keyArrowUp = new MetaKeyBean(0,0,keysByKeySym.get(0xFF52));
-		keyArrowRight = new MetaKeyBean(0,0,keysByKeySym.get(0xFF53));
-		keyArrowDown = new MetaKeyBean(0,0,keysByKeySym.get(0xFF54));
+		keyArrowLeft = new MetaKeyBean(0,0,keysByKeyCode.get(KeyEvent.KEYCODE_DPAD_LEFT));
+		keyArrowUp = new MetaKeyBean(0,0,keysByKeyCode.get(KeyEvent.KEYCODE_DPAD_UP));
+		keyArrowRight = new MetaKeyBean(0,0,keysByKeyCode.get(KeyEvent.KEYCODE_DPAD_RIGHT));
+		keyArrowDown = new MetaKeyBean(0,0,keysByKeyCode.get(KeyEvent.KEYCODE_DPAD_DOWN));
 	}
 	
 	private boolean _regenDesc;
@@ -131,8 +131,10 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 		_regenDesc = true;
 		if (toCopy.isMouseClick())
 			setMouseButtons(toCopy.getMouseButtons());
-		else
+		else {
+			setKeyEvent(toCopy.getKeyEvent());
 			setKeySym(toCopy.getKeySym());
+		}
 		setMetaListId(toCopy.getMetaListId());
 		setMetaFlags(toCopy.getMetaFlags());
 	}
@@ -180,7 +182,7 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 					if (isMouseClick())
 						base=keysByMouseButton.get(getMouseButtons());
 					else
-						base=keysByKeySym.get(getKeySym());
+						base=keysByKeyCode.get(getKeyEvent());
 					sb.append(base.name);
 					setKeyDesc(sb.toString());
 				}
@@ -198,6 +200,19 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 		_regenDesc = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.androidVNC.AbstractMetaKeyBean#setKeySym(int)
+	 */
+	@Override
+	public void setKeyEvent(int arg_keyEvent) {
+		if (arg_keyEvent!=getKeyEvent() || isMouseClick())
+		{
+			setMouseClick(false);
+			_regenDesc=true;
+			super.setKeyEvent(arg_keyEvent);
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see android.androidVNC.AbstractMetaKeyBean#setKeySym(int)
 	 */
@@ -238,12 +253,10 @@ class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaKeyBean>
 	
 	void setKeyBase(MetaKeyBase base)
 	{
-		if (base.isMouse)
-		{
+		if (base.isMouse) {
 			setMouseButtons(base.mouseButtons);
-		}
-		else
-		{
+		} else {
+			setKeyEvent(base.keyEvent);
 			setKeySym(base.keySym);
 		}
 	}

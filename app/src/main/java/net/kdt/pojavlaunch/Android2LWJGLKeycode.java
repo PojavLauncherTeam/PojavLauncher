@@ -6,7 +6,7 @@ import java.util.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 
-public class AndroidLWJGLKeycode {
+public class Android2LWJGLKeycode {
 	// Fix double letters on MC 1.9 and above
 	public static boolean isBackspaceAfterChar;
 	private static final ArrayMap<Integer, Integer> androidToLwjglMap;
@@ -207,7 +207,7 @@ public class AndroidLWJGLKeycode {
 	}
 	
 	public static int getKeyIndex(int index) {
-		return androidToLwjglMap.valueAt(index);
+		return androidToLwjglMap.keyAt(index);
 	}
 
 	public static int getIndexByLWJGLKey(int lwjglKey) {

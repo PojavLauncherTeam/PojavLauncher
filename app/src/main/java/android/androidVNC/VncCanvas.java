@@ -130,13 +130,16 @@ public class VncCanvas extends ImageView {
 		handleRREPaint = new Paint();
 		handleRREPaint.setStyle(Style.FILL);
 	}
-/*
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		Toast.makeText(getContext(), "x=" + event.getX() + ",y=" + event.getY() + ",event=" + MotionEvent.actionToString(event.getAction()), Toast.LENGTH_SHORT).show();
-		return super.onTouchEvent(event);
+		if (vncActivity.inputHandler == null) {
+			return super.onTouchEvent(event);
+		} else {
+			return vncActivity.inputHandler.onTouchEvent(event);
+		}
 	}
-*/
+
 	/**
 	 * Create a view showing a VNC connection
 	 * @param context Containing context (activity)
@@ -942,6 +945,16 @@ public class VncCanvas extends ImageView {
 
 	public void closeConnection() {
 		maintainConnection = false;
+	}
+	
+	void sendKeyboardKey(MetaKeyBean meta, boolean down) {
+		try {
+			rfb.writeKeyEvent(meta.getKeySym(), meta.getMetaFlags(), down);
+		}
+		catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
 	}
 	
 	void sendMetaKey(MetaKeyBean meta)

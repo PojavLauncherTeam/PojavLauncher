@@ -25,6 +25,8 @@ public interface IMetaKey {
 	@FieldAccessor
 	int getMouseButtons();
 	@FieldAccessor
+	int getKeyEvent();
+	@FieldAccessor
 	int getKeySym();
 	@FieldAccessor
 	String getShortcut();

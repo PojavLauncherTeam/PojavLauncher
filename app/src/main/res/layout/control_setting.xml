@@ -13,7 +13,7 @@
 	<Spinner
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:id="@+id/controlsetting_spinner_lwjglkeycode"/>
+		android:id="@+id/controlsetting_spinner_keycode"/>
 
 	<LinearLayout
 		android:layout_height="wrap_content"

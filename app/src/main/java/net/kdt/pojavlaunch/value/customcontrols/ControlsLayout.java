@@ -6,6 +6,7 @@ import android.view.*;
 import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
 import android.support.v7.app.*;
+import android.androidVNC.*;
 
 public class ControlsLayout extends FrameLayout
 {
@@ -29,6 +30,14 @@ public class ControlsLayout extends FrameLayout
 		}
 	}
 	
+	public void loadLayout(String jsonPath) {
+		try {
+			loadLayout(new Gson().fromJson(Tools.read(jsonPath), CustomControls.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void loadLayout(CustomControls controlLayout) {
 		mLayout = controlLayout;
 		removeAllViews();
@@ -37,6 +46,35 @@ public class ControlsLayout extends FrameLayout
 		}
 
 		setModified(false);
+	}
+
+	public void setupKeyEvent(final ControlListener listener) {
+		for (int i = 0; i < getChildCount(); i++) {
+			View v = getChildAt(i);
+			if (v instanceof ControlView) {
+				final ControlView ctrlView = (ControlView) v;
+				ctrlView.setOnTouchListener(new View.OnTouchListener(){
+
+					@Override
+					public boolean onTouch(View view, MotionEvent event)
+					{
+						boolean isDown = false;
+						switch (event.getActionMasked()) {
+							case MotionEvent.ACTION_DOWN: isDown = true; break;
+							case MotionEvent.ACTION_UP: isDown = false; break;
+						}
+						
+						for (int i = 0; i < MetaKeyBean.keysByKeyCode.size(); i++) {
+							MetaKeyBase key = MetaKeyBean.keysByKeyCode.valueAt(i);
+							if (ctrlView.getProperties().keycode == key.keyEvent) {
+								listener.onKey(key, isDown);
+							}
+						}
+						return false;
+					}
+				});
+			}
+		}
 	}
 	
 	public void addControlButton(ControlButton controlButton) {
@@ -81,5 +119,9 @@ public class ControlsLayout extends FrameLayout
 	
 	private void setModified(boolean z) {
 		if (mActivity != null) mActivity.isModified = z;
+	}
+	
+	public static interface ControlListener {
+		public void onKey(MetaKeyBase vncKey, boolean down);
 	}
 }

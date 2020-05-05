@@ -25,6 +25,13 @@
 			android:id="@+id/zoomer"
 			android:layout_gravity="bottom|center"/>
 
+		<net.kdt.pojavlaunch.value.customcontrols.ControlsLayout
+			android:id="@+id/main_controllayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+		</net.kdt.pojavlaunch.value.customcontrols.ControlsLayout>
+		
 		<LinearLayout
 			android:animateLayoutChanges="true"
 			android:id="@+id/content_log_layout"

@@ -21,6 +21,8 @@ public class CustomControlsActivity extends AppCompatActivity
 	private ControlsLayout ctrlLayout;
 	private CustomControls mCtrl;
 	
+	private SharedPreferences mPref;
+	
 	public boolean isModified = false;
 	
 	private Gson gson;
@@ -30,6 +32,8 @@ public class CustomControlsActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.control_mapping);
+		
+		mPref = getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE);
 		
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		
@@ -63,7 +67,17 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		
 		mCtrl = new CustomControls();
-		generateDefaultControlMap();
+		String defaultControl = mPref.getString("defaultCtrl", "");
+		if (defaultControl.isEmpty() || defaultControl.endsWith("/default.json")) {
+			generateDefaultControlMap();
+			try {
+				doSaveCtrl("default");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			loadControl(defaultControl);
+		}
 		
 		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.setActivity(this);
@@ -81,8 +95,37 @@ public class CustomControlsActivity extends AppCompatActivity
 		save(true);
 	}
 	
+	private void setDefaultControlJson(String path) {
+		mPref.edit().putString("defaultCtrl", path).commit();
+	}
+	
 	private void dialogSelectDefaultCtrl() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.customctrl_selectdefault);
+		builder.setPositiveButton(android.R.string.cancel, null);
+
+		final AlertDialog dialog = builder.create();
+		FileListView flv = new FileListView(this);
+		flv.listFileAt(Tools.CTRLMAP_PATH);
+		flv.setFileSelectedListener(new FileSelectedListener(){
+
+				@Override
+				public void onFileSelected(File file, String path, String name) {
+					if (name.endsWith(".json")) {
+						setDefaultControlJson(path);
+						dialog.dismiss();
+					}
+				}
+			});
+		dialog.setView(flv);
+		dialog.show();
+	}
+	
+	private String doSaveCtrl(String name) throws Exception {
+		String jsonPath = Tools.CTRLMAP_PATH + "/" + name + ".json";
+		ctrlLayout.saveLayout(jsonPath);
 		
+		return jsonPath;
 	}
 	
 	private void save(final boolean exit) {
@@ -118,9 +161,9 @@ public class CustomControlsActivity extends AppCompatActivity
 									edit.setError(getResources().getString(R.string.global_error_field_empty));
 								} else {
 									try {
-										ctrlLayout.saveLayout(Tools.CTRLMAP_PATH + "/" + edit.getText().toString() + ".json");
+										String jsonPath = doSaveCtrl(edit.getText().toString());
 										
-										Toast.makeText(CustomControlsActivity.this, getString(R.string.global_save) + ": " + getString(android.R.string.ok), Toast.LENGTH_SHORT).show();
+										Toast.makeText(CustomControlsActivity.this, getString(R.string.global_save) + ": " + jsonPath, Toast.LENGTH_SHORT).show();
 										
 										dialog.dismiss();
 										if (exit) {
@@ -140,7 +183,7 @@ public class CustomControlsActivity extends AppCompatActivity
 	
 	private void actionLoad() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select control json file");
+		builder.setTitle(R.string.customctrl_title_selectctrl);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
@@ -151,7 +194,7 @@ public class CustomControlsActivity extends AppCompatActivity
 				@Override
 				public void onFileSelected(File file, String path, String name) {
 					if (name.endsWith(".json")) {
-						loadControl(path, name);
+						loadControl(path);
 						dialog.dismiss();
 					}
 				}
@@ -160,12 +203,14 @@ public class CustomControlsActivity extends AppCompatActivity
 		dialog.show();
 	}
 
-	private void loadControl(String path, String name) {
+	private void loadControl(String path) {
 		try {
-			selectedName = name;
-			
 			mCtrl = gson.fromJson(Tools.read(path), CustomControls.class);
 			ctrlLayout.loadLayout(mCtrl);
+			
+			selectedName = new File(path).getName();
+			// Remove `.json`
+			selectedName = selectedName.substring(0, selectedName.length() - 5);
 		} catch (Exception e) {
 			Tools.showError(CustomControlsActivity.this, e);
 		}

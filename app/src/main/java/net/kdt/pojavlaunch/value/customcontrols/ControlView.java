@@ -98,7 +98,7 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 	@Override
 	public boolean onLongClick(View p1)
 	{
-		if (!mCanTriggerLongClick) return false;
+		if (!mCanTriggerLongClick || !mCanModify) return false;
 
 		if (mHandleView.isShowing()) {
 			mHandleView.hide();

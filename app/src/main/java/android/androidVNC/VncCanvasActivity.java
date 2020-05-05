@@ -45,6 +45,8 @@ import net.kdt.pojavlaunch.prefs.*;
 
 import android.app.AlertDialog;
 import com.theqvd.android.xpro.Config;
+import net.kdt.pojavlaunch.value.customcontrols.*;
+import com.google.gson.*;
 
 public class VncCanvasActivity extends AppCompatActivity
 {
@@ -83,12 +85,15 @@ public class VncCanvasActivity extends AppCompatActivity
 	private TextView textLog;
 	private ScrollView contentScroll;
 	private ToggleButton toggleLog;
+	private ControlsLayout mControlLayout;
 	
 	@Override
 	public void onCreate(Bundle icicle) {
 
 		super.onCreate(icicle);
 
+		MetaKeyBean.initStatic();
+		
 		mProfile = PojavProfile.getCurrentProfileContent(this);
 		mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 		
@@ -97,6 +102,34 @@ public class VncCanvasActivity extends AppCompatActivity
 							 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
 		setContentView(R.layout.canvas);
+		
+		mControlLayout = findViewById(R.id.main_controllayout);
+		mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
+		mControlLayout.setupKeyEvent(new ControlsLayout.ControlListener(){
+			@Override
+			public void onKey(MetaKeyBase vncKey, boolean down)
+			{
+				vncCanvas.sendKeyboardKey(new MetaKeyBean(0, 0, vncKey), down);
+			}
+		});
+		
+		ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+		specialButtons[0].specialButtonListener = new View.OnClickListener(){
+
+			@Override
+			public void onClick(View p1)
+			{
+				// showKeyboard(); 
+			}
+		};
+		specialButtons[1].specialButtonListener = new View.OnClickListener(){
+
+			@Override
+			public void onClick(View view)
+			{
+				// MainActivity.this.onClick(toggleControlButton);
+			}
+		};
 
 		database = new VncDatabase(VncCanvasActivity.this);
 		connection = new ConnectionBean();
@@ -399,7 +432,7 @@ public class VncCanvasActivity extends AppCompatActivity
 						});
 				
 					panner = new Panner(VncCanvasActivity.this, vncCanvas.handler);
-					inputHandler = getInputHandlerById(R.id.itemInputMouse);
+					inputHandler = getInputHandlerById(R.id.itemInputTouchpad);
 				}
 			}, 200);
 	}
@@ -489,6 +522,7 @@ public class VncCanvasActivity extends AppCompatActivity
 			mJavaProcess.writeToProcess("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/minecraft_lib/lwjgl" + (isLwjgl3 ? "3" : "2"));
 			mJavaProcess.writeToProcess("echo \"Running Minecraft: " + fromStringArray(mJreArgs.toArray(new String[0])) + "\"");
 			mJavaProcess.writeToProcess(mJreArgs.toArray(new String[0]));
+			mJavaProcess.writeToProcess("exit");
 		} catch (Throwable th) {
 			th.printStackTrace();
 			Tools.showError(this, th);
@@ -796,11 +830,6 @@ public class VncCanvasActivity extends AppCompatActivity
 			break;
 		}
 		return inputHandler.onTrackballEvent(event);
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		return inputHandler.onTouchEvent(event);
 	}
 
 	private void selectColorModel() {

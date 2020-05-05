@@ -540,7 +540,7 @@ class MetaKeyDialog extends Dialog implements ConnectionSettable {
 		{
 			base = MetaKeyBean.keysByMouseButton.get(_currentKeyBean.getMouseButtons());
 		} else {
-			base = MetaKeyBean.keysByKeySym.get(_currentKeyBean.getKeySym());
+			base = MetaKeyBean.keysByKeyCode.get(_currentKeyBean.getKeyEvent());
 		}
 		if (base != null) {
 			int index = Collections.binarySearch(MetaKeyBean.allKeys,base);

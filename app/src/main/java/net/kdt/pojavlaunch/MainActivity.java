@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			onClick(toggleControlButton);
 			this.drawerLayout.closeDrawers();
 			
-			AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
+			Android2LWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
 			
 			placeMouseAt(AndroidDisplay.windowWidth / 2, AndroidDisplay.windowHeight / 2);
 			new Thread(new Runnable(){
@@ -709,14 +709,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event)
 	{
-		AndroidLWJGLKeycode.execKey(this, event, keyCode, false);
+		Android2LWJGLKeycode.execKey(this, event, keyCode, false);
 		return super.onKeyUp(keyCode, event);
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
-		AndroidLWJGLKeycode.execKey(this, event, keyCode, true);
+		Android2LWJGLKeycode.execKey(this, event, keyCode, true);
 		return super.onKeyDown(keyCode, event);
 	}
 
@@ -1059,11 +1059,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private void dialogSendCustomKey() {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 		dialog.setTitle(R.string.control_customkey);
-		dialog.setItems(AndroidLWJGLKeycode.generateKeyName(), new DialogInterface.OnClickListener(){
+		dialog.setItems(Android2LWJGLKeycode.generateKeyName(), new DialogInterface.OnClickListener(){
 
 				@Override
 				public void onClick(DialogInterface dInterface, int position) {
-					AndroidLWJGLKeycode.execKeyIndex(MainActivity.this, position);
+					Android2LWJGLKeycode.execKeyIndex(MainActivity.this, position);
 				}
 			});
 		dialog.show();

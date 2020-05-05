@@ -127,7 +127,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						final EditText editName = dialog.findViewById(R.id.controlsetting_edit_name);
 						editName.setText(properties.name);
 
-						final Spinner spinnerKeycode = dialog.findViewById(R.id.controlsetting_spinner_lwjglkeycode);
+						final Spinner spinnerKeycode = dialog.findViewById(R.id.controlsetting_spinner_keycode);
 						ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item);
 
 						String[] oldSpecialArr = ControlButton.buildSpecialButtonArray();
@@ -137,13 +137,13 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						}
 
 						adapter.addAll(specialArr);
-						adapter.addAll(AndroidLWJGLKeycode.generateKeyName());
+						adapter.addAll(Android2LWJGLKeycode.generateKeyName());
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
-						if (properties.lwjglKeycode < 0) {
-							spinnerKeycode.setSelection(properties.lwjglKeycode + 2);
+						if (properties.keycode < 0) {
+							spinnerKeycode.setSelection(properties.keyindex);
 						} else {
-							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.lwjglKeycode + 2));
+							spinnerKeycode.setSelection(Android2LWJGLKeycode.getIndexByLWJGLKey(properties.keyindex + 2));
 						}
 						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
@@ -169,12 +169,13 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									if (editName.getText().toString().isEmpty()) {
 										editName.setError(view.getResources().getString(R.string.global_error_field_empty));
 									} else {
-										properties.lwjglKeycode = AndroidLWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 2;
+										properties.keycode = Android2LWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 2;
 										properties.name = editName.getText().toString();
-										if (properties.lwjglKeycode < 0) {
-											properties.name = ControlButton.getSpecialButtons()[properties.lwjglKeycode + 2].name;
+										if (properties.keycode < 0) {
+											properties.name = ControlButton.getSpecialButtons()[properties.keycode + 2].name;
 										}
 										properties.hidden = checkHidden.isChecked();
+										properties.keyindex = spinnerKeycode.getSelectedItemPosition();
 
 										mHandleView.mView.updateProperties();
 										mHandleView.mView.setModified(true);

@@ -20,10 +20,12 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
     public static final int GEN_ID_MOUSECLICK = 4;
     public static final String GEN_FIELD_MOUSEBUTTONS = "MOUSEBUTTONS";
     public static final int GEN_ID_MOUSEBUTTONS = 5;
+    public static final String GEN_FIELD_KEYEVENT = "KEYEVENT";
+    public static final int GEN_ID_KEYEVENT = 6;
     public static final String GEN_FIELD_KEYSYM = "KEYSYM";
-    public static final int GEN_ID_KEYSYM = 6;
+    public static final int GEN_ID_KEYSYM = 7;
     public static final String GEN_FIELD_SHORTCUT = "SHORTCUT";
-    public static final int GEN_ID_SHORTCUT = 7;
+    public static final int GEN_ID_SHORTCUT = 8;
 
     // SQL Command for creating the table
     public static String GEN_CREATE = "CREATE TABLE META_KEY (" +
@@ -33,6 +35,7 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
     "METAFLAGS INTEGER," +
     "MOUSECLICK INTEGER," +
     "MOUSEBUTTONS INTEGER," +
+    "KEYEVENT INTEGER," +
     "KEYSYM INTEGER," +
     "SHORTCUT TEXT" +
     ")";
@@ -44,6 +47,7 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
     private int gen_metaFlags;
     private boolean gen_mouseClick;
     private int gen_mouseButtons;
+    private int gen_keyEvent;
     private int gen_keySym;
     private java.lang.String gen_shortcut;
 
@@ -63,6 +67,8 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
     public void setMouseClick(boolean arg_mouseClick) { gen_mouseClick = arg_mouseClick; }
     public int getMouseButtons() { return gen_mouseButtons; }
     public void setMouseButtons(int arg_mouseButtons) { gen_mouseButtons = arg_mouseButtons; }
+    public int getKeyEvent() { return gen_keyEvent; }
+    public void setKeyEvent(int arg_keyEvent) { gen_keySym = arg_keyEvent; }
     public int getKeySym() { return gen_keySym; }
     public void setKeySym(int arg_keySym) { gen_keySym = arg_keySym; }
     public java.lang.String getShortcut() { return gen_shortcut; }
@@ -76,6 +82,7 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
         values.put(GEN_FIELD_METAFLAGS,Integer.toString(this.gen_metaFlags));
         values.put(GEN_FIELD_MOUSECLICK,(this.gen_mouseClick ? "1" : "0"));
         values.put(GEN_FIELD_MOUSEBUTTONS,Integer.toString(this.gen_mouseButtons));
+        values.put(GEN_FIELD_KEYEVENT,Integer.toString(this.gen_keyEvent));
         values.put(GEN_FIELD_KEYSYM,Integer.toString(this.gen_keySym));
         values.put(GEN_FIELD_SHORTCUT,this.gen_shortcut);
         return values;
@@ -98,8 +105,9 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
         result[3] = cursor.getColumnIndex(GEN_FIELD_METAFLAGS);
         result[4] = cursor.getColumnIndex(GEN_FIELD_MOUSECLICK);
         result[5] = cursor.getColumnIndex(GEN_FIELD_MOUSEBUTTONS);
-        result[6] = cursor.getColumnIndex(GEN_FIELD_KEYSYM);
-        result[7] = cursor.getColumnIndex(GEN_FIELD_SHORTCUT);
+        result[6] = cursor.getColumnIndex(GEN_FIELD_KEYEVENT);
+        result[7] = cursor.getColumnIndex(GEN_FIELD_KEYSYM);
+        result[8] = cursor.getColumnIndex(GEN_FIELD_SHORTCUT);
         return result;
     }
 
@@ -125,6 +133,9 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
         if ( columnIndices[GEN_ID_MOUSEBUTTONS] >= 0 && ! cursor.isNull(columnIndices[GEN_ID_MOUSEBUTTONS])) {
             gen_mouseButtons = (int)cursor.getInt(columnIndices[GEN_ID_MOUSEBUTTONS]);
         }
+        if ( columnIndices[GEN_ID_KEYEVENT] >= 0 && ! cursor.isNull(columnIndices[GEN_ID_KEYEVENT])) {
+            gen_keyEvent = (int)cursor.getInt(columnIndices[GEN_ID_KEYEVENT]);
+        }
         if ( columnIndices[GEN_ID_KEYSYM] >= 0 && ! cursor.isNull(columnIndices[GEN_ID_KEYSYM])) {
             gen_keySym = (int)cursor.getInt(columnIndices[GEN_ID_KEYSYM]);
         }
@@ -143,6 +154,7 @@ public abstract class AbstractMetaKeyBean extends com.antlersoft.android.dbimpl.
         gen_metaFlags = (int)values.getAsInteger(GEN_FIELD_METAFLAGS);
         gen_mouseClick = (values.getAsInteger(GEN_FIELD_MOUSECLICK) != 0);
         gen_mouseButtons = (int)values.getAsInteger(GEN_FIELD_MOUSEBUTTONS);
+        gen_keyEvent = (int)values.getAsInteger(GEN_FIELD_KEYEVENT);
         gen_keySym = (int)values.getAsInteger(GEN_FIELD_KEYSYM);
         gen_shortcut = values.getAsString(GEN_FIELD_SHORTCUT);
     }

@@ -7,10 +7,10 @@ package android.androidVNC;
  * @author Michael A. MacDonald
  *
  */
-class MetaKeyBase implements Comparable<MetaKeyBase> {
-	int keySym;
+public class MetaKeyBase implements Comparable<MetaKeyBase> {
+	public int keySym;
 	int mouseButtons;
-	int keyEvent;
+	public int keyEvent;
 	String name;
 	boolean isMouse;
 	boolean isKeyEvent;
