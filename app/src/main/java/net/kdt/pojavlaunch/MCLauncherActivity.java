@@ -428,6 +428,17 @@ public class MCLauncherActivity extends AppCompatActivity
 			super.onBackPressed();
 		}
 	}
+	
+	// Catching touch exception
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		try {
+			return super.onTouchEvent(event);
+		} catch (Throwable th) {
+			Tools.showError(this, th);
+			return false;
+		}
+	}
 
 	private GameRunnerTask mTask;
 
@@ -966,7 +977,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			super.onPreExecute();
 			dialog = new ProgressDialog(MCLauncherActivity.this);
 			dialog.setTitle("Installing OptiFine");
-			dialog.setMessage("Prepaping");
+			dialog.setMessage("Preparing");
 			dialog.setMax(5);
 			dialog.setCancelable(false);
 			dialog.show();
@@ -992,12 +1003,12 @@ public class MCLauncherActivity extends AppCompatActivity
 			Throwable throwable = null;
 			File convertedFile = null;
 			try {
-				publishProgress("Prepaping", "5");
+				publishProgress("Preparing", "5");
 				
 				String origMd5 = OptiFinePatcher.calculateMD5(file[0]);
 				convertedFile = new File(Tools.optifineDir, origMd5 + ".jar");
 				if (!convertedFile.exists()) {
-					publishProgress("Patching OptiFine Installer", null, "1", "ADD");
+					publishProgress("Patching OptiFine Installer", null, "1", "true");
 
 					Tools.extractAssetFolder(MCLauncherActivity.this, "optifine_patch", Tools.optifineDir, true);
 
@@ -1006,7 +1017,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
 					File patchedFile = new File(output[1]);
 
-					publishProgress("Converting OptiFine", null, null, Integer.toString(ProgressDialog.STYLE_SPINNER));
+					publishProgress("Converting OptiFine", null, null, "false");
 
 					System.setOut(new PrintStream(logOut));
 					System.setErr(new PrintStream(logErr));
@@ -1028,7 +1039,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					patchedFile.delete();
 				}
 
-				publishProgress("Launching OptiFine installer", null, null, Integer.toString(ProgressDialog.STYLE_SPINNER));
+				publishProgress("Launching OptiFine installer", null, null, "true");
 
 				File optDir = getDir("dalvik-cache", 0);
 				optDir.mkdir();
@@ -1074,12 +1085,12 @@ public class MCLauncherActivity extends AppCompatActivity
 		protected void onProgressUpdate(String[] text) {
 			super.onProgressUpdate(text);
 			dialog.setMessage(text[0]);
-			if (text.length >= 2 && text[1] != null) {
+			if (text.length > 1 && text[1] != null) {
 				dialog.setMax(Integer.valueOf(text[1]));
-			} if (text.length >= 3) {
+			} if (text.length > 2) {
 				dialog.setProgress(dialog.getProgress() + 1);
-			} if (text.length >= 4) {
-				dialog.setProgressStyle(Integer.parseInt(text[3]));
+			} if (text.length > 3 && text[3] != null) {
+				dialog.setIndeterminate(Boolean.getBoolean(text[3]));
 			}
 		}
 

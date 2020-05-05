@@ -81,7 +81,7 @@
 	<string name="mcl_launch_convert_lib">Converting library %s</string>
 	<string name="mcl_launch_convert_client">Converting Minecraft %s</string>
 	<string name="mcl_launch_patch_client">Patching Minecraft %s</string>
-	<string name="mcl_launch_download_assets">Prepaping to download resources</string>
+	<string name="mcl_launch_download_assets">Preparing to download resources</string>
 	
 	<string name="mcl_options">Options</string>
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
