@@ -105,6 +105,7 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 	public boolean onTouch(View view, MotionEvent event) {
 		if (!mCanModify) {
 			mCanTriggerLongClick = false;
+			
 			return false;
 		}
 		

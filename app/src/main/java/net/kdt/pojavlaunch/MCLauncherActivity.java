@@ -978,6 +978,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			dialog = new ProgressDialog(MCLauncherActivity.this);
 			dialog.setTitle("Installing OptiFine");
 			dialog.setMessage("Preparing");
+			dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			dialog.setMax(5);
 			dialog.setCancelable(false);
 			dialog.show();

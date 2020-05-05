@@ -178,10 +178,13 @@
 
 	<string name="control_more3"></string>
 	<string name="control_more4"></string>
-	
-	<string name="customctrl_keyname">LWJGL Keycode</string>
+
+	<string name="customctrl_keyname">Keycode</string>
 	<string name="customctrl_specialkey">Special Key</string>
 	<string name="customctrl_hidden">Hidden</string>
+	<string name="customctrl_addbutton">Add button</string>
+	<string name="customctrl_title_selectctrl">Select default Control json</string>
+	<string name="customctrl_selectdefault">Select default Control json</string>
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Update console</string>
