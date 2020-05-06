@@ -16,7 +16,7 @@ public class MetaKeyBean extends AbstractMetaKeyBean implements Comparable<MetaK
 	static ArrayList<MetaKeyBase> allKeys;
 	static String[] allKeysNames;
 	public static ArrayMap<Integer,MetaKeyBase> keysByKeyCode;
-	static ArrayMap<Integer,MetaKeyBase> keysByMouseButton;
+	public static ArrayMap<Integer,MetaKeyBase> keysByMouseButton;
 	static MetaKeyBean keyCtrlAltDel;
 	static MetaKeyBean keyArrowLeft;
 	static MetaKeyBean keyArrowRight;

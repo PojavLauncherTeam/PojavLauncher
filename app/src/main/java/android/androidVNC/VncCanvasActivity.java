@@ -127,6 +127,7 @@ public class VncCanvasActivity extends AppCompatActivity
 				// showKeyboard(); 
 			}
 		};
+		MetaKeyBean.keysByMouseButton.get(VncCanvas.MOUSE_BUTTON_RIGHT);
 		specialButtons[2].specialButtonListener = new ControlButton.TouchListener(){
 			@Override
 			public void onTouch(boolean down) {
