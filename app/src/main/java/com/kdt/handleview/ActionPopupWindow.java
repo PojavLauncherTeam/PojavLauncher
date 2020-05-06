@@ -172,7 +172,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 										properties.keycode = Android2LWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 2;
 										properties.name = editName.getText().toString();
 										if (properties.keycode < 0) {
-											properties.name = ControlButton.getSpecialButtons()[properties.keycode + 2].name;
+											properties.name = ControlButton.getSpecialButtons()[properties.keycode + 4].name;
 										}
 										properties.hidden = checkHidden.isChecked();
 										properties.keyindex = spinnerKeycode.getSelectedItemPosition();

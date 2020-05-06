@@ -42,6 +42,9 @@ public class ControlsLayout extends FrameLayout
 		mLayout = controlLayout;
 		removeAllViews();
 		for (ControlButton button : controlLayout.button) {
+			if (button.keycode < 0) {
+				// Set special button
+			}
 			addControlView(button);
 		}
 

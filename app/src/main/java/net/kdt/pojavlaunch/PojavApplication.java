@@ -31,6 +31,8 @@ public class PojavApplication extends Application
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 			specialButtons[0].name = getString(R.string.control_keyboard);
 			specialButtons[1].name = getString(R.string.control_toggle);
+			specialButtons[2].name = getString(R.string.control_primary);
+			specialButtons[3].name = getString(R.string.control_secondary);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

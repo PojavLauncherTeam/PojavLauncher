@@ -283,22 +283,32 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 			
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+			/*
 			specialButtons[0].specialButtonListener = new View.OnClickListener(){
-
 				@Override
-				public void onClick(View p1)
-				{
+				public void onClick(View p1) {
 					showKeyboard(); 
 				}
 			};
 			specialButtons[1].specialButtonListener = new View.OnClickListener(){
-
 				@Override
-				public void onClick(View view)
-				{
+				public void onClick(View view) {
 					MainActivity.this.onClick(toggleControlButton);
 				}
 			};
+			specialButtons[2].specialButtonListener = new View.OnClickListener(){
+				@Override
+				public void onClick(View p1) {
+					
+				}
+			};
+			specialButtons[3].specialButtonListener = new View.OnClickListener(){
+				@Override
+				public void onClick(View view) {
+					MainActivity.this.onClick(toggleControlButton);
+				}
+			};
+			*/
 
 			// toggleGui(null);
 			onClick(toggleControlButton);

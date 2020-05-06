@@ -24,7 +24,9 @@ public class ControlButton implements Cloneable
 		if (SPECIAL_BUTTONS == null) {
 			SPECIAL_BUTTONS = new ControlButton[]{
 				new ControlButton("Keyboard", -1, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, pixelOf80dp, pixelOf30dp),
-				new ControlButton("GUI", -2, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf2dp - pixelOf50dp * 2)
+				new ControlButton("GUI", -2, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
+				new ControlButton("PRI", -3, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
+				new ControlButton("SEC", -4, pixelOf2dp * 3 + pixelOf50dp * 2, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2)
 			};
 		}
 		
@@ -54,7 +56,7 @@ public class ControlButton implements Cloneable
 	public boolean holdCtrl;
 	public boolean holdAlt;
 	public boolean holdShift;
-	public View.OnClickListener specialButtonListener;
+	public Object specialButtonListener;
 	// public boolean hold
 	
 	public ControlButton() {
@@ -92,5 +94,9 @@ public class ControlButton implements Cloneable
 	
 	public ControlButton clone() {
 		return new ControlButton(name, keycode, x, y, width, height);
+	}
+	
+	public static interface TouchListener {
+		public void onTouch(boolean down);
 	}
 }

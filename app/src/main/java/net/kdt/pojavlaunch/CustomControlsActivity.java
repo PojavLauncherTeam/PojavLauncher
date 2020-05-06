@@ -13,6 +13,7 @@ import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
 
 public class CustomControlsActivity extends AppCompatActivity
 {
@@ -33,9 +34,11 @@ public class CustomControlsActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.control_mapping);
 		
-		mPref = getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE);
+		mPref = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
 		
 		gson = new GsonBuilder().setPrettyPrinting().create();
+
+		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		
 		// Menu
 		drawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
@@ -67,19 +70,20 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 		
 		mCtrl = new CustomControls();
-		String defaultControl = mPref.getString("defaultCtrl", "");
-		if (defaultControl.isEmpty() || defaultControl.endsWith("/default.json")) {
+
+		// Generate and save default control
+		try {
 			generateDefaultControlMap();
-			try {
-				doSaveCtrl("default");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
+			doSaveCtrl("default");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String defaultControl = mPref.getString("defaultCtrl", "");
+		if (!defaultControl.isEmpty()) {
 			loadControl(defaultControl);
 		}
 		
-		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.setActivity(this);
 		ctrlLayout.loadLayout(mCtrl);
 		ctrlLayout.setModifiable(true);
@@ -218,12 +222,23 @@ public class CustomControlsActivity extends AppCompatActivity
 	
 	private void generateDefaultControlMap() {
 		List<ControlButton> btn = mCtrl.button;
-		btn.add(ControlButton.getSpecialButtons()[0].clone()); // Keyboard
-		btn.add(ControlButton.getSpecialButtons()[1].clone()); // GUI
-		// btn.add(ControlButton.getSpecialButtons()[2]); // Toggle mouse
+		btn.add(ControlButton.getSpecialButtons()[0]); // Keyboard
+		btn.add(ControlButton.getSpecialButtons()[1]); // GUI
+		btn.add(ControlButton.getSpecialButtons()[2]); // Primary Mouse button
+		btn.add(ControlButton.getSpecialButtons()[3]); // Secondary Mouse button
+		
 		btn.add(new ControlButton(this, R.string.control_debug, Keyboard.KEY_F3, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
 		btn.add(new ControlButton(this, R.string.control_chat, Keyboard.KEY_T, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf80dp, ControlButton.pixelOf2dp, false)); 
 		btn.add(new ControlButton(this, R.string.control_listplayers, Keyboard.KEY_TAB, ControlButton.pixelOf2dp * 4 + ControlButton.pixelOf80dp * 3, ControlButton.pixelOf2dp, false));
 		btn.add(new ControlButton(this, R.string.control_thirdperson, Keyboard.KEY_F5, ControlButton.pixelOf2dp, ControlButton.pixelOf30dp + ControlButton.pixelOf2dp, false));
+		
+		btn.add(new ControlButton(this, R.string.control_up, Keyboard.KEY_W, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 3, true));
+		btn.add(new ControlButton(this, R.string.control_left, Keyboard.KEY_A, ControlButton.pixelOf2dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true)); 
+		btn.add(new ControlButton(this, R.string.control_down, Keyboard.KEY_S, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf50dp * 2 + ControlButton.pixelOf2dp * 4, true));
+		btn.add(new ControlButton(this, R.string.control_right, Keyboard.KEY_D, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp * 2, true));
+
+		btn.add(new ControlButton(this, R.string.control_inventory, Keyboard.KEY_E, ControlButton.pixelOf2dp * 4 + ControlButton.pixelOf50dp * 3, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 3, true));
+		btn.add(new ControlButton(this, R.string.control_shift, Keyboard.KEY_LSHIFT, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		btn.add(new ControlButton(this, R.string.control_jump, Keyboard.KEY_SPACE, AndroidDisplay.windowWidth - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
 	}
 }

@@ -58,7 +58,6 @@ public class VncCanvasActivity extends AppCompatActivity
 	AbstractInputHandler inputHandler;
 
 	VncCanvas vncCanvas;
-
 	VncDatabase database;
 
 	private MenuItem[] inputModeMenuItems;
@@ -87,13 +86,16 @@ public class VncCanvasActivity extends AppCompatActivity
 	private ToggleButton toggleLog;
 	private ControlsLayout mControlLayout;
 	
+	private SharedPreferences mVncPrefs;
+	
 	@Override
 	public void onCreate(Bundle icicle) {
 
 		super.onCreate(icicle);
 
 		MetaKeyBean.initStatic();
-		
+
+		mVncPrefs = getSharedPreferences("vnc_preferences", MODE_PRIVATE);
 		mProfile = PojavProfile.getCurrentProfileContent(this);
 		mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 		
@@ -102,6 +104,32 @@ public class VncCanvasActivity extends AppCompatActivity
 							 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
 		setContentView(R.layout.canvas);
+
+		ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+		specialButtons[0].specialButtonListener = new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+
+			}
+		};
+		specialButtons[1].specialButtonListener = new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// showKeyboard(); 
+			}
+		};
+		specialButtons[2].specialButtonListener = new ControlButton.TouchListener(){
+			@Override
+			public void onTouch(boolean down) {
+				// showKeyboard(); 
+			}
+		};
+		specialButtons[3].specialButtonListener = new ControlButton.TouchListener(){
+			@Override
+			public void onTouch(boolean down) {
+				// showKeyboard(); 
+			}
+		};
 		
 		mControlLayout = findViewById(R.id.main_controllayout);
 		mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
@@ -113,24 +141,6 @@ public class VncCanvasActivity extends AppCompatActivity
 			}
 		});
 		
-		ControlButton[] specialButtons = ControlButton.getSpecialButtons();
-		specialButtons[0].specialButtonListener = new View.OnClickListener(){
-
-			@Override
-			public void onClick(View p1)
-			{
-				// showKeyboard(); 
-			}
-		};
-		specialButtons[1].specialButtonListener = new View.OnClickListener(){
-
-			@Override
-			public void onClick(View view)
-			{
-				// MainActivity.this.onClick(toggleControlButton);
-			}
-		};
-
 		database = new VncDatabase(VncCanvasActivity.this);
 		connection = new ConnectionBean();
 		
@@ -197,13 +207,15 @@ public class VncCanvasActivity extends AppCompatActivity
 							if (newFollow) {
 								vncCanvas.panToMouse();
 							}
-							connection.save(database.getWritableDatabase());
+							
+							editPref().putBoolean("isFollowMouse", newFollow).commit();
+							// connection.save(database.getWritableDatabase());
 							return true;
 						case R.id.itemFollowPan:
 							boolean newFollowPan = !connection.getFollowPan();
 							item.setChecked(newFollowPan);
 							connection.setFollowPan(newFollowPan);
-							connection.save(database.getWritableDatabase());
+							editPref().putBoolean("isFollowPan", newFollowPan).commit();
 							return true;
 						case R.id.itemArrowLeft:
 							vncCanvas.sendMetaKey(MetaKeyBean.keyArrowLeft);
@@ -228,11 +240,16 @@ public class VncCanvasActivity extends AppCompatActivity
 							if (input != null) {
 								inputHandler = input;
 								connection.setInputMode(input.getName());
-								if (input.getName().equals(TOUCHPAD_MODE))
+								
+								editPref().putString("inputMode", input.getName()).commit();
+								if (input.getName().equals(TOUCHPAD_MODE)) {
 									connection.setFollowMouse(true);
+									
+									editPref().putBoolean("isFollowMouse", true);
+								}
 								item.setChecked(true);
 								showPanningState();
-								connection.save(database.getWritableDatabase());
+								// connection.save(database.getWritableDatabase());
 								return true;
 							}
 					}
@@ -350,6 +367,7 @@ public class VncCanvasActivity extends AppCompatActivity
 						}
 						if (host.equals(VncConstants.CONNECTION))
 						{
+							/*
 							if (connection.Gen_read(database.getReadableDatabase(), port))
 							{
 								MostRecentBean bean = androidVNC.getMostRecent(database.getReadableDatabase());
@@ -359,6 +377,7 @@ public class VncCanvasActivity extends AppCompatActivity
 									bean.Gen_update(database.getWritableDatabase());
 								}
 							}
+							*/
 						}
 						else
 						{
@@ -368,11 +387,12 @@ public class VncCanvasActivity extends AppCompatActivity
 							List<String> path = data.getPathSegments();
 							if (path.size() >= 1) {
 								connection.setColorModel(path.get(0));
+								editPref().putString("colorModel", path.get(0)).commit();
 							}
 							if (path.size() >= 2) {
 								connection.setPassword(path.get(1));
 							}
-							connection.save(database.getWritableDatabase());
+							// connection.save(database.getWritableDatabase());
 						}
 					} else {
 						if (extras != null) {
@@ -436,6 +456,10 @@ public class VncCanvasActivity extends AppCompatActivity
 				}
 			}, 200);
 	}
+	
+	public SharedPreferences.Editor editPref() {
+		return mVncPrefs.edit();
+	}
 
 	private void openLogOutput() {
 		contentLog.setVisibility(View.VISIBLE);
@@ -485,7 +509,7 @@ public class VncCanvasActivity extends AppCompatActivity
 	private void launchJava(String modPath) {
 		try {
 			/*
-			 * 17w43a and above change Minecraft arguments tag from
+			 * 17w43a (1.13) and higher change Minecraft arguments tag from
 			 * `minecraftArguments` to `arguments` so easily to check
 			 * if the selected version requires LWJGL 3 or not.
 			 */
@@ -621,8 +645,7 @@ public class VncCanvasActivity extends AppCompatActivity
 	 * color mode (already done) scaling, input mode
 	 */
 	void setModes() {
-		AbstractInputHandler handler = getInputHandlerByName(connection
-				.getInputMode());
+		AbstractInputHandler handler = getInputHandlerByName(mVncPrefs.getString("inputMode", ""));
 		AbstractScaling.getByScaleType(connection.getScaleMode())
 				.setScaleTypeForActivity(this);
 		this.inputHandler = handler;
@@ -860,7 +883,8 @@ public class VncCanvasActivity extends AppCompatActivity
 				COLORMODEL cm = COLORMODEL.values()[arg2];
 				vncCanvas.setColorModel(cm);
 				connection.setColorModel(cm.nameString());
-				connection.save(database.getWritableDatabase());
+				editPref().putString("colorModel", cm.nameString()).commit();
+				// connection.save(database.getWritableDatabase());
 				Toast.makeText(VncCanvasActivity.this,
 						"Updating Color Model to " + cm.toString(),
 						Toast.LENGTH_SHORT).show();
@@ -1036,7 +1060,8 @@ public class VncCanvasActivity extends AppCompatActivity
 			case KeyEvent.KEYCODE_DPAD_CENTER:
 				inputHandler = getInputHandlerById(R.id.itemInputMouse);
 				connection.setInputMode(inputHandler.getName());
-				connection.save(database.getWritableDatabase());
+				editPref().putString("inputMode", inputHandler.getName()).commit();
+				// connection.save(database.getWritableDatabase());
 				updateInputMenu();
 				showPanningState();
 				return true;
@@ -1281,7 +1306,7 @@ public class VncCanvasActivity extends AppCompatActivity
 				inputHandler = getInputHandlerById(R.id.itemInputPan);
 				showPanningState();
 				connection.setInputMode(inputHandler.getName());
-				connection.save(database.getWritableDatabase());
+				// connection.save(database.getWritableDatabase());
 				updateInputMenu();
 				return true;
 			}

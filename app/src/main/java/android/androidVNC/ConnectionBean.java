@@ -16,12 +16,14 @@ import java.lang.Comparable;
  *
  */
 class ConnectionBean extends AbstractConnectionBean implements Comparable<ConnectionBean> {
+	/*
 	static final NewInstance<ConnectionBean> newInstance=new NewInstance<ConnectionBean>() {
 		public ConnectionBean get() { return new ConnectionBean(); }
 	};
+	*/
 	ConnectionBean()
 	{
-		set_Id(0);
+		set_Id(1);
 		setAddress("");
 		setPassword("");
 		setKeepPassword(true);

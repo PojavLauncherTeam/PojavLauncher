@@ -202,7 +202,8 @@ class MetaKeyDialog extends Dialog implements ConnectionSettable {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				_connection.setMetaListId(_lists.get(position).get_Id());
-				_connection.Gen_update(_database.getWritableDatabase());
+				_canvasActivity.editPref().putLong("metaListId", _lists.get(position).get_Id()).commit();
+				// _connection.Gen_update(_database.getWritableDatabase());
 				setMetaKeyList();
 			}
 
@@ -456,23 +457,25 @@ class MetaKeyDialog extends Dialog implements ConnectionSettable {
 	void sendCurrentKey()
 	{
 		int index = Collections.binarySearch(_keysInList, _currentKeyBean);
-		SQLiteDatabase db = _database.getWritableDatabase();
+		// SQLiteDatabase db = _database.getWritableDatabase();
 		if (index < 0)
 		{
 			int insertionPoint = -(index + 1);
-			_currentKeyBean.Gen_insert(db);
+			// _currentKeyBean.Gen_insert(db);
 			_keysInList.add(insertionPoint,_currentKeyBean);
 			getSpinnerAdapter(_spinnerKeysInList).insert(_currentKeyBean.getKeyDesc(), insertionPoint);
 			_spinnerKeysInList.setSelection(insertionPoint);
 			_connection.setLastMetaKeyId(_currentKeyBean.get_Id());
+			_canvasActivity.editPref().putLong("lastMetaKeyId", _currentKeyBean.get_Id()).commit();
 		}
 		else
 		{
 			MetaKeyBean bean = _keysInList.get(index);
 			_connection.setLastMetaKeyId(bean.get_Id());
+			_canvasActivity.editPref().putLong("lastMetaKeyId", bean.get_Id()).commit();
 			_spinnerKeysInList.setSelection(index);
 		}
-		_connection.Gen_update(db);
+		// _connection.Gen_update(db);
 		_canvasActivity.vncCanvas.sendMetaKey(_currentKeyBean);
 	}
 	
