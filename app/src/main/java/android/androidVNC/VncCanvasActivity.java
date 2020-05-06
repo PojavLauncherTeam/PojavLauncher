@@ -47,6 +47,7 @@ import android.app.AlertDialog;
 import com.theqvd.android.xpro.Config;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import com.google.gson.*;
+import org.lwjgl.opengl.*;
 
 public class VncCanvasActivity extends AppCompatActivity
 {
@@ -88,10 +89,22 @@ public class VncCanvasActivity extends AppCompatActivity
 	
 	private SharedPreferences mVncPrefs;
 	
+	private String modPath;
 	@Override
 	public void onCreate(Bundle icicle) {
 
 		super.onCreate(icicle);
+		
+		// Generate fake XRandR info
+		try {
+			Tools.write(Tools.homeJreDir + "/home/fakexrandr.txt",
+						"Screen 0: minimum 1 x 1, current " + AndroidDisplay.windowWidth + " x " + AndroidDisplay.windowHeight + ", maximum " + AndroidDisplay.windowWidth + " x " + AndroidDisplay.windowHeight + "\n" +
+						"screen connected " + AndroidDisplay.windowWidth + "x" + AndroidDisplay.windowHeight + "+0+0 0mm x 0mm\n" +
+						"   " + AndroidDisplay.windowWidth + "x" + AndroidDisplay.windowHeight + "      0.00*\n"
+			);
+		} catch (Throwable th) {
+			Toast.makeText(this, "Could not generate fake XRandR info, resolution will not correctly!", Toast.LENGTH_LONG).show();
+		}
 
 		MetaKeyBean.initStatic();
 
@@ -107,43 +120,45 @@ public class VncCanvasActivity extends AppCompatActivity
 
 		final Bundle extras = getIntent().getExtras();
 		
-		final String modPath;
 		if (extras != null) {
 			modPath = extras.getString("launchJar", "");
+			if (modPath == null || modPath.isEmpty()) {
+				modPath = null;
+			}
 		} else {
 			modPath = null;
 		}
 		
-		ControlButton[] specialButtons = ControlButton.getSpecialButtons();
-		specialButtons[0].specialButtonListener = new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-
-			}
-		};
-		specialButtons[1].specialButtonListener = new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// showKeyboard(); 
-			}
-		};
-		MetaKeyBean.keysByMouseButton.get(VncCanvas.MOUSE_BUTTON_RIGHT);
-		specialButtons[2].specialButtonListener = new ControlButton.TouchListener(){
-			@Override
-			public void onTouch(boolean down) {
-				// showKeyboard(); 
-			}
-		};
-		specialButtons[3].specialButtonListener = new ControlButton.TouchListener(){
-			@Override
-			public void onTouch(boolean down) {
-				// showKeyboard(); 
-			}
-		};
-		
 		mControlLayout = findViewById(R.id.main_controllayout);
 		if (modPath == null) {
-			mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
+			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+			specialButtons[0].specialButtonListener = new View.OnClickListener(){
+				@Override
+				public void onClick(View v) {
+
+				}
+			};
+			specialButtons[1].specialButtonListener = new View.OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					// showKeyboard(); 
+				}
+			};
+			// MetaKeyBean.keysByMouseButton.get(VncCanvas.MOUSE_BUTTON_RIGHT);
+			specialButtons[2].specialButtonListener = new ControlButton.TouchListener(){
+				@Override
+				public void onTouch(boolean down) {
+					// showKeyboard(); 
+				}
+			};
+			specialButtons[3].specialButtonListener = new ControlButton.TouchListener(){
+				@Override
+				public void onTouch(boolean down) {
+					// showKeyboard(); 
+				}
+			};
+			
+			mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
 			mControlLayout.setupKeyEvent(new ControlsLayout.ControlListener(){
 					@Override
 					public void onKey(MetaKeyBase vncKey, boolean down)
@@ -316,7 +331,7 @@ public class VncCanvasActivity extends AppCompatActivity
 						mXVNCProcess.initInputStream(VncCanvasActivity.this);
 						mXVNCProcess.writeToProcess(cmdList);
 						
-						launchJava(modPath);
+						launchJava();
 						int javaResultCode = mJavaProcess.waitFor();
 						
 						// Kill XVnc server before exit
@@ -510,7 +525,7 @@ public class VncCanvasActivity extends AppCompatActivity
 			});
 	}
 
-	private void launchJava(String modPath) {
+	private void launchJava() {
 		try {
 			/*
 			 * 17w43a (1.13) and higher change Minecraft arguments tag from
@@ -548,7 +563,7 @@ public class VncCanvasActivity extends AppCompatActivity
 			mJavaProcess.writeToProcess("chmod -R 700 " + Tools.homeJreDir);
 			mJavaProcess.writeToProcess("cd " + Tools.MAIN_PATH);
 			mJavaProcess.writeToProcess("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/minecraft_lib/lwjgl" + (isLwjgl3 ? "3" : "2"));
-			mJavaProcess.writeToProcess("echo \"Running Minecraft: " + fromStringArray(mJreArgs.toArray(new String[0])) + "\"");
+			// mJavaProcess.writeToProcess("echo \"Running Minecraft: " + fromStringArray(mJreArgs.toArray(new String[0])) + "\"");
 			mJavaProcess.writeToProcess(mJreArgs.toArray(new String[0]));
 			mJavaProcess.writeToProcess("exit");
 		} catch (Throwable th) {
