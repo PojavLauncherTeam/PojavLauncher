@@ -3,19 +3,20 @@
  • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.<br>
  • LegacyLauncher: Open source Minecraft LaunchWrapper by Mojang.<br>
  • OpenJDK JRE 10 for Android by dongfangxunlei.<br>
+ • PRoot special build of Termux to bypass SECCOMP for OpenJDK run in Android 8.<br>
+ • TheQVD XVnc Pro (including Android VNC Viewer).
  • LWJGL.<br>
  • BusyBox.<br>
- • PRoot.<br>
 * License:<br>
  • This application is licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">Apache License 2.0</a>.<br>
 * Third party licenses:<br>
  • gl4es: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.<br>
  • LegacyLauncher: (unknown license).<br>
- • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPL License</a>.<br>
+ • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2 License</a>.<br>
+ • PRoot: <a href="https://github.com/termux/proot/blob/master/COPYING">GNU GPLv2 License</a>.<br>
+ • TheQVD XVnc Pro: <a href="https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt">GNU GPLv3 License</a>.
  • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's license</a>.<br>
  • BusyBox: <a href"https://busybox.net/license.html">GNU GPL License</a><br>
- • PRoot: (unknown license).<br>
 * Notes:<br>
  - This app is under development and will not be stable.<br>
- - This app is not yet supported Minecraft 1.13 or above.<br>
  - This app is not affiliated with Minecraft, Mojang or Microsoft.
