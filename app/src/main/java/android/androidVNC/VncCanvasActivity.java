@@ -105,6 +105,15 @@ public class VncCanvasActivity extends AppCompatActivity
 		
 		setContentView(R.layout.canvas);
 
+		final Bundle extras = getIntent().getExtras();
+		
+		final String modPath;
+		if (extras != null) {
+			modPath = extras.getString("launchJar", "");
+		} else {
+			modPath = null;
+		}
+		
 		ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 		specialButtons[0].specialButtonListener = new View.OnClickListener(){
 			@Override
@@ -132,14 +141,18 @@ public class VncCanvasActivity extends AppCompatActivity
 		};
 		
 		mControlLayout = findViewById(R.id.main_controllayout);
-		mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
-		mControlLayout.setupKeyEvent(new ControlsLayout.ControlListener(){
-			@Override
-			public void onKey(MetaKeyBase vncKey, boolean down)
-			{
-				vncCanvas.sendKeyboardKey(new MetaKeyBean(0, 0, vncKey), down);
-			}
-		});
+		if (modPath == null) {
+			mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
+			mControlLayout.setupKeyEvent(new ControlsLayout.ControlListener(){
+					@Override
+					public void onKey(MetaKeyBase vncKey, boolean down)
+					{
+						vncCanvas.sendKeyboardKey(new MetaKeyBean(0, 0, vncKey), down);
+					}
+				});
+		} else {
+			mControlLayout.setVisibility(View.GONE);
+		}
 		
 		database = new VncDatabase(VncCanvasActivity.this);
 		connection = new ConnectionBean();
@@ -275,8 +288,6 @@ public class VncCanvasActivity extends AppCompatActivity
 			connection.getFollowMouse());
 		menu.findItem(R.id.itemFollowPan).setChecked(connection.getFollowPan());
 
-		final Bundle extras = getIntent().getExtras();
-		
 		// Launch X Server before init anything!
 		final Config config = new Config(this);
 		new Thread(new Runnable(){
@@ -303,14 +314,6 @@ public class VncCanvasActivity extends AppCompatActivity
 							});
 						mXVNCProcess.initInputStream(VncCanvasActivity.this);
 						mXVNCProcess.writeToProcess(cmdList);
-						
-						final String modPath;
-
-						if (extras != null) {
-							modPath = extras.getString("launchJar", "");
-						} else {
-							modPath = null;
-						}
 						
 						launchJava(modPath);
 						int javaResultCode = mJavaProcess.waitFor();
