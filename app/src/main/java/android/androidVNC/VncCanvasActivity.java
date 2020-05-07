@@ -536,6 +536,8 @@ public class VncCanvasActivity extends AppCompatActivity
 
 			List<String> mJreArgs = new ArrayList<String>();
 			mJreArgs.add("java");
+			// Fix LWJGL3 / Minecraft 1.13 unable to load LWJGL3 native libraries.
+			mJreArgs.add("-Djava.library.path=$LD_LIBRARY_PATH");
 			mJreArgs.add("-Duser.home=" + Tools.MAIN_PATH);
 			mJreArgs.add("-Xmx512M");
 			
