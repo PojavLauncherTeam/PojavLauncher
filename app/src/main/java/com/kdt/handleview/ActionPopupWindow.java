@@ -131,7 +131,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item);
 
 						String[] oldSpecialArr = ControlButton.buildSpecialButtonArray();
-						String[] specialArr = new String[oldSpecialArr.length];
+						final String[] specialArr = new String[oldSpecialArr.length];
 						for (int i = 0; i < specialArr.length; i++) {
 							specialArr[i] = "SPECIAL_" + oldSpecialArr[i];
 						}
@@ -143,13 +143,13 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						if (properties.keycode < 0) {
 							spinnerKeycode.setSelection(properties.keyindex);
 						} else {
-							spinnerKeycode.setSelection(Android2LWJGLKeycode.getIndexByLWJGLKey(properties.keyindex + 2));
+							spinnerKeycode.setSelection(Android2LWJGLKeycode.getIndexByLWJGLKey(properties.keyindex + specialArr.length));
 						}
 						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
 								@Override
 								public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
-									normalBtnLayout.setVisibility(id < 2 ? View.GONE : View.VISIBLE);
+									normalBtnLayout.setVisibility(id < specialArr.length ? View.GONE : View.VISIBLE);
 								}
 
 								@Override
@@ -169,10 +169,10 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									if (editName.getText().toString().isEmpty()) {
 										editName.setError(view.getResources().getString(R.string.global_error_field_empty));
 									} else {
-										properties.keycode = Android2LWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 2;
+										properties.keycode = Android2LWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - specialArr.length;
 										properties.name = editName.getText().toString();
 										if (properties.keycode < 0) {
-											properties.name = ControlButton.getSpecialButtons()[properties.keycode + 4].name;
+											properties.name = ControlButton.getSpecialButtons()[properties.keycode + specialArr.length].name;
 										}
 										properties.hidden = checkHidden.isChecked();
 										properties.keyindex = spinnerKeycode.getSelectedItemPosition();
