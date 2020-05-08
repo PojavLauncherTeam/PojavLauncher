@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 3
-        versionName "3.0.0_preview4_b4_20200105"
+        versionName "3.0.1_preview1_b4_20200108"
     }
 	
     buildTypes {

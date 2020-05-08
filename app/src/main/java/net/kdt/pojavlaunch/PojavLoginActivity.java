@@ -142,125 +142,147 @@ public class PojavLoginActivity extends MineActivity
 		protected Integer doInBackground(Void[] p1)
 		{
 			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {}
 
-			publishProgress("visible");
-
-			while (Build.VERSION.SDK_INT >= 23 && !isStorageAllowed()){
 				try {
-					revokeCount++;
-					if (revokeCount >= 3) {
-						Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
-						finish();
-					}
-					isPromptingGrant = true;
-					requestStoragePermission();
-					while (isPromptingGrant) {
-						Thread.sleep(200);
-					}
-					
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {}
-			}
-			
-			File openjdkZip = new File(Tools.MAIN_PATH, "OpenJDK.zip");
-		
-			oldOpenjdkFolder = new File(Tools.datapath, "openjdk");
-			newOpenjdkFolder = new File(Tools.datapath, "jre");
-			
-			if (!firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_OPENJDK, false)) {
-				// Install OpenJDK
-				publishProgress(null);
-				try {
+
+				publishProgress("visible");
+
+				while (Build.VERSION.SDK_INT >= 23 && !isStorageAllowed()){
 					try {
-						Tools.deleteRecursive(oldOpenjdkFolder);
-						Tools.deleteRecursive(newOpenjdkFolder);
-					} catch (Throwable th) {
-						// Nothing wrong if can't delete OpenJDK folders.
-					}
-					
-					// BEGIN download openjdk
-					URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.0-preview1/net.kdt.pojavlaunch.openjdkv2.zip");
-					URLConnection connection = url.openConnection();
-					connection.connect();
-					int fileLength = connection.getContentLength();
-					int count = 0;
-					
-					publishProgress("i0", getString(R.string.openjdk_install_download_main), Integer.toString(fileLength));
-					if (!openjdkZip.exists() || openjdkZip.length() != fileLength) {
-						InputStream input = new BufferedInputStream(url.openStream());
-						OutputStream output = new FileOutputStream(openjdkZip);
-						byte data[] = new byte[1024];
-						long total = 0;
-
-						while ((count = input.read(data)) != -1) {
-							total += count;
-							publishProgress(null, null, null, Long.toString(total));
-							output.write(data, 0, count);
+						revokeCount++;
+						if (revokeCount >= 3) {
+							Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
+							finish();
 						}
-						output.flush();
-						output.close();
-						input.close();
-					}
-					// END download openjdk
-					
-					publishProgress("i1", getString(R.string.openjdk_install_unpack_main));
-					
-					unpackOpenJDK(openjdkZip, false);
-					openjdkZip.delete();
-					
-					setPref(PREF_IS_INSTALLED_OPENJDK, true);
-				} catch (Throwable e) {
-					Tools.dialogOnUiThread(PojavLoginActivity.this, "Error! Check your internet connection", Log.getStackTraceString(e));
-					// Tools.showError(PojavLoginActivity.this, e, true);
+						isPromptingGrant = true;
+						requestStoragePermission();
+						while (isPromptingGrant) {
+							Thread.sleep(200);
+						}
+
+					} catch (InterruptedException e) {}
 				}
-			}
-			
-			// Patch OpenJDK
-			try {
-				Thread.sleep(500);
+
+				File openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK.zip");
+
+				oldOpenjdkFolder = new File(Tools.datapath, "openjdk");
+				newOpenjdkFolder = new File(Tools.datapath, "jre");
 				
-				String patchUrl = DownloadUtils.downloadString(Tools.mhomeUrl + "/openjdk_patch.txt");
-				if (!patchUrl.startsWith("null")) {
-					// Next if a patch is available.
-					publishProgress("i1", getString(R.string.openjdk_install_download_patch));
-					
-					openjdkZip = new File(Tools.MAIN_PATH, "OpenJDK_patch.zip");
-					
-					String latestOpenjdkPatchVer = patchUrl.replace(Tools.mhomeUrl + "/openjdk_patches/openjdk_patch", "");
-					int latestOpenjdkPatchVerInt = Integer.parseInt(latestOpenjdkPatchVer.substring(0, latestOpenjdkPatchVer.indexOf("_")));
-					
-					if (firstLaunchPrefs.getInt(PREF_OPENJDK_PATCH_VERSION, -1) < latestOpenjdkPatchVerInt) {
-						// Auto download new OpenJDK patch
-						DownloadUtils.downloadFile(patchUrl, openjdkZip);
+				SimpleShellProcess shell = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
 
-						unpackOpenJDK(openjdkZip, true);
-						openjdkZip.delete();
-						firstLaunchPrefs.edit().putInt(PREF_OPENJDK_PATCH_VERSION, latestOpenjdkPatchVerInt).commit();
+					@Override
+					public void onPrintLine(String text)
+					{
+						publishProgress(null, text);
+					}
+				});
+				
+				shell.initInputStream(PojavLoginActivity.this);
+				shell.writeToProcess("mkdir -p " + Tools.homeJreDir + "/usr/bin");
+				Tools.copyAssetFile(PojavLoginActivity.this, "busybox-arm64", Tools.homeJreDir + "/usr/bin", false);
+				
+				if (!firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_OPENJDK, false)) {
+					// Install OpenJDK
+					publishProgress(null);
+					try {
+						try {
+							Tools.deleteRecursive(oldOpenjdkFolder);
+							Tools.deleteRecursive(newOpenjdkFolder);
+						} catch (Throwable th) {
+							// Nothing wrong if can't delete OpenJDK folders.
+						}
+
+						// BEGIN download openjdk
+						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.1-preview1/net.kdt.pojavlaunch.openjdkv3.zip");
+						URLConnection connection = url.openConnection();
+						connection.connect();
+						int fileLength = connection.getContentLength();
+						int count = 0;
+
+						publishProgress("i0", getString(R.string.openjdk_install_download_main), Integer.toString(fileLength));
+						if (!openjdkTar.exists() || openjdkTar.length() != fileLength) {
+							InputStream input = new BufferedInputStream(url.openStream());
+							OutputStream output = new FileOutputStream(openjdkTar);
+							byte data[] = new byte[1024];
+							long total = 0;
+
+							while ((count = input.read(data)) != -1) {
+								total += count;
+								publishProgress(null, null, null, Long.toString(total));
+								output.write(data, 0, count);
+							}
+							output.flush();
+							output.close();
+							input.close();
+						}
+						// END download openjdk
+
+						publishProgress(null, getString(R.string.openjdk_install_unpack_main));
+
+						unpackOpenJDK(shell, openjdkTar, false);
+						openjdkTar.delete();
+
+						setPref(PREF_IS_INSTALLED_OPENJDK, true);
+					} catch (Throwable e) {
+						Tools.dialogOnUiThread(PojavLoginActivity.this, "Error! Check your internet connection", Log.getStackTraceString(e));
+						// Tools.showError(PojavLoginActivity.this, e, true);
 					}
 				}
+				
 
-				// Grant execute permission
-				Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
-			} catch (final Throwable th) {
-				// Tools.showError(PojavLoginActivity.this, th);
-				runOnUiThread(new Runnable(){
+				// Patch OpenJDK
+				try {
+					Thread.sleep(500);
 
-						@Override
-						public void run()
-						{
-							Toast.makeText(PojavLoginActivity.this, "Warning: " + th.getMessage(), Toast.LENGTH_LONG).show();
+					String patchUrl = DownloadUtils.downloadString(Tools.mhomeUrl + "/openjdk_patch.txt");
+					if (!patchUrl.startsWith("null")) {
+						// Next if a patch is available.
+						publishProgress("i1", getString(R.string.openjdk_install_download_patch));
+
+						openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK_patch.zip");
+
+						String latestOpenjdkPatchVer = patchUrl.replace(Tools.mhomeUrl + "/openjdk_patches/openjdk_patch", "");
+						int latestOpenjdkPatchVerInt = Integer.parseInt(latestOpenjdkPatchVer.substring(0, latestOpenjdkPatchVer.indexOf("_")));
+
+						if (firstLaunchPrefs.getInt(PREF_OPENJDK_PATCH_VERSION, -1) < latestOpenjdkPatchVerInt) {
+							// Auto download new OpenJDK patch
+							DownloadUtils.downloadFile(patchUrl, openjdkTar);
+
+							unpackOpenJDK(shell, openjdkTar, true);
+							openjdkTar.delete();
+							firstLaunchPrefs.edit().putInt(PREF_OPENJDK_PATCH_VERSION, latestOpenjdkPatchVerInt).commit();
 						}
-					});
+					}
+
+					// Grant execute permission
+					Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
+				} catch (final Throwable th) {
+					// Tools.showError(PojavLoginActivity.this, th);
+					runOnUiThread(new Runnable(){
+
+							@Override
+							public void run()
+							{
+								Toast.makeText(PojavLoginActivity.this, "Warning: " + th.getMessage(), Toast.LENGTH_LONG).show();
+							}
+						});
+				}
+
+				initMain();
+			} catch (Throwable th) {
+				Tools.showError(PojavLoginActivity.this, th);
 			}
 			
-			initMain();
-
 			return 0;
 		}
 		
-		private void unpackOpenJDK(File openjdkZip, boolean isPatch) throws Throwable {
-			ZipFile zis = new ZipFile(openjdkZip);
+		private void unpackOpenJDK(SimpleShellProcess shell, File openjdkTar, boolean isPatch) throws Throwable {
+			shell.writeToProcess(Tools.homeJreDir + "/usr/bin/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.homeJreDir);
+			
+			/*
+			ZipFile zis = new ZipFile(openjdkTar);
 			try {
 				int count = 0;
 				publishProgress("i0", null, Integer.toString(zis.size()));
@@ -299,7 +321,7 @@ public class PojavLoginActivity extends MineActivity
 			} finally {
 				zis.close();
 			}
-			
+			*/
 			try {
 				oldOpenjdkFolder.renameTo(newOpenjdkFolder);
 			} catch (Throwable th) {

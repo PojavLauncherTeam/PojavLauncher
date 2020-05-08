@@ -343,7 +343,7 @@ public class VncCanvasActivity extends AppCompatActivity
 								@Override
 								public void run() {
 									Toast.makeText(VncCanvasActivity.this, R.string.mcn_exit_title, Toast.LENGTH_SHORT).show();
-									finish();
+									// finish();
 								}
 							});
 						} else {
