@@ -90,4 +90,10 @@ public class SimpleShellProcess
 	public static interface OnPrintListener {
 		public void onPrintLine(String text);
 	}
+	
+	public static class NonZeroError extends Error {
+		public NonZeroError(int errorCode) {
+			super("Process exited with code " + errorCode);
+		}
+	}
 }

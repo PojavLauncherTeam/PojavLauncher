@@ -56,8 +56,10 @@
 			android:name=".prefs.LauncherPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
-		<!-- VNC Activity -->
+		<!-- VNC Activity, which the Main Activity -->
 		<activity
+			android:launchMode="standard"
+			android:multiprocess="true"
 			android:screenOrientation="sensorLandscape"
 			android:name="android.androidVNC.VncCanvasActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>

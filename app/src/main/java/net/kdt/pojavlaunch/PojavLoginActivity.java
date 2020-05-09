@@ -40,7 +40,7 @@ public class PojavLoginActivity extends MineActivity
 	private SharedPreferences firstLaunchPrefs;
 	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
-	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKV2Installed";
+	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKV3Installed";
 	private String PREF_OPENJDK_PATCH_VERSION = "latestOpenjdkPatchVersion";
 	
 	private boolean isInitCalled = false;
@@ -167,8 +167,10 @@ public class PojavLoginActivity extends MineActivity
 
 				File openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK.zip");
 
-				oldOpenjdkFolder = new File(Tools.datapath, "openjdk");
+				oldOpenjdkFolder = new File(Tools.datapath, "jre_old");
 				newOpenjdkFolder = new File(Tools.datapath, "jre");
+				
+				final StringBuilder shellLog = new StringBuilder();
 				
 				SimpleShellProcess shell = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
 
@@ -176,6 +178,7 @@ public class PojavLoginActivity extends MineActivity
 					public void onPrintLine(String text)
 					{
 						publishProgress(null, text);
+						shellLog.append(text);
 					}
 				});
 				
@@ -187,13 +190,6 @@ public class PojavLoginActivity extends MineActivity
 					// Install OpenJDK
 					publishProgress(null);
 					try {
-						try {
-							Tools.deleteRecursive(oldOpenjdkFolder);
-							Tools.deleteRecursive(newOpenjdkFolder);
-						} catch (Throwable th) {
-							// Nothing wrong if can't delete OpenJDK folders.
-						}
-
 						// BEGIN download openjdk
 						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.1-preview1/net.kdt.pojavlaunch.openjdkv3.zip");
 						URLConnection connection = url.openConnection();
@@ -218,15 +214,15 @@ public class PojavLoginActivity extends MineActivity
 							input.close();
 						}
 						// END download openjdk
-
+						
 						publishProgress(null, getString(R.string.openjdk_install_unpack_main));
-
+						shellLog.setLength(0);
 						unpackOpenJDK(shell, openjdkTar, false);
 						openjdkTar.delete();
 
 						setPref(PREF_IS_INSTALLED_OPENJDK, true);
 					} catch (Throwable e) {
-						Tools.dialogOnUiThread(PojavLoginActivity.this, "Error! Check your internet connection", Log.getStackTraceString(e));
+						Tools.dialogOnUiThread(PojavLoginActivity.this, "Error!", Log.getStackTraceString(e) + "\n\nShell log:\n" + shellLog);
 						// Tools.showError(PojavLoginActivity.this, e, true);
 					}
 				}
@@ -250,7 +246,9 @@ public class PojavLoginActivity extends MineActivity
 							// Auto download new OpenJDK patch
 							DownloadUtils.downloadFile(patchUrl, openjdkTar);
 
+							shellLog.setLength(0);
 							unpackOpenJDK(shell, openjdkTar, true);
+							
 							openjdkTar.delete();
 							firstLaunchPrefs.edit().putInt(PREF_OPENJDK_PATCH_VERSION, latestOpenjdkPatchVerInt).commit();
 						}
@@ -279,7 +277,39 @@ public class PojavLoginActivity extends MineActivity
 		}
 		
 		private void unpackOpenJDK(SimpleShellProcess shell, File openjdkTar, boolean isPatch) throws Throwable {
+			// Backup Old OpenJDK
+			shell.writeToProcess("mv " + newOpenjdkFolder.getAbsolutePath() + " " + oldOpenjdkFolder.getAbsolutePath());
+			
 			shell.writeToProcess(Tools.homeJreDir + "/usr/bin/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.homeJreDir);
+			File resultCodeFile = new File(getCacheDir(), "extractOpenJDKResult");
+			shell.writeToProcess("echo $? > " + resultCodeFile.getAbsolutePath());
+			try {
+				oldOpenjdkFolder.renameTo(newOpenjdkFolder);
+			} catch (Throwable th) {
+				// Ignore because may change to jre folder!
+			}
+			
+			try {
+				int exitCode = Integer.parseInt(Tools.read(resultCodeFile.getAbsolutePath()));
+				if (exitCode != 0) {
+					SimpleShellProcess.NonZeroError error = new SimpleShellProcess.NonZeroError(exitCode);
+					shell.writeToProcess("echo \"" + error.getMessage() + ".\"");
+					throw error;
+				}
+				
+				// Safety delete the old one if success
+				Tools.deleteRecursive(oldOpenjdkFolder);
+			} catch (Throwable th) {
+				// If failed, restore to the old one
+				Tools.deleteRecursive(newOpenjdkFolder);
+				shell.writeToProcess("mv " + oldOpenjdkFolder.getAbsolutePath() + " " + newOpenjdkFolder.getAbsolutePath());
+				
+				throw th;
+			}
+			
+			
+			
+			// return Integer.parseInt(Tools.read(resultCodeFile.getAbsolutePath()));
 			
 			/*
 			ZipFile zis = new ZipFile(openjdkTar);
@@ -322,11 +352,7 @@ public class PojavLoginActivity extends MineActivity
 				zis.close();
 			}
 			*/
-			try {
-				oldOpenjdkFolder.renameTo(newOpenjdkFolder);
-			} catch (Throwable th) {
-				// Ignore because may change to jre folder!
-			}
+			
 		}
 
 		@Override
@@ -395,7 +421,7 @@ public class PojavLoginActivity extends MineActivity
 	private void uiInit() {
 		setContentView(R.layout.launcher_login);
 
-		edit2 = (EditText) findViewById(R.id.launcherAccEmail);
+		edit2 = findViewById(R.id.launcherAccEmail);
 		edit3 = (EditText) findViewById(R.id.launcherAccPassword);
 		if(prb == null) prb = (ProgressBar) findViewById(R.id.launcherAccProgress);
 		
