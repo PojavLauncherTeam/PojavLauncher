@@ -53,7 +53,7 @@ public class ControlsLayout extends FrameLayout
 	}
 	
 	public void hideAllHandleViews() {
-		for (final ControlView view : mControlViewList) {
+		for (ControlView view : getControlViewArray()) {
 			view.getHandleView().hide();
 		}
 	}
@@ -70,7 +70,7 @@ public class ControlsLayout extends FrameLayout
 		mLayout = controlLayout;
 		
 		// Safety remove only ControlView views
-		for (ControlView view : mControlViewList) {
+		for (ControlView view : getControlViewArray()) {
 			removeView(view);
 		}
 		
@@ -82,7 +82,7 @@ public class ControlsLayout extends FrameLayout
 	}
 
 	public void setControlVisible(boolean visible) {
-		for (final ControlView ctrlView : mControlViewList) {
+		for (ControlView ctrlView : getControlViewArray()) {
 			if (ctrlView.getProperties().keycode == ControlButton.SPECIALBTN_TOGGLECTRL) continue;
 			ctrlView.setVisibility(visible ? (
 				(ctrlView.getProperties().hidden && !mCanModify) ?
@@ -95,7 +95,7 @@ public class ControlsLayout extends FrameLayout
 	}
 	
 	public void setupKeyEvent(final ControlListener listener) {
-		for (final ControlView ctrlView : mControlViewList) {
+		for (final ControlView ctrlView : getControlViewArray()) {
 			if (ctrlView.getProperties().keycode < 0) continue;
 			ctrlView.setOnTouchListener(new View.OnTouchListener(){
 
@@ -149,7 +149,7 @@ public class ControlsLayout extends FrameLayout
 	
 	public void setModifiable(boolean z) {
 		mCanModify = z;
-		for (final ControlView view : mControlViewList) {
+		for (final ControlView view : getControlViewArray()) {
 			view.setModifiable(z);
 		}
 	}

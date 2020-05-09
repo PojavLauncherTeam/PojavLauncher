@@ -135,7 +135,7 @@ public class PojavLoginActivity extends MineActivity
 			startAle.getWindow().setGravity(Gravity.CENTER);
 		}
 		
-		private int revokeCount = -1;
+		private int deniedCount = -1;
 		private File oldOpenjdkFolder, newOpenjdkFolder;
 		@Override
 		protected Integer doInBackground(Void[] p1)
@@ -150,8 +150,8 @@ public class PojavLoginActivity extends MineActivity
 
 				while (Build.VERSION.SDK_INT >= 23 && !isStorageAllowed()){
 					try {
-						revokeCount++;
-						if (revokeCount >= 3) {
+						deniedCount++;
+						if (deniedCount >= 3) {
 							Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
 							finish();
 						}
@@ -168,6 +168,7 @@ public class PojavLoginActivity extends MineActivity
 
 				oldOpenjdkFolder = new File(Tools.datapath, "jre_old");
 				newOpenjdkFolder = new File(Tools.datapath, "jre");
+				newOpenjdkFolder.mkdir();
 				
 				final StringBuilder shellLog = new StringBuilder();
 				
@@ -216,7 +217,7 @@ public class PojavLoginActivity extends MineActivity
 						}
 						// END download openjdk
 						
-						publishProgress(null, getString(R.string.openjdk_install_unpack_main));
+						publishProgress("i1", getString(R.string.openjdk_install_unpack_main));
 						shellLog.setLength(0);
 
 						unpackOpenJDK(shellLog, shell, openjdkTar, false);
@@ -257,7 +258,7 @@ public class PojavLoginActivity extends MineActivity
 					}
 
 					// Grant execute permission
-					Runtime.getRuntime().exec("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
+					shell.writeToProcess("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
 				} catch (final Throwable th) {
 					// Tools.showError(PojavLoginActivity.this, th);
 					runOnUiThread(new Runnable(){
@@ -292,7 +293,7 @@ public class PojavLoginActivity extends MineActivity
 							shellLog.append(text);
 						}
 					// `Tools.datapath` instead of `Tools.homeJreDir` because tar.gz contains `jre` as root folder.
-					}, "sh -c \"" + Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath + "\"");
+					}, /* "/system/bin/sh -c " + */ Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath + "");
 				extractShell.initInputStream(PojavLoginActivity.this);
 				
 				int exitCode = extractShell.waitFor();
