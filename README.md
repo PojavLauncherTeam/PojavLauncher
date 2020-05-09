@@ -1,5 +1,5 @@
 # PojavLauncher
-A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11.<br>
+An open source Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11.<br>
 `gl4es` branch is the current development.
 
 ## iOS version?
@@ -48,8 +48,3 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - PRoot: [GNU GPLv2 License](https://github.com/termux/proot/blob/master/COPYING).<br>
 - TheQVD XVnc Pro: [GNU GPLv3 License](https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt).
 - LWJGL 2: [Legacy LWJGL License](http://legacy.lwjgl.org/license.php.html).<br>
-
-## Credits
-- [BoardwalkApp](https://github.com/BoardwalkApp) for original code.
-- pTitSeb and lunixbochs for [gl4es](https://github.com/pTitSeb/gl4es).
-- ...more (in-app).
