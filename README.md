@@ -1,6 +1,6 @@
 # PojavLauncher
 An open source Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11.<br>
-`gl4es` branch is the current development.
+`gl4es` and `v3_x11_openjdk` branch are the current development.
 
 ## iOS version?
 - Impossible for directly run. RoboVM is AOT Compiler. You could also try UTM with Android-x86.
