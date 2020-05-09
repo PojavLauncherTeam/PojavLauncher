@@ -183,15 +183,15 @@ public class PojavLoginActivity extends MineActivity
 				});
 				
 				shell.initInputStream(PojavLoginActivity.this);
-				shell.writeToProcess("mkdir -p " + Tools.homeJreDir + "/usr/bin");
-				Tools.copyAssetFile(PojavLoginActivity.this, "busybox-arm64", Tools.homeJreDir + "/usr/bin", false);
-				
 				if (!firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_OPENJDK, false)) {
 					// Install OpenJDK
 					publishProgress(null);
 					try {
+						shell.writeToProcess("mkdir -p " + Tools.homeJreDir + "/usr/bin");
+						Tools.copyAssetFile(PojavLoginActivity.this, "busybox-arm64", Tools.homeJreDir + "/usr/bin", "busybox", false);
+						
 						// BEGIN download openjdk
-						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.1-preview1/net.kdt.pojavlaunch.openjdkv3.tar.gz");
+						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/openjdk/net.kdt.pojavlaunch.openjdkv3.tar.gz");
 						URLConnection connection = url.openConnection();
 						connection.connect();
 						int fileLength = connection.getContentLength();
@@ -237,7 +237,7 @@ public class PojavLoginActivity extends MineActivity
 						// Next if a patch is available.
 						publishProgress("i1", getString(R.string.openjdk_install_download_patch));
 
-						openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK_patch.zip");
+						openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK_patch.tar.gz");
 
 						String latestOpenjdkPatchVer = patchUrl.replace(Tools.mhomeUrl + "/openjdk_patches/openjdk_patch", "");
 						int latestOpenjdkPatchVerInt = Integer.parseInt(latestOpenjdkPatchVer.substring(0, latestOpenjdkPatchVer.indexOf("_")));
@@ -281,8 +281,9 @@ public class PojavLoginActivity extends MineActivity
 			shell.writeToProcess("mv " + newOpenjdkFolder.getAbsolutePath() + " " + oldOpenjdkFolder.getAbsolutePath());
 			
 			shell.writeToProcess(Tools.homeJreDir + "/usr/bin/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.homeJreDir);
-			File resultCodeFile = new File(getCacheDir(), "extractOpenJDKResult");
-			shell.writeToProcess("echo $? > " + resultCodeFile.getAbsolutePath());
+			File resultCodeFile = new File(getCacheDir(), "extractOpenJDKResult.txt");
+			// resultCodeFile.createNewFile();
+			shell.writeToProcess("echo \"$?\" > " + resultCodeFile.getAbsolutePath());
 			try {
 				oldOpenjdkFolder.renameTo(newOpenjdkFolder);
 			} catch (Throwable th) {
@@ -290,6 +291,8 @@ public class PojavLoginActivity extends MineActivity
 			}
 			
 			try {
+				Thread.sleep(100);
+				
 				int exitCode = Integer.parseInt(Tools.read(resultCodeFile.getAbsolutePath()));
 				if (exitCode != 0) {
 					SimpleShellProcess.NonZeroError error = new SimpleShellProcess.NonZeroError(exitCode);
