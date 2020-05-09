@@ -29,100 +29,25 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - Device name
 - Android version 
 
-## Minecraft versions worked in PojavLauncher 2.4.2
-
-<table>
-	  <thead>
-		<tr>
-		  <th></th>
-		  <th align="center" colspan="7">Minecraft version</th>
-		</tr>
-		<tr>
-		  <th>Android</th>
-		  <th align="center">1.7.10</th>
-		  <th align="center">1.8</th>
-		  <th align="center">1.9</th>
-		  <th align="center">1.10</th>
-		  <th align="center">1.11</th>
-		  <th align="center">1.12</th>
-		  <th align="center">1.12.2</th>
-		</tr>
-	  </thead>
-	  <tbody>
-		<tr>
-		  <td>5.x</td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
-		</tr>
-		<tr>
-		  <td>6.0</td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
-		</tr>
-	  </tbody>
-	  <tbody>
-		<tr>
-		  <td>7.x</td>
-		  <td align="center">???</td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">No</a></td>
-		</tr>
-		<tr>
-		  <td>8.x</td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
-		</tr>
-	  </tbody>
-	  <tbody>
-		<tr>
-		  <td>9.0</td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
-		</tr>
-		<tr>
-		  <td>10.0</td>
-		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
-		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
-		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
-		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
-		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
-		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
-		</tr>
-	  </tbody>
-	</table>
-
-
 ## OptiFine worked in PojavLauncher 2.4.2
 |Android version  |  9.0 |???|???|Manually Android 10|9.0|
 |-----------------|------|---|---|-----|-----|
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
 |OptiFine         |OptiFine_1.7.10_HD_U_E7|???|???|OptiFine_1.10_HD_U_H5|OptiFine_1.11_HD_U_F5|
 |Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://youtu.be/TJeJcPFgzcI)|[Worked (with 1 hack)](https://youtu.be/eIawM9UmQ88)
+
+## License
+- This launcher and Boardwalk are licensed under (https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE)[Apache License 2.0].
+
+## Third party licenses
+- LegacyLauncher: (unknown license).<br>
+- Android Support Libraries & DX Dexer: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
+- gl4es: [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
+- BusyBox: [GNU GPLv2 License](https://busybox.net/license.html).<br>
+- OpenJDK: [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
+- PRoot: [GNU GPLv2 License](https://github.com/termux/proot/blob/master/COPYING).<br>
+- TheQVD XVnc Pro: [GNU GPLv3 License](https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt).
+- LWJGL 2: [Legacy LWJGL License](http://legacy.lwjgl.org/license.php.html).<br>
 
 ## Credits
 - [BoardwalkApp](https://github.com/BoardwalkApp) for original code.
