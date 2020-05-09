@@ -25,7 +25,6 @@ import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.util.*;
 import java.net.*;
 import com.kdt.mcgui.*;
-import java.util.zip.*;
 
 public class PojavLoginActivity extends MineActivity
 {
@@ -165,7 +164,7 @@ public class PojavLoginActivity extends MineActivity
 					} catch (InterruptedException e) {}
 				}
 
-				File openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK.zip");
+				File openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK.tar.gz");
 
 				oldOpenjdkFolder = new File(Tools.datapath, "jre_old");
 				newOpenjdkFolder = new File(Tools.datapath, "jre");
@@ -187,8 +186,10 @@ public class PojavLoginActivity extends MineActivity
 					// Install OpenJDK
 					publishProgress(null);
 					try {
-						shell.writeToProcess("mkdir -p " + Tools.homeJreDir + "/usr/bin");
-						Tools.copyAssetFile(PojavLoginActivity.this, "busybox-arm64", Tools.homeJreDir + "/usr/bin", "busybox", false);
+						shell.writeToProcess("mkdir " + Tools.worksDir);
+						Tools.copyAssetFile(PojavLoginActivity.this, "busybox-arm64", Tools.worksDir, "busybox", false);
+						shell.writeToProcess("chmod 700 " + Tools.worksDir + "/busybox");
+						// shell.writeToProcess("export PATH=$PATH:" + Tools.worksDir);
 						
 						// BEGIN download openjdk
 						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/openjdk/net.kdt.pojavlaunch.openjdkv3.tar.gz");
@@ -217,7 +218,8 @@ public class PojavLoginActivity extends MineActivity
 						
 						publishProgress(null, getString(R.string.openjdk_install_unpack_main));
 						shellLog.setLength(0);
-						unpackOpenJDK(shell, openjdkTar, false);
+
+						unpackOpenJDK(shellLog, shell, openjdkTar, false);
 						openjdkTar.delete();
 
 						setPref(PREF_IS_INSTALLED_OPENJDK, true);
@@ -247,7 +249,7 @@ public class PojavLoginActivity extends MineActivity
 							DownloadUtils.downloadFile(patchUrl, openjdkTar);
 
 							shellLog.setLength(0);
-							unpackOpenJDK(shell, openjdkTar, true);
+							unpackOpenJDK(shellLog, shell, openjdkTar, true);
 							
 							openjdkTar.delete();
 							firstLaunchPrefs.edit().putInt(PREF_OPENJDK_PATCH_VERSION, latestOpenjdkPatchVerInt).commit();
@@ -276,24 +278,24 @@ public class PojavLoginActivity extends MineActivity
 			return 0;
 		}
 		
-		private void unpackOpenJDK(SimpleShellProcess shell, File openjdkTar, boolean isPatch) throws Throwable {
+		private void unpackOpenJDK(final StringBuilder shellLog, SimpleShellProcess shell, File openjdkTar, boolean isPatch) throws Throwable {
 			// Backup Old OpenJDK
 			shell.writeToProcess("mv " + newOpenjdkFolder.getAbsolutePath() + " " + oldOpenjdkFolder.getAbsolutePath());
-			
-			shell.writeToProcess(Tools.homeJreDir + "/usr/bin/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.homeJreDir);
-			File resultCodeFile = new File(getCacheDir(), "extractOpenJDKResult.txt");
-			// resultCodeFile.createNewFile();
-			shell.writeToProcess("echo \"$?\" > " + resultCodeFile.getAbsolutePath());
+		
 			try {
-				oldOpenjdkFolder.renameTo(newOpenjdkFolder);
-			} catch (Throwable th) {
-				// Ignore because may change to jre folder!
-			}
-			
-			try {
-				Thread.sleep(100);
+				SimpleShellProcess extractShell = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
+
+						@Override
+						public void onPrintLine(String text)
+						{
+							publishProgress(null, text);
+							shellLog.append(text);
+						}
+					// `Tools.datapath` instead of `Tools.homeJreDir` because tar.gz contains `jre` as root folder.
+					}, Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath);
+				extractShell.initInputStream(PojavLoginActivity.this);
 				
-				int exitCode = Integer.parseInt(Tools.read(resultCodeFile.getAbsolutePath()));
+				int exitCode = extractShell.waitFor();
 				if (exitCode != 0) {
 					SimpleShellProcess.NonZeroError error = new SimpleShellProcess.NonZeroError(exitCode);
 					shell.writeToProcess("echo \"" + error.getMessage() + ".\"");
@@ -309,8 +311,6 @@ public class PojavLoginActivity extends MineActivity
 				
 				throw th;
 			}
-			
-			
 			
 			// return Integer.parseInt(Tools.read(resultCodeFile.getAbsolutePath()));
 			
