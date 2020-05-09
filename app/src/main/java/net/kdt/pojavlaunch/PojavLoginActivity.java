@@ -292,7 +292,7 @@ public class PojavLoginActivity extends MineActivity
 							shellLog.append(text);
 						}
 					// `Tools.datapath` instead of `Tools.homeJreDir` because tar.gz contains `jre` as root folder.
-					}, Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath);
+					}, "sh -c \"" + Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath + "\"");
 				extractShell.initInputStream(PojavLoginActivity.this);
 				
 				int exitCode = extractShell.waitFor();
