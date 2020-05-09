@@ -9,25 +9,8 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 - Some Huawei devices can't run Minecraft or OptiFine.
 - Can't run multiple versions at same time.
 
-## FAQ
-### • Installing OptiFine?
-Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
-
-### • Installing Forge?
-Not implemented yet.
-
-### • Unable to drag item in inventory?
-Disable touchscreen mode. Open Minecraft Settings -> Controls -> Touchscreen Mode: Toggle to OFF.
-
-### • Unable to install Minecraft 1.9 or above, can't convert library `net.java.dev.jna`
-Increase max DX references. Launcher Options -> Settings -> Increase max DX references to 8k.
-
-### • Other bugs or still not working?
-#### Report an issue with
-- Full error log: press **Show more** and copy.
-#### If it isn't a Minecraft crash
-- Device name
-- Android version 
+## Frequently asked questions
+- [See here](https://github.com/khanhduytran0/PojavLauncher/wiki/Frequently-asked-questions).
 
 ## OptiFine worked in PojavLauncher 2.4.2
 |Android version  |  9.0 |???|???|Manually Android 10|9.0|
