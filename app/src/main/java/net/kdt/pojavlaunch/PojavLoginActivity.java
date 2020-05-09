@@ -191,7 +191,7 @@ public class PojavLoginActivity extends MineActivity
 					publishProgress(null);
 					try {
 						// BEGIN download openjdk
-						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.1-preview1/net.kdt.pojavlaunch.openjdkv3.zip");
+						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/v3.0.1_preview1/net.kdt.pojavlaunch.openjdkv3.zip");
 						URLConnection connection = url.openConnection();
 						connection.connect();
 						int fileLength = connection.getContentLength();

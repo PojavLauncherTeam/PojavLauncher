@@ -14,8 +14,10 @@ public class ControlButton implements Cloneable
 	public static int pixelOf50dp;
 	public static int pixelOf80dp;
 	
-	public static final int SPECIALBTN_KEYBOARD = 0;
-	public static final int SPECIALBTN_TOGGLECTRL = 1;
+	public static final int SPECIALBTN_KEYBOARD = -1;
+	public static final int SPECIALBTN_TOGGLECTRL = -2;
+	public static final int SPECIALBTN_MOUSEPRI = -3;
+	public static final int SPECIALBTN_MOUSESEC = -4;
 	
 	private static ControlButton[] SPECIAL_BUTTONS;
 	private static String[] SPECIAL_BUTTON_NAME_ARRAY;
@@ -23,10 +25,10 @@ public class ControlButton implements Cloneable
 	public static ControlButton[] getSpecialButtons(){
 		if (SPECIAL_BUTTONS == null) {
 			SPECIAL_BUTTONS = new ControlButton[]{
-				new ControlButton("Keyboard", -1, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, pixelOf80dp, pixelOf30dp),
-				new ControlButton("GUI", -2, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
-				new ControlButton("PRI", -3, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
-				new ControlButton("SEC", -4, pixelOf2dp * 3 + pixelOf50dp * 2, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2)
+				new ControlButton("Keyboard", SPECIALBTN_KEYBOARD, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, pixelOf80dp, pixelOf30dp),
+				new ControlButton("GUI", SPECIALBTN_TOGGLECTRL, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
+				new ControlButton("PRI", SPECIALBTN_MOUSEPRI, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
+				new ControlButton("SEC", SPECIALBTN_MOUSESEC, pixelOf2dp * 3 + pixelOf50dp * 2, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2)
 			};
 		}
 		

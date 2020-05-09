@@ -48,6 +48,7 @@ import com.theqvd.android.xpro.Config;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import com.google.gson.*;
 import org.lwjgl.opengl.*;
+import android.view.inputmethod.*;
 
 public class VncCanvasActivity extends AppCompatActivity
 {
@@ -130,6 +131,7 @@ public class VncCanvasActivity extends AppCompatActivity
 		}
 		
 		mControlLayout = findViewById(R.id.main_controllayout);
+		mControlLayout.setModifiable(false);
 		if (modPath == null) {
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 			specialButtons[0].specialButtonListener = new View.OnClickListener(){
@@ -159,6 +161,25 @@ public class VncCanvasActivity extends AppCompatActivity
 			};
 			
 			mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
+			mControlLayout.setControlVisible(false);
+			boolean controlVisible = false;
+			for (ControlView specialView : mControlLayout.getSpecialControlViewArray()) {
+				switch (specialView.getProperties().keycode) {
+					case ControlButton.SPECIALBTN_KEYBOARD: 
+						InputMethodManager inputMgr = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+						inputMgr.toggleSoftInput(0, 0);
+						break;
+					case ControlButton.SPECIALBTN_TOGGLECTRL:
+						controlVisible = !controlVisible;
+						mControlLayout.setControlVisible(controlVisible);
+						break;
+					case ControlButton.SPECIALBTN_MOUSEPRI: 
+						break;
+					case ControlButton.SPECIALBTN_MOUSESEC: 
+						break;
+				}
+			}
+			
 			mControlLayout.setupKeyEvent(new ControlsLayout.ControlListener(){
 					@Override
 					public void onKey(MetaKeyBase vncKey, boolean down)

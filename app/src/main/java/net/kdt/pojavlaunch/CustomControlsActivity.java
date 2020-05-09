@@ -85,8 +85,8 @@ public class CustomControlsActivity extends AppCompatActivity
 		}
 		
 		ctrlLayout.setActivity(this);
-		ctrlLayout.loadLayout(mCtrl);
 		ctrlLayout.setModifiable(true);
+		ctrlLayout.loadLayout(mCtrl);
 	}
 
 	@Override

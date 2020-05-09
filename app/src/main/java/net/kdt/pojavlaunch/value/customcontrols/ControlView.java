@@ -19,16 +19,14 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 	private boolean mCanModify = false;
 	private boolean mCanTriggerLongClick = true;
 	
-	public ControlView(Context ctx, ControlButton properties) {
+	public ControlView(Context ctx, ControlButton properties, boolean modifiable) {
 		super(ctx);
 		
 		mGestureDetector = new GestureDetector(ctx, new SingleTapConfirm());
 		
 		setBackgroundResource(R.drawable.control_button);
 		
-		setOnLongClickListener(this);
-		setOnTouchListener(this);
-		
+		setModifiable(modifiable);
 		setProperties(properties);
 		
 		mHandleView = new SelectionEndHandleView(this);
@@ -42,10 +40,79 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 		return mProperties;
 	}
 	
+	@Override
+	public boolean onLongClick(View p1)
+	{
+		if (!mCanTriggerLongClick || !mCanModify) return false;
+
+		if (mHandleView.isShowing()) {
+			mHandleView.hide();
+		} else {
+			if (getParent() != null) {
+				((ControlsLayout) getParent()).hideAllHandleViews();
+			}
+			mHandleView.show();
+		}
+		return true;
+	}
+
+	private float moveX, moveY;
+	private float downX, downY;
+	@Override
+	public boolean onTouch(View view, MotionEvent event) {
+		if (!mCanModify) {
+			mCanTriggerLongClick = false;
+			return false;
+		}
+
+		switch (event.getActionMasked()) {
+			case MotionEvent.ACTION_DOWN:
+				mCanTriggerLongClick = true;
+				downX = event.getX();
+				downY = event.getY();
+				break;
+			case MotionEvent.ACTION_UP:
+			case MotionEvent.ACTION_MOVE:
+				mCanTriggerLongClick = false;
+				moveX += event.getX() - downX;
+				moveY += event.getY() - downY;
+
+				setTranslationX(moveX);
+				setTranslationY(moveY);
+
+				setModified(true);
+				break;
+		}
+
+		return false;
+	}
+	
 	public void setActivity(CustomControlsActivity activity) {
 		mActivity = activity;
 	}
+	
+	@Override
+	public void setLayoutParams(ViewGroup.LayoutParams params)
+	{
+		super.setLayoutParams(params);
 
+		mProperties.width = params.width;
+		mProperties.height = params.height;
+
+		setModified(true);
+	}
+
+	public void setModifiable(boolean z) {
+		mCanModify = z;
+		if (z) {
+			setOnLongClickListener(this);
+			setOnTouchListener(this);
+		} else {
+			setOnLongClickListener(null);
+			setOnTouchListener(null);
+		}
+	}
+	
 	public void setModified(boolean z) {
 		if (mActivity != null) mActivity.isModified = z;
 	}
@@ -68,17 +135,6 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 	}
 
 	@Override
-	public void setLayoutParams(ViewGroup.LayoutParams params)
-	{
-		super.setLayoutParams(params);
-		
-		mProperties.width = params.width;
-		mProperties.height = params.height;
-		
-		setModified(true);
-	}
-	
-	@Override
 	public void setTranslationX(float x)
 	{
 		super.setTranslationX(x);
@@ -95,59 +151,8 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 		setProperties(mProperties);
 	}
 
-	@Override
-	public boolean onLongClick(View p1)
-	{
-		if (!mCanTriggerLongClick || !mCanModify) return false;
-
-		if (mHandleView.isShowing()) {
-			mHandleView.hide();
-		} else {
-			if (getParent() != null) {
-				((ControlsLayout) getParent()).hideAllHandleViews();
-			}
-			mHandleView.show();
-		}
-		return true;
-	}
-	
-	private float moveX, moveY;
-	private float downX, downY;
-	@Override
-	public boolean onTouch(View view, MotionEvent event) {
-		if (!mCanModify) {
-			mCanTriggerLongClick = false;
-			return false;
-		}
-		
-		switch (event.getActionMasked()) {
-			case MotionEvent.ACTION_DOWN:
-				mCanTriggerLongClick = true;
-				downX = event.getX();
-				downY = event.getY();
-				break;
-			case MotionEvent.ACTION_UP:
-			case MotionEvent.ACTION_MOVE:
-				mCanTriggerLongClick = false;
-				moveX += event.getX() - downX;
-				moveY += event.getY() - downY;
-				
-				setTranslationX(moveX);
-				setTranslationY(moveY);
-				
-				setModified(true);
-				break;
-		}
-		
-		return false;
-	}
-	
-	public void setModifiable(boolean z) {
-		mCanModify = z;
-	}
-	
 	public ControlView clone() {
-		ControlView cloneObj = new ControlView(getContext(), mProperties);
+		ControlView cloneObj = new ControlView(getContext(), mProperties, mCanModify);
 		cloneObj.setTranslationX(getTranslationX());
 		cloneObj.setTranslationY(getTranslationY());
 		cloneObj.setTranslationZ(getTranslationZ());

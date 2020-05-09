@@ -7,26 +7,54 @@ import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
 import android.support.v7.app.*;
 import android.androidVNC.*;
+import java.util.*;
 
 public class ControlsLayout extends FrameLayout
 {
 	private boolean mCanModify;
 	private CustomControls mLayout;
 	private CustomControlsActivity mActivity;
+	private List<ControlView> mControlViewList;
+	
 	public ControlsLayout(Context ctx) {
-		super(ctx);
+		this(ctx, null);
 	}
 	
 	public ControlsLayout(Context ctx, AttributeSet attrs) {
 		super(ctx, attrs);
+		mControlViewList = new ArrayList<ControlView>();
+	}
+
+	@Override
+	public void addView(View view) {
+		super.addView(view);
+		if (view instanceof ControlView) mControlViewList.add((ControlView) view);
+	}
+	
+	@Override
+	public void removeView(View view) {
+		super.removeView(view);
+		if (view instanceof ControlView) mControlViewList.remove((ControlView) view);
+	}
+	
+	public ControlView[] getControlViewArray() {
+		return mControlViewList.toArray(new ControlView[0]);
+	}
+
+	public ControlView[] getSpecialControlViewArray() {
+		List<ControlView> specialViewList = new ArrayList<ControlView>();
+		for (ControlView view : getControlViewArray()) {
+			if (view.getProperties().keycode < 0) {
+				specialViewList.add(view);
+			}
+		}
+		
+		return specialViewList.toArray(new ControlView[0]);
 	}
 	
 	public void hideAllHandleViews() {
-		for (int i = 0; i < getChildCount(); i++) {
-			View view = getChildAt(i);
-			if (view instanceof ControlView) {
-				((ControlView) view).getHandleView().hide();
-			}
+		for (final ControlView view : mControlViewList) {
+			view.getHandleView().hide();
 		}
 	}
 	
@@ -40,23 +68,36 @@ public class ControlsLayout extends FrameLayout
 	
 	public void loadLayout(CustomControls controlLayout) {
 		mLayout = controlLayout;
-		removeAllViews();
+		
+		// Safety remove only ControlView views
+		for (ControlView view : mControlViewList) {
+			removeView(view);
+		}
+		
 		for (ControlButton button : controlLayout.button) {
-			if (button.keycode < 0) {
-				// Set special button
-			}
 			addControlView(button);
 		}
 
 		setModified(false);
 	}
 
+	public void setControlVisible(boolean visible) {
+		for (final ControlView ctrlView : mControlViewList) {
+			if (ctrlView.getProperties().keycode == ControlButton.SPECIALBTN_TOGGLECTRL) continue;
+			ctrlView.setVisibility(visible ? (
+				(ctrlView.getProperties().hidden && !mCanModify) ?
+					View.INVISIBLE :
+					View.VISIBLE
+				) :
+				View.GONE
+			);
+		}
+	}
+	
 	public void setupKeyEvent(final ControlListener listener) {
-		for (int i = 0; i < getChildCount(); i++) {
-			View v = getChildAt(i);
-			if (v instanceof ControlView) {
-				final ControlView ctrlView = (ControlView) v;
-				ctrlView.setOnTouchListener(new View.OnTouchListener(){
+		for (final ControlView ctrlView : mControlViewList) {
+			if (ctrlView.getProperties().keycode < 0) continue;
+			ctrlView.setOnTouchListener(new View.OnTouchListener(){
 
 					@Override
 					public boolean onTouch(View view, MotionEvent event)
@@ -66,7 +107,7 @@ public class ControlsLayout extends FrameLayout
 							case MotionEvent.ACTION_DOWN: isDown = true; break;
 							case MotionEvent.ACTION_UP: isDown = false; break;
 						}
-						
+
 						for (int i = 0; i < MetaKeyBean.keysByKeyCode.size(); i++) {
 							MetaKeyBase key = MetaKeyBean.keysByKeyCode.valueAt(i);
 							if (ctrlView.getProperties().keycode == key.keyEvent) {
@@ -76,7 +117,6 @@ public class ControlsLayout extends FrameLayout
 						return false;
 					}
 				});
-			}
 		}
 	}
 	
@@ -86,10 +126,8 @@ public class ControlsLayout extends FrameLayout
 	}
 	
 	private void addControlView(ControlButton controlButton) {
-		final ControlView view = new ControlView(getContext(), controlButton);
-		view.setModifiable(mCanModify);
+		final ControlView view = new ControlView(getContext(), controlButton, mCanModify);
 		addView(view);
-
 		setModified(true);
 	}
 	
@@ -97,7 +135,6 @@ public class ControlsLayout extends FrameLayout
 		mLayout.button.remove(controlButton.getProperties());
 		controlButton.setVisibility(View.GONE);
 		removeView(controlButton);
-		
 		setModified(true);
 	}
 	
@@ -112,16 +149,13 @@ public class ControlsLayout extends FrameLayout
 	
 	public void setModifiable(boolean z) {
 		mCanModify = z;
-		for (int i = 0; i < getChildCount(); i++) {
-			View v = getChildAt(i);
-			if (v instanceof ControlView) {
-				((ControlView) v).setModifiable(z);
-			}
+		for (final ControlView view : mControlViewList) {
+			view.setModifiable(z);
 		}
 	}
 	
 	private void setModified(boolean z) {
-		if (mActivity != null) mActivity.isModified = z;
+		if (mActivity != null && mCanModify) mActivity.isModified = z;
 	}
 	
 	public static interface ControlListener {
