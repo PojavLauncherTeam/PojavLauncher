@@ -55,9 +55,11 @@ public class ControlButton implements Cloneable
 	public int keycode;
 	public int keyindex;
 	public boolean hidden;
+	/*
 	public boolean holdCtrl;
 	public boolean holdAlt;
 	public boolean holdShift;
+	*/
 	public Object specialButtonListener;
 	// public boolean hold
 	
@@ -89,13 +91,24 @@ public class ControlButton implements Cloneable
 		this.width = width;
 		this.height = height;
 	}
+
+	public ControlButton(String name, int keycode, int keyindex, boolean hidden, float x, float y, int width, int height) {
+		this.name = name;
+		this.keycode = keycode;
+		this.keyindex = keyindex;
+		this.hidden = hidden;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
 	
 	public void execute(MainActivity act, boolean isDown) {
 		act.sendKeyPress(keycode, isDown);
 	}
 	
 	public ControlButton clone() {
-		return new ControlButton(name, keycode, x, y, width, height);
+		return new ControlButton(name, keycode, keyindex, hidden, x, y, width, height);
 	}
 	
 	public static interface TouchListener {

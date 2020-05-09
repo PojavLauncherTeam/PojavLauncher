@@ -96,7 +96,7 @@ public class ControlsLayout extends FrameLayout
 	
 	public void setupKeyEvent(final ControlListener listener) {
 		for (final ControlView ctrlView : getControlViewArray()) {
-			if (ctrlView.getProperties().keycode < 0) continue;
+			if (ctrlView.getProperties().keyindex < 4) continue;
 			ctrlView.setOnTouchListener(new View.OnTouchListener(){
 
 					@Override

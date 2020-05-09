@@ -140,7 +140,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						adapter.addAll(Android2LWJGLKeycode.generateKeyName());
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
-						if (properties.keycode < 0) {
+						if (properties.keyindex < 4) {
 							spinnerKeycode.setSelection(properties.keyindex);
 						} else {
 							spinnerKeycode.setSelection(Android2LWJGLKeycode.getIndexByLWJGLKey(properties.keyindex + specialArr.length));
@@ -169,13 +169,15 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									if (editName.getText().toString().isEmpty()) {
 										editName.setError(view.getResources().getString(R.string.global_error_field_empty));
 									} else {
-										properties.keycode = Android2LWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - specialArr.length;
-										properties.name = editName.getText().toString();
-										if (properties.keycode < 0) {
-											properties.name = ControlButton.getSpecialButtons()[properties.keycode + specialArr.length].name;
-										}
-										properties.hidden = checkHidden.isChecked();
+										properties.keycode = Android2LWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition());
 										properties.keyindex = spinnerKeycode.getSelectedItemPosition();
+										properties.hidden = checkHidden.isChecked();
+										properties.name = editName.getText().toString();
+										
+										if (properties.keyindex < 4) {
+											properties.keycode = properties.keyindex - 4;
+											properties.name = ControlButton.getSpecialButtons()[properties.keyindex].name;
+										}
 
 										mHandleView.mView.updateProperties();
 										mHandleView.mView.setModified(true);
