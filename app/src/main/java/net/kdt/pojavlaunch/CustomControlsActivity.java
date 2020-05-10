@@ -53,7 +53,7 @@ public class CustomControlsActivity extends AppCompatActivity
 							actionLoad();
 							break;
 						case R.id.menu_ctrl_add:
-							ctrlLayout.addControlButton(new ControlButton("New", Keyboard.CHAR_NONE, 100, 100));
+							ctrlLayout.addControlButton(new ControlButton("New", KeyEvent.KEYCODE_UNKNOWN, 100, 100));
 							break;
 						case R.id.menu_ctrl_selectdefault:
 							dialogSelectDefaultCtrl();
@@ -71,6 +71,9 @@ public class CustomControlsActivity extends AppCompatActivity
 		
 		mCtrl = new CustomControls();
 
+		ctrlLayout.setActivity(this);
+		ctrlLayout.setModifiable(true);
+		
 		// Generate and save default control
 		try {
 			generateDefaultControlMap();
@@ -83,8 +86,6 @@ public class CustomControlsActivity extends AppCompatActivity
 			loadControl(defaultControl);
 		}
 		
-		ctrlLayout.setActivity(this);
-		ctrlLayout.setModifiable(true);
 		ctrlLayout.loadLayout(mCtrl);
 	}
 
@@ -226,19 +227,21 @@ public class CustomControlsActivity extends AppCompatActivity
 		btn.add(ControlButton.getSpecialButtons()[2].clone()); // Primary Mouse button
 		btn.add(ControlButton.getSpecialButtons()[3].clone()); // Secondary Mouse button
 		
-		btn.add(new ControlButton(this, R.string.control_debug, Keyboard.KEY_F3, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
-		btn.add(new ControlButton(this, R.string.control_chat, Keyboard.KEY_T, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf80dp, ControlButton.pixelOf2dp, false)); 
-		btn.add(new ControlButton(this, R.string.control_listplayers, Keyboard.KEY_TAB, ControlButton.pixelOf2dp * 4 + ControlButton.pixelOf80dp * 3, ControlButton.pixelOf2dp, false));
-		btn.add(new ControlButton(this, R.string.control_thirdperson, Keyboard.KEY_F5, ControlButton.pixelOf2dp, ControlButton.pixelOf30dp + ControlButton.pixelOf2dp, false));
+		btn.add(new ControlButton(this, R.string.control_debug, KeyEvent.KEYCODE_F3, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
+		btn.add(new ControlButton(this, R.string.control_chat, KeyEvent.KEYCODE_T, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf80dp, ControlButton.pixelOf2dp, false)); 
+		btn.add(new ControlButton(this, R.string.control_listplayers, KeyEvent.KEYCODE_TAB, ControlButton.pixelOf2dp * 4 + ControlButton.pixelOf80dp * 3, ControlButton.pixelOf2dp, false));
+		btn.add(new ControlButton(this, R.string.control_thirdperson, KeyEvent.KEYCODE_F5, ControlButton.pixelOf2dp, ControlButton.pixelOf30dp + ControlButton.pixelOf2dp, false));
 		
-		btn.add(new ControlButton(this, R.string.control_up, Keyboard.KEY_W, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 3, true));
-		btn.add(new ControlButton(this, R.string.control_left, Keyboard.KEY_A, ControlButton.pixelOf2dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true)); 
-		btn.add(new ControlButton(this, R.string.control_down, Keyboard.KEY_S, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp, true));
-		btn.add(new ControlButton(this, R.string.control_right, Keyboard.KEY_D, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		btn.add(new ControlButton(this, R.string.control_up, KeyEvent.KEYCODE_W, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 3, true));
+		btn.add(new ControlButton(this, R.string.control_left, KeyEvent.KEYCODE_A, ControlButton.pixelOf2dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true)); 
+		btn.add(new ControlButton(this, R.string.control_down, KeyEvent.KEYCODE_S, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp, true));
+		btn.add(new ControlButton(this, R.string.control_right, KeyEvent.KEYCODE_D, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
 
-		btn.add(new ControlButton(this, R.string.control_inventory, Keyboard.KEY_E, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp, true));
-		btn.add(new ControlButton(this, R.string.control_shift, Keyboard.KEY_LSHIFT, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
-		btn.add(new ControlButton(this, R.string.control_jump, Keyboard.KEY_SPACE, AndroidDisplay.windowWidth - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		btn.add(new ControlButton(this, R.string.control_inventory, KeyEvent.KEYCODE_E, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp, true));
+		btn.add(new ControlButton(this, R.string.control_shift, KeyEvent.KEYCODE_SHIFT_LEFT, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		btn.add(new ControlButton(this, R.string.control_jump, KeyEvent.KEYCODE_SPACE, AndroidDisplay.windowWidth - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		
+		ctrlLayout.loadLayout(mCtrl);
 		
 		// Save to default control json
 		doSaveCtrl("default");

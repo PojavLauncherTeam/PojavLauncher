@@ -64,7 +64,7 @@ public class ControlButton implements Cloneable
 	// public boolean hold
 	
 	public ControlButton() {
-		this("", Keyboard.CHAR_NONE, 0, 0);
+		this("", KeyEvent.KEYCODE_UNKNOWN, 0, 0);
 	}
 
 	public ControlButton(String name, int keycode) {
