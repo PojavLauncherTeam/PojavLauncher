@@ -44,8 +44,8 @@
 	<!-- Warning -->
 	<string name="warning_title">Cảnh báo</string>
 	<string name="warning_msg">This v3 is experimental and may not worked. If you are not a developer, go back to v2!</string>
-	<string name="warning_noshowagain">Don\'t show again</string>
-	<string name="warning_action_tryanyway">Try anyway</string>
+	<string name="warning_noshowagain">Không hiện nữa</string>
+	<string name="warning_action_tryanyway">Vẫn thử</string>
 	<string name="warning_action_exit">Thoát</string>
 	<string name="warning_remove_account">This account will be removed!</string>
 
@@ -54,13 +54,13 @@
 	<string name="alerttitle_installmod">Chọn một trình cài đặt mod</string>
 
 	<!-- Error messages -->
-	<string name="error_checklog">Error! Please check the log below: %s</string>
+	<string name="error_checklog">Lỗi! Please check the log below: %s</string>
 	<string name="error_no_version">Không có phiên bản!</string>
 	<string name="error_load_version">Unable to load version %s</string>
 	<string name="error_convert_lib">Unable to convert library %s</string>
 	<string name="error_convert_client">Unable to convert Minecraft %s</string>
-	<string name="error_show_more">Show more</string>
-	<string name="error_show_less">Show less</string>
+	<string name="error_show_more">Nhiều hơn</string>
+	<string name="error_show_less">Ít hơn</string>
 
 	<!-- Toast messages -->
 	<string name="toast_permission_denied">The read/write to storage permission is required!</string>
@@ -71,9 +71,9 @@
 	-->
 
 	<!-- MCLauncherActivity: Tabs -->
-	<string name="mcl_tab_news">Launcher news</string>
+	<string name="mcl_tab_news">Tin tức Launcher</string>
 	<string name="mcl_tab_console">Development console</string>
-	<string name="mcl_tab_crash">Crash log</string>
+	<string name="mcl_tab_crash">Nhật kí lỗi</string>
 
 	<!-- MCLauncherActivity: Strings -->
 	<string name="mcl_version_msg">Ready to play Minecraft %s</string>

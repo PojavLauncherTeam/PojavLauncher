@@ -20,7 +20,16 @@ public class PojavApplication extends Application
 			
 			Tools.usingVerName = thisApp.versionName;
 			Tools.usingVerCode = thisApp.versionCode;
-			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
+			String fileDataPath = getDir("files", MODE_PRIVATE).getParent();
+			/*
+			 * "/s" meaning:
+			 * - "/storage"
+			 * - "/sdcard"
+			 *
+			 */
+			if (fileDataPath.startsWith("/data/data") || !fileDataPath.startsWith("/s") && !fileDataPath.contains("storage") && !fileDataPath.contains("sdcard")) {
+				Tools.datapath = fileDataPath;
+			}
 			
 			LauncherPreferences.loadPreferences(this);
 
