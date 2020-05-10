@@ -84,12 +84,7 @@ public class ControlButton implements Cloneable
 	}
 	
 	public ControlButton(String name, int keycode, float x, float y, int width, int height) {
-		this.name = name;
-		this.keycode = keycode;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		this(name, keycode, Android2LWJGLKeycode.getIndexByAndroidKey(keycode), false, x, y, width, height);
 	}
 
 	public ControlButton(String name, int keycode, int keyindex, boolean hidden, float x, float y, int width, int height) {

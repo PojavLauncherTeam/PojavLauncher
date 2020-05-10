@@ -74,7 +74,6 @@ public class CustomControlsActivity extends AppCompatActivity
 		// Generate and save default control
 		try {
 			generateDefaultControlMap();
-			doSaveCtrl("default");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -220,7 +219,7 @@ public class CustomControlsActivity extends AppCompatActivity
 		}
 	}
 	
-	private void generateDefaultControlMap() {
+	private void generateDefaultControlMap() throws Exception {
 		List<ControlButton> btn = mCtrl.button;
 		btn.add(ControlButton.getSpecialButtons()[0].clone()); // Keyboard
 		btn.add(ControlButton.getSpecialButtons()[1].clone()); // GUI
@@ -240,5 +239,8 @@ public class CustomControlsActivity extends AppCompatActivity
 		btn.add(new ControlButton(this, R.string.control_inventory, Keyboard.KEY_E, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp, true));
 		btn.add(new ControlButton(this, R.string.control_shift, Keyboard.KEY_LSHIFT, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
 		btn.add(new ControlButton(this, R.string.control_jump, Keyboard.KEY_SPACE, AndroidDisplay.windowWidth - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 2, AndroidDisplay.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		
+		// Save to default control json
+		doSaveCtrl("default");
 	}
 }
