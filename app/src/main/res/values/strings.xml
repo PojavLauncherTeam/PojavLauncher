@@ -183,7 +183,8 @@
 
 	<string name="control_more3"></string>
 	<string name="control_more4"></string>
-	
+
+	<string name="customctrl_error">Unable to load control file %s</string>
 	<string name="customctrl_keyname">Keycode</string>
 	<string name="customctrl_specialkey">Special Key</string>
 	<string name="customctrl_hidden">Hidden</string>

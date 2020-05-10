@@ -60,7 +60,7 @@ public class ControlButton implements Cloneable
 	public boolean holdAlt;
 	public boolean holdShift;
 	*/
-	public Object specialButtonListener;
+	// public Object specialButtonListener;
 	// public boolean hold
 	
 	public ControlButton() {
@@ -88,8 +88,9 @@ public class ControlButton implements Cloneable
 	}
 
 	public ControlButton(String name, int keycode, int keyindex, boolean hidden, float x, float y, int width, int height) {
+		super();
 		this.name = name;
-		this.keycode = keycode;
+		this.keycode = keycode + 4;
 		this.keyindex = keyindex;
 		this.hidden = hidden;
 		this.x = x;

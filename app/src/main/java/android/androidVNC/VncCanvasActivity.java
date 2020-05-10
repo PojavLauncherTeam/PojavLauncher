@@ -133,36 +133,9 @@ public class VncCanvasActivity extends AppCompatActivity
 		mControlLayout = findViewById(R.id.main_controllayout);
 		mControlLayout.setModifiable(false);
 		if (modPath == null) {
-			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
-			specialButtons[0].specialButtonListener = new View.OnClickListener(){
-				@Override
-				public void onClick(View v) {
-
-				}
-			};
-			specialButtons[1].specialButtonListener = new View.OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					// showKeyboard(); 
-				}
-			};
-			// MetaKeyBean.keysByMouseButton.get(VncCanvas.MOUSE_BUTTON_RIGHT);
-			specialButtons[2].specialButtonListener = new ControlButton.TouchListener(){
-				@Override
-				public void onTouch(boolean down) {
-					// showKeyboard(); 
-				}
-			};
-			specialButtons[3].specialButtonListener = new ControlButton.TouchListener(){
-				@Override
-				public void onTouch(boolean down) {
-					// showKeyboard(); 
-				}
-			};
-			
 			mControlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
-			mControlLayout.setControlVisible(false);
-			boolean controlVisible = false;
+			mControlLayout.setControlVisible(true);
+			boolean controlVisible = true;
 			for (ControlView specialView : mControlLayout.getSpecialControlViewArray()) {
 				switch (specialView.getProperties().keycode) {
 					case ControlButton.SPECIALBTN_KEYBOARD: 

@@ -234,10 +234,20 @@ public final class Tools
 
 	public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk)
 	{
-		showError(ctx, e, exitIfOk, false);
+		showError(ctx, ctx.getString(R.string.global_error), e, exitIfOk, false);
+	}
+	
+	public static void showError(Context ctx, String customTitle, Throwable e)
+	{
+		showError(ctx, customTitle, e, false);
 	}
 
-	private static void showError(final Context ctx, final Throwable e, final boolean exitIfOk, final boolean showMore)
+	public static void showError(final Context ctx, String customTitle, final Throwable e, final boolean exitIfOk)
+	{
+		showError(ctx, customTitle, e, exitIfOk, false);
+	}
+
+	private static void showError(final Context ctx, final String customTitle, final Throwable e, final boolean exitIfOk, final boolean showMore)
 	{
 		Runnable runnable = new Runnable(){
 
@@ -246,7 +256,8 @@ public final class Tools
 			{
 				final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
 				new AlertDialog.Builder((Context) ctx)
-					.setTitle(R.string.global_error)
+					//.setTitle(R.string.global_error)
+					.setTitle(customTitle)
 					.setMessage(errMsg)
 					.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
@@ -267,7 +278,7 @@ public final class Tools
 						@Override
 						public void onClick(DialogInterface p1, int p2)
 						{
-							showError(ctx, e, exitIfOk, !showMore);
+							showError(ctx, customTitle, e, exitIfOk, !showMore);
 						}
 					})
 					.setNeutralButton(android.R.string.copy, new DialogInterface.OnClickListener(){

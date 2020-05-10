@@ -13,23 +13,23 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<android.androidVNC.VncCanvas
-			android:id="@+id/vnc_canvas"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_gravity="bottom|center"/>
-
-		<ZoomControls
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/zoomer"
-			android:layout_gravity="bottom|center"/>
-
 		<net.kdt.pojavlaunch.value.customcontrols.ControlsLayout
 			android:id="@+id/main_controllayout"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
+			<android.androidVNC.VncCanvas
+				android:id="@+id/vnc_canvas"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_gravity="bottom|center"/>
+
+			<ZoomControls
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/zoomer"
+				android:layout_gravity="bottom|center"/>
+			
 		</net.kdt.pojavlaunch.value.customcontrols.ControlsLayout>
 		
 		<LinearLayout

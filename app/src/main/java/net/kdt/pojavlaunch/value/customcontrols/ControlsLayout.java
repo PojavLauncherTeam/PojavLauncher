@@ -61,19 +61,20 @@ public class ControlsLayout extends FrameLayout
 	public void loadLayout(String jsonPath) {
 		try {
 			loadLayout(new Gson().fromJson(Tools.read(jsonPath), CustomControls.class));
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Throwable th) {
+			th.printStackTrace();
+			Tools.showError(getContext(), getContext().getString(R.string.customctrl_error, jsonPath), th);
 		}
 	}
 	
 	public void loadLayout(CustomControls controlLayout) {
 		mLayout = controlLayout;
-		
+
 		// Safety remove only ControlView views
 		for (ControlView view : getControlViewArray()) {
 			removeView(view);
 		}
-		
+
 		for (ControlButton button : controlLayout.button) {
 			addControlView(button);
 		}
