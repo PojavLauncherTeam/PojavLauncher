@@ -140,11 +140,16 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						adapter.addAll(Android2LWJGLKeycode.generateKeyName());
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
-						if (properties.keyindex < 4) {
+						
+						spinnerKeycode.setSelection(Android2LWJGLKeycode.getIndexByAndroidKey(properties.keycode));
+						/*
+						if (properties.keyindex < specialArr.length) {
 							spinnerKeycode.setSelection(properties.keyindex);
 						} else {
-							spinnerKeycode.setSelection(Android2LWJGLKeycode.getIndexByLWJGLKey(properties.keyindex + specialArr.length));
+							// spinnerKeycode.setSelection(Android2LWJGLKeycode.getIndexByLWJGLKey(properties.keyindex + specialArr.length));
+							spinnerKeycode.setSelection(properties.keyindex + specialArr.length);
 						}
+						*/
 						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
 								@Override
@@ -174,8 +179,8 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 										properties.hidden = checkHidden.isChecked();
 										properties.name = editName.getText().toString();
 										
-										if (properties.keyindex < 4) {
-											properties.keycode = properties.keyindex - 4;
+										if (properties.keyindex < specialArr.length) {
+											properties.keycode = properties.keyindex - specialArr.length;
 											properties.name = ControlButton.getSpecialButtons()[properties.keyindex].name;
 										}
 

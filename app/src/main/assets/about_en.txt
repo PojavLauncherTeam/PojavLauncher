@@ -16,7 +16,7 @@
  • PRoot: <a href="https://github.com/termux/proot/blob/master/COPYING">GNU GPLv2 License</a>.<br>
  • TheQVD XVnc Pro: <a href="https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt">GNU GPLv3 License</a>.
  • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's license</a>.<br>
- • BusyBox: <a href"https://busybox.net/license.html">GNU GPL License</a><br>
+ • BusyBox: <a href="https://busybox.net/license.html">GNU GPL License</a><br>
 * Notes:<br>
  - This app is under development and will not be stable.<br>
  - This app is not affiliated with Minecraft, Mojang or Microsoft.

@@ -210,6 +210,17 @@ public class Android2LWJGLKeycode {
 		return androidToLwjglMap.keyAt(index);
 	}
 
+	public static int getIndexByAndroidKey(int key) {
+		for (int i = 0; i < androidToLwjglMap.size(); i++) {
+			int currKey = androidToLwjglMap.keyAt(i);
+			if (currKey == key) {
+				return i;
+			}
+		}
+
+		return 0;
+	}
+	
 	public static int getIndexByLWJGLKey(int lwjglKey) {
 		for (int i = 0; i < androidToLwjglMap.size(); i++) {
 			int currKey = androidToLwjglMap.valueAt(i);
