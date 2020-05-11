@@ -43,7 +43,7 @@
 	
 	<!-- Warning -->
 	<string name="warning_title">Warning</string>
-	<string name="warning_msg">This v3 is experimental and may not worked. If you are not a developer, go back to v2!</string>
+	<string name="warning_msg">This v3 is experimental and may not worked. If you are not really want test, go back to v2!</string>
 	<string name="warning_noshowagain">Don\'t show again</string>
 	<string name="warning_action_tryanyway">Try anyway</string>
 	<string name="warning_action_exit">Exit</string>

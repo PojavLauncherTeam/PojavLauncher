@@ -47,6 +47,10 @@ public class PojavLoginActivity extends MineActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState, false);
+		
+		// TODO remove after translations like Vietnamese are done.
+		Tools.setLocale(this, Locale.ENGLISH);
+		
 		if (!isInitCalled) {
 			init();
 			isInitCalled = true;
@@ -167,6 +171,7 @@ public class PojavLoginActivity extends MineActivity
 				File openjdkTar = new File(Tools.MAIN_PATH, "OpenJDK.tar.gz");
 
 				oldOpenjdkFolder = new File(Tools.datapath, "jre_old");
+				oldOpenjdkFolder.mkdir();
 				newOpenjdkFolder = new File(Tools.datapath, "jre");
 				newOpenjdkFolder.mkdir();
 				
@@ -187,7 +192,7 @@ public class PojavLoginActivity extends MineActivity
 					// Install OpenJDK
 					publishProgress(null);
 					try {
-						shell.writeToProcess("mkdir " + Tools.worksDir);
+						mkdirs(Tools.worksDir);
 						Tools.copyAssetFile(PojavLoginActivity.this, "busybox-arm64", Tools.worksDir, "busybox", false);
 						shell.writeToProcess("chmod 700 " + Tools.worksDir + "/busybox");
 						// shell.writeToProcess("export PATH=$PATH:" + Tools.worksDir);
@@ -201,6 +206,7 @@ public class PojavLoginActivity extends MineActivity
 
 						publishProgress("i0", getString(R.string.openjdk_install_download_main), Integer.toString(fileLength));
 						if (!openjdkTar.exists() || openjdkTar.length() != fileLength) {
+							openjdkTar.createNewFile();
 							InputStream input = new BufferedInputStream(url.openStream());
 							OutputStream output = new FileOutputStream(openjdkTar);
 							byte data[] = new byte[1024];
@@ -225,8 +231,22 @@ public class PojavLoginActivity extends MineActivity
 
 						setPref(PREF_IS_INSTALLED_OPENJDK, true);
 					} catch (Throwable e) {
-						Tools.dialogOnUiThread(PojavLoginActivity.this, "Error!", Log.getStackTraceString(e) + "\n\nShell log:\n" + shellLog);
-						// Tools.showError(PojavLoginActivity.this, e, true);
+						Throwable causedTh = e.getCause();
+						while (true) {
+							Throwable preCausedTh = causedTh.getCause();
+							if (preCausedTh == null) {
+								Throwable shellTh = new Throwable(shellLog.toString());
+								shellTh.setStackTrace(new StackTraceElement[0]);
+								causedTh.initCause(shellTh);
+								
+								break;
+							} else {
+								causedTh = preCausedTh;
+							}
+						}
+						
+						// Tools.dialogOnUiThread(PojavLoginActivity.this, "Error!", Log.getStackTraceString(e) + "\n\nShell log:\n" + shellLog);
+						Tools.showError(PojavLoginActivity.this, e, true);
 					}
 				}
 				
@@ -258,6 +278,7 @@ public class PojavLoginActivity extends MineActivity
 					}
 
 					// Grant execute permission
+					
 					shell.writeToProcess("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
 				} catch (final Throwable th) {
 					// Tools.showError(PojavLoginActivity.this, th);
@@ -281,7 +302,14 @@ public class PojavLoginActivity extends MineActivity
 		
 		private void unpackOpenJDK(final StringBuilder shellLog, SimpleShellProcess shell, File openjdkTar, boolean isPatch) throws Throwable {
 			// Backup Old OpenJDK
-			shell.writeToProcess("mv " + newOpenjdkFolder.getAbsolutePath() + " " + oldOpenjdkFolder.getAbsolutePath());
+			try {
+				if (!newOpenjdkFolder.renameTo(oldOpenjdkFolder)) throw new Throwable();
+			} catch (Throwable th) {
+				System.err.println("Unable to backup old OpenJDK!");
+				th.printStackTrace();
+				
+				shell.writeToProcess("mv " + newOpenjdkFolder.getAbsolutePath() + " " + oldOpenjdkFolder.getAbsolutePath());
+			}
 		
 			try {
 				SimpleShellProcess extractShell = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
@@ -482,7 +510,6 @@ public class PojavLoginActivity extends MineActivity
 	
 	private void initMain()
 	{
-		mkdirs(Tools.worksDir);
 		mkdirs(Tools.versnDir);
 		mkdirs(Tools.libraries);
 		

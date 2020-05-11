@@ -12,7 +12,7 @@
 	<string name="language_name">TIẾNG VIỆT - VN</string>
 
 	<!-- Logging output -->
-	<string name="log_title">Đầu ra nhật kí</string>
+	<string name="log_title">Log output</string>
 
 	<!-- Login strings -->
 	<string name="login_online_username_hint">Email hoặc tên người dùng</string>
@@ -43,11 +43,11 @@
 
 	<!-- Warning -->
 	<string name="warning_title">Cảnh báo</string>
-	<string name="warning_msg">This v3 is experimental and may not worked. If you are not a developer, go back to v2!</string>
+	<string name="warning_msg">Bản v3 này đang trong giai đoạn thử nghiệm và có thể không hoạt động. Nếu không thực sự muốn test thì hãy xuống v2!</string>
 	<string name="warning_noshowagain">Không hiện nữa</string>
 	<string name="warning_action_tryanyway">Vẫn thử</string>
 	<string name="warning_action_exit">Thoát</string>
-	<string name="warning_remove_account">This account will be removed!</string>
+	<string name="warning_remove_account">Tài khoản này sẽ bị xóa!</string>
 
 	<!-- AlertDialog title -->
 	<string name="alerttitle_selectkeymap">Chọn một điều khiển json</string>
@@ -56,14 +56,14 @@
 	<!-- Error messages -->
 	<string name="error_checklog">Lỗi! Please check the log below: %s</string>
 	<string name="error_no_version">Không có phiên bản!</string>
-	<string name="error_load_version">Unable to load version %s</string>
-	<string name="error_convert_lib">Unable to convert library %s</string>
-	<string name="error_convert_client">Unable to convert Minecraft %s</string>
+	<string name="error_load_version">Không thể tải phiên bản %s</string>
+	<string name="error_convert_lib">Không thể chuyển đổi thư viện %s</string>
+	<string name="error_convert_client">Không thể chuyển đổi Minecraft %s</string>
 	<string name="error_show_more">Nhiều hơn</string>
 	<string name="error_show_less">Ít hơn</string>
 
 	<!-- Toast messages -->
-	<string name="toast_permission_denied">The read/write to storage permission is required!</string>
+	<string name="toast_permission_denied">Quyền truy cập đọc/viết vào bộ nhớ là cần thiết!</string>
 	<string name="toast_login_error">Something went wrong after login. Please feedback to the developer.\nError: %s</string>
 	<string name="toast_optifine_success">Install successful</string>
 	<!--

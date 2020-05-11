@@ -1,43 +1,37 @@
 package net.kdt.pojavlaunch;
 
+import android.androidVNC.*;
 import android.app.*;
 import android.content.*;
+import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.app.*;
 import android.support.v4.view.*;
 import android.support.v7.app.*;
-import android.util.DisplayMetrics;
-import android.util.Log;
+import android.text.*;
+import android.util.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 import com.google.gson.*;
 import com.kdt.filerapi.*;
-import com.kdt.filermod.*;
+import com.kdt.mcgui.*;
+import com.theqvd.android.xpro.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
 import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.signer.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 import org.lwjgl.opengl.*;
 
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import dalvik.system.*;
-import java.lang.reflect.*;
-import net.kdt.pojavlaunch.patcher.*;
-import android.graphics.*;
-import android.content.pm.*;
-import android.text.*;
-import com.kdt.mcgui.*;
-import com.theqvd.android.xpro.*;
-import android.net.*;
-import android.androidVNC.*;
+import com.theqvd.android.xpro.Config;
 
 public class MCLauncherActivity extends AppCompatActivity
 {
@@ -76,6 +70,18 @@ public class MCLauncherActivity extends AppCompatActivity
 		DisplayMetrics dm = Tools.getDisplayMetrics(this);
 		AndroidDisplay.windowWidth = dm.widthPixels;
 		AndroidDisplay.windowHeight = dm.heightPixels;
+		
+		ControlButton.pixelOf2dp = (int) Tools.dpToPx(this, 2);
+		ControlButton.pixelOf30dp = (int) Tools.dpToPx(this, 30);
+		ControlButton.pixelOf50dp = (int) Tools.dpToPx(this, 50);
+		ControlButton.pixelOf80dp = (int) Tools.dpToPx(this, 80);
+		
+		ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+		specialButtons[0].name = getString(R.string.control_keyboard);
+		specialButtons[1].name = getString(R.string.control_toggle);
+		specialButtons[2].name = getString(R.string.control_primary);
+		specialButtons[3].name = getString(R.string.control_secondary);
+		
 		viewInit();
 	}
 	// DEBUG

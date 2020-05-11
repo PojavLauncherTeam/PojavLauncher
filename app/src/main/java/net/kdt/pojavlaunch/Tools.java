@@ -109,7 +109,15 @@ public final class Tools
 		ctx.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 		return displayMetrics;
 	}
-	
+
+	public static void setLocale(Context ctx, Locale locale) {
+		Locale.setDefault(locale);
+		Resources res = ctx.getResources();
+		res.getConfiguration().setLocale(locale);
+		res.getConfiguration().locale = locale;
+		res.updateConfiguration(res.getConfiguration(), res.getDisplayMetrics());
+	}
+
 	public static float pxToDp(Context ctx, float px) {
 		return (px / ctx.getResources().getDisplayMetrics().density);
 	}

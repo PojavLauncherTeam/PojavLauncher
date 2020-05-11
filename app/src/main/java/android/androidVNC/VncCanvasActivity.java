@@ -137,7 +137,7 @@ public class VncCanvasActivity extends AppCompatActivity
 			mControlLayout.setControlVisible(true);
 			boolean controlVisible = true;
 			for (ControlView specialView : mControlLayout.getSpecialControlViewArray()) {
-				switch (specialView.getProperties().keycode) {
+				switch (specialView.getProperties().keycode - ControlButton.getSpecialButtons().length) {
 					case ControlButton.SPECIALBTN_KEYBOARD: 
 						InputMethodManager inputMgr = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 						inputMgr.toggleSoftInput(0, 0);

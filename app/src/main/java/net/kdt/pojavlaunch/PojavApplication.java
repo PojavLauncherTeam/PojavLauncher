@@ -1,11 +1,13 @@
 package net.kdt.pojavlaunch;
 
-import android.app.Application;
-import android.os.*;
-import android.content.pm.PackageManager.*;
+import android.app.*;
 import android.content.pm.*;
+import android.util.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
+import org.lwjgl.opengl.*;
+import java.util.*;
+import android.content.res.*;
 
 public class PojavApplication extends Application
 {
@@ -30,18 +32,8 @@ public class PojavApplication extends Application
 			if (fileDataPath.startsWith("/data/data") || !fileDataPath.startsWith("/s") && !fileDataPath.contains("storage") && !fileDataPath.contains("sdcard")) {
 				Tools.datapath = fileDataPath;
 			}
-			
+		
 			LauncherPreferences.loadPreferences(this);
-
-			ControlButton.pixelOf2dp = (int) Tools.dpToPx(this, 2);
-			ControlButton.pixelOf30dp = (int) Tools.dpToPx(this, 30);
-			ControlButton.pixelOf50dp = (int) Tools.dpToPx(this, 50);
-			ControlButton.pixelOf80dp = (int) Tools.dpToPx(this, 80);
-			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
-			specialButtons[0].name = getString(R.string.control_keyboard);
-			specialButtons[1].name = getString(R.string.control_toggle);
-			specialButtons[2].name = getString(R.string.control_primary);
-			specialButtons[3].name = getString(R.string.control_secondary);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
