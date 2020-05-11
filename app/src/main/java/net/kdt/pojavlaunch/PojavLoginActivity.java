@@ -49,7 +49,7 @@ public class PojavLoginActivity extends MineActivity
 		super.onCreate(savedInstanceState, false);
 		
 		// TODO remove after translations like Vietnamese are done.
-		Tools.setLocale(this, Locale.ENGLISH);
+		// Tools.setLocale(this, Locale.ENGLISH);
 		
 		if (!isInitCalled) {
 			init();
@@ -231,22 +231,8 @@ public class PojavLoginActivity extends MineActivity
 
 						setPref(PREF_IS_INSTALLED_OPENJDK, true);
 					} catch (Throwable e) {
-						Throwable causedTh = e.getCause();
-						while (true) {
-							Throwable preCausedTh = causedTh.getCause();
-							if (preCausedTh == null) {
-								Throwable shellTh = new Throwable(shellLog.toString());
-								shellTh.setStackTrace(new StackTraceElement[0]);
-								causedTh.initCause(shellTh);
-								
-								break;
-							} else {
-								causedTh = preCausedTh;
-							}
-						}
-						
-						// Tools.dialogOnUiThread(PojavLoginActivity.this, "Error!", Log.getStackTraceString(e) + "\n\nShell log:\n" + shellLog);
-						Tools.showError(PojavLoginActivity.this, e, true);
+						Tools.dialogOnUiThread(PojavLoginActivity.this, "Error!", Log.getStackTraceString(e) + "\n\nShell log:\n" + shellLog);
+						// Tools.showError(PojavLoginActivity.this, e, true);
 					}
 				}
 				

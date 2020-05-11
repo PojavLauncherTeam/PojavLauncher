@@ -123,10 +123,8 @@ public class MCLauncherActivity extends AppCompatActivity
 
 			tvUsernameView.setText(profile.getUsername());
 		} catch(Exception e) {
-			//Tools.throwError(this, e);
 			e.printStackTrace();
-			toast(getStr(R.string.toast_login_error) + " " + e.getMessage());
-			finish();
+			Tools.showError(this, getStr(R.string.toast_login_error), e, true);
 		}
 
 		//showProfileInfo();
@@ -136,16 +134,15 @@ public class MCLauncherActivity extends AppCompatActivity
 
 		try {
 			if (fVers.listFiles().length < 1) {
-				throw new Exception(getStr(R.string.error_no_version));
+				versions.add(getStr(R.string.error_no_version));
 			}
 
 			for (File fVer : fVers.listFiles()) {
 				versions.add(fVer.getName());
 			}
-		} catch (Exception e) {
-			versions.add(getStr(R.string.global_error) + ":");
-			versions.add(e.getMessage());
-
+		} catch (Throwable th) {
+			th.printStackTrace();
+			Tools.showError(this, th);
 		} finally {
 			availableVersions = versions.toArray(new String[0]);
 		}
@@ -177,7 +174,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		{
 			try{
 				versionList = gson.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
-				ArrayList<String> versionStringList = filter(versionList.versions, new File(Tools.versnDir).listFiles());
+				ArrayList<String> versionStringList = filterDuplicate(versionList.versions, new File(Tools.versnDir).listFiles());
 
 				return versionStringList;
 			} catch (Exception e){
@@ -275,14 +272,16 @@ public class MCLauncherActivity extends AppCompatActivity
 		return Tools.getVersionInfo(version);
 	}
 
-	private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {
+	private ArrayList<String> filterDuplicate(JMinecraftVersionList.Version[] list1, File[] list2) {
 		ArrayList<String> output = new ArrayList<String>();
 
 		for (JMinecraftVersionList.Version value1: list1) {
 			if ((value1.type.equals("release") && LauncherPreferences.PREF_VERTYPE_RELEASE) ||
 				(value1.type.equals("snapshot") && LauncherPreferences.PREF_VERTYPE_SNAPSHOT) ||
 				(value1.type.equals("old_alpha") && LauncherPreferences.PREF_VERTYPE_OLDALPHA) ||
-				(value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA)) {
+				(value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA) ||
+				// Should be it?
+				(value1.type.equals("custom"))) {
 					output.add(value1.id);
 			}
 		}

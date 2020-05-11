@@ -329,6 +329,13 @@ public final class Tools
 						.setTitle(title)
 						.setMessage(message)
 						.setPositiveButton(android.R.string.ok, null)
+						.setNegativeButton(android.R.string.copy, new DialogInterface.OnClickListener(){
+							@Override
+							public void onClick(DialogInterface p1, int p2)
+							{
+								((android.content.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE)).setText(message);
+							}
+						})
 						.show();
 				}
 			});

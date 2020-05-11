@@ -29,6 +29,7 @@
 		android:title="@string/mcl_setting_category_veroption">
 		
         <android.support.v7.preference.CheckBoxPreference
+			android:enabled="false"
             android:defaultValue="true"
             android:key="vertype_release"
 			android:title="@string/mcl_setting_veroption_release" />
