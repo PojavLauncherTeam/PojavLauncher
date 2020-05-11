@@ -111,7 +111,7 @@ public class ControlsLayout extends FrameLayout
 
 						for (int i = 0; i < MetaKeyBean.keysByKeyCode.size(); i++) {
 							MetaKeyBase key = MetaKeyBean.keysByKeyCode.valueAt(i);
-							if (ctrlView.getProperties().keycode == key.keyEvent) {
+							if (ctrlView.getProperties().keycode + ControlButton.getSpecialButtons().length == key.keyEvent) {
 								listener.onKey(key, isDown);
 							}
 						}
