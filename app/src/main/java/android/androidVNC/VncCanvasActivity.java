@@ -161,7 +161,7 @@ public class VncCanvasActivity extends AppCompatActivity
 					}
 				});
 		} else {
-			mControlLayout.setVisibility(View.GONE);
+			// mControlLayout.setVisibility(View.GONE);
 		}
 		
 		database = new VncDatabase(VncCanvasActivity.this);
