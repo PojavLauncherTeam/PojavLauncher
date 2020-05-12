@@ -20,7 +20,7 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 |Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://youtu.be/TJeJcPFgzcI)|[Worked (with 1 hack)](https://youtu.be/eIawM9UmQ88)
 
 ## License
-- This launcher and Boardwalk are licensed under (https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE)[Apache License 2.0].
+- This launcher and Boardwalk are licensed under [Apache License 2.0](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
 ## Third party licenses
 - LegacyLauncher: (unknown license).<br>
