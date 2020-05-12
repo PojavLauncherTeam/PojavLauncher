@@ -1,1 +1,1 @@
-https://github.com/khanhduytran0/PojavLauncher/blob/gh-pages/jre_patches/openjdk_patch3_fixjavahome.tar.gz?raw=true
+https://raw.githubusercontent.com/khanhduytran0/PojavLauncher/blob/gh-pages/jre_patches/openjdk_patch4_libtalloc.tar.gz
