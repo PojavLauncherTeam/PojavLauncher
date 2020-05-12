@@ -25,6 +25,8 @@ import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.util.*;
 import java.net.*;
 import com.kdt.mcgui.*;
+import org.apache.commons.compress.archivers.tar.*;
+import org.apache.commons.compress.compressors.gzip.*;
 
 public class PojavLoginActivity extends MineActivity
 {
@@ -298,6 +300,7 @@ public class PojavLoginActivity extends MineActivity
 			}
 		
 			try {
+				/*
 				SimpleShellProcess extractShell = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
 
 						@Override
@@ -307,7 +310,7 @@ public class PojavLoginActivity extends MineActivity
 							shellLog.append(text);
 						}
 					// `Tools.datapath` instead of `Tools.homeJreDir` because tar.gz contains `jre` as root folder.
-					}, /* "/system/bin/sh -c " + */ Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath + "");
+					}, Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath + "");
 				extractShell.initInputStream(PojavLoginActivity.this);
 				
 				int exitCode = extractShell.waitFor();
@@ -316,12 +319,15 @@ public class PojavLoginActivity extends MineActivity
 					shell.writeToProcess("echo \"" + error.getMessage() + ".\"");
 					throw error;
 				}
+				*/
+				
+				uncompressTarGZ(openjdkTar, new File(Tools.datapath));
 				
 				// Safety delete the old one if success
-				Tools.deleteRecursive(oldOpenjdkFolder);
+				shell.writeToProcess("rm -r " + oldOpenjdkFolder);
 			} catch (Throwable th) {
 				// If failed, restore to the old one
-				Tools.deleteRecursive(newOpenjdkFolder);
+				shell.writeToProcess("rm -r " + newOpenjdkFolder);
 				shell.writeToProcess("mv " + oldOpenjdkFolder.getAbsolutePath() + " " + newOpenjdkFolder.getAbsolutePath());
 				
 				throw th;
@@ -372,6 +378,58 @@ public class PojavLoginActivity extends MineActivity
 			*/
 			
 		}
+		
+		private void uncompressTarGZ(File tarFile, File dest) throws IOException {
+			dest.mkdir();
+			TarArchiveInputStream tarIn = null;
+
+			tarIn = new TarArchiveInputStream(
+                new GzipCompressorInputStream(
+                    new BufferedInputStream(
+                        new FileInputStream(
+                            tarFile
+                        )
+                    )
+                )
+            );
+
+			TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
+			// tarIn is a TarArchiveInputStream
+			while (tarEntry != null) {
+				/*
+				 * Unpacking very small files in short time cause
+				 * application to ANR or out of memory, so delay
+				 * a little if size is above than 20kb (20480 bytes)
+				 */
+				if (tarEntry.getSize() <= 204800) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {}
+				}
+				publishProgress(null, "Unpacking " + tarEntry.getName());
+				File destPath = new File(dest, tarEntry.getName());
+				if (tarEntry.isDirectory()) {
+					destPath.mkdirs();
+				} else {
+					destPath.createNewFile();
+					
+					byte[] btoRead = new byte[2048];
+					BufferedOutputStream bout = 
+						new BufferedOutputStream(new FileOutputStream(destPath));
+					int len = 0;
+
+					while((len = tarIn.read(btoRead)) != -1) {
+						bout.write(btoRead,0,len);
+					}
+
+					bout.close();
+					btoRead = null;
+
+				}
+				tarEntry = tarIn.getNextTarEntry();
+			}
+			tarIn.close();
+		} 
 
 		@Override
 		protected void onProgressUpdate(String... obj)
