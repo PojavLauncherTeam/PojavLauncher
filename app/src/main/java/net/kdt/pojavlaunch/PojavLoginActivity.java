@@ -205,10 +205,11 @@ public class PojavLoginActivity extends MineActivity
 
 						publishProgress("i0", getString(R.string.openjdk_install_download_main), Integer.toString(fileLength));
 						if (!openjdkTar.exists() || openjdkTar.length() != fileLength) {
+							openjdkTar.getParentFile().mkdirs();
 							openjdkTar.createNewFile();
 							InputStream input = new BufferedInputStream(url.openStream());
 							OutputStream output = new FileOutputStream(openjdkTar);
-							byte data[] = new byte[1024];
+							byte[] data = new byte[2048];
 							long total = 0;
 
 							while ((count = input.read(data)) != -1) {
@@ -297,27 +298,6 @@ public class PojavLoginActivity extends MineActivity
 			}
 		
 			try {
-				/*
-				SimpleShellProcess extractShell = new SimpleShellProcess(new SimpleShellProcess.OnPrintListener(){
-
-						@Override
-						public void onPrintLine(String text)
-						{
-							publishProgress(null, text);
-							shellLog.append(text);
-						}
-					// `Tools.datapath` instead of `Tools.homeJreDir` because tar.gz contains `jre` as root folder.
-					}, Tools.worksDir + "/busybox tar xvzf " + openjdkTar.getAbsolutePath() + " -C " + Tools.datapath + "");
-				extractShell.initInputStream(PojavLoginActivity.this);
-				
-				int exitCode = extractShell.waitFor();
-				if (exitCode != 0) {
-					SimpleShellProcess.NonZeroError error = new SimpleShellProcess.NonZeroError(exitCode);
-					shell.writeToProcess("echo \"" + error.getMessage() + ".\"");
-					throw error;
-				}
-				*/
-				
 				uncompressTarGZ(openjdkTar, new File(Tools.datapath));
 				
 				// Safety delete the old one if success
@@ -331,49 +311,6 @@ public class PojavLoginActivity extends MineActivity
 			}
 			
 			// return Integer.parseInt(Tools.read(resultCodeFile.getAbsolutePath()));
-			
-			/*
-			ZipFile zis = new ZipFile(openjdkTar);
-			try {
-				int count = 0;
-				publishProgress("i0", null, Integer.toString(zis.size()));
-				Enumeration<? extends ZipEntry> zipEntries = zis.entries();
-				while (zipEntries.hasMoreElements()) {
-					ZipEntry ze = zipEntries.nextElement();
-					count++;
-					publishProgress(null, getString(isPatch ? R.string.openjdk_install_unpack_patch : R.string.openjdk_install_unpack_main) + ": " + ze.getName(), null, Integer.toString(count));
-
-					File file = new File(Tools.datapath, ze.getName());
-					File dir = ze.isDirectory() ? file : file.getParentFile();
-					if (!dir.isDirectory() && !dir.mkdirs())
-						throw new FileNotFoundException("Failed to ensure directory: " + dir.getAbsolutePath());
-					if (
-						ze.isDirectory() ||
-						file.exists() && file.length() == ze.getSize()
-						) {
-						continue;
-					}
-
-					byte[] byteArr = Tools.getByteArray(zis.getInputStream(ze));
-					String firstMd5 = Tools.calculateMD5(file);
-					if (firstMd5 != null && byteArr.length > 0 && firstMd5.equals(Tools.calculateMD5(byteArr))) {
-						continue;
-					}
-					
-					BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(file));
-					try {
-						fout.write(byteArr,  0, byteArr.length);
-					} finally {
-						fout.close();
-					}
-					long time = ze.getTime();
-					if (time > 0) file.setLastModified(time);
-				}
-			} finally {
-				zis.close();
-			}
-			*/
-			
 		}
 		
 		private void uncompressTarGZ(File tarFile, File dest) throws IOException {
@@ -404,11 +341,14 @@ public class PojavLoginActivity extends MineActivity
 					} catch (InterruptedException e) {}
 				}
 				publishProgress(null, "Unpacking " + tarEntry.getName());
-				File destPath = new File(dest, tarEntry.getName());
+				File destPath = new File(dest, tarEntry.getName()); 
 				if (tarEntry.isDirectory()) {
 					destPath.mkdirs();
-				} else {
+					destPath.setExecutable(true);
+				} else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
+					destPath.getParentFile().mkdirs();
 					destPath.createNewFile();
+					destPath.setExecutable(true);
 					
 					byte[] btoRead = new byte[2048];
 					BufferedOutputStream bout = 
@@ -465,30 +405,6 @@ public class PojavLoginActivity extends MineActivity
 			} */
 
 		}
-/*
-		private void appendlnToLog(String txt) {
-			publishProgress("", txt + "\n");
-		}
-		
-		 private void execCmd(String cmd) throws Exception {
-		 appendlnToLog("> " + cmd);
-		 ShellProcessOperation mainProcess = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
-
-		 @Override
-		 public void onPrintLine(String text)
-		 {
-		 publishProgress(text);
-		 }
-		 }, cmd);
-		 mainProcess.initInputStream(MCLoginActivity.this);
-		 String msgExit = cmd.split(" ")[0] + " has exited with code " + mainProcess.waitFor();
-		 if (mainProcess.exitCode() != 0) {
-		 throw new Error("(ERROR) " + msgExit);
-		 } else {
-		 appendlnToLog("(SUCCESS) " + msgExit);
-		 }
-		 }
-		 */
 	}
 	
 	private void uiInit() {
