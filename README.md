@@ -3,7 +3,7 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 `gl4es` and `v3_x11_openjdk` branch are the current development.
 
 ## iOS version?
-- Impossible for directly run. RoboVM is AOT Compiler. You could also try UTM with Android-x86.
+- Impossible for directly run. RoboVM is AOT Compiler.
 
 ## Known issues
 - Some Huawei devices can't run Minecraft or OptiFine.
