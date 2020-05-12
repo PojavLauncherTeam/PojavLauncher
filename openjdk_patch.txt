@@ -1,1 +1,1 @@
-null
+https://github.com/khanhduytran0/PojavLauncher/raw/gh-pages/openjdk_patches/openjdk_patch3_fixjavahome.tar.gz
