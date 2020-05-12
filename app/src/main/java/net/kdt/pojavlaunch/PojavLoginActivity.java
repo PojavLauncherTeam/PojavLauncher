@@ -195,9 +195,6 @@ public class PojavLoginActivity extends MineActivity
 					publishProgress(null);
 					try {
 						mkdirs(Tools.worksDir);
-						Tools.copyAssetFile(PojavLoginActivity.this, "busybox-arm64", Tools.worksDir, "busybox", false);
-						shell.writeToProcess("chmod 700 " + Tools.worksDir + "/busybox");
-						// shell.writeToProcess("export PATH=$PATH:" + Tools.worksDir);
 						
 						// BEGIN download openjdk
 						URL url = new URL("https://github.com/khanhduytran0/PojavLauncher/releases/download/openjdk/net.kdt.pojavlaunch.openjdkv3.tar.gz");
