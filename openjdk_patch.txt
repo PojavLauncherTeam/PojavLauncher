@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/khanhduytran0/PojavLauncher/gh-pages/jre_patches/openjdk_patch4_libtalloc.tar.gz
+https://khanhduytran0.github.io/PojavLauncher/openjdk_patches/openjdk_patch4_libtalloc.tar.gz
