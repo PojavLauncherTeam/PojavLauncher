@@ -41,7 +41,7 @@ public class PojavLoginActivity extends MineActivity
 	private SharedPreferences firstLaunchPrefs;
 	private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
 	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
-	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKV3Installed";
+	private String PREF_IS_INSTALLED_OPENJDK = "isOpenJDKV3P2Installed";
 	private String PREF_OPENJDK_PATCH_VERSION = "latestOpenjdkPatchVersion";
 	
 	private boolean isInitCalled = false;
@@ -142,7 +142,7 @@ public class PojavLoginActivity extends MineActivity
 		}
 		
 		private int deniedCount = -1;
-		private File oldOpenjdkFolder, newOpenjdkFolder;
+		private File oldOpenjdkFolder, curOpenjdkFolder;
 		@Override
 		protected Integer doInBackground(Void[] p1)
 		{
@@ -174,8 +174,8 @@ public class PojavLoginActivity extends MineActivity
 
 				oldOpenjdkFolder = new File(Tools.datapath, "jre_old");
 				oldOpenjdkFolder.mkdir();
-				newOpenjdkFolder = new File(Tools.datapath, "jre");
-				newOpenjdkFolder.mkdir();
+				curOpenjdkFolder = new File(Tools.datapath, "jre");
+				curOpenjdkFolder.mkdir();
 				
 				final StringBuilder shellLog = new StringBuilder();
 				
@@ -265,7 +265,7 @@ public class PojavLoginActivity extends MineActivity
 
 					// Grant execute permission
 					
-					shell.writeToProcess("chmod -R 700 " + newOpenjdkFolder.getAbsolutePath());
+					shell.writeToProcess("chmod -R 700 " + curOpenjdkFolder.getAbsolutePath());
 				} catch (final Throwable th) {
 					// Tools.showError(PojavLoginActivity.this, th);
 					runOnUiThread(new Runnable(){
@@ -287,26 +287,33 @@ public class PojavLoginActivity extends MineActivity
 		}
 		
 		private void unpackOpenJDK(final StringBuilder shellLog, SimpleShellProcess shell, File openjdkTar, boolean isPatch) throws Throwable {
-			// Backup Old OpenJDK
-			try {
-				if (!newOpenjdkFolder.renameTo(oldOpenjdkFolder)) throw new Throwable();
-			} catch (Throwable th) {
-				System.err.println("Unable to backup old OpenJDK!");
-				th.printStackTrace();
-				
-				shell.writeToProcess("mv " + newOpenjdkFolder.getAbsolutePath() + " " + oldOpenjdkFolder.getAbsolutePath());
+			if (isPatch) {
+				// Backup Old OpenJDK
+				try {
+					if (!curOpenjdkFolder.renameTo(oldOpenjdkFolder)) throw new Throwable();
+				} catch (Throwable th) {
+					System.err.println("Unable to backup old OpenJDK!");
+					th.printStackTrace();
+
+					shell.writeToProcess("mv " + curOpenjdkFolder.getAbsolutePath() + " " + oldOpenjdkFolder.getAbsolutePath());
+				}
 			}
 		
 			try {
 				uncompressTarGZ(openjdkTar, new File(Tools.datapath));
 				
-				// Safety delete the old one if success
-				shell.writeToProcess("rm -r " + oldOpenjdkFolder);
+				if (isPatch) {
+					// cur -> old: overwrite patch to current OpenJDK
+					shell.writeToProcess("mv " + curOpenjdkFolder.getAbsolutePath() + "/* " + oldOpenjdkFolder.getAbsolutePath());
+					// old -> cur: move to current OpenJDK directory
+					shell.writeToProcess("mv " + oldOpenjdkFolder.getAbsolutePath() + "/* " + curOpenjdkFolder.getAbsolutePath());
+				}
 			} catch (Throwable th) {
-				// If failed, restore to the old one
-				shell.writeToProcess("rm -r " + newOpenjdkFolder);
-				shell.writeToProcess("mv " + oldOpenjdkFolder.getAbsolutePath() + " " + newOpenjdkFolder.getAbsolutePath());
-				
+				if (isPatch) {
+					// If failed, restore to the old one
+					shell.writeToProcess("rm -r " + curOpenjdkFolder);
+					shell.writeToProcess("mv " + oldOpenjdkFolder.getAbsolutePath() + " " + curOpenjdkFolder.getAbsolutePath());
+				}
 				throw th;
 			}
 			
@@ -337,7 +344,8 @@ public class PojavLoginActivity extends MineActivity
 				 */
 				if (tarEntry.getSize() <= 204800) {
 					try {
-						Thread.sleep(100);
+						// 40 small files per second
+						Thread.sleep(25);
 					} catch (InterruptedException e) {}
 				}
 				publishProgress(null, "Unpacking " + tarEntry.getName());
