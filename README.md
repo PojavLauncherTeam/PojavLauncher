@@ -9,3 +9,6 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 ## Anything if this successful?
 - Able to custom min/max RAM heap.
 - Solve some incompatible issues.
+
+## Solution found!
+- [twaik/libcw](https://github.com/twaik/libcw) or [shodruky-rhyammer/gl-streaming](https://github.com/shodruky-rhyammer/gl-streaming) but I'm busy at v3.
