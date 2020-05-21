@@ -1,1 +1,1 @@
-https://khanhduytran0.github.io/PojavLauncher/openjdk_patches/openjdk_patch9_fixnetwork.tar.gz
+https://khanhduytran0.github.io/PojavLauncher/openjdk_patches/openjdk_patch10_fixnetworkwrong.tar.gz
