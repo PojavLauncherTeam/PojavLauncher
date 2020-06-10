@@ -167,6 +167,7 @@
 	<string name="control_jump">⬛</string>
 	<string name="control_thirdperson">3rd</string>
 	<string name="control_listplayers">Tab</string>
+	<string name="control_mouse">Mouse</string>
 	<string name="control_mouseoff">Mouse: off</string>
 	<string name="control_mouseon">Mouse: on </string>
 	

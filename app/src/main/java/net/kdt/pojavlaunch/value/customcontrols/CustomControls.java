@@ -24,6 +24,7 @@ public class CustomControls
 		this.button.add(ControlButton.getSpecialButtons()[1].clone()); // GUI
 		this.button.add(ControlButton.getSpecialButtons()[2].clone()); // Primary Mouse button
 		this.button.add(ControlButton.getSpecialButtons()[3].clone()); // Secondary Mouse button
+		this.button.add(ControlButton.getSpecialButtons()[4].clone()); // Virtual mouse toggle
 
 		this.button.add(new ControlButton(ctx, R.string.control_debug, Keyboard.KEY_F3, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
 		this.button.add(new ControlButton(ctx, R.string.control_chat, Keyboard.KEY_T, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf80dp, ControlButton.pixelOf2dp, false)); 

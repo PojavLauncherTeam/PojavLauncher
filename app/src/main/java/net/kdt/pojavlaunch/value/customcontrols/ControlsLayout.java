@@ -12,6 +12,7 @@ public class ControlsLayout extends FrameLayout
 	private boolean mCanModify;
 	private CustomControls mLayout;
 	private CustomControlsActivity mActivity;
+	private boolean mControlVisible = false;
 	public ControlsLayout(Context ctx) {
 		super(ctx);
 	}
@@ -76,7 +77,19 @@ public class ControlsLayout extends FrameLayout
 	public void setActivity(CustomControlsActivity activity) {
 		mActivity = activity;
 	}
-
+	
+	public void toggleControlVisible() {
+		if (mCanModify) return; // Not using on custom controls activity
+		
+		mControlVisible = !mControlVisible;
+		for (int i = 0; i < getChildCount(); i++) {
+			View view = getChildAt(i);
+			if (view instanceof ControlView && ((ControlView) view).getProperties().keycode != ControlButton.SPECIALBTN_TOGGLECTRL) {
+				((ControlView) view).setVisibility(mControlVisible ? (((ControlView) view).getProperties().hidden ? View.INVISIBLE : View.VISIBLE) : View.GONE);
+			}
+		}
+	}
+	
 	public void setModifiable(boolean z) {
 		mCanModify = z;
 		for (int i = 0; i < getChildCount(); i++) {
@@ -84,7 +97,7 @@ public class ControlsLayout extends FrameLayout
 			if (v instanceof ControlView) {
 				ControlView cv = ((ControlView) v);
 				cv.setModifiable(z);
-				cv.setVisibility(cv.getProperties().hidden ? View.INVISIBLE : View.VISIBLE);
+				// cv.setVisibility(cv.getProperties().hidden ? View.INVISIBLE : View.VISIBLE);
 			}
 		}
 	}

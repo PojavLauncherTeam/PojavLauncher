@@ -193,10 +193,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 			
-			controlLayout = findViewById(R.id.main_controllayout);
-			controlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
-			controlLayout.setModifiable(false);
-			
 			// Menu
 			drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_options);
 
@@ -275,10 +271,49 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				@Override
 				public void onClick(View view)
 				{
-					// MainActivity.this.onClick(toggleControlButton);
+					controlLayout.toggleControlVisible();
 				}
 			};
+			specialButtons[2].specialButtonListener = new View.OnTouchListener(){
 
+				@Override
+				public boolean onTouch(View view, MotionEvent event)
+				{
+					boolean isDown = (event.getActionMasked() == MotionEvent.ACTION_DOWN);
+					sendMouseButton(0, isDown);
+					return true;
+				}
+			};
+			specialButtons[3].specialButtonListener = new View.OnTouchListener(){
+
+				@Override
+				public boolean onTouch(View view, MotionEvent event)
+				{
+					boolean isDown = (event.getActionMasked() == MotionEvent.ACTION_DOWN);
+					if (AndroidDisplay.grab) {
+						sendMouseButton(1, isDown);
+					} else {
+						setRightOverride(isDown);
+					}
+					return true;
+				}
+			};
+			specialButtons[4].specialButtonListener = new View.OnClickListener(){
+
+				@Override
+				public void onClick(View view)
+				{
+					if (AndroidDisplay.grab) return;
+
+					boolean isVis = touchPad.getVisibility() == View.VISIBLE;
+					touchPad.setVisibility(isVis ? View.GONE : View.VISIBLE);
+					// ((Button) view).setText(isVis ? R.string.control_mouseoff: R.string.control_mouseon);
+				}
+			};
+			controlLayout = findViewById(R.id.main_controllayout);
+			controlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+			controlLayout.setModifiable(false);
+			
 			// toggleGui(null);
 			// onClick(toggleControlButton);
 			this.drawerLayout.closeDrawers();
@@ -740,6 +775,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 		*/
 	}
+	
+	
 	
     public boolean onTouch(View v, MotionEvent e) {
         boolean isDown;

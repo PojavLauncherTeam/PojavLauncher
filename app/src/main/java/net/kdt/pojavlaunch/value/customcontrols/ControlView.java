@@ -54,6 +54,14 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 			setTranslationY(moveY = properties.y);
 		}
 		
+		if (properties.specialButtonListener instanceof View.OnClickListener) {
+			setOnClickListener((View.OnClickListener) properties.specialButtonListener);
+		} else if (properties.specialButtonListener instanceof View.OnTouchListener) {
+			setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
+		} else {
+			throw new IllegalArgumentException("Field " + ControlButton.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener");
+		}
+		
 		setLayoutParams(new FrameLayout.LayoutParams(properties.width, properties.height));
 	}
 
