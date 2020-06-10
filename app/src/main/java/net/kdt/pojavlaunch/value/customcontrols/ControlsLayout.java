@@ -69,7 +69,7 @@ public class ControlsLayout extends FrameLayout
 	}
 
 	public void saveLayout(String path) throws Exception {
-		Tools.write(path, new Gson().toJson(mLayout));
+		mLayout.save(path);
 		setModified(false);
 	}
 

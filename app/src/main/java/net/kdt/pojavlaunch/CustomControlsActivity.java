@@ -13,6 +13,9 @@ import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
+import android.support.v7.preference.*;
+import net.kdt.pojavlaunch.prefs.*;
 
 public class CustomControlsActivity extends AppCompatActivity
 {
@@ -33,9 +36,11 @@ public class CustomControlsActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.control_mapping);
 
-		mPref = getSharedPreferences(getPackageName() + "_preferences", Context.MODE_PRIVATE);
+		mPref = PreferenceManager.getDefaultSharedPreferences(this);
 
 		gson = new GsonBuilder().setPrettyPrinting().create();
+
+		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 
 		// Menu
 		drawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
@@ -67,22 +72,13 @@ public class CustomControlsActivity extends AppCompatActivity
 			});
 
 		mCtrl = new CustomControls();
-		String defaultControl = mPref.getString("defaultCtrl", "");
-		if (defaultControl.isEmpty() || defaultControl.endsWith("/default.json")) {
-			generateDefaultControlMap();
-			try {
-				doSaveCtrl("default");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			loadControl(defaultControl);
-		}
 
-		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
 		ctrlLayout.setActivity(this);
-		ctrlLayout.loadLayout(mCtrl);
 		ctrlLayout.setModifiable(true);
+
+		loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+
+		ctrlLayout.loadLayout(mCtrl);
 	}
 
 	@Override
@@ -96,7 +92,14 @@ public class CustomControlsActivity extends AppCompatActivity
 	}
 
 	private void setDefaultControlJson(String path) {
-		mPref.edit().putString("defaultCtrl", path).commit();
+		try {
+			// Load before save to make sure control is not error
+			ctrlLayout.loadLayout(new Gson().fromJson(Tools.read(path), CustomControls.class));
+			LauncherPreferences.DEFAULT_PREF.edit().putString("defaultCtrl", path).commit();
+			LauncherPreferences.PREF_DEFAULTCTRL_PATH = path;
+		} catch (Throwable th) {
+			Tools.showError(this, th);
+		}
 	}
 
 	private void dialogSelectDefaultCtrl() {
@@ -214,16 +217,5 @@ public class CustomControlsActivity extends AppCompatActivity
 		} catch (Exception e) {
 			Tools.showError(CustomControlsActivity.this, e);
 		}
-	}
-
-	private void generateDefaultControlMap() {
-		List<ControlButton> btn = mCtrl.button;
-		btn.add(ControlButton.getSpecialButtons()[0].clone()); // Keyboard
-		btn.add(ControlButton.getSpecialButtons()[1].clone()); // GUI
-		// btn.add(ControlButton.getSpecialButtons()[2]); // Toggle mouse
-		btn.add(new ControlButton(this, R.string.control_debug, Keyboard.KEY_F3, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
-		btn.add(new ControlButton(this, R.string.control_chat, Keyboard.KEY_T, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf80dp, ControlButton.pixelOf2dp, false)); 
-		btn.add(new ControlButton(this, R.string.control_listplayers, Keyboard.KEY_TAB, ControlButton.pixelOf2dp * 4 + ControlButton.pixelOf80dp * 3, ControlButton.pixelOf2dp, false));
-		btn.add(new ControlButton(this, R.string.control_thirdperson, Keyboard.KEY_F5, ControlButton.pixelOf2dp, ControlButton.pixelOf30dp + ControlButton.pixelOf2dp, false));
 	}
 }

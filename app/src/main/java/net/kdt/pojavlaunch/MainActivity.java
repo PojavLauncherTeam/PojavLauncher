@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 			
 			controlLayout = findViewById(R.id.main_controllayout);
-			controlLayout.loadLayout(getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE).getString("defaultCtrl", Tools.CTRLMAP_PATH + "/default.json"));
+			controlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
 			controlLayout.setModifiable(false);
 			
 			// Menu
@@ -601,7 +601,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				});
 			glSurfaceView.setOnTouchListener(glTouchListener);
-			glSurfaceView.setRenderer(new GLTextureView.Renderer() {
+			glSurfaceView.setRenderer(new MinecraftGLView.Renderer() {
 					@Override
 					public void onSurfaceDestroyed(GL10 gl) {
 						Log.d(Tools.APP_NAME, "Surface destroyed.");
