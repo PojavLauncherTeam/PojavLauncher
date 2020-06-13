@@ -30,22 +30,30 @@ public class ControlsLayout extends FrameLayout
 		}
 	}
 
-	public void loadLayout(String jsonPath) {
+	public boolean loadLayout(String jsonPath) {
 		try {
-			loadLayout(new Gson().fromJson(Tools.read(jsonPath), CustomControls.class));
-		} catch (Exception e) {
-			e.printStackTrace();
+			return loadLayout(new Gson().fromJson(Tools.read(jsonPath), CustomControls.class));
+		} catch (Throwable th) {
+			Tools.showError(getContext(), th);
 		}
+		return false;
 	}
 
-	public void loadLayout(CustomControls controlLayout) {
-		mLayout = controlLayout;
-		removeAllViews();
-		for (ControlButton button : controlLayout.button) {
-			addControlView(button);
-		}
+	public boolean loadLayout(CustomControls controlLayout) {
+		try {
+			mLayout = controlLayout;
+			removeAllViews();
+			for (ControlButton button : controlLayout.button) {
+				addControlView(button);
+			}
 
-		setModified(false);
+			setModified(false);
+			
+			return true;
+		} catch (Throwable th) {
+			Tools.showError(getContext(), th);
+		}
+		return false;
 	}
 
 	public void addControlButton(ControlButton controlButton) {
@@ -76,6 +84,22 @@ public class ControlsLayout extends FrameLayout
 
 	public void setActivity(CustomControlsActivity activity) {
 		mActivity = activity;
+	}
+	
+	/*
+	 * Setting non-special buttons listener
+	 *
+	 * @param listener, the touch listener to initialize.
+	 */
+	public void setNonspecBtnsListener(View.OnTouchListener listener) {
+		for (int i = 0; i < getChildCount(); i++) {
+			View view = getChildAt(i);
+			if (view instanceof ControlView && ((ControlView) view).getProperties().keycode < 0) {
+				ControlView currView = ((ControlView) view);
+				currView.getProperties().specialButtonListener = listener;
+				currView.setOnTouchListener(listener);
+			}
+		}
 	}
 	
 	public void toggleControlVisible() {

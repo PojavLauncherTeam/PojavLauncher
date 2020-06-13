@@ -58,8 +58,10 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 			setOnClickListener((View.OnClickListener) properties.specialButtonListener);
 		} else if (properties.specialButtonListener instanceof View.OnTouchListener) {
 			setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
+		} else if (properties == null) {
+			// Maybe ignore?
 		} else {
-			throw new IllegalArgumentException("Field " + ControlButton.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener");
+			throw new IllegalArgumentException("Field " + ControlButton.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener instead of " + properties.specialButtonListener.getClass().getName());
 		}
 		
 		setLayoutParams(new FrameLayout.LayoutParams(properties.width, properties.height));
@@ -92,10 +94,12 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 	}
 
 	@Override
-	public boolean onLongClick(View p1)
+	public boolean onLongClick(View thiz)
 	{
+		// This should never happend
+		if (!mCanModify) throw new IllegalAccessError("Attemp to trigger built-in onLongClick() on a non-modifiable ControlView button");
 		if (!mCanTriggerLongClick) return false;
-
+		
 		if (mHandleView.isShowing()) {
 			mHandleView.hide();
 		} else {
@@ -110,12 +114,9 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 	private float moveX, moveY;
 	private float downX, downY;
 	@Override
-	public boolean onTouch(View view, MotionEvent event) {
-		if (!mCanModify) {
-			mCanTriggerLongClick = false;
-			
-			return false;
-		}
+	public boolean onTouch(View thiz, MotionEvent event) {
+		// This should never happend
+		if (!mCanModify) throw new IllegalAccessError("Attemp to trigger built-in onTouch() on a non-modifiable ControlView button");
 		
 		switch (event.getActionMasked()) {
 			case MotionEvent.ACTION_DOWN:
@@ -137,7 +138,16 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 		return false;
 	}
 	
-	public void setModifiable(boolean z) {
-		mCanModify = z;
+	public void setModifiable(boolean canModify) {
+		mCanModify = canModify;
+		// mCanTriggerLongClick &= canModify;
+		setOnLongClickListener(canModify ? this : null);
+		if (canModify) {
+			setOnTouchListener(this);
+		} /* else if (mProperties instanceof View.OnTouchListener) {
+			setOnTouchListener((View.OnTouchListener) mProperties);
+		} */ else {
+			setOnTouchListener(null);
+		}
 	}
 }

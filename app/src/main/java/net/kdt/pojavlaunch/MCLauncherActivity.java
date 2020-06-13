@@ -734,16 +734,15 @@ public class MCLauncherActivity extends AppCompatActivity
 		}
 
 		@Override
-		protected void onPostExecute(Throwable p1)
+		protected void onPostExecute(Throwable th)
 		{
 			playButton.setText("Play");
 			playButton.setEnabled(true);
 			launchProgress.setMax(100);
 			launchProgress.setProgress(0);
 			statusIsLaunching(false);
-			if(p1 != null) {
-				p1.printStackTrace();
-				Tools.showError(MCLauncherActivity.this, p1);
+			if(th != null) {
+				Tools.showError(MCLauncherActivity.this, th);
 			}
 			if(!launchWithError) {
 				crashView.setLastCrash("");
@@ -783,12 +782,11 @@ public class MCLauncherActivity extends AppCompatActivity
 			mTask = null;
 		}
 
-		private Gson gsonss = gson;
 		public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
 
 		public JAssets downloadIndex(String versionName, File output) throws Exception {
 			String versionJson = DownloadUtils.downloadString("http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json");
-			JAssets version = gsonss.fromJson(versionJson, JAssets.class);
+			JAssets version = gson.fromJson(versionJson, JAssets.class);
 			output.getParentFile().mkdirs();
 			Tools.write(output.getAbsolutePath(), versionJson.getBytes(Charset.forName("UTF-8")));
 			return version;

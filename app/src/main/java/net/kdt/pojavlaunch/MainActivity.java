@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	// private String mQueueText = new String();
 	
 	private JMinecraftVersionList.Version mVersionInfo;
-	
 	private View.OnTouchListener glTouchListener;
 	
 	// private Button[] controlButtons;
@@ -111,7 +110,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	/*
 	private LinearLayout contentCanvas;
 	private AWTSurfaceView contentCanvasView;
-	*/
+	 */
+	 
+	private boolean isResuming = false;
 	private boolean lastEnabled = false;
 	private boolean lastGrab = false;
 	private boolean isExited = false;
@@ -313,6 +314,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			controlLayout = findViewById(R.id.main_controllayout);
 			controlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
 			controlLayout.setModifiable(false);
+			
+			// Override non-special control buttons touch listener
+			
 			
 			// toggleGui(null);
 			// onClick(toggleControlButton);
@@ -564,6 +568,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					
 						builder.append("XPos=" + x + "\n");
 						builder.append("YPos=" + y + "\n\n");
+						
 						builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
 						builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
 						
@@ -593,15 +598,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						case MotionEvent.ACTION_CANCEL: // 3
 						case MotionEvent.ACTION_POINTER_UP: // 6
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
-							/*
-							if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-								sendMouseButton(1, true);
-								sendMouseButton(1, false);
-							}
-							if (triggeredLeftMouseButton) {
-								sendMouseButton(0, false);
-							}
-							*/
 							
 							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, true);
 							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, false);
@@ -612,7 +608,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 
 					return true;
-					// If onClick fail with false, change back to true
 				}
 			};
 
@@ -629,7 +624,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
 					@Override
 					public boolean onHover(View p1, MotionEvent p2) {
-						if (!AndroidDisplay.grab && isResumed()) {
+						if (!AndroidDisplay.grab && isResuming) {
 							return glTouchListener.onTouch(p1, p2);
 						}
 						return true;
@@ -665,6 +660,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 										Thread.sleep(200);
 										runCraft();
 									} catch (Throwable e) {
+										isExited = true;
 										Tools.showError(MainActivity.this, e, true);
 									}
 								}
@@ -683,9 +679,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 			glSurfaceView.setPreserveEGLContextOnPause(true);
 			glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
-			glSurfaceView.requestRender();
 		} catch (Throwable e) {
-			e.printStackTrace();
 			Tools.showError(this, e, true);
 		}
 		
@@ -739,6 +733,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	@Override
 	public void onResume() {
 		super.onResume();
+		isResuming = true;
 		glSurfaceView.requestRender();
 	}
 
@@ -755,10 +750,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	@Override
 	protected void onPause()
 	{
+		isResuming = false;
 		if (AndroidDisplay.grab){
 			sendKeyPress(Keyboard.KEY_ESCAPE);
 		}
 		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		isResuming = false;
+		super.onStop();
 	}
 
 	@Override
@@ -793,6 +795,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             default:
                 return false;
         }
+		
+		if (v instanceof ControlView) {
+			
+		}
+		
+		
 		/*
 		switch (v.getId()) {
 			case R.id.control_up: sendKeyPress(Keyboard.KEY_W, isDown); break;

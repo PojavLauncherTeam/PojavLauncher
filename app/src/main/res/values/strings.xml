@@ -33,7 +33,7 @@
 	<string name="login_select_account">Select account</string>
 	
 	<!-- Hint -->
-	<string name="hint_select_account">To select, click it. To delete an account, hold it.</string>
+	<string name="hint_select_account">Tip: Hold an account to delete</string>
 	<string name="hint_control_mapping">"This feature is not yet finished so can't apply custom control at the moment!\nSwipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
 	
 	<!-- Warning -->
@@ -108,6 +108,9 @@
 	<string name="mcl_setting_veroption_oldbeta">Old-beta</string>
 		
 	<string name="mcl_version_clone">Clone</string>
+	
+	<!-- Errors... buggy? -->
+	<string name="error_category_launch">Error</string>
 	
 	<!-- Global strings -->
 	<string name="global_add">Add</string>

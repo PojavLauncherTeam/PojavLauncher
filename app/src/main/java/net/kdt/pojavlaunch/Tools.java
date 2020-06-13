@@ -163,6 +163,7 @@ public final class Tools
 
 	private static void showError(final Context ctx, final Throwable e, final boolean exitIfOk, final boolean showMore)
 	{
+		e.printStackTrace();
 		Runnable runnable = new Runnable(){
 
 			@Override
