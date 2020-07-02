@@ -6,6 +6,7 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 - Impossible for directly run. RoboVM is AOT Compiler.
 
 ## Known issues (v2)
+- For many reports, Android 6 users can't run any Minecraft versions and error `ClassNotFoundException`. Confirmed in #237 #123 #55. Not confirmed in #217 #46 #21.
 - Some Huawei devices can't run Minecraft or OptiFine.
 - Can't run multiple versions at same time.
 
