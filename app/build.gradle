@@ -9,12 +9,12 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "2.5.0_preview1_6397b_20200417"
+        versionName "2.5.1_6398b_20200719"
     }
 	
     buildTypes {
         release {
-			// Don't set to true or java.awt will be a.a or something similar.
+	    // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             multiDexEnabled = true
