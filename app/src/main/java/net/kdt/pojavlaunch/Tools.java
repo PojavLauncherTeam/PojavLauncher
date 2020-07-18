@@ -33,6 +33,7 @@ public final class Tools
 	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/minecraft";
 	public static String ASSETS_PATH = MAIN_PATH + "/assets";
 	public static String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
+	public static String CTRLDEF_FILE = MAIN_PATH + "/controlmap/default.json";
 	
 	public static int usingVerCode = 1;
 	public static String usingVerName = "2.4.2";
@@ -72,12 +73,6 @@ public final class Tools
 
 	public static String getPatchedFile(String version) {
 		return versnDir + "/" + version + "/" + version + ".jar";
-	}
-
-	// May useless
-	public static boolean isOptifineInstalled(String version)
-	{
-		return new File(versnDir + "/" + version + "/optifine.jar").exists();
 	}
 
 	private static boolean isClientFirst = false;
@@ -155,13 +150,6 @@ public final class Tools
 			showError(ctx, e);
 		}
 	}
-	
-	/*
-	 public static void extractLibraries(Activity ctx) throws Exception
-	 {
-	 extractAssetFolder(ctx, "libraries", worksDir);
-	 }
-	 */
 
 	public static void showError(Context ctx, Throwable e)
 	{

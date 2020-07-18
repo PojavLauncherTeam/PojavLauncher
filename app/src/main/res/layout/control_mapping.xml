@@ -33,6 +33,6 @@
 		android:fitsSystemWindows="true"
 		app:menu="@menu/menu_customctrl"
 		android:id="@+id/customctrl_navigation_view"/>
-	
+
 </android.support.v4.widget.DrawerLayout>
 

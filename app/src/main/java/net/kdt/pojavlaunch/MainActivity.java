@@ -79,15 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private DisplayMetrics displayMetrics;
 	public boolean hiddenTextIgnoreUpdate = true;
 	public String hiddenTextContents = initText;
-	private Button upButton,
-				   downButton, leftButton,
-				   rightButton, jumpButton,
-				   primaryButton, secondaryButton,
-				   debugButton, shiftButton,
-				   keyboardButton, inventoryButton,
-				   talkButton, thirdPersonButton,
-				   zoomButton, listPlayersButton,
-				   toggleControlButton;
+	private ControlsLayout controlLayout;
 	private LinearLayout touchPad;
 	private ImageView mousePointer;
 	//private EditText hiddenEditor;
@@ -114,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	
 	private View.OnTouchListener glTouchListener;
 	
-	private Button[] controlButtons;
+	// private Button[] controlButtons;
 	
 	/*
 	private LinearLayout contentCanvas;
@@ -198,6 +190,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			System.out.println("WidthHeight: " + AndroidDisplay.windowWidth + ":" + AndroidDisplay.windowHeight);
 			
 			gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+
+			glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 			
 			// Menu
 			drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_options);
@@ -223,22 +217,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				});
 
-			this.upButton = findButton(R.id.control_up);
-			this.downButton = findButton(R.id.control_down);
-			this.leftButton = findButton(R.id.control_left);
-			this.rightButton = findButton(R.id.control_right);
-			this.jumpButton = findButton(R.id.control_jump);
-			this.primaryButton = findButton(R.id.control_primary);
-			this.secondaryButton = findButton(R.id.control_secondary);
-			this.debugButton = findButton(R.id.control_debug);
-			this.shiftButton = findButton(R.id.control_shift);
-			this.keyboardButton = findButton(R.id.control_keyboard);
-			this.inventoryButton = findButton(R.id.control_inventory);
-			this.talkButton = findButton(R.id.control_talk);
-			this.thirdPersonButton = findButton(R.id.control_thirdperson);
-			this.zoomButton = findButton(R.id.control_zoom);
-			this.listPlayersButton = findButton(R.id.control_listplayers);
-			this.toggleControlButton = findButton(R.id.control_togglecontrol);
+				
+			/*
 			this.controlButtons = new Button[]{
 				upButton, downButton, leftButton, rightButton,
 				jumpButton, primaryButton, secondaryButton,
@@ -246,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				inventoryButton, talkButton, thirdPersonButton,
 				listPlayersButton
 			};
+			*/
 			// this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
 			
 			//this.hiddenEditor = findViewById(R.id.hiddenTextbox);
@@ -276,11 +257,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			
 			this.debugText = (TextView) findViewById(R.id.content_text_debug);
 				
-			this.toggleControlButton.setOnClickListener(this);
-			this.zoomButton.setVisibility(mVersionInfo.optifineLib == null ? View.GONE : View.VISIBLE);
-			
-			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
-			
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 			specialButtons[0].specialButtonListener = new View.OnClickListener(){
 
@@ -295,12 +271,51 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				@Override
 				public void onClick(View view)
 				{
-					MainActivity.this.onClick(toggleControlButton);
+					controlLayout.toggleControlVisible();
 				}
 			};
+			specialButtons[2].specialButtonListener = new View.OnTouchListener(){
 
+				@Override
+				public boolean onTouch(View view, MotionEvent event)
+				{
+					boolean isDown = (event.getActionMasked() == MotionEvent.ACTION_DOWN);
+					sendMouseButton(0, isDown);
+					return true;
+				}
+			};
+			specialButtons[3].specialButtonListener = new View.OnTouchListener(){
+
+				@Override
+				public boolean onTouch(View view, MotionEvent event)
+				{
+					boolean isDown = (event.getActionMasked() == MotionEvent.ACTION_DOWN);
+					if (AndroidDisplay.grab) {
+						sendMouseButton(1, isDown);
+					} else {
+						setRightOverride(isDown);
+					}
+					return true;
+				}
+			};
+			specialButtons[4].specialButtonListener = new View.OnClickListener(){
+
+				@Override
+				public void onClick(View view)
+				{
+					if (AndroidDisplay.grab) return;
+
+					boolean isVis = touchPad.getVisibility() == View.VISIBLE;
+					touchPad.setVisibility(isVis ? View.GONE : View.VISIBLE);
+					// ((Button) view).setText(isVis ? R.string.control_mouseoff: R.string.control_mouseon);
+				}
+			};
+			controlLayout = findViewById(R.id.main_controllayout);
+			controlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+			controlLayout.setModifiable(false);
+			
 			// toggleGui(null);
-			onClick(toggleControlButton);
+			// onClick(toggleControlButton);
 			this.drawerLayout.closeDrawers();
 			
 			AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
@@ -621,7 +636,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				});
 			glSurfaceView.setOnTouchListener(glTouchListener);
-			glSurfaceView.setRenderer(new GLTextureView.Renderer() {
+			glSurfaceView.setRenderer(new MinecraftGLView.Renderer() {
 					@Override
 					public void onSurfaceDestroyed(GL10 gl) {
 						Log.d(Tools.APP_NAME, "Surface destroyed.");
@@ -748,16 +763,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	@Override
 	public void onClick(View view) {
+		/*
 		switch (view.getId()) {
-			case R.id.control_togglecontrol: {
-				/*
-				switch(overlayView.getVisibility()){
-					case View.VISIBLE: overlayView.setVisibility(View.GONE);
-						break;
-					case View.GONE: overlayView.setVisibility(View.VISIBLE);
-				}
-				*/
-				
+			case R.id.control_togglectrl: {
 				for (Button button : controlButtons) {
 					button.setVisibility(button.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
 				}
@@ -765,7 +773,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				zoomButton.setVisibility((zoomButton.getVisibility() == View.GONE && mVersionInfo.optifineLib != null) ? View.VISIBLE : View.GONE);
 			}
 		}
+		*/
 	}
+	
+	
 	
     public boolean onTouch(View v, MotionEvent e) {
         boolean isDown;
@@ -782,7 +793,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             default:
                 return false;
         }
-		
+		/*
 		switch (v.getId()) {
 			case R.id.control_up: sendKeyPress(Keyboard.KEY_W, isDown); break;
 			case R.id.control_left: sendKeyPress(Keyboard.KEY_A, isDown); break;
@@ -795,8 +806,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					sendMouseButton(1, isDown);
 				} else {
 					if (!isDown) {
-						AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, (byte) 0, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
-						AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, (byte) 1, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+						AndroidDisplay.putMouseEventWithCoords((byte) 1, (byte) 0, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+						AndroidDisplay.putMouseEventWithCoords((byte) 1, (byte) 1, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
 					}
 					setRightOverride(isDown);
 				} break;
@@ -809,7 +820,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			case R.id.control_zoom: sendKeyPress(Keyboard.KEY_C, isDown); break;
 			case R.id.control_listplayers: sendKeyPress(Keyboard.KEY_TAB, isDown); break;
 		}
-		
+		*/
         return false;
     }
 	
@@ -1222,20 +1233,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         // this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
     }
 	
-	public void sendKeyPress(int keyCode, boolean status) {
+	public static void sendKeyPress(int keyCode, boolean status) {
         sendKeyPress(keyCode, '\u0000', status);
     }
 
-    public void sendKeyPress(int keyCode, char keyChar, boolean status) {
+    public static void sendKeyPress(int keyCode, char keyChar, boolean status) {
         AndroidDisplay.setKey(keyCode, keyChar, status);
     }
 	
-	public void sendKeyPress(char keyChar) {
+	public static void sendKeyPress(char keyChar) {
 		sendKeyPress(0, keyChar, true);
 		sendKeyPress(0, keyChar, false);
 	}
 	
-	public void sendKeyPress(int keyCode) {
+	public static void sendKeyPress(int keyCode) {
 		sendKeyPress(keyCode, true);
 		sendKeyPress(keyCode, false);
 	}
