@@ -1069,13 +1069,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	private void openLogOutput() {
-		WindowAnimation.fadeIn(contentLog, 500);
+		contentLog.setVisibility(View.VISIBLE);
 	}
 
 	public void closeLogOutput(View view) {
-		//scrollLog.setVisibility(View.GONE);
-
-		WindowAnimation.fadeOut(contentLog, 500);
+		contentLog.setVisibility(View.GONE);
 	}
 	/*
 	 private void openCanvasOutput() {
