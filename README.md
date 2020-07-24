@@ -5,7 +5,7 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 Discord server: https://discord.gg/6RpEJda
 
 ## iOS version?
-- Impossible for directly run. RoboVM is AOT Compiler.
+- Impossible for directly run.
 
 ## Known issues (v2)
 - For many reports, Android 6 users can't run any Minecraft versions and error `ClassNotFoundException`. Confirmed in #237 #123 #55. Not confirmed in #217 #46 #21.
@@ -15,12 +15,8 @@ Discord server: https://discord.gg/6RpEJda
 ## Frequently asked questions
 - [See here](https://github.com/khanhduytran0/PojavLauncher/wiki/Frequently-asked-questions).
 
-## OptiFine worked in PojavLauncher 2.4.2
-|Android version  |  9.0 |???|???|Manually Android 10|9.0|
-|-----------------|------|---|---|-----|-----|
-|Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
-|OptiFine         |OptiFine_1.7.10_HD_U_E7|???|???|OptiFine_1.10_HD_U_H5|OptiFine_1.11_HD_U_F5|
-|Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://youtu.be/TJeJcPFgzcI)|[Worked (with 1 hack)](https://youtu.be/eIawM9UmQ88)
+## A note about 1.12.x
+- Minecraft 1.12.x can be run on Android 8.0 and above by use d8 for desugar and dexing in the latest v2, but will crash if join world/multiplayer.
 
 ## License
 - PojavLauncher ía licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
