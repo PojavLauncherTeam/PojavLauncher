@@ -74,16 +74,20 @@ public abstract class HandleView extends View implements ViewPositionListener, V
     }
 
 	private int getInternalId(String type, String name) {
-		for (Class perType : com.android.internal.R.class.getDeclaredClasses()) {
-			if (perType.getSimpleName().equals(type)) {
-				try {
-					Field f = perType.getDeclaredField(name);
-					f.setAccessible(true);
-					return f.get(null);
-				} catch (Throwable th) {
-					th.printStackTrace();
+		try {
+			for (Class perType : Class.forName("com.android.internal.R").getDeclaredClasses()) {
+				if (perType.getSimpleName().equals(type)) {
+					try {
+						Field f = perType.getDeclaredField(name);
+						f.setAccessible(true);
+						return f.get(null);
+					} catch (Throwable th) {
+						th.printStackTrace();
+					}
 				}
 			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 		return -1;
 	}

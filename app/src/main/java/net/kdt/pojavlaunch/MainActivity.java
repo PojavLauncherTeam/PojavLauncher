@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     private int fingerStillThreshold = 8;
 	private int initialX;
     private int initialY;
+	private boolean mIsResuming = false;
 	private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
 	private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
 	private static boolean triggeredLeftMouseButton = false;
@@ -614,7 +615,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
 					@Override
 					public boolean onHover(View p1, MotionEvent p2) {
-						if (!AndroidDisplay.grab && isResumed()) {
+						if (!AndroidDisplay.grab && mIsResuming) {
 							return glTouchListener.onTouch(p1, p2);
 						}
 						return true;
@@ -724,6 +725,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	@Override
 	public void onResume() {
 		super.onResume();
+		mIsResuming = true;
 		glSurfaceView.requestRender();
 	}
 
@@ -743,6 +745,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		if (AndroidDisplay.grab){
 			sendKeyPress(Keyboard.KEY_ESCAPE);
 		}
+		mIsResuming = false;
 		super.onPause();
 	}
 
@@ -1070,10 +1073,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private void openLogOutput() {
 		contentLog.setVisibility(View.VISIBLE);
+		mIsResuming = false;
 	}
 
 	public void closeLogOutput(View view) {
 		contentLog.setVisibility(View.GONE);
+		mIsResuming = true;
 	}
 	/*
 	 private void openCanvasOutput() {
