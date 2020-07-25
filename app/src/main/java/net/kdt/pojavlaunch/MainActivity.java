@@ -887,12 +887,45 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		varArgMap.put("user_type", userType);
 		varArgMap.put("version_type", mVersionInfo.type);
 		varArgMap.put("game_assets", Tools.ASSETS_PATH);
-
-		String[] argsFromJson = insertVariableArgument(splitAndFilterEmpty(mVersionInfo.minecraftArguments), varArgMap);
+		
+		List<String> minecraftArgs = new ArrayList<String>();
+		if (mVersionInfo.arguments != null) {
+			// Support Minecraft 1.13
+			for (Object arg : mVersionInfo.arguments.game) {
+				if (arg instanceof String) {
+					minecraftArgs.add((String) arg);
+				} else {
+					/*
+					 for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
+					 // rule.action = allow
+					 // TODO implement this
+					 }
+					 */
+				}
+			}
+		}
+		
+		String[] argsFromJson = insertVariableArgument(
+			splitAndFilterEmpty(
+			   mVersionInfo.minecraftArguments == null ?
+				   fromStringArray(minecraftArgs.toArray(new String[0])):
+				   mVersionInfo.minecraftArguments
+			), varArgMap
+		);
 		// Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
 		return argsFromJson;
 	}
+	
+	private String fromStringArray(String[] strArr) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < strArr.length; i++) {
+			if (i > 0) builder.append(" ");
+			builder.append(strArr[i]);
+		}
 
+		return builder.toString();
+	}
+	
 	private String[] splitAndFilterEmpty(String argStr) {
 		List<String> strList = new ArrayList<String>();
 		strList.add("--fullscreen");
@@ -919,7 +952,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 		return args;
 	}
-
+	
 	public static String launchClassPath;
 	public static String launchOptimizedDirectory;
 	public static String launchLibrarySearchPath;
