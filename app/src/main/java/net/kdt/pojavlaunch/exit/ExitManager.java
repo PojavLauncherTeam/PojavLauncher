@@ -3,7 +3,7 @@ package net.kdt.pojavlaunch.exit;
 import java.lang.reflect.*;
 
 public class ExitManager {
-	private static boolean stopLoop = false;
+	private static boolean stopLoop = true;
 	
 	private static ExitTrappedListener listener;
 	private static Thread exitTrappedHook = new Thread(new Runnable(){
@@ -12,24 +12,21 @@ public class ExitManager {
 		public void run()
 		{
 			if (listener != null) listener.onExitTrapped();
-			// Pre-check
-			// if (stopLoop) stopLoop = false;
 			
-			while (true) {
-				if (stopLoop) {
-					stopLoop = false;
-					break;
-				}
-				
+			stopLoop = false;
+			
+			while (!stopLoop) {
 				// Make Thread hook never stop, then System.exit() never continue!
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {}
 			}
-			
-			stopLoop = false;
 		}
 	});
+	
+	public static boolean isExiting() {
+		return !stopLoop;
+	}
 	
 	public static void setExitTrappedListener(ExitTrappedListener l) {
 		listener = l;

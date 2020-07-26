@@ -146,7 +146,7 @@
 	<string name="mcn_exit_title">Game exited</string>
 	<string name="mcn_exit_call">Exit</string>
 	<string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
-	<string name="mcn_exit_errcrash">Unable to locate crash!</string>
+	<string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
 	<string name="mcn_exit_confirm">Are you sure want to force close?</string>
 	
 	<!-- MainActivity: Control buttons -->

@@ -817,6 +817,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     }
 
 	public static void fullyExit() {
+		if (!ExitManager.isExiting()) {
+			ExitManager.enableSystemExit();
+			System.exit(0);
+		}
 		ExitManager.stopExitLoop();
 	}
 
@@ -982,56 +986,73 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void fixRSAPadding() throws Exception {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
+		System.out.println("Before: " + KeyFactory.getInstance("RSA") + " ; " + KeyFactory.getInstance("RSA").getProvider().toString());
+
 		try {
 			/*
 			 System.out.println(Cipher.getInstance("RSA"));
 			 System.out.println(Cipher.getInstance("RSA/ECB/PKCS1Padding"));
 			 */
-			if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
-				// FUUUUU I DON'T KNOW FIXME
-				Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-				// Cipher.getInstance("RSA", rsaPkcs1Cipher.getProvider());
 
-				Cipher newRSACipher = Cipher.getInstance("RSA");
+			Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+			Cipher rsaCipher = Cipher.getInstance("RSA");
 
-				Field fieldPKCS1 = Provider.class.getDeclaredField("serviceMap");
-				fieldPKCS1.setAccessible(true);
-				Map /* <Provider.ServerKey, Provider.Service> */ mapPKCS1 = (Map) fieldPKCS1.get(rsaPkcs1Cipher.getProvider());
-
-				Field fieldRSA = Provider.class.getDeclaredField("serviceMap");
-				fieldRSA.setAccessible(true);
-				Map /* <Provider.ServerKey, Provider.Service> */ mapRSA = (Map) fieldRSA.get(newRSACipher.getProvider());
-				mapRSA.clear();
-				mapRSA.putAll(mapPKCS1);
-			} else {
-				ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
-				ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
-				rsaList.clear();
-				rsaList.addAll(rsaPkcs1List);
+			for (Provider.Service ser : rsaPkcs1Cipher.getProvider().getServices()) {
+				System.out.println(" - " + ser.getType() + ", " + ser.getAlgorithm());
 			}
+
+			Provider.Service servicePkcs1 = rsaPkcs1Cipher.getProvider().getService("Cipher", "RSA/ECB/PKCS1Padding");
+			Provider rsaProvider = rsaCipher.getProvider();
+
+			Map pkcs1Map = new ArrayMap();
+			for (Map.Entry entry : servicePkcs1.getProvider().entrySet()) {
+				pkcs1Map.put(entry.getKey(), entry.getValue());
+			}
+
+			if (Build.VERSION.SDK_INT < 24) {
+				rsaProvider.putAll(pkcs1Map);
+			} else {
+				// Method rsaMethod_clear = rsaProvider.getClass().getDeclaredMethod("implClear");
+				Method rsaMethod_putAll = rsaProvider.getClass().getDeclaredMethod("implPutAll", Map.class);
+				// rsaMethod_clear.setAccessible(true);
+				rsaMethod_putAll.setAccessible(true);
+
+				// rsaMethod_clear.invoke(rsaProvider);
+				rsaMethod_putAll.invoke(rsaProvider, pkcs1Map);
+			}
+
+			/*
+			 if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
+			 // FUUUUU I DON'T KNOW FIXME
+			 } else {
+			 ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
+			 ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
+			 rsaList.clear();
+			 rsaList.addAll(rsaPkcs1List);
+			 }
+			 */
 		} catch (Throwable th) {
-			// Tools.dialogOnUiThread(MainActivity.this, "Warning: can't fix RSA Padding", Log.getStackTraceString(th));
 			th.printStackTrace();
 
 			runOnUiThread(new Runnable(){
-
 					@Override
-					public void run()
-					{
-						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. You can't play premium servers", Toast.LENGTH_LONG).show();
+					public void run() {
+						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited!", Toast.LENGTH_LONG).show();
 					}
 				});
 		}
 
 
-		//System.out.println("After: " + KeyFactory.getInstance("RSA") + ":" + KeyFactory.getInstance("RSA").getProvider());
+		System.out.println("After: " + KeyFactory.getInstance("RSA") + " ; " + KeyFactory.getInstance("RSA").getProvider().toString());
 
-		/*		Provider provider = KeyFactory.getInstance("RSA").getProvider();
+		/*
+		 Provider provider = KeyFactory.getInstance("RSA").getProvider();
 		 System.out.println("Before: " + provider.getService("KeyService", "RSA"));
 		 Provider.Service service = provider.getService("KeyService", "RSA/ECB/PKCS5Padding");
 		 System.out.println(service);
 		 provider.putService(service);
-		 System.out.println("After: " + provider.getService("KeyService", "RSA"));*/
+		 System.out.println("After: " + provider.getService("KeyService", "RSA"));
+		 */
 	}
 
 	public void printStream(InputStream stream) {
@@ -1185,7 +1206,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 
 					// If we are unable to enable exit, use method: kill myself.
-					android.os.Process.killProcess(android.os.Process.myPid());
+					// android.os.Process.killProcess(android.os.Process.myPid());
 
 					// Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();
 				}
