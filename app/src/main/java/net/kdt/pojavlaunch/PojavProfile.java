@@ -46,11 +46,7 @@ public class PojavProfile
 		if (profileCon.equals(":::::")) {
 			throw new RuntimeException("Profile not set or reset.");
 		}
-		/*
-		if (true) {
-			throw new RuntimeException(profilePath + ":" + new File(profilePath).exists());
-		}
-		*/
+		
 		return new File(profilePath).exists();
 	}
 }

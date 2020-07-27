@@ -5,6 +5,7 @@
 		<item name="windowActionBar">false</item>
 		<item name="android:windowContentOverlay">@null</item>
 		<item name="android:windowFullscreen">true</item>
+		<item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 	</style>
 	
 	<style name="RunTheme" parent="@style/Theme.AppCompat.NoActionBar">

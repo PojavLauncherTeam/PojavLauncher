@@ -717,6 +717,8 @@ public class Main {
         String fixedName = fixPath(name);
 
         if (isClass) {
+			
+			// if (fixedName.startsWith("META-INF/versions/9")) return false;
 
             if (keepResources && args.keepClassesInJar) {
                 synchronized (outputResources) {

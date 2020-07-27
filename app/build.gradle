@@ -9,12 +9,12 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "2.4.2_preview11b3_6397b_20200418"
+        versionName "2.5.1_6398b_20200719"
     }
 	
     buildTypes {
         release {
-			// Don't set to true or java.awt will be a.a or something similar.
+	    // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             multiDexEnabled = true
@@ -22,7 +22,7 @@ android {
         }
     }
 	
-	// Keep the following configuration in order to target Java 8.
+	// Keep the following configuration in order to might make Minecraft 1.12 support.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -34,7 +34,9 @@ dependencies {
 	implementation 'commons-codec:commons-codec:1.14'
     implementation 'com.wu-man:android-bsf-api:3.1.3'
     implementation 'com.android.support:support-v4:26.0.0'
+    implementation 'com.android.support:preference-v7:26.0.0'
     implementation 'com.android.support:appcompat-v7:26.0.0'
+	implementation 'com.android.support:preference-v14:26.0.0'
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support:support-annotations:26.0.0'
 	// compile 'com.google.guava:guava:24.0-android'

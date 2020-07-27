@@ -1,14 +1,17 @@
 package net.kdt.pojavlaunch.prefs;
 
-import net.kdt.pojavlaunch.*;
-import android.os.*;
-import android.support.v7.app.*;
-import android.widget.*;
 import android.content.*;
-import com.pojavdx.dex.*;
+import android.os.*;
+import android.view.*;
+import android.widget.*;
+import android.widget.CompoundButton.*;
+import android.widget.SeekBar.*;
 import com.kdt.mcgui.app.*;
+import com.pojavdx.dex.*;
+import java.lang.reflect.*;
+import net.kdt.pojavlaunch.*;
 
-public class PojavPreferenceActivity extends MineActivity
+public class PojavPreferenceActivity extends MineActivity implements OnCheckedChangeListener, OnSeekBarChangeListener
 {
 	public static boolean PREF_FREEFORM = false;
 	public static boolean PREF_FORGETOF = false;
@@ -17,6 +20,7 @@ public class PojavPreferenceActivity extends MineActivity
 	private SeekBar viewSeekDxRef, viewSeekControlSize;
 	private TextView viewSeekProgressDxRef, viewSeekProgressControl;
 	private Switch viewSwitchFreeform, viewSwitchForgetOF;
+	private CheckBox viewCheckVTypeRelease, viewCheckVTypeSnapshot, viewCheckVTypeOldAlpha, viewCheckVTypeOldBeta;
 	
 	private SharedPreferences mainPreference;
 	@Override
@@ -30,14 +34,14 @@ public class PojavPreferenceActivity extends MineActivity
 		 * - Having trouble setting.
 		 */
 
-		PojavPreferenceActivity.loadPreferences(this);
+		LauncherPreferences.loadPreferences(this);
 		
 		mainPreference = getSharedPreferences("pojav_preferences", MODE_PRIVATE);
 		final SharedPreferences.Editor mainPrefEdit = mainPreference.edit();
 		
 		// DX Refs
-		viewSeekDxRef = (SeekBar) findViewById(R.id.settings_seekbar_setmaxdxref);
-		viewSeekProgressDxRef = (TextView) findViewById(R.id.setting_progressseek_maxdxref);
+		viewSeekDxRef = (SeekBar) findView(R.id.settings_seekbar_setmaxdxref);
+		viewSeekProgressDxRef = (TextView) findView(R.id.setting_progressseek_maxdxref);
 		viewSeekDxRef.setMax(0xFFFF - 0xFFF);
 		viewSeekDxRef.setProgress(DexFormat.MAX_MEMBER_IDX - 0xFFF);
 		viewSeekDxRef.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
@@ -62,8 +66,8 @@ public class PojavPreferenceActivity extends MineActivity
 		viewSeekProgressDxRef.setText((viewSeekDxRef.getProgress() + 0xFFF) + "/" + 0xFFFF);
 
 		// Control size
-		viewSeekControlSize = (SeekBar) findViewById(R.id.settings_seekbar_controlsize);
-		viewSeekProgressControl = (TextView) findViewById(R.id.setting_progressseek_control);
+		viewSeekControlSize = (SeekBar) findView(R.id.settings_seekbar_controlsize);
+		viewSeekProgressControl = (TextView) findView(R.id.setting_progressseek_control);
 		viewSeekControlSize.setMax(200);
 		viewSeekControlSize.setProgress((int) (PREF_BUTTONSIZE * 100));
 		viewSeekControlSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
@@ -90,48 +94,91 @@ public class PojavPreferenceActivity extends MineActivity
 		viewSeekProgressControl.setText(((float) viewSeekControlSize.getProgress() / 100f) + "/2");
 		
 		// Freeform mode
-		viewSwitchFreeform = (Switch) findViewById(R.id.settings_switch_enablefreeform);
-		viewSwitchFreeform.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener(){
-
-				@Override
-				public void onCheckedChanged(CompoundButton b, boolean z)
-				{
-					mainPrefEdit.putBoolean("freeform", z);
-					mainPrefEdit.commit();
-				}
-			});
+		viewSwitchFreeform = (Switch) findView(R.id.settings_switch_enablefreeform);
 		viewSwitchFreeform.setChecked(PREF_FREEFORM);
 		viewSwitchFreeform.setEnabled(Build.VERSION.SDK_INT >= 24);
 		
 		// Forget OptiFine path
-		viewSwitchForgetOF = (Switch) findViewById(R.id.settings_switch_forgetoptifpath);
-		viewSwitchForgetOF.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener(){
-
-				@Override
-				public void onCheckedChanged(CompoundButton b, boolean z)
-				{
-					mainPrefEdit.putBoolean("forgetOptifinePath", z);
-					mainPrefEdit.commit();
-				}
-			});
+		viewSwitchForgetOF = (Switch) findView(R.id.settings_switch_forgetoptifpath);
 		viewSwitchForgetOF.setChecked(PREF_FORGETOF);
+		
+		viewCheckVTypeRelease = (CheckBox) findView(R.id.settings_checkbox_vertype_release);
+		viewCheckVTypeSnapshot = (CheckBox) findView(R.id.settings_checkbox_vertype_snapshot);
+		viewCheckVTypeOldAlpha = (CheckBox) findView(R.id.settings_checkbox_vertype_oldalpha);
+		viewCheckVTypeOldBeta = (CheckBox) findView(R.id.settings_checkbox_vertype_oldbeta);
 	}
 
 	@Override
-	public void onBackPressed()
-	{
+	public void onBackPressed() {
 		super.onBackPressed();
-		PojavPreferenceActivity.loadPreferences(this);
+		LauncherPreferences.loadPreferences(this);
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton btn, boolean isChecked) {
+		String prefName = null;
+		switch (btn.getId()) {
+			case R.id.settings_switch_enablefreeform:
+				
+				prefName = "freeform";
+				break;
+			case R.id.settings_switch_forgetoptifpath:
+				prefName = "forgetOptifinePath";
+				break;
+			case R.id.settings_checkbox_vertype_release:
+				prefName = "vertype_release";
+				break;
+			case R.id.settings_checkbox_vertype_snapshot:
+				prefName = "vertype_snapshot";
+				break;
+			case R.id.settings_checkbox_vertype_oldalpha:
+				prefName = "vertype_oldalpha";
+				break;
+			case R.id.settings_checkbox_vertype_oldbeta:
+				prefName = "vertype_oldbeta";
+				break;
+		}
+		
+		mainPreference.edit()
+			.putBoolean(prefName, isChecked)
+			.commit();
+	}
+
+	@Override
+	public void onProgressChanged(SeekBar p1, int p2, boolean p3) {
+		// Unused
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar bar) {
+		// Unused
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar bar) {
+		float currProgress = (float) bar.getProgress() / 100;
+		String progressStr = Float.toString(currProgress);
+		if (progressStr.length() == 3) progressStr = progressStr + "0";
+		
+		try {
+			Field field = R.id.class.getDeclaredField(getId(bar.getId()).replace("seekbar", "progressseek"));
+			((TextView) findViewById(field.get(null))).setText(currProgress + "/" + bar.getMax());
+		} catch (Throwable th) {
+			throw new RuntimeException(th);
+		}
 	}
 	
-	public static void loadPreferences(Context ctx) {
-		SharedPreferences mainPreference = ctx.getSharedPreferences("pojav_preferences", MODE_PRIVATE);
-		int maxDxPref = mainPreference.getInt("maxDxRefs", 0xFFF);
-		DexFormat.MAX_MEMBER_IDX = maxDxPref;
-		DexFormat.MAX_TYPE_IDX = maxDxPref;
-		
-		PREF_BUTTONSIZE = mainPreference.getFloat("controlSize", 1f);
-		PREF_FREEFORM = mainPreference.getBoolean("freeform", false);
-		PREF_FORGETOF = mainPreference.getBoolean("forgetOptifinePath", false);
+	public View findView(int id) {
+		View view = findView(id);
+		if (view instanceof CompoundButton) {
+			((CompoundButton) view).setOnCheckedChangeListener(this);
+		}
+		return view;
 	}
+	
+	private String getId(int id) {
+		if (id == View.NO_ID) return "unknown";
+		else return getResources().getResourceEntryName(id);
+	}
+	
 }

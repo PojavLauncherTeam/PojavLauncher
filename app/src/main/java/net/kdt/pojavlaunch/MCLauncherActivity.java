@@ -134,7 +134,7 @@ public class MCLauncherActivity extends AppCompatActivity
 				versions.add(fVer.getName());
 			}
 		} catch (Exception e) {
-			versions.add(getStr(R.string.error_title) + ":");
+			versions.add(getStr(R.string.global_error) + ":");
 			versions.add(e.getMessage());
 
 		} finally {
@@ -147,8 +147,6 @@ public class MCLauncherActivity extends AppCompatActivity
 		adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 		versionSelector = (Spinner) findId(R.id.launcherMainSelectVersion);
 		versionSelector.setAdapter(adapter);
-
-		new RefreshVersionListTask().execute();
 
 		launchProgress = (ProgressBar) findId(R.id.progressDownloadBar);
 		launchTextStatus = (TextView) findId(R.id.progressDownloadText);
@@ -272,7 +270,12 @@ public class MCLauncherActivity extends AppCompatActivity
 		ArrayList<String> output = new ArrayList<String>();
 
 		for (JMinecraftVersionList.Version value1: list1) {
-			output.add(value1.id);
+			if ((value1.type.equals("release") && LauncherPreferences.PREF_VERTYPE_RELEASE) ||
+				(value1.type.equals("snapshot") && LauncherPreferences.PREF_VERTYPE_SNAPSHOT) ||
+				(value1.type.equals("old_alpha") && LauncherPreferences.PREF_VERTYPE_OLDALPHA) ||
+				(value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA)) {
+					output.add(value1.id);
+			}
 		}
 
 		for (File value2: list2) {
@@ -332,6 +335,8 @@ public class MCLauncherActivity extends AppCompatActivity
 	protected void onResumeFragments()
 	{
 		super.onResumeFragments();
+		new RefreshVersionListTask().execute();
+		
 		try{
 			final ProgressDialog barrier = new ProgressDialog(this);
 			barrier.setMessage("Waiting");
@@ -421,6 +426,17 @@ public class MCLauncherActivity extends AppCompatActivity
 	{
 		if (canBack) {
 			super.onBackPressed();
+		}
+	}
+	
+	// Catching touch exception
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		try {
+			return super.onTouchEvent(event);
+		} catch (Throwable th) {
+			Tools.showError(this, th);
+			return false;
 		}
 	}
 
@@ -517,7 +533,8 @@ public class MCLauncherActivity extends AppCompatActivity
 							libItem.name.startsWith("com.mojang:realms") ||
 							libItem.name.startsWith("net.java.jinput") ||
 							libItem.name.startsWith("net.minecraft.launchwrapper") ||
-							libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
+							// libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
+							libItem.name.startsWith("org.lwjgl") ||
 							libItem.name.startsWith("tv.twitch")
 							) { // Black list
 							publishProgress("1", "Ignored " + libItem.name);
@@ -839,18 +856,15 @@ public class MCLauncherActivity extends AppCompatActivity
 						case 1:{ // OptiFine installer
 								installOptiFine();
 							} break;
-						case 2:{ // Check update
-								checkUpdate();
-							} break;
-						case 3:{ // Custom controls
+						case 2:{ // Custom controls
 								if (Tools.enableDevFeatures) {
 									startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
 								}
 							} break;
-						case 4:{ // Settings
-								startActivity(new Intent(MCLauncherActivity.this, PojavPreferenceActivity.class));
+						case 3:{ // Settings
+								startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
 							} break;
-						case 5:{ // About
+						case 4:{ // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
 								aboutB.setTitle(R.string.mcl_option_about);
 								try
@@ -964,7 +978,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			super.onPreExecute();
 			dialog = new ProgressDialog(MCLauncherActivity.this);
 			dialog.setTitle("Installing OptiFine");
-			dialog.setMessage("Prepaping");
+			dialog.setMessage("Preparing");
 			dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			dialog.setMax(5);
 			dialog.setCancelable(false);
@@ -991,12 +1005,12 @@ public class MCLauncherActivity extends AppCompatActivity
 			Throwable throwable = null;
 			File convertedFile = null;
 			try {
-				publishProgress("Prepaping", "5");
+				publishProgress("Preparing", "5");
 				
 				String origMd5 = OptiFinePatcher.calculateMD5(file[0]);
 				convertedFile = new File(Tools.optifineDir, origMd5 + ".jar");
 				if (!convertedFile.exists()) {
-					publishProgress("Patching OptiFine Installer", null, "1", "ADD");
+					publishProgress("Patching OptiFine Installer", null, "1", "true");
 
 					Tools.extractAssetFolder(MCLauncherActivity.this, "optifine_patch", Tools.optifineDir, true);
 
@@ -1005,7 +1019,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
 					File patchedFile = new File(output[1]);
 
-					publishProgress("Converting OptiFine", null, "1", "ADD");
+					publishProgress("Converting OptiFine", null, null, "false");
 
 					System.setOut(new PrintStream(logOut));
 					System.setErr(new PrintStream(logErr));
@@ -1014,7 +1028,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							@Override
 							public void onReceived(String msg, int max, int current)
 							{
-								publishProgress("Converting OptiFine: " + msg, Integer.toString(max), Integer.toString(current), "SET");
+								publishProgress("Converting OptiFine: " + msg, Integer.toString(max), null);
 							}
 					});
 
@@ -1027,7 +1041,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					patchedFile.delete();
 				}
 
-				publishProgress("Launching OptiFine installer", null, "1", "ADD");
+				publishProgress("Launching OptiFine installer", null, null, "true");
 
 				File optDir = getDir("dalvik-cache", 0);
 				optDir.mkdir();
@@ -1039,11 +1053,15 @@ public class MCLauncherActivity extends AppCompatActivity
 				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
 				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
 
-				publishProgress("(4/5) Patching OptiFine Tweaker", null, "1", "ADD");
+				publishProgress("(4/5) Patching OptiFine Tweaker", null, null);
 				File optifineLibFile = new File(AndroidOptiFineUtilities.optifineOutputJar);
+				if (!optifineLibFile.exists()) {
+					throw new FileNotFoundException(optifineLibFile.getAbsolutePath() + "\n\n--- OptiFine installer log ---\n" + currentLog.toString());
+				}
 				new OptiFinePatcher(optifineLibFile).saveTweaker();
+				convertedFile.delete();
 				
-				publishProgress("(5/5) Done!", null, "1", "ADD");
+				publishProgress("(5/5) Done!", null, null);
 				Thread.sleep(500);
 			} catch (Throwable th) {
 				throwable = th;
@@ -1069,14 +1087,12 @@ public class MCLauncherActivity extends AppCompatActivity
 		protected void onProgressUpdate(String[] text) {
 			super.onProgressUpdate(text);
 			dialog.setMessage(text[0]);
-			if (text.length >= 2 && text[1] != null) {
+			if (text.length > 1 && text[1] != null) {
 				dialog.setMax(Integer.valueOf(text[1]));
-			} if (text.length >= 4) {
-				if (text[3].equals("ADD")) {
-					dialog.setProgress(dialog.getProgress() + Integer.valueOf(text[2]));
-				} else if (text[3].equals("SET")) {
-					dialog.setProgress(7 + Integer.valueOf(text[2]));
-				}
+			} if (text.length > 2) {
+				dialog.setProgress(dialog.getProgress() + 1);
+			} if (text.length > 3 && text[3] != null) {
+				dialog.setIndeterminate(Boolean.getBoolean(text[3]));
 			}
 		}
 
@@ -1093,117 +1109,6 @@ public class MCLauncherActivity extends AppCompatActivity
 				Tools.showError(MCLauncherActivity.this, th);
 			}
 		}
-	}
-
-	public void updateAppProcess(final String ver)
-	{
-		new Thread(new Runnable(){
-
-				@Override
-				public void run()
-				{
-					try
-					{
-						DownloadUtils.downloadFile(Tools.mhomeUrl + "/installer_" + ver + ".jar", new File(Tools.worksDir + "/installer.jar"));
-						startActivity(new Intent(MCLauncherActivity.this, UpdateAppActivity.class));
-					}
-					catch (Throwable e)
-					{
-						e.printStackTrace();
-						mkToast("Download failed: " + e.getMessage());
-					}
-				}
-			}).start();
-	}
-
-	public void checkUpdate() {
-		final ProgressDialog progUp = new ProgressDialog(this);
-		progUp.setMessage(getStr(R.string.mcl_option_checkupdate));
-		progUp.setCancelable(false);
-		progUp.show();
-
-		new Thread(new Runnable(){
-
-				@Override
-				public void run()
-				{
-					final AlertDialog.Builder alUp = new AlertDialog.Builder(MCLauncherActivity.this);
-					alUp.setTitle(R.string.mcl_option_checkupdate);
-
-					try {
-						final int myVer = Tools.usingVerCode;
-						// final String currVerName = Tools.usingVerName;
-
-						String[] totalNewVer = DownloadUtils.downloadString(Tools.mhomeUrl + "/update.txt").split(";");
-						final int newVer = Integer.parseInt(totalNewVer[1]);
-						final String newVerName = totalNewVer[0];
-
-						//int myVer = 102;
-
-						runOnUiThread(new Runnable(){
-
-								@Override
-								public void run()
-								{
-									if(newVer != -1){
-										boolean isAvailable = myVer < newVer;
-
-										String isNewVerAvailable =
-											isAvailable ?
-											"A new version is available!\nSee changelog at Launcher News tab." :
-											"This launcher is up-to-date!";
-
-										if (myVer > newVer) {
-											isNewVerAvailable = "This is an unreleased version or unofficial version?";
-										}
-
-										alUp.setMessage(
-											"Received version " + newVerName + "\n" +
-											isNewVerAvailable
-										);
-										if(isAvailable){
-											alUp.setPositiveButton("Update", new DialogInterface.OnClickListener(){
-													@Override
-													public void onClick(DialogInterface p1, int p2)
-													{
-														updateAppProcess(newVerName);
-													}
-												});
-										}
-									}
-									else{
-										alUp.setMessage("Failed to check for update. Reason: No Internet connection");
-									}
-									alUp.setNegativeButton(android.R.string.cancel, null);
-									alUp.show();
-								}
-							});
-					} catch (final Exception e) {
-						Log.e(Tools.APP_NAME + ".CheckUpdateError", e.getMessage());
-						e.printStackTrace();
-
-						runOnUiThread(new Runnable(){
-
-								@Override
-								public void run()
-								{
-									alUp.setMessage("Failed to check for update. Reason: " + e.getMessage());
-									alUp.show();
-								}
-							});
-					} finally {
-						runOnUiThread(new Runnable(){
-
-								@Override
-								public void run()
-								{
-									progUp.dismiss();
-								}
-							});
-
-					}
-				}
-			}).start();
 	}
 
 	private class ViewPagerAdapter extends FragmentPagerAdapter {

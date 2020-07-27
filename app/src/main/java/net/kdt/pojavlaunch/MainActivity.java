@@ -48,12 +48,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		Keyboard.KEY_1, Keyboard.KEY_2,	Keyboard.KEY_3,
 		Keyboard.KEY_4, Keyboard.KEY_5,	Keyboard.KEY_6,
 		Keyboard.KEY_7, Keyboard.KEY_8, Keyboard.KEY_9};
-	
+
 	private boolean rightOverride = false;
 	private int scaleFactor = 1;
     private int fingerStillThreshold = 8;
 	private int initialX;
     private int initialY;
+	private boolean mIsResuming = false;
 	private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
 	private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
 	private static boolean triggeredLeftMouseButton = false;
@@ -71,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						}
 					} break;
 				case MSG_DROP_ITEM_BUTTON_CHECK: {
-					sendKeyPress(Keyboard.KEY_Q, true);
-				} break;
+						sendKeyPress(Keyboard.KEY_Q, true);
+					} break;
 			}
 		}
 	};
@@ -82,57 +83,57 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public boolean hiddenTextIgnoreUpdate = true;
 	public String hiddenTextContents = initText;
 	private Button upButton,
-				   downButton, leftButton,
-				   rightButton, jumpButton,
-				   primaryButton, secondaryButton,
-				   debugButton, shiftButton,
-				   keyboardButton, inventoryButton,
-				   talkButton, thirdPersonButton,
-				   zoomButton, listPlayersButton,
-				   toggleControlButton;
+	downButton, leftButton,
+	rightButton, jumpButton,
+	primaryButton, secondaryButton,
+	debugButton, shiftButton,
+	keyboardButton, inventoryButton,
+	talkButton, thirdPersonButton,
+	zoomButton, listPlayersButton,
+	toggleControlButton;
 	private LinearLayout touchPad;
 	private ImageView mousePointer;
 	//private EditText hiddenEditor;
 	// private ViewGroup overlayView;
 	private MCProfile.Builder mProfile;
-	
+
 	private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
-	
+
 	private LinearLayout contentLog;
 	private TextView textLog, textLogBehindGL;
 	private ScrollView contentScroll;
 	private ToggleButton toggleLog;
 	private GestureDetector gestureDetector;
-	
+
 	private TextView debugText;
 
 	private PointerOreoWrapper pointerSurface;
 	private View.OnTouchListener pointerCaptureListener;
-	
+
 	// private String mQueueText = new String();
-	
+
 	private JMinecraftVersionList.Version mVersionInfo;
-	
+
 	private View.OnTouchListener glTouchListener;
-	
+
 	private Button[] controlButtons;
-	
+
 	/*
-	private LinearLayout contentCanvas;
-	private AWTSurfaceView contentCanvasView;
-	*/
+	 private LinearLayout contentCanvas;
+	 private AWTSurfaceView contentCanvasView;
+	 */
 	private boolean lastEnabled = false;
 	private boolean lastGrab = false;
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
 
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
-	
+
 	private String getStr(int id) {
 		return getResources().getString(id);
 	}
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -142,18 +143,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		try {
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
-			
+
 			setTitle("Minecraft " + mProfile.getVersion());
-			
 			//System.loadLibrary("gl4es");
 			this.displayMetrics = Tools.getDisplayMetrics(this);
-			
+
 			AndroidDisplay.windowWidth = displayMetrics.widthPixels / scaleFactor;
 			AndroidDisplay.windowHeight = displayMetrics.heightPixels / scaleFactor;
 			System.out.println("WidthHeight: " + AndroidDisplay.windowWidth + ":" + AndroidDisplay.windowHeight);
-			
+
 			gestureDetector = new GestureDetector(this, new SingleTapConfirm());
-			
+
 			// Menu
 			drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_options);
 
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				listPlayersButton
 			};
 			// this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
-			
+
 			//this.hiddenEditor = findViewById(R.id.hiddenTextbox);
 
 			// Mouse pointer part
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			this.toggleLog.setChecked(false);
 			this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
 			this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
-	
+
 			this.textLog.setTypeface(Typeface.MONOSPACE);
 			this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
 
@@ -228,14 +228,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						appendToLog("");
 					}
 				});
-			
+
 			this.debugText = (TextView) findViewById(R.id.content_text_debug);
-				
+
 			this.toggleControlButton.setOnClickListener(this);
 			this.zoomButton.setVisibility(mVersionInfo.optifineLib == null ? View.GONE : View.VISIBLE);
-			
+
 			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
-			
+
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 			specialButtons[0].specialButtonListener = new View.OnClickListener(){
 
@@ -257,9 +257,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			// toggleGui(null);
 			onClick(toggleControlButton);
 			this.drawerLayout.closeDrawers();
-			
+
 			AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
-			
+
 			placeMouseAt(AndroidDisplay.windowWidth / 2, AndroidDisplay.windowHeight / 2);
 			new Thread(new Runnable(){
 
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 										} else if (touchPad.getVisibility() != View.GONE) {
 											touchPad.setVisibility(View.GONE);
 										}
-										
+
 										if (isPointerCaptureSupported()) {
 											if (!AndroidDisplay.grab && isCapturing) {
 												pointerSurface.releaseCapture(); // glSurfaceView.releasePointerCapture();
@@ -294,11 +294,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 												isCapturing = true;
 											}
 										}
-										
+
 										lastGrab = AndroidDisplay.grab;
 									}
 								});
-							
+
 							try {
 								Thread.sleep(100);
 							} catch (Throwable th) {}
@@ -308,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			// ORIGINAL Touch pad
 			touchPad.setOnTouchListener(new OnTouchListener(){
-				private float prevX, prevY;
+					private float prevX, prevY;
 					@Override
 					public boolean onTouch(View v, MotionEvent event) {
 						// MotionEvent reports input details from the touch screen
@@ -316,20 +316,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						// interested in events where the touch position changed.
 						// int index = event.getActionIndex();
 						int action = event.getActionMasked();
-						
+
 						float x = event.getX();
 						float y = event.getY();
-						
+
 						float mouseX = mousePointer.getTranslationX();
 						float mouseY = mousePointer.getTranslationY();
-						
+
 						if (gestureDetector.onTouchEvent(event)) {
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, (int) mouseX, (int) (AndroidDisplay.windowHeight - mouseY), 0, System.nanoTime());
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, (int) mouseX, (int) (AndroidDisplay.windowHeight - mouseY), 0, System.nanoTime());
 							if (!rightOverride) {
 								AndroidDisplay.mouseLeft = true;
 							}
-							
+
 						} else {
 							switch (action) {
 								case MotionEvent.ACTION_UP: // 1
@@ -354,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 										}
 									} finally {
 										placeMouseAt(mouseX, mouseY);
-										
+
 										AndroidDisplay.mouseX = (int) mouseX;
 										AndroidDisplay.mouseY = AndroidDisplay.windowHeight - (int) mouseY;
 										break;
@@ -366,12 +366,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						return true;
 					}
 				});
-				
+
 			// System.loadLibrary("Regal");
 
 			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
 			AndroidGraphics2D.getInstance(this, new Canvas(awtGraphics), null);
-			
+
 			glSurfaceView.setFocusable(true);
 			glSurfaceView.setFocusableInTouchMode(true);
 			glSurfaceView.setEGLContextClientVersion(2);
@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				public boolean onTouch(View p1, MotionEvent e)
 				{
 					// System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
-					
+
 					int x = ((int) e.getX()) / scaleFactor;
 					int y = (glSurfaceView.getHeight() - ((int) e.getY())) / scaleFactor;
 					int hudKeyHandled = handleGuiBar(x, y, e);
@@ -406,20 +406,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									sendKeyPress(hudKeyHandled, true);
 									hotbarX = x;
 									hotbarY = y;
-									
-									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, 500);
+
+									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 								} else {
 									AndroidDisplay.mouseX = x;
 									AndroidDisplay.mouseY = y;
 									if (!rightOverride) {
 										AndroidDisplay.mouseLeft = true;
 									}
-									
+
 									if (AndroidDisplay.grab) {
 										AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
 										initialX = x;
 										initialY = y;
-										theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+										theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 									}
 								}
 								break;
@@ -429,14 +429,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								if (!isTouchInHotbar) {
 									AndroidDisplay.mouseX = x;
 									AndroidDisplay.mouseY = y;
-							
+
 									// TODO uncomment after fix wrong trigger
 									// AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 									if (!rightOverride) {
 										AndroidDisplay.mouseLeft = false;
 									}
 								} 
-								
+
 								if (AndroidDisplay.grab) {
 									// System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
 									// System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
@@ -458,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									}
 								}
 								break;
-								
+
 							default:
 								if (!isTouchInHotbar) {
 									AndroidDisplay.mouseX = x;
@@ -467,7 +467,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								break;
 						}
 					}
-					
+
 					return true;
 					// return !AndroidDisplay.grab;
 				}
@@ -475,7 +475,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			pointerCaptureListener = new OnTouchListener(){
 				private int x, y;
-				
+
 				private String getMoving(float pos, boolean xOrY) {
 					if (pos == 0) {
 						return "STOPPED";
@@ -485,48 +485,48 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						return xOrY ? "LEFT" : "UP";
 					}
 				}
-				
+
 				@Override
 				public boolean onTouch(View p1, MotionEvent e)
 				{
 					x += ((int) e.getX()) / scaleFactor;
 					y -= ((int) e.getY()) / scaleFactor;
-					
+
 					if (debugText.getVisibility() == View.VISIBLE) {
 						StringBuilder builder = new StringBuilder();
 						builder.append("PointerCapture debug\n");
 						builder.append("MotionEvent=" + e.getActionMasked() + "\n\n");
-					
+
 						builder.append("PointerX=" + e.getX() + "\n");
 						builder.append("PointerY=" + e.getY() + "\n");
 						builder.append("RawX=" + e.getRawX() + "\n");
 						builder.append("RawY=" + e.getRawY() + "\n\n");
-					
+
 						builder.append("XPos=" + x + "\n");
 						builder.append("YPos=" + y + "\n\n");
 						builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
 						builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
-						
+
 						debugText.setText(builder.toString());
 					}
-					
+
 					AndroidDisplay.mouseX = x;
 					AndroidDisplay.mouseY = y;
-					
+
 					switch (e.getButtonState()) {
 						case MotionEvent.BUTTON_PRIMARY: AndroidDisplay.mouseLeft = true;
 							break;
 						case MotionEvent.BUTTON_SECONDARY: AndroidDisplay.mouseLeft = false;
 							break;
 					}
-					
+
 					switch (e.getActionMasked()) {
 						case MotionEvent.ACTION_DOWN: // 0
 						case MotionEvent.ACTION_POINTER_DOWN: // 5
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
 							initialX = x;
 							initialY = y;
-							theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, 500);
+							theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 							break;
 
 						case MotionEvent.ACTION_UP: // 1
@@ -534,18 +534,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						case MotionEvent.ACTION_POINTER_UP: // 6
 							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 							/*
-							if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-								sendMouseButton(1, true);
-								sendMouseButton(1, false);
-							}
-							if (triggeredLeftMouseButton) {
-								sendMouseButton(0, false);
-							}
-							*/
-							
+							 if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+							 sendMouseButton(1, true);
+							 sendMouseButton(1, false);
+							 }
+							 if (triggeredLeftMouseButton) {
+							 sendMouseButton(0, false);
+							 }
+							 */
+
 							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, true);
 							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, false);
-							
+
 							// triggeredLeftMouseButton = false;
 							theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
 							break;
@@ -559,17 +559,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			if (isPointerCaptureSupported()) {
 				this.pointerSurface = new PointerOreoWrapper(glSurfaceView);
 				this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
-					@Override
-					public boolean onCapturedPointer(View view, MotionEvent event) {
-						return pointerCaptureListener.onTouch(view, event);
-					}
-				});
+						@Override
+						public boolean onCapturedPointer(View view, MotionEvent event) {
+							return pointerCaptureListener.onTouch(view, event);
+						}
+					});
 			}
 
 			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
 					@Override
 					public boolean onHover(View p1, MotionEvent p2) {
-						if (!AndroidDisplay.grab && isResumed()) {
+						if (!AndroidDisplay.grab && mIsResuming) {
 							return glTouchListener.onTouch(p1, p2);
 						}
 						return true;
@@ -641,38 +641,38 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			e.printStackTrace();
 			Tools.showError(this, e, true);
 		}
-		
+
 		// Mirror video of OpenGL view.
 		/*
-		new Thread(new Runnable(){
+		 new Thread(new Runnable(){
 
-				@Override
-				public void run()
-				{
-					try {
-						while (true) {
-							if (bit == null) continue;
-							runOnUiThread(new Runnable(){
+		 @Override
+		 public void run()
+		 {
+		 try {
+		 while (true) {
+		 if (bit == null) continue;
+		 runOnUiThread(new Runnable(){
 
-									@Override
-									public void run()
-									{
-										fillCanvasGL();
-										mirrorView.setImageBitmap(bit);
-									}
-								});
-							
-							// ~33fps render
-							Thread.sleep(30);
-						}
-					} catch (Throwable th) {
-						th.printStackTrace();
-					}
-				}
-			}).start();
-		*/
+		 @Override
+		 public void run()
+		 {
+		 fillCanvasGL();
+		 mirrorView.setImageBitmap(bit);
+		 }
+		 });
+
+		 // ~33fps render
+		 Thread.sleep(30);
+		 }
+		 } catch (Throwable th) {
+		 th.printStackTrace();
+		 }
+		 }
+		 }).start();
+		 */
 	}
-	
+
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event)
 	{
@@ -692,17 +692,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	@Override
 	public void onResume() {
 		super.onResume();
+		mIsResuming = true;
 		glSurfaceView.requestRender();
 	}
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-	/*
-		if (hasFocus && glSurfaceView.getVisibility() == View.GONE) {
-			glSurfaceView.setVisibility(View.VISIBLE);
-		}
-	*/
+		/*
+		 if (hasFocus && glSurfaceView.getVisibility() == View.GONE) {
+		 glSurfaceView.setVisibility(View.VISIBLE);
+		 }
+		 */
 	}
 
 	@Override
@@ -711,6 +712,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		if (AndroidDisplay.grab){
 			sendKeyPress(Keyboard.KEY_ESCAPE);
 		}
+		mIsResuming = false;
 		super.onPause();
 	}
 
@@ -718,23 +720,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.control_togglecontrol: {
-				/*
-				switch(overlayView.getVisibility()){
-					case View.VISIBLE: overlayView.setVisibility(View.GONE);
-						break;
-					case View.GONE: overlayView.setVisibility(View.VISIBLE);
+					/*
+					 switch(overlayView.getVisibility()){
+					 case View.VISIBLE: overlayView.setVisibility(View.GONE);
+					 break;
+					 case View.GONE: overlayView.setVisibility(View.VISIBLE);
+					 }
+					 */
+
+					for (Button button : controlButtons) {
+						button.setVisibility(button.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+					}
+
+					zoomButton.setVisibility((zoomButton.getVisibility() == View.GONE && mVersionInfo.optifineLib != null) ? View.VISIBLE : View.GONE);
 				}
-				*/
-				
-				for (Button button : controlButtons) {
-					button.setVisibility(button.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-				}
-				
-				zoomButton.setVisibility((zoomButton.getVisibility() == View.GONE && mVersionInfo.optifineLib != null) ? View.VISIBLE : View.GONE);
-			}
 		}
 	}
-	
+
     public boolean onTouch(View v, MotionEvent e) {
         boolean isDown;
         switch (e.getActionMasked()) {
@@ -750,7 +752,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             default:
                 return false;
         }
-		
+
 		switch (v.getId()) {
 			case R.id.control_up: sendKeyPress(Keyboard.KEY_W, isDown); break;
 			case R.id.control_left: sendKeyPress(Keyboard.KEY_A, isDown); break;
@@ -762,7 +764,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				if (AndroidDisplay.grab) {
 					sendMouseButton(1, isDown);
 				} else {
-					AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, ((byte) (isDown ? 1 : 0)), AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+					if (!isDown) {
+						AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, (byte) 0, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+						AndroidDisplay.putMouseEventWithCoords(/* right mouse */ (byte) 1, (byte) 1, AndroidDisplay.mouseX, AndroidDisplay.mouseY, 0, System.nanoTime());
+					}
 					setRightOverride(isDown);
 				} break;
 			case R.id.control_debug: sendKeyPress(Keyboard.KEY_F3, isDown); break;
@@ -774,24 +779,72 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			case R.id.control_zoom: sendKeyPress(Keyboard.KEY_C, isDown); break;
 			case R.id.control_listplayers: sendKeyPress(Keyboard.KEY_TAB, isDown); break;
 		}
-		
+
         return false;
     }
-	
+
+	public static void fullyExit() {
+		if (!ExitManager.isExiting()) {
+			ExitManager.enableSystemExit();
+			System.exit(0);
+		}
+		ExitManager.stopExitLoop();
+	}
+
+    public void forceUserHome(String s) throws Exception {
+        Properties props = System.getProperties();
+        Class clazz = props.getClass();
+        Field f = null;
+        while (clazz != null) {
+            try {
+                f = clazz.getDeclaredField("defaults");
+                break;
+            } catch (Exception e) {
+                clazz = clazz.getSuperclass();
+            }
+        }
+        if (f != null) {
+            f.setAccessible(true);
+            ((Properties) f.get(props)).put("user.home", s);
+        }
+    }
+
+    public void initEnvs() {
+        try {
+            Os.setenv("LIBGL_MIPMAP", "3", true);
+            System.setProperty("user.home", Tools.MAIN_PATH);
+            if (!System.getProperty("user.home", "/").equals(Tools.MAIN_PATH)) {
+                forceUserHome(Tools.MAIN_PATH);
+            }
+            System.setProperty("org.apache.logging.log4j.level", "INFO");
+            System.setProperty("org.apache.logging.log4j.simplelog.level", "INFO");
+
+			// Disable javax management for smaller launcher.
+			System.setProperty("log4j2.disable.jmx", "true");
+
+            //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.level", "INFO");
+            //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.simplelog.level", "INFO");
+
+			// Change info for useful dump
+			System.setProperty("java.vm.info", Build.MANUFACTURER + " " + Build.MODEL + ", Android " + Build.VERSION.RELEASE);
+        } catch (Exception e) {
+            Tools.showError(MainActivity.this, e, true);
+        }
+    }
 	private boolean isPointerCaptureSupported() {
 		return Build.VERSION.SDK_INT >= 26; 
 	}
-	
+
 	private String[] getMCArgs()
 	{
 		String username = mProfile.getUsername();
 		String versionName = mProfile.getVersion();
 		String mcAssetsDir = Tools.ASSETS_PATH;
 		String userType = "mojang";
-		
+
 		File gameDir = new File(Tools.MAIN_PATH);
 		gameDir.mkdirs();
-		
+
 		Map<String, String> varArgMap = new ArrayMap<String, String>();
 		varArgMap.put("auth_player_name", username);
 		varArgMap.put("version_name", versionName);
@@ -805,9 +858,42 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		varArgMap.put("version_type", mVersionInfo.type);
 		varArgMap.put("game_assets", Tools.ASSETS_PATH);
 		
-		String[] argsFromJson = insertVariableArgument(splitAndFilterEmpty(mVersionInfo.minecraftArguments), varArgMap);
+		List<String> minecraftArgs = new ArrayList<String>();
+		if (mVersionInfo.arguments != null) {
+			// Support Minecraft 1.13
+			for (Object arg : mVersionInfo.arguments.game) {
+				if (arg instanceof String) {
+					minecraftArgs.add((String) arg);
+				} else {
+					/*
+					 for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
+					 // rule.action = allow
+					 // TODO implement this
+					 }
+					 */
+				}
+			}
+		}
+		
+		String[] argsFromJson = insertVariableArgument(
+			splitAndFilterEmpty(
+			   mVersionInfo.minecraftArguments == null ?
+				   fromStringArray(minecraftArgs.toArray(new String[0])):
+				   mVersionInfo.minecraftArguments
+			), varArgMap
+		);
 		// Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
 		return argsFromJson;
+	}
+	
+	private String fromStringArray(String[] strArr) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < strArr.length; i++) {
+			if (i > 0) builder.append(" ");
+			builder.append(strArr[i]);
+		}
+
+		return builder.toString();
 	}
 	
 	private String[] splitAndFilterEmpty(String argStr) {
@@ -820,7 +906,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 		return strList.toArray(new String[0]);
 	}
-	
+
 	private String[] insertVariableArgument(String[] args, Map<String, String> keyValueMap) {
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i];
@@ -843,7 +929,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private void runCraft(long eglContext) throws Throwable
 	{
 		String[] launchArgs = getMCArgs();
-		
+
 		// Setup OptiFine
 		if (mVersionInfo.optifineLib != null) {
 			String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
@@ -851,13 +937,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
 		}
-		
+
 		File optDir = getDir("dalvik-cache", 0);
 		optDir.mkdirs();
 
 		launchClassPath = Tools.generate(mProfile.getVersion());
 		launchOptimizedDirectory = optDir.getAbsolutePath();
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
+/* gl4es
+
+		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
+			net.minecraft.launchwrapper.Launch.main(launchArgs);
+		} else {
+			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
+				@Override
+				public void onCharPrint(char c) {
+					appendToLog(Character.toString(c));
+*/
 		
 		fixRSAPadding();
 
@@ -896,7 +992,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		final int waitFor = shell.waitFor();
 
 		runOnUiThread(new Runnable(){
-
 				@Override
 				public void run()
 				{
@@ -920,62 +1015,118 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private void createEGLHackStuff() {
 		 
 	}
-	
-	public void fixRSAPadding() throws Exception {
+		public void fixRSAPadding() throws Exception {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
-		
+
 		try {
-/*
-			System.out.println(Cipher.getInstance("RSA"));
-			System.out.println(Cipher.getInstance("RSA/ECB/PKCS1Padding"));
-*/
-			if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
-				// FUUUUU I DON'T KNOW FIXME
-				Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-				// Cipher.getInstance("RSA", rsaPkcs1Cipher.getProvider());
-				
-				Cipher newRSACipher = Cipher.getInstance("RSA");
-				
-				Field fieldPKCS1 = Provider.class.getDeclaredField("serviceMap");
-				fieldPKCS1.setAccessible(true);
-				Map /* <Provider.ServerKey, Provider.Service> */ mapPKCS1 = (Map) fieldPKCS1.get(rsaPkcs1Cipher.getProvider());
-				
-				Field fieldRSA = Provider.class.getDeclaredField("serviceMap");
-				fieldRSA.setAccessible(true);
-				Map /* <Provider.ServerKey, Provider.Service> */ mapRSA = (Map) fieldRSA.get(newRSACipher.getProvider());
-				mapRSA.clear();
-				mapRSA.putAll(mapPKCS1);
+			List<Provider.Service> rsaList, rsaPkcs1List;
+			if (android.os.Build.VERSION.SDK_INT > 23) { // Nougat
+				/*
+				 * Since Android 7, it use OpenJDK sun.security.jca.GetInstance
+				 * But it's not part of Android SDK.
+				 */
+				rsaList = getCipherServices("RSA");
+				rsaPkcs1List = getCipherServices("RSA/ECB/PKCS1PADDING");
 			} else {
-				ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
-				ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
-				rsaList.clear();
-				rsaList.addAll(rsaPkcs1List);
+				rsaList = Services.getServices("Cipher.RSA");
+				rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
 			}
+			
+			/* 
+			 * Not .clear() directly since the entry removal is protected,
+			 * so some reflections to reset it
+			 */
+			Modifiable.resetServiceList(rsaList);
+			rsaList.addAll(rsaPkcs1List);
 		} catch (Throwable th) {
-			// Tools.dialogOnUiThread(MainActivity.this, "Warning: can't fix RSA Padding", Log.getStackTraceString(th));
 			th.printStackTrace();
 			
-			runOnUiThread(new Runnable(){
+			final File rsaFixFile = new File(Tools.MAIN_PATH, "rsapadding_error.txt");
 
+			// Debug information
+			PrintStream rsaFixStream = new PrintStream(rsaFixFile);
+			rsaFixStream.println("--- RSA PADDING ERROR ---");
+			rsaFixStream.println("• Error stack trace");
+			th.printStackTrace(rsaFixStream);
+			rsaFixStream.println();
+			rsaFixStream.println("• RSAPadding info");
+			rsaFixStream.println(" - Patch method: " + (Build.VERSION.SDK_INT < 24 ? "Direct (no" : "Reflection Bypass (with") + " security check)");
+			rsaFixStream.println(" - getDeclaredMethods() return");
+			debug_printMethodInfo(rsaFixStream, Provider.class.getDeclaredMethods());
+			rsaFixStream.println(" - getMethods() return");
+			debug_printMethodInfo(rsaFixStream, Provider.class.getMethods());
+			rsaFixStream.println("• System info");
+			rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
+			rsaFixStream.close();
+			
+			runOnUiThread(new Runnable(){
 					@Override
-					public void run()
-					{
-						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. You can't play premium servers", Toast.LENGTH_LONG).show();
+					public void run() {
+						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited! Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer", Toast.LENGTH_LONG).show();
 					}
 				});
 		}
 		
-		
-		//System.out.println("After: " + KeyFactory.getInstance("RSA") + ":" + KeyFactory.getInstance("RSA").getProvider());
-
-		/*		Provider provider = KeyFactory.getInstance("RSA").getProvider();
+		/*
+		 Provider provider = KeyFactory.getInstance("RSA").getProvider();
 		 System.out.println("Before: " + provider.getService("KeyService", "RSA"));
 		 Provider.Service service = provider.getService("KeyService", "RSA/ECB/PKCS5Padding");
 		 System.out.println(service);
 		 provider.putService(service);
-		 System.out.println("After: " + provider.getService("KeyService", "RSA"));*/
+		 System.out.println("After: " + provider.getService("KeyService", "RSA"));
+		 */
 	}
 	
+	private List<Provider.Service> getCipherServices(String algorithm) throws InvocationTargetException, SecurityException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
+		return (List<Provider.Service>) Class.forName("sun.security.jca.GetInstance")
+			.getDeclaredMethod("getServices", String.class, String.class)
+			.invoke(null, new Object[]{"Cipher", algorithm});
+	}
+	
+	private void debug_printMethodInfo(PrintStream stream, Method[] methods) {
+		StringBuilder methodInfo = new StringBuilder();
+		for (Method method : methods) {
+			methodInfo.setLength(0);
+			if (Modifier.isPublic(method.getModifiers())) {
+				methodInfo.append("public ");
+			} else if (Modifier.isPrivate(method.getModifiers())) {
+				methodInfo.append("private ");
+			} else if (Modifier.isProtected(method.getModifiers())) {
+				methodInfo.append("protected ");
+			}
+
+			if (Modifier.isSynchronized(method.getModifiers())) {
+				methodInfo.append("synchronized ");
+			}
+			
+			if (Modifier.isStatic(method.getModifiers())) {
+				methodInfo.append("static ");
+			}
+			
+			if (Modifier.isAbstract(method.getModifiers())) {
+				methodInfo.append("abstract ");
+			}
+			
+			if (Modifier.isFinal(method.getModifiers())) {
+				methodInfo.append("final ");
+			}
+			
+			methodInfo.append(method.getName() + "(");
+			int paramLength = method.getParameterTypes().length;
+			for (int i = 0; i < paramLength; i++) {
+				Class params = method.getParameterTypes()[i];
+				
+				methodInfo.append(params.getName());
+				if (i + 1 < paramLength) {
+					methodInfo.append(", ");
+				}
+			}
+			methodInfo.append(")");
+			
+			stream.println(methodInfo);
+		}
+	}
+
 	public void printStream(InputStream stream) {
 		try {
 			BufferedReader buffStream = new BufferedReader(new InputStreamReader(stream));
@@ -987,7 +1138,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static String fromArray(List<String> arr) {
 		String s = "";
 		for (String exec : arr) {
@@ -995,11 +1146,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 		return s;
 	}
-	
+
 	private void toggleDebug() {
 		debugText.setVisibility(debugText.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
 	}
-	
+
 	private void dialogSendCustomKey() {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 		dialog.setTitle(R.string.control_customkey);
@@ -1012,29 +1163,29 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			});
 		dialog.show();
 	}
-	
+
 	private void openLogOutput() {
-		WindowAnimation.fadeIn(contentLog, 500);
+		contentLog.setVisibility(View.VISIBLE);
+		mIsResuming = false;
 	}
 
 	public void closeLogOutput(View view) {
-		//scrollLog.setVisibility(View.GONE);
+		contentLog.setVisibility(View.GONE);
+		mIsResuming = true;
+	}
+	/*
+	 private void openCanvasOutput() {
+	 WindowAnimation.fadeIn(contentCanvas, 500);
+	 }
 
-		WindowAnimation.fadeOut(contentLog, 500);
-	}
-/*
-	private void openCanvasOutput() {
-		WindowAnimation.fadeIn(contentCanvas, 500);
-	}
-	
-	public void closeCanvasOutput(View view) {
-		WindowAnimation.fadeOut(contentCanvas, 500);
-	}
-*/
+	 public void closeCanvasOutput(View view) {
+	 WindowAnimation.fadeOut(contentCanvas, 500);
+	 }
+	 */
 	private void appendlnToLog(String text) {
 		appendToLog(text + "\n");
 	}
-	
+
 	private void appendToLog(final String text) {
 		// if (!isLogAllow) return;
 		textLog.post(new Runnable(){
@@ -1046,7 +1197,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			});
 	}
-	
+
 	public void handleMessage(Message msg) {
 		switch (msg.what) {
 			case MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK /*1028*/:
@@ -1062,7 +1213,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				return;
 		}
 	}
-	
+
 	public String getMinecraftOption(String key) {
 		try {
 			String[] options = Tools.read(Tools.MAIN_PATH + "/options.txt").split("\n");
@@ -1077,39 +1228,39 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 		return "";
 	}
-	
+
 	public int mcscale(int input) {
         return this.guiScale * input;
     }
-	
+
 	/*
-	public int randomInRange(int min, int max) {
-        return min + (int)(Math.random() * (max - min + 1));
-    }
-	*/
-	
+	 public int randomInRange(int min, int max) {
+	 return min + (int)(Math.random() * (max - min + 1));
+	 }
+	 */
+
 	public void toggleMenu(View v) {
 		drawerLayout.openDrawer(Gravity.RIGHT);
 	}
-	
+
 	public void placeMouseAdd(float x, float y) {
 		this.mousePointer.setTranslationX(mousePointer.getTranslationX() + x);
 		this.mousePointer.setTranslationY(mousePointer.getTranslationY() + y);
 	}
-	
+
 	public void placeMouseAt(float x, float y) {
 		this.mousePointer.setTranslationX(x);
 		this.mousePointer.setTranslationY(y);
 	}
-	
+
 	public void toggleMouse(View view) {
 		if (AndroidDisplay.grab) return;
-		
+
 		boolean isVis = touchPad.getVisibility() == View.VISIBLE;
 		touchPad.setVisibility(isVis ? View.GONE : View.VISIBLE);
 		((Button) view).setText(isVis ? R.string.control_mouseoff: R.string.control_mouseon);
 	}
-	
+
 	public void dialogForceClose()
 	{
 		new AlertDialog.Builder(this)
@@ -1125,10 +1276,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					} catch (Throwable th) {
 						Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
 					}
-					
+
 					// If we are unable to enable exit, use method: kill myself.
-					android.os.Process.killProcess(android.os.Process.myPid());
-					
+					// android.os.Process.killProcess(android.os.Process.myPid());
+
 					// Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();
 				}
 
@@ -1139,7 +1290,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			})
 			.show();
 	}
-	
+
 	private Button findButton(int id) {
         Button button = (Button) findViewById(id);
 		button.setWidth((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getWidth()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
@@ -1152,7 +1303,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onBackPressed() {
 		// Prevent back
 	}
-	
+
 	public void hideKeyboard() {
 		try {
 			getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -1163,17 +1314,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showKeyboard() {
 		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 		glSurfaceView.requestFocus();
 	}
-	
+
 	private void setRightOverride(boolean val) {
         this.rightOverride = val;
         // this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
     }
-	
+
 	public void sendKeyPress(int keyCode, boolean status) {
         sendKeyPress(keyCode, '\u0000', status);
     }
@@ -1181,21 +1332,21 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public void sendKeyPress(int keyCode, char keyChar, boolean status) {
         AndroidDisplay.setKey(keyCode, keyChar, status);
     }
-	
+
 	public void sendKeyPress(char keyChar) {
 		sendKeyPress(0, keyChar, true);
 		sendKeyPress(0, keyChar, false);
 	}
-	
+
 	public void sendKeyPress(int keyCode) {
 		sendKeyPress(keyCode, true);
 		sendKeyPress(keyCode, false);
 	}
-	
+
 	public void sendMouseButton(int button, boolean status) {
         AndroidDisplay.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
     }
-	
+
 	public void calculateMcScale() {
         int scale = 1;
         int screenWidth = AndroidDisplay.windowWidth;
@@ -1205,12 +1356,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         }
         this.guiScale = scale;
     }
-	
+
 	public int handleGuiBar(int x, int y, MotionEvent e) {
         if (!AndroidDisplay.grab) {
             return -1;
         }
-        
+
         int screenWidth = AndroidDisplay.windowWidth;
         int screenHeight = AndroidDisplay.windowHeight;
         int barheight = mcscale(20);

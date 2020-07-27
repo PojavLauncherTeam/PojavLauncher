@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<android.support.v7.preference.PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.chom/apk/res-auto">
+	
+    <android.support.v7.preference.PreferenceCategory
+		android:title="@string/mcl_setting_category_general">
+		
+        <android.support.v7.preference.SeekBarPreference
+            android:key="maxDxRefs"
+            android:title="@string/mcl_setting_title_setmaxdxref"
+            android:summary="@string/mcl_setting_subtitle_setmaxdxref" />
+		
+        <android.support.v7.preference.SeekBarPreference
+            android:key="timeLongPressTrigger"
+            android:title="@string/mcl_setting_title_longpresstrigger"
+            android:summary="@string/mcl_setting_subtitle_longpresstrigger" />
+		
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="forgetOptifinePath"
+			android:title="@string/mcl_setting_title_forgetoptifpath"
+			android:summary="@string/mcl_setting_subtitle_forgetoptifpath"/>
+		
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="freeform"
+			android:title="@string/mcl_setting_title_freeform"
+			android:summary="@string/mcl_setting_subtitle_freeform"/>
+		
+    </android.support.v7.preference.PreferenceCategory>
+	
+    <android.support.v7.preference.PreferenceCategory
+		android:title="@string/mcl_setting_category_veroption">
+		
+        <android.support.v7.preference.CheckBoxPreference
+            android:defaultValue="true"
+            android:key="vertype_release"
+			android:title="@string/mcl_setting_veroption_release" />
+		
+        <android.support.v7.preference.CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_snapshot"
+			android:title="@string/mcl_setting_veroption_snapshot" />
+		
+        <android.support.v7.preference.CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_oldalpha"
+			android:title="@string/mcl_setting_veroption_oldalpha" />
+		
+        <android.support.v7.preference.CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_oldbeta"
+			android:title="@string/mcl_setting_veroption_oldbeta" />
+   
+	</android.support.v7.preference.PreferenceCategory>
+	
+</android.support.v7.preference.PreferenceScreen>

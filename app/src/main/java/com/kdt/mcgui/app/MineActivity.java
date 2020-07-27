@@ -1,13 +1,11 @@
 package com.kdt.mcgui.app;
 
-import android.app.*;
 import android.content.pm.*;
+import android.os.*;
+import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.*;
-import android.os.*;
-import android.support.v4.app.*;
-import android.support.v7.app.*;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -36,8 +34,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);
-		mcUIInit();
+		this.onCreate(savedInstanceState, true);
 	}
 	
 	protected void onCreate(Bundle savedInstanceState, boolean showBeforeView)
@@ -105,6 +102,19 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
 		replaceFonts(content);
 	}
 
+	@Override
+	public void setContentView(View view)
+	{
+		if (!showBeforeView) {
+			mcUIInit();
+		}
+		
+		content.addView(view);
+		if (view instanceof ViewGroup) {
+			replaceFonts((ViewGroup) view);
+		}
+	}
+	
 	@Override
 	public void onClick(View view)
 	{

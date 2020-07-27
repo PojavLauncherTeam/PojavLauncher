@@ -3,6 +3,7 @@
 	<!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
 	<string name="app_short_name">PojavLauncher</string>
+	<string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
 
 	<!-- Action bar part -->
 	<string name="actionbar_help">HELP</string>
@@ -33,7 +34,7 @@
 	
 	<!-- Hint -->
 	<string name="hint_select_account">To select, click it. To delete an account, hold it.</string>
-	<string name="hint_control_mapping">Swipe from right to left to open menu\n◀</string>
+	<string name="hint_control_mapping">"This feature is not yet finished so can't apply custom control at the moment!\nSwipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
 	
 	<!-- Warning -->
 	<string name="warning_title">Warning</string>
@@ -51,7 +52,6 @@
 	
 	<!-- Error messages -->
 	<string name="error_checklog">Error! Please check the log below: %s</string>
-	<string name="error_title">Error</string>
 	<string name="error_no_version">No version!</string>
 	<string name="error_load_version">Unable to load version %s</string>
 	<string name="error_convert_lib">Unable to convert library %s</string>
@@ -81,7 +81,7 @@
 	<string name="mcl_launch_convert_lib">Converting library %s</string>
 	<string name="mcl_launch_convert_client">Converting Minecraft %s</string>
 	<string name="mcl_launch_patch_client">Patching Minecraft %s</string>
-	<string name="mcl_launch_download_assets">Prepaping to download resources</string>
+	<string name="mcl_launch_download_assets">Preparing to download resources</string>
 	
 	<string name="mcl_options">Options</string>
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
@@ -92,17 +92,27 @@
 	<string name="mcl_option_about">About</string>
 	
 	<string name="mcl_setting_title_setmaxdxref">Set max DX references</string>
-	<string name="mcl_setting_subtitle_setmaxdxref">Increase If an error happend while converting: Too many ... references. You may try multi-dex option.</string>
-	<string name="mcl_setting_enablefreeform">Enable Freeform mode for launch Minecraft (Android 7.0+)</string>
+	<string name="mcl_setting_subtitle_setmaxdxref">Increase If an error happend while converting: Too many ... references. You may try multi-dex option. Recommended: 4096 or 8192.</string>
+	<string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
+	<string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
+	<string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
+	<string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
 	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
 	<string name="mcl_setting_title_forgetoptifpath">Make OptiFine unable to locate itself</string>
-	<string name="mcl_setting_subtitle_forgetoptifpath">Useful for making OptiFine launchable on some devices</string>
+	<string name="mcl_setting_subtitle_forgetoptifpath">Useful for making OptiFine launchable on some devices.</string>
+	<string name="mcl_setting_category_general">General settings</string>
+	<string name="mcl_setting_category_veroption">Version type will be in version list</string>
+	<string name="mcl_setting_veroption_release">Release</string>
+	<string name="mcl_setting_veroption_snapshot">Snapshot</string>
+	<string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+	<string name="mcl_setting_veroption_oldbeta">Old-beta</string>
 		
 	<string name="mcl_version_clone">Clone</string>
 	
 	<!-- Global strings -->
 	<string name="global_add">Add</string>
 	<string name="global_edit">Edit</string>
+	<string name="global_error">Error</string>
 	<string name="global_load">Load</string>
 	<string name="global_name">Name</string>
 	<string name="global_remove">Remove</string>
@@ -136,8 +146,8 @@
 	<string name="mcn_exit_title">Game exited</string>
 	<string name="mcn_exit_call">Exit</string>
 	<string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
-	<string name="mcn_exit_errcrash">Unable to locate crash!</string>
-	<string name="mcn_exit_confirm">Are you sure want to force exit?</string>
+	<string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
+	<string name="mcn_exit_confirm">Are you sure want to force close?</string>
 	
 	<!-- MainActivity: Control buttons -->
 	<string name="controls">Controls</string>
@@ -157,6 +167,7 @@
 	<string name="control_jump">⬛</string>
 	<string name="control_thirdperson">3rd</string>
 	<string name="control_listplayers">Tab</string>
+	<string name="control_mouse">Mouse</string>
 	<string name="control_mouseoff">Mouse: off</string>
 	<string name="control_mouseon">Mouse: on </string>
 	
@@ -168,9 +179,13 @@
 
 	<string name="control_more3"></string>
 	<string name="control_more4"></string>
-	
-	<string name="customctrl_keyname">LWJGL Keycode</string>
+
+	<string name="customctrl_keyname">Keycode</string>
+	<string name="customctrl_specialkey">Special Key</string>
 	<string name="customctrl_hidden">Hidden</string>
+	<string name="customctrl_addbutton">Add button</string>
+	<string name="customctrl_title_selectctrl">Select default Control json</string>
+	<string name="customctrl_selectdefault">Select default Control json</string>
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Update console</string>

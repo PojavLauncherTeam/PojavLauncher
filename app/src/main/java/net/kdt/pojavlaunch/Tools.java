@@ -33,6 +33,7 @@ public final class Tools
 	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/minecraft";
 	public static String ASSETS_PATH = MAIN_PATH + "/assets";
 	public static String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
+	public static String CTRLDEF_FILE = MAIN_PATH + "/controlmap/default.json";
 	
 	public static int usingVerCode = 1;
 	public static String usingVerName = "2.4.2";
@@ -72,12 +73,6 @@ public final class Tools
 
 	public static String getPatchedFile(String version) {
 		return versnDir + "/" + version + "/" + version + ".jar";
-	}
-
-	// May useless
-	public static boolean isOptifineInstalled(String version)
-	{
-		return new File(versnDir + "/" + version + "/optifine.jar").exists();
 	}
 
 	private static boolean isClientFirst = false;
@@ -155,86 +150,78 @@ public final class Tools
 			showError(ctx, e);
 		}
 	}
-	
-	/*
-	 public static void extractLibraries(Activity ctx) throws Exception
-	 {
-	 extractAssetFolder(ctx, "libraries", worksDir);
-	 }
-	 */
 
-	public static void showError(Activity ctx, Throwable e)
+	public static void showError(Context ctx, Throwable e)
 	{
 		showError(ctx, e, false);
 	}
 
-	public static void showError(final Activity ctx, final Throwable e, final boolean exitIfOk)
+	public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk)
 	{
 		showError(ctx, e, exitIfOk, false);
 	}
 
-	private static void showError(final Activity ctx, final Throwable e, final boolean exitIfOk, final boolean showMore)
+	private static void showError(final Context ctx, final Throwable e, final boolean exitIfOk, final boolean showMore)
 	{
-		ctx.runOnUiThread(new Runnable(){
+		Runnable runnable = new Runnable(){
 
-				@Override
-				public void run()
-				{
-					final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
-					new AlertDialog.Builder((Context) ctx)
-						.setTitle(R.string.error_title)
-						.setMessage(errMsg)
-						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+			@Override
+			public void run()
+			{
+				final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
+				new AlertDialog.Builder((Context) ctx)
+					.setTitle(R.string.global_error)
+					.setMessage(errMsg)
+					.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								if(exitIfOk) {
-									/*
-									if (ctx instanceof MainActivity) {
-										MainActivity.fullyExit();
-									} else {
-										ctx.finish();
-									}
-									*/
-									ctx.finish();
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							if(exitIfOk) {
+								if (ctx instanceof MainActivity) {
+									MainActivity.fullyExit();
+								} else if (ctx instanceof Activity) {
+									((Activity) ctx).finish();
 								}
 							}
-						})
-						.setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, new DialogInterface.OnClickListener(){
+						}
+					})
+					.setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, new DialogInterface.OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								showError(ctx, e, exitIfOk, !showMore);
-							}
-						})
-						.setNeutralButton(android.R.string.copy, new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							showError(ctx, e, exitIfOk, !showMore);
+						}
+					})
+					.setNeutralButton(android.R.string.copy, new DialogInterface.OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								StringSelection errData = new StringSelection(errMsg);
-								Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
-								
-								if(exitIfOk) {
-									/*
-									if (ctx instanceof MainActivity) {
-										MainActivity.fullyExit();
-									} else {
-										ctx.finish();
-									}
-									*/
-									
-									ctx.finish();
+						@Override
+						public void onClick(DialogInterface p1, int p2)
+						{
+							StringSelection errData = new StringSelection(errMsg);
+							Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
+
+							if(exitIfOk) {
+								if (ctx instanceof MainActivity) {
+									MainActivity.fullyExit();
+								} else {
+									((Activity) ctx).finish();
 								}
 							}
-						})
-						//.setNegativeButton("Report (not available)", null)
-						.setCancelable(!exitIfOk)
-						.show();
-				}
-			});
+						}
+					})
+					//.setNegativeButton("Report (not available)", null)
+					.setCancelable(!exitIfOk)
+					.show();
+			}
+		};
+		
+		if (ctx instanceof Activity) {
+			((Activity) ctx).runOnUiThread(runnable);
+		} else {
+			runnable.run();
+		}
 	}
 
 	public static void dialogOnUiThread(final Activity ctx, final CharSequence title, final CharSequence message) {
@@ -393,15 +380,15 @@ public final class Tools
     }
 	
 	// Prevent NullPointerException
-	private static void insertSafety(JMinecraftVersionList.Version inheritsVer, JMinecraftVersionList.Version theVer, String... keyArr) {
+	private static void insertSafety(JMinecraftVersionList.Version targetVer, JMinecraftVersionList.Version fromVer, String... keyArr) {
 		for (String key : keyArr) {
 			Object value = null;
 			try {
-				Field fieldA = theVer.getClass().getDeclaredField(key);
-				value = fieldA.get(theVer);
+				Field fieldA = fromVer.getClass().getDeclaredField(key);
+				value = fieldA.get(fromVer);
 				if (value != null || ((value instanceof String) && !((String) value).isEmpty())) {
-					Field fieldB = inheritsVer.getClass().getDeclaredField(key);
-					fieldB.set(inheritsVer, value);
+					Field fieldB = targetVer.getClass().getDeclaredField(key);
+					fieldB.set(targetVer, value);
 				}
 			} catch (Throwable th) {
 				System.err.println("Unable to insert " + key + "=" + value);
@@ -439,11 +426,13 @@ public final class Tools
 	
 	public static File lastFileModified(String dir) {
 		File fl = new File(dir);
+		
 		File[] files = fl.listFiles(new FileFilter() {          
 				public boolean accept(File file) {
 					return file.isFile();
 				}
 			});
+			
 		long lastMod = Long.MIN_VALUE;
 		File choice = null;
 		for (File file : files) {
@@ -452,6 +441,7 @@ public final class Tools
 				lastMod = file.lastModified();
 			}
 		}
+		
 		return choice;
 	}
 	
