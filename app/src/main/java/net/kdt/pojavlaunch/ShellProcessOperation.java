@@ -9,15 +9,18 @@ public class ShellProcessOperation
 	private Process process;
 
 	public ShellProcessOperation(OnPrintListener listener) throws IOException {
-		this.listener = listener;
-		process = Runtime.getRuntime().exec("/system/bin/sh");
+		this(listener, "sh");
 	}
 	
 	public ShellProcessOperation(OnPrintListener listener, String command) throws IOException {
 		this.listener = listener;
-		process = Runtime.getRuntime().exec(
-			command
-		); //"/system/bin/sh -c \"" + command + "\"");
+		
+		ProcessBuilder builder = new ProcessBuilder(command);
+		builder.redirectErrorStream(true);
+		
+		process = builder.start();
+		
+		//"/system/bin/sh -c \"" + command + "\"");
 	}
 	
 	public void writeToProcess(String cmd) throws IOException {
