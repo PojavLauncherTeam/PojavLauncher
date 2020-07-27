@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import java.util.*;
 import java.lang.reflect.*;
+import java.security.*;
 
 // This class simply get the modifiable original Collection from unmodifable one.
 public class Modifiable
@@ -29,7 +30,27 @@ public class Modifiable
         return (Collection<E>) collection;
     }
 	
+	public static <E> List<E> modifyList(List<? extends E> list) {
+		return (List<E>) modifyCollection(list);
+    }
+	
 	public static <E> Set<E> modifySet(Set<? extends E> set) {
 		return (Set<E>) modifyCollection(set);
     }
+	
+	// Get modifiable list from ServiceList
+	public static void resetServiceList(List<Provider.Service> list) throws Throwable {
+		Class<?> listClass = Class.forName("sun.security.jca.ProviderList$ServiceList");
+		Field servicesField = listClass.getDeclaredField("services");
+		Field firstServiceField = listClass.getDeclaredField("firstService");
+		
+		servicesField.setAccessible(true);
+		firstServiceField.setAccessible(true);
+		
+		List<Provider.Service> services = (List<Provider.Service>) servicesField.get(list);
+		firstServiceField.set(list, null);
+		if (services == null) {
+			System.err.println("ServiceList is null, how to erase?");
+		} else services.clear();
+	}
 }

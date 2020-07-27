@@ -983,10 +983,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			net.minecraft.launchwrapper.Launch.main(launchArgs);
 		} else {
 			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
-
 				@Override
-				public void onCharPrint(char c)
-				{
+				public void onCharPrint(char c) {
 					appendToLog(Character.toString(c));
 				}
 			};
@@ -1020,19 +1018,25 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
 		try {
+			List<Provider.Service> rsaList, rsaPkcs1List;
 			if (android.os.Build.VERSION.SDK_INT > 23) { // Nougat
-				// GetInstance.getServices("KeyPairGenerator", algorithm);
-				// Since Android 7, it use sun.security.jca.GetInstance
-				
-				Class.forName("sun.security.jca.GetInstance")
-					.getDeclaredMethod("getServices", String.class, String.class)
-					.invoke(null, new Object[]{"Cipher", "RSA"});
+				/*
+				 * Since Android 7, it use OpenJDK sun.security.jca.GetInstance
+				 * But it's not part of Android SDK.
+				 */
+				rsaList = getCipherServices("RSA");
+				rsaPkcs1List = getCipherServices("RSA/ECB/PKCS1PADDING");
 			} else {
-				ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
-				ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
-				rsaList.clear();
-				rsaList.addAll(rsaPkcs1List);
+				rsaList = Services.getServices("Cipher.RSA");
+				rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
 			}
+			
+			/* 
+			 * Not .clear() directly since the entry removal is protected,
+			 * so some reflections to reset it
+			 */
+			Modifiable.resetServiceList(rsaList);
+			rsaList.addAll(rsaPkcs1List);
 		} catch (Throwable th) {
 			th.printStackTrace();
 			
@@ -1070,6 +1074,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		 provider.putService(service);
 		 System.out.println("After: " + provider.getService("KeyService", "RSA"));
 		 */
+	}
+	
+	private List<Provider.Service> getCipherServices(String algorithm) throws InvocationTargetException, SecurityException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
+		return (List<Provider.Service>) Class.forName("sun.security.jca.GetInstance")
+			.getDeclaredMethod("getServices", String.class, String.class)
+			.invoke(null, new Object[]{"Cipher", algorithm});
 	}
 	
 	private void debug_printMethodInfo(PrintStream stream, Method[] methods) {
