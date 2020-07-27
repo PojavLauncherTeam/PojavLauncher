@@ -996,11 +996,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 			Cipher rsaCipher = Cipher.getInstance("RSA");
-
+/*
 			for (Provider.Service ser : rsaPkcs1Cipher.getProvider().getServices()) {
 				System.out.println(" - " + ser.getType() + ", " + ser.getAlgorithm());
 			}
-
+*/
 			Provider.Service servicePkcs1 = rsaPkcs1Cipher.getProvider().getService("Cipher", "RSA/ECB/PKCS1Padding");
 			Provider rsaProvider = rsaCipher.getProvider();
 
@@ -1033,11 +1033,28 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			 */
 		} catch (Throwable th) {
 			th.printStackTrace();
+			
+			final File rsaFixFile = new File(Tools.MAIN_PATH, "rsapadding_error.txt");
 
+			// Debug information
+			PrintStream rsaFixStream = new PrintStream(rsaFixFile);
+			rsaFixStream.println("--- RSA PADDING ERROR ---");
+			rsaFixStream.println("• Error stack trace");
+			th.printStackTrace(rsaFixStream);
+			rsaFixStream.println();
+			rsaFixStream.println("• RSAPadding info");
+			rsaFixStream.println(" - Patch method: " + (Build.VERSION.SDK_INT < 24 ? "Direct (no" : "Reflection Bypass (with") + " security check)");
+			rsaFixStream.println(" - getDeclaredMethods() return");
+			debug_printMethodInfo(rsaFixStream, Provider.class.getDeclaredMethods());
+			rsaFixStream.println(" - getMethods() return");
+			debug_printMethodInfo(rsaFixStream, Provider.class.getMethods());
+			rsaFixStream.println("• System info");
+			rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
+			
 			runOnUiThread(new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited!", Toast.LENGTH_LONG).show();
+						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited! Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer", Toast.LENGTH_LONG).show();
 					}
 				});
 		}
@@ -1053,6 +1070,50 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		 provider.putService(service);
 		 System.out.println("After: " + provider.getService("KeyService", "RSA"));
 		 */
+	}
+	
+	private void debug_printMethodInfo(PrintStream stream, Method[] methods) {
+		StringBuilder methodInfo = new StringBuilder();
+		for (Method method : methods) {
+			methodInfo.setLength(0);
+			if (Modifier.isPublic(method.getModifiers())) {
+				methodInfo.append("public ");
+			} else if (Modifier.isPrivate(method.getModifiers())) {
+				methodInfo.append("private ");
+			} else if (Modifier.isProtected(method.getModifiers())) {
+				methodInfo.append("protected ");
+			}
+
+			if (Modifier.isSynchronized(method.getModifiers())) {
+				methodInfo.append("synchronized ");
+			}
+			
+			if (Modifier.isStatic(method.getModifiers())) {
+				methodInfo.append("static ");
+			}
+			
+			if (Modifier.isAbstract(method.getModifiers())) {
+				methodInfo.append("abstract ");
+			}
+			
+			if (Modifier.isFinal(method.getModifiers())) {
+				methodInfo.append("final ");
+			}
+			
+			methodInfo.append(method.getName() + "(");
+			int paramLength = method.getParameterTypes().length;
+			for (int i = 0; i < paramLength; i++) {
+				Class params = method.getParameterTypes()[i];
+				
+				methodInfo.append(params.getName());
+				if (i + 1 < paramLength) {
+					methodInfo.append(", ");
+				}
+			}
+			methodInfo.append(")");
+			
+			stream.println(methodInfo);
+		}
 	}
 
 	public void printStream(InputStream stream) {

@@ -380,15 +380,15 @@ public final class Tools
     }
 	
 	// Prevent NullPointerException
-	private static void insertSafety(JMinecraftVersionList.Version inheritsVer, JMinecraftVersionList.Version theVer, String... keyArr) {
+	private static void insertSafety(JMinecraftVersionList.Version targetVer, JMinecraftVersionList.Version fromVer, String... keyArr) {
 		for (String key : keyArr) {
 			Object value = null;
 			try {
-				Field fieldA = theVer.getClass().getDeclaredField(key);
-				value = fieldA.get(theVer);
+				Field fieldA = fromVer.getClass().getDeclaredField(key);
+				value = fieldA.get(fromVer);
 				if (value != null || ((value instanceof String) && !((String) value).isEmpty())) {
-					Field fieldB = inheritsVer.getClass().getDeclaredField(key);
-					fieldB.set(inheritsVer, value);
+					Field fieldB = targetVer.getClass().getDeclaredField(key);
+					fieldB.set(targetVer, value);
 				}
 			} catch (Throwable th) {
 				System.err.println("Unable to insert " + key + "=" + value);
