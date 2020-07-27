@@ -986,51 +986,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void fixRSAPadding() throws Exception {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
-		System.out.println("Before: " + KeyFactory.getInstance("RSA") + " ; " + KeyFactory.getInstance("RSA").getProvider().toString());
-
 		try {
-			/*
-			 System.out.println(Cipher.getInstance("RSA"));
-			 System.out.println(Cipher.getInstance("RSA/ECB/PKCS1Padding"));
-			 */
-
-			Cipher rsaPkcs1Cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-			Cipher rsaCipher = Cipher.getInstance("RSA");
-/*
-			for (Provider.Service ser : rsaPkcs1Cipher.getProvider().getServices()) {
-				System.out.println(" - " + ser.getType() + ", " + ser.getAlgorithm());
-			}
-*/
-			Provider.Service servicePkcs1 = rsaPkcs1Cipher.getProvider().getService("Cipher", "RSA/ECB/PKCS1Padding");
-			Provider rsaProvider = rsaCipher.getProvider();
-
-			Map pkcs1Map = new ArrayMap();
-			for (Map.Entry entry : servicePkcs1.getProvider().entrySet()) {
-				pkcs1Map.put(entry.getKey(), entry.getValue());
-			}
-
-			if (Build.VERSION.SDK_INT < 24) {
-				rsaProvider.putAll(pkcs1Map);
+			if (android.os.Build.VERSION.SDK_INT > 23) { // Nougat
+				// GetInstance.getServices("KeyPairGenerator", algorithm);
+				// Since Android 7, it use sun.security.jca.GetInstance
+				
+				Class.forName("sun.security.jca.GetInstance")
+					.getDeclaredMethod("getServices", String.class, String.class)
+					.invoke(null, new Object[]{"Cipher", "RSA"});
 			} else {
-				// Method rsaMethod_clear = rsaProvider.getClass().getDeclaredMethod("implClear");
-				Method rsaMethod_putAll = rsaProvider.getClass().getDeclaredMethod("implPutAll", Map.class);
-				// rsaMethod_clear.setAccessible(true);
-				rsaMethod_putAll.setAccessible(true);
-
-				// rsaMethod_clear.invoke(rsaProvider);
-				rsaMethod_putAll.invoke(rsaProvider, pkcs1Map);
+				ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
+				ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
+				rsaList.clear();
+				rsaList.addAll(rsaPkcs1List);
 			}
-
-			/*
-			 if (android.os.Build.VERSION.SDK_INT >= 23) { // Marshmallow
-			 // FUUUUU I DON'T KNOW FIXME
-			 } else {
-			 ArrayList<Provider.Service> rsaList = Services.getServices("Cipher.RSA");
-			 ArrayList<Provider.Service> rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
-			 rsaList.clear();
-			 rsaList.addAll(rsaPkcs1List);
-			 }
-			 */
 		} catch (Throwable th) {
 			th.printStackTrace();
 			
@@ -1058,10 +1027,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				});
 		}
-
-
-		System.out.println("After: " + KeyFactory.getInstance("RSA") + " ; " + KeyFactory.getInstance("RSA").getProvider().toString());
-
+		
 		/*
 		 Provider provider = KeyFactory.getInstance("RSA").getProvider();
 		 System.out.println("Before: " + provider.getService("KeyService", "RSA"));
