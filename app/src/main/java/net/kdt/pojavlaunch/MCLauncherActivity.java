@@ -533,6 +533,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							libItem.name.startsWith("com.mojang:realms") ||
 							libItem.name.startsWith("net.java.jinput") ||
 							libItem.name.startsWith("net.minecraft.launchwrapper") ||
+							// libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
 							libItem.name.startsWith("org.lwjgl") ||
 							libItem.name.startsWith("tv.twitch")
 							) { // Black list

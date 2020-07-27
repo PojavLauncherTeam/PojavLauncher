@@ -1083,6 +1083,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			debug_printMethodInfo(rsaFixStream, Provider.class.getMethods());
 			rsaFixStream.println("• System info");
 			rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
+			rsaFixStream.close();
 			
 			runOnUiThread(new Runnable(){
 					@Override

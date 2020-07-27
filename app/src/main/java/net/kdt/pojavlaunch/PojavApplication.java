@@ -12,8 +12,7 @@ import java.io.*;
 public class PojavApplication extends Application
 {
 	@Override
-	public void onCreate()
-	{
+	public void onCreate() {
 		super.onCreate();
 		try {
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
