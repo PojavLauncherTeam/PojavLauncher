@@ -1056,7 +1056,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			runOnUiThread(new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited! Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer", Toast.LENGTH_LONG).show();
+						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited!" +
+							(Build.VERSION.SDK_INT == 23 ? 
+								"Android 6 currently don't have solution" :
+								"Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer")
+						, Toast.LENGTH_LONG).show();
 					}
 				});
 		}
