@@ -160,6 +160,11 @@ public class Services {
     public static synchronized ArrayList<Provider.Service> getServices(String key) {
         return services.get(key);
     }
+	
+	public static synchronized ArrayList<Provider.Service> getServices(String type, String algorithm) {
+		return null;
+	}
+	
     /**
      * Returns the default SecureRandom service description.
      */

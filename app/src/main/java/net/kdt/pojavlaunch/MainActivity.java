@@ -1019,23 +1019,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		try {
 			List<Provider.Service> rsaList, rsaPkcs1List;
-			if (android.os.Build.VERSION.SDK_INT > 23) { // Nougat
-				/*
-				 * Since Android 7, it use OpenJDK sun.security.jca.GetInstance
-				 * But it's not part of Android SDK.
-				 */
-				rsaList = getCipherServices("RSA");
-				rsaPkcs1List = getCipherServices("RSA/ECB/PKCS1PADDING");
-			} else {
-				rsaList = Services.getServices("Cipher.RSA");
-				rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
-			}
+			rsaList = getCipherServices("Cipher", "RSA");
+			rsaPkcs1List = getCipherServices("Cipher", "RSA/ECB/PKCS1PADDING");
 			
-			/* 
-			 * Not .clear() directly since the entry removal is protected,
-			 * so some reflections to reset it
-			 */
-			Modifiable.resetServiceList(rsaList);
+			rsaList.clear();
 			rsaList.addAll(rsaPkcs1List);
 		} catch (Throwable th) {
 			th.printStackTrace();
@@ -1049,11 +1036,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			th.printStackTrace(rsaFixStream);
 			rsaFixStream.println();
 			rsaFixStream.println("• RSAPadding info");
-			rsaFixStream.println(" - Patch method: " + (Build.VERSION.SDK_INT < 24 ? "Direct (no" : "Reflection Bypass (with") + " security check)");
-			rsaFixStream.println(" - getDeclaredMethods() return");
-			debug_printMethodInfo(rsaFixStream, Provider.class.getDeclaredMethods());
-			rsaFixStream.println(" - getMethods() return");
-			debug_printMethodInfo(rsaFixStream, Provider.class.getMethods());
+			rsaFixStream.println(" - Patch method: " + (Build.VERSION.SDK_INT < 24 ? "Apache Harmony" : "OpenJDK sun.security.jca"));
 			rsaFixStream.println("• System info");
 			rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
 			rsaFixStream.close();
@@ -1076,55 +1059,30 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		 */
 	}
 	
-	private List<Provider.Service> getCipherServices(String algorithm) throws InvocationTargetException, SecurityException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
-		return (List<Provider.Service>) Class.forName("sun.security.jca.GetInstance")
-			.getDeclaredMethod("getServices", String.class, String.class)
-			.invoke(null, new Object[]{"Cipher", algorithm});
-	}
-	
-	private void debug_printMethodInfo(PrintStream stream, Method[] methods) {
-		StringBuilder methodInfo = new StringBuilder();
-		for (Method method : methods) {
-			methodInfo.setLength(0);
-			if (Modifier.isPublic(method.getModifiers())) {
-				methodInfo.append("public ");
-			} else if (Modifier.isPrivate(method.getModifiers())) {
-				methodInfo.append("private ");
-			} else if (Modifier.isProtected(method.getModifiers())) {
-				methodInfo.append("protected ");
-			}
-
-			if (Modifier.isSynchronized(method.getModifiers())) {
-				methodInfo.append("synchronized ");
-			}
-			
-			if (Modifier.isStatic(method.getModifiers())) {
-				methodInfo.append("static ");
-			}
-			
-			if (Modifier.isAbstract(method.getModifiers())) {
-				methodInfo.append("abstract ");
-			}
-			
-			if (Modifier.isFinal(method.getModifiers())) {
-				methodInfo.append("final ");
-			}
-			
-			methodInfo.append(method.getName() + "(");
-			int paramLength = method.getParameterTypes().length;
-			for (int i = 0; i < paramLength; i++) {
-				Class params = method.getParameterTypes()[i];
-				
-				methodInfo.append(params.getName());
-				if (i + 1 < paramLength) {
-					methodInfo.append(", ");
+	// From org.apache.harmony.security.fortress.Services:getServices(String type, String algorithm)
+	public static synchronized ArrayList<Provider.Service> getCipherServices(String type, String algorithm) {
+		if (Build.VERSION.SDK_INT < 23) {
+			// 5.1 (Lollipop) and below
+			return Services.getServices(type + "." + algorithm);
+		} else if (Build.VERSION.SDK_INT == 23) {
+			// 6.0 (Marshmallow) only
+			return Services.getServices(type, algorithm);
+		} else {
+			// 7.0 (Nougat) and above
+			List<Provider> providers = sun.security.jca.ProviderList.providers();
+			ArrayList<Provider.Service> services = null;
+			for (Provider p : providers) {
+				Provider.Service s = p.getService(type, algorithm);
+				if (s != null) {
+					if (services == null) {
+						services = new ArrayList<>(providers.size());
+					}
+					services.add(s);
 				}
 			}
-			methodInfo.append(")");
-			
-			stream.println(methodInfo);
+			return services;
 		}
-	}
+    }
 
 	public void printStream(InputStream stream) {
 		try {
