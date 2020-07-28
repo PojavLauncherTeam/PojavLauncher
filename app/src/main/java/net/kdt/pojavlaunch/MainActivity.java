@@ -3,7 +3,6 @@ package net.kdt.pojavlaunch;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.widget.*;
@@ -22,21 +21,18 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.security.*;
 import java.util.*;
-import javax.crypto.*;
 import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 import optifine.*;
 import org.apache.harmony.security.fortress.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
-import org.lwjgl.util.applet.*;
-import org.lwjgl.util.glu.tessellation.*;
+import sun.security.jca.*;
 
 import android.app.AlertDialog;
-import android.graphics.drawable.Drawable;
-import net.kdt.pojavlaunch.value.customcontrols.*;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -1018,24 +1014,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
 		try {
-			List<Provider.Service> rsaList, rsaPkcs1List;
-			rsaList = getCipherServices("Cipher", "RSA");
-			rsaPkcs1List = getCipherServices("Cipher", "RSA/ECB/PKCS1PADDING");
-			
 			if (Build.VERSION.SDK_INT > 23) {
-				Method rsaMethod_putService = Provider.class.getDeclaredMethod("putService", Provider.Service.class);
-				rsaMethod_putService.setAccessible(true);
-				
-				Method rsaMethod_removeService = Provider.class.getDeclaredMethod("removeService", Provider.Service.class);
-				rsaMethod_removeService.setAccessible(true);
-				
-				for (Provider.Service s : rsaList) {
-					rsaMethod_removeService.invoke(s.getProvider(), s);
-				}
-				for (Provider.Service s : rsaPkcs1List) {
-					rsaMethod_putService.invoke(s.getProvider(), s);
+				Map<Provider, Provider.Service> rsaMap, rsaPkcs1Map;
+				rsaMap = getCipherServicesMap("Cipher", "RSA");
+				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
+
+				for (Map.Entry<Provider, Provider.Service> set : rsaMap.entrySet()) {
+					set.getKey().remove("Cipher.RSA");
+
+					for (Provider.Service s : rsaPkcs1Map.values()) {
+						set.getKey().put(s.getType(), s.getClassName());
+					}
 				}
 			} else {
+				Collection<Provider.Service> rsaList, rsaPkcs1List;
+				rsaList = getCipherServices("Cipher", "RSA");
+				rsaPkcs1List = getCipherServices("Cipher", "RSA/ECB/PKCS1PADDING");
+				
 				rsaList.clear();
 				rsaList.addAll(rsaPkcs1List);
 			}
@@ -1075,32 +1070,35 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 	
 	// From org.apache.harmony.security.fortress.Services:getServices(String type, String algorithm)
-	public static synchronized ArrayList<Provider.Service> getCipherServices(String type, String algorithm) {
+
+	public static synchronized Collection<Provider.Service> getCipherServices(String type, String algorithm) {
 		if (Build.VERSION.SDK_INT < 23) {
 			// 5.1 (Lollipop) and below
 			return Services.getServices(type + "." + algorithm);
 		} else if (Build.VERSION.SDK_INT == 23) {
 			// 6.0 (Marshmallow) only
-			
-			// FIXME it may not work!
-			// return Services.getServices(type, algorithm);
-			return new ArrayList<Provider.Service>();
+			return Services.getServices(type, algorithm);
 		} else {
-			// 7.0 (Nougat) and above
-			List<Provider> providers = sun.security.jca.ProviderList.providers();
-			ArrayList<Provider.Service> services = null;
-			for (Provider p : providers) {
-				Provider.Service s = p.getService(type, algorithm);
-				if (s != null) {
-					if (services == null) {
-						services = new ArrayList<>(providers.size());
-					}
-					services.add(s);
-				}
-			}
-			return services;
+			return getCipherServicesMap(type, algorithm).values();
 		}
+	}
+
+	public static synchronized Map<Provider, Provider.Service> getCipherServicesMap(String type, String algorithm) {
+		// 7.0 (Nougat) and above
+		List<Provider> providers = Providers.getProviderList().providers();
+		Map<Provider, Provider.Service> services = null;
+		for (Provider p : providers) {
+			Provider.Service s = p.getService(type, algorithm);
+			if (s != null) {
+				if (services == null) {
+					services = new HashMap<>(providers.size());
+				}
+				services.put(p, s);
+			}
+		}
+		return services;
     }
+	
 
 	public void printStream(InputStream stream) {
 		try {
