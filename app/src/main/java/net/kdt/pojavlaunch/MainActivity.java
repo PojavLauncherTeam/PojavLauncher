@@ -1022,8 +1022,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			rsaList = getCipherServices("Cipher", "RSA");
 			rsaPkcs1List = getCipherServices("Cipher", "RSA/ECB/PKCS1PADDING");
 			
-			rsaList.clear();
-			rsaList.addAll(rsaPkcs1List);
+			if (Build.VERSION.SDK_INT > 23) {
+				Method rsaMethod_putService = Provider.class.getDeclaredMethod("putService", Provider.Service.class);
+				rsaMethod_putService.setAccessible(true);
+				
+				Method rsaMethod_removeService = Provider.class.getDeclaredMethod("removeService", Provider.Service.class);
+				rsaMethod_removeService.setAccessible(true);
+				
+				for (Provider.Service s : rsaList) {
+					rsaMethod_removeService.invoke(s.getProvider(), s);
+				}
+				for (Provider.Service s : rsaPkcs1List) {
+					rsaMethod_putService.invoke(s.getProvider(), s);
+				}
+			} else {
+				rsaList.clear();
+				rsaList.addAll(rsaPkcs1List);
+			}
 		} catch (Throwable th) {
 			th.printStackTrace();
 			
@@ -1066,7 +1081,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			return Services.getServices(type + "." + algorithm);
 		} else if (Build.VERSION.SDK_INT == 23) {
 			// 6.0 (Marshmallow) only
-			return Services.getServices(type, algorithm);
+			
+			// FIXME it may not work!
+			// return Services.getServices(type, algorithm);
+			return new ArrayList<Provider.Service>();
 		} else {
 			// 7.0 (Nougat) and above
 			List<Provider> providers = sun.security.jca.ProviderList.providers();
