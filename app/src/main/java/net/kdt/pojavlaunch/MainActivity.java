@@ -1023,9 +1023,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					set.getKey().remove("Cipher.RSA");
 
 					for (Provider.Service s : rsaPkcs1Map.values()) {
+						set.getKey().put(s.getType(), s.getClassName());
+						
+				/*
 						set.getKey().put("Cipher.RSA algorithm", s.getAlgorithm());
 						set.getKey().put("Cipher.RSA className", s.getClassName());
 						set.getKey().put("Cipher.RSA type", s.getType());
+				*/
 					}
 				}
 			} else {
