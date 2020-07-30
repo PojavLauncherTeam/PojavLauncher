@@ -19,7 +19,7 @@ Discord server: https://discord.gg/6RpEJda
 - Minecraft 1.12.x can be run on Android 8.0 and above by use d8 for desugar and dexing in the latest v2, but will crash if join world/multiplayer.
 
 ## License
-- PojavLauncher ía licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
+- PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
 ## Using libraries & Third party licenses
 - (v2) Boardwalk: [Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE).
