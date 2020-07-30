@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "2.5.1_6398b_20200719"
+        versionName "2.5.2_6399b_20200731"
     }
 	
     buildTypes {
