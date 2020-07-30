@@ -162,7 +162,7 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 		
 		try {
 			Field field = R.id.class.getDeclaredField(getId(bar.getId()).replace("seekbar", "progressseek"));
-			((TextView) findViewById(field.get(null))).setText(currProgress + "/" + bar.getMax());
+			((TextView) findViewById((Integer) field.get(null))).setText(currProgress + "/" + bar.getMax());
 		} catch (Throwable th) {
 			throw new RuntimeException(th);
 		}
