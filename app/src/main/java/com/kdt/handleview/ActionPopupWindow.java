@@ -47,7 +47,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 					try {
 						Field f = perType.getDeclaredField(name);
 						f.setAccessible(true);
-						return f.get(null);
+						return (int) f.get(null);
 					} catch (Throwable th) {
 						th.printStackTrace();
 					}
@@ -63,7 +63,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 				try {
 					Field f = perType.getDeclaredField(name);
 					f.setAccessible(true);
-					return f.get(null);
+					return (int) f.get(null);
 				} catch (Throwable th) {
 					th.printStackTrace();
 				}
