@@ -155,16 +155,11 @@
 	<string name="control_keyboard">Klawiatura</string>
 	<string name="control_chat">Czat</string>
 	<string name="control_debug">Debug</string>
-	<string name="control_zoom">Zoom (C)</string>
+	<string name="control_zoom">Powiększenie (C)</string>
 	<string name="control_primary">Pri</string>
 	<string name="control_secondary">Sec</string>
 	<string name="control_shift">◇</string>
 	<string name="control_inventory">Inv</string>
-	<string name="control_up">▲</string>
-	<string name="control_left">◀</string>
-	<string name="control_right">▶</string>
-	<string name="control_down">▼</string>
-	<string name="control_jump">⬛</string>
 	<string name="control_thirdperson">3rd</string>
 	<string name="control_listplayers">Tab</string>
 	<string name="control_mouse">Mysz</string>
