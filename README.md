@@ -128,7 +128,7 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 |Status           |[Worked](https://youtu.be/In_EPebQG7Q)|???|???|[Worked (manually)](https://youtu.be/TJeJcPFgzcI)|[Worked (with 1 hack)](https://youtu.be/eIawM9UmQ88)
 
 ## A note about 1.12.x
-- Minecraft 1.12.x can be run on Android 8.0 and above by use d8 for desugar and dexing in the latest v2, but will crash if join world/multiplayer.
+- Minecraft 1.12.x can be run on Android 8.0 and above by use d8 for desugar and dexing in the latest v2, but will crash in singleplayer.
 
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
@@ -141,5 +141,5 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - (v3) BusyBox: [GNU GPLv2 License](https://busybox.net/license.html).<br>
 - (v3) OpenJDK: [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
 - (v3) PRoot: [GNU GPLv2 License](https://github.com/termux/proot/blob/master/COPYING).<br>
-- (v3) TheQVD XVnc Pro: [GNU GPLv3 License](https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt).
+- (v3) XVnc: [GNU GPLv3 License](https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt).
 - (all) LWJGL 2: [Legacy LWJGL License](http://legacy.lwjgl.org/license.php.html).<br>
