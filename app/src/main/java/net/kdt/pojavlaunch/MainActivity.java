@@ -188,6 +188,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			initEnvs();
 			//System.loadLibrary("gl4es");
+			/*
+			if (mVersionInfo.arguments != null) {
+				System.loadLibrary("lwjgl32");
+				System.loadLibrary("lwjgl_opengl32");
+				System.loadLibrary("lwjgl_stb32");
+			}
+			*/
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 
 			AndroidDisplay.windowWidth = displayMetrics.widthPixels / scaleFactor;

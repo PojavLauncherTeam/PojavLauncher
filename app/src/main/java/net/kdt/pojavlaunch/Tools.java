@@ -79,8 +79,22 @@ public final class Tools
 	public static String generate(String version) throws IOException
 	{
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
-		String[] classpath = generateLibClasspath(getVersionInfo(version));
+		
+		JMinecraftVersionList.Version info = getVersionInfo(version);
+		String[] classpath = generateLibClasspath(info);
 
+		// Debug: LWJGL 3 override
+		File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
+		if (info.arguments != null && lwjgl3Folder.exists()) {
+			for (File file: lwjgl3Folder.listFiles()) {
+				if (file.getName().endsWith(".jar")) {
+					libStr.append(file.getAbsolutePath() + ":");
+				}
+			}
+		} else {
+			libStr.append(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1") + ":");
+		}
+		
 		if (isClientFirst) {
 			libStr.append(getPatchedFile(version));
 		}
@@ -298,18 +312,6 @@ public final class Tools
 	*/
 	public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
 		List<String> libDir = new ArrayList<String>();
-		
-		// Debug: LWJGL 3 override
-		File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
-		if (info.arguments != null && lwjgl3Folder.exists()) {
-			for (File file: lwjgl3Folder.listFiles()) {
-				if (file.getName().endsWith(".jar")) {
-					libDir.add(file.getAbsolutePath());
-				}
-			}
-		} else {
-			libDir.add(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1"));
-		}
 		
 		for (DependentLibrary libItem: info.libraries) {
 			String[] libInfos = libItem.name.split(":");
