@@ -308,7 +308,7 @@ public final class Tools
 				}
 			}
 		} else {
-			libDir.add(Tools.libraries + "/" + Tools.artifactToPath("lwjgl", "lwjglboardwalk", "2.9.1"));
+			libDir.add(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1"));
 		}
 		
 		for (DependentLibrary libItem: info.libraries) {
