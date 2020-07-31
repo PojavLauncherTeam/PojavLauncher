@@ -1021,8 +1021,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void fixRSAPadding() throws Exception {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
+		final boolean isLegacyPatch = Build.VERSION.SDK_INT < 24;
+		
 		try {
-			if (Build.VERSION.SDK_INT > 23) {
+			if (!isLegacyPatch) {
 				Map<Provider, Provider.Service> rsaMap, rsaPkcs1Map;
 				rsaMap = getCipherServicesMap("Cipher", "RSA");
 				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
@@ -1068,7 +1070,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			th.printStackTrace(rsaFixStream);
 			rsaFixStream.println();
 			rsaFixStream.println("• RSAPadding info");
-			rsaFixStream.println(" - Patch method: " + (Build.VERSION.SDK_INT < 24 ? "Apache Harmony" : "OpenJDK sun.security.jca"));
+			rsaFixStream.println(" - Patch method: " + (isLegacyPatch ? "Apache Harmony" : "OpenJDK sun.security.jca"));
+			if (!isLegacyPatch) {
+				rsaFixStream.println(" - sun.security.jca.ProviderList:");
+				debug_printMethodInfo(rsaFixStream, ProviderList.class.getDeclaredMethods());
+			}
 			rsaFixStream.println("• System info");
 			rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
 			rsaFixStream.close();
@@ -1095,9 +1101,52 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		 */
 	}
 	
-	// From org.apache.harmony.security.fortress.Services:getServices(String type, String algorithm)
+	private static void debug_printMethodInfo(PrintStream stream, Method[] methods) {
+		StringBuilder methodInfo = new StringBuilder();
+		for (Method method : methods) {
+			methodInfo.setLength(0);
+			if (Modifier.isPublic(method.getModifiers())) {
+				methodInfo.append("public ");
+			} else if (Modifier.isPrivate(method.getModifiers())) {
+				methodInfo.append("private ");
+			} else if (Modifier.isProtected(method.getModifiers())) {
+				methodInfo.append("protected ");
+			}
 
-	public static synchronized Collection<Provider.Service> getCipherServices(String type, String algorithm) {
+			if (Modifier.isSynchronized(method.getModifiers())) {
+				methodInfo.append("synchronized ");
+			}
+			
+			if (Modifier.isStatic(method.getModifiers())) {
+				methodInfo.append("static ");
+			}
+			
+			if (Modifier.isAbstract(method.getModifiers())) {
+				methodInfo.append("abstract ");
+			}
+			
+			if (Modifier.isFinal(method.getModifiers())) {
+				methodInfo.append("final ");
+			}
+			
+			methodInfo.append(method.getName() + "(");
+			int paramLength = method.getParameterTypes().length;
+			for (int i = 0; i < paramLength; i++) {
+				Class params = method.getParameterTypes()[i];
+				
+				methodInfo.append(params.getName());
+				if (i + 1 < paramLength) {
+					methodInfo.append(", ");
+				}
+			}
+			methodInfo.append(")");
+			
+			stream.println(methodInfo);
+		}
+	}
+	
+	// From org.apache.harmony.security.fortress.Services:getServices(String type, String algorithm)
+	private static synchronized Collection<Provider.Service> getCipherServices(String type, String algorithm) {
 		if (Build.VERSION.SDK_INT < 23) {
 			// 5.1 (Lollipop) and below
 			return Services.getServices(type + "." + algorithm);
@@ -1109,7 +1158,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 	}
 
-	public static synchronized Map<Provider, Provider.Service> getCipherServicesMap(String type, String algorithm) {
+	private static synchronized Map<Provider, Provider.Service> getCipherServicesMap(String type, String algorithm) {
 		// 7.0 (Nougat) and above
 		List<Provider> providers = Providers.getProviderList().providers();
 		Map<Provider, Provider.Service> services = null;
