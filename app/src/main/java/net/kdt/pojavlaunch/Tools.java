@@ -307,6 +307,8 @@ public final class Tools
 					libDir.add(file.getAbsolutePath());
 				}
 			}
+		} else {
+			libDir.add(Tools.artifactToPath("lwjgl", "lwjglboardwalk", "2.9.1"));
 		}
 		
 		for (DependentLibrary libItem: info.libraries) {

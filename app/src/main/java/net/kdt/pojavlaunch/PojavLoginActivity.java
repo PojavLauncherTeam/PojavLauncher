@@ -35,7 +35,7 @@ public class PojavLoginActivity extends MineActivity
 	
 	private SharedPreferences firstLaunchPrefs;
 	// private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
-	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
+	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted2";
 	
 	private boolean isInitCalled = false;
 	@Override
