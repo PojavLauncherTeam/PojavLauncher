@@ -985,18 +985,19 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			};
 
-			PrintStream theStreamOut = new PrintStream( new LoggerJava.LoggerOutputStream(System.out, printLog));
+			PrintStream theStreamOut = new PrintStream(new LoggerJava.LoggerOutputStream(System.out, printLog));
 			System.setOut(theStreamOut);
-
+			// Redirect error stream to output stream
+			System.setErr(theStreamOut);
+			
+/*
 			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
 			System.setErr(theStreamErr);
-
+*/
 			fixRSAPadding();
 
-			System.out.println("> Running Minecraft with classpath:");
-			System.out.println(launchClassPath);
-			System.out.println();
-
+			appendlnToLog("Running Minecraft with classpath: \n" + launchClassPath + "\n", false);
+			
 			// Load classpath
 			DexClassLoader launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
 
@@ -1165,12 +1166,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	 WindowAnimation.fadeOut(contentCanvas, 500);
 	 }
 	 */
+	private void appendToLog(String text) {
+		appendToLog(text, true);
+	}
+	
 	private void appendlnToLog(String text) {
-		appendToLog(text + "\n");
+		appendlnToLog(text, true);
+	}
+	
+	private void appendlnToLog(String text, boolean checkAllow) {
+		appendToLog(text + "\n", checkAllow);
 	}
 
-	private void appendToLog(final String text) {
-		if (!isLogAllow) return;
+	private void appendToLog(final String text, boolean checkAllow) {
+		if (checkAllow && !isLogAllow) return;
 		textLog.post(new Runnable(){
 				@Override
 				public void run()
