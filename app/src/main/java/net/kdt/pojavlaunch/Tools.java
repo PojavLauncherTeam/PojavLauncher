@@ -304,7 +304,7 @@ public final class Tools
 		if (info.arguments != null && lwjgl3Folder.exists()) {
 			for (File file: lwjgl3Folder.listFiles()) {
 				if (file.getName().endsWith(".jar")) {
-					libDir.add(file.getAbsolutePath());
+					libDir.add(Tools.libraries + "/" + file.getAbsolutePath());
 				}
 			}
 		} else {
