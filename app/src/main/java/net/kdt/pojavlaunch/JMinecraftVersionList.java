@@ -13,7 +13,7 @@ public class JMinecraftVersionList {
     public Version[] versions;
 
     public static class Version {
-		// Since 1.13
+		// Since 1.13, so it's one of ways to check
 		public Arguments arguments;
 
         public String assets;

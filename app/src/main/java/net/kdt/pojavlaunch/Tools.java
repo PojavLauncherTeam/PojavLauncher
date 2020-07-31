@@ -79,7 +79,7 @@ public final class Tools
 	public static String generate(String version) throws IOException
 	{
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
-		String[] classpath = generateLibClasspath(getVersionInfo(version).libraries);
+		String[] classpath = generateLibClasspath(getVersionInfo(version));
 
 		if (isClientFirst) {
 			libStr.append(getPatchedFile(version));
@@ -296,10 +296,20 @@ public final class Tools
 		}
 	}
 	*/
-	public static String[] generateLibClasspath(DependentLibrary[] libs)
-	{
+	public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
 		List<String> libDir = new ArrayList<String>();
-		for (DependentLibrary libItem: libs) {
+		
+		// Debug: LWJGL 3 override
+		File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
+		if (info.arguments != null && lwjgl3Folder.exists()) {
+			for (File file: lwjgl3Folder.listFiles()) {
+				if (file.getName().endsWith(".jar")) {
+					libDir.add(file.getAbsolutePath());
+				}
+			}
+		}
+		
+		for (DependentLibrary libItem: info.libraries) {
 			String[] libInfos = libItem.name.split(":");
 			libDir.add(Tools.libraries + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
 		}
