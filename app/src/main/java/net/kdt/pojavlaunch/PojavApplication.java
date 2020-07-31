@@ -13,8 +13,8 @@ public class PojavApplication extends Application
 {
 	@Override
 	public void onCreate() {
-		super.onCreate();
 		try {
+			super.onCreate();
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
 			
 			PackageInfo thisApp = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -41,7 +41,7 @@ public class PojavApplication extends Application
 			new CustomControls(this).save(Tools.CTRLDEF_FILE);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			Tools.showError(this, e, true);
 		}
 	}
 }
