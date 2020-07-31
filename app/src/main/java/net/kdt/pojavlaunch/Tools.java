@@ -304,11 +304,11 @@ public final class Tools
 		if (info.arguments != null && lwjgl3Folder.exists()) {
 			for (File file: lwjgl3Folder.listFiles()) {
 				if (file.getName().endsWith(".jar")) {
-					libDir.add(Tools.libraries + "/" + file.getAbsolutePath());
+					libDir.add(file.getAbsolutePath());
 				}
 			}
 		} else {
-			libDir.add(Tools.artifactToPath("lwjgl", "lwjglboardwalk", "2.9.1"));
+			libDir.add(Tools.libraries + "/" + Tools.artifactToPath("lwjgl", "lwjglboardwalk", "2.9.1"));
 		}
 		
 		for (DependentLibrary libItem: info.libraries) {
