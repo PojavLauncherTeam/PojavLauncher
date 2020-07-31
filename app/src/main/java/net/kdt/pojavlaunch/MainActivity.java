@@ -1028,17 +1028,25 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
 
 				for (Map.Entry<Provider, Provider.Service> set : rsaMap.entrySet()) {
-					set.getKey().remove("Cipher.RSA");
-
-					for (Provider.Service s : rsaPkcs1Map.values()) {
-						set.getKey().put(s.getType(), s.getClassName());
-						
-				/*
-						set.getKey().put("Cipher.RSA algorithm", s.getAlgorithm());
-						set.getKey().put("Cipher.RSA className", s.getClassName());
-						set.getKey().put("Cipher.RSA type", s.getType());
-				*/
+					System.out.println(set.getKey().getName() + ": ");
+					for (Map.Entry en : set.getKey().entrySet()) {
+						if (en.getKey().toString().contains("Cipher.RSA"))
+							System.out.println(en.getKey().toString() + " = " + en.getValue().toString());
 					}
+
+					set.getKey().remove("Cipher.RSA SupportedKeyFormats");
+
+					int spend = 0;
+					for (Map.Entry<Provider, Provider.Service> s : rsaPkcs1Map.entrySet()) {
+						if (spend == 0) {
+							set.getKey().put("Cipher.RSA", s.getValue().getClassName());
+							set.getKey().put("Cipher.RSA SupportedKeyClasses", s.getKey().get("Cipher.RSA/ECB/PKCS1Padding SupportedKeyClasses"));
+
+							spend++;
+						}
+					}
+
+					// printList(set.getKey().getServices());
 				}
 			} else {
 				Collection<Provider.Service> rsaList, rsaPkcs1List;
