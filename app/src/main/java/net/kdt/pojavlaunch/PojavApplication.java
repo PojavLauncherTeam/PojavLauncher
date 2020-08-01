@@ -8,6 +8,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import android.support.v7.preference.*;
 import java.io.*;
+import android.content.*;
 
 public class PojavApplication extends Application
 {
@@ -40,8 +41,10 @@ public class PojavApplication extends Application
 			new File(Tools.CTRLMAP_PATH).mkdirs();
 			new CustomControls(this).save(Tools.CTRLDEF_FILE);
 			
-		} catch (Exception e) {
-			Tools.showError(this, e, true);
+		} catch (Throwable th) {
+			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
+			ferrorIntent.putExtra("throwable", th);
+			startActivity(ferrorIntent);
 		}
 	}
 }

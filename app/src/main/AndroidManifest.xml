@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 		</activity>
+
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name=".FatalErrorActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
 		<activity
 			android:screenOrientation="sensorLandscape"
