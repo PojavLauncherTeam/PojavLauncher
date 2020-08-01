@@ -9,7 +9,10 @@ public class FatalErrorActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		Throwable th = (Throwable) getIntent().getExtras().getSerializable("throwable");
-		Tools.showError(this, R.string.error_fatal, th, true);
+		Bundle extras = getIntent().getExtras();
+		Throwable th = (Throwable) extras.getSerializable("throwable");
+		boolean isFatalError = extras.getBoolean("isFatal", false);
+		
+		Tools.showError(this, isFatalError ? R.string.error_fatal : R.string.global_error, th, true);
 	}
 }
