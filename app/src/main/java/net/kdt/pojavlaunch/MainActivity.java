@@ -1025,6 +1025,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		
 		try {
 			if (!isLegacyPatch) {
+				System.out.println("RSAPadding BEFORE");
+				debug_printServiceInfo(System.out, "Cipher.RSA");
+				
 				Map<Provider, Provider.Service> rsaMap, rsaPkcs1Map;
 				rsaMap = getCipherServicesMap("Cipher", "RSA");
 				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
@@ -1044,11 +1047,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							set.getKey().put("Cipher.RSA", s.getValue().getClassName());
 							set.getKey().put("Cipher.RSA SupportedKeyClasses", s.getKey().get("Cipher.RSA/ECB/PKCS1Padding SupportedKeyClasses"));
 
+							List<String> rsaAliasList = Modifiable.getServiceAliases(set.getValue());
+							rsaAliasList.clear();
+							rsaAliasList.addAll(Modifiable.getServiceAliases(s.getValue()));
+							
 							spend++;
 						}
 					}
 
 					// printList(set.getKey().getServices());
+					
+					System.out.println("RSAPadding AFTER");
+					debug_printServiceInfo(System.out, "Cipher.RSA");
 				}
 			} else {
 				Collection<Provider.Service> rsaList, rsaPkcs1List;
@@ -1099,6 +1109,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		 provider.putService(service);
 		 System.out.println("After: " + provider.getService("KeyService", "RSA"));
 		 */
+	}
+	
+	private static void debug_printServiceInfo(PrintStream stream, String key) {
+		String[] keyArr = key.split(".");
+		for (Provider p : getCipherServicesMap(keyArr[0], keyArr[1]).keySet()) {
+			stream.println("- " + p.getName() + ": " + p.getInfo());
+			for (Provider.Service s : p.getServices()) {
+				if (s.getAlgorithm().contains(key)) {
+					stream.println(s.toString());
+				}
+			}
+		}
 	}
 	
 	private static void debug_printMethodInfo(PrintStream stream, Method[] methods) {
