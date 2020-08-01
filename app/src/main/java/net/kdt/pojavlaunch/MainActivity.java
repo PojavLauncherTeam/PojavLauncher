@@ -1160,15 +1160,24 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private static synchronized Map<Provider, Provider.Service> getCipherServicesMap(String type, String algorithm) {
 		// 7.0 (Nougat) and above
-		List<Provider> providers = Providers.getProviderList().providers();
+		ProviderList providerList = Providers.getProviderList();
 		Map<Provider, Provider.Service> services = null;
-		for (Provider p : providers) {
-			Provider.Service s = p.getService(type, algorithm);
-			if (s != null) {
-				if (services == null) {
-					services = new HashMap<>(providers.size());
+		
+		// Android 10
+		if (Build.VERSION.SDK_INT >= 29) {
+			services = new ArrayMap<>();
+			Provider.Service service = providerList.getService(type, algorithm);
+			services.put(service.getProvider(), service);
+		} else {
+			List<Provider> providers = providerList.providers();
+			for (Provider p : providers) {
+				Provider.Service s = p.getService(type, algorithm);
+				if (s != null) {
+					if (services == null) {
+						services = new ArrayMap<>(providers.size());
+					}
+					services.put(p, s);
 				}
-				services.put(p, s);
 			}
 		}
 		return services;
