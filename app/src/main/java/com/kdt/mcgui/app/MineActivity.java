@@ -6,6 +6,7 @@ import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.*;
+import java.util.*;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -61,8 +62,10 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
 		
 		replaceFonts(btm);
 
-		replaceFont((TextView) top.findViewById(R.id.topbar_navmenu_changelang));
-
+		// replaceFont((TextView) top.findViewById(R.id.topbar_navmenu_changelang));
+		Spinner changeLangSpinner = ((Spinner) top.findViewById(R.id.topbar_navmenu_changelang));
+		// Locale l = getResources().getConfiguration().locale;
+		
 		RelativeLayout.LayoutParams conLay = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 		conLay.addRule(root.BELOW, topId);
 		conLay.bottomMargin = 66;
