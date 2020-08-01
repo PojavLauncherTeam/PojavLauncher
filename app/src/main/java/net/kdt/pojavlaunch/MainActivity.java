@@ -1025,9 +1025,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		
 		try {
 			if (!isLegacyPatch) {
+			/*
 				System.out.println("RSAPadding BEFORE");
 				debug_printServiceInfo(System.out, "Cipher.RSA");
-				
+			*/
+			
 				Map<Provider, Provider.Service> rsaMap, rsaPkcs1Map;
 				rsaMap = getCipherServicesMap("Cipher", "RSA");
 				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
@@ -1056,9 +1058,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 
 					// printList(set.getKey().getServices());
-					
+				
+				/*
 					System.out.println("RSAPadding AFTER");
 					debug_printServiceInfo(System.out, "Cipher.RSA");
+				*/
 				}
 			} else {
 				Collection<Provider.Service> rsaList, rsaPkcs1List;
