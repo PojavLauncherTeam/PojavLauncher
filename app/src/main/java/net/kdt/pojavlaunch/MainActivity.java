@@ -1001,7 +1001,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
 			System.setErr(theStreamErr);
 */
-			fixRSAPadding();
+			fixRSAPadding(this);
 
 			appendlnToLog("Running Minecraft with classpath: \n" + launchClassPath + "\n", false);
 			
@@ -1018,7 +1018,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 
 
-	public void fixRSAPadding() throws Exception {
+	public static void fixRSAPadding(final Activity act) {
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
 		final boolean isLegacyPatch = Build.VERSION.SDK_INT < 24;
@@ -1077,32 +1077,43 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			
 			final File rsaFixFile = new File(Tools.MAIN_PATH, "rsapadding_error.txt");
 
-			// Debug information
-			PrintStream rsaFixStream = new PrintStream(rsaFixFile);
-			rsaFixStream.println("--- RSA PADDING ERROR ---");
-			rsaFixStream.println("• Error stack trace");
-			th.printStackTrace(rsaFixStream);
-			rsaFixStream.println();
-			rsaFixStream.println("• RSAPadding info");
-			rsaFixStream.println(" - Patch method: " + (isLegacyPatch ? "Apache Harmony" : "OpenJDK sun.security.jca"));
-			if (!isLegacyPatch) {
-				rsaFixStream.println(" - sun.security.jca.ProviderList:");
-				debug_printMethodInfo(rsaFixStream, ProviderList.class.getDeclaredMethods());
+			try {
+				// Debug information
+				PrintStream rsaFixStream = new PrintStream(rsaFixFile);
+				rsaFixStream.println("--- RSA PADDING ERROR ---");
+				rsaFixStream.println("• Error stack trace");
+				th.printStackTrace(rsaFixStream);
+				rsaFixStream.println();
+				rsaFixStream.println("• RSAPadding info");
+				rsaFixStream.println(" - Patch method: " + (isLegacyPatch ? "Apache Harmony" : "OpenJDK sun.security.jca"));
+				if (!isLegacyPatch) {
+					rsaFixStream.println(" - sun.security.jca.ProviderList:");
+					debug_printMethodInfo(rsaFixStream, ProviderList.class.getDeclaredMethods());
+				}
+				rsaFixStream.println("• System info");
+				rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
+				rsaFixStream.close();
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
 			}
-			rsaFixStream.println("• System info");
-			rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
-			rsaFixStream.close();
 			
-			runOnUiThread(new Runnable(){
+
+			final String errMsg = "Unable to fix RSAPadding. Premium features is limited!" +
+				(Build.VERSION.SDK_INT == 23 ? 
+				"Android 6 currently don't have solution" :
+				"Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer");
+			
+			if (act != null) {
+				act.runOnUiThread(new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited!" +
-							(Build.VERSION.SDK_INT == 23 ? 
-								"Android 6 currently don't have solution" :
-								"Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer")
-						, Toast.LENGTH_LONG).show();
+						Toast.makeText(act, errMsg, Toast.LENGTH_LONG).show();
 					}
 				});
+			} else {
+				System.err.println("RSAPadding error: " + errMsg);
+			}
 		}
 		
 		/*
