@@ -22,6 +22,7 @@ import android.system.*;
 import android.net.*;
 import static android.view.ViewGroup.LayoutParams.*;
 import net.kdt.pojavlaunch.update.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 
 public class PojavLoginActivity extends MineActivity
 {
@@ -304,9 +305,12 @@ public class PojavLoginActivity extends MineActivity
 		try {
 			file3.createNewFile();
 		} catch (IOException e){}
-		
+	
 		try {
 			mkdirs(Tools.MAIN_PATH);
+			
+			mkdirs(Tools.CTRLMAP_PATH);
+			new CustomControls(this).save(Tools.CTRLDEF_FILE);
 			
 			Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
 			

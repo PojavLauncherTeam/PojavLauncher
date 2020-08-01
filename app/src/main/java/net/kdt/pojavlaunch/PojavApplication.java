@@ -37,10 +37,6 @@ public class PojavApplication extends Application
 			specialButtons[2].name = getString(R.string.control_primary);
 			specialButtons[3].name = getString(R.string.control_secondary);
 			specialButtons[4].name = getString(R.string.control_mouse);
-			
-			new File(Tools.CTRLMAP_PATH).mkdirs();
-			new CustomControls(this).save(Tools.CTRLDEF_FILE);
-			
 		} catch (Throwable th) {
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", th);
