@@ -19,7 +19,8 @@
 				android:layout_height="match_parent"
 				android:layout_width="42px"
 				android:background="#FFFFFF"
-				android:id="@+id/topbar_earth_icon"/>
+				android:id="@+id/topbar_earth_icon"
+				android:src="@drawable/ic_earth"/>
 
 			<TextView
 				android:layout_height="match_parent"
