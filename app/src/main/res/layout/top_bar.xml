@@ -11,28 +11,11 @@
 		android:orientation="horizontal"
 		android:background="#000000">
 
-		<RelativeLayout
+		<Spinner
 			android:layout_height="match_parent"
-			android:layout_width="wrap_content">
-
-			<ImageView
-				android:layout_height="match_parent"
-				android:layout_width="42px"
-				android:background="#FFFFFF"
-				android:id="@+id/topbar_earth_icon"
-				android:src="@drawable/ic_earth"/>
-
-			<TextView
-				android:layout_height="match_parent"
-				android:layout_width="wrap_content"
-				android:text="@string/language_name"
-				android:gravity="center_vertical"
-				android:paddingLeft="15px"
-				android:layout_toRightOf="@id/topbar_earth_icon"
-				android:textColor="#FFFFFF"
-				android:id="@+id/topbar_language_text"/>
-
-		</RelativeLayout>
+			android:layout_width="wrap_content"
+			style="@style/SpinnerChangeLanguage"
+			android:id="@+id/topbar_navmenu_changelang"/>
 
 		<LinearLayout
 			android:layout_height="wrap_content"

@@ -61,7 +61,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
 		
 		replaceFonts(btm);
 
-		replaceFont((TextView) top.findViewById(R.id.topbar_language_text));
+		replaceFont((TextView) top.findViewById(R.id.topbar_navmenu_changelang));
 
 		RelativeLayout.LayoutParams conLay = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 		conLay.addRule(root.BELOW, topId);
