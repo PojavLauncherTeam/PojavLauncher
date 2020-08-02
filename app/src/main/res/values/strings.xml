@@ -24,7 +24,6 @@
 	<string name="login_online_create_account">(Create new account?)</string>
 	
 	<string name="login_offline_switch">Offline account?</string>
-	<string name="login_offline_warning_1">You are logging in by an offline account, but if you don\'t save it, your data may be reset in your worlds/multiplayers/servers. We recommend you to save it.</string>
 	<string name="login_offline_alert_skip">Skip</string>
 	
 	<string name="login_error_short_username">Username must be at least 3 characters</string>

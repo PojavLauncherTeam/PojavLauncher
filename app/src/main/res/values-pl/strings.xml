@@ -24,7 +24,6 @@
 	<string name="login_online_create_account">(Stwórz nowe konto?)</string>
 	
 	<string name="login_offline_switch">Konto offline?</string>
-	<string name="login_offline_warning_1">Logujesz się za pomocą konta offline, ale jeśli go nie zapiszesz, Twoje dane mogą zostać zresetowane na Twoich światach / multiplayerach / serwerach. Zalecamy, abyś go zapisał.</string>
 	<string name="login_offline_alert_skip">Pominąć</string>
 	
 	<string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>

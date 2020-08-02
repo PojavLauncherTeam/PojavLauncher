@@ -24,8 +24,6 @@
 	<string name="login_online_create_account">(Создать новый профиль?)</string>
 	
 	<string name="login_offline_switch">Offline-профиль?</string>
-	<!-- DuyKhanhTran said I can skip line below -->
-	<string name="login_offline_warning_1">You are logging in by an offline account, but if you don\'t save it, your data may be reset in your worlds/multiplayers/servers. We recommend you to save it.</string>
 	<string name="login_offline_alert_skip">Пропустить</string>
 	
 	<string name="login_error_short_username">Псевдоним должен быть длиной как минимум 3 символа</string>

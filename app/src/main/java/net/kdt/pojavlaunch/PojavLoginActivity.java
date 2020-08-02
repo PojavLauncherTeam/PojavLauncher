@@ -497,50 +497,8 @@ public class PojavLoginActivity extends MineActivity
 		end skip*/
 		
 		if (sOffline.isChecked()) {
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-			alert.setTitle(R.string.warning_title);
-			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						sRemember.setChecked(true);
-						mProfile = loginOffline();
-						playProfile();
-					}
-				});
-			
-			alert.setNegativeButton(R.string.login_offline_alert_skip, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						mProfile = loginOffline();
-						playProfile();
-					}
-				});
-			
-			alert.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						mProfile = null;
-					}
-				});
-			
-			if (!sRemember.isChecked()) {
-				alert.setMessage(R.string.login_offline_warning_1);
-				warning = alert.show();
-			} else {
-				mProfile = loginOffline();
-				playProfile();
-			}
-			
-			/*
-			while (warning != null && warning.isShowing()) {
-			}
-			*/
+			mProfile = loginOffline();
+			playProfile();
 		} else {
 			new LoginTask().setLoginListener(new LoginListener(){
 
