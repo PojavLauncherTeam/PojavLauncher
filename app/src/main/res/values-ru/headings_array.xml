@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="mcl_options">
+		<item>@string/mcl_option_modmgr</item>
+		<!-- <item>@string/mcl_option_forgeinstall</item> -->
+		<item>@string/mcl_option_optifineinstall</item>
+		<item>@string/mcl_option_customcontrol</item>
+		<item>@string/mcl_option_settings</item>
+		<item>@string/mcl_option_about</item>
+	</string-array>
+</resources>
