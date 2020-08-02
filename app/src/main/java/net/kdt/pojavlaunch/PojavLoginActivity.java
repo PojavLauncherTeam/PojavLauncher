@@ -230,7 +230,7 @@ public class PojavLoginActivity extends MineActivity
 	}
 	
 	private void uiInit() {
-		setContentView(R.layout.launcher_login);
+		setContentView(R.layout.launcher_login_v2);
 
 		edit2 = (EditText) findViewById(R.id.launcherAccEmail);
 		edit3 = (EditText) findViewById(R.id.launcherAccPassword);
