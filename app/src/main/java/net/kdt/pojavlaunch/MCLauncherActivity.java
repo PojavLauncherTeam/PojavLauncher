@@ -116,7 +116,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		} catch(Exception e) {
 			//Tools.throwError(this, e);
 			e.printStackTrace();
-			toast(getStr(R.string.toast_login_error) + " " + e.getMessage());
+			toast(getStr(R.string.toast_login_error, e.getMessage()));
 			finish();
 		}
 
@@ -611,7 +611,7 @@ public class MCLauncherActivity extends AppCompatActivity
 						}
 					}
 
-					publishProgress("5", getStr(R.string.mcl_launch_download_client) + p1[0]);
+					publishProgress("5", getStr(R.string.mcl_launch_download_client, p1[0]));
 					outUnpatchedConvert = new File(unpatchedPath);
 					boolean patchedExist = new File(patchedFile).exists();
 					if (!patchedExist) {
