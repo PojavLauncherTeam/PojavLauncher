@@ -55,3 +55,5 @@ deploy:
   prerelease: true
   overwrite: false
   target_commitish: $TRAVIS_COMMIT
+  on:
+    branch: gl4es
