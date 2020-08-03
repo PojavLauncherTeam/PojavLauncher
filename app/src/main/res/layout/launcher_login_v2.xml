@@ -116,8 +116,9 @@
 				android:layout_centerInParent="true"
 				android:id="@+id/topbar_logo"
 				android:layout_gravity="center_horizontal"
-				android:translationY="-25dp"/>
-			
+				android:translationY="-60dp"
+				android:translationZ="10dp"/>
+
 		</FrameLayout>
 
 	</ScrollView>
