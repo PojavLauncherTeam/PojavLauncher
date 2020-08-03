@@ -50,11 +50,11 @@
 	<string name="alerttitle_installoptifine">Wybierz plik jar OptiFine</string>
 	
 	<!-- Error messages -->
-	<string name="error_checklog">Błąd! Sprawdź dziennik poniżej:% s</string>
+	<string name="error_checklog">Błąd! Sprawdź dziennik poniżej: %s</string>
 	<string name="error_no_version">Brak wersji!</string>
-	<string name="error_load_version">Nie można załadować wersji% s</string>
-	<string name="error_convert_lib">Nie można przekonwertować biblioteki% s</string>
-	<string name="error_convert_client">Nie można przekonwertować% s Minecrafta</string>
+	<string name="error_load_version">Nie można załadować wersji %s</string>
+	<string name="error_convert_lib">Nie można przekonwertować biblioteki %s</string>
+	<string name="error_convert_client">Nie można przekonwertować %s Minecrafta</string>
 	<string name="error_show_more">Pokaż więcej</string>
 	<string name="error_show_less">Pokaż mniej</string>
 	
@@ -72,14 +72,14 @@
 	<string name="mcl_tab_crash">Dziennik awarii</string>
 	
 	<!-- MCLauncherActivity: Strings -->
-	<string name="mcl_version_msg">Gotowy do gry w Minecrafta% s</string>
+	<string name="mcl_version_msg">Gotowy do gry w Minecrafta %s</string>
 	<string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
-	<string name="mcl_launch_downloading">Pobieranie% s</string>
-	<string name="mcl_launch_download_lib">Pobieranie biblioteki% s</string>
-	<string name="mcl_launch_download_client">Pobieranie gry Minecraft% s</string>
-	<string name="mcl_launch_convert_lib">Konwertowanie biblioteki% s</string>
-	<string name="mcl_launch_convert_client">Konwertowanie Minecrafta% s</string>
-	<string name="mcl_launch_patch_client">Aktualizowanie Minecrafta% s</string>
+	<string name="mcl_launch_downloading">Pobieranie %s</string>
+	<string name="mcl_launch_download_lib">Pobieranie biblioteki %s</string>
+	<string name="mcl_launch_download_client">Pobieranie gry Minecraft %s</string>
+	<string name="mcl_launch_convert_lib">Konwertowanie biblioteki %s</string>
+	<string name="mcl_launch_convert_client">Konwertowanie Minecrafta %s</string>
+	<string name="mcl_launch_patch_client">Aktualizowanie Minecrafta %s</string>
 	<string name="mcl_launch_download_assets">Przygotowanie do pobrania zasobów</string>
 	
 	<string name="mcl_options">Opcje</string>
