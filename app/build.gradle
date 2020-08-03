@@ -2,11 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.0'
     dexOptions {
     javaMaxHeapSize "4g"
     }
-
+      lintOptions {
+          abortOnError false
+      }
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
