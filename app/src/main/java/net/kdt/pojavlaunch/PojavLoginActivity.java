@@ -234,12 +234,16 @@ public class PojavLoginActivity extends AppCompatActivity
 	private void uiInit() {
 		setContentView(R.layout.launcher_login_v2);
 
-		edit2 = (EditText) findViewById(R.id.launcherAccEmail);
-		edit3 = (EditText) findViewById(R.id.launcherAccPassword);
+		LinearLayout loginLayout = findViewById(R.id.login_layout_linear);
+		ImageView imageLogo = findViewById(R.id.login_image_logo);
+		imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 4f));
+		
+		edit2 = (EditText) findViewById(R.id.login_edit_email);
+		edit3 = (EditText) findViewById(R.id.login_edit_password);
 		if(prb == null) prb = (ProgressBar) findViewById(R.id.launcherAccProgress);
 		
-		sRemember = (Switch) findViewById(R.id.launcherAccRememberSwitch);
-		sOffline  = (Switch) findViewById(R.id.launcherAccOffSwitch);
+		sRemember = (Switch) findViewById(R.id.login_switch_remember);
+		sOffline  = (Switch) findViewById(R.id.login_switch_offline);
 		sOffline.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 				@Override

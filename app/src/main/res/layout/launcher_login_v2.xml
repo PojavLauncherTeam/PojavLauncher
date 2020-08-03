@@ -11,117 +11,104 @@
 		android:adjustViewBounds="true"
 		android:background="@drawable/sign_in_background"/>
 
-	<ScrollView
-		android:layout_height="wrap_content"
+	<LinearLayout
+		android:orientation="vertical"
 		android:layout_width="wrap_content"
-		android:layout_gravity="center">
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:padding="25dp"
+		android:background="#272727"
+		android:layout_gravity="center"
+		android:id="@+id/login_layout_linear">
 
-		<FrameLayout
+		<TextView
 			android:layout_height="wrap_content"
-			android:layout_width="wrap_content">
+			android:layout_width="wrap_content"
+			android:text="@string/login_online_username_hint"
+			android:layout_gravity="left"/>
 
-			<LinearLayout
-				android:orientation="vertical"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:gravity="center"
-				android:background="#272727"
-				android:padding="25dp">
+		<com.kdt.mcgui.MineEditText
+			android:imeOptions="flagNoExtractUi"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:id="@+id/login_edit_email"
+			android:inputType="textEmailAddress"
+			android:layout_marginBottom="5dp"/>
 
-				<TextView
-					android:layout_height="wrap_content"
-					android:layout_width="wrap_content"
-					android:text="@string/login_online_username_hint"
-					android:layout_gravity="left"/>
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_gravity="left"
+			android:text="@string/login_online_password_hint"/>
 
-				<com.kdt.mcgui.MineEditText
-					android:imeOptions="flagNoExtractUi"
+		<com.kdt.mcgui.MineEditText
+			android:imeOptions="flagNoExtractUi"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:id="@+id/login_edit_password"
+			android:inputType="textPassword"
+			android:layout_marginBottom="5dp"/>
+
+		<Switch
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/login_online_remember"
+			android:layout_gravity="right"
+			android:id="@+id/login_switch_remember"/>
+
+		<Switch
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_gravity="right"
+			android:text="@string/login_offline_switch"
+			android:id="@+id/login_switch_offline"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginBottom="10dp"
+			android:gravity="bottom|center_vertical">
+
+			<RelativeLayout
+				android:layout_height="42dp"
+				android:layout_width="210dp"
+				android:layout_marginRight="10dp">
+
+				<com.kdt.mcgui.MineButton
 					android:layout_width="match_parent"
-					android:layout_height="30dp"
-					android:id="@+id/launcherAccEmail"
-					android:inputType="textEmailAddress"
-					android:layout_marginBottom="5dp"/>
+					android:layout_height="match_parent"
+					android:text="@string/login_online_login_label"
+					android:onClick="loginMC"
+					android:gravity="center"/>
 
-				<TextView
-					android:layout_height="wrap_content"
-					android:layout_width="wrap_content"
-					android:layout_gravity="left"
-					android:text="@string/login_online_password_hint"/>
-
-				<com.kdt.mcgui.MineEditText
-					android:imeOptions="flagNoExtractUi"
+				<ProgressBar
 					android:layout_width="match_parent"
-					android:layout_height="30dp"
-					android:id="@+id/launcherAccPassword"
-					android:inputType="textPassword"
-					android:layout_marginBottom="5dp"/>
+					android:layout_height="match_parent"
+					android:background="#88000000"
+					android:id="@+id/launcherAccProgress"
+					android:visibility="gone"
+					android:layout_centerInParent="true"/>
 
-				<Switch
-					android:layout_height="wrap_content"
-					android:layout_width="wrap_content"
-					android:text="@string/login_online_remember"
-					android:layout_gravity="right"
-					android:id="@+id/launcherAccRememberSwitch"/>
+			</RelativeLayout>
 
-				<Switch
-					android:layout_height="wrap_content"
-					android:layout_width="wrap_content"
-					android:layout_gravity="right"
-					android:text="@string/login_offline_switch"
-					android:id="@+id/launcherAccOffSwitch"/>
+			<com.kdt.mcgui.MineButton
+				android:layout_width="210dip"
+				android:layout_height="42dp"
+				android:text="@string/login_select_account"
+				android:onClick="loginSavedAcc"/>
 
-				<LinearLayout
-					android:layout_height="wrap_content"
-					android:layout_width="wrap_content"
-					android:orientation="horizontal"
-					android:layout_marginBottom="10dp"
-					android:gravity="bottom|center_vertical">
+		</LinearLayout>
 
-					<RelativeLayout
-						android:layout_height="42dp"
-						android:layout_width="210dp"
-						android:layout_marginRight="10dp">
+	</LinearLayout>
 
-						<com.kdt.mcgui.MineButton
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:text="@string/login_online_login_label"
-							android:onClick="loginMC"
-							android:gravity="center"/>
-
-						<ProgressBar
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:background="#88000000"
-							android:id="@+id/launcherAccProgress"
-							android:visibility="gone"
-							android:layout_centerInParent="true"/>
-
-					</RelativeLayout>
-
-					<com.kdt.mcgui.MineButton
-						android:layout_width="210dip"
-						android:layout_height="42dp"
-						android:text="@string/login_select_account"
-						android:onClick="loginSavedAcc"/>
-
-				</LinearLayout>
-
-			</LinearLayout>
-
-			<ImageView
-				android:layout_height="wrap_content"
-				android:layout_width="300dp"
-				android:src="@drawable/logo"
-				android:layout_centerInParent="true"
-				android:id="@+id/topbar_logo"
-				android:layout_gravity="center_horizontal"
-				android:translationY="-60dp"
-				android:translationZ="10dp"/>
-
-		</FrameLayout>
-
-	</ScrollView>
+	<ImageView
+		android:layout_height="48dp"
+		android:layout_width="300dp"
+		android:src="@drawable/logo"
+		android:layout_centerInParent="true"
+		android:id="@+id/login_image_logo"
+		android:layout_gravity="center_horizontal"/>
 
 </FrameLayout>
 
