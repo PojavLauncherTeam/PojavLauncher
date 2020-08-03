@@ -15,6 +15,7 @@ android:
     - android-$ANDROID_API_LEVEL
     - extra-android-m2repository
   licenses:
+    - yes | sudo sdkmanager --licenses
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
