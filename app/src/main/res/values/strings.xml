@@ -198,5 +198,5 @@
 	<string name="main_switchuser">Switch user</string>
 	<string name="main_version_">Version:</string>
 	<string name="main_nocrash">No crash detected</string>
-
+        <string name="main_nolog">No log.</string>
 </resources>
