@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     {
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // for hiding title
+        getWindow().getDecorView().setSystemUiVisibility(SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+        SYSTEM_UI_FLAG_FULLSCREEN | SYSTEM_UI_FLAG_HIDE_NAVIGATION   | 
+        SYSTEM_UI_FLAG_LAYOUT_STABLE | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
 		try {
 			ExitManager.setExitTrappedListener(new ExitManager.ExitTrappedListener(){
@@ -963,7 +967,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public static String launchClassPath;
 	public static String launchOptimizedDirectory;
 	public static String launchLibrarySearchPath;
-	private void runCraft() throws Throwable
+	private void runCraft() throws Throwable //oncreate
 	{
 		String[] launchArgs = getMCArgs();
 
