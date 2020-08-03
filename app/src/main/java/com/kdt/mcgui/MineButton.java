@@ -11,8 +11,6 @@ import net.kdt.pojavlaunch.*;
 
 public class MineButton extends Button
 {
-	private static FontChanger fontChangerMinecraftTen;
-	
 	private ColorDrawable left = new ColorDrawable(Color.parseColor("#80000000"));
 	private ColorDrawable top = new ColorDrawable(Color.parseColor("#64FC20"));
 	private ColorDrawable right = new ColorDrawable(Color.parseColor("#40000000"));
@@ -54,10 +52,7 @@ public class MineButton extends Button
 		init();
 	}
 	
-	public void init()
-	{
-		if (fontChangerMinecraftTen == null) fontChangerMinecraftTen = new FontChanger(getContext().getAssets(), "font/minecraft-ten.ttf");
-		fontChangerMinecraftTen.replaceFont(this);
+	public void init() {
 		getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
 				public void onGlobalLayout() {

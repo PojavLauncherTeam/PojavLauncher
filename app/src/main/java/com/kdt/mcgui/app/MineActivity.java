@@ -8,36 +8,17 @@ import android.widget.*;
 import net.kdt.pojavlaunch.*;
 import java.util.*;
 import android.content.*;
+import com.kdt.mcgui.*;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener
 {
 	private int topId = 150001;
 	private boolean showBeforeView = true;
 	
-	private static FontChanger fontChanger;
-	
 	private ImageButton menu;
 	private LinearLayout content, undertop;
 
 	private LayoutInflater li;
-	
-	public static ViewGroup replaceFonts(Context ctx, ViewGroup viewTree) {
-		if (fontChanger == null) fontChanger = new FontChanger(ctx.getAssets(), "font/NotoSans-Bold.ttf");
-		return fontChanger.replaceFonts(viewTree);
-	}
-	
-	public static View replaceFont(Context ctx, TextView view) {
-		if (fontChanger == null) fontChanger = new FontChanger(ctx.getAssets(), "font/NotoSans-Bold.ttf");
-		return fontChanger.replaceFont(view);
-	}
-	
-	public ViewGroup replaceFonts(ViewGroup viewTree) {
-		return replaceFonts(this, viewTree);
-	}
-	
-	public View replaceFont(TextView view) {
-		return replaceFont(this, view);
-	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +46,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
 		li.inflate(R.layout.top_bar, top, true);
 		li.inflate(R.layout.bottom_bar, btm, true);
 		
-		replaceFonts(btm);
+		FontChanger.changeFonts(btm);
 
 		// replaceFont((TextView) top.findViewById(R.id.topbar_navmenu_changelang));
 		Spinner changeLangSpinner = ((Spinner) top.findViewById(R.id.topbar_navmenu_changelang));
@@ -107,7 +88,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
 		}
 		
 		li.inflate(resource, content, true);
-		replaceFonts(content);
+		FontChanger.changeFonts(content);
 	}
 
 	@Override
@@ -119,7 +100,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
 		
 		content.addView(view);
 		if (view instanceof ViewGroup) {
-			replaceFonts((ViewGroup) view);
+			FontChanger.changeFonts((ViewGroup) view);
 		}
 	}
 	

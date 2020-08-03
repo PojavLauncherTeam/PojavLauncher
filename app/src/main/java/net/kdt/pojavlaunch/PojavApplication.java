@@ -37,6 +37,8 @@ public class PojavApplication extends Application
 			specialButtons[2].name = getString(R.string.control_primary);
 			specialButtons[3].name = getString(R.string.control_secondary);
 			specialButtons[4].name = getString(R.string.control_mouse);
+			
+			FontChanger.initFonts(this);
 		} catch (Throwable th) {
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", th);

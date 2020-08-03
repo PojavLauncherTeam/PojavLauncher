@@ -49,20 +49,20 @@
 			android:inputType="textPassword"
 			android:layout_marginBottom="5dp"/>
 
-		<Switch
+		<CheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:text="@string/login_online_remember"
-			android:layout_gravity="right"
+			android:layout_gravity="left"
+			android:text="@string/login_online_check_keeplogin"
 			android:id="@+id/login_switch_remember"/>
 
-		<Switch
+		<CheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_gravity="right"
-			android:text="@string/login_offline_switch"
+			android:layout_gravity="left"
+			android:text="@string/login_offline_label"
 			android:id="@+id/login_switch_offline"/>
-
+		
 		<LinearLayout
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"

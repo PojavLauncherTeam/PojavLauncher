@@ -20,10 +20,12 @@
 	<string name="login_online_password_hint">Password</string>
 	<string name="login_online_password_question">Forgot password?</string>
 	<string name="login_online_remember">Remember me?</string>
+	<string name="login_online_check_keeplogin">Keep me logged in</string>
 	<string name="login_online_login_label">Login</string>
 	<string name="login_online_create_account">(Create new account?)</string>
 	
 	<string name="login_offline_switch">Offline account?</string>
+	<string name="login_offline_label">Login as offline account</string>
 	<string name="login_offline_alert_skip">Skip</string>
 	
 	<string name="login_error_short_username">Username must be at least 3 characters</string>
