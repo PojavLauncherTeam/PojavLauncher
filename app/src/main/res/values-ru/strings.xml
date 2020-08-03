@@ -198,5 +198,5 @@
 	<string name="mcl_tab_crash">Инфо о сбое</string>
 	<string name="update_console">Обновить консоль</string>
 	<string name="main_nocrash">Сбоев не обнаружено.</string>
-
+        <string name="main_nolog">Данных нет.</string>
 </resources>
