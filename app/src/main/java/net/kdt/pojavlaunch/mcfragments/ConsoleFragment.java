@@ -20,7 +20,7 @@ public class ConsoleFragment extends Fragment
 
 		consoleView = (TextView) view.findViewById(R.id.lmaintabconsoleLogTextView);
 		consoleView.setTypeface(Typeface.MONOSPACE);
-		consoleView.setHint("No log");
+		consoleView.setHint(this.getText(R.string.main_nolog));
 		
 		return view;
     }

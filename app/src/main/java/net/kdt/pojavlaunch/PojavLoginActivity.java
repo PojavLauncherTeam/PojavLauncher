@@ -358,7 +358,6 @@ public class PojavLoginActivity extends AppCompatActivity
 	public void loginSavedAcc(View view)
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.login_select_account);
 
 		if (Tools.enableDevFeatures) {
 			/*
@@ -376,7 +375,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		}
 		
 		builder.setPositiveButton(android.R.string.cancel, null);
-
+		builder.setTitle(this.getString(R.string.login_select_account));
 		final AlertDialog dialog = builder.create();
 
 		/*
@@ -387,6 +386,8 @@ public class PojavLoginActivity extends AppCompatActivity
 		lpHint.weight = 1;
 		lpFlv.weight = 1;
 		*/
+		dialog.setTitle(this.getString(R.string.login_select_account));
+		System.out.println("Setting title...");
 		LinearLayout dialay = new LinearLayout(this);
 		dialay.setOrientation(LinearLayout.VERTICAL);
 		TextView fhint = new TextView(this);
@@ -455,6 +456,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		dialay.addView(flv);
 		
 		dialog.setView(dialay);
+		dialog.setTitle(this.getString(R.string.login_select_account));
 		dialog.show();
 	}
 	
