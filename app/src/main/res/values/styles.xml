@@ -28,7 +28,11 @@
 		<item name="android:windowContentOverlay">@null</item>
 		<item name="android:windowAnimationStyle">@style/MenuDialogAnimation</item>
 		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-	</style>
+	   </style>
+	       <style name="AppTheme.Fullscreen" parent="AppTheme">
+               <item name="windowActionBar">false</item>
+               <item name="windowNoTitle">true</item>
+            </style>
 
 	<style name="MenuDialogAnimation">
 		<item name="android:windowEnterAnimation">@anim/translate_left_side</item>
