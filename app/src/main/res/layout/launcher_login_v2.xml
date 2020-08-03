@@ -106,7 +106,6 @@
 		android:layout_height="48dp"
 		android:layout_width="300dp"
 		android:src="@drawable/logo"
-		android:layout_centerInParent="true"
 		android:id="@+id/login_image_logo"
 		android:layout_gravity="center_horizontal"/>
 

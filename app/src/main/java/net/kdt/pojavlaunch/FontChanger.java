@@ -9,13 +9,11 @@ public class FontChanger
 {
     private Typeface typeface;
 
-    public FontChanger(Typeface typeface)
-    {
+    public FontChanger(Typeface typeface) {
         this.typeface = typeface;
     }
 
-    public FontChanger(AssetManager assets, String assetsFontFileName)
-    {
+    public FontChanger(AssetManager assets, String assetsFontFileName) {
         typeface = Typeface.createFromAsset(assets, assetsFontFileName);
     }
 
@@ -25,7 +23,7 @@ public class FontChanger
         for(int i = 0; i < viewTree.getChildCount(); ++i) {
             child = viewTree.getChildAt(i);
             if (child instanceof ViewGroup) {
-                replaceFonts((ViewGroup)child);
+                replaceFonts((ViewGroup) child);
             } else if (child instanceof TextView) {
                 replaceFont((TextView) child);
             }

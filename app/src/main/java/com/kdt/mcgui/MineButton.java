@@ -7,9 +7,12 @@ import android.util.*;
 import android.view.*;
 import android.widget.*;
 import android.view.View.*;
+import net.kdt.pojavlaunch.*;
 
 public class MineButton extends Button
 {
+	private static FontChanger fontChangerMinecraftTen;
+	
 	private ColorDrawable left = new ColorDrawable(Color.parseColor("#80000000"));
 	private ColorDrawable top = new ColorDrawable(Color.parseColor("#64FC20"));
 	private ColorDrawable right = new ColorDrawable(Color.parseColor("#40000000"));
@@ -42,20 +45,19 @@ public class MineButton extends Button
 	
 	private LayerDrawable layerdrawable, layerdrawablefocus;
 	
-	public MineButton(Context ctx)
-	{
-		super(ctx);
-		init();
+	public MineButton(Context ctx) {
+		this(ctx, null);
 	}
 	
-	public MineButton(Context ctx, AttributeSet attrs)
-	{
+	public MineButton(Context ctx, AttributeSet attrs) {
 		super(ctx, attrs);
 		init();
 	}
 	
 	public void init()
 	{
+		if (fontChangerMinecraftTen == null) fontChangerMinecraftTen = new FontChanger(getContext().getAssets(), "font/minecraft-ten.ttf");
+		fontChangerMinecraftTen.replaceFont(this);
 		getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
 				public void onGlobalLayout() {

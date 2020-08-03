@@ -234,10 +234,15 @@ public class PojavLoginActivity extends AppCompatActivity
 	private void uiInit() {
 		setContentView(R.layout.launcher_login_v2);
 
-		LinearLayout loginLayout = findViewById(R.id.login_layout_linear);
-		ImageView imageLogo = findViewById(R.id.login_image_logo);
-		imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 4f));
-		
+		final LinearLayout loginLayout = findViewById(R.id.login_layout_linear);
+		final ImageView imageLogo = findViewById(R.id.login_image_logo);
+		loginLayout.postDelayed(new Runnable(){
+				@Override
+				public void run(){
+					imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
+				}
+			}, 100);
+			
 		edit2 = (EditText) findViewById(R.id.login_edit_email);
 		edit3 = (EditText) findViewById(R.id.login_edit_password);
 		if(prb == null) prb = (ProgressBar) findViewById(R.id.launcherAccProgress);
