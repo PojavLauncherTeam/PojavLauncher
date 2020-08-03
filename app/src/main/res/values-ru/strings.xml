@@ -70,8 +70,7 @@
 	<!-- MCLauncherActivity: Tabs -->
 	<string name="mcl_tab_news">Новости</string>
 	<string name="mcl_tab_console">Терминал разработчика</string>
-	<string name="mcl_tab_crash">Crash log</string>
-	
+
 	<!-- MCLauncherActivity: Strings -->
 	<string name="mcl_version_msg">Готовы к запуску Minecraft %s</string>
 	<string name="mcl_launch_cleancache">Удаляем временные файлы</string>
@@ -95,17 +94,16 @@
 	<string name="mcl_setting_subtitle_setmaxdxref">Увеличьте, если возникает ошибка при конвертации из-за большого количества ссылок. Рекомендуемое значение: 4096 или 8192.</string>
 	<string name="mcl_setting_title_freeform">Запуск Minecraft в режиме Freeform</string>
 	<string name="mcl_setting_subtitle_freeform">Запуск Minecraft в оконном режиме. Требуется Android 7.0+</string>
-	<string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
-	<string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
+	<string name="mcl_setting_subtitle_longpresstrigger">Изменить время длинного нажатия для ломания и выбрасывания</string>
 	<string name="mcl_setting_title_controlsize">Размер кнопок</string>
 	<string name="mcl_setting_title_forgetoptifpath">Заставить OptiFine не находить самого себя</string>
 	<string name="mcl_setting_subtitle_forgetoptifpath">Позволяет заработать OptiFine на некоторых устройствах.</string>
 	<string name="mcl_setting_category_general">Основные настройки</string>
 	<string name="mcl_setting_category_veroption">Тип версии будет показан в списке версий</string>
-	<string name="mcl_setting_veroption_release">Release</string>
-	<string name="mcl_setting_veroption_snapshot">Snapshot</string>
-	<string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-	<string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+	<string name="mcl_setting_veroption_release">Стабильные</string>
+	<string name="mcl_setting_veroption_snapshot">Частые</string>
+	<string name="mcl_setting_veroption_oldalpha">Старые (Альфа)</string>
+	<string name="mcl_setting_veroption_oldbeta">Старые (Бета)</string>
 		
 	<string name="mcl_version_clone">Клонировать</string>
 	
@@ -188,6 +186,17 @@
 	<string name="customctrl_selectdefault">Выбрать раскладку по-умолчанию</string>
 	
 	<!-- Update part (unused now) -->
-	<string name="update_console">Update console</string>
-	
+	<string name="login_online_check_keeplogin">Запомнить меня</string>
+	<string name="login_offline_label">Войти как пират</string>
+	<string name="main_options">Опции</string>
+	<string name="main_play">Играть</string>
+	<string name="main_welcome">Добро пожаловать,</string>
+	<string name="main_infodev">Инфо (Р)</string>
+	<string name="main_switchuser">Сменить пользователя</string>
+	<string name="main_version_">Версия:</string>
+	<string name="mcl_setting_title_longpresstrigger">Сколько времени нужно держать кнопку</string>
+	<string name="mcl_tab_crash">Инфо о сбое</string>
+	<string name="update_console">Обновить консоль</string>
+	<string name="main_nocrash">Сбоев не обнаружено.</string>
+
 </resources>
