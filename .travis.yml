@@ -15,10 +15,12 @@ android:
     - android-$ANDROID_API_LEVEL
     - extra-android-m2repository
   licenses:
-    - yes | sudo sdkmanager --licenses
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+    - echo yes | sudo sdkmanager --licenses
+    - echo yes | sdkmanager "platforms;android-26"
+    - echo yes | sdkmanager "build-tools;26.0.0"
+    - echo yes | sdkmanager "platforms;android-28"
+    - echo yes | sdkmanager "build-tools;28.0.3"
+
 
 before_install:
   - touch $HOME/.android/repositories.cfg
