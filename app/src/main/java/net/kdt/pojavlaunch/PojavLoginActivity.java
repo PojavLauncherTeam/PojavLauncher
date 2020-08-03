@@ -31,7 +31,7 @@ public class PojavLoginActivity extends AppCompatActivity
 	private EditText edit2, edit3;
 	private int REQUEST_STORAGE_REQUEST_CODE = 1;
 	private ProgressBar prb;
-	private Switch sRemember, sOffline;
+	private CheckBox sRemember, sOffline;
 	
 	private boolean isPromptingGrant = false;
 	// private boolean isPermGranted = false;
@@ -247,8 +247,8 @@ public class PojavLoginActivity extends AppCompatActivity
 		edit3 = (EditText) findViewById(R.id.login_edit_password);
 		if(prb == null) prb = (ProgressBar) findViewById(R.id.launcherAccProgress);
 		
-		sRemember = (Switch) findViewById(R.id.login_switch_remember);
-		sOffline  = (Switch) findViewById(R.id.login_switch_offline);
+		sRemember = findViewById(R.id.login_switch_remember);
+		sOffline  = findViewById(R.id.login_switch_offline);
 		sOffline.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 				@Override
