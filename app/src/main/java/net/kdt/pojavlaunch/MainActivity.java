@@ -36,7 +36,7 @@ import android.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
-	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  "; //onResume
+	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
 
 	private static int[] hotbarKeys = {
 		Keyboard.KEY_1, Keyboard.KEY_2,	Keyboard.KEY_3,
@@ -132,8 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-		setContentView(R.layout.main); 
-		
+		setContentView(R.layout.main);
 		
 	   final View decorView = getWindow().getDecorView();
        decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
@@ -206,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			/*
 			if (mVersionInfo.arguments != null) {
 				System.loadLibrary("lwjgl32");
-				System.loadLibrary("lwjgl_opengl32"); //resume
+				System.loadLibrary("lwjgl_opengl32");
 				System.loadLibrary("lwjgl_stb32");
 			}
 			*/
