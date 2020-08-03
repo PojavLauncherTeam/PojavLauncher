@@ -4,6 +4,7 @@ import android.content.*;
 import android.util.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.*;
+import android.graphics.*;
 
 public class MineEditText extends EditText
 {
@@ -21,7 +22,8 @@ public class MineEditText extends EditText
 
 	public void init()
 	{
-		setBackgroundResource(R.drawable.border_edittext);
+		// setBackgroundResource(R.drawable.border_edittext);
+		setBackgroundColor(Color.parseColor("#131313"));
 		setPadding(5, 5, 5, 5);
 	}
 }
