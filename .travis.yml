@@ -7,6 +7,8 @@ env:
   - ANDROID_API_LEVEL=26
   - ANDROID_BUILD_TOOLS_VERSION=26.0.0
   - ANDROID_ABI=armeabi-v7a
+  - ANDROID_ABI=X86
+  - ANDROID_ABI=ARMEABI_V7A
 
 android:
   components:
