@@ -22,11 +22,14 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
+
 before_install:
+#  - yes | sudo sdkmanager --licenses
   - yes | sdkmanager "platforms;android-26"
   - yes | sdkmanager "build-tools;26.0.0"
   - yes | sdkmanager "platforms;android-28"
   - yes | sdkmanager "build-tools;28.0.3"
+  - touch $HOME/.android/repositories.cfg
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -44,3 +47,14 @@ before_script:
 script:
   - ./gradlew clean build
   - ./gradlew test
+
+deploy:
+  provider: releases
+  api-key: $GITHUB_API_KEY
+  file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/debug/app-debug.apk
+  skip_cleanup: true
+  name: autobuild-$TRAVIS_COMMIT
+  body: Automatic build of PojavLauncher from the latest source commit ($TRAVIS_COMMIT) built by Travis CI on $(date +'%F %T %Z').
+  prerelease: true
+  overwrite: false
+  target_commitish: $TRAVIS_COMMIT
