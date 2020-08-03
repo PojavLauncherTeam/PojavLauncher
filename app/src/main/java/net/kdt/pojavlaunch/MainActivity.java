@@ -36,7 +36,7 @@ import android.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
-	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
+	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  "; //onResume
 
 	private static int[] hotbarKeys = {
 		Keyboard.KEY_1, Keyboard.KEY_2,	Keyboard.KEY_3,
@@ -132,11 +132,22 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // for hiding title
-        getWindow().getDecorView().setSystemUiVisibility(SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-        SYSTEM_UI_FLAG_FULLSCREEN | SYSTEM_UI_FLAG_HIDE_NAVIGATION   | 
-        SYSTEM_UI_FLAG_LAYOUT_STABLE | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		setContentView(R.layout.main); 
+		
+		
+	   final View decorView = getWindow().getDecorView();
+       decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+        @Override
+        public void onSystemUiVisibilityChange(int visibility) {
+            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                decorView.setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            }
+        }
+    });
 
 		try {
 			ExitManager.setExitTrappedListener(new ExitManager.ExitTrappedListener(){
@@ -195,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			/*
 			if (mVersionInfo.arguments != null) {
 				System.loadLibrary("lwjgl32");
-				System.loadLibrary("lwjgl_opengl32");
+				System.loadLibrary("lwjgl_opengl32"); //resume
 				System.loadLibrary("lwjgl_stb32");
 			}
 			*/
@@ -734,6 +745,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		super.onResume();
 		mIsResuming = true;
 		glSurfaceView.requestRender();
+        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
 	}
 
 	@Override
