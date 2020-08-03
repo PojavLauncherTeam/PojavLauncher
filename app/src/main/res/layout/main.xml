@@ -52,7 +52,7 @@
 				android:layout_marginTop="2.0dip"
 				android:text="@string/control_debug"
 				android:layout_alignParentLeft="true"
-				android:layout_alignParentTop="false"
+				android:layout_alignParentTop="true"
 				android:layout_marginRight="2dp"/>
 
 			<Button
