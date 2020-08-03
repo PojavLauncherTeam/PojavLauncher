@@ -40,7 +40,7 @@ public class CrashFragment extends Fragment
 		
 		crashView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogCrashTextView);
 		crashView.setTypeface(Typeface.MONOSPACE);
-		crashView.setHint("No crash detected.");
+		crashView.setHint(this.getText(R.string.main_nocrash));
 		
 		//new File(crashPath).mkdirs();
 	}
