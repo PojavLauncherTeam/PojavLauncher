@@ -5,11 +5,9 @@ android {
     dexOptions {
     javaMaxHeapSize "4g"
     }
-    android {
       lintOptions {
           abortOnError false
       }
-  }
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
