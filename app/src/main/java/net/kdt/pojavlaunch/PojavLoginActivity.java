@@ -23,8 +23,10 @@ import android.net.*;
 import static android.view.ViewGroup.LayoutParams.*;
 import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
+import android.support.v7.app.AppCompatActivity;
 
-public class PojavLoginActivity extends MineActivity
+public class PojavLoginActivity extends AppCompatActivity
+// MineActivity
 {
 	private EditText edit2, edit3;
 	private int REQUEST_STORAGE_REQUEST_CODE = 1;
@@ -42,7 +44,7 @@ public class PojavLoginActivity extends MineActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState, false);
+		super.onCreate(savedInstanceState); // false);
 		if (!isInitCalled) {
 			init();
 			isInitCalled = true;
@@ -131,7 +133,7 @@ public class PojavLoginActivity extends MineActivity
 			LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
 			LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
 
-			replaceFonts(startScr);
+			MineActivity.replaceFonts(PojavLoginActivity.this, startScr);
 
 			progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
 			//startScr.addView(progress);
@@ -249,25 +251,6 @@ public class PojavLoginActivity extends MineActivity
 			});
 	}
 	
-	private boolean isAndroid7()
-	{
-		return Build.VERSION.SDK_INT >= 24;
-	}
-	
-	/*
-	
-	long lastTime = System.currentTimeMillis();
-	long lastDel = 0;
-	
-	
-	private void deAnr(String msg) {
-		long currt = System.currentTimeMillis();
-		lastDel = currt - lastTime;
-		lastTime = currt;
-		System.out.println("Time:" + lastDel + "ms||" + (lastDel / 1000) + "s: " + msg);
-	}
-	*/
-	
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -338,10 +321,10 @@ public class PojavLoginActivity extends MineActivity
 	
 	private boolean mkdirs(String path)
 	{
-		File mFileeee = new File(path);
-		if(mFileeee.getParentFile().exists())
-			 return mFileeee.mkdir();
-		else return mFileeee.mkdirs();
+		File file = new File(path);
+		if(file.getParentFile().exists())
+			 return file.mkdir();
+		else return file.mkdirs();
 	}
 	
 	/*

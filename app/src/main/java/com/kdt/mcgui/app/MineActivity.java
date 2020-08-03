@@ -7,39 +7,44 @@ import android.view.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.*;
 import java.util.*;
+import android.content.*;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener
 {
 	private int topId = 150001;
 	private boolean showBeforeView = true;
 	
-	private FontChanger fontChanger;
+	private static FontChanger fontChanger;
 	
 	private ImageButton menu;
 	private LinearLayout content, undertop;
 
 	private LayoutInflater li;
 	
-	public ViewGroup replaceFonts(ViewGroup viewTree)
-	{
-		if (fontChanger == null) fontChanger = new FontChanger(getAssets(), "font/NotoSans-Bold.ttf");
+	public static ViewGroup replaceFonts(Context ctx, ViewGroup viewTree) {
+		if (fontChanger == null) fontChanger = new FontChanger(ctx.getAssets(), "font/NotoSans-Bold.ttf");
 		return fontChanger.replaceFonts(viewTree);
 	}
 	
-	public View replaceFont(TextView view)
-	{
-		if (fontChanger == null) fontChanger = new FontChanger(getAssets(), "font/NotoSans-Bold.ttf");
+	public static View replaceFont(Context ctx, TextView view) {
+		if (fontChanger == null) fontChanger = new FontChanger(ctx.getAssets(), "font/NotoSans-Bold.ttf");
 		return fontChanger.replaceFont(view);
 	}
-
+	
+	public ViewGroup replaceFonts(ViewGroup viewTree) {
+		return replaceFonts(this, viewTree);
+	}
+	
+	public View replaceFont(TextView view) {
+		return replaceFont(this, view);
+	}
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		this.onCreate(savedInstanceState, true);
 	}
 	
-	protected void onCreate(Bundle savedInstanceState, boolean showBeforeView)
-	{
+	protected void onCreate(Bundle savedInstanceState, boolean showBeforeView) {
 		super.onCreate(savedInstanceState);
 		
 		this.showBeforeView = showBeforeView;
