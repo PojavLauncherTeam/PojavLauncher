@@ -53,7 +53,7 @@ deploy:
   name: autobuild-$TRAVIS_COMMIT
   body: Automatic build of PojavLauncher from the latest source commit ($TRAVIS_COMMIT) built by Travis CI on $(date +'%F %T %Z').
   prerelease: true
-  overwrite: false
+  overwrite: true
   target_commitish: $TRAVIS_COMMIT
   on:
     branch: gl4es
