@@ -15,6 +15,9 @@
         android:icon="@drawable/ic_launcher"
 		android:roundIcon="@drawable/ic_launcher"
 		android:resizeableActivity="true">
+    <meta-data 
+	    android:name="android.max_aspect"
+        android:value="ratio_float"/>
 		
 		<activity
 			android:screenOrientation="sensorLandscape"
@@ -60,6 +63,7 @@
 			android:screenOrientation="sensorLandscape"
 			android:name=".prefs.PojavPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
+   
     </application>
 
 </manifest>

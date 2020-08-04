@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean lastGrab = false;
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
+	private int navBarHeight;
+    private Object screenWidth;
 
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
@@ -140,10 +142,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         public void onSystemUiVisibilityChange(int visibility) {
             if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                 decorView.setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             }
         }
     });
@@ -659,6 +662,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
+						AndroidDisplay.windowWidth =+ navBarHeight;
+						
 						new Thread(new Runnable(){
 
 								@Override
