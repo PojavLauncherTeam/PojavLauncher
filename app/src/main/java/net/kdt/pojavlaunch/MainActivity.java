@@ -121,8 +121,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean lastGrab = false;
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
-	private int navBarHeight;
-    private Object screenWidth;
+	private int navBarHeight = 40;
 
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
@@ -662,7 +661,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
-						AndroidDisplay.windowWidth =+ navBarHeight;
+						AndroidDisplay.windowWidth += navBarHeight;
 						
 						new Thread(new Runnable(){
 
