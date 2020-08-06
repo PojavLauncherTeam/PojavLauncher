@@ -21,7 +21,8 @@
 
 package java.awt;
 
-import org.apache.harmony.awt.internal.nls.Messages;
+import org.apache.harmony.awt.internal.nls.*;
+import org.lwjgl.opengl.*;
 
 /**
  * The GraphicsDevice class describes the graphics devices (such as screens or
@@ -62,7 +63,7 @@ public abstract class GraphicsDevice {
      * Constructor is not to be used directly as this class is abstract.
      */
     protected GraphicsDevice() {
-        displayMode = new DisplayMode(0, 0, DisplayMode.BIT_DEPTH_MULTI,
+        displayMode = new DisplayMode(AndroidDisplay.windowWidth, AndroidDisplay.windowHeight, DisplayMode.BIT_DEPTH_MULTI,
                 DisplayMode.REFRESH_RATE_UNKNOWN);
     }
 
