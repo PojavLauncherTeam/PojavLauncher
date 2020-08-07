@@ -203,7 +203,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			setTitle("Minecraft " + mProfile.getVersion());
 
 			initEnvs();
-			//System.loadLibrary("gl4es");
+			
+			if (mVersionInfo.arguments != null) {
+				System.loadLibrary("gl04es");
+			}
+			
 			/*
 			if (mVersionInfo.arguments != null) {
 				System.loadLibrary("lwjgl32");
