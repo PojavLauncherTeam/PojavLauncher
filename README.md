@@ -1,5 +1,5 @@
 ## Warning
-- Do not merge this branch as it only have LWJGL3 so Minecraft 1.12.2 and below will not run...
+Do not merge this branch as it only have LWJGL3 so Minecraft 1.12.2 and below will not run...
 
 ![badge](https://api.travis-ci.com/PojavLauncherTeam/PojavLauncher.svg?branch=gl4es)
 # PojavLauncher
