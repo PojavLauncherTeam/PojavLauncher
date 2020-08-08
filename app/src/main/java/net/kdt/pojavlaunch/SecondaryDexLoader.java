@@ -12,15 +12,19 @@ import java.util.*;
 public class SecondaryDexLoader
 {
 	public static String TAG = "SecondaryDexLoader";
+
+	private static int ADDITIONAL_CLASSES = 0;
 	
 	public static void install(ClassLoader loader, List<File> additionalClassPathEntries, File optimizedDirectory) throws Throwable {
+		ADDITIONAL_CLASSES = additionalClassPathEntries.size();
+		
             /* The patched class loader is expected to be a descendant of
              * dalvik.system.BaseDexClassLoader. We modify its
              * dalvik.system.DexPathList pathList field to append additional DEX
              * file entries.
              */
-            Field pathListField = findField(loader, "pathList");
-            Object dexPathList = pathListField.get(loader);
+            
+            Object dexPathList = getDexPathList(loader);
             ArrayList<IOException> suppressedExceptions = new ArrayList<IOException>();
             expandFieldArray(dexPathList, "dexElements", makeDexElements(dexPathList,
                     new ArrayList<File>(additionalClassPathEntries), optimizedDirectory,
@@ -48,6 +52,11 @@ public class SecondaryDexLoader
                 }
                 suppressedExceptionsField.set(loader, dexElementsSuppressedExceptions);
             }
+	}
+	
+	private static /* DexPathList */ Object getDexPathList(ClassLoader loader) throws Throwable {
+		Field pathListField = findField(loader, "pathList");
+		return pathListField.get(loader);
 	}
 	
 	/**
@@ -113,14 +122,23 @@ public class SecondaryDexLoader
      * @param fieldName the field to modify.
      * @param extraElements elements to append at the end of the array.
      */
+	private static Object[] originalDex;
     private static void expandFieldArray(Object instance, String fieldName, Object[] extraElements) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field jlrField = findField(instance, fieldName);
-        Object[] original = (Object[]) jlrField.get(instance);
+        originalDex = (Object[]) jlrField.get(instance);
         Object[] combined = (Object[]) Array.newInstance(
-			original.getClass().getComponentType(), original.length + extraElements.length);
-        System.arraycopy(original, 0, combined, 0, original.length);
-        System.arraycopy(extraElements, 0, combined, original.length, extraElements.length);
+			originalDex.getClass().getComponentType(), originalDex.length + extraElements.length);
+        System.arraycopy(originalDex, 0, combined, 0, originalDex.length);
+        System.arraycopy(extraElements, 0, combined, originalDex.length, extraElements.length);
         jlrField.set(instance, combined);
     }
 	
+	public static void resetFieldArray(ClassLoader loader) throws Throwable {
+		if (originalDex == null) return;
+		
+		Object instance = getDexPathList(loader);
+		
+		Field jlrField = findField(instance, "dexElements");
+		jlrField.set(instance, originalDex);
+	}
 }

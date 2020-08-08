@@ -158,9 +158,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						runOnUiThread(new Runnable(){
 
 								@Override
-								public void run()
-								{
+								public void run() {
 									isExited = true;
+									
+									try {
+										SecondaryDexLoader.resetFieldArray(getClassLoader());
+									} catch (Throwable th) {
+										th.printStackTrace();
+									}
 
 									AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
 									d.setTitle(R.string.mcn_exit_title);
