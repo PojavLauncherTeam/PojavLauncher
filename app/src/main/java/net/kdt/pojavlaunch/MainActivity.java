@@ -706,7 +706,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 			glSurfaceView.setPreserveEGLContextOnPause(true);
 			glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
-			glSurfaceView.requestRender();
+			// glSurfaceView.requestRender();
 		} catch (Throwable e) {
 			e.printStackTrace();
 			Tools.showError(this, e, true);
