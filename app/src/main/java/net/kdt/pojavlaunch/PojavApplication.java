@@ -14,6 +14,14 @@ public class PojavApplication extends Application
 {
 	@Override
 	public void onCreate() {
+		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
+			@Override
+			public void uncaughtException(Thread thread, Throwable th) {
+				FatalErrorActivity.showError(PojavApplication.this, th);
+				android.os.Process.killProcess(android.os.Process.myPid());
+			}
+		});
+		
 		try {
 			super.onCreate();
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
