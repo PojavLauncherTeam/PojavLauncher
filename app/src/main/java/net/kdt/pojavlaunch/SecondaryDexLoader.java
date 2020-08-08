@@ -140,5 +140,7 @@ public class SecondaryDexLoader
 		
 		Field jlrField = findField(instance, "dexElements");
 		jlrField.set(instance, originalDex);
+		
+		originalDex = null;
 	}
 }

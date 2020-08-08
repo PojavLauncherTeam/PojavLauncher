@@ -224,7 +224,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			if (mVersionInfo.arguments == null) {
 				// Minecraft 1.12 and below
 				
-				SecondaryDexLoader.install(getClassLoader(), Arrays.asList(new File[]{new File(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1"))}), optDir);
+				// TODO uncomment after fix
+				// SecondaryDexLoader.install(getClassLoader(), Arrays.asList(new File[]{new File(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1"))}), optDir);
 			}
 			
 			this.displayMetrics = Tools.getDisplayMetrics(this);
