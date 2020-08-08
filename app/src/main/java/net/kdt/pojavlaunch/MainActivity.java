@@ -134,23 +134,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     {
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-	   final View decorView = getWindow().getDecorView();
-       decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
-        @Override
-        public void onSystemUiVisibilityChange(int visibility) {
-            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            }
-        }
-    });
 
 		try {
+			final View decorView = getWindow().getDecorView();
+			decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+				@Override
+				public void onSystemUiVisibilityChange(int visibility) {
+					if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+						decorView.setSystemUiVisibility(
+							View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+					}
+				}
+			});
+			
 			ExitManager.setExitTrappedListener(new ExitManager.ExitTrappedListener(){
 					@Override
 					public void onExitTrapped()
@@ -196,6 +196,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			} catch (Throwable th) {
 				Log.w(Tools.APP_NAME, "Could not disable System.exit() method!", th);
 			}
+			
+			File optDir = getDir("dalvik-cache", 0);
+			optDir.mkdirs();
+			launchOptimizedDirectory = optDir.getAbsolutePath();
 
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
@@ -211,6 +215,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				System.loadLibrary("lwjgl_stb32");
 			}
 			*/
+			
+			if (mVersionInfo.arguments == null) {
+				// Minecraft 1.12 and below
+				
+				SecondaryDexLoader.install(getClassLoader(), Arrays.asList(new File[]{new File(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1"))}), optDir);
+			}
+			
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 
 			AndroidDisplay.windowWidth = displayMetrics.widthPixels / scaleFactor;
@@ -986,6 +997,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public static String launchLibrarySearchPath;
 	private void runCraft() throws Throwable //oncreate
 	{
+		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
+			@Override
+			public void onCharPrint(char c) {
+				appendToLog(Character.toString(c));
+			}
+		};
+
+		PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
+		PrintStream theStreamOut = new PrintStream(new LoggerJava.LoggerOutputStream(System.out, printLog));
+		System.setErr(theStreamErr);
+		System.setOut(theStreamOut);
+		
 		String[] launchArgs = getMCArgs();
 
 		// Setup OptiFine
@@ -996,28 +1019,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
 		}
 
-		File optDir = getDir("dalvik-cache", 0);
-		optDir.mkdirs();
-
-		launchClassPath = Tools.generate(mProfile.getVersion());
-		launchOptimizedDirectory = optDir.getAbsolutePath();
+		launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
 
 		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
 			net.minecraft.launchwrapper.Launch.main(launchArgs);
 		} else {
-			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
-				@Override
-				public void onCharPrint(char c) {
-					appendToLog(Character.toString(c));
-				}
-			};
-
-			PrintStream theStreamOut = new PrintStream(new LoggerJava.LoggerOutputStream(System.out, printLog));
-			System.setOut(theStreamOut);
-			// Redirect error stream to output stream
-			System.setErr(theStreamOut);
-			
 /*
 			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
 			System.setErr(theStreamErr);

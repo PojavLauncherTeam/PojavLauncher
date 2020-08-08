@@ -76,7 +76,7 @@ public final class Tools
 	}
 
 	private static boolean isClientFirst = false;
-	public static String generate(String version) throws IOException
+	public static String generateLaunchClassPath(String version) throws IOException
 	{
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 		
@@ -91,8 +91,6 @@ public final class Tools
 					libStr.append(file.getAbsolutePath() + ":");
 				}
 			}
-		} else {
-			libStr.append(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1") + ":");
 		}
 		
 		if (isClientFirst) {
