@@ -17,7 +17,7 @@ public class PojavApplication extends Application
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
 			@Override
 			public void uncaughtException(Thread thread, Throwable th) {
-				FatalErrorActivity.showError(PojavApplication.this, th);
+				FatalErrorActivity.showError(PojavApplication.this, true, th);
 				android.os.Process.killProcess(android.os.Process.myPid());
 			}
 		});

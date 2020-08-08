@@ -52,7 +52,7 @@
 	<string name="alerttitle_installoptifine">Select OptiFine jar file</string>
 	
 	<!-- Error messages -->
-	<string name="error_fatal">Fatal error</string>
+	<string name="error_fatal">Unexpectedly crashed</string>
 	<string name="error_checklog">Error! Please check the log below: %s</string>
 	<string name="error_no_version">No version!</string>
 	<string name="error_load_version">Unable to load version %s</string>

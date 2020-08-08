@@ -6,11 +6,12 @@ import android.support.v7.app.*;
 
 public class FatalErrorActivity extends AppCompatActivity
 {
-	public static void showError(Context ctx, Throwable th) {
+	public static void showError(Context ctx, boolean isFatalErr, Throwable th) {
 		Intent ferrorIntent = new Intent(ctx, FatalErrorActivity.class);
 		ferrorIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		ferrorIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		ferrorIntent.putExtra("throwable", th);
+		ferrorIntent.putExtra("isFatal", isFatalErr);
 		ctx.startActivity(ferrorIntent);
 	}
 	
