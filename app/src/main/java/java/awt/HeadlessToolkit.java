@@ -169,14 +169,17 @@ public final class HeadlessToolkit extends ToolkitImpl {
         try {
             ComponentInternals.setComponentInternals(new ComponentInternalsImpl());
             // ???AWT: new EventQueue(this); // create the system EventQueue
-            // ???AWT: dispatcher = new Dispatcher(this);
+            // ???AWT:
+			dispatcher = new Dispatcher(this);
             desktopProperties = new HashMap<String, Object>();
             // ???AWT: desktopPropsSupport = new PropertyChangeSupport(this);
-            // ???AWT: awtEventsManager = new AWTEventsManager();
+            // ???AWT:
+			awtEventsManager = new AWTEventsManager();
             // ???AWT: dispatchThread = new HeadlessEventDispatchThread(this,
             // dispatcher);
             // ???AWT: dtk = DTK.getDTK();
-            dispatchThread.start();
+           
+			// dispatchThread.start();
         } finally {
             unlockAWT();
         }
