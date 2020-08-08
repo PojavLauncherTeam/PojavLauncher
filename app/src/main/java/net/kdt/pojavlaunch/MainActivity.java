@@ -763,7 +763,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onResume() {
 		super.onResume();
 		mIsResuming = true;
-		glSurfaceView.requestRender();
+		if (glSurfaceView != null) glSurfaceView.requestRender();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
