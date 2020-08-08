@@ -32,6 +32,8 @@ public class PojavLoginActivity extends AppCompatActivity
 	private int REQUEST_STORAGE_REQUEST_CODE = 1;
 	private ProgressBar prb;
 	private CheckBox sRemember, sOffline;
+	private LinearLayout loginLayout;
+	private ImageView imageLogo;
 	
 	private boolean isPromptingGrant = false;
 	// private boolean isPermGranted = false;
@@ -234,8 +236,8 @@ public class PojavLoginActivity extends AppCompatActivity
 	private void uiInit() {
 		setContentView(R.layout.launcher_login_v2);
 
-		final LinearLayout loginLayout = findViewById(R.id.login_layout_linear);
-		final ImageView imageLogo = findViewById(R.id.login_image_logo);
+		loginLayout = findViewById(R.id.login_layout_linear);
+		imageLogo = findViewById(R.id.login_image_logo);
 		loginLayout.postDelayed(new Runnable(){
 				@Override
 				public void run(){
@@ -263,6 +265,10 @@ public class PojavLoginActivity extends AppCompatActivity
 	@Override
 	public void onResume() {
 		super.onResume();
+		
+		if (loginLayout != null && imageLogo != null) {
+			imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
+		}
 		
 		// Clear current profile
 		PojavProfile.setCurrentProfile(this, null);
