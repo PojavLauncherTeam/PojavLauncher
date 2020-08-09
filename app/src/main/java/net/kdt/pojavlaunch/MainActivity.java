@@ -697,7 +697,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						try {
 							Field eglContextField = eglContextImpl.getClass().getDeclaredField("mEGLContext");
 							eglContextField.setAccessible(true);
-							eglContext = eglContextField.get(eglContextImpl);
+							eglContext = (long) eglContextField.get(eglContextImpl);
 						} catch (Throwable th) {
 							Tools.showError(MainActivity.this, th, true);
 						}

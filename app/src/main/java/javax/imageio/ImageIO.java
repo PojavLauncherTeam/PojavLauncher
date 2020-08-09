@@ -37,7 +37,6 @@ import android.graphics.*;
 import java.awt.image.*;
 import javax.imageio.stream.*;
 import java.io.*;
-import libcore.net.url.*;
 import java.lang.reflect.*;
 import java.util.jar.*;
 import java.util.zip.*;
