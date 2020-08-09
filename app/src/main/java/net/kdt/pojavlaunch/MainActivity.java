@@ -1080,7 +1080,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		
 		ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
-
 				@Override
 				public void onPrintLine(String text) {
 					appendToLog(text);
@@ -1407,7 +1406,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	private void appendToLog(final String text, boolean checkAllow) {
-		if (checkAllow && !isLogAllow) return;
+		// if (checkAllow && !isLogAllow) return;
 /*
 	private void appendToLog(final String text) {
   */
