@@ -1073,10 +1073,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			};
 */
 		fixRSAPadding(this);
+		
+		appendlnToLog("> Running Minecraft with classpath:");
+		appendlnToLog(launchClassPath + "\n");
 
-		System.out.println("> Running Minecraft with classpath:");
-		System.out.println(launchClassPath);
-		System.out.println();
+		Thread.sleep(200);
 		
 		ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
@@ -1406,7 +1407,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	private void appendToLog(final String text, boolean checkAllow) {
-		// if (checkAllow && !isLogAllow) return;
+		if (checkAllow && !isLogAllow) return;
 /*
 	private void appendToLog(final String text) {
   */

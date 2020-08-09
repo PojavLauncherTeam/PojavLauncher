@@ -1,29 +1,32 @@
 package net.kdt.pojavlaunch;
 
-import android.*;
+import android.Manifest;
 import android.app.*;
 import android.content.*;
 import android.content.pm.*;
+import android.net.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.v4.app.*;
 import android.support.v4.content.*;
+import android.system.*;
+import android.text.method.*;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
+import android.widget.CompoundButton.*;
+import android.support.v7.app.AppCompatActivity;
+import static android.view.ViewGroup.LayoutParams.*;
+
 import com.kdt.filermod.*;
 import com.kdt.mcgui.app.*;
 import com.kdt.mojangauth.*;
+
 import java.io.*;
 import java.util.*;
-import android.widget.CompoundButton.*;
-import android.text.method.*;
-import android.system.*;
-import android.net.*;
-import static android.view.ViewGroup.LayoutParams.*;
+
 import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
-import android.support.v7.app.AppCompatActivity;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -57,68 +60,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
 		new File(Tools.mpProfiles).mkdir();
 		
-		// Remove vmos warning???
-		/*
-		if (isAndroid7() && !firstLaunchPrefs.getBoolean(PREF_IS_DONOTSHOWAGAIN_WARN, false)) {
-			AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this);
-			startDlg.setTitle(R.string.warning_title);
-			
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-			
-			LinearLayout conLay = new LinearLayout(this);
-			conLay.setLayoutParams(params);
-			conLay.setOrientation(LinearLayout.VERTICAL);
-			TextView conText = new TextView(this);
-			conText.setText(R.string.warning_msg);
-			conText.setLayoutParams(params);
-			final CheckBox conCheck = new CheckBox(this);
-			conCheck.setText(R.string.warning_noshowagain);
-			conCheck.setLayoutParams(params);
-			conLay.addView(conCheck);
-			
-			conLay.addView(conText);
-			
-			startDlg.setView(conLay);
-			startDlg.setCancelable(false);
-			startDlg.setPositiveButton(R.string.warning_action_install, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						setPref(PREF_IS_DONOTSHOWAGAIN_WARN, conCheck.isChecked());
-						
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse("market://details?id=com.vmos.glb"));
-						startActivity(intent);
-					}
-				});
-				
-			startDlg.setNegativeButton(R.string.warning_action_tryanyway, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						setPref(PREF_IS_DONOTSHOWAGAIN_WARN, conCheck.isChecked());
-						
-						new InitTask().execute();
-					}
-				});
-			
-
-			startDlg.setNeutralButton(R.string.warning_action_exit, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						finish();
-					}
-				});
-				
-			startDlg.show();
-		} else {
-		*/
-			new InitTask().execute();
-		// }
+		new InitTask().execute();
 	}
 
 	private class InitTask extends AsyncTask<Void, String, Integer>{
