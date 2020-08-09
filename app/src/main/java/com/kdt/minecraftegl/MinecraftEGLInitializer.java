@@ -51,7 +51,7 @@ public class MinecraftEGLInitializer
 			System.out.println("eglGetError: " + Integer.toString(eglGetError) + ", success: " + Boolean.toString(eglGetError == EGL10.EGL_SUCCESS));
 			System.out.println("user.home: " + System.getProperty("user.home"));
 			
-			ActivityThread.currentActivityThread().getSystemContext().startActivity(new Intent().setComponent(new ComponentName("net.kdt.pojavlaunch", ".CustomControlsActivity")));
+			// ActivityThread.currentActivityThread().getSystemContext().startActivity(new Intent().setComponent(new ComponentName("net.kdt.pojavlaunch", ".CustomControlsActivity")));
 			
 /*
 			GL10 gl = ((GL10) context.getGL());

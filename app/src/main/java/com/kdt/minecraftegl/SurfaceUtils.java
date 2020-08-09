@@ -8,13 +8,13 @@ public class SurfaceUtils
 		try {
 			Field field = surface.getClass().getDeclaredField("mNativeObject");
 			field.setAccessible(true);
-			return field.get(surface);
+			return (long) field.get(surface);
 		} catch (Throwable th) {
 			System.err.println("Unable to get surface address!");
 			th.printStackTrace();
 		}
 		
-		return -1;
+		return -1l;
 	}
 	
 	public static Surface createSurfaceByAddress(long surfaceAddress) {
