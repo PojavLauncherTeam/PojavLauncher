@@ -1055,10 +1055,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
 			net.minecraft.launchwrapper.Launch.main(launchArgs);
 		} else {
-/*
 			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
 			System.setErr(theStreamErr);
-*/
+			
 			fixRSAPadding(this);
 
 			appendlnToLog("Running Minecraft with classpath: \n" + launchClassPath + "\n", false);
@@ -1070,9 +1069,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				@Override
 				public void onCharPrint(char c) {
 					appendToLog(Character.toString(c));
+				}
+			};
 */
-		
-		fixRSAPadding();
+		fixRSAPadding(this);
 
 		System.out.println("> Running Minecraft with classpath:");
 		System.out.println(launchClassPath);
@@ -1101,6 +1101,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			"-Xmx512M " + // Max heap
 			"-Djava.library.path=/system/lib:" + getApplicationInfo().nativeLibraryDir + " " +
 			"$base/bin com.kdt.minecraftegl.MinecraftEGLInitializer " +
+			
 			/* Long.toString(SurfaceUtils.getSurfaceAddress(((SurfaceView) glSurfaceView).getHolder().getSurface())) + "" + */ launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
 			this.mVersionInfo.mainClass + argStr
 		);
