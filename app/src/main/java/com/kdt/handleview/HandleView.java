@@ -80,7 +80,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 					try {
 						Field f = perType.getDeclaredField(name);
 						f.setAccessible(true);
-						return f.get(null);
+						return (int) f.get(null);
 					} catch (Throwable th) {
 						th.printStackTrace();
 					}

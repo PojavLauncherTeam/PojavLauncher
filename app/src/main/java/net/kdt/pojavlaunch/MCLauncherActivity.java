@@ -67,13 +67,29 @@ public class MCLauncherActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
 		gson = new Gson();
 
 		DisplayMetrics dm = Tools.getDisplayMetrics(this);
 		AndroidDisplay.windowWidth = dm.widthPixels;
 		AndroidDisplay.windowHeight = dm.heightPixels;
 		viewInit();
+		
+	   final View decorView = getWindow().getDecorView();
+       decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+        @Override
+        public void onSystemUiVisibilityChange(int visibility) {
+            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+        }
+    });	
+		
+		
 	}
 	// DEBUG
 	//new android.support.design.widget.NavigationView(this);
@@ -116,7 +132,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		} catch(Exception e) {
 			//Tools.throwError(this, e);
 			e.printStackTrace();
-			toast(getStr(R.string.toast_login_error) + " " + e.getMessage());
+			toast(getStr(R.string.toast_login_error, e.getMessage()));
 			finish();
 		}
 
@@ -400,9 +416,11 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	@Override
-	protected void onResume()
-	{
+	protected void onResume(){
 		super.onResume();
+        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
 	}
 
 	private boolean canBack = false;
@@ -533,6 +551,7 @@ public class MCLauncherActivity extends AppCompatActivity
 							libItem.name.startsWith("com.mojang:realms") ||
 							libItem.name.startsWith("net.java.jinput") ||
 							libItem.name.startsWith("net.minecraft.launchwrapper") ||
+							libItem.name.startsWith("optifine:launchwrapper-of") ||
 							// libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
 							libItem.name.startsWith("org.lwjgl") ||
 							libItem.name.startsWith("tv.twitch")
@@ -610,7 +629,7 @@ public class MCLauncherActivity extends AppCompatActivity
 						}
 					}
 
-					publishProgress("5", getStr(R.string.mcl_launch_download_client) + p1[0]);
+					publishProgress("5", getStr(R.string.mcl_launch_download_client, p1[0]));
 					outUnpatchedConvert = new File(unpatchedPath);
 					boolean patchedExist = new File(patchedFile).exists();
 					if (!patchedExist) {

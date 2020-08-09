@@ -38,19 +38,12 @@ public class Modifiable
 		return (Set<E>) modifyCollection(set);
     }
 	
-	// Get modifiable list from ServiceList
-	public static void resetServiceList(List<Provider.Service> list) throws Throwable {
-		Class<?> listClass = Class.forName("sun.security.jca.ProviderList$ServiceList");
-		Field servicesField = listClass.getDeclaredField("services");
-		Field firstServiceField = listClass.getDeclaredField("firstService");
-		
-		servicesField.setAccessible(true);
-		firstServiceField.setAccessible(true);
-		
-		List<Provider.Service> services = (List<Provider.Service>) servicesField.get(list);
-		firstServiceField.set(list, null);
-		if (services == null) {
-			System.err.println("ServiceList is null, how to erase?");
-		} else services.clear();
+	// Get alias list from Provider.Service
+	public static List<String> getServiceAliases(Provider.Service service) throws Throwable {
+		Method getAliasesMethod = service.getClass().getDeclaredMethod("getAliases");
+		getAliasesMethod.setAccessible(true);
+		return (List<String>) getAliasesMethod.invoke(service);
 	}
+	
+	
 }

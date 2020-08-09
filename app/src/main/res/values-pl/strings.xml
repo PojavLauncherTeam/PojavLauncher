@@ -24,7 +24,6 @@
 	<string name="login_online_create_account">(Stwórz nowe konto?)</string>
 	
 	<string name="login_offline_switch">Konto offline?</string>
-	<string name="login_offline_warning_1">Logujesz się za pomocą konta offline, ale jeśli go nie zapiszesz, Twoje dane mogą zostać zresetowane na Twoich światach / multiplayerach / serwerach. Zalecamy, abyś go zapisał.</string>
 	<string name="login_offline_alert_skip">Pominąć</string>
 	
 	<string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
@@ -51,11 +50,11 @@
 	<string name="alerttitle_installoptifine">Wybierz plik jar OptiFine</string>
 	
 	<!-- Error messages -->
-	<string name="error_checklog">Błąd! Sprawdź dziennik poniżej:% s</string>
+	<string name="error_checklog">Błąd! Sprawdź dziennik poniżej: %s</string>
 	<string name="error_no_version">Brak wersji!</string>
-	<string name="error_load_version">Nie można załadować wersji% s</string>
-	<string name="error_convert_lib">Nie można przekonwertować biblioteki% s</string>
-	<string name="error_convert_client">Nie można przekonwertować% s Minecrafta</string>
+	<string name="error_load_version">Nie można załadować wersji %s</string>
+	<string name="error_convert_lib">Nie można przekonwertować biblioteki %s</string>
+	<string name="error_convert_client">Nie można przekonwertować %s Minecrafta</string>
 	<string name="error_show_more">Pokaż więcej</string>
 	<string name="error_show_less">Pokaż mniej</string>
 	
@@ -73,14 +72,14 @@
 	<string name="mcl_tab_crash">Dziennik awarii</string>
 	
 	<!-- MCLauncherActivity: Strings -->
-	<string name="mcl_version_msg">Gotowy do gry w Minecrafta% s</string>
+	<string name="mcl_version_msg">Gotowy do gry w Minecrafta %s</string>
 	<string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
-	<string name="mcl_launch_downloading">Pobieranie% s</string>
-	<string name="mcl_launch_download_lib">Pobieranie biblioteki% s</string>
-	<string name="mcl_launch_download_client">Pobieranie gry Minecraft% s</string>
-	<string name="mcl_launch_convert_lib">Konwertowanie biblioteki% s</string>
-	<string name="mcl_launch_convert_client">Konwertowanie Minecrafta% s</string>
-	<string name="mcl_launch_patch_client">Aktualizowanie Minecrafta% s</string>
+	<string name="mcl_launch_downloading">Pobieranie %s</string>
+	<string name="mcl_launch_download_lib">Pobieranie biblioteki %s</string>
+	<string name="mcl_launch_download_client">Pobieranie gry Minecraft %s</string>
+	<string name="mcl_launch_convert_lib">Konwertowanie biblioteki %s</string>
+	<string name="mcl_launch_convert_client">Konwertowanie Minecrafta %s</string>
+	<string name="mcl_launch_patch_client">Aktualizowanie Minecrafta %s</string>
 	<string name="mcl_launch_download_assets">Przygotowanie do pobrania zasobów</string>
 	
 	<string name="mcl_options">Opcje</string>
@@ -155,16 +154,11 @@
 	<string name="control_keyboard">Klawiatura</string>
 	<string name="control_chat">Czat</string>
 	<string name="control_debug">Debug</string>
-	<string name="control_zoom">Zoom (C)</string>
+	<string name="control_zoom">Powiększenie (C)</string>
 	<string name="control_primary">Pri</string>
 	<string name="control_secondary">Sec</string>
 	<string name="control_shift">◇</string>
 	<string name="control_inventory">Inv</string>
-	<string name="control_up">▲</string>
-	<string name="control_left">◀</string>
-	<string name="control_right">▶</string>
-	<string name="control_down">▼</string>
-	<string name="control_jump">⬛</string>
 	<string name="control_thirdperson">3rd</string>
 	<string name="control_listplayers">Tab</string>
 	<string name="control_mouse">Mysz</string>
@@ -189,5 +183,5 @@
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Zaktualizuj konsolę</string>
-	
+
 </resources>

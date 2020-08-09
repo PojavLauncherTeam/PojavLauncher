@@ -309,7 +309,7 @@
 		android:layout_width="200dp"
 		android:layout_height="match_parent"
 		android:layout_gravity="right"
-		android:fitsSystemWindows="true"
+		android:fitsSystemWindows="false"
 		app:menu="@menu/menu_runopt"
 		android:id="@+id/main_navigation_view"/>
 

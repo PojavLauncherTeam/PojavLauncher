@@ -37,7 +37,7 @@ public final class Tools
 	
 	public static int usingVerCode = 1;
 	public static String usingVerName = "2.4.2";
-	public static String mhomeUrl = "https://khanhduytran0.github.io/PojavLauncher"; // "http://kdtjavacraft.eu5.net";
+	public static String mhomeUrl = "https://pojavlauncherteam.github.io/PojavLauncher"; // "http://kdtjavacraft.eu5.net";
 	public static String datapath = "/data/data/net.kdt.pojavlaunch";
 	public static String worksDir = datapath + "/app_working_dir";
 	
@@ -76,11 +76,23 @@ public final class Tools
 	}
 
 	private static boolean isClientFirst = false;
-	public static String generate(String version) throws IOException
+	public static String generateLaunchClassPath(String version) throws IOException
 	{
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
-		String[] classpath = generateLibClasspath(getVersionInfo(version).libraries);
+		
+		JMinecraftVersionList.Version info = getVersionInfo(version);
+		String[] classpath = generateLibClasspath(info);
 
+		// Debug: LWJGL 3 override
+		File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
+		if (info.arguments != null && lwjgl3Folder.exists()) {
+			for (File file: lwjgl3Folder.listFiles()) {
+				if (file.getName().endsWith(".jar")) {
+					libStr.append(file.getAbsolutePath() + ":");
+				}
+			}
+		}
+		
 		if (isClientFirst) {
 			libStr.append(getPatchedFile(version));
 		}
@@ -158,10 +170,15 @@ public final class Tools
 
 	public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk)
 	{
-		showError(ctx, e, exitIfOk, false);
+		showError(ctx, R.string.global_error, e, exitIfOk, false);
 	}
 
-	private static void showError(final Context ctx, final Throwable e, final boolean exitIfOk, final boolean showMore)
+	public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk)
+	{
+		showError(ctx, titleId, e, exitIfOk, false);
+	}
+	
+	private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore)
 	{
 		Runnable runnable = new Runnable(){
 
@@ -170,7 +187,7 @@ public final class Tools
 			{
 				final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
 				new AlertDialog.Builder((Context) ctx)
-					.setTitle(R.string.global_error)
+					.setTitle(titleId)
 					.setMessage(errMsg)
 					.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
@@ -191,7 +208,7 @@ public final class Tools
 						@Override
 						public void onClick(DialogInterface p1, int p2)
 						{
-							showError(ctx, e, exitIfOk, !showMore);
+							showError(ctx, titleId, e, exitIfOk, !showMore);
 						}
 					})
 					.setNeutralButton(android.R.string.copy, new DialogInterface.OnClickListener(){
@@ -296,10 +313,10 @@ public final class Tools
 		}
 	}
 	*/
-	public static String[] generateLibClasspath(DependentLibrary[] libs)
-	{
+	public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
 		List<String> libDir = new ArrayList<String>();
-		for (DependentLibrary libItem: libs) {
+		
+		for (DependentLibrary libItem: info.libraries) {
 			String[] libInfos = libItem.name.split(":");
 			libDir.add(Tools.libraries + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
 		}

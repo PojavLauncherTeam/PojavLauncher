@@ -2,14 +2,19 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.0'
-
+    dexOptions {
+    javaMaxHeapSize "4g"
+    }
+      lintOptions {
+          abortOnError false
+      }
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "2.5.1_6398b_20200719"
+        versionName "2.5.3_6400b_20200802"
+        multiDexEnabled true //important
     }
 	
     buildTypes {
@@ -17,7 +22,8 @@ android {
 	    // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            multiDexEnabled = true
+			// defaultConfig already set
+            // multiDexEnabled = true
             debuggable = true
         }
     }

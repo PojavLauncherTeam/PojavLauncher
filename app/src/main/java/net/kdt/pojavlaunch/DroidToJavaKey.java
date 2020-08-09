@@ -44,6 +44,16 @@ public class DroidToJavaKey {
         }
 		*/
 		
+		// Fix press 'e' key close inventory (while search item)
+		// Should it be or other ways?
+		/*
+		if (!AndroidDisplay.grab && keyEvent.getDisplayLabel() != 'e') {
+			mainActivity.sendKeyPress(keyEvent.getDisplayLabel(), status);
+		} else {
+			mainActivity.sendKeyPress(keyEvent.getDisplayLabel());
+		}
+		*/
+		
 		mainActivity.sendKeyPress(keyEvent.getDisplayLabel(), status);
     }
 }

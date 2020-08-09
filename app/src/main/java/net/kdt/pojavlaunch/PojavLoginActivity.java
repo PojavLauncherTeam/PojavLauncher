@@ -22,26 +22,31 @@ import android.system.*;
 import android.net.*;
 import static android.view.ViewGroup.LayoutParams.*;
 import net.kdt.pojavlaunch.update.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
+import android.support.v7.app.AppCompatActivity;
 
-public class PojavLoginActivity extends MineActivity
+public class PojavLoginActivity extends AppCompatActivity
+// MineActivity
 {
 	private EditText edit2, edit3;
 	private int REQUEST_STORAGE_REQUEST_CODE = 1;
 	private ProgressBar prb;
-	private Switch sRemember, sOffline;
+	private CheckBox sRemember, sOffline;
+	private LinearLayout loginLayout;
+	private ImageView imageLogo;
 	
 	private boolean isPromptingGrant = false;
 	// private boolean isPermGranted = false;
 	
 	private SharedPreferences firstLaunchPrefs;
 	// private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
-	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted";
+	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted2";
 	
 	private boolean isInitCalled = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState, false);
+		super.onCreate(savedInstanceState); // false);
 		if (!isInitCalled) {
 			init();
 			isInitCalled = true;
@@ -130,7 +135,7 @@ public class PojavLoginActivity extends MineActivity
 			LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
 			LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
 
-			replaceFonts(startScr);
+			FontChanger.changeFonts(startScr);
 
 			progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
 			//startScr.addView(progress);
@@ -229,14 +234,23 @@ public class PojavLoginActivity extends MineActivity
 	}
 	
 	private void uiInit() {
-		setContentView(R.layout.launcher_login);
+		setContentView(R.layout.launcher_login_v2);
 
-		edit2 = (EditText) findViewById(R.id.launcherAccEmail);
-		edit3 = (EditText) findViewById(R.id.launcherAccPassword);
+		loginLayout = findViewById(R.id.login_layout_linear);
+		imageLogo = findViewById(R.id.login_image_logo);
+		loginLayout.postDelayed(new Runnable(){
+				@Override
+				public void run(){
+					imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
+				}
+			}, 100);
+			
+		edit2 = (EditText) findViewById(R.id.login_edit_email);
+		edit3 = (EditText) findViewById(R.id.login_edit_password);
 		if(prb == null) prb = (ProgressBar) findViewById(R.id.launcherAccProgress);
 		
-		sRemember = (Switch) findViewById(R.id.launcherAccRememberSwitch);
-		sOffline  = (Switch) findViewById(R.id.launcherAccOffSwitch);
+		sRemember = findViewById(R.id.login_switch_remember);
+		sOffline  = findViewById(R.id.login_switch_offline);
 		sOffline.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 				@Override
@@ -248,28 +262,13 @@ public class PojavLoginActivity extends MineActivity
 			});
 	}
 	
-	private boolean isAndroid7()
-	{
-		return Build.VERSION.SDK_INT >= 24;
-	}
-	
-	/*
-	
-	long lastTime = System.currentTimeMillis();
-	long lastDel = 0;
-	
-	
-	private void deAnr(String msg) {
-		long currt = System.currentTimeMillis();
-		lastDel = currt - lastTime;
-		lastTime = currt;
-		System.out.println("Time:" + lastDel + "ms||" + (lastDel / 1000) + "s: " + msg);
-	}
-	*/
-	
 	@Override
 	public void onResume() {
 		super.onResume();
+		
+		if (loginLayout != null && imageLogo != null) {
+			imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
+		}
 		
 		// Clear current profile
 		PojavProfile.setCurrentProfile(this, null);
@@ -304,9 +303,12 @@ public class PojavLoginActivity extends MineActivity
 		try {
 			file3.createNewFile();
 		} catch (IOException e){}
-		
+	
 		try {
 			mkdirs(Tools.MAIN_PATH);
+			
+			mkdirs(Tools.CTRLMAP_PATH);
+			new CustomControls(this).save(Tools.CTRLDEF_FILE);
 			
 			Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
 			
@@ -334,10 +336,10 @@ public class PojavLoginActivity extends MineActivity
 	
 	private boolean mkdirs(String path)
 	{
-		File mFileeee = new File(path);
-		if(mFileeee.getParentFile().exists())
-			 return mFileeee.mkdir();
-		else return mFileeee.mkdirs();
+		File file = new File(path);
+		if(file.getParentFile().exists())
+			 return file.mkdir();
+		else return file.mkdirs();
 	}
 	
 	/*
@@ -362,7 +364,6 @@ public class PojavLoginActivity extends MineActivity
 	public void loginSavedAcc(View view)
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.login_select_account);
 
 		if (Tools.enableDevFeatures) {
 			/*
@@ -380,7 +381,7 @@ public class PojavLoginActivity extends MineActivity
 		}
 		
 		builder.setPositiveButton(android.R.string.cancel, null);
-
+		builder.setTitle(this.getString(R.string.login_select_account));
 		final AlertDialog dialog = builder.create();
 
 		/*
@@ -391,6 +392,8 @@ public class PojavLoginActivity extends MineActivity
 		lpHint.weight = 1;
 		lpFlv.weight = 1;
 		*/
+		dialog.setTitle(this.getString(R.string.login_select_account));
+		System.out.println("Setting title...");
 		LinearLayout dialay = new LinearLayout(this);
 		dialay.setOrientation(LinearLayout.VERTICAL);
 		TextView fhint = new TextView(this);
@@ -459,6 +462,7 @@ public class PojavLoginActivity extends MineActivity
 		dialay.addView(flv);
 		
 		dialog.setView(dialay);
+		dialog.setTitle(this.getString(R.string.login_select_account));
 		dialog.show();
 	}
 	
@@ -493,50 +497,8 @@ public class PojavLoginActivity extends MineActivity
 		end skip*/
 		
 		if (sOffline.isChecked()) {
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-			alert.setTitle(R.string.warning_title);
-			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						sRemember.setChecked(true);
-						mProfile = loginOffline();
-						playProfile();
-					}
-				});
-			
-			alert.setNegativeButton(R.string.login_offline_alert_skip, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						mProfile = loginOffline();
-						playProfile();
-					}
-				});
-			
-			alert.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface p1, int p2)
-					{
-						mProfile = null;
-					}
-				});
-			
-			if (!sRemember.isChecked()) {
-				alert.setMessage(R.string.login_offline_warning_1);
-				warning = alert.show();
-			} else {
-				mProfile = loginOffline();
-				playProfile();
-			}
-			
-			/*
-			while (warning != null && warning.isShowing()) {
-			}
-			*/
+			mProfile = loginOffline();
+			playProfile();
 		} else {
 			new LoginTask().setLoginListener(new LoginListener(){
 

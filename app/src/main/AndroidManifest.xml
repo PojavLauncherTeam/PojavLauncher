@@ -15,6 +15,9 @@
         android:icon="@drawable/ic_launcher"
 		android:roundIcon="@drawable/ic_launcher"
 		android:resizeableActivity="true">
+    <meta-data 
+	    android:name="android.max_aspect"
+        android:value="ratio_float"/>
 		
 		<activity
 			android:screenOrientation="sensorLandscape"
@@ -27,6 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 		</activity>
+
+		<activity
+			android:theme="@style/MenuDialog"
+			android:screenOrientation="sensorLandscape"
+			android:name=".FatalErrorActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
 		<activity
 			android:screenOrientation="sensorLandscape"
@@ -42,7 +51,6 @@
 			android:launchMode="standard"
 			android:multiprocess="true"
 			android:screenOrientation="sensorLandscape"
-			android:theme="@style/RunTheme"
             android:name=".MainActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
@@ -55,6 +63,7 @@
 			android:screenOrientation="sensorLandscape"
 			android:name=".prefs.PojavPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
+   
     </application>
 
 </manifest>

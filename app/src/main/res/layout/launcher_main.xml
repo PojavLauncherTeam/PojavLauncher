@@ -36,7 +36,6 @@
 			android:orientation="vertical"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="#EEEEEE"
 			android:gravity="center_horizontal">
 
 			<ProgressBar
@@ -78,13 +77,13 @@
 						android:orientation="horizontal">
 
 						<TextView
-							android:layout_height="match_parent"
-							android:text="Version:"
-							android:textAppearance="?android:attr/textAppearanceMedium"
 							android:id="@+id/lMTVVer"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
 							android:gravity="center"
-							android:textSize="12sp"
-							android:layout_width="wrap_content"/>
+							android:text="@string/main_version_"
+							android:textAppearance="?android:attr/textAppearanceMedium"
+							android:textSize="12sp" />
 
 						<Spinner
 							android:layout_width="match_parent"
@@ -94,24 +93,24 @@
 					</LinearLayout>
 
 					<Button
+						style="?android:attr/buttonBarButtonStyle"
 						android:layout_width="match_parent"
 						android:layout_height="40dp"
-						android:text="Options"
 						android:onClick="launcherMenu"
-						style="?android:attr/buttonBarButtonStyle"/>
+						android:text="@string/main_options" />
 
 				</LinearLayout>
 
 				<com.kdt.mcgui.MineButton
-					android:layout_toRightOf="@id/lMTVVer"
-					android:layout_toLeftOf="@id/launcherMainLeftLayout"
+					android:id="@+id/launcherMainPlayButton"
 					android:layout_width="wrap_content"
 					android:layout_height="80dp"
-					android:text="Play"
 					android:layout_alignParentBottom="true"
+					android:layout_margin="5dp"
+					android:layout_toLeftOf="@id/launcherMainLeftLayout"
+					android:layout_toRightOf="@id/lMTVVer"
 					android:onClick="launchGame"
-					android:id="@+id/launcherMainPlayButton"
-					android:layout_margin="5dp"/>
+					android:text="@string/main_play" />
 
 				<LinearLayout
 					android:id="@+id/launcherMainRightLayout"
@@ -130,10 +129,10 @@
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="20dp"
-							android:text="Welcome,"
 							android:layout_marginRight="4dp"
-							android:textSize="12sp"
-							android:gravity="center"/>
+							android:gravity="center"
+							android:text="@string/main_welcome"
+							android:textSize="12sp" />
 
 						<TextView
 							android:layout_width="wrap_content"
@@ -161,20 +160,20 @@
 						android:layout_height="wrap_content">
 
 						<Button
+							style="?android:attr/buttonBarButtonStyle"
 							android:layout_width="88dp"
 							android:layout_height="40dp"
-							android:text="Info (DEV)"
-							android:textSize="10sp"
 							android:onClick="mcaccSwitchUser"
-							style="?android:attr/buttonBarButtonStyle"/>
+							android:text="@string/main_infodev"
+							android:textSize="10sp" />
 
 						<Button
+							style="?android:attr/buttonBarButtonStyle"
 							android:layout_width="match_parent"
 							android:layout_height="40dp"
-							android:text="Switch user"
-							android:textSize="10sp"
 							android:onClick="mcaccLogout"
-							style="?android:attr/buttonBarButtonStyle"/>
+							android:text="@string/main_switchuser"
+							android:textSize="10sp" />
 
 					</LinearLayout>
 

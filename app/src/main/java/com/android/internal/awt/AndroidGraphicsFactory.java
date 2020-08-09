@@ -34,12 +34,12 @@ import org.apache.harmony.awt.gl.CommonGraphics2DFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.content.Context;
+import org.apache.harmony.awt.gl.*;
 
 public class AndroidGraphicsFactory extends CommonGraphics2DFactory {
     
     public GraphicsEnvironment createGraphicsEnvironment(WindowFactory wf) {
-        // TODO Auto-generated method stub
-        return null;
+        return new AndroidGraphicsEnvironment();
     }
 
     public Font embedFont(String fontFilePath) {

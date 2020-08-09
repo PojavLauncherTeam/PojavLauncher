@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
+	<string name="app_short_name">PojavLauncher</string>
+	<string name="app_motd">Запустите Minecraft: Java Edition на вашем устройстве!</string>
+
+	<!-- Action bar part -->
+	<string name="actionbar_help">ПОМОЩЬ</string>
+	
+	<!-- Languages list part -->
+	<string name="language_name">РУССКИЙ - RU</string>
+
+	<!-- Logging output -->
+	<string name="log_title">Журнал</string>
+	
+	<!-- Login strings -->
+	<string name="login_online_username_hint">Email или псевдоним</string>
+	<string name="login_online_username_question">(Что мне использовать?)</string>
+	<string name="login_online_password_hint">Пароль</string>
+	<string name="login_online_password_question">Забыли пароль?</string>
+	<string name="login_online_remember">Запомнить меня?</string>
+	<string name="login_online_login_label">Вход</string>
+	<string name="login_online_create_account">(Создать новый профиль?)</string>
+	
+	<string name="login_offline_switch">Offline-профиль?</string>
+	<string name="login_offline_alert_skip">Пропустить</string>
+	
+	<string name="login_error_short_username">Псевдоним должен быть длиной как минимум 3 символа</string>
+	<string name="login_error_exist_username">Этот псевдоним уже существует</string>
+	
+	<string name="login_select_account">Выбрать профиль</string>
+	
+	<!-- Hint -->
+	<string name="hint_select_account">Для выбора, нажмите. Для удаления, нажмите и задержите.</string>
+	<string name="hint_control_mapping">"Эта функция ещё не завершена и не может применять иные раскладки!\nПроведите справа налево чтобы открыть меню ◀\nЗадержите кнопку для настройки: изменить размер или удалить."</string>
+	
+	<!-- Warning -->
+	<string name="warning_title">Предупреждение</string>
+	<string name="warning_msg">Это приложение может быть не совместимо с вашей версией Android (более свежей или равной 7.0). Попробуйте VMOS и установите его туда. Учтите, что VMOS придётся установить вручную.</string>
+	<string name="warning_noshowagain">Не показывать вновь</string>
+	<string name="warning_action_install">Установить VMOS</string>
+	<string name="warning_action_tryanyway">Всё равно попробуйте</string>
+	<string name="warning_action_exit">Выйти</string>
+	<string name="warning_remove_account">Этот профиль будет удалён!</string>
+	
+	<!-- AlertDialog title -->
+	<string name="alerttitle_selectkeymap">Select a keymap json</string>
+	<string name="alerttitle_installmod">Добавить мод</string>
+	<string name="alerttitle_installoptifine">Выбрать файл OptiFine</string>
+	
+	<!-- Error messages -->
+	<string name="error_fatal">Критическая ошибка</string>
+	<string name="error_checklog">Ошибка! Просмотрите журнал ниже: %s</string>
+	<string name="error_no_version">Нет версии!</string>
+	<string name="error_load_version">Ошибка при загрузке версии %s</string>
+	<string name="error_convert_lib">Ошибка при конвертации библиотеки %s</string>
+	<string name="error_convert_client">Ошибка при конвертации Minecraft %s</string>
+	<string name="error_show_more">Больше</string>
+	<string name="error_show_less">Меньше</string>
+	
+	<!-- Toast messages -->
+	<string name="toast_permission_denied">К каталогу нет права на чтение и запись!</string>
+	<string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите разработчику.\nОшибка: %s</string>
+	<string name="toast_optifine_success">Установка завершена</string>
+	<!--
+	<string name="toast_3">Exit</string>
+	-->
+	
+	<!-- MCLauncherActivity: Tabs -->
+	<string name="mcl_tab_news">Новости</string>
+	<string name="mcl_tab_console">Терминал разработчика</string>
+
+	<!-- MCLauncherActivity: Strings -->
+	<string name="mcl_version_msg">Готовы к запуску Minecraft %s</string>
+	<string name="mcl_launch_cleancache">Удаляем временные файлы</string>
+	<string name="mcl_launch_downloading">Загружаем %s</string>
+	<string name="mcl_launch_download_lib">Загружаем библиотеку %s</string>
+	<string name="mcl_launch_download_client">Загружаем Minecraft %s</string>
+	<string name="mcl_launch_convert_lib">Конвертируем библиотеку %s</string>
+	<string name="mcl_launch_convert_client">Конвертируем Minecraft %s</string>
+	<string name="mcl_launch_patch_client">Патчим Minecraft %s</string>
+	<string name="mcl_launch_download_assets">Готовимся к скачиванию файлов игры</string>
+	
+	<string name="mcl_options">Настройки</string>
+	<string name="mcl_option_modmgr">Менеджер модов (не работает)</string>
+	<string name="mcl_option_optifineinstall">Установить OptiFine</string>
+	<string name="mcl_option_checkupdate">Проверить на обновления</string>
+	<string name="mcl_option_customcontrol">Собстенное управление</string>
+	<string name="mcl_option_settings">Настройки</string>
+	<string name="mcl_option_about">Информация</string>
+	
+	<string name="mcl_setting_title_setmaxdxref">Задать максимальное DX ссылок</string>
+	<string name="mcl_setting_subtitle_setmaxdxref">Увеличьте, если возникает ошибка при конвертации из-за большого количества ссылок. Рекомендуемое значение: 4096 или 8192.</string>
+	<string name="mcl_setting_title_freeform">Запуск Minecraft в режиме Freeform</string>
+	<string name="mcl_setting_subtitle_freeform">Запуск Minecraft в оконном режиме. Требуется Android 7.0+</string>
+	<string name="mcl_setting_subtitle_longpresstrigger">Изменить время длинного нажатия для ломания и выбрасывания</string>
+	<string name="mcl_setting_title_controlsize">Размер кнопок</string>
+	<string name="mcl_setting_title_forgetoptifpath">Заставить OptiFine не находить самого себя</string>
+	<string name="mcl_setting_subtitle_forgetoptifpath">Позволяет заработать OptiFine на некоторых устройствах.</string>
+	<string name="mcl_setting_category_general">Основные настройки</string>
+	<string name="mcl_setting_category_veroption">Тип версии будет показан в списке версий</string>
+	<string name="mcl_setting_veroption_release">Стабильные</string>
+	<string name="mcl_setting_veroption_snapshot">Частые</string>
+	<string name="mcl_setting_veroption_oldalpha">Старые (Альфа)</string>
+	<string name="mcl_setting_veroption_oldbeta">Старые (Бета)</string>
+		
+	<string name="mcl_version_clone">Клонировать</string>
+	
+	<!-- Global strings -->
+	<string name="global_add">Добавить</string>
+	<string name="global_edit">Редактировать</string>
+	<string name="global_error">Ошибка</string>
+	<string name="global_load">Загрузить</string>
+	<string name="global_name">Имя</string>
+	<string name="global_remove">Убрать</string>
+	<string name="global_save">Сохранить</string>
+	<string name="global_error_field_empty">Это поле не может быть пустым.</string>
+	
+<!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		//"© 2019 Khanh Duy Tran\n" + 
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+	<!-- MainActivity: strings -->
+	<string name="mcn_exit_title">Игра закрылась</string>
+	<string name="mcn_exit_call">Выход</string>
+	<string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
+	<string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
+	<string name="mcn_exit_confirm">Вы точно хотите закрыть игру немедленно?</string>
+	
+	<!-- MainActivity: Control buttons -->
+	<string name="controls">Кнопки</string>
+	<string name="control_toggle">GUI</string>
+	<string name="control_keyboard">Клавиатура</string>
+	<string name="control_chat">Чат</string>
+	<string name="control_debug">Откладка</string>
+	<string name="control_zoom">Зум (C)</string>
+	<string name="control_primary">ЛКМ</string>
+	<string name="control_secondary">ПКМ</string>
+	<string name="control_shift">◇</string>
+	<string name="control_inventory">Инв</string>
+	<string name="control_up">▲</string>
+	<string name="control_left">◀</string>
+	<string name="control_right">▶</string>
+	<string name="control_down">▼</string>
+	<string name="control_jump">⬛</string>
+	<string name="control_thirdperson">F5</string>
+	<string name="control_listplayers">Tab</string>
+	<string name="control_mouse">Мышь</string>
+	<string name="control_mouseoff">Мышь: выкл</string>
+	<string name="control_mouseon">Мышь: вкл </string>
+	
+	<!-- MainActivity: Menu advanced controls -->
+	<string name="control_forceclose">Закрыть игру</string>
+	<string name="control_viewout">Журнал</string>
+	<string name="control_adebug">PointerCapture Debug</string>
+	<string name="control_customkey">Ввести клавишу</string>
+
+	<string name="control_more3"></string>
+	<string name="control_more4"></string>
+
+	<string name="customctrl_keyname">Имя</string>
+	<string name="customctrl_specialkey">Особенная кнопка</string>
+	<string name="customctrl_hidden">Спрятано</string>
+	<string name="customctrl_addbutton">Добавить кнопку</string>
+	<string name="customctrl_title_selectctrl">Выбрать раскладку по-умолчанию</string>
+	<string name="customctrl_selectdefault">Выбрать раскладку по-умолчанию</string>
+	
+	<!-- Update part (unused now) -->
+	<string name="login_online_check_keeplogin">Запомнить меня</string>
+	<string name="login_offline_label">Войти как пират</string>
+	<string name="main_options">Опции</string>
+	<string name="main_play">Играть</string>
+	<string name="main_welcome">Добро пожаловать,</string>
+	<string name="main_infodev">Инфо (Р)</string>
+	<string name="main_switchuser">Сменить пользователя</string>
+	<string name="main_version_">Версия:</string>
+	<string name="mcl_setting_title_longpresstrigger">Сколько времени нужно держать кнопку</string>
+	<string name="mcl_tab_crash">Инфо о сбое</string>
+	<string name="update_console">Обновить консоль</string>
+	<string name="main_nocrash">Сбоев не обнаружено.</string>
+        <string name="main_nolog">Данных нет.</string>
+</resources>

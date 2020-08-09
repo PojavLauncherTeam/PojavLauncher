@@ -3,7 +3,6 @@ package net.kdt.pojavlaunch;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.widget.*;
@@ -22,23 +21,23 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.security.*;
 import java.util.*;
-import javax.crypto.*;
 import javax.microedition.khronos.egl.*;
 import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 import optifine.*;
 import org.apache.harmony.security.fortress.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
-import org.lwjgl.util.applet.*;
-import org.lwjgl.util.glu.tessellation.*;
+import sun.security.jca.*;
 
 import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import com.google.android.gles_jni.*;
 import com.kdt.minecraftegl.*;
+
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -127,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean lastGrab = false;
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
+	private int navBarHeight = 40;
 
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
@@ -141,11 +141,100 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setContentView(R.layout.main);
 
 		try {
+			final View decorView = getWindow().getDecorView();
+			decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+				@Override
+				public void onSystemUiVisibilityChange(int visibility) {
+					if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+						decorView.setSystemUiVisibility(
+							View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+					}
+				}
+			});
+			
+      /*
+			ExitManager.setExitTrappedListener(new ExitManager.ExitTrappedListener(){
+					@Override
+					public void onExitTrapped()
+					{
+						runOnUiThread(new Runnable(){
+
+								@Override
+								public void run() {
+									isExited = true;
+									
+									try {
+										SecondaryDexLoader.resetFieldArray(getClassLoader());
+									} catch (Throwable th) {
+										th.printStackTrace();
+									}
+
+									AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
+									d.setTitle(R.string.mcn_exit_title);
+
+									try {
+										File crashLog = Tools.lastFileModified(Tools.crashPath);
+										if(crashLog != null && Tools.read(crashLog.getAbsolutePath()).startsWith("---- Minecraft Crash Report ----")){
+											d.setMessage(R.string.mcn_exit_crash);
+										} else {
+											fullyExit();
+											return;
+										}
+									} catch (Throwable th) {
+										d.setMessage(getStr(R.string.mcn_exit_errcrash) + "\n" + Log.getStackTraceString(th));
+									}
+									d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+											@Override
+											public void onClick(DialogInterface p1, int p2)
+											{
+												fullyExit();
+											}
+										});
+									d.setCancelable(false);
+									d.show();
+								}
+							});
+					}
+				});
+
+			try {
+				ExitManager.disableSystemExit();
+			} catch (Throwable th) {
+				Log.w(Tools.APP_NAME, "Could not disable System.exit() method!", th);
+			}
+			
+      */
+			File optDir = getDir("dalvik-cache", 0);
+			optDir.mkdirs();
+			launchOptimizedDirectory = optDir.getAbsolutePath();
+
+
+
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 
 			setTitle("Minecraft " + mProfile.getVersion());
 			//System.loadLibrary("gl4es");
+			/*
+			if (mVersionInfo.arguments != null) {
+				System.loadLibrary("lwjgl32");
+				System.loadLibrary("lwjgl_opengl32");
+				System.loadLibrary("lwjgl_stb32");
+			}
+			*/
+			
+			if (mVersionInfo.arguments == null) {
+				// Minecraft 1.12 and below
+				
+				// TODO uncomment after fix
+				// SecondaryDexLoader.install(getClassLoader(), Arrays.asList(new File[]{new File(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1"))}), optDir);
+			}
+			
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 
 			AndroidDisplay.windowWidth = displayMetrics.widthPixels / scaleFactor;
@@ -598,6 +687,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
 						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
+
+
+						AndroidDisplay.windowWidth += navBarHeight;
+
 						*/
 						
 						EGLContextImpl eglContextImpl = (EGLContextImpl) egl10.eglGetCurrentContext();
@@ -608,6 +701,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						} catch (Throwable th) {
 							Tools.showError(MainActivity.this, th, true);
 						}
+
 						
 						new Thread(new Runnable(){
 
@@ -636,7 +730,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 			glSurfaceView.setPreserveEGLContextOnPause(true);
 			glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
-			glSurfaceView.requestRender();
+			// glSurfaceView.requestRender();
 		} catch (Throwable e) {
 			e.printStackTrace();
 			Tools.showError(this, e, true);
@@ -693,7 +787,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onResume() {
 		super.onResume();
 		mIsResuming = true;
-		glSurfaceView.requestRender();
+		if (glSurfaceView != null) glSurfaceView.requestRender();
+        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
 	}
 
 	@Override
@@ -927,7 +1024,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public static String launchOptimizedDirectory;
 	public static String launchLibrarySearchPath;
 	private void runCraft(long eglContext) throws Throwable
+
 	{
+		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
+			@Override
+			public void onCharPrint(char c) {
+				appendToLog(Character.toString(c));
+			}
+		};
+
+		PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
+		PrintStream theStreamOut = new PrintStream(new LoggerJava.LoggerOutputStream(System.out, printLog));
+		System.setErr(theStreamErr);
+		System.setOut(theStreamOut);
+		
 		String[] launchArgs = getMCArgs();
 
 		// Setup OptiFine
@@ -938,17 +1048,24 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
 		}
 
-		File optDir = getDir("dalvik-cache", 0);
-		optDir.mkdirs();
-
-		launchClassPath = Tools.generate(mProfile.getVersion());
-		launchOptimizedDirectory = optDir.getAbsolutePath();
+		launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
 /* gl4es
 
 		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
 			net.minecraft.launchwrapper.Launch.main(launchArgs);
 		} else {
+/*
+			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
+			System.setErr(theStreamErr);
+*/
+			fixRSAPadding(this);
+
+			appendlnToLog("Running Minecraft with classpath: \n" + launchClassPath + "\n", false);
+			
+			// Load classpath
+			DexClassLoader launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
+
 			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 				@Override
 				public void onCharPrint(char c) {
@@ -962,6 +1079,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		System.out.println();
 		
 		ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+
 
 				@Override
 				public void onPrintLine(String text) {
@@ -1012,59 +1130,107 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			});
 	}
 
+	public static void fixRSAPadding(final Activity act) {
+/*
 	private void createEGLHackStuff() {
 		 
 	}
-		public void fixRSAPadding() throws Exception {
+*/
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
+		final boolean isLegacyPatch = Build.VERSION.SDK_INT < 24;
+		
 		try {
-			List<Provider.Service> rsaList, rsaPkcs1List;
-			if (android.os.Build.VERSION.SDK_INT > 23) { // Nougat
-				/*
-				 * Since Android 7, it use OpenJDK sun.security.jca.GetInstance
-				 * But it's not part of Android SDK.
-				 */
-				rsaList = getCipherServices("RSA");
-				rsaPkcs1List = getCipherServices("RSA/ECB/PKCS1PADDING");
-			} else {
-				rsaList = Services.getServices("Cipher.RSA");
-				rsaPkcs1List = Services.getServices("Cipher.RSA/ECB/PKCS1PADDING");
-			}
+			if (!isLegacyPatch) {
+			/*
+				System.out.println("RSAPadding BEFORE");
+				debug_printServiceInfo(System.out, "Cipher.RSA");
+			*/
 			
-			/* 
-			 * Not .clear() directly since the entry removal is protected,
-			 * so some reflections to reset it
-			 */
-			Modifiable.resetServiceList(rsaList);
-			rsaList.addAll(rsaPkcs1List);
+				Map<Provider, Provider.Service> rsaMap, rsaPkcs1Map;
+				rsaMap = getCipherServicesMap("Cipher", "RSA");
+				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
+
+				for (Map.Entry<Provider, Provider.Service> set : rsaMap.entrySet()) {
+					System.out.println(set.getKey().getName() + ": ");
+					for (Map.Entry en : set.getKey().entrySet()) {
+						if (en.getKey().toString().contains("Cipher.RSA"))
+							System.out.println(en.getKey().toString() + " = " + en.getValue().toString());
+					}
+
+					set.getKey().remove("Cipher.RSA SupportedKeyFormats");
+
+					int spend = 0;
+					for (Map.Entry<Provider, Provider.Service> s : rsaPkcs1Map.entrySet()) {
+						if (spend == 0) {
+							set.getKey().put("Cipher.RSA", s.getValue().getClassName());
+							set.getKey().put("Cipher.RSA SupportedKeyClasses", s.getKey().get("Cipher.RSA/ECB/PKCS1Padding SupportedKeyClasses"));
+
+							List<String> rsaAliasList = Modifiable.getServiceAliases(set.getValue());
+							rsaAliasList.clear();
+							rsaAliasList.addAll(Modifiable.getServiceAliases(s.getValue()));
+							
+							spend++;
+						}
+					}
+
+					// printList(set.getKey().getServices());
+				
+				/*
+					System.out.println("RSAPadding AFTER");
+					debug_printServiceInfo(System.out, "Cipher.RSA");
+				*/
+				}
+			} else {
+				Collection<Provider.Service> rsaList, rsaPkcs1List;
+				rsaList = getCipherServices("Cipher", "RSA");
+				rsaPkcs1List = getCipherServices("Cipher", "RSA/ECB/PKCS1PADDING");
+				
+				rsaList.clear();
+				rsaList.addAll(rsaPkcs1List);
+			}
 		} catch (Throwable th) {
 			th.printStackTrace();
 			
 			final File rsaFixFile = new File(Tools.MAIN_PATH, "rsapadding_error.txt");
 
-			// Debug information
-			PrintStream rsaFixStream = new PrintStream(rsaFixFile);
-			rsaFixStream.println("--- RSA PADDING ERROR ---");
-			rsaFixStream.println("• Error stack trace");
-			th.printStackTrace(rsaFixStream);
-			rsaFixStream.println();
-			rsaFixStream.println("• RSAPadding info");
-			rsaFixStream.println(" - Patch method: " + (Build.VERSION.SDK_INT < 24 ? "Direct (no" : "Reflection Bypass (with") + " security check)");
-			rsaFixStream.println(" - getDeclaredMethods() return");
-			debug_printMethodInfo(rsaFixStream, Provider.class.getDeclaredMethods());
-			rsaFixStream.println(" - getMethods() return");
-			debug_printMethodInfo(rsaFixStream, Provider.class.getMethods());
-			rsaFixStream.println("• System info");
-			rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
-			rsaFixStream.close();
+			try {
+				// Debug information
+				PrintStream rsaFixStream = new PrintStream(rsaFixFile);
+				rsaFixStream.println("--- RSA PADDING ERROR ---");
+				rsaFixStream.println("• Error stack trace");
+				th.printStackTrace(rsaFixStream);
+				rsaFixStream.println();
+				rsaFixStream.println("• RSAPadding info");
+				rsaFixStream.println(" - Patch method: " + (isLegacyPatch ? "Apache Harmony" : "OpenJDK sun.security.jca"));
+				if (!isLegacyPatch) {
+					rsaFixStream.println(" - sun.security.jca.ProviderList:");
+					debug_printMethodInfo(rsaFixStream, ProviderList.class.getDeclaredMethods());
+				}
+				rsaFixStream.println("• System info");
+				rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
+				rsaFixStream.close();
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			
-			runOnUiThread(new Runnable(){
+
+			final String errMsg = "Unable to fix RSAPadding. Premium features is limited!" +
+				(Build.VERSION.SDK_INT == 23 ? 
+				"Android 6 currently don't have solution" :
+				"Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer");
+			
+			if (act != null) {
+				act.runOnUiThread(new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(MainActivity.this, "Unable to fix RSAPadding. Premium features is limited! Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer", Toast.LENGTH_LONG).show();
+						Toast.makeText(act, errMsg, Toast.LENGTH_LONG).show();
 					}
 				});
+			} else {
+				System.err.println("RSAPadding error: " + errMsg);
+			}
 		}
 		
 		/*
@@ -1077,13 +1243,19 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		 */
 	}
 	
-	private List<Provider.Service> getCipherServices(String algorithm) throws InvocationTargetException, SecurityException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, ClassNotFoundException {
-		return (List<Provider.Service>) Class.forName("sun.security.jca.GetInstance")
-			.getDeclaredMethod("getServices", String.class, String.class)
-			.invoke(null, new Object[]{"Cipher", algorithm});
+	private static void debug_printServiceInfo(PrintStream stream, String key) {
+		String[] keyArr = key.split(".");
+		for (Provider p : getCipherServicesMap(keyArr[0], keyArr[1]).keySet()) {
+			stream.println("- " + p.getName() + ": " + p.getInfo());
+			for (Provider.Service s : p.getServices()) {
+				if (s.getAlgorithm().contains(key)) {
+					stream.println(s.toString());
+				}
+			}
+		}
 	}
 	
-	private void debug_printMethodInfo(PrintStream stream, Method[] methods) {
+	private static void debug_printMethodInfo(PrintStream stream, Method[] methods) {
 		StringBuilder methodInfo = new StringBuilder();
 		for (Method method : methods) {
 			methodInfo.setLength(0);
@@ -1126,6 +1298,45 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			stream.println(methodInfo);
 		}
 	}
+	
+	// From org.apache.harmony.security.fortress.Services:getServices(String type, String algorithm)
+	private static synchronized Collection<Provider.Service> getCipherServices(String type, String algorithm) {
+		if (Build.VERSION.SDK_INT < 23) {
+			// 5.1 (Lollipop) and below
+			return Services.getServices(type + "." + algorithm);
+		} else if (Build.VERSION.SDK_INT == 23) {
+			// 6.0 (Marshmallow) only
+			return Services.getServices(type, algorithm);
+		} else {
+			return getCipherServicesMap(type, algorithm).values();
+		}
+	}
+
+	private static synchronized Map<Provider, Provider.Service> getCipherServicesMap(String type, String algorithm) {
+		// 7.0 (Nougat) and above
+		ProviderList providerList = Providers.getProviderList();
+		Map<Provider, Provider.Service> services = null;
+		
+		// Android 10
+		if (Build.VERSION.SDK_INT >= 29) {
+			services = new ArrayMap<>();
+			Provider.Service service = providerList.getService(type, algorithm);
+			services.put(service.getProvider(), service);
+		} else {
+			List<Provider> providers = providerList.providers();
+			for (Provider p : providers) {
+				Provider.Service s = p.getService(type, algorithm);
+				if (s != null) {
+					if (services == null) {
+						services = new ArrayMap<>(providers.size());
+					}
+					services.put(p, s);
+				}
+			}
+		}
+		return services;
+    }
+	
 
 	public void printStream(InputStream stream) {
 		try {
@@ -1182,12 +1393,24 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	 WindowAnimation.fadeOut(contentCanvas, 500);
 	 }
 	 */
+	private void appendToLog(String text) {
+		appendToLog(text, true);
+	}
+	
 	private void appendlnToLog(String text) {
-		appendToLog(text + "\n");
+		appendlnToLog(text, true);
+	}
+	
+	private void appendlnToLog(String text, boolean checkAllow) {
+		appendToLog(text + "\n", checkAllow);
 	}
 
+	private void appendToLog(final String text, boolean checkAllow) {
+		if (checkAllow && !isLogAllow) return;
+/*
 	private void appendToLog(final String text) {
-		// if (!isLogAllow) return;
+  */
+		// if (!isLogAllow) r
 		textLog.post(new Runnable(){
 				@Override
 				public void run()

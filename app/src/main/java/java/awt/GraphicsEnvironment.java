@@ -87,7 +87,10 @@ public abstract class GraphicsEnvironment {
      *         keyboard, or mouse, false otherwise.
      */
     public static boolean isHeadless() {
-        return "true".equals(System.getProperty("java.awt.headless"));
+        return false;
+		
+		// Disable headless...
+		// "true".equals(System.getProperty("java.awt.headless"));
     }
 
     /**

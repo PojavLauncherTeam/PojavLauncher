@@ -7,6 +7,7 @@ import android.util.*;
 import android.view.*;
 import android.widget.*;
 import android.view.View.*;
+import net.kdt.pojavlaunch.*;
 
 public class MineButton extends Button
 {
@@ -42,20 +43,16 @@ public class MineButton extends Button
 	
 	private LayerDrawable layerdrawable, layerdrawablefocus;
 	
-	public MineButton(Context ctx)
-	{
-		super(ctx);
-		init();
+	public MineButton(Context ctx) {
+		this(ctx, null);
 	}
 	
-	public MineButton(Context ctx, AttributeSet attrs)
-	{
+	public MineButton(Context ctx, AttributeSet attrs) {
 		super(ctx, attrs);
 		init();
 	}
 	
-	public void init()
-	{
+	public void init() {
 		getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
 				public void onGlobalLayout() {
