@@ -49,8 +49,8 @@ deploy:
   provider: releases
   api-key: $GITHUB_API_KEY
   file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/debug/app-debug.apk
-  skip_cleanup: true
-  name: autobuild-$TRAVIS_COMMIT
+  skip_cleanup: false
+  name: PojavLauncher_DevBuild-$TRAVIS_COMMIT
   body: Automatic build of PojavLauncher from the latest source commit ($TRAVIS_COMMIT) built by Travis CI on $(date +'%F %T %Z').
   prerelease: true
   overwrite: true
