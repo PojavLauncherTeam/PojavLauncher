@@ -9,8 +9,14 @@ Discord server: https://discord.gg/6RpEJda
 - Impossible for directly run. There's RoboVM but is AOT Compiler. You could also try UTM with Android-x86.
 - OpenJDK 9 and GL4ES has iOS port so maybe run in a jailbreaked device. I don't have a Mac OS X device to build one.
 
-## Installing OptiFine?
-Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
+## About this branch
+- This branch attempt to launch Minecraft using command line like `dalvikvm` and `app_process`.
+- Status: working partial, EGL Context not yet shared, process get crashed if attempt to execute OpenGL command.
+
+
+## Anything if this successful?
+- Able to custom min/max RAM heap.
+- Solve some incompatible issues.
 
 ## Installing Forge?
 Not implemented yet.
@@ -131,6 +137,9 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 ## A note about 1.12.x
 - Minecraft 1.12.x can be run on Android 8.0 and above by use d8 for desugar and dexing in the latest v2, but will crash in singleplayer.
 
+## Solution found!
+- [twaik/libcw](https://github.com/twaik/libcw) or [shodruky-rhyammer/gl-streaming](https://github.com/shodruky-rhyammer/gl-streaming) but I'm busy at v3.
+
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
@@ -144,3 +153,4 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - (v3) PRoot: [GNU GPLv2 License](https://github.com/termux/proot/blob/master/COPYING).<br>
 - (v3) XVnc: [GNU GPLv3 License](https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt).
 - (all) LWJGL 2: [Legacy LWJGL License](http://legacy.lwjgl.org/license.php.html).<br>
+

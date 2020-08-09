@@ -33,6 +33,11 @@ import org.lwjgl.opengl.*;
 import sun.security.jca.*;
 
 import android.app.AlertDialog;
+import android.graphics.drawable.Drawable;
+import net.kdt.pojavlaunch.value.customcontrols.*;
+import com.google.android.gles_jni.*;
+import com.kdt.minecraftegl.*;
+
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -151,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			});
 			
+      /*
 			ExitManager.setExitTrappedListener(new ExitManager.ExitTrappedListener(){
 					@Override
 					public void onExitTrapped()
@@ -202,16 +208,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				Log.w(Tools.APP_NAME, "Could not disable System.exit() method!", th);
 			}
 			
+      */
 			File optDir = getDir("dalvik-cache", 0);
 			optDir.mkdirs();
 			launchOptimizedDirectory = optDir.getAbsolutePath();
+
+
 
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 
 			setTitle("Minecraft " + mProfile.getVersion());
-
-			initEnvs();
 			//System.loadLibrary("gl4es");
 			/*
 			if (mVersionInfo.arguments != null) {
@@ -659,6 +666,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 			glSurfaceView.setOnTouchListener(glTouchListener);
 			glSurfaceView.setRenderer(new GLTextureView.Renderer() {
+					private volatile long eglContext = 0l;
 					@Override
 					public void onSurfaceDestroyed(GL10 gl) {
 						Log.d(Tools.APP_NAME, "Surface destroyed.");
@@ -670,6 +678,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						calculateMcScale();
 
 						EGL10 egl10 = (EGL10) EGLContext.getEGL();
+						
+						/*
 						AndroidContextImplementation.theEgl = egl10;
 						AndroidContextImplementation.context = egl10.eglGetCurrentContext();
 						AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
@@ -678,7 +688,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
+
 						AndroidDisplay.windowWidth += navBarHeight;
+
+						*/
+						
+						EGLContextImpl eglContextImpl = (EGLContextImpl) egl10.eglGetCurrentContext();
+						try {
+							Field eglContextField = eglContextImpl.getClass().getDeclaredField("mEGLContext");
+							eglContextField.setAccessible(true);
+							eglContext = eglContextField.get(eglContextImpl);
+						} catch (Throwable th) {
+							Tools.showError(MainActivity.this, th, true);
+						}
+
 						
 						new Thread(new Runnable(){
 
@@ -687,7 +710,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								{
 									try {
 										Thread.sleep(200);
-										runCraft();
+										runCraft(eglContext);
 									} catch (Throwable e) {
 										Tools.showError(MainActivity.this, e, true);
 									}
@@ -905,7 +928,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             Tools.showError(MainActivity.this, e, true);
         }
     }
-
 	private boolean isPointerCaptureSupported() {
 		return Build.VERSION.SDK_INT >= 26; 
 	}
@@ -1001,7 +1023,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public static String launchClassPath;
 	public static String launchOptimizedDirectory;
 	public static String launchLibrarySearchPath;
-	private void runCraft() throws Throwable //oncreate
+	private void runCraft(long eglContext) throws Throwable
+
 	{
 		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
 			@Override
@@ -1027,6 +1050,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
+/* gl4es
 
 		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
 			net.minecraft.launchwrapper.Launch.main(launchArgs);
@@ -1042,17 +1066,76 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			// Load classpath
 			DexClassLoader launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
 
-			// Launch Minecraft
-			Class mainClass = launchBaseLoader.loadClass(mVersionInfo.mainClass);
-			Method mainMethod = mainClass.getMethod("main", String[].class);
-			mainMethod.setAccessible(true);
-			mainMethod.invoke(null, new Object[]{launchArgs});
+			LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
+				@Override
+				public void onCharPrint(char c) {
+					appendToLog(Character.toString(c));
+*/
+		
+		fixRSAPadding();
+
+		System.out.println("> Running Minecraft with classpath:");
+		System.out.println(launchClassPath);
+		System.out.println();
+		
+		ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+
+
+				@Override
+				public void onPrintLine(String text) {
+					appendToLog(text);
+				}
+			}, "sh");
+		shell.initInputStream(this);
+			
+		shell.writeToProcess("base=/system");
+		shell.writeToProcess("export CLASSPATH=" + getApplicationInfo().publicSourceDir); // ":" + launchClassPath + "\n");
+		shell.writeToProcess("export HOME=" + Tools.MAIN_PATH);
+		String argStr = "";
+		for (String arg : launchArgs) {
+			argStr = argStr + " " + arg;
 		}
+		// app_process32 because this app is 32-bit only.
+		String execAppProcessStr = (
+			"exec app_process32 " +
+			"-Xmx512M " + // Max heap
+			"-Djava.library.path=/system/lib:" + getApplicationInfo().nativeLibraryDir + " " +
+			"$base/bin com.kdt.minecraftegl.MinecraftEGLInitializer " +
+			/* Long.toString(SurfaceUtils.getSurfaceAddress(((SurfaceView) glSurfaceView).getHolder().getSurface())) + "" + */ launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
+			this.mVersionInfo.mainClass + argStr
+		);
+		System.out.println(execAppProcessStr);
+		shell.writeToProcess(execAppProcessStr);
+		
+		final int waitFor = shell.waitFor();
+
+		runOnUiThread(new Runnable(){
+				@Override
+				public void run()
+				{
+					AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
+					d.setTitle(R.string.mcn_exit_title);
+					d.setMessage("Exited with code " + waitFor);
+					d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+							@Override
+							public void onClick(DialogInterface p1, int p2)
+							{
+								// finish();
+							}
+						});
+					d.setCancelable(false);
+					d.show();
+				}
+			});
 	}
 
-
-
 	public static void fixRSAPadding(final Activity act) {
+/*
+	private void createEGLHackStuff() {
+		 
+	}
+*/
 		// welcome to the territory of YOLO; I'll be your tour guide for today.
 
 		final boolean isLegacyPatch = Build.VERSION.SDK_INT < 24;
@@ -1324,6 +1407,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private void appendToLog(final String text, boolean checkAllow) {
 		if (checkAllow && !isLogAllow) return;
+/*
+	private void appendToLog(final String text) {
+  */
+		// if (!isLogAllow) r
 		textLog.post(new Runnable(){
 				@Override
 				public void run()
@@ -1417,6 +1504,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					// android.os.Process.killProcess(android.os.Process.myPid());
 
 					// Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();
+				}
+
+				private void fullyExit()
+				{
+					// TODO: Implement this method
 				}
 			})
 			.show();
