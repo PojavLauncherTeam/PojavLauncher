@@ -32,6 +32,7 @@
 		</activity>
 
 		<activity
+			android:theme="@style/MenuDialog"
 			android:screenOrientation="sensorLandscape"
 			android:name=".FatalErrorActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
@@ -50,7 +51,6 @@
 			android:launchMode="standard"
 			android:multiprocess="true"
 			android:screenOrientation="sensorLandscape"
-			android:theme="@style/RunTheme"
             android:name=".MainActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		

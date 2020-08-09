@@ -6,22 +6,14 @@
 		<item name="windowActionBar">false</item>
 		<item name="android:windowContentOverlay">@null</item>
 		<item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
 		<item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="android:windowTranslucentNavigation">true</item>
 	</style>
 	
-	<style name="RunTheme" parent="@style/Theme.AppCompat.NoActionBar">
-		<item name="windowNoTitle">true</item>
-		<item name="windowActionBar">false</item>
-		<item name="android:windowContentOverlay">@null</item>
-		<item name="android:windowFullscreen">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+    <style name="AlertTheme" parent="@style/AppTheme">
 	</style>
 	
-    <style name="AlertTheme" parent="@android:style/Theme.Material">
-	</style>
-	
-	<style name="MenuDialog" parent="@android:style/Theme.Material">
+	<style name="MenuDialog" parent="@style/AppTheme">
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
 		
