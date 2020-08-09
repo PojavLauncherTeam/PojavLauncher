@@ -56,4 +56,4 @@ deploy:
   overwrite: true
   target_commitish: $TRAVIS_COMMIT
   on:
-    branch: gl4es
+    branch: dalvikvm_gl4es
