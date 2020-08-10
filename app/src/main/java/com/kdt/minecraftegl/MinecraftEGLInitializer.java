@@ -21,6 +21,8 @@ public class MinecraftEGLInitializer
 {
 	public static void main(final String[] args) throws Throwable {
 		try {
+			Tools.datapath = System.getenv("POJAV_DATA_DIR");
+			
 			// long surfaceAddress = Long.parseLong(args[0]);
 			
 			// Disable for testing
@@ -40,7 +42,7 @@ public class MinecraftEGLInitializer
 					private volatile long eglContext = 0l;
 					@Override
 					public void onSurfaceDestroyed(GL10 gl) {
-						Log.d("PojavLauncher", "Surface destroyed.");
+						System.out.println("Surface destroyed.");
 					}
 
 					@Override
@@ -110,6 +112,7 @@ public class MinecraftEGLInitializer
 			gtv.setPreserveEGLContextOnPause(true);
 			gtv.setRenderMode(GLTextureView.RENDERMODE_CONTINUOUSLY);
 			gtv.setSize(AndroidDisplay.windowWidth, AndroidDisplay.windowHeight);
+			
 		} catch (Throwable th) {
 			System.err.println("UNEXCEPTED SHUTTING DOWN");
 			th.printStackTrace();

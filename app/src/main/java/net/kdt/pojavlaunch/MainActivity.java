@@ -1138,8 +1138,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		shell.initInputStream(this);
 			
 		shell.writeToProcess("base=/system");
+		shell.writeToProcess("export POJAV_DATA_DIR=" + Tools.datapath);
 		shell.writeToProcess("export CLASSPATH=" + getApplicationInfo().publicSourceDir); // ":" + launchClassPath + "\n");
 		shell.writeToProcess("export HOME=" + Tools.MAIN_PATH);
+		shell.writeToProcess("export MESA_GLSL_CACHE_DIR=$POJAV_DATA_DIR/cache");
 		String argStr = "";
 		for (String arg : launchArgs) {
 			argStr = argStr + " " + arg;
@@ -1561,11 +1563,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					// android.os.Process.killProcess(android.os.Process.myPid());
 
 					// Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();
-				}
-
-				private void fullyExit()
-				{
-					// TODO: Implement this method
 				}
 			})
 			.show();
