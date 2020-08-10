@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private View.OnTouchListener glTouchListener;
 
 	private Button[] controlButtons;
+	
+	private PrintStream logStream;
 
 	/*
 	 private LinearLayout contentCanvas;
@@ -125,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean lastGrab = false;
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
-	private int navBarHeight = 40;
 
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
@@ -140,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setContentView(R.layout.main);
 
 		try {
+			File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
+			logFile.delete();
+			logFile.createNewFile();
+			logStream = new PrintStream(logFile.getAbsolutePath());
+			
 			final View decorView = getWindow().getDecorView();
 			decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
 				@Override
@@ -1155,7 +1161,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
 			this.mVersionInfo.mainClass + " " + argStr
 		);
-		System.out.println(execAppProcessStr);
 		shell.writeToProcess(execAppProcessStr);
 		
 		final int waitFor = shell.waitFor();
@@ -1457,6 +1462,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	private void appendToLog(final String text, boolean checkAllow) {
+		logStream.print(text);
 		if (checkAllow && !isLogAllow) return;
 /*
 	private void appendToLog(final String text) {

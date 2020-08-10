@@ -25,10 +25,12 @@ public class MinecraftEGLInitializer
 			
 			// Disable for testing
 			ExitManager.disableSystemExit();
+			Thread.sleep(200);
+			// System.out.println(Arrays.toString(args));
 
-			long lSurfaceTexture = Long.getLong(args[0]);
-			long lProducer = Long.getLong(args[1]);
-			long lFrameAvailableListener = Long.getLong(args[2]);
+			long lSurfaceTexture = Long.parseLong(args[0]);
+			long lProducer = Long.parseLong(args[1]);
+			long lFrameAvailableListener = Long.parseLong(args[2]);
 
 			AndroidDisplay.windowWidth = Integer.parseInt(args[3]);
 			AndroidDisplay.windowHeight = Integer.parseInt(args[4]);

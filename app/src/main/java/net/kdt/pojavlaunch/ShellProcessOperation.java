@@ -24,6 +24,7 @@ public class ShellProcessOperation
 	}
 	
 	public void writeToProcess(String cmd) throws IOException {
+		listener.onPrintLine(" > " + cmd + "\n");
 		DataOutputStream os = new DataOutputStream(process.getOutputStream());
 		os.writeBytes(cmd + "\n");
 		os.flush();
