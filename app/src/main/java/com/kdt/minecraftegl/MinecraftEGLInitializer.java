@@ -20,6 +20,19 @@ import android.util.*;
 public class MinecraftEGLInitializer
 {
 	public static void main(final String[] args) throws Throwable {
+/*
+		new Thread(new Runnable(){
+			@Override
+			public void run() {
+				runOnThread(args);
+			}
+		}).start();
+*/
+
+		runOnThread(args);
+	}
+	
+	private static void runOnThread(final String[] args) {
 		try {
 			Tools.datapath = System.getenv("POJAV_DATA_DIR");
 			
@@ -39,7 +52,6 @@ public class MinecraftEGLInitializer
 			
 			GLTextureView gtv = new GLTextureView(lSurfaceTexture, lProducer, lFrameAvailableListener);
 			gtv.setRenderer(new GLTextureView.Renderer() {
-					private volatile long eglContext = 0l;
 					@Override
 					public void onSurfaceDestroyed(GL10 gl) {
 						System.out.println("Surface destroyed.");
@@ -58,6 +70,9 @@ public class MinecraftEGLInitializer
 						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
+						int eglGetError = egl10.eglGetError();
+						System.out.println("eglGetError: " + Integer.toString(eglGetError) + ", success: " + Boolean.toString(eglGetError == EGL10.EGL_SUCCESS));
+						
 						MainActivity.launchClassPath = args[5];
 						MainActivity.launchOptimizedDirectory = args[6];
 						MainActivity.launchLibrarySearchPath = args[7];
@@ -74,11 +89,6 @@ public class MinecraftEGLInitializer
 
 						try {
 							initEnvs();
-
-							boolean makeCurrBool = theEgl.eglMakeCurrent(display, read, draw, context);
-							System.out.println("Gave up context: " + context + ", makeCurrent: " + Boolean.toString(makeCurrBool));
-							int eglGetError = egl10.eglGetError();
-							System.out.println("eglGetError: " + Integer.toString(eglGetError) + ", success: " + Boolean.toString(eglGetError == EGL10.EGL_SUCCESS));
 							System.out.println("user.home: " + System.getProperty("user.home"));
 
 							// ActivityThread.currentActivityThread().getSystemContext().startActivity(new Intent().setComponent(new ComponentName("net.kdt.pojavlaunch", ".CustomControlsActivity")));
@@ -113,6 +123,10 @@ public class MinecraftEGLInitializer
 			gtv.setRenderMode(GLTextureView.RENDERMODE_CONTINUOUSLY);
 			gtv.setSize(AndroidDisplay.windowWidth, AndroidDisplay.windowHeight);
 			
+			// hmmmm
+			while (true) {
+				Thread.sleep(1000);
+			}
 		} catch (Throwable th) {
 			System.err.println("UNEXCEPTED SHUTTING DOWN");
 			th.printStackTrace();

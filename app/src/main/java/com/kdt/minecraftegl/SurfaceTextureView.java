@@ -10,6 +10,7 @@ public class SurfaceTextureView
 	private boolean isTextureAvailable = false;
 	public SurfaceTextureView(long lSurfaceTexture, long lProducer, long lFrameAvailableListener) {
 		mSurfaceTexture = new SurfaceTexture(false);
+		/*
 		try {
 			Tools.findField(mSurfaceTexture, "mSurfaceTexture").set(mSurfaceTexture, lSurfaceTexture);
 			Tools.findField(mSurfaceTexture, "mProducer").set(mSurfaceTexture, lProducer);
@@ -17,6 +18,7 @@ public class SurfaceTextureView
 		} catch (Throwable th) {
 			throw new RuntimeException(th);
 		}
+		*/
 	}
 	
 	public SurfaceTexture getSurfaceTexture() {
