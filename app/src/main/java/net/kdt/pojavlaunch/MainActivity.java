@@ -14,7 +14,6 @@ import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
 import com.android.internal.awt.*;
-import com.kdt.glsupport.*;
 import com.kdt.pointer.*;
 import dalvik.system.*;
 import java.io.*;
@@ -463,7 +462,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			glSurfaceView.setFocusable(true);
 			glSurfaceView.setFocusableInTouchMode(true);
-			glSurfaceView.setEGLContextClientVersion(2);
+			// glSurfaceView.setEGLContextClientVersion(2);
 
 			glTouchListener = new OnTouchListener(){
 				private boolean isTouchInHotbar = false;
@@ -655,6 +654,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					});
 			}
 
+			calculateMcScale();
+			
 			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
 					@Override
 					public boolean onHover(View p1, MotionEvent p2) {
@@ -665,6 +666,59 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				});
 			glSurfaceView.setOnTouchListener(glTouchListener);
+			glSurfaceView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
+
+				private boolean surfaceInited = false;
+					@Override
+					public void onSurfaceTextureAvailable(final SurfaceTexture texture, int width, int height)
+					{
+						AndroidDisplay.windowWidth = width;
+						AndroidDisplay.windowHeight = height;
+						if (!surfaceInited) {
+							new Thread(new Runnable(){
+
+									@Override
+									public void run() {
+										try {
+											Thread.sleep(200);
+											long mSurfaceTexture = (long) Tools.findField(texture, "mSurfaceTexture").get(texture);
+											long mProducer = (long) Tools.findField(texture, "mProducer").get(texture);
+											long mFrameAvailableListener = (long) Tools.findField(texture, "mFrameAvailableListener").get(texture);
+											runCraft(mSurfaceTexture, mProducer, mFrameAvailableListener);
+										} catch (Throwable e) {
+											Tools.showError(MainActivity.this, e, true);
+										}
+									}
+								}).start();
+							
+							surfaceInited = true;
+						}
+					}
+
+					@Override
+					public boolean onSurfaceTextureDestroyed(SurfaceTexture p1)
+					{
+						
+						return true;
+					}
+
+					@Override
+					public void onSurfaceTextureSizeChanged(SurfaceTexture p1, int width, int height)
+					{
+						AndroidDisplay.windowWidth = width;
+						AndroidDisplay.windowHeight = height;
+					}
+
+					@Override
+					public void onSurfaceTextureUpdated(SurfaceTexture p1)
+					{
+						
+					}
+				});
+			
+							
+			/*
+			
 			glSurfaceView.setRenderer(new GLTextureView.Renderer() {
 					private volatile long eglContext = 0l;
 					@Override
@@ -675,11 +729,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					@Override
 					public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig p2)
 					{
-						calculateMcScale();
+						
 
 						EGL10 egl10 = (EGL10) EGLContext.getEGL();
 						
-						/*
+						/ *
 						AndroidContextImplementation.theEgl = egl10;
 						AndroidContextImplementation.context = egl10.eglGetCurrentContext();
 						AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
@@ -691,7 +745,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 						AndroidDisplay.windowWidth += navBarHeight;
 
-						*/
+						* /
 						
 						EGLContextImpl eglContextImpl = (EGLContextImpl) egl10.eglGetCurrentContext();
 						try {
@@ -703,19 +757,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						}
 
 						
-						new Thread(new Runnable(){
-
-								@Override
-								public void run()
-								{
-									try {
-										Thread.sleep(200);
-										runCraft(eglContext);
-									} catch (Throwable e) {
-										Tools.showError(MainActivity.this, e, true);
-									}
-								}
-							}).start();
+						
 					}
 					@Override
 					public void onDrawFrame(GL10 gl) {
@@ -730,6 +772,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 			glSurfaceView.setPreserveEGLContextOnPause(true);
 			glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
+			*/
 			// glSurfaceView.requestRender();
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -787,7 +830,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onResume() {
 		super.onResume();
 		mIsResuming = true;
-		if (glSurfaceView != null) glSurfaceView.requestRender();
+		// if (glSurfaceView != null) glSurfaceView.requestRender();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
@@ -1023,7 +1066,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public static String launchClassPath;
 	public static String launchOptimizedDirectory;
 	public static String launchLibrarySearchPath;
-	private void runCraft(long eglContext) throws Throwable
+	private void runCraft(long lSurfaceTexture, long lProducer, long lFrameAvailableListener) throws Throwable
 
 	{
 		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
@@ -1101,9 +1144,16 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			"-Xmx512M " + // Max heap
 			"-Djava.library.path=/system/lib:" + getApplicationInfo().nativeLibraryDir + " " +
 			"$base/bin com.kdt.minecraftegl.MinecraftEGLInitializer " +
+			Long.toString(lSurfaceTexture) + " " +
+			Long.toString(lProducer) + " " +
+			Long.toString(lFrameAvailableListener) + " " +
+
+			Integer.toString(AndroidDisplay.windowWidth) + " " +
+			Integer.toString(AndroidDisplay.windowHeight) + " " +
 			
-			/* Long.toString(SurfaceUtils.getSurfaceAddress(((SurfaceView) glSurfaceView).getHolder().getSurface())) + "" + */ launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
-			this.mVersionInfo.mainClass + argStr
+			/* Long.toString(SurfaceUtils.getSurfaceAddress(((SurfaceView) glSurfaceView).getHolder().getSurface())) + "" + */
+			launchClassPath + " " + launchOptimizedDirectory + " " + launchLibrarySearchPath + " " +
+			this.mVersionInfo.mainClass + " " + argStr
 		);
 		System.out.println(execAppProcessStr);
 		shell.writeToProcess(execAppProcessStr);

@@ -34,7 +34,7 @@ public class SecondaryDexLoader
                     Log.w(TAG, "Exception in makeDexElement", e);
                 }
                 Field suppressedExceptionsField =
-                        findField(loader, "dexElementsSuppressedExceptions");
+                        Tools.findField(loader, "dexElementsSuppressedExceptions");
                 IOException[] dexElementsSuppressedExceptions =
                         (IOException[]) suppressedExceptionsField.get(loader);
                 if (dexElementsSuppressedExceptions == null) {
@@ -55,7 +55,7 @@ public class SecondaryDexLoader
 	}
 	
 	private static /* DexPathList */ Object getDexPathList(ClassLoader loader) throws Throwable {
-		Field pathListField = findField(loader, "pathList");
+		Field pathListField = Tools.findField(loader, "pathList");
 		return pathListField.get(loader);
 	}
 	
@@ -64,57 +64,10 @@ public class SecondaryDexLoader
 	 * {@code private static final dalvik.system.DexPathList#makeDexElements}.
 	 */
 	private static Object[] makeDexElements(Object dexPathList, ArrayList<File> files, File optimizedDirectory, ArrayList<IOException> suppressedExceptions) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		Method makeDexElements = findMethod(dexPathList, "makeDexElements", ArrayList.class, File.class, ArrayList.class);
+		Method makeDexElements = Tools.findMethod(dexPathList, "makeDexElements", ArrayList.class, File.class, ArrayList.class);
 		return (Object[]) makeDexElements.invoke(dexPathList, files, optimizedDirectory, suppressedExceptions);
     }
 		
-
-    /**
-     * Locates a given field anywhere in the class inheritance hierarchy.
-     *
-     * @param instance an object to search the field into.
-     * @param name field name
-     * @return a field object
-     * @throws NoSuchFieldException if the field cannot be located
-     */
-    private static Field findField(Object instance, String name) throws NoSuchFieldException {
-        for (Class<?> clazz = instance.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
-            try {
-                Field field = clazz.getDeclaredField(name);
-                if (!field.isAccessible()) {
-                    field.setAccessible(true);
-                }
-                return field;
-            } catch (NoSuchFieldException e) {
-                // ignore and search next
-            }
-        }
-        throw new NoSuchFieldException("Field " + name + " not found in " + instance.getClass());
-    }
-    /**
-     * Locates a given method anywhere in the class inheritance hierarchy.
-     *
-     * @param instance an object to search the method into.
-     * @param name method name
-     * @param parameterTypes method parameter types
-     * @return a method object
-     * @throws NoSuchMethodException if the method cannot be located
-     */
-    private static Method findMethod(Object instance, String name, Class<?>... parameterTypes) throws NoSuchMethodException {
-        for (Class<?> clazz = instance.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
-            try {
-                Method method = clazz.getDeclaredMethod(name, parameterTypes);
-                if (!method.isAccessible()) {
-                    method.setAccessible(true);
-                }
-                return method;
-            } catch (NoSuchMethodException e) {
-                // ignore and search next
-            }
-        }
-        throw new NoSuchMethodException("Method " + name + " with parameters " +
-										Arrays.asList(parameterTypes) + " not found in " + instance.getClass());
-    }
     /**
      * Replace the value of a field containing a non null array, by a new array containing the
      * elements of the original array plus the elements of extraElements.
@@ -124,7 +77,7 @@ public class SecondaryDexLoader
      */
 	private static Object[] originalDex;
     private static void expandFieldArray(Object instance, String fieldName, Object[] extraElements) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        Field jlrField = findField(instance, fieldName);
+        Field jlrField = Tools.findField(instance, fieldName);
         originalDex = (Object[]) jlrField.get(instance);
         Object[] combined = (Object[]) Array.newInstance(
 			originalDex.getClass().getComponentType(), originalDex.length + extraElements.length);
@@ -138,7 +91,7 @@ public class SecondaryDexLoader
 		
 		Object instance = getDexPathList(loader);
 		
-		Field jlrField = findField(instance, "dexElements");
+		Field jlrField = Tools.findField(instance, "dexElements");
 		jlrField.set(instance, originalDex);
 		
 		originalDex = null;

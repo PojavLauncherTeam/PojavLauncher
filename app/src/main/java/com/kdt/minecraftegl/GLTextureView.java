@@ -1,4 +1,4 @@
-package com.kdt.glsupport;
+package com.kdt.minecraftegl;
 
 // Search "DISABLED" to find disabled codes.
 
@@ -22,10 +22,13 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.View.*;
 
-public class GLTextureView
+public class GLTextureView extends SurfaceTextureView implements SurfaceTextureView.SurfaceTextureListener
+/*
         extends TextureView
         implements TextureView.SurfaceTextureListener,
-        View.OnLayoutChangeListener {
+        View.OnLayoutChangeListener
+*/
+{
 
     private final static String TAG = "GLTextureView";
 	private final static boolean LOG_ALL = true;
@@ -72,23 +75,32 @@ public class GLTextureView
      */
     public final static int DEBUG_LOG_GL_CALLS = 2;
 
+	public GLTextureView(long lSurfaceTexture, long lProducer, long lFrameAvailableListener) {
+        super(lSurfaceTexture, lProducer, lFrameAvailableListener);
+        init();
+    }
+	
     /**
      * Standard View constructor. In order to render something, you
      * must call {@link #setRenderer} to register a renderer.
      */
+/*
     public GLTextureView(Context context) {
         super(context);
         init();
     }
+*/
 
     /**
      * Standard View constructor. In order to render something, you
      * must call {@link #setRenderer} to register a renderer.
      */
+/*
     public GLTextureView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
+*/
 	
     @Override
     protected void finalize() throws Throwable {
@@ -457,6 +469,7 @@ public class GLTextureView
      * called or subclassed by clients of GLTextureView.
      * Must not be called before a renderer has been set.
      */
+
     @Override
     protected void onDetachedFromWindow() {
         if (LOG_ATTACH_DETACH) {
