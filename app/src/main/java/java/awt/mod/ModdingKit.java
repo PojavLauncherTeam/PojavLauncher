@@ -1,15 +1,27 @@
 package java.awt.mod;
 
 import android.app.*;
+import android.content.*;
 import android.graphics.*;
 import java.awt.image.*;
 import java.lang.reflect.*;
 import java.util.*;
+import net.kdt.pojavlaunch.*;
 
 public class ModdingKit
 {
-	public static Activity getCurrentActivity()
-	{
+	public static Context getSystemContext() {
+		try {
+			// ActivityThread.currentActivityThread().getSystemContext();
+			Class activityThreadClass = Class.forName("android.app.ActivityThread");
+			Object activityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null);
+			return (Context) activityThreadClass.getDeclaredMethod("getSystemContext").invoke(activityThread);
+		} catch (Throwable th) {
+			return null;
+		}
+	}
+	
+	public static Activity getCurrentActivity() {
 		try {
 			Class activityThreadClass = Class.forName("android.app.ActivityThread");
 			Object activityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null);

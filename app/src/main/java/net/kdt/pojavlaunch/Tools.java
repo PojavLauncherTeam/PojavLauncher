@@ -20,7 +20,6 @@ import net.kdt.pojavlaunch.patcher.*;
 import java.lang.reflect.*;
 import dalvik.system.*;
 import optifine.*;
-import android.text.*;
 import java.awt.*;
 import javax.xml.transform.*;
 import java.awt.datatransfer.*;
@@ -220,7 +219,11 @@ public final class Tools
 						{
 							StringSelection errData = new StringSelection(errMsg);
 							Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
-
+							
+							ClipboardManager cmgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+							ClipData clip = ClipData.newPlainText("Error", Log.getStackTraceString(e));
+							cmgr.setPrimaryClip(clip);
+							
 							if(exitIfOk) {
 								if (ctx instanceof MainActivity) {
 									MainActivity.fullyExit();

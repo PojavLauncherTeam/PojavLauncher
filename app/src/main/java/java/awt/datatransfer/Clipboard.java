@@ -8,31 +8,28 @@ import android.widget.Toast;
 
 import net.kdt.pojavlaunch.Tools;
 import java.awt.mod.*;
+import android.os.*;
 
 public class Clipboard extends Object
 {
-	private final Activity mActivity;
+	public static Context mSystemCtx;
+	public static ClipboardManager mClipboardAndroidMgr;
 	public Clipboard() {
-		mActivity = ModdingKit.getCurrentActivity();
+		// mActivity = ModdingKit.getCurrentActivity();
+		mSystemCtx = ModdingKit.getSystemContext();
+		mClipboardAndroidMgr = (ClipboardManager) mSystemCtx.getSystemService(Context.CLIPBOARD_SERVICE);
 	}
 	
     public synchronized void setContents(final Transferable contents, ClipboardOwner owner) {
-		try {
-			mActivity.runOnUiThread(new Runnable(){
-
+		new Handler().post(new Runnable(){
 				@Override
-				public void run()
-				{
-					ClipboardManager clipboard = (ClipboardManager) mActivity.getSystemService(Context.CLIPBOARD_SERVICE); 
-					ClipData clip = ClipData.newPlainText("Minecraft", ((StringSelection) contents).getString());
-					clipboard.setPrimaryClip(clip);
+				public void run() {
+					ClipData clip = ClipData.newPlainText("Clipboard", ((StringSelection) contents).getString());
+					mClipboardAndroidMgr.setPrimaryClip(clip);
 
-					Toast.makeText(mActivity, "Copied to clipboard!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(mSystemCtx, "Copied to clipboard!", Toast.LENGTH_SHORT).show();
 				}
 			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
     }
 
 	private Transferable clipboardText;
@@ -41,15 +38,12 @@ public class Clipboard extends Object
         try {
 			clipboardPasted = false;
 			
-			mActivity.runOnUiThread(new Runnable(){
-
+			new Handler().post(new Runnable(){
 					@Override
-					public void run()
-					{
-						ClipboardManager clipboard = (ClipboardManager) mActivity.getSystemService(Context.CLIPBOARD_SERVICE); 
-						clipboardText = new StringSelection(clipboard.getText().toString());
+					public void run() {
+						clipboardText = new StringSelection(mClipboardAndroidMgr.getText().toString());
 						clipboardPasted = true;
-						Toast.makeText(mActivity, "Paste from clipboard", Toast.LENGTH_SHORT).show();
+						Toast.makeText(mSystemCtx, "Paste from clipboard", Toast.LENGTH_SHORT).show();
 					}
 				});
 				
