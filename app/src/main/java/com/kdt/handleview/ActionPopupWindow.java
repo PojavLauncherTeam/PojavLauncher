@@ -32,15 +32,18 @@ import net.kdt.pojavlaunch.value.customcontrols.*;
 import android.support.v7.app.*;
 
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {
-	private static final int POPUP_TEXT_LAYOUT = getInternalId("layout", "text_edit_action_popup_text");
+	private final int POPUP_TEXT_LAYOUT;
 	private TextView mEditTextView;
 	private TextView mDeleteTextView;
 	
 	public ActionPopupWindow(HandleView handleView) {
 		super(handleView);
+		POPUP_TEXT_LAYOUT = Tools.getInternalResId(handleView.getContext(), "layout", "text_edit_action_popup_text");
 	}
-
+/*
 	private static int getInternalId(String type, String name) {
+		
+		
 		try {
 			for (Class perType : Class.forName("com.android.internal.R").getDeclaredClasses()) {
 				if (perType.getSimpleName().equals(type)) {
@@ -72,10 +75,10 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		
 		return -1;
 	}
-	
+*/
 	@Override
 	protected void createPopupWindow() {
-		mPopupWindow = new PopupWindow(mHandleView.getContext(), null, getInternalId("attr", "textSelectHandleWindowStyle"));
+		mPopupWindow = new PopupWindow(mHandleView.getContext(), null, Tools.getInternalResId(mHandleView.getContext(), "attr", "textSelectHandleWindowStyle"));
 		mPopupWindow.setClippingEnabled(true);
 	}
 
@@ -84,7 +87,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		LinearLayout linearLayout = new LinearLayout(mHandleView.getContext());
 		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 		mContentView = linearLayout;
-		mContentView.setBackgroundResource(getInternalId("drawable", "text_edit_paste_window"));
+		mContentView.setBackgroundResource(Tools.getInternalResId(mHandleView.getContext(), "drawable", "text_edit_paste_window"));
 
 		LayoutInflater inflater = (LayoutInflater) mHandleView.getContext().
 			getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -101,7 +104,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		mDeleteTextView = (TextView) inflater.inflate(POPUP_TEXT_LAYOUT, null);
 		mDeleteTextView.setLayoutParams(wrapContent);
 		mContentView.addView(mDeleteTextView);
-		mDeleteTextView.setText(getInternalId("string", "delete"));
+		mDeleteTextView.setText(Tools.getInternalResId(mHandleView.getContext(), "string", "delete"));
 		mDeleteTextView.setOnClickListener(this);
 	}
 
@@ -188,7 +191,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 			dialog.show();
 		} else if (view == mDeleteTextView) {
-			alert.setMessage(view.getResources().getString(getInternalId("string", "delete")) + " " + mHandleView.mView.getText() + "?");
+			alert.setMessage(view.getResources().getString(Tools.getInternalResId(mHandleView.getContext(), "string", "delete")) + " " + mHandleView.mView.getText() + "?");
 			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 					@Override

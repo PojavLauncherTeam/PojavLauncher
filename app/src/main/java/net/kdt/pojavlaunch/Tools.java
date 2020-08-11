@@ -163,29 +163,36 @@ public final class Tools
 			showError(ctx, e);
 		}
 	}
+	
+	public static int getInternalResId(Context ctx, String type, String name) {
+		Resources res = ctx.getResources();
+		int internalId = res.getIdentifier(name, type, "com.android.internal");
+		// = Resources.getSystem().getIdentifier();
+		
+		if (internalId == 0) {
+			internalId = res.getIdentifier(name, type, "android");
+		}
+		
+		return internalId;
+	}
 
-	public static void showError(Context ctx, Throwable e)
-	{
+	public static void showError(Context ctx, Throwable e) {
 		showError(ctx, e, false);
 	}
 
-	public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk)
-	{
+	public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk) {
 		showError(ctx, R.string.global_error, e, exitIfOk, false);
 	}
 
-	public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk)
-	{
+	public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
 		showError(ctx, titleId, e, exitIfOk, false);
 	}
 	
-	private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore)
-	{
+	private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore) {
 		Runnable runnable = new Runnable(){
 
 			@Override
-			public void run()
-			{
+			public void run() {
 				final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
 				new AlertDialog.Builder((Context) ctx)
 					.setTitle(titleId)
