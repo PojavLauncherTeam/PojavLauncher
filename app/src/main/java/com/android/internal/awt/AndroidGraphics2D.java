@@ -76,6 +76,7 @@ import android.graphics.PixelXorXfermode;
 import android.view.Display;
 import android.view.WindowManager;
 import android.content.Context;
+import org.lwjgl.opengl.*;
 
 public class AndroidGraphics2D extends Graphics2D {
     
@@ -120,7 +121,7 @@ public class AndroidGraphics2D extends Graphics2D {
     }
 
     public static AndroidGraphics2D getInstance(Context ctx, Canvas c, Paint p) {
-        if (c == null || ctx == null) {
+        if (c == null /* || ctx == null */) {
             throw new RuntimeException(
                     "Illegal argument, Canvas cannot be null!");
         }
@@ -143,7 +144,10 @@ public class AndroidGraphics2D extends Graphics2D {
             Display d = wm.getDefaultDisplay();
             displayWidth = d.getWidth();
             displayHeight = d.getHeight();
-        }
+        } else {
+			displayWidth = AndroidDisplay.windowWidth;
+			displayHeight = AndroidDisplay.windowHeight;
+		}
         blitter = new AndroidJavaBlitter(c);
         cm = new DirectColorModel(32, 0xff0000, 0xff00, 0xff, 0xff000000);
         sm = new SinglePixelPackedSampleModel(

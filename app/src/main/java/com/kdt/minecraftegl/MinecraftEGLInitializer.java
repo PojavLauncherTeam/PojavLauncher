@@ -1,21 +1,19 @@
 package com.kdt.minecraftegl;
 
-import android.app.*;
-import android.content.*;
+import android.graphics.*;
 import android.os.*;
 import android.system.*;
+import com.android.internal.awt.*;
 import dalvik.system.*;
 import java.lang.reflect.*;
 import java.util.*;
 import javax.microedition.khronos.egl.*;
+import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.exit.*;
+import org.lwjgl.opengl.*;
 
 import static org.lwjgl.opengl.AndroidContextImplementation.*;
-import android.content.pm.*;
-import org.lwjgl.opengl.*;
-import javax.microedition.khronos.opengles.*;
-import android.util.*;
 
 public class MinecraftEGLInitializer
 {
@@ -42,6 +40,8 @@ public class MinecraftEGLInitializer
 			ExitManager.disableSystemExit();
 			Thread.sleep(200);
 			// System.out.println(Arrays.toString(args));
+			
+			MainActivity.fixRSAPadding(null);
 
 			long lSurfaceTexture = Long.parseLong(args[0]);
 			long lProducer = Long.parseLong(args[1]);
@@ -49,6 +49,9 @@ public class MinecraftEGLInitializer
 
 			AndroidDisplay.windowWidth = Integer.parseInt(args[3]);
 			AndroidDisplay.windowHeight = Integer.parseInt(args[4]);
+			
+			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
+			AndroidGraphics2D.getInstance(null, new Canvas(awtGraphics), null);
 			
 			GLTextureView gtv = new GLTextureView(lSurfaceTexture, lProducer, lFrameAvailableListener);
 			gtv.setRenderer(new GLTextureView.Renderer() {
