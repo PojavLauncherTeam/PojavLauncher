@@ -55,4 +55,4 @@ deploy:
   overwrite: true
   target_commitish: $TRAVIS_COMMIT
   on:
-    branch: gl4es_lwjgl3A
+    branch: gl4es_lwjgl3
