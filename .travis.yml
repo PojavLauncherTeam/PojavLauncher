@@ -22,8 +22,8 @@ android:
     - 'google-gdk-license-.+'
 
 before_install:  
-#  - yes | sdkmanager "platforms;android-26"
-#  - yes | sdkmanager "build-tools;26.0.0"
+  - yes | sdkmanager "platforms;android-26"
+  - yes | sdkmanager "build-tools;26.0.0"
   - yes | sdkmanager "platforms;android-28"
   - yes | sdkmanager "build-tools;28.0.3"
 
