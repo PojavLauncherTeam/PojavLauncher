@@ -877,6 +877,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             if (!System.getProperty("user.home", "/").equals(Tools.MAIN_PATH)) {
                 forceUserHome(Tools.MAIN_PATH);
             }
+			
+			// Enable LWJGL3 debug
+			System.setProperty("org.lwjgl.util.Debug", "true");
+			System.setProperty("org.lwjgl.util.DebugLoader", "true");
+			
             System.setProperty("org.apache.logging.log4j.level", "INFO");
             System.setProperty("org.apache.logging.log4j.simplelog.level", "INFO");
 
