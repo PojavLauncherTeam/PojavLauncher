@@ -203,18 +203,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			setTitle("Minecraft " + mProfile.getVersion());
 
 			initEnvs();
-			
+/*
 			if (mVersionInfo.arguments != null) {
 				System.loadLibrary("gl04es");
 			}
+*/
 			
-			/*
-			if (mVersionInfo.arguments != null) {
-				System.loadLibrary("lwjgl32");
-				System.loadLibrary("lwjgl_opengl32");
-				System.loadLibrary("lwjgl_stb32");
-			}
-			*/
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 
 			AndroidDisplay.windowWidth = displayMetrics.widthPixels / scaleFactor;
