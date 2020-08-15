@@ -879,7 +879,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             }
 
 			// FIXME: Is loading libc.so good?
-			System.setProperty("org.lwjgl.jemalloc.libname", "libc.so");
+			System.setProperty("org.lwjgl.system.jemalloc.libname", "libc.so");
 			System.setProperty("org.lwjgl.opengl.libname", "libgl04es.so");
 			
 			// Enable LWJGL3 debug
