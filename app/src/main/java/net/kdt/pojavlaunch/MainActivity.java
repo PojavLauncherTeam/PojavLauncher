@@ -877,6 +877,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             if (!System.getProperty("user.home", "/").equals(Tools.MAIN_PATH)) {
                 forceUserHome(Tools.MAIN_PATH);
             }
+
+			// FIXME: Is loading libc.so good?
+			System.setProperty("org.lwjgl.jemalloc.libname", "libc.so");
+			System.setProperty("org.lwjgl.opengl.libname", "libgl04es.so");
 			
 			// Enable LWJGL3 debug
 			System.setProperty("org.lwjgl.util.Debug", "true");
