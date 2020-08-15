@@ -44,9 +44,24 @@ public class PojavLoginActivity extends AppCompatActivity
 	
 	private boolean isInitCalled = false;
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState); // false);
+		
+			final View decorView = getWindow().getDecorView();
+			decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+				@Override
+				public void onSystemUiVisibilityChange(int visibility) {
+					if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+						decorView.setSystemUiVisibility(
+							View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+					}
+				}
+			});
+			
 		if (!isInitCalled) {
 			init();
 			isInitCalled = true;
@@ -265,6 +280,9 @@ public class PojavLoginActivity extends AppCompatActivity
 	@Override
 	public void onResume() {
 		super.onResume();
+        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
 		
 		if (loginLayout != null && imageLogo != null) {
 			imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
