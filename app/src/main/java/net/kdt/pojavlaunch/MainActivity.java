@@ -846,7 +846,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		ExitManager.stopExitLoop();
 	}
 
-    public void forceUserHome(String s) throws Exception {
+    public void forceSetProperty(String key, String value) throws Exception {
         Properties props = System.getProperties();
         Class clazz = props.getClass();
         Field f = null;
@@ -860,7 +860,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         }
         if (f != null) {
             f.setAccessible(true);
-            ((Properties) f.get(props)).put("user.home", s);
+            ((Properties) f.get(props)).put(key, value);
         }
     }
 
@@ -869,15 +869,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             Os.setenv("LIBGL_MIPMAP", "3", true);
             System.setProperty("user.home", Tools.MAIN_PATH);
             if (!System.getProperty("user.home", "/").equals(Tools.MAIN_PATH)) {
-                forceUserHome(Tools.MAIN_PATH);
+                forceSetProperty("user.home", Tools.MAIN_PATH);
             }
 
-			// FIXME: Is loading libc.so good?
-			System.setProperty("org.lwjgl.system.jemalloc.libname", "libc.so");
+			forceSetProperty("java.library.path", System.getProperty("java.library.path") + ":" + getApplicationInfo().nativeLibraryDir);
+			
+			System.setProperty("org.lwjgl.system.jemalloc.libname", "libjemalloc.so");
 			System.setProperty("org.lwjgl.opengl.libname", "libgl04es.so");
 			
 			// Enable LWJGL3 debug
 			System.setProperty("org.lwjgl.util.Debug", "true");
+			System.setProperty("org.lwjgl.util.DebugFunctions", "true");
 			System.setProperty("org.lwjgl.util.DebugLoader", "true");
 			
             System.setProperty("org.apache.logging.log4j.level", "INFO");
