@@ -577,7 +577,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					if (debugText.getVisibility() == View.VISIBLE) {
 						StringBuilder builder = new StringBuilder();
 						builder.append("PointerCapture debug\n");
-						builder.append("MotionEvent=" + e.getActionMasked() + "\n\n");
+						builder.append("MotionEvent=" + e.getActionMasked() + "\n");
+						builder.append("PressingBtn=" + MotionEvent.buttonStateToString(e.getButtonState()) + "\n\n");
 
 						builder.append("PointerX=" + e.getX() + "\n");
 						builder.append("PointerY=" + e.getY() + "\n");
@@ -605,16 +606,19 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					switch (e.getActionMasked()) {
 						case MotionEvent.ACTION_DOWN: // 0
 						case MotionEvent.ACTION_POINTER_DOWN: // 5
-							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+							AndroidDisplay.putMouseEventWithCoords(!AndroidDisplay.mouseLeft /* rightOverride */ ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
 							initialX = x;
 							initialY = y;
-							theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+						
+							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, false);
+							
+							// theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 							break;
 
 						case MotionEvent.ACTION_UP: // 1
 						case MotionEvent.ACTION_CANCEL: // 3
 						case MotionEvent.ACTION_POINTER_UP: // 6
-							AndroidDisplay.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+							AndroidDisplay.putMouseEventWithCoords(!AndroidDisplay.mouseLeft /* rightOverride */ ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 							/*
 							 if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
 							 sendMouseButton(1, true);
@@ -626,10 +630,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							 */
 
 							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, true);
-							sendMouseButton(AndroidDisplay.mouseLeft ? 0 : 1, false);
 
 							// triggeredLeftMouseButton = false;
-							theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+							// theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
 							break;
 					}
 
