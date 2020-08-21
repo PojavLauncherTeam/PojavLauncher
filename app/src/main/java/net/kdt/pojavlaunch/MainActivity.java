@@ -574,10 +574,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				{
 					x += ((int) e.getX()) / scaleFactor;
 					y -= ((int) e.getY()) / scaleFactor;
-
-					StringBuilder builder = new StringBuilder();
 					
 					if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
+						StringBuilder builder = new StringBuilder();
 						try {
 							builder.append("PointerCapture debug\n");
 							builder.append("MotionEvent=" + e.getActionMasked() + "\n");
