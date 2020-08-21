@@ -557,6 +557,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			pointerCaptureListener = new OnTouchListener(){
 				private int x, y;
+				private boolean debugErrored = false;
 
 				private String getMoving(float pos, boolean xOrY) {
 					if (pos == 0) {
@@ -574,23 +575,30 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					x += ((int) e.getX()) / scaleFactor;
 					y -= ((int) e.getY()) / scaleFactor;
 
-					if (debugText.getVisibility() == View.VISIBLE) {
-						StringBuilder builder = new StringBuilder();
-						builder.append("PointerCapture debug\n");
-						builder.append("MotionEvent=" + e.getActionMasked() + "\n");
-						builder.append("PressingBtn=" + MotionEvent.buttonStateToString(e.getButtonState()) + "\n\n");
+					StringBuilder builder = new StringBuilder();
+					
+					if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
+						try {
+							builder.append("PointerCapture debug\n");
+							builder.append("MotionEvent=" + e.getActionMasked() + "\n");
+							builder.append("PressingBtn=" + MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState()) + "\n\n");
 
-						builder.append("PointerX=" + e.getX() + "\n");
-						builder.append("PointerY=" + e.getY() + "\n");
-						builder.append("RawX=" + e.getRawX() + "\n");
-						builder.append("RawY=" + e.getRawY() + "\n\n");
+							builder.append("PointerX=" + e.getX() + "\n");
+							builder.append("PointerY=" + e.getY() + "\n");
+							builder.append("RawX=" + e.getRawX() + "\n");
+							builder.append("RawY=" + e.getRawY() + "\n\n");
 
-						builder.append("XPos=" + x + "\n");
-						builder.append("YPos=" + y + "\n\n");
-						builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
-						builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
-
-						debugText.setText(builder.toString());
+							builder.append("XPos=" + x + "\n");
+							builder.append("YPos=" + y + "\n\n");
+							builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
+							builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
+						} catch (Throwable th) {
+							debugErrored = true;
+							builder.append("Error getting debug. The debug will be stopped!\n" + Log.getStackTraceString(th));
+						} finally {
+							debugText.setText(builder.toString());
+							builder.setLength(0);
+						}
 					}
 
 					AndroidDisplay.mouseX = x;
