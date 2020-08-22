@@ -27,7 +27,7 @@ public final class Tools
 	public static boolean enableDevFeatures = BuildConfig.DEBUG;
 	
 	public static String APP_NAME = "null";
-	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/minecraft";
+	public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
 	public static String ASSETS_PATH = MAIN_PATH + "/assets";
 	public static String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
 	public static String CTRLDEF_FILE = MAIN_PATH + "/controlmap/default.json";
@@ -489,11 +489,9 @@ public final class Tools
 		return buffer;
 	}
 	
-	public static void downloadFile(String urlInput, String nameOutput, boolean requireNonExist) throws Throwable
-	{
+	public static void downloadFile(String urlInput, String nameOutput, boolean requireNonExist) throws Throwable {
 		File fileDDD = new File(nameOutput);
-		if(requireNonExist && !fileDDD.exists())
-		{
+		if(requireNonExist && !fileDDD.exists()) {
 			DownloadUtils.downloadFile(urlInput, fileDDD);
 		}
 	}

@@ -518,13 +518,14 @@ public class MCLauncherActivity extends AppCompatActivity
 					DependentLibrary[] libList = verInfo.libraries;
 					setMax(libList.length * 2 + 5);
 
+					File outLib;
 					String libPathURL;
 		
 					for (final DependentLibrary libItem: libList) {
 
 						if (// libItem.name.startsWith("com.google.code.gson:gson") ||
 							// libItem.name.startsWith("com.mojang:realms") ||
-							// libItem.name.startsWith("net.java.jinput") ||
+							libItem.name.startsWith("net.java.jinput") ||
 							// libItem.name.startsWith("net.minecraft.launchwrapper") ||
 							libItem.name.startsWith("optifine:launchwrapper-of") ||
 							// libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
@@ -534,37 +535,48 @@ public class MCLauncherActivity extends AppCompatActivity
 							publishProgress("1", "Ignored " + libItem.name);
 							//Thread.sleep(100);
 						} else {
+
 							String[] libInfo = libItem.name.split(":");
 							String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
-							boolean skipIfFailed = false;
+							outLib = new File(Tools.libraries + "/" + libArtifact);
+							outLib.getParentFile().mkdirs();
 
-							if (libItem.downloads == null) {
-								MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
-								artifact.url = "https://libraries.minecraft.net/" + libArtifact;
-								libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
+							if (!outLib.exists()) {
+								publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
 
-								skipIfFailed = true;
-							}
-							try {
-								libPathURL = libItem.downloads.artifact.url;
-							} catch (Throwable th) {
-								if (!skipIfFailed) {
-									throw th;
-								} else {
-									th.printStackTrace();
+								boolean skipIfFailed = false;
+
+								if (libItem.downloads == null || libItem.downloads.artifact == null) {
+									MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
+									artifact.url = "https://libraries.minecraft.net/" + libArtifact;
+									libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
+
+									skipIfFailed = true;
+								}
+								try {
+									libPathURL = libItem.downloads.artifact.url;
+									Tools.downloadFile(
+										libPathURL,
+										outLib.getAbsolutePath(),
+										true
+									);
+								} catch (Throwable th) {
+									if (!skipIfFailed) {
+										throw th;
+									} else {
+										th.printStackTrace();
+									}
 								}
 							}
 						}
 					}
 
 					publishProgress("5", getStr(R.string.mcl_launch_download_client, p1[0]));
-					if (!new File(inputPath).exists()) {
-						Tools.downloadFile(
-							verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
-							inputPath,
-							true
-						);
-					}
+					Tools.downloadFile(
+						verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
+						inputPath,
+						true
+					);
 				} catch (Throwable e) {
 					launchWithError = true;
 					throw e;
