@@ -25,7 +25,6 @@ import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
-import org.apache.harmony.security.fortress.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 

@@ -20,7 +20,6 @@ import net.kdt.pojavlaunch.patcher.*;
 import java.lang.reflect.*;
 import dalvik.system.*;
 import android.text.*;
-import java.awt.*;
 import javax.xml.transform.*;
 
 public final class Tools
