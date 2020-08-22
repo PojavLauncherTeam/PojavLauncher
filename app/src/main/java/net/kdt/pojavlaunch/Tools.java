@@ -39,7 +39,7 @@ public final class Tools
 	public static String worksDir = datapath + "/app_working_dir";
 	
 	// New since 3.0.0
-	public static String homeJreDir = worksDir + "/jreruntime";
+	public static String homeJreDir = datapath + "/jre_runtime";
 	
 	// New since 2.4.2
 	public static String versnDir = MAIN_PATH + "/versions";

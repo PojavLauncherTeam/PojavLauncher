@@ -885,6 +885,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public void initEnvs() {
         try {
             Os.setenv("LIBGL_MIPMAP", "3", true);
+			Os.setenv("LD_LIBRARY_PATH",
+				System.getenv("LD_LIBRARY_PATH") + ":" +
+				Tools.homeJreDir + "/lib/" + ":" +
+				Tools.homeJreDir + "/lib/jli" + ":" +
+				Tools.homeJreDir + "/lib/server"
+				
+				,true
+			);
+			
             System.setProperty("user.home", Tools.MAIN_PATH);
             if (!System.getProperty("user.home", "/").equals(Tools.MAIN_PATH)) {
                 forceUserHome(Tools.MAIN_PATH);
@@ -1022,6 +1031,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		List<String> javaArgList = new ArrayList<String>();
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
+		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
