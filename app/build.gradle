@@ -13,7 +13,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "2.5.3_6400b_20200802"
+        versionName "3.2.0_6401b_20200822"
         multiDexEnabled true //important
     }
 	
