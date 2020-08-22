@@ -13,7 +13,6 @@ import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
-import com.android.internal.awt.*;
 import com.kdt.glsupport.*;
 import com.kdt.pointer.*;
 import dalvik.system.*;
@@ -26,11 +25,9 @@ import javax.microedition.khronos.opengles.*;
 import net.kdt.pojavlaunch.exit.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
-import optifine.*;
 import org.apache.harmony.security.fortress.*;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
-import sun.security.jca.*;
 
 import android.app.AlertDialog;
 
@@ -201,10 +198,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			} catch (Throwable th) {
 				Log.w(Tools.APP_NAME, "Could not disable System.exit() method!", th);
 			}
-			
-			File optDir = getDir("dalvik-cache", 0);
-			optDir.mkdirs();
-			launchOptimizedDirectory = optDir.getAbsolutePath();
 
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
@@ -450,9 +443,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 
 			// System.loadLibrary("Regal");
-
-			Bitmap awtGraphics = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
-			AndroidGraphics2D.getInstance(this, new Canvas(awtGraphics), null);
 
 			glSurfaceView.setFocusable(true);
 			glSurfaceView.setFocusableInTouchMode(true);
@@ -1009,262 +999,60 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 	
 	public static String launchClassPath;
-	public static String launchOptimizedDirectory;
 	public static String launchLibrarySearchPath;
-	private void runCraft() throws Throwable //oncreate
+	private void runCraft() throws Throwable
 	{
-		LoggerJava.OnStringPrintListener printLog = new LoggerJava.OnStringPrintListener(){
-			@Override
-			public void onCharPrint(char c) {
-				appendToLog(Character.toString(c));
-			}
-		};
-
-		PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
-		PrintStream theStreamOut = new PrintStream(new LoggerJava.LoggerOutputStream(System.out, printLog));
-		System.setErr(theStreamErr);
-		System.setOut(theStreamOut);
-		
 		String[] launchArgs = getMCArgs();
 
 		// Setup OptiFine
-		if (mVersionInfo.optifineLib != null) {
-			String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
-			String optifineJar = Tools.libraries + "/" + Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
+		/*
+		 if (mVersionInfo.optifineLib != null) {
+		 String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
+		 String optifineJar = Tools.libraries + "/" + Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
 
-			AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
-		}
+		 // AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
+		 }
+		 */
 
 		launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
 
-		if (mVersionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
-			net.minecraft.launchwrapper.Launch.main(launchArgs);
-		} else {
-/*
-			PrintStream theStreamErr = new PrintStream(new LoggerJava.LoggerOutputStream(System.err, printLog));
-			System.setErr(theStreamErr);
-*/
-			fixRSAPadding(this);
+		System.out.println("> Running Minecraft with classpath:");
+		System.out.println(launchClassPath);
+		System.out.println();
 
-			appendlnToLog("Running Minecraft with classpath: \n" + launchClassPath + "\n", false);
-			
-			// Load classpath
-			DexClassLoader launchBaseLoader = new DexClassLoader(launchClassPath, launchOptimizedDirectory, launchLibrarySearchPath, getClassLoader());
-
-			// Launch Minecraft
-			Class mainClass = launchBaseLoader.loadClass(mVersionInfo.mainClass);
-			Method mainMethod = mainClass.getMethod("main", String[].class);
-			mainMethod.setAccessible(true);
-			mainMethod.invoke(null, new Object[]{launchArgs});
-		}
-	}
-
-
-
-	public static void fixRSAPadding(final Activity act) {
-		// welcome to the territory of YOLO; I'll be your tour guide for today.
-
-		final boolean isLegacyPatch = Build.VERSION.SDK_INT < 24;
+		List<String> javaArgList = new ArrayList<String>();
+		javaArgList.add(Tools.homeJreDir + "/bin/java");
 		
+		// javaArgList.add("-Xms512m");
+		javaArgList.add("-Xmx512m");
+		
+		javaArgList.add("-Duser.home=" + Tools.MAIN_PATH);
+		
+		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
+		javaArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+			
+		// Enable LWJGL3 debug
+		javaArgList.add("-Dorg.lwjgl.util.Debug=true");
+		javaArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
+		javaArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
+			
+		javaArgList.add("-cp");
+		javaArgList.add(launchClassPath);
+		javaArgList.add(mVersionInfo.mainClass);
+		javaArgList.addAll(Arrays.asList(launchArgs));
+
 		try {
-			if (!isLegacyPatch) {
-			/*
-				System.out.println("RSAPadding BEFORE");
-				debug_printServiceInfo(System.out, "Cipher.RSA");
-			*/
-			
-				Map<Provider, Provider.Service> rsaMap, rsaPkcs1Map;
-				rsaMap = getCipherServicesMap("Cipher", "RSA");
-				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
-
-				for (Map.Entry<Provider, Provider.Service> set : rsaMap.entrySet()) {
-					System.out.println(set.getKey().getName() + ": ");
-					for (Map.Entry en : set.getKey().entrySet()) {
-						if (en.getKey().toString().contains("Cipher.RSA"))
-							System.out.println(en.getKey().toString() + " = " + en.getValue().toString());
-					}
-
-					set.getKey().remove("Cipher.RSA SupportedKeyFormats");
-
-					int spend = 0;
-					for (Map.Entry<Provider, Provider.Service> s : rsaPkcs1Map.entrySet()) {
-						if (spend == 0) {
-							set.getKey().put("Cipher.RSA", s.getValue().getClassName());
-							set.getKey().put("Cipher.RSA SupportedKeyClasses", s.getKey().get("Cipher.RSA/ECB/PKCS1Padding SupportedKeyClasses"));
-
-							List<String> rsaAliasList = Modifiable.getServiceAliases(set.getValue());
-							rsaAliasList.clear();
-							rsaAliasList.addAll(Modifiable.getServiceAliases(s.getValue()));
-							
-							spend++;
-						}
-					}
-
-					// printList(set.getKey().getServices());
-				
-				/*
-					System.out.println("RSAPadding AFTER");
-					debug_printServiceInfo(System.out, "Cipher.RSA");
-				*/
-				}
-			} else {
-				Collection<Provider.Service> rsaList, rsaPkcs1List;
-				rsaList = getCipherServices("Cipher", "RSA");
-				rsaPkcs1List = getCipherServices("Cipher", "RSA/ECB/PKCS1PADDING");
-				
-				rsaList.clear();
-				rsaList.addAll(rsaPkcs1List);
-			}
+			BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
 		} catch (Throwable th) {
-			th.printStackTrace();
-			
-			final File rsaFixFile = new File(Tools.MAIN_PATH, "rsapadding_error.txt");
-
-			try {
-				// Debug information
-				PrintStream rsaFixStream = new PrintStream(rsaFixFile);
-				rsaFixStream.println("--- RSA PADDING ERROR ---");
-				rsaFixStream.println("• Error stack trace");
-				th.printStackTrace(rsaFixStream);
-				rsaFixStream.println();
-				rsaFixStream.println("• RSAPadding info");
-				rsaFixStream.println(" - Patch method: " + (isLegacyPatch ? "Apache Harmony" : "OpenJDK sun.security.jca"));
-				if (!isLegacyPatch) {
-					rsaFixStream.println(" - sun.security.jca.ProviderList:");
-					debug_printMethodInfo(rsaFixStream, ProviderList.class.getDeclaredMethods());
-				}
-				rsaFixStream.println("• System info");
-				rsaFixStream.println(" - Android version " + Build.VERSION.RELEASE + " (API " + Integer.toString(Build.VERSION.SDK_INT) + ")");
-				rsaFixStream.close();
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			
-
-			final String errMsg = "Unable to fix RSAPadding. Premium features is limited!" +
-				(Build.VERSION.SDK_INT == 23 ? 
-				"Android 6 currently don't have solution" :
-				"Send the file at " + rsaFixFile.getAbsolutePath() + " to the developer");
-			
-			if (act != null) {
-				act.runOnUiThread(new Runnable(){
-					@Override
-					public void run() {
-						Toast.makeText(act, errMsg, Toast.LENGTH_LONG).show();
-					}
-				});
-			} else {
-				System.err.println("RSAPadding error: " + errMsg);
-			}
+			Tools.showError(this, th, true);
 		}
-		
 		/*
-		 Provider provider = KeyFactory.getInstance("RSA").getProvider();
-		 System.out.println("Before: " + provider.getService("KeyService", "RSA"));
-		 Provider.Service service = provider.getService("KeyService", "RSA/ECB/PKCS5Padding");
-		 System.out.println(service);
-		 provider.putService(service);
-		 System.out.println("After: " + provider.getService("KeyService", "RSA"));
+		 "-Dorg.apache.logging.log4j.level=INFO",
+		 "-Dorg.apache.logging.log4j.simplelog.level=INFO",
 		 */
 	}
 	
-	private static void debug_printServiceInfo(PrintStream stream, String key) {
-		String[] keyArr = key.split(".");
-		for (Provider p : getCipherServicesMap(keyArr[0], keyArr[1]).keySet()) {
-			stream.println("- " + p.getName() + ": " + p.getInfo());
-			for (Provider.Service s : p.getServices()) {
-				if (s.getAlgorithm().contains(key)) {
-					stream.println(s.toString());
-				}
-			}
-		}
-	}
-	
-	private static void debug_printMethodInfo(PrintStream stream, Method[] methods) {
-		StringBuilder methodInfo = new StringBuilder();
-		for (Method method : methods) {
-			methodInfo.setLength(0);
-			if (Modifier.isPublic(method.getModifiers())) {
-				methodInfo.append("public ");
-			} else if (Modifier.isPrivate(method.getModifiers())) {
-				methodInfo.append("private ");
-			} else if (Modifier.isProtected(method.getModifiers())) {
-				methodInfo.append("protected ");
-			}
-
-			if (Modifier.isSynchronized(method.getModifiers())) {
-				methodInfo.append("synchronized ");
-			}
-			
-			if (Modifier.isStatic(method.getModifiers())) {
-				methodInfo.append("static ");
-			}
-			
-			if (Modifier.isAbstract(method.getModifiers())) {
-				methodInfo.append("abstract ");
-			}
-			
-			if (Modifier.isFinal(method.getModifiers())) {
-				methodInfo.append("final ");
-			}
-			
-			methodInfo.append(method.getName() + "(");
-			int paramLength = method.getParameterTypes().length;
-			for (int i = 0; i < paramLength; i++) {
-				Class params = method.getParameterTypes()[i];
-				
-				methodInfo.append(params.getName());
-				if (i + 1 < paramLength) {
-					methodInfo.append(", ");
-				}
-			}
-			methodInfo.append(")");
-			
-			stream.println(methodInfo);
-		}
-	}
-	
-	// From org.apache.harmony.security.fortress.Services:getServices(String type, String algorithm)
-	private static synchronized Collection<Provider.Service> getCipherServices(String type, String algorithm) {
-		if (Build.VERSION.SDK_INT < 23) {
-			// 5.1 (Lollipop) and below
-			return Services.getServices(type + "." + algorithm);
-		} else if (Build.VERSION.SDK_INT == 23) {
-			// 6.0 (Marshmallow) only
-			return Services.getServices(type, algorithm);
-		} else {
-			return getCipherServicesMap(type, algorithm).values();
-		}
-	}
-
-	private static synchronized Map<Provider, Provider.Service> getCipherServicesMap(String type, String algorithm) {
-		// 7.0 (Nougat) and above
-		ProviderList providerList = Providers.getProviderList();
-		Map<Provider, Provider.Service> services = null;
-		
-		// Android 10
-		if (Build.VERSION.SDK_INT >= 29) {
-			services = new ArrayMap<>();
-			Provider.Service service = providerList.getService(type, algorithm);
-			services.put(service.getProvider(), service);
-		} else {
-			List<Provider> providers = providerList.providers();
-			for (Provider p : providers) {
-				Provider.Service s = p.getService(type, algorithm);
-				if (s != null) {
-					if (services == null) {
-						services = new ArrayMap<>(providers.size());
-					}
-					services.put(p, s);
-				}
-			}
-		}
-		return services;
-    }
-	
-
 	public void printStream(InputStream stream) {
 		try {
 			BufferedReader buffStream = new BufferedReader(new InputStreamReader(stream));

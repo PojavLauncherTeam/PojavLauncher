@@ -6,7 +6,6 @@ import android.os.*;
 import android.support.v7.app.*;
 import android.util.*;
 import java.awt.*;
-import java.awt.datatransfer.*;
 
 import android.support.v7.app.AlertDialog;
 
@@ -58,8 +57,8 @@ public class FatalErrorActivity extends AppCompatActivity
 
 				@Override
 				public void onClick(DialogInterface p1, int p2) {
-					StringSelection errData = new StringSelection(strStackTrace);
-					Toolkit.getDefaultToolkit().getSystemClipboard().setContents(errData, null);
+					ClipboardManager mgr = (ClipboardManager) FatalErrorActivity.this.getSystemService(CLIPBOARD_SERVICE);
+					mgr.setPrimaryClip(ClipData.newPlainText("error", strStackTrace));
 
 					finish();
 				}

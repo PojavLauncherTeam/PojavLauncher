@@ -269,8 +269,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		sOffline.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 				@Override
-				public void onCheckedChanged(CompoundButton p1, boolean p2)
-				{
+				public void onCheckedChanged(CompoundButton p1, boolean p2) {
 					// May delete later
 					edit3.setEnabled(!p2);
 				}
