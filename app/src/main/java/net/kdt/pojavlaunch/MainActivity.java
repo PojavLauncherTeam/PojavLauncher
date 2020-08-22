@@ -884,32 +884,21 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     public void initEnvs() {
         try {
-            Os.setenv("LIBGL_MIPMAP", "3", true);
+            // Os.setenv("LIBGL_MIPMAP", "3", true);
+			
+			System.out.println("ldlib before = " + System.getenv("LD_LIBRARY_PATH"));
+
+			Os.setenv("JAVA_HOME", Tools.homeJreDir, true);
+			Os.setenv("LIBGL_MIPMAP", "3", true);
 			Os.setenv("LD_LIBRARY_PATH",
 				System.getenv("LD_LIBRARY_PATH") + ":" +
 				Tools.homeJreDir + "/lib/" + ":" +
 				Tools.homeJreDir + "/lib/jli" + ":" +
 				Tools.homeJreDir + "/lib/server"
-				
-				,true
-			);
+			, true);
 			
-            System.setProperty("user.home", Tools.MAIN_PATH);
-            if (!System.getProperty("user.home", "/").equals(Tools.MAIN_PATH)) {
-                forceUserHome(Tools.MAIN_PATH);
-            }
-            System.setProperty("org.apache.logging.log4j.level", "INFO");
-            System.setProperty("org.apache.logging.log4j.simplelog.level", "INFO");
-
-			// Disable javax management for smaller launcher.
-			System.setProperty("log4j2.disable.jmx", "true");
-
-            //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.level", "INFO");
-            //System.setProperty("net.zhuoweizhang.boardwalk.org.apache.logging.log4j.simplelog.level", "INFO");
-
-			// Change info for useful dump
-			System.setProperty("java.vm.info", Build.MANUFACTURER + " " + Build.MODEL + ", Android " + Build.VERSION.RELEASE);
-        } catch (Exception e) {
+			System.out.println("ldlib after = " + System.getenv("LD_LIBRARY_PATH"));
+		} catch (Exception e) {
             Tools.showError(MainActivity.this, e, true);
         }
     }
@@ -1006,6 +995,16 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		return args;
 	}
 	
+	private static void redirectStdio() throws ErrnoException {
+		File logFile = new File(Tools.MAIN_PATH, "v3log.txt");
+
+		FileDescriptor fd = Os.open(logFile.getAbsolutePath(),
+									OsConstants.O_WRONLY | OsConstants.O_CREAT | OsConstants.O_TRUNC,
+									0666);
+		Os.dup2(fd, OsConstants.STDERR_FILENO);
+		Os.dup2(fd, OsConstants.STDOUT_FILENO);
+	}
+	
 	public static String launchClassPath;
 	public static String launchLibrarySearchPath;
 	private void runCraft() throws Throwable
@@ -1028,11 +1027,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		System.out.println("> Running Minecraft with classpath:");
 		System.out.println(launchClassPath);
 		System.out.println();
+		
+		redirectStdio();
 
 		List<String> javaArgList = new ArrayList<String>();
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
-		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
-		
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
 		
