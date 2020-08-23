@@ -890,12 +890,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			Os.setenv("JAVA_HOME", Tools.homeJreDir, true);
 			Os.setenv("LIBGL_MIPMAP", "3", true);
-			Os.setenv("LD_LIBRARY_PATH",
-				System.getenv("LD_LIBRARY_PATH") + ":" +
-				Tools.homeJreDir + "/lib/" + ":" +
-				Tools.homeJreDir + "/lib/jli" + ":" +
-				Tools.homeJreDir + "/lib/server"
-			, true);
 			
 			System.out.println("ldlib after = " + System.getenv("LD_LIBRARY_PATH"));
 		} catch (Exception e) {
@@ -1029,7 +1023,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		System.out.println();
 		
 		redirectStdio();
-
+		
 		List<String> javaArgList = new ArrayList<String>();
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 		// javaArgList.add("-Xms512m");
@@ -1051,7 +1045,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.addAll(Arrays.asList(launchArgs));
 
 		try {
-			BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
+			String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
+			BinaryExecutor.executeBinary(
+				"/system/" + libPath + ":" +
+				"/vendor/" + libPath + ":" +
+				"/vendor/" + libPath + "/hw:" +
+				getApplicationInfo().nativeLibraryDir + ":" +
+				Tools.homeJreDir + "/lib:" +
+				Tools.homeJreDir + "/lib/jli:" +
+				Tools.homeJreDir + "/lib/server",
+				
+				javaArgList.toArray(new String[0])
+			);
 		} catch (Throwable th) {
 			Tools.showError(this, th, true);
 		}
