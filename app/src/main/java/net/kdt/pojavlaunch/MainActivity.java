@@ -683,8 +683,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						new Thread(new Runnable(){
 
 								@Override
-								public void run()
-								{
+								public void run() {
 									try {
 										Thread.sleep(200);
 										runCraft();
@@ -974,37 +973,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 		return args;
 	}
-	
-	private static void redirectStdio() throws ErrnoException {
-		File logFile = new File(Tools.MAIN_PATH, "v3log.txt");
 
-		FileDescriptor fd = Os.open(logFile.getAbsolutePath(),
-									OsConstants.O_WRONLY | OsConstants.O_CREAT | OsConstants.O_TRUNC,
-									0666);
-		Os.dup2(fd, OsConstants.STDERR_FILENO);
-		Os.dup2(fd, OsConstants.STDOUT_FILENO);
-	}
-
-    public void initEnvs() {
-        try {
-            // Os.setenv("LIBGL_MIPMAP", "3", true);
-			
-			// This seems useless...
-			Os.setenv("LD_LIBRARY_PATH",
-				Tools.homeJreDir + "/lib/jli:" +
-				Tools.homeJreDir + "/lib/server:" +
-				Tools.homeJreDir + "/lib",
-			true);
-
-			Os.setenv("HOME", Tools.MAIN_PATH, true);
-			Os.setenv("JAVA_HOME", Tools.homeJreDir, true);
-			Os.setenv("LIBGL_MIPMAP", "3", true);
-
-		} catch (Exception e) {
-            Tools.showError(MainActivity.this, e, true);
-        }
-    }
-	
 	private void runCraft() throws Throwable {
 		String[] launchArgs = getMCArgs();
 
@@ -1014,17 +983,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
 		
-		String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
 		javaArgList.add("-Djava.library.path=" +
-			"/system/" + libPath + ":" +
-			"/vendor/" + libPath + ":" +
-			"/vendor/" + libPath + "/hw:" +
 			// TODO lwjgl2 vs lwjgl3 native path
 			getApplicationInfo().nativeLibraryDir
 		);
-		
-		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
-		javaArgList.add("-Duser.home=" + Tools.MAIN_PATH);
 		
 		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
 		javaArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
@@ -1039,10 +1001,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add(mVersionInfo.mainClass);
 		javaArgList.addAll(Arrays.asList(launchArgs));
 
-		StringBuilder strb = new StringBuilder();
-		for (String cmd : javaArgList) {strb.append(cmd + " ");}
-		appendlnToLog("Java arguments: " + strb.toString() + "\n", false);
-
 		ShellProcessOperation sp = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
 				@Override
@@ -1052,10 +1010,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			});
 		sp.initInputStream(this);
 		
-		sp.writeToProcess("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:" + Tools.homeJreDir + "/lib/jli:" + Tools.homeJreDir + "/lib/server:" + Tools.homeJreDir + "/lib");
-		sp.writeToProcess("export HOME=" + Tools.MAIN_PATH);
 		sp.writeToProcess("export JAVA_HOME=" + Tools.homeJreDir);
+		sp.writeToProcess("export HOME=" + Tools.MAIN_PATH);
 		sp.writeToProcess("export LIBGL_MIPMAP=3");
+		
+		String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
+		sp.writeToProcess("export LD_LIBRARY_PATH=$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
+
+		sp.writeToProcess("cd $HOME");
 		
 		sp.writeToProcess(javaArgList.toArray(new String[0]));
 	}
