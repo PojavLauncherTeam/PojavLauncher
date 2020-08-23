@@ -1012,14 +1012,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		
 		sp.writeToProcess("export JAVA_HOME=" + Tools.homeJreDir);
 		sp.writeToProcess("export HOME=" + Tools.MAIN_PATH);
+		sp.writeToProcess("export TMPDIR=" + getCacheDir().getAbsolutePath());
 		sp.writeToProcess("export LIBGL_MIPMAP=3");
 		
-		String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
+		// String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
 		sp.writeToProcess("export LD_LIBRARY_PATH=$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
 
 		sp.writeToProcess("cd $HOME");
 		
 		sp.writeToProcess(javaArgList.toArray(new String[0]));
+		
+		int exitCode = sp.waitFor();
+		if (exitCode != 0) {
+			Tools.showError(this, new ErrnoException("java", exitCode), false);
+		}
 	}
 	
 	public void printStream(InputStream stream) {
