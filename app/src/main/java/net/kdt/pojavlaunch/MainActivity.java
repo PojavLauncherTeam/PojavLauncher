@@ -29,6 +29,7 @@ import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
 
 import android.app.AlertDialog;
+import com.oracle.dalvik.*;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -673,7 +674,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
 						AndroidContextImplementation.read = egl10.eglGetCurrentSurface(EGL10.EGL_READ);
 						AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
-						egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
+						// egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
+						
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
 						AndroidDisplay.windowWidth += navBarHeight;
@@ -1018,10 +1020,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
 		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
-
+/*
 		System.out.println("> Running Minecraft with classpath:");
 		System.out.println(launchClassPath);
 		System.out.println();
+*/
 		
 		redirectStdio();
 		BinaryExecutor.initJavaRuntime();
@@ -1029,7 +1032,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		BinaryExecutor.dlopen(Tools.homeJreDir + "/bin/java");
 		
 		List<String> javaArgList = new ArrayList<String>();
-		javaArgList.add(Tools.homeJreDir + "/bin/java");
+		// javaArgList.add(Tools.homeJreDir + "/bin/java");
+		javaArgList.add("java");
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
 		
@@ -1058,6 +1062,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add(mVersionInfo.mainClass);
 		javaArgList.addAll(Arrays.asList(launchArgs));
 
+		StringBuilder strb = new StringBuilder();
+		for (String cmd : javaArgList) {strb.append(cmd + " ");}
+		appendlnToLog("Java arguments: " + strb.toString() + "\n", false);
+
 /*
 		ShellProcessOperation sp = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
@@ -1071,7 +1079,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		sp.writeToProcess(javaArgList.toArray(new String[0]));
 */
 
-		BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
+		// BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
+		
+		VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
 		
 		/*
 		 "-Dorg.apache.logging.log4j.level=INFO",

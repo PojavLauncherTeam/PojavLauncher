@@ -4,6 +4,8 @@ package net.kdt.pojavlaunch;
 public class BinaryExecutor
 {
 	public static void initJavaRuntime() {
+		chdir(Tools.MAIN_PATH);
+		
 		dlopen(Tools.homeJreDir + "/lib/jli/libjli.so");
 		dlopen(Tools.homeJreDir + "/lib/server/libjvm.so");
 		dlopen(Tools.homeJreDir + "/lib/libverify.so");
@@ -12,8 +14,6 @@ public class BinaryExecutor
 		dlopen(Tools.homeJreDir + "/lib/libnio.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
-		
-		chdir(Tools.MAIN_PATH);
 	}
 	
 	public static native int chdir(String path);
