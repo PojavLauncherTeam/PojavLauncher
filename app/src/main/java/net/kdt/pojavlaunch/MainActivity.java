@@ -988,52 +988,29 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public void initEnvs() {
         try {
             // Os.setenv("LIBGL_MIPMAP", "3", true);
-
-			System.out.println("ldlib before = " + System.getenv("LD_LIBRARY_PATH"));
+			
+			// This seems useless...
+			Os.setenv("LD_LIBRARY_PATH",
+				Tools.homeJreDir + "/lib/jli:" +
+				Tools.homeJreDir + "/lib/server:" +
+				Tools.homeJreDir + "/lib",
+			true);
 
 			Os.setenv("HOME", Tools.MAIN_PATH, true);
 			Os.setenv("JAVA_HOME", Tools.homeJreDir, true);
 			Os.setenv("LIBGL_MIPMAP", "3", true);
 
-			System.out.println("ldlib after = " + System.getenv("LD_LIBRARY_PATH"));
 		} catch (Exception e) {
             Tools.showError(MainActivity.this, e, true);
         }
     }
 	
-	public static String launchClassPath;
-	public static String launchLibrarySearchPath;
 	private void runCraft() throws Throwable {
-		initEnvs();
-		
 		String[] launchArgs = getMCArgs();
 
-		// Setup OptiFine
-		/*
-		 if (mVersionInfo.optifineLib != null) {
-		 String[] optifineInfo = mVersionInfo.optifineLib.name.split(":");
-		 String optifineJar = Tools.libraries + "/" + Tools.artifactToPath(optifineInfo[0], optifineInfo[1], optifineInfo[2]);
-
-		 // AndroidOptiFineUtilities.originalOptifineJar = PojavPreferenceActivity.PREF_FORGETOF ? "/null/file.jar" : optifineJar;
-		 }
-		 */
-
-		launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
-		launchLibrarySearchPath = getApplicationInfo().nativeLibraryDir;
-/*
-		System.out.println("> Running Minecraft with classpath:");
-		System.out.println(launchClassPath);
-		System.out.println();
-*/
-		
-		redirectStdio();
-		BinaryExecutor.initJavaRuntime();
-		
-		BinaryExecutor.dlopen(Tools.homeJreDir + "/bin/java");
-		
 		List<String> javaArgList = new ArrayList<String>();
-		// javaArgList.add(Tools.homeJreDir + "/bin/java");
-		javaArgList.add("java");
+		javaArgList.add(Tools.homeJreDir + "/bin/java");
+		
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
 		
@@ -1058,7 +1035,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
 			
 		javaArgList.add("-cp");
-		javaArgList.add(launchClassPath);
+		javaArgList.add(Tools.generateLaunchClassPath(mProfile.getVersion()));
 		javaArgList.add(mVersionInfo.mainClass);
 		javaArgList.addAll(Arrays.asList(launchArgs));
 
@@ -1066,7 +1043,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		for (String cmd : javaArgList) {strb.append(cmd + " ");}
 		appendlnToLog("Java arguments: " + strb.toString() + "\n", false);
 
-/*
 		ShellProcessOperation sp = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
 				@Override
@@ -1075,18 +1051,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			});
 		sp.initInputStream(this);
-		sp.writeToProcess("export LD_LIBRARY_PATH=" + Tools.homeJreDir + "/lib/jli:" + Tools.homeJreDir + "/lib/server:" + Tools.homeJreDir + "/lib");
+		
+		sp.writeToProcess("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:" + Tools.homeJreDir + "/lib/jli:" + Tools.homeJreDir + "/lib/server:" + Tools.homeJreDir + "/lib");
+		sp.writeToProcess("export HOME=" + Tools.MAIN_PATH);
+		sp.writeToProcess("export JAVA_HOME=" + Tools.homeJreDir);
+		sp.writeToProcess("export LIBGL_MIPMAP=3");
+		
 		sp.writeToProcess(javaArgList.toArray(new String[0]));
-*/
-
-		// BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
-		
-		VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
-		
-		/*
-		 "-Dorg.apache.logging.log4j.level=INFO",
-		 "-Dorg.apache.logging.log4j.simplelog.level=INFO",
-		 */
 	}
 	
 	public void printStream(InputStream stream) {
@@ -1160,8 +1131,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		if (checkAllow && !isLogAllow) return;
 		textLog.post(new Runnable(){
 				@Override
-				public void run()
-				{
+				public void run() {
 					textLog.append(text);
 					contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
 				}
