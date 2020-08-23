@@ -203,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			setTitle("Minecraft " + mProfile.getVersion());
 
-			initEnvs();
 			//System.loadLibrary("gl4es");
 			/*
 			if (mVersionInfo.arguments != null) {
@@ -882,21 +881,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         }
     }
 
-    public void initEnvs() {
-        try {
-            // Os.setenv("LIBGL_MIPMAP", "3", true);
-			
-			System.out.println("ldlib before = " + System.getenv("LD_LIBRARY_PATH"));
-
-			Os.setenv("JAVA_HOME", Tools.homeJreDir, true);
-			Os.setenv("LIBGL_MIPMAP", "3", true);
-			
-			System.out.println("ldlib after = " + System.getenv("LD_LIBRARY_PATH"));
-		} catch (Exception e) {
-            Tools.showError(MainActivity.this, e, true);
-        }
-    }
-
 	private boolean isPointerCaptureSupported() {
 		return Build.VERSION.SDK_INT >= 26; 
 	}
@@ -998,11 +982,28 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		Os.dup2(fd, OsConstants.STDERR_FILENO);
 		Os.dup2(fd, OsConstants.STDOUT_FILENO);
 	}
+
+    public void initEnvs() {
+        try {
+            // Os.setenv("LIBGL_MIPMAP", "3", true);
+
+			System.out.println("ldlib before = " + System.getenv("LD_LIBRARY_PATH"));
+
+			Os.setenv("HOME", Tools.MAIN_PATH, true);
+			Os.setenv("JAVA_HOME", Tools.homeJreDir, true);
+			Os.setenv("LIBGL_MIPMAP", "3", true);
+
+			System.out.println("ldlib after = " + System.getenv("LD_LIBRARY_PATH"));
+		} catch (Exception e) {
+            Tools.showError(MainActivity.this, e, true);
+        }
+    }
 	
 	public static String launchClassPath;
 	public static String launchLibrarySearchPath;
-	private void runCraft() throws Throwable
-	{
+	private void runCraft() throws Throwable {
+		initEnvs();
+		
 		String[] launchArgs = getMCArgs();
 
 		// Setup OptiFine
@@ -1023,12 +1024,25 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		System.out.println();
 		
 		redirectStdio();
+		BinaryExecutor.initJavaRuntime();
+		
+		BinaryExecutor.dlopen(Tools.homeJreDir + "/bin/java");
 		
 		List<String> javaArgList = new ArrayList<String>();
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
 		
+		String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
+		javaArgList.add("-Djava.library.path=" +
+			"/system/" + libPath + ":" +
+			"/vendor/" + libPath + ":" +
+			"/vendor/" + libPath + "/hw:" +
+			// TODO lwjgl2 vs lwjgl3 native path
+			getApplicationInfo().nativeLibraryDir
+		);
+		
+		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		javaArgList.add("-Duser.home=" + Tools.MAIN_PATH);
 		
 		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
@@ -1044,22 +1058,21 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add(mVersionInfo.mainClass);
 		javaArgList.addAll(Arrays.asList(launchArgs));
 
-		try {
-			String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
-			BinaryExecutor.executeBinary(
-				"/system/" + libPath + ":" +
-				"/vendor/" + libPath + ":" +
-				"/vendor/" + libPath + "/hw:" +
-				getApplicationInfo().nativeLibraryDir + ":" +
-				Tools.homeJreDir + "/lib:" +
-				Tools.homeJreDir + "/lib/jli:" +
-				Tools.homeJreDir + "/lib/server",
-				
-				javaArgList.toArray(new String[0])
-			);
-		} catch (Throwable th) {
-			Tools.showError(this, th, true);
-		}
+/*
+		ShellProcessOperation sp = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+
+				@Override
+				public void onPrintLine(String text) {
+					appendlnToLog(text, false);
+				}
+			});
+		sp.initInputStream(this);
+		sp.writeToProcess("export LD_LIBRARY_PATH=" + Tools.homeJreDir + "/lib/jli:" + Tools.homeJreDir + "/lib/server:" + Tools.homeJreDir + "/lib");
+		sp.writeToProcess(javaArgList.toArray(new String[0]));
+*/
+
+		BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
+		
 		/*
 		 "-Dorg.apache.logging.log4j.level=INFO",
 		 "-Dorg.apache.logging.log4j.simplelog.level=INFO",
