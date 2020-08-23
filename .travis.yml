@@ -55,4 +55,5 @@ deploy:
   prerelease: true
   overwrite: true
   target_commitish: $TRAVIS_COMMIT
-  on: [push]
+  on:
+    branch: v3_openjdk
