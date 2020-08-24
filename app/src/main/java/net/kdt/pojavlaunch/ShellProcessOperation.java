@@ -73,7 +73,7 @@ public class ShellProcessOperation
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
-						listener.onPrintLine(e.getMessage() + "\n");
+						listener.onPrintLine("PrintStream error: " + e.getMessage() + "\n");
 					}
 				}
 			}).start();

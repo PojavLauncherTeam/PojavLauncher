@@ -119,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
 	private int navBarHeight = 40;
+	
+	private static final int LTYPE_INVOCATION = 0;
+	private static final int LTYPE_PROCESS = 1;
+	private final int LAUNCH_TYPE = LTYPE_INVOCATION;
 
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
@@ -974,10 +978,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		return args;
 	}
 
+	private ShellProcessOperation mLaunchShell;
+	private void setEnvironment(String name, String value) throws ErrnoException, IOException {
+		if (LAUNCH_TYPE == LTYPE_PROCESS) {
+			mLaunchShell.writeToProcess("export " + name + "=" + value);
+		} else {
+			Os.setenv(name, value, true);
+		}
+	}
+
 	private void runCraft() throws Throwable {
 		String[] launchArgs = getMCArgs();
 
 		List<String> javaArgList = new ArrayList<String>();
+		
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 		
 		// javaArgList.add("-Xms512m");
@@ -1001,30 +1015,54 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add(mVersionInfo.mainClass);
 		javaArgList.addAll(Arrays.asList(launchArgs));
 
-		ShellProcessOperation sp = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+		if (LAUNCH_TYPE == LTYPE_PROCESS) {
+			mLaunchShell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
+					@Override
+					public void onPrintLine(String text) {
+						appendToLog(text, false);
+					}
+				});
+			mLaunchShell.initInputStream(this);
+		}
+		
+		setEnvironment("JAVA_HOME", Tools.homeJreDir);
+		setEnvironment("HOME", Tools.MAIN_PATH);
+		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
+		setEnvironment("LIBGL_MIPMAP", "3");
+		setEnvironment("LD_LIBRARY_PATH", "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
+		
+		if (LAUNCH_TYPE == LTYPE_PROCESS) {
+			mLaunchShell.writeToProcess("cd $HOME");
+
+			mLaunchShell.writeToProcess(javaArgList.toArray(new String[0]));
+			int exitCode = mLaunchShell.waitFor();
+			if (exitCode != 0) {
+				Tools.showError(this, new ErrnoException("java", exitCode), false);
+			}
+		} else {
+			final FileDescriptor logFile = BinaryExecutor.redirectStdio();
+			
+			new Thread(new Runnable() {
 				@Override
-				public void onPrintLine(String text) {
-					appendlnToLog(text, false);
+				public void run() {
+					try {
+						BufferedReader bis = new BufferedReader(new FileReader(logFile));
+						String currLine;
+						while ((currLine = bis.readLine()) != null) {
+							appendlnToLog(currLine);
+						}
+						bis.close();
+					} catch (Throwable th) {
+						appendlnToLog("Can't get log:\n" + Log.getStackTraceString(th));
+					}
 				}
-			});
-		sp.initInputStream(this);
-		
-		sp.writeToProcess("export JAVA_HOME=" + Tools.homeJreDir);
-		sp.writeToProcess("export HOME=" + Tools.MAIN_PATH);
-		sp.writeToProcess("export TMPDIR=" + getCacheDir().getAbsolutePath());
-		sp.writeToProcess("export LIBGL_MIPMAP=3");
-		
-		// String libPath = "lib" + (Build.CPU_ABI.contains("64") ? "64" : "");
-		sp.writeToProcess("export LD_LIBRARY_PATH=$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
-
-		sp.writeToProcess("cd $HOME");
-		
-		sp.writeToProcess(javaArgList.toArray(new String[0]));
-		
-		int exitCode = sp.waitFor();
-		if (exitCode != 0) {
-			Tools.showError(this, new ErrnoException("java", exitCode), false);
+			}, "RuntimeLogThread").start();
+			
+			BinaryExecutor.initJavaRuntime();
+			BinaryExecutor.chdir(Tools.MAIN_PATH);
+			
+			VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
 		}
 	}
 	
