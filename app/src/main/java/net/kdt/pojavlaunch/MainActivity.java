@@ -122,7 +122,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	
 	private static final int LTYPE_INVOCATION = 0;
 	private static final int LTYPE_PROCESS = 1;
-	private final int LAUNCH_TYPE = LTYPE_INVOCATION;
+	private final int LAUNCH_TYPE = LTYPE_PROCESS;
+	// LTYPE_INVOCATION;
 
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
