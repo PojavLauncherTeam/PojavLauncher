@@ -992,7 +992,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		List<String> javaArgList = new ArrayList<String>();
 		
-		javaArgList.add(Tools.homeJreDir + "/bin/java");
+		if (LAUNCH_TYPE == LTYPE_PROCESS) javaArgList.add(Tools.homeJreDir + "/bin/java");
+		else javaArgList.add("java");
 		
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
