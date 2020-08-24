@@ -915,7 +915,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		
 		List<String> minecraftArgs = new ArrayList<String>();
 		if (mVersionInfo.arguments != null) {
-			// Support Minecraft 1.13
+			// Support Minecraft 1.13+
 			for (Object arg : mVersionInfo.arguments.game) {
 				if (arg instanceof String) {
 					minecraftArgs.add((String) arg);
@@ -1010,6 +1010,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add("-Dorg.lwjgl.util.Debug=true");
 		javaArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
 		javaArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
+		
+		// GLFW Stub width height
+		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
+		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
 			
 		javaArgList.add("-cp");
 		javaArgList.add(Tools.generateLaunchClassPath(mProfile.getVersion()));
@@ -1041,7 +1045,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			if (exitCode != 0) {
 				Tools.showError(this, new ErrnoException("java", exitCode), false);
 			}
-		} else {
+		} else { // Type Invocation
 			final FileDescriptor logFile = BinaryExecutor.redirectStdio();
 			
 			new Thread(new Runnable() {
