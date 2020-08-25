@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private Button[] controlButtons;
 
+	private PrintStream logStream;
+	
 	/*
 	 private LinearLayout contentCanvas;
 	 private AWTSurfaceView contentCanvasView;
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private static final int LTYPE_PROCESS = 1;
 	private final int LAUNCH_TYPE = LTYPE_PROCESS;
 	// LTYPE_INVOCATION;
-
+	
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
 	private String getStr(int id) {
@@ -138,6 +140,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setContentView(R.layout.main);
 
 		try {
+			File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
+			logFile.delete();
+			logFile.createNewFile();
+			logStream = new PrintStream(logFile.getAbsolutePath());
+			
 			final View decorView = getWindow().getDecorView();
 			decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
 				@Override
@@ -157,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					@Override
 					public void onExitTrapped()
 					{
+						logStream.close();
 						runOnUiThread(new Runnable(){
 
 								@Override
@@ -1055,6 +1063,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setEnvironment("HOME", Tools.MAIN_PATH);
 		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
 		setEnvironment("LIBGL_MIPMAP", "3");
+		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
 		setEnvironment("LD_LIBRARY_PATH", "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
@@ -1160,6 +1169,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private void appendToLog(final String text, boolean checkAllow) {
 		if (checkAllow && !isLogAllow) return;
+		logStream.print(text);
 		textLog.post(new Runnable(){
 				@Override
 				public void run() {
