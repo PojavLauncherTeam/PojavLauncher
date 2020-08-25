@@ -1015,7 +1015,26 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// GLFW Stub width height
 		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
 		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
-			
+
+		
+		javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
+		
+		String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
+		if (eglDisplay.equals("1")) {
+			eglDisplay = Tools.getEGLAddress("Display", ((EGL10) EGLContext.getEGL()).eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY));
+		}
+		javaArgList.add("-Dglfwstub.eglDisplay=" + eglDisplay);
+		
+		javaArgList.add("-Dglfwstub.eglSurfaceRead=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.read));
+		javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
+		
+		if (mVersionInfo.arguments != null) {
+			// Minecraft 1.13+
+
+			javaArgList.add("-Dminecraft.launcher.brand=" + Tools.APP_NAME);
+			javaArgList.add("-Dminecraft.launcher.version=" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+		}
+		
 		javaArgList.add("-cp");
 		javaArgList.add(Tools.generateLaunchClassPath(mProfile.getVersion()));
 		javaArgList.add(mVersionInfo.mainClass);

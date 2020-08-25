@@ -162,6 +162,17 @@ public final class Tools
 			showError(ctx, e);
 		}
 	}
+	
+	public static String getEGLAddress(String type, Object obj) {
+		try {
+			Field addrField = obj.getClass().getDeclaredField("mEGL" + type);
+			addrField.setAccessible(true);
+			return Long.toString((long) addrField.get(obj));
+		} catch (Throwable th) {
+			th.printStackTrace();
+			return "0l";
+		}
+	}
 
 	public static void showError(Context ctx, Throwable e)
 	{
