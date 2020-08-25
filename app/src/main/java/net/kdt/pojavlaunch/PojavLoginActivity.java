@@ -309,6 +309,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		mkdirs(Tools.worksDir);
 		mkdirs(Tools.versnDir);
 		mkdirs(Tools.libraries);
+		mkdirs(Tools.mpProfiles);
 		
 		File file0 = new File(Tools.mpProfiles);
 		File file1 = new File(Tools.mpModEnable);
