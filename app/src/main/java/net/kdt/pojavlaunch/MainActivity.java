@@ -170,12 +170,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								@Override
 								public void run() {
 									isExited = true;
-									
-									try {
-										SecondaryDexLoader.resetFieldArray(getClassLoader());
-									} catch (Throwable th) {
-										th.printStackTrace();
-									}
 
 									AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
 									d.setTitle(R.string.mcn_exit_title);
@@ -1023,10 +1017,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// GLFW Stub width height
 		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
 		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
-
 		
 		javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
-		
 		String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
 		if (eglDisplay.equals("1")) {
 			eglDisplay = Tools.getEGLAddress("Display", ((EGL10) EGLContext.getEGL()).eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY));
