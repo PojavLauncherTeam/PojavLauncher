@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	
 	private static final int LTYPE_INVOCATION = 0;
 	private static final int LTYPE_PROCESS = 1;
-	private final int LAUNCH_TYPE = LTYPE_PROCESS;
+	private final int LAUNCH_TYPE = LTYPE_INVOCATION;
 	// LTYPE_INVOCATION;
 	
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
@@ -685,7 +685,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
-						AndroidDisplay.windowWidth += navBarHeight;
+						// Does it required anymore?
+						// AndroidDisplay.windowWidth += navBarHeight;
 						
 						new Thread(new Runnable(){
 
@@ -1005,9 +1006,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			// TODO lwjgl2 vs lwjgl3 native path
 			getApplicationInfo().nativeLibraryDir
 		);
+		javaArgList.add("-Dos.name=Linux");
 		
 		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
 		javaArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+		// javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
 			
 		// Enable LWJGL3 debug
 		javaArgList.add("-Dorg.lwjgl.util.Debug=true");
@@ -1054,7 +1057,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setEnvironment("JAVA_HOME", Tools.homeJreDir);
 		setEnvironment("HOME", Tools.MAIN_PATH);
 		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
-		setEnvironment("LIBGL_MIPMAP", "3");
+		// setEnvironment("LIBGL_MIPMAP", "3");
 		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
 		setEnvironment("LD_LIBRARY_PATH", "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
 		
@@ -1084,7 +1087,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 				}
 			}, "RuntimeLogThread").start();
-			
+
+			String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
+			BinaryExecutor.setLdLibraryPath(
+				"/system/" + libName + ":" +
+				"/vendor/" + libName + ":" +
+				"/vendor/" + libName + "/hw:" +
+				getApplicationInfo().nativeLibraryDir + ":" +
+				
+				Tools.homeJreDir + "/lib/jli:" +
+				Tools.homeJreDir + "/lib/server:" +
+				Tools.homeJreDir + "/lib"
+			);
 			BinaryExecutor.initJavaRuntime();
 			BinaryExecutor.chdir(Tools.MAIN_PATH);
 			

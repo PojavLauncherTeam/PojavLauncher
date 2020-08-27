@@ -8,8 +8,6 @@ public class BinaryExecutor
 	private BinaryExecutor() {}
 	
 	public static void initJavaRuntime() {
-		chdir(Tools.MAIN_PATH);
-
 		dlopen(Tools.homeJreDir + "/lib/jli/libjli.so");
 		dlopen(Tools.homeJreDir + "/lib/server/libjvm.so");
 		dlopen(Tools.homeJreDir + "/lib/libverify.so");
@@ -32,6 +30,8 @@ public class BinaryExecutor
 
 	public static native int chdir(String path);
 	public static native boolean dlopen(String libPath);
+	public static native void setLdLibraryPath(String ldLibraryPath);
+	public static native void setupBridgeEGL();
 	
 	// Load and execute PIE binary using dlopen and dlsym("main")
 	public static native int executeBinary(String[] args);
