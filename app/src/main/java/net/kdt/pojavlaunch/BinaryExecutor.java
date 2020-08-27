@@ -33,7 +33,8 @@ public class BinaryExecutor
 	public static native void setLdLibraryPath(String ldLibraryPath);
 	public static native void setupBridgeEGL();
 	
-	// Load and execute PIE binary using dlopen and dlsym("main")
+	// BEFORE Load and execute PIE binary using dlopen and dlsym("main")
+	// AFTER: Execute a binary in forked process
 	public static native int executeBinary(String[] args);
 
 	static {

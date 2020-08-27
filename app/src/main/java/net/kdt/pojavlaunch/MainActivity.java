@@ -122,8 +122,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean isLogAllow = false;
 	private int navBarHeight = 40;
 	
-	private static final int LTYPE_INVOCATION = 0;
-	private static final int LTYPE_PROCESS = 1;
+	private static final int LTYPE_PROCESS = 0;
+	private static final int LTYPE_INVOCATION = 1;
+	private static final int LTYPE_BINARYEXEC = 2;
 	private final int LAUNCH_TYPE = LTYPE_INVOCATION;
 	// LTYPE_INVOCATION;
 	
@@ -238,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			// Menu
 			drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_options);
 
-			navDrawer = (NavigationView) findViewById(R.id.main_navigation_view);
+			navDrawer = findViewById(R.id.main_navigation_view);
 			navDrawer.setNavigationItemSelectedListener(
 				new NavigationView.OnNavigationItemSelectedListener() {
 					@Override
@@ -1002,17 +1003,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		String[] launchArgs = getMCArgs();
 
 		List<String> javaArgList = new ArrayList<String>();
-		
-		if (LAUNCH_TYPE == LTYPE_PROCESS) javaArgList.add(Tools.homeJreDir + "/bin/java");
+	/*
+		if (LAUNCH_TYPE == LTYPE_PROCESS || LAUNCH_TYPE == LTYPE_BINARYEXEC) javaArgList.add(Tools.homeJreDir + "/bin/java");
 		else javaArgList.add("java");
-		
+	*/
+		javaArgList.add(Tools.homeJreDir + "/bin/java");
+	
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
-		
+	/*
 		javaArgList.add("-Djava.library.path=" +
 			// TODO lwjgl2 vs lwjgl3 native path
 			getApplicationInfo().nativeLibraryDir
 		);
+	*/
 		javaArgList.add("-Dos.name=Linux");
 		
 		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
@@ -1068,6 +1072,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
 		setEnvironment("LD_LIBRARY_PATH", "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
 		
+		// can fix java?
+		setEnvironment("ORIGIN", "$JAVA_HOME/lib");
+		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");
 
@@ -1076,7 +1083,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			if (exitCode != 0) {
 				Tools.showError(this, new ErrnoException("java", exitCode), false);
 			}
-		} else { // Type Invocation
+		} else { // Type Invocation or BinaryExec
 			final FileDescriptor logFile = BinaryExecutor.redirectStdio();
 			
 			new Thread(new Runnable() {
@@ -1096,7 +1103,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			}, "RuntimeLogThread").start();
 
 			String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
-			BinaryExecutor.setLdLibraryPath(
+			String ldLibraryPath = (
 				"/system/" + libName + ":" +
 				"/vendor/" + libName + ":" +
 				"/vendor/" + libName + "/hw:" +
@@ -1106,6 +1113,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				Tools.homeJreDir + "/lib/server:" +
 				Tools.homeJreDir + "/lib"
 			);
+			BinaryExecutor.setLdLibraryPath(ldLibraryPath);
+			Os.setenv("LD_LIBRARY_PATH", ldLibraryPath, true);
+			
 			BinaryExecutor.initJavaRuntime();
 			BinaryExecutor.chdir(Tools.MAIN_PATH);
 			
@@ -1113,7 +1123,19 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				startStrace(android.os.Process.myTid());
 			}
 			
-			VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+			if (LAUNCH_TYPE == LTYPE_BINARYEXEC) {
+				BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
+			} else {
+				// Test
+			/*
+				VMLauncher.launchJVM(new String[]{
+					Tools.homeJreDir + "/bin/java",
+					"-invalidarg"
+				});
+			*/
+				
+				VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+			}
 		}
 	}
 	

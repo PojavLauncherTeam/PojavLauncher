@@ -55,9 +55,9 @@ public class YggdrasilAuthenticator {
 					
                     return this.gson.fromJson(outString, responseClass);
                 }
-				throw new RuntimeException("Invalid username or password");
+				throw new RuntimeException("Invalid username or password, status code: " + statusCode);
             } catch (UnknownHostException e) {
-				throw new RuntimeException("Can't connect to the server");
+				throw new RuntimeException("Can't connect to the server", e);
 			} catch (Throwable th2) {
                 th = th2;
                 if (is != null) {
