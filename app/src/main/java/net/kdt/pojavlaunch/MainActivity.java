@@ -1064,13 +1064,25 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				});
 			mLaunchShell.initInputStream(this);
 		}
+
+		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
+		String ldLibraryPath = (
+			"/system/" + libName + ":" +
+			"/vendor/" + libName + ":" +
+			"/vendor/" + libName + "/hw:" +
+			getApplicationInfo().nativeLibraryDir + ":" +
+
+			Tools.homeJreDir + "/lib/jli:" +
+			Tools.homeJreDir + "/lib/server:" +
+			Tools.homeJreDir + "/lib"
+		);
 		
 		setEnvironment("JAVA_HOME", Tools.homeJreDir);
 		setEnvironment("HOME", Tools.MAIN_PATH);
 		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
 		// setEnvironment("LIBGL_MIPMAP", "3");
 		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
-		setEnvironment("LD_LIBRARY_PATH", Tools.homeJreDir + "/lib:" + Tools.homeJreDir + "/lib/jli:" + Tools.homeJreDir + "/lib/server");
+		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
 		
 		// can fix java?
 		setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
@@ -1102,20 +1114,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			}, "RuntimeLogThread").start();
 
-			String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
-			String ldLibraryPath = (
-				"/system/" + libName + ":" +
-				"/vendor/" + libName + ":" +
-				"/vendor/" + libName + "/hw:" +
-				getApplicationInfo().nativeLibraryDir + ":" +
-				
-				Tools.homeJreDir + "/lib/jli:" +
-				Tools.homeJreDir + "/lib/server:" +
-				Tools.homeJreDir + "/lib"
-			);
 			BinaryExecutor.setLdLibraryPath(ldLibraryPath);
-			Os.setenv("LD_LIBRARY_PATH", ldLibraryPath, true);
-			
 			BinaryExecutor.initJavaRuntime();
 			BinaryExecutor.chdir(Tools.MAIN_PATH);
 			
