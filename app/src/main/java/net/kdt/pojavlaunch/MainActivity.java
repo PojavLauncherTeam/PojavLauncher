@@ -682,7 +682,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
 						AndroidContextImplementation.read = egl10.eglGetCurrentSurface(EGL10.EGL_READ);
 						AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
-						// egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						
 						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
 
@@ -691,7 +690,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						
 						if (LAUNCH_TYPE != LTYPE_PROCESS) {
 							BinaryExecutor.setupBridgeEGL();
-							egl10.eglMakeCurrent(theEgl.eglGetCurrentDisplay(), EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
+							egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
 						}
 						
 						new Thread(new Runnable(){
