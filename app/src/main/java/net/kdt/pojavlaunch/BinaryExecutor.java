@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import android.system.*;
 import java.io.*;
 
+// This clads should be named as 'LoadMe' as original
 public class BinaryExecutor
 {
 	private BinaryExecutor() {}

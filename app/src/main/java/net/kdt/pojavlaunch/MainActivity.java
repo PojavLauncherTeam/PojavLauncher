@@ -689,6 +689,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						// Does it required anymore?
 						// AndroidDisplay.windowWidth += navBarHeight;
 						
+						if (LAUNCH_TYPE != LTYPE_PROCESS) {
+							BinaryExecutor.setupBridgeEGL();
+							egl10.eglMakeCurrent(theEgl.eglGetCurrentDisplay(), EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
+						}
+						
 						new Thread(new Runnable(){
 
 								@Override
@@ -1095,7 +1100,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			if (exitCode != 0) {
 				Tools.showError(this, new ErrnoException("java", exitCode), false);
 			}
-		} else { // Type Invocation or BinaryExec
+		} else { // Type Invocation
 			final FileDescriptor logFile = BinaryExecutor.redirectStdio();
 			
 			new Thread(new Runnable() {
