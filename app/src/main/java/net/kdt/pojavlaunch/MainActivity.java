@@ -990,7 +990,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			Os.setenv(name, value, true);
 		}
 	}
-
+	
+	private static void startStrace(int pid) throws Exception {
+		String[] straceArgs = new String[] {"/system/bin/strace",
+			"-o", new File(Tools.MAIN_PATH, "strace.txt").getAbsolutePath(), "-f", "-p", "" + pid};
+		System.out.println("strace args: " + Arrays.toString(straceArgs));
+		Runtime.getRuntime().exec(straceArgs);
+	}
+	
 	private void runCraft() throws Throwable {
 		String[] launchArgs = getMCArgs();
 
@@ -1101,6 +1108,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			);
 			BinaryExecutor.initJavaRuntime();
 			BinaryExecutor.chdir(Tools.MAIN_PATH);
+			
+			if (new File(Tools.MAIN_PATH, "strace.txt").exists()) {
+				startStrace(android.os.Process.myTid());
+			}
 			
 			VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
 		}
