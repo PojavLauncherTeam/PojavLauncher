@@ -1079,6 +1079,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			Tools.homeJreDir + "/lib/jli:" +
 			Tools.homeJreDir + "/lib/server:" +
 			Tools.homeJreDir + "/lib"
+
+			// "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server"
 		);
 		
 		setEnvironment("JAVA_HOME", Tools.homeJreDir);
@@ -1089,7 +1091,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
 		
 		// can fix java?
-		setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
+		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");

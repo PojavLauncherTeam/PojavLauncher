@@ -1,5 +1,5 @@
 # PojavLauncher
-An open source Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11
+A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11.2
 
 ## This branch?
 - Attempt to run Minecraft in OpenJDK, different a bit with Boardwalk 2.
