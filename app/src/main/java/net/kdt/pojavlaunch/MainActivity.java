@@ -1070,10 +1070,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
 		// setEnvironment("LIBGL_MIPMAP", "3");
 		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
-		setEnvironment("LD_LIBRARY_PATH", "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server");
+		setEnvironment("LD_LIBRARY_PATH", Tools.homeJreDir + "/lib:" + Tools.homeJreDir + "/lib/jli:" + Tools.homeJreDir + "/lib/server");
 		
 		// can fix java?
-		setEnvironment("ORIGIN", "$JAVA_HOME/lib");
+		setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");
