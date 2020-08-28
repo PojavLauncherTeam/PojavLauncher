@@ -124,8 +124,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	
 	private static final int LTYPE_PROCESS = 0;
 	private static final int LTYPE_INVOCATION = 1;
-	private static final int LTYPE_BINARYEXEC = 2;
-	private final int LAUNCH_TYPE = LTYPE_INVOCATION;
+	private static final int LTYPE_CREATEJAVAVM = 2;
+	private final int LAUNCH_TYPE = LTYPE_CREATEJAVAVM;
 	// LTYPE_INVOCATION;
 	
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
@@ -1053,11 +1053,16 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			javaArgList.add("-Dminecraft.launcher.version=" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
 		}
 		
-		javaArgList.add("-cp");
-		javaArgList.add(Tools.generateLaunchClassPath(mProfile.getVersion()));
-		javaArgList.add(mVersionInfo.mainClass);
-		javaArgList.addAll(Arrays.asList(launchArgs));
-
+		String launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
+		if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
+			javaArgList.add("-Djava.library.path=" + launchClassPath);
+		} else {
+			javaArgList.add("-cp");
+			javaArgList.add(launchClassPath);
+			javaArgList.add(mVersionInfo.mainClass);
+			javaArgList.addAll(Arrays.asList(launchArgs));
+		}
+		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 
@@ -1128,8 +1133,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				startStrace(android.os.Process.myTid());
 			}
 			
-			if (LAUNCH_TYPE == LTYPE_BINARYEXEC) {
-				BinaryExecutor.executeBinary(javaArgList.toArray(new String[0]));
+			if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
+				VMLauncher.createLaunchMainJVM(javaArgList.toArray(new String[0]), mVersionInfo.mainClass, launchArgs);
 			} else {
 				// Test
 			/*
