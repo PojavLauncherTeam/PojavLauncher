@@ -1092,13 +1092,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
 		String ldLibraryPath = (
+			// To make libjli.so ignore re-execute
+			Tools.homeJreDir + "/lib/server:" +
+			
 			"/system/" + libName + ":" +
 			"/vendor/" + libName + ":" +
 			"/vendor/" + libName + "/hw:" +
 
 			getApplicationInfo().nativeLibraryDir + ":" +
 			
-			Tools.homeJreDir + "/lib/server:" +
 			Tools.homeJreDir + "/lib/jli:" +
 			Tools.homeJreDir + "/lib"
 
