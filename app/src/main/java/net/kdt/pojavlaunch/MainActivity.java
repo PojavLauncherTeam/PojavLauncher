@@ -1035,6 +1035,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			getApplicationInfo().nativeLibraryDir
 		);
 	*/
+	
+		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		javaArgList.add("-Dos.name=Linux");
 		
 		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
@@ -1114,9 +1116,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// setEnvironment("LIBGL_MIPMAP", "3");
 		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
 		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
+		setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
 		
 		// can fix java?
-		setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
+		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");
