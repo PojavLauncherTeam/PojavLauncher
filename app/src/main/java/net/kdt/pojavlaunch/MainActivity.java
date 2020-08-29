@@ -120,13 +120,27 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean lastGrab = false;
 	private boolean isExited = false;
 	private boolean isLogAllow = false;
-	private int navBarHeight = 40;
+	// private int navBarHeight = 40;
 	
 	private static final int LTYPE_PROCESS = 0;
 	private static final int LTYPE_INVOCATION = 1;
 	private static final int LTYPE_CREATEJAVAVM = 2;
-	private final int LAUNCH_TYPE = LTYPE_CREATEJAVAVM;
-	// LTYPE_INVOCATION;
+	private static final int LAUNCH_TYPE;
+	
+	static {
+		int launchTypeFinal = LTYPE_INVOCATION;
+		
+		File customLTFile = new File(Tools.MAIN_PATH, "launchtype.txt");
+		if (customLTFile.exists()) {
+			try {
+				launchTypeFinal = Integer.parseInt(Tools.read(customLTFile.getAbsolutePath()));
+			} catch (Throwable th) {
+				th.printStackTrace();
+			}
+		}
+		
+		LAUNCH_TYPE = launchTypeFinal;
+	}
 	
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
@@ -1036,16 +1050,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
 		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
 		
-		javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
-		String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
-		if (eglDisplay.equals("1")) {
-			eglDisplay = Tools.getEGLAddress("Display", ((EGL10) EGLContext.getEGL()).eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY));
-		}
-		javaArgList.add("-Dglfwstub.eglDisplay=" + eglDisplay);
-		
-		javaArgList.add("-Dglfwstub.eglSurfaceRead=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.read));
-		javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
-		
 		if (mVersionInfo.arguments != null) {
 			// Minecraft 1.13+
 
@@ -1057,6 +1061,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
 			javaArgList.add("-Djava.library.path=" + launchClassPath);
 		} else {
+			if (LAUNCH_TYPE == LTYPE_PROCESS) {
+				javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
+				String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
+				if (eglDisplay.equals("1")) {
+					eglDisplay = Tools.getEGLAddress("Display", ((EGL10) EGLContext.getEGL()).eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY));
+				}
+				javaArgList.add("-Dglfwstub.eglDisplay=" + eglDisplay);
+
+				javaArgList.add("-Dglfwstub.eglSurfaceRead=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.read));
+				javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
+			}
+			
 			javaArgList.add("-cp");
 			javaArgList.add(launchClassPath);
 			javaArgList.add(mVersionInfo.mainClass);
@@ -1076,14 +1092,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
 		String ldLibraryPath = (
+			Tools.homeJreDir + "/lib/server:" +
+			
 			"/system/" + libName + ":" +
 			"/vendor/" + libName + ":" +
 			"/vendor/" + libName + "/hw:" +
-			getApplicationInfo().nativeLibraryDir + ":" +
 
+			getApplicationInfo().nativeLibraryDir + ":" +
+			
 			Tools.homeJreDir + "/lib/jli:" +
-			Tools.homeJreDir + "/lib/server:" +
 			Tools.homeJreDir + "/lib"
+
 
 			// "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server"
 		);
