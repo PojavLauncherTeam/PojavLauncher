@@ -1092,14 +1092,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
 		String ldLibraryPath = (
-			Tools.homeJreDir + "/lib/server:" +
-			
 			"/system/" + libName + ":" +
 			"/vendor/" + libName + ":" +
 			"/vendor/" + libName + "/hw:" +
 
 			getApplicationInfo().nativeLibraryDir + ":" +
 			
+			Tools.homeJreDir + "/lib/server:" +
 			Tools.homeJreDir + "/lib/jli:" +
 			Tools.homeJreDir + "/lib"
 
@@ -1115,7 +1114,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
 		
 		// can fix java?
-		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
+		setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");
