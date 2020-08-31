@@ -3,7 +3,7 @@ package net.kdt.pojavlaunch;
 import android.system.*;
 import java.io.*;
 
-// This clads should be named as 'LoadMe' as original
+// This class should be named as 'LoadMe' as original
 public class BinaryExecutor
 {
 	private BinaryExecutor() {}
@@ -18,15 +18,15 @@ public class BinaryExecutor
 		dlopen(Tools.homeJreDir + "/lib/libawt.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
 	}
-	
-	public static FileDescriptor redirectStdio() throws ErrnoException {
-		File logFile = new File(Tools.MAIN_PATH, "v3log.txt");
+
+	public static void redirectStdio() throws ErrnoException {
+		File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
 
 		FileDescriptor fd = Os.open(logFile.getAbsolutePath(), OsConstants.O_WRONLY | OsConstants.O_CREAT | OsConstants.O_TRUNC, 0666);
 		Os.dup2(fd, OsConstants.STDERR_FILENO);
 		Os.dup2(fd, OsConstants.STDOUT_FILENO);
 		
-		return fd;
+		// return fd;
 	}
 
 	public static native int chdir(String path);

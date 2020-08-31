@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private Button[] controlButtons;
 
+	private File logFile;
 	private PrintStream logStream;
 	
 	/*
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setContentView(R.layout.main);
 
 		try {
-			File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
+			logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
 			logFile.delete();
 			logFile.createNewFile();
 			logStream = new PrintStream(logFile.getAbsolutePath());
@@ -175,52 +176,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			});
 			
-			ExitManager.setExitTrappedListener(new ExitManager.ExitTrappedListener(){
-					@Override
-					public void onExitTrapped()
-					{
-						logStream.close();
-						runOnUiThread(new Runnable(){
-
-								@Override
-								public void run() {
-									isExited = true;
-
-									AlertDialog.Builder d = new AlertDialog.Builder(MainActivity.this);
-									d.setTitle(R.string.mcn_exit_title);
-
-									try {
-										File crashLog = Tools.lastFileModified(Tools.crashPath);
-										if(crashLog != null && Tools.read(crashLog.getAbsolutePath()).startsWith("---- Minecraft Crash Report ----")){
-											d.setMessage(R.string.mcn_exit_crash);
-										} else {
-											fullyExit();
-											return;
-										}
-									} catch (Throwable th) {
-										d.setMessage(getStr(R.string.mcn_exit_errcrash) + "\n" + Log.getStackTraceString(th));
-									}
-									d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-											@Override
-											public void onClick(DialogInterface p1, int p2)
-											{
-												fullyExit();
-											}
-										});
-									d.setCancelable(false);
-									d.show();
-								}
-							});
-					}
-				});
-
-			try {
-				ExitManager.disableSystemExit();
-			} catch (Throwable th) {
-				Log.w(Tools.APP_NAME, "Could not disable System.exit() method!", th);
-			}
-
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
 
@@ -334,18 +289,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 			specialButtons[0].specialButtonListener = new View.OnClickListener(){
-
 				@Override
-				public void onClick(View p1)
-				{
+				public void onClick(View view) {
 					showKeyboard(); 
 				}
 			};
 			specialButtons[1].specialButtonListener = new View.OnClickListener(){
-
 				@Override
-				public void onClick(View view)
-				{
+				public void onClick(View view) {
 					MainActivity.this.onClick(toggleControlButton);
 				}
 			};
@@ -884,11 +835,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     }
 
 	public static void fullyExit() {
-		if (!ExitManager.isExiting()) {
-			ExitManager.enableSystemExit();
-			System.exit(0);
-		}
-		ExitManager.stopExitLoop();
+		System.exit(0);
 	}
 
     public void forceUserHome(String s) throws Exception {
@@ -1029,16 +976,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	
 		// javaArgList.add("-Xms512m");
 		javaArgList.add("-Xmx512m");
-	/*
-		javaArgList.add("-Djava.library.path=" +
-			// TODO lwjgl2 vs lwjgl3 native path
-			getApplicationInfo().nativeLibraryDir
-		);
-	*/
 	
 		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		javaArgList.add("-Dos.name=Linux");
 		
+		// javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
 		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
 		javaArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
 		// javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
@@ -1051,6 +993,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// GLFW Stub width height
 		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
 		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
+		
+		javaArgList.add("-Dglfwstub.initEgl=false");
 		
 		if (mVersionInfo.arguments != null) {
 			// Minecraft 1.13+
@@ -1130,8 +1074,21 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				Tools.showError(this, new ErrnoException("java", exitCode), false);
 			}
 		} else { // Type Invocation
-			final FileDescriptor logFile = BinaryExecutor.redirectStdio();
-			
+			// Is it need?
+		/*
+			Os.dup2(FileDescriptor.err, OsConstants.STDERR_FILENO);
+			Os.dup2(FileDescriptor.out, OsConstants.STDOUT_FILENO);
+		*/
+
+			BinaryExecutor.redirectStdio();
+			// DEPRECATED constructor (String) api 29
+			FileObserver fobs = new FileObserver(logFile.getAbsolutePath(), FileObserver.MODIFY){
+				@Override
+				public void onEvent(int event, String str) {
+					
+				}
+			};
+			fobs.startWatching();
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
