@@ -34,7 +34,7 @@ import sun.security.jca.*;
 
 import android.app.AlertDialog;
 
-public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
+public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener, ToggleButton.OnCheckedChangeListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
 
@@ -821,6 +821,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		}
 	}
 
+	@Override
+	public void onCheckedChanged(CompoundButton btn, boolean checked) {
+		switch (btn.getId()) {
+			case R.id.control_shift: 
+				sendKeyPress(Keyboard.KEY_LSHIFT, checked);
+				break;
+		}
+	}
+
     public boolean onTouch(View v, MotionEvent e) {
         boolean isDown;
         switch (e.getActionMasked()) {
@@ -855,7 +864,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					setRightOverride(isDown);
 				} break;
 			case R.id.control_debug: sendKeyPress(Keyboard.KEY_F3, isDown); break;
-			case R.id.control_shift: sendKeyPress(Keyboard.KEY_LSHIFT, isDown); break;
+			// case R.id.control_shift: sendKeyPress(Keyboard.KEY_LSHIFT, isDown); break;
 			case R.id.control_inventory: sendKeyPress(Keyboard.KEY_E, isDown); break;
 			case R.id.control_talk: sendKeyPress(Keyboard.KEY_T, isDown); break;
 			case R.id.control_keyboard: showKeyboard(); break;
@@ -1436,7 +1445,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         Button button = (Button) findViewById(id);
 		button.setWidth((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getWidth()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
 		button.setHeight((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getHeight()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
-        button.setOnTouchListener(this);
+        if (button instanceof ToggleButton) {
+			((ToggleButton) button).setOnCheckedChangeListener(this);
+		} else button.setOnTouchListener(this);
         return button;
     }
 

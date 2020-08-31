@@ -193,7 +193,7 @@
 				android:layout_alignParentLeft="true"
 				android:layout_alignParentBottom="true"/>
 
-			<Button
+			<ToggleButton
 				android:textSize="20.0sp"
 				android:id="@+id/control_shift"
 				android:background="@drawable/control_button"
