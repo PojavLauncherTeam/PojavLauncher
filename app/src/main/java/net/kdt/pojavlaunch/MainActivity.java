@@ -34,7 +34,7 @@ import sun.security.jca.*;
 
 import android.app.AlertDialog;
 
-public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener, ToggleButton.OnCheckedChangeListener
+public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
 
@@ -120,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean lastEnabled = false;
 	private boolean lastGrab = false;
 	private boolean isExited = false;
+	private boolean isShiftModeClick = false;
+	private boolean isShiftDown = false;
 	private boolean isLogAllow = false;
 	private int navBarHeight = 40;
 
@@ -252,6 +254,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							case R.id.nav_debug: toggleDebug();
 								break;
 							case R.id.nav_customkey: dialogSendCustomKey();
+								break;
+							case R.id.nav_shiftmodechg:
+								isShiftModeClick = !isShiftModeClick;
+								// shiftButton.setOnTouchListener(isShiftModeClick ? null : MainActivity.this);
+								Toast.makeText(MainActivity.this, getString(R.string.toast_shiftmode) + " " + getString(isShiftModeClick ? R.string.toast_shiftmode_toggle : R.string.toast_shiftmode_hold), Toast.LENGTH_SHORT).show();
+								break;
 						}
 						//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
 
@@ -301,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
 
 			this.textLog.setTypeface(Typeface.MONOSPACE);
+			this.shiftButton.setOnClickListener(this);
 			this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
 
 					@Override
@@ -818,14 +827,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 					zoomButton.setVisibility((zoomButton.getVisibility() == View.GONE && mVersionInfo.optifineLib != null) ? View.VISIBLE : View.GONE);
 				}
-		}
-	}
-
-	@Override
-	public void onCheckedChanged(CompoundButton btn, boolean checked) {
-		switch (btn.getId()) {
+				break;
 			case R.id.control_shift: 
-				sendKeyPress(Keyboard.KEY_LSHIFT, checked);
+				if (isShiftModeClick) {
+					isShiftDown = !isShiftDown;
+					sendKeyPress(Keyboard.KEY_LSHIFT, isShiftDown);
+				}
 				break;
 		}
 	}
@@ -864,7 +871,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					setRightOverride(isDown);
 				} break;
 			case R.id.control_debug: sendKeyPress(Keyboard.KEY_F3, isDown); break;
-			// case R.id.control_shift: sendKeyPress(Keyboard.KEY_LSHIFT, isDown); break;
+			case R.id.control_shift:
+				if (!isShiftModeClick)
+					sendKeyPress(Keyboard.KEY_LSHIFT, isDown);
+				break;
 			case R.id.control_inventory: sendKeyPress(Keyboard.KEY_E, isDown); break;
 			case R.id.control_talk: sendKeyPress(Keyboard.KEY_T, isDown); break;
 			case R.id.control_keyboard: showKeyboard(); break;
@@ -1445,9 +1455,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         Button button = (Button) findViewById(id);
 		button.setWidth((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getWidth()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
 		button.setHeight((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getHeight()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
-        if (button instanceof ToggleButton) {
-			((ToggleButton) button).setOnCheckedChangeListener(this);
-		} else button.setOnTouchListener(this);
+        button.setOnTouchListener(this);
         return button;
     }
 

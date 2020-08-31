@@ -12,4 +12,7 @@
 	<item
 		android:id="@+id/nav_customkey"
 		android:title="@string/control_customkey" />
+	<item
+		android:id="@+id/nav_shiftmodechg"
+		android:title="@string/control_shiftmodechg" />
 </menu>

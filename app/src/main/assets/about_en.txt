@@ -6,12 +6,8 @@ Using libraries:
  • LegacyLauncher: Open source Minecraft LaunchWrapper by Mojang.
  • LWJGL %s.
  • openal_soft: OpenAL port for Android devices by apportable.
- • PojavDX (dx 1.16): tool to convert java bytecode to dex.
  • Android HandleView of EditText for easy resize for custom controls.
- • Java AWT Implementation includes:
-  - Boardwalk's makeshift.
-  - OpenJDK 7 codes implementation.
-  - Developer codes (copy text, open browser,...)
+ • OpenJDK Mobile 9.
 * Notes:
  - This app is under development and will not be stable.
  - This app only use LWJGL2 and didn't have a JRE8 desugar so 1.13 or above versions will not supported.
