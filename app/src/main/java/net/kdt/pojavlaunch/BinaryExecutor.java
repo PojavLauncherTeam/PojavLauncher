@@ -70,7 +70,7 @@ public class BinaryExecutor
 	public static native void setLdLibraryPath(String ldLibraryPath);
 	public static native void setupBridgeEGL();
 	
-	public static native void setupBridgeSurfaceAWT(Object surface);
+	public static native void setupBridgeSurfaceAWT(long surface);
 	
 	// BEFORE Load and execute PIE binary using dlopen and dlsym("main")
 	// AFTER: Execute a binary in forked process

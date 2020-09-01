@@ -7,6 +7,7 @@ import android.view.*;
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
+import java.lang.reflect.*;
 
 public class InstallModActivity extends AppCompatActivity
 {
@@ -23,7 +24,15 @@ public class InstallModActivity extends AppCompatActivity
 
 				@Override
 				public void onSurfaceTextureAvailable(SurfaceTexture tex, int w, int h) {
-					BinaryExecutor.setupBridgeSurfaceAWT(new Surface(tex));
+					try {
+						Surface surface = new Surface(tex);
+						Field field = surface.getClass().getDeclaredField("mNativeObject");
+						field.setAccessible(true);
+						BinaryExecutor.setupBridgeSurfaceAWT((long) field.get(surface));
+					} catch (Throwable th) {
+						Tools.showError(InstallModActivity.this, th, true);
+					}
+					
 					new Thread(new Runnable(){
 							@Override
 							public void run() {
