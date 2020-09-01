@@ -74,7 +74,15 @@ public class InstallModActivity extends AppCompatActivity
 
 			javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 			javaArgList.add("-Dos.name=Linux");
-			javaArgList.add("-Djava.library.path=");
+			
+			StringBuilder libStr = new StringBuilder();
+			for (File file: new File(Tools.MAIN_PATH, "cacioawtlib").listFiles()) {
+				if (file.getName().endsWith(".jar")) {
+					libStr.append(file.getAbsolutePath() + ":");
+				}
+			}
+			javaArgList.add("-Djava.library.path=" + libStr.toString());
+			
 			javaArgList.add("-jar");
 			javaArgList.add(modFile.getAbsolutePath());
 
