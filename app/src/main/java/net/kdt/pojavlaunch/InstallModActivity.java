@@ -83,8 +83,13 @@ public class InstallModActivity extends AppCompatActivity
 						libStr.append(file.getAbsolutePath() + ":");
 					}
 				}
+				javaArgList.add("-Djava.library.path=" + libStr.toString());
 			}
-			javaArgList.add("-Djava.library.path=" + libStr.toString());
+			
+			File cacioArgOverrideFile = new File(cacioAwtLibPath, "overrideargs.txt");
+			if (cacioArgOverrideFile.exists()) {
+				javaArgList.addAll(Arrays.asList(Tools.read(cacioArgOverrideFile.getAbsolutePath()).split(" ")));
+			}
 			
 			javaArgList.add("-jar");
 			javaArgList.add(modFile.getAbsolutePath());
