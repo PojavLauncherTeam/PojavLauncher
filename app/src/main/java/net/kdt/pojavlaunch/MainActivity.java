@@ -971,6 +971,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		javaArgList.add("-Xmx512m");
 	
 		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
+		javaArgList.add("-Djava.io.tmpdir=" + getCacheDir().getAbsolutePath());
 		javaArgList.add("-Dos.name=Linux");
 		
 		// javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
@@ -1029,10 +1030,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			mLaunchShell.initInputStream(this);
 		}
 
-		BinaryExecutor.setJavaEnvironment(this);
-		
 		// can fix java?
 		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
+		
+		BinaryExecutor.setJavaEnvironment(this);
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");

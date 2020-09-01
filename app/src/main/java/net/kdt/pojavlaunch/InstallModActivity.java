@@ -73,6 +73,7 @@ public class InstallModActivity extends AppCompatActivity
 			javaArgList.add("-Xmx512m");
 
 			javaArgList.add("-Djava.home=" + Tools.homeJreDir);
+			javaArgList.add("-Djava.io.tmpdir=" + getCacheDir().getAbsolutePath());
 			javaArgList.add("-Dos.name=Linux");
 			
 			File cacioAwtLibPath = new File(Tools.MAIN_PATH, "cacioawtlib");
@@ -80,10 +81,10 @@ public class InstallModActivity extends AppCompatActivity
 				StringBuilder libStr = new StringBuilder();
 				for (File file: cacioAwtLibPath.listFiles()) {
 					if (file.getName().endsWith(".jar")) {
-						libStr.append(file.getAbsolutePath() + ":");
+						libStr.append(":" + file.getAbsolutePath());
 					}
 				}
-				javaArgList.add("-Djava.library.path=" + libStr.toString());
+				javaArgList.add("-Xbootclasspath/a" + libStr.toString());
 			}
 			
 			File cacioArgOverrideFile = new File(cacioAwtLibPath, "overrideargs.txt");
@@ -94,6 +95,10 @@ public class InstallModActivity extends AppCompatActivity
 			javaArgList.add("-jar");
 			javaArgList.add(modFile.getAbsolutePath());
 
+			System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
+			
+			BinaryExecutor.setJavaEnvironment(this);
+			
 			BinaryExecutor.redirectStdio();
 			BinaryExecutor.setJavaEnvironment(this);
 			BinaryExecutor.initJavaRuntime();

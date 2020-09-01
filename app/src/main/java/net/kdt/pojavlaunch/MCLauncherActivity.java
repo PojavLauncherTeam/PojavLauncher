@@ -774,18 +774,18 @@ public class MCLauncherActivity extends AppCompatActivity
 				public void onClick(DialogInterface p1, int p2)
 				{
 					switch (p2) {
-						case 1: // Mod installer
+						case 0: // Mod installer
 							installMod();
 							break;
-						case 2: // Custom controls
+						case 1: // Custom controls
 							if (Tools.enableDevFeatures) {
 								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
 							}
 							break;
-						case 3: // Settings
+						case 2: // Settings
 							startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
 							break;
-						case 4:{ // About
+						case 3:{ // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
 								aboutB.setTitle(R.string.mcl_option_about);
 								try

@@ -55,6 +55,8 @@ public class BinaryExecutor
 		setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
 		
 		setLdLibraryPath(ldLibraryPath);
+		
+		// return ldLibraryPath;
 	}
 	
 	private static void setEnvironment(String name, String value) throws ErrnoException, IOException {
