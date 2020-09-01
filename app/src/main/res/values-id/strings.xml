@@ -48,7 +48,7 @@
 	
 	<!-- AlertDialog title -->
 	<string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
-	<string name="alerttitle_installmod">Pilih sebuah mod untuk di tambah</string>
+	<string name="alerttitle_installmod">Pilih sebuah mod untuk dipasang</string>
 	<string name="alerttitle_installoptifine">Pilih jar-nya OptiFine</string>
 	
 	<!-- Error messages -->

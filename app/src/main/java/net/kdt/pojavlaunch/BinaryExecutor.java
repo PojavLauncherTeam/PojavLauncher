@@ -28,11 +28,31 @@ public class BinaryExecutor
 		
 		// return fd;
 	}
-
+	
+	public static void setJavaEnvironment() {
+		setEnvironment("JAVA_HOME", Tools.homeJreDir);
+		setEnvironment("HOME", Tools.MAIN_PATH);
+		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
+		// setEnvironment("LIBGL_MIPMAP", "3");
+		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
+		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
+		setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+	}
+	
+	private static void setEnvironment(String name, String value) throws ErrnoException, IOException {
+		if (MainActivity.LAUNCH_TYPE == MainActivity.LTYPE_PROCESS) {
+			mLaunchShell.writeToProcess("export " + name + "=" + value);
+		} else {
+			Os.setenv(name, value, true);
+		}
+	}
+	
 	public static native int chdir(String path);
 	public static native boolean dlopen(String libPath);
 	public static native void setLdLibraryPath(String ldLibraryPath);
 	public static native void setupBridgeEGL();
+	
+	public static native void setupBridgeSurfaceAWT(Object surface);
 	
 	// BEFORE Load and execute PIE binary using dlopen and dlsym("main")
 	// AFTER: Execute a binary in forked process

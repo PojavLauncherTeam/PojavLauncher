@@ -123,10 +123,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean isLogAllow = false;
 	// private int navBarHeight = 40;
 	
-	private static final int LTYPE_PROCESS = 0;
-	private static final int LTYPE_INVOCATION = 1;
-	private static final int LTYPE_CREATEJAVAVM = 2;
-	private static final int LAUNCH_TYPE;
+	public static final int LTYPE_PROCESS = 0;
+	public static final int LTYPE_INVOCATION = 1;
+	public static final int LTYPE_CREATEJAVAVM = 2;
+	public static final int LAUNCH_TYPE;
 	
 	static {
 		int launchTypeFinal = LTYPE_INVOCATION;
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					@Override
 					public boolean onNavigationItemSelected(MenuItem menuItem) {
 						switch (menuItem.getItemId()) {
-							case R.id.nav_forceclose: dialogForceClose();
+							case R.id.nav_forceclose: dialogForceClose(MainActivity.this);
 								break;
 							case R.id.nav_viewlog: openLogOutput();
 								break;
@@ -949,13 +949,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	private ShellProcessOperation mLaunchShell;
-	private void setEnvironment(String name, String value) throws ErrnoException, IOException {
-		if (LAUNCH_TYPE == LTYPE_PROCESS) {
-			mLaunchShell.writeToProcess("export " + name + "=" + value);
-		} else {
-			Os.setenv(name, value, true);
-		}
-	}
 	
 	private static void startStrace(int pid) throws Exception {
 		String[] straceArgs = new String[] {"/system/bin/strace",
@@ -1054,13 +1047,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			// "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server"
 		);
 		
-		setEnvironment("JAVA_HOME", Tools.homeJreDir);
-		setEnvironment("HOME", Tools.MAIN_PATH);
-		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
-		// setEnvironment("LIBGL_MIPMAP", "3");
-		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
-		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
-		setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+		BinaryExecutor.setJavaEnvironment();
 		
 		// can fix java?
 		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
@@ -1082,6 +1069,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			BinaryExecutor.redirectStdio();
 			// DEPRECATED constructor (String) api 29
+			/*
 			FileObserver fobs = new FileObserver(logFile.getAbsolutePath(), FileObserver.MODIFY){
 				@Override
 				public void onEvent(int event, String str) {
@@ -1089,6 +1077,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			};
 			fobs.startWatching();
+			*/
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -1271,9 +1260,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		((Button) view).setText(isVis ? R.string.control_mouseoff: R.string.control_mouseon);
 	}
 
-	public void dialogForceClose()
-	{
-		new AlertDialog.Builder(this)
+	public static void dialogForceClose(Context ctx) {
+		new AlertDialog.Builder(ctx)
 			.setMessage(R.string.mcn_exit_confirm)
 			.setNegativeButton(android.R.string.cancel, null)
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
@@ -1307,6 +1295,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	@Override
 	public void onBackPressed() {
 		// Prevent back
+		// Catch back as Esc keycode at another place
 	}
 
 	public void hideKeyboard() {

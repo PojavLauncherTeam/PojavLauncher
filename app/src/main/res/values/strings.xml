@@ -48,8 +48,7 @@
 	
 	<!-- AlertDialog title -->
 	<string name="alerttitle_selectkeymap">Select a keymap json</string>
-	<string name="alerttitle_installmod">Select a mod to add</string>
-	<string name="alerttitle_installoptifine">Select OptiFine jar file</string>
+	<string name="alerttitle_installmod">Select a mod to install</string>
 	
 	<!-- Error messages -->
 	<string name="error_fatal">PojavLauncher has unexpectedly crashed</string>
@@ -87,7 +86,7 @@
 	
 	<string name="mcl_options">Options</string>
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
-	<string name="mcl_option_optifineinstall">Install OptiFine</string>
+	<string name="mcl_option_modinstall">Install mod (Forge, LabyMod, Fabric,...)</string>
 	<string name="mcl_option_checkupdate">Check for update</string>
 	<string name="mcl_option_customcontrol">Custom controls</string>
 	<string name="mcl_option_settings">Settings</string>
