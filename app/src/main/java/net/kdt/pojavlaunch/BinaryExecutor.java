@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.system.*;
 import java.io.*;
+import android.content.*;
 
 // This class should be named as 'LoadMe' as original
 public class BinaryExecutor
@@ -29,19 +30,36 @@ public class BinaryExecutor
 		// return fd;
 	}
 	
-	public static void setJavaEnvironment() {
+	public static void setJavaEnvironment(Context ctx) throws IOException, ErrnoException {
+		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
+		String ldLibraryPath = (
+			// To make libjli.so ignore re-execute
+			Tools.homeJreDir + "/lib/server:" +
+
+			"/system/" + libName + ":" +
+			"/vendor/" + libName + ":" +
+			"/vendor/" + libName + "/hw:" +
+
+			ctx.getApplicationInfo().nativeLibraryDir + ":" +
+
+			Tools.homeJreDir + "/lib/jli:" +
+			Tools.homeJreDir + "/lib"
+		);
+		
 		setEnvironment("JAVA_HOME", Tools.homeJreDir);
 		setEnvironment("HOME", Tools.MAIN_PATH);
-		setEnvironment("TMPDIR",  getCacheDir().getAbsolutePath());
+		setEnvironment("TMPDIR", ctx.getCacheDir().getAbsolutePath());
 		// setEnvironment("LIBGL_MIPMAP", "3");
-		setEnvironment("MESA_GLSL_CACHE_DIR", getCacheDir().getAbsolutePath());
+		setEnvironment("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
 		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
 		setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+		
+		setLdLibraryPath(ldLibraryPath);
 	}
 	
 	private static void setEnvironment(String name, String value) throws ErrnoException, IOException {
 		if (MainActivity.LAUNCH_TYPE == MainActivity.LTYPE_PROCESS) {
-			mLaunchShell.writeToProcess("export " + name + "=" + value);
+			MainActivity.mLaunchShell.writeToProcess("export " + name + "=" + value);
 		} else {
 			Os.setenv(name, value, true);
 		}

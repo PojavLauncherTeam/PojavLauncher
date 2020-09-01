@@ -68,25 +68,9 @@ public class InstallModActivity extends AppCompatActivity
 			javaArgList.add("-Djava.library.path=");
 			javaArgList.add("-jar");
 			javaArgList.add(modFile.getAbsolutePath());
-			
-			String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
-			String ldLibraryPath = (
-				// To make libjli.so ignore re-execute
-				Tools.homeJreDir + "/lib/server:" +
 
-				"/system/" + libName + ":" +
-				"/vendor/" + libName + ":" +
-				"/vendor/" + libName + "/hw:" +
-
-				getApplicationInfo().nativeLibraryDir + ":" +
-
-				Tools.homeJreDir + "/lib/jli:" +
-				Tools.homeJreDir + "/lib"
-			);
-			
-			BinaryExecutor.setJavaEnvironment();
 			BinaryExecutor.redirectStdio();
-			BinaryExecutor.setLdLibraryPath(ldLibraryPath);
+			BinaryExecutor.setJavaEnvironment(this);
 			BinaryExecutor.initJavaRuntime();
 			BinaryExecutor.chdir(Tools.MAIN_PATH);
 

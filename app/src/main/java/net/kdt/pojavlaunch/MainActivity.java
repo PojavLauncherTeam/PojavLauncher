@@ -948,7 +948,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		return args;
 	}
 
-	private ShellProcessOperation mLaunchShell;
+	public static ShellProcessOperation mLaunchShell;
 	
 	private static void startStrace(int pid) throws Exception {
 		String[] straceArgs = new String[] {"/system/bin/strace",
@@ -1029,25 +1029,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			mLaunchShell.initInputStream(this);
 		}
 
-		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
-		String ldLibraryPath = (
-			// To make libjli.so ignore re-execute
-			Tools.homeJreDir + "/lib/server:" +
-			
-			"/system/" + libName + ":" +
-			"/vendor/" + libName + ":" +
-			"/vendor/" + libName + "/hw:" +
-
-			getApplicationInfo().nativeLibraryDir + ":" +
-			
-			Tools.homeJreDir + "/lib/jli:" +
-			Tools.homeJreDir + "/lib"
-
-
-			// "$JAVA_HOME/lib:$JAVA_HOME/lib/jli:$JAVA_HOME/lib/server"
-		);
-		
-		BinaryExecutor.setJavaEnvironment();
+		BinaryExecutor.setJavaEnvironment(this);
 		
 		// can fix java?
 		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
@@ -1094,7 +1076,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			}, "RuntimeLogThread").start();
 
-			BinaryExecutor.setLdLibraryPath(ldLibraryPath);
 			BinaryExecutor.initJavaRuntime();
 			BinaryExecutor.chdir(Tools.MAIN_PATH);
 			
