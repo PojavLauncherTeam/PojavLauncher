@@ -764,6 +764,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	@Override
+	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			drawerLayout.openDrawer(Gravity.RIGHT);
+			return true;
+    	}
+		return super.onKeyLongPress(keyCode, event);
+	}
+	
+	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event)
 	{
 		AndroidLWJGLKeycode.execKey(this, event, keyCode, false);
