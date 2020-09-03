@@ -21,7 +21,7 @@
 
 package java.awt.image;
 
-import com.android.internal.awt.AndroidGraphics2D;
+import com.android.internal.awt.BufferedImageGraphics2D;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -710,10 +710,12 @@ public class BufferedImage extends Image implements WritableRenderedImage, Trans
      * @return the graphics2D object.
      */
     public Graphics2D createGraphics() {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		return BufferedImageGraphics2D.getInstance(this, null);
+		
+        //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         // return ge.createGraphics(this);
         // ???AWT hack, FIXME
-        return AndroidGraphics2D.getInstance();
+        //return AndroidGraphics2D.getInstance();
         // throw new RuntimeException("Not implemented!");
         // return null;
     }
