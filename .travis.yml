@@ -46,9 +46,9 @@ script:
   - ./gradlew test
 
 deploy:
-  provider: prerelease
+  provider: release
   api-key: $GITHUB_API_KEY
-  file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/debug/app-release.apk
+  file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/release/app-release.apk
   skip_cleanup: true
   name: PojavLauncher_DevBuild-$TRAVIS_COMMIT
   body: Automatic build of PojavLauncher from the latest source commit ($TRAVIS_COMMIT) built by Travis CI on $(date +'%F %T %Z').
