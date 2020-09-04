@@ -17,7 +17,7 @@ jobs:
 # the gradlew does not have exec perm already so
       run: chmod +x gradlew && ./gradlew build
     - name: Upload APK
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
           name: app
           path: app/build/outputs/apk/debug/app-debug.apk
