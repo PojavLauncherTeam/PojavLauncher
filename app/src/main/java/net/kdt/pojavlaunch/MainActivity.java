@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			}
 		}
 	};
-	private MinecraftGLView glSurfaceView;
+	private MinecraftGLView minecraftGLView;
 	private int guiScale;
 	private DisplayMetrics displayMetrics;
 	public boolean hiddenTextIgnoreUpdate = true;
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			this.toggleControlButton.setOnClickListener(this);
 			this.zoomButton.setVisibility(mVersionInfo.optifineLib == null ? View.GONE : View.VISIBLE);
 
-			this.glSurfaceView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
+			this.minecraftGLView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
 
 			ControlButton[] specialButtons = ControlButton.getSpecialButtons();
 			specialButtons[0].specialButtonListener = new View.OnClickListener(){
@@ -333,11 +333,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 										if (isPointerCaptureSupported()) {
 											if (!AndroidDisplay.grab && isCapturing) {
-												pointerSurface.releaseCapture(); // glSurfaceView.releasePointerCapture();
+												pointerSurface.releaseCapture(); // minecraftGLView.releasePointerCapture();
 												isCapturing = false;
 											} else if (AndroidDisplay.grab && !isCapturing) {
-												glSurfaceView.requestFocus();
-												pointerSurface.requestCapture(); // glSurfaceView.requestPointerCapture();
+												minecraftGLView.requestFocus();
+												pointerSurface.requestCapture(); // minecraftGLView.requestPointerCapture();
 												isCapturing = true;
 											}
 										}
@@ -416,9 +416,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			// System.loadLibrary("Regal");
 
-			glSurfaceView.setFocusable(true);
-			glSurfaceView.setFocusableInTouchMode(true);
-			glSurfaceView.setEGLContextClientVersion(2);
+			minecraftGLView.setFocusable(true);
+			minecraftGLView.setFocusableInTouchMode(true);
+			// minecraftGLView.setEGLContextClientVersion(2);
 
 			glTouchListener = new OnTouchListener(){
 				private boolean isTouchInHotbar = false;
@@ -429,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					// System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
 
 					int x = ((int) e.getX()) / scaleFactor;
-					int y = (glSurfaceView.getHeight() - ((int) e.getY())) / scaleFactor;
+					int y = (minecraftGLView.getHeight() - ((int) e.getY())) / scaleFactor;
 					int hudKeyHandled = handleGuiBar(x, y, e);
 					if (!AndroidDisplay.grab && gestureDetector.onTouchEvent(e)) {
 						if (hudKeyHandled != -1) {
@@ -611,7 +611,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			};
 
 			if (isPointerCaptureSupported()) {
-				this.pointerSurface = new PointerOreoWrapper(glSurfaceView);
+				this.pointerSurface = new PointerOreoWrapper(minecraftGLView);
 				this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
 						@Override
 						public boolean onCapturedPointer(View view, MotionEvent event) {
@@ -620,7 +620,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					});
 			}
 
-			glSurfaceView.setOnHoverListener(new View.OnHoverListener(){
+			minecraftGLView.setOnHoverListener(new View.OnHoverListener(){
 					@Override
 					public boolean onHover(View p1, MotionEvent p2) {
 						if (!AndroidDisplay.grab && mIsResuming) {
@@ -629,62 +629,56 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						return true;
 					}
 				});
-			glSurfaceView.setOnTouchListener(glTouchListener);
-			glSurfaceView.setRenderer(new GLTextureView.Renderer() {
+			minecraftGLView.setOnTouchListener(glTouchListener);
+			minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
+				
+					private boolean isCalled = false;
 					@Override
-					public void onSurfaceDestroyed(GL10 gl) {
-						Log.d(Tools.APP_NAME, "Surface destroyed.");
-					}
-
-					@Override
-					public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig p2)
-					{
+					public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
+						AndroidDisplay.windowWidth = width;
+						AndroidDisplay.windowHeight = height;
 						calculateMcScale();
-
-						EGL10 egl10 = (EGL10) EGLContext.getEGL();
-						AndroidContextImplementation.theEgl = egl10;
-						AndroidContextImplementation.context = egl10.eglGetCurrentContext();
-						AndroidContextImplementation.display = egl10.eglGetCurrentDisplay();
-						AndroidContextImplementation.read = egl10.eglGetCurrentSurface(EGL10.EGL_READ);
-						AndroidContextImplementation.draw = egl10.eglGetCurrentSurface(EGL10.EGL_DRAW);
 						
-						System.out.println(new StringBuffer().append("Gave up context: ").append(AndroidContextImplementation.context).toString());
+						// Should we do that?
+						if (!isCalled) {
+							isCalled = true;
+							
+							BinaryExecutor.setupBridgeWindow(new Surface(texture));
+							
+							new Thread(new Runnable(){
 
-						// Does it required anymore?
-						// AndroidDisplay.windowWidth += navBarHeight;
-						
-						if (LAUNCH_TYPE != LTYPE_PROCESS) {
-							BinaryExecutor.setupBridgeEGL();
-							egl10.eglMakeCurrent(AndroidContextImplementation.display, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
-						}
-						
-						new Thread(new Runnable(){
-
-								@Override
-								public void run() {
-									try {
-										Thread.sleep(200);
-										runCraft();
-									} catch (Throwable e) {
-										Tools.showError(MainActivity.this, e, true);
+									@Override
+									public void run() {
+										try {
+											Thread.sleep(200);
+											runCraft();
+										} catch (Throwable e) {
+											Tools.showError(MainActivity.this, e, true);
+										}
 									}
-								}
-							}).start();
+								}).start();
+						}
 					}
-					@Override
-					public void onDrawFrame(GL10 gl) {
-						//mkToast("onDrawFrame");
 
-					}
 					@Override
-					public void onSurfaceChanged(GL10 gl, int width, int height) {
-						AndroidDisplay.windowWidth = width / scaleFactor;
-						AndroidDisplay.windowHeight = height / scaleFactor;
+					public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
+						return true;
+					}
+
+					@Override
+					public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
+						AndroidDisplay.windowWidth = width;
+						AndroidDisplay.windowHeight = height;
+						calculateMcScale();
+						
+						// TODO: Implement this method for GLFW window size callback
+					}
+
+					@Override
+					public void onSurfaceTextureUpdated(SurfaceTexture texture) {
+						
 					}
 				});
-			glSurfaceView.setPreserveEGLContextOnPause(true);
-			glSurfaceView.setRenderMode(MinecraftGLView.RENDERMODE_CONTINUOUSLY);
-			// glSurfaceView.requestRender();
 		} catch (Throwable e) {
 			e.printStackTrace();
 			Tools.showError(this, e, true);
@@ -741,7 +735,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onResume() {
 		super.onResume();
 		mIsResuming = true;
-		if (glSurfaceView != null) glSurfaceView.requestRender();
+		// if (minecraftGLView != null) minecraftGLView.requestRender();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
@@ -751,8 +745,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		/*
-		 if (hasFocus && glSurfaceView.getVisibility() == View.GONE) {
-		 glSurfaceView.setVisibility(View.VISIBLE);
+		 if (hasFocus && minecraftGLView.getVisibility() == View.GONE) {
+		 minecraftGLView.setVisibility(View.VISIBLE);
 		 }
 		 */
 	}
@@ -1293,7 +1287,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	public void showKeyboard() {
 		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-		glSurfaceView.requestFocus();
+		minecraftGLView.requestFocus();
 	}
 
 	private void setRightOverride(boolean val) {

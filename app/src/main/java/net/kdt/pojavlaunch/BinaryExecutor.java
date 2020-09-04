@@ -70,7 +70,7 @@ public class BinaryExecutor
 	public static native int chdir(String path);
 	public static native boolean dlopen(String libPath);
 	public static native void setLdLibraryPath(String ldLibraryPath);
-	public static native void setupBridgeEGL();
+	public static native void setupBridgeWindow(Object surface);
 	
 	public static native void setupBridgeSurfaceAWT(long surface);
 	
