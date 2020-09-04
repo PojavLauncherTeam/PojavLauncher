@@ -16,8 +16,8 @@ jobs:
     - name: Build with Gradle
       run: chmod +x gradlew
            ./gradlew clean build
-# should test???
            ./gradlew test
+# should test???
 
     - name: Upload APK
       uses: actions/upload-artifact@v1
