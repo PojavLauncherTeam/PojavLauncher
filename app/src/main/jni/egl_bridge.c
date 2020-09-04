@@ -7,9 +7,10 @@
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 
-struct ANativeWindow* windowBridge;
-
 struct PotatoBridge {
+	ANativeWindow* androidWindow;
+	void* androidDisplay;
+	
 	void* eglContext;
 	void* eglDisplay;
 	void* eglSurface;
@@ -21,14 +22,15 @@ struct PotatoBridge {
 struct PotatoBridge potatoBridge;
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
-	windowBridge = ANativeWindow_fromSurface(env, surface);
+	potatoBridge.androidDisplay = EGL_DEFAULT_DISPLAY;
+	potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
 }
 
 // Called from JNI_OnLoad of liblwjgl_opengl32
 void pojav_openGLOnLoad() {
 	printf("ANativeWindow pointer = %p\n", windowBridge);
 	
-	potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+	potatoBridge.eglDisplay = eglGetDisplay(potatoBridge.androidDisplay);
 	if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
 		printf("Error: eglGetDefaultDisplay() failed: %p\n", eglGetError());
 		return; // -1;
@@ -42,10 +44,12 @@ void pojav_openGLOnLoad() {
 	}
 	
 	static const EGLint attribs[] = {
-		EGL_RED_SIZE, 1,
-		EGL_GREEN_SIZE, 1,
-		EGL_BLUE_SIZE, 1,
-		EGL_DEPTH_SIZE, 1,
+		EGL_RED_SIZE, 8,
+		EGL_GREEN_SIZE, 8,
+		EGL_BLUE_SIZE, 8,
+		EGL_ALPHA_SIZE, 0,
+		EGL_DEPTH_SIZE, 16,
+		EGL_STENCIL_SIZE, 0,
 		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
 		EGL_NONE
 	};
