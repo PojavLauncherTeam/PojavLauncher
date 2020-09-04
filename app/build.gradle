@@ -15,6 +15,10 @@ android {
         versionCode 156235
         versionName "3.2.0_6401b_20200822"
         multiDexEnabled true //important
+		
+		ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
 	
     buildTypes {
@@ -25,6 +29,12 @@ android {
 			// defaultConfig already set
             // multiDexEnabled = true
             debuggable = true
+        }
+    }
+	
+	externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
         }
     }
 	

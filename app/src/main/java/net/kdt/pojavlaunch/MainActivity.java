@@ -643,7 +643,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						if (!isCalled) {
 							isCalled = true;
 							
-							BinaryExecutor.setupBridgeWindow(new Surface(texture));
+							JREUtils.setupBridgeWindow(new Surface(texture));
 							
 							new Thread(new Runnable(){
 
@@ -1027,7 +1027,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		// can fix java?
 		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
 		
-		BinaryExecutor.setJavaEnvironment(this);
+		JREUtils.setJavaEnvironment(this);
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");
@@ -1044,7 +1044,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			Os.dup2(FileDescriptor.out, OsConstants.STDOUT_FILENO);
 		*/
 
-			BinaryExecutor.redirectStdio();
+			JREUtils.redirectStdio();
 			// DEPRECATED constructor (String) api 29
 			/*
 			FileObserver fobs = new FileObserver(logFile.getAbsolutePath(), FileObserver.MODIFY){
@@ -1071,8 +1071,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			}, "RuntimeLogThread").start();
 
-			BinaryExecutor.initJavaRuntime();
-			BinaryExecutor.chdir(Tools.MAIN_PATH);
+			JREUtils.initJavaRuntime();
+			JREUtils.chdir(Tools.MAIN_PATH);
 			
 			if (new File(Tools.MAIN_PATH, "strace.txt").exists()) {
 				startStrace(android.os.Process.myTid());

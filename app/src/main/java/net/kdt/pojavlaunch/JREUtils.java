@@ -4,10 +4,9 @@ import android.system.*;
 import java.io.*;
 import android.content.*;
 
-// This class should be named as 'LoadMe' as original
-public class BinaryExecutor
+public class JREUtils
 {
-	private BinaryExecutor() {}
+	private JREUtils() {}
 	
 	public static void initJavaRuntime() {
 		dlopen(Tools.homeJreDir + "/lib/jli/libjli.so");
@@ -79,6 +78,6 @@ public class BinaryExecutor
 	public static native int executeBinary(String[] args);
 
 	static {
-		System.loadLibrary("binexecutor");
+		System.loadLibrary("pojavexec");
 	}
 }

@@ -28,7 +28,7 @@ public class InstallModActivity extends AppCompatActivity
 						Surface surface = new Surface(tex);
 						Field field = surface.getClass().getDeclaredField("mNativeObject");
 						field.setAccessible(true);
-						BinaryExecutor.setupBridgeSurfaceAWT((long) field.get(surface));
+						JREUtils.setupBridgeSurfaceAWT((long) field.get(surface));
 					} catch (Throwable th) {
 						Tools.showError(InstallModActivity.this, th, true);
 					}
@@ -97,12 +97,12 @@ public class InstallModActivity extends AppCompatActivity
 
 			System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 			
-			BinaryExecutor.setJavaEnvironment(this);
+			JREUtils.setJavaEnvironment(this);
 			
-			BinaryExecutor.redirectStdio();
-			BinaryExecutor.setJavaEnvironment(this);
-			BinaryExecutor.initJavaRuntime();
-			BinaryExecutor.chdir(Tools.MAIN_PATH);
+			JREUtils.redirectStdio();
+			JREUtils.setJavaEnvironment(this);
+			JREUtils.initJavaRuntime();
+			JREUtils.chdir(Tools.MAIN_PATH);
 
 			VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
 		} catch (Throwable th) {
