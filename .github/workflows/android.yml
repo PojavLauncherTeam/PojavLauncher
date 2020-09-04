@@ -14,8 +14,11 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-# the gradlew does not have exec perm already so
-      run: chmod +x gradlew && ./gradlew build
+      run: chmod +x gradlew
+           ./gradlew clean build
+# should test???
+           ./gradlew test
+
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
