@@ -72,23 +72,24 @@ public class MCLauncherActivity extends AppCompatActivity
 		AndroidDisplay.windowWidth = dm.widthPixels;
 		AndroidDisplay.windowHeight = dm.heightPixels;
 		viewInit();
+
+		final View decorView = getWindow().getDecorView();
+		decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+				@Override
+				public void onSystemUiVisibilityChange(int visibility) {
+					if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+						decorView.setSystemUiVisibility(
+							View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+					}
+				}
+			});	
 		
-	   final View decorView = getWindow().getDecorView();
-       decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
-        @Override
-        public void onSystemUiVisibilityChange(int visibility) {
-            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            }
-        }
-    });	
-		
-		
+		if (BuildConfig.DEBUG)
+			Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
 	}
 	// DEBUG
 	//new android.support.design.widget.NavigationView(this);
@@ -131,7 +132,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		} catch(Exception e) {
 			//Tools.throwError(this, e);
 			e.printStackTrace();
-			toast(getStr(R.string.toast_login_error, e.getMessage()));
+			Toast.makeText(this, getStr(R.string.toast_login_error, e.getMessage()), Toast.LENGTH_LONG).show();
 			finish();
 		}
 
@@ -300,17 +301,6 @@ public class MCLauncherActivity extends AppCompatActivity
 		}
 
 		return output;
-	}
-
-	private void toast(final String str) {
-		runOnUiThread(new Runnable(){
-
-				@Override
-				public void run()
-				{
-					Toast.makeText(MCLauncherActivity.this, str, Toast.LENGTH_SHORT).show();
-				}
-			});
 	}
 
 	public void mcaccSwitchUser(View view)
@@ -754,14 +744,6 @@ public class MCLauncherActivity extends AppCompatActivity
 	public View findId(int id)
 	{
 		return findViewById(id);
-	}
-	private void mkToast(final String str)
-	{
-		runOnUiThread(new Runnable() {
-				public void run() {
-					Toast.makeText(MCLauncherActivity.this, str, Toast.LENGTH_LONG).show();
-				}
-			});
 	}
 
 	public void launcherMenu(View view)
