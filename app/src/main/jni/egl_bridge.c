@@ -33,7 +33,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEn
 void pojav_openGLOnLoad() {
 	FILE *fp = fopen ("/sdcard/games/.minecraft/eglout.txt", "w+");
 	
-	fprintf(fp, "ANativeWindow pointer = %p\n", windowBridge);
+	fprintf(fp, "ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
 	
 	potatoBridge.eglDisplay = eglGetDisplay(potatoBridge.androidDisplay);
 	if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
@@ -95,7 +95,7 @@ void pojav_openGLOnLoad() {
         assert(val == 2);
     }
 	
-	potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config, windowBridge, NULL);
+	potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
 	
 	if (!potatoBridge.eglSurface) {
         fprintf(fp, "Error: eglCreateWindowSurface failed: %p\n", eglGetError());
@@ -120,7 +120,7 @@ void pojav_openGLOnLoad() {
 	}
 	
 	// Test
-	glClearColor(0.5f, 0.5f, 0.5f, 1f);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
 }
