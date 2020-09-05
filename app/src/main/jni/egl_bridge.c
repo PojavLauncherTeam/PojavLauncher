@@ -38,6 +38,10 @@ void pojav_openGLOnUnload() {
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
+	
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz) {
 	printf("EGLBridge: Initializing\n");
 	printf("ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
 	
@@ -114,10 +118,13 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         assert(eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_SURFACE_TYPE, &val));
         assert(val & EGL_WINDOW_BIT);
     }
+	
+/*
 	return JNI_TRUE;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz) {
+*/
 	printf("EGLBridge: Making current\n");
 	printf("EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
 		potatoBridge.eglContext,
@@ -131,12 +138,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	}
 	
 	// Test
-/*
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
-*/
-	
+
 	return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
 }
 
