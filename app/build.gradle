@@ -8,6 +8,14 @@ android {
       lintOptions {
           abortOnError false
       }
+    signingConfigs {
+        customDebug {
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
@@ -18,6 +26,11 @@ android {
     }
 	
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.customDebug
+        }
         release {
 	    // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
