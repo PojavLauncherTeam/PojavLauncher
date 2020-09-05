@@ -1,3 +1,4 @@
+![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11.2
 
@@ -6,7 +7,8 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 
 ## Current status
 - [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
-- [x] JVDroid OpenJDK 11 (32 and 64-bit ARM and x86). Partial, no error `can't lock mutex`, but now exit with none output.
+- [x] **Temporary removed** ~~JVDroid OpenJDK 11 (32 and 64-bit ARM and x86). Partial, no error `can't lock mutex`, but now exit with none output.~~
+- [x] OpenJDK 9 Mobile port
 - [ ] AWT/Swing for mod installer. Will use `Caciocavallo` project.
 - [ ] OpenGL in OpenJDK environment. Use Boardwalk 2 method or other.
 - [ ] OpenAL 64-bit version

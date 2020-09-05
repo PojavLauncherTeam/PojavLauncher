@@ -3,11 +3,22 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     dexOptions {
-    javaMaxHeapSize "4g"
+        javaMaxHeapSize "4g"
     }
-      lintOptions {
-          abortOnError false
-      }
+	
+    lintOptions {
+        abortOnError false
+    }
+	
+	signingConfigs {
+        customDebug {
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+		}
+    }
+	
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
@@ -15,16 +26,32 @@ android {
         versionCode 156235
         versionName "3.2.0_6401b_20200822"
         multiDexEnabled true //important
+		
+		ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
 	
     buildTypes {
+		debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.customDebug
+		}
+		
         release {
-	    // Don't set to true or java.awt will be a.a or something similar.
+	        // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 			// defaultConfig already set
             // multiDexEnabled = true
             debuggable = true
+        }
+    }
+	
+	externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
         }
     }
 	

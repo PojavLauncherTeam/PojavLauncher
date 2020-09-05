@@ -755,22 +755,19 @@ public class MCLauncherActivity extends AppCompatActivity
 				@Override
 				public void onClick(DialogInterface p1, int p2)
 				{
-					switch(p2){
-						case 0:{ // Mods manager
-								modManager();
-							} break;
-						case 1:{ // OptiFine installer
-								installOptiFine();
-							} break;
-						case 2:{ // Custom controls
-								if (Tools.enableDevFeatures) {
-									startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
-								}
-							} break;
-						case 3:{ // Settings
-								startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
-							} break;
-						case 4:{ // About
+					switch (p2) {
+						case 0: // Mod installer
+							installMod();
+							break;
+						case 1: // Custom controls
+							if (Tools.enableDevFeatures) {
+								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
+							}
+							break;
+						case 2: // Settings
+							startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
+							break;
+						case 3:{ // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
 								aboutB.setTitle(R.string.mcl_option_about);
 								try
@@ -792,68 +789,9 @@ public class MCLauncherActivity extends AppCompatActivity
 		builder.show();
 	}
 
-	public void modManager()
-	{
-		/*
-		File file1 = new File(Tools.mpModEnable);
-		File file2 = new File(Tools.mpModDisable);
-		File file3 = new File(Tools.mpModAddNewMo);
-		file1.mkdirs();
-		file2.mkdir();
-		try
-		{
-			file3.createNewFile();
-		}
-		catch (IOException e){}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Mods manager (Forge)");
-		builder.setPositiveButton(android.R.string.cancel, null);
-
-		AlertDialog dialog = builder.create();
-
-		MFileListView flv = new MFileListView(this, dialog);
-		flv.listFileAt(Tools.datapath + "/ModsManager");
-		flv.setFileSelectedListener(new MFileSelectedListener(){
-
-				@Override
-				public void onFileLongClick(File file, String path, String nane, String extension)
-				{
-					// TODO: Implement this method
-				}
-				@Override
-				public void onFileSelected(File file, String path, String nane, String extension)
-				{
-					// TODO: Implement this method
-					if(extension.equals(".jar")) {
-
-					} else {
-						openSelectMod();
-					}
-				}
-			});
-		dialog.setView(flv);
-		dialog.show();
-		*/
-		
-		Tools.dialogOnUiThread(this, "Mods manager", "This feature is not yet supported!");
-	}
-
-	public void openSelectMod()
-	{
+	private void installMod() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.alerttitle_installmod);
-		builder.setPositiveButton(android.R.string.cancel, null);
-
-		AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this);
-
-		dialog.setView(flv);
-		dialog.show();
-	}
-
-	private void installOptiFine() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.alerttitle_installoptifine);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
@@ -863,150 +801,15 @@ public class MCLauncherActivity extends AppCompatActivity
 				@Override
 				public void onFileSelected(File file, String path, String name) {
 					if (name.endsWith(".jar")) {
-						doInstallOptiFine(file);
+						Intent intent = new Intent(MCLauncherActivity.this, InstallModActivity.class);
+						intent.putExtra("modFile", file);
+						startActivity(intent);
 						dialog.dismiss();
 					}
 				}
 			});
 		dialog.setView(flv);
 		dialog.show();
-	}
-
-	private void doInstallOptiFine(File optifineFile) {
-		new OptiFineInstaller().execute(optifineFile);
-	}
-
-	private class OptiFineInstaller extends AsyncTask<File, String, Throwable>
-	{
-		private ProgressDialog dialog;
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			dialog = new ProgressDialog(MCLauncherActivity.this);
-			dialog.setTitle("Installing OptiFine");
-			dialog.setMessage("Preparing");
-			dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			dialog.setMax(5);
-			dialog.setCancelable(false);
-			dialog.show();
-		}
-
-		@Override
-		protected Throwable doInBackground(File[] file) {
-			final StringBuilder currentLog = new StringBuilder();
-			LoggerJava.LoggerOutputStream logOut = new LoggerJava.LoggerOutputStream(System.out, new LoggerJava.OnStringPrintListener(){
-					@Override
-					public void onCharPrint(char c)
-					{
-						currentLog.append(c);
-					}
-				});
-			LoggerJava.LoggerOutputStream logErr = new LoggerJava.LoggerOutputStream(System.err, new LoggerJava.OnStringPrintListener(){
-					@Override
-					public void onCharPrint(char c)
-					{
-						currentLog.append(c);
-					}
-				});
-			Throwable throwable = null;
-			File convertedFile = null;
-			try {
-				publishProgress("Preparing", "5");
-				
-				String origMd5 = OptiFinePatcher.calculateMD5(file[0]);
-				convertedFile = new File(Tools.optifineDir, origMd5 + ".jar");
-				if (!convertedFile.exists()) {
-					publishProgress("Patching OptiFine Installer", null, "1", "true");
-
-					Tools.extractAssetFolder(MCLauncherActivity.this, "optifine_patch", Tools.optifineDir, true);
-
-					new File(Tools.optifineDir + "/optifine_patch/AndroidOptiFineUtilities.class.patch").delete();
-
-					String[] output = Tools.patchOptifineInstaller(MCLauncherActivity.this, file[0]);
-					File patchedFile = new File(output[1]);
-
-					publishProgress("Converting OptiFine", null, null, "false");
-
-					System.setOut(new PrintStream(logOut));
-					System.setErr(new PrintStream(logErr));
-
-					if (!convertedFile.exists()) {
-						RuntimeException dxError = new RuntimeException(getResources().getString(R.string.error_convert_lib, "OptiFine") + "\n" + currentLog.toString());
-						dxError.setStackTrace(new StackTraceElement[0]);
-						throw dxError;
-					}
-
-					patchedFile.delete();
-				}
-
-				publishProgress("Launching OptiFine installer", null, null, "true");
-
-				File optDir = getDir("dalvik-cache", 0);
-				optDir.mkdir();
-
-				DexClassLoader loader = new DexClassLoader(convertedFile.getAbsolutePath(), optDir.getAbsolutePath(), getApplicationInfo().nativeLibraryDir, getClass().getClassLoader());
-		 		// AndroidOptiFineUtilities.originalOptifineJar = convertedFile.getAbsolutePath();
-
-				Class installerClass = loader.loadClass("optifine.AndroidInstaller");
-				Method installerMethod = installerClass.getDeclaredMethod("doInstall", File.class);
-				installerMethod.invoke(null, new File(Tools.MAIN_PATH));
-
-				publishProgress("(4/5) Patching OptiFine Tweaker", null, null);
-				File optifineLibFile = new File("unimpl");
-				if (!optifineLibFile.exists()) {
-					throw new FileNotFoundException(optifineLibFile.getAbsolutePath() + "\n\n--- OptiFine installer log ---\n" + currentLog.toString());
-				}
-				new OptiFinePatcher(optifineLibFile).saveTweaker();
-				convertedFile.delete();
-				
-				publishProgress("(5/5) Done!", null, null);
-				Thread.sleep(500);
-			} catch (Throwable th) {
-				throwable = th;
-			} finally {
-				System.setOut(logOut.getRootStream());
-				System.setErr(logErr.getRootStream());
-				/*
-				 if (throwable != null && convertedFile != null) {
-				 convertedFile.delete();
-				 }
-				 */
-				return throwable;
-			}
-		}
-/*
-		private Object fromConfig(DexClassLoader loader, String name) throws ReflectiveOperationException {
-			Field f = loader.loadClass("Config").getDeclaredField(name);
-			f.setAccessible(true);
-			return f.get(null);
-		}
-*/
-		@Override
-		protected void onProgressUpdate(String[] text) {
-			super.onProgressUpdate(text);
-			dialog.setMessage(text[0]);
-			if (text.length > 1 && text[1] != null) {
-				dialog.setMax(Integer.valueOf(text[1]));
-			} if (text.length > 2) {
-				dialog.setProgress(dialog.getProgress() + 1);
-			} if (text.length > 3 && text[3] != null) {
-				dialog.setIndeterminate(Boolean.getBoolean(text[3]));
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Throwable th) {
-			super.onPostExecute(th);
-			dialog.dismiss();
-
-			new RefreshVersionListTask().execute();
-
-			if (th == null) {
-				Toast.makeText(MCLauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
-			} else {
-				Tools.showError(MCLauncherActivity.this, th);
-			}
-		}
 	}
 
 	private class ViewPagerAdapter extends FragmentPagerAdapter {

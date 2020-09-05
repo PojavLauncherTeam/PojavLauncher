@@ -43,6 +43,11 @@
 
 		<activity
 			android:screenOrientation="sensorLandscape"
+			android:name=".InstallModActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"/>
+		
+		<activity
+			android:screenOrientation="sensorLandscape"
 			android:name=".CustomControlsActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		

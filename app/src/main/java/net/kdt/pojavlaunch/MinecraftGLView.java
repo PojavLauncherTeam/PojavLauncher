@@ -5,7 +5,7 @@ import android.util.*;
 import android.view.*;
 import com.kdt.glsupport.*;
 
-public class MinecraftGLView extends GLTextureView
+public class MinecraftGLView extends TextureView
 {
 	// private View.OnTouchListener mTouchListener;
     public MinecraftGLView(Context context) {
@@ -17,18 +17,5 @@ public class MinecraftGLView extends GLTextureView
         super(context, attributeSet);
 		//setPreserveEGLContextOnPause(true);
     }
-
-	@Override
-	public void setOnTouchListener(View.OnTouchListener l)
-	{
-		super.setOnTouchListener(l);
-		// mTouchListener = l;
-	}
-
-	@Override
-	public void setOnClickListener(View.OnClickListener l)
-	{
-		super.setOnClickListener(l);
-	}
 }
 

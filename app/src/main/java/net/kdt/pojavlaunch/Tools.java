@@ -84,9 +84,16 @@ public final class Tools
 		String[] classpath = generateLibClasspath(info);
 
 		// Debug: LWJGL 3 override
+		File lwjgl2Folder = new File(Tools.MAIN_PATH, "lwjgl2");
 		File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
 		if (info.arguments != null && lwjgl3Folder.exists()) {
 			for (File file: lwjgl3Folder.listFiles()) {
+				if (file.getName().endsWith(".jar")) {
+					libStr.append(file.getAbsolutePath() + ":");
+				}
+			}
+		} else if (lwjgl2Folder.exists()) {
+			for (File file: lwjgl2Folder.listFiles()) {
 				if (file.getName().endsWith(".jar")) {
 					libStr.append(file.getAbsolutePath() + ":");
 				}
