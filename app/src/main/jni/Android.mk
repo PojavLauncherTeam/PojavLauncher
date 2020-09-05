@@ -1,7 +1,8 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_LDLIBS := -ldl -llog -lEGL -landroid
+# Link GLESv2 for test
+LOCAL_LDLIBS := -ldl -llog -landroid -lEGL -lGLESv2
 LOCAL_MODULE := pojavexec
 
 LOCAL_SRC_FILES := \
