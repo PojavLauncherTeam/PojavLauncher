@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include <EGL/egl.h>
 
-// #include <GLES2/gl2.h>
+#ifdef GLES_TEST
+#include <GLES2/gl2.h>
+#endif
 
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
@@ -138,9 +140,11 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	}
 	
 	// Test
+#ifdef GLES_TEST
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+#endif
 
 	return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
 }
