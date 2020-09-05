@@ -2,7 +2,10 @@
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <EGL/egl.h>
+
+#include <GLES2/gl2.h>
 
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
@@ -28,18 +31,20 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEn
 
 // Called from JNI_OnLoad of liblwjgl_opengl32
 void pojav_openGLOnLoad() {
-	printf("ANativeWindow pointer = %p\n", windowBridge);
+	FILE *fp = fopen ("/sdcard/games/.minecraft/eglout.txt", "w+");
+	
+	fprintf(fp, "ANativeWindow pointer = %p\n", windowBridge);
 	
 	potatoBridge.eglDisplay = eglGetDisplay(potatoBridge.androidDisplay);
 	if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
-		printf("Error: eglGetDefaultDisplay() failed: %p\n", eglGetError());
+		fprintf(fp, "Error: eglGetDefaultDisplay() failed: %p\n", eglGetError());
 		return; // -1;
 	}
 	
 	eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 	
 	if (!eglInitialize(potatoBridge.eglDisplay, NULL, NULL)) {
-		printf("Error: eglInitialize() failed\n");
+		fprintf(fp, "Error: eglInitialize() failed\n");
 		return; // -2;
 	}
 	
@@ -63,7 +68,7 @@ void pojav_openGLOnLoad() {
 	EGLint vid;
 	
 	if (!eglChooseConfig(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
-		printf("Error: couldn't get an EGL visual config\n");
+		fprintf(fp, "Error: couldn't get an EGL visual config\n");
 		return; // -3;
 	}
 	
@@ -71,7 +76,7 @@ void pojav_openGLOnLoad() {
 	assert(num_configs > 0);
 
 	if (!eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
-		printf("Error: eglGetConfigAttrib() failed\n");
+		fprintf(fp, "Error: eglGetConfigAttrib() failed\n");
 		return; // -4;
 	}
 
@@ -79,7 +84,7 @@ void pojav_openGLOnLoad() {
 
 	potatoBridge.eglContext = eglCreateContext(potatoBridge.eglDisplay, config, EGL_NO_CONTEXT, ctx_attribs);
 	if (!potatoBridge.eglContext) {
-		printf("Error: eglCreateContext failed\n");
+		fprintf(fp, "Error: eglCreateContext failed\n");
 		return; // -5;
 	}
 
@@ -93,7 +98,7 @@ void pojav_openGLOnLoad() {
 	potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config, windowBridge, NULL);
 	
 	if (!potatoBridge.eglSurface) {
-        printf("Error: eglCreateWindowSurface failed: %p\n", eglGetError());
+        fprintf(fp, "Error: eglCreateWindowSurface failed: %p\n", eglGetError());
         return; // -6;
     }
 	
@@ -104,15 +109,20 @@ void pojav_openGLOnLoad() {
         assert(val & EGL_WINDOW_BIT);
     }
 	
-	printf("EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
+	fprintf(fp, "EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
 		potatoBridge.eglContext,
 		potatoBridge.eglDisplay,
 		potatoBridge.eglSurface 
 	);
 	
 	if (eglMakeCurrent(potatoBridge.eglDisplay, potatoBridge.eglSurface, potatoBridge.eglSurface, potatoBridge.eglContext) == EGL_FALSE) {
-		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
+		fprintf(fp, "Error: eglMakeCurrent() failed: %p\n", eglGetError());
 	}
+	
+	// Test
+	glClearColor(0.5f, 0.5f, 0.5f, 1f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
 }
 
 void pojav_openGLOnUnload() {
