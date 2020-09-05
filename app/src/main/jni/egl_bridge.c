@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <EGL/egl.h>
 
-#include <GLES2/gl2.h>
+// #include <GLES2/gl2.h>
 
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
@@ -106,21 +106,6 @@ void pojav_openGLOnLoad() {
         assert(eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_SURFACE_TYPE, &val));
         assert(val & EGL_WINDOW_BIT);
     }
-	
-	printf("EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
-		potatoBridge.eglContext,
-		potatoBridge.eglDisplay,
-		potatoBridge.eglSurface 
-	);
-	
-	if (eglMakeCurrent(potatoBridge.eglDisplay, potatoBridge.eglSurface, potatoBridge.eglSurface, potatoBridge.eglContext) == EGL_FALSE) {
-		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
-	}
-	
-	// Test
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
 }
 
 void pojav_openGLOnUnload() {
@@ -129,6 +114,28 @@ void pojav_openGLOnUnload() {
 	eglDestroyContext(potatoBridge.eglDisplay, potatoBridge.eglContext);
 	eglTerminate(potatoBridge.eglDisplay);
 	eglReleaseThread();
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz) {
+	printf("EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
+		potatoBridge.eglContext,
+		potatoBridge.eglDisplay,
+		potatoBridge.eglSurface 
+	);
+	
+	EGLBoolean success = eglMakeCurrent(potatoBridge.eglDisplay, potatoBridge.eglSurface, potatoBridge.eglSurface, potatoBridge.eglContext);
+	if (success == EGL_FALSE) {
+		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
+	}
+	
+	// Test
+/*
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+*/
+	
+	return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv *env, jclass clazz) {
