@@ -1,8 +1,11 @@
 #include <jni.h>
 #include <assert.h>
+#include <dlfcn.h>
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <EGL/egl.h>
 
 #ifdef GLES_TEST
@@ -138,6 +141,9 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	if (success == EGL_FALSE) {
 		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
 	}
+	
+	// Init gl4es before
+	dlopen("libgl04es.so", RTLD_GLOBAL | RTLD_LAZY);
 	
 	// Test
 #ifdef GLES_TEST
