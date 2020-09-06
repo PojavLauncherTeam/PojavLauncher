@@ -9,6 +9,11 @@ LOCAL_SRC_FILES := \
     egl_bridge.c \
     jre_launcher.c \
     utils.c
+include $(BUILD_SHARED_LIBRARY)
 
+# libawt_xawt without X11
+include $(CLEAR_VARS)
+LOCAL_MODULE := awt_xawt
+LOCAL_SRC_FILES := xawt_fake.c
 include $(BUILD_SHARED_LIBRARY)
 
