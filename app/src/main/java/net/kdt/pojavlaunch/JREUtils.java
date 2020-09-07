@@ -17,6 +17,7 @@ public class JREUtils
 		dlopen(Tools.homeJreDir + "/lib/libnio.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
+		dlopen("libgl04es.so");
 	}
 
 	public static File redirectStdio(boolean current) throws ErrnoException {
