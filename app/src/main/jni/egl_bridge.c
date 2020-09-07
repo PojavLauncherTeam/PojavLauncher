@@ -18,7 +18,7 @@
 struct PotatoBridge {
 	ANativeWindow* androidWindow;
 	
-	EGLContext* eglContext;
+	void** eglContext;
 	EGLDisplay eglDisplay;
 	EGLSurface eglSurface;
 /*
