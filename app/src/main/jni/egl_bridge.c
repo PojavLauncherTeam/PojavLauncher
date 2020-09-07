@@ -17,7 +17,6 @@
 
 struct PotatoBridge {
 	ANativeWindow* androidWindow;
-	void* androidDisplay;
 	
 	EGLContext* eglContext;
 	EGLDisplay eglDisplay;
@@ -30,7 +29,6 @@ struct PotatoBridge {
 struct PotatoBridge potatoBridge;
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
-	potatoBridge.androidDisplay = EGL_DEFAULT_DISPLAY;
 	potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
 }
 
@@ -50,7 +48,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	printf("EGLBridge: Initializing\n");
 	printf("ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
 	
-	potatoBridge.eglDisplay = eglGetDisplay(potatoBridge.androidDisplay);
+	potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 	if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
 		printf("Error: eglGetDefaultDisplay() failed: %p\n", eglGetError());
 		return JNI_FALSE;
@@ -148,9 +146,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	
 	// Test
 #ifdef GLES_TEST
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+	printf("First frame error: %p\n", eglGetError());
 #endif
 
 	return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
