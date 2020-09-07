@@ -18,7 +18,7 @@
 struct PotatoBridge {
 	ANativeWindow* androidWindow;
 	
-	void** eglContext;
+	EGLContext eglContext;
 	EGLDisplay eglDisplay;
 	EGLSurface eglSurface;
 /*
@@ -96,7 +96,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	
 	eglBindAPI(EGL_OPENGL_ES_API);
 
-	potatoBridge.eglContext = &eglCreateContext(potatoBridge.eglDisplay, config, EGL_NO_CONTEXT, ctx_attribs);
+	potatoBridge.eglContext = eglCreateContext(potatoBridge.eglDisplay, config, EGL_NO_CONTEXT, ctx_attribs);
 	if (!potatoBridge.eglContext) {
 		printf("Error: eglCreateContext failed\n");
 		return JNI_FALSE;
@@ -105,7 +105,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	// test eglQueryContext() 
 	{
         EGLint val;
-        eglQueryContext(potatoBridge.eglDisplay, *potatoBridge.eglContext, EGL_CONTEXT_CLIENT_VERSION, &val);
+        eglQueryContext(potatoBridge.eglDisplay, potatoBridge.eglContext, EGL_CONTEXT_CLIENT_VERSION, &val);
         assert(val == 2);
     }
 	
@@ -136,7 +136,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 		potatoBridge.eglSurface 
 	);
 	
-	EGLBoolean success = eglMakeCurrent(potatoBridge.eglDisplay, potatoBridge.eglSurface, potatoBridge.eglSurface, *potatoBridge.eglContext);
+	EGLBoolean success = eglMakeCurrent(potatoBridge.eglDisplay, potatoBridge.eglSurface, potatoBridge.eglSurface, potatoBridge.eglContext);
 	if (success == EGL_FALSE) {
 		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
 	}
