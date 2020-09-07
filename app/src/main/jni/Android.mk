@@ -16,16 +16,6 @@ LOCAL_PATH := $(LOCAL_PATH)/awt_xawt
 include $(CLEAR_VARS)
 LOCAL_MODULE := awt_xawt
 LOCAL_CFLAGS += -DHEADLESS
-LOCAL_SRC_FILES := \
-    xawt_fake.c
-#    awt/awt_AWTEvent.c \
-#    awt/awt_DrawingSurface.c \
-#    awt/awt_Event.c \
-#    awt/awt_GraphicsEnv.c \
-#    awt/awt_InputMethod.c \
-#    awt/awt_Insets.c \
-#    awt/awt_Robot.c \
-    
-    
+LOCAL_SRC_FILES := xawt_fake.c
 include $(BUILD_SHARED_LIBRARY)
 

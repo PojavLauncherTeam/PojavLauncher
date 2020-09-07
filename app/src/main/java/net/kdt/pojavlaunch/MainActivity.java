@@ -837,7 +837,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private FileObserver mLogObserver;
 	private void runCraft() throws Throwable {
 		if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
-			final File currLogFile = JREUtils.redirectStdio(false);
+			final File currLogFile = JREUtils.redirectStdio(true);
 			// DEPRECATED constructor (String) api 29
 			mLogObserver = new FileObserver(currLogFile.getAbsolutePath(), FileObserver.MODIFY){
 				@Override
@@ -848,7 +848,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							Tools.write(file, "");
 						}
 					} catch (Throwable th) {
-						th.printStackTrace();
+						Tools.showError(MainActivity.this, th);
+						mLogObserver.stopWatching();
 					}
 				}
 			};

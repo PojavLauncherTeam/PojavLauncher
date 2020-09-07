@@ -20,7 +20,7 @@ public class JREUtils
 	}
 
 	public static File redirectStdio(boolean current) throws ErrnoException {
-		File logFile = new File(Tools.datapath, (current ? "current" : "latest") + "log.txt");
+		File logFile = new File(current ? Tools.datapath : Tools.MAIN_PATH, (current ? "current" : "latest") + "log.txt");
 
 		FileDescriptor fd = Os.open(logFile.getAbsolutePath(), OsConstants.O_WRONLY | OsConstants.O_CREAT | OsConstants.O_TRUNC, 0666);
 		Os.dup2(fd, OsConstants.STDERR_FILENO);
