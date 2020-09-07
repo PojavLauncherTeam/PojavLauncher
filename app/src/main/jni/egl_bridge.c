@@ -131,7 +131,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 */
 	printf("EGLBridge: Making current\n");
 	printf("EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
-		*potatoBridge.eglContext,
+		potatoBridge.eglContext,
 		potatoBridge.eglDisplay,
 		potatoBridge.eglSurface 
 	);
