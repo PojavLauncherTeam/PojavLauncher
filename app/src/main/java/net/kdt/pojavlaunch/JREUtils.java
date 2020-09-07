@@ -19,8 +19,8 @@ public class JREUtils
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
 	}
 
-	public static File redirectStdio() throws ErrnoException {
-		File logFile = new File(Tools.datapath, "currentlog.txt");
+	public static File redirectStdio(boolean current) throws ErrnoException {
+		File logFile = new File(Tools.datapath, (current ? "current" : "latest") + "log.txt");
 
 		FileDescriptor fd = Os.open(logFile.getAbsolutePath(), OsConstants.O_WRONLY | OsConstants.O_CREAT | OsConstants.O_TRUNC, 0666);
 		Os.dup2(fd, OsConstants.STDERR_FILENO);

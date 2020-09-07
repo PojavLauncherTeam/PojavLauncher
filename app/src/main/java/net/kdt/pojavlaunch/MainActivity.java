@@ -837,7 +837,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private FileObserver mLogObserver;
 	private void runCraft() throws Throwable {
 		if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
-			final File currLogFile = JREUtils.redirectStdio();
+			final File currLogFile = JREUtils.redirectStdio(false);
 			// DEPRECATED constructor (String) api 29
 			mLogObserver = new FileObserver(currLogFile.getAbsolutePath(), FileObserver.MODIFY){
 				@Override

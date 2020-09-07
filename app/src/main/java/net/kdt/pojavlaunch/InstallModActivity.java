@@ -37,7 +37,7 @@ public class InstallModActivity extends AppCompatActivity
 							@Override
 							public void run() {
 								launchJavaRuntime(modFile);
-								finish();
+								// finish();
 							}
 						}).start();
 				}
@@ -99,7 +99,7 @@ public class InstallModActivity extends AppCompatActivity
 			
 			JREUtils.setJavaEnvironment(this);
 			
-			JREUtils.redirectStdio();
+			JREUtils.redirectStdio(false);
 			JREUtils.setJavaEnvironment(this);
 			JREUtils.initJavaRuntime();
 			JREUtils.chdir(Tools.MAIN_PATH);

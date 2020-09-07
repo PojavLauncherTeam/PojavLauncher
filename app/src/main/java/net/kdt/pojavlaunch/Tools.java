@@ -72,7 +72,7 @@ public final class Tools
 	public static final int LAUNCH_TYPE = LTYPE_INVOCATION;
 	
 	public static ShellProcessOperation mLaunchShell;
-	public static void launchMinecraft(Activity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
+	public static void launchMinecraft(final Activity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
 		String[] launchArgs = getMinecraftArgs(profile, versionInfo);
 
 		List<String> javaArgList = new ArrayList<String>();
@@ -186,6 +186,21 @@ public final class Tools
 				VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
 			}
 		}
+		
+		ctx.runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+					dialog.setMessage(R.string.mcn_javaexit_title);
+					dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+							@Override
+							public void onClick(DialogInterface p1, int p2){
+								ctx.finish();
+							}
+						});
+				}
+			});
 	}
 	
 	public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo)
