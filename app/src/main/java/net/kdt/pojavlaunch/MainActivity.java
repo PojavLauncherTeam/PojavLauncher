@@ -123,26 +123,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private boolean isLogAllow = false;
 	// private int navBarHeight = 40;
 	
-	public static final int LTYPE_PROCESS = 0;
-	public static final int LTYPE_INVOCATION = 1;
-	public static final int LTYPE_CREATEJAVAVM = 2;
-	public static final int LAUNCH_TYPE;
-	
-	static {
-		int launchTypeFinal = LTYPE_INVOCATION;
-		
-		File customLTFile = new File(Tools.MAIN_PATH, "launchtype.txt");
-		if (customLTFile.exists()) {
-			try {
-				launchTypeFinal = Integer.parseInt(Tools.read(customLTFile.getAbsolutePath()));
-			} catch (Throwable th) {
-				th.printStackTrace();
-			}
-		}
-		
-		LAUNCH_TYPE = launchTypeFinal;
-	}
-	
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
 
 	private String getStr(int id) {
@@ -854,244 +834,28 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		return Build.VERSION.SDK_INT >= 26; 
 	}
 
-	private String[] getMCArgs()
-	{
-		String username = mProfile.getUsername();
-		String versionName = mProfile.getVersion();
-		String mcAssetsDir = Tools.ASSETS_PATH;
-		String userType = "mojang";
-
-		File gameDir = new File(Tools.MAIN_PATH);
-		gameDir.mkdirs();
-
-		Map<String, String> varArgMap = new ArrayMap<String, String>();
-		varArgMap.put("auth_player_name", username);
-		varArgMap.put("version_name", versionName);
-		varArgMap.put("game_directory", gameDir.getAbsolutePath());
-		varArgMap.put("assets_root", mcAssetsDir);
-		varArgMap.put("assets_index_name", mVersionInfo.assets);
-		varArgMap.put("auth_uuid", mProfile.getProfileID());
-		varArgMap.put("auth_access_token", mProfile.getAccessToken());
-		varArgMap.put("user_properties", "{}");
-		varArgMap.put("user_type", userType);
-		varArgMap.put("version_type", mVersionInfo.type);
-		varArgMap.put("game_assets", Tools.ASSETS_PATH);
-		
-		List<String> minecraftArgs = new ArrayList<String>();
-		if (mVersionInfo.arguments != null) {
-			// Support Minecraft 1.13+
-			for (Object arg : mVersionInfo.arguments.game) {
-				if (arg instanceof String) {
-					minecraftArgs.add((String) arg);
-				} else {
-					/*
-					 for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
-					 // rule.action = allow
-					 // TODO implement this
-					 }
-					 */
-				}
-			}
-		}
-		
-		String[] argsFromJson = insertVariableArgument(
-			splitAndFilterEmpty(
-			   mVersionInfo.minecraftArguments == null ?
-				   fromStringArray(minecraftArgs.toArray(new String[0])):
-				   mVersionInfo.minecraftArguments
-			), varArgMap
-		);
-		// Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
-		return argsFromJson;
-	}
-	
-	private String fromStringArray(String[] strArr) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < strArr.length; i++) {
-			if (i > 0) builder.append(" ");
-			builder.append(strArr[i]);
-		}
-
-		return builder.toString();
-	}
-	
-	private String[] splitAndFilterEmpty(String argStr) {
-		List<String> strList = new ArrayList<String>();
-		strList.add("--fullscreen");
-		for (String arg : argStr.split(" ")) {
-			if (!arg.isEmpty()) {
-				strList.add(arg);
-			}
-		}
-		return strList.toArray(new String[0]);
-	}
-
-	private String[] insertVariableArgument(String[] args, Map<String, String> keyValueMap) {
-		for (int i = 0; i < args.length; i++) {
-			String arg = args[i];
-			String argVar = null;
-			if (arg.startsWith("${") && arg.endsWith("}")) {
-				argVar = arg.substring(2, arg.length() - 1);
-				for (Map.Entry<String, String> keyValue : keyValueMap.entrySet()) {
-					if (argVar.equals(keyValue.getKey())) {
-						args[i] = keyValue.getValue();
-					}
-				}
-			}
-		}
-		return args;
-	}
-
-	public static ShellProcessOperation mLaunchShell;
-	
-	private static void startStrace(int pid) throws Exception {
-		String[] straceArgs = new String[] {"/system/bin/strace",
-			"-o", new File(Tools.MAIN_PATH, "strace.txt").getAbsolutePath(), "-f", "-p", "" + pid};
-		System.out.println("strace args: " + Arrays.toString(straceArgs));
-		Runtime.getRuntime().exec(straceArgs);
-	}
-	
+	private FileObserver mLogObserver;
 	private void runCraft() throws Throwable {
-		String[] launchArgs = getMCArgs();
-
-		List<String> javaArgList = new ArrayList<String>();
-	/*
-		if (LAUNCH_TYPE == LTYPE_PROCESS || LAUNCH_TYPE == LTYPE_BINARYEXEC) javaArgList.add(Tools.homeJreDir + "/bin/java");
-		else javaArgList.add("java");
-	*/
-		javaArgList.add(Tools.homeJreDir + "/bin/java");
-	
-		// javaArgList.add("-Xms512m");
-		javaArgList.add("-Xmx512m");
-	
-		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
-		javaArgList.add("-Djava.io.tmpdir=" + getCacheDir().getAbsolutePath());
-		javaArgList.add("-Dos.name=Linux");
-		
-		// javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
-		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
-		javaArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
-		// javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
-			
-		// Enable LWJGL3 debug
-		javaArgList.add("-Dorg.lwjgl.util.Debug=true");
-		javaArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
-		javaArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
-		
-		// GLFW Stub width height
-		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
-		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
-		
-		javaArgList.add("-Dglfwstub.initEgl=false");
-		
-		if (mVersionInfo.arguments != null) {
-			// Minecraft 1.13+
-
-			javaArgList.add("-Dminecraft.launcher.brand=" + Tools.APP_NAME);
-			javaArgList.add("-Dminecraft.launcher.version=" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
-		}
-		
-		String launchClassPath = Tools.generateLaunchClassPath(mProfile.getVersion());
-		if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
-			javaArgList.add("-Djava.library.path=" + launchClassPath);
-		} else {
-			if (LAUNCH_TYPE == LTYPE_PROCESS) {
-				javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
-				String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
-				if (eglDisplay.equals("1")) {
-					eglDisplay = Tools.getEGLAddress("Display", ((EGL10) EGLContext.getEGL()).eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY));
-				}
-				javaArgList.add("-Dglfwstub.eglDisplay=" + eglDisplay);
-
-				javaArgList.add("-Dglfwstub.eglSurfaceRead=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.read));
-				javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
-			}
-			
-			javaArgList.add("-cp");
-			javaArgList.add(launchClassPath);
-			javaArgList.add(mVersionInfo.mainClass);
-			javaArgList.addAll(Arrays.asList(launchArgs));
-		}
-		
-		if (LAUNCH_TYPE == LTYPE_PROCESS) {
-			mLaunchShell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
-
-					@Override
-					public void onPrintLine(String text) {
-						appendToLog(text, false);
-					}
-				});
-			mLaunchShell.initInputStream(this);
-		}
-
-		// can fix java?
-		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
-		
-		JREUtils.setJavaEnvironment(this);
-		
-		if (LAUNCH_TYPE == LTYPE_PROCESS) {
-			mLaunchShell.writeToProcess("cd $HOME");
-
-			mLaunchShell.writeToProcess(javaArgList.toArray(new String[0]));
-			int exitCode = mLaunchShell.waitFor();
-			if (exitCode != 0) {
-				Tools.showError(this, new ErrnoException("java", exitCode), false);
-			}
-		} else { // Type Invocation
-			// Is it need?
-		/*
-			Os.dup2(FileDescriptor.err, OsConstants.STDERR_FILENO);
-			Os.dup2(FileDescriptor.out, OsConstants.STDOUT_FILENO);
-		*/
-
-			JREUtils.redirectStdio();
+		if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
+			final File currLogFile = JREUtils.redirectStdio();
 			// DEPRECATED constructor (String) api 29
-			/*
-			FileObserver fobs = new FileObserver(logFile.getAbsolutePath(), FileObserver.MODIFY){
+			mLogObserver = new FileObserver(currLogFile.getAbsolutePath(), FileObserver.MODIFY){
 				@Override
-				public void onEvent(int event, String str) {
-					
+				public void onEvent(int event, String file) {
+					try {
+						if (event == FileObserver.MODIFY && currLogFile.length() > 0l) {
+							appendToLog(Tools.read(file));
+							Tools.write(file, "");
+						}
+					} catch (Throwable th) {
+						th.printStackTrace();
+					}
 				}
 			};
-			fobs.startWatching();
-			*/
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						BufferedReader bis = new BufferedReader(new FileReader(logFile));
-						String currLine;
-						while ((currLine = bis.readLine()) != null) {
-							appendlnToLog(currLine);
-						}
-						bis.close();
-					} catch (Throwable th) {
-						appendlnToLog("Can't get log:\n" + Log.getStackTraceString(th));
-					}
-				}
-			}, "RuntimeLogThread").start();
-
-			JREUtils.initJavaRuntime();
-			JREUtils.chdir(Tools.MAIN_PATH);
-			
-			if (new File(Tools.MAIN_PATH, "strace.txt").exists()) {
-				startStrace(android.os.Process.myTid());
-			}
-			
-			if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
-				VMLauncher.createLaunchMainJVM(javaArgList.toArray(new String[0]), mVersionInfo.mainClass, launchArgs);
-			} else {
-				// Test
-			/*
-				VMLauncher.launchJVM(new String[]{
-					Tools.homeJreDir + "/bin/java",
-					"-invalidarg"
-				});
-			*/
-				
-				VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
-			}
+			mLogObserver.startWatching();
 		}
+		
+		Tools.launchMinecraft(this, mProfile, mVersionInfo);
 	}
 	
 	public void printStream(InputStream stream) {

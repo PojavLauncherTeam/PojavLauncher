@@ -19,14 +19,14 @@ public class JREUtils
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
 	}
 
-	public static void redirectStdio() throws ErrnoException {
-		File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
+	public static File redirectStdio() throws ErrnoException {
+		File logFile = new File(Tools.datapath, "currentlog.txt");
 
 		FileDescriptor fd = Os.open(logFile.getAbsolutePath(), OsConstants.O_WRONLY | OsConstants.O_CREAT | OsConstants.O_TRUNC, 0666);
 		Os.dup2(fd, OsConstants.STDERR_FILENO);
 		Os.dup2(fd, OsConstants.STDOUT_FILENO);
 		
-		// return fd;
+		return logFile;
 	}
 	
 	public static void setJavaEnvironment(Context ctx) throws IOException, ErrnoException {
@@ -59,8 +59,8 @@ public class JREUtils
 	}
 	
 	private static void setEnvironment(String name, String value) throws ErrnoException, IOException {
-		if (MainActivity.LAUNCH_TYPE == MainActivity.LTYPE_PROCESS) {
-			MainActivity.mLaunchShell.writeToProcess("export " + name + "=" + value);
+		if (Tools.LAUNCH_TYPE == Tools.LTYPE_PROCESS) {
+			Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
 		} else {
 			Os.setenv(name, value, true);
 		}

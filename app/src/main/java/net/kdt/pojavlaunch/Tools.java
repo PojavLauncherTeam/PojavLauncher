@@ -5,22 +5,20 @@ import android.content.*;
 import android.content.res.*;
 import android.net.*;
 import android.os.*;
+import android.system.*;
 import android.util.*;
-import android.widget.*;
 import com.google.gson.*;
+import com.oracle.dalvik.*;
 import java.io.*;
+import java.lang.reflect.*;
 import java.nio.charset.*;
 import java.util.*;
-import java.util.jar.*;
 import java.util.zip.*;
+import javax.microedition.khronos.egl.*;
+import net.kdt.pojavlaunch.patcher.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
-import org.apache.commons.codec.digest.*;
-import net.kdt.pojavlaunch.patcher.*;
-import java.lang.reflect.*;
-import dalvik.system.*;
-import android.text.*;
-import javax.xml.transform.*;
+import org.lwjgl.opengl.*;
 
 public final class Tools
 {
@@ -66,6 +64,224 @@ public final class Tools
 		"1.8",
 		"1.9"
 	};
+	
+
+	public static final int LTYPE_PROCESS = 0;
+	public static final int LTYPE_INVOCATION = 1;
+	public static final int LTYPE_CREATEJAVAVM = 2;
+	public static final int LAUNCH_TYPE = LTYPE_INVOCATION;
+	
+	public static ShellProcessOperation mLaunchShell;
+	public static void launchMinecraft(Activity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
+		String[] launchArgs = getMinecraftArgs(profile, versionInfo);
+
+		List<String> javaArgList = new ArrayList<String>();
+	/*
+		if (LAUNCH_TYPE == LTYPE_PROCESS || LAUNCH_TYPE == LTYPE_BINARYEXEC) javaArgList.add(Tools.homeJreDir + "/bin/java");
+		else javaArgList.add("java");
+	*/
+		javaArgList.add(Tools.homeJreDir + "/bin/java");
+	
+		// javaArgList.add("-Xms512m");
+		javaArgList.add("-Xmx512m");
+	
+		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
+		javaArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
+		javaArgList.add("-Dos.name=Linux");
+		
+		// javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
+		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
+		javaArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+		// javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
+			
+		// Enable LWJGL3 debug
+		javaArgList.add("-Dorg.lwjgl.util.Debug=true");
+		javaArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
+		javaArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
+		
+		// GLFW Stub width height
+		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
+		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
+		
+		javaArgList.add("-Dglfwstub.initEgl=false");
+		
+		if (versionInfo.arguments != null) {
+			// Minecraft 1.13+
+
+			javaArgList.add("-Dminecraft.launcher.brand=" + Tools.APP_NAME);
+			javaArgList.add("-Dminecraft.launcher.version=" + ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionName);
+		}
+		
+		String launchClassPath = generateLaunchClassPath(profile.getVersion());
+		if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
+			javaArgList.add("-Djava.library.path=" + launchClassPath);
+		} else {
+			if (LAUNCH_TYPE == LTYPE_PROCESS) {
+				javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
+				String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
+				if (eglDisplay.equals("1")) {
+					eglDisplay = Tools.getEGLAddress("Display", ((EGL10) EGLContext.getEGL()).eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY));
+				}
+				javaArgList.add("-Dglfwstub.eglDisplay=" + eglDisplay);
+
+				javaArgList.add("-Dglfwstub.eglSurfaceRead=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.read));
+				javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
+			}
+			
+			javaArgList.add("-cp");
+			javaArgList.add(launchClassPath);
+			javaArgList.add(versionInfo.mainClass);
+			javaArgList.addAll(Arrays.asList(launchArgs));
+		}
+		
+		if (LAUNCH_TYPE == LTYPE_PROCESS) {
+			mLaunchShell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+
+					@Override
+					public void onPrintLine(String text) {
+						// ctx.appendToLog(text, false);
+					}
+				});
+			mLaunchShell.initInputStream(ctx);
+		}
+
+		// can fix java?
+		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
+		
+		JREUtils.setJavaEnvironment(ctx);
+		
+		if (LAUNCH_TYPE == LTYPE_PROCESS) {
+			mLaunchShell.writeToProcess("cd $HOME");
+
+			mLaunchShell.writeToProcess(javaArgList.toArray(new String[0]));
+			int exitCode = mLaunchShell.waitFor();
+			if (exitCode != 0) {
+				Tools.showError(ctx, new ErrnoException("java", exitCode), false);
+			}
+		} else { // Type Invocation
+			// Is it need?
+		/*
+			Os.dup2(FileDescriptor.err, OsConstants.STDERR_FILENO);
+			Os.dup2(FileDescriptor.out, OsConstants.STDOUT_FILENO);
+		*/
+
+			JREUtils.initJavaRuntime();
+			JREUtils.chdir(Tools.MAIN_PATH);
+			
+			if (new File(Tools.MAIN_PATH, "strace.txt").exists()) {
+				startStrace(android.os.Process.myTid());
+			}
+			
+			if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
+				VMLauncher.createLaunchMainJVM(javaArgList.toArray(new String[0]), versionInfo.mainClass, launchArgs);
+			} else {
+				// Test
+			/*
+				VMLauncher.launchJVM(new String[]{
+					Tools.homeJreDir + "/bin/java",
+					"-invalidarg"
+				});
+			*/
+				
+				VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+			}
+		}
+	}
+	
+	public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo)
+	{
+		String username = profile.getUsername();
+		String versionName = profile.getVersion();
+		String mcAssetsDir = Tools.ASSETS_PATH;
+		String userType = "mojang";
+
+		File gameDir = new File(Tools.MAIN_PATH);
+		gameDir.mkdirs();
+
+		Map<String, String> varArgMap = new ArrayMap<String, String>();
+		varArgMap.put("auth_player_name", username);
+		varArgMap.put("version_name", versionName);
+		varArgMap.put("game_directory", gameDir.getAbsolutePath());
+		varArgMap.put("assets_root", mcAssetsDir);
+		varArgMap.put("assets_index_name", versionInfo.assets);
+		varArgMap.put("auth_uuid", profile.getProfileID());
+		varArgMap.put("auth_access_token", profile.getAccessToken());
+		varArgMap.put("user_properties", "{}");
+		varArgMap.put("user_type", userType);
+		varArgMap.put("version_type", versionInfo.type);
+		varArgMap.put("game_assets", Tools.ASSETS_PATH);
+
+		List<String> minecraftArgs = new ArrayList<String>();
+		if (versionInfo.arguments != null) {
+			// Support Minecraft 1.13+
+			for (Object arg : versionInfo.arguments.game) {
+				if (arg instanceof String) {
+					minecraftArgs.add((String) arg);
+				} else {
+					/*
+					 for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
+					 // rule.action = allow
+					 // TODO implement this
+					 }
+					 */
+				}
+			}
+		}
+
+		String[] argsFromJson = insertVariableArgument(
+			splitAndFilterEmpty(
+				versionInfo.minecraftArguments == null ?
+				fromStringArray(minecraftArgs.toArray(new String[0])):
+				versionInfo.minecraftArguments
+			), varArgMap
+		);
+		// Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
+		return argsFromJson;
+	}
+
+	private static void startStrace(int pid) throws Exception {
+		String[] straceArgs = new String[] {"/system/bin/strace",
+			"-o", new File(Tools.MAIN_PATH, "strace.txt").getAbsolutePath(), "-f", "-p", "" + pid};
+		System.out.println("strace args: " + Arrays.toString(straceArgs));
+		Runtime.getRuntime().exec(straceArgs);
+	}
+	
+	public static String fromStringArray(String[] strArr) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < strArr.length; i++) {
+			if (i > 0) builder.append(" ");
+			builder.append(strArr[i]);
+		}
+
+		return builder.toString();
+	}
+
+	private static String[] splitAndFilterEmpty(String argStr) {
+		List<String> strList = new ArrayList<String>();
+		strList.add("--fullscreen");
+		for (String arg : argStr.split(" ")) {
+			if (!arg.isEmpty()) {
+				strList.add(arg);
+			}
+		}
+		return strList.toArray(new String[0]);
+	}
+
+	private static String[] insertVariableArgument(String[] args, Map<String, String> keyValueMap) {
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i];
+			String argVar = null;
+			if (arg.startsWith("${") && arg.endsWith("}")) {
+				argVar = arg.substring(2, arg.length() - 1);
+				for (Map.Entry<String, String> keyValue : keyValueMap.entrySet()) {
+					if (argVar.equals(keyValue.getKey())) {
+						args[i] = keyValue.getValue();
+					}
+				}
+			}
+		}
+		return args;
+	}
 
 	public static String artifactToPath(String group, String artifact, String version) {
 		return group.replaceAll("\\.", "/") + "/" + artifact + "/" + version + "/" + artifact + "-" + version + ".jar";
