@@ -67,9 +67,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 		EGL_RED_SIZE, 8,
 		EGL_GREEN_SIZE, 8,
 		EGL_BLUE_SIZE, 8,
-		EGL_ALPHA_SIZE, 0,
-		EGL_DEPTH_SIZE, 16,
-		EGL_STENCIL_SIZE, 0,
+		EGL_ALPHA_SIZE, 8,
+		EGL_DEPTH_SIZE, 24,
 		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
 		EGL_NONE
 	};
@@ -95,6 +94,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 		return JNI_FALSE;
 	}
 
+    ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow, 0, 0, vid);
+	
 	eglBindAPI(EGL_OPENGL_ES_API);
 
 	potatoBridge.eglContext = eglCreateContext(potatoBridge.eglDisplay, config, EGL_NO_CONTEXT, ctx_attribs);
@@ -143,7 +144,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	}
 	
 	// Init gl4es before
-	dlopen("libgl04es.so", RTLD_GLOBAL | RTLD_LAZY);
+	// dlopen("libgl04es.so", RTLD_GLOBAL | RTLD_LAZY);
 	
 	// Test
 #ifdef GLES_TEST
@@ -162,6 +163,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglTerminate(JNIEnv* e
 	eglDestroyContext(potatoBridge.eglDisplay, potatoBridge.eglContext);
 	eglTerminate(potatoBridge.eglDisplay);
 	eglReleaseThread();
+	
+	potatoBridge.eglContext = EGL_NO_CONTEXT;
+	potatoBridge.eglDisplay = EGL_NO_DISPLAY;
+	potatoBridge.eglSurface = EGL_NO_SURFACE;
 	
 	return JNI_TRUE;
 }
