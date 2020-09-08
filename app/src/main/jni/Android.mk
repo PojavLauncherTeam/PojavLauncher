@@ -8,6 +8,7 @@ LOCAL_MODULE := pojavexec
 # LOCAL_CFLAGS += -DGLES_TEST
 LOCAL_SRC_FILES := \
     egl_bridge.c \
+    input_bridge.c \
     jre_launcher.c \
     utils.c
 include $(BUILD_SHARED_LIBRARY)

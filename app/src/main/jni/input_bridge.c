@@ -2,7 +2,7 @@
 
 #include "utils.h"
 
-JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_LWJGLInputSender(JNIEnv* env, jclass clazz, jint type, jstring data) {
+JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_LWJGLInputSender_sendDataToJRE(JNIEnv* env, jclass clazz, jint type, jstring data) {
 	if (isEglMakeCurrentCalled == 1) {
         // Convert Dalvik string to JRE string: should or use directly?
         char *data_c = (char*)(*env)->GetStringUTFChars(env, data, 0);
