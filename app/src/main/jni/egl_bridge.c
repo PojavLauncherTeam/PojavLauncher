@@ -15,6 +15,8 @@
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 
+#include "utils.h"
+
 struct PotatoBridge {
 	ANativeWindow* androidWindow;
 	
