@@ -33,7 +33,7 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 		 * - Having trouble setting.
 		 */
 
-		LauncherPreferences.loadPreferences(this);
+		LauncherPreferences.loadPreferences();
 		
 		mainPreference = getSharedPreferences("pojav_preferences", MODE_PRIVATE);
 		final SharedPreferences.Editor mainPrefEdit = mainPreference.edit();
@@ -84,7 +84,7 @@ public class PojavPreferenceActivity extends MineActivity implements OnCheckedCh
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		LauncherPreferences.loadPreferences(this);
+		LauncherPreferences.loadPreferences();
 	}
 
 	@Override

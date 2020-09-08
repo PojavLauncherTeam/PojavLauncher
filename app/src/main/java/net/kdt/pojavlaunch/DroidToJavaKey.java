@@ -3,8 +3,7 @@ package net.kdt.pojavlaunch;
 import android.text.method.*;
 import android.view.*;
 import android.view.inputmethod.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.input.*;
+
 
 public class DroidToJavaKey {
     private static StringBuilder mComposing = new StringBuilder();

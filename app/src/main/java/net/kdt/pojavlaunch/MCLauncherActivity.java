@@ -22,7 +22,6 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.signer.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
-import org.lwjgl.opengl.*;
 
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
@@ -69,8 +68,8 @@ public class MCLauncherActivity extends AppCompatActivity
 		gson = new Gson();
 
 		DisplayMetrics dm = Tools.getDisplayMetrics(this);
-		AndroidDisplay.windowWidth = dm.widthPixels;
-		AndroidDisplay.windowHeight = dm.heightPixels;
+		LWJGLInputSender.windowWidth = dm.widthPixels;
+		LWJGLInputSender.windowHeight = dm.heightPixels;
 		viewInit();
 
 		final View decorView = getWindow().getDecorView();
@@ -258,10 +257,10 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	private float updateWidthHeight() {
-		float leftRightWidth = (float) AndroidDisplay.windowWidth / 100f * 32f;
-		float playButtonWidth = AndroidDisplay.windowWidth - leftRightWidth * 2f;
-		LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(this, AndroidDisplay.windowHeight / 9));
-		LinearLayout.LayoutParams playButtonParams = new LinearLayout.LayoutParams((int) playButtonWidth, (int) Tools.dpToPx(this, AndroidDisplay.windowHeight / 9));
+		float leftRightWidth = (float) LWJGLInputSender.windowWidth / 100f * 32f;
+		float playButtonWidth = LWJGLInputSender.windowWidth - leftRightWidth * 2f;
+		LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(this, LWJGLInputSender.windowHeight / 9));
+		LinearLayout.LayoutParams playButtonParams = new LinearLayout.LayoutParams((int) playButtonWidth, (int) Tools.dpToPx(this, LWJGLInputSender.windowHeight / 9));
 		leftView.setLayoutParams(leftRightParams);
 		rightView.setLayoutParams(leftRightParams);
 		playButton.setLayoutParams(playButtonParams);
@@ -775,7 +774,7 @@ public class MCLauncherActivity extends AppCompatActivity
 									aboutB.setMessage(String.format(Tools.read(getAssets().open("about_en.txt")),
 																	Tools.APP_NAME,
 																	Tools.usingVerName,
-																	org.lwjgl.Sys.getVersion())
+																	"3.2.3")
 													  );
 								} catch (Exception e) {
 									throw new RuntimeException(e);

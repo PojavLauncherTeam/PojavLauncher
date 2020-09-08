@@ -12,8 +12,6 @@ import com.kdt.filerapi.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
 import android.support.v7.preference.*;
 import net.kdt.pojavlaunch.prefs.*;
 
@@ -55,7 +53,7 @@ public class CustomControlsActivity extends AppCompatActivity
 							actionLoad();
 							break;
 						case R.id.menu_ctrl_add:
-							ctrlLayout.addControlButton(new ControlButton("New", Keyboard.CHAR_NONE, 100, 100));
+							ctrlLayout.addControlButton(new ControlButton("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
 							break;
 						case R.id.menu_ctrl_selectdefault:
 							dialogSelectDefaultCtrl();

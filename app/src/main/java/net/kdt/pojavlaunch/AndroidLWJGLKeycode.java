@@ -3,8 +3,6 @@ package net.kdt.pojavlaunch;
 import android.util.*;
 import android.view.*;
 import java.util.*;
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
 
 public class AndroidLWJGLKeycode {
 	// Fix double letters on MC 1.9 and above
@@ -23,136 +21,137 @@ public class AndroidLWJGLKeycode {
 		androidToLwjglMap = new ArrayMap<Integer, Integer>();
 		
 		// 0-9 keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_0, Keyboard.KEY_0);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_1, Keyboard.KEY_1);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_2, Keyboard.KEY_2);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_3, Keyboard.KEY_3);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_4, Keyboard.KEY_4);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_5, Keyboard.KEY_5);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_6, Keyboard.KEY_6);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_7, Keyboard.KEY_7);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_8, Keyboard.KEY_8);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_9, Keyboard.KEY_9);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_0, LWJGLGLFWKeycode.GLFW_KEY_0);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_1, LWJGLGLFWKeycode.GLFW_KEY_1);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_2, LWJGLGLFWKeycode.GLFW_KEY_2);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_3, LWJGLGLFWKeycode.GLFW_KEY_3);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_4, LWJGLGLFWKeycode.GLFW_KEY_4);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_5, LWJGLGLFWKeycode.GLFW_KEY_5);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_6, LWJGLGLFWKeycode.GLFW_KEY_6);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_7, LWJGLGLFWKeycode.GLFW_KEY_7);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_8, LWJGLGLFWKeycode.GLFW_KEY_8);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_9, LWJGLGLFWKeycode.GLFW_KEY_9);
 		
 		// A-Z keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_A, Keyboard.KEY_A);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_B, Keyboard.KEY_B);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_C, Keyboard.KEY_C);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_D, Keyboard.KEY_D);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_E, Keyboard.KEY_E);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F, Keyboard.KEY_F);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_G, Keyboard.KEY_G);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_H, Keyboard.KEY_H);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_I, Keyboard.KEY_I);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_J, Keyboard.KEY_J);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_K, Keyboard.KEY_K);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_L, Keyboard.KEY_L);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_M, Keyboard.KEY_M);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_N, Keyboard.KEY_M);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_O, Keyboard.KEY_O);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_P, Keyboard.KEY_P);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_Q, Keyboard.KEY_Q);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_R, Keyboard.KEY_R);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_S, Keyboard.KEY_S);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_T, Keyboard.KEY_T);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_U, Keyboard.KEY_U);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_V, Keyboard.KEY_V);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_W, Keyboard.KEY_W);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_X, Keyboard.KEY_X);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_Y, Keyboard.KEY_Y);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_Z, Keyboard.KEY_Z);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_A, LWJGLGLFWKeycode.GLFW_KEY_A);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_B, LWJGLGLFWKeycode.GLFW_KEY_B);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_C, LWJGLGLFWKeycode.GLFW_KEY_C);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_D, LWJGLGLFWKeycode.GLFW_KEY_D);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_E, LWJGLGLFWKeycode.GLFW_KEY_E);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F, LWJGLGLFWKeycode.GLFW_KEY_F);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_G, LWJGLGLFWKeycode.GLFW_KEY_G);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_H, LWJGLGLFWKeycode.GLFW_KEY_H);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_I, LWJGLGLFWKeycode.GLFW_KEY_I);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_J, LWJGLGLFWKeycode.GLFW_KEY_J);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_K, LWJGLGLFWKeycode.GLFW_KEY_K);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_L, LWJGLGLFWKeycode.GLFW_KEY_L);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_M, LWJGLGLFWKeycode.GLFW_KEY_M);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_N, LWJGLGLFWKeycode.GLFW_KEY_M);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_O, LWJGLGLFWKeycode.GLFW_KEY_O);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_P, LWJGLGLFWKeycode.GLFW_KEY_P);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_Q, LWJGLGLFWKeycode.GLFW_KEY_Q);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_R, LWJGLGLFWKeycode.GLFW_KEY_R);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_S, LWJGLGLFWKeycode.GLFW_KEY_S);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_T, LWJGLGLFWKeycode.GLFW_KEY_T);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_U, LWJGLGLFWKeycode.GLFW_KEY_U);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_V, LWJGLGLFWKeycode.GLFW_KEY_V);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_W, LWJGLGLFWKeycode.GLFW_KEY_W);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_X, LWJGLGLFWKeycode.GLFW_KEY_X);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_Y, LWJGLGLFWKeycode.GLFW_KEY_Y);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_Z, LWJGLGLFWKeycode.GLFW_KEY_Z);
 		
 		// Alt keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_ALT_LEFT, Keyboard.KEY_LMENU);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_ALT_RIGHT, Keyboard.KEY_RMENU);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_ALT_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_ALT_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_ALT);
 		
 		// Escape key
-		androidToLwjglMap.put(KeyEvent.KEYCODE_BACK, Keyboard.KEY_ESCAPE);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_BACK, LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
 		
-		androidToLwjglMap.put(KeyEvent.KEYCODE_BACKSLASH, Keyboard.KEY_BACKSLASH);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_BREAK, Keyboard.KEY_PAUSE);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_CAPS_LOCK, Keyboard.KEY_CAPITAL);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_COMMA, Keyboard.KEY_COMMA);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_BACKSLASH, LWJGLGLFWKeycode.GLFW_KEY_BACKSLASH);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_BREAK, LWJGLGLFWKeycode.GLFW_KEY_PAUSE);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_CAPS_LOCK, LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_COMMA, LWJGLGLFWKeycode.GLFW_KEY_COMMA);
 		
 		// Control keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_CTRL_LEFT, Keyboard.KEY_LCONTROL);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_CTRL_RIGHT, Keyboard.KEY_RCONTROL);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_CTRL_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_CTRL_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_CONTROL);
 		
-		androidToLwjglMap.put(KeyEvent.KEYCODE_DEL, Keyboard.KEY_BACK); // Backspace
+		androidToLwjglMap.put(KeyEvent.KEYCODE_DEL, LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE); // Backspace
 		
 		// Arrow keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_DOWN, Keyboard.KEY_DOWN);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_LEFT, Keyboard.KEY_LEFT);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_RIGHT, Keyboard.KEY_RIGHT);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_UP, Keyboard.KEY_UP);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_DOWN, LWJGLGLFWKeycode.GLFW_KEY_DOWN);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_DPAD_UP, LWJGLGLFWKeycode.GLFW_KEY_UP);
 		
-		androidToLwjglMap.put(KeyEvent.KEYCODE_ENTER, Keyboard.KEY_RETURN);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_EQUALS, Keyboard.KEY_EQUALS);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_ESCAPE, Keyboard.KEY_ESCAPE);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_ENTER, LWJGLGLFWKeycode.GLFW_KEY_ENTER);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_EQUALS, LWJGLGLFWKeycode.GLFW_KEY_EQUAL);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_ESCAPE, LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
 		
 		// Fn keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F1, Keyboard.KEY_F1);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F2, Keyboard.KEY_F2);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F3, Keyboard.KEY_F3);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F4, Keyboard.KEY_F4);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F5, Keyboard.KEY_F5);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F6, Keyboard.KEY_F6);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F7, Keyboard.KEY_F7);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F8, Keyboard.KEY_F8);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F9, Keyboard.KEY_F9);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F10, Keyboard.KEY_F10);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F11, Keyboard.KEY_F11);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_F12, Keyboard.KEY_F12);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_FUNCTION, Keyboard.KEY_FUNCTION);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F1, LWJGLGLFWKeycode.GLFW_KEY_F1);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F2, LWJGLGLFWKeycode.GLFW_KEY_F2);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F3, LWJGLGLFWKeycode.GLFW_KEY_F3);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F4, LWJGLGLFWKeycode.GLFW_KEY_F4);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F5, LWJGLGLFWKeycode.GLFW_KEY_F5);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F6, LWJGLGLFWKeycode.GLFW_KEY_F6);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F7, LWJGLGLFWKeycode.GLFW_KEY_F7);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F8, LWJGLGLFWKeycode.GLFW_KEY_F8);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F9, LWJGLGLFWKeycode.GLFW_KEY_F9);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F10, LWJGLGLFWKeycode.GLFW_KEY_F10);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F11, LWJGLGLFWKeycode.GLFW_KEY_F11);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_F12, LWJGLGLFWKeycode.GLFW_KEY_F12);
+        // FIXME GLFW Function key
+		// androidToLwjglMap.put(KeyEvent.KEYCODE_FUNCTION, LWJGLGLFWKeycode.GLFW_KEY_FUNCTION);
 		
-		androidToLwjglMap.put(KeyEvent.KEYCODE_GRAVE, Keyboard.KEY_GRAVE);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_HOME, Keyboard.KEY_HOME);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_INSERT, Keyboard.KEY_INSERT);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_KANA, Keyboard.KEY_KANA);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_LEFT_BRACKET, Keyboard.KEY_LBRACKET);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_MINUS, Keyboard.KEY_MINUS);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_GRAVE, LWJGLGLFWKeycode.GLFW_KEY_GRAVE_ACCENT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_HOME, LWJGLGLFWKeycode.GLFW_KEY_HOME);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_INSERT, LWJGLGLFWKeycode.GLFW_KEY_INSERT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_KANA, LWJGLGLFWKeycode.GLFW_KEY_K);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_LEFT_BRACKET, LWJGLGLFWKeycode.GLFW_KEY_LEFT_BRACKET);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_MINUS, LWJGLGLFWKeycode.GLFW_KEY_MINUS);
 		
 		// Num keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUM_LOCK, Keyboard.KEY_NUMLOCK);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_0, Keyboard.KEY_NUMPAD0);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_1, Keyboard.KEY_NUMPAD1);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_2, Keyboard.KEY_NUMPAD2);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_3, Keyboard.KEY_NUMPAD3);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_4, Keyboard.KEY_NUMPAD4);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_5, Keyboard.KEY_NUMPAD5);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_6, Keyboard.KEY_NUMPAD6);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_7, Keyboard.KEY_NUMPAD7);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_8, Keyboard.KEY_NUMPAD8);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_9, Keyboard.KEY_NUMPAD9);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_ADD, Keyboard.KEY_ADD);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_COMMA, Keyboard.KEY_NUMPADCOMMA);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_DIVIDE, Keyboard.KEY_DIVIDE);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_DOT, Keyboard.KEY_PERIOD);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_ENTER, Keyboard.KEY_NUMPADENTER);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_EQUALS, Keyboard.KEY_NUMPADEQUALS);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_MULTIPLY, Keyboard.KEY_MULTIPLY);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_SUBTRACT, Keyboard.KEY_SUBTRACT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUM_LOCK, LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_0, LWJGLGLFWKeycode.GLFW_KEY_0);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_1, LWJGLGLFWKeycode.GLFW_KEY_1);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_2, LWJGLGLFWKeycode.GLFW_KEY_2);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_3, LWJGLGLFWKeycode.GLFW_KEY_3);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_4, LWJGLGLFWKeycode.GLFW_KEY_4);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_5, LWJGLGLFWKeycode.GLFW_KEY_5);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_6, LWJGLGLFWKeycode.GLFW_KEY_6);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_7, LWJGLGLFWKeycode.GLFW_KEY_7);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_8, LWJGLGLFWKeycode.GLFW_KEY_8);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_9, LWJGLGLFWKeycode.GLFW_KEY_9);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_ADD, LWJGLGLFWKeycode.GLFW_KEY_KP_ADD);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_COMMA, LWJGLGLFWKeycode.GLFW_KEY_COMMA);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_DIVIDE, LWJGLGLFWKeycode.GLFW_KEY_KP_DIVIDE);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_DOT, LWJGLGLFWKeycode.GLFW_KEY_PERIOD);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_ENTER, LWJGLGLFWKeycode.GLFW_KEY_ENTER);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_EQUALS, LWJGLGLFWKeycode.GLFW_KEY_EQUAL);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_MULTIPLY, LWJGLGLFWKeycode.GLFW_KEY_KP_MULTIPLY);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_NUMPAD_SUBTRACT, LWJGLGLFWKeycode.GLFW_KEY_KP_SUBTRACT);
 		
 		// Page keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_PAGE_DOWN, Keyboard.KEY_NEXT);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_PAGE_UP, Keyboard.KEY_PRIOR);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_PAGE_DOWN, LWJGLGLFWKeycode.GLFW_KEY_PAGE_DOWN);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_PAGE_UP, LWJGLGLFWKeycode.GLFW_KEY_PAGE_UP);
 		
-		androidToLwjglMap.put(KeyEvent.KEYCODE_PERIOD, Keyboard.KEY_PERIOD);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_PLUS, Keyboard.KEY_ADD);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_POWER, Keyboard.KEY_POWER);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_RIGHT_BRACKET, Keyboard.KEY_RBRACKET);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_SEMICOLON, Keyboard.KEY_SEMICOLON);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_PERIOD, LWJGLGLFWKeycode.GLFW_KEY_PERIOD);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_PLUS, LWJGLGLFWKeycode.GLFW_KEY_KP_ADD);
+		// androidToLwjglMap.put(KeyEvent.KEYCODE_POWER, LWJGLGLFWKeycode.GLFW_KEY_POWER);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_RIGHT_BRACKET, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_BRACKET);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_SEMICOLON, LWJGLGLFWKeycode.GLFW_KEY_SEMICOLON);
 		
 		// Shift keys
-		androidToLwjglMap.put(KeyEvent.KEYCODE_SHIFT_LEFT, Keyboard.KEY_LSHIFT);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_SHIFT_RIGHT, Keyboard.KEY_RSHIFT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_SHIFT_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_SHIFT_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_SHIFT);
 		
-		androidToLwjglMap.put(KeyEvent.KEYCODE_SLASH, Keyboard.KEY_SLASH);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_SLEEP, Keyboard.KEY_SLEEP);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_SPACE, Keyboard.KEY_SPACE);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_SYSRQ, Keyboard.KEY_SYSRQ);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_TAB, Keyboard.KEY_TAB);
-		androidToLwjglMap.put(KeyEvent.KEYCODE_YEN, Keyboard.KEY_YEN);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_SLASH, LWJGLGLFWKeycode.GLFW_KEY_SLASH);
+		// androidToLwjglMap.put(KeyEvent.KEYCODE_SLEEP, LWJGLGLFWKeycode.GLFW_KEY_SLEEP);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_SPACE, LWJGLGLFWKeycode.GLFW_KEY_SPACE);
+		// androidToLwjglMap.put(KeyEvent.KEYCODE_SYSRQ, LWJGLGLFWKeycode.GLFW_KEY_SYSRQ);
+		androidToLwjglMap.put(KeyEvent.KEYCODE_TAB, LWJGLGLFWKeycode.GLFW_KEY_TAB);
+		// androidToLwjglMap.put(KeyEvent.KEYCODE_YEN, LWJGLGLFWKeycode.GLFW_KEY_YEN);
 	}
 	
 	public static String[] generateKeyName() {
@@ -180,25 +179,25 @@ public class AndroidLWJGLKeycode {
 		}
 		
 		if (keyEvent.isAltPressed()) {
-			mainActivity.sendKeyPress(Keyboard.KEY_LMENU, isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT, isDown);
 		} if (keyEvent.isCtrlPressed()) {
-			mainActivity.sendKeyPress(Keyboard.KEY_LCONTROL, isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL, isDown);
 		} if (keyEvent.isFunctionPressed()) {
-			mainActivity.sendKeyPress(Keyboard.KEY_FUNCTION, isDown);
+			// mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_FUNCTION, isDown);
 		} if (keyEvent.isShiftPressed()) {
-			mainActivity.sendKeyPress(Keyboard.KEY_LSHIFT, isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, isDown);
 		}
 		
 		try {
-			if (/* (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && */ !AndroidDisplay.grab) {
+			if (/* (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && */ !LWJGLInputSender.isGrabbing()) {
 				mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
 			}
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
 		
-		if (isBackspaceAfterChar && !AndroidDisplay.grab && i != KeyEvent.KEYCODE_DEL) {
-			mainActivity.sendKeyPress(Keyboard.KEY_BACK, isDown);
+		if (isBackspaceAfterChar && !LWJGLInputSender.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, isDown);
 		}
     }
 

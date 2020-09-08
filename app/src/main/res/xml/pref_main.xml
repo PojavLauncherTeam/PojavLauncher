@@ -18,15 +18,15 @@
 		
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="false"
-            android:key="forgetOptifinePath"
-			android:title="@string/mcl_setting_title_forgetoptifpath"
-			android:summary="@string/mcl_setting_subtitle_forgetoptifpath"/>
-		
-        <android.support.v7.preference.SwitchPreferenceCompat
-            android:defaultValue="false"
             android:key="freeform"
 			android:title="@string/mcl_setting_title_freeform"
 			android:summary="@string/mcl_setting_subtitle_freeform"/>
+
+        <android.support.v7.preference.EditTextPreference
+			android:key="javaArgs"
+			android:title="@string/mcl_setting_title_javaargs"
+			android:summary="@string/mcl_setting_subtitle_javaargs"
+			android:dialogTitle="dialog_title_edittext_preference"/>
 		
     </android.support.v7.preference.PreferenceCategory>
 	

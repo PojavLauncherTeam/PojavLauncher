@@ -61,7 +61,7 @@ public class PojavApplication extends Application
 			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
 			
 			LauncherPreferences.DEFAULT_PREF = PreferenceManager.getDefaultSharedPreferences(this);
-			LauncherPreferences.loadPreferences(this);
+			LauncherPreferences.loadPreferences();
 
 			ControlButton.pixelOf2dp = (int) Tools.dpToPx(this, 2);
 			ControlButton.pixelOf30dp = (int) Tools.dpToPx(this, 30);

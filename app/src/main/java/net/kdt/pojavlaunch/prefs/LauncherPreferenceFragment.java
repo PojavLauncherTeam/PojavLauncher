@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.prefs;
 
 import android.os.*;
 import net.kdt.pojavlaunch.*;
+import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.SeekBarPreference;
 
@@ -23,5 +24,7 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
 		seek2.setMin(100);
 		seek2.setMax(1000);
 		seek2.setValue(500);
+        
+        findPreference("javaArgs").setDefaultValue(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
 	}
 }

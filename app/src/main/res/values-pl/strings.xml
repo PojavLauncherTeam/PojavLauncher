@@ -19,11 +19,11 @@
 	<string name="login_online_username_question">(Którego mam użyć?)</string>
 	<string name="login_online_password_hint">Hasło</string>
 	<string name="login_online_password_question">Zapomniałeś hasła?</string>
-	<string name="login_online_remember">Zapamiętaj mnie?</string>
+	<string name="login_online_check_keeplogin">Pozostaw mnie zalogowanym</string>
 	<string name="login_online_login_label">Zaloguj sie</string>
 	<string name="login_online_create_account">(Stwórz nowe konto?)</string>
 	
-	<string name="login_offline_switch">Konto offline?</string>
+	<string name="login_offline_label">Zaloguj się jako konto offline</string>
 	<string name="login_offline_alert_skip">Pominąć</string>
 	
 	<string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>

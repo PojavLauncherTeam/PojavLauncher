@@ -18,7 +18,7 @@ import javax.microedition.khronos.egl.*;
 import net.kdt.pojavlaunch.patcher.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
-import org.lwjgl.opengl.*;
+import net.kdt.pojavlaunch.prefs.*;
 
 public final class Tools
 {
@@ -100,8 +100,8 @@ public final class Tools
 		javaArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
 		
 		// GLFW Stub width height
-		javaArgList.add("-Dglfwstub.windowWidth=" + AndroidDisplay.windowWidth);
-		javaArgList.add("-Dglfwstub.windowHeight=" + AndroidDisplay.windowHeight);
+		javaArgList.add("-Dglfwstub.windowWidth=" + LWJGLInputSender.windowWidth);
+		javaArgList.add("-Dglfwstub.windowHeight=" + LWJGLInputSender.windowHeight);
 		
 		javaArgList.add("-Dglfwstub.initEgl=false");
 		
@@ -116,6 +116,7 @@ public final class Tools
 		if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
 			javaArgList.add("-Djava.library.path=" + launchClassPath);
 		} else {
+        /*
 			if (LAUNCH_TYPE == LTYPE_PROCESS) {
 				javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
 				String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
@@ -127,7 +128,10 @@ public final class Tools
 				javaArgList.add("-Dglfwstub.eglSurfaceRead=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.read));
 				javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
 			}
-			
+        */
+            // Put at the end of default args to allow override args
+            javaArgList.addAll(Arrays.asList(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")));
+            
 			javaArgList.add("-cp");
 			javaArgList.add(launchClassPath);
 			javaArgList.add(versionInfo.mainClass);

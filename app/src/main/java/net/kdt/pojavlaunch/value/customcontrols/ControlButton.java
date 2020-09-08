@@ -4,8 +4,6 @@ import net.kdt.pojavlaunch.*;
 import android.view.*;
 import java.util.*;
 import android.content.*;
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
 import android.view.View.*;
 
 public class ControlButton implements Cloneable
@@ -28,10 +26,10 @@ public class ControlButton implements Cloneable
 		if (SPECIAL_BUTTONS == null) {
 			SPECIAL_BUTTONS = new ControlButton[]{
 				new ControlButton("Keyboard", SPECIALBTN_KEYBOARD, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, false),
-				new ControlButton("GUI", SPECIALBTN_TOGGLECTRL, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
-				new ControlButton("PRI", SPECIALBTN_MOUSEPRI, pixelOf2dp, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
-				new ControlButton("SEC", SPECIALBTN_MOUSESEC, pixelOf2dp * 3 + pixelOf50dp * 2, AndroidDisplay.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
-				new ControlButton("Mouse", SPECIALBTN_VIRTUALMOUSE, AndroidDisplay.windowWidth - pixelOf80dp, pixelOf2dp, false)
+				new ControlButton("GUI", SPECIALBTN_TOGGLECTRL, pixelOf2dp, LWJGLInputSender.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
+				new ControlButton("PRI", SPECIALBTN_MOUSEPRI, pixelOf2dp, LWJGLInputSender.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
+				new ControlButton("SEC", SPECIALBTN_MOUSESEC, pixelOf2dp * 3 + pixelOf50dp * 2, LWJGLInputSender.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
+				new ControlButton("Mouse", SPECIALBTN_VIRTUALMOUSE, LWJGLInputSender.windowWidth - pixelOf80dp, pixelOf2dp, false)
 			};
 		}
 
@@ -65,7 +63,7 @@ public class ControlButton implements Cloneable
 	// public boolean hold
 
 	public ControlButton() {
-		this("", Keyboard.CHAR_NONE, 0, 0);
+		this("", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 0, 0);
 	}
 
 	public ControlButton(String name, int keycode) {
