@@ -58,17 +58,6 @@
             android:name=".MainActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 		
-        <activity
-			android:launchMode="standard"
-			android:multiprocess="true"
-			android:screenOrientation="sensorLandscape"
-            android:name=".NativeMainActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize">
-				<meta-data
-					android:name="android.app.lib_name"
-					android:value="pojavexec" />
-		</activity>
-		
 		<activity
 			android:screenOrientation="sensorLandscape"
 			android:name=".prefs.LauncherPreferenceActivity"

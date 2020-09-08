@@ -844,8 +844,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				public void onEvent(int event, String file) {
 					try {
 						if (event == FileObserver.MODIFY && currLogFile.length() > 0l) {
-							appendToLog(Tools.read(file));
-							Tools.write(file, "");
+							appendToLog(Tools.read(currLogFile.getAbsolutePath()));
+							Tools.write(currLogFile.getAbsolutePath(), "");
 						}
 					} catch (Throwable th) {
 						Tools.showError(MainActivity.this, th);
