@@ -3,10 +3,10 @@ package net.kdt.pojavlaunch;
 public class LWJGLInputSender
 {
 	public static final int TYPE_CURSOR_POS = 0;
-	public static final int TYPE_CURSOR_BUTTON = 2;
-	public static final int TYPE_KEYCODE_CONTROL = 3;
-	public static final int TYPE_KEYCODE_CHAR = 4;
-	public static final int TYPE_MOUSE_KEYCODE_CONTROL = 3;
+	public static final int TYPE_CURSOR_BUTTON = 1;
+	public static final int TYPE_KEYCODE_CONTROL = 2;
+	public static final int TYPE_KEYCODE_CHAR = 3;
+	public static final int TYPE_MOUSE_KEYCODE_CONTROL = 4;
 	public static final int TYPE_WINDOW_SIZE = 5;
     
     public static int windowWidth, windowHeight;
