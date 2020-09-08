@@ -82,8 +82,8 @@ public final class Tools
 	*/
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
-		// javaArgList.add("-Xms512m");
-		javaArgList.add("-Xmx512m");
+	        javaArgList.add("-Xms800m");
+		javaArgList.add("-Xmx800m");
 	
 		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		javaArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
