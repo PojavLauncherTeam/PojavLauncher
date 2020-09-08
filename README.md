@@ -9,12 +9,12 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-
 - [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
 - [x] **Temporary removed** ~~JVDroid OpenJDK 11 (32 and 64-bit ARM and x86). Partial, no error `can't lock mutex`, but now exit with none output.~~
 - [x] OpenJDK 9 Mobile port
-- [ ] AWT/Swing for mod installer. Will use `Caciocavallo` project.
-- [ ] OpenGL in OpenJDK environment. Use Boardwalk 2 method or other.
+- [ ] AWT/Swing for mod installer.Will try own graphics environment~~use `Caciocavallo` project~~.
+- [x] OpenGL in OpenJDK environment. Used Boardwalk 2 method.
 - [ ] OpenAL 64-bit version
 - [ ] Input keyboard and mouse events from ART to OpenJDK environment
-- [ ] Support Minecraft 1.12 and below
-- [ ] Support Minecraft 1.13 and above
+- [ ] Support Minecraft 1.12 and below. Used GLFW stub.
+- [x] Support Minecraft 1.13 and above. Will make a wrapper LWJGL2 to 3.
 - [ ] More...
 
 ## Licenses
