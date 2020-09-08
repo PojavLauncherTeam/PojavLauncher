@@ -82,9 +82,18 @@ public final class Tools
 	*/
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
-	        javaArgList.add("-Xms2048m");
-		javaArgList.add("-Xmx2048m");
-	
+		//old ram amount flags
+	        javaArgList.add("-Xms1024m");
+		javaArgList.add("-Xmx1024m");
+		
+		javaArgList.add("-XX:+UseG1GC");
+		javaArgList.add("-Dsun.rmi.dgc.server.gcInterval=2147483646");
+		javaArgList.add("-XX:+UnlockExperimentalVMOptions");
+		javaArgList.add("-XX:G1NewSizePercent=20");
+		javaArgList.add("-XX:G1ReservePercent=20");
+		javaArgList.add("-XX:MaxGCPauseMillis=50");
+		javaArgList.add("-XX:G1HeapRegionSize=32M");
+		
 		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		javaArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
 		javaArgList.add("-Dos.name=Linux");
