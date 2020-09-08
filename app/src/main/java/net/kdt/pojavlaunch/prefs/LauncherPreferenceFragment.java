@@ -25,6 +25,8 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
 		seek2.setMax(1000);
 		seek2.setValue(500);
         
-        findPreference("javaArgs").setDefaultValue(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+        EditTextPreference javaArgsPref = (EditTextPreference) findPreference("javaArgs");
+        if (javaArgsPref.getText().isEmpty())
+            javaArgsPref.setText(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
 	}
 }

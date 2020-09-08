@@ -82,34 +82,33 @@ public final class Tools
 	*/
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
-		// javaArgList.add("-Xms512m");
-		javaArgList.add("-Xmx512m");
-	
-		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
-		javaArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
-		javaArgList.add("-Dos.name=Linux");
+        List<String> overrideableArgList = new ArrayList<String>();
+		
+		overrideableArgList.add("-Djava.home=" + Tools.homeJreDir);
+		overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
+		overrideableArgList.add("-Dos.name=Linux");
 		
 		// javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
 		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
-		javaArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+		overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
 		// javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
 			
 		// Enable LWJGL3 debug
-		javaArgList.add("-Dorg.lwjgl.util.Debug=true");
-		javaArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
-		javaArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
+		overrideableArgList.add("-Dorg.lwjgl.util.Debug=true");
+		// overrideableArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
+		overrideableArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
 		
 		// GLFW Stub width height
-		javaArgList.add("-Dglfwstub.windowWidth=" + LWJGLInputSender.windowWidth);
-		javaArgList.add("-Dglfwstub.windowHeight=" + LWJGLInputSender.windowHeight);
+		overrideableArgList.add("-Dglfwstub.windowWidth=" + LWJGLInputSender.windowWidth);
+		overrideableArgList.add("-Dglfwstub.windowHeight=" + LWJGLInputSender.windowHeight);
 		
-		javaArgList.add("-Dglfwstub.initEgl=false");
+		overrideableArgList.add("-Dglfwstub.initEgl=false");
 		
 		if (versionInfo.arguments != null) {
 			// Minecraft 1.13+
 
-			javaArgList.add("-Dminecraft.launcher.brand=" + Tools.APP_NAME);
-			javaArgList.add("-Dminecraft.launcher.version=" + ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionName);
+			overrideableArgList.add("-Dminecraft.launcher.brand=" + Tools.APP_NAME);
+			overrideableArgList.add("-Dminecraft.launcher.version=" + ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionName);
 		}
 		
 		String launchClassPath = generateLaunchClassPath(profile.getVersion());
@@ -129,8 +128,19 @@ public final class Tools
 				javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
 			}
         */
-            // Put at the end of default args to allow override args
-            javaArgList.addAll(Arrays.asList(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")));
+            // Override args
+            for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
+                for (int i = 0; i < overrideableArgList.size(); i++) {
+                    String arg = overrideableArgList.get(i);
+                    if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
+                        overrideableArgList.set(i, argOverride);
+                    } else {
+                        javaArgList.add(argOverride);
+                    }
+                }
+            }
+            
+            javaArgList.addAll(overrideableArgList);
             
 			javaArgList.add("-cp");
 			javaArgList.add(launchClassPath);

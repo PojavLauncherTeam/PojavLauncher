@@ -28,9 +28,9 @@ public class LauncherPreferences
 		PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
 		// Get double of max Android heap to set default heap size
 		int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
-		PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("customJavaArgs",
-			"-Xms" + androidHeap + " " +
-			"-Xmx" + (androidHeap * 2) + " " +
+		PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs",
+			"-Xms" + androidHeap + "m " +
+			"-Xmx" + (androidHeap * 2) + "m " +
 			"-XX:+UseG1GC " +
 			"-Dsun.rmi.dgc.server.gcInterval=2147483646 " +
 			"-XX:+UnlockExperimentalVMOptions " +

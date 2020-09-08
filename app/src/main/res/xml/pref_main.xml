@@ -26,7 +26,7 @@
 			android:key="javaArgs"
 			android:title="@string/mcl_setting_title_javaargs"
 			android:summary="@string/mcl_setting_subtitle_javaargs"
-			android:dialogTitle="dialog_title_edittext_preference"/>
+			android:dialogTitle="@string/mcl_setting_title_javaargs"/>
 		
     </android.support.v7.preference.PreferenceCategory>
 	
