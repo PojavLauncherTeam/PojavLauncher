@@ -62,12 +62,6 @@
 			android:screenOrientation="sensorLandscape"
 			android:name=".prefs.LauncherPreferenceActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
-		
-		<activity
-			android:screenOrientation="sensorLandscape"
-			android:name=".prefs.PojavPreferenceActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
-   
     </application>
 
 </manifest>

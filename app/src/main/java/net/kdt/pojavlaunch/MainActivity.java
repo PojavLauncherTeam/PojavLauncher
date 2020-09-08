@@ -1023,8 +1023,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private Button findButton(int id) {
         Button button = (Button) findViewById(id);
-		button.setWidth((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getWidth()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
-		button.setHeight((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getHeight()) * PojavPreferenceActivity.PREF_BUTTONSIZE));
+		button.setWidth((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getWidth()) * LauncherPreferences.PREF_BUTTONSIZE));
+		button.setHeight((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getHeight()) * LauncherPreferences.PREF_BUTTONSIZE));
         button.setOnTouchListener(this);
         return button;
     }
