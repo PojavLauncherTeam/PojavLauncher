@@ -1,13 +1,13 @@
 #ifndef _BINARY_UTILS_H_
 #define _BINARY_UTILS_H_
 
-JavaVM *runtimeJavaVMPtr = NULL;;
-JNIEnv *runtimeJNIEnvPtr = NULL;
+JavaVM *runtimeJavaVMPtr;
+JNIEnv *runtimeJNIEnvPtr;
 
-JavaVM *dalvikJavaVMPtr = NULL;
-JNIEnv *dalvikJNIEnvPtr = NULL;
+JavaVM *dalvikJavaVMPtr;
+JNIEnv *dalvikJNIEnvPtr;
 
-int isEglMakeCurrentCalled = 0;
+int isEglMakeCurrentCalled;
 
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);
 jobjectArray convert_from_char_array(JNIEnv *env, char **charArray, int num_rows);
