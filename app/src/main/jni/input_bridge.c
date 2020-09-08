@@ -9,7 +9,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_LWJGLInputSender_sendDataToJRE(J
         jstring data_jre = (*runtimeJNIEnvPtr)->NewStringUTF(runtimeJNIEnvPtr, data_c);
         (*env)->ReleaseStringUTFChars(env, data, data_c);
 	
-        jclass sendClass = (*runtimeJNIEnvPtr)->FindClass(runtimeJNIEnvPtr, main_class_c);
+        jclass sendClass = (*runtimeJNIEnvPtr)->FindClass(runtimeJNIEnvPtr, "org/lwjgl/glfw/CallbackReceiver");
         jmethodID sendMethod = (*runtimeJNIEnvPtr)->GetStaticMethodID(runtimeJNIEnvPtr, sendClass, "receiveCallback", "(ILjava/lang/String;)V");
         (*runtimeJNIEnvPtr)->CallStaticVoidMethod(runtimeJNIEnvPtr, sendClass, sendMethod, type, data_jre);
 	}
