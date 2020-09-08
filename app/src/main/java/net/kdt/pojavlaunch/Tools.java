@@ -82,7 +82,7 @@ public final class Tools
 	*/
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
-	        javaArgList.add("-Xms900m");
+	  //      javaArgList.add("-Xms900m");
 		javaArgList.add("-Xmx900m");
 		
 		javaArgList.add("-XX:+UseG1GC");
