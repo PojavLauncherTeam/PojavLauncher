@@ -82,7 +82,6 @@ public final class Tools
 	*/
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
-		//old ram amount flags
 	        javaArgList.add("-Xms900m");
 		javaArgList.add("-Xmx900m");
 		
@@ -93,6 +92,10 @@ public final class Tools
 		javaArgList.add("-XX:G1ReservePercent=20");
 		javaArgList.add("-XX:MaxGCPauseMillis=50");
 		javaArgList.add("-XX:G1HeapRegionSize=32M");
+		javaArgList.add("-XX:+UseFastAccessorMethods");
+		javaArgList.add("-XX:+OptimizeStringConcat");
+		javaArgList.add("-XX:+AggressiveOpts");
+		
 		
 		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		javaArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
