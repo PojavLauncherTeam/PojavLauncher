@@ -68,7 +68,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 */
 	} else if (dalvikJavaVMPtr != vm) {
 		runtimeJavaVMPtr = vm;
-		(*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr, JNI_VERSION_1_4);
+		// (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr, JNI_VERSION_1_4);
 	}
 	LOGD("JNI_OnLoad returning()");
     return JNI_VERSION_1_4;

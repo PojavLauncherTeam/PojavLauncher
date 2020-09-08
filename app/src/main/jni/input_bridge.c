@@ -3,7 +3,12 @@
 #include "utils.h"
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_LWJGLInputSender_sendDataToJRE(JNIEnv* env, jclass clazz, jint type, jstring data) {
-	if (isEglMakeCurrentCalled == 1) {
+	if (isInputReady) {
+        if (!isAndroidThreadAttached) {
+            (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr, NULL);
+            isAndroidThreadAttached = true;
+        }
+        
         // Convert Dalvik string to JRE string: should or use directly?
         char *data_c = (char*)(*env)->GetStringUTFChars(env, data, 0);
         jstring data_jre = (*runtimeJNIEnvPtr)->NewStringUTF(runtimeJNIEnvPtr, data_c);
