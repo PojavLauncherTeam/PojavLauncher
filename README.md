@@ -1,6 +1,6 @@
 ![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)
 # PojavLauncher
-A Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11.2
+A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
 
 ## This branch?
 - Attempt to run Minecraft in OpenJDK, different a bit with Boardwalk 2.
