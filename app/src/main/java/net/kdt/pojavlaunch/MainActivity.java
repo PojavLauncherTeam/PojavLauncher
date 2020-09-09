@@ -253,7 +253,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					@Override
 					public void onCheckedChanged(CompoundButton button, boolean isChecked)
 					{
-                        if (isChecked) Tools.write(currLogFile.getAbsolutePath(), "");
+                        try {
+                            if (isChecked) Tools.write(currLogFile.getAbsolutePath(), "");
+                        } catch (Exception e) {}
+                        
 						isLogAllow = isChecked;
 						appendToLog("");
 					}
