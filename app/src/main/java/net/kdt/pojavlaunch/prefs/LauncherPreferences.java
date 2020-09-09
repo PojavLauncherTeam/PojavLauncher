@@ -28,16 +28,21 @@ public class LauncherPreferences
 		PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
 		// Get double of max Android heap to set default heap size
 		int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
-		PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs",
-			"-Xms" + androidHeap + "m " +
-			"-Xmx" + (androidHeap * 2) + "m " +
-			"-XX:+UseG1GC " +
-			"-Dsun.rmi.dgc.server.gcInterval=2147483646 " +
-			"-XX:+UnlockExperimentalVMOptions " +
-			"-XX:G1NewSizePercent=20 " +
-			"-XX:G1ReservePercent=20 " +
-			"-XX:MaxGCPauseMillis=50 " +
-			"-XX:G1HeapRegionSize=32M"
-		);
+		PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs", "");
+        if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
+            String DEFAULT_JAVA_ARGS =
+                "-Xms" + androidHeap + "m " +
+                "-Xmx" + (androidHeap * 2) + "m " +
+                "-XX:+UseG1GC " +
+                // "-Dsun.rmi.dgc.server.gcInterval=2147483646 " +
+                "-XX:+UnlockExperimentalVMOptions " +
+                "-XX:G1NewSizePercent=20 " +
+                "-XX:G1ReservePercent=20 " +
+                "-XX:MaxGCPauseMillis=50 " +
+                "-XX:G1HeapRegionSize=32M";
+                
+            PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
+            DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
+        }
 	}
 }
