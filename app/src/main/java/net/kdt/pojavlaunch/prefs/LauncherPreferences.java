@@ -49,7 +49,7 @@ public class LauncherPreferences
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             if (arg.startsWith(argLwjglLibname)) {
-                PREF_CUSTOM_JAVA_ARGS = arg.substring(argLwjglLibname.length());
+                PREF_CUSTOM_OPENGL_LIBNAME = arg.substring(argLwjglLibname.length());
             }
         }
 	}
