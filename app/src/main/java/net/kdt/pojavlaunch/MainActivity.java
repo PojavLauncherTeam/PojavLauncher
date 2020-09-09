@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private Button[] controlButtons;
 
-	private File logFile;
+	private File currLogFile, logFile;
 	private PrintStream logStream;
 	
 	/*
@@ -253,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					@Override
 					public void onCheckedChanged(CompoundButton button, boolean isChecked)
 					{
+                        if (isChecked) Tools.write(currLogFile.getAbsolutePath(), "");
 						isLogAllow = isChecked;
 						appendToLog("");
 					}
@@ -645,6 +646,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
 						LWJGLInputSender.windowWidth = width;
 						LWJGLInputSender.windowHeight = height;
+                        LWJGLInputSender.sendUpdateWindowSize(width, height);
 						calculateMcScale();
 						
 						// TODO: Implement this method for GLFW window size callback
@@ -833,7 +835,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	private FileObserver mLogObserver;
 	private void runCraft() throws Throwable {
 		if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
-			final File currLogFile = JREUtils.redirectStdio(true);
+			currLogFile = JREUtils.redirectStdio(true);
 			// DEPRECATED constructor (String) api 29
 			mLogObserver = new FileObserver(currLogFile.getAbsolutePath(), FileObserver.MODIFY){
 				@Override
@@ -923,8 +925,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	private void appendToLog(final String text, boolean checkAllow) {
-		if (checkAllow && !isLogAllow) return;
 		logStream.print(text);
+		if (checkAllow && !isLogAllow) return;
 		textLog.post(new Runnable(){
 				@Override
 				public void run() {
