@@ -16,6 +16,7 @@ public class LauncherPreferences
 	public static int PREF_LONGPRESS_TRIGGER = 500;
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
+    public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl04es.so";
 	
 	public static void loadPreferences() {
 		PREF_BUTTONSIZE = DEFAULT_PREF.getFloat("controlSize", 1f);
@@ -43,6 +44,13 @@ public class LauncherPreferences
                 
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
+        }
+        
+        String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
+        for (String arg : PREF_CUSTOM_JAVA_ARGS.split(" ")) {
+            if (arg.startsWith(argLwjglLibname)) {
+                PREF_CUSTOM_JAVA_ARGS = arg.substring(argLwjglLibname.length());
+            }
         }
 	}
 }
