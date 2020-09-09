@@ -108,7 +108,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	{
         EGLint val;
         eglQueryContext(potatoBridge.eglDisplay, potatoBridge.eglContext, EGL_CONTEXT_CLIENT_VERSION, &val);
-        assert(val == 2);
+        printf("OpenGL ES from eglQueryContext: %i\n", val);
+        // assert(val >= 2);
     }
 	
 	potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
@@ -142,10 +143,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	if (success == EGL_FALSE) {
 		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
 	}
-	
-	// Init gl4es before
-	// dlopen("libgl04es.so", RTLD_GLOBAL | RTLD_LAZY);
-	
+
 	// Test
 #ifdef GLES_TEST
 	glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
