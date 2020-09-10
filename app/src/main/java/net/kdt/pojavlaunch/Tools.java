@@ -15,11 +15,11 @@ import java.nio.charset.*;
 import java.util.*;
 import java.util.zip.*;
 import javax.microedition.khronos.egl.*;
-import net.kdt.pojavlaunch.patcher.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.prefs.*;
 import java.nio.*;
+import org.apache.commons.compress.utils.*;
 
 public final class Tools
 {
@@ -586,13 +586,6 @@ public final class Tools
 		return libDir.toArray(new String[0]);
 	}
 	
-	public static String[] patchOptifineInstaller(Activity ctx, File inFile) throws Exception {
-		File optifineDirFile = new File(optifineDir);
-		optifineDirFile.mkdir();
-		
-		return new OptiFinePatcher(inFile).saveInstaller(optifineDirFile);
-	}
-	
 	public static JMinecraftVersionList.Version getVersionInfo(String versionName) {
         try {
 			JMinecraftVersionList.Version customVer = new Gson().fromJson(read(versnDir + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
@@ -701,19 +694,7 @@ public final class Tools
 	}
 	
 	public static byte[] getByteArray(InputStream stream) throws IOException {
-        ByteBuffer byteBuff = ByteBuffer.allocateDirect(stream.available()).order(ByteOrder.nativeOrder());
-        byteBuff.position(0);
-        
-        BufferedInputStream buf = new BufferedInputStream(stream);
-        // should be 1kb?
-		byte[] buffer = new byte[512];
-        int read;
-        while((read = buf.read(buffer)) != -1){
-            byteBuff.put(buffer, 0, read);
-        }
-		buf.close();
-
-		return byteBuff.array();
+        return IOUtils.toByteArray(stream);
 	}
 
 	public static String read(InputStream is) throws Exception {
