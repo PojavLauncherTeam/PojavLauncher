@@ -19,7 +19,6 @@ import java.nio.charset.*;
 import java.util.*;
 import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.signer.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
 
@@ -28,7 +27,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import dalvik.system.*;
 import java.lang.reflect.*;
-import net.kdt.pojavlaunch.patcher.*;
 import android.graphics.*;
 import android.content.pm.*;
 //import android.support.v7.view.menu.*;
@@ -623,14 +621,6 @@ public class MCLauncherActivity extends AppCompatActivity
 						launchProgress.setMax(value);
 					}
 				});
-		}
-
-		private void patchAndCleanJar(String version, String in, String out) throws Exception {
-			publishProgress("1", getStr(R.string.mcl_launch_patch_client, version));
-			JarSigner.sign(in, out);
-			new File(in).delete();
-
-			// Tools.clearDuplicateFiles(new File(out).getParentFile());
 		}
 
 		@Override
