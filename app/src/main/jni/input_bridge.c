@@ -6,7 +6,7 @@ jclass inputBridgeClass;
 jmethodID inputBridgeMethod;
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_LWJGLInputSender_sendDataToJRE(JNIEnv* env, jclass clazz, jint type, jstring data) {
-	if (isInputReady) {
+	if (runtimeJavaVMPtr != NULL) {
         if (!isAndroidThreadAttached) {
             // Allow invoke JRE reflection from Android side
             (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr, NULL);

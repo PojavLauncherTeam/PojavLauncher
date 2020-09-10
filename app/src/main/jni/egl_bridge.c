@@ -152,8 +152,6 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	printf("First frame error: %p\n", eglGetError());
 #endif
 
-    isInputReady = true;
-
 	return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
 }
 

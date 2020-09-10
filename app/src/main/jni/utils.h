@@ -9,7 +9,6 @@ JNIEnv *runtimeJNIEnvPtr;
 JavaVM *dalvikJavaVMPtr;
 JNIEnv *dalvikJNIEnvPtr;
 
-bool isInputReady;
 bool isAndroidThreadAttached;
 
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);

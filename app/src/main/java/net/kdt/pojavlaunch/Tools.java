@@ -19,6 +19,7 @@ import net.kdt.pojavlaunch.patcher.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.prefs.*;
+import java.nio.*;
 
 public final class Tools
 {
@@ -699,24 +700,29 @@ public final class Tools
 		return getByteArray(new FileInputStream(filePath));
 	}
 	
-	public static byte[] getByteArray(InputStream stream) throws IOException
-	{
-		byte[] bytes = new byte[stream.available()];
-		BufferedInputStream buf = new BufferedInputStream(stream);
-		buf.read(bytes, 0, bytes.length);
+	public static byte[] getByteArray(InputStream stream) throws IOException {
+        ByteBuffer byteBuff = ByteBuffer.allocateDirect(stream.available()).order(ByteOrder.nativeOrder());
+        byteBuff.position(0);
+        
+        BufferedInputStream buf = new BufferedInputStream(stream);
+        // should be 1kb?
+		byte[] buffer = new byte[512];
+        int read;
+        while((read = buf.read(buffer)) != -1){
+            byteBuff.put(buffer, 0, read);
+        }
 		buf.close();
 
-		return bytes;
+		return byteBuff.array();
 	}
 
-	public static String read(InputStream is) throws Exception
-	{
-		return new String(getByteArray(is));
+	public static String read(InputStream is) throws Exception {
+        byte[] byteArr = getByteArray(is);
+		return new String(byteArr, 0, byteArr.length);
 	}
 	
-	public static String read(String path) throws Exception
-	{
-		return new String(getByteArray(path));
+	public static String read(String path) throws Exception {
+		return read(new FileInputStream(path));
 	}
 	
 	public static void write(String path, byte[] content) throws Exception
