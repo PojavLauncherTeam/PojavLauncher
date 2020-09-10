@@ -4,8 +4,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical"
-	android:gravity="center"
-	android:id="@+id/startscreenLinearLayout1">
+	android:gravity="center">
 
 	<TextView
 		android:layout_width="wrap_content"
@@ -17,7 +16,8 @@
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
-		android:text="@string/app_motd"/>
+		android:text="@string/app_motd"
+		android:id="@+id/startscreen_text"/>
 
 	<ProgressBar
 		android:layout_height="wrap_content"

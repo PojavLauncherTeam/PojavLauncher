@@ -8,22 +8,22 @@ import android.os.*;
 import android.support.annotation.*;
 import android.support.v4.app.*;
 import android.support.v4.content.*;
-import android.util.*;
+import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
+import android.widget.CompoundButton.*;
 import com.kdt.filermod.*;
-import com.kdt.mcgui.app.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
-import android.widget.CompoundButton.*;
-import android.text.method.*;
-import android.system.*;
-import android.net.*;
-import static android.view.ViewGroup.LayoutParams.*;
 import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
-import android.support.v7.app.AppCompatActivity;
+import org.apache.commons.compress.archivers.tar.*;
+import org.apache.commons.compress.compressors.xz.*;
+
+import android.app.AlertDialog;
+import com.kdt.filerapi.*;
+import android.system.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -34,6 +34,7 @@ public class PojavLoginActivity extends AppCompatActivity
 	private CheckBox sRemember, sOffline;
 	private LinearLayout loginLayout;
 	private ImageView imageLogo;
+    private TextView startupTextView;
 	
 	private boolean isPromptingGrant = false;
 	// private boolean isPermGranted = false;
@@ -141,7 +142,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		private ProgressBar progress;
 
 		private ProgressBar progressSpin;
-		private EditText progressLog;
+		// private EditText progressLog;
 		private AlertDialog progDlg;
 
 		@Override
@@ -153,6 +154,7 @@ public class PojavLoginActivity extends AppCompatActivity
 			FontChanger.changeFonts(startScr);
 
 			progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
+            startupTextView = (TextView) startScr.findViewById(R.id.startscreen_text);
 			//startScr.addView(progress);
 
 			AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this, R.style.AppTheme);
@@ -204,9 +206,9 @@ public class PojavLoginActivity extends AppCompatActivity
 		{
 			if (obj[0].equals("visible")) {
 				progress.setVisibility(View.VISIBLE);
-			} else if (obj.length == 2 && obj[1] != null) {
+			} /* else if (obj.length == 2 && obj[1] != null) {
 				progressLog.append(obj[1]);
-			}
+			} */
 		}
 
 		@Override
@@ -216,10 +218,9 @@ public class PojavLoginActivity extends AppCompatActivity
 			if (obj == 0) {
 				if (progDlg != null) progDlg.dismiss();
 				uiInit();
-			} else if (progressLog != null) {
+			} /* else if (progressLog != null) {
 				progressLog.setText(getResources().getString(R.string.error_checklog, "\n\n" + progressLog.getText()));
-			}
-
+			} */
 		}
 /*
 		private void appendlnToLog(String txt) {
@@ -338,18 +339,117 @@ public class PojavLoginActivity extends AppCompatActivity
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.3.jar", Tools.versnDir + "/1.7.3");
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
 			
-			// Extract libraries
-			if (!isLibrariesExtracted()) {
-				Tools.extractAssetFolder(this, "libraries", Tools.MAIN_PATH);
-				setPref(PREF_IS_INSTALLED_LIBRARIES, true);
-			}
-
 			UpdateDataChanger.changeDataAuto("2.4", "2.4.2");
+            
+            if (!isJavaRuntimeInstalled()) {
+                File jreTarFile = selectJreTarFile();
+                uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
+                setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
+            }
 		}
 		catch(Exception e){
 			Tools.showError(this, e);
 		}
 	}
+    
+    private File selectJreTarFile() throws InterruptedException {
+        final StringBuilder selectedFile = new StringBuilder();
+        
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
+                builder.setTitle(R.string.alerttitle_install_jre);
+                builder.setCancelable(false);
+
+                final AlertDialog dialog = builder.create();
+                FileListView flv = new FileListView(PojavLoginActivity.this);
+                flv.setFileSelectedListener(new FileSelectedListener(){
+
+                        @Override
+                        public void onFileSelected(File file, String path, String name) {
+                            if (name.endsWith(".tar.xz")) {
+                                selectedFile.append(path);
+                            }
+                        }
+                    });
+                dialog.setView(flv);
+                dialog.show();
+            }
+        });
+        
+        while (selectedFile.length() == 0) {
+            Thread.sleep(500);
+        }
+        
+        return new File(selectedFile.toString());
+    }
+
+    private void uncompressTarXZ(final File tarFile, final File dest) throws IOException, ErrnoException {
+
+        dest.mkdir();
+        TarArchiveInputStream tarIn = null;
+
+        tarIn = new TarArchiveInputStream(
+            new XZCompressorInputStream(
+                new BufferedInputStream(
+                    new FileInputStream(tarFile)
+                )
+            )
+        );
+
+        TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
+        // tarIn is a TarArchiveInputStream
+        while (tarEntry != null) {
+            /*
+             * Unpacking very small files in short time cause
+             * application to ANR or out of memory, so delay
+             * a little if size is below than 20kb (20480 bytes)
+             */
+            if (tarEntry.getSize() <= 20480) {
+                try {
+                    // 40 small files per second
+                    Thread.sleep(25);
+                } catch (InterruptedException e) {}
+            }
+            final String tarEntryName = tarEntry.getName();
+            runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    startupTextView.setText(getString(R.string.global_unpacking, tarEntryName));
+                }
+            });
+            // publishProgress(null, "Unpacking " + tarEntry.getName());
+            File destPath = new File(dest, tarEntry.getName()); 
+            if (tarEntry.isSymbolicLink()) {
+                destPath.getParentFile().mkdirs();
+                android.system.Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                // unpackShell.writeToProcess("ln -s " + tarEntry.getName() + " " + tarEntry.getLinkName());
+            } else if (tarEntry.isDirectory()) {
+                destPath.mkdirs();
+                destPath.setExecutable(true);
+            } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
+                destPath.getParentFile().mkdirs();
+                destPath.createNewFile();
+                // destPath.setExecutable(true);
+
+                byte[] btoRead = new byte[2048];
+                BufferedOutputStream bout = 
+                    new BufferedOutputStream(new FileOutputStream(destPath));
+                int len = 0;
+
+                while((len = tarIn.read(btoRead)) != -1) {
+                    bout.write(btoRead,0,len);
+                }
+
+                bout.close();
+                btoRead = null;
+
+            }
+            tarEntry = tarIn.getNextTarEntry();
+        }
+        tarIn.close();
+    }
 	
 	private boolean mkdirs(String path)
 	{

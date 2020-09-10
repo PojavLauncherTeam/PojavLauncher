@@ -10,10 +10,7 @@
 	
 	<!-- Languages list part -->
 	<string name="language_name">ENGLISH - US</string>
-
-	<!-- Logging output -->
-	<string name="log_title">Log output</string>
-	
+    
 	<!-- Login strings -->
 	<string name="login_online_username_hint">Email or username</string>
 	<string name="login_online_username_question">(Which do I use?)</string>
@@ -47,6 +44,7 @@
 	<string name="warning_remove_account">This account will be removed!</string>
 	
 	<!-- AlertDialog title -->
+	<string name="alerttitle_install_jre">Install Java Runtime (.tar.xz)</string>
 	<string name="alerttitle_selectkeymap">Select a keymap json</string>
 	<string name="alerttitle_installmod">Select a mod to install</string>
 	
@@ -119,13 +117,13 @@
 	<string name="global_remove">Remove</string>
 	<string name="global_restart">Restart</string>
 	<string name="global_save">Save</string>
+	<string name="global_unpacking">Unpacking %s</string>
 	<string name="global_error_field_empty">This field can\'t be empty</string>
 	
 <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
 		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-		//"© 2019 Khanh Duy Tran\n" + 
 		"Using libraries:\n" +
 		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
 		//" • Boardwalk memory manager (not used now).\n" +
@@ -192,6 +190,7 @@
 	
 	<!-- Update part (unused now) -->
 	<string name="update_console">Update console</string>
+    
 	<string name="main_options">Options</string>
 	<string name="main_play">Play</string>
 	<string name="main_welcome">Welcome,</string>
@@ -199,5 +198,5 @@
 	<string name="main_switchuser">Switch user</string>
 	<string name="main_version_">Version:</string>
 	<string name="main_nocrash">No crash detected</string>
-        <string name="main_nolog">No log.</string>
+    <string name="main_nolog">No log.</string>
 </resources>

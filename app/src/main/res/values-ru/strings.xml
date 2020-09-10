@@ -11,9 +11,6 @@
 	<!-- Languages list part -->
 	<string name="language_name">РУССКИЙ - RU</string>
 
-	<!-- Logging output -->
-	<string name="log_title">Журнал</string>
-	
 	<!-- Login strings -->
 	<string name="login_online_username_hint">Email или псевдоним</string>
 	<string name="login_online_username_question">(Что мне использовать?)</string>

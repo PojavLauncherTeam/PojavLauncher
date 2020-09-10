@@ -11,9 +11,6 @@
 	<!-- Languages list part -->
 	<string name="language_name">Polski - PL</string>
 
-	<!-- Logging output -->
-	<string name="log_title">Wyjście dziennika</string>
-	
 	<!-- Login strings -->
 	<string name="login_online_username_hint">Email lub nazwa użytkownika</string>
 	<string name="login_online_username_question">(Którego mam użyć?)</string>
