@@ -386,7 +386,7 @@ public class PojavLoginActivity extends AppCompatActivity
         return new File(selectedFile.toString());
     }
 
-    private void uncompressTarXZ(final File tarFile, final File dest) throws IOException, ErrnoException {
+    private void uncompressTarXZ(final File tarFile, final File dest) throws IOException {
 
         dest.mkdir();
         TarArchiveInputStream tarIn = null;
@@ -424,7 +424,11 @@ public class PojavLoginActivity extends AppCompatActivity
             File destPath = new File(dest, tarEntry.getName()); 
             if (tarEntry.isSymbolicLink()) {
                 destPath.getParentFile().mkdirs();
-                android.system.Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                try {
+                    android.system.Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                } catch (ErrnoException e) {
+                    e.printStackTrace();
+                }
                 // unpackShell.writeToProcess("ln -s " + tarEntry.getName() + " " + tarEntry.getLinkName());
             } else if (tarEntry.isDirectory()) {
                 destPath.mkdirs();
