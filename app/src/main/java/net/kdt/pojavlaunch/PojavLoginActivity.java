@@ -39,8 +39,9 @@ public class PojavLoginActivity extends AppCompatActivity
 	// private boolean isPermGranted = false;
 	
 	private SharedPreferences firstLaunchPrefs;
-	// private String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
-	private String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted2";
+	// private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
+	private final String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted2";
+    private final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
 	
 	private boolean isInitCalled = false;
 	@Override
@@ -201,7 +202,6 @@ public class PojavLoginActivity extends AppCompatActivity
 		@Override
 		protected void onProgressUpdate(String... obj)
 		{
-
 			if (obj[0].equals("visible")) {
 				progress.setVisibility(View.VISIBLE);
 			} else if (obj.length == 2 && obj[1] != null) {
@@ -289,11 +289,11 @@ public class PojavLoginActivity extends AppCompatActivity
 		// Clear current profile
 		PojavProfile.setCurrentProfile(this, null);
 	}
-/*
-	private boolean isOpenJDKInstalled() {
-		return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_OPENJDK, false);
+
+	private boolean isJavaRuntimeInstalled() {
+		return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
 	}
-*/
+
 	private boolean isLibrariesExtracted() {
 		return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_LIBRARIES, false);
 	}
@@ -504,7 +504,6 @@ public class PojavLoginActivity extends AppCompatActivity
 	}
 	
 	private MCProfile.Builder mProfile = null;
-	private AlertDialog warning;
 	public void loginMC(final View v)
 	{
 		/*skip it
