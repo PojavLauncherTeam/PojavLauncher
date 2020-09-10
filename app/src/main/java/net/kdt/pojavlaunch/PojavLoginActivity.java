@@ -370,6 +370,7 @@ public class PojavLoginActivity extends AppCompatActivity
                         public void onFileSelected(File file, String path, String name) {
                             if (name.endsWith(".tar.xz")) {
                                 selectedFile.append(path);
+                                dialog.dismiss();
                             }
                         }
                     });
