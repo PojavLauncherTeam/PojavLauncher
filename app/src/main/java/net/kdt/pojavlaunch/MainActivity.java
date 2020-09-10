@@ -17,6 +17,7 @@ import com.kdt.glsupport.*;
 import com.kdt.pointer.*;
 import dalvik.system.*;
 import java.io.*;
+import java.lang.Process;
 import java.lang.reflect.*;
 import java.security.*;
 import java.util.*;
@@ -840,6 +841,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private FileObserver mLogObserver;
 	private void runCraft() throws Throwable {
+		/* Old logger
 		if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
 			currLogFile = JREUtils.redirectStdio(true);
 			// DEPRECATED constructor (String) api 29
@@ -848,7 +850,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				public void onEvent(int event, String file) {
 					try {
 						if (event == FileObserver.MODIFY && currLogFile.length() > 0l) {
-							appendToLog(Tools.read(currLogFile.getAbsolutePath()));
+							System.out.println(Tools.read(currLogFile.getAbsolutePath()));
 							Tools.write(currLogFile.getAbsolutePath(), "");
 						}
 					} catch (Throwable th) {
@@ -859,7 +861,26 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			};
 			mLogObserver.startWatching();
 		}
-		
+		*/
+		JREUtils.redirectLogcat();
+        Log.v("jrelog","Log starts here");
+		Thread t = new Thread(() -> {
+			try {
+				Log.i("jrelog-logcat","Clearing logcat");
+				new ProcessBuilder().command("logcat","-c").redirectErrorStream(true).start();
+				Log.i("jrelog-logcat","Starting logcat");
+				Process p = new ProcessBuilder().command("logcat","-v","brief","*:S").redirectErrorStream(true).start();
+				byte[] buf = new byte[512];
+				int len;
+				while ((len = p.getInputStream().read(buf)) != -1) {
+					appendToLog(new String(buf, 0, len));
+				}
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		t.start();
+		Log.i("jrelog-logcat","Logcat thread started");
 		Tools.launchMinecraft(this, mProfile, mVersionInfo);
 	}
 	

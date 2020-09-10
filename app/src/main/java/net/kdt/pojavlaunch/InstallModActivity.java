@@ -99,7 +99,7 @@ public class InstallModActivity extends AppCompatActivity
 			
 			JREUtils.setJavaEnvironment(this);
 			
-			JREUtils.redirectStdio(false);
+			//JREUtils.redirectStdio(false);
 			JREUtils.setJavaEnvironment(this);
 			JREUtils.initJavaRuntime();
 			JREUtils.chdir(Tools.MAIN_PATH);

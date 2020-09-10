@@ -27,6 +27,8 @@
 #include <stdio.h>
 #include <android/log.h>
 #include <dlfcn.h>
+#include <pthread.h>
+#include <unistd.h>
 // Boardwalk: missing include
 #include <string.h>
 
@@ -194,5 +196,39 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
    
     return res;
 }
+static int pfd[2];
+static pthread_t logger;
+static const char* tag = "jrelog";
 
+static void *logger_thread() {
+	ssize_t  rsize;
+	char buf[512];
+	while((rsize = read(pfd[0], buf, sizeof(buf)-1)) > 0) {
+		if(buf[rsize-1]=='\n') {
+			rsize=rsize-1;
+		}
+		buf[rsize]=0x00;
+		__android_log_write(ANDROID_LOG_SILENT,tag,buf);
+	}
+}
+
+JNIEXPORT void JNICALL
+Java_net_kdt_pojavlaunch_JREUtils_redirectLogcat(JNIEnv *env, jclass clazz) {
+	// TODO: implement redirectLogcat()
+	setvbuf(stdout, 0, _IOLBF, 0); // make stdout line-buffered
+	setvbuf(stderr, 0, _IONBF, 0); // make stderr unbuffered
+
+	/* create the pipe and redirect stdout and stderr */
+	pipe(pfd);
+	dup2(pfd[1], 1);
+	dup2(pfd[1], 2);
+
+	/* spawn the logging thread */
+	if(pthread_create(&logger, 0, logger_thread, 0) == -1) {
+		__android_log_write(ANDROID_LOG_ERROR,tag,"Error while spawning logging thread. JRE output won't be logged.");
+	}
+
+	pthread_detach(logger);
+	__android_log_write(ANDROID_LOG_INFO,tag,"Starting logging STDIO as jrelog:V");
+}
 

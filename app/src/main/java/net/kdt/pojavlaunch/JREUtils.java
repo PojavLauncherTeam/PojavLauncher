@@ -24,17 +24,7 @@ public class JREUtils
             dlopen("libgl04es.so");
         }
 	}
-
-	public static File redirectStdio(boolean current) throws ErrnoException {
-		File logFile = new File(current ? Tools.datapath : Tools.MAIN_PATH, (current ? "current" : "latest") + "log.txt");
-
-		FileDescriptor fd = Os.open(logFile.getAbsolutePath(), OsConstants.O_WRONLY | OsConstants.O_CREAT | OsConstants.O_TRUNC, 0666);
-		Os.dup2(fd, OsConstants.STDERR_FILENO);
-		Os.dup2(fd, OsConstants.STDOUT_FILENO);
-		
-		return logFile;
-	}
-	
+	public static native void redirectLogcat();
 	public static void setJavaEnvironment(Context ctx) throws IOException, ErrnoException {
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
 		String ldLibraryPath = (

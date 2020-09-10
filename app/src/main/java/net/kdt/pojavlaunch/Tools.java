@@ -642,16 +642,13 @@ public final class Tools
 	
 	public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
 
-		StringBuilder stringBuilder = new StringBuilder();
-		String line = null;
-
-		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, charset))) {	
-			while ((line = bufferedReader.readLine()) != null) {
-				stringBuilder.append(line);
-			}
+		String out = "";
+		int len;
+		byte[] buf = new byte[512];
+		while((len = inputStream.read(buf))!=-1) {
+			out += new String(buf,0,len,charset);
 		}
-
-		return stringBuilder.toString();
+		return out;
 	}
 	
 	// Current Useless below but keep it for future usage.
@@ -687,19 +684,16 @@ public final class Tools
 		
 		return choice;
 	}
-	
-	public static byte[] getByteArray(String filePath) throws Exception
-	{
-		return getByteArray(new FileInputStream(filePath));
-	}
-	
-	public static byte[] getByteArray(InputStream stream) throws IOException {
-        return IOUtils.toByteArray(stream);
-	}
+
 
 	public static String read(InputStream is) throws Exception {
-        byte[] byteArr = getByteArray(is);
-		return new String(byteArr, 0, byteArr.length);
+		String out = "";
+		int len;
+		byte[] buf = new byte[512];
+		while((len = is.read(buf))!=-1) {
+			out += new String(buf,0,len);
+		}
+		return out;
 	}
 	
 	public static String read(String path) throws Exception {
