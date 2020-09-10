@@ -73,6 +73,8 @@ dependencies {
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support:support-annotations:26.0.0'
 	// compile 'com.google.guava:guava:24.0-android'
+    
+    implementation 'org.tukaani:xz:1.8'
 
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
