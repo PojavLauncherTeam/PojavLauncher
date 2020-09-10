@@ -490,6 +490,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								break;
 						}
 					}
+                    
+                    debugText.setText(LWJGLInputSender.DEBUG_STRING.toString());
+                    LWJGLInputSender.DEBUG_STRING.setLength(0);
 
 					return true;
 					// return !LWJGLInputSender.isGrabbing();

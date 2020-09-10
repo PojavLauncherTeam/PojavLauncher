@@ -12,8 +12,15 @@ public class LWJGLInputSender
     public static int windowWidth, windowHeight;
     public static int mouseX, mouseY;
     public static boolean mouseLeft;
+    public static StringBuilder DEBUG_STRING = new StringBuilder();
+    
+    public static void sendMouseEvent(int x, int y, int keycode, boolean isDown) {
+        sendCursorPos(x, y);
+        sendKeycode(keycode, isDown);
+    }
     
 	public static void sendCursorPos(int x, int y) {
+        DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
         mouseX = x;
         mouseY = y;
 		sendDataToJRE(TYPE_CURSOR_POS, x + ":" + y);
@@ -24,6 +31,7 @@ public class LWJGLInputSender
 	}
     
     public static void sendMouseKeycode(int keycode, boolean isDown) {
+        DEBUG_STRING.append("MouseKey=" + keycode + ", down=" + isDown + "\n");
         sendDataToJRE(TYPE_MOUSE_KEYCODE_CONTROL, keycode + ":" + Boolean.toString(isDown));
 	}
     

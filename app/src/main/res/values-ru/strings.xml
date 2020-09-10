@@ -169,7 +169,7 @@
 	<!-- MainActivity: Menu advanced controls -->
 	<string name="control_forceclose">Закрыть игру</string>
 	<string name="control_viewout">Журнал</string>
-	<string name="control_adebug">PointerCapture Debug</string>
+	<string name="control_adebug">Input Debug</string>
 	<string name="control_customkey">Ввести клавишу</string>
 
 	<string name="control_more3"></string>
