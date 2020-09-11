@@ -310,23 +310,13 @@ public class PojavLoginActivity extends AppCompatActivity
 		mkdirs(Tools.versnDir);
 		mkdirs(Tools.libraries);
 		mkdirs(Tools.mpProfiles);
+        
+        mkdirs(Tools.MAIN_PATH);
+        mkdirs(Tools.CTRLMAP_PATH);
 		
-		File file0 = new File(Tools.mpProfiles);
-		File file1 = new File(Tools.mpModEnable);
-		File file2 = new File(Tools.mpModDisable);
-		File file3 = new File(Tools.mpModAddNewMo);
-		
-		file0.mkdir();
-		file1.mkdirs();
-		file2.mkdir();
+        mkdirs(Tools.MAIN_PATH + "/mods");
+
 		try {
-			file3.createNewFile();
-		} catch (IOException e){}
-	
-		try {
-			mkdirs(Tools.MAIN_PATH);
-			
-			mkdirs(Tools.CTRLMAP_PATH);
 			new CustomControls(this).save(Tools.CTRLDEF_FILE);
 			
 			Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);

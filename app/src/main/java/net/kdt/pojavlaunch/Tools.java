@@ -389,6 +389,15 @@ public final class Tools
 					inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
 				}
 
+                // Inheriting Minecraft 1.13+ with append custom args
+                if (inheritsVer.arguments != null && customVer.arguments != null) {
+                    List totalArgList = new ArrayList();
+                    totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
+                    totalArgList.addAll(Arrays.asList(customVer.arguments.game));
+                    
+                    customVer.arguments.game = totalArgList.toArray(new Object[0]);
+                }
+                
 				return inheritsVer;
 			}
 		} catch (Exception e) {
