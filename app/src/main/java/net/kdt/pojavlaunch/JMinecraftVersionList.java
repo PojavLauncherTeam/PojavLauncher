@@ -15,6 +15,7 @@ public class JMinecraftVersionList {
     public static class Version {
 		// Since 1.13, so it's one of ways to check
 		public Arguments arguments;
+        public AssetIndex assetIndex;
 
         public String assets;
 		public Map<String, MinecraftClientInfo> downloads;
@@ -46,5 +47,9 @@ public class JMinecraftVersionList {
 			}
 		}
 	}
+    public static class AssetIndex {
+        public String id, sha1, url;
+        public long size, totalSize;
+    }
 }
 

@@ -469,8 +469,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			statusIsLaunching(true);
 		}
 
-		private int maxSubProgress = 1;
-		private int valSubProgress = 1;
+		private JMinecraftVersionList.Version verInfo;
 		@Override
 		protected Throwable doInBackground(final String[] p1) {
 			Throwable throwable = null;
@@ -479,8 +478,6 @@ public class MCLauncherActivity extends AppCompatActivity
 
 				//Downloading libraries
 				String inputPath = Tools.versnDir + downVName + ".jar";
-
-				JMinecraftVersionList.Version verInfo;
 				
 				try {
 					//com.pojavdx.dx.mod.Main.debug = true;
@@ -593,6 +590,8 @@ public class MCLauncherActivity extends AppCompatActivity
 				try {
 					downloadAssets(verInfo.assets, new File(Tools.ASSETS_PATH));
 				} catch (Exception e) {
+                    e.printStackTrace();
+                    
 					// Ignore it
 					launchWithError = false;
 				} finally {
@@ -691,12 +690,13 @@ public class MCLauncherActivity extends AppCompatActivity
 		public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
 
 		public JAssets downloadIndex(String versionName, File output) throws Exception {
-			String versionJson = DownloadUtils.downloadString("http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json");
+			String versionJson = DownloadUtils.downloadString(verInfo.assetIndex != null ? verInfo.assetIndex.url : "http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json");
 			JAssets version = gsonss.fromJson(versionJson, JAssets.class);
 			output.getParentFile().mkdirs();
 			Tools.write(output.getAbsolutePath(), versionJson.getBytes(Charset.forName("UTF-8")));
 			return version;
 		}
+        
 		public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException, Throwable {
 			String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
 			File outFile = new File(objectsDir, assetPath);
