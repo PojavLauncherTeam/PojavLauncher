@@ -65,7 +65,7 @@
 	<string name="toast_permission_denied">The read/write to storage permission is required!</string>
 	<string name="toast_login_error">Something went wrong after login. Please feedback to the developer.\nError: %s</string>
 	<string name="toast_optifine_success">Install successful</string>
-	<string name="toast_shiftmode">Shift (sneak) button mode changed to</string>
+	<string name="toast_shiftmode">Shift (sneak) button mode changed to %s</string>
 	<string name="toast_shiftmode_hold">Hold mode</string>
 	<string name="toast_shiftmode_toggle">Click toggle mode</string>
 	<!--

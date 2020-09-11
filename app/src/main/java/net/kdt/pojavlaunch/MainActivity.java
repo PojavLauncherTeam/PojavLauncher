@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							case R.id.nav_shiftmodechg:
 								isShiftModeClick = !isShiftModeClick;
 								// shiftButton.setOnTouchListener(isShiftModeClick ? null : MainActivity.this);
-								Toast.makeText(MainActivity.this, getString(R.string.toast_shiftmode) + " " + getString(isShiftModeClick ? R.string.toast_shiftmode_toggle : R.string.toast_shiftmode_hold), Toast.LENGTH_SHORT).show();
+								Toast.makeText(MainActivity.this, getString(R.string.toast_shiftmode, getString(isShiftModeClick ? R.string.toast_shiftmode_toggle : R.string.toast_shiftmode_hold)), Toast.LENGTH_SHORT).show();
 								break;
 						}
 						//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
