@@ -355,7 +355,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 						if (gestureDetector.onTouchEvent(event)) {
 
-                            LWJGLInputSender.sendCursorPos((int) mouseX, (int) (LWJGLInputSender.windowHeight - mouseY));
+                            LWJGLInputSender.sendCursorPos((int) mouseX, (int) mouseY);
                             LWJGLInputSender.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
 							if (!rightOverride) {
 								LWJGLInputSender.mouseLeft = true;
@@ -386,13 +386,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									} finally {
 										placeMouseAt(mouseX, mouseY);
 
-										LWJGLInputSender.sendCursorPos((int) mouseX, LWJGLInputSender.windowHeight - (int) mouseY);
+										LWJGLInputSender.sendCursorPos((int) mouseX, (int) mouseY);
 										break;
 									}
 							}
 						}
 						prevX = x;
 						prevY = y;
+                        
+                        debugText.setText(LWJGLInputSender.DEBUG_STRING.toString());
+                        LWJGLInputSender.DEBUG_STRING.setLength(0);
+                        
 						return true;
 					}
 				});
@@ -589,6 +593,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							break;
 					}
 
+                    debugText.setText(LWJGLInputSender.DEBUG_STRING.toString());
+                    LWJGLInputSender.DEBUG_STRING.setLength(0);
+                    
 					return true;
 					// If onClick fail with false, change back to true
 				}
