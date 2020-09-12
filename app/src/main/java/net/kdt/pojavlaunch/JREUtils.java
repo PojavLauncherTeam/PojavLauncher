@@ -48,7 +48,12 @@ public class JREUtils
 		setEnvironment("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
 		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
 		setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
-		
+        
+        setEnvironment("REGAL_GL_VENDOR", "Android");
+        setEnvironment("REGAL_GL_RENDERER", "Regal");
+        setEnvironment("REGAL_GL_VERSION", "4.5");
+        // REGAL_GL_EXTENSIONS
+        
 		setLdLibraryPath(ldLibraryPath);
 		
 		// return ldLibraryPath;
