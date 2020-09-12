@@ -113,7 +113,7 @@ public final class Tools
 		}
 		
 		String launchClassPath = generateLaunchClassPath(profile.getVersion());
-        Log.d(Tools.APP_NAME, "Java Classpath: " + launchClassPath);
+        System.out.println("Java Classpath: " + launchClassPath);
 		if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
 			javaArgList.add("-Djava.library.path=" + launchClassPath);
 		} else {
