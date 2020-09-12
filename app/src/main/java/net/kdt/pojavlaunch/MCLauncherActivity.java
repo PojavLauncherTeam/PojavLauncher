@@ -144,7 +144,8 @@ public class MCLauncherActivity extends AppCompatActivity
 			}
 
 			for (File fVer : fVers.listFiles()) {
-				versions.add(fVer.getName());
+                if (fVer.isDirectory())
+				    versions.add(fVer.getName());
 			}
 		} catch (Exception e) {
 			versions.add(getStr(R.string.global_error) + ":");
@@ -511,10 +512,13 @@ public class MCLauncherActivity extends AppCompatActivity
 							// libItem.name.startsWith("com.mojang:realms") ||
 							libItem.name.startsWith("net.java.jinput") ||
 							// libItem.name.startsWith("net.minecraft.launchwrapper") ||
-							libItem.name.startsWith("optifine:launchwrapper-of") ||
+                            
+                            // FIXME lib below!
+							// libItem.name.startsWith("optifine:launchwrapper-of") ||
+                            
 							// libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
-							libItem.name.startsWith("org.lwjgl") ||
-							libItem.name.startsWith("tv.twitch")
+							libItem.name.startsWith("org.lwjgl")
+							// libItem.name.startsWith("tv.twitch")
 							) { // Black list
 							publishProgress("1", "Ignored " + libItem.name);
 							//Thread.sleep(100);
