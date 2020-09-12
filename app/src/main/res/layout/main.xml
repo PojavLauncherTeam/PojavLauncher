@@ -5,7 +5,8 @@
 	android:layout_height="match_parent"
 	android:layout_width="match_parent"
 	android:layout_alignParentRight="true"
-	android:id="@+id/main_drawer_options">
+	android:id="@+id/main_drawer_options"
+	android:keepScreenOn="true">
 
 	<FrameLayout
 		android:id="@+id/content_frame"
