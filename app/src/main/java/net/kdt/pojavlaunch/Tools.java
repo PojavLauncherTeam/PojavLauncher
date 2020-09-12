@@ -621,7 +621,7 @@ public final class Tools
                     totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
                     totalArgList.addAll(Arrays.asList(customVer.arguments.game));
                     
-                    customVer.arguments.game = totalArgList.toArray(new Object[0]);
+                    inheritsVer.arguments.game = totalArgList.toArray(new Object[0]);
                 }
                 
 				return inheritsVer;
@@ -638,7 +638,7 @@ public final class Tools
 			try {
 				Field fieldA = fromVer.getClass().getDeclaredField(key);
 				value = fieldA.get(fromVer);
-				if (value != null || ((value instanceof String) && !((String) value).isEmpty())) {
+				if (((value instanceof String) && !((String) value).isEmpty()) || value != null) {
 					Field fieldB = targetVer.getClass().getDeclaredField(key);
 					fieldB.set(targetVer, value);
 				}
