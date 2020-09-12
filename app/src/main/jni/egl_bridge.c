@@ -30,6 +30,8 @@ struct PotatoBridge {
 };
 struct PotatoBridge potatoBridge;
 
+typedef jint RegalMakeCurrent_func(EGLContext context);
+
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
 	potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
 }
@@ -168,6 +170,11 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglTerminate(JNIEnv* e
 	potatoBridge.eglSurface = EGL_NO_SURFACE;
 	
 	return JNI_TRUE;
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *env, jclass clazz) {
+    RegalMakeCurrent_func *RegalMakeCurrent = (RegalMakeCurrent_func *) dlsym(RTLD_DEFAULT, "RegalMakeCurrent");
+    RegalMakeCurrent(potatoBridge.eglContext);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv *env, jclass clazz) {
