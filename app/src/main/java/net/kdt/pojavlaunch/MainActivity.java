@@ -874,9 +874,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		Thread t = new Thread(() -> {
 			try {
 				Log.i("jrelog-logcat","Clearing logcat");
-				new ProcessBuilder().command("logcat","-c").redirectErrorStream(true).start();
+				new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
 				Log.i("jrelog-logcat","Starting logcat");
-				Process p = new ProcessBuilder().command("logcat","-v","brief","*:S").redirectErrorStream(true).start();
+				Process p = new ProcessBuilder().command("logcat", "-G", "1m", "-v", "brief", "*:S").redirectErrorStream(true).start();
 				byte[] buf = new byte[512];
 				int len;
 				while ((len = p.getInputStream().read(buf)) != -1) {
