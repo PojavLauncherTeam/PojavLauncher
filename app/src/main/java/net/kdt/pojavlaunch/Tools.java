@@ -131,13 +131,16 @@ public final class Tools
 			}
         */
             // Override args
+            // TODO fix duplicate args
             for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
                 for (int i = 0; i < overrideableArgList.size(); i++) {
                     String arg = overrideableArgList.get(i);
                     if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
                         overrideableArgList.set(i, argOverride);
+                        System.out.println("ARGProcessor: Replace override arg: " + arg);
                     } else {
                         javaArgList.add(argOverride);
+                        System.out.println("ARGProcessor: Add non-override arg: " + arg);
                     }
                 }
             }
