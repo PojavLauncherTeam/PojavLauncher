@@ -1,9 +1,9 @@
 #include <jni.h>
-
+/*
 struct X11GraphicsConfigIDs x11GraphicsConfigIDs;
 struct X11GraphicsDeviceIDs x11GraphicsDeviceIDs;
-
-struct char* display = ":0";
+*/
+char* display = ":0";
 
 JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsConfig_initIDs (JNIEnv *env, jclass cls) {
     
@@ -107,7 +107,7 @@ JNIEXPORT jdouble JNICALL Java_sun_awt_X11GraphicsConfig_getXResolution(JNIEnv *
      *  AndroidDpWidth * 25.4 / AndroidPxWidth
      */
     
-    return (jdouble) 1d;
+    return (jdouble) 1;
 }
 
 JNIEXPORT jdouble JNICALL Java_sun_awt_X11GraphicsConfig_getYResolution(JNIEnv *env, jobject this, jint screen) {
@@ -115,7 +115,7 @@ JNIEXPORT jdouble JNICALL Java_sun_awt_X11GraphicsConfig_getYResolution(JNIEnv *
      *  AndroidDpHeight * 25.4 / AndroidPxHeight
      */
     
-    return (jdouble) 1d;
+    return (jdouble) 1;
 }
 
 JNIEXPORT jint JNICALL Java_sun_awt_X11GraphicsConfig_getNumColors(JNIEnv *env, jobject this) {
