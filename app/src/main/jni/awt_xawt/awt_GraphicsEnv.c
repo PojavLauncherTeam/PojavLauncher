@@ -5,6 +5,10 @@ struct X11GraphicsDeviceIDs x11GraphicsDeviceIDs;
 */
 char* display = ":0";
 
+JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsEnvironment_initDisplay(JNIEnv *env, jobject this, jboolean glxReq) {
+    
+}
+
 JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsConfig_initIDs (JNIEnv *env, jclass cls) {
     
 }
