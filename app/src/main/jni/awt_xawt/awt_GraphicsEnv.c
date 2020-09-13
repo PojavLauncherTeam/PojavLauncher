@@ -15,11 +15,11 @@ JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsDevice_initIDs (JNIEnv *env, jcla
 
 JNIEXPORT jboolean JNICALL Java_sun_awt_X11GraphicsEnvironment_initGLX(JNIEnv *env, jclass cls) {
     // Return true if want try enable it
-    return false;
+    return JNI_FALSE;
 }
 
 JNIEXPORT jboolean JNICALL Java_sun_awt_X11GraphicsEnvironment_initXRender(JNIEnv *env, jclass cls, jboolean verbose) {
-    return false;
+    return JNI_FALSE;
 }
 
 JNIEXPORT jstring JNICALL Java_sun_awt_X11GraphicsEnvironment_getDisplayString(JNIEnv *env, jclass cls) {
