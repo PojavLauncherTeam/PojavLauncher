@@ -133,6 +133,26 @@ public class MCLauncherActivity extends AppCompatActivity
 			finish();
 		}
 
+        File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
+        if (logFile.exists() && logFile.length() < 2048) {
+            String errMsg = "Error occurred during initialization of ";
+            try {
+                String logContent = Tools.read(logFile.getAbsolutePath());
+                if (logContent.contains(errMsg + "VM") && 
+                  logContent.contains("Could not reserve enough space for")) {
+                    OutOfMemoryError ex = new OutOfMemoryError("Java error: " + logContent);
+                    ex.setStackTrace(null);
+                    Tools.showError(MCLauncherActivity.this, ex);
+                      
+                    // Do it so dialog will not shown for second time
+                    Tools.write(logFile.getAbsolutePath(), logContent.replace(errMsg + "VM", errMsg + " JVM"));
+                }
+            } catch (Throwable th) {
+                System.err.println("Could not detect java crash");
+                th.printStackTrace();
+            }
+        }
+        
 		//showProfileInfo();
 
 		List<String> versions = new ArrayList<String>();

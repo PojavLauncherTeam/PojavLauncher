@@ -17,7 +17,9 @@ include $(BUILD_SHARED_LIBRARY)
 LOCAL_PATH := $(LOCAL_PATH)/awt_xawt
 include $(CLEAR_VARS)
 LOCAL_MODULE := awt_xawt
-LOCAL_CFLAGS += -DHEADLESS
-LOCAL_SRC_FILES := xawt_fake.c
+# LOCAL_CFLAGS += -DHEADLESS
+LOCAL_SRC_FILES := \
+    xawt_fake.c \
+    awt_GraphicsEnv.c
 include $(BUILD_SHARED_LIBRARY)
 
