@@ -65,6 +65,9 @@
 	<string name="toast_permission_denied">Требуется разрешение на чтение/запись в хранилище!</string>
 	<string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите об этом разработчику.\nОшибка: %s</string>
 	<string name="toast_optifine_success">Установка прошла успешно</string>
+	<string name="toast_shiftmode">Режим кнопки Shift (крадся) изменен на %s</string>
+	<string name="toast_shiftmode_hold">режим удержания</string>
+	<string name="toast_shiftmode_toggle">режим переключения</string>
 	<!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -180,7 +183,8 @@
 	<string name="control_adebug">Откладка PointerCapture</string>
 	<string name="control_customkey">Отправить потловательскую раскладку</string>
 
-	<string name="control_more3"></string>
+	<string name="control_shiftmodechg">Изменить режим кнопки Shift (крадся)</string>
+	
 	<string name="control_more4"></string>
 
 	<string name="customctrl_keyname">Код клавиши</string>
