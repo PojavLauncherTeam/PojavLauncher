@@ -24,11 +24,11 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "3.2.0_6402b_20200910"
+        versionName "3.2.0_6403b_20200915"
         multiDexEnabled true //important
 		
 		ndk {
-            abiFilters "armeabi-v7a"
+            abiFilters "arm64-v8a", "armeabi-v7a"
         }
     }
 	
