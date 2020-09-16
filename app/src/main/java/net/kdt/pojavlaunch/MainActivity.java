@@ -1103,23 +1103,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			*/
 			
 				Map<Provider, Provider.Service> rsaMap, rsaPkcs1Map;
-				rsaMap = getCipherServicesMap("Cipher", "AES");
-				rsaPkcs1Map = getCipherServicesMap("Cipher", "AES/CBC/PKCS7Padding");
+				rsaMap = getCipherServicesMap("Cipher", "RSA");
+				rsaPkcs1Map = getCipherServicesMap("Cipher", "RSA/ECB/PKCS1PADDING");
 
 				for (Map.Entry<Provider, Provider.Service> set : rsaMap.entrySet()) {
 					System.out.println(set.getKey().getName() + ": ");
 					for (Map.Entry en : set.getKey().entrySet()) {
-						if (en.getKey().toString().contains("Cipher.AES"))
+						if (en.getKey().toString().contains("Cipher.RSA"))
 							System.out.println(en.getKey().toString() + " = " + en.getValue().toString());
 					}
 
-					set.getKey().remove("Cipher.AES SupportedKeyFormats");
+					set.getKey().remove("Cipher.RSA SupportedKeyFormats");
 
 					int spend = 0;
 					for (Map.Entry<Provider, Provider.Service> s : rsaPkcs1Map.entrySet()) {
 						if (spend == 0) {
-							set.getKey().put("Cipher.AES", s.getValue().getClassName());
-							set.getKey().put("Cipher.AES SupportedKeyClasses", s.getKey().get("Cipher.AES/CBC/PKCS7Padding SupportedKeyClasses"));
+							set.getKey().put("Cipher.RSA", s.getValue().getClassName());
+							set.getKey().put("Cipher.RSA SupportedKeyClasses", s.getKey().get("Cipher.RSA/ECB/PKCS1Padding SupportedKeyClasses"));
 
 							List<String> rsaAliasList = Modifiable.getServiceAliases(set.getValue());
 							rsaAliasList.clear();
@@ -1138,8 +1138,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 				}
 			} else {
 				Collection<Provider.Service> rsaList, rsaPkcs1List;
-				rsaList = getCipherServices("Cipher", "AES");
-				rsaPkcs1List = getCipherServices("Cipher", "AES/CBC/PKCS7Padding");
+				rsaList = getCipherServices("Cipher", "RSA");
+				rsaPkcs1List = getCipherServices("Cipher", "RSA/ECB/PKCS1PADDING");
 				
 				rsaList.clear();
 				rsaList.addAll(rsaPkcs1List);
@@ -1272,8 +1272,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		ProviderList providerList = Providers.getProviderList();
 		Map<Provider, Provider.Service> services = null;
 		
-		// Android 8.1.0
-		if (Build.VERSION.SDK_INT >= 27) {
+		// Android 10
+		if (Build.VERSION.SDK_INT >= 29) {
 			services = new ArrayMap<>();
 			Provider.Service service = providerList.getService(type, algorithm);
 			services.put(service.getProvider(), service);
