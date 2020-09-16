@@ -1273,7 +1273,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		Map<Provider, Provider.Service> services = null;
 		
 		// Android 8.1.0 and above
-		if (Build.VERSION.SDK_INT > 27) {
+		if (Build.VERSION.SDK_INT >= 27) {
 			services = new ArrayMap<>();
 			Provider.Service service = providerList.getService(type, algorithm);
 			services.put(service.getProvider(), service);
