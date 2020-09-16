@@ -137,10 +137,9 @@ public final class Tools
                     String arg = overrideableArgList.get(i);
                     if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
                         overrideableArgList.set(i, argOverride);
-                        System.out.println("ARGProcessor: Replace override arg: " + arg);
-                    } else {
+                        // break;
+                    } else if (i+1 == overrideableArgList.size()) {
                         javaArgList.add(argOverride);
-                        System.out.println("ARGProcessor: Add non-override arg: " + arg);
                     }
                 }
             }
