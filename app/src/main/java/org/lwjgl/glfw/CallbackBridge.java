@@ -21,7 +21,7 @@ public class CallbackBridge {
 
     public static void sendMouseEvent(int x, int y, int keycode, boolean isDown) {
         sendCursorPos(x, y);
-        sendKeycode(keycode, isDown);
+        sendMouseKeycode(keycode, isDown);
     }
 
     public static void sendCursorPos(int x, int y) {
@@ -56,7 +56,9 @@ public class CallbackBridge {
     // Called from JRE side
     public static void receiveCallback(int type, String data) {
         switch (type) {
-            case ANDROID_TYPE_GRAB_STATE: isGrabbing = Boolean.parseBoolean(data);
+            case ANDROID_TYPE_GRAB_STATE:
+                isGrabbing = Boolean.parseBoolean(data);
+                break;
         }
     }
     
