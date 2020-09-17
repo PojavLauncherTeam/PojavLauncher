@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEn
 	potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
 }
 
-// Called from JNI_OnLoad of liblwjgl_opengl32
+// Called from JNI_OnLoad of liblwjgl_opengl
 void pojav_openGLOnLoad() {
 	
 }

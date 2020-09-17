@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.app.*;
@@ -13,7 +14,6 @@ import android.widget.*;
 import android.widget.AdapterView.*;
 import com.google.gson.*;
 import com.kdt.filerapi.*;
-import com.kdt.filermod.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
@@ -21,14 +21,11 @@ import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
+import org.lwjgl.glfw.*;
 
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import dalvik.system.*;
-import java.lang.reflect.*;
-import android.graphics.*;
-import android.content.pm.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -66,8 +63,8 @@ public class MCLauncherActivity extends AppCompatActivity
 		gson = new Gson();
 
 		DisplayMetrics dm = Tools.getDisplayMetrics(this);
-		LWJGLInputSender.windowWidth = dm.widthPixels;
-		LWJGLInputSender.windowHeight = dm.heightPixels;
+		CallbackBridge.windowWidth = dm.widthPixels;
+		CallbackBridge.windowHeight = dm.heightPixels;
 		viewInit();
 
 		final View decorView = getWindow().getDecorView();
@@ -276,10 +273,10 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	private float updateWidthHeight() {
-		float leftRightWidth = (float) LWJGLInputSender.windowWidth / 100f * 32f;
-		float playButtonWidth = LWJGLInputSender.windowWidth - leftRightWidth * 2f;
-		LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(this, LWJGLInputSender.windowHeight / 9));
-		LinearLayout.LayoutParams playButtonParams = new LinearLayout.LayoutParams((int) playButtonWidth, (int) Tools.dpToPx(this, LWJGLInputSender.windowHeight / 9));
+		float leftRightWidth = (float) CallbackBridge.windowWidth / 100f * 32f;
+		float playButtonWidth = CallbackBridge.windowWidth - leftRightWidth * 2f;
+		LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(this, CallbackBridge.windowHeight / 9));
+		LinearLayout.LayoutParams playButtonParams = new LinearLayout.LayoutParams((int) playButtonWidth, (int) Tools.dpToPx(this, CallbackBridge.windowHeight / 9));
 		leftView.setLayoutParams(leftRightParams);
 		rightView.setLayoutParams(leftRightParams);
 		playButton.setLayoutParams(playButtonParams);

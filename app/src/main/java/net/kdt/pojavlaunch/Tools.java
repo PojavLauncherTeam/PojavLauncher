@@ -14,12 +14,10 @@ import java.lang.reflect.*;
 import java.nio.charset.*;
 import java.util.*;
 import java.util.zip.*;
-import javax.microedition.khronos.egl.*;
+import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
-import net.kdt.pojavlaunch.prefs.*;
-import java.nio.*;
-import org.apache.commons.compress.utils.*;
+import org.lwjgl.glfw.*;
 
 public final class Tools
 {
@@ -100,8 +98,8 @@ public final class Tools
 		overrideableArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
 		
 		// GLFW Stub width height
-		overrideableArgList.add("-Dglfwstub.windowWidth=" + LWJGLInputSender.windowWidth);
-		overrideableArgList.add("-Dglfwstub.windowHeight=" + LWJGLInputSender.windowHeight);
+		overrideableArgList.add("-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth);
+		overrideableArgList.add("-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight);
 		
 		overrideableArgList.add("-Dglfwstub.initEgl=false");
 		

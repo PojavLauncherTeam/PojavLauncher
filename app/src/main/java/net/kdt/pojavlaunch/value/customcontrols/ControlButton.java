@@ -1,10 +1,8 @@
 package net.kdt.pojavlaunch.value.customcontrols;
 
-import net.kdt.pojavlaunch.*;
-import android.view.*;
 import java.util.*;
-import android.content.*;
-import android.view.View.*;
+import net.kdt.pojavlaunch.*;
+import org.lwjgl.glfw.*;
 
 public class ControlButton implements Cloneable
 {
@@ -26,10 +24,10 @@ public class ControlButton implements Cloneable
 		if (SPECIAL_BUTTONS == null) {
 			SPECIAL_BUTTONS = new ControlButton[]{
 				new ControlButton("Keyboard", SPECIALBTN_KEYBOARD, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, false),
-				new ControlButton("GUI", SPECIALBTN_TOGGLECTRL, pixelOf2dp, LWJGLInputSender.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
-				new ControlButton("PRI", SPECIALBTN_MOUSEPRI, pixelOf2dp, LWJGLInputSender.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
-				new ControlButton("SEC", SPECIALBTN_MOUSESEC, pixelOf2dp * 3 + pixelOf50dp * 2, LWJGLInputSender.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
-				new ControlButton("Mouse", SPECIALBTN_VIRTUALMOUSE, LWJGLInputSender.windowWidth - pixelOf80dp, pixelOf2dp, false)
+				new ControlButton("GUI", SPECIALBTN_TOGGLECTRL, pixelOf2dp, CallbackBridge.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
+				new ControlButton("PRI", SPECIALBTN_MOUSEPRI, pixelOf2dp, CallbackBridge.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
+				new ControlButton("SEC", SPECIALBTN_MOUSESEC, pixelOf2dp * 3 + pixelOf50dp * 2, CallbackBridge.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
+				new ControlButton("Mouse", SPECIALBTN_VIRTUALMOUSE, CallbackBridge.windowWidth - pixelOf80dp, pixelOf2dp, false)
 			};
 		}
 

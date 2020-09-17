@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import android.util.*;
 import android.view.*;
 import java.util.*;
+import org.lwjgl.glfw.*;
 
 public class AndroidLWJGLKeycode {
 	// Fix double letters on MC 1.9 and above
@@ -189,14 +190,14 @@ public class AndroidLWJGLKeycode {
 		}
 		
 		try {
-			if (/* (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && */ !LWJGLInputSender.isGrabbing()) {
+			if (/* (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && */ !CallbackBridge.isGrabbing()) {
 				mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
 			}
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
 		
-		if (isBackspaceAfterChar && !LWJGLInputSender.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
+		if (isBackspaceAfterChar && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
 			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, isDown);
 		}
     }

@@ -7,28 +7,22 @@ import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.widget.*;
 import android.support.v7.app.*;
-import android.system.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
-import com.kdt.glsupport.*;
 import com.kdt.pointer.*;
-import dalvik.system.*;
 import java.io.*;
-import java.lang.Process;
 import java.lang.reflect.*;
-import java.security.*;
 import java.util.*;
-import javax.microedition.khronos.egl.*;
-import javax.microedition.khronos.opengles.*;
-import net.kdt.pojavlaunch.exit.*;
+import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
+import org.lwjgl.glfw.*;
 
 import android.app.AlertDialog;
-import com.oracle.dalvik.*;
+import java.lang.Process;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
 {
@@ -52,9 +46,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 				case MSG_LEFT_MOUSE_BUTTON_CHECK: {
-						int x = LWJGLInputSender.mouseX;
-						int y = LWJGLInputSender.mouseY;
-						if (LWJGLInputSender.isGrabbing() &&
+						int x = CallbackBridge.mouseX;
+						int y = CallbackBridge.mouseY;
+						if (CallbackBridge.isGrabbing() &&
 							Math.abs(initialX - x) < fingerStillThreshold &&
 							Math.abs(initialY - y) < fingerStillThreshold) {
 							triggeredLeftMouseButton = true;
@@ -178,9 +172,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 
-			LWJGLInputSender.windowWidth = displayMetrics.widthPixels / scaleFactor;
-			LWJGLInputSender.windowHeight = displayMetrics.heightPixels / scaleFactor;
-			System.out.println("WidthHeight: " + LWJGLInputSender.windowWidth + ":" + LWJGLInputSender.windowHeight);
+			CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
+			CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
+			System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
 			gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
@@ -290,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 			AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
 
-			placeMouseAt(LWJGLInputSender.windowWidth / 2, LWJGLInputSender.windowHeight / 2);
+			placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
 			new Thread(new Runnable(){
 
 					private boolean isCapturing = false;
@@ -303,29 +297,29 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									@Override
 									public void run()
 									{
-										if (lastGrab && !LWJGLInputSender.isGrabbing() && lastEnabled) {
+										if (lastGrab && !CallbackBridge.isGrabbing() && lastEnabled) {
 											touchPad.setVisibility(View.VISIBLE);
-											placeMouseAt(LWJGLInputSender.windowWidth / 2, LWJGLInputSender.windowHeight / 2);
+											placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
 										}
 
-										if (!LWJGLInputSender.isGrabbing()) {
+										if (!CallbackBridge.isGrabbing()) {
 											lastEnabled = touchPad.getVisibility() == View.VISIBLE;
 										} else if (touchPad.getVisibility() != View.GONE) {
 											touchPad.setVisibility(View.GONE);
 										}
 
 										if (isPointerCaptureSupported()) {
-											if (!LWJGLInputSender.isGrabbing() && isCapturing) {
+											if (!CallbackBridge.isGrabbing() && isCapturing) {
 												pointerSurface.releaseCapture(); // minecraftGLView.releasePointerCapture();
 												isCapturing = false;
-											} else if (LWJGLInputSender.isGrabbing() && !isCapturing) {
+											} else if (CallbackBridge.isGrabbing() && !isCapturing) {
 												minecraftGLView.requestFocus();
 												pointerSurface.requestCapture(); // minecraftGLView.requestPointerCapture();
 												isCapturing = true;
 											}
 										}
 
-										lastGrab = LWJGLInputSender.isGrabbing();
+										lastGrab = CallbackBridge.isGrabbing();
 									}
 								});
 
@@ -355,10 +349,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 						if (gestureDetector.onTouchEvent(event)) {
 
-                            LWJGLInputSender.sendCursorPos((int) mouseX, (int) mouseY);
-                            LWJGLInputSender.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
+                            CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
+                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
 							if (!rightOverride) {
-								LWJGLInputSender.mouseLeft = true;
+								CallbackBridge.mouseLeft = true;
 							}
 
 						} else {
@@ -367,7 +361,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 								case MotionEvent.ACTION_CANCEL: // 3
 								case MotionEvent.ACTION_POINTER_UP: // 6
 									if (!rightOverride) {
-										LWJGLInputSender.mouseLeft = false;
+										CallbackBridge.mouseLeft = false;
 									}
 									break;
 								case MotionEvent.ACTION_MOVE: // 2
@@ -376,17 +370,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 										mouseY += y - prevY;
 										if (mouseX <= 0) {
 											mouseX = 0;
-										} else if (mouseX >= LWJGLInputSender.windowWidth) {
-											mouseX = LWJGLInputSender.windowWidth;
+										} else if (mouseX >= CallbackBridge.windowWidth) {
+											mouseX = CallbackBridge.windowWidth;
 										} if (mouseY <= 0) {
 											mouseY = 0;
-										} else if (mouseY >= LWJGLInputSender.windowHeight) {
-											mouseY = LWJGLInputSender.windowHeight;
+										} else if (mouseY >= CallbackBridge.windowHeight) {
+											mouseY = CallbackBridge.windowHeight;
 										}
 									} finally {
 										placeMouseAt(mouseX, mouseY);
 
-										LWJGLInputSender.sendCursorPos((int) mouseX, (int) mouseY);
+										CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
 										break;
 									}
 							}
@@ -394,8 +388,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						prevX = x;
 						prevY = y;
                         
-                        debugText.setText(LWJGLInputSender.DEBUG_STRING.toString());
-                        LWJGLInputSender.DEBUG_STRING.setLength(0);
+                        debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                        CallbackBridge.DEBUG_STRING.setLength(0);
                         
 						return true;
 					}
@@ -418,14 +412,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					int x = ((int) e.getX()) / scaleFactor;
 					int y = (minecraftGLView.getHeight() - ((int) e.getY())) / scaleFactor;
 					int hudKeyHandled = handleGuiBar(x, y, e);
-					if (!LWJGLInputSender.isGrabbing() && gestureDetector.onTouchEvent(e)) {
+					if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
 						if (hudKeyHandled != -1) {
 							sendKeyPress(hudKeyHandled);
 						} else {
-                            LWJGLInputSender.sendCursorPos(x, y);
-                            LWJGLInputSender.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
+                            CallbackBridge.sendCursorPos(x, y);
+                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
 							if (!rightOverride) {
-								LWJGLInputSender.mouseLeft = true;
+								CallbackBridge.mouseLeft = true;
 							}
 						}
 					} else {
@@ -440,13 +434,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 								} else {
-									LWJGLInputSender.sendCursorPos(x, y);
+									CallbackBridge.sendCursorPos(x, y);
 									if (!rightOverride) {
-										// LWJGLInputSender.mouseLeft = true;
+										// CallbackBridge.mouseLeft = true;
 									}
 
-									if (LWJGLInputSender.isGrabbing()) {
-										LWJGLInputSender.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+									if (CallbackBridge.isGrabbing()) {
+										CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
 										initialX = x;
 										initialY = y;
 										theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
@@ -457,16 +451,16 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							case MotionEvent.ACTION_CANCEL: // 3
 							case MotionEvent.ACTION_POINTER_UP: // 6
 								if (!isTouchInHotbar) {
-                                    LWJGLInputSender.sendCursorPos(x, y);
+                                    CallbackBridge.sendCursorPos(x, y);
 
 									// TODO uncomment after fix wrong trigger
-									// LWJGLInputSender.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+									// CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 									if (!rightOverride) {
-										// LWJGLInputSender.mouseLeft = false;
+										// CallbackBridge.mouseLeft = false;
 									}
 								} 
 
-								if (LWJGLInputSender.isGrabbing()) {
+								if (CallbackBridge.isGrabbing()) {
 									// System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
 									// System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
 									if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
@@ -490,17 +484,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 							default:
 								if (!isTouchInHotbar) {
-									LWJGLInputSender.sendCursorPos(x, y);
+									CallbackBridge.sendCursorPos(x, y);
 								}
 								break;
 						}
 					}
                     
-                    debugText.setText(LWJGLInputSender.DEBUG_STRING.toString());
-                    LWJGLInputSender.DEBUG_STRING.setLength(0);
+                    debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                    CallbackBridge.DEBUG_STRING.setLength(0);
 
 					return true;
-					// return !LWJGLInputSender.isGrabbing();
+					// return !CallbackBridge.isGrabbing();
 				}
 			};
 
@@ -549,23 +543,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						}
 					}
 
-                    LWJGLInputSender.sendCursorPos(x, y);
+                    CallbackBridge.sendCursorPos(x, y);
                     
 					switch (e.getButtonState()) {
-						case MotionEvent.BUTTON_PRIMARY: LWJGLInputSender.mouseLeft = true;
+						case MotionEvent.BUTTON_PRIMARY: CallbackBridge.mouseLeft = true;
 							break;
-						case MotionEvent.BUTTON_SECONDARY: LWJGLInputSender.mouseLeft = false;
+						case MotionEvent.BUTTON_SECONDARY: CallbackBridge.mouseLeft = false;
 							break;
 					}
 
 					switch (e.getActionMasked()) {
 						case MotionEvent.ACTION_DOWN: // 0
 						case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            LWJGLInputSender.sendMouseKeycode(!LWJGLInputSender.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+                            CallbackBridge.sendMouseKeycode(!CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
 							initialX = x;
 							initialY = y;
 						
-							sendMouseButton(LWJGLInputSender.mouseLeft ? 0 : 1, false);
+							sendMouseButton(CallbackBridge.mouseLeft ? 0 : 1, false);
 							
 							// theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 							break;
@@ -573,9 +567,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						case MotionEvent.ACTION_UP: // 1
 						case MotionEvent.ACTION_CANCEL: // 3
 						case MotionEvent.ACTION_POINTER_UP: // 6
-                            LWJGLInputSender.sendCursorPos(x, y);
-                            LWJGLInputSender.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
-							// LWJGLInputSender.putMouseEventWithCoords(!LWJGLInputSender.mouseLeft /* rightOverride */ ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
+                            CallbackBridge.sendCursorPos(x, y);
+                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+							// CallbackBridge.putMouseEventWithCoords(!CallbackBridge.mouseLeft /* rightOverride */ ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 							/*
 							 if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
 							 sendMouseButton(1, true);
@@ -586,15 +580,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							 }
 							 */
 
-							sendMouseButton(LWJGLInputSender.mouseLeft ? 0 : 1, true);
+							sendMouseButton(CallbackBridge.mouseLeft ? 0 : 1, true);
 
 							// triggeredLeftMouseButton = false;
 							// theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
 							break;
 					}
 
-                    debugText.setText(LWJGLInputSender.DEBUG_STRING.toString());
-                    LWJGLInputSender.DEBUG_STRING.setLength(0);
+                    debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                    CallbackBridge.DEBUG_STRING.setLength(0);
                     
 					return true;
 					// If onClick fail with false, change back to true
@@ -614,7 +608,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			minecraftGLView.setOnHoverListener(new View.OnHoverListener(){
 					@Override
 					public boolean onHover(View p1, MotionEvent p2) {
-						if (!LWJGLInputSender.isGrabbing() && mIsResuming) {
+						if (!CallbackBridge.isGrabbing() && mIsResuming) {
 							return glTouchListener.onTouch(p1, p2);
 						}
 						return true;
@@ -626,8 +620,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					private boolean isCalled = false;
 					@Override
 					public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-						LWJGLInputSender.windowWidth = width;
-						LWJGLInputSender.windowHeight = height;
+						CallbackBridge.windowWidth = width;
+						CallbackBridge.windowHeight = height;
 						calculateMcScale();
 						
 						// Should we do that?
@@ -658,9 +652,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 					@Override
 					public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-						LWJGLInputSender.windowWidth = width;
-						LWJGLInputSender.windowHeight = height;
-                        LWJGLInputSender.sendUpdateWindowSize(width, height);
+						CallbackBridge.windowWidth = width;
+						CallbackBridge.windowHeight = height;
+                        CallbackBridge.sendUpdateWindowSize(width, height);
 						calculateMcScale();
 						
 						// TODO: Implement this method for GLFW window size callback
@@ -746,7 +740,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	@Override
 	protected void onPause()
 	{
-		if (LWJGLInputSender.isGrabbing()){
+		if (CallbackBridge.isGrabbing()){
 			sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
 		}
 		mIsResuming = false;
@@ -798,12 +792,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			case R.id.control_jump: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, isDown); break;
 			case R.id.control_primary: sendMouseButton(0, isDown); break;
 			case R.id.control_secondary:
-				if (LWJGLInputSender.isGrabbing()) {
+				if (CallbackBridge.isGrabbing()) {
 					sendMouseButton(1, isDown);
 				} else {
 					if (!isDown) {
-                        LWJGLInputSender.sendCursorPos(LWJGLInputSender.mouseX, LWJGLInputSender.mouseY);
-                        LWJGLInputSender.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT);
+                        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT);
 					}
 					setRightOverride(isDown);
 				} break;
@@ -973,9 +967,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	public void handleMessage(Message msg) {
 		switch (msg.what) {
 			case MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK /*1028*/:
-				int x = LWJGLInputSender.mouseX;
-				int y = LWJGLInputSender.mouseY;
-				if (LWJGLInputSender.isGrabbing() && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+				int x = CallbackBridge.mouseX;
+				int y = CallbackBridge.mouseY;
+				if (CallbackBridge.isGrabbing() && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
 					triggeredLeftMouseButton = true;
 					sendMouseButton(0, true);
 					return;
@@ -1026,7 +1020,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	}
 
 	public void toggleMouse(View view) {
-		if (LWJGLInputSender.isGrabbing()) return;
+		if (CallbackBridge.isGrabbing()) return;
 
 		boolean isVis = touchPad.getVisibility() == View.VISIBLE;
 		touchPad.setVisibility(isVis ? View.GONE : View.VISIBLE);
@@ -1098,7 +1092,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     public void sendKeyPress(int keyCode, char keyChar, boolean status) {
         // FIXME keyChar
-        LWJGLInputSender.sendKeycode(keyCode, /* keyChar, */ status);
+        CallbackBridge.sendKeycode(keyCode, /* keyChar, */ status);
     }
 
 	public void sendKeyPress(char keyChar) {
@@ -1113,13 +1107,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	public void sendMouseButton(int button, boolean status) {
         // TODO implement this method!!!
-        // LWJGLInputSender.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
+        // CallbackBridge.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
     }
 
 	public void calculateMcScale() {
         int scale = 1;
-        int screenWidth = LWJGLInputSender.windowWidth;
-        int screenHeight = LWJGLInputSender.windowHeight;
+        int screenWidth = CallbackBridge.windowWidth;
+        int screenHeight = CallbackBridge.windowHeight;
         while (screenWidth / (scale + 1) >= 320 && screenHeight / (scale + 1) >= 240) {
             scale++;
         }
@@ -1127,12 +1121,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     }
 
 	public int handleGuiBar(int x, int y, MotionEvent e) {
-        if (!LWJGLInputSender.isGrabbing()) {
+        if (!CallbackBridge.isGrabbing()) {
             return -1;
         }
 
-        int screenWidth = LWJGLInputSender.windowWidth;
-        int screenHeight = LWJGLInputSender.windowHeight;
+        int screenWidth = CallbackBridge.windowWidth;
+        int screenHeight = CallbackBridge.windowHeight;
         int barheight = mcscale(20);
         int barwidth = mcscale(180);
         int barx = (screenWidth / 2) - (barwidth / 2);
