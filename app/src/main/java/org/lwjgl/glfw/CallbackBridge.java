@@ -19,6 +19,11 @@ public class CallbackBridge {
     
     volatile private static boolean isGrabbing = false;
 
+    public static void sendMouseEvent(int x, int y, int keycode) {
+        sendCursorPos(x, y);
+        sendMouseKeycode(keycode);
+    }
+    
     public static void sendMouseEvent(int x, int y, int keycode, boolean isDown) {
         sendCursorPos(x, y);
         sendMouseKeycode(keycode, isDown);
@@ -27,7 +32,7 @@ public class CallbackBridge {
     public static void sendCursorPos(int x, int y) {
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
         mouseX = x;
-        mouseY = y;
+        mouseY = windowHeight - y;
         sendData(JRE_TYPE_CURSOR_POS, x + ":" + y);
     }
 

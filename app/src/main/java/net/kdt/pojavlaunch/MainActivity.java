@@ -796,8 +796,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					sendMouseButton(1, isDown);
 				} else {
 					if (!isDown) {
-                        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT);
+                        CallbackBridge.sendMouseEvent(CallbackBridge.mouseX, CallbackBridge.mouseY, LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT);
 					}
 					setRightOverride(isDown);
 				} break;
