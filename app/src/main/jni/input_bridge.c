@@ -13,7 +13,7 @@ JNIEnv* secondJNIEnv;
 
 void attachThreadIfNeed(bool* isAttached) {
     if (!*isAttached && secondJavaVM && secondJNIEnv) {
-        (*secondVMPtr)->AttachCurrentThread(secondVMPtr, &secondJNIEnv, NULL);
+        (*secondJavaVM)->AttachCurrentThread(secondJavaVM, &secondJNIEnv, NULL);
         *isAttached = true;
     }
 }
