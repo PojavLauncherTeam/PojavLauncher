@@ -11,28 +11,39 @@ JNIEnv* firstJNIEnv;
 JavaVM* secondJavaVM;
 JNIEnv* secondJNIEnv;
 
-void attachThreadIfNeed(bool* isAttached) {
-    if (!*isAttached && secondJavaVM && secondJNIEnv) {
-        (*secondJavaVM)->AttachCurrentThread(secondJavaVM, &secondJNIEnv, NULL);
+jint JNI_OnLoad(JavaVM* vm, void* reserved) {
+    if (dalvikJavaVMPtr_ANDROID == NULL) {
+        //Save dalvik global JavaVM pointer
+        dalvikJavaVMPtr_ANDROID = vm;
+        (*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr_ANDROID, JNI_VERSION_1_4);
+    } else if (dalvikJavaVMPtr_ANDROID != vm) {
+        runtimeJavaVMPtr_JRE = vm;
+        (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
+    }
+    return JNI_VERSION_1_4;
+}
+
+void attachThreadIfNeed(bool* isAttached, JNIEnv** secondJNIEnvPtr) {
+    if (!*isAttached && secondJavaVM) {
+        (*secondJavaVM)->AttachCurrentThread(secondJavaVM, secondJNIEnvPtr, NULL);
         *isAttached = true;
     }
+    secondJNIEnv = *secondJNIEnvPtr;
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv* env, jclass clazz, jboolean isAndroid, jint type, jstring data) {
     if (isAndroid == JNI_TRUE) {
         firstJavaVM = dalvikJavaVMPtr;
-        firstJNIEnv = dalvikJNIEnvPtr;
+        firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
         secondJavaVM = runtimeJavaVMPtr;
-        secondJNIEnv = runtimeJNIEnvPtr;
         
-        attachThreadIfNeed(&isAndroidThreadAttached);
+        attachThreadIfNeed(&isAndroidThreadAttached, &runtimeJNIEnvPtr_ANDROID);
     } else {
         firstJavaVM = runtimeJavaVMPtr;
-        firstJNIEnv = runtimeJNIEnvPtr;
+        firstJNIEnv = runtimeJNIEnvPtr_JRE;
         secondJavaVM = dalvikJavaVMPtr;
-        secondJNIEnv = dalvikJNIEnvPtr;
         
-        attachThreadIfNeed(&isRuntimeThreadAttached);
+        attachThreadIfNeed(&isRuntimeThreadAttached, dalvikJNIEnvPtr_JRE);
     }
     
     if (secondJavaVM != NULL) {

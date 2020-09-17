@@ -55,27 +55,6 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
         jint ergo                               /* ergonomics class policy */
 );
 
-jint JNI_OnLoad(JavaVM* vm, void* reserved)
-{
-	if (dalvikJavaVMPtr == NULL) {
-		//Save dalvik global JavaVM pointer
-		dalvikJavaVMPtr = vm;
-		(*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr, JNI_VERSION_1_4);
-/* Boardwalk: not used
-		LOGD("JNI_OnLoad calling GetEnv()");
-		JNIEnv* env = NULL;
-		(*vm)->GetEnv(vm, (void**) &env, JNI_VERSION_1_4);
-        LOGD("JNI_OnLoad calling initDalvikProxySelectorData()");
-        initDalvikProxySelectorData(env);
-*/
-	} else if (&dalvikJavaVMPtr != &vm) {
-		runtimeJavaVMPtr = vm;
-		// (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr, JNI_VERSION_1_4);
-	}
-	LOGD("JNI_OnLoad returning()");
-    return JNI_VERSION_1_4;
-}
-
 static void logArgs(int argc, char** argv) {
 /* BlockLauncher: disable logging
     int i;

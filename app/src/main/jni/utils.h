@@ -4,10 +4,12 @@
 #include <stdbool.h>
 
 JavaVM* runtimeJavaVMPtr;
-JNIEnv* runtimeJNIEnvPtr;
+JNIEnv* runtimeJNIEnvPtr_ANDROID;
+JNIEnv* runtimeJNIEnvPtr_JRE;
 
 JavaVM* dalvikJavaVMPtr;
-JNIEnv* dalvikJNIEnvPtr;
+JNIEnv* dalvikJNIEnvPtr_ANDROID;
+JNIEnv* dalvikJNIEnvPtr_JRE;
 
 bool isAndroidThreadAttached, isRuntimeThreadAttached;
 
