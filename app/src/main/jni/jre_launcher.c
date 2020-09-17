@@ -68,7 +68,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
         LOGD("JNI_OnLoad calling initDalvikProxySelectorData()");
         initDalvikProxySelectorData(env);
 */
-	} else if (dalvikJavaVMPtr != vm) {
+	} else if (&dalvikJavaVMPtr != &vm) {
 		runtimeJavaVMPtr = vm;
 		// (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr, JNI_VERSION_1_4);
 	}
