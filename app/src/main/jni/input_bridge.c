@@ -46,11 +46,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv*
         attachThreadIfNeed(&isRuntimeThreadAttached, dalvikJNIEnvPtr_JRE);
     }
     
-    printf("isAndroid=%p, isSecondJVMNull=%p\n", isAndroid, secondJavaVM == NULL);
+    // printf("isAndroid=%p, isSecondJVMNull=%p\n", isAndroid, secondJavaVM == NULL);
     
     if (secondJavaVM != NULL) {
         char *data_c = (char*)(*env)->GetStringUTFChars(env, data, 0);
-        printf("data=%s\n", data_c);
+        // printf("data=%s\n", data_c);
         jstring data_jre = (*secondJNIEnv)->NewStringUTF(secondJNIEnv, data_c);
         (*env)->ReleaseStringUTFChars(env, data, data_c);
     
