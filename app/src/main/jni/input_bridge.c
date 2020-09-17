@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_sendData(JNIEnv* env, 
         return;
     }
     
-    printf("[SendData] type=%i, isJVMNull=%p\n", type, secondJavaVM == null);
+    printf("[SendData] type=%i, isJVMNull=%p\n", type, secondJavaVM == NULL);
     
     if (secondJavaVM != NULL) {
         char *data_c = (char*)(*env)->GetStringUTFChars(env, data, 0);
