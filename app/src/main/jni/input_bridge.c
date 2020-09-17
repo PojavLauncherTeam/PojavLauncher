@@ -34,6 +34,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_sendData(JNIEnv* env, 
         
         attachThreadIfNeed(&isRuntimeThreadAttached);
     } else {
+        printf("cancel input, env=%p\n", env);
         return;
     }
     
