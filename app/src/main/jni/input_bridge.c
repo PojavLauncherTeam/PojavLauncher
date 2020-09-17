@@ -5,12 +5,15 @@
 jclass inputBridgeClass;
 jmethodID inputBridgeMethod;
 
-JavaVM *firstJavaVM, secondJavaVM;
-JNIEnv *firstJNIEnv, secondJNIEnv;
+JavaVM* firstJavaVM;
+JNIEnv* firstJNIEnv;
+
+JavaVM* secondJavaVM;
+JNIEnv* secondJNIEnv;
 
 void attachThreadIfNeed(bool* isAttached) {
-    if (!*isAttached && secondJavaVM && secondJniENV) {
-        (*secondVMPtr)->AttachCurrentThread(secondVMPtr, &secondJNIEnvPtr, NULL);
+    if (!*isAttached && secondJavaVM && secondJNIEnv) {
+        (*secondVMPtr)->AttachCurrentThread(secondVMPtr, &secondJNIEnv, NULL);
         *isAttached = true;
     }
 }
