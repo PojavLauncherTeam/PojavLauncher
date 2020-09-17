@@ -18,7 +18,7 @@ void attachThreadIfNeed(bool* isAttached) {
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_natievSendData(JNIEnv* env, jclass clazz, jboolean isAndroid, jint type, jstring data) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv* env, jclass clazz, jboolean isAndroid, jint type, jstring data) {
     if (isAndroid == JNI_TRUE) {
         firstJavaVM = dalvikJavaVMPtr;
         firstJNIEnv = dalvikJNIEnvPtr;
