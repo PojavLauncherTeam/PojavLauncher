@@ -62,6 +62,10 @@ public class CallbackBridge {
         }
     }
     
-    public static native void sendData(int type, String data);
+    public static void sendData(int type, String data) {
+        nativeSendData(true, type, data);
+    }
+    
+    private static native void nativeSendData(boolean isAndroid, int type, String data);
 }
 

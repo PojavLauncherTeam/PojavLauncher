@@ -18,27 +18,22 @@ void attachThreadIfNeed(bool* isAttached) {
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_sendData(JNIEnv* env, jclass clazz, jint type, jstring data) {
-    if (&env == &dalvikJNIEnvPtr) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_natievSendData(JNIEnv* env, jclass clazz, jboolean isAndroid, jint type, jstring data) {
+    if (isAndroid == JNI_TRUE) {
         firstJavaVM = dalvikJavaVMPtr;
         firstJNIEnv = dalvikJNIEnvPtr;
         secondJavaVM = runtimeJavaVMPtr;
         secondJNIEnv = runtimeJNIEnvPtr;
         
         attachThreadIfNeed(&isAndroidThreadAttached);
-    } else if (&env == &runtimeJNIEnvPtr) {
+    } else {
         firstJavaVM = runtimeJavaVMPtr;
         firstJNIEnv = runtimeJNIEnvPtr;
         secondJavaVM = dalvikJavaVMPtr;
         secondJNIEnv = dalvikJNIEnvPtr;
         
         attachThreadIfNeed(&isRuntimeThreadAttached);
-    } else {
-        printf("cancel input, env=%p, artenv=%p, %jvmenv=%p\n", &env, &dalvikJNIEnvPtr, &runtimeJNIEnvPtr);
-        return;
     }
-    
-    printf("[SendData] type=%i, isJVMNull=%p\n", type, secondJavaVM == NULL);
     
     if (secondJavaVM != NULL) {
         char *data_c = (char*)(*env)->GetStringUTFChars(env, data, 0);
