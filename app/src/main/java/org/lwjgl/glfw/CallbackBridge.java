@@ -12,7 +12,7 @@ public class CallbackBridge {
     
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
 
-    public static int windowWidth, windowHeight;
+    public static volatile int windowWidth, windowHeight;
     public static int mouseX, mouseY;
     public static boolean mouseLeft;
     public static StringBuilder DEBUG_STRING = new StringBuilder();
@@ -32,7 +32,7 @@ public class CallbackBridge {
     public static void sendCursorPos(int x, int y) {
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
         mouseX = x;
-        mouseY = windowHeight - y;
+        mouseY = y;
         sendData(JRE_TYPE_CURSOR_POS, x + ":" + y);
     }
 

@@ -416,8 +416,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						if (hudKeyHandled != -1) {
 							sendKeyPress(hudKeyHandled);
 						} else {
-                            CallbackBridge.sendCursorPos(x, y);
-                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
+                            CallbackBridge.sendMouseEvent(
+                                x, CallbackBridge.windowHeight - y,
+                                rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT
+                            );
 							if (!rightOverride) {
 								CallbackBridge.mouseLeft = true;
 							}
@@ -434,10 +436,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 									theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
 								} else {
-									CallbackBridge.sendCursorPos(x, y);
+									CallbackBridge.sendCursorPos(x, CallbackBridge.windowHeight - y);
+                                    /*
 									if (!rightOverride) {
-										// CallbackBridge.mouseLeft = true;
+										CallbackBridge.mouseLeft = true;
 									}
+                                    */
 
 									if (CallbackBridge.isGrabbing()) {
 										CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
@@ -451,7 +455,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							case MotionEvent.ACTION_CANCEL: // 3
 							case MotionEvent.ACTION_POINTER_UP: // 6
 								if (!isTouchInHotbar) {
-                                    CallbackBridge.sendCursorPos(x, y);
+                                    CallbackBridge.sendCursorPos(x, CallbackBridge.windowHeight - y);
 
 									// TODO uncomment after fix wrong trigger
 									// CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
@@ -484,7 +488,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 							default:
 								if (!isTouchInHotbar) {
-									CallbackBridge.sendCursorPos(x, y);
+									CallbackBridge.sendCursorPos(x, CallbackBridge.windowHeight - y);
 								}
 								break;
 						}
