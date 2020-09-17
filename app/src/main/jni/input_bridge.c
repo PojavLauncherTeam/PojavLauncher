@@ -12,12 +12,12 @@ JavaVM* secondJavaVM;
 JNIEnv* secondJNIEnv;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
-    if (dalvikJavaVMPtr_ANDROID == NULL) {
+    if (dalvikJavaVMPtr == NULL) {
         //Save dalvik global JavaVM pointer
-        dalvikJavaVMPtr_ANDROID = vm;
+        dalvikJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr_ANDROID, JNI_VERSION_1_4);
-    } else if (dalvikJavaVMPtr_ANDROID != vm) {
-        runtimeJavaVMPtr_JRE = vm;
+    } else if (dalvikJavaVMPtr != vm) {
+        runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
     }
     return JNI_VERSION_1_4;
@@ -48,7 +48,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv*
     
     if (secondJavaVM != NULL) {
         char *data_c = (char*)(*env)->GetStringUTFChars(env, data, 0);
-        printf("data=%s\n", data_c);
+        // printf("data=%s\n", data_c);
         jstring data_jre = (*secondJNIEnv)->NewStringUTF(secondJNIEnv, data_c);
         (*env)->ReleaseStringUTFChars(env, data, data_c);
     
