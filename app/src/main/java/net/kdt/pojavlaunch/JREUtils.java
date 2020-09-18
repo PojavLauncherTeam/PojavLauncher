@@ -19,6 +19,8 @@ public class JREUtils
 		dlopen(Tools.homeJreDir + "/lib/libawt.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
 		
+        dlopen("libopenal.so");
+        
         if (!dlopen(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME)) {
             System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
             dlopen("libgl04es.so");

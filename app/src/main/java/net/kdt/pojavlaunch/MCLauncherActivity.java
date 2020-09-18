@@ -553,7 +553,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 								if (libItem.downloads == null || libItem.downloads.artifact == null) {
 									MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
-									artifact.url = "https://libraries.minecraft.net/" + libArtifact;
+									artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url) + libArtifact;
 									libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
 
 									skipIfFailed = true;
@@ -570,6 +570,7 @@ public class MCLauncherActivity extends AppCompatActivity
 										throw th;
 									} else {
 										th.printStackTrace();
+                                        publishProgress("0", th.getMessage());
 									}
 								}
 							}

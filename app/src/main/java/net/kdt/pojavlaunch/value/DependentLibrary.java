@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.value;
 public class DependentLibrary {
     public String name;
 	public LibraryDownloads downloads;
+    public String url;
 	
 	public static class LibraryDownloads
 	{
