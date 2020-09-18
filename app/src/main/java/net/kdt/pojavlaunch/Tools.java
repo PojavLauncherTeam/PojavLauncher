@@ -351,6 +351,10 @@ public final class Tools
 			libStr.append(getPatchedFile(version));
 		}
 		for (String perJar : classpath) {
+            if (!new File(perJar).exists()) {
+                System.out.println("ClassPathGen: ignored non-exists file: " + perJar);
+                continue;
+            }
 			libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
 		}
 		if (!isClientFirst) {
