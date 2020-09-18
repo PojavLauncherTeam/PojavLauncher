@@ -2,8 +2,11 @@
 
 #include "utils.h"
 
-jclass inputBridgeClass;
-jmethodID inputBridgeMethod;
+jclass inputBridgeClass_ANDROID;
+jmethodID inputBridgeMethod_ANDROID;
+
+jclass inputBridgeClass_JRE;
+jmethodID inputBridgeMethod_JRE;
 
 JavaVM* firstJavaVM;
 JNIEnv* firstJNIEnv;
@@ -31,6 +34,13 @@ void attachThreadIfNeed(bool* isAttached, JNIEnv** secondJNIEnvPtr) {
     secondJNIEnv = *secondJNIEnvPtr;
 }
 
+void getJavaInputBridge(jclass* clazz, jmethod* method) {
+    if (*method == NULL) {
+        *clazz = (*secondJNIEnv)->FindClass(secondJNIEnv, "org/lwjgl/glfw/CallbackBridge");
+        *method = (*secondJNIEnv)->GetStaticMethodID(secondJNIEnv, *clazz, "receiveCallback", "(ILjava/lang/String;)V");
+    }
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv* env, jclass clazz, jboolean isAndroid, jint type, jstring data) {
     if (isAndroid == JNI_TRUE) {
         firstJavaVM = dalvikJavaVMPtr;
@@ -38,12 +48,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv*
         secondJavaVM = runtimeJavaVMPtr;
         
         attachThreadIfNeed(&isAndroidThreadAttached, &runtimeJNIEnvPtr_ANDROID);
+        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     } else {
         firstJavaVM = runtimeJavaVMPtr;
         firstJNIEnv = runtimeJNIEnvPtr_JRE;
         secondJavaVM = dalvikJavaVMPtr;
         
         attachThreadIfNeed(&isRuntimeThreadAttached, &dalvikJNIEnvPtr_JRE);
+        getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
     }
     
     // printf("isAndroid=%p, isSecondJVMNull=%p\n", isAndroid, secondJavaVM == NULL);
@@ -53,12 +65,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv*
         // printf("data=%s\n", data_c);
         jstring data_jre = (*secondJNIEnv)->NewStringUTF(secondJNIEnv, data_c);
         (*env)->ReleaseStringUTFChars(env, data, data_c);
-    
-        if (inputBridgeMethod == NULL) {
-            inputBridgeClass = (*secondJNIEnv)->FindClass(secondJNIEnv, "org/lwjgl/glfw/CallbackBridge");
-            inputBridgeMethod = (*secondJNIEnv)->GetStaticMethodID(secondJNIEnv, inputBridgeClass, "receiveCallback", "(ILjava/lang/String;)V");
-        }
-        (*secondJNIEnv)->CallStaticVoidMethod(secondJNIEnv, inputBridgeClass, inputBridgeMethod, type, data_jre);
+        (*secondJNIEnv)->CallStaticVoidMethod(
+            secondJNIEnv,
+            isAndroid == JNI_TRUE ? inputBridgeClass_ANDROID : inputBridgeClass_JRE,
+            isAndroid == JNI_TRUE ? inputBridgeMethod_ANDROID : inputBridgeMethod_JRE,
+            type,
+            data_jre
+        );
     }
     // else: too early!
 }
