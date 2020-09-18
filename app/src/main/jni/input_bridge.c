@@ -43,7 +43,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv*
         firstJNIEnv = runtimeJNIEnvPtr_JRE;
         secondJavaVM = dalvikJavaVMPtr;
         
-        attachThreadIfNeed(&isRuntimeThreadAttached, dalvikJNIEnvPtr_JRE);
+        attachThreadIfNeed(&isRuntimeThreadAttached, &dalvikJNIEnvPtr_JRE);
     }
     
     // printf("isAndroid=%p, isSecondJVMNull=%p\n", isAndroid, secondJavaVM == NULL);
