@@ -55,7 +55,8 @@ public class CallbackBridge {
     }
 
     public static boolean isGrabbing() {
-        return isGrabbing;
+        // return isGrabbing;
+        return nativeIsGrabbing();
     }
 
     // Called from JRE side
@@ -72,5 +73,6 @@ public class CallbackBridge {
     }
     
     private static native void nativeSendData(boolean isAndroid, int type, String data);
+    public static native boolean nativeIsGrabbing();
 }
 

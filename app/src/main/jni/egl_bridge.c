@@ -41,7 +41,7 @@ void pojav_openGLOnLoad() {
 	
 }
 void pojav_openGLOnUnload() {
-	
+
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {

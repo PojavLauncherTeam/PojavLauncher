@@ -8,6 +8,8 @@ jmethodID inputBridgeMethod_ANDROID;
 jclass inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_JRE;
 
+jboolean isGrabbing;
+
 JavaVM* firstJavaVM;
 JNIEnv* firstJNIEnv;
 
@@ -23,8 +25,24 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
     }
+    
+    isGrabbing = JNI_FALSE;
+    
     return JNI_VERSION_1_4;
 }
+
+// Should be?
+/*
+void JNI_OnUnload(JavaVM* vm, void* reserved) {
+    if (dalvikJavaVMPtr == vm) {
+    } else {
+    }
+    
+    DetachCurrentThread(vm);
+    
+    return JNI_VERSION_1_4;
+}
+*/
 
 void attachThreadIfNeed(bool* isAttached, JNIEnv** secondJNIEnvPtr) {
     if (!*isAttached && secondJavaVM) {
@@ -74,5 +92,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv*
         );
     }
     // else: too early!
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing) {
+    isGrabbing = grabbing;
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(JNIEnv* env, jclass clazz) {
+    return isGrabbing;
 }
 
