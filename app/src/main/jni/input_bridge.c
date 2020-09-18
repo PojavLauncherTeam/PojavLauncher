@@ -35,7 +35,7 @@ void attachThreadIfNeed(bool* isAttached, JNIEnv** secondJNIEnvPtr) {
 }
 
 void getJavaInputBridge(jclass* clazz, jmethod* method) {
-    if (*method == NULL) {
+    if (*method == NULL && secondJNIEnv != NILL) {
         *clazz = (*secondJNIEnv)->FindClass(secondJNIEnv, "org/lwjgl/glfw/CallbackBridge");
         *method = (*secondJNIEnv)->GetStaticMethodID(secondJNIEnv, *clazz, "receiveCallback", "(ILjava/lang/String;)V");
     }
