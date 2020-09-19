@@ -121,7 +121,7 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 	</table>
 
 
-## OptiFine worked in PojavLauncher 2.4.2
+## OptiFine worked in PojavLauncher [2.5.3](https://github.com/PojavLauncherTeam/PojavLauncher/releases/tag/untagged-4e80a0c1513abab0c480)
 |Android version  |  9.0 |???|???|Manually Android 10|9.0|
 |-----------------|------|---|---|-----|-----|
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
