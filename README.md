@@ -33,7 +33,7 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - Device name
 - Android version 
 
-## Minecraft versions worked in PojavLauncher 2.4.2
+## Minecraft versions worked in PojavLauncher [2.5.3](https://github.com/PojavLauncherTeam/PojavLauncher/releases/tag/untagged-4e80a0c1513abab0c480)
 
 <table>
 	  <thead>
@@ -90,8 +90,8 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		</tr>
