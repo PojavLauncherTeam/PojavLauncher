@@ -44,50 +44,64 @@ void pojav_openGLOnUnload() {
 
 }
 
+void terminateEgl() {
+    printf("EGLBridge: Terminating\n");
+    eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    eglDestroySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+    eglDestroyContext(potatoBridge.eglDisplay, potatoBridge.eglContext);
+    eglTerminate(potatoBridge.eglDisplay);
+    eglReleaseThread();
+    
+    potatoBridge.eglContext = EGL_NO_CONTEXT;
+    potatoBridge.eglDisplay = EGL_NO_DISPLAY;
+    potatoBridge.eglSurface = EGL_NO_SURFACE;
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
     return JNI_TRUE;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz) {
+    if (potatoBridge.eglContext != EGL_NO_CONTEXT) {
+        terminateEgl();
+    }
+    
     if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
         potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
         if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
-            printf("Error: eglGetDefaultDisplay() failed: %p\n", eglGetError());
+            printf("EGLBridge: Error eglGetDefaultDisplay() failed: %p\n", eglGetError());
             return JNI_FALSE;
         }
     }
     
-    eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    printf("EGLBridge: Initializing\n");
+    printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
     
-    if (potatoBridge.eglContext == NULL || potatoBridge.eglContext == EGL_NO_CONTEXT) {
-        printf("EGLBridge: Initializing\n");
-        printf("ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
-    
-        if (!eglInitialize(potatoBridge.eglDisplay, NULL, NULL)) {
-            printf("Error: eglInitialize() failed\n");
-            return JNI_FALSE;
-        }
+    if (!eglInitialize(potatoBridge.eglDisplay, NULL, NULL)) {
+        printf("EGLBridge: Error eglInitialize() failed\n");
+        return JNI_FALSE;
+    }
    
-        static const EGLint attribs[] = {
-            EGL_RED_SIZE, 8,
-            EGL_GREEN_SIZE, 8,
-            EGL_BLUE_SIZE, 8,
-            EGL_ALPHA_SIZE, 8,
-            EGL_DEPTH_SIZE, 24,
-            EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-            EGL_NONE
-        };
-        static const EGLint ctx_attribs[] = {
-            EGL_CONTEXT_CLIENT_VERSION, 2,
-            EGL_NONE
-        };
+    static const EGLint attribs[] = {
+        EGL_RED_SIZE, 8,
+        EGL_GREEN_SIZE, 8,
+        EGL_BLUE_SIZE, 8,
+        EGL_ALPHA_SIZE, 8,
+        EGL_DEPTH_SIZE, 24,
+        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+        EGL_NONE
+    };
+    static const EGLint ctx_attribs[] = {
+        EGL_CONTEXT_CLIENT_VERSION, 2,
+        EGL_NONE
+    };
    
-        EGLConfig config;
-        EGLint num_configs;
-        EGLint vid;
+    EGLConfig config;
+    EGLint num_configs;
+    EGLint vid;
     
         if (!eglChooseConfig(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
-            printf("Error: couldn't get an EGL visual config\n");
+            printf("EGLBridge: Error couldn't get an EGL visual config\n");
             return JNI_FALSE;
         }
     
@@ -95,7 +109,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         assert(num_configs > 0);
 
         if (!eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
-            printf("Error: eglGetConfigAttrib() failed\n");
+            printf("EGLBridge: Error eglGetConfigAttrib() failed\n");
             return JNI_FALSE;
         }
 
@@ -105,7 +119,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 
         potatoBridge.eglContext = eglCreateContext(potatoBridge.eglDisplay, config, EGL_NO_CONTEXT, ctx_attribs);
         if (!potatoBridge.eglContext) {
-            printf("Error: eglCreateContext failed\n");
+            printf("EGLBridge: Error eglCreateContext failed\n");
             return JNI_FALSE;
         }
 
@@ -113,14 +127,14 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         {
             EGLint val;
             eglQueryContext(potatoBridge.eglDisplay, potatoBridge.eglContext, EGL_CONTEXT_CLIENT_VERSION, &val);
-            printf("OpenGL ES from eglQueryContext: %i\n", val);
+            printf("EGLBridge: OpenGL ES from eglQueryContext: %i\n", val);
             // assert(val >= 2);
         }
     
         potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
     
         if (!potatoBridge.eglSurface) {
-            printf("Error: eglCreateWindowSurface failed: %p\n", eglGetError());
+            printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError());
             return JNI_FALSE;
         }
     
@@ -131,10 +145,9 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
             assert(val & EGL_WINDOW_BIT);
         }
     // return JNI_TRUE;
-    }
     
 	printf("EGLBridge: Making current\n");
-	printf("EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
+	printf("EGLBridge: EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
 		potatoBridge.eglContext,
 		potatoBridge.eglDisplay,
 		potatoBridge.eglSurface 
@@ -157,18 +170,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglTerminate(JNIEnv* env, jclass clazz) {
-	printf("EGLBridge: Terminating\n");
-	eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-	eglDestroySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface);
-	eglDestroyContext(potatoBridge.eglDisplay, potatoBridge.eglContext);
-	eglTerminate(potatoBridge.eglDisplay);
-	eglReleaseThread();
-	
-	potatoBridge.eglContext = EGL_NO_CONTEXT;
-	potatoBridge.eglDisplay = EGL_NO_DISPLAY;
-	potatoBridge.eglSurface = EGL_NO_SURFACE;
-	
-	return JNI_TRUE;
+    terminateEgl();
+    return JNI_TRUE;
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *env, jclass clazz) {

@@ -74,5 +74,9 @@ public class CallbackBridge {
     
     private static native void nativeSendData(boolean isAndroid, int type, String data);
     public static native boolean nativeIsGrabbing();
+    
+    static {
+        System.loadLibrary("pojavexec");
+    }
 }
 
