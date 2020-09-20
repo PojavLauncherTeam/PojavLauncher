@@ -41,8 +41,7 @@ public class PojavLoginActivity extends AppCompatActivity
 	
 	private SharedPreferences firstLaunchPrefs;
 	// private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
-	private final String PREF_IS_INSTALLED_LIBRARIES = "isLibrariesExtracted2";
-    private final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
+    public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
 	
 	private boolean isInitCalled = false;
 	@Override
@@ -293,10 +292,6 @@ public class PojavLoginActivity extends AppCompatActivity
 
 	private boolean isJavaRuntimeInstalled() {
 		return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
-	}
-
-	private boolean isLibrariesExtracted() {
-		return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_LIBRARIES, false);
 	}
 	
 	private boolean setPref(String prefName, boolean value) {

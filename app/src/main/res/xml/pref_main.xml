@@ -6,10 +6,9 @@
     <android.support.v7.preference.PreferenceCategory
 		android:title="@string/mcl_setting_category_general">
 		
-        <android.support.v7.preference.SeekBarPreference
-            android:key="maxDxRefs"
-            android:title="@string/mcl_setting_title_setmaxdxref"
-            android:summary="@string/mcl_setting_subtitle_setmaxdxref" />
+        <net.kdt.pojavlaunch.prefs.UninstallJREDialogPreference
+            android:title="@string/mcl_setting_title_uninstalljre"
+            android:summary="@string/mcl_setting_subtitle_uninstalljre" />
 		
         <android.support.v7.preference.SeekBarPreference
             android:key="timeLongPressTrigger"

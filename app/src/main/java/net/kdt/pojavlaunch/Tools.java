@@ -665,7 +665,6 @@ public final class Tools
 		return out;
 	}
 	
-	// Current Useless below but keep it for future usage.
 	public static void deleteRecursive(File fileOrDirectory) {
 		try {
 			if (fileOrDirectory.isDirectory()) {
