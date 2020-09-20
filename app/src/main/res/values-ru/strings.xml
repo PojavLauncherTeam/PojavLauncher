@@ -35,7 +35,7 @@
     <string name="warning_action_exit">Выйти</string>
     <string name="warning_remove_account">Этот профиль будет удалён!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Установить Java Runtime (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
     <string name="alerttitle_installmod">Добавить мод</string>
     <!-- Error messages -->
@@ -51,6 +51,7 @@
     <string name="toast_permission_denied">К каталогу нет права на чтение и запись!</string>
     <string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите разработчику.\nОшибка: %s</string>
     <string name="toast_optifine_success">Установка завершена</string>
+    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -75,8 +76,8 @@
     <string name="mcl_option_customcontrol">Собстенное управление</string>
     <string name="mcl_option_settings">Настройки</string>
     <string name="mcl_option_about">Информация</string>
-    <string name="mcl_setting_title_setmaxdxref">Задать максимальное DX ссылок</string>
-    <string name="mcl_setting_subtitle_setmaxdxref">Увеличьте, если возникает ошибка при конвертации из-за большого количества ссылок. Рекомендуемое значение: 4096 или 8192.</string>
+    <string name="mcl_setting_title_uninstalljre">Uninstall Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This let you re-install Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в режиме Freeform</string>
     <string name="mcl_setting_subtitle_freeform">Запуск Minecraft в оконном режиме. Требуется Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Сколько времени нужно держать кнопку</string>
