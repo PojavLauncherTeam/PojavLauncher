@@ -17,6 +17,7 @@ public class UninstallJREDialogPreference extends DialogPreference implements Di
     
     public UninstallJREDialogPreference(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
+        setPersistent(false);
         setDialogMessage(R.string.mcl_setting_title_uninstalljre);
         setPositiveButtonText(android.R.string.ok);
         setNegativeButtonText(android.R.string.cancel);
