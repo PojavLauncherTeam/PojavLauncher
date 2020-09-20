@@ -13,7 +13,14 @@ LOCAL_SRC_FILES := \
     utils.c
 include $(BUILD_SHARED_LIBRARY)
 
+# Helper to get current thread
+# include $(CLEAR_VARS)
+# LOCAL_MODULE := thread64helper
+# LOCAL_SRC_FILES := thread_helper.cpp
+# include $(BUILD_SHARED_LIBRARY)
+
 # libawt_xawt without X11
+include $(CLEAR_VARS)
 LOCAL_PATH := $(LOCAL_PATH)/awt_xawt
 include $(CLEAR_VARS)
 LOCAL_MODULE := awt_xawt
