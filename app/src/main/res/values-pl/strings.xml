@@ -35,7 +35,7 @@
     <string name="warning_action_exit">Wyjście</string>
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Install Java Runtime (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Wybierz plik json mapy klawiszy</string>
     <string name="alerttitle_installmod">Wybierz mod do dodania</string>
     <!-- Error messages -->
@@ -51,6 +51,7 @@
     <string name="toast_permission_denied">Wymagane jest uprawnienie do odczytu / zapisu w pamięci!</string>
     <string name="toast_login_error">Coś poszło nie tak po zalogowaniu. Prześlij opinię do programisty. \ NBłąd:% s</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
+    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -75,8 +76,8 @@
     <string name="mcl_option_customcontrol">Niestandardowe kontrole</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">O aplikacji</string>
-    <string name="mcl_setting_title_setmaxdxref">Ustaw maksymalną liczbę referencji DX</string>
-    <string name="mcl_setting_subtitle_setmaxdxref">Zwiększ Jeśli podczas konwersji wystąpił błąd: Za dużo ... odniesień. Możesz spróbować opcji multi-dex. Zalecane: 4096 lub 8192.</string>
+    <string name="mcl_setting_title_uninstalljre">Uninstall Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This let you re-install Java Runtime</string>
     <string name="mcl_setting_title_freeform">Uruchom Minecraft w trybie swobodnym</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
