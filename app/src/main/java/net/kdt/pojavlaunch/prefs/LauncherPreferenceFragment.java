@@ -24,10 +24,14 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
     
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
+        /*
         if (preference instanceof DialogPreference) {
             DialogFragment dialogFragment = new DialogFragment();
             dialogFragment.setTargetFragment(this, 0);
             dialogFragment.show(getFragmentManager(), null);
-        } else super.onDisplayPreferenceDialog(preference);
+        } else
+        */
+        
+        super.onDisplayPreferenceDialog(preference);
     }
 }
