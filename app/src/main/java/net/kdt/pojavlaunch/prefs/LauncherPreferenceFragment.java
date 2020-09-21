@@ -21,17 +21,4 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
 		seek2.setMax(1000);
 		seek2.setValue(500);
 	}
-    
-    @Override
-    public void onDisplayPreferenceDialog(Preference preference) {
-        /*
-        if (preference instanceof DialogPreference) {
-            DialogFragment dialogFragment = new DialogFragment();
-            dialogFragment.setTargetFragment(this, 0);
-            dialogFragment.show(getFragmentManager(), null);
-        } else
-        */
-        
-        super.onDisplayPreferenceDialog(preference);
-    }
 }
