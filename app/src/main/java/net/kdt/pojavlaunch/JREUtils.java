@@ -8,6 +8,8 @@ import net.kdt.pojavlaunch.prefs.*;
 public class JREUtils
 {
 	private JREUtils() {}
+    
+    private static String nativeLibDir;
 	
 	public static void initJavaRuntime() {
 		dlopen(Tools.homeJreDir + "/lib/jli/libjli.so");
@@ -19,15 +21,19 @@ public class JREUtils
 		dlopen(Tools.homeJreDir + "/lib/libawt.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
 		
-        dlopen("libopenal.so");
+        dlopen(nativeLibDir + "/libopenal.so");
         
+        if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
+            LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = nativeLibDir + "/libgl04es.so";
+        }
         if (!dlopen(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME)) {
             System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
-            dlopen("libgl04es.so");
+            dlopen(nativeLibDir + "/libgl04es.so");
         }
 	}
 	public static native void redirectLogcat();
 	public static void setJavaEnvironment(Context ctx) throws IOException, ErrnoException {
+        nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
 		String ldLibraryPath = (
 			// To make libjli.so ignore re-execute
@@ -37,7 +43,7 @@ public class JREUtils
 			"/vendor/" + libName + ":" +
 			"/vendor/" + libName + "/hw:" +
 
-			ctx.getApplicationInfo().nativeLibraryDir + ":" +
+			nativeLibDir + ":" +
 
 			Tools.homeJreDir + "/lib/jli:" +
 			Tools.homeJreDir + "/lib"

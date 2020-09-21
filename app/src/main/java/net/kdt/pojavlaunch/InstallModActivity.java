@@ -97,8 +97,6 @@ public class InstallModActivity extends AppCompatActivity
 
 			System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 			
-			JREUtils.setJavaEnvironment(this);
-			
 			//JREUtils.redirectStdio(false);
 			JREUtils.setJavaEnvironment(this);
 			JREUtils.initJavaRuntime();
