@@ -1,16 +1,18 @@
 package net.kdt.pojavlaunch.prefs;
 
 import android.content.*;
+import android.support.v7.app.*;
 import android.support.v7.preference.*;
 import android.util.*;
+import android.widget.*;
 import java.io.*;
 import net.kdt.pojavlaunch.*;
 
 import net.kdt.pojavlaunch.R;
-import android.widget.*;
 
-public class UninstallJREDialogPreference extends DialogPreference implements DialogInterface.OnClickListener
+public class UninstallJREDialogPreference extends Preference implements DialogInterface.OnClickListener
 {
+    private AlertDialog mDialog;
     public UninstallJREDialogPreference(Context ctx) {
         this(ctx, null);
     }
@@ -18,9 +20,18 @@ public class UninstallJREDialogPreference extends DialogPreference implements Di
     public UninstallJREDialogPreference(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
         setPersistent(false);
-        setDialogMessage(R.string.mcl_setting_title_uninstalljre);
-        setPositiveButtonText(android.R.string.ok);
-        setNegativeButtonText(android.R.string.cancel);
+        
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        dialog.setMessage(R.string.mcl_setting_title_uninstalljre);
+        dialog.setPositiveButton(android.R.string.ok, this);
+        dialog.setNegativeButton(android.R.string.cancel, this);
+        mDialog = dialog.create();
+    }
+
+    @Override
+    protected void onClick() {
+        super.onClick();
+        mDialog.show();
     }
     
     @Override
