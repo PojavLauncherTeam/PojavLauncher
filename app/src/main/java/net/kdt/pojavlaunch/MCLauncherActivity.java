@@ -62,9 +62,6 @@ public class MCLauncherActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		gson = new Gson();
 
-		DisplayMetrics dm = Tools.getDisplayMetrics(this);
-		CallbackBridge.windowWidth = dm.widthPixels;
-		CallbackBridge.windowHeight = dm.heightPixels;
 		viewInit();
 
 		final View decorView = getWindow().getDecorView();
@@ -267,9 +264,9 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	@Override
-	protected void onPostResume()
-	{
+	protected void onPostResume() {
 		super.onPostResume();
+        Tools.updateWindowSize(this);
 	}
 
 	private float updateWidthHeight() {

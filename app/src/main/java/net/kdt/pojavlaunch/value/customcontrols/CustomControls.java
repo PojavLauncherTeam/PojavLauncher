@@ -19,7 +19,7 @@ public class CustomControls
 	// Generate default control
 	public CustomControls(Context ctx) {
 		this();
-		this.button.add(ControlButton.getSpecialButtons()[0].clone()); // LWJGLGLFWKeycode
+		this.button.add(ControlButton.getSpecialButtons()[0].clone()); // Keyboard
 		this.button.add(ControlButton.getSpecialButtons()[1].clone()); // GUI
 		this.button.add(ControlButton.getSpecialButtons()[2].clone()); // Primary Mouse button
 		this.button.add(ControlButton.getSpecialButtons()[3].clone()); // Secondary Mouse button

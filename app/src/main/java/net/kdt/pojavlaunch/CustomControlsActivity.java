@@ -140,7 +140,7 @@ public class CustomControlsActivity extends AppCompatActivity
 		builder.setPositiveButton(android.R.string.ok, null);
 		builder.setNegativeButton(android.R.string.cancel, null);
 		if (exit) {
-			builder.setNeutralButton("Exit without save", new AlertDialog.OnClickListener(){
+			builder.setNeutralButton(R.string.mcn_exit_call, new AlertDialog.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface p1, int p2) {
 						CustomControlsActivity.super.onBackPressed();

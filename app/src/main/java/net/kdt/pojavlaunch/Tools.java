@@ -369,6 +369,12 @@ public final class Tools
 		ctx.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 		return displayMetrics;
 	}
+    
+    public static void updateWindowSize(Activity ctx) {
+        DisplayMetrics dm = getDisplayMetrics(ctx);
+        CallbackBridge.windowWidth = dm.widthPixels;
+		CallbackBridge.windowHeight = dm.heightPixels;
+    }
 	
 	public static float pxToDp(Context ctx, float px) {
 		return (px / ctx.getResources().getDisplayMetrics().density);

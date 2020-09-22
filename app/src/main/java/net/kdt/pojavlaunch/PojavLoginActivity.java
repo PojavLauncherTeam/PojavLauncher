@@ -47,7 +47,19 @@ public class PojavLoginActivity extends AppCompatActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState); // false);
-		
+
+        Tools.updateWindowSize(this);
+        ControlButton.pixelOf2dp = (int) Tools.dpToPx(this, 2);
+        ControlButton.pixelOf30dp = (int) Tools.dpToPx(this, 30);
+        ControlButton.pixelOf50dp = (int) Tools.dpToPx(this, 50);
+        ControlButton.pixelOf80dp = (int) Tools.dpToPx(this, 80);
+        ControlButton[] specialButtons = ControlButton.getSpecialButtons();
+        specialButtons[0].name = getString(R.string.control_keyboard);
+        specialButtons[1].name = getString(R.string.control_toggle);
+        specialButtons[2].name = getString(R.string.control_primary);
+        specialButtons[3].name = getString(R.string.control_secondary);
+        specialButtons[4].name = getString(R.string.control_mouse);
+        
 			final View decorView = getWindow().getDecorView();
 			decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
 				@Override
@@ -278,6 +290,9 @@ public class PojavLoginActivity extends AppCompatActivity
 	@Override
 	public void onResume() {
 		super.onResume();
+        
+        Tools.updateWindowSize(this);
+        
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);

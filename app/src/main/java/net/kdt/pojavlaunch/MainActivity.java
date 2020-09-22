@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			}
 			
 			this.displayMetrics = Tools.getDisplayMetrics(this);
-
 			CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
 			CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
 			System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
