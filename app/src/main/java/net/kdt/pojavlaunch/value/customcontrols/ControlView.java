@@ -56,7 +56,7 @@ public class ControlView extends Button implements OnLongClickListener, OnTouchL
 		
 		if (properties.specialButtonListener == null) {
             // A non-special button or inside custom controls screen so skip listener
-        } if (properties.specialButtonListener instanceof View.OnClickListener) {
+        } else if (properties.specialButtonListener instanceof View.OnClickListener) {
 			setOnClickListener((View.OnClickListener) properties.specialButtonListener);
 		} else if (properties.specialButtonListener instanceof View.OnTouchListener) {
 			setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
