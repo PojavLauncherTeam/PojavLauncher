@@ -73,8 +73,8 @@ public class CallbackBridge {
     public static void sendData(int type, Object... dataArr) {
         currData = "";
         for (int i = 0; i < dataArr.length; i++) {
-            if (dataArr[i] instanceof int) {
-                currData += Integer.toString(dataArr[i]);
+            if (dataArr[i] instanceof Integer) {
+                currData += Integer.toString((int) dataArr[i]);
             } else if (dataArr[i] instanceof String) {
                 currData += (String) dataArr[i];
             } else {
