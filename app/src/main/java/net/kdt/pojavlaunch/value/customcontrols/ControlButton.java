@@ -90,7 +90,7 @@ public class ControlButton implements Cloneable
 	}
 
 	public void execute(MainActivity act, boolean isDown) {
-		act.sendKeyPress(keycode, isDown);
+		act.sendKeyPress(keycode, 0, isDown);
 	}
 
 	public ControlButton clone() {

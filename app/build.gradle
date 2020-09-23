@@ -24,7 +24,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156235
-        versionName "3.2.0_6403b_20200915"
+        versionName "3.2.0_6404b_20200923"
         multiDexEnabled true //important
 		
 		ndk {

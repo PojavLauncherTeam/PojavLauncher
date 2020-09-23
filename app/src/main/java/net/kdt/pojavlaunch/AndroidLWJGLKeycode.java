@@ -7,7 +7,7 @@ import org.lwjgl.glfw.*;
 
 public class AndroidLWJGLKeycode {
 	// Fix double letters on MC 1.9 and above
-	public static boolean isBackspaceAfterChar;
+	// public static boolean isBackspaceAfterChar;
 	private static final ArrayMap<Integer, Integer> androidToLwjglMap;
 	private static String[] androidKeyNameArray;
 	static {
@@ -168,38 +168,37 @@ public class AndroidLWJGLKeycode {
 	
     public static void execKey(MainActivity mainActivity, KeyEvent keyEvent, int i, boolean isDown) {
 		for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
-			if (perKey.getKey() == i) {
-				if (i == KeyEvent.KEYCODE_BACK && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
-					// Right mouse detection
-					mainActivity.sendMouseButton(1, true);
-					mainActivity.sendMouseButton(1, false);
-				} else {
-					mainActivity.sendKeyPress(perKey.getValue(), isDown);
-				}
+			if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
+                // Right mouse detection
+                mainActivity.sendMouseButton(1, true);
+                mainActivity.sendMouseButton(1, false);
+            } else if (perKey.getKey() == i) {
+				mainActivity.sendKeyPress(perKey.getValue(), keyEvent.getModifiers(), isDown);
 			}
 		}
 		
 		if (keyEvent.isAltPressed()) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT, isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT, keyEvent.getModifiers(), isDown);
 		} if (keyEvent.isCtrlPressed()) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL, isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL, keyEvent.getModifiers(), isDown);
 		} if (keyEvent.isFunctionPressed()) {
-			// mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_FUNCTION, isDown);
+			// mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_FUNCTION, keyEvent.getModifiers(), isDown);
 		} if (keyEvent.isShiftPressed()) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, keyEvent.getModifiers(), isDown);
 		}
 		
 		try {
-			if (/* (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && */ !CallbackBridge.isGrabbing()) {
-				mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), isDown);
+			if (/* (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN || */ !CallbackBridge.isGrabbing()) {
+				mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), keyEvent.getModifiers(), isDown);
 			}
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
-		
+/*
 		if (isBackspaceAfterChar && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, keyEvent.getModifiers(), isDown);
 		}
+*/
     }
 
 	public static void execKeyIndex(MainActivity mainActivity, int index) {

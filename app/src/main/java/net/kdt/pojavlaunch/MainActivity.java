@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						}
 					} break;
 				case MSG_DROP_ITEM_BUTTON_CHECK: {
-						sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, true);
+						sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
 					} break;
 			}
 		}
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			onClick(toggleControlButton);
 			this.drawerLayout.closeDrawers();
 
-			AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
+			// AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
 
 			placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
 			new Thread(new Runnable(){
@@ -429,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 							case MotionEvent.ACTION_POINTER_DOWN: // 5
 								isTouchInHotbar = hudKeyHandled != -1;
 								if (isTouchInHotbar) {
-									sendKeyPress(hudKeyHandled, true);
+									sendKeyPress(hudKeyHandled, 0, true);
 									hotbarX = x;
 									hotbarY = y;
 
@@ -443,7 +443,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                                     */
 
 									if (CallbackBridge.isGrabbing()) {
-										CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+										CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
 										initialX = x;
 										initialY = y;
 										theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
@@ -467,7 +467,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 									// System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
 									// System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
 									if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
-										sendKeyPress(hudKeyHandled, false);
+										sendKeyPress(hudKeyHandled, 0, false);
 									} else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
 										sendMouseButton(1, true);
 										sendMouseButton(1, false);
@@ -479,7 +479,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 										triggeredLeftMouseButton = false;
 										theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
 									} else {
-										sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, false);
+										sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, false);
 										theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
 									}
 								}
@@ -558,7 +558,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					switch (e.getActionMasked()) {
 						case MotionEvent.ACTION_DOWN: // 0
 						case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            CallbackBridge.sendMouseKeycode(!CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+                            CallbackBridge.sendMouseKeycode(!CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
 							initialX = x;
 							initialY = y;
 						
@@ -571,7 +571,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 						case MotionEvent.ACTION_CANCEL: // 3
 						case MotionEvent.ACTION_POINTER_UP: // 6
                             CallbackBridge.sendCursorPos(x, y);
-                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
 							// CallbackBridge.putMouseEventWithCoords(!CallbackBridge.mouseLeft /* rightOverride */ ? (byte) 1 : (byte) 0, (byte) 0, x, y, 0, System.nanoTime());
 							/*
 							 if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
@@ -788,11 +788,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         }
 
 		switch (v.getId()) {
-			case R.id.control_up: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_W, isDown); break;
-			case R.id.control_left: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_A, isDown); break;
-			case R.id.control_down: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_S, isDown); break;
-			case R.id.control_right: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_D, isDown); break;
-			case R.id.control_jump: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, isDown); break;
+			case R.id.control_up: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_W, 0, isDown); break;
+			case R.id.control_left: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_A, 0, isDown); break;
+			case R.id.control_down: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_S, 0, isDown); break;
+			case R.id.control_right: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_D, 0, isDown); break;
+			case R.id.control_jump: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, 0, isDown); break;
 			case R.id.control_primary: sendMouseButton(0, isDown); break;
 			case R.id.control_secondary:
 				if (CallbackBridge.isGrabbing()) {
@@ -803,14 +803,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					}
 					setRightOverride(isDown);
 				} break;
-			case R.id.control_debug: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F3, isDown); break;
-			case R.id.control_shift: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, isDown); break;
-			case R.id.control_inventory: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_E, isDown); break;
-			case R.id.control_talk: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_T, isDown); break;
+			case R.id.control_debug: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F3, 0, isDown); break;
+			case R.id.control_shift: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, 0, isDown); break;
+			case R.id.control_inventory: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_E, 0, isDown); break;
+			case R.id.control_talk: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_T, 0, isDown); break;
 			case R.id.control_keyboard: showKeyboard(); break;
-			case R.id.control_thirdperson: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F5, isDown); break;
-			case R.id.control_zoom: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_C, isDown); break;
-			case R.id.control_listplayers: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_TAB, isDown); break;
+			case R.id.control_thirdperson: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F5, 0, isDown); break;
+			case R.id.control_zoom: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_C, 0, isDown); break;
+			case R.id.control_listplayers: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_TAB, 0, isDown); break;
 		}
 
         return false;
@@ -1088,23 +1088,22 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         // this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
     }
 
-	public void sendKeyPress(int keyCode, boolean status) {
-        sendKeyPress(keyCode, '\u0000', status);
+	public void sendKeyPress(int keyCode, int modifiers, boolean status) {
+        sendKeyPress(keyCode, '\u0000', modifiers, status);
     }
 
-    public void sendKeyPress(int keyCode, char keyChar, boolean status) {
-        // FIXME keyChar
-        CallbackBridge.sendKeycode(keyCode, /* keyChar, */ status);
+    public void sendKeyPress(int keyCode, char keyChar, int modifiers, boolean status) {
+        CallbackBridge.sendKeycode(keyCode, keyChar, modifiers, status);
     }
 
 	public void sendKeyPress(char keyChar) {
-		sendKeyPress(0, keyChar, true);
-		sendKeyPress(0, keyChar, false);
+		sendKeyPress(0, keyChar, 0, true);
+		sendKeyPress(0, keyChar, 0, false);
 	}
 
 	public void sendKeyPress(int keyCode) {
-		sendKeyPress(keyCode, true);
-		sendKeyPress(keyCode, false);
+		sendKeyPress(keyCode, 0, true);
+		sendKeyPress(keyCode, 0, false);
 	}
 
 	public void sendMouseButton(int button, boolean status) {
