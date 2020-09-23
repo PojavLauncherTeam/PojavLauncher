@@ -7,7 +7,7 @@ import org.lwjgl.glfw.*;
 
 public class AndroidLWJGLKeycode {
 	// Fix double letters on MC 1.9 and above
-	// public static boolean isBackspaceAfterChar;
+	public static boolean isBackspaceAfterChar;
 	private static final ArrayMap<Integer, Integer> androidToLwjglMap;
 	private static String[] androidKeyNameArray;
 	static {
@@ -194,11 +194,10 @@ public class AndroidLWJGLKeycode {
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
-/*
+
 		if (isBackspaceAfterChar && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
 			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, keyEvent.getModifiers(), isDown);
 		}
-*/
     }
 
 	public static void execKeyIndex(MainActivity mainActivity, int index) {
