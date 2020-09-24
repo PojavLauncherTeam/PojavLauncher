@@ -864,7 +864,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         
         appendlnToLog("--------- beggining with launcher debug");
         File lwjgl3dir = new File(Tools.MAIN_PATH, "lwjgl3");
-        if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.length() == 0) {
+        if (!lwjgl3dir.exists() || lwjgl3dir.isFile()) {
             appendlnToLog("Error: LWJGL3 is not installed!");
             Tools.showError(this, new Throwable("LWJGL3 is not installed!"), true);
             return;
