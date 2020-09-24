@@ -1,8 +1,9 @@
 package net.kdt.pojavlaunch;
 
-import android.system.*;
-import java.io.*;
 import android.content.*;
+import android.system.*;
+import android.util.*;
+import java.io.*;
 import net.kdt.pojavlaunch.prefs.*;
 
 public class JREUtils
@@ -31,7 +32,42 @@ public class JREUtils
             dlopen(nativeLibDir + "/libgl04es.so");
         }
 	}
-	public static native void redirectLogcat();
+	
+    public static void redirectAndPrintJRELog(LoggableActivity act) {
+        JREUtils.redirectLogcat();
+        Log.v("jrelog","Log starts here");
+        Thread t = new Thread(() -> {
+            try {
+                Log.i("jrelog-logcat","Clearing logcat");
+                new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
+                Log.i("jrelog-logcat","Starting logcat");
+                Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
+
+                // idk which better, but 512bytes may make a bug that printf(\n) in a single line
+                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    act.appendlnToLog(line);
+                }
+
+                /*
+                 byte[] buf = new byte[512];
+                 int len;
+                 while ((len = p.getInputStream().read(buf)) != -1) {
+                 appendToLog(new String(buf, 0, len));
+                 }
+                 */
+            } catch (IOException e) {
+                Log.e("jrelog-logcat", "IOException on logging thread");
+                e.printStackTrace();
+
+                act.appendlnToLog("IOException on logging thread:\n" + Log.getStackTraceString(e));
+            }
+        });
+        t.start();
+		Log.i("jrelog-logcat","Logcat thread started");
+    }
+    
 	public static void setJavaEnvironment(Context ctx) throws IOException, ErrnoException {
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
@@ -77,6 +113,7 @@ public class JREUtils
 	
 	public static native int chdir(String path);
 	public static native boolean dlopen(String libPath);
+    public static native void redirectLogcat();
 	public static native void setLdLibraryPath(String ldLibraryPath);
 	public static native void setupBridgeWindow(Object surface);
 	

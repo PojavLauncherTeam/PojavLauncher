@@ -24,7 +24,7 @@ import org.lwjgl.glfw.*;
 import android.app.AlertDialog;
 import java.lang.Process;
 
-public class MainActivity extends AppCompatActivity implements OnTouchListener, OnClickListener
+public class MainActivity extends LoggableActivity implements OnTouchListener, OnClickListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     private NavigationView navDrawer;
 
 	private LinearLayout contentLog;
-	private TextView textLog, textLogBehindGL;
+	private TextView textLog;
 	private ScrollView contentScroll;
 	private ToggleButton toggleLog;
 	private GestureDetector gestureDetector;
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
 	private Button[] controlButtons;
 
-	private File currLogFile, logFile;
+	private File logFile;
 	private PrintStream logStream;
 	
 	/*
@@ -238,8 +238,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			this.textLog = (TextView) contentScroll.getChildAt(0);
 			this.toggleLog = (ToggleButton) findViewById(R.id.content_log_toggle_log);
 			this.toggleLog.setChecked(false);
-			this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
-			this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
+			// this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
+			// this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
 
 			this.textLog.setTypeface(Typeface.MONOSPACE);
 			this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
@@ -247,10 +247,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 					@Override
 					public void onCheckedChanged(CompoundButton button, boolean isChecked)
 					{
-                        try {
-                            if (isChecked) Tools.write(currLogFile.getAbsolutePath(), "");
-                        } catch (Exception e) {}
-                        
 						isLogAllow = isChecked;
 						appendToLog("");
 					}
@@ -842,7 +838,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		return Build.VERSION.SDK_INT >= 26; 
 	}
 
-	private FileObserver mLogObserver;
+	// private FileObserver mLogObserver;
 	private void runCraft() throws Throwable {
 		/* Old logger
 		if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
@@ -865,25 +861,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 			mLogObserver.startWatching();
 		}
 		*/
-		JREUtils.redirectLogcat();
-        Log.v("jrelog","Log starts here");
-		Thread t = new Thread(() -> {
-			try {
-				Log.i("jrelog-logcat","Clearing logcat");
-				new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
-				Log.i("jrelog-logcat","Starting logcat");
-				Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
-				byte[] buf = new byte[512];
-				int len;
-				while ((len = p.getInputStream().read(buf)) != -1) {
-					appendToLog(new String(buf, 0, len));
-				}
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-		t.start();
-		Log.i("jrelog-logcat","Logcat thread started");
+        
+        appendlnToLog("--------- beggining with launcher debug");
+        File lwjgl3dir = new File(Tools.MAIN_PATH, "lwjgl3");
+        if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.length() == 0) {
+            appendlnToLog("Error: LWJGL3 is not installed!");
+            Tools.showError(this, new Throwable("LWJGL3 is not installed!"), true);
+            return;
+        } else {
+            appendlnToLog("Info: LWJGL3 directory size: " + lwjgl3dir.length());
+        }
+        
+		JREUtils.redirectAndPrintJRELog(this);
 		Tools.launchMinecraft(this, mProfile, mVersionInfo);
 	}
 	
@@ -942,19 +931,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 	 WindowAnimation.fadeOut(contentCanvas, 500);
 	 }
 	 */
-	private void appendToLog(String text) {
-		appendToLog(text, true);
-	}
-	
-	private void appendlnToLog(String text) {
-		appendlnToLog(text, true);
-	}
-	
-	private void appendlnToLog(String text, boolean checkAllow) {
-		appendToLog(text + "\n", checkAllow);
-	}
-
-	private void appendToLog(final String text, boolean checkAllow) {
+     
+    @Override
+	public void appendToLog(final String text, boolean checkAllow) {
 		logStream.print(text);
 		if (checkAllow && !isLogAllow) return;
 		textLog.post(new Runnable(){

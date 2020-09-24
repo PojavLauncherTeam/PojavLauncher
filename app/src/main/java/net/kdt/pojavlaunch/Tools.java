@@ -81,35 +81,6 @@ public final class Tools
 	*/
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
-        List<String> overrideableArgList = new ArrayList<String>();
-		
-		overrideableArgList.add("-Djava.home=" + Tools.homeJreDir);
-		overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
-		overrideableArgList.add("-Dos.name=Linux");
-		
-		// javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
-		// javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
-		overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
-		// javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
-			
-		// Enable LWJGL3 debug
-		overrideableArgList.add("-Dorg.lwjgl.util.Debug=true");
-		// overrideableArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
-		overrideableArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
-		
-		// GLFW Stub width height
-		overrideableArgList.add("-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth);
-		overrideableArgList.add("-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight);
-		
-		overrideableArgList.add("-Dglfwstub.initEgl=false");
-		
-		if (versionInfo.arguments != null) {
-			// Minecraft 1.13+
-
-			overrideableArgList.add("-Dminecraft.launcher.brand=" + Tools.APP_NAME);
-			overrideableArgList.add("-Dminecraft.launcher.version=" + ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionName);
-		}
-		
 		String launchClassPath = generateLaunchClassPath(profile.getVersion());
         System.out.println("Java Classpath: " + launchClassPath);
 		if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
@@ -128,21 +99,8 @@ public final class Tools
 				javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
 			}
         */
-            // Override args
-            // TODO fix duplicate args
-            for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
-                for (int i = 0; i < overrideableArgList.size(); i++) {
-                    String arg = overrideableArgList.get(i);
-                    if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
-                        overrideableArgList.set(i, argOverride);
-                        break;
-                    } else if (i+1 == overrideableArgList.size()) {
-                        javaArgList.add(argOverride);
-                    }
-                }
-            }
             
-            javaArgList.addAll(overrideableArgList);
+            getJavaArgs(ctx, javaArgList);
             
 			javaArgList.add("-cp");
 			javaArgList.add(launchClassPath);
@@ -218,7 +176,49 @@ public final class Tools
 				}
 			});
 	}
-	
+    
+    public static void getJavaArgs(Context ctx, List<String> javaArgList) {
+        List<String> overrideableArgList = new ArrayList<String>();
+
+        overrideableArgList.add("-Djava.home=" + Tools.homeJreDir);
+        overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
+        
+        // Should be compatible?
+        overrideableArgList.add("-Dos.name=Android");
+        overrideableArgList.add("-Dos.version=" + Build.VERSION.SDK);
+
+        // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
+        // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
+        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+        // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
+
+        // Enable LWJGL3 debug
+        overrideableArgList.add("-Dorg.lwjgl.util.Debug=true");
+        // overrideableArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
+        overrideableArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
+
+        // GLFW Stub width height
+        overrideableArgList.add("-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth);
+        overrideableArgList.add("-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight);
+
+        overrideableArgList.add("-Dglfwstub.initEgl=false");
+        
+		// Override args
+        for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
+            for (int i = 0; i < overrideableArgList.size(); i++) {
+                String arg = overrideableArgList.get(i);
+                if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
+                    overrideableArgList.set(i, argOverride);
+                    break;
+                } else if (i+1 == overrideableArgList.size()) {
+                    javaArgList.add(argOverride);
+                }
+            }
+        }
+        
+        javaArgList.addAll(overrideableArgList);
+    }
+
 	public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo)
 	{
 		String username = profile.getUsername();
