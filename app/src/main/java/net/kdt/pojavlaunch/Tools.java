@@ -184,7 +184,8 @@ public final class Tools
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
         
         // Should be compatible?
-        overrideableArgList.add("-Dos.name=Android");
+        // overrideableArgList.add("-Dos.name=Android");
+        overrideableArgList.add("-Dos.name=Linux");
         overrideableArgList.add("-Dos.version=" + Build.VERSION.SDK);
 
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
