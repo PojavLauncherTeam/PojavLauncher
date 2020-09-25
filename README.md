@@ -1,4 +1,4 @@
-![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)
+[![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)](https://github.com/PojavLauncherTeam/PojavLauncher/actions)
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
 
