@@ -765,17 +765,20 @@ public class MCLauncherActivity extends AppCompatActivity
 				{
 					switch (p2) {
 						case 0: // Mod installer
-							installMod();
+							installMod(false);
 							break;
-						case 1: // Custom controls
+                        case 1: // Mod installer with java args 
+                            installMod(true);
+							break;
+						case 2: // Custom controls
 							if (Tools.enableDevFeatures) {
 								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
 							}
 							break;
-						case 2: // Settings
+						case 3: // Settings
 							startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
 							break;
-						case 3:{ // About
+						case 4: { // About
 								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
 								aboutB.setTitle(R.string.mcl_option_about);
 								try
@@ -797,26 +800,43 @@ public class MCLauncherActivity extends AppCompatActivity
 		builder.show();
 	}
 
-	private void installMod() {
+	private void installMod(boolean customJavaArgs) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.alerttitle_installmod);
-		builder.setPositiveButton(android.R.string.cancel, null);
+		builder.setNegativeButton(android.R.string.cancel, null);
+        
+		final AlertDialog dialog;
+        if (customJavaArgs) {
+            final EditText edit = new EditText(this);
+            edit.setSingleLine();
+            edit.setHint("-jar/-cp /path/to/file.jar ...");
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface di, int i) {
+                    Intent intent = new Intent(MCLauncherActivity.this, InstallModActivity.class);
+                    intent.putExtra("javaArgs", edit.getText().toString());
+                    startActivity(intent);
+                }
+            });
+            dialog = builder.create();
+            dialog.setView(edit);
+        } else {
+            dialog = builder.create();
+            FileListView flv = new FileListView(this);
+            flv.setFileSelectedListener(new FileSelectedListener(){
 
-		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this);
-		flv.setFileSelectedListener(new FileSelectedListener(){
-
-				@Override
-				public void onFileSelected(File file, String path, String name) {
-					if (name.endsWith(".jar")) {
-						Intent intent = new Intent(MCLauncherActivity.this, InstallModActivity.class);
-						intent.putExtra("modFile", file);
-						startActivity(intent);
-						dialog.dismiss();
-					}
-				}
-			});
-		dialog.setView(flv);
+                    @Override
+                    public void onFileSelected(File file, String path, String name) {
+                        if (name.endsWith(".jar")) {
+                            Intent intent = new Intent(MCLauncherActivity.this, InstallModActivity.class);
+                            intent.putExtra("modFile", file);
+                            startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+            dialog.setView(flv);
+        }
 		dialog.show();
 	}
 

@@ -50,7 +50,8 @@ public class InstallModActivity extends LoggableActivity
             JREUtils.redirectAndPrintJRELog(this);
                 
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
-
+            final String javaArgs = getIntent().getExtras().getString("javaArgs");
+            
             mTextureView = findViewById(R.id.installmod_surfaceview);
             mTextureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
 
@@ -68,7 +69,7 @@ public class InstallModActivity extends LoggableActivity
                         new Thread(new Runnable(){
                                 @Override
                                 public void run() {
-                                    launchJavaRuntime(modFile);
+                                    launchJavaRuntime(modFile, javaArgs);
                                     // finish();
                                 }
                             }).start();
@@ -107,7 +108,7 @@ public class InstallModActivity extends LoggableActivity
         // mIsResuming = true;
 	}
     
-	private void launchJavaRuntime(File modFile) {
+	private void launchJavaRuntime(File modFile, String javaArgs) {
 		try {
 			List<String> javaArgList = new ArrayList<String>();
 
@@ -131,8 +132,12 @@ public class InstallModActivity extends LoggableActivity
 				javaArgList.addAll(Arrays.asList(Tools.read(cacioArgOverrideFile.getAbsolutePath()).split(" ")));
 			}
 			
-			javaArgList.add("-jar");
-			javaArgList.add(modFile.getAbsolutePath());
+			if (javaArgs != null) {
+                javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
+            } else {
+                javaArgList.add("-jar");
+                javaArgList.add(modFile.getAbsolutePath());
+            }
 
 			System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 			
