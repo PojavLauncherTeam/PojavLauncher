@@ -1,6 +1,7 @@
 package org.lwjgl.glfw;
 import java.io.*;
 import java.util.*;
+import android.widget.*;
 
 public class CallbackBridge {
     public static final int JRE_TYPE_CURSOR_POS = 0;
@@ -19,14 +20,9 @@ public class CallbackBridge {
     
     volatile private static boolean isGrabbing = false;
 
-    public static void sendMouseEvent(int x, int y, int keycode) {
+    public static void putMouseEventWithCoords(int button, int state, int x, int y, int dz, long nanos) {
         sendCursorPos(x, y);
-        sendMouseKeycode(keycode);
-    }
-    
-    public static void sendMouseEvent(int x, int y, int keycode, boolean isDown) {
-        sendCursorPos(x, y);
-        sendMouseKeycode(keycode, 0, isDown);
+        sendMouseKeycode(button, 0, state == 1);
     }
 
     public static void sendCursorPos(int x, int y) {
