@@ -32,10 +32,10 @@ public class PojavApplication extends Application
 					crashFile.createNewFile();
 					PrintStream crashStream = new PrintStream(crashFile);
 					crashStream.append("PojavLauncher crash report\n");
-					crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()));
-					crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL);
-					crashStream.append(" - Android version: " + Build.VERSION.RELEASE);
-					crashStream.append(" - Crash stack trace:");
+					crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()) + "\n");
+					crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL + "\n");
+					crashStream.append(" - Android version: " + Build.VERSION.RELEASE + "\n");
+					crashStream.append(" - Crash stack trace:\n");
 					crashStream.append(Log.getStackTraceString(th));
 					crashStream.close();
 				} catch (Throwable th2) {

@@ -18,11 +18,11 @@
 #include "utils.h"
 
 struct PotatoBridge {
-	ANativeWindow* androidWindow;
+	/* ANativeWindow */ void* androidWindow;
 	
-	EGLContext eglContext;
-	EGLDisplay eglDisplay;
-	EGLSurface eglSurface;
+	/* EGLContext */ void* eglContext;
+	/* EGLDisplay */ void* eglDisplay;
+	/* EGLSurface */ void* eglSurface;
 /*
 	void* eglSurfaceRead;
 	void* eglSurfaceDraw;

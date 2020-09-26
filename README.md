@@ -12,12 +12,12 @@ Architectures:
 - For ARMv7 (aarch32): **working**.
 - For ARM64 (aarch64): **working, but OpenGL doesn't**.
 - For x86 (i\*86): **working**.
-- For x86_64 (amd64): untested.
+- For x86_64 (amd64): **working, but OpenGL doesn't** (same as aarch64).
 
 ## Current status
 - [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
 - [x] **Temporary removed** ~~JVDroid OpenJDK 11 (32 and 64-bit ARM and x86). Partial, no error `can't lock mutex`, but now exit with none output.~~
-- [x] OpenJDK 9 Mobile port
+- [x] OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.
 - [ ] AWT/Swing for mod installer. Will try own graphics environment~~use `Caciocavallo` project~~.
 - [x] OpenGL in OpenJDK environment
 - [x] OpenAL (work on most devices)
