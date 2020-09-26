@@ -433,12 +433,10 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                         CallbackBridge.mouseLeft = true;
                                     }
 
-                                    if (CallbackBridge.isGrabbing()) {
-                                        CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
-                                        initialX = x;
-                                        initialY = y;
-                                        theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                    }
+                                    CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+                                    initialX = x;
+                                    initialY = y;
+                                    theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                 }
                                 break;
                             case MotionEvent.ACTION_UP: // 1
@@ -455,25 +453,23 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
                                 } 
 
-                                if (CallbackBridge.isGrabbing()) {
-                                    // System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
-                                    // System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
-                                    if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
-                                        sendKeyPress(hudKeyHandled, 0, false);
-                                    } else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-                                        sendMouseButton(1, true);
-                                        sendMouseButton(1, false);
+                                // System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
+                                // System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
+                                if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
+                                    sendKeyPress(hudKeyHandled, 0, false);
+                                } else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+                                    sendMouseButton(1, true);
+                                    sendMouseButton(1, false);
+                                }
+                                if (!isTouchInHotbar) {
+                                    if (triggeredLeftMouseButton) {
+                                        sendMouseButton(0, false);
                                     }
-                                    if (!isTouchInHotbar) {
-                                        if (triggeredLeftMouseButton) {
-                                            sendMouseButton(0, false);
-                                        }
-                                        triggeredLeftMouseButton = false;
-                                        theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-                                    } else {
-                                        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, false);
-                                        theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
-                                    }
+                                    triggeredLeftMouseButton = false;
+                                    theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+                                } else {
+                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, false);
+                                    theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
                                 }
                                 break;
 
@@ -1034,22 +1030,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 					contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
 				}
 			});
-	}
-
-	public void handleMessage(Message msg) {
-		switch (msg.what) {
-			case MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK /*1028*/:
-				int x = CallbackBridge.mouseX;
-				int y = CallbackBridge.mouseY;
-				if (CallbackBridge.isGrabbing() && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-					triggeredLeftMouseButton = true;
-					sendMouseButton(0, true);
-					return;
-				}
-				return;
-			default:
-				return;
-		}
 	}
 
 	public String getMinecraftOption(String key) {

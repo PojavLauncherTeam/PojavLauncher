@@ -43,20 +43,20 @@ public class JREUtils
                 Log.i("jrelog-logcat","Starting logcat");
                 Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
 
-                // idk which better, but 512bytes may make a bug that printf(\n) in a single line
+                // idk which better, both have a bug that printf(\n) in a single line
+            /*
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     act.appendlnToLog(line);
                 }
-
-                /*
-                 byte[] buf = new byte[512];
-                 int len;
-                 while ((len = p.getInputStream().read(buf)) != -1) {
-                 appendToLog(new String(buf, 0, len));
-                 }
-                 */
+            */
+                
+                byte[] buf = new byte[512];
+                int len;
+                while ((len = p.getInputStream().read(buf)) != -1) {
+                    act.appendToLog(new String(buf, 0, len));
+                }
             } catch (IOException e) {
                 Log.e("jrelog-logcat", "IOException on logging thread");
                 e.printStackTrace();
