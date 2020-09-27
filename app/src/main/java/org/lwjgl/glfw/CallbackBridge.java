@@ -20,7 +20,12 @@ public class CallbackBridge {
     
     // volatile private static boolean isGrabbing = false;
 
-    public static void putMouseEventWithCoords(int button, int state, int x, int y, int dz, long nanos) {
+    public static void putMouseEventWithCoords(int button, int x, int y /* , int dz, long nanos */) {
+        putMouseEventWithCoords(button, 1, x, y);
+        putMouseEventWithCoords(button, 0, x, y);
+    }
+    
+    public static void putMouseEventWithCoords(int button, int state, int x, int y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
         sendMouseKeycode(button, 0, state == 1);
     }

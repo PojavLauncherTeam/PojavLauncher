@@ -186,7 +186,7 @@ public final class Tools
         // Should be compatible?
         // overrideableArgList.add("-Dos.name=Android");
         overrideableArgList.add("-Dos.name=Linux");
-        overrideableArgList.add("-Dos.version=" + Build.VERSION.SDK);
+        overrideableArgList.add("-Dos.version=" + Build.VERSION.RELEASE);
 
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
