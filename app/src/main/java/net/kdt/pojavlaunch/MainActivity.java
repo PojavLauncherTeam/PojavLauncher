@@ -1050,7 +1050,22 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 		}
 		return "";
 	}
-
+    
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+            case MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK /*1028*/:
+                int x = CallbackBridge.mouseX;
+                int y = CallbackBridge.mouseY;
+                if (CallbackBridge.isGrabbing() && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+                    triggeredLeftMouseButton = true;
+                    sendMouseButton(0, true);
+                    return;
+                }
+                return;
+            default:
+                return;
+        }
+	}
 	public int mcscale(int input) {
         return this.guiScale * input;
     }
