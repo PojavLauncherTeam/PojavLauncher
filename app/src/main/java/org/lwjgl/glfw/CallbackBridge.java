@@ -10,6 +10,7 @@ public class CallbackBridge {
     public static final int JRE_TYPE_KEYCODE_CHAR = 3;
     public static final int JRE_TYPE_MOUSE_KEYCODE_CONTROL = 4;
     public static final int JRE_TYPE_WINDOW_SIZE = 5;
+    public static final int JRE_TYPE_GRAB_INITIAL_POS_UNSET = 6;
     
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
 
@@ -35,6 +36,11 @@ public class CallbackBridge {
         mouseX = x;
         mouseY = y;
         sendData(JRE_TYPE_CURSOR_POS, x, y);
+    }
+    
+    public static void sendGrabInitialPosUnset() {
+        DEBUG_STRING.append("Grab initial posititon uset");
+        sendData(JRE_TYPE_GRAB_INITIAL_POS_UNSET);
     }
 
     public static void sendKeycode(int keycode, char keychar, int modifiers, boolean isDown) {

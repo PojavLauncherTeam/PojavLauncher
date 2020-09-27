@@ -435,6 +435,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     if (CallbackBridge.isGrabbing()) {
                                         // It cause hold left mouse while moving camera
                                         // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y);
+                                        CallbackBridge.sendCursorPos(x, y);
                                         initialX = x;
                                         initialY = y;
                                         theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
@@ -447,6 +448,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
                                     CallbackBridge.mouseY = y;
+                                    
+                                    
 
                                     // TODO uncomment after fix wrong trigger
                                     // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y);
