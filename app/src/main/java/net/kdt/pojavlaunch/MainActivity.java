@@ -434,7 +434,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
 
                                     if (CallbackBridge.isGrabbing()) {
-                                        // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+                                        // bug hold left mouse!
+                                        CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
                                         initialX = x;
                                         initialY = y;
                                         theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
@@ -1050,22 +1051,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 		}
 		return "";
 	}
-    
-    public void handleMessage(Message msg) {
-        switch (msg.what) {
-            case MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK /*1028*/:
-                int x = CallbackBridge.mouseX;
-                int y = CallbackBridge.mouseY;
-                if (CallbackBridge.isGrabbing() && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-                    triggeredLeftMouseButton = true;
-                    sendMouseButton(0, true);
-                    return;
-                }
-                return;
-            default:
-                return;
-        }
-	}
+
 	public int mcscale(int input) {
         return this.guiScale * input;
     }
