@@ -39,7 +39,7 @@ public class CallbackBridge {
 
     public static void sendMouseKeycode(int keycode, int modifiers, boolean isDown) {
         DEBUG_STRING.append("MouseKey=" + keycode + ", down=" + isDown + "\n");
-        if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
+        // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
         sendData(JRE_TYPE_MOUSE_KEYCODE_CONTROL, keycode, Boolean.toString(isDown), modifiers);
     }
 
