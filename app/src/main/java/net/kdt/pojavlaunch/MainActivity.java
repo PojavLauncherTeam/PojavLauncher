@@ -433,7 +433,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                         CallbackBridge.mouseLeft = true;
                                     }
 
-                                    CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
+                                    // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y, 0, System.nanoTime());
                                     initialX = x;
                                     initialY = y;
                                     theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
