@@ -142,7 +142,7 @@ public class InstallModActivity extends LoggableActivity
 			System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 			
 			//JREUtils.redirectStdio(false);
-			JREUtils.setJavaEnvironment(this);
+			JREUtils.setJavaEnvironment(this, Tools.LAUNCH_TYPE);
 			JREUtils.initJavaRuntime();
 			JREUtils.chdir(Tools.MAIN_PATH);
 

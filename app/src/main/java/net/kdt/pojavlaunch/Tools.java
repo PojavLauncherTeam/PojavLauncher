@@ -34,7 +34,8 @@ public final class Tools
 	public static String mhomeUrl = "https://pojavlauncherteam.github.io/PojavLauncher"; // "http://kdtjavacraft.eu5.net";
 	public static String datapath = "/data/data/net.kdt.pojavlaunch";
 	public static String worksDir = datapath + "/app_working_dir";
-	
+	public static String currentArch;
+    
 	// New since 3.0.0
 	public static String homeJreDir = datapath + "/jre_runtime";
 	
@@ -122,7 +123,7 @@ public final class Tools
 		// can fix java?
 		// setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
 		
-		JREUtils.setJavaEnvironment(ctx);
+		JREUtils.setJavaEnvironment(ctx, Tools.LAUNCH_TYPE);
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {
 			mLaunchShell.writeToProcess("cd $HOME");

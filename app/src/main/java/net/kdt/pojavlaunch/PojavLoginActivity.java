@@ -359,7 +359,7 @@ public class PojavLoginActivity extends AppCompatActivity
             @Override
             public void run() {
                 AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
-                builder.setTitle(getString(R.string.alerttitle_install_jre, System.getProperty("os.arch")));
+                builder.setTitle(getString(R.string.alerttitle_install_jre, Tools.currentArch));
                 builder.setCancelable(false);
 
                 final AlertDialog dialog = builder.create();

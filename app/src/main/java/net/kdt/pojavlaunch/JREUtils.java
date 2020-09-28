@@ -68,7 +68,7 @@ public class JREUtils
 		Log.i("jrelog-logcat","Logcat thread started");
     }
     
-	public static void setJavaEnvironment(Context ctx) throws IOException, ErrnoException {
+	public static void setJavaEnvironment(Context ctx, int launchType) throws IOException, ErrnoException {
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
 		String ldLibraryPath = (
@@ -85,17 +85,17 @@ public class JREUtils
 			Tools.homeJreDir + "/lib"
 		);
 		
-		setEnvironment("JAVA_HOME", Tools.homeJreDir);
-		setEnvironment("HOME", Tools.MAIN_PATH);
-		setEnvironment("TMPDIR", ctx.getCacheDir().getAbsolutePath());
-		// setEnvironment("LIBGL_MIPMAP", "3");
-		setEnvironment("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-		setEnvironment("LD_LIBRARY_PATH", ldLibraryPath);
-		setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+		setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
+		setEnvironment(launchType, "HOME", Tools.MAIN_PATH);
+		setEnvironment(launchType, "TMPDIR", ctx.getCacheDir().getAbsolutePath());
+		// setEnvironment(launchType, "LIBGL_MIPMAP", "3");
+		setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+		setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath);
+		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
         
-        setEnvironment("REGAL_GL_VENDOR", "Android");
-        setEnvironment("REGAL_GL_RENDERER", "Regal");
-        setEnvironment("REGAL_GL_VERSION", "4.5");
+        setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
+        setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
+        setEnvironment(launchType, "REGAL_GL_VERSION", "4.5");
         // REGAL_GL_EXTENSIONS
         
 		setLdLibraryPath(ldLibraryPath);
@@ -103,8 +103,8 @@ public class JREUtils
 		// return ldLibraryPath;
 	}
 	
-	private static void setEnvironment(String name, String value) throws ErrnoException, IOException {
-		if (Tools.LAUNCH_TYPE == Tools.LTYPE_PROCESS) {
+	private static void setEnvironment(int launchType, String name, String value) throws ErrnoException, IOException {
+		if (launchType == Tools.LTYPE_PROCESS) {
 			Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
 		} else {
 			Os.setenv(name, value, true);

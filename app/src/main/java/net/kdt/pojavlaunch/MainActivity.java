@@ -23,6 +23,7 @@ import org.lwjgl.glfw.*;
 
 import android.app.AlertDialog;
 import java.lang.Process;
+import android.system.*;
 
 public class MainActivity extends LoggableActivity implements OnTouchListener, OnClickListener
 {
@@ -453,6 +454,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 
                                     // TODO uncomment after fix wrong trigger
                                     // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y);
+                                    CallbackBridge.sendCursorPos(x, y);
                                     if (!rightOverride) {
                                         CallbackBridge.mouseLeft = false;
                                     }
@@ -956,18 +958,67 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 		*/
         
         appendlnToLog("--------- beggining with launcher debug");
-        File lwjgl3dir = new File(Tools.MAIN_PATH, "lwjgl3");
-        if (!lwjgl3dir.exists() || lwjgl3dir.isFile()) {
-            appendlnToLog("Error: LWJGL3 is not installed!");
-            Tools.showError(this, new Throwable("LWJGL3 is not installed!"), true);
-            return;
-        } else {
-            appendlnToLog("Info: LWJGL3 directory size: " + lwjgl3dir.length());
-        }
+        checkLWJGL3Installed();
+        checkJavaArchitecture();
+        checkJavaArgsIsLaunchable();
         
 		JREUtils.redirectAndPrintJRELog(this);
 		Tools.launchMinecraft(this, mProfile, mVersionInfo);
 	}
+    
+    private void checkJavaArchitecture() throws Exception {
+        String[] argName = Tools.currentArch.split("/");
+        String releaseContent = Tools.read(Tools.homeJreDir + "/release");
+        int osArchIndex = releaseContent.indexOf("OS_ARCH=\"") + 9;
+        releaseContent = releaseContent.substring(osArchIndex);
+        releaseContent = releaseContent.substring(0, releaseContent.indexOf("\""));
+        if (!(releaseContent.contains(argName[0]) || releaseContent.contains(argName[1]))) {
+            appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + releaseContent);
+            throw new RuntimeException(getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, releaseContent));
+        }
+    }
+    
+    private void checkJavaArgsIsLaunchable() throws Throwable {
+        appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
+        
+        // Test java
+        ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+            @Override
+            public void onPrintLine(String text){
+                appendlnToLog("[JRETest] " + text);
+            }
+        });
+        Tools.mLaunchShell = shell;
+        JREUtils.setJavaEnvironment(this, Tools.LTYPE_PROCESS);
+        Tools.mLaunchShell = null;
+        
+        List<String> testArgs = new ArrayList<String>();
+        testArgs.add(Tools.homeJreDir + "/bin/java");
+        Tools.getJavaArgs(this, testArgs);
+        testArgs.add("-version");
+        
+        shell.writeToProcess("chmod 700 " + Tools.homeJreDir + "/bin/java");
+        shell.writeToProcess("set -e");
+        shell.writeToProcess(testArgs.toArray(new String[0]));
+        
+        int exitCode = shell.waitFor();
+        appendlnToLog("Info: java test command exited with " + exitCode);
+        
+        if (exitCode != 0) {
+            appendlnToLog("Error: it is failure!");
+            throw new RuntimeException(getString(R.string.mcn_check_fail_java));
+        }
+    }
+    
+    private void checkLWJGL3Installed() {
+        File lwjgl3dir = new File(Tools.MAIN_PATH, "lwjgl3");
+        if (!lwjgl3dir.exists() || lwjgl3dir.isFile()) {
+            appendlnToLog("Error: LWJGL3 was not installed!");
+            throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
+        } else {
+            appendlnToLog("Info: LWJGL3 directory: " + lwjgl3dir.list());
+        }
+    }
 	
 	public void printStream(InputStream stream) {
 		try {

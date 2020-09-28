@@ -26,6 +26,7 @@ import org.lwjgl.glfw.*;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -128,7 +129,7 @@ public class MCLauncherActivity extends AppCompatActivity
 		}
 
         File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
-        if (logFile.exists() && logFile.length() < 2048) {
+        if (logFile.exists() && logFile.length() < 20480) {
             String errMsg = "Error occurred during initialization of ";
             try {
                 String logContent = Tools.read(logFile.getAbsolutePath());
@@ -139,7 +140,7 @@ public class MCLauncherActivity extends AppCompatActivity
                     Tools.showError(MCLauncherActivity.this, ex);
                       
                     // Do it so dialog will not shown for second time
-                    Tools.write(logFile.getAbsolutePath(), logContent.replace(errMsg + "VM", errMsg + " JVM"));
+                    Tools.write(logFile.getAbsolutePath(), logContent.replace(errMsg + "VM", errMsg + "JVM"));
                 }
             } catch (Throwable th) {
                 System.err.println("Could not detect java crash");
@@ -783,11 +784,11 @@ public class MCLauncherActivity extends AppCompatActivity
 								aboutB.setTitle(R.string.mcl_option_about);
 								try
 								{
-									aboutB.setMessage(String.format(Tools.read(getAssets().open("about_en.txt")),
+									aboutB.setMessage(Html.fromHtml(String.format(Tools.read(getAssets().open("about_en.txt")),
 																	Tools.APP_NAME,
 																	Tools.usingVerName,
 																	"3.2.3")
-													  );
+													  ));
 								} catch (Exception e) {
 									throw new RuntimeException(e);
 								}
