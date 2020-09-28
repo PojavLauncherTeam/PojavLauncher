@@ -972,6 +972,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         int osArchIndex = releaseContent.indexOf("OS_ARCH=\"") + 9;
         releaseContent = releaseContent.substring(osArchIndex);
         releaseContent = releaseContent.substring(0, releaseContent.indexOf("\""));
+        appendlnToLog("Architecture: " + Tools.currentArch);
         if (!(releaseContent.contains(argName[0]) || releaseContent.contains(argName[1]))) {
             appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + releaseContent);
             throw new RuntimeException(getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, releaseContent));
@@ -997,7 +998,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         Tools.getJavaArgs(this, testArgs);
         testArgs.add("-version");
         
-        shell.writeToProcess("chmod 700 " + Tools.homeJreDir + "/bin/java");
+        shell.writeToProcess("chmod 777 " + Tools.homeJreDir + "/bin/java");
         shell.writeToProcess("set -e");
         shell.writeToProcess(testArgs.toArray(new String[0]));
         
