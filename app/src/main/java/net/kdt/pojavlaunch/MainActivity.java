@@ -1008,8 +1008,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         appendlnToLog("Info: java test command exited with " + exitCode);
         
         if (exitCode != 0) {
-            appendlnToLog("Error: it is failure!");
-            throw new RuntimeException(getString(R.string.mcn_check_fail_java));
+            appendlnToLog("Error: the test returned non-zero exit code.");
+            // throw new RuntimeException(getString(R.string.mcn_check_fail_java));
         }
     }
     
