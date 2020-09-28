@@ -133,6 +133,9 @@
     <string name="mcn_exit_crash">Game crash terdeteksi! Pencet OK untuk keluar.</string>
     <string name="mcn_exit_errcrash">Tidak bisa mencari sumber crash, anda bisa mengabaikan ini.</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
+    <string name="mcn_check_fail_incompatiblearch">Architecture %s is incompatible with Java Runtime %s.</string>
+    <string name="mcn_check_fail_java">Could not start test Java VM. Check %s for more info.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Kontrol</string>
     <string name="control_toggle">GUI</string>
