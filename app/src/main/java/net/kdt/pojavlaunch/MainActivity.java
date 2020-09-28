@@ -998,7 +998,9 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         Tools.getJavaArgs(this, testArgs);
         testArgs.add("-version");
         
-        shell.writeToProcess("chmod 777 " + Tools.homeJreDir + "/bin/java");
+        new File(Tools.homeJreDir + "/bin/java").setExecutable(true);
+        
+        // shell.writeToProcess("chmod 777 " + Tools.homeJreDir + "/bin/java");
         shell.writeToProcess("set -e");
         shell.writeToProcess(testArgs.toArray(new String[0]));
         
