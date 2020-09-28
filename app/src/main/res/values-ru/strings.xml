@@ -133,6 +133,9 @@
     <string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
     <string name="mcn_exit_confirm">Вы точно хотите закрыть игру немедленно?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
+    <string name="mcn_check_fail_incompatiblearch">Architecture %s is incompatible with Java Runtime %s.</string>
+    <string name="mcn_check_fail_java">Could not start test Java VM. Check %s for more info.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Кнопки</string>
     <string name="control_toggle">GUI</string>
