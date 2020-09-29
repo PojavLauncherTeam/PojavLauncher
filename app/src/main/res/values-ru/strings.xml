@@ -161,7 +161,6 @@
     <string name="control_adebug">Откладка PointerCapture</string>
     <string name="control_customkey">Отправить потловательскую раскладку</string>
     <string name="control_shiftmodechg">Изменить режим кнопки Shift (крадся)</string>
-    <string name="control_more4"></string>
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
     <string name="customctrl_hidden">Скрыто</string>
