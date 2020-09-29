@@ -35,7 +35,7 @@
     <string name="warning_action_exit">Выйти</string>
     <string name="warning_remove_account">Этот профиль будет удалён!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Установить Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
     <string name="alerttitle_installmod">Добавить мод</string>
     <!-- Error messages -->
@@ -51,7 +51,7 @@
     <string name="toast_permission_denied">К каталогу нет права на чтение и запись!</string>
     <string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите разработчику.\nОшибка: %s</string>
     <string name="toast_optifine_success">Установка завершена</string>
-    <string name="toast_uninstalljre_done">Успешное удаление Java Runtime</string>
+    <string name="toast_uninstalljre_done">Удаление Java Runtime завершено</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -72,13 +72,13 @@
     <string name="mcl_options">Настройки</string>
     <string name="mcl_option_modmgr">Менеджер модов (не работает)</string>
     <string name="mcl_option_modinstall">Установить мод (Forge, LabyMod, Fabric...)</string>
-    <string name="mcl_option_modinstallwitharg">Install mod (with custom arguments)</string>
+    <string name="mcl_option_modinstallwitharg">Установить мод (с пользовательскими аргументами)</string>
     <string name="mcl_option_checkupdate">Проверить на обновления</string>
     <string name="mcl_option_customcontrol">Собстенное управление</string>
     <string name="mcl_option_settings">Настройки</string>
     <string name="mcl_option_about">Информация</string>
-    <string name="mcl_setting_title_uninstalljre">Uninstall Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This let you re-install Java Runtime</string>
+    <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в режиме Freeform</string>
     <string name="mcl_setting_subtitle_freeform">Запуск Minecraft в оконном режиме. Требуется Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Сколько времени нужно держать кнопку</string>
@@ -133,9 +133,9 @@
     <string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
     <string name="mcn_exit_confirm">Вы точно хотите закрыть игру немедленно?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 не был установлен!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Could not start test Java VM. Check %s for more info.</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
+    <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовместима с Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_java">Не удалось запустить тестовую Java VM. Проверьте %s для получения дополнительной информации.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Кнопки</string>
     <string name="control_toggle">GUI</string>
