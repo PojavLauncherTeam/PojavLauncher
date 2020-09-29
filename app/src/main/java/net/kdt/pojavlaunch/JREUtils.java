@@ -1,9 +1,11 @@
 package net.kdt.pojavlaunch;
 
 import android.content.*;
+import android.os.*;
 import android.system.*;
 import android.util.*;
 import java.io.*;
+import java.lang.reflect.*;
 import net.kdt.pojavlaunch.prefs.*;
 
 public class JREUtils
@@ -91,7 +93,7 @@ public class JREUtils
 		// setEnvironment(launchType, "LIBGL_MIPMAP", "3");
 		setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
 		setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath);
-		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + libcore.io.Libcore.os.getenv("PATH"));
+		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + getBridgeOs("getenv", "PATH"));
         
         setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
         setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
@@ -108,7 +110,7 @@ public class JREUtils
 			Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
 		} else {
             // Libcore one support all Android versions
-            libcore.io.Libcore.os.setenv(name, value, true);
+            getBridgeOs("setenv", name, value, true);
             // Class.forName("libcore.io.Os").getMethod("setenv", String.class, String.class, boolean.class).invoke(null, name, value, true);
 /*
             if (Build.VERSION.SDK_INT < 21) {
@@ -119,6 +121,21 @@ public class JREUtils
 */
 		}
 	}
+    
+    public static Object getBridgeOs(String methodName, Object... objs) throws Throwable {
+        Class[] classes = new Class[objs.length];
+        for (int i = 0; i < classes.length; i++) {
+            classes[i] = objs[i].getClass();
+        }
+        if (Build.VERSION.SDK_INT < 21) {
+            Class libcoreClass = Class.forName("libcore.io.Libcore");
+            Object libcoreOs = libcoreClass.getField("os").get(null);
+            return Class.forName("libcore.io.Os").getMethod(methodName, classes).invoke(libcoreOs, objs);
+        } else {
+            // Avoid Android < 5 get ClassNotFoundException
+            return Class.forName("android.system.Os").getMethod(methodName, classes).invoke(null, objs);
+        }
+    }
 	
 	public static native int chdir(String path);
 	public static native boolean dlopen(String libPath);

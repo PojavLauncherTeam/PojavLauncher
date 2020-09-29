@@ -17,7 +17,6 @@ import com.kdt.filermod.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
-import libcore.io.*;
 import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import org.apache.commons.compress.archivers.tar.*;
@@ -427,7 +426,7 @@ public class PojavLoginActivity extends AppCompatActivity
                 try {
                     // android.system.Os
                     // Libcore one support all Android versions
-                    libcore.io.Libcore.os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    JREUtils.getBridgeOs("symlink", tarEntry.getName(), tarEntry.getLinkName());
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
