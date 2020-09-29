@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 21
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -21,7 +21,7 @@ android {
 	
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 156235
         versionName "3.2.0_6404b_20200923"
