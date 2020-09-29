@@ -162,8 +162,6 @@
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Откладка PointerCapture</string>
     <string name="control_customkey">Ввести клавишу</string>
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
     <string name="customctrl_keyname">Имя</string>
     <string name="customctrl_specialkey">Особенная кнопка</string>
     <string name="customctrl_hidden">Спрятано</string>
