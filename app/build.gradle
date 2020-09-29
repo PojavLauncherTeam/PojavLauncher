@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 26
     dexOptions {
         javaMaxHeapSize "4g"
     }
