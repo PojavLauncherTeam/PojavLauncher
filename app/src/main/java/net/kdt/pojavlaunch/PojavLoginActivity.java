@@ -12,18 +12,18 @@ import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
+import com.kdt.filerapi.*;
 import com.kdt.filermod.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
+import libcore.io.*;
 import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 
 import android.app.AlertDialog;
-import com.kdt.filerapi.*;
-import android.system.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -425,8 +425,10 @@ public class PojavLoginActivity extends AppCompatActivity
             if (tarEntry.isSymbolicLink()) {
                 destPath.getParentFile().mkdirs();
                 try {
-                    android.system.Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
-                } catch (ErrnoException e) {
+                    // android.system.Os
+                    // Libcore one support all Android versions
+                    Libcore.os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                } catch (Throwable e) {
                     e.printStackTrace();
                 }
                 // unpackShell.writeToProcess("ln -s " + tarEntry.getName() + " " + tarEntry.getLinkName());

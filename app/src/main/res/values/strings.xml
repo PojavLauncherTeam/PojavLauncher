@@ -152,7 +152,7 @@
 	<string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
 	<string name="mcn_exit_confirm">Are you sure want to force close?</string>
 	<string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
-	<string name="mcn_check_fail_incompatiblearch">Architecture %s is incompatible with Java Runtime %s.</string>
+	<string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
 	<string name="mcn_check_fail_java">Could not start test Java VM. Check %s for more info.</string>
 	
 	<!-- MainActivity: Control buttons -->

@@ -5,6 +5,8 @@ import android.system.*;
 import android.util.*;
 import java.io.*;
 import net.kdt.pojavlaunch.prefs.*;
+import android.os.*;
+import libcore.io.*;
 
 public class JREUtils
 {
@@ -41,7 +43,7 @@ public class JREUtils
                 Log.i("jrelog-logcat","Clearing logcat");
                 new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
                 Log.i("jrelog-logcat","Starting logcat");
-                Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
+                java.lang.Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
 
                 // idk which better, both have a bug that printf(\n) in a single line
             /*
@@ -68,7 +70,7 @@ public class JREUtils
 		Log.i("jrelog-logcat","Logcat thread started");
     }
     
-	public static void setJavaEnvironment(Context ctx, int launchType) throws IOException, ErrnoException {
+	public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
 		String ldLibraryPath = (
@@ -91,7 +93,7 @@ public class JREUtils
 		// setEnvironment(launchType, "LIBGL_MIPMAP", "3");
 		setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
 		setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath);
-		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Libcore.os.getenv("PATH"));
         
         setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
         setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
@@ -103,11 +105,20 @@ public class JREUtils
 		// return ldLibraryPath;
 	}
 	
-	private static void setEnvironment(int launchType, String name, String value) throws ErrnoException, IOException {
+	private static void setEnvironment(int launchType, String name, String value) throws Throwable {
 		if (launchType == Tools.LTYPE_PROCESS) {
 			Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
 		} else {
-			Os.setenv(name, value, true);
+            // Libcore one support all Android versions
+            Libcore.os.setenv(name, value, true);
+            // Class.forName("libcore.io.Os").getMethod("setenv", String.class, String.class, boolean.class).invoke(null, name, value, true);
+/*
+            if (Build.VERSION.SDK_INT < 21) {
+                Class.forName("libcore.io.Os").getMethod("setenv").invoke(null, name, value, true);
+            } else {
+                Class.forName("android.system.Os").getMethod("setenv").invoke(null, name, value, true);
+            }
+*/
 		}
 	}
 	
