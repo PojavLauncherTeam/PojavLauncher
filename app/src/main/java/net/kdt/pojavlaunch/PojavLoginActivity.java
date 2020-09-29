@@ -23,6 +23,7 @@ import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 
 import android.app.AlertDialog;
+import org.apache.commons.io.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -343,6 +344,10 @@ public class PojavLoginActivity extends AppCompatActivity
             if (!isJavaRuntimeInstalled()) {
                 File jreTarFile = selectJreTarFile();
                 uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
+                IOUtils.copy(
+                    new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, "libawt_xawt.so")),
+                    new FileOutputStream(new File(Tools.homeJreDir, "lib/libawt_xawt.so"))
+                );
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
             }
 		}
