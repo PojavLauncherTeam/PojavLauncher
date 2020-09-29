@@ -53,9 +53,6 @@
     <string name="toast_permission_denied">Permisi untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
-    <string name="toast_shiftmode">Shift (sneak) button mode changed to %s</string>
-    <string name="toast_shiftmode_hold">Hold mode</string>
-    <string name="toast_shiftmode_toggle">Click toggle mode</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -160,8 +157,6 @@
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">PointerCapture Debug</string>
     <string name="control_customkey">Kirim keycode kustom</string>
-    <string name="control_shiftmodechg">Change Shift (Sneak) mode</string>
-    <string name="control_more4"></string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Key spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
