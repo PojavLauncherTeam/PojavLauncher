@@ -35,7 +35,6 @@
     <string name="warning_action_exit">Keluar</string>
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
     <string name="alerttitle_installmod">Pilih sebuah mod untuk dipasang</string>
     <!-- Error messages -->
@@ -51,7 +50,6 @@
     <string name="toast_permission_denied">Permisi untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
-    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -71,21 +69,15 @@
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
     <string name="mcl_options">Pilihan</string>
     <string name="mcl_option_modmgr">Mod manager (tidak berfungsi)</string>
-    <string name="mcl_option_modinstall">Install mod (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Install mod (with custom arguments)</string>
     <string name="mcl_option_checkupdate">Periksa ada update</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
     <string name="mcl_option_about">Tentang</string>
-    <string name="mcl_setting_title_uninstalljre">Uninstall Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This let you re-install Java Runtime</string>
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan oencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
-    <string name="mcl_setting_title_javaargs">JRE Launch arguments</string>
-    <string name="mcl_setting_subtitle_javaargs">Be careful, this may make game crash if modified without knowledge.</string>
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -102,7 +94,6 @@
     <string name="global_remove">Hapus</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Simpan</string>
-    <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">Tempat ini tidak boleh kosong.</string>
     <!--
 	<string name="mcl_about">
@@ -127,15 +118,11 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_javaexit_title">Application exited</string>
     <string name="mcn_exit_title">Dikeluarkan dari game</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_crash">Game crash terdeteksi! Pencet OK untuk keluar.</string>
     <string name="mcn_exit_errcrash">Tidak bisa mencari sumber crash, anda bisa mengabaikan ini.</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Could not start test Java VM. Check %s for more info.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Kontrol</string>
     <string name="control_toggle">GUI</string>
@@ -162,8 +149,6 @@
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Kirim keycode kustom</string>
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Key spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
