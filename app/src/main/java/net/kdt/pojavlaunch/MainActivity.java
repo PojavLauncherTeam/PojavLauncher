@@ -960,7 +960,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         appendlnToLog("--------- beggining with launcher debug");
         checkLWJGL3Installed();
         checkJavaArchitecture();
-        checkJavaArgsIsLaunchable();
+        // checkJavaArgsIsLaunchable();
         
 		JREUtils.redirectAndPrintJRELog(this);
 		Tools.launchMinecraft(this, mProfile, mVersionInfo);
@@ -978,7 +978,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             throw new RuntimeException(getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, releaseContent));
         }
     }
-    
+/*
     private void checkJavaArgsIsLaunchable() throws Throwable {
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
@@ -1012,14 +1012,14 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             // throw new RuntimeException(getString(R.string.mcn_check_fail_java));
         }
     }
-    
+*/
     private void checkLWJGL3Installed() {
         File lwjgl3dir = new File(Tools.MAIN_PATH, "lwjgl3");
-        if (!lwjgl3dir.exists() || lwjgl3dir.isFile()) {
+        if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {
             appendlnToLog("Error: LWJGL3 was not installed!");
             throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
         } else {
-            appendlnToLog("Info: LWJGL3 directory: " + lwjgl3dir.list());
+            appendlnToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
         }
     }
 	
