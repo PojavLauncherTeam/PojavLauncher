@@ -427,7 +427,7 @@ public class PojavLoginActivity extends AppCompatActivity
                 try {
                     // android.system.Os
                     // Libcore one support all Android versions
-                    Libcore.os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    libcore.io.Libcore.os.symlink(tarEntry.getName(), tarEntry.getLinkName());
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }

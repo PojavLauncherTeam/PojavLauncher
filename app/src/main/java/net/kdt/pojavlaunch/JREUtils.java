@@ -5,8 +5,6 @@ import android.system.*;
 import android.util.*;
 import java.io.*;
 import net.kdt.pojavlaunch.prefs.*;
-import android.os.*;
-import libcore.io.*;
 
 public class JREUtils
 {
@@ -93,7 +91,7 @@ public class JREUtils
 		// setEnvironment(launchType, "LIBGL_MIPMAP", "3");
 		setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
 		setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath);
-		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Libcore.os.getenv("PATH"));
+		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + libcore.io.Libcore.os.getenv("PATH"));
         
         setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
         setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
@@ -110,7 +108,7 @@ public class JREUtils
 			Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
 		} else {
             // Libcore one support all Android versions
-            Libcore.os.setenv(name, value, true);
+            libcore.io.Libcore.os.setenv(name, value, true);
             // Class.forName("libcore.io.Os").getMethod("setenv", String.class, String.class, boolean.class).invoke(null, name, value, true);
 /*
             if (Build.VERSION.SDK_INT < 21) {
