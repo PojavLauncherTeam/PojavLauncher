@@ -51,7 +51,7 @@
     <string name="toast_permission_denied">К каталогу нет права на чтение и запись!</string>
     <string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите разработчику.\nОшибка: %s</string>
     <string name="toast_optifine_success">Установка завершена</string>
-    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
+    <string name="toast_uninstalljre_done">Успешное удаление Java Runtime</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -133,7 +133,7 @@
     <string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
     <string name="mcn_exit_confirm">Вы точно хотите закрыть игру немедленно?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 не был установлен!</string>
     <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
     <string name="mcn_check_fail_java">Could not start test Java VM. Check %s for more info.</string>
     <!-- MainActivity: Control buttons -->
