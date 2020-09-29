@@ -125,7 +125,11 @@ public class JREUtils
     public static Object getBridgeOs(String methodName, Object... objs) throws Throwable {
         Class[] classes = new Class[objs.length];
         for (int i = 0; i < classes.length; i++) {
-            classes[i] = objs[i].getClass();
+            if (objs[i] instanceof Boolean) {
+                classes[i] = boolean.class;
+            } else {
+                classes[i] = objs[i].getClass();
+            }
         }
         if (Build.VERSION.SDK_INT < 21) {
             Class libcoreClass = Class.forName("libcore.io.Libcore");
