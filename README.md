@@ -18,6 +18,7 @@ Not implemented yet.
 ## Known issues
 - Some Huawei devices can't run Minecraft or OptiFine.
 - Can't run multiple versions at same time.
+- V2 will not work on Android 6 and return error `ClassNotFoundException`.
 
 ## FAQ
 ### • Unable to drag item in inventory?
@@ -139,8 +140,6 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - (v2) LegacyLauncher: (unknown license).<br>
 - (all) Android Support Libraries & DX Dexer: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
 - (all) gl4es: [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
-- (v3) BusyBox: [GNU GPLv2 License](https://busybox.net/license.html).<br>
 - (v3) OpenJDK: [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
 - (v3) PRoot: [GNU GPLv2 License](https://github.com/termux/proot/blob/master/COPYING).<br>
-- (v3) XVnc: [GNU GPLv3 License](https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt).
 - (all) LWJGL 2: [Legacy LWJGL License](http://legacy.lwjgl.org/license.php.html).<br>
