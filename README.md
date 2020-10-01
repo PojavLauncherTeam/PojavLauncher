@@ -1,4 +1,5 @@
 [![badge](https://api.travis-ci.com/PojavLauncherTeam/PojavLauncher.svg?branch=gl4es)](https://travis-ci.com/github/PojavLauncherTeam/PojavLauncher)
+[![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
 # PojavLauncher
 An open source Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11
 (Codes has not been sorted yet, it contains ton of classes without packing to module).
