@@ -155,22 +155,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 
 			setTitle("Minecraft " + mProfile.getVersion());
 
-			//System.loadLibrary("gl4es");
-			/*
-			if (mVersionInfo.arguments != null) {
-				System.loadLibrary("lwjgl32");
-				System.loadLibrary("lwjgl_opengl32");
-				System.loadLibrary("lwjgl_stb32");
-			}
-			*/
-			
-			if (mVersionInfo.arguments == null) {
-				// Minecraft 1.12 and below
-				
-				// TODO uncomment after fix
-				// SecondaryDexLoader.install(getClassLoader(), Arrays.asList(new File[]{new File(Tools.libraries + "/" + Tools.artifactToPath("org.lwjgl", "lwjglboardwalk", "2.9.1"))}), optDir);
-			}
-			
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 			CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
 			CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
