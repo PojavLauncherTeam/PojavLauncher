@@ -95,7 +95,8 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	private void viewInit() {
-		setContentView(R.layout.launcher_main);
+        setContentView(R.layout.launcher_main_v3);
+		// setContentView(R.layout.launcher_main);
 
 		fullTab = (LinearLayout) findViewById(R.id.launchermainFragmentTabView);
 		tabLayout = (TabLayout) findViewById(R.id.launchermainTabLayout);
