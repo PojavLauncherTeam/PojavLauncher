@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.kdt.pojavlaunch.launcheruiv3;
+package android.support.design.widget;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_DRAGGING;
@@ -2159,7 +2159,7 @@ public class VerticalTabLayout extends ScrollView {
      * A {@link TabLayout.OnTabSelectedListener} class which contains the necessary calls back
      * to the provided {@link ViewPager} so that the tab position is kept in sync.
      */
-    public static class ViewPagerOnTabSelectedListener implements TabLayout.OnTabSelectedListener {
+    public static class ViewPagerOnTabSelectedListener implements VerticalTabLayout.OnTabSelectedListener {
         private final ViewPager mViewPager;
 
         public ViewPagerOnTabSelectedListener(ViewPager viewPager) {
@@ -2167,17 +2167,17 @@ public class VerticalTabLayout extends ScrollView {
         }
 
         @Override
-        public void onTabSelected(TabLayout.Tab tab) {
+        public void onTabSelected(VerticalTabLayout.Tab tab) {
             mViewPager.setCurrentItem(tab.getPosition());
         }
 
         @Override
-        public void onTabUnselected(TabLayout.Tab tab) {
+        public void onTabUnselected(VerticalTabLayout.Tab tab) {
             // No-op
         }
 
         @Override
-        public void onTabReselected(TabLayout.Tab tab) {
+        public void onTabReselected(VerticalTabLayout.Tab tab) {
             // No-op
         }
     }
