@@ -27,6 +27,7 @@ import org.lwjgl.glfw.*;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -34,8 +35,13 @@ public class MCLauncherActivity extends AppCompatActivity
 {
 	//private FragmentTabHost mTabHost;
 	private LinearLayout fullTab;
+    /*
 	private PojavLauncherViewPager viewPager;
 	private VerticalTabLayout tabLayout;
+    */
+    
+    private ViewPager viewPager;
+	private TabLayout tabLayout;
 
 	private TextView tvVersion, tvUsernameView;
 	private Spinner versionSelector;
@@ -95,8 +101,8 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	private void viewInit() {
-        setContentView(R.layout.launcher_main_v3);
-		// setContentView(R.layout.launcher_main);
+        // setContentView(R.layout.launcher_main_v3);
+		setContentView(R.layout.launcher_main);
 
 		fullTab = findViewById(R.id.launchermainFragmentTabView);
 		tabLayout = findViewById(R.id.launchermainTabLayout);
