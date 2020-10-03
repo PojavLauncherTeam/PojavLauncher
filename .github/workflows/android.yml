@@ -15,18 +15,20 @@ jobs:
         java-version: 1.8
     - name: Build 64-bit APK with Gradle
       run: |
+        mkdir -p out
         chmod +x gradlew 
         ./gradlew clean assembleDebug
-        mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/app-debug64.apk
+        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-64bit.apk
+
     - name: Build 32-bit APK with Gradle
       run: | 
         replace="\, \"x86_64\" , \"arm64-v8a\""
         sed -i "s/$replace//g" app/build.gradle
         ./gradlew clean assembleDebug
-        mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/app-debug32.apk
+        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-32bit.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
           name: app-debug
-          path: app/build/outputs/apk/debug/
+          path: out
