@@ -28,7 +28,9 @@ android {
         multiDexEnabled true //important
 
         ndk {
-            abiFilters "armeabi-v7a" , "x86" // , "x86_64" , "arm64-v8a"
+            // Do not edit below as 32bit and 64bit are built separately
+            // or ask @khanhduytran0 before edit below, as the text replacer may be broken.
+            abiFilters "armeabi-v7a" , "x86" , "x86_64" , "arm64-v8a"
         }
     }
 	
