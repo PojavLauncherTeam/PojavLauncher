@@ -13,13 +13,14 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Gradle
+    - name: Build 64-bit APK with Gradle
       run: |
         chmod +x gradlew 
-        
         ./gradlew clean assembleDebug
         mv app/build/outputs/apk/debug/app-debug-64bit.apk
-        
+    - name: Build 32-bit APK with Gradle
+      run: |
+        chmod +x gradlew 
         replace="\, \"x86_64\" , \"arm64-v8a\""
         sed -i "s/$replace//g" app/build.gradle
         ./gradlew clean assembleDebug
