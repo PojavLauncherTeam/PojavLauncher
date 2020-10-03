@@ -3,7 +3,7 @@
 A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
 
 ## This branch?
-- Attempt to run Minecraft in OpenJDK, different a bit with Boardwalk 2.
+- Attempt to run Minecraft in OpenJDK, similar way with Boardwalk 2.
 
 ## About OpenJDK 9 Java Runtime Mobile
 Build script: [PojavLauncherTeam/android-openjdk-build-multiarch](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch)<br>
