@@ -17,14 +17,13 @@ jobs:
       run: |
         chmod +x gradlew 
         ./gradlew clean assembleDebug
-        mv app/build/outputs/apk/debug/app-debug-64bit.apk
+        mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/app-debug-64bit.apk
     - name: Build 32-bit APK with Gradle
-      run: |
-        chmod +x gradlew 
+      run: | 
         replace="\, \"x86_64\" , \"arm64-v8a\""
         sed -i "s/$replace//g" app/build.gradle
         ./gradlew clean assembleDebug
-        mv app/build/outputs/apk/debug/app-debug-32bit.apk
+        mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/app-debug-32bit.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
