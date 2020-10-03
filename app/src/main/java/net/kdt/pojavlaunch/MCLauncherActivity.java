@@ -4,10 +4,9 @@ import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
-import android.support.design.widget.*;
 import android.support.v4.app.*;
-import android.support.v4.view.*;
 import android.support.v7.app.*;
+import android.text.*;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
@@ -17,6 +16,7 @@ import com.kdt.filerapi.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
+import net.kdt.pojavlaunch.launcheruiv3.*;
 import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.util.*;
@@ -26,7 +26,6 @@ import org.lwjgl.glfw.*;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -34,8 +33,8 @@ public class MCLauncherActivity extends AppCompatActivity
 {
 	//private FragmentTabHost mTabHost;
 	private LinearLayout fullTab;
-	private ViewPager viewPager;
-	private TabLayout tabLayout;
+	private PojavLauncherViewPager viewPager;
+	private VerticalTabLayout tabLayout;
 
 	private TextView tvVersion, tvUsernameView;
 	private Spinner versionSelector;
@@ -98,9 +97,9 @@ public class MCLauncherActivity extends AppCompatActivity
         setContentView(R.layout.launcher_main_v3);
 		// setContentView(R.layout.launcher_main);
 
-		fullTab = (LinearLayout) findViewById(R.id.launchermainFragmentTabView);
-		tabLayout = (TabLayout) findViewById(R.id.launchermainTabLayout);
-		viewPager = (ViewPager) findViewById(R.id.launchermainTabPager);
+		fullTab = findViewById(R.id.launchermainFragmentTabView);
+		tabLayout = findViewById(R.id.launchermainTabLayout);
+		viewPager = findViewById(R.id.launchermainTabPager);
 
 		consoleView = new ConsoleFragment();
 		crashView = new CrashFragment();
