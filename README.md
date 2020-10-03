@@ -10,9 +10,9 @@ Build script: [PojavLauncherTeam/android-openjdk-build-multiarch](https://github
 Source code: http://hg.openjdk.java.net/mobile/jdk9 <br>
 Architectures:
 - For ARMv7 (aarch32): **working**.
-- For ARM64 (aarch64): **working, but OpenGL doesn't**.
+- For ARM64 (aarch64): **working**.
 - For x86 (i\*86): **working**.
-- For x86_64 (amd64): **working, but OpenGL doesn't** (same as aarch64).
+- For x86_64 (amd64): **working**.
 
 ## Current status
 - [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
