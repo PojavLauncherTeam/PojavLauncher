@@ -18,12 +18,13 @@ Architectures:
 - [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
 - [x] **Temporary removed** ~~JVDroid OpenJDK 11 (32 and 64-bit ARM and x86). Partial, no error `can't lock mutex`, but now exit with none output.~~
 - [x] OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.
-- [ ] AWT/Swing for mod installer. Will try own graphics environment~~use `Caciocavallo` project~~.
+- [x] Mod installer headless
+- [ ] Mod installer with GUI. Will try own graphics environment~~use `Caciocavallo` project~~.
 - [x] OpenGL in OpenJDK environment
 - [x] OpenAL (work on most devices)
 - [x] Input keyboard and mouse events from ART to OpenJDK environment
-- [ ] Support Minecraft 1.12 and below.
-- [x] Support Minecraft 1.13 and above. Used GLFW stub.
+- [x] Support Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
+- [x] Support Minecraft 1.13 and above. Used [GLFW stub](https://github.com/PojavLauncherTeam/lwjgl3-glfw-java).
 - [ ] More...
 
 ## License
