@@ -77,7 +77,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * VerticalTabLayout provides a horizontal layout to display tabs.
+ * VerticalTabLayout provides a vertical layout to display tabs.
  *
  * <p>Population of the tabs to display is
  * done through {@link Tab} instances. You create tabs via {@link #newTab()}. From there you can
@@ -299,12 +299,12 @@ public class VerticalTabLayout extends ScrollView {
         ThemeUtils.checkAppCompatTheme(context);
 
         // Disable the Scroll Bar
-        setVerticalScrollBarEnabled(false);
+        // setVerticalScrollBarEnabled(false);
 
         // Add the TabStrip
         mTabStrip = new SlidingTabStrip(context);
         super.addView(mTabStrip, 0, new ScrollView.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+                          LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabLayout,
                 defStyleAttr, R.style.Widget_Design_TabLayout);
@@ -982,21 +982,18 @@ public class VerticalTabLayout extends ScrollView {
     }
 
     private LinearLayout.LayoutParams createLayoutParamsForTabs() {
-        // Horizontal: WRAP_CONTENT, MATCH_PARENT
         final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         updateTabViewLayoutParams(lp);
         return lp;
     }
 
     private void updateTabViewLayoutParams(LinearLayout.LayoutParams lp) {
         if (mMode == MODE_FIXED && mTabGravity == GRAVITY_FILL) {
-            // Horizontal: width 0
-            lp.height = 0;
+            lp.width = 0;
             lp.weight = 1;
         } else {
-            // Horizontal: width WRAP_CONTENT
-            lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            lp.width = LinearLayout.LayoutParams.WRAP_CONTENT;
             lp.weight = 0;
         }
     }
@@ -1009,17 +1006,15 @@ public class VerticalTabLayout extends ScrollView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // If we have a MeasureSpec which allows us to decide our height, try and use the default
         // height
-        
-        // Horizintal: idealHeight
         final int idealHeight = dpToPx(getDefaultHeight()) + getPaddingTop() + getPaddingBottom();
-        // final int idealWidth = dpToPx(getDefaultHeight()) + getPaddingLeft() + getPaddingRight();
+
         switch (MeasureSpec.getMode(heightMeasureSpec)) {
             case MeasureSpec.AT_MOST:
                 heightMeasureSpec = MeasureSpec.makeMeasureSpec(
                         Math.min(idealHeight, MeasureSpec.getSize(heightMeasureSpec)),
                         MeasureSpec.EXACTLY);
                 break;
-            case MeasureSpec.UNSPECIFIED:
+            case 0 /* MeasureSpec.UNSPECIFIED */:
                 heightMeasureSpec = MeasureSpec.makeMeasureSpec(idealHeight, MeasureSpec.EXACTLY);
                 break;
         }
@@ -1216,8 +1211,7 @@ public class VerticalTabLayout extends ScrollView {
 
         switch (mMode) {
             case MODE_FIXED:
-                // Horizontal: CENTER_HORIZONTAL
-                mTabStrip.setGravity(Gravity.CENTER_VERTICAL);
+                mTabStrip.setGravity(Gravity.CENTER_HORIZONTAL);
                 break;
             case MODE_SCROLLABLE:
                 mTabStrip.setGravity(GravityCompat.START);
@@ -1798,14 +1792,19 @@ public class VerticalTabLayout extends ScrollView {
 
         private int mLayoutDirection = -1;
 
-        private int mIndicatorLeft = -1;
-        private int mIndicatorRight = -1;
+        private int mIndicatorTop = -1;
+        private int mIndicatorBottom = -1;
 
         private ValueAnimator mIndicatorAnimator;
 
         SlidingTabStrip(Context context) {
             super(context);
             setWillNotDraw(false);
+
+            
+            // Easy way to get vertical tab view
+            setOrientation(VERTICAL);
+            
             mSelectedIndicatorPaint = new Paint();
         }
 
@@ -1938,32 +1937,32 @@ public class VerticalTabLayout extends ScrollView {
 
         private void updateIndicatorPosition() {
             final View selectedTitle = getChildAt(mSelectedPosition);
-            int left, right;
+            int top, bottom;
 
             if (selectedTitle != null && selectedTitle.getWidth() > 0) {
-                left = selectedTitle.getLeft();
-                right = selectedTitle.getRight();
+                top = selectedTitle.getTop();
+                bottom = selectedTitle.getBottom();
 
                 if (mSelectionOffset > 0f && mSelectedPosition < getChildCount() - 1) {
                     // Draw the selection partway between the tabs
                     View nextTitle = getChildAt(mSelectedPosition + 1);
-                    left = (int) (mSelectionOffset * nextTitle.getLeft() +
-                            (1.0f - mSelectionOffset) * left);
-                    right = (int) (mSelectionOffset * nextTitle.getRight() +
-                            (1.0f - mSelectionOffset) * right);
+                    top = (int) (mSelectionOffset * nextTitle.getTop() +
+                            (1.0f - mSelectionOffset) * top);
+                    bottom = (int) (mSelectionOffset * nextTitle.getBottom() +
+                            (1.0f - mSelectionOffset) * bottom);
                 }
             } else {
-                left = right = -1;
+                top = bottom = -1;
             }
 
-            setIndicatorPosition(left, right);
+            setIndicatorPosition(top, bottom);
         }
 
-        void setIndicatorPosition(int left, int right) {
-            if (left != mIndicatorLeft || right != mIndicatorRight) {
+        void setIndicatorPosition(int top, int bottom) {
+            if (top != mIndicatorTop || bottom != mIndicatorBottom) {
                 // If the indicator's left/right has changed, invalidate
-                mIndicatorLeft = left;
-                mIndicatorRight = right;
+                mIndicatorTop = top;
+                mIndicatorBottom = bottom;
                 ViewCompat.postInvalidateOnAnimation(this);
             }
         }
@@ -1983,36 +1982,40 @@ public class VerticalTabLayout extends ScrollView {
                 return;
             }
 
-            final int targetLeft = targetView.getLeft();
-            final int targetRight = targetView.getRight();
-            final int startLeft;
-            final int startRight;
+            final int targetTop = targetView.getTop();
+            final int targetBottom = targetView.getBottom();
+            final int startTop;
+            final int startBottom;
 
             if (Math.abs(position - mSelectedPosition) <= 1) {
                 // If the views are adjacent, we'll animate from edge-to-edge
-                startLeft = mIndicatorLeft;
-                startRight = mIndicatorRight;
+                startTop = mIndicatorTop;
+                startBottom = mIndicatorBottom;
             } else {
                 // Else, we'll just grow from the nearest edge
                 final int offset = dpToPx(MOTION_NON_ADJACENT_OFFSET);
                 if (position < mSelectedPosition) {
                     // We're going end-to-start
+                /*
                     if (isRtl) {
-                        startLeft = startRight = targetLeft - offset;
+                        startTop = startBottom = targetTop - offset;
                     } else {
-                        startLeft = startRight = targetRight + offset;
-                    }
+                */
+                        startTop = startBottom = targetBottom + offset;
+                //  }
                 } else {
                     // We're going start-to-end
+                /*
                     if (isRtl) {
                         startLeft = startRight = targetRight + offset;
                     } else {
-                        startLeft = startRight = targetLeft - offset;
-                    }
+                */
+                    startTop = startBottom = targetTop - offset;
+                //  }
                 }
             }
 
-            if (startLeft != targetLeft || startRight != targetRight) {
+            if (startTop != targetTop || startBottom != targetBottom) {
                 ValueAnimator animator = mIndicatorAnimator = new ValueAnimator();
                 animator.setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
                 animator.setDuration(duration);
@@ -2022,8 +2025,8 @@ public class VerticalTabLayout extends ScrollView {
                     public void onAnimationUpdate(ValueAnimator animator) {
                         final float fraction = animator.getAnimatedFraction();
                         setIndicatorPosition(
-                                AnimationUtils.lerp(startLeft, targetLeft, fraction),
-                                AnimationUtils.lerp(startRight, targetRight, fraction));
+                                AnimationUtils.lerp(startTop, targetTop, fraction),
+                                AnimationUtils.lerp(startBottom, targetBottom, fraction));
                     }
                 });
                 animator.addListener(new AnimatorListenerAdapter() {
@@ -2041,14 +2044,10 @@ public class VerticalTabLayout extends ScrollView {
         public void draw(Canvas canvas) {
             super.draw(canvas);
 
-            // Thick colored underline below the current selection
-            if (mIndicatorLeft >= 0 && mIndicatorRight > mIndicatorLeft) {
-                canvas.drawRect(mIndicatorLeft, getHeight() - mSelectedIndicatorHeight,
-                        mIndicatorRight, getHeight(), mSelectedIndicatorPaint);
-                        
-                // ADD: Try the VERTICAL
-                canvas.drawRect(mIndicatorLeft, getWidth() - mSelectedIndicatorHeight,
-                                mIndicatorRight, getWidth(), mSelectedIndicatorPaint);
+            // Thick colored line at the left side of the current selection
+            if (mIndicatorTop >= 0 && mIndicatorBottom > mIndicatorTop) { 
+                canvas.drawRect(0, mIndicatorTop,
+                        mSelectedIndicatorHeight, mIndicatorBottom, mSelectedIndicatorPaint);
             }
         }
     }
