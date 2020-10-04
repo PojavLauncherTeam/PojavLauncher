@@ -17,7 +17,6 @@ import com.kdt.filerapi.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
-import net.kdt.pojavlaunch.launcheruiv3.*;
 import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.util.*;
@@ -40,7 +39,7 @@ public class PojavLauncherActivity extends AppCompatActivity
      private VerticalTabLayout tabLayout;
      */
 
-    private PojavLauncherViewPager viewPager;
+    private ViewPager viewPager;
     private VerticalTabLayout tabLayout;
 
     private TextView tvVersion, tvUsernameView;

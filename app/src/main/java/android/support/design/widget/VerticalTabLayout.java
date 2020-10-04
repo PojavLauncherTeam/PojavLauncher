@@ -982,18 +982,21 @@ public class VerticalTabLayout extends ScrollView {
     }
 
     private LinearLayout.LayoutParams createLayoutParamsForTabs() {
+        // Horizontal: WRAP_CONTENT, MATCH_PARENT
         final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         updateTabViewLayoutParams(lp);
         return lp;
     }
 
     private void updateTabViewLayoutParams(LinearLayout.LayoutParams lp) {
         if (mMode == MODE_FIXED && mTabGravity == GRAVITY_FILL) {
-            lp.width = 0;
+            // Horizontal: width 0
+            lp.height = 0;
             lp.weight = 1;
         } else {
-            lp.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            // Horizontal: width WRAP_CONTENT
+            lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
             lp.weight = 0;
         }
     }
@@ -1006,7 +1009,10 @@ public class VerticalTabLayout extends ScrollView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // If we have a MeasureSpec which allows us to decide our height, try and use the default
         // height
+        
+        // Horizintal: idealHeight
         final int idealHeight = dpToPx(getDefaultHeight()) + getPaddingTop() + getPaddingBottom();
+        // final int idealWidth = dpToPx(getDefaultHeight()) + getPaddingLeft() + getPaddingRight();
         switch (MeasureSpec.getMode(heightMeasureSpec)) {
             case MeasureSpec.AT_MOST:
                 heightMeasureSpec = MeasureSpec.makeMeasureSpec(
@@ -1210,7 +1216,8 @@ public class VerticalTabLayout extends ScrollView {
 
         switch (mMode) {
             case MODE_FIXED:
-                mTabStrip.setGravity(Gravity.CENTER_HORIZONTAL);
+                // Horizontal: CENTER_HORIZONTAL
+                mTabStrip.setGravity(Gravity.CENTER_VERTICAL);
                 break;
             case MODE_SCROLLABLE:
                 mTabStrip.setGravity(GravityCompat.START);
@@ -2038,6 +2045,10 @@ public class VerticalTabLayout extends ScrollView {
             if (mIndicatorLeft >= 0 && mIndicatorRight > mIndicatorLeft) {
                 canvas.drawRect(mIndicatorLeft, getHeight() - mSelectedIndicatorHeight,
                         mIndicatorRight, getHeight(), mSelectedIndicatorPaint);
+                        
+                // ADD: Try the VERTICAL
+                canvas.drawRect(mIndicatorLeft, getWidth() - mSelectedIndicatorHeight,
+                                mIndicatorRight, getWidth(), mSelectedIndicatorPaint);
             }
         }
     }
