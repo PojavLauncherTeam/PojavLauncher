@@ -17,7 +17,6 @@ import com.kdt.filerapi.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
-import net.kdt.pojavlaunch.launcheruiv3.*;
 import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.util.*;
