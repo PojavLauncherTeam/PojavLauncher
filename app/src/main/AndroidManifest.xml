@@ -41,6 +41,11 @@
 			android:name=".MCLauncherActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"/>
 
+        <activity
+            android:screenOrientation="sensorLandscape"
+            android:name=".PojavLauncherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        
 		<activity
 			android:screenOrientation="sensorLandscape"
 			android:name=".InstallModActivity"
