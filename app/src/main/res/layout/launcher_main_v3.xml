@@ -7,7 +7,7 @@
 	android:gravity="center_horizontal">
 
 	<LinearLayout
-		android:id="@+id/launchermainFragmentTabView"
+		android:id="@+id/launchermain_layout_leftmenu"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_weight="1.0"
@@ -47,18 +47,26 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_width="match_parent"
 		android:orientation="vertical"
 		android:layout_weight="1.0">
 
-        <android.support.v4.view.ViewPager
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/launchermainTabPager"
-            android:background="#272727"/>
-        
+		<LinearLayout
+            android:id="@+id/launchermain_layout_viewpager"
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:orientation="vertical"
+			android:layout_weight="1.0">
+
+			<android.support.v4.view.ViewPager
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/launchermainTabPager"
+				android:background="#272727"/>
+
+		</LinearLayout>
+
 		<LinearLayout
 			android:orientation="vertical"
 			android:layout_width="match_parent"

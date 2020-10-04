@@ -33,7 +33,7 @@ import android.support.v4.view.*;
 public class PojavLauncherActivity extends AppCompatActivity
 {
     //private FragmentTabHost mTabHost;
-    private LinearLayout fullTab;
+    private LinearLayout fullTab, leftTab;
     /*
      private PojavLauncherViewPager viewPager;
      private VerticalTabLayout tabLayout;
@@ -91,19 +91,16 @@ public class PojavLauncherActivity extends AppCompatActivity
     // DEBUG
     //new android.support.design.widget.NavigationView(this);
 
-    private String getStr(int id, Object... val) {
-        if (val != null && val.length > 0) {
-            return getResources().getString(id, val);
-        } else {
-            return getResources().getString(id);
-        }
-    }
-
     private void viewInit() {
         setContentView(R.layout.launcher_main_v3);
         // setContentView(R.layout.launcher_main);
 
-        fullTab = findViewById(R.id.launchermainFragmentTabView);
+        leftTab = findViewById(R.id.launchermain_layout_leftmenu);
+        leftTab.setLayoutParams(new LinearLayout.LayoutParams(
+            CallbackBridge.windowWidth / 4,
+            LinearLayout.LayoutParams.MATCH_PARENT));
+        
+        fullTab = findViewById(R.id.launchermain_layout_viewpager);
         tabLayout = findViewById(R.id.launchermainTabLayout);
         viewPager = findViewById(R.id.launchermainTabPager);
 
@@ -111,10 +108,9 @@ public class PojavLauncherActivity extends AppCompatActivity
         crashView = new CrashFragment();
 
         viewPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-        viewPageAdapter.addFragment(new LauncherFragment(), getStr(R.string.mcl_tab_news));
-        viewPageAdapter.addFragment(consoleView, getStr(R.string.mcl_tab_console));
-        viewPageAdapter.addFragment(crashView, getStr(R.string.mcl_tab_crash));
+        viewPageAdapter.addFragment(new LauncherFragment(), getString(R.string.mcl_tab_news));
+        viewPageAdapter.addFragment(consoleView, getString(R.string.mcl_tab_console));
+        viewPageAdapter.addFragment(crashView, getString(R.string.mcl_tab_crash));
 
         viewPager.setAdapter(viewPageAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -130,7 +126,7 @@ public class PojavLauncherActivity extends AppCompatActivity
         } catch(Exception e) {
             //Tools.throwError(this, e);
             e.printStackTrace();
-            Toast.makeText(this, getStr(R.string.toast_login_error, e.getMessage()), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_login_error, e.getMessage()), Toast.LENGTH_LONG).show();
             finish();
         }
 
@@ -161,7 +157,7 @@ public class PojavLauncherActivity extends AppCompatActivity
 
         try {
             if (fVers.listFiles().length < 1) {
-                throw new Exception(getStr(R.string.error_no_version));
+                throw new Exception(getString(R.string.error_no_version));
             }
 
             for (File fVer : fVers.listFiles()) {
@@ -169,7 +165,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                     versions.add(fVer.getName());
             }
         } catch (Exception e) {
-            versions.add(getStr(R.string.global_error) + ":");
+            versions.add(getString(R.string.global_error) + ":");
             versions.add(e.getMessage());
 
         } finally {
@@ -241,7 +237,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                             PojavProfile.setCurrentProfile(PojavLauncherActivity.this, MCProfile.build(profile));
                         }
 
-                        tvVersion.setText(getStr(R.string.mcl_version_msg, version));
+                        tvVersion.setText(getString(R.string.mcl_version_msg, version));
                     }
 
                     @Override
@@ -266,7 +262,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                     }  
                 });  
 
-            tvVersion.setText(getStr(R.string.mcl_version_msg) + versionSelector.getSelectedItem());
+            tvVersion.setText(getString(R.string.mcl_version_msg) + versionSelector.getSelectedItem());
         }
     }
 
@@ -548,7 +544,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                             outLib.getParentFile().mkdirs();
 
                             if (!outLib.exists()) {
-                                publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
+                                publishProgress("1", getString(R.string.mcl_launch_download_lib, libItem.name));
 
                                 boolean skipIfFailed = false;
 
@@ -578,7 +574,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                         }
                     }
 
-                    publishProgress("1", getStr(R.string.mcl_launch_download_client, p1[0]));
+                    publishProgress("1", getString(R.string.mcl_launch_download_client, p1[0]));
                     Tools.downloadFile(
                         verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
                         inputPath,
@@ -589,7 +585,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                     throw e;
                 }
 
-                publishProgress("1", getStr(R.string.mcl_launch_cleancache));
+                publishProgress("1", getString(R.string.mcl_launch_cleancache));
                 // new File(inputPath).delete();
 
                 for (File f : new File(Tools.versnDir).listFiles()) {
@@ -609,7 +605,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                             playButton.setEnabled(true);
                         }
                     });
-                publishProgress("1", getStr(R.string.mcl_launch_download_assets));
+                publishProgress("1", getString(R.string.mcl_launch_download_assets));
                 try {
                     downloadAssets(assets, verInfo.assets, new File(Tools.ASSETS_PATH));
                 } catch (Exception e) {
@@ -743,7 +739,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                     }
 
                     downloadAsset(asset, objectsDir);
-                    publishProgress("1", getStr(R.string.mcl_launch_downloading, assetsObjects.keySet().toArray(new String[0])[downloadedSs]));
+                    publishProgress("1", getString(R.string.mcl_launch_downloading, assetsObjects.keySet().toArray(new String[0])[downloadedSs]));
                     downloadedSs++;
                 }
                 hasDownloadedFile.getParentFile().mkdirs();
