@@ -18,7 +18,7 @@
 			android:layout_weight="1.0"
 			android:orientation="horizontal">
 
-			<net.kdt.pojavlaunch.launcheruiv3.PojavLauncherTabLayout
+			<android.support.design.widget.VerticalTabLayout
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
 				android:id="@+id/launchermainTabLayout"/>
