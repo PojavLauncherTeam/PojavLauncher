@@ -35,35 +35,38 @@ public class JREUtils
         }
 	}
 	
-    public static void redirectAndPrintJRELog(LoggableActivity act) {
+    public static void redirectAndPrintJRELog(final LoggableActivity act) {
         JREUtils.redirectLogcat();
         Log.v("jrelog","Log starts here");
-        Thread t = new Thread(() -> {
-            try {
-                Log.i("jrelog-logcat","Clearing logcat");
-                new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
-                Log.i("jrelog-logcat","Starting logcat");
-                java.lang.Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    Log.i("jrelog-logcat","Clearing logcat");
+                    new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
+                    Log.i("jrelog-logcat","Starting logcat");
+                    java.lang.Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
 
-                // idk which better, both have a bug that printf(\n) in a single line
-            /*
-                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    act.appendlnToLog(line);
-                }
-            */
-                
-                byte[] buf = new byte[512];
-                int len;
-                while ((len = p.getInputStream().read(buf)) != -1) {
-                    act.appendToLog(new String(buf, 0, len));
-                }
-            } catch (IOException e) {
-                Log.e("jrelog-logcat", "IOException on logging thread");
-                e.printStackTrace();
+                    // idk which better, both have a bug that printf(\n) in a single line
+                    /*
+                     BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                     String line;
+                     while ((line = reader.readLine()) != null) {
+                     act.appendlnToLog(line);
+                     }
+                     */
 
-                act.appendlnToLog("IOException on logging thread:\n" + Log.getStackTraceString(e));
+                    byte[] buf = new byte[512];
+                    int len;
+                    while ((len = p.getInputStream().read(buf)) != -1) {
+                        act.appendToLog(new String(buf, 0, len));
+                    }
+                } catch (IOException e) {
+                    Log.e("jrelog-logcat", "IOException on logging thread");
+                    e.printStackTrace();
+
+                    act.appendlnToLog("IOException on logging thread:\n" + Log.getStackTraceString(e));
+                }
             }
         });
         t.start();
