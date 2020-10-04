@@ -5,7 +5,7 @@ public class PojavV2ActivityManager
 {
 	public static String CATEGORY_LAUNCHER = "launcher";
 	public static Class<?> LAUNCHER_V1 = MCLauncherActivity.class;
-	public static Class<?> LAUNCHER_V2 = LAUNCHER_V1; // PojavLauncherActivity.class;
+	public static Class<?> LAUNCHER_V2 = PojavLauncherActivity.class;
 
 	public static boolean setLauncherRemakeClass(Context context, Class<?> cls) {
 		return setLauncherRemakeVer(context, cls.getName().equals(LAUNCHER_V1.getName()) ? 0 : 1);

@@ -494,18 +494,16 @@ public class PojavLoginActivity extends AppCompatActivity
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 		if (Tools.enableDevFeatures) {
-			/*
-			builder.setNegativeButton("Toggle v2", new DialogInterface.OnClickListener(){
+			builder.setNegativeButton("Toggle UI v2", new DialogInterface.OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface p1, int p2)
 					{
-						int ver = PojavV2ActivityManager.getLauncherRemakeInt(MCLoginActivity.this) == 0 ? 1 : 0;
-						PojavV2ActivityManager.setLauncherRemakeVer(MCLoginActivity.this, ver);
-						Toast.makeText(MCLoginActivity.this, "Changed to use v" + (ver + 1), Toast.LENGTH_SHORT).show();
+						int ver = PojavV2ActivityManager.getLauncherRemakeInt(PojavLoginActivity.this) == 0 ? 1 : 0;
+						PojavV2ActivityManager.setLauncherRemakeVer(PojavLoginActivity.this, ver);
+						Toast.makeText(PojavLoginActivity.this, "Changed to use v" + (ver + 1), Toast.LENGTH_SHORT).show();
 					}
 				});
-				*/		
 		}
 		
 		builder.setPositiveButton(android.R.string.cancel, null);
