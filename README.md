@@ -3,16 +3,16 @@
 A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
 
 ## This branch?
-- Attempt to run Minecraft in OpenJDK, different a bit with Boardwalk 2.
+- Attempt to run Minecraft in OpenJDK, similar way with Boardwalk 2.
 
 ## About OpenJDK 9 Java Runtime Mobile
 Build script: [PojavLauncherTeam/android-openjdk-build-multiarch](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch)<br>
 Source code: http://hg.openjdk.java.net/mobile/jdk9 <br>
 Architectures:
 - For ARMv7 (aarch32): **working**.
-- For ARM64 (aarch64): **working, but OpenGL doesn't**.
+- For ARM64 (aarch64): **working**.
 - For x86 (i\*86): **working**.
-- For x86_64 (amd64): **working, but OpenGL doesn't** (same as aarch64).
+- For x86_64 (amd64): **working**.
 
 ## Current status
 - [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
