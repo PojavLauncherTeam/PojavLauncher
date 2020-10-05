@@ -51,7 +51,7 @@ Java_java_awt_AWTEvent_initIDs(JNIEnv *env, jclass cls)
 JNIEXPORT void JNICALL
 Java_java_awt_event_InputEvent_initIDs(JNIEnv *env, jclass cls)
 {
-    CHECK_NULL(inputEventIDs.modifiers = (*env)->GetFieldID(env, cls, "modifiers", "I"));
+    // CHECK_NULL(inputEventIDs.modifiers = (*env)->GetFieldID(env, cls, "modifiers", "I"));
 }
 
 JNIEXPORT void JNICALL

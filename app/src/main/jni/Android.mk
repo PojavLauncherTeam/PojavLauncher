@@ -32,6 +32,8 @@ LOCAL_SRC_FILES := \
     awt_InputMethod.c \
     awt_Insets.c \
     awt_Robot.c \
-    awt_UNIXToolkit.c
+    awt_UNIXToolkit.c \
+    awt_Desktop.c \
+    awt_Taskbar.c
 include $(BUILD_SHARED_LIBRARY)
 
