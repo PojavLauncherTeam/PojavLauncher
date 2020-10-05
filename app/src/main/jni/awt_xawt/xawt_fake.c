@@ -20,8 +20,5 @@ JNIEXPORT void JNICALL Java_java_awt_Dialog_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_java_awt_KeyboardFocusManager_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_java_awt_TrayIcon_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_sun_awt_X11_XWindow_initIDs(JNIEnv *env, jclass cls) {}
-
-JNIEXPORT jboolean JNICALL Java_sun_awt_X11GraphicsDevice_initXrandrExtension(JNIEnv *env, jclass cls) {
-    return JNI_FALSE;
-}
+JNIEXPORT void JNICALL Java_sun_awt_SunFontManager_initIDs(JNIEnv *env, jclass cls) {}
 

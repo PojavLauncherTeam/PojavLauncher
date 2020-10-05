@@ -138,3 +138,158 @@ JNIEXPORT jobject JNICALL Java_sun_awt_X11GraphicsConfig_makeColorModel(JNIEnv *
     return NULL;
 }
 
+JNIEXPORT jobject JNICALL
+Java_sun_awt_X11GraphicsConfig_pGetBounds(JNIEnv *env, jobject this, jint screen)
+{
+    jclass clazz;
+    jmethodID mid;
+    jobject bounds = NULL;
+/*
+    AwtGraphicsConfigDataPtr adata;
+
+    adata = (AwtGraphicsConfigDataPtr)
+        JNU_GetLongFieldAsPtr(env, this, x11GraphicsConfigIDs.aData);
+*/
+    clazz = (*env)->FindClass(env, "java/awt/Rectangle");
+    CHECK_NULL_RETURN(clazz, NULL);
+    mid = (*env)->GetMethodID(env, clazz, "<init>", "(IIII)V");
+    if (mid != NULL) {
+        // TODO: change width height
+        bounds = (*env)->NewObject(env, clazz, mid,
+            0, // fbrects[screen].x,
+            0, // fbrects[screen].y,
+            1280, // fbrects[screen].width,
+            720); // fbrects[screen].height);
+    }
+    return bounds;
+}
+
+JNIEXPORT jlong JNICALL
+Java_sun_awt_X11GraphicsConfig_createBackBuffer
+    (JNIEnv *env, jobject this, jlong window, jint swapAction)
+{
+/*
+    int32_t v1, v2;
+    XdbeBackBuffer ret = (unsigned long) 0;
+    Window w = (Window)window;
+    AWT_LOCK();
+    if (!XdbeQueryExtension(awt_display, &v1, &v2)) {
+        JNU_ThrowByName(env, "java/lang/Exception",
+                        "Could not query double-buffer extension");
+        AWT_UNLOCK();
+        return (jlong)0;
+    }
+    ret = XdbeAllocateBackBufferName(awt_display, w,
+                                     (XdbeSwapAction)swapAction);
+    AWT_FLUSH_UNLOCK();
+    return (jlong)ret;
+*/
+
+    return (jlong)0;
+}
+
+JNIEXPORT void JNICALL
+Java_sun_awt_X11GraphicsConfig_destroyBackBuffer
+    (JNIEnv *env, jobject this, jlong backBuffer)
+{
+/*
+    AWT_LOCK();
+    XdbeDeallocateBackBufferName(awt_display, (XdbeBackBuffer)backBuffer);
+    AWT_FLUSH_UNLOCK();
+*/
+}
+
+JNIEXPORT void JNICALL
+Java_sun_awt_X11GraphicsConfig_swapBuffers
+    (JNIEnv *env, jobject this,
+     jlong window, jint swapAction)
+{
+    /*
+     * TODO: implement as
+     * - GL.swapBuffers() if use OpenGL render
+     * - Canvas.unlockAndPost() if use Android Canvas
+     */
+}
+
+JNIEXPORT jboolean JNICALL
+Java_sun_awt_X11GraphicsConfig_isTranslucencyCapable
+    (JNIEnv *env, jobject this, jlong configData)
+{
+    return JNI_TRUE;
+}
+
+JNIEXPORT jboolean JNICALL
+Java_sun_awt_X11GraphicsDevice_isDBESupported(JNIEnv *env, jobject this)
+{
+    // FIXME should be false?
+    return JNI_FALSE;
+    
+/*
+#ifdef HEADLESS
+    return JNI_FALSE;
+#else
+    int opcode = 0, firstEvent = 0, firstError = 0;
+    jboolean ret;
+
+    AWT_LOCK();
+    ret = (jboolean)XQueryExtension(awt_display, "DOUBLE-BUFFER",
+                                    &opcode, &firstEvent, &firstError);
+    AWT_FLUSH_UNLOCK();
+    return ret;
+#endif // !HEADLESS
+*/
+}
+
+JNIEXPORT void JNICALL
+Java_sun_awt_X11GraphicsDevice_getDoubleBufferVisuals(JNIEnv *env,
+    jobject this, jint screen)
+{
+    
+}
+
+JNIEXPORT jboolean JNICALL
+Java_sun_awt_X11GraphicsEnvironment_pRunningXinerama(JNIEnv *env,
+    jobject this)
+{
+    return JNI_FALSE;
+}
+
+JNIEXPORT jobject JNICALL
+Java_sun_awt_X11GraphicsEnvironment_getXineramaCenterPoint(JNIEnv *env,
+    jobject this)
+{
+    return NULL;
+}
+
+JNIEXPORT jboolean JNICALL Java_sun_awt_X11GraphicsDevice_initXrandrExtension(JNIEnv *env, jclass cls) {
+    return JNI_FALSE;
+}
+
+JNIEXPORT jobject JNICALL
+Java_sun_awt_X11GraphicsDevice_getCurrentDisplayMode
+    (JNIEnv* env, jclass x11gd, jint screen)
+{
+    // TODO implement
+    return NULL;
+}
+
+JNIEXPORT void JNICALL
+Java_sun_awt_X11GraphicsDevice_enumDisplayModes
+    (JNIEnv* env, jclass x11gd,
+     jint screen, jobject arrayList)
+{
+    // TODO implement
+}
+
+JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsDevice_enterFullScreenExclusive(JNIEnv *env, jclass x11gd, jint screen) {
+    
+}
+
+JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsDevice_exitFullScreenExclusive(JNIEnv *env, jclass x11gd, jint screen) {
+    
+}
+
+JNIEXPORT jdouble JNICALL Java_sun_awt_X11GraphicsDevice_getNativeScaleFactor(JNIEnv *env, jclass x11gd, jint screen) {
+    return (jdouble) 1;
+}
+
