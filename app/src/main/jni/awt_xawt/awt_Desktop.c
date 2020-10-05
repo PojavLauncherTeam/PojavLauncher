@@ -31,7 +31,7 @@ static gboolean gtk_has_been_loaded = FALSE;
 static gboolean gnome_has_been_loaded = FALSE;
 */
 
-include <jni.h>
+#include <jni.h>
 
 /*
  * Class:     sun_awt_X11_XDesktopPeer
