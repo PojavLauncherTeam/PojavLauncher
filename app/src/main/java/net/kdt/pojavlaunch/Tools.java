@@ -105,6 +105,7 @@ public final class Tools
             
             javaArgList.add("-cp");
             javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar");
+            javaArgList.add("ClassWrapper");
             javaArgList.add(launchClassPath);
             javaArgList.add(versionInfo.mainClass);
 			javaArgList.addAll(Arrays.asList(launchArgs));
