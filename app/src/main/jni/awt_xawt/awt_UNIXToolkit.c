@@ -29,7 +29,7 @@
 #include <dlfcn.h>
 
 #include <jni.h>
-#include <sizecalc.h>
+#include "sizecalc.h"
 // #include "sun_awt_UNIXToolkit.h"
 
 #define HEADLESS
