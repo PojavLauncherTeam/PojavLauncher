@@ -217,38 +217,39 @@ JNIEXPORT void JNICALL
 Java_sun_awt_X11_XRobotPeer_keyPressImpl (JNIEnv *env,
                          jclass cls,
                          jint keycode) {
-
+/*
     AWT_LOCK();
 
     DTRACE_PRINTLN1("RobotPeer: keyPressImpl(%i)", keycode);
-/*
+
     XTestFakeKeyEvent(awt_display,
                       XKeysymToKeycode(awt_display, awt_getX11KeySym(keycode)),
                       True,
                       CurrentTime);
 
     XSync(awt_display, False);
-*/
-    AWT_UNLOCK();
 
+    AWT_UNLOCK();
+*/
 }
 
 JNIEXPORT void JNICALL
 Java_sun_awt_X11_XRobotPeer_keyReleaseImpl (JNIEnv *env,
                            jclass cls,
                            jint keycode) {
+/*
     AWT_LOCK();
 
     DTRACE_PRINTLN1("RobotPeer: keyReleaseImpl(%i)", keycode);
-/*
+
     XTestFakeKeyEvent(awt_display,
                       XKeysymToKeycode(awt_display, awt_getX11KeySym(keycode)),
                       False,
                       CurrentTime);
 
     XSync(awt_display, False);
-*/
     AWT_UNLOCK();
+*/
 }
 
 JNIEXPORT void JNICALL
