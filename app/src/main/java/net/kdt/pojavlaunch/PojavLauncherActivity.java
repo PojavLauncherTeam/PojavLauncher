@@ -156,7 +156,7 @@ public class PojavLauncherActivity extends AppCompatActivity
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        accountSelector = (Spinner) findViewById(R.id.launcherMainSelectVersion);
+        accountSelector = (Spinner) findViewById(R.id.launchermain_spinner_account);
         accountSelector.setAdapter(adapterAcc);
         accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
@@ -195,7 +195,7 @@ public class PojavLauncherActivity extends AppCompatActivity
 
         ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, availableVersions);
         adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        versionSelector = (Spinner) findViewById(R.id.launcherMainSelectVersion);
+        versionSelector = (Spinner) findViewById(R.id.launchermain_spinner_version);
         versionSelector.setAdapter(adapterVer);
 
         launchProgress = (ProgressBar) findViewById(R.id.progressDownloadBar);

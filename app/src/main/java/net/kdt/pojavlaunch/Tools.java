@@ -103,10 +103,17 @@ public final class Tools
             
             getJavaArgs(ctx, javaArgList);
             
+            javaArgList.add("-cp");
+            javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar");
+            javaArgList.add(launchClassPath);
+            javaArgList.add(versionInfo.mainClass);
+			javaArgList.addAll(Arrays.asList(launchArgs));
+/*
 			javaArgList.add("-cp");
 			javaArgList.add(launchClassPath);
 			javaArgList.add(versionInfo.mainClass);
 			javaArgList.addAll(Arrays.asList(launchArgs));
+*/
 		}
 		
 		if (LAUNCH_TYPE == LTYPE_PROCESS) {

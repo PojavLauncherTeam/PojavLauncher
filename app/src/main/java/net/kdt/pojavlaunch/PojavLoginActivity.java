@@ -321,10 +321,11 @@ public class PojavLoginActivity extends AppCompatActivity
 		mkdirs(Tools.mpProfiles);
         
         mkdirs(Tools.MAIN_PATH);
+        mkdirs(Tools.MAIN_PATH + "/lwjgl3");
+        mkdirs(Tools.MAIN_PATH + "/mods");
+        
         mkdirs(Tools.CTRLMAP_PATH);
 		
-        mkdirs(Tools.MAIN_PATH + "/mods");
-
 		try {
 			new CustomControls(this).save(Tools.CTRLDEF_FILE);
 			
@@ -333,6 +334,8 @@ public class PojavLoginActivity extends AppCompatActivity
 			// Extract launcher_profiles.json
 			// TODO: Remove after implement.
 			Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
+            
+            Tools.copyAssetFile(this, "ClassWrapper.jar", Tools.MAIN_PATH + "/lwjgl3", false);
 			
 			// Yep, the codebase from v1.0.3:
 			//FileAccess.copyAssetToFolderIfNonExist(this, "1.0.jar", Tools.versnDir + "/1.0");
