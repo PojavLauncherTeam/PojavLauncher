@@ -348,11 +348,19 @@ public class PojavLoginActivity extends AppCompatActivity
                 File jreTarFile = selectJreTarFile();
                 uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
                 IOUtils.copy(
-                    new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, "libawt_xawt.so")),
-                    new FileOutputStream(new File(Tools.homeJreDir, "lib/libawt_xawt.so"))
+                    new FileInputStream(new File(Tools.homeJreDir, "lib/libfreetype.so.6")),
+                    new FileOutputStream(new File(Tools.homeJreDir, "lib/libfreetype.so"))
                 );
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
             }
+            
+            // Refresh libawt_xawt.so
+            File fileLibawtXawt = new File(Tools.homeJreDir, "lib/libawt_xawt.so");
+            fileLibawtXawt.delete();
+            IOUtils.copy(
+                new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, "libawt_xawt.so")),
+                new FileOutputStream(fileLibawtXawt)
+            );
 		}
 		catch(Exception e){
 			Tools.showError(this, e);
