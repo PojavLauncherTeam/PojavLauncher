@@ -26,6 +26,12 @@ LOCAL_MODULE := awt_xawt
 # LOCAL_CFLAGS += -DHEADLESS
 LOCAL_SRC_FILES := \
     xawt_fake.c \
-    awt_GraphicsEnv.c
+    awt_AWTEvent.c \
+    awt_Event.c \
+    awt_GraphicsEnv.c \
+    awt_InputMethod.c \
+    awt_Insets.c \
+    awt_Robot.c \
+    awt_UNIXToolkit.c
 include $(BUILD_SHARED_LIBRARY)
 
