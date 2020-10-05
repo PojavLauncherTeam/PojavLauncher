@@ -188,14 +188,14 @@ public class AndroidLWJGLKeycode {
 		}
 		
 		try {
-			if (/* (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN || */ !CallbackBridge.isGrabbing()) {
+			if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing()) {
 				mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), keyEvent.getModifiers(), isDown);
 			}
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
 
-		if (isBackspaceAfterChar && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
+		if (isBackspaceAfterChar && (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
 			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, keyEvent.getModifiers(), isDown);
 		}
     }

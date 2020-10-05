@@ -552,11 +552,9 @@ public class PojavLoginActivity extends AppCompatActivity
 					builder2.show();
 				}
 				@Override
-				public void onFileSelected(File file, final String path, String nane, String extension)
-				{
-					try
-					{
-						if(MCProfile.load(path).isMojangAccount()){
+				public void onFileSelected(File file, final String path, String nane, String extension) {
+					try {
+						if (MCProfile.load(path).isMojangAccount()){
 							MCProfile.updateTokens(PojavLoginActivity.this, path, new RefreshListener(){
 
 									@Override

@@ -150,10 +150,12 @@ public class JREUtils
 	public static native void setLdLibraryPath(String ldLibraryPath);
 	public static native void setupBridgeWindow(Object surface);
 	
+    // TODO AWT Android port
 	public static native void setupBridgeSurfaceAWT(long surface);
 	
 	// BEFORE Load and execute PIE binary using dlopen and dlsym("main")
-	// AFTER: Execute a binary in forked process
+	// AFTER: [Deprecated]
+    @Deprecated
 	public static native int executeBinary(String[] args);
 
 	static {

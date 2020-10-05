@@ -43,7 +43,7 @@ public class PojavLauncherActivity extends AppCompatActivity
     private VerticalTabLayout tabLayout;
 
     private TextView tvVersion, tvUsernameView;
-    private Spinner versionSelector;
+    private Spinner accountSelector, versionSelector;
     private String[] availableVersions = Tools.versionList;
     private MCProfile.Builder profile;
     private String profilePath = null;
@@ -115,8 +115,8 @@ public class PojavLauncherActivity extends AppCompatActivity
         viewPager.setAdapter(viewPageAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        tvUsernameView = (TextView) findId(R.id.launcherMainUsernameView);
-        tvVersion = (TextView) findId(R.id.launcherMainVersionView);
+        tvUsernameView = (TextView) findViewById(R.id.launcherMainUsernameView);
+        tvVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
         try {
             profilePath = PojavProfile.getCurrentProfilePath(this);
@@ -152,6 +152,25 @@ public class PojavLauncherActivity extends AppCompatActivity
 
         //showProfileInfo();
 
+        final String[] accountList = new File(Tools.mpProfiles).list();
+        
+        ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
+        adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        accountSelector = (Spinner) findViewById(R.id.launcherMainSelectVersion);
+        accountSelector.setAdapter(adapterAcc);
+        accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> p1, View p2, int position, long p4) {
+                PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> p1) {
+                // TODO: Implement this method
+            }
+        });
+        
         List<String> versions = new ArrayList<String>();
         final File fVers = new File(Tools.versnDir);
 
@@ -174,20 +193,20 @@ public class PojavLauncherActivity extends AppCompatActivity
 
         //availableVersions;
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, availableVersions);
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        versionSelector = (Spinner) findId(R.id.launcherMainSelectVersion);
-        versionSelector.setAdapter(adapter);
+        ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, availableVersions);
+        adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        versionSelector = (Spinner) findViewById(R.id.launcherMainSelectVersion);
+        versionSelector.setAdapter(adapterVer);
 
-        launchProgress = (ProgressBar) findId(R.id.progressDownloadBar);
-        launchTextStatus = (TextView) findId(R.id.progressDownloadText);
-        LinearLayout exitLayout = (LinearLayout) findId(R.id.launcherMainExitbtns);
+        launchProgress = (ProgressBar) findViewById(R.id.progressDownloadBar);
+        launchTextStatus = (TextView) findViewById(R.id.progressDownloadText);
+        LinearLayout exitLayout = (LinearLayout) findViewById(R.id.launcherMainExitbtns);
         switchUsrBtn = (Button) exitLayout.getChildAt(0);
         logoutBtn = (Button) exitLayout.getChildAt(1);
 
-        leftView = (LinearLayout) findId(R.id.launcherMainLeftLayout);
-        playButton = (Button) findId(R.id.launcherMainPlayButton);
-        rightView = (ViewGroup) findId(R.id.launcherMainRightLayout);
+        leftView = (LinearLayout) findViewById(R.id.launcherMainLeftLayout);
+        playButton = (Button) findViewById(R.id.launcherMainPlayButton);
+        rightView = (ViewGroup) findViewById(R.id.launcherMainRightLayout);
 
         statusIsLaunching(false);
     }
@@ -748,11 +767,7 @@ public class PojavLauncherActivity extends AppCompatActivity
             }
         }
     }
-    public View findId(int id)
-    {
-        return findViewById(id);
-    }
-
+    
     public void launcherMenu(View view)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
