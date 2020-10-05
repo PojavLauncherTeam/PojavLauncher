@@ -210,8 +210,8 @@ Java_sun_awt_X11_XRobotPeer_getRGBPixelsImpl( JNIEnv *env,
         (*env)->ReleasePrimitiveArrayCritical(env, pixelArray, ary, 0);
     }
     AWT_UNLOCK();
-}
 */
+}
 
 JNIEXPORT void JNICALL
 Java_sun_awt_X11_XRobotPeer_keyPressImpl (JNIEnv *env,
