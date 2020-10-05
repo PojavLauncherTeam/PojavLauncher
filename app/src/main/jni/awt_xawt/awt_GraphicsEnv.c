@@ -1,4 +1,6 @@
 #include <jni.h>
+#include <assert.h>
+
 /*
 struct X11GraphicsConfigIDs x11GraphicsConfigIDs;
 struct X11GraphicsDeviceIDs x11GraphicsDeviceIDs;
@@ -265,12 +267,47 @@ JNIEXPORT jboolean JNICALL Java_sun_awt_X11GraphicsDevice_initXrandrExtension(JN
     return JNI_FALSE;
 }
 
+static jobject
+X11GD_CreateDisplayMode(JNIEnv *env, jint width, jint height,
+                        jint bitDepth, jint refreshRate)
+{
+    jclass displayModeClass;
+    jmethodID cid;
+    jint validRefreshRate = refreshRate;
+
+    displayModeClass = (*env)->FindClass(env, "java/awt/DisplayMode");
+    assert(displayModeClass != null);
+
+    cid = (*env)->GetMethodID(env, displayModeClass, "<init>", "(IIII)V");
+    assert(cid != null);
+/*
+    CHECK_NULL_RETURN(cid, NULL);
+    if (cid == NULL) {
+        JNU_ThrowInternalError(env,
+                               "Could not get display mode constructor");
+        return NULL;
+    }
+*/
+
+    // early versions of xrandr may report "empty" rates (6880694)
+    if (validRefreshRate <= 0) {
+        validRefreshRate = 60; // REFRESH_RATE_UNKNOWN;
+    }
+
+    return (*env)->NewObject(env, displayModeClass, cid,
+                             width, height, bitDepth, validRefreshRate);
+}
+
 JNIEXPORT jobject JNICALL
 Java_sun_awt_X11GraphicsDevice_getCurrentDisplayMode
     (JNIEnv* env, jclass x11gd, jint screen)
 {
-    // TODO implement
-    return NULL;
+    // TODO change width height
+    return X11GD_CreateDisplayMode(env,
+        1280, // curSize.width,
+        720, // curSize.height,
+        -1, // BIT_DEPTH_MULTI, // FIXME should be -1?
+        60 /* refresh rate */);
 }
 
 JNIEXPORT void JNICALL
