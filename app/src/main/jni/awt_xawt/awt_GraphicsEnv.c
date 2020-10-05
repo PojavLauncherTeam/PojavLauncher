@@ -153,7 +153,7 @@ Java_sun_awt_X11GraphicsConfig_pGetBounds(JNIEnv *env, jobject this, jint screen
         JNU_GetLongFieldAsPtr(env, this, x11GraphicsConfigIDs.aData);
 */
     clazz = (*env)->FindClass(env, "java/awt/Rectangle");
-    CHECK_NULL_RETURN(clazz, NULL);
+    // CHECK_NULL_RETURN(clazz, NULL);
     mid = (*env)->GetMethodID(env, clazz, "<init>", "(IIII)V");
     if (mid != NULL) {
         // TODO: change width height
