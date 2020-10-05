@@ -32,6 +32,8 @@
 struct InsetsIDs insetsIDs;
 */
 
+#include <jni.h>
+
 JNIEXPORT void JNICALL
 Java_java_awt_Insets_initIDs(JNIEnv *env, jclass cls)
 {
