@@ -72,7 +72,8 @@ public final class Tools
 	public static final int LAUNCH_TYPE = LTYPE_INVOCATION;
 	
 	public static ShellProcessOperation mLaunchShell;
-	public static void launchMinecraft(final Activity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
+    private static int exitCode = 0;
+	public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
 		String[] launchArgs = getMinecraftArgs(profile, versionInfo);
 
 		List<String> javaArgList = new ArrayList<String>();
@@ -166,22 +167,24 @@ public final class Tools
 				});
 			*/
 				
-				VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+				exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+                ctx.appendlnToLog("Java Exit code: " + exitCode);
 			}
 		}
-		
+        
 		ctx.runOnUiThread(new Runnable(){
 				@Override
 				public void run() {
 					AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-					dialog.setMessage(R.string.mcn_javaexit_title);
+					dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
 					dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 							@Override
 							public void onClick(DialogInterface p1, int p2){
-								ctx.finish();
+								MainActivity.fullyExit();
 							}
 						});
+                    dialog.show();
 				}
 			});
 	}
