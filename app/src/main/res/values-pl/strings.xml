@@ -114,7 +114,6 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Gra została zakończona</string>
     <string name="mcn_exit_call">Wyjście</string>
     <string name="mcn_exit_crash">Wykryto awarię gry! Kliknij OK, aby wyjść.</string>
     <string name="mcn_exit_errcrash">Nie można zlokalizować awarii!</string>
