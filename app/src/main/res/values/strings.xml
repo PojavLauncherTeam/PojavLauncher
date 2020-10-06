@@ -145,7 +145,7 @@
 	</string>
 -->
 	<!-- MainActivity: strings -->
-	<string name="mcn_exit_title">Application/Game exited with code %s</string>
+	<string name="mcn_exit_title">Application/Game exited with code %d</string>
 	<string name="mcn_exit_call">Exit</string>
 	<string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
 	<string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
