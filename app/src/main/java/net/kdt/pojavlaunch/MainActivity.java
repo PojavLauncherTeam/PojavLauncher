@@ -462,6 +462,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                         theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
                                     }
                                 }
+                                
+                                CallbackBridge.sendGrabInitialPosUnset();
                                 break;
 
                             default:
