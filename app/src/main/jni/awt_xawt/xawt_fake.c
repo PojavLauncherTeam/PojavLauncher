@@ -31,4 +31,5 @@ JNIEXPORT void JNICALL Java_java_awt_KeyboardFocusManager_initIDs(JNIEnv *env, j
 JNIEXPORT void JNICALL Java_java_awt_TrayIcon_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_sun_awt_X11_XWindow_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_sun_font_SunFontManager_initIDs(JNIEnv *env, jclass cls) {}
+JNIEXPORT void JNICALL Java_sun_java2d_x11_X11SurfaceData_initIDs(JNIEnv *env, jclass cls) {}
 
