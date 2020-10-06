@@ -127,8 +127,6 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_javaexit_title">Приложение закрылось</string>
-    <string name="mcn_exit_title">Игра закрылась</string>
     <string name="mcn_exit_call">Выход</string>
     <string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
