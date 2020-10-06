@@ -1,4 +1,5 @@
 #include <jni.h>
+#include <assert.h>
 
 #include "utils.h"
 
@@ -55,7 +56,9 @@ void attachThreadIfNeed(bool* isAttached, JNIEnv** secondJNIEnvPtr) {
 void getJavaInputBridge(jclass* clazz, jmethodID* method) {
     if (*method == NULL && secondJNIEnv != NULL) {
         *clazz = (*secondJNIEnv)->FindClass(secondJNIEnv, "org/lwjgl/glfw/CallbackBridge");
+        assert(*clazz != NULL);
         *method = (*secondJNIEnv)->GetStaticMethodID(secondJNIEnv, *clazz, "receiveCallback", "(ILjava/lang/String;)V");
+        assert(*method != NULL);
     }
 }
 
