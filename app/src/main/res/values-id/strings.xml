@@ -118,7 +118,6 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Dikeluarkan dari game</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_crash">Game crash terdeteksi! Pencet OK untuk keluar.</string>
     <string name="mcn_exit_errcrash">Tidak bisa mencari sumber crash, anda bisa mengabaikan ini.</string>
