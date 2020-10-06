@@ -18,11 +18,6 @@ jobs:
         chmod +x gradlew 
         ./gradlew clean assembleDebug
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-64bit.apk
-        
-        # Debug native libs
-        mkdir -p out_debug_natives
-        ls app/*/*/*/*
-        cp app/src/main/java/obj/local/*/*.so out_debug_natives/
 
     - name: Build 32-bit APK with Gradle
       run: | 
@@ -36,9 +31,3 @@ jobs:
       with:
           name: app-debug
           path: out
-          
-    - name: Upload Debug native libs
-      uses: actions/upload-artifact@v2
-      with:
-          name: out_debug_natives
-          path: out_debug_natives
