@@ -4,9 +4,13 @@ import android.content.*;
 import android.os.*;
 import android.system.*;
 import android.util.*;
+
 import java.io.*;
 import java.lang.reflect.*;
+
 import net.kdt.pojavlaunch.prefs.*;
+
+import org.lwjgl.glfw.*;
 
 public class JREUtils
 {
@@ -101,6 +105,10 @@ public class JREUtils
         setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
         setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
         setEnvironment(launchType, "REGAL_GL_VERSION", "4.5");
+
+        setEnvironment(launchType, "AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
+        setEnvironment(launchType, "AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
+        
         // REGAL_GL_EXTENSIONS
         
 		setLdLibraryPath(ldLibraryPath);

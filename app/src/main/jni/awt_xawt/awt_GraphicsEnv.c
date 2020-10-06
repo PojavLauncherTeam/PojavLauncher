@@ -1,11 +1,45 @@
+/*
+ * Copyright (c) 1998, 2014, Oracle and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
+
 #include <jni.h>
 #include <assert.h>
+
+#include "awt_global.h"
 
 /*
 struct X11GraphicsConfigIDs x11GraphicsConfigIDs;
 struct X11GraphicsDeviceIDs x11GraphicsDeviceIDs;
 */
 char* display = ":0";
+
+JNIEXPORT jint JNICALL
+Java_sun_awt_X11GraphicsEnvironment_getDefaultScreenNum(
+JNIEnv *env, jobject this)
+{
+    return (jint)0;
+}
 
 JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsEnvironment_initDisplay(JNIEnv *env, jobject this, jboolean glxReq) {
     
@@ -130,13 +164,14 @@ JNIEXPORT jint JNICALL Java_sun_awt_X11GraphicsConfig_getNumColors(JNIEnv *env, 
 }
 
 JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsConfig_init(JNIEnv *env, jobject this, jint visualNum, jint screen) {
-    /*
-    (*env)->SetIntField(env, this, x11GraphicsConfigIDs.bitsPerPixel,
-                        (jint)tempImage->bits_per_pixel);
-    */
+    // Android: 16bits pixel
+    jfieldID bitsPerPixel = (*env)->GetFieldID(env, cls, "bitsPerPixel", "I");
+    (*env)->SetIntField(env, (*env)->GetObjectClass(env, this), bitsPerPixel,
+                        (jint) 16 /* tempImage->bits_per_pixel */);
 }
 
 JNIEXPORT jobject JNICALL Java_sun_awt_X11GraphicsConfig_makeColorModel(JNIEnv *env, jobject this) {
+    // TODO
     return NULL;
 }
 
@@ -160,8 +195,8 @@ Java_sun_awt_X11GraphicsConfig_pGetBounds(JNIEnv *env, jobject this, jint screen
         bounds = (*env)->NewObject(env, clazz, mid,
             0, // fbrects[screen].x,
             0, // fbrects[screen].y,
-            1280, // fbrects[screen].width,
-            720); // fbrects[screen].height);
+            GLOBAL_WIDTH, // fbrects[screen].width,
+            GLOBAL_HEIGHT); // fbrects[screen].height);
     }
     return bounds;
 }
@@ -304,8 +339,8 @@ Java_sun_awt_X11GraphicsDevice_getCurrentDisplayMode
 {
     // TODO change width height
     return X11GD_CreateDisplayMode(env,
-        1280, // curSize.width,
-        720, // curSize.height,
+        GLOBAL_WIDTH, // curSize.width,
+        GLOBAL_HEIGHT, // curSize.height,
         -1, // BIT_DEPTH_MULTI, // FIXME should be -1?
         60 /* refresh rate */);
 }

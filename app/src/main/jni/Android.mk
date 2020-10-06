@@ -19,11 +19,11 @@ include $(BUILD_SHARED_LIBRARY)
 # include $(BUILD_SHARED_LIBRARY)
 
 # libawt_xawt without X11
-include $(CLEAR_VARS)
 LOCAL_PATH := $(LOCAL_PATH)/awt_xawt
 include $(CLEAR_VARS)
 LOCAL_MODULE := awt_xawt
 # LOCAL_CFLAGS += -DHEADLESS
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_SRC_FILES := \
     xawt_fake.c \
     awt_AWTEvent.c \

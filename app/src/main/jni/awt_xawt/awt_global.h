@@ -1,0 +1,8 @@
+#ifndef AWT_GLOBAL_H
+#define AWT_GLOBAL_H
+
+int GLOBAL_WIDTH;
+int GLOBAL_HEIGHT;
+
+#endif // AWT_GLOBAL_H
+
