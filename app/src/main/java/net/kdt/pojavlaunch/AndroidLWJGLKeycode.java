@@ -170,8 +170,8 @@ public class AndroidLWJGLKeycode {
 		for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
 			if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
                 // Right mouse detection
-                mainActivity.sendMouseButton(1, true);
-                mainActivity.sendMouseButton(1, false);
+                mainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
+                mainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
             } else if (perKey.getKey() == i) {
 				mainActivity.sendKeyPress(perKey.getValue(), keyEvent.getModifiers(), isDown);
 			}
