@@ -276,10 +276,10 @@ X11GD_CreateDisplayMode(JNIEnv *env, jint width, jint height,
     jint validRefreshRate = refreshRate;
 
     displayModeClass = (*env)->FindClass(env, "java/awt/DisplayMode");
-    assert(displayModeClass != null);
+    assert(displayModeClass != NULL);
 
     cid = (*env)->GetMethodID(env, displayModeClass, "<init>", "(IIII)V");
-    assert(cid != null);
+    assert(cid != NULL);
 /*
     CHECK_NULL_RETURN(cid, NULL);
     if (cid == NULL) {
