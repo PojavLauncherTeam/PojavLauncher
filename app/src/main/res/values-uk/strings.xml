@@ -127,8 +127,6 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_javaexit_title">Програма закрита</string>
-    <string name="mcn_exit_title">Гра закрилася</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_crash">Виявлено збій гри! Натисніть кнопку ОК, щоб вийти.</string>
     <string name="mcn_exit_errcrash">Не вдалося знайти збій! Можете не звертати на це уваги.</string>
