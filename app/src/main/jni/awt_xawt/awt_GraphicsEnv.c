@@ -165,8 +165,9 @@ JNIEXPORT jint JNICALL Java_sun_awt_X11GraphicsConfig_getNumColors(JNIEnv *env, 
 
 JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsConfig_init(JNIEnv *env, jobject this, jint visualNum, jint screen) {
     // Android: 16bits pixel
+    jclass cls = (*env)->GetObjectClass(env, this);
     jfieldID bitsPerPixel = (*env)->GetFieldID(env, cls, "bitsPerPixel", "I");
-    (*env)->SetIntField(env, (*env)->GetObjectClass(env, this), bitsPerPixel,
+    (*env)->SetIntField(env, cls, bitsPerPixel,
                         (jint) 16 /* tempImage->bits_per_pixel */);
 }
 
