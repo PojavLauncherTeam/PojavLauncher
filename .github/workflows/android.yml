@@ -21,7 +21,7 @@ jobs:
         
         # Debug native libs
         mkdir -p out_debug_natives
-        cp app/src/main/obj/local/*/*.so out_debug_natives/
+        cp app/src/main/java/obj/local/*/*.so out_debug_natives/
 
     - name: Build 32-bit APK with Gradle
       run: | 
