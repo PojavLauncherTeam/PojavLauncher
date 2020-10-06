@@ -18,19 +18,19 @@ jobs:
         chmod +x gradlew 
         ./gradlew clean assembleDebug
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-64bit.apk
-        find . -name "*.so"
+        # find . -name "*.so"
 
     - name: Upload Debug native libs
       uses: actions/upload-artifact@v2
       with:
           name: native_libs_debug
-          path: app/build/intermediates
+          path: app/build/intermediates/merged_native_libs/debug/out/lib
 
     - name: Build 32-bit APK with Gradle
       run: | 
         replace="\, \"x86_64\" , \"arm64-v8a\""
         sed -i "s/$replace//g" app/build.gradle
-        ./gradlew clean assembleDebug
+        ./gradlew assembleDebug
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-32bit.apk
 
     - name: Upload APK
