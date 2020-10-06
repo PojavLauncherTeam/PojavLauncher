@@ -105,9 +105,15 @@ public final class Tools
             getJavaArgs(ctx, javaArgList);
             
             javaArgList.add("-cp");
-            javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar");
-            javaArgList.add("ClassWrapper");
-            javaArgList.add(launchClassPath);
+            if (versionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
+                // Also preload LWJGL3 to fix crash on send input events
+                javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar:" + getLWJGL3ClassPath());
+                javaArgList.add("ClassWrapper");
+                javaArgList.add(launchClassPath);
+            } else {
+                javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
+            }
+            
             javaArgList.add(versionInfo.mainClass);
 			javaArgList.addAll(Arrays.asList(launchArgs));
 /*
@@ -335,9 +341,23 @@ public final class Tools
 		return versnDir + "/" + version + "/" + version + ".jar";
 	}
 
+    private static String getLWJGL3ClassPath() {
+        StringBuilder libStr = new StringBuilder();
+        File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
+        if (/* info.arguments != null && */ lwjgl3Folder.exists()) {
+            for (File file: lwjgl3Folder.listFiles()) {
+                if (file.getName().endsWith(".jar")) {
+                    libStr.append(file.getAbsolutePath() + ":");
+                }
+            }
+		}
+        // Remove the ':' at the end
+        libStr.setLength(libStr.length() - 1);
+        return libStr.toString();
+    }
+    
 	private static boolean isClientFirst = false;
-	public static String generateLaunchClassPath(String version) throws IOException
-	{
+	public static String generateLaunchClassPath(String version) {
 		StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 		
 		JMinecraftVersionList.Version info = getVersionInfo(version);
@@ -345,20 +365,23 @@ public final class Tools
 
 		// Debug: LWJGL 3 override
 		// File lwjgl2Folder = new File(Tools.MAIN_PATH, "lwjgl2");
+        
+        /*
 		File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
-		if (/* info.arguments != null && */ lwjgl3Folder.exists()) {
+		if (lwjgl3Folder.exists()) {
 			for (File file: lwjgl3Folder.listFiles()) {
 				if (file.getName().endsWith(".jar")) {
 					libStr.append(file.getAbsolutePath() + ":");
 				}
 			}
-		} /* else if (lwjgl2Folder.exists()) {
+		} else if (lwjgl2Folder.exists()) {
 			for (File file: lwjgl2Folder.listFiles()) {
 				if (file.getName().endsWith(".jar")) {
 					libStr.append(file.getAbsolutePath() + ":");
 				}
 			}
-		} */
+		}
+        */
 		
 		if (isClientFirst) {
 			libStr.append(getPatchedFile(version));
