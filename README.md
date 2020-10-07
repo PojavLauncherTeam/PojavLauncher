@@ -119,6 +119,16 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		</tr>
+		<tr>
+		  <td>11.0</td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
+		</tr>
 	  </tbody>
 	</table>
 
