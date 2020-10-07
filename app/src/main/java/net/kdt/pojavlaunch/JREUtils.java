@@ -98,7 +98,7 @@ public class JREUtils
 		setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
 		setEnvironment(launchType, "HOME", Tools.MAIN_PATH);
 		setEnvironment(launchType, "TMPDIR", ctx.getCacheDir().getAbsolutePath());
-		setEnvironment(launchType, "LIBGL_MIPMAP", "3");
+		setEnvironment(launchType, "LIBGL_MIPMAP", "0");
 		setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
 		setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath);
 		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + getBridgeOs("getenv", "PATH"));
