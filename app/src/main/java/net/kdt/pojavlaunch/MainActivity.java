@@ -403,6 +403,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                         switch (e.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN: // 0
                             case MotionEvent.ACTION_POINTER_DOWN: // 5
+                                CallbackBridge.sendGrabInitialPosUnset();
+                                
                                 isTouchInHotbar = hudKeyHandled != -1;
                                 if (isTouchInHotbar) {
                                     sendKeyPress(hudKeyHandled, 0, true);
@@ -463,9 +465,9 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
                                 }
                                 
-                                CallbackBridge.sendGrabInitialPosUnset();
                                 break;
 
+                            // TODO implement GLFWScrollCallback to ACTION_SCROLL
                             default:
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
@@ -629,6 +631,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 					switch (e.getActionMasked()) {
 						case MotionEvent.ACTION_DOWN: // 0
 						case MotionEvent.ACTION_POINTER_DOWN: // 5
+                            CallbackBridge.sendGrabInitialPosUnset();
+                            
                             CallbackBridge.sendMouseKeycode(!CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
 							initialX = x;
 							initialY = y;
@@ -641,9 +645,9 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 						case MotionEvent.ACTION_UP: // 1
 						case MotionEvent.ACTION_CANCEL: // 3
 						case MotionEvent.ACTION_POINTER_UP: // 6
-                            CallbackBridge.sendCursorPos(x, y);
-                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
-							// CallbackBridge.putMouseEventWithCoords(!CallbackBridge.mouseLeft /* rightOverride */ ? (byte) 1 : (byte) 0, (byte) 0, x, y);
+                            // CallbackBridge.sendCursorPos(x, y);
+                            // CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
+							CallbackBridge.putMouseEventWithCoords(CallbackBridge.mouseLeft /* rightOverride */ ? (byte) 0 : (byte) 1, (byte) 1, x, y);
 							/*
 							 if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
 							 sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
