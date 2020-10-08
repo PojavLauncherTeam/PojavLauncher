@@ -454,7 +454,10 @@ public class PojavLoginActivity extends AppCompatActivity
                 destPath.getParentFile().mkdirs();
                 destPath.createNewFile();
                 // destPath.setExecutable(true);
+                
+                IOUtils.copy(tarIn, new FileOutputStream(destPath));
 
+/*
                 byte[] btoRead = new byte[2048];
                 BufferedOutputStream bout = 
                     new BufferedOutputStream(new FileOutputStream(destPath));
@@ -466,7 +469,7 @@ public class PojavLoginActivity extends AppCompatActivity
 
                 bout.close();
                 btoRead = null;
-
+*/
             }
             tarEntry = tarIn.getNextTarEntry();
         }
