@@ -543,7 +543,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		final FileListView flv = new FileListView(this, dialog);
 		// flv.setLayoutParams(lpFlv);
 		
-		flv.listFileAt(Tools.mpProfiles);
+		flv.lockPathAt(Tools.mpProfiles);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override

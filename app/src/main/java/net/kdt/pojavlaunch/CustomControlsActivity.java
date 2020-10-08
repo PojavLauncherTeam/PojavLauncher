@@ -107,7 +107,7 @@ public class CustomControlsActivity extends AppCompatActivity
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(this, dialog);
-		flv.listFileAt(Tools.CTRLMAP_PATH);
+		flv.lockPathAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override

@@ -10,6 +10,7 @@ import com.ipaulpro.afilechooser.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import android.os.*;
 
 public class FileListView extends LinearLayout
 {
@@ -17,12 +18,11 @@ public class FileListView extends LinearLayout
     private String fullPath;
     private ListView mainLv;
     private Context context;
-    private boolean lockedHome = false;
 
     //For File selected listener:
     private FileSelectedListener listener;
     private AlertDialog build;
-    private String homePath;
+    private String lockPath = "/";
 
     public FileListView(Context context, AlertDialog build) {
         super(context);
@@ -79,6 +79,8 @@ public class FileListView extends LinearLayout
                 }
             });
         addView(mainLv, layParam);
+        
+        listFileAt(Environment.getExternalStorageDirectory().getAbsolutePath());
     }
     public void setFileSelectedListener(FileSelectedListener listener)
     {
@@ -90,15 +92,11 @@ public class FileListView extends LinearLayout
             final File mainPath = new File(path);
             if(mainPath.exists()){
                 if(mainPath.isDirectory()){
-                    if(!lockedHome){
-                        homePath = path;
-                        lockedHome = true;
-                    }
                     fullPath = path;
 
                     File[] listFile = mainPath.listFiles();
                     FileListAdapter fileAdapter = new FileListAdapter(context);
-                    if(!path.equals(homePath)){
+                    if(!path.equals(lockPath)){
                         //fileAdapter.add(new File(path, "Path=\""+path+"\".noEquals(homePath=\""+homePath+"\")"));
                         fileAdapter.add(new File(path, ".."));
                     }
@@ -127,15 +125,19 @@ public class FileListView extends LinearLayout
         return fullPath;
     }
 
-    public void refreshPath()
-    {
+    public void refreshPath() {
         listFileAt(getFullPath());
     }
-    public void parentDir()
-    {
+    
+    public void parentDir() {
         File pathFile = new File(fullPath);
         if(!pathFile.getAbsolutePath().equals("/")){
             listFileAt(pathFile.getParent());
         }
+    }
+    
+    public void lockPathAt(String path) {
+        lockPath = path;
+        listFileAt(path);
     }
 }
