@@ -5,15 +5,15 @@ import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.widget.*;
 import android.support.v7.app.*;
+import android.support.v7.preference.*;
 import android.view.*;
 import android.widget.*;
 import com.google.gson.*;
 import com.kdt.filerapi.*;
 import java.io.*;
-import java.util.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
-import android.support.v7.preference.*;
+import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.value.customcontrols.*;
 
 public class CustomControlsActivity extends AppCompatActivity
 {
@@ -106,13 +106,13 @@ public class CustomControlsActivity extends AppCompatActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this);
+		FileListView flv = new FileListView(this, dialog);
 		flv.listFileAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
-				public void onFileSelected(File file, String path, String name) {
-					if (name.endsWith(".json")) {
+				public void onFileSelected(File file, String path) {
+					if (file.getName().endsWith(".json")) {
 						setDefaultControlJson(path);
 						dialog.dismiss();
 					}
@@ -188,13 +188,13 @@ public class CustomControlsActivity extends AppCompatActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this);
+		FileListView flv = new FileListView(this, dialog);
 		flv.listFileAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
-				public void onFileSelected(File file, String path, String name) {
-					if (name.endsWith(".json")) {
+				public void onFileSelected(File file, String path) {
+					if (file.getName().endsWith(".json")) {
 						loadControl(path);
 						dialog.dismiss();
 					}

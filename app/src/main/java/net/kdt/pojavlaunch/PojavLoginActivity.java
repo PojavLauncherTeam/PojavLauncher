@@ -1,7 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import android.*;
-import android.app.*;
+import android.support.v7.app.*;
 import android.content.*;
 import android.content.pm.*;
 import android.os.*;
@@ -13,7 +13,6 @@ import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
 import com.kdt.filerapi.*;
-import com.kdt.filermod.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
@@ -21,9 +20,9 @@ import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.value.customcontrols.*;
 import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
-
-import android.app.AlertDialog;
 import org.apache.commons.io.*;
+
+import android.support.v7.app.AlertDialog;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -378,12 +377,12 @@ public class PojavLoginActivity extends AppCompatActivity
                 builder.setCancelable(false);
 
                 final AlertDialog dialog = builder.create();
-                FileListView flv = new FileListView(PojavLoginActivity.this);
+                FileListView flv = new FileListView(PojavLoginActivity.this, dialog);
                 flv.setFileSelectedListener(new FileSelectedListener(){
 
                         @Override
-                        public void onFileSelected(File file, String path, String name) {
-                            if (name.endsWith(".tar.xz")) {
+                        public void onFileSelected(File file, String path) {
+                            if (file.getName().endsWith(".tar.xz")) {
                                 selectedFile.append(path);
                                 dialog.dismiss();
                             }
@@ -537,24 +536,22 @@ public class PojavLoginActivity extends AppCompatActivity
 		fhint.setText(R.string.hint_select_account);
 		// fhint.setLayoutParams(lpHint);
 		
-		final MFileListView flv = new MFileListView(this, dialog);
+		final FileListView flv = new FileListView(this, dialog);
 		// flv.setLayoutParams(lpFlv);
 		
 		flv.listFileAt(Tools.mpProfiles);
-		flv.setFileSelectedListener(new MFileSelectedListener(){
+		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
-				public void onFileLongClick(final File file, String path, String name, String extension)
+				public void onFileLongClick(final File file, String path)
 				{
 					AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
-					builder2.setTitle(name);
+					builder2.setTitle(file.getName());
 					builder2.setMessage(R.string.warning_remove_account);
 					builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 							@Override
-							public void onClick(DialogInterface p1, int p2)
-							{
-								// TODO: Implement this method
+							public void onClick(DialogInterface p1, int p2) {
 								file.delete();
 								flv.refreshPath();
 							}
@@ -563,7 +560,7 @@ public class PojavLoginActivity extends AppCompatActivity
 					builder2.show();
 				}
 				@Override
-				public void onFileSelected(File file, final String path, String nane, String extension) {
+				public void onFileSelected(File file, final String path) {
 					try {
 						if (MCProfile.load(path).isMojangAccount()){
 							MCProfile.updateTokens(PojavLoginActivity.this, path, new RefreshListener(){

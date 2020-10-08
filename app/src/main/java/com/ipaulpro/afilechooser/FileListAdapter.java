@@ -1,5 +1,3 @@
-package com.kdt.filermod;
-
 /*
  * Copyright (C) 2012 Paul Burke
  *
@@ -16,11 +14,14 @@ package com.kdt.filermod;
  * limitations under the License.
  */
 
+package com.ipaulpro.afilechooser;
+
 import android.content.*;
 import android.view.*;
 import android.widget.*;
 import java.io.*;
 import java.util.*;
+import net.kdt.pojavlaunch.*;
 
 /**
  * List adapter for Files.
@@ -29,15 +30,18 @@ import java.util.*;
  * @author paulburke (ipaulpro)
  *
  * @addDate 2018-08-08
- * @addToMyProject khanhduy032 (kdt032)
+ * @addToMyProject khanhduy032
  */
-public class MFileListAdapter extends BaseAdapter {
+public class FileListAdapter extends BaseAdapter {
+
+    private final static int ICON_FOLDER = R.drawable.ic_folder;
+    private final static int ICON_FILE = R.drawable.ic_file;
 
     private final LayoutInflater mInflater;
 
     private List<File> mData = new ArrayList<File>();
 
-    public MFileListAdapter(Context context) {
+    public FileListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
@@ -105,6 +109,10 @@ public class MFileListAdapter extends BaseAdapter {
 
         // Set the TextView as the file name
         view.setText(file.getName());
+
+        // If the item is not a directory, use the file icon
+        int icon = file.isDirectory() ? ICON_FOLDER : ICON_FILE;
+        view.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
 
         return row;
     }

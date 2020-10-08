@@ -1,11 +1,11 @@
 package net.kdt.pojavlaunch;
 
-import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.app.*;
+import android.support.v4.view.*;
 import android.support.v7.app.*;
 import android.text.*;
 import android.util.*;
@@ -17,16 +17,17 @@ import com.kdt.filerapi.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
+import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.*;
+import android.app.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -829,12 +830,11 @@ public class MCLauncherActivity extends AppCompatActivity
             dialog.setView(edit);
         } else {
             dialog = builder.create();
-            FileListView flv = new FileListView(this);
+            FileListView flv = new FileListView(this, dialog);
             flv.setFileSelectedListener(new FileSelectedListener(){
-
                     @Override
-                    public void onFileSelected(File file, String path, String name) {
-                        if (name.endsWith(".jar")) {
+                    public void onFileSelected(File file, String path) {
+                        if (file.getName().endsWith(".jar")) {
                             Intent intent = new Intent(MCLauncherActivity.this, InstallModActivity.class);
                             intent.putExtra("modFile", file);
                             startActivity(intent);
