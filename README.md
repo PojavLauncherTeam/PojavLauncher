@@ -29,4 +29,3 @@ Architectures:
 
 ## License
 - PojavLauncher is licensed under GPLv3.
-
