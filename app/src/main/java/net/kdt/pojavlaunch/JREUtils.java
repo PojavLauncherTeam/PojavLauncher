@@ -101,7 +101,7 @@ public class JREUtils
 		setEnvironment(launchType, "LIBGL_MIPMAP", "3");
 		setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
 		setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath);
-		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + getBridgeOs("getenv", "PATH"));
+		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
         
         setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
         setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
@@ -121,38 +121,10 @@ public class JREUtils
 		if (launchType == Tools.LTYPE_PROCESS) {
 			Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
 		} else {
-            // Libcore one support all Android versions
-            getBridgeOs("setenv", name, value, true);
-            // Class.forName("libcore.io.Os").getMethod("setenv", String.class, String.class, boolean.class).invoke(null, name, value, true);
-/*
-            if (Build.VERSION.SDK_INT < 21) {
-                Class.forName("libcore.io.Os").getMethod("setenv").invoke(null, name, value, true);
-            } else {
-                Class.forName("android.system.Os").getMethod("setenv").invoke(null, name, value, true);
-            }
-*/
+            Os.setenv(name, value, true);
 		}
 	}
-    
-    public static Object getBridgeOs(String methodName, Object... objs) throws Throwable {
-        Class[] classes = new Class[objs.length];
-        for (int i = 0; i < classes.length; i++) {
-            if (objs[i] instanceof Boolean) {
-                classes[i] = boolean.class;
-            } else {
-                classes[i] = objs[i].getClass();
-            }
-        }
-        if (Build.VERSION.SDK_INT < 21) {
-            Class libcoreClass = Class.forName("libcore.io.Libcore");
-            Object libcoreOs = libcoreClass.getField("os").get(null);
-            return Class.forName("libcore.io.Os").getMethod(methodName, classes).invoke(libcoreOs, objs);
-        } else {
-            // Avoid Android < 5 get ClassNotFoundException
-            return Class.forName("android.system.Os").getMethod(methodName, classes).invoke(null, objs);
-        }
-    }
-	
+
 	public static native int chdir(String path);
 	public static native boolean dlopen(String libPath);
     public static native void redirectLogcat();

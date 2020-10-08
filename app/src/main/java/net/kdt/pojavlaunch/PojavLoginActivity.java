@@ -23,6 +23,7 @@ import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;
 
 import android.support.v7.app.AlertDialog;
+import android.system.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -441,7 +442,7 @@ public class PojavLoginActivity extends AppCompatActivity
                 try {
                     // android.system.Os
                     // Libcore one support all Android versions
-                    JREUtils.getBridgeOs("symlink", tarEntry.getName(), tarEntry.getLinkName());
+                    Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
