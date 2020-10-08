@@ -354,18 +354,23 @@ public class PojavLoginActivity extends AppCompatActivity
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
             }
             
-            // Refresh libawt_xawt.so
-            File fileLibawtXawt = new File(Tools.homeJreDir, "lib/libawt_xawt.so");
-            fileLibawtXawt.delete();
-            IOUtils.copy(
-                new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, "libawt_xawt.so")),
-                new FileOutputStream(fileLibawtXawt)
-            );
+            // Refresh libraries
+            copyDummyNativeLib("libawt_xawt.so");
+            copyDummyNativeLib("libfontconfig.so");
 		}
-		catch(Exception e){
+		catch(Throwable e){
 			Tools.showError(this, e);
 		}
 	}
+    
+    private void copyDummyNativeLib(String name) throws Throwable {
+        File fileLib = new File(Tools.homeJreDir, "lib/" + name);
+        fileLib.delete();
+        IOUtils.copy(
+            new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, name)),
+            new FileOutputStream(fileLib)
+        );
+    }
     
     private File selectJreTarFile() throws InterruptedException {
         final StringBuilder selectedFile = new StringBuilder();
