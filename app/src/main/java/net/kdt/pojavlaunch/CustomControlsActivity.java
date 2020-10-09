@@ -106,7 +106,7 @@ public class CustomControlsActivity extends AppCompatActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this, dialog);
+		FileListView flv = new FileListView(dialog);
 		flv.lockPathAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
@@ -188,7 +188,7 @@ public class CustomControlsActivity extends AppCompatActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this, dialog);
+		FileListView flv = new FileListView(dialog);
 		flv.listFileAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 

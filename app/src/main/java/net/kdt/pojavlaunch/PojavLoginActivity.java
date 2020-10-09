@@ -383,7 +383,7 @@ public class PojavLoginActivity extends AppCompatActivity
                 builder.setCancelable(false);
 
                 final AlertDialog dialog = builder.create();
-                FileListView flv = new FileListView(PojavLoginActivity.this, dialog);
+                FileListView flv = new FileListView(dialog);
                 flv.setFileSelectedListener(new FileSelectedListener(){
 
                         @Override
@@ -545,7 +545,7 @@ public class PojavLoginActivity extends AppCompatActivity
 		fhint.setText(R.string.hint_select_account);
 		// fhint.setLayoutParams(lpHint);
 		
-		final FileListView flv = new FileListView(this, dialog);
+		final FileListView flv = new FileListView(dialog);
 		// flv.setLayoutParams(lpFlv);
 		
 		flv.lockPathAt(Tools.mpProfiles);

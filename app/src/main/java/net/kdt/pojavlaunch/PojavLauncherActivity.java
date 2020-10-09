@@ -837,7 +837,7 @@ public class PojavLauncherActivity extends AppCompatActivity
             dialog.setView(edit);
         } else {
             dialog = builder.create();
-            FileListView flv = new FileListView(this, dialog);
+            FileListView flv = new FileListView(dialog);
             flv.setFileSelectedListener(new FileSelectedListener(){
 
                     @Override

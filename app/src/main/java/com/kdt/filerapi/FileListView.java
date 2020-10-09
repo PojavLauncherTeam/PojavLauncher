@@ -24,15 +24,13 @@ public class FileListView extends LinearLayout
     private AlertDialog build;
     private String lockPath = "/";
 
-    public FileListView(Context context, AlertDialog build) {
-        super(context);
-        init(context);
+    public FileListView(AlertDialog build) {
+        this(build.getContext(), null);
         this.build = build;
     }
 
     public FileListView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+        this(context, attrs, 0);
     }
 
     public FileListView(Context context, AttributeSet attrs, int defStyle) {
@@ -58,7 +56,7 @@ public class FileListView extends LinearLayout
                 {
                     // TODO: Implement this method
                     File mainFile = new File(p1.getItemAtPosition(p3).toString());
-                    if (p3 == 0) {
+                    if (p3 == 0 && !lockPath.equals(fullPath)) {
                         parentDir();
                     } else {
                         listFileAt(mainFile.getAbsolutePath());
@@ -108,7 +106,7 @@ public class FileListView extends LinearLayout
                         }
                     }
                     mainLv.setAdapter(fileAdapter);
-                    build.setTitle(new File(path).getName());
+                    if (build != null) build.setTitle(new File(path).getName());
                 } else {
                     listener.onFileSelected(mainPath, path);
                 }
