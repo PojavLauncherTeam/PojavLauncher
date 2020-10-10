@@ -21,4 +21,10 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
 		seek2.setMax(1000);
 		seek2.setValue(500);
 	}
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) LauncherPreferences.loadPreferences();
+    }
 }
