@@ -1526,8 +1526,8 @@ public class VerticalTabLayout extends ScrollView {
             }
             ViewCompat.setPaddingRelative(this, mTabPaddingStart, mTabPaddingTop,
                     mTabPaddingEnd, mTabPaddingBottom);
-            setGravity(Gravity.CENTER);
-            setOrientation(VERTICAL);
+            setGravity(Gravity.CENTER_HORIZONTAL);
+            setOrientation(HORIZONTAL);
             setClickable(true);
             ViewCompat.setPointerIcon(this,
                     PointerIconCompat.getSystemIcon(getContext(), PointerIconCompat.TYPE_HAND));
