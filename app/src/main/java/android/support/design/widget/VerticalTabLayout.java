@@ -450,6 +450,7 @@ public class VerticalTabLayout extends LinearLayout {
         final int position = mTabs.size() - 1;
         final int selectedTabPosition = mSelectedTab != null ? mSelectedTab.getPosition() : 0;
         final TabView view = (TabView) mTabStrip.getChildAt(position);
+        view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         mTabStrip.removeViewAt(position);
         requestLayout();
 
