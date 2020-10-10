@@ -301,6 +301,8 @@ public class VerticalTabLayout extends LinearLayout {
 
         ThemeUtils.checkAppCompatTheme(context);
 
+        setOrientation(VERTICAL);
+        
         // Disable the Scroll Bar
         // setVerticalScrollBarEnabled(false);
 
