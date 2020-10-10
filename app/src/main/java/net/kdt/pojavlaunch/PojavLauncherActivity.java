@@ -114,9 +114,10 @@ public class PojavLauncherActivity extends AppCompatActivity
         viewPageAdapter.addFragment(consoleView, R.drawable.ic_menu_java, getString(R.string.mcl_tab_console));
         viewPageAdapter.addFragment(crashView, 0, getString(R.string.mcl_tab_crash));
         viewPageAdapter.addFragment(new LauncherPreferenceFragment(), R.drawable.ic_menu_settings, getString(R.string.mcl_option_settings));
-
+        
         viewPager.setAdapter(viewPageAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setLastTabAsBottom();
 
         tvUsernameView = (TextView) findViewById(R.id.launcherMainUsernameView);
         tvVersion = (TextView) findViewById(R.id.launcherMainVersionView);

@@ -149,7 +149,7 @@ import android.support.v4.app.*;
  * @attr ref android.support.design.R.styleable#TabLayout_tabTextAppearance
  */
 @ViewPager.DecorView
-public class VerticalTabLayout extends ScrollView {
+public class VerticalTabLayout extends LinearLayout {
 
     private static final int DEFAULT_HEIGHT_WITH_TEXT_ICON = 72; // dps
     static final int DEFAULT_GAP_TEXT_ICON = 8; // dps
@@ -247,6 +247,7 @@ public class VerticalTabLayout extends ScrollView {
     private final ArrayList<Tab> mTabs = new ArrayList<>();
     private Tab mSelectedTab;
 
+    private final ScrollView mTopScrollView;
     private final SlidingTabStrip mTabStrip;
 
     int mTabPaddingStart;
@@ -303,11 +304,17 @@ public class VerticalTabLayout extends ScrollView {
         // Disable the Scroll Bar
         // setVerticalScrollBarEnabled(false);
 
+        LayoutParams scrollViewParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        scrollViewParams.weight = 1f;
+        mTopScrollView = new ScrollView(context);
+        mTopScrollView.setLayoutParams(scrollViewParams);
+        
         // Add the TabStrip
         mTabStrip = new SlidingTabStrip(context);
-        super.addView(mTabStrip, 0, new ScrollView.LayoutParams(
+        mTopScrollView.addView(mTabStrip, 0, new ScrollView.LayoutParams(
                           LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
-
+        super.addView(mTopScrollView);
+        
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabLayout,
                 defStyleAttr, R.style.Widget_Design_TabLayout);
 
@@ -425,7 +432,7 @@ public class VerticalTabLayout extends ScrollView {
         if (mScrollAnimator != null && mScrollAnimator.isRunning()) {
             mScrollAnimator.cancel();
         }
-        scrollTo(calculateScrollXForTab(position, positionOffset), 0);
+        mTopScrollView.scrollTo(calculateScrollXForTab(position, positionOffset), 0);
 
         // Update the 'selected state' view as we scroll, if enabled
         if (updateSelectedText) {
@@ -437,6 +444,26 @@ public class VerticalTabLayout extends ScrollView {
         return mTabStrip.getIndicatorPosition();
     }
 
+    public void setLastTabAsBottom() {
+        final int position = mTabs.size() - 1;
+        final int selectedTabPosition = mSelectedTab != null ? mSelectedTab.getPosition() : 0;
+        final TabView view = (TabView) mTabStrip.getChildAt(position);
+        mTabStrip.removeViewAt(position);
+        requestLayout();
+
+        mTabs.remove(position);
+        super.addView(view);
+
+        final int newTabCount = mTabs.size();
+        for (int i = position; i < newTabCount; i++) {
+            mTabs.get(i).setPosition(i);
+        }
+
+        if (selectedTabPosition == position) {
+            selectTab(mTabs.isEmpty() ? null : mTabs.get(Math.max(0, position - 1)));
+        }
+    }
+    
     /**
      * Add a tab to this layout. The tab will be added at the end of the list.
      * If this is the first tab to be added it will become the selected tab.
@@ -880,8 +907,8 @@ public class VerticalTabLayout extends ScrollView {
     }
 
     private int getTabScrollRange() {
-        return Math.max(0, mTabStrip.getWidth() - getWidth() - getPaddingLeft()
-                - getPaddingRight());
+        return Math.max(0, mTabStrip.getWidth() - mTopScrollView.getWidth() - mTopScrollView.getPaddingLeft()
+                - mTopScrollView.getPaddingRight());
     }
 
     void setPagerAdapter(@Nullable final ViewPagerAdapter adapter, final boolean addObserver) {
@@ -1011,7 +1038,7 @@ public class VerticalTabLayout extends ScrollView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // If we have a MeasureSpec which allows us to decide our height, try and use the default
         // height
-        final int idealHeight = dpToPx(getDefaultHeight()) + getPaddingTop() + getPaddingBottom();
+        final int idealHeight = dpToPx(getDefaultHeight()) + mTopScrollView.getPaddingTop() + mTopScrollView.getPaddingBottom();
 
         switch (MeasureSpec.getMode(heightMeasureSpec)) {
             case MeasureSpec.AT_MOST:
@@ -1046,20 +1073,20 @@ public class VerticalTabLayout extends ScrollView {
                 case MODE_SCROLLABLE:
                     // We only need to resize the child if it's smaller than us. This is similar
                     // to fillViewport
-                    remeasure = child.getMeasuredWidth() < getMeasuredWidth();
+                    remeasure = child.getMeasuredWidth() < mTopScrollView.getMeasuredWidth();
                     break;
                 case MODE_FIXED:
                     // Resize the child so that it doesn't scroll
-                    remeasure = child.getMeasuredWidth() != getMeasuredWidth();
+                    remeasure = child.getMeasuredWidth() != mTopScrollView.getMeasuredWidth();
                     break;
             }
 
             if (remeasure) {
                 // Re-measure the child with a widthSpec set to be exactly our measure width
-                int childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, getPaddingTop()
-                        + getPaddingBottom(), child.getLayoutParams().height);
+                int childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, mTopScrollView.getPaddingTop()
+                        + mTopScrollView.getPaddingBottom(), child.getLayoutParams().height);
                 int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                        getMeasuredWidth(), MeasureSpec.EXACTLY);
+                        mTopScrollView.getMeasuredWidth(), MeasureSpec.EXACTLY);
                 child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
             }
         }
@@ -1088,7 +1115,7 @@ public class VerticalTabLayout extends ScrollView {
             return;
         }
 
-        final int startScrollX = getScrollX();
+        final int startScrollX = mTopScrollView.getScrollX();
         final int targetScrollX = calculateScrollXForTab(newPosition, 0);
 
         if (startScrollX != targetScrollX) {
@@ -1195,11 +1222,11 @@ public class VerticalTabLayout extends ScrollView {
             final int nextWidth = nextChild != null ? nextChild.getWidth() : 0;
 
             // base scroll amount: places center of tab in center of parent
-            int scrollBase = selectedChild.getLeft() + (selectedWidth / 2) - (getWidth() / 2);
+            int scrollBase = selectedChild.getLeft() + (selectedWidth / 2) - (mTopScrollView.getWidth() / 2);
             // offset amount: fraction of the distance between centers of tabs
             int scrollOffset = (int) ((selectedWidth + nextWidth) * 0.5f * positionOffset);
 
-            return (ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_LTR)
+            return (ViewCompat.getLayoutDirection(mTopScrollView) == ViewCompat.LAYOUT_DIRECTION_LTR)
                     ? scrollBase + scrollOffset
                     : scrollBase - scrollOffset;
         }
@@ -1610,7 +1637,7 @@ public class VerticalTabLayout extends ScrollView {
 
             // We need to switch the text size based on whether the text is spanning 2 lines or not
             if (mTextView != null) {
-                final Resources res = getResources();
+                // final Resources res = getResources();
                 float textSize = mTabTextSize;
                 int maxLines = mDefaultMaxLines;
 
