@@ -1009,7 +1009,8 @@ public class VerticalTabLayout extends LinearLayout {
         if (child instanceof TabItem) {
             addTabFromItemView((TabItem) child);
         } else {
-            throw new IllegalArgumentException("Only TabItem instances can be added to TabLayout");
+            super.addView(child);
+            // throw new IllegalArgumentException("Only TabItem instances can be added to TabLayout");
         }
     }
 
