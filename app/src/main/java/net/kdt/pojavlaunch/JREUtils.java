@@ -23,7 +23,7 @@ public class JREUtils
 		dlopen(Tools.homeJreDir + "/lib/server/libjvm.so");
 		dlopen(Tools.homeJreDir + "/lib/libverify.so");
 		dlopen(Tools.homeJreDir + "/lib/libjava.so");
-		dlopen(Tools.homeJreDir + "/lib/libjsig.so");
+		// dlopen(Tools.homeJreDir + "/lib/libjsig.so");
 		dlopen(Tools.homeJreDir + "/lib/libnet.so");
 		dlopen(Tools.homeJreDir + "/lib/libnio.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt.so");
