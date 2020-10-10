@@ -40,7 +40,8 @@ public class JREUtils
         }
 	}
 	
-    public static void redirectAndPrintJRELog(final LoggableActivity act) {
+    private static boolean checkAccessTokenLeak = true;
+    public static void redirectAndPrintJRELog(final LoggableActivity act, final String accessToken) {
         JREUtils.redirectLogcat();
         Log.v("jrelog","Log starts here");
         Thread t = new Thread(new Runnable(){
@@ -59,12 +60,24 @@ public class JREUtils
                      while ((line = reader.readLine()) != null) {
                      act.appendlnToLog(line);
                      }
+                     reader.close();
                      */
 
-                    byte[] buf = new byte[512];
+                    byte[] buf = new byte[1024];
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
-                        act.appendToLog(new String(buf, 0, len));
+                        String currStr = new String(buf, 0, len);
+                        
+                        // Avoid leaking access token to log by replace it.
+                        // Also, Minecraft will just print it once.
+                        if (checkAccessTokenLeak) {
+                            checkAccessTokenLeak = false;
+                            if (accessToken != null && accessToken.length() > 5 && currStr.contains(accessToken)) {
+                                currStr.replace(accessToken, "ACCESS_TOKEN_HIDDEN");
+                            }
+                        }
+                        
+                        act.appendToLog(currStr);
                     }
                 } catch (IOException e) {
                     Log.e("jrelog-logcat", "IOException on logging thread");

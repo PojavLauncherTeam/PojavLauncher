@@ -47,7 +47,7 @@ public class InstallModActivity extends LoggableActivity
                         appendToLog("");
                     }
 				});
-            JREUtils.redirectAndPrintJRELog(this);
+            JREUtils.redirectAndPrintJRELog(this, null);
                 
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");

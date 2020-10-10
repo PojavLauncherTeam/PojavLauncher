@@ -952,7 +952,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         // checkJavaArgsIsLaunchable();
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
-		JREUtils.redirectAndPrintJRELog(this);
+		JREUtils.redirectAndPrintJRELog(this, mProfile.getAccessToken());
 		Tools.launchMinecraft(this, mProfile, mVersionInfo);
 	}
     
