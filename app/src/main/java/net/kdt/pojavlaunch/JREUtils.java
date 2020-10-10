@@ -73,7 +73,7 @@ public class JREUtils
                         if (checkAccessTokenLeak) {
                             checkAccessTokenLeak = false;
                             if (accessToken != null && accessToken.length() > 5 && currStr.contains(accessToken)) {
-                                currStr.replace(accessToken, "ACCESS_TOKEN_HIDDEN");
+                                currStr = currStr.replace(accessToken, "ACCESS_TOKEN_HIDDEN");
                             }
                         }
                         
