@@ -985,23 +985,23 @@ public class VerticalTabLayout extends LinearLayout {
         mTabStrip.addView(tabView, tab.getPosition(), createLayoutParamsForTabs());
     }
 
-    @Override
-    public void addView(View child) {
+    // @Override
+    public void addViewItem(View child) {
         addViewInternal(child);
     }
 
-    @Override
-    public void addView(View child, int index) {
+    // @Override
+    public void addViewItem(View child, int index) {
         addViewInternal(child);
     }
 
-    @Override
-    public void addView(View child, ViewGroup.LayoutParams params) {
+    // @Override
+    public void addViewItem(View child, ViewGroup.LayoutParams params) {
         addViewInternal(child);
     }
 
-    @Override
-    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    // @Override
+    public void addViewItem(View child, int index, ViewGroup.LayoutParams params) {
         addViewInternal(child);
     }
 
@@ -1009,8 +1009,7 @@ public class VerticalTabLayout extends LinearLayout {
         if (child instanceof TabItem) {
             addTabFromItemView((TabItem) child);
         } else {
-            super.addView(child);
-            // throw new IllegalArgumentException("Only TabItem instances can be added to TabLayout");
+            throw new IllegalArgumentException("Only TabItem instances can be added to TabLayout");
         }
     }
 
