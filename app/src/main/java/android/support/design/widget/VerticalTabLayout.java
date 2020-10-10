@@ -75,6 +75,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.*;
+import android.support.v4.app.*;
 
 /**
  * VerticalTabLayout provides a vertical layout to display tabs.
@@ -276,7 +278,7 @@ public class VerticalTabLayout extends ScrollView {
     private ValueAnimator mScrollAnimator;
 
     ViewPager mViewPager;
-    private PagerAdapter mPagerAdapter;
+    private ViewPagerAdapter mPagerAdapter;
     private DataSetObserver mPagerAdapterObserver;
     private VerticalTabLayoutOnPageChangeListener mPageChangeListener;
     private AdapterChangeListener mAdapterChangeListener;
@@ -808,7 +810,7 @@ public class VerticalTabLayout extends ScrollView {
             mCurrentVpSelectedListener = new ViewPagerOnTabSelectedListener(viewPager);
             addOnTabSelectedListener(mCurrentVpSelectedListener);
 
-            final PagerAdapter adapter = viewPager.getAdapter();
+            final ViewPagerAdapter adapter = (VerticalTabLayout.ViewPagerAdapter) viewPager.getAdapter();
             if (adapter != null) {
                 // Now we'll populate ourselves from the pager adapter, adding an observer if
                 // autoRefresh is enabled
@@ -840,7 +842,7 @@ public class VerticalTabLayout extends ScrollView {
      *             when the {@link PagerAdapter} is changed.
      */
     @Deprecated
-    public void setTabsFromPagerAdapter(@Nullable final PagerAdapter adapter) {
+    public void setTabsFromPagerAdapter(@Nullable final ViewPagerAdapter adapter) {
         setPagerAdapter(adapter, false);
     }
 
@@ -882,7 +884,7 @@ public class VerticalTabLayout extends ScrollView {
                 - getPaddingRight());
     }
 
-    void setPagerAdapter(@Nullable final PagerAdapter adapter, final boolean addObserver) {
+    void setPagerAdapter(@Nullable final ViewPagerAdapter adapter, final boolean addObserver) {
         if (mPagerAdapter != null && mPagerAdapterObserver != null) {
             // If we already have a PagerAdapter, unregister our observer
             mPagerAdapter.unregisterDataSetObserver(mPagerAdapterObserver);
@@ -909,6 +911,9 @@ public class VerticalTabLayout extends ScrollView {
             final int adapterCount = mPagerAdapter.getCount();
             for (int i = 0; i < adapterCount; i++) {
                 addTab(newTab().setText(mPagerAdapter.getPageTitle(i)), false);
+                if (mPagerAdapter.getIcon(i) != 0) {
+                    getTabAt(i).setIcon(mPagerAdapter.getIcon(i));
+                }
             }
 
             // Make sure we reflect the currently set ViewPager item
@@ -2217,12 +2222,65 @@ public class VerticalTabLayout extends ScrollView {
         public void onAdapterChanged(@NonNull ViewPager viewPager,
                 @Nullable PagerAdapter oldAdapter, @Nullable PagerAdapter newAdapter) {
             if (mViewPager == viewPager) {
-                setPagerAdapter(newAdapter, mAutoRefresh);
+                setPagerAdapter((ViewPagerAdapter) newAdapter, mAutoRefresh);
             }
         }
 
         void setAutoRefresh(boolean autoRefresh) {
             mAutoRefresh = autoRefresh;
         }
+    }
+    
+    public static class ViewPagerAdapter extends FragmentPagerAdapter {
+        List<ViewPagerItem> viewPagerList = new ArrayList<>();
+        
+        public ViewPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return viewPagerList.get(position).fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return viewPagerList.size();
+        }
+        
+        public int getIcon(int position) {
+            return viewPagerList.get(position).icon;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return viewPagerList.get(position).title;
+        }
+        
+        public void addFragment(Fragment fragment, int icon, String name) {
+            ViewPagerItem item = new ViewPagerItem();
+            item.fragment = fragment;
+            item.icon = icon;
+            item.title = name;
+            viewPagerList.add(item);
+        }
+
+        public void setFragment(int index, Fragment fragment, int icon, String name) {
+            ViewPagerItem item = new ViewPagerItem();
+            item.fragment = fragment;
+            item.icon = icon;
+            item.title = name;
+            viewPagerList.set(index, item);
+        }
+
+        public void removeFragment(int index) {
+            viewPagerList.remove(index);
+        }
+    }
+    
+    public static class ViewPagerItem {
+        public Fragment fragment;
+        public String title;
+        public int icon;
     }
 }

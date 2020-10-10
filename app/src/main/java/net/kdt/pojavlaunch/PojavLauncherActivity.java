@@ -5,6 +5,7 @@ import android.content.*;
 import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
+import android.support.design.widget.VerticalTabLayout.ViewPagerAdapter;
 import android.support.v4.app.*;
 import android.support.v4.view.*;
 import android.support.v7.app.*;
@@ -109,9 +110,10 @@ public class PojavLauncherActivity extends AppCompatActivity
         crashView = new CrashFragment();
 
         viewPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPageAdapter.addFragment(new LauncherFragment(), getString(R.string.mcl_tab_news));
-        viewPageAdapter.addFragment(consoleView, getString(R.string.mcl_tab_console));
-        viewPageAdapter.addFragment(crashView, getString(R.string.mcl_tab_crash));
+        viewPageAdapter.addFragment(new LauncherFragment(), R.drawable.ic_menu_news, getString(R.string.mcl_tab_news));
+        viewPageAdapter.addFragment(consoleView, R.drawable.ic_menu_java, getString(R.string.mcl_tab_console));
+        viewPageAdapter.addFragment(crashView, 0, getString(R.string.mcl_tab_crash));
+        viewPageAdapter.addFragment(new LauncherPreferenceFragment(), R.drawable.ic_menu_settings, getString(R.string.mcl_option_settings));
 
         viewPager.setAdapter(viewPageAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -853,45 +855,5 @@ public class PojavLauncherActivity extends AppCompatActivity
             dialog.setView(flv);
         }
         dialog.show();
-    }
-
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        List<Fragment> fragmentList = new ArrayList<>();
-        List<String> fragmentTitles = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragmentTitles.get(position);
-        }
-
-        public void addFragment(Fragment fragment, String name) {
-            fragmentList.add(fragment);
-            fragmentTitles.add(name);
-        }
-
-        public void setFragment(int index, Fragment fragment, String name) {
-            fragmentList.set(index, fragment);
-            fragmentTitles.set(index, name);
-        }
-
-        public void removeFragment(int index) {
-            fragmentList.remove(index);
-            fragmentTitles.remove(index);
-        }
     }
 }
