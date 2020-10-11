@@ -1,4 +1,5 @@
 [![badge](https://api.travis-ci.com/PojavLauncherTeam/PojavLauncher.svg?branch=gl4es)](https://travis-ci.com/github/PojavLauncherTeam/PojavLauncher)
+[![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
 # PojavLauncher
 An open source Minecraft: Java Edition launcher for Android based from Boardwalk. Support up-to Minecraft 1.11
 (Codes has not been sorted yet, it contains ton of classes without packing to module).
@@ -18,6 +19,7 @@ Not implemented yet.
 ## Known issues
 - Some Huawei devices can't run Minecraft or OptiFine.
 - Can't run multiple versions at same time.
+- V2 will not work on Android 6 and return error `ClassNotFoundException`.
 
 ## FAQ
 ### • Unable to drag item in inventory?
@@ -33,7 +35,7 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - Device name
 - Android version 
 
-## Minecraft versions worked in PojavLauncher 2.4.2
+## Minecraft versions worked in PojavLauncher [2.5.3](https://github.com/PojavLauncherTeam/PojavLauncher/releases/tag/untagged-4e80a0c1513abab0c480)
 
 <table>
 	  <thead>
@@ -90,8 +92,8 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><b>Yes</b></td>
-		  <td align="center">???</td>
-		  <td align="center">???</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Yes</b></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		</tr>
@@ -117,11 +119,21 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
 		</tr>
+		<tr>
+		  <td>11.0</td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://github.com/khanhduytran0/PojavLauncher/issues/7#issue-586928527"><b>Yes</b></a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
+		  <td align="center"><a href="https://stackoverflow.com/a/57861173">Java8</a></td>
+		</tr>
 	  </tbody>
 	</table>
 
 
-## OptiFine worked in PojavLauncher 2.4.2
+## OptiFine worked in PojavLauncher [2.5.3](https://github.com/PojavLauncherTeam/PojavLauncher/releases/tag/untagged-4e80a0c1513abab0c480)
 |Android version  |  9.0 |???|???|Manually Android 10|9.0|
 |-----------------|------|---|---|-----|-----|
 |Minecraft version|1.7.10|1.8|1.9| 1.10| 1.11|
@@ -139,8 +151,6 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 - (v2) LegacyLauncher: (unknown license).<br>
 - (all) Android Support Libraries & DX Dexer: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
 - (all) gl4es: [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
-- (v3) BusyBox: [GNU GPLv2 License](https://busybox.net/license.html).<br>
 - (v3) OpenJDK: [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
 - (v3) PRoot: [GNU GPLv2 License](https://github.com/termux/proot/blob/master/COPYING).<br>
-- (v3) XVnc: [GNU GPLv3 License](https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt).
 - (all) LWJGL 2: [Legacy LWJGL License](http://legacy.lwjgl.org/license.php.html).<br>

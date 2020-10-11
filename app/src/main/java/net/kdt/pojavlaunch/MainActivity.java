@@ -1272,8 +1272,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		ProviderList providerList = Providers.getProviderList();
 		Map<Provider, Provider.Service> services = null;
 		
-		// Android 10
-		if (Build.VERSION.SDK_INT >= 29) {
+		// Android 6.0.0 and above
+		if (Build.VERSION.SDK_INT >= 24) {
 			services = new ArrayMap<>();
 			Provider.Service service = providerList.getService(type, algorithm);
 			services.put(service.getProvider(), service);
