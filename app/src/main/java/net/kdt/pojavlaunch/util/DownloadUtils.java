@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.*;
 import java.nio.charset.*;
 import net.kdt.pojavlaunch.*;
+import org.apache.commons.io.*;
 
 public class DownloadUtils {
     public static final String USER_AGENT = Tools.APP_NAME;
@@ -20,7 +21,6 @@ public class DownloadUtils {
 
     public static void download(URL url, OutputStream os) throws Throwable {
         InputStream is = null;
-        byte[] buf; // 16384
         try {
 			// System.out.println("Connecting: " + url.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -32,9 +32,8 @@ public class DownloadUtils {
                 throw new RuntimeException("Server returned HTTP " + conn.getResponseCode()
 					+ ": " + conn.getResponseMessage());
             }
-			buf = new byte[conn.getContentLength()];
             is = conn.getInputStream();
-            IoUtil.pipe(is, os, buf);
+			IOUtils.copy(is, os);
         } finally {
 			if (is != null) {
                 try {
