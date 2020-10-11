@@ -1246,7 +1246,7 @@ public class VerticalTabLayout extends LinearLayout {
 
         switch (mMode) {
             case MODE_FIXED:
-                mTabStrip.setGravity(Gravity.CENTER_HORIZONTAL);
+                mTabStrip.setGravity(Gravity.CENTER_VERTICAL);
                 break;
             case MODE_SCROLLABLE:
                 mTabStrip.setGravity(GravityCompat.START);
@@ -1556,7 +1556,7 @@ public class VerticalTabLayout extends LinearLayout {
             }
             ViewCompat.setPaddingRelative(this, mTabPaddingStart, mTabPaddingTop,
                     mTabPaddingEnd, mTabPaddingBottom);
-            setGravity(Gravity.CENTER_HORIZONTAL);
+            setGravity(Gravity.CENTER_VERTICAL);
             setOrientation(HORIZONTAL);
             setClickable(true);
             ViewCompat.setPointerIcon(this,

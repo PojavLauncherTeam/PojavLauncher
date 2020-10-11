@@ -116,6 +116,7 @@ public class PojavLauncherActivity extends AppCompatActivity
         viewPageAdapter.addFragment(new LauncherPreferenceFragment(), R.drawable.ic_menu_settings, getString(R.string.mcl_option_settings));
         
         viewPager.setAdapter(viewPageAdapter);
+        tabLayout.setTabMode(VerticalTabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setLastTabAsBottom();
 
