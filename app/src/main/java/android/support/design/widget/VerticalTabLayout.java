@@ -1646,7 +1646,7 @@ public class VerticalTabLayout extends LinearLayout {
 
                 if (mIconView != null && mIconView.getVisibility() == VISIBLE) {
                     // If the icon view is being displayed, we limit the text to 1 line
-                    maxLines = 1;
+                    maxLines = 2;
                 } else if (mTextView != null && mTextView.getLineCount() > 1) {
                     // Otherwise when we have text which wraps we reduce the text size
                     textSize = mTabTextMultiLineSize;
