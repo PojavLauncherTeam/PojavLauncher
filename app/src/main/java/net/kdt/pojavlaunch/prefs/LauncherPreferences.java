@@ -34,16 +34,15 @@ public class LauncherPreferences
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
             String DEFAULT_JAVA_ARGS =
                 "-Xms" + androidHeap + "m " +
-                // More than 800mb may make JVM not allocateable and crash
+                // (32bit) More than 800mb may make JVM not allocateable and crash
                 "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m " +
                 "-XX:+UseG1GC " +
-                // "-Dsun.rmi.dgc.server.gcInterval=2147483646 " +
                 "-XX:+UnlockExperimentalVMOptions " +
                 "-XX:G1NewSizePercent=20 " +
                 "-XX:G1ReservePercent=20 " +
                 "-XX:MaxGCPauseMillis=50 " +
-                "-XX:G1HeapRegionSize=32M";
-                
+                "-XX:G1HeapRegionSize=16M";
+            
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
         }
