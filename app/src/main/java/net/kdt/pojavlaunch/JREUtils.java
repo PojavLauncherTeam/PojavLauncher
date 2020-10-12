@@ -123,6 +123,15 @@ public class JREUtils
         setEnvironment(launchType, "AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
         setEnvironment(launchType, "AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
         
+        BufferedReader reader = new BufferedReader(new FileReader(new File(Tools.MAIN_PATH, "custom_env.txt")));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Not use split() as only split first one
+            int index = line.indexOf("=");
+            setEnvironment(launchType, line.substring(0, index), line.substring(index + 1));
+        }
+        reader.close();
+        
         // REGAL_GL_EXTENSIONS
         
 		setLdLibraryPath(ldLibraryPath);
