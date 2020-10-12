@@ -105,14 +105,15 @@ public final class Tools
             getJavaArgs(ctx, javaArgList);
             
             javaArgList.add("-cp");
+            /*
             if (versionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
                 // Also preload LWJGL3 to fix crash on send input events
                 javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar:" + getLWJGL3ClassPath());
                 javaArgList.add("ClassWrapper");
                 javaArgList.add(launchClassPath);
-            } else {
+            } else { */
                 javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
-            }
+            // }
             
             javaArgList.add(versionInfo.mainClass);
 			javaArgList.addAll(Arrays.asList(launchArgs));

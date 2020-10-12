@@ -30,6 +30,7 @@ struct PotatoBridge {
 */
 };
 struct PotatoBridge potatoBridge;
+EGLConfig config;
 
 typedef jint RegalMakeCurrent_func(EGLContext context);
 
@@ -58,11 +59,20 @@ void terminateEgl() {
     potatoBridge.eglSurface = EGL_NO_SURFACE;
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIEnv* env, jclass clazz) {
+    return (jlong) (uintptr_t) potatoBridge.eglContext;
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
     return JNI_TRUE;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz) {
+    static const EGLint ctx_attribs[] = {
+        EGL_CONTEXT_CLIENT_VERSION, 2,
+        EGL_NONE
+    };
+   
     if (potatoBridge.eglContext != EGL_NO_CONTEXT) {
         potatoBridge.eglContextOld = potatoBridge.eglContext;
         potatoBridge.eglContext = eglCreateContext(potatoBridge.eglDisplay, config, potatoBridge.eglContextOld, ctx_attribs);
@@ -93,12 +103,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
             EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
             EGL_NONE
         };
-        static const EGLint ctx_attribs[] = {
-            EGL_CONTEXT_CLIENT_VERSION, 2,
-            EGL_NONE
-        };
-   
-        EGLConfig config;
+        
         EGLint num_configs;
         EGLint vid;
     
