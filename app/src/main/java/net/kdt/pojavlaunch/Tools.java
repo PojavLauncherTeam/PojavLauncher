@@ -640,8 +640,12 @@ public final class Tools
 			for (DependentLibrary lib : customVer.libraries) {
 				if (lib.name.startsWith(optifineLib)) {
 					customVer.optifineLib = lib;
-					break;
-				}
+				} else if (lib.name.startsWith("net.minecraft:launchwrapper")) {
+                    int versionIndex = lib.name.lastIndexOf(":");
+                    if (lib.name.substring(versionIndex + 1).startsWith("1.")) {
+                        lib.name = lib.name.substring(0, versionIndex + 1) + "2.0";
+                    }
+                }
 			}
 			if (customVer.inheritsFrom == null) {
 				return customVer;
