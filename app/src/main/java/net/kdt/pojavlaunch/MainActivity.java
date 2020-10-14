@@ -403,7 +403,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                         switch (e.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN: // 0
                             case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                CallbackBridge.sendGrabInitialPosUnset();
+                                CallbackBridge.sendPrepareGrabInitialPos();
                                 
                                 isTouchInHotbar = hudKeyHandled != -1;
                                 if (isTouchInHotbar) {
@@ -631,7 +631,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 					switch (e.getActionMasked()) {
 						case MotionEvent.ACTION_DOWN: // 0
 						case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            CallbackBridge.sendGrabInitialPosUnset();
+                            CallbackBridge.sendPrepareGrabInitialPos();
                             
                             CallbackBridge.sendMouseKeycode(!CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
 							initialX = x;
@@ -693,6 +693,18 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 					}
 				});
 			minecraftGLView.setOnTouchListener(glTouchListener);
+            minecraftGLView.setOnGenericMotionListener(new OnGenericMotionListener(){
+                @Override
+                public boolean onGenericMotion(View v, MotionEvent event) {
+                    switch (event.getActionMasked()) {
+                        case MotionEvent.ACTION_SCROLL:
+                            CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
+                            break;
+                    }
+                    return true;
+                }
+            });
+            
 			minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
 				
 					private boolean isCalled = false;

@@ -2,6 +2,7 @@ package org.lwjgl.glfw;
 import java.io.*;
 import java.util.*;
 import android.widget.*;
+import net.kdt.pojavlaunch.*;
 
 public class CallbackBridge {
     public static final int JRE_TYPE_CURSOR_POS = 0;
@@ -35,32 +36,43 @@ public class CallbackBridge {
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
         mouseX = x;
         mouseY = y;
-        sendData(JRE_TYPE_CURSOR_POS, x, y);
+        nativeSendCursorPos(x, y);
     }
     
-    public static void sendGrabInitialPosUnset() {
-        DEBUG_STRING.append("Grab initial posititon uset");
-        sendData(JRE_TYPE_GRAB_INITIAL_POS_UNSET);
+    public static void sendPrepareGrabInitialPos() {
+        DEBUG_STRING.append("Prepare set grab initial posititon");
+        sendMouseKeycode(-1, 0, false);
     }
 
     public static void sendKeycode(int keycode, char keychar, int modifiers, boolean isDown) {
         DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
-        sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
+        // TODO CHECK: This may cause input issue, not receive input!
+        if (!nativeSendCharMods(keycode, modifiers) ||!nativeSendChar(keycode)) {
+            nativeSendKey(keycode, 0 /* scancode */, isDown ? 1 : 0, modifiers);
+        }
+        
+        // sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
     }
 
-    public static void sendMouseKeycode(int keycode, int modifiers, boolean isDown) {
-        DEBUG_STRING.append("MouseKey=" + keycode + ", down=" + isDown + "\n");
+    public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
+        DEBUG_STRING.append("MouseKey=" + button + ", down=" + isDown + "\n");
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
-        sendData(JRE_TYPE_MOUSE_KEYCODE_CONTROL, keycode, Boolean.toString(isDown), modifiers);
+        nativeSendMouseButton(button, isDown ? 1 : 0, modifiers);
     }
 
     public static void sendMouseKeycode(int keycode) {
         sendMouseKeycode(keycode, 0, true);
         sendMouseKeycode(keycode, 0, false);
     }
+    
+    public static void sendScroll(double xoffset, double yoffset) {
+        DEBUG_STRING.append("ScrollX=" + xoffset + ",ScrollY=" + yoffset);
+        nativeSendScroll(xoffset, yoffset);
+    }
 
     public static void sendUpdateWindowSize(int w, int h) {
-        sendData(JRE_TYPE_WINDOW_SIZE, w, h);
+        nativeSendFramebufferSize(w, h);
+        nativeSendWindowSize(w, h);
     }
 
     public static boolean isGrabbing() {
@@ -76,7 +88,7 @@ public class CallbackBridge {
                 break;
         }
     }
-    
+/*
     private static String currData;
     public static void sendData(int type, Object... dataArr) {
         currData = "";
@@ -92,12 +104,26 @@ public class CallbackBridge {
         }
         nativeSendData(true, type, currData);
     }
-    
     private static native void nativeSendData(boolean isAndroid, int type, String data);
+*/
+
+    private static native void nativeAttachThreadToJRE();
+    private static native boolean nativeSendChar(int codepoint);
+    // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
+    private static native boolean nativeSendCharMods(int codepoint, int mods);
+    private static native void nativeSendCursorEnter(int entered);
+    private static native void nativeSendCursorPos(int x, int y);
+    private static native void nativeSendFramebufferSize(int width, int height);
+    private static native void nativeSendKey(int key, int scancode, int action, int mods);
+    private static native void nativeSendMouseButton(int button, int action, int mods);
+    private static native void nativeSendScroll(double xoffset, double yoffset);
+    private static native void nativeSendWindowSize(int width, int height);
+    
     public static native boolean nativeIsGrabbing();
     
     static {
         System.loadLibrary("pojavexec");
+        nativeAttachThreadToJRE();
     }
 }
 
