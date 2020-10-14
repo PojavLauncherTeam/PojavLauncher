@@ -133,7 +133,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
 #define ADD_CALLBACK_WWIN(NAME) \
 GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
-    void* oldCallback = &GLFW_invoke_##NAME; \
+    void** oldCallback = &GLFW_invoke_##NAME; \
     GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
     return (jlong) (uintptr_t) *oldCallback; \
 }
@@ -143,6 +143,7 @@ ADD_CALLBACK_WWIN(CharMods);
 ADD_CALLBACK_WWIN(CursorEnter);
 ADD_CALLBACK_WWIN(CursorPos);
 ADD_CALLBACK_WWIN(FramebufferSize);
+ADD_CALLBACK_WWIN(Key);
 ADD_CALLBACK_WWIN(MouseButton);
 ADD_CALLBACK_WWIN(Scroll);
 ADD_CALLBACK_WWIN(WindowSize);
@@ -175,7 +176,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
     if (GLFW_invoke_CursorPos && isInputReady) {
         if (GLFW_invoke_CursorEnter && !isCursorEntered) {
             isCursorEntered = true;
-            GLFW_invoke_CursorEnter(showingWindow, entered);
+            GLFW_invoke_CursorEnter(showingWindow, 1);
         }
         
         if (isGrabbing) {
@@ -185,13 +186,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
             } else {
                 isPrepareGrabPos = false;
                 lastCursorX = x;
-                lastCursotY = y;
+                lastCursorY = y;
                 return;
             }
         }
         GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
         lastCursorX = x;
-        lastCursotY = y;
+        lastCursorY = y;
     }
 }
 
@@ -224,7 +225,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEn
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendWindowSize(JNIEnv* env, jclass clazz, jint x, jint y) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendWindowSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     if (GLFW_invoke_WindowSize && isInputReady) {
         GLFW_invoke_WindowSize(showingWindow, width, height);
     }
