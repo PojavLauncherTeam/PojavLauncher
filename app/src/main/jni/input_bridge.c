@@ -13,8 +13,11 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
-JavaVM* firstJavaVM, secondJavaVM;
-JNIEnv* firstJNIEnv, secondJNIEnv;
+JavaVM* firstJavaVM;
+JavaVM* secondJavaVM;
+
+JNIEnv* firstJNIEnv;
+JNIEnv* secondJNIEnv;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
