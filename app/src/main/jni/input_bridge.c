@@ -234,7 +234,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendWindowSize(J
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nativeSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
     showingWindow = (long) window;
 }
 
