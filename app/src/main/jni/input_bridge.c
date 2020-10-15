@@ -13,15 +13,15 @@ struct GLFWInputEvent {
 struct GLFWInputEvent glfwInputEventArr[100];
 int glfwInputEventIndex;
 
-#define EVENT_TYPE_CHAR 1000;
-#define EVENT_TYPE_CHAR_MODS 1001;
-#define EVENT_TYPE_CURSOR_ENTER 1002;
-#define EVENT_TYPE_CURSOR_POS 1003;
-#define EVENT_TYPE_FRAMEBUFFER_SIZE 1004;
-#define EVENT_TYPE_KEY 1005;
-#define EVENT_TYPE_MOUSE_BUTTON 1006;
-#define EVENT_TYPE_SCROLL 1007;
-#define EVENT_TYPE_WINDOW_SIZE 1008;
+#define EVENT_TYPE_CHAR 1000
+#define EVENT_TYPE_CHAR_MODS 1001
+#define EVENT_TYPE_CURSOR_ENTER 1002
+#define EVENT_TYPE_CURSOR_POS 1003
+#define EVENT_TYPE_FRAMEBUFFER_SIZE 1004
+#define EVENT_TYPE_KEY 1005
+#define EVENT_TYPE_MOUSE_BUTTON 1006
+#define EVENT_TYPE_SCROLL 1007
+#define EVENT_TYPE_WINDOW_SIZE 1008
 
 typedef void GLFW_invoke_Char_func(void* window, unsigned int codepoint);
 typedef void GLFW_invoke_CharMods_func(void* window, unsigned int codepoint, int mods);
@@ -176,7 +176,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
-    if (isUsePushPollCall && isInputReady) {
+    if (!isInputReady) isInputReady = true;
+    if (isUsePushPollCall) {
         GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
         
         for (int i = 0; i < glfwInputEventIndex; i++) {
@@ -374,14 +375,5 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendWindowSize(J
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
     showingWindow = (long) window;
-}
-
-/*
- * Class:     org_lwjgl_glfw_GLFW
- * Method:    nglfwSetInputReady
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetInputReady(JNIEnv *env, jclass cls) {
-    isInputReady = true;
 }
 
