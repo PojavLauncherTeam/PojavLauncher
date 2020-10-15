@@ -1,7 +1,27 @@
 #include <jni.h>
 #include <assert.h>
 
+#include "log.h"
 #include "utils.h"
+
+struct GLFWInputEvent {
+    int type;
+    unsigned int ui1;
+    int i1, i2, i3, i4;
+    double d1, d2;
+};
+struct GLFWInputEvent glfwInputEventArr[100];
+int glfwInputEventIndex;
+
+#define EVENT_TYPE_CHAR 1000;
+#define EVENT_TYPE_CHAR_MODS 1001;
+#define EVENT_TYPE_CURSOR_ENTER 1002;
+#define EVENT_TYPE_CURSOR_POS 1003;
+#define EVENT_TYPE_FRAMEBUFFER_SIZE 1004;
+#define EVENT_TYPE_KEY 1005;
+#define EVENT_TYPE_MOUSE_BUTTON 1006;
+#define EVENT_TYPE_SCROLL 1007;
+#define EVENT_TYPE_WINDOW_SIZE 1008;
 
 typedef void GLFW_invoke_Char_func(void* window, unsigned int codepoint);
 typedef void GLFW_invoke_CharMods_func(void* window, unsigned int codepoint, int mods);
@@ -22,7 +42,7 @@ JNIEnv* secondJNIEnv;
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
 
-jboolean isGrabbing;
+jboolean isGrabbing, isUsePushPollCall;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     if (dalvikJavaVMPtr == NULL) {
@@ -69,8 +89,30 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToJRE(JNIEnv* env, jclass clazz, jboolean isAndroid) {
-    if (isAndroid == JNI_TRUE) {
+void invokeCursorPos(int x, int y) {
+    if (isGrabbing) {
+        if (!isPrepareGrabPos) {
+            grabCursorX += x - lastCursorX;
+            grabCursorY += y - lastCursorY;
+        } else {
+            isPrepareGrabPos = false;
+            lastCursorX = x;
+            lastCursorY = y;
+            return;
+        }
+    }
+    if (!isUsePushPollCall)
+        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
+    lastCursorX = x;
+    lastCursorY = y;
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUsePushPoll) {
+    glfwInputEventIndex = -1;
+    isUsePushPollCall = isUsePushPoll;
+    if (isUsePushPoll) {
+        isPrepareGrabPos = true;
+    } else if (isAndroid) {
         firstJavaVM = dalvikJavaVMPtr;
         firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
         secondJavaVM = runtimeJavaVMPtr;
@@ -133,6 +175,60 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
     return isGrabbing;
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
+    if (isUsePushPollCall && isInputReady) {
+        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
+        
+        for (int i = 0; i < glfwInputEventIndex; i++) {
+            GLFWInputEvent curr = glfwInputEventArr[i];
+            switch (curr.type) {
+                case EVENT_TYPE_CHAR:
+                    if (GLFW_invoke_Char) {
+                        GLFW_invoke_Char(showingWindow, curr.ui1);
+                    }
+                    break;
+                case EVENT_TYPE_CHAR_MODS:
+                    if (GLFW_invoke_CharMods) {
+                        GLFW_invoke_CharMods(showingWindow, curr.ui1, curr.i2);
+                    }
+                    break;
+                case EVENT_TYPE_CURSOR_ENTER:
+                    if (GLFW_invoke_CursorEnter) {
+                        GLFW_invoke_CursorEnter(showingWindow, curr.i1);
+                    }
+                    break;
+                case EVENT_TYPE_FRAMEBUFFER_SIZE:
+                    if (GLFW_invoke_FramebufferSize) {
+                        GLFW_invoke_FramebufferSize(showingWindow, curr.i1, curr.i2);
+                    }
+                    break;
+                case EVENT_TYPE_KEY:
+                    if (GLFW_invoke_Key) {
+                        GLFW_invoke_Key(showingWindow, curr.i1, curr.i2, curr.i3, curr.i4);
+                    }
+                    break;
+                case EVENT_TYPE_MOUSE_BUTTON:
+                    if (GLFW_invoke_MouseButton) {
+                        GLFW_invoke_MouseButton(showingWindow, curr.i1, curr.i2, curr.i3);
+                    }
+                    break;
+                case EVENT_TYPE_SCROLL:
+                    if (GLFW_invoke_Scroll) {
+                        GLFW_invoke_Scroll(showingWindow, curr.d1, curr.d2);
+                    }
+                    break;
+                case EVENT_TYPE_WINDOW_SIZE:
+                    if (GLFW_invoke_WindowSize) {
+                        GLFW_invoke_WindowSize(showingWindow, curr.i1, curr.i2);
+                    }
+                    break;
+                default: LOGW("Unknown GLFW input event: %d", curr.type;
+            }
+            glfwInputEventIndex = -1;
+        }
+    }
+}
+
 #define ADD_CALLBACK_WWIN(NAME) \
 GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
@@ -155,7 +251,12 @@ ADD_CALLBACK_WWIN(WindowSize);
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jint codepoint) {
     if (GLFW_invoke_Char && isInputReady) {
-        GLFW_invoke_Char(showingWindow, codepoint);
+        if (isUsePushPollCall) {
+            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            curr.type = EVENT_TYPE_CHAR;
+            curr.ui1 = codepoint;
+        } else
+            GLFW_invoke_Char(showingWindow, codepoint);
         return JNI_TRUE;
     }
     return JNI_FALSE;
@@ -163,7 +264,13 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jint codepoint, jint mods) {
     if (GLFW_invoke_CharMods && isInputReady) {
-        GLFW_invoke_CharMods(showingWindow, codepoint, mods);
+        if (isUsePushPollCall) {
+            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            curr.type = EVENT_TYPE_CHAR_MODS;
+            curr.ui1 = codepoint;
+            curr.i2 = mods;
+        } else
+            GLFW_invoke_CharMods(showingWindow, codepoint, mods);
         return JNI_TRUE;
     }
     return JNI_FALSE;
@@ -177,37 +284,49 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorEnter(
 */
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JNIEnv* env, jclass clazz, jint x, jint y) {
     if (GLFW_invoke_CursorPos && isInputReady) {
-        if (GLFW_invoke_CursorEnter && !isCursorEntered) {
-            isCursorEntered = true;
-            GLFW_invoke_CursorEnter(showingWindow, 1);
-        }
-        
-        if (isGrabbing) {
-            if (!isPrepareGrabPos) {
-                grabCursorX += x - lastCursorX;
-                grabCursorY += y - lastCursorY;
-            } else {
-                isPrepareGrabPos = false;
-                lastCursorX = x;
-                lastCursorY = y;
-                return;
+        if (!isCursorEntered) {
+            if (GLFW_invoke_CursorEnter) {
+                isCursorEntered = true;
+                if (isUsePushPollCall) {
+                    GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+                    curr.type = EVENT_TYPE_CURSOR_ENTER;
+                    curr.i1 = 1;
+                } else
+                    GLFW_invoke_CursorEnter(showingWindow, 1);
+            } else if (isGrabbing) {
+                // Some Minecraft versions does not use GLFWCursorEnterCallback
+                // This is a smart check, as Minecraft will not in grab mode if already not.
+                isCursorEntered = true;
             }
         }
-        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
-        lastCursorX = x;
-        lastCursorY = y;
+        
+        invokeCursorPos(x, y);
     }
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     if (GLFW_invoke_FramebufferSize && isInputReady) {
-        GLFW_invoke_FramebufferSize(showingWindow, width, height);
+        if (isUsePushPollCall) {
+            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            curr.type = EVENT_TYPE_FRAMEBUFFER_SIZE;
+            curr.i1 = width;
+            curr.i2 = height;
+        } else
+            GLFW_invoke_FramebufferSize(showingWindow, width, height);
     }
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (GLFW_invoke_Key && isInputReady) {
-        GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
+        if (isUsePushPollCall) {
+            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            curr.type = EVENT_TYPE_KEY;
+            curr.i1 = key;
+            curr.i2 = scancode;
+            curr.i3 = action;
+            curr.i4 = mods;
+        } else
+            GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
     }
 }
 
@@ -217,82 +336,45 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
             // Notify to prepare set new grab pos
             isPrepareGrabPos = true;
         } else if (GLFW_invoke_MouseButton) {
-            GLFW_invoke_MouseButton(showingWindow, button, action, mods);
+            if (isUsePushPollCall) {
+                GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+                curr.type = EVENT_TYPE_MOUSE_BUTTON;
+                curr.i1 = button;
+                curr.i2 = action;
+                curr.i3 = mods;
+            } else
+                GLFW_invoke_MouseButton(showingWindow, button, action, mods);
         }
     }
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEnv* env, jclass clazz, jdouble xoffset, jdouble yoffset) {
     if (GLFW_invoke_Scroll && isInputReady) {
-        GLFW_invoke_Scroll(showingWindow, (double) xoffset, (double) yoffset);
+        if (isUsePushPollCall) {
+            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            curr.type = EVENT_TYPE_SCROLL;
+            curr.d1 = (double) xoffset;
+            curr.d2 = (double) yoffset;
+        } else
+            GLFW_invoke_Scroll(showingWindow, (double) xoffset, (double) yoffset);
     }
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendWindowSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     if (GLFW_invoke_WindowSize && isInputReady) {
-        GLFW_invoke_WindowSize(showingWindow, width, height);
+        if (isUsePushPollCall) {
+            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            curr.type = EVENT_TYPE_WINDOW_SIZE;
+            curr.i1 = width;
+            curr.i2 = height;
+        } else
+            GLFW_invoke_WindowSize(showingWindow, width, height);
     }
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
     showingWindow = (long) window;
 }
-
-/*
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetCharCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_Char;
-    GLFW_invoke_Char = (GLFW_invoke_Char_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetCharModsCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_CharMods;
-    GLFW_invoke_CharMods = (GLFW_invoke_CharMods_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetCursorEnterCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_CursorEnter;
-    GLFW_invoke_CursorEnter = (GLFW_invoke_CursorEnter_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetCursorPosCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_CursorPos;
-    GLFW_invoke_CursorPos = (GLFW_invoke_CursorPos_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetFramebufferSizeCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_FramebufferSize;
-    GLFW_invoke_FramebufferSize = (GLFW_invoke_FramebufferSize_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetKeyCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_Key;
-    GLFW_invoke_Key = (GLFW_invoke_Key_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetMouseButtonCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_MouseButton;
-    GLFW_invoke_MouseButton = (GLFW_invoke_MouseButton_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetScrollCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_Scroll;
-    GLFW_invoke_Scroll = (GLFW_invoke_Scroll_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetWindowSizeCallback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) {
-    void* oldCallback = &GLFW_invoke_WindowSize;
-    GLFW_invoke_WindowSize = (GLFW_invoke_WindowSize_func*) (uintptr_t) callbackptr;
-    return (jlong) (uintptr_t) *oldCallback;
-}
-*/
 
 /*
  * Class:     org_lwjgl_glfw_GLFW

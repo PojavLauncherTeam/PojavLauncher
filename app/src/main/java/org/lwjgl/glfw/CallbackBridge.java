@@ -107,11 +107,11 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    private static native void nativeAttachThreadToJRE();
+    private static native void nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
     private static native boolean nativeSendChar(int codepoint);
     // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
     private static native boolean nativeSendCharMods(int codepoint, int mods);
-    private static native void nativeSendCursorEnter(int entered);
+    // private static native void nativeSendCursorEnter(int entered);
     private static native void nativeSendCursorPos(int x, int y);
     private static native void nativeSendFramebufferSize(int width, int height);
     private static native void nativeSendKey(int key, int scancode, int action, int mods);
@@ -123,7 +123,7 @@ public class CallbackBridge {
     
     static {
         System.loadLibrary("pojavexec");
-        nativeAttachThreadToJRE();
+        nativeAttachThreadToOther(true, MainActivity.isPushPollCall);
     }
 }
 
