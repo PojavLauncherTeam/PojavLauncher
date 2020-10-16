@@ -107,6 +107,26 @@ void invokeCursorPos(int x, int y) {
     lastCursorY = y;
 }
 
+#define ADD_CALLBACK_WWIN(NAME) \
+GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
+JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
+    void** oldCallback = &GLFW_invoke_##NAME; \
+    GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
+    return (jlong) (uintptr_t) *oldCallback; \
+}
+
+ADD_CALLBACK_WWIN(Char);
+ADD_CALLBACK_WWIN(CharMods);
+ADD_CALLBACK_WWIN(CursorEnter);
+ADD_CALLBACK_WWIN(CursorPos);
+ADD_CALLBACK_WWIN(FramebufferSize);
+ADD_CALLBACK_WWIN(Key);
+ADD_CALLBACK_WWIN(MouseButton);
+ADD_CALLBACK_WWIN(Scroll);
+ADD_CALLBACK_WWIN(WindowSize);
+
+#undef ADD_CALLBACK_WWIN
+
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUsePushPoll) {
     glfwInputEventIndex = -1;
     isUsePushPollCall = isUsePushPoll;
@@ -129,42 +149,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
         attachThreadIfNeed(&isRuntimeThreadAttached, &dalvikJNIEnvPtr_JRE);
         getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
     }
-}
-
-// TODO deprecate if implement fully callback in native
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendData(JNIEnv* env, jclass clazz, jboolean isAndroid, jint type, jstring data) {
-    if (isAndroid == JNI_TRUE) {
-        firstJavaVM = dalvikJavaVMPtr;
-        firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
-        secondJavaVM = runtimeJavaVMPtr;
-        
-        attachThreadIfNeed(&isAndroidThreadAttached, &runtimeJNIEnvPtr_ANDROID);
-        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
-    } else {
-        firstJavaVM = runtimeJavaVMPtr;
-        firstJNIEnv = runtimeJNIEnvPtr_JRE;
-        secondJavaVM = dalvikJavaVMPtr;
-        
-        attachThreadIfNeed(&isRuntimeThreadAttached, &dalvikJNIEnvPtr_JRE);
-        getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
-    }
-    
-    // printf("isAndroid=%p, isSecondJVMNull=%p\n", isAndroid, secondJavaVM == NULL);
-    
-    if (secondJavaVM != NULL) {
-        char *data_c = (char*)(*env)->GetStringUTFChars(env, data, 0);
-        // printf("data=%s\n", data_c);
-        jstring data_jre = (*secondJNIEnv)->NewStringUTF(secondJNIEnv, data_c);
-        (*env)->ReleaseStringUTFChars(env, data, data_c);
-        (*secondJNIEnv)->CallStaticVoidMethod(
-            secondJNIEnv,
-            isAndroid == JNI_TRUE ? inputBridgeClass_ANDROID : inputBridgeClass_JRE,
-            isAndroid == JNI_TRUE ? inputBridgeMethod_ANDROID : inputBridgeMethod_JRE,
-            type,
-            data_jre
-        );
-    }
-    // else: too early!
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing) {
@@ -229,26 +213,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
         }
     }
 }
-
-#define ADD_CALLBACK_WWIN(NAME) \
-GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
-    void** oldCallback = &GLFW_invoke_##NAME; \
-    GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
-    return (jlong) (uintptr_t) *oldCallback; \
-}
-
-ADD_CALLBACK_WWIN(Char);
-ADD_CALLBACK_WWIN(CharMods);
-ADD_CALLBACK_WWIN(CursorEnter);
-ADD_CALLBACK_WWIN(CursorPos);
-ADD_CALLBACK_WWIN(FramebufferSize);
-ADD_CALLBACK_WWIN(Key);
-ADD_CALLBACK_WWIN(MouseButton);
-ADD_CALLBACK_WWIN(Scroll);
-ADD_CALLBACK_WWIN(WindowSize);
-
-#undef ADD_CALLBACK_WWIN
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jint codepoint) {
     if (GLFW_invoke_Char && isInputReady) {
