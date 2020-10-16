@@ -30,6 +30,7 @@ public class JREUtils
     
     public static void initJavaRuntime() {
         dlopen(findInLdLibPath("libjli.so"));
+/*
         dlopen(findInLdLibPath("libjvm.so"));
         dlopen(findInLdLibPath("libverify.so"));
         dlopen(findInLdLibPath("libjava.so"));
@@ -38,6 +39,7 @@ public class JREUtils
         dlopen(findInLdLibPath("libnio.so"));
         dlopen(findInLdLibPath("libawt.so"));
         dlopen(findInLdLibPath("libawt_headless.so"));
+*/
         dlopen(nativeLibDir + "/libopenal.so");
         
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
@@ -107,9 +109,12 @@ public class JREUtils
         StringBuilder ldLibraryPath = new StringBuilder();
         
         for (String arch : Tools.currentArch.split("/")) {
-            ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + "/server:");
-            ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + "/jli:");
-            ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + ":");
+            File f = new File(Tools.homeJreDir + "/lib/" + arch);
+            if (f.exists() && f.isDirectory()) {
+                ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + "/server:");
+                ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + "/jli:");
+                ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + ":");
+            }
         }
         
         ldLibraryPath.append(
