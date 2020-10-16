@@ -25,5 +25,9 @@ I expected ...
  - CPU architecture [e.g. aarch64] 
  - Android Version [e.g. 10]
 
-**Additional context**
+<details> <summary><b>Additional context</b></summary>
+<br>
+<pre>
 Add any other context about the problem here.
+</pre>
+</details>
