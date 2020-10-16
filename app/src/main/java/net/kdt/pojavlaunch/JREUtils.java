@@ -30,18 +30,16 @@ public class JREUtils
     
     public static void initJavaRuntime() {
         dlopen(findInLdLibPath("libjli.so"));
-        
-        // As we set LD_LIBRARY_PATH, so it's not required to preload them
-        /*
-        dlopen("libjvm.so");
-        dlopen(Tools.homeJreDir + "/lib/libverify.so");
-        dlopen(Tools.homeJreDir + "/lib/libjava.so");
-        // dlopen(Tools.homeJreDir + "/lib/libjsig.so");
-        dlopen(Tools.homeJreDir + "/lib/libnet.so");
-        dlopen(Tools.homeJreDir + "/lib/libnio.so");
-        dlopen(Tools.homeJreDir + "/lib/libawt.so");
-        dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
-        */
+        dlopen(findInLdLibPath("libjvm.so"));
+    /*
+        dlopen(findInLdLibPath("libverify.so"));
+        dlopen(findInLdLibPath("libjava.so"));
+        // dlopen(findInLdLibPath("/lib/libjsig.so"));
+        dlopen(findInLdLibPath("libnet.so"));
+        dlopen(findInLdLibPath("libnio.so"));
+        dlopen(findInLdLibPath("libawt.so"));
+        dlopen(findInLdLibPath("libawt_headless.so"));
+    */
         dlopen(nativeLibDir + "/libopenal.so");
         
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
