@@ -14,24 +14,34 @@ import org.lwjgl.glfw.*;
 
 public class JREUtils
 {
-	private JREUtils() {}
+    private JREUtils() {}
     
     private static String nativeLibDir;
-	
-	public static void initJavaRuntime() {
-		dlopen("libjli.so");
+    
+    private static String findInLdLibPath(String libName) {
+        for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
+            File f = new File(libPath, libName);
+            if (f.exists() && f.isFile()) {
+                return f.getAbsolutePath();
+            }
+        }
+        return libName;
+    }
+    
+    public static void initJavaRuntime() {
+        dlopen(findInLdLibPath("libjli.so"));
         
         // As we set LD_LIBRARY_PATH, so it's not required to preload them
         /*
-		dlopen("libjvm.so");
-		dlopen(Tools.homeJreDir + "/lib/libverify.so");
-		dlopen(Tools.homeJreDir + "/lib/libjava.so");
-		// dlopen(Tools.homeJreDir + "/lib/libjsig.so");
-		dlopen(Tools.homeJreDir + "/lib/libnet.so");
-		dlopen(Tools.homeJreDir + "/lib/libnio.so");
-		dlopen(Tools.homeJreDir + "/lib/libawt.so");
-		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
-		*/
+        dlopen("libjvm.so");
+        dlopen(Tools.homeJreDir + "/lib/libverify.so");
+        dlopen(Tools.homeJreDir + "/lib/libjava.so");
+        // dlopen(Tools.homeJreDir + "/lib/libjsig.so");
+        dlopen(Tools.homeJreDir + "/lib/libnet.so");
+        dlopen(Tools.homeJreDir + "/lib/libnio.so");
+        dlopen(Tools.homeJreDir + "/lib/libawt.so");
+        dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
+        */
         dlopen(nativeLibDir + "/libopenal.so");
         
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
@@ -41,8 +51,8 @@ public class JREUtils
             System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
             dlopen(nativeLibDir + "/libgl04es.so");
         }
-	}
-	
+    }
+    
     private static boolean checkAccessTokenLeak = true;
     public static void redirectAndPrintJRELog(final LoggableActivity act, final String accessToken) {
         JREUtils.redirectLogcat();
@@ -91,12 +101,12 @@ public class JREUtils
             }
         });
         t.start();
-		Log.i("jrelog-logcat","Logcat thread started");
+        Log.i("jrelog-logcat","Logcat thread started");
     }
     
-	public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
+    public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
-		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
+        String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
         
         StringBuilder ldLibraryPath = new StringBuilder();
         
@@ -106,26 +116,26 @@ public class JREUtils
             ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + ":");
         }
         
-		ldLibraryPath.append(
-			// To make libjli.so ignore re-execute
-			Tools.homeJreDir + "/lib/server:" +
+        ldLibraryPath.append(
+            // To make libjli.so ignore re-execute
+            Tools.homeJreDir + "/lib/server:" +
             Tools.homeJreDir + "/lib/jli:" +
-			Tools.homeJreDir + "/lib:" +
+            Tools.homeJreDir + "/lib:" +
 
-			"/system/" + libName + ":" +
-			"/vendor/" + libName + ":" +
-			"/vendor/" + libName + "/hw:" +
+            "/system/" + libName + ":" +
+            "/vendor/" + libName + ":" +
+            "/vendor/" + libName + "/hw:" +
 
-			nativeLibDir
-		);
-		
-		setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
-		setEnvironment(launchType, "HOME", Tools.MAIN_PATH);
-		setEnvironment(launchType, "TMPDIR", ctx.getCacheDir().getAbsolutePath());
-		setEnvironment(launchType, "LIBGL_MIPMAP", "3");
-		setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-		setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath.toString());
-		setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+            nativeLibDir
+        );
+        
+        setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
+        setEnvironment(launchType, "HOME", Tools.MAIN_PATH);
+        setEnvironment(launchType, "TMPDIR", ctx.getCacheDir().getAbsolutePath());
+        setEnvironment(launchType, "LIBGL_MIPMAP", "3");
+        setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+        setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath.toString());
+        setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
         
         setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
         setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
@@ -148,34 +158,33 @@ public class JREUtils
         
         // REGAL_GL_EXTENSIONS
         
-		setLdLibraryPath(ldLibraryPath.toString());
-		
-		// return ldLibraryPath;
-	}
-	
-	private static void setEnvironment(int launchType, String name, String value) throws Throwable {
-		if (launchType == Tools.LTYPE_PROCESS) {
-			Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
-		} else {
-            Os.setenv(name, value, true);
-		}
-	}
+        setLdLibraryPath(ldLibraryPath.toString());
+        
+        // return ldLibraryPath;
+    }
+    
+    private static void setEnvironment(int launchType, String name, String value) throws Throwable {
+        if (launchType == Tools.LTYPE_PROCESS) {
+            Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
+        }
+        Os.setenv(name, value, true);
+    }
 
-	public static native int chdir(String path);
-	public static native boolean dlopen(String libPath);
+    public static native int chdir(String path);
+    public static native boolean dlopen(String libPath);
     public static native void redirectLogcat();
-	public static native void setLdLibraryPath(String ldLibraryPath);
-	public static native void setupBridgeWindow(Object surface);
-	
+    public static native void setLdLibraryPath(String ldLibraryPath);
+    public static native void setupBridgeWindow(Object surface);
+    
     // TODO AWT Android port
-	public static native void setupBridgeSurfaceAWT(long surface);
-	
-	// BEFORE Load and execute PIE binary using dlopen and dlsym("main")
-	// AFTER: [Deprecated]
+    public static native void setupBridgeSurfaceAWT(long surface);
+    
+    // BEFORE Load and execute PIE binary using dlopen and dlsym("main")
+    // AFTER: [Deprecated]
     @Deprecated
-	public static native int executeBinary(String[] args);
+    public static native int executeBinary(String[] args);
 
-	static {
-		System.loadLibrary("pojavexec");
-	}
+    static {
+        System.loadLibrary("pojavexec");
+    }
 }
