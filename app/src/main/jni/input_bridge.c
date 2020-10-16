@@ -72,6 +72,26 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
 }
 */
 
+#define ADD_CALLBACK_WWIN(NAME) \
+GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
+JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
+    void** oldCallback = &GLFW_invoke_##NAME; \
+    GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
+    return (jlong) (uintptr_t) *oldCallback; \
+}
+
+ADD_CALLBACK_WWIN(Char);
+ADD_CALLBACK_WWIN(CharMods);
+ADD_CALLBACK_WWIN(CursorEnter);
+ADD_CALLBACK_WWIN(CursorPos);
+ADD_CALLBACK_WWIN(FramebufferSize);
+ADD_CALLBACK_WWIN(Key);
+ADD_CALLBACK_WWIN(MouseButton);
+ADD_CALLBACK_WWIN(Scroll);
+ADD_CALLBACK_WWIN(WindowSize);
+
+#undef ADD_CALLBACK_WWIN
+
 void attachThreadIfNeed(bool* isAttached, JNIEnv** secondJNIEnvPtr) {
     if (!*isAttached && secondJavaVM) {
         (*secondJavaVM)->AttachCurrentThread(secondJavaVM, secondJNIEnvPtr, NULL);
@@ -106,26 +126,6 @@ void invokeCursorPos(int x, int y) {
     lastCursorX = x;
     lastCursorY = y;
 }
-
-#define ADD_CALLBACK_WWIN(NAME) \
-GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
-    void** oldCallback = &GLFW_invoke_##NAME; \
-    GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
-    return (jlong) (uintptr_t) *oldCallback; \
-}
-
-ADD_CALLBACK_WWIN(Char);
-ADD_CALLBACK_WWIN(CharMods);
-ADD_CALLBACK_WWIN(CursorEnter);
-ADD_CALLBACK_WWIN(CursorPos);
-ADD_CALLBACK_WWIN(FramebufferSize);
-ADD_CALLBACK_WWIN(Key);
-ADD_CALLBACK_WWIN(MouseButton);
-ADD_CALLBACK_WWIN(Scroll);
-ADD_CALLBACK_WWIN(WindowSize);
-
-#undef ADD_CALLBACK_WWIN
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUsePushPoll) {
     glfwInputEventIndex = -1;
