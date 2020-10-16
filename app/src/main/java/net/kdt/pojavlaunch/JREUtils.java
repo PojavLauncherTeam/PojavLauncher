@@ -31,7 +31,6 @@ public class JREUtils
     public static void initJavaRuntime() {
         dlopen(findInLdLibPath("libjli.so"));
         dlopen(findInLdLibPath("libjvm.so"));
-    /*
         dlopen(findInLdLibPath("libverify.so"));
         dlopen(findInLdLibPath("libjava.so"));
         // dlopen(findInLdLibPath("/lib/libjsig.so"));
@@ -39,7 +38,6 @@ public class JREUtils
         dlopen(findInLdLibPath("libnio.so"));
         dlopen(findInLdLibPath("libawt.so"));
         dlopen(findInLdLibPath("libawt_headless.so"));
-    */
         dlopen(nativeLibDir + "/libopenal.so");
         
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
