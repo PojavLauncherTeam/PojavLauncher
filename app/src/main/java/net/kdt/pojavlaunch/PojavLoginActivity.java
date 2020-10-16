@@ -347,10 +347,15 @@ public class PojavLoginActivity extends AppCompatActivity
             if (!isJavaRuntimeInstalled()) {
                 File jreTarFile = selectJreTarFile();
                 uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
-                IOUtils.copy(
-                    new FileInputStream(new File(Tools.homeJreDir, "lib/libfreetype.so.6")),
-                    new FileOutputStream(new File(Tools.homeJreDir, "lib/libfreetype.so"))
-                );
+                
+                File ftIn = new File(Tools.homeJreDir, "lib/libfreetype.so.6");
+                File ftOut = new File(Tools.homeJreDir, "lib/libfreetype.so");
+                if (ftIn.exists() && (!ftOut.exists() || ftIn.length() != ftOut.length())) {
+                    IOUtils.copy(
+                        new FileInputStream(ftIn),
+                        new FileOutputStream(ftOut)
+                    );
+                }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
             }
             
