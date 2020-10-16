@@ -66,13 +66,14 @@ static void logArgs(int argc, char** argv) {
 }
 
 JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_createLaunchMainJVM(JNIEnv *env, jclass clazz, jobjectArray vmArgArr, jstring mainClassStr, jobjectArray mainArgArr) {
+    /*
     void *libjvm = dlopen("libjvm.so", RTLD_NOW + RTLD_GLOBAL);
     if (libjvm == NULL) {
         LOGE("dlopen failed to open libjvm.so (dlerror %s).", dlerror());
         return -1;
     }
-
-    JNI_CreateJavaVM_func *jl_JNI_CreateJavaVM = (JNI_CreateJavaVM_func *) dlsym(libjvm, "JNI_CreateJavaVM");
+    */
+    JNI_CreateJavaVM_func *jl_JNI_CreateJavaVM = (JNI_CreateJavaVM_func *) dlsym(RTLD_NEXT /* libjvm */, "JNI_CreateJavaVM");
         if (jl_JNI_CreateJavaVM == NULL) {
         LOGE("dlsym failed to get JNI_CreateJavaVM (dlerror %s).", dlerror());
         return -1;
@@ -115,26 +116,25 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_createLaunchMainJVM(JNI
 
 static jint launchJVM(int argc, char** argv) {
     logArgs(argc, argv);
-
-   void* libjli = RTLD_DEFAULT;
-   // dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
+/*
+   void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
    
-    // Boardwalk: silence
-        // LOGD("JLI lib = %x", (int)libjli);
+   // Boardwalk: silence
+   // LOGD("JLI lib = %x", (int)libjli);
    if (NULL == libjli) {
        LOGE("JLI lib = NULL: %s", dlerror());
-       return 0;
+       return -1;
    }
    LOGD("Found JLI lib");
-
+*/
    JLI_Launch_func *pJLI_Launch =
-          (JLI_Launch_func *)dlsym(libjli, "JLI_Launch");
+          (JLI_Launch_func *)dlsym(RTLD_NEXT /* libjli */, "JLI_Launch");
     // Boardwalk: silence
     // LOGD("JLI_Launch = 0x%x", *(int*)&pJLI_Launch);
 
    if (NULL == pJLI_Launch) {
        LOGE("JLI_Launch = NULL");
-       return 0;
+       return -1;
    }
 
    LOGD("Calling JLI_Launch");
