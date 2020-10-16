@@ -19,8 +19,11 @@ public class JREUtils
     private static String nativeLibDir;
 	
 	public static void initJavaRuntime() {
-		dlopen(Tools.homeJreDir + "/lib/jli/libjli.so");
-		dlopen(Tools.homeJreDir + "/lib/server/libjvm.so");
+		dlopen("libjli.so");
+        
+        // As we set LD_LIBRARY_PATH, so it's not required to preload them
+        /*
+		dlopen("libjvm.so");
 		dlopen(Tools.homeJreDir + "/lib/libverify.so");
 		dlopen(Tools.homeJreDir + "/lib/libjava.so");
 		// dlopen(Tools.homeJreDir + "/lib/libjsig.so");
@@ -28,7 +31,7 @@ public class JREUtils
 		dlopen(Tools.homeJreDir + "/lib/libnio.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt.so");
 		dlopen(Tools.homeJreDir + "/lib/libawt_headless.so");
-		
+		*/
         dlopen(nativeLibDir + "/libopenal.so");
         
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
@@ -94,18 +97,26 @@ public class JREUtils
 	public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 		String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
-		String ldLibraryPath = (
+        
+        StringBuilder builder = new StringBuilder();
+        
+        for (String arch : Tools.currentArch.split("/")) {
+            builder.append(Tools.homeJreDir + "/lib/" + arch + "/server:");
+            builder.append(Tools.homeJreDir + "/lib/" + arch + "/jli:");
+            builder.append(Tools.homeJreDir + "/lib/" + arch + ":");
+        }
+        
+		builder.append(
 			// To make libjli.so ignore re-execute
 			Tools.homeJreDir + "/lib/server:" +
+            Tools.homeJreDir + "/lib/jli:" +
+			Tools.homeJreDir + "/lib:" +
 
 			"/system/" + libName + ":" +
 			"/vendor/" + libName + ":" +
 			"/vendor/" + libName + "/hw:" +
 
-			nativeLibDir + ":" +
-
-			Tools.homeJreDir + "/lib/jli:" +
-			Tools.homeJreDir + "/lib"
+			nativeLibDir
 		);
 		
 		setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
