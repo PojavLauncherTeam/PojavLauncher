@@ -204,7 +204,7 @@ public final class Tools
         
         // Should be compatible?
         // overrideableArgList.add("-Dos.name=Android");
-        overrideableArgList.add("-Dos.name=Linux");
+        overrideableArgList.add("-Dos.name=Android");
         overrideableArgList.add("-Dos.version=" + Build.VERSION.RELEASE);
 
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
@@ -222,6 +222,8 @@ public final class Tools
         overrideableArgList.add("-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight);
 
         overrideableArgList.add("-Dglfwstub.initEgl=false");
+        
+        overrideableArgList.add("-Dnet.minecraft.clientmodname=" + Tools.APP_NAME);
         
 		// Override args
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
