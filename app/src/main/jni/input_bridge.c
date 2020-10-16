@@ -159,10 +159,22 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
     return isGrabbing;
 }
 
+int diffX, diffY, logTimes;
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
     if (!isInputReady) isInputReady = true;
     if (isUsePushPollCall) {
-        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : lastCursorX), (double) (isGrabbing ? grabCursorY : lastCursorY));
+        if (diffX != lastCursorX || diffY != lastCursorY) {
+            if (logTimes < 1000) {
+                logTimes++;
+                LOGI("Mouse pos diff! x=%d, y=%d", lastCursorX, lastCursorY);
+            }
+            diffX = lastCursorX;
+            diffY = lastCursorY;
+        }
+        
+        if (GLFW_invoke_CursorPos) {
+            GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : lastCursorX), (double) (isGrabbing ? grabCursorY : lastCursorY));
+        }
         
         for (int i = 0; i < glfwInputEventIndex; i++) {
             struct GLFWInputEvent curr = glfwInputEventArr[i];
@@ -221,7 +233,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
         if (isUsePushPollCall) {
             struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_CHAR;
-            curr.ui1 = codepoint;
+            curr.ui1 = (unsigned int) codepoint;
         } else
             GLFW_invoke_Char(showingWindow, codepoint);
         return JNI_TRUE;
@@ -234,7 +246,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods
         if (isUsePushPollCall) {
             struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_CHAR_MODS;
-            curr.ui1 = codepoint;
+            curr.ui1 = (unsigned int) codepoint;
             curr.i2 = mods;
         } else
             GLFW_invoke_CharMods(showingWindow, codepoint, mods);
