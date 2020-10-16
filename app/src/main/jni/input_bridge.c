@@ -162,10 +162,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
     if (!isInputReady) isInputReady = true;
     if (isUsePushPollCall) {
-        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
+        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : lastCursorX), (double) (isGrabbing ? grabCursorY : lastCursorY));
         
         for (int i = 0; i < glfwInputEventIndex; i++) {
-            GLFWInputEvent curr = glfwInputEventArr[i];
+            struct GLFWInputEvent curr = glfwInputEventArr[i];
             switch (curr.type) {
                 case EVENT_TYPE_CHAR:
                     if (GLFW_invoke_Char) {
@@ -207,7 +207,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
                         GLFW_invoke_WindowSize(showingWindow, curr.i1, curr.i2);
                     }
                     break;
-                default: LOGW("Unknown GLFW input event: %d", curr.type;
+                default:
+                    LOGW("Unknown GLFW input event: %d", curr.type);
+                    break;
             }
             glfwInputEventIndex = -1;
         }
@@ -217,7 +219,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jint codepoint) {
     if (GLFW_invoke_Char && isInputReady) {
         if (isUsePushPollCall) {
-            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_CHAR;
             curr.ui1 = codepoint;
         } else
@@ -230,7 +232,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jint codepoint, jint mods) {
     if (GLFW_invoke_CharMods && isInputReady) {
         if (isUsePushPollCall) {
-            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_CHAR_MODS;
             curr.ui1 = codepoint;
             curr.i2 = mods;
@@ -253,7 +255,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
             if (GLFW_invoke_CursorEnter) {
                 isCursorEntered = true;
                 if (isUsePushPollCall) {
-                    GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+                    struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
                     curr.type = EVENT_TYPE_CURSOR_ENTER;
                     curr.i1 = 1;
                 } else
@@ -272,7 +274,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     if (GLFW_invoke_FramebufferSize && isInputReady) {
         if (isUsePushPollCall) {
-            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_FRAMEBUFFER_SIZE;
             curr.i1 = width;
             curr.i2 = height;
@@ -284,7 +286,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferS
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (GLFW_invoke_Key && isInputReady) {
         if (isUsePushPollCall) {
-            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_KEY;
             curr.i1 = key;
             curr.i2 = scancode;
@@ -302,7 +304,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
             isPrepareGrabPos = true;
         } else if (GLFW_invoke_MouseButton) {
             if (isUsePushPollCall) {
-                GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+                struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
                 curr.type = EVENT_TYPE_MOUSE_BUTTON;
                 curr.i1 = button;
                 curr.i2 = action;
@@ -316,7 +318,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEnv* env, jclass clazz, jdouble xoffset, jdouble yoffset) {
     if (GLFW_invoke_Scroll && isInputReady) {
         if (isUsePushPollCall) {
-            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_SCROLL;
             curr.d1 = (double) xoffset;
             curr.d2 = (double) yoffset;
@@ -328,7 +330,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEn
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendWindowSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     if (GLFW_invoke_WindowSize && isInputReady) {
         if (isUsePushPollCall) {
-            GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_WINDOW_SIZE;
             curr.i1 = width;
             curr.i2 = height;
