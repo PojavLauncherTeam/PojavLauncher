@@ -56,6 +56,7 @@ public class JREUtils
         JREUtils.redirectLogcat();
         Log.v("jrelog","Log starts here");
         Thread t = new Thread(new Runnable(){
+            int failTime = 0;
             @Override
             public void run() {
                 try {
@@ -89,6 +90,16 @@ public class JREUtils
                         }
                         
                         act.appendToLog(currStr);
+                    }
+                    
+                    if (p.exitValue() != 0) {
+                        Log.e("jrelog-logcat", "Logcat exited with code " + p.exitValue());
+                        failTime++;
+                        Log.i("jrelog-logcat", (failTime <= 10 ? "Restarting logcat" : "Too many restart fails") + " (attempt " + failTime + "/10");
+                        if (failTime <= 10) {
+                            run();
+                        }
+                        return;
                     }
                 } catch (IOException e) {
                     Log.e("jrelog-logcat", "IOException on logging thread");
