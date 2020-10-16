@@ -98,6 +98,8 @@ public class JREUtils
                         Log.i("jrelog-logcat", (failTime <= 10 ? "Restarting logcat" : "Too many restart fails") + " (attempt " + failTime + "/10");
                         if (failTime <= 10) {
                             run();
+                        } else {
+                            act.appendlnToLog("ERROR: Unable to get more log.");
                         }
                         return;
                     }
