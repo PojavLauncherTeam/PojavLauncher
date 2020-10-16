@@ -116,7 +116,9 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_createLaunchMainJVM(JNI
 static jint launchJVM(int argc, char** argv) {
     logArgs(argc, argv);
 
-   void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
+   void* libjli = RTLD_DEFAULT;
+   // dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
+   
     // Boardwalk: silence
         // LOGD("JLI lib = %x", (int)libjli);
    if (NULL == libjli) {
