@@ -163,6 +163,7 @@ int diffX, diffY, logTimes;
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
     if (!isInputReady) isInputReady = true;
     if (isUsePushPollCall) {
+        LOGI("Mouse pos curr! x=%d, y=%d; Input length=%d", lastCursorX, lastCursorY, glfwInputEventIndex);
         if (diffX != lastCursorX || diffY != lastCursorY) {
             if (logTimes < 1000) {
                 logTimes++;
