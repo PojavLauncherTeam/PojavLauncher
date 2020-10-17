@@ -33,7 +33,7 @@ public class LauncherPreferences
 		PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs", "");
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
             String DEFAULT_JAVA_ARGS =
-                "-Xms" + androidHeap + "m " +
+                "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
                 // (32bit) More than 800mb may make JVM not allocateable and crash
                 "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m " +
                 "-XX:+UseG1GC " +
