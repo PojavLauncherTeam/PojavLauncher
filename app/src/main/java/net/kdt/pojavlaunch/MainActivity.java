@@ -28,7 +28,7 @@ import android.system.*;
 public class MainActivity extends LoggableActivity implements OnTouchListener, OnClickListener
 {
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
-    public static boolean isPushPollCall;
+    volatile public static boolean isPushPollCall;
 
 	private static int[] hotbarKeys = {
 		LWJGLGLFWKeycode.GLFW_KEY_1, LWJGLGLFWKeycode.GLFW_KEY_2,	LWJGLGLFWKeycode.GLFW_KEY_3,
@@ -158,7 +158,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             
             // Minecraft 1.13+
             isPushPollCall = mVersionInfo.arguments != null;
-
+            CallbackBridge.nativeAttachThreadToOther(true, isPushPollCall);
+            
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 			CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
 			CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
