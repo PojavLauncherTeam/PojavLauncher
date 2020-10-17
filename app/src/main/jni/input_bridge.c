@@ -121,8 +121,9 @@ void invokeCursorPos(int x, int y) {
             return;
         }
     }
-    if (!isUseStackQueueCall)
+    if (!isUseStackQueueCall) {
         GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
+    }
     lastCursorX = x;
     lastCursorY = y;
 }
@@ -159,26 +160,26 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
     return isGrabbing;
 }
 
-int diffX, diffY, logTimes;
+int diffX, diffY, diffGrabX, diffGrabY;
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
     if (!isInputReady) isInputReady = true;
     if (isUseStackQueueCall) {
-        /*
-        LOGI("Mouse pos curr! x=%d, y=%d; Input length=%d", lastCursorX, lastCursorY, glfwInputEventIndex);
-        if (diffX != lastCursorX || diffY != lastCursorY) {
-            if (logTimes < 1000) {
-                logTimes++;
-                LOGI("Mouse pos diff! x=%d, y=%d", lastCursorX, lastCursorY);
-            }
+        if (!isGrabbing && (diffX != lastCursorX || diffY != lastCursorY)) {
             diffX = lastCursorX;
             diffY = lastCursorY;
+            
+            if (GLFW_invoke_CursorPos) {
+                GLFW_invoke_CursorPos(showingWindow, (double) lastCursorX), (double) lastCursorY));
+            }
+        } else if (isGrabbing && (diffGrabX != grabCursorX || diffGrabY != grabCursorY)) {
+            diffGrabX = grabCursorX;
+            diffGrabY = grabCursorY;
+            
+            if (GLFW_invoke_CursorPos) {
+                GLFW_invoke_CursorPos(showingWindow, (double) grabCursorX, (double) grabCursorY);
+            }
         }
-        */
-        
-        if (GLFW_invoke_CursorPos) {
-            GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : lastCursorX), (double) (isGrabbing ? grabCursorY : lastCursorY));
-        }
-        
+
         for (int i = 0; i < glfwInputEventIndex; i++) {
             struct GLFWInputEvent curr = glfwInputEventArr[i];
             switch (curr.type) {
