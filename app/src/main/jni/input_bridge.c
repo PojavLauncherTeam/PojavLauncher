@@ -160,9 +160,15 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
     return isGrabbing;
 }
 
-int diffX, diffY, diffGrabX, diffGrabY;
+int diffX, diffY, diffGrabX, diffGrabY, debugTimes;
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
     if (!isInputReady) isInputReady = true;
+    
+    if (debugTimes < 1000) {
+        debugTimes++;
+        LOGI("INPUT: IsUseStackQueue=%d, CurrentInputLength=%d, CursorX=%d, CursorY=%d", isUseStackQueueCall, glfwInputEventIndex, lastCursorX, lastCursorY);
+    }
+    
     if (isUseStackQueueCall) {
         if (diffX != lastCursorX || diffY != lastCursorY) {
             diffX = lastCursorX;
@@ -175,6 +181,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
 
         for (int i = 0; i <= glfwInputEventIndex; i++) {
             struct GLFWInputEvent curr = glfwInputEventArr[i];
+            
+            if (debugTimes < 1000) {
+                LOGI("INPUT: Got input event %d", curr.type);
+            }
+            
             switch (curr.type) {
                 case EVENT_TYPE_CHAR:
                     if (GLFW_invoke_Char) {
