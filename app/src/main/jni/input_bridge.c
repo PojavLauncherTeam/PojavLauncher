@@ -173,7 +173,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
             }
         }
 
-        for (int i = 0; i < glfwInputEventIndex; i++) {
+        for (int i = 0; i <= glfwInputEventIndex; i++) {
             struct GLFWInputEvent curr = glfwInputEventArr[i];
             switch (curr.type) {
                 case EVENT_TYPE_CHAR:
