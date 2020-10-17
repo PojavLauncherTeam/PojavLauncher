@@ -47,7 +47,7 @@ public class CallbackBridge {
     public static void sendKeycode(int keycode, char keychar, int modifiers, boolean isDown) {
         DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
         // TODO CHECK: This may cause input issue, not receive input!
-        if (!nativeSendCharMods(keycode, modifiers) ||!nativeSendChar(keycode)) {
+        if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar((int) keychar)) {
             nativeSendKey(keycode, 0 /* scancode */, isDown ? 1 : 0, modifiers);
         }
         
