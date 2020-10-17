@@ -164,19 +164,12 @@ int diffX, diffY, diffGrabX, diffGrabY;
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
     if (!isInputReady) isInputReady = true;
     if (isUseStackQueueCall) {
-        if (!isGrabbing && (diffX != lastCursorX || diffY != lastCursorY)) {
+        if (diffX != lastCursorX || diffY != lastCursorY) {
             diffX = lastCursorX;
             diffY = lastCursorY;
             
             if (GLFW_invoke_CursorPos) {
-                GLFW_invoke_CursorPos(showingWindow, (double) lastCursorX), (double) lastCursorY));
-            }
-        } else if (isGrabbing && (diffGrabX != grabCursorX || diffGrabY != grabCursorY)) {
-            diffGrabX = grabCursorX;
-            diffGrabY = grabCursorY;
-            
-            if (GLFW_invoke_CursorPos) {
-                GLFW_invoke_CursorPos(showingWindow, (double) grabCursorX, (double) grabCursorY);
+                GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : lastCursorX), (double) (isGrabbing ? grabCursorY : lastCursorY));
             }
         }
 
