@@ -26,6 +26,8 @@ Architectures:
 - [x] Input keyboard and mouse events from ART to OpenJDK environment
 - [x] Support Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
 - [x] Support Minecraft 1.13 and above. Used [GLFW stub](https://github.com/PojavLauncherTeam/lwjgl3-glfw-java).
+- [ ] Game surface zooming.
+- [x] New input pipe rewritten to native code to boost performance.
 - [ ] More...
 
 ## License
