@@ -10,8 +10,8 @@ struct GLFWInputEvent {
     int i1, i2, i3, i4;
     double d1, d2;
 };
-struct GLFWInputEvent glfwInputEventArr[100];
-int glfwInputEventIndex;
+static struct GLFWInputEvent glfwInputEventArr[100];
+static int glfwInputEventIndex;
 
 #define EVENT_TYPE_CHAR 1000
 #define EVENT_TYPE_CHAR_MODS 1001
