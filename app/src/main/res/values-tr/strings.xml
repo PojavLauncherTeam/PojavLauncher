@@ -14,6 +14,8 @@
 	-->
     <!-- MCLauncherActivity: Tabs -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_option_settings">Ayarlar</string>
+    <string name="mcl_setting_category_general">Genel ayarlar</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
@@ -39,6 +41,8 @@
 -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
+    <string name="control_listplayers">Tab</string>
     <!-- MainActivity: Menu advanced controls -->
     <!-- Update part (unused now) -->
+    <string name="main_play">Oyna</string>
 </resources>
