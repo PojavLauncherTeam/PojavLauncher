@@ -1,20 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Start Minecraft Java: Java editie op je apparaat!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">HELP</string>
     <!-- Languages list part -->
+    <string name="language_name">ENGLISH - US</string>
     <!-- Logging output -->
+    <string name="log_title">Log output</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">E-mail of gebruikersnaam</string>
+    <string name="login_online_username_question">(Welke gebruik ik dan?)</string>
+    <string name="login_online_password_hint">Wachtwoord</string>
+    <string name="login_online_password_question">Wachtwoord vergeten?</string>
+    <string name="login_online_remember">Mijn gegevens onthouden?</string>
+    <string name="login_online_check_keeplogin">Houd mij ingelogd</string>
+    <string name="login_online_login_label">Aanmelden</string>
+    <string name="login_online_create_account">(Nieuw account aanmaken?)</string>
+    <string name="login_offline_switch">Offline account?</string>
+    <string name="login_offline_label">Inloggen als offline account</string>
+    <string name="login_offline_alert_skip">Overslaan</string>
+    <string name="login_error_short_username">Gebruikersnaam moet uit minstens 3 tekens bestaan</string>
+    <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
+    <string name="login_select_account">Selecteer gebruiker</string>
     <!-- Hint -->
+    <string name="hint_select_account">Om te selecteren, klik erop. Om een account te verwijderen, houd deze ingedrukt.</string>
+    <string name="hint_control_mapping">"Deze functie is nog niet voltooid, dus kan aangepaste bediening op dit moment niet toepassen!\nVeeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, aanpassen of aanpassen of aanpassen."</string>
     <!-- Warning -->
+    <string name="warning_title">Waarschuwing</string>
+    <string name="warning_msg">Deze app is mogelijk niet compatibel met uw Android-versie (hoger of gelijk aan Android 7.0). Je kunt VMOS gebruiken en deze app in plaats daarvan installeren naar VMOS. Maar VMOS is verwijderd door Play Store, je moet het handmatig installeren.</string>
+    <string name="warning_noshowagain">Niet opnieuw weergeven</string>
+    <string name="warning_action_install">Installeer VMOS</string>
+    <string name="warning_action_tryanyway">Toch proberen</string>
+    <string name="warning_action_exit">Afsluiten</string>
+    <string name="warning_remove_account">Dit account wordt verwijderd!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Selecteer een keymap json</string>
+    <string name="alerttitle_installmod">Selecteer een mod om toe te voegen</string>
+    <string name="alerttitle_installoptifine">Selecteer OptiFine jar bestand</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher is onverwacht gecrasht</string>
+    <string name="error_checklog">Fout! Controleer het log hieronder: %s</string>
+    <string name="error_no_version">Geen versie!</string>
+    <string name="error_load_version">Versie %s kan niet geladen worden</string>
+    <string name="error_convert_lib">Kan bibliotheek %s niet converteren</string>
+    <string name="error_convert_client">Kan Minecraft %s niet converteren</string>
+    <string name="error_show_more">Meer weergeven</string>
+    <string name="error_show_less">Minder weergeven</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">De rechten om te lezen/schrijven naar opslag zijn vereist!</string>
+    <string name="toast_login_error">Er is iets misgegaan na het inloggen. Geef feedback aan de ontwikkelaar.\nFout: %s</string>
+    <string name="toast_optifine_success">Installatie geslaagd</string>
+    <string name="toast_shiftmode">Shift (sneak) knop modus gewijzigd naar %s</string>
+    <string name="toast_shiftmode_hold">Ingedrukt houden modus</string>
+    <string name="toast_shiftmode_toggle">Klik schakelaar modus</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Launcher nieuws</string>
+    <string name="mcl_tab_console">Ontwikkelings console</string>
+    <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Klaar om Minecraft %s te spelen</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
@@ -40,6 +90,41 @@
 -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
+    <string name="control_zoom">Verzoomen (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3de</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Muis</string>
+    <string name="control_mouseoff">Mouse: uit</string>
+    <string name="control_mouseon">Mouse: aan </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Geforceerd sluiten</string>
+    <string name="control_viewout">Log output</string>
+    <string name="control_adebug">PointerCapture Foutopsporing</string>
+    <string name="control_customkey">Verstuur aangepaste sleutelcode</string>
+    <string name="control_shiftmodechg">Verander Shift (Sneak) modus</string>
+    <string name="customctrl_keyname">Sleutelcode</string>
+    <string name="customctrl_specialkey">Speciale sleutel</string>
+    <string name="customctrl_hidden">Verborgen</string>
+    <string name="customctrl_addbutton">Knop toevoegen</string>
+    <string name="customctrl_title_selectctrl">Selecteer standaard control json</string>
+    <string name="customctrl_selectdefault">Selecteer standaard Control json</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Console bijwerken</string>
+    <string name="main_options">Opties</string>
+    <string name="main_play">Speel</string>
+    <string name="main_welcome">Welkom!</string>
+    <string name="main_infodev">Informatie (DEV)</string>
+    <string name="main_switchuser">Gebruiker wijzigen</string>
+    <string name="main_version_">Versie:</string>
+    <string name="main_nocrash">Geen crash gedetecteerd</string>
+    <string name="main_nolog">Geen log.</string>
 </resources>
