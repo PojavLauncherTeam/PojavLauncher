@@ -35,6 +35,7 @@
     <string name="warning_action_exit">Çıkış</string>
     <string name="warning_remove_account">Bu hesap silinecek!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Java Runtime indir %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Bir keymap json dosyası seçin</string>
     <string name="alerttitle_installmod">Yüklenecek modu seçin</string>
     <!-- Error messages -->
@@ -63,9 +64,46 @@
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
     <string name="mcl_launch_downloading">%s indiriliyor</string>
     <string name="mcl_launch_download_lib">%s kütüphanesi indiriliyor</string>
+    <string name="mcl_launch_download_client">Minecraft %s indiriliyor</string>
+    <string name="mcl_launch_convert_lib">%s kütüphanesi çevriliyor</string>
+    <string name="mcl_launch_convert_client">Minecraft %s çevriliyor</string>
+    <string name="mcl_launch_patch_client">Minecraft %s yamalanıyor</string>
+    <string name="mcl_launch_download_assets">Kaynakları yüklemeye hazırlanılıyor</string>
+    <string name="mcl_options">Ayarlar</string>
+    <string name="mcl_option_modmgr">Mod yöneticisi (işlevsiz)</string>
+    <string name="mcl_option_modinstall">Mod yükle (Forge, LabyMod, Fabric,...)</string>
+    <string name="mcl_option_modinstallwitharg">Mod yükle (özel argümanlarla)</string>
+    <string name="mcl_option_checkupdate">Güncellemeleri kontrol et</string>
+    <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
+    <string name="mcl_option_about">Launcher hakkında</string>
+    <string name="mcl_setting_title_uninstalljre">Java Runtime\'ı kaldır</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Başlatıcı için yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
+    <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerekir</string>
+    <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
+    <string name="mcl_setting_title_controlsize">Kontrol düğmelerinin büyüklüğünü ayarla</string>
+    <string name="mcl_setting_title_javaargs">JRE Başlatma argümanları</string>
+    <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
+    <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
+    <string name="mcl_setting_veroption_release">Sürümler</string>
+    <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
+    <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
+    <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
+    <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
+    <string name="global_add">Ekle</string>
+    <string name="global_edit">Düzenle</string>
+    <string name="global_error">Hata</string>
+    <string name="global_load">Yükle</string>
+    <string name="global_name">İsim</string>
+    <string name="global_remove">Kaldır</string>
+    <string name="global_restart">Yeniden başlat</string>
+    <string name="global_save">Kaydet</string>
+    <string name="global_unpacking">Açılıyor %s</string>
+    <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -89,7 +127,19 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
+    <string name="mcn_exit_call">Çıkış</string>
+    <string name="mcn_exit_crash">Oyun Çökmesi algılandı! Çıkmak için Tamam\'a basın.</string>
+    <string name="mcn_exit_errcrash">Çökmenin sebebi algılanamadı! Bunu görmezden gelebilirsiniz.</string>
+    <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 yüklenmemiş!</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s mimarisi Java Runtime %2$s ile uyumsuz.</string>
+    <string name="mcn_check_fail_java">Java VM denemesi başlatılmadı. Daha fazla bilgi için: %s.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Kontroller</string>
+    <string name="control_toggle">Grafiksel Kullanıcı Arayüzü</string>
+    <string name="control_keyboard">Klavye</string>
+    <string name="control_chat">Sohbet</string>
     <string name="control_debug">Debug</string>
     <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
@@ -109,6 +159,7 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Kapatmaya zorla</string>
     <string name="control_viewout">Günlük çıktısı</string>
+    <string name="control_adebug">Girdi hata ayıklaması</string>
     <string name="control_customkey">Özel anahtarkodu gönder</string>
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_specialkey">Özel Tuş</string>
