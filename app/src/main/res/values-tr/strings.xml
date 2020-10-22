@@ -167,6 +167,7 @@
     <string name="customctrl_hidden">Gizli</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_title_selectctrl">Varsayılan Control json\'u seç</string>
+    <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Konsolu güncelle</string>
     <string name="main_options">Ayarlar</string>
