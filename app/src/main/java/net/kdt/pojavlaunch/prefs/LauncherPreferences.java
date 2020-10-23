@@ -36,12 +36,12 @@ public class LauncherPreferences
                 "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
                 // (32bit) More than 800mb may make JVM not allocateable and crash
                 "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m " +
-                "-XX:+UseG1GC " +
                 "-XX:+UnlockExperimentalVMOptions " +
+                "-XX:+UseG1GC " +
                 "-XX:G1NewSizePercent=20 " +
                 "-XX:G1ReservePercent=20 " +
                 "-XX:MaxGCPauseMillis=50 " +
-                "-XX:G1HeapRegionSize=16M";
+                "-XX:G1HeapRegionSize=32M";
             
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
