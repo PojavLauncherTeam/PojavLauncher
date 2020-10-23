@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Edició de Java per Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Juga a Minecraft: edició de Java al teu dispositiu!</string>
+    <!-- Action bar part -->
+    <string name="actionbar_help">AJUDA</string>
+    <!-- Languages list part -->
+    <string name="language_name">ANGLES - US</string>
+    <!-- Logging output -->
+    <string name="log_title">Registra la sortida</string>
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email o usuari</string>
+    <string name="login_online_username_question">(Quin faig servir?)</string>
+    <string name="login_online_password_hint">Contrasenya</string>
+    <string name="login_online_password_question">Olbidat la contrasenya?</string>
+    <string name="login_online_remember">Recorda\'m?</string>
+    <string name="login_online_check_keeplogin">Mantenir-me connectat</string>
+    <string name="login_online_login_label">Iniciar sessió</string>
+    <string name="login_online_create_account">(Crear una conta nova?)</string>
+    <string name="login_offline_switch">Conta offline?</string>
+    <string name="login_offline_label">Enta amb una conta offline</string>
+    <string name="login_offline_alert_skip">Omet</string>
+    <string name="login_error_short_username">Nom d’usuari ha de ser com a minim 3 caracters o mes</string>
+    <string name="login_error_exist_username">Aquet nom d’usuari ja existeix</string>
+    <string name="login_select_account">Seleccioneu un compte</string>
+    <!-- Hint -->
+    <string name="hint_select_account">Per selecionar, clica. Per esorrar una conta, manten presionant.</string>
+    <!-- Warning -->
+    <string name="warning_title">Perill</string>
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <!-- Toast messages -->
+    <!--
+	<string name="toast_3">Exit</string>
+	-->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Strings -->
+    <!-- Global strings -->
+    <!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+    <!-- MainActivity: strings -->
+    <!-- MainActivity: Control buttons -->
+    <!-- MainActivity: Menu advanced controls -->
+    <!-- Update part (unused now) -->
+</resources>
