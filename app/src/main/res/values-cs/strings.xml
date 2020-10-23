@@ -88,7 +88,24 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
     <string name="mcl_setting_title_controlsize">Nastavit velikost ovládacích tlačítek</string>
     <string name="mcl_setting_title_forgetoptifpath">Nechte OptiFine nenajít sám sebe</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Užitečné pro umožnění spuštění OptiFine na některých zařízeních.</string>
+    <string name="mcl_setting_category_general">Obecná nastavení</string>
+    <string name="mcl_setting_category_veroption">Typ verze bude v seznamu verzí</string>
+    <string name="mcl_setting_veroption_release">Vydání</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
+    <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
+    <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
+    <string name="global_add">Přidat</string>
+    <string name="global_edit">Editovat</string>
+    <string name="global_error">Chyba</string>
+    <string name="global_load">Načíst</string>
+    <string name="global_name">Název</string>
+    <string name="global_remove">Odstranit</string>
+    <string name="global_restart">Restart</string>
+    <string name="global_save">Uložit</string>
+    <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -112,7 +129,17 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Hra ukončena</string>
+    <string name="mcn_exit_call">Ukončit</string>
+    <string name="mcn_exit_crash">Byl zjištěn pád hry! Klepnutím na tlačítko OK ukončíte.</string>
+    <string name="mcn_exit_errcrash">Nelze najít pád! Toto můžete ignorovat.</string>
+    <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Ovládání</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Klávesnice</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Ladění</string>
     <string name="control_zoom">Přiblížit (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
