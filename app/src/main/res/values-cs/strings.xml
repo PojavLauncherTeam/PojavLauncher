@@ -65,6 +65,29 @@
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Připraveno k spuštení Minecraftu %s</string>
+    <string name="mcl_launch_cleancache">Čištění souborů mezipaměti</string>
+    <string name="mcl_launch_downloading">Stahování %s</string>
+    <string name="mcl_launch_download_lib">Stahování knihovny %s</string>
+    <string name="mcl_launch_download_client">Stahování Minecraftu %s</string>
+    <string name="mcl_launch_convert_lib">Převádění knihovny %s</string>
+    <string name="mcl_launch_convert_client">Převádění Minecraftu %s</string>
+    <string name="mcl_launch_patch_client">Záplatuji Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
+    <string name="mcl_options">Nastavení</string>
+    <string name="mcl_option_modmgr">Manažer modů (bez funkce)</string>
+    <string name="mcl_option_optifineinstall">Nainstalovat OptiFine</string>
+    <string name="mcl_option_checkupdate">Zkontrolovat aktualizace</string>
+    <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
+    <string name="mcl_option_settings">Nastavení</string>
+    <string name="mcl_option_about">O aplikaci</string>
+    <string name="mcl_setting_title_setmaxdxref">Nastavit maximální DX reference</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Zvyšujte Pokud dojde k chybě během převodu: Příliš mnoho ... odkazů. Můžete zkusit multiplikační možnost. Doporučeno: 4096 nebo 8192.</string>
+    <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
+    <string name="mcl_setting_title_controlsize">Nastavit velikost ovládacích tlačítek</string>
+    <string name="mcl_setting_title_forgetoptifpath">Nechte OptiFine nenajít sám sebe</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
@@ -115,5 +138,16 @@
     <string name="customctrl_specialkey">Speciální písmeno</string>
     <string name="customctrl_hidden">Skryté</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
+    <string name="customctrl_title_selectctrl">Vybrat json výchozího ovládání</string>
+    <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Aktualizovat konzoli</string>
+    <string name="main_options">Nastavení</string>
+    <string name="main_play">Hrát</string>
+    <string name="main_welcome">Vítej,</string>
+    <string name="main_infodev">Údaje (DEV)</string>
+    <string name="main_switchuser">Přepnout uživatele</string>
+    <string name="main_version_">Verze:</string>
+    <string name="main_nocrash">Nenalezen žádný pád</string>
+    <string name="main_nolog">Žádný záznam.</string>
 </resources>
