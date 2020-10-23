@@ -4,16 +4,31 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_question">(Which one do I use?)</string>
+    <string name="login_offline_label">Login as a offline account</string>
+    <string name="login_error_short_username">Username must be at least 3 characters long</string>
     <!-- Hint -->
+    <string name="hint_select_account">To select an account, click. To delete an account, hold.</string>
+    <string name="hint_control_mapping">"This feature is not yet finished so you can't apply any custom controls at the moment!\nSwipe from right to left to open the menu ◀\nHold any buttons to customize them: edit, resize or delete."</string>
     <!-- Warning -->
+    <string name="warning_msg">This app is not compatible with your Android version (has to be above or equal Android 7.0). You can use VMOS, then install this app on VMOS instead. VMOS was removed in the Play Store, you will have to install it manually.</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Select a mod to add</string>
     <!-- Error messages -->
     <!-- Toast messages -->
+    <string name="toast_login_error">Something went wrong after loging in. Please contact us with the following error.\nError: %s</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_option_modmgr">Mod manager (under construction)</string>
+    <string name="mcl_option_checkupdate">Check for updates</string>
+    <string name="mcl_setting_subtitle_freeform">Launch Minecraft in a floating window (Requires Android 7.0 or newer)</string>
+    <string name="mcl_setting_title_longpresstrigger">Trigger press duration</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Trigger press duration for destroying blocks and dropping items.</string>
+    <string name="mcl_setting_title_controlsize">Set button size</string>
+    <string name="mcl_setting_category_veroption">Version type will be in the version list</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
@@ -38,7 +53,13 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Game exited</string>
+    <string name="mcn_exit_errcrash">Unable to locate crash! You can ignore this.</string>
+    <string name="mcn_exit_confirm">Are you sure you want to force close?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_up">🔼</string>
+    <string name="control_down">🔽</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_adebug">PointerCapture Debug</string>
     <!-- Update part (unused now) -->
 </resources>
