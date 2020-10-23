@@ -77,7 +77,35 @@
     <string name="mcl_option_modmgr">Mod manager (geen functie)</string>
     <string name="mcl_option_optifineinstall">OptiFine Installeren</string>
     <string name="mcl_option_checkupdate">Controleren op update</string>
+    <string name="mcl_option_customcontrol">Aangepaste controles</string>
+    <string name="mcl_option_settings">Instellingen</string>
+    <string name="mcl_option_about">Over deze app</string>
+    <string name="mcl_setting_title_setmaxdxref">Maximale DX referenties instellen</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Toename als tijdens omzetten een fout gelukkig: Te veel verwijzingen. Je kunt meerdex optie proberen. Aanbevolen: 4096 of 8192.</string>
+    <string name="mcl_setting_title_freeform">Start Minecraft in Freeform modus</string>
+    <string name="mcl_setting_subtitle_freeform">Start Minecraft in zwevend venster. Vereist Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Hoe lang zal starten na lange indrukken</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Verander de triggertijd voor lang indrukken van vernietig blok en laten vallen.</string>
+    <string name="mcl_setting_title_controlsize">Instellen van de regelknoppen</string>
+    <string name="mcl_setting_title_forgetoptifpath">Maak OptiFine niet in staat om zichzelf te vinden</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Handig om OptiFine launchable te maken op sommige apparaten.</string>
+    <string name="mcl_setting_category_general">Algemene instellingen</string>
+    <string name="mcl_setting_category_veroption">Versietype zal in de versielijst staan</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_version_clone">Dupliceren</string>
     <!-- Global strings -->
+    <string name="global_add">Toevoegen</string>
+    <string name="global_edit">Bewerken</string>
+    <string name="global_error">Foutmelding</string>
+    <string name="global_load">Lading</string>
+    <string name="global_name">Naam</string>
+    <string name="global_remove">Verwijderen</string>
+    <string name="global_restart">Opnieuw starten</string>
+    <string name="global_save">Opslaan</string>
+    <string name="global_error_field_empty">Dit veld mag niet leeg zijn</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -101,7 +129,17 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Spel beëindigd</string>
+    <string name="mcn_exit_call">Afsluiten</string>
+    <string name="mcn_exit_crash">Spel Crash gedetecteerd! Klik op OK om af te sluiten.</string>
+    <string name="mcn_exit_errcrash">Kan geen crash vinden! U kunt dit negeren.</string>
+    <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Besturing</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Toetsenbord</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Foutoplossing</string>
     <string name="control_zoom">Verzoomen (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
