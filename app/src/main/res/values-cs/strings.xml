@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft Java edice pro Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Spusť Minecraft Java edici v tvém zařízení!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">NÁPOVĚDA</string>
     <!-- Languages list part -->
+    <string name="language_name">CZECH - CZ</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email nebo uživatelské jméno</string>
+    <string name="login_online_username_question">(Který používám?)</string>
+    <string name="login_online_password_hint">Heslo</string>
+    <string name="login_online_password_question">Zapomněli jste heslo?</string>
+    <string name="login_online_remember">Zapamatuj si mne?</string>
+    <string name="login_online_check_keeplogin">Zůstat přihlášen</string>
+    <string name="login_online_login_label">Přihlásit se</string>
+    <string name="login_online_create_account">(Vytvořit nový účet?)</string>
+    <string name="login_offline_switch">Offline účet?</string>
+    <string name="login_offline_label">Přihlásit se jako offline účet</string>
+    <string name="login_offline_alert_skip">Přeskočit</string>
+    <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
+    <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
+    <string name="login_select_account">Vybrat účet</string>
     <!-- Hint -->
+    <string name="hint_select_account">Chcete-li vybrat, klepněte na to. Chcete-li účet odstranit, podržte jej.</string>
+    <string name="hint_control_mapping">"Tato funkce ještě není dokončena, takže v tuto chvíli nelze použít vlastní ovládání!\nPřejetím zprava doleva otevřete nabídku ◀\nPodrž tlačítko pro úpravu: upravit, změnit velikost nebo smazat."</string>
     <!-- Warning -->
+    <string name="warning_title">Varování</string>
+    <string name="warning_msg">Tato aplikace nemusí být kompatibilní s vaší verzí Androidu (Android 7.0 nebo novější). Můžete použít VMOS a nainstalovat tuto aplikaci na VMOS. Ale VMOS je odstraněn v Obchodě Play, musíte ji nainstalovat ručně.</string>
+    <string name="warning_noshowagain">Znovu nezobrazovat</string>
+    <string name="warning_action_install">Instalovat VMOS</string>
+    <string name="warning_action_tryanyway">Přesto zkusit</string>
+    <string name="warning_action_exit">Odejít</string>
+    <string name="warning_remove_account">Tento účet bude odstraněn!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Nainstalovat Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_selectkeymap">Vyber json klávesové mapy</string>
     <!-- Error messages -->
     <!-- Toast messages -->
     <!--
