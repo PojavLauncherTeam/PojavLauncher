@@ -37,13 +37,33 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Nainstalovat Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Vyber json klávesové mapy</string>
+    <string name="alerttitle_installmod">Vyberte mód k instalaci</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
+    <string name="error_checklog">Chyba! Zkontrolujte záznam níže: %s</string>
+    <string name="error_no_version">Žádná verze!</string>
+    <string name="error_load_version">Nelze načíst verzi %s</string>
+    <string name="error_convert_lib">Nelze převést knihovnu %s</string>
+    <string name="error_convert_client">Nelze převést Minecraft %s</string>
+    <string name="error_show_more">Zobrazit více</string>
+    <string name="error_show_less">Zobrazit méně</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Oprávnění ke čtení/zápisu do úložiště je požadováno!</string>
+    <string name="toast_login_error">Něco se po přihlášení pokazilo. Prosím pošlete zpětnou vazbu k vývojáři.\nChyba: %s</string>
+    <string name="toast_optifine_success">Instalace proběhla úspěšně</string>
+    <string name="toast_uninstalljre_done">Odinstalování Java Runtime dokončeno</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Novinky z launcheru</string>
+    <string name="mcl_tab_console">Vývojářská konzole</string>
+    <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Připraveno k spuštení Minecraftu %s</string>
+    <string name="mcl_launch_cleancache">Čištění souborů mezipaměti</string>
+    <string name="mcl_launch_downloading">Stahování %s</string>
+    <string name="mcl_launch_download_lib">Stahování knihovny %s</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
