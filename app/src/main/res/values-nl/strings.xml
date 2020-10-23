@@ -65,6 +65,18 @@
     <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Klaar om Minecraft %s te spelen</string>
+    <string name="mcl_launch_cleancache">Cache bestanden opschonen</string>
+    <string name="mcl_launch_downloading">Downloaden %s</string>
+    <string name="mcl_launch_download_lib">Download bibliotheek %s</string>
+    <string name="mcl_launch_download_client">Minecraft %s downloaden</string>
+    <string name="mcl_launch_convert_lib">Converteren van bibliotheek %s</string>
+    <string name="mcl_launch_convert_client">Minecraft %s converteren</string>
+    <string name="mcl_launch_patch_client">Patchen van Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Voorbereiden om bronnen te downloaden</string>
+    <string name="mcl_options">Opties</string>
+    <string name="mcl_option_modmgr">Mod manager (geen functie)</string>
+    <string name="mcl_option_optifineinstall">OptiFine Installeren</string>
+    <string name="mcl_option_checkupdate">Controleren op update</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
