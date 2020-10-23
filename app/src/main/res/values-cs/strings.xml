@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft Java edice pro Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Spusť Minecraft Java edici v tvém zařízení!</string>
+    <!-- Action bar part -->
+    <string name="actionbar_help">NÁPOVĚDA</string>
+    <!-- Languages list part -->
+    <string name="language_name">CZECH - CZ</string>
+    <!-- Logging output -->
+    <string name="log_title">Záznam výstupu</string>
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email nebo uživatelské jméno</string>
+    <string name="login_online_username_question">(Který používám?)</string>
+    <string name="login_online_password_hint">Heslo</string>
+    <string name="login_online_password_question">Zapomněli jste heslo?</string>
+    <string name="login_online_remember">Zapamatuj si mne?</string>
+    <string name="login_online_check_keeplogin">Zůstat přihlášen</string>
+    <string name="login_online_login_label">Přihlásit se</string>
+    <string name="login_online_create_account">(Vytvořit nový účet?)</string>
+    <string name="login_offline_switch">Offline účet?</string>
+    <string name="login_offline_label">Přihlásit se jako offline účet</string>
+    <string name="login_offline_alert_skip">Přeskočit</string>
+    <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
+    <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
+    <string name="login_select_account">Vybrat účet</string>
+    <!-- Hint -->
+    <string name="hint_select_account">Chcete-li vybrat, klepněte na to. Chcete-li účet odstranit, podržte jej.</string>
+    <string name="hint_control_mapping">"Tato funkce ještě není dokončena, takže v tuto chvíli nelze použít vlastní ovládání!\nPřejetím zprava doleva otevřete nabídku ◀\nPodrž tlačítko pro úpravu: upravit, změnit velikost nebo smazat."</string>
+    <!-- Warning -->
+    <string name="warning_title">Varování</string>
+    <string name="warning_msg">Tato aplikace nemusí být kompatibilní s vaší verzí Androidu (Android 7.0 nebo novější). Můžete použít VMOS a nainstalovat tuto aplikaci na VMOS. Ale VMOS je odstraněn v Obchodě Play, musíte ji nainstalovat ručně.</string>
+    <string name="warning_noshowagain">Znovu nezobrazovat</string>
+    <string name="warning_action_install">Instalovat VMOS</string>
+    <string name="warning_action_tryanyway">Přesto zkusit</string>
+    <string name="warning_action_exit">Odejít</string>
+    <string name="warning_remove_account">Tento účet bude odstraněn!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Vyber json klávesové mapy</string>
+    <string name="alerttitle_installmod">Vyberte mód pro přidání</string>
+    <string name="alerttitle_installoptifine">Vyber Optifine jar soubor</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
+    <string name="error_checklog">Chyba! Zkontrolujte záznam níže: %s</string>
+    <string name="error_no_version">Žádná verze!</string>
+    <string name="error_load_version">Nelze načíst verzi %s</string>
+    <string name="error_convert_lib">Nelze převést knihovnu %s</string>
+    <string name="error_convert_client">Nelze převést Minecraft %s</string>
+    <string name="error_show_more">Zobrazit více</string>
+    <string name="error_show_less">Zobrazit méně</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Oprávnění ke čtení/zápisu do úložiště je požadováno!</string>
+    <string name="toast_login_error">Něco se po přihlášení pokazilo. Prosím pošlete zpětnou vazbu k vývojáři.\nChyba: %s</string>
+    <string name="toast_optifine_success">Instalace proběhla úspěšně</string>
+    <string name="toast_shiftmode">Režim tlačítka Shift (plížení) byl změněn na %s</string>
+    <string name="toast_shiftmode_hold">Režim držení</string>
+    <string name="toast_shiftmode_toggle">Režim přepínání</string>
+    <!--
+	<string name="toast_3">Exit</string>
+	-->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Novinky launcheru</string>
+    <string name="mcl_tab_console">Vývojářská konzole</string>
+    <string name="mcl_tab_crash">Záznam pádu</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Připraveno k spuštení Minecraftu %s</string>
+    <!-- Global strings -->
+    <!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+    <!-- MainActivity: strings -->
+    <!-- MainActivity: Control buttons -->
+    <string name="control_zoom">Přiblížit (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3-tí</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Myš</string>
+    <string name="control_mouseoff">Myš: vypnuta</string>
+    <string name="control_mouseon">Myš: zapnuta </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Vynuceně zavřít</string>
+    <string name="control_viewout">Záznam výstupu</string>
+    <string name="control_adebug">PointerCapture Ladění</string>
+    <string name="control_customkey">Poslat vlastní klávesu</string>
+    <string name="control_shiftmodechg">Změnit režim Shift (plížení)</string>
+    <string name="customctrl_keyname">Kód písmena</string>
+    <string name="customctrl_specialkey">Speciální písmeno</string>
+    <string name="customctrl_hidden">Skryté</string>
+    <string name="customctrl_addbutton">Přidat tlačítko</string>
+    <!-- Update part (unused now) -->
+</resources>
