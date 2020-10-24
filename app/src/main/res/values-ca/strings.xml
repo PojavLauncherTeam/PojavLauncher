@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Edició de Java per Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition per Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Juga a Minecraft: edició de Java al teu dispositiu!</string>
     <!-- Action bar part -->
@@ -127,7 +127,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Game exited</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Game exited</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
     <string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
