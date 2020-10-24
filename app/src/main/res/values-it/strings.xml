@@ -65,6 +65,31 @@
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pronto a giocare Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Ripulendo i file di cache</string>
+    <string name="mcl_launch_downloading">Scaricando %s</string>
+    <string name="mcl_launch_download_lib">Scaricando libreria %s</string>
+    <string name="mcl_launch_download_client">Scaricando Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Convertendo libreria %s</string>
+    <string name="mcl_launch_convert_client">Convertendo Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Patchando Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
+    <string name="mcl_options">Impostazioni</string>
+    <string name="mcl_option_modmgr">Gestore Mod (nessuna funzione)</string>
+    <string name="mcl_option_optifineinstall">Installa Optifine</string>
+    <string name="mcl_option_checkupdate">Cerca aggiornamenti</string>
+    <string name="mcl_option_customcontrol">Controlli personalizzati</string>
+    <string name="mcl_option_settings">Impostazioni</string>
+    <string name="mcl_option_about">Informazioni</string>
+    <string name="mcl_setting_title_setmaxdxref">Imposta riferimenti DX massimi</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Aumenta se avviene un errore durante la conversione: Troppi ... riferimenti. Potresti anche provare le impostazioni dei multi-dex. Consigliato: 4096 o 8192.</string>
+    <string name="mcl_setting_title_freeform">Avvia Minecraft in modalità finestra</string>
+    <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Nessario Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
+    <string name="mcl_setting_title_controlsize">Imposta dimensione dei pulsanti di controllo</string>
+    <string name="mcl_setting_title_forgetoptifpath">Rendi incapace alla Optifine di rilevare la sua posizione</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Utile per avviare la Optifine su alcuni dispositivi.</string>
+    <string name="mcl_setting_category_general">Impostazioni generali</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
