@@ -115,8 +115,8 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
 void invokeCursorPos(int x, int y) {
     if (isGrabbing) {
         if (!isPrepareGrabPos) {
-            *grabCursorX += x - lastCursorX;
-            *grabCursorY += y - lastCursorY;
+            *grabCursorX += x - *lastCursorX;
+            *grabCursorY += y - *lastCursorY;
         } else {
             isPrepareGrabPos = false;
             *lastCursorX = x;
