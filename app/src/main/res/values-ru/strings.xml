@@ -127,7 +127,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Произошел собой приложение/игры с кодом %d</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Произошел собой приложение/игры с кодом %d</string>
     <string name="mcn_exit_call">Выход</string>
     <string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
