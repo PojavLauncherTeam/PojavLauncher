@@ -15,7 +15,7 @@
     <string name="login_online_username_question">(Quale dovrei usare?)</string>
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_password_question">Password dimenticata?</string>
-    <string name="login_online_remember">Memorizzare le credenziali?</string>
+    <string name="login_online_remember">Ricordami?</string>
     <string name="login_online_check_keeplogin">Resta collegato</string>
     <string name="login_online_login_label">Accedi</string>
     <string name="login_online_create_account">(Creare nuovo account?)</string>
@@ -35,7 +35,7 @@
     <string name="warning_action_install">Installa VMOS</string>
     <string name="warning_action_tryanyway">Prova comunque</string>
     <string name="warning_action_exit">Esci</string>
-    <string name="warning_remove_account">Questo account sarà rimosso!</string>
+    <string name="warning_remove_account">Questo account verrà rimosso!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Seleziona un keymap json</string>
     <string name="alerttitle_installmod">Seleziona una mod da aggiungere</string>
@@ -90,7 +90,22 @@
     <string name="mcl_setting_title_forgetoptifpath">Rendi incapace alla Optifine di rilevare la sua posizione</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Utile per avviare la Optifine su alcuni dispositivi.</string>
     <string name="mcl_setting_category_general">Impostazioni generali</string>
+    <string name="mcl_setting_category_veroption">Tipo di versioni che saranno visibili nella lista delle versioni</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
+    <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
+    <string name="global_add">Aggiungi</string>
+    <string name="global_edit">Modifica</string>
+    <string name="global_error">Errore</string>
+    <string name="global_load">Carica</string>
+    <string name="global_name">Nome</string>
+    <string name="global_remove">Rimuovi</string>
+    <string name="global_restart">Riavvia</string>
+    <string name="global_save">Salva</string>
+    <string name="global_error_field_empty">Questo campo non può essere vuoto</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -114,7 +129,17 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Il gioco è terminato</string>
+    <string name="mcn_exit_call">Esci</string>
+    <string name="mcn_exit_crash">Crash del gioco rilevato! Clicca OK per uscire.</string>
+    <string name="mcn_exit_errcrash">Impossibile individuare il crash! Potresti ignorare questo errore.</string>
+    <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Controlli</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Tastiera</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
     <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
