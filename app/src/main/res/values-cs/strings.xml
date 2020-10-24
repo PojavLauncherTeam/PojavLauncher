@@ -78,7 +78,32 @@
     <string name="mcl_option_settings">Nastavení</string>
     <string name="mcl_option_about">O aplikaci</string>
     <string name="mcl_setting_title_uninstalljre">Odinstalovat Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Restart launcheru vyžadován] Toto vám umožní přeinstalovat Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
+    <string name="mcl_setting_title_controlsize">Nastavit velikost ovládacích tlačítek</string>
+    <string name="mcl_setting_title_javaargs">JRE spouštěcí argumenty</string>
+    <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, pokud je upraveno bez znalostí.</string>
+    <string name="mcl_setting_category_general">Obecná nastavení</string>
+    <string name="mcl_setting_category_veroption">Typ verze bude v seznamu verzí</string>
+    <string name="mcl_setting_veroption_release">Vydání</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
+    <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
+    <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
+    <string name="global_add">Přidat</string>
+    <string name="global_edit">Editovat</string>
+    <string name="global_error">Chyba</string>
+    <string name="global_load">Načíst</string>
+    <string name="global_name">Název</string>
+    <string name="global_remove">Odstranit</string>
+    <string name="global_restart">Restart</string>
+    <string name="global_save">Uložit</string>
+    <string name="global_unpacking">Rozbalování %s</string>
+    <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -102,7 +127,54 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Aplikace/Hra skončila s kódem %d</string>
+    <string name="mcn_exit_call">Ukončit</string>
+    <string name="mcn_exit_crash">Byl zjištěn pád hry! Klepnutím na tlačítko OK ukončíte.</string>
+    <string name="mcn_exit_errcrash">Nelze najít pád! Toto můžete ignorovat.</string>
+    <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 nebyl nainstalován!</string>
+    <string name="mcn_check_fail_incompatiblearch">Architektura %1$s je nekompatibilní s Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_java">Nelze spustit test Java VM. Pro více informací zkontrolujte %s.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Ovládání</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Klávesnice</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Ladění</string>
+    <string name="control_zoom">Přiblížit (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3-tí</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Myš</string>
+    <string name="control_mouseoff">Myš: vypnuta</string>
+    <string name="control_mouseon">Myš: zapnuta </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Vynuceně zavřít</string>
+    <string name="control_viewout">Záznam výstupu</string>
+    <string name="control_adebug">Ladění Vstupu</string>
+    <string name="control_customkey">Poslat vlastní klávesu</string>
+    <string name="customctrl_keyname">Kód písmena</string>
+    <string name="customctrl_specialkey">Speciální písmeno</string>
+    <string name="customctrl_hidden">Skryté</string>
+    <string name="customctrl_addbutton">Přidat tlačítko</string>
+    <string name="customctrl_title_selectctrl">Vybrat json výchozího ovládání</string>
+    <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Aktualizovat konzoli</string>
+    <string name="main_options">Nastavení</string>
+    <string name="main_play">Hrát</string>
+    <string name="main_welcome">Vítej,</string>
+    <string name="main_infodev">Údaje (DEV)</string>
+    <string name="main_switchuser">Přepnout uživatele</string>
+    <string name="main_version_">Verze:</string>
+    <string name="main_nocrash">Nenalezen žádný pád</string>
+    <string name="main_nolog">Žádný záznam.</string>
 </resources>
