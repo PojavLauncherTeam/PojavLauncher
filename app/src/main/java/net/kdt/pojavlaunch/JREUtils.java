@@ -91,7 +91,7 @@ public class JREUtils
                         act.appendToLog(currStr);
                     }
                     
-                    if (p.exitValue() != 0) {
+                    if (p.waitFor() != 0) {
                         Log.e("jrelog-logcat", "Logcat exited with code " + p.exitValue());
                         failTime++;
                         Log.i("jrelog-logcat", (failTime <= 10 ? "Restarting logcat" : "Too many restart fails") + " (attempt " + failTime + "/10");
@@ -102,7 +102,7 @@ public class JREUtils
                         }
                         return;
                     }
-                } catch (IOException e) {
+                } catch (Throwable e) {
                     Log.e("jrelog-logcat", "IOException on logging thread");
                     e.printStackTrace();
 

@@ -60,17 +60,19 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 }
 
 // Should be?
-/*
 void JNI_OnUnload(JavaVM* vm, void* reserved) {
+/*
     if (dalvikJavaVMPtr == vm) {
     } else {
     }
     
     DetachCurrentThread(vm);
-    
+*/
+
+    free(glfwInputEventArr);
+
     return JNI_VERSION_1_4;
 }
-*/
 
 #define ADD_CALLBACK_WWIN(NAME) \
 GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
