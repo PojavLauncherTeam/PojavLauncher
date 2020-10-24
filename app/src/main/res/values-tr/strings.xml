@@ -127,7 +127,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Uygulama/Oyun %d koduyla kapandı</string>
     <string name="mcn_exit_call">Çıkış</string>
     <string name="mcn_exit_crash">Oyun Çökmesi algılandı! Çıkmak için Tamam\'a basın.</string>
     <string name="mcn_exit_errcrash">Çökmenin sebebi algılanamadı! Bunu görmezden gelebilirsiniz.</string>
