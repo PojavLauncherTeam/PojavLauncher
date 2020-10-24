@@ -53,9 +53,9 @@
     <string name="toast_permission_denied">Es requireix el permis de llegir/escriure!</string>
     <string name="toast_login_error">Error al entrar al teu conte. Siusplau envian’s el text seguent.\nError: %s</string>
     <string name="toast_optifine_success">Instalació completada</string>
-    <string name="toast_shiftmode">La tecla Shift (sneak) s’ha canviat al mode %s</string>
-    <string name="toast_shiftmode_hold">Mode de espera</string>
-    <string name="toast_shiftmode_toggle">Mode de click toggle</string>
+    <string name="toast_shiftmode" comment="toast_shiftmode&#10;&#10;%s will be replaced with one of the following strings: toast_shiftmode_hold, toast_shiftmode_toggle">La tecla Shift (sneak) s’ha canviat al mode %s</string>
+    <string name="toast_shiftmode_hold" comment="toast_shiftmode_hold&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Mode de espera</string>
+    <string name="toast_shiftmode_toggle" comment="toast_shiftmode_toggle&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Mode de click toggle</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -129,7 +129,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Game exited</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Game exited</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
     <string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
