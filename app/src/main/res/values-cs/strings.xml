@@ -64,6 +64,20 @@
     <string name="mcl_launch_cleancache">Čištění souborů mezipaměti</string>
     <string name="mcl_launch_downloading">Stahování %s</string>
     <string name="mcl_launch_download_lib">Stahování knihovny %s</string>
+    <string name="mcl_launch_download_client">Stahování Minecraftu %s</string>
+    <string name="mcl_launch_convert_lib">Převádění knihovny %s</string>
+    <string name="mcl_launch_convert_client">Převádění Minecraftu %s</string>
+    <string name="mcl_launch_patch_client">Záplatuji Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
+    <string name="mcl_options">Nastavení</string>
+    <string name="mcl_option_modmgr">Manažer modů (bez funkce)</string>
+    <string name="mcl_option_modinstall">Nainstalovat mód (Forge, LabyMod, Fabric,...)</string>
+    <string name="mcl_option_modinstallwitharg">Instalovat mód (s vlastními argumenty)</string>
+    <string name="mcl_option_checkupdate">Zkontrolovat aktualizace</string>
+    <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
+    <string name="mcl_option_settings">Nastavení</string>
+    <string name="mcl_option_about">O aplikaci</string>
+    <string name="mcl_setting_title_uninstalljre">Odinstalovat Java Runtime</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
