@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft Java edice pro Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition pro Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Spusť Minecraft Java edici v tvém zařízení!</string>
+    <string name="app_motd">Spusť Minecraft Java Edition v tvém zařízení!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">NÁPOVĚDA</string>
     <!-- Languages list part -->
@@ -53,9 +53,9 @@
     <string name="toast_permission_denied">Oprávnění ke čtení/zápisu do úložiště je požadováno!</string>
     <string name="toast_login_error">Něco se po přihlášení pokazilo. Prosím pošlete zpětnou vazbu k vývojáři.\nChyba: %s</string>
     <string name="toast_optifine_success">Instalace proběhla úspěšně</string>
-    <string name="toast_shiftmode">Režim tlačítka Shift (plížení) byl změněn na %s</string>
-    <string name="toast_shiftmode_hold">Režim držení</string>
-    <string name="toast_shiftmode_toggle">Režim přepínání</string>
+    <string name="toast_shiftmode" comment="toast_shiftmode&#10;&#10;%s will be replaced with one of the following strings: toast_shiftmode_hold, toast_shiftmode_toggle">Režim tlačítka Shift (plížení) byl změněn na %s</string>
+    <string name="toast_shiftmode_hold" comment="toast_shiftmode_hold&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Režim držení</string>
+    <string name="toast_shiftmode_toggle" comment="toast_shiftmode_toggle&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Režim přepínání</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
