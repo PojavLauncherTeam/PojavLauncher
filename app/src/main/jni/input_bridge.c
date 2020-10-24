@@ -10,7 +10,7 @@ struct GLFWInputEvent {
     int i1, i2, i3, i4;
     double d1, d2;
 };
-GLFWInputEvent* glfwInputEventArr;
+struct GLFWInputEvent* glfwInputEventArr;
 int glfwInputEventIndex;
 
 #define EVENT_TYPE_CHAR 1000
@@ -134,8 +134,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
     if (isUseStackQueue) {
         isPrepareGrabPos = true;
         
-        glfwInputEventArr = calloc(100, sizeof(GLFWInputEvent));
-    } else if (isAndroid) {
+        glfwInputEventArr = calloc(100, sizeof(struct GLFWInputEvent));
+    }
+    
+    if (isAndroid) {
         firstJavaVM = dalvikJavaVMPtr;
         firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
         secondJavaVM = runtimeJavaVMPtr;
@@ -296,7 +298,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     if (GLFW_invoke_FramebufferSize && isInputReady) {
         if (isUseStackQueueCall) {
-            struct GLFWInputEvent *curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_FRAMEBUFFER_SIZE;
             curr.i1 = width;
             curr.i2 = height;
@@ -308,7 +310,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferS
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (GLFW_invoke_Key && isInputReady) {
         if (isUseStackQueueCall) {
-            struct GLFWInputEvent *curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_KEY;
             curr.i1 = key;
             curr.i2 = scancode;
@@ -326,7 +328,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
             isPrepareGrabPos = true;
         } else if (GLFW_invoke_MouseButton) {
             if (isUseStackQueueCall) {
-                struct GLFWInputEvent *curr = glfwInputEventArr[glfwInputEventIndex++];
+                struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
                 curr.type = EVENT_TYPE_MOUSE_BUTTON;
                 curr.i1 = button;
                 curr.i2 = action;
