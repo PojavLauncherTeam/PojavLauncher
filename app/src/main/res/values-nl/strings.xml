@@ -127,7 +127,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Applicatie/spel is afgesloten met code %d</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Applicatie/spel is afgesloten met code %d</string>
     <string name="mcn_exit_call">Afsluiten</string>
     <string name="mcn_exit_crash">Spel Crash gedetecteerd! Klik op OK om af te sluiten.</string>
     <string name="mcn_exit_errcrash">Kan geen crash vinden! U kunt dit negeren.</string>
