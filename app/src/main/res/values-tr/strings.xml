@@ -53,9 +53,9 @@
     <string name="toast_permission_denied">Okuma/yazma izinleri depolama için gerekli!</string>
     <string name="toast_login_error">Girişten sonra birşey yanlış gitti. Lütfen geliştiricimize geri bildirimde bulunun.\nHata: %s</string>
     <string name="toast_optifine_success">Yükleme başarılı</string>
-    <string name="toast_shiftmode">Shift (eğilme) düğmesi %s düğmesine değişti</string>
-    <string name="toast_shiftmode_hold">Basılı tutma modu</string>
-    <string name="toast_shiftmode_toggle">Geçiş tuşuna tıkla</string>
+    <string name="toast_shiftmode" comment="toast_shiftmode&#10;&#10;%s will be replaced with one of the following strings: toast_shiftmode_hold, toast_shiftmode_toggle">Shift (eğilme) düğmesi %s düğmesine değişti</string>
+    <string name="toast_shiftmode_hold" comment="toast_shiftmode_hold&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Basılı tutma modu</string>
+    <string name="toast_shiftmode_toggle" comment="toast_shiftmode_toggle&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Geçiş tuşuna tıkla</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -130,7 +130,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Oyundan çıkıldı</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Oyundan çıkıldı</string>
     <string name="mcn_exit_call">Çıkış</string>
     <string name="mcn_exit_crash">Oyun Çökmesi algılandı! Çıkmak için Tamam\'a basın.</string>
     <string name="mcn_exit_errcrash">Çökmenin sebebi algılanamadı! Bunu görmezden gelebilirsiniz.</string>
