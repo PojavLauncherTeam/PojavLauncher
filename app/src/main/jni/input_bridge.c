@@ -11,6 +11,9 @@ struct GLFWInputEvent {
     double d1, d2;
 };
 struct GLFWInputEvent* glfwInputEventArr;
+
+int *grabCursorX, *grabCursorY, *lastCursorX, *lastCursorY;
+
 int glfwInputEventIndex;
 
 #define EVENT_TYPE_CHAR 1000
@@ -70,8 +73,6 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
 */
 
     free(glfwInputEventArr);
-
-    return JNI_VERSION_1_4;
 }
 
 #define ADD_CALLBACK_WWIN(NAME) \
@@ -114,20 +115,20 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
 void invokeCursorPos(int x, int y) {
     if (isGrabbing) {
         if (!isPrepareGrabPos) {
-            grabCursorX += x - lastCursorX;
-            grabCursorY += y - lastCursorY;
+            *grabCursorX += x - lastCursorX;
+            *grabCursorY += y - lastCursorY;
         } else {
             isPrepareGrabPos = false;
-            lastCursorX = x;
-            lastCursorY = y;
+            *lastCursorX = x;
+            *lastCursorY = y;
             return;
         }
     }
     if (!isUseStackQueueCall) {
-        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
+        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? *grabCursorX : x), (double) (isGrabbing ? *grabCursorY : y));
     }
-    lastCursorX = x;
-    lastCursorY = y;
+    *lastCursorX = x;
+    *lastCursorY = y;
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
@@ -137,9 +138,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
         isPrepareGrabPos = true;
         
         glfwInputEventArr = calloc(100, sizeof(struct GLFWInputEvent));
-    }
-    
-    if (isAndroid) {
+    } else if (isAndroid) {
         firstJavaVM = dalvikJavaVMPtr;
         firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
         secondJavaVM = runtimeJavaVMPtr;
@@ -169,29 +168,29 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
 int diffX, diffY, diffGrabX, diffGrabY, debugTimes;
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jclass clazz) {
     if (!isInputReady) isInputReady = true;
-    
+/*
     if (debugTimes < 1000) {
         debugTimes++;
-        LOGI("INPUT: IsUseStackQueue=%d, CurrentInputLength=%d, CursorX=%d, CursorY=%d", isUseStackQueueCall, glfwInputEventIndex, lastCursorX, lastCursorY);
+        LOGI("INPUT: IsUseStackQueue=%d, CurrentInputLength=%d, CursorX=%d, CursorY=%d", isUseStackQueueCall, glfwInputEventIndex, *lastCursorX, *lastCursorY);
     }
-    
+*/
     if (isUseStackQueueCall) {
-        if (diffX != lastCursorX || diffY != lastCursorY) {
-            diffX = lastCursorX;
-            diffY = lastCursorY;
+        if (diffX != *lastCursorX || diffY != *lastCursorY) {
+            diffX = *lastCursorX;
+            diffY = *lastCursorY;
             
             if (GLFW_invoke_CursorPos) {
-                GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : lastCursorX), (double) (isGrabbing ? grabCursorY : lastCursorY));
+                GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? *grabCursorX : *lastCursorX), (double) (isGrabbing ? *grabCursorY : *lastCursorY));
             }
         }
 
         for (int i = 0; i <= glfwInputEventIndex; i++) {
             struct GLFWInputEvent curr = glfwInputEventArr[i];
-            
+/*
             if (debugTimes < 1000) {
                 LOGI("INPUT: Got input event %d", curr.type);
             }
-            
+*/
             switch (curr.type) {
                 case EVENT_TYPE_CHAR:
                     if (GLFW_invoke_Char) {
@@ -237,8 +236,8 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
                     LOGW("Unknown GLFW input event: %d", curr.type);
                     break;
             }
-            glfwInputEventIndex = -1;
         }
+        glfwInputEventIndex = -1;
     }
 }
 

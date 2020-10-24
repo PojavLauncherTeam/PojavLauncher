@@ -11,8 +11,6 @@ JavaVM* dalvikJavaVMPtr;
 JNIEnv* dalvikJNIEnvPtr_ANDROID;
 JNIEnv* dalvikJNIEnvPtr_JRE;
 
-int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
-
 long showingWindow;
 
 bool isAndroidThreadAttached, isRuntimeThreadAttached, isInputReady, isCursorEntered, isPrepareGrabPos;
