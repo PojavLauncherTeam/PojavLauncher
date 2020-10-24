@@ -129,7 +129,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Hra ukončena</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Hra ukončena</string>
     <string name="mcn_exit_call">Ukončit</string>
     <string name="mcn_exit_crash">Byl zjištěn pád hry! Klepnutím na tlačítko OK ukončíte.</string>
     <string name="mcn_exit_errcrash">Nelze najít pád! Toto můžete ignorovat.</string>
