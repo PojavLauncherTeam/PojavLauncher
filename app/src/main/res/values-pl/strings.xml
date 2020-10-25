@@ -16,6 +16,7 @@
     <string name="login_online_password_hint">Hasło</string>
     <string name="login_online_password_question">Zapomniałeś hasła?</string>
     <string name="login_online_remember">Zapamiętaj mnie?</string>
+    <string name="login_online_check_keeplogin">Pozostaw mnie zalogowanym</string>
     <string name="login_online_login_label">Zaloguj sie</string>
     <string name="login_online_create_account">(Stwórz nowe konto?)</string>
     <string name="login_offline_switch">Konto offline?</string>
@@ -122,7 +123,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Gra została zakończona</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Gra została zakończona</string>
     <string name="mcn_exit_call">Wyjście</string>
     <string name="mcn_exit_crash">Wykryto awarię gry! Kliknij OK, aby wyjść.</string>
     <string name="mcn_exit_errcrash">Nie można zlokalizować awarii!</string>
