@@ -51,7 +51,7 @@
     <string name="toast_permission_denied">Wymagane jest uprawnienie do odczytu / zapisu w pamięci!</string>
     <string name="toast_login_error">Coś poszło nie tak po zalogowaniu. Prześlij opinię do programisty. \ NBłąd:% s</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
-    <string name="toast_uninstalljre_done">Zakończono odinstalowanie Java Runtime</string>
+    <string name="toast_uninstalljre_done">Zakończono odinstalowywanie Java Runtime</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -71,8 +71,8 @@
     <string name="mcl_launch_download_assets">Przygotowanie do pobrania zasobów</string>
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modmgr">Menedżer modów (brak funkcji)</string>
-    <string name="mcl_option_modinstall">Zainstaluj mody (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Zainstaluj mody (z niestandardowymi argumentami)</string>
+    <string name="mcl_option_modinstall">Zainstaluj modyfikacje (Forge, LabyMod, Fabric,...)</string>
+    <string name="mcl_option_modinstallwitharg">Zainstaluj modyfikacje (z niestandardowymi argumentami)</string>
     <string name="mcl_option_checkupdate">Sprawdź aktualizacje</string>
     <string name="mcl_option_customcontrol">Niestandardowe kontrole</string>
     <string name="mcl_option_settings">Ustawienia</string>
@@ -84,7 +84,7 @@
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
     <string name="mcl_setting_title_controlsize">Ustaw rozmiar przycisków sterujących</string>
-    <string name="mcl_setting_title_javaargs">Argumenty JRE Launch</string>
+    <string name="mcl_setting_title_javaargs">Argumenty uruchamiania JRE</string>
     <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostanie ona zmodyfikowana bez wiedzy.</string>
     <string name="mcl_setting_category_general">Ustawienia główne</string>
     <string name="mcl_setting_category_veroption">Typ wersji będzie na liście wersji</string>
@@ -100,7 +100,7 @@
     <string name="global_load">Załaduj</string>
     <string name="global_name">Nazwa</string>
     <string name="global_remove">Usunąć</string>
-    <string name="global_restart">Urucham ponownie</string>
+    <string name="global_restart">Uruchom ponownie</string>
     <string name="global_save">Zapisać</string>
     <string name="global_unpacking">Rozpakowywanie %s</string>
     <string name="global_error_field_empty">To pole nie może być puste</string>
@@ -127,20 +127,20 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Aplikacja/Gra zakończyła się kodem %d</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Aplikacja/Gra zakończyła się z kodem %d</string>
     <string name="mcn_exit_call">Wyjście</string>
     <string name="mcn_exit_crash">Wykryto awarię gry! Kliknij OK, aby wyjść.</string>
     <string name="mcn_exit_errcrash">Nie można zlokalizować awarii!</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niezgodna z Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Nie można uruchomić testu Java VM. Sprawdź %s aby uzyskać więcej informacji.</string>
+    <string name="mcn_check_fail_java">Nie można uruchomić testu Java VM. Sprawdź %s, aby uzyskać więcej informacji.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Sterownica</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
-    <string name="control_debug">Debug</string>
+    <string name="control_debug">Debugowanie</string>
     <string name="control_zoom">Powiększenie (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
@@ -176,5 +176,5 @@
     <string name="main_switchuser">Przełącz użytkownika</string>
     <string name="main_version_">Wersja:</string>
     <string name="main_nocrash">Nie wykryto awarii</string>
-    <string name="main_nolog">Brak logów.</string>
+    <string name="main_nolog">Brak plików dziennika.</string>
 </resources>
