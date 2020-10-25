@@ -20,6 +20,7 @@
     <string name="login_online_login_label">Zaloguj sie</string>
     <string name="login_online_create_account">(Stwórz nowe konto?)</string>
     <string name="login_offline_switch">Konto offline?</string>
+    <string name="login_offline_label">Zaloguj się jako konto offline</string>
     <string name="login_offline_alert_skip">Pominąć</string>
     <string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
@@ -40,6 +41,7 @@
     <string name="alerttitle_installmod">Wybierz mod do dodania</string>
     <string name="alerttitle_installoptifine">Wybierz plik jar OptiFine</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
     <string name="error_checklog">Błąd! Sprawdź dziennik poniżej: %s</string>
     <string name="error_no_version">Brak wersji!</string>
     <string name="error_load_version">Nie można załadować wersji %s</string>
@@ -51,6 +53,9 @@
     <string name="toast_permission_denied">Wymagane jest uprawnienie do odczytu / zapisu w pamięci!</string>
     <string name="toast_login_error">Coś poszło nie tak po zalogowaniu. Prześlij opinię do programisty. \ NBłąd:% s</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
+    <string name="toast_shiftmode" comment="toast_shiftmode&#10;&#10;%s will be replaced with one of the following strings: toast_shiftmode_hold, toast_shiftmode_toggle">Przycisk Shift (skradanie) zmieniony na %s</string>
+    <string name="toast_shiftmode_hold" comment="toast_shiftmode_hold&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Tryb przytrzymania</string>
+    <string name="toast_shiftmode_toggle" comment="toast_shiftmode_toggle&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Kliknij przełącznik tybu</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -98,6 +103,7 @@
     <string name="global_load">Załaduj</string>
     <string name="global_name">Nazwa</string>
     <string name="global_remove">Usunąć</string>
+    <string name="global_restart">Urucham ponownie</string>
     <string name="global_save">Zapisać</string>
     <string name="global_error_field_empty">To pole nie może być puste</string>
     <!--
@@ -139,6 +145,11 @@
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mysz</string>
@@ -149,6 +160,7 @@
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Debugowanie PointerCapture</string>
     <string name="control_customkey">Wyślij własny kod klucza</string>
+    <string name="control_shiftmodechg">Zmień działanie Shift\'u (skradanie)</string>
     <string name="customctrl_keyname">Kod Klucza</string>
     <string name="customctrl_specialkey">Klucz specjalny</string>
     <string name="customctrl_hidden">Ukryty</string>
@@ -157,4 +169,12 @@
     <string name="customctrl_selectdefault">Wybierz domyślny json Control</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Zaktualizuj konsolę</string>
+    <string name="main_options">Opcje</string>
+    <string name="main_play">Graj</string>
+    <string name="main_welcome">Witaj,</string>
+    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_switchuser">Przełącz użytkownika</string>
+    <string name="main_version_">Wersja:</string>
+    <string name="main_nocrash">Nie wykryto awarii</string>
+    <string name="main_nolog">Brak logów.</string>
 </resources>
