@@ -19,7 +19,7 @@
     <string name="login_online_create_account">(Stwórz nowe konto?)</string>
     <string name="login_offline_switch">Konto offline?</string>
     <string name="login_offline_label">Zaloguj się jako konto offline</string>
-    <string name="login_offline_alert_skip">Pominąć</string>
+    <string name="login_offline_alert_skip">Pomiń</string>
     <string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_select_account">Wybierz konto</string>
@@ -28,11 +28,11 @@
     <string name="hint_control_mapping">"„Ta funkcja nie została jeszcze ukończona, więc nie można w tej chwili zastosować niestandardowego sterowania! \ NPrzesuń palcem od prawej do lewej, aby otworzyć menu ◀ \ nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.”"</string>
     <!-- Warning -->
     <string name="warning_title">Ostrzeżenie</string>
-    <string name="warning_msg">Ta aplikacja może nie być zgodna z Twoją wersją Androida (powyżej lub równa Androidowi 7.0). Możesz użyć VMOS, a następnie zainstalować tę aplikację w VMOS. Ale VMOS jest usuwany przez Sklep Play, musisz go zainstalować ręcznie.</string>
+    <string name="warning_msg">Ta aplikacja może nie być zgodna z Twoją wersją Androida (nowszy niż Android 7 lub Android 7). Możesz użyć VMOS, a następnie zainstalować tę aplikację w VMOS. VMOS został usunięty ze Sklepu Play, musisz go zainstalować ręcznie.</string>
     <string name="warning_noshowagain">Nie pokazuj ponownie</string>
     <string name="warning_action_install">Zainstaluj VMOS</string>
     <string name="warning_action_tryanyway">Spróbuj mimo wszystko</string>
-    <string name="warning_action_exit">Wyjście</string>
+    <string name="warning_action_exit">Wyjdź</string>
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Zainstaluj Java Runtime %s (.tar.xz)</string>
@@ -95,7 +95,7 @@
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
     <string name="global_add">Dodaj</string>
-    <string name="global_edit">Edytować</string>
+    <string name="global_edit">Edytuj</string>
     <string name="global_error">Błąd</string>
     <string name="global_load">Załaduj</string>
     <string name="global_name">Nazwa</string>
