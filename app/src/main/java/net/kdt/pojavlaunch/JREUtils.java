@@ -56,13 +56,18 @@ public class JREUtils
         Log.v("jrelog","Log starts here");
         Thread t = new Thread(new Runnable(){
             int failTime = 0;
+            ProcessBuilder logcatPb;
             @Override
             public void run() {
                 try {
+                    if (logcatPb == null) {
+                        logcatPb = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true);
+                    }
+                    
                     Log.i("jrelog-logcat","Clearing logcat");
                     new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
                     Log.i("jrelog-logcat","Starting logcat");
-                    java.lang.Process p = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true).start();
+                    java.lang.Process p = logcatPb.start();
 
                     // idk which better, both have a bug that printf(\n) in a single line
                     /*
@@ -103,10 +108,10 @@ public class JREUtils
                         return;
                     }
                 } catch (Throwable e) {
-                    Log.e("jrelog-logcat", "IOException on logging thread");
+                    Log.e("jrelog-logcat", "Exception on logging thread");
                     e.printStackTrace();
 
-                    act.appendlnToLog("IOException on logging thread:\n" + Log.getStackTraceString(e));
+                    act.appendlnToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
                 }
             }
         });

@@ -10,11 +10,10 @@ struct GLFWInputEvent {
     int i1, i2, i3, i4;
     double d1, d2;
 };
-struct GLFWInputEvent* glfwInputEventArr;
+struct char* glfwInputEventArr[100];
+int glfwInputEventIndex;
 
 int *grabCursorX, *grabCursorY, *lastCursorX, *lastCursorY;
-
-int glfwInputEventIndex;
 
 #define EVENT_TYPE_CHAR 1000
 #define EVENT_TYPE_CHAR_MODS 1001
@@ -124,24 +123,25 @@ void invokeCursorPos(int x, int y) {
             return;
         }
     }
-    if (!isUseStackQueueCall) {
+    if (!isUseStackQueueCall && GLFW_invoke_CursorPos) {
         GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? *grabCursorX : x), (double) (isGrabbing ? *grabCursorY : y));
     }
     *lastCursorX = x;
     *lastCursorY = y;
 }
 
+void addInputToQueue(GLFWInputEvent event) {
+    if (glfwInputEventIndex++
+    glfwInputEventArr[glfwInputEventIndex] = (char*) event;
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
     glfwInputEventIndex = -1;
-    isUseStackQueueCall = 1;
-    // isUseStackQueueCall = (int) isUseStackQueue;
+    // isUseStackQueueCall = 1;
+    isUseStackQueueCall = (int) isUseStackQueue;
     if (isUseStackQueue) {
         isPrepareGrabPos = true;
-        
-        glfwInputEventArr = calloc(100, sizeof(struct GLFWInputEvent));
-    }
-    
-    if (isAndroid) {
+    } else if (isAndroid) {
         firstJavaVM = dalvikJavaVMPtr;
         firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
         secondJavaVM = runtimeJavaVMPtr;
@@ -314,12 +314,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferS
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (GLFW_invoke_Key && isInputReady) {
         if (isUseStackQueueCall) {
-            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
+            struct GLFWInputEvent curr;
             curr.type = EVENT_TYPE_KEY;
             curr.i1 = key;
             curr.i2 = scancode;
             curr.i3 = action;
             curr.i4 = mods;
+            addInputToQueue(curr);
         } else
             GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
     }
