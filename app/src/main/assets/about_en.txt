@@ -2,11 +2,11 @@
 * Using libraries:<br>
  • ClassWrapperMC: A simple wrapper to help launching Minecraft LaunchWrapper on JRE9 and later.<br>
  • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.<br>
- • OpenJDK JRE 10 for Android by dongfangxunlei.<br>
+ • OpenJDK JRE 8 for Android.<br>
  • Apache Commons Compress.<br>
  • LWJGL.<br>
 * License:<br>
- • This application and ClassWrapperMC are licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">Apache License 2.0</a>.<br>
+ • This application is licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">GNU GPLv3</a>.<br>
 * Third party licenses:<br>
  • Apache Commons Compress (unknown or Apache License 2.0).<br>
  • gl4es: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.<br>
