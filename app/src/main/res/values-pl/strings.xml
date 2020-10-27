@@ -144,13 +144,13 @@
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
-    <string name="control_inventory">Inv</string>
+    <string name="control_inventory">Ekw</string>
     <string name="control_up">▲</string>
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3rd</string>
+    <string name="control_thirdperson">3-os</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mysz</string>
     <string name="control_mouseoff">Mysz: wyłączona</string>
@@ -160,7 +160,7 @@
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Debugowanie PointerCapture</string>
     <string name="control_customkey">Wyślij własny kod klucza</string>
-    <string name="control_shiftmodechg">Zmień działanie Shift\'u (skradanie)</string>
+    <string name="control_shiftmodechg">Zmień tryb Shift (skradanie)</string>
     <string name="customctrl_keyname">Kod Klucza</string>
     <string name="customctrl_specialkey">Klucz specjalny</string>
     <string name="customctrl_hidden">Ukryty</string>
