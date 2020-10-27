@@ -14,7 +14,7 @@ struct GLFWInputEvent {
 struct GLFWInputEvent glfwInputEventArr[100];
 int glfwInputEventIndex;
 
-int *grabCursorX, *grabCursorY, *lastCursorX, *lastCursorY;
+int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 #define EVENT_TYPE_CHAR 1000
 #define EVENT_TYPE_CHAR_MODS 1001
@@ -115,20 +115,20 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
 void invokeCursorPos(int x, int y) {
     if (isGrabbing) {
         if (!isPrepareGrabPos) {
-            *grabCursorX += x - *lastCursorX;
-            *grabCursorY += y - *lastCursorY;
+            grabCursorX += x - lastCursorX;
+            grabCursorY += y - lastCursorY;
         } else {
             isPrepareGrabPos = false;
-            *lastCursorX = x;
-            *lastCursorY = y;
+            lastCursorX = x;
+            lastCursorY = y;
             return;
         }
     }
     if (!isUseStackQueueCall && GLFW_invoke_CursorPos) {
-        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? *grabCursorX : x), (double) (isGrabbing ? *grabCursorY : y));
+        GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
     }
-    *lastCursorX = x;
-    *lastCursorY = y;
+    lastCursorX = x;
+    lastCursorY = y;
 }
 /*
 void addInputToQueue(GLFWInputEvent event) {
@@ -141,8 +141,8 @@ void addInputToQueue(GLFWInputEvent event) {
 */
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
     glfwInputEventIndex = -1;
-    // isUseStackQueueCall = 1;
-    isUseStackQueueCall = (int) isUseStackQueue;
+    isUseStackQueueCall = 1;
+    // isUseStackQueueCall = (int) isUseStackQueue;
     if (isUseStackQueue) {
         isPrepareGrabPos = true;
     } else if (isAndroid) {
@@ -178,16 +178,16 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
 /*
     if (debugTimes < 1000) {
         debugTimes++;
-        LOGI("INPUT: IsUseStackQueue=%d, CurrentInputLength=%d, CursorX=%d, CursorY=%d", isUseStackQueueCall, glfwInputEventIndex, *lastCursorX, *lastCursorY);
+        LOGI("INPUT: IsUseStackQueue=%d, CurrentInputLength=%d, CursorX=%d, CursorY=%d", isUseStackQueueCall, glfwInputEventIndex, lastCursorX, lastCursorY);
     }
 */
     if (isUseStackQueueCall) {
-        if (diffX != *lastCursorX || diffY != *lastCursorY) {
-            diffX = *lastCursorX;
-            diffY = *lastCursorY;
+        if (diffX != lastCursorX || diffY != lastCursorY) {
+            diffX = lastCursorX;
+            diffY = lastCursorY;
             
             if (GLFW_invoke_CursorPos) {
-                GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? *grabCursorX : *lastCursorX), (double) (isGrabbing ? *grabCursorY : *lastCursorY));
+                GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : lastCursorX), (double) (isGrabbing ? grabCursorY : lastCursorY));
             }
         }
 
