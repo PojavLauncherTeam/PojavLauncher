@@ -146,7 +146,7 @@ void addInputToQueue(struct GLFWInputEvent event) {
 #define ADD_TRIGGER_WWIN(NAME, VALUE) \
 void trigger##NAME(struct GLFWInputEvent event) { \
     if (GLFW_invoke_##NAME) { \
-        GLFW_invoke_##NAME(VALUES); \
+        GLFW_invoke_##NAME(##VALUES##); \
     } \
 }
 
