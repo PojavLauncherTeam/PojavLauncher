@@ -9,7 +9,7 @@ struct GLFWInputEvent {
     unsigned int ui1;
     int i1, i2, i3, i4;
     double d1, d2;
-};
+} GLFWInputEvent;
 // struct char* glfwInputEventArr[100];
 GLFWInputEvent glfwInputEventArr[100];
 int glfwInputEventIndex;
@@ -130,7 +130,7 @@ void invokeCursorPos(int x, int y) {
     *lastCursorX = x;
     *lastCursorY = y;
 }
-
+/*
 void addInputToQueue(GLFWInputEvent event) {
     if (glfwInputEventIndex++ >= 100) {
         // player type too fast? or fps lower than player tps?
@@ -138,7 +138,7 @@ void addInputToQueue(GLFWInputEvent event) {
     }
     glfwInputEventArr[glfwInputEventIndex] = (char*) event;
 }
-
+*/
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
     glfwInputEventIndex = -1;
     // isUseStackQueueCall = 1;
@@ -318,13 +318,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferS
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (GLFW_invoke_Key && isInputReady) {
         if (isUseStackQueueCall) {
-            struct GLFWInputEvent curr;
+            struct GLFWInputEvent curr = glfwInputEventArr[glfwInputEventIndex++];
             curr.type = EVENT_TYPE_KEY;
             curr.i1 = key;
             curr.i2 = scancode;
             curr.i3 = action;
             curr.i4 = mods;
-            addInputToQueue(curr);
+            // addInputToQueue(curr);
         } else
             GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
     }
