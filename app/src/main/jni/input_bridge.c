@@ -143,24 +143,24 @@ void addInputToQueue(struct GLFWInputEvent event) {
 }
 
 // TODO merge other defines to
-#define ADD_TRIGGER_WWIN(NAME, VALUES) \
+#define ADD_TRIGGER(NAME, VALUES) \
 void trigger##NAME(struct GLFWInputEvent event) { \
     if (GLFW_invoke_##NAME) { \
-        GLFW_invoke_##NAME(VALUES); \
+        GLFW_invoke_##NAME VALUES; \
     } \
 }
 
-ADD_TRIGGER_WWIN(Char, (event.ui1));
-ADD_TRIGGER_WWIN(CharMods, (event.ui1, event.i2));
-ADD_TRIGGER_WWIN(CursorEnter, (event.i1));
-ADD_TRIGGER_WWIN(CursorPos, ((double) event.i1, (double) event.i2));
-ADD_TRIGGER_WWIN(FramebufferSize, (event.i1, event.i2));
-ADD_TRIGGER_WWIN(Key, (event.i1, event.i2, event.i3, event.i4));
-ADD_TRIGGER_WWIN(MouseButton, (event.i1, event.i2, event.i3));
-ADD_TRIGGER_WWIN(Scroll, ((double) event.i1, (double) event.i2));
-ADD_TRIGGER_WWIN(WindowSize, (event.i1, event.i2));
+ADD_TRIGGER(Char, (showingWindow, event.ui1));
+ADD_TRIGGER(CharMods, (showingWindow, event.ui1, event.i2));
+ADD_TRIGGER(CursorEnter, (showingWindow, event.i1));
+ADD_TRIGGER(CursorPos, (showingWindow, (double) event.i1, (double) event.i2));
+ADD_TRIGGER(FramebufferSize, (showingWindow, event.i1, event.i2));
+ADD_TRIGGER(Key, (showingWindow, event.i1, event.i2, event.i3, event.i4));
+ADD_TRIGGER(MouseButton, (showingWindow, event.i1, event.i2, event.i3));
+ADD_TRIGGER(Scroll, (showingWindow, (double) event.i1, (double) event.i2));
+ADD_TRIGGER(WindowSize, (showingWindow, event.i1, event.i2));
 
-#undef ADD_TRIGGER_WWIN
+#undef ADD_TRIGGER
 
 /*
 void triggerChar(struct GLFWInputEvent event) {
