@@ -133,7 +133,8 @@ void invokeCursorPos(int x, int y) {
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
     glfwInputEventIndex = -1;
-    isUseStackQueueCall = (int) isUseStackQueue;
+    isUseStackQueueCall = 1;
+    // isUseStackQueueCall = (int) isUseStackQueue;
     if (isUseStackQueue) {
         isPrepareGrabPos = true;
         

@@ -129,12 +129,16 @@ public class JREUtils
             }
         }
         
+        if (ldLibraryPath.length() == 0) {
+            ldLibraryPath.append(
+                // To make libjli.so ignore re-execute
+                Tools.homeJreDir + "/lib/server:" +
+                Tools.homeJreDir + "/lib/jli:" +
+                Tools.homeJreDir + "/lib:"
+            );
+        }
+        
         ldLibraryPath.append(
-            // To make libjli.so ignore re-execute
-            Tools.homeJreDir + "/lib/server:" +
-            Tools.homeJreDir + "/lib/jli:" +
-            Tools.homeJreDir + "/lib:" +
-
             "/system/" + libName + ":" +
             "/vendor/" + libName + ":" +
             "/vendor/" + libName + "/hw:" +
