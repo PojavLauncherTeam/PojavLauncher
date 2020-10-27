@@ -9,9 +9,9 @@ struct GLFWInputEvent {
     unsigned int ui1;
     int i1, i2, i3, i4;
     double d1, d2;
-} GLFWInputEvent;
+};
 // struct char* glfwInputEventArr[100];
-GLFWInputEvent glfwInputEventArr[100];
+struct GLFWInputEvent glfwInputEventArr[100];
 int glfwInputEventIndex;
 
 int *grabCursorX, *grabCursorY, *lastCursorX, *lastCursorY;
