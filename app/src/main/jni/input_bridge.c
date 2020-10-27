@@ -10,7 +10,8 @@ struct GLFWInputEvent {
     int i1, i2, i3, i4;
     double d1, d2;
 };
-struct char* glfwInputEventArr[100];
+// struct char* glfwInputEventArr[100];
+GLFWInputEvent glfwInputEventArr[100];
 int glfwInputEventIndex;
 
 int *grabCursorX, *grabCursorY, *lastCursorX, *lastCursorY;
@@ -131,7 +132,10 @@ void invokeCursorPos(int x, int y) {
 }
 
 void addInputToQueue(GLFWInputEvent event) {
-    if (glfwInputEventIndex++
+    if (glfwInputEventIndex++ >= 100) {
+        // player type too fast? or fps lower than player tps?
+        glfwInputEventIndex = 0;
+    }
     glfwInputEventArr[glfwInputEventIndex] = (char*) event;
 }
 
