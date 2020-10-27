@@ -11,7 +11,7 @@ struct GLFWInputEvent {
     int i1, i2, i3, i4;
     double d1, d2;
 };
-struct char* glfwInputEventArr[100];
+char* glfwInputEventArr[100];
 // struct GLFWInputEvent glfwInputEventArr[100];
 int glfwInputEventIndex;
 
