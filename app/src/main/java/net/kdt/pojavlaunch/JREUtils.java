@@ -18,7 +18,7 @@ public class JREUtils
     
     private static String nativeLibDir;
     
-    private static String findInLdLibPath(String libName) {
+    public static String findInLdLibPath(String libName) {
         for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
             File f = new File(libPath, libName);
             if (f.exists() && f.isFile()) {
@@ -121,10 +121,10 @@ public class JREUtils
     
     public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
-        String libName = System.getProperty("os.arch").contains("64") ? "lib64" : "lib";
+        String libName = Tools.currentArch.contains("64") ? "lib64" : "lib";
         
         StringBuilder ldLibraryPath = new StringBuilder();
-        
+/*
         for (String arch : Tools.currentArch.split("/")) {
             File f = new File(Tools.homeJreDir + "/lib/" + arch);
             if (f.exists() && f.isDirectory()) {
@@ -133,15 +133,14 @@ public class JREUtils
                 ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + ":");
             }
         }
-        
-        if (ldLibraryPath.length() == 0) {
-            ldLibraryPath.append(
-                // To make libjli.so ignore re-execute
-                Tools.homeJreDir + "/lib/server:" +
-                Tools.homeJreDir + "/lib/jli:" +
-                Tools.homeJreDir + "/lib:"
-            );
-        }
+*/
+
+        ldLibraryPath.append(
+            // To make libjli.so ignore re-execute
+            Tools.homeJreDir + "/" + Tools.homeJreLib + "/server:" +
+            Tools.homeJreDir + "/" +  Tools.homeJreLib + "/lib/jli:" +
+            Tools.homeJreDir + "/" + Tools.homeJreLib + ":"
+        );
         
         ldLibraryPath.append(
             "/system/" + libName + ":" +

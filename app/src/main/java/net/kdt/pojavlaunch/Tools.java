@@ -38,6 +38,7 @@ public final class Tools
     
 	// New since 3.0.0
 	public static String homeJreDir = datapath + "/jre_runtime";
+    public static String homeJreLib = "lib";
 	
 	// New since 2.4.2
 	public static String versnDir = MAIN_PATH + "/versions";
