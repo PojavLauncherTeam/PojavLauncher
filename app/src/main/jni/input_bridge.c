@@ -139,7 +139,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
         isPrepareGrabPos = true;
         
         glfwInputEventArr = calloc(100, sizeof(struct GLFWInputEvent));
-    } else if (isAndroid) {
+    }
+    
+    if (isAndroid) {
         firstJavaVM = dalvikJavaVMPtr;
         firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
         secondJavaVM = runtimeJavaVMPtr;
