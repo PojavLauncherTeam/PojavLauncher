@@ -290,7 +290,7 @@ public class PojavLoginActivity extends AppCompatActivity
             }
             
             for (String arch : Tools.currentArch.split("/")) {
-                File f = new File(Tools.homeJreDir + "/lib/" + arch);
+                File f = new File(Tools.homeJreDir, "lib/" + arch);
                 if (f.exists() && f.isDirectory()) {
                     Tools.homeJreLib = "lib/" + arch;
                     break;

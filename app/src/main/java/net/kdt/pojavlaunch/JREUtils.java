@@ -138,7 +138,7 @@ public class JREUtils
         ldLibraryPath.append(
             // To make libjli.so ignore re-execute
             Tools.homeJreDir + "/" + Tools.homeJreLib + "/server:" +
-            Tools.homeJreDir + "/" +  Tools.homeJreLib + "/lib/jli:" +
+            Tools.homeJreDir + "/" +  Tools.homeJreLib + "/jli:" +
             Tools.homeJreDir + "/" + Tools.homeJreLib + ":"
         );
         
