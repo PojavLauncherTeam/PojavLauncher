@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Abra Minecraft: Java Edition em seu dispositivo!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">AJUDA</string>
     <!-- Languages list part -->
+    <string name="language_name">PORTUGUÊS - BR</string>
     <!-- Logging output -->
+    <string name="log_title">Log de saída</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email ou nome de usuário</string>
+    <string name="login_online_username_question">(De qual eu uso?)</string>
+    <string name="login_online_password_hint">Senha</string>
+    <string name="login_online_password_question">Esqueceu a senha?</string>
+    <string name="login_online_remember">Lembrar usuário?</string>
+    <string name="login_online_check_keeplogin">Mantenha-me logado</string>
+    <string name="login_online_login_label">Entrar</string>
+    <string name="login_online_create_account">(Criar uma nova conta?)</string>
+    <string name="login_offline_switch">Conta offline?</string>
+    <string name="login_offline_label">Entrar com conta offline</string>
+    <string name="login_offline_alert_skip">Pular</string>
+    <string name="login_error_short_username">Nome de usuário deve ter no mínimo 3 caracteres</string>
+    <string name="login_error_exist_username">Este nome de usuário já existe</string>
+    <string name="login_select_account">Selecionar conta</string>
     <!-- Hint -->
+    <string name="hint_select_account">Para selecionar, pressione. Para excluir uma conta, manter pressionado.</string>
+    <string name="hint_control_mapping">"Essa função ainda não está concluída, então você não pode aplicar controles personalizados no momento! \nDeslize da direita pra esquerda para abrir o menu. \nPressione um botão para personalizar: editar, redimencionar e excluir."</string>
     <!-- Warning -->
+    <string name="warning_title">Aviso</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
