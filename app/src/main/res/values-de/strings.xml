@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition für Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Spiele Minecraft: Java Edition auf deinem Gerät!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">Hilfe</string>
     <!-- Languages list part -->
     <!-- Logging output -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email oder Benutzername</string>
+    <string name="login_online_username_question">(Was benutze ich?)</string>
+    <string name="login_online_password_hint">Passwort</string>
+    <string name="login_online_password_question">Passwort vergessen?</string>
+    <string name="login_online_remember">Erinnere dich an mich? (Without context its pretty bad to translate)?</string>
     <!-- Hint -->
     <!-- Warning -->
     <!-- AlertDialog title -->
