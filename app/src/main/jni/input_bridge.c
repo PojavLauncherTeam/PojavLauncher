@@ -243,7 +243,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwPollEvents(JNIEnv* env, jcl
         }
         
         for (int i = 0; i <= glfwInputEventIndex; i++) {
-            struct GLFWInputEvent curr = (struct GLFWInputEvent) glfwInputEventArr[i];
+            struct GLFWInputEvent curr = glfwInputEventArr[i];
             ((GLFW_invoke_callback*) curr.trigger)(curr);
             
 //            if (debugTimes < 1000) {
