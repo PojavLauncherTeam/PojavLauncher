@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Jogue Minecraft: Java Edition em seu dispositivo!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">AJUDA</string>
     <!-- Languages list part -->
+    <string name="language_name">PORTUGUÊS - BR</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email ou nome de usuário</string>
+    <string name="login_online_username_question">(Qual usar?)</string>
+    <string name="login_online_password_hint">Senha</string>
+    <string name="login_online_password_question">Esqueceu a senha?</string>
+    <string name="login_online_remember">Lembrar usuário?</string>
+    <string name="login_online_check_keeplogin">Me mantenha conectado</string>
+    <string name="login_online_login_label">Entrar</string>
+    <string name="login_online_create_account">(Criar uma nova conta?)</string>
+    <string name="login_offline_switch">Conta offline?</string>
+    <string name="login_offline_label">Entrar como conta offline</string>
+    <string name="login_offline_alert_skip">Pular</string>
+    <string name="login_error_short_username">Nome de usuário deve ter no mínimo 3 caracteres</string>
+    <string name="login_error_exist_username">Este nome de usuário já existe</string>
+    <string name="login_select_account">Selecionar conta</string>
     <!-- Hint -->
     <!-- Warning -->
     <!-- AlertDialog title -->
