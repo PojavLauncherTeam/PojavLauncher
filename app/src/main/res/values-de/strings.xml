@@ -137,11 +137,13 @@
     <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sek</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Inventar</string>
     <string name="control_up">▲</string>
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <!-- MainActivity: Menu advanced controls -->
     <!-- Update part (unused now) -->
 </resources>
