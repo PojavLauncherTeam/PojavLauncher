@@ -24,16 +24,86 @@
     <string name="login_error_exist_username">Este nome de usuário já existe</string>
     <string name="login_select_account">Selecionar conta</string>
     <!-- Hint -->
+    <string name="hint_select_account">Para selecionar, pressione. Para excluir uma conta, manter pressionado.</string>
+    <string name="hint_control_mapping">"Essa função ainda não está finalizada, então você não pode aplicar controles personalizados no momento! \nDeslize da direita pra esquerda para abrir o menu. \nPressione um botão para personalizar: editar, redimencionar e excluir."</string>
     <!-- Warning -->
+    <string name="warning_title">Aviso</string>
+    <string name="warning_msg">Este app pode não ser compatível com sua versão do Android (Android 7.0+). Você pode usar o VMOS e instalar esse app no VMOS. Mas o VMOS não está disponível pelo Play Store, você deve instalar manualmente.</string>
+    <string name="warning_noshowagain">Não mostrar novamente</string>
+    <string name="warning_action_install">Instalar VMOS</string>
+    <string name="warning_action_tryanyway">Pular</string>
+    <string name="warning_action_exit">Sair</string>
+    <string name="warning_remove_account">Esta conta será removida!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Instalar Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_selectkeymap">Selecione um json de keymap</string>
+    <string name="alerttitle_installmod">Selecione um mod para instalar</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher fechou inesperadamente</string>
+    <string name="error_checklog">Erro! Por favor, verifique o log abaixo: %s</string>
+    <string name="error_no_version">Nenhuma versão!</string>
+    <string name="error_load_version">Não foi possível carregar a versão %s</string>
+    <string name="error_convert_lib">Não foi possível converter a library %s</string>
+    <string name="error_convert_client">Não foi possível converter Minecraft %s</string>
+    <string name="error_show_more">Mostrar mais</string>
+    <string name="error_show_less">Mostrar menos</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">É necessário conceder permissão para ler/modificar armazenamento!</string>
+    <string name="toast_login_error">Algo deu errado ao se conectar. Por favor, mande feedback para o desenvolvedor. \nErro: %s</string>
+    <string name="toast_optifine_success">Instalação concluída</string>
+    <string name="toast_uninstalljre_done">Desinstalação do Java Runtime concluída</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Novidades do Launcher</string>
+    <string name="mcl_tab_console">Console de desenvolvedor</string>
+    <string name="mcl_tab_crash">Log de crash</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
+    <string name="mcl_launch_downloading">Baixando %s</string>
+    <string name="mcl_launch_download_lib">Baixando library %s</string>
+    <string name="mcl_launch_download_client">Baixando Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Convertendo library %s</string>
+    <string name="mcl_launch_convert_client">Convertendo Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Patcheando Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Preparando para baixar os recursos</string>
+    <string name="mcl_options">Opções</string>
+    <string name="mcl_option_modmgr">Gerenciador de mods (sem função)</string>
+    <string name="mcl_option_modinstall">Instalar mod (Forge, LabyMod, Fabric,...)</string>
+    <string name="mcl_option_modinstallwitharg">Instalar mod (com argumentos personalizados)</string>
+    <string name="mcl_option_checkupdate">Verificar por atualizações</string>
+    <string name="mcl_option_customcontrol">Controles Personalizados</string>
+    <string name="mcl_option_settings">Configurações</string>
+    <string name="mcl_option_about">Sobre</string>
+    <string name="mcl_setting_title_uninstalljre">Desinstalar Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Reinicialização necessária] Isso permite você reinstalar o Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Iniciar o Minecraft no modo Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Executar Minecraft em janela flutuante. Requer Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Acionar função ao manter toque pressionado</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
+    <string name="mcl_setting_title_controlsize">Definir tamanho dos botões de controle</string>
+    <string name="mcl_setting_title_javaargs">Argumentos JRE</string>
+    <string name="mcl_setting_subtitle_javaargs">Cuidado, isso pode fazer seu jogo crashar se modificado sem conhecimento.</string>
+    <string name="mcl_setting_category_general">Configurações gerais</string>
+    <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Alfa</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta</string>
+    <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
+    <string name="global_add">Adicionar</string>
+    <string name="global_edit">Editar</string>
+    <string name="global_error">Erro</string>
+    <string name="global_load">Carregar</string>
+    <string name="global_name">Nome</string>
+    <string name="global_remove">Remover</string>
+    <string name="global_restart">Reiniciar</string>
+    <string name="global_save">Salvar</string>
+    <string name="global_unpacking">Descompactando %s</string>
+    <string name="global_error_field_empty">Este campo não pode ficar vazio</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -57,7 +127,54 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Aplicativo/Jogo fechou com código %d</string>
+    <string name="mcn_exit_call">Sair</string>
+    <string name="mcn_exit_crash">Um crash foi detectado! Clique OK para sair.</string>
+    <string name="mcn_exit_errcrash">Não foi possível localizar o crash! Você pode ignorar isto.</string>
+    <string name="mcn_exit_confirm">Tem certeza que deseja forçar fechamento?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 não foi instalado!</string>
+    <string name="mcn_check_fail_incompatiblearch">Arquitetura %1$s é incompatível com Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_java">Não foi possível iniciar o teste Java VM. Verifique %s para mais informações.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Controles</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Teclado</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_zoom">Zoom (C)</string>
+    <string name="control_primary">Esq</string>
+    <string name="control_secondary">Dir</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">F5</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Forçar encerramento</string>
+    <string name="control_viewout">Log de saída</string>
+    <string name="control_adebug">Input Debug</string>
+    <string name="control_customkey">Enviar código-chave personalizado</string>
+    <string name="customctrl_keyname">Código chave</string>
+    <string name="customctrl_specialkey">Tecla Especial</string>
+    <string name="customctrl_hidden">Oculto</string>
+    <string name="customctrl_addbutton">Adicionar botão</string>
+    <string name="customctrl_title_selectctrl">Selecione o json de Control padrão</string>
+    <string name="customctrl_selectdefault">Selecione o json de Control padrão</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Atualizar console</string>
+    <string name="main_options">Opções</string>
+    <string name="main_play">Jogar</string>
+    <string name="main_welcome">Bem-vindo,</string>
+    <string name="main_infodev">Info. (DEV)</string>
+    <string name="main_switchuser">Trocar usuário</string>
+    <string name="main_version_">Versão:</string>
+    <string name="main_nocrash">Nenhum crash detectado</string>
+    <string name="main_nolog">Sem log.</string>
 </resources>
