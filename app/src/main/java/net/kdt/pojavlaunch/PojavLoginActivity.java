@@ -289,13 +289,7 @@ public class PojavLoginActivity extends AppCompatActivity
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
             }
             
-            for (String arch : Tools.currentArch.split("/")) {
-                File f = new File(Tools.homeJreDir, "lib/" + arch);
-                if (f.exists() && f.isDirectory()) {
-                    Tools.homeJreLib = "lib/" + arch;
-                    break;
-                }
-            }
+            JREUtils.relocateLibPath();
 
             File ftIn = new File(Tools.homeJreDir, Tools.homeJreLib + "/libfreetype.so.6");
             File ftOut = new File(Tools.homeJreDir, Tools.homeJreLib + "/libfreetype.so");

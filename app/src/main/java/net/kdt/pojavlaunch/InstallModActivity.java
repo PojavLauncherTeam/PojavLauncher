@@ -110,8 +110,9 @@ public class InstallModActivity extends LoggableActivity
     
 	private void launchJavaRuntime(File modFile, String javaArgs) {
 		try {
+            JREUtils.relocateLibPath();
+            
 			List<String> javaArgList = new ArrayList<String>();
-
 			javaArgList.add(Tools.homeJreDir + "/bin/java");
 
 			Tools.getJavaArgs(this, javaArgList);

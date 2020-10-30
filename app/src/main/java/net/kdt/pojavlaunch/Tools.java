@@ -75,6 +75,7 @@ public final class Tools
 	public static ShellProcessOperation mLaunchShell;
     private static int exitCode = 0;
 	public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
+        JREUtils.relocateLibPath();
 		String[] launchArgs = getMinecraftArgs(profile, versionInfo);
 
 		List<String> javaArgList = new ArrayList<String>();

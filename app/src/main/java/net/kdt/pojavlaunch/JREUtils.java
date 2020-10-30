@@ -119,6 +119,16 @@ public class JREUtils
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
+    public static void relocateLibPath() {
+        for (String arch : Tools.currentArch.split("/")) {
+            File f = new File(Tools.homeJreDir, "lib/" + arch);
+            if (f.exists() && f.isDirectory()) {
+                Tools.homeJreLib = "lib/" + arch;
+                break;
+            }
+        }
+    }
+    
     public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
         String libName = Tools.currentArch.contains("64") ? "lib64" : "lib";
