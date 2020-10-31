@@ -3,6 +3,8 @@
     <!-- App name part -->
     <!-- Action bar part -->
     <!-- Languages list part -->
+    <string name="language_name">Tên_ngôn ngữ
+Danh sách ngôn ngữ</string>
     <!-- Login strings -->
     <!-- Hint -->
     <!-- Warning -->
