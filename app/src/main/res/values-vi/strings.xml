@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">Trợ giúp</string>
@@ -81,7 +82,30 @@ Danh sách ngôn ngữ</string>
     <string name="mcl_option_about">Giới thiệu</string>
     <string name="mcl_setting_title_setmaxdxref">Đặt tham chiếu DX tối đa</string>
     <string name="mcl_setting_subtitle_setmaxdxref">Tăng nếu gặp phải lỗi trong khi đang lấy: Quá nhiều ... sự phản hồi. Bạn có thể thử tùy chọn đa dex. Khuyến nghị: 4096 hoặc 8192.</string>
+    <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ tự do</string>
+    <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa cửa sổ nổi. Đề nghị Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn dài</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong khối phá hủy và thả vật phẩm.</string>
+    <string name="mcl_setting_title_controlsize">Đặt kích thước nút điều khiển</string>
+    <string name="mcl_setting_title_forgetoptifpath">Làm cho OptiFine không thể tự định vị</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Hữu ích để làm cho OptiFine có thể sử dụng được trên một số thiết bị.</string>
+    <string name="mcl_setting_category_general">Thiết lập chung</string>
+    <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được ở trong danh sách phiên bản</string>
+    <string name="mcl_setting_veroption_release">Bản phát hành</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">apha-cũ</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-cũ</string>
+    <string name="mcl_version_clone">Nhân bản</string>
     <!-- Global strings -->
+    <string name="global_add">Thêm</string>
+    <string name="global_edit">Chỉnh sửa</string>
+    <string name="global_error">Lỗi</string>
+    <string name="global_load">Tải</string>
+    <string name="global_name">Tên</string>
+    <string name="global_remove">Loại bỏ</string>
+    <string name="global_restart">Khởi động lại</string>
+    <string name="global_save">Lưu</string>
+    <string name="global_error_field_empty">Trường này không được để trống</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -105,7 +129,21 @@ Danh sách ngôn ngữ</string>
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Trò chơi đã thoái ra</string>
+    <string name="mcn_exit_call">Thoát</string>
+    <string name="mcn_exit_crash">Đã phát hiện sự cố trò chơi! Nhấn OK để thoát.</string>
+    <string name="mcn_exit_errcrash">Không thể xác định vị trí sự cố! Bạn có thể bỏ qua điều này.</string>
+    <string name="mcn_exit_confirm">Bạn có chắc muốn thoát chương trình?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Điều khiển</string>
+    <string name="control_toggle">Giao diện</string>
+    <string name="control_keyboard">Bàn Phím</string>
+    <string name="control_chat">Trò chuyện</string>
+    <string name="control_debug">Gỡ lỗi</string>
+    <string name="control_zoom">Phóng đại (C)</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Nhật ký ra</string>
+    <string name="control_adebug">Gỡ lỗi PointerCapture</string>
+    <string name="control_customkey">Gửi phím tùy chọn</string>
     <!-- Update part (unused now) -->
 </resources>
