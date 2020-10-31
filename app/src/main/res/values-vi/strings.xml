@@ -8,17 +8,79 @@
     <string name="language_name">Tên_ngôn ngữ
 Danh sách ngôn ngữ</string>
     <!-- Logging output -->
+    <string name="log_title">Nhật ký ra</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email hoặc tên người dùng</string>
+    <string name="login_online_username_question">(Tôi sử dụng cái nào)</string>
+    <string name="login_online_password_hint">Mật khẩu</string>
+    <string name="login_online_password_question">Quên mật khẩu?</string>
+    <string name="login_online_remember">Ghi nhớ tôi?</string>
+    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
+    <string name="login_online_login_label">Đăng nhập</string>
+    <string name="login_online_create_account">(Tạo tài khoản mới?)</string>
+    <string name="login_offline_switch">Tài khoản ngoại tuyến?</string>
+    <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
+    <string name="login_offline_alert_skip">Bỏ qua</string>
+    <string name="login_error_short_username">Tên người dùng phải co ít nhất 3 kí tự</string>
+    <string name="login_error_exist_username">Tên này đã tồn tại</string>
+    <string name="login_select_account">Chọn tài khoản</string>
     <!-- Hint -->
+    <string name="hint_select_account">Để chọn, nhấp vào. Để xóa một tài khoản, giữ vào.</string>
+    <string name="hint_control_mapping">"Tính năng này chưa hoàn thiện nên không thể áp dụng tùy trỉnh điều khiển ngay lúc này!\nVuốt từ bên phải sang trái để mở menu◀\nGiữ một nút để điều chỉnh: sắp xếp, thay đổi kích thước hoặc xóa."</string>
     <!-- Warning -->
+    <string name="warning_title">Cảnh báo</string>
+    <string name="warning_msg">Ứng dụng này có thể không tương thích với phiên bản Android của bạn (hơn hoặc bằng Android 7.0). Bạn có thể dùng VMOS sau khi tải ứng dụng này sang VMOS để thay thế. Nhưng VMOS bị loại bỏ bởi CH Play, bạn phải cài đặt thủ công.</string>
+    <string name="warning_noshowagain">Không hiển thị lại</string>
+    <string name="warning_action_install">Tải VMOS</string>
+    <string name="warning_action_tryanyway">Thử mọi cách</string>
+    <string name="warning_action_exit">Thoát</string>
+    <string name="warning_remove_account">Tài khoản này sẽ bị loại bỏ!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Chọn một sơ đồ bàn phím json</string>
+    <string name="alerttitle_installmod">Chọn một mod để thêm</string>
+    <string name="alerttitle_installoptifine">Chọn thư mục OptiFine jar</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher đã bất ngờ bị rớt</string>
+    <string name="error_checklog">Lỗi! Làm ơn kiểm tra nhật kí bên dưới: %s</string>
+    <string name="error_no_version">Không có phiên bản!</string>
+    <string name="error_load_version">Không thể tải phiên bản %s</string>
+    <string name="error_convert_lib">Không thể lấy library %s</string>
+    <string name="error_convert_client">Không thẻ lấy Minecraft %s</string>
+    <string name="error_show_more">Hiển thị thêm</string>
+    <string name="error_show_less">Hiển thị ít hơn</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Quyền đọc / ghi vào bộ nhớ là bắt buộc!</string>
+    <string name="toast_login_error">Một thứ nào đó đã bị nhầm sau khi đăng nhập. Làm ơn phản hồi với nhà phát triển.\nLỗi: %s</string>
+    <string name="toast_optifine_success">Cài đặt thành công</string>
+    <string name="toast_shiftmode" comment="toast_shiftmode&#10;&#10;%s will be replaced with one of the following strings: toast_shiftmode_hold, toast_shiftmode_toggle">Chế độ nút Shift (lẻn) đã thay đổi thành %s</string>
+    <string name="toast_shiftmode_hold" comment="toast_shiftmode_hold&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Chế độ giữ</string>
+    <string name="toast_shiftmode_toggle" comment="toast_shiftmode_toggle&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Chuyển đổi chế độ nhấp</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Tin tức về trình khởi chạy</string>
+    <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
+    <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Làm sạch file bộ nhớ đệm</string>
+    <string name="mcl_launch_downloading">Đang tải xuống %s</string>
+    <string name="mcl_launch_download_lib">Đang tải xuống library %s</string>
+    <string name="mcl_launch_download_client">Đang tải Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Đang lấy library %s</string>
+    <string name="mcl_launch_convert_client">Đang lấy Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Đang vá Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
+    <string name="mcl_options">Tùy chọn</string>
+    <string name="mcl_option_modmgr">Quản lý mod (không có chức năng)</string>
+    <string name="mcl_option_optifineinstall">Tải OptiFine</string>
+    <string name="mcl_option_checkupdate">Kiểm tra bản cập nhật</string>
+    <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
+    <string name="mcl_option_settings">Thiết lập</string>
+    <string name="mcl_option_about">Giới thiệu</string>
+    <string name="mcl_setting_title_setmaxdxref">Đặt tham chiếu DX tối đa</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Tăng nếu gặp phải lỗi trong khi đang lấy: Quá nhiều ... sự phản hồi. Bạn có thể thử tùy chọn đa dex. Khuyến nghị: 4096 hoặc 8192.</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
