@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition cho Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">Trợ giúp</string>
     <!-- Languages list part -->
     <string name="language_name">Tên_ngôn ngữ
 Danh sách ngôn ngữ</string>
