@@ -24,6 +24,9 @@ import org.apache.commons.io.*;
 
 import android.support.v7.app.AlertDialog;
 import android.system.*;
+import android.content.res.*;
+import android.text.*;
+import android.text.style.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -33,6 +36,7 @@ public class PojavLoginActivity extends AppCompatActivity
     private ProgressBar prb;
     private CheckBox sRemember, sOffline;
     private LinearLayout loginLayout;
+    private Spinner spinnerChgLang;
     private ImageView imageLogo;
     private TextView startupTextView;
     
@@ -201,6 +205,7 @@ public class PojavLoginActivity extends AppCompatActivity
         setContentView(R.layout.launcher_login_v2);
 
         loginLayout = findViewById(R.id.login_layout_linear);
+        spinnerChgLang = findViewById(R.id.login_spinner_language);
         imageLogo = findViewById(R.id.login_image_logo);
         loginLayout.postDelayed(new Runnable(){
                 @Override
@@ -208,6 +213,38 @@ public class PojavLoginActivity extends AppCompatActivity
                     imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
                 }
             }, 100);
+
+        String defaultLang = Locale.getDefault().getDisplayName();
+        SpannableString defaultLangChar = new SpannableString(defaultLang);
+        defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(),0);
+        
+        ArrayAdapter<CharSequence> langAdapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item);
+        langAdapter.add(defaultLangChar);
+        for (Locale locale : Locale.getAvailableLocales()) {
+            langAdapter.add(locale.getDisplayLanguage());
+        }
+        langAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        
+        spinnerChgLang.setAdapter(langAdapter);
+        spinnerChgLang.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
+                Locale locale;
+                if (position == 0) {
+                    locale = Locale.getDefault();
+                } else {
+                    locale = Locale.getAvailableLocales()[position + 1];
+                }
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+            }
+            
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {}
+        });
             
         edit2 = (EditText) findViewById(R.id.login_edit_email);
         edit3 = (EditText) findViewById(R.id.login_edit_password);
