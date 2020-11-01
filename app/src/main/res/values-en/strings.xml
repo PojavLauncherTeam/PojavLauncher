@@ -30,7 +30,7 @@
     <string name="hint_control_mapping">"This feature is not yet finished so you can't apply any custom controls at the moment!\nSwipe from right to left to open the menu ◀\nHold any buttons to customize them: edit, resize or delete."</string>
     <!-- Warning -->
     <string name="warning_title">Warning</string>
-    <string name="warning_msg">This app is not compatible with your Android version (has to be above or equal Android 7.0). You can use VMOS, then install this app on VMOS instead. VMOS was removed in the Play Store, you will have to install it manually.</string>
+    <string name="warning_msg">This app is not compatible with your Android version (has to be above or equal Android 7.0). You can use VMOS, then install this app on VMOS instead. VMOS was removed from Play Store, you will have to install it manually.</string>
     <string name="warning_noshowagain">Don\'t show again</string>
     <string name="warning_action_install">Install VMOS</string>
     <string name="warning_action_tryanyway">Try anyway</string>
