@@ -141,7 +141,11 @@ Danh sách ngôn ngữ</string>
     <string name="control_chat">Trò chuyện</string>
     <string name="control_debug">Gỡ lỗi</string>
     <string name="control_zoom">Phóng đại (C)</string>
+    <string name="control_mouse">Chuột</string>
+    <string name="control_mouseoff">Chuột: tắt</string>
+    <string name="control_mouseon">Chuột: bật </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Đóng chương trình</string>
     <string name="control_viewout">Nhật ký ra</string>
     <string name="control_adebug">Gỡ lỗi PointerCapture</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
