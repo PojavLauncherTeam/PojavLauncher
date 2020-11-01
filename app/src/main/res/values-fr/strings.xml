@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition pour Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Lancez Minecraft: Java Edition sur votre appareil !</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">Aide</string>
     <!-- Languages list part -->
+    <string name="language_name">ENGLISH - US</string>
     <!-- Logging output -->
+    <string name="log_title">Sortie du journal</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Adresse e-mail ou nom d\'utilisateur</string>
+    <string name="login_online_username_question">(Lequel dois-je utiliser ?)</string>
+    <string name="login_online_password_hint">Mot de passe</string>
+    <string name="login_online_password_question">Mot de passe oublié ?</string>
+    <string name="login_online_remember">Se souvenir de moi ?</string>
+    <string name="login_online_check_keeplogin">Conserver ma session</string>
+    <string name="login_online_login_label">Se connecter</string>
+    <string name="login_online_create_account">(Créer un nouveau compte ?)</string>
+    <string name="login_offline_switch">Compte hors-ligne ?</string>
+    <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
+    <string name="login_offline_alert_skip">Passer</string>
+    <string name="login_error_short_username">Un nom d\'utilisateur doit contenir 3 caractères au minimum</string>
+    <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
+    <string name="login_select_account">Sélectionner un compte</string>
     <!-- Hint -->
+    <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
+    <string name="hint_control_mapping">"Cette fonctionnalité n'est pas encore terminée, alors vous ne pouvez pas appliquer de contrôle personnalisé pour le moment!\nGlissez de droite à gauche pour ouvrir le menu ◀\nMaintenez un bouton pour personnaliser : éditer, redimensionner ou supprimer."</string>
     <!-- Warning -->
+    <string name="warning_title">Attention</string>
+    <string name="warning_msg">Cette application peut ne pas être compatible avec votre version d\'Android (supérieure ou égale à Android 7.0). Vous pouvez utiliser VMOS puis installer cette application sur VMOS à la place. Mais VMOS est supprimé par le Play Store, vous devez l\'installer manuellement.</string>
+    <string name="warning_noshowagain">Ne plus afficher</string>
+    <string name="warning_action_install">Installer VMOS</string>
+    <string name="warning_action_tryanyway">Essayer quand même</string>
+    <string name="warning_action_exit">Quitter</string>
+    <string name="warning_remove_account">Ce compte sera supprimé !</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Sélectionnez un mod à ajouter</string>
+    <string name="alerttitle_installoptifine">Sélectionnez le fichier OptiFine jar</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher a planté de façon inattendue</string>
+    <string name="error_checklog">Erreur! Veuillez vérifier le journal ci-dessous: %s</string>
+    <string name="error_no_version">Aucune version!</string>
+    <string name="error_load_version">Impossible de charger la version %s</string>
+    <string name="error_convert_lib">Impossible de convertir la bibliothèque %s</string>
+    <string name="error_convert_client">Impossible de convertir Minecraft %s</string>
+    <string name="error_show_more">Affiche plus</string>
+    <string name="error_show_less">Afficher moins</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">L\'autorisation de lecture/écriture sur le stockage est requise !</string>
+    <string name="toast_login_error">Quelque chose s\'est mal passé après la connexion. Veuillez envoyer un commentaire au développeur.\nErreur: %s</string>
+    <string name="toast_optifine_success">Installation réussie</string>
+    <string name="toast_shiftmode" comment="toast_shiftmode&#10;&#10;%s will be replaced with one of the following strings: toast_shiftmode_hold, toast_shiftmode_toggle">Le mode du bouton Maj (s\'accroupir) a été changé en %s</string>
+    <string name="toast_shiftmode_hold" comment="toast_shiftmode_hold&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Maintenir le mode</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Actualités du launcher</string>
+    <string name="mcl_tab_console">Console de Développement</string>
+    <string name="mcl_tab_crash">Journal d\'erreurs</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Prêt à jouer à Minecraft %s</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
