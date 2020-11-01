@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition cho Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">Trợ giúp</string>
     <!-- Languages list part -->
-    <string name="language_name">Tên_ngôn ngữ
-Danh sách ngôn ngữ</string>
+    <string name="language_name">Việt Nam - VN</string>
     <!-- Logging output -->
     <string name="log_title">Nhật ký ra</string>
     <!-- Login strings -->
@@ -141,6 +141,17 @@ Danh sách ngôn ngữ</string>
     <string name="control_chat">Trò chuyện</string>
     <string name="control_debug">Gỡ lỗi</string>
     <string name="control_zoom">Phóng đại (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Túi đồ</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">Thứ ba</string>
+    <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Chuột</string>
     <string name="control_mouseoff">Chuột: tắt</string>
     <string name="control_mouseon">Chuột: bật </string>
@@ -149,5 +160,21 @@ Danh sách ngôn ngữ</string>
     <string name="control_viewout">Nhật ký ra</string>
     <string name="control_adebug">Gỡ lỗi PointerCapture</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
+    <string name="control_shiftmodechg">Chuyển chế đô Shift (lẻn)</string>
+    <string name="customctrl_keyname">Mã phím</string>
+    <string name="customctrl_specialkey">Phím đặc biệt</string>
+    <string name="customctrl_hidden">Ẩn</string>
+    <string name="customctrl_addbutton">Thêm nút</string>
+    <string name="customctrl_title_selectctrl">Chọn bộ điều khiển json thông thường</string>
+    <string name="customctrl_selectdefault">Chọn bộ điều khiển json thông thường</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Cập nhập bàn điều khiển</string>
+    <string name="main_options">Tùy chọn</string>
+    <string name="main_play">Chơi</string>
+    <string name="main_welcome">Chào mừng,</string>
+    <string name="main_infodev">Thông tin (DEV)</string>
+    <string name="main_switchuser">Đổi người dùng</string>
+    <string name="main_version_">Phiên bản:</string>
+    <string name="main_nocrash">Không phát hiện sự cố</string>
+    <string name="main_nolog">Không có bản ghi.</string>
 </resources>
