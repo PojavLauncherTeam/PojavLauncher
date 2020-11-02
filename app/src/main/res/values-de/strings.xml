@@ -7,7 +7,9 @@
     <!-- Action bar part -->
     <string name="actionbar_help">Hilfe</string>
     <!-- Languages list part -->
+    <string name="language_name">DEUTSCH - DE</string>
     <!-- Logging output -->
+    <string name="log_title">Log Ausgabe</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email oder Benutzername</string>
     <string name="login_online_username_question">(Was benutze ich?)</string>
@@ -144,6 +146,16 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
+    <string name="control_mouse">Maus</string>
+    <string name="control_mouseoff">Maus: Aus</string>
+    <string name="control_mouseon">Maus: An </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Schließen erzwingen</string>
+    <string name="control_viewout">Log Ausgabe</string>
     <!-- Update part (unused now) -->
+    <string name="main_options">Einstellungen</string>
+    <string name="main_play">Spielen</string>
+    <string name="main_welcome">Wilkommen,</string>
+    <string name="main_switchuser">Benutzer wechseln</string>
+    <string name="main_version_">Version:</string>
 </resources>
