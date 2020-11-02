@@ -133,6 +133,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
     } */
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(JNIEnv* env, jclass clazz, jboolean inputReady) {
+    isInputReady = inputReady;
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing) {
     isGrabbing = grabbing;
 }
@@ -145,8 +149,9 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
     if (GLFW_invoke_Char && isInputReady) {
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
-        } else
+        } else {
             GLFW_invoke_Char(showingWindow, codepoint);
+        }
         return JNI_TRUE;
     }
     return JNI_FALSE;
@@ -156,8 +161,9 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods
     if (GLFW_invoke_CharMods && isInputReady) {
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR_MODS, codepoint, mods, 0, 0);
-        } else
+        } else {
             GLFW_invoke_CharMods(showingWindow, codepoint, mods);
+        }
         return JNI_TRUE;
     }
     return JNI_FALSE;
