@@ -7,11 +7,13 @@
     <!-- Action bar part -->
     <string name="actionbar_help">Hilfe</string>
     <!-- Languages list part -->
+    <string name="language_name">DEUTSCH - DE</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email oder Benutzername</string>
     <string name="login_online_username_question">(Was benutze ich?)</string>
     <string name="login_online_password_hint">Passwort</string>
     <string name="login_online_password_question">Passwort vergessen?</string>
+    <string name="login_online_remember">Angemeldet bleiben?</string>
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
     <string name="login_online_create_account">(Neues Konto erstellen?)</string>
@@ -65,6 +67,7 @@
     <string name="mcl_launch_download_client">Lade Minecraft %s herunter</string>
     <string name="mcl_launch_convert_lib">Konvertiere Bibliothek %s</string>
     <string name="mcl_launch_convert_client">Konvertiere Minecraft Version %s</string>
+    <string name="mcl_launch_patch_client">Patche Minecraft %s</string>
     <string name="mcl_launch_download_assets">Vorbereitung zum Download von Ressourcen</string>
     <string name="mcl_options">Optionen</string>
     <string name="mcl_option_modmgr">Mod Manager (keine funktionen)</string>
@@ -133,11 +136,14 @@
     <!-- MainActivity: Control buttons -->
     <string name="controls">Steuerung</string>
     <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Tastatur</string>
+    <string name="control_chat">Chat</string>
     <string name="control_shift">◇</string>
     <string name="control_up">▲</string>
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
+    <string name="control_mouse">Maus</string>
     <string name="control_mouseon">Maus: An </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Schließen erzwingen</string>
