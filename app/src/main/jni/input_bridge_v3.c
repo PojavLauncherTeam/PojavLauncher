@@ -61,8 +61,6 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
     
     DetachCurrentThread(vm);
 */
-
-    free(glfwInputEventArr);
 }
 
 #define ADD_CALLBACK_WWIN(NAME) \
