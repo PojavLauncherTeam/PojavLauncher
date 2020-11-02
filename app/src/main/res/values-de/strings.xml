@@ -144,9 +144,11 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_mouse">Maus</string>
+    <string name="control_mouseoff">Maus: Aus</string>
     <string name="control_mouseon">Maus: An </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Schließen erzwingen</string>
+    <string name="control_viewout">Log Ausgabe</string>
     <string name="customctrl_hidden">Versteckt</string>
     <string name="customctrl_addbutton">Taste hinzufügen</string>
     <string name="customctrl_title_selectctrl">Standard-Kontroll-json auswählen</string>
