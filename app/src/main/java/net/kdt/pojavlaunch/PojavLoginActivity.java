@@ -234,12 +234,13 @@ public class PojavLoginActivity extends AppCompatActivity
                 if (position == 0) {
                     locale = Locale.getDefault();
                 } else {
-                    locale = Locale.getAvailableLocales()[position + 1];
+                    locale = Locale.getAvailableLocales()[position - 1];
                 }
                 Locale.setDefault(locale);
                 Configuration config = new Configuration();
-                config.locale = locale;
-                getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                config.setLocale(locale);
+                // TODO replace deprecated
+                getResources().updateConfiguration(config, getResources().getDisplayMetrics());
             }
             
             @Override
