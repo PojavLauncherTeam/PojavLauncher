@@ -77,14 +77,11 @@ ADD_CALLBACK_WWIN(WindowSize);
 
 #undef ADD_CALLBACK_WWIN
 
-void attachThreadIfNeed(bool isAndroid, bool* isAttached, JNIEnv** secondJNIEnvPtr) {
-    if (!*isAttached) {
-        if (isAndroid && runtimeJavaVMPtr) {
-            (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
-        } else if (!isAndroid && dalvikJavaVMPtr) {
-            (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, secondJNIEnvPtr, NULL);
-        }
-        *isAttached = true;
+void attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
+    if (isAndroid && runtimeJavaVMPtr) {
+        (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
+    } else if (!isAndroid && dalvikJavaVMPtr) {
+        (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, secondJNIEnvPtr, NULL);
     }
 }
 
@@ -111,16 +108,16 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
     isUseStackQueueCall = (int) isUseStackQueue;
-    if (isUseStackQueue) {
-        isPrepareGrabPos = true;
-    } else if (isAndroid) {
-        attachThreadIfNeed(true, &isAndroidThreadAttached, &runtimeJNIEnvPtr_ANDROID);
-        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
-        
-        isPrepareGrabPos = true;
+    if (isAndroid) {
+        attachThread(true, &runtimeJNIEnvPtr_ANDROID);
     } else {
-        attachThreadIfNeed(false, &isRuntimeThreadAttached, &dalvikJNIEnvPtr_JRE);
+        attachThread(false, &dalvikJNIEnvPtr_JRE);
         // getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
+    }
+    
+    if (isUseStackQueue && isAndroid) {
+        isPrepareGrabPos = true;
+        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     }
 }
 
