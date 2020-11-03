@@ -27,6 +27,8 @@ import android.system.*;
 
 public class MainActivity extends LoggableActivity implements OnTouchListener, OnClickListener
 {
+    public static volatile ClipboardManager GLOBAL_CLIPBOARD;
+    
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
     volatile public static boolean isPushPollCall;
 
@@ -82,7 +84,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 	//private EditText hiddenEditor;
 	// private ViewGroup overlayView;
 	private MCProfile.Builder mProfile;
-
+    
 	private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
 
@@ -131,6 +133,9 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 		setContentView(R.layout.main);
 
 		try {
+            // FIXME: is it safe fot multi thread?
+            GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            
 			logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
 			logFile.delete();
 			logFile.createNewFile();

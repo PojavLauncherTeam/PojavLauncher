@@ -26,10 +26,6 @@ typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
 int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
-JavaVM* firstJavaVM;
-JavaVM* secondJavaVM;
-
-JNIEnv* firstJNIEnv;
 JNIEnv* secondJNIEnv;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
@@ -83,19 +79,22 @@ ADD_CALLBACK_WWIN(WindowSize);
 
 #undef ADD_CALLBACK_WWIN
 
-void attachThreadIfNeed(bool* isAttached, JNIEnv** secondJNIEnvPtr) {
-    if (!*isAttached && secondJavaVM) {
-        (*secondJavaVM)->AttachCurrentThread(secondJavaVM, secondJNIEnvPtr, NULL);
+void attachThreadIfNeed(bool isAndroid, bool* isAttached, JNIEnv** secondJNIEnvPtr) {
+    if (!*isAttached) {
+        if (isAndroid && runtimeJavaVMPtr) {
+            (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
+        } else if (!isAndroid && dalvikJavaVMPtr) {
+            (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, secondJNIEnvPtr, NULL);
+        }
         *isAttached = true;
     }
-    secondJNIEnv = *secondJNIEnvPtr;
 }
 
 void getJavaInputBridge(jclass* clazz, jmethodID* method) {
-    if (*method == NULL && secondJNIEnv != NULL) {
-        *clazz = (*secondJNIEnv)->FindClass(secondJNIEnv, "org/lwjgl/glfw/CallbackBridge");
+    if (*method == NULL && runtimeJNIEnvPtr_ANDROID != NULL) {
+        *clazz = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/glfw/CallbackBridge");
         assert(*clazz != NULL);
-        *method = (*secondJNIEnv)->GetStaticMethodID(secondJNIEnv, *clazz, "receiveCallback", "(IIIII)V");
+        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IIIII)V");
         assert(*method != NULL);
     }
 }
@@ -115,22 +114,24 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
     if (isUseStackQueue) {
         isPrepareGrabPos = true;
     } else if (isAndroid) {
-        firstJavaVM = dalvikJavaVMPtr;
-        firstJNIEnv = dalvikJNIEnvPtr_ANDROID;
-        secondJavaVM = runtimeJavaVMPtr;
-        
-        attachThreadIfNeed(&isAndroidThreadAttached, &runtimeJNIEnvPtr_ANDROID);
+        attachThreadIfNeed(true, &isAndroidThreadAttached, &runtimeJNIEnvPtr_ANDROID);
         getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
         
         isPrepareGrabPos = true;
-    } /* else {
-        firstJavaVM = runtimeJavaVMPtr;
-        firstJNIEnv = runtimeJNIEnvPtr_JRE;
-        secondJavaVM = dalvikJavaVMPtr;
-        
-        attachThreadIfNeed(&isRuntimeThreadAttached, &dalvikJNIEnvPtr_JRE);
-        getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
-    } */
+    } else {
+        attachThreadIfNeed(false, &isRuntimeThreadAttached, &dalvikJNIEnvPtr_JRE);
+        // getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
+    }
+}
+
+JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jstring copy) {
+    // TODO: if crash here, then convert jstring to jstring (diff JVM)
+    jclass clazz = (*dalvikJNIEnvPtr_JRE)->FindClass(dalvikJNIEnvPtr_JRE, "org/lwjgl/glfw/CallbackBridge");
+    assert(clazz != NULL);
+    method = (*dalvikJNIEnvPtr_JRE)->GetStaticMethodID(dalvikJNIEnvPtr_JRE, clazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
+    assert(method != NULL);
+    
+    return (jstring) (*dalvikJNIEnvPtr_JRE)->CallStaticMethodObject(dalvikJNIEnvPtr_JRE, action, copy);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(JNIEnv* env, jclass clazz, jboolean inputReady) {

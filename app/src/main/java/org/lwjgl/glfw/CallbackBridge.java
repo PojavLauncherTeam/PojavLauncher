@@ -3,18 +3,14 @@ import java.io.*;
 import java.util.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.*;
+import android.content.*;
 
 public class CallbackBridge {
-    public static final int JRE_TYPE_CURSOR_POS = 0;
-    public static final int JRE_TYPE_CURSOR_BUTTON = 1;
-    public static final int JRE_TYPE_KEYCODE_CONTROL = 2;
-    public static final int JRE_TYPE_KEYCODE_CHAR = 3;
-    public static final int JRE_TYPE_MOUSE_KEYCODE_CONTROL = 4;
-    public static final int JRE_TYPE_WINDOW_SIZE = 5;
-    public static final int JRE_TYPE_GRAB_INITIAL_POS_UNSET = 6;
-    
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
-
+    
+    public static final int CLIPBOARD_COPY = 2000;
+    public static final int CLIPBOARD_PASTE = 2001;
+    
     public static volatile int windowWidth, windowHeight;
     public static int mouseX, mouseY;
     public static boolean mouseLeft;
@@ -81,6 +77,22 @@ public class CallbackBridge {
     }
 
     // Called from JRE side
+    public static String accessAndroidClipboard(int type, String copy) {
+        switch (type) {
+            case CLIPBOARD_COPY:
+                MainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
+                return null;
+                
+            case CLIPBOARD_PASTE:
+                if (MainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && MainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    return MainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
+                } else {
+                    return "";
+                }
+                
+            default: return null;
+        }
+    }
     public static void receiveCallback(int type, String data) {
         switch (type) {
             case ANDROID_TYPE_GRAB_STATE:
