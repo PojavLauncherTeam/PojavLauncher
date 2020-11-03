@@ -135,6 +135,7 @@ public class CallbackBridge {
     
     static {
         System.loadLibrary("pojavexec");
+        CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
     }
 }
 

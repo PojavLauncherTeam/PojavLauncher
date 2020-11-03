@@ -163,7 +163,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;
-            CallbackBridge.nativeAttachThreadToOther(true, isInputStackCall);
             
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 			CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
