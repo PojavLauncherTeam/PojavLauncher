@@ -135,7 +135,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
 
 JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jstring copy) {
 #ifdef DEBUG
-    LOGD("Debug: Clipboard access is going on\n", isUseStackQueue);
+    LOGD("Debug: Clipboard access is going on\n", isUseStackQueueCall);
 #endif
     // TODO: if crash here, then convert jstring to jstring (diff JVM)
     jclass bridgeClazz = (*dalvikJNIEnvPtr_JRE)->FindClass(dalvikJNIEnvPtr_JRE, "org/lwjgl/glfw/CallbackBridge");
