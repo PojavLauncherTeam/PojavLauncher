@@ -78,6 +78,9 @@ ADD_CALLBACK_WWIN(WindowSize);
 #undef ADD_CALLBACK_WWIN
 
 void attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
+#ifdef DEBUG
+    LOGD("Debug: Attaching %s thread to %s, javavm.isNull=%d\n", isAndroid ? "Android" : "JRE", isAndroid ? "JRE" : "Android", (isAndroid ? runtimeJavaVMPtr : dalvikJavaVMPtr) == NULL);
+#endif
     if (isAndroid && runtimeJavaVMPtr) {
         (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
     } else if (!isAndroid && dalvikJavaVMPtr) {
@@ -86,6 +89,9 @@ void attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
 }
 
 void getJavaInputBridge(jclass* clazz, jmethodID* method) {
+#ifdef DEBUG
+    LOGD("Debug: Initializing input bridge, method.isNull=%d, jnienv.isNull=%d\n", *method == NULL, runtimeJNIEnvPtr_ANDROID == NULL);
+#endif
     if (*method == NULL && runtimeJNIEnvPtr_ANDROID != NULL) {
         *clazz = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/glfw/CallbackBridge");
         assert(*clazz != NULL);
@@ -95,6 +101,9 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
 }
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
+#ifdef DEBUG
+    LOGD("Debug: Send data, jnienv.isNull=%d\n", runtimeJNIEnvPtr_ANDROID == NULL);
+#endif
     if (runtimeJNIEnvPtr_ANDROID != NULL) {
         (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
             runtimeJNIEnvPtr_ANDROID,
@@ -107,6 +116,9 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
+#ifdef DEBUG
+    LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueue);
+#endif
     isUseStackQueueCall = (int) isUseStackQueue;
     if (isAndroid) {
         attachThread(true, &runtimeJNIEnvPtr_ANDROID);
@@ -122,6 +134,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOt
 }
 
 JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jstring copy) {
+#ifdef DEBUG
+    LOGD("Debug: Clipboard access is going on\n", isUseStackQueue);
+#endif
     // TODO: if crash here, then convert jstring to jstring (diff JVM)
     jclass bridgeClazz = (*dalvikJNIEnvPtr_JRE)->FindClass(dalvikJNIEnvPtr_JRE, "org/lwjgl/glfw/CallbackBridge");
     assert(bridgeClazz != NULL);
@@ -132,6 +147,9 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(JNIEnv* env, jclass clazz, jboolean inputReady) {
+#ifdef DEBUG
+    LOGD("Debug: Changing input state, isReady=%d, isUseStackQueueCall=%d\n", inputReady, isUseStackQueueCall);
+#endif
     isInputReady = inputReady;
     return isUseStackQueueCall;
 }

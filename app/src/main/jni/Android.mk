@@ -6,7 +6,8 @@ include $(CLEAR_VARS)
 LOCAL_LDLIBS := -ldl -llog -landroid -lEGL
 # -lGLESv2
 LOCAL_MODULE := pojavexec
-# LOCAL_CFLAGS += -DGLES_TEST
+LOCAL_CFLAGS += -DDEBUG
+# -DGLES_TEST
 LOCAL_SRC_FILES := \
     egl_bridge.c \
     input_bridge_v3.c \
