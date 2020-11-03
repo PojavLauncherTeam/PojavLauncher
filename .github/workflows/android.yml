@@ -18,7 +18,8 @@ jobs:
         chmod +x gradlew 
         ./gradlew clean assembleDebug
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug.apk
-        # find . -name "*.so"
+        rm -rf app/src/main/obj/local/*/objs
+        mv app/src/main/obj/local out/debug_libs
 
 #    - name: Build 32-bit APK with Gradle
 #      run: | 
