@@ -1,22 +1,22 @@
-%s BETA (Minecraft Java launcher for Android), version %s by Tran Khanh Duy (based from "Boardwalk" app)<br>
+%s (Minecraft Java Launcher for Android), version %s by Tran Khanh Duy (based on "Boardwalk" app)<br>
+
 * Using libraries:<br>
  • ClassWrapperMC: A simple wrapper to help launching Minecraft LaunchWrapper on JRE9 and later.<br>
  • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.<br>
  • OpenJDK JRE 8 for Android.<br>
  • Apache Commons Compress.<br>
  • LWJGL.<br>
+ 
 * License:<br>
  • This application is licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">GNU GPLv3</a>.<br>
+ 
 * Third party licenses:<br>
  • Apache Commons Compress (unknown or Apache License 2.0).<br>
  • gl4es: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.<br>
  • LegacyLauncher: (unknown license).<br>
  • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2 License</a>.<br>
- • PRoot: <a href="https://github.com/termux/proot/blob/master/COPYING">GNU GPLv2 License</a>.<br>
- • TheQVD XVnc Pro: <a href="https://github.com/theqvd/qvd-client-android/blob/master/LICENSE.txt">GNU GPLv3 License</a>.<br>
  • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's License</a>.<br><br>
- • Debian libraries: Multiple licenses.<br>
- • BusyBox: <a href="https://busybox.net/license.html">GNU GPL License</a><br>
+ 
 * Notes:<br>
  - This app is under development and will not be stable.<br>
  - This app is not affiliated with Minecraft, Mojang or Microsoft.
