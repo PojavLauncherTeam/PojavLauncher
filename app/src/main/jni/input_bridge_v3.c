@@ -26,8 +26,6 @@ typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
 int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
-JNIEnv* secondJNIEnv;
-
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
 
@@ -100,8 +98,8 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
 }
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
-    (*secondJNIEnv)->CallStaticVoidMethod(
-        secondJNIEnv,
+    (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_ANDROID,
         inputBridgeClass_ANDROID,
         inputBridgeMethod_ANDROID,
         type,
