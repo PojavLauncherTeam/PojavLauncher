@@ -30,7 +30,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     
 	public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
-    volatile public static boolean isPushPollCall;
+    volatile public static boolean isInputStackCall;
 
 	private static int[] hotbarKeys = {
 		LWJGLGLFWKeycode.GLFW_KEY_1, LWJGLGLFWKeycode.GLFW_KEY_2,	LWJGLGLFWKeycode.GLFW_KEY_3,
@@ -162,8 +162,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 			setTitle("Minecraft " + mProfile.getVersion());
             
             // Minecraft 1.13+
-            isPushPollCall = mVersionInfo.arguments != null;
-            CallbackBridge.nativeAttachThreadToOther(true, isPushPollCall);
+            isInputStackCall = mVersionInfo.arguments != null;
+            CallbackBridge.nativeAttachThreadToOther(true, isInputStackCall);
             
 			this.displayMetrics = Tools.getDisplayMetrics(this);
 			CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
