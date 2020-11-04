@@ -9,13 +9,12 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 
-public class InstallModActivity extends LoggableActivity
-{
-	private TextureView mTextureView;
+public class InstallModActivity extends LoggableActivity{
+    private TextureView mTextureView;
     private LinearLayout contentLog;
     private TextView textLog;
     private ScrollView contentScroll;
-	private ToggleButton toggleLog; 
+    private ToggleButton toggleLog; 
     
     private File logFile;
     private PrintStream logStream;
@@ -28,6 +27,21 @@ public class InstallModActivity extends LoggableActivity
 		setContentView(R.layout.install_mod);
         
         try {
+		
+          final View decorView = getWindow().getDecorView();
+	  decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+		@Override
+		public void onSystemUiVisibilityChange(int visibility) {
+		if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+		decorView.setSystemUiVisibility(
+		View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+	      | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+	      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+	      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+	      | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		   }
+	     }
+       });
             logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
@@ -152,6 +166,14 @@ public class InstallModActivity extends LoggableActivity
 			Tools.showError(this, th, true);
 		}
 	}
+	
+    @Override
+    public void onResume() {
+        super.onResume();
+        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
+    }
     
     @Override
     public void appendToLog(final String text, boolean checkAllow) {
