@@ -71,7 +71,7 @@ public class InstallModActivity extends LoggableActivity {
                         
                         // final Surface surface = new Surface(tex);
                         new Thread(new Runnable(){
-                            private TextPaint fpsPaint = new TextPaint(Color.LIGHT_GRAY);
+                            private TextPaint fpsPaint = new TextPaint(Color.LTGRAY);
                             private boolean attached = false;
                             
                             // Temporary count fps https://stackoverflow.com/a/13729241
