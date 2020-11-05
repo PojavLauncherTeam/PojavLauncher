@@ -91,7 +91,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                 if (attached) {
                     drawing = JREUtils.renderAWTScreenFrame(canvas, mWidth, mHeight);
                 }
-                canvas.drawText("FPS: " + fps() + ", attached=" + attached + ", drawing=" + drawing, 50, 50, fpsPaint);
+                canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", attached=" + attached + ", drawing=" + drawing, 50, 50, fpsPaint);
 
                 mSurface.unlockCanvasAndPost(canvas);
             } catch (Throwable th) {

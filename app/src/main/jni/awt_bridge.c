@@ -8,7 +8,10 @@
 // TODO: check for memory leaks
 int printed = 0;
 JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz, jobject canvas, jint width, jint height) {
-    if (runtimeJNIEnvPtr_ANDROID == NULL) return JNI_FALSE;
+    if (runtimeJNIEnvPtr_ANDROID == NULL) {
+        if (runtimeJavaVMPtr == NULL) return JNI_FALSE;
+        (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr_ANDROID, NULL);
+    }
     
     int *rgbArray;
     jintArray jreRgbArray, androidRgbArray;
