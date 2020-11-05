@@ -11,6 +11,7 @@ import java.util.*;
 import org.lwjgl.glfw.*;
 import android.support.v7.app.*;
 import android.content.*;
+import android.text.*;
 
 public class InstallModActivity extends LoggableActivity {
     public static volatile boolean IS_JRE_RUNNING;
@@ -70,7 +71,26 @@ public class InstallModActivity extends LoggableActivity {
                         
                         // final Surface surface = new Surface(tex);
                         new Thread(new Runnable(){
+                            private TextPaint fpsPaint = new TextPaint(Color.LIGHT_GRAY);
                             private boolean attached = false;
+                            
+                            // Temporary count fps https://stackoverflow.com/a/13729241
+                            private LinkedList<Long> times = new LinkedList<Long>(){{add(System.nanoTime());}};
+                            private final int MAX_SIZE = 100;
+                            private final double NANOS = 1000000000.0;
+
+                            /** Calculates and returns frames per second */
+                            private double fps() {
+                                long lastTime = System.nanoTime();
+                                double difference = (lastTime - times.getFirst()) / NANOS;
+                                times.addLast(lastTime);
+                                int size = times.size();
+                                if (size > MAX_SIZE) {
+                                    times.removeFirst();
+                                }
+                                return difference > 0 ? times.size() / difference : 0.0;
+                            }
+                                
                             @Override
                             public void run() {
                                 try {
@@ -78,10 +98,12 @@ public class InstallModActivity extends LoggableActivity {
                                         if (!attached) {
                                             attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
                                             Thread.sleep(100);
-                                            continue;
                                         }
                                         Canvas canvas = mTextureView.lockCanvas();
-                                        JREUtils.renderAWTScreenFrame(canvas, w, h);
+                                        if (attached) {
+                                            JREUtils.renderAWTScreenFrame(canvas, w, h);
+                                        }
+                                        canvas.drawText("FPS: " + fps(), 10, 10, fpsPaint);
                                         mTextureView.unlockCanvasAndPost(canvas);
                                     }
                                 } catch (InterruptedException e) {}
