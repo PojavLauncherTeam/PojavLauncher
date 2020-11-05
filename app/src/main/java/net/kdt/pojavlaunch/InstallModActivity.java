@@ -16,7 +16,7 @@ import android.text.*;
 public class InstallModActivity extends LoggableActivity {
     public static volatile boolean IS_JRE_RUNNING;
     
-	private TextureView mTextureView;
+	private AWTCanvasView mTextureView;
     private LinearLayout contentLog;
     private TextView textLog;
     private ScrollView contentScroll;
@@ -60,98 +60,32 @@ public class InstallModActivity extends LoggableActivity {
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
             
             mTextureView = findViewById(R.id.installmod_surfaceview);
-            mTextureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
-
-                    private boolean isAvailableCalled = false;
+            
+            new Thread(new Runnable(){
                     @Override
-                    public void onSurfaceTextureAvailable(SurfaceTexture tex, final int w, final int h) {
-                        if (!isAvailableCalled) {
-                            isAvailableCalled = true;
-                        } else return;
-                        
-                        // final Surface surface = new Surface(tex);
-                        new Thread(new Runnable(){
-                            private TextPaint fpsPaint = new TextPaint(Color.LTGRAY);
-                            private boolean attached = false;
-                            
-                            // Temporary count fps https://stackoverflow.com/a/13729241
-                            private LinkedList<Long> times = new LinkedList<Long>(){{add(System.nanoTime());}};
-                            private final int MAX_SIZE = 100;
-                            private final double NANOS = 1000000000.0;
+                    public void run() {
+                        final int exitCode = launchJavaRuntime(modFile, javaArgs);
+                        IS_JRE_RUNNING = false;
 
-                            /** Calculates and returns frames per second */
-                            private double fps() {
-                                long lastTime = System.nanoTime();
-                                double difference = (lastTime - times.getFirst()) / NANOS;
-                                times.addLast(lastTime);
-                                int size = times.size();
-                                if (size > MAX_SIZE) {
-                                    times.removeFirst();
+                        appendlnToLog("Java Exit code: " + exitCode);
+
+                        runOnUiThread(new Runnable(){
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder dialog = new AlertDialog.Builder(InstallModActivity.this);
+                                    dialog.setMessage(getString(R.string.mcn_exit_title, exitCode));
+                                    dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                                            @Override
+                                            public void onClick(DialogInterface p1, int p2){
+                                                MainActivity.fullyExit();
+                                            }
+                                        });
+                                    dialog.show();
                                 }
-                                return difference > 0 ? times.size() / difference : 0.0;
-                            }
-                                
-                            @Override
-                            public void run() {
-                                try {
-                                    while (IS_JRE_RUNNING) {
-                                        if (!attached) {
-                                            attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
-                                            Thread.sleep(100);
-                                        }
-                                        Canvas canvas = mTextureView.lockCanvas();
-                                        if (attached) {
-                                            JREUtils.renderAWTScreenFrame(canvas, w, h);
-                                        }
-                                        canvas.drawText("FPS: " + fps(), 10, 10, fpsPaint);
-                                        mTextureView.unlockCanvasAndPost(canvas);
-                                    }
-                                } catch (InterruptedException e) {}
-                            }
-                        }, "AWTSurfaceUpdater").start();
-
-                        new Thread(new Runnable(){
-                            @Override
-                            public void run() {
-                                final int exitCode = launchJavaRuntime(modFile, javaArgs);
-                                IS_JRE_RUNNING = false;
-
-                                appendlnToLog("Java Exit code: " + exitCode);
-
-                                runOnUiThread(new Runnable(){
-                                        @Override
-                                        public void run() {
-                                            AlertDialog.Builder dialog = new AlertDialog.Builder(InstallModActivity.this);
-                                            dialog.setMessage(getString(R.string.mcn_exit_title, exitCode));
-                                            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                                                    @Override
-                                                    public void onClick(DialogInterface p1, int p2){
-                                                        MainActivity.fullyExit();
-                                                    }
-                                                });
-                                            dialog.show();
-                                        }
-                                    });
-                            }
-                        }, "JREMainThread").start();
+                            });
                     }
-
-                    @Override
-                    public boolean onSurfaceTextureDestroyed(SurfaceTexture tex) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onSurfaceTextureSizeChanged(SurfaceTexture tex, int w, int h) {
-
-                    }
-
-                    @Override
-                    public void onSurfaceTextureUpdated(SurfaceTexture tex) {
-
-                    }
-                });
+                }, "JREMainThread").start();
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }

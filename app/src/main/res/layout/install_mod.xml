@@ -8,7 +8,7 @@
 		android:layout_height="match_parent"
 		android:layout_width="match_parent">
 
-		<TextureView
+		<net.kdt.pojavlaunch.AWTCanvasView
 			android:layout_height="match_parent"
 			android:layout_width="match_parent"
 			android:id="@+id/installmod_surfaceview"/>
