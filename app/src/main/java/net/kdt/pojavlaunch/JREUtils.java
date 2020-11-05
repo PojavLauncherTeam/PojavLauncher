@@ -120,7 +120,9 @@ public class JREUtils
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
-    public static void relocateLibPath() {
+    public static void relocateLibPath(Context ctx) {
+        nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
+
         for (String arch : Tools.currentArch.split("/")) {
             File f = new File(Tools.homeJreDir, "lib/" + arch);
             if (f.exists() && f.isDirectory()) {
@@ -149,8 +151,6 @@ public class JREUtils
     }
     
     public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
-        nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
-        
         setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
         setEnvironment(launchType, "HOME", Tools.MAIN_PATH);
         setEnvironment(launchType, "TMPDIR", ctx.getCacheDir().getAbsolutePath());
