@@ -36,6 +36,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         //Save dalvik global JavaVM pointer
         dalvikJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr_ANDROID, JNI_VERSION_1_4);
+        
+        isUseStackQueueCall = JNI_FALSE;
     } else if (dalvikJavaVMPtr != vm) {
         runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
@@ -85,7 +87,7 @@ jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
     LOGD("Debug: Attaching %s thread to %s, javavm.isNull=%d\n", isAndroid ? "Android" : "JRE", isAndroid ? "JRE" : "Android", (isAndroid ? runtimeJavaVMPtr : dalvikJavaVMPtr) == NULL);
 #endif
 
-    if (*secondJNIEnvPtr != NULL) return JNI_TRUE;
+    if (*secondJNIEnvPtr != NULL || !isUseStackQueueCall) return JNI_TRUE;
 
     if (isAndroid && runtimeJavaVMPtr) {
         (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
@@ -114,15 +116,17 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
 #ifdef DEBUG
     LOGD("Debug: Send data, jnienv.isNull=%d\n", runtimeJNIEnvPtr_ANDROID == NULL);
 #endif
-    if (runtimeJNIEnvPtr_ANDROID != NULL) {
-        (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
-            runtimeJNIEnvPtr_ANDROID,
-            inputBridgeClass_ANDROID,
-            inputBridgeMethod_ANDROID,
-            type,
-            i1, i2, i3, i4
-        );
+    if (runtimeJNIEnvPtr_ANDROID == NULL) {
+        LOGE("BUG: Input is ready but thread is not attached yet.");
+        return;
     }
+    (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_ANDROID,
+        inputBridgeClass_ANDROID,
+        inputBridgeMethod_ANDROID,
+        type,
+        i1, i2, i3, i4
+    );
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {

@@ -28,10 +28,10 @@ public class CallbackBridge {
         sendMouseKeycode(button, 0, state == 1);
     }
 
-    private static boolean attached;
+    private static boolean threadAttached;
     public static void sendCursorPos(int x, int y) {
-        if (!attached) {
-            attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
+        if (!threadAttached) {
+            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
         }
         
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
