@@ -77,18 +77,22 @@ ADD_CALLBACK_WWIN(WindowSize);
 
 #undef ADD_CALLBACK_WWIN
 
-void attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
+jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
 #ifdef DEBUG
     LOGD("Debug: Attaching %s thread to %s, javavm.isNull=%d\n", isAndroid ? "Android" : "JRE", isAndroid ? "JRE" : "Android", (isAndroid ? runtimeJavaVMPtr : dalvikJavaVMPtr) == NULL);
 #endif
 
-    if (*secondJNIEnvPtr != NULL) return;
+    if (*secondJNIEnvPtr != NULL) return JNI_TRUE;
 
     if (isAndroid && runtimeJavaVMPtr) {
         (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
+        return JNI_TRUE;
     } else if (!isAndroid && dalvikJavaVMPtr) {
         (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, secondJNIEnvPtr, NULL);
+        return JNI_TRUE;
     }
+    
+    return JNI_FALSE;
 }
 
 void getJavaInputBridge(jclass* clazz, jmethodID* method) {
@@ -118,22 +122,27 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueue) {
 #ifdef DEBUG
     LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueue);
 #endif
+
+    jboolean result;
+
     isUseStackQueueCall = (int) isUseStackQueue;
     if (isAndroid) {
-        attachThread(true, &runtimeJNIEnvPtr_ANDROID);
+        result = attachThread(true, &runtimeJNIEnvPtr_ANDROID);
     } else {
-        attachThread(false, &dalvikJNIEnvPtr_JRE);
+        result = attachThread(false, &dalvikJNIEnvPtr_JRE);
         // getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
     }
     
-    if (isUseStackQueue && isAndroid) {
+    if (isUseStackQueue && isAndroid && result) {
         isPrepareGrabPos = true;
         getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     }
+    
+    return result;
 }
 
 JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jstring copy) {
