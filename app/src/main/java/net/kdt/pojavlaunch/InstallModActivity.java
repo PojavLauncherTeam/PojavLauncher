@@ -70,13 +70,21 @@ public class InstallModActivity extends LoggableActivity {
                         
                         // final Surface surface = new Surface(tex);
                         new Thread(new Runnable(){
+                            private boolean attached = false;
                             @Override
                             public void run() {
-                                while (IS_JRE_RUNNING) {
-                                    Canvas canvas = mTextureView.lockCanvas();
-                                    JREUtils.renderAWTScreenFrame(canvas, w, h);
-                                    mTextureView.unlockCanvasAndPost(canvas);
-                                }
+                                try {
+                                    while (IS_JRE_RUNNING) {
+                                        if (!attached) {
+                                            attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
+                                            Thread.sleep(100);
+                                            continue;
+                                        }
+                                        Canvas canvas = mTextureView.lockCanvas();
+                                        JREUtils.renderAWTScreenFrame(canvas, w, h);
+                                        mTextureView.unlockCanvasAndPost(canvas);
+                                    }
+                                } catch (InterruptedException e) {}
                             }
                         }, "AWTSurfaceUpdater").start();
 

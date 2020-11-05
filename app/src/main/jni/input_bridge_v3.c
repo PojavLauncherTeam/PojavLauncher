@@ -81,6 +81,9 @@ void attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
 #ifdef DEBUG
     LOGD("Debug: Attaching %s thread to %s, javavm.isNull=%d\n", isAndroid ? "Android" : "JRE", isAndroid ? "JRE" : "Android", (isAndroid ? runtimeJavaVMPtr : dalvikJavaVMPtr) == NULL);
 #endif
+
+    if (*secondJNIEnvPtr != NULL) return;
+
     if (isAndroid && runtimeJavaVMPtr) {
         (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
     } else if (!isAndroid && dalvikJavaVMPtr) {

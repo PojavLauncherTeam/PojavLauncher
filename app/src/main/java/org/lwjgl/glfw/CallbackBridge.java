@@ -28,7 +28,12 @@ public class CallbackBridge {
         sendMouseKeycode(button, 0, state == 1);
     }
 
+    private static boolean attached;
     public static void sendCursorPos(int x, int y) {
+        if (!attached) {
+            attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
+        }
+        
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
         mouseX = x;
         mouseY = y;
@@ -119,7 +124,7 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    public static native void nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
+    public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
     private static native boolean nativeSendChar(int codepoint);
     // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
     private static native boolean nativeSendCharMods(int codepoint, int mods);
@@ -135,7 +140,6 @@ public class CallbackBridge {
     
     static {
         System.loadLibrary("pojavexec");
-        CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
     }
 }
 
