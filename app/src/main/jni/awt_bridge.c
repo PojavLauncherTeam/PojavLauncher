@@ -12,7 +12,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JN
     jintArray jreRgbArray, androidRgbArray;
     
     jclass class_awt = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "net/java/openjdk/cacio/ctc/CTCScreen");
-    jmethodID method_awt = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, class_awt, "getCurrentScreenRGB");
+    jmethodID method_awt = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, class_awt, "getCurrentScreenRGB", "()V");
     jreRgbArray = (jintArray) (*runtimeJNIEnvPtr_ANDROID)->CallStaticObjectMethod(
         runtimeJNIEnvPtr_ANDROID,
         class_awt,
@@ -27,7 +27,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JN
     
     // Maybe use Skia lib instead?
     jclass class_canvas = (*dalvikJNIEnvPtr_ANDROID)->GetObjectClass(dalvikJNIEnvPtr_ANDROID, canvas);
-    jmethodID method_canvas = (*dalvikJNIEnvPtr_ANDROID)->GetMethodID(dalvikJNIEnvPtr_ANDROID, class_canvas, "drawBitmap", "[IIIFFIIZLandroid/graphics/Paint;");
+    jmethodID method_canvas = (*dalvikJNIEnvPtr_ANDROID)->GetMethodID(dalvikJNIEnvPtr_ANDROID, class_canvas, "drawBitmap", "([IIIFFIIZLandroid/graphics/Paint;)V");
     (*runtimeJNIEnvPtr_ANDROID)->CallVoidMethod(
         runtimeJNIEnvPtr_ANDROID,
         canvas,
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JN
 
     // android_graphics_Canvas_native_drawBitmap
     
-    (*runtimeJNIEnvPtr_ANDROID)->ReleaseIntArrayElements(runtimeJNIEnvPtr_ANDROID, jreRgbArray, rgbArray);
+    (*runtimeJNIEnvPtr_ANDROID)->ReleaseIntArrayElements(runtimeJNIEnvPtr_ANDROID, jreRgbArray, rgbArray, NULL);
     (*dalvikJNIEnvPtr_ANDROID)->DeleteLocalRef(dalvikJNIEnvPtr_ANDROID, androidRgbArray);
     // free(rgbArray);
 }
