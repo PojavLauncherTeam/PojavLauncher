@@ -204,7 +204,7 @@ public final class Tools
 
         overrideableArgList.add("-Djava.home=" + Tools.homeJreDir);
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
-        overrideableArgList.add("-Djava.library.path=" + JREUtils.LD_LIBRARY_PATH);
+        // overrideableArgList.add("-Djava.library.path=" + JREUtils.LD_LIBRARY_PATH);
 
         // Should be compatible?
         // overrideableArgList.add("-Dos.name=Android");
