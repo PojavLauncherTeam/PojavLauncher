@@ -9,6 +9,8 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 import org.lwjgl.glfw.*;
+import android.support.v7.app.*;
+import android.content.*;
 
 public class InstallModActivity extends LoggableActivity
 {
@@ -80,8 +82,26 @@ public class InstallModActivity extends LoggableActivity
                         new Thread(new Runnable(){
                             @Override
                             public void run() {
-                                launchJavaRuntime(modFile, javaArgs);
-                                
+                                final int exitCode = launchJavaRuntime(modFile, javaArgs);
+                                IS_JRE_RUNNING = false;
+
+                                appendlnToLog("Java Exit code: " + exitCode);
+
+                                runOnUiThread(new Runnable(){
+                                        @Override
+                                        public void run() {
+                                            AlertDialog.Builder dialog = new AlertDialog.Builder(InstallModActivity.this);
+                                            dialog.setMessage(getString(R.string.mcn_exit_title, exitCode));
+                                            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                                                    @Override
+                                                    public void onClick(DialogInterface p1, int p2){
+                                                        MainActivity.fullyExit();
+                                                    }
+                                                });
+                                            dialog.show();
+                                        }
+                                    });
                             }
                         }, "JREMainThread").start();
                     }
@@ -119,7 +139,7 @@ public class InstallModActivity extends LoggableActivity
         // mIsResuming = true;
 	}
     
-	private void launchJavaRuntime(File modFile, String javaArgs) {
+	private int launchJavaRuntime(File modFile, String javaArgs) {
 		try {
             JREUtils.relocateLibPath();
             
@@ -160,9 +180,10 @@ public class InstallModActivity extends LoggableActivity
 			JREUtils.initJavaRuntime();
 			JREUtils.chdir(Tools.MAIN_PATH);
 
-			VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+			return VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
 		} catch (Throwable th) {
 			Tools.showError(this, th, true);
+            return -1;
 		}
 	}
     
