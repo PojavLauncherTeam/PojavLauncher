@@ -9,6 +9,7 @@ LOCAL_MODULE := pojavexec
 LOCAL_CFLAGS += -DDEBUG
 # -DGLES_TEST
 LOCAL_SRC_FILES := \
+    awt_bridge.c \
     egl_bridge.c \
     input_bridge_v3.c \
     jre_launcher.c \

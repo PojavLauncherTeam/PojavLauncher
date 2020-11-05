@@ -8,9 +8,12 @@ import com.oracle.dalvik.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
+import org.lwjgl.glfw.*;
 
 public class InstallModActivity extends LoggableActivity
 {
+    public static volatile boolean IS_JRE_RUNNING;
+    
 	private TextureView mTextureView;
     private LinearLayout contentLog;
     private TextView textLog;
@@ -32,7 +35,7 @@ public class InstallModActivity extends LoggableActivity
             logFile.delete();
             logFile.createNewFile();
             logStream = new PrintStream(logFile.getAbsolutePath());
-            this.contentLog = (LinearLayout) findViewById(R.id.content_log_layout);
+            this.contentLog = findViewById(R.id.content_log_layout);
             this.contentScroll = (ScrollView) findViewById(R.id.content_log_scroll);
             this.textLog = (TextView) contentScroll.getChildAt(0);
             this.toggleLog = (ToggleButton) findViewById(R.id.content_log_toggle_log);
@@ -55,24 +58,32 @@ public class InstallModActivity extends LoggableActivity
             mTextureView = findViewById(R.id.installmod_surfaceview);
             mTextureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
 
+                    private boolean isAvailableCalled = false;
                     @Override
-                    public void onSurfaceTextureAvailable(SurfaceTexture tex, int w, int h) {
-                        try {
-                            Surface surface = new Surface(tex);
-                            Field field = surface.getClass().getDeclaredField("mNativeObject");
-                            field.setAccessible(true);
-                            JREUtils.setupBridgeSurfaceAWT((long) field.get(surface));
-                        } catch (Throwable th) {
-                            Tools.showError(InstallModActivity.this, th, true);
-                        }
+                    public void onSurfaceTextureAvailable(SurfaceTexture tex, final int w, final int h) {
+                        if (!isAvailableCalled) {
+                            isAvailableCalled = true;
+                        } else return;
+                        
+                        // final Surface surface = new Surface(tex);
+                        new Thread(new Runnable(){
+                            @Override
+                            public void run() {
+                                while (IS_JRE_RUNNING) {
+                                    Canvas canvas = mTextureView.lockCanvas();
+                                    JREUtils.renderAWTScreenFrame(canvas, w, h);
+                                    mTextureView.unlockCanvasAndPost(canvas);
+                                }
+                            }
+                        }, "AWTSurfaceUpdater").start();
 
                         new Thread(new Runnable(){
-                                @Override
-                                public void run() {
-                                    launchJavaRuntime(modFile, javaArgs);
-                                    // finish();
-                                }
-                            }).start();
+                            @Override
+                            public void run() {
+                                launchJavaRuntime(modFile, javaArgs);
+                                
+                            }
+                        }, "JREMainThread").start();
                     }
 
                     @Override
@@ -128,6 +139,8 @@ public class InstallModActivity extends LoggableActivity
 				javaArgList.add("-Xbootclasspath/a" + libStr.toString());
 			}
 			
+            javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
+            
 			File cacioArgOverrideFile = new File(cacioAwtLibPath, "overrideargs.txt");
 			if (cacioArgOverrideFile.exists()) {
 				javaArgList.addAll(Arrays.asList(Tools.read(cacioArgOverrideFile.getAbsolutePath()).split(" ")));

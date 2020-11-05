@@ -34,10 +34,6 @@ EGLConfig config;
 
 typedef jint RegalMakeCurrent_func(EGLContext context);
 
-JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
-	potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
-}
-
 // Called from JNI_OnLoad of liblwjgl_opengl
 void pojav_openGLOnLoad() {
 	
