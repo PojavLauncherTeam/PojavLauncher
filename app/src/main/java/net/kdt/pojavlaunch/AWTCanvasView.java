@@ -77,14 +77,14 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     private Surface mSurface;
     @Override
     public void run() {
-        try {
-            Canvas canvas;
-            mSurface = new Surface(getSurfaceTexture());
+        Canvas canvas;
+        mSurface = new Surface(getSurfaceTexture());
 
-            while (!mIsDestroyed) {
+        while (!mIsDestroyed && mSurface.isValid()) {
+            try {
                 canvas = mSurface.lockCanvas(null);
                 canvas.drawRGB(0, 0, 0);
-                
+
                 if (!attached) {
                     attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
                 }
@@ -92,11 +92,11 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                     drawing = JREUtils.renderAWTScreenFrame(canvas, mWidth, mHeight);
                 }
                 canvas.drawText("FPS: " + fps() + ", attached=" + attached + ", drawing=" + drawing, 50, 50, fpsPaint);
-                
+
                 mSurface.unlockCanvasAndPost(canvas);
+            } catch (Throwable th) {
+                th.printStackTrace();
             }
-        } catch (Throwable th) {
-            Tools.showError(getContext(), th, true);
         }
     }
 }
