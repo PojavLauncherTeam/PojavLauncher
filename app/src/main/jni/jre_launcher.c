@@ -37,8 +37,8 @@
 #include "utils.h"
 
 // PojavLancher: fixme: are these wrong?
-#define FULL_VERSION "1.9.0-internal"
-#define DOT_VERSION "1.9"
+#define FULL_VERSION "1.8.0-internal"
+#define DOT_VERSION "1.8"
 
 typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
 
