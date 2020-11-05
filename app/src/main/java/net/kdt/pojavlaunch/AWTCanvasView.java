@@ -38,7 +38,7 @@ public class AWTCanvasView extends View {
     
     public AWTCanvasView(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
-        setWillNotDraw(false);
+        // setWillNotDraw(false);
         
         fpsPaint = new TextPaint();
         fpsPaint.setColor(Color.WHITE);
