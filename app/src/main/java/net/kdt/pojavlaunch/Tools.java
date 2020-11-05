@@ -89,7 +89,7 @@ public final class Tools
         String launchClassPath = generateLaunchClassPath(profile.getVersion());
         System.out.println("Java Classpath: " + launchClassPath);
         if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
-            javaArgList.add("-Djava.library.path=" + launchClassPath);
+            javaArgList.add("-Djava.class.path=" + launchClassPath);
         } else {
             /*
              if (LAUNCH_TYPE == LTYPE_PROCESS) {
@@ -106,7 +106,7 @@ public final class Tools
              */
 
             getJavaArgs(ctx, javaArgList);
-
+            
             javaArgList.add("-cp");
             /*
              if (versionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
@@ -204,6 +204,7 @@ public final class Tools
 
         overrideableArgList.add("-Djava.home=" + Tools.homeJreDir);
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
+        overrideableArgList.add("-Djava.library.path=" + JREUtils.LD_LIBRARY_PATH);
 
         // Should be compatible?
         // overrideableArgList.add("-Dos.name=Android");

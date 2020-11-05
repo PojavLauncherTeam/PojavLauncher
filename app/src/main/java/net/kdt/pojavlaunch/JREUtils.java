@@ -16,6 +16,7 @@ public class JREUtils
 {
     private JREUtils() {}
     
+    public static String LD_LIBRARY_PATH;
     private static String nativeLibDir;
     
     public static String findInLdLibPath(String libName) {
@@ -127,31 +128,15 @@ public class JREUtils
                 break;
             }
         }
-    }
-    
-    public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
-        nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
-        String libName = Tools.currentArch.contains("64") ? "lib64" : "lib";
         
+        String libName = Tools.currentArch.contains("64") ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
-/*
-        for (String arch : Tools.currentArch.split("/")) {
-            File f = new File(Tools.homeJreDir + "/lib/" + arch);
-            if (f.exists() && f.isDirectory()) {
-                ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + "/server:");
-                ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + "/jli:");
-                ldLibraryPath.append(Tools.homeJreDir + "/lib/" + arch + ":");
-            }
-        }
-*/
-
         ldLibraryPath.append(
             // To make libjli.so ignore re-execute
             Tools.homeJreDir + "/" + Tools.homeJreLib + "/server:" +
             Tools.homeJreDir + "/" +  Tools.homeJreLib + "/jli:" +
             Tools.homeJreDir + "/" + Tools.homeJreLib + ":"
         );
-        
         ldLibraryPath.append(
             "/system/" + libName + ":" +
             "/vendor/" + libName + ":" +
@@ -160,12 +145,18 @@ public class JREUtils
             nativeLibDir
         );
         
+        LD_LIBRARY_PATH = ldLibraryPath.toString();
+    }
+    
+    public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
+        nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
+        
         setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
         setEnvironment(launchType, "HOME", Tools.MAIN_PATH);
         setEnvironment(launchType, "TMPDIR", ctx.getCacheDir().getAbsolutePath());
         setEnvironment(launchType, "LIBGL_MIPMAP", "3");
         setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-        setEnvironment(launchType, "LD_LIBRARY_PATH", ldLibraryPath.toString());
+        setEnvironment(launchType, "LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
         
         setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
@@ -189,7 +180,7 @@ public class JREUtils
         
         // REGAL_GL_EXTENSIONS
         
-        setLdLibraryPath(ldLibraryPath.toString());
+        setLdLibraryPath(LD_LIBRARY_PATH);
         
         // return ldLibraryPath;
     }
