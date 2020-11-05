@@ -67,12 +67,6 @@ public final class Tools
         "1.9"
     };
 
-
-    public static final int LTYPE_PROCESS = 0;
-    public static final int LTYPE_INVOCATION = 1;
-    public static final int LTYPE_CREATEJAVAVM = 2;
-    public static final int LAUNCH_TYPE = LTYPE_INVOCATION;
-
     public static ShellProcessOperation mLaunchShell;
     private static int exitCode = 0;
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
@@ -88,99 +82,39 @@ public final class Tools
 
         String launchClassPath = generateLaunchClassPath(profile.getVersion());
         System.out.println("Java Classpath: " + launchClassPath);
-        if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
-            javaArgList.add("-Djava.class.path=" + launchClassPath);
-        } else {
-            /*
-             if (LAUNCH_TYPE == LTYPE_PROCESS) {
-             javaArgList.add("-Dglfwstub.eglContext=" + Tools.getEGLAddress("Context", AndroidContextImplementation.context));
-             String eglDisplay = Tools.getEGLAddress("Display", AndroidContextImplementation.display);
-             if (eglDisplay.equals("1")) {
-             eglDisplay = Tools.getEGLAddress("Display", ((EGL10) EGLContext.getEGL()).eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY));
-             }
-             javaArgList.add("-Dglfwstub.eglDisplay=" + eglDisplay);
 
-             javaArgList.add("-Dglfwstub.eglSurfaceRead=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.read));
-             javaArgList.add("-Dglfwstub.eglSurfaceDraw=" + Tools.getEGLAddress("Surface", AndroidContextImplementation.draw));
-             }
-             */
+        getJavaArgs(ctx, javaArgList);
 
-            getJavaArgs(ctx, javaArgList);
-            
-            javaArgList.add("-cp");
-            /*
-             if (versionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
-             // Also preload LWJGL3 to fix crash on send input events
-             javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar:" + getLWJGL3ClassPath());
-             javaArgList.add("ClassWrapper");
-             javaArgList.add(launchClassPath);
-             } else { */
-            javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
-            // }
+        javaArgList.add("-cp");
+        /*
+         if (versionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
+         // Also preload LWJGL3 to fix crash on send input events
+         javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar:" + getLWJGL3ClassPath());
+         javaArgList.add("ClassWrapper");
+         javaArgList.add(launchClassPath);
+         } else { */
+        javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
+        // }
 
-            javaArgList.add(versionInfo.mainClass);
-            javaArgList.addAll(Arrays.asList(launchArgs));
-            /*
-             javaArgList.add("-cp");
-             javaArgList.add(launchClassPath);
-             javaArgList.add(versionInfo.mainClass);
-             javaArgList.addAll(Arrays.asList(launchArgs));
-             */
-        }
-
-        if (LAUNCH_TYPE == LTYPE_PROCESS) {
-            mLaunchShell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
-
-                    @Override
-                    public void onPrintLine(String text) {
-                        // ctx.appendToLog(text, false);
-                    }
-                });
-            mLaunchShell.initInputStream(ctx);
-        }
+        javaArgList.add(versionInfo.mainClass);
+        javaArgList.addAll(Arrays.asList(launchArgs));
 
         // can fix java?
         // setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
 
-        JREUtils.setJavaEnvironment(ctx, Tools.LAUNCH_TYPE);
+        JREUtils.setJavaEnvironment(ctx);
 
-        if (LAUNCH_TYPE == LTYPE_PROCESS) {
-            mLaunchShell.writeToProcess("cd $HOME");
+        JREUtils.initJavaRuntime();
+        JREUtils.chdir(Tools.MAIN_PATH);
 
-            mLaunchShell.writeToProcess(javaArgList.toArray(new String[0]));
-            int exitCode = mLaunchShell.waitFor();
-            if (exitCode != 0) {
-                Tools.showError(ctx, new ErrnoException("java", exitCode), false);
-            }
-        } else { // Type Invocation
-            // Is it need?
-            /*
-             Os.dup2(FileDescriptor.err, OsConstants.STDERR_FILENO);
-             Os.dup2(FileDescriptor.out, OsConstants.STDOUT_FILENO);
-             */
-
-            JREUtils.initJavaRuntime();
-            JREUtils.chdir(Tools.MAIN_PATH);
-
-            if (new File(Tools.MAIN_PATH, "strace.txt").exists()) {
-                startStrace(android.os.Process.myTid());
-            }
-
-            if (LAUNCH_TYPE == LTYPE_CREATEJAVAVM) {
-                VMLauncher.createLaunchMainJVM(javaArgList.toArray(new String[0]), versionInfo.mainClass, launchArgs);
-            } else {
-                // Test
-                /*
-                 VMLauncher.launchJVM(new String[]{
-                 Tools.homeJreDir + "/bin/java",
-                 "-invalidarg"
-                 });
-                 */
-
-                exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
-                ctx.appendlnToLog("Java Exit code: " + exitCode);
-            }
+        if (new File(Tools.MAIN_PATH, "strace.txt").exists()) {
+            startStrace(android.os.Process.myTid());
         }
+
+        exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+        ctx.appendlnToLog("Java Exit code: " + exitCode);
+
+
 
         ctx.runOnUiThread(new Runnable(){
                 @Override

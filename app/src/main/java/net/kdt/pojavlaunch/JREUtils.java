@@ -150,21 +150,21 @@ public class JREUtils
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
-    public static void setJavaEnvironment(Context ctx, int launchType) throws Throwable {
-        setEnvironment(launchType, "JAVA_HOME", Tools.homeJreDir);
-        setEnvironment(launchType, "HOME", Tools.MAIN_PATH);
-        setEnvironment(launchType, "TMPDIR", ctx.getCacheDir().getAbsolutePath());
-        setEnvironment(launchType, "LIBGL_MIPMAP", "3");
-        setEnvironment(launchType, "MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-        setEnvironment(launchType, "LD_LIBRARY_PATH", LD_LIBRARY_PATH);
-        setEnvironment(launchType, "PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+    public static void setJavaEnvironment(Context ctx) throws Throwable {
+        setEnvironment("JAVA_HOME", Tools.homeJreDir);
+        setEnvironment("HOME", Tools.MAIN_PATH);
+        setEnvironment("TMPDIR", ctx.getCacheDir().getAbsolutePath());
+        setEnvironment("LIBGL_MIPMAP", "3");
+        setEnvironment("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+        setEnvironment("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
+        setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
         
-        setEnvironment(launchType, "REGAL_GL_VENDOR", "Android");
-        setEnvironment(launchType, "REGAL_GL_RENDERER", "Regal");
-        setEnvironment(launchType, "REGAL_GL_VERSION", "4.5");
+        setEnvironment("REGAL_GL_VENDOR", "Android");
+        setEnvironment("REGAL_GL_RENDERER", "Regal");
+        setEnvironment("REGAL_GL_VERSION", "4.5");
 
-        setEnvironment(launchType, "AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
-        setEnvironment(launchType, "AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
+        setEnvironment("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
+        setEnvironment("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
         
         File customEnvFile = new File(Tools.MAIN_PATH, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
@@ -173,7 +173,7 @@ public class JREUtils
             while ((line = reader.readLine()) != null) {
                 // Not use split() as only split first one
                 int index = line.indexOf("=");
-                setEnvironment(launchType, line.substring(0, index), line.substring(index + 1));
+                setEnvironment(line.substring(0, index), line.substring(index + 1));
             }
             reader.close();
         }
@@ -185,10 +185,7 @@ public class JREUtils
         // return ldLibraryPath;
     }
     
-    private static void setEnvironment(int launchType, String name, String value) throws Throwable {
-        if (launchType == Tools.LTYPE_PROCESS) {
-            Tools.mLaunchShell.writeToProcess("export " + name + "=" + value);
-        }
+    private static void setEnvironment(String name, String value) throws Throwable {
         Os.setenv(name, value, true);
     }
 
