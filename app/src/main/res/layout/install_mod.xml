@@ -11,8 +11,7 @@
 		<net.kdt.pojavlaunch.AWTCanvasView
 			android:layout_height="match_parent"
 			android:layout_width="match_parent"
-			android:id="@+id/installmod_surfaceview"
-			android:background="#000000"/>
+			android:id="@+id/installmod_surfaceview"/>
 
 		<Button
 			android:layout_height="wrap_content"
