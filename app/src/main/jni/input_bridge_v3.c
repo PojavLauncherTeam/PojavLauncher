@@ -56,7 +56,7 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
     DetachCurrentThread(vm);
 */
 
-    androidJNIEnvPtr_JRE = NULL;
+    dalvikJNIEnvPtr_JRE = NULL;
     runtimeJNIEnvPtr_ANDROID = NULL;
 }
 
