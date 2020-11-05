@@ -5,8 +5,8 @@
 // jmethodID method_awt;
 
 // TODO: check for memory leaks
-JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz, jobject canvas, jint width, jint height) {
-    if (runtimeJNIEnvPtr_ANDROID == NULL) return;
+JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz, jobject canvas, jint width, jint height) {
+    if (runtimeJNIEnvPtr_ANDROID == NULL) return JNI_FALSE;
     
     int *rgbArray;
     jintArray jreRgbArray, androidRgbArray;
@@ -40,5 +40,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JN
     (*runtimeJNIEnvPtr_ANDROID)->ReleaseIntArrayElements(runtimeJNIEnvPtr_ANDROID, jreRgbArray, rgbArray, NULL);
     (*dalvikJNIEnvPtr_ANDROID)->DeleteLocalRef(dalvikJNIEnvPtr_ANDROID, androidRgbArray);
     // free(rgbArray);
+    
+    return JNI_TRUE;
 }
 

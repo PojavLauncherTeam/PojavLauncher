@@ -12,7 +12,7 @@ import org.lwjgl.glfw.*;
 public class AWTCanvasView extends View {
     private int mWidth, mHeight;
     
-    private TextPaint fpsPaint = new TextPaint(Color.WHITE);
+    private TextPaint fpsPaint;
     private boolean attached = false;
 
     // Temporary count fps https://stackoverflow.com/a/13729241
@@ -39,6 +39,10 @@ public class AWTCanvasView extends View {
     public AWTCanvasView(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
         setWillNotDraw(false);
+        
+        fpsPaint = new TextPaint();
+        fpsPaint.setColor(Color.WHITE);
+        fpsPaint.setTextSize(20);
     }
 
     @Override
@@ -48,6 +52,7 @@ public class AWTCanvasView extends View {
         // mRadius = (float) (Math.min(mWidth, mHeight) / 2 * 0.8);
     }
     
+    private boolean drawing = false;
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -56,8 +61,8 @@ public class AWTCanvasView extends View {
             attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
         }
         if (attached) {
-            JREUtils.renderAWTScreenFrame(canvas, mWidth, mHeight);
+            drawing = JREUtils.renderAWTScreenFrame(canvas, mWidth, mHeight);
         }
-        canvas.drawText("FPS: " + fps(), 100, 100, fpsPaint);
+        canvas.drawText("FPS: " + fps() + ", drawing=" + drawing, 100, 100, fpsPaint);
     }
 }
