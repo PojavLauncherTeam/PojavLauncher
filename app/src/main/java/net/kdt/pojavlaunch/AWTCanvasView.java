@@ -9,8 +9,9 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
-public class AWTCanvasView extends View {
+public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
     private int mWidth, mHeight;
+    private boolean mIsDestroyed = false;
     
     private TextPaint fpsPaint;
     private boolean attached = false;
@@ -43,26 +44,52 @@ public class AWTCanvasView extends View {
         fpsPaint = new TextPaint();
         fpsPaint.setColor(Color.WHITE);
         fpsPaint.setTextSize(20);
+        
+        setSurfaceTextureListener(this);
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    public void onSurfaceTextureAvailable(SurfaceTexture texture, int w, int h) {
         mWidth = w;
         mHeight = h;
-        // mRadius = (float) (Math.min(mWidth, mHeight) / 2 * 0.8);
+        
+        mIsDestroyed = false;
+        new Thread(this, "AndroidAWTRenderer").start();
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
+        mIsDestroyed = true;
+        return true;
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int w, int h) {
+        mWidth = w;
+        mHeight = h;
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture texture) {
     }
     
     private boolean drawing = false;
+    private Surface mSurface;
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    public void run() {
+        Canvas canvas;
+        mSurface = new Surface(getSurfaceTexture());
         
-        if (!attached) {
-            attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
+        while (!mIsDestroyed) {
+            canvas = mSurface.lockCanvas(null);
+            if (!attached) {
+                attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
+            }
+            if (attached) {
+                drawing = JREUtils.renderAWTScreenFrame(canvas, mWidth, mHeight);
+            }
+            canvas.drawText("FPS: " + fps() + ", drawing=" + drawing, 10, 10, fpsPaint);
+            mSurface.unlockCanvasAndPost(canvas);
         }
-        if (attached) {
-            drawing = JREUtils.renderAWTScreenFrame(canvas, mWidth, mHeight);
-        }
-        canvas.drawText("FPS: " + fps() + ", drawing=" + drawing, 100, 100, fpsPaint);
     }
 }
