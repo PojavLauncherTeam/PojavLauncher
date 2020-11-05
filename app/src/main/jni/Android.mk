@@ -6,7 +6,7 @@ include $(CLEAR_VARS)
 LOCAL_LDLIBS := -ldl -llog -landroid -lEGL
 # -lGLESv2
 LOCAL_MODULE := pojavexec
-LOCAL_CFLAGS += -DDEBUG
+# LOCAL_CFLAGS += -DDEBUG
 # -DGLES_TEST
 LOCAL_SRC_FILES := \
     awt_bridge.c \

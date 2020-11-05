@@ -12,15 +12,14 @@ import org.lwjgl.glfw.*;
 import android.support.v7.app.*;
 import android.content.*;
 
-public class InstallModActivity extends LoggableActivity
-{
+public class InstallModActivity extends LoggableActivity {
     public static volatile boolean IS_JRE_RUNNING;
     
 	private TextureView mTextureView;
     private LinearLayout contentLog;
     private TextView textLog;
     private ScrollView contentScroll;
-	private ToggleButton toggleLog; 
+    private ToggleButton toggleLog; 
     
     private File logFile;
     private PrintStream logStream;
@@ -33,6 +32,8 @@ public class InstallModActivity extends LoggableActivity
 		setContentView(R.layout.install_mod);
         
         try {
+		    Tools.setFullscreen(this);
+          
             logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
@@ -186,6 +187,14 @@ public class InstallModActivity extends LoggableActivity
             return -1;
 		}
 	}
+	
+    @Override
+    public void onResume() {
+        super.onResume();
+        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
+    }
     
     @Override
     public void appendToLog(final String text, boolean checkAllow) {
