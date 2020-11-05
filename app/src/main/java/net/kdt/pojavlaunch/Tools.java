@@ -70,40 +70,31 @@ public final class Tools
     public static ShellProcessOperation mLaunchShell;
     private static int exitCode = 0;
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
-        JREUtils.relocateLibPath(ctx);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo);
-
-        List<String> javaArgList = new ArrayList<String>();
-        /*
-         if (LAUNCH_TYPE == LTYPE_PROCESS || LAUNCH_TYPE == LTYPE_BINARYEXEC) javaArgList.add(Tools.homeJreDir + "/bin/java");
-         else javaArgList.add("java");
-         */
-        javaArgList.add(Tools.homeJreDir + "/bin/java");
 
         String launchClassPath = generateLaunchClassPath(profile.getVersion());
         System.out.println("Java Classpath: " + launchClassPath);
 
-        getJavaArgs(ctx, javaArgList);
-
+        List<String> javaArgList = new ArrayList<String>();
+        
         javaArgList.add("-cp");
-        /*
-         if (versionInfo.mainClass.equals("net.minecraft.launchwrapper.Launch")) {
-         // Also preload LWJGL3 to fix crash on send input events
-         javaArgList.add(Tools.MAIN_PATH + "/lwjgl3/ClassWrapper.jar:" + getLWJGL3ClassPath());
-         javaArgList.add("ClassWrapper");
-         javaArgList.add(launchClassPath);
-         } else { */
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
-        // }
 
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
 
-        // can fix java?
-        // setEnvironment("ORIGIN", Tools.homeJreDir + "/lib");
-
+        launchJavaVM(ctx, javaArgList);
+    }
+    
+    public static void launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
+        JREUtils.relocateLibPath(ctx);
+        
+        List<String> javaArgList = new ArrayList<String>();
+        javaArgList.add(Tools.homeJreDir + "/bin/java");
+        getJavaArgs(ctx, javaArgList);
+        javaArgList.addAll(args);
+        
         JREUtils.setJavaEnvironment(ctx);
-
         JREUtils.initJavaRuntime();
         JREUtils.chdir(Tools.MAIN_PATH);
 
@@ -113,9 +104,6 @@ public final class Tools
 
         exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);
-
-
-
         ctx.runOnUiThread(new Runnable(){
                 @Override
                 public void run() {

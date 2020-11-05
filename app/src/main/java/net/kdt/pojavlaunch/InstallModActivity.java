@@ -64,26 +64,8 @@ public class InstallModActivity extends LoggableActivity {
             new Thread(new Runnable(){
                     @Override
                     public void run() {
-                        final int exitCode = launchJavaRuntime(modFile, javaArgs);
+                        launchJavaRuntime(modFile, javaArgs);
                         IS_JRE_RUNNING = false;
-
-                        appendlnToLog("Java Exit code: " + exitCode);
-
-                        runOnUiThread(new Runnable(){
-                                @Override
-                                public void run() {
-                                    AlertDialog.Builder dialog = new AlertDialog.Builder(InstallModActivity.this);
-                                    dialog.setMessage(getString(R.string.mcn_exit_title, exitCode));
-                                    dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                                            @Override
-                                            public void onClick(DialogInterface p1, int p2){
-                                                MainActivity.fullyExit();
-                                            }
-                                        });
-                                    dialog.show();
-                                }
-                            });
                     }
                 }, "JREMainThread").start();
         } catch (Throwable th) {
@@ -104,15 +86,10 @@ public class InstallModActivity extends LoggableActivity {
         // mIsResuming = true;
 	}
     
-	private int launchJavaRuntime(File modFile, String javaArgs) {
+	private void launchJavaRuntime(File modFile, String javaArgs) {
 		try {
-            JREUtils.relocateLibPath(this);
-            
 			List<String> javaArgList = new ArrayList<String>();
-			javaArgList.add(Tools.homeJreDir + "/bin/java");
-
-			Tools.getJavaArgs(this, javaArgList);
-			
+            
 			File cacioAwtLibPath = new File(Tools.MAIN_PATH, "cacioawtlib");
 			if (cacioAwtLibPath.exists()) {
 				StringBuilder libStr = new StringBuilder();
@@ -138,17 +115,11 @@ public class InstallModActivity extends LoggableActivity {
                 javaArgList.add(modFile.getAbsolutePath());
             }
 
-			System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
+			// System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 			
-			//JREUtils.redirectStdio(false);
-			JREUtils.setJavaEnvironment(this);
-			JREUtils.initJavaRuntime();
-			JREUtils.chdir(Tools.MAIN_PATH);
-
-			return VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+			Tools.launchJavaVM(this, javaArgList);
 		} catch (Throwable th) {
 			Tools.showError(this, th, true);
-            return -1;
 		}
 	}
 	
