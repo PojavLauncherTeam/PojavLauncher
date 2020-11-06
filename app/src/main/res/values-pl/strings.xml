@@ -15,8 +15,8 @@
     <string name="login_online_password_question">Zapomniałeś hasła?</string>
     <string name="login_online_remember">Zapamiętaj mnie?</string>
     <string name="login_online_check_keeplogin">Pozostaw mnie zalogowanym</string>
-    <string name="login_online_login_label">Zaloguj sie</string>
-    <string name="login_online_create_account">(Stwórz nowe konto?)</string>
+    <string name="login_online_login_label">Zaloguj się</string>
+    <string name="login_online_create_account">(Stworzyć nowe konto?)</string>
     <string name="login_offline_switch">Konto offline?</string>
     <string name="login_offline_label">Zaloguj się jako konto offline</string>
     <string name="login_offline_alert_skip">Pomiń</string>
@@ -24,7 +24,7 @@
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_select_account">Wybierz konto</string>
     <!-- Hint -->
-    <string name="hint_select_account">Aby wybrać, kliknij go. Aby usunąć konto, przytrzymaj je.</string>
+    <string name="hint_select_account">Aby wybrać, kliknij. Aby usunąć konto, przytrzymaj.</string>
     <string name="hint_control_mapping">"„Ta funkcja nie została jeszcze ukończona, więc nie można w tej chwili zastosować niestandardowego sterowania! \ NPrzesuń palcem od prawej do lewej, aby otworzyć menu ◀ \ nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.”"</string>
     <!-- Warning -->
     <string name="warning_title">Ostrzeżenie</string>
@@ -37,7 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Zainstaluj Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Wybierz plik json mapy klawiszy</string>
-    <string name="alerttitle_installmod">Wybierz mod do dodania</string>
+    <string name="alerttitle_installmod">Wybierz modyfikację do dodania</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
     <string name="error_checklog">Błąd! Sprawdź dziennik poniżej: %s</string>
