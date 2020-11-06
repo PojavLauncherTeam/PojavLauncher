@@ -170,8 +170,14 @@ public final class Tools
 
     public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo)
     {
+        if(versionInfo.inheritsFrom != null) {
+            versionInfo.id = versioninfo.inheritsFrom;
+        }
         String username = profile.getUsername();
         String versionName = profile.getVersion();
+        if(versionInfo.inheritsFrom != null) {
+            versionName=versionInfo.inheritsFrom;
+        }
         String mcAssetsDir = Tools.ASSETS_PATH;
         String userType = "mojang";
 
