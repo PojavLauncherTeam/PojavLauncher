@@ -183,11 +183,11 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jint codepoint) {
     if (GLFW_invoke_Char && isInputReady) {
-        if (isUseStackQueueCall) {
+        // if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
-        } else {
+        /* } else {
             GLFW_invoke_Char(showingWindow, codepoint);
-        }
+        } */
         return JNI_TRUE;
     }
     return JNI_FALSE;
@@ -195,11 +195,11 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jint codepoint, jint mods) {
     if (GLFW_invoke_CharMods && isInputReady) {
-        if (isUseStackQueueCall) {
+        // if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR_MODS, codepoint, mods, 0, 0);
-        } else {
+        /* } else {
             GLFW_invoke_CharMods(showingWindow, codepoint, mods);
-        }
+        } */
         return JNI_TRUE;
     }
     return JNI_FALSE;
