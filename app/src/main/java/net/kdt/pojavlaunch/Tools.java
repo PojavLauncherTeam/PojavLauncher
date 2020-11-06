@@ -67,7 +67,6 @@ public final class Tools
         "1.9"
     };
 
-    public static ShellProcessOperation mLaunchShell;
     private static int exitCode = 0;
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
         String[] launchArgs = getMinecraftArgs(profile, versionInfo);
@@ -94,7 +93,7 @@ public final class Tools
         getJavaArgs(ctx, javaArgList);
         javaArgList.addAll(args);
         
-        JREUtils.setJavaEnvironment(ctx);
+        JREUtils.setJavaEnvironment(ctx, null);
         JREUtils.initJavaRuntime();
         JREUtils.chdir(Tools.MAIN_PATH);
 

@@ -956,28 +956,42 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
         
         appendlnToLog("--------- beggining with launcher debug");
         checkLWJGL3Installed();
-        checkJavaArchitecture();
-        // checkJavaArgsIsLaunchable();
-        appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
+        
+        Map<String, String> jreReleaseList = readJREReleaseProperties();
+        checkJavaArchitecture(jreReleaseList.get("OS_ARCH"));
+        checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
+        // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
 		JREUtils.redirectAndPrintJRELog(this, mProfile.getAccessToken());
 		Tools.launchMinecraft(this, mProfile, mVersionInfo);
 	}
     
-    private void checkJavaArchitecture() throws Exception {
+    private Map<String, String> readJREReleaseProperties() throws IOException {
+        Map<String, String> jreReleaseMap = new ArrayMap<>();
+        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.homeJreDir + "/release"));
+        String currLine;
+        while ((currLine = jreReleaseReader.readLine()) != null) {
+            if (!currLine.isEmpty() || currLine.contains("=")) {
+                String[] keyValue = currLine.split("=");
+                jreReleaseMap.put(keyValue[0], keyValue[1].replace("\"", ""));
+            }
+        }
+        jreReleaseReader.close();
+        return jreReleaseMap;
+    }
+    
+    private void checkJavaArchitecture(String jreArch) throws Exception {
         String[] argName = Tools.currentArch.split("/");
-        String releaseContent = Tools.read(Tools.homeJreDir + "/release");
-        int osArchIndex = releaseContent.indexOf("OS_ARCH=\"") + 9;
-        releaseContent = releaseContent.substring(osArchIndex);
-        releaseContent = releaseContent.substring(0, releaseContent.indexOf("\""));
         appendlnToLog("Architecture: " + Tools.currentArch);
-        if (!(releaseContent.contains(argName[0]) || releaseContent.contains(argName[1]))) {
-            appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + releaseContent);
-            throw new RuntimeException(getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, releaseContent));
+        if (!(jreArch.contains(argName[0]) || jreArch.contains(argName[1]))) {
+            appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + jreArch);
+            throw new RuntimeException(getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, jreArch));
         }
     }
-/*
-    private void checkJavaArgsIsLaunchable() throws Throwable {
+
+    private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
+        if (jreVersion.equals("1.9.0")) return;
+        
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
         // Test java
@@ -987,9 +1001,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                 appendlnToLog("[JRETest] " + text);
             }
         });
-        Tools.mLaunchShell = shell;
-        JREUtils.setJavaEnvironment(this, Tools.LTYPE_PROCESS);
-        Tools.mLaunchShell = null;
+        JREUtils.setJavaEnvironment(this, shell);
         
         List<String> testArgs = new ArrayList<String>();
         testArgs.add(Tools.homeJreDir + "/bin/java");
@@ -1010,7 +1022,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             // throw new RuntimeException(getString(R.string.mcn_check_fail_java));
         }
     }
-*/
+
     private void checkLWJGL3Installed() {
         File lwjgl3dir = new File(Tools.MAIN_PATH, "lwjgl3");
         if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {

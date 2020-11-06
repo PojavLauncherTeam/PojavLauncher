@@ -1,16 +1,13 @@
 package net.kdt.pojavlaunch;
 
 import android.content.*;
-import android.os.*;
 import android.system.*;
 import android.util.*;
-
 import java.io.*;
-import java.lang.reflect.*;
-
+import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
-
 import org.lwjgl.glfw.*;
+import android.support.annotation.*;
 
 public class JREUtils
 {
@@ -150,21 +147,22 @@ public class JREUtils
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
-    public static void setJavaEnvironment(Context ctx) throws Throwable {
-        setEnvironment("JAVA_HOME", Tools.homeJreDir);
-        setEnvironment("HOME", Tools.MAIN_PATH);
-        setEnvironment("TMPDIR", ctx.getCacheDir().getAbsolutePath());
-        setEnvironment("LIBGL_MIPMAP", "3");
-        setEnvironment("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-        setEnvironment("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
-        setEnvironment("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+    public static void setJavaEnvironment(Context ctx, @Nullable ShellProcessOperation shell) throws Throwable {
+        Map<String, String> envMap = new ArrayMap<>();
+        envMap.put("JAVA_HOME", Tools.homeJreDir);
+        envMap.put("HOME", Tools.MAIN_PATH);
+        envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("LIBGL_MIPMAP", "3");
+        envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
+        envMap.put("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
         
-        setEnvironment("REGAL_GL_VENDOR", "Android");
-        setEnvironment("REGAL_GL_RENDERER", "Regal");
-        setEnvironment("REGAL_GL_VERSION", "4.5");
+        envMap.put("REGAL_GL_VENDOR", "Android");
+        envMap.put("REGAL_GL_RENDERER", "Regal");
+        envMap.put("REGAL_GL_VERSION", "4.5");
 
-        setEnvironment("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
-        setEnvironment("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
+        envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
+        envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
         
         File customEnvFile = new File(Tools.MAIN_PATH, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
@@ -173,20 +171,24 @@ public class JREUtils
             while ((line = reader.readLine()) != null) {
                 // Not use split() as only split first one
                 int index = line.indexOf("=");
-                setEnvironment(line.substring(0, index), line.substring(index + 1));
+                envMap.put(line.substring(0, index), line.substring(index + 1));
             }
             reader.close();
         }
         
-        // REGAL_GL_EXTENSIONS
+        for (Map.Entry<String, String> env : envMap.entrySet()) {
+            if (shell == null) {
+                Os.setenv(env.getKey(), env.getValue(), true);
+            } else {
+                shell.writeToProcess("export " + env.getKey() + "=" + env.getValue());
+            }
+        }
         
-        setLdLibraryPath(LD_LIBRARY_PATH);
+        if (shell == null) {
+            setLdLibraryPath(LD_LIBRARY_PATH);
+        }
         
         // return ldLibraryPath;
-    }
-    
-    private static void setEnvironment(String name, String value) throws Throwable {
-        Os.setenv(name, value, true);
     }
 
     public static native int chdir(String path);
