@@ -24,7 +24,7 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
     LOGD("step1");
     jclass class_awt = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "net/java/openjdk/cacio/ctc/CTCScreen");
     assert(class_awt != NULL);
-    jmethodID method_awt = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, class_awt, "getCurrentScreenRGB", "()V");
+    jmethodID method_awt = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, class_awt, "getCurrentScreenRGB", "()[I");
     assert(class_awt != NULL);
     jreRgbArray = (jintArray) (*runtimeJNIEnvPtr_ANDROID)->CallStaticObjectMethod(
         runtimeJNIEnvPtr_ANDROID,
