@@ -21,7 +21,7 @@
     <string name="login_online_create_account">(Stwórz nowe konto?)</string>
     <string name="login_offline_switch">Konto offline?</string>
     <string name="login_offline_label">Zaloguj się jako konto offline</string>
-    <string name="login_offline_alert_skip">Pominąć</string>
+    <string name="login_offline_alert_skip">Pomiń</string>
     <string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_select_account">Wybierz konto</string>
@@ -60,11 +60,11 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Wiadomości dotyczące programu uruchamiającego</string>
+    <string name="mcl_tab_news">Aktualności na temat Launchera</string>
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Gotowy do gry w Minecrafta %s</string>
+    <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
     <string name="mcl_launch_downloading">Pobieranie %s</string>
     <string name="mcl_launch_download_lib">Pobieranie biblioteki %s</string>
