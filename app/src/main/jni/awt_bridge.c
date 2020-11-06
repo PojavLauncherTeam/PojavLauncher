@@ -31,7 +31,7 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
         method_awt
     );
     if (jreRgbArray  == NULL) {
-        return;
+        return JNI_FALSE;
     }
     
     // Copy JRE RGB array memory to Android.
