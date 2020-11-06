@@ -138,9 +138,9 @@ public final class Tools
         // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
 
         // Enable LWJGL3 debug
-        overrideableArgList.add("-Dorg.lwjgl.util.Debug=true");
+        // overrideableArgList.add("-Dorg.lwjgl.util.Debug=true");
         // overrideableArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
-        overrideableArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
+        // overrideableArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
 
         // GLFW Stub width height
         overrideableArgList.add("-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth);
@@ -599,8 +599,8 @@ public final class Tools
                 // Inheriting Minecraft 1.13+ with append custom args
                 if (inheritsVer.arguments != null && customVer.arguments != null) {
                     List totalArgList = new ArrayList();
-                    totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
                     totalArgList.addAll(Arrays.asList(customVer.arguments.game));
+                    totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
 
                     inheritsVer.arguments.game = totalArgList.toArray(new Object[0]);
                 }
