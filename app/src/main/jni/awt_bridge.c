@@ -11,7 +11,8 @@
 // int printed = 0;
 JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz, jobject canvas, jint width, jint height) {
     if (runtimeJNIEnvPtr_ANDROID == NULL) {
-        return JNI_FALSE;
+        attachThread(true, &runtimeJNIEnvPtr_ANDROID);
+        // return JNI_FALSE;
     }
     
     int *rgbArray;
