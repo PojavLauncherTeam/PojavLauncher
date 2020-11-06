@@ -71,6 +71,8 @@ public final class Tools
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
         String[] launchArgs = getMinecraftArgs(profile, versionInfo);
 
+        ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
+
         String launchClassPath = generateLaunchClassPath(profile.getVersion());
         System.out.println("Java Classpath: " + launchClassPath);
 
