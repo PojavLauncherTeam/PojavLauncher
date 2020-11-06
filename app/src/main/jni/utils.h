@@ -13,7 +13,7 @@ JNIEnv* dalvikJNIEnvPtr_JRE;
 
 long showingWindow;
 
-bool isInputReady, isCursorEntered, isPrepareGrabPos;
+bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
 
 jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr);
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);

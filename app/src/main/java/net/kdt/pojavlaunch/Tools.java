@@ -168,11 +168,7 @@ public final class Tools
         javaArgList.addAll(overrideableArgList);
     }
 
-    public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo)
-    {
-        if(versionInfo.inheritsFrom != null) {
-            versionInfo.id = versionInfo.inheritsFrom;
-        }
+    public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) {
         String username = profile.getUsername();
         String versionName = profile.getVersion();
         if(versionInfo.inheritsFrom != null) {
@@ -244,12 +240,12 @@ public final class Tools
 
     private static String[] splitAndFilterEmpty(String argStr) {
         List<String> strList = new ArrayList<String>();
-        strList.add("--fullscreen");
         for (String arg : argStr.split(" ")) {
             if (!arg.isEmpty()) {
                 strList.add(arg);
             }
         }
+        strList.add("--fullscreen");
         return strList.toArray(new String[0]);
     }
 

@@ -29,7 +29,7 @@ int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
 
-jboolean isGrabbing, isUseStackQueueCall;
+jboolean isGrabbing;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     if (dalvikJavaVMPtr == NULL) {
