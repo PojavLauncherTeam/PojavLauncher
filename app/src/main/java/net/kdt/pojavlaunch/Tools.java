@@ -171,7 +171,7 @@ public final class Tools
     public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo)
     {
         if(versionInfo.inheritsFrom != null) {
-            versionInfo.id = versioninfo.inheritsFrom;
+            versionInfo.id = versionInfo.inheritsFrom;
         }
         String username = profile.getUsername();
         String versionName = profile.getVersion();
