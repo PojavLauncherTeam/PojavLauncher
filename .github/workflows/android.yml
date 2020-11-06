@@ -18,7 +18,7 @@ jobs:
         chmod +x gradlew 
         ./gradlew clean assembleDebug
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug.apk
-        mv app/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
+        # mv app/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
 
 #    - name: Build 32-bit APK with Gradle
 #      run: | 
