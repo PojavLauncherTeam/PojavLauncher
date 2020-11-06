@@ -20,7 +20,8 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
     
     int *rgbArray;
     jintArray jreRgbArray, androidRgbArray;
-    
+   
+    LOGD("step1");
     jclass class_awt = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "net/java/openjdk/cacio/ctc/CTCScreen");
     assert(class_awt != NULL);
     jmethodID method_awt = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, class_awt, "getCurrentScreenRGB", "()V");
@@ -32,6 +33,7 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
     );
     assert(jreRgbArray != NULL);
     
+    LOGD("step2");
     // Copy JRE RGB array memory to Android.
     int arrayLength = (*runtimeJNIEnvPtr_ANDROID)->GetArrayLength(runtimeJNIEnvPtr_ANDROID, jreRgbArray);
     rgbArray = (*runtimeJNIEnvPtr_ANDROID)->GetIntArrayElements(runtimeJNIEnvPtr_ANDROID, jreRgbArray, 0);
@@ -43,6 +45,7 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
     }
 */
     // Maybe use Skia lib instead?
+    LOGD("step3");
     jclass class_canvas = (*dalvikJNIEnvPtr_ANDROID)->GetObjectClass(dalvikJNIEnvPtr_ANDROID, canvas);
     assert(class_canvas != NULL);
     jmethodID method_canvas = (*dalvikJNIEnvPtr_ANDROID)->GetMethodID(dalvikJNIEnvPtr_ANDROID, class_canvas, "drawBitmap", "([IIIFFIIZLandroid/graphics/Paint;)V");
@@ -55,7 +58,7 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
     );
 
     // android_graphics_Canvas_native_drawBitmap
-    
+    LOGD("step4");
     (*runtimeJNIEnvPtr_ANDROID)->ReleaseIntArrayElements(runtimeJNIEnvPtr_ANDROID, jreRgbArray, rgbArray, NULL);
     (*dalvikJNIEnvPtr_ANDROID)->DeleteLocalRef(dalvikJNIEnvPtr_ANDROID, androidRgbArray);
     // free(rgbArray);
