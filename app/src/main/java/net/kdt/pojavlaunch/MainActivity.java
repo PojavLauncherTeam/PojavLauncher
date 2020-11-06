@@ -990,10 +990,11 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
     }
 
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
-        if (jreVersion.equals("1.9.0")) return;
-        
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
+        if (jreVersion.equals("1.9.0")) return;
+        
+    /*
         // Test java
         ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
             @Override
@@ -1021,6 +1022,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             appendlnToLog("Error: the test returned non-zero exit code.");
             // throw new RuntimeException(getString(R.string.mcn_check_fail_java));
         }
+    */
     }
 
     private void checkLWJGL3Installed() {
