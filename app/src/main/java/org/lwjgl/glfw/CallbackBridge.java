@@ -11,6 +11,7 @@ public class CallbackBridge {
     public static final int CLIPBOARD_COPY = 2000;
     public static final int CLIPBOARD_PASTE = 2001;
     
+    public static boolean isMinecraft1p12;
     public static volatile int windowWidth, windowHeight;
     public static int mouseX, mouseY;
     public static boolean mouseLeft;
@@ -31,7 +32,7 @@ public class CallbackBridge {
     private static boolean threadAttached;
     public static void sendCursorPos(int x, int y) {
         if (!threadAttached) {
-            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
+            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, isMinecraft1p12, MainActivity.isInputStackCall);
         }
         
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
@@ -124,7 +125,7 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
+    public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isMinecraft1p12, boolean isUsePushPoll);
     private static native boolean nativeSendChar(int codepoint);
     // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
     private static native boolean nativeSendCharMods(int codepoint, int mods);

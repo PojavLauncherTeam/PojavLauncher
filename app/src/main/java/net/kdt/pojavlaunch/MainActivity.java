@@ -145,7 +145,9 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 			
 			mProfile = PojavProfile.getCurrentProfileContent(this);
 			mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
-
+            // Minecraft 1.12.x special case: use indirect char pipe
+            CallbackBridge.isMinecraft1p12 = mVersionInfo.assets.startsWith("1.12");
+            
 			setTitle("Minecraft " + mProfile.getVersion());
             
             // Minecraft 1.13+

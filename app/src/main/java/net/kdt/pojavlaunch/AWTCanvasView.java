@@ -86,7 +86,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                 canvas.drawRGB(0, 0, 0);
 
                 if (!attached) {
-                    attached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
+                    attached = CallbackBridge.nativeAttachThreadToOther(true, false, MainActivity.isInputStackCall);
                 } else {
                     int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
                         if (rgbArray == null) {
