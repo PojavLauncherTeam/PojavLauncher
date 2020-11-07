@@ -88,7 +88,7 @@ jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
     LOGD("Debug: Attaching %s thread to %s, javavm.isNull=%d\n", isAndroid ? "Android" : "JRE", isAndroid ? "JRE" : "Android", (isAndroid ? runtimeJavaVMPtr : dalvikJavaVMPtr) == NULL);
 #endif
 
-    if (*secondJNIEnvPtr != NULL || (!isMinecraft1p12 && !isUseStackQueueCall) return JNI_TRUE;
+    if (*secondJNIEnvPtr != NULL || (!isMinecraft1p12 && !isUseStackQueueCall)) return JNI_TRUE;
 
     if (isAndroid && runtimeJavaVMPtr) {
         (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
