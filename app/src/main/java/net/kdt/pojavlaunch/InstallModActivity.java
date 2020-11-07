@@ -15,26 +15,26 @@ import android.text.*;
 
 public class InstallModActivity extends LoggableActivity {
     public static volatile boolean IS_JRE_RUNNING;
-    
-	private AWTCanvasView mTextureView;
+
+    private AWTCanvasView mTextureView;
     private LinearLayout contentLog;
     private TextView textLog;
     private ScrollView contentScroll;
     private ToggleButton toggleLog; 
-    
+
     private File logFile;
     private PrintStream logStream;
-    
+
     private boolean isLogAllow;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.install_mod);
-        
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.install_mod);
+
         try {
-		    Tools.setFullscreen(this);
-          
+            Tools.setFullscreen(this);
+
             logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
@@ -53,14 +53,14 @@ public class InstallModActivity extends LoggableActivity {
                         isLogAllow = isChecked;
                         appendToLog("");
                     }
-				});
+                });
             JREUtils.redirectAndPrintJRELog(this, null);
-                
+
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
-            
+
             mTextureView = findViewById(R.id.installmod_surfaceview);
-            
+
             new Thread(new Runnable(){
                     @Override
                     public void run() {
@@ -71,58 +71,58 @@ public class InstallModActivity extends LoggableActivity {
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
-	}
-	
-	public void forceClose(View v) {
-		MainActivity.dialogForceClose(this);
-	}
-    
+    }
+
+    public void forceClose(View v) {
+        MainActivity.dialogForceClose(this);
+    }
+
     public void openLogOutput(View v) {
         contentLog.setVisibility(View.VISIBLE);
     }
-    
+
     public void closeLogOutput(View view) {
         contentLog.setVisibility(View.GONE);
         // mIsResuming = true;
-	}
-    
-	private void launchJavaRuntime(File modFile, String javaArgs) {
-		try {
-			List<String> javaArgList = new ArrayList<String>();
-            
-			File cacioAwtLibPath = new File(Tools.MAIN_PATH, "cacioawtlib");
-			if (cacioAwtLibPath.exists()) {
-				StringBuilder libStr = new StringBuilder();
-				for (File file: cacioAwtLibPath.listFiles()) {
-					if (file.getName().endsWith(".jar")) {
-						libStr.append(":" + file.getAbsolutePath());
-					}
-				}
-				javaArgList.add("-Xbootclasspath/a" + libStr.toString());
-			}
-			
+    }
+
+    private void launchJavaRuntime(File modFile, String javaArgs) {
+        try {
+            List<String> javaArgList = new ArrayList<String>();
+
+            File cacioAwtLibPath = new File(Tools.MAIN_PATH, "cacioawtlib");
+            if (cacioAwtLibPath.exists()) {
+                StringBuilder libStr = new StringBuilder();
+                for (File file: cacioAwtLibPath.listFiles()) {
+                    if (file.getName().endsWith(".jar")) {
+                        libStr.append(":" + file.getAbsolutePath());
+                    }
+                }
+                javaArgList.add("-Xbootclasspath/a" + libStr.toString());
+            }
+
             javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
-            
-			File cacioArgOverrideFile = new File(cacioAwtLibPath, "overrideargs.txt");
-			if (cacioArgOverrideFile.exists()) {
-				javaArgList.addAll(Arrays.asList(Tools.read(cacioArgOverrideFile.getAbsolutePath()).split(" ")));
-			}
-			
-			if (javaArgs != null) {
+
+            File cacioArgOverrideFile = new File(cacioAwtLibPath, "overrideargs.txt");
+            if (cacioArgOverrideFile.exists()) {
+                javaArgList.addAll(Arrays.asList(Tools.read(cacioArgOverrideFile.getAbsolutePath()).split(" ")));
+            }
+
+            if (javaArgs != null) {
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
             } else {
                 javaArgList.add("-jar");
                 javaArgList.add(modFile.getAbsolutePath());
             }
 
-			// System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
-			
-			Tools.launchJavaVM(this, javaArgList);
-		} catch (Throwable th) {
-			Tools.showError(this, th, true);
-		}
-	}
-	
+            // System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
+
+            Tools.launchJavaVM(this, javaArgList);
+        } catch (Throwable th) {
+            Tools.showError(this, th, true);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -130,7 +130,7 @@ public class InstallModActivity extends LoggableActivity {
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
     }
-    
+
     @Override
     public void appendToLog(final String text, boolean checkAllow) {
         logStream.print(text);
