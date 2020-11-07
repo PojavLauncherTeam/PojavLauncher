@@ -80,7 +80,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         Canvas canvas;
         mSurface = new Surface(getSurfaceTexture());
 
-        while (!mIsDestroyed && mSurface.isValid()) {
+        while (!mIsDestroyed) {
             try {
                 canvas = mSurface.lockCanvas(null);
                 canvas.drawRGB(0, 0, 0);
@@ -92,8 +92,8 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                         if (rgbArray == null) {
                             drawing = false;
                         } else {
-                            canvas.drawText("FPS", 50, 50, fpsPaint);
-                            canvas.drawBitmap(rgbArray, 0, mWidth, 0, 0, mWidth, mHeight, false, null);
+                            // canvas.drawText("FPS", 50, 50, fpsPaint);
+                            canvas.drawBitmap(rgbArray, 0, mWidth, 0, 0, mWidth, mHeight, true, null);
                         }
                 }
                 canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", attached=" + attached + ", drawing=" + drawing, 50, 50, fpsPaint);
