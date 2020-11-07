@@ -9,10 +9,10 @@
 
 // TODO: check for memory leaks
 // int printed = 0;
-JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz, jobject canvas, jint width, jint height) {
+JNIEXPORT jintArray JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz /*, jobject canvas, jint width, jint height */) {
     if (runtimeJNIEnvPtr_ANDROID == NULL) {
         if (runtimeJavaVMPtr == NULL) {
-            return JNI_FALSE;
+            return NULL;
         } else {
             (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr_ANDROID, NULL);
         }
@@ -31,7 +31,7 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
         method_awt
     );
     if (jreRgbArray == NULL) {
-        return JNI_FALSE;
+        return NULL;
     }
     
     // Copy JRE RGB array memory to Android.
@@ -39,29 +39,11 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFram
     rgbArray = (*runtimeJNIEnvPtr_ANDROID)->GetIntArrayElements(runtimeJNIEnvPtr_ANDROID, jreRgbArray, 0);
     androidRgbArray = (*env)->NewIntArray(env, arrayLength);
     (*env)->SetIntArrayRegion(env, androidRgbArray, 0, arrayLength, rgbArray);
-/*
-    if (printed++ < 200) {
-        LOGD("[AWT] First 3 pixels: | %i | %i | %i |", rgbArray[0], rgbArray[1], rgbArray[2]);
-    }
-*/
-    // Maybe use Skia lib instead?
-    jclass class_canvas = (*env)->GetObjectClass(env, canvas);
-    assert(class_canvas != NULL);
-    jmethodID method_canvas = (*env)->GetMethodID(env, class_canvas, "drawBitmap", "([IIIFFIIZLandroid/graphics/Paint;)V");
-    assert(method_canvas != NULL);
-    (*env)->CallVoidMethod(
-        env,
-        canvas,
-        method_canvas,
-        rgbArray, 0, width, 0, 0, width, height, JNI_TRUE, NULL
-    );
 
-    // android_graphics_Canvas_native_drawBitmap
-    LOGD("step4");
     (*runtimeJNIEnvPtr_ANDROID)->ReleaseIntArrayElements(runtimeJNIEnvPtr_ANDROID, jreRgbArray, rgbArray, NULL);
-    (*env)->DeleteLocalRef(env, androidRgbArray);
+    // (*env)->DeleteLocalRef(env, androidRgbArray);
     // free(rgbArray);
     
-    return JNI_TRUE;
+    return androidRgbArray;
 }
 

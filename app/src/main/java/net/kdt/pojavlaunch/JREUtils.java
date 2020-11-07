@@ -198,7 +198,7 @@ public class JREUtils
     public static native void setupBridgeWindow(Object surface);
     
     // TODO AWT Android port
-    public static native boolean renderAWTScreenFrame(Object canvas, int width, int height);
+    public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
     
     // BEFORE Load and execute PIE binary using dlopen and dlsym("main")
     // AFTER: [Deprecated]
