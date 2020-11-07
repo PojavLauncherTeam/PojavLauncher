@@ -73,7 +73,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     public void onSurfaceTextureUpdated(SurfaceTexture texture) {
     }
     
-    private boolean drawing = false;
+    private boolean mDrawing;
     private Surface mSurface;
     @Override
     public void run() {
@@ -89,13 +89,14 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                     attached = CallbackBridge.nativeAttachThreadToOther(true, false, MainActivity.isInputStackCall);
                 } else {
                     int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
-                        if (rgbArray == null) {
-                            drawing = false;
-                        } else {
-                            canvas.drawBitmap(rgbArray, 0, CallbackBridge.windowWidth, 0, 0, CallbackBridge.windowWidth, CallbackBridge.windowHeight, true, null);
-                        }
+                    mDrawing = rgbArray != null;
+                    if (rgbArray != null) {
+                        canvas.drawBitmap(rgbArray, 0, CallbackBridge.windowWidth, 0, 0, CallbackBridge.windowWidth, CallbackBridge.windowHeight, true, null);
+                    }
+                    rgbArray = null;
+                    // System.gc();
                 }
-                canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", attached=" + attached + ", drawing=" + drawing, 50, 50, fpsPaint);
+                canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", attached=" + attached + ", drawing=" + mDrawing, 50, 50, fpsPaint);
 
                 mSurface.unlockCanvasAndPost(canvas);
             }
