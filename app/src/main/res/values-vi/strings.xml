@@ -49,8 +49,8 @@ Danh sách ngôn ngữ</string>
     <string name="error_show_more">Hiển thị thêm</string>
     <string name="error_show_less">Hiển thị ít hơn</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Quyền đọc / ghi vào bộ nhớ là bắt buộc!</string>
-    <string name="toast_login_error">Một thứ nào đó đã bị nhầm sau khi đăng nhập. Làm ơn phản hồi với nhà phát triển.\nLỗi: %s</string>
+    <string name="toast_permission_denied">Quyền đọc/ghi vào bộ nhớ là cần thiết!</string>
+    <string name="toast_login_error">Có gì đó sai sau khi đăng nhập. Vui lòng phản hồi với nhà phát triển.\nLỗi: %s</string>
     <string name="toast_optifine_success">Cài đặt thành công</string>
     <string name="toast_uninstalljre_done">Đã gỡ Java Runtime</string>
     <!--
@@ -80,19 +80,19 @@ Danh sách ngôn ngữ</string>
     <string name="mcl_option_about">Giới thiệu</string>
     <string name="mcl_setting_title_uninstalljre">Gỡ Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Đề nghị khởi động lại trình khởi chạy] Điều này cho phép bạn cài đặt lại Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ tự do</string>
-    <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa cửa sổ nổi. Đề nghị Android 7.0+</string>
+    <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa cửa sổ nổi. Cần Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn dài</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong phá hủy khối và thả vật phẩm.</string>
     <string name="mcl_setting_title_controlsize">Đặt kích thước nút điều khiển</string>
     <string name="mcl_setting_title_javaargs">JRE Khởi chạy đối số</string>
-    <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không cần biết.</string>
+    <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
     <string name="mcl_setting_category_general">Thiết lập chung</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được ở trong danh sách phiên bản</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">apha-cũ</string>
-    <string name="mcl_setting_veroption_oldbeta">Beta-cũ</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha cũ</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta cũ</string>
     <string name="mcl_version_clone">Nhân bản</string>
     <!-- Global strings -->
     <string name="global_add">Thêm</string>
@@ -166,7 +166,7 @@ Danh sách ngôn ngữ</string>
     <string name="customctrl_specialkey">Phím đặc biệt</string>
     <string name="customctrl_hidden">Ẩn</string>
     <string name="customctrl_addbutton">Thêm nút</string>
-    <string name="customctrl_title_selectctrl">Chọn bộ điều khiển json thông thường</string>
+    <string name="customctrl_title_selectctrl">Chọn bộ điều khiển json mặc định</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json thông thường</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Cập nhập bàn điều khiển</string>
