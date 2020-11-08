@@ -20,17 +20,17 @@
     <string name="login_online_login_label">Вхід</string>
     <string name="login_online_create_account">(Створити новий обліковий запис?)</string>
     <string name="login_offline_switch">Офлайн обліковий запис?</string>
-    <string name="login_offline_label">Увійти як офлайн акаунт</string>
+    <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
     <string name="login_offline_alert_skip">Пропустити</string>
     <string name="login_error_short_username">Ім\'я користувача повинно мати хоча б 3 символи</string>
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
     <string name="login_select_account">Виберіть обліковий запис</string>
     <!-- Hint -->
     <string name="hint_select_account">Щоб вибрати обліковий запис, натисніть на нього. Щоб видалити, натисніть і утримуйте його.</string>
-    <string name="hint_control_mapping">"Ця функція ще не завершена, тому в даний момент ви не можете застосувати користувацьке управління!\nПроведіть пальцем справа наліво, щоб відкрити меню◀\nУтримуйтейте кнопку для настройки: редагування, зміни розміру або видалення."</string>
+    <string name="hint_control_mapping">"Ця функція ще не завершена, тому в даний момент ви не можете застосувати користувацьке управління!\nПроведіть пальцем справа наліво, щоб відкрити меню◀\nУтримуйте кнопку для настройки: редагування, зміни розміру або видалення."</string>
     <!-- Warning -->
     <string name="warning_title">Застереження</string>
-    <string name="warning_msg">Ця програма може бути несумісний з вашою версією Android (Android 7.0 і вище). Замість цього ви можете використовувати VMOS і встановити цю програму на VMOS. Але VMOS видалити з Play Маркета, ви повинні встановити його вручну.</string>
+    <string name="warning_msg">Ця програма може бути несумісний з вашою версією Android (Android 7.0 і вище). Замість цього ви можете використовувати VMOS і встановити цю програму на VMOS. Але VMOS видалили з Play Маркета, ви повинні встановити його вручну.</string>
     <string name="warning_noshowagain">Не показувати знову</string>
     <string name="warning_action_install">Встановити VMOS</string>
     <string name="warning_action_tryanyway">Все одно попробувати</string>
@@ -53,9 +53,9 @@
     <string name="toast_permission_denied">Потрібен дозвіл на читання/запис в сховище!</string>
     <string name="toast_login_error">Після входу щось пішло не так. Будь ласка, повідомте про це розробнику.\nПомилка: %s</string>
     <string name="toast_optifine_success">Установка пройшла успішно</string>
-    <string name="toast_shiftmode">Режим кнопки Shift (крастися) замінений на %s</string>
-    <string name="toast_shiftmode_hold">режим утримання</string>
-    <string name="toast_shiftmode_toggle">режим переключено</string>
+    <string name="toast_shiftmode" comment="toast_shiftmode&#10;&#10;%s will be replaced with one of the following strings: toast_shiftmode_hold, toast_shiftmode_toggle">Режим кнопки Shift (крастися) замінений на %s</string>
+    <string name="toast_shiftmode_hold" comment="toast_shiftmode_hold&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">Режим утримання</string>
+    <string name="toast_shiftmode_toggle" comment="toast_shiftmode_toggle&#10;&#10;Continuation of the toast_shiftmode string. If your language doesn't use Capitalization, you can translate this string starting with a small letter.">режим переключено</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -65,7 +65,7 @@
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готовий до запуску</string>
-    <string name="mcl_launch_cleancache">Очищення кеша файлів</string>
+    <string name="mcl_launch_cleancache">Очищення файлів кешу</string>
     <string name="mcl_launch_downloading">Завантаження %s</string>
     <string name="mcl_launch_download_lib">Завантаження бібліотеки %s</string>
     <string name="mcl_launch_download_client">Завантаження Minecraft %s</string>
@@ -129,7 +129,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Гра закрилася</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Гра закрилася</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_crash">Виявлено збій гри! Натисніть кнопку ОК, щоб вийти.</string>
     <string name="mcn_exit_errcrash">Не вдалося знайти збій! Можете не звертати на це уваги.</string>
