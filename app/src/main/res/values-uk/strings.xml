@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрої!</string>
+    <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрою!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">Допомога</string>
     <!-- Languages list part -->
@@ -74,18 +74,18 @@
     <string name="mcl_launch_patch_client">Збірка Minecraft %s</string>
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
     <string name="mcl_options">Опції</string>
-    <string name="mcl_option_modmgr">Диспетчер модов (непрацює)</string>
+    <string name="mcl_option_modmgr">Диспетчер модів (непрацює)</string>
     <string name="mcl_option_optifineinstall">Встановити OptiFine</string>
     <string name="mcl_option_checkupdate">Перевірити наявність оновлень</string>
     <string name="mcl_option_customcontrol">Користувацьке управління</string>
     <string name="mcl_option_settings">Налаштування</string>
     <string name="mcl_option_about">Про лаунчер</string>
-    <string name="mcl_setting_title_setmaxdxref">Встановлення макс. кількість запросів DX</string>
-    <string name="mcl_setting_subtitle_setmaxdxref">Збільшити якщо при конвертації сталась помилка: Too many ... references. Ви можете попробувати опцвю multi-dex. Рекомендуєм: 4096 або 8192.</string>
+    <string name="mcl_setting_title_setmaxdxref">Встановлення макс. кількість звертань DX</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Збільшити якщо при конвертації сталась помилка: Too many ... references. Ви можете попробувати опіюю multi-dex. Рекомендуєм: 4096 або 8192.</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плаваючому вікні</string>
     <string name="mcl_setting_subtitle_freeform">Запустити Minecraft в плаваючому вікні. Треба Android 7.0 чи вище</string>
     <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викідованія предметів.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
     <string name="mcl_setting_title_controlsize">Установка розміру кнопок управління</string>
     <string name="mcl_setting_title_forgetoptifpath">Зробити OptiFine нездатним виявити себе</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Дозволяє зробити OptiFine здатним запуститися на деяких пристроях.</string>
@@ -100,7 +100,7 @@
     <string name="global_add">Добавити</string>
     <string name="global_edit">Редагувати</string>
     <string name="global_error">Помилка</string>
-    <string name="global_load">Загрузка</string>
+    <string name="global_load">Звантаження</string>
     <string name="global_name">Ім\'я</string>
     <string name="global_remove">Видалити</string>
     <string name="global_restart">Перезапуск</string>
@@ -158,7 +158,7 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Закрити примусово</string>
     <string name="control_viewout">Журнал</string>
-    <string name="control_adebug">Відкладка PointerCapture</string>
+    <string name="control_adebug">Вкладка PointerCapture</string>
     <string name="control_customkey">Надіслати користувацьку розкладку</string>
     <string name="control_shiftmodechg">Змінити режим кнопки Shift (крастися)</string>
     <string name="customctrl_keyname">Код клавіші</string>
@@ -172,7 +172,7 @@
     <string name="main_options">Опції</string>
     <string name="main_play">Грати</string>
     <string name="main_welcome">Ласкаво просимо,</string>
-    <string name="main_infodev">Інфо (Розроб.)</string>
+    <string name="main_infodev">Інфо(Розробник)</string>
     <string name="main_switchuser">Змінити користувача</string>
     <string name="main_version_">Версія:</string>
     <string name="main_nocrash">Збоїв не виявлено</string>
