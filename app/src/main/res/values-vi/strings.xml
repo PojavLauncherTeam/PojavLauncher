@@ -5,23 +5,22 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">Trợ giúp</string>
+    <string name="actionbar_help">TRỢ GIÚP</string>
     <!-- Languages list part -->
-    <string name="language_name">Tên_ngôn ngữ
-Danh sách ngôn ngữ</string>
+    <string name="language_name">TIẾNG VIỆT - VN</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email hoặc tên người dùng</string>
     <string name="login_online_username_question">(Tôi sử dụng cái nào)</string>
     <string name="login_online_password_hint">Mật khẩu</string>
     <string name="login_online_password_question">Quên mật khẩu?</string>
     <string name="login_online_remember">Ghi nhớ tôi?</string>
-    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
+    <string name="login_online_check_keeplogin">Giữ tôi đăng nhập</string>
     <string name="login_online_login_label">Đăng nhập</string>
     <string name="login_online_create_account">(Tạo tài khoản mới?)</string>
     <string name="login_offline_switch">Tài khoản ngoại tuyến?</string>
     <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
     <string name="login_offline_alert_skip">Bỏ qua</string>
-    <string name="login_error_short_username">Tên người dùng phải co ít nhất 3 kí tự</string>
+    <string name="login_error_short_username">Tên người dùng phải có ít nhất 3 kí tự</string>
     <string name="login_error_exist_username">Tên này đã tồn tại</string>
     <string name="login_select_account">Chọn tài khoản</string>
     <!-- Hint -->
@@ -41,10 +40,10 @@ Danh sách ngôn ngữ</string>
     <string name="alerttitle_installmod">Chọn một mod để tải</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher đã bất ngờ bị dừng</string>
-    <string name="error_checklog">Lỗi! Làm ơn kiểm tra nhật kí bên dưới: %s</string>
+    <string name="error_checklog">Lỗi! Vui lòng kiểm tra nhật kí bên dưới: %s</string>
     <string name="error_no_version">Không có phiên bản!</string>
     <string name="error_load_version">Không thể tải phiên bản %s</string>
-    <string name="error_convert_lib">Không thể lấy library %s</string>
+    <string name="error_convert_lib">Không thể chuyển đổi thư viện %s</string>
     <string name="error_convert_client">Không thể chuyển đổi Minecraft %s</string>
     <string name="error_show_more">Hiển thị thêm</string>
     <string name="error_show_less">Hiển thị ít hơn</string>
@@ -64,16 +63,16 @@ Danh sách ngôn ngữ</string>
     <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Làm sạch file bộ nhớ đệm</string>
     <string name="mcl_launch_downloading">Đang tải xuống %s</string>
-    <string name="mcl_launch_download_lib">Đang tải xuống library %s</string>
+    <string name="mcl_launch_download_lib">Đang tải xuống thư viện %s</string>
     <string name="mcl_launch_download_client">Đang tải Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Đang lấy library %s</string>
+    <string name="mcl_launch_convert_lib">Đang chuyển đổi thư viện %s</string>
     <string name="mcl_launch_convert_client">Đang lấy Minecraft %s</string>
     <string name="mcl_launch_patch_client">Đang vá Minecraft %s</string>
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
     <string name="mcl_options">Tùy chọn</string>
     <string name="mcl_option_modmgr">Quản lý mod (không có chức năng)</string>
     <string name="mcl_option_modinstall">Cài đặt mod (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Tải mod (với đối số tùy chỉnh)</string>
+    <string name="mcl_option_modinstallwitharg">Cài đặt mod (với dữ liệu thành phần tùy chỉnh)</string>
     <string name="mcl_option_checkupdate">Kiểm tra bản cập nhật</string>
     <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
     <string name="mcl_option_settings">Thiết lập</string>
@@ -82,14 +81,14 @@ Danh sách ngôn ngữ</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Đề nghị khởi động lại trình khởi chạy] Điều này cho phép bạn cài đặt lại Java Runtime</string>
     <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ Freeform</string>
     <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa cửa sổ nổi. Cần Android 7.0+</string>
-    <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn dài</string>
+    <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn lâu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong phá hủy khối và thả vật phẩm.</string>
     <string name="mcl_setting_title_controlsize">Đặt kích thước nút điều khiển</string>
-    <string name="mcl_setting_title_javaargs">JRE Khởi chạy đối số</string>
+    <string name="mcl_setting_title_javaargs">JRE Khởi chạy arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
     <string name="mcl_setting_category_general">Thiết lập chung</string>
-    <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được ở trong danh sách phiên bản</string>
-    <string name="mcl_setting_veroption_release">Bản phát hành</string>
+    <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
+    <string name="mcl_setting_veroption_release">\"Phát hành chính thức (Release)\"</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha cũ</string>
     <string name="mcl_setting_veroption_oldbeta">Beta cũ</string>
@@ -103,7 +102,7 @@ Danh sách ngôn ngữ</string>
     <string name="global_remove">Loại bỏ</string>
     <string name="global_restart">Khởi động lại</string>
     <string name="global_save">Lưu</string>
-    <string name="global_unpacking">Giải nén %s</string>
+    <string name="global_unpacking">Đang giải nén %s</string>
     <string name="global_error_field_empty">Trường này không được để trống</string>
     <!--
 	<string name="mcl_about">
@@ -128,23 +127,23 @@ Danh sách ngôn ngữ</string>
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Ứng dụng/Trò chơi thoát với mã %d</string>
+    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Ứng dụng/Trò chơi đã thoát với mã %d</string>
     <string name="mcn_exit_call">Thoát</string>
     <string name="mcn_exit_crash">Đã phát hiện sự cố trò chơi! Nhấn OK để thoát.</string>
     <string name="mcn_exit_errcrash">Không thể xác định vị trí sự cố! Bạn có thể bỏ qua điều này.</string>
-    <string name="mcn_exit_confirm">Bạn có chắc muốn thoát chương trình?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 không được tải!</string>
+    <string name="mcn_exit_confirm">Bạn có chắc muốn buộc dừng?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
     <string name="mcn_check_fail_incompatiblearch">Kiến trúc %1$s không tương thích với Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Không thể bắt đầu thử nhiệm Java VM. Kiểm tra %s để biết thêm thông tin.</string>
+    <string name="mcn_check_fail_java">Không thể bắt đầu thử Java VM. Kiểm tra %s để biết thêm thông tin.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Điều khiển</string>
-    <string name="control_toggle">Giao diện</string>
-    <string name="control_keyboard">Bàn Phím</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Bàn phím</string>
     <string name="control_chat">Trò chuyện</string>
     <string name="control_debug">Gỡ lỗi</string>
-    <string name="control_zoom">Phóng đại (C)</string>
-    <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_zoom">Phóng to (C)</string>
+    <string name="control_primary">Chuột trái</string>
+    <string name="control_secondary">Chuột phải</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Túi đồ</string>
     <string name="control_up">▲</string>
@@ -152,14 +151,14 @@ Danh sách ngôn ngữ</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">Thứ ba</string>
+    <string name="control_thirdperson">Đổi góc nhìn</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Chuột</string>
     <string name="control_mouseoff">Chuột: tắt</string>
     <string name="control_mouseon">Chuột: bật </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Đóng chương trình</string>
-    <string name="control_viewout">Nhật ký ra</string>
+    <string name="control_forceclose">Buộc dừng</string>
+    <string name="control_viewout">Nhật ký đầu ra</string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
     <string name="customctrl_keyname">Mã phím</string>
@@ -167,7 +166,7 @@ Danh sách ngôn ngữ</string>
     <string name="customctrl_hidden">Ẩn</string>
     <string name="customctrl_addbutton">Thêm nút</string>
     <string name="customctrl_title_selectctrl">Chọn bộ điều khiển json mặc định</string>
-    <string name="customctrl_selectdefault">Chọn bộ điều khiển json thông thường</string>
+    <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Cập nhập bàn điều khiển</string>
     <string name="main_options">Tùy chọn</string>
