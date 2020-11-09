@@ -184,7 +184,7 @@ public class CustomControlsActivity extends AppCompatActivity
 
 	private void actionLoad() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.customctrl_title_selectctrl);
+		builder.setTitle(R.string.global_load);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
