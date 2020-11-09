@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Nainstalovat Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Vyber json klávesové mapy</string>
-    <string name="alerttitle_installmod">Vyberte mód k instalaci</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
     <string name="error_checklog">Chyba! Zkontrolujte záznam níže: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Novinky z launcheru</string>
     <string name="mcl_tab_console">Vývojářská konzole</string>
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Aplikace/Hra skončila s kódem %d</string>
+    <string name="mcn_exit_title">Aplikace/Hra skončila s kódem %d</string>
     <string name="mcn_exit_call">Ukončit</string>
     <string name="mcn_exit_crash">Byl zjištěn pád hry! Klepnutím na tlačítko OK ukončíte.</string>
     <string name="mcn_exit_errcrash">Nelze najít pád! Toto můžete ignorovat.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Speciální písmeno</string>
     <string name="customctrl_hidden">Skryté</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
-    <string name="customctrl_title_selectctrl">Vybrat json výchozího ovládání</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Aktualizovat konzoli</string>
