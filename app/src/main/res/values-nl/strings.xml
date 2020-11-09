@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installeer Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Selecteer een keymap json</string>
-    <string name="alerttitle_installmod">Selecteer een mod om toe te voegen</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher is onverwacht gecrasht</string>
     <string name="error_checklog">Fout! Controleer het log hieronder: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Launcher nieuws</string>
     <string name="mcl_tab_console">Ontwikkelings console</string>
     <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Applicatie/spel is afgesloten met code %d</string>
+    <string name="mcn_exit_title">Applicatie/spel is afgesloten met code %d</string>
     <string name="mcn_exit_call">Afsluiten</string>
     <string name="mcn_exit_crash">Spel Crash gedetecteerd! Klik op OK om af te sluiten.</string>
     <string name="mcn_exit_errcrash">Kan geen crash vinden! U kunt dit negeren.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Speciale sleutel</string>
     <string name="customctrl_hidden">Verborgen</string>
     <string name="customctrl_addbutton">Knop toevoegen</string>
-    <string name="customctrl_title_selectctrl">Selecteer standaard control json</string>
     <string name="customctrl_selectdefault">Selecteer standaard Control json</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Console bijwerken</string>
