@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Zainstaluj Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Wybierz plik json mapy klawiszy</string>
-    <string name="alerttitle_installmod">Wybierz modyfikację do dodania</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
     <string name="error_checklog">Błąd! Sprawdź dziennik poniżej: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Wiadomości dotyczące programu uruchamiającego</string>
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Aplikacja/Gra zakończyła się z kodem %d</string>
+    <string name="mcn_exit_title">Aplikacja/Gra zakończyła się z kodem %d</string>
     <string name="mcn_exit_call">Wyjście</string>
     <string name="mcn_exit_crash">Wykryto awarię gry! Kliknij OK, aby wyjść.</string>
     <string name="mcn_exit_errcrash">Nie można zlokalizować awarii!</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Klucz specjalny</string>
     <string name="customctrl_hidden">Ukryty</string>
     <string name="customctrl_addbutton">Dodaj przycisk</string>
-    <string name="customctrl_title_selectctrl">Wybierz domyślny json Control</string>
     <string name="customctrl_selectdefault">Wybierz domyślny json Control</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Zaktualizuj konsolę</string>
