@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installa Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Seleziona un keymap json</string>
-    <string name="alerttitle_installmod">Seleziona una mod da installare</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher è crashato in modo imprevisto</string>
     <string name="error_checklog">Errore! Per favore controlla i log sotto: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Notizie del launcher</string>
     <string name="mcl_tab_console">Console di sviluppo</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Applicazione/Gioco è uscito con il seguente codice %d</string>
+    <string name="mcn_exit_title">Applicazione/Gioco è uscito con il seguente codice %d</string>
     <string name="mcn_exit_call">Esci</string>
     <string name="mcn_exit_crash">Crash del gioco rilevato! Clicca OK per uscire.</string>
     <string name="mcn_exit_errcrash">Impossibile individuare il crash! Potresti ignorare questo errore.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Tasto speciale</string>
     <string name="customctrl_hidden">Nascosto</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
-    <string name="customctrl_title_selectctrl">Seleziona Controllo di default json</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Aggiorna console</string>
