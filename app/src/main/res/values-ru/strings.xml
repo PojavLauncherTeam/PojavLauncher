@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установить Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
-    <string name="alerttitle_installmod">Добавить мод</string>
     <!-- Error messages -->
     <string name="error_fatal">Критическая ошибка</string>
     <string name="error_checklog">Ошибка! Просмотрите журнал ниже: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Новости</string>
     <string name="mcl_tab_console">Терминал разработчика</string>
     <string name="mcl_tab_crash">Инфо о сбое</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Произошел собой приложение/игры с кодом %d</string>
+    <string name="mcn_exit_title">Произошел собой приложение/игры с кодом %d</string>
     <string name="mcn_exit_call">Выход</string>
     <string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Особенная кнопка</string>
     <string name="customctrl_hidden">Спрятано</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
-    <string name="customctrl_title_selectctrl">Выбрать раскладку по-умолчанию</string>
     <string name="customctrl_selectdefault">Выбрать раскладку по-умолчанию</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Обновить консоль</string>
