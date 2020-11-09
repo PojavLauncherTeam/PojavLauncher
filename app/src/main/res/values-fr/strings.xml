@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installer Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches json</string>
-    <string name="alerttitle_installmod">Sélectionnez un mod à installer</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher a planté de façon inattendue</string>
     <string name="error_checklog">Erreur! Veuillez vérifier le journal ci-dessous: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Actualités du launcher</string>
     <string name="mcl_tab_console">Console de Développement</string>
     <string name="mcl_tab_crash">Journal d\'erreurs</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Application/Partie quittée avec le code %d</string>
+    <string name="mcn_exit_title">Application/Partie quittée avec le code %d</string>
     <string name="mcn_exit_call">Quitter</string>
     <string name="mcn_exit_crash">Crash de jeu détecté! Cliquez sur OK pour quitter.</string>
     <string name="mcn_exit_errcrash">Impossible de localiser le plantage! Vous pouvez ignorer cela.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Touches spéciales</string>
     <string name="customctrl_hidden">Masqué</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
-    <string name="customctrl_title_selectctrl">Sélectionner le json de contrôle par défaut</string>
     <string name="customctrl_selectdefault">Sélectionner le json de contrôle par défaut</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Mettre à jour la console</string>
