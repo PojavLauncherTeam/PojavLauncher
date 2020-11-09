@@ -3,32 +3,77 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
+    <string name="app_motd">Abre Minecraft: Java Edition en tu dispositivo!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">HELP</string>
+    <string name="actionbar_help">AYUDA</string>
     <!-- Languages list part -->
-    <string name="language_name">ENGLISH - US</string>
+    <string name="language_name">INGLÉS - US</string>
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email or username</string>
-    <string name="login_online_username_question">(Which do I use?)</string>
-    <string name="login_online_password_hint">Password</string>
-    <string name="login_online_password_question">Forgot password?</string>
-    <string name="login_online_remember">Dylan</string>
+    <string name="login_online_username_hint">Email o usuario</string>
+    <string name="login_online_username_question">(Que utilizo?)</string>
+    <string name="login_online_password_hint">Contraseña</string>
+    <string name="login_online_password_question">Contraseña olvidada?</string>
+    <string name="login_online_remember">Recordarme?</string>
     <string name="login_online_check_keeplogin">Mantener tu sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <string name="login_online_create_account">(Crear cuenta nueva?)</string>
     <string name="login_offline_switch">Cuenta no premium?</string>
     <string name="login_offline_label">Inicia sesión con una cuenta no premium</string>
+    <string name="login_offline_alert_skip">Saltar</string>
+    <string name="login_error_short_username">El nombre de usuario debe tener mínimo 3 carácteres</string>
+    <string name="login_error_exist_username">Este usuario ya existe</string>
+    <string name="login_select_account">Elije una cuenta</string>
     <!-- Hint -->
+    <string name="hint_select_account">Para seleccionar una cuenta dele click, para eliminarla manténgala pulsada.</string>
+    <string name="hint_control_mapping">"Esta cualidad no está terminada y no se pueden aplicar controles customizados aún!\nDesliza de izquierda a derecha para abrir el menú ◀\nMantén pulsado un botón para editarlo."</string>
     <!-- Warning -->
+    <string name="warning_title">Advertencia</string>
+    <string name="warning_msg">Esta aplicación puede no ser compatible con la versión de tu dispositivo Android (superior o igual Android 7.0). Puede usar VMOS e instalar esta aplicación desde VMOS, pero tenga en cuenta que tendrá que instalar VMOS manualmente porque fue eliminado de Play Store.</string>
+    <string name="warning_noshowagain">No mostrar más</string>
+    <string name="warning_action_install">Instalar VMOS</string>
+    <string name="warning_action_tryanyway">Intentarlo de todos modos</string>
+    <string name="warning_action_exit">Salir</string>
+    <string name="warning_remove_account">Esta cuenta va a ser eliminada!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Instalar Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_selectkeymap">Selecciona un mapa de teclas en JSON</string>
+    <string name="alerttitle_installmod">Selecciona un instalador de mods</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher se ha bloqueado inesperadamente</string>
+    <string name="error_checklog">Error! Por favor mira el log debajo: %s</string>
+    <string name="error_no_version">Ninguna versión!</string>
+    <string name="error_load_version">No se pudo cargar la versión %s</string>
+    <string name="error_convert_lib">Error al convertir la librería %s</string>
+    <string name="error_convert_client">Error al convertir Minecraft %s</string>
+    <string name="error_show_more">Mostrar más</string>
+    <string name="error_show_less">Mostrar menos</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">El permiso de leer/escribir en el almacenamiento del dispositivo es necesario!</string>
+    <string name="toast_login_error">Algo fué mal después de iniciar sesión. Por favor, envía esto al desarrollador.\nError: %s</string>
+    <string name="toast_optifine_success">Instalación exitosa</string>
+    <string name="toast_uninstalljre_done">Java Runtime desinstalado</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Noticias</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
+    <string name="mcl_tab_console">Consola de desarrollador</string>
+    <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Listo para jugar a Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Limpiando archivos caché</string>
+    <string name="mcl_launch_downloading">Descargando %s</string>
+    <string name="mcl_launch_download_lib">Descargando librería %s</string>
+    <string name="mcl_launch_download_client">Descargando Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Convirtiendo librería %s</string>
+    <string name="mcl_launch_convert_client">Convirtiendo Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Parcheando Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Preparando para descargar recursos</string>
+    <string name="mcl_options">Opciones</string>
+    <string name="mcl_option_modmgr">Gestor de mods (no funciona aún)</string>
+    <string name="mcl_option_modinstall">Instalar mod (Forge, LabyMod, Fabric,...)</string>
+    <string name="mcl_option_modinstallwitharg">Instalar mod (con parámetros personalizados)</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
@@ -54,6 +99,32 @@
 -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3ª P</string>
+    <string name="control_listplayers">Tabulador</string>
+    <string name="control_mouse">Ratón</string>
+    <string name="control_mouseoff">Ratón: apagado</string>
+    <string name="control_mouseon">Ratón: encendido </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Forzar cerrado</string>
+    <string name="control_viewout">Registro de salida</string>
+    <string name="control_adebug">Ingresar Debug</string>
+    <string name="control_customkey">Enviar tecla personalizada</string>
+    <string name="customctrl_keyname">Tecla</string>
+    <string name="customctrl_specialkey">Tecla especial</string>
+    <string name="customctrl_hidden">Oculto</string>
+    <string name="customctrl_addbutton">Añadir botón</string>
+    <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Actualizar consola</string>
+    <string name="main_options">Opciones</string>
+    <string name="main_play">Jugar</string>
+    <string name="main_welcome">Bienvenido</string>
+    <string name="main_infodev">Información (DEV)</string>
+    <string name="main_switchuser">Cambiar usuario</string>
+    <string name="main_version_">Versión:</string>
+    <string name="main_nocrash">Ningún bloqueo detectado</string>
+    <string name="main_nolog">Ningún log.</string>
 </resources>
