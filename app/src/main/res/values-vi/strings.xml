@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Cài đặt Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Chọn một sơ đồ bàn phím json</string>
-    <string name="alerttitle_installmod">Chọn một mod để tải</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher đã bất ngờ bị dừng</string>
     <string name="error_checklog">Lỗi! Vui lòng kiểm tra nhật kí bên dưới: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Tin tức về trình khởi chạy</string>
     <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Ứng dụng/Trò chơi đã thoát với mã %d</string>
+    <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d</string>
     <string name="mcn_exit_call">Thoát</string>
     <string name="mcn_exit_crash">Đã phát hiện sự cố trò chơi! Nhấn OK để thoát.</string>
     <string name="mcn_exit_errcrash">Không thể xác định vị trí sự cố! Bạn có thể bỏ qua điều này.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Phím đặc biệt</string>
     <string name="customctrl_hidden">Ẩn</string>
     <string name="customctrl_addbutton">Thêm nút</string>
-    <string name="customctrl_title_selectctrl">Chọn bộ điều khiển json mặc định</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Cập nhập bàn điều khiển</string>
