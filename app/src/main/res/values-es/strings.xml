@@ -14,6 +14,11 @@
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_password_question">Forgot password?</string>
     <string name="login_online_remember">Dylan</string>
+    <string name="login_online_check_keeplogin">Mantener tu sesión iniciada</string>
+    <string name="login_online_login_label">Iniciar sesión</string>
+    <string name="login_online_create_account">(Crear cuenta nueva?)</string>
+    <string name="login_offline_switch">Cuenta no premium?</string>
+    <string name="login_offline_label">Inicia sesión con una cuenta no premium</string>
     <!-- Hint -->
     <!-- Warning -->
     <!-- AlertDialog title -->
