@@ -28,7 +28,7 @@ import android.widget.*;
 import android.content.*;
 import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 
 public abstract class HandleView extends View implements ViewPositionListener, View.OnLongClickListener
  {

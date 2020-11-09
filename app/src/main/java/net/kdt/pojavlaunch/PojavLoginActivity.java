@@ -17,7 +17,7 @@ import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.update.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;

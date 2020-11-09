@@ -253,16 +253,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendFramebufferSize(JNIEnv* env, jclass clazz, jint width, jint height) {
-    if (GLFW_invoke_FramebufferSize && isInputReady) {
-        if (isUseStackQueueCall) {
-            sendData(EVENT_TYPE_FRAMEBUFFER_SIZE, width, height, 0, 0);
-        } else {
-            GLFW_invoke_FramebufferSize(showingWindow, width, height);
-        }
-    }
-}
-
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (GLFW_invoke_Key && isInputReady) {
         if (isUseStackQueueCall) {
@@ -288,22 +278,34 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
     }
 }
 
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(JNIEnv* env, jclass clazz, jint width, jint height) {
+    if (isInputReady) {
+        if (GLFW_invoke_FramebufferSize) {
+            if (isUseStackQueueCall) {
+                sendData(EVENT_TYPE_FRAMEBUFFER_SIZE, width, height, 0, 0);
+            } else {
+                GLFW_invoke_FramebufferSize(showingWindow, width, height);
+            }
+        }
+        
+        if (GLFW_invoke_WindowSize) {
+            if (isUseStackQueueCall) {
+                sendData(EVENT_TYPE_WINDOW_SIZE, width, height, 0, 0);
+            } else {
+                GLFW_invoke_WindowSize(showingWindow, width, height);
+            }
+        }
+    }
+    
+    return (isInputReady && (GLFW_invoke_FramebufferSize || GLFW_invoke_WindowSize));
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEnv* env, jclass clazz, jdouble xoffset, jdouble yoffset) {
     if (GLFW_invoke_Scroll && isInputReady) {
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_SCROLL, xoffset, yoffset, 0, 0);
         } else {
             GLFW_invoke_Scroll(showingWindow, (double) xoffset, (double) yoffset);
-        }
-    }
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendWindowSize(JNIEnv* env, jclass clazz, jint width, jint height) {
-    if (GLFW_invoke_WindowSize && isInputReady) {
-        if (isUseStackQueueCall) {
-            sendData(EVENT_TYPE_WINDOW_SIZE, width, height, 0, 0);
-        } else {
-            GLFW_invoke_WindowSize(showingWindow, width, height);
         }
     }
 }

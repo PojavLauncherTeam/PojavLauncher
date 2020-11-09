@@ -18,7 +18,7 @@ import java.lang.reflect.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 import org.lwjgl.glfw.*;
 
 import android.app.AlertDialog;

@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.value.customcontrols;
+package net.kdt.pojavlaunch.customcontrols;
 import android.widget.*;
 import android.content.*;
 import android.util.*;

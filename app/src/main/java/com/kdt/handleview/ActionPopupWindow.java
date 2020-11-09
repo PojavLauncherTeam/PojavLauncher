@@ -28,7 +28,7 @@ import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
 
 import android.view.View.OnClickListener;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 import android.support.v7.app.*;
 
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {

@@ -13,7 +13,7 @@ import com.kdt.filerapi.*;
 import java.io.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 
 public class CustomControlsActivity extends AppCompatActivity
 {

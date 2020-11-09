@@ -5,7 +5,7 @@ import android.os.*;
 import android.content.pm.PackageManager.*;
 import android.content.pm.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 import android.support.v7.preference.*;
 import java.io.*;
 import android.content.*;

@@ -29,10 +29,13 @@ public class CallbackBridge {
         sendMouseKeycode(button, 0, state == 1);
     }
 
-    private static boolean threadAttached;
+    private static boolean threadAttached, screenSizeSet;
     public static void sendCursorPos(int x, int y) {
         if (!threadAttached) {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, isMinecraft1p12, MainActivity.isInputStackCall);
+        }
+        if (!screenSizeSet) {
+            screenSizeSet = nativeSendScreenSize(windowWidth, windowHeight);
         }
         
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
@@ -73,8 +76,7 @@ public class CallbackBridge {
     }
 
     public static void sendUpdateWindowSize(int w, int h) {
-        nativeSendFramebufferSize(w, h);
-        nativeSendWindowSize(w, h);
+        nativeSendScreenSize(w, h);
     }
 
     public static boolean isGrabbing() {
@@ -131,11 +133,10 @@ public class CallbackBridge {
     private static native boolean nativeSendCharMods(int codepoint, int mods);
     // private static native void nativeSendCursorEnter(int entered);
     private static native void nativeSendCursorPos(int x, int y);
-    private static native void nativeSendFramebufferSize(int width, int height);
     private static native void nativeSendKey(int key, int scancode, int action, int mods);
     private static native void nativeSendMouseButton(int button, int action, int mods);
     private static native void nativeSendScroll(double xoffset, double yoffset);
-    private static native void nativeSendWindowSize(int width, int height);
+    private static native boolean nativeSendScreenSize(int width, int height);
     
     public static native boolean nativeIsGrabbing();
     
