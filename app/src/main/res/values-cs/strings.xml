@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Nainstalovat Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Vyber json klávesové mapy</string>
+    <string name="alerttitle_installmod">Vyberte instalatér módů</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
     <string name="error_checklog">Chyba! Zkontrolujte záznam níže: %s</string>
@@ -55,6 +56,8 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Novinky</string>
+    <string name="mcl_tab_mcje">Minecraft: Java edice</string>
     <string name="mcl_tab_console">Vývojářská konzole</string>
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Strings -->
