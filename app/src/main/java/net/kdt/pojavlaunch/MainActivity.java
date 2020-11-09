@@ -631,7 +631,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 						case MotionEvent.ACTION_POINTER_DOWN: // 5
                             CallbackBridge.sendPrepareGrabInitialPos();
                             
-                            CallbackBridge.sendMouseKeycode(!CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
+                            CallbackBridge.sendMouseKeycode(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, true);
 							initialX = x;
 							initialY = y;
 						
