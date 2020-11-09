@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Встановити Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Вибрати розкладку формату json</string>
-    <string name="alerttitle_installmod">Вибрати мод для додавання</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher був зупинений в результаті збою</string>
     <string name="error_checklog">Помилка! Будь ласка, перевірте журнал нижче: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Новини лаунчера</string>
     <string name="mcl_tab_console">Консоль розробки</string>
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Застосування/гра завершилась з кодом %d</string>
+    <string name="mcn_exit_title">Застосування/гра завершилась з кодом %d</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_crash">Виявлено збій гри! Натисніть кнопку ОК, щоб вийти.</string>
     <string name="mcn_exit_errcrash">Не вдалося знайти збій! Можете не звертати на це уваги.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Спеціальна клавіша</string>
     <string name="customctrl_hidden">Приховано</string>
     <string name="customctrl_addbutton">Додати кнопку</string>
-    <string name="customctrl_title_selectctrl">Вибрати управління за замовчуванням</string>
     <string name="customctrl_selectdefault">Вибирати управління за замовчуванням</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Оновити консоль</string>
