@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java Runtime indir %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Bir keymap json dosyası seçin</string>
-    <string name="alerttitle_installmod">Yüklenecek modu seçin</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
     <string name="error_checklog">Hata! Lütfen aşağıdaki günlüğe bakınız: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Başlatıcı haberleri</string>
     <string name="mcl_tab_console">Geliştirici konsolu</string>
     <string name="mcl_tab_crash">Çökme günlüğü</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Uygulama/Oyun %d koduyla kapandı</string>
+    <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
     <string name="mcn_exit_call">Çıkış</string>
     <string name="mcn_exit_crash">Oyun Çökmesi algılandı! Çıkmak için Tamam\'a basın.</string>
     <string name="mcn_exit_errcrash">Çökmenin sebebi algılanamadı! Bunu görmezden gelebilirsiniz.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Özel Tuş</string>
     <string name="customctrl_hidden">Gizli</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
-    <string name="customctrl_title_selectctrl">Varsayılan Control json\'u seç</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Konsolu güncelle</string>
