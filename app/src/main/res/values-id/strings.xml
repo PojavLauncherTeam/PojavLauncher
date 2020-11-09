@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Pasang Runtime Java %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
-    <string name="alerttitle_installmod">Pilih sebuah mod untuk dipasang</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher tiba-tiba crash!</string>
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Berita launcher</string>
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
@@ -127,7 +125,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Aplikasi/Permainan keluar dengan code %d</string>
+    <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan code %d</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_crash">Game crash terdeteksi! Pencet OK untuk keluar.</string>
     <string name="mcn_exit_errcrash">Tidak bisa mencari sumber crash, anda bisa mengabaikan ini.</string>
@@ -165,7 +163,6 @@
     <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
-    <string name="customctrl_title_selectctrl">Pilih json kontrol default</string>
     <string name="customctrl_selectdefault">Pilih json kontrol default</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Perbarui konsol</string>
