@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installer Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches json</string>
+    <string name="alerttitle_installmod">Sélectionnez un mod à installer</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher a planté de façon inattendue</string>
     <string name="error_checklog">Erreur! Veuillez vérifier le journal ci-dessous: %s</string>
@@ -55,6 +56,8 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Actualités</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Console de Développement</string>
     <string name="mcl_tab_crash">Journal d\'erreurs</string>
     <!-- MCLauncherActivity: Strings -->
