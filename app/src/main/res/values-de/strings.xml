@@ -37,7 +37,6 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java Runtime %s (.tar.xz) installieren</string>
     <string name="alerttitle_selectkeymap">Wähle eine keymap json aus</string>
-    <string name="alerttitle_installmod">Mod auswählen welche installiert werden soll</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher ist unerwartet abgestürzt</string>
     <string name="error_checklog">Fehler! Bitte überprüfen sie das untenstehende Protokoll: %s</string>
@@ -56,7 +55,6 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Launcher Nachrichten</string>
     <string name="mcl_tab_console">Entwickler Konsole</string>
     <string name="mcl_tab_crash">Absturzbericht</string>
     <!-- MCLauncherActivity: Strings -->
@@ -125,7 +123,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title" comment="mcn_exit_title&#10;MainActivity: strings">Anwendung/Spiel mit Code %d beendet</string>
+    <string name="mcn_exit_title">Anwendung/Spiel mit Code %d beendet</string>
     <string name="mcn_exit_call">Beenden</string>
     <string name="mcn_exit_crash">Spielabsturz erkannt! Klicke auf OK, um es zu beenden.</string>
     <string name="mcn_exit_errcrash">Absturz konnte nicht gefunden werden! Du kannst dies ignorieren.</string>
@@ -151,7 +149,6 @@
     <string name="control_viewout">Log Ausgabe</string>
     <string name="customctrl_hidden">Versteckt</string>
     <string name="customctrl_addbutton">Taste hinzufügen</string>
-    <string name="customctrl_title_selectctrl">Standard-Kontroll-json auswählen</string>
     <string name="customctrl_selectdefault">Standard-Kontroll-json auswählen</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Konsole aktualisieren</string>
