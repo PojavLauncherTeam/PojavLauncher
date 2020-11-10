@@ -5,11 +5,9 @@ import android.content.*;
 import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
-import android.support.design.widget.VerticalTabLayout.ViewPagerAdapter;
-import android.support.v4.app.*;
+import android.support.design.widget.VerticalTabLayout.*;
 import android.support.v4.view.*;
 import android.support.v7.app.*;
-import android.support.v7.app.AlertDialog;
 import android.text.*;
 import android.util.*;
 import android.view.*;
@@ -25,10 +23,10 @@ import net.kdt.pojavlaunch.mcfragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.util.*;
 import net.kdt.pojavlaunch.value.*;
+import org.apache.commons.io.*;
 import org.lwjgl.glfw.*;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
