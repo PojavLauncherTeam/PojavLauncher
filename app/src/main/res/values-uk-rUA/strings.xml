@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрою!</string>
+    <!-- Action bar part -->
+    <string name="actionbar_help">Допомога</string>
+    <!-- Languages list part -->
+    <string name="language_name">УКРАЇНСЬКА - UA</string>
+    <!-- Logging output -->
+    <string name="log_title">Показати вивід журналу</string>
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email або ім\'я користувача</string>
+    <string name="login_online_username_question">(Що мені використовувати?)</string>
+    <string name="login_online_password_hint">Пароль</string>
+    <string name="login_online_password_question">Забули пароль?</string>
+    <string name="login_online_remember">Запам\'ятати мене?</string>
+    <string name="login_online_check_keeplogin">Зберегти мене авторизованим</string>
+    <string name="login_online_login_label">Вхід</string>
+    <string name="login_online_create_account">(Створити новий обліковий запис?)</string>
+    <string name="login_offline_switch">Офлайн обліковий запис?</string>
+    <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
+    <string name="login_offline_alert_skip">Пропустити</string>
+    <string name="login_error_short_username">Ім\'я користувача повинно мати хоча б 3 символи</string>
+    <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
+    <string name="login_select_account">Виберіть обліковий запис</string>
+    <!-- Hint -->
+    <string name="hint_select_account">Щоб вибрати обліковий запис, натисніть на нього. Щоб видалити, натисніть і утримуйте його.</string>
+    <string name="hint_control_mapping">"Ця функція ще не завершена, тому в даний момент ви не можете застосувати користувацьке управління!\nПроведіть пальцем справа наліво, щоб відкрити меню◀\nУтримуйте кнопку для настройки: редагування, зміни розміру або видалення."</string>
+    <!-- Warning -->
+    <string name="warning_title">Застереження</string>
+    <string name="warning_msg">Ця програма може бути несумісний з вашою версією Android (Android 7.0 і вище). Замість цього ви можете використовувати VMOS і встановити цю програму на VMOS. Але VMOS видалили з Play Маркета, ви повинні встановити його вручну.</string>
+    <string name="warning_noshowagain">Не показувати знову</string>
+    <string name="warning_action_install">Встановити VMOS</string>
+    <string name="warning_action_tryanyway">Все одно попробувати</string>
+    <string name="warning_action_exit">Вийти</string>
+    <string name="warning_remove_account">Цей обліковий запис буде видалено!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Вибрати роскладку формату json</string>
+    <string name="alerttitle_installmod">Вибрати мод для додавання</string>
+    <string name="alerttitle_installoptifine">Вибрати файл OptiFine формату jar</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher був зупинений в результаті збою</string>
+    <string name="error_checklog">Помилка! Будь ласка, провірте журнал нижче: %s</string>
+    <string name="error_no_version">Немає версії!</string>
+    <string name="error_load_version">Не вдалося завантажити версію %s</string>
+    <string name="error_convert_lib">Не вдалося конвертувати бібліотеку %s</string>
+    <string name="error_convert_client">Не вдалося конвертувати Minecraft %s</string>
+    <string name="error_show_more">Розвенути</string>
+    <string name="error_show_less">Звернути</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Потрібен дозвіл на читання/запис в сховище!</string>
+    <string name="toast_login_error">Після входу щось пішло не так. Будь ласка, повідомте про це розробнику.\nПомилка: %s</string>
+    <string name="toast_optifine_success">Установка пройшла успішно</string>
+    <string name="toast_shiftmode">Режим кнопки Shift (крастися) замінений на %s</string>
+    <string name="toast_shiftmode_hold">Режим утримання</string>
+    <string name="toast_shiftmode_toggle">режим переключено</string>
+    <!--
+	<string name="toast_3">Exit</string>
+	-->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Новини лаунчера</string>
+    <string name="mcl_tab_console">Консоль розробки</string>
+    <string name="mcl_tab_crash">Журнал збоїв</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s готовий до запуску</string>
+    <string name="mcl_launch_cleancache">Очищення файлів кешу</string>
+    <string name="mcl_launch_downloading">Завантаження %s</string>
+    <string name="mcl_launch_download_lib">Завантаження бібліотеки %s</string>
+    <string name="mcl_launch_download_client">Завантаження Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Конвертація бібліотеки %s</string>
+    <string name="mcl_launch_convert_client">Конвертація Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Збірка Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
+    <string name="mcl_options">Опції</string>
+    <string name="mcl_option_modmgr">Диспетчер модів (непрацює)</string>
+    <string name="mcl_option_optifineinstall">Встановити OptiFine</string>
+    <string name="mcl_option_checkupdate">Перевірити наявність оновлень</string>
+    <string name="mcl_option_customcontrol">Користувацьке управління</string>
+    <string name="mcl_option_settings">Налаштування</string>
+    <string name="mcl_option_about">Про лаунчер</string>
+    <string name="mcl_setting_title_setmaxdxref">Встановлення макс. кількість звертань DX</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Збільшити якщо при конвертації сталась помилка: Too many ... references. Ви можете попробувати опіюю multi-dex. Рекомендуєм: 4096 або 8192.</string>
+    <string name="mcl_setting_title_freeform">Запуск Minecraft в плаваючому вікні</string>
+    <string name="mcl_setting_subtitle_freeform">Запустити Minecraft в плаваючому вікні. Треба Android 7.0 чи вище</string>
+    <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
+    <string name="mcl_setting_title_controlsize">Установка розміру кнопок управління</string>
+    <string name="mcl_setting_title_forgetoptifpath">Зробити OptiFine нездатним виявити себе</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Дозволяє зробити OptiFine здатним запуститися на деяких пристроях.</string>
+    <string name="mcl_setting_category_general">Загальні налаштування</string>
+    <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
+    <string name="mcl_setting_veroption_release">Релізи</string>
+    <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
+    <string name="mcl_setting_veroption_oldalpha">Старі альфи</string>
+    <string name="mcl_setting_veroption_oldbeta">Старі бети</string>
+    <string name="mcl_version_clone">Клонувати</string>
+    <!-- Global strings -->
+    <string name="global_add">Добавити</string>
+    <string name="global_edit">Редагувати</string>
+    <string name="global_error">Помилка</string>
+    <string name="global_load">Звантаження</string>
+    <string name="global_name">Ім\'я</string>
+    <string name="global_remove">Видалити</string>
+    <string name="global_restart">Перезапуск</string>
+    <string name="global_save">Зберегти</string>
+    <string name="global_error_field_empty">Це поле не може бути порожнім</string>
+    <!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Гра закрилася</string>
+    <string name="mcn_exit_call">Вийти</string>
+    <string name="mcn_exit_crash">Виявлено збій гри! Натисніть кнопку ОК, щоб вийти.</string>
+    <string name="mcn_exit_errcrash">Не вдалося знайти збій! Можете не звертати на це уваги.</string>
+    <string name="mcn_exit_confirm">Ви впевнені, що хочете примусово закрити його?</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="controls">Управління</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Клавіатура</string>
+    <string name="control_chat">Чат</string>
+    <string name="control_debug">Налагодження</string>
+    <string name="control_zoom">Зум (C)</string>
+    <string name="control_primary">ЛКМ</string>
+    <string name="control_secondary">ПКМ</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Інв</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3-я особа</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Мишка</string>
+    <string name="control_mouseoff">Мишка: Викл</string>
+    <string name="control_mouseon">Мишка: Вкл </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Закрити примусово</string>
+    <string name="control_viewout">Журнал</string>
+    <string name="control_adebug">Вкладка PointerCapture</string>
+    <string name="control_customkey">Надіслати користувацьку розкладку</string>
+    <string name="control_shiftmodechg">Змінити режим кнопки Shift (крастися)</string>
+    <string name="customctrl_keyname">Код клавіші</string>
+    <string name="customctrl_specialkey">Спеціальна клавіша</string>
+    <string name="customctrl_hidden">Приховано</string>
+    <string name="customctrl_addbutton">Додати кнопку</string>
+    <string name="customctrl_title_selectctrl">Вибрати управління за замовчуванням</string>
+    <string name="customctrl_selectdefault">Вибирати управління за замовчуванням</string>
+    <!-- Update part (unused now) -->
+    <string name="update_console">Оновити консоль</string>
+    <string name="main_options">Опції</string>
+    <string name="main_play">Грати</string>
+    <string name="main_welcome">Ласкаво просимо,</string>
+    <string name="main_infodev">Інфо(Розробник)</string>
+    <string name="main_switchuser">Змінити користувача</string>
+    <string name="main_version_">Версія:</string>
+    <string name="main_nocrash">Збоїв не виявлено</string>
+    <string name="main_nolog">Нема записів.</string>
+</resources>
