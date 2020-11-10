@@ -588,10 +588,19 @@ public class PojavLauncherActivity extends AppCompatActivity
                     publishProgress("1", getString(R.string.mcl_launch_download_client, p1[0]));
                     File minecraftMainFile = new File(minecraftMainJar);
                     if (!minecraftMainFile.exists() || minecraftMainFile.length() == 0l) {
-                        Tools.downloadFile(
-                            verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
-                            minecraftMainJar
-                        );
+                        try {
+                            Tools.downloadFile(
+                                verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
+                                minecraftMainJar
+                            );
+                        } catch (Throwable th) {
+                            if (verInfo.inheritsFrom != null) {
+                                minecraftMainFile.delete();
+                                IOUtils.copy(new FileInputStream(new File(Tools.versnDir, verInfo.inheritsFrom + "/" + verInfo.inheritsFrom + ".jar")), new FileOutputStream(minecraftMainFile));
+                            } else {
+                                throw th;
+                            }
+                        }
                     }
                 } catch (Throwable e) {
                     launchWithError = true;
