@@ -28,6 +28,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.app.*;
+import org.apache.commons.io.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -471,280 +472,286 @@ public class MCLauncherActivity extends AppCompatActivity
 	}
 
 	public class GameRunnerTask extends AsyncTask<String, String, Throwable>
-	{
-		private boolean launchWithError = false;
+    {
+        private boolean launchWithError = false;
 
-		@Override
-		protected void onPreExecute() {
-			launchProgress.setMax(39);
-			statusIsLaunching(true);
-		}
+        @Override
+        protected void onPreExecute() {
+            launchProgress.setMax(1);
+            statusIsLaunching(true);
+        }
 
-		private JMinecraftVersionList.Version verInfo;
-		@Override
-		protected Throwable doInBackground(final String[] p1) {
-			Throwable throwable = null;
-			try {
-				final String downVName = "/" + p1[0] + "/" + p1[0];
+        private JMinecraftVersionList.Version verInfo;
+        @Override
+        protected Throwable doInBackground(final String[] p1) {
+            Throwable throwable = null;
+            try {
+                final String downVName = "/" + p1[0] + "/" + p1[0];
 
-				//Downloading libraries
-				String inputPath = Tools.versnDir + downVName + ".jar";
-				
-				try {
-					//com.pojavdx.dx.mod.Main.debug = true;
+                //Downloading libraries
+                String minecraftMainJar = Tools.versnDir + downVName + ".jar";
+                JAssets assets = null;
+                try {
+                    //com.pojavdx.dx.mod.Main.debug = true;
 
-					String verJsonDir = Tools.versnDir + downVName + ".json";
+                    String verJsonDir = Tools.versnDir + downVName + ".json";
 
-					verInfo = findVersion(p1[0]);
+                    verInfo = findVersion(p1[0]);
 
-					if (verInfo.url != null) {
-						publishProgress("5", "Downloading " + p1[0] + " configuration...");
-						Tools.downloadFile(
-							verInfo.url,
-							verJsonDir,
-							true
-						);
-					}
+                    if (verInfo.url != null && !new File(verJsonDir).exists()) {
+                        publishProgress("1", "Downloading " + p1[0] + " configuration...");
+                        Tools.downloadFile(
+                            verInfo.url,
+                            verJsonDir
+                        );
+                    }
 
-					zeroProgress();
+                    verInfo = Tools.getVersionInfo(p1[0]);
+                    assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
 
-					verInfo = Tools.getVersionInfo(p1[0]);
+                    File outLib;
+                    String libPathURL;
 
-					DependentLibrary[] libList = verInfo.libraries;
-					setMax(libList.length * 2 + 5);
+                    setMax(verInfo.libraries.length + 4 + assets.objects.size());
+                    for (final DependentLibrary libItem : verInfo.libraries) {
 
-					File outLib;
-					String libPathURL;
-		
-					for (final DependentLibrary libItem: libList) {
+                        if (// libItem.name.startsWith("com.google.code.gson:gson") ||
+                        // libItem.name.startsWith("com.mojang:realms") ||
+                            libItem.name.startsWith("net.java.jinput") ||
+                        // libItem.name.startsWith("net.minecraft.launchwrapper") ||
 
-						if (// libItem.name.startsWith("com.google.code.gson:gson") ||
-							// libItem.name.startsWith("com.mojang:realms") ||
-							libItem.name.startsWith("net.java.jinput") ||
-							// libItem.name.startsWith("net.minecraft.launchwrapper") ||
-                            
-                            // FIXME lib below!
-							// libItem.name.startsWith("optifine:launchwrapper-of") ||
-                            
-							// libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
-							libItem.name.startsWith("org.lwjgl")
-							// libItem.name.startsWith("tv.twitch")
-							) { // Black list
-							publishProgress("1", "Ignored " + libItem.name);
-							//Thread.sleep(100);
-						} else {
+                        // FIXME lib below!
+                        // libItem.name.startsWith("optifine:launchwrapper-of") ||
 
-							String[] libInfo = libItem.name.split(":");
-							String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
-							outLib = new File(Tools.libraries + "/" + libArtifact);
-							outLib.getParentFile().mkdirs();
+                        // libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
+                            libItem.name.startsWith("org.lwjgl")
+                        // libItem.name.startsWith("tv.twitch")
+                            ) { // Black list
+                            publishProgress("1", "Ignored " + libItem.name);
+                            //Thread.sleep(100);
+                        } else {
 
-							if (!outLib.exists()) {
-								publishProgress("1", getStr(R.string.mcl_launch_download_lib, libItem.name));
+                            String[] libInfo = libItem.name.split(":");
+                            String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
+                            outLib = new File(Tools.libraries + "/" + libArtifact);
+                            outLib.getParentFile().mkdirs();
 
-								boolean skipIfFailed = false;
+                            if (!outLib.exists()) {
+                                publishProgress("1", getString(R.string.mcl_launch_download_lib, libItem.name));
 
-								if (libItem.downloads == null || libItem.downloads.artifact == null) {
-									MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
-									artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url) + libArtifact;
-									libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
+                                boolean skipIfFailed = false;
 
-									skipIfFailed = true;
-								}
-								try {
-									libPathURL = libItem.downloads.artifact.url;
-									Tools.downloadFile(
-										libPathURL,
-										outLib.getAbsolutePath(),
-										true
-									);
-								} catch (Throwable th) {
-									if (!skipIfFailed) {
-										throw th;
-									} else {
-										th.printStackTrace();
+                                if (libItem.downloads == null || libItem.downloads.artifact == null) {
+                                    MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
+                                    artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url) + libArtifact;
+                                    libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
+
+                                    skipIfFailed = true;
+                                }
+                                try {
+                                    libPathURL = libItem.downloads.artifact.url;
+                                    Tools.downloadFile(
+                                        libPathURL,
+                                        outLib.getAbsolutePath()
+                                    );
+                                } catch (Throwable th) {
+                                    if (!skipIfFailed) {
+                                        throw th;
+                                    } else {
+                                        th.printStackTrace();
                                         publishProgress("0", th.getMessage());
-									}
-								}
-							}
-						}
-					}
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-					publishProgress("5", getStr(R.string.mcl_launch_download_client, p1[0]));
-					Tools.downloadFile(
-						verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
-						inputPath,
-						true
-					);
-				} catch (Throwable e) {
-					launchWithError = true;
-					throw e;
-				}
+                    publishProgress("1", getString(R.string.mcl_launch_download_client, p1[0]));
+                    File minecraftMainFile = new File(minecraftMainJar);
+                    if (!minecraftMainFile.exists() || minecraftMainFile.length() == 0l) {
+                        try {
+                            Tools.downloadFile(
+                                verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
+                                minecraftMainJar
+                            );
+                        } catch (Throwable th) {
+                            if (verInfo.inheritsFrom != null) {
+                                minecraftMainFile.delete();
+                                IOUtils.copy(new FileInputStream(new File(Tools.versnDir, verInfo.inheritsFrom + "/" + verInfo.inheritsFrom + ".jar")), new FileOutputStream(minecraftMainFile));
+                            } else {
+                                throw th;
+                            }
+                        }
+                    }
+                } catch (Throwable e) {
+                    launchWithError = true;
+                    throw e;
+                }
 
-				publishProgress("7", getStr(R.string.mcl_launch_cleancache));
-				// new File(inputPath).delete();
+                publishProgress("1", getString(R.string.mcl_launch_cleancache));
+                // new File(inputPath).delete();
 
-				for (File f : new File(Tools.versnDir).listFiles()) {
-					if(f.getName().endsWith(".part")) {
-						Log.d(Tools.APP_NAME, "Cleaning cache: " + f);
-						f.delete();
-					}
-				}
+                for (File f : new File(Tools.versnDir).listFiles()) {
+                    if(f.getName().endsWith(".part")) {
+                        Log.d(Tools.APP_NAME, "Cleaning cache: " + f);
+                        f.delete();
+                    }
+                }
 
-				isAssetsProcessing = true;
-				playButton.post(new Runnable(){
+                isAssetsProcessing = true;
+                playButton.post(new Runnable(){
 
-						@Override
-						public void run()
-						{
-							playButton.setText("Skip");
-							playButton.setEnabled(true);
-						}
-					});
-				publishProgress("9", getStr(R.string.mcl_launch_download_assets));
-				try {
-					downloadAssets(verInfo.assets, new File(Tools.ASSETS_PATH));
-				} catch (Exception e) {
+                        @Override
+                        public void run()
+                        {
+                            playButton.setText("Skip");
+                            playButton.setEnabled(true);
+                        }
+                    });
+                publishProgress("1", getString(R.string.mcl_launch_download_assets));
+                try {
+                    downloadAssets(assets, verInfo.assets, new File(Tools.ASSETS_PATH));
+                } catch (Exception e) {
                     e.printStackTrace();
-                    
-					// Ignore it
-					launchWithError = false;
-				} finally {
-					isAssetsProcessing = false;
-				}
-			} catch (Throwable th){
-				throwable = th;
-			} finally {
-				return throwable;
-			}
-		}
-		private int addProgress = 0; // 34
 
-		public void zeroProgress()
-		{
-			addProgress = 0;
-		}
+                    // Ignore it
+                    launchWithError = false;
+                } finally {
+                    isAssetsProcessing = false;
+                }
+            } catch (Throwable th){
+                throwable = th;
+            } finally {
+                return throwable;
+            }
+        }
+        private int addProgress = 0; // 34
 
-		public void setMax(final int value)
-		{
-			launchProgress.post(new Runnable(){
+        public void zeroProgress()
+        {
+            addProgress = 0;
+        }
 
-					@Override
-					public void run()
-					{
-						launchProgress.setMax(value);
-					}
-				});
-		}
+        public void setMax(final int value)
+        {
+            launchProgress.post(new Runnable(){
 
-		@Override
-		protected void onProgressUpdate(String... p1)
-		{
-			int addedProg = Integer.parseInt(p1[0]);
-			if (addedProg != -1) {
-				addProgress = addProgress + addedProg;
-				launchProgress.setProgress(addProgress);
+                    @Override
+                    public void run()
+                    {
+                        launchProgress.setMax(value);
+                    }
+                });
+        }
 
-				launchTextStatus.setText(p1[1]);
-			}
+        @Override
+        protected void onProgressUpdate(String... p1)
+        {
+            int addedProg = Integer.parseInt(p1[0]);
+            if (addedProg != -1) {
+                addProgress = addProgress + addedProg;
+                launchProgress.setProgress(addProgress);
 
-			if (p1.length < 3) consoleView.putLog(p1[1] + (p1.length < 3 ? "\n" : ""));
-		}
+                launchTextStatus.setText(p1[1]);
+            }
 
-		@Override
-		protected void onPostExecute(Throwable p1)
-		{
-			playButton.setText("Play");
-			playButton.setEnabled(true);
-			launchProgress.setMax(100);
-			launchProgress.setProgress(0);
-			statusIsLaunching(false);
-			if(p1 != null) {
-				p1.printStackTrace();
-				Tools.showError(MCLauncherActivity.this, p1);
-			}
-			if(!launchWithError) {
-				crashView.setLastCrash("");
+            if (p1.length < 3) consoleView.putLog(p1[1] + (p1.length < 3 ? "\n" : ""));
+        }
 
-				try {
-					/*
-					 List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
-					 jvmArgs.add("-Xms128M");
-					 jvmArgs.add("-Xmx1G");
-					 */
-					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
-					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
-					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-					mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-					if (LauncherPreferences.PREF_FREEFORM) {
-						DisplayMetrics dm = new DisplayMetrics();
-						getWindowManager().getDefaultDisplay().getMetrics(dm);
+        @Override
+        protected void onPostExecute(Throwable p1)
+        {
+            playButton.setText("Play");
+            playButton.setEnabled(true);
+            launchProgress.setMax(100);
+            launchProgress.setProgress(0);
+            statusIsLaunching(false);
+            if(p1 != null) {
+                p1.printStackTrace();
+                Tools.showError(MCLauncherActivity.this, p1);
+            }
+            if(!launchWithError) {
+                crashView.setLastCrash("");
 
-						ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
-						Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
-						options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
-						startActivity(mainIntent, options.toBundle());
-					} else {
-						startActivity(mainIntent);
-					}
-				}
-				catch (Throwable e) {
-					Tools.showError(MCLauncherActivity.this, e);
-				}
+                try {
+                    /*
+                     List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
+                     jvmArgs.add("-Xms128M");
+                     jvmArgs.add("-Xmx1G");
+                     */
+                    Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
+                    // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                    if (LauncherPreferences.PREF_FREEFORM) {
+                        DisplayMetrics dm = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-				/*
-				 FloatingIntent maini = new FloatingIntent(MCLauncherActivity.this, MainActivity.class);
-				 maini.startFloatingActivity();
-				 */
-			}
+                        ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
+                        Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
+                        options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
+                        startActivity(mainIntent, options.toBundle());
+                    } else {
+                        startActivity(mainIntent);
+                    }
+                }
+                catch (Throwable e) {
+                    Tools.showError(MCLauncherActivity.this, e);
+                }
 
-			mTask = null;
-		}
+                /*
+                 FloatingIntent maini = new FloatingIntent(PojavLauncherActivity.this, MainActivity.class);
+                 maini.startFloatingActivity();
+                 */
+            }
 
-		private Gson gsonss = gson;
-		public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
+            mTask = null;
+        }
 
-		public JAssets downloadIndex(String versionName, File output) throws Exception {
-			String versionJson = DownloadUtils.downloadString(verInfo.assetIndex != null ? verInfo.assetIndex.url : "http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json");
-			JAssets version = gsonss.fromJson(versionJson, JAssets.class);
-			output.getParentFile().mkdirs();
-			Tools.write(output.getAbsolutePath(), versionJson.getBytes(Charset.forName("UTF-8")));
-			return version;
-		}
-        
-		public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException, Throwable {
-			String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-			File outFile = new File(objectsDir, assetPath);
-			if (!outFile.exists()) {
-				DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
-			}
-		}
+        private Gson gsonss = gson;
+        public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
 
-		public void downloadAssets(String assetsVersion, File outputDir) throws IOException, Throwable {
-			File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
-			if (!hasDownloadedFile.exists()) {
-				System.out.println("Assets begin time: " + System.currentTimeMillis());
-				JAssets assets = downloadIndex(assetsVersion, new File(outputDir, "indexes/" + assetsVersion + ".json"));
-				Map<String, JAssetInfo> assetsObjects = assets.objects;
-				launchProgress.setMax(assetsObjects.size());
-				zeroProgress();
-				File objectsDir = new File(outputDir, "objects");
-				int downloadedSs = 0;
-				for (JAssetInfo asset : assetsObjects.values()) {
-					if (!isAssetsProcessing) {
-						return;
-					}
+        public JAssets downloadIndex(String versionName, File output) throws Exception {
+            String versionJson = DownloadUtils.downloadString(verInfo.assetIndex != null ? verInfo.assetIndex.url : "http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json");
+            JAssets version = gsonss.fromJson(versionJson, JAssets.class);
+            output.getParentFile().mkdirs();
+            Tools.write(output.getAbsolutePath(), versionJson.getBytes(Charset.forName("UTF-8")));
+            return version;
+        }
 
-					downloadAsset(asset, objectsDir);
-					publishProgress("1", getStr(R.string.mcl_launch_downloading, assetsObjects.keySet().toArray(new String[0])[downloadedSs]));
-					downloadedSs++;
-				}
-				hasDownloadedFile.getParentFile().mkdirs();
-				hasDownloadedFile.createNewFile();
-				System.out.println("Assets end time: " + System.currentTimeMillis());
-			}
-		}
-	}
+        public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException, Throwable {
+            String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
+            File outFile = new File(objectsDir, assetPath);
+            if (!outFile.exists()) {
+                DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
+            }
+        }
+
+        public void downloadAssets(JAssets assets, String assetsVersion, File outputDir) throws IOException, Throwable {
+            File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
+            if (!hasDownloadedFile.exists()) {
+                System.out.println("Assets begin time: " + System.currentTimeMillis());
+                Map<String, JAssetInfo> assetsObjects = assets.objects;
+                launchProgress.setMax(assetsObjects.size());
+                zeroProgress();
+                File objectsDir = new File(outputDir, "objects");
+                int downloadedSs = 0;
+                for (JAssetInfo asset : assetsObjects.values()) {
+                    if (!isAssetsProcessing) {
+                        return;
+                    }
+
+                    downloadAsset(asset, objectsDir);
+                    publishProgress("1", getString(R.string.mcl_launch_downloading, assetsObjects.keySet().toArray(new String[0])[downloadedSs]));
+                    downloadedSs++;
+                }
+                hasDownloadedFile.getParentFile().mkdirs();
+                hasDownloadedFile.createNewFile();
+                System.out.println("Assets end time: " + System.currentTimeMillis());
+            }
+        }
+    }
+    
 	public View findId(int id)
 	{
 		return findViewById(id);

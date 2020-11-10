@@ -508,7 +508,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                 final String downVName = "/" + p1[0] + "/" + p1[0];
 
                 //Downloading libraries
-                String inputPath = Tools.versnDir + downVName + ".jar";
+                String minecraftMainJar = Tools.versnDir + downVName + ".jar";
                 JAssets assets = null;
                 try {
                     //com.pojavdx.dx.mod.Main.debug = true;
@@ -517,12 +517,11 @@ public class PojavLauncherActivity extends AppCompatActivity
 
                     verInfo = findVersion(p1[0]);
 
-                    if (verInfo.url != null) {
+                    if (verInfo.url != null && !new File(verJsonDir).exists()) {
                         publishProgress("1", "Downloading " + p1[0] + " configuration...");
                         Tools.downloadFile(
                             verInfo.url,
-                            verJsonDir,
-                            true
+                            verJsonDir
                         );
                     }
 
@@ -572,8 +571,7 @@ public class PojavLauncherActivity extends AppCompatActivity
                                     libPathURL = libItem.downloads.artifact.url;
                                     Tools.downloadFile(
                                         libPathURL,
-                                        outLib.getAbsolutePath(),
-                                        true
+                                        outLib.getAbsolutePath()
                                     );
                                 } catch (Throwable th) {
                                     if (!skipIfFailed) {
@@ -588,11 +586,13 @@ public class PojavLauncherActivity extends AppCompatActivity
                     }
 
                     publishProgress("1", getString(R.string.mcl_launch_download_client, p1[0]));
-                    Tools.downloadFile(
-                        verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
-                        inputPath,
-                        true
-                    );
+                    File minecraftMainFile = new File(minecraftMainJar);
+                    if (!minecraftMainFile.exists() || minecraftMainFile.length() == 0l) {
+                        Tools.downloadFile(
+                            verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
+                            minecraftMainJar
+                        );
+                    }
                 } catch (Throwable e) {
                     launchWithError = true;
                     throw e;

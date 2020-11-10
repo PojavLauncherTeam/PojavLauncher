@@ -727,11 +727,9 @@ public final class Tools
         return buffer;
     }
 
-    public static void downloadFile(String urlInput, String nameOutput, boolean requireNonExist) throws Throwable {
-        File fileDDD = new File(nameOutput);
-        if(requireNonExist && !fileDDD.exists()) {
-            DownloadUtils.downloadFile(urlInput, fileDDD);
-        }
+    public static void downloadFile(String urlInput, String nameOutput) throws Throwable {
+        File file = new File(nameOutput);
+        DownloadUtils.downloadFile(urlInput, file);
     }
     public static class ZipTool
     {
