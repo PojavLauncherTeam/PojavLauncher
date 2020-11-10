@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Instalar Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Selecione um json de keymap</string>
+    <string name="alerttitle_installmod">Selecione um instalador de mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher fechou inesperadamente</string>
     <string name="error_checklog">Erro! Por favor, verifique o log abaixo: %s</string>
@@ -55,6 +56,8 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Notícias</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Console de desenvolvedor</string>
     <string name="mcl_tab_crash">Log de crash</string>
     <!-- MCLauncherActivity: Strings -->
