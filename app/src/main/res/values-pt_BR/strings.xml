@@ -141,8 +141,8 @@
     <string name="control_chat">Chat</string>
     <string name="control_debug">Depuração</string>
     <string name="control_zoom">Zoom (C)</string>
-    <string name="control_primary">Esq</string>
-    <string name="control_secondary">Dir</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
