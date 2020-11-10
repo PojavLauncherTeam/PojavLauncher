@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installeer Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Selecteer een keymap json</string>
+    <string name="alerttitle_installmod">Selecteer een mod installatie</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher is onverwacht gecrasht</string>
     <string name="error_checklog">Fout! Controleer het log hieronder: %s</string>
@@ -55,6 +56,8 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Nieuws</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Editie</string>
     <string name="mcl_tab_console">Ontwikkelings console</string>
     <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Strings -->
