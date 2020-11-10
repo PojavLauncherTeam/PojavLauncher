@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pro Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Spusť Minecraft Java Edition v tvém zařízení!</string>
+    <string name="app_motd">Spusť Minecraft: Java Edici v tvém zařízení!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">NÁPOVĚDA</string>
     <!-- Languages list part -->
@@ -20,7 +20,7 @@
     <string name="login_online_login_label">Přihlásit se</string>
     <string name="login_online_create_account">(Vytvořit nový účet?)</string>
     <string name="login_offline_switch">Offline účet?</string>
-    <string name="login_offline_label">Přihlásit se jako offline účet</string>
+    <string name="login_offline_label">Přihlásit se za offline účet</string>
     <string name="login_offline_alert_skip">Přeskočit</string>
     <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
@@ -38,8 +38,8 @@
     <string name="warning_remove_account">Tento účet bude odstraněn!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Vyber json klávesové mapy</string>
-    <string name="alerttitle_installmod">Vyberte mód pro přidání</string>
-    <string name="alerttitle_installoptifine">Vyber Optifine jar soubor</string>
+    <string name="alerttitle_installmod">Vyberte modifikaci pro přidání</string>
+    <string name="alerttitle_installoptifine">Vyber OptiFine jar soubor</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
     <string name="error_checklog">Chyba! Zkontrolujte záznam níže: %s</string>
@@ -50,9 +50,9 @@
     <string name="error_show_more">Zobrazit více</string>
     <string name="error_show_less">Zobrazit méně</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Oprávnění ke čtení/zápisu do úložiště je požadováno!</string>
+    <string name="toast_permission_denied">Je vyžadováno oprávnění pro čtení/zápis do úložiště!</string>
     <string name="toast_login_error">Něco se po přihlášení pokazilo. Prosím pošlete zpětnou vazbu k vývojáři.\nChyba: %s</string>
-    <string name="toast_optifine_success">Instalace proběhla úspěšně</string>
+    <string name="toast_optifine_success">Instalace byla úspěšná</string>
     <string name="toast_shiftmode">Režim tlačítka Shift (plížení) byl změněn na %s</string>
     <string name="toast_shiftmode_hold">Režim držení</string>
     <string name="toast_shiftmode_toggle">Režim přepínání</string>
@@ -74,7 +74,7 @@
     <string name="mcl_launch_patch_client">Záplatuji Minecraft %s</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
     <string name="mcl_options">Nastavení</string>
-    <string name="mcl_option_modmgr">Manažer modů (bez funkce)</string>
+    <string name="mcl_option_modmgr">Manažer modifikací (bez funkce)</string>
     <string name="mcl_option_optifineinstall">Nainstalovat OptiFine</string>
     <string name="mcl_option_checkupdate">Zkontrolovat aktualizace</string>
     <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
@@ -82,7 +82,7 @@
     <string name="mcl_option_about">O aplikaci</string>
     <string name="mcl_setting_title_setmaxdxref">Nastavit maximální DX reference</string>
     <string name="mcl_setting_subtitle_setmaxdxref">Zvyšujte Pokud dojde k chybě během převodu: Příliš mnoho ... odkazů. Můžete zkusit multiplikační možnost. Doporučeno: 4096 nebo 8192.</string>
-    <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Freeform</string>
+    <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Volného okna</string>
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
@@ -156,7 +156,7 @@
     <string name="control_mouseoff">Myš: vypnuta</string>
     <string name="control_mouseon">Myš: zapnuta </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Vynuceně zavřít</string>
+    <string name="control_forceclose">Vynutit zavření</string>
     <string name="control_viewout">Záznam výstupu</string>
     <string name="control_adebug">PointerCapture Ladění</string>
     <string name="control_customkey">Poslat vlastní klávesu</string>
@@ -166,7 +166,7 @@
     <string name="customctrl_hidden">Skryté</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_title_selectctrl">Vybrat json výchozího ovládání</string>
-    <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
+    <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Aktualizovat konzoli</string>
     <string name="main_options">Nastavení</string>
