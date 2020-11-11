@@ -18,15 +18,15 @@ LOCAL_PATH:= $(call my-dir)
 
 libbacktrace_common_cflags := \
 	-Wall \
-	-Werror \
-	-I$(HERE_PATH)/crash_dump/libunwind/include
+	-Werror
 
 libbacktrace_common_conlyflags := \
 	-std=gnu99 \
 
 libbacktrace_common_cppflags := \
 	-std=gnu++11 \
-	-I external/libunwind/include/tdep \
+	-I$(HERE_PATH)/crash_dump/libbase/include \
+	-I$(HERE_PATH)/crash_dump/libunwind/include/tdep
 
 # The latest clang (r230699) does not allow SP/PC to be declared in inline asm lists.
 libbacktrace_common_clang_cflags += \

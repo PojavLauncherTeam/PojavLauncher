@@ -25,7 +25,8 @@ LOCAL_SRC_FILES_arm64  := arm64/machine.cpp
 LOCAL_SRC_FILES_x86    := x86/machine.cpp
 LOCAL_SRC_FILES_x86_64 := x86_64/machine.cpp
 
-LOCAL_CPPFLAGS := $(common_cppflags)
+LOCAL_CPPFLAGS := $(common_cppflags) \
+	-I$(HERE_PATH)/crash_dump/libbase/include
 
 LOCAL_INIT_RC_32 := debuggerd.rc
 LOCAL_INIT_RC_64 := debuggerd64.rc
@@ -58,7 +59,9 @@ LOCAL_SRC_FILES_x86    := x86/crashglue.S
 LOCAL_SRC_FILES_x86_64 := x86_64/crashglue.S
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS += -fstack-protector-all -Werror -Wno-free-nonheap-object -Wno-date-time
+LOCAL_CFLAGS += -fstack-protector-all -Werror -Wno-free-nonheap-object -Wno-date-time \
+    -I$(HERE_PATH)/crash_dump/libbase/include
+
 #LOCAL_FORCE_STATIC_EXECUTABLE := true
 LOCAL_SHARED_LIBRARIES := libcutils liblog libc
 
