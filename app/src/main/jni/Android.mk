@@ -1,9 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 HERE_PATH := $(LOCAL_PATH)
 
-# include $(HERE_PATH)/crash_dump/libunwind/Android.mk
-# include $(HERE_PATH)/crash_dump/libbacktrace/Android.mk
-# include $(HERE_PATH)/crash_dump/debuggerd/Android.mk
+include $(call all-subdir-makefiles)
 
 LOCAL_PATH := $(HERE_PATH)
 include $(CLEAR_VARS)
