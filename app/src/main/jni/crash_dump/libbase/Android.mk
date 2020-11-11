@@ -38,21 +38,21 @@ libbase_darwin_cppflags := \
 # Device
 # ------------------------------------------------------------------------------
 include $(CLEAR_VARS)
-LOCAL_MODULE := libcrashdumpbase
+LOCAL_MODULE := libcrashdumpbase_static
 LOCAL_CLANG := true
 LOCAL_SRC_FILES := $(libbase_src_files) $(libbase_linux_src_files)
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 LOCAL_CPPFLAGS := $(libbase_cppflags) $(libbase_linux_cppflags)
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
-LOCAL_STATIC_LIBRARIES := liblog
+LOCAL_LDLIBS := -llog
 LOCAL_MULTILIB := both
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libcrashdumpbase
 LOCAL_CLANG := true
-LOCAL_WHOLE_STATIC_LIBRARIES := libcrashdumpbase
-LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_WHOLE_STATIC_LIBRARIES := libcrashdumpbase_static
+LOCAL_LDLIBS := -llog
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
 LOCAL_MULTILIB := both
 include $(BUILD_SHARED_LIBRARY)
