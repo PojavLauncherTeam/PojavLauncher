@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 HERE_PATH := $(LOCAL_PATH)
 
-# include $(HERE_PATH)/crash_dump/libunwind/Android.mk
+include $(HERE_PATH)/crash_dump/libbase/Android.mk
 include $(HERE_PATH)/crash_dump/libbacktrace/Android.mk
 include $(HERE_PATH)/crash_dump/debuggerd/Android.mk
 
@@ -27,7 +27,7 @@ include $(BUILD_SHARED_LIBRARY)
 # LOCAL_SRC_FILES := thread_helper.cpp
 # include $(BUILD_SHARED_LIBRARY)
 
-# libawt_xawt without X11
+# libawt_xawt without X11, used to get Caciocavallo working
 LOCAL_PATH := $(HERE_PATH)/awt_xawt
 include $(CLEAR_VARS)
 LOCAL_MODULE := awt_xawt

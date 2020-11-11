@@ -37,7 +37,7 @@ endif
 LOCAL_LDLIBS := -llog
 LOCAL_SHARED_LIBRARIES := \
     libbacktrace \
-    libbase
+    libcrashdumpbase
 
 LOCAL_CLANG := true
 

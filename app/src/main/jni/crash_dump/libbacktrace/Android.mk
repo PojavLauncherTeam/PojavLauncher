@@ -56,10 +56,8 @@ libbacktrace_src_files := \
 	UnwindMap.cpp \
 	UnwindPtrace.cpp \
 
-libbacktrace_shared_ldlibs := -llog -lunwind
-# -lbase
-
-# libbacktrace_shared_libraries := libunwind
+libbacktrace_shared_ldlibs := -llog
+libbacktrace_shared_libraries := libunwind libcrashdumpbase
 
 module := libbacktrace
 module_tag := optional
