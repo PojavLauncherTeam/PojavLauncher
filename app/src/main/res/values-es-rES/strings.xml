@@ -74,6 +74,19 @@
     <string name="mcl_option_modmgr">Gestor de mods (no funciona aún)</string>
     <string name="mcl_option_modinstall">Instalar mod (Forge, LabyMod, Fabric,...)</string>
     <string name="mcl_option_modinstallwitharg">Instalar mod (con parámetros personalizados)</string>
+    <string name="mcl_option_checkupdate">Comprobar actualizaciónes</string>
+    <string name="mcl_option_customcontrol">Personalizar controles</string>
+    <string name="mcl_option_settings">Configuración</string>
+    <string name="mcl_option_about">Sobre nosotros</string>
+    <string name="mcl_setting_title_uninstalljre">Desinstalar Java runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Reiniciar el lanzador] Esto te permitirá reinstalar Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Iniciar Minecraft en modo flotante</string>
+    <string name="mcl_setting_subtitle_freeform">Iniciar Minecraft en una ventana flotante. Necesario Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
+    <string name="mcl_setting_title_controlsize">Tamaño de los botones</string>
+    <string name="mcl_setting_title_javaargs">JRE Argumentos de Lanzado</string>
+    <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
+    <string name="mcl_setting_category_general">Configuración General</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
