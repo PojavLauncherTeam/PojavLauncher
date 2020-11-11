@@ -86,7 +86,7 @@
 	
 	<string name="mcl_options">Options</string>
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
-	<string name="mcl_option_modinstall">Install mod (Forge, LabyMod, Fabric,...)</string>
+	<string name="mcl_option_modinstall">Launch a mod installer (Forge, LabyMod, Fabric, etc...)</string>
 	<string name="mcl_option_modinstallwitharg">Install mod (with custom arguments)</string>
 	<string name="mcl_option_checkupdate">Check for update</string>
 	<string name="mcl_option_customcontrol">Custom controls</string>

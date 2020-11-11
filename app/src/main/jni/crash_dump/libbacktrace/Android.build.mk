@@ -26,11 +26,11 @@ ifneq ($(build_target),$(filter $(build_target),SHARED_LIBRARY STATIC_LIBRARY))
 endif
 endif
 
-ifeq ($(build_type),target)
-  include $(LLVM_DEVICE_BUILD_MK)
-else
-  include $(LLVM_HOST_BUILD_MK)
-endif
+# ifeq ($(build_type),target)
+#   include $(LLVM_DEVICE_BUILD_MK)
+# else
+#   include $(LLVM_HOST_BUILD_MK)
+# endif
 
 LOCAL_ADDITIONAL_DEPENDENCIES += \
     $(LOCAL_PATH)/Android.mk \

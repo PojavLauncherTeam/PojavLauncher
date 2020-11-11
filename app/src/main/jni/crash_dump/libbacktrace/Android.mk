@@ -19,6 +19,7 @@ LOCAL_PATH:= $(call my-dir)
 libbacktrace_common_cflags := \
 	-Wall \
 	-Werror \
+	-I$(HERE_PATH)/crash_dump/libunwind/include
 
 libbacktrace_common_conlyflags := \
 	-std=gnu99 \
@@ -38,8 +39,8 @@ build_host := true
 endif
 endif
 
-LLVM_ROOT_PATH := external/llvm
-include $(LLVM_ROOT_PATH)/llvm.mk
+# LLVM_ROOT_PATH := external/llvm
+# include $(LLVM_ROOT_PATH)/llvm.mk
 
 #-------------------------------------------------------------------------
 # The libbacktrace library.
@@ -55,13 +56,10 @@ libbacktrace_src_files := \
 	UnwindMap.cpp \
 	UnwindPtrace.cpp \
 
-libbacktrace_shared_libraries := \
-	libbase \
-	liblog \
-	libunwind \
+libbacktrace_shared_ldlibs := -llog -lunwind
+# -lbase
 
-libbacktrace_static_libraries := \
-	libcutils
+# libbacktrace_shared_libraries := libunwind
 
 module := libbacktrace
 module_tag := optional
@@ -71,10 +69,11 @@ include $(LOCAL_PATH)/Android.build.mk
 build_type := host
 libbacktrace_multilib := both
 include $(LOCAL_PATH)/Android.build.mk
-libbacktrace_static_libraries := \
-	libbase \
-	liblog \
-	libunwind \
+libbacktrace_static_ldlibs := -llog -lunwind
+# -lbase
+
+# libbacktrace_static_libraries := libunwind
+
 
 build_target := STATIC_LIBRARY
 include $(LOCAL_PATH)/Android.build.mk
@@ -120,111 +119,8 @@ module := libbacktrace_offline
 build_type := target
 build_target := STATIC_LIBRARY
 libbacktrace_offline_multilib := both
-include $(LOCAL_PATH)/Android.build.mk
+# i don't know if this lib is required or not
+# include $(LOCAL_PATH)/Android.build.mk
 build_type := host
-include $(LOCAL_PATH)/Android.build.mk
+# include $(LOCAL_PATH)/Android.build.mk
 
-#-------------------------------------------------------------------------
-# The libbacktrace_test library needed by backtrace_test.
-#-------------------------------------------------------------------------
-libbacktrace_test_cflags := \
-	-O0 \
-
-libbacktrace_test_src_files := \
-	backtrace_testlib.c \
-
-libbacktrace_test_strip_module := false
-
-module := libbacktrace_test
-module_tag := debug
-build_type := target
-build_target := SHARED_LIBRARY
-libbacktrace_test_multilib := both
-include $(LOCAL_PATH)/Android.build.mk
-build_type := host
-include $(LOCAL_PATH)/Android.build.mk
-
-#-------------------------------------------------------------------------
-# The backtrace_test executable.
-#-------------------------------------------------------------------------
-backtrace_test_cflags := \
-	-fno-builtin \
-	-O0 \
-	-g \
-
-backtrace_test_cflags_target := \
-	-DENABLE_PSS_TESTS \
-
-backtrace_test_src_files := \
-	backtrace_offline_test.cpp \
-	backtrace_test.cpp \
-	GetPss.cpp \
-	thread_utils.c \
-
-backtrace_test_ldlibs_host := \
-	-lpthread \
-	-lrt \
-
-backtrace_test_shared_libraries := \
-	libbacktrace_test \
-	libbacktrace \
-	libbase \
-	libcutils \
-	liblog \
-	libunwind \
-
-backtrace_test_shared_libraries_target += \
-	libdl \
-	libutils \
-	libLLVM \
-
-backtrace_test_static_libraries := \
-	libbacktrace_offline \
-
-backtrace_test_static_libraries_target := \
-	libziparchive \
-	libz \
-
-backtrace_test_static_libraries_host := \
-	libziparchive-host \
-	libz \
-	libutils \
-	libLLVMObject \
-	libLLVMBitReader \
-	libLLVMMC \
-	libLLVMMCParser \
-	libLLVMCore \
-	libLLVMSupport \
-
-backtrace_test_ldlibs_host += \
-	-ldl \
-
-backtrace_test_strip_module := false
-
-module := backtrace_test
-module_tag := debug
-build_type := target
-build_target := NATIVE_TEST
-backtrace_test_multilib := both
-include $(LOCAL_PATH)/Android.build.mk
-build_type := host
-include $(LOCAL_PATH)/Android.build.mk
-
-#----------------------------------------------------------------------------
-# Special truncated libbacktrace library for mac.
-#----------------------------------------------------------------------------
-ifeq ($(HOST_OS),darwin)
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := libbacktrace
-LOCAL_MODULE_TAGS := optional
-
-LOCAL_SRC_FILES := \
-	BacktraceMap.cpp \
-
-LOCAL_MULTILIB := both
-
-include $(BUILD_HOST_SHARED_LIBRARY)
-
-endif # HOST_OS-darwin
