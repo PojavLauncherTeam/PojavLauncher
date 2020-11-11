@@ -38,9 +38,9 @@ ifeq ($(LOCAL_MULTILIB),both)
 endif
 endif
 
-# LOCAL_ADDITIONAL_DEPENDENCIES := \
-#     $(LOCAL_PATH)/Android.mk \
-#     $(LOCAL_PATH)/Android.build.mk \
+LOCAL_ADDITIONAL_DEPENDENCIES := \
+    $(LOCAL_PATH)/Android.mk \
+    $(LOCAL_PATH)/Android.build.mk \
 
 LOCAL_CFLAGS += \
     $(libunwind_common_cflags) \
