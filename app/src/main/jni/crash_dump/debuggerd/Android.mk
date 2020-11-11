@@ -42,10 +42,10 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_CLANG := true
 
-LOCAL_MODULE := debuggerd
+LOCAL_MODULE := crashdump
 LOCAL_MULTILIB := both
 
-include $(BUILD_EXECUTABLE)
+include $(BUILD_SHARED_LIBRARY)
 
 
 

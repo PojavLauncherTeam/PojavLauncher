@@ -177,26 +177,32 @@ public class AndroidLWJGLKeycode {
 			}
 		}
 		
+        // todo replace to mods param
+        int mods = 0;
 		if (keyEvent.isAltPressed()) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT, keyEvent.getModifiers(), isDown);
-		} if (keyEvent.isCtrlPressed()) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL, keyEvent.getModifiers(), isDown);
+			mods &= LWJGLGLFWKeycode.GLFW_MOD_ALT;
+		} if (keyEvent.isCapsLockOn()) {
+            mods &= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
+        } if (keyEvent.isCtrlPressed()) {
+			mods &= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
 		} if (keyEvent.isFunctionPressed()) {
-			// mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_FUNCTION, keyEvent.getModifiers(), isDown);
-		} if (keyEvent.isShiftPressed()) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, keyEvent.getModifiers(), isDown);
+			// mods &= LWJGLGLFWKeycode.GLFW_MOD_FUC
+		} if (keyEvent.isNumLockOn()) {
+            mods &= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
+        } if (keyEvent.isShiftPressed()) {
+			mods &= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
 		}
 		
 		try {
 			if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing()) {
-				mainActivity.sendKeyPress(0, (char) keyEvent.getUnicodeChar(), keyEvent.getModifiers(), isDown);
+				mainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), mods, isDown);
 			}
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
 
 		if (isBackspaceAfterChar && (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
-			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, keyEvent.getModifiers(), isDown);
+			mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, 0, isDown);
 		}
     }
 

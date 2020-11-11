@@ -51,7 +51,7 @@ public class YggdrasilAuthenticator {
                 }
                 String outString = new String(bos.toByteArray(), Charset.forName("UTF-8"));
                 if (statusCode == 200){
-					Log.i("Result", "Login successful");
+					Log.i("Result", "Task " + endpoint + " successful");
 					
                     return this.gson.fromJson(outString, responseClass);
                 }
@@ -85,6 +85,11 @@ public class YggdrasilAuthenticator {
     public RefreshResponse refresh(String authToken, UUID clientId) throws IOException, Throwable {
         return (RefreshResponse) makeRequest("refresh", new RefreshRequest(authToken, clientId), RefreshResponse.class);
     }
+    
+    public int validate(String authToken) throws Throwable {
+        return (Integer) makeRequest("validate", new RefreshRequest(authToken, null), null);
+    }
+    
 	private void pipe(InputStream is, OutputStream out, byte[] buf) throws IOException {
         while (true) {
             int amt = is.read(buf);
