@@ -54,6 +54,7 @@
     <string name="toast_login_error">Etwas ist nach dem Login schiefgelaufen. Bitte Feedback an die Entwicker.\n Fehler: %s</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
     <string name="toast_shiftmode">Ducken (schleichen) Knopf Modus zu %s geändert</string>
+    <string name="toast_shiftmode_hold">Halten</string>
     <string name="toast_shiftmode_toggle">Drücke um den Modus ein oder auszuschalten</string>
     <!--
 	<string name="toast_3">Exit</string>
@@ -152,10 +153,12 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Schließen erzwingen</string>
     <string name="control_viewout">Log Ausgabe</string>
+    <string name="customctrl_addbutton">Taste hinzufügen</string>
     <!-- Update part (unused now) -->
     <string name="main_options">Einstellungen</string>
     <string name="main_play">Spielen</string>
     <string name="main_welcome">Wilkommen,</string>
     <string name="main_switchuser">Benutzer wechseln</string>
     <string name="main_version_">Version:</string>
+    <string name="main_nolog">Kein Protokoll.</string>
 </resources>
