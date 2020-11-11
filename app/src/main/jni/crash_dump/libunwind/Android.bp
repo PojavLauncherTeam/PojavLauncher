@@ -1,0 +1,486 @@
+//
+// Copyright (C) 2014 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+// Set to true to enable a debug build of the libraries.
+// To control what is logged, set the environment variable UNW_DEBUG_LEVEL=x,
+// where x controls the verbosity (from 1 to 20).
+libunwind_debug = ["false"]
+
+libunwind_common_cppflags = [
+    "-Wno-old-style-cast",
+]
+
+libunwind_common_cflags = [
+    "-Wno-unused-parameter",
+    "-Werror",
+]
+
+// gcc 4.8 appears to be overeager declaring that a variable is uninitialized,
+// under certain circumstances. Turn off this warning only for target so that
+// coverage is still present for the host code. When the entire build system
+// is switched to 4.9, then this can be removed.
+libunwind_common_cflags_target = ["-Wno-maybe-uninitialized"]
+
+// src/mi/backtrace.c is misdetected as a bogus header guard by clang 3.5
+// src/x86_64/Gstash_frame.c has unnecessary calls to labs.
+libunwind_common_clang_cflags = [
+    "-Wno-header-guard",
+    "-Wno-absolute-value",
+    // The latest clang (r230699) does not allow SP/PC to be declared in inline asm lists.
+    "-Wno-inline-asm",
+]
+
+libunwind_common_cflags += [
+    "-DHAVE_CONFIG_H",
+    "-D_GNU_SOURCE",
+    "-DNDEBUG",
+]
+
+libunwind_common_debug_cflags = [
+    "-UNDEBUG",
+    "-DDEBUG",
+    "-U_FORTIFY_SOURCE",
+]
+
+libunwind_common_c_local_includes = [
+    "src",
+    "include",
+]
+
+libunwind_common_arch_includes = {
+    arm: {
+        local_include_dirs: ["include/tdep-arm"],
+    },
+    arm64: {
+        local_include_dirs: ["include/tdep-aarch64"],
+    },
+    mips: {
+        local_include_dirs: ["include/tdep-mips"],
+    },
+    mips64: {
+        local_include_dirs: ["include/tdep-mips"],
+    },
+    x86: {
+        local_include_dirs: ["include/tdep-x86"],
+    },
+    x86_64: {
+        local_include_dirs: ["include/tdep-x86_64"],
+    },
+}
+
+//-----------------------------------------------------------------------
+// libunwind shared and static library
+//-----------------------------------------------------------------------
+
+cc_library {
+    name: "libunwind",
+    host_supported: true,
+    srcs: [
+        "src/mi/init.c",
+        "src/mi/flush_cache.c",
+        "src/mi/mempool.c",
+        "src/mi/strerror.c",
+        "src/mi/backtrace.c",
+        "src/mi/dyn-cancel.c",
+        "src/mi/dyn-info-list.c",
+        "src/mi/dyn-register.c",
+        "src/mi/map.c",
+        "src/mi/Lmap.c",
+        "src/mi/Ldyn-extract.c",
+        "src/mi/Lfind_dynamic_proc_info.c",
+        "src/mi/Lget_proc_info_by_ip.c",
+        "src/mi/Lget_proc_name.c",
+        "src/mi/Lput_dynamic_unwind_info.c",
+        "src/mi/Ldestroy_addr_space.c",
+        "src/mi/Lget_reg.c",
+        "src/mi/Lset_reg.c",
+        "src/mi/Lget_fpreg.c",
+        "src/mi/Lset_fpreg.c",
+        "src/mi/Lset_caching_policy.c",
+        "src/mi/Gdyn-extract.c",
+        "src/mi/Gdyn-remote.c",
+        "src/mi/Gfind_dynamic_proc_info.c",
+        "src/mi/Gget_accessors.c",
+        "src/mi/Gget_proc_info_by_ip.c",
+        "src/mi/Gget_proc_name.c",
+        "src/mi/Gput_dynamic_unwind_info.c",
+        "src/mi/Gdestroy_addr_space.c",
+        "src/mi/Gget_reg.c",
+        "src/mi/Gset_reg.c",
+        "src/mi/Gget_fpreg.c",
+        "src/mi/Gset_fpreg.c",
+        "src/mi/Gset_caching_policy.c",
+        "src/dwarf/Lexpr.c",
+        "src/dwarf/Lfde.c",
+        "src/dwarf/Lparser.c",
+        "src/dwarf/Lpe.c",
+        "src/dwarf/Lstep_dwarf.c",
+        "src/dwarf/Lfind_proc_info-lsb.c",
+        "src/dwarf/Lfind_unwind_table.c",
+        "src/dwarf/Gexpr.c",
+        "src/dwarf/Gfde.c",
+        "src/dwarf/Gfind_proc_info-lsb.c",
+        "src/dwarf/Gfind_unwind_table.c",
+        "src/dwarf/Gparser.c",
+        "src/dwarf/Gpe.c",
+        "src/dwarf/Gstep_dwarf.c",
+        "src/dwarf/global.c",
+        "src/os-common.c",
+        "src/os-linux.c",
+        "src/Los-common.c",
+
+        // ptrace files for remote unwinding.
+        "src/ptrace/_UPT_accessors.c",
+        "src/ptrace/_UPT_access_fpreg.c",
+        "src/ptrace/_UPT_access_mem.c",
+        "src/ptrace/_UPT_access_reg.c",
+        "src/ptrace/_UPT_create.c",
+        "src/ptrace/_UPT_destroy.c",
+        "src/ptrace/_UPT_find_proc_info.c",
+        "src/ptrace/_UPT_get_dyn_info_list_addr.c",
+        "src/ptrace/_UPT_put_unwind_info.c",
+        "src/ptrace/_UPT_get_proc_name.c",
+        "src/ptrace/_UPT_reg_offset.c",
+        "src/ptrace/_UPT_resume.c",
+     ],
+
+    cflags: libunwind_common_cflags,
+    clang_cflags: libunwind_common_clang_cflags,
+    local_include_dirs: libunwind_common_c_local_includes,
+
+    arch: {
+        arm: {
+            srcs: [
+                "src/arm/is_fpreg.c",
+                "src/arm/regname.c",
+                "src/arm/Gcreate_addr_space.c",
+                "src/arm/Gget_proc_info.c",
+                "src/arm/Gget_save_loc.c",
+                "src/arm/Gglobal.c",
+                "src/arm/Ginit.c",
+                "src/arm/Ginit_local.c",
+                "src/arm/Ginit_remote.c",
+                "src/arm/Gregs.c",
+                "src/arm/Gresume.c",
+                "src/arm/Gstep.c",
+                "src/arm/Lcreate_addr_space.c",
+                "src/arm/Lget_proc_info.c",
+                "src/arm/Lget_save_loc.c",
+                "src/arm/Lglobal.c",
+                "src/arm/Linit.c",
+                "src/arm/Linit_local.c",
+                "src/arm/Linit_remote.c",
+                "src/arm/Lregs.c",
+                "src/arm/Lresume.c",
+                "src/arm/Lstep.c",
+
+                "src/arm/getcontext.S",
+                "src/arm/Gis_signal_frame.c",
+                "src/arm/Gex_tables.c",
+                "src/arm/Lis_signal_frame.c",
+                "src/arm/Lex_tables.c",
+            ],
+        },
+        arm64: {
+            srcs: [
+                "src/aarch64/is_fpreg.c",
+                "src/aarch64/regname.c",
+                "src/aarch64/Gcreate_addr_space.c",
+                "src/aarch64/Gget_proc_info.c",
+                "src/aarch64/Gget_save_loc.c",
+                "src/aarch64/Gglobal.c",
+                "src/aarch64/Ginit.c",
+                "src/aarch64/Ginit_local.c",
+                "src/aarch64/Ginit_remote.c",
+                "src/aarch64/Gregs.c",
+                "src/aarch64/Gresume.c",
+                "src/aarch64/Gstep.c",
+                "src/aarch64/Lcreate_addr_space.c",
+                "src/aarch64/Lget_proc_info.c",
+                "src/aarch64/Lget_save_loc.c",
+                "src/aarch64/Lglobal.c",
+                "src/aarch64/Linit.c",
+                "src/aarch64/Linit_local.c",
+                "src/aarch64/Linit_remote.c",
+                "src/aarch64/Lregs.c",
+                "src/aarch64/Lresume.c",
+                "src/aarch64/Lstep.c",
+
+                "src/aarch64/Gis_signal_frame.c",
+                "src/aarch64/Lis_signal_frame.c",
+            ],
+        },
+        mips: {
+            srcs: [
+                "src/mips/is_fpreg.c",
+                "src/mips/regname.c",
+                "src/mips/Gcreate_addr_space.c",
+                "src/mips/Gget_proc_info.c",
+                "src/mips/Gget_save_loc.c",
+                "src/mips/Gglobal.c",
+                "src/mips/Ginit.c",
+                "src/mips/Ginit_local.c",
+                "src/mips/Ginit_remote.c",
+                "src/mips/Gregs.c",
+                "src/mips/Gresume.c",
+                "src/mips/Gstep.c",
+                "src/mips/Lcreate_addr_space.c",
+                "src/mips/Lget_proc_info.c",
+                "src/mips/Lget_save_loc.c",
+                "src/mips/Lglobal.c",
+                "src/mips/Linit.c",
+                "src/mips/Linit_local.c",
+                "src/mips/Linit_remote.c",
+                "src/mips/Lregs.c",
+                "src/mips/Lresume.c",
+                "src/mips/Lstep.c",
+
+                "src/mips/getcontext-android.S",
+                "src/mips/Gis_signal_frame.c",
+                "src/mips/Lis_signal_frame.c",
+            ],
+        },
+        // mips and mips64 use the same sources but define _MIP_SIM differently
+        // to change the behavior.
+        //   mips uses o32 abi (_MIPS_SIM == _ABIO32).
+        //   mips64 uses n64 abi (_MIPS_SIM == _ABI64).
+        mips64: {
+            srcs: [
+                "src/mips/is_fpreg.c",
+                "src/mips/regname.c",
+                "src/mips/Gcreate_addr_space.c",
+                "src/mips/Gget_proc_info.c",
+                "src/mips/Gget_save_loc.c",
+                "src/mips/Gglobal.c",
+                "src/mips/Ginit.c",
+                "src/mips/Ginit_local.c",
+                "src/mips/Ginit_remote.c",
+                "src/mips/Gregs.c",
+                "src/mips/Gresume.c",
+                "src/mips/Gstep.c",
+                "src/mips/Lcreate_addr_space.c",
+                "src/mips/Lget_proc_info.c",
+                "src/mips/Lget_save_loc.c",
+                "src/mips/Lglobal.c",
+                "src/mips/Linit.c",
+                "src/mips/Linit_local.c",
+                "src/mips/Linit_remote.c",
+                "src/mips/Lregs.c",
+                "src/mips/Lresume.c",
+                "src/mips/Lstep.c",
+
+                "src/mips/getcontext-android.S",
+                "src/mips/Gis_signal_frame.c",
+                "src/mips/Lis_signal_frame.c",
+            ],
+        },
+        x86: {
+            srcs: [
+                "src/x86/is_fpreg.c",
+                "src/x86/regname.c",
+                "src/x86/Gcreate_addr_space.c",
+                "src/x86/Gget_proc_info.c",
+                "src/x86/Gget_save_loc.c",
+                "src/x86/Gglobal.c",
+                "src/x86/Ginit.c",
+                "src/x86/Ginit_local.c",
+                "src/x86/Ginit_remote.c",
+                "src/x86/Gregs.c",
+                "src/x86/Gresume.c",
+                "src/x86/Gstep.c",
+                "src/x86/Lcreate_addr_space.c",
+                "src/x86/Lget_proc_info.c",
+                "src/x86/Lget_save_loc.c",
+                "src/x86/Lglobal.c",
+                "src/x86/Linit.c",
+                "src/x86/Linit_local.c",
+                "src/x86/Linit_remote.c",
+                "src/x86/Lregs.c",
+                "src/x86/Lresume.c",
+                "src/x86/Lstep.c",
+
+                "src/x86/getcontext-linux.S",
+                "src/x86/Gos-linux.c",
+                "src/x86/Los-linux.c",
+            ],
+        },
+        x86_64: {
+            srcs: [
+                "src/x86_64/is_fpreg.c",
+                "src/x86_64/regname.c",
+                "src/x86_64/Gcreate_addr_space.c",
+                "src/x86_64/Gget_proc_info.c",
+                "src/x86_64/Gget_save_loc.c",
+                "src/x86_64/Gglobal.c",
+                "src/x86_64/Ginit.c",
+                "src/x86_64/Ginit_local.c",
+                "src/x86_64/Ginit_remote.c",
+                "src/x86_64/Gregs.c",
+                "src/x86_64/Gresume.c",
+                "src/x86_64/Gstep.c",
+                "src/x86_64/Lcreate_addr_space.c",
+                "src/x86_64/Lget_proc_info.c",
+                "src/x86_64/Lget_save_loc.c",
+                "src/x86_64/Lglobal.c",
+                "src/x86_64/Linit.c",
+                "src/x86_64/Linit_local.c",
+                "src/x86_64/Linit_remote.c",
+                "src/x86_64/Lregs.c",
+                "src/x86_64/Lresume.c",
+                "src/x86_64/Lstep.c",
+
+                "src/x86_64/getcontext.S",
+                "src/x86_64/Gstash_frame.c",
+                "src/x86_64/Gtrace.c",
+                "src/x86_64/Gos-linux.c",
+                "src/x86_64/Lstash_frame.c",
+                "src/x86_64/Ltrace.c",
+                "src/x86_64/Los-linux.c",
+                "src/x86_64/setcontext.S",
+            ],
+        },
+    } + libunwind_common_arch_includes,
+
+    multilib: {
+        lib32: {
+            srcs: ["src/elf32.c"],
+        },
+        lib64: {
+            srcs: ["src/elf64.c"],
+        },
+    },
+
+    target: {
+        android: {
+            shared_libs: ["libdl"],
+            cflags: libunwind_common_cflags_target,
+        },
+        host: {
+            ldflags: ["-nostdlib"],
+            host_ldlibs: [
+                "-lc",
+                "-lpthread",
+            ],
+        },
+        darwin: {
+            enabled: false,
+        },
+    },
+
+    export_include_dirs: ["include"],
+    stl: "none",
+
+    shared_libs: ["liblzma"],
+
+    /*debug: {
+    shared_libs: ["liblog"],
+    cflags: libunwind_common_debug_cflags,
+    },*/
+}
+
+//-----------------------------------------------------------------------
+// libunwindbacktrace static library
+//-----------------------------------------------------------------------
+cc_library_static {
+    name: "libunwindbacktrace",
+    host_supported: true,
+    srcs: [
+        "src/unwind/BacktraceWrapper.c",
+        "src/unwind/DeleteException.c",
+        "src/unwind/FindEnclosingFunction.c",
+        "src/unwind/ForcedUnwind.c",
+        "src/unwind/GetBSP.c",
+        "src/unwind/GetCFA.c",
+        "src/unwind/GetDataRelBase.c",
+        "src/unwind/GetGR.c",
+        "src/unwind/GetIP.c",
+        "src/unwind/GetIPInfo.c",
+        "src/unwind/GetLanguageSpecificData.c",
+        "src/unwind/GetRegionStart.c",
+        "src/unwind/GetTextRelBase.c",
+        "src/unwind/RaiseException.c",
+        "src/unwind/Resume.c",
+        "src/unwind/Resume_or_Rethrow.c",
+        "src/unwind/SetGR.c",
+        "src/unwind/SetIP.c",
+    ],
+
+    cflags: libunwind_common_cflags + [
+        "-Wno-old-style-declaration",
+        "-fvisibility=hidden",
+    ],
+
+    clang_cflags: libunwind_common_clang_cflags,
+    local_include_dirs: libunwind_common_c_local_includes,
+
+    arch: libunwind_common_arch_includes,
+
+    target: {
+        android: {
+            cflags: libunwind_common_cflags_target,
+        },
+        darwin: {
+            enabled: false,
+        },
+    },
+
+    whole_static_libs: ["libunwind"],
+    stl: "none",
+}
+
+/*
+//-----------------------------------------------------------------------
+// libunwind testing
+//-----------------------------------------------------------------------
+libunwind-unit-tests_cflags = [
+"-fno-builtin",
+"-O0",
+"-g",
+]
+
+libunwind-unit-tests_c_local_includes = ["include"]
+
+libunwind-unit-tests_src_files = ["android/tests/local_test.cpp"]
+
+libunwind-unit-tests_shared_libraries = ["libunwind"]
+
+libunwind-unit-tests_multilib = ["both"]
+module = ["libunwind-unit-tests"]
+module_tag = ["optional"]
+build_type = ["target"]
+build_target = ["NATIVE_TEST"]
+// ANDROIDMK TRANSLATION ERROR: unsupported include
+// include $(LOCAL_PATH)/Android.build.mk
+build_type = ["host"]
+// ANDROIDMK TRANSLATION ERROR: unsupported include
+// include $(LOCAL_PATH)/Android.build.mk
+// Run the unit tests built for x86 or x86_64.
+// ANDROIDMK TRANSLATION ERROR: unsupported conditional
+// ifeq ($(TARGET_ARCH),$(filter $(TARGET_ARCH),x86 x86_64))
+// ANDROIDMK TRANSLATION ERROR: unsupported conditional
+// ifneq ($(TARGET_ARCH),$(filter $(TARGET_ARCH),x86))
+LINKER = ["linker64"]
+TEST_SUFFIX = ["64"]
+// ANDROIDMK TRANSLATION ERROR: else from unsupported contitional
+// else
+LINKER = ["linker"]
+TEST_SUFFIX = ["32"]
+// ANDROIDMK TRANSLATION ERROR: endif from unsupported contitional
+// endif
+
+// ANDROIDMK TRANSLATION ERROR: endif from unsupported contitional
+// endif
+*/

@@ -1,0 +1,26 @@
+This version of libunwind based on libunwind 1.1.
+
+--------------------------------------------------------------------------
+To configure a libunwind install for arm:
+
+source build/envsetup.sh
+lunch aosp_arm-eng
+make -jXX
+cd external/libuwnind
+android/conf_arm.sh
+
+To configure a libunwind install for mips:
+
+source build/envsetup.sh
+lunch aosp_mips-eng
+make -jXX
+cd external/libuwnind
+android/conf_mips.sh
+
+To configure a libunwind install for x86:
+
+source build/envsetup.sh
+lunch aosp_x86-eng
+make -jXX
+cd external/libuwnind
+android/conf_x86.sh
