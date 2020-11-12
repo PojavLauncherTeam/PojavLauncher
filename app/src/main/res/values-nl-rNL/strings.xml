@@ -85,6 +85,7 @@
     <string name="mcl_setting_title_longpresstrigger">Hoe lang zal starten na lange indrukken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Verander de triggertijd voor lang indrukken van vernietig blok en laten vallen.</string>
     <string name="mcl_setting_title_controlsize">Instellen van de regelknoppen</string>
+    <string name="mcl_setting_title_javaargs">JVM Launch argumenten</string>
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
     <string name="mcl_setting_category_general">Algemene instellingen</string>
     <string name="mcl_setting_category_veroption">Versietype zal in de versielijst staan</string>
