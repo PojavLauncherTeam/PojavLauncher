@@ -80,7 +80,6 @@
     <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
     <string name="mcl_setting_title_controlsize">Установка розміру кнопок управління</string>
-    <string name="mcl_setting_title_javaargs">Аргументи запуску JRE</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте обережні, це може призвести до збоїв у грі, якщо це замінити без знань.</string>
     <string name="mcl_setting_category_general">Загальні налаштування</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
