@@ -80,7 +80,6 @@
     <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn lâu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong phá hủy khối và thả vật phẩm.</string>
     <string name="mcl_setting_title_controlsize">Đặt kích thước nút điều khiển</string>
-    <string name="mcl_setting_title_javaargs">JRE Khởi chạy arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
     <string name="mcl_setting_category_general">Thiết lập chung</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
