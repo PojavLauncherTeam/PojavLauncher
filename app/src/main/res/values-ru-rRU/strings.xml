@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установить Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
+    <string name="alerttitle_installmod">Выбрать установщик мода</string>
     <!-- Error messages -->
     <string name="error_fatal">Критическая ошибка</string>
     <string name="error_checklog">Ошибка! Просмотрите журнал ниже: %s</string>
@@ -55,6 +56,8 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Новости</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Терминал разработчика</string>
     <string name="mcl_tab_crash">Инфо о сбое</string>
     <!-- MCLauncherActivity: Strings -->
@@ -69,6 +72,8 @@
     <string name="mcl_launch_download_assets">Готовимся к скачиванию файлов игры</string>
     <string name="mcl_options">Настройки</string>
     <string name="mcl_option_modmgr">Менеджер модов (не работает)</string>
+    <string name="mcl_option_modinstall">Запустить установщик мода (Forge, LabyMod, Fabric и т. п.)</string>
+    <string name="mcl_option_modinstallwitharg">Запустить установщик мода (с пользовательскими аргументами)</string>
     <string name="mcl_option_checkupdate">Проверить на обновления</string>
     <string name="mcl_option_customcontrol">Собстенное управление</string>
     <string name="mcl_option_settings">Настройки</string>
@@ -80,6 +85,7 @@
     <string name="mcl_setting_title_longpresstrigger">Сколько времени нужно держать кнопку</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Изменить время длинного нажатия для ломания и выбрасывания</string>
     <string name="mcl_setting_title_controlsize">Размер кнопок</string>
+    <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
     <string name="mcl_setting_category_general">Основные настройки</string>
     <string name="mcl_setting_category_veroption">Тип версии будет показан в списке версий</string>
