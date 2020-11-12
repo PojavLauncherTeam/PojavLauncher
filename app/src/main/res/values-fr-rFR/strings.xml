@@ -83,7 +83,6 @@
     <string name="mcl_setting_title_longpresstrigger">Combien de temps se déclenchera après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_controlsize">Définir la taille du bouton de contrôle</string>
-    <string name="mcl_setting_title_javaargs">Arguments de lancement JRE</string>
     <string name="mcl_setting_subtitle_javaargs">Attention, cela peut faire planter le jeu si modifié sans connaissance.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
     <string name="mcl_setting_category_veroption">Le type de version sera dans la liste des versions</string>
