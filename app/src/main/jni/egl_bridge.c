@@ -55,7 +55,7 @@ void terminateEgl() {
     potatoBridge.eglSurface = EGL_NO_SURFACE;
 }
 
-JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {    
+JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {    
     potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);   
 }
 

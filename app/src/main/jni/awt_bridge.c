@@ -9,7 +9,7 @@
 
 // TODO: check for memory leaks
 // int printed = 0;
-JNIEXPORT jintArray JNICALL Java_net_kdt_pojavlaunch_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz /*, jobject canvas, jint width, jint height */) {
+JNIEXPORT jintArray JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz /*, jobject canvas, jint width, jint height */) {
     if (runtimeJNIEnvPtr_ANDROID == NULL) {
         if (runtimeJavaVMPtr == NULL) {
             return NULL;

@@ -133,7 +133,7 @@ static void *logger_thread() {
 }
 
 JNIEXPORT void JNICALL
-Java_net_kdt_pojavlaunch_JREUtils_redirectLogcat(JNIEnv *env, jclass clazz) {
+Java_net_kdt_pojavlaunch_utils_JREUtils_redirectLogcat(JNIEnv *env, jclass clazz) {
     // TODO: implement redirectLogcat()
     setvbuf(stdout, 0, _IOLBF, 0); // make stdout line-buffered
     setvbuf(stderr, 0, _IONBF, 0); // make stderr unbuffered
