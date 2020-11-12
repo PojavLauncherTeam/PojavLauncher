@@ -80,7 +80,6 @@
     <string name="mcl_setting_title_longpresstrigger">Trigger press duration</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Trigger press duration for destroying blocks and dropping items.</string>
     <string name="mcl_setting_title_controlsize">Set button size</string>
-    <string name="mcl_setting_title_javaargs">JRE Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Be careful, this can make the game crash if modified without any prior knowledge.</string>
     <string name="mcl_setting_category_general">General settings</string>
     <string name="mcl_setting_category_veroption">Version type will be in the version list</string>
