@@ -1,8 +1,8 @@
 package net.kdt.pojavlaunch.prefs;
 
 import android.content.*;
+import java.util.*;
 import net.kdt.pojavlaunch.*;
-import android.os.*;
 
 public class LauncherPreferences
 {
@@ -17,6 +17,7 @@ public class LauncherPreferences
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
     public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl04es.so";
+    public static String PREF_LANGUAGE = "default";
 	
 	public static void loadPreferences() {
 		PREF_BUTTONSIZE = DEFAULT_PREF.getFloat("controlSize", 1f);
@@ -27,6 +28,8 @@ public class LauncherPreferences
 		PREF_VERTYPE_OLDBETA = DEFAULT_PREF.getBoolean("vertype_oldbeta", false);
 		PREF_LONGPRESS_TRIGGER = DEFAULT_PREF.getInt("timeLongPressTrigger", 500);
 		PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
+        PREF_LANGUAGE = DEFAULT_PREF.getString("language", "default");
+        
 		// Get double of max Android heap to set default heap size
 		int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
         int doubleAndroidHeap = androidHeap * 2;

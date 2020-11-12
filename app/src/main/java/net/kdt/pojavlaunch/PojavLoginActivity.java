@@ -19,11 +19,13 @@ import com.kdt.filerapi.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
+import java.util.zip.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;
+import net.kdt.pojavlaunch.prefs.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -186,6 +188,10 @@ public class PojavLoginActivity extends AppCompatActivity
     }
     
     private void uiInit() {
+        if (!LauncherPreferences.PREF_LANGUAGE.equals("default")) {
+            setLocale(new Locale(LauncherPreferences.PREF_LANGUAGE));
+        }
+        
         setContentView(R.layout.launcher_login_v2);
 
         loginLayout = findViewById(R.id.login_layout_linear);
@@ -202,11 +208,26 @@ public class PojavLoginActivity extends AppCompatActivity
         SpannableString defaultLangChar = new SpannableString(defaultLang);
         defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(),0);
         
-        ArrayAdapter<CharSequence> langAdapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item);
-        langAdapter.add(defaultLangChar);
-        for (Locale locale : Locale.getAvailableLocales()) {
-            langAdapter.add(locale.getDisplayLanguage());
+        ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<DisplayableLocale>(this, android.R.layout.simple_spinner_item);
+        langAdapter.add(new DisplayableLocale(Locale.getDefault(), defaultLangChar));
+        langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
+        
+        // TODO better way to read language list
+        try {
+            ZipFile thisApk = new ZipFile(getApplicationInfo().publicSourceDir);
+            Enumeration<?> thisEntries = thisApk.entries();
+            while (thisEntries.hasMoreElements()) {
+                File currFile = new File("/" + ((ZipEntry) thisEntries.nextElement()).getName());
+                if (currFile.getAbsolutePath().startsWith("/res/values-") && currFile.getName().startsWith("values-")) {
+                    // TODO use regex
+                    Locale thisLocale = new Locale(currFile.getName().replace("values-", "").replace("-r", "-"));
+                    langAdapter.add(new DisplayableLocale(thisLocale));
+                }
+            }
+        } catch (IOException e) {
+            Tools.showError(this, e);
         }
+        
         langAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         
         spinnerChgLang.setAdapter(langAdapter);
@@ -217,14 +238,12 @@ public class PojavLoginActivity extends AppCompatActivity
                 Locale locale;
                 if (position == 0) {
                     locale = Locale.getDefault();
+                } else if (position == 1) {
+                    locale = Locale.ENGLISH;
                 } else {
-                    locale = Locale.getAvailableLocales()[position - 1];
+                    locale = Locale.getAvailableLocales()[position - 2];
                 }
-                Locale.setDefault(locale);
-                Configuration config = new Configuration();
-                config.setLocale(locale);
-                // TODO replace deprecated
-                getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+                setLocale(locale);
             }
             
             @Override
@@ -263,6 +282,16 @@ public class PojavLoginActivity extends AppCompatActivity
         
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
+    }
+    
+    private void setLocale(Locale locale) {
+        LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
+        LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).commit();
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        // TODO replace deprecated
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 
     private boolean isJavaRuntimeInstalled() {
