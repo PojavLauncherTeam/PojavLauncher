@@ -39,17 +39,17 @@
     <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
     <string name="alerttitle_installmod">Выбрать установщик мода</string>
     <!-- Error messages -->
-    <string name="error_fatal">Критическая ошибка</string>
-    <string name="error_checklog">Ошибка! Просмотрите журнал ниже: %s</string>
+    <string name="error_fatal">PojavLauncher неожиданно потерпел сбой</string>
+    <string name="error_checklog">Ошибка! Проверьте журнал ниже: %s</string>
     <string name="error_no_version">Нет версии!</string>
-    <string name="error_load_version">Ошибка при загрузке версии %s</string>
-    <string name="error_convert_lib">Ошибка при конвертации библиотеки %s</string>
-    <string name="error_convert_client">Ошибка при конвертации Minecraft %s</string>
-    <string name="error_show_more">Больше</string>
-    <string name="error_show_less">Меньше</string>
+    <string name="error_load_version">Не удалось загрузить версию %s</string>
+    <string name="error_convert_lib">Не удалось конвертировать библиотеку %s</string>
+    <string name="error_convert_client">Не удалось конвертировать Minecraft %s</string>
+    <string name="error_show_more">Развернуть</string>
+    <string name="error_show_less">Свернуть</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">К каталогу нет права на чтение и запись!</string>
-    <string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите разработчику.\nОшибка: %s</string>
+    <string name="toast_permission_denied">Требуется разрешение на чтение/запись хранилища!</string>
+    <string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите об этом разработчику.\nОшибка: %s</string>
     <string name="toast_optifine_success">Установка завершена</string>
     <string name="toast_uninstalljre_done">Удаление Java Runtime завершено</string>
     <!--
@@ -58,41 +58,41 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Новости</string>
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
-    <string name="mcl_tab_console">Терминал разработчика</string>
-    <string name="mcl_tab_crash">Инфо о сбое</string>
+    <string name="mcl_tab_console">Консоль разработки</string>
+    <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Готовы к запуску Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Удаляем временные файлы</string>
-    <string name="mcl_launch_downloading">Загружаем %s</string>
-    <string name="mcl_launch_download_lib">Загружаем библиотеку %s</string>
-    <string name="mcl_launch_download_client">Загружаем Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Конвертируем библиотеку %s</string>
-    <string name="mcl_launch_convert_client">Конвертируем Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Патчим Minecraft %s</string>
-    <string name="mcl_launch_download_assets">Готовимся к скачиванию файлов игры</string>
+    <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
+    <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
+    <string name="mcl_launch_downloading">Загрузка %s</string>
+    <string name="mcl_launch_download_lib">Загрузка библиатеки %s</string>
+    <string name="mcl_launch_download_client">Загрузка Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Конвертация библиотеки %s</string>
+    <string name="mcl_launch_convert_client">Конвертация Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Сборка Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Подготовка к загрузке ресурсов</string>
     <string name="mcl_options">Настройки</string>
-    <string name="mcl_option_modmgr">Менеджер модов (не работает)</string>
+    <string name="mcl_option_modmgr">Диспетчер модов (не работает)</string>
     <string name="mcl_option_modinstall">Запустить установщик мода (Forge, LabyMod, Fabric и т. п.)</string>
     <string name="mcl_option_modinstallwitharg">Запустить установщик мода (с пользовательскими аргументами)</string>
-    <string name="mcl_option_checkupdate">Проверить на обновления</string>
-    <string name="mcl_option_customcontrol">Собстенное управление</string>
+    <string name="mcl_option_checkupdate">Проверить наличие обновлений</string>
+    <string name="mcl_option_customcontrol">Пользовательское управление</string>
     <string name="mcl_option_settings">Настройки</string>
-    <string name="mcl_option_about">Информация</string>
+    <string name="mcl_option_about">О лаунчере</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Запуск Minecraft в режиме Freeform</string>
-    <string name="mcl_setting_subtitle_freeform">Запуск Minecraft в оконном режиме. Требуется Android 7.0+</string>
-    <string name="mcl_setting_title_longpresstrigger">Сколько времени нужно держать кнопку</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменить время длинного нажатия для ломания и выбрасывания</string>
-    <string name="mcl_setting_title_controlsize">Размер кнопок</string>
+    <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
+    <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
+    <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатие для ломания блоков и выкидования предметов.</string>
+    <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
-    <string name="mcl_setting_category_general">Основные настройки</string>
-    <string name="mcl_setting_category_veroption">Тип версии будет показан в списке версий</string>
-    <string name="mcl_setting_veroption_release">Стабильные</string>
-    <string name="mcl_setting_veroption_snapshot">Частые</string>
-    <string name="mcl_setting_veroption_oldalpha">Старые (Альфа)</string>
-    <string name="mcl_setting_veroption_oldbeta">Старые (Бета)</string>
+    <string name="mcl_setting_category_general">Общие настройки</string>
+    <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
+    <string name="mcl_setting_veroption_release">Релизы</string>
+    <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
+    <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
+    <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
     <string name="mcl_version_clone">Клонировать</string>
     <!-- Global strings -->
     <string name="global_add">Добавить</string>
@@ -100,11 +100,11 @@
     <string name="global_error">Ошибка</string>
     <string name="global_load">Загрузить</string>
     <string name="global_name">Имя</string>
-    <string name="global_remove">Убрать</string>
+    <string name="global_remove">Удалить</string>
     <string name="global_restart">Перезапуск</string>
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
-    <string name="global_error_field_empty">Это поле не может быть пустым.</string>
+    <string name="global_error_field_empty">Это поле не может быть пустым</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -129,19 +129,19 @@
 -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошел собой приложение/игры с кодом %d</string>
-    <string name="mcn_exit_call">Выход</string>
-    <string name="mcn_exit_crash">Игра вылетела! Нажмите ОК для выхода.</string>
+    <string name="mcn_exit_call">Выйти</string>
+    <string name="mcn_exit_crash">Обнаружен сбой игры! Чтобы выйти нажмите кнопку ОК.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
-    <string name="mcn_exit_confirm">Вы точно хотите закрыть игру немедленно?</string>
+    <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовместима с Java Runtime %2$s.</string>
     <string name="mcn_check_fail_java">Не удалось запустить тестовую Java VM. Проверьте %s для получения дополнительной информации.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Кнопки</string>
+    <string name="controls">Управление</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Клавиатура</string>
     <string name="control_chat">Чат</string>
-    <string name="control_debug">Откладка</string>
+    <string name="control_debug">Отладка</string>
     <string name="control_zoom">Зум (C)</string>
     <string name="control_primary">ЛКМ</string>
     <string name="control_secondary">ПКМ</string>
@@ -155,26 +155,26 @@
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Мышь</string>
-    <string name="control_mouseoff">Мышь: выкл</string>
-    <string name="control_mouseon">Мышь: вкл </string>
+    <string name="control_mouseoff">Мышь: Выкл</string>
+    <string name="control_mouseon">Мышь: Вкл </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Закрыть игру</string>
+    <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Откладка PointerCapture</string>
-    <string name="control_customkey">Ввести клавишу</string>
+    <string name="control_customkey">Отправить пользовательскую раскладку</string>
     <string name="customctrl_keyname">Имя</string>
-    <string name="customctrl_specialkey">Особенная кнопка</string>
-    <string name="customctrl_hidden">Спрятано</string>
+    <string name="customctrl_specialkey">Специальная клавиша</string>
+    <string name="customctrl_hidden">Скрыто</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
-    <string name="customctrl_selectdefault">Выбрать раскладку по-умолчанию</string>
+    <string name="customctrl_selectdefault">Выберите управление по умолчанию</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Обновить консоль</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать,</string>
     <string name="main_infodev">Инфо (Р)</string>
-    <string name="main_switchuser">Сменить пользователя</string>
+    <string name="main_switchuser">Выбрать пользователя</string>
     <string name="main_version_">Версия:</string>
-    <string name="main_nocrash">Сбоев не обнаружено.</string>
-    <string name="main_nolog">Данных нет.</string>
+    <string name="main_nocrash">Сбоев не обнаружено</string>
+    <string name="main_nolog">Нет записей</string>
 </resources>
