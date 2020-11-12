@@ -28,6 +28,9 @@ import org.apache.commons.io.*;
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
 {
+    private Object mLockStoragePerm = new Object(),
+        mLockSelectJRE = new Object();
+    
     private EditText edit2, edit3;
     private int REQUEST_STORAGE_REQUEST_CODE = 1;
     private ProgressBar prb;
@@ -36,9 +39,6 @@ public class PojavLoginActivity extends AppCompatActivity
     private Spinner spinnerChgLang;
     private ImageView imageLogo;
     private TextView startupTextView;
-    
-    private boolean isPromptingGrant = false;
-    // private boolean isPermGranted = false;
     
     private SharedPreferences firstLaunchPrefs;
     // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
@@ -124,12 +124,12 @@ public class PojavLoginActivity extends AppCompatActivity
                         Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
                         finish();
                     }
-                    isPromptingGrant = true;
-                    requestStoragePermission();
-                    while (isPromptingGrant) {
-                        Thread.sleep(200);
-                    }
                     
+                    requestStoragePermission();
+                    
+                    synchronized (mLockStoragePerm) {
+                        mLockStoragePerm.wait();
+                    }
                 } catch (InterruptedException e) {}
             }
 
@@ -356,6 +356,10 @@ public class PojavLoginActivity extends AppCompatActivity
                             if (file.getName().endsWith(".tar.xz")) {
                                 selectedFile.append(path);
                                 dialog.dismiss();
+                                
+                                synchronized (mLockSelectJRE) {
+                                    mLockSelectJRE.notifyAll();
+                                }
                             }
                         }
                     });
@@ -364,8 +368,8 @@ public class PojavLoginActivity extends AppCompatActivity
             }
         });
         
-        while (selectedFile.length() == 0) {
-            Thread.sleep(500);
+        synchronized (mLockSelectJRE) {
+            mLockSelectJRE.wait();
         }
         
         return new File(selectedFile.toString());
@@ -678,14 +682,13 @@ public class PojavLoginActivity extends AppCompatActivity
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
     }
 
-    //This method will be called when the user will tap on allow or deny
+    // This method will be called when the user will tap on allow or deny
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        //Checking the request code of our request
-        if(requestCode == REQUEST_STORAGE_REQUEST_CODE){
-            isPromptingGrant = false;
-            // isPermGranted = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED;
+        if (requestCode == REQUEST_STORAGE_REQUEST_CODE){
+            synchronized (mLockStoragePerm) {
+                mLockStoragePerm.notifyAll();
+            }
         }
     }
 }
