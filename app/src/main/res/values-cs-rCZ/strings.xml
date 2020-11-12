@@ -72,8 +72,6 @@
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
     <string name="mcl_options">Nastavení</string>
     <string name="mcl_option_modmgr">Manažer modů (bez funkce)</string>
-    <string name="mcl_option_modinstall">Nainstalovat mód (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Instalovat mód (s vlastními argumenty)</string>
     <string name="mcl_option_checkupdate">Zkontrolovat aktualizace</string>
     <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
     <string name="mcl_option_settings">Nastavení</string>
