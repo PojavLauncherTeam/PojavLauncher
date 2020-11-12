@@ -69,8 +69,6 @@
     <string name="mcl_launch_download_assets">Готовимся к скачиванию файлов игры</string>
     <string name="mcl_options">Настройки</string>
     <string name="mcl_option_modmgr">Менеджер модов (не работает)</string>
-    <string name="mcl_option_modinstall">Установить мод (Forge, LabyMod, Fabric...)</string>
-    <string name="mcl_option_modinstallwitharg">Установить мод (с пользовательскими аргументами)</string>
     <string name="mcl_option_checkupdate">Проверить на обновления</string>
     <string name="mcl_option_customcontrol">Собстенное управление</string>
     <string name="mcl_option_settings">Настройки</string>
