@@ -69,8 +69,6 @@
     <string name="mcl_launch_download_assets">Kaynakları yüklemeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
     <string name="mcl_option_modmgr">Mod yöneticisi (işlevsiz)</string>
-    <string name="mcl_option_modinstall">Mod yükle (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Mod yükle (özel argümanlarla)</string>
     <string name="mcl_option_checkupdate">Güncellemeleri kontrol et</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
