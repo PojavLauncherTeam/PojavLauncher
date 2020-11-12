@@ -83,7 +83,6 @@
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
     <string name="mcl_setting_title_controlsize">Nastavit velikost ovládacích tlačítek</string>
-    <string name="mcl_setting_title_javaargs">JRE spouštěcí argumenty</string>
     <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, pokud je upraveno bez znalostí.</string>
     <string name="mcl_setting_category_general">Obecná nastavení</string>
     <string name="mcl_setting_category_veroption">Typ verze bude v seznamu verzí</string>
