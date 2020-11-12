@@ -69,8 +69,6 @@
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
     <string name="mcl_options">Tùy chọn</string>
     <string name="mcl_option_modmgr">Quản lý mod (không có chức năng)</string>
-    <string name="mcl_option_modinstall">Cài đặt mod (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Cài đặt mod (với dữ liệu thành phần tùy chỉnh)</string>
     <string name="mcl_option_checkupdate">Kiểm tra bản cập nhật</string>
     <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
     <string name="mcl_option_settings">Thiết lập</string>
