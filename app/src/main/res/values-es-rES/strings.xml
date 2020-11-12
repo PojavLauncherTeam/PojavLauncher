@@ -82,7 +82,6 @@
     <string name="mcl_setting_subtitle_freeform">Iniciar Minecraft en una ventana flotante. Necesario Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
     <string name="mcl_setting_title_controlsize">Tamaño de los botones</string>
-    <string name="mcl_setting_title_javaargs">JRE Argumentos de Lanzado</string>
     <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
     <string name="mcl_setting_category_general">Configuración General</string>
     <!-- Global strings -->
