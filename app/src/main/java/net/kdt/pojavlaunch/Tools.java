@@ -132,14 +132,10 @@ public final class Tools
         // GLFW Stub width height
         overrideableArgList.add("-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth);
         overrideableArgList.add("-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight);
-
         overrideableArgList.add("-Dglfwstub.initEgl=false");
 
         overrideableArgList.add("-Dnet.minecraft.clientmodname=" + Tools.APP_NAME);
         
-        //test tingie
-        overrideableArgList.add("-DLIBGL_BATCH=10");
-
         // Override args
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             for (int i = 0; i < overrideableArgList.size(); i++) {

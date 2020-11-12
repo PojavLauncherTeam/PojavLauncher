@@ -154,6 +154,7 @@ public class JREUtils
         envMap.put("HOME", Tools.MAIN_PATH);
         envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
+        envMap.put("LIBGL_BATCH", "10");
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
