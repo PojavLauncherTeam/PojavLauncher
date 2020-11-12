@@ -69,8 +69,6 @@
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
     <string name="mcl_options">Pilihan</string>
     <string name="mcl_option_modmgr">Mod manager (tidak berfungsi)</string>
-    <string name="mcl_option_modinstall">Pasang mod (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Pasang mod (dengan argumen dibuat sendiri)</string>
     <string name="mcl_option_checkupdate">Periksa ada update</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
