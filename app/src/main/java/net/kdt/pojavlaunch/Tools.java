@@ -136,6 +136,9 @@ public final class Tools
         overrideableArgList.add("-Dglfwstub.initEgl=false");
 
         overrideableArgList.add("-Dnet.minecraft.clientmodname=" + Tools.APP_NAME);
+        
+        //test tingie
+        overrideableArgList.add("-DLIBGL_BATCH=10");
 
         // Override args
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
