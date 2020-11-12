@@ -69,8 +69,6 @@
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
     <string name="mcl_options">Options</string>
     <string name="mcl_option_modmgr">Mod manager (no function)</string>
-    <string name="mcl_option_modinstall">Instala mods (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Instala mods (amb arguments personalitsats)</string>
     <string name="mcl_option_checkupdate">Check for update</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_option_settings">Settings</string>
