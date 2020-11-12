@@ -1,13 +1,14 @@
-package net.kdt.pojavlaunch;
+package net.kdt.pojavlaunch.utils;
 
 import android.content.*;
+import android.support.annotation.*;
 import android.system.*;
 import android.util.*;
 import java.io.*;
 import java.util.*;
+import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
-import android.support.annotation.*;
 
 public class JREUtils
 {

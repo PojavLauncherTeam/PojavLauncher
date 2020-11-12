@@ -48,7 +48,7 @@
         
 		<activity
 			android:screenOrientation="sensorLandscape"
-			android:name=".InstallModActivity"
+			android:name=".JavaGUILauncherActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 		
 		<activity

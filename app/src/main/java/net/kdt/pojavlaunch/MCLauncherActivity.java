@@ -18,9 +18,9 @@ import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.mcfragments.*;
+import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.util.*;
+import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 
@@ -46,7 +46,7 @@ public class MCLauncherActivity extends AppCompatActivity
 
 	private TextView tvVersion, tvUsernameView;
 	private Spinner versionSelector;
-	private String[] availableVersions = Tools.versionList;
+	private String[] availableVersions;
 	private MCProfile.Builder profile;
 	private String profilePath = null;
 	private CrashFragment crashView;
@@ -816,7 +816,7 @@ public class MCLauncherActivity extends AppCompatActivity
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface di, int i) {
-                    Intent intent = new Intent(MCLauncherActivity.this, InstallModActivity.class);
+                    Intent intent = new Intent(MCLauncherActivity.this, JavaGUILauncherActivity.class);
                     intent.putExtra("javaArgs", edit.getText().toString());
                     startActivity(intent);
                 }
@@ -830,7 +830,7 @@ public class MCLauncherActivity extends AppCompatActivity
                     @Override
                     public void onFileSelected(File file, String path) {
                         if (file.getName().endsWith(".jar")) {
-                            Intent intent = new Intent(MCLauncherActivity.this, InstallModActivity.class);
+                            Intent intent = new Intent(MCLauncherActivity.this, JavaGUILauncherActivity.class);
                             intent.putExtra("modFile", file);
                             startActivity(intent);
                             dialog.dismiss();

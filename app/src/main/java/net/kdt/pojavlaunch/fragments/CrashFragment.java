@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.mcfragments;
+package net.kdt.pojavlaunch.fragments;
 
 import android.os.*;
 import android.support.annotation.*;

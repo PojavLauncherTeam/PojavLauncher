@@ -6,7 +6,7 @@ import android.text.*;
 import android.util.*;
 import android.view.*;
 import java.util.*;
-import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {

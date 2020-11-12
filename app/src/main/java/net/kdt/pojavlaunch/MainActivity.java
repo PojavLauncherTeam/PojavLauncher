@@ -6,7 +6,6 @@ import android.graphics.*;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.widget.*;
-import android.support.v7.app.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
@@ -16,14 +15,10 @@ import com.kdt.pointer.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
-import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
-
-import android.app.AlertDialog;
-import java.lang.Process;
-import android.system.*;
 
 public class MainActivity extends LoggableActivity implements OnTouchListener, OnClickListener
 {
@@ -121,10 +116,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 	// private int navBarHeight = 40;
 	
 	// private static Collection<? extends Provider.Service> rsaPkcs1List;
-
-	private String getStr(int id) {
-		return getResources().getString(id);
-	}
 
     @Override
     public void onCreate(Bundle savedInstanceState)

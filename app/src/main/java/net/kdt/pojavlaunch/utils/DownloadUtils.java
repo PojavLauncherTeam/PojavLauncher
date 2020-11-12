@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.util;
+package net.kdt.pojavlaunch.utils;
 
 import android.util.*;
 import java.io.*;

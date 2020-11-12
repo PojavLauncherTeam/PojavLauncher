@@ -15,7 +15,7 @@ import java.nio.charset.*;
 import java.util.*;
 import java.util.zip.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.util.*;
+import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 import android.view.*;
@@ -46,26 +46,10 @@ public final class Tools
     public static String libraries = MAIN_PATH + "/libraries";
     public static String optifineDir = MAIN_PATH + "/optifine";
 
-    // Old since 2.4.2
-    public static String oldGameDir = MAIN_PATH + "/gamedir";
-    public static String oldVersionDir = worksDir + "/versions";
-    public static String oldLibrariesDir = worksDir + "/libraries";
-
     public static String mpProfiles = datapath + "/Users";
     public static String crashPath = MAIN_PATH + "/crash-reports";
 
-    public static String mpModEnable = datapath + "/ModsManager/✅Enabled";
-    public static String mpModDisable = datapath + "/ModsManager/❌Disabled";
-    public static String mpModAddNewMo = datapath + "/ModsManager/➕Add mod";
-
     public static String optifineLib = "optifine:OptiFine";
-
-    public static String[] versionList = {
-        "1.7.3",
-        "1.7.10",
-        "1.8",
-        "1.9"
-    };
 
     private static int exitCode = 0;
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {

@@ -4,17 +4,18 @@ import android.app.Application;
 import android.os.*;
 import android.content.pm.PackageManager.*;
 import android.content.pm.*;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.customcontrols.*;
 import android.support.v7.preference.*;
-import java.io.*;
 import android.content.*;
 import android.support.v4.app.*;
 import android.util.*;
-import net.kdt.pojavlaunch.exit.*;
+
+import java.io.*;
 import java.time.*;
 import java.text.*;
 import java.util.*;
+
+import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 
 public class PojavApplication extends Application
 {

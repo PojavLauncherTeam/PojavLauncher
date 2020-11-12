@@ -1,14 +1,17 @@
 package net.kdt.pojavlaunch;
 
 import android.*;
-import android.support.v7.app.*;
 import android.content.*;
 import android.content.pm.*;
+import android.content.res.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.v4.app.*;
 import android.support.v4.content.*;
 import android.support.v7.app.*;
+import android.system.*;
+import android.text.*;
+import android.text.style.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
@@ -16,17 +19,11 @@ import com.kdt.filerapi.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
-import net.kdt.pojavlaunch.update.*;
 import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.utils.*;
 import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;
-
-import android.support.v7.app.AlertDialog;
-import android.system.*;
-import android.content.res.*;
-import android.text.*;
-import android.text.style.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -305,7 +302,7 @@ public class PojavLoginActivity extends AppCompatActivity
             //FileAccess.copyAssetToFolderIfNonExist(this, "1.7.3.jar", Tools.versnDir + "/1.7.3");
             //FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
             
-            UpdateDataChanger.changeDataAuto("2.4", "2.4.2");
+            // UpdateDataChanger.changeDataAuto("2.4", "2.4.2");
             
             if (!isJavaRuntimeInstalled()) {
                 File jreTarFile = selectJreTarFile();

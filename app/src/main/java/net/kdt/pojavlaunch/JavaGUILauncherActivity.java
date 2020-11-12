@@ -4,16 +4,12 @@ import android.graphics.*;
 import android.os.*;
 import android.view.*;
 import android.widget.*;
-import com.oracle.dalvik.*;
 import java.io.*;
-import java.lang.reflect.*;
 import java.util.*;
+import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
-import android.support.v7.app.*;
-import android.content.*;
-import android.text.*;
 
-public class InstallModActivity extends LoggableActivity {
+public class JavaGUILauncherActivity extends LoggableActivity {
     public static volatile boolean IS_JRE_RUNNING;
 
     private AWTCanvasView mTextureView;
