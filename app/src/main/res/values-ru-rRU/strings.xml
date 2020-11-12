@@ -80,7 +80,6 @@
     <string name="mcl_setting_title_longpresstrigger">Сколько времени нужно держать кнопку</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Изменить время длинного нажатия для ломания и выбрасывания</string>
     <string name="mcl_setting_title_controlsize">Размер кнопок</string>
-    <string name="mcl_setting_title_javaargs">Аргументы запуска JRE</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
     <string name="mcl_setting_category_general">Основные настройки</string>
     <string name="mcl_setting_category_veroption">Тип версии будет показан в списке версий</string>
