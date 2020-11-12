@@ -72,6 +72,8 @@
     <string name="mcl_launch_download_assets">Voorbereiden om bronnen te downloaden</string>
     <string name="mcl_options">Opties</string>
     <string name="mcl_option_modmgr">Mod manager (geen functie)</string>
+    <string name="mcl_option_modinstall">Start een mod installatie (Forge, LabyMod, Fabric, enzovoort...)</string>
+    <string name="mcl_option_modinstallwitharg">Start een mod installatie (met aangepaste argumenten)</string>
     <string name="mcl_option_checkupdate">Controleren op update</string>
     <string name="mcl_option_customcontrol">Aangepaste controles</string>
     <string name="mcl_option_settings">Instellingen</string>
