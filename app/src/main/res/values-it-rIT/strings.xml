@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installa Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Seleziona un keymap json</string>
+    <string name="alerttitle_installmod">Seleziona un mod installer</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher è crashato in modo imprevisto</string>
     <string name="error_checklog">Errore! Per favore controlla i log sotto: %s</string>
@@ -55,6 +56,8 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Notizie</string>
+    <string name="mcl_tab_mcje">Minecraft: java Edition</string>
     <string name="mcl_tab_console">Console di sviluppo</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Strings -->
@@ -69,6 +72,8 @@
     <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
     <string name="mcl_options">Impostazioni</string>
     <string name="mcl_option_modmgr">Gestore Mod (nessuna funzione)</string>
+    <string name="mcl_option_modinstall">Avvia un mod installer (Forge, LabyMod, Fabric, ecc...)</string>
+    <string name="mcl_option_modinstallwitharg">Avvia un mod installer (personalizzato)</string>
     <string name="mcl_option_checkupdate">Cerca aggiornamenti</string>
     <string name="mcl_option_customcontrol">Controlli personalizzati</string>
     <string name="mcl_option_settings">Impostazioni</string>
