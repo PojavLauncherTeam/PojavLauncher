@@ -83,7 +83,6 @@
     <string name="mcl_setting_title_longpresstrigger">Acionar função ao manter toque pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
     <string name="mcl_setting_title_controlsize">Definir tamanho dos botões de controle</string>
-    <string name="mcl_setting_title_javaargs">Argumentos JRE</string>
     <string name="mcl_setting_subtitle_javaargs">Cuidado, isso pode fazer seu jogo crashar se modificado sem conhecimento.</string>
     <string name="mcl_setting_category_general">Configurações gerais</string>
     <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
