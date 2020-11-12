@@ -218,6 +218,7 @@ public class PojavLoginActivity extends AppCompatActivity
             Enumeration<?> thisEntries = thisApk.entries();
             while (thisEntries.hasMoreElements()) {
                 File currFile = new File("/" + ((ZipEntry) thisEntries.nextElement()).getName());
+                System.out.println(currFile.getAbsolutePath());
                 if (currFile.getAbsolutePath().startsWith("/res/values-") && currFile.getName().startsWith("values-")) {
                     // TODO use regex
                     Locale thisLocale = new Locale(currFile.getName().replace("values-", "").replace("-r", "-"));
