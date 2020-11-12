@@ -72,8 +72,6 @@
     <string name="mcl_launch_download_assets">Préparation du téléchargement des ressources</string>
     <string name="mcl_options">Paramètres</string>
     <string name="mcl_option_modmgr">Gestionnaire de mods (non fonctionnel)</string>
-    <string name="mcl_option_modinstall">Installer un mod (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Installer un mod (avec des arguments personnalisés)</string>
     <string name="mcl_option_checkupdate">Rechercher des mises à jour</string>
     <string name="mcl_option_customcontrol">Contrôles personnalisés</string>
     <string name="mcl_option_settings">Réglages</string>
