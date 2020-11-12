@@ -69,8 +69,6 @@
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
     <string name="mcl_options">Опції</string>
     <string name="mcl_option_modmgr">Диспетчер модов (непрацює)</string>
-    <string name="mcl_option_modinstall">Встановити мод (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Встановити мод (з користувацькими аргументами)</string>
     <string name="mcl_option_checkupdate">Провірити наявність оновлень</string>
     <string name="mcl_option_customcontrol">Користувацьке управління</string>
     <string name="mcl_option_settings">Настройки</string>
