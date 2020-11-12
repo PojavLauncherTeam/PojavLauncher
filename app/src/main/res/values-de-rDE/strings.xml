@@ -78,7 +78,6 @@
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
     <string name="mcl_setting_title_controlsize">Stell die Knopf-Größe ein</string>
-    <string name="mcl_setting_title_javaargs">JRE-Startargumente</string>
     <string name="mcl_setting_subtitle_javaargs">Seien Sie vorsichtig, dies kann zu einem Absturz des Spiels führen, wenn es ohne Wissen geändert wird.</string>
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
     <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
