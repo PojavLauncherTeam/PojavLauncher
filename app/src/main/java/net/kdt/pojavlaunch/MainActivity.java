@@ -360,7 +360,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
-                private int scrollInitialX, scrollInitialY, scrollX, scrollY;
+                private int scrollInitialX, scrollInitialY;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
@@ -398,9 +398,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
 
                                     if (CallbackBridge.isGrabbing()) {
-                                        scrollX = 0;
-                                        scrollY = 0;
-                                        
                                         // It cause hold left mouse while moving camera
                                         // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y);
                                         initialX = x;
@@ -448,20 +445,17 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                 break;
 
                             case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                scrollX = Math.max(0, scrollX + x - scrollInitialX);
-                                scrollY = Math.max(0, scrollY + y - scrollInitialY);
-                                
-                                CallbackBridge.sendScroll(scrollX, scrollY);
-                                
+                            case MotionEvent.ACTION_POINTER_INDEX_SHIFT:
+                                CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
                                 scrollInitialX = x;
                                 scrollInitialY = y;
                                 break;
+                                
                             case MotionEvent.ACTION_POINTER_UP: // 6
                                 scrollInitialX = x;
                                 scrollInitialY = y;
                                 break;
  
-                            // TODO implement GLFWScrollCallback to ACTION_SCROLL
                             default:
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
