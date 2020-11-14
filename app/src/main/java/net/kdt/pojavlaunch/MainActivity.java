@@ -333,24 +333,12 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 									}
 									break;
 								case MotionEvent.ACTION_MOVE: // 2
-									try {
-										mouseX += x - prevX;
-										mouseY += y - prevY;
-										if (mouseX <= 0) {
-											mouseX = 0;
-										} else if (mouseX >= CallbackBridge.windowWidth) {
-											mouseX = CallbackBridge.windowWidth;
-										} if (mouseY <= 0) {
-											mouseY = 0;
-										} else if (mouseY >= CallbackBridge.windowHeight) {
-											mouseY = CallbackBridge.windowHeight;
-										}
-									} finally {
-										placeMouseAt(mouseX, mouseY);
+									mouseX = Math.max(0, Math.min(CallbackBridge.windowWidth, mouseX + x - prevX));
+                                    mouseY = Math.max(0, Math.min(CallbackBridge.windowHeight, mouseY + y - prevY));
+									placeMouseAt(mouseX, mouseY);
 
-										CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
-										break;
-									}
+									CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
+									break;
 							}
 						}
 						prevX = x;
@@ -372,6 +360,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
+                private int scrollInitialX, scrollInitialY, scrollX, scrollY;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
@@ -391,7 +380,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                     } else {
                         switch (e.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN: // 0
-                            case MotionEvent.ACTION_POINTER_DOWN: // 5
                                 CallbackBridge.sendPrepareGrabInitialPos();
                                 
                                 isTouchInHotbar = hudKeyHandled != -1;
@@ -410,6 +398,9 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
 
                                     if (CallbackBridge.isGrabbing()) {
+                                        scrollX = 0;
+                                        scrollY = 0;
+                                        
                                         // It cause hold left mouse while moving camera
                                         // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y);
                                         initialX = x;
@@ -418,9 +409,9 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
                                 }
                                 break;
+                                
                             case MotionEvent.ACTION_UP: // 1
                             case MotionEvent.ACTION_CANCEL: // 3
-                            case MotionEvent.ACTION_POINTER_UP: // 6
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
                                     CallbackBridge.mouseY = y;
@@ -456,6 +447,20 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                 
                                 break;
 
+                            case MotionEvent.ACTION_POINTER_DOWN: // 5
+                                scrollX = Math.max(0, scrollX + x - scrollInitialX);
+                                scrollY = Math.max(0, scrollY + y - scrollInitialY);
+                                
+                                CallbackBridge.sendScroll(scrollX, scrollY);
+                                
+                                scrollInitialX = x;
+                                scrollInitialY = y;
+                                break;
+                            case MotionEvent.ACTION_POINTER_UP: // 6
+                                scrollInitialX = x;
+                                scrollInitialY = y;
+                                break;
+ 
                             // TODO implement GLFWScrollCallback to ACTION_SCROLL
                             default:
                                 if (!isTouchInHotbar) {
@@ -682,17 +687,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 					}
 				});
 			minecraftGLView.setOnTouchListener(glTouchListener);
-            minecraftGLView.setOnGenericMotionListener(new OnGenericMotionListener(){
-                @Override
-                public boolean onGenericMotion(View v, MotionEvent event) {
-                    switch (event.getActionMasked()) {
-                        case MotionEvent.ACTION_SCROLL:
-                            CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
-                            break;
-                    }
-                    return true;
-                }
-            });
             
 			minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
 				
@@ -744,6 +738,20 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 						
 					}
 				});
+            
+            OnGenericMotionListener gmlistener = new OnGenericMotionListener(){
+                    @Override
+                    public boolean onGenericMotion(View v, MotionEvent event) {
+                        switch (event.getActionMasked()) {
+                            case MotionEvent.ACTION_SCROLL:
+                                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
+                                break;
+                        }
+                        return true;
+                    }
+                };
+            minecraftGLView.setOnGenericMotionListener(gmlistener);
+            touchPad.setOnGenericMotionListener(gmlistener);
 		} catch (Throwable e) {
 			e.printStackTrace();
 			Tools.showError(this, e, true);
