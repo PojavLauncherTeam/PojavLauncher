@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Pasang Runtime Java %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
+    <string name="alerttitle_installmod">Pilih sebuah instaler mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher tiba-tiba crash!</string>
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
@@ -55,6 +56,8 @@
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Berita</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
@@ -69,6 +72,8 @@
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
     <string name="mcl_options">Pilihan</string>
     <string name="mcl_option_modmgr">Mod manager (tidak berfungsi)</string>
+    <string name="mcl_option_modinstall">Luncurkan sebuah installer mod (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Luncurkan sebuah installer mod (dengan argumen buatan sendiri)</string>
     <string name="mcl_option_checkupdate">Periksa ada update</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
@@ -80,6 +85,7 @@
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan oencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
+    <string name="mcl_setting_title_javaargs">Argumen untuk meluncurkan JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Hati-hati, ini bisa meng-crash permainan jika di-ubah tanpa pengetahuan.</string>
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
