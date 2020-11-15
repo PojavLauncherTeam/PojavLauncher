@@ -338,6 +338,8 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 									placeMouseAt(mouseX, mouseY);
 
 									CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
+                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
+                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
 									break;
 							}
 						}
@@ -405,8 +407,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                         initialY = y;
                                         theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                     }
-                                    
-                                    CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
+                                   
                                     scrollInitialX = x;
                                     scrollInitialY = y;
                                 }
@@ -448,9 +449,6 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
                                 }
                                 
-                                scrollInitialX = x;
-                                scrollInitialY = y;
-                                
                                 break;
 /*
                             case MotionEvent.ACTION_POINTER_DOWN: // 5
@@ -464,11 +462,16 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                 scrollInitialY = y;
                                 break;
  */
-                            default:
+                            case MotionEvent.ACTION_MOVE:
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
                                     CallbackBridge.mouseY = y;
+                                    
                                     CallbackBridge.sendCursorPos(x, y);
+                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
+                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
+                                    
+                                    CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
                                 }
                                 break;
                         }
@@ -1231,10 +1234,15 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 		sendKeyPress(keyCode, 0, false);
 	}
 
+    private boolean isLeftMouseDown, isRightMouseDown;
 	public void sendMouseButton(int button, boolean status) {
         // TODO implement this method!!!
         // CallbackBridge.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
         // or
+        
+        isLeftMouseDown = button == LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT && status;
+        isRightMouseDown = button == LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT && status;
+        
         CallbackBridge.sendMouseKeycode(button, 0, status);
     }
 
