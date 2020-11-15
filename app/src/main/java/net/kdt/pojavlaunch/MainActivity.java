@@ -380,6 +380,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                     } else {
                         switch (e.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN: // 0
+                            case MotionEvent.ACTION_POINTER_DOWN: // 5
                                 CallbackBridge.sendPrepareGrabInitialPos();
                                 
                                 isTouchInHotbar = hudKeyHandled != -1;
@@ -404,10 +405,15 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                         initialY = y;
                                         theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                     }
+                                    
+                                    CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
+                                    scrollInitialX = x;
+                                    scrollInitialY = y;
                                 }
                                 break;
                                 
                             case MotionEvent.ACTION_UP: // 1
+                            case MotionEvent.ACTION_POINTER_UP: // 6
                             case MotionEvent.ACTION_CANCEL: // 3
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
@@ -442,10 +448,12 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     }
                                 }
                                 
+                                scrollInitialX = x;
+                                scrollInitialY = y;
+                                
                                 break;
-
+/*
                             case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            case MotionEvent.ACTION_POINTER_INDEX_SHIFT:
                                 CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
                                 scrollInitialX = x;
                                 scrollInitialY = y;
@@ -455,7 +463,7 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                 scrollInitialX = x;
                                 scrollInitialY = y;
                                 break;
- 
+ */
                             default:
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
