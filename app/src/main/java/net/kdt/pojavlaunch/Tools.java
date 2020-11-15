@@ -160,24 +160,23 @@ public final class Tools
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
         }
-        String mcAssetsDir = Tools.ASSETS_PATH;
         String userType = "mojang";
 
         File gameDir = new File(Tools.MAIN_PATH);
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
-        varArgMap.put("auth_player_name", username);
-        varArgMap.put("version_name", versionName);
-        varArgMap.put("game_directory", gameDir.getAbsolutePath());
-        varArgMap.put("assets_root", mcAssetsDir);
-        varArgMap.put("assets_index_name", versionInfo.assets);
-        varArgMap.put("auth_uuid", profile.getProfileID());
         varArgMap.put("auth_access_token", profile.getAccessToken());
+        varArgMap.put("auth_player_name", username);
+        varArgMap.put("auth_uuid", profile.getProfileID());
+        varArgMap.put("assets_root", Tools.ASSETS_PATH);
+        varArgMap.put("assets_index_name", versionInfo.assets);
+        varArgMap.put("game_assets", Tools.ASSETS_PATH);
+        varArgMap.put("game_directory", gameDir.getAbsolutePath());
         varArgMap.put("user_properties", "{}");
         varArgMap.put("user_type", userType);
+        varArgMap.put("version_name", versionName);
         varArgMap.put("version_type", versionInfo.type);
-        varArgMap.put("game_assets", Tools.ASSETS_PATH);
 
         List<String> minecraftArgs = new ArrayList<String>();
         if (versionInfo.arguments != null) {
