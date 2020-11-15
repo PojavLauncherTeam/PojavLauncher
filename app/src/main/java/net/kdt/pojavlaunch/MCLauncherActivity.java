@@ -123,7 +123,7 @@ public class MCLauncherActivity extends AppCompatActivity
 			Toast.makeText(this, getStr(R.string.toast_login_error, e.getMessage()), Toast.LENGTH_LONG).show();
 			finish();
 		}
-
+/*
         File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
         if (logFile.exists() && logFile.length() < 20480) {
             String errMsg = "Error occurred during initialization of ";
@@ -143,7 +143,7 @@ public class MCLauncherActivity extends AppCompatActivity
                 th.printStackTrace();
             }
         }
-        
+*/
 		//showProfileInfo();
 
 		List<String> versions = new ArrayList<String>();
@@ -448,12 +448,7 @@ public class MCLauncherActivity extends AppCompatActivity
 	// Catching touch exception
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		try {
-			return super.onTouchEvent(event);
-		} catch (Throwable th) {
-			Tools.showError(this, th);
-			return false;
-		}
+		return super.onTouchEvent(event);
 	}
 
 	private GameRunnerTask mTask;
@@ -708,15 +703,15 @@ public class MCLauncherActivity extends AppCompatActivity
             mTask = null;
         }
 
-        private Gson gsonss = gson;
         public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
 
-        public JAssets downloadIndex(String versionName, File output) throws Exception {
-            String versionJson = DownloadUtils.downloadString(verInfo.assetIndex != null ? verInfo.assetIndex.url : "http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json");
-            JAssets version = gsonss.fromJson(versionJson, JAssets.class);
-            output.getParentFile().mkdirs();
-            Tools.write(output.getAbsolutePath(), versionJson.getBytes(Charset.forName("UTF-8")));
-            return version;
+        public JAssets downloadIndex(String versionName, File output) throws Throwable {
+            if (!output.exists()) {
+                output.getParentFile().mkdirs();
+                DownloadUtils.downloadFile(verInfo.assetIndex != null ? verInfo.assetIndex.url : "http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json", output);
+            }
+            
+            return gson.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
         }
 
         public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException, Throwable {
