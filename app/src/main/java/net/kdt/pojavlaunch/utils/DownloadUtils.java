@@ -11,15 +11,11 @@ public class DownloadUtils {
     public static final String USER_AGENT = Tools.APP_NAME;
     public static final Charset utf8 = Charset.forName("UTF-8");
 
-    public static void download(String url, OutputStream os) {
-        try {
-            download(new URL(url), os);
-        } catch (Throwable malformed) {
-            throw new RuntimeException(malformed);
-        }
+    public static void download(String url, OutputStream os) throws IOException {
+        download(new URL(url), os);
     }
 
-    public static void download(URL url, OutputStream os) throws Throwable {
+    public static void download(URL url, OutputStream os) throws IOException {
         InputStream is = null;
         try {
 			// System.out.println("Connecting: " + url.toString());
@@ -29,11 +25,13 @@ public class DownloadUtils {
             conn.setDoInput(true);
             conn.connect();
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new RuntimeException("Server returned HTTP " + conn.getResponseCode()
+                throw new IOException("Server returned HTTP " + conn.getResponseCode()
 					+ ": " + conn.getResponseMessage());
             }
             is = conn.getInputStream();
 			IOUtils.copy(is, os);
+        } catch (IOException e) {
+            throw new IOException("Unable to download from " + url.toString(), e);
         } finally {
 			if (is != null) {
                 try {
@@ -51,7 +49,7 @@ public class DownloadUtils {
         return new String(bos.toByteArray(), utf8);
     }
 
-    public static void downloadFile(String url, File out) throws Throwable {
+    public static void downloadFile(String url, File out) throws IOException {
         out.getParentFile().mkdirs();
         File tempOut = File.createTempFile(out.getName(), ".part", out.getParentFile());
         BufferedOutputStream bos = null;
@@ -66,7 +64,7 @@ public class DownloadUtils {
                 if (tempOut.exists()) {
                     tempOut.delete();
                 }
-            } catch (Throwable th2) {
+            } catch (IOException th2) {
                 if (bos != null) {
                     bos.close();
                 }
@@ -75,7 +73,7 @@ public class DownloadUtils {
                 }
                 throw th2;
             }
-        } catch (Throwable th3) {
+        } catch (IOException th3) {
          
             if (bos != null) {
                 bos.close();
