@@ -186,17 +186,19 @@ public final class Tools
                 if (arg instanceof String) {
                     minecraftArgs.add((String) arg);
                 } else {
+                    /*
                     JMinecraftVersionList.Arguments.ArgValue argv = (JMinecraftVersionList.Arguments.ArgValue) arg;
                     if (argv.values != null) {
                         minecraftArgs.add(argv.values[0]);
                     } else {
-                        /*
+                        
                          for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
                          // rule.action = allow
                          // TODO implement this
                          }
-                         */
+                         
                     }
+                    */
                 }
             }
         }
@@ -571,13 +573,14 @@ public final class Tools
                     }
                 }
             }
-            if (customVer.inheritsFrom == null) {
+            if (customVer.inheritsFrom == null || customVer.inheritsFrom.isEmpty()) {
                 return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer = new Gson().fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
-
+                inheritsVer.inheritsFrom = "";
+                
                 insertSafety(inheritsVer, customVer,
-                             "assetIndex", "assets",
+                             "assetIndex", "assets", "id",
                              "mainClass", "minecraftArguments",
                              "optifineLib", "releaseTime", "time", "type"
                              );
