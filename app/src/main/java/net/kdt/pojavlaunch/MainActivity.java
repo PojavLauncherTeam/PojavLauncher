@@ -338,8 +338,11 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 									placeMouseAt(mouseX, mouseY);
 
 									CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
-                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
-                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
+                                    
+                                    if (!CallbackBridge.isGrabbing()) {
+                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
+                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
+                                    }
 									break;
 							}
 						}
@@ -468,10 +471,15 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     CallbackBridge.mouseY = y;
                                     
                                     CallbackBridge.sendCursorPos(x, y);
-                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
-                                    CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
                                     
-                                    CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
+                                    if (!CallbackBridge.isGrabbing()) {
+                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
+                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
+                                    
+                                        CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
+                                        scrollInitialX = x;
+                                        scrollInitialY = y;
+                                    }
                                 }
                                 break;
                         }
