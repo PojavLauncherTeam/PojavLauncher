@@ -40,6 +40,9 @@ public class JMinecraftVersionList {
 		public static class ArgValue {
 			public ArgRules[] rules;
 			public String value;
+            
+            // TLauncher styled argument...
+            public String[] values;
 
 			public static class ArgRules {
 				public String action;

@@ -186,12 +186,17 @@ public final class Tools
                 if (arg instanceof String) {
                     minecraftArgs.add((String) arg);
                 } else {
-                    /*
-                     for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
-                     // rule.action = allow
-                     // TODO implement this
-                     }
-                     */
+                    JMinecraftVersionList.Arguments.ArgValue argv = (JMinecraftVersionList.Arguments.ArgValue) arg;
+                    if (argv.values != null) {
+                        minecraftArgs.add(argv.values[0]);
+                    } else {
+                        /*
+                         for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
+                         // rule.action = allow
+                         // TODO implement this
+                         }
+                         */
+                    }
                 }
             }
         }
@@ -573,7 +578,7 @@ public final class Tools
 
                 insertSafety(inheritsVer, customVer,
                              "assetIndex", "assets",
-                             "id", "mainClass", "minecraftArguments",
+                             "mainClass", "minecraftArguments",
                              "optifineLib", "releaseTime", "time", "type"
                              );
 
@@ -589,8 +594,35 @@ public final class Tools
                 // Inheriting Minecraft 1.13+ with append custom args
                 if (inheritsVer.arguments != null && customVer.arguments != null) {
                     List totalArgList = new ArrayList();
-                    totalArgList.addAll(Arrays.asList(customVer.arguments.game));
                     totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
+                    
+                    int nskip = 0;
+                    for (int i = 0; i < customVer.arguments.game.length; i++) {
+                        if (nskip > 0) {
+                            nskip--;
+                            continue;
+                        }
+                        
+                        Object perCustomArg = customVer.arguments.game[i];
+                        if (perCustomArg instanceof String) {
+                            String perCustomArgStr = (String) perCustomArg;
+                            // Check if there is a duplicate argument on combine
+                            if (perCustomArgStr.startsWith("--") && totalArgList.contains(perCustomArgStr)) {
+                                perCustomArg = customVer.arguments.game[i + 1];
+                                if (perCustomArg instanceof String) {
+                                    perCustomArgStr = (String) perCustomArg;
+                                    // If the next is argument value, skip it
+                                    if (!perCustomArgStr.startsWith("--")) {
+                                        nskip++;
+                                    }
+                                }
+                            } else {
+                                totalArgList.add(perCustomArgStr);
+                            }
+                        } else if (!totalArgList.contains(perCustomArg)) {
+                            totalArgList.add(perCustomArg);
+                        }
+                    }
 
                     inheritsVer.arguments.game = totalArgList.toArray(new Object[0]);
                 }
