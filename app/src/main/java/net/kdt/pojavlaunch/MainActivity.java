@@ -338,11 +338,12 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
 									placeMouseAt(mouseX, mouseY);
 
 									CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
-                                    
+                                    /*
                                     if (!CallbackBridge.isGrabbing()) {
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
                                     }
+                                    */
 									break;
 							}
 						}
@@ -473,9 +474,10 @@ public class MainActivity extends LoggableActivity implements OnTouchListener, O
                                     CallbackBridge.sendCursorPos(x, y);
                                     
                                     if (!CallbackBridge.isGrabbing()) {
+                                        /*
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
-                                    
+                                        */
                                         CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
                                         scrollInitialX = x;
                                         scrollInitialY = y;
