@@ -234,10 +234,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
             if (!isPrepareGrabPos) {
                 grabCursorX += x - lastCursorX;
                 grabCursorY += y - lastCursorY;
-            } else {
+            }
+            
+            lastCursorX = x;
+            lastCursorY = y;
+            
+            if (isPrepareGrabPos) {
                 isPrepareGrabPos = false;
-                lastCursorX = x;
-                lastCursorY = y;
                 return;
             }
         }
