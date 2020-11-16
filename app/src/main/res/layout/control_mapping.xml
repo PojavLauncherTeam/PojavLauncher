@@ -17,12 +17,12 @@
 			android:layout_width="wrap_content"
 			android:layout_alignParentRight="true"/>
 
-		<net.kdt.pojavlaunch.value.customcontrols.ControlsLayout
+		<net.kdt.pojavlaunch.customcontrols.ControlsLayout
 			android:id="@+id/customctrl_controllayout"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-		</net.kdt.pojavlaunch.value.customcontrols.ControlsLayout>
+		</net.kdt.pojavlaunch.customcontrols.ControlsLayout>
 
 	</RelativeLayout>
 
