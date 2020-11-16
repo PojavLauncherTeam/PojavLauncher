@@ -188,7 +188,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
         if (isMinecraft1p12 || isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
         } else {
-            GLFW_invoke_Char(showingWindow, unsigned(codepoint));
+            GLFW_invoke_Char(showingWindow, (unsigned int) codepoint);
         }
         return JNI_TRUE;
     }
@@ -198,7 +198,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jint codepoint, jint mods) {
     if (GLFW_invoke_CharMods && isInputReady) {
         if (isMinecraft1p12 || isUseStackQueueCall) {
-            sendData(EVENT_TYPE_CHAR_MODS, unsigned(codepoint), mods, 0, 0);
+            sendData(EVENT_TYPE_CHAR_MODS, (unsigned int) codepoint, mods, 0, 0);
         } else {
             GLFW_invoke_CharMods(showingWindow, codepoint, mods);
         }
