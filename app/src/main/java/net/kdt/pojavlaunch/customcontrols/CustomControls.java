@@ -42,6 +42,6 @@ public class CustomControls
 	}
 	
 	public void save(String path) throws Exception {
-		Tools.write(path, new Gson().toJson(this));
+		Tools.write(path, Tools.GLOBAL_GSON.toJson(this));
 	}
 }

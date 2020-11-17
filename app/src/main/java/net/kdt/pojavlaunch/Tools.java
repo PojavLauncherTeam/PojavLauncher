@@ -22,17 +22,19 @@ import android.view.*;
 
 public final class Tools
 {
-    public static boolean enableDevFeatures = BuildConfig.DEBUG;
+    public static final boolean enableDevFeatures = BuildConfig.DEBUG;
 
     public static String APP_NAME = "null";
-    public static String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
-    public static String ASSETS_PATH = MAIN_PATH + "/assets";
-    public static String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
-    public static String CTRLDEF_FILE = MAIN_PATH + "/controlmap/default.json";
+    public static final String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
+    public static final String ASSETS_PATH = MAIN_PATH + "/assets";
+    public static final String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
+    public static final String CTRLDEF_FILE = MAIN_PATH + "/controlmap/default.json";
 
+    public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
+    
+    public static final String mhomeUrl = "https://pojavlauncherteam.github.io/PojavLauncher";
     public static int usingVerCode = 1;
-    public static String usingVerName = "2.4.2";
-    public static String mhomeUrl = "https://pojavlauncherteam.github.io/PojavLauncher"; // "http://kdtjavacraft.eu5.net";
+    public static String usingVerName = "3.2.0";
     public static String datapath = "/data/data/net.kdt.pojavlaunch";
     public static String worksDir = datapath + "/app_working_dir";
     public static String currentArch;
@@ -42,14 +44,14 @@ public final class Tools
     public static String homeJreLib = "lib";
 
     // New since 2.4.2
-    public static String versnDir = MAIN_PATH + "/versions";
-    public static String libraries = MAIN_PATH + "/libraries";
-    public static String optifineDir = MAIN_PATH + "/optifine";
+    public static final String versnDir = MAIN_PATH + "/versions";
+    public static final String libraries = MAIN_PATH + "/libraries";
+    public static final String optifineDir = MAIN_PATH + "/optifine";
 
+    public static final String crashPath = MAIN_PATH + "/crash-reports";
     public static String mpProfiles = datapath + "/Users";
-    public static String crashPath = MAIN_PATH + "/crash-reports";
 
-    public static String optifineLib = "optifine:OptiFine";
+    public static final String optifineLib = "optifine:OptiFine";
 
     private static int exitCode = 0;
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
@@ -465,9 +467,7 @@ public final class Tools
         ctx.runOnUiThread(new Runnable(){
 
                 @Override
-                public void run()
-                {
-                    // TODO: Implement this method
+                public void run() {
                     new AlertDialog.Builder(ctx)
                         .setTitle(title)
                         .setMessage(message)
@@ -508,31 +508,7 @@ public final class Tools
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         act.startActivity(browserIntent);
     }
-    /*
-     public static void clearDuplicateFiles(File f) throws IOException {
-     List<File> list = Arrays.asList(f.listFiles());
-     for (File file : list) {
-     if (!file.exists()) {
-     // The file was deleted by duplicate
-     list.remove(file);
-     continue;
-     }
 
-     String md5 = Md5Crypt.md5Crypt(read(file));
-     list.remove(file);
-     clearDuplicateFilesByMD5(list.toArray(new File[0]), md5);
-     }
-     }
-
-     public static void clearDuplicateFilesByMD5(File[] list, String md5Find) throws IOException {
-     for (File file : list) {
-     String md5Other = DigestUtils.md5Hex(new FileInputStream(file));
-     if (md5Find.equals(md5Other)) {
-     file.delete();
-     }
-     }
-     }
-     */
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<String>();
 
@@ -545,7 +521,7 @@ public final class Tools
 
     public static JMinecraftVersionList.Version getVersionInfo(String versionName) {
         try {
-            JMinecraftVersionList.Version customVer = new Gson().fromJson(read(versnDir + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
+            JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(versnDir + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             for (DependentLibrary lib : customVer.libraries) {
                 if (lib.name.startsWith(optifineLib)) {
                     customVer.optifineLib = lib;
@@ -559,7 +535,7 @@ public final class Tools
             if (customVer.inheritsFrom == null || customVer.inheritsFrom.isEmpty()) {
                 return customVer;
             } else {
-                JMinecraftVersionList.Version inheritsVer = new Gson().fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
+                JMinecraftVersionList.Version inheritsVer = Tools.GLOBAL_GSON.fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
                 inheritsVer.inheritsFrom = "";
                 
                 insertSafety(inheritsVer, customVer,

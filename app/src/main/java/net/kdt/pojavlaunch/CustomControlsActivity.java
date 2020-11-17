@@ -92,7 +92,7 @@ public class CustomControlsActivity extends AppCompatActivity
 	private void setDefaultControlJson(String path) {
 		try {
 			// Load before save to make sure control is not error
-			ctrlLayout.loadLayout(new Gson().fromJson(Tools.read(path), CustomControls.class));
+			ctrlLayout.loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(path), CustomControls.class));
 			LauncherPreferences.DEFAULT_PREF.edit().putString("defaultCtrl", path).commit();
 			LauncherPreferences.PREF_DEFAULTCTRL_PATH = path;
 		} catch (Throwable th) {

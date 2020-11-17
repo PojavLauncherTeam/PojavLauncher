@@ -642,17 +642,13 @@ public class PojavLoginActivity extends AppCompatActivity
             new LoginTask().setLoginListener(new LoginListener(){
 
                     @Override
-                    public void onBeforeLogin()
-                    {
-                        // TODO: Implement this method
+                    public void onBeforeLogin() {
                         v.setEnabled(false);
                         prb.setVisibility(View.VISIBLE);
                     }
 
                     @Override
-                    public void onLoginDone(String[] result)
-                    {
-                        // TODO: Implement this method
+                    public void onLoginDone(String[] result) {
                         if(result[0].equals("ERROR")){
                             Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(R.string.global_error), strArrToString(result));
                         } else{

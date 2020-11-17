@@ -1,24 +1,23 @@
 package com.kdt.mojangauth.yggdrasil;
 
 import android.util.*;
-import com.google.gson.*;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.*;
 import java.util.*;
+import net.kdt.pojavlaunch.*;
 
 public class YggdrasilAuthenticator {
     private static final String API_URL = "https://authserver.mojang.com/";
     private String clientName = "Minecraft";
     private int clientVersion = 1;
-    private Gson gson = new Gson();
 
     private <T> T makeRequest(String endpoint, Object inputObject, Class<T> responseClass) throws IOException, Throwable {
         Throwable th;
         InputStream is = null;
         byte[] buf = new byte[16384];
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        String requestJson = this.gson.toJson(inputObject);
+        String requestJson = Tools.GLOBAL_GSON.toJson(inputObject);
         try {
             URL url = new URL(API_URL + endpoint);
             OutputStream os;
@@ -53,7 +52,7 @@ public class YggdrasilAuthenticator {
                 if (statusCode == 200){
 					Log.i("Result", "Task " + endpoint + " successful");
 					
-                    return this.gson.fromJson(outString, responseClass);
+                    return Tools.GLOBAL_GSON.fromJson(outString, responseClass);
                 }
 				throw new RuntimeException("Invalid username or password, status code: " + statusCode);
             } catch (UnknownHostException e) {
@@ -64,6 +63,7 @@ public class YggdrasilAuthenticator {
                     try {
                         is.close();
                     } catch (Exception e2) {
+                        e2.addSuppressed(th2);
 						throw e2;
                     }
                 }

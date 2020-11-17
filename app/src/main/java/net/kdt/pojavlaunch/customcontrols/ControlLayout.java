@@ -32,7 +32,7 @@ public class ControlLayout extends FrameLayout
 
 	public void loadLayout(String jsonPath) {
 		try {
-			loadLayout(new Gson().fromJson(Tools.read(jsonPath), CustomControls.class));
+			loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(jsonPath), CustomControls.class));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

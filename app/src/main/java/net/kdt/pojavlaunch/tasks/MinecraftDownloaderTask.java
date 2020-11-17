@@ -266,7 +266,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             DownloadUtils.downloadFile(verInfo.assetIndex != null ? verInfo.assetIndex.url : "http://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json", output);
         }
 
-        return new Gson().fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
+        return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
     }
 
     public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException, Throwable {
