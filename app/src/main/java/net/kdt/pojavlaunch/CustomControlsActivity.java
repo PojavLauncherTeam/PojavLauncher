@@ -19,7 +19,7 @@ public class CustomControlsActivity extends AppCompatActivity
 {
 	private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
-	private ControlsLayout ctrlLayout;
+	private ControlLayout ctrlLayout;
 	private CustomControls mCtrl;
 
 	private SharedPreferences mPref;
@@ -38,7 +38,7 @@ public class CustomControlsActivity extends AppCompatActivity
 
 		gson = new GsonBuilder().setPrettyPrinting().create();
 
-		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
+		ctrlLayout = (ControlLayout) findViewById(R.id.customctrl_controllayout);
 
 		// Menu
 		drawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
@@ -53,7 +53,7 @@ public class CustomControlsActivity extends AppCompatActivity
 							actionLoad();
 							break;
 						case R.id.menu_ctrl_add:
-							ctrlLayout.addControlButton(new ControlButton("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
+							ctrlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
 							break;
 						case R.id.menu_ctrl_selectdefault:
 							dialogSelectDefaultCtrl();

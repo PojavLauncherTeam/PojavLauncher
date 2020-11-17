@@ -11,6 +11,7 @@
  
 * Third party licenses:<br>
  • Apache Commons Compress (unknown or Apache License 2.0).<br>
+ • exp4j: <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.<br>
  • gl4es: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.<br>
  • LegacyLauncher: (unknown license).<br>
  • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2 License</a>.<br>

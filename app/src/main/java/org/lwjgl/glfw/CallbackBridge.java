@@ -32,7 +32,7 @@ public class CallbackBridge {
     private static boolean threadAttached;
     public static void sendCursorPos(int x, int y) {
         if (!threadAttached) {
-            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, isMinecraft1p12, MainActivity.isInputStackCall);
+            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, isMinecraft1p12, BaseMainActivity.isInputStackCall);
         }
         
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
@@ -85,12 +85,12 @@ public class CallbackBridge {
     public static String accessAndroidClipboard(int type, String copy) {
         switch (type) {
             case CLIPBOARD_COPY:
-                MainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
+                BaseMainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
                 return null;
                 
             case CLIPBOARD_PASTE:
-                if (MainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && MainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    return MainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
+                if (BaseMainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    return BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
                 } else {
                     return "";
                 }

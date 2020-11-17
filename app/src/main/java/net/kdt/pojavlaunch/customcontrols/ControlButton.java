@@ -1,99 +1,145 @@
 package net.kdt.pojavlaunch.customcontrols;
 
-import java.util.*;
+import android.content.*;
+import android.view.*;
+import android.view.View.*;
+import android.widget.*;
 import net.kdt.pojavlaunch.*;
-import org.lwjgl.glfw.*;
+import com.kdt.handleview.*;
+import android.view.ViewGroup.*;
 
-public class ControlButton implements Cloneable
+public class ControlButton extends Button implements OnLongClickListener, OnTouchListener
 {
-	public static int pixelOf2dp;
-	public static int pixelOf30dp;
-	public static int pixelOf50dp;
-	public static int pixelOf80dp;
-
-	public static final int SPECIALBTN_KEYBOARD = -1;
-	public static final int SPECIALBTN_TOGGLECTRL = -2;
-	public static final int SPECIALBTN_MOUSEPRI = -3;
-	public static final int SPECIALBTN_MOUSESEC = -4;
-	public static final int SPECIALBTN_VIRTUALMOUSE = -5;
+	private GestureDetector mGestureDetector;
+	private ControlData mProperties;
+	private SelectionEndHandleView mHandleView;
 	
-	private static ControlButton[] SPECIAL_BUTTONS;
-	private static String[] SPECIAL_BUTTON_NAME_ARRAY;
-
-	public static ControlButton[] getSpecialButtons(){
-		if (SPECIAL_BUTTONS == null) {
-			SPECIAL_BUTTONS = new ControlButton[]{
-				new ControlButton("Keyboard", SPECIALBTN_KEYBOARD, pixelOf2dp * 3 + pixelOf80dp * 2, pixelOf2dp, false),
-				new ControlButton("GUI", SPECIALBTN_TOGGLECTRL, pixelOf2dp, CallbackBridge.windowHeight - pixelOf50dp * 2 + pixelOf2dp * 4),
-				new ControlButton("PRI", SPECIALBTN_MOUSEPRI, pixelOf2dp, CallbackBridge.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
-				new ControlButton("SEC", SPECIALBTN_MOUSESEC, pixelOf2dp * 3 + pixelOf50dp * 2, CallbackBridge.windowHeight - pixelOf50dp * 4 + pixelOf2dp * 2),
-				new ControlButton("Mouse", SPECIALBTN_VIRTUALMOUSE, CallbackBridge.windowWidth - pixelOf80dp, pixelOf2dp, false)
-			};
-		}
-
-		return SPECIAL_BUTTONS;
+	private boolean mCanModify = false;
+	private boolean mCanTriggerLongClick = true;
+	
+	public ControlButton(Context ctx, ControlData properties) {
+		super(ctx);
+		
+		mGestureDetector = new GestureDetector(ctx, new SingleTapConfirm());
+		
+		setBackgroundResource(R.drawable.control_button);
+		
+		setOnLongClickListener(this);
+		setOnTouchListener(this);
+		
+		setProperties(properties);
+		
+		mHandleView = new SelectionEndHandleView(this);
+	}
+	
+	public HandleView getHandleView() {
+		return mHandleView;
 	}
 
-	public static String[] buildSpecialButtonArray() {
-		if (SPECIAL_BUTTON_NAME_ARRAY == null) {
-			List<String> nameList = new ArrayList<String>();
-			for (ControlButton btn : getSpecialButtons()) {
-				nameList.add(btn.name);
+	public ControlData getProperties() {
+		return mProperties;
+	}
+	
+	public void setProperties(ControlData properties) {
+		setProperties(properties, true);
+	}
+	
+	public void setProperties(ControlData properties, boolean changePos) {
+		mProperties = properties;
+		// com.android.internal.R.string.delete
+		// android.R.string.
+		setText(properties.name);
+		if (changePos) {
+			setTranslationX(moveX = properties.x);
+			setTranslationY(moveY = properties.y);
+		}
+		
+		if (properties.specialButtonListener == null) {
+            // A non-special button or inside custom controls screen so skip listener
+        } else if (properties.specialButtonListener instanceof View.OnClickListener) {
+			setOnClickListener((View.OnClickListener) properties.specialButtonListener);
+		} else if (properties.specialButtonListener instanceof View.OnTouchListener) {
+			setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
+		} else {
+			throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but is " + properties.specialButtonListener.getClass().getName());
+		}
+		
+		setLayoutParams(new FrameLayout.LayoutParams(properties.width, properties.height));
+	}
+
+	@Override
+	public void setLayoutParams(ViewGroup.LayoutParams params)
+	{
+		super.setLayoutParams(params);
+		
+		mProperties.width = params.width;
+		mProperties.height = params.height;
+	}
+	
+	@Override
+	public void setTranslationX(float x)
+	{
+		super.setTranslationX(x);
+		mProperties.x = x;
+	}
+
+	@Override
+	public void setTranslationY(float y) {
+		super.setTranslationY(y);
+		mProperties.y = y;
+	}
+	
+	public void updateProperties() {
+		setProperties(mProperties);
+	}
+
+	@Override
+	public boolean onLongClick(View p1)
+	{
+		if (!mCanTriggerLongClick) return false;
+
+		if (mHandleView.isShowing()) {
+			mHandleView.hide();
+		} else {
+			if (getParent() != null) {
+				((ControlLayout) getParent()).hideAllHandleViews();
 			}
-			SPECIAL_BUTTON_NAME_ARRAY = nameList.toArray(new String[0]);
+			mHandleView.show();
 		}
-
-		return SPECIAL_BUTTON_NAME_ARRAY;
+		return true;
 	}
-
-	public String name;
-	public float x;
-	public float y;
-	public int width = pixelOf50dp;
-	public int height = pixelOf50dp;
-	public int keycode;
-	public int keyindex;
-	public boolean hidden;
-	public boolean holdCtrl;
-	public boolean holdAlt;
-	public boolean holdShift;
-	public /* View.OnClickListener */ Object specialButtonListener;
-	// public boolean hold
-
-	public ControlButton() {
-		this("", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 0, 0);
+	
+	private float moveX, moveY;
+	private float downX, downY;
+	@Override
+	public boolean onTouch(View view, MotionEvent event) {
+		if (!mCanModify) {
+			mCanTriggerLongClick = false;
+			
+			return false;
+		}
+		
+		switch (event.getActionMasked()) {
+			case MotionEvent.ACTION_DOWN:
+				mCanTriggerLongClick = true;
+				downX = event.getX();
+				downY = event.getY();
+				break;
+			case MotionEvent.ACTION_UP:
+			case MotionEvent.ACTION_MOVE:
+				mCanTriggerLongClick = false;
+				moveX += event.getX() - downX;
+				moveY += event.getY() - downY;
+				
+				setTranslationX(moveX);
+				setTranslationY(moveY);
+				break;
+		}
+		
+		return false;
 	}
-
-	public ControlButton(String name, int keycode) {
-		this(name, keycode, 0, 0);
-	}
-
-	public ControlButton(String name, int keycode, float x, float y) {
-		this(name, keycode, x, y, pixelOf50dp, pixelOf50dp);
-	}
-
-	public ControlButton(android.content.Context ctx, int resId, int keycode, float x, float y, boolean isSquare) {
-		this(ctx.getResources().getString(resId), keycode, x, y, isSquare);
-	}
-
-	public ControlButton(String name, int keycode, float x, float y, boolean isSquare) {
-		this(name, keycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
-	}
-
-	public ControlButton(String name, int keycode, float x, float y, int width, int height) {
-		this.name = name;
-		this.keycode = keycode;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
-
-	public void execute(MainActivity act, boolean isDown) {
-		act.sendKeyPress(keycode, 0, isDown);
-	}
-
-	public ControlButton clone() {
-		return new ControlButton(name, keycode, x, y, width, height);
+	
+	public void setModifiable(boolean z) {
+		mCanModify = z;
 	}
 }

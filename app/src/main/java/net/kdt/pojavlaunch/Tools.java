@@ -98,7 +98,7 @@ public final class Tools
 
                             @Override
                             public void onClick(DialogInterface p1, int p2){
-                                MainActivity.fullyExit();
+                                BaseMainActivity.fullyExit();
                             }
                         });
                     dialog.show();
@@ -202,7 +202,7 @@ public final class Tools
             }
         }
 
-        String[] argsFromJson = insertVariableArgument(
+        String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(
                 versionInfo.minecraftArguments == null ?
                 fromStringArray(minecraftArgs.toArray(new String[0])):
@@ -239,22 +239,6 @@ public final class Tools
         }
         strList.add("--fullscreen");
         return strList.toArray(new String[0]);
-    }
-
-    private static String[] insertVariableArgument(String[] args, Map<String, String> keyValueMap) {
-        for (int i = 0; i < args.length; i++) {
-            String arg = args[i];
-            String argVar = null;
-            if (arg.startsWith("${") && arg.endsWith("}")) {
-                argVar = arg.substring(2, arg.length() - 1);
-                for (Map.Entry<String, String> keyValue : keyValueMap.entrySet()) {
-                    if (argVar.equals(keyValue.getKey())) {
-                        args[i] = keyValue.getValue();
-                    }
-                }
-            }
-        }
-        return args;
     }
 
     public static String artifactToPath(String group, String artifact, String version) {
@@ -432,8 +416,8 @@ public final class Tools
                         public void onClick(DialogInterface p1, int p2)
                         {
                             if(exitIfOk) {
-                                if (ctx instanceof MainActivity) {
-                                    MainActivity.fullyExit();
+                                if (ctx instanceof BaseMainActivity) {
+                                    BaseMainActivity.fullyExit();
                                 } else if (ctx instanceof Activity) {
                                     ((Activity) ctx).finish();
                                 }
@@ -456,8 +440,8 @@ public final class Tools
                             android.content.ClipboardManager mgr = (android.content.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
                             mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
                             if(exitIfOk) {
-                                if (ctx instanceof MainActivity) {
-                                    MainActivity.fullyExit();
+                                if (ctx instanceof BaseMainActivity) {
+                                    BaseMainActivity.fullyExit();
                                 } else {
                                     ((Activity) ctx).finish();
                                 }

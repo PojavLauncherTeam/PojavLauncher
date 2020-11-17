@@ -27,7 +27,7 @@ import net.kdt.pojavlaunch.customcontrols.*;
 
 public class SelectionEndHandleView extends HandleView
 {
-	public SelectionEndHandleView(ControlView view) {
+	public SelectionEndHandleView(ControlButton view) {
 		super(view);
 	}
 

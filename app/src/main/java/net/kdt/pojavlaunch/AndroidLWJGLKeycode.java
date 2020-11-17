@@ -168,7 +168,7 @@ public class AndroidLWJGLKeycode {
         return androidKeyNameArray;
     }
     
-    public static void execKey(MainActivity mainActivity, KeyEvent keyEvent, int i, boolean isDown) {
+    public static void execKey(BaseMainActivity mainActivity, KeyEvent keyEvent, int i, boolean isDown) {
         for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
             if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
                 // Right mouse detection
@@ -207,7 +207,7 @@ public class AndroidLWJGLKeycode {
         }
     }
 
-    public static void execKeyIndex(MainActivity mainActivity, int index) {
+    public static void execKeyIndex(BaseMainActivity mainActivity, int index) {
         mainActivity.sendKeyPress(getKeyIndex(index));
     }
     

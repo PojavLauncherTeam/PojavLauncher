@@ -120,7 +120,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 			alert.setPositiveButton(android.R.string.ok, null);
 			alert.setNegativeButton(android.R.string.cancel, null);
 			final AlertDialog dialog = alert.create();
-			final ControlButton properties = mHandleView.mView.getProperties();
+			final ControlData properties = mHandleView.mView.getProperties();
 
 			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
 
@@ -134,7 +134,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						final Spinner spinnerKeycode = dialog.findViewById(R.id.controlsetting_spinner_lwjglkeycode);
 						ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item);
 
-						String[] oldSpecialArr = ControlButton.buildSpecialButtonArray();
+						String[] oldSpecialArr = ControlData.buildSpecialButtonArray();
 						String[] specialArr = new String[oldSpecialArr.length];
 						for (int i = 0; i < specialArr.length; i++) {
 							specialArr[i] = "SPECIAL_" + oldSpecialArr[i];
@@ -145,7 +145,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
 						if (properties.keycode < 0) {
-							spinnerKeycode.setSelection(properties.keycode + 2);
+							spinnerKeycode.setSelection(properties.keycode + 5);
 						} else {
 							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode + 2));
 						}
@@ -194,7 +194,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 					@Override
 					public void onClick(DialogInterface p1, int p2)
 					{
-						ControlsLayout layout = ((ControlsLayout) mHandleView.mView.getParent());
+						ControlLayout layout = ((ControlLayout) mHandleView.mView.getParent());
 						layout.removeControlButton(mHandleView.mView);
 					}
 				});

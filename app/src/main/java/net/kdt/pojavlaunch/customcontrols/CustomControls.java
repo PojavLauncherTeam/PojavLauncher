@@ -7,37 +7,37 @@ import org.lwjgl.glfw.*;
 
 public class CustomControls
 {
-	public List<ControlButton> button;
+	public List<ControlData> button;
 	public CustomControls() {
-		this(new ArrayList<ControlButton>());
+		this(new ArrayList<ControlData>());
 	}
 	
-	public CustomControls(List<ControlButton> button) {
+	public CustomControls(List<ControlData> button) {
 		this.button = button;
 	}
 	
 	// Generate default control
 	public CustomControls(Context ctx) {
 		this();
-		this.button.add(ControlButton.getSpecialButtons()[0].clone()); // Keyboard
-		this.button.add(ControlButton.getSpecialButtons()[1].clone()); // GUI
-		this.button.add(ControlButton.getSpecialButtons()[2].clone()); // Primary Mouse button
-		this.button.add(ControlButton.getSpecialButtons()[3].clone()); // Secondary Mouse button
-		this.button.add(ControlButton.getSpecialButtons()[4].clone()); // Virtual mouse toggle
+		this.button.add(ControlData.getSpecialButtons()[0].clone()); // Keyboard
+		this.button.add(ControlData.getSpecialButtons()[1].clone()); // GUI
+		this.button.add(ControlData.getSpecialButtons()[2].clone()); // Primary Mouse button
+		this.button.add(ControlData.getSpecialButtons()[3].clone()); // Secondary Mouse button
+		this.button.add(ControlData.getSpecialButtons()[4].clone()); // Virtual mouse toggle
 
-		this.button.add(new ControlButton(ctx, R.string.control_debug, LWJGLGLFWKeycode.GLFW_KEY_F3, ControlButton.pixelOf2dp, ControlButton.pixelOf2dp, false));
-		this.button.add(new ControlButton(ctx, R.string.control_chat, LWJGLGLFWKeycode.GLFW_KEY_T, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf80dp, ControlButton.pixelOf2dp, false)); 
-		this.button.add(new ControlButton(ctx, R.string.control_listplayers, LWJGLGLFWKeycode.GLFW_KEY_TAB, ControlButton.pixelOf2dp * 4 + ControlButton.pixelOf80dp * 3, ControlButton.pixelOf2dp, false));
-		this.button.add(new ControlButton(ctx, R.string.control_thirdperson, LWJGLGLFWKeycode.GLFW_KEY_F5, ControlButton.pixelOf2dp, ControlButton.pixelOf30dp + ControlButton.pixelOf2dp, false));
+		this.button.add(new DynamicControlData(ctx, R.string.control_debug, LWJGLGLFWKeycode.GLFW_KEY_F3, "${margin}", "${margin}", false));
+		this.button.add(new DynamicControlData(ctx, R.string.control_chat, LWJGLGLFWKeycode.GLFW_KEY_T, "${margin} * 2 + ${width}", "${margin}", false)); 
+		this.button.add(new DynamicControlData(ctx, R.string.control_listplayers, LWJGLGLFWKeycode.GLFW_KEY_TAB, "${margin} * 4 + ${width} * 3", "${margin}", false));
+		this.button.add(new DynamicControlData(ctx, R.string.control_thirdperson, LWJGLGLFWKeycode.GLFW_KEY_F5, "${margin}", "${height} + ${margin}", false));
 
-		this.button.add(new ControlButton(ctx, R.string.control_up, LWJGLGLFWKeycode.GLFW_KEY_W, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, CallbackBridge.windowHeight - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 3, true));
-		this.button.add(new ControlButton(ctx, R.string.control_left, LWJGLGLFWKeycode.GLFW_KEY_A, ControlButton.pixelOf2dp, CallbackBridge.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true)); 
-		this.button.add(new ControlButton(ctx, R.string.control_down, LWJGLGLFWKeycode.GLFW_KEY_S, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, CallbackBridge.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp, true));
-		this.button.add(new ControlButton(ctx, R.string.control_right, LWJGLGLFWKeycode.GLFW_KEY_D, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, CallbackBridge.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		this.button.add(new DynamicControlData(ctx, R.string.control_up, LWJGLGLFWKeycode.GLFW_KEY_W, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 3 - ${height} * 3", true));
+		this.button.add(new DynamicControlData(ctx, R.string.control_left, LWJGLGLFWKeycode.GLFW_KEY_A, "${margin}", "${screen_height} - ${margin} * 2 - ${height} * 2", true)); 
+		this.button.add(new DynamicControlData(ctx, R.string.control_down, LWJGLGLFWKeycode.GLFW_KEY_S, "${margin} * 2 + ${width}", "${screen_height} - ${margin} - ${width}", true));
+		this.button.add(new DynamicControlData(ctx, R.string.control_right, LWJGLGLFWKeycode.GLFW_KEY_D, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 2 - ${width} * 2", true));
 
-		this.button.add(new ControlButton(ctx, R.string.control_inventory, LWJGLGLFWKeycode.GLFW_KEY_E, ControlButton.pixelOf2dp * 3 + ControlButton.pixelOf50dp * 2, CallbackBridge.windowHeight - ControlButton.pixelOf2dp - ControlButton.pixelOf50dp, true));
-		this.button.add(new ControlButton(ctx, R.string.control_shift, LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, ControlButton.pixelOf2dp * 2 + ControlButton.pixelOf50dp, CallbackBridge.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
-		this.button.add(new ControlButton(ctx, R.string.control_jump, LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.windowWidth - ControlButton.pixelOf2dp * 3 - ControlButton.pixelOf50dp * 2, CallbackBridge.windowHeight - ControlButton.pixelOf2dp * 2 - ControlButton.pixelOf50dp * 2, true));
+		this.button.add(new DynamicControlData(ctx, R.string.control_inventory, LWJGLGLFWKeycode.GLFW_KEY_E, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} - ${width}", true));
+		this.button.add(new DynamicControlData(ctx, R.string.control_shift, LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 2 - ${width} * 2", true));
+		this.button.add(new DynamicControlData(ctx, R.string.control_jump, LWJGLGLFWKeycode.GLFW_KEY_SPACE, "${screen_width} - ${margin} * 3 - ${width} * 2", "${screen_height} - ${margin} * 2 - ${width} * 2", true));
 		
 	}
 	

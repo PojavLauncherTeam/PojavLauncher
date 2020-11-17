@@ -73,5 +73,7 @@ dependencies {
 
     implementation 'org.tukaani:xz:1.8'
     
+    implementation 'net.objecthunter:exp4j:0.4.8'
+    
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

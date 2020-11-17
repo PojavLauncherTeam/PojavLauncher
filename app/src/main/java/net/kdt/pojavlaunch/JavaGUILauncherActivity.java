@@ -70,7 +70,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     }
 
     public void forceClose(View v) {
-        MainActivity.dialogForceClose(this);
+        BaseMainActivity.dialogForceClose(this);
     }
 
     public void openLogOutput(View v) {
