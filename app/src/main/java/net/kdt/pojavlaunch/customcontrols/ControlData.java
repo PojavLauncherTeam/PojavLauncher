@@ -93,6 +93,10 @@ public class ControlData implements Cloneable
 	}
 
 	public ControlData clone() {
-		return new ControlData(name, keycode, x, y, width, height);
+        if (this instanceof DynamicControlData) {
+            return new DynamicControlData(name, keycode, ((DynamicControlData) this).dynamicX, ((DynamicControlData) this).dynamicY, width, height);
+        } else {
+            return new ControlData(name, keycode, x, y, width, height);
+        }
 	}
 }

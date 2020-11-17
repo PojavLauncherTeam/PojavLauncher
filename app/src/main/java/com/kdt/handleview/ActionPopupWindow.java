@@ -147,7 +147,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						if (properties.keycode < 0) {
 							spinnerKeycode.setSelection(properties.keycode + 5);
 						} else {
-							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode + 2));
+							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode + 5));
 						}
 						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
@@ -173,7 +173,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									if (editName.getText().toString().isEmpty()) {
 										editName.setError(view.getResources().getString(R.string.global_error_field_empty));
 									} else {
-										properties.keycode = AndroidLWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 2;
+										properties.keycode = AndroidLWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 5;
 										properties.name = editName.getText().toString();
 										properties.hidden = checkHidden.isChecked();
 

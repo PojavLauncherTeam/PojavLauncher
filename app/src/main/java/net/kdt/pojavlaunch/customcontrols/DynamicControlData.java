@@ -16,7 +16,7 @@ public class DynamicControlData extends ControlData {
      * bigger device or vice versa.
      */
     
-    private String dynamicX, dynamicY;
+    public String dynamicX, dynamicY;
     
     public DynamicControlData() {
         this("", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN);
