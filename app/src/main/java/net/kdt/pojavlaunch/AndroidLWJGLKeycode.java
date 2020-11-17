@@ -208,10 +208,10 @@ public class AndroidLWJGLKeycode {
     }
 
     public static void execKeyIndex(BaseMainActivity mainActivity, int index) {
-        mainActivity.sendKeyPress(getKeyIndex(index));
+        mainActivity.sendKeyPress(getKeyByIndex(index));
     }
     
-    public static int getKeyIndex(int index) {
+    public static int getKeyByIndex(int index) {
         return androidToLwjglMap.valueAt(index);
     }
 

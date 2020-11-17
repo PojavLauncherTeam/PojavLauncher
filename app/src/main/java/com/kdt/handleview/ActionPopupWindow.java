@@ -135,7 +135,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item);
 
 						String[] oldSpecialArr = ControlData.buildSpecialButtonArray();
-						String[] specialArr = new String[oldSpecialArr.length];
+						final String[] specialArr = new String[oldSpecialArr.length];
 						for (int i = 0; i < specialArr.length; i++) {
 							specialArr[i] = "SPECIAL_" + oldSpecialArr[i];
 						}
@@ -145,15 +145,15 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
 						if (properties.keycode < 0) {
-							spinnerKeycode.setSelection(properties.keycode + 5);
+							spinnerKeycode.setSelection(properties.keycode + specialArr.length);
 						} else {
-							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode + 5));
+							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode));
 						}
 						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
 								@Override
 								public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
-									normalBtnLayout.setVisibility(id < 2 ? View.GONE : View.VISIBLE);
+									normalBtnLayout.setVisibility(id < specialArr.length ? View.GONE : View.VISIBLE);
 								}
 
 								@Override
@@ -173,7 +173,11 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									if (editName.getText().toString().isEmpty()) {
 										editName.setError(view.getResources().getString(R.string.global_error_field_empty));
 									} else {
-										properties.keycode = AndroidLWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 5;
+                                        if (spinnerKeycode.getSelectedItemPosition() < specialArr.length) {
+										    properties.keycode = spinnerKeycode.getSelectedItemPosition() - specialArr.length;
+                                        } else {
+                                            properties.keycode = AndroidLWJGLKeycode.getKeyByIndex(spinnerKeycode.getSelectedItemPosition() - specialArr.length);
+                                        }
 										properties.name = editName.getText().toString();
 										properties.hidden = checkHidden.isChecked();
 
