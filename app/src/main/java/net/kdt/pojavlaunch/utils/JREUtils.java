@@ -14,8 +14,24 @@ public class JREUtils
 {
     private JREUtils() {}
     
+    public static String JRE_ARCHITECTURE;
+    
     public static String LD_LIBRARY_PATH;
     private static String nativeLibDir;
+
+    public static void checkJavaArchitecture(LoggableActivity act, String jreArch) throws Exception {
+        String[] argName = Tools.currentArch.split("/");
+        act.appendlnToLog("Architecture: " + Tools.currentArch);
+        if (!(jreArch.contains(argName[0]) || jreArch.contains(argName[1]))) {
+            // x86 check workaround
+            if (jreArch.startsWith("i") && jreArch.endsWith("86") && Tools.currentArch.contains("x86") && !Tools.currentArch.contains("64")) {
+                return;
+            }
+
+            act.appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + jreArch);
+            throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, jreArch));
+        }
+    }
     
     public static String findInLdLibPath(String libName) {
         for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
@@ -47,6 +63,20 @@ public class JREUtils
             System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
             dlopen(nativeLibDir + "/libgl04es.so");
         }
+    }
+
+    public static Map<String, String> readJREReleaseProperties() throws IOException {
+        Map<String, String> jreReleaseMap = new ArrayMap<>();
+        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.homeJreDir + "/release"));
+        String currLine;
+        while ((currLine = jreReleaseReader.readLine()) != null) {
+            if (!currLine.isEmpty() || currLine.contains("=")) {
+                String[] keyValue = currLine.split("=");
+                jreReleaseMap.put(keyValue[0], keyValue[1].replace("\"", ""));
+            }
+        }
+        jreReleaseReader.close();
+        return jreReleaseMap;
     }
     
     private static boolean checkAccessTokenLeak = true;
@@ -118,15 +148,17 @@ public class JREUtils
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
-    public static void relocateLibPath(Context ctx) {
+    public static void relocateLibPath(Context ctx) throws Exception {
+        if (JRE_ARCHITECTURE == null) {
+            Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
+            JRE_ARCHITECTURE = jreReleaseList.get("OS_ARCH");
+        }
+        
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 
-        for (String arch : Tools.currentArch.split("/")) {
-            File f = new File(Tools.homeJreDir, "lib/" + arch);
-            if (f.exists() && f.isDirectory()) {
-                Tools.homeJreLib = "lib/" + arch;
-                break;
-            }
+        File f = new File(Tools.homeJreDir, "lib/" + JRE_ARCHITECTURE);
+        if (f.exists() && f.isDirectory()) {
+            Tools.homeJreLib = "lib/" + JRE_ARCHITECTURE;
         }
         
         String libName = Tools.currentArch.contains("64") ? "lib64" : "lib";

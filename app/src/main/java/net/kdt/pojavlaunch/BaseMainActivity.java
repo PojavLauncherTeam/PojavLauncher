@@ -908,8 +908,8 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
         appendlnToLog("--------- beggining with launcher debug");
         checkLWJGL3Installed();
         
-        Map<String, String> jreReleaseList = readJREReleaseProperties();
-        checkJavaArchitecture(jreReleaseList.get("OS_ARCH"));
+        Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
+        JREUtils.checkJavaArchitecture(this, jreReleaseList.get("OS_ARCH"));
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
@@ -917,34 +917,6 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
         Tools.launchMinecraft(this, mProfile, mVersionInfo);
     }
     
-    private Map<String, String> readJREReleaseProperties() throws IOException {
-        Map<String, String> jreReleaseMap = new ArrayMap<>();
-        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.homeJreDir + "/release"));
-        String currLine;
-        while ((currLine = jreReleaseReader.readLine()) != null) {
-            if (!currLine.isEmpty() || currLine.contains("=")) {
-                String[] keyValue = currLine.split("=");
-                jreReleaseMap.put(keyValue[0], keyValue[1].replace("\"", ""));
-            }
-        }
-        jreReleaseReader.close();
-        return jreReleaseMap;
-    }
-    
-    private void checkJavaArchitecture(String jreArch) throws Exception {
-        String[] argName = Tools.currentArch.split("/");
-        appendlnToLog("Architecture: " + Tools.currentArch);
-        if (!(jreArch.contains(argName[0]) || jreArch.contains(argName[1]))) {
-            // x86 check workaround
-            if (jreArch.startsWith("i") && jreArch.endsWith("86") && Tools.currentArch.contains("x86") && !Tools.currentArch.contains("64")) {
-                return;
-            }
-            
-            appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + jreArch);
-            throw new RuntimeException(getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, jreArch));
-        }
-    }
-
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
