@@ -154,7 +154,6 @@ public class JREUtils
             JRE_ARCHITECTURE = jreReleaseList.get("OS_ARCH");
             if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.currentArch.contains("x86") && !Tools.currentArch.contains("64")) {
                 JRE_ARCHITECTURE = "i386/i486/i586";
-                return;
             }
         }
         
