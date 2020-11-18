@@ -934,7 +934,7 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
     private void checkJavaArchitecture(String jreArch) throws Exception {
         String[] argName = Tools.currentArch.split("/");
         appendlnToLog("Architecture: " + Tools.currentArch);
-        if (!(jreArch.contains(argName[0]) || jreArch.contains(argName[1]))) {
+        if (!(jreArch.contains(argName[0]) || jreArch.contains(argName[1])) && !(jreArch.startsWith("i") && jreArch.endsWith("86") && argName[1].equals("x86"))) {
             appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + jreArch);
             throw new RuntimeException(getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, jreArch));
         }
