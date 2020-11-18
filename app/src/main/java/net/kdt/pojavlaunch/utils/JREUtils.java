@@ -116,8 +116,8 @@ public class JREUtils
                         // Avoid leaking access token to log by replace it.
                         // Also, Minecraft will just print it once.
                         if (checkAccessTokenLeak) {
-                            checkAccessTokenLeak = false;
                             if (accessToken != null && accessToken.length() > 5 && currStr.contains(accessToken)) {
+                                checkAccessTokenLeak = false;
                                 currStr = currStr.replace(accessToken, "ACCESS_TOKEN_HIDDEN");
                             }
                         }
