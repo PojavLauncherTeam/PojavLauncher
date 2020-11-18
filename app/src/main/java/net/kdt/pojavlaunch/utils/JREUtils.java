@@ -186,7 +186,7 @@ public class JREUtils
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
-    public static void setJavaEnvironment(Context ctx, @Nullable ShellProcessOperation shell) throws Throwable {
+    public static void setJavaEnvironment(LoggableActivity ctx, @Nullable ShellProcessOperation shell) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("JAVA_HOME", Tools.homeJreDir);
         envMap.put("HOME", Tools.MAIN_PATH);
@@ -217,10 +217,14 @@ public class JREUtils
         }
         
         for (Map.Entry<String, String> env : envMap.entrySet()) {
-            if (shell == null) {
-                Os.setenv(env.getKey(), env.getValue(), true);
-            } else {
-                shell.writeToProcess("export " + env.getKey() + "=" + env.getValue());
+            try {
+                if (shell == null) {
+                    Os.setenv(env.getKey(), env.getValue(), true);
+                } else {
+                    shell.writeToProcess("export " + env.getKey() + "=" + env.getValue());
+                }
+            } catch (Throwable th) {
+                ctx.appendlnToLog(Log.getStackTraceString(th));
             }
         }
         
