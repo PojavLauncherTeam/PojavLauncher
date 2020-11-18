@@ -198,7 +198,7 @@
 	<string name="main_play">启动游戏</string>
 	<string name="main_welcome">欢迎，</string>
 	<string name="main_infodev">信息（开发）</string>
-	<string name="main_switchuser">切换账号</string>
+	<string name="main_switchuser">切换用户</string>
 	<string name="main_version_">版本：</string>
 	<string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
