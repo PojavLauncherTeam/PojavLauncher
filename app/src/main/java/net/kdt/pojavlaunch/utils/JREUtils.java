@@ -152,13 +152,19 @@ public class JREUtils
         if (JRE_ARCHITECTURE == null) {
             Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
             JRE_ARCHITECTURE = jreReleaseList.get("OS_ARCH");
+            if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.currentArch.contains("x86") && !Tools.currentArch.contains("64")) {
+                JRE_ARCHITECTURE = "i386/i486/i586";
+                return;
+            }
         }
         
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 
-        File f = new File(Tools.homeJreDir, "lib/" + JRE_ARCHITECTURE);
-        if (f.exists() && f.isDirectory()) {
-            Tools.homeJreLib = "lib/" + JRE_ARCHITECTURE;
+        for (String arch : JRE_ARCHITECTURE.split("/")) {
+            File f = new File(Tools.homeJreDir, "lib/" + arch);
+            if (f.exists() && f.isDirectory()) {
+                Tools.homeJreLib = "lib/" + arch;
+            }
         }
         
         String libName = Tools.currentArch.contains("64") ? "lib64" : "lib";
