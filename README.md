@@ -1,4 +1,5 @@
 [![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)](https://github.com/PojavLauncherTeam/PojavLauncher/actions)
+[![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
 
@@ -25,8 +26,9 @@ Architectures:
 - [x] Input keyboard and mouse events from ART to OpenJDK environment
 - [x] Support Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
 - [x] Support Minecraft 1.13 and above. Used [GLFW stub](https://github.com/PojavLauncherTeam/lwjgl3-glfw-java).
+- [ ] Game surface zooming.
+- [x] New input pipe rewritten to native code to boost performance.
 - [ ] More...
 
 ## License
 - PojavLauncher is licensed under GPLv3.
-

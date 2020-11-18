@@ -12,20 +12,20 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build 64-bit APK with Gradle
+    - name: Build APK with Gradle
       run: |
         mkdir -p out
         chmod +x gradlew 
         ./gradlew clean assembleDebug
-        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-64bit.apk
-        # find . -name "*.so"
+        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug.apk
+        # mv app/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
 
-    - name: Build 32-bit APK with Gradle
-      run: | 
-        replace="\, \"x86_64\" , \"arm64-v8a\""
-        sed -i "s/$replace//g" app/build.gradle
-        ./gradlew assembleDebug
-        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-32bit.apk
+#    - name: Build 32-bit APK with Gradle
+#      run: | 
+#        replace="\, \"x86_64\" , \"arm64-v8a\""
+#        sed -i "s/$replace//g" app/build.gradle
+#        ./gradlew assembleDebug
+#        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-32bit.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v2

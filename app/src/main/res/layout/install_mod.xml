@@ -8,7 +8,7 @@
 		android:layout_height="match_parent"
 		android:layout_width="match_parent">
 
-		<TextureView
+		<net.kdt.pojavlaunch.AWTCanvasView
 			android:layout_height="match_parent"
 			android:layout_width="match_parent"
 			android:id="@+id/installmod_surfaceview"/>
@@ -40,7 +40,7 @@
 		android:orientation="vertical">
 
 		<RelativeLayout
-			android:layout_height="84px"
+			android:layout_height="42dp"
 			android:layout_width="match_parent"
 			android:gravity="center_vertical"
 			android:background="#555555">
@@ -49,13 +49,13 @@
 				android:layout_height="wrap_content"
 				android:layout_width="wrap_content"
 				android:text="@string/control_viewout"
-				android:paddingLeft="30px"
+				android:paddingLeft="15dp"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:layout_centerVertical="true"/>
 
 			<ImageView
-				android:layout_height="84px"
-				android:layout_width="84px"
+				android:layout_height="42dp"
+				android:layout_width="42dp"
 				android:src="@android:drawable/ic_delete"
 				android:onClick="closeLogOutput"
 				android:layout_alignParentRight="true"

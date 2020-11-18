@@ -23,11 +23,11 @@ import android.graphics.drawable.*;
 import android.text.*;
 import android.view.*;
 import android.os.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 
 public class SelectionEndHandleView extends HandleView
 {
-	public SelectionEndHandleView(ControlView view) {
+	public SelectionEndHandleView(ControlButton view) {
 		super(view);
 	}
 

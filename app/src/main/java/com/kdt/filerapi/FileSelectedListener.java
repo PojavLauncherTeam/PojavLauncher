@@ -2,7 +2,8 @@ package com.kdt.filerapi;
 
 import java.io.File;
 
-public interface FileSelectedListener
+public abstract class FileSelectedListener
 {
-	public void onFileSelected(File file, String path, String name);
+	public abstract void onFileSelected(File file, String path);
+    public void onFileLongClick(File file, String path) {}
 }

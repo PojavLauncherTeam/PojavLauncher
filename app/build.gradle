@@ -23,15 +23,9 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 156235
-        versionName "3.2.0t6_6406b_20201007"
+        versionCode 156236
+        versionName "3.3.0b_6408b_20201112"
         multiDexEnabled true //important
-
-        ndk {
-            // Do not edit below as 32bit and 64bit are built separately
-            // or ask @khanhduytran0 before edit below, as the text replacer may be broken.
-            abiFilters "armeabi-v7a" , "x86" , "x86_64" , "arm64-v8a"
-        }
     }
 	
     buildTypes {
@@ -73,9 +67,13 @@ dependencies {
     implementation 'com.android.support:preference-v14:26.0.0'
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support:support-annotations:26.0.0'
-    // compile 'com.google.guava:guava:24.0-android'
     
-    implementation 'org.tukaani:xz:1.8'
+    // implementation 'com.intuit.sdp:sdp-android:1.0.5'
+    // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
+    implementation 'org.tukaani:xz:1.8'
+    
+    implementation 'net.objecthunter:exp4j:0.4.8'
+    
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

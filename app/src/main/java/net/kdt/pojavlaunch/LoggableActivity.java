@@ -2,8 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.support.v7.app.*;
 
-public abstract class LoggableActivity extends AppCompatActivity
- {
+public abstract class LoggableActivity extends AppCompatActivity {
     public void appendToLog(String text) {
         appendToLog(text, true);
     }

@@ -28,7 +28,7 @@ import android.widget.*;
 import android.content.*;
 import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 
 public abstract class HandleView extends View implements ViewPositionListener, View.OnLongClickListener
  {
@@ -59,7 +59,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 	private Runnable mActionPopupShower;
 	// Minimum touch target size for handles
 	private int mMinSize;
-	protected ControlView mView;
+	protected ControlButton mView;
 	
 	// MOD: Addition. Save old size of parent
 	private int mDownWidth, mDownHeight;
@@ -92,7 +92,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 		return -1;
 	}
 	
-	public HandleView(ControlView view) {
+	public HandleView(ControlButton view) {
 		super(view.getContext());
 		
 		mView = view;

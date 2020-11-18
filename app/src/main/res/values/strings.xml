@@ -46,7 +46,7 @@
 	<!-- AlertDialog title -->
 	<string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
 	<string name="alerttitle_selectkeymap">Select a keymap json</string>
-	<string name="alerttitle_installmod">Select a mod to install</string>
+	<string name="alerttitle_installmod">Select a mod installer</string>
 	
 	<!-- Error messages -->
 	<string name="error_fatal">PojavLauncher has unexpectedly crashed</string>
@@ -68,7 +68,8 @@
 	-->
 	
 	<!-- MCLauncherActivity: Tabs -->
-	<string name="mcl_tab_news">Launcher news</string>
+	<string name="mcl_tab_news">News</string>
+	<string name="mcl_tab_mcje">Minecraft: Java Edition</string>
 	<string name="mcl_tab_console">Development console</string>
 	<string name="mcl_tab_crash">Crash log</string>
 	
@@ -85,8 +86,8 @@
 	
 	<string name="mcl_options">Options</string>
 	<string name="mcl_option_modmgr">Mod manager (no function)</string>
-	<string name="mcl_option_modinstall">Install mod (Forge, LabyMod, Fabric,...)</string>
-	<string name="mcl_option_modinstallwitharg">Install mod (with custom arguments)</string>
+	<string name="mcl_option_modinstall">Launch a mod installer (Forge, LabyMod, Fabric, etc...)</string>
+	<string name="mcl_option_modinstallwitharg">Launch a mod installer (with custom arguments)</string>
 	<string name="mcl_option_checkupdate">Check for update</string>
 	<string name="mcl_option_customcontrol">Custom controls</string>
 	<string name="mcl_option_settings">Settings</string>
@@ -99,7 +100,7 @@
 	<string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
 	<string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
 	<string name="mcl_setting_title_controlsize">Set control buttons size</string>
-	<string name="mcl_setting_title_javaargs">JRE Launch arguments</string>
+	<string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
 	<string name="mcl_setting_subtitle_javaargs">Be careful, this may make game crash if modified without knowledge.</string>
 	<string name="mcl_setting_category_general">General settings</string>
 	<string name="mcl_setting_category_veroption">Version type will be in version list</string>
@@ -189,7 +190,6 @@
 	<string name="customctrl_specialkey">Special Key</string>
 	<string name="customctrl_hidden">Hidden</string>
 	<string name="customctrl_addbutton">Add button</string>
-	<string name="customctrl_title_selectctrl">Select default Control json</string>
 	<string name="customctrl_selectdefault">Select default Control json</string>
 	
 	<!-- Update part (unused now) -->
