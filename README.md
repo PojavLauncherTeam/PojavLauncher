@@ -146,11 +146,11 @@ Increase max DX references. Launcher Options -> Settings -> Increase max DX refe
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
-## Using libraries & Third party licenses
+## Third party components and it's licenses
 - (v2) Boardwalk: [Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE).
 - (v2) LegacyLauncher: (unknown license).<br>
 - (all) Android Support Libraries & DX Dexer: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
 - (all) gl4es: [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
 - (v3) OpenJDK: [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
-- (v3) PRoot: [GNU GPLv2 License](https://github.com/termux/proot/blob/master/COPYING).<br>
 - (all) LWJGL 2: [Legacy LWJGL License](http://legacy.lwjgl.org/license.php.html).<br>
+- (v3) LWJGL 3: [BSD-3 License](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md).
