@@ -195,7 +195,7 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
             this.debugText = (TextView) findViewById(R.id.content_text_debug);
 
             this.minecraftGLView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
-
+           
             ControlData[] specialButtons = ControlData.getSpecialButtons();
             specialButtons[0].specialButtonListener = new View.OnClickListener(){
                 @Override
@@ -238,7 +238,6 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
                                                 pointerSurface.releaseCapture(); // minecraftGLView.releasePointerCapture();
                                                 isCapturing = false;
                                             } else if (CallbackBridge.isGrabbing() && !isCapturing) {
-                                                minecraftGLView.requestFocus();
                                                 pointerSurface.requestCapture(); // minecraftGLView.requestPointerCapture();
                                                 isCapturing = true;
                                             }
@@ -315,8 +314,8 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
 
             // System.loadLibrary("Regal");
 
-            minecraftGLView.setFocusable(true);
-            minecraftGLView.setFocusableInTouchMode(true);
+            minecraftGLView.setFocusable(false);
+            minecraftGLView.setFocusableInTouchMode(false);
             // minecraftGLView.setEGLContextClientVersion(2);
 
             glTouchListener = new OnTouchListener(){
@@ -1108,6 +1107,8 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
         button.setWidth((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getWidth()) * LauncherPreferences.PREF_BUTTONSIZE));
         button.setHeight((int) Tools.dpToPx(this, Tools.pxToDp(this, button.getHeight()) * LauncherPreferences.PREF_BUTTONSIZE));
         button.setOnTouchListener(this);
+        button.setFocusable(false);
+        button.setFocusableInTouchMode(false);
         return button;
     }
 
@@ -1130,7 +1131,6 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
 
     public void showKeyboard() {
         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-        minecraftGLView.requestFocus();
     }
 
     private void setRightOverride(boolean val) {
