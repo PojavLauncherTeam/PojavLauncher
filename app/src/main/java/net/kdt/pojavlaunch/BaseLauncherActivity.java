@@ -5,7 +5,7 @@ import android.widget.*;
 import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.tasks.*;
 
-public abstract class BaseLauncherActivity extends AppCompatActivity {
+public abstract class BaseLauncherActivity extends BaseActivity {
 	public Button mPlayButton;
 	public ConsoleFragment mConsoleView;
     public CrashFragment mCrashView;

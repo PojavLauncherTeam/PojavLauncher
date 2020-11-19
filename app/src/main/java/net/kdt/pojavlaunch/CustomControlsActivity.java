@@ -15,7 +15,7 @@ import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
-public class CustomControlsActivity extends AppCompatActivity
+public class CustomControlsActivity extends BaseActivity
 {
 	private DrawerLayout drawerLayout;
     private NavigationView navDrawer;

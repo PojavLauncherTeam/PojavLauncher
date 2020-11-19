@@ -28,7 +28,7 @@ import org.apache.commons.io.*;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
 
-public class PojavLoginActivity extends AppCompatActivity
+public class PojavLoginActivity extends BaseActivity
 // MineActivity
 {
     private Object mLockStoragePerm = new Object(),
@@ -295,7 +295,7 @@ public class PojavLoginActivity extends AppCompatActivity
         LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
         LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).commit();
         Locale.setDefault(locale);
-        Configuration config = new Configuration();
+        Configuration config = getResources().getConfiguration();
         config.setLocale(locale);
         // TODO replace deprecated
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());

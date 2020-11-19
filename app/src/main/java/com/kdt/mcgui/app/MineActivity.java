@@ -10,7 +10,7 @@ import java.util.*;
 import android.content.*;
 import com.kdt.mcgui.*;
 
-public class MineActivity extends AppCompatActivity implements View.OnClickListener
+public class MineActivity extends BaseActivity implements View.OnClickListener
 {
 	private int topId = 150001;
 	private boolean showBeforeView = true;
