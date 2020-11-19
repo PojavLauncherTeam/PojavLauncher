@@ -14,9 +14,13 @@ jobs:
         java-version: 1.8
     - name: Build APK with Gradle
       run: |
+        chmod +x scripts/languagelist_updater.sh
+        bash scripts/languagelist_updater.sh
+      
         mkdir -p out
         chmod +x gradlew 
         ./gradlew clean assembleDebug
+        
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug.apk
         # mv app/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
 

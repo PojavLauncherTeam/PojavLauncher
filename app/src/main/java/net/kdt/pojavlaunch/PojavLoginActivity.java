@@ -212,15 +212,14 @@ public class PojavLoginActivity extends AppCompatActivity
         langAdapter.add(new DisplayableLocale(Locale.getDefault(), defaultLangChar));
         langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
-        // TODO better way to read language list
         try {
-            ZipFile thisApk = new ZipFile(getApplicationInfo().publicSourceDir);
-            Enumeration<?> thisEntries = thisApk.entries();
-            while (thisEntries.hasMoreElements()) {
-                File currFile = new File("/" + ((ZipEntry) thisEntries.nextElement()).getName());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("language_list.txt")));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                File currFile = new File("/" + line);
                 System.out.println(currFile.getAbsolutePath());
-                if (currFile.getAbsolutePath().startsWith("/res/values-") && currFile.getName().startsWith("values-")) {
-                    // TODO use regex
+                if (currFile.getAbsolutePath().contains("/values-") || currFile.getName().startsWith("values-")) {
+                    // TODO use regex(?)
                     Locale thisLocale = new Locale(currFile.getName().replace("values-", "").replace("-r", "-"));
                     langAdapter.add(new DisplayableLocale(thisLocale));
                 }

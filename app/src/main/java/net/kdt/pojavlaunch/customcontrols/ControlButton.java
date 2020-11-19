@@ -46,6 +46,8 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 	
 	public void setProperties(ControlData properties, boolean changePos) {
 		mProperties = properties;
+        properties.update();
+        
 		// com.android.internal.R.string.delete
 		// android.R.string.
 		setText(properties.name);

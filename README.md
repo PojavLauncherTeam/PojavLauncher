@@ -15,6 +15,18 @@ Architectures:
 - For x86 (i\*86): **working**.
 - For x86_64 (amd64): **working**.
 
+## Building
+- Because languages are auto added by Crowdin, so need to run language list generator before build. In this directory, run:
+```
+# On Linux, Mac OS:
+chmod +x scripts/languagelist_updater.sh
+bash scripts/languagelist_updater.sh
+
+# On Windows:
+scripts\languagelist_updater.bat
+```
+- Then, build use Android Studio.
+
 ## Current status
 - [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
 - [x] **Temporary removed** ~~JVDroid OpenJDK 11 (32 and 64-bit ARM and x86). Partial, no error `can't lock mutex`, but now exit with none output.~~
