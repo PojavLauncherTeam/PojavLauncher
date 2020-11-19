@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THISDIR=`dirname $0`
+THISDIR=.
 LANGFILE=$THISDIR/../app/src/main/assets/language_list.txt
 
 rm $LANGFILE
