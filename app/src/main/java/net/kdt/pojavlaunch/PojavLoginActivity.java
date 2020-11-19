@@ -43,6 +43,9 @@ public class PojavLoginActivity extends AppCompatActivity
     private TextView startupTextView;
     
     private SharedPreferences firstLaunchPrefs;
+    
+    private Locale mDefaultLocale;
+    
     // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
     
@@ -50,7 +53,13 @@ public class PojavLoginActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false);
+        
+        mDefaultLocale = Locale.getDefault();
 
+        if (!LauncherPreferences.PREF_LANGUAGE.equals("default")) {
+            setLocale(new Locale(LauncherPreferences.PREF_LANGUAGE));
+        }
+        
         Tools.updateWindowSize(this);
         ControlData.pixelOf2dp = (int) Tools.dpToPx(this, 2);
         ControlData.pixelOf30dp = (int) Tools.dpToPx(this, 30);
@@ -188,10 +197,6 @@ public class PojavLoginActivity extends AppCompatActivity
     }
     
     private void uiInit() {
-        if (!LauncherPreferences.PREF_LANGUAGE.equals("default")) {
-            setLocale(new Locale(LauncherPreferences.PREF_LANGUAGE));
-        }
-        
         setContentView(R.layout.launcher_login_v2);
 
         loginLayout = findViewById(R.id.login_layout_linear);
@@ -204,12 +209,12 @@ public class PojavLoginActivity extends AppCompatActivity
                 }
             }, 100);
 
-        String defaultLang = Locale.getDefault().getDisplayName();
+        String defaultLang = mDefaultLocale.getDisplayName();
         SpannableString defaultLangChar = new SpannableString(defaultLang);
-        defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(),0);
+        defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(), 0);
         
-        ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<DisplayableLocale>(this, android.R.layout.simple_spinner_item);
-        langAdapter.add(new DisplayableLocale(Locale.getDefault(), defaultLangChar));
+        final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<DisplayableLocale>(this, android.R.layout.simple_spinner_item);
+        langAdapter.add(new DisplayableLocale(mDefaultLocale, defaultLangChar));
         langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
         try {
@@ -241,7 +246,7 @@ public class PojavLoginActivity extends AppCompatActivity
                 } else if (position == 1) {
                     locale = Locale.ENGLISH;
                 } else {
-                    locale = Locale.getAvailableLocales()[position - 2];
+                    locale = langAdapter.getItem(position).mLocale;
                 }
                 setLocale(locale);
             }
