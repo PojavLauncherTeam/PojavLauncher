@@ -3,78 +3,78 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">¡Lanza Minecraft: Edición Java en tu dispositivo!</string>
+    <string name="app_motd">¡Juega Minecraft: Java en tu celular!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">AYUDA</string>
     <!-- Languages list part -->
-    <string name="language_name">ENGLISH - US</string>
+    <string name="language_name">INGLÉS - US</string>
     <!-- Logging output -->
     <string name="log_title">Registro de salida</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email o nombre de usuario</string>
     <string name="login_online_username_question">(¿Cuál utilizo?)</string>
     <string name="login_online_password_hint">Contraseña</string>
-    <string name="login_online_password_question">¿Olvido su contraseña?</string>
-    <string name="login_online_remember">Recordarme?</string>
+    <string name="login_online_password_question">¿Olvidó su contraseña?</string>
+    <string name="login_online_remember">¿Recordar mi cuenta?</string>
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <string name="login_online_create_account">(¿Crear cuenta nueva?)</string>
-    <string name="login_offline_switch">¿Cuenta fuera de línea?</string>
-    <string name="login_offline_label">Iniciar sesión con una cuenta offline</string>
+    <string name="login_offline_switch">¿Cuenta sin conexión?</string>
+    <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
     <string name="login_offline_alert_skip">Omitir</string>
-    <string name="login_error_short_username">El nombre de usuario debe ser al menos de 3 caracteres o mas</string>
+    <string name="login_error_short_username">El nombre de usuario debe tener al menos 3 letras o mas</string>
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
     <string name="login_select_account">Seleccione una cuenta</string>
     <!-- Hint -->
-    <string name="hint_select_account">Per selecionar, clica. Per esorrar una conta, manten presionant.</string>
-    <string name="hint_control_mapping">"Aquesta funció encara no esta acavada, no pots costumitzar els controls en aquest moment!\nLlisca desde l’esquerra a la dreta per obrir el menu ◀️\nAguanta un buto per costumitsarl’ho: editar, canviar el tamany o esborrar."</string>
+    <string name="hint_select_account">Para seleccionar una cuenta dele click, para eliminarla mantenla pulsada.</string>
+    <string name="hint_control_mapping">"Esta función aún no está terminada y no se pueden utilizar los controles personalizados aún \nDesliza de izquierda a derecha para abrir el menú ◀\nMantén pulsado un botón para editarlo."</string>
     <!-- Warning -->
-    <string name="warning_title">Perill</string>
-    <string name="warning_msg">Aquesta app pot no ser compatible amb la teva versio d’Android (mes gran o igual que Android 7.0). Pots fe servir VMOS i despres instalar aquesta app alternativament a VMOS. Pero VMOS ja no esta al Play Store, l’hauras d’instalar manual ment.</string>
-    <string name="warning_noshowagain">No tornar a mostrar</string>
+    <string name="warning_title">Advertencia</string>
+    <string name="warning_msg">Esta aplicación puede no ser compatible con la versión de tu dispositivo Android (superior o igual Android 7.0). Puede usar VMOS e instalar esta aplicación desde VMOS, pero tenga en cuenta que tendrá que instalar VMOS manualmente porque fue eliminado de Play Store.</string>
+    <string name="warning_noshowagain">No mostrar de nuevo</string>
     <string name="warning_action_install">Instalar VMOS</string>
-    <string name="warning_action_tryanyway">Probar igualment</string>
-    <string name="warning_action_exit">Exit</string>
-    <string name="warning_remove_account">Aquesta conta sera eliminada!</string>
+    <string name="warning_action_tryanyway">Probar igualmente</string>
+    <string name="warning_action_exit">Salir</string>
+    <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_selectkeymap">Selecciona una mapa de tecla json</string>
-    <string name="alerttitle_installmod">Selecciona un mod per affegir</string>
-    <string name="alerttitle_installoptifine">Selecciona el fitxer jar OptiFine</string>
+    <string name="alerttitle_selectkeymap">Seleccione un mapeado de teclas json</string>
+    <string name="alerttitle_installmod">Seleccione el mod a añadir</string>
+    <string name="alerttitle_installoptifine">Seleccione el fichero Jar de Optifine</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher s’ha parat inesperadament</string>
-    <string name="error_checklog">Error! Siusplau mireu’vos el registre: %s</string>
-    <string name="error_no_version">Cap versio!</string>
-    <string name="error_load_version">Error al carregar la versio %s</string>
-    <string name="error_convert_lib">Error al convertir la llibraria %s</string>
+    <string name="error_fatal">PojavLauncher se ha detenido inesperadamente</string>
+    <string name="error_checklog">¡Error! Por favor mira el log debajo: %s</string>
+    <string name="error_no_version">¡No hay versiones!</string>
+    <string name="error_load_version">Error al cargar la versión %s</string>
+    <string name="error_convert_lib">Error al convertir la librería %s</string>
     <string name="error_convert_client">Error al convertir Minecraft %s</string>
-    <string name="error_show_more">Mostra més</string>
-    <string name="error_show_less">Mostrar menys</string>
+    <string name="error_show_more">Mostrar más</string>
+    <string name="error_show_less">Mostrar menos</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Es requireix el permis de llegir/escriure!</string>
-    <string name="toast_login_error">Error al entrar al teu conte. Siusplau envian’s el text seguent.\nError: %s</string>
-    <string name="toast_optifine_success">Instalació completada</string>
-    <string name="toast_shiftmode">La tecla Shift (sneak) s’ha canviat al mode %s</string>
-    <string name="toast_shiftmode_hold">Mode de espera</string>
-    <string name="toast_shiftmode_toggle">Mode de click toggle</string>
+    <string name="toast_permission_denied">¡Se requiere el permiso de lectura/escritura al almacenamiento!</string>
+    <string name="toast_login_error">Algo salió mal después de iniciar sesión. Por favor, contacta al desarrollador. \nError: %s</string>
+    <string name="toast_optifine_success">Instalación completada</string>
+    <string name="toast_shiftmode">La tecla Shift (agacharse) se ha cambiado al modo %s</string>
+    <string name="toast_shiftmode_hold">Modo de espera</string>
+    <string name="toast_shiftmode_toggle">Alternar el modo de clic</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Noticies del launcher</string>
-    <string name="mcl_tab_console">Consola de desenvolupador</string>
-    <string name="mcl_tab_crash">Registre de crashes</string>
+    <string name="mcl_tab_news">Novedades del launcher</string>
+    <string name="mcl_tab_console">Consola de desarrollador</string>
+    <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Apunt de jugar Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Cleaning cache files</string>
-    <string name="mcl_launch_downloading">Downloading %s</string>
-    <string name="mcl_launch_download_lib">Downloading library %s</string>
-    <string name="mcl_launch_download_client">Downloading Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Converting library %s</string>
-    <string name="mcl_launch_convert_client">Converting Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Patching Minecraft %s</string>
-    <string name="mcl_launch_download_assets">Preparing to download resources</string>
-    <string name="mcl_options">Options</string>
-    <string name="mcl_option_modmgr">Mod manager (no function)</string>
+    <string name="mcl_version_msg">Listo para jugar Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Limpiando archivos de caché</string>
+    <string name="mcl_launch_downloading">Descargando %s</string>
+    <string name="mcl_launch_download_lib">Descargando librería %s</string>
+    <string name="mcl_launch_download_client">Descargando Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Convirtiendo librería %s</string>
+    <string name="mcl_launch_convert_client">Convirtiendo Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Parcheando Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Preparando para descargar los recursos</string>
+    <string name="mcl_options">Opciones</string>
+    <string name="mcl_option_modmgr">Administrador de mods (No funciona)</string>
     <string name="mcl_option_optifineinstall">Install OptiFine</string>
     <string name="mcl_option_checkupdate">Check for update</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
