@@ -149,6 +149,9 @@
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
     <string name="control_mouse">鼠标</string>
     <string name="control_mouseoff">鼠标：关</string>
     <string name="control_mouseon">鼠标：开</string>
