@@ -2,6 +2,7 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher（适用于 Android 的 Java 版 Minecraft）</string>
+    <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">在您的设备上启动 Java 版 Minecraft！</string>
     <!-- Action bar part -->
     <string name="actionbar_help">帮助</string>
@@ -88,6 +89,10 @@
     <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
     <string name="mcl_setting_category_general">通用设置</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
     <string name="global_add">添加</string>
@@ -133,13 +138,22 @@
     <string name="mcn_check_fail_java">无法启动测试 Java 虚拟机。查看 %s 获取更多信息。</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">控制</string>
+    <string name="control_toggle">GUI</string>
     <string name="control_keyboard">键盘</string>
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
     <string name="control_zoom">缩放 (C)</string>
     <string name="control_primary">主</string>
     <string name="control_secondary">副</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">背包</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
     <string name="control_mouse">鼠标</string>
     <string name="control_mouseoff">鼠标：关</string>
     <string name="control_mouseon">鼠标：开</string>
