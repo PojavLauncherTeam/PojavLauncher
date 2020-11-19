@@ -334,10 +334,11 @@ public final class Tools
             });
     }
 
+    public static DisplayMetrics currentDisplayMetrics;
     public static void updateWindowSize(Activity ctx) {
-        DisplayMetrics dm = getDisplayMetrics(ctx);
-        CallbackBridge.windowWidth = dm.widthPixels;
-        CallbackBridge.windowHeight = dm.heightPixels;
+        DisplayMetrics currentDisplayMetrics = getDisplayMetrics(ctx);
+        CallbackBridge.windowWidth = currentDisplayMetrics.widthPixels;
+        CallbackBridge.windowHeight = currentDisplayMetrics.heightPixels;
     }
 
     public static float pxToDp(Context ctx, float px) {
@@ -346,7 +347,8 @@ public final class Tools
 
     public static float dpToPx(Context ctx, float dp) {
         // 921600 = 1280 * 720, default scale
-        float scaledDp = dp / 921600 * CallbackBridge.windowWidth * CallbackBridge.windowHeight;
+        float scaledDp = dp * currentDisplayMetrics.scaledDensity;
+        // / 921600 * CallbackBridge.windowWidth * CallbackBridge.windowHeight;
         return (scaledDp * ctx.getResources().getDisplayMetrics().density);
     }
 
