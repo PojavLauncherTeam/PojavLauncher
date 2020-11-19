@@ -345,7 +345,9 @@ public final class Tools
     }
 
     public static float dpToPx(Context ctx, float dp) {
-        return (dp * ctx.getResources().getDisplayMetrics().density);
+        // 921600 = 1280 * 720, default scale
+        float scaledDp = dp / 921600 * CallbackBridge.windowWidth * CallbackBridge.windowHeight;
+        return (scaledDp * ctx.getResources().getDisplayMetrics().density);
     }
 
     public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws Exception

@@ -31,6 +31,7 @@ public class ControlData implements Cloneable
      * bigger device or vice versa.
      */
     public String dynamicX, dynamicY;
+    public boolean isDynamicBtn;
     
 	public static ControlData[] getSpecialButtons(){
 		if (SPECIAL_BUTTONS == null) {
@@ -98,6 +99,7 @@ public class ControlData implements Cloneable
 		this.y = y;
 		this.width = width;
 		this.height = height;
+        this.isDynamicBtn = false;
 	}
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
@@ -116,6 +118,7 @@ public class ControlData implements Cloneable
         this(name, keycode, 0, 0, width, height);
         this.dynamicX = dynamicX;
         this.dynamicY = dynamicY;
+        this.isDynamicBtn = true;
         update();
     }
     
@@ -132,7 +135,7 @@ public class ControlData implements Cloneable
 	}
     
     public void update() {
-        if (dynamicX == null || dynamicY == null) {
+        if (!isDynamicBtn) {
             return;
         }
         

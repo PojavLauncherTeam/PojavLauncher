@@ -30,9 +30,10 @@ import net.kdt.pojavlaunch.*;
 import android.view.View.OnClickListener;
 import net.kdt.pojavlaunch.customcontrols.*;
 import android.support.v7.app.*;
+import android.content.res.*;
 
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {
-	private static final int POPUP_TEXT_LAYOUT = getInternalId("layout", "text_edit_action_popup_text");
+	private final int POPUP_TEXT_LAYOUT = getInternalId("layout", "text_edit_action_popup_text");
 	private TextView mEditTextView;
 	private TextView mDeleteTextView;
 	
@@ -40,37 +41,12 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		super(handleView);
 	}
 
-	private static int getInternalId(String type, String name) {
-		try {
-			for (Class perType : Class.forName("com.android.internal.R").getDeclaredClasses()) {
-				if (perType.getSimpleName().equals(type)) {
-					try {
-						Field f = perType.getDeclaredField(name);
-						f.setAccessible(true);
-						return (int) f.get(null);
-					} catch (Throwable th) {
-						th.printStackTrace();
-					}
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		// If unable to find in com.android.internal.R, go find in android.R
-		for (Class perType : android.R.class.getDeclaredClasses()) {
-			if (perType.getSimpleName().equals(type)) {
-				try {
-					Field f = perType.getDeclaredField(name);
-					f.setAccessible(true);
-					return (int) f.get(null);
-				} catch (Throwable th) {
-					th.printStackTrace();
-				}
-			}
-		}
-		
-		return -1;
+	private int getInternalId(String type, String name) {
+        int id = Resources.getSystem().getIdentifier(name, type, "com.android.internal.R");
+        if (id == 0) {
+            mHandleView.getContext().getResources().getIdentifier(name, type, "android");
+        }
+		return id;
 	}
 	
 	@Override
@@ -164,7 +140,29 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 						final CheckBox checkHidden = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
 						checkHidden.setChecked(properties.hidden);
+                        
+                        final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
+                        checkDynamicPos.setChecked(properties.isDynamicBtn);
 
+                        final LinearLayout layoutDynamicBtn = dialog.findViewById(R.id.controlsetting_dynamicbtnlayout);
+                        
+                        final EditText editDynamicX = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_x);
+                        final EditText editDynamicY = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_y);
+                        
+                        editDynamicX.setHint(Float.toString(properties.x));
+                        editDynamicX.setText(properties.dynamicX);
+                        
+                        editDynamicY.setHint(Float.toString(properties.y));
+                        editDynamicY.setText(properties.dynamicY);
+                        
+                        checkDynamicPos.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
+
+                                @Override
+                                public void onCheckedChanged(CompoundButton btn, boolean checked) {
+                                    layoutDynamicBtn.setVisibility(checked ? View.VISIBLE : View.GONE);
+                                }
+                            });
+                        
 						Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 						button.setOnClickListener(new View.OnClickListener() {
 
@@ -180,6 +178,15 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                                         }
 										properties.name = editName.getText().toString();
 										properties.hidden = checkHidden.isChecked();
+                                        properties.isDynamicBtn = checkDynamicPos.isChecked();
+                                        properties.dynamicX = editDynamicX.getText().toString();
+                                        properties.dynamicY = editDynamicY.getText().toString();
+                                        
+                                        if (properties.dynamicX.isEmpty()) {
+                                            properties.dynamicX = Float.toString(properties.x);
+                                        } if (properties.dynamicY.isEmpty()) {
+                                            properties.dynamicY = Float.toString(properties.y);
+                                        }
 
 										mHandleView.mView.updateProperties();
 

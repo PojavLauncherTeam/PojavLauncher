@@ -26,6 +26,7 @@ import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;
 import net.kdt.pojavlaunch.prefs.*;
+import org.lwjgl.glfw.*;
 
 public class PojavLoginActivity extends AppCompatActivity
 // MineActivity
@@ -61,6 +62,7 @@ public class PojavLoginActivity extends AppCompatActivity
         }
         
         Tools.updateWindowSize(this);
+        
         ControlData.pixelOf2dp = (int) Tools.dpToPx(this, 2);
         ControlData.pixelOf30dp = (int) Tools.dpToPx(this, 30);
         ControlData.pixelOf50dp = (int) Tools.dpToPx(this, 50);

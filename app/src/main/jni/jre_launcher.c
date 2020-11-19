@@ -85,7 +85,7 @@ static jint launchJVM(int argc, char** argv) {
 }
 
 /*
- * Class:     com_oracle_embedded_launcher_VMLauncher
+ * Class:     com_oracle_dalvik_VMLauncher
  * Method:    launchJVM
  * Signature: ([Ljava/lang/String;)I
  */
@@ -109,7 +109,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
 
     res = launchJVM(argc, argv);
 
-    LOGD("Freeing args");
+    LOGD("Going to free args");
     free_char_array(env, argsArray, argv);
     
     LOGD("Free done");
