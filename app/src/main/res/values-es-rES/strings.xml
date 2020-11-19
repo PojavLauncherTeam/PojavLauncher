@@ -14,10 +14,10 @@
     <string name="login_online_password_hint">Contraseña</string>
     <string name="login_online_password_question">Contraseña olvidada?</string>
     <string name="login_online_remember">Recordarme?</string>
-    <string name="login_online_check_keeplogin">Mantener tu sesión iniciada</string>
+    <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
-    <string name="login_online_create_account">(Crear cuenta nueva?)</string>
-    <string name="login_offline_switch">Cuenta no premium?</string>
+    <string name="login_online_create_account">(¿Crear una cuenta nueva?)</string>
+    <string name="login_offline_switch">¿Cuenta no premium?</string>
     <string name="login_offline_label">Inicia sesión con una cuenta no premium</string>
     <string name="login_offline_alert_skip">Saltar</string>
     <string name="login_error_short_username">El nombre de usuario debe tener mínimo 3 carácteres</string>
@@ -72,6 +72,8 @@
     <string name="mcl_launch_download_assets">Preparando para descargar recursos</string>
     <string name="mcl_options">Opciones</string>
     <string name="mcl_option_modmgr">Gestor de mods (no funciona aún)</string>
+    <string name="mcl_option_modinstall">Usar un instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Iniciar un instalador de un mod (con comandos personalizados)</string>
     <string name="mcl_option_checkupdate">Comprobar actualizaciónes</string>
     <string name="mcl_option_customcontrol">Personalizar controles</string>
     <string name="mcl_option_settings">Configuración</string>
@@ -81,10 +83,27 @@
     <string name="mcl_setting_title_freeform">Iniciar Minecraft en modo flotante</string>
     <string name="mcl_setting_subtitle_freeform">Iniciar Minecraft en una ventana flotante. Necesario Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Cambia el tiempo de activación durante una pulsación larga en destruir bloques y soltar objetos.</string>
     <string name="mcl_setting_title_controlsize">Tamaño de los botones</string>
+    <string name="mcl_setting_title_javaargs">JRE Argumentos de lanzamiento</string>
     <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
     <string name="mcl_setting_category_general">Configuración General</string>
+    <string name="mcl_setting_category_veroption">El tipo de versión estará en la lista de versiones</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Alfa-vieja</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-antigua</string>
+    <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
+    <string name="global_add">Añadir</string>
+    <string name="global_edit">Editar</string>
+    <string name="global_load">Cargar</string>
+    <string name="global_name">Nombre</string>
+    <string name="global_remove">Quitar</string>
+    <string name="global_restart">Reiniciar</string>
+    <string name="global_save">Guardar</string>
+    <string name="global_unpacking">Descomprimiendo</string>
+    <string name="global_error_field_empty">Este campo es obligarorio</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -108,7 +127,18 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d</string>
+    <string name="mcn_exit_call">Salir</string>
+    <string name="mcn_exit_crash">¡Se ha detectado un error en el juego! Haga clic en Aceptar para salir.</string>
+    <string name="mcn_exit_errcrash">¡No se puede localizar el fallo! Puede ignorar esto.</string>
+    <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
+    <string name="mcn_check_fail_lwjgl">¡LWJGL3 no ha sido instalado!</string>
+    <string name="mcn_check_fail_incompatiblearch">La arquitectura %1$s es incompatible con Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_java">No se pudo iniciar la prueba de la máquina virtual Java. Compruebe %s para más información.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Controles</string>
+    <string name="control_keyboard">Teclado</string>
+    <string name="control_secondary">Seg</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
