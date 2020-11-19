@@ -1,3 +1,13 @@
+/*
+ * V3 input bridge implementation.
+ *
+ * Status:
+ * - Active development
+ * - Works with some bugs:
+ *  + Modded versions gives broken stuff.
+ *  + Broken text input on MC 1.12.2 and below.
+ */
+ 
 #include <jni.h>
 #include <assert.h>
 

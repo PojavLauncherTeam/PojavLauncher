@@ -1,3 +1,11 @@
+/*
+ * V2 input bridge implementation.
+ *
+ * Status:
+ * - Abandoned.
+ * - 1.13+ works, but below them don't.
+ */
+
 #include <jni.h>
 #include <assert.h>
 

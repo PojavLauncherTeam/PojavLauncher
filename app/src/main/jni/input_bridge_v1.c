@@ -1,3 +1,12 @@
+/*
+ * V1 input bridge implementation.
+ *
+ * Status:
+ * - Abandoned.
+ * - Works in any versions.
+ * - More lag than v2 and v3
+ */
+
 #include <jni.h>
 #include <assert.h>
 
