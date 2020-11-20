@@ -33,7 +33,6 @@ import android.support.v7.app.*;
 import android.content.res.*;
 
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {
-	private final int POPUP_TEXT_LAYOUT = getInternalId("layout", "text_edit_action_popup_text");
 	private TextView mEditTextView;
 	private TextView mDeleteTextView;
 	
@@ -41,50 +40,9 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		super(handleView);
 	}
 
-	private int getInternalId(String type, String name) {
-/*
-        int id = Resources.getSystem().getIdentifier(name, type, "com.android.internal");
-        if (id == 0) {
-            mHandleView.getContext().getResources().getIdentifier(name, type, "android");
-        }
-		return id;
-*/
-
-        try {
-            for (Class perType : Class.forName("com.android.internal.R").getDeclaredClasses()) {
-                if (perType.getSimpleName().equals(type)) {
-                    try {
-                        Field f = perType.getDeclaredField(name);
-                        f.setAccessible(true);
-                        return (int) f.get(null);
-                    } catch (Throwable th) {
-                        th.printStackTrace();
-                    }
-                }
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        // If unable to find in com.android.internal.R, go find in android.R
-        for (Class perType : android.R.class.getDeclaredClasses()) {
-            if (perType.getSimpleName().equals(type)) {
-                try {
-                    Field f = perType.getDeclaredField(name);
-                    f.setAccessible(true);
-                    return (int) f.get(null);
-                } catch (Throwable th) {
-                    th.printStackTrace();
-                }
-            }
-        }
-
-		return -1;
-	}
-	
 	@Override
 	protected void createPopupWindow() {
-		mPopupWindow = new PopupWindow(mHandleView.getContext(), null, getInternalId("attr", "textSelectHandleWindowStyle"));
+		mPopupWindow = new PopupWindow(mHandleView.getContext(), null, android.R.attr.textSelectHandleWindowStyle);
 		mPopupWindow.setClippingEnabled(true);
 	}
 
@@ -93,7 +51,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		LinearLayout linearLayout = new LinearLayout(mHandleView.getContext());
 		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 		mContentView = linearLayout;
-		mContentView.setBackgroundResource(getInternalId("drawable", "text_edit_paste_window"));
+		mContentView.setBackgroundResource(Resources.getSystem().getIdentifier("text_edit_paste_window", "drawable", "com.android.internal"));
 
 		LayoutInflater inflater = (LayoutInflater) mHandleView.getContext().
 			getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -101,16 +59,16 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		LayoutParams wrapContent = new LayoutParams(
 			ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-		mEditTextView = (TextView) inflater.inflate(POPUP_TEXT_LAYOUT, null);
+		mEditTextView = (TextView) inflater.inflate(R.layout.control_action_popup_text, null);
 		mEditTextView.setLayoutParams(wrapContent);
 		mContentView.addView(mEditTextView);
 		mEditTextView.setText(R.string.global_edit);
 		mEditTextView.setOnClickListener(this);
 
-		mDeleteTextView = (TextView) inflater.inflate(POPUP_TEXT_LAYOUT, null);
+		mDeleteTextView = (TextView) inflater.inflate(R.layout.control_action_popup_text, null);
 		mDeleteTextView.setLayoutParams(wrapContent);
 		mContentView.addView(mDeleteTextView);
-		mDeleteTextView.setText(getInternalId("string", "delete"));
+		mDeleteTextView.setText(Resources.getSystem().getIdentifier("delete", "string", "com.android.internal"));
 		mDeleteTextView.setOnClickListener(this);
 	}
 
@@ -232,7 +190,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 			dialog.show();
 		} else if (view == mDeleteTextView) {
-			alert.setMessage(view.getResources().getString(getInternalId("string", "delete")) + " " + mHandleView.mView.getText() + "?");
+			alert.setMessage(Resources.getSystem().getIdentifier("delete", "string", "com.android.internal") + " " + mHandleView.mView.getText() + "?");
 			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 					@Override
