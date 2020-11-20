@@ -25,7 +25,6 @@
     <string name="login_select_account">Hesap seçin</string>
     <!-- Hint -->
     <string name="hint_select_account">Seçmek için tıklayın. Silmek icin basılı tutun.</string>
-    <string name="hint_control_mapping">"Bu özellik henüz tamamlanmadı o yüzden şu anlık özel kontrol ayarlaması yapamazsın!\nMenüyü açmak için Sağdan sola kaydır ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için düğmeyi basılı tutun."</string>
     <!-- Warning -->
     <string name="warning_title">Uyarı</string>
     <string name="warning_msg">Bu uygulama cihazınızın Android sürümüyle (Android 7.0 ve üstü) uyumlu olmayabilir. VMOS\'u indirip uygulamayı VMOS\'de açabilirsin. Ancak VMOS Google Play mağazasından kaldırıldı, onu manuel olarak indirmelisin.</string>
