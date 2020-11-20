@@ -37,6 +37,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Cài đặt Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Chọn một sơ đồ bàn phím json</string>
+    <string name="alerttitle_installmod">Chọn một bộ cài mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher đã bất ngờ bị dừng</string>
     <string name="error_checklog">Lỗi! Vui lòng kiểm tra nhật kí bên dưới: %s</string>
@@ -55,6 +56,8 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Tin tức</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Strings -->
@@ -69,6 +72,8 @@
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
     <string name="mcl_options">Tùy chọn</string>
     <string name="mcl_option_modmgr">Quản lý mod (không có chức năng)</string>
+    <string name="mcl_option_modinstall">Chạy một bộ cài mod (Forge, LabyMod, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Chạy một bộ cài mod (với chỉ số tùy chỉnh)</string>
     <string name="mcl_option_checkupdate">Kiểm tra bản cập nhật</string>
     <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
     <string name="mcl_option_settings">Thiết lập</string>
@@ -80,6 +85,7 @@
     <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn lâu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong phá hủy khối và thả vật phẩm.</string>
     <string name="mcl_setting_title_controlsize">Đặt kích thước nút điều khiển</string>
+    <string name="mcl_setting_title_javaargs">Các chỉ số chạy JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
     <string name="mcl_setting_category_general">Thiết lập chung</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
@@ -159,6 +165,9 @@
     <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_specialkey">Phím đặc biệt</string>
     <string name="customctrl_hidden">Ẩn</string>
+    <string name="customctrl_dynamicpos">Điểm động</string>
+    <string name="customctrl_dynamicpos_x">Động X</string>
+    <string name="customctrl_dynamicpos_y">Động Y</string>
     <string name="customctrl_addbutton">Thêm nút</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
     <!-- Update part (unused now) -->
