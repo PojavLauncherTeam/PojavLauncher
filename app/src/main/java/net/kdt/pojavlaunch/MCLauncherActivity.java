@@ -59,8 +59,6 @@ public class MCLauncherActivity extends BaseLauncherActivity
         
 		viewInit();
 
-		Tools.setFullscreen(this);
-		
 		if (BuildConfig.DEBUG) {
 			Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
         }

@@ -121,8 +121,6 @@ public class BaseMainActivity extends LoggableActivity {
             logFile.createNewFile();
             logStream = new PrintStream(logFile.getAbsolutePath());
             
-            Tools.setFullscreen(this);
-            
             mProfile = PojavProfile.getCurrentProfileContent(this);
             mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
             // Minecraft 1.12.x special case: use indirect char pipe

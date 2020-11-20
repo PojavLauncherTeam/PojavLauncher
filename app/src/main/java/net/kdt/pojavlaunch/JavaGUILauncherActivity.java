@@ -29,8 +29,6 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         setContentView(R.layout.install_mod);
 
         try {
-            Tools.setFullscreen(this);
-
             logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();

@@ -74,8 +74,6 @@ public class PojavLoginActivity extends BaseActivity
         specialButtons[3].name = getString(R.string.control_secondary);
         specialButtons[4].name = getString(R.string.control_mouse);
         
-        Tools.setFullscreen(this);
-            
         if (!isInitCalled) {
             init();
             isInitCalled = true;

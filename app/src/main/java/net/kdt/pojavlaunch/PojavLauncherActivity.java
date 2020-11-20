@@ -52,13 +52,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private ViewGroup leftView, rightView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         viewInit();
-
-        Tools.setFullscreen(this);
 
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
