@@ -107,9 +107,11 @@ public class BaseMainActivity extends LoggableActivity {
     // private static Collection<? extends Provider.Service> rsaPkcs1List;
 
     // @Override
-    public void onCreate(Bundle savedInstanceState, int resId)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    protected void initLayout(int resId) {
         setContentView(resId);
 
         try {

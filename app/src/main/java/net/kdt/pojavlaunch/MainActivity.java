@@ -20,10 +20,11 @@ public class MainActivity extends BaseMainActivity implements OnClickListener, O
 	toggleControlButton;
 
     private Button[] controlButtons;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.main);
+        super.onCreate(savedInstanceState);
+        initLayout(R.layout.main);
         
         this.upButton = findButton(R.id.control_up);
         this.downButton = findButton(R.id.control_down);
