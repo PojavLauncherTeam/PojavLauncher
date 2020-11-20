@@ -25,7 +25,6 @@
     <string name="login_select_account">Account auswählen</string>
     <!-- Hint -->
     <string name="hint_select_account">Um ein Konto auszuwählen draufdrücken. Um es zu löschen gedrückt halten.</string>
-    <string name="hint_control_mapping">"Dieses Feature ist noch nicht fertig, deswegen kann man keine benutzerdefinierte Steuerung anwenden!\nWisch von rechts nach Links um das Menü zu öffnen. \nHalte ein Knopf gedrückt, um ihn zu anzupassen: bearbeiten, vergrößern/verkleinern oder um ihn zu löschen."</string>
     <!-- Warning -->
     <string name="warning_title">Achtung</string>
     <string name="warning_msg">Diese App ist möglicherweise nicht kompatibel mit deiner Android Version (über oder gleich Android 7.0). Du kannst stattdessen VMOS benutzen und diese App in VMOS installieren. VMOS gibt es nicht im Play Store, weswegen du es manuell herunterladen musst.</string>
