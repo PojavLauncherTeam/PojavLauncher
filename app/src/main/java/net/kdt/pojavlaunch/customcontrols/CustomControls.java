@@ -30,14 +30,14 @@ public class CustomControls
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_listplayers, LWJGLGLFWKeycode.GLFW_KEY_TAB, "${margin} * 4 + ${width} * 3", "${margin}", false));
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_thirdperson, LWJGLGLFWKeycode.GLFW_KEY_F5, "${margin}", "${height} + ${margin}", false));
 
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_up, LWJGLGLFWKeycode.GLFW_KEY_W, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 3 - ${height} * 3", true));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_left, LWJGLGLFWKeycode.GLFW_KEY_A, "${margin}", "${screen_height} - ${margin} * 2 - ${height} * 2", true)); 
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_down, LWJGLGLFWKeycode.GLFW_KEY_S, "${margin} * 2 + ${width}", "${screen_height} - ${margin} - ${width}", true));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_right, LWJGLGLFWKeycode.GLFW_KEY_D, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 2 - ${width} * 2", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_up, LWJGLGLFWKeycode.GLFW_KEY_W, "${margin} * 2 + ${width}", "${bottom} - ${margin} * 3 - ${height} * 2", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_left, LWJGLGLFWKeycode.GLFW_KEY_A, "${margin}", "${bottom} - ${margin} * 2 - ${height}", true)); 
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_down, LWJGLGLFWKeycode.GLFW_KEY_S, "${margin} * 2 + ${width}", "${bottom} - ${margin}", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_right, LWJGLGLFWKeycode.GLFW_KEY_D, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin} * 2 - ${height}", true));
 
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_inventory, LWJGLGLFWKeycode.GLFW_KEY_E, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} - ${width}", true));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_shift, LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 2 - ${width} * 2", true));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, LWJGLGLFWKeycode.GLFW_KEY_SPACE, "${screen_width} - ${margin} * 3 - ${width} * 2", "${screen_height} - ${margin} * 2 - ${width} * 2", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_inventory, LWJGLGLFWKeycode.GLFW_KEY_E, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin}", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_shift, LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 2 - ${height} * 2", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, LWJGLGLFWKeycode.GLFW_KEY_SPACE, "${right} - ${margin} * 2 - ${width}", "${bottom} - ${margin} * 2 - ${height}", true));
 		
 	}
     

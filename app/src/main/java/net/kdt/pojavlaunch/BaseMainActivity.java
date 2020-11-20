@@ -83,7 +83,6 @@ public class BaseMainActivity extends LoggableActivity {
     private TextView debugText;
 
     private PointerOreoWrapper pointerSurface;
-    private View.OnTouchListener pointerCaptureListener;
 
     // private String mQueueText = new String();
 
@@ -529,112 +528,104 @@ public class BaseMainActivity extends LoggableActivity {
                     // return !CallbackBridge.isGrabbing();
                 }
             };
-
-            pointerCaptureListener = new OnTouchListener(){
-                private int x, y;
-                private boolean debugErrored = false;
-
-                private String getMoving(float pos, boolean xOrY) {
-                    if (pos == 0) {
-                        return "STOPPED";
-                    } else if (pos > 0) {
-                        return xOrY ? "RIGHT" : "DOWN";
-                    } else { // if (pos3 < 0) {
-                        return xOrY ? "LEFT" : "UP";
-                    }
-                }
-
-                @Override
-                public boolean onTouch(View p1, MotionEvent e)
-                {
-                    x += ((int) e.getX()) / scaleFactor;
-                    y -= ((int) e.getY()) / scaleFactor;
-                    
-                    if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
-                        StringBuilder builder = new StringBuilder();
-                        try {
-                            builder.append("PointerCapture debug\n");
-                            builder.append("MotionEvent=" + e.getActionMasked() + "\n");
-                            builder.append("PressingBtn=" + MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState()) + "\n\n");
-
-                            builder.append("PointerX=" + e.getX() + "\n");
-                            builder.append("PointerY=" + e.getY() + "\n");
-                            builder.append("RawX=" + e.getRawX() + "\n");
-                            builder.append("RawY=" + e.getRawY() + "\n\n");
-
-                            builder.append("XPos=" + x + "\n");
-                            builder.append("YPos=" + y + "\n\n");
-                            builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
-                            builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
-                        } catch (Throwable th) {
-                            debugErrored = true;
-                            builder.append("Error getting debug. The debug will be stopped!\n" + Log.getStackTraceString(th));
-                        } finally {
-                            debugText.setText(builder.toString());
-                            builder.setLength(0);
-                        }
-                    }
-
-                    CallbackBridge.sendCursorPos(x, y);
-                    
-                    switch (e.getButtonState()) {
-                        case MotionEvent.BUTTON_PRIMARY: CallbackBridge.mouseLeft = true;
-                            break;
-                        case MotionEvent.BUTTON_SECONDARY: CallbackBridge.mouseLeft = false;
-                            break;
-                    }
-
-                    switch (e.getActionMasked()) {
-                        case MotionEvent.ACTION_DOWN: // 0
-                        case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            CallbackBridge.sendPrepareGrabInitialPos();
-                            
-                            CallbackBridge.sendMouseKeycode(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, true);
-                            initialX = x;
-                            initialY = y;
-                        
-                            sendMouseButton(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-                            
-                            // theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                            break;
-
-                        case MotionEvent.ACTION_UP: // 1
-                        case MotionEvent.ACTION_CANCEL: // 3
-                        case MotionEvent.ACTION_POINTER_UP: // 6
-                            // CallbackBridge.sendCursorPos(x, y);
-                            // CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
-                            CallbackBridge.putMouseEventWithCoords(CallbackBridge.mouseLeft /* rightOverride */ ? (byte) 0 : (byte) 1, (byte) 1, x, y);
-                            /*
-                             if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-                             }
-                             if (triggeredLeftMouseButton) {
-                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
-                             }
-                             */
-
-                            sendMouseButton(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-
-                            // triggeredLeftMouseButton = false;
-                            // theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-                            break;
-                    }
-
-                    debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                    CallbackBridge.DEBUG_STRING.setLength(0);
-                    
-                    return true;
-                    // If onClick fail with false, change back to true
-                }
-            };
-
+            
             if (isPointerCaptureSupported()) {
                 this.pointerSurface = new PointerOreoWrapper(minecraftGLView);
                 this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
+                        private int x, y;
+                        private boolean debugErrored = false;
+
+                        private String getMoving(float pos, boolean xOrY) {
+                            if (pos == 0) {
+                                return "STOPPED";
+                            } else if (pos > 0) {
+                                return xOrY ? "RIGHT" : "DOWN";
+                            } else { // if (pos3 < 0) {
+                                return xOrY ? "LEFT" : "UP";
+                            }
+                        }
+
                         @Override
-                        public boolean onCapturedPointer(View view, MotionEvent event) {
-                            return pointerCaptureListener.onTouch(view, event);
+                        public boolean onCapturedPointer(View view, MotionEvent e) {
+                            x += ((int) e.getX()) / scaleFactor;
+                            y -= ((int) e.getY()) / scaleFactor;
+
+                            if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
+                                StringBuilder builder = new StringBuilder();
+                                try {
+                                    builder.append("PointerCapture debug\n");
+                                    builder.append("MotionEvent=" + e.getActionMasked() + "\n");
+                                    builder.append("PressingBtn=" + MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState()) + "\n\n");
+
+                                    builder.append("PointerX=" + e.getX() + "\n");
+                                    builder.append("PointerY=" + e.getY() + "\n");
+                                    builder.append("RawX=" + e.getRawX() + "\n");
+                                    builder.append("RawY=" + e.getRawY() + "\n\n");
+
+                                    builder.append("XPos=" + x + "\n");
+                                    builder.append("YPos=" + y + "\n\n");
+                                    builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
+                                    builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
+                                } catch (Throwable th) {
+                                    debugErrored = true;
+                                    builder.append("Error getting debug. The debug will be stopped!\n" + Log.getStackTraceString(th));
+                                } finally {
+                                    debugText.setText(builder.toString());
+                                    builder.setLength(0);
+                                }
+                            }
+
+                            CallbackBridge.sendCursorPos(x, y);
+
+                            switch (e.getButtonState()) {
+                                case MotionEvent.BUTTON_PRIMARY: CallbackBridge.mouseLeft = true;
+                                    break;
+                                case MotionEvent.BUTTON_SECONDARY: CallbackBridge.mouseLeft = false;
+                                    break;
+                            }
+
+                            switch (e.getActionMasked()) {
+                                case MotionEvent.ACTION_DOWN: // 0
+                                case MotionEvent.ACTION_POINTER_DOWN: // 5
+                                    CallbackBridge.sendPrepareGrabInitialPos();
+
+                                    CallbackBridge.sendMouseKeycode(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, true);
+                                    initialX = x;
+                                    initialY = y;
+
+                                    sendMouseButton(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+
+                                    // theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+                                    break;
+
+                                case MotionEvent.ACTION_UP: // 1
+                                case MotionEvent.ACTION_CANCEL: // 3
+                                case MotionEvent.ACTION_POINTER_UP: // 6
+                                    // CallbackBridge.sendCursorPos(x, y);
+                                    // CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
+                                    CallbackBridge.putMouseEventWithCoords(CallbackBridge.mouseLeft /* rightOverride */ ? (byte) 0 : (byte) 1, (byte) 1, x, y);
+                                    /*
+                                     if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+                                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
+                                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+                                     }
+                                     if (triggeredLeftMouseButton) {
+                                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
+                                     }
+                                     */
+
+                                    sendMouseButton(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
+
+                                    // triggeredLeftMouseButton = false;
+                                    // theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+                                    break;
+                            }
+
+                            debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                            CallbackBridge.DEBUG_STRING.setLength(0);
+
+                            return true;
+                        // If onClick fail with false, change back to true
                         }
                     });
             }

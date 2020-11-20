@@ -40,7 +40,7 @@ public class ControlData implements Cloneable
 		if (SPECIAL_BUTTONS == null) {
 			ControlData[] specialButtons = new ControlData[]{
 				new ControlData("Keyboard", SPECIALBTN_KEYBOARD, "${margin} * 3 + ${width} * 2", "${margin}", false),
-				new ControlData("GUI", SPECIALBTN_TOGGLECTRL, "${margin}", "${bottom}"),
+				new ControlData("GUI", SPECIALBTN_TOGGLECTRL, "${margin}", "${bottom} - ${margin}"),
 				new ControlData("PRI", SPECIALBTN_MOUSEPRI, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
 				new ControlData("SEC", SPECIALBTN_MOUSESEC, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 3 - ${height} * 3"),
 				new ControlData("Mouse", SPECIALBTN_VIRTUALMOUSE, "${right}", "${margin}", false)

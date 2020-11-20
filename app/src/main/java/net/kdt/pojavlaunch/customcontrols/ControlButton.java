@@ -140,12 +140,13 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         }
 
         switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_DOWN:
                 mCanTriggerLongClick = true;
                 downX = event.getX();
                 downY = event.getY();
                 break;
-            case MotionEvent.ACTION_UP:
+                
             case MotionEvent.ACTION_MOVE:
                 mCanTriggerLongClick = false;
                 moveX += event.getX() - downX;

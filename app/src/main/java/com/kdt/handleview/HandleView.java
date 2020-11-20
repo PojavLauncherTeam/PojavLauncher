@@ -311,14 +311,14 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 		return 0;  
 	}
 	
-	// MOD: Addition
+	// Addition
 	@Override
 	public boolean onLongClick(View view) {
 		showActionPopupWindow(0);
 		return true;
 	}
 
-	// MOD: Addition
+	// Addition
 	private float mDownX, mDownY;
 	
 	@Override
