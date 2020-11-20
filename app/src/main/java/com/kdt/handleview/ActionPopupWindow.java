@@ -133,7 +133,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						final CheckBox checkHidden = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
 						checkHidden.setChecked(properties.hidden);
                         
-                        final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
+                        final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_dynamicpos);
                         checkDynamicPos.setChecked(properties.isDynamicBtn);
 
                         final LinearLayout layoutDynamicBtn = dialog.findViewById(R.id.controlsetting_dynamicbtnlayout);
