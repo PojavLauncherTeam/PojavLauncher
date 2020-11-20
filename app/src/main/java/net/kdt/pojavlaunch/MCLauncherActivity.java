@@ -56,7 +56,7 @@ public class MCLauncherActivity extends BaseLauncherActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
+        
 		viewInit();
 
 		Tools.setFullscreen(this);

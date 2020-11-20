@@ -347,8 +347,8 @@ public final class Tools
 
     public static float dpToPx(Context ctx, float dp) {
         // 921600 = 1280 * 720, default scale
-        float scaledDp = dp * currentDisplayMetrics.scaledDensity;
-        // / 921600 * CallbackBridge.windowWidth * CallbackBridge.windowHeight;
+        // TODO better way to scaling
+        float scaledDp = dp / 921600 * CallbackBridge.windowWidth * CallbackBridge.windowHeight;
         return (scaledDp * ctx.getResources().getDisplayMetrics().density);
     }
 

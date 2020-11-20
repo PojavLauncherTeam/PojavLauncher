@@ -42,7 +42,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	}
 
 	private int getInternalId(String type, String name) {
-        int id = Resources.getSystem().getIdentifier(name, type, "com.android.internal.R");
+        int id = Resources.getSystem().getIdentifier(name, type, "com.android.internal");
         if (id == 0) {
             mHandleView.getContext().getResources().getIdentifier(name, type, "android");
         }
