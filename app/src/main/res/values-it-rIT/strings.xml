@@ -25,6 +25,7 @@
     <string name="login_select_account">Seleziona account</string>
     <!-- Hint -->
     <string name="hint_select_account">Per selezionare, cliccalo. Per cancellare un account, tieni premuto.</string>
+    <string name="hint_control_mapping">"Scorri da destra verso sinistra per aprire il menu ◀\nTieni premuto per personalizzare: modificare, ridimensionare o eliminare."</string>
     <!-- Warning -->
     <string name="warning_title">Avviso</string>
     <string name="warning_msg">Questa applicazione potrebbe non essere compatibile con la tua versione di android (Successiva o uguale ad Android 7.0). Puoi utilizzare VMOS e poi installare questa app a VMOS. Però VMOS non è più disponibile sul Play Store, devi installarlo manualmente.</string>
