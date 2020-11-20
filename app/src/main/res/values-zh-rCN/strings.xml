@@ -25,7 +25,6 @@
     <string name="login_select_account">选择账号</string>
     <!-- Hint -->
     <string name="hint_select_account">点击选择账号，长按删除。</string>
-    <string name="hint_control_mapping">"此项功能尚未完善，暂时无法应用自定义控制键位！\n左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
     <!-- Warning -->
     <string name="warning_title">警告</string>
     <string name="warning_msg">本应用可能与您的 Android 版本（大于等于 Android 7.0）不兼容。作为替代，您可以安装虚拟大师并在其中安装本应用。但由于虚拟大师已从 Play 商店移除，您必须手动安装。</string>
