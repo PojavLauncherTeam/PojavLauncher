@@ -138,6 +138,11 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
             
             return false;
         }
+        
+        if (mGestureDetector.onTouchEvent(event)) {
+            mCanTriggerLongClick = true;
+            onLongClick(this);
+        }
 
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_UP:
