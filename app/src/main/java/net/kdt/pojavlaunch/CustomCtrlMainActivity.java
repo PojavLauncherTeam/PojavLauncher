@@ -14,7 +14,8 @@ public class CustomCtrlMainActivity extends BaseMainActivity implements OnClickL
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.main_with_customctrl);
+        super.onCreate(savedInstanceState);
+        initLayout(R.layout.main_with_customctrl);
 
         ControlData[] specialButtons = ControlData.getSpecialButtons();
         for (ControlData specialButton : specialButtons) {

@@ -42,11 +42,44 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	}
 
 	private int getInternalId(String type, String name) {
+/*
         int id = Resources.getSystem().getIdentifier(name, type, "com.android.internal");
         if (id == 0) {
             mHandleView.getContext().getResources().getIdentifier(name, type, "android");
         }
 		return id;
+*/
+
+        try {
+            for (Class perType : Class.forName("com.android.internal.R").getDeclaredClasses()) {
+                if (perType.getSimpleName().equals(type)) {
+                    try {
+                        Field f = perType.getDeclaredField(name);
+                        f.setAccessible(true);
+                        return (int) f.get(null);
+                    } catch (Throwable th) {
+                        th.printStackTrace();
+                    }
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // If unable to find in com.android.internal.R, go find in android.R
+        for (Class perType : android.R.class.getDeclaredClasses()) {
+            if (perType.getSimpleName().equals(type)) {
+                try {
+                    Field f = perType.getDeclaredField(name);
+                    f.setAccessible(true);
+                    return (int) f.get(null);
+                } catch (Throwable th) {
+                    th.printStackTrace();
+                }
+            }
+        }
+
+		return -1;
 	}
 	
 	@Override
