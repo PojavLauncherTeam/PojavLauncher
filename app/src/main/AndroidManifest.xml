@@ -62,6 +62,13 @@
 			android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+        <activity
+            android:launchMode="standard"
+            android:multiprocess="true"
+            android:screenOrientation="sensorLandscape"
+            android:name=".CustomCtrlMainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 		
 		<activity
 			android:screenOrientation="sensorLandscape"

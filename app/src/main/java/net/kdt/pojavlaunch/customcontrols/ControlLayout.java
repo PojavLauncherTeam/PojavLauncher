@@ -6,6 +6,7 @@ import android.view.*;
 import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
 import android.support.v7.app.*;
+import java.util.*;
 
 public class ControlLayout extends FrameLayout
 {
@@ -13,6 +14,7 @@ public class ControlLayout extends FrameLayout
 	private CustomControls mLayout;
 	private CustomControlsActivity mActivity;
 	private boolean mControlVisible = false;
+    
 	public ControlLayout(Context ctx) {
 		super(ctx);
 	}
@@ -41,7 +43,8 @@ public class ControlLayout extends FrameLayout
 	public void loadLayout(CustomControls controlLayout) {
 		mLayout = controlLayout;
 		removeAllViews();
-		for (ControlData button : controlLayout.button) {
+		for (ControlData button : controlLayout.mControlDataList) {
+            button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
 			addControlView(button);
 		}
 
@@ -49,7 +52,7 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void addControlButton(ControlData controlButton) {
-		mLayout.button.add(controlButton);
+		mLayout.mControlDataList.add(controlButton);
 		addControlView(controlButton);
 	}
 
@@ -62,7 +65,7 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void removeControlButton(ControlButton controlButton) {
-		mLayout.button.remove(controlButton.getProperties());
+		mLayout.mControlDataList.remove(controlButton.getProperties());
 		controlButton.setVisibility(View.GONE);
 		removeView(controlButton);
 
@@ -84,7 +87,7 @@ public class ControlLayout extends FrameLayout
 		mControlVisible = !mControlVisible;
 		for (int i = 0; i < getChildCount(); i++) {
 			View view = getChildAt(i);
-			if (view instanceof ControlButton && ((ControlButton) view).getProperties().keycode != ControlData.SPECIALBTN_TOGGLECTRL) {
+			if (view instanceof ControlButton && ((ControlButton) view).getProperties().isHideable) {
 				((ControlButton) view).setVisibility(mControlVisible ? (((ControlButton) view).getProperties().hidden ? View.INVISIBLE : View.VISIBLE) : View.GONE);
 			}
 		}
@@ -97,7 +100,9 @@ public class ControlLayout extends FrameLayout
 			if (v instanceof ControlButton) {
 				ControlButton cv = ((ControlButton) v);
 				cv.setModifiable(z);
-				// cv.setVisibility(cv.getProperties().hidden ? View.INVISIBLE : View.VISIBLE);
+                if (!z) {
+				    cv.setAlpha(cv.getProperties().hidden ? 0f : 1.0f);
+                }
 			}
 		}
 	}

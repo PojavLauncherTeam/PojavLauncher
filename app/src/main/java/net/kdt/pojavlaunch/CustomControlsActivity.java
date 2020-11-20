@@ -26,7 +26,6 @@ public class CustomControlsActivity extends BaseActivity
 
 	public boolean isModified = false;
 
-	private Gson gson;
 	private String selectedName = "new_control";
 
 	@Override
@@ -35,8 +34,6 @@ public class CustomControlsActivity extends BaseActivity
 		setContentView(R.layout.control_mapping);
 
 		mPref = PreferenceManager.getDefaultSharedPreferences(this);
-
-		gson = new GsonBuilder().setPrettyPrinting().create();
 
 		ctrlLayout = (ControlLayout) findViewById(R.id.customctrl_controllayout);
 
@@ -206,7 +203,7 @@ public class CustomControlsActivity extends BaseActivity
 
 	private void loadControl(String path) {
 		try {
-			mCtrl = gson.fromJson(Tools.read(path), CustomControls.class);
+			mCtrl = Tools.GLOBAL_GSON.fromJson(Tools.read(path), CustomControls.class);
 			ctrlLayout.loadLayout(mCtrl);
 
 			selectedName = new File(path).getName();

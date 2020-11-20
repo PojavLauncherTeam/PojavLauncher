@@ -20,7 +20,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
-public class BaseMainActivity extends LoggableActivity implements OnTouchListener {
+public class BaseMainActivity extends LoggableActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     
     public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
@@ -106,11 +106,11 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
     
     // private static Collection<? extends Provider.Service> rsaPkcs1List;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)
+    // @Override
+    public void onCreate(Bundle savedInstanceState, int resId)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(resId);
 
         try {
             // FIXME: is it safe fot multi thread?
@@ -196,14 +196,6 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
 
             this.minecraftGLView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
            
-            ControlData[] specialButtons = ControlData.getSpecialButtons();
-            specialButtons[0].specialButtonListener = new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    showKeyboard(); 
-                }
-            };
-
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
 
@@ -649,9 +641,14 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
 
             minecraftGLView.setOnHoverListener(new View.OnHoverListener(){
                     @Override
-                    public boolean onHover(View p1, MotionEvent p2) {
+                    public boolean onHover(View v, MotionEvent e) {
                         if (!CallbackBridge.isGrabbing() && mIsResuming) {
-                            return glTouchListener.onTouch(p1, p2);
+                            // return glTouchListener.onTouch(v, e);
+                            int x = ((int) e.getX()) / scaleFactor;
+                            int y = ((int) e.getY()) / scaleFactor;
+                            CallbackBridge.mouseX = x;
+                            CallbackBridge.mouseY = y;
+                            CallbackBridge.sendCursorPos(x, y);
                         }
                         return true;
                     }
@@ -802,56 +799,6 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
         }
         mIsResuming = false;
         super.onPause();
-    }
-
-    public boolean onTouch(View v, MotionEvent e) {
-        boolean isDown;
-        switch (e.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN: // 0
-            case MotionEvent.ACTION_POINTER_DOWN: // 5
-                isDown = true;
-                break;
-            case MotionEvent.ACTION_UP: // 1
-            case MotionEvent.ACTION_CANCEL: // 3
-            case MotionEvent.ACTION_POINTER_UP: // 6
-                isDown = false;
-                break;
-            default:
-                return false;
-        }
-
-        switch (v.getId()) {
-            case R.id.control_up: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_W, 0, isDown); break;
-            case R.id.control_left: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_A, 0, isDown); break;
-            case R.id.control_down: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_S, 0, isDown); break;
-            case R.id.control_right: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_D, 0, isDown); break;
-            case R.id.control_jump: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, 0, isDown); break;
-            case R.id.control_primary: sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown); break;
-            case R.id.control_secondary:
-                if (CallbackBridge.isGrabbing()) {
-                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
-                } else {
-                    /*
-                    if (!isDown) {
-                        CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, CallbackBridge.mouseX, CallbackBridge.mouseY);
-                    }
-                    */
-                    
-                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown ? 1 : 0, CallbackBridge.mouseX, CallbackBridge.mouseY);
-                    
-                    setRightOverride(isDown);
-                } break;
-            case R.id.control_debug: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F3, 0, isDown); break;
-            case R.id.control_shift: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, 0, isDown); break;
-            case R.id.control_inventory: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_E, 0, isDown); break;
-            case R.id.control_talk: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_T, 0, isDown); break;
-            case R.id.control_keyboard: showKeyboard(); break;
-            case R.id.control_thirdperson: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F5, 0, isDown); break;
-            case R.id.control_zoom: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_C, 0, isDown); break;
-            case R.id.control_listplayers: sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_TAB, 0, isDown); break;
-        }
-
-        return false;
     }
 
     public static void fullyExit() {
@@ -1102,16 +1049,6 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
             .show();
     }
 
-    protected Button findButton(int id) {
-        Button button = (Button) findViewById(id);
-        button.setWidth((int) (button.getWidth() * Tools.currentDisplayMetrics.scaledDensity));
-        button.setHeight((int) (button.getHeight() * LauncherPreferences.PREF_BUTTONSIZE));
-        button.setOnTouchListener(this);
-        button.setFocusable(false);
-        button.setFocusableInTouchMode(false);
-        return button;
-    }
-
     @Override
     public void onBackPressed() {
         // Prevent back
@@ -1133,7 +1070,7 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
-    private void setRightOverride(boolean val) {
+    protected void setRightOverride(boolean val) {
         this.rightOverride = val;
         // this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
     }

@@ -23,6 +23,9 @@ public class ControlData implements Cloneable
 	private static ControlData[] SPECIAL_BUTTONS;
 	private static String[] SPECIAL_BUTTON_NAME_ARRAY;
 
+    // Internal usage only
+    public boolean isHideable;
+    
     /**
      * Both fields below are dynamic position data, auto updates
      * X and Y position, unlike the original one which uses fixed
@@ -135,7 +138,13 @@ public class ControlData implements Cloneable
 	}
     
     public void update() {
-        if (!isDynamicBtn) {
+        if (keycode < 0) {
+            for (ControlData data : getSpecialButtons()) {
+                if (keycode == data.keycode) {
+                    specialButtonListener = data.specialButtonListener;
+                }
+            }
+        } if (!isDynamicBtn) {
             return;
         }
         
