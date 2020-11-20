@@ -25,7 +25,6 @@
     <string name="login_select_account">Selecionar conta</string>
     <!-- Hint -->
     <string name="hint_select_account">Para selecionar, pressione. Para excluir uma conta, manter pressionado.</string>
-    <string name="hint_control_mapping">"Essa função ainda não está finalizada, então você não pode aplicar controles personalizados no momento! \nDeslize da direita pra esquerda para abrir o menu. \nPressione um botão para personalizar: editar, redimencionar e excluir."</string>
     <!-- Warning -->
     <string name="warning_title">Aviso</string>
     <string name="warning_msg">Este app pode não ser compatível com sua versão do Android (Android 7.0+). Você pode usar o VMOS e instalar esse app no VMOS. Mas o VMOS não está disponível pelo Play Store, você deve instalar manualmente.</string>
