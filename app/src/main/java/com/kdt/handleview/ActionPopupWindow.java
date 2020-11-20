@@ -68,7 +68,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		mDeleteTextView = (TextView) inflater.inflate(R.layout.control_action_popup_text, null);
 		mDeleteTextView.setLayoutParams(wrapContent);
 		mContentView.addView(mDeleteTextView);
-		mDeleteTextView.setText(Resources.getSystem().getIdentifier("delete", "string", "com.android.internal"));
+		mDeleteTextView.setText(R.string.global_remove);
 		mDeleteTextView.setOnClickListener(this);
 	}
 
@@ -190,7 +190,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 			dialog.show();
 		} else if (view == mDeleteTextView) {
-			alert.setMessage(Resources.getSystem().getIdentifier("delete", "string", "com.android.internal") + " " + mHandleView.mView.getText() + "?");
+			alert.setMessage(R.string.global_remove + " " + mHandleView.mView.getText() + "?");
 			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 					@Override
