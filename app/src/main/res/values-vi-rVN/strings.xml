@@ -25,7 +25,6 @@
     <string name="login_select_account">Chọn tài khoản</string>
     <!-- Hint -->
     <string name="hint_select_account">Để chọn, nhấp vào. Để xóa một tài khoản, giữ vào.</string>
-    <string name="hint_control_mapping">"Tính năng này chưa hoàn thiện nên không thể áp dụng tùy trỉnh điều khiển ngay lúc này!\nVuốt từ bên phải sang trái để mở menu◀\nGiữ một nút để điều chỉnh: sắp xếp, thay đổi kích thước hoặc xóa."</string>
     <!-- Warning -->
     <string name="warning_title">Cảnh báo</string>
     <string name="warning_msg">Ứng dụng này có thể không tương thích với phiên bản Android của bạn (hơn hoặc bằng Android 7.0). Bạn có thể dùng VMOS sau khi tải ứng dụng này sang VMOS để thay thế. Nhưng VMOS bị loại bỏ bởi CH Play, bạn phải cài đặt thủ công.</string>
