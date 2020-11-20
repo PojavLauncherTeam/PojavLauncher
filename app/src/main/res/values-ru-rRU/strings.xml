@@ -25,7 +25,7 @@
     <string name="login_select_account">Выбрать профиль</string>
     <!-- Hint -->
     <string name="hint_select_account">Для выбора, нажмите. Для удаления, нажмите и задержите.</string>
-    <string name="hint_control_mapping">"Эта функция ещё не завершена и не может применять иные раскладки!\nПроведите справа налево чтобы открыть меню ◀\nЗадержите кнопку для настройки: изменить размер или удалить."</string>
+    <string name="hint_control_mapping">"Свайп справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактировать, изменять размер или удалить."</string>
     <!-- Warning -->
     <string name="warning_title">Предупреждение</string>
     <string name="warning_msg">Это приложение может быть не совместимо с вашей версией Android (более свежей или равной 7.0). Попробуйте VMOS и установите его туда. Учтите, что VMOS придётся установить вручную.</string>
@@ -165,6 +165,9 @@
     <string name="customctrl_keyname">Имя</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
     <string name="customctrl_hidden">Скрыто</string>
+    <string name="customctrl_dynamicpos">Динамическая позиция</string>
+    <string name="customctrl_dynamicpos_x">Динамический X</string>
+    <string name="customctrl_dynamicpos_y">Динамический Y</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_selectdefault">Выберите управление по умолчанию</string>
     <!-- Update part (unused now) -->
