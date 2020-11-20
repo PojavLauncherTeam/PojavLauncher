@@ -1073,11 +1073,11 @@ public class BaseMainActivity extends LoggableActivity {
         // this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
     }
 
-    public void sendKeyPress(int keyCode, int modifiers, boolean status) {
+    public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
         sendKeyPress(keyCode, '\u0000', modifiers, status);
     }
 
-    public void sendKeyPress(int keyCode, char keyChar, int modifiers, boolean status) {
+    public static void sendKeyPress(int keyCode, char keyChar, int modifiers, boolean status) {
         CallbackBridge.sendKeycode(keyCode, keyChar, modifiers, status);
     }
 

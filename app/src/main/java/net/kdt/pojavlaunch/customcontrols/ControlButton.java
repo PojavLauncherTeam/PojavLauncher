@@ -95,8 +95,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     }
 
     @Override
-    public boolean onLongClick(View p1)
-    {
+    public boolean onLongClick(View p1) {
         if (!mCanTriggerLongClick) return false;
 
         if (mHandleView.isShowing()) {
@@ -116,7 +115,27 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     public boolean onTouch(View view, MotionEvent event) {
         if (!mCanModify) {
             mCanTriggerLongClick = false;
+            
+            if (mProperties.keycode >= 0) {
+                boolean isDown;
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: // 0
+                    case MotionEvent.ACTION_POINTER_DOWN: // 5
+                        isDown = true;
+                        break;
+                    case MotionEvent.ACTION_UP: // 1
+                    case MotionEvent.ACTION_CANCEL: // 3
+                    case MotionEvent.ACTION_POINTER_UP: // 6
+                        isDown = false;
+                        break;
+                    default:
+                        return false;
+                }
+                MainActivity.sendKeyPress(mProperties.keycode, 0, isDown);
 
+                return true;
+            }
+            
             return false;
         }
 
