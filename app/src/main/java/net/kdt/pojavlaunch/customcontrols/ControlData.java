@@ -170,7 +170,7 @@ public class ControlData implements Cloneable
         }
         
         x = insertDynamicPos(dynamicX);
-        y = insertDynamicPos(dynamicX);
+        y = insertDynamicPos(dynamicY);
     }
 
     private static float calculate(String math) {
