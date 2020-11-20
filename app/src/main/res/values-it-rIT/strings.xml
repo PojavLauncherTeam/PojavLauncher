@@ -85,6 +85,7 @@
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
     <string name="mcl_setting_title_controlsize">Imposta dimensione dei pulsanti di controllo</string>
+    <string name="mcl_setting_title_javaargs">Argomenti di avvio JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attento, questo potrebbe far crashare il gioco se modificato senza sapere quello che fai.</string>
     <string name="mcl_setting_category_general">Impostazioni generali</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno visibili nella lista delle versioni</string>
@@ -164,6 +165,9 @@
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Tasto speciale</string>
     <string name="customctrl_hidden">Nascosto</string>
+    <string name="customctrl_dynamicpos">Posizione dinamica</string>
+    <string name="customctrl_dynamicpos_x">X dinamica</string>
+    <string name="customctrl_dynamicpos_y">Y dinamica</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
     <!-- Update part (unused now) -->
