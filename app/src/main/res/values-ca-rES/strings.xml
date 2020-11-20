@@ -25,7 +25,6 @@
     <string name="login_select_account">Seleccioneu un compte</string>
     <!-- Hint -->
     <string name="hint_select_account">Per selecionar, clica. Per esorrar una conta, manten presionant.</string>
-    <string name="hint_control_mapping">"Aquesta funció encara no esta acavada, no pots costumitzar els controls en aquest moment!\nLlisca desde l’esquerra a la dreta per obrir el menu ◀️\nAguanta un buto per costumitsarl’ho: editar, canviar el tamany o esborrar."</string>
     <!-- Warning -->
     <string name="warning_title">Perill</string>
     <string name="warning_msg">Aquesta app pot no ser compatible amb la teva versio d’Android (mes gran o igual que Android 7.0). Pots fe servir VMOS i despres instalar aquesta app alternativament a VMOS. Pero VMOS ja no esta al Play Store, l’hauras d’instalar manual ment.</string>
