@@ -25,6 +25,7 @@
     <string name="login_select_account">选择账号</string>
     <!-- Hint -->
     <string name="hint_select_account">点击选择账号，长按删除。</string>
+    <string name="hint_control_mapping">"左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
     <!-- Warning -->
     <string name="warning_title">警告</string>
     <string name="warning_msg">本应用可能与您的 Android 版本（大于等于 Android 7.0）不兼容。作为替代，您可以安装虚拟大师并在其中安装本应用。但由于虚拟大师已从 Play 商店移除，您必须手动安装。</string>
@@ -164,6 +165,9 @@
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_specialkey">特殊键</string>
     <string name="customctrl_hidden">隐藏</string>
+    <string name="customctrl_dynamicpos">动态位置</string>
+    <string name="customctrl_dynamicpos_x">动态 X 轴</string>
+    <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
     <!-- Update part (unused now) -->
