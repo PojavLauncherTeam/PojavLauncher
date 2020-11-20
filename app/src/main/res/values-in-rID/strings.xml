@@ -25,7 +25,6 @@
     <string name="login_select_account">Pilih akun</string>
     <!-- Hint -->
     <string name="hint_select_account">Untuk memilih akun, di-klik. Untuk menghapus akun, dipencet dengan ditahan.</string>
-    <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum busa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
     <!-- Warning -->
     <string name="warning_title">Peringatan</string>
     <string name="warning_msg">Aplikasi ini mungkin tidak biaa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
