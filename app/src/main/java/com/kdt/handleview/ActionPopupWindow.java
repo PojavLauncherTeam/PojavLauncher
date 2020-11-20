@@ -31,6 +31,7 @@ import android.view.View.OnClickListener;
 import net.kdt.pojavlaunch.customcontrols.*;
 import android.support.v7.app.*;
 import android.content.res.*;
+import net.objecthunter.exp4j.*;
 
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {
 	private TextView mEditTextView;
@@ -51,7 +52,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		LinearLayout linearLayout = new LinearLayout(mHandleView.getContext());
 		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 		mContentView = linearLayout;
-		mContentView.setBackgroundResource(Resources.getSystem().getIdentifier("text_edit_paste_window", "drawable", "com.android.internal"));
+		mContentView.setBackgroundResource(R.drawable.control_side_action_window);
 
 		LayoutInflater inflater = (LayoutInflater) mHandleView.getContext().
 			getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -114,7 +115,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						if (properties.keycode < 0) {
 							spinnerKeycode.setSelection(properties.keycode + specialArr.length);
 						} else {
-							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode));
+							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode) + specialArr.length);
 						}
 						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
@@ -162,6 +163,34 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									if (editName.getText().toString().isEmpty()) {
 										editName.setError(view.getResources().getString(R.string.global_error_field_empty));
 									} else {
+                                        /*
+                                        String errorAt = null;
+                                        try {
+                                            errorAt = "DynamicX";
+                                            properties.insertDynamicPos(editDynamicX.getText().toString());
+                                            errorAt = "DynamicY";
+                                            properties.insertDynamicPos(editDynamicY.getText().toString());
+                                        } catch (Throwable th) {
+                                            Error e = new Error(errorAt, th);
+                                            e.setStackTrace(null);
+                                            Tools.showError(view.getContext(), e);
+                                            return;
+                                        }
+                                        errorAt = null;
+                                        */
+                                        
+                                        int errorAt = 0;
+                                        try {
+                                            properties.insertDynamicPos(editDynamicX.getText().toString());
+                                            errorAt = 1;
+                                            properties.insertDynamicPos(editDynamicY.getText().toString());
+                                        } catch (Throwable th) {
+                                            (errorAt == 0 ? editDynamicX : editDynamicY)
+                                                .setError(th.getMessage());
+                                            
+                                            return;
+                                        }
+                                        
                                         if (spinnerKeycode.getSelectedItemPosition() < specialArr.length) {
 										    properties.keycode = spinnerKeycode.getSelectedItemPosition() - specialArr.length;
                                         } else {
@@ -170,8 +199,6 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 										properties.name = editName.getText().toString();
 										properties.hidden = checkHidden.isChecked();
                                         properties.isDynamicBtn = checkDynamicPos.isChecked();
-                                        properties.dynamicX = editDynamicX.getText().toString();
-                                        properties.dynamicY = editDynamicY.getText().toString();
                                         
                                         if (properties.dynamicX.isEmpty()) {
                                             properties.dynamicX = Float.toString(properties.x);

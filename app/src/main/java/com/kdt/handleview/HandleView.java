@@ -73,25 +73,6 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         return mPositionListener;
     }
 
-	private int getInternalId(String type, String name) {
-		try {
-			for (Class perType : Class.forName("com.android.internal.R").getDeclaredClasses()) {
-				if (perType.getSimpleName().equals(type)) {
-					try {
-						Field f = perType.getDeclaredField(name);
-						f.setAccessible(true);
-						return (int) f.get(null);
-					} catch (Throwable th) {
-						th.printStackTrace();
-					}
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	
 	public HandleView(ControlButton view) {
 		super(view.getContext());
 		
@@ -100,7 +81,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 		mDownWidth = view.getLayoutParams().width;
 		mDownHeight = view.getLayoutParams().height;
 		
-		mContainer = new PopupWindow(view.getContext(), null, getInternalId("attr", "textSelectHandleWindowStyle"));
+		mContainer = new PopupWindow(view.getContext(), null, android.R.attr.textSelectHandleWindowStyle);
 		mContainer.setSplitTouchEnabled(true);
 		mContainer.setClippingEnabled(false);
 		mContainer.setWindowLayoutType(WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
@@ -108,7 +89,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 
 		mDrawableLtr = view.getContext().getDrawable(R.drawable.text_select_handle_left_material);
 		mDrawableRtl = view.getContext().getDrawable(R.drawable.text_select_handle_right_material);
-		mMinSize = view.getContext().getResources().getDimensionPixelSize(getInternalId("dimen", "text_handle_min_size"));
+		mMinSize = view.getContext().getResources().getDimensionPixelSize(R.dimen.text_handle_min_size);
 
 		setOnLongClickListener(this);
 			

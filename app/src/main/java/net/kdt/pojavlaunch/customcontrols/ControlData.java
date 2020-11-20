@@ -138,17 +138,7 @@ public class ControlData implements Cloneable
         }
 	}
     
-    public void update() {
-        if (keycode < 0 && SPECIAL_BUTTONS != null) {
-            for (ControlData data : getSpecialButtons()) {
-                if (keycode == data.keycode) {
-                    specialButtonListener = data.specialButtonListener;
-                }
-            }
-        } if (!isDynamicBtn) {
-            return;
-        }
-        
+    public float insertDynamicPos(String dynamicPos) {
         // Values in the map below may be always changed
         Map<String, String> keyValueMap = new ArrayMap<>();
         keyValueMap.put("top", "0");
@@ -160,21 +150,30 @@ public class ControlData implements Cloneable
         keyValueMap.put("screen_width", Integer.toString(CallbackBridge.windowWidth));
         keyValueMap.put("screen_height", Integer.toString(CallbackBridge.windowHeight));
         keyValueMap.put("margin", Integer.toString(pixelOf2dp));
-
-        // Insert JSON values to variables
-        String insertedX = JSONUtils.insertSingleJSONValue(dynamicX, keyValueMap);
-        String insertedY = JSONUtils.insertSingleJSONValue(dynamicY, keyValueMap);
-
-        // Calculate and save, because the dynamic position contains some math equations
-        x = calculate(insertedX);
-        y = calculate(insertedY);
+        
+        // Insert value to ${variable}
+        String insertedPos = JSONUtils.insertSingleJSONValue(dynamicPos, keyValueMap);
+        
+        // Calculate, because the dynamic position contains some math equations
+        return calculate(insertedPos);
+    }
+    
+    public void update() {
+        if (keycode < 0 && SPECIAL_BUTTONS != null) {
+            for (ControlData data : getSpecialButtons()) {
+                if (keycode == data.keycode) {
+                    specialButtonListener = data.specialButtonListener;
+                }
+            }
+        } if (!isDynamicBtn) {
+            return;
+        }
+        
+        x = insertDynamicPos(dynamicX);
+        y = insertDynamicPos(dynamicX);
     }
 
     private static float calculate(String math) {
-        // try {
         return (float) new ExpressionBuilder(math).build().evaluate();
-        /* } catch (e) {
-
-         } */
     }
 }
