@@ -25,7 +25,6 @@
     <string name="login_select_account">Vybrat účet</string>
     <!-- Hint -->
     <string name="hint_select_account">Chcete-li vybrat, klepněte na to. Chcete-li účet odstranit, podržte jej.</string>
-    <string name="hint_control_mapping">"Tato funkce ještě není dokončena, takže v tuto chvíli nelze použít vlastní ovládání!\nPřejetím zprava doleva otevřete nabídku ◀\nPodrž tlačítko pro úpravu: upravit, změnit velikost nebo smazat."</string>
     <!-- Warning -->
     <string name="warning_title">Varování</string>
     <string name="warning_msg">Tato aplikace nemusí být kompatibilní s vaší verzí Androidu (Android 7.0 nebo novější). Můžete použít VMOS a nainstalovat tuto aplikaci na VMOS. Ale VMOS je odstraněn v Obchodě Play, musíte ji nainstalovat ručně.</string>
