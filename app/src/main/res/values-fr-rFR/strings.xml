@@ -25,7 +25,6 @@
     <string name="login_select_account">Sélectionner un compte</string>
     <!-- Hint -->
     <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
-    <string name="hint_control_mapping">"Cette fonctionnalité n'est pas encore terminée, alors vous ne pouvez pas appliquer de contrôle personnalisé pour le moment!\nGlissez de droite à gauche pour ouvrir le menu ◀\nMaintenez un bouton pour personnaliser : éditer, redimensionner ou supprimer."</string>
     <!-- Warning -->
     <string name="warning_title">Avertissement</string>
     <string name="warning_msg">Cette application peut ne pas être compatible avec votre version d\'Android (supérieure ou égale à Android 7.0). Vous pouvez utiliser VMOS puis installer cette application sur VMOS à la place. Mais VMOS est supprimé par le Play Store, vous devez l\'installer manuellement.</string>
