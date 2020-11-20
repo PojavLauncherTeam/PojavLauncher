@@ -199,6 +199,8 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 										properties.name = editName.getText().toString();
 										properties.hidden = checkHidden.isChecked();
                                         properties.isDynamicBtn = checkDynamicPos.isChecked();
+                                        properties.dynamicX = editDynamicX.getText().toString();    
+                                        properties.dynamicY = editDynamicY.getText().toString();
                                         
                                         if (properties.dynamicX.isEmpty()) {
                                             properties.dynamicX = Float.toString(properties.x);
