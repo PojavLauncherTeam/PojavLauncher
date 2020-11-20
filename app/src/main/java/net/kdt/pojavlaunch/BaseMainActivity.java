@@ -1104,7 +1104,7 @@ public class BaseMainActivity extends LoggableActivity implements OnTouchListene
 
     protected Button findButton(int id) {
         Button button = (Button) findViewById(id);
-        button.setWidth((int) (button.getWidth() * LauncherPreferences.PREF_BUTTONSIZE));
+        button.setWidth((int) (button.getWidth() * Tools.currentDisplayMetrics.scaledDensity));
         button.setHeight((int) (button.getHeight() * LauncherPreferences.PREF_BUTTONSIZE));
         button.setOnTouchListener(this);
         button.setFocusable(false);
