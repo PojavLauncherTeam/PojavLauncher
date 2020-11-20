@@ -38,13 +38,14 @@ public class ControlData implements Cloneable
     
 	public static ControlData[] getSpecialButtons(){
 		if (SPECIAL_BUTTONS == null) {
-			SPECIAL_BUTTONS = new ControlData[]{
+			ControlData[] specialButtons = new ControlData[]{
 				new ControlData("Keyboard", SPECIALBTN_KEYBOARD, "${margin} * 3 + ${width} * 2", "${margin}", false),
 				new ControlData("GUI", SPECIALBTN_TOGGLECTRL, "${margin}", "${bottom}"),
 				new ControlData("PRI", SPECIALBTN_MOUSEPRI, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
 				new ControlData("SEC", SPECIALBTN_MOUSESEC, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 3 - ${height} * 3"),
 				new ControlData("Mouse", SPECIALBTN_VIRTUALMOUSE, "${right}", "${margin}", false)
 			};
+            SPECIAL_BUTTONS = specialButtons;
 		}
 
 		return SPECIAL_BUTTONS;
@@ -138,7 +139,7 @@ public class ControlData implements Cloneable
 	}
     
     public void update() {
-        if (keycode < 0) {
+        if (keycode < 0 && SPECIAL_BUTTONS != null) {
             for (ControlData data : getSpecialButtons()) {
                 if (keycode == data.keycode) {
                     specialButtonListener = data.specialButtonListener;
