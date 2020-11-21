@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
     <!-- Action bar part -->
@@ -13,14 +13,14 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">Email atau username</string>
     <string name="login_online_username_question">(Saya pilih yang mana?)</string>
-    <string name="login_online_password_hint">Password</string>
-    <string name="login_online_password_question">Lupa password?</string>
+    <string name="login_online_password_hint">Kata sandi</string>
+    <string name="login_online_password_question">Lupa kata sandi?</string>
     <string name="login_online_remember">Ingat saya?</string>
     <string name="login_online_check_keeplogin">Tetapkan login saya?</string>
-    <string name="login_online_login_label">Login</string>
+    <string name="login_online_login_label">Masuk</string>
     <string name="login_online_create_account">(Buat akun baru?)</string>
     <string name="login_offline_switch">Akun offline?</string>
-    <string name="login_offline_label">Login sebagai akun offline</string>
+    <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_offline_alert_skip">Lewati</string>
     <string name="login_error_short_username">Username harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
@@ -30,7 +30,7 @@
     <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum busa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
     <!-- Warning -->
     <string name="warning_title">Peringatan</string>
-    <string name="warning_msg">Aplikasi ini mungkin tidak biaa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
+    <string name="warning_msg">Aplikasi ini mungkin tidak bisa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
     <string name="warning_noshowagain">Jangan tunjukkan lagi</string>
     <string name="warning_action_install">Pasang VMOS</string>
     <string name="warning_action_tryanyway">Coba saja</string>
@@ -39,20 +39,23 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
     <string name="alerttitle_installmod">Pilih sebuah mod untuk di tambah</string>
-    <string name="alerttitle_installoptifine">Pilih jar-nya OptiFine</string>
+    <string name="alerttitle_installoptifine">Pilih jar OptiFine</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher tiba-tiba crash!</string>
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
-    <string name="error_load_version">Tidak bisa mengload versi! %s</string>
-    <string name="error_convert_lib">Tidak bisa melakukan konversi pada library %s</string>
-    <string name="error_convert_client">Tidak bisa melakukan konversi pada Minecraft %s</string>
+    <string name="error_load_version">Tidak bisa memuat versi! %s</string>
+    <string name="error_convert_lib">Gagal melakukan konversi pada library %s</string>
+    <string name="error_convert_client">Gagal melakukan konversi pada Minecraft %s</string>
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Permisi untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
+    <string name="toast_shiftmode">Mode tombol shift (menunduk) diganti menjadi %s</string>
+    <string name="toast_shiftmode_hold">Mode pencet lama</string>
+    <string name="toast_shiftmode_toggle">Mode pencet untuk beralih</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -61,7 +64,7 @@
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Siap untuk main Minecraft %s</string>
+    <string name="mcl_version_msg">Siap meluncurkan Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan file-file cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_download_lib">Mengunduh library %s</string>
@@ -82,7 +85,7 @@
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan oencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
     <string name="mcl_setting_title_forgetoptifpath">Buat OptiFine tidak bisa mencari diri sendiri</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Bisa dipakai untuk meluncurkan OptiFine di beberapa device</string>
@@ -97,10 +100,10 @@
     <string name="global_add">Tambah</string>
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
-    <string name="global_load">Load</string>
+    <string name="global_load">Muat</string>
     <string name="global_name">Nama</string>
     <string name="global_remove">Hapus</string>
-    <string name="global_restart">Restart</string>
+    <string name="global_restart">Buka ulang</string>
     <string name="global_save">Simpan</string>
     <string name="global_error_field_empty">Tempat ini tidak boleh kosong.</string>
     <!--
@@ -150,14 +153,15 @@
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mouse</string>
-    <string name="control_mouseoff">Mouse: off</string>
-    <string name="control_mouseon">Mouse: on </string>
+    <string name="control_mouseoff">Mouse: mati</string>
+    <string name="control_mouseon">Mouse: nyala </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Tutp secara paksa</string>
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">PointerCapture Debug</string>
-    <string name="control_customkey">Kirim keycode kustom</string>
-    <string name="customctrl_keyname">Keycode</string>
+    <string name="control_customkey">Kirim kode kunci kustom</string>
+    <string name="control_shiftmodechg">Ganti mode shift (menunduk)</string>
+    <string name="customctrl_keyname">Kode kunci</string>
     <string name="customctrl_specialkey">Key spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
     <string name="customctrl_addbutton">Tambah tombol</string>

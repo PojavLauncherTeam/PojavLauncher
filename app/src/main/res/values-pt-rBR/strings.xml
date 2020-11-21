@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Jogue Minecraft: Java Edition em seu dispositivo!</string>
+    <!-- Action bar part -->
+    <string name="actionbar_help">AJUDA</string>
+    <!-- Languages list part -->
+    <string name="language_name">PORTUGUÊS - BR</string>
+    <!-- Logging output -->
+    <string name="log_title">Log de saída</string>
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email ou nome de usuário</string>
+    <string name="login_online_username_question">(Qual usar?)</string>
+    <string name="login_online_password_hint">Senha</string>
+    <string name="login_online_password_question">Esqueceu a senha?</string>
+    <string name="login_online_remember">Lembrar usuário?</string>
+    <string name="login_online_check_keeplogin">Manter conectado</string>
+    <string name="login_online_login_label">Entrar</string>
+    <string name="login_online_create_account">(Criar uma nova conta?)</string>
+    <string name="login_offline_switch">Conta offline?</string>
+    <string name="login_offline_label">Entrar com conta offline</string>
+    <string name="login_offline_alert_skip">Pular</string>
+    <string name="login_error_short_username">Nome de usuário deve ter no mínimo 3 caracteres</string>
+    <string name="login_error_exist_username">Este nome de usuário já existe</string>
+    <string name="login_select_account">Selecionar conta</string>
+    <!-- Hint -->
+    <string name="hint_select_account">Para selecionar, pressione. Para excluir uma conta, manter pressionado.</string>
+    <string name="hint_control_mapping">"Essa função ainda não está finalizada, então você não pode aplicar controles personalizados no momento! \nDeslize da direita pra esquerda para abrir o menu. \nPressione um botão para personalizar: editar, redimencionar e excluir."</string>
+    <!-- Warning -->
+    <string name="warning_title">Aviso</string>
+    <string name="warning_msg">Este app pode não ser compatível com sua versão do Android (Android 7.0+). Você pode usar o VMOS e instalar esse app no VMOS. Mas o VMOS não está disponível pelo Play Store, você deve instalar manualmente.</string>
+    <string name="warning_noshowagain">Não mostrar novamente</string>
+    <string name="warning_action_install">Instalar VMOS</string>
+    <string name="warning_action_tryanyway">Pular</string>
+    <string name="warning_action_exit">Sair</string>
+    <string name="warning_remove_account">Esta conta será removida!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Selecione um json de keymap</string>
+    <string name="alerttitle_installmod">Selecione um mod para adicionar</string>
+    <string name="alerttitle_installoptifine">Selecionar arquivo jar de OptiFine</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher fechou inesperadamente</string>
+    <string name="error_checklog">Erro! Por favor, verifique o log abaixo: %s</string>
+    <string name="error_no_version">Nenhuma versão!</string>
+    <string name="error_load_version">Não foi possível carregar a versão %s</string>
+    <string name="error_convert_lib">Não foi possível converter a library %s</string>
+    <string name="error_convert_client">Não foi possível converter Minecraft %s</string>
+    <string name="error_show_more">Mostrar mais</string>
+    <string name="error_show_less">Mostrar menos</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">É necessário conceder permissão para ler/modificar armazenamento!</string>
+    <string name="toast_login_error">Algo deu errado ao se conectar. Por favor, mande feedback para o desenvolvedor. \nErro: %s</string>
+    <string name="toast_optifine_success">Instalação concluída</string>
+    <string name="toast_shiftmode">O modo do botão de Shift (agachar) alterado para %s</string>
+    <string name="toast_shiftmode_hold">Modo manter pressionado</string>
+    <string name="toast_shiftmode_toggle">Modo alternância</string>
+    <!--
+	<string name="toast_3">Exit</string>
+	-->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Novidades do Launcher</string>
+    <string name="mcl_tab_console">Console de desenvolvedor</string>
+    <string name="mcl_tab_crash">Log de crash</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
+    <string name="mcl_launch_downloading">Baixando %s</string>
+    <string name="mcl_launch_download_lib">Baixando library %s</string>
+    <string name="mcl_launch_download_client">Baixando Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Convertendo library %s</string>
+    <string name="mcl_launch_convert_client">Convertendo Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Patchiando Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Preparando para baixar os recursos</string>
+    <string name="mcl_options">Opções</string>
+    <string name="mcl_option_modmgr">Gerenciador de mods (sem função)</string>
+    <string name="mcl_option_optifineinstall">Instalar OptiFine</string>
+    <string name="mcl_option_checkupdate">Verificar por atualizações</string>
+    <string name="mcl_option_customcontrol">Controles Personalizados</string>
+    <string name="mcl_option_settings">Configurações</string>
+    <string name="mcl_option_about">Sobre</string>
+    <string name="mcl_setting_title_setmaxdxref">Definir o máximo de referências DX</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Aumente caso um erro aconteça ao converter: Too many ... references. Você pode tentar a opção de multi-dex. Recomendado: 4096 ou 8192.</string>
+    <string name="mcl_setting_title_freeform">Iniciar o Minecraft no modo Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Executar Minecraft em janela flutuante. Requer Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Tempo para acionar função ao manter pressionado</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
+    <string name="mcl_setting_title_controlsize">Definir tamanho dos botões de controle</string>
+    <string name="mcl_setting_title_forgetoptifpath">Deixar o OptiFine incapaz de se localizar</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Útil para fazer o OptiFine iniciar em alguns dispositivos.</string>
+    <string name="mcl_setting_category_general">Configurações gerais</string>
+    <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_version_clone">Clonar</string>
+    <!-- Global strings -->
+    <string name="global_add">Adicionar</string>
+    <string name="global_edit">Editar</string>
+    <string name="global_error">Erro</string>
+    <string name="global_load">Carregar</string>
+    <string name="global_name">Nome</string>
+    <string name="global_remove">Remover</string>
+    <string name="global_restart">Reiniciar</string>
+    <string name="global_save">Salvar</string>
+    <string name="global_error_field_empty">Este campo não pode ficar vazio</string>
+    <!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Jogo encerrado</string>
+    <string name="mcn_exit_call">Sair</string>
+    <string name="mcn_exit_crash">Um crash foi detectado! Clique OK para sair.</string>
+    <string name="mcn_exit_errcrash">Não foi possível localizar o crash! Você pode ignorar isto.</string>
+    <string name="mcn_exit_confirm">Tem certeza que deseja forçar fechamento?</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="controls">Controles</string>
+    <string name="control_toggle">Interface</string>
+    <string name="control_keyboard">Teclado</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Depuração</string>
+    <string name="control_zoom">Zoom (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">F5</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Forçar encerramento</string>
+    <string name="control_viewout">Log de saída</string>
+    <string name="control_adebug">Depuração de PointerCapture</string>
+    <string name="control_customkey">Enviar código-chave personalizado</string>
+    <string name="control_shiftmodechg">Alterar modo Shift (Agachar)</string>
+    <string name="customctrl_keyname">Código chave</string>
+    <string name="customctrl_specialkey">Tecla Especial</string>
+    <string name="customctrl_hidden">Oculto</string>
+    <string name="customctrl_addbutton">Adicionar botão</string>
+    <string name="customctrl_title_selectctrl">Selecione o json de Control padrão</string>
+    <string name="customctrl_selectdefault">Selecione o json de Control padrão</string>
+    <!-- Update part (unused now) -->
+    <string name="update_console">Atualizar console</string>
+    <string name="main_options">Opções</string>
+    <string name="main_play">Jogar</string>
+    <string name="main_welcome">Bem-vindo,</string>
+    <string name="main_infodev">Info. (DEV)</string>
+    <string name="main_switchuser">Trocar usuário</string>
+    <string name="main_version_">Versão:</string>
+    <string name="main_nocrash">Nenhum crash detectado</string>
+    <string name="main_nolog">Sem log.</string>
+</resources>
