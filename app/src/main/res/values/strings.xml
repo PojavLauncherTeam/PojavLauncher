@@ -189,10 +189,17 @@
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Special Key</string>
     <string name="customctrl_hidden">Hidden</string>
+    
     <string name="customctrl_dynamicpos">Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y</string>
+    
+    <string name="customctrl_keycombine">Key combination</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Add button</string>
+    
     <string name="customctrl_selectdefault">Select default Control json</string>
 
     <!-- Update part (unused now) -->

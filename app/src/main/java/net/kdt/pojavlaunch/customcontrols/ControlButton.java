@@ -16,6 +16,8 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
     private boolean mCanModify = false;
     private boolean mCanTriggerLongClick = true;
+    
+    private int mMods;
 
     public ControlButton(Context ctx, ControlData properties) {
         super(ctx);
@@ -47,6 +49,14 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     public void setProperties(ControlData properties, boolean changePos) {
         mProperties = properties;
         properties.update();
+        
+        if (properties.holdAlt) {
+            mMods &= LWJGLGLFWKeycode.GLFW_MOD_ALT;
+        } if (properties.holdCtrl) {
+            mMods &= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
+        } if (properties.holdShift) {
+            mMods &= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
+        }
 
         // com.android.internal.R.string.delete
         // android.R.string.
@@ -131,7 +141,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                     default:
                         return false;
                 }
-                MainActivity.sendKeyPress(mProperties.keycode, 0, isDown);
+                MainActivity.sendKeyPress(mProperties.keycode, mMods, isDown);
 
                 return true;
             }

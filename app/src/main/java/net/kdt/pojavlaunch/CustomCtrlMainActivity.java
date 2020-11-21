@@ -76,6 +76,10 @@ public class CustomCtrlMainActivity extends BaseMainActivity implements OnClickL
                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                     break;
                     
+                case ControlData.SPECIALBTN_MOUSEMID:
+                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_MIDDLE, isDown);
+                    break;
+                    
                 case ControlData.SPECIALBTN_MOUSESEC:
                     if (CallbackBridge.isGrabbing()) {
                         sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);

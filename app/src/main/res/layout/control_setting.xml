@@ -19,24 +19,16 @@
 			android:layout_width="match_parent"
 			android:id="@+id/controlsetting_spinner_lwjglkeycode"/>
 
-		<LinearLayout
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/global_name"/>
+
+		<EditText
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:orientation="vertical"
-			android:id="@+id/controlsetting_normalbtnlayout">
-
-			<TextView
-				android:layout_height="wrap_content"
-				android:layout_width="wrap_content"
-				android:text="@string/global_name"/>
-
-			<EditText
-				android:layout_height="wrap_content"
-				android:layout_width="match_parent"
-				android:singleLine="true"
-				android:id="@+id/controlsetting_edit_name"/>
-
-		</LinearLayout>
+			android:singleLine="true"
+			android:id="@+id/controlsetting_edit_name"/>
 
 		<CheckBox
 			android:layout_height="wrap_content"
@@ -80,6 +72,29 @@
 
 		</LinearLayout>
 
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/customctrl_keycombine"/>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_keycombine_alt"
+            android:id="@+id/controlsetting_checkbox_keycombine_alt"/>
+        
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_keycombine_control"
+            android:id="@+id/controlsetting_checkbox_keycombine_control"/>
+        
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_keycombine_shift"
+            android:id="@+id/controlsetting_checkbox_keycombine_shift"/>
+        
 	</LinearLayout>
 
 </ScrollView>

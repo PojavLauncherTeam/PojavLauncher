@@ -52,9 +52,6 @@ public class MainActivity extends BaseMainActivity implements OnClickListener, O
         this.toggleControlButton.setOnClickListener(this);
         this.zoomButton.setVisibility(mVersionInfo.optifineLib == null ? View.GONE : View.VISIBLE);
         
-        ControlData[] specialButtons = ControlData.getSpecialButtons();
-        specialButtons[1].specialButtonListener = this;
-
         // toggleGui(null);
         onClick(toggleControlButton);
     }

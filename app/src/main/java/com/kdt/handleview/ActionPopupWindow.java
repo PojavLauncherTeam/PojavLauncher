@@ -94,8 +94,6 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 					@Override
 					public void onShow(DialogInterface dialogInterface) {
-						final LinearLayout normalBtnLayout = dialog.findViewById(R.id.controlsetting_normalbtnlayout);
-
 						final EditText editName = dialog.findViewById(R.id.controlsetting_edit_name);
 						editName.setText(properties.name);
 
@@ -117,18 +115,6 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						} else {
 							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode) + specialArr.length);
 						}
-						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
-
-								@Override
-								public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
-									normalBtnLayout.setVisibility(id < specialArr.length ? View.GONE : View.VISIBLE);
-								}
-
-								@Override
-								public void onNothingSelected(AdapterView<?> adapter){
-									// Unused
-								}
-							});
 
 						final CheckBox checkHidden = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
 						checkHidden.setChecked(properties.hidden);
@@ -155,6 +141,15 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                                 }
                             });
                         
+                        final CheckBox checkHoldAlt = dialog.findViewById(R.id.controlsetting_checkbox_keycombine_alt);
+                        checkHoldAlt.setChecked(properties.holdAlt);
+
+                        final CheckBox checkHoldControl = dialog.findViewById(R.id.controlsetting_checkbox_keycombine_control);
+                        checkHoldControl.setChecked(properties.holdCtrl);
+
+                        final CheckBox checkHoldShift = dialog.findViewById(R.id.controlsetting_checkbox_keycombine_shift);
+                        checkHoldShift.setChecked(properties.holdShift);
+                            
 						Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 						button.setOnClickListener(new View.OnClickListener() {
 
@@ -201,6 +196,10 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                                         properties.isDynamicBtn = checkDynamicPos.isChecked();
                                         properties.dynamicX = editDynamicX.getText().toString();    
                                         properties.dynamicY = editDynamicY.getText().toString();
+
+                                        properties.holdAlt = checkHoldAlt.isChecked();
+                                        properties.holdCtrl = checkHoldControl.isChecked();
+                                        properties.holdShift = checkHoldShift.isChecked();
                                         
                                         if (properties.dynamicX.isEmpty()) {
                                             properties.dynamicX = Float.toString(properties.x);
@@ -219,7 +218,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 			dialog.show();
 		} else if (view == mDeleteTextView) {
-			alert.setMessage(R.string.global_remove + " " + mHandleView.mView.getText() + "?");
+			alert.setMessage(view.getContext().getString(R.string.global_remove) + " " + mHandleView.mView.getText() + "?");
 			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 					@Override
