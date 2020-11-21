@@ -93,6 +93,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Přidat</string>
@@ -170,8 +171,6 @@
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Aktualizovat konzoli</string>
     <string name="main_options">Nastavení</string>
     <string name="main_play">Hrát</string>
     <string name="main_welcome">Vítej,</string>
