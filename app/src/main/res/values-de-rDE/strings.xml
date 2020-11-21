@@ -84,6 +84,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alte-Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Alte-Beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Klonen</string>
     <!-- Global strings -->
     <string name="global_add">Hinzufügen</string>
@@ -146,8 +147,6 @@
     <string name="customctrl_hidden">Versteckt</string>
     <string name="customctrl_addbutton">Taste hinzufügen</string>
     <string name="customctrl_selectdefault">Standard-Kontroll-json auswählen</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Konsole aktualisieren</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
     <string name="main_welcome">Wilkommen,</string>
