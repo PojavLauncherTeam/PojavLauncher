@@ -92,6 +92,7 @@
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Ekle</string>
@@ -166,8 +167,6 @@
     <string name="customctrl_hidden">Gizli</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Konsolu güncelle</string>
     <string name="main_options">Ayarlar</string>
     <string name="main_play">Oyna</string>
     <string name="main_welcome">Hoşgeldiniz,</string>
