@@ -94,6 +94,7 @@
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
     <!-- Credit translators in this language, append your name there -->
+    <string name="mcl_about_translated_by">"Tradotto da: GABRYCA"</string>
     <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
     <string name="global_add">Aggiungi</string>
@@ -169,6 +170,10 @@
     <string name="customctrl_dynamicpos">Posizione dinamica</string>
     <string name="customctrl_dynamicpos_x">X dinamica</string>
     <string name="customctrl_dynamicpos_y">Y dinamica</string>
+    <string name="customctrl_keycombine">Combinazione tasti</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
     <string name="main_options">Impostazioni</string>
