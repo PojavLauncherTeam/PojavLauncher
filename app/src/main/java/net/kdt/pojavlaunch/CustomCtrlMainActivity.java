@@ -77,6 +77,7 @@ public class CustomCtrlMainActivity extends BaseMainActivity implements OnClickL
 
         if (view instanceof ControlButton) {
             ControlButton button = (ControlButton) view;
+            appendToLog("Debug: touch special btn " + button.getProperties().keycode);
             switch (button.getProperties().keycode) {
                 case ControlData.SPECIALBTN_MOUSEPRI:
                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);

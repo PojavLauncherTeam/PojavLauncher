@@ -21,3 +21,6 @@
 * Notes:<br>
  - This app is under development and will not be stable.<br>
  - This app is not affiliated with Minecraft, Mojang or Microsoft.
+ 
+%s
+ 

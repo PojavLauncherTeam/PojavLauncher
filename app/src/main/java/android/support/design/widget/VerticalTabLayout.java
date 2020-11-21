@@ -1422,7 +1422,7 @@ public class VerticalTabLayout extends LinearLayout {
             if (mParent == null) {
                 throw new IllegalArgumentException("Tab not attached to a TabLayout");
             }
-            return setIcon(AppCompatResources.getDrawable(mParent.getContext(), resId));
+            return setIcon(resId == 0 ? null : AppCompatResources.getDrawable(mParent.getContext(), resId));
         }
 
         /**

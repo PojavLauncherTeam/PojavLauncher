@@ -30,6 +30,9 @@ import android.support.v4.app.FragmentManager;
 import android.app.*;
 import org.apache.commons.io.*;
 import net.kdt.pojavlaunch.tasks.*;
+
+import android.support.design.widget.VerticalTabLayout.*;
+
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -87,15 +90,15 @@ public class MCLauncherActivity extends BaseLauncherActivity
 
 		viewPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-		viewPageAdapter.addFragment(new LauncherFragment(), getStr(R.string.mcl_tab_news));
-		viewPageAdapter.addFragment(mConsoleView, getStr(R.string.mcl_tab_console));
-		viewPageAdapter.addFragment(mCrashView, getStr(R.string.mcl_tab_crash));
+		viewPageAdapter.addFragment(new LauncherFragment(), 0, getStr(R.string.mcl_tab_news));
+		viewPageAdapter.addFragment(mConsoleView, 0, getStr(R.string.mcl_tab_console));
+		viewPageAdapter.addFragment(mCrashView, 0, getStr(R.string.mcl_tab_crash));
 
 		viewPager.setAdapter(viewPageAdapter);
 		tabLayout.setupWithViewPager(viewPager);
 
-		tvUsernameView = (TextView) findId(R.id.launcherMainUsernameView);
-		mTextVersion = (TextView) findId(R.id.launcherMainVersionView);
+		tvUsernameView = (TextView) findViewById(R.id.launcherMainUsernameView);
+		mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
 		try {
 			profilePath = PojavProfile.getCurrentProfilePath(this);
@@ -155,18 +158,18 @@ public class MCLauncherActivity extends BaseLauncherActivity
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
 		adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-		mVersionSelector = (Spinner) findId(R.id.launcherMainSelectVersion);
+		mVersionSelector = (Spinner) findViewById(R.id.launcherMainSelectVersion);
 		mVersionSelector.setAdapter(adapter);
 
-		mLaunchProgress = (ProgressBar) findId(R.id.progressDownloadBar);
-		mLaunchTextStatus = (TextView) findId(R.id.progressDownloadText);
-		LinearLayout exitLayout = (LinearLayout) findId(R.id.launcherMainExitbtns);
+		mLaunchProgress = (ProgressBar) findViewById(R.id.progressDownloadBar);
+		mLaunchTextStatus = (TextView) findViewById(R.id.progressDownloadText);
+		LinearLayout exitLayout = (LinearLayout) findViewById(R.id.launcherMainExitbtns);
 		switchUsrBtn = (Button) exitLayout.getChildAt(0);
 		logoutBtn = (Button) exitLayout.getChildAt(1);
 
-		leftView = (LinearLayout) findId(R.id.launcherMainLeftLayout);
-		mPlayButton = (Button) findId(R.id.launcherMainPlayButton);
-		rightView = (ViewGroup) findId(R.id.launcherMainRightLayout);
+		leftView = (LinearLayout) findViewById(R.id.launcherMainLeftLayout);
+		mPlayButton = (Button) findViewById(R.id.launcherMainPlayButton);
+		rightView = (ViewGroup) findViewById(R.id.launcherMainRightLayout);
 
 		statusIsLaunching(false);
 	}
@@ -324,138 +327,6 @@ public class MCLauncherActivity extends BaseLauncherActivity
 			mTask = new MinecraftDownloaderTask(this);
 			mTask.execute(mProfile.getVersion());
 			mCrashView.resetCrashLog = true;
-		}
-	}
-
-	
-    
-	public View findId(int id)
-	{
-		return findViewById(id);
-	}
-
-	public void launcherMenu(View view)
-	{
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.mcl_options);
-		builder.setItems(R.array.mcl_options, new DialogInterface.OnClickListener(){
-
-				@Override
-				public void onClick(DialogInterface p1, int p2)
-				{
-					switch (p2) {
-						case 0: // Mod installer
-							installMod(false);
-							break;
-                        case 1: // Mod installer with java args 
-                            installMod(true);
-							break;
-						case 2: // Custom controls
-							if (Tools.enableDevFeatures) {
-								startActivity(new Intent(MCLauncherActivity.this, CustomControlsActivity.class));
-							}
-							break;
-						case 3: // Settings
-							startActivity(new Intent(MCLauncherActivity.this, LauncherPreferenceActivity.class));
-							break;
-						case 4: { // About
-								final AlertDialog.Builder aboutB = new AlertDialog.Builder(MCLauncherActivity.this);
-								aboutB.setTitle(R.string.mcl_option_about);
-								try
-								{
-									aboutB.setMessage(Html.fromHtml(String.format(Tools.read(getAssets().open("about_en.txt")),
-																	Tools.APP_NAME,
-																	Tools.usingVerName,
-																	"3.2.3")
-													  ));
-								} catch (Exception e) {
-									throw new RuntimeException(e);
-								}
-								aboutB.setPositiveButton(android.R.string.ok, null);
-								aboutB.show();
-							} break;
-					}
-				}
-			});
-		builder.show();
-	}
-
-	private void installMod(boolean customJavaArgs) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.alerttitle_installmod);
-		builder.setNegativeButton(android.R.string.cancel, null);
-        
-		final AlertDialog dialog;
-        if (customJavaArgs) {
-            final EditText edit = new EditText(this);
-            edit.setSingleLine();
-            edit.setHint("-jar/-cp /path/to/file.jar ...");
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-                @Override
-                public void onClick(DialogInterface di, int i) {
-                    Intent intent = new Intent(MCLauncherActivity.this, JavaGUILauncherActivity.class);
-                    intent.putExtra("javaArgs", edit.getText().toString());
-                    startActivity(intent);
-                }
-            });
-            dialog = builder.create();
-            dialog.setView(edit);
-        } else {
-            dialog = builder.create();
-            FileListView flv = new FileListView(dialog);
-            flv.setFileSelectedListener(new FileSelectedListener(){
-                    @Override
-                    public void onFileSelected(File file, String path) {
-                        if (file.getName().endsWith(".jar")) {
-                            Intent intent = new Intent(MCLauncherActivity.this, JavaGUILauncherActivity.class);
-                            intent.putExtra("modFile", file);
-                            startActivity(intent);
-                            dialog.dismiss();
-                        }
-                    }
-                });
-            dialog.setView(flv);
-        }
-		dialog.show();
-	}
-
-	private class ViewPagerAdapter extends FragmentPagerAdapter {
-
-		List<Fragment> fragmentList = new ArrayList<>();
-		List<String> fragmentTitles = new ArrayList<>();
-
-		public ViewPagerAdapter(FragmentManager fragmentManager) {
-			super(fragmentManager);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return fragmentList.get(position);
-		}
-
-		@Override
-		public int getCount() {
-			return fragmentList.size();
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return fragmentTitles.get(position);
-		}
-
-		public void addFragment(Fragment fragment, String name) {
-			fragmentList.add(fragment);
-			fragmentTitles.add(name);
-		}
-
-		public void setFragment(int index, Fragment fragment, String name) {
-			fragmentList.set(index, fragment);
-			fragmentTitles.set(index, name);
-		}
-
-		public void removeFragment(int index) {
-			fragmentList.remove(index);
-			fragmentTitles.remove(index);
 		}
 	}
 }
