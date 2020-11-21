@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（适用于 Android 的 Java 版 Minecraft）</string>
+    <string name="app_name">PojavLauncher（适用于 Android 的《Minecraft：Java版》）</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">在您的设备上启动 Java 版 Minecraft！</string>
+    <string name="app_motd">在您的设备上启动《Minecraft：Java版》！</string>
     <!-- Action bar part -->
     <string name="actionbar_help">帮助</string>
     <!-- Languages list part -->
