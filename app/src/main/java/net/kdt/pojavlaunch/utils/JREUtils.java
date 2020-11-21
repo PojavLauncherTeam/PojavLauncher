@@ -196,8 +196,8 @@ public class JREUtils
         envMap.put("LIBGL_NORMALIZE", "1");
         
    // those 2 down below make it more laggy also kinda usless as they dont fix the sheep collor \\
-   //     envMap.put("LIBGL_BATCH", "10");
-   //     envMap.put("LIBGL_USEVBO", "0");
+        envMap.put("LIBGL_BATCH", "10");
+        envMap.put("LIBGL_USEVBO", "0");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
