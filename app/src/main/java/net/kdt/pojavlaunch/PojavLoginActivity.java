@@ -217,8 +217,7 @@ public class PojavLoginActivity extends BaseActivity
                 System.out.println(currFile.getAbsolutePath());
                 if (currFile.getAbsolutePath().contains("/values-") || currFile.getName().startsWith("values-")) {
                     // TODO use regex(?)
-                    Locale thisLocale = new Locale(currFile.getName().replace("values-", "").replace("-r", "-"));
-                    langAdapter.add(new DisplayableLocale(thisLocale));
+                    langAdapter.add(new DisplayableLocale(currFile.getName().replace("values-", "").replace("-r", "-")));
                 }
             }
         } catch (IOException e) {
@@ -248,7 +247,7 @@ public class PojavLoginActivity extends BaseActivity
                 
                 Locale locale;
                 if (position == 0) {
-                    locale = Locale.getDefault();
+                    locale = LocaleUtils.DEFAULT_LOCALE;
                 } else if (position == 1) {
                     locale = Locale.ENGLISH;
                 } else {

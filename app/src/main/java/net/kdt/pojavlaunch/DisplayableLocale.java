@@ -5,6 +5,19 @@ public class DisplayableLocale {
     public final Locale mLocale;
     public final CharSequence mName;
     
+    private static Locale processStringLocale(String locale) {
+        if (locale.contains("-")) {
+            String[] split = locale.split("-");
+            return new Locale(split[0], split[1]);
+        } else {
+            return new Locale(locale);
+        }
+    }
+    
+    public DisplayableLocale(String locale) {
+        this(processStringLocale(locale));
+    }
+    
     public DisplayableLocale(Locale locale) {
         this(locale, locale.getDisplayName(locale));
     }
