@@ -18,9 +18,15 @@ public class CustomCtrlMainActivity extends BaseMainActivity implements OnClickL
         initLayout(R.layout.main_with_customctrl);
 
         ControlData[] specialButtons = ControlData.getSpecialButtons();
-        for (ControlData specialButton : specialButtons) {
-            specialButton.specialButtonListener = this;
-        }
+        specialButtons[0].specialButtonListener
+            = specialButtons[1].specialButtonListener
+            = specialButtons[4].specialButtonListener
+            = ((View.OnClickListener) this);
+
+        specialButtons[2].specialButtonListener
+            = specialButtons[3].specialButtonListener
+            = specialButtons[5].specialButtonListener
+            = ((View.OnTouchListener) this);
         
         mControlLayout = findViewById(R.id.main_control_layout);
         mControl = new CustomControls();
