@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрої!</string>
+    <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрою!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">Допомога</string>
     <!-- Languages list part -->
@@ -18,14 +18,13 @@
     <string name="login_online_login_label">Вхід</string>
     <string name="login_online_create_account">(Створити новий обліковий запис?)</string>
     <string name="login_offline_switch">Офлайн обліковий запис?</string>
-    <string name="login_offline_label">Увійти як офлайн акаунт</string>
+    <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
     <string name="login_offline_alert_skip">Пропустити</string>
     <string name="login_error_short_username">Ім\'я користувача повинно мати хоча б 3 символи</string>
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
     <string name="login_select_account">Облікові записи</string>
     <!-- Hint -->
     <string name="hint_select_account">Щоб вибрати обліковий запис, натисніть на нього. Щоб видалити, натисніть і утримуйте його.</string>
-    <string name="hint_control_mapping">"Ця функція ще не завершена, тому в даний момент ви не можете застосувати користувацьке управління!\nПроведіть пальцем справа наліво, щоб відкрити меню◀\nУтримуйтейте кнопку для настройки: редагування, зміни розміру або видалення."</string>
     <!-- Warning -->
     <string name="warning_title">Застереження</string>
     <string name="warning_msg">Ця програма може бути несумісний з вашою версією Android (Android 7.0 і вище). Замість цього ви можете використовувати VMOS і встановити цю програму на VMOS. Але VMOS видалити з Play Маркета, ви повинні встановити його вручну.</string>
@@ -33,19 +32,18 @@
     <string name="warning_action_install">Встановити VMOS</string>
     <string name="warning_action_tryanyway">Все одно попробувати</string>
     <string name="warning_action_exit">Вийти</string>
-    <string name="warning_remove_account">Цей облвковий запис буде видалено!</string>
+    <string name="warning_remove_account">Цей обліковий запис буде видалено!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Встановити Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Вибрати роскладку формату json</string>
-    <string name="alerttitle_installmod">Вибрати мод для додавання</string>
+    <string name="alerttitle_selectkeymap">Вибрати розкладку формату json</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher був зупинений в результаті збою</string>
-    <string name="error_checklog">Помилка! Будь ласка, провірте журнал нижче: %s</string>
+    <string name="error_checklog">Помилка! Будь ласка, перевірте журнал нижче: %s</string>
     <string name="error_no_version">Немає версій!</string>
     <string name="error_load_version">Не вдалося завантажити версію %s</string>
     <string name="error_convert_lib">Не вдалося конвертувати бібліотеку %s</string>
     <string name="error_convert_client">Не вдалося конвертувати Minecraft %s</string>
-    <string name="error_show_more">Розвенути</string>
+    <string name="error_show_more">Розвернути</string>
     <string name="error_show_less">Звернути</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Потрібен дозвіл на читання/запис в сховище!</string>
@@ -53,10 +51,9 @@
     <string name="toast_optifine_success">Установка пройшла успішно</string>
     <string name="toast_uninstalljre_done">Видалення Java Runtime завершено</string>
     <!--
-	<string name="toast_3">Exit</string>
-	-->
+    <string name="toast_3">Exit</string>
+    -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Новини лаунчера</string>
     <string name="mcl_tab_console">Консоль розробки</string>
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Strings -->
@@ -71,9 +68,7 @@
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
     <string name="mcl_options">Опції</string>
     <string name="mcl_option_modmgr">Диспетчер модов (непрацює)</string>
-    <string name="mcl_option_modinstall">Встановити мод (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Встановити мод (з користувацькими аргументами)</string>
-    <string name="mcl_option_checkupdate">Провірити наявність обновлень</string>
+    <string name="mcl_option_checkupdate">Провірити наявність оновлень</string>
     <string name="mcl_option_customcontrol">Користувацьке управління</string>
     <string name="mcl_option_settings">Настройки</string>
     <string name="mcl_option_about">Про лаунчер</string>
@@ -82,9 +77,8 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плаваючому вікні</string>
     <string name="mcl_setting_subtitle_freeform">Запустити Minecraft в плаваючому вікні. Треба Android 7.0 чи вище</string>
     <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викідованія предметів.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
     <string name="mcl_setting_title_controlsize">Установка розміру кнопок управління</string>
-    <string name="mcl_setting_title_javaargs">Аргументи запуску JRE</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте обережні, це може призвести до збоїв у грі, якщо це замінити без знань.</string>
     <string name="mcl_setting_category_general">Загальні налаштування</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
@@ -92,12 +86,13 @@
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
     <string name="mcl_setting_veroption_oldalpha">Старі альфи</string>
     <string name="mcl_setting_veroption_oldbeta">Старі бети</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Клонувати</string>
     <!-- Global strings -->
     <string name="global_add">Добавити</string>
     <string name="global_edit">Редагувати</string>
     <string name="global_error">Помилка</string>
-    <string name="global_load">Загрузка</string>
+    <string name="global_load">Завантаження</string>
     <string name="global_name">Ім\'я</string>
     <string name="global_remove">Видалити</string>
     <string name="global_restart">Перезапуск</string>
@@ -105,28 +100,29 @@
     <string name="global_unpacking">Розпакування %s</string>
     <string name="global_error_field_empty">Це поле не може бути порожнім</string>
     <!--
-	<string name="mcl_about">
-%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
-		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-		"Using libraries:\n" +
-		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-		//" • Boardwalk memory manager (not used now).\n" +
-		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-		" • dx: tool to convert.\n" +
-		" • Java AWT Implementation includes:\n" +
-		"  - Boardwalk's makeshift.\n" +
-		"  - Apache Harmony AWT Framework.\n" +
-		"  - OpenJDK 7 codes implementation.\n" +
-		"  - Developer code implement (copy text, open browser,...)\n" +
-		"\n" +
-		"* Notes:\n" +
-		" - This app is currently BETA, it will not be stable.\n" +
-		//"* This app will unstable on Android 7.0 or higher devices.\n" +
-		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
-		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
-	</string>
--->
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • dx: tool to convert.\n" +
+    " • Java AWT Implementation includes:\n" +
+    "  - Boardwalk's makeshift.\n" +
+    "  - Apache Harmony AWT Framework.\n" +
+    "  - OpenJDK 7 codes implementation.\n" +
+    "  - Developer code implement (copy text, open browser,...)\n" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Застосування/гра завершилась з кодом %d</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_crash">Виявлено збій гри! Натисніть кнопку ОК, щоб вийти.</string>
     <string name="mcn_exit_errcrash">Не вдалося знайти збій! Можете не звертати на це уваги.</string>
@@ -158,22 +154,19 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Примусове закриття</string>
     <string name="control_viewout">Показати вивід журналу</string>
-    <string name="control_adebug">Відкладка PointerCapture</string>
+    <string name="control_adebug">Вкладка PointerCapture</string>
     <string name="control_customkey">Надіслати користувацьку розкладку</string>
     <string name="customctrl_keyname">Код клавіші</string>
     <string name="customctrl_specialkey">Спеціальна клавіша</string>
     <string name="customctrl_hidden">Приховано</string>
     <string name="customctrl_addbutton">Додати кнопку</string>
-    <string name="customctrl_title_selectctrl">Вибрати управління за замовчуванням</string>
     <string name="customctrl_selectdefault">Вибирати управління за замовчуванням</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Оновити консоль</string>
     <string name="main_options">Опції</string>
     <string name="main_play">Грати</string>
     <string name="main_welcome">Ласкаво просимо,</string>
-    <string name="main_infodev">Інфо (Розроб.)</string>
+    <string name="main_infodev">Інфо (Розробник)</string>
     <string name="main_switchuser">Змінити користувача</string>
     <string name="main_version_">Версія:</string>
     <string name="main_nocrash">Збоїв не виявлено</string>
-    <string name="main_nolog">Нема записів</string>
+    <string name="main_nolog">Немає записів.</string>
 </resources>
