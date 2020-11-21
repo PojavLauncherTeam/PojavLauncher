@@ -111,7 +111,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
 						if (properties.keycode < 0) {
-							spinnerKeycode.setSelection(properties.keycode + specialArr.length);
+							spinnerKeycode.setSelection(0 - properties.keycode);
 						} else {
 							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode) + specialArr.length);
 						}
