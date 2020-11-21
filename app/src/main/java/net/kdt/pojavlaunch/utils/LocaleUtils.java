@@ -19,11 +19,13 @@ public class LocaleUtils {
 			LauncherPreferences.loadPreferences();
         }
         
+        Locale locale;
         if (LauncherPreferences.PREF_LANGUAGE.equals("default")) {
-            return context;
+            locale = DEFAULT_LOCALE;
+        } else {
+            locale = new Locale(LauncherPreferences.PREF_LANGUAGE);
         }
         
-        Locale locale = new Locale(LauncherPreferences.PREF_LANGUAGE);
         Locale.setDefault(locale);
 
         Resources res = context.getResources();

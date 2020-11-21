@@ -45,7 +45,7 @@ public class PojavLoginActivity extends BaseActivity
     
     private SharedPreferences firstLaunchPrefs;
     
-    private boolean isSkipInit = false;
+    private static boolean isSkipInit = false;
     
     // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
@@ -69,8 +69,6 @@ public class PojavLoginActivity extends BaseActivity
         
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
         new InitTask().execute(isSkipInit);
-        
-        isSkipInit = true;
     }
 
     private class InitTask extends AsyncTask<Boolean, String, Integer>{
@@ -280,6 +278,8 @@ public class PojavLoginActivity extends BaseActivity
                     edit3.setEnabled(!p2);
                 }
             });
+            
+        isSkipInit = true;
     }
     
     @Override
