@@ -147,35 +147,35 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
             }
             
             return false;
-        }
-        
-        if (mGestureDetector.onTouchEvent(event)) {
-            mCanTriggerLongClick = true;
-            onLongClick(this);
-        }
-
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_DOWN:
+        } else {
+            if (mGestureDetector.onTouchEvent(event)) {
                 mCanTriggerLongClick = true;
-                downX = event.getX();
-                downY = event.getY();
-                break;
-                
-            case MotionEvent.ACTION_MOVE:
-                mCanTriggerLongClick = false;
-                moveX += event.getX() - downX;
-                moveY += event.getY() - downY;
+                onLongClick(this);
+            }
+            
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_DOWN:
+                    mCanTriggerLongClick = true;
+                    downX = event.getX();
+                    downY = event.getY();
+                    break;
 
-                if (!mProperties.isDynamicBtn) {
-                    setTranslationX(moveX);
-                    setTranslationY(moveY);
-                }
-                
-                break;
+                case MotionEvent.ACTION_MOVE:
+                    mCanTriggerLongClick = false;
+                    moveX += event.getX() - downX;
+                    moveY += event.getY() - downY;
+
+                    if (!mProperties.isDynamicBtn) {
+                        setTranslationX(moveX);
+                        setTranslationY(moveY);
+                    }
+
+                    break;
+            }
+
+            return false;
         }
-
-        return false;
     }
 
     public void setModifiable(boolean z) {

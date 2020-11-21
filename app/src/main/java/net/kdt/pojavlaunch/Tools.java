@@ -664,7 +664,7 @@ public final class Tools
     }
 
 
-    public static String read(InputStream is) throws Exception {
+    public static String read(InputStream is) throws IOException {
         String out = "";
         int len;
         byte[] buf = new byte[512];
@@ -674,11 +674,11 @@ public final class Tools
         return out;
     }
 
-    public static String read(String path) throws Exception {
+    public static String read(String path) throws IOException {
         return read(new FileInputStream(path));
     }
 
-    public static void write(String path, byte[] content) throws Exception
+    public static void write(String path, byte[] content) throws IOException
     {
         File outPath = new File(path);
         outPath.getParentFile().mkdirs();
@@ -689,8 +689,7 @@ public final class Tools
         fos.close();
     }
 
-    public static void write(String path, String content) throws Exception
-    {
+    public static void write(String path, String content) throws IOException {
         write(path, content.getBytes());
     }
 
