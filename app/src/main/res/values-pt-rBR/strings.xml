@@ -25,6 +25,7 @@
     <string name="login_select_account">Selecionar conta</string>
     <!-- Hint -->
     <string name="hint_select_account">Para selecionar, pressione. Para excluir uma conta, manter pressionado.</string>
+    <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀\nSegure um botão para personalizar: editar, redimensionar ou excluir."</string>
     <!-- Warning -->
     <string name="warning_title">Aviso</string>
     <string name="warning_msg">Este app pode não ser compatível com sua versão do Android (Android 7.0+). Você pode usar o VMOS e instalar esse app no VMOS. Mas o VMOS não está disponível pelo Play Store, você deve instalar manualmente.</string>
@@ -71,6 +72,7 @@
     <string name="mcl_launch_download_assets">Preparando para baixar os recursos</string>
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modmgr">Gerenciador de mods (sem função)</string>
+    <string name="mcl_option_modinstall">Iniciar um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_checkupdate">Verificar por atualizações</string>
     <string name="mcl_option_customcontrol">Controles Personalizados</string>
     <string name="mcl_option_settings">Configurações</string>
