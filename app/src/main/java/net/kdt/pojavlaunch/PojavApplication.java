@@ -1,21 +1,18 @@
 package net.kdt.pojavlaunch;
 
-import android.app.Application;
-import android.os.*;
-import android.content.pm.PackageManager.*;
-import android.content.pm.*;
-import android.support.v7.preference.*;
+import android.app.*;
 import android.content.*;
+import android.content.pm.*;
+import android.content.res.*;
+import android.os.*;
 import android.support.v4.app.*;
+import android.support.v7.preference.*;
 import android.util.*;
-
 import java.io.*;
-import java.time.*;
 import java.text.*;
 import java.util.*;
-
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application
 {
@@ -67,9 +64,6 @@ public class PojavApplication extends Application
                 case "x86": Tools.currentArch = "x86/i*86"; break;
                 case "x86_64": Tools.currentArch = "x86_64/amd64"; break;
             }
-            
-			LauncherPreferences.DEFAULT_PREF = PreferenceManager.getDefaultSharedPreferences(this);
-			LauncherPreferences.loadPreferences();
 
 			FontChanger.initFonts(this);
 		} catch (Throwable th) {
@@ -78,4 +72,15 @@ public class PojavApplication extends Application
 			startActivity(ferrorIntent);
 		}
 	}
+    
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleUtils.setLocale(base));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LocaleUtils.setLocale(this);
+    }
 }

@@ -45,21 +45,14 @@ public class PojavLoginActivity extends BaseActivity
     
     private SharedPreferences firstLaunchPrefs;
     
-    private Locale mDefaultLocale;
+    private boolean isSkipInit = false;
     
     // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
     
-    private boolean isInitCalled = false;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false);
-        
-        mDefaultLocale = Locale.getDefault();
-
-        if (!LauncherPreferences.PREF_LANGUAGE.equals("default")) {
-            setLocale(new Locale(LauncherPreferences.PREF_LANGUAGE));
-        }
         
         Tools.updateWindowSize(this);
         
@@ -74,18 +67,13 @@ public class PojavLoginActivity extends BaseActivity
         specialButtons[3].name = getString(R.string.control_secondary);
         specialButtons[4].name = getString(R.string.control_mouse);
         
-        if (!isInitCalled) {
-            init();
-            isInitCalled = true;
-        }
-    }
-    
-    private void init() {
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
-        new InitTask().execute();
+        new InitTask().execute(isSkipInit);
+        
+        isSkipInit = true;
     }
 
-    private class InitTask extends AsyncTask<Void, String, Integer>{
+    private class InitTask extends AsyncTask<Boolean, String, Integer>{
         private AlertDialog startAle;
         private ProgressBar progress;
 
@@ -120,8 +108,12 @@ public class PojavLoginActivity extends BaseActivity
         private int revokeCount = -1;
         
         @Override
-        protected Integer doInBackground(Void[] p1)
-        {
+        protected Integer doInBackground(Boolean[] params) {
+            // If trigger a quick restart
+            if (params[0] == true) {
+                return 0;
+            }
+            
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {}
@@ -209,12 +201,12 @@ public class PojavLoginActivity extends BaseActivity
                 }
             }, 100);
 
-        String defaultLang = mDefaultLocale.getDisplayName();
+        String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
         SpannableString defaultLangChar = new SpannableString(defaultLang);
         defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(), 0);
         
         final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<DisplayableLocale>(this, android.R.layout.simple_spinner_item);
-        langAdapter.add(new DisplayableLocale(mDefaultLocale, defaultLangChar));
+        langAdapter.add(new DisplayableLocale(LocaleUtils.DEFAULT_LOCALE, defaultLangChar));
         langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
         try {
@@ -248,7 +240,13 @@ public class PojavLoginActivity extends BaseActivity
                 } else {
                     locale = langAdapter.getItem(position).mLocale;
                 }
-                setLocale(locale);
+                
+                LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
+                LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).commit();
+                
+                // Restart to apply language change
+                finish();
+                startActivity(getIntent());
             }
             
             @Override
@@ -287,16 +285,6 @@ public class PojavLoginActivity extends BaseActivity
         
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
-    }
-    
-    private void setLocale(Locale locale) {
-        LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
-        LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).commit();
-        Locale.setDefault(locale);
-        Configuration config = getResources().getConfiguration();
-        config.setLocale(locale);
-        // TODO replace deprecated
-        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 
     private boolean isJavaRuntimeInstalled() {
