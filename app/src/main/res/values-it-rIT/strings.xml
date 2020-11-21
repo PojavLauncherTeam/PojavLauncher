@@ -93,6 +93,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
     <string name="global_add">Aggiungi</string>
@@ -170,8 +171,6 @@
     <string name="customctrl_dynamicpos_y">Y dinamica</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Aggiorna console</string>
     <string name="main_options">Impostazioni</string>
     <string name="main_play">Gioca</string>
     <string name="main_welcome">Benvenuto,</string>
