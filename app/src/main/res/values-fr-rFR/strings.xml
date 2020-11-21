@@ -25,6 +25,7 @@
     <string name="login_select_account">Sélectionner un compte</string>
     <!-- Hint -->
     <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
+    <string name="hint_control_mapping">"Glisser de droite à gauche pour ouvrir le menu ◀\nMaintenez un bouton pour personnaliser : modifier, redimensionner ou supprimer."</string>
     <!-- Warning -->
     <string name="warning_title">Avertissement</string>
     <string name="warning_msg">Cette application peut ne pas être compatible avec votre version d\'Android (supérieure ou égale à Android 7.0). Vous pouvez utiliser VMOS puis installer cette application sur VMOS à la place. Mais VMOS est supprimé par le Play Store, vous devez l\'installer manuellement.</string>
@@ -71,6 +72,8 @@
     <string name="mcl_launch_download_assets">Préparation du téléchargement des ressources</string>
     <string name="mcl_options">Paramètres</string>
     <string name="mcl_option_modmgr">Gestionnaire de mods (non fonctionnel)</string>
+    <string name="mcl_option_modinstall">Lancer un installateur de mods (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Lancer un installateur de mod (avec des arguments personnalisés)</string>
     <string name="mcl_option_checkupdate">Rechercher des mises à jour</string>
     <string name="mcl_option_customcontrol">Contrôles personnalisés</string>
     <string name="mcl_option_settings">Réglages</string>
@@ -82,6 +85,7 @@
     <string name="mcl_setting_title_longpresstrigger">Combien de temps se déclenchera après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_controlsize">Définir la taille du bouton de contrôle</string>
+    <string name="mcl_setting_title_javaargs">Arguments de lancement JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attention, cela peut faire planter le jeu si modifié sans connaissance.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
     <string name="mcl_setting_category_veroption">Le type de version sera dans la liste des versions</string>
@@ -90,6 +94,7 @@
     <string name="mcl_setting_veroption_oldalpha">Ancienne alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Ancienne bêta</string>
     <!-- Credit translators in this language, append your name there -->
+    <string name="mcl_about_translated_by">"Traduit par : minemobs"</string>
     <string name="mcl_version_clone">Cloner</string>
     <!-- Global strings -->
     <string name="global_add">Ajouter</string>
@@ -162,6 +167,13 @@
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touches spéciales</string>
     <string name="customctrl_hidden">Masqué</string>
+    <string name="customctrl_dynamicpos">Positionnement dynamique</string>
+    <string name="customctrl_dynamicpos_x">X Dynamique</string>
+    <string name="customctrl_dynamicpos_y">Y Dynamique</string>
+    <string name="customctrl_keycombine">Combinaisons de touches</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
     <string name="customctrl_selectdefault">Sélectionner le json de contrôle par défaut</string>
     <string name="main_options">Paramètres</string>
