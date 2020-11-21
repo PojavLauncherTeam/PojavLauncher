@@ -93,6 +93,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
     <string name="global_add">添加</string>
@@ -170,8 +171,6 @@
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">更新控制台</string>
     <string name="main_options">选项</string>
     <string name="main_play">启动游戏</string>
     <string name="main_welcome">欢迎，</string>
