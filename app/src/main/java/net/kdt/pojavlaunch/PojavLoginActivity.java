@@ -227,11 +227,25 @@ public class PojavLoginActivity extends BaseActivity
         
         langAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         
+        int selectedLang = 0;
+        for (int i = 0; i < langAdapter.getCount(); i++) {
+            if (Locale.getDefault().getDisplayLanguage().equals(langAdapter.getItem(i).mLocale.getDisplayLanguage())) {
+                selectedLang = i;
+                break;
+            }
+        }
+        
         spinnerChgLang.setAdapter(langAdapter);
+        spinnerChgLang.setSelection(selectedLang);
         spinnerChgLang.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
-
+            private boolean isInitCalled;
             @Override
             public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
+                if (!isInitCalled) {
+                    isInitCalled = true;
+                    return;
+                }
+                
                 Locale locale;
                 if (position == 0) {
                     locale = Locale.getDefault();
