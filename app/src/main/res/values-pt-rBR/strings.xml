@@ -73,6 +73,7 @@
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modmgr">Gerenciador de mods (sem função)</string>
     <string name="mcl_option_modinstall">Iniciar um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Inicie um instalador de mods (com argumentos personalizados)</string>
     <string name="mcl_option_checkupdate">Verificar por atualizações</string>
     <string name="mcl_option_customcontrol">Controles Personalizados</string>
     <string name="mcl_option_settings">Configurações</string>
@@ -84,6 +85,7 @@
     <string name="mcl_setting_title_longpresstrigger">Acionar função ao manter toque pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
     <string name="mcl_setting_title_controlsize">Definir tamanho dos botões de controle</string>
+    <string name="mcl_setting_title_javaargs">Argumentos JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Cuidado, isso pode fazer seu jogo crashar se modificado sem conhecimento.</string>
     <string name="mcl_setting_category_general">Configurações gerais</string>
     <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
@@ -92,6 +94,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Beta</string>
     <!-- Credit translators in this language, append your name there -->
+    <string name="mcl_about_translated_by">"Traduzido por: "</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_add">Adicionar</string>
@@ -164,6 +167,13 @@
     <string name="customctrl_keyname">Código chave</string>
     <string name="customctrl_specialkey">Tecla Especial</string>
     <string name="customctrl_hidden">Oculto</string>
+    <string name="customctrl_dynamicpos">Posição dinâmica</string>
+    <string name="customctrl_dynamicpos_x">X Dinâmico</string>
+    <string name="customctrl_dynamicpos_y">Y Dinâmico</string>
+    <string name="customctrl_keycombine">Combinação de teclas</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
     <string name="customctrl_selectdefault">Selecione o json de Control padrão</string>
     <string name="main_options">Opções</string>
