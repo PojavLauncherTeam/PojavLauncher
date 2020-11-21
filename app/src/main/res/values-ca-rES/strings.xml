@@ -86,6 +86,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
     <string name="global_add">Add</string>
@@ -160,8 +161,6 @@
     <string name="customctrl_hidden">Hidden</string>
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_selectdefault">Select default Control json</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Update console</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
     <string name="main_welcome">Welcome,</string>
