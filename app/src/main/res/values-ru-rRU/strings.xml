@@ -93,6 +93,7 @@
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Клонировать</string>
     <!-- Global strings -->
     <string name="global_add">Добавить</string>
@@ -170,8 +171,6 @@
     <string name="customctrl_dynamicpos_y">Динамический Y</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_selectdefault">Выберите управление по умолчанию</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Обновить консоль</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать,</string>
