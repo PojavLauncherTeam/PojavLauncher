@@ -25,6 +25,7 @@
     <string name="login_select_account">Pilih akun</string>
     <!-- Hint -->
     <string name="hint_select_account">Untuk memilih akun, di-klik. Untuk menghapus akun, dipencet dengan ditahan.</string>
+    <string name="hint_control_mapping">"Geser dari kanan ke kiri untuk membuka menu ◀\nPencet lama sebuah tombol untuk memodifikasi: edit, modifikasi ukuran, atau hapus."</string>
     <!-- Warning -->
     <string name="warning_title">Peringatan</string>
     <string name="warning_msg">Aplikasi ini mungkin tidak biaa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
@@ -92,6 +93,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Tambah</string>
@@ -164,10 +166,15 @@
     <string name="customctrl_keyname">Kode kunci</string>
     <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
+    <string name="customctrl_dynamicpos">Posisi dinamis</string>
+    <string name="customctrl_dynamicpos_x">Dinamis X</string>
+    <string name="customctrl_dynamicpos_y">Dinamis Y</string>
+    <string name="customctrl_keycombine">Kombinasi kunci</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Kontrol</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
     <string name="customctrl_selectdefault">Pilih json kontrol default</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Perbarui konsol</string>
     <string name="main_options">Pilihan</string>
     <string name="main_play">Main</string>
     <string name="main_welcome">Selamat datang,</string>
