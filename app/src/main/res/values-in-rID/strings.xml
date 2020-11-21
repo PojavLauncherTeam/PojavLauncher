@@ -11,50 +11,53 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">Email atau username</string>
     <string name="login_online_username_question">(Saya pilih yang mana?)</string>
-    <string name="login_online_password_hint">Password</string>
-    <string name="login_online_password_question">Lupa password?</string>
+    <string name="login_online_password_hint">Kata sandi</string>
+    <string name="login_online_password_question">Lupa kata sandi?</string>
     <string name="login_online_remember">Ingat saya?</string>
     <string name="login_online_check_keeplogin">Tetapkan login saya?</string>
-    <string name="login_online_login_label">Login</string>
+    <string name="login_online_login_label">Masuk</string>
     <string name="login_online_create_account">(Buat akun baru?)</string>
     <string name="login_offline_switch">Akun offline?</string>
-    <string name="login_offline_label">Login sebagai akun offline</string>
+    <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_offline_alert_skip">Lewati</string>
     <string name="login_error_short_username">Username harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
     <string name="login_select_account">Pilih akun</string>
     <!-- Hint -->
     <string name="hint_select_account">Untuk memilih akun, di-klik. Untuk menghapus akun, dipencet dengan ditahan.</string>
-    <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum busa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
+    <string name="hint_control_mapping">"Geser dari kanan ke kiri untuk membuka menu ◀\nPencet lama sebuah tombol untuk memodifikasi: edit, modifikasi ukuran, atau hapus."</string>
     <!-- Warning -->
     <string name="warning_title">Peringatan</string>
-    <string name="warning_msg">Aplikasi ini mungkin tidak biaa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
+    <string name="warning_msg">Aplikasi ini mungkin tidak biaa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
     <string name="warning_noshowagain">Jangan tunjukkan lagi</string>
     <string name="warning_action_install">Pasang VMOS</string>
     <string name="warning_action_tryanyway">Coba saja</string>
     <string name="warning_action_exit">Keluar</string>
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Pasang Runtime Java %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
-    <string name="alerttitle_installmod">Pilih sebuah mod untuk dipasang</string>
+    <string name="alerttitle_installmod">Pilih sebuah instaler mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher tiba-tiba crash!</string>
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
     <string name="error_load_version">Tidak bisa mengload versi! %s</string>
-    <string name="error_convert_lib">Tidak bisa melakukan konversi pada library %s</string>
-    <string name="error_convert_client">Tidak bisa melakukan konversi pada Minecraft %s</string>
+    <string name="error_convert_lib">Gagal melakukan konversi pada library %s</string>
+    <string name="error_convert_client">Gagal melakukan konversi pada Minecraft %s</string>
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Permisi untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
+    <string name="toast_uninstalljre_done">Selesai mencopot Runtime Java</string>
     <!--
-	<string name="toast_3">Exit</string>
-	-->
+    <string name="toast_3">Exit</string>
+    -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Berita launcher</string>
+    <string name="mcl_tab_news">Berita</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
@@ -69,21 +72,28 @@
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
     <string name="mcl_options">Pilihan</string>
     <string name="mcl_option_modmgr">Mod manager (tidak berfungsi)</string>
+    <string name="mcl_option_modinstall">Luncurkan sebuah installer mod (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Luncurkan sebuah installer mod (dengan argumen buatan sendiri)</string>
     <string name="mcl_option_checkupdate">Periksa ada update</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
     <string name="mcl_option_about">Tentang</string>
+    <string name="mcl_setting_title_uninstalljre">Copot Runtime Java</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Peluncur butuh di buka ulang] Ini membiarkan kamu memasang ulang Runtime Java</string>
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan oencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
+    <string name="mcl_setting_title_javaargs">Argumen untuk meluncurkan JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Hati-hati, ini bisa meng-crash permainan jika di-ubah tanpa pengetahuan.</string>
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Tambah</string>
@@ -94,34 +104,39 @@
     <string name="global_remove">Hapus</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Simpan</string>
+    <string name="global_unpacking">Membongkar %s</string>
     <string name="global_error_field_empty">Tempat ini tidak boleh kosong.</string>
     <!--
-	<string name="mcl_about">
-%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
-		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-		"Using libraries:\n" +
-		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-		//" • Boardwalk memory manager (not used now).\n" +
-		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-		" • dx: tool to convert.\n" +
-		" • Java AWT Implementation includes:\n" +
-		"  - Boardwalk's makeshift.\n" +
-		"  - Apache Harmony AWT Framework.\n" +
-		"  - OpenJDK 7 codes implementation.\n" +
-		"  - Developer code implement (copy text, open browser,...)\n" +
-		"\n" +
-		"* Notes:\n" +
-		" - This app is currently BETA, it will not be stable.\n" +
-		//"* This app will unstable on Android 7.0 or higher devices.\n" +
-		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
-		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
-	</string>
--->
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • dx: tool to convert.\n" +
+    " • Java AWT Implementation includes:\n" +
+    "  - Boardwalk's makeshift.\n" +
+    "  - Apache Harmony AWT Framework.\n" +
+    "  - OpenJDK 7 codes implementation.\n" +
+    "  - Developer code implement (copy text, open browser,...)\n" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan code %d</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_crash">Game crash terdeteksi! Pencet OK untuk keluar.</string>
     <string name="mcn_exit_errcrash">Tidak bisa mencari sumber crash, anda bisa mengabaikan ini.</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 tidak dipasang!</string>
+    <string name="mcn_check_fail_incompatiblearch">Arsitektur %1$s tidak kompatibel dengan Runtime Java %2$s.</string>
+    <string name="mcn_check_fail_java">Gagal meluncurkan tes Java VM. Cek %s untuk informasi lebih banyak.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Kontrol</string>
     <string name="control_toggle">GUI</string>
@@ -147,15 +162,19 @@
     <string name="control_forceclose">Tutp secara paksa</string>
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
-    <string name="control_customkey">Kirim keycode kustom</string>
-    <string name="customctrl_keyname">Keycode</string>
-    <string name="customctrl_specialkey">Key spesial</string>
+    <string name="control_customkey">Kirim kode kunci kustom</string>
+    <string name="customctrl_keyname">Kode kunci</string>
+    <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
+    <string name="customctrl_dynamicpos">Posisi dinamis</string>
+    <string name="customctrl_dynamicpos_x">Dinamis X</string>
+    <string name="customctrl_dynamicpos_y">Dinamis Y</string>
+    <string name="customctrl_keycombine">Kombinasi kunci</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Kontrol</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
-    <string name="customctrl_title_selectctrl">Pilih json kontrol default</string>
     <string name="customctrl_selectdefault">Pilih json kontrol default</string>
-    <!-- Update part (unused now) -->
-    <string name="update_console">Perbarui konsol</string>
     <string name="main_options">Pilihan</string>
     <string name="main_play">Main</string>
     <string name="main_welcome">Selamat datang,</string>
