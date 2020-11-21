@@ -94,6 +94,7 @@
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
     <!-- Credit translators in this language, append your name there -->
+    <string name="mcl_about_translated_by">"Переведено: "</string>
     <string name="mcl_version_clone">Клонировать</string>
     <!-- Global strings -->
     <string name="global_add">Добавить</string>
@@ -169,6 +170,9 @@
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамический X</string>
     <string name="customctrl_dynamicpos_y">Динамический Y</string>
+    <string name="customctrl_keycombine">Комбинация клавиш</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_selectdefault">Выберите управление по умолчанию</string>
     <string name="main_options">Опции</string>
