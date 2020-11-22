@@ -108,6 +108,8 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     }
     
     private void doCustomInstall(File modFile, String javaArgs) throws IOException {
+        isLogAllow = true;
+        
         // Attempt to detects some mod installers 
         BaseInstaller installer = new BaseInstaller();
         installer.setInput(modFile);
@@ -116,6 +118,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
             appendlnToLog("Detected Forge installer!");
             new ForgeInstaller(installer).install(this);
         } else {
+            isLogAllow = false;
             mIsCustomInstall = false;
             launchJavaRuntime(modFile, javaArgs);
         }

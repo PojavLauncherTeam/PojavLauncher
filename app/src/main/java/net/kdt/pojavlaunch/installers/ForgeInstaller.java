@@ -35,7 +35,7 @@ public class ForgeInstaller extends BaseInstaller {
         String[] libInfos = profile.install.path.split(":");
         File libraryFile = new File(Tools.libraries, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         libraryFile.mkdirs();
-        target = libraryFile.getAbsolutePath() + "/" + profile.install.filePath.replace("-universal", "");
+        target = libraryFile.getAbsolutePath().replace("-universal", "");
         ctx.appendlnToLog("Writing " + target);
         FileOutputStream out = new FileOutputStream(target);
         IOUtils.copy(mJarFile.getInputStream(mJarFile.getEntry(profile.install.filePath)), out);
