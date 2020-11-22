@@ -8,10 +8,10 @@ import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
+import net.kdt.pojavlaunch.installers.*;
+import android.util.*;
 
 public class JavaGUILauncherActivity extends LoggableActivity {
-    public static volatile boolean IS_JRE_RUNNING;
-
     private AWTCanvasView mTextureView;
     private LinearLayout contentLog;
     private TextView textLog;
@@ -21,7 +21,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     private File logFile;
     private PrintStream logStream;
 
-    private boolean isLogAllow;
+    private boolean isLogAllow, mIsCustomInstall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +48,44 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                         appendToLog("");
                     }
                 });
-            JREUtils.redirectAndPrintJRELog(this, null);
-
+            
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
-            final String javaArgs = getIntent().getExtras().getString("javaArgs");
+            final String javaArgs = getIntent().getExtras().getString("javaArgs", "");
 
             mTextureView = findViewById(R.id.installmod_surfaceview);
+           
+            mIsCustomInstall = getIntent().getExtras().getBoolean("customInstall", false);
+            if (mIsCustomInstall) {
+                JREUtils.redirectAndPrintJRELog(this, null);
+                new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            launchJavaRuntime(modFile, javaArgs);
+                        }
+                    }, "JREMainThread").start();
+            } else {
+                openLogOutput(null);
+                new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            try {
+                                doCustomInstall(modFile, javaArgs);
+                                appendlnToLog(getString(R.string.toast_optifine_success));
+                                runOnUiThread(new Runnable(){
 
-            new Thread(new Runnable(){
-                    @Override
-                    public void run() {
-                        launchJavaRuntime(modFile, javaArgs);
-                        IS_JRE_RUNNING = false;
-                    }
-                }, "JREMainThread").start();
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            } catch (IOException e) {
+                                appendlnToLog("Install failed:");
+                                appendlnToLog(Log.getStackTraceString(e));
+                                Tools.showError(JavaGUILauncherActivity.this, e);
+                            }
+                        }
+                    }, "Installer").start();
+            }
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
@@ -76,8 +100,25 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     }
 
     public void closeLogOutput(View view) {
-        contentLog.setVisibility(View.GONE);
-        // mIsResuming = true;
+        if (mIsCustomInstall) {
+            forceClose(null);
+        } else {
+            contentLog.setVisibility(View.GONE);
+        }
+    }
+    
+    private void doCustomInstall(File modFile, String javaArgs) throws IOException {
+        // Attempt to detects some mod installers 
+        BaseInstaller installer = new BaseInstaller();
+        installer.setInput(modFile);
+        
+        if (InstallerDetector.isForgeLegacy(installer)) {
+            appendlnToLog("Detected Forge installer!");
+            new ForgeInstaller(installer).install(this);
+        } else {
+            mIsCustomInstall = false;
+            launchJavaRuntime(modFile, javaArgs);
+        }
     }
 
     private void launchJavaRuntime(File modFile, String javaArgs) {

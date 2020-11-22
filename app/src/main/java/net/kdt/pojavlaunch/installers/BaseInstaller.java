@@ -1,14 +1,22 @@
 package net.kdt.pojavlaunch.installers;
 
-import android.content.*;
 import java.io.*;
+import java.util.jar.*;
+import net.kdt.pojavlaunch.*;
 
-public abstract class BaseInstaller {
-    protected File mJarFile;
+public class BaseInstaller {
+    protected File mFile;
+    protected JarFile mJarFile;
 
-    public void setInput(File jarFile) {
-        mJarFile = jarFile;
+    public void setInput(File file) throws IOException {
+        mFile = file;
+        mJarFile = new JarFile(file);
     }
     
-    public abstract void install(Context ctx) throws IOException;
+    public void install(LoggableActivity ctx) throws IOException {}
+    
+    public void from(BaseInstaller base) {
+        mFile = base.mFile;
+        mJarFile = base.mJarFile;
+    }
 }
