@@ -14,7 +14,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     private ControlData mProperties;
     private SelectionEndHandleView mHandleView;
 
-    private boolean mCanModify = false;
+    private boolean mModifiable = false;
     private boolean mCanTriggerLongClick = true;
     
     private int mMods;
@@ -106,7 +106,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
     @Override
     public boolean onLongClick(View p1) {
-        if (mCanTriggerLongClick) {
+        if (mCanTriggerLongClick && mModifiable) {
             if (mHandleView.isShowing()) {
                 mHandleView.hide();
             } else {
@@ -124,7 +124,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     private float downX, downY;
     @Override
     public boolean onTouch(View view, MotionEvent event) {
-        if (!mCanModify) {
+        if (!mModifiable) {
             mCanTriggerLongClick = false;
             
             if (mProperties.keycode >= 0) {
@@ -178,6 +178,6 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     }
 
     public void setModifiable(boolean z) {
-        mCanModify = z;
+        mModifiable = z;
     }
 }

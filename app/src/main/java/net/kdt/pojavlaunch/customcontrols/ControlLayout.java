@@ -11,7 +11,7 @@ import java.io.*;
 
 public class ControlLayout extends FrameLayout
 {
-	private boolean mCanModify;
+	private boolean mModifiable;
 	private CustomControls mLayout;
 	private CustomControlsActivity mActivity;
 	private boolean mControlVisible = false;
@@ -61,7 +61,7 @@ public class ControlLayout extends FrameLayout
 
 	private void addControlView(ControlData controlButton) {
 		final ControlButton view = new ControlButton(getContext(), controlButton);
-		view.setModifiable(mCanModify);
+		view.setModifiable(mModifiable);
 		addView(view);
 
 		setModified(true);
@@ -85,7 +85,7 @@ public class ControlLayout extends FrameLayout
 	}
 	
 	public void toggleControlVisible() {
-		if (mCanModify) return; // Not using on custom controls activity
+		if (mModifiable) return; // Not using on custom controls activity
 		
 		mControlVisible = !mControlVisible;
 		for (int i = 0; i < getChildCount(); i++) {
@@ -97,7 +97,7 @@ public class ControlLayout extends FrameLayout
 	}
 	
 	public void setModifiable(boolean z) {
-		mCanModify = z;
+		mModifiable = z;
 		for (int i = 0; i < getChildCount(); i++) {
 			View v = getChildAt(i);
 			if (v instanceof ControlButton) {
