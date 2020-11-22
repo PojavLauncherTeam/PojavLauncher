@@ -114,6 +114,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface di, int i) {
                         Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
+                        intent.putExtra("skipDetectMod", true);
                         intent.putExtra("javaArgs", edit.getText().toString());
                         startActivity(intent);
                     }

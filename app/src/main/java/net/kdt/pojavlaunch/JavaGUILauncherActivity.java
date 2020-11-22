@@ -21,7 +21,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     private File logFile;
     private PrintStream logStream;
 
-    private boolean isLogAllow, mIsCustomInstall;
+    private boolean isLogAllow, mSkipDetectMod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,8 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
             mTextureView = findViewById(R.id.installmod_surfaceview);
            
-            mIsCustomInstall = getIntent().getExtras().getBoolean("customInstall", false);
-            if (mIsCustomInstall) {
+            mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
+            if (mSkipDetectMod) {
                 JREUtils.redirectAndPrintJRELog(this, null);
                 new Thread(new Runnable(){
                         @Override
@@ -100,7 +100,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     }
 
     public void closeLogOutput(View view) {
-        if (mIsCustomInstall) {
+        if (mSkipDetectMod) {
             forceClose(null);
         } else {
             contentLog.setVisibility(View.GONE);
@@ -119,7 +119,8 @@ public class JavaGUILauncherActivity extends LoggableActivity {
             new ForgeInstaller(installer).install(this);
         } else {
             isLogAllow = false;
-            mIsCustomInstall = false;
+            mSkipDetectMod = true;
+            JREUtils.redirectAndPrintJRELog(this, null);
             launchJavaRuntime(modFile, javaArgs);
         }
     }
