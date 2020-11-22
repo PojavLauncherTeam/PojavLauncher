@@ -20,12 +20,10 @@ public class CustomControlsActivity extends BaseActivity
 	private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
 	private ControlLayout ctrlLayout;
-	private CustomControls mCtrl;
-
+    
 	private SharedPreferences mPref;
 
 	public boolean isModified = false;
-
 	private String selectedName = "new_control";
 
 	@Override
@@ -66,14 +64,10 @@ public class CustomControlsActivity extends BaseActivity
 				}
 			});
 
-		mCtrl = new CustomControls();
-
 		ctrlLayout.setActivity(this);
 		ctrlLayout.setModifiable(true);
 
 		loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
-
-		ctrlLayout.loadLayout(mCtrl);
 	}
 
 	@Override
@@ -96,7 +90,7 @@ public class CustomControlsActivity extends BaseActivity
 			Tools.showError(this, th);
 		}
 	}
-
+    
 	private void dialogSelectDefaultCtrl() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.customctrl_selectdefault);
@@ -203,8 +197,7 @@ public class CustomControlsActivity extends BaseActivity
 
 	private void loadControl(String path) {
 		try {
-			mCtrl = Tools.GLOBAL_GSON.fromJson(Tools.read(path), CustomControls.class);
-			ctrlLayout.loadLayout(mCtrl);
+			ctrlLayout.loadLayout(path);
 
 			selectedName = new File(path).getName();
 			// Remove `.json`

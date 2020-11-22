@@ -103,7 +103,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						String[] oldSpecialArr = ControlData.buildSpecialButtonArray();
 						final String[] specialArr = new String[oldSpecialArr.length];
 						for (int i = 0; i < specialArr.length; i++) {
-							specialArr[i] = "SPECIAL_" + oldSpecialArr[i];
+							specialArr[i] = "SPECIAL_" + oldSpecialArr[specialArr.length - i - 1];
 						}
 
 						adapter.addAll(specialArr);
@@ -111,7 +111,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
 						if (properties.keycode < 0) {
-							spinnerKeycode.setSelection(0 - properties.keycode);
+							spinnerKeycode.setSelection(properties.keycode + specialArr.length);
 						} else {
 							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode) + specialArr.length);
 						}

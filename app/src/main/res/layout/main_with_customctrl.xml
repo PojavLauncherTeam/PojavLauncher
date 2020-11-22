@@ -13,31 +13,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <net.kdt.pojavlaunch.MinecraftGLView
-            android:id="@+id/main_game_render_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
-
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/main_touchpad"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_height="27dp"
-                android:layout_width="18dp"
-                android:src="@drawable/mouse_pointer"
-                android:id="@+id/main_mouse_pointer"/>
-
-        </LinearLayout>
-        
         <net.kdt.pojavlaunch.customcontrols.ControlLayout
             android:id="@+id/main_control_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <net.kdt.pojavlaunch.MinecraftGLView
+                android:id="@+id/main_game_render_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/main_touchpad"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_height="27dp"
+                    android:layout_width="18dp"
+                    android:src="@drawable/mouse_pointer"
+                    android:id="@+id/main_mouse_pointer"/>
+
+            </LinearLayout>
+            
         </net.kdt.pojavlaunch.customcontrols.ControlLayout>
         
         <LinearLayout

@@ -7,9 +7,10 @@ import android.widget.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
+import java.io.*;
+import com.google.gson.*;
 
 public class CustomCtrlMainActivity extends BaseMainActivity {
-    private CustomControls mControl;
     private ControlLayout mControlLayout;
     
     private View.OnClickListener mClickListener;
@@ -99,21 +100,15 @@ public class CustomCtrlMainActivity extends BaseMainActivity {
             = mTouchListener;
         
         mControlLayout = findViewById(R.id.main_control_layout);
-        mControl = new CustomControls();
+        try {
+            mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+        } catch (Throwable th) {
+            Tools.showError(this, th);
+        }
+        
         mControlLayout.setModifiable(false);
-        loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
-        mControlLayout.loadLayout(mControl);
         
         // toggleGui(null);
         mControlLayout.toggleControlVisible();
-    }
-
-    private void loadControl(String path) {
-        try {
-            mControl = Tools.GLOBAL_GSON.fromJson(Tools.read(path), CustomControls.class);
-            mControlLayout.loadLayout(mControl);
-        } catch (Exception e) {
-            Tools.showError(this, e);
-        }
     }
 }

@@ -7,6 +7,7 @@ import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
 import android.support.v7.app.*;
 import java.util.*;
+import java.io.*;
 
 public class ControlLayout extends FrameLayout
 {
@@ -32,17 +33,19 @@ public class ControlLayout extends FrameLayout
 		}
 	}
 
-	public void loadLayout(String jsonPath) {
-		try {
-			loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(jsonPath), CustomControls.class));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void loadLayout(String jsonPath) throws IOException, JsonSyntaxException {
+		loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(jsonPath), CustomControls.class));
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
 		mLayout = controlLayout;
-		removeAllViews();
+		
+        for (int i = 0; i < getChildCount(); i++) {
+            if (getChildAt(i) instanceof ControlButton) {
+                removeViewAt(i);
+            }
+        }
+        
 		for (ControlData button : controlLayout.mControlDataList) {
             button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
 			addControlView(button);

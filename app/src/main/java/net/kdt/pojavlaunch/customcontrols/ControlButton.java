@@ -106,17 +106,18 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
     @Override
     public boolean onLongClick(View p1) {
-        if (!mCanTriggerLongClick) return false;
-
-        if (mHandleView.isShowing()) {
-            mHandleView.hide();
-        } else {
-            if (getParent() != null) {
-                ((ControlLayout) getParent()).hideAllHandleViews();
+        if (mCanTriggerLongClick) {
+            if (mHandleView.isShowing()) {
+                mHandleView.hide();
+            } else {
+                if (getParent() != null) {
+                    ((ControlLayout) getParent()).hideAllHandleViews();
+                }
+                mHandleView.show();
             }
-            mHandleView.show();
         }
-        return true;
+        
+        return mCanTriggerLongClick;
     }
 
     private float moveX, moveY;
@@ -145,8 +146,6 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
                 return true;
             }
-            
-            return false;
         } else {
             if (mGestureDetector.onTouchEvent(event)) {
                 mCanTriggerLongClick = true;
@@ -173,9 +172,9 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
                     break;
             }
-
-            return false;
         }
+        
+        return false;
     }
 
     public void setModifiable(boolean z) {
