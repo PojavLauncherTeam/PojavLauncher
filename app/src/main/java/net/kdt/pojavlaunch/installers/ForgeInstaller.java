@@ -34,7 +34,7 @@ public class ForgeInstaller extends BaseInstaller {
         // Extract Forge universal
         String[] libInfos = profile.install.path.split(":");
         File libraryFile = new File(Tools.libraries, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
-        libraryFile.mkdirs();
+        libraryFile.getParentFile().mkdirs();
         target = libraryFile.getAbsolutePath().replace("-universal", "");
         ctx.appendlnToLog("Writing " + target);
         FileOutputStream out = new FileOutputStream(target);
