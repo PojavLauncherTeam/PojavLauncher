@@ -56,10 +56,10 @@ public class PojavLoginActivity extends BaseActivity
         
         Tools.updateWindowSize(this);
         
-        ControlData.pixelOf2dp = (int) Tools.dpToPx(this, 2);
-        ControlData.pixelOf30dp = (int) Tools.dpToPx(this, 30);
-        ControlData.pixelOf50dp = (int) Tools.dpToPx(this, 50);
-        ControlData.pixelOf80dp = (int) Tools.dpToPx(this, 80);
+        ControlData.pixelOf2dp = (int) Tools.dpToPx(2);
+        ControlData.pixelOf30dp = (int) Tools.dpToPx(30);
+        ControlData.pixelOf50dp = (int) Tools.dpToPx(50);
+        ControlData.pixelOf80dp = (int) Tools.dpToPx(80);
         ControlData[] specialButtons = ControlData.getSpecialButtons();
         specialButtons[0].name = getString(R.string.control_keyboard);
         specialButtons[1].name = getString(R.string.control_toggle);

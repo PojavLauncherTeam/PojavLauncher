@@ -341,15 +341,11 @@ public final class Tools
         CallbackBridge.windowHeight = currentDisplayMetrics.heightPixels;
     }
 
-    public static float pxToDp(Context ctx, float px) {
-        return (px / ctx.getResources().getDisplayMetrics().density);
-    }
-
-    public static float dpToPx(Context ctx, float dp) {
+    public static float dpToPx(float dp) {
         // 921600 = 1280 * 720, default scale
         // TODO better way to scaling
-        // float scaledDp = dp / 921600 * CallbackBridge.windowWidth * CallbackBridge.windowHeight;
-        return (dp /* scaledDp */ * ctx.getResources().getDisplayMetrics().density);
+        float scaledDp = dp / DisplayMetrics.DENSITY_XHIGH * currentDisplayMetrics.densityDpi;
+        return (scaledDp * currentDisplayMetrics.density);
     }
 
     public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws Exception

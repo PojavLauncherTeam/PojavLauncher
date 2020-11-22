@@ -151,8 +151,8 @@ public class MCLauncherActivity extends BaseLauncherActivity
     protected float updateWidthHeight() {
         float leftRightWidth = (float) CallbackBridge.windowWidth / 100f * 32f;
         float mPlayButtonWidth = CallbackBridge.windowWidth - leftRightWidth * 2f;
-        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(this, CallbackBridge.windowHeight / 9));
-        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth, (int) Tools.dpToPx(this, CallbackBridge.windowHeight / 9));
+        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
+        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
         leftView.setLayoutParams(leftRightParams);
         rightView.setLayoutParams(leftRightParams);
         mPlayButton.setLayoutParams(mPlayButtonParams);
