@@ -118,6 +118,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
             appendlnToLog("Detected Forge installer!");
             new ForgeInstaller(installer).install(this);
         } else {
+            appendlnToLog("No mod detected. Starting JVM");
             isLogAllow = false;
             mSkipDetectMod = true;
             JREUtils.redirectAndPrintJRELog(this, null);

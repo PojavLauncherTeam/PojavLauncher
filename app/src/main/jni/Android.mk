@@ -46,11 +46,3 @@ LOCAL_SRC_FILES := \
     awt_Taskbar.c
 include $(BUILD_SHARED_LIBRARY)
 
-# libfontconfig dummy implementation, althought have Android port...
-LOCAL_PATH := $(HERE_PATH)/fontconfig
-include $(CLEAR_VARS)
-LOCAL_MODULE := fontconfig
-LOCAL_SRC_FILES := \
-    fontconfig.c
-include $(BUILD_SHARED_LIBRARY)
-

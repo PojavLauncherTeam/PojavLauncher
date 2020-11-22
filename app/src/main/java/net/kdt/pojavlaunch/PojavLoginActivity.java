@@ -356,7 +356,7 @@ public class PojavLoginActivity extends BaseActivity
             
             // Refresh libraries
             copyDummyNativeLib("libawt_xawt.so");
-            copyDummyNativeLib("libfontconfig.so");
+            // copyDummyNativeLib("libfontconfig.so");
         }
         catch(Throwable e){
             Tools.showError(this, e);

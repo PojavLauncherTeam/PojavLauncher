@@ -125,12 +125,11 @@ public class BaseMainActivity extends LoggableActivity {
             mProfile = PojavProfile.getCurrentProfileContent(this);
             mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
             // Minecraft 1.12.x special case: use indirect char pipe
-            CallbackBridge.isMinecraft1p12 = mVersionInfo.assets.startsWith("1.12");
             
             setTitle("Minecraft " + mProfile.getVersion());
             
             // Minecraft 1.13+
-            isInputStackCall = mVersionInfo.arguments != null;
+            isInputStackCall = true; // mVersionInfo.arguments != null;
             
             this.displayMetrics = Tools.getDisplayMetrics(this);
             CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
