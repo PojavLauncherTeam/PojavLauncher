@@ -38,13 +38,14 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
-		mLayout = controlLayout;
-		
         for (int i = 0; i < getChildCount(); i++) {
-            if (getChildAt(i) instanceof ControlButton) {
-                removeViewAt(i);
+            View v = getChildAt(i);
+            if (v instanceof ControlButton) {
+                removeControlButton((ControlButton) v);
             }
         }
+
+		mLayout = controlLayout;
         
 		for (ControlData button : controlLayout.mControlDataList) {
             button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
@@ -91,7 +92,7 @@ public class ControlLayout extends FrameLayout
 		for (int i = 0; i < getChildCount(); i++) {
 			View view = getChildAt(i);
 			if (view instanceof ControlButton && ((ControlButton) view).getProperties().isHideable) {
-				((ControlButton) view).setVisibility(mControlVisible ? (((ControlButton) view).getProperties().hidden ? View.INVISIBLE : View.VISIBLE) : View.GONE);
+				((ControlButton) view).setVisibility(mControlVisible ? View.VISIBLE : View.GONE);
 			}
 		}
 	}
