@@ -22,6 +22,7 @@
 			android:summary="@string/mcl_setting_subtitle_freeform"/>
 
         <android.support.v7.preference.EditTextPreference
+            android:singleLine="true"
 			android:key="javaArgs"
 			android:title="@string/mcl_setting_title_javaargs"
 			android:summary="@string/mcl_setting_subtitle_javaargs"
