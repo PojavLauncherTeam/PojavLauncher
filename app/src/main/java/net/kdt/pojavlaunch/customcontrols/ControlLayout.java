@@ -1,14 +1,13 @@
 package net.kdt.pojavlaunch.customcontrols;
-import android.widget.*;
 import android.content.*;
 import android.util.*;
 import android.view.*;
+import android.widget.*;
 import com.google.gson.*;
-import net.kdt.pojavlaunch.*;
-import android.support.v7.app.*;
-import java.util.*;
 import java.io.*;
+import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
+import org.lwjgl.glfw.*;
 
 public class ControlLayout extends FrameLayout
 {
@@ -49,6 +48,8 @@ public class ControlLayout extends FrameLayout
             button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
             button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+            button.dynamicX = Float.toString(button.x / CallbackBridge.windowWidth) + " * ${screen_width}";
+            button.dynamicY = Float.toString(button.y / CallbackBridge.windowHeight) + " * ${screen_height}";
 			addControlView(button);
 		}
 

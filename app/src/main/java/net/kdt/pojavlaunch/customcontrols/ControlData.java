@@ -100,13 +100,7 @@ public class ControlData implements Cloneable
 	}
 
 	public ControlData(String name, int keycode, float x, float y, float width, float height) {
-		this.name = name;
-		this.keycode = keycode;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-        this.isDynamicBtn = false;
+        this(name, keycode, null, null, width, height);
 	}
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
@@ -168,8 +162,10 @@ public class ControlData implements Cloneable
                     specialButtonListener = data.specialButtonListener;
                 }
             }
-        } if (!isDynamicBtn) {
-            return;
+        } if (dynamicX == null) {
+            dynamicX = Float.toString(x);
+        } if (dynamicY == null) {
+            dynamicY = Float.toString(y);
         }
         
         x = insertDynamicPos(dynamicX);

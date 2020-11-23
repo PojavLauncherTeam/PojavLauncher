@@ -7,6 +7,7 @@ import android.widget.*;
 import net.kdt.pojavlaunch.*;
 import com.kdt.handleview.*;
 import android.view.ViewGroup.*;
+import org.lwjgl.glfw.*;
 
 public class ControlButton extends Button implements OnLongClickListener, OnTouchListener
 {
@@ -100,6 +101,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
         if (!mProperties.isDynamicBtn) {
             mProperties.x = x;
+            mProperties.dynamicX = Float.toString(x / CallbackBridge.windowWidth) + " * ${screen_width}";
             setModified(true);
         }
     }
@@ -110,6 +112,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
         if (!mProperties.isDynamicBtn) {
             mProperties.y = y;
+            mProperties.dynamicY = Float.toString(y / CallbackBridge.windowHeight) + " * ${screen_height}";
             setModified(true);
         }
     }

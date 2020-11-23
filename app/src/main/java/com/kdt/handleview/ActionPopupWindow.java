@@ -118,11 +118,17 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 						final CheckBox checkHidden = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
 						checkHidden.setChecked(properties.hidden);
-                        
-                        final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_dynamicpos);
-                        checkDynamicPos.setChecked(properties.isDynamicBtn);
 
                         final LinearLayout layoutDynamicBtn = dialog.findViewById(R.id.controlsetting_dynamicbtnlayout);
+                        final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_dynamicpos);
+                        checkDynamicPos.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
+
+                                @Override
+                                public void onCheckedChanged(CompoundButton btn, boolean checked) {
+                                    layoutDynamicBtn.setVisibility(checked ? View.VISIBLE : View.GONE);
+                                }
+                            });
+                        checkDynamicPos.setChecked(properties.isDynamicBtn);
                         
                         final EditText editDynamicX = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_x);
                         final EditText editDynamicY = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_y);
@@ -132,14 +138,6 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                         
                         editDynamicY.setHint(Float.toString(properties.y));
                         editDynamicY.setText(properties.dynamicY);
-                        
-                        checkDynamicPos.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
-
-                                @Override
-                                public void onCheckedChanged(CompoundButton btn, boolean checked) {
-                                    layoutDynamicBtn.setVisibility(checked ? View.VISIBLE : View.GONE);
-                                }
-                            });
                         
                         final CheckBox checkHoldAlt = dialog.findViewById(R.id.controlsetting_checkbox_keycombine_alt);
                         checkHoldAlt.setChecked(properties.holdAlt);
