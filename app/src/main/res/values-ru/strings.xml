@@ -43,8 +43,6 @@
     <string name="error_checklog">Ошибка! Проверьте журнал ниже: %s</string>
     <string name="error_no_version">Нет версии!</string>
     <string name="error_load_version">Не удалось загрузить версию %s</string>
-    <string name="error_convert_lib">Не удалось конвертировать библиотеку %s</string>
-    <string name="error_convert_client">Не удалось конвертировать Minecraft %s</string>
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>
     <!-- Toast messages -->
@@ -178,7 +176,6 @@
     <string name="main_welcome">Добро пожаловать,</string>
     <string name="main_infodev">Инфо (Р)</string>
     <string name="main_switchuser">Выбрать пользователя</string>
-    <string name="main_version_">Версия:</string>
     <string name="main_nocrash">Сбоев не обнаружено</string>
     <string name="main_nolog">Нет записей</string>
 </resources>
