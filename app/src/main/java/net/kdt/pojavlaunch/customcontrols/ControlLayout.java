@@ -108,7 +108,7 @@ public class ControlLayout extends FrameLayout
 		}
 	}
 
-	private void setModified(boolean z) {
+	protected void setModified(boolean z) {
 		if (mActivity != null) mActivity.isModified = z;
 	}
 }

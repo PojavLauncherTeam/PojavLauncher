@@ -25,11 +25,11 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         mGestureDetector = new GestureDetector(ctx, new SingleTapConfirm());
 
         setBackgroundResource(R.drawable.control_button);
-
         setOnLongClickListener(this);
         setOnTouchListener(this);
 
         setProperties(properties);
+        setModified(false);
 
         mHandleView = new SelectionEndHandleView(this);
     }
@@ -80,26 +80,31 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     }
 
     @Override
-    public void setLayoutParams(ViewGroup.LayoutParams params)
-    {
+    public void setLayoutParams(ViewGroup.LayoutParams params) {
         super.setLayoutParams(params);
 
         mProperties.width = params.width;
         mProperties.height = params.height;
+        
+        setModified(true);
     }
 
     @Override
     public void setTranslationX(float x) {
         super.setTranslationX(x);
         mProperties.x = x;
+
+        setModified(true);
     }
 
     @Override
     public void setTranslationY(float y) {
         super.setTranslationY(y);
         mProperties.y = y;
-    }
 
+        setModified(true);
+    }
+    
     public void updateProperties() {
         setProperties(mProperties);
     }
@@ -179,5 +184,11 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
     public void setModifiable(boolean z) {
         mModifiable = z;
+    }
+    
+    private void setModified(boolean modified) {
+        if (getParent() != null) {
+            ((ControlLayout) getParent()).setModified(modified);
+        }
     }
 }

@@ -86,7 +86,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                                     aboutB.setMessage(Html.fromHtml(String.format(Tools.read(getAssets().open("about_en.txt")),
                                                                                   Tools.APP_NAME,
                                                                                   Tools.usingVerName,
-                                                                                  "3.2.3", getString(R.string.mcl_about_translated_by))
+                                                                                  "3.2.3")
                                                                     ));
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
