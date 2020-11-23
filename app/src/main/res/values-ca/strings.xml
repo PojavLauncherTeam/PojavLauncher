@@ -41,8 +41,6 @@
     <string name="error_checklog">Error! Siusplau mireu’vos el registre: %s</string>
     <string name="error_no_version">Cap versio!</string>
     <string name="error_load_version">Error al carregar la versio %s</string>
-    <string name="error_convert_lib">Error al convertir la llibraria %s</string>
-    <string name="error_convert_client">Error al convertir Minecraft %s</string>
     <string name="error_show_more">Mostra més</string>
     <string name="error_show_less">Mostrar menys</string>
     <!-- Toast messages -->
@@ -165,7 +163,6 @@
     <string name="main_welcome">Welcome,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Switch user</string>
-    <string name="main_version_">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
 </resources>
