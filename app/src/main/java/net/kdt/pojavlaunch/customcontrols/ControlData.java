@@ -101,6 +101,7 @@ public class ControlData implements Cloneable
 
 	public ControlData(String name, int keycode, float x, float y, float width, float height) {
         this(name, keycode, Float.toString(x), Float.toString(y), width, height);
+        this.isDynamicBtn = false;
 	}
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
@@ -116,9 +117,12 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY, float width, float height) {
-        this(name, keycode, 0, 0, width, height);
+        this.name = name;
+        this.keycode = keycode;
         this.dynamicX = dynamicX;
         this.dynamicY = dynamicY;
+        this.width = width;
+        this.height = height;
         this.isDynamicBtn = true;
         update();
     }
