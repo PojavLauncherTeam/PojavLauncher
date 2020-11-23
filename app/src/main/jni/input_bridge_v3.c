@@ -290,6 +290,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(JNIEnv* env, jclass clazz, jint width, jint height) {
+    savedWidth = width;
+    savedHeight = height;
+    
     if (isInputReady) {
         if (GLFW_invoke_FramebufferSize) {
             if (isUseStackQueueCall) {

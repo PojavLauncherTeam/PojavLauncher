@@ -190,8 +190,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *e
     RegalMakeCurrent(potatoBridge.eglContext);
 }
 
+bool isSizeSet;
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv *env, jclass clazz) {
-	  return eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+    if (!isSizeSet) {
+        isSizeSet = true;
+        Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(NULL, NULL, savedWidth, savedHeight);
+    }
+    return eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv *env, jclass clazz, jint interval) {

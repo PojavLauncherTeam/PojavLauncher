@@ -100,7 +100,7 @@ public class ControlData implements Cloneable
 	}
 
 	public ControlData(String name, int keycode, float x, float y, float width, float height) {
-        this(name, keycode, null, null, width, height);
+        this(name, keycode, Float.toString(x), Float.toString(y), width, height);
 	}
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
