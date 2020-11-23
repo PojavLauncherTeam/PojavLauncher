@@ -7,6 +7,7 @@ import org.lwjgl.glfw.*;
 
 public class CustomControls
 {
+    public float scaledAt;
 	public List<ControlData> mControlDataList;
 	public CustomControls() {
 		this(new ArrayList<ControlData>());
@@ -14,6 +15,7 @@ public class CustomControls
 	
 	public CustomControls(List<ControlData> mControlDataList) {
 		this.mControlDataList = mControlDataList;
+        this.scaledAt = 1f;
 	}
 	
 	// Generate default control

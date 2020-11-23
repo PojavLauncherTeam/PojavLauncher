@@ -69,8 +69,8 @@ public class ControlData implements Cloneable
 	public String name;
 	public float x;
 	public float y;
-	public int width = pixelOf50dp;
-	public int height = pixelOf50dp;
+	public float width = pixelOf50dp;
+	public float height = pixelOf50dp;
 	public int keycode;
 	public boolean hidden;
 	public boolean holdCtrl;
@@ -99,7 +99,7 @@ public class ControlData implements Cloneable
 		this(name, keycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
 	}
 
-	public ControlData(String name, int keycode, float x, float y, int width, int height) {
+	public ControlData(String name, int keycode, float x, float y, float width, float height) {
 		this.name = name;
 		this.keycode = keycode;
 		this.x = x;
@@ -121,7 +121,7 @@ public class ControlData implements Cloneable
         this(name, keycode, dynamicX, dynamicY, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
     }
 
-    public ControlData(String name, int keycode, String dynamicX, String dynamicY, int width, int height) {
+    public ControlData(String name, int keycode, String dynamicX, String dynamicY, float width, float height) {
         this(name, keycode, 0, 0, width, height);
         this.dynamicX = dynamicX;
         this.dynamicY = dynamicY;
@@ -146,10 +146,10 @@ public class ControlData implements Cloneable
         Map<String, String> keyValueMap = new ArrayMap<>();
         keyValueMap.put("top", "0");
         keyValueMap.put("left", "0");
-        keyValueMap.put("right", Integer.toString(CallbackBridge.windowWidth - width));
-        keyValueMap.put("bottom", Integer.toString(CallbackBridge.windowHeight - height));
-        keyValueMap.put("width", Integer.toString(width));
-        keyValueMap.put("height", Integer.toString(height));
+        keyValueMap.put("right", Float.toString(CallbackBridge.windowWidth - width));
+        keyValueMap.put("bottom", Float.toString(CallbackBridge.windowHeight - height));
+        keyValueMap.put("width", Float.toString(width));
+        keyValueMap.put("height", Float.toString(height));
         keyValueMap.put("screen_width", Integer.toString(CallbackBridge.windowWidth));
         keyValueMap.put("screen_height", Integer.toString(CallbackBridge.windowHeight));
         keyValueMap.put("margin", Integer.toString(pixelOf2dp));

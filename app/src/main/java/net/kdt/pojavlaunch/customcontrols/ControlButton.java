@@ -76,7 +76,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
             throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but is " + properties.specialButtonListener.getClass().getName());
         }
 
-        setLayoutParams(new FrameLayout.LayoutParams(properties.width, properties.height));
+        setLayoutParams(new FrameLayout.LayoutParams((int) properties.width, (int) properties.height));
     }
 
     @Override
@@ -86,23 +86,32 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         mProperties.width = params.width;
         mProperties.height = params.height;
         
+        // Re-calculate position
+        mProperties.update();
+        setTranslationX(mProperties.x);
+        setTranslationY(mProperties.y);
+        
         setModified(true);
     }
 
     @Override
     public void setTranslationX(float x) {
         super.setTranslationX(x);
-        mProperties.x = x;
 
-        setModified(true);
+        if (!mProperties.isDynamicBtn) {
+            mProperties.x = x;
+            setModified(true);
+        }
     }
 
     @Override
     public void setTranslationY(float y) {
         super.setTranslationY(y);
-        mProperties.y = y;
 
-        setModified(true);
+        if (!mProperties.isDynamicBtn) {
+            mProperties.y = y;
+            setModified(true);
+        }
     }
     
     public void updateProperties() {

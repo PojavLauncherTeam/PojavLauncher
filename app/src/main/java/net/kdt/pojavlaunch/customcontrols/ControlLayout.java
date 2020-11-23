@@ -8,6 +8,7 @@ import net.kdt.pojavlaunch.*;
 import android.support.v7.app.*;
 import java.util.*;
 import java.io.*;
+import net.kdt.pojavlaunch.prefs.*;
 
 public class ControlLayout extends FrameLayout
 {
@@ -46,6 +47,8 @@ public class ControlLayout extends FrameLayout
         
 		for (ControlData button : controlLayout.mControlDataList) {
             button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
+            button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+            button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
 			addControlView(button);
 		}
 
