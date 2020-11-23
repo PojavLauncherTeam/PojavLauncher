@@ -93,8 +93,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Beta</string>
-    <!-- Credit translators in this language, append your name there -->
-    <string name="mcl_about_translated_by">"Traduzido por: "</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_add">Adicionar</string>
