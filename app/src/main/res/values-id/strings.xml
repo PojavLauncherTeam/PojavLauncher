@@ -43,8 +43,6 @@
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
     <string name="error_load_version">Tidak bisa mengload versi! %s</string>
-    <string name="error_convert_lib">Gagal melakukan konversi pada library %s</string>
-    <string name="error_convert_client">Gagal melakukan konversi pada Minecraft %s</string>
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
@@ -179,7 +177,6 @@
     <string name="main_welcome">Selamat datang,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Beralih/ganti user</string>
-    <string name="main_version_">Versi:</string>
     <string name="main_nocrash">Tidak ada crash terdeteksi</string>
     <string name="main_nolog">Tidak ada catatan log.</string>
 </resources>
