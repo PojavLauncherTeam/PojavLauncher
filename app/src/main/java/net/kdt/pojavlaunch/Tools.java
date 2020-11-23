@@ -609,9 +609,12 @@ public final class Tools
             }
         }
     }
-
+    
+    public static String convertStream(InputStream inputStream) throws IOException {
+        return convertStream(inputStream, Charset.forName("UTF-8"));
+    }
+    
     public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
-
         String out = "";
         int len;
         byte[] buf = new byte[512];
@@ -701,7 +704,7 @@ public final class Tools
         return buffer;
     }
 
-    public static void downloadFile(String urlInput, String nameOutput) throws Throwable {
+    public static void downloadFile(String urlInput, String nameOutput) throws IOException {
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }

@@ -1,4 +1,5 @@
 package net.kdt.pojavlaunch.installers;
+
 import android.content.*;
 import java.io.*;
 import java.util.jar.*;
@@ -9,46 +10,45 @@ import org.apache.commons.io.*;
 import com.google.gson.*;
 import java.util.zip.*;
 
-public class ForgeInstaller extends BaseInstaller {
-    public ForgeInstaller(BaseInstaller i) {
+public class NewForgeInstaller extends BaseInstaller {
+    public NewForgeInstaller(BaseInstaller i) {
         from(i);
     }
-    
+
     @Override
     public void install(LoggableActivity ctx) throws IOException {
         String target;
-        
+
         ctx.appendlnToLog("Reading install_profile.json");
         ForgeInstallProfile profile = readInstallProfile(this);
-            
+
         // Write the json file
-        File versionFile = new File(Tools.versnDir, profile.install.target);
+        File versionFile = new File(Tools.versnDir, profile.version);
         versionFile.mkdir();
-        target = versionFile.getAbsolutePath() + "/" + profile.install.target + ".json";
+        target = versionFile.getAbsolutePath() + "/" + profile.version + ".json";
         ctx.appendlnToLog("Writing " + target);
         Tools.write(
             target,
-            Tools.GLOBAL_GSON.toJson(profile.versionInfo)
+            Tools.convertStream(mJarFile.getInputStream(mJarFile.getEntry(profile.json)))
         );
-        
-        // Extract Forge universal
-        String[] libInfos = profile.install.path.split(":");
+
+        // Forge 1.12.2+ installer does not include universal, so download
+        // Users are already go throught Forge ads to download installer, so not again.
+        String[] libInfos = profile.path.split(":");
         File libraryFile = new File(Tools.libraries, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         libraryFile.getParentFile().mkdirs();
-        target = libraryFile.getAbsolutePath().replace("-universal", "");
-        ctx.appendlnToLog("Writing " + target);
-        FileOutputStream out = new FileOutputStream(target);
-        IOUtils.copy(mJarFile.getInputStream(mJarFile.getEntry(profile.install.filePath)), out);
-        out.close();
+        target = libraryFile.getAbsolutePath();
+        String downloadPath = "https://files.minecraftforge.net/maven/" + profile.path.replace(":", "/") + "/forge-" + libInfos[2] + "-universal.jar";
+        ctx.appendlnToLog("Downloading " + target);
+        Tools.downloadFile(downloadPath, target);
     }
-    
+
     public static ForgeInstallProfile readInstallProfile(BaseInstaller base) throws IOException, JsonSyntaxException {
         ZipEntry entry = base.mJarFile.getEntry("install_profile.json");
         return entry == null ? null : Tools.GLOBAL_GSON.fromJson(
-                Tools.convertStream(
-                    base.mJarFile.getInputStream(entry),
-                    Charset.forName("UTF-8")
-                ),
+            Tools.convertStream(
+                base.mJarFile.getInputStream(entry)
+            ),
             ForgeInstallProfile.class
         );
     }

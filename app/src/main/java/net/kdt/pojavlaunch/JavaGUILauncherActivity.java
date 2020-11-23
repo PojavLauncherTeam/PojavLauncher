@@ -115,9 +115,12 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         installer.setInput(modFile);
         
         if (InstallerDetector.isForgeLegacy(installer)) {
-            appendlnToLog("Detected Forge installer!");
-            new ForgeInstaller(installer).install(this);
-        } else {
+            appendlnToLog("Detected Forge Installer 1.12.1 or below!");
+            new LegacyForgeInstaller(installer).install(this);
+        } else if (InstallerDetector.isForgeNew(installer)) {
+            appendlnToLog("Detected Forge Installer 1.12.2 or above!");
+            new NewForgeInstaller(installer).install(this);
+        }  else {
             appendlnToLog("No mod detected. Starting JVM");
             isLogAllow = false;
             mSkipDetectMod = true;
