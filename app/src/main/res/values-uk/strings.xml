@@ -41,8 +41,6 @@
     <string name="error_checklog">Помилка! Будь ласка, перевірте журнал нижче: %s</string>
     <string name="error_no_version">Немає версій!</string>
     <string name="error_load_version">Не вдалося завантажити версію %s</string>
-    <string name="error_convert_lib">Не вдалося конвертувати бібліотеку %s</string>
-    <string name="error_convert_client">Не вдалося конвертувати Minecraft %s</string>
     <string name="error_show_more">Розвернути</string>
     <string name="error_show_less">Звернути</string>
     <!-- Toast messages -->
@@ -165,7 +163,6 @@
     <string name="main_welcome">Ласкаво просимо,</string>
     <string name="main_infodev">Інфо (Розробник)</string>
     <string name="main_switchuser">Змінити користувача</string>
-    <string name="main_version_">Версія:</string>
     <string name="main_nocrash">Збоїв не виявлено</string>
     <string name="main_nolog">Немає записів.</string>
 </resources>
