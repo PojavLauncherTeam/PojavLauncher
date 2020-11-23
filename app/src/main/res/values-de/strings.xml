@@ -41,8 +41,6 @@
     <string name="error_checklog">Fehler! Bitte überprüfen sie das untenstehende Protokoll: %s</string>
     <string name="error_no_version">Keine Version</string>
     <string name="error_load_version">Die Version %s konnte nicht geladen werden</string>
-    <string name="error_convert_lib">Die Bibliothek %s konnte nicht konvertiert werden</string>
-    <string name="error_convert_client">Minecraft %s konnte nicht konvertiert werden</string>
     <string name="error_show_more">Mehr anzeigen</string>
     <string name="error_show_less">Weniger anzeigen</string>
     <!-- Toast messages -->
@@ -151,7 +149,6 @@
     <string name="main_welcome">Wilkommen,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Benutzer wechseln</string>
-    <string name="main_version_">Version:</string>
     <string name="main_nocrash">Kein Absturz festgestellt</string>
     <string name="main_nolog">Kein Protokoll.</string>
 </resources>
