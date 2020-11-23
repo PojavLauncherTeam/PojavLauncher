@@ -43,8 +43,6 @@
     <string name="error_checklog">Errore! Per favore controlla i log sotto: %s</string>
     <string name="error_no_version">Nessuna versione!</string>
     <string name="error_load_version">Impossibile caricare la versione %s</string>
-    <string name="error_convert_lib">Impossibile convertire la libreria %s</string>
-    <string name="error_convert_client">Impossibile convertire Minecraft %s</string>
     <string name="error_show_more">Mostra altro</string>
     <string name="error_show_less">Mostra meno</string>
     <!-- Toast messages -->
@@ -181,7 +179,6 @@
     <string name="main_welcome">Benvenuto,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Cambia utente</string>
-    <string name="main_version_">Versione:</string>
     <string name="main_nocrash">Nessun crash rilevato</string>
     <string name="main_nolog">Nessun log.</string>
 </resources>
