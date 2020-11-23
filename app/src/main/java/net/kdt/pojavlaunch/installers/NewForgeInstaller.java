@@ -16,7 +16,7 @@ public class NewForgeInstaller extends BaseInstaller {
     }
 
     @Override
-    public void install(LoggableActivity ctx) throws IOException {
+    public void install(JavaGUILauncherActivity ctx) throws IOException {
         String target;
 
         ctx.appendlnToLog("Reading install_profile.json");
@@ -42,6 +42,8 @@ public class NewForgeInstaller extends BaseInstaller {
         String downloadPath = "https://files.minecraftforge.net/maven/" + profile.path.replace(":", "/").replace("net.minecraftforge","net/minecraftforge") + "/forge-" + libInfos[2] + "-universal.jar";
         ctx.appendlnToLog("Downloading " + target);
         Tools.downloadFile(downloadPath, target);
+        
+        mJarFile.close();
     }
 
     public static ForgeInstallProfile readInstallProfile(BaseInstaller base) throws IOException, JsonSyntaxException {

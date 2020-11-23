@@ -13,7 +13,7 @@ public class BaseInstaller {
         mJarFile = new ZipFile(file);
     }
     
-    public void install(LoggableActivity ctx) throws IOException {}
+    public void install(JavaGUILauncherActivity ctx) throws IOException {}
     
     public void from(BaseInstaller base) {
         mFile = base.mFile;

@@ -344,7 +344,7 @@ public final class Tools
     public static float dpToPx(float dp) {
         // 921600 = 1280 * 720, default scale
         // TODO better way to scaling
-        float scaledDp = dp / DisplayMetrics.DENSITY_XHIGH * currentDisplayMetrics.densityDpi;
+        float scaledDp = dp; // / DisplayMetrics.DENSITY_XHIGH * currentDisplayMetrics.densityDpi;
         return (scaledDp * currentDisplayMetrics.density);
     }
 

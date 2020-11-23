@@ -15,7 +15,7 @@ public class LegacyForgeInstaller extends BaseInstaller {
     }
     
     @Override
-    public void install(LoggableActivity ctx) throws IOException {
+    public void install(JavaGUILauncherActivity ctx) throws IOException {
         String target;
         
         ctx.appendlnToLog("Reading install_profile.json");
@@ -40,6 +40,8 @@ public class LegacyForgeInstaller extends BaseInstaller {
         FileOutputStream out = new FileOutputStream(target);
         IOUtils.copy(mJarFile.getInputStream(mJarFile.getEntry(profile.install.filePath)), out);
         out.close();
+        
+        mJarFile.close();
     }
     
     public static ForgeInstallProfile readInstallProfile(BaseInstaller base) throws IOException, JsonSyntaxException {

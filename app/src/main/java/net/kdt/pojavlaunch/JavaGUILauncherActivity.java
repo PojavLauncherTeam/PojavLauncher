@@ -2,14 +2,16 @@ package net.kdt.pojavlaunch;
 
 import android.graphics.*;
 import android.os.*;
+import android.support.v7.app.*;
+import android.util.*;
 import android.view.*;
 import android.widget.*;
 import java.io.*;
 import java.util.*;
+import net.kdt.pojavlaunch.installers.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
-import net.kdt.pojavlaunch.installers.*;
-import android.util.*;
+import android.content.*;
 
 public class JavaGUILauncherActivity extends LoggableActivity {
     private AWTCanvasView mTextureView;
@@ -20,6 +22,8 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
     private File logFile;
     private PrintStream logStream;
+    
+    private Object mDialogLock;
 
     private boolean isLogAllow, mSkipDetectMod;
 
@@ -56,7 +60,6 @@ public class JavaGUILauncherActivity extends LoggableActivity {
            
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
             if (mSkipDetectMod) {
-                JREUtils.redirectAndPrintJRELog(this, null);
                 new Thread(new Runnable(){
                         @Override
                         public void run() {
@@ -78,7 +81,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                                             Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                            } catch (IOException e) {
+                            } catch (Throwable e) {
                                 appendlnToLog("Install failed:");
                                 appendlnToLog(Log.getStackTraceString(e));
                                 Tools.showError(JavaGUILauncherActivity.this, e);
@@ -89,6 +92,42 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
+    }
+    
+    public String dialogInput(final String title, final int message) {
+        final StringBuilder str = new StringBuilder();
+        
+        runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    final EditText editText = new EditText(JavaGUILauncherActivity.this);
+                    editText.setHint(message);
+                    editText.setSingleLine();
+                    
+                    AlertDialog.Builder d = new AlertDialog.Builder(JavaGUILauncherActivity.this);
+                    d.setCancelable(false);
+                    d.setTitle(title);
+                    d.setView(message);
+                    d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                            @Override
+                            public void onClick(DialogInterface i, int id) {
+                                str.append(editText.getText().toString());
+                                mDialogLock.notifyAll();
+                            }
+                        });
+                }
+            });
+
+        try {
+            synchronized (mDialogLock) {
+                mDialogLock.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        return str.toString();
     }
 
     public void forceClose(View v) {
@@ -120,16 +159,19 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         } else if (InstallerDetector.isForgeNew(installer)) {
             appendlnToLog("Detected Forge Installer 1.12.2 or above!");
             new NewForgeInstaller(installer).install(this);
-        }  else {
+        } else if (InstallerDetector.isFabric(installer)) {
+            appendlnToLog("Detected Fabric Installer!");
+            new FabricInstaller(installer).install(this);
+        } else {
             appendlnToLog("No mod detected. Starting JVM");
             isLogAllow = false;
             mSkipDetectMod = true;
-            JREUtils.redirectAndPrintJRELog(this, null);
             launchJavaRuntime(modFile, javaArgs);
         }
     }
 
-    private void launchJavaRuntime(File modFile, String javaArgs) {
+    public void launchJavaRuntime(File modFile, String javaArgs) {
+        JREUtils.redirectAndPrintJRELog(this, null);
         try {
             List<String> javaArgList = new ArrayList<String>();
 
