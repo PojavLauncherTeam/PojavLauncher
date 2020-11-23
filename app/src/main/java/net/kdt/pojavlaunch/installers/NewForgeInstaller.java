@@ -39,7 +39,7 @@ public class NewForgeInstaller extends BaseInstaller {
         File libraryFile = new File(Tools.libraries, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         libraryFile.getParentFile().mkdirs();
         target = libraryFile.getAbsolutePath();
-        String downloadPath = "https://files.minecraftforge.net/maven/" + profile.path.replace(":", "/") + "/forge-" + libInfos[2] + "-universal.jar";
+        String downloadPath = "https://files.minecraftforge.net/maven/" + profile.path.replace(":", "/").replace("net.minecraftforge","net/minecraftforge" + "/forge-" + libInfos[2] + "-universal.jar";
         ctx.appendlnToLog("Downloading " + target);
         Tools.downloadFile(downloadPath, target);
     }
