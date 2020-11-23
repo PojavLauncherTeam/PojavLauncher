@@ -42,8 +42,6 @@
     <string name="error_checklog">Fout! Controleer het log hieronder: %s</string>
     <string name="error_no_version">Geen versie!</string>
     <string name="error_load_version">Versie %s kan niet geladen worden</string>
-    <string name="error_convert_lib">Kan bibliotheek %s niet converteren</string>
-    <string name="error_convert_client">Kan Minecraft %s niet converteren</string>
     <string name="error_show_more">Meer weergeven</string>
     <string name="error_show_less">Minder weergeven</string>
     <!-- Toast messages -->
@@ -171,7 +169,6 @@
     <string name="main_welcome">Welkom,</string>
     <string name="main_infodev">Informatie (DEV)</string>
     <string name="main_switchuser">Gebruiker wijzigen</string>
-    <string name="main_version_">Versie:</string>
     <string name="main_nocrash">Geen crash gedetecteerd</string>
     <string name="main_nolog">Geen log.</string>
 </resources>
