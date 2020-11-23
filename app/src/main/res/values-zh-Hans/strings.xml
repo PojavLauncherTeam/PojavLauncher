@@ -93,8 +93,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    <!-- Credit translators in this language, append your name there -->
-    <string name="mcl_about_translated_by">"翻译者：Blockcity（Ratizux） "</string>
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
     <string name="global_add">添加</string>
