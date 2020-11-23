@@ -116,6 +116,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                                 mDialogLock.notifyAll();
                             }
                         });
+                    d.show();
                 }
             });
 
