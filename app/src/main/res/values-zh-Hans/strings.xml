@@ -43,8 +43,6 @@
     <string name="error_checklog">错误！检查下方日志： %s</string>
     <string name="error_no_version">无版本！</string>
     <string name="error_load_version">无法加载版本 %s</string>
-    <string name="error_convert_lib">无法转换运行库 %s</string>
-    <string name="error_convert_client">无法转换 Minecraft %s</string>
     <string name="error_show_more">显示细节</string>
     <string name="error_show_less">隐藏细节</string>
     <!-- Toast messages -->
@@ -179,7 +177,6 @@
     <string name="main_welcome">欢迎，</string>
     <string name="main_infodev">信息（开发）</string>
     <string name="main_switchuser">切换用户</string>
-    <string name="main_version_">版本：</string>
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
 </resources>
