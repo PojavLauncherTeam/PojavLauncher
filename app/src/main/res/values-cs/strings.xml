@@ -43,8 +43,6 @@
     <string name="error_checklog">Chyba! Zkontrolujte záznam níže: %s</string>
     <string name="error_no_version">Žádná verze!</string>
     <string name="error_load_version">Nelze načíst verzi %s</string>
-    <string name="error_convert_lib">Nelze převést knihovnu %s</string>
-    <string name="error_convert_client">Nelze převést Minecraft %s</string>
     <string name="error_show_more">Zobrazit více</string>
     <string name="error_show_less">Zobrazit méně</string>
     <!-- Toast messages -->
@@ -175,7 +173,6 @@
     <string name="main_welcome">Vítej,</string>
     <string name="main_infodev">Údaje (DEV)</string>
     <string name="main_switchuser">Přepnout uživatele</string>
-    <string name="main_version_">Verze:</string>
     <string name="main_nocrash">Nenalezen žádný pád</string>
     <string name="main_nolog">Žádný záznam.</string>
 </resources>
