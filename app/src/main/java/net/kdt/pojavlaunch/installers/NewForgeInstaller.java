@@ -27,7 +27,7 @@ public class NewForgeInstaller extends BaseInstaller {
         versionFile.mkdir();
         target = versionFile.getAbsolutePath() + "/" + profile.version + ".json";
         ctx.appendlnToLog("Writing " + target + " from " + profile.json);
-        ZipEntry versionJson = mJarFile.getEntry(profile.json==null ? "/version.json" : profile.json);
+        ZipEntry versionJson = mJarFile.getEntry(profile.json==null ? "version.json" : profile.json.substring(profile.json.indexOf("/")+1,profile.json.length());
         Tools.write(
             target,
             Tools.convertStream(mJarFile.getInputStream(versionJson))
