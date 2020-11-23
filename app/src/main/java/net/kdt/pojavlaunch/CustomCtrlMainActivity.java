@@ -100,13 +100,12 @@ public class CustomCtrlMainActivity extends BaseMainActivity {
             = mTouchListener;
         
         mControlLayout = findViewById(R.id.main_control_layout);
+        mControlLayout.setModifiable(false);
         try {
             mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
         } catch (Throwable th) {
             Tools.showError(this, th);
         }
-        
-        mControlLayout.setModifiable(false);
         
         // toggleGui(null);
         mControlLayout.toggleControlVisible();

@@ -38,11 +38,8 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
-        for (int i = 0; i < getChildCount(); i++) {
-            View v = getChildAt(i);
-            if (v instanceof ControlButton) {
-                removeControlButton((ControlButton) v);
-            }
+        if (mModifiable) {
+            removeAllViews();
         }
 
 		mLayout = controlLayout;

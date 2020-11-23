@@ -1,19 +1,13 @@
 [![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)](https://github.com/PojavLauncherTeam/PojavLauncher/actions)
 [![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
+[**Discord server**](https://discord.gg/6RpEJda)
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
 
-## This branch?
-- Attempt to run Minecraft in OpenJDK, similar way with Boardwalk 2.
-
-## About OpenJDK 9 Java Runtime Mobile
-Build script: [PojavLauncherTeam/android-openjdk-build-multiarch](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch)<br>
-Source code: http://hg.openjdk.java.net/mobile/jdk9 <br>
-Architectures:
-- For ARMv7 (aarch32): **working**.
-- For ARM64 (aarch64): **working**.
-- For x86 (i\*86): **working**.
-- For x86_64 (amd64): **working**.
+## Mainly features on v3
+- Launch Minecraft 1.6 to latest 1.17 snapshot.
+- Launch Forge up to 1.13.2. To install Forge 1.12.2 and below, simply put to mod install launcher. For Forge 1.13.2, use custom arguments.
+- Launch Fabric any versions. [How to install Fabric](https://github.com/PojavLauncherTeam/PojavLauncher/wiki/Install-Fabric).
 
 ## Building
 - Because languages are auto added by Crowdin, so need to run language list generator before build. In this directory, run:
@@ -28,14 +22,12 @@ scripts\languagelist_updater.bat
 - Then, build use Android Studio.
 
 ## Current status
-- [x] **Removed** ~~BinaryExecutor: execute `java` binary, no `JNIInvocation`.~~
-- [x] **Temporary removed** ~~JVDroid OpenJDK 11 (32 and 64-bit ARM and x86). Partial, no error `can't lock mutex`, but now exit with none output.~~
 - [x] OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.
+- [x] OpenJDK 8 Mobile port: ARM64, x86, x86_64
 - [x] Mod installer headless
-- [ ] Mod installer with GUI. Will try own graphics environment~~use `Caciocavallo` project~~.
+- [ ] Mod installer with GUI. Little run on `Caciocavallo` project.
 - [x] OpenGL in OpenJDK environment
 - [x] OpenAL (work on most devices)
-- [x] Input keyboard and mouse events from ART to OpenJDK environment
 - [x] Support Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
 - [x] Support Minecraft 1.13 and above. Used [GLFW stub](https://github.com/PojavLauncherTeam/lwjgl3-glfw-java).
 - [ ] Game surface zooming.
@@ -43,4 +35,13 @@ scripts\languagelist_updater.bat
 - [ ] More...
 
 ## License
-- PojavLauncher is licensed under GPLv3.
+- PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
+
+## Third party components and it's licenses
+- [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): [Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE).
+- Android Support Libraries: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
+- [GL4ES](https://github.com/ptitSeb/gl4es): [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
+- [OpenJDK](https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u): [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
+- [LWJGL3](https://github.com/PojavLauncherTeam/lwjgl3): [BSD-3 License](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md).
+- [LWJGLX](https://github.com/PojavLauncherTeam/lwjglx) (LWJGL2 API compatibility layer for LWJGL3): unknown license.<br>
+
