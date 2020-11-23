@@ -43,8 +43,6 @@
     <string name="error_checklog">Erreur! Veuillez vérifier le journal ci-dessous: %s</string>
     <string name="error_no_version">Aucune version!</string>
     <string name="error_load_version">Impossible de charger la version %s</string>
-    <string name="error_convert_lib">Impossible de convertir la bibliothèque %s</string>
-    <string name="error_convert_client">Impossible de convertir Minecraft %s</string>
     <string name="error_show_more">Affiche plus</string>
     <string name="error_show_less">Afficher moins</string>
     <!-- Toast messages -->
@@ -181,7 +179,6 @@
     <string name="main_welcome">Bienvenue,</string>
     <string name="main_infodev">Informations (DEV)</string>
     <string name="main_switchuser">Changer d\'utilisateur</string>
-    <string name="main_version_">Version:</string>
     <string name="main_nocrash">Aucun plantage détecté</string>
     <string name="main_nolog">Pas de journal.</string>
 </resources>
