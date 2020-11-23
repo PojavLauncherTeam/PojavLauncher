@@ -43,8 +43,6 @@
     <string name="error_checklog">Lỗi! Vui lòng kiểm tra nhật kí bên dưới: %s</string>
     <string name="error_no_version">Không có phiên bản!</string>
     <string name="error_load_version">Không thể tải phiên bản %s</string>
-    <string name="error_convert_lib">Không thể chuyển đổi thư viện %s</string>
-    <string name="error_convert_client">Không thể chuyển đổi Minecraft %s</string>
     <string name="error_show_more">Hiển thị thêm</string>
     <string name="error_show_less">Hiển thị ít hơn</string>
     <!-- Toast messages -->
@@ -179,7 +177,6 @@
     <string name="main_welcome">Chào mừng,</string>
     <string name="main_infodev">Thông tin (DEV)</string>
     <string name="main_switchuser">Đổi người dùng</string>
-    <string name="main_version_">Phiên bản:</string>
     <string name="main_nocrash">Không phát hiện sự cố</string>
     <string name="main_nolog">Không có bản ghi.</string>
 </resources>
