@@ -84,6 +84,8 @@
     <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Nessario Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
+    <string name="mcl_setting_title_buttonscale">Ridimensionamento controlli</string>
+    <string name="mcl_setting_subtitle_buttonscale">Ingrandisci i pulsanti se sono troppo piccoli.</string>
     <string name="mcl_setting_title_controlsize">Imposta dimensione dei pulsanti di controllo</string>
     <string name="mcl_setting_title_javaargs">Argomenti di avvio JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attento, questo potrebbe far crashare il gioco se modificato senza sapere quello che fai.</string>
