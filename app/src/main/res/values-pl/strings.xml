@@ -41,8 +41,6 @@
     <string name="error_checklog">Błąd! Sprawdź dziennik poniżej: %s</string>
     <string name="error_no_version">Brak wersji!</string>
     <string name="error_load_version">Nie można załadować wersji %s</string>
-    <string name="error_convert_lib">Nie można przekonwertować biblioteki %s</string>
-    <string name="error_convert_client">Nie można przekonwertować %s Minecrafta</string>
     <string name="error_show_more">Pokaż więcej</string>
     <string name="error_show_less">Pokaż mniej</string>
     <!-- Toast messages -->
@@ -165,7 +163,6 @@
     <string name="main_welcome">Witaj,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Przełącz użytkownika</string>
-    <string name="main_version_">Wersja:</string>
     <string name="main_nocrash">Nie wykryto awarii</string>
     <string name="main_nolog">Brak plików dziennika.</string>
 </resources>
