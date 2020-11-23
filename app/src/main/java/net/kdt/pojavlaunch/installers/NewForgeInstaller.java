@@ -26,10 +26,11 @@ public class NewForgeInstaller extends BaseInstaller {
         File versionFile = new File(Tools.versnDir, profile.version);
         versionFile.mkdir();
         target = versionFile.getAbsolutePath() + "/" + profile.version + ".json";
-        ctx.appendlnToLog("Writing " + target);
+        ctx.appendlnToLog("Writing " + target + " from " + profile.json);
+        ZipEntry versionJson = mJarFile.getEntry(profile.json==null ? "/version.json" : profile.json);
         Tools.write(
             target,
-            Tools.convertStream(mJarFile.getInputStream(mJarFile.getEntry(profile.json==null ? "/version.json" : profile.json)))
+            Tools.convertStream(mJarFile.getInputStream(versionJson))
         );
 
         // Forge 1.12.2+ installer does not include universal, so download
