@@ -42,8 +42,6 @@
     <string name="error_checklog">Hata! Lütfen aşağıdaki günlüğe bakınız: %s</string>
     <string name="error_no_version">Sürüm yok!</string>
     <string name="error_load_version">%s sürümü yüklenemedi</string>
-    <string name="error_convert_lib">%s kütüphanesi çevrilemedi</string>
-    <string name="error_convert_client">Minecraft %s çevrilemedi</string>
     <string name="error_show_more">Daha fazla göster</string>
     <string name="error_show_less">Daha az göster</string>
     <!-- Toast messages -->
@@ -171,7 +169,6 @@
     <string name="main_welcome">Hoşgeldiniz,</string>
     <string name="main_infodev">Bilgi (Geliştirici)</string>
     <string name="main_switchuser">Kullanıcı değiştir</string>
-    <string name="main_version_">Sürüm:</string>
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
 </resources>
