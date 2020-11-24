@@ -149,7 +149,7 @@ jboolean lwjgl2_callCharEvent(jchar keyChar) {
     } else if (!lwjgl2KeyboardClass && !lwjgl2KeyboardCharMethod) {
         lwjgl2KeyboardClass = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/input/Keyboard");
         assert(lwjgl2KeyboardClass != NULL);
-        lwjgl2KeyboardCharMethod = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "addCharEvent", "(IC)V");
+        lwjgl2KeyboardCharMethod = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, lwjgl2KeyboardClass, "addCharEvent", "(IC)V");
         assert(lwjgl2KeyboardCharMethod != NULL);
     }
     
