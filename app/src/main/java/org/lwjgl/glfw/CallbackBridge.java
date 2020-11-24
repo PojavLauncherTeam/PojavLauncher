@@ -48,7 +48,7 @@ public class CallbackBridge {
     public static void sendKeycode(int keycode, char keychar, int modifiers, boolean isDown) {
         DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
         // TODO CHECK: This may cause input issue, not receive input!
-        if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar((int) keychar)) {
+        if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar(keychar)) {
             nativeSendKey(keycode, 0 /* scancode */, isDown ? 1 : 0, modifiers);
         }
         
@@ -124,7 +124,7 @@ public class CallbackBridge {
 */
 
     public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
-    private static native boolean nativeSendChar(int codepoint);
+    private static native boolean nativeSendChar(char codepoint /* int codepoint */);
     // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
     private static native boolean nativeSendCharMods(int codepoint, int mods);
     // private static native void nativeSendCursorEnter(int entered);
