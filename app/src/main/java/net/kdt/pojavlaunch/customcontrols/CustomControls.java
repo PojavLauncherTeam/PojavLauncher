@@ -15,7 +15,7 @@ public class CustomControls
 	
 	public CustomControls(List<ControlData> mControlDataList) {
 		this.mControlDataList = mControlDataList;
-        this.scaledAt = 1f;
+        this.scaledAt = 100f;
 	}
 	
 	// Generate default control
