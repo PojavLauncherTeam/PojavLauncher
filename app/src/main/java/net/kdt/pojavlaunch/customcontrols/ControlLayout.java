@@ -43,7 +43,6 @@ public class ControlLayout extends FrameLayout
         }
 
 		mLayout = controlLayout;
-        mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
         
 		for (ControlData button : controlLayout.mControlDataList) {
             button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
@@ -56,6 +55,7 @@ public class ControlLayout extends FrameLayout
             button.update();
 			addControlView(button);
 		}
+        mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
 
 		setModified(false);
 	}
