@@ -82,6 +82,7 @@
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan oencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
+    <string name="mcl_setting_title_buttonscale">Scaling tombol kontrol</string>
     <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
     <string name="mcl_setting_title_javaargs">Argumen untuk meluncurkan JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Hati-hati, ini bisa meng-crash permainan jika di-ubah tanpa pengetahuan.</string>
