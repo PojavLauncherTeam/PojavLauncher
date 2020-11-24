@@ -82,6 +82,8 @@
     <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+。</string>
     <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长。</string>
+    <string name="mcl_setting_title_buttonscale">控制键缩放</string>
+    <string name="mcl_setting_subtitle_buttonscale">若按键太小，将其放大。</string>
     <string name="mcl_setting_title_controlsize">设定控制键大小</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
     <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
@@ -177,6 +179,7 @@
     <string name="main_welcome">欢迎，</string>
     <string name="main_infodev">信息（开发）</string>
     <string name="main_switchuser">切换用户</string>
+    <string name="main_version">版本:</string>
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
 </resources>
