@@ -143,7 +143,7 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
     );
 }
 
-jboolean lwjgl2_callCharEvent(jchar keyChar) {
+jboolean lwjgl2_triggerCharEvent(jchar keyChar) {
     if (!runtimeJNIEnvPtr_ANDROID) {
         return JNI_FALSE;
     } else if (!lwjgl2KeyboardClass && !lwjgl2KeyboardCharMethod) {
