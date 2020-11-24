@@ -34,10 +34,14 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
+int savedKeycode;
 int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
+
+jclass lwjgl2KeyboardClass;
+jmethodID lwjgl2KeyboardCharMethod;
 
 jboolean isGrabbing;
 
@@ -139,6 +143,26 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
     );
 }
 
+jboolean lwjgl2_callCharEvent(jchar keyChar) {
+    if (!runtimeJNIEnvPtr_ANDROID) {
+        return JNI_FALSE;
+    } else if (!lwjgl2KeyboardClass && !lwjgl2KeyboardCharMethod) {
+        lwjgl2KeyboardClass = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/input/Keyboard");
+        assert(lwjgl2KeyboardClass != NULL);
+        lwjgl2KeyboardCharMethod = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "addCharEvent", "(IC)V");
+        assert(lwjgl2KeyboardCharMethod != NULL);
+    }
+    
+    (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_ANDROID,
+        lwjgl2KeyboardClass,
+        lwjgl2KeyboardCharMethod,
+        (jint) savedKeycode, keyChar
+    );
+    
+    return JNI_TRUE;
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueueBool) {
 #ifdef DEBUG
     LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueue);
@@ -191,12 +215,13 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
     return isGrabbing;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jint codepoint) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jchar codepoint /* jint codepoint */) {
     if (GLFW_invoke_Char && isInputReady) {
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
         } else {
-            GLFW_invoke_Char(showingWindow, (unsigned int) codepoint);
+            // GLFW_invoke_Char(showingWindow, (unsigned int) codepoint);
+            return lwjgl2_triggerCharEvent(codepoint);
         }
         return JNI_TRUE;
     }
@@ -208,7 +233,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR_MODS, (unsigned int) codepoint, mods, 0, 0);
         } else {
-            GLFW_invoke_CharMods(showingWindow, codepoint, mods);
+            // GLFW_invoke_CharMods(showingWindow, codepoint, mods);
+            return JNI_FALSE;
         }
         return JNI_TRUE;
     }
@@ -269,6 +295,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_KEY, key, scancode, action, mods);
         } else {
+            savedKeycode = key;
             GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
         }
     }
