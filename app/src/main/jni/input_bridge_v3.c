@@ -35,7 +35,6 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
-int savedKeycode;
 int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
@@ -119,15 +118,12 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
     if (*method == NULL && runtimeJNIEnvPtr_ANDROID != NULL) {
         *clazz = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/glfw/CallbackBridge");
         assert(*clazz != NULL);
-        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IIIIII)V");
+        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IIIII)V");
         assert(*method != NULL);
     }
 }
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
-    sendData(type, i1, i2, i3, i4, 0);
-}
-void sendData(int type, int i1, int i2, int i3, int i4, int i5) {
 #ifdef DEBUG
     LOGD("Debug: Send data, jnienv.isNull=%d\n", runtimeJNIEnvPtr_ANDROID == NULL);
 #endif
@@ -140,7 +136,7 @@ void sendData(int type, int i1, int i2, int i3, int i4, int i5) {
         inputBridgeClass_ANDROID,
         inputBridgeMethod_ANDROID,
         type,
-        i1, i2, i3, i4, i5
+        i1, i2, i3, i4
     );
 }
 
@@ -275,7 +271,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_KEY, key, scancode, action, mods);
         } else {
-            savedKeycode = key;
             GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
         }
     }
@@ -283,13 +278,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKeycode(JNIEnv* env, jclass clazz, jint keycode, jchar keychar, jint scancode, jint action, jint mods) {
     if (isInputReady) {
-        if (isUseStackQueue) {
-            if (!Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(env, clazz, keychar, mods) && !Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(env, clazz, keychar)) {
-                Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(env, clazz, keycode, action, mods);
-            }
-        } else {
-            sendData(EVENT_TYPE_KEYCODE, keycode, keychar, scancode, action, mods);
+        if (!Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(env, clazz, keychar, mods)) {
+            Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(env, clazz, keychar);
         }
+        Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(env, clazz, keycode, action, mods);
     }
 }
 
