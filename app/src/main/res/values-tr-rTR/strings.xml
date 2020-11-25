@@ -25,6 +25,7 @@
     <string name="login_select_account">Hesap seçin</string>
     <!-- Hint -->
     <string name="hint_select_account">Seçmek için tıklayın. Silmek icin basılı tutun.</string>
+    <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warning -->
     <string name="warning_title">Uyarı</string>
     <string name="warning_msg">Bu uygulama cihazınızın Android sürümüyle (Android 7.0 ve üstü) uyumlu olmayabilir. VMOS\'u indirip uygulamayı VMOS\'de açabilirsin. Ancak VMOS Google Play mağazasından kaldırıldı, onu manuel olarak indirmelisin.</string>
@@ -42,8 +43,6 @@
     <string name="error_checklog">Hata! Lütfen aşağıdaki günlüğe bakınız: %s</string>
     <string name="error_no_version">Sürüm yok!</string>
     <string name="error_load_version">%s sürümü yüklenemedi</string>
-    <string name="error_convert_lib">%s kütüphanesi çevrilemedi</string>
-    <string name="error_convert_client">Minecraft %s çevrilemedi</string>
     <string name="error_show_more">Daha fazla göster</string>
     <string name="error_show_less">Daha az göster</string>
     <!-- Toast messages -->
@@ -83,6 +82,8 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerekir</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
+    <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
+    <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
     <string name="mcl_setting_title_controlsize">Kontrol düğmelerinin büyüklüğünü ayarla</string>
     <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
@@ -92,7 +93,6 @@
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
-    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Ekle</string>
@@ -165,6 +165,13 @@
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_specialkey">Özel Tuş</string>
     <string name="customctrl_hidden">Gizli</string>
+    <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
+    <string name="customctrl_dynamicpos_x">Dinamik X</string>
+    <string name="customctrl_dynamicpos_y">Dinamik Y</string>
+    <string name="customctrl_keycombine">Anahtar Kombinasyonu</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
     <string name="main_options">Ayarlar</string>
@@ -172,7 +179,7 @@
     <string name="main_welcome">Hoşgeldiniz,</string>
     <string name="main_infodev">Bilgi (Geliştirici)</string>
     <string name="main_switchuser">Kullanıcı değiştir</string>
-    <string name="main_version_">Sürüm:</string>
+    <string name="main_version">Sürüm:</string>
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
 </resources>
