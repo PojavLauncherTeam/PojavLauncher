@@ -25,7 +25,7 @@
     <string name="login_select_account">Выбрать профиль</string>
     <!-- Hint -->
     <string name="hint_select_account">Для выбора, нажмите. Для удаления, нажмите и задержите.</string>
-    <string name="hint_control_mapping">"Свайп справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактировать, изменять размер или удалить."</string>
+    <string name="hint_control_mapping">"Свайп справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для её редактирования."</string>
     <!-- Warning -->
     <string name="warning_title">Предупреждение</string>
     <string name="warning_msg">Это приложение может быть не совместимо с вашей версией Android (более свежей или равной 7.0). Попробуйте VMOS и установите его туда. Учтите, что VMOS придётся установить вручную.</string>
@@ -43,8 +43,6 @@
     <string name="error_checklog">Ошибка! Проверьте журнал ниже: %s</string>
     <string name="error_no_version">Нет версии!</string>
     <string name="error_load_version">Не удалось загрузить версию %s</string>
-    <string name="error_convert_lib">Не удалось конвертировать библиотеку %s</string>
-    <string name="error_convert_client">Не удалось конвертировать Minecraft %s</string>
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>
     <!-- Toast messages -->
@@ -84,6 +82,8 @@
     <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатие для ломания блоков и выкидования предметов.</string>
+    <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
+    <string name="mcl_setting_subtitle_buttonscale">Увеличьте их если слишком малы.</string>
     <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
@@ -93,8 +93,6 @@
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
-    <!-- Credit translators in this language, append your name there -->
-    <string name="mcl_about_translated_by">"Переведено: "</string>
     <string name="mcl_version_clone">Клонировать</string>
     <!-- Global strings -->
     <string name="global_add">Добавить</string>
@@ -172,6 +170,7 @@
     <string name="customctrl_dynamicpos_y">Динамический Y</string>
     <string name="customctrl_keycombine">Комбинация клавиш</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_selectdefault">Выберите управление по умолчанию</string>
@@ -180,7 +179,7 @@
     <string name="main_welcome">Добро пожаловать,</string>
     <string name="main_infodev">Инфо (Р)</string>
     <string name="main_switchuser">Выбрать пользователя</string>
-    <string name="main_version_">Версия:</string>
+    <string name="main_version">Версия:</string>
     <string name="main_nocrash">Сбоев не обнаружено</string>
     <string name="main_nolog">Нет записей</string>
 </resources>
