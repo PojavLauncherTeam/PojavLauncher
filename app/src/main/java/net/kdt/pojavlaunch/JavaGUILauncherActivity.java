@@ -79,6 +79,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                                         @Override
                                         public void run() {
                                             Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
+                                            finish();
                                         }
                                     });
                             } catch (Throwable e) {
