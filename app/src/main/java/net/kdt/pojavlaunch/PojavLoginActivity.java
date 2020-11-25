@@ -330,15 +330,6 @@ public class PojavLoginActivity extends BaseActivity
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
             
-            Tools.copyAssetFile(this, "ClassWrapper.jar", Tools.MAIN_PATH + "/lwjgl3", false);
-            
-            // Yep, the codebase from v1.0.3:
-            //FileAccess.copyAssetToFolderIfNonExist(this, "1.0.jar", Tools.versnDir + "/1.0");
-            //FileAccess.copyAssetToFolderIfNonExist(this, "1.7.3.jar", Tools.versnDir + "/1.7.3");
-            //FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
-            
-            // UpdateDataChanger.changeDataAuto("2.4", "2.4.2");
-            
             if (!isJavaRuntimeInstalled()) {
                 File jreTarFile = selectJreTarFile();
                 uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
