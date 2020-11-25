@@ -196,7 +196,7 @@ public class BaseMainActivity extends LoggableActivity {
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
 
-            AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
+            AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 
             placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
             new Thread(new Runnable(){
