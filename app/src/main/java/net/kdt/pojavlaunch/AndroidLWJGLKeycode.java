@@ -196,7 +196,7 @@ public class AndroidLWJGLKeycode {
         
         try {
             if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing()) {
-                mainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), mods, isDown);
+                mainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), keyEvent.getScanCode(), mods, isDown);
             }
         } catch (Throwable th) {
             th.printStackTrace();

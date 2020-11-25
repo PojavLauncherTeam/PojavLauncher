@@ -23,6 +23,7 @@
 #define EVENT_TYPE_MOUSE_BUTTON 1006
 #define EVENT_TYPE_SCROLL 1007
 #define EVENT_TYPE_WINDOW_SIZE 1008
+#define EVENT_TYPE_KEYCODE 1009
 
 typedef void GLFW_invoke_Char_func(void* window, unsigned int codepoint);
 typedef void GLFW_invoke_CharMods_func(void* window, unsigned int codepoint, int mods);
@@ -39,9 +40,6 @@ int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
-
-jclass lwjgl2KeyboardClass;
-jmethodID lwjgl2KeyboardCharMethod;
 
 jboolean isGrabbing;
 
@@ -121,12 +119,15 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
     if (*method == NULL && runtimeJNIEnvPtr_ANDROID != NULL) {
         *clazz = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/glfw/CallbackBridge");
         assert(*clazz != NULL);
-        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IIIII)V");
+        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IIIIII)V");
         assert(*method != NULL);
     }
 }
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
+    sendData(type, i1, i2, i3, i4, 0);
+}
+void sendData(int type, int i1, int i2, int i3, int i4, int i5) {
 #ifdef DEBUG
     LOGD("Debug: Send data, jnienv.isNull=%d\n", runtimeJNIEnvPtr_ANDROID == NULL);
 #endif
@@ -139,28 +140,8 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
         inputBridgeClass_ANDROID,
         inputBridgeMethod_ANDROID,
         type,
-        i1, i2, i3, i4
+        i1, i2, i3, i4, i5
     );
-}
-
-jboolean lwjgl2_triggerCharEvent(jchar keyChar) {
-    if (!runtimeJNIEnvPtr_ANDROID) {
-        return JNI_FALSE;
-    } else if (!lwjgl2KeyboardClass && !lwjgl2KeyboardCharMethod) {
-        lwjgl2KeyboardClass = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/input/Keyboard");
-        assert(lwjgl2KeyboardClass != NULL);
-        lwjgl2KeyboardCharMethod = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, lwjgl2KeyboardClass, "addCharEvent", "(IC)V");
-        assert(lwjgl2KeyboardCharMethod != NULL);
-    }
-    
-    (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
-        runtimeJNIEnvPtr_ANDROID,
-        lwjgl2KeyboardClass,
-        lwjgl2KeyboardCharMethod,
-        (jint) savedKeycode, keyChar
-    );
-    
-    return JNI_TRUE;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueueBool) {
@@ -180,8 +161,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
     
     if (isUseStackQueueCall && isAndroid && result) {
         isPrepareGrabPos = true;
-        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     }
+        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     
     return result;
 }
@@ -220,21 +201,20 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
         } else {
-            // GLFW_invoke_Char(showingWindow, (unsigned int) codepoint);
-            return lwjgl2_triggerCharEvent(codepoint);
+            GLFW_invoke_Char(showingWindow, (unsigned int) codepoint);
+            // return lwjgl2_triggerCharEvent(codepoint);
         }
         return JNI_TRUE;
     }
     return JNI_FALSE;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jint codepoint, jint mods) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jchar codepoint, jint mods) {
     if (GLFW_invoke_CharMods && isInputReady) {
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR_MODS, (unsigned int) codepoint, mods, 0, 0);
         } else {
-            // GLFW_invoke_CharMods(showingWindow, codepoint, mods);
-            return JNI_FALSE;
+            GLFW_invoke_CharMods(showingWindow, codepoint, mods);
         }
         return JNI_TRUE;
     }
@@ -297,6 +277,18 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
         } else {
             savedKeycode = key;
             GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
+        }
+    }
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKeycode(JNIEnv* env, jclass clazz, jint keycode, jchar keychar, jint scancode, jint action, jint mods) {
+    if (isInputReady) {
+        if (isUseStackQueue) {
+            if (!Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(env, clazz, keychar, mods) && !Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(env, clazz, keychar)) {
+                Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(env, clazz, keycode, action, mods);
+            }
+        } else {
+            sendData(EVENT_TYPE_KEYCODE, keycode, keychar, scancode, action, mods);
         }
     }
 }

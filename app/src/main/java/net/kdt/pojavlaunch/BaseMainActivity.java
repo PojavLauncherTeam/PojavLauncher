@@ -1065,16 +1065,20 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
-        sendKeyPress(keyCode, '\u0000', modifiers, status);
+        sendKeyPress(keyCode, 0, modifiers, status);
+    }
+    
+    public static void sendKeyPress(int keyCode, int scancode, int modifiers, boolean status) {
+        sendKeyPress(keyCode, '\u0000', scancode, modifiers, status);
     }
 
-    public static void sendKeyPress(int keyCode, char keyChar, int modifiers, boolean status) {
-        CallbackBridge.sendKeycode(keyCode, keyChar, modifiers, status);
+    public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
+        CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
     }
 
     public void sendKeyPress(char keyChar) {
-        sendKeyPress(0, keyChar, 0, true);
-        sendKeyPress(0, keyChar, 0, false);
+        sendKeyPress(0, keyChar, 0, 0, true);
+        sendKeyPress(0, keyChar, 0, 0, false);
     }
 
     public void sendKeyPress(int keyCode) {

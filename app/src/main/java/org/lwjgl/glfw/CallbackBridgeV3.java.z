@@ -1,0 +1,15 @@
+package org.lwjgl.glfw;
+
+public class CallbackBridgeV3 extends CallbackBridge
+{
+    @Override protected native boolean nativeSendChar(char codepoint /* int codepoint */);
+    // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
+    @Override protected native boolean nativeSendCharMods(char codepoint, int mods);
+    // @Override protected native void nativeSendCursorEnter(int entered);
+    @Override protected native void nativeSendCursorPos(int x, int y);
+    @Override protected native void nativeSendKey(int key, int scancode, int action, int mods);
+    @Override protected native void nativeSendMouseButton(int button, int action, int mods);
+    @Override protected native void nativeSendScroll(double xoffset, double yoffset);
+    @Override protected native void nativeSendScreenSize(int width, int height);
+}
+
