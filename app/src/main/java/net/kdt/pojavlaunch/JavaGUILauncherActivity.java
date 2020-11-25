@@ -107,7 +107,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                     AlertDialog.Builder d = new AlertDialog.Builder(JavaGUILauncherActivity.this);
                     d.setCancelable(false);
                     d.setTitle(title);
-                    d.setView(message);
+                    d.setView(editText);
                     d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
                             @Override
