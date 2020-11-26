@@ -141,7 +141,7 @@
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Toetsenbord</string>
     <string name="control_chat">Chat</string>
-    <string name="control_debug">Foutoplossing</string>
+    <string name="control_debug">Debug</string>
     <string name="control_zoom">Verzoomen (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
