@@ -159,10 +159,11 @@ public final class Tools
 
     public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) {
         String username = profile.getUsername();
-        String versionName = profile.getVersion();
+        String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
         }
+        
         String userType = "mojang";
 
         File gameDir = new File(Tools.MAIN_PATH);
@@ -528,11 +529,11 @@ public final class Tools
                     customVer.optifineLib = lib;
                 }
             }
-            if (customVer.inheritsFrom == null || customVer.inheritsFrom.isEmpty()) {
+            if (customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer = Tools.GLOBAL_GSON.fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
-                inheritsVer.inheritsFrom = "";
+                inheritsVer.inheritsFrom = inheritsVer.id;
                 
                 insertSafety(inheritsVer, customVer,
                              "assetIndex", "assets", "id",
