@@ -1,114 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:layout_alignParentRight="true"
-    android:id="@+id/main_drawer_options"
-    android:keepScreenOn="true">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:layout_alignParentRight="true"
+	android:id="@+id/main_drawer_options"
+	android:keepScreenOn="true">
 
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+	<FrameLayout
+		android:id="@+id/content_frame"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
-        <net.kdt.pojavlaunch.customcontrols.ControlLayout
-            android:id="@+id/main_control_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+		<net.kdt.pojavlaunch.customcontrols.ControlLayout
+			android:id="@+id/main_control_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
 
-            <net.kdt.pojavlaunch.MinecraftGLView
-                android:id="@+id/main_game_render_view"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"/>
+			<net.kdt.pojavlanch.CapturedEditText
+				android:layout_height="match_parent"
+				android:layout_width="match_parent"
+				android:id="@+id/main_key_handler"/>
 
-            <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/main_touchpad"
-                android:visibility="gone">
+			<net.kdt.pojavlaunch.MinecraftGLView
+				android:id="@+id/main_game_render_view"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"/>
 
-                <ImageView
-                    android:layout_height="27dp"
-                    android:layout_width="18dp"
-                    android:src="@drawable/mouse_pointer"
-                    android:id="@+id/main_mouse_pointer"/>
+			<LinearLayout
+				android:layout_height="match_parent"
+				android:layout_width="match_parent"
+				android:orientation="vertical"
+				android:id="@+id/main_touchpad"
+				android:visibility="gone">
 
-            </LinearLayout>
-            
-        </net.kdt.pojavlaunch.customcontrols.ControlLayout>
-        
-        <LinearLayout
-            android:id="@+id/content_log_layout"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:orientation="vertical">
+				<ImageView
+					android:layout_height="27dp"
+					android:layout_width="18dp"
+					android:src="@drawable/mouse_pointer"
+					android:id="@+id/main_mouse_pointer"/>
 
-            <RelativeLayout
-                android:layout_height="84px"
-                android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:background="#555555">
+			</LinearLayout>
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/control_viewout"
-                    android:paddingLeft="30px"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_centerVertical="true"/>
+		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 
-                <ImageView
-                    android:layout_height="84px"
-                    android:layout_width="84px"
-                    android:src="@android:drawable/ic_delete"
-                    android:onClick="closeLogOutput"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/content_log_close_button"/>
+		<LinearLayout
+			android:id="@+id/content_log_layout"
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:visibility="gone"
+			android:orientation="vertical">
 
-                <ToggleButton
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_toLeftOf="@id/content_log_close_button"
-                    android:id="@+id/content_log_toggle_log"/>
+			<RelativeLayout
+				android:layout_height="84px"
+				android:layout_width="match_parent"
+				android:gravity="center_vertical"
+				android:background="#555555">
 
-            </RelativeLayout>
+				<TextView
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:text="@string/control_viewout"
+					android:paddingLeft="30px"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:layout_centerVertical="true"/>
 
-            <ScrollView
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:id="@+id/content_log_scroll"
-                android:alpha="0.8"
-                android:background="#000000">
+				<ImageView
+					android:layout_height="84px"
+					android:layout_width="84px"
+					android:src="@android:drawable/ic_delete"
+					android:onClick="closeLogOutput"
+					android:layout_alignParentRight="true"
+					android:id="@+id/content_log_close_button"/>
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textIsSelectable="true"/>
+				<ToggleButton
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:layout_toLeftOf="@id/content_log_close_button"
+					android:id="@+id/content_log_toggle_log"/>
 
-            </ScrollView>
+			</RelativeLayout>
 
-        </LinearLayout>
+			<ScrollView
+				android:layout_height="match_parent"
+				android:layout_width="match_parent"
+				android:id="@+id/content_log_scroll"
+				android:alpha="0.8"
+				android:background="#000000">
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="PointerCapture debug"
-            android:id="@+id/content_text_debug"
-            android:visibility="gone"/>
+				<TextView
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:textIsSelectable="true"/>
 
-    </FrameLayout>
+			</ScrollView>
 
-    <android.support.design.widget.NavigationView
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:fitsSystemWindows="false"
-        app:menu="@menu/menu_runopt"
-        android:id="@+id/main_navigation_view"/>
+		</LinearLayout>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="PointerCapture debug"
+			android:id="@+id/content_text_debug"
+			android:visibility="gone"/>
+
+	</FrameLayout>
+
+	<android.support.design.widget.NavigationView
+		android:layout_width="200dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="right"
+		android:fitsSystemWindows="false"
+		app:menu="@menu/menu_runopt"
+		android:id="@+id/main_navigation_view"/>
 
 </android.support.v4.widget.DrawerLayout>
 

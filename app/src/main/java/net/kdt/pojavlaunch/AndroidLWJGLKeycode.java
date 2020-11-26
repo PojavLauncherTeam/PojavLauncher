@@ -168,14 +168,14 @@ public class AndroidLWJGLKeycode {
         return androidKeyNameArray;
     }
     
-    public static void execKey(BaseMainActivity mainActivity, KeyEvent keyEvent, int i, boolean isDown) {
+    public static void execKey(KeyEvent keyEvent, int i, boolean isDown) {
         for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
             if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
                 // Right mouse detection
-                mainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                mainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+                BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                // BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
             } else if (perKey.getKey() == i) {
-                mainActivity.sendKeyPress(perKey.getValue(), keyEvent.getModifiers(), isDown);
+                BaseMainActivity.sendKeyPress(perKey.getValue(), keyEvent.getModifiers(), isDown);
             }
         }
 
@@ -196,14 +196,14 @@ public class AndroidLWJGLKeycode {
         
         try {
             if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing()) {
-                mainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), keyEvent.getScanCode(), mods, isDown);
+                BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), keyEvent.getScanCode(), mods, isDown);
             }
         } catch (Throwable th) {
             th.printStackTrace();
         }
 
         if (isBackspaceAfterChar && (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
-            mainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, 0, isDown);
+            BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, 0, isDown);
         }
     }
 

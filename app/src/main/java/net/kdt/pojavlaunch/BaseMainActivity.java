@@ -73,6 +73,8 @@ public class BaseMainActivity extends LoggableActivity {
     
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
+    
+    private CapturedEditText mKeyHandlerView;
 
     private LinearLayout contentLog;
     private TextView textLog;
@@ -196,6 +198,11 @@ public class BaseMainActivity extends LoggableActivity {
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
 
+            mKeyHandlerView = findViewById(R.id.main_key_handler);
+            mKeyHandlerView.setFocusable(true);
+            mKeyHandlerView.setFocusableInTouchMode(true);
+            mKeyHandlerView.requestFocus();
+            
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 
             placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
@@ -712,50 +719,6 @@ public class BaseMainActivity extends LoggableActivity {
             e.printStackTrace();
             Tools.showError(this, e, true);
         }
-
-        // Mirror video of OpenGL view.
-        /*
-         new Thread(new Runnable(){
-
-         @Override
-         public void run()
-         {
-         try {
-         while (true) {
-         if (bit == null) continue;
-         runOnUiThread(new Runnable(){
-
-         @Override
-         public void run()
-         {
-         fillCanvasGL();
-         mirrorView.setImageBitmap(bit);
-         }
-         });
-
-         // ~33fps render
-         Thread.sleep(30);
-         }
-         } catch (Throwable th) {
-         th.printStackTrace();
-         }
-         }
-         }).start();
-         */
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event)
-    {
-        AndroidLWJGLKeycode.execKey(this, event, keyCode, false);
-        return super.onKeyUp(keyCode, event);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        AndroidLWJGLKeycode.execKey(this, event, keyCode, true);
-        return super.onKeyDown(keyCode, event);
     }
 
     //private Dialog menuDial;
@@ -1042,8 +1005,10 @@ public class BaseMainActivity extends LoggableActivity {
     public void onBackPressed() {
         // Prevent back
         // Catch back as Esc keycode at another place
-    }
 
+        // sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+    }
+    
     public void hideKeyboard() {
         try {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -1086,8 +1051,8 @@ public class BaseMainActivity extends LoggableActivity {
         sendKeyPress(keyCode, 0, false);
     }
 
-    private boolean isLeftMouseDown, isRightMouseDown;
-    public void sendMouseButton(int button, boolean status) {
+    private static boolean isLeftMouseDown, isRightMouseDown;
+    public static void sendMouseButton(int button, boolean status) {
         // TODO implement this method!!!
         // CallbackBridge.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
         // or

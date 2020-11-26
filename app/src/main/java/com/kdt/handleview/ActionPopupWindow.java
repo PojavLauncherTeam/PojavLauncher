@@ -172,16 +172,18 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                                         errorAt = null;
                                         */
                                         
-                                        int errorAt = 0;
-                                        try {
-                                            properties.insertDynamicPos(editDynamicX.getText().toString());
-                                            errorAt = 1;
-                                            properties.insertDynamicPos(editDynamicY.getText().toString());
-                                        } catch (Throwable th) {
-                                            (errorAt == 0 ? editDynamicX : editDynamicY)
-                                                .setError(th.getMessage());
-                                            
-                                            return;
+                                        if (properties.isDynamicBtn) {
+                                            int errorAt = 0;
+                                            try {
+                                                properties.insertDynamicPos(editDynamicX.getText().toString());
+                                                errorAt = 1;
+                                                properties.insertDynamicPos(editDynamicY.getText().toString());
+                                            } catch (Throwable th) {
+                                                (errorAt == 0 ? editDynamicX : editDynamicY)
+                                                    .setError(th.getMessage());
+
+                                                return;
+                                            }
                                         }
                                         
                                         if (spinnerKeycode.getSelectedItemPosition() < specialArr.length) {
