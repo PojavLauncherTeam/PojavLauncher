@@ -23,7 +23,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     private File logFile;
     private PrintStream logStream;
     
-    private Object mDialogLock;
+    private Object mDialogLock = new Object();
 
     private boolean isLogAllow, mSkipDetectMod;
 
