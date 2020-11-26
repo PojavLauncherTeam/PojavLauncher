@@ -41,8 +41,6 @@
     <string name="error_checklog">Error! Please check the log below: %s</string>
     <string name="error_no_version">No version!</string>
     <string name="error_load_version">Unable to load version %s</string>
-    <string name="error_convert_lib">Unable to convert library %s</string>
-    <string name="error_convert_client">Unable to convert Minecraft %s</string>
     <string name="error_show_more">Show more</string>
     <string name="error_show_less">Show less</string>
     <!-- Toast messages -->
@@ -86,7 +84,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
     <string name="global_add">Add</string>
@@ -166,7 +163,6 @@
     <string name="main_welcome">Welcome,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Switch user</string>
-    <string name="main_version_">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
 </resources>
