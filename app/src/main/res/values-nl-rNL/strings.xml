@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition voor Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Start Minecraft Java: Java editie op je apparaat!</string>
+    <string name="app_motd">Start Minecraft: Java editie op je apparaat!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">HELP</string>
     <!-- Languages list part -->
