@@ -43,8 +43,6 @@
     <string name="error_checklog">Errore! Per favore controlla i log sotto: %s</string>
     <string name="error_no_version">Nessuna versione!</string>
     <string name="error_load_version">Impossibile caricare la versione %s</string>
-    <string name="error_convert_lib">Impossibile convertire la libreria %s</string>
-    <string name="error_convert_client">Impossibile convertire Minecraft %s</string>
     <string name="error_show_more">Mostra altro</string>
     <string name="error_show_less">Mostra meno</string>
     <!-- Toast messages -->
@@ -84,6 +82,8 @@
     <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Nessario Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
+    <string name="mcl_setting_title_buttonscale">Ridimensionamento controlli</string>
+    <string name="mcl_setting_subtitle_buttonscale">Ingrandisci i pulsanti se sono troppo piccoli.</string>
     <string name="mcl_setting_title_controlsize">Imposta dimensione dei pulsanti di controllo</string>
     <string name="mcl_setting_title_javaargs">Argomenti di avvio JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attento, questo potrebbe far crashare il gioco se modificato senza sapere quello che fai.</string>
@@ -93,7 +93,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
-    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
     <string name="global_add">Aggiungi</string>
@@ -169,6 +168,10 @@
     <string name="customctrl_dynamicpos">Posizione dinamica</string>
     <string name="customctrl_dynamicpos_x">X dinamica</string>
     <string name="customctrl_dynamicpos_y">Y dinamica</string>
+    <string name="customctrl_keycombine">Combinazione tasti</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
     <string name="main_options">Impostazioni</string>
@@ -176,7 +179,7 @@
     <string name="main_welcome">Benvenuto,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Cambia utente</string>
-    <string name="main_version_">Versione:</string>
+    <string name="main_version">Versione:</string>
     <string name="main_nocrash">Nessun crash rilevato</string>
     <string name="main_nolog">Nessun log.</string>
 </resources>

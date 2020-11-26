@@ -43,8 +43,6 @@
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
     <string name="error_load_version">Tidak bisa mengload versi! %s</string>
-    <string name="error_convert_lib">Gagal melakukan konversi pada library %s</string>
-    <string name="error_convert_client">Gagal melakukan konversi pada Minecraft %s</string>
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
@@ -84,6 +82,8 @@
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan oencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
+    <string name="mcl_setting_title_buttonscale">Skala tombol kontrol</string>
+    <string name="mcl_setting_subtitle_buttonscale">Tingkatkan skala jika tombol terlalu kecil.</string>
     <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
     <string name="mcl_setting_title_javaargs">Argumen untuk meluncurkan JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Hati-hati, ini bisa meng-crash permainan jika di-ubah tanpa pengetahuan.</string>
@@ -93,7 +93,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Tambah</string>
@@ -180,7 +179,7 @@
     <string name="main_welcome">Selamat datang,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Beralih/ganti user</string>
-    <string name="main_version_">Versi:</string>
+    <string name="main_version">Versi:</string>
     <string name="main_nocrash">Tidak ada crash terdeteksi</string>
     <string name="main_nolog">Tidak ada catatan log.</string>
 </resources>
