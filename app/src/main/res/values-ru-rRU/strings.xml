@@ -15,10 +15,10 @@
     <string name="login_online_password_question">Забыли пароль?</string>
     <string name="login_online_remember">Запомнить меня?</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
-    <string name="login_online_login_label">Вход</string>
+    <string name="login_online_login_label">Войти</string>
     <string name="login_online_create_account">(Создать новый профиль?)</string>
     <string name="login_offline_switch">Offline-профиль?</string>
-    <string name="login_offline_label">Войти как пират</string>
+    <string name="login_offline_label">Войти как автономная учётная запись</string>
     <string name="login_offline_alert_skip">Пропустить</string>
     <string name="login_error_short_username">Псевдоним должен быть длиной как минимум 3 символа</string>
     <string name="login_error_exist_username">Этот псевдоним уже существует</string>
@@ -30,7 +30,7 @@
     <string name="warning_title">Предупреждение</string>
     <string name="warning_msg">Это приложение может быть не совместимо с вашей версией Android (более свежей или равной 7.0). Попробуйте VMOS и установите его туда. Учтите, что VMOS придётся установить вручную.</string>
     <string name="warning_noshowagain">Не показывать вновь</string>
-    <string name="warning_action_install">Установить VMOS</string>
+    <string name="warning_action_install">Установите VMOS</string>
     <string name="warning_action_tryanyway">Всё равно попробуйте</string>
     <string name="warning_action_exit">Выйти</string>
     <string name="warning_remove_account">Этот профиль будет удалён!</string>
@@ -83,7 +83,7 @@
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатие для ломания блоков и выкидования предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
-    <string name="mcl_setting_subtitle_buttonscale">Увеличьте их если слишком малы.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
     <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
