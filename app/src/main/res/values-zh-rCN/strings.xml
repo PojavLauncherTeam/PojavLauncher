@@ -43,8 +43,6 @@
     <string name="error_checklog">错误！检查下方日志： %s</string>
     <string name="error_no_version">无版本！</string>
     <string name="error_load_version">无法加载版本 %s</string>
-    <string name="error_convert_lib">无法转换运行库 %s</string>
-    <string name="error_convert_client">无法转换 Minecraft %s</string>
     <string name="error_show_more">显示细节</string>
     <string name="error_show_less">隐藏细节</string>
     <!-- Toast messages -->
@@ -84,6 +82,8 @@
     <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+。</string>
     <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长。</string>
+    <string name="mcl_setting_title_buttonscale">控制键缩放</string>
+    <string name="mcl_setting_subtitle_buttonscale">若按键太小，将其放大。</string>
     <string name="mcl_setting_title_controlsize">设定控制键大小</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
     <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
@@ -93,7 +93,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    <!-- Credit translators in this language, append your name there -->
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
     <string name="global_add">添加</string>
@@ -169,6 +168,10 @@
     <string name="customctrl_dynamicpos">动态位置</string>
     <string name="customctrl_dynamicpos_x">动态 X 轴</string>
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
+    <string name="customctrl_keycombine">按键组合</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">控制</string>
+    <string name="customctrl_keycombine_shift">上档</string>
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
     <string name="main_options">选项</string>
@@ -176,7 +179,7 @@
     <string name="main_welcome">欢迎，</string>
     <string name="main_infodev">信息（开发）</string>
     <string name="main_switchuser">切换用户</string>
-    <string name="main_version_">版本：</string>
+    <string name="main_version">版本:</string>
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
 </resources>
