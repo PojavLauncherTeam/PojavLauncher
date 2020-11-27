@@ -86,7 +86,10 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
             // A non-special button or inside custom controls screen so skip listener
         } else if (properties.specialButtonListener instanceof View.OnClickListener) {
             setOnClickListener((View.OnClickListener) properties.specialButtonListener);
+            setOnLongClickListener(null);
+            setOnTouchListener(null);
         } else if (properties.specialButtonListener instanceof View.OnTouchListener) {
+            setOnLongClickListener(null);
             setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
         } else {
             throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but is " + properties.specialButtonListener.getClass().getName());
