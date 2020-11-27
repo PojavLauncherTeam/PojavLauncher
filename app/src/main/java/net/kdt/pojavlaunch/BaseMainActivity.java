@@ -200,6 +200,8 @@ public class BaseMainActivity extends LoggableActivity {
 
             mKeyHandlerView = findViewById(R.id.main_key_handler);
             mKeyHandlerView.setSingleLine(false);
+            mKeyHandlerView.setFocusable(false);
+            mKeyHandlerView.setFocusableInTouchMode(false);
             
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 
