@@ -42,6 +42,12 @@
 			android:text="@string/customctrl_dynamicpos"
 			android:id="@+id/controlsetting_checkbox_dynamicpos"/>
 
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_toggle"
+            android:id="@+id/controlsetting_checkbox_toggle"/>
+        
 		<LinearLayout
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"

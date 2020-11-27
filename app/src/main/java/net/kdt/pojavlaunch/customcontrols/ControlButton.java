@@ -1,16 +1,19 @@
 package net.kdt.pojavlaunch.customcontrols;
 
 import android.content.*;
+import android.graphics.*;
+import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
-import net.kdt.pojavlaunch.*;
 import com.kdt.handleview.*;
-import android.view.ViewGroup.*;
+import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
 public class ControlButton extends Button implements OnLongClickListener, OnTouchListener
 {
+    private Paint mRectPaint;
+    
     private GestureDetector mGestureDetector;
     private ControlData mProperties;
     private SelectionEndHandleView mHandleView;
@@ -18,12 +21,18 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     private boolean mModifiable = false;
     private boolean mCanTriggerLongClick = true;
     
+    private boolean mChecked = false;
+    
+    private float mScaleAt;
     private int mMods;
 
-    public ControlButton(Context ctx, ControlData properties) {
-        super(ctx);
+    public ControlButton(ControlLayout layout, ControlData properties) {
+        super(layout.getContext());
+        setWillNotDraw(false);
 
-        mGestureDetector = new GestureDetector(ctx, new SingleTapConfirm());
+        mScaleAt = layout.mLayout.scaledAt;
+        
+        mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
 
         setBackgroundResource(R.drawable.control_button);
         setOnLongClickListener(this);
@@ -33,6 +42,12 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         setModified(false);
 
         mHandleView = new SelectionEndHandleView(this);
+        
+        final TypedValue value = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+        
+        mRectPaint = new Paint();
+        mRectPaint.setColor(value.data);
     }
 
     public HandleView getHandleView() {
@@ -122,6 +137,14 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     }
 
     @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        if (mChecked) {
+            canvas.drawRect(0, getHeight() - 10 * mScaleAt, getWidth(), getHeight(), mRectPaint);
+        }
+    }
+
+    @Override
     public boolean onLongClick(View p1) {
         if (mCanTriggerLongClick && mModifiable) {
             if (mHandleView.isShowing()) {
@@ -144,25 +167,30 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         if (!mModifiable) {
             mCanTriggerLongClick = false;
             
-            if (mProperties.keycode >= 0) {
-                boolean isDown;
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN: // 0
-                    case MotionEvent.ACTION_POINTER_DOWN: // 5
-                        isDown = true;
-                        break;
-                    case MotionEvent.ACTION_UP: // 1
-                    case MotionEvent.ACTION_CANCEL: // 3
-                    case MotionEvent.ACTION_POINTER_UP: // 6
-                        isDown = false;
-                        break;
-                    default:
-                        return false;
+            if (!mProperties.isToggle) {
+                if (mProperties.keycode >= 0) {
+                    boolean isDown;
+                    switch (event.getActionMasked()) {
+                        case MotionEvent.ACTION_DOWN: // 0
+                        case MotionEvent.ACTION_POINTER_DOWN: // 5
+                            isDown = true;
+                            break;
+                        case MotionEvent.ACTION_UP: // 1
+                        case MotionEvent.ACTION_CANCEL: // 3
+                        case MotionEvent.ACTION_POINTER_UP: // 6
+                            isDown = false;
+                            break;
+                        default:
+                            return false;
+                    }
+                    MainActivity.sendKeyPress(mProperties.keycode, mMods, isDown);
                 }
-                MainActivity.sendKeyPress(mProperties.keycode, mMods, isDown);
-
-                return true;
+            } else if (mGestureDetector.onTouchEvent(event)) {
+                mChecked = !mChecked;
+                MainActivity.sendKeyPress(mProperties.keycode, mMods, mChecked);
             }
+
+            return true;
         } else {
             if (mGestureDetector.onTouchEvent(event)) {
                 mCanTriggerLongClick = true;

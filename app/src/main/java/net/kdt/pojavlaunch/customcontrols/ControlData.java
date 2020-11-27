@@ -35,7 +35,7 @@ public class ControlData implements Cloneable
      * bigger device or vice versa.
      */
     public String dynamicX, dynamicY;
-    public boolean isDynamicBtn;
+    public boolean isDynamicBtn, isToggle;
     
 	public static ControlData[] getSpecialButtons(){
 		if (SPECIAL_BUTTONS == null) {
@@ -100,12 +100,12 @@ public class ControlData implements Cloneable
 	}
 
 	public ControlData(String name, int keycode, float x, float y, float width, float height) {
-        this(name, keycode, Float.toString(x), Float.toString(y), width, height);
+        this(name, keycode, Float.toString(x), Float.toString(y), width, height, false);
         this.isDynamicBtn = false;
 	}
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
-        this(name, keycode, dynamicX, dynamicY, pixelOf50dp, pixelOf50dp);
+        this(name, keycode, dynamicX, dynamicY, pixelOf50dp, pixelOf50dp, false);
     }
 
     public ControlData(android.content.Context ctx, int resId, int keycode, String dynamicX, String dynamicY, boolean isSquare) {
@@ -113,10 +113,10 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY, boolean isSquare) {
-        this(name, keycode, dynamicX, dynamicY, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
+        this(name, keycode, dynamicX, dynamicY, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp, false);
     }
 
-    public ControlData(String name, int keycode, String dynamicX, String dynamicY, float width, float height) {
+    public ControlData(String name, int keycode, String dynamicX, String dynamicY, float width, float height, boolean isToggle) {
         this.name = name;
         this.keycode = keycode;
         this.dynamicX = dynamicX;
@@ -124,6 +124,7 @@ public class ControlData implements Cloneable
         this.width = width;
         this.height = height;
         this.isDynamicBtn = true;
+        this.isToggle = isToggle;
         update();
     }
     
@@ -133,7 +134,7 @@ public class ControlData implements Cloneable
 
 	public ControlData clone() {
         if (this instanceof ControlData) {
-            return new ControlData(name, keycode, ((ControlData) this).dynamicX, ((ControlData) this).dynamicY, width, height);
+            return new ControlData(name, keycode, ((ControlData) this).dynamicX, ((ControlData) this).dynamicY, width, height, isToggle);
         } else {
             return new ControlData(name, keycode, x, y, width, height);
         }

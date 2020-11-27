@@ -190,6 +190,7 @@
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Special Key</string>
     <string name="customctrl_hidden">Hidden</string>
+    <string name="customctrl_toggle">Toggleable</string>
     
     <string name="customctrl_dynamicpos">Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>

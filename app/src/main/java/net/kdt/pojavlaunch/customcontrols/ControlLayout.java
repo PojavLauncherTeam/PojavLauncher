@@ -11,8 +11,8 @@ import org.lwjgl.glfw.*;
 
 public class ControlLayout extends FrameLayout
 {
+	protected CustomControls mLayout;
 	private boolean mModifiable;
-	private CustomControls mLayout;
 	private CustomControlsActivity mActivity;
 	private boolean mControlVisible = false;
     
@@ -66,7 +66,7 @@ public class ControlLayout extends FrameLayout
 	}
 
 	private void addControlView(ControlData controlButton) {
-		final ControlButton view = new ControlButton(getContext(), controlButton);
+		final ControlButton view = new ControlButton(this, controlButton);
 		view.setModifiable(mModifiable);
 		addView(view);
 
