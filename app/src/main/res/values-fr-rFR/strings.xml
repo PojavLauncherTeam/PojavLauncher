@@ -165,6 +165,7 @@
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touches spéciales</string>
     <string name="customctrl_hidden">Masqué</string>
+    <string name="customctrl_toggle">Activable</string>
     <string name="customctrl_dynamicpos">Positionnement dynamique</string>
     <string name="customctrl_dynamicpos_x">X Dynamique</string>
     <string name="customctrl_dynamicpos_y">Y Dynamique</string>
@@ -179,6 +180,7 @@
     <string name="main_welcome">Bienvenue,</string>
     <string name="main_infodev">Informations (DEV)</string>
     <string name="main_switchuser">Changer d\'utilisateur</string>
+    <string name="main_version">Version:</string>
     <string name="main_nocrash">Aucun plantage détecté</string>
     <string name="main_nolog">Pas de journal.</string>
 </resources>
