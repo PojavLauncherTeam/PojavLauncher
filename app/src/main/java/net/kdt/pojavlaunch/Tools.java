@@ -358,7 +358,9 @@ public final class Tools
     {
         try {
             File file = new File(output);
-            if(!file.exists()) file.mkdirs();
+            if(!file.exists()) {
+                file.mkdirs();
+            }
             File file2 = new File(output, outputName);
             if(!file2.exists() || overwrite){
                 write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
