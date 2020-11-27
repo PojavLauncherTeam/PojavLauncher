@@ -201,6 +201,7 @@ public class BaseMainActivity extends LoggableActivity {
             mKeyHandlerView = findViewById(R.id.main_key_handler);
             mKeyHandlerView.setSingleLine(false);
             mKeyHandlerView.clearFocus();
+            mKeyHandlerView.setVisibility(View.GONE);
             
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 
@@ -720,6 +721,18 @@ public class BaseMainActivity extends LoggableActivity {
         }
     }
 
+    @Override   
+    public boolean onKeyUp(int keyCode, KeyEvent event) {   
+        AndroidLWJGLKeycode.execKey(event, keyCode, false);   
+        return super.onKeyUp(keyCode, event);   
+    }   
+
+    @Override   
+    public boolean onKeyDown(int keyCode, KeyEvent event) {   
+        AndroidLWJGLKeycode.execKey(event, keyCode, true);    
+        return super.onKeyDown(keyCode, event); 
+    }
+    
     //private Dialog menuDial;
 
     @Override
