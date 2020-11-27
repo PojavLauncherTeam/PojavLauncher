@@ -18,7 +18,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-			<net.kdt.pojavlanch.CapturedEditText
+			<net.kdt.pojavlaunch.CapturedEditText
 				android:layout_height="match_parent"
 				android:layout_width="match_parent"
 				android:id="@+id/main_key_handler"/>
