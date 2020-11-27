@@ -74,7 +74,7 @@ public class BaseMainActivity extends LoggableActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
     
-    private CapturedEditText mKeyHandlerView;
+    protected CapturedEditText mKeyHandlerView;
 
     private LinearLayout contentLog;
     private TextView textLog;
@@ -200,8 +200,7 @@ public class BaseMainActivity extends LoggableActivity {
 
             mKeyHandlerView = findViewById(R.id.main_key_handler);
             mKeyHandlerView.setSingleLine(false);
-            mKeyHandlerView.setFocusable(false);
-            mKeyHandlerView.setFocusableInTouchMode(false);
+            mKeyHandlerView.clearFocus();
             
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 
@@ -1021,7 +1020,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public void showKeyboard() {
-        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).showSoftInput(mKeyHandlerView, InputMethodManager.SHOW_IMPLICIT);
     }
 
     protected void setRightOverride(boolean val) {
