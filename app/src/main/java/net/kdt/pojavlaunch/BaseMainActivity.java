@@ -197,12 +197,12 @@ public class BaseMainActivity extends LoggableActivity {
            
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
-
+/*
             mKeyHandlerView = findViewById(R.id.main_key_handler);
             mKeyHandlerView.setSingleLine(false);
             mKeyHandlerView.clearFocus();
             mKeyHandlerView.setVisibility(View.GONE);
-            
+*/
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 
             placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
