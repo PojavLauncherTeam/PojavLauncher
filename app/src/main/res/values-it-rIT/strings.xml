@@ -165,6 +165,7 @@
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Tasto speciale</string>
     <string name="customctrl_hidden">Nascosto</string>
+    <string name="customctrl_toggle">Attivabile</string>
     <string name="customctrl_dynamicpos">Posizione dinamica</string>
     <string name="customctrl_dynamicpos_x">X dinamica</string>
     <string name="customctrl_dynamicpos_y">Y dinamica</string>
