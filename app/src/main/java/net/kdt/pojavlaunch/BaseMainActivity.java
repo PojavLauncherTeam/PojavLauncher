@@ -1032,7 +1032,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public void showKeyboard() {
-        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).showSoftInput(mKeyHandlerView, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
     protected void setRightOverride(boolean val) {
