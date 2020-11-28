@@ -71,9 +71,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                             installMod(true);
                             break;
                         case 2: // Custom controls
-                            if (Tools.enableDevFeatures) {
-                                startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
-                            }
+                            startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
                             break;
                         case 3: // Settings
                             startActivity(new Intent(BaseLauncherActivity.this, LauncherPreferenceActivity.class));
