@@ -165,6 +165,7 @@
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_specialkey">Özel Tuş</string>
     <string name="customctrl_hidden">Gizli</string>
+    <string name="customctrl_toggle">Değiştirilebilir</string>
     <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
