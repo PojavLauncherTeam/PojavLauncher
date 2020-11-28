@@ -74,7 +74,7 @@ public class BaseMainActivity extends LoggableActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
     
-    protected CapturedEditText mKeyHandlerView;
+    // protected CapturedEditText mKeyHandlerView;
 
     private LinearLayout contentLog;
     private TextView textLog;
@@ -197,13 +197,13 @@ public class BaseMainActivity extends LoggableActivity {
            
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
-
+/*
             mKeyHandlerView = findViewById(R.id.main_key_handler);
             mKeyHandlerView.setSingleLine(false);
             mKeyHandlerView.clearFocus();
             
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
-
+*/
             placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
             new Thread(new Runnable(){
 
@@ -719,7 +719,7 @@ public class BaseMainActivity extends LoggableActivity {
             Tools.showError(this, e, true);
         }
     }
-/*
+
     @Override   
     public boolean onKeyUp(int keyCode, KeyEvent event) {   
         AndroidLWJGLKeycode.execKey(event, keyCode, false);   
@@ -731,7 +731,7 @@ public class BaseMainActivity extends LoggableActivity {
         AndroidLWJGLKeycode.execKey(event, keyCode, true);    
         return super.onKeyDown(keyCode, event); 
     }
-*/
+
     //private Dialog menuDial;
 
     @Override

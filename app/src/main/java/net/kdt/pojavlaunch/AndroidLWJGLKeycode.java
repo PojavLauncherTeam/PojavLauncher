@@ -195,8 +195,12 @@ public class AndroidLWJGLKeycode {
         }
         
         try {
-            if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing()) {
-                BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), keyEvent.getScanCode(), mods, isDown);
+            if (!CallbackBridge.isGrabbing()) {
+                if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
+                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), mods, isDown);
+                } else if ((int) keyEvent.getUnicodeChar() != KeyEvent.KEYCODE_UNKNOWN) {
+                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), keyEvent.getScanCode(), mods, isDown);
+                }
             }
         } catch (Throwable th) {
             th.printStackTrace();

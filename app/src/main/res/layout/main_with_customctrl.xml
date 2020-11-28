@@ -18,12 +18,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-			<net.kdt.pojavlaunch.CapturedEditText
-                android:imeOptions="flagNoExtractUi"
-				android:layout_height="match_parent"
-				android:layout_width="match_parent"
-				android:id="@+id/main_key_handler"/>
-
 			<net.kdt.pojavlaunch.MinecraftGLView
 				android:id="@+id/main_game_render_view"
 				android:layout_width="fill_parent"
