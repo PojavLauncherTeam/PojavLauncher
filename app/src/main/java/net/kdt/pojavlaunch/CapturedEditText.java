@@ -16,14 +16,16 @@ public class CapturedEditText extends EditText
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        AndroidLWJGLKeycode.execKey(event, keyCode, true);
-        return true;
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        AndroidLWJGLKeycode.execKey(event, keyCode, false);
-        return true;
+    public boolean onKeyPreIme(int keyCode, KeyEvent event){
+        switch (event.getAction()) {
+            case KeyEvent.ACTION_DOWN:
+                AndroidLWJGLKeycode.execKey(event, keyCode, true);
+                break;
+                
+            case KeyEvent.ACTION_UP:
+                AndroidLWJGLKeycode.execKey(event, keyCode, false);
+                break;
+        }
+        return false;
     }
 }
