@@ -5,7 +5,7 @@ import android.util.*;
 import android.widget.*;
 import android.view.*;
 
-public class CapturedEditText extends TextView
+public class CapturedEditText extends EditText
 {
     public CapturedEditText(Context ctx) {
         this(ctx, null);
@@ -13,11 +13,6 @@ public class CapturedEditText extends TextView
     
     public CapturedEditText(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
-    }
-    
-    @Override
-    public boolean getDefaultEditable() {
-        return true;
     }
 
     @Override
