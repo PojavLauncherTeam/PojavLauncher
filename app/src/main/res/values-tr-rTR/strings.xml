@@ -137,7 +137,7 @@
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Kontroller</string>
-    <string name="control_toggle">Grafiksel Kullanıcı Arayüzü</string>
+    <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klavye</string>
     <string name="control_chat">Sohbet</string>
     <string name="control_debug">Debug</string>
@@ -172,7 +172,7 @@
     <string name="update_console">Konsolu güncelle</string>
     <string name="main_options">Ayarlar</string>
     <string name="main_play">Oyna</string>
-    <string name="main_welcome">Hoşgeldiniz</string>
+    <string name="main_welcome">Hoşgeldiniz,</string>
     <string name="main_infodev">Bilgi (Geliştirici)</string>
     <string name="main_switchuser">Kullanıcı değiştir</string>
     <string name="main_version_">Sürüm:</string>
