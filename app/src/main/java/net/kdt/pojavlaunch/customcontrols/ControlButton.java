@@ -86,10 +86,10 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
             // A non-special button or inside custom controls screen so skip listener
         } else if (properties.specialButtonListener instanceof View.OnClickListener) {
             setOnClickListener((View.OnClickListener) properties.specialButtonListener);
-            setOnLongClickListener(null);
-            setOnTouchListener(null);
+            // setOnLongClickListener(null);
+            // setOnTouchListener(null);
         } else if (properties.specialButtonListener instanceof View.OnTouchListener) {
-            setOnLongClickListener(null);
+            // setOnLongClickListener(null);
             setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
         } else {
             throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but is " + properties.specialButtonListener.getClass().getName());
@@ -170,7 +170,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         if (!mModifiable) {
             mCanTriggerLongClick = false;
             
-            if (!mProperties.isToggle) {
+            // if (!mProperties.isToggle) {
                 if (mProperties.keycode >= 0) {
                     boolean isDown;
                     switch (event.getActionMasked()) {
@@ -187,13 +187,13 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                             return false;
                     }
                     MainActivity.sendKeyPress(mProperties.keycode, mMods, isDown);
+                    return true;
                 }
-            } else if (mGestureDetector.onTouchEvent(event)) {
+            /* } else if (mGestureDetector.onTouchEvent(event)) {
                 mChecked = !mChecked;
                 MainActivity.sendKeyPress(mProperties.keycode, mMods, mChecked);
-            }
+            } */
 
-            return true;
         } else {
             if (mGestureDetector.onTouchEvent(event)) {
                 mCanTriggerLongClick = true;
