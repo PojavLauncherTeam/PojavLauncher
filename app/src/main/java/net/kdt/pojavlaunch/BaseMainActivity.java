@@ -719,7 +719,7 @@ public class BaseMainActivity extends LoggableActivity {
             Tools.showError(this, e, true);
         }
     }
-
+/*
     @Override   
     public boolean onKeyUp(int keyCode, KeyEvent event) {   
         AndroidLWJGLKeycode.execKey(event, keyCode, false);   
@@ -731,7 +731,7 @@ public class BaseMainActivity extends LoggableActivity {
         AndroidLWJGLKeycode.execKey(event, keyCode, true);    
         return super.onKeyDown(keyCode, event); 
     }
-    
+*/
     //private Dialog menuDial;
 
     @Override
