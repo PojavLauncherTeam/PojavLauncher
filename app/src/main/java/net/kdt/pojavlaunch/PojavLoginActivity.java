@@ -12,6 +12,7 @@ import android.support.v7.app.*;
 import android.system.*;
 import android.text.*;
 import android.text.style.*;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
@@ -322,6 +323,7 @@ public class PojavLoginActivity extends BaseActivity
         mkdirs(Tools.CTRLMAP_PATH);
         
         try {
+            AssetManager am = this.getAssets();
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
             
             Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
@@ -329,7 +331,47 @@ public class PojavLoginActivity extends BaseActivity
             // Extract launcher_profiles.json
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
-            
+
+            InputStream is = am.open("components/lwjgl3/version");
+            if(!new File(Tools.MAIN_PATH + "/lwjgl3/version").exists()) {
+                Log.i("LWJGL3Prep","Pack was installed manually, or does not exist, unpacking new...");
+                String[] lwjglFileList = am.list("components/lwjgl3");
+                FileOutputStream fos;
+                InputStream iis;
+                for(String s : lwjglFileList) {
+                    iis = am.open("components/lwjgl3/"+s);
+                    fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
+                    int i; byte[] buf = new byte[1024];
+                    while((i = iis.read(buf)) != -1) {
+                        fos.write(buf,0,i);
+                    }
+                    fos.close();
+                    iis.close();
+                }
+            }else {
+                FileInputStream fis = new FileInputStream(new File(Tools.MAIN_PATH + "/lwjgl3/version"));
+                byte[] release1 = new byte[is.available()];
+                byte[] release2 = new byte[fis.available()];
+                is.read(release1);
+                fis.read(release2);
+                if(!Arrays.equals(release1,release2)) {
+                    String[] lwjglFileList = am.list("components/lwjgl3");
+                    FileOutputStream fos;
+                    InputStream iis;
+                    for(String s : lwjglFileList) {
+                        iis = am.open("components/lwjgl3/"+s);
+                        fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
+                        int i; byte[] buf = new byte[1024];
+                        while((i = iis.read(buf)) != -1) {
+                            fos.write(buf,0,i);
+                        }
+                        fos.close();
+                        iis.close();
+                    }
+                }else{
+                    Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
+                }
+            }
             if (!isJavaRuntimeInstalled()) {
                 File jreTarFile = selectJreTarFile();
                 uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
