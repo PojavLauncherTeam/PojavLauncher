@@ -165,6 +165,7 @@
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_specialkey">特殊键</string>
     <string name="customctrl_hidden">隐藏</string>
+    <string name="customctrl_toggle">可切换</string>
     <string name="customctrl_dynamicpos">动态位置</string>
     <string name="customctrl_dynamicpos_x">动态 X 轴</string>
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
