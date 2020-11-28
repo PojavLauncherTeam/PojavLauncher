@@ -165,6 +165,7 @@
     <string name="customctrl_keyname">Имя</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
     <string name="customctrl_hidden">Скрыто</string>
+    <string name="customctrl_toggle">Переключатель</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамический X</string>
     <string name="customctrl_dynamicpos_y">Динамический Y</string>
