@@ -165,6 +165,7 @@
     <string name="customctrl_keyname">Kode kunci</string>
     <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
+    <string name="customctrl_toggle">Bisa beralih</string>
     <string name="customctrl_dynamicpos">Posisi dinamis</string>
     <string name="customctrl_dynamicpos_x">Dinamis X</string>
     <string name="customctrl_dynamicpos_y">Dinamis Y</string>
