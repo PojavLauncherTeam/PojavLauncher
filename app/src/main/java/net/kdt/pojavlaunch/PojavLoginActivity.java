@@ -341,10 +341,13 @@ public class PojavLoginActivity extends BaseActivity
                 for(String s : lwjglFileList) {
                     iis = am.open("components/lwjgl3/"+s);
                     fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
+                    /*
                     int i; byte[] buf = new byte[1024];
                     while((i = iis.read(buf)) != -1) {
                         fos.write(buf,0,i);
                     }
+                    */
+                    IOUtils.copy(iis,fos);
                     fos.close();
                     iis.close();
                 }
@@ -361,10 +364,14 @@ public class PojavLoginActivity extends BaseActivity
                     for(String s : lwjglFileList) {
                         iis = am.open("components/lwjgl3/"+s);
                         fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
+                        /*
                         int i; byte[] buf = new byte[1024];
                         while((i = iis.read(buf)) != -1) {
                             fos.write(buf,0,i);
                         }
+                        */
+                        IOUtils.copy(iis,fos);
+
                         fos.close();
                         iis.close();
                     }
