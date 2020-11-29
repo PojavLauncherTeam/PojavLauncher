@@ -674,8 +674,8 @@ public final class Tools
         outPath.getParentFile().mkdirs();
         outPath.createNewFile();
 
-        FileOutputStream fos = new FileOutputStream(path);
-        fos.write(content);
+        BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(path));
+        fos.write(content, 0, content.length);
         fos.close();
     }
 
@@ -704,6 +704,7 @@ public final class Tools
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }
+    
     public static class ZipTool
     {
         private ZipTool(){}

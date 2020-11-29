@@ -46,6 +46,7 @@ public class DownloadUtils {
     public static String downloadString(String url) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         download(url, bos);
+        bos.close();
         return new String(bos.toByteArray(), utf8);
     }
 

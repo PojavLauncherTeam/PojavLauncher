@@ -37,8 +37,10 @@ public class LegacyForgeInstaller extends BaseInstaller {
         libraryFile.getParentFile().mkdirs();
         target = libraryFile.getAbsolutePath().replace("-universal", "");
         ctx.appendlnToLog("Writing " + target);
+        InputStream in = mJarFile.getInputStream(mJarFile.getEntry(profile.install.filePath));
         FileOutputStream out = new FileOutputStream(target);
-        IOUtils.copy(mJarFile.getInputStream(mJarFile.getEntry(profile.install.filePath)), out);
+        IOUtils.copy(in, out);
+        in.close();
         out.close();
         
         mJarFile.close();

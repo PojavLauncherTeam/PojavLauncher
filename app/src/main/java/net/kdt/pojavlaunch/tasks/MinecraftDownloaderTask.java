@@ -125,7 +125,11 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     } catch (Throwable th) {
                         if (verInfo.inheritsFrom != null) {
                             minecraftMainFile.delete();
-                            IOUtils.copy(new FileInputStream(new File(Tools.versnDir, verInfo.inheritsFrom + "/" + verInfo.inheritsFrom + ".jar")), new FileOutputStream(minecraftMainFile));
+                            FileInputStream is = new FileInputStream(new File(Tools.versnDir, verInfo.inheritsFrom + "/" + verInfo.inheritsFrom + ".jar"));
+                            FileOutputStream os = new FileOutputStream(minecraftMainFile);
+                            IOUtils.copy(is, os);
+                            is.close();
+                            os.close();
                         } else {
                             throw th;
                         }

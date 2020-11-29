@@ -364,31 +364,18 @@ public class PojavLoginActivity extends BaseActivity
                     fos.close();
                     iis.close();
                 }
-            }else {
+            } else {
                 FileInputStream fis = new FileInputStream(new File(Tools.MAIN_PATH + "/lwjgl3/version"));
                 byte[] release1 = new byte[is.available()];
                 byte[] release2 = new byte[fis.available()];
                 is.read(release1);
                 fis.read(release2);
-                if(!Arrays.equals(release1,release2)) {
+                if (!Arrays.equals(release1,release2)) {
                     String[] lwjglFileList = am.list("components/lwjgl3");
-                    FileOutputStream fos;
-                    InputStream iis;
-                    for(String s : lwjglFileList) {
-                        iis = am.open("components/lwjgl3/"+s);
-                        fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
-                        /*
-                        int i; byte[] buf = new byte[1024];
-                        while((i = iis.read(buf)) != -1) {
-                            fos.write(buf,0,i);
-                        }
-                        */
-                        IOUtils.copy(iis,fos);
-
-                        fos.close();
-                        iis.close();
+                    for (String s : lwjglFileList) {
+                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.MAIN_PATH + "/lwjgl3", true);
                     }
-                }else{
+                } else {
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
                 }
             }
@@ -399,10 +386,7 @@ public class PojavLoginActivity extends BaseActivity
                     uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
                 }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
-                byte[] buf = new byte[1024];
-                int i = am.open("components/jre/version").read(buf);;
-                String s = new String(buf,0,i);
-                setPref(PREF_JAVARUNTIME_VER,s);
+                setPref(PREF_JAVARUNTIME_VER, Tools.read(am.open("components/jre/version")));
             }
             
             JREUtils.relocateLibPath(this);
@@ -464,10 +448,11 @@ public class PojavLoginActivity extends BaseActivity
     private void copyDummyNativeLib(String name) throws Throwable {
         File fileLib = new File(Tools.homeJreDir, Tools.homeJreLib + "/" + name);
         fileLib.delete();
-        IOUtils.copy(
-            new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, name)),
-            new FileOutputStream(fileLib)
-        );
+        FileInputStream is = new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, name));
+        FileOutputStream os = new FileOutputStream(fileLib);
+        IOUtils.copy(is, os);
+        is.close();
+        os.close();
     }
     
     private File selectJreTarFile() throws InterruptedException {
@@ -562,7 +547,9 @@ public class PojavLoginActivity extends BaseActivity
                 destPath.createNewFile();
                 // destPath.setExecutable(true);
                 
-                IOUtils.copy(tarIn, new FileOutputStream(destPath));
+                FileOutputStream os = new FileOutputStream(destPath);
+                IOUtils.copy(tarIn, os);
+                os.close();
 
 /*
                 byte[] btoRead = new byte[2048];
