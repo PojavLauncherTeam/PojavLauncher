@@ -306,11 +306,10 @@ public class PojavLoginActivity extends BaseActivity
 
     private boolean isJavaRuntimeInstalled(AssetManager am) {
         try {
-            byte[] buf = new byte[1024];
-            int i = am.open("components/jre/version").read(buf);;
-            String s = new String(buf,0,i);
-            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false) && s.equals(firstLaunchPrefs.getString(PREF_JAVARUNTIME_VER,""));
+            
+            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false) && Tools.read(new FileInputStream(Tools.homeJreDir+"/version")).equals(Tools.read(am.open("components/jre/version"));
         }catch(IOException e) {
+            Log.e("JVMCtl","failed to read file",e);
             return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
         }
     }
@@ -373,7 +372,7 @@ public class PojavLoginActivity extends BaseActivity
                 if (!Arrays.equals(release1,release2)) {
                     String[] lwjglFileList = am.list("components/lwjgl3");
                     for (String s : lwjglFileList) {
-                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.MAIN_PATH + "/lwjgl3", true);
+                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools., true);
                     }
                 } else {
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
@@ -386,7 +385,7 @@ public class PojavLoginActivity extends BaseActivity
                     uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
                 }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
-                setPref(PREF_JAVARUNTIME_VER, Tools.read(am.open("components/jre/version")));
+                Tools.copyAssetFile(this, "components/jre/version" + s, Tools.homeJreDir + "/version", true);
             }
             
             JREUtils.relocateLibPath(this);
