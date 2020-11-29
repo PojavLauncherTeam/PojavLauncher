@@ -423,37 +423,37 @@ public class PojavLoginActivity extends BaseActivity
     }
     private boolean installRuntimeAutomatically(AssetManager am) {
         File rtUniversal = new File(Tools.homeJreDir+"/universal.tar.xz");
-        File rtPlatformDependent = new File(Tools.homeJreDir+"/cust-bin.tar.xz");;
+        File rtPlatformDependent = new File(Tools.homeJreDir+"/cust-bin.tar.xz");
         InputStream is;
         FileOutputStream os;
         try {
             is = am.open("components/runtime/universal.tar.xz");
-            os =  new FileOutputStream(rtUniversal);
+            os = new FileOutputStream(rtUniversal);
             IOUtils.copy(is,os);
             is.close();
             os.close();
             uncompressTarXZ(rtUniversal, new File(Tools.homeJreDir));
-        }catch(IOException e){
+        } catch (IOException e){
             Log.e("JREAuto","Failed to unpack universal. Custom embedded-less build?",e);
             return false;
         }
         try {
-            is = am.open("components/runtime/bin-" + new File(getApplicationInfo().nativeLibraryDir).getName() + ".tar.xz");
+            is = am.open("components/runtime/bin-" + Tools.currentArch.split("/")[0] + ".tar.xz");
             os = new FileOutputStream(rtPlatformDependent);
             IOUtils.copy(is, os);
             is.close();
             os.close();
             uncompressTarXZ(rtPlatformDependent, new File(Tools.homeJreDir));
-        }catch(IOException e) {
+        } catch (IOException e) {
             //Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?), in both cases, redirecting to manual install, and removing the universal stuff
-            for(File f : new File(Tools.homeJreDir).listFiles()) {
-                if(f.isDirectory()){
+            for (File f : new File(Tools.homeJreDir).listFiles()) {
+                if (f.isDirectory()){
                     try {
                         FileUtils.deleteDirectory(f);
-                    }catch(IOException e1) {
+                    } catch(IOException e1) {
                         Log.e("JREAuto","da fuq is wrong wit ur device?",e1);
                     }
-                }else{
+                } else{
                     f.delete();
                 }
             }

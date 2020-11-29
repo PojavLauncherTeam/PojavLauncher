@@ -632,18 +632,6 @@ public final class Tools
         return out;
     }
 
-    public static void deleteRecursive(File fileOrDirectory) {
-        try {
-            if (fileOrDirectory.isDirectory()) {
-                for (File child : fileOrDirectory.listFiles()) {
-                    deleteRecursive(child);
-                }
-            }
-        } finally {
-            fileOrDirectory.delete();
-        }
-    }
-
     public static File lastFileModified(String dir) {
         File fl = new File(dir);
 

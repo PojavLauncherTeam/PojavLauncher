@@ -59,8 +59,8 @@ public class PojavApplication extends Application
 			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
             Tools.currentArch = new File(getApplicationInfo().nativeLibraryDir).getName();
 			switch (Tools.currentArch) {
-                case "arm": Tools.currentArch = "arm/aarch32"; break;
-                case "arm64": Tools.currentArch = "arm64/aarch64"; break;
+                case "arm": Tools.currentArch = "aarch32"; break;
+                case "arm64": Tools.currentArch = "aarch64"; break;
                 case "x86": Tools.currentArch = "x86/i*86"; break;
                 case "x86_64": Tools.currentArch = "x86_64/amd64"; break;
             }
