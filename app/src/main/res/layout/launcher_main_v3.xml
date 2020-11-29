@@ -116,7 +116,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="match_parent"
 							android:gravity="center"
-							android:text="@string/main_version_"
+							android:text="@string/main_version"
 							android:textAppearance="?android:attr/textAppearanceMedium"
 							android:textSize="12sp"/>
 

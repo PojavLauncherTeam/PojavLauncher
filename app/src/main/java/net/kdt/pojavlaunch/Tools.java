@@ -75,7 +75,7 @@ public final class Tools
     
     public static void launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
         JREUtils.relocateLibPath(ctx);
-        ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
+        // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
         
         List<String> javaArgList = new ArrayList<String>();
         javaArgList.add(Tools.homeJreDir + "/bin/java");
@@ -159,10 +159,11 @@ public final class Tools
 
     public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) {
         String username = profile.getUsername();
-        String versionName = profile.getVersion();
+        String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
         }
+        
         String userType = "mojang";
 
         File gameDir = new File(Tools.MAIN_PATH);
@@ -341,15 +342,11 @@ public final class Tools
         CallbackBridge.windowHeight = currentDisplayMetrics.heightPixels;
     }
 
-    public static float pxToDp(Context ctx, float px) {
-        return (px / ctx.getResources().getDisplayMetrics().density);
-    }
-
-    public static float dpToPx(Context ctx, float dp) {
+    public static float dpToPx(float dp) {
         // 921600 = 1280 * 720, default scale
         // TODO better way to scaling
-        // float scaledDp = dp / 921600 * CallbackBridge.windowWidth * CallbackBridge.windowHeight;
-        return (dp /* scaledDp */ * ctx.getResources().getDisplayMetrics().density);
+        float scaledDp = dp; // / DisplayMetrics.DENSITY_XHIGH * currentDisplayMetrics.densityDpi;
+        return (scaledDp * currentDisplayMetrics.density);
     }
 
     public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws Exception
@@ -361,7 +358,9 @@ public final class Tools
     {
         try {
             File file = new File(output);
-            if(!file.exists()) file.mkdirs();
+            if(!file.exists()) {
+                file.mkdirs();
+            }
             File file2 = new File(output, outputName);
             if(!file2.exists() || overwrite){
                 write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
@@ -532,18 +531,13 @@ public final class Tools
             for (DependentLibrary lib : customVer.libraries) {
                 if (lib.name.startsWith(optifineLib)) {
                     customVer.optifineLib = lib;
-                } else if (lib.name.startsWith("net.minecraft:launchwrapper")) {
-                    int versionIndex = lib.name.lastIndexOf(":");
-                    if (lib.name.substring(versionIndex + 1).startsWith("1.")) {
-                        lib.name = lib.name.substring(0, versionIndex + 1) + "2.0";
-                    }
                 }
             }
-            if (customVer.inheritsFrom == null || customVer.inheritsFrom.isEmpty()) {
+            if (customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer = Tools.GLOBAL_GSON.fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
-                inheritsVer.inheritsFrom = "";
+                inheritsVer.inheritsFrom = inheritsVer.id;
                 
                 insertSafety(inheritsVer, customVer,
                              "assetIndex", "assets", "id",
@@ -620,9 +614,12 @@ public final class Tools
             }
         }
     }
-
+    
+    public static String convertStream(InputStream inputStream) throws IOException {
+        return convertStream(inputStream, Charset.forName("UTF-8"));
+    }
+    
     public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
-
         String out = "";
         int len;
         byte[] buf = new byte[512];
@@ -666,7 +663,7 @@ public final class Tools
     }
 
 
-    public static String read(InputStream is) throws Exception {
+    public static String read(InputStream is) throws IOException {
         String out = "";
         int len;
         byte[] buf = new byte[512];
@@ -676,11 +673,11 @@ public final class Tools
         return out;
     }
 
-    public static String read(String path) throws Exception {
+    public static String read(String path) throws IOException {
         return read(new FileInputStream(path));
     }
 
-    public static void write(String path, byte[] content) throws Exception
+    public static void write(String path, byte[] content) throws IOException
     {
         File outPath = new File(path);
         outPath.getParentFile().mkdirs();
@@ -691,8 +688,7 @@ public final class Tools
         fos.close();
     }
 
-    public static void write(String path, String content) throws Exception
-    {
+    public static void write(String path, String content) throws IOException {
         write(path, content.getBytes());
     }
 
@@ -713,7 +709,7 @@ public final class Tools
         return buffer;
     }
 
-    public static void downloadFile(String urlInput, String nameOutput) throws Throwable {
+    public static void downloadFile(String urlInput, String nameOutput) throws IOException {
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }

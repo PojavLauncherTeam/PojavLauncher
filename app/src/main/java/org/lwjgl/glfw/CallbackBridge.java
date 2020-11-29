@@ -11,7 +11,6 @@ public class CallbackBridge {
     public static final int CLIPBOARD_COPY = 2000;
     public static final int CLIPBOARD_PASTE = 2001;
     
-    public static boolean isMinecraft1p12;
     public static volatile int windowWidth, windowHeight;
     public static int mouseX, mouseY;
     public static boolean mouseLeft;
@@ -32,7 +31,7 @@ public class CallbackBridge {
     private static boolean threadAttached;
     public static void sendCursorPos(int x, int y) {
         if (!threadAttached) {
-            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, isMinecraft1p12, BaseMainActivity.isInputStackCall);
+            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
         
         DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
@@ -46,12 +45,16 @@ public class CallbackBridge {
         sendMouseKeycode(-1, 0, false);
     }
 
-    public static void sendKeycode(int keycode, char keychar, int modifiers, boolean isDown) {
+    public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
         DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
         // TODO CHECK: This may cause input issue, not receive input!
-        if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar((int) keychar)) {
-            nativeSendKey(keycode, 0 /* scancode */, isDown ? 1 : 0, modifiers);
+/*
+        if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar(keychar)) {
+            nativeSendKey(keycode, 0, isDown ? 1 : 0, modifiers);
         }
+*/
+
+        nativeSendKeycode(keycode, keychar, scancode, isDown ? 1 : 0, modifiers);
         
         // sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
     }
@@ -124,13 +127,15 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isMinecraft1p12, boolean isUsePushPoll);
-    private static native boolean nativeSendChar(int codepoint);
+    public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
+    /*
+    private static native boolean nativeSendChar(char codepoint);
     // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
-    private static native boolean nativeSendCharMods(int codepoint, int mods);
+    private static native boolean nativeSendCharMods(char codepoint, int mods);
+    */
     // private static native void nativeSendCursorEnter(int entered);
     private static native void nativeSendCursorPos(int x, int y);
-    private static native void nativeSendKey(int key, int scancode, int action, int mods);
+    private static native void nativeSendKeycode(int keycode, char keychar, int scancode, int action, int mods);
     private static native void nativeSendMouseButton(int button, int action, int mods);
     private static native void nativeSendScroll(double xoffset, double yoffset);
     private static native void nativeSendScreenSize(int width, int height);

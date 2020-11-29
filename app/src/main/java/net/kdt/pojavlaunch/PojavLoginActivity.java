@@ -12,6 +12,7 @@ import android.support.v7.app.*;
 import android.system.*;
 import android.text.*;
 import android.text.style.*;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
@@ -45,7 +46,7 @@ public class PojavLoginActivity extends BaseActivity
     
     private SharedPreferences firstLaunchPrefs;
     
-    private boolean isSkipInit = false;
+    private static boolean isSkipInit = false;
     
     // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
@@ -56,10 +57,10 @@ public class PojavLoginActivity extends BaseActivity
         
         Tools.updateWindowSize(this);
         
-        ControlData.pixelOf2dp = (int) Tools.dpToPx(this, 2);
-        ControlData.pixelOf30dp = (int) Tools.dpToPx(this, 30);
-        ControlData.pixelOf50dp = (int) Tools.dpToPx(this, 50);
-        ControlData.pixelOf80dp = (int) Tools.dpToPx(this, 80);
+        ControlData.pixelOf2dp = (int) Tools.dpToPx(2);
+        ControlData.pixelOf30dp = (int) Tools.dpToPx(30);
+        ControlData.pixelOf50dp = (int) Tools.dpToPx(50);
+        ControlData.pixelOf80dp = (int) Tools.dpToPx(80);
         ControlData[] specialButtons = ControlData.getSpecialButtons();
         specialButtons[0].name = getString(R.string.control_keyboard);
         specialButtons[1].name = getString(R.string.control_toggle);
@@ -69,8 +70,6 @@ public class PojavLoginActivity extends BaseActivity
         
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
         new InitTask().execute(isSkipInit);
-        
-        isSkipInit = true;
     }
 
     private class InitTask extends AsyncTask<Boolean, String, Integer>{
@@ -217,8 +216,7 @@ public class PojavLoginActivity extends BaseActivity
                 System.out.println(currFile.getAbsolutePath());
                 if (currFile.getAbsolutePath().contains("/values-") || currFile.getName().startsWith("values-")) {
                     // TODO use regex(?)
-                    Locale thisLocale = new Locale(currFile.getName().replace("values-", "").replace("-r", "-"));
-                    langAdapter.add(new DisplayableLocale(thisLocale));
+                    langAdapter.add(new DisplayableLocale(currFile.getName().replace("values-", "").replace("-r", "-")));
                 }
             }
         } catch (IOException e) {
@@ -248,7 +246,7 @@ public class PojavLoginActivity extends BaseActivity
                 
                 Locale locale;
                 if (position == 0) {
-                    locale = Locale.getDefault();
+                    locale = LocaleUtils.DEFAULT_LOCALE;
                 } else if (position == 1) {
                     locale = Locale.ENGLISH;
                 } else {
@@ -281,6 +279,8 @@ public class PojavLoginActivity extends BaseActivity
                     edit3.setEnabled(!p2);
                 }
             });
+            
+        isSkipInit = true;
     }
     
     @Override
@@ -323,6 +323,7 @@ public class PojavLoginActivity extends BaseActivity
         mkdirs(Tools.CTRLMAP_PATH);
         
         try {
+            AssetManager am = this.getAssets();
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
             
             Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
@@ -330,16 +331,54 @@ public class PojavLoginActivity extends BaseActivity
             // Extract launcher_profiles.json
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
-            
-            Tools.copyAssetFile(this, "ClassWrapper.jar", Tools.MAIN_PATH + "/lwjgl3", false);
-            
-            // Yep, the codebase from v1.0.3:
-            //FileAccess.copyAssetToFolderIfNonExist(this, "1.0.jar", Tools.versnDir + "/1.0");
-            //FileAccess.copyAssetToFolderIfNonExist(this, "1.7.3.jar", Tools.versnDir + "/1.7.3");
-            //FileAccess.copyAssetToFolderIfNonExist(this, "1.7.10.jar", Tools.versnDir + "/1.7.10");
-            
-            // UpdateDataChanger.changeDataAuto("2.4", "2.4.2");
-            
+
+            InputStream is = am.open("components/lwjgl3/version");
+            if(!new File(Tools.MAIN_PATH + "/lwjgl3/version").exists()) {
+                Log.i("LWJGL3Prep","Pack was installed manually, or does not exist, unpacking new...");
+                String[] lwjglFileList = am.list("components/lwjgl3");
+                FileOutputStream fos;
+                InputStream iis;
+                for(String s : lwjglFileList) {
+                    iis = am.open("components/lwjgl3/"+s);
+                    fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
+                    /*
+                    int i; byte[] buf = new byte[1024];
+                    while((i = iis.read(buf)) != -1) {
+                        fos.write(buf,0,i);
+                    }
+                    */
+                    IOUtils.copy(iis,fos);
+                    fos.close();
+                    iis.close();
+                }
+            }else {
+                FileInputStream fis = new FileInputStream(new File(Tools.MAIN_PATH + "/lwjgl3/version"));
+                byte[] release1 = new byte[is.available()];
+                byte[] release2 = new byte[fis.available()];
+                is.read(release1);
+                fis.read(release2);
+                if(!Arrays.equals(release1,release2)) {
+                    String[] lwjglFileList = am.list("components/lwjgl3");
+                    FileOutputStream fos;
+                    InputStream iis;
+                    for(String s : lwjglFileList) {
+                        iis = am.open("components/lwjgl3/"+s);
+                        fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
+                        /*
+                        int i; byte[] buf = new byte[1024];
+                        while((i = iis.read(buf)) != -1) {
+                            fos.write(buf,0,i);
+                        }
+                        */
+                        IOUtils.copy(iis,fos);
+
+                        fos.close();
+                        iis.close();
+                    }
+                }else{
+                    Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
+                }
+            }
             if (!isJavaRuntimeInstalled()) {
                 File jreTarFile = selectJreTarFile();
                 uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
@@ -357,7 +396,7 @@ public class PojavLoginActivity extends BaseActivity
             
             // Refresh libraries
             copyDummyNativeLib("libawt_xawt.so");
-            copyDummyNativeLib("libfontconfig.so");
+            // copyDummyNativeLib("libfontconfig.so");
         }
         catch(Throwable e){
             Tools.showError(this, e);

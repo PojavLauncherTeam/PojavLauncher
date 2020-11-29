@@ -191,7 +191,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *e
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv *env, jclass clazz) {
-	  return eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+    return eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv *env, jclass clazz, jint interval) {

@@ -15,17 +15,23 @@
             android:title="@string/mcl_setting_title_longpresstrigger"
             android:summary="@string/mcl_setting_subtitle_longpresstrigger" />
 		
+        <android.support.v7.preference.SeekBarPreference
+            android:key="buttonscale"
+            android:title="@string/mcl_setting_title_buttonscale"
+            android:summary="@string/mcl_setting_subtitle_buttonscale" />
+		
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="freeform"
 			android:title="@string/mcl_setting_title_freeform"
 			android:summary="@string/mcl_setting_subtitle_freeform"/>
 
-        <android.support.v7.preference.EditTextPreference
+        <EditTextPreference
 			android:key="javaArgs"
 			android:title="@string/mcl_setting_title_javaargs"
 			android:summary="@string/mcl_setting_subtitle_javaargs"
-			android:dialogTitle="@string/mcl_setting_title_javaargs"/>
+			android:dialogTitle="@string/mcl_setting_title_javaargs"
+            android:singleLine="true"/>
 		
     </android.support.v7.preference.PreferenceCategory>
 	

@@ -1,0 +1,66 @@
+package org.lwjgl.glfw;
+
+public class CallbackBridgeV1 extends CallbackBridge
+{
+    public static final int JRE_TYPE_CURSOR_POS = 0;
+    public static final int JRE_TYPE_CURSOR_BUTTON = 1;
+    public static final int JRE_TYPE_KEYCODE_CONTROL = 2;
+    public static final int JRE_TYPE_KEYCODE_CHAR = 3;
+    public static final int JRE_TYPE_MOUSE_KEYCODE_CONTROL = 4;
+    public static final int JRE_TYPE_WINDOW_SIZE = 5;
+    public static final int JRE_TYPE_GRAB_INITIAL_POS_UNSET = 6;
+
+    public static final int ANDROID_TYPE_GRAB_STATE = 0;
+    
+    public void nativeSendCursorPos(int x, int y) {
+        DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
+        mouseX = x;
+        mouseY = y;
+        sendData(JRE_TYPE_CURSOR_POS, x, y);
+    }
+
+    public void nativeSendGrabInitialPosUnset() {
+        DEBUG_STRING.append("Grab initial posititon uset");
+        sendData(JRE_TYPE_GRAB_INITIAL_POS_UNSET);
+    }
+
+    public void nativeSendKeycode(int keycode, char keychar, int modifiers, boolean isDown) {
+        DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
+        sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
+    }
+
+    @Override
+    public void nativeSendMouseButton(int keycode, int action, int modifiers) {
+        DEBUG_STRING.append("MouseKey=" + keycode + ", down=" + action + "\n");
+        // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
+        sendData(JRE_TYPE_MOUSE_KEYCODE_CONTROL, keycode, action == 1, modifiers);
+    }
+
+    public void nativeSendMouseKeycode(int keycode) {
+        sendMouseKeycode(keycode, 0, true);
+        sendMouseKeycode(keycode, 0, false);
+    }
+
+    @Override
+    public void nativeSendScreenSize(int w, int h) {
+        sendData(JRE_TYPE_WINDOW_SIZE, w, h);
+    }
+    
+    private static String currData;
+    public void sendData(int type, Object... dataArr) {
+        currData = "";
+        for (int i = 0; i < dataArr.length; i++) {
+            if (dataArr[i] instanceof Integer) {
+                currData += Integer.toString((int) dataArr[i]);
+            } else if (dataArr[i] instanceof String) {
+                currData += (String) dataArr[i];
+            } else {
+                currData += dataArr[i].toString();
+            }
+            currData += (i + 1 < dataArr.length ? ":" : "");
+        }
+        nativeSendData(type, currData);
+    }
+    
+    protected native void nativeSendData(int type, String data);
+}

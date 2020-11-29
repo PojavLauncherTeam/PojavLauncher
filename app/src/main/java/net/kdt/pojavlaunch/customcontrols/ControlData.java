@@ -35,7 +35,7 @@ public class ControlData implements Cloneable
      * bigger device or vice versa.
      */
     public String dynamicX, dynamicY;
-    public boolean isDynamicBtn;
+    public boolean isDynamicBtn, isToggle;
     
 	public static ControlData[] getSpecialButtons(){
 		if (SPECIAL_BUTTONS == null) {
@@ -69,8 +69,8 @@ public class ControlData implements Cloneable
 	public String name;
 	public float x;
 	public float y;
-	public int width = pixelOf50dp;
-	public int height = pixelOf50dp;
+	public float width = pixelOf50dp;
+	public float height = pixelOf50dp;
 	public int keycode;
 	public boolean hidden;
 	public boolean holdCtrl;
@@ -99,18 +99,13 @@ public class ControlData implements Cloneable
 		this(name, keycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
 	}
 
-	public ControlData(String name, int keycode, float x, float y, int width, int height) {
-		this.name = name;
-		this.keycode = keycode;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+	public ControlData(String name, int keycode, float x, float y, float width, float height) {
+        this(name, keycode, Float.toString(x), Float.toString(y), width, height, false);
         this.isDynamicBtn = false;
 	}
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
-        this(name, keycode, dynamicX, dynamicY, pixelOf50dp, pixelOf50dp);
+        this(name, keycode, dynamicX, dynamicY, pixelOf50dp, pixelOf50dp, false);
     }
 
     public ControlData(android.content.Context ctx, int resId, int keycode, String dynamicX, String dynamicY, boolean isSquare) {
@@ -118,14 +113,18 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY, boolean isSquare) {
-        this(name, keycode, dynamicX, dynamicY, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
+        this(name, keycode, dynamicX, dynamicY, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp, false);
     }
 
-    public ControlData(String name, int keycode, String dynamicX, String dynamicY, int width, int height) {
-        this(name, keycode, 0, 0, width, height);
+    public ControlData(String name, int keycode, String dynamicX, String dynamicY, float width, float height, boolean isToggle) {
+        this.name = name;
+        this.keycode = keycode;
         this.dynamicX = dynamicX;
         this.dynamicY = dynamicY;
+        this.width = width;
+        this.height = height;
         this.isDynamicBtn = true;
+        this.isToggle = isToggle;
         update();
     }
     
@@ -135,7 +134,7 @@ public class ControlData implements Cloneable
 
 	public ControlData clone() {
         if (this instanceof ControlData) {
-            return new ControlData(name, keycode, ((ControlData) this).dynamicX, ((ControlData) this).dynamicY, width, height);
+            return new ControlData(name, keycode, ((ControlData) this).dynamicX, ((ControlData) this).dynamicY, width, height, isToggle);
         } else {
             return new ControlData(name, keycode, x, y, width, height);
         }
@@ -146,10 +145,10 @@ public class ControlData implements Cloneable
         Map<String, String> keyValueMap = new ArrayMap<>();
         keyValueMap.put("top", "0");
         keyValueMap.put("left", "0");
-        keyValueMap.put("right", Integer.toString(CallbackBridge.windowWidth - width));
-        keyValueMap.put("bottom", Integer.toString(CallbackBridge.windowHeight - height));
-        keyValueMap.put("width", Integer.toString(width));
-        keyValueMap.put("height", Integer.toString(height));
+        keyValueMap.put("right", Float.toString(CallbackBridge.windowWidth - width));
+        keyValueMap.put("bottom", Float.toString(CallbackBridge.windowHeight - height));
+        keyValueMap.put("width", Float.toString(width));
+        keyValueMap.put("height", Float.toString(height));
         keyValueMap.put("screen_width", Integer.toString(CallbackBridge.windowWidth));
         keyValueMap.put("screen_height", Integer.toString(CallbackBridge.windowHeight));
         keyValueMap.put("margin", Integer.toString(pixelOf2dp));
@@ -168,8 +167,10 @@ public class ControlData implements Cloneable
                     specialButtonListener = data.specialButtonListener;
                 }
             }
-        } if (!isDynamicBtn) {
-            return;
+        } if (dynamicX == null) {
+            dynamicX = Float.toString(x);
+        } if (dynamicY == null) {
+            dynamicY = Float.toString(y);
         }
         
         x = insertDynamicPos(dynamicX);

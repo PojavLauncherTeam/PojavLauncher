@@ -23,6 +23,7 @@
 #define EVENT_TYPE_MOUSE_BUTTON 1006
 #define EVENT_TYPE_SCROLL 1007
 #define EVENT_TYPE_WINDOW_SIZE 1008
+#define EVENT_TYPE_KEYCODE 1009
 
 typedef void GLFW_invoke_Char_func(void* window, unsigned int codepoint);
 typedef void GLFW_invoke_CharMods_func(void* window, unsigned int codepoint, int mods);
@@ -34,7 +35,6 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
-bool isMinecraft1p12;
 int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
@@ -98,7 +98,7 @@ jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
     LOGD("Debug: Attaching %s thread to %s, javavm.isNull=%d\n", isAndroid ? "Android" : "JRE", isAndroid ? "JRE" : "Android", (isAndroid ? runtimeJavaVMPtr : dalvikJavaVMPtr) == NULL);
 #endif
 
-    if (*secondJNIEnvPtr != NULL || (!isMinecraft1p12 && !isUseStackQueueCall)) return JNI_TRUE;
+    if (*secondJNIEnvPtr != NULL || (!isUseStackQueueCall)) return JNI_TRUE;
 
     if (isAndroid && runtimeJavaVMPtr) {
         (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
@@ -140,14 +140,13 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
     );
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isMinecraft1p12Bool, jboolean isUseStackQueueBool) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueueBool) {
 #ifdef DEBUG
     LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueue);
 #endif
 
     jboolean result;
 
-    isMinecraft1p12 = isMinecraft1p12Bool;
     isUseStackQueueCall = (int) isUseStackQueueBool;
     if (isAndroid) {
         result = attachThread(true, &runtimeJNIEnvPtr_ANDROID);
@@ -156,10 +155,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
         // getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
     }
     
-    if ((isMinecraft1p12 || isUseStackQueueCall) && isAndroid && result) {
+    if (isUseStackQueueCall && isAndroid && result) {
         isPrepareGrabPos = true;
-        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     }
+        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     
     return result;
 }
@@ -193,21 +192,22 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(J
     return isGrabbing;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jint codepoint) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jchar codepoint /* jint codepoint */) {
     if (GLFW_invoke_Char && isInputReady) {
-        if (isMinecraft1p12 || isUseStackQueueCall) {
+        if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
         } else {
             GLFW_invoke_Char(showingWindow, (unsigned int) codepoint);
+            // return lwjgl2_triggerCharEvent(codepoint);
         }
         return JNI_TRUE;
     }
     return JNI_FALSE;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jint codepoint, jint mods) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jchar codepoint, jint mods) {
     if (GLFW_invoke_CharMods && isInputReady) {
-        if (isMinecraft1p12 || isUseStackQueueCall) {
+        if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR_MODS, (unsigned int) codepoint, mods, 0, 0);
         } else {
             GLFW_invoke_CharMods(showingWindow, codepoint, mods);
@@ -276,6 +276,15 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
     }
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKeycode(JNIEnv* env, jclass clazz, jint keycode, jchar keychar, jint scancode, jint action, jint mods) {
+    if (isInputReady) {
+        Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(env, clazz, keycode, scancode, action, mods);
+        if (!Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(env, clazz, keychar, mods)) {
+            Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(env, clazz, keychar);
+        }
+    }
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(JNIEnv* env, jclass clazz, jint button, jint action, jint mods) {
     if (isInputReady) {
         if (button == -1) {
@@ -292,6 +301,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(JNIEnv* env, jclass clazz, jint width, jint height) {
+    savedWidth = width;
+    savedHeight = height;
+    
     if (isInputReady) {
         if (GLFW_invoke_FramebufferSize) {
             if (isUseStackQueueCall) {

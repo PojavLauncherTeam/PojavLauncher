@@ -1,17 +1,18 @@
 package net.kdt.pojavlaunch.customcontrols;
-import android.widget.*;
 import android.content.*;
 import android.util.*;
 import android.view.*;
+import android.widget.*;
 import com.google.gson.*;
+import java.io.*;
 import net.kdt.pojavlaunch.*;
-import android.support.v7.app.*;
-import java.util.*;
+import net.kdt.pojavlaunch.prefs.*;
+import org.lwjgl.glfw.*;
 
 public class ControlLayout extends FrameLayout
 {
-	private boolean mCanModify;
-	private CustomControls mLayout;
+	protected CustomControls mLayout;
+	private boolean mModifiable;
 	private CustomControlsActivity mActivity;
 	private boolean mControlVisible = false;
     
@@ -32,21 +33,29 @@ public class ControlLayout extends FrameLayout
 		}
 	}
 
-	public void loadLayout(String jsonPath) {
-		try {
-			loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(jsonPath), CustomControls.class));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void loadLayout(String jsonPath) throws IOException, JsonSyntaxException {
+		loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(jsonPath), CustomControls.class));
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
+        if (mModifiable) {
+            removeAllViews();
+        }
+
 		mLayout = controlLayout;
-		removeAllViews();
+        
 		for (ControlData button : controlLayout.mControlDataList) {
             button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
+            button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+            button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+            if (!button.isDynamicBtn) {
+                button.dynamicX = Float.toString(button.x / CallbackBridge.windowWidth) + " * ${screen_width}";
+                button.dynamicY = Float.toString(button.y / CallbackBridge.windowHeight) + " * ${screen_height}";
+            }
+            button.update();
 			addControlView(button);
 		}
+        mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
 
 		setModified(false);
 	}
@@ -57,8 +66,8 @@ public class ControlLayout extends FrameLayout
 	}
 
 	private void addControlView(ControlData controlButton) {
-		final ControlButton view = new ControlButton(getContext(), controlButton);
-		view.setModifiable(mCanModify);
+		final ControlButton view = new ControlButton(this, controlButton);
+		view.setModifiable(mModifiable);
 		addView(view);
 
 		setModified(true);
@@ -82,19 +91,19 @@ public class ControlLayout extends FrameLayout
 	}
 	
 	public void toggleControlVisible() {
-		if (mCanModify) return; // Not using on custom controls activity
+		if (mModifiable) return; // Not using on custom controls activity
 		
 		mControlVisible = !mControlVisible;
 		for (int i = 0; i < getChildCount(); i++) {
 			View view = getChildAt(i);
 			if (view instanceof ControlButton && ((ControlButton) view).getProperties().isHideable) {
-				((ControlButton) view).setVisibility(mControlVisible ? (((ControlButton) view).getProperties().hidden ? View.INVISIBLE : View.VISIBLE) : View.GONE);
+				((ControlButton) view).setVisibility(mControlVisible ? View.VISIBLE : View.GONE);
 			}
 		}
 	}
 	
 	public void setModifiable(boolean z) {
-		mCanModify = z;
+		mModifiable = z;
 		for (int i = 0; i < getChildCount(); i++) {
 			View v = getChildAt(i);
 			if (v instanceof ControlButton) {
@@ -107,7 +116,7 @@ public class ControlLayout extends FrameLayout
 		}
 	}
 
-	private void setModified(boolean z) {
+	protected void setModified(boolean z) {
 		if (mActivity != null) mActivity.isModified = z;
 	}
 }

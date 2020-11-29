@@ -20,7 +20,7 @@ public class LauncherPreferences
     public static String PREF_LANGUAGE = "default";
 	
 	public static void loadPreferences() {
-		PREF_BUTTONSIZE = DEFAULT_PREF.getFloat("controlSize", 1f);
+		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
 		PREF_FREEFORM = DEFAULT_PREF.getBoolean("freeform", false);
 		PREF_VERTYPE_RELEASE = DEFAULT_PREF.getBoolean("vertype_release", true);
 		PREF_VERTYPE_SNAPSHOT = DEFAULT_PREF.getBoolean("vertype_snapshot", false);

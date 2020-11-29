@@ -2,16 +2,18 @@ package net.kdt.pojavlaunch;
 
 import android.graphics.*;
 import android.os.*;
+import android.support.v7.app.*;
+import android.util.*;
 import android.view.*;
 import android.widget.*;
 import java.io.*;
 import java.util.*;
+import net.kdt.pojavlaunch.installers.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
+import android.content.*;
 
 public class JavaGUILauncherActivity extends LoggableActivity {
-    public static volatile boolean IS_JRE_RUNNING;
-
     private AWTCanvasView mTextureView;
     private LinearLayout contentLog;
     private TextView textLog;
@@ -20,8 +22,10 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
     private File logFile;
     private PrintStream logStream;
+    
+    private final Object mDialogLock = new Object();
 
-    private boolean isLogAllow;
+    private boolean isLogAllow, mSkipDetectMod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +52,86 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                         appendToLog("");
                     }
                 });
-            JREUtils.redirectAndPrintJRELog(this, null);
-
+            
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
 
             mTextureView = findViewById(R.id.installmod_surfaceview);
+           
+            mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
+            if (mSkipDetectMod) {
+                new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            launchJavaRuntime(modFile, javaArgs);
+                        }
+                    }, "JREMainThread").start();
+            } else {
+                openLogOutput(null);
+                new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            try {
+                                doCustomInstall(modFile, javaArgs);
+                                appendlnToLog(getString(R.string.toast_optifine_success));
+                                runOnUiThread(new Runnable(){
 
-            new Thread(new Runnable(){
-                    @Override
-                    public void run() {
-                        launchJavaRuntime(modFile, javaArgs);
-                        IS_JRE_RUNNING = false;
-                    }
-                }, "JREMainThread").start();
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    });
+                            } catch (Throwable e) {
+                                appendlnToLog("Install failed:");
+                                appendlnToLog(Log.getStackTraceString(e));
+                                Tools.showError(JavaGUILauncherActivity.this, e);
+                            }
+                        }
+                    }, "Installer").start();
+            }
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
+    }
+    
+    public String dialogInput(final String title, final int message) {
+        final StringBuilder str = new StringBuilder();
+        
+        runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    final EditText editText = new EditText(JavaGUILauncherActivity.this);
+                    editText.setHint(message);
+                    editText.setSingleLine();
+                    
+                    AlertDialog.Builder d = new AlertDialog.Builder(JavaGUILauncherActivity.this);
+                    d.setCancelable(false);
+                    d.setTitle(title);
+                    d.setView(editText);
+                    d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                            @Override
+                            public void onClick(DialogInterface i, int id) {
+                                str.append(editText.getText().toString());
+                                synchronized (mDialogLock) {
+                                    mDialogLock.notifyAll();
+                                }
+                            }
+                        });
+                    d.show();
+                }
+            });
+
+        try {
+            synchronized (mDialogLock) {
+                mDialogLock.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        return str.toString();
     }
 
     public void forceClose(View v) {
@@ -76,11 +143,39 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     }
 
     public void closeLogOutput(View view) {
-        contentLog.setVisibility(View.GONE);
-        // mIsResuming = true;
+        if (mSkipDetectMod) {
+            contentLog.setVisibility(View.GONE);
+        } else {
+            forceClose(null);
+        }
+    }
+    
+    private void doCustomInstall(File modFile, String javaArgs) throws IOException {
+        isLogAllow = true;
+        
+        // Attempt to detects some mod installers 
+        BaseInstaller installer = new BaseInstaller();
+        installer.setInput(modFile);
+        
+        if (InstallerDetector.isForgeLegacy(installer)) {
+            appendlnToLog("Detected Forge Installer 1.12.1 or below!");
+            new LegacyForgeInstaller(installer).install(this);
+        } else if (InstallerDetector.isForgeNew(installer)) {
+            appendlnToLog("Detected Forge Installer 1.12.2 or above!");
+            new NewForgeInstaller(installer).install(this);
+        } else if (InstallerDetector.isFabric(installer)) {
+            appendlnToLog("Detected Fabric Installer!");
+            new FabricInstaller(installer).install(this);
+        } else {
+            appendlnToLog("No mod detected. Starting JVM");
+            isLogAllow = false;
+            mSkipDetectMod = true;
+            launchJavaRuntime(modFile, javaArgs);
+        }
     }
 
-    private void launchJavaRuntime(File modFile, String javaArgs) {
+    public void launchJavaRuntime(File modFile, String javaArgs) {
+        JREUtils.redirectAndPrintJRELog(this, null);
         try {
             List<String> javaArgList = new ArrayList<String>();
 
@@ -111,6 +206,8 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
             // System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 
+            appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
+            
             Tools.launchJavaVM(this, javaArgList);
         } catch (Throwable th) {
             Tools.showError(this, th, true);

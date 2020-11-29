@@ -55,16 +55,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewInit();
-
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
         }
-    }
-    // DEBUG
-    //new android.support.design.widget.NavigationView(this);
-
-    private void viewInit() {
+        
         setContentView(R.layout.launcher_main_v3);
         // setContentView(R.layout.launcher_main);
 
@@ -188,16 +182,11 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        Tools.updateWindowSize(this);
-    }
-
-    private float updateWidthHeight() {
+    protected float updateWidthHeight() {
         float leftRightWidth = (float) CallbackBridge.windowWidth / 100f * 32f;
         float mPlayButtonWidth = CallbackBridge.windowWidth - leftRightWidth * 2f;
-        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(this, CallbackBridge.windowHeight / 9));
-        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth, (int) Tools.dpToPx(this, CallbackBridge.windowHeight / 9));
+        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
+        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
         leftView.setLayoutParams(leftRightParams);
         rightView.setLayoutParams(leftRightParams);
         mPlayButton.setLayoutParams(mPlayButtonParams);
@@ -205,102 +194,14 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         return leftRightWidth;
     }
 
-    public void mcaccSwitchUser(View view)
-    {
-        showProfileInfo();
-    }
-
-    public void mcaccLogout(View view)
-    {
-        //PojavProfile.reset();
-        finish();
-    }
-
-    private void showProfileInfo()
-    {
-        /*
-         new AlertDialog.Builder(this)
-         .setTitle("Info player")
-         .setMessage(
-         "AccessToken=" + profile.getAccessToken() + "\n" +
-         "ClientID=" + profile.getClientID() + "\n" +
-         "ProfileID=" + profile.getProfileID() + "\n" +
-         "Username=" + profile.getUsername() + "\n" +
-         "Version=" + profile.getVersion()
-         ).show();
-         */
-    }
-
-    private void selectTabPage(int pageIndex){
+    @Override
+    protected void selectTabPage(int pageIndex){
         if (tabLayout.getSelectedTabPosition() != pageIndex) {
             tabLayout.setScrollPosition(pageIndex,0f,true);
             viewPager.setCurrentItem(pageIndex);
         }
     }
 
-    @Override
-    protected void onResumeFragments()
-    {
-        super.onResumeFragments();
-        new RefreshVersionListTask(this).execute();
-
-        try{
-            final ProgressDialog barrier = new ProgressDialog(this);
-            barrier.setMessage("Waiting");
-            barrier.setProgressStyle(barrier.STYLE_SPINNER);
-            barrier.setCancelable(false);
-            barrier.show();
-
-            new Thread(new Runnable(){
-
-                    @Override
-                    public void run()
-                    {
-                        while (mConsoleView == null) {
-                            try {
-                                Thread.sleep(20);
-                            } catch (Throwable th) {}
-                        }
-
-                        try {
-                            Thread.sleep(100);
-                        } catch (Throwable th) {}
-
-                        runOnUiThread(new Runnable() {
-                                @Override
-                                public void run()
-                                {
-                                    try {
-                                        mConsoleView.putLog("");
-                                        barrier.dismiss();
-                                    } catch (Throwable th) {
-                                        startActivity(getIntent());
-                                        finish();
-                                    }
-                                }
-                            });
-                    }
-                }).start();
-
-            File lastCrashFile = Tools.lastFileModified(Tools.crashPath);
-            if(CrashFragment.isNewCrash(lastCrashFile) || !mCrashView.getLastCrash().isEmpty()){
-                mCrashView.resetCrashLog = false;
-                selectTabPage(2);
-            } else throw new Exception();
-        } catch(Throwable e){
-            selectTabPage(tabLayout.getSelectedTabPosition());
-        }
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        final View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(uiOptions);
-    }
-
-    private boolean canBack = false;
     public void statusIsLaunching(boolean isLaunching) {
         // As preference fragment put to tab, changes without notice, so need re-load pref
         if (isLaunching) LauncherPreferences.loadPreferences();
@@ -318,35 +219,5 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         mVersionSelector.setEnabled(!isLaunching);
         canBack = !isLaunching;
     }
-    @Override
-    public void onBackPressed()
-    {
-        if (canBack) {
-            super.onBackPressed();
-        }
-    }
-
-    // Catching touch exception
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        try {
-            return super.onTouchEvent(event);
-        } catch (Throwable th) {
-            Tools.showError(this, th);
-            return false;
-        }
-    }
-
-    public void launchGame(View v)
-    {
-        if (!canBack && mIsAssetsProcessing) {
-            mIsAssetsProcessing = false;
-            statusIsLaunching(false);
-        } else if (canBack) {
-            v.setEnabled(false);
-            mTask = new MinecraftDownloaderTask(this);
-            mTask.execute(mProfile.getVersion());
-            mCrashView.resetCrashLog = true;
-        }
-    }
 }
+

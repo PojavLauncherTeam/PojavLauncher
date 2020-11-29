@@ -73,6 +73,8 @@ public class BaseMainActivity extends LoggableActivity {
     
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
+    
+    // protected CapturedEditText mKeyHandlerView;
 
     private LinearLayout contentLog;
     private TextView textLog;
@@ -124,8 +126,6 @@ public class BaseMainActivity extends LoggableActivity {
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
             mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
-            // Minecraft 1.12.x special case: use indirect char pipe
-            CallbackBridge.isMinecraft1p12 = mVersionInfo.assets.startsWith("1.12");
             
             setTitle("Minecraft " + mProfile.getVersion());
             
@@ -197,9 +197,13 @@ public class BaseMainActivity extends LoggableActivity {
            
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
-
-            AndroidLWJGLKeycode.isBackspaceAfterChar = mVersionInfo.minimumLauncherVersion >= 18;
-
+/*
+            mKeyHandlerView = findViewById(R.id.main_key_handler);
+            mKeyHandlerView.setSingleLine(false);
+            mKeyHandlerView.clearFocus();
+            
+            AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
+*/
             placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
             new Thread(new Runnable(){
 
@@ -714,50 +718,18 @@ public class BaseMainActivity extends LoggableActivity {
             e.printStackTrace();
             Tools.showError(this, e, true);
         }
-
-        // Mirror video of OpenGL view.
-        /*
-         new Thread(new Runnable(){
-
-         @Override
-         public void run()
-         {
-         try {
-         while (true) {
-         if (bit == null) continue;
-         runOnUiThread(new Runnable(){
-
-         @Override
-         public void run()
-         {
-         fillCanvasGL();
-         mirrorView.setImageBitmap(bit);
-         }
-         });
-
-         // ~33fps render
-         Thread.sleep(30);
-         }
-         } catch (Throwable th) {
-         th.printStackTrace();
-         }
-         }
-         }).start();
-         */
     }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event)
-    {
-        AndroidLWJGLKeycode.execKey(this, event, keyCode, false);
-        return super.onKeyUp(keyCode, event);
-    }
+    @Override   
+    public boolean onKeyUp(int keyCode, KeyEvent event) {   
+        AndroidLWJGLKeycode.execKey(event, keyCode, false);   
+        return super.onKeyUp(keyCode, event);   
+    }   
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        AndroidLWJGLKeycode.execKey(this, event, keyCode, true);
-        return super.onKeyDown(keyCode, event);
+    @Override   
+    public boolean onKeyDown(int keyCode, KeyEvent event) {   
+        AndroidLWJGLKeycode.execKey(event, keyCode, true);    
+        return super.onKeyDown(keyCode, event); 
     }
 
     //private Dialog menuDial;
@@ -1044,8 +1016,10 @@ public class BaseMainActivity extends LoggableActivity {
     public void onBackPressed() {
         // Prevent back
         // Catch back as Esc keycode at another place
-    }
 
+        // sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+    }
+    
     public void hideKeyboard() {
         try {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -1067,16 +1041,20 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
-        sendKeyPress(keyCode, '\u0000', modifiers, status);
+        sendKeyPress(keyCode, 0, modifiers, status);
+    }
+    
+    public static void sendKeyPress(int keyCode, int scancode, int modifiers, boolean status) {
+        sendKeyPress(keyCode, '\u0000', scancode, modifiers, status);
     }
 
-    public static void sendKeyPress(int keyCode, char keyChar, int modifiers, boolean status) {
-        CallbackBridge.sendKeycode(keyCode, keyChar, modifiers, status);
+    public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
+        CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
     }
 
     public void sendKeyPress(char keyChar) {
-        sendKeyPress(0, keyChar, 0, true);
-        sendKeyPress(0, keyChar, 0, false);
+        sendKeyPress(0, keyChar, 0, 0, true);
+        sendKeyPress(0, keyChar, 0, 0, false);
     }
 
     public void sendKeyPress(int keyCode) {
@@ -1084,8 +1062,8 @@ public class BaseMainActivity extends LoggableActivity {
         sendKeyPress(keyCode, 0, false);
     }
 
-    private boolean isLeftMouseDown, isRightMouseDown;
-    public void sendMouseButton(int button, boolean status) {
+    private static boolean isLeftMouseDown, isRightMouseDown;
+    public static void sendMouseButton(int button, boolean status) {
         // TODO implement this method!!!
         // CallbackBridge.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
         // or

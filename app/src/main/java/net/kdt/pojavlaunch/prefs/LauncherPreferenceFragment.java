@@ -19,7 +19,12 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
 		SeekBarPreference seek2 = (SeekBarPreference) findPreference("timeLongPressTrigger");
 		seek2.setMin(100);
 		seek2.setMax(1000);
-		seek2.setValue(500);
+		seek2.setValue(LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+        
+        SeekBarPreference seek3 = (SeekBarPreference) findPreference("buttonscale");
+        seek3.setMin(20);
+        seek3.setMax(500);
+		seek3.setValue((int) LauncherPreferences.PREF_BUTTONSIZE);
 	}
 
     @Override
