@@ -170,7 +170,9 @@
     <string name="customctrl_dynamicpos_x">Динаміка Х</string>
     <string name="customctrl_dynamicpos_y">Динаміка Y</string>
     <string name="customctrl_keycombine">Сполучення клавіш</string>
+    <string name="customctrl_keycombine_alt">Альт</string>
     <string name="customctrl_keycombine_control">Керування</string>
+    <string name="customctrl_keycombine_shift">Шіфт</string>
     <string name="customctrl_addbutton">Додати кнопку</string>
     <string name="customctrl_selectdefault">Вибирати управління за замовчуванням</string>
     <string name="main_options">Опції</string>
