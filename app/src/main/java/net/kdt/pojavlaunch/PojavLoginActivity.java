@@ -27,6 +27,8 @@ import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;
 import net.kdt.pojavlaunch.prefs.*;
+
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.*;
 
 public class PojavLoginActivity extends BaseActivity
@@ -50,6 +52,7 @@ public class PojavLoginActivity extends BaseActivity
     
     // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
+    public static final String PREF_JAVARUNTIME_VER = "javaRuntimeVersion";
     
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -301,12 +304,22 @@ public class PojavLoginActivity extends BaseActivity
         PojavProfile.setCurrentProfile(this, null);
     }
 
-    private boolean isJavaRuntimeInstalled() {
-        return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
+    private boolean isJavaRuntimeInstalled(AssetManager am) {
+        try {
+            byte[] buf = new byte[1024];
+            int i = am.open("components/jre/version").read(buf);;
+            String s = new String(buf,0,i);
+            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false) && s.equals(firstLaunchPrefs.getString(PREF_JAVARUNTIME_VER,""));
+        }catch(IOException e) {
+            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
+        }
     }
     
     private boolean setPref(String prefName, boolean value) {
         return firstLaunchPrefs.edit().putBoolean(prefName, value).commit();
+    }
+    private boolean setPref(String prefName, String value) {
+        return firstLaunchPrefs.edit().putString(prefName, value).commit();
     }
     
     private void initMain()
@@ -379,11 +392,17 @@ public class PojavLoginActivity extends BaseActivity
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
                 }
             }
-            if (!isJavaRuntimeInstalled()) {
-                File jreTarFile = selectJreTarFile();
-                uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
-                
+
+            if (!isJavaRuntimeInstalled(am)) {
+                if(!installRuntimeAutomatically(am)) {
+                    File jreTarFile = selectJreTarFile();
+                    uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
+                }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
+                byte[] buf = new byte[1024];
+                int i = am.open("components/jre/version").read(buf);;
+                String s = new String(buf,0,i);
+                setPref(PREF_JAVARUNTIME_VER,s);
             }
             
             JREUtils.relocateLibPath(this);
@@ -402,7 +421,46 @@ public class PojavLoginActivity extends BaseActivity
             Tools.showError(this, e);
         }
     }
-    
+    private boolean installRuntimeAutomatically(AssetManager am) {
+        File rtUniversal = new File(Tools.homeJreDir+"/universal.tar.xz");
+        File rtPlatformDependent = new File(Tools.homeJreDir+"/cust-bin.tar.xz");;
+        InputStream is;
+        FileOutputStream os;
+        try {
+            is = am.open("components/runtime/universal.tar.xz");
+            os =  new FileOutputStream(rtUniversal);
+            IOUtils.copy(is,os);
+            is.close();
+            os.close();
+            uncompressTarXZ(rtUniversal, new File(Tools.homeJreDir));
+        }catch(IOException e){
+            Log.e("JREAuto","Failed to unpack universal. Custom embedded-less build?",e);
+            return false;
+        }
+        try {
+            is = am.open("components/runtime/bin-" + new File(getApplicationInfo().nativeLibraryDir).getName() + ".tar.xz");
+            os = new FileOutputStream(rtPlatformDependent);
+            IOUtils.copy(is, os);
+            is.close();
+            os.close();
+            uncompressTarXZ(rtPlatformDependent, new File(Tools.homeJreDir));
+        }catch(IOException e) {
+            //Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?), in both cases, redirecting to manual install, and removing the universal stuff
+            for(File f : new File(Tools.homeJreDir).listFiles()) {
+                if(f.isDirectory()){
+                    try {
+                        FileUtils.deleteDirectory(f);
+                    }catch(IOException e1) {
+                        Log.e("JREAuto","da fuq is wrong wit ur device?",e1);
+                    }
+                }else{
+                    f.delete();
+                }
+            }
+            return false;
+        }
+        return true;
+    }
     private void copyDummyNativeLib(String name) throws Throwable {
         File fileLib = new File(Tools.homeJreDir, Tools.homeJreLib + "/" + name);
         fileLib.delete();
