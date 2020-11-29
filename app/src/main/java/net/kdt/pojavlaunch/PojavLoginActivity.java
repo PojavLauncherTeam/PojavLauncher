@@ -411,7 +411,7 @@ public class PojavLoginActivity extends BaseActivity
         InputStream is;
         FileOutputStream os;
         try {
-            is = am.open("components/runtime/universal.tar.xz");
+            is = am.open("components/jre/universal.tar.xz");
             os = new FileOutputStream(rtUniversal);
             IOUtils.copy(is,os);
             is.close();
@@ -422,7 +422,7 @@ public class PojavLoginActivity extends BaseActivity
             return false;
         }
         try {
-            is = am.open("components/runtime/bin-" + Tools.currentArch.split("/")[0] + ".tar.xz");
+            is = am.open("components/jre/bin-" + Tools.currentArch.split("/")[0] + ".tar.xz");
             os = new FileOutputStream(rtPlatformDependent);
             IOUtils.copy(is, os);
             is.close();
