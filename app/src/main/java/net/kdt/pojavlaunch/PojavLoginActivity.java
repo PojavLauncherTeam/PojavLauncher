@@ -372,7 +372,7 @@ public class PojavLoginActivity extends BaseActivity
                 if (!Arrays.equals(release1,release2)) {
                     String[] lwjglFileList = am.list("components/lwjgl3");
                     for (String s : lwjglFileList) {
-                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools., true);
+                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.MAIN_PATH+"/lwjgl3/",s, true);
                     }
                 } else {
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
