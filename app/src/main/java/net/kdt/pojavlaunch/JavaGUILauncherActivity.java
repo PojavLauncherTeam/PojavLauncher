@@ -142,9 +142,9 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
     public void closeLogOutput(View view) {
         if (mSkipDetectMod) {
-            forceClose(null);
-        } else {
             contentLog.setVisibility(View.GONE);
+        } else {
+            forceClose(null);
         }
     }
     
