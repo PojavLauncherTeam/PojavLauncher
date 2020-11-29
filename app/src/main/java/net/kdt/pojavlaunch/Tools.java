@@ -75,7 +75,7 @@ public final class Tools
     
     public static void launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
         JREUtils.relocateLibPath(ctx);
-        ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
+        // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
         
         List<String> javaArgList = new ArrayList<String>();
         javaArgList.add(Tools.homeJreDir + "/bin/java");

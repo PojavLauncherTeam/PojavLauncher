@@ -54,7 +54,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                 });
             
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
-            final String javaArgs = getIntent().getExtras().getString("javaArgs", "");
+            final String javaArgs = getIntent().getExtras().getString("javaArgs");
 
             mTextureView = findViewById(R.id.installmod_surfaceview);
            
@@ -204,6 +204,8 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
             // System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 
+            appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
+            
             Tools.launchJavaVM(this, javaArgList);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
