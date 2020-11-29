@@ -407,7 +407,20 @@ public class PojavLoginActivity extends BaseActivity
     private boolean installRuntimeAutomatically(AssetManager am) {
         File rtUniversal = new File(Tools.homeJreDir+"/universal.tar.xz");
         File rtPlatformDependent = new File(Tools.homeJreDir+"/cust-bin.tar.xz");
-        if(!new File(Tools.homeJreDir).exists()) new File(Tools.homeJreDir).mkdirs();
+        if(!new File(Tools.homeJreDir).exists()) new File(Tools.homeJreDir).mkdirs(); else {
+            //SANITY: remove the existing files
+            for (File f : new File(Tools.homeJreDir).listFiles()) {
+                if (f.isDirectory()){
+                    try {
+                        FileUtils.deleteDirectory(f);
+                    } catch(IOException e1) {
+                        Log.e("JREAuto","da fuq is wrong wit ur device? n2",e1);
+                    }
+                } else{
+                    f.delete();
+                }
+            }
+        }
         InputStream is;
         FileOutputStream os;
         try {
