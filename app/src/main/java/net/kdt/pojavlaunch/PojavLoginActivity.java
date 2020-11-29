@@ -307,7 +307,7 @@ public class PojavLoginActivity extends BaseActivity
     private boolean isJavaRuntimeInstalled(AssetManager am) {
         try {
             
-            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false) && Tools.read(new FileInputStream(Tools.homeJreDir+"/version")).equals(Tools.read(am.open("components/jre/version"));
+            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false) && Tools.read(new FileInputStream(Tools.homeJreDir+"/version")).equals(Tools.read(am.open("components/jre/version")));
         }catch(IOException e) {
             Log.e("JVMCtl","failed to read file",e);
             return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
@@ -385,7 +385,7 @@ public class PojavLoginActivity extends BaseActivity
                     uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
                 }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
-                Tools.copyAssetFile(this, "components/jre/version" + s, Tools.homeJreDir + "/version", true);
+                Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/version", true);
             }
             
             JREUtils.relocateLibPath(this);
