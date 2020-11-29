@@ -720,16 +720,19 @@ public class BaseMainActivity extends LoggableActivity {
         }
     }
 
-    @Override   
-    public boolean onKeyUp(int keyCode, KeyEvent event) {   
-        AndroidLWJGLKeycode.execKey(event, keyCode, false);   
-        return super.onKeyUp(keyCode, event);   
-    }   
-
-    @Override   
-    public boolean onKeyDown(int keyCode, KeyEvent event) {   
-        AndroidLWJGLKeycode.execKey(event, keyCode, true);    
-        return super.onKeyDown(keyCode, event); 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        switch (event.getAction()) {
+            case KeyEvent.ACTION_DOWN:
+                AndroidLWJGLKeycode.execKey(event, event.getKeyCode(), true);
+                break;
+                
+            case KeyEvent.ACTION_UP:
+                AndroidLWJGLKeycode.execKey(event, event.getKeyCode(), false);
+                break;
+        }
+        
+        return super.dispatchKeyEvent(event);
     }
 
     //private Dialog menuDial;

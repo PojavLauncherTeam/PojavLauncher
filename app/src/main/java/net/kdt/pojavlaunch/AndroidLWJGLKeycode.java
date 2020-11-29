@@ -196,8 +196,8 @@ public class AndroidLWJGLKeycode {
         
         try {
             if (!CallbackBridge.isGrabbing()) {
-                if ((int) keyEvent.getUnicodeChar() != KeyEvent.KEYCODE_UNKNOWN) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(), keyEvent.getScanCode(), mods, isDown);
+                if (keyEvent.isPrintingKey()) {
+                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), mods, isDown);
                 } else if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), mods, isDown);
                 }
