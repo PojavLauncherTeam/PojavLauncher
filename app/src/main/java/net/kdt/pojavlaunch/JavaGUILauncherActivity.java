@@ -23,7 +23,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     private File logFile;
     private PrintStream logStream;
     
-    private Object mDialogLock = new Object();
+    private final Object mDialogLock = new Object();
 
     private boolean isLogAllow, mSkipDetectMod;
 
@@ -114,7 +114,9 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                             @Override
                             public void onClick(DialogInterface i, int id) {
                                 str.append(editText.getText().toString());
-                                mDialogLock.notifyAll();
+                                synchronized (mDialogLock) {
+                                    mDialogLock.notifyAll();
+                                }
                             }
                         });
                     d.show();
