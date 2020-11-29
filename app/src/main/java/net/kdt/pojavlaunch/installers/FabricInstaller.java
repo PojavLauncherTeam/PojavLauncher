@@ -16,14 +16,14 @@ public class FabricInstaller extends BaseInstaller {
     }
 
     @Override
-    public void install(JavaGUILauncherActivity ctx) throws IOException {
+    public int install(JavaGUILauncherActivity ctx) throws IOException {
         // Unused ZipFile
         mJarFile.close();
         
         String mcversion = ctx.dialogInput("Fabric installer", R.string.main_version);
         
         ctx.appendlnToLog("Launching JVM");
-        ctx.launchJavaRuntime(null,
+        return ctx.launchJavaRuntime(null,
             "-jar " + mFile.getAbsolutePath() + " client -dir . -mcversion " + mcversion);
     }
 }

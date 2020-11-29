@@ -16,7 +16,7 @@ public class NewForgeInstaller extends BaseInstaller {
     }
 
     @Override
-    public void install(JavaGUILauncherActivity ctx) throws IOException {
+    public int install(JavaGUILauncherActivity ctx) throws IOException {
         String target;
 
         ctx.appendlnToLog("Reading install_profile.json");
@@ -44,6 +44,8 @@ public class NewForgeInstaller extends BaseInstaller {
         Tools.downloadFile(downloadPath, target);
         
         mJarFile.close();
+        
+        return 0;
     }
 
     public static ForgeInstallProfile readInstallProfile(BaseInstaller base) throws IOException, JsonSyntaxException {

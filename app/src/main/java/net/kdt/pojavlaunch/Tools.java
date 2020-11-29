@@ -73,7 +73,7 @@ public final class Tools
         launchJavaVM(ctx, javaArgList);
     }
     
-    public static void launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
+    public static int launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
         JREUtils.relocateLibPath(ctx);
         // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
         
@@ -92,21 +92,24 @@ public final class Tools
 
         exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);
-        ctx.runOnUiThread(new Runnable(){
-                @Override
-                public void run() {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-                    dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
-                    dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+        if (exitCode != 0) {
+            ctx.runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+                        dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
+                        dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
-                            @Override
-                            public void onClick(DialogInterface p1, int p2){
-                                BaseMainActivity.fullyExit();
-                            }
-                        });
-                    dialog.show();
-                }
-            });
+                                @Override
+                                public void onClick(DialogInterface p1, int p2){
+                                    BaseMainActivity.fullyExit();
+                                }
+                            });
+                        dialog.show();
+                    }
+                });
+        }
+        return exitCode;
     }
 
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {

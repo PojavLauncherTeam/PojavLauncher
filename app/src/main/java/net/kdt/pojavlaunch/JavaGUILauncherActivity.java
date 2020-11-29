@@ -150,7 +150,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         }
     }
     
-    private void doCustomInstall(File modFile, String javaArgs) throws IOException {
+    private int doCustomInstall(File modFile, String javaArgs) throws IOException {
         isLogAllow = true;
         
         // Attempt to detects some mod installers 
@@ -159,22 +159,22 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         
         if (InstallerDetector.isForgeLegacy(installer)) {
             appendlnToLog("Detected Forge Installer 1.12.1 or below!");
-            new LegacyForgeInstaller(installer).install(this);
+            return new LegacyForgeInstaller(installer).install(this);
         } else if (InstallerDetector.isForgeNew(installer)) {
             appendlnToLog("Detected Forge Installer 1.12.2 or above!");
-            new NewForgeInstaller(installer).install(this);
+            return new NewForgeInstaller(installer).install(this);
         } else if (InstallerDetector.isFabric(installer)) {
             appendlnToLog("Detected Fabric Installer!");
-            new FabricInstaller(installer).install(this);
+            return new FabricInstaller(installer).install(this);
         } else {
             appendlnToLog("No mod detected. Starting JVM");
             isLogAllow = false;
             mSkipDetectMod = true;
-            launchJavaRuntime(modFile, javaArgs);
+            return launchJavaRuntime(modFile, javaArgs);
         }
     }
 
-    public void launchJavaRuntime(File modFile, String javaArgs) {
+    public int launchJavaRuntime(File modFile, String javaArgs) {
         JREUtils.redirectAndPrintJRELog(this, null);
         try {
             List<String> javaArgList = new ArrayList<String>();
@@ -208,9 +208,10 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
             appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
             
-            Tools.launchJavaVM(this, javaArgList);
+            return Tools.launchJavaVM(this, javaArgList);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
+            return -1;
         }
     }
 
