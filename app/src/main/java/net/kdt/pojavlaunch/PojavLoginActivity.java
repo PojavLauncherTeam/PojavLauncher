@@ -408,6 +408,7 @@ public class PojavLoginActivity extends BaseActivity
     private boolean installRuntimeAutomatically(AssetManager am) {
         File rtUniversal = new File(Tools.homeJreDir+"/universal.tar.xz");
         File rtPlatformDependent = new File(Tools.homeJreDir+"/cust-bin.tar.xz");
+        if(!new File(Tools.homeJreDir).exists()) new File(Tools.homeJreDir).mkdirs();
         InputStream is;
         FileOutputStream os;
         try {
