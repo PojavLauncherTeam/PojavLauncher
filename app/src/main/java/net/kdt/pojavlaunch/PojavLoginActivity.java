@@ -306,12 +306,12 @@ public class PojavLoginActivity extends BaseActivity
     }
 
     private boolean isJavaRuntimeInstalled(AssetManager am) {
+        boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
         try {
-            
-            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false) && Tools.read(new FileInputStream(Tools.homeJreDir+"/version")).equals(Tools.read(am.open("components/jre/version")));
-        }catch(IOException e) {
+            return prefValue && Tools.read(new FileInputStream(Tools.homeJreDir+"/version")).equals(Tools.read(am.open("components/jre/version")));
+        } catch(IOException e) {
             Log.e("JVMCtl","failed to read file",e);
-            return firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
+            return prefValue;
         }
     }
     
