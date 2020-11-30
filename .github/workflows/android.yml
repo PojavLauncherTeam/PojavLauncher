@@ -26,7 +26,7 @@ jobs:
 
     - name: Build APK without runtime
       run: | 
-        rm -rf app/src/main/assets/components/jre
+        rm app/src/main/assets/components/jre/*.tar.xz
         ./gradlew assembleDebug
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-noruntime.apk
 
