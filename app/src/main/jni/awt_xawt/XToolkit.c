@@ -23,9 +23,7 @@
  * questions.
  */
 
-#include <jvm.h>
 #include <jni.h>
-#include <jlong.h>
 
 #include <unistd.h>
 
