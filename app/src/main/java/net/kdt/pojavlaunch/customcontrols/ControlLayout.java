@@ -39,6 +39,7 @@ public class ControlLayout extends FrameLayout
 
 	public void loadLayout(CustomControls controlLayout) {
         if (mModifiable) {
+            hideAllHandleViews();
             removeAllViews();
         }
 

@@ -156,7 +156,12 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                 if (getParent() != null) {
                     ((ControlLayout) getParent()).hideAllHandleViews();
                 }
-                mHandleView.show();
+                
+                try {
+                    mHandleView.show();
+                } catch (Throwable th) {
+                    th.printStackTrace();
+                }
             }
         }
         

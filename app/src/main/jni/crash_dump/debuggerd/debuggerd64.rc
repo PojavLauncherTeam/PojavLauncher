@@ -1,3 +1,0 @@
-service debuggerd64 /system/bin/debuggerd64
-    group root readproc
-    writepid /dev/cpuset/system-background/tasks

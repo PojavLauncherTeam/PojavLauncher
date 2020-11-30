@@ -1,3 +1,0 @@
-service debuggerd /system/bin/debuggerd
-    group root readproc
-    writepid /dev/cpuset/system-background/tasks

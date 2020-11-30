@@ -78,7 +78,6 @@ JNIEXPORT jint JNICALL Java_sun_awt_X11GraphicsEnvironment_getNumScreens(JNIEnv 
  *    0 otherwise
  */
 JNIEXPORT jint JNICALL Java_sun_awt_X11GraphicsEnvironment_checkShmExt(JNIEnv *env, jclass cls, jboolean verbose) {
-    // This could be return 0 once MITShm implementation added
     return (jint) -1;
 }
 

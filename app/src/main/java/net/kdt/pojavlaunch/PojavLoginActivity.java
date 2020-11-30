@@ -128,6 +128,7 @@ public class PojavLoginActivity extends BaseActivity
                     if (revokeCount >= 3) {
                         Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
                         finish();
+                        return 0;
                     }
                     
                     requestStoragePermission();
