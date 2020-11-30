@@ -43,6 +43,7 @@ LOCAL_SRC_FILES := \
     awt_Robot.c \
     awt_UNIXToolkit.c \
     awt_Desktop.c \
-    awt_Taskbar.c
+    awt_Taskbar.c \
+    XToolkit.c
 include $(BUILD_SHARED_LIBRARY)
 

@@ -10,25 +10,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     return JNI_VERSION_1_4;
 }
 
-JNIEXPORT void JNICALL Java_java_awt_FileDialog_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_java_awt_Font_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Component_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Container_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Button_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Scrollbar_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Window_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Frame_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_MenuComponent_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Cursor_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_MenuItem_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Menu_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_TextArea_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Checkbox_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_ScrollPane_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_TextField_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_Dialog_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_KeyboardFocusManager_initIDs(JNIEnv *env, jclass cls) {}
-JNIEXPORT void JNICALL Java_java_awt_TrayIcon_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_sun_awt_X11_XWindow_initIDs(JNIEnv *env, jclass cls) {}
 JNIEXPORT void JNICALL Java_sun_font_SunFontManager_initIDs(JNIEnv *env, jclass cls) {}
 
@@ -45,4 +27,13 @@ JNIEXPORT jboolean JNICALL Java_sun_java2d_x11_X11SurfaceData_isShmPMAvailable(J
 JNIEXPORT void JNICALL Java_sun_java2d_x11_X11SurfaceData_XSetCopyMode(JNIEnv *env, jclass cls, jlong xgc) {}
 JNIEXPORT void JNICALL Java_sun_java2d_x11_X11SurfaceData_XSetXorMode(JNIEnv *env, jclass cls, jlong xgv) {}
 JNIEXPORT void JNICALL Java_sun_java2d_x11_X11SurfaceData_XSetForeground(JNIEnv *env, jclass cls, jlong xgc, jint pixel) {}
+
+JNIEXPORT jint JNICALL
+Java_sun_awt_X11_XlibWrapper_XKeysymToKeycode(JNIEnv *env, jclass clazz,
+                                              jlong display, jlong keysym) {
+    // AWT_CHECK_HAVE_LOCK_RETURN(0);
+    // return XKeysymToKeycode((Display*) jlong_to_ptr(display), (KeySym)keysym);
+    
+    return 0;
+}
 
