@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 29
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -41,7 +41,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 	    // defaultConfig already set
             // multiDexEnabled = true
-            debuggable = true
+           // debuggable = true
         }
     }
 	
