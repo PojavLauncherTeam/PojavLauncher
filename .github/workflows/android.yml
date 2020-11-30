@@ -24,15 +24,20 @@ jobs:
         mv app/build/outputs/apk/debug/app-debug.apk out/app-debug.apk
         # mv app/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
 
-#    - name: Build 32-bit APK with Gradle
-#      run: | 
-#        replace="\, \"x86_64\" , \"arm64-v8a\""
-#        sed -i "s/$replace//g" app/build.gradle
-#        ./gradlew assembleDebug
-#        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-32bit.apk
+    - name: Build APK without runtime
+      run: | 
+        rm -rf app/src/main/assets/components/jre
+        ./gradlew assembleDebug
+        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-noruntime.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
           name: app-debug
-          path: out
+          path: out/app-debug.apk
+
+    - name: Upload APK (without runtime)
+      uses: actions/upload-artifact@v2
+      with:
+          name: app-debug-noruntime
+          path: out/app-debug-noruntime.apk
