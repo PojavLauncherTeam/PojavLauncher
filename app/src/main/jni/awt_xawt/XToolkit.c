@@ -23,10 +23,6 @@
  * questions.
  */
 
-#ifdef __linux__
-#include <execinfo.h>
-#endif
-
 #include <jvm.h>
 #include <jni.h>
 #include <jlong.h>
