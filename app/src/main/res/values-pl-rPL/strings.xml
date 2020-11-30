@@ -25,6 +25,8 @@
     <string name="login_select_account">Wybierz konto</string>
     <!-- Hint -->
     <string name="hint_select_account">Aby wybrać, kliknij. Aby usunąć konto, przytrzymaj.</string>
+    <string name="hint_control_mapping">"Przesuń od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.
+"</string>
     <!-- Warning -->
     <string name="warning_title">Ostrzeżenie</string>
     <string name="warning_msg">Ta aplikacja może nie być zgodna z Twoją wersją Androida (nowszy niż Android 7 lub Android 7). Możesz użyć VMOS, a następnie zainstalować tę aplikację w VMOS. VMOS został usunięty ze Sklepu Play, musisz go zainstalować ręcznie.</string>
@@ -36,6 +38,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Zainstaluj Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Wybierz plik json mapy klawiszy</string>
+    <string name="alerttitle_installmod">Wybierz instalator modów</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
     <string name="error_checklog">Błąd! Sprawdź dziennik poniżej: %s</string>
@@ -45,13 +48,15 @@
     <string name="error_show_less">Pokaż mniej</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Wymagane jest uprawnienie do odczytu / zapisu w pamięci!</string>
-    <string name="toast_login_error">Coś poszło nie tak po zalogowaniu. Prześlij opinię do programisty. \ NBłąd:% s</string>
+    <string name="toast_login_error">Coś poszło nie tak po zalogowaniu. Prześlij opinię do programisty.\nBłąd: %s</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
     <string name="toast_uninstalljre_done">Zakończono odinstalowywanie Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Aktualności</string>
+    <string name="mcl_tab_mcje">Minecraft: Edycja Java</string>
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
     <!-- MCLauncherActivity: Strings -->
@@ -66,6 +71,8 @@
     <string name="mcl_launch_download_assets">Przygotowanie do pobrania zasobów</string>
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modmgr">Menedżer modów (brak funkcji)</string>
+    <string name="mcl_option_modinstall">Uruchom instalator modów (Forge, LabyMod, Fabric itp.)</string>
+    <string name="mcl_option_modinstallwitharg">Uruchom instalator modów (z niestandardowymi argumentami)</string>
     <string name="mcl_option_checkupdate">Sprawdź aktualizacje</string>
     <string name="mcl_option_customcontrol">Niestandardowe kontrole</string>
     <string name="mcl_option_settings">Ustawienia</string>
@@ -76,7 +83,10 @@
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
+    <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
+    <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
     <string name="mcl_setting_title_controlsize">Ustaw rozmiar przycisków sterujących</string>
+    <string name="mcl_setting_title_javaargs">JVM Uruchom argumenty</string>
     <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostanie ona zmodyfikowana bez wiedzy.</string>
     <string name="mcl_setting_category_general">Ustawienia główne</string>
     <string name="mcl_setting_category_veroption">Typ wersji będzie na liście wersji</string>
@@ -156,6 +166,14 @@
     <string name="customctrl_keyname">Kod Klucza</string>
     <string name="customctrl_specialkey">Klucz specjalny</string>
     <string name="customctrl_hidden">Ukryty</string>
+    <string name="customctrl_toggle">Przełączalne</string>
+    <string name="customctrl_dynamicpos">Dynamiczna pozycja</string>
+    <string name="customctrl_dynamicpos_x">Dynamiczne X</string>
+    <string name="customctrl_dynamicpos_y">Dynamiczne Y</string>
+    <string name="customctrl_keycombine">Kombinacja klawiszy</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Dodaj przycisk</string>
     <string name="customctrl_selectdefault">Wybierz domyślny json Control</string>
     <string name="main_options">Opcje</string>
@@ -163,6 +181,7 @@
     <string name="main_welcome">Witaj,</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Przełącz użytkownika</string>
+    <string name="main_version">Wersja:</string>
     <string name="main_nocrash">Nie wykryto awarii</string>
     <string name="main_nolog">Brak plików dziennika.</string>
 </resources>
