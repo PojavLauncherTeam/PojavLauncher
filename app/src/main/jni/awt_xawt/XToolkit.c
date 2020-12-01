@@ -97,17 +97,6 @@ JNIEXPORT jlong JNICALL Java_sun_awt_X11_XToolkit_getDefaultXColormap
     return (jlong) 0; 
 }
 
-JNIEXPORT jint JNICALL
-JNI_OnLoad(JavaVM *vm, void *reserved)
-{
-    // jvm = vm;
-
-    //Set the gtk backend to x11 on all the systems
-    // putenv("GDK_BACKEND=x11");
-
-    return JNI_VERSION_1_2;
-}
-
 /*
  * Class:     sun_awt_X11_XToolkit
  * Method:    nativeLoadSystemColors
