@@ -330,23 +330,19 @@ Java_java_awt_KeyboardFocusManager_initIDs
  */
 JNIEXPORT jstring JNICALL Java_sun_awt_X11_XToolkit_getEnv
 (JNIEnv *env , jclass clazz, jstring key) {
-/*
     char *ptr = NULL;
     const char *keystr = NULL;
     jstring ret = NULL;
 
-    keystr = JNU_GetStringPlatformChars(env, key, NULL);
+    keystr = (*env)->GetStringUTFChars(env, key, NULL);
     if (keystr) {
         ptr = getenv(keystr);
         if (ptr) {
-            ret = JNU_NewStringPlatform(env, (const char *) ptr);
+            ret = (*env)->NewStringUTF(env, (const char *) ptr);
         }
-        JNU_ReleaseStringPlatformChars(env, key, (const char*)keystr);
+        (*env)->ReleaseStringUTFChars(env, key, (const char*)keystr);
     }
     return ret;
-*/
-
-    return (*env)->NewStringUTF(env, getenv(keystr));
 }
 
 /*

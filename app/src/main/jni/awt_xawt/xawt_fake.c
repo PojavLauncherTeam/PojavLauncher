@@ -28,12 +28,3 @@ JNIEXPORT void JNICALL Java_sun_java2d_x11_X11SurfaceData_XSetCopyMode(JNIEnv *e
 JNIEXPORT void JNICALL Java_sun_java2d_x11_X11SurfaceData_XSetXorMode(JNIEnv *env, jclass cls, jlong xgv) {}
 JNIEXPORT void JNICALL Java_sun_java2d_x11_X11SurfaceData_XSetForeground(JNIEnv *env, jclass cls, jlong xgc, jint pixel) {}
 
-JNIEXPORT jint JNICALL
-Java_sun_awt_X11_XlibWrapper_XKeysymToKeycode(JNIEnv *env, jclass clazz,
-                                              jlong display, jlong keysym) {
-    // AWT_CHECK_HAVE_LOCK_RETURN(0);
-    // return XKeysymToKeycode((Display*) jlong_to_ptr(display), (KeySym)keysym);
-    
-    return 0;
-}
-

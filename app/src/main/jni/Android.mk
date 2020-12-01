@@ -44,6 +44,7 @@ LOCAL_SRC_FILES := \
     awt_UNIXToolkit.c \
     awt_Desktop.c \
     awt_Taskbar.c \
+    XlibWrapper.c \
     XToolkit.c
 include $(BUILD_SHARED_LIBRARY)
 
