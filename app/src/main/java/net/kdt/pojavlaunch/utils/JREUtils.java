@@ -53,6 +53,8 @@ public class JREUtils
         dlopen(findInLdLibPath("libnio.so"));
         dlopen(findInLdLibPath("libawt.so"));
         dlopen(findInLdLibPath("libawt_headless.so"));
+        dlopen(findInLdLibPath("libfreetype.so"));
+        dlopen(findInLdLibPath("libfontmanager.so"));
 
         dlopen(nativeLibDir + "/libopenal.so");
         
