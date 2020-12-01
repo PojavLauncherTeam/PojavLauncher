@@ -55,11 +55,11 @@
 */
 
 #include "awt_global.h"
+/*
 
 #if defined(DEBUG) || defined(INTERNAL_BUILD)
 static jmethodID lockIsHeldMID = NULL;
 
-/*
 static void
 CheckHaveAWTLock(JNIEnv *env)
 {
