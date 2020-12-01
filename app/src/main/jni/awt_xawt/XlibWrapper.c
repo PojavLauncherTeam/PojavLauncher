@@ -95,7 +95,6 @@ CheckHaveAWTLock(JNIEnv *env)
 #define AWT_CHECK_HAVE_LOCK()
 #define AWT_CHECK_HAVE_LOCK_RETURN(ret)
 #endif
-*/
 
 void freeNativeStringArray(char **array, jsize length) {
     int i;
@@ -157,6 +156,7 @@ char** stringArrayToNative(JNIEnv *env, jobjectArray array, jsize * ret_length) 
 
     return strings;
 }
+*/
 
 /*
  * Class:     XlibWrapper
@@ -243,7 +243,7 @@ JNIEXPORT jlong JNICALL Java_sun_awt_X11_XlibWrapper_DisplayWidthMM
  */
 JNIEXPORT jlong JNICALL Java_sun_awt_X11_XlibWrapper_DisplayHeight
 (JNIEnv *env, jclass clazz, jlong display, jlong screen) {
-    return DISPLAY_HEIGHT;
+    return GLOBAL_HEIGHT;
 }
 /*
  * Class:     sun_awt_X11_XlibWrapper
@@ -252,7 +252,7 @@ JNIEXPORT jlong JNICALL Java_sun_awt_X11_XlibWrapper_DisplayHeight
  */
 JNIEXPORT jlong JNICALL Java_sun_awt_X11_XlibWrapper_DisplayHeightMM
 (JNIEnv *env, jclass clazz, jlong display, jlong screen) {
-    return DISPLAY_HEIGHT;
+    return GLOBAL_HEIGHT;
 }
 
 /*
@@ -442,7 +442,8 @@ JNIEXPORT void JNICALL Java_sun_awt_X11_XlibWrapper_XUngrabKeyboard
 
 JNIEXPORT void JNICALL
 Java_sun_awt_X11_XlibWrapper_XGrabServer(JNIEnv *env, jclass clazz,
- 
+                                         jlong display) {
+
 }
 
 JNIEXPORT void JNICALL
