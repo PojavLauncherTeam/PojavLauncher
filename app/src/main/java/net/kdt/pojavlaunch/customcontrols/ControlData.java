@@ -9,20 +9,20 @@ import org.lwjgl.glfw.*;
 
 public class ControlData implements Cloneable
 {
-	public static int pixelOf2dp;
-	public static int pixelOf30dp;
-	public static int pixelOf50dp;
-	public static int pixelOf80dp;
+    public static int pixelOf2dp;
+    public static int pixelOf30dp;
+    public static int pixelOf50dp;
+    public static int pixelOf80dp;
 
-	public static final int SPECIALBTN_KEYBOARD = -1;
-	public static final int SPECIALBTN_TOGGLECTRL = -2;
-	public static final int SPECIALBTN_MOUSEPRI = -3;
-	public static final int SPECIALBTN_MOUSESEC = -4;
-	public static final int SPECIALBTN_VIRTUALMOUSE = -5;
-	public static final int SPECIALBTN_MOUSEMID = -6;
-	
-	private static ControlData[] SPECIAL_BUTTONS;
-	private static String[] SPECIAL_BUTTON_NAME_ARRAY;
+    public static final int SPECIALBTN_KEYBOARD = -1;
+    public static final int SPECIALBTN_TOGGLECTRL = -2;
+    public static final int SPECIALBTN_MOUSEPRI = -3;
+    public static final int SPECIALBTN_MOUSESEC = -4;
+    public static final int SPECIALBTN_VIRTUALMOUSE = -5;
+    public static final int SPECIALBTN_MOUSEMID = -6;
+    
+    private static ControlData[] SPECIAL_BUTTONS;
+    private static String[] SPECIAL_BUTTON_NAME_ARRAY;
 
     // Internal usage only
     public boolean isHideable;
@@ -37,72 +37,71 @@ public class ControlData implements Cloneable
     public String dynamicX, dynamicY;
     public boolean isDynamicBtn, isToggle;
     
-	public static ControlData[] getSpecialButtons(){
-		if (SPECIAL_BUTTONS == null) {
-			ControlData[] specialButtons = new ControlData[]{
-				new ControlData("Keyboard", SPECIALBTN_KEYBOARD, "${margin} * 3 + ${width} * 2", "${margin}", false),
-				new ControlData("GUI", SPECIALBTN_TOGGLECTRL, "${margin}", "${bottom} - ${margin}"),
-				new ControlData("PRI", SPECIALBTN_MOUSEPRI, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
-				new ControlData("SEC", SPECIALBTN_MOUSESEC, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 3 - ${height} * 3"),
-				new ControlData("Mouse", SPECIALBTN_VIRTUALMOUSE, "${right}", "${margin}", false),
+    public static ControlData[] getSpecialButtons(){
+        if (SPECIAL_BUTTONS == null) {
+            ControlData[] specialButtons = new ControlData[]{
+                new ControlData("Keyboard", SPECIALBTN_KEYBOARD, "${margin} * 3 + ${width} * 2", "${margin}", false),
+                new ControlData("GUI", SPECIALBTN_TOGGLECTRL, "${margin}", "${bottom} - ${margin}"),
+                new ControlData("PRI", SPECIALBTN_MOUSEPRI, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
+                new ControlData("SEC", SPECIALBTN_MOUSESEC, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 3 - ${height} * 3"),
+                new ControlData("Mouse", SPECIALBTN_VIRTUALMOUSE, "${right}", "${margin}", false),
                 
                 new ControlData("MID", SPECIALBTN_MOUSEMID, "${margin}", "${margin}")
-			};
+            };
             SPECIAL_BUTTONS = specialButtons;
-		}
+        }
 
-		return SPECIAL_BUTTONS;
-	}
+        return SPECIAL_BUTTONS;
+    }
 
-	public static String[] buildSpecialButtonArray() {
-		if (SPECIAL_BUTTON_NAME_ARRAY == null) {
-			List<String> nameList = new ArrayList<String>();
-			for (ControlData btn : getSpecialButtons()) {
-				nameList.add(btn.name);
-			}
-			SPECIAL_BUTTON_NAME_ARRAY = nameList.toArray(new String[0]);
-		}
+    public static String[] buildSpecialButtonArray() {
+        if (SPECIAL_BUTTON_NAME_ARRAY == null) {
+            List<String> nameList = new ArrayList<String>();
+            for (ControlData btn : getSpecialButtons()) {
+                nameList.add(btn.name);
+            }
+            SPECIAL_BUTTON_NAME_ARRAY = nameList.toArray(new String[0]);
+        }
 
-		return SPECIAL_BUTTON_NAME_ARRAY;
-	}
+        return SPECIAL_BUTTON_NAME_ARRAY;
+    }
 
-	public String name;
-	public float x;
-	public float y;
-	public float width = pixelOf50dp;
-	public float height = pixelOf50dp;
-	public int keycode;
-	public boolean hidden;
-	public boolean holdCtrl;
-	public boolean holdAlt;
-	public boolean holdShift;
-	public /* View.OnClickListener */ Object specialButtonListener;
-	// public boolean hold
+    public String name;
+    public float x;
+    public float y;
+    public float width = pixelOf50dp;
+    public float height = pixelOf50dp;
+    public int keycode;
+    public boolean hidden;
+    public boolean holdCtrl;
+    public boolean holdAlt;
+    public boolean holdShift;
+    public Object specialButtonListener;
 
-	public ControlData() {
-		this("", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 0, 0);
-	}
+    public ControlData() {
+        this("", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 0, 0);
+    }
 
-	public ControlData(String name, int keycode) {
-		this(name, keycode, 0, 0);
-	}
+    public ControlData(String name, int keycode) {
+        this(name, keycode, 0, 0);
+    }
 
-	public ControlData(String name, int keycode, float x, float y) {
-		this(name, keycode, x, y, pixelOf50dp, pixelOf50dp);
-	}
+    public ControlData(String name, int keycode, float x, float y) {
+        this(name, keycode, x, y, pixelOf50dp, pixelOf50dp);
+    }
 
-	public ControlData(android.content.Context ctx, int resId, int keycode, float x, float y, boolean isSquare) {
-		this(ctx.getResources().getString(resId), keycode, x, y, isSquare);
-	}
+    public ControlData(android.content.Context ctx, int resId, int keycode, float x, float y, boolean isSquare) {
+        this(ctx.getResources().getString(resId), keycode, x, y, isSquare);
+    }
 
-	public ControlData(String name, int keycode, float x, float y, boolean isSquare) {
-		this(name, keycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
-	}
+    public ControlData(String name, int keycode, float x, float y, boolean isSquare) {
+        this(name, keycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
+    }
 
-	public ControlData(String name, int keycode, float x, float y, float width, float height) {
+    public ControlData(String name, int keycode, float x, float y, float width, float height) {
         this(name, keycode, Float.toString(x), Float.toString(y), width, height, false);
         this.isDynamicBtn = false;
-	}
+    }
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
         this(name, keycode, dynamicX, dynamicY, pixelOf50dp, pixelOf50dp, false);
@@ -128,17 +127,17 @@ public class ControlData implements Cloneable
         update();
     }
     
-	public void execute(BaseMainActivity act, boolean isDown) {
-		act.sendKeyPress(keycode, 0, isDown);
-	}
+    public void execute(BaseMainActivity act, boolean isDown) {
+        act.sendKeyPress(keycode, 0, isDown);
+    }
 
-	public ControlData clone() {
+    public ControlData clone() {
         if (this instanceof ControlData) {
             return new ControlData(name, keycode, ((ControlData) this).dynamicX, ((ControlData) this).dynamicY, width, height, isToggle);
         } else {
             return new ControlData(name, keycode, x, y, width, height);
         }
-	}
+    }
     
     public float insertDynamicPos(String dynamicPos) {
         // Values in the map below may be always changed
