@@ -69,6 +69,9 @@ public class ControlLayout extends FrameLayout
 	private void addControlView(ControlData controlButton) {
 		final ControlButton view = new ControlButton(this, controlButton);
 		view.setModifiable(mModifiable);
+        if (!mModifiable) {
+            view.setAlpha(view.getProperties().hidden ? 0f : 1.0f);
+        }
 		addView(view);
 
 		setModified(true);

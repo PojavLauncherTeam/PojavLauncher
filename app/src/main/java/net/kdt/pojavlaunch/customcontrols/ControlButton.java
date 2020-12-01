@@ -174,9 +174,8 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     public boolean onTouch(View view, MotionEvent event) {
         if (!mModifiable) {
             mCanTriggerLongClick = false;
-            
-            // if (!mProperties.isToggle) {
-                if (mProperties.keycode >= 0) {
+            if (mProperties.keycode >= 0) {
+                if (!mProperties.isToggle) {
                     boolean isDown;
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN: // 0
@@ -192,13 +191,12 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                             return false;
                     }
                     MainActivity.sendKeyPress(mProperties.keycode, mMods, isDown);
-                    return true;
+                } else if (mGestureDetector.onTouchEvent(event)) {
+                    mChecked = !mChecked;
+                    MainActivity.sendKeyPress(mProperties.keycode, mMods, mChecked);
                 }
-            /* } else if (mGestureDetector.onTouchEvent(event)) {
-                mChecked = !mChecked;
-                MainActivity.sendKeyPress(mProperties.keycode, mMods, mChecked);
-            } */
-
+                return true;
+            }
         } else {
             if (mGestureDetector.onTouchEvent(event)) {
                 mCanTriggerLongClick = true;
