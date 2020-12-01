@@ -1415,6 +1415,7 @@ Java_sun_awt_X11_XlibWrapper_XGetModifierMapping(JNIEnv *env, jclass clazz,
 
 JNIEXPORT void JNICALL
 Java_sun_awt_X11_XlibWrapper_XFreeModifiermap(JNIEnv *env, jclass clazz,
+                                              jlong keymap) {
   
 }
 /*
