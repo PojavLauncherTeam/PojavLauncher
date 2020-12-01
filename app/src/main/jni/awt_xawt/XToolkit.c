@@ -27,19 +27,9 @@
 
 #include <unistd.h>
 
-extern JavaVM *jvm;
+// extern JavaVM *jvm;
 
-// Tracing level
-static int tracing = 0;
-#ifdef PRINT
-#undef PRINT
-#endif
-#ifdef PRINT2
-#undef PRINT2
-#endif
-
-#define PRINT if (tracing) printf
-#define PRINT2 if (tracing > 1) printf
+static int32_t num_buttons = 0;
 
 JNIEXPORT void JNICALL
 Java_sun_awt_X11_XFontPeer_initIDs
@@ -109,7 +99,7 @@ JNIEXPORT jlong JNICALL Java_sun_awt_X11_XToolkit_getDefaultXColormap
 JNIEXPORT jint JNICALL
 JNI_OnLoad(JavaVM *vm, void *reserved)
 {
-    jvm = vm;
+    // jvm = vm;
 
     //Set the gtk backend to x11 on all the systems
     // putenv("GDK_BACKEND=x11");
@@ -517,76 +507,10 @@ Java_java_awt_Cursor_finalizeImpl(JNIEnv *env, jclass clazz, jlong pData)
 JNIEXPORT jint JNICALL Java_sun_awt_X11_XToolkit_getNumberOfButtonsImpl
 (JNIEnv * env, jobject cls){
     if (num_buttons == 0) {
-        num_buttons = getNumButtons();
+        num_buttons = 3;
+        // getNumButtons()
     }
     return num_buttons;
-}
-
-int32_t getNumButtons() {
-/*
-    int32_t major_opcode, first_event, first_error;
-    int32_t xinputAvailable;
-    int32_t numDevices, devIdx, clsIdx;
-    XDeviceInfo* devices;
-    XDeviceInfo* aDevice;
-    XButtonInfo* bInfo;
-*/
-    int32_t local_num_buttons = 0;
-
-    /* 4700242:
-     * If XTest is asked to press a non-existant mouse button
-     * (i.e. press Button3 on a system configured with a 2-button mouse),
-     * then a crash may happen.  To avoid this, we use the XInput
-     * extension to query for the number of buttons on the XPointer, and check
-     * before calling XTestFakeButtonEvent().
-     */
-/*
-    xinputAvailable = XQueryExtension(awt_display, INAME, &major_opcode, &first_event, &first_error);
-    if (xinputAvailable) {
-        DTRACE_PRINTLN3("RobotPeer: XQueryExtension(XINPUT) returns major_opcode = %d, first_event = %d, first_error = %d",
-                        major_opcode, first_event, first_error);
-        devices = XListInputDevices(awt_display, &numDevices);
-        for (devIdx = 0; devIdx < numDevices; devIdx++) {
-            aDevice = &(devices[devIdx]);
-#ifdef IsXExtensionPointer
-            if (aDevice->use == IsXExtensionPointer) {
-                for (clsIdx = 0; clsIdx < aDevice->num_classes; clsIdx++) {
-                    if (aDevice->inputclassinfo[clsIdx].class == ButtonClass) {
-                        bInfo = (XButtonInfo*)(&(aDevice->inputclassinfo[clsIdx]));
-                        local_num_buttons = bInfo->num_buttons;
-                        DTRACE_PRINTLN1("RobotPeer: XPointer has %d buttons", num_buttons);
-                        break;
-                    }
-                }
-                break;
-            }
-#endif
-            if (local_num_buttons <= 0 ) {
-                if (aDevice->use == IsXPointer) {
-                    for (clsIdx = 0; clsIdx < aDevice->num_classes; clsIdx++) {
-                        if (aDevice->inputclassinfo[clsIdx].class == ButtonClass) {
-                            bInfo = (XButtonInfo*)(&(aDevice->inputclassinfo[clsIdx]));
-                            local_num_buttons = bInfo->num_buttons;
-                            DTRACE_PRINTLN1("RobotPeer: XPointer has %d buttons", num_buttons);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-
-        XFreeDeviceList(devices);
-    }
-    else {
-        DTRACE_PRINTLN1("RobotPeer: XINPUT extension is unavailable, assuming %d mouse buttons", num_buttons);
-    }
-*/
-    if (local_num_buttons == 0 ) {
-        local_num_buttons = 3;
-    }
-
-    return local_num_buttons;
 }
 
 /*
