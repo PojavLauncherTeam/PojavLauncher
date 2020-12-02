@@ -9,7 +9,7 @@ A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch
 - [Building](#building)
 - [Current status](#current-status)
 - [License](#license)
-- [Credits & Third party components and it's licenses](Credits & Third party-components-and-its-licenses)
+- [Credits & Third party components and it's licenses](#credits--third-party-components-and-its-licenses)
 
 
 ## Mainly features on v3
