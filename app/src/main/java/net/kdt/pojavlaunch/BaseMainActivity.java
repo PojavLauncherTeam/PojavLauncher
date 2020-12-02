@@ -176,8 +176,8 @@ public class BaseMainActivity extends LoggableActivity {
                 @Override
                 public void run() {
                     ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
-                    params.width = (int) (mousePointer.getWidth() / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                    params.height = (int) (mousePointer.getHeight() / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                    params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                    params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
                 }
             });
 
