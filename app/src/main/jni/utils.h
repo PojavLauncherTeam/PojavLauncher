@@ -11,8 +11,13 @@ JavaVM* dalvikJavaVMPtr;
 JNIEnv* dalvikJNIEnvPtr_ANDROID;
 JNIEnv* dalvikJNIEnvPtr_JRE;
 
-bool isAndroidThreadAttached, isRuntimeThreadAttached;
+long showingWindow;
 
+bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
+
+int savedWidth, savedHeight;
+
+jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr);
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);
 jobjectArray convert_from_char_array(JNIEnv *env, char **charArray, int num_rows);
 void free_char_array(JNIEnv *env, jobjectArray jstringArray, const char **charArray);

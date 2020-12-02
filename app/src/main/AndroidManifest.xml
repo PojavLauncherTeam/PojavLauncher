@@ -22,7 +22,7 @@
 			android:screenOrientation="sensorLandscape"
 			android:label="@string/app_short_name"
 			android:name=".PojavLoginActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize">
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,34 +34,39 @@
 			android:theme="@style/MenuDialog"
 			android:screenOrientation="sensorLandscape"
 			android:name=".FatalErrorActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 		
 		<activity
 			android:screenOrientation="sensorLandscape"
 			android:name=".MCLauncherActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
+        <activity
+            android:screenOrientation="sensorLandscape"
+            android:name=".PojavLauncherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+        
 		<activity
 			android:screenOrientation="sensorLandscape"
-			android:name=".InstallModActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
+			android:name=".JavaGUILauncherActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 		
 		<activity
 			android:screenOrientation="sensorLandscape"
 			android:name=".CustomControlsActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
 			android:launchMode="standard"
 			android:multiprocess="true"
 			android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
-		
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
 		<activity
 			android:screenOrientation="sensorLandscape"
 			android:name=".prefs.LauncherPreferenceActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"/>
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
     </application>
 
 </manifest>

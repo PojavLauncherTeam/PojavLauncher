@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 29
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -21,31 +21,27 @@ android {
 	
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 26
-        versionCode 156235
-        versionName "3.2.0_6403b_20200915"
+        versionCode 156236
+        versionName "3.3.0b_6408b_20201127"
         multiDexEnabled true //important
-		
-		ndk {
-            abiFilters "armeabi-v7a", "x86" // , "arm64-v8a"
-        }
     }
 	
     buildTypes {
-		debug {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-			signingConfig signingConfigs.customDebug
-		}
+            signingConfig signingConfigs.customDebug
+        }
 		
         release {
-	        // Don't set to true or java.awt will be a.a or something similar.
+	    // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-			// defaultConfig already set
+	    // defaultConfig already set
             // multiDexEnabled = true
-            debuggable = true
+           // debuggable = true
         }
     }
 	
@@ -54,8 +50,7 @@ android {
             path file('src/main/jni/Android.mk')
         }
     }
-	
-	// Keep the following configuration in order to might make Minecraft 1.12 support.
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -63,18 +58,22 @@ android {
 }
 
 dependencies {
-	implementation 'javax.annotation:javax.annotation-api:1.3.2'
-	implementation 'commons-codec:commons-codec:1.14'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'commons-codec:commons-codec:1.14'
     implementation 'com.wu-man:android-bsf-api:3.1.3'
     implementation 'com.android.support:support-v4:26.0.0'
     implementation 'com.android.support:preference-v7:26.0.0'
     implementation 'com.android.support:appcompat-v7:26.0.0'
-	implementation 'com.android.support:preference-v14:26.0.0'
+    implementation 'com.android.support:preference-v14:26.0.0'
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support:support-annotations:26.0.0'
-	// compile 'com.google.guava:guava:24.0-android'
     
-    implementation 'org.tukaani:xz:1.8'
+    // implementation 'com.intuit.sdp:sdp-android:1.0.5'
+    // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.tukaani:xz:1.8'
+    
+    implementation 'net.objecthunter:exp4j:0.4.8'
+    
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

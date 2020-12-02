@@ -1,0 +1,133 @@
+package org.lwjgl.glfw;
+import java.io.*;
+import java.util.*;
+import android.widget.*;
+import net.kdt.pojavlaunch.*;
+import android.content.*;
+
+public abstract class CallbackBridge {
+    public static final int ANDROID_TYPE_GRAB_STATE = 0;
+    
+    public static final int CLIPBOARD_COPY = 2000;
+    public static final int CLIPBOARD_PASTE = 2001;
+    
+    public static volatile int windowWidth, windowHeight;
+    public static int mouseX, mouseY;
+    public static boolean mouseLeft;
+    public static StringBuilder DEBUG_STRING = new StringBuilder();
+    
+    public static final CallbackBridge INSTANCE = new CallbackBridgeV3();
+    
+    // volatile private static boolean isGrabbing = false;
+
+    public void putMouseEventWithCoords(int button, int x, int y /* , int dz, long nanos */) {
+        putMouseEventWithCoords(button, 1, x, y);
+        putMouseEventWithCoords(button, 0, x, y);
+    }
+    
+    public void putMouseEventWithCoords(int button, int state, int x, int y /* , int dz, long nanos */) {
+        sendCursorPos(x, y);
+        sendMouseKeycode(button, 0, state == 1);
+    }
+
+    private static boolean threadAttached;
+    public void sendCursorPos(int x, int y) {
+        if (!threadAttached) {
+            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
+        }
+        
+        DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
+        mouseX = x;
+        mouseY = y;
+        nativeSendCursorPos(x, y);
+    }
+    
+    public void sendPrepareGrabInitialPos() {
+        DEBUG_STRING.append("Prepare set grab initial posititon");
+        sendMouseKeycode(-1, 0, false);
+    }
+
+    public void sendKeycode(int keycode, char keychar, int modifiers, boolean isDown) {
+        DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
+        // TODO CHECK: This may cause input issue, not receive input!
+/*
+        if (!nativeSendCharMods(keychar, modifiers) || !nativeSendChar(keychar)) {
+            nativeSendKey(keycode, 0, isDown ? 1 : 0, modifiers);
+        }
+*/
+
+        nativeSendKeycode(keycode, keychar, modifiers, isDown);
+
+        // sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
+    }
+
+    public void sendMouseKeycode(int button, int modifiers, boolean isDown) {
+        DEBUG_STRING.append("MouseKey=" + button + ", down=" + isDown + "\n");
+        // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
+        nativeSendMouseButton(button, isDown ? 1 : 0, modifiers);
+    }
+
+    public void sendMouseKeycode(int keycode) {
+        sendMouseKeycode(keycode, 0, true);
+        sendMouseKeycode(keycode, 0, false);
+    }
+    
+    public void sendScroll(double xoffset, double yoffset) {
+        DEBUG_STRING.append("ScrollX=" + xoffset + ",ScrollY=" + yoffset);
+        nativeSendScroll(xoffset, yoffset);
+    }
+
+    public void sendUpdateWindowSize(int w, int h) {
+        nativeSendScreenSize(w, h);
+    }
+
+    public static boolean isGrabbing() {
+        // return isGrabbing;
+        return nativeIsGrabbing();
+    }
+
+    // Called from JRE side
+    public static String accessAndroidClipboard(int type, String copy) {
+        switch (type) {
+            case CLIPBOARD_COPY:
+                BaseMainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
+                return null;
+                
+            case CLIPBOARD_PASTE:
+                if (BaseMainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    return BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
+                } else {
+                    return "";
+                }
+                
+            default: return null;
+        }
+    }
+    public void receiveCallback(int type, String data) {
+        switch (type) {
+            case ANDROID_TYPE_GRAB_STATE:
+                // isGrabbing = Boolean.parseBoolean(data);
+                break;
+        }
+    }
+
+    public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
+    public static native boolean nativeIsGrabbing();
+    
+    protected abstract boolean nativeSendChar(char codepoint /* int codepoint */);
+    // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
+    protected abstract boolean nativeSendCharMods(char codepoint, int mods);
+    // protected abstract void nativeSendCursorEnter(int entered);
+    protected abstract void nativeSendCursorPos(int x, int y);
+    protected abstract void nativeSendKey(int key, int scancode, int action, int mods);
+    protected abstract void nativeSendMouseButton(int button, int action, int mods);
+    protected abstract void nativeSendScroll(double xoffset, double yoffset);
+    protected abstract void nativeSendScreenSize(int width, int height);
+    
+    
+    
+    static {
+        System.loadLibrary("pojavexec");
+    }
+}
+

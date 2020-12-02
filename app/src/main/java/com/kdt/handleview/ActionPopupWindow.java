@@ -28,11 +28,12 @@ import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
 
 import android.view.View.OnClickListener;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 import android.support.v7.app.*;
+import android.content.res.*;
+import net.objecthunter.exp4j.*;
 
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {
-	private static final int POPUP_TEXT_LAYOUT = getInternalId("layout", "text_edit_action_popup_text");
 	private TextView mEditTextView;
 	private TextView mDeleteTextView;
 	
@@ -40,42 +41,9 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		super(handleView);
 	}
 
-	private static int getInternalId(String type, String name) {
-		try {
-			for (Class perType : Class.forName("com.android.internal.R").getDeclaredClasses()) {
-				if (perType.getSimpleName().equals(type)) {
-					try {
-						Field f = perType.getDeclaredField(name);
-						f.setAccessible(true);
-						return (int) f.get(null);
-					} catch (Throwable th) {
-						th.printStackTrace();
-					}
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		// If unable to find in com.android.internal.R, go find in android.R
-		for (Class perType : android.R.class.getDeclaredClasses()) {
-			if (perType.getSimpleName().equals(type)) {
-				try {
-					Field f = perType.getDeclaredField(name);
-					f.setAccessible(true);
-					return (int) f.get(null);
-				} catch (Throwable th) {
-					th.printStackTrace();
-				}
-			}
-		}
-		
-		return -1;
-	}
-	
 	@Override
 	protected void createPopupWindow() {
-		mPopupWindow = new PopupWindow(mHandleView.getContext(), null, getInternalId("attr", "textSelectHandleWindowStyle"));
+		mPopupWindow = new PopupWindow(mHandleView.getContext(), null, android.R.attr.textSelectHandleWindowStyle);
 		mPopupWindow.setClippingEnabled(true);
 	}
 
@@ -84,7 +52,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		LinearLayout linearLayout = new LinearLayout(mHandleView.getContext());
 		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 		mContentView = linearLayout;
-		mContentView.setBackgroundResource(getInternalId("drawable", "text_edit_paste_window"));
+		mContentView.setBackgroundResource(R.drawable.control_side_action_window);
 
 		LayoutInflater inflater = (LayoutInflater) mHandleView.getContext().
 			getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -92,16 +60,16 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		LayoutParams wrapContent = new LayoutParams(
 			ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-		mEditTextView = (TextView) inflater.inflate(POPUP_TEXT_LAYOUT, null);
+		mEditTextView = (TextView) inflater.inflate(R.layout.control_action_popup_text, null);
 		mEditTextView.setLayoutParams(wrapContent);
 		mContentView.addView(mEditTextView);
 		mEditTextView.setText(R.string.global_edit);
 		mEditTextView.setOnClickListener(this);
 
-		mDeleteTextView = (TextView) inflater.inflate(POPUP_TEXT_LAYOUT, null);
+		mDeleteTextView = (TextView) inflater.inflate(R.layout.control_action_popup_text, null);
 		mDeleteTextView.setLayoutParams(wrapContent);
 		mContentView.addView(mDeleteTextView);
-		mDeleteTextView.setText(getInternalId("string", "delete"));
+		mDeleteTextView.setText(R.string.global_remove);
 		mDeleteTextView.setOnClickListener(this);
 	}
 
@@ -120,24 +88,22 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 			alert.setPositiveButton(android.R.string.ok, null);
 			alert.setNegativeButton(android.R.string.cancel, null);
 			final AlertDialog dialog = alert.create();
-			final ControlButton properties = mHandleView.mView.getProperties();
+			final ControlData properties = mHandleView.mView.getProperties();
 
 			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
 
 					@Override
 					public void onShow(DialogInterface dialogInterface) {
-						final LinearLayout normalBtnLayout = dialog.findViewById(R.id.controlsetting_normalbtnlayout);
-
 						final EditText editName = dialog.findViewById(R.id.controlsetting_edit_name);
 						editName.setText(properties.name);
 
 						final Spinner spinnerKeycode = dialog.findViewById(R.id.controlsetting_spinner_lwjglkeycode);
 						ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item);
 
-						String[] oldSpecialArr = ControlButton.buildSpecialButtonArray();
-						String[] specialArr = new String[oldSpecialArr.length];
+						String[] oldSpecialArr = ControlData.buildSpecialButtonArray();
+						final String[] specialArr = new String[oldSpecialArr.length];
 						for (int i = 0; i < specialArr.length; i++) {
-							specialArr[i] = "SPECIAL_" + oldSpecialArr[i];
+							specialArr[i] = "SPECIAL_" + oldSpecialArr[specialArr.length - i - 1];
 						}
 
 						adapter.addAll(specialArr);
@@ -145,26 +111,46 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 						adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 						spinnerKeycode.setAdapter(adapter);
 						if (properties.keycode < 0) {
-							spinnerKeycode.setSelection(properties.keycode + 2);
+							spinnerKeycode.setSelection(properties.keycode + specialArr.length);
 						} else {
-							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode + 2));
+							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode) + specialArr.length);
 						}
-						spinnerKeycode.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
-
-								@Override
-								public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
-									normalBtnLayout.setVisibility(id < 2 ? View.GONE : View.VISIBLE);
-								}
-
-								@Override
-								public void onNothingSelected(AdapterView<?> adapter){
-									// Unused
-								}
-							});
 
 						final CheckBox checkHidden = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
 						checkHidden.setChecked(properties.hidden);
 
+                        final CheckBox checkToggle = dialog.findViewById(R.id.controlsetting_checkbox_toggle);
+                        checkToggle.setChecked(properties.isToggle);
+
+                        final LinearLayout layoutDynamicBtn = dialog.findViewById(R.id.controlsetting_dynamicbtnlayout);
+                        final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_dynamicpos);
+                        checkDynamicPos.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
+
+                                @Override
+                                public void onCheckedChanged(CompoundButton btn, boolean checked) {
+                                    layoutDynamicBtn.setVisibility(checked ? View.VISIBLE : View.GONE);
+                                }
+                            });
+                        checkDynamicPos.setChecked(properties.isDynamicBtn);
+                        
+                        final EditText editDynamicX = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_x);
+                        final EditText editDynamicY = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_y);
+                        
+                        editDynamicX.setHint(Float.toString(properties.x));
+                        editDynamicX.setText(properties.dynamicX);
+                        
+                        editDynamicY.setHint(Float.toString(properties.y));
+                        editDynamicY.setText(properties.dynamicY);
+                        
+                        final CheckBox checkHoldAlt = dialog.findViewById(R.id.controlsetting_checkbox_keycombine_alt);
+                        checkHoldAlt.setChecked(properties.holdAlt);
+
+                        final CheckBox checkHoldControl = dialog.findViewById(R.id.controlsetting_checkbox_keycombine_control);
+                        checkHoldControl.setChecked(properties.holdCtrl);
+
+                        final CheckBox checkHoldShift = dialog.findViewById(R.id.controlsetting_checkbox_keycombine_shift);
+                        checkHoldShift.setChecked(properties.holdShift);
+                            
 						Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 						button.setOnClickListener(new View.OnClickListener() {
 
@@ -173,9 +159,57 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 									if (editName.getText().toString().isEmpty()) {
 										editName.setError(view.getResources().getString(R.string.global_error_field_empty));
 									} else {
-										properties.keycode = AndroidLWJGLKeycode.getKeyIndex(spinnerKeycode.getSelectedItemPosition()) - 2;
+                                        /*
+                                        String errorAt = null;
+                                        try {
+                                            errorAt = "DynamicX";
+                                            properties.insertDynamicPos(editDynamicX.getText().toString());
+                                            errorAt = "DynamicY";
+                                            properties.insertDynamicPos(editDynamicY.getText().toString());
+                                        } catch (Throwable th) {
+                                            Error e = new Error(errorAt, th);
+                                            e.setStackTrace(null);
+                                            Tools.showError(view.getContext(), e);
+                                            return;
+                                        }
+                                        errorAt = null;
+                                        */
+                                        
+                                        if (properties.isDynamicBtn) {
+                                            int errorAt = 0;
+                                            try {
+                                                properties.insertDynamicPos(editDynamicX.getText().toString());
+                                                errorAt = 1;
+                                                properties.insertDynamicPos(editDynamicY.getText().toString());
+                                            } catch (Throwable th) {
+                                                (errorAt == 0 ? editDynamicX : editDynamicY)
+                                                    .setError(th.getMessage());
+
+                                                return;
+                                            }
+                                        }
+                                        
+                                        if (spinnerKeycode.getSelectedItemPosition() < specialArr.length) {
+										    properties.keycode = spinnerKeycode.getSelectedItemPosition() - specialArr.length;
+                                        } else {
+                                            properties.keycode = AndroidLWJGLKeycode.getKeyByIndex(spinnerKeycode.getSelectedItemPosition() - specialArr.length);
+                                        }
 										properties.name = editName.getText().toString();
 										properties.hidden = checkHidden.isChecked();
+                                        properties.isDynamicBtn = checkDynamicPos.isChecked();
+                                        properties.isToggle = checkToggle.isChecked();
+                                        properties.dynamicX = editDynamicX.getText().toString();    
+                                        properties.dynamicY = editDynamicY.getText().toString();
+
+                                        properties.holdAlt = checkHoldAlt.isChecked();
+                                        properties.holdCtrl = checkHoldControl.isChecked();
+                                        properties.holdShift = checkHoldShift.isChecked();
+                                        
+                                        if (properties.dynamicX.isEmpty()) {
+                                            properties.dynamicX = Float.toString(properties.x);
+                                        } if (properties.dynamicY.isEmpty()) {
+                                            properties.dynamicY = Float.toString(properties.y);
+                                        }
 
 										mHandleView.mView.updateProperties();
 
@@ -188,13 +222,13 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 			dialog.show();
 		} else if (view == mDeleteTextView) {
-			alert.setMessage(view.getResources().getString(getInternalId("string", "delete")) + " " + mHandleView.mView.getText() + "?");
+			alert.setMessage(view.getContext().getString(R.string.global_remove) + " " + mHandleView.mView.getText() + "?");
 			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface p1, int p2)
 					{
-						ControlsLayout layout = ((ControlsLayout) mHandleView.mView.getParent());
+						ControlLayout layout = ((ControlLayout) mHandleView.mView.getParent());
 						layout.removeControlButton(mHandleView.mView);
 					}
 				});

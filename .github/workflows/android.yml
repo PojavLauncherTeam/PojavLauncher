@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -13,15 +12,32 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Gradle
+    - name: Build APK with Gradle
       run: |
+        chmod +x scripts/languagelist_updater.sh
+        bash scripts/languagelist_updater.sh
+      
+        mkdir -p out
         chmod +x gradlew 
         ./gradlew clean assembleDebug
-        ./gradlew test
-# should test???
+        
+        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug.apk
+        # mv app/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
+
+    - name: Build APK without runtime
+      run: | 
+        rm -r app/src/main/assets/components/jre
+        ./gradlew assembleDebug
+        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-noruntime.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
           name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: out/app-debug.apk
+
+    - name: Upload APK (without runtime)
+      uses: actions/upload-artifact@v2
+      with:
+          name: app-debug-noruntime
+          path: out/app-debug-noruntime.apk

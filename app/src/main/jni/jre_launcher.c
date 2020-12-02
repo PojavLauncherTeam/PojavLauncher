@@ -37,8 +37,8 @@
 #include "utils.h"
 
 // PojavLancher: fixme: are these wrong?
-#define FULL_VERSION "1.9.0-internal"
-#define DOT_VERSION "1.9"
+#define FULL_VERSION "1.8.0-internal"
+#define DOT_VERSION "1.8"
 
 typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
 
@@ -55,73 +55,14 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
         jint ergo                               /* ergonomics class policy */
 );
 
-static void logArgs(int argc, char** argv) {
-/* BlockLauncher: disable logging
-    int i;
-    
-    for (i = 0; i < argc; i++) {
-        LOGD("arg[%d]: %s", i, argv[i]);
-    }
-*/
-}
-
-JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_createLaunchMainJVM(JNIEnv *env, jclass clazz, jobjectArray vmArgArr, jstring mainClassStr, jobjectArray mainArgArr) {
-    void *libjvm = dlopen("libjvm.so", RTLD_NOW + RTLD_GLOBAL);
-    if (libjvm == NULL) {
-        LOGE("dlopen failed to open libjvm.so (dlerror %s).", dlerror());
-        return -1;
-    }
-
-    JNI_CreateJavaVM_func *jl_JNI_CreateJavaVM = (JNI_CreateJavaVM_func *) dlsym(libjvm, "JNI_CreateJavaVM");
-        if (jl_JNI_CreateJavaVM == NULL) {
-        LOGE("dlsym failed to get JNI_CreateJavaVM (dlerror %s).", dlerror());
-        return -1;
-    }
-    
-    int vm_argc = (*env)->GetArrayLength(env, vmArgArr);
-    char **vm_argv = convert_to_char_array(env, vmArgArr);
-    
-    int main_argc = (*env)->GetArrayLength(env, mainArgArr);
-    char **main_argv = convert_to_char_array(env, mainArgArr);
-    
-    JavaVMInitArgs vm_args;
-    JavaVMOption options[vm_argc];
-    for (int i = 0; i < vm_argc; i++) {
-        options[i].optionString = vm_argv[i];
-    }
-    vm_args.version = JNI_VERSION_1_6;
-    vm_args.options = options;
-    vm_args.nOptions = vm_argc;
-    vm_args.ignoreUnrecognized = JNI_FALSE;
-    
-    jint res = (jint) jl_JNI_CreateJavaVM(&runtimeJavaVMPtr, (void**)&runtimeJNIEnvPtr_JRE, &vm_args);
-    // delete options;
-    
-    char *main_class_c = (*env)->GetStringUTFChars(env, mainClassStr, 0);
-    
-    jclass mainClass = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, main_class_c);
-    jmethodID mainMethod = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, mainClass, "main", "([Ljava/lang/String;)V");
-
-    // Need recreate jobjectArray to make JNIEnv is 'runtimeJNIEnvPtr_JRE'.
-    jobjectArray runtime_main_argv = convert_from_char_array(runtimeJNIEnvPtr_JRE, main_argv, main_argc);
-    (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(runtimeJNIEnvPtr_JRE, mainClass, mainMethod, runtime_main_argv);
-    
-    (*env)->ReleaseStringUTFChars(env, mainClassStr, main_class_c);
-    free_char_array(env, mainArgArr, main_argv);
-    free_char_array(env, vmArgArr, vm_argv);
-    
-    return res;
-}
-
 static jint launchJVM(int argc, char** argv) {
-    logArgs(argc, argv);
-
    void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
-    // Boardwalk: silence
-        // LOGD("JLI lib = %x", (int)libjli);
+   
+   // Boardwalk: silence
+   // LOGD("JLI lib = %x", (int)libjli);
    if (NULL == libjli) {
        LOGE("JLI lib = NULL: %s", dlerror());
-       return 0;
+       return -1;
    }
    LOGD("Found JLI lib");
 
@@ -132,7 +73,7 @@ static jint launchJVM(int argc, char** argv) {
 
    if (NULL == pJLI_Launch) {
        LOGE("JLI_Launch = NULL");
-       return 0;
+       return -1;
    }
 
    LOGD("Calling JLI_Launch");
@@ -144,7 +85,7 @@ static jint launchJVM(int argc, char** argv) {
 }
 
 /*
- * Class:     com_oracle_embedded_launcher_VMLauncher
+ * Class:     com_oracle_dalvik_VMLauncher
  * Method:    launchJVM
  * Signature: ([Ljava/lang/String;)I
  */
@@ -168,7 +109,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
 
     res = launchJVM(argc, argv);
 
-    LOGD("Freeing args");
+    LOGD("Going to free args");
     free_char_array(env, argsArray, argv);
     
     LOGD("Free done");
@@ -192,7 +133,7 @@ static void *logger_thread() {
 }
 
 JNIEXPORT void JNICALL
-Java_net_kdt_pojavlaunch_JREUtils_redirectLogcat(JNIEnv *env, jclass clazz) {
+Java_net_kdt_pojavlaunch_utils_JREUtils_redirectLogcat(JNIEnv *env, jclass clazz) {
     // TODO: implement redirectLogcat()
     setvbuf(stdout, 0, _IOLBF, 0); // make stdout line-buffered
     setvbuf(stderr, 0, _IONBF, 0); // make stderr unbuffered

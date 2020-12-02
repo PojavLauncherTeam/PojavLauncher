@@ -1,4 +1,6 @@
 package net.kdt.pojavlaunch.value.launcherprofiles;
+import com.google.gson.*;
+import net.kdt.pojavlaunch.*;
 
 public class MinecraftLauncherProfiles
 {
@@ -10,4 +12,8 @@ public class MinecraftLauncherProfiles
 	// public Map analyticsToken;
 	public int analyticsFailcount;
 	public MinecraftSelectedUser selectedUser;
+    
+    public String toJson() {
+        return Tools.GLOBAL_GSON.toJson(this);
+    }
 }

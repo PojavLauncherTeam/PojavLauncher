@@ -5,28 +5,25 @@ import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.widget.*;
 import android.support.v7.app.*;
+import android.support.v7.preference.*;
 import android.view.*;
 import android.widget.*;
 import com.google.gson.*;
 import com.kdt.filerapi.*;
 import java.io.*;
-import java.util.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
-import android.support.v7.preference.*;
+import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 
-public class CustomControlsActivity extends AppCompatActivity
+public class CustomControlsActivity extends BaseActivity
 {
 	private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
-	private ControlsLayout ctrlLayout;
-	private CustomControls mCtrl;
-
+	private ControlLayout ctrlLayout;
+    
 	private SharedPreferences mPref;
 
 	public boolean isModified = false;
-
-	private Gson gson;
 	private String selectedName = "new_control";
 
 	@Override
@@ -36,9 +33,7 @@ public class CustomControlsActivity extends AppCompatActivity
 
 		mPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-		gson = new GsonBuilder().setPrettyPrinting().create();
-
-		ctrlLayout = (ControlsLayout) findViewById(R.id.customctrl_controllayout);
+		ctrlLayout = (ControlLayout) findViewById(R.id.customctrl_controllayout);
 
 		// Menu
 		drawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
@@ -53,7 +48,7 @@ public class CustomControlsActivity extends AppCompatActivity
 							actionLoad();
 							break;
 						case R.id.menu_ctrl_add:
-							ctrlLayout.addControlButton(new ControlButton("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
+							ctrlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
 							break;
 						case R.id.menu_ctrl_selectdefault:
 							dialogSelectDefaultCtrl();
@@ -69,14 +64,10 @@ public class CustomControlsActivity extends AppCompatActivity
 				}
 			});
 
-		mCtrl = new CustomControls();
-
 		ctrlLayout.setActivity(this);
 		ctrlLayout.setModifiable(true);
 
 		loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
-
-		ctrlLayout.loadLayout(mCtrl);
 	}
 
 	@Override
@@ -92,27 +83,27 @@ public class CustomControlsActivity extends AppCompatActivity
 	private void setDefaultControlJson(String path) {
 		try {
 			// Load before save to make sure control is not error
-			ctrlLayout.loadLayout(new Gson().fromJson(Tools.read(path), CustomControls.class));
+			ctrlLayout.loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(path), CustomControls.class));
 			LauncherPreferences.DEFAULT_PREF.edit().putString("defaultCtrl", path).commit();
 			LauncherPreferences.PREF_DEFAULTCTRL_PATH = path;
 		} catch (Throwable th) {
 			Tools.showError(this, th);
 		}
 	}
-
+    
 	private void dialogSelectDefaultCtrl() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.customctrl_selectdefault);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this);
-		flv.listFileAt(Tools.CTRLMAP_PATH);
+		FileListView flv = new FileListView(dialog);
+		flv.lockPathAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
-				public void onFileSelected(File file, String path, String name) {
-					if (name.endsWith(".json")) {
+				public void onFileSelected(File file, String path) {
+					if (file.getName().endsWith(".json")) {
 						setDefaultControlJson(path);
 						dialog.dismiss();
 					}
@@ -184,17 +175,17 @@ public class CustomControlsActivity extends AppCompatActivity
 
 	private void actionLoad() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.customctrl_title_selectctrl);
+		builder.setTitle(R.string.global_load);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(this);
+		FileListView flv = new FileListView(dialog);
 		flv.listFileAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
-				public void onFileSelected(File file, String path, String name) {
-					if (name.endsWith(".json")) {
+				public void onFileSelected(File file, String path) {
+					if (file.getName().endsWith(".json")) {
 						loadControl(path);
 						dialog.dismiss();
 					}
@@ -206,12 +197,11 @@ public class CustomControlsActivity extends AppCompatActivity
 
 	private void loadControl(String path) {
 		try {
-			mCtrl = gson.fromJson(Tools.read(path), CustomControls.class);
-			ctrlLayout.loadLayout(mCtrl);
+			ctrlLayout.loadLayout(path);
 
 			selectedName = new File(path).getName();
 			// Remove `.json`
-			selectedName = selectedName.substring(0, selectedName.length() - 5);
+			selectedName = selectedName.substring(0, selectedName.length() - ControlData.getSpecialButtons().length);
 		} catch (Exception e) {
 			Tools.showError(CustomControlsActivity.this, e);
 		}

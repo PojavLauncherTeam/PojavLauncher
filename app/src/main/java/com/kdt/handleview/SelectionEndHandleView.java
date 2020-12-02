@@ -23,55 +23,55 @@ import android.graphics.drawable.*;
 import android.text.*;
 import android.view.*;
 import android.os.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 
 public class SelectionEndHandleView extends HandleView
 {
-	public SelectionEndHandleView(ControlView view) {
-		super(view);
-	}
+    public SelectionEndHandleView(ControlButton view) {
+        super(view);
+    }
 
-	@Override
-	protected int getHotspotX(Drawable drawable, boolean isRtlRun) {
-		if (isRtlRun) {
-			return (drawable.getIntrinsicWidth() * 3) / 4;
-		} else {
-			return drawable.getIntrinsicWidth() / 4;
-		}
-	}
+    @Override
+    protected int getHotspotX(Drawable drawable, boolean isRtlRun) {
+        if (isRtlRun) {
+            return (drawable.getIntrinsicWidth() * 3) / 4;
+        } else {
+            return drawable.getIntrinsicWidth() / 4;
+        }
+    }
 
-	@Override
-	protected int getHorizontalGravity(boolean isRtlRun) {
-		return isRtlRun ? Gravity.LEFT : Gravity.RIGHT;
-	}
+    @Override
+    protected int getHorizontalGravity(boolean isRtlRun) {
+        return isRtlRun ? Gravity.LEFT : Gravity.RIGHT;
+    }
 
-	@Override
-	public int getCurrentCursorOffset() {
-		return 0; // mView.getSelectionEnd();
-	}
+    @Override
+    public int getCurrentCursorOffset() {
+        return 0; // mView.getSelectionEnd();
+    }
 
-	@Override
-	public void show() {
-		super.show();
-		
-		showActionPopupWindow(0);
-	}
+    @Override
+    public void show() {
+        super.show();
 
-	@Override
-	public void updateSelection(int offset) {
-		// Selection.setSelection((Spannable) mView.getText(), mView.getSelectionStart(), offset);
-		updateDrawable();
-	}
+        showActionPopupWindow(0);
+    }
 
-	@Override
-	public void updatePosition(float x, float y) {
-		// updatePosition((int) x, (int) y, false, false);
-		positionAtCursorOffset(0, false);
-	}
-	/*
-	 public void setActionPopupWindow(ActionPopupWindow actionPopupWindow) {
-	 mActionPopupWindow = actionPopupWindow;
-	 }
-	 */
+    @Override
+    public void updateSelection(int offset) {
+        // Selection.setSelection((Spannable) mView.getText(), mView.getSelectionStart(), offset);
+        updateDrawable();
+    }
+
+    @Override
+    public void updatePosition(float x, float y) {
+        // updatePosition((int) x, (int) y, false, false);
+        positionAtCursorOffset(0, false);
+    }
+    /*
+     public void setActionPopupWindow(ActionPopupWindow actionPopupWindow) {
+     mActionPopupWindow = actionPopupWindow;
+     }
+     */
 }
 

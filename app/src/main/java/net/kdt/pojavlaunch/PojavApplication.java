@@ -1,20 +1,18 @@
 package net.kdt.pojavlaunch;
 
-import android.app.Application;
-import android.os.*;
-import android.content.pm.PackageManager.*;
-import android.content.pm.*;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.value.customcontrols.*;
-import android.support.v7.preference.*;
-import java.io.*;
+import android.app.*;
 import android.content.*;
+import android.content.pm.*;
+import android.content.res.*;
+import android.os.*;
 import android.support.v4.app.*;
+import android.support.v7.preference.*;
 import android.util.*;
-import net.kdt.pojavlaunch.exit.*;
-import java.time.*;
+import java.io.*;
 import java.text.*;
 import java.util.*;
+import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application
 {
@@ -32,10 +30,10 @@ public class PojavApplication extends Application
 					crashFile.createNewFile();
 					PrintStream crashStream = new PrintStream(crashFile);
 					crashStream.append("PojavLauncher crash report\n");
-					crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()));
-					crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL);
-					crashStream.append(" - Android version: " + Build.VERSION.RELEASE);
-					crashStream.append(" - Crash stack trace:");
+					crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()) + "\n");
+					crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL + "\n");
+					crashStream.append(" - Android version: " + Build.VERSION.RELEASE + "\n");
+					crashStream.append(" - Crash stack trace:\n");
 					crashStream.append(Log.getStackTraceString(th));
 					crashStream.close();
 				} catch (Throwable th2) {
@@ -46,7 +44,7 @@ public class PojavApplication extends Application
 				FatalErrorActivity.showError(PojavApplication.this, crashFile.getAbsolutePath(), storagePermAllowed, th);
 				// android.os.Process.killProcess(android.os.Process.myPid());
 				
-				MainActivity.fullyExit();
+				BaseMainActivity.fullyExit();
 			}
 		});
 		
@@ -59,9 +57,13 @@ public class PojavApplication extends Application
 			Tools.usingVerName = thisApp.versionName;
 			Tools.usingVerCode = thisApp.versionCode;
 			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
-			
-			LauncherPreferences.DEFAULT_PREF = PreferenceManager.getDefaultSharedPreferences(this);
-			LauncherPreferences.loadPreferences();
+            Tools.currentArch = new File(getApplicationInfo().nativeLibraryDir).getName();
+			switch (Tools.currentArch) {
+                case "arm": Tools.currentArch = "arm/aarch32"; break;
+                case "arm64": Tools.currentArch = "arm64/aarch64"; break;
+                case "x86": Tools.currentArch = "x86/i*86"; break;
+                case "x86_64": Tools.currentArch = "x86_64/amd64"; break;
+            }
 
 			FontChanger.initFonts(this);
 		} catch (Throwable th) {
@@ -70,4 +72,15 @@ public class PojavApplication extends Application
 			startActivity(ferrorIntent);
 		}
 	}
+    
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleUtils.setLocale(base));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LocaleUtils.setLocale(this);
+    }
 }
