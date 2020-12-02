@@ -12,6 +12,7 @@ import net.kdt.pojavlaunch.installers.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 import android.content.*;
+import android.system.*;
 
 public class JavaGUILauncherActivity extends LoggableActivity {
     private AWTCanvasView mTextureView;
@@ -72,16 +73,19 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                         @Override
                         public void run() {
                             try {
-                                doCustomInstall(modFile, javaArgs);
+                                final int exit = doCustomInstall(modFile, javaArgs);
                                 appendlnToLog(getString(R.string.toast_optifine_success));
-                                runOnUiThread(new Runnable(){
-
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }
-                                    });
+                                if (exit == 0) {
+                                    runOnUiThread(new Runnable(){
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
+                                                MainActivity.fullyExit();
+                                            }
+                                        });
+                                } /* else {
+                                    throw new ErrnoException(getString(R.string.glo, exit);
+                                } */
                             } catch (Throwable e) {
                                 appendlnToLog("Install failed:");
                                 appendlnToLog(Log.getStackTraceString(e));
