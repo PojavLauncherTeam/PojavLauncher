@@ -84,10 +84,13 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
     <string name="mcl_setting_title_buttonscale">Ridimensionamento controlli</string>
     <string name="mcl_setting_subtitle_buttonscale">Ingrandisci i pulsanti se sono troppo piccoli.</string>
+    <string name="mcl_setting_title_mousescale">Dimensioni mouse</string>
+    <string name="mcl_setting_subtitle_mousescale">Modifica dimensioni mouse virtuale.</string>
     <string name="mcl_setting_title_controlsize">Imposta dimensione dei pulsanti di controllo</string>
     <string name="mcl_setting_title_javaargs">Argomenti di avvio JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attento, questo potrebbe far crashare il gioco se modificato senza sapere quello che fai.</string>
     <string name="mcl_setting_category_general">Impostazioni generali</string>
+    <string name="mcl_setting_category_scaling">Impostazioni dimensioni</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno visibili nella lista delle versioni</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
