@@ -4,6 +4,14 @@
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
 
+## Navigation
+- [Introduction](#mainly-features-on-v3)
+- [Building](#building)
+- [Current status](#current-status)
+- [License](#license)
+- [Credits & Third party components and it's licenses](Credits & Third party-components-and-its-licenses)
+
+
 ## Mainly features on v3
 - Launch Minecraft 1.6 to latest 1.17 snapshot.
 - Launch Forge up to 1.13.2. To install Forge 1.12.2 and below, simply put to mod install launcher. For Forge 1.13.2, use custom arguments.
@@ -37,11 +45,10 @@ scripts\languagelist_updater.bat
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
-## Third party components and it's licenses
+## Credits & Third party components and it's licenses
 - [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
 - Android Support Libraries: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
 - [GL4ES](https://github.com/ptitSeb/gl4es): [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
 - [OpenJDK](https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u): [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
 - [LWJGL3](https://github.com/PojavLauncherTeam/lwjgl3): [BSD-3 License](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md).
 - [LWJGLX](https://github.com/PojavLauncherTeam/lwjglx) (LWJGL2 API compatibility layer for LWJGL3): unknown license.<br>
-
