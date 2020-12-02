@@ -171,6 +171,15 @@ public class BaseMainActivity extends LoggableActivity {
             //this.mouseToggleButton = findButton(R.id.control_togglemouse);
             this.touchPad = (LinearLayout) findViewById(R.id.main_touchpad);
             this.mousePointer = (ImageView) findViewById(R.id.main_mouse_pointer);
+            this.mousePointer.post(new Runnable(){
+
+                @Override
+                public void run() {
+                    ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
+                    params.width = (int) (mousePointer.getWidth() / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                    params.height = (int) (mousePointer.getHeight() / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                }
+            });
 
             this.contentLog = (LinearLayout) findViewById(R.id.content_log_layout);
             this.contentScroll = (ScrollView) findViewById(R.id.content_log_scroll);

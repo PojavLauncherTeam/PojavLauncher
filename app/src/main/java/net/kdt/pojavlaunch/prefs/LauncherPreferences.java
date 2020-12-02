@@ -12,7 +12,8 @@ public class LauncherPreferences
 	public static boolean PREF_VERTYPE_OLDALPHA = false;
 	public static boolean PREF_VERTYPE_OLDBETA = false;
 	public static boolean PREF_FREEFORM = false;
-	public static float PREF_BUTTONSIZE = 1.0f;
+	public static float PREF_BUTTONSIZE = 100f;
+	public static float PREF_MOUSESCALE = 100f;
 	public static int PREF_LONGPRESS_TRIGGER = 500;
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
@@ -21,6 +22,7 @@ public class LauncherPreferences
 	
 	public static void loadPreferences() {
 		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
+		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
 		PREF_FREEFORM = DEFAULT_PREF.getBoolean("freeform", false);
 		PREF_VERTYPE_RELEASE = DEFAULT_PREF.getBoolean("vertype_release", true);
 		PREF_VERTYPE_SNAPSHOT = DEFAULT_PREF.getBoolean("vertype_snapshot", false);

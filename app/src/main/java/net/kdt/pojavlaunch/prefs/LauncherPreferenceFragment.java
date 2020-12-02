@@ -25,6 +25,12 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
         seek3.setMin(20);
         seek3.setMax(500);
 		seek3.setValue((int) LauncherPreferences.PREF_BUTTONSIZE);
+        
+        SeekBarPreference seek4 = (SeekBarPreference) findPreference("mousescale");
+        seek4.setMin(20);
+        seek4.setMax(500);
+        seek4.setValue((int) LauncherPreferences.PREF_MOUSESCALE);
+        
 	}
 
     @Override
