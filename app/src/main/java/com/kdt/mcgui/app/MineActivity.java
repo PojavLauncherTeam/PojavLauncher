@@ -110,9 +110,9 @@ public class MineActivity extends BaseActivity implements View.OnClickListener
         switch (view.getId()) {
             case R.id.topbar_help_text: Tools.openURL(this, "https://www.minecraft.net/help");
                 break;
-            case R.id.topbar_logo: Tools.openURL(this, "https://www.minecraft.net");
+            case R.id.topbar_logo: Tools.openURL(this, "https://github.com/PojavLauncherTeam/PojavLauncher");
                 break;
-            case R.id.bottombar_author_logo: Tools.openURL(this, "https://mojang.com");
+            case R.id.bottombar_author_logo: Tools.openURL(this, "https://github.com/PojavLauncherTeam");
                 break;
         }
     }
