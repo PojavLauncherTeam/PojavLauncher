@@ -20,6 +20,8 @@ public class ControlData implements Cloneable
     public static final int SPECIALBTN_MOUSESEC = -4;
     public static final int SPECIALBTN_VIRTUALMOUSE = -5;
     public static final int SPECIALBTN_MOUSEMID = -6;
+    public static final int SPECIALBTN_SCROLLUP = -7;
+    public static final int SPECIALBTN_SCROLLDOWN = -8;
     
     private static ControlData[] SPECIAL_BUTTONS;
     private static String[] SPECIAL_BUTTON_NAME_ARRAY;
@@ -45,8 +47,10 @@ public class ControlData implements Cloneable
                 new ControlData("PRI", SPECIALBTN_MOUSEPRI, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
                 new ControlData("SEC", SPECIALBTN_MOUSESEC, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 3 - ${height} * 3"),
                 new ControlData("Mouse", SPECIALBTN_VIRTUALMOUSE, "${right}", "${margin}", false),
-                
-                new ControlData("MID", SPECIALBTN_MOUSEMID, "${margin}", "${margin}")
+
+                new ControlData("MID", SPECIALBTN_MOUSEMID, "${margin}", "${margin}"),
+                new ControlData("SCROLLUP", SPECIALBTN_SCROLLUP, "${margin}", "${margin}"),
+                new ControlData("SCROLLDOWN", SPECIALBTN_SCROLLDOWN, "${margin}", "${margin}")
             };
             SPECIAL_BUTTONS = specialButtons;
         }

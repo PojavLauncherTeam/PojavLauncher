@@ -81,6 +81,14 @@ public class MainActivity extends BaseMainActivity {
                                 setRightOverride(isDown);
                             } 
                             break;
+                            
+                        case ControlData.SPECIALBTN_SCROLLDOWN:
+                            CallbackBridge.sendScroll(0, 0.1d);
+                            break;
+                            
+                        case ControlData.SPECIALBTN_SCROLLUP:
+                            CallbackBridge.sendScroll(0, -0.1d);
+                            break;
                     }
                 }
 
@@ -97,6 +105,8 @@ public class MainActivity extends BaseMainActivity {
         specialButtons[2].specialButtonListener
             = specialButtons[3].specialButtonListener
             = specialButtons[5].specialButtonListener
+            = specialButtons[6].specialButtonListener 
+            = specialButtons[7].specialButtonListener
             = mTouchListener;
         
         mControlLayout = findViewById(R.id.main_control_layout);
