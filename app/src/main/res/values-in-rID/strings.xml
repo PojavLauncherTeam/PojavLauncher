@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">BANTUAN</string>
     <!-- Languages list part -->
-    <string name="language_name">BAHASA - ID</string>
+    <string name="language_name">BAHASA INDONESIA - ID</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email atau username</string>
     <string name="login_online_username_question">(Saya pilih yang mana?)</string>
