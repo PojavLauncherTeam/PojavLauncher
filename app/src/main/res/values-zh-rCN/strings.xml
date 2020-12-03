@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">帮助</string>
     <!-- Languages list part -->
-    <string name="language_name">SIMPLIFIED CHINESE - CN</string>
+    <string name="language_name">简体中文 - CN</string>
     <!-- Logging output -->
     <string name="log_title">日志输出</string>
     <!-- Login strings -->
