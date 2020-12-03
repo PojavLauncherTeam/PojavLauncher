@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">WSPARCIE</string>
     <!-- Languages list part -->
-    <string name="language_name">Polski - PL</string>
+    <string name="language_name">POLSKI - PL</string>
     <!-- Logging output -->
     <string name="log_title">Wyjście dziennika</string>
     <!-- Login strings -->
