@@ -130,8 +130,8 @@ public final class Tools
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
        
-        // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
-        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
+        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+        // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
         
         // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
 
