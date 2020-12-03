@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">AYUDA</string>
     <!-- Languages list part -->
-    <string name="language_name">INGLÉS - US</string>
+    <string name="language_name">ESPAÑOL - ES</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email o usuario</string>
     <string name="login_online_username_question">(Que utilizo?)</string>
