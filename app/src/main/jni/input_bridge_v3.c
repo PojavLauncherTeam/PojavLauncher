@@ -4,8 +4,7 @@
  * Status:
  * - Active development
  * - Works with some bugs:
- *  + Modded versions gives broken stuff.
- *  + Broken text input on MC 1.12.2 and below.
+ *  + Modded versions gives broken stuff..
  */
  
 #include <jni.h>
@@ -186,6 +185,12 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputRead
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing) {
     isGrabbing = grabbing;
+    if (isGrabbing == JNI_TRUE) {
+        // Center the cursor pointer
+        grabCursorX = savedWidth / 2;
+        grabCursorY = savedHeight / 2;
+        isPrepareGrabPos = true;
+    }
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(JNIEnv* env, jclass clazz) {
