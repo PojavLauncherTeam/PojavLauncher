@@ -195,7 +195,7 @@ public class JREUtils
         envMap.put("LIBGL_MIPMAP", "3");
         
         // Fix white color on banner and sheep
-        envMap.put("LIBGL_NORMALIZE", "1");
+       // envMap.put("LIBGL_NORMALIZE", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
