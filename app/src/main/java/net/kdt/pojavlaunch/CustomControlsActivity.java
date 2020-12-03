@@ -201,7 +201,7 @@ public class CustomControlsActivity extends BaseActivity
 
 			selectedName = new File(path).getName();
 			// Remove `.json`
-			selectedName = selectedName.substring(0, selectedName.length() - ControlData.getSpecialButtons().length);
+			selectedName = selectedName.substring(0, selectedName.length() - 5);
 		} catch (Exception e) {
 			Tools.showError(CustomControlsActivity.this, e);
 		}
