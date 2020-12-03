@@ -6,7 +6,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">AJUTOR</string>
     <!-- Languages list part -->
-    <string name="language_name">ENGLEZA - US</string>
+    <string name="language_name">ROMÂNĂ - RO</string>
     <!-- Logging output -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Emailul sau numele de utilizator</string>
