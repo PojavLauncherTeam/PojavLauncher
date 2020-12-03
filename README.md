@@ -2,13 +2,14 @@
 [![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
 [**Discord server**](https://discord.gg/6RpEJda)
 # PojavLauncher
-A Minecraft: Java Edition launcher for Android based from Boardwalk. This branch is intended to support 1.13+
+A Minecraft: Java Edition launcher for Android based on [Boardwalk](https://github.com/zhuowei/Boardwalk).
 
 ## Navigation
 - [Introduction](#mainly-features-on-v3)
 - [Building](#building)
 - [Current status](#current-status)
 - [License](#license)
+- [Contributing](#contributing)
 - [Credits & Third party components and it's licenses](#credits--third-party-components-and-its-licenses)
 
 
@@ -44,6 +45,9 @@ scripts\languagelist_updater.bat
 
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
+
+## Contributing
+Contributing are welcome! We welcome any type of contribution, not only code. Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
 ## Credits & Third party components and it's licenses
 - [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
