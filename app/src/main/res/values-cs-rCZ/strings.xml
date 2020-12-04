@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">NÁPOVĚDA</string>
     <!-- Languages list part -->
-    <string name="language_name">CZECH - CZ</string>
+    <string name="language_name">ČEŠTINA - CZ</string>
     <!-- Logging output -->
     <string name="log_title">Záznam výstupu</string>
     <!-- Login strings -->

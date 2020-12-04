@@ -17,7 +17,7 @@
     <string name="login_online_password_question">Забыли пароль?</string>
     <string name="login_online_remember">Запомнить меня?</string>
     <string name="login_online_check_keeplogin">Сохранить меня авторизованным</string>
-    <string name="login_online_login_label">Вход</string>
+    <string name="login_online_login_label">Войти</string>
     <string name="login_online_create_account">(Создать новую учётную запись?)</string>
     <string name="login_offline_switch">Автономная учётная запись?</string>
     <string name="login_offline_label">Войти как автономная учётная запись</string>
@@ -32,7 +32,7 @@
     <string name="warning_title">Предупреждение</string>
     <string name="warning_msg">Это приложение может быть несовместимо с вашей версией Android (Android 7.0 и выше). Вместо этого вы можете использовать VMOS и установить это приложение на VMOS. Но VMOS удалён из Play Маркета, вы должны установить его вручную.</string>
     <string name="warning_noshowagain">Больше не показывать</string>
-    <string name="warning_action_install">Установить VMOS</string>
+    <string name="warning_action_install">Установите VMOS</string>
     <string name="warning_action_tryanyway">Все равно попробовать</string>
     <string name="warning_action_exit">Выйти</string>
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
