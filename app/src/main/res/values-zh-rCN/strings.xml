@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">帮助</string>
     <!-- Languages list part -->
-    <string name="language_name">SIMPLIFIED CHINESE - CN</string>
+    <string name="language_name">简体中文 - CN</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">电子邮件或用户名</string>
     <string name="login_online_username_question">（使用哪个？）</string>
@@ -84,10 +84,13 @@
     <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长。</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
     <string name="mcl_setting_subtitle_buttonscale">若按键太小，将其放大。</string>
+    <string name="mcl_setting_title_mousescale">鼠标缩放</string>
+    <string name="mcl_setting_subtitle_mousescale">更改虚拟鼠标的大小。</string>
     <string name="mcl_setting_title_controlsize">设定控制键大小</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
     <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
     <string name="mcl_setting_category_general">通用设置</string>
+    <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -165,6 +168,7 @@
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_specialkey">特殊键</string>
     <string name="customctrl_hidden">隐藏</string>
+    <string name="customctrl_toggle">可切换</string>
     <string name="customctrl_dynamicpos">动态位置</string>
     <string name="customctrl_dynamicpos_x">动态 X 轴</string>
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>

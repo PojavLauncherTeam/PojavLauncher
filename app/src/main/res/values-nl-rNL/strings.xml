@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">HELP</string>
     <!-- Languages list part -->
-    <string name="language_name">ENGLISH - US</string>
+    <string name="language_name">NEDERLANDS - NL</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail of gebruikersnaam</string>
     <string name="login_online_username_question">(Welke gebruik ik dan?)</string>
@@ -25,6 +25,7 @@
     <string name="login_select_account">Selecteer gebruiker</string>
     <!-- Hint -->
     <string name="hint_select_account">Om te selecteren, klik erop. Om een account te verwijderen, houd deze ingedrukt.</string>
+    <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
     <!-- Warning -->
     <string name="warning_title">Waarschuwing</string>
     <string name="warning_msg">Deze app is mogelijk niet compatibel met uw Android-versie (hoger of gelijk aan Android 7.0). Je kunt VMOS gebruiken en deze app in plaats daarvan installeren naar VMOS. Maar VMOS is verwijderd door Play Store, je moet het handmatig installeren.</string>
@@ -46,7 +47,7 @@
     <string name="error_show_less">Minder weergeven</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">De rechten om te lezen/schrijven naar opslag zijn vereist!</string>
-    <string name="toast_login_error">Er is iets misgegaan na het inloggen. Geef feedback aan de ontwikkelaar.\nFout: %s</string>
+    <string name="toast_login_error">Er is iets misgegaan na het inloggen. Geef feedback aan de ontwikkelaar.\nError: %s</string>
     <string name="toast_optifine_success">Installatie geslaagd</string>
     <string name="toast_uninstalljre_done">Java Runtime verwijderen voltooid</string>
     <!--
@@ -81,6 +82,8 @@
     <string name="mcl_setting_subtitle_freeform">Start Minecraft in zwevend venster. Vereist Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Hoe lang zal starten na lange indrukken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Verander de triggertijd voor lang indrukken van vernietig blok en laten vallen.</string>
+    <string name="mcl_setting_title_buttonscale">Controle knoppen schalen</string>
+    <string name="mcl_setting_subtitle_buttonscale">Vergroot ze als knoppen te klein zijn.</string>
     <string name="mcl_setting_title_controlsize">Instellen van de regelknoppen</string>
     <string name="mcl_setting_title_javaargs">JVM Launch argumenten</string>
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
@@ -138,7 +141,7 @@
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Toetsenbord</string>
     <string name="control_chat">Chat</string>
-    <string name="control_debug">Foutoplossing</string>
+    <string name="control_debug">Debug</string>
     <string name="control_zoom">Verzoomen (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
@@ -162,6 +165,13 @@
     <string name="customctrl_keyname">Toetscode</string>
     <string name="customctrl_specialkey">Speciale sleutel</string>
     <string name="customctrl_hidden">Verborgen</string>
+    <string name="customctrl_dynamicpos">Dynamische positie</string>
+    <string name="customctrl_dynamicpos_x">Dynamisch X</string>
+    <string name="customctrl_dynamicpos_y">Dynamisch Y</string>
+    <string name="customctrl_keycombine">Toetsencombinatie</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Knop toevoegen</string>
     <string name="customctrl_selectdefault">Selecteer standaard Control json</string>
     <string name="main_options">Opties</string>
@@ -169,6 +179,7 @@
     <string name="main_welcome">Welkom,</string>
     <string name="main_infodev">Informatie (DEV)</string>
     <string name="main_switchuser">Gebruiker wijzigen</string>
+    <string name="main_version">Versie:</string>
     <string name="main_nocrash">Geen crash gedetecteerd</string>
     <string name="main_nolog">Geen log.</string>
 </resources>

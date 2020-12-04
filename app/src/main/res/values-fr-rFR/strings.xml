@@ -84,10 +84,13 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_buttonscale">Echelle des boutons de contrôle</string>
     <string name="mcl_setting_subtitle_buttonscale">Mettre à l\'échelle si les boutons sont trop petits.</string>
+    <string name="mcl_setting_title_mousescale">Mise à l\'échelle de la souris</string>
+    <string name="mcl_setting_subtitle_mousescale">Changer la taille de la souris virtuelle.</string>
     <string name="mcl_setting_title_controlsize">Définir la taille du bouton de contrôle</string>
     <string name="mcl_setting_title_javaargs">Arguments de lancement JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attention, cela peut faire planter le jeu si modifié sans connaissance.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
+    <string name="mcl_setting_category_scaling">Paramètres de redimensionnement</string>
     <string name="mcl_setting_category_veroption">Le type de version sera dans la liste des versions</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -165,6 +168,7 @@
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touches spéciales</string>
     <string name="customctrl_hidden">Masqué</string>
+    <string name="customctrl_toggle">Activable</string>
     <string name="customctrl_dynamicpos">Positionnement dynamique</string>
     <string name="customctrl_dynamicpos_x">X Dynamique</string>
     <string name="customctrl_dynamicpos_y">Y Dynamique</string>
@@ -179,6 +183,7 @@
     <string name="main_welcome">Bienvenue,</string>
     <string name="main_infodev">Informations (DEV)</string>
     <string name="main_switchuser">Changer d\'utilisateur</string>
+    <string name="main_version">Version:</string>
     <string name="main_nocrash">Aucun plantage détecté</string>
     <string name="main_nolog">Pas de journal.</string>
 </resources>

@@ -82,10 +82,15 @@
     <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa cửa sổ nổi. Cần Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn lâu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong phá hủy khối và thả vật phẩm.</string>
+    <string name="mcl_setting_title_buttonscale">Độ rộng nút điều khiển</string>
+    <string name="mcl_setting_subtitle_buttonscale">Tăng độ rộng nếu nút quá nhỏ.</string>
+    <string name="mcl_setting_title_mousescale">Độ rộng chuột</string>
+    <string name="mcl_setting_subtitle_mousescale">Đổi kích thước chuột ảo.</string>
     <string name="mcl_setting_title_controlsize">Đặt kích thước nút điều khiển</string>
     <string name="mcl_setting_title_javaargs">Các chỉ số chạy JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
     <string name="mcl_setting_category_general">Thiết lập chung</string>
+    <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
     <string name="mcl_setting_veroption_release">\"Phát hành chính thức (Release)\"</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -163,6 +168,7 @@
     <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_specialkey">Phím đặc biệt</string>
     <string name="customctrl_hidden">Ẩn</string>
+    <string name="customctrl_toggle">Chuyển đổi</string>
     <string name="customctrl_dynamicpos">Điểm động</string>
     <string name="customctrl_dynamicpos_x">Động X</string>
     <string name="customctrl_dynamicpos_y">Động Y</string>
@@ -177,6 +183,7 @@
     <string name="main_welcome">Chào mừng,</string>
     <string name="main_infodev">Thông tin (DEV)</string>
     <string name="main_switchuser">Đổi người dùng</string>
+    <string name="main_version">Phiên bản:</string>
     <string name="main_nocrash">Không phát hiện sự cố</string>
     <string name="main_nolog">Không có bản ghi.</string>
 </resources>
