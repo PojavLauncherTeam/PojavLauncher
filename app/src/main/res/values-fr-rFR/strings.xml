@@ -26,12 +26,7 @@
     <!-- Hint -->
     <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
     <string name="hint_control_mapping">"Glisser de droite à gauche pour ouvrir le menu ◀\nMaintenez un bouton pour personnaliser : modifier, redimensionner ou supprimer."</string>
-    <!-- Warning -->
-    <string name="warning_title">Avertissement</string>
-    <string name="warning_msg">Cette application peut ne pas être compatible avec votre version d\'Android (supérieure ou égale à Android 7.0). Vous pouvez utiliser VMOS puis installer cette application sur VMOS à la place. Mais VMOS est supprimé par le Play Store, vous devez l\'installer manuellement.</string>
-    <string name="warning_noshowagain">Ne plus afficher</string>
-    <string name="warning_action_install">Installer VMOS</string>
-    <string name="warning_action_tryanyway">Essayer quand même</string>
+    <!-- Warnings -->
     <string name="warning_action_exit">Quitter</string>
     <string name="warning_remove_account">Ce compte sera supprimé !</string>
     <!-- AlertDialog title -->
@@ -182,7 +177,6 @@
     <string name="customctrl_selectdefault">Sélectionner le json de contrôle par défaut</string>
     <string name="main_options">Paramètres</string>
     <string name="main_play">Jouer</string>
-    <string name="main_welcome">Bienvenue,</string>
     <string name="main_infodev">Informations (DEV)</string>
     <string name="main_switchuser">Changer d\'utilisateur</string>
     <string name="main_version">Version:</string>
