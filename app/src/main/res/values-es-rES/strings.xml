@@ -25,12 +25,7 @@
     <string name="login_select_account">Elije una cuenta</string>
     <!-- Hint -->
     <string name="hint_select_account">Para seleccionar una cuenta dele click, para eliminarla manténgala pulsada.</string>
-    <!-- Warning -->
-    <string name="warning_title">Advertencia</string>
-    <string name="warning_msg">Esta aplicación puede no ser compatible con la versión de tu dispositivo Android (superior o igual Android 7.0). Puede usar VMOS e instalar esta aplicación desde VMOS, pero tenga en cuenta que tendrá que instalar VMOS manualmente porque fue eliminado de Play Store.</string>
-    <string name="warning_noshowagain">No mostrar más</string>
-    <string name="warning_action_install">Instalar VMOS</string>
-    <string name="warning_action_tryanyway">Intentarlo de todos modos</string>
+    <!-- Warnings -->
     <string name="warning_action_exit">Salir</string>
     <string name="warning_remove_account">Esta cuenta va a ser eliminada!</string>
     <!-- AlertDialog title -->
@@ -156,7 +151,6 @@
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
-    <string name="main_welcome">Bienvenido</string>
     <string name="main_infodev">Información (DEV)</string>
     <string name="main_switchuser">Cambiar usuario</string>
     <string name="main_nocrash">Ningún bloqueo detectado</string>
