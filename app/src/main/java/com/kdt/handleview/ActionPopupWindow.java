@@ -83,7 +83,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
 		alert.setCancelable(false);
 		if (view == mEditTextView) {
-			alert.setTitle(view.getResources().getString(R.string.global_edit) + " " + mHandleView.mView.getText());
+			alert.setTitle(view.getResources().getString(R.string.customctrl_edit, mHandleView.mView.getText()));
 			alert.setView(R.layout.control_setting);
 			alert.setPositiveButton(android.R.string.ok, null);
 			alert.setNegativeButton(android.R.string.cancel, null);
@@ -222,8 +222,8 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 			dialog.show();
 		} else if (view == mDeleteTextView) {
-			alert.setMessage(view.getContext().getString(R.string.global_remove) + " " + mHandleView.mView.getText() + "?");
-			alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+			alert.setMessage(view.getContext().getString(R.string.customctrl_remove, mHandleView.mView.getText()) + "?");
+			alert.setPositiveButton(R.string.global_remove, new DialogInterface.OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface p1, int p2)
