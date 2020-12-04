@@ -172,6 +172,8 @@
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика X</string>
     <string name="customctrl_dynamicpos_y">Динамика Y</string>
+    <string name="customctrl_transparency_bg">Прозрачность фона</string>
+    <string name="customctrl_transparency_text">Прозрачность текста</string>
     <string name="customctrl_keycombine">Комбинация клавиш</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
