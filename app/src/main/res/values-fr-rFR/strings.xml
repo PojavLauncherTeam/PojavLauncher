@@ -172,6 +172,8 @@
     <string name="customctrl_dynamicpos">Positionnement dynamique</string>
     <string name="customctrl_dynamicpos_x">X Dynamique</string>
     <string name="customctrl_dynamicpos_y">Y Dynamique</string>
+    <string name="customctrl_transparency_bg">Transparence de l\'arrière-plan</string>
+    <string name="customctrl_transparency_text">Transparence du texte</string>
     <string name="customctrl_keycombine">Combinaisons de touches</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
