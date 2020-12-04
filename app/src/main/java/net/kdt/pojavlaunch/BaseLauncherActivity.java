@@ -179,7 +179,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 
         try{
             final ProgressDialog barrier = new ProgressDialog(this);
-            barrier.setMessage(R.string.global_waiting);
+            barrier.setMessage(getString(R.string.global_waiting));
             barrier.setProgressStyle(barrier.STYLE_SPINNER);
             barrier.setCancelable(false);
             barrier.show();
