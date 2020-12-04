@@ -122,19 +122,21 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                         final CheckBox checkToggle = dialog.findViewById(R.id.controlsetting_checkbox_toggle);
                         checkToggle.setChecked(properties.isToggle);
 
-                        final LinearLayout layoutDynamicBtn = dialog.findViewById(R.id.controlsetting_dynamicbtnlayout);
+                        final EditText editDynamicX = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_x);
+                        final EditText editDynamicY = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_y);
+                        editDynamicX.setEnabled(properties.isDynamicBtn);
+                        editDynamicY.setEnabled(properties.isDynamicBtn);
+                        
                         final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_dynamicpos);
                         checkDynamicPos.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
 
                                 @Override
                                 public void onCheckedChanged(CompoundButton btn, boolean checked) {
-                                    layoutDynamicBtn.setVisibility(checked ? View.VISIBLE : View.GONE);
+                                    editDynamicX.setEnabled(checked);
+                                    editDynamicY.setEnabled(checked);
                                 }
                             });
                         checkDynamicPos.setChecked(properties.isDynamicBtn);
-                        
-                        final EditText editDynamicX = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_x);
-                        final EditText editDynamicY = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_y);
                         
                         editDynamicX.setHint(Float.toString(properties.x));
                         editDynamicX.setText(properties.dynamicX);
