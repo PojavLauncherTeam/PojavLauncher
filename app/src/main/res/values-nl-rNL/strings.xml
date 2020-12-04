@@ -26,12 +26,7 @@
     <!-- Hint -->
     <string name="hint_select_account">Om te selecteren, klik erop. Om een account te verwijderen, houd deze ingedrukt.</string>
     <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
-    <!-- Warning -->
-    <string name="warning_title">Waarschuwing</string>
-    <string name="warning_msg">Deze app is mogelijk niet compatibel met uw Android-versie (hoger of gelijk aan Android 7.0). Je kunt VMOS gebruiken en deze app in plaats daarvan installeren naar VMOS. Maar VMOS is verwijderd door Play Store, je moet het handmatig installeren.</string>
-    <string name="warning_noshowagain">Niet opnieuw weergeven</string>
-    <string name="warning_action_install">Installeer VMOS</string>
-    <string name="warning_action_tryanyway">Toch proberen</string>
+    <!-- Warnings -->
     <string name="warning_action_exit">Afsluiten</string>
     <string name="warning_remove_account">Dit account wordt verwijderd!</string>
     <!-- AlertDialog title -->
@@ -176,7 +171,6 @@
     <string name="customctrl_selectdefault">Selecteer standaard Control json</string>
     <string name="main_options">Opties</string>
     <string name="main_play">Speel</string>
-    <string name="main_welcome">Welkom,</string>
     <string name="main_infodev">Informatie (DEV)</string>
     <string name="main_switchuser">Gebruiker wijzigen</string>
     <string name="main_version">Versie:</string>
