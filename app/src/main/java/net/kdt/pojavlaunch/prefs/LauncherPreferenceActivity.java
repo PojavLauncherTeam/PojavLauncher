@@ -15,7 +15,8 @@ public class LauncherPreferenceActivity extends MinePrefActivity
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		LauncherPreferences.loadPreferences();
 	}
+    
+    
 }
 

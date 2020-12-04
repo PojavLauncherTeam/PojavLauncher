@@ -203,9 +203,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     public void statusIsLaunching(boolean isLaunching) {
-        // As preference fragment put to tab, changes without notice, so need re-load pref
-        if (isLaunching) LauncherPreferences.loadPreferences();
-        
         LinearLayout.LayoutParams reparam = new LinearLayout.LayoutParams((int) updateWidthHeight(), LinearLayout.LayoutParams.WRAP_CONTENT);
         ViewGroup.MarginLayoutParams lmainTabParam = (ViewGroup.MarginLayoutParams) fullTab.getLayoutParams();
         int launchVisibility = isLaunching ? View.VISIBLE : View.GONE;

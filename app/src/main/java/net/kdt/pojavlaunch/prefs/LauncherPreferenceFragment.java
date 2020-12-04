@@ -6,8 +6,9 @@ import android.support.v7.preference.*;
 import net.kdt.pojavlaunch.*;
 
 import net.kdt.pojavlaunch.R;
+import android.content.*;
 
-public class LauncherPreferenceFragment extends PreferenceFragmentCompat
+public class LauncherPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener
 {
 	@Override
 	public void onCreatePreferences(Bundle b, String str) {
@@ -30,12 +31,22 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat
         seek4.setMin(20);
         seek4.setMax(500);
         seek4.setValue((int) LauncherPreferences.PREF_MOUSESCALE);
-        
 	}
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (hidden) LauncherPreferences.loadPreferences();
+    public void onResume() {
+        super.onResume();
+        getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences p, String s) {
+        LauncherPreferences.loadPreferences();
     }
 }
