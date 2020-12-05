@@ -160,6 +160,10 @@
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Kirim kode kunci kustom</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">Kode kunci</string>
     <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
