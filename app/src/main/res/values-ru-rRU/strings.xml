@@ -84,7 +84,7 @@
     <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
-    <string name="mcl_setting_category_general">Общие настройки</string>
+    <string name="mcl_setting_category_general">Основные настройки</string>
     <string name="mcl_setting_category_scaling">Масштабирование</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
