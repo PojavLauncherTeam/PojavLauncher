@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Android үшін Minecraft: Java Edition)</string>
+    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">КӨМЕК</string>
     <!-- Languages list part -->
+    <string name="language_name">ҚАЗАҚША - KZ</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email немесе пайдаланушының аты</string>
+    <string name="login_online_password_hint">Құпиясөз</string>
+    <string name="login_online_login_label">Кіру</string>
+    <string name="login_offline_alert_skip">Қалдыру</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
