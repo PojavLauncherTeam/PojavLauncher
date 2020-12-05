@@ -157,6 +157,10 @@
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Verstuur aangepaste keycode</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">Toetscode</string>
     <string name="customctrl_specialkey">Speciale sleutel</string>
     <string name="customctrl_hidden">Verborgen</string>
