@@ -103,6 +103,7 @@
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
+    <string name="global_waiting">Подождите</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -160,6 +161,10 @@
     <string name="control_viewout">Показать вывод журнала</string>
     <string name="control_adebug">Откладка PointerCapture</string>
     <string name="control_customkey">Отправить потловательскую раскладку</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
     <string name="customctrl_hidden">Скрыто</string>
@@ -177,6 +182,7 @@
     <string name="customctrl_selectdefault">Выберать управление по умолчанию</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
+    <string name="main_welcome">Добро пожаловать, %s</string>
     <string name="main_infodev">Инфо (Разраб.)</string>
     <string name="main_switchuser">Выбрать пользователя</string>
     <string name="main_version">Версия:</string>
