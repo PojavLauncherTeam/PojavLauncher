@@ -144,6 +144,10 @@
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">Tecla</string>
     <string name="customctrl_specialkey">Tecla especial</string>
     <string name="customctrl_hidden">Oculto</string>
