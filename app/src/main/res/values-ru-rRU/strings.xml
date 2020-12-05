@@ -127,7 +127,7 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Игра закрылась</string>
+    <string name="mcn_exit_title">Произошел собой приложение/игры с кодом %d</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_crash">Обнаружен сбой игры! Нажмите кнопку ОК, чтобы выйти.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
@@ -159,7 +159,7 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Показать вывод журнала</string>
-    <string name="control_adebug">Откладка PointerCapture</string>
+    <string name="control_adebug">Входная отладка</string>
     <string name="control_customkey">Отправить потловательскую раскладку</string>
     <!--
     <string name="control_more3"></string>
