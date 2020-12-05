@@ -160,6 +160,10 @@
     <string name="control_viewout">Показати вивід журналу</string>
     <string name="control_adebug">Вкладка PointerCapture</string>
     <string name="control_customkey">Надіслати користувацьку розкладку</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">Код клавіші</string>
     <string name="customctrl_specialkey">Спеціальна клавіша</string>
     <string name="customctrl_hidden">Приховано</string>
