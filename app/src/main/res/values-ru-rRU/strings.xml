@@ -151,7 +151,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3-е лицо</string>
+    <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Мышь</string>
     <string name="control_mouseoff">Мышь: Выкл</string>
