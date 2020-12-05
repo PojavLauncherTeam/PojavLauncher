@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
-import com.kdt.filerapi.*;
+import com.kdt.pickafile.*;
 import com.kdt.mojangauth.*;
 import java.io.*;
 import java.util.*;
@@ -332,6 +332,21 @@ public class PojavLoginActivity extends BaseActivity
         mkdirs(Tools.MAIN_PATH);
         mkdirs(Tools.MAIN_PATH + "/lwjgl3");
         mkdirs(Tools.MAIN_PATH + "/mods");
+        
+        File forgeSplashFile = new File(Tools.MAIN_PATH, "config/splash.properties");
+        forgeSplashFile.mkdir();
+        String forgeSplashContent = "enabled=true";
+        try {
+            if (forgeSplashFile.exists()) {
+                forgeSplashContent = Tools.read(forgeSplashFile.toString());
+            }
+            if (forgeSplashContent.contains("enabled=true")) {
+                Tools.write(forgeSplashFile.toString(),
+                    forgeSplashContent.replace("enabled=true", "enabled=false"));
+            }
+        } catch (IOException e) {
+            Log.w(Tools.APP_NAME, "Could not disable Forge splash screen!");
+        }
         
         mkdirs(Tools.CTRLMAP_PATH);
         

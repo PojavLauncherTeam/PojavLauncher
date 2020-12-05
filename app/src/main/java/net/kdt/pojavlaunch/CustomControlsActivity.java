@@ -9,7 +9,7 @@ import android.support.v7.preference.*;
 import android.view.*;
 import android.widget.*;
 import com.google.gson.*;
-import com.kdt.filerapi.*;
+import com.kdt.pickafile.*;
 import java.io.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;

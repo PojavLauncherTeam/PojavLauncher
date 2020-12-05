@@ -1,7 +1,5 @@
 package com.kdt.glsupport;
 
-// Search "DISABLED" to find disabled codes.
-
 import java.io.Writer;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -1257,7 +1255,6 @@ public class GLTextureView
                                     Log.i("GLThread", "noticed surfaceView surface lost tid=" + getId());
                                 }
                                 if (mHaveEglSurface) {
-									// DISABLED
                                     stopEglSurfaceLocked();
                                 }
                                 mWaitingForSurface = true;
@@ -1505,7 +1502,7 @@ public class GLTextureView
             synchronized(sGLThreadManager) {
                 if (LOG_THREADS) {
                     Log.i("GLThread", "surfaceDestroyed tid=" + getId());
-					new Throwable("Surface destroy calling at???").printStackTrace();
+					// new Throwable("Surface destroy calling at???").printStackTrace();
                 }
                 mHasSurface = false;
                 sGLThreadManager.notifyAll();
