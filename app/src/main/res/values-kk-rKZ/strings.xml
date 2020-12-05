@@ -3,25 +3,60 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android үшін Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Minecraft: Java Edition-ді өз құрылғыңызда қосыңыз!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">КӨМЕК</string>
     <!-- Languages list part -->
     <string name="language_name">ҚАЗАҚША - KZ</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email немесе пайдаланушының аты</string>
+    <string name="login_online_username_question">(Қайсысын қолданайын?)</string>
     <string name="login_online_password_hint">Құпиясөз</string>
+    <string name="login_online_password_question">Құпиясөзді ұмыттыңыз ба?</string>
+    <string name="login_online_remember">Мені есте сақтау?</string>
+    <string name="login_online_check_keeplogin">Мені кірген қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
+    <string name="login_online_create_account">(Жаңа тіркелгі құрасыз ба?)</string>
     <string name="login_offline_alert_skip">Қалдыру</string>
+    <string name="login_error_short_username">Қолданушы аты кем дегенде 3 таңбадан тұруы керек</string>
+    <string name="login_error_exist_username">Бұл ат бос емес</string>
+    <string name="login_select_account">Тіркелгі таңдау</string>
     <!-- Hint -->
+    <string name="hint_select_account">Таңдау үшін басыңыз, жойып тастау үшін басып ұстаңыз.</string>
+    <string name="hint_control_mapping">"Мәзірді ашу үшін экранды оңнан солға сипаңыз ◀\nБаптау (өңдеу, көлем өзгерту я жою) үшін батырманы басып ұстаңыз."</string>
     <!-- Warnings -->
+    <string name="warning_action_exit">Шығу</string>
+    <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Java Runtime-ді орнату %s (.tar.xz)</string>
+    <string name="alerttitle_selectkeymap">json пішіміндегі жаймады таңдау</string>
+    <string name="alerttitle_installmod">Мод орнатқышты таңдау</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher кенет құлады</string>
+    <string name="error_checklog">Қате! Астыңғы жорналды көріңізші: %s</string>
+    <string name="error_no_version">Нұсқа жоқ!</string>
+    <string name="error_load_version">%s нұсқасын жүктеу мүмкін емес</string>
+    <string name="error_show_more">Көрсету</string>
+    <string name="error_show_less">Жасыру</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Қоймадан оқу/жазу рұқсаты керек!</string>
+    <string name="toast_login_error">Кіргеннен кейін бірдеңе істемей қалды. Әзірлеушіге жазыңызшы.\nҚате:%s</string>
+    <string name="toast_optifine_success">Орнату сәтті өтті</string>
+    <string name="toast_uninstalljre_done">Java Runtime жойылып бітті</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Жаңалық</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
+    <string name="mcl_tab_console">Әзірлеу консолі</string>
+    <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
+    <string name="mcl_launch_cleancache">Кэш файлдарын жоюда</string>
+    <string name="mcl_launch_downloading">%s жүктелуде</string>
+    <string name="mcl_launch_download_lib">%s кітапханасы жүктелуде</string>
+    <string name="mcl_launch_download_client">Minecraft %s жүктелуде</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
