@@ -160,6 +160,10 @@
     <string name="control_viewout">Nhật ký đầu ra</string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_specialkey">Phím đặc biệt</string>
     <string name="customctrl_hidden">Ẩn</string>
