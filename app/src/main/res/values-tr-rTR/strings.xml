@@ -157,6 +157,10 @@
     <string name="control_viewout">Günlük çıktısı</string>
     <string name="control_adebug">Hata ayıklama tuşu gir</string>
     <string name="control_customkey">Özel anahtarkodu gönder</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_specialkey">Özel Tuş</string>
     <string name="customctrl_hidden">Gizli</string>
