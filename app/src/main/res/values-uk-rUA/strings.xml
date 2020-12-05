@@ -164,6 +164,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_remove">Видалити %s?</string>
     <string name="customctrl_keyname">Код клавіші</string>
     <string name="customctrl_specialkey">Спеціальна клавіша</string>
     <string name="customctrl_hidden">Приховано</string>
@@ -180,7 +181,8 @@
     <string name="customctrl_addbutton">Додати кнопку</string>
     <string name="customctrl_selectdefault">Вибирати управління за замовчуванням</string>
     <string name="main_options">Опції</string>
-    <string name="main_play">Грати</string>
+    <string name="main_play" comment="main_play">Грати</string>
+    <string name="main_welcome">Ласкаво просимо, %s</string>
     <string name="main_infodev">Інфо (Розробник)</string>
     <string name="main_switchuser">Змінити користувача</string>
     <string name="main_version">Версія:</string>
