@@ -182,12 +182,12 @@
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send custom keycode</string>
-
+<!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
-
+-->
     <string name="customctrl_edit">Edit %s</string>
-    <string name="customctrl_remove">%s will be removed</string>
+    <string name="customctrl_remove">Remove %s?</string>
     
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Special Key</string>

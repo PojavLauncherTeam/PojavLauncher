@@ -366,11 +366,9 @@ public class PojavLoginActivity extends BaseActivity
                 }
             } else {
                 FileInputStream fis = new FileInputStream(new File(Tools.MAIN_PATH + "/lwjgl3/version"));
-                byte[] release1 = new byte[is.available()];
-                byte[] release2 = new byte[fis.available()];
-                is.read(release1);
-                fis.read(release2);
-                if (!Arrays.equals(release1,release2)) {
+                String release1 = Tools.read(is);
+                String release2 = Tools.read(fis);
+                if (!release1.equals(release2)) {
                     String[] lwjglFileList = am.list("components/lwjgl3");
                     for (String s : lwjglFileList) {
                         Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.MAIN_PATH+"/lwjgl3/",s, true);

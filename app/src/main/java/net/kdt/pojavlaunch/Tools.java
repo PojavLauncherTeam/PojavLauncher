@@ -375,7 +375,7 @@ public final class Tools
             throw new RuntimeException("Unable to copy " + fileName + " to " + output + "/" + outputName, th);
         }
     }
-
+/*
     public static void extractAssetFolder(Activity ctx, String path, String output) throws Exception {
         extractAssetFolder(ctx, path, output, false);
     }
@@ -399,7 +399,7 @@ public final class Tools
             showError(ctx, e);
         }
     }
-
+*/
     public static void showError(Context ctx, Throwable e) {
         showError(ctx, e, false);
     }
