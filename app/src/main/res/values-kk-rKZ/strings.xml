@@ -97,6 +97,13 @@
     <string name="global_edit">Өңдеу</string>
     <string name="global_error">Қате</string>
     <string name="global_load">Жүктеу</string>
+    <string name="global_name">Атауы</string>
+    <string name="global_remove">Алып тастау</string>
+    <string name="global_restart">Қайта жүктеу</string>
+    <string name="global_save">Сақтау</string>
+    <string name="global_unpacking">%s ашылуда</string>
+    <string name="global_error_field_empty">Бұл өріс бос болмауы міндетті</string>
+    <string name="global_waiting">Күтуде</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -120,7 +127,23 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Қолданба/Ойын %d кодымен жабылды</string>
+    <string name="mcn_exit_call">Шығу</string>
+    <string name="mcn_exit_crash">Ойын іркілісі табылды! Шығу үшін OK\'ті басыңыз.</string>
+    <string name="mcn_exit_errcrash">Іркілісті табу мүмкін емес! Бұған мән бермей-ақ қойыңыз.</string>
+    <string name="mcn_exit_confirm">Мәжбүрлеп жабуға сенімдісіз бе?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 орнатылмаған!</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s сәулеті Java Runtime-мен %2$s сыйыса алмайды.</string>
+    <string name="mcn_check_fail_java">Сынақ Java VM-ді қосу мүмкін емес. Тағы ақпар үшін %s көріңіз.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Басқару</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Пернетақта</string>
+    <string name="control_chat">Чат</string>
+    <string name="control_debug">Оңдау</string>
+    <string name="control_zoom">Зум (С)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Инв</string>
     <string name="control_up">▲</string>
@@ -135,9 +158,36 @@
     <string name="control_mouseon">Тінтуір: қос.</string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Мәжбүрлеп жабу</string>
+    <string name="control_viewout">Жорнал шығысы</string>
+    <string name="control_adebug">Кірісті оңдау</string>
+    <string name="control_customkey">Өзгертілген жайманы жіберу</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit" comment="customctrl_edit">%s өңдеу</string>
+    <string name="customctrl_remove">%s алып тастайсыз ба?</string>
+    <string name="customctrl_keyname">Перне коды</string>
+    <string name="customctrl_specialkey">Арнайы перне</string>
+    <string name="customctrl_hidden">Жасырын</string>
+    <string name="customctrl_toggle">Ауыстырғыш</string>
+    <string name="customctrl_dynamicpos">Динамикалық позиция</string>
+    <string name="customctrl_dynamicpos_x">Динамикалық X</string>
+    <string name="customctrl_dynamicpos_y">Динамикалық Y</string>
+    <string name="customctrl_transparency_bg">Фон мөлдірлігі</string>
+    <string name="customctrl_transparency_text">Мәтін мөлдірлігі</string>
+    <string name="customctrl_keycombine">Перне комбинациясы</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">Батырма қосу</string>
+    <string name="customctrl_selectdefault">Ctrl-дың әдепкі json-ын таңдау</string>
+    <string name="main_options">Баптау</string>
+    <string name="main_play" comment="main_play">Ойнау</string>
+    <string name="main_welcome">Сәлем, %s</string>
+    <string name="main_infodev">Ақпар (Әзірлеуші)</string>
+    <string name="main_switchuser">Пайдаланушыны ауыстыру</string>
+    <string name="main_version">Нұсқасы:</string>
+    <string name="main_nocrash">Іркіліс табылмады</string>
     <string name="main_nolog">Лог жоқ.</string>
 </resources>
