@@ -160,6 +160,10 @@
     <string name="control_viewout">日志输出</string>
     <string name="control_adebug">输入调试</string>
     <string name="control_customkey">发送自定义键码</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_specialkey">特殊键</string>
     <string name="customctrl_hidden">隐藏</string>
