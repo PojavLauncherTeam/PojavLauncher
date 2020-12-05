@@ -161,8 +161,11 @@
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Invia keycode personalizzato</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_edit">Modifica %s</string>
-    <string name="customctrl_remove">%s sarà rimosso</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Tasto speciale</string>
     <string name="customctrl_hidden">Nascosto</string>
