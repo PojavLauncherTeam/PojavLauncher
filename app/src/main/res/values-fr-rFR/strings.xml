@@ -161,8 +161,11 @@
     <string name="control_viewout">Sortie du journal</string>
     <string name="control_adebug">Entrée de Debug</string>
     <string name="control_customkey">Envoyer un code clavier personnalisé</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_edit">Modifier %s</string>
-    <string name="customctrl_remove">%s sera supprimé</string>
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touches spéciales</string>
     <string name="customctrl_hidden">Masqué</string>
