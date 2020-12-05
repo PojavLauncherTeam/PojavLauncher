@@ -160,16 +160,21 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit" comment="customctrl_edit">Upravit %s</string>
+    <string name="customctrl_remove">Odstranit %s?</string>
     <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_specialkey">Speciální písmeno</string>
     <string name="customctrl_hidden">Skryté</string>
+    <string name="customctrl_toggle">Přepnutelné</string>
     <string name="customctrl_dynamicpos">Dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
+    <string name="customctrl_transparency_bg">Průhlednost pozadí</string>
+    <string name="customctrl_transparency_text">Průhlednost textu</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
     <string name="main_options">Nastavení</string>
-    <string name="main_play">Hrát</string>
+    <string name="main_play" comment="main_play">Hrát</string>
     <string name="main_infodev">Údaje (DEV)</string>
     <string name="main_switchuser">Přepnout uživatele</string>
     <string name="main_nocrash">Nenalezen žádný pád</string>
