@@ -103,7 +103,7 @@
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
-    <string name="global_waiting">Подождите</string>
+    <string name="global_waiting">Ожидание</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
