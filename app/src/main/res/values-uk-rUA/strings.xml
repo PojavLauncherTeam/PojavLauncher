@@ -103,6 +103,7 @@
     <string name="global_save">Зберегти</string>
     <string name="global_unpacking">Розпакування %s</string>
     <string name="global_error_field_empty">Це поле не може бути порожнім</string>
+    <string name="global_waiting">Очікування</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -164,7 +165,8 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_remove">Видалити %s?</string>
+    <string name="customctrl_edit" comment="customctrl_edit">Редагування «%s»</string>
+    <string name="customctrl_remove">Видалити «%s»?</string>
     <string name="customctrl_keyname">Код клавіші</string>
     <string name="customctrl_specialkey">Спеціальна клавіша</string>
     <string name="customctrl_hidden">Приховано</string>
