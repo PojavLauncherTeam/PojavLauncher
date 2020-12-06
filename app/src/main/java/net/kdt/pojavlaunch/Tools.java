@@ -211,6 +211,12 @@ public final class Tools
                 }
             }
         }
+        
+        // Window size fix
+        minecraftArgs.add("--width");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
+        minecraftArgs.add("--height");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
 
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(
