@@ -27,24 +27,35 @@
     <string name="login_select_account">Тіркелгі таңдау</string>
     <!-- Hint -->
     <string name="hint_select_account">Таңдау үшін басыңыз, жойып тастау үшін басып ұстаңыз.</string>
+    <string name="hint_control_mapping">"Бұл мүмкіндік әлі аяқталған жоқ, сондықтан сіз қазіргі уақытта реттелетін басқаруды қолдана алмайсыз!\nМәзірді ашу үшін оңнан солға қарай сырғытыңыз ◀\nТүймелеу үшін түймені басып тұрыңыз: өңдеу, өлшемін өзгерту немесе жою."</string>
     <!-- Warning -->
     <string name="warning_title">Назар аударыңыз</string>
+    <string name="warning_msg">Бұл қолданба сіздің Android нұсқаңызбен үйлесімді болмауы мүмкін (Android 7.0 немесе одан жоғары). Оның орнына сіз VMOS-ты пайдаланып, осы қосымшаны VMOS-қа орната аласыз. Бірақ VMOS Play Store дүкенінен жойылды, оны қолмен орнату керек.</string>
     <string name="warning_noshowagain">Ендігәрі көрсетпеу</string>
+    <string name="warning_action_install">VMOS орнатыңыз</string>
+    <string name="warning_action_tryanyway">Бәрібір көріңіз</string>
     <string name="warning_action_exit">Шығу</string>
     <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">json пішіміндегі жаймады таңдау</string>
+    <string name="alerttitle_installmod">Қосылатын режимді таңдаңыз</string>
+    <string name="alerttitle_installoptifine">Optifine Installer (.jar) таңдаңыз</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher кенет іркілді</string>
     <string name="error_checklog">Қате! Астыңғы жорналды көріңізші: %s</string>
     <string name="error_no_version">Нұсқа жоқ!</string>
     <string name="error_load_version">%s нұсқасын жүктеу мүмкін емес</string>
+    <string name="error_convert_lib">%s кітапханасын түрлендіру мүмкін емес</string>
+    <string name="error_convert_client">Minecraft %s түрлендірілмеді</string>
     <string name="error_show_more">Көрсету</string>
     <string name="error_show_less">Жасыру</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Қоймадан оқу/жазу рұқсаты керек!</string>
     <string name="toast_login_error">Кіргеннен кейін бірдеңе істемей қалды. Әзірлеушіге жазыңызшы.\nҚате:%s</string>
     <string name="toast_optifine_success">Орнату сәтті өтті</string>
+    <string name="toast_shiftmode">Shift (жасырын) перне режимі %s болып өзгертілді</string>
+    <string name="toast_shiftmode_hold">Ұстау режимі</string>
+    <string name="toast_shiftmode_toggle">Ауыстыру режимі</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
@@ -64,15 +75,20 @@
     <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
     <string name="mcl_options">Баптау</string>
     <string name="mcl_option_modmgr">Мод меңгеруші (істемейді)</string>
+    <string name="mcl_option_optifineinstall">OptiFine орнату</string>
     <string name="mcl_option_checkupdate">Жаңару тексеру</string>
     <string name="mcl_option_customcontrol">Өңделген басқару</string>
     <string name="mcl_option_settings">Баптау</string>
     <string name="mcl_option_about">Лаунчер жайлы</string>
+    <string name="mcl_setting_title_setmaxdxref">Максимумды орнату. DX сұраныстарының саны</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Егер түрлендіру кезінде қате пайда болса, ұлғайту: сілтемелер тым көп ... Multi-dex опциясын қолдануға болады. Біз ұсынамыз: 4096 немесе 8192.</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ті терезе режімінде қосу</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
     <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
     <string name="mcl_setting_title_controlsize">Басқару батырмаларының көлемін баптау</string>
+    <string name="mcl_setting_title_forgetoptifpath">OptiFine өзін таба алмайтындай етіңіз</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">OptiFine-ді кейбір құрылғыларда іске қосуға мүмкіндік береді.</string>
     <string name="mcl_setting_category_general">Негізгі баптамалар</string>
     <string name="mcl_setting_category_veroption">Нұсқа тізімінде көрсетілетін нұсқа түрлері</string>
     <string name="mcl_setting_veroption_release">Релиз</string>
@@ -142,7 +158,9 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Мәжбүрлеп жабу</string>
     <string name="control_viewout">Жорнал шығысы</string>
+    <string name="control_adebug">PointerCapture түзету</string>
     <string name="control_customkey">Өзгертілген жайманы жіберу</string>
+    <string name="control_shiftmodechg">Shift пернесі режимін өзгерту (жасырын)</string>
     <string name="customctrl_keyname">Перне коды</string>
     <string name="customctrl_specialkey">Арнайы перне</string>
     <string name="customctrl_hidden">Жасырын</string>
