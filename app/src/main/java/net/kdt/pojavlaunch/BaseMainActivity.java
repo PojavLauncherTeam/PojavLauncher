@@ -137,6 +137,10 @@ public class BaseMainActivity extends LoggableActivity {
             CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
+            MCOptionUtils.INSTANCE.set("overrideWidth", Integer.toString(CallbackBridge.windowWidth));
+            MCOptionUtils.INSTANCE.set("overrideHeight", Integer.toString(CallbackBridge.windowHeight));
+            MCOptionUtils.INSTANCE.save();
+            
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
             // Menu
@@ -726,7 +730,6 @@ public class BaseMainActivity extends LoggableActivity {
             minecraftGLView.setOnGenericMotionListener(gmlistener);
             touchPad.setOnGenericMotionListener(gmlistener);
         } catch (Throwable e) {
-            e.printStackTrace();
             Tools.showError(this, e, true);
         }
     }

@@ -34,7 +34,7 @@ public class MCProfile
         try {
             byte[] bFull = toString(builder).getBytes("UTF-8");
             Tools.write(Tools.mpProfiles + "/" + builder.getUsername(), bFull);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         

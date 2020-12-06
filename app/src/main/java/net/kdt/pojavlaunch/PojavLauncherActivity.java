@@ -115,8 +115,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                     Tools.write(logFile.getAbsolutePath(), logContent.replace(errMsg + "VM", errMsg + "JVM"));
                 }
             } catch (Throwable th) {
-                System.err.println("Could not detect java crash");
-                th.printStackTrace();
+                Log.w(Tools.APP_NAME, "Could not detect java crash", th);
             }
         }
 

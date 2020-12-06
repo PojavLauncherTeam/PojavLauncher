@@ -345,7 +345,7 @@ public class PojavLoginActivity extends BaseActivity
                     forgeSplashContent.replace("enabled=true", "enabled=false"));
             }
         } catch (IOException e) {
-            Log.w(Tools.APP_NAME, "Could not disable Forge splash screen!");
+            Log.w(Tools.APP_NAME, "Could not disable Forge splash screen!", e);
         }
         
         mkdirs(Tools.CTRLMAP_PATH);

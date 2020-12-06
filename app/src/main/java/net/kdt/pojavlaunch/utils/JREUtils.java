@@ -139,9 +139,7 @@ public class JREUtils
                         return;
                     }
                 } catch (Throwable e) {
-                    Log.e("jrelog-logcat", "Exception on logging thread");
-                    e.printStackTrace();
-
+                    Log.e("jrelog-logcat", "Exception on logging thread", e);
                     act.appendlnToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
                 }
             }

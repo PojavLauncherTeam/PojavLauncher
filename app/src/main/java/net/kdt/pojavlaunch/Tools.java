@@ -212,12 +212,6 @@ public final class Tools
             }
         }
         
-        // Window size fix
-        minecraftArgs.add("--width");
-        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
-        minecraftArgs.add("--height");
-        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
-
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(
                 versionInfo.minecraftArguments == null ?
@@ -621,8 +615,7 @@ public final class Tools
                     fieldB.set(targetVer, value);
                 }
             } catch (Throwable th) {
-                System.err.println("Unable to insert " + key + "=" + value);
-                th.printStackTrace();
+                Log.w(Tools.APP_NAME, "Unable to insert " + key + "=" + value, th);
             }
         }
     }
