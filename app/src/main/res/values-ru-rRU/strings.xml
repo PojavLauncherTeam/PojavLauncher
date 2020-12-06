@@ -57,7 +57,7 @@
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
-    <string name="mcl_launch_download_lib">Загрузка библиатеки %s</string>
+    <string name="mcl_launch_download_lib">Загрузка библиотеки %s</string>
     <string name="mcl_launch_download_client">Загрузка Minecraft %s</string>
     <string name="mcl_launch_convert_lib">Конвертация библиотеки %s</string>
     <string name="mcl_launch_convert_client">Конвертация Minecraft %s</string>
@@ -76,7 +76,7 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
     <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатие для ломания блоков и выкидования предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
@@ -127,7 +127,7 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Произошел собой приложение/игры с кодом %d</string>
+    <string name="mcn_exit_title">Произошел сбой приложение/игры с кодом %d</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_crash">Обнаружен сбой игры! Нажмите кнопку ОК, чтобы выйти.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
@@ -159,7 +159,7 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Показать вывод журнала</string>
-    <string name="control_adebug">Входная отладка</string>
+    <string name="control_adebug">Отладка касаний</string>
     <string name="control_customkey">Отправить потловательскую раскладку</string>
     <!--
     <string name="control_more3"></string>
@@ -172,8 +172,8 @@
     <string name="customctrl_hidden">Скрыто</string>
     <string name="customctrl_toggle">Переключатель</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
-    <string name="customctrl_dynamicpos_x">Динамика X</string>
-    <string name="customctrl_dynamicpos_y">Динамика Y</string>
+    <string name="customctrl_dynamicpos_x">Динамика оси X</string>
+    <string name="customctrl_dynamicpos_y">Динамика оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
     <string name="customctrl_transparency_text">Прозрачность текста</string>
     <string name="customctrl_keycombine">Комбинация клавиш</string>
@@ -181,7 +181,7 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
-    <string name="customctrl_selectdefault">Выберать управление по умолчанию</string>
+    <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
     <string name="main_options">Опции</string>
     <string name="main_play" comment="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать, %s</string>
