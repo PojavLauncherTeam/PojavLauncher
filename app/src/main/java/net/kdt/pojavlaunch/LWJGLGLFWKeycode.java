@@ -3,7 +3,7 @@ package net.kdt.pojavlaunch;
 public class LWJGLGLFWKeycode
 {
     /** The unknown key. */
-    public static final int GLFW_KEY_UNKNOWN = -1;
+    public static final int GLFW_KEY_UNKNOWN = 0; // should be -1
 
     /** Printable keys. */
     public static final int

@@ -152,6 +152,9 @@ public class AndroidLWJGLKeycode {
         androidToLwjglMap.put(KeyEvent.KEYCODE_SPACE, LWJGLGLFWKeycode.GLFW_KEY_SPACE);
         // androidToLwjglMap.put(KeyEvent.KEYCODE_SYSRQ, LWJGLGLFWKeycode.GLFW_KEY_SYSRQ);
         androidToLwjglMap.put(KeyEvent.KEYCODE_TAB, LWJGLGLFWKeycode.GLFW_KEY_TAB);
+        
+        androidToLwjglMap.put(KeyEvent.KEYCODE_UNKNOWN, -1 /* LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN */);
+        
         // androidToLwjglMap.put(KeyEvent.KEYCODE_YEN, LWJGLGLFWKeycode.GLFW_KEY_YEN);
         
         // androidToLwjglMap.put(KeyEvent.KEYCODE_BUTTON_1, LWJGLGLFWKeycode.G
@@ -196,11 +199,15 @@ public class AndroidLWJGLKeycode {
         
         try {
             if (!CallbackBridge.isGrabbing()) {
+                BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), mods, isDown);
+                
+                /*
                 if (keyEvent.isPrintingKey()) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), mods, isDown);
                 } else if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), mods, isDown);
                 }
+                */
             }
         } catch (Throwable th) {
             th.printStackTrace();
