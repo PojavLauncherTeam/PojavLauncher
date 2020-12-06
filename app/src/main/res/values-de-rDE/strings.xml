@@ -84,6 +84,8 @@
     <string name="mcl_setting_subtitle_setmaxdxref">Erhöhe die Option wenn ein Fehler während der Konvertierung auftrat: Zu viele ... Referenzen. Sie können probieren. die Multi-dex Option zu benutzen. Empfohlen wird: 4096 oder 8192.</string>
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Wie lange wird nach langem Drücken ausgelöst</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
     <string name="mcl_setting_title_controlsize">Stell die Größe der Schaltflächen ein</string>
     <string name="mcl_setting_title_forgetoptifpath">OptiFine unfähig machen, sich selbst zu lokalisieren</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Nützlich, um OptiFine auf einigen Geräten funktionstüchtig zu machen.</string>
