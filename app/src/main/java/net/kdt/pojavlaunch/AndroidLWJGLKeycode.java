@@ -172,14 +172,12 @@ public class AndroidLWJGLKeycode {
     }
     
     public static void execKey(KeyEvent keyEvent, int i, boolean isDown) {
-        for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
-            if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
-                // Right mouse detection
-                BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
-                // BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-            } else if (perKey.getKey() == i) {
-                BaseMainActivity.sendKeyPress(perKey.getValue(), keyEvent.getModifiers(), isDown);
-            }
+        if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
+            // Right mouse detection
+            BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+            // BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+        } else {
+            BaseMainActivity.sendKeyPress(androidToLwjglMap.get(i), keyEvent.getModifiers(), isDown);
         }
 
         int mods = 0;
@@ -199,21 +197,17 @@ public class AndroidLWJGLKeycode {
         
         try {
             if (!CallbackBridge.isGrabbing()) {
-                BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), mods, isDown);
-                
-                /*
                 if (keyEvent.isPrintingKey()) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), mods, isDown);
                 } else if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), mods, isDown);
                 }
-                */
             }
         } catch (Throwable th) {
             th.printStackTrace();
         }
 
-        if (isBackspaceAfterChar && (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
+        if (isBackspaceAfterChar && (keyEvent.getDisplayLabel() + keyEvent.getUnicodeChar()) != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
             BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, 0, isDown);
         }
     }
