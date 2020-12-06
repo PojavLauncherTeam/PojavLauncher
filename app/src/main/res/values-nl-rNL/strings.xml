@@ -79,8 +79,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Verander de trigger tijd voor lang indrukken van vernietig blok en laten vallen.</string>
     <string name="mcl_setting_title_buttonscale">Controle knoppen schalen</string>
     <string name="mcl_setting_subtitle_buttonscale">Vergroot ze als knoppen te klein zijn.</string>
-    <string name="mcl_setting_title_mousescale">Muisaanpassing</string>
-    <string name="mcl_setting_subtitle_mousescale">Verander de grootte van de virtuele muis.</string>
+    <string name="mcl_setting_title_mousescale">Muis schaling</string>
+    <string name="mcl_setting_subtitle_mousescale">Wijzig de grootte van de virtuele muis.</string>
     <string name="mcl_setting_title_controlsize">Instellen van de regelknoppen</string>
     <string name="mcl_setting_title_javaargs">JVM Launch argumenten</string>
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
