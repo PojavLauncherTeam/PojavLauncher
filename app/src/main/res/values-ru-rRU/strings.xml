@@ -39,7 +39,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
     <string name="alerttitle_installmod">Выбрать мод для добавления</string>
-    <string name="alerttitle_installoptifine">Выбрать файл OptiFine формата jar</string>
+    <string name="alerttitle_installoptifine">Выбрать установщик Optifine (.jar)</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher был остановлен в результате сбоя</string>
     <string name="error_checklog">Ошибка! Пожалуйста, проверьте журнал ниже: %s</string>
@@ -67,7 +67,7 @@
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
-    <string name="mcl_launch_download_lib">Загрузка библиатеки %s</string>
+    <string name="mcl_launch_download_lib">Загрузка библиотеки %s</string>
     <string name="mcl_launch_download_client">Загрузка Minecraft %s</string>
     <string name="mcl_launch_convert_lib">Конвертация библиотеки %s</string>
     <string name="mcl_launch_convert_client">Конвертация Minecraft %s</string>
@@ -85,7 +85,7 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
     <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатие для ломания блоков и выкидования предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_forgetoptifpath">Сделать OptiFine неспособным обнаружить себя</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Позволяет сделать OptiFine способным запуститься на некоторых устройствах.</string>
@@ -158,15 +158,15 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Показать вывод журнала</string>
-    <string name="control_adebug">Откладка PointerCapture</string>
-    <string name="control_customkey">Отправить потловательскую раскладку</string>
+    <string name="control_adebug">Отладка PointerCapture</string>
+    <string name="control_customkey">Отправить пользовательскую раскладку</string>
     <string name="control_shiftmodechg">Изменить режим кнопки Shift (крадся)</string>
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
     <string name="customctrl_hidden">Скрыто</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
-    <string name="customctrl_title_selectctrl">Выберать управление по умолчанию</string>
-    <string name="customctrl_selectdefault">Выберать управление по умолчанию</string>
+    <string name="customctrl_title_selectctrl">Выбрать управление по умолчанию</string>
+    <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Обновить консоль</string>
     <string name="main_options">Опции</string>
