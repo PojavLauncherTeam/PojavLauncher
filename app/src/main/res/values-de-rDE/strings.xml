@@ -25,12 +25,14 @@
     <string name="login_select_account">Account auswählen</string>
     <!-- Hint -->
     <string name="hint_select_account">Um ein Konto auszuwählen draufdrücken. Um es zu löschen gedrückt halten.</string>
+    <string name="hint_control_mapping">"Wische von rechts nach links um das Menü zu öffnen ◀\nDrücke auf eine Schaltfläche um Sie anzupassen: Editieren, Vergrößern und Verkleinern oder Löschen."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Beenden</string>
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java Runtime %s (.tar.xz) installieren</string>
     <string name="alerttitle_selectkeymap">Wähle eine keymap json aus</string>
+    <string name="alerttitle_installmod">Wähle einen Mod-Installer</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher ist unerwartet abgestürzt</string>
     <string name="error_checklog">Fehler! Bitte überprüfen sie das untenstehende Protokoll: %s</string>
@@ -47,6 +49,8 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Neuigkeiten</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Entwickler Konsole</string>
     <string name="mcl_tab_crash">Absturzbericht</string>
     <!-- MCLauncherActivity: Strings -->
@@ -61,6 +65,8 @@
     <string name="mcl_launch_download_assets">Vorbereitung zum Download von Ressourcen</string>
     <string name="mcl_options">Optionen</string>
     <string name="mcl_option_modmgr">Mod Manager (keine funktionen)</string>
+    <string name="mcl_option_modinstall">Starte einen Mod-Installer (Forge, LabyMod, Fabric, u.s.w.)</string>
+    <string name="mcl_option_modinstallwitharg">Starte einen Mod-Installer (Mit eigenen Argumenten)</string>
     <string name="mcl_option_checkupdate">Nach Updates suchen</string>
     <string name="mcl_option_customcontrol">Benutzerdefinierte Steuerung</string>
     <string name="mcl_option_settings">Einstellungen</string>
@@ -69,9 +75,15 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher Neustart erforderlich] Mit dieser Option können sie Java Runtime erneut installieren</string>
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
+    <string name="mcl_setting_title_buttonscale">Größe der Steuerungsschaltflächen</string>
+    <string name="mcl_setting_subtitle_buttonscale">Vergrößere die Schaltflächen, wenn sie zu klein sind.</string>
+    <string name="mcl_setting_title_mousescale">Größe der Maus</string>
+    <string name="mcl_setting_subtitle_mousescale">Ändere die Größe der virtuellen Maus.</string>
     <string name="mcl_setting_title_controlsize">Stell die Knopf-Größe ein</string>
+    <string name="mcl_setting_title_javaargs">JVM-Start-Argumente</string>
     <string name="mcl_setting_subtitle_javaargs">Seien Sie vorsichtig, dies kann zu einem Absturz des Spiels führen, wenn es ohne Wissen geändert wird.</string>
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
+    <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -89,6 +101,7 @@
     <string name="global_save">Speichern</string>
     <string name="global_unpacking">Entpacken von %s</string>
     <string name="global_error_field_empty">Dieses Feld darf nicht leer sein</string>
+    <string name="global_waiting">Warten</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -125,28 +138,53 @@
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatur</string>
     <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_zoom">Zoom (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sek</string>
     <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3. Prsn</string>
+    <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Maus</string>
     <string name="control_mouseoff">Maus: Aus</string>
     <string name="control_mouseon">Maus: An </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Schließen erzwingen</string>
     <string name="control_viewout">Log Ausgabe</string>
+    <string name="control_adebug">Eingabe-Debug</string>
+    <string name="control_customkey">Sende personalisierten Keycode</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit" comment="customctrl_edit">Editiere %s</string>
+    <string name="customctrl_remove">Soll %s entfernt werden?</string>
+    <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_specialkey">Spezielle Taste</string>
     <string name="customctrl_hidden">Versteckt</string>
+    <string name="customctrl_toggle">Umschaltbar</string>
+    <string name="customctrl_dynamicpos">Dynamische Position</string>
+    <string name="customctrl_dynamicpos_x">Dynamische X-Achse</string>
+    <string name="customctrl_dynamicpos_y">Dynamische Y-Achse</string>
+    <string name="customctrl_transparency_bg">Hintergrund-Transparenz</string>
+    <string name="customctrl_transparency_text">Text-Transparenz</string>
+    <string name="customctrl_keycombine">Tastenkombination</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Steuerung</string>
     <string name="customctrl_addbutton">Taste hinzufügen</string>
     <string name="customctrl_selectdefault">Standard-Kontroll-json auswählen</string>
     <string name="main_options">Optionen</string>
-    <string name="main_play">Spielen</string>
+    <string name="main_play" comment="main_play">Spielen</string>
+    <string name="main_welcome">Willkommen, %s</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Benutzer wechseln</string>
+    <string name="main_version">Version:</string>
     <string name="main_nocrash">Kein Absturz festgestellt</string>
     <string name="main_nolog">Kein Protokoll.</string>
 </resources>
