@@ -82,8 +82,10 @@
     <string name="mcl_setting_title_mousescale">Mouse scaling</string>
     <string name="mcl_setting_subtitle_mousescale">Change size of virtual mouse.</string>
     <string name="mcl_setting_title_controlsize">Set button size</string>
+    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Be careful, this can make the game crash if modified without any prior knowledge.</string>
     <string name="mcl_setting_category_general">General settings</string>
+    <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_veroption">Version type will be in the version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -163,9 +165,20 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit" comment="customctrl_edit">Edit %s</string>
+    <string name="customctrl_remove">Remove %s?</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Special Key</string>
     <string name="customctrl_hidden">Hidden</string>
+    <string name="customctrl_toggle">Toggleable</string>
+    <string name="customctrl_dynamicpos">Dynamic position</string>
+    <string name="customctrl_dynamicpos_x">Dynamic X-axis</string>
+    <string name="customctrl_dynamicpos_y">Dynamic Y-axis</string>
+    <string name="customctrl_transparency_bg">Background transparency</string>
+    <string name="customctrl_transparency_text">Text transparency</string>
+    <string name="customctrl_keycombine">Key combination</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Control</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_selectdefault">Select default Control json</string>
