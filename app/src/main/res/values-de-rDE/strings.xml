@@ -75,6 +75,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher Neustart erforderlich] Mit dieser Option können sie Java Runtime erneut installieren</string>
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Wie lange wird nach langem Drücken ausgelöst</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
     <string name="mcl_setting_title_buttonscale">Größe der Steuerungsschaltflächen</string>
     <string name="mcl_setting_subtitle_buttonscale">Vergrößere die Schaltflächen, wenn sie zu klein sind.</string>
     <string name="mcl_setting_title_mousescale">Größe der Maus</string>
@@ -177,6 +179,7 @@
     <string name="customctrl_keycombine">Tastenkombination</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Steuerung</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Taste hinzufügen</string>
     <string name="customctrl_selectdefault">Standard-Kontroll-json auswählen</string>
     <string name="main_options">Optionen</string>
