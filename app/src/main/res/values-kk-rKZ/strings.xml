@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Android үшін Minecraft: Java Edition)</string>
+    <string name="app_name">PojavLauncher (Android-ке арналған Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Minecraft: Java Edition-ді өз құрылғыңызда қосыңыз!</string>
     <!-- Action bar part -->
@@ -11,7 +11,7 @@
     <!-- Logging output -->
     <string name="log_title">Жорнал шығысы</string>
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email немесе пайдаланушының аты</string>
+    <string name="login_online_username_hint">Email я пайдаланушы аты</string>
     <string name="login_online_username_question">(Қайсысын қолданайын?)</string>
     <string name="login_online_password_hint">Құпиясөз</string>
     <string name="login_online_password_question">Құпиясөзді ұмыттыңыз ба?</string>
@@ -21,7 +21,7 @@
     <string name="login_online_create_account">(Жаңа тіркелгі құрасыз ба?)</string>
     <string name="login_offline_switch">Offline-тіркелгі?</string>
     <string name="login_offline_label">Offline-тіркелгімен кіру</string>
-    <string name="login_offline_alert_skip">Қалдыру</string>
+    <string name="login_offline_alert_skip">Өткізіп жіберу</string>
     <string name="login_error_short_username">Қолданушы аты кем дегенде 3 таңбадан тұруы керек</string>
     <string name="login_error_exist_username">Бұл ат бос емес</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
@@ -62,8 +62,34 @@
     <string name="mcl_launch_convert_client">Minecraft %s түрленуде</string>
     <string name="mcl_launch_patch_client">Minecraft %s түзетілуде</string>
     <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
-    <string name="mcl_option_about">Лаунчер туралы</string>
+    <string name="mcl_options">Баптау</string>
+    <string name="mcl_option_modmgr">Мод меңгеруші (істемейді)</string>
+    <string name="mcl_option_checkupdate">Жаңару тексеру</string>
+    <string name="mcl_option_customcontrol">Өңделген басқару</string>
+    <string name="mcl_option_settings">Баптау</string>
+    <string name="mcl_option_about">Лаунчер жайлы</string>
+    <string name="mcl_setting_title_freeform">Minecraft\'ті терезе режімінде қосу</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
+    <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
+    <string name="mcl_setting_title_controlsize">Басқару батырмаларының көлемін баптау</string>
+    <string name="mcl_setting_category_general">Негізгі баптамалар</string>
+    <string name="mcl_setting_category_veroption">Нұсқа тізімінде көрсетілетін нұсқа түрлері</string>
+    <string name="mcl_setting_veroption_release">Релиз</string>
+    <string name="mcl_setting_veroption_snapshot">Снапшот</string>
+    <string name="mcl_setting_veroption_oldalpha">Ескі альфа</string>
+    <string name="mcl_setting_veroption_oldbeta">Ескі бета</string>
+    <string name="mcl_version_clone">Клондау</string>
     <!-- Global strings -->
+    <string name="global_add">Қосу</string>
+    <string name="global_edit">Өңдеу</string>
+    <string name="global_error">Қате</string>
+    <string name="global_load">Жүктеу</string>
+    <string name="global_name">Атауы</string>
+    <string name="global_remove">Алып тастау</string>
+    <string name="global_restart">Қайта жүктеу</string>
+    <string name="global_save">Сақтау</string>
+    <string name="global_error_field_empty">Бұл өріс бос болмауы міндетті</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -87,7 +113,15 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Ойын жабылды</string>
+    <string name="mcn_exit_call">Шығу</string>
+    <string name="mcn_exit_crash">Ойын іркілісі табылды! Шығу үшін OK\'ті басыңыз.</string>
+    <string name="mcn_exit_errcrash">Іркілісті табу мүмкін емес! Бұған мән бермей-ақ қойыңыз.</string>
+    <string name="mcn_exit_confirm">Мәжбүрлеп жабуға сенімдісіз бе?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Басқару</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Пернетақта</string>
     <string name="control_chat">Чат</string>
     <string name="control_debug">Оңдау</string>
     <string name="control_zoom">Зум (С)</string>
@@ -103,6 +137,26 @@
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Тінтуір</string>
+    <string name="control_mouseoff">Тінтуір: өшір.</string>
+    <string name="control_mouseon">Тінтуір: қос.</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Мәжбүрлеп жабу</string>
+    <string name="control_viewout">Жорнал шығысы</string>
+    <string name="control_customkey">Өзгертілген жайманы жіберу</string>
+    <string name="customctrl_keyname">Перне коды</string>
+    <string name="customctrl_specialkey">Арнайы перне</string>
+    <string name="customctrl_hidden">Жасырын</string>
+    <string name="customctrl_addbutton">Батырма қосу</string>
+    <string name="customctrl_title_selectctrl">Ctrl-дың әдепкі json-ын таңдау</string>
+    <string name="customctrl_selectdefault">Ctrl-дың әдепкі json-ын таңдау</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Консольді жаңарту</string>
+    <string name="main_options">Баптау</string>
+    <string name="main_play">Ойнау</string>
+    <string name="main_welcome">Сәлем,</string>
+    <string name="main_infodev">Ақпар (Әзірлеуші)</string>
+    <string name="main_switchuser">Пайдаланушыны ауыстыру</string>
+    <string name="main_version_">Нұсқасы:</string>
+    <string name="main_nocrash">Іркіліс табылмады</string>
+    <string name="main_nolog">Лог жоқ.</string>
 </resources>
