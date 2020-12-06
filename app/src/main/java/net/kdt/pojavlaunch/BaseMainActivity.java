@@ -170,6 +170,8 @@ public class BaseMainActivity extends LoggableActivity {
             // Mouse pointer part
             //this.mouseToggleButton = findButton(R.id.control_togglemouse);
             this.touchPad = (LinearLayout) findViewById(R.id.main_touchpad);
+            touchPad.setFocusable(false);
+            
             this.mousePointer = (ImageView) findViewById(R.id.main_mouse_pointer);
             this.mousePointer.post(new Runnable(){
 
@@ -321,7 +323,7 @@ public class BaseMainActivity extends LoggableActivity {
             minecraftGLView.setFocusable(false);
             minecraftGLView.setFocusableInTouchMode(false);
             // minecraftGLView.setEGLContextClientVersion(2);
-
+            
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
