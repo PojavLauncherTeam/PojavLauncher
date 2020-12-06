@@ -3,26 +3,65 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android үшін Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Minecraft: Java Edition-ді өз құрылғыңызда қосыңыз!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">КӨМЕК</string>
     <!-- Languages list part -->
     <string name="language_name">ҚАЗАҚША - KZ</string>
     <!-- Logging output -->
+    <string name="log_title">Жорнал шығысы</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email немесе пайдаланушының аты</string>
+    <string name="login_online_username_question">(Қайсысын қолданайын?)</string>
     <string name="login_online_password_hint">Құпиясөз</string>
+    <string name="login_online_password_question">Құпиясөзді ұмыттыңыз ба?</string>
+    <string name="login_online_remember">Мені есте сақтау?</string>
+    <string name="login_online_check_keeplogin">Мені кірген қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
+    <string name="login_online_create_account">(Жаңа тіркелгі құрасыз ба?)</string>
+    <string name="login_offline_switch">Offline-тіркелгі?</string>
+    <string name="login_offline_label">Offline-тіркелгімен кіру</string>
     <string name="login_offline_alert_skip">Қалдыру</string>
+    <string name="login_error_short_username">Қолданушы аты кем дегенде 3 таңбадан тұруы керек</string>
+    <string name="login_error_exist_username">Бұл ат бос емес</string>
+    <string name="login_select_account">Тіркелгі таңдау</string>
     <!-- Hint -->
+    <string name="hint_select_account">Таңдау үшін басыңыз, жойып тастау үшін басып ұстаңыз.</string>
     <!-- Warning -->
+    <string name="warning_title">Назар аударыңыз</string>
+    <string name="warning_noshowagain">Ендігәрі көрсетпеу</string>
+    <string name="warning_action_exit">Шығу</string>
+    <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">json пішіміндегі жаймады таңдау</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher кенет іркілді</string>
+    <string name="error_checklog">Қате! Астыңғы жорналды көріңізші: %s</string>
+    <string name="error_no_version">Нұсқа жоқ!</string>
+    <string name="error_load_version">%s нұсқасын жүктеу мүмкін емес</string>
+    <string name="error_show_more">Көрсету</string>
+    <string name="error_show_less">Жасыру</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Қоймадан оқу/жазу рұқсаты керек!</string>
+    <string name="toast_login_error">Кіргеннен кейін бірдеңе істемей қалды. Әзірлеушіге жазыңызшы.\nҚате:%s</string>
+    <string name="toast_optifine_success">Орнату сәтті өтті</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Лаунчер жаңалығы</string>
+    <string name="mcl_tab_console">Әзірлеу консолі</string>
+    <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
+    <string name="mcl_launch_cleancache">Кэш файлдарын жоюда</string>
+    <string name="mcl_launch_downloading">%s жүктелуде</string>
+    <string name="mcl_launch_download_lib">%s кітапханасы жүктелуде</string>
+    <string name="mcl_launch_download_client">Minecraft %s жүктелуде</string>
+    <string name="mcl_launch_convert_lib">%s кітапханасы түрленуде</string>
+    <string name="mcl_launch_convert_client">Minecraft %s түрленуде</string>
+    <string name="mcl_launch_patch_client">Minecraft %s түзетілуде</string>
+    <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
     <string name="mcl_option_about">Лаунчер туралы</string>
     <!-- Global strings -->
     <!--
@@ -49,6 +88,21 @@
 -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
+    <string name="control_chat">Чат</string>
+    <string name="control_debug">Оңдау</string>
+    <string name="control_zoom">Зум (С)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Инв</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">F5</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Тінтуір</string>
     <!-- MainActivity: Menu advanced controls -->
     <!-- Update part (unused now) -->
 </resources>
