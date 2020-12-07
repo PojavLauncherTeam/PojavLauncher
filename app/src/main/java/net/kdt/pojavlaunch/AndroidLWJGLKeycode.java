@@ -207,7 +207,7 @@ public class AndroidLWJGLKeycode {
             th.printStackTrace();
         }
 
-        if (isBackspaceAfterChar && (keyEvent.getDisplayLabel() + keyEvent.getUnicodeChar()) != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
+        if (isBackspaceAfterChar && (keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN || keyEvent.isPrintingKey()) && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
             BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, 0, isDown);
         }
     }
