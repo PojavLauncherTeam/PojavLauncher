@@ -2,10 +2,9 @@
 [![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
 [![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/6RpEJda)
 # PojavLauncher
-A Minecraft: Java Edition launcher for Android based on [Boardwalk](https://github.com/zhuowei/Boardwalk).
 
 ## Navigation
-- [Introduction](#mainly-features-on-v3)
+- [Introduction](#introduction)
 - [Building](#building)
 - [Current status](#current-status)
 - [License](#license)
@@ -13,10 +12,8 @@ A Minecraft: Java Edition launcher for Android based on [Boardwalk](https://gith
 - [Credits & Third party components and it's licenses](#credits--third-party-components-and-its-licenses)
 
 
-## Mainly features on v3
-- Launch Minecraft 1.6 to latest 1.17 snapshot.
-- Launch Forge up to 1.13.2. To install Forge 1.12.2 and below, simply put to mod install launcher. For Forge 1.13.2, use custom arguments.
-- Launch Fabric any versions. [How to install Fabric](https://github.com/PojavLauncherTeam/PojavLauncher/wiki/Install-Fabric).
+## Introduction
+PojavLauncher is a Minecraft: Java Edition launcher for Android based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher can launch a variety large of Minecraft versions (from 1.6 to latest 1.17 snapshot, even Combat Test versions). Modding via Forge and Fabric is also supported,  but Forge is currently limited to 1.13.2 and below.
 
 ## Building
 - Because languages are auto added by Crowdin, so need to run language list generator before build. In this directory, run:
