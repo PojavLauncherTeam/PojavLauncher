@@ -677,7 +677,7 @@ public class PojavLoginActivity extends BaseActivity
 
                             @Override
                             public void onClick(DialogInterface p1, int p2) {
-                                file.delete();
+                                new InvalidateTokenTask(PojavLoginActivity.this).execute(file.getAbsolutePath());
                                 flv.refreshPath();
                             }
                         });

@@ -6,16 +6,16 @@ import java.net.*;
 import java.nio.charset.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import org.apache.commons.io.*;
 
 public class YggdrasilAuthenticator {
     private static final String API_URL = "https://authserver.mojang.com/";
     private String clientName = "Minecraft";
     private int clientVersion = 1;
 
-    private <T> T makeRequest(String endpoint, Object inputObject, Class<T> responseClass) throws IOException, Throwable {
+    private NetworkResponse makeRequest(String endpoint, Object inputObject, Class responseClass) throws IOException, Throwable {
         Throwable th;
         InputStream is = null;
-        byte[] buf = new byte[16384];
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         String requestJson = Tools.GLOBAL_GSON.toJson(inputObject);
         try {
@@ -40,7 +40,7 @@ public class YggdrasilAuthenticator {
                 } else {
                     is = conn.getInputStream();
                 }
-                pipe(is, bos, buf);
+                IOUtils.copy(is, bos);
                 if (is != null) {
                     try {
                         is.close();
@@ -52,14 +52,14 @@ public class YggdrasilAuthenticator {
                 if (statusCode == 200 || statusCode == 204){
 					Log.i("Result", "Task " + endpoint + " successful");
 					
-                    if (responseClass == null) {
-                        return (T) Integer.valueOf(statusCode);
-                    } else {
-                        return Tools.GLOBAL_GSON.fromJson(outString, responseClass);
+                    if (responseClass != null) {
+                        return new NetworkResponse(statusCode, Tools.GLOBAL_GSON.fromJson(outString, responseClass));
                     }
                 } else {
                     Log.i("Result", "Task " + endpoint + " failure");
-                    return (T) Integer.valueOf(statusCode);
+                }
+                if (responseClass == null) {
+                    return new NetworkResponse(statusCode, outString);
                 }
             } catch (UnknownHostException e) {
 				throw new RuntimeException("Can't connect to the server", e);
@@ -82,37 +82,32 @@ public class YggdrasilAuthenticator {
             }
             throw th;
         }
-	}
+        return null;
+    }
 
     public AuthenticateResponse authenticate(String username, String password, UUID clientId) throws IOException, Throwable {
-        Object obj = makeRequest("authenticate", new AuthenticateRequest(username, password, clientId, this.clientName, this.clientVersion), AuthenticateResponse.class);
-        if (obj instanceof Integer) {
-            throw new RuntimeException("Invalid username or password, status code: " + (Integer) obj);
+        NetworkResponse obj = makeRequest("authenticate", new AuthenticateRequest(username, password, clientId, this.clientName, this.clientVersion), AuthenticateResponse.class);
+        /*
+        if (obj.statusCode != 200) {
+            throw new RuntimeException("Invalid username or password, status code: " + obj.statusCode);
         }
-        return (AuthenticateResponse) obj;
+        */
+        obj.throwExceptionIfNeed();
+        return (AuthenticateResponse) obj.response;
     }
 
     public RefreshResponse refresh(String authToken, UUID clientId) throws IOException, Throwable {
-        Object obj = makeRequest("refresh", new RefreshRequest(authToken, clientId), RefreshResponse.class);
-        if (obj instanceof Integer) {
-            throw new RuntimeException("Invalid username or password, status code: " + (Integer) obj);
-        }
-        return (RefreshResponse) obj;
+        NetworkResponse obj = makeRequest("refresh", new RefreshRequest(authToken, clientId), RefreshResponse.class);
+        obj.throwExceptionIfNeed(); // "Invalid username or password, status code: " + obj.statusCode);
+        return (RefreshResponse) obj.response;
     }
     
-    public int validate(String authToken) throws Throwable {
-        return (Integer) makeRequest("validate", new RefreshRequest(authToken, null), null);
+    public NetworkResponse validate(String authToken) throws Throwable {
+        return makeRequest("validate", new RefreshRequest(authToken, null), null);
     }
-    
-	private void pipe(InputStream is, OutputStream out, byte[] buf) throws IOException {
-        while (true) {
-            int amt = is.read(buf);
-            if (amt >= 0) {
-                out.write(buf, 0, amt);
-            } else {
-                return;
-            }
-        }
+
+    public NetworkResponse invalidate(String authToken, UUID clientId) throws Throwable {
+        return makeRequest("invalidate", new RefreshRequest(authToken, clientId), null);
     }
 }
 

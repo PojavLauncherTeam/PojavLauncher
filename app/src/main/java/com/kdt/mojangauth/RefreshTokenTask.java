@@ -37,7 +37,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
             this.profilePath = MCProfile.load(args[0]);
             // https://wiki.vg/Authentication
             // Returns an empty payload (204 No Content) if successful, an error JSON with status 403 Forbidden otherwise.
-            if (204 != this.authenticator.validate(profilePath.getAccessToken())) {
+            if (204 != this.authenticator.validate(profilePath.getAccessToken()).statusCode) {
                 RefreshResponse response = this.authenticator.refresh(profilePath.getAccessToken(), UUID.fromString(profilePath.getClientID()));
                 if (response == null) {
                     throw new NullPointerException("Response is null?");
