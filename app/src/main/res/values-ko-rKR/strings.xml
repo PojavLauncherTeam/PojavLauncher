@@ -68,7 +68,7 @@
     <string name="mcl_option_modinstall">모드 설치기 실행 (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">모드 설치기 실행 (with custom arguments)</string>
     <string name="mcl_option_checkupdate">업데이트 확인</string>
-    <string name="mcl_option_customcontrol">사용자 지정 컨트롤</string>
+    <string name="mcl_option_customcontrol">사용자 지정 조작</string>
     <string name="mcl_option_settings">설정</string>
     <string name="mcl_option_about">정보</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime 삭제</string>
@@ -81,7 +81,7 @@
     <string name="mcl_setting_subtitle_buttonscale">버튼이 너무 작다면 크기를 키우세요.</string>
     <string name="mcl_setting_title_mousescale">마우스 크기</string>
     <string name="mcl_setting_subtitle_mousescale">가상 마우스 크기 변경.</string>
-    <string name="mcl_setting_title_controlsize">컨트롤 버튼의 크기 설정</string>
+    <string name="mcl_setting_title_controlsize">조작 버튼의 크기 설정</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">조심하세요, 정보 없이 수정하면 게임 충돌이 발생할 수 있습니다.</string>
     <string name="mcl_setting_category_general">일반 설정</string>
