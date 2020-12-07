@@ -21,7 +21,8 @@
 			<net.kdt.pojavlaunch.MinecraftGLView
 				android:id="@+id/main_game_render_view"
 				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"/>
+				android:layout_height="fill_parent"
+				android:background="#00000000"/>
 
 			<LinearLayout
 				android:layout_height="match_parent"

@@ -1,12 +1,12 @@
 package net.kdt.pojavlaunch.value.launcherprofiles;
-import com.google.gson.*;
+import java.util.*;
 import net.kdt.pojavlaunch.*;
 
 public class MinecraftLauncherProfiles
 {
-	public MinecraftProfile[] profiles;
+	public Map<String, MinecraftProfile> profiles;
 	public String clientToken;
-	public MinecraftAuthenticationDatabase[] authenticationDatabase;
+	public Map<String, MinecraftAuthenticationDatabase> authenticationDatabase;
 	// public Map launcherVersion;
 	public MinecraftLauncherSettings settings;
 	// public Map analyticsToken;

@@ -121,17 +121,38 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         //showProfileInfo();
 
-        final String[] accountList = new File(Tools.mpProfiles).list();
+        final List<String> accountList = new ArrayList<String>();
+        final MCProfile.Builder tempProfile = PojavProfile.getTempProfileContent(this);
+        if (tempProfile != null) {
+            accountList.add(tempProfile.getUsername());
+        }
+        accountList.addAll(Arrays.asList(new File(Tools.mpProfiles).list()));
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         accountSelector = (Spinner) findViewById(R.id.launchermain_spinner_account);
         accountSelector.setAdapter(adapterAcc);
+        if (tempProfile != null) {
+            accountSelector.setSelection(0);
+        } else {
+            for (int i = 0; i < accountList.size(); i++) {
+                String account = accountList.get(i);
+                if (account.equals(mProfile.getUsername())) {
+                    accountSelector.setSelection(i);
+                }
+            }
+        }
         accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
             public void onItemSelected(AdapterView<?> p1, View p2, int position, long p4) {
-                PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList[position]);
+                if (tempProfile != null && position == 0) {
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
+                } else {
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList.get(position + (tempProfile != null ? 1 : 0)));
+                }
+                finish();
+                startActivity(getIntent());
             }
 
             @Override

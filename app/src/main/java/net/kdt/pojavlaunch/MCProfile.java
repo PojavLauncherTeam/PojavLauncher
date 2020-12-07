@@ -52,6 +52,10 @@ public class MCProfile
     }
     
     public static MCProfile.Builder parse(String content) {
+        if (content == null || content.isEmpty()) {
+            return null;
+        }
+        
         MCProfile.Builder builder = new MCProfile.Builder();
 
         String[] profileInfos = content.split(":");
