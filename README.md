@@ -16,6 +16,17 @@
 PojavLauncher is a Minecraft: Java Edition launcher for Android based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher can launch a variety large of Minecraft versions (from 1.6 to latest 1.17 snapshot, even Combat Test versions). Modding via Forge and Fabric is also supported,  but Forge is currently limited to 1.13.2 and below.
 
 ## Building
+Will be moved to **BUILDING.md**
+### Java Runtime Environment (JRE)
+- JRE for Android is [here](https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u), also the build script [here](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch).
+- Follow build instruction on build script [README.md](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/blob/buildjre8/README.md).
+- You can also get [CI auto builds](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/actions).
+- Spliting JRE and put to the launcher: **coming soon**.
+
+### LWJGL and GLFW
+- **Coming soon**
+
+### The Launcher
 - Because languages are auto added by Crowdin, so need to run language list generator before build. In this directory, run:
 ```
 # On Linux, Mac OS:
