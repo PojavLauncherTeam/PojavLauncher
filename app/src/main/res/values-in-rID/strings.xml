@@ -16,7 +16,7 @@
     <string name="login_online_password_hint">Kata sandi</string>
     <string name="login_online_password_question">Lupa kata sandi?</string>
     <string name="login_online_remember">Ingat saya?</string>
-    <string name="login_online_check_keeplogin">Tetapkan login saya?</string>
+    <string name="login_online_check_keeplogin">Tetap masuk</string>
     <string name="login_online_login_label">Masuk</string>
     <string name="login_online_create_account">(Buat akun baru?)</string>
     <string name="login_offline_switch">Akun offline?</string>
