@@ -9,52 +9,47 @@
     <!-- Languages list part -->
     <string name="language_name">РУССКИЙ - RU</string>
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email или псевдоним</string>
+    <string name="login_online_username_hint">Email или имя пользователя</string>
     <string name="login_online_username_question">(Что мне использовать?)</string>
     <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_password_question">Забыли пароль?</string>
     <string name="login_online_remember">Запомнить меня?</string>
-    <string name="login_online_check_keeplogin">Запомнить меня</string>
+    <string name="login_online_check_keeplogin">Сохранить меня авторизованным</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_online_create_account">(Создать новый профиль?)</string>
-    <string name="login_offline_switch">Offline-профиль?</string>
+    <string name="login_online_create_account">(Создать новую учётную запись?)</string>
+    <string name="login_offline_switch">Автономная учётная запись?</string>
     <string name="login_offline_label">Войти как автономная учётная запись</string>
     <string name="login_offline_alert_skip">Пропустить</string>
-    <string name="login_error_short_username">Псевдоним должен быть длиной как минимум 3 символа</string>
-    <string name="login_error_exist_username">Этот псевдоним уже существует</string>
-    <string name="login_select_account">Выбрать профиль</string>
+    <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
+    <string name="login_error_exist_username">Это имя пользователя уже существует</string>
+    <string name="login_select_account">Учётные записи</string>
     <!-- Hint -->
-    <string name="hint_select_account">Для выбора, нажмите. Для удаления, нажмите и задержите.</string>
+    <string name="hint_select_account">Чтобы выбрать учётную запись, нажмите на неё. Чтобы удалить, нажмите и удерживайте её.</string>
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
-    <!-- Warning -->
-    <string name="warning_title">Предупреждение</string>
-    <string name="warning_msg">Это приложение может быть не совместимо с вашей версией Android (более свежей или равной 7.0). Попробуйте VMOS и установите его туда. Учтите, что VMOS придётся установить вручную.</string>
-    <string name="warning_noshowagain">Не показывать вновь</string>
-    <string name="warning_action_install">Установите VMOS</string>
-    <string name="warning_action_tryanyway">Всё равно попробуйте</string>
+    <!-- Warnings -->
     <string name="warning_action_exit">Выйти</string>
-    <string name="warning_remove_account">Этот профиль будет удалён!</string>
+    <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установить Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
-    <string name="alerttitle_installmod">Выбрать установщик мода</string>
+    <string name="alerttitle_installmod">Выбрать мод для добавления</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher неожиданно потерпел сбой</string>
-    <string name="error_checklog">Ошибка! Проверьте журнал ниже: %s</string>
-    <string name="error_no_version">Нет версии!</string>
+    <string name="error_fatal">PojavLauncher был остановлен в результате сбоя</string>
+    <string name="error_checklog">Ошибка! Пожалуйста, проверьте журнал ниже: %s</string>
+    <string name="error_no_version">Нет версий!</string>
     <string name="error_load_version">Не удалось загрузить версию %s</string>
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Требуется разрешение на чтение/запись хранилища!</string>
+    <string name="toast_permission_denied">Требуется разрешение на чтение/запись в хранилище!</string>
     <string name="toast_login_error">После входа что-то пошло не так. Пожалуйста, сообщите об этом разработчику.\nОшибка: %s</string>
-    <string name="toast_optifine_success">Установка завершена</string>
+    <string name="toast_optifine_success">Установка прошла успешно</string>
     <string name="toast_uninstalljre_done">Удаление Java Runtime завершено</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Новости</string>
+    <string name="mcl_tab_news">Новости лаунчера</string>
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Консоль разработки</string>
     <string name="mcl_tab_crash">Журнал сбоев</string>
@@ -62,13 +57,13 @@
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
-    <string name="mcl_launch_download_lib">Загрузка библиатеки %s</string>
+    <string name="mcl_launch_download_lib">Загрузка библиотеки %s</string>
     <string name="mcl_launch_download_client">Загрузка Minecraft %s</string>
     <string name="mcl_launch_convert_lib">Конвертация библиотеки %s</string>
     <string name="mcl_launch_convert_client">Конвертация Minecraft %s</string>
     <string name="mcl_launch_patch_client">Сборка Minecraft %s</string>
     <string name="mcl_launch_download_assets">Подготовка к загрузке ресурсов</string>
-    <string name="mcl_options">Настройки</string>
+    <string name="mcl_options">Опции</string>
     <string name="mcl_option_modmgr">Диспетчер модов (не работает)</string>
     <string name="mcl_option_modinstall">Запустить установщик мода (Forge, LabyMod, Fabric и т. п.)</string>
     <string name="mcl_option_modinstallwitharg">Запустить установщик мода (с пользовательскими аргументами)</string>
@@ -81,7 +76,7 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
     <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатие для ломания блоков и выкидывания предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
@@ -89,7 +84,7 @@
     <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
-    <string name="mcl_setting_category_general">Общие настройки</string>
+    <string name="mcl_setting_category_general">Основные настройки</string>
     <string name="mcl_setting_category_scaling">Масштабирование</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
@@ -101,13 +96,14 @@
     <string name="global_add">Добавить</string>
     <string name="global_edit">Редактировать</string>
     <string name="global_error">Ошибка</string>
-    <string name="global_load">Загрузить</string>
+    <string name="global_load">Загрузка</string>
     <string name="global_name">Имя</string>
     <string name="global_remove">Удалить</string>
     <string name="global_restart">Перезапуск</string>
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
+    <string name="global_waiting">Ожидание</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -131,9 +127,9 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Произошел собой приложение/игры с кодом %d</string>
+    <string name="mcn_exit_title">Произошел сбой приложение/игры с кодом %d</string>
     <string name="mcn_exit_call">Выйти</string>
-    <string name="mcn_exit_crash">Обнаружен сбой игры! Чтобы выйти нажмите кнопку ОК.</string>
+    <string name="mcn_exit_crash">Обнаружен сбой игры! Нажмите кнопку ОК, чтобы выйти.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
@@ -162,26 +158,34 @@
     <string name="control_mouseon">Мышь: Вкл </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Принудительное закрытие</string>
-    <string name="control_viewout">Журнал</string>
-    <string name="control_adebug">Откладка PointerCapture</string>
-    <string name="control_customkey">Отправить пользовательскую раскладку</string>
-    <string name="customctrl_keyname">Имя</string>
+    <string name="control_viewout">Показать вывод журнала</string>
+    <string name="control_adebug">Отладка ввода</string>
+    <string name="control_customkey">Отправить потловательскую раскладку</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit" comment="customctrl_edit">Редактирование «%s»</string>
+    <string name="customctrl_remove">Удалить «%s»?</string>
+    <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
     <string name="customctrl_hidden">Скрыто</string>
-    <string name="customctrl_toggle">Переключатель</string>
+    <string name="customctrl_toggle">Переключаемый</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
-    <string name="customctrl_dynamicpos_x">Динамический X</string>
-    <string name="customctrl_dynamicpos_y">Динамический Y</string>
+    <string name="customctrl_dynamicpos_x">Динамика оси X</string>
+    <string name="customctrl_dynamicpos_y">Динамика оси Y</string>
+    <string name="customctrl_transparency_bg">Прозрачность фона</string>
+    <string name="customctrl_transparency_text">Прозрачность текста</string>
     <string name="customctrl_keycombine">Комбинация клавиш</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
-    <string name="customctrl_selectdefault">Выберите управление по умолчанию</string>
+    <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
     <string name="main_options">Опции</string>
-    <string name="main_play">Играть</string>
-    <string name="main_welcome">Добро пожаловать,</string>
-    <string name="main_infodev">Инфо (Р)</string>
+    <string name="main_play" comment="main_play">Играть</string>
+    <string name="main_welcome">Добро пожаловать, %s</string>
+    <string name="main_infodev">Инфо (Разраб.)</string>
     <string name="main_switchuser">Выбрать пользователя</string>
     <string name="main_version">Версия:</string>
     <string name="main_nocrash">Сбоев не обнаружено</string>

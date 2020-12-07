@@ -26,12 +26,7 @@
     <!-- Hint -->
     <string name="hint_select_account">Để chọn, nhấp vào. Để xóa một tài khoản, giữ vào.</string>
     <string name="hint_control_mapping">"Vuốt từ phải sang trái để mở menu ◀\nGiữ một nút để tùy chỉnh: chỉnh sửa, thay đổi kích thước hoặc xoá."</string>
-    <!-- Warning -->
-    <string name="warning_title">Cảnh báo</string>
-    <string name="warning_msg">Ứng dụng này có thể không tương thích với phiên bản Android của bạn (hơn hoặc bằng Android 7.0). Bạn có thể dùng VMOS sau khi tải ứng dụng này sang VMOS để thay thế. Nhưng VMOS bị loại bỏ bởi CH Play, bạn phải cài đặt thủ công.</string>
-    <string name="warning_noshowagain">Không hiển thị lại</string>
-    <string name="warning_action_install">Tải VMOS</string>
-    <string name="warning_action_tryanyway">Thử mọi cách</string>
+    <!-- Warnings -->
     <string name="warning_action_exit">Thoát</string>
     <string name="warning_remove_account">Tài khoản này sẽ bị loại bỏ!</string>
     <!-- AlertDialog title -->
@@ -165,6 +160,10 @@
     <string name="control_viewout">Nhật ký đầu ra</string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
     <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_specialkey">Phím đặc biệt</string>
     <string name="customctrl_hidden">Ẩn</string>
@@ -180,7 +179,6 @@
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
     <string name="main_options">Tùy chọn</string>
     <string name="main_play">Chơi</string>
-    <string name="main_welcome">Chào mừng,</string>
     <string name="main_infodev">Thông tin (DEV)</string>
     <string name="main_switchuser">Đổi người dùng</string>
     <string name="main_version">Phiên bản:</string>

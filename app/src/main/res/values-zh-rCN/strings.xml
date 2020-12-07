@@ -26,12 +26,7 @@
     <!-- Hint -->
     <string name="hint_select_account">点击选择账号，长按删除。</string>
     <string name="hint_control_mapping">"左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
-    <!-- Warning -->
-    <string name="warning_title">警告</string>
-    <string name="warning_msg">本应用可能与您的 Android 版本（大于等于 Android 7.0）不兼容。作为替代，您可以安装虚拟大师并在其中安装本应用。但由于虚拟大师已从 Play 商店移除，您必须手动安装。</string>
-    <string name="warning_noshowagain">不再提示</string>
-    <string name="warning_action_install">安装虚拟大师</string>
-    <string name="warning_action_tryanyway">仍然尝试</string>
+    <!-- Warnings -->
     <string name="warning_action_exit">退出</string>
     <string name="warning_remove_account">此账号将被移除！</string>
     <!-- AlertDialog title -->
@@ -108,6 +103,7 @@
     <string name="global_save">保存</string>
     <string name="global_unpacking">正在解包 %s</string>
     <string name="global_error_field_empty">此处表单不能为空</string>
+    <string name="global_waiting">等待中</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,6 +161,12 @@
     <string name="control_viewout">日志输出</string>
     <string name="control_adebug">输入调试</string>
     <string name="control_customkey">发送自定义键码</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit" comment="customctrl_edit">编辑 %s</string>
+    <string name="customctrl_remove">移除 %s ？</string>
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_specialkey">特殊键</string>
     <string name="customctrl_hidden">隐藏</string>
@@ -172,6 +174,8 @@
     <string name="customctrl_dynamicpos">动态位置</string>
     <string name="customctrl_dynamicpos_x">动态 X 轴</string>
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
+    <string name="customctrl_transparency_bg">背景透明度</string>
+    <string name="customctrl_transparency_text">文本透明度</string>
     <string name="customctrl_keycombine">按键组合</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">控制</string>
@@ -179,8 +183,8 @@
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
     <string name="main_options">选项</string>
-    <string name="main_play">启动游戏</string>
-    <string name="main_welcome">欢迎，</string>
+    <string name="main_play" comment="main_play">启动游戏</string>
+    <string name="main_welcome">欢迎， %s</string>
     <string name="main_infodev">信息（开发）</string>
     <string name="main_switchuser">切换用户</string>
     <string name="main_version">版本:</string>
