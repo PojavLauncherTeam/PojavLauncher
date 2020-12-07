@@ -159,7 +159,7 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Показать вывод журнала</string>
-    <string name="control_adebug">Отладка касаний</string>
+    <string name="control_adebug">Отладка ввода</string>
     <string name="control_customkey">Отправить потловательскую раскладку</string>
     <!--
     <string name="control_more3"></string>
@@ -170,7 +170,7 @@
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
     <string name="customctrl_hidden">Скрыто</string>
-    <string name="customctrl_toggle">Переключатель</string>
+    <string name="customctrl_toggle">Переключаемый</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика оси Y</string>
