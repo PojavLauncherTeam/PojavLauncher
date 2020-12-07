@@ -15,7 +15,7 @@
     <string name="login_online_username_question">(Was benutze ich?)</string>
     <string name="login_online_password_hint">Passwort</string>
     <string name="login_online_password_question">Passwort vergessen?</string>
-    <string name="login_online_remember">Erinnere dich an mich? (Without context its pretty bad to translate)?</string>
+    <string name="login_online_remember">Accountdaten speichern?</string>
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
     <string name="login_online_create_account">(Neues Konto erstellen?)</string>
