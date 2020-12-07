@@ -30,10 +30,10 @@
     <string name="hint_control_mapping">"Бұл мүмкіндік әлі аяқталған жоқ, сондықтан сіз қазіргі уақытта реттелетін басқаруды қолдана алмайсыз!\nМәзірді ашу үшін оңнан солға қарай сырғытыңыз ◀\nТүймелеу үшін түймені басып тұрыңыз: өңдеу, өлшемін өзгерту немесе жою."</string>
     <!-- Warning -->
     <string name="warning_title">Назар аударыңыз</string>
-    <string name="warning_msg">Бұл қолданба сіздің Android нұсқаңызбен үйлесімді болмауы мүмкін (Android 7.0 немесе одан жоғары). Оның орнына сіз VMOS-ты пайдаланып, осы қосымшаны VMOS-қа орната аласыз. Бірақ VMOS Play Store дүкенінен жойылды, оны қолмен орнату керек.</string>
+    <string name="warning_msg">Бұл қолданба құрылғыңыздағы Android нұсқасымен үйлесімді болмауы мүмкін (Android 7.0+). Оның орнына сіз VMOS-ты пайдаланып, осы қолданбаны VMOS-қа орната аласыз. Бірақ VMOS Play Store-дан жойылған, оны қолдан орнатуыңыз керек.</string>
     <string name="warning_noshowagain">Ендігәрі көрсетпеу</string>
-    <string name="warning_action_install">VMOS орнатыңыз</string>
-    <string name="warning_action_tryanyway">Бәрібір көріңіз</string>
+    <string name="warning_action_install">VMOS-ты орнату</string>
+    <string name="warning_action_tryanyway">Бәрібір көру</string>
     <string name="warning_action_exit">Шығу</string>
     <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
@@ -53,9 +53,9 @@
     <string name="toast_permission_denied">Қоймадан оқу/жазу рұқсаты керек!</string>
     <string name="toast_login_error">Кіргеннен кейін бірдеңе істемей қалды. Әзірлеушіге жазыңызшы.\nҚате:%s</string>
     <string name="toast_optifine_success">Орнату сәтті өтті</string>
-    <string name="toast_shiftmode">Shift (жасырын) перне режимі %s болып өзгертілді</string>
-    <string name="toast_shiftmode_hold">Ұстау режимі</string>
-    <string name="toast_shiftmode_toggle">Ауыстыру режимі</string>
+    <string name="toast_shiftmode">Shift пернесінің режімі %sне ауыстырылған</string>
+    <string name="toast_shiftmode_hold">ұстау режімі</string>
+    <string name="toast_shiftmode_toggle">ауыстыру режімі</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
