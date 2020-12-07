@@ -31,7 +31,7 @@
     <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Select a keymap json</string>
+    <string name="alerttitle_selectkeymap">Select a keymap (.json)</string>
     <string name="alerttitle_installmod">Choose a mod installer (.jar)</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher has unexpectedly crashed</string>
