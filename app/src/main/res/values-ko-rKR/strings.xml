@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">도움</string>
     <!-- Languages list part -->
+    <string name="language_name">ENGLISH - US</string>
     <!-- Logging output -->
+    <string name="log_title">로그 확인</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email or username</string>
+    <string name="login_online_username_question">(어떤 것을 사용할까요?)</string>
+    <string name="login_online_password_hint">Password</string>
+    <string name="login_online_password_question">비밀번호를 잊으셨습니까?</string>
+    <string name="login_online_remember">계정 저장하기</string>
+    <string name="login_online_check_keeplogin">로그인 상태 유지</string>
+    <string name="login_online_login_label">로그인</string>
+    <string name="login_online_create_account">(새로운 계정을 만드시겠습니까?)</string>
+    <string name="login_offline_switch">오프라인 계정이란?</string>
+    <string name="login_offline_label">오프라인 계정으로 로그인</string>
+    <string name="login_offline_alert_skip">건너뛰기</string>
+    <string name="login_error_short_username">사용자명은 최소 3자 이상이어야 합니다</string>
+    <string name="login_error_exist_username">이미 존재하는 사용자명입니다</string>
+    <string name="login_select_account">계정 선택</string>
     <!-- Hint -->
+    <string name="hint_select_account">터치하여 계정을 선택하거나, 길게 눌러 계정을 삭제하세요.</string>
+    <string name="hint_control_mapping">"이 기능은 아직 완료되지 않았으므로 현재 사용자 지정 조작을 적용할 수 없습니다!\n오른쪽에서 왼쪽으로 스와이프 하여 메뉴를 여세요. ◀\n 버튼을 눌러 수정, 크기 조절, 삭제를 할 수 있습니다."</string>
     <!-- Warning -->
+    <string name="warning_title">경고</string>
+    <string name="warning_noshowagain">다시 표시하지 않음</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
