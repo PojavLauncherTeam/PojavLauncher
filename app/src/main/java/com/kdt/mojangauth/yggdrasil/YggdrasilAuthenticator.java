@@ -49,12 +49,18 @@ public class YggdrasilAuthenticator {
                     }
                 }
                 String outString = new String(bos.toByteArray(), Charset.forName("UTF-8"));
-                if (statusCode == 200){
+                if (statusCode == 200 || statusCode == 204){
 					Log.i("Result", "Task " + endpoint + " successful");
 					
-                    return Tools.GLOBAL_GSON.fromJson(outString, responseClass);
+                    if (responseClass == null) {
+                        return (T) Integer.valueOf(statusCode);
+                    } else {
+                        return Tools.GLOBAL_GSON.fromJson(outString, responseClass);
+                    }
+                } else {
+                    Log.i("Result", "Task " + endpoint + " failure");
+                    return (T) Integer.valueOf(statusCode);
                 }
-				throw new RuntimeException("Invalid username or password, status code: " + statusCode);
             } catch (UnknownHostException e) {
 				throw new RuntimeException("Can't connect to the server", e);
 			} catch (Throwable th2) {
@@ -79,11 +85,19 @@ public class YggdrasilAuthenticator {
 	}
 
     public AuthenticateResponse authenticate(String username, String password, UUID clientId) throws IOException, Throwable {
-        return (AuthenticateResponse) makeRequest("authenticate", new AuthenticateRequest(username, password, clientId, this.clientName, this.clientVersion), AuthenticateResponse.class);
+        Object obj = makeRequest("authenticate", new AuthenticateRequest(username, password, clientId, this.clientName, this.clientVersion), AuthenticateResponse.class);
+        if (obj instanceof Integer) {
+            throw new RuntimeException("Invalid username or password, status code: " + (Integer) obj);
+        }
+        return (AuthenticateResponse) obj;
     }
 
     public RefreshResponse refresh(String authToken, UUID clientId) throws IOException, Throwable {
-        return (RefreshResponse) makeRequest("refresh", new RefreshRequest(authToken, clientId), RefreshResponse.class);
+        Object obj = makeRequest("refresh", new RefreshRequest(authToken, clientId), RefreshResponse.class);
+        if (obj instanceof Integer) {
+            throw new RuntimeException("Invalid username or password, status code: " + (Integer) obj);
+        }
+        return (RefreshResponse) obj;
     }
     
     public int validate(String authToken) throws Throwable {
