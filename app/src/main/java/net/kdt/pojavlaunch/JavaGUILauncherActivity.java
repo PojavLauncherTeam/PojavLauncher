@@ -212,7 +212,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
             appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
             
-            return Tools.launchJavaVM(this, javaArgList);
+            return JREUtils.launchJavaVM(this, javaArgList);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
             return -1;

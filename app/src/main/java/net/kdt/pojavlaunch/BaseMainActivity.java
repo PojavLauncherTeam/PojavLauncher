@@ -137,14 +137,15 @@ public class BaseMainActivity extends LoggableActivity {
             CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
-            MCOptionUtils.INSTANCE.set("overrideWidth", Integer.toString(CallbackBridge.windowWidth));
-            MCOptionUtils.INSTANCE.set("overrideHeight", Integer.toString(CallbackBridge.windowHeight));
-            MCOptionUtils.INSTANCE.save();
+            MCOptionUtils.load();
+            MCOptionUtils.set("overrideWidth", Integer.toString(CallbackBridge.windowWidth));
+            MCOptionUtils.set("overrideHeight", Integer.toString(CallbackBridge.windowHeight));
+            MCOptionUtils.save();
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
             // Menu
-            drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_options);
+            drawerLayout = findViewById(R.id.main_drawer_options);
 
             navDrawer = findViewById(R.id.main_navigation_view);
             navDrawer.setNavigationItemSelectedListener(
@@ -173,10 +174,10 @@ public class BaseMainActivity extends LoggableActivity {
 
             // Mouse pointer part
             //this.mouseToggleButton = findButton(R.id.control_togglemouse);
-            this.touchPad = (LinearLayout) findViewById(R.id.main_touchpad);
+            this.touchPad = findViewById(R.id.main_touchpad);
             touchPad.setFocusable(false);
             
-            this.mousePointer = (ImageView) findViewById(R.id.main_mouse_pointer);
+            this.mousePointer = findViewById(R.id.main_mouse_pointer);
             this.mousePointer.post(new Runnable(){
 
                 @Override
@@ -187,10 +188,10 @@ public class BaseMainActivity extends LoggableActivity {
                 }
             });
 
-            this.contentLog = (LinearLayout) findViewById(R.id.content_log_layout);
-            this.contentScroll = (ScrollView) findViewById(R.id.content_log_scroll);
+            this.contentLog = findViewById(R.id.content_log_layout);
+            this.contentScroll = findViewById(R.id.content_log_scroll);
             this.textLog = (TextView) contentScroll.getChildAt(0);
-            this.toggleLog = (ToggleButton) findViewById(R.id.content_log_toggle_log);
+            this.toggleLog = findViewById(R.id.content_log_toggle_log);
             this.toggleLog.setChecked(false);
             // this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
             // this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
@@ -206,9 +207,9 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                 });
 
-            this.debugText = (TextView) findViewById(R.id.content_text_debug);
+            this.debugText = findViewById(R.id.content_text_debug);
 
-            this.minecraftGLView = (MinecraftGLView) findViewById(R.id.main_game_render_view);
+            this.minecraftGLView = findViewById(R.id.main_game_render_view);
            
             // toggleGui(null);
             this.drawerLayout.closeDrawers();

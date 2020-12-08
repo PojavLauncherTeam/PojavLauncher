@@ -53,7 +53,6 @@ public final class Tools
 
     public static final String optifineLib = "optifine:OptiFine";
 
-    private static int exitCode = 0;
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
         String[] launchArgs = getMinecraftArgs(profile, versionInfo);
 
@@ -70,48 +69,9 @@ public final class Tools
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
 
-        launchJavaVM(ctx, javaArgList);
+        JREUtils.launchJavaVM(ctx, javaArgList);
     }
     
-    public static int launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
-        JREUtils.relocateLibPath(ctx);
-        // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
-        
-        List<String> javaArgList = new ArrayList<String>();
-        javaArgList.add(Tools.homeJreDir + "/bin/java");
-        getJavaArgs(ctx, javaArgList);
-        javaArgList.addAll(args);
-        
-        JREUtils.setJavaEnvironment(ctx, null);
-        JREUtils.initJavaRuntime();
-        JREUtils.chdir(Tools.MAIN_PATH);
-
-        if (new File(Tools.MAIN_PATH, "strace.txt").exists()) {
-            startStrace(android.os.Process.myTid());
-        }
-
-        exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
-        ctx.appendlnToLog("Java Exit code: " + exitCode);
-        if (exitCode != 0) {
-            ctx.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-                        dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
-                        dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                                @Override
-                                public void onClick(DialogInterface p1, int p2){
-                                    BaseMainActivity.fullyExit();
-                                }
-                            });
-                        dialog.show();
-                    }
-                });
-        }
-        return exitCode;
-    }
-
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
         List<String> overrideableArgList = new ArrayList<String>();
 
@@ -221,13 +181,6 @@ public final class Tools
         );
         // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
         return argsFromJson;
-    }
-
-    private static void startStrace(int pid) throws Exception {
-        String[] straceArgs = new String[] {"/system/bin/strace",
-            "-o", new File(Tools.MAIN_PATH, "strace.txt").getAbsolutePath(), "-f", "-p", "" + pid};
-        System.out.println("strace args: " + Arrays.toString(straceArgs));
-        Runtime.getRuntime().exec(straceArgs);
     }
 
     public static String fromStringArray(String[] strArr) {

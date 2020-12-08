@@ -1,9 +1,11 @@
 package net.kdt.pojavlaunch.utils;
 
+import android.app.*;
 import android.content.*;
 import android.support.annotation.*;
 import android.system.*;
 import android.util.*;
+import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
@@ -235,6 +237,41 @@ public class JREUtils
         }
         
         // return ldLibraryPath;
+    }
+    
+    public static int launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
+        JREUtils.relocateLibPath(ctx);
+        // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
+
+        List<String> javaArgList = new ArrayList<String>();
+        javaArgList.add(Tools.homeJreDir + "/bin/java");
+        Tools.getJavaArgs(ctx, javaArgList);
+        javaArgList.addAll(args);
+
+        JREUtils.setJavaEnvironment(ctx, null);
+        JREUtils.initJavaRuntime();
+        JREUtils.chdir(Tools.MAIN_PATH);
+
+        final int exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+        ctx.appendlnToLog("Java Exit code: " + exitCode);
+        if (exitCode != 0) {
+            ctx.runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+                        dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
+                        dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                                @Override
+                                public void onClick(DialogInterface p1, int p2){
+                                    BaseMainActivity.fullyExit();
+                                }
+                            });
+                        dialog.show();
+                    }
+                });
+        }
+        return exitCode;
     }
 
     public static native int chdir(String path);

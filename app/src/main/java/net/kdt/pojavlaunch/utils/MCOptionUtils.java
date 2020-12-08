@@ -7,12 +7,15 @@ import net.kdt.pojavlaunch.*;
 
 public class MCOptionUtils
 {
-    public static final MCOptionUtils INSTANCE = new MCOptionUtils();
+    private static List<String> mLineList;
     
-    private List<String> mLineList;
-    
-    private MCOptionUtils() {
-        mLineList = new ArrayList<String>();
+    public static void load() {
+        if (mLineList == null) {
+            mLineList = new ArrayList<String>();
+        } else {
+            mLineList.clear();
+        }
+        
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Tools.MAIN_PATH + "/options.txt"));
             String line;
@@ -25,7 +28,7 @@ public class MCOptionUtils
         }
     }
     
-    public void set(String key, String value) {
+    public static void set(String key, String value) {
         for (int i = 0; i < mLineList.size(); i++) {
             String line = mLineList.get(i);
             if (line.startsWith(key + ":")) {
@@ -37,7 +40,7 @@ public class MCOptionUtils
         mLineList.add(key + ":" + value);
     }
     
-    public void save() {
+    public static void save() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < mLineList.size(); i++) {
             result.append(mLineList.get(i));
