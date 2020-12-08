@@ -165,7 +165,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">%s öğesini düzenle</string>
+    <string name="customctrl_edit">%s öğesini düzenle</string>
     <string name="customctrl_remove">%s kaldırılsın mı?</string>
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_specialkey">Özel Tuş</string>
@@ -183,7 +183,7 @@
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
     <string name="main_options">Ayarlar</string>
-    <string name="main_play" comment="main_play">Oyna</string>
+    <string name="main_play">Oyna</string>
     <string name="main_welcome">Hoş geldiniz, %s</string>
     <string name="main_infodev">Bilgi (Geliştirici)</string>
     <string name="main_switchuser">Kullanıcı değiştir</string>
