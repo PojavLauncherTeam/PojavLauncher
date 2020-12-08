@@ -31,8 +31,8 @@
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установить Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Выбрать раскладку формата json</string>
-    <string name="alerttitle_installmod">Выбрать мод для добавления</string>
+    <string name="alerttitle_selectkeymap">Выбрать раскладку (.json)</string>
+    <string name="alerttitle_installmod">Выберите установщик мода</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher был остановлен в результате сбоя</string>
     <string name="error_checklog">Ошибка! Пожалуйста, проверьте журнал ниже: %s</string>
