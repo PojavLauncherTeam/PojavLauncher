@@ -13,7 +13,7 @@ public class YggdrasilAuthenticator {
     private String clientName = "Minecraft";
     private int clientVersion = 1;
 
-    private NetworkResponse makeRequest(String endpoint, Object inputObject, Class responseClass) throws IOException, Throwable {
+    private NetworkResponse makeRequest(String endpoint, Object inputObject, Class<?> responseClass) throws IOException, Throwable {
         Throwable th;
         InputStream is = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -61,12 +61,14 @@ public class YggdrasilAuthenticator {
                 } else {
                     Log.i("Result", "Task " + endpoint + " failure");
                 }
-                
-                if (responseClass == null) {
-                    return new NetworkResponse(statusCode, outString);
-                }
+
+                return new NetworkResponse(statusCode, outString);
             } catch (UnknownHostException e) {
-				throw new RuntimeException("Can't connect to the server", e);
+				if (endpoint.equals("refresh")) {
+                    return null;
+                } else {
+                    throw new RuntimeException("Can't connect to the server", e);
+                }
 			} catch (Throwable th2) {
                 th = th2;
                 if (is != null) {
@@ -86,7 +88,6 @@ public class YggdrasilAuthenticator {
             }
             throw th;
         }
-        return null;
     }
 
     public AuthenticateResponse authenticate(String username, String password, UUID clientId) throws IOException, Throwable {
@@ -102,8 +103,12 @@ public class YggdrasilAuthenticator {
 
     public RefreshResponse refresh(String authToken, UUID clientId) throws IOException, Throwable {
         NetworkResponse obj = makeRequest("refresh", new RefreshRequest(authToken, clientId), RefreshResponse.class);
-        obj.throwExceptionIfNeed(); // "Invalid username or password, status code: " + obj.statusCode);
-        return (RefreshResponse) obj.response;
+        if (obj == null) {
+            return null;
+        } else {
+            obj.throwExceptionIfNeed(); // "Invalid username or password, status code: " + obj.statusCode);
+            return (RefreshResponse) obj.response;
+        }
     }
     
     public NetworkResponse validate(String authToken) throws Throwable {

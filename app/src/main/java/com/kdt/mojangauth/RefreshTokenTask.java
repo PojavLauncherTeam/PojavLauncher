@@ -35,16 +35,20 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     public Throwable doInBackground(String... args) {
         try {
             this.profilePath = MCProfile.load(args[0]);
-            // https://wiki.vg/Authentication
-            // Returns an empty payload (204 No Content) if successful, an error JSON with status 403 Forbidden otherwise.
-            if (204 != this.authenticator.validate(profilePath.getAccessToken()).statusCode) {
+            int responseCode = 400;
+            responseCode = this.authenticator.validate(profilePath.getAccessToken()).statusCode;
+            if (400 <= responseCode) {
                 RefreshResponse response = this.authenticator.refresh(profilePath.getAccessToken(), UUID.fromString(profilePath.getClientID()));
+                // if (response == null) {
+                    // throw new NullPointerException("Response is null?");
+                // }
                 if (response == null) {
-                    throw new NullPointerException("Response is null?");
-                }
-                if (response.selectedProfile == null) {
+                    // Refresh when offline?
+                    return null;
+                } else if (response.selectedProfile == null) {
                     throw new IllegalArgumentException("Can't refresh a demo account!");
                 }
+                
                 profilePath.setClientID(response.clientToken.toString());
                 profilePath.setAccessToken(response.accessToken);
                 profilePath.setUsername(response.selectedProfile.name);
