@@ -30,7 +30,7 @@
     <string name="warning_action_exit">나가기</string>
     <string name="warning_remove_account">이 계정이 제거됩니다!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java 런타임 설치중  %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Java 런타임 설치 %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">조작 프리셋 선택하기</string>
     <string name="alerttitle_installmod">모드 설치기를 선택하세요</string>
     <!-- Error messages -->
