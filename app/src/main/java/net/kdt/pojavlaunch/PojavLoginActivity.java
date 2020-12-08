@@ -625,6 +625,7 @@ public class PojavLoginActivity extends BaseActivity
     public void loginMicrosoft(View view) {
         // TODO
         // Documentation: https://wiki.vg/Microsoft_Authentication_Scheme
+        CustomTabs.openTab(this, "https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
     }
     
     // developer methods

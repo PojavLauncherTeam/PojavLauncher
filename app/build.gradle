@@ -67,6 +67,7 @@ dependencies {
     implementation 'com.android.support:preference-v14:26.0.0'
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support:support-annotations:26.0.0'
+    implementation 'com.android.support:customtabs:25.2.0'
     
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
