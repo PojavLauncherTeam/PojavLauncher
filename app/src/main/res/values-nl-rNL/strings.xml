@@ -165,7 +165,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">Bewerk %s</string>
+    <string name="customctrl_edit">Bewerk %s</string>
     <string name="customctrl_remove">Verwijderen %s?</string>
     <string name="customctrl_keyname">Toetscode</string>
     <string name="customctrl_specialkey">Speciale sleutel</string>
@@ -183,7 +183,7 @@
     <string name="customctrl_addbutton">Knop toevoegen</string>
     <string name="customctrl_selectdefault">Selecteer standaard Control json</string>
     <string name="main_options">Opties</string>
-    <string name="main_play" comment="main_play">Speel</string>
+    <string name="main_play">Speel</string>
     <string name="main_welcome">Welkom, %s</string>
     <string name="main_infodev">Informatie (DEV)</string>
     <string name="main_switchuser">Gebruiker wijzigen</string>
