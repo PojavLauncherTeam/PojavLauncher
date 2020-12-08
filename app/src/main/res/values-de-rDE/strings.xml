@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Überspringen</string>
     <string name="login_error_short_username">Der Nutzername muss mindestens 3 Zeichen lang sein</string>
     <string name="login_error_exist_username">Dieser Benutzername ist bereits vergeben</string>
+    <string name="login_microsoft">Microsoft-Login</string>
     <string name="login_select_account">Account auswählen</string>
     <!-- Hint -->
     <string name="hint_select_account">Um ein Konto auszuwählen draufdrücken. Um es zu löschen gedrückt halten.</string>
