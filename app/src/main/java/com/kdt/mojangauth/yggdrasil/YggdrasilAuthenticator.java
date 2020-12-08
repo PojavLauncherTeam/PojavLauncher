@@ -34,20 +34,23 @@ public class YggdrasilAuthenticator {
                 if (os != null) {
                     os.close();
                 }
+                
                 int statusCode = conn.getResponseCode();
                 if (statusCode != 200) {
                     is = conn.getErrorStream();
                 } else {
                     is = conn.getInputStream();
                 }
-                IOUtils.copy(is, bos);
+                
                 if (is != null) {
+                    IOUtils.copy(is, bos);
                     try {
                         is.close();
                     } catch (Exception e) {
 						throw e;
                     }
                 }
+                
                 String outString = new String(bos.toByteArray(), Charset.forName("UTF-8"));
                 if (statusCode == 200 || statusCode == 204){
 					Log.i("Result", "Task " + endpoint + " successful");
@@ -58,6 +61,7 @@ public class YggdrasilAuthenticator {
                 } else {
                     Log.i("Result", "Task " + endpoint + " failure");
                 }
+                
                 if (responseClass == null) {
                     return new NetworkResponse(statusCode, outString);
                 }
