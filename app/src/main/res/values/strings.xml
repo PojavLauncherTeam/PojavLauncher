@@ -28,6 +28,8 @@
     <string name="login_error_short_username">Username must be at least 3 characters</string>
     <string name="login_error_exist_username">This username already exist</string>
 
+    <string name="login_microsoft">Microsoft login</string>
+    
     <string name="login_select_account">Select account</string>
 
     <!-- Hint -->

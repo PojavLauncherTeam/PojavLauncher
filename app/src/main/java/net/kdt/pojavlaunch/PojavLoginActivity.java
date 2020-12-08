@@ -622,10 +622,14 @@ public class PojavLoginActivity extends BaseActivity
     }
     */
     
+    public void loginMicrosoft(View view) {
+        // TODO
+        // Documentation: https://wiki.vg/Microsoft_Authentication_Scheme
+    }
+    
     // developer methods
     // end dev methods
-    public void loginSavedAcc(View view)
-    {
+    public void loginSavedAcc(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         if (Tools.enableDevFeatures) {
