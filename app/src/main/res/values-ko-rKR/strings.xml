@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">건너뛰기</string>
     <string name="login_error_short_username">사용자명은 최소 3자 이상이어야 합니다</string>
     <string name="login_error_exist_username">이미 존재하는 사용자명입니다</string>
+    <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
     <!-- Hint -->
     <string name="hint_select_account">터치하여 계정을 선택하거나, 길게 눌러 계정을 삭제하세요.</string>
