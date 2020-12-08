@@ -17,7 +17,7 @@
 /*
  * This class has been splited from android/widget/Editor$HandleView.java
  */
-package com.kdt.handleview;
+package net.kdt.pojavlaunch.customcontrols.handleview;
 
 public interface ViewPositionListener {
 	public void updatePosition(int parentPositionX, int parentPositionY, boolean parentPositionChanged, boolean parentScrolled);

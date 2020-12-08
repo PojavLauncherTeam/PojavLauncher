@@ -70,7 +70,7 @@ public class ControlLayout extends FrameLayout
 		final ControlButton view = new ControlButton(this, controlButton);
 		view.setModifiable(mModifiable);
         if (!mModifiable) {
-            view.setAlpha(view.getProperties().hidden ? 0f : 1.0f);
+            view.setAlpha(1f - view.getProperties().transparency / 100);
         }
 		addView(view);
 
@@ -114,7 +114,7 @@ public class ControlLayout extends FrameLayout
 				ControlButton cv = ((ControlButton) v);
 				cv.setModifiable(z);
                 if (!z) {
-				    cv.setAlpha(cv.getProperties().hidden ? 0f : 1.0f);
+				    cv.setAlpha(1f - cv.getProperties().transparency / 100);
                 }
 			}
 		}

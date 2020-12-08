@@ -280,13 +280,8 @@ public class JREUtils
     public static native void setLdLibraryPath(String ldLibraryPath);
     public static native void setupBridgeWindow(Object surface);
     
-    // TODO AWT Android port
+    // Obtain AWT screen pixels to render on Android SurfaceView
     public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
-    
-    // BEFORE Load and execute PIE binary using dlopen and dlsym("main")
-    // AFTER: [Deprecated]
-    @Deprecated
-    public static native int executeBinary(String[] args);
 
     static {
         System.loadLibrary("pojavexec");

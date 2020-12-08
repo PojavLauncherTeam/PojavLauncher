@@ -3,7 +3,6 @@ package net.kdt.pojavlaunch;
 import android.content.*;
 import android.util.*;
 import android.view.*;
-import com.kdt.glsupport.*;
 
 public class MinecraftGLView extends TextureView
 {

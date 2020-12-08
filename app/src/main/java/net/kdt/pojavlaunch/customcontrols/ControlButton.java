@@ -6,7 +6,7 @@ import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
-import com.kdt.handleview.*;
+import net.kdt.pojavlaunch.customcontrols.handleview.*;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
@@ -64,6 +64,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
     public void setProperties(ControlData properties, boolean changePos) {
         mProperties = properties;
+        mProperties.transparency = mProperties.hidden ? 100 : mProperties.transparency;
         properties.update();
         
         if (properties.holdAlt) {

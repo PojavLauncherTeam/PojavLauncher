@@ -77,6 +77,7 @@ public class ControlData implements Cloneable
     public float height = pixelOf50dp;
     public int keycode;
     public int transparency;
+    @Deprecated
     public boolean hidden;
     public boolean holdCtrl;
     public boolean holdAlt;

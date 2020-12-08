@@ -17,7 +17,7 @@
 /*
  * This class has been splited from android/widget/Editor$HandleView.java
  */
-package com.kdt.handleview;
+package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.content.*;
 import android.view.*;
@@ -116,9 +116,6 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 							spinnerKeycode.setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycode) + specialArr.length);
 						}
 
-						final CheckBox checkHidden = dialog.findViewById(R.id.controlsetting_checkbox_hidden);
-						checkHidden.setChecked(properties.hidden);
-
                         final CheckBox checkToggle = dialog.findViewById(R.id.controlsetting_checkbox_toggle);
                         checkToggle.setChecked(properties.isToggle);
 
@@ -126,6 +123,10 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                         final EditText editDynamicY = dialog.findViewById(R.id.controlsetting_edit_dynamicpos_y);
                         editDynamicX.setEnabled(properties.isDynamicBtn);
                         editDynamicY.setEnabled(properties.isDynamicBtn);
+                        
+                        final SeekBar seekTransparency = dialog.findViewById(R.id.controlsetting_seek_transparency);
+                        seekTransparency.setMax(100);
+                        seekTransparency.setProgress(properties.hidden ? 100 : properties.transparency);
                         
                         final CheckBox checkDynamicPos = dialog.findViewById(R.id.controlsetting_checkbox_dynamicpos);
                         checkDynamicPos.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
@@ -197,9 +198,12 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                                             properties.keycode = AndroidLWJGLKeycode.getKeyByIndex(spinnerKeycode.getSelectedItemPosition() - specialArr.length);
                                         }
 										properties.name = editName.getText().toString();
-										properties.hidden = checkHidden.isChecked();
-                                        properties.isDynamicBtn = checkDynamicPos.isChecked();
+                                        
+                                        properties.transparency = seekTransparency.getProgress();
+                                        
+										properties.hidden = false;
                                         properties.isToggle = checkToggle.isChecked();
+                                        properties.isDynamicBtn = checkDynamicPos.isChecked();
                                         properties.dynamicX = editDynamicX.getText().toString();    
                                         properties.dynamicY = editDynamicY.getText().toString();
 

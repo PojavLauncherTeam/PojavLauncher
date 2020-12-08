@@ -1,4 +1,4 @@
-package com.kdt.glsupport;
+package net.kdt.pojavlaunch;
 
 import java.io.Writer;
 import java.lang.ref.WeakReference;

@@ -17,7 +17,7 @@
 /*
  * This class has been splited from android/widget/Editor$HandleView.java
  */
-package com.kdt.handleview;
+package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.util.*;
 import android.view.*;

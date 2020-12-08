@@ -30,11 +30,16 @@
 			android:singleLine="true"
 			android:id="@+id/controlsetting_edit_name"/>
 
+		<SeekBar
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:id="@+id/controlsetting_seek_transparency"/>
+
 		<CheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/customctrl_hidden"
-			android:id="@+id/controlsetting_checkbox_hidden"/>
+			android:text="@string/customctrl_toggle"
+			android:id="@+id/controlsetting_checkbox_toggle"/>
 
 		<CheckBox
 			android:layout_height="wrap_content"
@@ -42,12 +47,6 @@
 			android:text="@string/customctrl_dynamicpos"
 			android:id="@+id/controlsetting_checkbox_dynamicpos"/>
 
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_toggle"
-            android:id="@+id/controlsetting_checkbox_toggle"/>
-        
 		<LinearLayout
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
@@ -82,24 +81,24 @@
 			android:layout_width="wrap_content"
 			android:text="@string/customctrl_keycombine"/>
 
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_keycombine_alt"
-            android:id="@+id/controlsetting_checkbox_keycombine_alt"/>
-        
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_keycombine_control"
-            android:id="@+id/controlsetting_checkbox_keycombine_control"/>
-        
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_keycombine_shift"
-            android:id="@+id/controlsetting_checkbox_keycombine_shift"/>
-        
+		<CheckBox
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/customctrl_keycombine_alt"
+			android:id="@+id/controlsetting_checkbox_keycombine_alt"/>
+
+		<CheckBox
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/customctrl_keycombine_control"
+			android:id="@+id/controlsetting_checkbox_keycombine_control"/>
+
+		<CheckBox
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/customctrl_keycombine_shift"
+			android:id="@+id/controlsetting_checkbox_keycombine_shift"/>
+
 	</LinearLayout>
 
 </ScrollView>
