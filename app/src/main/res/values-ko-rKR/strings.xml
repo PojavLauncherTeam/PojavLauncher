@@ -165,7 +165,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">%s 수정</string>
+    <string name="customctrl_edit">%s 수정</string>
     <string name="customctrl_remove">%s(을)를 제거하시겠습니까?</string>
     <string name="customctrl_keyname">키</string>
     <string name="customctrl_specialkey">특수 키</string>
@@ -183,7 +183,7 @@
     <string name="customctrl_addbutton">버튼 추가</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
     <string name="main_options">설정</string>
-    <string name="main_play" comment="main_play">시작하기</string>
+    <string name="main_play">시작하기</string>
     <string name="main_welcome">환영합니다, %s!</string>
     <string name="main_infodev">정보 (DEV)</string>
     <string name="main_switchuser">사용자 전환</string>
