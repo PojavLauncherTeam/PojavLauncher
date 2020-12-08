@@ -85,14 +85,14 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setLastTabAsBottom();
 
-        tvUsernameView = (TextView) findViewById(R.id.launcherMainUsernameView);
+        tvUsernameView = (TextView) findViewById(R.id.launchermain_text_welcome);
         mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
         try {
             profilePath = PojavProfile.getCurrentProfilePath(this);
             mProfile = PojavProfile.getCurrentProfileContent(this);
 
-            tvUsernameView.setText(mProfile.getUsername());
+            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.getUsername()));
         } catch(Exception e) {
             //Tools.throwError(this, e);
             e.printStackTrace();
