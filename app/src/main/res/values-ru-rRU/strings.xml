@@ -165,7 +165,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">Редактирование «%s»</string>
+    <string name="customctrl_edit">Редактирование «%s»</string>
     <string name="customctrl_remove">Удалить «%s»?</string>
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_specialkey">Специальная клавиша</string>
@@ -183,7 +183,7 @@
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
     <string name="main_options">Опции</string>
-    <string name="main_play" comment="main_play">Играть</string>
+    <string name="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать, %s</string>
     <string name="main_infodev">Инфо (Разраб.)</string>
     <string name="main_switchuser">Выбрать пользователя</string>
