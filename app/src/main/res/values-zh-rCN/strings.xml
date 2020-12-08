@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">跳过</string>
     <string name="login_error_short_username">用户名至少为3字符长</string>
     <string name="login_error_exist_username">用户名已存在</string>
+    <string name="login_microsoft">微软帐号登录</string>
     <string name="login_select_account">选择账号</string>
     <!-- Hint -->
     <string name="hint_select_account">点击选择账号，长按删除。</string>
