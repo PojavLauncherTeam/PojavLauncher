@@ -121,30 +121,15 @@
 					android:gravity="center_horizontal"
 					android:layout_alignParentRight="true">
 
-					<LinearLayout
-						android:orientation="horizontal"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content">
-
-						<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="20dp"
-							android:layout_marginRight="4dp"
-							android:gravity="center"
-							android:text="@string/main_welcome"
-							android:textSize="12sp" />
-
-						<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="20dp"
-							android:text="guest"
-							android:id="@+id/launcherMainUsernameView"
-							android:textStyle="bold"
-							android:textSize="12sp"
-							android:gravity="center"/>
-
-					</LinearLayout>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center"
+                        android:text="@string/main_welcome"
+                        android:textSize="12sp"
+                        android:id="@+id/launchermain_text_welcome"/>
+                    
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="20dp"
