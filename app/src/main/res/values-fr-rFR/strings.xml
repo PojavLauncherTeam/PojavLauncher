@@ -165,7 +165,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">Modifier %s</string>
+    <string name="customctrl_edit">Modifier %s</string>
     <string name="customctrl_remove">Supprimer %s?</string>
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touches spéciales</string>
@@ -183,7 +183,7 @@
     <string name="customctrl_addbutton">Ajouter un bouton</string>
     <string name="customctrl_selectdefault">Sélectionner le json de contrôle par défaut</string>
     <string name="main_options">Paramètres</string>
-    <string name="main_play" comment="main_play">Jouer</string>
+    <string name="main_play">Jouer</string>
     <string name="main_welcome">Bienvenue, %s</string>
     <string name="main_infodev">Informations (DEV)</string>
     <string name="main_switchuser">Changer d\'utilisateur</string>
