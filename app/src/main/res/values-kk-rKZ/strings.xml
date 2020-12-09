@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Өткізіп жіберу</string>
     <string name="login_error_short_username">Қолданушы аты кем дегенде 3 таңбадан тұруы керек</string>
     <string name="login_error_exist_username">Бұл ат бос емес</string>
+    <string name="login_microsoft">Microsoft-пен кіру</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
     <!-- Hint -->
     <string name="hint_select_account">Таңдау үшін басыңыз, жойып тастау үшін басып ұстаңыз.</string>
