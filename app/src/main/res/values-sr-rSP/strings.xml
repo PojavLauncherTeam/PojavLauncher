@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">ПОМОЋ</string>
     <!-- Languages list part -->
+    <string name="language_name">Енглески - УС</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Е-пошта или ваше Минецрафт име</string>
     <string name="login_online_username_question">(Шта да користим?)</string>
@@ -14,17 +15,89 @@
     <string name="login_online_password_question">Заборавили шифру?</string>
     <string name="login_online_remember">Запамти ме?</string>
     <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
+    <string name="login_online_login_label">Пријава</string>
+    <string name="login_online_create_account">(Направити нови налог?)</string>
+    <string name="login_offline_switch">Офлајн налог?(Некористи Мојанг Налог)</string>
+    <string name="login_offline_label">Пријавите се као офлајн налог</string>
+    <string name="login_offline_alert_skip">Прескочите</string>
+    <string name="login_error_short_username">Корисничко име мора имати најмање 3 карактера</string>
+    <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
+    <string name="login_microsoft">Microsoft Пријава</string>
+    <string name="login_select_account">Изаберите налог</string>
     <!-- Hint -->
+    <string name="hint_select_account">Да селектујете, притисните. Да избришете налог, дршжите изабрани налог.</string>
+    <string name="hint_control_mapping">"Повуците са десна на лево да отворите мени ◀\nДржите дугме да га прилагодиш: едит, промени величину или избриши."</string>
     <!-- Warnings -->
+    <string name="warning_action_exit">Изађи</string>
+    <string name="warning_remove_account">Овај налог ће бити уклоњен!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Инсталирајте Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_selectkeymap">Селектујте keymap json</string>
+    <string name="alerttitle_installmod">Селектујте мод инсталер</string>
     <!-- Error messages -->
+    <string name="error_fatal">ПојавЛаунчер је неочекивано угасио</string>
+    <string name="error_checklog">Грешка! Молим вас да провјерите лог испод: %s</string>
+    <string name="error_no_version">Нема верзије!</string>
+    <string name="error_load_version">Није могло да се учита верзија %s</string>
+    <string name="error_show_more">Прикажи више</string>
+    <string name="error_show_less">Прикажи мање</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">ПојавЛаунчер треба пиши/читај дозволу!</string>
+    <string name="toast_login_error">Грешка се десила послије пријаве. Молим вас да ово пријавите девелоперу.\nГрешка: %s</string>
+    <string name="toast_optifine_success">Инсталирање успјешно</string>
+    <string name="toast_uninstalljre_done">Завршено уклањавање Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Вести</string>
+    <string name="mcl_tab_console">Програмерска конзола</string>
+    <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
+    <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
+    <string name="mcl_launch_downloading">Преузимање %s</string>
+    <string name="mcl_launch_download_lib">Преузимање Библиотеке %s</string>
+    <string name="mcl_launch_download_client">Преузимање Минецрафт %s</string>
+    <string name="mcl_launch_convert_lib">Конвертирање Библиотеке %s</string>
+    <string name="mcl_launch_convert_client">Ковертирање Минецрафт %s</string>
+    <string name="mcl_launch_patch_client">Патчање Минецрафт %s</string>
+    <string name="mcl_launch_download_assets">Спремање да се преузимају ресурси</string>
+    <string name="mcl_options">Опције</string>
+    <string name="mcl_option_modmgr">Мод манаџер (нема функције)</string>
+    <string name="mcl_option_modinstall">Покрени мод инсталер (Форге, Лабумод, Фабрик, итд...)</string>
+    <string name="mcl_option_modinstallwitharg">Покрени мод инсталер (са прилагоћеним аргументима)</string>
+    <string name="mcl_option_checkupdate">Провери да ли постоје ажурирања</string>
+    <string name="mcl_option_customcontrol">Прилагођене контроле</string>
+    <string name="mcl_option_settings">Подешавања</string>
+    <string name="mcl_option_about">О апликацији</string>
+    <string name="mcl_setting_title_uninstalljre">Деисталирајте Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Лаунчер рестарт потребан] Ово ће вам дозволити да ре-инсталирајте Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Покрените Минецрафт у прозору</string>
+    <string name="mcl_setting_subtitle_freeform">Покрените Минецрафт на прозору. Потребно Андроид 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Колико дуго ће се активирати након дугог притиска</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Промените време за дуготрајни притисак за уништавање блока и испуштању предмета.</string>
+    <string name="mcl_setting_title_buttonscale">Величина дугма (контрола)</string>
+    <string name="mcl_setting_subtitle_buttonscale">Повећајте ако су премали.</string>
+    <string name="mcl_setting_title_mousescale">Величина Миша</string>
+    <string name="mcl_setting_subtitle_mousescale">Промените величину виртуалног миша.</string>
+    <string name="mcl_setting_title_controlsize">Подесите величину дугмад</string>
+    <string name="mcl_setting_title_javaargs">ЈВМ Покретање аргументи</string>
+    <string name="mcl_setting_subtitle_javaargs">Будите пажљиви, ваша игра се може покварити ако незнате ово користити.</string>
+    <string name="mcl_setting_category_general">Општа подешавања</string>
+    <string name="mcl_setting_category_scaling">Подешавања величине</string>
+    <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
+    <string name="mcl_setting_veroption_release">Стабилне верзије</string>
+    <string name="mcl_setting_veroption_snapshot">Снепшот</string>
+    <string name="mcl_setting_veroption_oldalpha">Стари-Алпха</string>
+    <string name="mcl_setting_veroption_oldbeta">Стари-Бета</string>
+    <string name="mcl_version_clone">Клонирај</string>
     <!-- Global strings -->
+    <string name="global_add">Додај</string>
+    <string name="global_edit">Измени</string>
+    <string name="global_error">Грешка</string>
+    <string name="global_load">Учитај</string>
+    <string name="global_name">Назив</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
