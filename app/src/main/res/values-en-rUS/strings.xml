@@ -22,7 +22,7 @@
     <string name="login_offline_alert_skip">Skip</string>
     <string name="login_error_short_username">Username must be at least 3 characters long</string>
     <string name="login_error_exist_username">This username already exist</string>
-    <string name="login_microsoft">Login with Microsoft</string>
+    <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
     <!-- Hint -->
     <string name="hint_select_account">To select an account, click. To delete an account, hold.</string>
