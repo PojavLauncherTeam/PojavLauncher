@@ -30,6 +30,7 @@ import net.kdt.pojavlaunch.prefs.*;
 
 import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.*;
+import android.net.*;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -305,6 +306,24 @@ public class PojavLoginActivity extends BaseActivity
         PojavProfile.setCurrentProfile(this, null);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        
+        Uri data = intent.getData();
+        if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
+            String error = data.getQueryParameter("error");
+            String error_description = data.getQueryParameter("error_description");
+            if (error != null && !error_description.startsWith("The user has denied access to the scope requested by the client application")) {
+                // "The user has denied access to the scope requested by the client application": user pressed Cancel button, skip it
+                Toast.makeText(this, "Error: " + error + ": " + error_description, Toast.LENGTH_LONG).show();
+            } else {
+                String code = data.getQueryParameter("code");
+                Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    
     private boolean isJavaRuntimeInstalled(AssetManager am) {
         boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
         try {
@@ -625,7 +644,7 @@ public class PojavLoginActivity extends BaseActivity
     public void loginMicrosoft(View view) {
         // TODO
         // Documentation: https://wiki.vg/Microsoft_Authentication_Scheme
-        CustomTabs.openTab(this, "https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+        CustomTabs.openTab(this, "https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
     }
     
     // developer methods

@@ -31,11 +31,11 @@
             
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+               
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="login.live.com" android:scheme="https"
-                    android:pathPrefix="/oauth20_desktop.srf"/>
+                <data android:scheme="ms-xal-00000000402b5328"
+                    android:host="auth"/>
             </intent-filter>
 		</activity>
 
