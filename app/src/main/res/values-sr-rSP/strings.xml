@@ -51,6 +51,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Вести</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Програмерска конзола</string>
     <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Strings -->
@@ -98,6 +99,12 @@
     <string name="global_error">Грешка</string>
     <string name="global_load">Учитај</string>
     <string name="global_name">Назив</string>
+    <string name="global_remove">Уклони</string>
+    <string name="global_restart">Рестарт</string>
+    <string name="global_save">Сачувај</string>
+    <string name="global_unpacking">Распакивање %s</string>
+    <string name="global_error_field_empty">Ово поље не може остати празно</string>
+    <string name="global_waiting">Чекање</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -121,10 +128,67 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Апликација/Игра је изашла са кодом %d</string>
+    <string name="mcn_exit_call">Изађи</string>
+    <string name="mcn_exit_crash">Грешка у Игри пронаћена! Притисните ОК да изаћете.</string>
+    <string name="mcn_exit_errcrash">Није могло да се лоцира Грешка! Ви можете ово игнорисати.</string>
+    <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
+    <string name="mcn_check_fail_incompatiblearch">Архиктетура %1$s неоже радити са Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_java">Није могло поктернути тест Java Виртуалну машину. Проверите %s за више информација.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Контроле</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Тастатура</string>
+    <string name="control_chat">Чет</string>
+    <string name="control_debug">Дебаг</string>
+    <string name="control_zoom">Зумирање (Ц)</string>
+    <string name="control_primary">При</string>
+    <string name="control_secondary">Сек</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Инв</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3рд</string>
+    <string name="control_listplayers">Таб</string>
+    <string name="control_mouse">Миш</string>
+    <string name="control_mouseoff">Миш: Искључен</string>
+    <string name="control_mouseon">Миш: Искључен </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Форце затвори</string>
+    <string name="control_viewout">Лог Избацивано</string>
+    <string name="control_adebug">Инпут дебаг</string>
+    <string name="control_customkey">Пошаљи прилагоћени типка-код</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Уреди %s</string>
+    <string name="customctrl_remove">Уклони %s?</string>
+    <string name="customctrl_keyname">Кôд тастера</string>
+    <string name="customctrl_specialkey">Специјална типка</string>
+    <string name="customctrl_hidden">Сакривено</string>
+    <string name="customctrl_toggle">Тогелабле</string>
+    <string name="customctrl_dynamicpos">Динамична позиција</string>
+    <string name="customctrl_dynamicpos_x">Динамични Х</string>
+    <string name="customctrl_dynamicpos_y">Динамични У</string>
+    <string name="customctrl_transparency_bg">Провидна позадина</string>
+    <string name="customctrl_transparency_text">Прозирност текста</string>
+    <string name="customctrl_keycombine">Комбинација типка</string>
+    <string name="customctrl_keycombine_alt">Алт</string>
+    <string name="customctrl_keycombine_control">Цтрл</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">Додај дугме</string>
+    <string name="customctrl_selectdefault">Селектујте опћенити Control json</string>
+    <string name="main_options">Опције</string>
+    <string name="main_play">Играј</string>
+    <string name="main_welcome">Добродошли, %s</string>
+    <string name="main_infodev">Информације (ДЕВ)</string>
+    <string name="main_switchuser">Промени корисника</string>
+    <string name="main_version">Верзија:</string>
+    <string name="main_nocrash">Није пронаћена грешка</string>
+    <string name="main_nolog">Нема лог.</string>
 </resources>
