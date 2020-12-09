@@ -12,7 +12,7 @@ public class NetworkResponse
     }
     
     public void throwExceptionIfNeed(String msg) {
-        if (statusCode >= 400) {
+        if (statusCode < 200 || statusCode >= 300) {
             throw new RuntimeException(msg);
         }
     }

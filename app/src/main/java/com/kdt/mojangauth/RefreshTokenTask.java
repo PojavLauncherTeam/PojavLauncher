@@ -25,7 +25,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     @Override
     public void onPreExecute() {
         build = new ProgressDialog(ctx);
-        build.setMessage("Refreshing");
+        build.setMessage(ctx.getString(R.string.global_waiting));
         build.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         build.setCancelable(false);
         build.show();
@@ -37,7 +37,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
             this.profilePath = MCProfile.load(args[0]);
             int responseCode = 400;
             responseCode = this.authenticator.validate(profilePath.getAccessToken()).statusCode;
-            if (400 <= responseCode) {
+            if (responseCode >= 200 && responseCode < 300) {
                 RefreshResponse response = this.authenticator.refresh(profilePath.getAccessToken(), UUID.fromString(profilePath.getClientID()));
                 // if (response == null) {
                     // throw new NullPointerException("Response is null?");

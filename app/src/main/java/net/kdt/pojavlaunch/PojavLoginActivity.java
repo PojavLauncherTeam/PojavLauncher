@@ -314,9 +314,11 @@ public class PojavLoginActivity extends BaseActivity
         if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
             String error = data.getQueryParameter("error");
             String error_description = data.getQueryParameter("error_description");
-            if (error != null && !error_description.startsWith("The user has denied access to the scope requested by the client application")) {
+            if (error != null) {
                 // "The user has denied access to the scope requested by the client application": user pressed Cancel button, skip it
-                Toast.makeText(this, "Error: " + error + ": " + error_description, Toast.LENGTH_LONG).show();
+                if (!error_description.startsWith("The user has denied access to the scope requested by the client application")) {
+                    Toast.makeText(this, "Error: " + error + ": " + error_description, Toast.LENGTH_LONG).show();
+                }
             } else {
                 String code = data.getQueryParameter("code");
                 Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
