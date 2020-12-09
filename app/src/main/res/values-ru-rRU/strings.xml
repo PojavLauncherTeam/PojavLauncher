@@ -22,7 +22,7 @@
     <string name="login_offline_alert_skip">Пропустить</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
-    <string name="login_microsoft">Вход через Microsoft</string>
+    <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учётные записи</string>
     <!-- Hint -->
     <string name="hint_select_account">Чтобы выбрать учётную запись, нажмите на неё. Чтобы удалить, нажмите и удерживайте её.</string>
