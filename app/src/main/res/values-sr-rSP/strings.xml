@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Издање за Андроид)</string>
+    <string name="app_short_name">ПојавЛаунчер</string>
+    <string name="app_motd">Покрените Минецрафт Јава Издање на вашем уређају!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">ПОМОЋ</string>
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Е-пошта или ваше Минецрафт име</string>
+    <string name="login_online_username_question">(Шта да користим?)</string>
+    <string name="login_online_password_hint">Шифра</string>
+    <string name="login_online_password_question">Заборавили шифру?</string>
+    <string name="login_online_remember">Запамти ме?</string>
+    <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
