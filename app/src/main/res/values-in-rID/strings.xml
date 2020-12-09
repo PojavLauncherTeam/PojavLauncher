@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Lewati</string>
     <string name="login_error_short_username">Username harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
+    <string name="login_microsoft">Login Microsoft</string>
     <string name="login_select_account">Pilih akun</string>
     <!-- Hint -->
     <string name="hint_select_account">Untuk memilih akun, di-klik. Untuk menghapus akun, dipencet dengan ditahan.</string>
