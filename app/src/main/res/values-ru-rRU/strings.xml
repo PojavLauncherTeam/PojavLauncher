@@ -104,7 +104,7 @@
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
-    <string name="global_waiting">Ожидание</string>
+    <string name="global_waiting">Подождите</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -173,8 +173,8 @@
     <string name="customctrl_hidden">Скрыто</string>
     <string name="customctrl_toggle">Переключаемый</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
-    <string name="customctrl_dynamicpos_x">Динамика оси X</string>
-    <string name="customctrl_dynamicpos_y">Динамика оси Y</string>
+    <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
+    <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
     <string name="customctrl_transparency_text">Прозрачность текста</string>
     <string name="customctrl_keycombine">Комбинация клавиш</string>
