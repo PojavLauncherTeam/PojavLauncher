@@ -19,14 +19,23 @@
         android:value="ratio_float"/>
 		
 		<activity
+            android:launchMode="singleTop"
 			android:screenOrientation="sensorLandscape"
 			android:label="@string/app_short_name"
 			android:name=".PojavLoginActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="login.live.com" android:scheme="https"
+                    android:pathPrefix="/oauth20_desktop.srf"/>
             </intent-filter>
 		</activity>
 
