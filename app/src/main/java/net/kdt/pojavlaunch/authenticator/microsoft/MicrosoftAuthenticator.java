@@ -43,13 +43,14 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Object> {
         build.setMessage(ctx.getString(R.string.global_waiting));
         build.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         build.setCancelable(false);
+        build.setMax(5);
         build.show();
     }
 
     @Override
     public Object doInBackground(String... args) {
         try {
-            String authCode = args[1];
+            String authCode = args[0];
             
             publishProgress();
             String msaAccessToken = acquireAccessToken(authCode);
@@ -67,12 +68,14 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Object> {
             // TODO migrate account format to json
             MinecraftAccount acc = checkMcProfile(mcAccessToken);
             
-            MCProfile.Builder profilePath = MCProfile.load(args[0]);
+            MCProfile.Builder profilePath = new MCProfile.Builder();
             
             profilePath.setClientID("0" /* FIXME */);
             profilePath.setAccessToken(acc.accessToken);
             profilePath.setUsername(acc.username);
             profilePath.setProfileID(acc.profileId);
+            profilePath.setIsMojangAccount(false);
+            
             MCProfile.build(profilePath);
            
             return profilePath;
