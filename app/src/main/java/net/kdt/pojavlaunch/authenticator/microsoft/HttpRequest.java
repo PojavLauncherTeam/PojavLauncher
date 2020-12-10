@@ -14,6 +14,8 @@ public class HttpRequest
         public Builder(URI uri) throws IOException {
             mURI = uri;
             mConn = (HttpURLConnection) uri.toURL().openConnection();
+            mConn.setUseCaches(false);
+            mConn.setDoOutput(true);
         }
         
         public HttpURLConnection getBase() {
