@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">도움</string>
     <!-- Languages list part -->
-    <string name="language_name">ENGLISH - US</string>
+    <string name="language_name">한국어 - KR</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email or username</string>
     <string name="login_online_username_question">(어떤 것을 사용할까요?)</string>
