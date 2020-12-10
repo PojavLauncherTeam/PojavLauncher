@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
-import android.support.v7.app.*;
+import androidx.appcompat.app.*;
 import android.text.*;
 import android.view.*;
 import android.widget.*;
@@ -12,7 +12,7 @@ import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.tasks.*;
 
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 public abstract class BaseLauncherActivity extends BaseActivity {
 	public Button mPlayButton;
@@ -160,23 +160,26 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        System.out.println("call to onPostResume");
         Tools.updateWindowSize(this);
-        
+        System.out.println("call to onPostResume; E");
     }
     
     @Override
     protected void onResume(){
         super.onResume();
+        System.out.println("call to onResume");
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
+        System.out.println("call to onResume; E");
     }
 
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
         new RefreshVersionListTask(this).execute();
-
+        System.out.println("call to onResumeFragments");
         try{
             final ProgressDialog barrier = new ProgressDialog(this);
             barrier.setMessage(getString(R.string.global_waiting));
@@ -219,11 +222,12 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             if(CrashFragment.isNewCrash(lastCrashFile) || !mCrashView.getLastCrash().isEmpty()){
                 mCrashView.resetCrashLog = false;
                 selectTabPage(2);
-            } else throw new Exception();
+            } /*else throw new Exception();*/
         } catch(Throwable e) {
             e.printStackTrace();
             // selectTabPage(tabLayout.getSelectedTabPosition());
         }
+        System.out.println("call to onResumeFragments; E");
     }
     
     // Catching touch exception

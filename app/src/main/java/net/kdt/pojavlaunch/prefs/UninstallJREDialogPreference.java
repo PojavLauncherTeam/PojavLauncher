@@ -1,8 +1,8 @@
 package net.kdt.pojavlaunch.prefs;
 
 import android.content.*;
-import android.support.v7.app.*;
-import android.support.v7.preference.*;
+import androidx.appcompat.app.*;
+import androidx.preference.*;
 import android.util.*;
 import android.widget.*;
 import java.io.*;

@@ -6,10 +6,11 @@ import android.content.pm.*;
 import android.content.res.*;
 import android.net.*;
 import android.os.*;
-import android.support.annotation.*;
-import android.support.v4.app.*;
-import android.support.v4.content.*;
-import android.support.v7.app.*;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.*;
+import androidx.core.content.*;
+import androidx.appcompat.app.*;
 import android.system.*;
 import android.text.*;
 import android.text.style.*;

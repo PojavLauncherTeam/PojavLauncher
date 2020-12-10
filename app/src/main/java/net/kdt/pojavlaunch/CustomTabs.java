@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.content.*;
 import android.net.*;
-import android.support.customtabs.*;
+import androidx.browser.customtabs.*;
 // import androidx.browser.customtabs.*;
 
 public class CustomTabs {

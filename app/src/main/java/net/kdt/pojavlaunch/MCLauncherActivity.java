@@ -1,35 +1,25 @@
 package net.kdt.pojavlaunch;
 
-import android.content.*;
-import android.graphics.*;
 import android.os.*;
-import android.support.design.widget.*;
-import android.support.v4.app.*;
-import android.support.v4.view.*;
-import android.support.v7.app.*;
-import android.text.*;
-import android.util.*;
+
+import androidx.core.app.*;
+import androidx.core.view.*;
+import androidx.appcompat.app.*;
+
 import android.view.*;
 import android.widget.*;
-import android.widget.AdapterView.*;
-import com.google.gson.*;
-import com.kdt.pickafile.*;
+
+import com.google.android.material.tabs.TabLayout;
+
 import java.io.*;
-import java.nio.charset.*;
 import java.util.*;
-import net.kdt.pojavlaunch.*;
+
 import net.kdt.pojavlaunch.fragments.*;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.utils.*;
-import net.kdt.pojavlaunch.value.*;
+
 import org.lwjgl.glfw.*;
 
-import android.support.v7.app.AlertDialog;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.app.*;
-import org.apache.commons.io.*;
-import net.kdt.pojavlaunch.tasks.*;
+import androidx.appcompat.app.AlertDialog;
+import androidx.viewpager.widget.ViewPager;
 
 import android.support.design.widget.VerticalTabLayout.*;
 

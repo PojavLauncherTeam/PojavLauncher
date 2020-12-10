@@ -1,18 +1,18 @@
 package net.kdt.pojavlaunch.tasks;
 
 import android.os.*;
-import android.support.v7.widget.*;
+import androidx.appcompat.widget.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
-import com.google.gson.*;
+
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 
-import android.support.v7.widget.PopupMenu;
+import androidx.appcompat.widget.PopupMenu;
 
 public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<String>>
 {

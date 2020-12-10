@@ -19,13 +19,11 @@ package com.kdt.mcgui.pref;
 import android.content.*;
 import android.content.res.*;
 import android.os.*;
-import android.support.v7.preference.*;
+import androidx.preference.*;
 import android.util.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 import android.widget.SeekBar.*;
-import net.kdt.pojavlaunch.*;
 
 import android.view.View.BaseSavedState;
 import net.kdt.pojavlaunch.R;

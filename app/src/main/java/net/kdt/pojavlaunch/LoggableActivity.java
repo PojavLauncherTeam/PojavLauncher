@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch;
 
-import android.support.v7.app.*;
+import androidx.appcompat.app.*;
 
 public abstract class LoggableActivity extends BaseActivity {
     public void appendToLog(String text) {

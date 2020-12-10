@@ -2,16 +2,19 @@ package net.kdt.pojavlaunch;
 
 import android.content.*;
 import android.os.*;
-import android.support.design.widget.*;
-import android.support.v4.widget.*;
-import android.support.v7.app.*;
-import android.support.v7.preference.*;
+
+import androidx.core.widget.*;
+import androidx.appcompat.app.*;
+import androidx.preference.*;
 import android.view.*;
 import android.widget.*;
-import com.google.gson.*;
+
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 import com.kdt.pickafile.*;
 import java.io.*;
-import net.kdt.pojavlaunch.*;
+
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
