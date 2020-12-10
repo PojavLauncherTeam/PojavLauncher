@@ -4,6 +4,7 @@ import android.*;
 import android.content.*;
 import android.content.pm.*;
 import android.content.res.*;
+import android.net.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.v4.app.*;
@@ -12,25 +13,23 @@ import android.support.v7.app.*;
 import android.system.*;
 import android.text.*;
 import android.text.style.*;
-import android.util.Log;
+import android.util.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
-import com.kdt.pickafile.*;
 import com.kdt.mojangauth.*;
+import com.kdt.pickafile.*;
 import java.io.*;
 import java.util.*;
-import java.util.zip.*;
+import net.kdt.pojavlaunch.authenticator.microsoft.*;
 import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.apache.commons.compress.archivers.tar.*;
 import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;
-import net.kdt.pojavlaunch.prefs.*;
 
 import org.apache.commons.io.FileUtils;
-import org.lwjgl.glfw.*;
-import android.net.*;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -321,7 +320,18 @@ public class PojavLoginActivity extends BaseActivity
                 }
             } else {
                 String code = data.getQueryParameter("code");
-                Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
+                new MicrosoftAuthenticator(this, new RefreshListener(){
+                        @Override
+                        public void onFailed(Throwable e) {
+                            Tools.showError(PojavLoginActivity.this, e);
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            // TODO: Implement this method
+                        }
+                    }).execute(code);
+                // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
             }
         }
     }

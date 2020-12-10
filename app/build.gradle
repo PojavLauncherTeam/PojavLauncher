@@ -24,7 +24,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 156236
-        versionName "3.3.1b_6409b_20201203"
+        versionName "3.3.1b_6409b_20201210"
         multiDexEnabled true //important
     }
 	
@@ -76,6 +76,6 @@ dependencies {
     implementation 'org.tukaani:xz:1.8'
     
     implementation 'net.objecthunter:exp4j:0.4.8'
-    
+    // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

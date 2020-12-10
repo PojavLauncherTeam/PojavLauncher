@@ -1,0 +1,35 @@
+package net.kdt.pojavlaunch.authenticator.microsoft;
+import java.io.*;
+import java.lang.reflect.*;
+import net.kdt.pojavlaunch.*;
+
+public class HttpResponse<T>
+{
+    private HttpRequest mRequest;
+    public HttpResponse(HttpRequest request) {
+        mRequest = request;
+    }
+    
+    public static class BodyHandler<T> {
+        // public BodySubscriber<T> apply(ResponseInfo responseInfo);
+    }
+    
+    public static class BodyHandlers {
+        public static BodyHandler<String> ofString() {
+            return new BodyHandler<String>();
+        }
+    }
+
+    public int statusCode() throws IOException {
+        return mRequest.mBuilder.getBase().getResponseCode();
+    }
+    
+    public T body() throws IOException {
+        Class<T> type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        if (type.isAssignableFrom(String.class)) {
+            return (T) Tools.read(mRequest.mBuilder.getBase().getInputStream());
+        } else {
+            throw new UnsupportedOperationException();
+        }
+    }
+}
