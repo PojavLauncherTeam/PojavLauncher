@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Overslaan</string>
     <string name="login_error_short_username">Gebruikersnaam moet uit minstens 3 tekens bestaan</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
+    <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecteer gebruiker</string>
     <!-- Hint -->
     <string name="hint_select_account">Om te selecteren, klik erop. Om een account te verwijderen, houd deze ingedrukt.</string>
