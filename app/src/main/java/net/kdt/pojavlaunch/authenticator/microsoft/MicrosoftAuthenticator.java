@@ -156,7 +156,7 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Object> {
         data.put("client_id", "00000000402b5328");
         data.put("code", authcode);
         data.put("grant_type", "authorization_code");
-        data.put("redirect_uri", "https://login.live.com/oauth20_desktop.srf");
+        data.put("redirect_url", "https://login.live.com/oauth20_desktop.srf");
         data.put("scope", "service::user.auth.xboxlive.com::MBI_SSL");
 
         HttpRequest request = HttpRequest.newBuilder(uri)
