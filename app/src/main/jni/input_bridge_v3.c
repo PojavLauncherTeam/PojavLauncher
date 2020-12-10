@@ -22,7 +22,6 @@
 #define EVENT_TYPE_MOUSE_BUTTON 1006
 #define EVENT_TYPE_SCROLL 1007
 #define EVENT_TYPE_WINDOW_SIZE 1008
-#define EVENT_TYPE_KEYCODE 1009
 
 typedef void GLFW_invoke_Char_func(void* window, unsigned int codepoint);
 typedef void GLFW_invoke_CharMods_func(void* window, unsigned int codepoint, int mods);

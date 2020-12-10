@@ -172,27 +172,18 @@ public class AndroidLWJGLKeycode {
             }
         }
 
-        int mods = 0;
-        if (keyEvent.isAltPressed()) {
-            mods &= LWJGLGLFWKeycode.GLFW_MOD_ALT;
-        } if (keyEvent.isCapsLockOn()) {
-            mods &= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
-        } if (keyEvent.isCtrlPressed()) {
-            mods &= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
-        } /* if (keyEvent.isFunctionPressed()) {
-            mods &= LWJGLGLFWKeycode.GLFW_MOD_FUNCTION
-        } */ if (keyEvent.isNumLockOn()) {
-            mods &= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
-        } if (keyEvent.isShiftPressed()) {
-            mods &= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
-        }
-        
+        CallbackBridge.holdingAlt = keyEvent.isAltPressed();
+        CallbackBridge.holdingCapslock = keyEvent.isCapsLockOn();
+        CallbackBridge.holdingCtrl = keyEvent.isCtrlPressed();
+        CallbackBridge.holdingNumlock = keyEvent.isNumLockOn();
+        CallbackBridge.holdingShift = keyEvent.isShiftPressed();
+
         try {
             if (!CallbackBridge.isGrabbing()) {
                 if (keyEvent.isPrintingKey()) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), mods, isDown);
+                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
                 } else if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), mods, isDown);
+                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
                 }
             }
         } catch (Throwable th) {

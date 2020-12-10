@@ -609,7 +609,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 case MotionEvent.ACTION_POINTER_DOWN: // 5
                                     CallbackBridge.sendPrepareGrabInitialPos();
 
-                                    CallbackBridge.sendMouseKeycode(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, true);
+                                    CallbackBridge.sendMouseKeycode(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, CallbackBridge.getCurrentMods(), true);
                                     initialX = x;
                                     initialY = y;
 
@@ -1071,13 +1071,13 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public void sendKeyPress(char keyChar) {
-        sendKeyPress(0, keyChar, 0, 0, true);
-        sendKeyPress(0, keyChar, 0, 0, false);
+        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
+        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
     }
 
     public void sendKeyPress(int keyCode) {
-        sendKeyPress(keyCode, 0, true);
-        sendKeyPress(keyCode, 0, false);
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
     }
 
     private static boolean isLeftMouseDown, isRightMouseDown;
@@ -1089,7 +1089,7 @@ public class BaseMainActivity extends LoggableActivity {
         isLeftMouseDown = button == LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT && status;
         isRightMouseDown = button == LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT && status;
         
-        CallbackBridge.sendMouseKeycode(button, 0, status);
+        CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
     }
 
     public void calculateMcScale() {

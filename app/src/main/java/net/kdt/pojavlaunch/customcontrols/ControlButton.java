@@ -24,7 +24,6 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     private boolean mChecked = false;
     
     private float mScaleAt;
-    private int mMods;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
@@ -66,14 +65,6 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         mProperties = properties;
         mProperties.transparency = mProperties.hidden ? 100 : mProperties.transparency;
         properties.update();
-        
-        if (properties.holdAlt) {
-            mMods &= LWJGLGLFWKeycode.GLFW_MOD_ALT;
-        } if (properties.holdCtrl) {
-            mMods &= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
-        } if (properties.holdShift) {
-            mMods &= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
-        }
 
         // com.android.internal.R.string.delete
         // android.R.string.
@@ -93,7 +84,8 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
             // setOnLongClickListener(null);
             setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
         } else {
-            throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but is " + properties.specialButtonListener.getClass().getName());
+            throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but was " +
+                properties.specialButtonListener.getClass().getName());
         }
 
         setLayoutParams(new FrameLayout.LayoutParams((int) properties.width, (int) properties.height));
@@ -168,6 +160,20 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         
         return mCanTriggerLongClick;
     }
+    
+    private void setHolding(boolean isDown) {
+        if (mProperties.holdAlt || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_ALT) {
+            CallbackBridge.holdingAlt = isDown;
+        } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK) {
+            CallbackBridge.holdingCapslock = isDown;
+        } if (mProperties.holdCtrl || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_CONTROL) {
+            CallbackBridge.holdingCtrl = isDown;
+        } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK) {
+            CallbackBridge.holdingNumlock = isDown;
+        } if (mProperties.holdShift || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_SHIFT) {
+            CallbackBridge.holdingShift = isDown;
+        } 
+    }
 
     private float moveX, moveY;
     private float downX, downY;
@@ -191,10 +197,12 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                         default:
                             return false;
                     }
-                    MainActivity.sendKeyPress(mProperties.keycode, mMods, isDown);
+                    setHolding(isDown);
+                    MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), isDown);
                 } else if (mGestureDetector.onTouchEvent(event)) {
                     mChecked = !mChecked;
-                    MainActivity.sendKeyPress(mProperties.keycode, mMods, mChecked);
+                    setHolding(mChecked);
+                    MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), mChecked);
                 }
                 return true;
             }

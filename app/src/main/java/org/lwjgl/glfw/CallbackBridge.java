@@ -25,7 +25,7 @@ public class CallbackBridge {
     
     public static void putMouseEventWithCoords(int button, int state, int x, int y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
-        sendMouseKeycode(button, 0, state == 1);
+        sendMouseKeycode(button, CallbackBridge.getCurrentMods(), state == 1);
     }
 
     private static boolean threadAttached;
@@ -42,7 +42,7 @@ public class CallbackBridge {
     
     public static void sendPrepareGrabInitialPos() {
         DEBUG_STRING.append("Prepare set grab initial posititon");
-        sendMouseKeycode(-1, 0, false);
+        sendMouseKeycode(-1, CallbackBridge.getCurrentMods(), false);
     }
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
@@ -66,8 +66,8 @@ public class CallbackBridge {
     }
 
     public static void sendMouseKeycode(int keycode) {
-        sendMouseKeycode(keycode, 0, true);
-        sendMouseKeycode(keycode, 0, false);
+        sendMouseKeycode(keycode, CallbackBridge.getCurrentMods(), true);
+        sendMouseKeycode(keycode, CallbackBridge.getCurrentMods(), false);
     }
     
     public static void sendScroll(double xoffset, double yoffset) {
@@ -126,6 +126,24 @@ public class CallbackBridge {
     }
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
+
+    public static boolean holdingAlt, holdingCapslock, holdingCtrl,
+        holdingNumlock, holdingShift;
+    public static int getCurrentMods() {
+        int currMods = 0;
+        if (holdingAlt) {
+            currMods &= LWJGLGLFWKeycode.GLFW_MOD_ALT;
+        } if (holdingCapslock) {
+            currMods &= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
+        } if (holdingCtrl) {
+            currMods &= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
+        } if (holdingNumlock) {
+            currMods &= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
+        } if (holdingShift) {
+            currMods &= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
+        }
+        return currMods;
+    }
 
     public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
     /*
