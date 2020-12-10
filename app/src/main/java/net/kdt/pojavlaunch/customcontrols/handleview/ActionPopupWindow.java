@@ -21,17 +21,14 @@ package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.content.*;
 import android.view.*;
-import android.view.View.*;
 import android.view.ViewGroup.*;
 import android.widget.*;
-import java.lang.reflect.*;
+
 import net.kdt.pojavlaunch.*;
 
 import android.view.View.OnClickListener;
 import net.kdt.pojavlaunch.customcontrols.*;
-import android.support.v7.app.*;
-import android.content.res.*;
-import net.objecthunter.exp4j.*;
+import androidx.appcompat.app.*;
 
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {
 	private TextView mEditTextView;

@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.graphics.*;
 import android.os.*;
-import android.support.v7.app.*;
+import androidx.appcompat.app.*;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
@@ -12,7 +12,6 @@ import net.kdt.pojavlaunch.installers.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 import android.content.*;
-import android.system.*;
 
 public class JavaGUILauncherActivity extends LoggableActivity {
     private AWTCanvasView mTextureView;

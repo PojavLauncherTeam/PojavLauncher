@@ -4,18 +4,22 @@ import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
-import android.support.design.widget.*;
-import android.support.v4.widget.*;
+
+import androidx.core.widget.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
+
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 import com.kdt.pointer.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
-import net.kdt.pojavlaunch.customcontrols.*;
+
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;

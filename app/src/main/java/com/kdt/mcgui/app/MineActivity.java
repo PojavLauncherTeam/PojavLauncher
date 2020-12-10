@@ -2,13 +2,10 @@ package com.kdt.mcgui.app;
 
 import android.content.pm.*;
 import android.os.*;
-import android.support.v7.app.*;
+import androidx.appcompat.app.*;
 import android.view.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.*;
-import java.util.*;
-import android.content.*;
-import com.kdt.mcgui.*;
 
 public class MineActivity extends BaseActivity implements View.OnClickListener
 {
@@ -22,6 +19,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         this.onCreate(savedInstanceState, true);
     }
     

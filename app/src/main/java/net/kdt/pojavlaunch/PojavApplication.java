@@ -5,13 +5,13 @@ import android.content.*;
 import android.content.pm.*;
 import android.content.res.*;
 import android.os.*;
-import android.support.v4.app.*;
-import android.support.v7.preference.*;
+import androidx.core.app.*;
+import androidx.preference.*;
 import android.util.*;
 import java.io.*;
 import java.text.*;
 import java.util.*;
-import net.kdt.pojavlaunch.prefs.*;
+
 import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application

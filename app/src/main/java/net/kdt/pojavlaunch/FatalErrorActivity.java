@@ -3,9 +3,9 @@ package net.kdt.pojavlaunch;
 import android.app.*;
 import android.content.*;
 import android.os.*;
-import android.support.v7.app.*;
+import androidx.appcompat.app.*;
 import android.util.*;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 public class FatalErrorActivity extends BaseActivity
 {

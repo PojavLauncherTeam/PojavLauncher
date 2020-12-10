@@ -2,9 +2,11 @@ package net.kdt.pojavlaunch.utils;
 
 import android.app.*;
 import android.content.*;
-import android.support.annotation.*;
 import android.system.*;
 import android.util.*;
+
+import androidx.annotation.Nullable;
+
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
