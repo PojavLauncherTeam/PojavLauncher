@@ -27,7 +27,11 @@ public class HttpResponse<T>
     public T body() throws IOException {
         Class<T> type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         if (type.isAssignableFrom(String.class)) {
-            return (T) Tools.read(mRequest.mBuilder.getBase().getInputStream());
+            if (statusCode() >= 200 && statusCode() < 300) {
+                return (T) Tools.read(mRequest.mBuilder.getBase().getInputStream());
+            } else {
+                return (T) Tools.read(mRequest.mBuilder.getBase().getErrorStream());
+            }
         } else {
             throw new UnsupportedOperationException();
         }

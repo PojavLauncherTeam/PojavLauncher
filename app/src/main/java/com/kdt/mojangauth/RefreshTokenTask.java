@@ -65,7 +65,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     public void onPostExecute(Throwable result) {
         build.dismiss();
         if (result == null) {
-            listener.onSuccess();
+            listener.onSuccess(null);
         } else {
             listener.onFailed(result);
         }

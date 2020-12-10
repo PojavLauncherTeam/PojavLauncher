@@ -15,13 +15,15 @@ import org.json.*;
 
 import java.text.ParseException;
 import java.io.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.*;
+import net.kdt.pojavlaunch.value.*;
 
-public class MicrosoftAuthenticator extends AsyncTask<String, Void, Throwable> {
+public class MicrosoftAuthenticator extends AsyncTask<String, Void, Object> {
     private static final String authTokenUrl = "https://login.live.com/oauth20_token.srf";
     private static final String xblAuthUrl = "https://user.auth.xboxlive.com/user/authenticate";
     private static final String xstsAuthUrl = "https://xsts.auth.xboxlive.com/xsts/authorize";
     private static final String mcLoginUrl = "https://api.minecraftservices.com/authentication/login_with_xbox";
-    private static final String mcStoreUrl = "https://api.minecraftservices.com/entitlements/mcstore";
+    // private static final String mcStoreUrl = "https://api.minecraftservices.com/entitlements/mcstore";
     private static final String mcProfileUrl = "https://api.minecraftservices.com/minecraft/profile";
     
     //private Gson gson = new Gson();
@@ -45,9 +47,8 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Throwable> {
     }
 
     @Override
-    public Throwable doInBackground(String... args) {
+    public Object doInBackground(String... args) {
         try {
-            MCProfile.Builder profilePath = MCProfile.load(args[0]);
             String authCode = args[1];
             
             publishProgress();
@@ -57,16 +58,24 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Throwable> {
             String xblToken = acquireXBLToken(msaAccessToken);
             
             publishProgress();
-            // TODO
+            String[] xstsData = acquireXsts(xblToken);
             
-           /*
-            profilePath.setClientID(response.clientToken.toString());
-            profilePath.setAccessToken(response.accessToken);
-            profilePath.setUsername(response.selectedProfile.name);
-            profilePath.setProfileID(response.selectedProfile.id);
+            publishProgress();
+            String mcAccessToken = acquireMinecraftToken(xstsData[0], xstsData[1]);
+            
+            publishProgress();
+            // TODO migrate account format to json
+            MinecraftAccount acc = checkMcProfile(mcAccessToken);
+            
+            MCProfile.Builder profilePath = MCProfile.load(args[0]);
+            
+            profilePath.setClientID("0" /* FIXME */);
+            profilePath.setAccessToken(acc.accessToken);
+            profilePath.setUsername(acc.username);
+            profilePath.setProfileID(acc.profileId);
             MCProfile.build(profilePath);
-           */
-            return null;
+           
+            return profilePath;
         } catch (Throwable e) {
             return e;
         }
@@ -76,16 +85,15 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Throwable> {
     protected void onProgressUpdate(Void[] p1) {
         super.onProgressUpdate(p1);
         build.setProgress(build.getProgress() + 1);
-        
     }
     
     @Override
-    public void onPostExecute(Throwable result) {
+    public void onPostExecute(Object result) {
         build.dismiss();
-        if (result == null) {
-            listener.onSuccess();
+        if (result instanceof MCProfile.Builder) {
+            listener.onSuccess((MCProfile.Builder) result);
         } else {
-            listener.onFailed(result);
+            listener.onFailed((Throwable) result);
         }
     }
     
@@ -115,12 +123,27 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Throwable> {
      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
      SOFTWARE.
      */
+    private final class XSTSXUI {
+        private String uhs;
+    }
+     
+    private final class XSTSDisplayClaims {
+        private XSTSXUI[] xui;
+    }
+     
     private final class GlobalToken {
         // MSA AccessToken
         private String access_token;
         
-        // XBL Token
+        // XBL, XSTS Token
         private String Token;
+        
+        // XSTS 
+        private XSTSDisplayClaims DisplayClaims;
+        
+        // Minecraft side
+        private String id;
+        private String name;
     }
 
     private String acquireAccessToken(String authcode) throws IOException, URISyntaxException{
@@ -137,8 +160,12 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Throwable> {
             .header("Content-Type", "application/x-www-form-urlencoded")
             .POST(ofFormData(data)).build();
 
-        HttpResponse response = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());
-        return Tools.GLOBAL_GSON.fromJson((String) response.body(), GlobalToken.class).access_token;
+        HttpResponse resp = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());
+        if (resp.statusCode() >= 200 && resp.statusCode() < 300) {
+            return Tools.GLOBAL_GSON.fromJson((String) resp.body(), GlobalToken.class).access_token;
+        } else {
+            throw new RuntimeException("Error " + resp.statusCode() + ": " + (String) resp.body());
+        }
     }
     
     private String acquireXBLToken(String accessToken) throws IOException, URISyntaxException {
@@ -160,7 +187,89 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Throwable> {
             .POST(ofJSONData(data)).build();
 
         HttpResponse resp = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());
-        return Tools.GLOBAL_GSON.fromJson((String) resp.body(), GlobalToken.class).Token;
+        if (resp.statusCode() >= 200 && resp.statusCode() < 300) {
+            return Tools.GLOBAL_GSON.fromJson((String) resp.body(), GlobalToken.class).Token;
+        } else {
+            throw new RuntimeException("Error " + resp.statusCode() + ": " + (String) resp.body());
+        }
+    }
+    
+    private String[] acquireXsts(String xblToken) throws IOException, URISyntaxException {
+        URI uri = new URI(xstsAuthUrl);
+
+        Map<Object, Object> dataProp = new ArrayMap<>();
+        dataProp.put("SandboxId", "RETAIL");
+        dataProp.put("UserTokens", Arrays.asList(xblToken));
+        
+        Map<Object, Object> data = new ArrayMap<>();
+        data.put("Properties", dataProp);
+        data.put("RelyingParty", "rp://api.minecraftservices.com/");
+        data.put("TokenType", "JWT");
+
+        HttpRequest request = HttpRequest.newBuilder(uri)
+            .header("Content-Type", "application/json")
+            .header("Accept", "application/json")
+            .POST(ofJSONData(data)).build();
+
+        HttpResponse resp = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());
+        
+        if (resp.statusCode() >= 200 && resp.statusCode() < 300) {
+            String body = (String) resp.body();
+            GlobalToken token = Tools.GLOBAL_GSON.fromJson(body, GlobalToken.class);
+            String xblXsts = token.Token;
+            String uhs = token.DisplayClaims.xui[0].uhs;
+            
+            return new String[]{uhs, xblXsts};
+        } else {
+            throw new RuntimeException("Error " + resp.statusCode() + ": " + (String) resp.body());
+        }
+    }
+
+    private String acquireMinecraftToken(String xblUhs, String xblXsts) throws IOException, URISyntaxException {
+        URI uri = new URI(mcLoginUrl);
+
+        Map<Object, Object> data = new ArrayMap<>();
+        data.put("identityToken", "XBL3.0 x=" + xblUhs + ";" + xblXsts);
+
+        HttpRequest request = HttpRequest.newBuilder(uri)
+            .header("Content-Type", "application/json")
+            .header("Accept", "application/json")
+            .POST(ofJSONData(data)).build();
+
+        HttpResponse resp = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());
+        if (resp.statusCode() >= 200 && resp.statusCode() < 300) {
+            String body = (String) resp.body();
+            return Tools.GLOBAL_GSON.fromJson(body, GlobalToken.class).access_token;
+        } else {
+            throw new RuntimeException("Error " + resp.statusCode() + ": " + (String) resp.body());
+        }
+    }
+
+    private MinecraftAccount checkMcProfile(String mcAccessToken) throws IOException, URISyntaxException {
+        URI uri = new URI(mcProfileUrl);
+
+        HttpRequest request = HttpRequest.newBuilder(uri)
+            .header("Authorization", "Bearer " + mcAccessToken)
+            .GET().build();
+
+        HttpResponse resp = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());
+        if (resp.statusCode() >= 200 && resp.statusCode() < 300) {
+            String body = (String) resp.body();
+            GlobalToken token = Tools.GLOBAL_GSON.fromJson(body, GlobalToken.class);
+            String uuid = token.id;
+            String uuidDashes = uuid.replaceFirst(
+                "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5"
+            );
+            
+            MinecraftAccount acc = new MinecraftAccount();
+            acc.isMicrosoft = true;
+            acc.username = token.name;
+            acc.accessToken = mcAccessToken;
+            acc.profileId = uuidDashes;
+            return acc;
+        } else {
+            throw new RuntimeException("Error " + resp.statusCode() + ": " + (String) resp.body());
+        }
     }
     
     public static HttpRequest.BodyPublisher ofJSONData(Map<Object, Object> data) {

@@ -327,8 +327,9 @@ public class PojavLoginActivity extends BaseActivity
                         }
 
                         @Override
-                        public void onSuccess() {
-                            // TODO: Implement this method
+                        public void onSuccess(MCProfile.Builder b) {
+                            mProfile = b;
+                            playProfile();
                         }
                     }).execute(code);
                 // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
@@ -733,7 +734,7 @@ public class PojavLoginActivity extends BaseActivity
                                     }
 
                                     @Override
-                                    public void onSuccess()
+                                    public void onSuccess(MCProfile.Builder unused)
                                     {
                                         MCProfile.launch(PojavLoginActivity.this, path);
                                     }
