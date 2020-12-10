@@ -7,7 +7,7 @@ public class HttpClient
 {
     public static class Builder {
         public HttpClient build() {
-            return new HttpClient(this);
+            return new HttpClient(/* this */);
         }
     }
     
@@ -15,9 +15,9 @@ public class HttpClient
         return new Builder();
     }
     
-    private Builder mBuilder;
-    protected HttpClient(Builder b) {
-        mBuilder = b;
+    // private Builder mBuilder;
+    protected HttpClient(/* Builder b */) {
+        // mBuilder = b;
     }
     
     // This method is not official java.net.http.HttpClient API.
