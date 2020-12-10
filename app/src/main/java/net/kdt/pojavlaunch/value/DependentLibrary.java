@@ -4,6 +4,9 @@ public class DependentLibrary {
     public String name;
 	public LibraryDownloads downloads;
     public String url;
+    
+    // Forge specific params
+    public boolean clientreq, serverreq;
 	
 	public static class LibraryDownloads
 	{

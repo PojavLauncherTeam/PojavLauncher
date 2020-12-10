@@ -507,7 +507,9 @@ public final class Tools
                 List<DependentLibrary> libList = new ArrayList<DependentLibrary>(Arrays.asList(inheritsVer.libraries));
                 try {
                     for (DependentLibrary lib : customVer.libraries) {
-                        libList.add(lib);
+                        if (lib.clientreq || !lib.serverreq) {
+                            libList.add(lib);
+                        }
                     }
                 } finally {
                     inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
