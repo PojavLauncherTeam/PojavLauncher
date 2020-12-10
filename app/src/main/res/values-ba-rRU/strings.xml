@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Android өсөн Minecraft: Java Edition)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Minecraft: Java Edition үҙегеҙҙең яйланмала ебәрегеҙ!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">ЯРҘАМ</string>
     <!-- Languages list part -->
+    <string name="language_name">БАШҠОРТСА - RU</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email йәки ҡулланыусы исеме</string>
+    <string name="login_online_username_question">(Ҡайһын ҡулланырға?)</string>
+    <string name="login_online_password_hint">Серһүҙ</string>
+    <string name="login_online_password_question">Серһүҙҙе оноттоғоҙ мы?</string>
+    <string name="login_online_remember">Хәтерҙә ҡалдырырға мы?</string>
+    <string name="login_online_check_keeplogin">Хәтерҙә ҡалдырырға</string>
+    <string name="login_online_login_label">Керергә</string>
+    <string name="login_online_create_account">(Яңы хисап яҙманы яҙырға мы?)</string>
+    <string name="login_offline_alert_skip">Үтеәрергә</string>
+    <string name="login_error_short_username">Ҡулланыусы исеме 3 хәрефтән аҙ булмаҫҡа тейеш</string>
+    <string name="login_error_exist_username">Был ҡулланыусы исеме инде бар</string>
+    <string name="login_microsoft">Microsoft менән керергә</string>
+    <string name="login_select_account">Хисап яҙмалар</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_action_exit">Сығырға</string>
+    <string name="warning_remove_account">Был хисап яҙма юйыласаҡ!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
