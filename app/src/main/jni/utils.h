@@ -22,5 +22,7 @@ char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);
 jobjectArray convert_from_char_array(JNIEnv *env, char **charArray, int num_rows);
 void free_char_array(JNIEnv *env, jobjectArray jstringArray, const char **charArray);
 
+void closeGLFWWindow();
+
 #endif // _BINARY_UTILS_H_
 
