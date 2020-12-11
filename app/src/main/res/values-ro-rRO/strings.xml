@@ -75,6 +75,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Iesire</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <!-- Update part (unused now) -->
