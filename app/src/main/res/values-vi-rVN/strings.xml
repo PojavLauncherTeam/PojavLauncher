@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Bỏ qua</string>
     <string name="login_error_short_username">Tên người dùng phải có ít nhất 3 kí tự</string>
     <string name="login_error_exist_username">Tên này đã tồn tại</string>
+    <string name="login_microsoft">Đăng nhập Microsoft</string>
     <string name="login_select_account">Chọn tài khoản</string>
     <!-- Hint -->
     <string name="hint_select_account">Để chọn, nhấp vào. Để xóa một tài khoản, giữ vào.</string>
@@ -103,6 +104,7 @@
     <string name="global_save">Lưu</string>
     <string name="global_unpacking">Đang giải nén %s</string>
     <string name="global_error_field_empty">Trường này không được để trống</string>
+    <string name="global_waiting">Đợi</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -164,6 +166,8 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Chỉnh %s</string>
+    <string name="customctrl_remove">Xóa %s?</string>
     <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_specialkey">Phím đặc biệt</string>
     <string name="customctrl_hidden">Ẩn</string>
@@ -171,6 +175,8 @@
     <string name="customctrl_dynamicpos">Điểm động</string>
     <string name="customctrl_dynamicpos_x">Động X</string>
     <string name="customctrl_dynamicpos_y">Động Y</string>
+    <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
+    <string name="customctrl_transparency_text">Độ trong suốt của chữ</string>
     <string name="customctrl_keycombine">Kết hợp phím</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Control</string>
@@ -179,6 +185,7 @@
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
     <string name="main_options">Tùy chọn</string>
     <string name="main_play">Chơi</string>
+    <string name="main_welcome">Chào mừng, %s</string>
     <string name="main_infodev">Thông tin (DEV)</string>
     <string name="main_switchuser">Đổi người dùng</string>
     <string name="main_version">Phiên bản:</string>
