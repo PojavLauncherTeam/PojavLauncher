@@ -507,8 +507,15 @@ public final class Tools
                 List<DependentLibrary> libList = new ArrayList<DependentLibrary>(Arrays.asList(inheritsVer.libraries));
                 try {
                     for (DependentLibrary lib : customVer.libraries) {
-                        if (lib.clientreq || !lib.serverreq) {
-                            libList.add(lib);
+                        String libName = lib.name.substring(0, lib.name.lastIndexOf(":"));
+                        for (int i = 0; i < libList.size(); i++) {
+                            DependentLibrary libAdded = libList.get(i);
+                            String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
+                            if (libAddedName.equals(libName)) {
+                                libList.set(i, lib);
+                            } else {
+                                libList.add(lib);
+                            }
                         }
                     }
                 } finally {
