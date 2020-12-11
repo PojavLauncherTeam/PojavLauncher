@@ -19,7 +19,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         this.onCreate(savedInstanceState, true);
     }
     
