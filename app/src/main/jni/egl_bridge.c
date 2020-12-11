@@ -190,8 +190,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *e
     RegalMakeCurrent(potatoBridge.eglContext);
 }
 
+bool stopMakeCurrent;
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv *env, jclass clazz) {
-    return eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+    if (stopMakeCurrent) {
+        return JNI_FALSE;
+    }
+    
+    jboolean result = (jboolean) eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+    if (!result) {
+        if (eglGetError() == EGL_BAD_SURFACE) {
+            stopMakeCurrent = true;
+            closeGLFWWindow();
+        }
+    }
+    return result;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv *env, jclass clazz, jint interval) {
