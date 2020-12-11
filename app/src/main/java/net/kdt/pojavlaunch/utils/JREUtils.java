@@ -250,12 +250,14 @@ public class JREUtils
         Tools.getJavaArgs(ctx, javaArgList);
         javaArgList.addAll(args);
         
+        // For debugging only!
+/*
         StringBuilder sbJavaArgs = new StringBuilder();
         for (String s : javaArgList) {
             sbJavaArgs.append(s + " ");
         }
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
-
+*/
         JREUtils.setJavaEnvironment(ctx, null);
         JREUtils.initJavaRuntime();
         JREUtils.chdir(Tools.MAIN_PATH);
