@@ -59,5 +59,6 @@
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Журнал</string>
     <!-- Update part (unused now) -->
 </resources>
