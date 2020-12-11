@@ -11,6 +11,8 @@ import com.google.gson.*;
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.lang.reflect.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.*;
 import java.util.*;
 import java.util.zip.*;
@@ -669,7 +671,25 @@ public final class Tools
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }
-    
+    public abstract static class DownloaderFeedback {
+        public abstract void updateProgress(int curr, int max);
+    }
+    public static void downloadFileMonitored(String urlInput,String nameOutput, DownloaderFeedback monitor) throws IOException {
+        if(!new File(nameOutput).exists()){
+            new File(nameOutput).getParentFile().mkdirs();
+        }
+        HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
+        InputStream readStr = conn.getInputStream();
+        FileOutputStream fos = new FileOutputStream(new File(nameOutput));
+        int cur = 0; int oval=0; int len = conn.getContentLength(); byte[] buf = new byte[65535];
+        while((cur = readStr.read(buf)) != -1) {
+            oval += cur;
+            fos.write(buf,0,cur);
+            monitor.updateProgress(oval,len);
+        }
+        fos.close();
+        conn.disconnect();
+    }
     public static class ZipTool
     {
         private ZipTool(){}
