@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
+    <string name="app_motd">Menjalankan Minecraft: Java Edition Di Perangkat Anda!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">BANTUAN</string>
     <!-- Languages list part -->
@@ -38,10 +38,10 @@
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
-    <string name="alerttitle_installmod">Pilih sebuah mod untuk di tambah</string>
+    <string name="alerttitle_installmod">Pilih sebuah mod untuk di tambahkan</string>
     <string name="alerttitle_installoptifine">Pilih jar OptiFine</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher tiba-tiba crash!</string>
+    <string name="error_fatal">PojavLauncher tiba-tiba crash</string>
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
     <string name="error_load_version">Tidak bisa memuat versi! %s</string>
