@@ -513,8 +513,10 @@ public final class Tools
                             String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
                             if (libAddedName.equals(libName)) {
                                 libList.set(i, lib);
+                                break;
                             } else {
                                 libList.add(lib);
+                                break;
                             }
                         }
                     }
