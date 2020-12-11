@@ -50,7 +50,7 @@
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Permisi untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
+    <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
     <string name="toast_shiftmode">Mode tombol shift (menunduk) diganti menjadi %s</string>
