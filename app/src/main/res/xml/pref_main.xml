@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<androidx.preference.PreferenceScreen
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.preference.PreferenceScreen xmlns:app2="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.chom/apk/res-auto">
 	
     <androidx.preference.PreferenceCategory
 		android:title="@string/mcl_setting_category_general">
-		
+
         <net.kdt.pojavlaunch.prefs.UninstallJREDialogPreference
+            android:summary="@string/mcl_setting_subtitle_uninstalljre"
             android:title="@string/mcl_setting_title_uninstalljre"
-            android:summary="@string/mcl_setting_subtitle_uninstalljre" />
-		
+            app2:icon="@drawable/rm_jre" />
+
         <androidx.preference.SeekBarPreference
             android:key="timeLongPressTrigger"
+            android:summary="@string/mcl_setting_subtitle_longpresstrigger"
             android:title="@string/mcl_setting_title_longpresstrigger"
-            android:summary="@string/mcl_setting_subtitle_longpresstrigger" />
-		
+            app2:icon="@drawable/tap_len" />
+
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="freeform"
-			android:title="@string/mcl_setting_title_freeform"
-			android:summary="@string/mcl_setting_subtitle_freeform"/>
+            android:summary="@string/mcl_setting_subtitle_freeform"
+            android:title="@string/mcl_setting_title_freeform"
+            app2:icon="@drawable/freeform_opt" />
 
         <EditTextPreference
-			android:key="javaArgs"
-			android:title="@string/mcl_setting_title_javaargs"
-			android:summary="@string/mcl_setting_subtitle_javaargs"
-			android:dialogTitle="@string/mcl_setting_title_javaargs"
-            android:singleLine="true"/>
+            android:dialogTitle="@string/mcl_setting_title_javaargs"
+            android:icon="@drawable/jre_args"
+            android:key="javaArgs"
+            android:singleLine="true"
+            android:summary="@string/mcl_setting_subtitle_javaargs"
+            android:title="@string/mcl_setting_title_javaargs" />
 		
     </androidx.preference.PreferenceCategory>
 	
@@ -37,11 +41,12 @@
             android:key="buttonscale"
             android:title="@string/mcl_setting_title_buttonscale"
             android:summary="@string/mcl_setting_subtitle_buttonscale" />
-        
+
         <androidx.preference.SeekBarPreference
             android:key="mousescale"
+            android:summary="@string/mcl_setting_subtitle_mousescale"
             android:title="@string/mcl_setting_title_mousescale"
-            android:summary="@string/mcl_setting_subtitle_mousescale" />
+            app2:icon="@drawable/mouse_pointer" />
         
     </androidx.preference.PreferenceCategory>
 	
