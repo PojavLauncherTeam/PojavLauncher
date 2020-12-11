@@ -59,7 +59,6 @@ public final class Tools
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
         String launchClassPath = generateLaunchClassPath(profile.getVersion());
-        System.out.println("Java Classpath: " + launchClassPath);
 
         List<String> javaArgList = new ArrayList<String>();
         

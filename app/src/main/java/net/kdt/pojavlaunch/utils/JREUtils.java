@@ -249,6 +249,12 @@ public class JREUtils
         javaArgList.add(Tools.homeJreDir + "/bin/java");
         Tools.getJavaArgs(ctx, javaArgList);
         javaArgList.addAll(args);
+        
+        StringBuilder sbJavaArgs = new StringBuilder();
+        for (String s : javaArgList) {
+            sbJavaArgs.append(s + " ");
+        }
+        ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 
         JREUtils.setJavaEnvironment(ctx, null);
         JREUtils.initJavaRuntime();
