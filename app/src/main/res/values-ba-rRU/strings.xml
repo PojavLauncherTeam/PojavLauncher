@@ -33,6 +33,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_options">Опциялар</string>
     <!-- Global strings -->
@@ -61,6 +62,7 @@
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Журнал</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
