@@ -145,10 +145,10 @@
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
-    <string name="control_up">🔼</string>
+    <string name="control_up">▲</string>
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
-    <string name="control_down">🔽</string>
+    <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
