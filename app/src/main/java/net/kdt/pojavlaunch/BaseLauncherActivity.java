@@ -2,10 +2,11 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
-import androidx.appcompat.app.*;
 import android.text.*;
+import android.text.method.*;
 import android.view.*;
 import android.widget.*;
+import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
 import net.kdt.pojavlaunch.fragments.*;
@@ -79,8 +80,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                         case 4: { // About
                                 final AlertDialog.Builder aboutB = new AlertDialog.Builder(BaseLauncherActivity.this);
                                 aboutB.setTitle(R.string.mcl_option_about);
-                                try
-                                {
+                                try {
                                     aboutB.setMessage(Html.fromHtml(String.format(Tools.read(getAssets().open("about_en.txt")),
                                                                                   Tools.APP_NAME,
                                                                                   Tools.usingVerName,
@@ -90,7 +90,9 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                                     throw new RuntimeException(e);
                                 }
                                 aboutB.setPositiveButton(android.R.string.ok, null);
-                                aboutB.show();
+                                AlertDialog aboutDialog = aboutB.show();
+                                TextView aboutTv = aboutDialog.findViewById(android.R.id.message);
+                                aboutTv.setMovementMethod(LinkMovementMethod.getInstance());
                             } break;
                     }
                 }

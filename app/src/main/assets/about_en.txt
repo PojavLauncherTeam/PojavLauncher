@@ -22,5 +22,5 @@
  - This app is under development and will not be stable.<br>
  - This app is not affiliated with Minecraft, Mojang or Microsoft.<br><br>
  
-* Translators can be found at https://crowdin.com/project/pojavlauncher
+* Translators can be found at <a href="https://crowdin.com/project/pojavlauncher">Crowdin</a>
  
