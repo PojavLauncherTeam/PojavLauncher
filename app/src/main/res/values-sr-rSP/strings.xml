@@ -89,10 +89,12 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Изађи</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_zoom">Зумирање (Ц)</string>
     <string name="control_primary">При</string>
     <string name="control_secondary">Сек</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Лог Избацивано</string>
     <!-- Update part (unused now) -->
 </resources>
