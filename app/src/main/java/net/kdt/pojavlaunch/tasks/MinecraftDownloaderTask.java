@@ -18,7 +18,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
  {
     private BaseLauncherActivity mActivity;
     private boolean launchWithError = false;
-
+    MinecraftDownloaderTask thiz = this;
     public MinecraftDownloaderTask(BaseLauncherActivity activity) {
         mActivity = activity;
     }
@@ -35,7 +35,6 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         Throwable throwable = null;
         try {
             final String downVName = "/" + p1[0] + "/" + p1[0];
-
             //Downloading libraries
             String minecraftMainJar = Tools.versnDir + downVName + ".jar";
             JAssets assets = null;
@@ -48,9 +47,16 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 if (verInfo.url != null && !new File(verJsonDir).exists()) {
                     publishProgress("1", "Downloading " + p1[0] + " configuration...");
-                    Tools.downloadFile(
+
+                    Tools.downloadFileMonitored(
                         verInfo.url,
-                        verJsonDir
+                        verJsonDir,
+                            new Tools.DownloaderFeedback(){
+                                @Override
+                                public void updateProgress(int curr, int max) {
+                                    publishProgress("0", "Downloading " + p1[0] + " configuration ("+curr+"/"+max+")");
+                                }
+                            }
                     );
                 }
 
@@ -60,7 +66,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 File outLib;
                 String libPathURL;
 
-                setMax(verInfo.libraries.length + 4 + assets.objects.size());
+                setMax(verInfo.libraries.length);
+                zeroProgress();
                 for (final DependentLibrary libItem : verInfo.libraries) {
 
                     if (// libItem.name.startsWith("com.google.code.gson:gson") ||
@@ -98,9 +105,15 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                             }
                             try {
                                 libPathURL = libItem.downloads.artifact.url;
-                                Tools.downloadFile(
+                                Tools.downloadFileMonitored(
                                     libPathURL,
-                                    outLib.getAbsolutePath()
+                                    outLib.getAbsolutePath(),
+                                        new Tools.DownloaderFeedback() {
+                                            @Override
+                                            public void updateProgress(int curr, int max) {
+                                                publishProgress("0", mActivity.getString(R.string.mcl_launch_download_lib, libItem.name)+" ("+curr+"/"+max+") ");
+                                            }
+                                        }
                                 );
                             } catch (Throwable th) {
                                 if (!skipIfFailed) {
@@ -113,14 +126,21 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         }
                     }
                 }
-
+                setMax(3);
+                zeroProgress();
                 publishProgress("1", mActivity.getString(R.string.mcl_launch_download_client, p1[0]));
                 File minecraftMainFile = new File(minecraftMainJar);
                 if (!minecraftMainFile.exists() || minecraftMainFile.length() == 0l) {
                     try {
-                        Tools.downloadFile(
+                        Tools.downloadFileMonitored(
                             verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
-                            minecraftMainJar
+                            minecraftMainJar,
+                                new Tools.DownloaderFeedback() {
+                                    @Override
+                                    public void updateProgress(int curr, int max) {
+                                        publishProgress("0", mActivity.getString(R.string.mcl_launch_download_client, p1[0])+" ("+curr+"/"+max+") ");
+                                    }
+                                }
                         );
                     } catch (Throwable th) {
                         if (verInfo.inheritsFrom != null) {
@@ -161,6 +181,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     }
                 });
             publishProgress("1", mActivity.getString(R.string.mcl_launch_download_assets));
+            setMax(assets.objects.size());
+            zeroProgress();
             try {
                 downloadAssets(assets, verInfo.assets, new File(Tools.ASSETS_PATH));
             } catch (Exception e) {
@@ -262,7 +284,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         mActivity.mTask = null;
     }
 
-    public static final String MINECRAFT_RES = "http://resources.download.minecraft.net/";
+    public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
 
     public JAssets downloadIndex(String versionName, File output) throws Throwable {
         if (!output.exists()) {

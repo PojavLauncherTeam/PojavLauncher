@@ -139,6 +139,7 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
 }
 
 void closeGLFWWindow() {
+    /*
     jclass glfwClazz = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW");
     assert(glfwClazz != NULL);
     jmethodID glfwMethod = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, glfwMethod, "glfwSetWindowShouldClose", "(JZ)V");
@@ -149,6 +150,8 @@ void closeGLFWWindow() {
         glfwClazz, glfwMethod,
         (jlong) showingWindow, JNI_TRUE
     );
+    */
+    exit(-1);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueueBool) {
