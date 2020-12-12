@@ -180,10 +180,12 @@ public class AndroidLWJGLKeycode {
 
         try {
             if (!CallbackBridge.isGrabbing()) {
-                if (keyEvent.isPrintingKey()) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
-                } else if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
+                if (keyEvent.getKeyCode() != KeyEvent.KEYCODE_UNKNOWN) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
+                } else {
+                    for (char c : keyEvent.getCharacters().toCharArray()) {
+                        BaseMainActivity.sendKeyPress(-1 /* GLFW_KEY_UNKNOWN */, c, keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
+                    }
                 }
             }
         } catch (Throwable th) {
