@@ -40,6 +40,14 @@
 #define FULL_VERSION "1.8.0-internal"
 #define DOT_VERSION "1.8"
 
+static const char* const_progname = "java";
+static const char* const_launcher = "openjdk";
+static const char** const_jargs = NULL;
+static const char** const_appclasspath = NULL;
+static const jboolean const_javaw = JNI_FALSE;
+static const jboolean const_cpwildcard = JNI_TRUE;
+static const jint const_ergo_class = 0; // DEFAULT_POLICY
+
 typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
 
 typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
@@ -55,7 +63,7 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
         jint ergo                               /* ergonomics class policy */
 );
 
-static jint launchJVM(int argc, char** argv) {
+static jint launchJVM(int margc, char** margv) {
    void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
    
    // Boardwalk: silence
@@ -78,10 +86,21 @@ static jint launchJVM(int argc, char** argv) {
 
    LOGD("Calling JLI_Launch");
 
+   return pJLI_Launch(margc, margv,
+                   sizeof(const_jargs) / sizeof(char *), const_jargs,
+                   sizeof(const_appclasspath) / sizeof(char *), const_appclasspath,
+                   FULL_VERSION,
+                   DOT_VERSION,
+                   (const_progname != NULL) ? const_progname : *margv,
+                   (const_launcher != NULL) ? const_launcher : *margv,
+                   (const_jargs != NULL) ? JNI_TRUE : JNI_FALSE,
+                   const_cpwildcard, const_javaw, const_ergo_class);
+/*
    return pJLI_Launch(argc, argv, 
        0, NULL, 0, NULL, FULL_VERSION,
-       DOT_VERSION, *argv, *argv, /* "java", "openjdk", */
+       DOT_VERSION, *margv, *margv, // "java", "openjdk",
        JNI_FALSE, JNI_TRUE, JNI_FALSE, 0);
+*/
 }
 
 /*
