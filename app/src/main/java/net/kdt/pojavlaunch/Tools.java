@@ -509,8 +509,8 @@ public final class Tools
                 try {
                     for (DependentLibrary lib : customVer.libraries) {
                         String libName = lib.name.substring(0, lib.name.lastIndexOf(":"));
-                        for (int i = 0; i < libList.size(); i++) {
-                            DependentLibrary libAdded = libList.get(i);
+                        for (int i = 0; i < inheritsVer.libraries.length; i++) {
+                            DependentLibrary libAdded = inheritsVer.libraries[i];
                             String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
                             
                             System.out.println("Equals? " + lib.name + " and " + libAdded.name);
