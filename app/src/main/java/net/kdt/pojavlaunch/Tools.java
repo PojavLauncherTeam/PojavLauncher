@@ -260,7 +260,7 @@ public final class Tools
         }
         for (String perJar : classpath) {
             if (!new File(perJar).exists()) {
-                System.out.println("ClassPathGen: ignored non-exists file: " + perJar);
+                Log.d(APP_NAME, "Ignored non-exists file: " + perJar);
                 continue;
             }
             libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
@@ -513,6 +513,9 @@ public final class Tools
                             DependentLibrary libAdded = libList.get(i);
                             String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
                             if (libAddedName.equals(libName)) {
+                                Log.d(APP_NAME, "Library " + libName + ": Replaced version " + 
+                                    libName.substring(libName.lastIndexOf(":") + 1) + " with " +
+                                    libAddedName.substring(libAddedName.lastIndexOf(":") + 1));
                                 libList.set(i, lib);
                                 break;
                             } else {
