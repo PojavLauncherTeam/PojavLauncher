@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Přeskočit</string>
     <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
+    <string name="login_microsoft">Microsoft přihlášení</string>
     <string name="login_select_account">Vybrat účet</string>
     <!-- Hint -->
     <string name="hint_select_account">Chcete-li vybrat, klepněte na to. Chcete-li účet odstranit, podržte jej.</string>
