@@ -512,6 +512,8 @@ public final class Tools
                         for (int i = 0; i < libList.size(); i++) {
                             DependentLibrary libAdded = libList.get(i);
                             String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
+                            
+                            System.out.println("Equals? " + lib.name + " and " + libAdded.name);
                             if (libAddedName.equals(libName)) {
                                 Log.d(APP_NAME, "Library " + libName + ": Replaced version " + 
                                     libName.substring(libName.lastIndexOf(":") + 1) + " with " +
