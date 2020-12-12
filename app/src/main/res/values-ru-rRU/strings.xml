@@ -132,7 +132,7 @@
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_crash">Обнаружен сбой игры! Нажмите кнопку ОК, чтобы выйти.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
-    <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
+    <string name="mcn_exit_confirm">Вы уверены, что хотите закрыть игру и выйти на главную лаунчера?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовместима с Java Runtime %2$s.</string>
     <string name="mcn_check_fail_java">Не удалось запустить тестовую Java VM. Проверьте %s для получения дополнительной информации.</string>
@@ -158,7 +158,7 @@
     <string name="control_mouseoff">Мышь: Выкл</string>
     <string name="control_mouseon">Мышь: Вкл </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Принудительное закрытие</string>
+    <string name="control_forceclose">Закрыть игру</string>
     <string name="control_viewout">Показать вывод журнала</string>
     <string name="control_adebug">Отладка ввода</string>
     <string name="control_customkey">Отправить потловательскую раскладку</string>
