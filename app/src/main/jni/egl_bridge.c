@@ -65,6 +65,10 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIE
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
+    return JNI_TRUE;
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
     static const EGLint ctx_attribs[] = {
         EGL_CONTEXT_CLIENT_VERSION, 2,
         EGL_NONE
@@ -148,15 +152,11 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         printf("EGLBridge: OpenGL ES from eglQueryContext: %i\n", val);
         // assert(val >= 2);
     }
-    
-    return JNI_TRUE;
-}
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
     printf("EGLBridge: Making current\n");
     printf("EGLBridge: ThreadID=%d, WindowID=%p\n", gettid(), window);
     printf("EGLBridge: EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
-        window==0 ? EGL_NO_CONTEXT : potatoBridge.eglContext,
+        /* window==0 ? EGL_NO_CONTEXT : */ potatoBridge.eglContext,
         potatoBridge.eglDisplay,
         potatoBridge.eglSurface 
     );
@@ -165,7 +165,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         potatoBridge.eglDisplay,
         potatoBridge.eglSurface,
         potatoBridge.eglSurface,
-        window==0 ? EGL_NO_CONTEXT : potatoBridge.eglContext
+        /* window==0 ? EGL_NO_CONTEXT : */ potatoBridge.eglContext
     );
 	if (success == EGL_FALSE) {
 		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
