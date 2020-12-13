@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Passer</string>
     <string name="login_error_short_username">Un nom d\'utilisateur doit contenir 3 caractères au minimum</string>
     <string name="login_error_exist_username">Cet utilisateur existe déjà</string>
+    <string name="login_microsoft">Connection Microsoft</string>
     <string name="login_select_account">Sélectionner un compte</string>
     <!-- Hint -->
     <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
