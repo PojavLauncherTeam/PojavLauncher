@@ -218,7 +218,7 @@ public class PojavLoginActivity extends BaseActivity
             String line;
             while ((line = reader.readLine()) != null) {
                 File currFile = new File("/" + line);
-                System.out.println(currFile.getAbsolutePath());
+                // System.out.println(currFile.getAbsolutePath());
                 if (currFile.getAbsolutePath().contains("/values-") || currFile.getName().startsWith("values-")) {
                     // TODO use regex(?)
                     langAdapter.add(new DisplayableLocale(currFile.getName().replace("values-", "").replace("-r", "-")));
@@ -371,7 +371,7 @@ public class PojavLoginActivity extends BaseActivity
         String forgeSplashContent = "enabled=true";
         try {
             if (forgeSplashFile.exists()) {
-                forgeSplashContent = Tools.read(forgeSplashFile.toString());
+                forgeSplashContent = Tools.read(forgeSplashFile.getAbsolutePath());
             }
             if (forgeSplashContent.contains("enabled=true")) {
                 Tools.write(forgeSplashFile.getAbsolutePath(),
@@ -386,7 +386,7 @@ public class PojavLoginActivity extends BaseActivity
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
-            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless.jar", Tools.MAIN_PATH + "/config", "forge-installer-headless.jar", true);
+            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar", Tools.MAIN_PATH + "/config", "forge-installer-headless.jar", true);
             
             Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
             
