@@ -166,7 +166,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         } else if (InstallerDetector.isForge1p12p2(installer)) {
             appendlnToLog("Detected Forge Installer 1.12.2!");
             return new Legacy1p12p2ForgeInstaller(installer).install(this);
-        } else if (InstallerDetector.isForge1p12p2(installer)) {
+        } else if (InstallerDetector.isForgeNew(installer)) {
             appendlnToLog("Detected Forge Installer 1.13 or above!");
             return new NewForgeInstaller(installer).install(this);
         } else if (InstallerDetector.isFabric(installer)) {
