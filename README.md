@@ -9,7 +9,7 @@
 - [Current status](#current-status)
 - [License](#license)
 - [Contributing](#contributing)
-- [Credits & Third party components and their licenses](#credits--third-party-components-and-its-licenses)
+- [Credits & Third party components and their licenses](#credits--third-party-components-and-their-licenses)
 
 
 ## Introduction
