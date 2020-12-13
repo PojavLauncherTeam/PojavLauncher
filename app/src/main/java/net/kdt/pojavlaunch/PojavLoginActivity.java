@@ -363,18 +363,18 @@ public class PojavLoginActivity extends BaseActivity
         mkdirs(Tools.mpProfiles);
         
         mkdirs(Tools.MAIN_PATH);
+        mkdirs(Tools.MAIN_PATH + "/config");
         mkdirs(Tools.MAIN_PATH + "/lwjgl3");
         mkdirs(Tools.MAIN_PATH + "/mods");
         
         File forgeSplashFile = new File(Tools.MAIN_PATH, "config/splash.properties");
-        forgeSplashFile.mkdir();
         String forgeSplashContent = "enabled=true";
         try {
             if (forgeSplashFile.exists()) {
                 forgeSplashContent = Tools.read(forgeSplashFile.toString());
             }
             if (forgeSplashContent.contains("enabled=true")) {
-                Tools.write(forgeSplashFile.toString(),
+                Tools.write(forgeSplashFile.getAbsolutePath(),
                     forgeSplashContent.replace("enabled=true", "enabled=false"));
             }
         } catch (IOException e) {
@@ -384,8 +384,9 @@ public class PojavLoginActivity extends BaseActivity
         mkdirs(Tools.CTRLMAP_PATH);
         
         try {
-            AssetManager am = this.getAssets();
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
+
+            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless.jar", Tools.MAIN_PATH + "/config", "forge-installer-headless.jar", true);
             
             Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
             
@@ -393,6 +394,8 @@ public class PojavLoginActivity extends BaseActivity
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
 
+            AssetManager am = this.getAssets();
+            
             InputStream is = am.open("components/lwjgl3/version");
             if(!new File(Tools.MAIN_PATH + "/lwjgl3/version").exists()) {
                 Log.i("LWJGL3Prep","Pack was installed manually, or does not exist, unpacking new...");

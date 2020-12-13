@@ -312,24 +312,19 @@ public final class Tools
         return (scaledDp * currentDisplayMetrics.density);
     }
 
-    public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws Exception
-    {
+    public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws IOException {
         copyAssetFile(ctx, fileName, output, fileName, overwrite);
     }
 
-    public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws Exception
+    public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws IOException
     {
-        try {
-            File file = new File(output);
-            if(!file.exists()) {
-                file.mkdirs();
-            }
-            File file2 = new File(output, outputName);
-            if(!file2.exists() || overwrite){
-                write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
-            }
-        } catch (Throwable th) {
-            throw new RuntimeException("Unable to copy " + fileName + " to " + output + "/" + outputName, th);
+        File file = new File(output);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+        File file2 = new File(output, outputName);
+        if(!file2.exists() || overwrite){
+            write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
         }
     }
 /*
