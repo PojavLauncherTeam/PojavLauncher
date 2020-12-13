@@ -22,7 +22,6 @@
     <string name="login_offline_alert_skip">Pomiń</string>
     <string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
-    <string name="login_microsoft">€</string>
     <string name="login_select_account">Wybierz konto</string>
     <!-- Hint -->
     <string name="hint_select_account">Aby wybrać, kliknij. Aby usunąć konto, przytrzymaj ręcznie.</string>
