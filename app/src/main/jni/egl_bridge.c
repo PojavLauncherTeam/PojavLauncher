@@ -76,8 +76,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
    
     if (potatoBridge.eglContext != EGL_NO_CONTEXT) {
         eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+/*
         potatoBridge.eglContextOld = potatoBridge.eglContext;
         potatoBridge.eglContext = eglCreateContext(potatoBridge.eglDisplay, config, potatoBridge.eglContextOld, ctx_attribs);
+*/
     } else {
         if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
             potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -88,7 +90,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         }
     
         printf("EGLBridge: Initializing\n");
-        printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
+        // printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
     
         if (!eglInitialize(potatoBridge.eglDisplay, NULL, NULL)) {
             printf("EGLBridge: Error eglInitialize() failed\n");
