@@ -507,24 +507,23 @@ public final class Tools
 
                 List<DependentLibrary> libList = new ArrayList<DependentLibrary>(Arrays.asList(inheritsVer.libraries));
                 try {
+                    loop_1:
                     for (DependentLibrary lib : customVer.libraries) {
                         String libName = lib.name.substring(0, lib.name.lastIndexOf(":"));
-                        for (int i = 0; i < inheritsVer.libraries.length; i++) {
-                            DependentLibrary libAdded = inheritsVer.libraries[i];
+                        for (int i = 0; i < libList.size(); i++) {
+                            DependentLibrary libAdded = libList.get(i);
                             String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
                             
-                            System.out.println("Equals? " + lib.name + " and " + libAdded.name);
                             if (libAddedName.equals(libName)) {
                                 Log.d(APP_NAME, "Library " + libName + ": Replaced version " + 
                                     libName.substring(libName.lastIndexOf(":") + 1) + " with " +
                                     libAddedName.substring(libAddedName.lastIndexOf(":") + 1));
                                 libList.set(i, lib);
-                                break;
-                            } else {
-                                libList.add(lib);
-                                break;
+                                continue loop_1;
                             }
                         }
+
+                        libList.add(lib);
                     }
                 } finally {
                     inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
