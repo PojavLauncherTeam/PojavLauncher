@@ -16,6 +16,6 @@ public class NewForgeInstaller extends BaseInstaller
 
         ctx.appendlnToLog("Launching JVM");
         return ctx.launchJavaRuntime(null,
-            "-cp " + Tools.MAIN_PATH + "/config/forge-installer-headless.jar:" + mFile.getAbsolutePath() + " --installClient .");
+            "-cp " + Tools.MAIN_PATH + "/config/forge-installer-headless.jar:" + mFile.getAbsolutePath() + " me.xfl03.HeadlessInstaller --installClient .");
     }
 }
