@@ -108,6 +108,9 @@ public final class Tools
 
         overrideableArgList.add("-Dnet.minecraft.clientmodname=" + Tools.APP_NAME);
         
+        // Disable FML Early Loading Screen to get Forge 1.14+ works
+        overrideableArgList.add("-Dfml.earlyprogresswindow", "false");
+        
         // Override args
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             for (int i = 0; i < overrideableArgList.size(); i++) {
