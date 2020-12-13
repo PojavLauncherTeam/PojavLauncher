@@ -9,7 +9,7 @@
 - [Current status](#current-status)
 - [License](#license)
 - [Contributing](#contributing)
-- [Credits & Third party components and it's licenses](#credits--third-party-components-and-its-licenses)
+- [Credits & Third party components and their licenses](#credits--third-party-components-and-its-licenses)
 
 
 ## Introduction
@@ -55,9 +55,9 @@ scripts\languagelist_updater.bat
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
 ## Contributing
-Contributing are welcome! We welcome any type of contribution, not only code. Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
+Contributions are welcome! We welcome any type of contribution, not only code. Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
-## Credits & Third party components and it's licenses
+## Credits & Third party components and their licenses
 - [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
 - Android Support Libraries: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
 - [GL4ES](https://github.com/ptitSeb/gl4es): [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
