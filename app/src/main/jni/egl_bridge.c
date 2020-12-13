@@ -75,6 +75,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
     };
    
     if (potatoBridge.eglContext != EGL_NO_CONTEXT) {
+        eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         potatoBridge.eglContextOld = potatoBridge.eglContext;
         potatoBridge.eglContext = eglCreateContext(potatoBridge.eglDisplay, config, potatoBridge.eglContextOld, ctx_attribs);
     } else {
