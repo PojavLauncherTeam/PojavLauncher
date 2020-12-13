@@ -13,7 +13,7 @@
 
 
 ## Introduction
-PojavLauncher is a Minecraft: Java Edition launcher for Android based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher can launch a variety large of Minecraft versions (from 1.6 to latest 1.17 snapshot, even Combat Test versions). Modding via Forge and Fabric is also supported,  but Forge is currently limited to 1.13.2 and below.
+PojavLauncher is a Minecraft: Java Edition launcher for Android based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher can launch a variety large of Minecraft versions (from 1.6 to latest 1.17 snapshot, even Combat Test versions). Modding via Forge and Fabric are also supported.
 
 ## Building
 Will be moved to **BUILDING.md**
