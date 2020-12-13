@@ -558,7 +558,7 @@ public class PojavLoginActivity extends BaseActivity
 
     private void uncompressTarXZ(final File tarFile, final File dest) throws IOException {
 
-        dest.mkdir();
+        dest.mkdirs();
         TarArchiveInputStream tarIn = null;
 
         tarIn = new TarArchiveInputStream(
