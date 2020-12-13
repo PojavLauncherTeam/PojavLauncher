@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 #include <EGL/egl.h>
 
@@ -153,6 +154,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
     printf("EGLBridge: Making current\n");
+    printf("EGLBridge: ThreadID=%d, WindowID=%p\n", gettid(), window);
     printf("EGLBridge: EGLContext=%p, EGLDisplay=%p, EGLSurface=%p\n",
         !window ? EGL_NO_CONTEXT : potatoBridge.eglContext,
         potatoBridge.eglDisplay,
@@ -163,7 +165,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         potatoBridge.eglDisplay,
         potatoBridge.eglSurface,
         potatoBridge.eglSurface,
-        !window ? EGL_NO_CONTEXT : potatoBridge.eglContext
+        window==0 ? EGL_NO_CONTEXT : potatoBridge.eglContext
     );
 	if (success == EGL_FALSE) {
 		printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
