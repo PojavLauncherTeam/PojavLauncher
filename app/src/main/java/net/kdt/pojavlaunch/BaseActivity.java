@@ -18,4 +18,10 @@ public class BaseActivity extends AppCompatActivity
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleUtils.setLocale(base));
     }
+
+    @Override
+    public void startActivity(Intent i) {
+        super.startActivity(i);
+        new Throwable("StartActivity").printStackTrace();
+    }
 }
