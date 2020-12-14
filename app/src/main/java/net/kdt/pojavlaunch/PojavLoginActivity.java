@@ -428,10 +428,6 @@ public class PojavLoginActivity extends BaseActivity
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
                 }
             }
-            if(new File(Tools.homeJreDir+"/versions").isDirectory()) {
-               FileUtils.deleteDirectory(new File(Tools.homeJreDir+"/versions"));
-               Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/","version", true);
-            }
             if (!isJavaRuntimeInstalled(am)) {
                 if(!installRuntimeAutomatically(am)) {
                     File jreTarFile = selectJreTarFile();
