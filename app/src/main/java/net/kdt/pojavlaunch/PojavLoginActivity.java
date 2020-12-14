@@ -430,7 +430,7 @@ public class PojavLoginActivity extends BaseActivity
             }
             if(new File(Tools.homeJreDir+"/versions").isDirectory()) {
                FileUtils.deleteDirectory(new File(Tools.homeJreDir+"/versions"));
-               Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/",s, true);
+               Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/","version", true);
             }
             if (!isJavaRuntimeInstalled(am)) {
                 if(!installRuntimeAutomatically(am)) {
@@ -438,7 +438,7 @@ public class PojavLoginActivity extends BaseActivity
                     uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
                 }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
-                Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/",s, true);
+                Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/","version", true);
             }
             
             JREUtils.relocateLibPath(this);
