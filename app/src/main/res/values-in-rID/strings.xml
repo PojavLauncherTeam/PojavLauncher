@@ -104,6 +104,7 @@
     <string name="global_save">Simpan</string>
     <string name="global_unpacking">Membongkar %s</string>
     <string name="global_error_field_empty">Tempat ini tidak boleh kosong.</string>
+    <string name="global_waiting">Tunggu</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,6 +166,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Mengedit %s</string>
     <string name="customctrl_remove">Hapus %s?</string>
     <string name="customctrl_keyname">Kode kunci</string>
     <string name="customctrl_specialkey">Kunci spesial</string>
@@ -177,6 +179,7 @@
     <string name="customctrl_transparency_text">Transparansi teks</string>
     <string name="customctrl_keycombine">Kombinasi kunci</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
     <string name="customctrl_selectdefault">Pilih json kontrol default</string>
