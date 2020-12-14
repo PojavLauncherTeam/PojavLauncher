@@ -173,7 +173,6 @@
     <string name="customctrl_dynamicpos_y">Y Dinâmico</string>
     <string name="customctrl_keycombine">Combinação de teclas</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Control</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
     <string name="customctrl_selectdefault">Selecione o json de Control padrão</string>
