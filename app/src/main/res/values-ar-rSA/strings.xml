@@ -1,21 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">(PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">تشغيل ماين كرافت: إصدار الجافا في جهازك!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">مساعدة</string>
     <!-- Languages list part -->
+    <string name="language_name">الإنجليزية - الولايات المتحدة</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
+    <string name="login_online_username_question">(ايهما أستخدم؟)</string>
+    <string name="login_online_password_hint">كلمة المرور</string>
+    <string name="login_online_password_question">نسيت كلمة المرور؟</string>
+    <string name="login_online_remember">تذكرني عند الدخول مرة اخرى؟</string>
+    <string name="login_online_check_keeplogin">أبق تسجيل دخولي</string>
+    <string name="login_online_login_label">تسجيل الدخول</string>
+    <string name="login_online_create_account">تسجيل حساب جديد</string>
+    <string name="login_offline_switch">حساب غير متصل؟</string>
+    <string name="login_offline_label">تسجيل الدخول كحساب غير متصل</string>
+    <string name="login_offline_alert_skip">تخطي</string>
+    <string name="login_error_short_username">يجب أن يحتوي اسم المستخدم على 3 أحرف على الأقل</string>
+    <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
+    <string name="login_select_account">اختر الحساب</string>
     <!-- Hint -->
+    <string name="hint_select_account">للتحديد، انقر عليه. لحذف حساب، ثبت الضغط عليه.</string>
     <!-- Warnings -->
+    <string name="warning_action_exit">خروج</string>
+    <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">حدد خريطة مفتاحية بصيغة json</string>
     <!-- Error messages -->
+    <string name="error_fatal">لقد توقف PojavLauncher بشكل غير متوقع</string>
+    <string name="error_checklog">خطأ! الرجاء التحقق من السجل في الأسفل: %s</string>
+    <string name="error_no_version">لا يوجد اصدار!</string>
+    <string name="error_load_version">تعذر تحميل الإصدار %s</string>
+    <string name="error_show_more">اظهر المزيد</string>
+    <string name="error_show_less">أظهِر أقل</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">مطلوب إذن القراءة و الكتابة للتخزين!</string>
+    <string name="toast_login_error">حدث خطأ ما بعد تسجيل الدخول. يرجى التعليق للمطور.\nخطأ: %s</string>
+    <string name="toast_optifine_success">تم التثبيت بنجاح</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
+    <string name="mcl_tab_console">وحدة التحكم البرمجية</string>
+    <string name="mcl_tab_crash">سجل توقف العمل</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
+    <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
+    <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
+    <string name="mcl_launch_download_lib">جار تحميل ملفات المكتبة %s</string>
+    <string name="mcl_launch_download_client">جار تحميل ماين كرافت %s</string>
+    <string name="mcl_launch_convert_lib">جار تحويل المكتبة %s</string>
+    <string name="mcl_launch_convert_client">جار تحويل ماين كرافت %s</string>
+    <string name="mcl_launch_patch_client">جار تصحيح ماين كرافت %s</string>
+    <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
+    <string name="mcl_options">الخيارات</string>
+    <string name="mcl_option_about">حول التطبيق</string>
     <!-- Global strings -->
+    <string name="global_remove">إزالة</string>
+    <string name="global_restart">اعادة تشغيل</string>
+    <string name="global_save">حفظ</string>
+    <string name="global_error_field_empty">لا يمكن لهذه الخانة ان تكون فارغة</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -39,10 +88,43 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">خروج</string>
+    <string name="mcn_exit_crash">تم اكتشاف توقف في اللعبة! انقر موافق للخروج.</string>
+    <string name="mcn_exit_errcrash">غير قادر على تحديد موقع التوقف! يمكنك تجاهل هذا.</string>
+    <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">التحكمات</string>
+    <string name="control_toggle">واجهة المستخدم الرسومية</string>
+    <string name="control_keyboard">لوحة المفاتيح</string>
+    <string name="control_chat">دردشة</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_zoom">تكبير (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">الفأرة</string>
+    <string name="control_mouseoff">وضع الفأرة: موقفة</string>
+    <string name="control_mouseon">وضع الفأرة: مفعلة </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">فرض الإغلاق</string>
+    <string name="control_viewout">سجل الإخراج</string>
+    <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_keyname">رمز مفتاحي</string>
+    <string name="customctrl_specialkey">مفتاح خاص</string>
+    <string name="customctrl_hidden">مخفي</string>
+    <string name="customctrl_addbutton">إضافة زر</string>
+    <string name="customctrl_selectdefault">حدد رمز تحكم اعتيادي بصيغة json</string>
+    <string name="main_options">الخيارات</string>
+    <string name="main_play">ابدآ اللعب</string>
+    <string name="main_infodev">معلومات (المطورين)</string>
+    <string name="main_switchuser">تبديل الحساب</string>
+    <string name="main_version">الإصدار:</string>
+    <string name="main_nocrash">لم يتم اكتشاف توقف</string>
+    <string name="main_nolog">لا توجد سجلات.</string>
 </resources>
