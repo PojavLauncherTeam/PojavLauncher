@@ -104,7 +104,6 @@
     <string name="global_save">Uložit</string>
     <string name="global_unpacking">Rozbalování %s</string>
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
-    <string name="global_waiting">Čekám</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -166,7 +165,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Upravit %s</string>
     <string name="customctrl_remove">Odstranit %s?</string>
     <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_specialkey">Speciální písmeno</string>
@@ -179,7 +177,6 @@
     <string name="customctrl_transparency_text">Průhlednost textu</string>
     <string name="customctrl_keycombine">Kombinace kláves</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
