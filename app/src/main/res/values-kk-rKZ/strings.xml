@@ -104,7 +104,6 @@
     <string name="global_save">Сақтау</string>
     <string name="global_unpacking">%s ашылуда</string>
     <string name="global_error_field_empty">Бұл өріс бос болмауы міндетті</string>
-    <string name="global_waiting">Күтуде</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -166,7 +165,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">%s өңдеу</string>
     <string name="customctrl_remove">%s алып тастайсыз ба?</string>
     <string name="customctrl_keyname">Перне коды</string>
     <string name="customctrl_specialkey">Арнайы перне</string>
@@ -179,7 +177,6 @@
     <string name="customctrl_transparency_text">Мәтін мөлдірлігі</string>
     <string name="customctrl_keycombine">Перне комбинациясы</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Батырма қосу</string>
     <string name="customctrl_selectdefault">Ctrl-дың әдепкі json-ын таңдау</string>
