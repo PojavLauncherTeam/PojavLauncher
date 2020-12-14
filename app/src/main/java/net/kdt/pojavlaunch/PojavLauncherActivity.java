@@ -80,18 +80,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         tvUsernameView = (TextView) findViewById(R.id.launchermain_text_welcome);
         mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
-        try {
-            profilePath = PojavProfile.getCurrentProfilePath(this);
-            mProfile = PojavProfile.getCurrentProfileContent(this);
-
-            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.getUsername()));
-        } catch(Exception e) {
-            //Tools.throwError(this, e);
-            e.printStackTrace();
-            Toast.makeText(this, getString(R.string.toast_login_error, e.getMessage()), Toast.LENGTH_LONG).show();
-            finish();
-        }
-
+        pickAccount();
+        
+/*
         File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
         if (logFile.exists() && logFile.length() < 20480) {
             String errMsg = "Error occurred during initialization of ";
@@ -110,7 +101,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 Log.w(Tools.APP_NAME, "Could not detect java crash", th);
             }
         }
-
+*/
         //showProfileInfo();
 
         final List<String> accountList = new ArrayList<String>();
@@ -142,8 +133,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 } else {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
-                finish();
-                startActivity(getIntent());
+                pickAccount();
             }
 
             @Override
@@ -210,6 +200,19 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         if (tabLayout.getSelectedTabPosition() != pageIndex) {
             tabLayout.setScrollPosition(pageIndex,0f,true);
             viewPager.setCurrentItem(pageIndex);
+        }
+    }
+    
+    private void pickAccount() {
+        try {
+            profilePath = PojavProfile.getCurrentProfilePath(this);
+            mProfile = PojavProfile.getCurrentProfileContent(this);
+
+            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.getUsername()));
+        } catch(Exception e) {
+            profilePath = "";
+            mProfile = new MCProfile.Builder();
+            Tools.showError(this, e, true);
         }
     }
 
