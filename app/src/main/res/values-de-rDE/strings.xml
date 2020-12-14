@@ -104,7 +104,7 @@
     <string name="global_save">Speichern</string>
     <string name="global_unpacking">Entpacken von %s</string>
     <string name="global_error_field_empty">Dieses Feld darf nicht leer sein</string>
-    <string name="global_waiting">Bitte warte einen Moment</string>
+    <string name="global_waiting">Bitte warte einen kleinen Moment</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
