@@ -428,14 +428,17 @@ public class PojavLoginActivity extends BaseActivity
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
                 }
             }
-
+            if(new File(Tools.homeJreDir+"/versions").isDirectory()) {
+               FileUtils.deleteDirectory(new File(Tools.homeJreDir+"/versions"));
+               Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/",s, true);
+            }
             if (!isJavaRuntimeInstalled(am)) {
                 if(!installRuntimeAutomatically(am)) {
                     File jreTarFile = selectJreTarFile();
                     uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
                 }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
-                Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/version", true);
+                Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/",s, true);
             }
             
             JREUtils.relocateLibPath(this);
