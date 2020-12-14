@@ -135,19 +135,15 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
         }
         accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            private boolean isCalled;
             @Override
             public void onItemSelected(AdapterView<?> p1, View p2, int position, long p4) {
-                if (!isCalled) {
-                    isCalled = true;
-                    if (tempProfile != null && position == 0) {
-                        PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
-                    } else {
-                        PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList.get(position + (tempProfile != null ? 1 : 0)));
-                    }
-                    finish();
-                    startActivity(getIntent());
+                if (tempProfile != null && position == 0) {
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
+                } else {
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
+                finish();
+                startActivity(getIntent());
             }
 
             @Override
