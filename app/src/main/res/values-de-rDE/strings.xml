@@ -104,6 +104,7 @@
     <string name="global_save">Speichern</string>
     <string name="global_unpacking">Entpacken von %s</string>
     <string name="global_error_field_empty">Dieses Feld darf nicht leer sein</string>
+    <string name="global_waiting">Warten Sie bitte kurz</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,6 +166,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Editiere %s</string>
     <string name="customctrl_remove">Soll %s entfernt werden?</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Spezielle Taste</string>
@@ -177,6 +179,7 @@
     <string name="customctrl_transparency_text">Text-Transparenz</string>
     <string name="customctrl_keycombine">Tastenkombination</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Strg</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Taste hinzufügen</string>
     <string name="customctrl_selectdefault">Standard-Kontroll-json auswählen</string>
