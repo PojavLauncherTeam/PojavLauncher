@@ -27,7 +27,7 @@ Will be moved to **BUILDING.md**
 - **Coming soon**
 
 ### The Launcher
-- Because languages are auto added by Crowdin, so need to run language list generator before build. In this directory, run:
+- Because languages are auto added by Crowdin, so need to run language list generator before building. In this directory, run:
 ```
 # On Linux, Mac OS:
 chmod +x scripts/languagelist_updater.sh
