@@ -31,7 +31,7 @@
     <string name="warning_action_exit">Выйти</string>
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Установить Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre" comment="alerttitle_install_jre&#10;AlertDialog title&#10;%s is replaced by the architecture of the device ">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку (.json)</string>
     <string name="alerttitle_installmod">Выберите установщик мода</string>
     <!-- Error messages -->
