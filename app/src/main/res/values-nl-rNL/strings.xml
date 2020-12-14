@@ -104,7 +104,6 @@
     <string name="global_save">Opslaan</string>
     <string name="global_unpacking">Uitpakken %s</string>
     <string name="global_error_field_empty">Dit veld mag niet leeg zijn</string>
-    <string name="global_waiting">Aan het wachten</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -166,7 +165,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Bewerk %s</string>
     <string name="customctrl_remove">Verwijderen %s?</string>
     <string name="customctrl_keyname">Toetscode</string>
     <string name="customctrl_specialkey">Speciale sleutel</string>
@@ -179,7 +177,6 @@
     <string name="customctrl_transparency_text">Teksttransparantie</string>
     <string name="customctrl_keycombine">Toetsencombinatie</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Control</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Knop toevoegen</string>
     <string name="customctrl_selectdefault">Selecteer standaard Control json</string>
