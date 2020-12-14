@@ -104,7 +104,6 @@
     <string name="global_save">저장</string>
     <string name="global_unpacking">압축 해제 중 %s</string>
     <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
-    <string name="global_waiting">기다리는 중</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -166,7 +165,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">%s 수정</string>
     <string name="customctrl_remove">%s(을)를 제거하시겠습니까?</string>
     <string name="customctrl_keyname">키</string>
     <string name="customctrl_specialkey">특수 키</string>
@@ -179,7 +177,6 @@
     <string name="customctrl_transparency_text">텍스트 투명도</string>
     <string name="customctrl_keycombine">키 조합</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Control</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">버튼 추가</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
