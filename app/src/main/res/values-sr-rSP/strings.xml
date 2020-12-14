@@ -104,7 +104,6 @@
     <string name="global_save">Сачувај</string>
     <string name="global_unpacking">Распакивање %s</string>
     <string name="global_error_field_empty">Ово поље не може остати празно</string>
-    <string name="global_waiting">Чекање</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -166,7 +165,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Уреди %s</string>
     <string name="customctrl_remove">Уклони %s?</string>
     <string name="customctrl_keyname">Кôд тастера</string>
     <string name="customctrl_specialkey">Специјална типка</string>
@@ -179,7 +177,6 @@
     <string name="customctrl_transparency_text">Прозирност текста</string>
     <string name="customctrl_keycombine">Комбинација типка</string>
     <string name="customctrl_keycombine_alt">Алт</string>
-    <string name="customctrl_keycombine_control">Цтрл</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Додај дугме</string>
     <string name="customctrl_selectdefault">Селектујте опћенити Control json</string>
