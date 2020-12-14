@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Přeskočit</string>
     <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
+    <string name="login_microsoft">Microsoft přihlášení</string>
     <string name="login_select_account">Vybrat účet</string>
     <!-- Hint -->
     <string name="hint_select_account">Chcete-li vybrat, klepněte na to. Chcete-li účet odstranit, podržte jej.</string>
@@ -103,7 +104,6 @@
     <string name="global_save">Uložit</string>
     <string name="global_unpacking">Rozbalování %s</string>
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
-    <string name="global_waiting">Čekám</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,7 +165,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">Upravit %s</string>
     <string name="customctrl_remove">Odstranit %s?</string>
     <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_specialkey">Speciální písmeno</string>
@@ -178,12 +177,11 @@
     <string name="customctrl_transparency_text">Průhlednost textu</string>
     <string name="customctrl_keycombine">Kombinace kláves</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
     <string name="main_options">Nastavení</string>
-    <string name="main_play" comment="main_play">Hrát</string>
+    <string name="main_play">Hrát</string>
     <string name="main_welcome">Vítejte, %s</string>
     <string name="main_infodev">Údaje (DEV)</string>
     <string name="main_switchuser">Přepnout uživatele</string>

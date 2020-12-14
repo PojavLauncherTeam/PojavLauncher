@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition pentru Android)</string>
+    <string name="app_motd">Lanseaza Minecraft: Java Edition in propriul telefon al tau!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">AJUTOR</string>
     <!-- Languages list part -->
+    <string name="language_name">ROMÂNĂ - RO</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Emailul sau numele de utilizator</string>
+    <string name="login_online_username_question">(Care sa il folosesc?)</string>
+    <string name="login_online_password_hint">Parola</string>
+    <string name="login_online_password_question">Ai uitat parola?</string>
+    <string name="login_online_remember">Tine-ma minte?</string>
+    <string name="login_online_check_keeplogin">Tine-ma logat</string>
+    <string name="login_online_login_label">Autentificate</string>
+    <string name="login_online_create_account">(Creaza cont nou?)</string>
+    <string name="login_offline_switch">Cont offline?</string>
+    <string name="login_offline_label">Autentificate ca cont offline</string>
+    <string name="login_offline_alert_skip">Treci peste</string>
+    <string name="login_error_short_username">Numele de utilizator trebuie sa fie macar 3 caractere</string>
+    <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
+    <string name="login_select_account">Selecteaza contul</string>
     <!-- Hint -->
+    <string name="hint_select_account">Pentru al selecta, apasa pe el. Pentru al sterge, tine apasat pe el.</string>
     <!-- Warnings -->
+    <string name="warning_action_exit">Iesire</string>
+    <string name="warning_remove_account">Acest cont va fi eliminat!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher s-a oprit neasteptat</string>
+    <string name="error_checklog">Eroare! Te rog sa verifici jurnalul de mai jos: %s</string>
+    <string name="error_no_version">Nici-o versiune!</string>
+    <string name="error_load_version">Versiunea nu poate fi incarcata %s</string>
+    <string name="error_show_more">Arata mai mult</string>
+    <string name="error_show_less">Arata mai putin</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Permisiunea de citire/scriere la stocare este necesară!</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <!-- MCLauncherActivity: Strings -->
     <!-- Global strings -->
     <!--
@@ -38,6 +67,7 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Iesire</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <!--

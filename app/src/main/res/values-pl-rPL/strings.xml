@@ -176,7 +176,6 @@
     <string name="customctrl_transparency_text">Przezroczystość tekstu</string>
     <string name="customctrl_keycombine">Kombinacja klawiszy</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Dodaj przycisk</string>
     <string name="customctrl_selectdefault">Wybierz domyślny json Control</string>

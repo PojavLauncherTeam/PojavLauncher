@@ -89,6 +89,7 @@
     <!-- Global strings -->
     <string name="global_add">Añadir</string>
     <string name="global_edit">Editar</string>
+    <string name="global_error">Error</string>
     <string name="global_load">Cargar</string>
     <string name="global_name">Nombre</string>
     <string name="global_remove">Quitar</string>
@@ -129,8 +130,17 @@
     <string name="mcn_check_fail_java">No se pudo iniciar la prueba de la máquina virtual Java. Compruebe %s para más información.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Controles</string>
+    <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Teclado</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_zoom">Zoom (C)</string>
+    <string name="control_primary">Pri</string>
     <string name="control_secondary">Seg</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
@@ -157,6 +167,7 @@
     <string name="main_play">Jugar</string>
     <string name="main_infodev">Información (DEV)</string>
     <string name="main_switchuser">Cambiar usuario</string>
+    <string name="main_version">Versión:</string>
     <string name="main_nocrash">Ningún bloqueo detectado</string>
     <string name="main_nolog">Ningún log.</string>
 </resources>

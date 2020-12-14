@@ -103,7 +103,6 @@
     <string name="global_save">Kaydet</string>
     <string name="global_unpacking">Açılıyor %s</string>
     <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
-    <string name="global_waiting">Bekleniyor</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,7 +164,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">%s öğesini düzenle</string>
     <string name="customctrl_remove">%s kaldırılsın mı?</string>
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_specialkey">Özel Tuş</string>
@@ -178,12 +176,11 @@
     <string name="customctrl_transparency_text">Yazı saydamlığı</string>
     <string name="customctrl_keycombine">Anahtar Kombinasyonu</string>
     <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Control</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
     <string name="main_options">Ayarlar</string>
-    <string name="main_play" comment="main_play">Oyna</string>
+    <string name="main_play">Oyna</string>
     <string name="main_welcome">Hoş geldiniz, %s</string>
     <string name="main_infodev">Bilgi (Geliştirici)</string>
     <string name="main_switchuser">Kullanıcı değiştir</string>

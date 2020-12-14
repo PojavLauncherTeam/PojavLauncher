@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Өткізіп жіберу</string>
     <string name="login_error_short_username">Қолданушы аты кем дегенде 3 таңбадан тұруы керек</string>
     <string name="login_error_exist_username">Бұл ат бос емес</string>
+    <string name="login_microsoft">Microsoft-пен кіру</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
     <!-- Hint -->
     <string name="hint_select_account">Таңдау үшін басыңыз, жойып тастау үшін басып ұстаңыз.</string>
@@ -103,7 +104,7 @@
     <string name="global_save">Сақтау</string>
     <string name="global_unpacking">%s ашылуда</string>
     <string name="global_error_field_empty">Бұл өріс бос болмауы міндетті</string>
-    <string name="global_waiting">Күтуде</string>
+    <string name="global_waiting">Күте тұрыңыз</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,7 +166,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit" comment="customctrl_edit">%s өңдеу</string>
+    <string name="customctrl_edit">%s өңделуде</string>
     <string name="customctrl_remove">%s алып тастайсыз ба?</string>
     <string name="customctrl_keyname">Перне коды</string>
     <string name="customctrl_specialkey">Арнайы перне</string>
@@ -183,7 +184,7 @@
     <string name="customctrl_addbutton">Батырма қосу</string>
     <string name="customctrl_selectdefault">Ctrl-дың әдепкі json-ын таңдау</string>
     <string name="main_options">Баптау</string>
-    <string name="main_play" comment="main_play">Ойнау</string>
+    <string name="main_play">Ойнау</string>
     <string name="main_welcome">Сәлем, %s</string>
     <string name="main_infodev">Ақпар (Әзірлеуші)</string>
     <string name="main_switchuser">Пайдаланушыны ауыстыру</string>
