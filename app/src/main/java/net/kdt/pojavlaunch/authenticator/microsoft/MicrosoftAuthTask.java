@@ -50,8 +50,9 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
     @Override
     public Object doInBackground(String... args) {
         try {
+
             String authCode = args[0];
-            
+            /*
             publishProgress();
             String msaAccessToken = acquireAccessToken(authCode);
             
@@ -65,16 +66,22 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
             String mcAccessToken = acquireMinecraftToken(xstsData[0], xstsData[1]);
             
             publishProgress();
+
+             */
+            Msa msa = new Msa(authCode);
+
             // TODO migrate account format to json
-            MinecraftAccount acc = checkMcProfile(mcAccessToken);
+            //MinecraftAccount acc = new MinecraftAccount();
             
             MCProfile.Builder profilePath = new MCProfile.Builder();
-            
-            profilePath.setClientID("0" /* FIXME */);
-            profilePath.setAccessToken(acc.accessToken);
-            profilePath.setUsername(acc.username);
-            profilePath.setProfileID(acc.profileId);
-            profilePath.setIsMojangAccount(false);
+            if(msa.doesOwnGame) {
+                profilePath.setClientID("0" /* FIXME */);
+                profilePath.setAccessToken(msa.mcToken);
+                profilePath.setUsername(msa.mcName);
+                profilePath.setProfileID(msa.mcUuid);
+                profilePath.setIsMojangAccount(false);
+            }
+
             
             MCProfile.build(profilePath);
            
@@ -126,6 +133,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
      SOFTWARE.
      */
+    /*
     private final class XSTSXUI {
         private String uhs;
     }
@@ -297,5 +305,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
         }
         return HttpRequest.BodyPublishers.ofString(builder.toString());
     }
+
+     */
 }
 
