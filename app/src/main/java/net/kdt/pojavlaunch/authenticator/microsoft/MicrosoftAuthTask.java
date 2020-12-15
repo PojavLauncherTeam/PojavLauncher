@@ -19,13 +19,15 @@ import net.kdt.pojavlaunch.value.launcherprofiles.*;
 import net.kdt.pojavlaunch.value.*;
 
 public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
+/*
     private static final String authTokenUrl = "https://login.live.com/oauth20_token.srf";
     private static final String xblAuthUrl = "https://user.auth.xboxlive.com/user/authenticate";
     private static final String xstsAuthUrl = "https://xsts.auth.xboxlive.com/xsts/authorize";
     private static final String mcLoginUrl = "https://api.minecraftservices.com/authentication/login_with_xbox";
-    // private static final String mcStoreUrl = "https://api.minecraftservices.com/entitlements/mcstore";
+    private static final String mcStoreUrl = "https://api.minecraftservices.com/entitlements/mcstore";
     private static final String mcProfileUrl = "https://api.minecraftservices.com/minecraft/profile";
-    
+*/
+
     //private Gson gson = new Gson();
     private RefreshListener listener;
 
@@ -43,14 +45,13 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
         build.setMessage(ctx.getString(R.string.global_waiting));
         build.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         build.setCancelable(false);
-        build.setMax(5);
+        build.setMax(6);
         build.show();
     }
 
     @Override
     public Object doInBackground(String... args) {
         try {
-
             String authCode = args[0];
             /*
             publishProgress();
@@ -68,20 +69,19 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
             publishProgress();
 
              */
-            Msa msa = new Msa(authCode);
+            Msa msa = new Msa(this, authCode);
 
             // TODO migrate account format to json
             //MinecraftAccount acc = new MinecraftAccount();
             
             MCProfile.Builder profilePath = new MCProfile.Builder();
-            if(msa.doesOwnGame) {
+            if (msa.doesOwnGame) {
                 profilePath.setClientID("0" /* FIXME */);
                 profilePath.setAccessToken(msa.mcToken);
                 profilePath.setUsername(msa.mcName);
                 profilePath.setProfileID(msa.mcUuid);
                 profilePath.setIsMojangAccount(false);
             }
-
             
             MCProfile.build(profilePath);
            
@@ -89,6 +89,10 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
         } catch (Throwable e) {
             return e;
         }
+    }
+
+    public void publishProgressPublic() {
+        super.publishProgress();
     }
 
     @Override
