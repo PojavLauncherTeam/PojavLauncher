@@ -106,9 +106,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         final List<String> accountList = new ArrayList<String>();
         final MCProfile.Builder tempProfile = PojavProfile.getTempProfileContent(this);
-        //if (tempProfile != null) {
-        //    accountList.add(tempProfile.getUsername());
-        //}
+        if (tempProfile != null) {
+            accountList.add(tempProfile.getUsername());
+        }
         accountList.addAll(Arrays.asList(new File(Tools.mpProfiles).list()));
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
