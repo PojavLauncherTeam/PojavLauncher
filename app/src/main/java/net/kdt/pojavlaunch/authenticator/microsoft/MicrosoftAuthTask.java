@@ -253,8 +253,8 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
 
         HttpRequest request = HttpRequest.newBuilder(uri)
             .header("Authorization", "Bearer " + mcAccessToken)
-            // .header("Content-Type", "application/json")
-            // .header("Accept", "application/json")
+             .header("Content-Type", "application/json")
+             .header("Accept", "application/json")
             .GET().build();
 
         HttpResponse resp = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());
