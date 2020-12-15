@@ -822,7 +822,7 @@ public class PojavLoginActivity extends BaseActivity
                         v.setEnabled(true);
                         prb.setVisibility(View.GONE);
                         
-                        playProfile(true);
+                        playProfile(false);
                     }
                 }).execute(edit2.getText().toString(), edit3.getText().toString());
         }

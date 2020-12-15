@@ -40,6 +40,7 @@ public class PojavProfile
 			} else if (obj instanceof String) {
 				pref.putString(PROFILE_PREF_FILE, (String) obj);
 				pref.putString(PROFILE_PREF_CONTENT, MCProfile.toString((String) obj));
+                pref.putString(PROFILE_PREF_TEMP_CONTENT, "");
 			} else if (obj == null) {
 				pref.putString(PROFILE_PREF_FILE, "");
 				pref.putString(PROFILE_PREF_CONTENT, "");
