@@ -131,7 +131,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 if (tempProfile != null && position == 0) {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList.get(position + (tempProfile != null ? 1 : 0)));
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.mpProfiles + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
                 pickAccount();
             }
