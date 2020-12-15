@@ -1743,8 +1743,8 @@ public class VerticalTabLayout extends LinearLayout {
                 if (mIconView == null) {
                     ImageView iconView = (ImageView) LayoutInflater.from(getContext())
                             .inflate(R.layout.design_layout_tab_icon, this, false);
-                    iconView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
+                    iconView.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(25),
+                        dpToPx(25)));
                     addView(iconView, 0);
                     mIconView = iconView;
                 }
@@ -1753,7 +1753,7 @@ public class VerticalTabLayout extends LinearLayout {
                             .inflate(R.layout.design_layout_tab_text, this, false);
                     LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
-                    textParams.gravity = Gravity.TOP | Gravity.CENTER_VERTICAL;
+                    textParams.gravity = Gravity.CENTER_VERTICAL;
                     textView.setLayoutParams(textParams);
                     addView(textView);
                     mTextView = textView;
