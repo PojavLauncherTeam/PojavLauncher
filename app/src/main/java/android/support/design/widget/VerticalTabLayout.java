@@ -1743,7 +1743,7 @@ public class VerticalTabLayout extends LinearLayout {
                 if (mIconView == null) {
                     ImageView iconView = (ImageView) LayoutInflater.from(getContext())
                             .inflate(R.layout.design_layout_tab_icon, this, false);
-                    iconView.serLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    iconView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
                     addView(iconView, 0);
                     mIconView = iconView;
