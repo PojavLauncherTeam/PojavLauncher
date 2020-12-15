@@ -1743,12 +1743,18 @@ public class VerticalTabLayout extends LinearLayout {
                 if (mIconView == null) {
                     ImageView iconView = (ImageView) LayoutInflater.from(getContext())
                             .inflate(R.layout.design_layout_tab_icon, this, false);
+                    iconView.serLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
                     addView(iconView, 0);
                     mIconView = iconView;
                 }
                 if (mTextView == null) {
                     TextView textView = (TextView) LayoutInflater.from(getContext())
                             .inflate(R.layout.design_layout_tab_text, this, false);
+                    LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                    textParams.gravity = Gravity.TOP | Gravity.CENTER_VERTICAL;
+                    textView.setLayoutParams(textParams);
                     addView(textView);
                     mTextView = textView;
                     mDefaultMaxLines = TextViewCompat.getMaxLines(mTextView);
@@ -2015,9 +2021,6 @@ public class VerticalTabLayout extends LinearLayout {
             if (mIndicatorAnimator != null && mIndicatorAnimator.isRunning()) {
                 mIndicatorAnimator.cancel();
             }
-
-            final boolean isRtl = ViewCompat.getLayoutDirection(this)
-                    == ViewCompat.LAYOUT_DIRECTION_RTL;
 
             final View targetView = getChildAt(position);
             if (targetView == null) {
