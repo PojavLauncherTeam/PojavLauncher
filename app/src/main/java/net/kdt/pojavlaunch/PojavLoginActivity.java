@@ -330,7 +330,7 @@ public class PojavLoginActivity extends BaseActivity
                         @Override
                         public void onSuccess(MCProfile.Builder b) {
                             mProfile = b;
-                            playProfile();
+                            playProfile(false);
                         }
                     }).execute(code);
                 // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
@@ -739,7 +739,8 @@ public class PojavLoginActivity extends BaseActivity
                                     @Override
                                     public void onSuccess(MCProfile.Builder unused)
                                     {
-                                        MCProfile.launch(PojavLoginActivity.this, path);
+                                        mProfile = MCProfile.load(path);
+                                        playProfile(true);
                                     }
                                 });
                         } else {
@@ -794,7 +795,7 @@ public class PojavLoginActivity extends BaseActivity
         
         if (sOffline.isChecked()) {
             mProfile = loginOffline();
-            playProfile();
+            playProfile(false);
         } else {
             new LoginTask().setLoginListener(new LoginListener(){
 
@@ -821,16 +822,16 @@ public class PojavLoginActivity extends BaseActivity
                         v.setEnabled(true);
                         prb.setVisibility(View.GONE);
                         
-                        playProfile();
+                        playProfile(true);
                     }
                 }).execute(edit2.getText().toString(), edit3.getText().toString());
         }
     }
     
-    private void playProfile() {
+    private void playProfile(boolean notOnLogin) {
         if (mProfile != null) {
             String profilePath = null;
-            if (sRemember.isChecked()) {
+            if (sRemember.isChecked() || notOnLogin) {
                 profilePath = MCProfile.build(mProfile);
             }
             
