@@ -18,7 +18,7 @@ import java.io.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.*;
 import net.kdt.pojavlaunch.value.*;
 
-public class MicrosoftAuthenticator extends AsyncTask<String, Void, Object> {
+public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
     private static final String authTokenUrl = "https://login.live.com/oauth20_token.srf";
     private static final String xblAuthUrl = "https://user.auth.xboxlive.com/user/authenticate";
     private static final String xstsAuthUrl = "https://xsts.auth.xboxlive.com/xsts/authorize";
@@ -32,7 +32,7 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Object> {
     private Context ctx;
     private ProgressDialog build;
 
-    public MicrosoftAuthenticator(Context ctx, RefreshListener listener) {
+    public MicrosoftAuthTask(Context ctx, RefreshListener listener) {
         this.ctx = ctx;
         this.listener = listener;
     }
@@ -253,8 +253,8 @@ public class MicrosoftAuthenticator extends AsyncTask<String, Void, Object> {
 
         HttpRequest request = HttpRequest.newBuilder(uri)
             .header("Authorization", "Bearer " + mcAccessToken)
-            .header("Content-Type", "application/json")
-            .header("Accept", "application/json")
+            // .header("Content-Type", "application/json")
+            // .header("Accept", "application/json")
             .GET().build();
 
         HttpResponse resp = HttpClient.newBuilder().build().sendRequest(request, HttpResponse.BodyHandlers.ofString());

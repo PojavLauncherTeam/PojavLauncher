@@ -321,7 +321,7 @@ public class PojavLoginActivity extends BaseActivity
                 }
             } else {
                 String code = data.getQueryParameter("code");
-                new MicrosoftAuthenticator(this, new RefreshListener(){
+                new MicrosoftAuthTask(this, new RefreshListener(){
                         @Override
                         public void onFailed(Throwable e) {
                             Tools.showError(PojavLoginActivity.this, e);
