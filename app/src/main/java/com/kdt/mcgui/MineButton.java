@@ -11,7 +11,7 @@ import net.kdt.pojavlaunch.*;
 
 public class MineButton extends Button
 {
-	private ColorDrawable left = new ColorDrawable(Color.parseColor("#ADD8E6"));
+	private ColorDrawable left = new ColorDrawable(Color.parseColor("#80000000"));
 	private ColorDrawable top = new ColorDrawable(Color.parseColor("#64FC20"));
 	private ColorDrawable right = new ColorDrawable(Color.parseColor("#40000000"));
 	private ColorDrawable bottom = new ColorDrawable(Color.parseColor("#80000000"));
