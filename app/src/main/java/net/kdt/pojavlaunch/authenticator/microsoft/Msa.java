@@ -5,31 +5,12 @@
  */
 package net.kdt.pojavlaunch.authenticator.microsoft;
 
-import android.util.Log;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.UUID;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import android.os.*;
+import android.util.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import net.kdt.pojavlaunch.*;
+import org.json.*;
 
 
 
@@ -95,17 +76,11 @@ public class Msa {
             wr.write(req.getBytes("UTF-8"));
         }
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s = ""; int len = 0; byte[] buf = new byte[256];
-            InputStream is = conn.getInputStream();
-            while((len = is.read(buf)) != -1) { //читаем строчку пока не получим всё
-                s += new String(buf,0,len);
-            }
-            JSONObject jo = new JSONObject(s);
+            JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             Log.i("MicroAuth","Acess Token = "+jo.getString("access_token"));
             acquireXBLToken(jo.getString("access_token"));
         }else{
-            Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": "+conn.getResponseMessage());
-            throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+            throwResponseError(conn);
         }
 
     }
@@ -148,17 +123,11 @@ public class Msa {
             wr.write(req.getBytes("UTF-8"));
         }
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s = ""; int len = 0; byte[] buf = new byte[256];
-            InputStream is = conn.getInputStream();
-            while((len = is.read(buf)) != -1) { //читаем строчку пока не получим всё
-                s += new String(buf,0,len);
-            }
-            JSONObject jo = new JSONObject(s);
+            JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             Log.i("MicroAuth","Xbl Token = "+jo.getString("Token"));
             acquireXsts(jo.getString("Token"));
         }else{
-            Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": "+conn.getResponseMessage());
-            throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+            throwResponseError(conn);
         }
     }
 
@@ -198,18 +167,12 @@ public class Msa {
         }
 
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s = ""; int len = 0; byte[] buf = new byte[256];
-            InputStream is = conn.getInputStream();
-            while((len = is.read(buf)) != -1) { //читаем строчку пока не получим всё
-                s += new String(buf,0,len);
-            }
-            JSONObject jo = new JSONObject(s);
+            JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             String uhs = jo.getJSONObject("DisplayClaims").getJSONArray("xui").getJSONObject(0).getString("uhs");
             Log.i("MicroAuth","Xbl Xsts = "+jo.getString("Token")+"; Uhs = " + uhs);
             acquireMinecraftToken(uhs,jo.getString("Token"));
-        }else{
-            Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": "+conn.getResponseMessage());
-            throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+        }else{;
+            throwResponseError(conn);
         }
     }
 
@@ -237,20 +200,14 @@ public class Msa {
         }
 
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s = ""; int len = 0; byte[] buf = new byte[256];
-            InputStream is = conn.getInputStream();
-            while((len = is.read(buf)) != -1) { //читаем строчку пока не получим всё
-                s += new String(buf,0,len);
-            }
-            JSONObject jo = new JSONObject(s);
+            JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             Log.i("MicroAuth","MC token: "+jo.getString("access_token"));
             mcToken = jo.getString("access_token");
             checkMcProfile(jo.getString("access_token"));
             checkMcStore(jo.getString("access_token"));
 
-        }else{
-            Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": "+conn.getResponseMessage());
-            throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+        }else{;
+            throwResponseError(conn);
         }
     }
     private void checkMcStore(String mcAccessToken) throws IOException, JSONException {
@@ -263,12 +220,7 @@ public class Msa {
         conn.setUseCaches(false);
         conn.connect();
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s = ""; int len = 0; byte[] buf = new byte[256];
-            InputStream is = conn.getInputStream();
-            while((len = is.read(buf)) != -1) { //читаем строчку пока не получим всё
-                s += new String(buf,0,len);
-            }
-            JSONObject jo = new JSONObject(s);
+            JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             JSONArray ja = jo.getJSONArray("items");
             Log.i("MicroAuth","Store Len = " + ja.length());
             for(int i = 0; i < ja.length(); i++) {
@@ -276,8 +228,7 @@ public class Msa {
                 Log.i("MicroAuth","Product " + i +": " +prod);
             }
         }else{
-            Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": "+conn.getResponseMessage());
-            throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+            throwResponseError(conn);
         }
         /*
          HttpRequest request = HttpRequest.newBuilder(uri)
@@ -304,11 +255,7 @@ public class Msa {
         conn.connect();
 
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s = ""; int len = 0; byte[] buf = new byte[256];
-            InputStream is = conn.getInputStream();
-            while((len = is.read(buf)) != -1) { //читаем строчку пока не получим всё
-                s += new String(buf,0,len);
-            }
+            String s= Tools.read(conn.getInputStream());
             Log.i("MicroAuth","profile:" + s);
             JSONObject jsonObject = new JSONObject(s);
             String name = (String) jsonObject.get("name");
@@ -322,10 +269,9 @@ public class Msa {
             mcName=name;
             mcUuid=uuidDashes;
         }else{
-            Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": "+conn.getResponseMessage());
-            Log.i("MicroAuth","It seems that this Microshit Account does not own the game.");
+            Log.i("MicroAuth","It seems that this Microsoft Account does not own the game.");
             doesOwnGame = false;
-            throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+            throwResponseError(conn);
         }
     }
 
@@ -350,5 +296,10 @@ public class Msa {
         return builder.toString();
     }
 
+    private static void throwResponseError(HttpURLConnection conn) throws IOException {
+        String errStr = Tools.read(conn.getErrorStream());
+        Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
+        throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n, Error stream: " + errStr);
+    }
 }
 
