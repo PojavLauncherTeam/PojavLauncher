@@ -65,7 +65,7 @@
     <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
-    <string name="mcl_launch_cleancache">Кэш файлдарын жоюда</string>
+    <string name="mcl_launch_cleancache">Кәш файлдарын жоюда</string>
     <string name="mcl_launch_downloading">%s жүктелуде</string>
     <string name="mcl_launch_download_lib">%s кітапханасы жүктелуде</string>
     <string name="mcl_launch_download_client">Minecraft %s жүктелуде</string>
