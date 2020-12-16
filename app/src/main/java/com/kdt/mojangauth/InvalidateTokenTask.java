@@ -6,11 +6,12 @@ import com.kdt.mojangauth.yggdrasil.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.value.*;
 
 public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
     private YggdrasilAuthenticator authenticator = new YggdrasilAuthenticator();
     //private Gson gson = new Gson();
-    private MCProfile.Builder profilePath;
+    private MinecraftAccount profilePath;
 
     private Context ctx;
     private String path;
@@ -23,8 +24,9 @@ public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
     public Throwable doInBackground(String... args) {
         path = args[0];
         try {
-            this.profilePath = MCProfile.load(args[0]);
-            this.authenticator.invalidate(profilePath.getAccessToken(), UUID.fromString(profilePath.getClientID()));
+            this.profilePath = MinecraftAccount.load(args[0]);
+            this.authenticator.invalidate(profilePath.accessToken,
+                UUID.fromString(profilePath.isMicrosoft ? profilePath.profileId : profilePath.clientToken /* should be? */));
             return null;
         } catch (Throwable e) {
             return e;

@@ -54,7 +54,9 @@ public class PojavApplication extends Application
 			
 			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
             Tools.DIR_HOME_JRE = Tools.DIR_DATA + "/jre_runtime";
-            Tools.DIR_DATA_PROFILES = Tools.DIR_DATA + "/Users";
+            Tools.DIR_ACCOUNT_OLD = Tools.DIR_DATA + "/Users";
+            Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
+            // Tools.FILE_ACCOUNT_JSON = getFilesDir().getAbsolutePath() + "/account_profiles.json";
             
             Tools.CURRENT_ARCHITECTURE = new File(getApplicationInfo().nativeLibraryDir).getName();
 			switch (Tools.CURRENT_ARCHITECTURE) {

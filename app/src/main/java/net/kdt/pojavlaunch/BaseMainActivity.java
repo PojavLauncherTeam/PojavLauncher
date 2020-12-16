@@ -4,24 +4,20 @@ import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
-
-import androidx.core.widget.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.*;
+import com.google.android.material.navigation.*;
 import com.kdt.pointer.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
-
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
+import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
@@ -73,7 +69,7 @@ public class BaseMainActivity extends LoggableActivity {
     private ImageView mousePointer;
     //private EditText hiddenEditor;
     // private ViewGroup overlayView;
-    private MCProfile.Builder mProfile;
+    private MinecraftAccount mProfile;
     
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
@@ -129,9 +125,9 @@ public class BaseMainActivity extends LoggableActivity {
             logStream = new PrintStream(logFile.getAbsolutePath());
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            mVersionInfo = Tools.getVersionInfo(mProfile.getVersion());
+            mVersionInfo = Tools.getVersionInfo(mProfile.selectedVersion);
             
-            setTitle("Minecraft " + mProfile.getVersion());
+            setTitle("Minecraft " + mProfile.selectedVersion);
             
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;
@@ -844,7 +840,7 @@ public class BaseMainActivity extends LoggableActivity {
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
-        JREUtils.redirectAndPrintJRELog(this, mProfile.getAccessToken());
+        JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
         Tools.launchMinecraft(this, mProfile, mVersionInfo);
     }
     

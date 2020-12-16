@@ -14,6 +14,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.tasks.*;
 
 import androidx.appcompat.app.AlertDialog;
+import net.kdt.pojavlaunch.value.*;
 
 public abstract class BaseLauncherActivity extends BaseActivity {
 	public Button mPlayButton;
@@ -25,7 +26,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     
     public JMinecraftVersionList mVersionList;
 	public MinecraftDownloaderTask mTask;
-	public MCProfile.Builder mProfile;
+	public MinecraftAccount mProfile;
 	public String[] mAvailableVersions;
     
 	public boolean mIsAssetsProcessing = false;
@@ -147,7 +148,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         } else if (canBack) {
             v.setEnabled(false);
             mTask = new MinecraftDownloaderTask(this);
-            mTask.execute(mProfile.getVersion());
+            mTask.execute(mProfile.selectedVersion);
             mCrashView.resetCrashLog = true;
         }
     }

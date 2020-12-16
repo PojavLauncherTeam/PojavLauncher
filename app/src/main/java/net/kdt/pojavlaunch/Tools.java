@@ -39,6 +39,7 @@ public final class Tools
     public static String CURRENT_ARCHITECTURE;
 
     // New since 3.3.1
+    public static String DIR_ACCOUNT_OLD;
     public static String DIR_ACCOUNT_NEW;
     
     // New since 3.0.0
@@ -50,16 +51,15 @@ public final class Tools
     public static final String DIR_HOME_LIBRARY = MAIN_PATH + "/libraries";
 
     public static final String DIR_HOME_CRASH = MAIN_PATH + "/crash-reports";
-    public static String DIR_DATA_PROFILES;
 
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
-    public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
+    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
         String[] launchArgs = getMinecraftArgs(profile, versionInfo);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
-        String launchClassPath = generateLaunchClassPath(profile.getVersion());
+        String launchClassPath = generateLaunchClassPath(profile.selectedVersion);
 
         List<String> javaArgList = new ArrayList<String>();
         
@@ -126,8 +126,8 @@ public final class Tools
         javaArgList.addAll(overrideableArgList);
     }
 
-    public static String[] getMinecraftArgs(MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) {
-        String username = profile.getUsername();
+    public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {
+        String username = profile.username;
         String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
@@ -139,9 +139,9 @@ public final class Tools
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
-        varArgMap.put("auth_access_token", profile.getAccessToken());
+        varArgMap.put("auth_access_token", profile.accessToken);
         varArgMap.put("auth_player_name", username);
-        varArgMap.put("auth_uuid", profile.getProfileID());
+        varArgMap.put("auth_uuid", profile.profileId);
         varArgMap.put("assets_root", Tools.ASSETS_PATH);
         varArgMap.put("assets_index_name", versionInfo.assets);
         varArgMap.put("game_assets", Tools.ASSETS_PATH);

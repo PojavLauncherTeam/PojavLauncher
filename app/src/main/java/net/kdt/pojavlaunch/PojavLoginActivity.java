@@ -31,6 +31,8 @@ import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.io.*;
 
 import org.apache.commons.io.FileUtils;
+import net.kdt.pojavlaunch.value.*;
+import com.google.gson.*;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -329,7 +331,7 @@ public class PojavLoginActivity extends BaseActivity
                         }
 
                         @Override
-                        public void onSuccess(MCProfile.Builder b) {
+                        public void onSuccess(MinecraftAccount b) {
                             mProfile = b;
                             playProfile(false);
                         }
@@ -360,12 +362,13 @@ public class PojavLoginActivity extends BaseActivity
     {
         mkdirs(Tools.DIR_HOME_VERSION);
         mkdirs(Tools.DIR_HOME_LIBRARY);
-        mkdirs(Tools.DIR_DATA_PROFILES);
         
         mkdirs(Tools.MAIN_PATH);
         mkdirs(Tools.MAIN_PATH + "/config");
         mkdirs(Tools.MAIN_PATH + "/lwjgl3");
         mkdirs(Tools.MAIN_PATH + "/mods");
+        
+        PojavMigrator.migrateAccountData(this);
         
         File forgeSplashFile = new File(Tools.MAIN_PATH, "config/splash.properties");
         String forgeSplashContent = "enabled=true";
@@ -378,7 +381,7 @@ public class PojavLoginActivity extends BaseActivity
                     forgeSplashContent.replace("enabled=true", "enabled=false"));
             }
         } catch (IOException e) {
-            Log.w(Tools.APP_NAME, "Could not disable Forge splash screen!", e);
+            Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
         }
         
         mkdirs(Tools.CTRLMAP_PATH);
@@ -704,7 +707,7 @@ public class PojavLoginActivity extends BaseActivity
         final FileListView flv = new FileListView(dialog);
         // flv.setLayoutParams(lpFlv);
         
-        flv.lockPathAt(Tools.DIR_DATA_PROFILES);
+        flv.lockPathAt(Tools.DIR_ACCOUNT_NEW);
         flv.setFileSelectedListener(new FileSelectedListener(){
 
                 @Override
@@ -727,7 +730,10 @@ public class PojavLoginActivity extends BaseActivity
                 @Override
                 public void onFileSelected(File file, final String path) {
                     try {
-                        if (MCProfile.load(path).isMojangAccount()){
+                        MinecraftAccount acc = MinecraftAccount.load(path);
+                        if (acc.isMicrosoft){
+                            // IMPORTANT TODO
+                        } else if (acc.accessToken.length() >= 5) {
                             MCProfile.updateTokens(PojavLoginActivity.this, path, new RefreshListener(){
 
                                     @Override
@@ -737,10 +743,14 @@ public class PojavLoginActivity extends BaseActivity
                                     }
 
                                     @Override
-                                    public void onSuccess(MCProfile.Builder unused)
+                                    public void onSuccess(MinecraftAccount unused)
                                     {
-                                        mProfile = MCProfile.load(path);
-                                        playProfile(true);
+                                        try {
+                                            mProfile = MinecraftAccount.load(path);
+                                            playProfile(true);
+                                        } catch (Throwable e) {
+                                            Tools.showError(PojavLoginActivity.this, e);
+                                        }
                                     }
                                 });
                         } else {
@@ -764,27 +774,27 @@ public class PojavLoginActivity extends BaseActivity
         dialog.show();
     }
     
-    private MCProfile.Builder loginOffline() {
-        new File(Tools.DIR_DATA_PROFILES).mkdir();
+    private MinecraftAccount loginOffline() {
+        new File(Tools.DIR_ACCOUNT_OLD).mkdir();
         
         String text = edit2.getText().toString();
         if(text.isEmpty()){
             edit2.setError(getResources().getString(R.string.global_error_field_empty));
         } else if(text.length() <= 2){
             edit2.setError(getResources().getString(R.string.login_error_short_username));
-        } else if(new File(Tools.DIR_DATA_PROFILES + "/" + text).exists()){
+        } else if(new File(Tools.DIR_ACCOUNT_OLD + "/" + text).exists()){
             edit2.setError(getResources().getString(R.string.login_error_exist_username));
         } else{
-            MCProfile.Builder builder = new MCProfile.Builder();
-            builder.setIsMojangAccount(false);
-            builder.setUsername(text);
+            MinecraftAccount builder = new MinecraftAccount();
+            builder.isMicrosoft = false;
+            builder.username = text;
             
             return builder;
         }
         return null;
     }
     
-    private MCProfile.Builder mProfile = null;
+    private MinecraftAccount mProfile = null;
     public void loginMC(final View v)
     {
         /*skip it
@@ -810,12 +820,11 @@ public class PojavLoginActivity extends BaseActivity
                         if(result[0].equals("ERROR")){
                             Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(R.string.global_error), strArrToString(result));
                         } else{
-                            MCProfile.Builder builder = new MCProfile.Builder();
-                            builder.setAccessToken(result[1]);
-                            builder.setClientID(result[2]);
-                            builder.setProfileID(result[3]);
-                            builder.setUsername(result[4]);
-                            builder.setVersion("1.7.10");
+                            MinecraftAccount builder = new MinecraftAccount();
+                            builder.accessToken = result[1];
+                            builder.clientToken = result[2];
+                            builder.profileId = result[3];
+                            builder.username = result[4];
 
                             mProfile = builder;
                         }
@@ -830,12 +839,16 @@ public class PojavLoginActivity extends BaseActivity
     
     private void playProfile(boolean notOnLogin) {
         if (mProfile != null) {
-            String profilePath = null;
-            if (sRemember.isChecked() || notOnLogin) {
-                profilePath = MCProfile.build(mProfile);
+            try {
+                String profilePath = null;
+                if (sRemember.isChecked() || notOnLogin) {
+                    profilePath = mProfile.save();
+                }
+
+                MCProfile.launch(PojavLoginActivity.this, profilePath == null ? mProfile : profilePath);
+            } catch (IOException e) {
+                Tools.showError(this, e);
             }
-            
-            MCProfile.launch(PojavLoginActivity.this, profilePath == null ? mProfile : profilePath);
         }
     }
     

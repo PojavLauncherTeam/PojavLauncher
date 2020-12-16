@@ -20,6 +20,7 @@ import org.lwjgl.glfw.*;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager.widget.ViewPager;
+import net.kdt.pojavlaunch.value.*;
 //import android.support.v7.view.menu.*;
 //import net.zhuoweizhang.boardwalk.downloader.*;
 
@@ -105,11 +106,11 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         //showProfileInfo();
 
         final List<String> accountList = new ArrayList<String>();
-        final MCProfile.Builder tempProfile = PojavProfile.getTempProfileContent(this);
+        final MinecraftAccount tempProfile = PojavProfile.getTempProfileContent(this);
         if (tempProfile != null) {
-            accountList.add(tempProfile.getUsername());
+            accountList.add(tempProfile.username);
         }
-        accountList.addAll(Arrays.asList(new File(Tools.DIR_DATA_PROFILES).list()));
+        accountList.addAll(Arrays.asList(new File(Tools.DIR_ACCOUNT_OLD).list()));
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -120,7 +121,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         } else {
             for (int i = 0; i < accountList.size(); i++) {
                 String account = accountList.get(i);
-                if (account.equals(mProfile.getUsername())) {
+                if (account.equals(mProfile.username)) {
                     accountSelector.setSelection(i);
                 }
             }
@@ -131,7 +132,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 if (tempProfile != null && position == 0) {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.DIR_DATA_PROFILES + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)));
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.DIR_ACCOUNT_OLD + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
                 pickAccount();
             }
@@ -208,10 +209,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             profilePath = PojavProfile.getCurrentProfilePath(this);
             mProfile = PojavProfile.getCurrentProfileContent(this);
 
-            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.getUsername()));
+            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));
         } catch(Exception e) {
             profilePath = "";
-            mProfile = new MCProfile.Builder();
+            mProfile = new MinecraftAccount();
             Tools.showError(this, e, true);
         }
     }

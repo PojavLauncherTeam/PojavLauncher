@@ -48,9 +48,9 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_spinner_item, result);
             adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
             mActivity.mVersionSelector.setAdapter(adapter);
-            mActivity.mVersionSelector.setSelection(selectAt(result.toArray(new String[0]), mActivity.mProfile.getVersion()));
+            mActivity.mVersionSelector.setSelection(selectAt(result.toArray(new String[0]), mActivity.mProfile.selectedVersion));
         } else {
-            mActivity.mVersionSelector.setSelection(selectAt(mActivity.mAvailableVersions, mActivity.mProfile.getVersion()));
+            mActivity.mVersionSelector.setSelection(selectAt(mActivity.mAvailableVersions, mActivity.mProfile.selectedVersion));
         }
         mActivity.mVersionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
 
@@ -58,11 +58,15 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                 public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
                 {
                     String version = p1.getItemAtPosition(p3).toString();
-                    mActivity.mProfile.setVersion(version);
+                    mActivity.mProfile.selectedVersion = version;
 
                     PojavProfile.setCurrentProfile(mActivity, mActivity.mProfile);
                     if (PojavProfile.isFileType(mActivity)) {
-                        PojavProfile.setCurrentProfile(mActivity, MCProfile.build(mActivity.mProfile));
+                        try {
+                            PojavProfile.setCurrentProfile(mActivity, mActivity.mProfile.save());
+                        } catch (IOException e) {
+                            Tools.showError(mActivity, e);
+                        }
                     }
 
                     mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg, version));

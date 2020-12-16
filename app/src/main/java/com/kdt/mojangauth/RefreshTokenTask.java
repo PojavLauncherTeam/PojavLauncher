@@ -7,12 +7,13 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import com.kdt.mojangauth.yggdrasil.*;
 import android.app.*;
+import net.kdt.pojavlaunch.value.*;
 
 public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     private YggdrasilAuthenticator authenticator = new YggdrasilAuthenticator();
     //private Gson gson = new Gson();
     private RefreshListener listener;
-    private MCProfile.Builder profilePath;
+    private MinecraftAccount profilePath;
 
     private Context ctx;
     private ProgressDialog build;
@@ -34,11 +35,11 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     @Override
     public Throwable doInBackground(String... args) {
         try {
-            this.profilePath = MCProfile.load(args[0]);
+            this.profilePath = MinecraftAccount.load(args[0]);
             int responseCode = 400;
-            responseCode = this.authenticator.validate(profilePath.getAccessToken()).statusCode;
+            responseCode = this.authenticator.validate(profilePath.accessToken).statusCode;
             if (responseCode >= 200 && responseCode < 300) {
-                RefreshResponse response = this.authenticator.refresh(profilePath.getAccessToken(), UUID.fromString(profilePath.getClientID()));
+                RefreshResponse response = this.authenticator.refresh(profilePath.accessToken, UUID.fromString(profilePath.clientToken));
                 // if (response == null) {
                     // throw new NullPointerException("Response is null?");
                 // }
@@ -49,11 +50,11 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
                     throw new IllegalArgumentException("Can't refresh a demo account!");
                 }
                 
-                profilePath.setClientID(response.clientToken.toString());
-                profilePath.setAccessToken(response.accessToken);
-                profilePath.setUsername(response.selectedProfile.name);
-                profilePath.setProfileID(response.selectedProfile.id);
-                MCProfile.build(profilePath);
+                profilePath.clientToken = response.clientToken.toString();
+                profilePath.accessToken = response.accessToken;
+                profilePath.username = response.selectedProfile.name;
+                profilePath.profileId = response.selectedProfile.id;
+                profilePath.save();
             }
             return null;
         } catch (Throwable e) {

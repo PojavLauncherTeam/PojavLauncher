@@ -77,7 +77,7 @@ public class MCLauncherActivity extends BaseLauncherActivity
             profilePath = PojavProfile.getCurrentProfilePath(this);
             mProfile = PojavProfile.getCurrentProfileContent(this);
 
-            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.getUsername()));
+            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));
         } catch(Exception e) {
             //Tools.throwError(this, e);
             e.printStackTrace();

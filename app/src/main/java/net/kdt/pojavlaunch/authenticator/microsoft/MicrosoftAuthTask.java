@@ -71,21 +71,18 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
              */
             Msa msa = new Msa(this, authCode);
 
-            // TODO migrate account format to json
-            //MinecraftAccount acc = new MinecraftAccount();
-            
-            MCProfile.Builder profilePath = new MCProfile.Builder();
+            MinecraftAccount acc = new MinecraftAccount();
             if (msa.doesOwnGame) {
-                profilePath.setClientID("0" /* FIXME */);
-                profilePath.setAccessToken(msa.mcToken);
-                profilePath.setUsername(msa.mcName);
-                profilePath.setProfileID(msa.mcUuid);
-                profilePath.setIsMojangAccount(false);
+                acc.clientToken = "0"; /* FIXME */
+                acc.accessToken = msa.mcToken;
+                acc.username = msa.mcName;
+                acc.profileId = msa.mcUuid;
+                acc.isMicrosoft = true;
+                acc.msaRefreshToken = msa.msRefreshToken;
             }
-            
-            MCProfile.build(profilePath);
+            acc.save();
            
-            return profilePath;
+            return acc;
         } catch (Throwable e) {
             return e;
         }
@@ -104,8 +101,8 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
     @Override
     public void onPostExecute(Object result) {
         build.dismiss();
-        if (result instanceof MCProfile.Builder) {
-            listener.onSuccess((MCProfile.Builder) result);
+        if (result instanceof MinecraftAccount) {
+            listener.onSuccess((MinecraftAccount) result);
         } else {
             listener.onFailed((Throwable) result);
         }
