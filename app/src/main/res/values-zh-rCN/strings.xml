@@ -104,6 +104,7 @@
     <string name="global_save">保存</string>
     <string name="global_unpacking">正在解包 %s</string>
     <string name="global_error_field_empty">此处表单不能为空</string>
+    <string name="global_waiting">等待</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,6 +166,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">正在编辑 %s</string>
     <string name="customctrl_remove">移除 %s ？</string>
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_specialkey">特殊键</string>
@@ -177,6 +179,7 @@
     <string name="customctrl_transparency_text">文本透明度</string>
     <string name="customctrl_keycombine">按键组合</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">上档</string>
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
