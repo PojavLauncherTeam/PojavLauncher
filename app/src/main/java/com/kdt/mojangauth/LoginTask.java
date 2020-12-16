@@ -38,7 +38,7 @@ public class LoginTask extends AsyncTask<String, Void, String[]>
                 if (response.selectedProfile == null) {
                     str.add("Can't login a demo account!\n");
                 } else {
-                    if (new File(Tools.mpProfiles + "/" + response.selectedProfile.name).exists()) {
+                    if (new File(Tools.DIR_DATA_PROFILES + "/" + response.selectedProfile.name).exists()) {
                         str.add("This account already exist!\n");
                     } else {
                         str.add(response.accessToken);            // Access token

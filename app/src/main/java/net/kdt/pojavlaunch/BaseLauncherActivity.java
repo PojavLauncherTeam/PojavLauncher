@@ -83,7 +83,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                                 try {
                                     aboutB.setMessage(Html.fromHtml(String.format(Tools.read(getAssets().open("about_en.txt")),
                                                                                   Tools.APP_NAME,
-                                                                                  Tools.usingVerName,
+                                                                                  BuildConfig.VERSION_NAME,
                                                                                   "3.2.3")
                                                                     ));
                                 } catch (Exception e) {
@@ -220,7 +220,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                     }
                 }).start();
 
-            File lastCrashFile = Tools.lastFileModified(Tools.crashPath);
+            File lastCrashFile = Tools.lastFileModified(Tools.DIR_HOME_CRASH);
             if(CrashFragment.isNewCrash(lastCrashFile) || !mCrashView.getLastCrash().isEmpty()){
                 mCrashView.resetCrashLog = false;
                 selectTabPage(2);

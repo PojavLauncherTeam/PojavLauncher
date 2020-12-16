@@ -24,16 +24,16 @@ public class JREUtils
     private static String nativeLibDir;
 
     public static void checkJavaArchitecture(LoggableActivity act, String jreArch) throws Exception {
-        String[] argName = Tools.currentArch.split("/");
-        act.appendlnToLog("Architecture: " + Tools.currentArch);
+        String[] argName = Tools.CURRENT_ARCHITECTURE.split("/");
+        act.appendlnToLog("Architecture: " + Tools.CURRENT_ARCHITECTURE);
         if (!(jreArch.contains(argName[0]) || jreArch.contains(argName[1]))) {
             // x86 check workaround
-            if (jreArch.startsWith("i") && jreArch.endsWith("86") && Tools.currentArch.contains("x86") && !Tools.currentArch.contains("64")) {
+            if (jreArch.startsWith("i") && jreArch.endsWith("86") && Tools.CURRENT_ARCHITECTURE.contains("x86") && !Tools.CURRENT_ARCHITECTURE.contains("64")) {
                 return;
             }
 
-            act.appendlnToLog("Architecture " + Tools.currentArch + " is incompatible with Java Runtime " + jreArch);
-            throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, Tools.currentArch, jreArch));
+            act.appendlnToLog("Architecture " + Tools.CURRENT_ARCHITECTURE + " is incompatible with Java Runtime " + jreArch);
+            throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, Tools.CURRENT_ARCHITECTURE, jreArch));
         }
     }
     
@@ -73,7 +73,7 @@ public class JREUtils
 
     public static Map<String, String> readJREReleaseProperties() throws IOException {
         Map<String, String> jreReleaseMap = new ArrayMap<>();
-        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.homeJreDir + "/release"));
+        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.DIR_HOME_JRE + "/release"));
         String currLine;
         while ((currLine = jreReleaseReader.readLine()) != null) {
             if (!currLine.isEmpty() || currLine.contains("=")) {
@@ -156,7 +156,7 @@ public class JREUtils
         if (JRE_ARCHITECTURE == null) {
             Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
             JRE_ARCHITECTURE = jreReleaseList.get("OS_ARCH");
-            if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.currentArch.contains("x86") && !Tools.currentArch.contains("64")) {
+            if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.CURRENT_ARCHITECTURE.contains("x86") && !Tools.CURRENT_ARCHITECTURE.contains("64")) {
                 JRE_ARCHITECTURE = "i386/i486/i586";
             }
         }
@@ -164,19 +164,19 @@ public class JREUtils
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 
         for (String arch : JRE_ARCHITECTURE.split("/")) {
-            File f = new File(Tools.homeJreDir, "lib/" + arch);
+            File f = new File(Tools.DIR_HOME_JRE, "lib/" + arch);
             if (f.exists() && f.isDirectory()) {
-                Tools.homeJreLib = "lib/" + arch;
+                Tools.DIRNAME_HOME_JRE = "lib/" + arch;
             }
         }
         
-        String libName = Tools.currentArch.contains("64") ? "lib64" : "lib";
+        String libName = Tools.CURRENT_ARCHITECTURE.contains("64") ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
         ldLibraryPath.append(
             // To make libjli.so ignore re-execute
-            Tools.homeJreDir + "/" + Tools.homeJreLib + "/server:" +
-            Tools.homeJreDir + "/" +  Tools.homeJreLib + "/jli:" +
-            Tools.homeJreDir + "/" + Tools.homeJreLib + ":"
+            Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server:" +
+            Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
+            Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":"
         );
         ldLibraryPath.append(
             "/system/" + libName + ":" +
@@ -191,7 +191,7 @@ public class JREUtils
     
     public static void setJavaEnvironment(LoggableActivity ctx, @Nullable ShellProcessOperation shell) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
-        envMap.put("JAVA_HOME", Tools.homeJreDir);
+        envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.MAIN_PATH);
         envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
@@ -201,7 +201,7 @@ public class JREUtils
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
-        envMap.put("PATH", Tools.homeJreDir + "/bin:" + Os.getenv("PATH"));
+        envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
         
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");
@@ -246,7 +246,7 @@ public class JREUtils
         // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
 
         List<String> javaArgList = new ArrayList<String>();
-        javaArgList.add(Tools.homeJreDir + "/bin/java");
+        javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
         Tools.getJavaArgs(ctx, javaArgList);
         javaArgList.addAll(args);
         

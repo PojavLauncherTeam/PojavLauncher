@@ -29,7 +29,7 @@ public class LauncherFragment extends Fragment
 		webNews.setWebChromeClient(new WebChromeClient(){});
 		webNews.clearCache(true);
 		webNews.getSettings().setJavaScriptEnabled(true);
-		webNews.loadUrl(Tools.mhomeUrl + "/changelog.html");
+		webNews.loadUrl(Tools.URL_HOME + "/changelog.html");
 	}
 	
 }

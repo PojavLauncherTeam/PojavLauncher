@@ -342,7 +342,7 @@ public class PojavLoginActivity extends BaseActivity
     private boolean isJavaRuntimeInstalled(AssetManager am) {
         boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
         try {
-            return prefValue && (am.open("components/jre/bin-" + Tools.currentArch.split("/")[0] + ".tar.xz") == null || Tools.read(new FileInputStream(Tools.homeJreDir+"/version")).equals(Tools.read(am.open("components/jre/version"))));
+            return prefValue && (am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz") == null || Tools.read(new FileInputStream(Tools.DIR_HOME_JRE+"/version")).equals(Tools.read(am.open("components/jre/version"))));
         } catch(IOException e) {
             Log.e("JVMCtl","failed to read file",e);
             return prefValue;
@@ -358,10 +358,9 @@ public class PojavLoginActivity extends BaseActivity
     
     private void initMain()
     {
-        mkdirs(Tools.worksDir);
-        mkdirs(Tools.versnDir);
-        mkdirs(Tools.libraries);
-        mkdirs(Tools.mpProfiles);
+        mkdirs(Tools.DIR_HOME_VERSION);
+        mkdirs(Tools.DIR_HOME_LIBRARY);
+        mkdirs(Tools.DIR_DATA_PROFILES);
         
         mkdirs(Tools.MAIN_PATH);
         mkdirs(Tools.MAIN_PATH + "/config");
@@ -432,16 +431,16 @@ public class PojavLoginActivity extends BaseActivity
             if (!isJavaRuntimeInstalled(am)) {
                 if(!installRuntimeAutomatically(am)) {
                     File jreTarFile = selectJreTarFile();
-                    uncompressTarXZ(jreTarFile, new File(Tools.homeJreDir));
+                    uncompressTarXZ(jreTarFile, new File(Tools.DIR_HOME_JRE));
                 }
                 setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
-                Tools.copyAssetFile(this, "components/jre/version", Tools.homeJreDir + "/","version", true);
+                Tools.copyAssetFile(this, "components/jre/version", Tools.DIR_HOME_JRE + "/","version", true);
             }
             
             JREUtils.relocateLibPath(this);
 
-            File ftIn = new File(Tools.homeJreDir, Tools.homeJreLib + "/libfreetype.so.6");
-            File ftOut = new File(Tools.homeJreDir, Tools.homeJreLib + "/libfreetype.so");
+            File ftIn = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/libfreetype.so.6");
+            File ftOut = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/libfreetype.so");
             if (ftIn.exists() && (!ftOut.exists() || ftIn.length() != ftOut.length())) {
                 ftIn.renameTo(ftOut);
             }
@@ -455,11 +454,11 @@ public class PojavLoginActivity extends BaseActivity
         }
     }
     private boolean installRuntimeAutomatically(AssetManager am) {
-        File rtUniversal = new File(Tools.homeJreDir+"/universal.tar.xz");
-        File rtPlatformDependent = new File(Tools.homeJreDir+"/cust-bin.tar.xz");
-        if(!new File(Tools.homeJreDir).exists()) new File(Tools.homeJreDir).mkdirs(); else {
+        File rtUniversal = new File(Tools.DIR_HOME_JRE+"/universal.tar.xz");
+        File rtPlatformDependent = new File(Tools.DIR_HOME_JRE+"/cust-bin.tar.xz");
+        if(!new File(Tools.DIR_HOME_JRE).exists()) new File(Tools.DIR_HOME_JRE).mkdirs(); else {
             //SANITY: remove the existing files
-            for (File f : new File(Tools.homeJreDir).listFiles()) {
+            for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
                 if (f.isDirectory()){
                     try {
                         FileUtils.deleteDirectory(f);
@@ -479,21 +478,21 @@ public class PojavLoginActivity extends BaseActivity
             IOUtils.copy(is,os);
             is.close();
             os.close();
-            uncompressTarXZ(rtUniversal, new File(Tools.homeJreDir));
+            uncompressTarXZ(rtUniversal, new File(Tools.DIR_HOME_JRE));
         } catch (IOException e){
             Log.e("JREAuto","Failed to unpack universal. Custom embedded-less build?",e);
             return false;
         }
         try {
-            is = am.open("components/jre/bin-" + Tools.currentArch.split("/")[0] + ".tar.xz");
+            is = am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz");
             os = new FileOutputStream(rtPlatformDependent);
             IOUtils.copy(is, os);
             is.close();
             os.close();
-            uncompressTarXZ(rtPlatformDependent, new File(Tools.homeJreDir));
+            uncompressTarXZ(rtPlatformDependent, new File(Tools.DIR_HOME_JRE));
         } catch (IOException e) {
             //Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?), in both cases, redirecting to manual install, and removing the universal stuff
-            for (File f : new File(Tools.homeJreDir).listFiles()) {
+            for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
                 if (f.isDirectory()){
                     try {
                         FileUtils.deleteDirectory(f);
@@ -509,7 +508,7 @@ public class PojavLoginActivity extends BaseActivity
         return true;
     }
     private void copyDummyNativeLib(String name) throws Throwable {
-        File fileLib = new File(Tools.homeJreDir, Tools.homeJreLib + "/" + name);
+        File fileLib = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/" + name);
         fileLib.delete();
         FileInputStream is = new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, name));
         FileOutputStream os = new FileOutputStream(fileLib);
@@ -525,7 +524,7 @@ public class PojavLoginActivity extends BaseActivity
             @Override
             public void run() {
                 AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
-                builder.setTitle(getString(R.string.alerttitle_install_jre, Tools.currentArch));
+                builder.setTitle(getString(R.string.alerttitle_install_jre, Tools.CURRENT_ARCHITECTURE));
                 builder.setCancelable(false);
 
                 final AlertDialog dialog = builder.create();
@@ -669,7 +668,7 @@ public class PojavLoginActivity extends BaseActivity
     public void loginSavedAcc(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        if (Tools.enableDevFeatures) {
+        if (Tools.ENABLE_DEV_FEATURES) {
             builder.setNegativeButton("Toggle UI v2", new DialogInterface.OnClickListener(){
 
                     @Override
@@ -705,7 +704,7 @@ public class PojavLoginActivity extends BaseActivity
         final FileListView flv = new FileListView(dialog);
         // flv.setLayoutParams(lpFlv);
         
-        flv.lockPathAt(Tools.mpProfiles);
+        flv.lockPathAt(Tools.DIR_DATA_PROFILES);
         flv.setFileSelectedListener(new FileSelectedListener(){
 
                 @Override
@@ -766,14 +765,14 @@ public class PojavLoginActivity extends BaseActivity
     }
     
     private MCProfile.Builder loginOffline() {
-        new File(Tools.mpProfiles).mkdir();
+        new File(Tools.DIR_DATA_PROFILES).mkdir();
         
         String text = edit2.getText().toString();
         if(text.isEmpty()){
             edit2.setError(getResources().getString(R.string.global_error_field_empty));
         } else if(text.length() <= 2){
             edit2.setError(getResources().getString(R.string.login_error_short_username));
-        } else if(new File(Tools.mpProfiles + "/" + text).exists()){
+        } else if(new File(Tools.DIR_DATA_PROFILES + "/" + text).exists()){
             edit2.setError(getResources().getString(R.string.login_error_exist_username));
         } else{
             MCProfile.Builder builder = new MCProfile.Builder();

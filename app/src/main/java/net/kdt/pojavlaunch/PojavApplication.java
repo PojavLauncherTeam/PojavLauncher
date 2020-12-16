@@ -24,7 +24,7 @@ public class PojavApplication extends Application
 			@Override
 			public void uncaughtException(Thread thread, Throwable th) {
 				boolean storagePermAllowed = Build.VERSION.SDK_INT < 23 || ActivityCompat.checkSelfPermission(PojavApplication.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-				File crashFile = new File(storagePermAllowed ? Tools.MAIN_PATH : Tools.datapath, "latestcrash.txt");
+				File crashFile = new File(storagePermAllowed ? Tools.MAIN_PATH : Tools.DIR_DATA, "latestcrash.txt");
 				try {
 					// Write to file, since some devices may not able to show error
 					crashFile.createNewFile();
@@ -52,17 +52,16 @@ public class PojavApplication extends Application
 			super.onCreate();
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
 			
-			PackageInfo thisApp = getPackageManager().getPackageInfo(getPackageName(), 0);
-			
-			Tools.usingVerName = thisApp.versionName;
-			Tools.usingVerCode = thisApp.versionCode;
-			Tools.datapath = getDir("files", MODE_PRIVATE).getParent();
-            Tools.currentArch = new File(getApplicationInfo().nativeLibraryDir).getName();
-			switch (Tools.currentArch) {
-                case "arm": Tools.currentArch = "arm/aarch32"; break;
-                case "arm64": Tools.currentArch = "arm64/aarch64"; break;
-                case "x86": Tools.currentArch = "x86/i*86"; break;
-                case "x86_64": Tools.currentArch = "x86_64/amd64"; break;
+			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
+            Tools.DIR_HOME_JRE = Tools.DIR_DATA + "/jre_runtime";
+            Tools.DIR_DATA_PROFILES = Tools.DIR_DATA + "/Users";
+            
+            Tools.CURRENT_ARCHITECTURE = new File(getApplicationInfo().nativeLibraryDir).getName();
+			switch (Tools.CURRENT_ARCHITECTURE) {
+                case "arm": Tools.CURRENT_ARCHITECTURE = "arm/aarch32"; break;
+                case "arm64": Tools.CURRENT_ARCHITECTURE = "arm64/aarch64"; break;
+                case "x86": Tools.CURRENT_ARCHITECTURE = "x86/i*86"; break;
+                case "x86_64": Tools.CURRENT_ARCHITECTURE = "x86_64/amd64"; break;
             }
 
 			FontChanger.initFonts(this);

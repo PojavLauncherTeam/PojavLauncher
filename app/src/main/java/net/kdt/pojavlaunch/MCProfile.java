@@ -33,12 +33,12 @@ public class MCProfile
         
         try {
             byte[] bFull = toString(builder).getBytes("UTF-8");
-            Tools.write(Tools.mpProfiles + "/" + builder.getUsername(), bFull);
+            Tools.write(Tools.DIR_DATA_PROFILES + "/" + builder.getUsername(), bFull);
         } catch (IOException e) {
             e.printStackTrace();
         }
         
-        return Tools.mpProfiles + "/" + builder.getUsername();
+        return Tools.DIR_DATA_PROFILES + "/" + builder.getUsername();
     }
     
     public static MCProfile.Builder load(String pofFilePath) {

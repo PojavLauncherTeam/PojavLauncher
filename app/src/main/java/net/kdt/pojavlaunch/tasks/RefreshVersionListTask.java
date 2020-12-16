@@ -27,7 +27,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     {
         try {
             mActivity.mVersionList = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
-            ArrayList<String> versionStringList = filter(mActivity.mVersionList.versions, new File(Tools.versnDir).listFiles());
+            ArrayList<String> versionStringList = filter(mActivity.mVersionList.versions, new File(Tools.DIR_HOME_VERSION).listFiles());
 
             return versionStringList;
         } catch (Exception e){

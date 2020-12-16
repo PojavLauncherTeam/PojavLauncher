@@ -24,7 +24,7 @@ import android.view.*;
 
 public final class Tools
 {
-    public static final boolean enableDevFeatures = BuildConfig.DEBUG;
+    public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
 
     public static String APP_NAME = "null";
     public static final String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
@@ -34,26 +34,25 @@ public final class Tools
 
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
     
-    public static final String mhomeUrl = "https://pojavlauncherteam.github.io/PojavLauncher";
-    public static int usingVerCode = 1;
-    public static String usingVerName = "3.2.0";
-    public static String datapath = "/data/data/net.kdt.pojavlaunch";
-    public static String worksDir = datapath + "/app_working_dir";
-    public static String currentArch;
+    public static final String URL_HOME = "https://pojavlauncherteam.github.io/PojavLauncher";
+    public static String DIR_DATA = "/data/data/" + BuildConfig.APPLICATION_ID;
+    public static String CURRENT_ARCHITECTURE;
 
+    // New since 3.3.1
+    public static String DIR_ACCOUNT_NEW;
+    
     // New since 3.0.0
-    public static String homeJreDir = datapath + "/jre_runtime";
-    public static String homeJreLib = "lib";
+    public static String DIR_HOME_JRE;
+    public static String DIRNAME_HOME_JRE = "lib";
 
     // New since 2.4.2
-    public static final String versnDir = MAIN_PATH + "/versions";
-    public static final String libraries = MAIN_PATH + "/libraries";
-    public static final String optifineDir = MAIN_PATH + "/optifine";
+    public static final String DIR_HOME_VERSION = MAIN_PATH + "/versions";
+    public static final String DIR_HOME_LIBRARY = MAIN_PATH + "/libraries";
 
-    public static final String crashPath = MAIN_PATH + "/crash-reports";
-    public static String mpProfiles = datapath + "/Users";
+    public static final String DIR_HOME_CRASH = MAIN_PATH + "/crash-reports";
+    public static String DIR_DATA_PROFILES;
 
-    public static final String optifineLib = "optifine:OptiFine";
+    public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
     public static void launchMinecraft(final LoggableActivity ctx, MCProfile.Builder profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
         String[] launchArgs = getMinecraftArgs(profile, versionInfo);
@@ -76,7 +75,7 @@ public final class Tools
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
         List<String> overrideableArgList = new ArrayList<String>();
 
-        overrideableArgList.add("-Djava.home=" + Tools.homeJreDir);
+        overrideableArgList.add("-Djava.home=" + Tools.DIR_HOME_JRE);
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
         // overrideableArgList.add("-Djava.library.path=" + JREUtils.LD_LIBRARY_PATH);
         overrideableArgList.add("-Duser.home=" + new File(Tools.MAIN_PATH).getParent());
@@ -213,7 +212,7 @@ public final class Tools
     }
 
     public static String getPatchedFile(String version) {
-        return versnDir + "/" + version + "/" + version + ".jar";
+        return DIR_HOME_VERSION + "/" + version + "/" + version + ".jar";
     }
 
     private static String getLWJGL3ClassPath() {
@@ -478,23 +477,23 @@ public final class Tools
 
         for (DependentLibrary libItem: info.libraries) {
             String[] libInfos = libItem.name.split(":");
-            libDir.add(Tools.libraries + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
+            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         }
         return libDir.toArray(new String[0]);
     }
 
     public static JMinecraftVersionList.Version getVersionInfo(String versionName) {
         try {
-            JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(versnDir + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
+            JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             for (DependentLibrary lib : customVer.libraries) {
-                if (lib.name.startsWith(optifineLib)) {
+                if (lib.name.startsWith(LIBNAME_OPTIFINE)) {
                     customVer.optifineLib = lib;
                 }
             }
             if (customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
-                JMinecraftVersionList.Version inheritsVer = Tools.GLOBAL_GSON.fromJson(read(versnDir + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
+                JMinecraftVersionList.Version inheritsVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
                 inheritsVer.inheritsFrom = inheritsVer.id;
                 
                 insertSafety(inheritsVer, customVer,

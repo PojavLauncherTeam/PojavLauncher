@@ -20,7 +20,7 @@ public class PojavV2ActivityManager
 	}
 
 	public static int getLauncherRemakeInt(Context context) {
-		if (Tools.enableDevFeatures) {
+		if (Tools.ENABLE_DEV_FEATURES) {
 			return getPref(context).getInt(CATEGORY_LAUNCHER, 0);
 		} else {
 			return 0;

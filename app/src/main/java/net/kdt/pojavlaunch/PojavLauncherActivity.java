@@ -109,7 +109,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         if (tempProfile != null) {
             accountList.add(tempProfile.getUsername());
         }
-        accountList.addAll(Arrays.asList(new File(Tools.mpProfiles).list()));
+        accountList.addAll(Arrays.asList(new File(Tools.DIR_DATA_PROFILES).list()));
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -131,7 +131,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 if (tempProfile != null && position == 0) {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.mpProfiles + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)));
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.DIR_DATA_PROFILES + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
                 pickAccount();
             }
@@ -143,7 +143,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         });
         
         List<String> versions = new ArrayList<String>();
-        final File fVers = new File(Tools.versnDir);
+        final File fVers = new File(Tools.DIR_HOME_VERSION);
 
         try {
             if (fVers.listFiles().length < 1) {

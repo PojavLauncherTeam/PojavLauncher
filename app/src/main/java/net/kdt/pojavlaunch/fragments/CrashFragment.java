@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 public class CrashFragment extends Fragment
 {
-	public static String lastCrashFile = Tools.worksDir + "/lastcrash.txt";
+	public static String lastCrashFile = Tools.DIR_DATA + "/lastcrash.txt";
 	
 	private String crashContent;
 	private TextView crashView;
@@ -58,7 +58,7 @@ public class CrashFragment extends Fragment
 	{
 		try {
 			if(!resetCrashLog){
-				File crashLog = Tools.lastFileModified(Tools.crashPath);
+				File crashLog = Tools.lastFileModified(Tools.DIR_HOME_CRASH);
 				String lastCrash = getLastCrash();
 				if (isNewCrash(crashLog)) {
 					crashContent = Tools.read(crashLog.getAbsolutePath());

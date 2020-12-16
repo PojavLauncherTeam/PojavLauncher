@@ -36,12 +36,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         try {
             final String downVName = "/" + p1[0] + "/" + p1[0];
             //Downloading libraries
-            String minecraftMainJar = Tools.versnDir + downVName + ".jar";
+            String minecraftMainJar = Tools.DIR_HOME_VERSION + downVName + ".jar";
             JAssets assets = null;
             try {
                 //com.pojavdx.dx.mod.Main.debug = true;
 
-                String verJsonDir = Tools.versnDir + downVName + ".json";
+                String verJsonDir = Tools.DIR_HOME_VERSION + downVName + ".json";
 
                 verInfo = findVersion(p1[0]);
 
@@ -88,7 +88,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                         String[] libInfo = libItem.name.split(":");
                         String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
-                        outLib = new File(Tools.libraries + "/" + libArtifact);
+                        outLib = new File(Tools.DIR_HOME_LIBRARY + "/" + libArtifact);
                         outLib.getParentFile().mkdirs();
 
                         if (!outLib.exists()) {
@@ -145,7 +145,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     } catch (Throwable th) {
                         if (verInfo.inheritsFrom != null) {
                             minecraftMainFile.delete();
-                            FileInputStream is = new FileInputStream(new File(Tools.versnDir, verInfo.inheritsFrom + "/" + verInfo.inheritsFrom + ".jar"));
+                            FileInputStream is = new FileInputStream(new File(Tools.DIR_HOME_VERSION, verInfo.inheritsFrom + "/" + verInfo.inheritsFrom + ".jar"));
                             FileOutputStream os = new FileOutputStream(minecraftMainFile);
                             IOUtils.copy(is, os);
                             is.close();
@@ -163,7 +163,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             publishProgress("1", mActivity.getString(R.string.mcl_launch_cleancache));
             // new File(inputPath).delete();
 
-            for (File f : new File(Tools.versnDir).listFiles()) {
+            for (File f : new File(Tools.DIR_HOME_VERSION).listFiles()) {
                 if(f.getName().endsWith(".part")) {
                     Log.d(Tools.APP_NAME, "Cleaning cache: " + f);
                     f.delete();

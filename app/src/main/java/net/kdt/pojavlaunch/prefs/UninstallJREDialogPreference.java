@@ -39,7 +39,7 @@ public class UninstallJREDialogPreference extends Preference implements DialogIn
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             try {
-                FileUtils.deleteDirectory(new File(Tools.homeJreDir));
+                FileUtils.deleteDirectory(new File(Tools.DIR_HOME_JRE));
                 
                 getContext().getSharedPreferences("pojav_extract", Context.MODE_PRIVATE)
                     .edit().putBoolean(PojavLoginActivity.PREF_IS_INSTALLED_JAVARUNTIME, false).commit();

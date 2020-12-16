@@ -22,7 +22,7 @@ public class LegacyForgeInstaller extends BaseInstaller {
         ForgeInstallProfile profile = readInstallProfile(this);
             
         // Write the json file
-        File versionFile = new File(Tools.versnDir, profile.install.target);
+        File versionFile = new File(Tools.DIR_HOME_VERSION, profile.install.target);
         versionFile.mkdir();
         target = versionFile.getAbsolutePath() + "/" + profile.install.target + ".json";
         ctx.appendlnToLog("Writing " + target);
@@ -33,7 +33,7 @@ public class LegacyForgeInstaller extends BaseInstaller {
         
         // Extract Forge universal
         String[] libInfos = profile.install.path.split(":");
-        File libraryFile = new File(Tools.libraries, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
+        File libraryFile = new File(Tools.DIR_HOME_LIBRARY, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         libraryFile.getParentFile().mkdirs();
         target = libraryFile.getAbsolutePath().replace("-universal", "");
         ctx.appendlnToLog("Writing " + target);

@@ -88,7 +88,7 @@ public class MCLauncherActivity extends BaseLauncherActivity
         //showProfileInfo();
 
         List<String> versions = new ArrayList<String>();
-        final File fVers = new File(Tools.versnDir);
+        final File fVers = new File(Tools.DIR_HOME_VERSION);
 
         try {
             if (fVers.listFiles().length < 1) {

@@ -23,7 +23,7 @@ public class Legacy1p12p2ForgeInstaller extends BaseInstaller {
         ForgeInstallProfile profile = readInstallProfile(this);
 
         // Write the json file
-        File versionFile = new File(Tools.versnDir, profile.version);
+        File versionFile = new File(Tools.DIR_HOME_VERSION, profile.version);
         versionFile.mkdir();
         target = versionFile.getAbsolutePath() + "/" + profile.version + ".json";
         ctx.appendlnToLog("Writing " + target + " from " + profile.json);
@@ -36,7 +36,7 @@ public class Legacy1p12p2ForgeInstaller extends BaseInstaller {
         // Forge 1.12.2+ installer does not include universal, so download
         // Users are already go throught Forge ads to download installer, so not again.
         String[] libInfos = profile.path.split(":");
-        File libraryFile = new File(Tools.libraries, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
+        File libraryFile = new File(Tools.DIR_HOME_LIBRARY, Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         libraryFile.getParentFile().mkdirs();
         target = libraryFile.getAbsolutePath();
         String downloadPath = "https://files.minecraftforge.net/maven/" + profile.path.replace(":", "/").replace("net.minecraftforge","net/minecraftforge") + "/forge-" + libInfos[2] + "-universal.jar";
