@@ -140,9 +140,9 @@ public final class Tools
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
-        varArgMap.put("auth_access_token", profile.accessToken);
+        varArgMap.put("auth_access_token", profile.accessToken == null ? "0" : profile.accessToken);
         varArgMap.put("auth_player_name", username);
-        varArgMap.put("auth_uuid", profile.profileId);
+        varArgMap.put("auth_uuid", profile.profileId == null ? "0" : profile.profileId);
         varArgMap.put("assets_root", Tools.ASSETS_PATH);
         varArgMap.put("assets_index_name", versionInfo.assets);
         varArgMap.put("game_assets", Tools.ASSETS_PATH);
