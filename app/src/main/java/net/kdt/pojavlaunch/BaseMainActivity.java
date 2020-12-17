@@ -36,7 +36,7 @@ public class BaseMainActivity extends LoggableActivity {
     private int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
-    boolean mIsResuming;
+    private boolean resuming;
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
     private static boolean triggeredLeftMouseButton = false;
@@ -653,7 +653,7 @@ public class BaseMainActivity extends LoggableActivity {
             minecraftGLView.setOnHoverListener(new View.OnHoverListener(){
                     @Override
                     public boolean onHover(View v, MotionEvent e) {
-                        if (!CallbackBridge.isGrabbing() && mIsResuming) {
+                        if (!CallbackBridge.isGrabbing() && resuming) {
                             // return glTouchListener.onTouch(v, e);
                             int x = ((int) e.getX()) / scaleFactor;
                             int y = ((int) e.getY()) / scaleFactor;
@@ -755,7 +755,7 @@ public class BaseMainActivity extends LoggableActivity {
     @Override
     public void onResume() {
         super.onResume();
-        mIsResuming = true;
+        resuming = true;
         // if (minecraftGLView != null) minecraftGLView.requestRender();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
@@ -778,7 +778,7 @@ public class BaseMainActivity extends LoggableActivity {
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
         }
-        mIsResuming = false;
+        resuming = false;
         super.onPause();
     }
 
@@ -929,12 +929,12 @@ public class BaseMainActivity extends LoggableActivity {
 
     private void openLogOutput() {
         contentLog.setVisibility(View.VISIBLE);
-        mIsResuming = false;
+        resuming = false;
     }
 
     public void closeLogOutput(View view) {
         contentLog.setVisibility(View.GONE);
-        mIsResuming = true;
+        resuming = true;
     }
     /*
      private void openCanvasOutput() {
