@@ -298,16 +298,15 @@ public class PojavLoginActivity extends BaseActivity
     }
    
     private void initMain() throws Throwable {
-        mkdirs(Tools.DIR_HOME_VERSION);
-        mkdirs(Tools.DIR_HOME_LIBRARY);
-        
-        mkdirs(Tools.DIR_GAME_NEW);
-        mkdirs(Tools.DIR_GAME_NEW + "/config");
-        mkdirs(Tools.DIR_GAME_NEW + "/lwjgl3");
-        mkdirs(Tools.DIR_GAME_NEW + "/mods");
-        
         PojavMigrator.migrateAccountData(this);
-        PojavMigrator.migrateGameDir();
+        if (!PojavMigrator.migrateGameDir()) {
+            mkdirs(Tools.DIR_GAME_NEW);
+            mkdirs(Tools.DIR_GAME_NEW + "/config");
+            mkdirs(Tools.DIR_GAME_NEW + "/lwjgl3");
+            mkdirs(Tools.DIR_GAME_NEW + "/mods");
+            mkdirs(Tools.DIR_HOME_VERSION);
+            mkdirs(Tools.DIR_HOME_LIBRARY);
+        }
         
         File forgeSplashFile = new File(Tools.DIR_GAME_NEW, "config/splash.properties");
         String forgeSplashContent = "enabled=true";
@@ -330,7 +329,7 @@ public class PojavLoginActivity extends BaseActivity
 
             Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar", Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
-            Tools.copyAssetFile(this, "java_sandbox.policy", Tools.DIR_GAME_NEW, true);
+            Tools.copyAssetFile(this, "java_sandbox.policy", Tools.DIR_GAME_HOME, true);
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
 

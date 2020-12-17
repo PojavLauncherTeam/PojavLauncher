@@ -35,9 +35,10 @@ public final class Tools
     public static String CURRENT_ARCHITECTURE;
 
     // New since 3.3.1
-    public static String DIR_ACCOUNT_OLD;
     public static String DIR_ACCOUNT_NEW;
-    public static final String DIR_GAME_NEW = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher/.minecraft";
+    public static String DIR_ACCOUNT_OLD;
+    public static final String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
+    public static final String DIR_GAME_NEW = DIR_GAME_NEW + "/.minecraft";
     public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
     
     // New since 3.0.0
@@ -84,8 +85,6 @@ public final class Tools
         overrideableArgList.add("-Duser.language=" + System.getProperty("user.language"));
         // overrideableArgList.add("-Duser.timezone=GMT");
 
-        // Should be compatible?
-        // overrideableArgList.add("-Dos.name=Android");
         overrideableArgList.add("-Dos.name=Linux");
         overrideableArgList.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
 
