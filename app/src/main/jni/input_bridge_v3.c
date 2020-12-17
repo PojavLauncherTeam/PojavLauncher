@@ -6,7 +6,7 @@
  * - Works with some bugs:
  *  + Modded versions gives broken stuff..
  *
- * TODO:
+ * 
  * - Implements glfwSetCursorPos() to handle grab camera pos correctly.
  */
  
@@ -201,12 +201,11 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputRead
     return isUseStackQueueCall;
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing, jint xset, jint yset) {
     isGrabbing = grabbing;
     if (isGrabbing == JNI_TRUE) {
-        // Center the cursor pointer
-        grabCursorX = savedWidth / 2;
-        grabCursorY = savedHeight / 2;
+        grabCursorX = xset; // savedWidth / 2;
+        grabCursorY = yset; // savedHeight / 2;
         isPrepareGrabPos = true;
     }
 }
