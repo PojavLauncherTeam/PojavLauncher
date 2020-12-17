@@ -173,7 +173,7 @@ public class Msa {
             String uhs = jo.getJSONObject("DisplayClaims").getJSONArray("xui").getJSONObject(0).getString("uhs");
             Log.i("MicroAuth","Xbl Xsts = "+jo.getString("Token")+"; Uhs = " + uhs);
             acquireMinecraftToken(uhs,jo.getString("Token"));
-        }else{;
+        }else{
             throwResponseError(conn);
         }
     }
@@ -208,7 +208,7 @@ public class Msa {
             checkMcProfile(jo.getString("access_token"));
             checkMcStore(jo.getString("access_token"));
 
-        }else{;
+        }else{
             throwResponseError(conn);
         }
     }

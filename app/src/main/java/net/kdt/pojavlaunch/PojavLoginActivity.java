@@ -142,7 +142,12 @@ public class PojavLoginActivity extends BaseActivity
                 } catch (InterruptedException e) {}
             }
 
-            initMain();
+            try {
+                initMain();
+            } catch (Throwable th) {
+                Tools.showError(PojavLoginActivity.this, th, true);
+                return 1;
+            }
 
             return 0;
         }
@@ -168,30 +173,6 @@ public class PojavLoginActivity extends BaseActivity
                 progressLog.setText(getResources().getString(R.string.error_checklog, "\n\n" + progressLog.getText()));
             } */
         }
-/*
-        private void appendlnToLog(String txt) {
-            publishProgress("", txt + "\n");
-        }
-        
-         private void execCmd(String cmd) throws Exception {
-         appendlnToLog("> " + cmd);
-         ShellProcessOperation mainProcess = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
-
-         @Override
-         public void onPrintLine(String text)
-         {
-         publishProgress(text);
-         }
-         }, cmd);
-         mainProcess.initInputStream(MCLoginActivity.this);
-         String msgExit = cmd.split(" ")[0] + " has exited with code " + mainProcess.waitFor();
-         if (mainProcess.exitCode() != 0) {
-         throw new Error("(ERROR) " + msgExit);
-         } else {
-         appendlnToLog("(SUCCESS) " + msgExit);
-         }
-         }
-         */
     }
     
     private void uiInit() {
@@ -315,27 +296,20 @@ public class PojavLoginActivity extends BaseActivity
             return prefValue;
         }
     }
-    
-    private boolean setPref(String prefName, boolean value) {
-        return firstLaunchPrefs.edit().putBoolean(prefName, value).commit();
-    }
-    private boolean setPref(String prefName, String value) {
-        return firstLaunchPrefs.edit().putString(prefName, value).commit();
-    }
-    
-    private void initMain()
-    {
+   
+    private void initMain() throws Throwable {
         mkdirs(Tools.DIR_HOME_VERSION);
         mkdirs(Tools.DIR_HOME_LIBRARY);
         
-        mkdirs(Tools.MAIN_PATH);
-        mkdirs(Tools.MAIN_PATH + "/config");
-        mkdirs(Tools.MAIN_PATH + "/lwjgl3");
-        mkdirs(Tools.MAIN_PATH + "/mods");
+        mkdirs(Tools.DIR_GAME_NEW);
+        mkdirs(Tools.DIR_GAME_NEW + "/config");
+        mkdirs(Tools.DIR_GAME_NEW + "/lwjgl3");
+        mkdirs(Tools.DIR_GAME_NEW + "/mods");
         
         PojavMigrator.migrateAccountData(this);
+        PojavMigrator.migrateGameDir();
         
-        File forgeSplashFile = new File(Tools.MAIN_PATH, "config/splash.properties");
+        File forgeSplashFile = new File(Tools.DIR_GAME_NEW, "config/splash.properties");
         String forgeSplashContent = "enabled=true";
         try {
             if (forgeSplashFile.exists()) {
@@ -354,25 +328,23 @@ public class PojavLoginActivity extends BaseActivity
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
-            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar", Tools.MAIN_PATH + "/config", "forge-installer-headless.jar", true);
-            
-            Tools.copyAssetFile(this, "options.txt", Tools.MAIN_PATH, false);
-            
-            // Extract launcher_profiles.json
+            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar", Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
+            Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
+            Tools.copyAssetFile(this, "java_sandbox.policy", Tools.DIR_GAME_NEW, true);
             // TODO: Remove after implement.
-            Tools.copyAssetFile(this, "launcher_profiles.json", Tools.MAIN_PATH, false);
+            Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
 
             AssetManager am = this.getAssets();
             
             InputStream is = am.open("components/lwjgl3/version");
-            if(!new File(Tools.MAIN_PATH + "/lwjgl3/version").exists()) {
+            if(!new File(Tools.DIR_GAME_NEW + "/lwjgl3/version").exists()) {
                 Log.i("LWJGL3Prep","Pack was installed manually, or does not exist, unpacking new...");
                 String[] lwjglFileList = am.list("components/lwjgl3");
                 FileOutputStream fos;
                 InputStream iis;
                 for(String s : lwjglFileList) {
                     iis = am.open("components/lwjgl3/"+s);
-                    fos = new FileOutputStream(new File(Tools.MAIN_PATH+"/lwjgl3/"+s));
+                    fos = new FileOutputStream(new File(Tools.DIR_GAME_NEW+"/lwjgl3/"+s));
                     /*
                     int i; byte[] buf = new byte[1024];
                     while((i = iis.read(buf)) != -1) {
@@ -384,13 +356,13 @@ public class PojavLoginActivity extends BaseActivity
                     iis.close();
                 }
             } else {
-                FileInputStream fis = new FileInputStream(new File(Tools.MAIN_PATH + "/lwjgl3/version"));
+                FileInputStream fis = new FileInputStream(new File(Tools.DIR_GAME_NEW + "/lwjgl3/version"));
                 String release1 = Tools.read(is);
                 String release2 = Tools.read(fis);
                 if (!release1.equals(release2)) {
                     String[] lwjglFileList = am.list("components/lwjgl3");
                     for (String s : lwjglFileList) {
-                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.MAIN_PATH+"/lwjgl3/",s, true);
+                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW+"/lwjgl3/",s, true);
                     }
                 } else {
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
@@ -401,7 +373,7 @@ public class PojavLoginActivity extends BaseActivity
                     File jreTarFile = selectJreTarFile();
                     uncompressTarXZ(jreTarFile, new File(Tools.DIR_HOME_JRE));
                 }
-                setPref(PREF_IS_INSTALLED_JAVARUNTIME, true);
+                firstLaunchPrefs.edit().putBoolean(PREF_IS_INSTALLED_JAVARUNTIME, true).commit();
                 Tools.copyAssetFile(this, "components/jre/version", Tools.DIR_HOME_JRE + "/","version", true);
             }
             
@@ -603,6 +575,7 @@ public class PojavLoginActivity extends BaseActivity
     private boolean mkdirs(String path)
     {
         File file = new File(path);
+        // check necessary???
         if(file.getParentFile().exists())
              return file.mkdir();
         else return file.mkdirs();

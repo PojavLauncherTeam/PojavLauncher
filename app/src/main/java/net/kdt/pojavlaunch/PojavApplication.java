@@ -24,9 +24,10 @@ public class PojavApplication extends Application
 			@Override
 			public void uncaughtException(Thread thread, Throwable th) {
 				boolean storagePermAllowed = Build.VERSION.SDK_INT < 23 || ActivityCompat.checkSelfPermission(PojavApplication.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-				File crashFile = new File(storagePermAllowed ? Tools.MAIN_PATH : Tools.DIR_DATA, "latestcrash.txt");
+				File crashFile = new File(storagePermAllowed ? Tools.DIR_GAME_NEW : Tools.DIR_DATA, "latestcrash.txt");
 				try {
 					// Write to file, since some devices may not able to show error
+                    crashFile.getParentFile().mkdirs();
 					crashFile.createNewFile();
 					PrintStream crashStream = new PrintStream(crashFile);
 					crashStream.append("PojavLauncher crash report\n");

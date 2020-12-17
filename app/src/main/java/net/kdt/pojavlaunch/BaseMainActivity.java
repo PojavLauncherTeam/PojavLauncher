@@ -119,7 +119,7 @@ public class BaseMainActivity extends LoggableActivity {
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             
-            logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
+            logFile = new File(Tools.DIR_GAME_NEW, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
             logStream = new PrintStream(logFile.getAbsolutePath());
@@ -881,7 +881,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     private void checkLWJGL3Installed() {
-        File lwjgl3dir = new File(Tools.MAIN_PATH, "lwjgl3");
+        File lwjgl3dir = new File(Tools.DIR_GAME_NEW, "lwjgl3");
         if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {
             appendlnToLog("Error: LWJGL3 was not installed!");
             throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
@@ -961,7 +961,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     public String getMinecraftOption(String key) {
         try {
-            String[] options = Tools.read(Tools.MAIN_PATH + "/options.txt").split("\n");
+            String[] options = Tools.read(Tools.DIR_GAME_NEW + "/options.txt").split("\n");
             for (String option : options) {
                 String[] optionKeyValue = option.split(":");
                 if (optionKeyValue[0].equals(key)) {

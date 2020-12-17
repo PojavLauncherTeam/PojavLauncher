@@ -33,7 +33,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         setContentView(R.layout.install_mod);
 
         try {
-            logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
+            logFile = new File(Tools.DIR_GAME_NEW, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
             logStream = new PrintStream(logFile.getAbsolutePath());
@@ -185,7 +185,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         try {
             List<String> javaArgList = new ArrayList<String>();
 
-            File cacioAwtLibPath = new File(Tools.MAIN_PATH, "cacioawtlib");
+            File cacioAwtLibPath = new File(Tools.DIR_GAME_NEW, "cacioawtlib");
             if (cacioAwtLibPath.exists()) {
                 StringBuilder libStr = new StringBuilder();
                 for (File file: cacioAwtLibPath.listFiles()) {

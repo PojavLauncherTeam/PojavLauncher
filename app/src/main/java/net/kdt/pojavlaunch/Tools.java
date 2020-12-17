@@ -27,11 +27,7 @@ public final class Tools
     public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
 
     public static String APP_NAME = "null";
-    public static final String MAIN_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
-    public static final String ASSETS_PATH = MAIN_PATH + "/assets";
-    public static final String CTRLMAP_PATH = MAIN_PATH + "/controlmap";
-    public static final String CTRLDEF_FILE = MAIN_PATH + "/controlmap/default.json";
-
+    
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
     
     public static final String URL_HOME = "https://pojavlauncherteam.github.io/PojavLauncher";
@@ -41,17 +37,23 @@ public final class Tools
     // New since 3.3.1
     public static String DIR_ACCOUNT_OLD;
     public static String DIR_ACCOUNT_NEW;
+    public static final String DIR_GAME_NEW = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher/.minecraft";
+    public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
     
     // New since 3.0.0
     public static String DIR_HOME_JRE;
     public static String DIRNAME_HOME_JRE = "lib";
 
     // New since 2.4.2
-    public static final String DIR_HOME_VERSION = MAIN_PATH + "/versions";
-    public static final String DIR_HOME_LIBRARY = MAIN_PATH + "/libraries";
+    public static final String DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
+    public static final String DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
 
-    public static final String DIR_HOME_CRASH = MAIN_PATH + "/crash-reports";
+    public static final String DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
 
+    public static final String ASSETS_PATH = DIR_GAME_NEW + "/assets";
+    public static final String CTRLMAP_PATH = DIR_GAME_NEW + "/controlmap";
+    public static final String CTRLDEF_FILE = DIR_GAME_NEW + "/controlmap/default.json";
+    
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
     public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
@@ -78,7 +80,7 @@ public final class Tools
         overrideableArgList.add("-Djava.home=" + Tools.DIR_HOME_JRE);
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
         // overrideableArgList.add("-Djava.library.path=" + JREUtils.LD_LIBRARY_PATH);
-        overrideableArgList.add("-Duser.home=" + new File(Tools.MAIN_PATH).getParent());
+        overrideableArgList.add("-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent());
         overrideableArgList.add("-Duser.language=" + System.getProperty("user.language"));
         // overrideableArgList.add("-Duser.timezone=GMT");
 
@@ -135,7 +137,7 @@ public final class Tools
         
         String userType = "mojang";
 
-        File gameDir = new File(Tools.MAIN_PATH);
+        File gameDir = new File(Tools.DIR_GAME_NEW);
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
@@ -217,7 +219,7 @@ public final class Tools
 
     private static String getLWJGL3ClassPath() {
         StringBuilder libStr = new StringBuilder();
-        File lwjgl3Folder = new File(Tools.MAIN_PATH, "lwjgl3");
+        File lwjgl3Folder = new File(Tools.DIR_GAME_NEW, "lwjgl3");
         if (/* info.arguments != null && */ lwjgl3Folder.exists()) {
             for (File file: lwjgl3Folder.listFiles()) {
                 if (file.getName().endsWith(".jar")) {

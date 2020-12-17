@@ -192,7 +192,7 @@ public class JREUtils
     public static void setJavaEnvironment(LoggableActivity ctx, @Nullable ShellProcessOperation shell) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
-        envMap.put("HOME", Tools.MAIN_PATH);
+        envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
         
@@ -210,7 +210,7 @@ public class JREUtils
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
         
-        File customEnvFile = new File(Tools.MAIN_PATH, "custom_env.txt");
+        File customEnvFile = new File(Tools.DIR_GAME_NEW, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
             BufferedReader reader = new BufferedReader(new FileReader(customEnvFile));
             String line;
@@ -260,7 +260,7 @@ public class JREUtils
 */
         JREUtils.setJavaEnvironment(ctx, null);
         JREUtils.initJavaRuntime();
-        JREUtils.chdir(Tools.MAIN_PATH);
+        JREUtils.chdir(Tools.DIR_GAME_NEW);
 
         final int exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);

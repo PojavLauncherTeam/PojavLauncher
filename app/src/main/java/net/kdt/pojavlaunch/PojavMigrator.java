@@ -31,4 +31,17 @@ public class PojavMigrator
             }
         }
     }
+    
+    public static void migrateGameDir() throws IOException, InterruptedException {
+        File oldGameDir = new File(Tools.DIR_GAME_OLD);
+        if (oldGameDir.exists() && oldGameDir.isDirectory()) {
+            Process p = Runtime.getRuntime().exec(
+                new String[]{"mv", Tools.DIR_GAME_OLD, Tools.DIR_GAME_NEW});
+            int exitCode = p.waitFor();
+            if (exitCode != 0) {
+                throw new IOException("Could not move game dir! Exit code " + exitCode +
+                    ", message:\n" + Tools.read(p.getErrorStream()));
+            }
+        }
+    }
 }
