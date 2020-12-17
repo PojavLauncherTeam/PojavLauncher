@@ -1,21 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）</string>
+    <string name="app_motd">在您的裝置上啟動《Minecraft：Java版》！</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">幫助</string>
     <!-- Languages list part -->
+    <string name="language_name">繁體中文 - TW</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">電子郵件或使用者名稱</string>
+    <string name="login_online_username_question">（使用哪個？）</string>
+    <string name="login_online_password_hint">密碼</string>
+    <string name="login_online_password_question">忘記密碼？</string>
+    <string name="login_online_remember">記住我</string>
+    <string name="login_online_check_keeplogin">保持登入狀態</string>
+    <string name="login_online_login_label">登入</string>
+    <string name="login_online_create_account">（建立新賬號？）</string>
+    <string name="login_offline_switch">離線登入？</string>
+    <string name="login_offline_label">以離線賬號登入</string>
+    <string name="login_offline_alert_skip">跳過</string>
+    <string name="login_error_short_username">使用者名稱長度至少為3字元</string>
+    <string name="login_error_exist_username">使用者名稱已存在</string>
+    <string name="login_microsoft">微軟帳號登入</string>
+    <string name="login_select_account">選擇賬號</string>
     <!-- Hint -->
+    <string name="hint_select_account">點選選擇賬號，長按刪除。</string>
+    <string name="hint_control_mapping">"左滑開啟選單 ◀\n長按按鍵以自訂：編輯，縮放或刪除。"</string>
     <!-- Warnings -->
+    <string name="warning_action_exit">退出</string>
+    <string name="warning_remove_account">此賬號將被移除！</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">安裝 Java 執行時環境 %s (.tar.xz)</string>
+    <string name="alerttitle_selectkeymap">選擇 .json 按鍵位置檔案</string>
+    <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher 意外崩潰</string>
+    <string name="error_checklog">錯誤！檢查下方日誌： %s</string>
+    <string name="error_no_version">無版本！</string>
+    <string name="error_load_version">無法載入版本 %s</string>
+    <string name="error_show_more">顯示細節</string>
+    <string name="error_show_less">隱藏細節</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">需要儲存讀寫授權！</string>
+    <string name="toast_login_error">登入後出現問題。請向開發人員回報。\n錯誤： %s</string>
+    <string name="toast_optifine_success">安裝成功</string>
+    <string name="toast_uninstalljre_done">Java 執行時環境解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
+    <string name="mcl_tab_news">新聞</string>
+    <string name="mcl_tab_mcje">《Minecraft：Java版》</string>
+    <string name="mcl_tab_console">開發控制台</string>
+    <string name="mcl_tab_crash">崩潰日誌</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s 就緒</string>
+    <string name="mcl_launch_cleancache">正在清理快取</string>
+    <string name="mcl_launch_downloading">正在下載 %s</string>
+    <string name="mcl_launch_download_lib">正在下載執行庫 %s</string>
+    <string name="mcl_launch_download_client">正在下載 Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">正在轉換執行庫 %s</string>
+    <string name="mcl_launch_convert_client">正在轉換 Minecraft %s</string>
+    <string name="mcl_launch_patch_client">正在修補 Minecraft %s</string>
+    <string name="mcl_launch_download_assets">正在準備下載資源</string>
+    <string name="mcl_options">選項</string>
+    <string name="mcl_option_modmgr">Mod 管理器（無功能）</string>
+    <string name="mcl_option_modinstall">啟動 Mod 安裝器（例如 Forge, LabyMod, Fabric...）</string>
+    <string name="mcl_option_modinstallwitharg">以自訂引數啟動 Mod 安裝器</string>
+    <string name="mcl_option_checkupdate">偵測更新</string>
+    <string name="mcl_option_customcontrol">自訂控制鍵</string>
+    <string name="mcl_option_settings">設定</string>
+    <string name="mcl_option_about">關於</string>
+    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行時環境</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 得以重新安裝 Java 執行時環境。</string>
+    <string name="mcl_setting_title_freeform">以自由式模式啟動 Minecraft</string>
+    <string name="mcl_setting_subtitle_freeform">在浮動視窗中啟動 Minecraft。需要 Android 7.0+。</string>
+    <string name="mcl_setting_title_longpresstrigger">長按觸發時長</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">修改長按摧毀方塊、丟棄物品的觸發時長。</string>
+    <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
+    <string name="mcl_setting_subtitle_buttonscale">若按鍵太小，將其放大。</string>
+    <string name="mcl_setting_title_mousescale">滑鼠縮放</string>
+    <string name="mcl_setting_subtitle_mousescale">更改虛擬滑鼠的大小。</string>
+    <string name="mcl_setting_title_controlsize">設定控制鍵大小</string>
+    <string name="mcl_setting_title_javaargs">JVM 啟動引數</string>
+    <string name="mcl_setting_subtitle_javaargs">注意，非專業人士修改此值可能導致遊戲崩潰。</string>
+    <string name="mcl_setting_category_general">通用設定</string>
+    <string name="mcl_setting_category_scaling">縮放設定</string>
+    <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
+    <string name="mcl_version_clone">複製</string>
     <!-- Global strings -->
+    <string name="global_add">新增</string>
+    <string name="global_edit">修改</string>
+    <string name="global_error">錯誤</string>
+    <string name="global_load">載入</string>
+    <string name="global_name">名稱</string>
+    <string name="global_remove">移除</string>
+    <string name="global_restart">重啟</string>
+    <string name="global_save">儲存</string>
+    <string name="global_unpacking">正在解包 %s</string>
+    <string name="global_error_field_empty">此處表單不能為空</string>
+    <string name="global_waiting">等待中</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -39,10 +123,57 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
+    <string name="mcn_exit_call">退出</string>
+    <string name="mcn_exit_crash">偵測到遊戲崩潰！按確定鍵退出。</string>
+    <string name="mcn_exit_errcrash">無法定位崩潰！您可以忽略這條訊息。</string>
+    <string name="mcn_exit_confirm">確定強制關閉？</string>
+    <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
+    <string name="mcn_check_fail_java">無法啟動測試 Java 虛擬機器。檢視 %s 獲取更多資訊。</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">控制</string>
+    <string name="control_keyboard">鍵盤</string>
+    <string name="control_chat">聊天</string>
+    <string name="control_debug">除錯</string>
+    <string name="control_zoom">縮放 (C)</string>
+    <string name="control_primary">主</string>
+    <string name="control_secondary">副</string>
+    <string name="control_inventory">揹包</string>
+    <string name="control_mouse">滑鼠</string>
+    <string name="control_mouseoff">滑鼠：關</string>
+    <string name="control_mouseon">滑鼠：開</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">強制關閉</string>
+    <string name="control_viewout">日誌輸出</string>
+    <string name="control_adebug">輸入除錯</string>
+    <string name="control_customkey">傳送自訂鍵碼</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">編輯 %s</string>
+    <string name="customctrl_remove">移除 %s ？</string>
+    <string name="customctrl_keyname">鍵碼</string>
+    <string name="customctrl_specialkey">特殊鍵</string>
+    <string name="customctrl_hidden">隱藏</string>
+    <string name="customctrl_toggle">可切換</string>
+    <string name="customctrl_dynamicpos">動態位置</string>
+    <string name="customctrl_dynamicpos_x">動態 X 軸</string>
+    <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
+    <string name="customctrl_transparency_bg">背景透明度</string>
+    <string name="customctrl_transparency_text">文字透明度</string>
+    <string name="customctrl_keycombine">按鍵組合</string>
+    <string name="customctrl_keycombine_control">控制</string>
+    <string name="customctrl_keycombine_shift">上檔</string>
+    <string name="customctrl_addbutton">新增按鍵</string>
+    <string name="customctrl_selectdefault">選擇預設 .json 控制鍵位</string>
+    <string name="main_options">選項</string>
+    <string name="main_play">啟動遊戲</string>
+    <string name="main_welcome">歡迎， %s</string>
+    <string name="main_infodev">資訊（開發）</string>
+    <string name="main_switchuser">切換使用者</string>
+    <string name="main_version">版本:</string>
+    <string name="main_nocrash">未檢測到崩潰</string>
+    <string name="main_nolog">無日誌。</string>
 </resources>
