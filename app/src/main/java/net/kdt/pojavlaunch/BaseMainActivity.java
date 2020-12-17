@@ -31,12 +31,12 @@ public class BaseMainActivity extends LoggableActivity {
         LWJGLGLFWKeycode.GLFW_KEY_4, LWJGLGLFWKeycode.GLFW_KEY_5,   LWJGLGLFWKeycode.GLFW_KEY_6,
         LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
 
-    private rightOverride;
+    private int rightOverride;
     private int scaleFactor = 1;
     private int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
-    private mIsResuming;
+    private int mIsResuming;
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
     private static boolean triggeredLeftMouseButton = false;
