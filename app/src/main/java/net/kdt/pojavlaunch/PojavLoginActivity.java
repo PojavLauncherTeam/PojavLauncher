@@ -296,51 +296,16 @@ public class PojavLoginActivity extends BaseActivity
         
         Tools.updateWindowSize(this);
         
-        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        final View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(uiOptions);
-        
         if (loginLayout != null && imageLogo != null) {
             imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
         }
         
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
         
-        Uri data = intent.getData();
-        Log.i("MicroAuth",data.toString());
-        if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
-            String error = data.getQueryParameter("error");
-            String error_description = data.getQueryParameter("error_description");
-            if (error != null) {
-                // "The user has denied access to the scope requested by the client application": user pressed Cancel button, skip it
-                if (!error_description.startsWith("The user has denied access to the scope requested by the client application")) {
-                    Toast.makeText(this, "Error: " + error + ": " + error_description, Toast.LENGTH_LONG).show();
-                }
-            } else {
-                String code = data.getQueryParameter("code");
-                new MicrosoftAuthTask(this, new RefreshListener(){
-                        @Override
-                        public void onFailed(Throwable e) {
-                            Tools.showError(PojavLoginActivity.this, e);
-                        }
-
-                        @Override
-                        public void onSuccess(MinecraftAccount b) {
-                            mProfile = b;
-                            playProfile(false);
-                        }
-                    }).execute("false", code);
-                // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
-            }
-        }
+        
     }
-    
+
     private boolean isJavaRuntimeInstalled(AssetManager am) {
         boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
         try {
@@ -664,6 +629,39 @@ public class PojavLoginActivity extends BaseActivity
         CustomTabs.openTab(this, "https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
     }
     
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        
+        Uri data = intent.getData();
+        Log.i("MicroAuth", data.toString());
+        if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
+            String error = data.getQueryParameter("error");
+            String error_description = data.getQueryParameter("error_description");
+            if (error != null) {
+                // "The user has denied access to the scope requested by the client application": user pressed Cancel button, skip it
+                if (!error_description.startsWith("The user has denied access to the scope requested by the client application")) {
+                    Toast.makeText(this, "Error: " + error + ": " + error_description, Toast.LENGTH_LONG).show();
+                }
+            } else {
+                String code = data.getQueryParameter("code");
+                new MicrosoftAuthTask(this, new RefreshListener(){
+                        @Override
+                        public void onFailed(Throwable e) {
+                            Tools.showError(PojavLoginActivity.this, e);
+                        }
+
+                        @Override
+                        public void onSuccess(MinecraftAccount b) {
+                            mProfile = b;
+                            playProfile(false);
+                        }
+                    }).execute("false", code);
+                // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    
     public void loginSavedAcc(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -737,7 +735,7 @@ public class PojavLoginActivity extends BaseActivity
                                     @Override
                                     public void onSuccess(MinecraftAccount b) {
                                         mProfile = b;
-                                        playProfile(false);
+                                        playProfile(true);
                                     }
                                 }).execute("true", acc.msaRefreshToken);
                         } else if (acc.accessToken.length() >= 5) {

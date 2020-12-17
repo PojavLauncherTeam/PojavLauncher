@@ -302,6 +302,11 @@ public final class Tools
         currentDisplayMetrics = getDisplayMetrics(ctx);
         CallbackBridge.windowWidth = currentDisplayMetrics.widthPixels;
         CallbackBridge.windowHeight = currentDisplayMetrics.heightPixels;
+        
+        if (CallbackBridge.windowWidth < CallbackBridge.windowHeight) {
+            CallbackBridge.windowWidth = currentDisplayMetrics.heightPixels;
+            CallbackBridge.windowHeight = currentDisplayMetrics.widthPixels;
+        }
     }
 
     public static float dpToPx(float dp) {
