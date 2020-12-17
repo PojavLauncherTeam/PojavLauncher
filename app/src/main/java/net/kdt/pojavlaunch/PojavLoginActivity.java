@@ -335,7 +335,7 @@ public class PojavLoginActivity extends BaseActivity
                             mProfile = b;
                             playProfile(false);
                         }
-                    }).execute(code);
+                    }).execute("false", code);
                 // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
             }
         }
@@ -661,13 +661,9 @@ public class PojavLoginActivity extends BaseActivity
     */
     
     public void loginMicrosoft(View view) {
-        // TODO
-        // Documentation: https://wiki.vg/Microsoft_Authentication_Scheme
         CustomTabs.openTab(this, "https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
     }
     
-    // developer methods
-    // end dev methods
     public void loginSavedAcc(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -732,7 +728,18 @@ public class PojavLoginActivity extends BaseActivity
                     try {
                         MinecraftAccount acc = MinecraftAccount.load(path);
                         if (acc.isMicrosoft){
-                            // IMPORTANT TODO
+                            new MicrosoftAuthTask(PojavLoginActivity.this, new RefreshListener(){
+                                    @Override
+                                    public void onFailed(Throwable e) {
+                                        Tools.showError(PojavLoginActivity.this, e);
+                                    }
+
+                                    @Override
+                                    public void onSuccess(MinecraftAccount b) {
+                                        mProfile = b;
+                                        playProfile(false);
+                                    }
+                                }).execute("true", acc.msaRefreshToken);
                         } else if (acc.accessToken.length() >= 5) {
                             MCProfile.updateTokens(PojavLoginActivity.this, path, new RefreshListener(){
 

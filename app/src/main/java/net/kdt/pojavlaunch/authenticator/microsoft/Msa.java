@@ -13,7 +13,6 @@ import net.kdt.pojavlaunch.*;
 import org.json.*;
 
 
-
 public class Msa {
     /*
      private static final String loginUrl = "https://login.live.com/oauth20_authorize.srf" +
@@ -33,22 +32,23 @@ public class Msa {
 
     private MicrosoftAuthTask task;
 
+    public boolean isRefresh;
     public String msRefreshToken;
     public String mcName;
     public String mcToken;
     public String mcUuid;
     public boolean doesOwnGame;
 
-    public Msa(MicrosoftAuthTask task, String authCode) throws IOException, JSONException {
+    public Msa(MicrosoftAuthTask task, boolean isRefresh, String authCode) throws IOException, JSONException {
         this.task = task;
-        acquireAccessToken(authCode);
+        acquireAccessToken(isRefresh, authCode);
     }
 
-    public void acquireAccessToken(String authcode) throws IOException, JSONException {
+    public void acquireAccessToken(boolean isRefresh, String authcode) throws IOException, JSONException {
         task.publishProgressPublic();
 
         URL url = new URL(authTokenUrl);
-        Log.i("MicroAuth","authCode= "+authcode);
+        Log.i("MicroAuth", "isRefresh=" + isRefresh + ", authCode= "+authcode);
         Map<Object, Object> data = new HashMap<>();/*Map.of(
          "client_id", "00000000402b5328",
          "code", authcode,
@@ -57,7 +57,7 @@ public class Msa {
          "scope", "service::user.auth.xboxlive.com::MBI_SSL"
          );*/
         data.put("client_id", "00000000402b5328");
-        data.put("code", authcode);
+        data.put(isRefresh ? "refresh_token" : "code", authcode);
         data.put("grant_type", "authorization_code");
         data.put("redirect_url", "https://login.live.com/oauth20_desktop.srf");
         data.put("scope", "service::user.auth.xboxlive.com::MBI_SSL");

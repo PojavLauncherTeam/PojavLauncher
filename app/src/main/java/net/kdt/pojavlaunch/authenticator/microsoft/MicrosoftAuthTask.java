@@ -52,10 +52,9 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
     @Override
     public Object doInBackground(String... args) {
         try {
-            String authCode = args[0];
             /*
             publishProgress();
-            String msaAccessToken = acquireAccessToken(authCode);
+            String msaAccessToken = acquireAccessToken(args[0]);
             
             publishProgress();
             String xblToken = acquireXBLToken(msaAccessToken);
@@ -69,7 +68,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
             publishProgress();
 
              */
-            Msa msa = new Msa(this, authCode);
+            Msa msa = new Msa(this, Boolean.parseBoolean(args[0]), args[1]);
 
             MinecraftAccount acc = new MinecraftAccount();
             if (msa.doesOwnGame) {
