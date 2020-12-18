@@ -59,12 +59,20 @@ public class PojavApplication extends Application
             Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
             // Tools.FILE_ACCOUNT_JSON = getFilesDir().getAbsolutePath() + "/account_profiles.json";
             
-            Tools.CURRENT_ARCHITECTURE = new File(getApplicationInfo().nativeLibraryDir).getName();
+            File nativeLibDir = new File(getApplicationInfo().nativeLibraryDir);
+            
+            Tools.CURRENT_ARCHITECTURE = nativeLibDir.getName();
 			switch (Tools.CURRENT_ARCHITECTURE) {
                 case "arm": Tools.CURRENT_ARCHITECTURE = "arm/aarch32"; break;
                 case "arm64": Tools.CURRENT_ARCHITECTURE = "arm64/aarch64"; break;
                 case "x86": Tools.CURRENT_ARCHITECTURE = "x86/i*86"; break;
                 case "x86_64": Tools.CURRENT_ARCHITECTURE = "x86_64/amd64"; break;
+            }
+            
+            // Special case for Asus x86 devixes
+            if (Build.SUPPORTED_ABIS[0].equals("x86")) {
+                getApplicationInfo().nativeLibraryDir = nativeLibDir.getParent() + "/x86";
+                Tools.CURRENT_ARCHITECTURE = "x86/i*86";
             }
 
 			FontChanger.initFonts(this);
