@@ -36,7 +36,6 @@ public class BaseMainActivity extends LoggableActivity {
     private int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
-    private boolean resuming;
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
     private static boolean triggeredLeftMouseButton = false;
@@ -99,6 +98,7 @@ public class BaseMainActivity extends LoggableActivity {
      private LinearLayout contentCanvas;
      private AWTSurfaceView contentCanvasView;
      */
+    private boolean resuming;
     private boolean lastEnabled = false;
     private boolean lastGrab = false;
     private boolean isExited = false;
