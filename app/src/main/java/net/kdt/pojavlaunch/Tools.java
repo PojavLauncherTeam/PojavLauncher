@@ -78,9 +78,12 @@ public final class Tools
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
         List<String> overrideableArgList = new ArrayList<String>();
 
+        overrideableArgList.add("-Djava.security.manager");
+        overrideableArgList.add("-Djava.security.policy=java_sandbox.policy");
+        
         overrideableArgList.add("-Djava.home=" + Tools.DIR_HOME_JRE);
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
-        // overrideableArgList.add("-Djava.library.path=" + JREUtils.LD_LIBRARY_PATH);
+        
         overrideableArgList.add("-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent());
         overrideableArgList.add("-Duser.language=" + System.getProperty("user.language"));
         // overrideableArgList.add("-Duser.timezone=GMT");
@@ -88,6 +91,9 @@ public final class Tools
         overrideableArgList.add("-Dos.name=Linux");
         overrideableArgList.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
 
+        overrideableArgList.add("-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW);
+        overrideableArgList.add("-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW);
+        
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
        
