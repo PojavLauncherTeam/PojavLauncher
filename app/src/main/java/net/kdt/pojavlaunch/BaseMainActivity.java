@@ -31,12 +31,6 @@ public class BaseMainActivity extends LoggableActivity {
         LWJGLGLFWKeycode.GLFW_KEY_4, LWJGLGLFWKeycode.GLFW_KEY_5,   LWJGLGLFWKeycode.GLFW_KEY_6,
         LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
 
-    private boolean rightOverride;
-    private int scaleFactor = 1;
-    private int fingerStillThreshold = 8;
-    private int initialX;
-    private int initialY;
-
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
     private static boolean triggeredLeftMouseButton = false;
@@ -104,11 +98,14 @@ public class BaseMainActivity extends LoggableActivity {
     private boolean lastGrab = false;
     private boolean isExited = false;
     private boolean isLogAllow = false;
-    // private int navBarHeight = 40;
-    
-    // private static Collection<? extends Provider.Service> rsaPkcs1List;
 
-    // @Override
+    private boolean rightOverride;
+    private int scaleFactor = 1;
+    private int fingerStillThreshold = 8;
+    private int initialX;
+    private int initialY;
+    
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
