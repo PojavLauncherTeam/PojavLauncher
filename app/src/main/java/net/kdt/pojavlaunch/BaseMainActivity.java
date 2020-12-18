@@ -99,6 +99,7 @@ public class BaseMainActivity extends LoggableActivity {
      private LinearLayout contentCanvas;
      private AWTSurfaceView contentCanvasView;
      */
+    private boolean resuming;
     private boolean lastEnabled = false;
     private boolean lastGrab = false;
     private boolean isExited = false;

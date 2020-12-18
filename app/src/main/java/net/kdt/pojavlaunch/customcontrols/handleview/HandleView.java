@@ -196,7 +196,11 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         if (mActionPopupShower == null) {
             mActionPopupShower = new Runnable() {
                 public void run() {
-                    mActionPopupWindow.show();
+                    try {
+                        mActionPopupWindow.show();
+                    } catch (Throwable th) {
+                        th.printStackTrace();
+                    }
                 }
             };
         } else {
