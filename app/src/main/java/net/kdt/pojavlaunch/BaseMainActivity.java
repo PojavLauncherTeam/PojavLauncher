@@ -31,6 +31,12 @@ public class BaseMainActivity extends LoggableActivity {
         LWJGLGLFWKeycode.GLFW_KEY_4, LWJGLGLFWKeycode.GLFW_KEY_5,   LWJGLGLFWKeycode.GLFW_KEY_6,
         LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
 
+    private boolean rightOverride = false;
+    private int scaleFactor = 1;
+    private int fingerStillThreshold = 8;
+    private int initialX;
+    private int initialY;
+    private boolean mIsResuming = false;
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
     private static boolean triggeredLeftMouseButton = false;
@@ -93,19 +99,15 @@ public class BaseMainActivity extends LoggableActivity {
      private LinearLayout contentCanvas;
      private AWTSurfaceView contentCanvasView;
      */
-    private boolean resuming;
     private boolean lastEnabled = false;
     private boolean lastGrab = false;
     private boolean isExited = false;
     private boolean isLogAllow = false;
-
-    private boolean rightOverride;
-    private int scaleFactor = 1;
-    private int fingerStillThreshold = 8;
-    private int initialX;
-    private int initialY;
+    // private int navBarHeight = 40;
     
-    @Override
+    // private static Collection<? extends Provider.Service> rsaPkcs1List;
+
+    // @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -651,7 +653,7 @@ public class BaseMainActivity extends LoggableActivity {
             minecraftGLView.setOnHoverListener(new View.OnHoverListener(){
                     @Override
                     public boolean onHover(View v, MotionEvent e) {
-                        if (!CallbackBridge.isGrabbing() && resuming) {
+                        if (!CallbackBridge.isGrabbing() && mIsResuming) {
                             // return glTouchListener.onTouch(v, e);
                             int x = ((int) e.getX()) / scaleFactor;
                             int y = ((int) e.getY()) / scaleFactor;
@@ -753,7 +755,7 @@ public class BaseMainActivity extends LoggableActivity {
     @Override
     public void onResume() {
         super.onResume();
-        resuming = true;
+        mIsResuming = true;
         // if (minecraftGLView != null) minecraftGLView.requestRender();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
@@ -776,7 +778,7 @@ public class BaseMainActivity extends LoggableActivity {
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
         }
-        resuming = false;
+        mIsResuming = false;
         super.onPause();
     }
 
@@ -927,12 +929,12 @@ public class BaseMainActivity extends LoggableActivity {
 
     private void openLogOutput() {
         contentLog.setVisibility(View.VISIBLE);
-        resuming = false;
+        mIsResuming = false;
     }
 
     public void closeLogOutput(View view) {
         contentLog.setVisibility(View.GONE);
-        resuming = true;
+        mIsResuming = true;
     }
     /*
      private void openCanvasOutput() {

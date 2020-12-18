@@ -35,10 +35,9 @@ public final class Tools
     public static String CURRENT_ARCHITECTURE;
 
     // New since 3.3.1
-    public static String DIR_ACCOUNT_NEW;
     public static String DIR_ACCOUNT_OLD;
-    public static final String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
-    public static final String DIR_GAME_NEW = DIR_GAME_NEW + "/.minecraft";
+    public static String DIR_ACCOUNT_NEW;
+    public static final String DIR_GAME_NEW = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher/.minecraft";
     public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
     
     // New since 3.0.0
@@ -85,6 +84,8 @@ public final class Tools
         overrideableArgList.add("-Duser.language=" + System.getProperty("user.language"));
         // overrideableArgList.add("-Duser.timezone=GMT");
 
+        // Should be compatible?
+        // overrideableArgList.add("-Dos.name=Android");
         overrideableArgList.add("-Dos.name=Linux");
         overrideableArgList.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
 
@@ -140,9 +141,9 @@ public final class Tools
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
-        varArgMap.put("auth_access_token", profile.accessToken == null ? "0" : profile.accessToken);
+        varArgMap.put("auth_access_token", profile.accessToken);
         varArgMap.put("auth_player_name", username);
-        varArgMap.put("auth_uuid", profile.profileId == null ? "0" : profile.profileId);
+        varArgMap.put("auth_uuid", profile.profileId);
         varArgMap.put("assets_root", Tools.ASSETS_PATH);
         varArgMap.put("assets_index_name", versionInfo.assets);
         varArgMap.put("game_assets", Tools.ASSETS_PATH);

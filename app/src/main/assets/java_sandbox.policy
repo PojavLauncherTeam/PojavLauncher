@@ -3,7 +3,7 @@
 // This file is important to protect you against viruses/malwares that could be come from unknown Java Programs (run on mod install) or a mod.
 
 grant {
-    permission java.io.FilePermission "${java.io.tmpdir}/*", "read, write, delete";
+    permission java.io.FilePermission "${pojav.path.cache}/*", "read, write, delete";
     permission java.io.FilePermission "${pojav.path.minecraft}/*", "read, write, delete";
 };
 

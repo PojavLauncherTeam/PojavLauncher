@@ -24,7 +24,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156236
-        versionName "3.3.1b_6409b_20201218"
+        versionName "3.3.1b_6409b_20201210"
         multiDexEnabled true //important
     }
 	
@@ -60,13 +60,14 @@ android {
 dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     implementation 'commons-codec:commons-codec:1.14'
-    // implementation 'com.wu-man:android-bsf-api:3.1.3'
+    implementation 'com.wu-man:android-bsf-api:3.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.annotation:annotation:1.0.0'
+    // implementation 'androidx.browser:browser:1.0.0'
     implementation 'androidx.browser:browser:1.0.0'
     
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
