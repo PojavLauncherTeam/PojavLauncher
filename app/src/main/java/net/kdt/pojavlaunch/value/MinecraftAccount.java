@@ -5,13 +5,13 @@ import com.google.gson.*;
 
 public class MinecraftAccount
 {
-    public String accessToken; // access token
-    public String clientToken; // clientID: refresh and invalidate
-    public String profileId; // authenticate UUID
-    public String username;
+    public String accessToken = "0"; // access token
+    public String clientToken = "0"; // clientID: refresh and invalidate
+    public String profileId = "0"; // authenticate UUID
+    public String username = "Steve";
     public String selectedVersion = "1.7.10";
-    public boolean isMicrosoft;
-    public String msaRefreshToken;
+    public boolean isMicrosoft = false;
+    public String msaRefreshToken = "0";
     
     public String save(String outPath) throws IOException {
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
@@ -27,7 +27,13 @@ public class MinecraftAccount
     }
     
     public static MinecraftAccount load(String path) throws IOException, JsonSyntaxException {
-        return parse(Tools.read(path));
+        MinecraftAccount acc = parse(Tools.read(path));
+        if (acc.accessToken == null) {
+            acc.accessToken = "0";
+        } if (acc.profileId == null) {
+            acc.profileId = "0";
+        }
+        return acc;
     }
     
     public static void clearTempAccount() {
