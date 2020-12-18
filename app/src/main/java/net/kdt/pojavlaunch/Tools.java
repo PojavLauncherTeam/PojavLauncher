@@ -78,9 +78,6 @@ public final class Tools
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
         List<String> overrideableArgList = new ArrayList<String>();
 
-        overrideableArgList.add("-Djava.security.manager");
-        overrideableArgList.add("-Djava.security.policy==java_sandbox.policy");
-        
         overrideableArgList.add("-Djava.home=" + Tools.DIR_HOME_JRE);
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
         
