@@ -61,8 +61,7 @@ public class PojavMigrator
     }
     
     private static void command(String cmd) throws IOException, InterruptedException {
-        Process p = Runtime.getRuntime().exec(
-            new String[]{cmd});
+        Process p = Runtime.getRuntime().exec(cmd);
         int exitCode = p.waitFor();
         if (exitCode != 0) {
             throw new IOException("Exit code " + exitCode +

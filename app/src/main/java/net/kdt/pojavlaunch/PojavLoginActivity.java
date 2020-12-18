@@ -301,6 +301,7 @@ public class PojavLoginActivity extends BaseActivity
         mkdirs(Tools.DIR_ACCOUNT_NEW);
         PojavMigrator.migrateAccountData(this);
         
+        mkdirs(Tools.DIR_GAME_HOME);
         if (!PojavMigrator.migrateGameDir()) {
             mkdirs(Tools.DIR_GAME_NEW);
             mkdirs(Tools.DIR_GAME_NEW + "/config");
