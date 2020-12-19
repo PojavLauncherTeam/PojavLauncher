@@ -19,16 +19,21 @@ jobs:
       
         mkdir -p out
         chmod +x gradlew 
-        ./gradlew clean assembleDebug
         
-        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug.apk
-        # mv app/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
+        # Build JRE JAR files (security manager, etc...)
+        ./gradlew clean buildJar
+        cp jre_securitymanager/build/libs/jre_securitymanager-1.0.jar
+        
+        # Build the launcher
+        ./gradlew assembleDebug
+        mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
+        # mv app_pojavlauncher/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
 
     - name: Build APK without runtime
       run: | 
-        rm -r app/src/main/assets/components/jre
+        rm -r app_pojavlauncher/src/main/assets/components/jre
         ./gradlew assembleDebug
-        mv app/build/outputs/apk/debug/app-debug.apk out/app-debug-noruntime.apk
+        mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
@@ -41,3 +46,4 @@ jobs:
       with:
           name: app-debug-noruntime
           path: out/app-debug-noruntime.apk
+
