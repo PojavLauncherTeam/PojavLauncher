@@ -130,8 +130,8 @@ public final class Tools
         javaArgList.addAll(overrideableArgList);
         
         // Run java on sandbox, non-overrideable.
-        javaArgList.add("-Djava.security.manager");
-        javaArgList.add("-Djava.security.policy==" + Tools.DIR_DATA + "/java_sandbox.policy");
+        // javaArgList.add("-Djava.security.manager");
+        // javaArgList.add("-Djava.security.policy==" + Tools.DIR_DATA + "/java_sandbox.policy");
     }
 
     public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {
