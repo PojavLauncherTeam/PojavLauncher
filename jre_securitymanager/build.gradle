@@ -6,11 +6,10 @@ version = '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-task buildJar(type: Jar) {
+buildJar {
     manifest {
-        attributes
-            'Implementation-Title': 'PojavLauncher SecurityManager',  
-            'Implementation-Version': version
+        attributes 'Implementation-Title': 'PojavLauncher SecurityManager',  
+                   'Implementation-Version': version
     }
     baseName = project.name
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
