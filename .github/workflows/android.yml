@@ -22,7 +22,8 @@ jobs:
         
         # Build JRE JAR files (security manager, etc...)
         ./gradlew clean build
-        cp jre_securitymanager/build/libs/jre_securitymanager-1.0.jar
+        mkdir app_pojavlauncher/src/main/assets/components/internal_libs
+        cp jre_securitymanager/build/libs/jre_securitymanager-1.0.jar app_pojavlauncher/src/main/assets/components/internal_libs
         
         # Build the launcher
         ./gradlew assembleDebug
