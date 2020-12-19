@@ -130,8 +130,9 @@ public final class Tools
         javaArgList.addAll(overrideableArgList);
         
         // Run java on sandbox, non-overrideable.
-        // javaArgList.add("-Djava.security.manager");
-        // javaArgList.add("-Djava.security.policy==" + Tools.DIR_DATA + "/java_sandbox.policy");
+        javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/pro-grade.jar");
+        javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
+        javaArgList.add("-Djava.security.policy==" + Tools.DIR_DATA + "/java_sandbox.policy");
     }
 
     public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {
@@ -325,7 +326,7 @@ public final class Tools
     }
 
     public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws IOException {
-        copyAssetFile(ctx, fileName, output, fileName, overwrite);
+        copyAssetFile(ctx, fileName, output, new File(fileName).getName(), overwrite);
     }
 
     public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws IOException

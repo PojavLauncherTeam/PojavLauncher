@@ -331,8 +331,9 @@ public class PojavLoginActivity extends BaseActivity
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
             Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar", Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
+            Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
+            Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
-            // Tools.copyAssetFile(this, "java_sandbox.policy", Tools.DIR_DATA, true);
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
 
@@ -342,20 +343,17 @@ public class PojavLoginActivity extends BaseActivity
             if(!new File(Tools.DIR_GAME_NEW + "/lwjgl3/version").exists()) {
                 Log.i("LWJGL3Prep","Pack was installed manually, or does not exist, unpacking new...");
                 String[] lwjglFileList = am.list("components/lwjgl3");
-                FileOutputStream fos;
-                InputStream iis;
+                // FileOutputStream fos;
+                // InputStream iis;
                 for(String s : lwjglFileList) {
+                    Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW + "/lwjgl3", true);
+                    /*
                     iis = am.open("components/lwjgl3/"+s);
                     fos = new FileOutputStream(new File(Tools.DIR_GAME_NEW+"/lwjgl3/"+s));
-                    /*
-                    int i; byte[] buf = new byte[1024];
-                    while((i = iis.read(buf)) != -1) {
-                        fos.write(buf,0,i);
-                    }
-                    */
                     IOUtils.copy(iis,fos);
                     fos.close();
                     iis.close();
+                    */
                 }
             } else {
                 FileInputStream fis = new FileInputStream(new File(Tools.DIR_GAME_NEW + "/lwjgl3/version"));
@@ -364,7 +362,7 @@ public class PojavLoginActivity extends BaseActivity
                 if (!release1.equals(release2)) {
                     String[] lwjglFileList = am.list("components/lwjgl3");
                     for (String s : lwjglFileList) {
-                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW+"/lwjgl3/",s, true);
+                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW + "/lwjgl3", true);
                     }
                 } else {
                     Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
