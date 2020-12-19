@@ -21,7 +21,7 @@ jobs:
         chmod +x gradlew 
         
         # Build JRE JAR files (security manager, etc...)
-        ./gradlew clean buildJar
+        ./gradlew clean build
         cp jre_securitymanager/build/libs/jre_securitymanager-1.0.jar
         
         # Build the launcher
