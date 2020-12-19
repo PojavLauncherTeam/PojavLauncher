@@ -374,9 +374,10 @@ public class PojavLoginActivity extends BaseActivity
                 if(!installRuntimeAutomatically(am)) {
                     File jreTarFile = selectJreTarFile();
                     uncompressTarXZ(jreTarFile, new File(Tools.DIR_HOME_JRE));
+                } else {
+                    Tools.copyAssetFile(this, "components/jre/version", Tools.DIR_HOME_JRE + "/","version", true);
                 }
                 firstLaunchPrefs.edit().putBoolean(PREF_IS_INSTALLED_JAVARUNTIME, true).commit();
-                Tools.copyAssetFile(this, "components/jre/version", Tools.DIR_HOME_JRE + "/","version", true);
             }
             
             JREUtils.relocateLibPath(this);
@@ -395,7 +396,15 @@ public class PojavLoginActivity extends BaseActivity
             Tools.showError(this, e);
         }
     }
+    
     private boolean installRuntimeAutomatically(AssetManager am) {
+        try {
+            am.open("components/jre/version");
+        } catch (IOException e) {
+            Log.e("JREAuto", "JRE was not included on this APK.", e);
+            return false;
+        }
+        
         File rtUniversal = new File(Tools.DIR_HOME_JRE+"/universal.tar.xz");
         File rtPlatformDependent = new File(Tools.DIR_HOME_JRE+"/cust-bin.tar.xz");
         if(!new File(Tools.DIR_HOME_JRE).exists()) new File(Tools.DIR_HOME_JRE).mkdirs(); else {
