@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.kdt.pojavlaunch"
+    android:versionCode="156236"
+    android:versionName="3.3.1b_6409b_20201218" >
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="29" />
+
+    <uses-feature android:glEsVersion="0x00020000" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="net.kdt.pojavlaunch.PojavApplication"
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:resizeableActivity="true"
+        android:roundIcon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="ratio_float" />
+
+        <activity
+            android:name="net.kdt.pojavlaunch.PojavLoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:label="@string/app_short_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="auth"
+                    android:scheme="ms-xal-00000000402b5328" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="net.kdt.pojavlaunch.FatalErrorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/MenuDialog" />
+        <activity
+            android:name="net.kdt.pojavlaunch.MCLauncherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name="net.kdt.pojavlaunch.PojavLauncherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name="net.kdt.pojavlaunch.JavaGUILauncherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name="net.kdt.pojavlaunch.CustomControlsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name="net.kdt.pojavlaunch.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:launchMode="standard"
+            android:multiprocess="true"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name="net.kdt.pojavlaunch.prefs.LauncherPreferenceActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+    </application>
+
+</manifest>
