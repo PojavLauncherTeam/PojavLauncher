@@ -30,6 +30,11 @@
 			android:singleLine="true"
 			android:id="@+id/controlsetting_edit_name"/>
 
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/customctrl_transparency_bg"/>
+        
 		<SeekBar
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
