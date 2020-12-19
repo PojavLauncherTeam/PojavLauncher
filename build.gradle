@@ -6,7 +6,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:5.4.1'
+        classpath 'com.android.tools.build:gradle:3.5.3'
 
         // NOTE: Do not place syour application dependencies here; they belong
         // in the individual module build.gradle files
