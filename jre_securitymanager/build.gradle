@@ -36,6 +36,7 @@ install {
 }
 
 wrapper {
+    jarFile = "${project.projectDir}/../gradle/wrapper/gradle-wrapper.jar"
     gradleVersion = "5.4.1"
     distributionType = Wrapper.DistributionType.ALL
 }
