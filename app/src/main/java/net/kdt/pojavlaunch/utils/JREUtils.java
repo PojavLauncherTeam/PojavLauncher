@@ -249,10 +249,6 @@ public class JREUtils
         javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
         Tools.getJavaArgs(ctx, javaArgList);
 
-        // Run java on sandbox, non-overrideable.
-        javaArgList.add("-Djava.security.manager");
-        javaArgList.add("-Djava.security.policy==java_sandbox.policy");
-        
         javaArgList.addAll(args);
         
         // For debugging only!
