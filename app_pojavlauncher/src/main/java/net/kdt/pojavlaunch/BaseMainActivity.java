@@ -11,7 +11,6 @@ import android.view.inputmethod.*;
 import android.widget.*;
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
-import com.kdt.pointer.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
@@ -83,8 +82,6 @@ public class BaseMainActivity extends LoggableActivity {
     private GestureDetector gestureDetector;
 
     private TextView debugText;
-
-    private PointerOreoWrapper pointerSurface;
 
     // private String mQueueText = new String();
 
@@ -245,11 +242,13 @@ public class BaseMainActivity extends LoggableActivity {
                                             touchPad.setVisibility(View.GONE);
                                         }
 
-                                        if (isPointerCaptureSupported()) {
+                                        if (isAndroid8OrHigher()) {
                                             if (!CallbackBridge.isGrabbing() && isCapturing) {
                                                 minecraftGLView.releasePointerCapture();
+                                                minecraftGLView.clearFocus();
                                                 isCapturing = false;
                                             } else if (CallbackBridge.isGrabbing() && !isCapturing) {
+                                                minecraftGLView.requestFocus();
                                                 minecraftGLView.requestPointerCapture();
                                                 isCapturing = true;
                                             }
@@ -326,8 +325,7 @@ public class BaseMainActivity extends LoggableActivity {
 
             // System.loadLibrary("Regal");
 
-            minecraftGLView.setFocusable(false);
-            minecraftGLView.setFocusableInTouchMode(false);
+            minecraftGLView.setFocusable(true);
             // minecraftGLView.setEGLContextClientVersion(2);
             
             glTouchListener = new OnTouchListener(){
@@ -550,24 +548,24 @@ public class BaseMainActivity extends LoggableActivity {
                 }
             };
             
-            if (isPointerCaptureSupported()) {
-                this.pointerSurface = new PointerOreoWrapper(minecraftGLView);
-                this.pointerSurface.setOnCapturedPointerListener(new PointerOreoWrapper.OnCapturedPointerListener(){
-                        private int x, y;
-                        private boolean debugErrored = false;
+            if (isAndroid8OrHigher()) {
+                minecraftGLView.setDefaultFocusHighlightEnabled(false);
+                minecraftGLView.setOnCapturedPointerListener(new View.OnCapturedPointerListener() {
+                    private int x, y;
+                    private boolean debugErrored = false;
 
-                        private String getMoving(float pos, boolean xOrY) {
-                            if (pos == 0) {
-                                return "STOPPED";
-                            } else if (pos > 0) {
-                                return xOrY ? "RIGHT" : "DOWN";
-                            } else { // if (pos3 < 0) {
-                                return xOrY ? "LEFT" : "UP";
-                            }
+                    private String getMoving(float pos, boolean xOrY) {
+                        if (pos == 0) {
+                            return "STOPPED";
+                        } else if (pos > 0) {
+                            return xOrY ? "RIGHT" : "DOWN";
+                        } else { // if (pos3 < 0) {
+                            return xOrY ? "LEFT" : "UP";
                         }
+                    }
 
-                        @Override
-                        public boolean onCapturedPointer(View view, MotionEvent e) {
+                    @Override
+                    public boolean onCapturedPointer (View view, MotionEvent e) {
                             x += ((int) e.getX()) / scaleFactor;
                             y -= ((int) e.getY()) / scaleFactor;
 
@@ -672,7 +670,6 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                 });
             minecraftGLView.setOnTouchListener(glTouchListener);
-            
             minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
                 
                     private boolean isCalled = false;
@@ -811,7 +808,7 @@ public class BaseMainActivity extends LoggableActivity {
         }
     }
 
-    private boolean isPointerCaptureSupported() {
+    private boolean isAndroid8OrHigher() {
         return Build.VERSION.SDK_INT >= 26; 
     }
 
