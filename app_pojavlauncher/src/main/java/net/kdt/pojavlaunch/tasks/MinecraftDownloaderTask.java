@@ -39,14 +39,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             String minecraftMainJar = Tools.DIR_HOME_VERSION + downVName + ".jar";
             JAssets assets = null;
             try {
-                //com.pojavdx.dx.mod.Main.debug = true;
-
                 String verJsonDir = Tools.DIR_HOME_VERSION + downVName + ".json";
 
                 verInfo = findVersion(p1[0]);
 
                 if (verInfo.url != null && !new File(verJsonDir).exists()) {
-                    publishProgress("1", "Downloading " + p1[0] + " configuration...");
+                    publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, p1[0] + ".json"));
 
                     Tools.downloadFileMonitored(
                         verInfo.url,
@@ -54,7 +52,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                             new Tools.DownloaderFeedback(){
                                 @Override
                                 public void updateProgress(int curr, int max) {
-                                    publishProgress("0", "Downloading " + p1[0] + " configuration ("+curr+"/"+max+")");
+                                    publishDownloadProgress(p1[0] + ".json", curr, max);
                                 }
                             }
                     );
@@ -70,29 +68,20 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 zeroProgress();
                 for (final DependentLibrary libItem : verInfo.libraries) {
 
-                    if (// libItem.name.startsWith("com.google.code.gson:gson") ||
-                    // libItem.name.startsWith("com.mojang:realms") ||
+                    if (
                         libItem.name.startsWith("net.java.jinput") ||
-                    // libItem.name.startsWith("net.minecraft.launchwrapper") ||
-
-                    // FIXME lib below!
-                    // libItem.name.startsWith("optifine:launchwrapper-of") ||
-
-                    // libItem.name.startsWith("org.lwjgl.lwjgl:lwjgl") ||
                         libItem.name.startsWith("org.lwjgl")
-                    // libItem.name.startsWith("tv.twitch")
-                        ) { // Black list
+                    ) { // Black list
                         publishProgress("1", "Ignored " + libItem.name);
                         //Thread.sleep(100);
                     } else {
-
                         String[] libInfo = libItem.name.split(":");
                         String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
                         outLib = new File(Tools.DIR_HOME_LIBRARY + "/" + libArtifact);
                         outLib.getParentFile().mkdirs();
 
                         if (!outLib.exists()) {
-                            publishProgress("1", mActivity.getString(R.string.mcl_launch_download_lib, libItem.name));
+                            publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, libItem.name));
 
                             boolean skipIfFailed = false;
 
@@ -111,7 +100,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                                         new Tools.DownloaderFeedback() {
                                             @Override
                                             public void updateProgress(int curr, int max) {
-                                                publishProgress("0", mActivity.getString(R.string.mcl_launch_download_lib, libItem.name)+" ("+curr+"/"+max+") ");
+                                                publishDownloadProgress(libItem.name, curr, max);
                                             }
                                         }
                                 );
@@ -128,7 +117,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
                 setMax(3);
                 zeroProgress();
-                publishProgress("1", mActivity.getString(R.string.mcl_launch_download_client, p1[0]));
+                publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, p1[0] + ".jar"));
                 File minecraftMainFile = new File(minecraftMainJar);
                 if (!minecraftMainFile.exists() || minecraftMainFile.length() == 0l) {
                     try {
@@ -138,7 +127,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                                 new Tools.DownloaderFeedback() {
                                     @Override
                                     public void updateProgress(int curr, int max) {
-                                        publishProgress("0", mActivity.getString(R.string.mcl_launch_download_client, p1[0])+" ("+curr+"/"+max+") ");
+                                        publishDownloadProgress(p1[0] + ".jar", curr, max);
                                     }
                                 }
                         );
@@ -199,10 +188,9 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             return throwable;
         }
     }
-    private int addProgress = 0; // 34
+    private int addProgress = 0;
 
-    public void zeroProgress()
-    {
+    public void zeroProgress() {
         addProgress = 0;
     }
 
@@ -217,6 +205,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
             });
     }
+    
+    private void publishDownloadProgress(String target, int curr, int max) {
+        // array length > 2 ignores append log on dev console
+        publishProgress("0", mActivity.getString(R.string.mcl_launch_downloading_progress, target,
+            curr / 1024d / 1024d, max / 1024d / 1024d), "");
+    }
 
     @Override
     protected void onProgressUpdate(String... p1)
@@ -230,7 +224,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         }
 
         if (p1.length < 3) {
-            mActivity.mConsoleView.putLog(p1[1] + (p1.length < 3 ? "\n" : ""));
+            mActivity.mConsoleView.putLog(p1[1] + "\n");
         }
     }
 

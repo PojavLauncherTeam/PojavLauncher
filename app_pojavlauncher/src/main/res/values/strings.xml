@@ -72,11 +72,7 @@
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
     <string name="mcl_launch_downloading">Downloading %s</string>
-    <string name="mcl_launch_download_lib">Downloading library %s</string>
-    <string name="mcl_launch_download_client">Downloading Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Converting library %s</string>
-    <string name="mcl_launch_convert_client">Converting Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Patching Minecraft %s</string>
+    <string name="mcl_launch_downloading_progress">Downloading %s (%d MB / %d MB)</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
 
     <string name="mcl_options">Options</string>
