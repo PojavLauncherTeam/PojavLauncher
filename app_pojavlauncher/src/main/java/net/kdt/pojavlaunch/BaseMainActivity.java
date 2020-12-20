@@ -247,10 +247,10 @@ public class BaseMainActivity extends LoggableActivity {
 
                                         if (isPointerCaptureSupported()) {
                                             if (!CallbackBridge.isGrabbing() && isCapturing) {
-                                                pointerSurface.releaseCapture(); // minecraftGLView.releasePointerCapture();
+                                                minecraftGLView.releasePointerCapture();
                                                 isCapturing = false;
                                             } else if (CallbackBridge.isGrabbing() && !isCapturing) {
-                                                pointerSurface.requestCapture(); // minecraftGLView.requestPointerCapture();
+                                                minecraftGLView.requestPointerCapture();
                                                 isCapturing = true;
                                             }
                                         }
@@ -596,16 +596,9 @@ public class BaseMainActivity extends LoggableActivity {
                                 }
                             }
 
-                            CallbackBridge.sendCursorPos(x, y);
-
-                            switch (e.getButtonState()) {
-                                case MotionEvent.BUTTON_PRIMARY: CallbackBridge.mouseLeft = true;
-                                    break;
-                                case MotionEvent.BUTTON_SECONDARY: CallbackBridge.mouseLeft = false;
-                                    break;
-                            }
-
+                            boolean isDown = false;
                             switch (e.getActionMasked()) {
+                                /*
                                 case MotionEvent.ACTION_DOWN: // 0
                                 case MotionEvent.ACTION_POINTER_DOWN: // 5
                                     CallbackBridge.sendPrepareGrabInitialPos();
@@ -624,21 +617,34 @@ public class BaseMainActivity extends LoggableActivity {
                                 case MotionEvent.ACTION_POINTER_UP: // 6
                                     // CallbackBridge.sendCursorPos(x, y);
                                     // CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
-                                    CallbackBridge.putMouseEventWithCoords(CallbackBridge.mouseLeft /* rightOverride */ ? (byte) 0 : (byte) 1, (byte) 1, x, y);
-                                    /*
-                                     if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-                                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-                                     }
-                                     if (triggeredLeftMouseButton) {
-                                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
-                                     }
-                                     */
-
-                                    sendMouseButton(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-
+                                    CallbackBridge.putMouseEventWithCoords(CallbackBridge.mouseLeft ? (byte) 0 : (byte) 1, (byte) 1, x, y);
+                                  
                                     // triggeredLeftMouseButton = false;
                                     // theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+                                    break;
+                                */
+                                
+                                case MotionEvent.ACTION_DOWN: // 0
+                                case MotionEvent.ACTION_POINTER_DOWN: // 5
+                                    isDown = true;
+                                    break;
+                                    
+                                case MotionEvent.ACTION_UP: // 1
+                                case MotionEvent.ACTION_CANCEL: // 3
+                                case MotionEvent.ACTION_POINTER_UP: // 6
+                                    isDown = false;
+                                    break;
+                                
+                                case MotionEvent.ACTION_MOVE:
+                                    CallbackBridge.sendCursorPos(x, y);
+                                    break;
+                                
+                                case MotionEvent.ACTION_BUTTON_PRESS:
+                                    sendMouseButtonUnconverted(e.getActionButton(), isDown);
+                                    break;
+                                
+                                case MotionEvent.ACTION_SCROLL:
+                                    CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
                                     break;
                             }
 
@@ -1080,17 +1086,26 @@ public class BaseMainActivity extends LoggableActivity {
         sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
         sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
     }
-
-    private static boolean isLeftMouseDown, isRightMouseDown;
+    
     public static void sendMouseButton(int button, boolean status) {
-        // TODO implement this method!!!
-        // CallbackBridge.setMouseButtonInGrabMode((byte) button, status ? (byte) 1 : (byte) 0);
-        // or
-        
-        isLeftMouseDown = button == LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT && status;
-        isRightMouseDown = button == LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT && status;
-        
         CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
+    }
+    
+    public static void sendMouseButtonUnconverted(int button, boolean status) {
+        int glfwButton = 0;
+        switch (button) {
+            case MotionEvent.BUTTON_PRIMARY:
+                glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT;
+                break;
+            case MotionEvent.BUTTON_TERTIARY:
+                glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_MIDDLE;
+                break;
+            case MotionEvent.BUTTON_SECONDARY:
+                glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT;
+                break;
+        }
+        
+        sendMouseButton(glfwButton, status);
     }
 
     public void calculateMcScale() {
