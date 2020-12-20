@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.tukaani:xz:1.8@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tukaani/xz/1.8/c4f7d054303948eb6a4066194253886c8af07128/xz-1.8.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tukaani/xz/1.8/9354393aa96682804ccc2ffdf5aa066fa23efc41/xz-1.8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tukaani/xz/1.8/38c6cb5218afd414465ab6458fbcfeb1c947e808/xz-1.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
