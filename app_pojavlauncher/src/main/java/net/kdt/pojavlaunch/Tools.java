@@ -128,11 +128,6 @@ public final class Tools
         }
 
         javaArgList.addAll(overrideableArgList);
-        
-        // Run java on sandbox, non-overrideable.
-        javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/pro-grade.jar");
-        javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
-        javaArgList.add("-Djava.security.policy==" + Tools.DIR_DATA + "/java_sandbox.policy");
     }
 
     public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {

@@ -214,6 +214,11 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
             appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
             
+            // Run java on sandbox, non-overrideable.
+            javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/pro-grade.jar");
+            javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
+            javaArgList.add("-Djava.security.policy==" + Tools.DIR_DATA + "/java_sandbox.policy");
+            
             return JREUtils.launchJavaVM(this, javaArgList);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
