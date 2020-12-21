@@ -1,1 +1,4 @@
-include ':app'
+rootProject.name='PojavLauncher'
+include ':jre_securitymanager'
+include ':app_pojavlauncher'
+

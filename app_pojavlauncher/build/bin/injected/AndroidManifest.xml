@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="net.kdt.pojavlaunch"
+	android:versionCode="156236"
+	android:versionName="3.3.1b_6409b_20201218">
+
+	<uses-sdk
+		android:minSdkVersion="21"
+		android:targetSdkVersion="29"/>
+
+	<uses-feature
+		android:glEsVersion="0x00020000"/>
+
+	<uses-permission
+		android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+	<uses-permission
+		android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+	<uses-permission
+		android:name="android.permission.INTERNET"/>
+
+	<application
+		android:allowBackup="true"
+		android:name=".PojavApplication"
+		android:theme="@style/AppTheme"
+		android:label="@string/app_name"
+		android:icon="@drawable/ic_launcher"
+		android:roundIcon="@drawable/ic_launcher"
+		android:resizeableActivity="true"
+		android:requestLegacyExternalStorage="true">
+
+		<meta-data
+			android:name="android.max_aspect"
+			android:value="ratio_float"/>
+
+		<activity
+			android:launchMode="singleTop"
+			android:screenOrientation="sensorLandscape"
+			android:label="@string/app_short_name"
+			android:name=".PojavLoginActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.MAIN"/>
+
+				<category
+					android:name="android.intent.category.LAUNCHER"/>
+
+			</intent-filter>
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.VIEW"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+				<category
+					android:name="android.intent.category.BROWSABLE"/>
+
+				<data
+					android:scheme="ms-xal-00000000402b5328"
+					android:host="auth"/>
+
+			</intent-filter>
+
+		</activity>
+
+		<activity
+			android:theme="@style/MenuDialog"
+			android:screenOrientation="sensorLandscape"
+			android:name=".FatalErrorActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name=".MCLauncherActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name=".PojavLauncherActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name=".JavaGUILauncherActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name=".CustomControlsActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+		<activity
+			android:launchMode="standard"
+			android:multiprocess="true"
+			android:screenOrientation="sensorLandscape"
+			android:name=".MainActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+		<activity
+			android:screenOrientation="sensorLandscape"
+			android:name=".prefs.LauncherPreferenceActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+
+	</application>
+
+</manifest>
+

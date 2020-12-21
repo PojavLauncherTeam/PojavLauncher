@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+
+	<RelativeLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent">
+
+		<net.kdt.pojavlaunch.AWTCanvasView
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:id="@+id/installmod_surfaceview"/>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:background="@drawable/control_button"
+			android:layout_alignParentRight="true"
+			android:text="@string/control_forceclose"
+			android:onClick="forceClose"
+			android:id="@+id/installmod_btn2"/>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:background="@drawable/control_button"
+			android:text="@string/control_viewout"
+			android:onClick="openLogOutput"
+			android:layout_toLeftOf="@id/installmod_btn2"/>
+
+	</RelativeLayout>
+
+	<LinearLayout
+		android:id="@+id/content_log_layout"
+		android:layout_height="match_parent"
+		android:layout_width="wrap_content"
+		android:visibility="gone"
+		android:orientation="vertical">
+
+		<RelativeLayout
+			android:layout_height="42dp"
+			android:layout_width="match_parent"
+			android:gravity="center_vertical"
+			android:background="#555555">
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="@string/control_viewout"
+				android:paddingLeft="15dp"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:layout_centerVertical="true"/>
+
+			<ImageView
+				android:layout_height="42dp"
+				android:layout_width="42dp"
+				android:src="@android:drawable/ic_delete"
+				android:onClick="closeLogOutput"
+				android:layout_alignParentRight="true"
+				android:id="@+id/content_log_close_button"/>
+
+			<ToggleButton
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_toLeftOf="@id/content_log_close_button"
+				android:id="@+id/content_log_toggle_log"/>
+
+		</RelativeLayout>
+
+		<ScrollView
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:id="@+id/content_log_scroll"
+			android:alpha="0.8"
+			android:background="#000000">
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:textIsSelectable="true"/>
+
+		</ScrollView>
+
+	</LinearLayout>
+
+</FrameLayout>
+

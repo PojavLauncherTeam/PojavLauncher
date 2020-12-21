@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.preference.PreferenceScreen xmlns:app2="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.chom/apk/res-auto">
+	
+    <androidx.preference.PreferenceCategory
+		android:title="@string/mcl_setting_category_general">
+
+        <net.kdt.pojavlaunch.prefs.UninstallJREDialogPreference
+            android:summary="@string/mcl_setting_subtitle_uninstalljre"
+            android:title="@string/mcl_setting_title_uninstalljre"
+            app2:icon="@drawable/rm_jre" />
+
+        <androidx.preference.SeekBarPreference
+            android:key="timeLongPressTrigger"
+            android:summary="@string/mcl_setting_subtitle_longpresstrigger"
+            android:title="@string/mcl_setting_title_longpresstrigger"
+            app2:icon="@drawable/tap_len" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="freeform"
+            android:summary="@string/mcl_setting_subtitle_freeform"
+            android:title="@string/mcl_setting_title_freeform"
+            app2:icon="@drawable/freeform_opt" />
+
+        <EditTextPreference
+            android:dialogTitle="@string/mcl_setting_title_javaargs"
+            android:icon="@drawable/jre_args"
+            android:key="javaArgs"
+            android:singleLine="true"
+            android:summary="@string/mcl_setting_subtitle_javaargs"
+            android:title="@string/mcl_setting_title_javaargs" />
+		
+    </androidx.preference.PreferenceCategory>
+	
+    <androidx.preference.PreferenceCategory
+        android:title="@string/mcl_setting_category_scaling">
+        
+        <androidx.preference.SeekBarPreference
+            android:key="buttonscale"
+            android:title="@string/mcl_setting_title_buttonscale"
+            android:summary="@string/mcl_setting_subtitle_buttonscale" />
+
+        <androidx.preference.SeekBarPreference
+            android:key="mousescale"
+            android:summary="@string/mcl_setting_subtitle_mousescale"
+            android:title="@string/mcl_setting_title_mousescale"
+            app2:icon="@drawable/mouse_pointer" />
+        
+    </androidx.preference.PreferenceCategory>
+	
+    <androidx.preference.PreferenceCategory
+		android:title="@string/mcl_setting_category_veroption">
+		
+        <androidx.preference.CheckBoxPreference
+            android:defaultValue="true"
+            android:key="vertype_release"
+			android:title="@string/mcl_setting_veroption_release" />
+		
+        <androidx.preference.CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_snapshot"
+			android:title="@string/mcl_setting_veroption_snapshot" />
+		
+        <androidx.preference.CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_oldalpha"
+			android:title="@string/mcl_setting_veroption_oldalpha" />
+		
+        <androidx.preference.CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_oldbeta"
+			android:title="@string/mcl_setting_veroption_oldbeta" />
+   
+	</androidx.preference.PreferenceCategory>
+	
+</androidx.preference.PreferenceScreen>

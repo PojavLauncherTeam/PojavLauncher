@@ -1,0 +1,20 @@
+%s (Minecraft Java Launcher for Android), version %s by Tran Khanh Duy (based on "Boardwalk" app)<br>
+
+* License:<br>
+ • This application is licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">GNU GPLv3</a>.<br>
+ 
+* Third party components and their licenses:<br>
+ • Apache Commons Compress (unknown or Apache License 2.0).<br>
+ • exp4j: <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.<br>
+ • GL4ES: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.<br>
+ • LegacyLauncher: (unknown license).<br>
+ • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2 License</a>.<br>
+ • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's License</a>.<br><br>
+ • pro-gradle: <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a>.<br>
+ 
+* Notes:<br>
+ - This app is under development and will not be stable.<br>
+ - This app is not affiliated with Minecraft, Mojang or Microsoft.<br><br>
+ 
+* Translators can be found at <a href="https://crowdin.com/project/pojavlauncher">Crowdin</a>
+ 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/ver_clone"
+        android:title="@string/mcl_version_clone" />
+    <item
+        android:id="@+id/ver_edit"
+        android:title="@string/global_edit" />
+    <item
+        android:id="@+id/ver_remove"
+        android:title="@string/global_remove" />
+</menu>
