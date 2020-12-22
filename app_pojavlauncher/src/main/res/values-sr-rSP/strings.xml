@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Издање за Андроид)</string>
-    <string name="app_short_name">ПојавЛаунчер</string>
-    <string name="app_motd">Покрените Минецрафт Јава Издање на вашем уређају!</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition за Андроид)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Покрените Minecraft: Java Edition на вашем уређају!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">ПОМОЋ</string>
     <!-- Languages list part -->
@@ -17,7 +17,7 @@
     <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
     <string name="login_online_login_label">Пријава</string>
     <string name="login_online_create_account">(Направити нови налог?)</string>
-    <string name="login_offline_switch">Офлајн налог?(Некористи Мојанг Налог)</string>
+    <string name="login_offline_switch">Офлајн налог?(Некористи Мојанг Налог)?</string>
     <string name="login_offline_label">Пријавите се као офлајн налог</string>
     <string name="login_offline_alert_skip">Прескочите</string>
     <string name="login_error_short_username">Корисничко име мора имати најмање 3 карактера</string>
@@ -56,54 +56,19 @@
     <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
-    <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
-    <string name="mcl_launch_downloading">Преузимање %s</string>
-    <string name="mcl_launch_download_lib">Преузимање Библиотеке %s</string>
-    <string name="mcl_launch_download_client">Преузимање Минецрафт %s</string>
-    <string name="mcl_launch_convert_lib">Конвертирање Библиотеке %s</string>
-    <string name="mcl_launch_convert_client">Ковертирање Минецрафт %s</string>
-    <string name="mcl_launch_patch_client">Патчање Минецрафт %s</string>
-    <string name="mcl_launch_download_assets">Спремање да се преузимају ресурси</string>
-    <string name="mcl_options">Опције</string>
-    <string name="mcl_option_modmgr">Мод манаџер (нема функције)</string>
     <string name="mcl_option_modinstall">Покрени мод инсталер (Форге, Лабумод, Фабрик, итд...)</string>
     <string name="mcl_option_modinstallwitharg">Покрени мод инсталер (са прилагоћеним аргументима)</string>
-    <string name="mcl_option_checkupdate">Провери да ли постоје ажурирања</string>
-    <string name="mcl_option_customcontrol">Прилагођене контроле</string>
-    <string name="mcl_option_settings">Подешавања</string>
-    <string name="mcl_option_about">О апликацији</string>
     <string name="mcl_setting_title_uninstalljre">Деисталирајте Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Лаунчер рестарт потребан] Ово ће вам дозволити да ре-инсталирајте Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Покрените Минецрафт у прозору</string>
-    <string name="mcl_setting_subtitle_freeform">Покрените Минецрафт на прозору. Потребно Андроид 7.0+</string>
-    <string name="mcl_setting_title_longpresstrigger">Колико дуго ће се активирати након дугог притиска</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Промените време за дуготрајни притисак за уништавање блока и испуштању предмета.</string>
     <string name="mcl_setting_title_buttonscale">Величина дугма (контрола)</string>
     <string name="mcl_setting_subtitle_buttonscale">Повећајте ако су премали.</string>
     <string name="mcl_setting_title_mousescale">Величина Миша</string>
     <string name="mcl_setting_subtitle_mousescale">Промените величину виртуалног миша.</string>
-    <string name="mcl_setting_title_controlsize">Подесите величину дугмад</string>
     <string name="mcl_setting_title_javaargs">ЈВМ Покретање аргументи</string>
     <string name="mcl_setting_subtitle_javaargs">Будите пажљиви, ваша игра се може покварити ако незнате ово користити.</string>
-    <string name="mcl_setting_category_general">Општа подешавања</string>
     <string name="mcl_setting_category_scaling">Подешавања величине</string>
-    <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
-    <string name="mcl_setting_veroption_release">Стабилне верзије</string>
-    <string name="mcl_setting_veroption_snapshot">Снепшот</string>
-    <string name="mcl_setting_veroption_oldalpha">Стари-Алпха</string>
-    <string name="mcl_setting_veroption_oldbeta">Стари-Бета</string>
-    <string name="mcl_version_clone">Клонирај</string>
     <!-- Global strings -->
-    <string name="global_add">Додај</string>
-    <string name="global_edit">Измени</string>
-    <string name="global_error">Грешка</string>
-    <string name="global_load">Учитај</string>
-    <string name="global_name">Назив</string>
-    <string name="global_remove">Уклони</string>
-    <string name="global_restart">Рестарт</string>
-    <string name="global_save">Сачувај</string>
     <string name="global_unpacking">Распакивање %s</string>
-    <string name="global_error_field_empty">Ово поље не може остати празно</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -129,46 +94,21 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Апликација/Игра је изашла са кодом %d</string>
     <string name="mcn_exit_call">Изађи</string>
-    <string name="mcn_exit_crash">Грешка у Игри пронаћена! Притисните ОК да изаћете.</string>
-    <string name="mcn_exit_errcrash">Није могло да се лоцира Грешка! Ви можете ово игнорисати.</string>
-    <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
     <string name="mcn_check_fail_incompatiblearch">Архиктетура %1$s неоже радити са Java Runtime %2$s.</string>
     <string name="mcn_check_fail_java">Није могло поктернути тест Java Виртуалну машину. Проверите %s за више информација.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Контроле</string>
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Тастатура</string>
-    <string name="control_chat">Чет</string>
-    <string name="control_debug">Дебаг</string>
     <string name="control_zoom">Зумирање (Ц)</string>
     <string name="control_primary">При</string>
     <string name="control_secondary">Сек</string>
-    <string name="control_shift">◇</string>
-    <string name="control_inventory">Инв</string>
-    <string name="control_up">▲</string>
-    <string name="control_left">◀</string>
-    <string name="control_right">▶</string>
-    <string name="control_down">▼</string>
-    <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3рд</string>
-    <string name="control_listplayers">Таб</string>
-    <string name="control_mouse">Миш</string>
-    <string name="control_mouseoff">Миш: Искључен</string>
-    <string name="control_mouseon">Миш: Искључен </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Форце затвори</string>
     <string name="control_viewout">Лог Избацивано</string>
     <string name="control_adebug">Инпут дебаг</string>
-    <string name="control_customkey">Пошаљи прилагоћени типка-код</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_remove">Уклони %s?</string>
-    <string name="customctrl_keyname">Кôд тастера</string>
-    <string name="customctrl_specialkey">Специјална типка</string>
-    <string name="customctrl_hidden">Сакривено</string>
     <string name="customctrl_toggle">Тогелабле</string>
     <string name="customctrl_dynamicpos">Динамична позиција</string>
     <string name="customctrl_dynamicpos_x">Динамични Х</string>
@@ -178,14 +118,5 @@
     <string name="customctrl_keycombine">Комбинација типка</string>
     <string name="customctrl_keycombine_alt">Алт</string>
     <string name="customctrl_keycombine_shift">Shift</string>
-    <string name="customctrl_addbutton">Додај дугме</string>
-    <string name="customctrl_selectdefault">Селектујте опћенити Control json</string>
-    <string name="main_options">Опције</string>
-    <string name="main_play">Играј</string>
     <string name="main_welcome">Добродошли, %s</string>
-    <string name="main_infodev">Информације (ДЕВ)</string>
-    <string name="main_switchuser">Промени корисника</string>
-    <string name="main_version">Верзија:</string>
-    <string name="main_nocrash">Није пронаћена грешка</string>
-    <string name="main_nolog">Нема лог.</string>
 </resources>
