@@ -55,7 +55,7 @@
     <string name="mcl_tab_console">개발자 콘솔</string>
     <string name="mcl_tab_crash">충돌 로그</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었다.</string>
+    <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었습니다.</string>
     <string name="mcl_launch_cleancache">캐시 파일 삭제</string>
     <string name="mcl_launch_downloading">다운로드 중 %s</string>
     <string name="mcl_launch_downloading_progress">"다운로드중 %s (%.2f MB / %.2f MB)"</string>
