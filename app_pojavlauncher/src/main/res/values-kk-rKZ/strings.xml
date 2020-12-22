@@ -58,6 +58,7 @@
     <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
     <string name="mcl_launch_cleancache">Кәш файлдарын жоюда</string>
     <string name="mcl_launch_downloading">%s жүктелуде</string>
+    <string name="mcl_launch_downloading_progress">"%s жүктелуде (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
     <string name="mcl_options">Баптау</string>
     <string name="mcl_option_modmgr">Мод меңгеруші (істемейді)</string>
