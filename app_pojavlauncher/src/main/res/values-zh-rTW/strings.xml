@@ -4,18 +4,37 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_microsoft">微軟帳號登入</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"左滑開啟選單 ◀\n長按按鍵以自訂：編輯，縮放或刪除。"</string>
     <!-- Warnings -->
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">安裝 Java 執行時環境 %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
     <!-- Toast messages -->
+    <string name="toast_uninstalljre_done">Java 執行時環境解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">新聞</string>
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_option_modinstall">啟動 Mod 安裝器（例如 Forge, LabyMod, Fabric...）</string>
+    <string name="mcl_option_modinstallwitharg">以自訂引數啟動 Mod 安裝器</string>
+    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行時環境</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 得以重新安裝 Java 執行時環境。</string>
+    <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
+    <string name="mcl_setting_subtitle_buttonscale">若按鍵太小，將其放大。</string>
+    <string name="mcl_setting_title_mousescale">滑鼠縮放</string>
+    <string name="mcl_setting_subtitle_mousescale">更改虛擬滑鼠的大小。</string>
+    <string name="mcl_setting_title_javaargs">JVM 啟動引數</string>
+    <string name="mcl_setting_subtitle_javaargs">注意，非專業人士修改此值可能導致遊戲崩潰。</string>
+    <string name="mcl_setting_category_scaling">縮放設定</string>
     <!-- Global strings -->
+    <string name="global_unpacking">正在解包 %s</string>
+    <string name="global_waiting">等待中</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -39,10 +58,27 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
+    <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
+    <string name="mcn_check_fail_java">無法啟動測試 Java 虛擬機器。檢視 %s 獲取更多資訊。</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_adebug">輸入除錯</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">編輯 %s</string>
+    <string name="customctrl_remove">移除 %s ？</string>
+    <string name="customctrl_toggle">可切換</string>
+    <string name="customctrl_dynamicpos">動態位置</string>
+    <string name="customctrl_dynamicpos_x">動態 X 軸</string>
+    <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
+    <string name="customctrl_transparency_bg">背景透明度</string>
+    <string name="customctrl_transparency_text">文字透明度</string>
+    <string name="customctrl_keycombine">按鍵組合</string>
+    <string name="customctrl_keycombine_control">控制</string>
+    <string name="customctrl_keycombine_shift">上檔</string>
+    <string name="main_welcome">歡迎， %s</string>
 </resources>
