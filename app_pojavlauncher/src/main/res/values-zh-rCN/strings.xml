@@ -51,18 +51,13 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">新闻</string>
-    <string name="mcl_tab_mcje">《Minecraft：Java版》</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">开发控制台</string>
     <string name="mcl_tab_crash">崩溃日志</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 就绪</string>
     <string name="mcl_launch_cleancache">正在清理缓存</string>
     <string name="mcl_launch_downloading">正在下载 %s</string>
-    <string name="mcl_launch_download_lib">正在下载运行库 %s</string>
-    <string name="mcl_launch_download_client">正在下载 Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">正在转换运行库 %s</string>
-    <string name="mcl_launch_convert_client">正在转换 Minecraft %s</string>
-    <string name="mcl_launch_patch_client">正在修补 Minecraft %s</string>
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_modmgr">Mod 管理器（无功能）</string>
@@ -75,9 +70,9 @@
     <string name="mcl_setting_title_uninstalljre">卸载 Java 运行时环境</string>
     <string name="mcl_setting_subtitle_uninstalljre">[需要重启启动器] 得以重新安装 Java 运行时环境。</string>
     <string name="mcl_setting_title_freeform">以自由式模式启动 Minecraft</string>
-    <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+。</string>
+    <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长。</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
     <string name="mcl_setting_subtitle_buttonscale">若按键太小，将其放大。</string>
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
@@ -104,6 +99,7 @@
     <string name="global_save">保存</string>
     <string name="global_unpacking">正在解包 %s</string>
     <string name="global_error_field_empty">此处表单不能为空</string>
+    <string name="global_waiting">等待</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -165,6 +161,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">正在编辑 %s</string>
     <string name="customctrl_remove">移除 %s ？</string>
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_specialkey">特殊键</string>
@@ -177,6 +174,7 @@
     <string name="customctrl_transparency_text">文本透明度</string>
     <string name="customctrl_keycombine">按键组合</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">上档</string>
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
@@ -185,7 +183,7 @@
     <string name="main_welcome">欢迎， %s</string>
     <string name="main_infodev">信息（开发）</string>
     <string name="main_switchuser">切换用户</string>
-    <string name="main_version">版本:</string>
+    <string name="main_version">版本：</string>
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
 </resources>
