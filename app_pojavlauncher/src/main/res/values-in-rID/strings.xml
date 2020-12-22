@@ -58,6 +58,7 @@
     <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan file-file cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
+    <string name="mcl_launch_downloading_progress">"Mengunduh %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
     <string name="mcl_options">Pilihan</string>
     <string name="mcl_option_modmgr">Mod manager (tidak berfungsi)</string>
