@@ -58,6 +58,7 @@
     <string name="mcl_version_msg">Připraveno k spuštení Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čištění souborů mezipaměti</string>
     <string name="mcl_launch_downloading">Stahování %s</string>
+    <string name="mcl_launch_downloading_progress">"Stahuji %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
     <string name="mcl_options">Nastavení</string>
     <string name="mcl_option_modmgr">Manažer modifikací (bez funkce)</string>
@@ -99,6 +100,7 @@
     <string name="global_save">Uložit</string>
     <string name="global_unpacking">Rozbalování %s</string>
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
+    <string name="global_waiting">Počkejte</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -160,6 +162,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Upravuji %s</string>
     <string name="customctrl_remove">Odstranit %s?</string>
     <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_specialkey">Speciální písmeno</string>
@@ -172,6 +175,7 @@
     <string name="customctrl_transparency_text">Průhlednost textu</string>
     <string name="customctrl_keycombine">Kombinace kláves</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
