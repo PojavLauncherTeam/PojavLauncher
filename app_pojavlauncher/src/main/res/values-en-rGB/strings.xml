@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher(Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
     <!-- Action bar part -->
@@ -58,11 +58,6 @@
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
     <string name="mcl_launch_downloading">Downloading %s</string>
-    <string name="mcl_launch_download_lib">Downloading library %s</string>
-    <string name="mcl_launch_download_client">Downloading Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Converting library %s</string>
-    <string name="mcl_launch_convert_client">Converting Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Patching Minecraft %s</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
     <string name="mcl_options">Options</string>
     <string name="mcl_option_modmgr">Mod manager (no function)</string>
@@ -91,7 +86,7 @@
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-alpha</string>
     <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
     <string name="global_add">Add</string>
