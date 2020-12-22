@@ -58,6 +58,7 @@
     <string name="mcl_version_msg">Bereit um Minecraft Version %s zu spielen</string>
     <string name="mcl_launch_cleancache">Säuberung von Cachedateien</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
+    <string name="mcl_launch_downloading_progress">"Lade %s herunter(%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bereite das Herunterladen der Resourcen vor</string>
     <string name="mcl_options">Optionen</string>
     <string name="mcl_option_modmgr">Mod Manager (keine Funktionen)</string>
