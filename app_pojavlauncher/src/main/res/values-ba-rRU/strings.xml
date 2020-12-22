@@ -24,8 +24,6 @@
     <string name="login_select_account">Хисап яҙмалар</string>
     <!-- Hint -->
     <!-- Warnings -->
-    <string name="warning_action_exit">Сығырға</string>
-    <string name="warning_remove_account">Был хисап яҙма юйыласаҡ!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
@@ -35,7 +33,6 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_options">Опциялар</string>
     <!-- Global strings -->
     <string name="global_add">Өҫтәргә</string>
     <!--
@@ -79,9 +76,5 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="main_options">Опциялар</string>
-    <string name="main_play">Уйнарға</string>
     <string name="main_welcome">%s, рәхим итегеҙ</string>
-    <string name="main_infodev">Инфо (Эшк.)</string>
-    <string name="main_version">Версия:</string>
 </resources>
