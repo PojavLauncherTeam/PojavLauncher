@@ -16,7 +16,7 @@
     <string name="login_online_remember">Zapamiętaj mnie?</string>
     <string name="login_online_check_keeplogin">Pozostaw mnie zalogowanym</string>
     <string name="login_online_login_label">Zaloguj się</string>
-    <string name="login_online_create_account">(Stworzyć nowe konto?)</string>
+    <string name="login_online_create_account">(Stwórz nowe konto?)</string>
     <string name="login_offline_switch">Konto offline?</string>
     <string name="login_offline_label">Zaloguj się jako konto offline</string>
     <string name="login_offline_alert_skip">Pomiń</string>
@@ -24,11 +24,11 @@
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_select_account">Wybierz konto</string>
     <!-- Hint -->
-    <string name="hint_select_account">Aby wybrać, kliknij. Aby usunąć konto, przytrzymaj ręcznie.</string>
+    <string name="hint_select_account">Aby wybrać, kliknij go. Aby usunąć konto, przytrzymaj je.</string>
     <string name="hint_control_mapping">"Przesuń od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.
 "</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Wyjdź</string>
+    <string name="warning_action_exit">Wyjście</string>
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Zainstaluj Java Runtime %s (.tar.xz)</string>
@@ -51,18 +51,13 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Aktualności</string>
-    <string name="mcl_tab_mcje">Minecraft: Edycja Java</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Gotowy do gry w Minecrafta %s</string>
+    <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
     <string name="mcl_launch_downloading">Pobieranie %s</string>
-    <string name="mcl_launch_download_lib">Pobieranie biblioteki %s</string>
-    <string name="mcl_launch_download_client">Pobieranie gry Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Konwertowanie biblioteki %s</string>
-    <string name="mcl_launch_convert_client">Konwertowanie Minecrafta %s</string>
-    <string name="mcl_launch_patch_client">Aktualizowanie Minecrafta %s</string>
     <string name="mcl_launch_download_assets">Przygotowanie do pobrania zasobów</string>
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modmgr">Menedżer modów (brak funkcji)</string>
@@ -95,7 +90,7 @@
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
     <string name="global_add">Dodaj</string>
-    <string name="global_edit">Edytuj</string>
+    <string name="global_edit">Edytować</string>
     <string name="global_error">Błąd</string>
     <string name="global_load">Załaduj</string>
     <string name="global_name">Nazwa</string>
@@ -140,18 +135,18 @@
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
-    <string name="control_debug">Debugowanie</string>
+    <string name="control_debug">Debug</string>
     <string name="control_zoom">Powiększenie (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
-    <string name="control_inventory">Inv</string>
+    <string name="control_inventory">Ekw</string>
     <string name="control_up">▲</string>
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3rd</string>
+    <string name="control_thirdperson">3-os</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mysz</string>
     <string name="control_mouseoff">Mysz: wyłączona</string>
@@ -181,9 +176,9 @@
     <string name="customctrl_selectdefault">Wybierz domyślny json Control</string>
     <string name="main_options">Opcje</string>
     <string name="main_play">Graj</string>
-    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_infodev">Informacje (DEV)</string>
     <string name="main_switchuser">Przełącz użytkownika</string>
     <string name="main_version">Wersja:</string>
     <string name="main_nocrash">Nie wykryto awarii</string>
-    <string name="main_nolog">Brak plików dziennika.</string>
+    <string name="main_nolog">Brak logów.</string>
 </resources>
