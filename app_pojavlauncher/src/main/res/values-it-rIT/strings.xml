@@ -58,6 +58,7 @@
     <string name="mcl_version_msg">Pronto a giocare Minecraft %s</string>
     <string name="mcl_launch_cleancache">Ripulendo i file di cache</string>
     <string name="mcl_launch_downloading">Scaricando %s</string>
+    <string name="mcl_launch_downloading_progress">"Scaricando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
     <string name="mcl_options">Impostazioni</string>
     <string name="mcl_option_modmgr">Gestore Mod (nessuna funzione)</string>
