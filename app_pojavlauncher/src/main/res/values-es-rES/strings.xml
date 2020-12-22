@@ -3,46 +3,46 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Abre Minecraft: Java Edition en tu dispositivo!</string>
+    <string name="app_motd">¡Juega Minecraft: Java en tu celular!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">AYUDA</string>
     <!-- Languages list part -->
     <string name="language_name">ESPAÑOL - ES</string>
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email o usuario</string>
-    <string name="login_online_username_question">(Que utilizo?)</string>
+    <string name="login_online_username_hint">Email o nombre de usuario</string>
+    <string name="login_online_username_question">(¿Cuál utilizo?)</string>
     <string name="login_online_password_hint">Contraseña</string>
-    <string name="login_online_password_question">Contraseña olvidada?</string>
-    <string name="login_online_remember">Recordarme?</string>
+    <string name="login_online_password_question">¿Olvidó su contraseña?</string>
+    <string name="login_online_remember">¿Recordar mi cuenta?</string>
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
-    <string name="login_online_create_account">(¿Crear una cuenta nueva?)</string>
-    <string name="login_offline_switch">¿Cuenta no premium?</string>
-    <string name="login_offline_label">Inicia sesión con una cuenta no premium</string>
-    <string name="login_offline_alert_skip">Saltar</string>
-    <string name="login_error_short_username">El nombre de usuario debe tener mínimo 3 carácteres</string>
-    <string name="login_error_exist_username">Este usuario ya existe</string>
-    <string name="login_select_account">Elije una cuenta</string>
+    <string name="login_online_create_account">(¿Crear cuenta nueva?)</string>
+    <string name="login_offline_switch">¿Cuenta sin conexión?</string>
+    <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
+    <string name="login_offline_alert_skip">Omitir</string>
+    <string name="login_error_short_username">El nombre de usuario debe tener al menos 3 letras o mas</string>
+    <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
+    <string name="login_select_account">Seleccione una cuenta</string>
     <!-- Hint -->
-    <string name="hint_select_account">Para seleccionar una cuenta dele click, para eliminarla manténgala pulsada.</string>
+    <string name="hint_select_account">Para seleccionar una cuenta dele click, para eliminarla mantenla pulsada.</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Salir</string>
-    <string name="warning_remove_account">Esta cuenta va a ser eliminada!</string>
+    <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Instalar Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Selecciona un mapa de teclas en JSON</string>
+    <string name="alerttitle_selectkeymap">Seleccione un mapeado de teclas json</string>
     <string name="alerttitle_installmod">Selecciona un instalador de mods</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher se ha bloqueado inesperadamente</string>
-    <string name="error_checklog">Error! Por favor mira el log debajo: %s</string>
-    <string name="error_no_version">Ninguna versión!</string>
-    <string name="error_load_version">No se pudo cargar la versión %s</string>
+    <string name="error_fatal">PojavLauncher se ha detenido inesperadamente</string>
+    <string name="error_checklog">¡Error! Por favor mira el log debajo: %s</string>
+    <string name="error_no_version">¡No hay versiones!</string>
+    <string name="error_load_version">Error al cargar la versión %s</string>
     <string name="error_show_more">Mostrar más</string>
     <string name="error_show_less">Mostrar menos</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">El permiso de leer/escribir en el almacenamiento del dispositivo es necesario!</string>
-    <string name="toast_login_error">Algo fué mal después de iniciar sesión. Por favor, envía esto al desarrollador.\nError: %s</string>
-    <string name="toast_optifine_success">Instalación exitosa</string>
+    <string name="toast_permission_denied">¡Se requiere el permiso de lectura/escritura al almacenamiento!</string>
+    <string name="toast_login_error">Algo salió mal después de iniciar sesión. Por favor, contacta al desarrollador. \nError: %s</string>
+    <string name="toast_optifine_success">Instalación completada</string>
     <string name="toast_uninstalljre_done">Java Runtime desinstalado</string>
     <!--
     <string name="toast_3">Exit</string>
@@ -53,38 +53,33 @@
     <string name="mcl_tab_console">Consola de desarrollador</string>
     <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Listo para jugar a Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Limpiando archivos caché</string>
+    <string name="mcl_version_msg">Listo para jugar Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Limpiando archivos de caché</string>
     <string name="mcl_launch_downloading">Descargando %s</string>
-    <string name="mcl_launch_download_lib">Descargando librería %s</string>
-    <string name="mcl_launch_download_client">Descargando Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Convirtiendo librería %s</string>
-    <string name="mcl_launch_convert_client">Convirtiendo Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Parcheando Minecraft %s</string>
-    <string name="mcl_launch_download_assets">Preparando para descargar recursos</string>
+    <string name="mcl_launch_download_assets">Preparando para descargar los recursos</string>
     <string name="mcl_options">Opciones</string>
-    <string name="mcl_option_modmgr">Gestor de mods (no funciona aún)</string>
+    <string name="mcl_option_modmgr">Administrador de mods (No funciona)</string>
     <string name="mcl_option_modinstall">Usar un instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Iniciar un instalador de un mod (con comandos personalizados)</string>
-    <string name="mcl_option_checkupdate">Comprobar actualizaciónes</string>
-    <string name="mcl_option_customcontrol">Personalizar controles</string>
-    <string name="mcl_option_settings">Configuración</string>
-    <string name="mcl_option_about">Sobre nosotros</string>
+    <string name="mcl_option_checkupdate">Buscar actualizaciones</string>
+    <string name="mcl_option_customcontrol">Controles personalizados</string>
+    <string name="mcl_option_settings">Ajustes</string>
+    <string name="mcl_option_about">Acerca de</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reiniciar el lanzador] Esto te permitirá reinstalar Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Iniciar Minecraft en modo flotante</string>
-    <string name="mcl_setting_subtitle_freeform">Iniciar Minecraft en una ventana flotante. Necesario Android 7.0+</string>
+    <string name="mcl_setting_title_freeform">Lanzar Minecraft en ventana flotante</string>
+    <string name="mcl_setting_subtitle_freeform">Lanzar Minecraft en ventana flotante. Requiere Android 7.0 o superior</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia el tiempo de activación durante una pulsación larga en destruir bloques y soltar objetos.</string>
-    <string name="mcl_setting_title_controlsize">Tamaño de los botones</string>
+    <string name="mcl_setting_title_controlsize">Selecciona el tamaño de los botones</string>
     <string name="mcl_setting_title_javaargs">JRE Argumentos de lanzamiento</string>
     <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
-    <string name="mcl_setting_category_general">Configuración General</string>
-    <string name="mcl_setting_category_veroption">El tipo de versión estará en la lista de versiones</string>
-    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_category_general">Opciones generales</string>
+    <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
+    <string name="mcl_setting_veroption_release">Lanzadas</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alfa-vieja</string>
-    <string name="mcl_setting_veroption_oldbeta">Beta-antigua</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta antigua</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_add">Añadir</string>
@@ -92,7 +87,7 @@
     <string name="global_error">Error</string>
     <string name="global_load">Cargar</string>
     <string name="global_name">Nombre</string>
-    <string name="global_remove">Quitar</string>
+    <string name="global_remove">Remover</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Guardar</string>
     <string name="global_unpacking">Descomprimiendo</string>
@@ -123,7 +118,7 @@
     <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d</string>
     <string name="mcn_exit_call">Salir</string>
     <string name="mcn_exit_crash">¡Se ha detectado un error en el juego! Haga clic en Aceptar para salir.</string>
-    <string name="mcn_exit_errcrash">¡No se puede localizar el fallo! Puede ignorar esto.</string>
+    <string name="mcn_exit_errcrash">¡No se puede localizar el fallo! Puedes ignorar esto.</string>
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_lwjgl">¡LWJGL3 no ha sido instalado!</string>
     <string name="mcn_check_fail_incompatiblearch">La arquitectura %1$s es incompatible con Java Runtime %2$s.</string>
@@ -144,13 +139,13 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3ª P</string>
-    <string name="control_listplayers">Tabulador</string>
+    <string name="control_thirdperson">3ra</string>
+    <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Ratón</string>
-    <string name="control_mouseoff">Ratón: apagado</string>
+    <string name="control_mouseoff">Ratón: Apagado</string>
     <string name="control_mouseon">Ratón: encendido </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Forzar cerrado</string>
+    <string name="control_forceclose">Forzar cierre</string>
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
@@ -166,8 +161,8 @@
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
     <string name="main_infodev">Información (DEV)</string>
-    <string name="main_switchuser">Cambiar usuario</string>
+    <string name="main_switchuser">Cambiar de usuario</string>
     <string name="main_version">Versión:</string>
-    <string name="main_nocrash">Ningún bloqueo detectado</string>
-    <string name="main_nolog">Ningún log.</string>
+    <string name="main_nocrash">No se han detectado errores</string>
+    <string name="main_nolog">Sin registros.</string>
 </resources>
