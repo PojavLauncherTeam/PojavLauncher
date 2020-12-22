@@ -9,23 +9,23 @@
     <!-- Languages list part -->
     <string name="language_name">ITALIANO - IT</string>
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email o nome utente</string>
+    <string name="login_online_username_hint">Indirizzo Email o nome utente</string>
     <string name="login_online_username_question">(Quale dovrei usare?)</string>
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_password_question">Password dimenticata?</string>
     <string name="login_online_remember">Ricordami?</string>
     <string name="login_online_check_keeplogin">Resta collegato</string>
     <string name="login_online_login_label">Accedi</string>
-    <string name="login_online_create_account">(Creare nuovo account)</string>
-    <string name="login_offline_switch">Account offline?</string>
-    <string name="login_offline_label">Accedi come account offline</string>
+    <string name="login_online_create_account">(Creare nuovo account?)</string>
+    <string name="login_offline_switch">Account Offline?</string>
+    <string name="login_offline_label">Accedi come account Offline</string>
     <string name="login_offline_alert_skip">Ignora</string>
     <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
-    <string name="login_error_exist_username">Questo nome utente esiste già</string>
+    <string name="login_error_exist_username">Il nome utente esiste già</string>
     <string name="login_microsoft">Accedi con un account Microsoft</string>
     <string name="login_select_account">Seleziona account</string>
     <!-- Hint -->
-    <string name="hint_select_account">Per selezionare, cliccalo. Per cancellare un account, tieni premuto.</string>
+    <string name="hint_select_account">Per selezionarlo, cliccalo. Per cancellare un account, tieni premuto.</string>
     <string name="hint_control_mapping">"Scorri da destra verso sinistra per aprire il menu ◀\nTieni premuto per personalizzare: modificare, ridimensionare o eliminare."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Esci</string>
@@ -51,18 +51,13 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Notizie</string>
-    <string name="mcl_tab_mcje">Minecraft: java Edition</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Console di sviluppo</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pronto a giocare Minecraft %s</string>
     <string name="mcl_launch_cleancache">Ripulendo i file di cache</string>
     <string name="mcl_launch_downloading">Scaricando %s</string>
-    <string name="mcl_launch_download_lib">Scaricando libreria %s</string>
-    <string name="mcl_launch_download_client">Scaricando Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Convertendo libreria %s</string>
-    <string name="mcl_launch_convert_client">Convertendo Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Patchando Minecraft %s</string>
     <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
     <string name="mcl_options">Impostazioni</string>
     <string name="mcl_option_modmgr">Gestore Mod (nessuna funzione)</string>
