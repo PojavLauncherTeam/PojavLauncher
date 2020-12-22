@@ -43,7 +43,7 @@
     <string name="error_show_less">간략히 보기</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">저장소 읽고 쓰기 권한이 필요합니다!</string>
-    <string name="toast_login_error">로그인 후 문제가 발생했습니다. 개발자에게 문의하세요.\nError: %s</string>
+    <string name="toast_login_error">로그인 후 문제가 발생했습니다. 개발자에게 문의하세요.\n오류: %s</string>
     <string name="toast_optifine_success">설치 성공</string>
     <string name="toast_uninstalljre_done">Java 런타임 삭제 완료</string>
     <!--
@@ -58,11 +58,6 @@
     <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었다.</string>
     <string name="mcl_launch_cleancache">캐시 파일 삭제</string>
     <string name="mcl_launch_downloading">다운로드 중 %s</string>
-    <string name="mcl_launch_download_lib">라이브러리 다운로드 중 %s</string>
-    <string name="mcl_launch_download_client">Minecraft 다운로드 중 %s</string>
-    <string name="mcl_launch_convert_lib">라이브러리 변환 중 %s</string>
-    <string name="mcl_launch_convert_client">Minecraft 변환 중 %s</string>
-    <string name="mcl_launch_patch_client">Minecraft 패치 중 %s</string>
     <string name="mcl_launch_download_assets">다운로드 준비 중</string>
     <string name="mcl_options">설정</string>
     <string name="mcl_option_modmgr">모드 매니저 (기능 없음)</string>
@@ -75,7 +70,7 @@
     <string name="mcl_setting_title_uninstalljre">Java Runtime 삭제</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher 재 실행 요구] Java 런타임 재 설치하기</string>
     <string name="mcl_setting_title_freeform">Minecraft를 Freeform mode로 실행하기</string>
-    <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다.  Android 7.0 이상을 요구합니다.</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다. Android 7.0 이상을 요구합니다.</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
     <string name="mcl_setting_subtitle_longpresstrigger">블럭 파괴와 아이템 던지기를 위한 길게 누르기 시간 변경</string>
     <string name="mcl_setting_title_buttonscale">컨트롤 버튼 크기</string>
@@ -155,7 +150,7 @@
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">마우스</string>
     <string name="control_mouseoff">Mouse: 끔</string>
-    <string name="control_mouseon">Mouse: 켬</string>
+    <string name="control_mouseon">Mouse: 켬 </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">강제 종료</string>
     <string name="control_viewout">로그 확인</string>
