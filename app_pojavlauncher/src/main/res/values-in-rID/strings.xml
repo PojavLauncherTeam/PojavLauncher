@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
+    <string name="app_motd">Menjalankan Minecraft: Java Edition Di Perangkat Anda!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">BANTUAN</string>
     <!-- Languages list part -->
@@ -35,14 +35,14 @@
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
     <string name="alerttitle_installmod">Pilih sebuah instaler mod</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher tiba-tiba crash!</string>
+    <string name="error_fatal">PojavLauncher tiba-tiba crash</string>
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
-    <string name="error_load_version">Tidak bisa mengload versi! %s</string>
+    <string name="error_load_version">Tidak bisa memuat versi! %s</string>
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Permisi untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
+    <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
     <string name="toast_uninstalljre_done">Selesai mencopot Runtime Java</string>
@@ -55,14 +55,9 @@
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Siap untuk main Minecraft %s</string>
+    <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan file-file cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
-    <string name="mcl_launch_download_lib">Mengunduh library %s</string>
-    <string name="mcl_launch_download_client">Mengunduh Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Melakukan konversi pada library %s</string>
-    <string name="mcl_launch_convert_client">Melakukan konversi pada Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Melakukan patch pada Minecraft %s</string>
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
     <string name="mcl_options">Pilihan</string>
     <string name="mcl_option_modmgr">Mod manager (tidak berfungsi)</string>
@@ -77,7 +72,7 @@
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan oencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_buttonscale">Skala tombol kontrol</string>
     <string name="mcl_setting_subtitle_buttonscale">Tingkatkan skala jika tombol terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Penskalaan mouse</string>
@@ -88,7 +83,7 @@
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
-    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
@@ -96,14 +91,14 @@
     <!-- Global strings -->
     <string name="global_add">Tambah</string>
     <string name="global_edit">Edit</string>
-    <string name="global_error">Error</string>
-    <string name="global_load">Load</string>
+    <string name="global_error">Eror</string>
+    <string name="global_load">Memuat</string>
     <string name="global_name">Nama</string>
     <string name="global_remove">Hapus</string>
-    <string name="global_restart">Restart</string>
+    <string name="global_restart">Buka ulang</string>
     <string name="global_save">Simpan</string>
     <string name="global_unpacking">Membongkar %s</string>
-    <string name="global_error_field_empty">Tempat ini tidak boleh kosong.</string>
+    <string name="global_error_field_empty">Tempat ini tidak boleh kosong</string>
     <string name="global_waiting">Tunggu</string>
     <!--
     <string name="mcl_about">
@@ -155,10 +150,10 @@
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mouse</string>
-    <string name="control_mouseoff">Mouse: off</string>
-    <string name="control_mouseon">Mouse: on </string>
+    <string name="control_mouseoff">Mouse: mati</string>
+    <string name="control_mouseon">Mouse: nyala </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Tutp secara paksa</string>
+    <string name="control_forceclose">Tutup secara paksa</string>
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Kirim kode kunci kustom</string>
@@ -182,12 +177,12 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
-    <string name="customctrl_selectdefault">Pilih json kontrol default</string>
+    <string name="customctrl_selectdefault">Pilih \". json\" kontrol default</string>
     <string name="main_options">Pilihan</string>
     <string name="main_play">Main</string>
     <string name="main_welcome">Selamat datang, %s</string>
     <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Beralih/ganti user</string>
+    <string name="main_switchuser">Beralih/ganti pengguna</string>
     <string name="main_version">Versi:</string>
     <string name="main_nocrash">Tidak ada crash terdeteksi</string>
     <string name="main_nolog">Tidak ada catatan log.</string>
