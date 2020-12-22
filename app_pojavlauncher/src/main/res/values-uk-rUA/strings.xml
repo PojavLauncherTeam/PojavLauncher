@@ -58,6 +58,7 @@
     <string name="mcl_version_msg">Minecraft %s готовий до запуску</string>
     <string name="mcl_launch_cleancache">Очищення файлів кешу</string>
     <string name="mcl_launch_downloading">Завантаження %s</string>
+    <string name="mcl_launch_downloading_progress">"Завантаження %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
     <string name="mcl_options">Опції</string>
     <string name="mcl_option_modmgr">Диспетчер модів (непрацює)</string>
