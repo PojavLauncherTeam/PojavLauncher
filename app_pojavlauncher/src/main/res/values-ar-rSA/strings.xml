@@ -58,11 +58,6 @@
     <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
     <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
     <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
-    <string name="mcl_launch_download_lib">جار تحميل ملفات المكتبة %s</string>
-    <string name="mcl_launch_download_client">جار تحميل ماين كرافت %s</string>
-    <string name="mcl_launch_convert_lib">جار تحويل المكتبة %s</string>
-    <string name="mcl_launch_convert_client">جار تحويل ماين كرافت %s</string>
-    <string name="mcl_launch_patch_client">جار تصحيح ماين كرافت %s</string>
     <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
     <string name="mcl_options">الخيارات</string>
     <string name="mcl_option_modmgr">مدير المودات (بدون وظيفة)</string>
