@@ -4,13 +4,13 @@ import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.util.*;
-import com.kdt.mojangauth.*;
-import com.kdt.mojangauth.yggdrasil.*;
 
 import java.net.*;
 import java.text.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.authenticator.mojang.*;
+import net.kdt.pojavlaunch.authenticator.microsoft.*;
 import org.json.*;
 
 import java.text.ParseException;

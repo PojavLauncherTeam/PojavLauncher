@@ -4,8 +4,8 @@ import android.app.*;
 import android.content.*;
 import android.util.*;
 import android.view.*;
-import com.kdt.mojangauth.*;
 import java.io.*;
+import net.kdt.pojavlaunch.authenticator.mojang.*;
 
 public class MCProfile
 {

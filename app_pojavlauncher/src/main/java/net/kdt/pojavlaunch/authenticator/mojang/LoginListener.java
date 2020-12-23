@@ -1,4 +1,4 @@
-package com.kdt.mojangauth;
+package net.kdt.pojavlaunch.authenticator.mojang;
 
 public interface LoginListener
 {

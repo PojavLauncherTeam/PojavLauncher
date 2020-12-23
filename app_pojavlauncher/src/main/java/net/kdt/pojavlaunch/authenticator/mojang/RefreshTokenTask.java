@@ -1,11 +1,11 @@
-package com.kdt.mojangauth;
+package net.kdt.pojavlaunch.authenticator.mojang;
 
 import android.content.*;
 import android.os.*;
 import com.google.gson.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
-import com.kdt.mojangauth.yggdrasil.*;
+import net.kdt.pojavlaunch.authenticator.mojang.yggdrasil.*;
 import android.app.*;
 import net.kdt.pojavlaunch.value.*;
 

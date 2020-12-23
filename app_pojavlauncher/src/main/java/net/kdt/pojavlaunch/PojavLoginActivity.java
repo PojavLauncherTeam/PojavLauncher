@@ -18,11 +18,11 @@ import android.util.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
-import com.kdt.mojangauth.*;
 import com.kdt.pickafile.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.authenticator.microsoft.*;
+import net.kdt.pojavlaunch.authenticator.mojang.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -688,7 +688,6 @@ public class PojavLoginActivity extends BaseActivity
         
         builder.setPositiveButton(android.R.string.cancel, null);
         builder.setTitle(this.getString(R.string.login_select_account));
-        builder.setMessage(R.string.hint_select_account);
         builder.setSingleChoiceItems(listAdapter, 0, new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(final DialogInterface di, final int selectedIndex) {

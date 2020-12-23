@@ -1,4 +1,4 @@
-package com.kdt.mojangauth.yggdrasil;
+package net.kdt.pojavlaunch.authenticator.mojang.yggdrasil.*;
 
 public class ErrorResponse {
     public String cause;

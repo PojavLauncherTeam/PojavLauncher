@@ -71,7 +71,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         viewPageAdapter.addFragment(new LauncherFragment(), R.drawable.ic_menu_news, getString(R.string.mcl_tab_news));
         viewPageAdapter.addFragment(mConsoleView, R.drawable.ic_menu_java, getString(R.string.mcl_tab_console));
         viewPageAdapter.addFragment(mCrashView, 0, getString(R.string.mcl_tab_crash));
-        viewPageAdapter.addFragment(new LauncherPreferenceFragment(), R.drawable.ic_menu_settings, getString(R.string.mcl_option_settings));
+        viewPageAdapter.addFragment(new LauncherPreferenceFragment(), R.drawable.ic_menu_settings,
+            getString(R.string.mcl_option_settings));
         
         viewPager.setAdapter(viewPageAdapter);
         // tabLayout.setTabMode(VerticalTabLayout.MODE_SCROLLABLE);
@@ -134,7 +135,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 if (tempProfile != null && position == 0) {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.DIR_ACCOUNT_NEW + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)) + ".json");
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this,
+                        Tools.DIR_ACCOUNT_NEW + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)) + ".json");
                 }
                 pickAccount();
             }
@@ -189,8 +191,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     protected float updateWidthHeight() {
         float leftRightWidth = (float) CallbackBridge.windowWidth / 100f * 32f;
         float mPlayButtonWidth = CallbackBridge.windowWidth - leftRightWidth * 2f;
-        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
-        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
+        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth,
+            (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
+        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth,
+            (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
         leftView.setLayoutParams(leftRightParams);
         rightView.setLayoutParams(leftRightParams);
         mPlayButton.setLayoutParams(mPlayButtonParams);
@@ -220,7 +224,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     public void statusIsLaunching(boolean isLaunching) {
-        LinearLayout.LayoutParams reparam = new LinearLayout.LayoutParams((int) updateWidthHeight(), LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams reparam = new LinearLayout.LayoutParams((int) updateWidthHeight(),
+            LinearLayout.LayoutParams.WRAP_CONTENT);
         ViewGroup.MarginLayoutParams lmainTabParam = (ViewGroup.MarginLayoutParams) fullTab.getLayoutParams();
         int launchVisibility = isLaunching ? View.VISIBLE : View.GONE;
         mLaunchProgress.setVisibility(launchVisibility);
