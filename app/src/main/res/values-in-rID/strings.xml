@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Menjalankan Minecraft: Java Edition Di Perangkat Anda!</string>
+    <string name="app_motd">Menjalankan Minecraft: Java Edition di perangkat anda!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">BANTUAN</string>
     <!-- Languages list part -->
@@ -22,12 +22,12 @@
     <string name="login_offline_switch">Akun offline?</string>
     <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_offline_alert_skip">Lewati</string>
-    <string name="login_error_short_username">Username harus ada 3 karakter</string>
+    <string name="login_error_short_username">Username minimal harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
     <string name="login_select_account">Pilih akun</string>
     <!-- Hint -->
-    <string name="hint_select_account">Untuk memilih akun, di-klik. Untuk menghapus akun, dipencet dengan ditahan.</string>
-    <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum busa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
+    <string name="hint_select_account">Pencet untuk memilih akun. Untuk menghapus akun, dipencet dengan ditahan.</string>
+    <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum bisa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
     <!-- Warning -->
     <string name="warning_title">Peringatan</string>
     <string name="warning_msg">Aplikasi ini mungkin tidak bisa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
