@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecionar conta</string>
     <!-- Hint -->
-    <string name="hint_select_account">Para selecionar, pressione. Para excluir uma conta, manter pressionado.</string>
     <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀\nSegure um botão para personalizar: editar, redimensionar ou excluir."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Sair</string>
