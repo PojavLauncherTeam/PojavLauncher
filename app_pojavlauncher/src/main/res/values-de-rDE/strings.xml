@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft-Login</string>
     <string name="login_select_account">Konto auswählen</string>
     <!-- Hint -->
-    <string name="hint_select_account">Um ein Konto auszuwählen, bitte den Kontonamen anklicken. Um es zu löschen gedrückt halten.</string>
     <string name="hint_control_mapping">"Wische von rechts nach links um das Menü zu öffnen ◀\nDrücke auf eine Schaltfläche um Sie anzupassen: Editieren, Vergrößern und Verkleinern oder Löschen."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Beenden</string>
