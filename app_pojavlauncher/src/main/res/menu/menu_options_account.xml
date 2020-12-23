@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_account_select"
+        android:title="@string/login_select_account"/>
+    
+    <item
+        android:id="@+id/menu_account_remove"
+        android:title="@string/global_remove"/>
+</menu>

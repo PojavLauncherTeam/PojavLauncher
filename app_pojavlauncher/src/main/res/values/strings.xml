@@ -33,7 +33,6 @@
     <string name="login_select_account">Select account</string>
 
     <!-- Hint -->
-    <string name="hint_select_account">To select, click it. To delete an account, hold it.</string>
     <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
 
     <!-- Warnings -->

@@ -41,7 +41,11 @@ public class PojavProfile
                     Tools.showError(ctx, e);
                 }
 			} else if (obj instanceof String) {
-				pref.putString(PROFILE_PREF_FILE, (String) obj);
+                String acc = (String) obj;
+				pref.putString(PROFILE_PREF_FILE,
+                    acc.startsWith("/") ?
+                        acc : 
+                        Tools.DIR_ACCOUNT_NEW + "/" + acc + ".json");
                 MinecraftAccount.clearTempAccount();
 			} else if (obj == null) {
 				pref.putString(PROFILE_PREF_FILE, "");

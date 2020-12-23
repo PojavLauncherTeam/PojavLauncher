@@ -110,7 +110,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         if (tempProfile != null) {
             accountList.add(tempProfile.username);
         }
-        accountList.addAll(Arrays.asList(new File(Tools.DIR_ACCOUNT_OLD).list()));
+        for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
+            accountList.add(s.substring(0, s.length() - 5));
+        }
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -132,7 +134,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 if (tempProfile != null && position == 0) {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.DIR_ACCOUNT_OLD + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)));
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.DIR_ACCOUNT_NEW + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)) + ".json");
                 }
                 pickAccount();
             }

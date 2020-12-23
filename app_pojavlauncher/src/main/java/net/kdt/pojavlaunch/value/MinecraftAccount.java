@@ -26,8 +26,8 @@ public class MinecraftAccount
         return Tools.GLOBAL_GSON.fromJson(content, MinecraftAccount.class);
     }
     
-    public static MinecraftAccount load(String path) throws IOException, JsonSyntaxException {
-        MinecraftAccount acc = parse(Tools.read(path));
+    public static MinecraftAccount load(String name) throws IOException, JsonSyntaxException {
+        MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
         if (acc.accessToken == null) {
             acc.accessToken = "0";
         } if (acc.profileId == null) {

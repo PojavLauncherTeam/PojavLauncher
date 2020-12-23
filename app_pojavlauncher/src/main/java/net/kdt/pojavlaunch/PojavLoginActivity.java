@@ -290,7 +290,9 @@ public class PojavLoginActivity extends BaseActivity
     private boolean isJavaRuntimeInstalled(AssetManager am) {
         boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
         try {
-            return prefValue && (am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz") == null || Tools.read(new FileInputStream(Tools.DIR_HOME_JRE+"/version")).equals(Tools.read(am.open("components/jre/version"))));
+            return prefValue && (
+                am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz") == null ||
+                Tools.read(new FileInputStream(Tools.DIR_HOME_JRE+"/version")).equals(Tools.read(am.open("components/jre/version"))));
         } catch(IOException e) {
             Log.e("JVMCtl","failed to read file",e);
             return prefValue;
@@ -330,7 +332,8 @@ public class PojavLoginActivity extends BaseActivity
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
-            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar", Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
+            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar",
+                Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
@@ -440,7 +443,8 @@ public class PojavLoginActivity extends BaseActivity
             os.close();
             uncompressTarXZ(rtPlatformDependent, new File(Tools.DIR_HOME_JRE));
         } catch (IOException e) {
-            //Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?), in both cases, redirecting to manual install, and removing the universal stuff
+            // Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?),
+            // in both cases, redirecting to manual install, and removing the universal stuff
             for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
                 if (f.isDirectory()){
                     try {
@@ -608,7 +612,12 @@ public class PojavLoginActivity extends BaseActivity
     */
     
     public void loginMicrosoft(View view) {
-        CustomTabs.openTab(this, "https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+        CustomTabs.openTab(this,
+            "https://login.live.com/oauth20_authorize.srf" + 
+            "?client_id=00000000402b5328" +
+            "&response_type=code" +
+            "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
+            "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
     }
     
     @Override
@@ -644,6 +653,18 @@ public class PojavLoginActivity extends BaseActivity
         }
     }
     
+    private View getViewFromList(int pos, ListView listView) {
+        final int firstItemPos = listView.getFirstVisiblePosition();
+        final int lastItemPos = firstItemPos + listView.getChildCount() - 1;
+
+        if (pos < firstItemPos || pos > lastItemPos ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstItemPos;
+            return listView.getChildAt(childIndex);
+        }
+    }
+    
     public void loginSavedAcc(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -660,105 +681,80 @@ public class PojavLoginActivity extends BaseActivity
                 });
         }
         
+        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
+            listAdapter.add(s.substring(0, s.length() - 5));
+        }
+        
         builder.setPositiveButton(android.R.string.cancel, null);
         builder.setTitle(this.getString(R.string.login_select_account));
-        final AlertDialog dialog = builder.create();
-
-        /*
-        LinearLayout.LayoutParams lpHint, lpFlv;
-        
-        lpHint = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lpFlv = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lpHint.weight = 1;
-        lpFlv.weight = 1;
-        */
-        dialog.setTitle(this.getString(R.string.login_select_account));
-        System.out.println("Setting title...");
-        LinearLayout dialay = new LinearLayout(this);
-        dialay.setOrientation(LinearLayout.VERTICAL);
-        TextView fhint = new TextView(this);
-        fhint.setText(R.string.hint_select_account);
-        // fhint.setLayoutParams(lpHint);
-        
-        final FileListView flv = new FileListView(dialog);
-        // flv.setLayoutParams(lpFlv);
-        
-        flv.lockPathAt(Tools.DIR_ACCOUNT_NEW);
-        flv.setFileSelectedListener(new FileSelectedListener(){
-
+        builder.setMessage(R.string.hint_select_account);
+        builder.setSingleChoiceItems(listAdapter, 0, new DialogInterface.OnClickListener(){
                 @Override
-                public void onFileLongClick(final File file, String path)
-                {
-                    AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
-                    builder2.setTitle(file.getName());
-                    builder2.setMessage(R.string.warning_remove_account);
-                    builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
+                public void onClick(final DialogInterface di, final int selectedIndex) {
+                    PopupMenu popup = new PopupMenu(PojavLoginActivity.this, getViewFromList(selectedIndex, ((AlertDialog) di).getListView()));
+                    popup.inflate(R.menu.menu_options_account);
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
-                            public void onClick(DialogInterface p1, int p2) {
-                                new InvalidateTokenTask(PojavLoginActivity.this).execute(file.getAbsolutePath());
-                                flv.refreshPath();
-                            }
-                        });
-                    builder2.setNegativeButton(android.R.string.cancel, null);
-                    builder2.show();
-                }
-                @Override
-                public void onFileSelected(File file, final String path) {
-                    try {
-                        MinecraftAccount acc = MinecraftAccount.load(path);
-                        if (acc.isMicrosoft){
-                            new MicrosoftAuthTask(PojavLoginActivity.this, new RefreshListener(){
-                                    @Override
-                                    public void onFailed(Throwable e) {
-                                        Tools.showError(PojavLoginActivity.this, e);
-                                    }
-
-                                    @Override
-                                    public void onSuccess(MinecraftAccount b) {
-                                        mProfile = b;
-                                        playProfile(true);
-                                    }
-                                }).execute("true", acc.msaRefreshToken);
-                        } else if (acc.accessToken.length() >= 5) {
-                            MCProfile.updateTokens(PojavLoginActivity.this, path, new RefreshListener(){
-
-                                    @Override
-                                    public void onFailed(Throwable e)
-                                    {
-                                        Tools.showError(PojavLoginActivity.this, e);
-                                    }
-
-                                    @Override
-                                    public void onSuccess(MinecraftAccount unused)
-                                    {
+                            public boolean onMenuItemClick(MenuItem item) {
+                                final String selectedAccName = listAdapter.getItem(selectedIndex);
+                                switch (item.getItemId()) {
+                                    case R.id.menu_account_select:
                                         try {
-                                            mProfile = MinecraftAccount.load(path);
-                                            playProfile(true);
-                                        } catch (Throwable e) {
+                                            RefreshListener authListener = new RefreshListener(){
+                                                @Override
+                                                public void onFailed(Throwable e) {
+                                                    Tools.showError(PojavLoginActivity.this, e);
+                                                }
+
+                                                @Override
+                                                public void onSuccess(MinecraftAccount out) {
+                                                    di.dismiss();
+                                                    mProfile = out;
+                                                    playProfile(true);
+                                                }
+                                            };
+                                            
+                                            MinecraftAccount acc = MinecraftAccount.load(selectedAccName);
+                                            if (acc.isMicrosoft){
+                                                new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
+                                                    .execute("true", acc.msaRefreshToken);
+                                            } else if (acc.accessToken.length() >= 5) {
+                                                MCProfile.updateTokens(PojavLoginActivity.this, selectedAccName, authListener);
+                                            } else {
+                                                di.dismiss();
+                                                MCProfile.launch(PojavLoginActivity.this, selectedAccName);
+                                            }
+                                        } catch (Exception e) {
                                             Tools.showError(PojavLoginActivity.this, e);
                                         }
-                                    }
-                                });
-                        } else {
-                            MCProfile.launch(PojavLoginActivity.this, path);
-                        }
-                        
-                        dialog.hide();
-                        //Tools.throwError(MCLoginActivity.this, new Exception(builder.getAccessToken() + "," + builder.getUUID() + "," + builder.getNickname() + "," + builder.getEmail() + "," + builder.getPassword()));
-                    }
-                    catch (Exception e)
-                    {
-                        Tools.showError(PojavLoginActivity.this, e);
-                    }
+                                        break;
+                                    
+                                    case R.id.menu_account_remove:
+                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
+                                        builder2.setTitle(selectedAccName);
+                                        builder2.setMessage(R.string.warning_remove_account);
+                                        builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                                                @Override
+                                                public void onClick(DialogInterface p1, int p2) {
+                                                    new InvalidateTokenTask(PojavLoginActivity.this)
+                                                        .execute(Tools.DIR_ACCOUNT_NEW + "/" + selectedAccName + ".json");
+                                                    listAdapter.remove(selectedAccName);
+                                                    listAdapter.notifyDataSetChanged();
+                                                }
+                                            });
+                                        builder2.setNegativeButton(android.R.string.cancel, null);
+                                        builder2.show();
+                                        break;
+                                }
+                                return true;
+                            }
+                        });
+                    popup.show();
                 }
             });
-        dialay.addView(fhint);
-        dialay.addView(flv);
-        
-        dialog.setView(dialay);
-        dialog.setTitle(this.getString(R.string.login_select_account));
-        dialog.show();
+        builder.show();
     }
     
     private MinecraftAccount loginOffline() {
@@ -769,7 +765,7 @@ public class PojavLoginActivity extends BaseActivity
             edit2.setError(getResources().getString(R.string.global_error_field_empty));
         } else if(text.length() <= 2){
             edit2.setError(getResources().getString(R.string.login_error_short_username));
-        } else if(new File(Tools.DIR_ACCOUNT_OLD + "/" + text).exists()){
+        } else if(new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()){
             edit2.setError(getResources().getString(R.string.login_error_exist_username));
         } else{
             MinecraftAccount builder = new MinecraftAccount();
@@ -805,7 +801,8 @@ public class PojavLoginActivity extends BaseActivity
                     @Override
                     public void onLoginDone(String[] result) {
                         if(result[0].equals("ERROR")){
-                            Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(R.string.global_error), strArrToString(result));
+                            Tools.dialogOnUiThread(PojavLoginActivity.this,
+                                getResources().getString(R.string.global_error), strArrToString(result));
                         } else{
                             MinecraftAccount builder = new MinecraftAccount();
                             builder.accessToken = result[1];
@@ -863,7 +860,8 @@ public class PojavLoginActivity extends BaseActivity
     //Requesting permission
     private void requestStoragePermission()
     {
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
     }
 
     // This method will be called when the user will tap on allow or deny

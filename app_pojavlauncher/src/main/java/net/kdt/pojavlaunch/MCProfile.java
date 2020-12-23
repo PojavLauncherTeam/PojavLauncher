@@ -24,8 +24,8 @@ public class MCProfile
         ctx.startActivity(intent);
     }
     
-    public static void updateTokens(final Activity ctx, final String pofFilePath, RefreshListener listen) throws Exception {
-        new RefreshTokenTask(ctx, listen).execute(pofFilePath);
+    public static void updateTokens(final Activity ctx, final String name, RefreshListener listen) throws Exception {
+        new RefreshTokenTask(ctx, listen).execute(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json");
     }
     
     public static String build(MCProfile.Builder builder) {
