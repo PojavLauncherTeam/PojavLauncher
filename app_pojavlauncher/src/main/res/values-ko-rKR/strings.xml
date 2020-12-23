@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
     <!-- Hint -->
-    <string name="hint_select_account">터치하여 계정을 선택하거나, 길게 눌러 계정을 삭제하세요.</string>
     <string name="hint_control_mapping">"오른쪽에서 왼쪽으로 스와이프 하여 메뉴를 여세요. ◀\n 버튼을 눌러 수정,  크기 조절,  삭제를 할 수 있습니다."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">나가기</string>
