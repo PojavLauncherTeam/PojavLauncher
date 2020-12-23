@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Menjalankan Minecraft: Java Edition Di Perangkat Anda!</string>
+    <string name="app_motd">Menjalankan Minecraft: Java Edition di perangkat anda!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">BANTUAN</string>
     <!-- Languages list part -->
@@ -20,12 +20,11 @@
     <string name="login_offline_switch">Akun offline?</string>
     <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_offline_alert_skip">Lewati</string>
-    <string name="login_error_short_username">Username harus ada 3 karakter</string>
+    <string name="login_error_short_username">Username minimal harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
     <string name="login_microsoft">Login Microsoft</string>
     <string name="login_select_account">Pilih akun</string>
     <!-- Hint -->
-    <string name="hint_select_account">Untuk memilih akun, di-klik. Untuk menghapus akun, dipencet dengan ditahan.</string>
     <string name="hint_control_mapping">"Geser dari kanan ke kiri untuk membuka menu ◀\nPencet lama sebuah tombol untuk memodifikasi: edit, modifikasi ukuran, atau hapus."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Keluar</string>
