@@ -58,6 +58,7 @@
     <string name="mcl_version_msg">Minecraft %s 就绪</string>
     <string name="mcl_launch_cleancache">正在清理缓存</string>
     <string name="mcl_launch_downloading">正在下载 %s</string>
+    <string name="mcl_launch_downloading_progress">"正在下载 %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_modmgr">Mod 管理器（无功能）</string>
