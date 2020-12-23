@@ -25,16 +25,40 @@
     <string name="login_select_account">Хисап яҙмалар</string>
     <!-- Hint -->
     <!-- Warning -->
+    <string name="warning_noshowagain">Бөтән күрһәтмеҫкә</string>
+    <string name="warning_action_install">VMOS-ты урынлаштырығыҙ</string>
+    <string name="warning_action_exit">Сығырға</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_no_version">Версиялар юҡ!</string>
+    <string name="error_show_more">Күберәк</string>
+    <string name="error_show_less">Әҙерәк</string>
     <!-- Toast messages -->
+    <string name="toast_optifine_success">Урынлаштырылды</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Яңылыҡтар</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading">Йөкләү %s</string>
+    <string name="mcl_options">Опциялар</string>
+    <string name="mcl_option_optifineinstall">OptiFine-ды урынлаштырырға</string>
+    <string name="mcl_option_checkupdate">Яңыртыуҙарҙы тикшерергә</string>
+    <string name="mcl_option_settings">Көйләүҙәр</string>
+    <string name="mcl_option_about">Лаунчер тураһында</string>
+    <string name="mcl_setting_veroption_release">Релиздар</string>
+    <string name="mcl_setting_veroption_snapshot">Снапшотттар</string>
+    <string name="mcl_setting_veroption_oldalpha">Иҫке альфалар</string>
+    <string name="mcl_setting_veroption_oldbeta">Иҫке беталар</string>
     <!-- Global strings -->
     <string name="global_add">Өҫтәргә</string>
+    <string name="global_edit">Үҙгәртергә</string>
+    <string name="global_error">Хата</string>
+    <string name="global_load">Йөкләү</string>
+    <string name="global_name">Исем</string>
+    <string name="global_remove">Юйырға</string>
+    <string name="global_save">Һаҡларға</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -58,8 +82,12 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Уйын ябылды</string>
+    <string name="mcn_exit_call">Сығырға</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
+    <string name="control_chat">Сүбхәт</string>
+    <string name="control_zoom">Зум (С)</string>
     <string name="control_primary">ҺСТ</string>
     <string name="control_secondary">УСТ</string>
     <string name="control_shift">◇</string>
@@ -70,7 +98,18 @@
     <string name="control_jump">⬛</string>
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Сысҡан</string>
+    <string name="control_mouseoff">Сысҡан: Һүн</string>
+    <string name="control_mouseon">Сысҡан: Ҡаб </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Журнал</string>
+    <string name="customctrl_hidden">Йәшеренгән</string>
+    <string name="customctrl_addbutton">Төймәне булдырырға</string>
     <!-- Update part (unused now) -->
+    <string name="main_options">Опциялар</string>
+    <string name="main_play">Уйнарға</string>
+    <string name="main_welcome">Рәхим итегеҙ,</string>
+    <string name="main_infodev">Инфо (Эшк.)</string>
+    <string name="main_switchuser">Ҡулланыусыны алмаштырырға</string>
+    <string name="main_version_">Версия:</string>
 </resources>
