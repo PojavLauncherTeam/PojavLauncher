@@ -24,7 +24,6 @@
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_select_account">Wybierz konto</string>
     <!-- Hint -->
-    <string name="hint_select_account">Aby wybrać, kliknij go. Aby usunąć konto, przytrzymaj je.</string>
     <string name="hint_control_mapping">"Przesuń od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.
 "</string>
     <!-- Warnings -->
