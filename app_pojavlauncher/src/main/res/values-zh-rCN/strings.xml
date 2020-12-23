@@ -25,7 +25,6 @@
     <string name="login_microsoft">微软帐号登录</string>
     <string name="login_select_account">选择账号</string>
     <!-- Hint -->
-    <string name="hint_select_account">点击选择账号，长按删除。</string>
     <string name="hint_control_mapping">"左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
     <!-- Warnings -->
     <string name="warning_action_exit">退出</string>
