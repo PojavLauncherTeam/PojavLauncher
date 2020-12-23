@@ -23,7 +23,6 @@
     <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
     <string name="login_select_account">Selecteaza contul</string>
     <!-- Hint -->
-    <string name="hint_select_account">Pentru al selecta, apasa pe el. Pentru al sterge, tine apasat pe el.</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Iesire</string>
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
