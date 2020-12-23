@@ -823,12 +823,13 @@ public class PojavLoginActivity extends BaseActivity
     private void playProfile(boolean notOnLogin) {
         if (mProfile != null) {
             try {
-                String profilePath = null;
+                String profileName = null;
                 if (sRemember.isChecked() || notOnLogin) {
-                    profilePath = mProfile.save();
+                    profileName = new File(mProfile.save()).getName();
                 }
+                profileName = profileName.substring(0, profileName.length() - 5);
 
-                MCProfile.launch(PojavLoginActivity.this, profilePath == null ? mProfile : profilePath);
+                MCProfile.launch(PojavLoginActivity.this, profileName == null ? mProfile : profileName);
             } catch (IOException e) {
                 Tools.showError(this, e);
             }
