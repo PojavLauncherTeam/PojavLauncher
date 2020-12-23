@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft přihlášení</string>
     <string name="login_select_account">Vybrat účet</string>
     <!-- Hint -->
-    <string name="hint_select_account">Chcete-li vybrat, klepněte na to. Chcete-li účet odstranit, podržte jej.</string>
     <string name="hint_control_mapping">"Přejetím zprava doleva otevřete nabídku ◀\nPodrž tlačítko pro úpravu: upravit, změnit velikost nebo smazat."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Odejít</string>
