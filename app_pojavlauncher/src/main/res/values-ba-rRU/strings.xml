@@ -27,20 +27,25 @@
     <string name="warning_action_exit">Сығырға</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_no_version">Версиялар юҡ!</string>
     <string name="error_show_more">Күберәк</string>
     <string name="error_show_less">Әҙерәк</string>
     <!-- Toast messages -->
+    <string name="toast_optifine_success">Урынлаштырылды</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading">Йөкләү %s</string>
     <string name="mcl_options">Опциялар</string>
+    <string name="mcl_option_checkupdate">Яңыртыуҙарҙы тикшерергә</string>
     <string name="mcl_option_settings">Көйләүҙәр</string>
     <string name="mcl_option_about">Лаунчер тураһында</string>
     <string name="mcl_setting_veroption_release">Релиздар</string>
     <string name="mcl_setting_veroption_snapshot">Снапшотттар</string>
+    <string name="mcl_setting_veroption_oldalpha">Иҫке альфалар</string>
     <string name="mcl_setting_veroption_oldbeta">Иҫке беталар</string>
     <!-- Global strings -->
     <string name="global_add">Өҫтәргә</string>
@@ -89,6 +94,8 @@
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Сысҡан</string>
+    <string name="control_mouseoff">Сысҡан: Һүн</string>
+    <string name="control_mouseon">Сысҡан: Ҡаб </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Журнал</string>
     <!--
@@ -96,8 +103,11 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_hidden">Йәшеренгән</string>
+    <string name="customctrl_addbutton">Төймәне булдырырға</string>
     <string name="main_options">Опциялар</string>
     <string name="main_play">Уйнарға</string>
     <string name="main_welcome">%s, рәхим итегеҙ</string>
+    <string name="main_infodev">Инфо (Эшк.)</string>
+    <string name="main_switchuser">Ҡулланыусыны алмаштырырға</string>
     <string name="main_version">Версия:</string>
 </resources>
