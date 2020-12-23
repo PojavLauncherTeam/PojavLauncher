@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
     <!-- Hint -->
-    <string name="hint_select_account">Seçmek için tıklayın. Silmek icin basılı tutun.</string>
     <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Çıkış</string>
