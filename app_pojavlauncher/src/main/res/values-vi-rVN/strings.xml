@@ -25,7 +25,6 @@
     <string name="login_microsoft">Đăng nhập Microsoft</string>
     <string name="login_select_account">Chọn tài khoản</string>
     <!-- Hint -->
-    <string name="hint_select_account">Để chọn, nhấp vào. Để xóa một tài khoản, giữ vào.</string>
     <string name="hint_control_mapping">"Vuốt từ phải sang trái để mở menu ◀\nGiữ một nút để tùy chỉnh: chỉnh sửa, thay đổi kích thước hoặc xoá."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Thoát</string>
