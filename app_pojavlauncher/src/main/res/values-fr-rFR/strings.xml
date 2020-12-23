@@ -25,7 +25,6 @@
     <string name="login_microsoft">Connection Microsoft</string>
     <string name="login_select_account">Sélectionner un compte</string>
     <!-- Hint -->
-    <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
     <string name="hint_control_mapping">"Glisser de droite à gauche pour ouvrir le menu ◀\nMaintenez un bouton pour personnaliser : modifier, redimensionner ou supprimer."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Quitter</string>
