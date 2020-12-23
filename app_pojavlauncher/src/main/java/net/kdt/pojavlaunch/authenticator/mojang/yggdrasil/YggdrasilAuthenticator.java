@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.authenticator.mojang.yggdrasil.*;
+package net.kdt.pojavlaunch.authenticator.mojang.yggdrasil;
 
 import android.util.*;
 import java.io.*;
