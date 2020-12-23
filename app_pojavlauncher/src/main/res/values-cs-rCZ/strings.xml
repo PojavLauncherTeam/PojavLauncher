@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pro Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Spusť Minecraft Java edici v tvém zařízení!</string>
+    <string name="app_motd">Spusť Minecraft: Java Edici v tvém zařízení!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">NÁPOVĚDA</string>
     <!-- Languages list part -->
@@ -18,7 +18,7 @@
     <string name="login_online_login_label">Přihlásit se</string>
     <string name="login_online_create_account">(Vytvořit nový účet?)</string>
     <string name="login_offline_switch">Offline účet?</string>
-    <string name="login_offline_label">Přihlásit se jako offline účet</string>
+    <string name="login_offline_label">Přihlásit se za offline účet</string>
     <string name="login_offline_alert_skip">Přeskočit</string>
     <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
@@ -42,30 +42,26 @@
     <string name="error_show_more">Zobrazit více</string>
     <string name="error_show_less">Zobrazit méně</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Oprávnění ke čtení/zápisu do úložiště je požadováno!</string>
+    <string name="toast_permission_denied">Je vyžadováno oprávnění pro čtení/zápis do úložiště!</string>
     <string name="toast_login_error">Něco se po přihlášení pokazilo. Prosím pošlete zpětnou vazbu k vývojáři.\nChyba: %s</string>
-    <string name="toast_optifine_success">Instalace proběhla úspěšně</string>
+    <string name="toast_optifine_success">Instalace byla úspěšná</string>
     <string name="toast_uninstalljre_done">Odinstalování Java Runtime dokončeno</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Novinky</string>
-    <string name="mcl_tab_mcje">Minecraft: Java edice</string>
+    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Vývojářská konzole</string>
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Připraveno k spuštení Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čištění souborů mezipaměti</string>
     <string name="mcl_launch_downloading">Stahování %s</string>
-    <string name="mcl_launch_download_lib">Stahování knihovny %s</string>
-    <string name="mcl_launch_download_client">Stahování Minecraftu %s</string>
-    <string name="mcl_launch_convert_lib">Převádění knihovny %s</string>
-    <string name="mcl_launch_convert_client">Převádění Minecraftu %s</string>
-    <string name="mcl_launch_patch_client">Záplatuji Minecraft %s</string>
+    <string name="mcl_launch_downloading_progress">"Stahuji %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
     <string name="mcl_options">Nastavení</string>
-    <string name="mcl_option_modmgr">Manažer modů (bez funkce)</string>
+    <string name="mcl_option_modmgr">Manažer modifikací (bez funkce)</string>
     <string name="mcl_option_modinstall">Spusťte instalátor módů (Forge, LabyMod, Fabric, atd...)</string>
     <string name="mcl_option_modinstallwitharg">Spustit instalátor módů (s vlastními argumenty)</string>
     <string name="mcl_option_checkupdate">Zkontrolovat aktualizace</string>
@@ -74,7 +70,7 @@
     <string name="mcl_option_about">O aplikaci</string>
     <string name="mcl_setting_title_uninstalljre">Odinstalovat Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Restart launcheru vyžadován] Toto vám umožní přeinstalovat Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Freeform</string>
+    <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Volného okna</string>
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
@@ -104,6 +100,7 @@
     <string name="global_save">Uložit</string>
     <string name="global_unpacking">Rozbalování %s</string>
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
+    <string name="global_waiting">Počkejte</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -128,7 +125,7 @@
     -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikace/Hra skončila s kódem %d</string>
-    <string name="mcn_exit_call">Ukončit</string>
+    <string name="mcn_exit_call">Odejít</string>
     <string name="mcn_exit_crash">Byl zjištěn pád hry! Klepnutím na tlačítko OK ukončíte.</string>
     <string name="mcn_exit_errcrash">Nelze najít pád! Toto můžete ignorovat.</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
@@ -157,7 +154,7 @@
     <string name="control_mouseoff">Myš: vypnuta</string>
     <string name="control_mouseon">Myš: zapnuta </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Vynuceně zavřít</string>
+    <string name="control_forceclose">Vynutit zavření</string>
     <string name="control_viewout">Záznam výstupu</string>
     <string name="control_adebug">Ladění Vstupu</string>
     <string name="control_customkey">Poslat vlastní klávesu</string>
@@ -165,6 +162,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Upravuji %s</string>
     <string name="customctrl_remove">Odstranit %s?</string>
     <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_specialkey">Speciální písmeno</string>
@@ -177,9 +175,10 @@
     <string name="customctrl_transparency_text">Průhlednost textu</string>
     <string name="customctrl_keycombine">Kombinace kláves</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
-    <string name="customctrl_selectdefault">Vybrat json výchozího ovládán</string>
+    <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
     <string name="main_options">Nastavení</string>
     <string name="main_play">Hrát</string>
     <string name="main_welcome">Vítejte, %s</string>

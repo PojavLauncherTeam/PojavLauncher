@@ -22,6 +22,7 @@
     <string name="login_offline_alert_skip">Atla</string>
     <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmak zorundadır</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
+    <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
     <!-- Hint -->
     <string name="hint_select_account">Seçmek için tıklayın. Silmek icin basılı tutun.</string>
@@ -57,11 +58,6 @@
     <string name="mcl_version_msg">Minecraft %s başlamaya hazır</string>
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
     <string name="mcl_launch_downloading">%s indiriliyor</string>
-    <string name="mcl_launch_download_lib">%s kütüphanesi indiriliyor</string>
-    <string name="mcl_launch_download_client">Minecraft %s indiriliyor</string>
-    <string name="mcl_launch_convert_lib">%s kütüphanesi çevriliyor</string>
-    <string name="mcl_launch_convert_client">Minecraft %s çevriliyor</string>
-    <string name="mcl_launch_patch_client">Minecraft %s yamalanıyor</string>
     <string name="mcl_launch_download_assets">Kaynakları yüklemeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
     <string name="mcl_option_modmgr">Mod yöneticisi (işlevsiz)</string>
@@ -74,7 +70,7 @@
     <string name="mcl_setting_title_uninstalljre">Java Runtime\'ı kaldır</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Başlatıcı için yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
-    <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerekir</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
@@ -103,6 +99,7 @@
     <string name="global_save">Kaydet</string>
     <string name="global_unpacking">Açılıyor %s</string>
     <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
+    <string name="global_waiting">Bekleyin</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -138,7 +135,7 @@
     <string name="controls">Kontroller</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klavye</string>
-    <string name="control_chat">Chat</string>
+    <string name="control_chat">Sohbet</string>
     <string name="control_debug">Debug</string>
     <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
@@ -156,7 +153,7 @@
     <string name="control_mouseoff">Fare: kpl</string>
     <string name="control_mouseon">Fare: açık </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Kapanmaya zorla</string>
+    <string name="control_forceclose">Kapatmaya zorla</string>
     <string name="control_viewout">Günlük çıktısı</string>
     <string name="control_adebug">Hata ayıklama tuşu gir</string>
     <string name="control_customkey">Özel anahtarkodu gönder</string>
@@ -164,6 +161,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">%s düzenleniyor</string>
     <string name="customctrl_remove">%s kaldırılsın mı?</string>
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_specialkey">Özel Tuş</string>
@@ -176,6 +174,7 @@
     <string name="customctrl_transparency_text">Yazı saydamlığı</string>
     <string name="customctrl_keycombine">Anahtar Kombinasyonu</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>

@@ -14,7 +14,7 @@
     <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_password_question">Забыли пароль?</string>
     <string name="login_online_remember">Запомнить меня?</string>
-    <string name="login_online_check_keeplogin">Сохранить меня авторизованным</string>
+    <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
     <string name="login_online_create_account">(Создать новую учётную запись?)</string>
     <string name="login_offline_switch">Автономная учётная запись?</string>
@@ -58,14 +58,10 @@
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
-    <string name="mcl_launch_download_lib">Загрузка библиотеки %s</string>
-    <string name="mcl_launch_download_client">Загрузка Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Конвертация библиотеки %s</string>
-    <string name="mcl_launch_convert_client">Конвертация Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Сборка Minecraft %s</string>
+    <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Подготовка к загрузке ресурсов</string>
     <string name="mcl_options">Опции</string>
-    <string name="mcl_option_modmgr">Диспетчер модов (не работает)</string>
+    <string name="mcl_option_modmgr">Менеджер модов (не работает)</string>
     <string name="mcl_option_modinstall">Запустить установщик мода (Forge, LabyMod, Fabric и т. п.)</string>
     <string name="mcl_option_modinstallwitharg">Запустить установщик мода (с пользовательскими аргументами)</string>
     <string name="mcl_option_checkupdate">Проверить наличие обновлений</string>
@@ -77,7 +73,7 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
     <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
@@ -85,7 +81,7 @@
     <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
-    <string name="mcl_setting_category_general">Основные настройки</string>
+    <string name="mcl_setting_category_general">Общие настройки</string>
     <string name="mcl_setting_category_scaling">Масштабирование</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
@@ -128,11 +124,11 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Произошел сбой приложение/игры с кодом %d</string>
+    <string name="mcn_exit_title">Произошел сбой приложения/игры с кодом %d</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_crash">Обнаружен сбой игры! Нажмите кнопку ОК, чтобы выйти.</string>
     <string name="mcn_exit_errcrash">Не удалось найти сбой! Можете не обращать на это внимания.</string>
-    <string name="mcn_exit_confirm">Вы уверены, что хотите закрыть игру и выйти на главную лаунчера?</string>
+    <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовместима с Java Runtime %2$s.</string>
     <string name="mcn_check_fail_java">Не удалось запустить тестовую Java VM. Проверьте %s для получения дополнительной информации.</string>
@@ -158,10 +154,10 @@
     <string name="control_mouseoff">Мышь: Выкл</string>
     <string name="control_mouseon">Мышь: Вкл </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Закрыть игру</string>
-    <string name="control_viewout">Показать вывод журнала</string>
+    <string name="control_forceclose">Принудительное закрытие</string>
+    <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
-    <string name="control_customkey">Отправить потловательскую раскладку</string>
+    <string name="control_customkey">Отправить пользовательскую раскладку</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -187,7 +183,7 @@
     <string name="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать, %s</string>
     <string name="main_infodev">Инфо (Разраб.)</string>
-    <string name="main_switchuser">Выбрать пользователя</string>
+    <string name="main_switchuser">Сменить пользователя</string>
     <string name="main_version">Версия:</string>
     <string name="main_nocrash">Сбоев не обнаружено</string>
     <string name="main_nolog">Нет записей</string>

@@ -54,11 +54,6 @@
     <string name="mcl_version_msg">Apunt de jugar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
     <string name="mcl_launch_downloading">Downloading %s</string>
-    <string name="mcl_launch_download_lib">Downloading library %s</string>
-    <string name="mcl_launch_download_client">Downloading Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Converting library %s</string>
-    <string name="mcl_launch_convert_client">Converting Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Patching Minecraft %s</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
     <string name="mcl_options">Options</string>
     <string name="mcl_option_modmgr">Mod manager (no function)</string>
@@ -146,7 +141,7 @@
     <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Force close</string>
-    <string name="control_viewout">Log output</string>
+    <string name="control_viewout">Registra la sortida</string>
     <string name="control_adebug">PointerCapture Debug</string>
     <string name="control_customkey">Send custom keycode</string>
     <!--

@@ -58,11 +58,7 @@
     <string name="mcl_version_msg">Prêt à jouer à Minecraft %s</string>
     <string name="mcl_launch_cleancache">Nettoyage des fichiers cache</string>
     <string name="mcl_launch_downloading">Téléchargement de : %s</string>
-    <string name="mcl_launch_download_lib">Téléchargement des Librairies %s</string>
-    <string name="mcl_launch_download_client">Téléchargement de Minecraft %s</string>
-    <string name="mcl_launch_convert_lib">Conversion de la bibliothèque %s</string>
-    <string name="mcl_launch_convert_client">Conversion de Minecraft %s</string>
-    <string name="mcl_launch_patch_client">Correction de Minecraft %s</string>
+    <string name="mcl_launch_downloading_progress">"Téléchargement de : %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Préparation du téléchargement des ressources</string>
     <string name="mcl_options">Paramètres</string>
     <string name="mcl_option_modmgr">Gestionnaire de mods (non fonctionnel)</string>
@@ -104,6 +100,7 @@
     <string name="global_save">Sauvegarder</string>
     <string name="global_unpacking">Décompression de %s</string>
     <string name="global_error_field_empty">Ce champ ne peut pas être vide</string>
+    <string name="global_waiting">Attendez</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -143,7 +140,7 @@
     <string name="control_debug">Débogage</string>
     <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_secondary">Se</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
@@ -165,6 +162,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Modifier %s</string>
     <string name="customctrl_remove">Supprimer %s?</string>
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touches spéciales</string>
@@ -177,6 +175,7 @@
     <string name="customctrl_transparency_text">Transparence du texte</string>
     <string name="customctrl_keycombine">Combinaisons de touches</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
     <string name="customctrl_selectdefault">Sélectionner le json de contrôle par défaut</string>

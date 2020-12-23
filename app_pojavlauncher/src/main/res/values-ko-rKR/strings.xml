@@ -43,7 +43,7 @@
     <string name="error_show_less">간략히 보기</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">저장소 읽고 쓰기 권한이 필요합니다!</string>
-    <string name="toast_login_error">로그인 후 문제가 발생했습니다. 개발자에게 문의하세요.\nError: %s</string>
+    <string name="toast_login_error">로그인 후 문제가 발생했습니다. 개발자에게 문의하세요.\n오류: %s</string>
     <string name="toast_optifine_success">설치 성공</string>
     <string name="toast_uninstalljre_done">Java 런타임 삭제 완료</string>
     <!--
@@ -55,14 +55,10 @@
     <string name="mcl_tab_console">개발자 콘솔</string>
     <string name="mcl_tab_crash">충돌 로그</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었다.</string>
+    <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었습니다.</string>
     <string name="mcl_launch_cleancache">캐시 파일 삭제</string>
     <string name="mcl_launch_downloading">다운로드 중 %s</string>
-    <string name="mcl_launch_download_lib">라이브러리 다운로드 중 %s</string>
-    <string name="mcl_launch_download_client">Minecraft 다운로드 중 %s</string>
-    <string name="mcl_launch_convert_lib">라이브러리 변환 중 %s</string>
-    <string name="mcl_launch_convert_client">Minecraft 변환 중 %s</string>
-    <string name="mcl_launch_patch_client">Minecraft 패치 중 %s</string>
+    <string name="mcl_launch_downloading_progress">"다운로드중 %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">다운로드 준비 중</string>
     <string name="mcl_options">설정</string>
     <string name="mcl_option_modmgr">모드 매니저 (기능 없음)</string>
@@ -75,7 +71,7 @@
     <string name="mcl_setting_title_uninstalljre">Java Runtime 삭제</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher 재 실행 요구] Java 런타임 재 설치하기</string>
     <string name="mcl_setting_title_freeform">Minecraft를 Freeform mode로 실행하기</string>
-    <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다.  Android 7.0 이상을 요구합니다.</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다. Android 7.0 이상을 요구합니다.</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
     <string name="mcl_setting_subtitle_longpresstrigger">블럭 파괴와 아이템 던지기를 위한 길게 누르기 시간 변경</string>
     <string name="mcl_setting_title_buttonscale">컨트롤 버튼 크기</string>
@@ -104,6 +100,7 @@
     <string name="global_save">저장</string>
     <string name="global_unpacking">압축 해제 중 %s</string>
     <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
+    <string name="global_waiting">기다려주세요</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -155,7 +152,7 @@
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">마우스</string>
     <string name="control_mouseoff">Mouse: 끔</string>
-    <string name="control_mouseon">Mouse: 켬</string>
+    <string name="control_mouseon">Mouse: 켬 </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">강제 종료</string>
     <string name="control_viewout">로그 확인</string>
@@ -165,6 +162,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">%s 수정중</string>
     <string name="customctrl_remove">%s(을)를 제거하시겠습니까?</string>
     <string name="customctrl_keyname">키</string>
     <string name="customctrl_specialkey">특수 키</string>
@@ -177,6 +175,7 @@
     <string name="customctrl_transparency_text">텍스트 투명도</string>
     <string name="customctrl_keycombine">키 조합</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">버튼 추가</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
