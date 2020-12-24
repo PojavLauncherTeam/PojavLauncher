@@ -21,7 +21,7 @@
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
     <string name="login_offline_alert_skip">Ignorer</string>
     <string name="login_error_short_username">Le nom d\'utilisateur doit contenir au moins 3 caractères</string>
-    <string name="login_error_exist_username">Cet utilisateur existe déjà</string>
+    <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_microsoft">Connexion Microsoft</string>
     <string name="login_select_account">Sélectionner un compte</string>
     <!-- Hint -->
@@ -166,7 +166,7 @@
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touche spéciale</string>
     <string name="customctrl_hidden">Masqué</string>
-    <string name="customctrl_toggle">Activable</string>
+    <string name="customctrl_toggle">Basculable</string>
     <string name="customctrl_dynamicpos">Position dynamique</string>
     <string name="customctrl_dynamicpos_x">X dynamique</string>
     <string name="customctrl_dynamicpos_y">Y dynamique</string>
@@ -175,7 +175,7 @@
     <string name="customctrl_keycombine">Combinaison de touches</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_keycombine_shift">Maj</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
     <string name="customctrl_selectdefault">Sélectionner le json de contrôle par défaut</string>
     <string name="main_options">Options</string>
