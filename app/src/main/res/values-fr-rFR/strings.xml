@@ -21,7 +21,7 @@
     <string name="login_online_create_account">(Créer un nouveau compte ?)</string>
     <string name="login_offline_switch">Compte hors ligne ?</string>
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
-    <string name="login_offline_alert_skip">Passer</string>
+    <string name="login_offline_alert_skip">Ignorer</string>
     <string name="login_error_short_username">Le nom d\'utilisateur doit contenir au moins 3 caractères</string>
     <string name="login_error_exist_username">Cet utilisateur existe déjà</string>
     <string name="login_select_account">Sélectionner un compte</string>
@@ -136,13 +136,13 @@
     <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Contrôles</string>
-    <string name="control_toggle">Interface</string>
+    <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Clavier</string>
     <string name="control_chat">Tchat</string>
-    <string name="control_debug">Débogage</string>
-    <string name="control_zoom">Zoom (C)</string>
-    <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_debug">Débog.</string>
+    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Zoom (C)</string>
+    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">Pri</string>
+    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">Sec</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
@@ -162,7 +162,7 @@
     <string name="control_customkey">Envoyer un code de touche personnalisé</string>
     <string name="control_shiftmodechg">Changer le mode Shift (s\'accroupir)</string>
     <string name="customctrl_keyname">Code de touche</string>
-    <string name="customctrl_specialkey">Touches spéciales</string>
+    <string name="customctrl_specialkey">Touche spéciale</string>
     <string name="customctrl_hidden">Masqué</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
     <string name="customctrl_title_selectctrl">Sélectionner le json de contrôle par défaut</string>
