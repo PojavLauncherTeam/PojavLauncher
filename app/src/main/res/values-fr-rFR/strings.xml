@@ -23,7 +23,7 @@
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
     <string name="login_offline_alert_skip">Ignorer</string>
     <string name="login_error_short_username">Le nom d\'utilisateur doit contenir au moins 3 caractères</string>
-    <string name="login_error_exist_username">Cet utilisateur existe déjà</string>
+    <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_select_account">Sélectionner un compte</string>
     <!-- Hint -->
     <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
