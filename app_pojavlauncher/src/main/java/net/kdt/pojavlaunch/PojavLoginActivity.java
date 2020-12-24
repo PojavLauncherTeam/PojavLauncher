@@ -717,10 +717,10 @@ public class PojavLoginActivity extends BaseActivity
                                                 new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
                                                     .execute("true", acc.msaRefreshToken);
                                             } else if (acc.accessToken.length() >= 5) {
-                                                MCProfile.updateTokens(PojavLoginActivity.this, selectedAccName, authListener);
+                                                PojavProfile.updateTokens(PojavLoginActivity.this, selectedAccName, authListener);
                                             } else {
                                                 di.dismiss();
-                                                MCProfile.launch(PojavLoginActivity.this, selectedAccName);
+                                                PojavProfile.launch(PojavLoginActivity.this, selectedAccName);
                                             }
                                         } catch (Exception e) {
                                             Tools.showError(PojavLoginActivity.this, e);
@@ -826,7 +826,7 @@ public class PojavLoginActivity extends BaseActivity
                     profileName = mProfile.save();
                 }
                 
-                MCProfile.launch(PojavLoginActivity.this, profileName == null ? mProfile : profileName);
+                PojavProfile.launch(PojavLoginActivity.this, profileName == null ? mProfile : profileName);
             } catch (IOException e) {
                 Tools.showError(this, e);
             }

@@ -7,6 +7,13 @@ import android.view.*;
 import java.io.*;
 import net.kdt.pojavlaunch.authenticator.mojang.*;
 
+/**
+ * This account data format is deprecated.
+ * The current account data format is JSON on net.kdt.pojavlaunch.value.MinecraftAccount.
+ * This class remain for account data migrator only.
+ * Methods for saving/exporting on this format are no longer available.
+ */
+@Deprecated
 public class MCProfile
 {
     private static String[] emptyBuilder = new String[]{
@@ -16,30 +23,6 @@ public class MCProfile
         "AccessTokenEmpty",
         "Steve"
     };
-    
-    public static void launch(Activity ctx, Object o) {
-        PojavProfile.setCurrentProfile(ctx, o);
-        
-        Intent intent = new Intent(ctx, PojavV2ActivityManager.getLauncherRemakeVer(ctx)); //MCLauncherActivity.class);
-        ctx.startActivity(intent);
-    }
-    
-    public static void updateTokens(final Activity ctx, final String name, RefreshListener listen) throws Exception {
-        new RefreshTokenTask(ctx, listen).execute(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json");
-    }
-    
-    public static String build(MCProfile.Builder builder) {
-        //System.out.println("build THE VER = " + builder.getVersion());
-        
-        try {
-            byte[] bFull = toString(builder).getBytes("UTF-8");
-            Tools.write(Tools.DIR_ACCOUNT_OLD + "/" + builder.getUsername(), bFull);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return Tools.DIR_ACCOUNT_OLD + "/" + builder.getUsername();
-    }
     
     public static MCProfile.Builder load(String pofFilePath) {
         try {
@@ -90,20 +73,6 @@ public class MCProfile
         }
     }
 
-    public static String toString(String pofFilePath) {
-        return toString(load(pofFilePath));
-    }
-    
-    public static String toString(MCProfile.Builder builder) {
-        return
-            builder.getClientID() + ":" +
-            builder.getProfileID() + ":" +
-            builder.getAccessToken() + ":" +
-            builder.getUsername() + ":" +
-            builder.getVersion() + ":" +
-            Boolean.toString(builder.isMojangAccount());
-    }
-    
     public static class Builder implements Serializable
     {
         private String[] fullArgs = new String[6];

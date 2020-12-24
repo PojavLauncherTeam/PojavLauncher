@@ -1,8 +1,14 @@
 package net.kdt.pojavlaunch;
-import java.io.*;
-import android.content.*;
-import net.kdt.pojavlaunch.value.*;
-import com.google.gson.*;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import com.google.gson.JsonSyntaxException;
+import java.io.File;
+import java.io.IOException;
+import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
+import net.kdt.pojavlaunch.authenticator.mojang.RefreshTokenTask;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
 
 public class PojavProfile
 {
@@ -26,9 +32,15 @@ public class PojavProfile
         return MinecraftAccount.parse(getPrefs(ctx).getString(PROFILE_PREF_TEMP_CONTENT, ""));
     }
 	
-	public static String getCurrentProfileName(Context ctx) {
-		return getPrefs(ctx).getString(PROFILE_PREF_FILE, "");
-	}
+    public static String getCurrentProfileName(Context ctx) {
+        String name = getPrefs(ctx).getString(PROFILE_PREF_FILE, "");
+        // A dirty fix
+        if (!name.isEmpty() && name.startsWith(Tools.DIR_ACCOUNT_NEW) && name.endsWith(".json")) {
+            name = name.substring(0, name.length() - 5).replace(Tools.DIR_ACCOUNT_NEW, "");
+            setCurrentProfile(ctx, name);
+        }
+        return name;
+    }
 	
 	public static boolean setCurrentProfile(Context ctx, Object obj) {
 		SharedPreferences.Editor pref = getPrefs(ctx).edit();
@@ -57,4 +69,16 @@ public class PojavProfile
 	public static boolean isFileType(Context ctx) {
 		return new File(Tools.DIR_ACCOUNT_NEW + "/" + PojavProfile.getCurrentProfileName(ctx) + ".json").exists();
 	}
+	
+
+    public static void launch(Activity ctx, Object o) {
+        PojavProfile.setCurrentProfile(ctx, o);
+
+        Intent intent = new Intent(ctx, PojavV2ActivityManager.getLauncherRemakeVer(ctx)); //MCLauncherActivity.class);
+        ctx.startActivity(intent);
+    }
+
+    public static void updateTokens(final Activity ctx, final String name, RefreshListener listen) throws Exception {
+        new RefreshTokenTask(ctx, listen).execute(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json");
+    }
 }
