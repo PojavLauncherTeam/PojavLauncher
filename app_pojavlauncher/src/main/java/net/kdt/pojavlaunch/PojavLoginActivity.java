@@ -283,8 +283,6 @@ public class PojavLoginActivity extends BaseActivity
         
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
-        
-        
     }
 
     private boolean isJavaRuntimeInstalled(AssetManager am) {
@@ -825,10 +823,9 @@ public class PojavLoginActivity extends BaseActivity
             try {
                 String profileName = null;
                 if (sRemember.isChecked() || notOnLogin) {
-                    profileName = new File(mProfile.save()).getName();
+                    profileName = mProfile.save();
                 }
-                profileName = profileName.substring(0, profileName.length() - 5);
-
+                
                 MCProfile.launch(PojavLoginActivity.this, profileName == null ? mProfile : profileName);
             } catch (IOException e) {
                 Tools.showError(this, e);

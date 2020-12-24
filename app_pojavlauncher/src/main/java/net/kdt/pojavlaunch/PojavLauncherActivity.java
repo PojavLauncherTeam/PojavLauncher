@@ -38,7 +38,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
     private TextView tvUsernameView;
     private Spinner accountSelector;
-    private String profilePath = null;
     private ViewPagerAdapter viewPageAdapter;
 
     private Button switchUsrBtn, logoutBtn; // MineButtons
@@ -136,7 +135,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this,
-                        Tools.DIR_ACCOUNT_NEW + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)) + ".json");
+                        accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
                 pickAccount();
             }
@@ -212,12 +211,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     
     private void pickAccount() {
         try {
-            profilePath = PojavProfile.getCurrentProfilePath(this);
             mProfile = PojavProfile.getCurrentProfileContent(this);
 
             tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));
         } catch(Exception e) {
-            profilePath = "";
             mProfile = new MinecraftAccount();
             Tools.showError(this, e, true);
         }

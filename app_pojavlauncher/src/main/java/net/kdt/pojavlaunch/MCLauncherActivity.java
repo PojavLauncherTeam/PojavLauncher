@@ -39,7 +39,6 @@ public class MCLauncherActivity extends BaseLauncherActivity
     private TabLayout tabLayout;
 
     private TextView tvUsernameView;
-    private String profilePath = null;
     private ViewPagerAdapter viewPageAdapter;
 
     private Button switchUsrBtn, logoutBtn; // MineButtons
@@ -74,7 +73,6 @@ public class MCLauncherActivity extends BaseLauncherActivity
         mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
         try {
-            profilePath = PojavProfile.getCurrentProfilePath(this);
             mProfile = PojavProfile.getCurrentProfileContent(this);
 
             tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));

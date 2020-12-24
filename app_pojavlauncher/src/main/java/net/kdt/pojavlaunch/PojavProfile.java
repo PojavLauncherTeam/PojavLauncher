@@ -15,7 +15,7 @@ public class PojavProfile
 	}
 	
 	public static MinecraftAccount getCurrentProfileContent(Context ctx) throws IOException, JsonSyntaxException {
-		MinecraftAccount build = MinecraftAccount.load(getPrefs(ctx).getString(PROFILE_PREF_FILE, ""));
+		MinecraftAccount build = MinecraftAccount.load(getCurrentProfileName(ctx));
         if (build == null) {
             getTempProfileContent(ctx);
         }
@@ -26,7 +26,7 @@ public class PojavProfile
         return MinecraftAccount.parse(getPrefs(ctx).getString(PROFILE_PREF_TEMP_CONTENT, ""));
     }
 	
-	public static String getCurrentProfilePath(Context ctx) {
+	public static String getCurrentProfileName(Context ctx) {
 		return getPrefs(ctx).getString(PROFILE_PREF_FILE, "");
 	}
 	
@@ -42,10 +42,7 @@ public class PojavProfile
                 }
 			} else if (obj instanceof String) {
                 String acc = (String) obj;
-				pref.putString(PROFILE_PREF_FILE,
-                    acc.startsWith("/") ?
-                        acc : 
-                        Tools.DIR_ACCOUNT_NEW + "/" + acc + ".json");
+				pref.putString(PROFILE_PREF_FILE, acc);
                 MinecraftAccount.clearTempAccount();
 			} else if (obj == null) {
 				pref.putString(PROFILE_PREF_FILE, "");
@@ -58,6 +55,6 @@ public class PojavProfile
 	}
 	
 	public static boolean isFileType(Context ctx) {
-		return new File(PojavProfile.getCurrentProfilePath(ctx)).exists();
+		return new File(Tools.DIR_ACCOUNT_NEW + "/" + PojavProfile.getCurrentProfileName(ctx) + ".json").exists();
 	}
 }
