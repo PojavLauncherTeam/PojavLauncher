@@ -80,29 +80,29 @@
     <string name="mcl_option_customcontrol">Contrôles personnalisés</string>
     <string name="mcl_option_settings">Paramètres</string>
     <string name="mcl_option_about">À propos</string>
-    <string name="mcl_setting_title_setmaxdxref">Définir le nombre maximum de références DX</string>
+    <string name="mcl_setting_title_setmaxdxref">Régler le nombre maximum de références DX</string>
     <string name="mcl_setting_subtitle_setmaxdxref">Augmente si une erreur se produit lors de la conversion : \"trop de... références\". Vous pouvez essayer l\'option multi-dex. Recommandé : 4096 ou 8192.</string>
     <string name="mcl_setting_title_freeform">Lancer Minecraft en mode libre</string>
     <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 ou une version supérieure.</string>
-    <string name="mcl_setting_title_longpresstrigger">Combien de temps se déclenchera après un appui long</string>
+    <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
-    <string name="mcl_setting_title_controlsize">Définir la taille du bouton de contrôle</string>
+    <string name="mcl_setting_title_controlsize">Régler la taille des boutons de contrôle</string>
     <string name="mcl_setting_title_forgetoptifpath">Rendre OptiFine incapable de se localiser</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Utile pour rendre OptiFine disponible sur certains appareils.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
-    <string name="mcl_setting_category_veroption">Le type de version sera dans la liste des versions</string>
-    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_category_veroption">Le type de version sera visible dans la liste des versions</string>
+    <string name="mcl_setting_veroption_release">Version officielle</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Ancienne alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Ancienne bêta</string>
-    <string name="mcl_version_clone">Cloner</string>
+    <string name="mcl_setting_veroption_oldalpha">Ancien-Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Ancien-Bêta</string>
+    <string name="mcl_version_clone">Dupliquer</string>
     <!-- Global strings -->
     <string name="global_add">Ajouter</string>
     <string name="global_edit">Modifier</string>
     <string name="global_error">Erreur</string>
     <string name="global_load">Charger</string>
     <string name="global_name">Nom</string>
-    <string name="global_remove">Retirer</string>
+    <string name="global_remove">Supprimer</string>
     <string name="global_restart">Redémarrer</string>
     <string name="global_save">Sauvegarder</string>
     <string name="global_error_field_empty">Ce champ ne peut pas être vide</string>
@@ -131,18 +131,18 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Jeu quitté</string>
     <string name="mcn_exit_call">Quitter</string>
-    <string name="mcn_exit_crash">Crash de jeu détecté! Cliquez sur OK pour quitter.</string>
-    <string name="mcn_exit_errcrash">Impossible de localiser le plantage! Vous pouvez ignorer cela.</string>
-    <string name="mcn_exit_confirm">Êtes-vous sûr de vouloir forcer la fermeture ?</string>
+    <string name="mcn_exit_crash">Une erreur a été détectée dans le jeu ! Cliquez sur OK pour quitter.</string>
+    <string name="mcn_exit_errcrash">Impossible de localiser l\'erreur ! Vous pouvez ignorer ce message.</string>
+    <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Contrôles</string>
-    <string name="control_toggle">Interface utilisateur</string>
+    <string name="control_toggle">Interface</string>
     <string name="control_keyboard">Clavier</string>
-    <string name="control_chat">Chat</string>
+    <string name="control_chat">Tchat</string>
     <string name="control_debug">Débogage</string>
     <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
-    <string name="control_secondary">Se</string>
+    <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
@@ -154,12 +154,12 @@
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Souris</string>
     <string name="control_mouseoff">Souris : désactivée</string>
-    <string name="control_mouseon">Souris: activé </string>
+    <string name="control_mouseon">Souris : activée </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Fermeture forcée</string>
+    <string name="control_forceclose">Forcer la fermeture</string>
     <string name="control_viewout">Sortie du journal</string>
-    <string name="control_adebug">Débogage du point de capture</string>
-    <string name="control_customkey">Envoyer un code clavier personnalisé</string>
+    <string name="control_adebug">Débogage de PointerCapture</string>
+    <string name="control_customkey">Envoyer un code de touche personnalisé</string>
     <string name="control_shiftmodechg">Changer le mode Shift (s\'accroupir)</string>
     <string name="customctrl_keyname">Code de touche</string>
     <string name="customctrl_specialkey">Touches spéciales</string>
@@ -172,9 +172,9 @@
     <string name="main_options">Paramètres</string>
     <string name="main_play">Jouer</string>
     <string name="main_welcome">Bienvenue,</string>
-    <string name="main_infodev">Informations (DEV)</string>
+    <string name="main_infodev">Infos (DEV)</string>
     <string name="main_switchuser">Changer d\'utilisateur</string>
-    <string name="main_version_">Version:</string>
-    <string name="main_nocrash">Aucun plantage détecté</string>
+    <string name="main_version_">Version :</string>
+    <string name="main_nocrash">Aucune erreur détectée</string>
     <string name="main_nolog">Pas de journal.</string>
 </resources>
