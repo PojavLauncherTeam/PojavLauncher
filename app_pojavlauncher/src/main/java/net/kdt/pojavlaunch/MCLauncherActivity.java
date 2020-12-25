@@ -77,10 +77,7 @@ public class MCLauncherActivity extends BaseLauncherActivity
 
             tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));
         } catch(Exception e) {
-            //Tools.throwError(this, e);
-            e.printStackTrace();
-            Toast.makeText(this, getStr(R.string.toast_login_error, e.getMessage()), Toast.LENGTH_LONG).show();
-            finish();
+            Tools.showError(this, e);
         }
         
         //showProfileInfo();

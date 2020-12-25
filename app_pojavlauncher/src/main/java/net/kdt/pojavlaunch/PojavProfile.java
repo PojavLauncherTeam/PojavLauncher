@@ -36,7 +36,7 @@ public class PojavProfile
         String name = getPrefs(ctx).getString(PROFILE_PREF_FILE, "");
         // A dirty fix
         if (!name.isEmpty() && name.startsWith(Tools.DIR_ACCOUNT_NEW) && name.endsWith(".json")) {
-            name = name.substring(0, name.length() - 5).replace(Tools.DIR_ACCOUNT_NEW, "");
+            name = name.substring(0, name.length() - 5).replace(Tools.DIR_ACCOUNT_NEW, "").replace(".json", "");
             setCurrentProfile(ctx, name);
         }
         return name;
