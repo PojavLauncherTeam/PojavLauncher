@@ -30,8 +30,16 @@ public class MinecraftAccount
         MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
         if (acc.accessToken == null) {
             acc.accessToken = "0";
+        } if (acc.clientToken == null) {
+            acc.clientToken = "0";
         } if (acc.profileId == null) {
             acc.profileId = "0";
+        } if (acc.username == null) {
+            acc.username = "0";
+        } if (acc.selectedVersion == null) {
+            acc.selectedVersion = "1.7.10";
+        } if (acc.msaRefreshToken == null) {
+            acc.msaRefreshToken = "0";
         }
         return acc;
     }
