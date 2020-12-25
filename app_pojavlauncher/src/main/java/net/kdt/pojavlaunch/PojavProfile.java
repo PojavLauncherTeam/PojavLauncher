@@ -23,7 +23,7 @@ public class PojavProfile
 	public static MinecraftAccount getCurrentProfileContent(Context ctx) throws IOException, JsonSyntaxException {
 		MinecraftAccount build = MinecraftAccount.load(getCurrentProfileName(ctx));
         if (build == null) {
-            getTempProfileContent(ctx);
+            return getTempProfileContent(ctx);
         }
         return build;
 	}
