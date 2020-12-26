@@ -21,13 +21,13 @@
     <string name="login_online_create_account">(Créer un nouveau compte ?)</string>
     <string name="login_offline_switch">Compte hors ligne ?</string>
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
-    <string name="login_offline_alert_skip">Ignorer</string>
+    <string name="login_offline_alert_skip">Passer</string>
     <string name="login_error_short_username">Le nom d\'utilisateur doit contenir au moins 3 caractères</string>
     <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_select_account">Choisir un compte</string>
     <!-- Hint -->
-    <string name="hint_select_account">Pour sélectionner, cliquez dessus. Pour supprimer un compte, maintenez-le.</string>
-    <string name="hint_control_mapping">"Cette fonctionnalité n'est pas encore finalisée. Vous ne pouvez donc pas appliquer de contrôle personnalisé pour le moment !\nGlissez de droite à gauche pour ouvrir le menu ◀\nMaintenez un des boutons suivants pour personnaliser : modifier, redimensionner ou supprimer."</string>
+    <string name="hint_select_account">Pour choisir un compte, cliquez dessus. Pour en retirer un, maintenez-le.</string>
+    <string name="hint_control_mapping">"Cette fonctionnalité n'est pas encore finalisée. Vous ne pouvez donc pas appliquer de contrôle personnalisé pour le moment !\nBalayez l'écran vers la gauche pour ouvrir le menu ◀\nCliquez sur un bouton pour le modifier, le redimensionner ou le supprimer."</string>
     <!-- Warning -->
     <string name="warning_title">Avertissement</string>
     <string name="warning_msg">Cette application peut ne pas être compatible avec votre version d\'Android (supérieure ou égale à Android 7.0). Vous pouvez utiliser VMOS puis installer cette application sur VMOS à la place. Cependant, VMOS ayant été retiré du Play Store, vous devez l\'installer manuellement.</string>
@@ -35,7 +35,7 @@
     <string name="warning_action_install">Installer VMOS</string>
     <string name="warning_action_tryanyway">Essayer quand même</string>
     <string name="warning_action_exit">Quitter</string>
-    <string name="warning_remove_account">Ce compte sera supprimé !</string>
+    <string name="warning_remove_account">Ce compte sera retiré !</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches json</string>
     <string name="alerttitle_installmod">Sélectionnez un mod à ajouter</string>
@@ -90,11 +90,11 @@
     <string name="mcl_setting_title_forgetoptifpath">Rendre OptiFine incapable de se localiser</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Utile pour rendre OptiFine disponible sur certains appareils.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
-    <string name="mcl_setting_category_veroption">Le type de version sera visible dans la liste des versions</string>
+    <string name="mcl_setting_category_veroption">Type de versions visible dans la liste des versions</string>
     <string name="mcl_setting_veroption_release">Version officielle</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Ancien-Alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Ancien-Bêta</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Bêta</string>
     <string name="mcl_version_clone">Dupliquer</string>
     <!-- Global strings -->
     <string name="global_add">Ajouter</string>
@@ -153,19 +153,19 @@
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Souris</string>
-    <string name="control_mouseoff">Souris : désactivée</string>
-    <string name="control_mouseon">Souris : activée </string>
+    <string name="control_mouseoff">Souris : Non</string>
+    <string name="control_mouseon">Souris : Oui </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Forcer la fermeture</string>
     <string name="control_viewout">Sortie du journal</string>
     <string name="control_adebug">Débogage de PointerCapture</string>
-    <string name="control_customkey">Envoyer un code de touche personnalisé</string>
+    <string name="control_customkey">Envoyer une touche personnalisée</string>
     <string name="control_shiftmodechg">Changer le mode Shift (s\'accroupir)</string>
-    <string name="customctrl_keyname">Code de touche</string>
+    <string name="customctrl_keyname">Touche</string>
     <string name="customctrl_specialkey">Touche spéciale</string>
-    <string name="customctrl_hidden">Masqué</string>
+    <string name="customctrl_hidden">Masquée</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
-    <string name="customctrl_title_selectctrl">Sélectionner le json de contrôle par défaut</string>
+    <string name="customctrl_title_selectctrl">Choisir json contrôle par défaut</string>
     <string name="customctrl_selectdefault">Sélectionner le json de contrôle par défaut</string>
     <!-- Update part (unused now) -->
     <string name="update_console">Mettre à jour la console</string>
@@ -175,6 +175,6 @@
     <string name="main_infodev">Infos (DEV)</string>
     <string name="main_switchuser">Changer d\'utilisateur</string>
     <string name="main_version_">Version :</string>
-    <string name="main_nocrash">Aucune erreur détectée</string>
+    <string name="main_nocrash">Aucune erreur détectée.</string>
     <string name="main_nolog">Pas de journal.</string>
 </resources>
