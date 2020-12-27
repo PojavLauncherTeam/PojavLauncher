@@ -567,7 +567,7 @@ public class BaseMainActivity extends LoggableActivity {
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
                             x += ((int) e.getX()) / scaleFactor;
-                            y -= ((int) e.getY()) / scaleFactor;
+                            y += ((int) e.getY()) / scaleFactor;
 
                             if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
                                 StringBuilder builder = new StringBuilder();
