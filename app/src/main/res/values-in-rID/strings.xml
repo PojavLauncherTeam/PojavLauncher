@@ -30,7 +30,7 @@
     <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum bisa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
     <!-- Warning -->
     <string name="warning_title">Peringatan</string>
-    <string name="warning_msg">Aplikasi ini mungkin tidak bisa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
+    <string name="warning_msg">Aplikasi ini mungkin tidak bisa dipakai di perangkat anda (lebih dari atau sama dengan Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
     <string name="warning_noshowagain">Jangan tunjukkan lagi</string>
     <string name="warning_action_install">Pasang VMOS</string>
     <string name="warning_action_tryanyway">Coba saja</string>
@@ -140,9 +140,9 @@
     <string name="control_keyboard">Keyboard</string>
     <string name="control_chat">Obrolan</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Perbesar (C)</string>
-    <string name="control_primary">Pertama</string>
-    <string name="control_secondary">Kedua</string>
+    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Perbesar (C)</string>
+    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">Pertama</string>
+    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">Kedua</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
