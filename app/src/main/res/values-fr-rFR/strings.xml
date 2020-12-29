@@ -37,9 +37,9 @@
     <string name="warning_action_exit">Quitter</string>
     <string name="warning_remove_account">Ce compte sera retiré !</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches json</string>
+    <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches (.json)</string>
     <string name="alerttitle_installmod">Sélectionnez un mod à ajouter</string>
-    <string name="alerttitle_installoptifine">Sélectionnez le fichier OptiFine jar</string>
+    <string name="alerttitle_installoptifine">Sélectionnez le fichier OptiFine (.jar)</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher a cessé de fonctionner de façon inattendue</string>
     <string name="error_checklog">Erreur ! Veuillez vérifier le journal ci-dessous : %s</string>
@@ -54,7 +54,7 @@
     <string name="toast_login_error">Une erreur s\'est produite à la suite de la connexion. Veuillez envoyer un commentaire au développeur.\nErreur : %s</string>
     <string name="toast_optifine_success">Installation réussie</string>
     <string name="toast_shiftmode">Le mode du bouton Maj (s\'accroupir) a été changé en %s</string>
-    <string name="toast_shiftmode_hold">Maintenir le mode</string>
+    <string name="toast_shiftmode_hold">Mode \"maintien\"</string>
     <string name="toast_shiftmode_toggle">Appuyez pour activer le mode</string>
     <!--
 	<string name="toast_3">Exit</string>
@@ -83,7 +83,7 @@
     <string name="mcl_setting_title_setmaxdxref">Régler le nombre maximum de références DX</string>
     <string name="mcl_setting_subtitle_setmaxdxref">Augmente si une erreur se produit lors de la conversion : \"trop de... références\". Vous pouvez essayer l\'option multi-dex. Recommandé : 4096 ou 8192.</string>
     <string name="mcl_setting_title_freeform">Lancer Minecraft en mode libre</string>
-    <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 ou une version supérieure.</string>
+    <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 +</string>
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_controlsize">Régler la taille des boutons de contrôle</string>
