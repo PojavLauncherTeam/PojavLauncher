@@ -79,6 +79,6 @@ public class PojavProfile
     }
 
     public static void updateTokens(final Activity ctx, final String name, RefreshListener listen) throws Exception {
-        new RefreshTokenTask(ctx, listen).execute(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json");
+        new RefreshTokenTask(ctx, listen).execute(name);
     }
 }

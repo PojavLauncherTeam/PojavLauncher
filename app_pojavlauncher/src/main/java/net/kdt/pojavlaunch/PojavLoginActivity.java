@@ -736,7 +736,7 @@ public class PojavLoginActivity extends BaseActivity
                                                 @Override
                                                 public void onClick(DialogInterface p1, int p2) {
                                                     new InvalidateTokenTask(PojavLoginActivity.this)
-                                                        .execute(Tools.DIR_ACCOUNT_NEW + "/" + selectedAccName + ".json");
+                                                        .execute(selectedAccName);
                                                     listAdapter.remove(selectedAccName);
                                                     listAdapter.notifyDataSetChanged();
                                                 }
