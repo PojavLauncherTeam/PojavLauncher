@@ -27,7 +27,7 @@ public class MinecraftAccount
     }
     
     public static MinecraftAccount load(String name) throws IOException, JsonSyntaxException {
-        MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
+        MinecraftAccount acc = parse(Tools.read(name));
         if (acc.accessToken == null) {
             acc.accessToken = "0";
         } if (acc.clientToken == null) {
