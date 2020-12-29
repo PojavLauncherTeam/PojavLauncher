@@ -65,7 +65,7 @@
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Membersihkan file-file cache</string>
+    <string name="mcl_launch_cleancache">Membersihkan berkas-berkas cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_download_lib">Mengunduh library %s</string>
     <string name="mcl_launch_download_client">Mengunduh Minecraft %s</string>
@@ -80,8 +80,8 @@
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
     <string name="mcl_option_about">Tentang</string>
-    <string name="mcl_setting_title_setmaxdxref">Set maksimal referensi DX</string>
-    <string name="mcl_setting_subtitle_setmaxdxref">Tambahkan jika ada error waktu melakukan konversi: Terlalu banyak ... referensi. Anda bisa mencoba untuk menggunakan pilihan multi dex. Rekomendasi: 4096 atau 8192.</string>
+    <string name="mcl_setting_title_setmaxdxref">Set referensi maksimal DX</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Tambahkan jika ada error waktu melakukan konversi: Terlalu banyak ... referensi. Anda bisa mencoba untuk menggunakan pilihan multi-dex. Rekomendasi: 4096 atau 8192.</string>
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
@@ -93,8 +93,8 @@
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Tambah</string>
@@ -158,10 +158,10 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Tutup secara paksa</string>
     <string name="control_viewout">Catatan log</string>
-    <string name="control_adebug">Pointer Capture Debug</string>
-    <string name="control_customkey">Kirim kode kunci kustom</string>
+    <string name="control_adebug">PointerCapture Debug</string>
+    <string name="control_customkey">Kirim keycode kustom</string>
     <string name="control_shiftmodechg">Ganti mode shift (menunduk)</string>
-    <string name="customctrl_keyname">Kode kunci</string>
+    <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
