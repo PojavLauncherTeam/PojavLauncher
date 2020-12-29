@@ -66,7 +66,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     public void onPostExecute(Throwable result) {
         build.dismiss();
         if (result == null) {
-            listener.onSuccess(null);
+            listener.onSuccess(profilePath);
         } else {
             listener.onFailed(result);
         }
