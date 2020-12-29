@@ -15,7 +15,7 @@ public class MinecraftAccount
     
     public String save(String outPath) throws IOException {
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
-        return outPath;
+        return username;
     }
     
     public String save() throws IOException {
