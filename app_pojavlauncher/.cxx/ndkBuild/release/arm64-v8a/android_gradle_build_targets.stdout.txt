@@ -1,2 +1,0 @@
-make: Nothing to be done for 'awt_xawt'.
-make: Nothing to be done for 'pojavexec'.
