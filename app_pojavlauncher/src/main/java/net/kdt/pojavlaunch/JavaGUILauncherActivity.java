@@ -172,6 +172,9 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         } else if (InstallerDetector.isFabric(installer)) {
             appendlnToLog("Detected Fabric Installer!");
             return new FabricInstaller(installer).install(this);
+        }else if (InstallerDetector.isOptiFine(installer)) {
+            appendlnToLog("Detected OptiFine Installer!");
+            return new LegacyOptifineInstaller(installer).install(this);
         } else {
             appendlnToLog("No mod detected. Starting JVM");
             isLogAllow = false;

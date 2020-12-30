@@ -17,7 +17,9 @@ public class LegacyOptifineInstaller extends BaseInstaller {
 
     @Override
     public int install(JavaGUILauncherActivity ctx) throws IOException {
-        
-        return 0;
+        mJarFile.close();
+        ctx.appendlnToLog("Launching JVM");
+        return ctx.launchJavaRuntime(null,
+                "-jar "+Tools.DIR_GAME_NEW+"/config/OptiInst.jar " + mFile.getAbsolutePath() +" .");
     }
 }

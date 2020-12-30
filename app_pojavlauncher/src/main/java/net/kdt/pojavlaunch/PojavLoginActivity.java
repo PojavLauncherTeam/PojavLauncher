@@ -332,6 +332,8 @@ public class PojavLoginActivity extends BaseActivity
 
             Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar",
                 Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
+            Tools.copyAssetFile(this, "components/OptiInst.jar",
+                    Tools.DIR_GAME_NEW + "/config", "OptiInst.jar", true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);

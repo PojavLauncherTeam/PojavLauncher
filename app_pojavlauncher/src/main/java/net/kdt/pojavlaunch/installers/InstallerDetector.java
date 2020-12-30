@@ -1,6 +1,9 @@
 package net.kdt.pojavlaunch.installers;
 
 import java.io.*;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+
 import com.google.gson.*;
 import net.kdt.pojavlaunch.value.*;
 
@@ -9,7 +12,10 @@ public class InstallerDetector
     public static boolean isFabric(BaseInstaller installer) {
         return installer.mJarFile.getEntry("net/fabricmc/installer/Main.class") != null;
     }
-    
+    public static boolean isOptiFine(BaseInstaller installer) {
+        Enumeration e = installer.mJarFile.entries();
+        return installer.mJarFile.getEntry("optifine/Installer.class") != null;
+    }
     // Forge Legacy: for 1.12.1 and below
     public static boolean isForgeLegacy(BaseInstaller installer) throws IOException, JsonSyntaxException {
         ForgeInstallProfile profile = LegacyForgeInstaller.readInstallProfile(installer);
