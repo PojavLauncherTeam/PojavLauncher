@@ -808,7 +808,8 @@ public class PojavLoginActivity extends BaseActivity
                             builder.clientToken = result[2];
                             builder.profileId = result[3];
                             builder.username = result[4];
-
+                            builder.selectedVersion = "1.12.2";
+                            
                             mProfile = builder;
                         }
                         v.setEnabled(true);
