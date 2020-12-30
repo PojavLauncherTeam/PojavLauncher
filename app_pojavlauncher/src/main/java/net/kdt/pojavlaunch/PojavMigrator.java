@@ -35,13 +35,17 @@ public class PojavMigrator
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
         
         boolean moved = oldGameDir.exists() && oldGameDir.isDirectory();
+        /*
         if (!migrateBugFix20201217() && moved) {
             command("mv " + Tools.DIR_GAME_OLD + " " + Tools.DIR_GAME_HOME + "/");
         }
-
+        */
+        if(!moved) {
+            oldGameDir.renameTo(new File(Tools.DIR_GAME_HOME + "/"));
+        }
         return moved;
     }
-    
+
     public static boolean migrateBugFix20201217() throws IOException, InterruptedException {
         File bugGameDir = new File(Tools.DIR_GAME_NEW + "/.minecraft");
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
@@ -59,7 +63,7 @@ public class PojavMigrator
 
         return moved;
     }
-    
+
     private static void command(String cmd) throws IOException, InterruptedException {
         Process p = Runtime.getRuntime().exec(cmd);
         int exitCode = p.waitFor();
