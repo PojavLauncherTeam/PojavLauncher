@@ -3,7 +3,7 @@
   "messages": [
     {
       "level": "INFO",
-      "message": "android.ndkVersion from module build.gradle is 21.3.6528147"
+      "message": "android.ndkVersion from module build.gradle is not set"
     },
     {
       "level": "INFO",
@@ -31,19 +31,7 @@
     },
     {
       "level": "INFO",
-      "message": "Found 2 NDK folders that matched requested version 21.3.6528147:"
-    },
-    {
-      "level": "INFO",
-      "message": " (1) /home/maks/Android/Sdk/ndk/21.3.6528147 in SDK ndk folder"
-    },
-    {
-      "level": "INFO",
-      "message": " (2) /home/maks/Android/Sdk/ndk-bundle in SDK ndk-bundle folder"
-    },
-    {
-      "level": "INFO",
-      "message": "  choosing /home/maks/Android/Sdk/ndk/21.3.6528147"
+      "message": "No user requested version, choosing /home/maks/Android/Sdk/ndk/21.3.6528147 which is version 21.3.6528147"
     }
   ]
 }
