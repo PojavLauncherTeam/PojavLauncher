@@ -1,4 +1,6 @@
 package net.kdt.pojavlaunch.value;
+import android.util.Log;
+
 import net.kdt.pojavlaunch.*;
 import java.io.*;
 import com.google.gson.*;
@@ -26,22 +28,32 @@ public class MinecraftAccount
         return Tools.GLOBAL_GSON.fromJson(content, MinecraftAccount.class);
     }
     
-    public static MinecraftAccount load(String name) throws IOException, JsonSyntaxException {
-        MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
-        if (acc.accessToken == null) {
-            acc.accessToken = "0";
-        } if (acc.clientToken == null) {
-            acc.clientToken = "0";
-        } if (acc.profileId == null) {
-            acc.profileId = "0";
-        } if (acc.username == null) {
-            acc.username = "0";
-        } if (acc.selectedVersion == null) {
-            acc.selectedVersion = "1.7.10";
-        } if (acc.msaRefreshToken == null) {
-            acc.msaRefreshToken = "0";
+    public static MinecraftAccount load(String name) throws JsonSyntaxException {
+        try {
+            MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
+            if (acc.accessToken == null) {
+                acc.accessToken = "0";
+            }
+            if (acc.clientToken == null) {
+                acc.clientToken = "0";
+            }
+            if (acc.profileId == null) {
+                acc.profileId = "0";
+            }
+            if (acc.username == null) {
+                acc.username = "0";
+            }
+            if (acc.selectedVersion == null) {
+                acc.selectedVersion = "1.7.10";
+            }
+            if (acc.msaRefreshToken == null) {
+                acc.msaRefreshToken = "0";
+            }
+            return acc;
+        }catch(IOException e) {
+            Log.e(MinecraftAccount.class.getName(), "Caught an exception while loading the profile",e);
+            return null;
         }
-        return acc;
     }
     
     public static void clearTempAccount() {

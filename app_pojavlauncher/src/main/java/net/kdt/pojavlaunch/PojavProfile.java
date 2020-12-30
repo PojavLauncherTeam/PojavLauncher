@@ -3,6 +3,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
+
 import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
@@ -14,22 +16,47 @@ public class PojavProfile
 {
 	private static String PROFILE_PREF = "pojav_profile";
 	private static String PROFILE_PREF_FILE = "file";
-	private static String PROFILE_PREF_TEMP_CONTENT = "tempContent";
+	public static String PROFILE_PREF_TEMP_CONTENT = "tempContent";
 	
-	private static SharedPreferences getPrefs(Context ctx) {
+	public static SharedPreferences getPrefs(Context ctx) {
 		return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
 	}
 	
-	public static MinecraftAccount getCurrentProfileContent(Context ctx) throws IOException, JsonSyntaxException {
+	public static MinecraftAccount getCurrentProfileContent(Context ctx) throws JsonSyntaxException {
 		MinecraftAccount build = MinecraftAccount.load(getCurrentProfileName(ctx));
         if (build == null) {
+            System.out.println("isTempProfile null? " + (getTempProfileContent(ctx) == null));
             return getTempProfileContent(ctx);
         }
         return build;
 	}
 
     public static MinecraftAccount getTempProfileContent(Context ctx) {
-        return MinecraftAccount.parse(getPrefs(ctx).getString(PROFILE_PREF_TEMP_CONTENT, ""));
+	    try {
+            MinecraftAccount acc = MinecraftAccount.parse(Tools.read(Tools.DIR_DATA+"/cache/tempacc.json"));
+            if (acc.accessToken == null) {
+                acc.accessToken = "0";
+            }
+            if (acc.clientToken == null) {
+                acc.clientToken = "0";
+            }
+            if (acc.profileId == null) {
+                acc.profileId = "0";
+            }
+            if (acc.username == null) {
+                acc.username = "0";
+            }
+            if (acc.selectedVersion == null) {
+                acc.selectedVersion = "1.7.10";
+            }
+            if (acc.msaRefreshToken == null) {
+                acc.msaRefreshToken = "0";
+            }
+            return acc;
+        }catch (IOException e) {
+            Log.e(MinecraftAccount.class.getName(), "Caught an exception while loading the temporary profile",e);
+            return null;
+        }
     }
 	
     public static String getCurrentProfileName(Context ctx) {
