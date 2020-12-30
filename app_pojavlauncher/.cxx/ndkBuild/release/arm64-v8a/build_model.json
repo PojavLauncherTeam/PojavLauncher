@@ -1,0 +1,60 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/home/maks/AndroidStudioProjects/PojavLauncher",
+      "sdkFolder": "/home/maks/Android/Sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates",
+      "gradleModulePathName": ":app_pojavlauncher",
+      "moduleRootFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher",
+      "makeFile": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Android.mk",
+      "buildSystem": "NDK_BUILD",
+      "compilerSettingsCacheFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/.cxx",
+      "cxxFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx",
+      "ndkFolder": "/home/maks/Android/Sdk/ndk/21.3.6528147",
+      "ndkVersion": "21.3.6528147",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "release",
+    "soFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/lib",
+    "objFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj/local",
+    "jsonFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release",
+    "gradleBuildOutputFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/cxx/release",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARM64_V8A",
+  "abiPlatformVersion": 21,
+  "cxxBuildFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release/arm64-v8a",
+  "jsonFile": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release/arm64-v8a/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/cxx/release/arm64-v8a",
+  "objFolder": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj/local/arm64-v8a",
+  "buildCommandFile": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release/arm64-v8a/build_command.txt",
+  "buildOutputFile": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release/arm64-v8a/build_output.txt",
+  "modelOutputFile": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release/arm64-v8a/build_model.json",
+  "jsonGenerationLoggingRecordFile": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release/arm64-v8a/json_generation_record.json",
+  "compileCommandsJsonFile": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/.cxx/ndkBuild/release/arm64-v8a/compile_commands.json"
+}

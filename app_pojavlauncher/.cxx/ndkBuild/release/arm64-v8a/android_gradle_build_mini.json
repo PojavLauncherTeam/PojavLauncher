@@ -1,0 +1,24 @@
+{
+  "buildFiles": [
+    "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Android.mk",
+    "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Application.mk"
+  ],
+  "cleanCommands": [
+    "/home/maks/Android/Sdk/ndk/21.3.6528147/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/lib clean"
+  ],
+  "buildTargetsCommand": "/home/maks/Android/Sdk/ndk/21.3.6528147/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/lib {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "pojavexec-release-arm64-v8a": {
+      "artifactName": "pojavexec",
+      "buildCommand": "/home/maks/Android/Sdk/ndk/21.3.6528147/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/lib /home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libpojavexec.so",
+      "abi": "arm64-v8a",
+      "output": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libpojavexec.so"
+    },
+    "awt_xawt-release-arm64-v8a": {
+      "artifactName": "awt_xawt",
+      "buildCommand": "/home/maks/Android/Sdk/ndk/21.3.6528147/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/src/main/jni/Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/lib /home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libawt_xawt.so",
+      "abi": "arm64-v8a",
+      "output": "/home/maks/AndroidStudioProjects/PojavLauncher/app_pojavlauncher/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libawt_xawt.so"
+    }
+  }
+}
