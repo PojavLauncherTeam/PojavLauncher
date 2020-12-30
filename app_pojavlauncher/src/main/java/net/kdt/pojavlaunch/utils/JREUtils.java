@@ -172,9 +172,11 @@ public class JREUtils
         
         String libName = Tools.CURRENT_ARCHITECTURE.contains("64") ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
+        File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
+        // To make libjli.so ignore re-execute
         ldLibraryPath.append(
-            // To make libjli.so ignore re-execute
-            Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server:" +
+            Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client") + ":");
+        ldLibraryPath.append(
             Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
             Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":"
         );
