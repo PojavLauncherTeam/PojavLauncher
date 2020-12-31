@@ -755,7 +755,17 @@ public class BaseMainActivity extends LoggableActivity {
     }
     */
     //private Dialog menuDial;
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        AndroidLWJGLKeycode.execKey(event,keyCode,false);
+        return true;
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        AndroidLWJGLKeycode.execKey(event,keyCode,true);
+        return true;
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -1039,7 +1049,7 @@ public class BaseMainActivity extends LoggableActivity {
         // Prevent back
         // Catch back as Esc keycode at another place
 
-        // sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
     }
     
     public void hideKeyboard() {

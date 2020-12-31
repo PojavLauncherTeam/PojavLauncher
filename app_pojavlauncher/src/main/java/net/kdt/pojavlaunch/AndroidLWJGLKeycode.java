@@ -181,7 +181,7 @@ public class AndroidLWJGLKeycode {
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
         try {
-            if (!CallbackBridge.isGrabbing() && keyEvent.getScanCode() == 0) {
+            if (!CallbackBridge.isGrabbing()) {
                 /*
                 if (keyEvent.isPrintingKey()) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
@@ -189,12 +189,10 @@ public class AndroidLWJGLKeycode {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), keyEvent.getDisplayLabel(), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
                 }
                 */
-                 if(keyEvent.isPrintingKey()) {
-                     System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
+                System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
+                 if(keyEvent.getUnicodeChar() != 0) {
                      char key = (char)keyEvent.getUnicodeChar();
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),key,0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
-                 }else if(androidToLwjglMap.get(keyEvent.getKeyCode()) == 32) {
-                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),' ',0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
                  }else{
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),CallbackBridge.getCurrentMods(),keyEvent.getAction()==KeyEvent.ACTION_DOWN);
                  }

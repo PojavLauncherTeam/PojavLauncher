@@ -37,19 +37,6 @@ public class MinecraftGLView extends TextureView
             return new BaseInputConnection(this,false);
         }
     }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        AndroidLWJGLKeycode.execKey(event,keyCode,false);
-        return true;
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        AndroidLWJGLKeycode.execKey(event,keyCode,true);
-        return true;
-    }
-
     @Override
     public boolean onCheckIsTextEditor() {
         return false;
