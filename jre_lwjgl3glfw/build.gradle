@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'org.lwjgl.glfw'
+version = '3.2.3'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = project.name
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
