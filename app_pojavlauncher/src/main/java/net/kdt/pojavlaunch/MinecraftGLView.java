@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import android.content.*;
+import android.content.res.Configuration;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.util.*;
@@ -30,13 +31,19 @@ public class MinecraftGLView extends TextureView
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
         outAttrs.inputType = EditorInfo.TYPE_NULL;
-        Log.d("EnhancedTextInput","Context: " + ctx);
-        return new MyInputConnection(this,false);
+        if(!isHardKB(this.getContext())) {
+            return new MyInputConnection(this, false);
+        }else{
+            return null;
+        }
     }
 
     @Override
     public boolean onCheckIsTextEditor() {
         return false;
+    }
+    public static boolean isHardKB(Context ctx) {
+        return ctx.getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY;
     }
 }
 class MyInputConnection extends BaseInputConnection {

@@ -2,14 +2,17 @@ package net.kdt.pojavlaunch;
 
 import android.util.*;
 import android.view.*;
+
+import java.net.CookieHandler;
 import java.util.*;
 import org.lwjgl.glfw.*;
 
 public class AndroidLWJGLKeycode {
     // Fix double letters on MC 1.9 and above
     public static boolean isBackspaceAfterChar = true;
-    private static final ArrayMap<Integer, Integer> androidToLwjglMap;
-    private static String[] androidKeyNameArray;
+    public static final ArrayMap<Integer, Integer> androidToLwjglMap;
+    public static String[] androidKeyNameArray;
+
     static {
         // Mapping Android Keycodes to LWJGL Keycodes
         androidToLwjglMap = new ArrayMap<Integer, Integer>();

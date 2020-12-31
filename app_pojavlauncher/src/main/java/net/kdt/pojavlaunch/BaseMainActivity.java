@@ -1066,7 +1066,7 @@ public class BaseMainActivity extends LoggableActivity {
     public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
         sendKeyPress(keyCode, 0, modifiers, status);
     }
-    
+
     public static void sendKeyPress(int keyCode, int scancode, int modifiers, boolean status) {
         sendKeyPress(keyCode, '\u0000', scancode, modifiers, status);
     }
@@ -1078,9 +1078,9 @@ public class BaseMainActivity extends LoggableActivity {
     public void sendKeyPress(char keyChar) {
         try {
             int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
-            sendKeyPress(keyCode, keyChar, 0, CallbackBridge.getCurrentMods(), true);
-            sendKeyPress(keyCode, keyChar, 0, CallbackBridge.getCurrentMods(), false);
-        }catch(Exception e) {
+            sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
+            sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
             sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
         }
