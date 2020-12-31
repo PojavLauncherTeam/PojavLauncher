@@ -162,6 +162,7 @@ public class AndroidLWJGLKeycode {
     }
     
     public static void execKey(KeyEvent keyEvent, int i, boolean isDown) {
+        System.out.println("An event was received!");
         for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
             if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
                 // Right mouse detection
@@ -189,6 +190,8 @@ public class AndroidLWJGLKeycode {
                      System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
                      char key = (char)keyEvent.getUnicodeChar();
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),key,0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
+                 }else if(androidToLwjglMap.get(keyEvent.getKeyCode()) == 32) {
+                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),' ',0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
                  }else{
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),CallbackBridge.getCurrentMods(),keyEvent.getAction()==KeyEvent.ACTION_DOWN);
                  }
