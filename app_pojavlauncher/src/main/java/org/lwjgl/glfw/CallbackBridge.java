@@ -54,8 +54,13 @@ public class CallbackBridge {
         }
 */
 
-        nativeSendKeycode(keycode, keychar, scancode, isDown ? 1 : 0, modifiers);
-        
+        //nativeSendKeycode(keycode, keychar, scancode, isDown ? 1 : 0, modifiers);
+        nativeSendKey(keycode,scancode,isDown ? 1 : 0, modifiers);
+        if(isDown && keychar != '\u0000') {
+            nativeSendCharMods(keychar,modifiers);
+            nativeSendChar(keychar);
+        }
+        //throw new IllegalStateException("Tracing call");
         // sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
     }
 
@@ -146,14 +151,13 @@ public class CallbackBridge {
     }
 
     public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
-    /*
+
     private static native boolean nativeSendChar(char codepoint);
     // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
     private static native boolean nativeSendCharMods(char codepoint, int mods);
-    */
+    private static native void nativeSendKey(int key, int scancode, int action, int mods);
     // private static native void nativeSendCursorEnter(int entered);
     private static native void nativeSendCursorPos(int x, int y);
-    private static native void nativeSendKeycode(int keycode, char keychar, int scancode, int action, int mods);
     private static native void nativeSendMouseButton(int button, int action, int mods);
     private static native void nativeSendScroll(double xoffset, double yoffset);
     private static native void nativeSendScreenSize(int width, int height);
