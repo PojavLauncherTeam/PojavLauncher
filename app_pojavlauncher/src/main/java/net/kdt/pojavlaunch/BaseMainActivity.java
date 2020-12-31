@@ -1085,13 +1085,24 @@ public class BaseMainActivity extends LoggableActivity {
     public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
         CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
     }
-
+    public static boolean doesObjectContainField(Class objectClass, String fieldName) {
+        for (Field field : objectClass.getFields()) {
+            if (field.getName().equals(fieldName)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void sendKeyPress(char keyChar) {
-        try {
-            int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
-            sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
-            sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
+        if(doesObjectContainField(KeyEvent.class,"KEYCODE_" + Character.toUpperCase(keyChar))) {
+            try {
+                int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
+                sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
+                sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+
+            }
+        }else{
             sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
             sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
         }

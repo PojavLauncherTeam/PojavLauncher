@@ -55,7 +55,7 @@ public class CallbackBridge {
 */
 
         //nativeSendKeycode(keycode, keychar, scancode, isDown ? 1 : 0, modifiers);
-        nativeSendKey(keycode,scancode,isDown ? 1 : 0, modifiers);
+        if(keycode != 0 || !isDown)  nativeSendKey(keycode,scancode,isDown ? 1 : 0, modifiers);
         if(isDown && keychar != '\u0000') {
             nativeSendCharMods(keychar,modifiers);
             nativeSendChar(keychar);

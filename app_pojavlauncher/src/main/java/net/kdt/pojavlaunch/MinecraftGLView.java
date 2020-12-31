@@ -60,9 +60,7 @@ class MinecraftInputConnection extends BaseInputConnection {
     }
 
     public boolean commitText(CharSequence text, int newCursorPosition) {
-        Log.d("EnhancedTextInput","Text committed: "+text);
-        parent.sendKeyPress(text.charAt(0
-        ));
+        parent.sendKeyPress(text.charAt(0));
         return true;
     }
 
