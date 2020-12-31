@@ -481,19 +481,18 @@ public class PojavLoginActivity extends BaseActivity
                 builder.setCancelable(false);
 
                 final AlertDialog dialog = builder.create();
-                FileListView flv = new FileListView(dialog);
+                FileListView flv = new FileListView(dialog, "tar.xz");
                 flv.setFileSelectedListener(new FileSelectedListener(){
 
                         @Override
                         public void onFileSelected(File file, String path) {
-                            if (file.getName().endsWith(".tar.xz")) {
-                                selectedFile.append(path);
-                                dialog.dismiss();
-                                
-                                synchronized (mLockSelectJRE) {
-                                    mLockSelectJRE.notifyAll();
-                                }
+                            selectedFile.append(path);
+                            dialog.dismiss();
+
+                            synchronized (mLockSelectJRE) {
+                                mLockSelectJRE.notifyAll();
                             }
+
                         }
                     });
                 dialog.setView(flv);

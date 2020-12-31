@@ -124,16 +124,15 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             dialog.setView(edit);
         } else {
             dialog = builder.create();
-            FileListView flv = new FileListView(dialog);
+            FileListView flv = new FileListView(dialog,"jar");
             flv.setFileSelectedListener(new FileSelectedListener(){
                     @Override
                     public void onFileSelected(File file, String path) {
-                        if (file.getName().endsWith(".jar")) {
-                            Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
-                            intent.putExtra("modFile", file);
-                            startActivity(intent);
-                            dialog.dismiss();
-                        }
+                        Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
+                        intent.putExtra("modFile", file);
+                        startActivity(intent);
+                        dialog.dismiss();
+
                     }
                 });
             dialog.setView(flv);
