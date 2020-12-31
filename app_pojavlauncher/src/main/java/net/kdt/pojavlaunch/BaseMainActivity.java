@@ -1055,6 +1055,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     public void showKeyboard() {
         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        minecraftGLView.requestFocusFromTouch();
     }
 
     protected void setRightOverride(boolean val) {
@@ -1075,8 +1076,14 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public void sendKeyPress(char keyChar) {
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
+        try {
+            int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
+            sendKeyPress(keyCode, keyChar, 0, CallbackBridge.getCurrentMods(), true);
+            sendKeyPress(keyCode, keyChar, 0, CallbackBridge.getCurrentMods(), false);
+        }catch(Exception e) {
+            sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
+            sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
+        }
     }
 
     public void sendKeyPress(int keyCode) {
