@@ -100,16 +100,14 @@ public class CustomControlsActivity extends BaseActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(dialog);
+		FileListView flv = new FileListView(dialog, "json");
 		flv.lockPathAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
 				public void onFileSelected(File file, String path) {
-					if (file.getName().endsWith(".json")) {
-						setDefaultControlJson(path);
-						dialog.dismiss();
-					}
+					setDefaultControlJson(path);
+					dialog.dismiss();
 				}
 			});
 		dialog.setView(flv);
@@ -182,16 +180,14 @@ public class CustomControlsActivity extends BaseActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(dialog);
+		FileListView flv = new FileListView(dialog, "json");
 		flv.listFileAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
 				public void onFileSelected(File file, String path) {
-					if (file.getName().endsWith(".json")) {
-						loadControl(path);
-						dialog.dismiss();
-					}
+					loadControl(path);
+					dialog.dismiss();
 				}
 			});
 		dialog.setView(flv);
