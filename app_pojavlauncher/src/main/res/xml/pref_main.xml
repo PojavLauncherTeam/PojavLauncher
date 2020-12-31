@@ -51,9 +51,9 @@
             android:key="mousescale"
             android:summary="@string/mcl_setting_subtitle_mousescale"
             android:title="@string/mcl_setting_title_mousescale"
-            app2:showSeekBarValue="true"
+            app2:icon="@drawable/mouse_pointer_1"
             app2:selectable="false"
-            app2:icon="@drawable/mouse_pointer"/>
+            app2:showSeekBarValue="true" />
         
     </androidx.preference.PreferenceCategory>
 	
