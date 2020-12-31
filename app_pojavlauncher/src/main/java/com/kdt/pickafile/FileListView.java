@@ -24,17 +24,31 @@ public class FileListView extends LinearLayout
     private AlertDialog build;
     private String lockPath = "/";
 
+    //For filtering by file types:
+    private final String[] fileSuffixes;
+
     public FileListView(AlertDialog build) {
-        this(build.getContext(), null);
+        this(build.getContext(), null, new String[0]);
         this.build = build;
     }
 
-    public FileListView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+    public FileListView(AlertDialog build, String fileSuffix) {
+        this(build.getContext(), null, new String[]{fileSuffix});
+        this.build = build;
     }
 
-    public FileListView(Context context, AttributeSet attrs, int defStyle) {
+    public FileListView(AlertDialog build, String[] fileSuffixes){
+        this(build.getContext(), null, fileSuffixes);
+        this.build = build;
+    }
+
+    public FileListView(Context context, AttributeSet attrs, String[] fileSuffixes) {
+        this(context, attrs, 0, fileSuffixes);
+    }
+
+    public FileListView(Context context, AttributeSet attrs, int defStyle, String[] fileSuffixes) {
         super(context, attrs, defStyle);
+        this.fileSuffixes = fileSuffixes;
         init(context);
     }
 
@@ -84,6 +98,7 @@ public class FileListView extends LinearLayout
     {
         this.listener = listener;
     }
+
     public void listFileAt(final String path)
     {
         try{
@@ -101,9 +116,26 @@ public class FileListView extends LinearLayout
 
                     if(listFile.length != 0){
                         Arrays.sort(listFile, new SortFileName());
-                        for(File file : listFile){
-                            fileAdapter.add(file);
+                        if(fileSuffixes.length > 0){ //Meaning we want only specific files
+                            for(File file : listFile){
+                                if(file.isDirectory()){
+                                    fileAdapter.add(file);
+                                    continue;
+                                }
+
+                                for(String suffix : fileSuffixes){
+                                    if(file.getName().endsWith("." + suffix)){
+                                        fileAdapter.add(file);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else{ //We get every file
+                            for(File file : listFile){
+                                fileAdapter.add(file);
+                            }
                         }
+
                     }
                     mainLv.setAdapter(fileAdapter);
                     if (build != null) build.setTitle(new File(path).getName());
