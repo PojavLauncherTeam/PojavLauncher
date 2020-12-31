@@ -15,12 +15,12 @@ import org.lwjgl.glfw.CallbackBridge;
 
 public class MinecraftGLView extends TextureView
 {
-    volatile Context ctx;
+    volatile BaseMainActivity ctx;
 	// private View.OnTouchListener mTouchListener;
     public MinecraftGLView(Context context) {
         super(context);
 		//setPreserveEGLContextOnPause(true);
-        ctx = context;
+        ctx = (BaseMainActivity) context;
     }
 
     public MinecraftGLView(Context context, AttributeSet attributeSet) {
@@ -34,8 +34,20 @@ public class MinecraftGLView extends TextureView
         if(!isHardKB(this.getContext())) {
             return new MyInputConnection(this, false);
         }else{
-            return null;
+            return new BaseInputConnection(this,false);
         }
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        AndroidLWJGLKeycode.execKey(event,keyCode,false);
+        return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        AndroidLWJGLKeycode.execKey(event,keyCode,true);
+        return true;
     }
 
     @Override
@@ -65,7 +77,9 @@ class MyInputConnection extends BaseInputConnection {
 
     public boolean commitText(CharSequence text, int newCursorPosition) {
         Log.d("EnhancedTextInput","Text committed: "+text);
-        parent.sendKeyPress(text.charAt(0));
+        parent.sendKeyPress(text.charAt(0
+        ));
         return true;
     }
+
 }

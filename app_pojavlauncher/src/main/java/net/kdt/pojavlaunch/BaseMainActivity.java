@@ -738,7 +738,7 @@ public class BaseMainActivity extends LoggableActivity {
             Tools.showError(this, e, true);
         }
     }
-
+    /*
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         switch (event.getAction()) {
@@ -753,7 +753,7 @@ public class BaseMainActivity extends LoggableActivity {
         
         return super.dispatchKeyEvent(event);
     }
-
+    */
     //private Dialog menuDial;
 
     @Override
@@ -1056,6 +1056,7 @@ public class BaseMainActivity extends LoggableActivity {
     public void showKeyboard() {
         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         minecraftGLView.requestFocusFromTouch();
+        minecraftGLView.requestFocus();
     }
 
     protected void setRightOverride(boolean val) {
