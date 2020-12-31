@@ -9,9 +9,6 @@ import android.view.*;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
-import android.widget.TextView;
-
-import org.lwjgl.glfw.CallbackBridge;
 
 public class MinecraftGLView extends TextureView
 {
@@ -32,7 +29,7 @@ public class MinecraftGLView extends TextureView
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
         outAttrs.inputType = EditorInfo.TYPE_NULL;
         if(!isHardKB(this.getContext())) {
-            return new MyInputConnection(this, false);
+            return new MinecraftInputConnection(this, false);
         }else{
             return new BaseInputConnection(this,false);
         }
@@ -45,10 +42,10 @@ public class MinecraftGLView extends TextureView
         return ctx.getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY;
     }
 }
-class MyInputConnection extends BaseInputConnection {
+class MinecraftInputConnection extends BaseInputConnection {
     private SpannableStringBuilder _editable;
     BaseMainActivity parent;
-    public MyInputConnection(View targetView, boolean fullEditor) {
+    public MinecraftInputConnection(View targetView, boolean fullEditor) {
         super(targetView, fullEditor);
 
         parent = (BaseMainActivity)targetView.getContext();

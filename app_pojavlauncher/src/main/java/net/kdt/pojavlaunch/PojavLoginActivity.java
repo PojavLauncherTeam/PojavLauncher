@@ -624,7 +624,7 @@ public class PojavLoginActivity extends BaseActivity
         super.onNewIntent(intent);
         
         Uri data = intent.getData();
-        Log.i("MicroAuth", data.toString());
+        //Log.i("MicroAuth", data.toString());
         if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
             String error = data.getQueryParameter("error");
             String error_description = data.getQueryParameter("error_description");
