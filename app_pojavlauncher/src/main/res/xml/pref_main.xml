@@ -16,6 +16,7 @@
             android:summary="@string/mcl_setting_subtitle_longpresstrigger"
             android:title="@string/mcl_setting_title_longpresstrigger"
             app2:showSeekBarValue="true"
+            app2:selectable="false"
             app2:icon="@drawable/tap_len" />
 
         <androidx.preference.SwitchPreferenceCompat
@@ -42,13 +43,16 @@
             android:key="buttonscale"
             android:title="@string/mcl_setting_title_buttonscale"
             android:summary="@string/mcl_setting_subtitle_buttonscale"
-            app2:showSeekBarValue="true"/>
+            app2:showSeekBarValue="true"
+            app2:selectable="false"
+            app2:icon="@drawable/btn_scale"/>
 
         <androidx.preference.SeekBarPreference
             android:key="mousescale"
             android:summary="@string/mcl_setting_subtitle_mousescale"
             android:title="@string/mcl_setting_title_mousescale"
             app2:showSeekBarValue="true"
+            app2:selectable="false"
             app2:icon="@drawable/mouse_pointer"/>
         
     </androidx.preference.PreferenceCategory>
