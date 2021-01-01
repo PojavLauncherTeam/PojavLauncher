@@ -289,7 +289,7 @@ public class Mouse {
 	 * @throws LWJGLException if the mouse could not be created for any reason
 	 */
 	public static void create() throws LWJGLException {
-			if (!Display.isCreated()) throw new IllegalStateException("Display must be created.");
+		//stub
 	}
 
 	/**
