@@ -159,9 +159,13 @@ public class Mouse {
 	private static  boolean clipMouseCoordinatesToWindow = !getPrivilegedBoolean("org.lwjgl.input.Mouse.allowNegativeMouseCoords");
 	static int evt_prevX=0;
 	static int evt_prevY=0;
+	static boolean isBufferReadable;
+	static boolean isBufferWritable;
     public static void pushMouseEvent(int x, int y, byte button, boolean status, int dwheel) {
     	//LWJGL2 evt structure
+		while(!isBufferWritable) {}
 		if(!readBuffer.isReadOnly()) {
+			isBufferReadable = false;
 			readBuffer.put(button);
 			readBuffer.put((byte) (status ? 1 : 0));
 			if(x != -1 && y != -1) {
@@ -178,6 +182,7 @@ public class Mouse {
 			}
 			readBuffer.putInt(dwheel);
 			readBuffer.putLong(Sys.getNanoTime());
+			isBufferReadable = true;
 		}
 		evt_prevY = y;
 		evt_prevX = x;
@@ -429,7 +434,9 @@ public class Mouse {
 	 */
 	public static boolean next() {
 			if (!created) throw new IllegalStateException("Mouse must be created before you can read events");
+			while(!isBufferReadable) {}
 			readBuffer.flip();
+			isBufferWritable = false;
 			if (readBuffer.hasRemaining()) {
 
 				eventButton = readBuffer.get();
@@ -458,8 +465,10 @@ public class Mouse {
 				event_dwheel = readBuffer.getInt();
 				event_nanos = readBuffer.getLong();
 				readBuffer.flip();
+				isBufferWritable = true;
 				return true;
 			} else
+				isBufferWritable = true;
 				readBuffer.flip();
 				return false;
 	}
