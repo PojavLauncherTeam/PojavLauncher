@@ -127,24 +127,56 @@ public class ARBShaderObjects {
         glUniform4fvARB(location, value);
     }
     
-    public static void glUniform1ARB(@NativeType("GLint") int location, @NativeType("GLfloat const *") IntBuffer value) {
+    public static void glUniform1ARB(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         glUniform1ivARB(location, value);
     }
     
-    public static void glUniform2ARB(@NativeType("GLint") int location, @NativeType("GLfloat const *") IntBuffer value) {
+    public static void glUniform2ARB(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         glUniform2ivARB(location, value);
     }
     
-    public static void glUniform3ARB(@NativeType("GLint") int location, @NativeType("GLfloat const *") IntBuffer value) {
+    public static void glUniform3ARB(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         glUniform3ivARB(location, value);
     }
     
-    public static void glUniform4ARB(@NativeType("GLint") int location, @NativeType("GLfloat const *") IntBuffer value) {
+    public static void glUniform4ARB(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         glUniform4ivARB(location, value);
+    }
+        
+    public static void glUniformMatrix2ARB(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
+        glUniformMatrix2fvARB(location, transpose, value);
+    }
+    
+    public static void glUniformMatrix3ARB(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
+        glUniformMatrix3fvARB(location, transpose, value);
+    }
+    
+    public static void glUniformMatrix4ARB(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
+        glUniformMatrix4fvARB(location, transpose, value);
+    }
+    
+    public static void glGetObjectParameterARB(@NativeType("GLhandleARB") int obj, @NativeType("GLenum") int pname, @NativeType("GLfloat *") FloatBuffer params) {
+        glGetObjectParameterfvARB(obj, pname, params);
     }
     
     public static void glGetObjectParameterARB(@NativeType("GLhandleARB") int obj, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         glGetObjectParameterivARB(obj, pname, params);
+    }
+    
+    public static void glGetUniformARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLint") int location, @NativeType("GLfloat *") FloatBuffer params) {
+        glGetUniformfvARB(programObj, location, params);
+    }
+    
+    public static void glGetUniformARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLint") int location, @NativeType("GLint *") IntBuffer params) {
+        glGetUniformivARB(programObj, location, params);
+    }
+    
+    public static void glGetUniformfvARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
+        glGetUniformfvARB(programObj, location, params);
+    }
+    
+    public static void glGetUniformfvARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
+        glGetUniformivARB(programObj, location, params);
     }
 // -- End LWJGL2 part --
     
