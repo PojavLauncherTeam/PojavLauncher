@@ -290,6 +290,15 @@ public class Mouse {
 	 */
 	public static void create() throws LWJGLException {
 		//stub
+		hasWheel = true;
+		created = true;
+
+		// set mouse buttons
+		buttonCount = 3;
+		buttons = BufferUtils.createByteBuffer(buttonCount);
+		coord_buffer = BufferUtils.createIntBuffer(3);
+		readBuffer = ByteBuffer.allocate(EVENT_SIZE * BUFFER_SIZE);
+		readBuffer.limit(0);
 	}
 
 	/**
