@@ -140,50 +140,42 @@ public class Mouse {
 	}
 
 	public static boolean next() {
-		return queue.next();
+		//return queue.next();
+		return true;
 	}
-    private static void moveAutomatically() {
-		if(queue.getCurrentPos() == -1) {
-			next();
-		}
-	}
+
 	public static int getEventX() {
-		moveAutomatically();
-		return xEvents[queue.getCurrentPos()];
+		return getX();
 	}
 
 	public static int getEventY() {
-		moveAutomatically();
-		return yEvents[queue.getCurrentPos()];
+		return getY();
 	}
 
 	public static int getEventDX() {
-		moveAutomatically();
-		return xEvents[queue.getCurrentPos()] - lastxEvents[queue.getCurrentPos()];
+		return getDX();
 	}
 
 	public static int getEventDY() {
-		moveAutomatically();
-		return yEvents[queue.getCurrentPos()] - lastyEvents[queue.getCurrentPos()];
+		return getDY();
 	}
 
 	public static long getEventNanoseconds() {
-		moveAutomatically();
-		return nanoTimeEvents[queue.getCurrentPos()];
+		return Sys.getNanoTime();
 	}
 
 	public static int getEventButton() {
-		moveAutomatically();
+		next();
 		return buttonEvents[queue.getCurrentPos()];
 	}
 
 	public static boolean getEventButtonState() {
-		moveAutomatically();
+		next();
 		return buttonEventStates[queue.getCurrentPos()];
 	}
 
 	public static int getEventDWheel() {
-		moveAutomatically();
+		next();
 		return wheelEvents[queue.getCurrentPos()];
 	}
 
