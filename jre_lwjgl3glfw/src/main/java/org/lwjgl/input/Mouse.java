@@ -160,10 +160,8 @@ public class Mouse {
 	static int evt_prevX=0;
 	static int evt_prevY=0;
 	static boolean isBufferReadable;
-	static boolean isBufferWritable;
     public static void pushMouseEvent(int x, int y, byte button, boolean status, int dwheel) {
     	//LWJGL2 evt structure
-		while(!isBufferWritable) {}
 		if(!readBuffer.isReadOnly()) {
 			isBufferReadable = false;
 			readBuffer.put(button);
@@ -436,9 +434,7 @@ public class Mouse {
 			if (!created) throw new IllegalStateException("Mouse must be created before you can read events");
 			while(!isBufferReadable) {}
 			readBuffer.flip();
-			isBufferWritable = false;
 			if (readBuffer.hasRemaining()) {
-
 				eventButton = readBuffer.get();
 				eventState = readBuffer.get() != 0;
 				if (isGrabbed()) {
@@ -465,10 +461,8 @@ public class Mouse {
 				event_dwheel = readBuffer.getInt();
 				event_nanos = readBuffer.getLong();
 				readBuffer.flip();
-				isBufferWritable = true;
 				return true;
 			} else
-				isBufferWritable = true;
 				readBuffer.flip();
 				return false;
 	}
