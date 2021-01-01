@@ -159,10 +159,9 @@ public class Mouse {
 	private static  boolean clipMouseCoordinatesToWindow = !getPrivilegedBoolean("org.lwjgl.input.Mouse.allowNegativeMouseCoords");
 	static int evt_prevX=0;
 	static int evt_prevY=0;
-	static boolean isBufferReadable;
+	static boolean isBufferReadable=true; // sed default readability
     public static void pushMouseEvent(int x, int y, byte button, boolean status, int dwheel) {
     	//LWJGL2 evt structure
-		if(!readBuffer.isReadOnly()) {
 			isBufferReadable = false;
 			readBuffer.put(button);
 			readBuffer.put((byte) (status ? 1 : 0));
@@ -181,7 +180,6 @@ public class Mouse {
 			readBuffer.putInt(dwheel);
 			readBuffer.putLong(Sys.getNanoTime());
 			isBufferReadable = true;
-		}
 		evt_prevY = y;
 		evt_prevX = x;
     	//inserting events as soon as mouse generates them
