@@ -98,7 +98,7 @@ public class Mouse {
 	}
 
 	public static void poll() {
-		next();
+		//next();
 		lastX = x;
 		lastY = y;
 
@@ -142,36 +142,48 @@ public class Mouse {
 	public static boolean next() {
 		return queue.next();
 	}
-
+    private static void moveAutomatically() {
+		if(queue.getCurrentPos() == -1) {
+			next();
+		}
+	}
 	public static int getEventX() {
+		moveAutomatically();
 		return xEvents[queue.getCurrentPos()];
 	}
 
 	public static int getEventY() {
+		moveAutomatically();
 		return yEvents[queue.getCurrentPos()];
 	}
 
 	public static int getEventDX() {
+		moveAutomatically();
 		return xEvents[queue.getCurrentPos()] - lastxEvents[queue.getCurrentPos()];
 	}
 
 	public static int getEventDY() {
+		moveAutomatically();
 		return yEvents[queue.getCurrentPos()] - lastyEvents[queue.getCurrentPos()];
 	}
 
 	public static long getEventNanoseconds() {
+		moveAutomatically();
 		return nanoTimeEvents[queue.getCurrentPos()];
 	}
 
 	public static int getEventButton() {
+		moveAutomatically();
 		return buttonEvents[queue.getCurrentPos()];
 	}
 
 	public static boolean getEventButtonState() {
+		moveAutomatically();
 		return buttonEventStates[queue.getCurrentPos()];
 	}
 
 	public static int getEventDWheel() {
+		moveAutomatically();
 		return wheelEvents[queue.getCurrentPos()];
 	}
 
