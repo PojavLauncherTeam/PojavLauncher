@@ -7,8 +7,8 @@ package org.lwjgl.input;
 class EventQueue {
 
 	private int maxEvents = 32;
-	private int currentEventPos = 0;
-	private int nextEventPos = 1;
+	private int currentEventPos = -1;
+	private int nextEventPos = 0;
 
 	EventQueue(int maxEvents) {
 		this.maxEvents = maxEvents;

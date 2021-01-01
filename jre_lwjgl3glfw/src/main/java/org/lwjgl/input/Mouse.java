@@ -98,6 +98,7 @@ public class Mouse {
 	}
 
 	public static void poll() {
+		next();
 		lastX = x;
 		lastY = y;
 
