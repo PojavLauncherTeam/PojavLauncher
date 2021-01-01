@@ -316,21 +316,22 @@ public class Display {
         Window.cursorEnterCallback = new GLFWCursorEnterCallback() {
             @Override
             public void invoke(long window, boolean entered) {
-                Mouse.setMouseInsideWindow(entered == true);
+                //Mouse.setMouseInsideWindow(entered == true);
+                Mouse.setInside(entered);
             }
         };
 
         Window.cursorPosCallback = new GLFWCursorPosCallback() {
             @Override
             public void invoke(long window, double xpos, double ypos) {
-                Mouse.addMoveEvent(xpos, ypos);
+                Mouse.pushMouseEvent((int)xpos,(int)ypos, (byte) -1,false,0);
             }
         };
 
         Window.mouseButtonCallback = new GLFWMouseButtonCallback() {
             @Override
             public void invoke(long window, int button, int action, int mods) {
-                Mouse.addButtonEvent(button, action == GLFW.GLFW_PRESS ? true : false);
+                Mouse.pushMouseEvent(-1,-1, (byte) button, action == GLFW.GLFW_PRESS ? true : false,0);
             }
         };
 
@@ -383,7 +384,8 @@ public class Display {
         Window.scrollCallback = new GLFWScrollCallback() {
             @Override
             public void invoke(long window, double xoffset, double yoffset) {
-                Mouse.addWheelEvent((int) (yoffset * 120));
+              //  Mouse.addWheelEvent((int) (yoffset * 120));
+                Mouse.pushMouseEvent(-1,-1, (byte) -1, false,(int)(yoffset*120));
             }
         };
 
@@ -1056,12 +1058,12 @@ public class Display {
         if (Window.handle != MemoryUtil.NULL)
             glfwDestroyWindow(Window.handle);
         Window.handle = newWindow;
-        try {
-            Mouse.setNativeCursor(Mouse.getCurrentCursor());
-        } catch (LWJGLException e) {
-            System.err.println("Failed to set new window cursor!");
-            e.printStackTrace();
-        }
+        //try {
+            //Mouse.setNativeCursor(Mouse.getCurrentCursor());
+        //} catch (LWJGLException e) {
+        //    System.err.println("Failed to set new window cursor!");
+        //    e.printStackTrace();
+        //}
         GLFW.glfwSetWindowTitle(newWindow, windowTitle);
         Window.setCallbacks();
 
