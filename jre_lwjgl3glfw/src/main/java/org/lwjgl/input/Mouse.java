@@ -20,7 +20,8 @@ public class Mouse {
 	private static int y = 0;
 
 	private static int lastDWheel = 0;
-
+    private static int lastButton;
+	private static boolean lastButtonStatus;
 	private static EventQueue queue = new EventQueue(32);
 
 	private static int[] buttonEvents = new int[queue.getMaxEvents()];
@@ -67,7 +68,8 @@ public class Mouse {
 
 		buttonEvents[queue.getNextPos()] = button;
 		buttonEventStates[queue.getNextPos()] = pressed;
-
+        lastButton = button;
+        lastButtonStatus = pressed;
 		wheelEvents[queue.getNextPos()] = 0;
 
 		nanoTimeEvents[queue.getNextPos()] = Sys.getNanoTime();
@@ -165,18 +167,15 @@ public class Mouse {
 	}
 
 	public static int getEventButton() {
-		next();
-		return buttonEvents[queue.getCurrentPos()];
+		return lastButton;
 	}
 
 	public static boolean getEventButtonState() {
-		next();
-		return buttonEventStates[queue.getCurrentPos()];
+		return lastButtonStatus;
 	}
 
 	public static int getEventDWheel() {
-		next();
-		return wheelEvents[queue.getCurrentPos()];
+		return lastDWheel;
 	}
 
 	public static int getX() {
