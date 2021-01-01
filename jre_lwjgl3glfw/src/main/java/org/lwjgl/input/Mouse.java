@@ -13,6 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,8 +123,8 @@ public class Mouse {
 	private static boolean		initialized;
 
 	/** The mouse button events from the last read */
-	private static ByteBuffer readBuffer;
-
+	static ArrayList<MouseEvent> eventList = new ArrayList<>();
+	static int nextEventIndex=0;
 	/** The current mouse event button being examined */
 	private static int				eventButton;
 
@@ -160,8 +161,10 @@ public class Mouse {
 	static int evt_prevX=0;
 	static int evt_prevY=0;
 	static boolean isBufferReadable=true; // sed default readability
+
     public static void pushMouseEvent(int x, int y, byte button, boolean status, int dwheel) {
     	//LWJGL2 evt structure
+		/*
 			isBufferReadable = false;
 			readBuffer.put(button);
 			readBuffer.put((byte) (status ? 1 : 0));
@@ -180,12 +183,29 @@ public class Mouse {
 			readBuffer.putInt(dwheel);
 			readBuffer.putLong(Sys.getNanoTime());
 			isBufferReadable = true;
+
+		 */
+			MouseEvent evt = new MouseEvent();
+			evt.button = button;
+			evt.status = status;
+			evt.wheel = dwheel;
+			if (isGrabbed()) {
+				evt.mouseX = (x - evt_prevX);
+				evt.mouseY = (y - evt_prevY);
+			} else {
+				evt.mouseX=x;
+				evt.mouseY=y;
+			}
+			evt.timeNano = Sys.getNanoTime();
+			eventList.add(evt);
 		evt_prevY = y;
 		evt_prevX = x;
     	//inserting events as soon as mouse generates them
 		glfwMouseX = x;
 		glfwMouseY = y;
 		glfwWheel = dwheel;
+
+
 	}
 
 	/**
@@ -251,8 +271,11 @@ public class Mouse {
 	}
 
 	private static void resetMouse() {
+
+
 		dx = dy = dwheel = 0;
-		readBuffer.position(readBuffer.limit());
+		eventList = new ArrayList<>();
+		nextEventIndex = 0;
 	}
 
 	//static InputImplementation getImplementation() {
@@ -277,9 +300,8 @@ public class Mouse {
 		buttonCount = 3;
 		buttons = BufferUtils.createByteBuffer(buttonCount);
 		coord_buffer = BufferUtils.createIntBuffer(3);
-		readBuffer = ByteBuffer.allocate(EVENT_SIZE * BUFFER_SIZE);
-		readBuffer.limit(0);
-		setGrabbed(isGrabbed);
+		eventList = new ArrayList<>();
+		nextEventIndex = 0;
 	}
 
 	/**
@@ -298,8 +320,8 @@ public class Mouse {
 		buttonCount = 3;
 		buttons = BufferUtils.createByteBuffer(buttonCount);
 		coord_buffer = BufferUtils.createIntBuffer(3);
-		readBuffer = ByteBuffer.allocate(EVENT_SIZE * BUFFER_SIZE);
-		readBuffer.limit(0);
+		eventList = new ArrayList<>();
+		nextEventIndex = 0;
 	}
 
 	/**
@@ -377,7 +399,7 @@ public class Mouse {
 	}
 
 	private static void read() {
-		readBuffer.compact();
+		eventList = new ArrayList<>();
 	}
 
 	/**
@@ -430,21 +452,20 @@ public class Mouse {
 	 */
 	public static boolean next() {
 			if (!created) throw new IllegalStateException("Mouse must be created before you can read events");
-			while(!isBufferReadable) {}
-			readBuffer.flip();
-			if (readBuffer.hasRemaining()) {
-				eventButton = readBuffer.get();
-				eventState = readBuffer.get() != 0;
+             MouseEvent evt = eventList.get(nextEventIndex);
+
+				eventButton = evt.button;
+				eventState = evt.status;
 				if (isGrabbed()) {
-					event_dx = readBuffer.getInt();
-					event_dy = readBuffer.getInt();
+					event_dx = evt.mouseX;
+					event_dy = evt.mouseY;
 					event_x += event_dx;
 					event_y += event_dy;
 					last_event_raw_x = event_x;
 					last_event_raw_y = event_y;
 				} else {
-					int new_event_x = readBuffer.getInt();
-					int new_event_y = readBuffer.getInt();
+					int new_event_x = evt.mouseX;
+					int new_event_y = evt.mouseY;
 					event_dx = new_event_x - last_event_raw_x;
 					event_dy = new_event_y - last_event_raw_y;
 					event_x = new_event_x;
@@ -456,13 +477,18 @@ public class Mouse {
 					event_x = Math.min(Display.getWidth() - 1, Math.max(0, event_x));
 					event_y = Math.min(Display.getHeight() - 1, Math.max(0, event_y));
 				}
-				event_dwheel = readBuffer.getInt();
-				event_nanos = readBuffer.getLong();
-				readBuffer.flip();
+				event_dwheel = evt.wheel;
+				event_nanos = evt.timeNano;
+				if((nextEventIndex+1 < eventList.size()-1)){
+					nextEventIndex++;
+					if(nextEventIndex == 100) {
+						nextEventIndex = 0;
+						eventList = new ArrayList<>();
+					}
+				}else{
+					System.out.println("no new events");
+				}
 				return true;
-			} else
-				readBuffer.flip();
-				return false;
 	}
 
 	/**
@@ -659,4 +685,12 @@ public class Mouse {
 	public static boolean isInsideWindow() {
 		return isInsideWindow;
 	}
+}
+class MouseEvent {
+	int mouseX;
+	int mouseY;
+	int wheel;
+	byte button;
+	boolean status;
+	long timeNano;
 }
