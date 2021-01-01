@@ -31,6 +31,15 @@ public class Mouse {
 	private static int[] lastxEvents = new int[queue.getMaxEvents()];
 	private static int[] lastyEvents = new int[queue.getMaxEvents()];
 	private static long[] nanoTimeEvents = new long[queue.getMaxEvents()];
+	/* varbuffer to avoid IOOBE on some Forge mods */
+    static int XEvent;
+	static int YEvent;
+	static int lastXEvent;
+	static int lastYEvent;
+	static int ButtonEvent;
+	static int WheelEvent;
+	static long NanoTimeEvent;
+	static boolean ButtonStateEvent;
 
 	private static boolean clipPostionToDisplay = true;
 
@@ -139,39 +148,51 @@ public class Mouse {
 	}
 
 	public static boolean next() {
-		return queue.next();
+		if(queue.next()) {
+			XEvent = xEvents[queue.getCurrentPos()];
+			YEvent = yEvents[queue.getCurrentPos()];
+			lastXEvent = lastxEvents[queue.getCurrentPos()];
+			lastYEvent = lastyEvents[queue.getCurrentPos()];
+ 			NanoTimeEvent = nanoTimeEvents[queue.getCurrentPos()];
+			ButtonEvent = buttonEvents[queue.getCurrentPos()];
+			ButtonStateEvent = buttonEventStates[queue.getCurrentPos()];
+			WheelEvent = wheelEvents[queue.getCurrentPos()];
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public static int getEventX() {
-		return xEvents[queue.getCurrentPos()];
+		return XEvent;
 	}
 
 	public static int getEventY() {
-		return yEvents[queue.getCurrentPos()];
+		return YEvent;
 	}
 
 	public static int getEventDX() {
-		return xEvents[queue.getCurrentPos()] - lastxEvents[queue.getCurrentPos()];
+		return XEvent - lastXEvent;
 	}
 
 	public static int getEventDY() {
-		return yEvents[queue.getCurrentPos()] - lastyEvents[queue.getCurrentPos()];
+		return YEvent - lastYEvent;
 	}
 
 	public static long getEventNanoseconds() {
-		return nanoTimeEvents[queue.getCurrentPos()];
+		return NanoTimeEvent;
 	}
 
 	public static int getEventButton() {
-		return buttonEvents[queue.getCurrentPos()];
+		return ButtonEvent;
 	}
 
 	public static boolean getEventButtonState() {
-		return buttonEventStates[queue.getCurrentPos()];
+		return ButtonStateEvent;
 	}
 
 	public static int getEventDWheel() {
-		return wheelEvents[queue.getCurrentPos()];
+		return WheelEvent;
 	}
 
 	public static int getX() {

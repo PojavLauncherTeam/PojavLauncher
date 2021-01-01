@@ -316,22 +316,22 @@ public class Display {
         Window.cursorEnterCallback = new GLFWCursorEnterCallback() {
             @Override
             public void invoke(long window, boolean entered) {
-                //Mouse.setMouseInsideWindow(entered == true);
-                Mouse.setInside(entered);
+                Mouse.setMouseInsideWindow(entered == true);
+
             }
         };
 
         Window.cursorPosCallback = new GLFWCursorPosCallback() {
             @Override
             public void invoke(long window, double xpos, double ypos) {
-                Mouse.pushMouseEvent((int)xpos,(int)ypos, (byte) -1,false,0);
+                Mouse.addMoveEvent(xpos,ypos);
             }
         };
 
         Window.mouseButtonCallback = new GLFWMouseButtonCallback() {
             @Override
             public void invoke(long window, int button, int action, int mods) {
-                Mouse.pushMouseEvent(-1,-1, (byte) button, action == GLFW.GLFW_PRESS ? true : false,0);
+                Mouse.addButtonEvent(button, action == GLFW.GLFW_PRESS ? true : false);
             }
         };
 
@@ -385,7 +385,7 @@ public class Display {
             @Override
             public void invoke(long window, double xoffset, double yoffset) {
               //  Mouse.addWheelEvent((int) (yoffset * 120));
-                Mouse.pushMouseEvent(-1,-1, (byte) -1, false,(int)(yoffset*120));
+                Mouse.addWheelEvent((int)(yoffset*120));
             }
         };
 
