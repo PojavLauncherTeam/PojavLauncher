@@ -9,30 +9,41 @@ import android.view.*;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputMethodManager;
 
 public class MinecraftGLView extends TextureView
 {
-    volatile BaseMainActivity ctx;
-	// private View.OnTouchListener mTouchListener;
     public MinecraftGLView(Context context) {
         super(context);
 		//setPreserveEGLContextOnPause(true);
-        ctx = (BaseMainActivity) context;
+        setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    ((InputMethodManager)view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(),0);
+                }
+            }
+        });
+
     }
 
     public MinecraftGLView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-		//setPreserveEGLContextOnPause(true);
+        setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    ((InputMethodManager)view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(),0);
+                }
+            }
+        });
     }
 
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
         outAttrs.inputType = EditorInfo.TYPE_NULL;
-        if(!isHardKB(this.getContext())) {
+        Log.d("TypeableGLView","onCreateInputConnection");
             return new MinecraftInputConnection(this, false);
-        }else{
-            return new BaseInputConnection(this,false);
-        }
     }
     @Override
     public boolean onCheckIsTextEditor() {
