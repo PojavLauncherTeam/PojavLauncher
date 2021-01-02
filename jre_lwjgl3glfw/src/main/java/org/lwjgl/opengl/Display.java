@@ -13,6 +13,8 @@ import java.nio.IntBuffer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.input.GLFWInputImplementation;
+import org.lwjgl.input.KeyCodes;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.LWJGLException;
@@ -302,21 +304,22 @@ public class Display {
                 // false);
                 // }
 
-                Keyboard.addKeyEvent(key, action);
+                GLFWInputImplementation.singleton.putKeyboardEvent(KeyCodes.toLwjglKey(key),(byte)action,0,Sys.getNanoTime(),false);
             }
         };
 
         Window.charCallback = new GLFWCharCallback() {
             @Override
             public void invoke(long window, int codepoint) {
-                Keyboard.addCharEvent(latestEventKey, (char) codepoint);
+                GLFWInputImplementation.singleton.putKeyboardEvent(KeyCodes.toLwjglKey(32),(byte)1,(int)codepoint,Sys.getNanoTime(),false);
+                GLFWInputImplementation.singleton.putKeyboardEvent(KeyCodes.toLwjglKey(32),(byte)0,(int)codepoint,Sys.getNanoTime(),false);
             }
         };
 
         Window.cursorEnterCallback = new GLFWCursorEnterCallback() {
             @Override
             public void invoke(long window, boolean entered) {
-                Mouse.setMouseInsideWindow(entered == true);
+
 
             }
         };
@@ -324,14 +327,14 @@ public class Display {
         Window.cursorPosCallback = new GLFWCursorPosCallback() {
             @Override
             public void invoke(long window, double xpos, double ypos) {
-                Mouse.addMoveEvent(xpos,ypos);
+                GLFWInputImplementation.singleton.putMouseEventWithCoords((byte)-1, (byte)0,(int)xpos,(int)((ypos - Display.getHeight())*-1),0,Sys.getNanoTime());
             }
         };
 
         Window.mouseButtonCallback = new GLFWMouseButtonCallback() {
             @Override
             public void invoke(long window, int button, int action, int mods) {
-                Mouse.addButtonEvent(button, action == GLFW.GLFW_PRESS ? true : false);
+                GLFWInputImplementation.singleton.putMouseEventWithCoords((byte)button,(byte)action,-1,-1,0,Sys.getNanoTime());
             }
         };
 
@@ -385,7 +388,7 @@ public class Display {
             @Override
             public void invoke(long window, double xoffset, double yoffset) {
               //  Mouse.addWheelEvent((int) (yoffset * 120));
-                Mouse.addWheelEvent((int)(yoffset*120));
+                GLFWInputImplementation.singleton.putMouseEventWithCoords((byte)-1,(byte)0,-1,-1,(int)(yoffset*120),Sys.getNanoTime());
             }
         };
 
@@ -734,7 +737,7 @@ public class Display {
     }
 
     public static boolean isCreated() {
-        return displayCreated;
+        return true;
     }
 
     public static boolean isActive() {

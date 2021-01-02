@@ -1,61 +1,83 @@
+/*
+ * Copyright (c) 2002-2008 LWJGL Project
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ * * Redistributions of source code must retain the above copyright
+ *   notice, this list of conditions and the following disclaimer.
+ *
+ * * Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in the
+ *   documentation and/or other materials provided with the distribution.
+ *
+ * * Neither the name of 'LWJGL' nor the names of
+ *   its contributors may be used to endorse or promote products derived
+ *   from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 package org.lwjgl.input;
 
 /**
- * Internal utility class to keep track of event positions in an array. When the
- * array is full the position will wrap to the beginning.
+ * A java implementation of a LWJGL compatible event queue.
+ * @author elias_naur
  */
+
+import java.nio.ByteBuffer;
+
 class EventQueue {
+	private static final int QUEUE_SIZE = 200;
 
-	private int maxEvents = 32;
-	private int currentEventPos = -1;
-	private int nextEventPos = 0;
+	private final int event_size;
 
-	EventQueue(int maxEvents) {
-		this.maxEvents = maxEvents;
+	private final ByteBuffer queue;
+
+	protected EventQueue(int event_size) {
+		this.event_size = event_size;
+		this.queue = ByteBuffer.allocate(QUEUE_SIZE*event_size);
+	}
+
+	protected synchronized void clearEvents() {
+		queue.clear();
 	}
 
 	/**
-	 * add event to the queue
+	 * Copy available events into the specified buffer.
 	 */
-	void add() {
-		nextEventPos++; // increment next event position
-		if (nextEventPos == maxEvents)
-			nextEventPos = 0; // wrap next event position
-
-		if (nextEventPos == currentEventPos) {
-			currentEventPos++; // skip oldest event is queue full
-			if (currentEventPos == maxEvents)
-				currentEventPos = 0; // wrap current event position
-		}
+	public synchronized void copyEvents(ByteBuffer dest) {
+		queue.flip();
+		int old_limit = queue.limit();
+		if (dest.remaining() < queue.remaining())
+			queue.limit(dest.remaining() + queue.position());
+		dest.put(queue);
+		queue.limit(old_limit);
+		queue.compact();
 	}
 
 	/**
-	 * Increment the event queue
-	 * 
-	 * @return - true if there is an event available
+	 * Put an event into the queue.
+	 * @return true if the event fitted into the queue, false otherwise
 	 */
-	boolean next() {
-		if (currentEventPos == nextEventPos - 1)
+	public synchronized boolean putEvent(ByteBuffer event) {
+		if (event.remaining() != event_size)
+			throw new IllegalArgumentException("Internal error: event size " + event_size + " does not equal the given event size " + event.remaining());
+		if (queue.remaining() >= event.remaining()) {
+			queue.put(event);
+			return true;
+		} else
 			return false;
-		if (nextEventPos == 0 && currentEventPos == maxEvents - 1)
-			return false;
-
-		currentEventPos++; // increment current event position
-		if (currentEventPos == maxEvents)
-			currentEventPos = 0; // wrap current event position
-
-		return true;
-	}
-
-	int getMaxEvents() {
-		return maxEvents;
-	}
-
-	int getCurrentPos() {
-		return currentEventPos;
-	}
-
-	int getNextPos() {
-		return nextEventPos;
 	}
 }
