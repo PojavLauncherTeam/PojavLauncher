@@ -28,6 +28,7 @@ public static int getControllerCount() {
     public static void destroy() {
 
     }
+    public static void clearEvents() {}
     public static Controller getEventSource() {
         return ctrlr;
     }
