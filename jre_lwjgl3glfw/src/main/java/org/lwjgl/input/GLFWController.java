@@ -21,7 +21,7 @@ public class GLFWController implements Controller{
 
     @Override
     public int getButtonCount() {
-        return 0;
+        return 8;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class GLFWController implements Controller{
 
     @Override
     public int getAxisCount() {
-        return 0;
+        return 8;
     }
 
     @Override
