@@ -13,6 +13,8 @@ import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
 import java.lang.reflect.*;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -754,6 +756,54 @@ public class BaseMainActivity extends LoggableActivity {
         return super.dispatchKeyEvent(event);
     }
     */
+
+    @Override
+    public boolean dispatchGenericMotionEvent(MotionEvent ev) {
+        if(ev.getSource() == InputDevice.SOURCE_CLASS_JOYSTICK) {
+            CallbackBridge.nativePutControllerAxes((FloatBuffer)FloatBuffer.allocate(8)
+                    .put(ev.getAxisValue(MotionEvent.AXIS_X))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_Y))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_Z))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_RX))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_RY))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_RZ))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_HAT_X))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_HAT_Y))
+            .flip());
+            return true;//consume the cum chalice
+        }else{
+            return false;
+        }
+    }
+    byte[] kevArray = new byte[8];
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getSource() == InputDevice.SOURCE_CLASS_JOYSTICK) {
+            switch(event.getKeyCode()) {
+                case KeyEvent.KEYCODE_BUTTON_A:
+                    kevArray[0]= (byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_BUTTON_B:
+                    kevArray[1]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_BUTTON_X:
+                    kevArray[2]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_BUTTON_Y:
+                    kevArray[3]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_LEFT:
+                    kevArray[4]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_RIGHT:
+                    kevArray[5]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_UP:
+                    kevArray[6]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_DOWN:
+                    kevArray[7]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+            }
+            CallbackBridge.nativePutControllerButtons(ByteBuffer.wrap(kevArray));
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //private Dialog menuDial;
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
