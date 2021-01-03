@@ -1247,4 +1247,27 @@ public class GLFW
 	public static ByteBuffer glfwGetjoystickHats(int jid) {
         return null;
 	}
+	public static boolean glfwJoystickIsGamepad(int jid) {
+    	if(jid == 0) return true;
+    	else return false;
+	}
+	public static String glfwGetJoystickGUID(int jid) {
+    	if(jid == 0) return "aio0";
+    	else return null;
+	}
+	public static long glfwGetJoystickUserPointer(int jid) {
+    	return 0;
+	}
+	public static void glfwSetJoystickUserPointer(int jid, long pointer) {
+
+	}
+	public static boolean glfwUpdateGamepadMappings(ByteBuffer string) {
+return false;
+	}
+	public static String glfwGetGamepadName(int jid) {
+    	return null;
+	}
+	public static boolean glfwGetGamepadState(int jid, GLFWGamepadState state) {
+    	return false;
+	}
 }
