@@ -9,7 +9,7 @@ public static void create() {
     ctrlr = new GLFWController();
     ctrlr.jid = 0;
 }
-public static Controller getController() {
+public static Controller getController(int ctrl) {
     return ctrlr;
 }
 public static int getControllerCount() {
