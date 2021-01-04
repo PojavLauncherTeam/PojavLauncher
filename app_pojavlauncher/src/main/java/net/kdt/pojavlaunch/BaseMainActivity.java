@@ -755,9 +755,9 @@ public class BaseMainActivity extends LoggableActivity {
         return super.dispatchKeyEvent(event);
     }
     */
-
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent ev) {
+        boolean isDown = false;
         if(ev.getSource() == InputDevice.SOURCE_CLASS_JOYSTICK) {
             CallbackBridge.nativePutControllerAxes((FloatBuffer)FloatBuffer.allocate(8)
                     .put(ev.getAxisValue(MotionEvent.AXIS_X))
@@ -770,9 +770,33 @@ public class BaseMainActivity extends LoggableActivity {
                     .put(ev.getAxisValue(MotionEvent.AXIS_HAT_Y))
             .flip());
             return true;//consume the cum chalice
-        }else{
-            return false;
-        }
+        }else if(ev.getSource() == InputDevice.SOURCE_MOUSE){
+            switch(ev.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN: // 0
+                case MotionEvent.ACTION_POINTER_DOWN: // 5
+                    isDown = true;
+                    break;
+
+                case MotionEvent.ACTION_UP: // 1
+                case MotionEvent.ACTION_CANCEL: // 3
+                case MotionEvent.ACTION_POINTER_UP: // 6
+                    isDown = false;
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    CallbackBridge.sendCursorPos((int)ev.getX(), (int)ev.getY());
+                    break;
+
+                case MotionEvent.ACTION_BUTTON_PRESS:
+                    sendMouseButtonUnconverted(ev.getActionButton(),isDown);
+                    break;
+
+                case MotionEvent.ACTION_SCROLL:
+                    CallbackBridge.sendScroll(ev.getAxisValue(MotionEvent.AXIS_HSCROLL), ev.getAxisValue(MotionEvent.AXIS_VSCROLL));
+                    break;
+            }
+            return true;
+        }else return false;
     }
     byte[] kevArray = new byte[8];
     @Override
@@ -800,18 +824,6 @@ public class BaseMainActivity extends LoggableActivity {
             return true;
         }else if(event.getSource() == InputDevice.SOURCE_KEYBOARD) {
              AndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
-            return true;
-        }else if(event.getSource() == InputDevice.SOURCE_MOUSE) {
-            int glfwCurrentMouse = LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
-            switch(event.getKeyCode()) {
-                case 1:
-                    glfwCurrentMouse = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT;
-                    break;
-                case 2:
-                    glfwCurrentMouse = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT;
-                    break;
-            }
-            sendMouseButton(glfwCurrentMouse,event.getAction() == KeyEvent.ACTION_DOWN);
             return true;
         }else return false;
     }
