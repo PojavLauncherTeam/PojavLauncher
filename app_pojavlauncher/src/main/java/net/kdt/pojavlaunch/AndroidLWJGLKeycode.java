@@ -165,15 +165,6 @@ public class AndroidLWJGLKeycode {
     }
     
     public static void execKey(KeyEvent keyEvent, int i, boolean isDown) {
-        System.out.println("An event was received!");
-        for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
-            if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
-                // Right mouse detection
-                BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
-                // BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-            }
-        }
-
         CallbackBridge.holdingAlt = keyEvent.isAltPressed();
         CallbackBridge.holdingCapslock = keyEvent.isCapsLockOn();
         CallbackBridge.holdingCtrl = keyEvent.isCtrlPressed();
@@ -181,7 +172,6 @@ public class AndroidLWJGLKeycode {
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
         try {
-            if (!CallbackBridge.isGrabbing()) {
                 /*
                 if (keyEvent.isPrintingKey()) {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
@@ -189,14 +179,13 @@ public class AndroidLWJGLKeycode {
                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), keyEvent.getDisplayLabel(), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
                 }
                 */
-                System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
+                //System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
                  if(keyEvent.getUnicodeChar() != 0) {
                      char key = (char)keyEvent.getUnicodeChar();
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),key,0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
                  }else{
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),CallbackBridge.getCurrentMods(),keyEvent.getAction()==KeyEvent.ACTION_DOWN);
                  }
-            }
         } catch (Throwable th) {
             th.printStackTrace();
         }

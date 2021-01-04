@@ -799,23 +799,25 @@ public class BaseMainActivity extends LoggableActivity {
             }
             CallbackBridge.nativePutControllerButtons(ByteBuffer.wrap(kevArray));
             return true;
-        }else{
-            return false;
-        }
+        }else if(event.getSource() == InputDevice.SOURCE_KEYBOARD) {
+             AndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
+            return true;
+        }else if(event.getSource() == InputDevice.SOURCE_MOUSE) {
+            int glfwCurrentMouse = LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
+            switch(event.getKeyCode()) {
+                case 1:
+                    glfwCurrentMouse = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT;
+                    break;
+                case 2:
+                    glfwCurrentMouse = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT;
+                    break;
+            }
+            sendMouseButton(glfwCurrentMouse,event.getAction() == KeyEvent.ACTION_DOWN);
+            return true;
+        }else return false;
     }
 
     //private Dialog menuDial;
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        AndroidLWJGLKeycode.execKey(event,keyCode,false);
-        return true;
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        AndroidLWJGLKeycode.execKey(event,keyCode,true);
-        return true;
-    }
     @Override
     public void onResume() {
         super.onResume();
