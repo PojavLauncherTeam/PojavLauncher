@@ -9,11 +9,12 @@ import org.lwjgl.glfw.*;
 
 public class ControlData implements Cloneable
 {
-    public static int pixelOf2dp;
-    public static int pixelOf30dp;
-    public static int pixelOf50dp;
+    /*
+    public static int pixelOf2dp = (int) Tools.dpToPx(2);
+    public static int pixelOf30dp = (int) Tools.dpToPx(30);
+    public static int pixelOf50dp = Tools.dpToPx(50);;
     public static int pixelOf80dp;
-
+    */
     public static final int SPECIALBTN_KEYBOARD = -1;
     public static final int SPECIALBTN_TOGGLECTRL = -2;
     public static final int SPECIALBTN_MOUSEPRI = -3;
@@ -73,8 +74,8 @@ public class ControlData implements Cloneable
     public String name;
     public float x;
     public float y;
-    public float width = pixelOf50dp;
-    public float height = pixelOf50dp;
+    public float width;
+    public float height;
     public int keycode;
     public int transparency;
     @Deprecated
@@ -93,7 +94,7 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int keycode, float x, float y) {
-        this(name, keycode, x, y, pixelOf50dp, pixelOf50dp);
+        this(name, keycode, x, y, Tools.dpToPx(50), Tools.dpToPx(50));
     }
 
     public ControlData(android.content.Context ctx, int resId, int keycode, float x, float y, boolean isSquare) {
@@ -101,7 +102,7 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int keycode, float x, float y, boolean isSquare) {
-        this(name, keycode, x, y, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp);
+        this(name, keycode, x, y, isSquare ? Tools.dpToPx(50) : Tools.dpToPx(80), isSquare ? Tools.dpToPx(50) : Tools.dpToPx(30));
     }
 
     public ControlData(String name, int keycode, float x, float y, float width, float height) {
@@ -110,7 +111,7 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY) {
-        this(name, keycode, dynamicX, dynamicY, pixelOf50dp, pixelOf50dp, false);
+        this(name, keycode, dynamicX, dynamicY, Tools.dpToPx(50), Tools.dpToPx(50), false);
     }
 
     public ControlData(android.content.Context ctx, int resId, int keycode, String dynamicX, String dynamicY, boolean isSquare) {
@@ -118,7 +119,7 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY, boolean isSquare) {
-        this(name, keycode, dynamicX, dynamicY, isSquare ? pixelOf50dp : pixelOf80dp, isSquare ? pixelOf50dp : pixelOf30dp, false);
+        this(name, keycode, dynamicX, dynamicY, isSquare ? Tools.dpToPx(50) : Tools.dpToPx(80), isSquare ? Tools.dpToPx(50) : Tools.dpToPx(30), false);
     }
 
     public ControlData(String name, int keycode, String dynamicX, String dynamicY, float width, float height, boolean isToggle) {
@@ -156,7 +157,7 @@ public class ControlData implements Cloneable
         keyValueMap.put("height", Float.toString(height));
         keyValueMap.put("screen_width", Integer.toString(CallbackBridge.windowWidth));
         keyValueMap.put("screen_height", Integer.toString(CallbackBridge.windowHeight));
-        keyValueMap.put("margin", Integer.toString(pixelOf2dp));
+        keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
         
         // Insert value to ${variable}
         String insertedPos = JSONUtils.insertSingleJSONValue(dynamicPos, keyValueMap);

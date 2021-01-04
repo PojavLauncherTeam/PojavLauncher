@@ -210,7 +210,6 @@ public class BaseMainActivity extends LoggableActivity {
             this.debugText = findViewById(R.id.content_text_debug);
 
             this.minecraftGLView = findViewById(R.id.main_game_render_view);
-           
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
 /*
