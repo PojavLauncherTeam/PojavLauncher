@@ -274,6 +274,7 @@ public class BaseMainActivity extends LoggableActivity {
                         // and other input controls. In this case, you are only
                         // interested in events where the touch position changed.
                         // int index = event.getActionIndex();
+
                         int action = event.getActionMasked();
 
                         float x = event.getX();
@@ -336,6 +337,21 @@ public class BaseMainActivity extends LoggableActivity {
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
+                    int mptrIndex = -1;
+                    for(int i = 0; i < e.getPointerCount(); i++) {
+                        if(e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) { //if there's at least one mouse...
+                            mptrIndex = i; //index it
+                        }
+                    }
+                    if(mptrIndex != -1) {
+                        //handle mouse events by just sending the coords of the new point in touch event
+                        int x = ((int) e.getX(mptrIndex)) / scaleFactor;
+                        int y = ((int) e.getY(mptrIndex)) / scaleFactor;
+                        CallbackBridge.mouseX = x;
+                        CallbackBridge.mouseY = y;
+                        CallbackBridge.sendCursorPos(x,y);
+                        return true; // event handled sucessfully
+                    }//if index IS -1, continue handling as an usual touch event
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
                     int x = ((int) e.getX()) / scaleFactor;
                     int y = ((int) e.getY()) / scaleFactor;
@@ -594,82 +610,25 @@ public class BaseMainActivity extends LoggableActivity {
                                     builder.setLength(0);
                                 }
                             }
-
-                            boolean isDown = false;
-                            switch (e.getActionMasked()) {
-                                /*
-                                case MotionEvent.ACTION_DOWN: // 0
-                                case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                    CallbackBridge.sendPrepareGrabInitialPos();
-
-                                    CallbackBridge.sendMouseKeycode(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, CallbackBridge.getCurrentMods(), true);
-                                    initialX = x;
-                                    initialY = y;
-
-                                    sendMouseButton(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-
-                                    // theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                    break;
-
-                                case MotionEvent.ACTION_UP: // 1
-                                case MotionEvent.ACTION_CANCEL: // 3
-                                case MotionEvent.ACTION_POINTER_UP: // 6
-                                    // CallbackBridge.sendCursorPos(x, y);
-                                    // CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
-                                    CallbackBridge.putMouseEventWithCoords(CallbackBridge.mouseLeft ? (byte) 0 : (byte) 1, (byte) 1, x, y);
-                                  
-                                    // triggeredLeftMouseButton = false;
-                                    // theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-                                    break;
-                                */
-                                
-                                case MotionEvent.ACTION_DOWN: // 0
-                                case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                    isDown = true;
-                                    break;
-                                    
-                                case MotionEvent.ACTION_UP: // 1
-                                case MotionEvent.ACTION_CANCEL: // 3
-                                case MotionEvent.ACTION_POINTER_UP: // 6
-                                    isDown = false;
-                                    break;
-                                
-                                case MotionEvent.ACTION_MOVE:
-                                    CallbackBridge.sendCursorPos(x, y);
-                                    break;
-                                
-                                case MotionEvent.ACTION_BUTTON_PRESS:
-                                    sendMouseButtonUnconverted(e.getActionButton(), isDown);
-                                    break;
-                                
-                                case MotionEvent.ACTION_SCROLL:
-                                    CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
-                                    break;
-                            }
-
                             debugText.setText(CallbackBridge.DEBUG_STRING.toString());
                             CallbackBridge.DEBUG_STRING.setLength(0);
-
-                            return true;
-                        // If onClick fail with false, change back to true
+                            switch (e.getActionMasked()) {
+                                case MotionEvent.ACTION_MOVE:
+                                    CallbackBridge.sendCursorPos(x, y);
+                                    return true;
+                                case MotionEvent.ACTION_BUTTON_PRESS:
+                                    return sendMouseButtonUnconverted(e.getActionButton(), true);
+                                case MotionEvent.ACTION_BUTTON_RELEASE:
+                                    return sendMouseButtonUnconverted(e.getActionButton(), false);
+                                case MotionEvent.ACTION_SCROLL:
+                                    CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
+                                    return true;
+                                default:
+                                    return false;
+                            }
                         }
                     });
             }
-
-            minecraftGLView.setOnHoverListener(new View.OnHoverListener(){
-                    @Override
-                    public boolean onHover(View v, MotionEvent e) {
-                        if (!CallbackBridge.isGrabbing() && mIsResuming) {
-                            // return glTouchListener.onTouch(v, e);
-                            int x = ((int) e.getX()) / scaleFactor;
-                            int y = ((int) e.getY()) / scaleFactor;
-                            CallbackBridge.mouseX = x;
-                            CallbackBridge.mouseY = y;
-                            CallbackBridge.sendCursorPos(x, y);
-                        }
-                        return true;
-                    }
-                });
             minecraftGLView.setOnTouchListener(glTouchListener);
             minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
                 
@@ -721,20 +680,6 @@ public class BaseMainActivity extends LoggableActivity {
                         
                     }
                 });
-            
-            OnGenericMotionListener gmlistener = new OnGenericMotionListener(){
-                    @Override
-                    public boolean onGenericMotion(View v, MotionEvent event) {
-                        switch (event.getActionMasked()) {
-                            case MotionEvent.ACTION_SCROLL:
-                                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
-                                break;
-                        }
-                        return true;
-                    }
-                };
-            minecraftGLView.setOnGenericMotionListener(gmlistener);
-            touchPad.setOnGenericMotionListener(gmlistener);
         } catch (Throwable e) {
             Tools.showError(this, e, true);
         }
@@ -757,7 +702,7 @@ public class BaseMainActivity extends LoggableActivity {
     */
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent ev) {
-        boolean isDown = false;
+        int mouseCursorIndex = -1;
         if(ev.getSource() == InputDevice.SOURCE_CLASS_JOYSTICK) {
             CallbackBridge.nativePutControllerAxes((FloatBuffer)FloatBuffer.allocate(8)
                     .put(ev.getAxisValue(MotionEvent.AXIS_X))
@@ -770,33 +715,30 @@ public class BaseMainActivity extends LoggableActivity {
                     .put(ev.getAxisValue(MotionEvent.AXIS_HAT_Y))
             .flip());
             return true;//consume the cum chalice
-        }else if(ev.getSource() == InputDevice.SOURCE_MOUSE){
-            switch(ev.getActionMasked()) {
-                case MotionEvent.ACTION_DOWN: // 0
-                case MotionEvent.ACTION_POINTER_DOWN: // 5
-                    isDown = true;
-                    break;
-
-                case MotionEvent.ACTION_UP: // 1
-                case MotionEvent.ACTION_CANCEL: // 3
-                case MotionEvent.ACTION_POINTER_UP: // 6
-                    isDown = false;
-                    break;
-
-                case MotionEvent.ACTION_MOVE:
-                    CallbackBridge.sendCursorPos((int)ev.getX(), (int)ev.getY());
-                    break;
-
-                case MotionEvent.ACTION_BUTTON_PRESS:
-                    sendMouseButtonUnconverted(ev.getActionButton(),isDown);
-                    break;
-
-                case MotionEvent.ACTION_SCROLL:
-                    CallbackBridge.sendScroll(ev.getAxisValue(MotionEvent.AXIS_HSCROLL), ev.getAxisValue(MotionEvent.AXIS_VSCROLL));
-                    break;
+        }else {
+            for(int i = 0; i < ev.getPointerCount(); i++) {
+                if(ev.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) {
+                    mouseCursorIndex = i;
+                }
             }
-            return true;
-        }else return false;
+            if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
+            switch(ev.getActionMasked()) {
+                case MotionEvent.ACTION_HOVER_MOVE:
+                    CallbackBridge.mouseX = (int) (ev.getX(mouseCursorIndex)/scaleFactor);
+                    CallbackBridge.mouseY = (int) (ev.getY(mouseCursorIndex)/scaleFactor);
+                    CallbackBridge.sendCursorPos((int) (ev.getX(mouseCursorIndex)/scaleFactor), (int) (ev.getY(mouseCursorIndex)/scaleFactor));
+                    return true;
+                case MotionEvent.ACTION_SCROLL:
+                    CallbackBridge.sendScroll((double) ev.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) ev.getAxisValue(MotionEvent.AXIS_HSCROLL));
+                    return true;
+                case MotionEvent.ACTION_BUTTON_PRESS:
+                     return sendMouseButtonUnconverted(ev.getActionButton(),true);
+                case MotionEvent.ACTION_BUTTON_RELEASE:
+                    return sendMouseButtonUnconverted(ev.getActionButton(),false);
+                default:
+                    return false;
+            }
+        }
     }
     byte[] kevArray = new byte[8];
     @Override
@@ -1180,8 +1122,8 @@ public class BaseMainActivity extends LoggableActivity {
         CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
     }
     
-    public static void sendMouseButtonUnconverted(int button, boolean status) {
-        int glfwButton = 0;
+    public static boolean sendMouseButtonUnconverted(int button, boolean status) {
+        int glfwButton = -256;
         switch (button) {
             case MotionEvent.BUTTON_PRIMARY:
                 glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT;
@@ -1193,8 +1135,9 @@ public class BaseMainActivity extends LoggableActivity {
                 glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT;
                 break;
         }
-        
+        if(glfwButton == -256) return false;
         sendMouseButton(glfwButton, status);
+        return true;
     }
 
     public void calculateMcScale() {
