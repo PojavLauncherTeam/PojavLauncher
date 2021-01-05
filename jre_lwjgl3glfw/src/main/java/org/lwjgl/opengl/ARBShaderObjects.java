@@ -170,14 +170,6 @@ public class ARBShaderObjects {
     public static void glGetUniformARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLint") int location, @NativeType("GLint *") IntBuffer params) {
         glGetUniformivARB(programObj, location, params);
     }
-    
-    public static void glGetUniformfvARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
-        glGetUniformfvARB(programObj, location, params);
-    }
-    
-    public static void glGetUniformfvARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
-        glGetUniformivARB(programObj, location, params);
-    }
 // -- End LWJGL2 part --
     
     // --- [ glDeleteObjectARB ] ---
