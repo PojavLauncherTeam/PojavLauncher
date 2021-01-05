@@ -767,9 +767,9 @@ public class BaseMainActivity extends LoggableActivity {
             }
             CallbackBridge.nativePutControllerButtons(ByteBuffer.wrap(kevArray));
             return true;
-        }else if(event.getSource() == InputDevice.SOURCE_KEYBOARD) {
+        }else if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD || event.getSource() == InputDevice.SOURCE_KEYBOARD) {
              AndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
-            return true;
+            return false;
         }else return false;
     }
 
