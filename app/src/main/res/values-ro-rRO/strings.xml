@@ -18,15 +18,16 @@
     <string name="login_online_remember">Tine-ma minte?</string>
     <string name="login_online_check_keeplogin">Tine-ma logat</string>
     <string name="login_online_login_label">Autentificate</string>
-    <string name="login_online_create_account">(Creaza cont nou?)</string>
+    <string name="login_online_create_account">(Creeaza cont nou?)</string>
     <string name="login_offline_switch">Cont offline?</string>
     <string name="login_offline_label">Autentificate ca cont offline</string>
     <string name="login_offline_alert_skip">Treci peste</string>
-    <string name="login_error_short_username">Numele de utilizator trebuie sa fie macar 3 caractere</string>
+    <string name="login_error_short_username">Numele de utilizator trebuie sa fie format din macar 3 caractere</string>
     <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
-    <string name="login_select_account">Selecteaza contul</string>
+    <string name="login_select_account">Selectează contul</string>
     <!-- Hint -->
-    <string name="hint_select_account">Pentru al selecta, apasa pe el. Pentru al sterge, tine apasat pe el.</string>
+    <string name="hint_select_account">Pentru a selecta, apasă-l. Pentru a șterge, ține apăsat pe el.</string>
+    <string name="hint_control_mapping">"Această caracteristică nu este încă finalizată așa că nu se poate aplica control personalizat în acest moment!\nGlisați de la dreapta la stânga pentru a deschide meniul ◀\nȚineți apăsat un buton pentru a personaliza: editare, redimensionare sau ștergere."</string>
     <!-- Warning -->
     <string name="warning_title">Avertisment</string>
     <string name="warning_msg">Aceasta aplicatie s-ar putea sa nu fie compatibila cu versiunea dumneavoastra de Android (peste sau egal cu Android 7.0). Trebuie sa folositi VMOS iar atuncia sa instalati aceasta aplicatie acolo. Dar VMOS a fost sters de pe Play Store, asa ca va trebuit instalat manual.</string>
@@ -36,7 +37,9 @@
     <string name="warning_action_exit">Iesire</string>
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Selectează o hartă de butoane json</string>
     <string name="alerttitle_installmod">Selecteaza un mod de adaugat</string>
+    <string name="alerttitle_installoptifine">Selectează Optifine fișier jar</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher s-a oprit neasteptat</string>
     <string name="error_checklog">Eroare! Te rog sa verifici jurnalul de mai jos: %s</string>
@@ -48,12 +51,59 @@
     <string name="error_show_less">Arata mai putin</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Permisiunea de citire/scriere la stocare este necesară!</string>
+    <string name="toast_login_error">Ceva nu a mers după logare. Vă rugăm ziceții developerului.\nEroare:%s</string>
+    <string name="toast_optifine_success">Instalare reușită</string>
+    <string name="toast_shiftmode">Shift (a strecura) mod de buton schimbat la %s</string>
+    <string name="toast_shiftmode_hold">Mod ține apăsat</string>
+    <string name="toast_shiftmode_toggle">Schimbă modul de click</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Știri lansator</string>
+    <string name="mcl_tab_console">Consolă developer</string>
+    <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
+    <string name="mcl_launch_downloading">Se descarcă %s</string>
+    <string name="mcl_launch_download_lib">Se descarcă library %s</string>
+    <string name="mcl_launch_download_client">Se descarcă Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Se convertează library %s</string>
+    <string name="mcl_launch_convert_client">Se convertează Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Patching Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Se pregătește pentru a descărca resursele</string>
+    <string name="mcl_options">Opțiuni</string>
+    <string name="mcl_option_modmgr">Manager de mod (nicio funcție)</string>
+    <string name="mcl_option_optifineinstall">Instalează Optifine</string>
+    <string name="mcl_option_checkupdate">Verifică actualizare</string>
+    <string name="mcl_option_customcontrol">Controale personalizate</string>
+    <string name="mcl_option_settings">Setări</string>
+    <string name="mcl_option_about">Despre</string>
+    <string name="mcl_setting_title_setmaxdxref">Setează maximul de referințe DX</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Crește dacă o eroare s-a întâmplat în timpul conversiei: Prea Multe ... referințe. Ai putea încerca opțiunea mulți-de. Recomandat: 4096 sau 8192.</string>
+    <string name="mcl_setting_title_freeform">Deschide Minecraft-ul în modul de fereastră</string>
+    <string name="mcl_setting_subtitle_freeform">Deschide Minecraft-ul în modul de fereastră plutitoare. Necesită Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
+    <string name="mcl_setting_title_controlsize">Setaţi dimensiunea butoanelor de control</string>
+    <string name="mcl_setting_title_forgetoptifpath">Fă ca Optifine să nu se poată localiza pe el însuși</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Folositor pentru a face Optifine să ruleze pe unele dispozitive.</string>
+    <string name="mcl_setting_category_general">Setări generale</string>
+    <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
+    <string name="mcl_setting_veroption_release">Lansat oficial</string>
+    <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha-vechi</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-vechi</string>
+    <string name="mcl_version_clone">Clonă</string>
     <!-- Global strings -->
+    <string name="global_add">Adaugă</string>
+    <string name="global_edit">Editează</string>
+    <string name="global_error">Eroare</string>
+    <string name="global_load">Incarcă</string>
+    <string name="global_name">Nume</string>
+    <string name="global_remove">Șterge</string>
+    <string name="global_restart">Repornire</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -82,4 +132,5 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Ieșire jurnal</string>
     <!-- Update part (unused now) -->
+    <string name="main_options">Opțiuni</string>
 </resources>
