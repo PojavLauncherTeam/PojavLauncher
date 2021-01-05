@@ -2,12 +2,14 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pentru Android)</string>
+    <string name="app_short_name">Lansator Minecraft: Java edition în dispozitivul tău</string>
     <string name="app_motd">Lanseaza Minecraft: Java Edition in propriul telefon al tau!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">AJUTOR</string>
     <!-- Languages list part -->
     <string name="language_name">ROMÂNĂ - RO</string>
     <!-- Logging output -->
+    <string name="log_title">Ieșire jurnal</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Emailul sau numele de utilizator</string>
     <string name="login_online_username_question">(Care sa il folosesc?)</string>
@@ -78,5 +80,6 @@
     <string name="mcn_exit_call">Iesire</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Ieșire jurnal</string>
     <!-- Update part (unused now) -->
 </resources>
