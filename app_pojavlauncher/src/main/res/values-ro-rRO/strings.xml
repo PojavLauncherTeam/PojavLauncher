@@ -2,6 +2,7 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pentru Android)</string>
+    <string name="app_short_name">Lansator Minecraft: Java edition în dispozitivul tău</string>
     <string name="app_motd">Lanseaza Minecraft: Java Edition in propriul telefon al tau!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">AJUTOR</string>
@@ -21,12 +22,16 @@
     <string name="login_offline_alert_skip">Treci peste</string>
     <string name="login_error_short_username">Numele de utilizator trebuie sa fie macar 3 caractere</string>
     <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
+    <string name="login_microsoft">Conectare Microsoft</string>
     <string name="login_select_account">Selecteaza contul</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Glisează de la dreapta la stânga pentru a deschide meniul ◀\n Ține apăsat un buton pentru a personaliza: editează, schimbă mărimea sau șterge."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Iesire</string>
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Se instalează Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Selectează un instalator de mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher s-a oprit neasteptat</string>
     <string name="error_checklog">Eroare! Te rog sa verifici jurnalul de mai jos: %s</string>
@@ -69,6 +74,7 @@
     <string name="mcn_exit_call">Iesire</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Ieșire jurnal</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
