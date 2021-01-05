@@ -329,7 +329,6 @@ public class BaseMainActivity extends LoggableActivity {
 
             minecraftGLView.setFocusable(true);
             // minecraftGLView.setEGLContextClientVersion(2);
-            
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
@@ -337,21 +336,25 @@ public class BaseMainActivity extends LoggableActivity {
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
-                    int mptrIndex = -1;
-                    for(int i = 0; i < e.getPointerCount(); i++) {
-                        if(e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) { //if there's at least one mouse...
-                            mptrIndex = i; //index it
+
+                    {
+                        int mptrIndex = -1;
+                        for (int i = 0; i < e.getPointerCount(); i++) {
+                            if (e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) { //if there's at least one mouse...
+                                mptrIndex = i; //index it
+                            }
                         }
+                        if (mptrIndex != -1) {
+                            //handle mouse events by just sending the coords of the new point in touch event
+                            int x = ((int) e.getX(mptrIndex)) / scaleFactor;
+                            int y = ((int) e.getY(mptrIndex)) / scaleFactor;
+                            CallbackBridge.mouseX = x;
+                            CallbackBridge.mouseY = y;
+                            CallbackBridge.sendCursorPos(x, y);
+                            return true; // event handled sucessfully
+                        }//if index IS -1, continue handling as an usual touch event
                     }
-                    if(mptrIndex != -1) {
-                        //handle mouse events by just sending the coords of the new point in touch event
-                        int x = ((int) e.getX(mptrIndex)) / scaleFactor;
-                        int y = ((int) e.getY(mptrIndex)) / scaleFactor;
-                        CallbackBridge.mouseX = x;
-                        CallbackBridge.mouseY = y;
-                        CallbackBridge.sendCursorPos(x,y);
-                        return true; // event handled sucessfully
-                    }//if index IS -1, continue handling as an usual touch event
+
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
                     int x = ((int) e.getX()) / scaleFactor;
                     int y = ((int) e.getY()) / scaleFactor;
