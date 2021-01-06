@@ -279,7 +279,13 @@ public class BaseMainActivity extends LoggableActivity {
 
                         float x = event.getX();
                         float y = event.getY();
-
+                        if(event.getHistorySize() > 0) {
+                            prevX = event.getHistoricalX(0);
+                            prevY = event.getHistoricalY(0);
+                        }else{
+                            prevX = x;
+                            prevY = y;
+                        }
                         float mouseX = mousePointer.getTranslationX();
                         float mouseY = mousePointer.getTranslationY();
 
@@ -315,8 +321,6 @@ public class BaseMainActivity extends LoggableActivity {
                                     break;
                             }
                         }
-                        prevX = x;
-                        prevY = y;
                         
                         debugText.setText(CallbackBridge.DEBUG_STRING.toString());
                         CallbackBridge.DEBUG_STRING.setLength(0);
