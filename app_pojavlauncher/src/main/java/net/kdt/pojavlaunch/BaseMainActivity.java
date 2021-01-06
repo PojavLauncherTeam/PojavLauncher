@@ -9,6 +9,8 @@ import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
+
+import androidx.annotation.RequiresApi;
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
@@ -367,17 +369,16 @@ public class BaseMainActivity extends LoggableActivity {
                         x += (int)(e.getX() - e.getHistoricalX(0));
                         y += (int)(e.getY() - e.getHistoricalY(0));
                     }
-                    if(x == 0 || !CallbackBridge.isGrabbing()) {
+                    if(!CallbackBridge.isGrabbing()) {
                         x = (int) e.getX();
                         y = (int) e.getY();
                     }
-                    int hudKeyHandled = handleGuiBar(x, y);
+                    int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
                         if (hudKeyHandled != -1) {
                             sendKeyPress(hudKeyHandled);
                         } else {
-                            CallbackBridge.sendMouseKeycode(rightOverride ? (byte) 1 : (byte) 0);
-                            CallbackBridge.sendCursorPos(x, y);
+                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0,x,y);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
                             }
@@ -391,8 +392,8 @@ public class BaseMainActivity extends LoggableActivity {
                                 isTouchInHotbar = hudKeyHandled != -1;
                                 if (isTouchInHotbar) {
                                     sendKeyPress(hudKeyHandled, 0, true);
-                                    hotbarX = x;
-                                    hotbarY = y;
+                                    hotbarX = (int)e.getX();
+                                    hotbarY = (int)e.getY();
 
                                     theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                 } else {
