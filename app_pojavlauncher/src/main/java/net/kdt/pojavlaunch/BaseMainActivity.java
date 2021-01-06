@@ -333,6 +333,7 @@ public class BaseMainActivity extends LoggableActivity {
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
                 private int scrollInitialX, scrollInitialY;
+                private int x,y;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
@@ -356,14 +357,23 @@ public class BaseMainActivity extends LoggableActivity {
                     }
 
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
-                    int x = ((int) e.getX()) / scaleFactor;
-                    int y = ((int) e.getY()) / scaleFactor;
+                   /* int x = ((int) e.getX()) / scaleFactor;
+                    int y = ((int) e.getY()) / scaleFactor;*/
+                    if(e.getHistorySize() > 0) {
+                        x += (int)(e.getX() - e.getHistoricalX(0));
+                        y += (int)(e.getY() - e.getHistoricalY(0));
+                    }
+                    if(x == 0 || !CallbackBridge.isGrabbing()) {
+                        x = (int) e.getX();
+                        y = (int) e.getY();
+                    }
                     int hudKeyHandled = handleGuiBar(x, y);
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
                         if (hudKeyHandled != -1) {
                             sendKeyPress(hudKeyHandled);
                         } else {
-                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, x, y);
+                            CallbackBridge.sendMouseKeycode(rightOverride ? (byte) 1 : (byte) 0);
+                            CallbackBridge.sendCursorPos(x, y);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
                             }
@@ -455,7 +465,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
                                     CallbackBridge.mouseY = y;
-                                    
+
                                     CallbackBridge.sendCursorPos(x, y);
                                     
                                     if (!CallbackBridge.isGrabbing()) {
