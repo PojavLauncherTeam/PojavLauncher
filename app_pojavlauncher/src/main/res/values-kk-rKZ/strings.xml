@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft-пен кіру</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
     <!-- Hint -->
-    <string name="hint_select_account">Таңдау үшін басыңыз, жойып тастау үшін басып ұстаңыз.</string>
     <string name="hint_control_mapping">"Мәзірді ашу үшін экранды оңнан солға сипаңыз ◀\nБаптау (өңдеу, көлем өзгерту я жою) үшін батырманы басып ұстаңыз."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Шығу</string>

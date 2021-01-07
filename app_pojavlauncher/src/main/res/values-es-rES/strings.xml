@@ -24,7 +24,6 @@
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
     <string name="login_select_account">Seleccione una cuenta</string>
     <!-- Hint -->
-    <string name="hint_select_account">Para seleccionar una cuenta dele click, para eliminarla mantenla pulsada.</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Salir</string>
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>

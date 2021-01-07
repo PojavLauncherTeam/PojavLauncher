@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecteer gebruiker</string>
     <!-- Hint -->
-    <string name="hint_select_account">Om te selecteren, klik erop. Om een account te verwijderen, houd deze ingedrukt.</string>
     <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Afsluiten</string>

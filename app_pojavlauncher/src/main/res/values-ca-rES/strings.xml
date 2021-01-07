@@ -24,7 +24,6 @@
     <string name="login_error_exist_username">Aquet nom d’usuari ja existeix</string>
     <string name="login_select_account">Seleccioneu un compte</string>
     <!-- Hint -->
-    <string name="hint_select_account">Per selecionar, clica. Per esorrar una conta, manten presionant.</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Exit</string>
     <string name="warning_remove_account">Aquesta conta sera eliminada!</string>

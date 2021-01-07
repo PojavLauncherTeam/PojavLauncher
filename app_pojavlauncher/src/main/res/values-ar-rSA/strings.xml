@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <string name="actionbar_help">مساعدة</string>
     <!-- Languages list part -->
-    <string name="language_name">الإنجليزية - الولايات المتحدة</string>
+    <string name="language_name">العربية - SA</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
     <string name="login_online_username_question">(ايهما أستخدم؟)</string>
@@ -25,7 +25,6 @@
     <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
     <string name="login_select_account">اختر الحساب</string>
     <!-- Hint -->
-    <string name="hint_select_account">للتحديد، انقر عليه. لحذف حساب، ثبت الضغط عليه.</string>
     <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر لتخصيص: تحرير أو تغيير الحجم أو حذفه."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">خروج</string>

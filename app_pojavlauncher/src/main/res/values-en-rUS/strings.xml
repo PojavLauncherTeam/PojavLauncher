@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
     <!-- Hint -->
-    <string name="hint_select_account">To select an account, click. To delete an account, hold.</string>
     <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Exit</string>
@@ -58,6 +57,7 @@
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
     <string name="mcl_launch_downloading">Downloading %s</string>
+    <string name="mcl_launch_downloading_progress">"Downloading %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
     <string name="mcl_options">Options</string>
     <string name="mcl_option_modmgr">Mod manager (under construction)</string>

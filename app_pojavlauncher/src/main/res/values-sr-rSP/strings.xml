@@ -25,7 +25,6 @@
     <string name="login_microsoft">Microsoft Пријава</string>
     <string name="login_select_account">Изаберите налог</string>
     <!-- Hint -->
-    <string name="hint_select_account">Да селектујете, притисните. Да избришете налог, дршжите изабрани налог.</string>
     <string name="hint_control_mapping">"Повуците са десна на лево да отворите мени ◀\nДржите дугме да га прилагодиш: едит, промени величину или избриши."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Изађи</string>
