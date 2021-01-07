@@ -201,6 +201,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                     MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), isDown);
                 } else if (mGestureDetector.onTouchEvent(event)) {
                     mChecked = !mChecked;
+                    invalidate();
                     setHolding(mChecked);
                     MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), mChecked);
                 }
