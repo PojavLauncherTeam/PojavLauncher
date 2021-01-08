@@ -675,7 +675,7 @@ public class PojavLoginActivity extends BaseActivity
         int yScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().heightPixels;
 
         accountDialog.setContentView(R.layout.simple_account_list_holder);
-        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)(yScreen*0.8));
+
 
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -734,6 +734,7 @@ public class PojavLoginActivity extends BaseActivity
 
         }
 
+        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*190));
         accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         accountDialog.show();
     }
