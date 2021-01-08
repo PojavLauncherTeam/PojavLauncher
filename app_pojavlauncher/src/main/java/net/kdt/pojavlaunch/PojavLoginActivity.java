@@ -727,20 +727,8 @@ public class PojavLoginActivity extends BaseActivity
                 final String selectedAccName = accountName.getText().toString();
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
-                    builder2.setTitle(selectedAccName);
-                    builder2.setMessage(R.string.warning_remove_account);
-                    builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface p1, int p2) {
-                            new InvalidateTokenTask(PojavLoginActivity.this)
-                                    .execute(selectedAccName);
-                            accountListLayout.removeAllViewsInLayout();
-                        }
-                    });
-                    builder2.setNegativeButton(android.R.string.cancel, null);
-                    builder2.show();
+                    new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
+                    accountListLayout.removeViewsInLayout(0,1);
                 }
             });
 
