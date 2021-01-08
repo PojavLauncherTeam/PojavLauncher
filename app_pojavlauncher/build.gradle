@@ -24,7 +24,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156237
-        versionName "3.3.1b_6409b_20201218"
+        versionName "3.3.1b_6409b_20210108"
         multiDexEnabled true //important
     }
 	
