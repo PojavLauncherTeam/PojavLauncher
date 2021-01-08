@@ -220,7 +220,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             File lastCrashFile = Tools.lastFileModified(Tools.DIR_HOME_CRASH);
             if(CrashFragment.isNewCrash(lastCrashFile) || !mCrashView.getLastCrash().isEmpty()){
                 mCrashView.resetCrashLog = false;
-                selectTabPage(2);
+                initTabs(2);
 
             } /*else throw new Exception();*/
         } catch(Throwable e) {
@@ -236,5 +236,5 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         return super.onTouchEvent(event);
     }
 
-    protected abstract void selectTabPage(int pageIndex);
+    protected abstract void initTabs(int pageIndex);
 }

@@ -4,6 +4,8 @@ import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.VerticalTabLayout.ViewPagerAdapter;
 import android.view.View;
 import android.widget.AdapterView;
@@ -90,6 +92,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         Tabs[1] = findViewById(R.id.btnTab2);
         Tabs[2] = findViewById(R.id.btnTab3);
         Tabs[3] = findViewById(R.id.btnTab4);
+
 
         pickAccount();
         
@@ -191,11 +194,13 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         mPlayButton = (Button) findViewById(R.id.launchermainPlayButton);
 
         statusIsLaunching(false);
+
+        initTabs(0);
     }
 
 
-    @Override
-    protected void selectTabPage(int pageIndex){
+
+    private void selectTabPage(int pageIndex){
         viewPager.setCurrentItem(pageIndex);
         setTabActive(pageIndex);
     }
@@ -244,6 +249,17 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         animation.setDuration(250);
         animation.addUpdateListener(animation1 -> selected.setY((float) animation1.getAnimatedValue()));
         animation.start();
+    }
+
+    protected void initTabs(int activeTab){
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                selectTabPage(activeTab);
+            }
+        }, 500);
     }
 
 }
