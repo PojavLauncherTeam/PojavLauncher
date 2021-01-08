@@ -729,12 +729,14 @@ public class PojavLoginActivity extends BaseActivity
                 public void onClick(View v) {
                     new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
                     accountListLayout.removeViewsInLayout(0,1);
+                    //Resize the window
+                    accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*150));
                 }
             });
 
         }
 
-        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*190));
+        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*150));
         accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         accountDialog.show();
     }
