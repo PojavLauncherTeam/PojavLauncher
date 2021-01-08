@@ -57,6 +57,7 @@
     <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Làm sạch file bộ nhớ đệm</string>
     <string name="mcl_launch_downloading">Đang tải xuống %s</string>
+    <string name="mcl_launch_downloading_progress">"Đang tải %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
     <string name="mcl_options">Tùy chọn</string>
     <string name="mcl_option_modmgr">Quản lý mod (không có chức năng)</string>
@@ -98,6 +99,7 @@
     <string name="global_save">Lưu</string>
     <string name="global_unpacking">Đang giải nén %s</string>
     <string name="global_error_field_empty">Trường này không được để trống</string>
+    <string name="global_waiting">Đợi</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -159,6 +161,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Tùy chỉnh %s</string>
     <string name="customctrl_remove">Xóa %s?</string>
     <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_specialkey">Phím đặc biệt</string>
@@ -171,6 +174,7 @@
     <string name="customctrl_transparency_text">Độ trong suốt của chữ</string>
     <string name="customctrl_keycombine">Kết hợp phím</string>
     <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Thêm nút</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json thông thường</string>
