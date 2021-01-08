@@ -4,7 +4,6 @@
         <item>@string/mcl_option_modinstall</item>
         <item>@string/mcl_option_modinstallwitharg</item>
         <item>@string/mcl_option_customcontrol</item>
-        <item>@string/mcl_option_settings</item>
         <item>@string/mcl_option_about</item>
     </string-array>
 </resources>

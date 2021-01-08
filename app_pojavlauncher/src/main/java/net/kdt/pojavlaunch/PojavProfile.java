@@ -17,7 +17,7 @@ public class PojavProfile
 	private static String PROFILE_PREF = "pojav_profile";
 	private static String PROFILE_PREF_FILE = "file";
 	public static String PROFILE_PREF_TEMP_CONTENT = "tempContent";
-	
+
 	public static SharedPreferences getPrefs(Context ctx) {
 		return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
 	}
@@ -58,7 +58,7 @@ public class PojavProfile
             return null;
         }
     }
-	
+
     public static String getCurrentProfileName(Context ctx) {
         String name = getPrefs(ctx).getString(PROFILE_PREF_FILE, "");
         // A dirty fix
@@ -101,7 +101,7 @@ public class PojavProfile
     public static void launch(Activity ctx, Object o) {
         PojavProfile.setCurrentProfile(ctx, o);
 
-        Intent intent = new Intent(ctx, PojavV2ActivityManager.getLauncherRemakeVer(ctx)); //MCLauncherActivity.class);
+        Intent intent = new Intent(ctx, PojavLauncherActivity.class); //MCLauncherActivity.class);
         ctx.startActivity(intent);
     }
 

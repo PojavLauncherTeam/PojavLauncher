@@ -1,85 +1,95 @@
 package net.kdt.pojavlaunch;
 
-import android.os.*;
-import android.support.design.widget.*;
-import android.support.design.widget.VerticalTabLayout.*;
-import androidx.core.view.*;
-import androidx.appcompat.app.*;
+import android.animation.ValueAnimator;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.design.widget.VerticalTabLayout.ViewPagerAdapter;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-
-import java.io.*;
-import java.util.*;
-
-import net.kdt.pojavlaunch.fragments.*;
-import net.kdt.pojavlaunch.prefs.*;
-
-import org.lwjgl.glfw.*;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager.widget.ViewPager;
-import net.kdt.pojavlaunch.value.*;
-//import android.support.v7.view.menu.*;
-//import net.zhuoweizhang.boardwalk.downloader.*;
+
+import net.kdt.pojavlaunch.fragments.ConsoleFragment;
+import net.kdt.pojavlaunch.fragments.CrashFragment;
+import net.kdt.pojavlaunch.fragments.LauncherFragment;
+import net.kdt.pojavlaunch.prefs.LauncherPreferenceFragment;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PojavLauncherActivity extends BaseLauncherActivity
 {
-    //private FragmentTabHost mTabHost;
-    private LinearLayout fullTab, leftTab;
-    /*
-     private PojavLauncherViewPager viewPager;
-     private VerticalTabLayout tabLayout;
-     */
 
     private ViewPager viewPager;
-    private VerticalTabLayout tabLayout;
 
     private TextView tvUsernameView;
     private Spinner accountSelector;
     private ViewPagerAdapter viewPageAdapter;
+    private final Button[] Tabs = new Button[4];
+    private View selected;
 
     private Button switchUsrBtn, logoutBtn; // MineButtons
-    private ViewGroup leftView, rightView;
+
+    public PojavLauncherActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.launcher_main_v4);
+
 
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
         }
-        
-        setContentView(R.layout.launcher_main_v3);
-        // setContentView(R.layout.launcher_main);
 
-        leftTab = findViewById(R.id.launchermain_layout_leftmenu);
-        leftTab.setLayoutParams(new LinearLayout.LayoutParams(
-            CallbackBridge.windowWidth / 4,
-            LinearLayout.LayoutParams.MATCH_PARENT));
-        
-        fullTab = findViewById(R.id.launchermain_layout_viewpager);
-        tabLayout = findViewById(R.id.launchermainTabLayout);
+
         viewPager = findViewById(R.id.launchermainTabPager);
+        selected = findViewById(R.id.viewTabSelected);
 
         mConsoleView = new ConsoleFragment();
         mCrashView = new CrashFragment();
 
         viewPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPageAdapter.addFragment(new LauncherFragment(), R.drawable.ic_menu_news, getString(R.string.mcl_tab_news));
-        viewPageAdapter.addFragment(mConsoleView, R.drawable.ic_menu_java, getString(R.string.mcl_tab_console));
+        viewPageAdapter.addFragment(new LauncherFragment(), 0, getString(R.string.mcl_tab_news));
+        viewPageAdapter.addFragment(mConsoleView, 0, getString(R.string.mcl_tab_console));
         viewPageAdapter.addFragment(mCrashView, 0, getString(R.string.mcl_tab_crash));
-        viewPageAdapter.addFragment(new LauncherPreferenceFragment(), R.drawable.ic_menu_settings,
-            getString(R.string.mcl_option_settings));
-        
+        viewPageAdapter.addFragment(new LauncherPreferenceFragment(), 0, getString(R.string.mcl_option_settings));
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                setTabActive(position);
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         viewPager.setAdapter(viewPageAdapter);
-        // tabLayout.setTabMode(VerticalTabLayout.MODE_SCROLLABLE);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setLastTabAsBottom();
 
         tvUsernameView = (TextView) findViewById(R.id.launchermain_text_welcome);
         mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
+
+        Tabs[0] = findViewById(R.id.btnTab1);
+        Tabs[1] = findViewById(R.id.btnTab2);
+        Tabs[2] = findViewById(R.id.btnTab3);
+        Tabs[3] = findViewById(R.id.btnTab4);
 
         pickAccount();
         
@@ -128,6 +138,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 }
             }
         }
+
         accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> p1, View p2, int position, long p4) {
@@ -167,7 +178,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }
 
         //mAvailableVersions;
-
         ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
         adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         mVersionSelector = (Spinner) findViewById(R.id.launchermain_spinner_version);
@@ -175,40 +185,21 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         mLaunchProgress = (ProgressBar) findViewById(R.id.progressDownloadBar);
         mLaunchTextStatus = (TextView) findViewById(R.id.progressDownloadText);
-        LinearLayout exitLayout = (LinearLayout) findViewById(R.id.launcherMainExitbtns);
-        switchUsrBtn = (Button) exitLayout.getChildAt(0);
-        logoutBtn = (Button) exitLayout.getChildAt(1);
+        switchUsrBtn = (Button) findViewById(R.id.infoDevBtn);
+        logoutBtn = (Button) findViewById(R.id.switchUserBtn);
 
-        leftView = (LinearLayout) findViewById(R.id.launcherMainLeftLayout);
-        mPlayButton = (Button) findViewById(R.id.launcherMainPlayButton);
-        rightView = (ViewGroup) findViewById(R.id.launcherMainRightLayout);
+        mPlayButton = (Button) findViewById(R.id.launchermainPlayButton);
 
         statusIsLaunching(false);
     }
 
-    @Override
-    protected float updateWidthHeight() {
-        float leftRightWidth = (float) CallbackBridge.windowWidth / 100f * 32f;
-        float mPlayButtonWidth = CallbackBridge.windowWidth - leftRightWidth * 2f;
-        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth,
-            (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
-        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth,
-            (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
-        leftView.setLayoutParams(leftRightParams);
-        rightView.setLayoutParams(leftRightParams);
-        mPlayButton.setLayoutParams(mPlayButtonParams);
-
-        return leftRightWidth;
-    }
 
     @Override
     protected void selectTabPage(int pageIndex){
-        if (tabLayout.getSelectedTabPosition() != pageIndex) {
-            tabLayout.setScrollPosition(pageIndex,0f,true);
-            viewPager.setCurrentItem(pageIndex);
-        }
+        viewPager.setCurrentItem(pageIndex);
+        setTabActive(pageIndex);
     }
-    
+
     private void pickAccount() {
         try {
             mProfile = PojavProfile.getCurrentProfileContent(this);
@@ -221,19 +212,39 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     public void statusIsLaunching(boolean isLaunching) {
-        LinearLayout.LayoutParams reparam = new LinearLayout.LayoutParams((int) updateWidthHeight(),
-            LinearLayout.LayoutParams.WRAP_CONTENT);
-        ViewGroup.MarginLayoutParams lmainTabParam = (ViewGroup.MarginLayoutParams) fullTab.getLayoutParams();
         int launchVisibility = isLaunching ? View.VISIBLE : View.GONE;
         mLaunchProgress.setVisibility(launchVisibility);
         mLaunchTextStatus.setVisibility(launchVisibility);
-        lmainTabParam.bottomMargin = reparam.height;
-        leftView.setLayoutParams(reparam);
 
         switchUsrBtn.setEnabled(!isLaunching);
         logoutBtn.setEnabled(!isLaunching);
         mVersionSelector.setEnabled(!isLaunching);
         canBack = !isLaunching;
     }
+
+    public void onTabClicked(View view) {
+        for(int i=0; i<Tabs.length;i++){
+            if(view.getId() == Tabs[i].getId()) {
+                selectTabPage(i);
+                return;
+            }
+        }
+    }
+
+    private void setTabActive(int index){
+        for (Button tab : Tabs) {
+            tab.setTypeface(null, Typeface.NORMAL);
+            tab.setTextColor(Color.rgb(220,220,220)); //Slightly less bright white.
+        }
+        Tabs[index].setTypeface(Tabs[index].getTypeface(), Typeface.BOLD);
+        Tabs[index].setTextColor(Color.WHITE);
+
+        //Animating the white bar on the left
+        ValueAnimator animation = ValueAnimator.ofFloat(selected.getY(), Tabs[index].getY()+(Tabs[index].getHeight()-selected.getHeight())/2f);
+        animation.setDuration(250);
+        animation.addUpdateListener(animation1 -> selected.setY((float) animation1.getAnimatedValue()));
+        animation.start();
+    }
+
 }
 

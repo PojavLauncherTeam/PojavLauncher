@@ -75,10 +75,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                         case 2: // Custom controls
                             startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
                             break;
-                        case 3: // Settings
-                            startActivity(new Intent(BaseLauncherActivity.this, LauncherPreferenceActivity.class));
-                            break;
-                        case 4: { // About
+                        case 3: { // About
                                 final AlertDialog.Builder aboutB = new AlertDialog.Builder(BaseLauncherActivity.this);
                                 aboutB.setTitle(R.string.mcl_option_about);
                                 try {
@@ -224,6 +221,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             if(CrashFragment.isNewCrash(lastCrashFile) || !mCrashView.getLastCrash().isEmpty()){
                 mCrashView.resetCrashLog = false;
                 selectTabPage(2);
+
             } /*else throw new Exception();*/
         } catch(Throwable e) {
             e.printStackTrace();
@@ -239,5 +237,4 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     }
 
     protected abstract void selectTabPage(int pageIndex);
-    protected abstract float updateWidthHeight();
 }
