@@ -38,7 +38,7 @@ public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
         if (result != null) {
             Tools.showError(ctx, result);
         }
-        boolean test = new File(Tools.DIR_ACCOUNT_NEW + "/" + path + ".json").delete();
+        new File(Tools.DIR_ACCOUNT_NEW + "/" + path + ".json").delete();
     }
 }
 
