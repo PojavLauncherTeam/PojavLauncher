@@ -10,13 +10,13 @@ android {
         abortOnError false
     }
 	
-	signingConfigs {
+    signingConfigs {
         customDebug {
             storeFile file("debug.keystore")
             storePassword "android"
             keyAlias "androiddebugkey"
             keyPassword "android"
-		}
+        }
     }
 	
     defaultConfig {
@@ -24,10 +24,14 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156237
-        versionName "3.3.1b_6409b_20210108"
+        versionName "3.3.1b_6409b_${build()}"
         multiDexEnabled true //important
     }
-	
+
+    def getDate() {
+        return new Date().format('yyyyMMdd')
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
