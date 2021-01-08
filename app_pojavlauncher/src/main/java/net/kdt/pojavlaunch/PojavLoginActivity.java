@@ -671,8 +671,11 @@ public class PojavLoginActivity extends BaseActivity
     public void loginSavedAcc(View view) {
         final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
+        int xScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().widthPixels;
+        int yScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().heightPixels;
+
         accountDialog.setContentView(R.layout.simple_account_list_holder);
-        accountDialog.getWindow().setLayout(800,500);
+        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)(yScreen*0.8));
 
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
