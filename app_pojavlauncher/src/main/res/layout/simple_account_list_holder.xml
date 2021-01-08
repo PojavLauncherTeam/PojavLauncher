@@ -17,7 +17,7 @@
         android:textStyle="bold"
         android:textColor="@android:color/white"
 
-        android:text="Select Account"
+        android:text="@string/login_select_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
