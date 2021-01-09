@@ -87,9 +87,9 @@
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_chat">Сүбхәт</string>
-    <string name="control_zoom">Зум (С)</string>
-    <string name="control_primary">ҺСТ</string>
-    <string name="control_secondary">УСТ</string>
+    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Зум (С)</string>
+    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">ҺСТ</string>
+    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">УСТ</string>
     <string name="control_shift">◇</string>
     <string name="control_up">▲</string>
     <string name="control_left">◀</string>
