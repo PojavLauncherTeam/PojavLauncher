@@ -31,7 +31,7 @@
     <string name="warning_remove_account">Ce compte sera retiré !</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installer l\'environnement d\'exécution Java %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches json</string>
+    <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches (.json)</string>
     <string name="alerttitle_installmod">Sélectionnez un installateur de mods</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher a cessé de fonctionner de façon inattendue</string>
@@ -70,7 +70,7 @@
     <string name="mcl_setting_title_uninstalljre">Désinstaller l\'environnement d\'exécution Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Redémarrage du Launcher requis] Cela vous permet de réinstaller l\'environnement d\'exécution Java</string>
     <string name="mcl_setting_title_freeform">Lancer Minecraft en mode libre</string>
-    <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 ou une version supérieure.</string>
+    <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 +</string>
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_buttonscale">Échelle des boutons de contrôle</string>
