@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.viewpager.widget.ViewPager;
 
 import net.kdt.pojavlaunch.fragments.ConsoleFragment;
@@ -27,6 +29,8 @@ import net.kdt.pojavlaunch.value.MinecraftAccount;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_HIDE_SIDEBAR;
 
 public class PojavLauncherActivity extends BaseLauncherActivity
 {
@@ -199,6 +203,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         statusIsLaunching(false);
 
         initTabs(0);
+        restoreOldLook(PREF_HIDE_SIDEBAR);
     }
 
 
@@ -265,5 +270,23 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }, 500);
     }
 
+    private void restoreOldLook(boolean oldLookState){
+        if(oldLookState){
+            //UI v1 Style
+            //Hide the sidebar
+            Guideline guideLine = findViewById(R.id.guidelineLeft);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
+            params.guidePercent = 0; // 0%, range: 0 <-> 1
+            guideLine.setLayoutParams(params);
+
+            //Remove the selected Tab
+            selected.setVisibility(View.GONE);
+
+            //Enlarge the button, but just a bit.
+            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
+            params.width = (int)(params.width*1.80);
+            mPlayButton.setLayoutParams(params);
+        }
+    }
 }
 
