@@ -10,11 +10,11 @@
     <string name="language_name">NEDERLANDS - NL</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail of gebruikersnaam</string>
-    <string name="login_online_username_question">(Welke gebruik ik dan?)</string>
+    <string name="login_online_username_question">(Welke moet ik gebruiken?)</string>
     <string name="login_online_password_hint">Wachtwoord</string>
     <string name="login_online_password_question">Wachtwoord vergeten?</string>
     <string name="login_online_remember">Mijn gegevens onthouden?</string>
-    <string name="login_online_check_keeplogin">Houd mij ingelogd</string>
+    <string name="login_online_check_keeplogin">Ingelogd blijven</string>
     <string name="login_online_login_label">Aanmelden</string>
     <string name="login_online_create_account">(Nieuw account aanmaken?)</string>
     <string name="login_offline_switch">Offline account?</string>
@@ -23,7 +23,7 @@
     <string name="login_error_short_username">Gebruikersnaam moet uit minstens 3 tekens bestaan</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
     <string name="login_microsoft">Microsoft login</string>
-    <string name="login_select_account">Selecteer gebruiker</string>
+    <string name="login_select_account">Selecteer account</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
     <!-- Warnings -->
@@ -154,7 +154,7 @@
     <string name="control_mouseon">Mouse: aan </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Geforceerd sluiten</string>
-    <string name="control_viewout">Log output</string>
+    <string name="control_viewout">Logboekuitvoer</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Verstuur aangepaste sleutelcode</string>
     <!--
