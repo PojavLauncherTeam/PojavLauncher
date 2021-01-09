@@ -44,13 +44,25 @@
 			android:layout_gravity="start"
 			android:text="@string/login_online_password_hint"/>
 
-		<com.kdt.mcgui.MineEditText
-			android:imeOptions="flagNoExtractUi"
+		<com.google.android.material.textfield.TextInputLayout
 			android:layout_width="match_parent"
-			android:layout_height="30dp"
-			android:id="@+id/login_edit_password"
-			android:inputType="textPassword"
-			android:layout_marginBottom="5dp"/>
+			android:layout_height="match_parent"
+			android:layout_marginTop="-10dp"
+			app:passwordToggleEnabled="true"
+			app:passwordToggleTint="@android:color/white"
+			>
+
+			<com.kdt.mcgui.MineEditText
+				android:imeOptions="flagNoExtractUi"
+				android:layout_width="match_parent"
+				android:layout_height="30dp"
+				android:id="@+id/login_edit_password"
+				android:inputType="textPassword"
+				/>
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+
 
 		<CheckBox
 			android:layout_height="wrap_content"

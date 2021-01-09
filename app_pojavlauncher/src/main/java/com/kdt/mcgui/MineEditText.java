@@ -6,7 +6,7 @@ import android.widget.*;
 import net.kdt.pojavlaunch.*;
 import android.graphics.*;
 
-public class MineEditText extends EditText
+public class MineEditText extends com.google.android.material.textfield.TextInputEditText
 {
 	public MineEditText(Context ctx)
 	{
