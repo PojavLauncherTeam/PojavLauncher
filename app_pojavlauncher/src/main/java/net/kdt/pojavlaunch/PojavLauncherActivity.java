@@ -88,6 +88,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         tvUsernameView = (TextView) findViewById(R.id.launchermain_text_welcome);
         mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
+        //The following line is used to make this TextView horizontally scroll if the version name is larger than the view
+        mTextVersion.setSelected(true);
+
         Tabs[0] = findViewById(R.id.btnTab1);
         Tabs[1] = findViewById(R.id.btnTab2);
         Tabs[2] = findViewById(R.id.btnTab3);
