@@ -55,7 +55,7 @@
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Membersihkan file-file cache</string>
+    <string name="mcl_launch_cleancache">Membersihkan berkas-berkas cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_downloading_progress">"Mengunduh %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
@@ -85,8 +85,8 @@
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Tambah</string>
@@ -156,14 +156,14 @@
     <string name="control_forceclose">Tutup secara paksa</string>
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
-    <string name="control_customkey">Kirim kode kunci kustom</string>
+    <string name="control_customkey">Kirim keycode kustom</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Mengedit %s</string>
     <string name="customctrl_remove">Hapus %s?</string>
-    <string name="customctrl_keyname">Kode kunci</string>
+    <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
     <string name="customctrl_toggle">Bisa beralih</string>
