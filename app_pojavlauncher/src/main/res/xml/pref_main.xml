@@ -26,6 +26,13 @@
             android:title="@string/mcl_setting_title_freeform"
             app2:icon="@drawable/freeform_opt" />
 
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="hideSidebar"
+            android:summary="@string/mcl_setting_subtitle_hide_sidebar"
+            android:title="@string/mcl_setting_title_hide_sidebar"
+            app2:icon="@drawable/hide_sidebar" />
+
         <EditTextPreference
             android:dialogTitle="@string/mcl_setting_title_javaargs"
             android:icon="@drawable/jre_args"
