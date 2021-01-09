@@ -24,13 +24,13 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156237
-        versionName "3.3.1b_6409b_${getDate()}"
+        versionName "3.3.1b_6409b_20200109" // getDate()
         multiDexEnabled true //important
     }
 
-    def getDate() {
-        return new Date().format('yyyyMMdd')
-    }
+//    def getDate() {
+//        return new Date().format('yyyyMMdd')
+//    }
 
     buildTypes {
         debug {
