@@ -147,7 +147,7 @@ static void *logger_thread() {
             rsize=rsize-1;
         }
         buf[rsize]=0x00;
-        __android_log_write(ANDROID_LOG_SILENT,tag,buf);
+        __android_log_write(ANDROID_LOG_INFO,tag,buf);
     }
 }
 

@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+def getDate() {
+    return new Date().format('yyyyMMdd')
+}
+
 android {
     compileSdkVersion 29
     dexOptions {
@@ -24,12 +28,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156237
-        versionName "3.3.1b_6409b_${getDate()}"
+        versionName "3.3.1b_6409b_" + getDate()
         multiDexEnabled true //important
-    }
-
-    def getDate() {
-        return new Date().format('yyyyMMdd')
     }
 
     buildTypes {
