@@ -273,13 +273,19 @@
 
     <TextView
         android:id="@+id/launcherMainVersionView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         android:gravity="center"
         android:text="@string/global_waiting"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/launchermain_text_welcome"
-        app:layout_constraintStart_toStartOf="@+id/launchermain_text_welcome"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/launchermainPlayButton"
         app:layout_constraintTop_toBottomOf="@+id/launchermain_text_welcome" />
 
     <Button
