@@ -71,6 +71,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher Neustart erforderlich] Mit dieser Option können sie Java Runtime erneut installieren</string>
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Seitenleiste ausblenden</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgiker, die die alte v1-Benutzeroberfläche bevorzugen, könnten dies mögen. Gibt dir ein besseres Vollbild-Erlebnis.</string>
     <string name="mcl_setting_title_longpresstrigger">Wie lange wird nach langem Drücken ausgelöst</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
     <string name="mcl_setting_title_buttonscale">Größe der Steuerungsschaltflächen</string>
