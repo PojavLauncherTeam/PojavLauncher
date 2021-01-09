@@ -57,6 +57,7 @@
     <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
     <string name="mcl_launch_downloading">Baixando %s</string>
+    <string name="mcl_launch_downloading_progress">"Baixando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparando para baixar os recursos</string>
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modmgr">Gerenciador de mods (sem função)</string>
@@ -70,6 +71,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Reinicialização necessária] Isso permite você reinstalar o Java Runtime</string>
     <string name="mcl_setting_title_freeform">Iniciar o Minecraft no modo Freeform</string>
     <string name="mcl_setting_subtitle_freeform">Executar Minecraft em janela flutuante. Requer Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Ocultar barra lateral</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Pessoal nostálgico preferindo a antiga interface v1 pode gostar disso. Dá a você uma experiência de tela cheia.</string>
     <string name="mcl_setting_title_longpresstrigger">Tempo para acionar função ao manter pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
     <string name="mcl_setting_title_buttonscale">Aumentar escala de botões</string>
