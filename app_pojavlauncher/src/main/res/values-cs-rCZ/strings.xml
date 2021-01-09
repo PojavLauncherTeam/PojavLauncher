@@ -71,6 +71,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Restart launcheru vyžadován] Toto vám umožní přeinstalovat Java Runtime</string>
     <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Volného okna</string>
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Skrýt postranní panel</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňující staré uživatelské rozhraní v1. Dá vám více celo-obrazné prostředí.</string>
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
     <string name="mcl_setting_title_buttonscale">Škálování kontrolních tlačítek</string>
