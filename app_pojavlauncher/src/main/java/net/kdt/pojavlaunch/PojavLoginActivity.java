@@ -1,9 +1,12 @@
 package net.kdt.pojavlaunch;
 
 import android.*;
+import android.app.Dialog;
 import android.content.*;
 import android.content.pm.*;
 import android.content.res.*;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.*;
 import android.os.*;
 
@@ -666,94 +669,87 @@ public class PojavLoginActivity extends BaseActivity
     }
     
     public void loginSavedAcc(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
-        if (Tools.ENABLE_DEV_FEATURES) {
-            builder.setNegativeButton("Toggle UI v2", new DialogInterface.OnClickListener(){
+        int xScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().widthPixels;
+        int yScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().heightPixels;
 
-                    @Override
-                    public void onClick(DialogInterface p1, int p2)
-                    {
-                        int ver = PojavV2ActivityManager.getLauncherRemakeInt(PojavLoginActivity.this) == 0 ? 1 : 0;
-                        PojavV2ActivityManager.setLauncherRemakeVer(PojavLoginActivity.this, ver);
-                        Toast.makeText(PojavLoginActivity.this, "Changed to use v" + (ver + 1), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        }
-        
-        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        accountDialog.setContentView(R.layout.simple_account_list_holder);
+
+
+        LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
         for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
-            listAdapter.add(s.substring(0, s.length() - 5));
-        }
-        
-        builder.setPositiveButton(android.R.string.cancel, null);
-        builder.setTitle(this.getString(R.string.login_select_account));
-        builder.setSingleChoiceItems(listAdapter, 0, new DialogInterface.OnClickListener(){
+            View child = inflater.inflate(R.layout.simple_account_list_item, null);
+            TextView accountName = child.findViewById(R.id.accountName);
+            ImageButton removeButton = child.findViewById(R.id.removeBtn);
+
+            accountName.setText(s.substring(0, s.length() - 5));
+
+            accountListLayout.addView(child);
+
+            accountName.setOnClickListener(new View.OnClickListener() {
+                final String selectedAccName = accountName.getText().toString();
                 @Override
-                public void onClick(final DialogInterface di, final int selectedIndex) {
-                    PopupMenu popup = new PopupMenu(PojavLoginActivity.this, getViewFromList(selectedIndex, ((AlertDialog) di).getListView()));
-                    popup.inflate(R.menu.menu_options_account);
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public void onClick(View v) {
+                    try {
+                        RefreshListener authListener = new RefreshListener(){
                             @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                final String selectedAccName = listAdapter.getItem(selectedIndex);
-                                switch (item.getItemId()) {
-                                    case R.id.menu_account_select:
-                                        try {
-                                            RefreshListener authListener = new RefreshListener(){
-                                                @Override
-                                                public void onFailed(Throwable e) {
-                                                    Tools.showError(PojavLoginActivity.this, e);
-                                                }
-
-                                                @Override
-                                                public void onSuccess(MinecraftAccount out) {
-                                                    di.dismiss();
-                                                    mProfile = out;
-                                                    playProfile(true);
-                                                }
-                                            };
-                                            
-                                            MinecraftAccount acc = MinecraftAccount.load(selectedAccName);
-                                            if (acc.isMicrosoft){
-                                                new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
-                                                    .execute("true", acc.msaRefreshToken);
-                                            } else if (acc.accessToken.length() >= 5) {
-                                                PojavProfile.updateTokens(PojavLoginActivity.this, selectedAccName, authListener);
-                                            } else {
-                                                di.dismiss();
-                                                PojavProfile.launch(PojavLoginActivity.this, selectedAccName);
-                                            }
-                                        } catch (Exception e) {
-                                            Tools.showError(PojavLoginActivity.this, e);
-                                        }
-                                        break;
-                                    
-                                    case R.id.menu_account_remove:
-                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
-                                        builder2.setTitle(selectedAccName);
-                                        builder2.setMessage(R.string.warning_remove_account);
-                                        builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                                                @Override
-                                                public void onClick(DialogInterface p1, int p2) {
-                                                    new InvalidateTokenTask(PojavLoginActivity.this)
-                                                        .execute(selectedAccName);
-                                                    listAdapter.remove(selectedAccName);
-                                                    listAdapter.notifyDataSetChanged();
-                                                }
-                                            });
-                                        builder2.setNegativeButton(android.R.string.cancel, null);
-                                        builder2.show();
-                                        break;
-                                }
-                                return true;
+                            public void onFailed(Throwable e) {
+                                Tools.showError(PojavLoginActivity.this, e);
                             }
-                        });
-                    popup.show();
+
+                            @Override
+                            public void onSuccess(MinecraftAccount out) {
+                                accountDialog.dismiss();
+                                mProfile = out;
+                                playProfile(true);
+                            }
+                        };
+
+                        MinecraftAccount acc = MinecraftAccount.load(selectedAccName);
+                        if (acc.isMicrosoft){
+                            new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
+                                    .execute("true", acc.msaRefreshToken);
+                        } else if (acc.accessToken.length() >= 5) {
+                            PojavProfile.updateTokens(PojavLoginActivity.this, selectedAccName, authListener);
+                        } else {
+                            accountDialog.dismiss();
+                            PojavProfile.launch(PojavLoginActivity.this, selectedAccName);
+                        }
+                    } catch (Exception e) {
+                        Tools.showError(PojavLoginActivity.this, e);
+                    }
                 }
             });
-        builder.show();
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                final String selectedAccName = accountName.getText().toString();
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
+                    builder2.setTitle(selectedAccName);
+                    builder2.setMessage(R.string.warning_remove_account);
+                    builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface p1, int p2) {
+                            new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
+                            accountListLayout.removeViewsInLayout(0,1);
+                            //Resize the window
+                            accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*150));
+                        }
+                    });
+                    builder2.setNegativeButton(android.R.string.cancel, null);
+                    builder2.show();
+                }
+            });
+
+        }
+
+        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*150));
+        accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        accountDialog.show();
     }
     
     private MinecraftAccount loginOffline() {
