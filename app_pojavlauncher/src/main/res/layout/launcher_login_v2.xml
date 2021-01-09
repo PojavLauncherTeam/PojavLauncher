@@ -30,7 +30,7 @@
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:text="@string/login_online_username_hint"
-			android:layout_gravity="left"/>
+			android:layout_gravity="start"/>
 
 		<com.kdt.mcgui.MineEditText
 			android:imeOptions="flagNoExtractUi"
@@ -43,7 +43,7 @@
 		<TextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_gravity="left"
+			android:layout_gravity="start"
 			android:text="@string/login_online_password_hint"/>
 
 		<com.kdt.mcgui.MineEditText
@@ -57,14 +57,14 @@
 		<CheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_gravity="left"
+			android:layout_gravity="start"
 			android:text="@string/login_online_check_keeplogin"
 			android:id="@+id/login_switch_remember"/>
 
 		<CheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_gravity="left"
+			android:layout_gravity="start"
 			android:text="@string/login_offline_label"
 			android:id="@+id/login_switch_offline"/>
 
