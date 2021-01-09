@@ -22,17 +22,17 @@
     <string name="login_offline_alert_skip">Ignora</string>
     <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
     <string name="login_error_exist_username">Il nome utente esiste già</string>
-    <string name="login_microsoft">Accedi con un account Microsoft</string>
+    <string name="login_microsoft">Accedi con Microsoft</string>
     <string name="login_select_account">Seleziona account</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Scorri da destra verso sinistra per aprire il menu ◀\nTieni premuto per personalizzare: modificare, ridimensionare o eliminare."</string>
+    <string name="hint_control_mapping">"Scorri da destra verso sinistra per aprire il menu ◀\nTieni premuto per personalizzare: modificare, ridimensionare o cancellare."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Esci</string>
     <string name="warning_remove_account">Questo account verrà rimosso!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Installa Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Installa Runtime Java %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Seleziona un keymap json</string>
-    <string name="alerttitle_installmod">Seleziona un mod installer</string>
+    <string name="alerttitle_installmod">Seleziona un installer mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher è crashato in modo imprevisto</string>
     <string name="error_checklog">Errore! Per favore controlla i log sotto: %s</string>
@@ -44,7 +44,7 @@
     <string name="toast_permission_denied">È necessario il permesso di lettura/scrittura sulla archiviazione!</string>
     <string name="toast_login_error">Qualcosa è andato storto dopo l\'accesso. Per favore segnalalo allo sviluppatore.\nErrore: %s</string>
     <string name="toast_optifine_success">Installato con successo</string>
-    <string name="toast_uninstalljre_done">Disinstallazione Java Runtime finita</string>
+    <string name="toast_uninstalljre_done">Disinstallazione Runtime Java completato</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -71,6 +71,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Riavvio del launcher necessario] Questo ti lascerà reinstallare il Runtime Java</string>
     <string name="mcl_setting_title_freeform">Avvia Minecraft in modalità finestra</string>
     <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Nessario Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Nascondi barra laterale</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Questo potrebbe piacere a coloro che preferiscono la vecchia l\'interfaccia grafica v1. Dà una migliore esperienza a schermo intero.</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
     <string name="mcl_setting_title_buttonscale">Ridimensionamento controlli</string>
