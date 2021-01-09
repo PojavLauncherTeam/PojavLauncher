@@ -166,7 +166,7 @@ JNIEXPORT void JNICALL Java_sun_awt_X11GraphicsConfig_init(JNIEnv *env, jobject 
     // Android: 16bits pixel
     jclass cls = (*env)->GetObjectClass(env, this);
     jfieldID bitsPerPixel = (*env)->GetFieldID(env, cls, "bitsPerPixel", "I");
-    (*env)->SetIntField(env, cls, bitsPerPixel,
+    (*env)->SetIntField(env, this, bitsPerPixel,
                         (jint) 16 /* tempImage->bits_per_pixel */);
 }
 
