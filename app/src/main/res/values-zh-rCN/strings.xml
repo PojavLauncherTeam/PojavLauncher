@@ -15,7 +15,7 @@
     <string name="login_online_username_question">（使用哪个？）</string>
     <string name="login_online_password_hint">密码</string>
     <string name="login_online_password_question">忘记密码？</string>
-    <string name="login_online_remember">记住我</string>
+    <string name="login_online_remember">记住我？</string>
     <string name="login_online_check_keeplogin">保持登录状态</string>
     <string name="login_online_login_label">登录</string>
     <string name="login_online_create_account">（创建新账号？）</string>
@@ -82,7 +82,7 @@
     <string name="mcl_option_about">关于</string>
     <string name="mcl_setting_title_setmaxdxref">设定最大 DX 引用值</string>
     <string name="mcl_setting_subtitle_setmaxdxref">若转换时出现错误：“Too many ... references. You may try multi-dex option.”则调高此值。建议的值：4096或8192。</string>
-    <string name="mcl_setting_title_freeform">以自由式模式启动 Minecraft</string>
+    <string name="mcl_setting_title_freeform">以自由窗口模式启动 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长</string>
@@ -91,10 +91,10 @@
     <string name="mcl_setting_subtitle_forgetoptifpath">可能使 OptiFine 在某些设备上可以启动。</string>
     <string name="mcl_setting_category_general">通用设置</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
-    <string name="mcl_setting_veroption_release">Release</string>
-    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_release">正式版</string>
+    <string name="mcl_setting_veroption_snapshot">快照</string>
+    <string name="mcl_setting_veroption_oldalpha">远古alpha版</string>
+    <string name="mcl_setting_veroption_oldbeta">远古beta版</string>
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
     <string name="global_add">添加</string>
@@ -140,9 +140,9 @@
     <string name="control_keyboard">键盘</string>
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
-    <string name="control_zoom">缩放 (C)</string>
-    <string name="control_primary">主</string>
-    <string name="control_secondary">副</string>
+    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">缩放 (C)</string>
+    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">主</string>
+    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">副</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">背包</string>
     <string name="control_up">▲</string>
@@ -150,7 +150,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3rd</string>
+    <string name="control_thirdperson">视角</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">鼠标</string>
     <string name="control_mouseoff">鼠标：关</string>
