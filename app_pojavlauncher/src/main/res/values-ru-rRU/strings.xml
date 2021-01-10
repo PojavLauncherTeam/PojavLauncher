@@ -72,7 +72,7 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
     <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_hide_sidebar">Скрыть боковую панель</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Ностальгирующие люди, предпочитающие старый интерфейс v1 могут его вернуть. Он даст вам более полноэкранные возможности.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
