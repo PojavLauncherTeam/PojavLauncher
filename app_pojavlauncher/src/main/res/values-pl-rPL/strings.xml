@@ -73,6 +73,7 @@
     <string name="mcl_setting_title_freeform">Uruchom Minecraft w trybie swobodnym</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Ludzie Nostalgic preferujący stary interfejs v1 może to podobać. Daje ci więcej wrażeń w trybie pełnoekranowym.</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
     <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
