@@ -39,6 +39,8 @@ public class MinecraftAccount
             Bitmap bFace = Bitmap.createBitmap(pixels, 8, 8, Bitmap.Config.ARGB_8888);
             bFace.compress(Bitmap.CompressFormat.PNG, 100, outByteArr);
             skinFaceBase64 = Base64.encodeToString(outByteArr.toByteArray(), Base64.DEFAULT);
+            
+            bFace.recycle();
         } catch (IOException e) {
             // Skin refresh limit, no internet connection, etc...
             // Simply ignore updating skin face
@@ -47,6 +49,7 @@ public class MinecraftAccount
     }
     
     public String save(String outPath) throws IOException {
+        updateSkinFace();
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
         return username;
     }
