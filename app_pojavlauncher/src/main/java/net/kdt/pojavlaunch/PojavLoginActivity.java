@@ -6,6 +6,7 @@ import android.content.*;
 import android.content.pm.*;
 import android.content.res.*;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.net.*;
 import android.os.*;
