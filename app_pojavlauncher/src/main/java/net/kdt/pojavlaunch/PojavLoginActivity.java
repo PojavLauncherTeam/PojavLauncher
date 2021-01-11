@@ -854,9 +854,11 @@ public class PojavLoginActivity extends BaseActivity
                             builder.updateSkinFace();
                             mProfile = builder;
                         }
-                        v.setEnabled(true);
-                        prb.setVisibility(View.GONE);
-                        playProfile(false);
+                        runOnUiThread(() -> {
+                            v.setEnabled(true);
+                            prb.setVisibility(View.GONE);
+                            playProfile(false);
+                        });
                     }
                 }).execute(edit2.getText().toString(), edit3.getText().toString());
         }
