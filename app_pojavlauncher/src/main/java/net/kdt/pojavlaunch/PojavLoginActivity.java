@@ -738,7 +738,7 @@ public class PojavLoginActivity extends BaseActivity
                             new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
                             accountListLayout.removeViewsInLayout(0,1);
                             //Resize the window
-                            accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*150));
+                            accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int) Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*55)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
                         }
                     });
                     builder2.setNegativeButton(android.R.string.cancel, null);
@@ -748,7 +748,8 @@ public class PojavLoginActivity extends BaseActivity
 
         }
 
-        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), 200 + accountListLayout.getChildCount()*150));
+        //The value 73 and 56 are dp numbers, converted into px in order to resize the layout.
+        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*56)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
         accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         accountDialog.show();
     }
