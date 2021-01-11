@@ -57,12 +57,13 @@ public class LoginTask extends AsyncTask<String, Void, String[]>
         catch(Exception e){
             str.add(e.getMessage());
         }
-        return str.toArray(new String[0]);
+        
+        listener.onLoginDone(str.toArray(new String[0]));
     }
     
     @Override
     protected void onPostExecute(String[] result) {
-        listener.onLoginDone(result);
+        // listener.onLoginDone(result);
         super.onPostExecute(result);
     }
 }

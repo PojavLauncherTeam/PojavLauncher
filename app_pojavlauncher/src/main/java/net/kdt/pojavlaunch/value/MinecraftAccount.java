@@ -20,19 +20,19 @@ public class MinecraftAccount
     public String msaRefreshToken = "0";
     public String skinFaceBase64;
     
-    public void obtainSkinFace() {
+    public void updateSkinFace() {
         try {
             String skinFile = File.createTempFile("skin", "png", new File(Tools.DIR_DATA, "cache")).getAbsolutePath();
             Tools.downloadFile("https://sessionserver.mojang.com/session/minecraft/profile/" + profileId, skinFile);
             
             Bitmap bSkin = BitmapFactory.decodeFile(skinFile);
             if (bSkin.getWidth() != 64 || bSkin.getHeight() != 64) {
-                Log.w("SkinLoader", "Only skin size 64x64 is currently supported, this skin is " + b.getWidth() + "x" + b.getHeight());
+                Log.w("SkinLoader", "Only skin size 64x64 is currently supported, this skin is " + bSkin.getWidth() + "x" + bSkin.getHeight());
                 return;
             }
             
             int[] pixels = new int[8 * 8];
-            bSkin.getPixels(pixels, 0, b.getWidth(), 8, 8, 8, 8); 
+            bSkin.getPixels(pixels, 0, bSkin.getWidth(), 8, 8, 8, 8); 
             bSkin.recycle();
             
             ByteArrayOutputStream outByteArr = new ByteArrayOutputStream();

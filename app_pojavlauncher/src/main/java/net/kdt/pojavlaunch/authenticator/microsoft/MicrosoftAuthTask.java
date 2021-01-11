@@ -78,6 +78,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
                 acc.profileId = msa.mcUuid;
                 acc.isMicrosoft = true;
                 acc.msaRefreshToken = msa.msRefreshToken;
+                acc.updateSkinFace();
             }
             acc.save();
            

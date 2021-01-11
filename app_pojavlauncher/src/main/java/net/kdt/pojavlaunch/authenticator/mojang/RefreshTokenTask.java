@@ -54,6 +54,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
                 profilePath.accessToken = response.accessToken;
                 profilePath.username = response.selectedProfile.name;
                 profilePath.profileId = response.selectedProfile.id;
+                profilePath.updateSkinFace();
                 profilePath.save();
             }
             return null;

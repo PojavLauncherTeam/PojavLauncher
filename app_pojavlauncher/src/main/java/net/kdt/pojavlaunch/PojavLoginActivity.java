@@ -851,6 +851,7 @@ public class PojavLoginActivity extends BaseActivity
                             builder.profileId = result[3];
                             builder.username = result[4];
                             builder.selectedVersion = "1.12.2";
+                            builder.updateSkinFace();
                             mProfile = builder;
                         }
                         v.setEnabled(true);
