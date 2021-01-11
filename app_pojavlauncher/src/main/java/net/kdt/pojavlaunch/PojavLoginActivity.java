@@ -729,13 +729,9 @@ public class PojavLoginActivity extends BaseActivity
             } else {
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_steve);
             }
-            
-            Matrix matrix = new Matrix();
-            matrix.postScale(10, 10);
-            Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 80, 80, matrix, true);
-            // bitmap.recycle();
+            Bitmap upscaledBitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);
         
-            accountIcon.setImageBitmap(resizedBitmap);
+            accountIcon.setImageBitmap(upscaledBitmap);
             
             accountName.setText(accNameStr);
 
