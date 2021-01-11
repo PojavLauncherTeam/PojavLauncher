@@ -71,6 +71,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[需要重启启动器] 得以重新安装 Java 运行时环境。</string>
     <string name="mcl_setting_title_freeform">以自由窗口模式启动 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">隐藏侧边栏</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">怀念旧 v1 界面的用户可能喜欢这样。提供了更接近全屏的体验。</string>
     <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
