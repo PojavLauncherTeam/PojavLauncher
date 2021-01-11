@@ -747,7 +747,7 @@ public class PojavLoginActivity extends BaseActivity
 
         }
 
-        //The value 73 and 55 are dp numbers, converted into px in order to resize the layout.
+        //The value 73 and 56 are dp numbers, converted into px in order to resize the layout.
         accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*56)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
         accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         accountDialog.show();
