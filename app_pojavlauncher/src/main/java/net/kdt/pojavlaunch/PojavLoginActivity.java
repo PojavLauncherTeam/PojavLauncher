@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch;
 
 import android.Manifest;
-import android.R;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
