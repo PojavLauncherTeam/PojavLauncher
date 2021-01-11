@@ -46,8 +46,20 @@ public class JREUtils
         }
         return libName;
     }
-    
+    public static ArrayList<File> locateLibs(File path) {
+        ArrayList<File> ret = new ArrayList<>();
+        File[] list = path.listFiles();
+        for(File f : list) {
+            if(f.isFile() && f.getName().endsWith(".so")) {
+                ret.add(f);
+            }else if(f.isDirectory()) {
+                ret.addAll(locateLibs(f));
+            }
+        }
+        return ret;
+    }
     public static void initJavaRuntime() {
+
         dlopen(findInLdLibPath("libjli.so"));
         dlopen(findInLdLibPath("libjvm.so"));
         dlopen(findInLdLibPath("libverify.so"));
@@ -59,7 +71,9 @@ public class JREUtils
         dlopen(findInLdLibPath("libawt_headless.so"));
         dlopen(findInLdLibPath("libfreetype.so"));
         dlopen(findInLdLibPath("libfontmanager.so"));
-
+        for(File f : locateLibs(new File(Tools.DIR_DATA+"/jre_runtime/lib/aarch64"))) {
+            dlopen(f.getAbsolutePath());
+        }
         dlopen(nativeLibDir + "/libopenal.so");
         
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
