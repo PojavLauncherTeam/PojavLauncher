@@ -14,6 +14,7 @@ public class MinecraftAccount
     public String selectedVersion = "1.7.10";
     public boolean isMicrosoft = false;
     public String msaRefreshToken = "0";
+    public String skinIcon;
     
     public String save(String outPath) throws IOException {
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
