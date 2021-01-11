@@ -29,15 +29,15 @@ public class MinecraftAccount
             }
             
             int[] pixels = new int[8 * 8];
-            bSkin.getPixels(pixels, 0, bSkin.getWidth(), 8, 8, 8, 8); 
+            bSkin.getPixels(pixels, 0, 8, 8, 8, 8, 8); 
             bSkin.recycle();
             
             ByteArrayOutputStream outByteArr = new ByteArrayOutputStream();
             Bitmap bFace = Bitmap.createBitmap(pixels, 8, 8, Bitmap.Config.ARGB_8888);
             bFace.compress(Bitmap.CompressFormat.PNG, 100, outByteArr);
-            skinFaceBase64 = Base64.encodeToString(outByteArr.toByteArray(), Base64.DEFAULT);
-            
             bFace.recycle();
+            skinFaceBase64 = Base64.encodeToString(outByteArr.toByteArray(), Base64.DEFAULT);
+            outByteArr.close();
             
             Log.i("SkinLoader", "Update skin face success");
         } catch (IOException e) {
