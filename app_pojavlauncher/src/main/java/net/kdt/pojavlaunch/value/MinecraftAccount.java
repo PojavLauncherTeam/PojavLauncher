@@ -22,10 +22,7 @@ public class MinecraftAccount
     
     public void updateSkinFace() {
         try {
-            String skinFile = File.createTempFile("skin", "png", new File(Tools.DIR_DATA, "cache")).getAbsolutePath();
-            Tools.downloadFile("https://sessionserver.mojang.com/session/minecraft/profile/" + profileId, skinFile);
-            
-            Bitmap bSkin = BitmapFactory.decodeFile(skinFile);
+            Bitmap bSkin = AccountSkin.getSkin(profileId);
             if (bSkin.getWidth() != 64 || bSkin.getHeight() != 64) {
                 Log.w("SkinLoader", "Only skin size 64x64 is currently supported, this skin is " + bSkin.getWidth() + "x" + bSkin.getHeight());
                 return;
@@ -41,6 +38,8 @@ public class MinecraftAccount
             skinFaceBase64 = Base64.encodeToString(outByteArr.toByteArray(), Base64.DEFAULT);
             
             bFace.recycle();
+            
+            Log.i("SkinLoader", "Update skin face success");
         } catch (IOException e) {
             // Skin refresh limit, no internet connection, etc...
             // Simply ignore updating skin face
@@ -49,7 +48,6 @@ public class MinecraftAccount
     }
     
     public String save(String outPath) throws IOException {
-        updateSkinFace();
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
         return username;
     }

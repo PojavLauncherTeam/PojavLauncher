@@ -31,7 +31,7 @@
         android:text="Name Placeholder"
 
         app:layout_constraintBottom_toBottomOf="@+id/accountitem_button_remove"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/accountitem_button_remove"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -42,7 +42,6 @@
         android:paddingStart="10dp"
 
         android:paddingEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/accountitem_text_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_remove" />
