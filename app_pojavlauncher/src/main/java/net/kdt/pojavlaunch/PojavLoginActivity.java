@@ -720,13 +720,13 @@ public class PojavLoginActivity extends BaseActivity
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
 
             String accNameStr = s.substring(0, s.length() - 5);
-            String faceIconStr = MinecraftAccount.load(accNameStr).skinIcon;
+            String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
             final Bitmap bitmap;
-            if (faceIconStr != null) {
-                byte[] faceIconBytes = Base64.decode(faceIconStr, Base64.DEFAULT);
+            if (skinFaceBase64 != null) {
+                byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
                 bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
             } else {
-                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon_steve);
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_steve);
             }
             bitmap.setDensity(320);
             accountIcon.setImageBitmap(bitmap);

@@ -4,6 +4,10 @@ import android.util.Log;
 import net.kdt.pojavlaunch.*;
 import java.io.*;
 import com.google.gson.*;
+import android.os.Environment;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 public class MinecraftAccount
 {
@@ -14,7 +18,33 @@ public class MinecraftAccount
     public String selectedVersion = "1.7.10";
     public boolean isMicrosoft = false;
     public String msaRefreshToken = "0";
-    public String skinIcon;
+    public String skinFaceBase64;
+    
+    public void obtainSkinFace() {
+        try {
+            String skinFile = File.createTempFile("skin", "png", new File(Tools.DIR_DATA, "cache")).getAbsolutePath();
+            Tools.downloadFile("https://sessionserver.mojang.com/session/minecraft/profile/" + profileId, skinFile);
+            
+            Bitmap bSkin = BitmapFactory.decodeFile(skinFile);
+            if (bSkin.getWidth() != 64 || bSkin.getHeight() != 64) {
+                Log.w("SkinLoader", "Only skin size 64x64 is currently supported, this skin is " + b.getWidth() + "x" + b.getHeight());
+                return;
+            }
+            
+            int[] pixels = new int[8 * 8];
+            bSkin.getPixels(pixels, 0, b.getWidth(), 8, 8, 8, 8); 
+            bSkin.recycle();
+            
+            ByteArrayOutputStream outByteArr = new ByteArrayOutputStream();
+            Bitmap bFace = Bitmap.createBitmap(pixels, 8, 8, Bitmap.Config.ARGB_8888);
+            bFace.compress(Bitmap.CompressFormat.PNG, 100, outByteArr);
+            skinFaceBase64 = Base64.encodeToString(outByteArr.toByteArray(), Base64.DEFAULT);
+        } catch (IOException e) {
+            // Skin refresh limit, no internet connection, etc...
+            // Simply ignore updating skin face
+            Log.w("SkinLoader", "Could not update skin face", e);
+        }
+    }
     
     public String save(String outPath) throws IOException {
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
@@ -51,7 +81,7 @@ public class MinecraftAccount
                 acc.msaRefreshToken = "0";
             }
             return acc;
-        }catch(IOException e) {
+        } catch(IOException e) {
             Log.e(MinecraftAccount.class.getName(), "Caught an exception while loading the profile",e);
             return null;
         }
