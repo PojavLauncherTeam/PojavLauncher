@@ -682,9 +682,13 @@ public class PojavLoginActivity extends BaseActivity
 
         for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
-            TextView accountName = child.findViewById(R.id.accountName);
-            ImageButton removeButton = child.findViewById(R.id.removeBtn);
+            ImageView accountIcon = child.findViewById(R.id.accountitem_image_icon);
+            TextView accountName = child.findViewById(R.id.accountitem_text_name);
+            ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
 
+            // TODO
+            // accountIcon.setImage
+            
             accountName.setText(s.substring(0, s.length() - 5));
 
             accountListLayout.addView(child);
