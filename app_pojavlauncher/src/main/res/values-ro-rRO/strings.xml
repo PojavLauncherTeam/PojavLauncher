@@ -180,4 +180,5 @@
     <string name="main_version">Versiune:</string>
     <string name="main_nocrash">Nicio eroare detectată</string>
     <string name="main_nolog">Niciun jurnal.</string>
+    <string name="main_no_news_feed">Preluarea fluxului de știri a eșuat!</string>
 </resources>
