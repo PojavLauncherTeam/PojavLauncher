@@ -1,6 +1,8 @@
 package net.kdt.pojavlaunch.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -44,6 +46,15 @@ public class LauncherFragment extends Fragment
 				}
 			}
 
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				if(!url.equals(Tools.URL_HOME + "/changelog.html")){
+					Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+					startActivity(i);
+					return true;
+				}
+				return false;
+			}
 
 			@RequiresApi(23) //API 23+
 			@Override
@@ -54,7 +65,16 @@ public class LauncherFragment extends Fragment
 				}
 			}
 
-
+			@RequiresApi(23)
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+				if(!request.getUrl().toString().equals(Tools.URL_HOME + "/changelog.html")){
+					Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
+					startActivity(i);
+					return true;
+				}
+				return false;
+			}
 		});
 		webNews.clearCache(true);
 		webNews.getSettings().setJavaScriptEnabled(true);
