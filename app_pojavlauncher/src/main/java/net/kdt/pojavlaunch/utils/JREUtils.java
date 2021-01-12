@@ -71,7 +71,7 @@ public class JREUtils
         dlopen(findInLdLibPath("libawt_headless.so"));
         dlopen(findInLdLibPath("libfreetype.so"));
         dlopen(findInLdLibPath("libfontmanager.so"));
-        for(File f : locateLibs(new File(Tools.DIR_DATA+"/jre_runtime/lib/aarch64"))) {
+        for(File f : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
             dlopen(f.getAbsolutePath());
         }
         dlopen(nativeLibDir + "/libopenal.so");
