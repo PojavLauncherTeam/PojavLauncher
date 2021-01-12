@@ -216,4 +216,5 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
+    <string name="main_no_news_feed">Failed to fetch the news feed !</string>
 </resources>
