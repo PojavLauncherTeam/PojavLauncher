@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/accountitem_image_icon"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
 
