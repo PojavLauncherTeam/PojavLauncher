@@ -71,6 +71,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Лаунчерді жаңадан жүктеу керек] Бұл әрекет Java Runtime-ді жаңадан орнатуға мүмкіндік береді</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ті терезе режімінде қосу</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
+    <string name="mcl_setting_title_hide_sidebar">Бүйір пәнелін жасыру</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы адамдарға бұл ескі v1 интерфейсі ұнауы керек. Көбірек толық экран тәжірибесін береді.</string>
     <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
     <string name="mcl_setting_title_buttonscale">Батырма масштабы</string>
