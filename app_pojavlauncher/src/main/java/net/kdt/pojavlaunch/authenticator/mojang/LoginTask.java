@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 
-public class LoginTask extends AsyncTask<String, Void, String[]>
+public class LoginTask extends AsyncTask<String, Void, Void>
 {
     private YggdrasilAuthenticator authenticator = new YggdrasilAuthenticator();
     //private String TAG = "MojangAuth-login";
@@ -29,7 +29,7 @@ public class LoginTask extends AsyncTask<String, Void, String[]>
     }
     
     @Override
-    protected String[] doInBackground(String[] args) {
+    protected Void doInBackground(String[] args) {
         ArrayList<String> str = new ArrayList<String>();
         str.add("ERROR");
         try{
@@ -57,12 +57,15 @@ public class LoginTask extends AsyncTask<String, Void, String[]>
         catch(Exception e){
             str.add(e.getMessage());
         }
-        return str.toArray(new String[0]);
+        
+        listener.onLoginDone(str.toArray(new String[0]));
+        
+        return null;
     }
     
     @Override
-    protected void onPostExecute(String[] result) {
-        listener.onLoginDone(result);
+    protected void onPostExecute(Void result) {
+        // listener.onLoginDone(result);
         super.onPostExecute(result);
     }
 }

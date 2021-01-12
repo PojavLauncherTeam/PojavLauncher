@@ -1,42 +1,75 @@
 package net.kdt.pojavlaunch;
 
-import android.*;
+import android.Manifest;
 import android.app.Dialog;
-import android.content.*;
-import android.content.pm.*;
-import android.content.res.*;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
-import android.net.*;
-import android.os.*;
-
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.system.Os;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.util.Base64;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.core.app.*;
-import androidx.core.content.*;
-import androidx.appcompat.app.*;
-import android.system.*;
-import android.text.*;
-import android.text.style.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-import android.widget.CompoundButton.*;
-import com.kdt.pickafile.*;
-import java.io.*;
-import java.util.*;
-import net.kdt.pojavlaunch.authenticator.microsoft.*;
-import net.kdt.pojavlaunch.authenticator.mojang.*;
-import net.kdt.pojavlaunch.customcontrols.*;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.utils.*;
-import org.apache.commons.compress.archivers.tar.*;
-import org.apache.commons.compress.compressors.xz.*;
-import org.apache.commons.io.*;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import com.kdt.pickafile.FileListView;
+import com.kdt.pickafile.FileSelectedListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Locale;
+import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthTask;
+import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
+import net.kdt.pojavlaunch.authenticator.mojang.LoginListener;
+import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
+import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.CustomControls;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.LocaleUtils;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
+import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
 import org.apache.commons.io.FileUtils;
-import net.kdt.pojavlaunch.value.*;
-import com.google.gson.*;
+import org.apache.commons.io.IOUtils;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -683,10 +716,28 @@ public class PojavLoginActivity extends BaseActivity
 
         for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
-            TextView accountName = child.findViewById(R.id.accountName);
-            ImageButton removeButton = child.findViewById(R.id.removeBtn);
+            ImageView accountIcon = child.findViewById(R.id.accountitem_image_icon);
+            TextView accountName = child.findViewById(R.id.accountitem_text_name);
+            ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
 
-            accountName.setText(s.substring(0, s.length() - 5));
+            String accNameStr = s.substring(0, s.length() - 5);
+            String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
+            Bitmap bitmap = Bitmap.createBitmap(8, 8, Bitmap.Config.ARGB_8888);
+            if (skinFaceBase64 != null) {
+                byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
+                bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+            } else {
+                try {
+                    bitmap = BitmapFactory.decodeStream(getAssets().open("ic_steve.png"));
+                } catch (IOException e) {
+                    // Should never happen
+                    e.printStackTrace();
+                }
+            }
+            Bitmap upscaledBitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, false);
+            accountIcon.setImageBitmap(upscaledBitmap);
+            
+            accountName.setText(accNameStr);
 
             accountListLayout.addView(child);
 
@@ -807,11 +858,14 @@ public class PojavLoginActivity extends BaseActivity
                             builder.profileId = result[3];
                             builder.username = result[4];
                             builder.selectedVersion = "1.12.2";
+                            builder.updateSkinFace();
                             mProfile = builder;
                         }
-                        v.setEnabled(true);
-                        prb.setVisibility(View.GONE);
-                        playProfile(false);
+                        runOnUiThread(() -> {
+                            v.setEnabled(true);
+                            prb.setVisibility(View.GONE);
+                            playProfile(false);
+                        });
                     }
                 }).execute(edit2.getText().toString(), edit3.getText().toString());
         }

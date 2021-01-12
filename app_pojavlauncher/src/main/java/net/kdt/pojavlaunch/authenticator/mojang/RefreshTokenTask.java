@@ -38,7 +38,7 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
             this.profilePath = MinecraftAccount.load(args[0]);
             int responseCode = 400;
             responseCode = this.authenticator.validate(profilePath.accessToken).statusCode;
-            if (responseCode >= 200 && responseCode < 300) {
+            if (responseCode == 403) {
                 RefreshResponse response = this.authenticator.refresh(profilePath.accessToken, UUID.fromString(profilePath.clientToken));
                 // if (response == null) {
                     // throw new NullPointerException("Response is null?");
@@ -54,8 +54,9 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
                 profilePath.accessToken = response.accessToken;
                 profilePath.username = response.selectedProfile.name;
                 profilePath.profileId = response.selectedProfile.id;
-                profilePath.save();
             }
+            profilePath.updateSkinFace();
+            profilePath.save();
             return null;
         } catch (Throwable e) {
             return e;
