@@ -188,4 +188,5 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">Es wurde kein Spiel-Absturz festgestellt</string>
     <string name="main_nolog">Kein Protokoll.</string>
+    <string name="main_no_news_feed">Nachrichtenfeed konnte nicht geladen werden!</string>
 </resources>
