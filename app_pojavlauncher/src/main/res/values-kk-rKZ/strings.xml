@@ -188,4 +188,5 @@
     <string name="main_version">Нұсқасы:</string>
     <string name="main_nocrash">Іркіліс табылмады</string>
     <string name="main_nolog">Лог жоқ.</string>
+    <string name="main_no_news_feed">Жаңалық легін алу мүмкін емес!</string>
 </resources>
