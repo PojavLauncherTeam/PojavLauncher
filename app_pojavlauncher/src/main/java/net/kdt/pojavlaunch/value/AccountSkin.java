@@ -23,7 +23,7 @@ public class AccountSkin {
     private static Bitmap getSkinFromProperty(SkinProperty p) throws IOException {
         for (Map.Entry<String, Texture> texture : p.textures.entrySet()) {
             if (texture.getKey().equals("SKIN")) {
-                String skinFile = File.createTempFile("skin", "png", new File(Tools.DIR_DATA, "cache")).getAbsolutePath();
+                String skinFile = File.createTempFile("skin", ".png", new File(Tools.DIR_DATA, "cache")).getAbsolutePath();
                 Tools.downloadFile(texture.getValue().url, skinFile);
                 return BitmapFactory.decodeFile(skinFile);
             }
