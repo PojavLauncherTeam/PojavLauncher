@@ -49,13 +49,13 @@ public class JREUtils
     public static ArrayList<File> locateLibs(File path) {
         ArrayList<File> ret = new ArrayList<>();
         File[] list = path.listFiles();
-        for(File f : list) {
+        if(list != null) {for(File f : list) {
             if(f.isFile() && f.getName().endsWith(".so")) {
                 ret.add(f);
             }else if(f.isDirectory()) {
                 ret.addAll(locateLibs(f));
             }
-        }
+        }}
         return ret;
     }
     public static void initJavaRuntime() {
