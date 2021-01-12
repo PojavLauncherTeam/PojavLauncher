@@ -34,7 +34,7 @@ public class PojavMigrator
         }
     }
     
-    public static boolean migrateGameDir() {
+    public static boolean migrateGameDir() throws IOException {
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
         
         boolean moved = oldGameDir.exists() && oldGameDir.isDirectory();
@@ -45,6 +45,7 @@ public class PojavMigrator
         */
         if(moved) {
             oldGameDir.renameTo(new File(Tools.DIR_GAME_NEW + "/"));
+            FileUtils.deleteDirectory(new File(Tools.DIR_GAME_NEW + "/lwjgl3"));
         }
         return moved;
     }
