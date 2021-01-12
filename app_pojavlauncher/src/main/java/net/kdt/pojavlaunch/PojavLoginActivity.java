@@ -727,7 +727,13 @@ public class PojavLoginActivity extends BaseActivity
                 byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
                 bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
             } else {
-                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_steve);
+                try {
+                    bitmap = BitmapFactory.decodeStream(getAssets().open("ic_steve.png"));
+                } catch (IOException e) {
+                    // Should never happen
+                    e.printStackTrace();
+                    bitmap = Bitmap.createBitmap(8, 8, Bitmap.Config.ARGB_8888);
+                }
             }
             Bitmap upscaledBitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, false);
             accountIcon.setImageBitmap(upscaledBitmap);
