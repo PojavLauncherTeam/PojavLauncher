@@ -16,7 +16,7 @@
     <string name="login_online_password_hint">Құпиясөз</string>
     <string name="login_online_password_question">Құпиясөзді ұмыттыңыз ба?</string>
     <string name="login_online_remember">Мені есте сақтау?</string>
-    <string name="login_online_check_keeplogin">Мені кірген қалдыру</string>
+    <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
     <string name="login_online_create_account">(Жаңа тіркелгі құрасыз ба?)</string>
     <string name="login_offline_switch">Offline-тіркелгі?</string>
@@ -33,12 +33,12 @@
     <string name="warning_msg">Бұл қолданба құрылғыңыздағы Android нұсқасымен үйлесімді болмауы мүмкін (Android 7.0+). Оның орнына сіз VMOS-ты пайдаланып, осы қолданбаны VMOS-қа орната аласыз. Бірақ VMOS Play Store-дан жойылған, оны қолдан орнатуыңыз керек.</string>
     <string name="warning_noshowagain">Ендігәрі көрсетпеу</string>
     <string name="warning_action_install">VMOS-ты орнату</string>
-    <string name="warning_action_tryanyway">Бәрібір көру</string>
+    <string name="warning_action_tryanyway">Сонда да көру</string>
     <string name="warning_action_exit">Шығу</string>
     <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_selectkeymap">json пішіміндегі жаймады таңдау</string>
-    <string name="alerttitle_installmod">Қосылатын режімді таңдаңыз</string>
+    <string name="alerttitle_selectkeymap">json пішімді жаймады таңдау</string>
+    <string name="alerttitle_installmod">Қосылатын мод таңдаңыз</string>
     <string name="alerttitle_installoptifine">OptiFine jar файлын таңдаңыз</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher кенет іркілді</string>
@@ -65,7 +65,7 @@
     <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
-    <string name="mcl_launch_cleancache">Кәш файлдарын жоюда</string>
+    <string name="mcl_launch_cleancache">Кәш файлдары жойылуда</string>
     <string name="mcl_launch_downloading">%s жүктелуде</string>
     <string name="mcl_launch_download_lib">%s кітапханасы жүктелуде</string>
     <string name="mcl_launch_download_client">Minecraft %s жүктелуде</string>
@@ -75,19 +75,19 @@
     <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
     <string name="mcl_options">Баптау</string>
     <string name="mcl_option_modmgr">Мод меңгеруші (істемейді)</string>
-    <string name="mcl_option_optifineinstall">OptiFine-ды орнату</string>
+    <string name="mcl_option_optifineinstall">OptiFine орнату</string>
     <string name="mcl_option_checkupdate">Жаңару тексеру</string>
     <string name="mcl_option_customcontrol">Өңделген басқару</string>
     <string name="mcl_option_settings">Баптау</string>
     <string name="mcl_option_about">Лаунчер жайлы</string>
     <string name="mcl_setting_title_setmaxdxref">DX сұратымның макс. санын баптау</string>
-    <string name="mcl_setting_subtitle_setmaxdxref">Түрлену барысында қате пайда болғанда көбейтіңіз: Тым көп ... сұратым. Multi-dex опциясын қолданып көре аласыз. 4096 я 8192 ұсынамыз.</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Түрлену барысында қате пайда болғанда көбейтіңіз: Тым көп ... сұратым. Multi-dex опциясын қолданып көріңіз. 4096 я 8192 ұсынамыз.</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ті терезе режімінде қосу</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
     <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
     <string name="mcl_setting_title_controlsize">Басқару батырмаларының көлемін баптау</string>
-    <string name="mcl_setting_title_forgetoptifpath">OptiFine-ді өзін таба алмайтын қылу</string>
+    <string name="mcl_setting_title_forgetoptifpath">OptiFine-ді өзін таба алмас қылу</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">OptiFine-ді кейбір құрылғыда қосуға мүмкіндік береді.</string>
     <string name="mcl_setting_category_general">Негізгі баптамалар</string>
     <string name="mcl_setting_category_veroption">Нұсқа тізімінде көрсетілетін нұсқа түрлері</string>
@@ -105,7 +105,7 @@
     <string name="global_remove">Алып тастау</string>
     <string name="global_restart">Қайта жүктеу</string>
     <string name="global_save">Сақтау</string>
-    <string name="global_error_field_empty">Бұл өріс бос болмауы міндетті</string>
+    <string name="global_error_field_empty">Бұл өріс бос бола алмайды</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -133,7 +133,7 @@
     <string name="mcn_exit_call">Шығу</string>
     <string name="mcn_exit_crash">Ойын іркілісі табылды! Шығу үшін OK\'ті басыңыз.</string>
     <string name="mcn_exit_errcrash">Іркілісті табу мүмкін емес! Бұған мән бермей-ақ қойыңыз.</string>
-    <string name="mcn_exit_confirm">Мәжбүрлеп жабуға сенімдісіз бе?</string>
+    <string name="mcn_exit_confirm">Мәжбүрлеп жапқыңыз келе ме?</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Басқару</string>
     <string name="control_toggle">GUI</string>
@@ -173,7 +173,7 @@
     <string name="main_play">Ойнау</string>
     <string name="main_welcome">Сәлем,</string>
     <string name="main_infodev">Ақпар (Әзірлеуші)</string>
-    <string name="main_switchuser">Пайдаланушыны ауыстыру</string>
+    <string name="main_switchuser">Пайдаланушы ауыстыру</string>
     <string name="main_version_">Нұсқасы:</string>
     <string name="main_nocrash">Іркіліс табылмады</string>
     <string name="main_nolog">Лог жоқ.</string>
