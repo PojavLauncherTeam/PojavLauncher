@@ -188,4 +188,5 @@
     <string name="main_version">Версия:</string>
     <string name="main_nocrash">Сбоев не обнаружено</string>
     <string name="main_nolog">Нет записей</string>
+    <string name="main_no_news_feed">Не удалось получить ленту новостей!</string>
 </resources>
