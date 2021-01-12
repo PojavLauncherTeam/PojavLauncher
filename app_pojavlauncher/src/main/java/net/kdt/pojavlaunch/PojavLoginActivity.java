@@ -722,7 +722,7 @@ public class PojavLoginActivity extends BaseActivity
 
             String accNameStr = s.substring(0, s.length() - 5);
             String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
-            final Bitmap bitmap;
+            Bitmap bitmap = Bitmap.createBitmap(8, 8, Bitmap.Config.ARGB_8888);
             if (skinFaceBase64 != null) {
                 byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
                 bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
@@ -732,7 +732,6 @@ public class PojavLoginActivity extends BaseActivity
                 } catch (IOException e) {
                     // Should never happen
                     e.printStackTrace();
-                    bitmap = Bitmap.createBitmap(8, 8, Bitmap.Config.ARGB_8888);
                 }
             }
             Bitmap upscaledBitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, false);
