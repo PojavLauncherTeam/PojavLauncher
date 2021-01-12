@@ -14,7 +14,7 @@
     <string name="login_online_password_hint">Құпиясөз</string>
     <string name="login_online_password_question">Құпиясөзді ұмыттыңыз ба?</string>
     <string name="login_online_remember">Мені есте сақтау?</string>
-    <string name="login_online_check_keeplogin">Мені кірген қалдыру</string>
+    <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
     <string name="login_online_create_account">(Жаңа тіркелгі құрасыз ба?)</string>
     <string name="login_offline_switch">Offline-тіркелгі?</string>
@@ -31,8 +31,8 @@
     <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java Runtime-ді орнату %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">json пішіміндегі жаймады таңдау</string>
-    <string name="alerttitle_installmod">Мод орнатқышты таңдау</string>
+    <string name="alerttitle_selectkeymap">json пішімді жаймады таңдау</string>
+    <string name="alerttitle_installmod">Мод орнатқыш таңдау</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher кенет іркілді</string>
     <string name="error_checklog">Қате! Астыңғы жорналды көріңізші: %s</string>
@@ -55,7 +55,7 @@
     <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
-    <string name="mcl_launch_cleancache">Кәш файлдарын жоюда</string>
+    <string name="mcl_launch_cleancache">Кәш файлдары жойылуда</string>
     <string name="mcl_launch_downloading">%s жүктелуде</string>
     <string name="mcl_launch_downloading_progress">"%s жүктелуде (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
@@ -81,7 +81,7 @@
     <string name="mcl_setting_subtitle_mousescale">Меңзер көлемін өзгертеді.</string>
     <string name="mcl_setting_title_controlsize">Басқару батырмаларының көлемін баптау</string>
     <string name="mcl_setting_title_javaargs">JVM қосу аргументі</string>
-    <string name="mcl_setting_subtitle_javaargs">Абайлаңыз, мұны түсінбей баптау ойынды іркуі мүмкін.</string>
+    <string name="mcl_setting_subtitle_javaargs">Абайлаңыз, мұны түсінбей баптасаңыз, ойын іркілуі мүмкін.</string>
     <string name="mcl_setting_category_general">Негізгі баптамалар</string>
     <string name="mcl_setting_category_scaling">Масштаб</string>
     <string name="mcl_setting_category_veroption">Нұсқа тізімінде көрсетілетін нұсқа түрлері</string>
@@ -100,7 +100,7 @@
     <string name="global_restart">Қайта жүктеу</string>
     <string name="global_save">Сақтау</string>
     <string name="global_unpacking">%s ашылуда</string>
-    <string name="global_error_field_empty">Бұл өріс бос болмауы міндетті</string>
+    <string name="global_error_field_empty">Бұл өріс бос бола алмайды</string>
     <string name="global_waiting">Күте тұрыңыз</string>
     <!--
     <string name="mcl_about">
@@ -125,13 +125,13 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Қолданба/Ойын %d кодымен жабылды</string>
+    <string name="mcn_exit_title">Қолданба/ойын %d кодымен жабылды</string>
     <string name="mcn_exit_call">Шығу</string>
     <string name="mcn_exit_crash">Ойын іркілісі табылды! Шығу үшін OK\'ті басыңыз.</string>
     <string name="mcn_exit_errcrash">Іркілісті табу мүмкін емес! Бұған мән бермей-ақ қойыңыз.</string>
-    <string name="mcn_exit_confirm">Мәжбүрлеп жабуға сенімдісіз бе?</string>
+    <string name="mcn_exit_confirm">Мәжбүрлеп жапқыңыз келе ме?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 орнатылмаған!</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s сәулеті Java Runtime-мен %2$s сыйыса алмайды.</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s сәулеті Java Runtime-мен %2$s үйлесе алмайды.</string>
     <string name="mcn_check_fail_java">Сынақ Java VM-ді қосу мүмкін емес. Тағы ақпар үшін %s көріңіз.</string>
     <!-- MainActivity: Control buttons -->
     <string name="controls">Басқару</string>
@@ -157,7 +157,7 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Мәжбүрлеп жабу</string>
     <string name="control_viewout">Жорнал шығысы</string>
-    <string name="control_adebug">Кірісті оңдау</string>
+    <string name="control_adebug">Кіріс оңдау</string>
     <string name="control_customkey">Өзгертілген жайманы жіберу</string>
     <!--
     <string name="control_more3"></string>
@@ -184,7 +184,7 @@
     <string name="main_play">Ойнау</string>
     <string name="main_welcome">Сәлем, %s</string>
     <string name="main_infodev">Ақпар (Әзірлеуші)</string>
-    <string name="main_switchuser">Пайдаланушыны ауыстыру</string>
+    <string name="main_switchuser">Пайдаланушы ауыстыру</string>
     <string name="main_version">Нұсқасы:</string>
     <string name="main_nocrash">Іркіліс табылмады</string>
     <string name="main_nolog">Лог жоқ.</string>
