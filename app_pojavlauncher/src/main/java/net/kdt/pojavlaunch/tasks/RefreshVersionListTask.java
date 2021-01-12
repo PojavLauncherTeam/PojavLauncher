@@ -109,7 +109,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
             }
         }
 
-        for (File value2: list2) {
+        if(list2 != null) for (File value2: list2) {
             if (!output.contains(value2.getName())) {
                 output.add(value2.getName());
             }

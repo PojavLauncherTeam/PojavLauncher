@@ -10,6 +10,8 @@ import org.lwjgl.glfw.*;
 import java.io.*;
 import com.google.gson.*;
 
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
+
 public class MainActivity extends BaseMainActivity {
     private ControlLayout mControlLayout;
     
@@ -113,6 +115,13 @@ public class MainActivity extends BaseMainActivity {
         mControlLayout.setModifiable(false);
         try {
             mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+        } catch(IOException e) {
+            try {
+                mControlLayout.loadLayout(Tools.CTRLDEF_FILE);
+                DEFAULT_PREF.edit().putString("defaultCtrl",Tools.CTRLDEF_FILE).commit();
+            } catch (IOException ioException) {
+                Tools.showError(this, ioException);
+            }
         } catch (Throwable th) {
             Tools.showError(this, th);
         }

@@ -3,6 +3,9 @@ import android.content.*;
 import java.io.*;
 import net.kdt.pojavlaunch.value.*;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
 public class PojavMigrator
 {
     public static void migrateAccountData(Context ctx) {
@@ -31,7 +34,7 @@ public class PojavMigrator
         }
     }
     
-    public static boolean migrateGameDir() throws IOException, InterruptedException {
+    public static boolean migrateGameDir() {
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
         
         boolean moved = oldGameDir.exists() && oldGameDir.isDirectory();
@@ -40,8 +43,8 @@ public class PojavMigrator
             command("mv " + Tools.DIR_GAME_OLD + " " + Tools.DIR_GAME_HOME + "/");
         }
         */
-        if(!moved) {
-            oldGameDir.renameTo(new File(Tools.DIR_GAME_HOME + "/"));
+        if(moved) {
+            oldGameDir.renameTo(new File(Tools.DIR_GAME_NEW + "/"));
         }
         return moved;
     }

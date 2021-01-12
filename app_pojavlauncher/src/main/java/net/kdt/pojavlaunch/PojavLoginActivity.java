@@ -902,6 +902,7 @@ public class PojavLoginActivity extends BaseActivity
         int result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
+
         //If permission is granted returning true
         return result1 == PackageManager.PERMISSION_GRANTED &&
             result2 == PackageManager.PERMISSION_GRANTED;
