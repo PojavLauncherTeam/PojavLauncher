@@ -188,4 +188,5 @@
     <string name="main_version">Verze:</string>
     <string name="main_nocrash">Nenalezen žádný pád</string>
     <string name="main_nolog">Žádný záznam.</string>
+    <string name="main_no_news_feed">Nepodařilo se načíst novinky !</string>
 </resources>
