@@ -71,6 +71,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Peluncur butuh di buka ulang] Ini membiarkan kamu memasang ulang Runtime Java</string>
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Sembunyikan sidebar</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Orang yang telah lama menggunakan UI lama v1 mungkin akan menyukai ini. Memberi kamu sebuah experimen layar penuh.</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_buttonscale">Skala tombol kontrol</string>
@@ -186,4 +188,5 @@
     <string name="main_version">Versi:</string>
     <string name="main_nocrash">Tidak ada crash terdeteksi</string>
     <string name="main_nolog">Tidak ada catatan log.</string>
+    <string name="main_no_news_feed">Gagal mengambil news feed !</string>
 </resources>
