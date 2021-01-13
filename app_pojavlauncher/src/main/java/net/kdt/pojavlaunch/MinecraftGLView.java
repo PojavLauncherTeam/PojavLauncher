@@ -71,8 +71,16 @@ class MinecraftInputConnection extends BaseInputConnection {
     }
 
     public boolean commitText(CharSequence text, int newCursorPosition) {
-        parent.sendKeyPress(text.charAt(0));
+        //parent.sendKeyPress(text.charAt(0));
+        for(int i = 0; i < text.length(); i++) parent.sendKeyPress(text.charAt(i));
         return true;
     }
 
+    @Override
+    public boolean deleteSurroundingText(int beforeLength, int afterLength) {
+        for(int i = 0; i < beforeLength; i++) {
+            parent.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE);
+        }
+        return true;
+    }
 }
