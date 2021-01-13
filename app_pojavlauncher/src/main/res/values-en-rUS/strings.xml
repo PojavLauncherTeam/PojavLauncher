@@ -44,7 +44,7 @@
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_login_error">Something went wrong after loging in. Please contact us with the following error.\nError: %s</string>
     <string name="toast_optifine_success">Install successful</string>
-    <string name="toast_uninstalljre_done">Uninstalled Java Runtime sucsesfully</string>
+    <string name="toast_uninstalljre_done">Uninstalled Java Runtime succesfully</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
