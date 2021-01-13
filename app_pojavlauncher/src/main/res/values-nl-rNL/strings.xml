@@ -188,4 +188,5 @@
     <string name="main_version">Versie:</string>
     <string name="main_nocrash">Geen crash gedetecteerd</string>
     <string name="main_nolog">Geen log.</string>
+    <string name="main_no_news_feed">Kon nieuwsfeed niet ophalen!</string>
 </resources>
