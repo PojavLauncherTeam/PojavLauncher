@@ -189,4 +189,5 @@
     <string name="main_version">Wersja:</string>
     <string name="main_nocrash">Nie wykryto awarii</string>
     <string name="main_nolog">Brak logów.</string>
+    <string name="main_no_news_feed">Nie udało się pobrać kanału informacyjnego!</string>
 </resources>
