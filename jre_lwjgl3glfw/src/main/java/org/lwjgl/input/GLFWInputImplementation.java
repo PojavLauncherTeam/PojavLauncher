@@ -175,6 +175,7 @@ public class GLFWInputImplementation implements InputImplementation {
         last_event_nanos = nanos;
     }
     public void putKeyboardEvent(int keycode, byte state, int ch, long nanos, boolean repeat) {
+        key_down_buffer[keycode] = state;
         keyboardEvent.clear();
         keyboardEvent.putInt(keycode).put(state).putInt(ch).putLong(nanos).put(repeat ? (byte)1 : (byte)0);
         keyboardEvent.flip();

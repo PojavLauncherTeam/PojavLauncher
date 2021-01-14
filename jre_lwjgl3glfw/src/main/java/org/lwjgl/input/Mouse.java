@@ -403,6 +403,7 @@ public class Mouse {
     public static boolean next() {
             if (!created) throw new IllegalStateException("Mouse must be created before you can read events");
             if (readBuffer.hasRemaining()) {
+
                 eventButton = readBuffer.get();
                 eventState = readBuffer.get() != 0;
                 if (isGrabbed()) {
