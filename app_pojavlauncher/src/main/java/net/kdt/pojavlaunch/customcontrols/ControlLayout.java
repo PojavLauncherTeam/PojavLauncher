@@ -71,6 +71,8 @@ public class ControlLayout extends FrameLayout
 		view.setModifiable(mModifiable);
         if (!mModifiable) {
             view.setAlpha(1f - view.getProperties().transparency / 100);
+			view.setFocusable(false);
+			view.setFocusableInTouchMode(false);
         }
 		addView(view);
 

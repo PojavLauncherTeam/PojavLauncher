@@ -135,20 +135,20 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    public static boolean holdingAlt, holdingCapslock, holdingCtrl,
+    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
         holdingNumlock, holdingShift;
     public static int getCurrentMods() {
         int currMods = 0;
         if (holdingAlt) {
-            currMods &= LWJGLGLFWKeycode.GLFW_MOD_ALT;
+            currMods |= LWJGLGLFWKeycode.GLFW_MOD_ALT;
         } if (holdingCapslock) {
-            currMods &= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
+            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
         } if (holdingCtrl) {
-            currMods &= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
+            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
         } if (holdingNumlock) {
-            currMods &= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
+            currMods |= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
         } if (holdingShift) {
-            currMods &= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
+            currMods |= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
         }
         return currMods;
     }

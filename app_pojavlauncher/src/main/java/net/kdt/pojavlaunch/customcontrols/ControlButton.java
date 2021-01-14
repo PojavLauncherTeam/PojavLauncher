@@ -164,14 +164,19 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     private void setHolding(boolean isDown) {
         if (mProperties.holdAlt || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_ALT) {
             CallbackBridge.holdingAlt = isDown;
+            System.out.println("holdingAlt="+CallbackBridge.holdingAlt);
         } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK) {
             CallbackBridge.holdingCapslock = isDown;
+            System.out.println("holdingCapslock="+CallbackBridge.holdingCapslock);
         } if (mProperties.holdCtrl || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_CONTROL) {
             CallbackBridge.holdingCtrl = isDown;
+            System.out.println("holdingCtrl="+CallbackBridge.holdingCtrl);
         } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK) {
             CallbackBridge.holdingNumlock = isDown;
+            System.out.println("holdingNumlock="+CallbackBridge.holdingNumlock);
         } if (mProperties.holdShift || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_SHIFT) {
             CallbackBridge.holdingShift = isDown;
+            System.out.println("holdingShift="+CallbackBridge.holdingShift);
         } 
     }
 
@@ -187,18 +192,19 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN: // 0
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            isDown = true;
+                            setHolding(true);
+                            MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), true);
                             break;
                         case MotionEvent.ACTION_UP: // 1
                         case MotionEvent.ACTION_CANCEL: // 3
                         case MotionEvent.ACTION_POINTER_UP: // 6
-                            isDown = false;
+                            setHolding(false);
+                            MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), false);
                             break;
                         default:
                             return false;
                     }
-                    setHolding(isDown);
-                    MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), isDown);
+
                 } else if (mGestureDetector.onTouchEvent(event)) {
                     mChecked = !mChecked;
                     invalidate();
