@@ -4,8 +4,8 @@
 #include "awt_global.h"
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
-    // GLOBAL_WIDTH = atoi(getenv("AWTSTUB_WIDTH"));
-    // GLOBAL_HEIGHT = atoi(getenv("AWTSTUB_HEIGHT"));
+    GLOBAL_WIDTH = atoi(getenv("AWTSTUB_WIDTH"));
+    GLOBAL_HEIGHT = atoi(getenv("AWTSTUB_HEIGHT"));
     
     return JNI_VERSION_1_4;
 }
