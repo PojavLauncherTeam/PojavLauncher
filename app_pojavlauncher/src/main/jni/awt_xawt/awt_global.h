@@ -1,8 +1,4 @@
-#ifndef AWT_GLOBAL_H
-#define AWT_GLOBAL_H
+#pragma once
 
-int GLOBAL_WIDTH;
-int GLOBAL_HEIGHT;
-
-#endif // AWT_GLOBAL_H
-
+static int GLOBAL_WIDTH;
+static int GLOBAL_HEIGHT;
