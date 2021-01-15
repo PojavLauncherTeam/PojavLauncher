@@ -53,6 +53,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">开发控制台</string>
     <string name="mcl_tab_crash">崩溃日志</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 就绪</string>
     <string name="mcl_launch_cleancache">正在清理缓存</string>
