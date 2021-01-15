@@ -53,6 +53,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Програмерска конзола</string>
     <string name="mcl_tab_crash">Лог Грешака</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
     <string name="mcl_option_modinstall">Покрени мод инсталер (Форге, Лабумод, Фабрик, итд...)</string>
