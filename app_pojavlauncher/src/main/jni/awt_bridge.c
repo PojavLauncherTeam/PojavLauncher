@@ -1,20 +1,43 @@
 #include <jni.h>
 #include <assert.h>
 
-#include "log.h"
-#include "utils.h"
+static JavaVM* dalvikJavaVMPtr;
+static JNIEnv* dalvikJNIEnvPtr_ANDROID;
+static JNIEnv* dalvikJNIEnvPtr_JRE;
 
-// jclass class_awt;
-// jmethodID method_awt;
+static JavaVM* runtimeJavaVMPtr;
+static JNIEnv* runtimeJNIEnvPtr_ANDROID;
+static JNIEnv* runtimeJNIEnvPtr_JRE;
+
+jint JNI_OnLoad(JavaVM* vm, void* reserved) {
+    if (dalvikJavaVMPtr == NULL) {
+        //Save dalvik global JavaVM pointer
+        dalvikJavaVMPtr = vm;
+        (*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr_ANDROID, JNI_VERSION_1_4);
+        
+        isUseStackQueueCall = JNI_FALSE;
+    } else if (dalvikJavaVMPtr != vm) {
+        runtimeJavaVMPtr = vm;
+        (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
+    }
+    
+    isGrabbing = JNI_FALSE;
+    
+    return JNI_VERSION_1_4;
+}
 
 // TODO: check for memory leaks
 // int printed = 0;
+int threadAttached = 0;
 JNIEXPORT jintArray JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_renderAWTScreenFrame(JNIEnv* env, jclass clazz /*, jobject canvas, jint width, jint height */) {
     if (runtimeJNIEnvPtr_ANDROID == NULL) {
         if (runtimeJavaVMPtr == NULL) {
             return NULL;
         } else {
-            (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr_ANDROID, NULL);
+            if (threadAttached == 0) {
+                (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr_ANDROID, NULL);
+                threadAttached = 1;
+            }
         }
     }
 

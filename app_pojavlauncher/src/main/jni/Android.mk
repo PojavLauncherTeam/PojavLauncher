@@ -14,11 +14,16 @@ LOCAL_MODULE := pojavexec
 # LOCAL_CFLAGS += -DDEBUG
 # -DGLES_TEST
 LOCAL_SRC_FILES := \
-    awt_bridge.c \
     egl_bridge.c \
     input_bridge_v3.c \
     jre_launcher.c \
     utils.c
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := pojavexec_awt
+LOCAL_SRC_FILES := \
+    awt_bridge.c
 include $(BUILD_SHARED_LIBRARY)
 
 # Helper to get current thread
