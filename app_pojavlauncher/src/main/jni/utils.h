@@ -1,21 +1,20 @@
-#ifndef _BINARY_UTILS_H_
-#define _BINARY_UTILS_H_
+#pragma once
 
 #include <stdbool.h>
 
-JavaVM* runtimeJavaVMPtr;
-JNIEnv* runtimeJNIEnvPtr_ANDROID;
-JNIEnv* runtimeJNIEnvPtr_JRE;
+static JavaVM* runtimeJavaVMPtr;
+static JNIEnv* runtimeJNIEnvPtr_ANDROID;
+static JNIEnv* runtimeJNIEnvPtr_JRE;
 
-JavaVM* dalvikJavaVMPtr;
-JNIEnv* dalvikJNIEnvPtr_ANDROID;
-JNIEnv* dalvikJNIEnvPtr_JRE;
+static JavaVM* dalvikJavaVMPtr;
+static JNIEnv* dalvikJNIEnvPtr_ANDROID;
+static JNIEnv* dalvikJNIEnvPtr_JRE;
 
-long showingWindow;
+static long showingWindow;
 
-bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
+static bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
 
-int savedWidth, savedHeight;
+staric int savedWidth, savedHeight;
 
 jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr);
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);
@@ -23,6 +22,4 @@ jobjectArray convert_from_char_array(JNIEnv *env, char **charArray, int num_rows
 void free_char_array(JNIEnv *env, jobjectArray jstringArray, const char **charArray);
 
 void closeGLFWWindow();
-
-#endif // _BINARY_UTILS_H_
 

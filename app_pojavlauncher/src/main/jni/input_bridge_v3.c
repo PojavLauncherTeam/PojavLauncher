@@ -36,7 +36,7 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
-int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
+static int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
