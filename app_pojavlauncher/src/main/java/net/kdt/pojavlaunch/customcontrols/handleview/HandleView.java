@@ -394,7 +394,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
                 mIsDragging = false;
                 break;
         }
-        return false; // super.onTouchEvent(ev);
+        return true;
     }
 
     public boolean isDragging() {
