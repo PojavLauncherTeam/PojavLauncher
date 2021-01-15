@@ -53,6 +53,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Әзірлеу консолі</string>
     <string name="mcl_tab_crash">Іркіліс жорналы</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
     <string name="mcl_launch_cleancache">Кәш файлдары жойылуда</string>
