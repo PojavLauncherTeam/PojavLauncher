@@ -18,24 +18,24 @@
     <string name="login_online_remember">Запомнить меня?</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_online_create_account">(Создать новую учётную запись?)</string>
-    <string name="login_offline_switch">Автономная учётная запись?</string>
-    <string name="login_offline_label">Войти как автономная учётная запись</string>
+    <string name="login_online_create_account">(Создать новую учетную запись?)</string>
+    <string name="login_offline_switch">Оффлайн учетная запись?</string>
+    <string name="login_offline_label">Войти как оффлайн учетная запись</string>
     <string name="login_offline_alert_skip">Пропустить</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
-    <string name="login_select_account">Учётные записи</string>
+    <string name="login_select_account">Учетные записи</string>
     <!-- Hint -->
-    <string name="hint_select_account">Чтобы выбрать учётную запись, нажмите на неё. Чтобы удалить, нажмите и удерживайте её.</string>
+    <string name="hint_select_account">Чтобы выбрать учетную запись, нажмите на неё. Чтобы удалить, нажмите и удерживайте её.</string>
     <string name="hint_control_mapping">"Эта функция еще не завершена, поэтому в данный момент вы не можете использовать пользовательское управление!\nПроведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warning -->
     <string name="warning_title">Предупреждение</string>
-    <string name="warning_msg">Это приложение может быть несовместимо с вашей версией Android (Android 7.0 и выше). Вместо этого вы можете использовать VMOS и установить это приложение на VMOS. Но VMOS удалён из Play Маркета, вы должны установить его вручную.</string>
+    <string name="warning_msg">Это приложение может быть несовместимо с вашей версией Android (Android 7.0 и выше). Вместо этого вы можете использовать VMOS и установить это приложение на VMOS. Но VMOS удален из Play Маркета, вы должны установить его вручную.</string>
     <string name="warning_noshowagain">Больше не показывать</string>
     <string name="warning_action_install">Установите VMOS</string>
     <string name="warning_action_tryanyway">Все равно попробовать</string>
     <string name="warning_action_exit">Выйти</string>
-    <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
+    <string name="warning_remove_account">Эта учетная запись будет удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Выбрать раскладку (.json)</string>
     <string name="alerttitle_installmod">Выбрать мод для добавления</string>
