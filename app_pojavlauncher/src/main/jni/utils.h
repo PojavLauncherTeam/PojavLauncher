@@ -14,7 +14,7 @@ static long showingWindow;
 
 static bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
 
-staric int savedWidth, savedHeight;
+static int savedWidth, savedHeight;
 
 jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr);
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);
