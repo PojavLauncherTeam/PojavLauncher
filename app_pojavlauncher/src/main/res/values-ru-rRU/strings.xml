@@ -16,19 +16,19 @@
     <string name="login_online_remember">Запомнить меня?</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_online_create_account">(Создать новую учётную запись?)</string>
-    <string name="login_offline_switch">Автономная учётная запись?</string>
-    <string name="login_offline_label">Войти как автономная учётная запись</string>
+    <string name="login_online_create_account">(Создать новую учетную запись?)</string>
+    <string name="login_offline_switch">Оффлайн учетная запись?</string>
+    <string name="login_offline_label">Войти как оффлайн учетная запись</string>
     <string name="login_offline_alert_skip">Пропустить</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_microsoft">Войти через Microsoft</string>
-    <string name="login_select_account">Учётные записи</string>
+    <string name="login_select_account">Учетные записи</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Выйти</string>
-    <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
+    <string name="warning_remove_account">Эта учетная запись будет удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку (.json)</string>
@@ -53,6 +53,9 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Консоль разработки</string>
     <string name="mcl_tab_crash">Журнал сбоев</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Подключено</string>
+    <string name="mcl_account_offline">Оффлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
