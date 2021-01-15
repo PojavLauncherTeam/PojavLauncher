@@ -54,6 +54,8 @@
     <string name="mcl_tab_console">Console sviluppatore</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connesso</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s pronto</string>
     <string name="mcl_launch_cleancache">Pulizia dei file di cache in corso</string>
