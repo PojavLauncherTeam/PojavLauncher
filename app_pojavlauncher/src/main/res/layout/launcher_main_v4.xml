@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:text="Connected"
+        android:text="@string/global_waiting"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/launchermain_spinner_account" />

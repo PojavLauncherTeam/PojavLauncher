@@ -66,6 +66,10 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Development console</string>
     <string name="mcl_tab_crash">Crash log</string>
+    
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connected</string>
+    <string name="mcl_account_offline">Offline</string>
 
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>

@@ -37,7 +37,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
     private ViewPager viewPager;
 
-    private TextView tvUsernameView;
+    private TextView tvUsernameView, tvConnectStatus;
     private Spinner accountSelector;
     private ViewPagerAdapter viewPageAdapter;
     private final Button[] Tabs = new Button[4];
@@ -89,6 +89,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         });
         viewPager.setAdapter(viewPageAdapter);
 
+        tvConnectStatus = (TextView) findViewById(R.id.launchermain_text_accountstatus);
         tvUsernameView = (TextView) findViewById(R.id.launchermain_text_welcome);
         mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
@@ -218,6 +219,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             mProfile = PojavProfile.getCurrentProfileContent(this);
 
             tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));
+            tvConnectStatus.setText(mProfile.accessToken.equals("0") ? R.string.mcl_account_offline : R.string.mcl_account_connected);
         } catch(Exception e) {
             mProfile = new MinecraftAccount();
             Tools.showError(this, e, true);
