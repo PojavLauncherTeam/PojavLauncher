@@ -54,6 +54,8 @@
     <string name="mcl_tab_console">开发控制台</string>
     <string name="mcl_tab_crash">崩溃日志</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">已连接</string>
+    <string name="mcl_account_offline">离线</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 就绪</string>
     <string name="mcl_launch_cleancache">正在清理缓存</string>
