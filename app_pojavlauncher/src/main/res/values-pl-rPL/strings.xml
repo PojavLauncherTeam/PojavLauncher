@@ -54,6 +54,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
