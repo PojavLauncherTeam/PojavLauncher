@@ -62,9 +62,16 @@ public final class Tools
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
-        String launchClassPath = generateLaunchClassPath(profile.selectedVersion);
+        String launchClassPath = generateLaunchClassPath(versionInfo);
 
         List<String> javaArgList = new ArrayList<String>();
+        
+        int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
+        // 13w17a: 20130425
+        // 13w18a: 20130502
+        if (mcReleaseDate < 20130502) {
+            // TODO support 13w17a and below by use other AWT impl
+        }
         
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
@@ -235,10 +242,9 @@ public final class Tools
     }
 
     private static boolean isClientFirst = false;
-    public static String generateLaunchClassPath(String version) {
+    public static String generateLaunchClassPath(JMinecraftVersionList.Version info) {
         StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 
-        JMinecraftVersionList.Version info = getVersionInfo(version);
         String[] classpath = generateLibClasspath(info);
 
         // Debug: LWJGL 3 override
@@ -262,7 +268,7 @@ public final class Tools
          */
 
         if (isClientFirst) {
-            libStr.append(getPatchedFile(version));
+            libStr.append(getPatchedFile(info.id));
         }
         for (String perJar : classpath) {
             if (!new File(perJar).exists()) {
@@ -272,7 +278,7 @@ public final class Tools
             libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
         }
         if (!isClientFirst) {
-            libStr.append(getPatchedFile(version));
+            libStr.append(getPatchedFile(info.id));
         }
 
         return libStr.toString();
