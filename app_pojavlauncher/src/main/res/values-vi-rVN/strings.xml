@@ -53,6 +53,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Làm sạch file bộ nhớ đệm</string>
