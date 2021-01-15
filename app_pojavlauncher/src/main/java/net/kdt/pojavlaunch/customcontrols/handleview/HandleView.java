@@ -372,8 +372,8 @@ public abstract class HandleView extends View implements ViewPositionListener, V
                     int newWidth = (int) (mDownWidth + (rawX - mDownX));
                     int newHeight = (int) (mDownHeight + (rawY - mDownY));
                     
-                    mDownX = rawX;
-                    mDownY = rawY;
+                    // mDownX = rawX;
+                    // mDownY = rawY;
                     
                     params.width = Math.max(50, newWidth);
                     params.height = Math.max(50, newHeight);
