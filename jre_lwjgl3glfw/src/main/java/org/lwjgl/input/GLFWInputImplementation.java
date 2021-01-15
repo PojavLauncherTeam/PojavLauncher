@@ -49,7 +49,7 @@ public class GLFWInputImplementation implements InputImplementation {
     public void pollMouse(IntBuffer coord_buffer, ByteBuffer buttons) {
         coord_buffer.put(0, grab? mouseX - mouseLastX: mouseX);
         coord_buffer.put(1, grab? mouseY - mouseLastY: mouseY);
-        System.out.println("Poll Call: Buffer length="+buttons.capacity()+"; Pos="+buttons.position());
+        //System.out.println("Poll Call: Buffer length="+buttons.capacity()+"; Pos="+buttons.position());
         buttons.rewind();
         buttons.put(mouse_buffer);
         mouseLastX = mouseX;
