@@ -14,15 +14,11 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         //Save dalvik global JavaVM pointer
         dalvikJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr_ANDROID, JNI_VERSION_1_4);
-        
-        isUseStackQueueCall = JNI_FALSE;
     } else if (dalvikJavaVMPtr != vm) {
         runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
     }
-    
-    isGrabbing = JNI_FALSE;
-    
+
     return JNI_VERSION_1_4;
 }
 
