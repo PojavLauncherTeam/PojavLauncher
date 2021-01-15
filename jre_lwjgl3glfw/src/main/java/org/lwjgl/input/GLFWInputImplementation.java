@@ -15,6 +15,7 @@ public class GLFWInputImplementation implements InputImplementation {
     private final EventQueue keyboardEventQueue = new EventQueue(Keyboard.EVENT_SIZE);
     private final ByteBuffer keyboardEvent = ByteBuffer.allocate(Keyboard.EVENT_SIZE);
     public final byte[] key_down_buffer = new byte[Keyboard.KEYBOARD_SIZE];
+    public final byte[] mouse_buffer = new byte[3];
     public int mouseX = 0;
     public int mouseY = 0;
     public int mouseLastEventX = 0;
@@ -24,7 +25,6 @@ public class GLFWInputImplementation implements InputImplementation {
     public int mouseComparatorX;
     public int mouseComparatorY;
     public boolean grab;
-    public boolean mouseLeft = false;
     private long last_event_nanos = System.nanoTime();
     @Override
     public boolean hasWheel() {
@@ -49,7 +49,9 @@ public class GLFWInputImplementation implements InputImplementation {
     public void pollMouse(IntBuffer coord_buffer, ByteBuffer buttons) {
         coord_buffer.put(0, grab? mouseX - mouseLastX: mouseX);
         coord_buffer.put(1, grab? mouseY - mouseLastY: mouseY);
-        buttons.put(0, mouseLeft? (byte) 1: (byte) 0);
+        System.out.println("Poll Call: Buffer length="+buttons.capacity()+"; Pos="+buttons.position());
+        buttons.rewind();
+        buttons.put(mouse_buffer);
         mouseLastX = mouseX;
         mouseLastY = mouseY;
     }
@@ -157,6 +159,9 @@ public class GLFWInputImplementation implements InputImplementation {
             event_buffer.putInt(acoord1-mouseLastX).putInt(acoord2-mouseLastY);
         }else{
             event_buffer.putInt(acoord1).putInt(acoord2);
+        }
+        if(button != -1) {
+            mouse_buffer[button]=state;
         }
         event_buffer.putInt(dz).putLong(nanos);
         event_buffer.flip();

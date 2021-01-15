@@ -19,10 +19,22 @@ public class CallbackBridge {
     public static StringBuilder DEBUG_STRING = new StringBuilder();
     
     // volatile private static boolean isGrabbing = false;
-
+    public static class PusherRunnable implements Runnable {
+        int button; int x; int y;
+        public PusherRunnable(int button, int x, int y) {
+           this.button = button;
+           this.x = x;
+           this.y = y;
+        }
+        @Override
+        public void run() {
+            putMouseEventWithCoords(button, 1, x, y);
+            try { Thread.sleep(40); } catch (InterruptedException e) {}
+            putMouseEventWithCoords(button, 0, x, y);
+        }
+    }
     public static void putMouseEventWithCoords(int button, int x, int y /* , int dz, long nanos */) {
-        putMouseEventWithCoords(button, 1, x, y);
-        putMouseEventWithCoords(button, 0, x, y);
+        new Thread(new PusherRunnable(button,x,y)).run();
     }
     
     public static void putMouseEventWithCoords(int button, int state, int x, int y /* , int dz, long nanos */) {
