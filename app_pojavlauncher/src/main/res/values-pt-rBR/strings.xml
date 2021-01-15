@@ -53,6 +53,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Console de desenvolvedor</string>
     <string name="mcl_tab_crash">Log de crash</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
