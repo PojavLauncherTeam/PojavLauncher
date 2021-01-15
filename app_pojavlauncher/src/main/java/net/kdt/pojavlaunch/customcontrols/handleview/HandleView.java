@@ -238,7 +238,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
     public abstract void updatePosition(float x, float y);
 
     protected void positionAtCursorOffset(int offset, boolean parentScrolled) {
-        mPositionX = (int) (mView.getWidth() / 1.1);
+        mPositionX = mView.getWidth();
         mPositionY = mView.getHeight();
         
         mPositionHasChanged = true;
