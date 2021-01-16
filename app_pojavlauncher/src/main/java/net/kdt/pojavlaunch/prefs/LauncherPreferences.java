@@ -59,8 +59,7 @@ public class LauncherPreferences
 		"-XX:G1RSetUpdatingPauseTimePercent=5 " +
 		"-XX:SurvivorRatio=32 " +
 		"-XX:+PerfDisableSharedMem " +
-                "-XX:MaxTenuringThreshold=1" +
-		"-Dhttp.proxyHost=betacraft.pl";
+                "-XX:MaxTenuringThreshold=1";
             
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
