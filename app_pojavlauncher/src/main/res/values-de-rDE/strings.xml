@@ -192,4 +192,7 @@
     <string name="main_nocrash">Es wurde kein Spiel-Absturz festgestellt</string>
     <string name="main_nolog">Kein Protokoll.</string>
     <string name="main_no_news_feed">Nachrichtenfeed konnte nicht geladen werden!</string>
+    <string name="auto_ram_subtitle">Aktiviert automatische RAM-Einstellungen</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Der maximale RAM-Verbrauch ist aktuell auf %d MB gesetzt</string>
 </resources>
