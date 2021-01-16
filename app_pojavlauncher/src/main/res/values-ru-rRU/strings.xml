@@ -16,19 +16,19 @@
     <string name="login_online_remember">Запомнить меня?</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_online_create_account">(Создать новую учётную запись?)</string>
-    <string name="login_offline_switch">Автономная учётная запись?</string>
-    <string name="login_offline_label">Войти как автономная учётная запись</string>
+    <string name="login_online_create_account">(Создать новую учетную запись?)</string>
+    <string name="login_offline_switch">Оффлайн учетная запись?</string>
+    <string name="login_offline_label">Войти как оффлайн учетная запись</string>
     <string name="login_offline_alert_skip">Пропустить</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_microsoft">Войти через Microsoft</string>
-    <string name="login_select_account">Учётные записи</string>
+    <string name="login_select_account">Учетные записи</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Выйти</string>
-    <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
+    <string name="warning_remove_account">Эта учетная запись будет удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Выбрать раскладку (.json)</string>
@@ -53,6 +53,9 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Консоль разработки</string>
     <string name="mcl_tab_crash">Журнал сбоев</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Подключено</string>
+    <string name="mcl_account_offline">Оффлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
@@ -71,6 +74,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
     <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
+    <string name="mcl_setting_title_hide_sidebar">Скрыть боковую панель</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
@@ -186,4 +191,5 @@
     <string name="main_version">Версия:</string>
     <string name="main_nocrash">Сбоев не обнаружено</string>
     <string name="main_nolog">Нет записей</string>
+    <string name="main_no_news_feed">Не удалось получить ленту новостей!</string>
 </resources>

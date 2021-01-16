@@ -1,6 +1,9 @@
 name: Android CI
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - 'l10n_*'
 
 jobs:
   build:

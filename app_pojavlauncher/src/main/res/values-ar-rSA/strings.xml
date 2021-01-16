@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">(PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">تشغيل ماين كرافت: إصدار الجافا في جهازك!</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">بوجفافلانشر</string>
+    <string name="app_motd">تشغيل ماين كرافت: إصدار جافا على جهازك!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">مساعدة</string>
     <!-- Languages list part -->
@@ -53,6 +53,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">وحدة التحكم البرمجية</string>
     <string name="mcl_tab_crash">سجل توقف العمل</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
     <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>

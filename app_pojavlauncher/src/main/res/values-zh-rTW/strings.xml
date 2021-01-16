@@ -20,6 +20,7 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">新聞</string>
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_option_modinstall">啟動 Mod 安裝器（例如 Forge, LabyMod, Fabric...）</string>
     <string name="mcl_option_modinstallwitharg">以自訂引數啟動 Mod 安裝器</string>

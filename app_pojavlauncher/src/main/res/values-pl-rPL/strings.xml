@@ -54,6 +54,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
@@ -72,6 +73,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować Java Runtime</string>
     <string name="mcl_setting_title_freeform">Uruchom Minecraft w trybie swobodnym</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Ludzie Nostalgic preferujący stary interfejs v1 może to podobać. Daje ci więcej wrażeń w trybie pełnoekranowym.</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
     <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
@@ -187,4 +190,5 @@
     <string name="main_version">Wersja:</string>
     <string name="main_nocrash">Nie wykryto awarii</string>
     <string name="main_nolog">Brak logów.</string>
+    <string name="main_no_news_feed">Nie udało się pobrać kanału informacyjnego!</string>
 </resources>

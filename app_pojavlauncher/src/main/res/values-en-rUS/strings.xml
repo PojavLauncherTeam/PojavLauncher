@@ -44,7 +44,7 @@
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_login_error">Something went wrong after loging in. Please contact us with the following error.\nError: %s</string>
     <string name="toast_optifine_success">Install successful</string>
-    <string name="toast_uninstalljre_done">Uninstalled Java Runtime sucsesfully</string>
+    <string name="toast_uninstalljre_done">Uninstalled Java Runtime succesfully</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -53,6 +53,9 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Development console</string>
     <string name="mcl_tab_crash">Crash log</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connected</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>

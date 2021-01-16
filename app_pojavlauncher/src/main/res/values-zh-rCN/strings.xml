@@ -13,7 +13,7 @@
     <string name="login_online_username_question">（使用哪个？）</string>
     <string name="login_online_password_hint">密码</string>
     <string name="login_online_password_question">忘记密码？</string>
-    <string name="login_online_remember">记住我</string>
+    <string name="login_online_remember">记住我？</string>
     <string name="login_online_check_keeplogin">保持登录状态</string>
     <string name="login_online_login_label">登录</string>
     <string name="login_online_create_account">（创建新账号？）</string>
@@ -53,6 +53,9 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">开发控制台</string>
     <string name="mcl_tab_crash">崩溃日志</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">已连接</string>
+    <string name="mcl_account_offline">离线</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 就绪</string>
     <string name="mcl_launch_cleancache">正在清理缓存</string>
@@ -69,12 +72,14 @@
     <string name="mcl_option_about">关于</string>
     <string name="mcl_setting_title_uninstalljre">卸载 Java 运行时环境</string>
     <string name="mcl_setting_subtitle_uninstalljre">[需要重启启动器] 得以重新安装 Java 运行时环境。</string>
-    <string name="mcl_setting_title_freeform">以自由式模式启动 Minecraft</string>
+    <string name="mcl_setting_title_freeform">以自由窗口模式启动 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">隐藏侧边栏</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">怀念旧 v1 界面的用户可能喜欢这样。提供了更接近全屏的体验。</string>
     <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
-    <string name="mcl_setting_subtitle_buttonscale">若按键太小，将其放大。</string>
+    <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其放大。</string>
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
     <string name="mcl_setting_subtitle_mousescale">更改虚拟鼠标的大小。</string>
     <string name="mcl_setting_title_controlsize">设定控制键大小</string>
@@ -83,10 +88,10 @@
     <string name="mcl_setting_category_general">通用设置</string>
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
-    <string name="mcl_setting_veroption_release">Release</string>
-    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_release">正式版</string>
+    <string name="mcl_setting_veroption_snapshot">快照</string>
+    <string name="mcl_setting_veroption_oldalpha">远古alpha版</string>
+    <string name="mcl_setting_veroption_oldbeta">远古beta版</string>
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
     <string name="global_add">添加</string>
@@ -147,7 +152,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3rd</string>
+    <string name="control_thirdperson">视角</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">鼠标</string>
     <string name="control_mouseoff">鼠标：关</string>
@@ -175,7 +180,7 @@
     <string name="customctrl_keycombine">按键组合</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">上档</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
     <string name="main_options">选项</string>
@@ -186,4 +191,5 @@
     <string name="main_version">版本：</string>
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
+    <string name="main_no_news_feed">新闻获取失败！</string>
 </resources>

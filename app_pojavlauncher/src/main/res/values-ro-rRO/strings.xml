@@ -53,6 +53,7 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Consolă developer</string>
     <string name="mcl_tab_crash">Jurnal de erori</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
     <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
@@ -71,6 +72,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[repornire lansator necesar] Acest lucru vă re-instalează Java Runtime</string>
     <string name="mcl_setting_title_freeform">Deschide Minecraft-ul în modul de fereastră</string>
     <string name="mcl_setting_subtitle_freeform">Deschide Minecraft-ul în modul de fereastră plutitoare. Necesită Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Ascunde Bara Laterală</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Oamenii nostalgici care preferă vechiul v1 UI ar putea să îi placă aceasta. Îți dă mai multă impresie fullscreen.</string>
     <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
     <string name="mcl_setting_title_buttonscale">Redimensionare butoane de control</string>
@@ -180,4 +183,5 @@
     <string name="main_version">Versiune:</string>
     <string name="main_nocrash">Nicio eroare detectată</string>
     <string name="main_nolog">Niciun jurnal.</string>
+    <string name="main_no_news_feed">Preluarea fluxului de știri a eșuat!</string>
 </resources>

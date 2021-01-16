@@ -37,6 +37,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
+    <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_downloading">Йөкләү %s</string>
     <string name="mcl_options">Опциялар</string>

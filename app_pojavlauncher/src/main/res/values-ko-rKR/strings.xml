@@ -53,6 +53,9 @@
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">개발자 콘솔</string>
     <string name="mcl_tab_crash">충돌 로그</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">연결됨</string>
+    <string name="mcl_account_offline">오프라인</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었습니다.</string>
     <string name="mcl_launch_cleancache">캐시 파일 삭제</string>
@@ -71,6 +74,7 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher 재 실행 요구] Java 런타임 재 설치하기</string>
     <string name="mcl_setting_title_freeform">Minecraft를 Freeform mode로 실행하기</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다. Android 7.0 이상을 요구합니다.</string>
+    <string name="mcl_setting_title_hide_sidebar">사이드바 숨기기</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
     <string name="mcl_setting_subtitle_longpresstrigger">블럭 파괴와 아이템 던지기를 위한 길게 누르기 시간 변경</string>
     <string name="mcl_setting_title_buttonscale">컨트롤 버튼 크기</string>
