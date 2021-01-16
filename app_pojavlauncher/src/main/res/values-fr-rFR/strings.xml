@@ -54,6 +54,8 @@
     <string name="mcl_tab_console">Console de développement</string>
     <string name="mcl_tab_crash">Journal d\'erreurs</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connecté</string>
+    <string name="mcl_account_offline">Hors ligne</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Prêt à jouer à Minecraft %s</string>
     <string name="mcl_launch_cleancache">Nettoyage des fichiers cache</string>
@@ -73,7 +75,7 @@
     <string name="mcl_setting_title_freeform">Lancer Minecraft en mode libre</string>
     <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 +</string>
     <string name="mcl_setting_title_hide_sidebar">Cacher la barre latérale</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Les gens nostalgiques qui préfèrant l\'ancienne interface utilisateur (v1) peuvent aimer cette option. Vous donne une expérience orienté plein écran.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Les gens nostalgiques qui préfèrent l\'ancienne interface utilisateur (v1) peuvent aimer cette option. Vous donne une expérience orienté plein écran.</string>
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_buttonscale">Échelle des boutons de contrôle</string>
@@ -190,4 +192,7 @@
     <string name="main_nocrash">Aucune erreur détectée.</string>
     <string name="main_nolog">Pas de journal.</string>
     <string name="main_no_news_feed">Impossible de récupérer le flux d\'actualités !</string>
+    <string name="auto_ram_subtitle">Activer l\'ajusteur de Mémoire</string>
+    <string name="auto_ram_title">Mémoire Automatique</string>
+    <string name="autoram_info_msg">Mémoire définie à %d MB</string>
 </resources>
