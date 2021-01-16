@@ -18,7 +18,7 @@
     <ImageView
         android:layout_width="112dp"
         android:layout_height="match_parent"
-        android:src="@drawable/mojang_logo"
+        android:src="@drawable/pojav_logo"
         android:layout_alignParentRight="true"
         android:padding="5dp"
         android:background="#000000"

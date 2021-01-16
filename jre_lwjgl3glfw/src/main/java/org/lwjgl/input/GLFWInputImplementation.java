@@ -156,7 +156,7 @@ public class GLFWInputImplementation implements InputImplementation {
         event_buffer.put(button).put(state);
         //always put deltas when grabbed
         if (grab) {
-            event_buffer.putInt(acoord1-mouseLastX).putInt(acoord2-mouseLastY);
+            event_buffer.putInt(acoord1-mouseX).putInt(acoord2-mouseY);
         }else{
             event_buffer.putInt(acoord1).putInt(acoord2);
         }
