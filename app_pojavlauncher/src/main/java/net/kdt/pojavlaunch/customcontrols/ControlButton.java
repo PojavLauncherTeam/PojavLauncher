@@ -47,6 +47,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         
         mRectPaint = new Paint();
         mRectPaint.setColor(value.data);
+        mRectPaint.setAlpha(128);
     }
 
     public HandleView getHandleView() {
