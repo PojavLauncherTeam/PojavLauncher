@@ -188,24 +188,6 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         try {
             List<String> javaArgList = new ArrayList<String>();
 
-            File cacioAwtLibPath = new File(Tools.DIR_GAME_NEW, "cacioawtlib");
-            if (cacioAwtLibPath.exists()) {
-                StringBuilder libStr = new StringBuilder();
-                for (File file: cacioAwtLibPath.listFiles()) {
-                    if (file.getName().endsWith(".jar")) {
-                        libStr.append(":" + file.getAbsolutePath());
-                    }
-                }
-                javaArgList.add("-Xbootclasspath/a" + libStr.toString());
-            }
-
-            javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
-
-            File cacioArgOverrideFile = new File(cacioAwtLibPath, "overrideargs.txt");
-            if (cacioArgOverrideFile.exists()) {
-                javaArgList.addAll(Arrays.asList(Tools.read(cacioArgOverrideFile.getAbsolutePath()).split(" ")));
-            }
-
             if (javaArgs != null) {
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
             } else {

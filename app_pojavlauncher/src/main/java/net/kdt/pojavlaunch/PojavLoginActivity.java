@@ -335,6 +335,29 @@ public class PojavLoginActivity extends BaseActivity
         }
     }
    
+    private void unpackComponent(AssetManager am, String component) throws IOException {
+        InputStream is = am.open("components/" + component + "/version");
+        if(!new File(Tools.DIR_GAME_NEW + "/" + component + "/version").exists()) {
+            Log.i("UnpackPrep", component + ": Pack was installed manually, or does not exist, unpacking new...");
+            String[] fileList = am.list("components/" + component);
+            for(String s : fileList) {
+                Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_NEW + "/" + component, true);
+            }
+        } else {
+            FileInputStream fis = new FileInputStream(new File(Tools.DIR_GAME_NEW + "/" + component + "/version"));
+            String release1 = Tools.read(is);
+            String release2 = Tools.read(fis);
+            if (!release1.equals(release2)) {
+                String[] fileList = am.list("components/" + component);
+                for (String s : fileList) {
+                    Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_NEW + "/" + component, true);
+                }
+            } else {
+                Log.i("UnpackPrep", component + ": Pack is up-to-date with the launcher, continuing...");
+            }
+        }
+    }
+    
     private void initMain() throws Throwable {
         mkdirs(Tools.DIR_ACCOUNT_NEW);
         PojavMigrator.migrateAccountData(this);
@@ -380,35 +403,8 @@ public class PojavLoginActivity extends BaseActivity
 
             AssetManager am = this.getAssets();
             
-            InputStream is = am.open("components/lwjgl3/version");
-            if(!new File(Tools.DIR_GAME_NEW + "/lwjgl3/version").exists()) {
-                Log.i("LWJGL3Prep","Pack was installed manually, or does not exist, unpacking new...");
-                String[] lwjglFileList = am.list("components/lwjgl3");
-                // FileOutputStream fos;
-                // InputStream iis;
-                for(String s : lwjglFileList) {
-                    Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW + "/lwjgl3", true);
-                    /*
-                    iis = am.open("components/lwjgl3/"+s);
-                    fos = new FileOutputStream(new File(Tools.DIR_GAME_NEW+"/lwjgl3/"+s));
-                    IOUtils.copy(iis,fos);
-                    fos.close();
-                    iis.close();
-                    */
-                }
-            } else {
-                FileInputStream fis = new FileInputStream(new File(Tools.DIR_GAME_NEW + "/lwjgl3/version"));
-                String release1 = Tools.read(is);
-                String release2 = Tools.read(fis);
-                if (!release1.equals(release2)) {
-                    String[] lwjglFileList = am.list("components/lwjgl3");
-                    for (String s : lwjglFileList) {
-                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW + "/lwjgl3", true);
-                    }
-                } else {
-                    Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
-                }
-            }
+            unpackComponent(am, "caciocavallo");
+            unpackComponent(am, "lwjgl3");
             if (!isJavaRuntimeInstalled(am)) {
                 if(!installRuntimeAutomatically(am)) {
                     File jreTarFile = selectJreTarFile();

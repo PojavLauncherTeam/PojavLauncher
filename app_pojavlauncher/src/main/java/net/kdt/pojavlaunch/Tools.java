@@ -70,7 +70,19 @@ public final class Tools
         // 13w17a: 20130425
         // 13w18a: 20130502
         if (mcReleaseDate < 20130502) {
-            // TODO support 13w17a and below by use other AWT impl
+            javaArgList.add("-Djava.awt.headless=false");
+            
+            StringBuilder cacioClasspath = new StringBuilder();
+            cacioClasspath.append("-Xbootclasspath/a");
+            File cacioDir = new File(DIR_GAME_NEW + "/caciocavallo");
+            if (cacioDir.exists() && cacioDir.isDirectory()) {
+                for (File file : cacioDir.listFiles()) {
+                    if (file.getName().endsWith(".jar")) {
+                        cacioClasspath.append(":" + file.getAbsolutePath());
+                    }
+                }
+            }
+            javaArgList.add(cacioClasspath.toString());
         }
         
         javaArgList.add("-cp");
@@ -97,6 +109,14 @@ public final class Tools
 
         overrideableArgList.add("-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW);
         overrideableArgList.add("-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW);
+        
+        // Caciocavallo config 
+        overrideableArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
+        overrideableArgList.add("-Dsun.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
+        overrideableArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
+        overrideableArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
+        overrideableArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+        overrideableArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
         
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
