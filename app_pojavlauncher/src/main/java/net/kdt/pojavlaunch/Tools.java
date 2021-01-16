@@ -71,7 +71,15 @@ public final class Tools
         // 13w18a: 20130502
         if (mcReleaseDate < 20130502) {
             javaArgList.add("-Djava.awt.headless=false");
-            
+
+            // Caciocavallo config 
+            javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
+            javaArgList.add("-Dsun.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
+            javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
+            javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
+            javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+            javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
+
             StringBuilder cacioClasspath = new StringBuilder();
             cacioClasspath.append("-Xbootclasspath/a");
             File cacioDir = new File(DIR_GAME_NEW + "/caciocavallo");
@@ -109,14 +117,6 @@ public final class Tools
 
         overrideableArgList.add("-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW);
         overrideableArgList.add("-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW);
-        
-        // Caciocavallo config 
-        overrideableArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
-        overrideableArgList.add("-Dsun.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
-        overrideableArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
-        overrideableArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
-        overrideableArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
-        overrideableArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
         
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
