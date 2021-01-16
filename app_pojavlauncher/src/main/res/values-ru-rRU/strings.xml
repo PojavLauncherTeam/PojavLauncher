@@ -192,4 +192,7 @@
     <string name="main_nocrash">Сбоев не обнаружено</string>
     <string name="main_nolog">Нет записей</string>
     <string name="main_no_news_feed">Не удалось получить ленту новостей!</string>
+    <string name="auto_ram_subtitle">Включить авто-управление ОЗУ</string>
+    <string name="auto_ram_title">Автоматическая ОЗУ</string>
+    <string name="autoram_info_msg">Память установлена на %d МБ</string>
 </resources>
