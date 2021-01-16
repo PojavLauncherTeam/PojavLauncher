@@ -69,7 +69,7 @@ public final class Tools
         int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
         // 13w17a: 20130425
         // 13w18a: 20130502
-        if (mcReleaseDate < 20130502) {
+        if (mcReleaseDate < 20130502 && versionInfo.minimumLauncherVersion <= 4){
             javaArgList.add("-Djava.awt.headless=false");
 
             // Caciocavallo config 
