@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.system.*;
 import android.util.*;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -264,7 +265,20 @@ public class JREUtils
         List<String> javaArgList = new ArrayList<String>();
         javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
         Tools.getJavaArgs(ctx, javaArgList);
-
+        if(LauncherPreferences.DEFAULT_PREF.getBoolean("autoRam",true)) {
+            ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+            ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
+            purgeArg(javaArgList,"-Xms");
+            purgeArg(javaArgList,"-Xmx");
+            javaArgList.add("-Xms"+((mi.availMem / 1048576L)-50)+"M");
+            javaArgList.add("-Xmx"+((mi.availMem / 1048576L)-50)+"M");
+            ctx.runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,((mi.availMem / 1048576L)-50)), Toast.LENGTH_SHORT).show();
+                }
+            });
+            System.out.println(javaArgList);
+        }
         javaArgList.addAll(args);
         
         // For debugging only!
@@ -275,6 +289,7 @@ public class JREUtils
         }
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 */
+
         JREUtils.setJavaEnvironment(ctx, null);
         JREUtils.initJavaRuntime();
         JREUtils.chdir(Tools.DIR_GAME_NEW);
@@ -300,7 +315,14 @@ public class JREUtils
         }
         return exitCode;
     }
-
+    private static void purgeArg(List<String> argList, String argStart) {
+        for(int i = 0; i < argList.size(); i++) {
+            final String arg = argList.get(i);
+            if(arg.startsWith(argStart)) {
+                argList.remove(i);
+            }
+        }
+    }
     public static native int chdir(String path);
     public static native boolean dlopen(String libPath);
     public static native void redirectLogcat();

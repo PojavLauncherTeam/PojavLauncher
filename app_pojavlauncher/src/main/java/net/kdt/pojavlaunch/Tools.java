@@ -21,6 +21,7 @@ import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 import android.view.*;
+import android.widget.Toast;
 
 public final class Tools
 {
@@ -103,7 +104,7 @@ public final class Tools
         ctx.appendlnToLog("full args: "+javaArgList.toString());
         JREUtils.launchJavaVM(ctx, javaArgList);
     }
-    
+
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
         List<String> overrideableArgList = new ArrayList<String>();
 
