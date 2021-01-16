@@ -3,6 +3,8 @@ package net.kdt.pojavlaunch.authenticator.mojang;
 import android.content.*;
 import android.os.*;
 import com.google.gson.*;
+
+import java.io.IOException;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.authenticator.mojang.yggdrasil.*;
@@ -37,7 +39,10 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
         try {
             this.profilePath = MinecraftAccount.load(args[0]);
             int responseCode = 400;
-            responseCode = this.authenticator.validate(profilePath.accessToken).statusCode;
+            try {
+                responseCode = this.authenticator.validate(profilePath.accessToken).statusCode;
+            }catch(RuntimeException e) {}
+
             if (responseCode == 403) {
                 RefreshResponse response = this.authenticator.refresh(profilePath.accessToken, UUID.fromString(profilePath.clientToken));
                 // if (response == null) {
