@@ -75,10 +75,10 @@ public final class Tools
             // Caciocavallo config 
             javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
             javaArgList.add("-Dsun.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
+            javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
             javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
             javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
             javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
-            javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
 
             StringBuilder cacioClasspath = new StringBuilder();
             cacioClasspath.append("-Xbootclasspath/a");
