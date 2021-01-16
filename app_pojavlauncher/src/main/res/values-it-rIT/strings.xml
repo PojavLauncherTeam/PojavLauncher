@@ -192,4 +192,7 @@
     <string name="main_nocrash">Nessun crash rilevato</string>
     <string name="main_nolog">Nessun log.</string>
     <string name="main_no_news_feed">Collegamento alle news fallito !</string>
+    <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memory impostata a %d MB</string>
 </resources>
