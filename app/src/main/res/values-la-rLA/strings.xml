@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition quia Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Lorem Minecraft: Java Edition in vestra fabrica!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">AUXILIUM</string>
     <!-- Languages list part -->
+    <string name="language_name">LATINA - VA</string>
     <!-- Logging output -->
+    <string name="log_title">Log output</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email uel vos</string>
+    <string name="login_online_username_question">(Quod facere uti?)</string>
+    <string name="login_online_password_hint">Signum</string>
+    <string name="login_online_password_question">Oblitus es signum?</string>
+    <string name="login_online_remember">Memento mei?</string>
+    <string name="login_online_check_keeplogin">Custodi me apud log</string>
+    <string name="login_online_login_label">Login</string>
+    <string name="login_online_create_account">(Crea novae ratio?)</string>
+    <string name="login_offline_switch">Ratio offline?</string>
+    <string name="login_offline_label">Propter quod login offline</string>
+    <string name="login_offline_alert_skip">Skip</string>
+    <string name="login_error_short_username">Esse certe necesse est nomen tuum III characteribus</string>
+    <string name="login_error_exist_username">Hoc nomen iam exi</string>
+    <string name="login_select_account">Ob selectos</string>
     <!-- Hint -->
+    <string name="hint_select_account">Eligere, attingere. Delere illam non tenere.</string>
+    <string name="hint_control_mapping">"Hoc tamen non est non complevit et imperium in tua nunc!\n Ut patere ius menu ungunt reliquit◀\n Recensere tenere puga pyga ut, resize vel delete."</string>
     <!-- Warning -->
+    <string name="warning_title">Monitum</string>
+    <string name="warning_msg">Hoc non fit in vestri application Android (cf. sive denique æqualis est Android VII). Vos can utor VMOS tunc install is application est applicare pro VMOS. Sed VMOS Play redactum est, remota a te gratis install is manually.</string>
+    <string name="warning_noshowagain">Aut ne iterum</string>
+    <string name="warning_action_install">VMOS install</string>
+    <string name="warning_action_tryanyway">Haec tempta, usquam</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
@@ -41,5 +68,6 @@
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Log output</string>
     <!-- Update part (unused now) -->
 </resources>
