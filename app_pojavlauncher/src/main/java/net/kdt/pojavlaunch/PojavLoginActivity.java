@@ -710,7 +710,9 @@ public class PojavLoginActivity extends BaseActivity
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
+        String[] accountArr = new File(Tools.DIR_ACCOUNT_NEW).list();
+        for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
+            String s = accountArr[accountIndex];
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
             ImageView accountIcon = child.findViewById(R.id.accountitem_image_icon);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
@@ -783,7 +785,7 @@ public class PojavLoginActivity extends BaseActivity
                         @Override
                         public void onClick(DialogInterface p1, int p2) {
                             new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
-                            accountListLayout.removeViewsInLayout(0, 1);
+                            accountListLayout.removeViewsInLayout(accountIndex, 1);
                             //Resize the window
                             accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int) Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*55)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
                         }
