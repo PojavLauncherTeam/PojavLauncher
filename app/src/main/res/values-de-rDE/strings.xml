@@ -53,7 +53,7 @@
     <string name="toast_permission_denied">Die Schreib-/Lese-Berechtigung ist erforderlich!</string>
     <string name="toast_login_error">Etwas ist nach dem Login schiefgelaufen. Bitte sendet Feedback an die Entwickler.\n Fehler: %s</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
-    <string name="toast_shiftmode">Ducken (schleichen) Knopf Modus zu %s geändert</string>
+    <string name="toast_shiftmode">Der Shift (schleichen)-Knopf-Modus wurde zu %s geändert</string>
     <string name="toast_shiftmode_hold">Halten</string>
     <string name="toast_shiftmode_toggle">Drücke um den Modus ein oder auszuschalten</string>
     <!--
