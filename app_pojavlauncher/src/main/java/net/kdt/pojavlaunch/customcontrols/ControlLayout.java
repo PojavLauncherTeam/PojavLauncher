@@ -50,8 +50,8 @@ public class ControlLayout extends FrameLayout
             button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             if (!button.isDynamicBtn) {
-                button.dynamicX = Float.toString(button.x / CallbackBridge.windowWidth) + " * ${screen_width}";
-                button.dynamicY = Float.toString(button.y / CallbackBridge.windowHeight) + " * ${screen_height}";
+                button.dynamicX = Float.toString(button.x / CallbackBridge.physicalWidth) + " * ${screen_width}";
+                button.dynamicY = Float.toString(button.y / CallbackBridge.physicalHeight) + " * ${screen_height}";
             }
             button.update();
 			addControlView(button);

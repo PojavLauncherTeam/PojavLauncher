@@ -151,12 +151,12 @@ public class ControlData implements Cloneable
         Map<String, String> keyValueMap = new ArrayMap<>();
         keyValueMap.put("top", "0");
         keyValueMap.put("left", "0");
-        keyValueMap.put("right", Float.toString(CallbackBridge.windowWidth - width));
-        keyValueMap.put("bottom", Float.toString(CallbackBridge.windowHeight - height));
+        keyValueMap.put("right", Float.toString(CallbackBridge.physicalWidth - width));
+        keyValueMap.put("bottom", Float.toString(CallbackBridge.physicalHeight - height));
         keyValueMap.put("width", Float.toString(width));
         keyValueMap.put("height", Float.toString(height));
-        keyValueMap.put("screen_width", Integer.toString(CallbackBridge.windowWidth));
-        keyValueMap.put("screen_height", Integer.toString(CallbackBridge.windowHeight));
+        keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
+        keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
         keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
         
         // Insert value to ${variable}

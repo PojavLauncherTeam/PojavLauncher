@@ -113,7 +113,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
         if (!mProperties.isDynamicBtn) {
             mProperties.x = x;
-            mProperties.dynamicX = Float.toString(x / CallbackBridge.windowWidth) + " * ${screen_width}";
+            mProperties.dynamicX = Float.toString(x / CallbackBridge.physicalWidth) + " * ${screen_width}";
             setModified(true);
         }
     }
@@ -124,7 +124,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
         if (!mProperties.isDynamicBtn) {
             mProperties.y = y;
-            mProperties.dynamicY = Float.toString(y / CallbackBridge.windowHeight) + " * ${screen_height}";
+            mProperties.dynamicY = Float.toString(y / CallbackBridge.physicalHeight) + " * ${screen_height}";
             setModified(true);
         }
     }

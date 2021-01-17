@@ -14,6 +14,7 @@ public class CallbackBridge {
     public static final int CLIPBOARD_PASTE = 2001;
     
     public static volatile int windowWidth, windowHeight;
+    public static volatile int physicalWidth, physicalHeight;
     public static int mouseX, mouseY;
     public static boolean mouseLeft;
     public static StringBuilder DEBUG_STRING = new StringBuilder();

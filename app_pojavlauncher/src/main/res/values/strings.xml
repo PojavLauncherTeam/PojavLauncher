@@ -224,4 +224,6 @@
     <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory set to %d MB</string>
+    <string name="resolution_decrease_subtitle">Allows you to decrease the game resolution. Improves framerate. 0 is the default.</string>
+    <string name="resolution_decrease_title">Resolution decrease ratio</string>
 </resources>

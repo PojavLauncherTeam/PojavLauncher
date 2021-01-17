@@ -333,12 +333,12 @@ public final class Tools
     public static DisplayMetrics currentDisplayMetrics;
     public static void updateWindowSize(Activity ctx) {
         currentDisplayMetrics = getDisplayMetrics(ctx);
-        CallbackBridge.windowWidth = currentDisplayMetrics.widthPixels;
-        CallbackBridge.windowHeight = currentDisplayMetrics.heightPixels;
+        CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
+        CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
         
-        if (CallbackBridge.windowWidth < CallbackBridge.windowHeight) {
-            CallbackBridge.windowWidth = currentDisplayMetrics.heightPixels;
-            CallbackBridge.windowHeight = currentDisplayMetrics.widthPixels;
+        if (CallbackBridge.physicalWidth < CallbackBridge.physicalHeight) {
+            CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.heightPixels);
+            CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.widthPixels);
         }
     }
 

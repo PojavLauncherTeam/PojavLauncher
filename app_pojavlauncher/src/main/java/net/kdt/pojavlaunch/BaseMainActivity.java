@@ -35,7 +35,7 @@ public class BaseMainActivity extends LoggableActivity {
         LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
 
     private boolean rightOverride = false;
-    private int scaleFactor = 1;
+    private float scaleFactor = 1;
     private int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
@@ -135,8 +135,8 @@ public class BaseMainActivity extends LoggableActivity {
             isInputStackCall = mVersionInfo.arguments != null;
             
             this.displayMetrics = Tools.getDisplayMetrics(this);
-            CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
-            CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
+            CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels / scaleFactor);
+            CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels / scaleFactor);
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
             MCOptionUtils.load();
@@ -221,7 +221,7 @@ public class BaseMainActivity extends LoggableActivity {
             
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 */
-            placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
+            placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
             new Thread(new Runnable(){
 
                     private boolean isCapturing = false;
@@ -236,7 +236,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     {
                                         if (lastGrab && !CallbackBridge.isGrabbing() && lastEnabled) {
                                             touchPad.setVisibility(View.VISIBLE);
-                                            placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
+                                            placeMouseAt(displayMetrics.widthPixels / 2, displayMetrics.heightPixels / 2);
                                         }
 
                                         if (!CallbackBridge.isGrabbing()) {
@@ -293,7 +293,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                         if (gestureDetector.onTouchEvent(event)) {
 
-                            CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
+                            CallbackBridge.sendCursorPos((int) (mouseX / scaleFactor), (int) (mouseY /scaleFactor));
                             CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
@@ -309,11 +309,11 @@ public class BaseMainActivity extends LoggableActivity {
                                     }
                                     break;
                                 case MotionEvent.ACTION_MOVE: // 2
-                                    mouseX = Math.max(0, Math.min(CallbackBridge.windowWidth, mouseX + x - prevX));
-                                    mouseY = Math.max(0, Math.min(CallbackBridge.windowHeight, mouseY + y - prevY));
+                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + x - prevX));
+                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
                                     placeMouseAt(mouseX, mouseY);
 
-                                    CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
+                                    CallbackBridge.sendCursorPos((int) (mouseX / scaleFactor),  (int) (mouseY /scaleFactor));
                                     /*
                                     if (!CallbackBridge.isGrabbing()) {
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
@@ -353,8 +353,8 @@ public class BaseMainActivity extends LoggableActivity {
                         }
                         if (mptrIndex != -1) {
                             //handle mouse events by just sending the coords of the new point in touch event
-                            int x = ((int) e.getX(mptrIndex)) / scaleFactor;
-                            int y = ((int) e.getY(mptrIndex)) / scaleFactor;
+                            int x = (int) (e.getX(mptrIndex) / scaleFactor);
+                            int y = (int) (e.getY(mptrIndex) / scaleFactor);
                             CallbackBridge.mouseX = x;
                             CallbackBridge.mouseY = y;
                             CallbackBridge.sendCursorPos(x, y);
@@ -370,8 +370,8 @@ public class BaseMainActivity extends LoggableActivity {
                         y += (int)(e.getY() - e.getHistoricalY(0));
                     }
                     if(!CallbackBridge.isGrabbing()) {
-                        x = (int) e.getX();
-                        y = (int) e.getY();
+                        x = (int) (e.getX() / scaleFactor);
+                        y = (int) (e.getY() / scaleFactor);
                     }
 
                     int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
@@ -654,10 +654,13 @@ public class BaseMainActivity extends LoggableActivity {
                     private boolean isCalled = false;
                     @Override
                     public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-                        CallbackBridge.windowWidth = width;
-                        CallbackBridge.windowHeight = height;
+                        scaleFactor = (LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",0)/100f) + 1f;
+                        texture.setDefaultBufferSize((int)(width/scaleFactor),(int)(height/scaleFactor));
+                        CallbackBridge.windowWidth = (int)(width/scaleFactor);
+                        CallbackBridge.windowHeight = (int)(height/scaleFactor);
+                        //CallbackBridge.sendUpdateWindowSize((int)(width/scaleFactor),(int)(height/scaleFactor));
+
                         calculateMcScale();
-                        
                         // Should we do that?
                         if (!isCalled) {
                             isCalled = true;
@@ -686,9 +689,9 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-                        CallbackBridge.windowWidth = width;
-                        CallbackBridge.windowHeight = height;
-                        CallbackBridge.sendUpdateWindowSize(width, height);
+                        CallbackBridge.windowWidth = (int)(width/scaleFactor);
+                        CallbackBridge.windowHeight = (int)(height/scaleFactor);
+                        CallbackBridge.sendUpdateWindowSize((int)(width/scaleFactor),(int)(height/scaleFactor));
                         calculateMcScale();
                         
                         // TODO: Implement this method for GLFW window size callback

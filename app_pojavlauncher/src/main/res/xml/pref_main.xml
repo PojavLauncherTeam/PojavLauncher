@@ -18,7 +18,13 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:icon="@drawable/tap_len" />
-
+        <androidx.preference.SeekBarPreference
+            android:key="resolutionRatio"
+            android:summary="@string/resolution_decrease_subtitle"
+            android:title="@string/resolution_decrease_title"
+            android:max="500"
+            app2:showSeekBarValue="true"
+            app2:selectable="false" />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="freeform"
