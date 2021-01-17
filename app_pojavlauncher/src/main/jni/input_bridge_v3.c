@@ -261,7 +261,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
                 isCursorEntered = true;
             }
         }
-        
+
         if (isGrabbing) {
             if (!isPrepareGrabPos) {
                 grabCursorX += x - lastCursorX;
@@ -276,9 +276,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
                 return;
             }
         }
-        
+
         if (!isUseStackQueueCall) {
-            GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
+            GLFW_invoke_CursorPos(showingWindow, (double) (x), (double) (y));
         } else {
             sendData(EVENT_TYPE_CURSOR_POS, (isGrabbing ? grabCursorX : x), (isGrabbing ? grabCursorY : y), 0, 0);
         }

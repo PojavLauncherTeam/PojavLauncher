@@ -144,11 +144,9 @@ public class GLFWInputImplementation implements InputImplementation {
         int acoord1=0;
         int acoord2=0;
         if(coord1 == -1 && coord2 == -1) {
-            acoord1 = mouseComparatorX;
-            acoord2 = mouseComparatorY;
+            acoord1 = mouseX;
+            acoord2 = mouseY;
         }else{
-            mouseComparatorX = coord1;
-            mouseComparatorY = coord2;
             acoord1 = coord1;
             acoord2= coord2;
         }
