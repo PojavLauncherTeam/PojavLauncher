@@ -191,4 +191,7 @@
     <string name="main_nocrash">Nie wykryto awarii</string>
     <string name="main_nolog">Brak logów.</string>
     <string name="main_no_news_feed">Nie udało się pobrać kanału informacyjnego!</string>
+    <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
+    <string name="auto_ram_title">Automatyczny ram</string>
+    <string name="autoram_info_msg">Pamięć ustawiona na %d MB</string>
 </resources>
