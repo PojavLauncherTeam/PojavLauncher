@@ -270,8 +270,13 @@ public class JREUtils
             ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
             purgeArg(javaArgList,"-Xms");
             purgeArg(javaArgList,"-Xmx");
-            javaArgList.add("-Xms"+((mi.availMem / 1048576L)-50)+"M");
-            javaArgList.add("-Xmx"+((mi.availMem / 1048576L)-50)+"M");
+            if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 750) {
+                javaArgList.add("-Xms750M");
+                javaArgList.add("-Xmx750M");
+            }else {
+                javaArgList.add("-Xms" + ((mi.availMem / 1048576L) - 50) + "M");
+                javaArgList.add("-Xmx" + ((mi.availMem / 1048576L) - 50) + "M");
+            }
             ctx.runOnUiThread(new Runnable() {
                 public void run() {
                     Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,((mi.availMem / 1048576L)-50)), Toast.LENGTH_SHORT).show();
