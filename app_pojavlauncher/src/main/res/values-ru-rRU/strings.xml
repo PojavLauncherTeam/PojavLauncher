@@ -194,5 +194,5 @@
     <string name="main_no_news_feed">Не удалось получить ленту новостей!</string>
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
-    <string name="autoram_info_msg">Память установлена на %d Мбайт</string>
+    <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
 </resources>
