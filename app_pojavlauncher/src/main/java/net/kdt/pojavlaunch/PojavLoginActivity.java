@@ -783,7 +783,7 @@ public class PojavLoginActivity extends BaseActivity
                         @Override
                         public void onClick(DialogInterface p1, int p2) {
                             new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
-                            accountListLayout.removeViewsInLayout(0,1);
+                            accountListLayout.removeViewsInLayout(0, 1);
                             //Resize the window
                             accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int) Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*55)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
                         }

@@ -24,6 +24,10 @@ public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
     public Throwable doInBackground(String... args) {
         path = args[0];
         try {
+            if (profilePath.accessToken.equals("0")) {
+                return null;
+            }
+            
             this.profilePath = MinecraftAccount.load(args[0]);
             this.authenticator.invalidate(profilePath.accessToken,
                 UUID.fromString(profilePath.isMicrosoft ? profilePath.profileId : profilePath.clientToken /* should be? */));
