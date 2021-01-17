@@ -173,10 +173,23 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         decorView.setSystemUiVisibility(uiOptions);
         System.out.println("call to onResume; E");
     }
-
+    SharedPreferences.OnSharedPreferenceChangeListener listRefreshListener = null;
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
+        if(listRefreshListener == null) {
+            final BaseLauncherActivity thiz = this;
+            listRefreshListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                    if(key.startsWith("vertype_")) {
+                        System.out.println("Verlist update needed!");
+                        new RefreshVersionListTask(thiz).execute();
+                    }
+                }
+            };
+            LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
+        }
         new RefreshVersionListTask(this).execute();
         System.out.println("call to onResumeFragments");
         try{

@@ -1,12 +1,14 @@
 package net.kdt.pojavlaunch;
 
 import android.animation.ValueAnimator;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.VerticalTabLayout.ViewPagerAdapter;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +26,7 @@ import net.kdt.pojavlaunch.fragments.ConsoleFragment;
 import net.kdt.pojavlaunch.fragments.CrashFragment;
 import net.kdt.pojavlaunch.fragments.LauncherFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferenceFragment;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
 import java.io.File;
@@ -204,6 +207,14 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         statusIsLaunching(false);
 
         initTabs(0);
+        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                if(key.equals("hideSidebar")) {
+                    restoreOldLook(sharedPreferences.getBoolean("hideSidebar",false));
+                }
+            }
+        });
         restoreOldLook(PREF_HIDE_SIDEBAR);
     }
 
@@ -287,6 +298,24 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             //Enlarge the button, but just a bit.
             params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
             params.width = (int)(params.width*1.80);
+            mPlayButton.setLayoutParams(params);
+        }else{
+            //UI v2 Style
+            //Show the sidebar back
+            Guideline guideLine = findViewById(R.id.guidelineLeft);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
+            params.guidePercent = 0.23f; // 23%, range: 0 <-> 1
+            guideLine.setLayoutParams(params);
+
+            //Show the selected Tab
+            selected.setVisibility(View.VISIBLE);
+
+            //Set the default button size
+            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
+            params.width = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    160,
+                    getResources().getDisplayMetrics());
             mPlayButton.setLayoutParams(params);
         }
     }
