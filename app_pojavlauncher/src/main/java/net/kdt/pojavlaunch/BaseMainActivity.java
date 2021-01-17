@@ -365,7 +365,7 @@ public class BaseMainActivity extends LoggableActivity {
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
                    /* int x = ((int) e.getX()) / scaleFactor;
                     int y = ((int) e.getY()) / scaleFactor;*/
-                    if(e.getHistorySize() > 0) {
+                    if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
                         x += (int)(e.getX() - e.getHistoricalX(0));
                         y += (int)(e.getY() - e.getHistoricalY(0));
                     }
@@ -373,6 +373,7 @@ public class BaseMainActivity extends LoggableActivity {
                         x = (int) e.getX();
                         y = (int) e.getY();
                     }
+
                     int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
                         if (hudKeyHandled != -1) {

@@ -21,6 +21,7 @@ import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 import android.view.*;
+import android.widget.Toast;
 
 public final class Tools
 {
@@ -69,10 +70,10 @@ public final class Tools
         int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
         // 13w17a: 20130425
         // 13w18a: 20130502
-        if (mcReleaseDate < 20130502 && versionInfo.minimumLauncherVersion <= 4){
+        if (mcReleaseDate < 20130502 && versionInfo.minimumLauncherVersion < 9){
+            ctx.appendlnToLog("AWT-enabled version detected! ("+mcReleaseDate+")");
             javaArgList.add("-Djava.awt.headless=false");
-
-            // Caciocavallo config 
+            // Caciocavallo config AWT-enabled version
             javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
             javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
             // javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
@@ -91,6 +92,8 @@ public final class Tools
                 }
             }
             javaArgList.add(cacioClasspath.toString());
+        }else{
+            ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
         
         javaArgList.add("-cp");
@@ -98,10 +101,10 @@ public final class Tools
 
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
-
+        ctx.appendlnToLog("full args: "+javaArgList.toString());
         JREUtils.launchJavaVM(ctx, javaArgList);
     }
-    
+
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
         List<String> overrideableArgList = new ArrayList<String>();
 
