@@ -3,21 +3,63 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition skirta Android)</string>
     <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Paleiskite Minecraft: Java Edition savo įrenginyje!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">PAGALBA</string>
     <!-- Languages list part -->
     <string name="language_name">LIETUVIŲ - LT</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">El. paštas arba slapyvardis</string>
+    <string name="login_online_username_question">(Kurį naudoti?)</string>
+    <string name="login_online_password_hint">Slaptažodis</string>
+    <string name="login_online_password_question">Pamiršote slaptažodį?</string>
+    <string name="login_online_remember">Atsiminti?</string>
+    <string name="login_online_check_keeplogin">Likti prisijungus</string>
+    <string name="login_online_login_label">Prisijungti</string>
+    <string name="login_online_create_account">(Sukurti naują paskyrą?)</string>
+    <string name="login_offline_switch">Netikra paskyra?</string>
+    <string name="login_offline_label">Prisijungti naudojant netikrą paskyrą</string>
+    <string name="login_offline_alert_skip">Praleisti</string>
+    <string name="login_error_short_username">Slapyvardis turi būti bent iš 3 simbolių</string>
+    <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
+    <string name="login_select_account">Pasirinkti paskyrą</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_action_exit">Išeiti</string>
+    <string name="warning_remove_account">Ši paskyra bus pašalinta!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Pasirinkti kontrolių JSON</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher netikėtai išsijungė</string>
+    <string name="error_checklog">Klaida! Prašome pažiūrėti įrašus žemiau: %s</string>
+    <string name="error_no_version">Nėra versijos!</string>
+    <string name="error_load_version">Negalima įkelti versijos %s</string>
+    <string name="error_show_more">Rodyti daugiau</string>
+    <string name="error_show_less">Rodyti mažiau</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Skaitymo/rašymo atmintyje leidimas yra būtinas!</string>
+    <string name="toast_login_error">Kažkas blogo atsitiko po prisijungimo. Prašome palikti žinutę kūrejui.\nKlaida: %s</string>
+    <string name="toast_optifine_success">Instaliavimas sėkmingas</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_console">Kūrėjo konsolė</string>
+    <string name="mcl_tab_crash">Išsijungimo įrašai</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Pasiruošta žaisti Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Valomi nereikalingi failai</string>
+    <string name="mcl_launch_downloading">Atsisiunčiama %s</string>
+    <string name="mcl_launch_download_assets">Rengiamasi atsisiųsti resursus</string>
+    <string name="mcl_options">Pasirinkimai</string>
+    <string name="mcl_option_modmgr">Modifikacijos (neveikia)</string>
+    <string name="mcl_option_checkupdate">Ieškoti atnaujinimų</string>
+    <string name="mcl_option_customcontrol">Kontrolės</string>
+    <string name="mcl_option_settings">Nustatymai</string>
+    <string name="mcl_option_about">Apie</string>
+    <string name="mcl_setting_title_freeform">Paleisti laisvoje formoje</string>
+    <string name="mcl_setting_subtitle_freeform">Paleisti Minecraft skraidančiame lange. Reikia Android 7.0+</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
@@ -42,10 +84,33 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Išeiti</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_secondary">Šal</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3</string>
+    <string name="control_listplayers">TAB</string>
+    <string name="control_mouse">Pelė</string>
+    <string name="control_mouseoff">Pelė: išjungta</string>
+    <string name="control_mouseon">Pelė: įjungta </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Priverstinai išjungti</string>
+    <string name="control_viewout">Žurnalo įrašai</string>
+    <string name="control_customkey">Siųsti mygtuko kodą</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_keyname">Mygtuko kodas</string>
+    <string name="customctrl_specialkey">Specialus kodas</string>
+    <string name="customctrl_hidden">Paslėpta</string>
+    <string name="customctrl_addbutton">Pridėti mygtuką</string>
+    <string name="customctrl_selectdefault">Pasirinkti pagrindinį kontrolių JSON</string>
+    <string name="main_options">Pasirinkimai</string>
+    <string name="main_play">Žaisti</string>
+    <string name="main_infodev">Informacija</string>
+    <string name="main_switchuser">Perjungti žaidėją</string>
+    <string name="main_version">Versija:</string>
+    <string name="main_nocrash">Nerasta netikėtų išsijungimų</string>
+    <string name="main_nolog">Nėra įrašų.</string>
 </resources>
