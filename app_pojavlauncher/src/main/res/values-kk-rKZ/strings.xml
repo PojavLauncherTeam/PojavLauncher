@@ -54,6 +54,8 @@
     <string name="mcl_tab_console">Әзірлеу консолі</string>
     <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Желіде</string>
+    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
     <string name="mcl_launch_cleancache">Кәш файлдары жойылуда</string>
@@ -190,4 +192,9 @@
     <string name="main_nocrash">Іркіліс табылмады</string>
     <string name="main_nolog">Лог жоқ.</string>
     <string name="main_no_news_feed">Жаңалық легін алу мүмкін емес!</string>
+    <string name="auto_ram_subtitle">Автоматты түрде ОЕСҚ-ны басқарады</string>
+    <string name="auto_ram_title">Авто ОЕСҚ</string>
+    <string name="autoram_info_msg">%d МБ жад берілді</string>
+    <string name="resolution_decrease_subtitle">Ойын өлшемін азайтып, кадр жиілігін жақсартады. Әдепкісі 0.</string>
+    <string name="resolution_decrease_title">Өлшем азайту</string>
 </resources>
