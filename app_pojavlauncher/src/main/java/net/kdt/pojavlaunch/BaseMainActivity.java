@@ -139,10 +139,6 @@ public class BaseMainActivity extends LoggableActivity {
             CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels / scaleFactor);
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
-            MCOptionUtils.load();
-            MCOptionUtils.set("overrideWidth", Integer.toString(CallbackBridge.windowWidth));
-            MCOptionUtils.set("overrideHeight", Integer.toString(CallbackBridge.windowHeight));
-            MCOptionUtils.save();
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
@@ -659,7 +655,10 @@ public class BaseMainActivity extends LoggableActivity {
                         CallbackBridge.windowWidth = (int)(width/scaleFactor);
                         CallbackBridge.windowHeight = (int)(height/scaleFactor);
                         //CallbackBridge.sendUpdateWindowSize((int)(width/scaleFactor),(int)(height/scaleFactor));
-
+                        MCOptionUtils.load();
+                        MCOptionUtils.set("overrideWidth", ""+CallbackBridge.windowWidth);
+                        MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
+                        MCOptionUtils.save();
                         calculateMcScale();
                         // Should we do that?
                         if (!isCalled) {
