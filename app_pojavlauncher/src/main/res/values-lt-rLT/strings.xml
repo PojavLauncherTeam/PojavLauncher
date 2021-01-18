@@ -22,13 +22,17 @@
     <string name="login_offline_alert_skip">Praleisti</string>
     <string name="login_error_short_username">Slapyvardis turi būti bent iš 3 simbolių</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
+    <string name="login_microsoft">Microsoft prisijungimas</string>
     <string name="login_select_account">Pasirinkti paskyrą</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Vilkti iš dešinės į kairę kad atidarytumėte meniu. ◀\nLaikykite mygtuką kad pritaikytume: redaguoti, padidinti ar ištrinti."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Išeiti</string>
     <string name="warning_remove_account">Ši paskyra bus pašalinta!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Instaliuoti Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_selectkeymap">Pasirinkti kontrolių JSON</string>
+    <string name="alerttitle_installmod">Pasirinkite modifikacijų įdiegimui</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher netikėtai išsijungė</string>
     <string name="error_checklog">Klaida! Prašome pažiūrėti įrašus žemiau: %s</string>
@@ -40,27 +44,52 @@
     <string name="toast_permission_denied">Skaitymo/rašymo atmintyje leidimas yra būtinas!</string>
     <string name="toast_login_error">Kažkas blogo atsitiko po prisijungimo. Prašome palikti žinutę kūrejui.\nKlaida: %s</string>
     <string name="toast_optifine_success">Instaliavimas sėkmingas</string>
+    <string name="toast_uninstalljre_done">Baigta instaliuoti Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Naujienos</string>
     <string name="mcl_tab_console">Kūrėjo konsolė</string>
     <string name="mcl_tab_crash">Išsijungimo įrašai</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Prisijungta</string>
+    <string name="mcl_account_offline">Neprisijungta</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pasiruošta žaisti Minecraft %s</string>
     <string name="mcl_launch_cleancache">Valomi nereikalingi failai</string>
     <string name="mcl_launch_downloading">Atsisiunčiama %s</string>
+    <string name="mcl_launch_downloading_progress">"Atsisiunčiama %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Rengiamasi atsisiųsti resursus</string>
     <string name="mcl_options">Pasirinkimai</string>
     <string name="mcl_option_modmgr">Modifikacijos (neveikia)</string>
+    <string name="mcl_option_modinstall">Paleisti modifikacijų įdiegimui (Forge, LabyMod, Fabric, kt.)</string>
     <string name="mcl_option_checkupdate">Ieškoti atnaujinimų</string>
     <string name="mcl_option_customcontrol">Kontrolės</string>
     <string name="mcl_option_settings">Nustatymai</string>
     <string name="mcl_option_about">Apie</string>
     <string name="mcl_setting_title_freeform">Paleisti laisvoje formoje</string>
     <string name="mcl_setting_subtitle_freeform">Paleisti Minecraft skraidančiame lange. Reikia Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Kaip ilgai suveiks po palaikymo</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Pakeisti veikimo laiką po palaikymo panaikinti ir išmesti daiktą.</string>
+    <string name="mcl_setting_title_controlsize">Pakeisti kontrolių dydį</string>
+    <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
+    <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
+    <string name="mcl_setting_veroption_release">Leidimai</string>
+    <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta</string>
+    <string name="mcl_version_clone">Klonuoti</string>
     <!-- Global strings -->
+    <string name="global_add">Pridėti</string>
+    <string name="global_edit">Redaguoti</string>
+    <string name="global_error">Klaida</string>
+    <string name="global_load">Įjungti</string>
+    <string name="global_name">Pavadinimas</string>
+    <string name="global_remove">Pašalinti</string>
+    <string name="global_restart">Perkrauti</string>
+    <string name="global_save">Išsaugoti</string>
+    <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -85,8 +114,18 @@
     -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Išeiti</string>
+    <string name="mcn_exit_crash">Žaidimo išsijungimas rastas! Paspauskite OK išėjimui.</string>
+    <string name="mcn_exit_errcrash">Negalima rasti išsijungimo! Jūs galite tai ignoruoti.</string>
+    <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_secondary">Šal</string>
+    <string name="controls">Kontrolės</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Klaviatūra</string>
+    <string name="control_chat">Pokalbiai</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_zoom">Priartinti (C)</string>
+    <string name="control_primary">Kairė</string>
+    <string name="control_secondary">Deš.</string>
     <string name="control_inventory">Inv</string>
     <string name="control_thirdperson">3</string>
     <string name="control_listplayers">TAB</string>
