@@ -1163,7 +1163,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     public void calculateMcScale() {
         int scale = 1;
-        while (CallbackBridge.windowWidth / (scale + 1) >= 320 && CallbackBridge.windowHeight / (scale + 1) >= 240) {
+        while (CallbackBridge.physicalWidth / (scale + 1) >= 320 && CallbackBridge.physicalHeight / (scale + 1) >= 240) {
             scale++;
         }
         this.guiScale = scale;
@@ -1174,8 +1174,8 @@ public class BaseMainActivity extends LoggableActivity {
         
         int barheight = mcscale(20);
         int barwidth = mcscale(180);
-        int barx = (CallbackBridge.windowWidth / 2) - (barwidth / 2);
-        int bary = CallbackBridge.windowHeight - barheight;
+        int barx = (CallbackBridge.physicalWidth / 2) - (barwidth / 2);
+        int bary = CallbackBridge.physicalHeight - barheight;
         if (x < barx || x >= barx + barwidth || y < bary || y >= bary + barheight) {
             return -1;
         }
