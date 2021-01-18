@@ -187,4 +187,6 @@
     <string name="auto_ram_subtitle">Activează ajustarea automată RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memorie setată la %d MB</string>
+    <string name="resolution_decrease_subtitle">Vă permite să micșorați rezoluția jocului. Îmbunătățește framerate-ul. 0 este implicitul.</string>
+    <string name="resolution_decrease_title">Rata diminuării rezoluţiei</string>
 </resources>
