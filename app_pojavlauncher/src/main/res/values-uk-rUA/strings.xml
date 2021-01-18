@@ -54,6 +54,8 @@
     <string name="mcl_tab_console">Консоль розробки</string>
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">З\'єднано</string>
+    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готовий до запуску</string>
     <string name="mcl_launch_cleancache">Очищення файлів кешу</string>
@@ -72,6 +74,7 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Необхідно перезапустити лаунчер] Це допоможе вам перевстановити Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плаваючому вікні</string>
     <string name="mcl_setting_subtitle_freeform">Запустити Minecraft в плаваючому вікні. Треба Android 7.0 чи вище</string>
+    <string name="mcl_setting_title_hide_sidebar">Приховати бічну панель</string>
     <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
     <string name="mcl_setting_title_buttonscale">Масштабування кнопок керування</string>
