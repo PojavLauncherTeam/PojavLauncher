@@ -17,8 +17,8 @@
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
     <string name="login_online_create_account">(Создать новую учетную запись?)</string>
-    <string name="login_offline_switch">Оффлайн учетная запись?</string>
-    <string name="login_offline_label">Войти как оффлайн учетная запись</string>
+    <string name="login_offline_switch">Офлайн учетная запись?</string>
+    <string name="login_offline_label">Войти как офлайн учетная запись</string>
     <string name="login_offline_alert_skip">Пропустить</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
@@ -55,7 +55,7 @@
     <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
-    <string name="mcl_account_offline">Оффлайн</string>
+    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
