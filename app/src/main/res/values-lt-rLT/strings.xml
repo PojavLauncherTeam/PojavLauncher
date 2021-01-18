@@ -83,7 +83,29 @@
     <string name="mcl_setting_title_setmaxdxref">Nustatyti maksimalią DX nuorodų skaičių</string>
     <string name="mcl_setting_subtitle_setmaxdxref">Padidinti jei atsitinka klaida konvertuojant: Per daug ... nuorodų. Jūs galite bandyti Multi-DEX pasirinkimą. Rekomenduojama: 4096 arba 8192.</string>
     <string name="mcl_setting_title_freeform">Paleisti laisvoje formoje</string>
+    <string name="mcl_setting_subtitle_freeform">Paleisti Minecraft skraidančiame lange. Reikia Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Kaip ilgai suveiks po palaikymo</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Pakeisti veikimo laiką po palaikymo panaikinti ir išmesti daiktą.</string>
+    <string name="mcl_setting_title_controlsize">Pakeisti kontrolių dydį</string>
+    <string name="mcl_setting_title_forgetoptifpath">Padaryti OptiFine nerasti savęs</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Padeda OptiFine būti naudojama ant kai kurių prietaisų.</string>
+    <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
+    <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
+    <string name="mcl_setting_veroption_release">Leidimai</string>
+    <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta</string>
+    <string name="mcl_version_clone">Klonuoti</string>
     <!-- Global strings -->
+    <string name="global_add">Pridėti</string>
+    <string name="global_edit">Redaguoti</string>
+    <string name="global_error">Klaida</string>
+    <string name="global_load">Įjungti</string>
+    <string name="global_name">Pavadinimas</string>
+    <string name="global_remove">Pašalinti</string>
+    <string name="global_restart">Perkrauti</string>
+    <string name="global_save">Išsaugoti</string>
+    <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -107,9 +129,20 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Žaidimas išjungiamas</string>
     <string name="mcn_exit_call">Išeiti</string>
+    <string name="mcn_exit_crash">Žaidimo išsijungimas rastas! Paspauskite OK išėjimui.</string>
+    <string name="mcn_exit_errcrash">Negalima rasti išsijungimo! Jūs galite tai ignoruoti.</string>
+    <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">Šal</string>
+    <string name="controls">Kontrolės</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Klaviatūra</string>
+    <string name="control_chat">Pokalbiai</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Priartinti (C)</string>
+    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">Kairė</string>
+    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">Deš.</string>
     <string name="control_inventory">Inv</string>
     <string name="control_thirdperson">3</string>
     <string name="control_listplayers">TAB</string>
