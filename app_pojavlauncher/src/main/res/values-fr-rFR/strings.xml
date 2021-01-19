@@ -195,4 +195,6 @@
     <string name="auto_ram_subtitle">Activer l\'ajusteur de Mémoire</string>
     <string name="auto_ram_title">Mémoire Automatique</string>
     <string name="autoram_info_msg">Mémoire définie à %d MB</string>
+    <string name="resolution_decrease_subtitle">Vous permet de diminuer la résolution du jeu. Améliore la fréquence d\'images. 0 est la valeur par défaut.</string>
+    <string name="resolution_decrease_title">Taux de diminution de la résolution</string>
 </resources>
