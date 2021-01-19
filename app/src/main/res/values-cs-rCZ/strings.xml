@@ -73,7 +73,7 @@
     <string name="mcl_launch_convert_client">Převádění Minecraftu %s</string>
     <string name="mcl_launch_patch_client">Záplatuji Minecraft %s</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
-    <string name="mcl_options">Nastavení</string>
+    <string name="mcl_options">Možnosti</string>
     <string name="mcl_option_modmgr">Manažer modifikací (bez funkce)</string>
     <string name="mcl_option_optifineinstall">Nainstalovat OptiFine</string>
     <string name="mcl_option_checkupdate">Zkontrolovat aktualizace</string>
