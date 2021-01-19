@@ -698,13 +698,14 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public void onSurfaceTextureUpdated(SurfaceTexture texture) {
-                        
+                        texture.setDefaultBufferSize(CallbackBridge.windowWidth,CallbackBridge.windowHeight);
                     }
                 });
         } catch (Throwable e) {
             Tools.showError(this, e, true);
         }
     }
+
     /*
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {

@@ -10,7 +10,7 @@ import net.kdt.pojavlaunch.customcontrols.handleview.*;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
-public class ControlButton extends Button implements OnLongClickListener, OnTouchListener
+public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
 {
     private Paint mRectPaint;
     
@@ -35,7 +35,6 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
         setBackgroundResource(R.drawable.control_button);
         setOnLongClickListener(this);
-        setOnTouchListener(this);
 
         setProperties(properties);
         setModified(false);
@@ -184,12 +183,11 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     private float moveX, moveY;
     private float downX, downY;
     @Override
-    public boolean onTouch(View view, MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         if (!mModifiable) {
             mCanTriggerLongClick = false;
             if (mProperties.keycode >= 0) {
                 if (!mProperties.isToggle) {
-                    boolean isDown;
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN: // 0
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
@@ -219,7 +217,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                 mCanTriggerLongClick = true;
                 onLongClick(this);
             }
-            
+
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_DOWN:
@@ -241,7 +239,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                     break;
             }
         }
-        
+
         return false;
     }
 
