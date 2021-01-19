@@ -64,6 +64,7 @@
     <string name="mcl_options">Pasirinkimai</string>
     <string name="mcl_option_modmgr">Modifikacijos (neveikia)</string>
     <string name="mcl_option_modinstall">Paleisti modifikacijų įdiegimui (Forge, LabyMod, Fabric, kt.)</string>
+    <string name="mcl_option_modinstallwitharg">Paleisti modifikacijų įdiegimui (su pasirinktinais argumentais)</string>
     <string name="mcl_option_checkupdate">Ieškoti atnaujinimų</string>
     <string name="mcl_option_customcontrol">Kontrolės</string>
     <string name="mcl_option_settings">Nustatymai</string>
