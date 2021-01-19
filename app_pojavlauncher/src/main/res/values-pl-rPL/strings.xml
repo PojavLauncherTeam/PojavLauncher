@@ -194,4 +194,6 @@
     <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
     <string name="auto_ram_title">Automatyczny ram</string>
     <string name="autoram_info_msg">Pamięć ustawiona na %d MB</string>
+    <string name="resolution_decrease_subtitle">Pozwala na zmniejszenie rozdzielczości gry. Poprawia ramki. 0 jest domyślne.</string>
+    <string name="resolution_decrease_title">Współczynnik spadku rozdzielczości</string>
 </resources>
