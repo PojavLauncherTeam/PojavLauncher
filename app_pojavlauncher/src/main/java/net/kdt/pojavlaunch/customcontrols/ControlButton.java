@@ -184,6 +184,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     private float downX, downY;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
         if (!mModifiable) {
             mCanTriggerLongClick = false;
             if (mProperties.keycode >= 0) {

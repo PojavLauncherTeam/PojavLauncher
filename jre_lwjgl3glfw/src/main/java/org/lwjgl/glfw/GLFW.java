@@ -500,7 +500,7 @@ public class GLFW
     public static final byte[] keyDownBuffer = new byte[316];
 	private static final String PROP_WINDOW_WIDTH = "glfwstub.windowWidth";
 	private static final String PROP_WINDOW_HEIGHT= "glfwstub.windowHeight";
-
+    public static long mainContext = 0;
 	static {
         String windowWidth = System.getProperty(PROP_WINDOW_WIDTH);
         String windowHeight = System.getProperty(PROP_WINDOW_HEIGHT);
@@ -571,6 +571,8 @@ public class GLFW
     private static native long nativeEglGetCurrentContext();
 	private static native boolean nativeEglInit();
 	public static native boolean nativeEglMakeCurrent(long window);
+	public static native void nativeEglDetachOnCurrentThread();
+	public static native long nativeEglCreateContext(long contextSrc);
 	private static native boolean nativeEglTerminate();
 	private static native boolean nativeEglSwapBuffers();
 	private static native boolean nativeEglSwapInterval(int inverval);
@@ -767,10 +769,13 @@ public class GLFW
     public static GLFWWindowSizeCallback glfwSetWindowSizeCallback(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWwindowsizefun") GLFWWindowSizeCallbackI cbfun) {
         return mGLFWWindowSizeCallback = GLFWWindowSizeCallback.createSafe(nglfwSetWindowSizeCallback(window, memAddressSafe(cbfun)));
     }
-    
+    static boolean isGLFWReady;
 	public static boolean glfwInit() {
-        mGLFWInitialTime = (double) System.nanoTime();
-		return nativeEglInit();
+		if (!isGLFWReady) {
+			mGLFWInitialTime = (double) System.nanoTime();
+			isGLFWReady = nativeEglInit();
+	    }
+	    return isGLFWReady;
     }
 
 	public static void glfwTerminate() {
@@ -937,17 +942,13 @@ public class GLFW
 	}
 
 	public static void glfwMakeContextCurrent(long window) {
-        long currentGLThreadId = Thread.currentThread().getId();
-        // Long.parseLong(System.getProperty("glfwstub.internal.glthreadid", "-1"));
-        System.out.println("GLFW: glfwMakeContextCurrent() calling from thread ID " + currentGLThreadId + ", name: " + Thread.currentThread().getName());
-        if (currentGLThreadId != -1 && currentGLThreadId != Thread.currentThread().getId()) {
-            System.out.println("GLFW: Current context is set, creating shared context");
-            if (!nativeEglMakeCurrent(window)) {
-                throw new RuntimeException("eglMakeCurrent() failed, check log file for more details");
-            }
-        } else {
-            System.out.println("GLFW: glfwMakeContextCurrent() request is skipped");
-        }
+    	//Probably not the best idea to rely on program's internals to share the contexts...
+		try{
+			throw new Exception("Trace exception");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+       nativeEglMakeCurrent(window);
 	}
 
 	public static void glfwSwapBuffers(long window) {
@@ -981,23 +982,23 @@ public class GLFW
 	// GLFW Window functions
     public static long glfwCreateWindow(int width, int height, CharSequence title, long monitor, long share) {
         EventLoop.OffScreen.check();
+			// Create an ACTUAL EGL context
+			long ptr = nativeEglCreateContext(share);
+            //nativeEglMakeCurrent(ptr);
+			GLFWWindowProperties win = new GLFWWindowProperties();
+			// win.width = width;
+			// win.height = height;
 
-        // A good idea to fake pointer
-        long ptr = System.currentTimeMillis();
-        
-        GLFWWindowProperties win = new GLFWWindowProperties();
-        // win.width = width;
-        // win.height = height;
-        
-        win.width = mGLFWWindowWidth;
-        win.height = mGLFWWindowHeight;
-        
-        win.title = title;
-        
-        mGLFWWindowMap.put(ptr, win);
+			win.width = mGLFWWindowWidth;
+			win.height = mGLFWWindowHeight;
 
-		// Prevent NULL check
-		return ptr;
+			win.title = title;
+
+			mGLFWWindowMap.put(ptr, win);
+			mainContext = ptr;
+			return ptr;
+        //Return our context
+
 	}
 
 	public static void glfwDestroyWindow(long window) {

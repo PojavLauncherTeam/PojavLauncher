@@ -346,7 +346,7 @@ public final class GL {
     @SuppressWarnings("AssignmentToMethodParameter")
     public static GLCapabilities createCapabilities(boolean forwardCompatible) {
         // This fixed framebuffer issue on 1.13+ 64-bit by another making current
-        GLFW.nativeEglMakeCurrent(1);
+        GLFW.nativeEglMakeCurrent(GLFW.mainContext);
         
         if (isUsingRegal /* && Long.parseLong(System.getProperty("glfwstub.internal.glthreadid", "-1")) != Thread.currentThread().getId() */) {
             nativeRegalMakeCurrent();
