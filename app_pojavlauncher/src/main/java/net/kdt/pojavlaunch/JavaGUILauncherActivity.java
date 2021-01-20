@@ -203,7 +203,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
             Collections.reverse(javaArgList);
             javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/pro-grade.jar");
             javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
-            javaArgList.add("-Djava.security.policy==" + Tools.DIR_DATA + "/java_sandbox.policy");
+            javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/java_sandbox.policy");
             Collections.reverse(javaArgList);
             return JREUtils.launchJavaVM(this, javaArgList);
         } catch (Throwable th) {
