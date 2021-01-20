@@ -303,8 +303,8 @@ public class Msa {
         String errStr = Tools.read(conn.getErrorStream());
         Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
         
-        if (errStream.contains("NOT_FOUND") &&
-            errStream.contains("The server has not found anything matching the request URI"))
+        if (errStr.contains("NOT_FOUND") &&
+            errStr.contains("The server has not found anything matching the request URI"))
         {
             otherErrStr = "Can't login a demo account!";
         }
