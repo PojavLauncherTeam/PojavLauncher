@@ -299,7 +299,7 @@ public class Msa {
     }
 
     private static void throwResponseError(HttpURLConnection conn) throws IOException {
-        String otherErrStr;
+        String otherErrStr = "";
         String errStr = Tools.read(conn.getErrorStream());
         Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
         
