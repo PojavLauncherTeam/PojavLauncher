@@ -299,9 +299,17 @@ public class Msa {
     }
 
     private static void throwResponseError(HttpURLConnection conn) throws IOException {
+        String otherErrStr;
         String errStr = Tools.read(conn.getErrorStream());
         Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
-        throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);
+        
+        if (errStream.contains("NOT_FOUND") &&
+            errStream.contains("The server has not found anything matching the request URI"))
+        {
+            otherErrStr = "Can't login a demo account!";
+        }
+        
+        throw new RuntimeException(otherErrStr + "\n\nMSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);
     }
 }
 
