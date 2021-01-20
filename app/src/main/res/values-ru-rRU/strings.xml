@@ -30,10 +30,10 @@
     <string name="hint_control_mapping">"Эта функция еще не завершена, поэтому в данный момент вы не можете использовать пользовательское управление!\nПроведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warning -->
     <string name="warning_title">Предупреждение</string>
-    <string name="warning_msg">Это приложение может быть несовместимо с вашей версией Android (Android 7.0 и выше). Вместо этого вы можете использовать VMOS и установить это приложение на VMOS. Но VMOS удален из Play Маркета, вы должны установить его вручную.</string>
+    <string name="warning_msg">Это приложение может быть несовместимо с вашей версией Android (Android 7.0 и выше). Вы можете использовать VMOS и установить это приложение на него. VMOS удален из Play Маркета, так что вы должны установить его вручную.</string>
     <string name="warning_noshowagain">Больше не показывать</string>
     <string name="warning_action_install">Установите VMOS</string>
-    <string name="warning_action_tryanyway">Все равно попробовать</string>
+    <string name="warning_action_tryanyway">Повторить попытку</string>
     <string name="warning_action_exit">Выйти</string>
     <string name="warning_remove_account">Эта учетная запись будет удалена!</string>
     <!-- AlertDialog title -->
