@@ -193,4 +193,8 @@
     <string name="main_nolog">无日志。</string>
     <string name="main_no_news_feed">新闻获取失败！</string>
     <string name="auto_ram_subtitle">启用 RAM 自动调节器</string>
+    <string name="auto_ram_title">自动 RAM</string>
+    <string name="autoram_info_msg">内存已设为 %d MB</string>
+    <string name="resolution_decrease_subtitle">允许调小游戏画面分辨率，从而提高帧速率。默认值为0。</string>
+    <string name="resolution_decrease_title">分辨率降低率</string>
 </resources>
