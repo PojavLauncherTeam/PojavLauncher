@@ -573,6 +573,7 @@ public class GLFW
 	public static native boolean nativeEglMakeCurrent(long window);
 	public static native void nativeEglDetachOnCurrentThread();
 	public static native long nativeEglCreateContext(long contextSrc);
+    private static native void nativeEglSetHint(int hint, int value);
 	private static native boolean nativeEglTerminate();
 	private static native boolean nativeEglSwapBuffers();
 	private static native boolean nativeEglSwapInterval(int inverval);
@@ -1030,7 +1031,9 @@ public class GLFW
 	public static void glfwShowWindow(long window) {
         nglfwSetShowingWindow(window);
     }
-	public static void glfwWindowHint(int hint, int value) {}
+	public static void glfwWindowHint(int hint, int value) {
+        nativeEglSetHint(hint, value);
+    }
 	public static void glfwWindowHintString(int hint, @NativeType("const char *") ByteBuffer value) {}
     public static void glfwWindowHintString(int hint, @NativeType("const char *") CharSequence value) {}
 

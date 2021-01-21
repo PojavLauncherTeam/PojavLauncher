@@ -31,6 +31,21 @@ struct PotatoBridge {
 */
 };
 struct PotatoBridge potatoBridge;
+
+struct EGLHints {
+    jlong windowID;
+    
+    int redBits, greenBits, alphaBits,
+        alphaBits, depthBits, stencilBits,
+        // accumRedBits, accumGreenBits, accumBlueBits,
+        samples; // , sRGB;
+/*
+    accumAlphaBits, auxBuffers, stereo,
+    doubleBuffers, transparent, refreshRate
+*/
+}
+struct EGLHints eglHints;
+
 EGLConfig config;
 
 typedef jint RegalMakeCurrent_func(EGLContext context);
@@ -67,6 +82,62 @@ static const EGLint ctx_attribs[] = {
         EGL_CONTEXT_CLIENT_VERSION, 2,
         EGL_NONE
 };
+
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSetHint(JNIEnv* env, jclass clazz, jint hint, jint value) {
+    switch (hint) {
+        case GLFW_RED_BITS:
+            eglHints.redBits = value;
+            return;
+        case GLFW_GREEN_BITS:
+            eglHints.greenBits = value;
+            return;
+        case GLFW_BLUE_BITS:
+            eglHints.blueBits = value;
+            return;
+        case GLFW_ALPHA_BITS:
+            eglHints.alphaBits = value;
+            return;
+        case GLFW_DEPTH_BITS:
+            eglHints.depthBits = value;
+            return;
+        case GLFW_STENCIL_BITS:
+            eglHints.stencilBits = value;
+            return;
+/*
+        case GLFW_ACCUM_RED_BITS:
+            eglHints.accumRedBits = value;
+            return;
+        case GLFW_ACCUM_GREEN_BITS:
+            eglHints.accumGreenBits = value;
+            return;
+        case GLFW_ACCUM_BLUE_BITS:
+            eglHints.accumBlueBits = value;
+            return;
+        case GLFW_ACCUM_ALPHA_BITS:
+            eglHints.accumAlphaBits = value;
+            return;
+        case GLFW_AUX_BUFFERS:
+            eglHints.auxBuffers = value;
+            return;
+        case GLFW_STEREO:
+            eglHints.stereo = value;
+            return;
+        case GLFW_DOUBLEBUFFER:
+            eglHints.doublebuffer = value;
+            return;
+        case GLFW_TRANSPARENT_FRAMEBUFFER:
+            eglHints.transparent = value;
+            return;
+*/
+        case GLFW_SAMPLES:
+            eglHints.samples = value;
+            return;
+        default:
+            printf("EGLBridge: unknown GLFW hint: %d=%d\n", hint, value);
+            return;
+    }
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
     if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
         potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -85,12 +156,15 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     }
 
     static const EGLint attribs[] = {
-            EGL_RED_SIZE, 8,
-            EGL_GREEN_SIZE, 8,
-            EGL_BLUE_SIZE, 8,
-            EGL_ALPHA_SIZE, 8,
+            EGL_RED_SIZE, eglHints.redBits,
+            EGL_GREEN_SIZE, eglHints.greenBits,
+            EGL_BLUE_SIZE, eglHints.blueBits,
+            EGL_ALPHA_SIZE, eglHints.alphaBits,
             // Minecraft required on initial 24
-            EGL_DEPTH_SIZE, 24, // 16
+            EGL_DEPTH_SIZE, eglHints.depthBits, // 16
+            EGL_STENCIL_SIZE, eglHints.stencilBits,
+            EGL_SAMPLES, eglHints.samples,
+            
             EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
             EGL_NONE
     };
