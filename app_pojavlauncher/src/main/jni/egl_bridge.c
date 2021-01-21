@@ -166,7 +166,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         return JNI_FALSE;
     }
 
-    static const EGLint attribs[] = {
+    EGLint attribs[] = {
             EGL_RED_SIZE, eglHints.redBits,
             EGL_GREEN_SIZE, eglHints.greenBits,
             EGL_BLUE_SIZE, eglHints.blueBits,
