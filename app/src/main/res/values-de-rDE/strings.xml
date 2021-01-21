@@ -19,8 +19,8 @@
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
     <string name="login_online_create_account">(Neues Konto erstellen?)</string>
-    <string name="login_offline_switch">Offline Konto?</string>
-    <string name="login_offline_label">Als offline Konto anmelden</string>
+    <string name="login_offline_switch">Offline-Konto?</string>
+    <string name="login_offline_label">Als Offline-Konto anmelden</string>
     <string name="login_offline_alert_skip">Überspringen</string>
     <string name="login_error_short_username">Der Nutzername muss mindestens 3 Zeichen lang sein</string>
     <string name="login_error_exist_username">Dieser Benutzername existiert bereits</string>
@@ -39,18 +39,18 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Wähle eine keymap json aus</string>
     <string name="alerttitle_installmod">Wähle eine Mod zum hinzufügen aus</string>
-    <string name="alerttitle_installoptifine">Wähle eine Optifine jar Datei aus</string>
+    <string name="alerttitle_installoptifine">Wähle eine Optifine jar-Datei aus</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher ist unerwartet abgestürzt</string>
     <string name="error_checklog">Fehler! Bitte überprüfen sie das untenstehende Protokoll: %s</string>
-    <string name="error_no_version">Keine Version</string>
+    <string name="error_no_version">Keine Version!</string>
     <string name="error_load_version">Die Version %s konnte nicht geladen werden</string>
     <string name="error_convert_lib">Die Bibliothek %s konnte nicht konvertiert werden</string>
     <string name="error_convert_client">Minecraft %s konnte nicht konvertiert werden</string>
     <string name="error_show_more">Mehr anzeigen</string>
     <string name="error_show_less">Weniger anzeigen</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Die Schreib-/Lese-Berechtigung ist erforderlich!</string>
+    <string name="toast_permission_denied">Die Schreib-/Lese-Berechtigung für den Speicher ist erforderlich!</string>
     <string name="toast_login_error">Etwas ist nach dem Login schiefgelaufen. Bitte sendet Feedback an die Entwickler.\n Fehler: %s</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
     <string name="toast_shiftmode">Der Shift (schleichen)-Knopf-Modus wurde zu %s geändert</string>
