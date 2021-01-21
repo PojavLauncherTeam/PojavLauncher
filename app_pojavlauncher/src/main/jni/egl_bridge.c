@@ -220,11 +220,12 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 
     if (window != 0x1) {
         printf("Making current on window %p\n", window);
+        potatoBridge.eglContext = (EGLContext *) window;
     EGLBoolean success = eglMakeCurrent(
             potatoBridge.eglDisplay,
             potatoBridge.eglSurface,
             potatoBridge.eglSurface,
-            /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
+            /* window == 0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
     );
     if (success == EGL_FALSE) {
         printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());

@@ -772,11 +772,7 @@ public class GLFW
     }
     static boolean isGLFWReady;
 	public static boolean glfwInit() {
-		if (!isGLFWReady) {
-			mGLFWInitialTime = (double) System.nanoTime();
-			isGLFWReady = nativeEglInit();
-	    }
-	    return isGLFWReady;
+	    return true;
     }
 
 	public static void glfwTerminate() {
@@ -982,6 +978,11 @@ public class GLFW
     
 	// GLFW Window functions
     public static long glfwCreateWindow(int width, int height, CharSequence title, long monitor, long share) {
+        if (!isGLFWReady) {
+            mGLFWInitialTime = (double) System.nanoTime();
+            isGLFWReady = nativeEglInit();
+	    }
+        
         EventLoop.OffScreen.check();
 			// Create an ACTUAL EGL context
 			long ptr = nativeEglCreateContext(share);
