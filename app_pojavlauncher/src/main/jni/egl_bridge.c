@@ -42,16 +42,20 @@ struct PotatoBridge {
 struct PotatoBridge potatoBridge;
 
 struct EGLHints {
-    int redBits, greenBits, blueBits,
-        alphaBits, depthBits, stencilBits,
-        // accumRedBits, accumGreenBits, accumBlueBits,
-        samples; // , sRGB;
+    int redBits;
+    int greenBits;
+    int blueBits;
+    int alphaBits;
+    int depthBits;
+    int stencilBits;
+ // accumRedBits, accumGreenBits, accumBlueBits,
+    int samples;
+ // , sRGB;
 /*
     accumAlphaBits, auxBuffers, stereo,
     doubleBuffers, transparent, refreshRate
 */
-};
-struct EGLHints eglHints;
+} eglHints;
 
 EGLConfig config;
 
