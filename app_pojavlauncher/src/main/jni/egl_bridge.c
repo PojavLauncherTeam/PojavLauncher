@@ -18,6 +18,15 @@
 
 #include "utils.h"
 
+
+#define GLFW_RED_BITS               0x00021001
+#define GLFW_GREEN_BITS             0x00021002
+#define GLFW_BLUE_BITS              0x00021003
+#define GLFW_ALPHA_BITS             0x00021004
+#define GLFW_DEPTH_BITS             0x00021005
+#define GLFW_STENCIL_BITS           0x00021006
+#define GLFW_SAMPLES                0x0002100D
+
 struct PotatoBridge {
 	/* ANativeWindow */ void* androidWindow;
 	    
@@ -33,9 +42,7 @@ struct PotatoBridge {
 struct PotatoBridge potatoBridge;
 
 struct EGLHints {
-    jlong windowID;
-    
-    int redBits, greenBits, alphaBits,
+    int redBits, greenBits, blueBits,
         alphaBits, depthBits, stencilBits,
         // accumRedBits, accumGreenBits, accumBlueBits,
         samples; // , sRGB;
@@ -43,7 +50,7 @@ struct EGLHints {
     accumAlphaBits, auxBuffers, stereo,
     doubleBuffers, transparent, refreshRate
 */
-}
+};
 struct EGLHints eglHints;
 
 EGLConfig config;
