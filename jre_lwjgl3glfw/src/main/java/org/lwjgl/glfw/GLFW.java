@@ -573,7 +573,6 @@ public class GLFW
 	public static native boolean nativeEglMakeCurrent(long window);
 	public static native void nativeEglDetachOnCurrentThread();
 	public static native long nativeEglCreateContext(long contextSrc);
-    private static native void nativeEglSetHint(int hint, int value);
 	private static native boolean nativeEglTerminate();
 	private static native boolean nativeEglSwapBuffers();
 	private static native boolean nativeEglSwapInterval(int inverval);
@@ -772,7 +771,11 @@ public class GLFW
     }
     static boolean isGLFWReady;
 	public static boolean glfwInit() {
-	    return true;
+		if (!isGLFWReady) {
+			mGLFWInitialTime = (double) System.nanoTime();
+			isGLFWReady = nativeEglInit();
+	    }
+	    return isGLFWReady;
     }
 
 	public static void glfwTerminate() {
@@ -978,11 +981,6 @@ public class GLFW
     
 	// GLFW Window functions
     public static long glfwCreateWindow(int width, int height, CharSequence title, long monitor, long share) {
-        if (!isGLFWReady) {
-            mGLFWInitialTime = (double) System.nanoTime();
-            isGLFWReady = nativeEglInit();
-	    }
-        
         EventLoop.OffScreen.check();
 			// Create an ACTUAL EGL context
 			long ptr = nativeEglCreateContext(share);
@@ -1032,9 +1030,7 @@ public class GLFW
 	public static void glfwShowWindow(long window) {
         nglfwSetShowingWindow(window);
     }
-	public static void glfwWindowHint(int hint, int value) {
-        nativeEglSetHint(hint, value);
-    }
+	public static void glfwWindowHint(int hint, int value) {}
 	public static void glfwWindowHintString(int hint, @NativeType("const char *") ByteBuffer value) {}
     public static void glfwWindowHintString(int hint, @NativeType("const char *") CharSequence value) {}
 
