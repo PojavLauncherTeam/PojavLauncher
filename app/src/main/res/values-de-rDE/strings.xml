@@ -81,7 +81,7 @@
     <string name="mcl_option_settings">Einstellungen</string>
     <string name="mcl_option_about">Über</string>
     <string name="mcl_setting_title_setmaxdxref">Maximale DX-Referenz</string>
-    <string name="mcl_setting_subtitle_setmaxdxref">Erhöhe die Option wenn ein Fehler während der Konvertierung auftrat: Zu viele ... Referenzen. Sie können probieren. die Multi-dex Option zu benutzen. Empfohlen wird: 4096 oder 8192.</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Erhöhe die Option, wenn ein Fehler während der Konvertierung auftrat: Zu viele ... Referenzen. Sie können probieren, die Multi-dex-Option zu benutzen. Empfohlen wird: 4096 oder 8192.</string>
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Wie lange wird nach langem Drücken ausgelöst</string>
@@ -94,8 +94,8 @@
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Alte-Beta</string>
-    <string name="mcl_version_clone">Dublizieren</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
+    <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
     <string name="global_add">Hinzufügen</string>
     <string name="global_edit">Bearbeiten</string>
@@ -156,10 +156,10 @@
     <string name="control_mouseoff">Maus: Aus</string>
     <string name="control_mouseon">Maus: An </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Schließen erzwingen</string>
+    <string name="control_forceclose">Erwinge das Beenden</string>
     <string name="control_viewout">Protokoll-Ausgabe</string>
     <string name="control_adebug">Zeigeraufnahme-Debug</string>
-    <string name="control_customkey">Sende personalisierten Keycode</string>
+    <string name="control_customkey">Sende Keycode</string>
     <string name="control_shiftmodechg">Shift (Schleichen) Modus ändern</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_specialkey">Spezielle Taste</string>
