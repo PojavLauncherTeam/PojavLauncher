@@ -10,6 +10,7 @@
  * - Implements glfwSetCursorPos() to handle grab camera pos correctly.
  */
  
+#include <stdlib.h>
 #include <jni.h>
 #include <assert.h>
 
@@ -200,7 +201,7 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
     
     LOGD("Clipboard: Calling 2nd\n");
     jstring pasteDst = convertStringJVM(dalvikEnv, env, (jstring) (*dalvikEnv)->CallStaticObjectMethod(dalvikEnv, bridgeClazz, bridgeMethod, action, copyDst));
-    dalvikJavaVMPtr->DetachCurrentThread(dalvikJavaVMPtr);
+    (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
     return pasteDst;
 }
 
