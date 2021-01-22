@@ -162,20 +162,25 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
     
     private void setHolding(boolean isDown) {
-        if (mProperties.holdAlt || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_ALT) {
+        if (mProperties.holdAlt) {
             CallbackBridge.holdingAlt = isDown;
+            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT,0,isDown);
             System.out.println("holdingAlt="+CallbackBridge.holdingAlt);
         } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK) {
             CallbackBridge.holdingCapslock = isDown;
+            //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK,0,isDown);
             System.out.println("holdingCapslock="+CallbackBridge.holdingCapslock);
-        } if (mProperties.holdCtrl || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_CONTROL) {
+        } if (mProperties.holdCtrl) {
             CallbackBridge.holdingCtrl = isDown;
+            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL,0,isDown);
             System.out.println("holdingCtrl="+CallbackBridge.holdingCtrl);
         } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK) {
             CallbackBridge.holdingNumlock = isDown;
+            //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK,0,isDown);
             System.out.println("holdingNumlock="+CallbackBridge.holdingNumlock);
-        } if (mProperties.holdShift || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_SHIFT) {
+        } if (mProperties.holdShift) {
             CallbackBridge.holdingShift = isDown;
+            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT,0,isDown);
             System.out.println("holdingShift="+CallbackBridge.holdingShift);
         } 
     }
