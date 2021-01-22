@@ -699,6 +699,12 @@ public class PojavLoginActivity extends BaseActivity
     }
     
     public void loginSavedAcc(View view) {
+        String[] accountArr = new File(Tools.DIR_ACCOUNT_NEW).list();
+        if(accountArr.length == 0){
+           showNoAccountDialog();
+           return;
+        }
+
         final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
         int xScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().widthPixels;
@@ -710,7 +716,7 @@ public class PojavLoginActivity extends BaseActivity
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        String[] accountArr = new File(Tools.DIR_ACCOUNT_NEW).list();
+
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
@@ -791,6 +797,10 @@ public class PojavLoginActivity extends BaseActivity
                             new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
                             accountListLayout.removeViewsInLayout(accountIndex_final, 1);
                             //Resize the window
+                            if (accountListLayout.getChildCount() == 0) {
+                                accountDialog.dismiss(); //No need to keep it, since there is no account
+                                return;
+                            }
                             accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int) Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*55)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
                         }
                     });
@@ -926,4 +936,21 @@ public class PojavLoginActivity extends BaseActivity
             }
         }
     }
+
+    //When the user have no saved account, you can show him this dialog
+    private void showNoAccountDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
+
+
+        builder.setMessage(R.string.login_dialog_no_saved_account)
+                .setTitle(R.string.login_title_no_saved_account)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    //Fucking nothing
+                });
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }
