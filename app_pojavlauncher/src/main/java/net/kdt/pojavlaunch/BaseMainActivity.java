@@ -826,7 +826,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public static void fullyExit() {
-        System.exit(0);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     public void forceUserHome(String s) throws Exception {
