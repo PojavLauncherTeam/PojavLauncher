@@ -119,6 +119,7 @@ public class FileListView extends LinearLayout
                         if(fileSuffixes.length > 0){ //Meaning we want only specific files
                             for(File file : listFile){
                                 if(file.isDirectory()){
+                                    if((!file.getName().startsWith(".")) || file.getName().equals(".minecraft"))
                                     fileAdapter.add(file);
                                     continue;
                                 }
