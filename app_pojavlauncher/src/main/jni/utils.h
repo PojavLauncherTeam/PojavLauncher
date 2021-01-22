@@ -20,7 +20,7 @@ jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr);
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray);
 jobjectArray convert_from_char_array(JNIEnv *env, char **charArray, int num_rows);
 void free_char_array(JNIEnv *env, jobjectArray jstringArray, const char **charArray);
-jstring convertStringToJVM(JNIEnv* srcEnv, JNIEnv* dstEnv, jstring srcStr);
+jstring convertStringJVM(JNIEnv* srcEnv, JNIEnv* dstEnv, jstring srcStr);
 
 void closeGLFWWindow();
 
