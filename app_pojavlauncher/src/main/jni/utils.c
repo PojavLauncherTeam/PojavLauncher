@@ -49,6 +49,10 @@ void free_char_array(JNIEnv *env, jobjectArray jstringArray, const char **charAr
 }
 
 jstring convertStringJVM(JNIEnv* srcEnv, JNIEnv* dstEnv, jstring srcStr) {
+    if (srcStr == NULL) {
+        return NULL;
+    }
+    
     const char* srcStrC = (*srcEnv)->GetStringUTFChars(srcEnv, srcStr, 0);
     jstring dstStr = (*dstEnv)->NewStringUTF(dstEnv, srcStrC);
 	(*srcEnv)->ReleaseStringUTFChars(srcEnv, srcStr, srcStrC);

@@ -264,6 +264,10 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                 }).start();
 
+
+            if (isAndroid8OrHigher()) {
+                touchPad.setDefaultFocusHighlightEnabled(false);
+            }
             touchPad.setOnTouchListener(new OnTouchListener(){
                     private float prevX, prevY;
                     @Override
@@ -692,8 +696,6 @@ public class BaseMainActivity extends LoggableActivity {
                         CallbackBridge.windowHeight = (int)(height/scaleFactor);
                         CallbackBridge.sendUpdateWindowSize((int)(width/scaleFactor),(int)(height/scaleFactor));
                         calculateMcScale();
-                        
-                        // TODO: Implement this method for GLFW window size callback
                     }
 
                     @Override

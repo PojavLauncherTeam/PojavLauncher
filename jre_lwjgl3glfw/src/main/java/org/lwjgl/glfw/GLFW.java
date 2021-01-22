@@ -772,6 +772,7 @@ public class GLFW
     static boolean isGLFWReady;
 	public static boolean glfwInit() {
 		if (!isGLFWReady) {
+            CallbackBridge.nativeAttachThreadToOther(false, false);
 			mGLFWInitialTime = (double) System.nanoTime();
 			isGLFWReady = nativeEglInit();
 	    }

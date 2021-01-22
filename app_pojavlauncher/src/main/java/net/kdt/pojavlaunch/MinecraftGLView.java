@@ -14,17 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 public class MinecraftGLView extends TextureView
 {
     public MinecraftGLView(Context context) {
-        super(context);
-		//setPreserveEGLContextOnPause(true);
-        setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(!b) {
-                    ((InputMethodManager)view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(),0);
-                }
-            }
-        });
-
+        this(context, null);
     }
 
     public MinecraftGLView(Context context, AttributeSet attributeSet) {
@@ -52,6 +42,8 @@ public class MinecraftGLView extends TextureView
     public static boolean isHardKB(Context ctx) {
         return ctx.getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY;
     }
+    
+    
 }
 class MinecraftInputConnection extends BaseInputConnection {
     private SpannableStringBuilder _editable;

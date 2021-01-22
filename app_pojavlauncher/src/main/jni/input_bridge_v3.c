@@ -175,7 +175,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
     if (isUseStackQueueCall && isAndroid && result) {
         isPrepareGrabPos = true;
     }
-        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
+    getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     
     return result;
 }
