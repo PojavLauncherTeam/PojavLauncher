@@ -184,23 +184,24 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
 #ifdef DEBUG
     LOGD("Debug: Clipboard access is going on\n", isUseStackQueueCall);
 #endif
-    if (dalvikJNIEnvPtr_JRE == NULL) {
-        attachThread(false, &dalvikJNIEnvPtr_JRE);
-    }
-    assert(dalvikJNIEnvPtr_JRE != NULL);
+    JNIEnv *dalvikEnv;
+    (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, &dalvikEnv, NULL);
+    assert(dalvikEnv != NULL);
 
     LOGD("Clipboard: Obtaining class\n");
-    jclass bridgeClazz = (*dalvikJNIEnvPtr_JRE)->FindClass(dalvikJNIEnvPtr_JRE, "org/lwjgl/glfw/CallbackBridge");
+    jclass bridgeClazz = (*dalvikEnv)->FindClass(dalvikEnv, "org/lwjgl/glfw/CallbackBridge");
     assert(bridgeClazz != NULL);
     LOGD("Clipboard: Obtaining class\n");
-    jmethodID bridgeMethod = (*dalvikJNIEnvPtr_JRE)->GetStaticMethodID(dalvikJNIEnvPtr_JRE, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
+    jmethodID bridgeMethod = (* dalvikEnv)->GetStaticMethodID(dalvikEnv, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
     assert(bridgeMethod != NULL);
     
     LOGD("Clipboard: Converting string\n");
-    jstring copyDst = convertStringJVM(env, dalvikJNIEnvPtr_JRE, copySrc);
+    jstring copyDst = convertStringJVM(env, dalvikEnv, copySrc);
     
     LOGD("Clipboard: Calling 2nd\n");
-    return convertStringJVM(dalvikJNIEnvPtr_JRE, env, (jstring) (*dalvikJNIEnvPtr_JRE)->CallStaticObjectMethod(dalvikJNIEnvPtr_JRE, bridgeClazz, bridgeMethod, action, copyDst));
+    jstring pasteDst = convertStringJVM(dalvikEnv, env, (jstring) (*dalvikEnv)->CallStaticObjectMethod(dalvikEnv, bridgeClazz, bridgeMethod, action, copyDst));
+    dalvikJavaVMPtr->DetachCurrentThread();
+    return pasteDst;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(JNIEnv* env, jclass clazz, jboolean inputReady) {
