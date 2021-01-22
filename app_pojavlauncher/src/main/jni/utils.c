@@ -48,6 +48,13 @@ void free_char_array(JNIEnv *env, jobjectArray jstringArray, const char **charAr
 	}
 }
 
+jstring convertStringToJVM(JNIEnv* srcEnv, JNIEnv* dstEnv, jstring srcStr) {
+    const char* srcStrC = (*srcEnv)->GetStringUTFChars(srcEnv, srcStr, 0);
+    jstring dstStr = (*dstEnv)->NewStringUTF(dstEnv, srcStrC);
+	(*srcEnv)->ReleaseStringUTFChars(srcEnv, srcStr, srcStrC);
+    return dstStr;
+}
+
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeSurfaceAWT(JNIEnv *env, jclass clazz, jlong surface) {
 	shared_awt_surface = surface;
 }
