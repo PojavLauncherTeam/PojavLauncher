@@ -284,26 +284,22 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     private void restoreOldLook(boolean oldLookState){
+        Guideline guideLine = findViewById(R.id.guidelineLeft);
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
         if(oldLookState){
             //UI v1 Style
             //Hide the sidebar
-            Guideline guideLine = findViewById(R.id.guidelineLeft);
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
             params.guidePercent = 0; // 0%, range: 0 <-> 1
-            guideLine.setLayoutParams(params);
 
             //Remove the selected Tab
             selected.setVisibility(View.GONE);
 
             //Enlarge the button, but just a bit.
             params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
-            params.width = (int)(params.width*1.80);
-            mPlayButton.setLayoutParams(params);
+            params.matchConstraintPercentWidth = 0.35f;
         }else{
             //UI v2 Style
             //Show the sidebar back
-            Guideline guideLine = findViewById(R.id.guidelineLeft);
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
             params.guidePercent = 0.23f; // 23%, range: 0 <-> 1
             guideLine.setLayoutParams(params);
 
@@ -312,12 +308,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
             //Set the default button size
             params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
-            params.width = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    160,
-                    getResources().getDisplayMetrics());
-            mPlayButton.setLayoutParams(params);
+            params.matchConstraintPercentWidth = 0.25f;
         }
+        mPlayButton.setLayoutParams(params);
     }
 }
 
