@@ -184,6 +184,9 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
 #ifdef DEBUG
     LOGD("Debug: Clipboard access is going on\n", isUseStackQueueCall);
 #endif
+    if (dalvikJNIEnvPtr_JRE == NULL) {
+        attachThread(false, &dalvikJNIEnvPtr_JRE);
+    }
     assert(dalvikJNIEnvPtr_JRE != NULL);
 
     LOGD("Clipboard: Obtaining class\n");
