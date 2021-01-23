@@ -44,7 +44,7 @@
             android:summary="@string/auto_ram_subtitle"
             android:title="@string/auto_ram_title" />
 
-        <EditTextPreference
+        <androidx.preference.EditTextPreference
             android:dialogTitle="@string/mcl_setting_title_javaargs"
             android:icon="@drawable/jre_args"
             android:key="javaArgs"

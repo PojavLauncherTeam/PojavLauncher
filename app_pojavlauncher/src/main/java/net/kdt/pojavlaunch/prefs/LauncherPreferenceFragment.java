@@ -30,6 +30,16 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
         seek4.setMin(20);
         seek4.setMax(500);
         seek4.setValue((int) LauncherPreferences.PREF_MOUSESCALE);
+        
+        EditTextPreference editJVMArgs = findPreference("javaArgs");
+        if (editJVMArgs != null) {
+            editJVMArgs.setOnBindEditTextListener(new EditTextPreference.OnBindEditTextListener() {
+                @Override
+                public void onBindEditText(@NonNull EditText editText) {
+                    editText.setSingleLine();
+                }
+            });
+        }
 	}
 
     @Override
