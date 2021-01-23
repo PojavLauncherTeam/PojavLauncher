@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
     <string name="login_microsoft">Microsoft prisijungimas</string>
     <string name="login_select_account">Pasirinkti paskyrą</string>
+    <string name="login_title_no_saved_account">Paskyra nerasta!</string>
+    <string name="login_dialog_no_saved_account">Jūs neturite išsaugotų paskyrų.\nPasinaudokite funkcija <b>\"Likti prisijungus\"</b> jei norite išsaugoti savo paskyrą.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Vilkti iš dešinės į kairę kad atidarytumėte meniu. ◀\nLaikykite mygtuką kad pritaikytume: redaguoti, padidinti ar ištrinti."</string>
     <!-- Warnings -->
