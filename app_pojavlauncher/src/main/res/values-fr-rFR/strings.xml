@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_microsoft">Connexion Microsoft</string>
     <string name="login_select_account">Choisir un compte</string>
+    <string name="login_title_no_saved_account">Aucun compte trouvé !</string>
+    <string name="login_dialog_no_saved_account">Vous n\'avez pas de compte enregistré.\nUtilisez l\'option <b>\"Rester connecté\"</b> pour enregistrer un compte lors de la première connexion.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Balayez l'écran vers la gauche pour ouvrir le menu ◀\nCliquez sur un bouton pour le modifier, le redimensionner ou le supprimer."</string>
     <!-- Warnings -->
@@ -74,11 +76,11 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Redémarrage du Launcher requis] Cela vous permet de réinstaller l\'environnement d\'exécution Java</string>
     <string name="mcl_setting_title_freeform">Lancer Minecraft en mode libre</string>
     <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 +</string>
-    <string name="mcl_setting_title_hide_sidebar">Cacher la barre latérale</string>
+    <string name="mcl_setting_title_hide_sidebar">Masquer la barre latérale</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Les gens nostalgiques qui préfèrent l\'ancienne interface utilisateur (v1) peuvent aimer cette option. Vous donne une expérience orienté plein écran.</string>
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
-    <string name="mcl_setting_title_buttonscale">Échelle des boutons de contrôle</string>
+    <string name="mcl_setting_title_buttonscale">Mise à l\'échelle des boutons de contrôle</string>
     <string name="mcl_setting_subtitle_buttonscale">Mettre à l\'échelle si les boutons sont trop petits.</string>
     <string name="mcl_setting_title_mousescale">Mise à l\'échelle de la souris</string>
     <string name="mcl_setting_subtitle_mousescale">Change la taille de la souris virtuelle.</string>
@@ -86,7 +88,7 @@
     <string name="mcl_setting_title_javaargs">Arguments de lancement JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attention, cela peut faire planter le jeu si ce paramètre est modifié sans connaissance.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
-    <string name="mcl_setting_category_scaling">Paramètres de redimensionnement</string>
+    <string name="mcl_setting_category_scaling">Paramètres de mise à l\'échelle</string>
     <string name="mcl_setting_category_veroption">Type de versions visible dans la liste des versions</string>
     <string name="mcl_setting_veroption_release">Version officielle</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -191,10 +193,10 @@
     <string name="main_version">Version :</string>
     <string name="main_nocrash">Aucune erreur détectée.</string>
     <string name="main_nolog">Pas de journal.</string>
-    <string name="main_no_news_feed">Impossible de récupérer le flux d\'actualités !</string>
-    <string name="auto_ram_subtitle">Activer l\'ajusteur de Mémoire</string>
-    <string name="auto_ram_title">Mémoire Automatique</string>
+    <string name="main_no_news_feed">Impossible de récupérer le fil d\'actualités !</string>
+    <string name="auto_ram_subtitle">Active le régulateur automatique de la mémoire RAM</string>
+    <string name="auto_ram_title">Mémoire RAM automatique</string>
     <string name="autoram_info_msg">Mémoire définie à %d MB</string>
-    <string name="resolution_decrease_subtitle">Vous permet de diminuer la résolution du jeu. Améliore la fréquence d\'images. 0 est la valeur par défaut.</string>
+    <string name="resolution_decrease_subtitle">Permet de diminuer la résolution du jeu. Améliore la fréquence d\'images. 0 est la valeur par défaut.</string>
     <string name="resolution_decrease_title">Taux de diminution de la résolution</string>
 </resources>
