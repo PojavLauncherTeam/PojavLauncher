@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Dieser Benutzername existiert bereits</string>
     <string name="login_microsoft">Microsoft-Login</string>
     <string name="login_select_account">Konto auswählen</string>
+    <string name="login_title_no_saved_account">Es konnte kein Konto gefunden werden!</string>
+    <string name="login_dialog_no_saved_account">Sie haben keine Konten eingespeichert.\nWähle die Option <b>\"Angemeldet bleiben\"</b> während des Anmeldens aus, um das Konto einzuspeichern.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Wische von rechts nach links um das Menü zu öffnen ◀\nDrücke auf eine Schaltfläche um Sie anzupassen: Editieren, Vergrößern und Verkleinern oder Löschen."</string>
     <!-- Warnings -->
