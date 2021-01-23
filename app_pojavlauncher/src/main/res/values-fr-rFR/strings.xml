@@ -196,7 +196,7 @@
     <string name="main_no_news_feed">Impossible de récupérer le fil d\'actualités !</string>
     <string name="auto_ram_subtitle">Active le régulateur automatique de la mémoire RAM</string>
     <string name="auto_ram_title">Mémoire RAM automatique</string>
-    <string name="autoram_info_msg">Mémoire définie à %d MB</string>
+    <string name="autoram_info_msg">Mémoire définie à %d Mo</string>
     <string name="resolution_decrease_subtitle">Permet de diminuer la résolution du jeu. Améliore la fréquence d\'images. 0 est la valeur par défaut.</string>
     <string name="resolution_decrease_title">Taux de diminution de la résolution</string>
 </resources>
