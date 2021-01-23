@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Nome utente già esistente</string>
     <string name="login_microsoft">Accesso Microsoft</string>
     <string name="login_select_account">Seleziona account</string>
+    <string name="login_title_no_saved_account">Non sono stati trovati account !</string>
+    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Apri il menu scorrendo da destra verso sinistra ◀\nTieni premuto per personalizzare: modificare, ridimensionare o cancellare."</string>
     <!-- Warnings -->
