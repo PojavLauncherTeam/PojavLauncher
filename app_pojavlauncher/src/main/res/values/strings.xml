@@ -29,8 +29,10 @@
     <string name="login_error_exist_username">This username already exist</string>
 
     <string name="login_microsoft">Microsoft login</string>
-    
+
     <string name="login_select_account">Select account</string>
+    <string name="login_title_no_saved_account">No account found !</string>
+    <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
 
     <!-- Hint -->
     <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
