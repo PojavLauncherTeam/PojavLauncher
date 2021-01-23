@@ -34,8 +34,14 @@
     <string name="warning_noshowagain">Aut ne iterum</string>
     <string name="warning_action_install">VMOS install</string>
     <string name="warning_action_tryanyway">Haec tempta, usquam</string>
+    <string name="warning_action_exit">Exitus</string>
+    <string name="warning_remove_account">Et ob hoc remotus!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Eligere keymap json</string>
+    <string name="alerttitle_installmod">Eligere mod addere</string>
+    <string name="alerttitle_installoptifine">Eligere Optifine jar file</string>
     <!-- Error messages -->
+    <string name="error_fatal">Pojav launcher crashed subito</string>
     <!-- Toast messages -->
     <!--
 	<string name="toast_3">Exit</string>
@@ -66,6 +72,7 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Exitus</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Log output</string>
