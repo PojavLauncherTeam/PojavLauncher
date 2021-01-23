@@ -25,6 +25,7 @@
     <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учетные записи</string>
     <string name="login_title_no_saved_account">Аккаунт не найден!</string>
+    <string name="login_dialog_no_saved_account">Вы не имеете сохранённых аккаунтов.\nИспользуйте опцию <b>\"Сохранить меня авторизованным\"</b>чтобы сохранить аккаунт при первом входе.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warnings -->
