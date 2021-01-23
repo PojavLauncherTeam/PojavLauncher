@@ -49,7 +49,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">뉴스</string>
+    <string name="mcl_tab_news">소식</string>
     <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">개발자 콘솔</string>
     <string name="mcl_tab_crash">충돌 로그</string>
@@ -75,6 +75,7 @@
     <string name="mcl_setting_title_freeform">Minecraft를 Freeform mode로 실행하기</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다. Android 7.0 이상을 요구합니다.</string>
     <string name="mcl_setting_title_hide_sidebar">사이드바 숨기기</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">과거 v1 UI를 선호하는 사람을 위한 설정입니다.</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
     <string name="mcl_setting_subtitle_longpresstrigger">블럭 파괴와 아이템 던지기를 위한 길게 누르기 시간 변경</string>
     <string name="mcl_setting_title_buttonscale">컨트롤 버튼 크기</string>
@@ -190,4 +191,10 @@
     <string name="main_version">버전:</string>
     <string name="main_nocrash">발견된 충돌 없음</string>
     <string name="main_nolog">기록 없음.</string>
+    <string name="main_no_news_feed">소식을 불러오는데 실패하였습니다!</string>
+    <string name="auto_ram_subtitle">자동 램 할당 활성화하기</string>
+    <string name="auto_ram_title">자동 램 할당</string>
+    <string name="autoram_info_msg">메모리가 %dMB 할당되었습니다.</string>
+    <string name="resolution_decrease_subtitle">게임 해상도를 낮출수있습니다. 프레임 향상에 도움을 줍니다. 기본값 0</string>
+    <string name="resolution_decrease_title">해상도 감소 비율</string>
 </resources>
