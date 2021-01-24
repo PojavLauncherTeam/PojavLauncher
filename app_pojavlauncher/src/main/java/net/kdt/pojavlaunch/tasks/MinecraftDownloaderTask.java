@@ -59,7 +59,11 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
 
                 verInfo = Tools.getVersionInfo(p1[0]);
-                assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
+                try {
+                    assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
+                } catch (IOEXception e) {
+                    publishProgress("0", Log.getStackTraceString(e));
+                }
 
                 File outLib;
                 String libPathURL;
@@ -169,6 +173,10 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         mActivity.mPlayButton.setEnabled(true);
                     }
                 });
+                
+            if (assets == null) {
+                return null;
+            }
             publishProgress("1", mActivity.getString(R.string.mcl_launch_download_assets));
             setMax(assets.objects.size());
             zeroProgress();
