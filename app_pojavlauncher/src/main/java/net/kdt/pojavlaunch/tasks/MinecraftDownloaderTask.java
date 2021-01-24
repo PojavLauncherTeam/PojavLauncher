@@ -61,7 +61,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 verInfo = Tools.getVersionInfo(p1[0]);
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
-                } catch (IOEXception e) {
+                } catch (IOException e) {
                     publishProgress("0", Log.getStackTraceString(e));
                 }
 
