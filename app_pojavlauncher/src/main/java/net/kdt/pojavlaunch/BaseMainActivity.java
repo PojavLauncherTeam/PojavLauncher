@@ -220,7 +220,7 @@ public class BaseMainActivity extends LoggableActivity {
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
             new Thread(new Runnable(){
 
-                    private boolean isCapturing = false;
+                    //private boolean isCapturing = false;
                     @Override
                     public void run()
                     {
@@ -240,7 +240,7 @@ public class BaseMainActivity extends LoggableActivity {
                                         } else if (touchPad.getVisibility() != View.GONE) {
                                             touchPad.setVisibility(View.GONE);
                                         }
-
+                                        /*
                                         if (isAndroid8OrHigher()) {
                                             if (!CallbackBridge.isGrabbing() && isCapturing) {
                                                 minecraftGLView.releasePointerCapture();
@@ -252,7 +252,7 @@ public class BaseMainActivity extends LoggableActivity {
                                                 isCapturing = true;
                                             }
                                         }
-
+                                        */
                                         lastGrab = CallbackBridge.isGrabbing();
                                     }
                                 });
@@ -604,7 +604,9 @@ public class BaseMainActivity extends LoggableActivity {
                     public boolean onCapturedPointer (View view, MotionEvent e) {
                             x += ((int) e.getX()) / scaleFactor;
                             y += ((int) e.getY()) / scaleFactor;
-
+                            if(!CallbackBridge.isGrabbing()){
+                                view.releasePointerCapture();
+                            }
                             if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
                                 StringBuilder builder = new StringBuilder();
                                 try {
@@ -746,6 +748,9 @@ public class BaseMainActivity extends LoggableActivity {
                 }
             }
             if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
+            if(CallbackBridge.isGrabbing()) {
+                if(BaseMainActivity.isAndroid8OrHigher()) minecraftGLView.requestPointerCapture();
+            }
             switch(ev.getActionMasked()) {
                 case MotionEvent.ACTION_HOVER_MOVE:
                     CallbackBridge.mouseX = (int) (ev.getX(mouseCursorIndex)/scaleFactor);
@@ -756,6 +761,7 @@ public class BaseMainActivity extends LoggableActivity {
                     CallbackBridge.sendScroll((double) ev.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) ev.getAxisValue(MotionEvent.AXIS_HSCROLL));
                     return true;
                 case MotionEvent.ACTION_BUTTON_PRESS:
+
                      return sendMouseButtonUnconverted(ev.getActionButton(),true);
                 case MotionEvent.ACTION_BUTTON_RELEASE:
                     return sendMouseButtonUnconverted(ev.getActionButton(),false);
@@ -847,7 +853,7 @@ public class BaseMainActivity extends LoggableActivity {
         }
     }
 
-    private boolean isAndroid8OrHigher() {
+    public static boolean isAndroid8OrHigher() {
         return Build.VERSION.SDK_INT >= 26; 
     }
 
