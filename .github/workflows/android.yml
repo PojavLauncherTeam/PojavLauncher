@@ -11,8 +11,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: PojavLauncher
 
     - uses: actions/checkout@v2
       with:
@@ -26,8 +24,6 @@ jobs:
 
     - name: Build latest GL4ES
       continue-on-error: true
-      with:
-        path: gl4es
       run: |
         cd gl4es
         git fetch upstream
