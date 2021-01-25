@@ -30,7 +30,7 @@ jobs:
         git fetch upstream
         git checkout master
         git merge upstream/main || echo "Merge exit code $?"
-        ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
+        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
         cp -R libs/* ../PojavLauncher/app_pojavlauncher/src/main/jniLibs/
         
     - name: Build APK with Gradle
