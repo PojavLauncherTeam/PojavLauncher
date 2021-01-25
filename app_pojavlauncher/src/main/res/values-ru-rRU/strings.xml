@@ -24,8 +24,8 @@
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учетные записи</string>
-    <string name="login_title_no_saved_account">Учётные записи не найдены!</string>
-    <string name="login_dialog_no_saved_account">Вы не имеете сохранённых учётных записей.\nИспользуйте опцию <b>\"Запомнить меня\"</b>, чтобы сохранить учётную запись при первом входе.</string>
+    <string name="login_title_no_saved_account">Учетные записи не найдены!</string>
+    <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцию <b>«Запомнить меня»</b>, чтобы сохранить учетную запись при первом входе.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warnings -->
