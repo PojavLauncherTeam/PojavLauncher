@@ -26,9 +26,7 @@ jobs:
       continue-on-error: true
       run: |
         cd gl4es
-        git fetch upstream
-        git checkout master
-        git merge upstream/master
+        git pull https://github.com/ptitSeb/gl4es master
         ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
         cp -R libs/* ../PojavLauncher/app_pojavlauncher/src/main/jniLibs/
         
