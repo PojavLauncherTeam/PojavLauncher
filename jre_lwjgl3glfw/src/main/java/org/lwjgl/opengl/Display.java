@@ -311,8 +311,8 @@ public class Display {
         Window.charCallback = new GLFWCharCallback() {
             @Override
             public void invoke(long window, int codepoint) {
-                //GLFWInputImplementation.singleton.putKeyboardEvent(0,(byte)1,(int)codepoint,Sys.getNanoTime(),false);
-                GLFWInputImplementation.singleton.putKeyboardEvent(0,(byte)0,(int)codepoint,Sys.getNanoTime(),false);
+                GLFWInputImplementation.singleton.putKeyboardEvent(0,(byte)1,(int)codepoint,Sys.getNanoTime(),false);
+                //GLFWInputImplementation.singleton.putKeyboardEvent(0,(byte)0,(int)codepoint,Sys.getNanoTime(),false);
             }
         };
 
