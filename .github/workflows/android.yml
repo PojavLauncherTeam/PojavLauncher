@@ -20,7 +20,7 @@ jobs:
       continue-on-error: true
       run: |
         cd ..
-        git clone git@github.com/PojavLauncherTeam/gl4es
+        git clone git@github.com:PojavLauncherTeam/gl4es
         cd gl4es
         git fetch upstream
         git checkout master
