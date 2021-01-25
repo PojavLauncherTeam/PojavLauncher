@@ -43,7 +43,7 @@ public class AndroidLWJGLKeycode {
         androidToLwjglMap.put(KeyEvent.KEYCODE_K, LWJGLGLFWKeycode.GLFW_KEY_K);
         androidToLwjglMap.put(KeyEvent.KEYCODE_L, LWJGLGLFWKeycode.GLFW_KEY_L);
         androidToLwjglMap.put(KeyEvent.KEYCODE_M, LWJGLGLFWKeycode.GLFW_KEY_M);
-        androidToLwjglMap.put(KeyEvent.KEYCODE_N, LWJGLGLFWKeycode.GLFW_KEY_M);
+        androidToLwjglMap.put(KeyEvent.KEYCODE_N, LWJGLGLFWKeycode.GLFW_KEY_N);
         androidToLwjglMap.put(KeyEvent.KEYCODE_O, LWJGLGLFWKeycode.GLFW_KEY_O);
         androidToLwjglMap.put(KeyEvent.KEYCODE_P, LWJGLGLFWKeycode.GLFW_KEY_P);
         androidToLwjglMap.put(KeyEvent.KEYCODE_Q, LWJGLGLFWKeycode.GLFW_KEY_Q);
