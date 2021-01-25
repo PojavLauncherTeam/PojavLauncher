@@ -290,6 +290,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             //UI v1 Style
             //Hide the sidebar
             params.guidePercent = 0; // 0%, range: 0 <-> 1
+            guideLine.setLayoutParams(params);
 
             //Remove the selected Tab
             selected.setVisibility(View.GONE);
