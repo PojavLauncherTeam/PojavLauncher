@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -720,7 +721,6 @@ public class PojavLoginActivity extends BaseActivity
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
-            ImageView accountIcon = child.findViewById(R.id.accountitem_image_icon);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
 
@@ -738,8 +738,9 @@ public class PojavLoginActivity extends BaseActivity
                     e.printStackTrace();
                 }
             }
-            Bitmap upscaledBitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, false);
-            accountIcon.setImageBitmap(upscaledBitmap);
+            accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
+                    Bitmap.createScaledBitmap(bitmap, 80, 80, false)),
+                    null, null, null);
             
             accountName.setText(accNameStr);
 
