@@ -15,6 +15,21 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    
+    - uses: actions/checkout@v2
+      with:
+        repository: PojavLauncherTeam/gl4es
+
+    - name: Build latest GL4ES
+      continue-on-error: true
+      run: |
+        cd ../gl4es
+        git fetch upstream
+        git checkout master
+        git merge upstream/master
+        ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
+        cp -R libs/* ../PojavLauncher/app_pojavlauncher/src/main/jniLibs/
+        
     - name: Build APK with Gradle
       run: |
         chmod +x scripts/languagelist_updater.sh
