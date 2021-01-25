@@ -19,8 +19,9 @@ jobs:
     - name: Build latest GL4ES
       continue-on-error: true
       run: |
-        cd ../gl4es
+        cd ..
         git clone git@github.com/PojavLauncherTeam/gl4es
+        cd gl4es
         git fetch upstream
         git checkout master
         git merge upstream/master
