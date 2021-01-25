@@ -15,15 +15,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    
-    - uses: actions/checkout@v2
-      with:
-        repository: PojavLauncherTeam/gl4es
 
     - name: Build latest GL4ES
       continue-on-error: true
       run: |
         cd ../gl4es
+        git clone git@github.com/PojavLauncherTeam/gl4es
         git fetch upstream
         git checkout master
         git merge upstream/master
