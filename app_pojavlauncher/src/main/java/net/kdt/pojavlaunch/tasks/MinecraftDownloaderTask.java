@@ -123,7 +123,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 zeroProgress();
                 publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, p1[0] + ".jar"));
                 File minecraftMainFile = new File(minecraftMainJar);
-                if (!minecraftMainFile.exists() || minecraftMainFile.length() == 0l) {
+                if ((!minecraftMainFile.exists() || minecraftMainFile.length() == 0l) &&
+                  verInfo.downloads != null) {
                     try {
                         Tools.downloadFileMonitored(
                             verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
