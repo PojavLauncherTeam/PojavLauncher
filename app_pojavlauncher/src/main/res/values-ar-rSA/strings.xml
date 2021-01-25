@@ -2,8 +2,8 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">بوجفافلانشر</string>
-    <string name="app_motd">تشغيل ماين كرافت: إصدار جافا على جهازك!</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">تشغيل ماين Minecraft: Java Edition على جهازك!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">مساعدة</string>
     <!-- Languages list part -->

@@ -54,6 +54,8 @@
     <string name="mcl_tab_console">Console de desenvolvedor</string>
     <string name="mcl_tab_crash">Log de crash</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Conectado</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
@@ -189,4 +191,10 @@
     <string name="main_version">Versão:</string>
     <string name="main_nocrash">Nenhum crash detectado</string>
     <string name="main_nolog">Sem log.</string>
+    <string name="main_no_news_feed">Falha ao obter o feed de notícias!</string>
+    <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memória definida para %d MB</string>
+    <string name="resolution_decrease_subtitle">Permite que você reduza a resolução do jogo. Melhora a taxa de frames. 0 é o padrão.</string>
+    <string name="resolution_decrease_title">Taxa de redução de resolução</string>
 </resources>

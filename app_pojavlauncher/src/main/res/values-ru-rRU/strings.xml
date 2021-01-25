@@ -17,13 +17,15 @@
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
     <string name="login_online_create_account">(Создать новую учетную запись?)</string>
-    <string name="login_offline_switch">Оффлайн учетная запись?</string>
-    <string name="login_offline_label">Войти как оффлайн учетная запись</string>
+    <string name="login_offline_switch">Офлайн учетная запись?</string>
+    <string name="login_offline_label">Войти как офлайн учетная запись</string>
     <string name="login_offline_alert_skip">Пропустить</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учетные записи</string>
+    <string name="login_title_no_saved_account">Учетные записи не найдены!</string>
+    <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцию <b>«Запомнить меня»</b>, чтобы сохранить учетную запись при первом входе.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warnings -->
@@ -55,7 +57,7 @@
     <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
-    <string name="mcl_account_offline">Оффлайн</string>
+    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
@@ -192,4 +194,9 @@
     <string name="main_nocrash">Сбоев не обнаружено</string>
     <string name="main_nolog">Нет записей</string>
     <string name="main_no_news_feed">Не удалось получить ленту новостей!</string>
+    <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
+    <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
+    <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
+    <string name="resolution_decrease_subtitle">Позволяет уменьшить разрешение игры. Повышает частоту кадров. По умолчанию: 0.</string>
+    <string name="resolution_decrease_title">Уменьшение разрешения</string>
 </resources>

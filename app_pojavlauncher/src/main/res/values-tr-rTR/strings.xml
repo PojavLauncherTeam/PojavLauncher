@@ -54,6 +54,8 @@
     <string name="mcl_tab_console">Geliştirici konsolu</string>
     <string name="mcl_tab_crash">Çökme günlüğü</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Bağlandı</string>
+    <string name="mcl_account_offline">Çevrimdışı</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s başlamaya hazır</string>
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
@@ -189,4 +191,10 @@
     <string name="main_version">Sürüm:</string>
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
+    <string name="main_no_news_feed">Haberler bilgileri sağlanamadı !</string>
+    <string name="auto_ram_subtitle">Otomatik BELLEK yükselticiyi aktifleştirir</string>
+    <string name="auto_ram_title">Otomatik BELLEK</string>
+    <string name="autoram_info_msg">Bellek %d MB olarak ayarlandı</string>
+    <string name="resolution_decrease_subtitle">Oyun çözünürlüğünü düşürmeni sağlar. Kare sayısını arttırır. 0 varsayılandır.</string>
+    <string name="resolution_decrease_title">Çözünürlük azalma oranı</string>
 </resources>

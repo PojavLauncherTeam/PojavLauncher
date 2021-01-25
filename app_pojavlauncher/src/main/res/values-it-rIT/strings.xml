@@ -22,10 +22,12 @@
     <string name="login_offline_alert_skip">Salta</string>
     <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
     <string name="login_error_exist_username">Nome utente già esistente</string>
-    <string name="login_microsoft">Accedi con Microsoft</string>
+    <string name="login_microsoft">Accesso Microsoft</string>
     <string name="login_select_account">Seleziona account</string>
+    <string name="login_title_no_saved_account">Non sono stati trovati account !</string>
+    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al login.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Scorri da destra verso sinistra per aprire il menu ◀\nTieni premuto per personalizzare: modificare, ridimensionare o cancellare."</string>
+    <string name="hint_control_mapping">"Apri il menu scorrendo da destra verso sinistra ◀\nTieni premuto per personalizzare: modificare, ridimensionare o cancellare."</string>
     <!-- Warnings -->
     <string name="warning_action_exit">Esci</string>
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
@@ -192,4 +194,9 @@
     <string name="main_nocrash">Nessun crash rilevato</string>
     <string name="main_nolog">Nessun log.</string>
     <string name="main_no_news_feed">Collegamento alle news fallito !</string>
+    <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memory impostata a %d MB</string>
+    <string name="resolution_decrease_subtitle">Permette di ridurre la risoluzione del gioco. Aumenta gli FPS. 0 di default.</string>
+    <string name="resolution_decrease_title">Rapporto risoluzione nativa</string>
 </resources>
