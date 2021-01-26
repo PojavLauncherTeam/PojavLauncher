@@ -195,6 +195,4 @@
     <string name="auto_ram_subtitle">Otomatik BELLEK yükselticiyi aktifleştirir</string>
     <string name="auto_ram_title">Otomatik BELLEK</string>
     <string name="autoram_info_msg">Bellek %d MB olarak ayarlandı</string>
-    <string name="resolution_decrease_subtitle">Oyun çözünürlüğünü düşürmeni sağlar. Kare sayısını arttırır. 0 varsayılandır.</string>
-    <string name="resolution_decrease_title">Çözünürlük azalma oranı</string>
 </resources>
