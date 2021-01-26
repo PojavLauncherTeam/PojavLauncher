@@ -197,6 +197,4 @@
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
-    <string name="resolution_decrease_subtitle">Позволяет уменьшить разрешение игры. Повышает частоту кадров. По умолчанию: 0.</string>
-    <string name="resolution_decrease_title">Уменьшение разрешения</string>
 </resources>
