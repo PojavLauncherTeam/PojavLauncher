@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">用户名已存在</string>
     <string name="login_microsoft">微软帐号登录</string>
     <string name="login_select_account">选择账号</string>
+    <string name="login_title_no_saved_account">帐户未找到！</string>
+    <string name="login_dialog_no_saved_account">尚未保存任何帐号。\n使用<b>“保持登录状态”</b>选项以在首次登录后保存帐号。</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
     <!-- Warnings -->
