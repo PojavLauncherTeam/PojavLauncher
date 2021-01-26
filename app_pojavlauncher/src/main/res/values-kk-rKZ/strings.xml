@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Бұл ат бос емес</string>
     <string name="login_microsoft">Microsoft-пен кіру</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
+    <string name="login_title_no_saved_account">Тіркелгі табылмады!</string>
+    <string name="login_dialog_no_saved_account">Сақталған тіркелгіңіз жоқ.\n<b>\"Мені кірген күйде қалдыру\"</b> функциясын қолданып, кірген күйде қала беріңіз.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Мәзірді ашу үшін экранды оңнан солға сипаңыз ◀\nБаптау (өңдеу, көлем өзгерту я жою) үшін батырманы басып ұстаңыз."</string>
     <!-- Warnings -->
