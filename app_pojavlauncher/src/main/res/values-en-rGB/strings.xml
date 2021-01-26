@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">This username already exist</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
+    <string name="login_title_no_saved_account">No account found !</string>
+    <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
     <!-- Warnings -->
@@ -54,6 +56,8 @@
     <string name="mcl_tab_console">Development console</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connected</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
@@ -72,6 +76,8 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This let you re-install Java Runtime</string>
     <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
     <string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Hide Sidebar</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folks preferring the old v1 UI might like this. Gives you a more fullscreen experience.</string>
     <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
@@ -187,4 +193,10 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
+    <string name="main_no_news_feed">Failed to fetch the news feed !</string>
+    <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memory set to %d MB</string>
+    <string name="resolution_decrease_subtitle">Allows you to decrease the game resolution. Improves framerate. 0 is the default.</string>
+    <string name="resolution_decrease_title">Resolution decrease ratio</string>
 </resources>
