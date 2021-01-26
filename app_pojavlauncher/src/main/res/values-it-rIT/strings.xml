@@ -197,6 +197,4 @@
     <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory impostata a %d MB</string>
-    <string name="resolution_decrease_subtitle">Permette di ridurre la risoluzione del gioco. Aumenta gli FPS. 0 di default.</string>
-    <string name="resolution_decrease_title">Rapporto risoluzione nativa</string>
 </resources>
