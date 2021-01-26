@@ -190,6 +190,4 @@
     <string name="main_nocrash">Tidak ada crash terdeteksi</string>
     <string name="main_nolog">Tidak ada catatan log.</string>
     <string name="main_no_news_feed">Gagal mengambil news feed !</string>
-    <string name="resolution_decrease_subtitle">Memungkinkan Anda mengurangi resolusi permainan. Meningkatkan frekuensi gambar. 0 adalah default.</string>
-    <string name="resolution_decrease_title">Resolusi mengurangi rasio</string>
 </resources>
