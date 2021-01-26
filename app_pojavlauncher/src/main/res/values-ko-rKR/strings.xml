@@ -196,6 +196,4 @@
     <string name="auto_ram_subtitle">자동 램 할당 활성화하기</string>
     <string name="auto_ram_title">자동 램 할당</string>
     <string name="autoram_info_msg">메모리가 %dMB 할당되었습니다.</string>
-    <string name="resolution_decrease_subtitle">게임 해상도를 낮출수있습니다. 프레임 향상에 도움을 줍니다. 기본값 0</string>
-    <string name="resolution_decrease_title">해상도 감소 비율</string>
 </resources>
