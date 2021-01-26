@@ -20,11 +20,11 @@
             app2:icon="@drawable/tap_len" />
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="resolutionRatio"
-            android:summary="@string/resolution_decrease_subtitle"
-            android:title="@string/resolution_decrease_title"
-            android:max="500"
+            android:summary="@string/mcl_setting_subtitle_resolution_scaler"
+            android:title="@string/mcl_setting_title_resolution_scaler"
             app2:showSeekBarValue="true"
-            app2:selectable="false" />
+            app2:selectable="false"
+            app2:icon="@drawable/resolution_scaler"/>
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="freeform"

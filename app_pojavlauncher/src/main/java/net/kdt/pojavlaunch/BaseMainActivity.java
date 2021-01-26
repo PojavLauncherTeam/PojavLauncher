@@ -135,8 +135,8 @@ public class BaseMainActivity extends LoggableActivity {
             isInputStackCall = mVersionInfo.arguments != null;
             
             this.displayMetrics = Tools.getDisplayMetrics(this);
-            CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels / scaleFactor);
-            CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels / scaleFactor);
+            CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels * scaleFactor);
+            CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels * scaleFactor);
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
             
@@ -293,7 +293,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                         if (gestureDetector.onTouchEvent(event)) {
 
-                            CallbackBridge.sendCursorPos((int) (mouseX / scaleFactor), (int) (mouseY /scaleFactor));
+                            CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor), (int) (mouseY *scaleFactor));
                             CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
@@ -313,7 +313,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
                                     placeMouseAt(mouseX, mouseY);
 
-                                    CallbackBridge.sendCursorPos((int) (mouseX / scaleFactor),  (int) (mouseY /scaleFactor));
+                                    CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
                                     /*
                                     if (!CallbackBridge.isGrabbing()) {
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
@@ -353,8 +353,8 @@ public class BaseMainActivity extends LoggableActivity {
                         }
                         if (mptrIndex != -1) {
                             //handle mouse events by just sending the coords of the new point in touch event
-                            int x = (int) (e.getX(mptrIndex) / scaleFactor);
-                            int y = (int) (e.getY(mptrIndex) / scaleFactor);
+                            int x = (int) (e.getX(mptrIndex) * scaleFactor);
+                            int y = (int) (e.getY(mptrIndex) * scaleFactor);
                             CallbackBridge.mouseX = x;
                             CallbackBridge.mouseY = y;
                             CallbackBridge.sendCursorPos(x, y);
@@ -363,15 +363,15 @@ public class BaseMainActivity extends LoggableActivity {
                     }
 
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
-                   /* int x = ((int) e.getX()) / scaleFactor;
-                    int y = ((int) e.getY()) / scaleFactor;*/
+                   /* int x = ((int) e.getX()) * scaleFactor;
+                    int y = ((int) e.getY()) * scaleFactor;*/
                     if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
                         x += (int)(e.getX() - e.getHistoricalX(0));
                         y += (int)(e.getY() - e.getHistoricalY(0));
                     }
                     if(!CallbackBridge.isGrabbing()) {
-                        x = (int) (e.getX() / scaleFactor);
-                        y = (int) (e.getY() / scaleFactor);
+                        x = (int) (e.getX() * scaleFactor);
+                        y = (int) (e.getY() * scaleFactor);
                     }
 
                     int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
@@ -489,8 +489,8 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                     
 /*
-                    int x = ((int) e.getX()) / scaleFactor;
-                    int y = (minecraftGLView.getHeight() - ((int) e.getY())) / scaleFactor;
+                    int x = ((int) e.getX()) * scaleFactor;
+                    int y = (minecraftGLView.getHeight() - ((int) e.getY())) * scaleFactor;
                     int hudKeyHandled = handleGuiBar(x, y, e);
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
                         if (hudKeyHandled != -1) {
@@ -602,8 +602,8 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
-                            x += ((int) e.getX()) / scaleFactor;
-                            y += ((int) e.getY()) / scaleFactor;
+                            x += ((int) e.getX()) * scaleFactor;
+                            y += ((int) e.getY()) * scaleFactor;
 
                             if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
                                 StringBuilder builder = new StringBuilder();
@@ -654,11 +654,11 @@ public class BaseMainActivity extends LoggableActivity {
                     private boolean isCalled = false;
                     @Override
                     public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-                        scaleFactor = (LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",0)/100f) + 1f;
-                        texture.setDefaultBufferSize((int)(width/scaleFactor),(int)(height/scaleFactor));
-                        CallbackBridge.windowWidth = (int)(width/scaleFactor);
-                        CallbackBridge.windowHeight = (int)(height/scaleFactor);
-                        //CallbackBridge.sendUpdateWindowSize((int)(width/scaleFactor),(int)(height/scaleFactor));
+                        scaleFactor = (LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f);
+                        texture.setDefaultBufferSize((int)(width*scaleFactor),(int)(height*scaleFactor));
+                        CallbackBridge.windowWidth = (int)(width*scaleFactor);
+                        CallbackBridge.windowHeight = (int)(height*scaleFactor);
+                        //CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
                         MCOptionUtils.load();
                         MCOptionUtils.set("overrideWidth", ""+CallbackBridge.windowWidth);
                         MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
@@ -692,9 +692,9 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-                        CallbackBridge.windowWidth = (int)(width/scaleFactor);
-                        CallbackBridge.windowHeight = (int)(height/scaleFactor);
-                        CallbackBridge.sendUpdateWindowSize((int)(width/scaleFactor),(int)(height/scaleFactor));
+                        CallbackBridge.windowWidth = (int)(width*scaleFactor);
+                        CallbackBridge.windowHeight = (int)(height*scaleFactor);
+                        CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
                         calculateMcScale();
                     }
 
@@ -748,9 +748,9 @@ public class BaseMainActivity extends LoggableActivity {
             if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
             switch(ev.getActionMasked()) {
                 case MotionEvent.ACTION_HOVER_MOVE:
-                    CallbackBridge.mouseX = (int) (ev.getX(mouseCursorIndex)/scaleFactor);
-                    CallbackBridge.mouseY = (int) (ev.getY(mouseCursorIndex)/scaleFactor);
-                    CallbackBridge.sendCursorPos((int) (ev.getX(mouseCursorIndex)/scaleFactor), (int) (ev.getY(mouseCursorIndex)/scaleFactor));
+                    CallbackBridge.mouseX = (int) (ev.getX(mouseCursorIndex)*scaleFactor);
+                    CallbackBridge.mouseY = (int) (ev.getY(mouseCursorIndex)*scaleFactor);
+                    CallbackBridge.sendCursorPos((int) (ev.getX(mouseCursorIndex)*scaleFactor), (int) (ev.getY(mouseCursorIndex)*scaleFactor));
                     return true;
                 case MotionEvent.ACTION_SCROLL:
                     CallbackBridge.sendScroll((double) ev.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) ev.getAxisValue(MotionEvent.AXIS_HSCROLL));
