@@ -197,6 +197,4 @@
     <string name="auto_ram_subtitle">Bật tự động điều chỉnh RAM</string>
     <string name="auto_ram_title">RAM tự động</string>
     <string name="autoram_info_msg">Đặt bộ nhớ %d MB</string>
-    <string name="resolution_decrease_subtitle">Cho phép bạn giảm độ phân giải trò chơi. Cải thiện tốc độ khung hình. 0 là mặc định.</string>
-    <string name="resolution_decrease_title">Giảm tỉ lệ độ phân giải</string>
 </resources>
