@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Tên này đã tồn tại</string>
     <string name="login_microsoft">Đăng nhập Microsoft</string>
     <string name="login_select_account">Chọn tài khoản</string>
+    <string name="login_title_no_saved_account">Không tìm thấy tài khoản !</string>
+    <string name="login_dialog_no_saved_account">Bạn không có một tài khoản nào được giữ.\nDùng cài đặt <b>\"Giữ đăng nhập\"</b> để giữ tài khoản lúc đầu đăng nhập.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Vuốt từ phải sang trái để mở menu ◀\nGiữ một nút để tùy chỉnh: chỉnh sửa, thay đổi kích thước hoặc xoá."</string>
     <!-- Warnings -->
@@ -54,6 +56,8 @@
     <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Đã kết nối</string>
+    <string name="mcl_account_offline">Ngoại tuyến</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Làm sạch file bộ nhớ đệm</string>
@@ -189,4 +193,10 @@
     <string name="main_version">Phiên bản:</string>
     <string name="main_nocrash">Không phát hiện sự cố</string>
     <string name="main_nolog">Không có bản ghi.</string>
+    <string name="main_no_news_feed">Lỗi để tải bài đăng mới !</string>
+    <string name="auto_ram_subtitle">Bật tự động điều chỉnh RAM</string>
+    <string name="auto_ram_title">RAM tự động</string>
+    <string name="autoram_info_msg">Đặt bộ nhớ %d MB</string>
+    <string name="resolution_decrease_subtitle">Cho phép bạn giảm độ phân giải trò chơi. Cải thiện tốc độ khung hình. 0 là mặc định.</string>
+    <string name="resolution_decrease_title">Giảm tỉ lệ độ phân giải</string>
 </resources>
