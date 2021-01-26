@@ -190,6 +190,4 @@
     <string name="auto_ram_subtitle">Įjungia automatišką RAM keitėją</string>
     <string name="auto_ram_title">Automatiškas RAM</string>
     <string name="autoram_info_msg">Atmintis pakeista į %d MB</string>
-    <string name="resolution_decrease_subtitle">Leidžia nuleisti žaidimo rezoliuciją. Pageriną našumą. 0 yra nuolatinis.</string>
-    <string name="resolution_decrease_title">Pakeisti rezoliuciją</string>
 </resources>
