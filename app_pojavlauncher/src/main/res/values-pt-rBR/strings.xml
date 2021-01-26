@@ -195,6 +195,4 @@
     <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
-    <string name="resolution_decrease_subtitle">Permite que você reduza a resolução do jogo. Melhora a taxa de frames. 0 é o padrão.</string>
-    <string name="resolution_decrease_title">Taxa de redução de resolução</string>
 </resources>
