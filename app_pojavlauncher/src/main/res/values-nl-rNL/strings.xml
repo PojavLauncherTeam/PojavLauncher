@@ -24,6 +24,7 @@
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecteer account</string>
+    <string name="login_title_no_saved_account">Geen account gevonden!</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
     <!-- Warnings -->
