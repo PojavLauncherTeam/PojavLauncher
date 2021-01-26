@@ -197,6 +197,4 @@
     <string name="auto_ram_subtitle">Автоматты түрде ОЕСҚ-ны басқарады</string>
     <string name="auto_ram_title">Авто ОЕСҚ</string>
     <string name="autoram_info_msg">%d МБ жад берілді</string>
-    <string name="resolution_decrease_subtitle">Ойын өлшемін азайтып, кадр жиілігін жақсартады. Әдепкісі 0.</string>
-    <string name="resolution_decrease_title">Өлшем азайту</string>
 </resources>
