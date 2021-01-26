@@ -42,14 +42,14 @@ scripts\languagelist_updater.bat
 
 ## Current status
 - [x] ~~OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.~~ Replaced by JRE8.
-- [x] OpenJDK 8 Mobile port: ARM64, x86, x86_64
+- [x] OpenJDK 8 Mobile port: ARM32, ARM64, x86, x86_64
 - [x] Mod installer headless
 - [ ] Mod installer with GUI. Little run on `Caciocavallo` project.
 - [x] OpenGL in OpenJDK environment
 - [x] OpenAL (work on most devices)
 - [x] Support Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
 - [x] Support Minecraft 1.13 and above. Used [GLFW stub](https://github.com/PojavLauncherTeam/lwjgl3-glfw-java).
-- [ ] Game surface zooming.
+- [x] Game surface zooming.
 - [x] New input pipe rewritten to native code to boost performance.
 - [ ] More...
 
