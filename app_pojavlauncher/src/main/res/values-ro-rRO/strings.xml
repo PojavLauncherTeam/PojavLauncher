@@ -76,6 +76,8 @@
     <string name="mcl_setting_subtitle_freeform">Deschide Minecraft-ul în modul de fereastră plutitoare. Necesită Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ascunde Bara Laterală</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Oamenii nostalgici care preferă vechiul v1 UI ar putea să îi placă aceasta. Îți dă mai multă impresie fullscreen.</string>
+    <string name="mcl_setting_title_resolution_scaler">Scalator de rezolutie</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite descreșterea rezoluției jocului. 100% este o rezoluție completă</string>
     <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
     <string name="mcl_setting_title_buttonscale">Redimensionare butoane de control</string>
