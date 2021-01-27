@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Username ini sudah ada</string>
     <string name="login_microsoft">Login Microsoft</string>
     <string name="login_select_account">Pilih akun</string>
+    <string name="login_title_no_saved_account">Tidak ada akun yang ditemukan!</string>
+    <string name="login_dialog_no_saved_account">Anda tidak punya akun yang sudah disimpan.\nGunakan opsi <b>\"Tetap masuk\"</b> untuk menyimpan sebuah akun waktu login pertama kali.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Geser dari kanan ke kiri untuk membuka menu ◀\nPencet lama sebuah tombol untuk memodifikasi: edit, modifikasi ukuran, atau hapus."</string>
     <!-- Warnings -->
@@ -54,6 +56,8 @@
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Terhubung</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan berkas-berkas cache</string>
