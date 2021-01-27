@@ -79,7 +79,7 @@
     <string name="mcl_setting_title_hide_sidebar">Скрыть боковую панель</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
     <string name="mcl_setting_title_resolution_scaler">Масштабирование разрешения</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Позволяет вам уменьшить разрешение игры. 100% - полное разрешение</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Позволяет уменьшить разрешение игры. Разрешение вашего экрана: 100%</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
