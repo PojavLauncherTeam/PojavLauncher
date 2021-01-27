@@ -83,9 +83,9 @@
     <string name="mcl_setting_title_setmaxdxref">Установка макс. кол-во запросов DX</string>
     <string name="mcl_setting_subtitle_setmaxdxref">Увеличьте если при конвертации произошла ошибка: Too many ... references. Вы можете попробовать опцию multi-dex. Рекомендуем: 4096 или 8192.</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
-    <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
+    <string name="mcl_setting_subtitle_freeform">Запускает Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_controlsize">Установка размера кнопок управления</string>
     <string name="mcl_setting_title_forgetoptifpath">Сделать OptiFine неспособным обнаружить себя</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Позволяет сделать OptiFine способным запуститься на некоторых устройствах.</string>
