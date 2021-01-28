@@ -194,6 +194,9 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                 javaArgList.add("-jar");
                 javaArgList.add(modFile.getAbsolutePath());
             }
+            
+            // Enable Caciocavallo
+            Tools.getCacioJavaArgs(javaArgList);
 
             // System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 

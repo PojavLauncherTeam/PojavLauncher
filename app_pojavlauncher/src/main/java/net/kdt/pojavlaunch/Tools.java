@@ -72,26 +72,7 @@ public final class Tools
         // 13w18a: 20130502
         if (mcReleaseDate < 20130502 && versionInfo.minimumLauncherVersion < 9){
             ctx.appendlnToLog("AWT-enabled version detected! ("+mcReleaseDate+")");
-            javaArgList.add("-Djava.awt.headless=false");
-            // Caciocavallo config AWT-enabled version
-            javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
-            javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
-            // javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
-            javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
-            javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
-            javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
-
-            StringBuilder cacioClasspath = new StringBuilder();
-            cacioClasspath.append("-Xbootclasspath/p");
-            File cacioDir = new File(DIR_GAME_NEW + "/caciocavallo");
-            if (cacioDir.exists() && cacioDir.isDirectory()) {
-                for (File file : cacioDir.listFiles()) {
-                    if (file.getName().endsWith(".jar")) {
-                        cacioClasspath.append(":" + file.getAbsolutePath());
-                    }
-                }
-            }
-            javaArgList.add(cacioClasspath.toString());
+            getCacioJavaArgs(javaArgList);
         }else{
             ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
@@ -103,6 +84,29 @@ public final class Tools
         javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
         JREUtils.launchJavaVM(ctx, javaArgList);
+    }
+    
+    public static void getCacioJavaArgs(List<String> javaArgList) {
+        javaArgList.add("-Djava.awt.headless=false");
+        // Caciocavallo config AWT-enabled version
+        javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.windowWidth + "x" + CallbackBridge.windowHeight);
+        javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
+        // javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
+        javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
+        javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
+        javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+
+        StringBuilder cacioClasspath = new StringBuilder();
+        cacioClasspath.append("-Xbootclasspath/p");
+        File cacioDir = new File(DIR_GAME_NEW + "/caciocavallo");
+        if (cacioDir.exists() && cacioDir.isDirectory()) {
+            for (File file : cacioDir.listFiles()) {
+                if (file.getName().endsWith(".jar")) {
+                    cacioClasspath.append(":" + file.getAbsolutePath());
+                }
+            }
+        }
+        javaArgList.add(cacioClasspath.toString());
     }
 
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
