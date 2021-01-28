@@ -61,7 +61,7 @@
 	-->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Новости лаунчера</string>
-    <string name="mcl_tab_console">Консоль разработки</string>
+    <string name="mcl_tab_console">Консоль разработчика</string>
     <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
