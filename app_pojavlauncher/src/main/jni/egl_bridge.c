@@ -90,7 +90,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
             EGL_BLUE_SIZE, 8,
             EGL_ALPHA_SIZE, 8,
             // Minecraft required on initial 24
-            EGL_DEPTH_SIZE, 16,
+            EGL_DEPTH_SIZE, 24,
             EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
             EGL_NONE
     };
