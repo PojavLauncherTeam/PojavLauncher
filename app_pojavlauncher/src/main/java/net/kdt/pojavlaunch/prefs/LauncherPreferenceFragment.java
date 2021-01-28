@@ -40,7 +40,7 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
 	
 	// #724 bug fix
         if (seek5.getValue() < 25) {
-            seek5.setValue(25);
+            seek5.setValue(100);
         }
         
         EditTextPreference editJVMArgs = findPreference("javaArgs");
