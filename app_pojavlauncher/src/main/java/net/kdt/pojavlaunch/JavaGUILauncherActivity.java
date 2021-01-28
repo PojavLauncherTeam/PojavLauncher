@@ -32,6 +32,8 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.install_mod);
 
+        Tools.updateWindowSize(this);
+        
         try {
             logFile = new File(Tools.DIR_GAME_NEW, "latestlog.txt");
             logFile.delete();
@@ -188,6 +190,9 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         try {
             List<String> javaArgList = new ArrayList<String>();
 
+            // Enable Caciocavallo
+            Tools.getCacioJavaArgs(javaArgList);
+            
             if (javaArgs != null) {
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
             } else {
@@ -195,9 +200,6 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                 javaArgList.add(modFile.getAbsolutePath());
             }
             
-            // Enable Caciocavallo
-            Tools.getCacioJavaArgs(javaArgList);
-
             // System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 
             appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));

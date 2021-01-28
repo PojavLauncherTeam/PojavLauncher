@@ -224,8 +224,8 @@ public class JREUtils
         envMap.put("REGAL_GL_RENDERER", "Regal");
         envMap.put("REGAL_GL_VERSION", "4.5");
 
-        envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
-        envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
+        envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
+        envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
         
         File customEnvFile = new File(Tools.DIR_GAME_NEW, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
