@@ -22,7 +22,6 @@
             android:key="resolutionRatio"
             android:summary="@string/mcl_setting_subtitle_resolution_scaler"
             android:title="@string/mcl_setting_title_resolution_scaler"
-            app2:min="1"
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:icon="@drawable/resolution_scaler"/>
