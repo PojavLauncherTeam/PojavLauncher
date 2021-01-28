@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import android.app.*;
 import android.content.*;
 import android.content.res.*;
+import android.graphics.Point;
 import android.net.*;
 import android.os.*;
 import android.system.*;
@@ -337,6 +338,13 @@ public final class Tools
     public static DisplayMetrics currentDisplayMetrics;
     public static void updateWindowSize(Activity ctx) {
         currentDisplayMetrics = getDisplayMetrics(ctx);
+
+        Point point = new Point();
+        ctx.getWindowManager().getDefaultDisplay().getRealSize(point); //Used to get the full screen width/height regardless of a notch/status bar.
+        currentDisplayMetrics.widthPixels = point.x;
+        currentDisplayMetrics.heightPixels = point.y;
+
+
         CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
         CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
         
