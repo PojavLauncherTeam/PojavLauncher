@@ -37,6 +37,11 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
         CustomSeekBarPreference seek5 = (CustomSeekBarPreference) findPreference("resolutionRatio");
         seek5.setMin(25);
         seek5.setSuffix(" %");
+	
+	// #724 bug fix
+        if (seek5.getValue() < 25) {
+            seek5.setValue(25);
+        }
         
         EditTextPreference editJVMArgs = findPreference("javaArgs");
         if (editJVMArgs != null) {
