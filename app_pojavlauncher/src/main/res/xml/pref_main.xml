@@ -41,9 +41,9 @@
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="ignoreNotch"
-            android:summary="@string/mcl_setting_subtitle_hide_sidebar"
-            android:title="@string/mcl_setting_title_hide_sidebar"
-            app2:icon="@drawable/hide_sidebar" />
+            android:summary="@string/mcl_setting_subtitle_ignore_notch"
+            android:title="@string/mcl_setting_title_ignore_notch"
+            app2:icon="@drawable/ignore_notch" />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="autoRam"
