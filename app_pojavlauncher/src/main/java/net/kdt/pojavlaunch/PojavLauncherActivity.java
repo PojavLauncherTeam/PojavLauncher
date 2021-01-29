@@ -4,11 +4,12 @@ import android.animation.ValueAnimator;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.VerticalTabLayout.ViewPagerAdapter;
-import android.util.TypedValue;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
@@ -33,7 +35,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.os.Build.VERSION_CODES.P;
+import static net.kdt.pojavlaunch.Tools.ignoreNotch;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_HIDE_SIDEBAR;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 public class PojavLauncherActivity extends BaseLauncherActivity
 {
@@ -52,6 +58,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launcher_main_v4);
@@ -206,18 +213,25 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         statusIsLaunching(false);
 
+
         initTabs(0);
         LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if(key.equals("hideSidebar")) {
+                if(key.equals("hideSidebar")){
                     restoreOldLook(sharedPreferences.getBoolean("hideSidebar",false));
+                    return;
+                }
+
+                if(key.equals("ignoreNotch")){
+                    ignoreNotch(sharedPreferences.getBoolean("ignoreNotch", true), PojavLauncherActivity.this);
+                    return;
                 }
             }
         });
         restoreOldLook(PREF_HIDE_SIDEBAR);
+        ignoreNotch(PREF_IGNORE_NOTCH, PojavLauncherActivity.this);
     }
-
 
 
     private void selectTabPage(int pageIndex){
@@ -313,5 +327,20 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }
         mPlayButton.setLayoutParams(params);
     }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (Build.VERSION.SDK_INT >= P){
+            //Get the fucking notch height:
+            try {
+                PREF_NOTCH_SIZE = getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0).width();
+            }catch (Exception e){
+                Log.i("NOTCH DETECTION", "No notch detected, or the device if in split screen mode");
+            }
+            Tools.updateWindowSize(this);
+        }
+    }
+
 }
 

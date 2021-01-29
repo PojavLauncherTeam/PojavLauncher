@@ -2,8 +2,6 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.*;
-import android.graphics.Point;
 import android.net.*;
 import android.os.*;
 import android.system.*;
@@ -23,6 +21,10 @@ import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 import android.view.*;
 import android.widget.Toast;
+
+import static android.os.Build.VERSION_CODES.P;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 public final class Tools
 {
@@ -314,7 +316,17 @@ public final class Tools
 
     public static DisplayMetrics getDisplayMetrics(Activity ctx) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ctx.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && (ctx.isInMultiWindowMode() || ctx.isInPictureInPictureMode())){
+            //For devices with free form/split screen, we need window size, not screen size.
+            displayMetrics = ctx.getResources().getDisplayMetrics();
+        }else{
+            ctx.getDisplay().getRealMetrics(displayMetrics);
+            if(!PREF_IGNORE_NOTCH){
+                //Remove notch width when it isn't ignored.
+                displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
+            }
+        }
         return displayMetrics;
     }
 
@@ -336,22 +348,12 @@ public final class Tools
     }
 
     public static DisplayMetrics currentDisplayMetrics;
+
     public static void updateWindowSize(Activity ctx) {
         currentDisplayMetrics = getDisplayMetrics(ctx);
 
-        Point point = new Point();
-        ctx.getWindowManager().getDefaultDisplay().getRealSize(point); //Used to get the full screen width/height regardless of a notch/status bar.
-        currentDisplayMetrics.widthPixels = point.x;
-        currentDisplayMetrics.heightPixels = point.y;
-
-
         CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
         CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
-        
-        if (CallbackBridge.physicalWidth < CallbackBridge.physicalHeight) {
-            CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.heightPixels);
-            CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.widthPixels);
-        }
     }
 
     public static float dpToPx(float dp) {
@@ -810,4 +812,17 @@ public final class Tools
             }
         }
     }
+
+    public static void ignoreNotch(boolean shouldIgnore, Activity ctx){
+        if (Build.VERSION.SDK_INT >= P) {
+            if (shouldIgnore) {
+                ctx.getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            } else {
+                ctx.getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
+            }
+            ctx.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+            Tools.updateWindowSize(ctx);
+        }
+    }
+
 }

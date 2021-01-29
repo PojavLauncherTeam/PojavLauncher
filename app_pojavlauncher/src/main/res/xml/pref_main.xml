@@ -40,6 +40,12 @@
             app2:icon="@drawable/hide_sidebar" />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
+            android:key="ignoreNotch"
+            android:summary="@string/mcl_setting_subtitle_hide_sidebar"
+            android:title="@string/mcl_setting_title_hide_sidebar"
+            app2:icon="@drawable/hide_sidebar" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
             android:key="autoRam"
             android:summary="@string/auto_ram_subtitle"
             android:title="@string/auto_ram_title" />
