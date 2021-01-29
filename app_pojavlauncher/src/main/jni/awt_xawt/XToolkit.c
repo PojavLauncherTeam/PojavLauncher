@@ -267,11 +267,11 @@ Java_java_awt_TextField_initIDs
 }
 
 JNIEXPORT jboolean JNICALL AWTIsHeadless() {
-#ifdef HEADLESS
+// #ifdef HEADLESS
     return JNI_TRUE;
-#else
-    return JNI_FALSE;
-#endif
+// #else
+//     return JNI_FALSE;
+// #endif
 }
 
 JNIEXPORT void JNICALL Java_java_awt_Dialog_initIDs (JNIEnv *env, jclass cls)
