@@ -252,7 +252,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
+        android:background="@drawable/mine_button_background"/>
 
     <TextView
         android:id="@+id/launchermain_text_welcome"
