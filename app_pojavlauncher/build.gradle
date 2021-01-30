@@ -5,7 +5,7 @@ def getDate() {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     dexOptions {
         javaMaxHeapSize "4g"
     }

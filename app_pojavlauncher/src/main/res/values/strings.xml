@@ -95,6 +95,8 @@
     <string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Hide Sidebar</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folks preferring the old v1 UI might like this. Gives you a more fullscreen experience.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignore notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignore the notch and extends the screen under it.\nGives you a more immersive experience.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
     <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
