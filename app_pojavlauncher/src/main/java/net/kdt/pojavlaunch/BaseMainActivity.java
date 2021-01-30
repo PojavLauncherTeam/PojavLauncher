@@ -127,7 +127,7 @@ public class BaseMainActivity extends LoggableActivity {
             logStream = new PrintStream(logFile.getAbsolutePath());
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            mVersionInfo = Tools.getVersionInfo(mProfile.selectedVersion);
+            mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
             
             setTitle("Minecraft " + mProfile.selectedVersion);
             

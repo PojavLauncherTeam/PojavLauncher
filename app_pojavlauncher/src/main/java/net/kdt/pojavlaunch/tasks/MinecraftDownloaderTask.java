@@ -58,7 +58,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     );
                 }
 
-                verInfo = Tools.getVersionInfo(p1[0]);
+                verInfo = Tools.getVersionInfo(mActivity,p1[0]);
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
                 } catch (IOException e) {
@@ -341,6 +341,6 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         }
 
         // Custom version, inherits from base.
-        return Tools.getVersionInfo(version);
+        return Tools.getVersionInfo(mActivity,version);
     }
 }
