@@ -24,6 +24,7 @@
     <string name="login_error_exist_username">Este nome de usuário já existe</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecionar conta</string>
+    <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀\nSegure um botão para personalizar: editar, redimensionar ou excluir."</string>
     <!-- Warnings -->
