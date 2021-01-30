@@ -78,6 +78,10 @@
     <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 +</string>
     <string name="mcl_setting_title_hide_sidebar">Masquer la barre latérale</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Les gens nostalgiques qui préfèrent l\'ancienne interface utilisateur (v1) peuvent aimer cette option. Vous donne une expérience orienté plein écran.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorer l\'encoche</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignore l\'encoche et étend l\'écran en dessous de celle ci.\nVous donne une expérience plus immersive.</string>
+    <string name="mcl_setting_title_resolution_scaler">Échelle de résolution</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Vous permet de diminuer la résolution du jeu. 100% représente la pleine résolution</string>
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_buttonscale">Mise à l\'échelle des boutons de contrôle</string>
