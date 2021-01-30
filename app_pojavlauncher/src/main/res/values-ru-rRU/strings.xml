@@ -79,7 +79,7 @@
     <string name="mcl_setting_title_hide_sidebar">Скрытие боковой панели</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
     <string name="mcl_setting_title_ignore_notch">Игнорировать фронт. камеру</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Игнорирует выемку и расширяет экран под ней. \nдаст вам большее погружение в игру.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Игнорирует фронт. камеру-каплю, и расширяет экран за неё.\n Обеспечивает большее погружение в игру.</string>
     <string name="mcl_setting_title_resolution_scaler">Уменьшение разрешения</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Позволяет вам уменьшить разрешение игры. 100% - полное разрешение</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
