@@ -78,6 +78,8 @@
     <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Nessario Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Nascondi barra laterale</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Potrebbe piacere a coloro che preferivano la vecchia l\'interfaccia v1. Offre un\'esperienza migliore a schermo intero.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignora notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Allarga lo schermo fino al di sotto della notch.\nDandoti un\'esperienza più immersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Proporzioni risoluzione</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ti permetti di diminuire la risoluzione del gioco. 100% è la risoluzione completa</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
