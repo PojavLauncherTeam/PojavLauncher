@@ -18,6 +18,8 @@ import java.io.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
+
 public class CustomControlsActivity extends BaseActivity
 {
 	private DrawerLayout drawerLayout;
@@ -33,6 +35,8 @@ public class CustomControlsActivity extends BaseActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.control_mapping);
+		
+		Tools.ignoreNotch(PREF_IGNORE_NOTCH, this);
 
 		mPref = PreferenceManager.getDefaultSharedPreferences(this);
 
