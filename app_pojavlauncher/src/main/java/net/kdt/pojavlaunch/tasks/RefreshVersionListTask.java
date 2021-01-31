@@ -94,7 +94,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                 }  
             });  
 
-        mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg) + mActivity.mVersionSelector.getSelectedItem());
+        mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg,mActivity.mVersionSelector.getSelectedItem()));
     }
     
     private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {
