@@ -99,6 +99,7 @@ public class PojavLoginActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false);
         
+        Tools.ignoreNotch(PREF_IGNORE_NOTCH, this);
         Tools.updateWindowSize(this);
         /*
         ControlData.pixelOf2dp = (int) Tools.dpToPx(2);
