@@ -917,7 +917,7 @@ public class Display {
     public static void setTitle(String title) {
         windowTitle = title;
     }
-
+    public static String getTitle() { return windowTitle; }
     public static boolean isCloseRequested() {
         return glfwWindowShouldClose(Window.handle) == true;
     }
