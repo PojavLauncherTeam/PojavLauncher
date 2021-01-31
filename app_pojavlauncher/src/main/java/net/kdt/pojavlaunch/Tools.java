@@ -67,7 +67,7 @@ public final class Tools
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
-        String launchClassPath = generateLaunchClassPath(versionName);
+        String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
 
         List<String> javaArgList = new ArrayList<String>();
         
@@ -275,10 +275,10 @@ public final class Tools
     }
 
     private static boolean isClientFirst = false;
-    public static String generateLaunchClassPath(String info) {
+    public static String generateLaunchClassPath(JMinecraftVersionList.Version info,String actualname) {
         StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 
-        String[] classpath = generateLibClasspath(Tools.getVersionInfo(null,info));
+        String[] classpath = generateLibClasspath(info);
 
         // Debug: LWJGL 3 override
         // File lwjgl2Folder = new File(Tools.MAIN_PATH, "lwjgl2");
@@ -301,7 +301,7 @@ public final class Tools
          */
 
         if (isClientFirst) {
-            libStr.append(getPatchedFile(info));
+            libStr.append(getPatchedFile(actualname));
         }
         for (String perJar : classpath) {
             if (!new File(perJar).exists()) {
@@ -311,7 +311,7 @@ public final class Tools
             libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
         }
         if (!isClientFirst) {
-            libStr.append(getPatchedFile(info));
+            libStr.append(getPatchedFile(actualname));
         }
 
         return libStr.toString();
