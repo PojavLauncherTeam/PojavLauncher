@@ -75,8 +75,9 @@ public final class Tools
         // 13w18a: 20130502
         if (mcReleaseDate < 20130502 && versionInfo.minimumLauncherVersion < 9){
             ctx.appendlnToLog("AWT-enabled version detected! ("+mcReleaseDate+")");
-            getCacioJavaArgs(javaArgList);
+            getCacioJavaArgs(javaArgList,false);
         }else{
+            getCacioJavaArgs(javaArgList,true);
             ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
         
@@ -89,12 +90,13 @@ public final class Tools
         JREUtils.launchJavaVM(ctx, javaArgList);
     }
     
-    public static void getCacioJavaArgs(List<String> javaArgList) {
-        javaArgList.add("-Djava.awt.headless=false");
+    public static void getCacioJavaArgs(List<String> javaArgList, boolean isHeadless) {
+        javaArgList.add("-Djava.awt.headless="+isHeadless);
         // Caciocavallo config AWT-enabled version
         javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.physicalWidth + "x" + CallbackBridge.physicalHeight);
         javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
-        // javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
+        if(isHeadless) javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler"); //safe to use it when running in headless mode
+        //else javaArgList.add("-Dcacio.font.fontscaler=sun.font.NullFontScaler"); // it will literally disable the text rendering, so...
         javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
         javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
         javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");

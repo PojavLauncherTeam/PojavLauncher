@@ -191,7 +191,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
             List<String> javaArgList = new ArrayList<String>();
 
             // Enable Caciocavallo
-            Tools.getCacioJavaArgs(javaArgList);
+            Tools.getCacioJavaArgs(javaArgList,false);
             
             if (javaArgs != null) {
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
