@@ -11,7 +11,6 @@ import java.io.*;
 import com.google.gson.*;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 
 public class MainActivity extends BaseMainActivity {
     private ControlLayout mControlLayout;
@@ -24,7 +23,6 @@ public class MainActivity extends BaseMainActivity {
         super.onCreate(savedInstanceState);
         initLayout(R.layout.main_with_customctrl);
 
-        Tools.ignoreNotch(PREF_IGNORE_NOTCH, this);
 
         mClickListener = new View.OnClickListener(){
             @Override
