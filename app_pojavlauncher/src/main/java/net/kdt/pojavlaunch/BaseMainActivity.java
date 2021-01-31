@@ -891,7 +891,7 @@ public class BaseMainActivity extends LoggableActivity {
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
         JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
-        Tools.launchMinecraft(this, mProfile, mVersionInfo);
+        Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {

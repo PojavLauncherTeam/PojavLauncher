@@ -61,12 +61,13 @@ public final class Tools
     
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
-    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
+    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
+        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
-        String launchClassPath = generateLaunchClassPath(versionInfo);
+        String launchClassPath = generateLaunchClassPath(versionName);
 
         List<String> javaArgList = new ArrayList<String>();
         
@@ -274,10 +275,10 @@ public final class Tools
     }
 
     private static boolean isClientFirst = false;
-    public static String generateLaunchClassPath(JMinecraftVersionList.Version info) {
+    public static String generateLaunchClassPath(String info) {
         StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 
-        String[] classpath = generateLibClasspath(info);
+        String[] classpath = generateLibClasspath(Tools.getVersionInfo(null,info));
 
         // Debug: LWJGL 3 override
         // File lwjgl2Folder = new File(Tools.MAIN_PATH, "lwjgl2");
@@ -300,7 +301,7 @@ public final class Tools
          */
 
         if (isClientFirst) {
-            libStr.append(getPatchedFile(info.id));
+            libStr.append(getPatchedFile(info));
         }
         for (String perJar : classpath) {
             if (!new File(perJar).exists()) {
@@ -310,7 +311,7 @@ public final class Tools
             libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
         }
         if (!isClientFirst) {
-            libStr.append(getPatchedFile(info.id));
+            libStr.append(getPatchedFile(info));
         }
 
         return libStr.toString();
