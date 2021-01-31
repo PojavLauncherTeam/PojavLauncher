@@ -56,6 +56,13 @@ scripts\languagelist_updater.bat
 - [x] New input pipe rewritten to native code to boost performance.
 - [ ] More...
 
+## Known Issues
+- in 1.16 and up spawneggs banners are white 
+- controller mods arnt working
+- with big modpacks texture could be mest up
+- if your using gl4es 1.1.5 on 1.16 and lower texture will bug out when hit a mob
+- probely more thats why we have a bug tracker ;)
+
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
