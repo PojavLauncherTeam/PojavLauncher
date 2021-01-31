@@ -93,9 +93,12 @@
 				<com.kdt.mcgui.MineButton
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
+					android:background="@drawable/mine_button_background"
 					android:text="@string/login_online_login_label"
+					android:textColor="@android:color/white"
 					android:onClick="loginMC"
-					android:gravity="center"/>
+					android:gravity="center"
+					/>
 
 				<ProgressBar
 					android:layout_width="match_parent"
@@ -110,16 +113,22 @@
 			<com.kdt.mcgui.MineButton
 				android:layout_width="210dip"
 				android:layout_height="match_parent"
+				android:background="@drawable/mine_button_background"
 				android:text="@string/login_select_account"
-				android:onClick="loginSavedAcc"/>
+				android:textColor="@android:color/white"
+				android:onClick="loginSavedAcc"
+				/>
 
 		</LinearLayout>
 
 		<com.kdt.mcgui.MineButton
 			android:layout_height="42dp"
 			android:layout_width="match_parent"
+			android:background="@drawable/mine_button_background"
 			android:text="@string/login_microsoft"
-			android:onClick="loginMicrosoft"/>
+			android:textColor="@android:color/white"
+			android:onClick="loginMicrosoft"
+			/>
 
 	</LinearLayout>
 

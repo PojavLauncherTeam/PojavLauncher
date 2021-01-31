@@ -241,18 +241,21 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom2" />
 
     <com.kdt.mcgui.MineButton
+        android:background="@drawable/mine_button_background"
         android:id="@+id/launchermainPlayButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:onClick="launchGame"
         android:text="@string/main_play"
+        android:textColor="@android:color/white"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
+        />
 
     <TextView
         android:id="@+id/launchermain_text_welcome"
