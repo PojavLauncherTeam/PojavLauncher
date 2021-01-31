@@ -56,6 +56,7 @@ public final class Tools
     public static final String DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
 
     public static final String ASSETS_PATH = DIR_GAME_NEW + "/assets";
+    public static final String OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
     public static final String CTRLMAP_PATH = DIR_GAME_NEW + "/controlmap";
     public static final String CTRLDEF_FILE = DIR_GAME_NEW + "/controlmap/default.json";
     

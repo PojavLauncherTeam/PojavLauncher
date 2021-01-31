@@ -183,7 +183,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             setMax(assets.objects.size());
             zeroProgress();
             try {
-                downloadAssets(assets, verInfo.assets, new File(Tools.ASSETS_PATH));
+                downloadAssets(assets, verInfo.assets, assets.map_to_resources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -306,6 +306,13 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
         }
     }
+    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir) throws Throwable {
+        String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
+        File outFile = new File(resDir,"/"+assetName);
+        if (!outFile.exists()) {
+            DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
+        }
+    }
 
     public void downloadAssets(JAssets assets, String assetsVersion, File outputDir) throws IOException, Throwable {
         File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
@@ -321,7 +328,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     return;
                 }
 
-                downloadAsset(asset, objectsDir);
+                if(!assets.map_to_resources) downloadAsset(asset, objectsDir);
+                else downloadAssetMapped(asset,(assetsObjects.keySet().toArray(new String[0])[downloadedSs]),outputDir);
                 publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, assetsObjects.keySet().toArray(new String[0])[downloadedSs]));
                 downloadedSs++;
             }
