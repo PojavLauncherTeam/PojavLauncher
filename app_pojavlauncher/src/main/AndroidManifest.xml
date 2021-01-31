@@ -46,11 +46,6 @@
 			android:screenOrientation="sensorLandscape"
 			android:name=".FatalErrorActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-		
-		<activity
-			android:screenOrientation="sensorLandscape"
-			android:name=".MCLauncherActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
             android:screenOrientation="sensorLandscape"
