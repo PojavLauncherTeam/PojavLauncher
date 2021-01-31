@@ -90,8 +90,9 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                             boolean skipIfFailed = false;
 
                             if (libItem.downloads == null || libItem.downloads.artifact == null) {
+                                System.out.println("UnkLib:"+libArtifact);
                                 MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
-                                artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url) + libArtifact;
+                                artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url.replace("http://","https://")) + libArtifact;
                                 libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
 
                                 skipIfFailed = true;
