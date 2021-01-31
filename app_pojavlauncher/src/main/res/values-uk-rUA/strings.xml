@@ -24,6 +24,8 @@
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
     <string name="login_select_account">Виберіть обліковий запис</string>
+    <string name="login_title_no_saved_account">Акаунт не знайдено !</string>
+    <string name="login_dialog_no_saved_account">У вас немає жодного збереженого акаунта.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміну розміру або видалення."</string>
     <!-- Warnings -->
@@ -75,6 +77,11 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плаваючому вікні</string>
     <string name="mcl_setting_subtitle_freeform">Запустити Minecraft в плаваючому вікні. Треба Android 7.0 чи вище</string>
     <string name="mcl_setting_title_hide_sidebar">Приховати бічну панель</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Ностальгічні люди віддають перевагу старому інтерфейсу v1, який може їм подобатися. Дає вам більш повноекранний досвід.</string>
+    <string name="mcl_setting_title_ignore_notch">Ігнорувати виріз фронт. камери</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ігнорує виріз фронт. камери і розширює екран за неї.\nДає вам більш захоплюючий досвід.</string>
+    <string name="mcl_setting_title_resolution_scaler">Масштабування роздільності</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Дозволяє зменшити роздільну здатність гри. 100% - роздільна здатність смартфона</string>
     <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
     <string name="mcl_setting_title_buttonscale">Масштабування кнопок керування</string>
@@ -190,4 +197,8 @@
     <string name="main_version">Версія:</string>
     <string name="main_nocrash">Збоїв не виявлено</string>
     <string name="main_nolog">Нема записів.</string>
+    <string name="main_no_news_feed">Не вдалося обновити останні новини!</string>
+    <string name="auto_ram_subtitle">Вмикає автоматичне регулювання оперативної пам\'яті</string>
+    <string name="auto_ram_title">Авто ОЗУ</string>
+    <string name="autoram_info_msg">Пам\'ять встановлено на %d МБ</string>
 </resources>
