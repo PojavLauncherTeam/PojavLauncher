@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">HELP</string>
     <!-- Languages list part -->
-    <string name="language_name">ENGLISH - US</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email or username</string>
-    <string name="login_online_username_question">(Which one do I use?)</string>
     <string name="login_online_password_hint">Password</string>
-    <string name="login_online_password_question">Forgot password?</string>
-    <string name="login_online_remember">Remember me?</string>
     <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Login</string>
-    <string name="login_online_create_account">(Create new account?)</string>
-    <string name="login_offline_switch">Offline account?</string>
     <string name="login_offline_label">Login as a offline account</string>
-    <string name="login_offline_alert_skip">Skip</string>
     <string name="login_error_short_username">Username must be at least 3 characters long</string>
     <string name="login_error_exist_username">This username already exist</string>
     <string name="login_microsoft">Microsoft login</string>
@@ -27,22 +19,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Exit</string>
     <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Select a keymap json</string>
     <string name="alerttitle_installmod">Choose a mod installer (.jar)</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher has unexpectedly crashed</string>
-    <string name="error_checklog">Error! Please check the log below: %s</string>
     <string name="error_no_version">No version!</string>
-    <string name="error_load_version">Unable to load version %s</string>
     <string name="error_show_more">Show more</string>
     <string name="error_show_less">Show less</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
-    <string name="toast_login_error">Something went wrong after loging in. Please contact us with the following error.\nError: %s</string>
     <string name="toast_optifine_success">Install successful</string>
     <string name="toast_uninstalljre_done">Uninstalled Java Runtime succesfully</string>
     <!--
@@ -50,7 +37,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">News</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Development console</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
@@ -63,10 +49,8 @@
     <string name="mcl_launch_downloading_progress">"Downloading %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
     <string name="mcl_options">Options</string>
-    <string name="mcl_option_modmgr">Mod manager (under construction)</string>
     <string name="mcl_option_modinstall">Launch a mod installer (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Launch a mod installer (with custom arguments)</string>
-    <string name="mcl_option_checkupdate">Check for updates</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_option_settings">Settings</string>
     <string name="mcl_option_about">About</string>
@@ -80,7 +64,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Upscale them if buttons are too small.</string>
     <string name="mcl_setting_title_mousescale">Mouse scaling</string>
     <string name="mcl_setting_subtitle_mousescale">Change size of virtual mouse.</string>
-    <string name="mcl_setting_title_controlsize">Set button size</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Be careful, this can make the game crash if modified without any prior knowledge.</string>
     <string name="mcl_setting_category_general">General settings</string>
@@ -92,7 +75,6 @@
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
-    <string name="global_add">Add</string>
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
     <string name="global_load">Load</string>
@@ -128,19 +110,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Game exited</string>
     <string name="mcn_exit_call">Exit</string>
-    <string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
-    <string name="mcn_exit_errcrash">Unable to locate crash! You can ignore this.</string>
     <string name="mcn_exit_confirm">Are you sure you want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
     <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Could not start Java VM test. Check %s for more info.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Controls</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -167,14 +144,11 @@
     <string name="customctrl_edit">Editing %s</string>
     <string name="customctrl_remove">Remove %s?</string>
     <string name="customctrl_keyname">Keycode</string>
-    <string name="customctrl_specialkey">Special Key</string>
-    <string name="customctrl_hidden">Hidden</string>
     <string name="customctrl_toggle">Toggleable</string>
     <string name="customctrl_dynamicpos">Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X-axis</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y-axis</string>
     <string name="customctrl_transparency_bg">Background transparency</string>
-    <string name="customctrl_transparency_text">Text transparency</string>
     <string name="customctrl_keycombine">Key combination</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>

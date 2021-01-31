@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Avvia Minecraft: Java Edition sul tuo dispositivo!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">Aiuto</string>
     <!-- Languages list part -->
-    <string name="language_name">ITALIANO - IT</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Indirizzo Email o nome utente</string>
-    <string name="login_online_username_question">(Quale dovrei usare?)</string>
     <string name="login_online_password_hint">Password</string>
-    <string name="login_online_password_question">Password dimenticata?</string>
-    <string name="login_online_remember">Ricordami?</string>
     <string name="login_online_check_keeplogin">Resta collegato</string>
     <string name="login_online_login_label">Accedi</string>
-    <string name="login_online_create_account">(Creare nuovo account?)</string>
-    <string name="login_offline_switch">Account Offline?</string>
     <string name="login_offline_label">Accedi come account Offline</string>
-    <string name="login_offline_alert_skip">Salta</string>
     <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
     <string name="login_error_exist_username">Nome utente già esistente</string>
     <string name="login_microsoft">Accesso Microsoft</string>
@@ -29,22 +21,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Apri il menu scorrendo da destra verso sinistra ◀\nTieni premuto per personalizzare: modificare, ridimensionare o cancellare."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Esci</string>
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installa Runtime Java %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Seleziona mappatura (keymap) json</string>
     <string name="alerttitle_installmod">Seleziona un installer mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher è crashato</string>
-    <string name="error_checklog">Errore! Per favore controlla i log in basso: %s</string>
     <string name="error_no_version">Nessuna versione!</string>
-    <string name="error_load_version">Impossibile caricare la versione %s</string>
     <string name="error_show_more">Mostra altro</string>
     <string name="error_show_less">Mostra meno</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Permesso di scrittura/lettura sulla memoria necessario!</string>
-    <string name="toast_login_error">Qualcosa è andato storto dopo l\'accesso. Per favore segnalalo allo sviluppatore.\nErrore: %s</string>
     <string name="toast_optifine_success">Installato con successo</string>
     <string name="toast_uninstalljre_done">Disinstallazione Runtime Java completato</string>
     <!--
@@ -52,7 +39,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Notizie</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Console sviluppatore</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
@@ -65,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"Scaricando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
     <string name="mcl_options">Impostazioni</string>
-    <string name="mcl_option_modmgr">Gestore Mod (nessuna funzione)</string>
     <string name="mcl_option_modinstall">Avvia un mod installer (Forge, LabyMod, Fabric, ecc...)</string>
     <string name="mcl_option_modinstallwitharg">Avvia un mod installer (personalizzato)</string>
-    <string name="mcl_option_checkupdate">Cerca aggiornamenti</string>
     <string name="mcl_option_customcontrol">Controlli personalizzati</string>
     <string name="mcl_option_settings">Impostazioni</string>
     <string name="mcl_option_about">Informazioni</string>
@@ -84,7 +68,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Aumenta le dimensioni se i pulsanti sono troppo piccoli.</string>
     <string name="mcl_setting_title_mousescale">Dimensioni mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Cambia dimensioni mouse virtuale.</string>
-    <string name="mcl_setting_title_controlsize">Imposta dimensione dei pulsanti di controllo</string>
     <string name="mcl_setting_title_javaargs">Impostazioni di avvio JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Fa attenzione, se effettui modifiche senza sapere quello che fai potresti crashare.</string>
     <string name="mcl_setting_category_general">Impostazioni generali</string>
@@ -96,7 +79,6 @@
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
     <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
-    <string name="global_add">Aggiungi</string>
     <string name="global_edit">Modifica</string>
     <string name="global_error">Errore</string>
     <string name="global_load">Carica</string>
@@ -132,19 +114,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'applicazione/Gioco si è chiuso con il codice %d</string>
     <string name="mcn_exit_call">Esci</string>
-    <string name="mcn_exit_crash">Crash del gioco rilevato! Clicca OK per uscire.</string>
-    <string name="mcn_exit_errcrash">Impossibile individuare il crash! Potresti ignorare questo errore.</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 non installato!</string>
     <string name="mcn_check_fail_incompatiblearch">L\'architettura %1$s non è compatibile con il Runtime Java %2$s.</string>
-    <string name="mcn_check_fail_java">Impossibile avviare il test della VM Java. Controlla %s per maggiori informazioni.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Controlli</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastiera</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -171,14 +148,11 @@
     <string name="customctrl_edit">Modificando %s</string>
     <string name="customctrl_remove">Rimuovere %s?</string>
     <string name="customctrl_keyname">Keycode</string>
-    <string name="customctrl_specialkey">Tasto speciale</string>
-    <string name="customctrl_hidden">Nascosto</string>
     <string name="customctrl_toggle">Attivabile</string>
     <string name="customctrl_dynamicpos">Posizione dinamica</string>
     <string name="customctrl_dynamicpos_x">X dinamica</string>
     <string name="customctrl_dynamicpos_y">Y dinamica</string>
     <string name="customctrl_transparency_bg">Trasparenza sfondo</string>
-    <string name="customctrl_transparency_text">Trasparenza testo</string>
     <string name="customctrl_keycombine">Combinazioni tasti</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
@@ -197,6 +171,4 @@
     <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory impostata a %d MB</string>
-    <string name="resolution_decrease_subtitle">Permette di ridurre la risoluzione del gioco. Aumenta gli FPS. 0 di default.</string>
-    <string name="resolution_decrease_title">Rapporto risoluzione nativa</string>
 </resources>

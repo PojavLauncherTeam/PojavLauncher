@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрою!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">Допомога</string>
     <!-- Languages list part -->
-    <string name="language_name">УКРАЇНСЬКА - UA</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email або ім\'я користувача</string>
-    <string name="login_online_username_question">(Що мені використовувати?)</string>
     <string name="login_online_password_hint">Пароль</string>
-    <string name="login_online_password_question">Забули пароль?</string>
-    <string name="login_online_remember">Запам\'ятати мене?</string>
     <string name="login_online_check_keeplogin">Зберегти мене авторизованим</string>
     <string name="login_online_login_label">Вхід</string>
-    <string name="login_online_create_account">(Створити новий обліковий запис?)</string>
-    <string name="login_offline_switch">Офлайн обліковий запис?</string>
     <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
-    <string name="login_offline_alert_skip">Пропустити</string>
     <string name="login_error_short_username">Ім\'я користувача повинно мати хоча б 3 символи</string>
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
@@ -27,22 +19,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміну розміру або видалення."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Вийти</string>
     <string name="warning_remove_account">Цей обліковий запис буде видалено!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Встановити Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Вибрати роскладку формату json</string>
     <string name="alerttitle_installmod">Вибрати установщик моду</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher був зупинений в результаті збою</string>
-    <string name="error_checklog">Помилка! Будь ласка, провірте журнал нижче: %s</string>
     <string name="error_no_version">Немає версії!</string>
-    <string name="error_load_version">Не вдалося завантажити версію %s</string>
     <string name="error_show_more">Розвенути</string>
     <string name="error_show_less">Звернути</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Потрібен дозвіл на читання/запис в сховище!</string>
-    <string name="toast_login_error">Після входу щось пішло не так. Будь ласка, повідомте про це розробнику.\nПомилка: %s</string>
     <string name="toast_optifine_success">Установка пройшла успішно</string>
     <string name="toast_uninstalljre_done">Видалення Java Runtime завершено</string>
     <!--
@@ -50,7 +37,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Новини</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Консоль розробки</string>
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Account status -->
@@ -63,10 +49,8 @@
     <string name="mcl_launch_downloading_progress">"Завантаження %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
     <string name="mcl_options">Опції</string>
-    <string name="mcl_option_modmgr">Диспетчер модів (непрацює)</string>
     <string name="mcl_option_modinstall">Запустити установщик модів (Forge, LabyMod, Fabric, інші...)</string>
     <string name="mcl_option_modinstallwitharg">Запустити установщик модів (з своїми аргументи)</string>
-    <string name="mcl_option_checkupdate">Перевірити наявність оновлень</string>
     <string name="mcl_option_customcontrol">Користувацьке управління</string>
     <string name="mcl_option_settings">Налаштування</string>
     <string name="mcl_option_about">Про лаунчер</string>
@@ -81,7 +65,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Збільшити їх, якщо кнопки замалі.</string>
     <string name="mcl_setting_title_mousescale">Масштабування курсору</string>
     <string name="mcl_setting_subtitle_mousescale">Змінює розмір курсора миші.</string>
-    <string name="mcl_setting_title_controlsize">Установка розміру кнопок управління</string>
     <string name="mcl_setting_title_javaargs">Аргументи запуску JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте обережні, це може призвести до збоїв у грі, якщо це замінити без знань.</string>
     <string name="mcl_setting_category_general">Загальні налаштування</string>
@@ -93,7 +76,6 @@
     <string name="mcl_setting_veroption_oldbeta">Старі бети</string>
     <string name="mcl_version_clone">Клонувати</string>
     <!-- Global strings -->
-    <string name="global_add">Добавити</string>
     <string name="global_edit">Редагувати</string>
     <string name="global_error">Помилка</string>
     <string name="global_load">Звантаження</string>
@@ -129,19 +111,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Застосування/гра завершилась з кодом %d</string>
     <string name="mcn_exit_call">Вийти</string>
-    <string name="mcn_exit_crash">Виявлено збій гри! Натисніть кнопку ОК, щоб вийти.</string>
-    <string name="mcn_exit_errcrash">Не вдалося знайти збій! Можете не звертати на це уваги.</string>
     <string name="mcn_exit_confirm">Ви впевнені, що хочете примусово закрити його?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не встановлено!</string>
     <string name="mcn_check_fail_incompatiblearch">Архітектура %1$s несумісна з Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Неможливо запустити тест Java VM. Перевірте %s для отримання додаткової інформації.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Управління</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Клавіатура</string>
     <string name="control_chat">Чат</string>
     <string name="control_debug">Налагодження</string>
-    <string name="control_zoom">Зум (C)</string>
     <string name="control_primary">ЛКМ</string>
     <string name="control_secondary">ПКМ</string>
     <string name="control_shift">◇</string>
@@ -168,14 +145,11 @@
     <string name="customctrl_edit">Редагування «%s»</string>
     <string name="customctrl_remove">Видалити «%s»?</string>
     <string name="customctrl_keyname">Код клавіші</string>
-    <string name="customctrl_specialkey">Спеціальна клавіша</string>
-    <string name="customctrl_hidden">Приховано</string>
     <string name="customctrl_toggle">Перемикач</string>
     <string name="customctrl_dynamicpos">Динамічне розташування</string>
     <string name="customctrl_dynamicpos_x">Динаміка Х</string>
     <string name="customctrl_dynamicpos_y">Динаміка Y</string>
     <string name="customctrl_transparency_bg">Прозорість фону</string>
-    <string name="customctrl_transparency_text">Прозорість тексту</string>
     <string name="customctrl_keycombine">Сполучення клавіш</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>

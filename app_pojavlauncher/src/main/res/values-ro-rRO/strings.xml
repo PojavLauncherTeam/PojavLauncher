@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Lanseaza Minecraft: Java Edition in propriul dispozitiv!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">AJUTOR</string>
     <!-- Languages list part -->
-    <string name="language_name">ROMÂNĂ - RO</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
-    <string name="login_online_username_question">(Care sa îl folosesc?)</string>
     <string name="login_online_password_hint">Parola</string>
-    <string name="login_online_password_question">Ai uitat parola?</string>
-    <string name="login_online_remember">Ține minte?</string>
     <string name="login_online_check_keeplogin">Ține-mă logat</string>
     <string name="login_online_login_label">Autentificate/Loghează-te</string>
-    <string name="login_online_create_account">(Creează cont nou?)</string>
-    <string name="login_offline_switch">Cont offline?</string>
     <string name="login_offline_label">Autentificate ca cont offline</string>
-    <string name="login_offline_alert_skip">Treci peste</string>
     <string name="login_error_short_username">Numele de utilizator trebuie sa fie format din macar 3 caractere</string>
     <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
     <string name="login_microsoft">Conectare Microsoft</string>
@@ -29,22 +21,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Glisează de la dreapta la stânga pentru a deschide meniul ◀\n Ține apăsat un buton pentru a personaliza: editează, schimbă mărimea sau șterge."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Ieșire</string>
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Se instalează Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Selectează o hartă de butoane json</string>
     <string name="alerttitle_installmod">Selectează un instalator de mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher s-a oprit neașteptat</string>
-    <string name="error_checklog">Eroare! Vă rugăm sa verificați jurnalul de mai jos: %s</string>
     <string name="error_no_version">Nicio versiune!</string>
-    <string name="error_load_version">Versiunea nu poate fi incarcată %s</string>
     <string name="error_show_more">Arată mai mult</string>
     <string name="error_show_less">Arată mai puțin</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Permisiunea de citire/scriere stocare este necesară!</string>
-    <string name="toast_login_error">Ceva nu a mers după logare. Vă rugăm ziceții developerului.\nEroare:%s</string>
     <string name="toast_optifine_success">Instalare reușită</string>
     <string name="toast_uninstalljre_done">S-a terminat de dezinstalat Java Runtime</string>
     <!--
@@ -52,7 +39,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Știri</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Consolă developer</string>
     <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Account status -->
@@ -63,10 +49,8 @@
     <string name="mcl_launch_downloading_progress">"Se descarcă %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Se pregătește pentru a descărca resursele</string>
     <string name="mcl_options">Opțiuni</string>
-    <string name="mcl_option_modmgr">Manager de mod (nicio funcție)</string>
     <string name="mcl_option_modinstall">Deschide un instalator de mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Deschide un instalator de mod (cu argument personalizat)</string>
-    <string name="mcl_option_checkupdate">Verifică actualizare</string>
     <string name="mcl_option_customcontrol">Controale personalizate</string>
     <string name="mcl_option_settings">Setări</string>
     <string name="mcl_option_about">Despre</string>
@@ -82,7 +66,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Fă mai mare dacă butoanele sunt prea mici.</string>
     <string name="mcl_setting_title_mousescale">Redimensionarea mouse-ului</string>
     <string name="mcl_setting_subtitle_mousescale">Schimbă dimensiunea mouse-ului virtual.</string>
-    <string name="mcl_setting_title_controlsize">Setaţi dimensiunea butoanelor de control</string>
     <string name="mcl_setting_title_javaargs">Argumente lansare JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Aveți grijă, acest lucru poate face ca jocul să se oprească dacă este modificat fără cunoștințe.</string>
     <string name="mcl_setting_category_general">Setări generale</string>
@@ -94,7 +77,6 @@
     <string name="mcl_setting_veroption_oldbeta">Beta-vechi</string>
     <string name="mcl_version_clone">Clonă</string>
     <!-- Global strings -->
-    <string name="global_add">Adaugă</string>
     <string name="global_edit">Editează</string>
     <string name="global_error">Eroare</string>
     <string name="global_load">Incarcă</string>
@@ -130,19 +112,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplicația/Jocul s-a oprit cu codul %d</string>
     <string name="mcn_exit_call">Ieșire</string>
-    <string name="mcn_exit_crash">Jocul s-a oprit din cauza unei erori! Apasă OK pentru ieși.</string>
-    <string name="mcn_exit_errcrash">Nu se poate găsi eroarea! Ai putea să ignori acest lucru.</string>
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nu se poate instala!</string>
     <string name="mcn_check_fail_incompatiblearch">Arhitectura %1$s nu este compatibilă cu Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Nu s-a putut porni testul Java VM. Verifică %s pentru mai multe detalii.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Controale</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatură</string>
     <string name="control_chat">Mesaje (Chat)</string>
     <string name="control_debug">Depanare</string>
-    <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_inventory">Inv</string>
@@ -163,14 +140,11 @@
     <string name="customctrl_edit">Editează %s</string>
     <string name="customctrl_remove">Șterge %s?</string>
     <string name="customctrl_keyname">Cod cheie</string>
-    <string name="customctrl_specialkey">Cheie specială</string>
-    <string name="customctrl_hidden">Ascuns</string>
     <string name="customctrl_toggle">Comutabil</string>
     <string name="customctrl_dynamicpos">Poziție dinamică</string>
     <string name="customctrl_dynamicpos_x">Dinamica X</string>
     <string name="customctrl_dynamicpos_y">Dinamica Y</string>
     <string name="customctrl_transparency_bg">Transparenţa fundalului</string>
-    <string name="customctrl_transparency_text">Transparența textului</string>
     <string name="customctrl_keycombine">Combinația de butoane</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
@@ -189,6 +163,4 @@
     <string name="auto_ram_subtitle">Activează ajustarea automată RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memorie setată la %d MB</string>
-    <string name="resolution_decrease_subtitle">Vă permite să micșorați rezoluția jocului. Îmbunătățește framerate-ul. 0 este implicitul.</string>
-    <string name="resolution_decrease_title">Rata diminuării rezoluţiei</string>
 </resources>

@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">تشغيل ماين Minecraft: Java Edition على جهازك!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">مساعدة</string>
     <!-- Languages list part -->
-    <string name="language_name">العربية - SA</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
-    <string name="login_online_username_question">(ايهما أستخدم؟)</string>
     <string name="login_online_password_hint">كلمة المرور</string>
-    <string name="login_online_password_question">نسيت كلمة المرور؟</string>
-    <string name="login_online_remember">تذكرني عند الدخول مرة اخرى؟</string>
     <string name="login_online_check_keeplogin">أبق تسجيل دخولي</string>
     <string name="login_online_login_label">تسجيل الدخول</string>
-    <string name="login_online_create_account">تسجيل حساب جديد</string>
-    <string name="login_offline_switch">حساب غير متصل؟</string>
     <string name="login_offline_label">تسجيل الدخول كحساب غير متصل</string>
-    <string name="login_offline_alert_skip">تخطي</string>
     <string name="login_error_short_username">يجب أن يحتوي اسم المستخدم على 3 أحرف على الأقل</string>
     <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
     <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
@@ -27,22 +19,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر لتخصيص: تحرير أو تغيير الحجم أو حذفه."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">خروج</string>
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">تثبيت محرك تشغيل جافا %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">حدد خريطة مفتاحية بصيغة json</string>
     <string name="alerttitle_installmod">حدد مود للتثبيت</string>
     <!-- Error messages -->
     <string name="error_fatal">لقد توقف PojavLauncher بشكل غير متوقع</string>
-    <string name="error_checklog">خطأ! الرجاء التحقق من السجل في الأسفل: %s</string>
     <string name="error_no_version">لا يوجد اصدار!</string>
-    <string name="error_load_version">تعذر تحميل الإصدار %s</string>
     <string name="error_show_more">اظهر المزيد</string>
     <string name="error_show_less">أظهِر أقل</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">مطلوب إذن القراءة و الكتابة للتخزين!</string>
-    <string name="toast_login_error">حدث خطأ ما بعد تسجيل الدخول. يرجى التعليق للمطور.\nخطأ: %s</string>
     <string name="toast_optifine_success">تم التثبيت بنجاح</string>
     <string name="toast_uninstalljre_done">تم إلغاء محرك تشغيل جافا</string>
     <!--
@@ -50,7 +37,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">أخبار</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">وحدة التحكم البرمجية</string>
     <string name="mcl_tab_crash">سجل توقف العمل</string>
     <!-- MCLauncherActivity: Account status -->
@@ -60,10 +46,8 @@
     <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
     <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
     <string name="mcl_options">الخيارات</string>
-    <string name="mcl_option_modmgr">مدير المودات (بدون وظيفة)</string>
     <string name="mcl_option_modinstall">تشغيل مثبت مورد (Forge, LabyMod, Fabric, الخ...)</string>
     <string name="mcl_option_modinstallwitharg">تشغيل مثبت Mod (مع حجج مخصصة)</string>
-    <string name="mcl_option_checkupdate">التحقق من وجود تحديث</string>
     <string name="mcl_option_customcontrol">تخصيص التحكم</string>
     <string name="mcl_option_settings">الاعدادات</string>
     <string name="mcl_option_about">حول التطبيق</string>
@@ -77,7 +61,6 @@
     <string name="mcl_setting_subtitle_buttonscale">قم بتكبير الأزرار إذا كانت صغيرة جداً.</string>
     <string name="mcl_setting_title_mousescale">توسيع حجم الفأرة</string>
     <string name="mcl_setting_subtitle_mousescale">تغيير حجم الفأرة الافتراضية.</string>
-    <string name="mcl_setting_title_controlsize">تعيين حجم أزرار التحكم</string>
     <string name="mcl_setting_title_javaargs">حجج إطلاق JVM</string>
     <string name="mcl_setting_subtitle_javaargs">كن حذرا، قد يجعل هذا اللعبة تتوقف إذا تم تعديلها بدون علم.</string>
     <string name="mcl_setting_category_general">إعدادات عامة</string>
@@ -89,7 +72,6 @@
     <string name="mcl_setting_veroption_oldbeta">نسخ بيتا قديمة</string>
     <string name="mcl_version_clone">نسخ</string>
     <!-- Global strings -->
-    <string name="global_add">إضافة</string>
     <string name="global_edit">تعديل</string>
     <string name="global_error">خطأ</string>
     <string name="global_load">تحميل</string>
@@ -125,19 +107,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">تم الخروج من اللعبة مع الرمز %d</string>
     <string name="mcn_exit_call">خروج</string>
-    <string name="mcn_exit_crash">تم اكتشاف توقف في اللعبة! انقر موافق للخروج.</string>
-    <string name="mcn_exit_errcrash">غير قادر على تحديد موقع التوقف! يمكنك تجاهل هذا.</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
     <string name="mcn_check_fail_incompatiblearch">المعمارية %1$s غير متوافقة مع محرك تشغيل جافا %2$s.</string>
-    <string name="mcn_check_fail_java">تعذر بدء اختبار Java VM. تحقق من %s للمزيد من المعلومات.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">التحكمات</string>
     <string name="control_toggle">واجهة المستخدم الرسومية</string>
     <string name="control_keyboard">لوحة المفاتيح</string>
     <string name="control_chat">دردشة</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">تكبير (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_inventory">Inv</string>
@@ -158,14 +135,11 @@
     <string name="customctrl_edit">التعديل %s</string>
     <string name="customctrl_remove">حذف %s؟</string>
     <string name="customctrl_keyname">رمز مفتاحي</string>
-    <string name="customctrl_specialkey">مفتاح خاص</string>
-    <string name="customctrl_hidden">مخفي</string>
     <string name="customctrl_toggle">تبديلي</string>
     <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
     <string name="customctrl_transparency_bg">شفافية الخلفية</string>
-    <string name="customctrl_transparency_text">شفافية النص</string>
     <string name="customctrl_keycombine">مجموعة المفاتيح</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>

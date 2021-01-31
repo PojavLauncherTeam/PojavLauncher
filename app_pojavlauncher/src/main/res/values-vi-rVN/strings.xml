@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">Trợ giúp</string>
     <!-- Languages list part -->
-    <string name="language_name">TIẾNG VIỆT - VN</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email hoặc tên người dùng</string>
-    <string name="login_online_username_question">(Tôi sử dụng cái nào)</string>
     <string name="login_online_password_hint">Mật khẩu</string>
-    <string name="login_online_password_question">Quên mật khẩu?</string>
-    <string name="login_online_remember">Ghi nhớ tôi?</string>
     <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
     <string name="login_online_login_label">Đăng nhập</string>
-    <string name="login_online_create_account">(Tạo tài khoản mới?)</string>
-    <string name="login_offline_switch">Tài khoản ngoại tuyến?</string>
     <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
-    <string name="login_offline_alert_skip">Bỏ qua</string>
     <string name="login_error_short_username">Tên người dùng phải co ít nhất 3 kí tự</string>
     <string name="login_error_exist_username">Tên này đã tồn tại</string>
     <string name="login_microsoft">Đăng nhập Microsoft</string>
@@ -27,22 +19,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Vuốt từ phải sang trái để mở menu ◀\nGiữ một nút để tùy chỉnh: chỉnh sửa, thay đổi kích thước hoặc xoá."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Thoát</string>
     <string name="warning_remove_account">Tài khoản này sẽ bị loại bỏ!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Cài đặt Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Chọn một sơ đồ bàn phím json</string>
     <string name="alerttitle_installmod">Chọn một bộ cài mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher đã bất ngờ bị rớt</string>
-    <string name="error_checklog">Lỗi! Làm ơn kiểm tra nhật kí bên dưới: %s</string>
     <string name="error_no_version">Không có phiên bản!</string>
-    <string name="error_load_version">Không thể tải phiên bản %s</string>
     <string name="error_show_more">Hiển thị thêm</string>
     <string name="error_show_less">Hiển thị ít hơn</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Quyền đọc / ghi vào bộ nhớ là bắt buộc!</string>
-    <string name="toast_login_error">Một thứ nào đó đã bị nhầm sau khi đăng nhập. Làm ơn phản hồi với nhà phát triển.\nLỗi: %s</string>
     <string name="toast_optifine_success">Cài đặt thành công</string>
     <string name="toast_uninstalljre_done">Đã gỡ Java Runtime</string>
     <!--
@@ -50,7 +37,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Tin tức</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Account status -->
@@ -61,10 +47,8 @@
     <string name="mcl_launch_downloading_progress">"Đang tải %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
     <string name="mcl_options">Tùy chọn</string>
-    <string name="mcl_option_modmgr">Quản lý mod (không có chức năng)</string>
     <string name="mcl_option_modinstall">Chạy một bộ cài mod (Forge, LabyMod, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Chạy một bộ cài mod (với chỉ số tùy chỉnh)</string>
-    <string name="mcl_option_checkupdate">Kiểm tra bản cập nhật</string>
     <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
     <string name="mcl_option_settings">Thiết lập</string>
     <string name="mcl_option_about">Giới thiệu</string>
@@ -80,7 +64,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Tăng độ rộng nếu nút quá nhỏ.</string>
     <string name="mcl_setting_title_mousescale">Độ rộng chuột</string>
     <string name="mcl_setting_subtitle_mousescale">Đổi kích thước chuột ảo.</string>
-    <string name="mcl_setting_title_controlsize">Đặt kích thước nút điều khiển</string>
     <string name="mcl_setting_title_javaargs">Các chỉ số chạy JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
     <string name="mcl_setting_category_general">Thiết lập chung</string>
@@ -92,7 +75,6 @@
     <string name="mcl_setting_veroption_oldbeta">Beta-cũ</string>
     <string name="mcl_version_clone">Nhân bản</string>
     <!-- Global strings -->
-    <string name="global_add">Thêm</string>
     <string name="global_edit">Chỉnh sửa</string>
     <string name="global_error">Lỗi</string>
     <string name="global_load">Tải</string>
@@ -128,19 +110,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d</string>
     <string name="mcn_exit_call">Thoát</string>
-    <string name="mcn_exit_crash">Đã phát hiện sự cố trò chơi! Nhấn OK để thoát.</string>
-    <string name="mcn_exit_errcrash">Không thể xác định vị trí sự cố! Bạn có thể bỏ qua điều này.</string>
     <string name="mcn_exit_confirm">Bạn có chắc muốn thoát chương trình?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
     <string name="mcn_check_fail_incompatiblearch">Kiến trúc %1$s không tương thích với Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Không thể bắt đầu thử Java VM. Kiểm tra %s để biết thêm thông tin.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Điều khiển</string>
     <string name="control_toggle">Giao diện</string>
     <string name="control_keyboard">Bàn Phím</string>
     <string name="control_chat">Trò chuyện</string>
     <string name="control_debug">Gỡ lỗi</string>
-    <string name="control_zoom">Phóng đại (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -167,14 +144,11 @@
     <string name="customctrl_edit">Tùy chỉnh %s</string>
     <string name="customctrl_remove">Xóa %s?</string>
     <string name="customctrl_keyname">Mã phím</string>
-    <string name="customctrl_specialkey">Phím đặc biệt</string>
-    <string name="customctrl_hidden">Ẩn</string>
     <string name="customctrl_toggle">Chuyển đổi</string>
     <string name="customctrl_dynamicpos">Điểm động</string>
     <string name="customctrl_dynamicpos_x">Động X</string>
     <string name="customctrl_dynamicpos_y">Động Y</string>
     <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
-    <string name="customctrl_transparency_text">Độ trong suốt của chữ</string>
     <string name="customctrl_keycombine">Kết hợp phím</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>

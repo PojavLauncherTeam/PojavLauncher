@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Spiele Minecraft: Java Edition auf deinem Gerät!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">Hilfe</string>
     <!-- Languages list part -->
-    <string name="language_name">DEUTSCH - DE</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email oder Benutzername</string>
-    <string name="login_online_username_question">(Was benutze ich?)</string>
     <string name="login_online_password_hint">Passwort</string>
-    <string name="login_online_password_question">Passwort vergessen?</string>
-    <string name="login_online_remember">Accountdaten speichern?</string>
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
-    <string name="login_online_create_account">(Neues Konto erstellen?)</string>
-    <string name="login_offline_switch">Offline-Konto?</string>
     <string name="login_offline_label">Als Offline-Konto anmelden</string>
-    <string name="login_offline_alert_skip">Überspringen</string>
     <string name="login_error_short_username">Der Nutzername muss mindestens 3 Zeichen lang sein</string>
     <string name="login_error_exist_username">Dieser Benutzername existiert bereits</string>
     <string name="login_microsoft">Microsoft-Login</string>
@@ -29,22 +21,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Wische von rechts nach links um das Menü zu öffnen ◀\nDrücke auf eine Schaltfläche um Sie anzupassen: Editieren, Vergrößern und Verkleinern oder Löschen."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Beenden</string>
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java Runtime %s (.tar.xz) installieren</string>
-    <string name="alerttitle_selectkeymap">Wähle eine keymap json aus</string>
     <string name="alerttitle_installmod">Wähle einen Mod-Installer</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher ist unerwartet abgestürzt</string>
-    <string name="error_checklog">Fehler! Bitte überprüfen sie das untenstehende Protokoll: %s</string>
     <string name="error_no_version">Keine Version!</string>
-    <string name="error_load_version">Die Version %s konnte nicht geladen werden</string>
     <string name="error_show_more">Mehr anzeigen</string>
     <string name="error_show_less">Weniger anzeigen</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Die Schreib-/Lese-Berechtigung für den Speicher ist erforderlich!</string>
-    <string name="toast_login_error">Etwas ist nach dem Login schiefgelaufen. Bitte sendet Feedback an die Entwickler.\n Fehler: %s</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
     <string name="toast_uninstalljre_done">Deinstallation der Java Runtime fertiggestellt</string>
     <!--
@@ -52,7 +39,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Neuigkeiten</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Entwickler-Konsole</string>
     <string name="mcl_tab_crash">Absturzbericht</string>
     <!-- MCLauncherActivity: Account status -->
@@ -65,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"%s wird heruntergeladen (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bereite das Herunterladen der Resourcen vor</string>
     <string name="mcl_options">Optionen</string>
-    <string name="mcl_option_modmgr">Mod Manager (keine Funktionen)</string>
     <string name="mcl_option_modinstall">Starte einen Mod-Installer (Forge, LabyMod, Fabric, u.s.w.)</string>
     <string name="mcl_option_modinstallwitharg">Starte einen Mod-Installer (Mit eigenen Argumenten)</string>
-    <string name="mcl_option_checkupdate">Nach Updates suchen</string>
     <string name="mcl_option_customcontrol">Benutzerdefinierte Steuerung</string>
     <string name="mcl_option_settings">Einstellungen</string>
     <string name="mcl_option_about">Über</string>
@@ -84,7 +68,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Vergrößere die Schaltflächen, wenn sie zu klein sind.</string>
     <string name="mcl_setting_title_mousescale">Größe der Maus</string>
     <string name="mcl_setting_subtitle_mousescale">Ändere die Größe der virtuellen Maus.</string>
-    <string name="mcl_setting_title_controlsize">Stell die Größe der Schaltflächen ein</string>
     <string name="mcl_setting_title_javaargs">JVM-Start-Argumente</string>
     <string name="mcl_setting_subtitle_javaargs">Passen Sie auf. Sollten Sie die Argumente wahrlos verändern, könnte dies zu Abstürzen führen.</string>
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
@@ -96,7 +79,6 @@
     <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
     <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
-    <string name="global_add">Hinzufügen</string>
     <string name="global_edit">Bearbeiten</string>
     <string name="global_error">Fehler</string>
     <string name="global_load">Laden</string>
@@ -132,19 +114,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Anwendung/Spiel mit Code %d beendet</string>
     <string name="mcn_exit_call">Beenden</string>
-    <string name="mcn_exit_crash">Spielabsturz erkannt! Klicke auf OK, um es zu beenden.</string>
-    <string name="mcn_exit_errcrash">Absturz konnte nicht gefunden werden! Du kannst dies ignorieren.</string>
     <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie die Beendung erzwingen möchten?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wurde nicht installiert!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektur %1$s ist inkompatibel mit Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Java VM konnte nicht gestartet werden. Überprüfen Sie %s für weitere Informationen.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Steuerung</string>
     <string name="control_toggle">Benutzeroberfläche</string>
     <string name="control_keyboard">Tastatur</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sek</string>
     <string name="control_shift">◇</string>
@@ -171,14 +148,11 @@
     <string name="customctrl_edit">Editiere %s</string>
     <string name="customctrl_remove">Soll %s entfernt werden?</string>
     <string name="customctrl_keyname">Keycode</string>
-    <string name="customctrl_specialkey">Spezielle Taste</string>
-    <string name="customctrl_hidden">Versteckt</string>
     <string name="customctrl_toggle">Umschaltbar</string>
     <string name="customctrl_dynamicpos">Dynamische Position</string>
     <string name="customctrl_dynamicpos_x">Dynamische X-Achse</string>
     <string name="customctrl_dynamicpos_y">Dynamische Y-Achse</string>
     <string name="customctrl_transparency_bg">Hintergrund-Transparenz</string>
-    <string name="customctrl_transparency_text">Text-Transparenz</string>
     <string name="customctrl_keycombine">Tastenkombination</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Strg</string>
@@ -197,6 +171,4 @@
     <string name="auto_ram_subtitle">Aktiviert automatische RAM-Einstellungen</string>
     <string name="auto_ram_title">Auto-RAM</string>
     <string name="autoram_info_msg">Der maximale RAM-Verbrauch ist aktuell auf %d MB gesetzt</string>
-    <string name="resolution_decrease_subtitle">Ermöglicht dir, die Spielauflösung zu verringern, um Framerate(Bilder pro Sekunde) zu erhöhen. 0 ist die Standardeinstellung.</string>
-    <string name="resolution_decrease_title">Auflösung Reduzierungsrate</string>
 </resources>
