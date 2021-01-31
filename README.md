@@ -5,7 +5,7 @@
 # PojavLauncher
 
 ## Note
-We do not exist on TikTok. No one from the dev team makes TikTok videos.
+We do not exist on TikTok. No one from the dev team makes TikTok videos. 
 
 ## Navigation
 - [Introduction](#introduction)
