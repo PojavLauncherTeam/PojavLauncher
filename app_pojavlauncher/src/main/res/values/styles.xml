@@ -10,9 +10,6 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
-    <style name="AlertTheme" parent="@style/AppTheme">
-    </style>
-
     <style name="MenuDialog" parent="@style/AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -31,8 +28,4 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="SpinnerChangeLanguage">
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:background">@drawable/spinner_change_language</item>
-    </style>
 </resources>
