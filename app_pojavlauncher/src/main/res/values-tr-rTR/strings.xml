@@ -5,44 +5,33 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Cihazınızda Minecraft: Java Edition çalıştırın!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">YARDIM</string>
     <!-- Languages list part -->
-    <string name="language_name">TÜRKÇE - TR</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
-    <string name="login_online_username_question">(Hangisini kullanıyorum?)</string>
     <string name="login_online_password_hint">Şifre</string>
-    <string name="login_online_password_question">Şifrenizi mi unuttunuz?</string>
-    <string name="login_online_remember">Beni Hatırla?</string>
     <string name="login_online_check_keeplogin">Oturumu Açık Tut</string>
     <string name="login_online_login_label">Giriş yap</string>
-    <string name="login_online_create_account">(Yeni hesap oluştur?)</string>
-    <string name="login_offline_switch">Çevrimdışı hesap?</string>
     <string name="login_offline_label">Çevrimdışı olarak oturum açın</string>
-    <string name="login_offline_alert_skip">Atla</string>
     <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmak zorundadır</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
+    <string name="login_title_no_saved_account">Hesap bulunamadı !</string>
+    <string name="login_dialog_no_saved_account">Hiçbir kayıtlı hesabın yok.\n&lt;b&gt;\"Beni hatırla\"&lt;b&gt;\'yı seçerek hesaplarını kaydedebilirsin.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Çıkış</string>
     <string name="warning_remove_account">Bu hesap silinecek!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java Runtime kur %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Bir keymap json dosyası seçin</string>
     <string name="alerttitle_installmod">Bir mod yükleyicisi seçin</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
-    <string name="error_checklog">Hata! Lütfen aşağıdaki günlüğe bakınız: %s</string>
     <string name="error_no_version">Sürüm yok!</string>
-    <string name="error_load_version">%s sürümü yüklenemedi</string>
     <string name="error_show_more">Daha fazla göster</string>
     <string name="error_show_less">Daha az göster</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Okuma/yazma izinleri depolama için gerekli!</string>
-    <string name="toast_login_error">Girişten sonra birşey yanlış gitti. Lütfen geliştiricimize geri bildirimde bulunun.\nHata: %s</string>
     <string name="toast_optifine_success">Yükleme başarılı</string>
     <string name="toast_uninstalljre_done">Java Runtime kaldırması tamamlandı</string>
     <!--
@@ -50,7 +39,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Haberler</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Geliştirici konsolu</string>
     <string name="mcl_tab_crash">Çökme günlüğü</string>
     <!-- MCLauncherActivity: Account status -->
@@ -63,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"%s indiriliyor (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Kaynakları yüklemeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
-    <string name="mcl_option_modmgr">Mod yöneticisi (işlevsiz)</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
     <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümânlarla)</string>
-    <string name="mcl_option_checkupdate">Güncellemeleri kontrol et</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
     <string name="mcl_option_about">Launcher hakkında</string>
@@ -76,13 +62,14 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
     <string name="mcl_setting_title_hide_sidebar">Kenar çubuğunu gizle</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Eski v1 Menüsünü hatırlayan eski arkadaşlar bunu tercih ediyor. Daha çok tam ekran deneyimi verir.</string>
+    <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
     <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
     <string name="mcl_setting_subtitle_mousescale">Sanal farenin boyutunu ayarlayın.</string>
-    <string name="mcl_setting_title_controlsize">Kontrol düğmelerinin büyüklüğünü ayarla</string>
     <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
@@ -94,7 +81,6 @@
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
-    <string name="global_add">Ekle</string>
     <string name="global_edit">Düzenle</string>
     <string name="global_error">Hata</string>
     <string name="global_load">Yükle</string>
@@ -130,19 +116,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
     <string name="mcn_exit_call">Çıkış</string>
-    <string name="mcn_exit_crash">Oyun Çökmesi algılandı! Çıkmak için Tamam\'a basın.</string>
-    <string name="mcn_exit_errcrash">Çökmenin sebebi algılanamadı! Bunu görmezden gelebilirsiniz.</string>
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 yüklenmemiş!</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s mimarisi Java Runtime %2$s ile uyumsuz.</string>
-    <string name="mcn_check_fail_java">Java VM denemesi başlatılmadı. Daha fazla bilgi için: %s.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Kontroller</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klavye</string>
     <string name="control_chat">Sohbet</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -169,14 +150,11 @@
     <string name="customctrl_edit">%s düzenleniyor</string>
     <string name="customctrl_remove">%s kaldırılsın mı?</string>
     <string name="customctrl_keyname">AnahtarKodu</string>
-    <string name="customctrl_specialkey">Özel Tuş</string>
-    <string name="customctrl_hidden">Gizli</string>
     <string name="customctrl_toggle">Değiştirilebilir</string>
     <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
     <string name="customctrl_transparency_bg">Arkaplan saydamlığı</string>
-    <string name="customctrl_transparency_text">Yazı saydamlığı</string>
     <string name="customctrl_keycombine">Anahtar Kombinasyonu</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
