@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Menjalankan Minecraft: Java Edition di perangkat anda!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">BANTUAN</string>
     <!-- Languages list part -->
-    <string name="language_name">BAHASA INDONESIA - ID</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email atau username</string>
-    <string name="login_online_username_question">(Saya pilih yang mana?)</string>
     <string name="login_online_password_hint">Kata sandi</string>
-    <string name="login_online_password_question">Lupa kata sandi?</string>
-    <string name="login_online_remember">Ingat saya?</string>
     <string name="login_online_check_keeplogin">Tetap masuk</string>
     <string name="login_online_login_label">Masuk</string>
-    <string name="login_online_create_account">(Buat akun baru?)</string>
-    <string name="login_offline_switch">Akun offline?</string>
     <string name="login_offline_label">Masuk sebagai akun offline</string>
-    <string name="login_offline_alert_skip">Lewati</string>
     <string name="login_error_short_username">Username minimal harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
     <string name="login_microsoft">Login Microsoft</string>
@@ -29,22 +21,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Geser dari kanan ke kiri untuk membuka menu ◀\nPencet lama sebuah tombol untuk memodifikasi: edit, modifikasi ukuran, atau hapus."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Keluar</string>
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Pasang Runtime Java %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
     <string name="alerttitle_installmod">Pilih sebuah instaler mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher tiba-tiba crash</string>
-    <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
-    <string name="error_load_version">Tidak bisa memuat versi! %s</string>
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
-    <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
     <string name="toast_uninstalljre_done">Selesai mencopot Runtime Java</string>
     <!--
@@ -52,7 +39,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Berita</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
@@ -65,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"Mengunduh %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
     <string name="mcl_options">Pilihan</string>
-    <string name="mcl_option_modmgr">Mod manager (tidak berfungsi)</string>
     <string name="mcl_option_modinstall">Luncurkan sebuah installer mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Luncurkan sebuah installer mod (dengan argumen buatan sendiri)</string>
-    <string name="mcl_option_checkupdate">Periksa ada update</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
     <string name="mcl_option_about">Tentang</string>
@@ -88,7 +72,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Tingkatkan skala jika tombol terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Penskalaan mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Ubah ukuran mouse virtual.</string>
-    <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
     <string name="mcl_setting_title_javaargs">Argumen untuk meluncurkan JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Hati-hati, ini bisa meng-crash permainan jika di-ubah tanpa pengetahuan.</string>
     <string name="mcl_setting_category_general">Pengaturan umum</string>
@@ -100,7 +83,6 @@
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
-    <string name="global_add">Tambah</string>
     <string name="global_edit">Edit</string>
     <string name="global_error">Eror</string>
     <string name="global_load">Memuat</string>
@@ -136,19 +118,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan code %d</string>
     <string name="mcn_exit_call">Keluar</string>
-    <string name="mcn_exit_crash">Game crash terdeteksi! Pencet OK untuk keluar.</string>
-    <string name="mcn_exit_errcrash">Tidak bisa mencari sumber crash, anda bisa mengabaikan ini.</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak dipasang!</string>
     <string name="mcn_check_fail_incompatiblearch">Arsitektur %1$s tidak kompatibel dengan Runtime Java %2$s.</string>
-    <string name="mcn_check_fail_java">Gagal meluncurkan tes Java VM. Cek %s untuk informasi lebih banyak.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Kontrol</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
     <string name="control_chat">Obrolan</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Perbesar (C)</string>
     <string name="control_primary">Pertama</string>
     <string name="control_secondary">Kedua</string>
     <string name="control_shift">◇</string>
@@ -175,14 +152,11 @@
     <string name="customctrl_edit">Mengedit %s</string>
     <string name="customctrl_remove">Hapus %s?</string>
     <string name="customctrl_keyname">Keycode</string>
-    <string name="customctrl_specialkey">Kunci spesial</string>
-    <string name="customctrl_hidden">Tersembunyi</string>
     <string name="customctrl_toggle">Bisa beralih</string>
     <string name="customctrl_dynamicpos">Posisi dinamis</string>
     <string name="customctrl_dynamicpos_x">Dinamis X</string>
     <string name="customctrl_dynamicpos_y">Dinamis Y</string>
     <string name="customctrl_transparency_bg">Transparansi latar belakang</string>
-    <string name="customctrl_transparency_text">Transparansi teks</string>
     <string name="customctrl_keycombine">Kombinasi kunci</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
