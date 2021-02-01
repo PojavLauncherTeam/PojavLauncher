@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">도움</string>
     <!-- Languages list part -->
-    <string name="language_name">한국어 - KR</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email or username</string>
-    <string name="login_online_username_question">(어떤 것을 사용할까요?)</string>
     <string name="login_online_password_hint">Password</string>
-    <string name="login_online_password_question">비밀번호를 잊으셨습니까?</string>
-    <string name="login_online_remember">계정 저장하기</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
-    <string name="login_online_create_account">(새로운 계정을 만드시겠습니까?)</string>
-    <string name="login_offline_switch">오프라인 계정이란?</string>
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
-    <string name="login_offline_alert_skip">건너뛰기</string>
     <string name="login_error_short_username">사용자명은 최소 3자 이상이어야 합니다</string>
     <string name="login_error_exist_username">이미 존재하는 사용자명입니다</string>
     <string name="login_microsoft">Microsoft 로그인</string>
@@ -28,22 +20,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"오른쪽에서 왼쪽으로 스와이프 하여 메뉴를 여세요. ◀\n 버튼을 눌러 수정,  크기 조절,  삭제를 할 수 있습니다."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">나가기</string>
     <string name="warning_remove_account">이 계정이 제거됩니다!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java 런타임 설치 %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">조작 프리셋 선택하기</string>
     <string name="alerttitle_installmod">모드 설치기를 선택하세요</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher에 예상치 못한 충돌이 발생했습니다</string>
-    <string name="error_checklog">오류! 아래 로그를 확인하십시오: %s</string>
     <string name="error_no_version">버전이 없습니다!</string>
-    <string name="error_load_version">버전을 불러올 수 없습니다 %s</string>
     <string name="error_show_more">더 보기</string>
     <string name="error_show_less">간략히 보기</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">저장소 읽고 쓰기 권한이 필요합니다!</string>
-    <string name="toast_login_error">로그인 후 문제가 발생했습니다. 개발자에게 문의하세요.\n오류: %s</string>
     <string name="toast_optifine_success">설치 성공</string>
     <string name="toast_uninstalljre_done">Java 런타임 삭제 완료</string>
     <!--
@@ -51,7 +38,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">소식</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">개발자 콘솔</string>
     <string name="mcl_tab_crash">충돌 로그</string>
     <!-- MCLauncherActivity: Account status -->
@@ -64,10 +50,8 @@
     <string name="mcl_launch_downloading_progress">"다운로드중 %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">다운로드 준비 중</string>
     <string name="mcl_options">설정</string>
-    <string name="mcl_option_modmgr">모드 매니저 (기능 없음)</string>
     <string name="mcl_option_modinstall">모드 설치기 실행 (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">모드 설치기 실행 (with custom arguments)</string>
-    <string name="mcl_option_checkupdate">업데이트 확인</string>
     <string name="mcl_option_customcontrol">사용자 지정 조작</string>
     <string name="mcl_option_settings">설정</string>
     <string name="mcl_option_about">정보</string>
@@ -83,7 +67,6 @@
     <string name="mcl_setting_subtitle_buttonscale">버튼이 너무 작다면 크기를 키우세요.</string>
     <string name="mcl_setting_title_mousescale">마우스 크기</string>
     <string name="mcl_setting_subtitle_mousescale">가상 마우스 크기 변경.</string>
-    <string name="mcl_setting_title_controlsize">조작 버튼의 크기 설정</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">조심하세요, 정보 없이 수정하면 게임 충돌이 발생할 수 있습니다.</string>
     <string name="mcl_setting_category_general">일반 설정</string>
@@ -95,7 +78,6 @@
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">복제</string>
     <!-- Global strings -->
-    <string name="global_add">추가</string>
     <string name="global_edit">수정</string>
     <string name="global_error">오류</string>
     <string name="global_load">불러오기</string>
@@ -131,19 +113,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">앱/게임이 나가졌습니다. code %d</string>
     <string name="mcn_exit_call">나가기</string>
-    <string name="mcn_exit_crash">게임 충돌이 감지되었습니다! OK를 눌러 나갈 수 있습니다.</string>
-    <string name="mcn_exit_errcrash">충돌 위치를 찾을 수 없습니다! 무시할 수 있습니다.</string>
     <string name="mcn_exit_confirm">강제로 닫기를 원합니까?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 이 설치되지 않았습니다!</string>
     <string name="mcn_check_fail_incompatiblearch">Architecture %1$s 은(는)  Java Runtime %2$s에 호환되지 않습니다.</string>
-    <string name="mcn_check_fail_java">테스트 Java VM을 실행할 수 없습니다. 더 많은 정보 확인하기 %s</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">조작</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">키보드</string>
     <string name="control_chat">챗</string>
     <string name="control_debug">디버그</string>
-    <string name="control_zoom">줌 (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -170,14 +147,11 @@
     <string name="customctrl_edit">%s 수정중</string>
     <string name="customctrl_remove">%s(을)를 제거하시겠습니까?</string>
     <string name="customctrl_keyname">키</string>
-    <string name="customctrl_specialkey">특수 키</string>
-    <string name="customctrl_hidden">숨김</string>
     <string name="customctrl_toggle">토글</string>
     <string name="customctrl_dynamicpos">동적 위치</string>
     <string name="customctrl_dynamicpos_x">동적 X 값</string>
     <string name="customctrl_dynamicpos_y">동적 Y 값</string>
     <string name="customctrl_transparency_bg">배경 투명도</string>
-    <string name="customctrl_transparency_text">텍스트 투명도</string>
     <string name="customctrl_keycombine">키 조합</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
