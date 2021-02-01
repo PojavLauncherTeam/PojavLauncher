@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Start Minecraft: Java editie op je apparaat!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">HELP</string>
     <!-- Languages list part -->
-    <string name="language_name">NEDERLANDS - NL</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail of gebruikersnaam</string>
-    <string name="login_online_username_question">(Welke moet ik gebruiken?)</string>
     <string name="login_online_password_hint">Wachtwoord</string>
-    <string name="login_online_password_question">Wachtwoord vergeten?</string>
-    <string name="login_online_remember">Mijn gegevens onthouden?</string>
     <string name="login_online_check_keeplogin">Ingelogd blijven</string>
     <string name="login_online_login_label">Aanmelden</string>
-    <string name="login_online_create_account">(Nieuw account aanmaken?)</string>
-    <string name="login_offline_switch">Offline account?</string>
     <string name="login_offline_label">Inloggen als offline account</string>
-    <string name="login_offline_alert_skip">Overslaan</string>
     <string name="login_error_short_username">Gebruikersnaam moet uit minstens 3 tekens bestaan</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
     <string name="login_microsoft">Microsoft login</string>
@@ -27,22 +19,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Afsluiten</string>
     <string name="warning_remove_account">Dit account wordt verwijderd!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installeer Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Selecteer een keymap json</string>
     <string name="alerttitle_installmod">Selecteer een mod installatie</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher is onverwacht gecrasht</string>
-    <string name="error_checklog">Fout! Controleer het log hieronder: %s</string>
     <string name="error_no_version">Geen versie!</string>
-    <string name="error_load_version">Versie %s kan niet geladen worden</string>
     <string name="error_show_more">Meer weergeven</string>
     <string name="error_show_less">Minder weergeven</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">De rechten om te lezen/schrijven naar opslag zijn vereist!</string>
-    <string name="toast_login_error">Er is iets misgegaan na het inloggen. Geef feedback aan de ontwikkelaar.\nFout: %s</string>
     <string name="toast_optifine_success">Installatie geslaagd</string>
     <string name="toast_uninstalljre_done">Java Runtime verwijderen voltooid</string>
     <!--
@@ -50,7 +37,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Nieuws</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Ontwikkelings console</string>
     <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Account status -->
@@ -61,10 +47,8 @@
     <string name="mcl_launch_downloading_progress">"%s downloaden (%.2fMB / %.2fMB)"</string>
     <string name="mcl_launch_download_assets">Voorbereiden om bronnen te downloaden</string>
     <string name="mcl_options">Opties</string>
-    <string name="mcl_option_modmgr">Mod manager (geen functie)</string>
     <string name="mcl_option_modinstall">Start een mod installatie (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Start een mod installatie (met aangepaste argumenten)</string>
-    <string name="mcl_option_checkupdate">Controleren op update</string>
     <string name="mcl_option_customcontrol">Aangepaste controles</string>
     <string name="mcl_option_settings">Instellingen</string>
     <string name="mcl_option_about">Over deze app</string>
@@ -80,7 +64,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Vergroot ze als knoppen te klein zijn.</string>
     <string name="mcl_setting_title_mousescale">Muis schaling</string>
     <string name="mcl_setting_subtitle_mousescale">Wijzig de grootte van de virtuele muis.</string>
-    <string name="mcl_setting_title_controlsize">Instellen van de regelknoppen</string>
     <string name="mcl_setting_title_javaargs">JVM Launch argumenten</string>
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
     <string name="mcl_setting_category_general">Algemene instellingen</string>
@@ -92,7 +75,6 @@
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">Dupliceren</string>
     <!-- Global strings -->
-    <string name="global_add">Toevoegen</string>
     <string name="global_edit">Bewerken</string>
     <string name="global_error">Foutmelding</string>
     <string name="global_load">Lading</string>
@@ -128,19 +110,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applicatie/spel is afgesloten met code %d</string>
     <string name="mcn_exit_call">Afsluiten</string>
-    <string name="mcn_exit_crash">Spel Crash gedetecteerd! Klik op OK om af te sluiten.</string>
-    <string name="mcn_exit_errcrash">Kan geen crash vinden! U kunt dit negeren.</string>
     <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 is niet geïnstalleerd!</string>
     <string name="mcn_check_fail_incompatiblearch">Architectuur %1$s is niet compatibel met Java Runtime %2$s,.</string>
-    <string name="mcn_check_fail_java">Test Java VM kon niet worden gestart. Controleer %s voor meer informatie.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Besturing</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Toetsenbord</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Foutoplossing</string>
-    <string name="control_zoom">Verzoomen (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -167,14 +144,11 @@
     <string name="customctrl_edit">Bewerken %s</string>
     <string name="customctrl_remove">Verwijderen %s?</string>
     <string name="customctrl_keyname">Sleutelcode</string>
-    <string name="customctrl_specialkey">Speciale sleutel</string>
-    <string name="customctrl_hidden">Verborgen</string>
     <string name="customctrl_toggle">Omschakelbaar</string>
     <string name="customctrl_dynamicpos">Dynamische positie</string>
     <string name="customctrl_dynamicpos_x">Dynamisch X</string>
     <string name="customctrl_dynamicpos_y">Dynamisch Y</string>
     <string name="customctrl_transparency_bg">Achtergrondtransparantie</string>
-    <string name="customctrl_transparency_text">Teksttransparantie</string>
     <string name="customctrl_keycombine">Toetsencombinatie</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>

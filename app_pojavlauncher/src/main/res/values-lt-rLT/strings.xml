@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Paleiskite Minecraft: Java Edition savo įrenginyje!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">PAGALBA</string>
     <!-- Languages list part -->
-    <string name="language_name">LIETUVIŲ - LT</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">El. paštas arba slapyvardis</string>
-    <string name="login_online_username_question">(Kurį naudoti?)</string>
     <string name="login_online_password_hint">Slaptažodis</string>
-    <string name="login_online_password_question">Pamiršote slaptažodį?</string>
-    <string name="login_online_remember">Atsiminti?</string>
     <string name="login_online_check_keeplogin">Likti prisijungus</string>
     <string name="login_online_login_label">Prisijungti</string>
-    <string name="login_online_create_account">(Sukurti naują paskyrą?)</string>
-    <string name="login_offline_switch">Netikra paskyra?</string>
     <string name="login_offline_label">Prisijungti naudojant netikrą paskyrą</string>
-    <string name="login_offline_alert_skip">Praleisti</string>
     <string name="login_error_short_username">Slapyvardis turi būti bent iš 3 simbolių</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
     <string name="login_microsoft">Microsoft prisijungimas</string>
@@ -29,22 +21,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Vilkti iš dešinės į kairę kad atidarytumėte meniu. ◀\nLaikykite mygtuką kad pritaikytume: redaguoti, padidinti ar ištrinti."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Išeiti</string>
     <string name="warning_remove_account">Ši paskyra bus pašalinta!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Instaliuoti Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Pasirinkti kontrolių JSON</string>
     <string name="alerttitle_installmod">Pasirinkite modifikacijų įdiegimui</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher netikėtai išsijungė</string>
-    <string name="error_checklog">Klaida! Prašome pažiūrėti įrašus žemiau: %s</string>
     <string name="error_no_version">Nėra versijos!</string>
-    <string name="error_load_version">Negalima įkelti versijos %s</string>
     <string name="error_show_more">Rodyti daugiau</string>
     <string name="error_show_less">Rodyti mažiau</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Skaitymo/rašymo atmintyje leidimas yra būtinas!</string>
-    <string name="toast_login_error">Kažkas blogo atsitiko po prisijungimo. Prašome palikti žinutę kūrejui.\nKlaida: %s</string>
     <string name="toast_optifine_success">Instaliavimas sėkmingas</string>
     <string name="toast_uninstalljre_done">Baigta instaliuoti Java Runtime</string>
     <!--
@@ -64,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"Atsisiunčiama %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Rengiamasi atsisiųsti resursus</string>
     <string name="mcl_options">Pasirinkimai</string>
-    <string name="mcl_option_modmgr">Modifikacijos (neveikia)</string>
     <string name="mcl_option_modinstall">Paleisti modifikacijų įdiegimui (Forge, LabyMod, Fabric, kt.)</string>
     <string name="mcl_option_modinstallwitharg">Paleisti modifikacijų įdiegimui (su pasirinktinais argumentais)</string>
-    <string name="mcl_option_checkupdate">Ieškoti atnaujinimų</string>
     <string name="mcl_option_customcontrol">Kontrolės</string>
     <string name="mcl_option_settings">Nustatymai</string>
     <string name="mcl_option_about">Apie</string>
@@ -83,7 +68,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Padidinkite jei mygtukai per maži.</string>
     <string name="mcl_setting_title_mousescale">Pelės dydis</string>
     <string name="mcl_setting_subtitle_mousescale">Pakeisti virtualios pelės dydį.</string>
-    <string name="mcl_setting_title_controlsize">Pakeisti kontrolių dydį</string>
     <string name="mcl_setting_title_javaargs">JVM Paleidimo argumentai</string>
     <string name="mcl_setting_subtitle_javaargs">Būkite atsargūs, tai gali paveikti žaidimą jei modifikuota be išmonės.</string>
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
@@ -95,7 +79,6 @@
     <string name="mcl_setting_veroption_oldbeta">Beta</string>
     <string name="mcl_version_clone">Klonuoti</string>
     <!-- Global strings -->
-    <string name="global_add">Pridėti</string>
     <string name="global_edit">Redaguoti</string>
     <string name="global_error">Klaida</string>
     <string name="global_load">Įjungti</string>
@@ -131,19 +114,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikacija/Žaidimas išsijungė su kodu %d</string>
     <string name="mcn_exit_call">Išeiti</string>
-    <string name="mcn_exit_crash">Žaidimo išsijungimas rastas! Paspauskite OK išėjimui.</string>
-    <string name="mcn_exit_errcrash">Negalima rasti išsijungimo! Jūs galite tai ignoruoti.</string>
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebuvo instaliuota!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektūra %1$s nėra palaikomas su Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">Nebuvo galima įjungti Java VM. Peržiūrėkite %s dėl daugiau informacijos.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Kontrolės</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klaviatūra</string>
     <string name="control_chat">Pokalbiai</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Priartinti (C)</string>
     <string name="control_primary">Kairė</string>
     <string name="control_secondary">Deš.</string>
     <string name="control_inventory">Inv</string>
@@ -164,14 +142,11 @@
     <string name="customctrl_edit">Redaguojama %s</string>
     <string name="customctrl_remove">Panaikinti %s?</string>
     <string name="customctrl_keyname">Mygtuko kodas</string>
-    <string name="customctrl_specialkey">Specialus kodas</string>
-    <string name="customctrl_hidden">Paslėpta</string>
     <string name="customctrl_toggle">Perjungiama</string>
     <string name="customctrl_dynamicpos">Dinamiška pozicija</string>
     <string name="customctrl_dynamicpos_x">Dinamiška X</string>
     <string name="customctrl_dynamicpos_y">Dinamiška Y</string>
     <string name="customctrl_transparency_bg">Fono skaidrumas</string>
-    <string name="customctrl_transparency_text">Teksto matomumas</string>
     <string name="customctrl_keycombine">Mygtukų kombinacija</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
@@ -190,6 +165,4 @@
     <string name="auto_ram_subtitle">Įjungia automatišką RAM keitėją</string>
     <string name="auto_ram_title">Automatiškas RAM</string>
     <string name="autoram_info_msg">Atmintis pakeista į %d MB</string>
-    <string name="resolution_decrease_subtitle">Leidžia nuleisti žaidimo rezoliuciją. Pageriną našumą. 0 yra nuolatinis.</string>
-    <string name="resolution_decrease_title">Pakeisti rezoliuciją</string>
 </resources>

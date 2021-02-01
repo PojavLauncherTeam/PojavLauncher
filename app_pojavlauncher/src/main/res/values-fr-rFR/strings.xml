@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Lancez Minecraft: Java Edition sur votre appareil !</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">AIDE</string>
     <!-- Languages list part -->
-    <string name="language_name">FRANÇAIS - FR</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Adresse e-mail ou nom d\'utilisateur</string>
-    <string name="login_online_username_question">(Lequel dois-je utiliser ?)</string>
     <string name="login_online_password_hint">Mot de passe</string>
-    <string name="login_online_password_question">Mot de passe oublié ?</string>
-    <string name="login_online_remember">Se souvenir de moi ?</string>
     <string name="login_online_check_keeplogin">Rester connecté</string>
     <string name="login_online_login_label">Se connecter</string>
-    <string name="login_online_create_account">(Créer un nouveau compte ?)</string>
-    <string name="login_offline_switch">Compte hors ligne ?</string>
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
-    <string name="login_offline_alert_skip">Passer</string>
     <string name="login_error_short_username">Le nom d\'utilisateur doit contenir au moins 3 caractères</string>
     <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_microsoft">Connexion Microsoft</string>
@@ -29,22 +21,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"Balayez l'écran vers la gauche pour ouvrir le menu ◀\nCliquez sur un bouton pour le modifier, le redimensionner ou le supprimer."</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">Quitter</string>
     <string name="warning_remove_account">Ce compte sera retiré !</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installer l\'environnement d\'exécution Java %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Sélectionnez une disposition de touches (.json)</string>
     <string name="alerttitle_installmod">Sélectionnez un installateur de mods</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher a cessé de fonctionner de façon inattendue</string>
-    <string name="error_checklog">Erreur ! Veuillez vérifier le journal ci-dessous : %s</string>
     <string name="error_no_version">Aucune version !</string>
-    <string name="error_load_version">Impossible de charger la version %s</string>
     <string name="error_show_more">Afficher plus</string>
     <string name="error_show_less">Afficher moins</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">L\'autorisation de lecture/écriture sur le stockage est requise !</string>
-    <string name="toast_login_error">Une erreur s\'est produite à la suite de la connexion. Veuillez envoyer un commentaire au développeur.\nErreur : %s</string>
     <string name="toast_optifine_success">Installation réussie</string>
     <string name="toast_uninstalljre_done">Désinstallation de l\'environnement d\'exécution Java terminée</string>
     <!--
@@ -52,7 +39,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Actualités</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Console de développement</string>
     <string name="mcl_tab_crash">Journal d\'erreurs</string>
     <!-- MCLauncherActivity: Account status -->
@@ -65,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"Téléchargement de %s (%.2f Mo / %.2f Mo)"</string>
     <string name="mcl_launch_download_assets">Préparation du téléchargement des ressources</string>
     <string name="mcl_options">Options</string>
-    <string name="mcl_option_modmgr">Gestionnaire de mods (non fonctionnel)</string>
     <string name="mcl_option_modinstall">Lancer un installateur de mods (Forge, LabyMod, Fabric, etc.)</string>
     <string name="mcl_option_modinstallwitharg">Lancer un installateur de mods (avec des arguments personnalisés)</string>
-    <string name="mcl_option_checkupdate">Rechercher des mises à jour</string>
     <string name="mcl_option_customcontrol">Contrôles personnalisés</string>
     <string name="mcl_option_settings">Paramètres</string>
     <string name="mcl_option_about">À propos</string>
@@ -84,7 +68,6 @@
     <string name="mcl_setting_subtitle_buttonscale">Mettre à l\'échelle si les boutons sont trop petits.</string>
     <string name="mcl_setting_title_mousescale">Mise à l\'échelle de la souris</string>
     <string name="mcl_setting_subtitle_mousescale">Change la taille de la souris virtuelle.</string>
-    <string name="mcl_setting_title_controlsize">Régler la taille des boutons de contrôle</string>
     <string name="mcl_setting_title_javaargs">Arguments de lancement JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attention, cela peut faire planter le jeu si ce paramètre est modifié sans connaissance.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
@@ -96,7 +79,6 @@
     <string name="mcl_setting_veroption_oldbeta">Bêta</string>
     <string name="mcl_version_clone">Dupliquer</string>
     <!-- Global strings -->
-    <string name="global_add">Ajouter</string>
     <string name="global_edit">Modifier</string>
     <string name="global_error">Erreur</string>
     <string name="global_load">Charger</string>
@@ -132,19 +114,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'application/la partie a été quittée avec le code %d</string>
     <string name="mcn_exit_call">Quitter</string>
-    <string name="mcn_exit_crash">Une erreur a été détectée dans le jeu ! Cliquez sur OK pour quitter.</string>
-    <string name="mcn_exit_errcrash">Impossible de localiser l\'erreur ! Vous pouvez ignorer ce message.</string>
     <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 n\'a pas été installé !</string>
     <string name="mcn_check_fail_incompatiblearch">L\'architecture %1$s est incompatible avec l\'environnement d\'exécution Java %2$s.</string>
-    <string name="mcn_check_fail_java">Impossible de démarrer le test Java VM. Vérifiez %s pour plus d\'informations.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Contrôles</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Clavier</string>
     <string name="control_chat">Tchat</string>
     <string name="control_debug">Débog.</string>
-    <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -171,14 +148,11 @@
     <string name="customctrl_edit">Modification de %s</string>
     <string name="customctrl_remove">Supprimer %s ?</string>
     <string name="customctrl_keyname">Touche</string>
-    <string name="customctrl_specialkey">Touche spéciale</string>
-    <string name="customctrl_hidden">Masquée</string>
     <string name="customctrl_toggle">Basculable</string>
     <string name="customctrl_dynamicpos">Position dynamique</string>
     <string name="customctrl_dynamicpos_x">X dynamique</string>
     <string name="customctrl_dynamicpos_y">Y dynamique</string>
     <string name="customctrl_transparency_bg">Transparence de l\'arrière-plan</string>
-    <string name="customctrl_transparency_text">Transparence du texte</string>
     <string name="customctrl_keycombine">Combinaison de touches</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
@@ -197,6 +171,4 @@
     <string name="auto_ram_subtitle">Active le régulateur automatique de la mémoire RAM</string>
     <string name="auto_ram_title">Mémoire RAM automatique</string>
     <string name="autoram_info_msg">Mémoire définie à %d Mo</string>
-    <string name="resolution_decrease_subtitle">Permet de diminuer la résolution du jeu. Améliore la fréquence d\'images. 0 est la valeur par défaut.</string>
-    <string name="resolution_decrease_title">Taux de diminution de la résolution</string>
 </resources>

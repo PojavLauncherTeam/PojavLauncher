@@ -19,7 +19,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">新聞</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_option_modinstall">啟動 Mod 安裝器（例如 Forge, LabyMod, Fabric...）</string>
@@ -62,7 +61,6 @@
     <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
-    <string name="mcn_check_fail_java">無法啟動測試 Java 虛擬機器。檢視 %s 獲取更多資訊。</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_adebug">輸入除錯</string>
@@ -77,7 +75,6 @@
     <string name="customctrl_dynamicpos_x">動態 X 軸</string>
     <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
     <string name="customctrl_transparency_bg">背景透明度</string>
-    <string name="customctrl_transparency_text">文字透明度</string>
     <string name="customctrl_keycombine">按鍵組合</string>
     <string name="customctrl_keycombine_control">控制</string>
     <string name="customctrl_keycombine_shift">上檔</string>
