@@ -5,48 +5,34 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Juga a Minecraft: edició de Java al teu dispositiu!</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">AJUDA</string>
     <!-- Languages list part -->
-    <string name="language_name">CATALÀ - ES</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email o usuari</string>
-    <string name="login_online_username_question">(Quin faig servir?)</string>
     <string name="login_online_password_hint">Contrasenya</string>
-    <string name="login_online_password_question">Olbidat la contrasenya?</string>
-    <string name="login_online_remember">Recorda\'m?</string>
     <string name="login_online_check_keeplogin">Mantenir-me connectat</string>
     <string name="login_online_login_label">Iniciar sessió</string>
-    <string name="login_online_create_account">(Crear una conta nova?)</string>
-    <string name="login_offline_switch">Conta offline?</string>
     <string name="login_offline_label">Enta amb una conta offline</string>
-    <string name="login_offline_alert_skip">Omet</string>
     <string name="login_error_short_username">Nom d’usuari ha de ser com a minim 3 caracters o mes</string>
     <string name="login_error_exist_username">Aquet nom d’usuari ja existeix</string>
     <string name="login_select_account">Seleccioneu un compte</string>
     <!-- Hint -->
     <!-- Warnings -->
-    <string name="warning_action_exit">Exit</string>
     <string name="warning_remove_account">Aquesta conta sera eliminada!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Instala Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">Selecciona una mapa de tecla json</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher s’ha parat inesperadament</string>
-    <string name="error_checklog">Error! Siusplau mireu’vos el registre: %s</string>
     <string name="error_no_version">Cap versio!</string>
-    <string name="error_load_version">Error al carregar la versio %s</string>
     <string name="error_show_more">Mostra més</string>
     <string name="error_show_less">Mostrar menys</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Es requireix el permis de llegir/escriure!</string>
-    <string name="toast_login_error">Error al entrar al teu conte. Siusplau envian’s el text seguent.\nError: %s</string>
     <string name="toast_optifine_success">Instalació completada</string>
     <string name="toast_uninstalljre_done">Desinstalació de Java Runtime completa</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">Consola de desenvolupador</string>
     <string name="mcl_tab_crash">Registre de crashes</string>
     <!-- MCLauncherActivity: Account status -->
@@ -56,8 +42,6 @@
     <string name="mcl_launch_downloading">Downloading %s</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
     <string name="mcl_options">Options</string>
-    <string name="mcl_option_modmgr">Mod manager (no function)</string>
-    <string name="mcl_option_checkupdate">Check for update</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_option_settings">Settings</string>
     <string name="mcl_option_about">About</string>
@@ -67,7 +51,6 @@
     <string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
-    <string name="mcl_setting_title_controlsize">Set control buttons size</string>
     <string name="mcl_setting_subtitle_javaargs">Vés amb compte, això podria provocar un bloqueig del joc si es modifica sense coneixement.</string>
     <string name="mcl_setting_category_general">General settings</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
@@ -77,7 +60,6 @@
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
-    <string name="global_add">Add</string>
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
     <string name="global_load">Load</string>
@@ -112,19 +94,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Game exited</string>
     <string name="mcn_exit_call">Exit</string>
-    <string name="mcn_exit_crash">Game Crash detected! Click OK to exit.</string>
-    <string name="mcn_exit_errcrash">Unable to locate crash! You may ignore this.</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 no s\'ha instal·lat!</string>
     <string name="mcn_check_fail_incompatiblearch">L\'arquitectura %1$s no és compatible amb Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_java">No s\'ha pogut iniciar la prova de la màquina virtual Java. Consulteu %s per obtenir més informació.</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">Controls</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom">Zoom (C)</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -149,8 +126,6 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_keyname">Keycode</string>
-    <string name="customctrl_specialkey">Special Key</string>
-    <string name="customctrl_hidden">Hidden</string>
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_selectdefault">Select default Control json</string>
     <string name="main_options">Options</string>
