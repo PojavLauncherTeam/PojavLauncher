@@ -5,21 +5,13 @@
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">在您的设备上启动《Minecraft：Java版》！</string>
     <!-- Action bar part -->
-    <string name="actionbar_help">帮助</string>
     <!-- Languages list part -->
-    <string name="language_name">简体中文 - CN</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">电子邮件或用户名</string>
-    <string name="login_online_username_question">（使用哪个？）</string>
     <string name="login_online_password_hint">密码</string>
-    <string name="login_online_password_question">忘记密码？</string>
-    <string name="login_online_remember">记住我？</string>
     <string name="login_online_check_keeplogin">保持登录状态</string>
     <string name="login_online_login_label">登录</string>
-    <string name="login_online_create_account">（创建新账号？）</string>
-    <string name="login_offline_switch">离线登录？</string>
     <string name="login_offline_label">以离线账号登录</string>
-    <string name="login_offline_alert_skip">跳过</string>
     <string name="login_error_short_username">用户名至少为3字符长</string>
     <string name="login_error_exist_username">用户名已存在</string>
     <string name="login_microsoft">微软帐号登录</string>
@@ -29,22 +21,17 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
     <!-- Warnings -->
-    <string name="warning_action_exit">退出</string>
     <string name="warning_remove_account">此账号将被移除！</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">安装 Java 运行时环境 %s (.tar.xz)</string>
-    <string name="alerttitle_selectkeymap">选择 .json 键位文件</string>
     <string name="alerttitle_installmod">选择 Mod 安装器</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩溃</string>
-    <string name="error_checklog">错误！检查下方日志： %s</string>
     <string name="error_no_version">无版本！</string>
-    <string name="error_load_version">无法加载版本 %s</string>
     <string name="error_show_more">显示细节</string>
     <string name="error_show_less">隐藏细节</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要存储读写权限！</string>
-    <string name="toast_login_error">登录后出现问题。请向开发者反馈。\n错误： %s</string>
     <string name="toast_optifine_success">安装成功</string>
     <string name="toast_uninstalljre_done">Java 运行时环境卸载成功</string>
     <!--
@@ -52,7 +39,6 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">新闻</string>
-    <string name="mcl_tab_mcje">Minecraft: Java Edition</string>
     <string name="mcl_tab_console">开发控制台</string>
     <string name="mcl_tab_crash">崩溃日志</string>
     <!-- MCLauncherActivity: Account status -->
@@ -65,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"正在下载 %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
     <string name="mcl_options">选项</string>
-    <string name="mcl_option_modmgr">Mod 管理器（无功能）</string>
     <string name="mcl_option_modinstall">启动 Mod 安装器（例如 Forge, LabyMod, Fabric...）</string>
     <string name="mcl_option_modinstallwitharg">以自定义参数启动 Mod 安装器</string>
-    <string name="mcl_option_checkupdate">检查更新</string>
     <string name="mcl_option_customcontrol">自定义控制键</string>
     <string name="mcl_option_settings">设置</string>
     <string name="mcl_option_about">关于</string>
@@ -88,7 +72,6 @@
     <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其放大。</string>
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
     <string name="mcl_setting_subtitle_mousescale">更改虚拟鼠标的大小。</string>
-    <string name="mcl_setting_title_controlsize">设定控制键大小</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
     <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
     <string name="mcl_setting_category_general">通用设置</string>
@@ -100,7 +83,6 @@
     <string name="mcl_setting_veroption_oldbeta">远古beta版</string>
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
-    <string name="global_add">添加</string>
     <string name="global_edit">修改</string>
     <string name="global_error">错误</string>
     <string name="global_load">加载</string>
@@ -136,19 +118,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用/游戏以 %d 代码退出</string>
     <string name="mcn_exit_call">退出</string>
-    <string name="mcn_exit_crash">检测到游戏崩溃！按确定键退出。</string>
-    <string name="mcn_exit_errcrash">无法定位崩溃！您可以忽略这条消息。</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
     <string name="mcn_check_fail_lwjgl">未安装LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架构不与 Java 运行时环境 %2$s 兼容。</string>
-    <string name="mcn_check_fail_java">无法启动测试 Java 虚拟机。查看 %s 获取更多信息。</string>
     <!-- MainActivity: Control buttons -->
-    <string name="controls">控制</string>
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">键盘</string>
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
-    <string name="control_zoom">缩放 (C)</string>
     <string name="control_primary">主</string>
     <string name="control_secondary">副</string>
     <string name="control_shift">◇</string>
@@ -175,14 +152,11 @@
     <string name="customctrl_edit">正在编辑 %s</string>
     <string name="customctrl_remove">移除 %s ？</string>
     <string name="customctrl_keyname">键码</string>
-    <string name="customctrl_specialkey">特殊键</string>
-    <string name="customctrl_hidden">隐藏</string>
     <string name="customctrl_toggle">可切换</string>
     <string name="customctrl_dynamicpos">动态位置</string>
     <string name="customctrl_dynamicpos_x">动态 X 轴</string>
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
     <string name="customctrl_transparency_bg">背景透明度</string>
-    <string name="customctrl_transparency_text">文本透明度</string>
     <string name="customctrl_keycombine">按键组合</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
