@@ -1,4 +1,4 @@
-#include "jni.h"
+#include <jni.h>
 
 JNIEXPORT void JNICALL
 Java_java_awt_Component_initIDs
