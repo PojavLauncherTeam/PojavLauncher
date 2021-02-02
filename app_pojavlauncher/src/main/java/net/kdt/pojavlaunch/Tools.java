@@ -325,7 +325,11 @@ public final class Tools
             //For devices with free form/split screen, we need window size, not screen size.
             displayMetrics = ctx.getResources().getDisplayMetrics();
         }else{
-            ctx.getDisplay().getRealMetrics(displayMetrics);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                ctx.getDisplay().getRealMetrics(displayMetrics);
+            } else {
+                displayMetrics = getWindowManager().getDefaultDisplay();
+            }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
                 displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
