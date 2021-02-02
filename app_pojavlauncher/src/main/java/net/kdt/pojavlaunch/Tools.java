@@ -97,8 +97,7 @@ public final class Tools
         // Caciocavallo config AWT-enabled version
         javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.physicalWidth + "x" + CallbackBridge.physicalHeight);
         javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
-        if(isHeadless) javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler"); //safe to use it when running in headless mode
-        //else javaArgList.add("-Dcacio.font.fontscaler=sun.font.NullFontScaler"); // it will literally disable the text rendering, so...
+        javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
         javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
         javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
         javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
