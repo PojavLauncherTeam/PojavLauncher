@@ -32,13 +32,21 @@ include $(BUILD_SHARED_LIBRARY)
 # LOCAL_SRC_FILES := thread_helper.cpp
 # include $(BUILD_SHARED_LIBRARY)
 
+# fake lib for linker
+include $(CLEAR_VARS)
+LOCAL_MODULE := awt_headless
+include $(BUILD_SHARED_LIBRARY)
+
 # libawt_xawt without X11, used to get Caciocavallo working
 LOCAL_PATH := $(HERE_PATH)/awt_xawt
 include $(CLEAR_VARS)
 LOCAL_MODULE := awt_xawt
 # LOCAL_CFLAGS += -DHEADLESS
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
-LOCAL_SRC_FILES := \
+LOCAL_SHARED_LIBRARIES := awt_headless
+LOCAL_SRC_FILES := xawt_fake.c
+# commented out
+LOCAL_SRC_FILES_ALL := \
     xawt_fake.c \
     awt_AWTEvent.c \
     awt_Event.c \
@@ -52,4 +60,7 @@ LOCAL_SRC_FILES := \
     XlibWrapper.c \
     XToolkit.c
 include $(BUILD_SHARED_LIBRARY)
+
+# delete fake libs after linked
+$(info $(shell (rm $(HERE_PATH)/../jniLibs/*/libawt_headless.so)))
 
