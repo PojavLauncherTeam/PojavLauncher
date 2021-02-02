@@ -328,7 +328,7 @@ public final class Tools
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 ctx.getDisplay().getRealMetrics(displayMetrics);
             } else {
-                displayMetrics = ctx.getWindowManager().getDefaultDisplay();
+                 ctx.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
