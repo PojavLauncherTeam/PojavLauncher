@@ -10,7 +10,8 @@ static JNIEnv* runtimeJNIEnvPtr_INPUT;
 jclass class_CTCScreen;
 jmethodID method_GetRGB;
 
-jfieldID field_CTCRobotPeer;
+jclass class_CTCAndroidInput;
+jmethodID method_ReceiveInput;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     if (dalvikJavaVMPtr == NULL) {
@@ -23,7 +24,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     return JNI_VERSION_1_4;
 }
 
-JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_AWTInputBridge_sendData(JNIEnv* env, jclass clazz, jint type, jint i1, jint i2, jint i3, jint i4) {
+JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_AWTInputBridge_nativeSendData(JNIEnv* env, jclass clazz, jint type, jint i1, jint i2, jint i3, jint i4) {
     if (runtimeJNIEnvPtr_INPUT == NULL) {
         if (runtimeJavaVMPtr == NULL) {
             return;
@@ -32,7 +33,16 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_AWTInputBridge_sendData(JNIEnv* 
         }
     }
 
-    
+    if (method_ReceiveInput == NULL) {
+        class_CTCAndroidInput = (*runtimeJNIEnvPtr_INPUT)->FindClass(runtimeJNIEnvPtr_INPUT, "net/java/openjdk/cacio/ctc/CTCAndroidInput");
+        method_ReceiveInput = (*runtimeJNIEnvPtr_INPUT)->GetStaticFieldID(runtimeJNIEnvPtr_INPUT, class_CTCAndroidInput, "receiveData", "(IIIII)V");
+    }
+    (*runtimeJNIEnvPtr_INPUT)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_INPUT,
+        class_CTCAndroidInput,
+        method_ReceiveInput,
+        type, i1, i2, i3, i4
+    );
 }
 
 // TODO: check for memory leaks
@@ -50,7 +60,7 @@ JNIEXPORT jintArray JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_renderAWTScr
     int *rgbArray;
     jintArray jreRgbArray, androidRgbArray;
   
-    if (!method_GetRGB) {
+    if (method_GetRGB == NULL) {
         class_CTCScreen = (*runtimeJNIEnvPtr_GRAPHICS)->FindClass(runtimeJNIEnvPtr_GRAPHICS, "net/java/openjdk/cacio/ctc/CTCScreen");
         assert(class_CTCScreen != NULL);
         method_GetRGB = (*runtimeJNIEnvPtr_GRAPHICS)->GetStaticMethodID(runtimeJNIEnvPtr_GRAPHICS, class_CTCScreen, "getCurrentScreenRGB", "()[I");

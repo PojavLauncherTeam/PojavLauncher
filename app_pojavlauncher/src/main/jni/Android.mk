@@ -45,20 +45,6 @@ LOCAL_MODULE := awt_xawt
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_SHARED_LIBRARIES := awt_headless
 LOCAL_SRC_FILES := xawt_fake.c
-# commented out
-LOCAL_SRC_FILES_ALL := \
-    xawt_fake.c \
-    awt_AWTEvent.c \
-    awt_Event.c \
-    awt_GraphicsEnv.c \
-    awt_InputMethod.c \
-    awt_Insets.c \
-    awt_Robot.c \
-    awt_UNIXToolkit.c \
-    awt_Desktop.c \
-    awt_Taskbar.c \
-    XlibWrapper.c \
-    XToolkit.c
 include $(BUILD_SHARED_LIBRARY)
 
 # delete fake libs after linked
