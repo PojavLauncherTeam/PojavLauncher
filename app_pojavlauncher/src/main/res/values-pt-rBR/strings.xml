@@ -65,6 +65,7 @@
     <string name="mcl_setting_title_ignore_notch">Ignorar entalhe</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignorar o entalhe e estender a tela por baixo dele.\nGarante uma experiência mais envolvente.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala de resolução</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite que você reduza a resolução do jogo. 100% é resolução total</string>
     <string name="mcl_setting_title_longpresstrigger">Tempo para acionar função ao manter pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
     <string name="mcl_setting_title_buttonscale">Aumentar escala de botões</string>
