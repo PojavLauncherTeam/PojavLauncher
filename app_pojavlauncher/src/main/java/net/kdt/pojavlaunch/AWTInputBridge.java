@@ -20,6 +20,11 @@ public class AWTInputBridge {
         nativeSendData(EVENT_TYPE_MOUSE_BUTTON, awtButtons, isDown ? 1 : 0, 0, 0);
     }
     
+    public static void sendMousePress(int awtButtons) {
+        sendMousePress(awtButtons, true);
+        sendMousePress(awtButtons, false);
+    }
+    
     public static void sendMousePos(int x, int y) {
         nativeSendData(EVENT_TYPE_CURSOR_POS, x, y, 0, 0);
     }

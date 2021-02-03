@@ -28,29 +28,31 @@ public class AWTInputEvent
 {
 // InputEvent
     /**
-     * The Shift key modifier constant.
-     * It is recommended that SHIFT_DOWN_MASK be used instead.
+     * This flag indicates that the Shift key was down when the event
+     * occurred.
      */
-    public static final int SHIFT_MASK = Event.SHIFT_MASK;
+    public static final int SHIFT_MASK          = 1 << 0;
 
     /**
-     * The Control key modifier constant.
-     * It is recommended that CTRL_DOWN_MASK be used instead.
+     * This flag indicates that the Control key was down when the event
+     * occurred.
      */
-    public static final int CTRL_MASK = Event.CTRL_MASK;
+    public static final int CTRL_MASK           = 1 << 1;
 
     /**
-     * The Meta key modifier constant.
-     * It is recommended that META_DOWN_MASK be used instead.
+     * This flag indicates that the Meta key was down when the event
+     * occurred. For mouse events, this flag indicates that the right
+     * button was pressed or released.
      */
-    public static final int META_MASK = Event.META_MASK;
+    public static final int META_MASK           = 1 << 2;
 
     /**
-     * The Alt key modifier constant.
-     * It is recommended that ALT_DOWN_MASK be used instead.
+     * This flag indicates that the Alt key was down when
+     * the event occurred. For mouse events, this flag indicates that the
+     * middle mouse button was pressed or released.
      */
-    public static final int ALT_MASK = Event.ALT_MASK;
-
+    public static final int ALT_MASK            = 1 << 3;
+    
     /**
      * The AltGraph key modifier constant.
      */
@@ -67,14 +69,14 @@ public class AWTInputEvent
      * It is recommended that BUTTON2_DOWN_MASK be used instead.
      * Note that BUTTON2_MASK has the same value as ALT_MASK.
      */
-    public static final int BUTTON2_MASK = Event.ALT_MASK;
+    public static final int BUTTON2_MASK = ALT_MASK;
 
     /**
      * The Mouse Button3 modifier constant.
      * It is recommended that BUTTON3_DOWN_MASK be used instead.
      * Note that BUTTON3_MASK has the same value as META_MASK.
      */
-    public static final int BUTTON3_MASK = Event.META_MASK;
+    public static final int BUTTON3_MASK = META_MASK;
 
     /**
      * The Shift key extended modifier constant.
@@ -123,37 +125,6 @@ public class AWTInputEvent
      * @since 1.4
      */
     public static final int ALT_GRAPH_DOWN_MASK = 1 << 13;
-
-    /**
-     * An array of extended modifiers for additional buttons.
-     * @see getButtonDownMasks
-     * There are twenty buttons fit into 4byte space.
-     * one more bit is reserved for FIRST_HIGH_BIT.
-     * @since 7.0
-     */
-    private static final int [] BUTTON_DOWN_MASK = new int [] { BUTTON1_DOWN_MASK,
-                                                               BUTTON2_DOWN_MASK,
-                                                               BUTTON3_DOWN_MASK,
-                                                               1<<14, //4th phisical button (this is not a wheel!)
-                                                               1<<15, //(this is not a wheel!)
-                                                               1<<16,
-                                                               1<<17,
-                                                               1<<18,
-                                                               1<<19,
-                                                               1<<20,
-                                                               1<<21,
-                                                               1<<22,
-                                                               1<<23,
-                                                               1<<24,
-                                                               1<<25,
-                                                               1<<26,
-                                                               1<<27,
-                                                               1<<28,
-                                                               1<<29,
-                                                               1<<30};
-
-
-
 
 
 // KeyEvent
