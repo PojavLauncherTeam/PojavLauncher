@@ -76,7 +76,4 @@ JNIEXPORT jintArray JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_renderAWTScr
     // free(rgbArray);
     
     return androidRgbArray;
-}
-
-JNIEXPORT void JNICALL 
-
+} 
