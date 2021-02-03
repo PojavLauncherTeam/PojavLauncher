@@ -10,7 +10,6 @@ import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
 
-import androidx.annotation.RequiresApi;
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
@@ -661,7 +660,8 @@ public class BaseMainActivity extends LoggableActivity {
                         texture.setDefaultBufferSize((int)(width*scaleFactor),(int)(height*scaleFactor));
                         CallbackBridge.windowWidth = (int)(width*scaleFactor);
                         CallbackBridge.windowHeight = (int)(height*scaleFactor);
-                        //CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
+
+                        //Load Minecraft options:
                         MCOptionUtils.load();
                         MCOptionUtils.set("overrideWidth", ""+CallbackBridge.windowWidth);
                         MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
@@ -1025,7 +1025,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public int mcscale(int input) {
-        return this.guiScale * input;
+        return (int)((this.guiScale * input)/scaleFactor);
     }
 
     /*
@@ -1181,15 +1181,19 @@ public class BaseMainActivity extends LoggableActivity {
 
     public int handleGuiBar(int x, int y) {
         if (!CallbackBridge.isGrabbing()) return -1;
-        
-        int barheight = mcscale(20);
-        int barwidth = mcscale(180);
-        int barx = (CallbackBridge.physicalWidth / 2) - (barwidth / 2);
-        int bary = CallbackBridge.physicalHeight - barheight;
-        if (x < barx || x >= barx + barwidth || y < bary || y >= bary + barheight) {
+
+        int mcGuiScale = Integer.parseInt(MCOptionUtils.get("guiScale"));
+        if(mcGuiScale == 0) mcGuiScale = (Math.min(CallbackBridge.windowHeight, CallbackBridge.windowWidth)/240);
+        mcGuiScale = Math.min(mcGuiScale, (Math.min(CallbackBridge.windowHeight, CallbackBridge.windowWidth)/240));
+
+        int barHeight = mcscale(5 * mcGuiScale);
+        int barWidth = mcscale(45 * mcGuiScale);
+        int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
+        int barY = CallbackBridge.physicalHeight - barHeight;
+        if (x < barX || x >= barX + barWidth || y < barY || y >= barY + barHeight) {
             return -1;
         }
-        return hotbarKeys[((x - barx) / mcscale(180 / 9)) % 9];
+        return hotbarKeys[((x - barX) / mcscale((45 * mcGuiScale) / 9)) % 9];
     }
 /*
     public int handleGuiBar(int x, int y, MotionEvent e) {
