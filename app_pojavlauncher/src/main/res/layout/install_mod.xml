@@ -17,8 +17,7 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:id="@+id/main_touchpad"
-            android:visibility="gone">
+            android:id="@+id/main_touchpad">
 
             <ImageView
                 android:layout_height="27dp"
@@ -51,6 +50,7 @@
 		android:id="@+id/content_log_layout"
 		android:layout_height="match_parent"
 		android:layout_width="wrap_content"
+		android:visibility="gone"
 		android:orientation="vertical">
 
 		<RelativeLayout
