@@ -111,6 +111,7 @@ public class MainActivity extends BaseMainActivity {
             public void onEvent(int i, @Nullable String s) {
                 //FIXME Make sure the multithreading nature of this event doesn't cause any problems ?
                 MCOptionUtils.load();
+                getMcScale();
             }
         };
         fileObserver.startWatching();

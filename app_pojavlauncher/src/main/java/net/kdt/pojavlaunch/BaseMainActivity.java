@@ -666,7 +666,7 @@ public class BaseMainActivity extends LoggableActivity {
                         MCOptionUtils.set("overrideWidth", ""+CallbackBridge.windowWidth);
                         MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
                         MCOptionUtils.save();
-                        calculateMcScale();
+                        getMcScale();
                         // Should we do that?
                         if (!isCalled) {
                             isCalled = true;
@@ -698,7 +698,7 @@ public class BaseMainActivity extends LoggableActivity {
                         CallbackBridge.windowWidth = (int)(width*scaleFactor);
                         CallbackBridge.windowHeight = (int)(height*scaleFactor);
                         CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
-                        calculateMcScale();
+                        getMcScale();
                     }
 
                     @Override
@@ -1171,29 +1171,27 @@ public class BaseMainActivity extends LoggableActivity {
         return true;
     }
 
-    public void calculateMcScale() {
-        int scale = 1;
-        while (CallbackBridge.physicalWidth / (scale + 1) >= 320 && CallbackBridge.physicalHeight / (scale + 1) >= 240) {
-            scale++;
+    public void getMcScale() {
+        //Get the scale stored in game files, used auto scale if found or if the stored scaled is bigger than the authorized size.
+        this.guiScale = Integer.parseInt(MCOptionUtils.get("guiScale"));
+
+        int scale = Math.max(Math.min(CallbackBridge.windowWidth / 320, CallbackBridge.windowHeight / 240), 1);
+        if(scale < this.guiScale || guiScale == 0){
+            this.guiScale = scale;
         }
-        this.guiScale = scale;
     }
 
     public int handleGuiBar(int x, int y) {
         if (!CallbackBridge.isGrabbing()) return -1;
 
-        int mcGuiScale = Integer.parseInt(MCOptionUtils.get("guiScale"));
-        if(mcGuiScale == 0) mcGuiScale = (Math.min(CallbackBridge.windowHeight, CallbackBridge.windowWidth)/240);
-        mcGuiScale = Math.min(mcGuiScale, (Math.min(CallbackBridge.windowHeight, CallbackBridge.windowWidth)/240));
-
-        int barHeight = mcscale(5 * mcGuiScale);
-        int barWidth = mcscale(45 * mcGuiScale);
+        int barHeight = mcscale(20);
+        int barWidth = mcscale(180);
         int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
         int barY = CallbackBridge.physicalHeight - barHeight;
         if (x < barX || x >= barX + barWidth || y < barY || y >= barY + barHeight) {
             return -1;
         }
-        return hotbarKeys[((x - barX) / mcscale((45 * mcGuiScale) / 9)) % 9];
+        return hotbarKeys[((x - barX) / mcscale(180 / 9)) % 9];
     }
 /*
     public int handleGuiBar(int x, int y, MotionEvent e) {

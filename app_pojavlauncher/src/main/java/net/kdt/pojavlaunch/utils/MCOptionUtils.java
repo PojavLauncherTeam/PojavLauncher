@@ -41,6 +41,9 @@ public class MCOptionUtils
     }
 
     public static String get(String key){
+        if (mLineList == null){
+            load();
+        }
         for (int i = 0; i < mLineList.size(); i++) {
             String line = mLineList.get(i);
             if (line.startsWith(key + ":")) {
