@@ -13,19 +13,19 @@
 			android:layout_width="match_parent"
 			android:id="@+id/installmod_surfaceview"/>
 
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/main_touchpad">
+		<LinearLayout
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:orientation="vertical"
+			android:id="@+id/main_touchpad">
 
-            <ImageView
-                android:layout_height="27dp"
-                android:layout_width="18dp"
-                android:src="@drawable/mouse_pointer"
-                android:id="@+id/main_mouse_pointer"/>
+			<ImageView
+				android:layout_height="27dp"
+				android:layout_width="18dp"
+				android:src="@drawable/mouse_pointer"
+				android:id="@+id/main_mouse_pointer"/>
 
-        </LinearLayout>
+		</LinearLayout>
 
 		<Button
 			android:layout_height="wrap_content"
@@ -43,6 +43,23 @@
 			android:text="@string/control_viewout"
 			android:onClick="openLogOutput"
 			android:layout_toLeftOf="@id/installmod_btn2"/>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:background="@drawable/control_button"
+			android:text="@string/control_primary"
+			android:id="@+id/installmod_mouse_pri"
+			android:layout_alignParentBottom="true"/>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:background="@drawable/control_button"
+			android:text="@string/control_secondary"
+			android:id="@+id/installmod_mouse_sec"
+			android:layout_toRightOf="@id/installmod_mouse_pri"
+			android:layout_alignParentBottom="true"/>
 
 	</RelativeLayout>
 

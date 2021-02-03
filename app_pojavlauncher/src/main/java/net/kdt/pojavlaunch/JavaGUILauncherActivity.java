@@ -16,7 +16,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
-public class JavaGUILauncherActivity extends LoggableActivity {
+public class JavaGUILauncherActivity extends LoggableActivity implements View.OnTouchListener {
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     
     private AWTCanvasView mTextureView;
@@ -74,6 +74,9 @@ public class JavaGUILauncherActivity extends LoggableActivity {
             CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels * scaleFactor);
             CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels * scaleFactor);
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
+
+            findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
+            findViewById(R.id.installmod_mouse_sec).setOnTouchListener(this);
             
             this.touchPad = findViewById(R.id.main_touchpad);
             touchPad.setFocusable(false);
@@ -226,6 +229,35 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent e) {
+        boolean isDown;
+        switch (e.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN: // 0
+            case MotionEvent.ACTION_POINTER_DOWN: // 5
+                isDown = true;
+                break;
+            case MotionEvent.ACTION_UP: // 1
+            case MotionEvent.ACTION_CANCEL: // 3
+            case MotionEvent.ACTION_POINTER_UP: // 6
+                isDown = false;
+                break;
+            default:
+                return false;
+        }
+        
+        switch (v.getId()) {
+            case R.id.installmod_mouse_pri:
+                AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK, isDown);
+                break;
+                
+            case R.id.installmod_mouse_sec:
+                AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON3_DOWN_MASK, isDown);
+                break;
+        }
+        return true;
     }
 
     public void placeMouseAdd(float x, float y) {
