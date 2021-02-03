@@ -62,6 +62,7 @@
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Skrýt postranní panel</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňující staré uživatelské rozhraní v1. Dá vám více celo-obrazné prostředí.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorovat výřez</string>
     <string name="mcl_setting_title_resolution_scaler">Škála rozlišení</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Umožňuje snížit rozlišení hry. 100% je plné rozlišení</string>
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
