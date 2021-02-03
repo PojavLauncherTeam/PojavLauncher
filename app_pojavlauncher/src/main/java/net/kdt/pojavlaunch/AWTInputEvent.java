@@ -26,8 +26,137 @@ package net.kdt.pojavlaunch;
      */
 public class AWTInputEvent
 {
- 
-// KEYBOARD
+// InputEvent
+    /**
+     * The Shift key modifier constant.
+     * It is recommended that SHIFT_DOWN_MASK be used instead.
+     */
+    public static final int SHIFT_MASK = Event.SHIFT_MASK;
+
+    /**
+     * The Control key modifier constant.
+     * It is recommended that CTRL_DOWN_MASK be used instead.
+     */
+    public static final int CTRL_MASK = Event.CTRL_MASK;
+
+    /**
+     * The Meta key modifier constant.
+     * It is recommended that META_DOWN_MASK be used instead.
+     */
+    public static final int META_MASK = Event.META_MASK;
+
+    /**
+     * The Alt key modifier constant.
+     * It is recommended that ALT_DOWN_MASK be used instead.
+     */
+    public static final int ALT_MASK = Event.ALT_MASK;
+
+    /**
+     * The AltGraph key modifier constant.
+     */
+    public static final int ALT_GRAPH_MASK = 1 << 5;
+
+    /**
+     * The Mouse Button1 modifier constant.
+     * It is recommended that BUTTON1_DOWN_MASK be used instead.
+     */
+    public static final int BUTTON1_MASK = 1 << 4;
+
+    /**
+     * The Mouse Button2 modifier constant.
+     * It is recommended that BUTTON2_DOWN_MASK be used instead.
+     * Note that BUTTON2_MASK has the same value as ALT_MASK.
+     */
+    public static final int BUTTON2_MASK = Event.ALT_MASK;
+
+    /**
+     * The Mouse Button3 modifier constant.
+     * It is recommended that BUTTON3_DOWN_MASK be used instead.
+     * Note that BUTTON3_MASK has the same value as META_MASK.
+     */
+    public static final int BUTTON3_MASK = Event.META_MASK;
+
+    /**
+     * The Shift key extended modifier constant.
+     * @since 1.4
+     */
+    public static final int SHIFT_DOWN_MASK = 1 << 6;
+
+    /**
+     * The Control key extended modifier constant.
+     * @since 1.4
+     */
+    public static final int CTRL_DOWN_MASK = 1 << 7;
+
+    /**
+     * The Meta key extended modifier constant.
+     * @since 1.4
+     */
+    public static final int META_DOWN_MASK = 1 << 8;
+
+    /**
+     * The Alt key extended modifier constant.
+     * @since 1.4
+     */
+    public static final int ALT_DOWN_MASK = 1 << 9;
+
+    /**
+     * The Mouse Button1 extended modifier constant.
+     * @since 1.4
+     */
+    public static final int BUTTON1_DOWN_MASK = 1 << 10;
+
+    /**
+     * The Mouse Button2 extended modifier constant.
+     * @since 1.4
+     */
+    public static final int BUTTON2_DOWN_MASK = 1 << 11;
+
+    /**
+     * The Mouse Button3 extended modifier constant.
+     * @since 1.4
+     */
+    public static final int BUTTON3_DOWN_MASK = 1 << 12;
+
+    /**
+     * The AltGraph key extended modifier constant.
+     * @since 1.4
+     */
+    public static final int ALT_GRAPH_DOWN_MASK = 1 << 13;
+
+    /**
+     * An array of extended modifiers for additional buttons.
+     * @see getButtonDownMasks
+     * There are twenty buttons fit into 4byte space.
+     * one more bit is reserved for FIRST_HIGH_BIT.
+     * @since 7.0
+     */
+    private static final int [] BUTTON_DOWN_MASK = new int [] { BUTTON1_DOWN_MASK,
+                                                               BUTTON2_DOWN_MASK,
+                                                               BUTTON3_DOWN_MASK,
+                                                               1<<14, //4th phisical button (this is not a wheel!)
+                                                               1<<15, //(this is not a wheel!)
+                                                               1<<16,
+                                                               1<<17,
+                                                               1<<18,
+                                                               1<<19,
+                                                               1<<20,
+                                                               1<<21,
+                                                               1<<22,
+                                                               1<<23,
+                                                               1<<24,
+                                                               1<<25,
+                                                               1<<26,
+                                                               1<<27,
+                                                               1<<28,
+                                                               1<<29,
+                                                               1<<30};
+
+
+
+
+
+// KeyEvent
     /**
      * The first number in the range of ids used for key events.
      */
