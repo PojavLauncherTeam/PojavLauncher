@@ -1,17 +1,40 @@
 package net.kdt.pojavlaunch;
 
-import android.graphics.*;
-import android.os.*;
-import androidx.appcompat.app.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-import java.io.*;
-import java.util.*;
-import net.kdt.pojavlaunch.installers.*;
-import net.kdt.pojavlaunch.utils.*;
-import org.lwjgl.glfw.*;
-import android.content.*;
+import android.content.DialogInterface;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+import androidx.appcompat.app.AlertDialog;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import net.kdt.pojavlaunch.installers.BaseInstaller;
+import net.kdt.pojavlaunch.installers.FabricInstaller;
+import net.kdt.pojavlaunch.installers.InstallerDetector;
+import net.kdt.pojavlaunch.installers.Legacy1p12p2ForgeInstaller;
+import net.kdt.pojavlaunch.installers.LegacyForgeInstaller;
+import net.kdt.pojavlaunch.installers.LegacyOptifineInstaller;
+import net.kdt.pojavlaunch.installers.NewForgeInstaller;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.JREUtils;
+import org.lwjgl.glfw.CallbackBridge;
+import android.os.Handler;
 
 public class JavaGUILauncherActivity extends LoggableActivity {
     private AWTCanvasView mTextureView;
@@ -20,6 +43,9 @@ public class JavaGUILauncherActivity extends LoggableActivity {
     private ScrollView contentScroll;
     private ToggleButton toggleLog; 
 
+    private LinearLayout touchPad;
+    private ImageView mousePointer;
+    
     private File logFile;
     private PrintStream logStream;
     
@@ -27,6 +53,33 @@ public class JavaGUILauncherActivity extends LoggableActivity {
 
     private boolean isLogAllow, mSkipDetectMod;
 
+    private boolean rightOverride = false;
+    private float scaleFactor = 1;
+    private int fingerStillThreshold = 8;
+    private int initialX;
+    private int initialY;
+    private static boolean triggeredLeftMouseButton = false;
+    private Handler theHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_LEFT_MOUSE_BUTTON_CHECK: {
+                        int x = CallbackBridge.mouseX;
+                        int y = CallbackBridge.mouseY;
+                        if (CallbackBridge.isGrabbing() &&
+                            Math.abs(initialX - x) < fingerStillThreshold &&
+                            Math.abs(initialY - y) < fingerStillThreshold) {
+                            triggeredLeftMouseButton = true;
+                            AWTInputBridge.sendMousePress(0, true);
+                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+                        }
+                    } break;
+                case MSG_DROP_ITEM_BUTTON_CHECK: {
+                        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
+                    } break;
+            }
+        }
+    };
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +88,81 @@ public class JavaGUILauncherActivity extends LoggableActivity {
         Tools.updateWindowSize(this);
         
         try {
+            this.touchPad = findViewById(R.id.main_touchpad);
+            touchPad.setFocusable(false);
+
+            this.mousePointer = findViewById(R.id.main_mouse_pointer);
+            this.mousePointer.post(new Runnable(){
+
+                    @Override
+                    public void run() {
+                        ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
+                        params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                        params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                    }
+                });
+            touchPad.setOnTouchListener(new OnTouchListener(){
+                    private float prevX, prevY;
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        // MotionEvent reports input details from the touch screen
+                        // and other input controls. In this case, you are only
+                        // interested in events where the touch position changed.
+                        // int index = event.getActionIndex();
+
+                        int action = event.getActionMasked();
+
+                        float x = event.getX();
+                        float y = event.getY();
+                        if(event.getHistorySize() > 0) {
+                            prevX = event.getHistoricalX(0);
+                            prevY = event.getHistoricalY(0);
+                        }else{
+                            prevX = x;
+                            prevY = y;
+                        }
+                        float mouseX = mousePointer.getTranslationX();
+                        float mouseY = mousePointer.getTranslationY();
+
+                        if (gestureDetector.onTouchEvent(event)) {
+
+                            CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor), (int) (mouseY *scaleFactor));
+                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
+                            if (!rightOverride) {
+                                CallbackBridge.mouseLeft = true;
+                            }
+
+                        } else {
+                            switch (action) {
+                                case MotionEvent.ACTION_UP: // 1
+                                case MotionEvent.ACTION_CANCEL: // 3
+                                case MotionEvent.ACTION_POINTER_UP: // 6
+                                    if (!rightOverride) {
+                                        CallbackBridge.mouseLeft = false;
+                                    }
+                                    break;
+                                case MotionEvent.ACTION_MOVE: // 2
+                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + x - prevX));
+                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
+                                    placeMouseAt(mouseX, mouseY);
+
+                                    CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
+                                    /*
+                                     if (!CallbackBridge.isGrabbing()) {
+                                     CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
+                                     CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
+                                     }
+                                     */
+                                    break;
+                            }
+                        }
+
+                        // debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                        CallbackBridge.DEBUG_STRING.setLength(0);
+
+                        return true;
+                    }
+                });
             logFile = new File(Tools.DIR_GAME_NEW, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
