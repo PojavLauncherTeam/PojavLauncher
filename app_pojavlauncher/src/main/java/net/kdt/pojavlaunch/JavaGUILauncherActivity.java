@@ -88,6 +88,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                         params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
                     }
                 });
+/*
             touchPad.setOnHoverListener(new OnHoverListener() {
                     @Override
                     public boolean onHover(View v, MotionEvent event) {
@@ -95,6 +96,7 @@ public class JavaGUILauncherActivity extends LoggableActivity {
                         return false;
                     }
             });
+*/
             touchPad.setOnTouchListener(new OnTouchListener(){
                     private float prevX, prevY;
                     @Override
