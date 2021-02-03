@@ -35,7 +35,9 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_AWTInputBridge_nativeSendData(JN
 
     if (method_ReceiveInput == NULL) {
         class_CTCAndroidInput = (*runtimeJNIEnvPtr_INPUT)->FindClass(runtimeJNIEnvPtr_INPUT, "net/java/openjdk/cacio/ctc/CTCAndroidInput");
-        method_ReceiveInput = (*runtimeJNIEnvPtr_INPUT)->GetStaticFieldID(runtimeJNIEnvPtr_INPUT, class_CTCAndroidInput, "receiveData", "(IIIII)V");
+        assert(class_CTCAndroidInput != NULL);
+        method_ReceiveInput = (*runtimeJNIEnvPtr_INPUT)->GetStaticMethodID(runtimeJNIEnvPtr_INPUT, class_CTCAndroidInput, "receiveData", "(IIIII)V");
+        assert(method_ReceiveInput != NULL);
     }
     (*runtimeJNIEnvPtr_INPUT)->CallStaticVoidMethod(
         runtimeJNIEnvPtr_INPUT,
