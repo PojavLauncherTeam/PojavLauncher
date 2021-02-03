@@ -47,7 +47,7 @@ scripts\languagelist_updater.bat
 - [x] ~~OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.~~ Replaced by JRE8.
 - [x] OpenJDK 8 Mobile port: ARM32, ARM64, x86, x86_64
 - [x] Mod installer headless
-- [ ] Mod installer with GUI. Little run on `Caciocavallo` project.
+- [x] Mod installer with GUI. Used `Caciocavallo` project for AWT without X11.
 - [x] OpenGL in OpenJDK environment
 - [x] OpenAL (work on most devices)
 - [x] Support Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
