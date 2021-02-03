@@ -17,6 +17,7 @@
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecionar conta</string>
     <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
+    <string name="login_dialog_no_saved_account">Você não tem nenhuma conta salva.\nUse a opção <b>\"Me mantenha logado\"</b> para salvar uma conta após o primeiro login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀\nSegure um botão para personalizar: editar, redimensionar ou excluir."</string>
     <!-- Warnings -->
@@ -61,6 +62,9 @@
     <string name="mcl_setting_subtitle_freeform">Executar Minecraft em janela flutuante. Requer Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ocultar barra lateral</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Pessoal nostálgico preferindo a antiga interface v1 pode gostar disso. Dá a você uma experiência de tela cheia.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorar entalhe</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignorar o entalhe e estender a tela por baixo dele.\nGarante uma experiência mais envolvente.</string>
+    <string name="mcl_setting_title_resolution_scaler">Escala de resolução</string>
     <string name="mcl_setting_title_longpresstrigger">Tempo para acionar função ao manter pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
     <string name="mcl_setting_title_buttonscale">Aumentar escala de botões</string>
