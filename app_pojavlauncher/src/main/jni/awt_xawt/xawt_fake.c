@@ -1,6 +1,13 @@
 #include <jni.h>
 
 JNIEXPORT void JNICALL
+Java_java_awt_Button_initIDs
+  (JNIEnv *env, jclass cls)
+{
+    
+}
+
+JNIEXPORT void JNICALL
 Java_java_awt_Component_initIDs
   (JNIEnv *env, jclass cls)
 {
