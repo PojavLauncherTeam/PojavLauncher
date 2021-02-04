@@ -337,18 +337,29 @@ public class PojavLoginActivity extends BaseActivity
     }
    
     private void unpackComponent(AssetManager am, String component) throws IOException {
+        File versionFile = new File(Tools.DIR_GAME_NEW + "/" + component + "/version");
         InputStream is = am.open("components/" + component + "/version");
-        if(!new File(Tools.DIR_GAME_NEW + "/" + component + "/version").exists()) {
+        if(!versionFile.exists()) {
+            if (versionFile.getParentFile().exists() && versionFile.getParentFile().isDirectory()) {
+                FileUtils.deleteDirectory(versionFile.getParentFile());
+            }
+            versionFile.getParentFile().mkdir();
+            
             Log.i("UnpackPrep", component + ": Pack was installed manually, or does not exist, unpacking new...");
             String[] fileList = am.list("components/" + component);
             for(String s : fileList) {
                 Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_NEW + "/" + component, true);
             }
         } else {
-            FileInputStream fis = new FileInputStream(new File(Tools.DIR_GAME_NEW + "/" + component + "/version"));
+            FileInputStream fis = new FileInputStream(versionFile);
             String release1 = Tools.read(is);
             String release2 = Tools.read(fis);
             if (!release1.equals(release2)) {
+                if (versionFile.getParentFile().exists() && versionFile.getParentFile().isDirectory()) {
+                    FileUtils.deleteDirectory(versionFile.getParentFile());
+                }
+                versionFile.getParentFile().mkdir();
+                
                 String[] fileList = am.list("components/" + component);
                 for (String s : fileList) {
                     Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_NEW + "/" + component, true);
