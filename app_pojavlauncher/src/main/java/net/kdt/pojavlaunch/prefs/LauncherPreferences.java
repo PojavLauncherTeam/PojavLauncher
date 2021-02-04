@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.prefs;
 
 import android.content.*;
-import java.util.*;
 import net.kdt.pojavlaunch.*;
 
 public class LauncherPreferences

@@ -3,15 +3,12 @@ package net.kdt.pojavlaunch.fragments;
 import android.os.*;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.*;
 import android.view.*;
 import android.widget.*;
 import java.io.*;
 import net.kdt.pojavlaunch.*;
 
 import android.graphics.*;
-
-import androidx.core.os.*;
 import androidx.fragment.app.Fragment;
 
 public class CrashFragment extends Fragment
@@ -43,8 +40,7 @@ public class CrashFragment extends Fragment
 		crashView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogCrashTextView);
 		crashView.setTypeface(Typeface.MONOSPACE);
 		crashView.setHint(this.getText(R.string.main_nocrash));
-		
-		//new File(crashPath).mkdirs();
+
 	}
 	
 	@Override

@@ -4,9 +4,7 @@ import android.util.Log;
 import net.kdt.pojavlaunch.*;
 import java.io.*;
 import com.google.gson.*;
-import android.os.Environment;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 public class MinecraftAccount

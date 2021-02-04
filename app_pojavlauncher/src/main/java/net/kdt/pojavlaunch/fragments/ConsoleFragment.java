@@ -3,7 +3,6 @@ package net.kdt.pojavlaunch.fragments;
 import android.os.*;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.*;
 import android.view.*;
 import android.widget.*;
 
@@ -27,37 +26,7 @@ public class ConsoleFragment extends Fragment
 		
 		return view;
     }
-	
-	@Override
-	public void onActivityCreated(Bundle p1)
-	{
-		super.onActivityCreated(p1);
-		/*
-		new Thread(new Runnable(){
-			@Override
-			public void run()
-			{
-				while (true) {
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {}
-					
-					final String popLog = ConsoleFragmentHelper.popLog();
-					if (!popLog.isEmpty()) {
-						getActivity().runOnUiThread(new Runnable(){
-							@Override
-							public void run()
-							{
-								consoleView.append(popLog);
-								System.out.println("OKAY? " + popLog);
-							}
-						});
-					}
-				}
-			}
-		}).start();
-		*/
-	}
+
 
 	@Override
 	public void onResume()

@@ -45,9 +45,6 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
 
             if (responseCode == 403) {
                 RefreshResponse response = this.authenticator.refresh(profilePath.accessToken, UUID.fromString(profilePath.clientToken));
-                // if (response == null) {
-                    // throw new NullPointerException("Response is null?");
-                // }
                 if (response == null) {
                     // Refresh when offline?
                     return null;
