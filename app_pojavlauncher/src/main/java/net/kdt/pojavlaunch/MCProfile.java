@@ -1,11 +1,6 @@
 package net.kdt.pojavlaunch;
 
-import android.app.*;
-import android.content.*;
-import android.util.*;
-import android.view.*;
-import java.io.*;
-import net.kdt.pojavlaunch.authenticator.mojang.*;
+import java.io.*;;
 
 /**
  * This account data format is deprecated.
@@ -26,7 +21,6 @@ public class MCProfile
     
     public static MCProfile.Builder load(String pofFilePath) {
         try {
-            //String th = new String(new byte[]{-128});
             String pofContent = Tools.read(pofFilePath);
             return parse(pofContent);
         } catch (Exception e) {

@@ -62,8 +62,6 @@ public class FileListView extends LinearLayout
 
         mainLv = new ListView(context);
 
-        //listFileAt(Environment.getExternalStorageDirectory().getPath());
-
         mainLv.setOnItemClickListener(new OnItemClickListener(){
                 @Override
                 public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4)
@@ -110,7 +108,6 @@ public class FileListView extends LinearLayout
                     File[] listFile = mainPath.listFiles();
                     FileListAdapter fileAdapter = new FileListAdapter(context);
                     if(!path.equals(lockPath)){
-                        //fileAdapter.add(new File(path, "Path=\""+path+"\".noEquals(homePath=\""+homePath+"\")"));
                         fileAdapter.add(new File(path, ".."));
                     }
 

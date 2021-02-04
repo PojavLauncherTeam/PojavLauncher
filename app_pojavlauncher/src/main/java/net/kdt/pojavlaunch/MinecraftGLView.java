@@ -63,7 +63,6 @@ class MinecraftInputConnection extends BaseInputConnection {
     }
 
     public boolean commitText(CharSequence text, int newCursorPosition) {
-        //parent.sendKeyPress(text.charAt(0));
         for(int i = 0; i < text.length(); i++) parent.sendKeyPress(text.charAt(i));
         return true;
     }

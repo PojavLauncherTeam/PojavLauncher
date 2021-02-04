@@ -113,28 +113,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
 
         pickAccount();
-        
-/*
-        File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
-        if (logFile.exists() && logFile.length() < 20480) {
-            String errMsg = "Error occurred during initialization of ";
-            try {
-                String logContent = Tools.read(logFile.getAbsolutePath());
-                if (logContent.contains(errMsg + "VM") && 
-                    logContent.contains("Could not reserve enough space for")) {
-                    OutOfMemoryError ex = new OutOfMemoryError("Java error: " + logContent);
-                    ex.setStackTrace(null);
-                    Tools.showError(PojavLauncherActivity.this, ex);
 
-                    // Do it so dialog will not shown for second time
-                    Tools.write(logFile.getAbsolutePath(), logContent.replace(errMsg + "VM", errMsg + "JVM"));
-                }
-            } catch (Throwable th) {
-                Log.w(Tools.APP_NAME, "Could not detect java crash", th);
-            }
-        }
-*/
-        //showProfileInfo();
 
         final List<String> accountList = new ArrayList<String>();
         final MinecraftAccount tempProfile = PojavProfile.getTempProfileContent(this);
