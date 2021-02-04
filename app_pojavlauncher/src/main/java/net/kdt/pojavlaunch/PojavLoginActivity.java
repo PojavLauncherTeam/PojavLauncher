@@ -811,11 +811,6 @@ public class PojavLoginActivity extends BaseActivity
     private MinecraftAccount mProfile = null;
     public void loginMC(final View v)
     {
-        /*skip it
-
-        String proFilePath = MCProfile.build(builder);
-        MCProfile.launchWithProfile(this, proFilePath);
-        end skip*/
         
         if (sOffline.isChecked()) {
             mProfile = loginOffline();
