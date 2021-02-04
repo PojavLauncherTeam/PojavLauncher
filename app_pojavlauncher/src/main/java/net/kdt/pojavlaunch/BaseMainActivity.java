@@ -1173,7 +1173,9 @@ public class BaseMainActivity extends LoggableActivity {
 
     public void getMcScale() {
         //Get the scale stored in game files, used auto scale if found or if the stored scaled is bigger than the authorized size.
-        this.guiScale = Integer.parseInt(MCOptionUtils.get("guiScale"));
+        String str = MCOptionUtils.get("guiScale");
+        this.guiScale = (str == null ? 0 :Integer.parseInt(str));
+        
 
         int scale = Math.max(Math.min(CallbackBridge.windowWidth / 320, CallbackBridge.windowHeight / 240), 1);
         if(scale < this.guiScale || guiScale == 0){
