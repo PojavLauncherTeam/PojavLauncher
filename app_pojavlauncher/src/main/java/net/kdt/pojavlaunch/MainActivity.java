@@ -105,7 +105,7 @@ public class MainActivity extends BaseMainActivity {
             }
         };
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
             fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
