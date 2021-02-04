@@ -10,7 +10,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -91,7 +90,7 @@ public class PojavLoginActivity extends BaseActivity
     
     private static boolean isSkipInit = false;
     
-    // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
+
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
     public static final String PREF_JAVARUNTIME_VER = "javaRuntimeVersion";
     
@@ -100,12 +99,7 @@ public class PojavLoginActivity extends BaseActivity
         super.onCreate(savedInstanceState); // false);
 
         Tools.updateWindowSize(this);
-        /*
-        ControlData.pixelOf2dp = (int) Tools.dpToPx(2);
-        ControlData.pixelOf30dp = (int) Tools.dpToPx(30);
-        ControlData.pixelOf50dp = (int) Tools.dpToPx(50);
-        ControlData.pixelOf80dp = (int) Tools.dpToPx(80);
-         */
+
         ControlData[] specialButtons = ControlData.getSpecialButtons();
         specialButtons[0].name = getString(R.string.control_keyboard);
         specialButtons[1].name = getString(R.string.control_toggle);
@@ -122,7 +116,6 @@ public class PojavLoginActivity extends BaseActivity
         private ProgressBar progress;
 
         private ProgressBar progressSpin;
-        // private EditText progressLog;
         private AlertDialog progDlg;
 
         @Override
@@ -135,7 +128,7 @@ public class PojavLoginActivity extends BaseActivity
 
             progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
             startupTextView = (TextView) startScr.findViewById(R.id.startscreen_text);
-            //startScr.addView(progress);
+
 
             AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this, R.style.AppTheme);
             startDlg.setView(startScr);
@@ -196,9 +189,7 @@ public class PojavLoginActivity extends BaseActivity
         {
             if (obj[0].equals("visible")) {
                 progress.setVisibility(View.VISIBLE);
-            } /* else if (obj.length == 2 && obj[1] != null) {
-                progressLog.append(obj[1]);
-            } */
+            }
         }
 
         @Override
@@ -208,9 +199,7 @@ public class PojavLoginActivity extends BaseActivity
             if (obj == 0) {
                 if (progDlg != null) progDlg.dismiss();
                 uiInit();
-            } /* else if (progressLog != null) {
-                progressLog.setText(getResources().getString(R.string.error_checklog, "\n\n" + progressLog.getText()));
-            } */
+            }
         }
     }
     
@@ -598,32 +587,18 @@ public class PojavLoginActivity extends BaseActivity
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
-                // unpackShell.writeToProcess("ln -s " + tarEntry.getName() + " " + tarEntry.getLinkName());
+
             } else if (tarEntry.isDirectory()) {
                 destPath.mkdirs();
                 destPath.setExecutable(true);
             } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
                 destPath.getParentFile().mkdirs();
                 destPath.createNewFile();
-                // destPath.setExecutable(true);
                 
                 FileOutputStream os = new FileOutputStream(destPath);
                 IOUtils.copy(tarIn, os);
                 os.close();
 
-/*
-                byte[] btoRead = new byte[2048];
-                BufferedOutputStream bout = 
-                    new BufferedOutputStream(new FileOutputStream(destPath));
-                int len = 0;
-
-                while((len = tarIn.read(btoRead)) != -1) {
-                    bout.write(btoRead,0,len);
-                }
-
-                bout.close();
-                btoRead = null;
-*/
             }
             tarEntry = tarIn.getNextTarEntry();
         }
@@ -638,23 +613,7 @@ public class PojavLoginActivity extends BaseActivity
              return file.mkdir();
         else return file.mkdirs();
     }
-    
-    /*
-    public void loginUsername(View view)
-    {
-        LinearLayout mainLaun = new LinearLayout(this);
-        LayoutInflater.from(this).inflate(R.layout.launcher_user, mainLaun, true);
-        replaceFonts(mainLaun);
-        
-        //edit1 = mainLaun.findViewById(R.id.launcherAccUsername);
-        
-        new AlertDialog.Builder(this)
-            .setTitle("Register with username")
-            .setView(mainLaun)
-            .show();
-        
-    }
-    */
+
     
     public void loginMicrosoft(View view) {
         CustomTabs.openTab(this,

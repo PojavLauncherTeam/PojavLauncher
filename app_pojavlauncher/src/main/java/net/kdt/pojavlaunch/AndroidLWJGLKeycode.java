@@ -172,13 +172,6 @@ public class AndroidLWJGLKeycode {
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
         try {
-                /*
-                if (keyEvent.isPrintingKey()) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
-                } else if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), keyEvent.getDisplayLabel(), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
-                }
-                */
                 //System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
                  if(keyEvent.getUnicodeChar() != 0) {
                      char key = (char)keyEvent.getUnicodeChar();
@@ -189,10 +182,6 @@ public class AndroidLWJGLKeycode {
         } catch (Throwable th) {
             th.printStackTrace();
         }
-
-        //if (isBackspaceAfterChar && (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
-        //    BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, 0, isDown);
-        //}
     }
 
     public static void execKeyIndex(BaseMainActivity mainActivity, int index) {

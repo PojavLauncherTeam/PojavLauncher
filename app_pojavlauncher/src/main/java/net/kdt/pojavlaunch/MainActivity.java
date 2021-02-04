@@ -2,8 +2,6 @@ package net.kdt.pojavlaunch;
 
 import android.os.*;
 import android.view.*;
-import android.view.View.*;
-import android.widget.*;
 
 import androidx.annotation.Nullable;
 
@@ -13,7 +11,6 @@ import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
 import org.lwjgl.glfw.*;
 import java.io.*;
-import com.google.gson.*;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 

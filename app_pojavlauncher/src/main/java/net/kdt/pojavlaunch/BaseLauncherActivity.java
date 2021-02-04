@@ -238,7 +238,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             } /*else throw new Exception();*/
         } catch(Throwable e) {
             e.printStackTrace();
-            // selectTabPage(tabLayout.getSelectedTabPosition());
         }
         System.out.println("call to onResumeFragments; E");
     }
