@@ -10,7 +10,6 @@ import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
 
-import androidx.annotation.RequiresApi;
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
@@ -661,12 +660,13 @@ public class BaseMainActivity extends LoggableActivity {
                         texture.setDefaultBufferSize((int)(width*scaleFactor),(int)(height*scaleFactor));
                         CallbackBridge.windowWidth = (int)(width*scaleFactor);
                         CallbackBridge.windowHeight = (int)(height*scaleFactor);
-                        //CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
+
+                        //Load Minecraft options:
                         MCOptionUtils.load();
                         MCOptionUtils.set("overrideWidth", ""+CallbackBridge.windowWidth);
                         MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
                         MCOptionUtils.save();
-                        calculateMcScale();
+                        getMcScale();
                         // Should we do that?
                         if (!isCalled) {
                             isCalled = true;
@@ -698,7 +698,7 @@ public class BaseMainActivity extends LoggableActivity {
                         CallbackBridge.windowWidth = (int)(width*scaleFactor);
                         CallbackBridge.windowHeight = (int)(height*scaleFactor);
                         CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
-                        calculateMcScale();
+                        getMcScale();
                     }
 
                     @Override
@@ -1025,7 +1025,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public int mcscale(int input) {
-        return this.guiScale * input;
+        return (int)((this.guiScale * input)/scaleFactor);
     }
 
     /*
@@ -1171,40 +1171,29 @@ public class BaseMainActivity extends LoggableActivity {
         return true;
     }
 
-    public void calculateMcScale() {
-        int scale = 1;
-        while (CallbackBridge.physicalWidth / (scale + 1) >= 320 && CallbackBridge.physicalHeight / (scale + 1) >= 240) {
-            scale++;
+    public void getMcScale() {
+        //Get the scale stored in game files, used auto scale if found or if the stored scaled is bigger than the authorized size.
+        String str = MCOptionUtils.get("guiScale");
+        this.guiScale = (str == null ? 0 :Integer.parseInt(str));
+        
+
+        int scale = Math.max(Math.min(CallbackBridge.windowWidth / 320, CallbackBridge.windowHeight / 240), 1);
+        if(scale < this.guiScale || guiScale == 0){
+            this.guiScale = scale;
         }
-        this.guiScale = scale;
     }
 
     public int handleGuiBar(int x, int y) {
         if (!CallbackBridge.isGrabbing()) return -1;
-        
-        int barheight = mcscale(20);
-        int barwidth = mcscale(180);
-        int barx = (CallbackBridge.physicalWidth / 2) - (barwidth / 2);
-        int bary = CallbackBridge.physicalHeight - barheight;
-        if (x < barx || x >= barx + barwidth || y < bary || y >= bary + barheight) {
-            return -1;
-        }
-        return hotbarKeys[((x - barx) / mcscale(180 / 9)) % 9];
-    }
-/*
-    public int handleGuiBar(int x, int y, MotionEvent e) {
-        if (!CallbackBridge.isGrabbing()) {
-            return -1;
-        }
 
-        // int screenHeight = CallbackBridge.windowHeight;
-        int barheight = mcscale(20);
-        int barwidth = mcscale(180);
-        int barx = (CallbackBridge.windowWidth / 2) - (barwidth / 2);
-        if (x < barx || x >= barx + barwidth || y < 0 || y >= 0 + barheight) {
+        int barHeight = mcscale(20);
+        int barWidth = mcscale(180);
+        int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
+        int barY = CallbackBridge.physicalHeight - barHeight;
+        if (x < barX || x >= barX + barWidth || y < barY || y >= barY + barHeight) {
             return -1;
         }
-        return hotbarKeys[((x - barx) / mcscale(20)) % 9];
+        return hotbarKeys[((x - barX) / mcscale(180 / 9)) % 9];
     }
-*/
+
 }
