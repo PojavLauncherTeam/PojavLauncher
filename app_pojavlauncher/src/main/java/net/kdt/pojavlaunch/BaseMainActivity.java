@@ -1193,20 +1193,5 @@ public class BaseMainActivity extends LoggableActivity {
         }
         return hotbarKeys[((x - barX) / mcscale(180 / 9)) % 9];
     }
-/*
-    public int handleGuiBar(int x, int y, MotionEvent e) {
-        if (!CallbackBridge.isGrabbing()) {
-            return -1;
-        }
 
-        // int screenHeight = CallbackBridge.windowHeight;
-        int barheight = mcscale(20);
-        int barwidth = mcscale(180);
-        int barx = (CallbackBridge.windowWidth / 2) - (barwidth / 2);
-        if (x < barx || x >= barx + barwidth || y < 0 || y >= 0 + barheight) {
-            return -1;
-        }
-        return hotbarKeys[((x - barx) / mcscale(20)) % 9];
-    }
-*/
 }
