@@ -105,15 +105,26 @@ public class MainActivity extends BaseMainActivity {
             }
         };
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    //FIXME Make sure the multithreading nature of this event doesn't cause any problems ?
+                    MCOptionUtils.load();
+                    getMcScale();
+                }
+            };
+        }else{
+            fileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    //FIXME Make sure the multithreading nature of this event doesn't cause any problems ?
+                    MCOptionUtils.load();
+                    getMcScale();
+                }
+            };
+        }
 
-        fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
-            @Override
-            public void onEvent(int i, @Nullable String s) {
-                //FIXME Make sure the multithreading nature of this event doesn't cause any problems ?
-                MCOptionUtils.load();
-                getMcScale();
-            }
-        };
         fileObserver.startWatching();
         
         ControlData[] specialButtons = ControlData.getSpecialButtons();
