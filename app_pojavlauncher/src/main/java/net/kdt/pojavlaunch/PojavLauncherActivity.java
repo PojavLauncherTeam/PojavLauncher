@@ -27,9 +27,13 @@ import androidx.viewpager.widget.ViewPager;
 import net.kdt.pojavlaunch.fragments.ConsoleFragment;
 import net.kdt.pojavlaunch.fragments.CrashFragment;
 import net.kdt.pojavlaunch.fragments.LauncherFragment;
+import net.kdt.pojavlaunch.fragments.ProfileEditorFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+import net.kdt.pojavlaunch.value.launcherprofiles.VersionProfileAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,7 +53,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private TextView tvUsernameView, tvConnectStatus;
     private Spinner accountSelector;
     private ViewPagerAdapter viewPageAdapter;
-    private final Button[] Tabs = new Button[4];
+    private final Button[] Tabs = new Button[5];
     private View selected;
 
     private Button switchUsrBtn, logoutBtn; // MineButtons
@@ -74,11 +78,13 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         mConsoleView = new ConsoleFragment();
         mCrashView = new CrashFragment();
+        mProfileEditView = new ProfileEditorFragment();
 
         viewPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPageAdapter.addFragment(new LauncherFragment(), 0, getString(R.string.mcl_tab_news));
         viewPageAdapter.addFragment(mConsoleView, 0, getString(R.string.mcl_tab_console));
         viewPageAdapter.addFragment(mCrashView, 0, getString(R.string.mcl_tab_crash));
+        viewPageAdapter.addFragment(mProfileEditView, 0, getString(R.string.mcl_tab_profiles));
         viewPageAdapter.addFragment(new LauncherPreferenceFragment(), 0, getString(R.string.mcl_option_settings));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -109,7 +115,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         Tabs[0] = findViewById(R.id.btnTab1);
         Tabs[1] = findViewById(R.id.btnTab2);
         Tabs[2] = findViewById(R.id.btnTab3);
-        Tabs[3] = findViewById(R.id.btnTab4);
+        Tabs[3] = findViewById(R.id.btnTab3_5);
+        Tabs[4] = findViewById(R.id.btnTab4);
 
 
         pickAccount();
@@ -178,8 +185,11 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }
 
         //mAvailableVersions;
-        ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
-        adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        LauncherProfiles.update();
+        MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
+        VersionProfileAdapter adapterVer = new VersionProfileAdapter(this,R.layout.version_profile_layout, profs);
+        //ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
+        //adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         mVersionSelector = (Spinner) findViewById(R.id.launchermain_spinner_version);
         mVersionSelector.setAdapter(adapterVer);
 

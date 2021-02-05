@@ -176,6 +176,7 @@
         android:id="@+id/launchermainTabPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:onClick="onTabClicked"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
@@ -321,6 +322,23 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnTab1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/launchermain_text_accountstatus" />
+
+    <Button
+        android:id="@+id/btnTab3.5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:drawableStart="@drawable/ic_menu_java"
+        android:onClick="onTabClicked"
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/mcl_tab_profiles"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTab3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,13 +11,15 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+import net.kdt.pojavlaunch.value.launcherprofiles.VersionProfileAdapter;
 
 import androidx.appcompat.widget.PopupMenu;
 
 public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<String>>
 {
     private BaseLauncherActivity mActivity;
-    
     public RefreshVersionListTask(BaseLauncherActivity activity) {
         mActivity = activity;
     }
@@ -45,21 +47,21 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
         popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());  
 
         if(result != null && result.size() > 0) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_spinner_item, result);
-            adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-            mActivity.mVersionSelector.setAdapter(adapter);
-            mActivity.mVersionSelector.setSelection(selectAt(result.toArray(new String[0]), mActivity.mProfile.selectedVersion));
+            LauncherProfiles.update();
+            MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
+            VersionProfileAdapter adapterVer = new VersionProfileAdapter(mActivity,R.layout.version_profile_layout, profs);
+            mActivity.mVersionSelector.setAdapter(adapterVer);
+            //mActivity.mVersionSelector.setSelection(selectAt(result.toArray(new String[0]), mActivity.mProfile.selectedVersion));
         } else {
-            mActivity.mVersionSelector.setSelection(selectAt(mActivity.mAvailableVersions, mActivity.mProfile.selectedVersion));
+            //mActivity.mVersionSelector.setSelection(selectAt(mActivity.mAvailableVersions, mActivity.mProfile.selectedVersion));
         }
         mActivity.mVersionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
 
                 @Override
                 public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
                 {
-                    String version = p1.getItemAtPosition(p3).toString();
+                    String version = ((MinecraftProfile)p1.getItemAtPosition(p3)).lastVersionId;
                     mActivity.mProfile.selectedVersion = version;
-
                     PojavProfile.setCurrentProfile(mActivity, mActivity.mProfile);
                     if (PojavProfile.isFileType(mActivity)) {
                         try {

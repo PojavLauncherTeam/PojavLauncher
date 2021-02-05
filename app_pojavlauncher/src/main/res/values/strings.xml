@@ -204,4 +204,7 @@
     <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory set to %d MB</string>
+    <string name="vp_latest_snapshot">Latest Snapshot</string>
+    <string name="vp_latest_release">Latest Release</string>
+    <string name="mcl_tab_profiles">Profiles</string>
 </resources>

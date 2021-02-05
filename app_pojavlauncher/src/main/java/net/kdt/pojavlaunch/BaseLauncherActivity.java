@@ -20,6 +20,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 	public Button mPlayButton;
 	public ConsoleFragment mConsoleView;
     public CrashFragment mCrashView;
+    public ProfileEditorFragment mProfileEditView;
     public ProgressBar mLaunchProgress;
 	public Spinner mVersionSelector;
 	public TextView mLaunchTextStatus, mTextVersion;

@@ -171,4 +171,7 @@
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
+    <string name="vp_latest_snapshot">Последний снапшот</string>
+    <string name="vp_latest_release">Последний релиз</string>
+    <string name="mcl_tab_profiles">Профили</string>
 </resources>
