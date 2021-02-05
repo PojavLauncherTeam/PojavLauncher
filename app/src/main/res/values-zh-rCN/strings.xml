@@ -89,7 +89,7 @@
     <string name="mcl_setting_title_controlsize">设定控制键大小</string>
     <string name="mcl_setting_title_forgetoptifpath">阻止 OptiFine 定位自身</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">可能使 OptiFine 在某些设备上可以启动。</string>
-    <string name="mcl_setting_category_general">通用设置</string>
+    <string name="mcl_setting_category_general">常规设置</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
