@@ -651,7 +651,7 @@ public class BaseMainActivity extends LoggableActivity {
                     });
             }
             minecraftGLView.setOnTouchListener(glTouchListener);
-            minecraftGLView.setOpaque(false);
+            minecraftGLView.setOpaque(true);
             minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
                 
                     private boolean isCalled = false;
