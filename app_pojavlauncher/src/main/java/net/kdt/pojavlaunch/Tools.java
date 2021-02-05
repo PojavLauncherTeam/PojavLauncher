@@ -431,7 +431,7 @@ public final class Tools
             public void run()
             {
                 final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
-                new AlertDialog.Builder((Context) ctx)
+                AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
                     .setTitle(titleId)
                     .setMessage(errMsg)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
@@ -473,8 +473,12 @@ public final class Tools
                         }
                     })
                     //.setNegativeButton("Report (not available)", null)
-                    .setCancelable(!exitIfOk)
-                    .show();
+                    .setCancelable(!exitIfOk);
+                try {
+                    builder.show();
+                } catch (Throwable th) {
+                    th.printStackTrace();
+                }
             }
         };
 
