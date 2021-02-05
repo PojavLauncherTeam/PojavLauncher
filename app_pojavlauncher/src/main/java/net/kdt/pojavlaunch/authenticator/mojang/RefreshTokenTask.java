@@ -5,6 +5,7 @@ import android.os.*;
 import com.google.gson.*;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.authenticator.mojang.yggdrasil.*;
@@ -17,18 +18,18 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     private RefreshListener listener;
     private MinecraftAccount profilePath;
 
-    private Context ctx;
+    private final WeakReference<Context> ctx;
     private ProgressDialog build;
 
     public RefreshTokenTask(Context ctx, RefreshListener listener) {
-        this.ctx = ctx;
+        this.ctx = new WeakReference<>(ctx);
         this.listener = listener;
     }
 
     @Override
     public void onPreExecute() {
-        build = new ProgressDialog(ctx);
-        build.setMessage(ctx.getString(R.string.global_waiting));
+        build = new ProgressDialog(ctx.get());
+        build.setMessage(ctx.get().getString(R.string.global_waiting));
         build.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         build.setCancelable(false);
         build.show();
