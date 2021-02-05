@@ -1004,8 +1004,13 @@ public class GLFW
 
 	public static void glfwDestroyWindow(long window) {
         // Check window exists
-        internalGetWindow(window);
-        mGLFWWindowMap.remove(window);
+        try {
+            internalGetWindow(window);
+            mGLFWWindowMap.remove(window);
+        } catch (IllegalArgumentException e) {
+            System.out.println("GLFW: Warning: failed to remove window " + window);
+            e.printStackTrace();
+        }
         nglfwSetShowingWindow(mGLFWWindowMap.size() == 0 ? 0 : mGLFWWindowMap.keyAt(mGLFWWindowMap.size() - 1));
     }
 
