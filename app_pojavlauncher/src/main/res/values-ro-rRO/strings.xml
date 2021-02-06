@@ -145,6 +145,9 @@
     <string name="customctrl_remove">Șterge %s?</string>
     <string name="customctrl_keyname">Cod cheie</string>
     <string name="customctrl_toggle">Comutabil</string>
+    <string name="customctrl_size">Dimensiune</string>
+    <string name="customctrl_size_width">Lățime</string>
+    <string name="customctrl_size_height">Înălţime</string>
     <string name="customctrl_dynamicpos">Poziție dinamică</string>
     <string name="customctrl_dynamicpos_x">Dinamica X</string>
     <string name="customctrl_dynamicpos_y">Dinamica Y</string>
