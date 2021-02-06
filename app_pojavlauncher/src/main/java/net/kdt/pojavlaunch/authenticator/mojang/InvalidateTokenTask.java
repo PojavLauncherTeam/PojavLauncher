@@ -4,6 +4,7 @@ import android.content.*;
 import android.os.*;
 import net.kdt.pojavlaunch.authenticator.mojang.yggdrasil.*;
 import java.io.*;
+import java.lang.ref.WeakReference;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.value.*;
@@ -13,11 +14,11 @@ public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
     //private Gson gson = new Gson();
     private MinecraftAccount profilePath;
 
-    private Context ctx;
+    private final WeakReference<Context> ctx;
     private String path;
 
     public InvalidateTokenTask(Context ctx) {
-        this.ctx = ctx;
+        this.ctx = new WeakReference<>(ctx);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
     @Override
     public void onPostExecute(Throwable result) {
         if (result != null) {
-            Tools.showError(ctx, result);
+            Tools.showError(ctx.get(), result);
         }
         new File(Tools.DIR_ACCOUNT_NEW + "/" + path + ".json").delete();
     }
