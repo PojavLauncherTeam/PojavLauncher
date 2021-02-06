@@ -74,7 +74,7 @@
     <string name="mcl_setting_subtitle_mousescale">更改虚拟鼠标的大小。</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
     <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
-    <string name="mcl_setting_category_general">通用设置</string>
+    <string name="mcl_setting_category_general">常规设置</string>
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">正式版</string>
