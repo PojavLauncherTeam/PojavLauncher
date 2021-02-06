@@ -42,61 +42,13 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     protected void onPostExecute(ArrayList<String> result)
     {
         super.onPostExecute(result);
-
-        final PopupMenu popup = new PopupMenu(mActivity, mActivity.mVersionSelector);  
-        popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());  
-
         if(result != null && result.size() > 0) {
-            LauncherProfiles.update();
-            MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
-            VersionProfileAdapter adapterVer = new VersionProfileAdapter(mActivity,R.layout.version_profile_layout, profs);
-            mActivity.mVersionSelector.setAdapter(adapterVer);
-            //mActivity.mVersionSelector.setSelection(selectAt(result.toArray(new String[0]), mActivity.mProfile.selectedVersion));
-        } else {
-            //mActivity.mVersionSelector.setSelection(selectAt(mActivity.mAvailableVersions, mActivity.mProfile.selectedVersion));
+            mActivity.mVersionStringList = result;
+            if(mActivity.mProfileEditView != null) {
+                mActivity.mProfileEditView.refreshVersions();
+            }
         }
-        mActivity.mVersionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
 
-                @Override
-                public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-                {
-                    String version = ((MinecraftProfile)p1.getItemAtPosition(p3)).lastVersionId;
-                    mActivity.mProfile.selectedVersion = version;
-                    PojavProfile.setCurrentProfile(mActivity, mActivity.mProfile);
-                    if (PojavProfile.isFileType(mActivity)) {
-                        try {
-                            PojavProfile.setCurrentProfile(mActivity, mActivity.mProfile.save());
-                        } catch (IOException e) {
-                            Tools.showError(mActivity, e);
-                        }
-                    }
-
-                    mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg, version));
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> p1)
-                {
-                    // TODO: Implement this method
-                }
-            });
-        mActivity.mVersionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-                @Override
-                public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
-                {
-                    // Implement copy, remove, reinstall,...
-                    popup.show();
-                    return true;
-                }
-            });
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
-                public boolean onMenuItemClick(MenuItem item) {  
-                    return true;  
-                }  
-            });  
-
-        mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg,mActivity.mVersionSelector.getSelectedItem()));
     }
     
     private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {

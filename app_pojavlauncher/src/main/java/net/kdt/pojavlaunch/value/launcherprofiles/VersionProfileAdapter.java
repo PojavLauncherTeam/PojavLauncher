@@ -37,7 +37,7 @@ public class VersionProfileAdapter extends ArrayAdapter<MinecraftProfile> {
         }else{
                 ((TextView)layout.findViewById(R.id.vprof_version_id_view)).setText(getItem(pos).lastVersionId);
         }
-        if(getItem(pos).icon != null && getItem(pos).icon.startsWith("data:")) ((ImageView)layout.findViewById(R.id.vprof_icon_view)).setImageBitmap(decodeIcon(pos));
+        if(getItem(pos).icon != null && getItem(pos).icon.startsWith("data:")) ((ImageView)layout.findViewById(R.id.vprof_icon_view)).setImageBitmap(decodeIcon(getItem(pos).icon));
         return layout;
     }
 
@@ -51,8 +51,8 @@ public class VersionProfileAdapter extends ArrayAdapter<MinecraftProfile> {
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         return prepareView(position,parent);
     }
-    private Bitmap decodeIcon(int verPos) {
-      byte[] image = Base64.decode(getItem(verPos).icon.split(",")[1],Base64.DEFAULT);
+    public static Bitmap decodeIcon(String icon) {
+      byte[] image = Base64.decode(icon.split(",")[1],Base64.DEFAULT);
       return BitmapFactory.decodeByteArray(image,0,image.length);
     }
 }

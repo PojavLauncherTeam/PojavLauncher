@@ -70,6 +70,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/versionRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalBottom"
@@ -113,6 +114,26 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineVerticalMiddle"
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalBottom"
         app:layout_constraintVertical_bias="0.529" />
+
+    <TextView
+        android:id="@+id/mineCurrentProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@android:string/unknownName"
+        app:layout_constraintBottom_toTopOf="@+id/profileRecyclerView"
+        app:layout_constraintStart_toEndOf="@+id/textViewProfiles"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mineCurrentVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@android:string/unknownName"
+        app:layout_constraintBottom_toTopOf="@+id/versionRecyclerView"
+        app:layout_constraintStart_toEndOf="@+id/textViewVersions"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

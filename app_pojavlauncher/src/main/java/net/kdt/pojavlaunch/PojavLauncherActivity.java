@@ -163,7 +163,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 // TODO: Implement this method
             }
         });
-        
+        /*
         List<String> versions = new ArrayList<String>();
         final File fVers = new File(Tools.DIR_HOME_VERSION);
 
@@ -183,7 +183,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         } finally {
             mAvailableVersions = versions.toArray(new String[0]);
         }
-
+        */
         //mAvailableVersions;
         LauncherProfiles.update();
         MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);

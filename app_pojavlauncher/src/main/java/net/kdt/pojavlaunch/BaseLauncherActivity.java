@@ -9,12 +9,19 @@ import android.widget.*;
 import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
+import java.util.ArrayList;
+
 import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.tasks.*;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.PopupMenu;
+
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+import net.kdt.pojavlaunch.value.launcherprofiles.VersionProfileAdapter;
 
 public abstract class BaseLauncherActivity extends BaseActivity {
 	public Button mPlayButton;
@@ -28,7 +35,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public JMinecraftVersionList mVersionList;
 	public MinecraftDownloaderTask mTask;
 	public MinecraftAccount mProfile;
-	public String[] mAvailableVersions;
+	public ArrayList<String> mVersionStringList;
     
 	public boolean mIsAssetsProcessing = false;
     protected boolean canBack = false;
@@ -192,6 +199,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
         }
         new RefreshVersionListTask(this).execute();
+        updateProfileList();
         System.out.println("call to onResumeFragments");
         try{
             final ProgressDialog barrier = new ProgressDialog(this);
@@ -248,6 +256,57 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(event);
     }
+    public void updateProfileList() {
+        final PopupMenu popup = new PopupMenu(this, this.mVersionSelector);
+        final BaseLauncherActivity thiz = this;
+        popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());
+        LauncherProfiles.update();
+        MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
+        VersionProfileAdapter adapterVer = new VersionProfileAdapter(this,R.layout.version_profile_layout, profs);
+        this.mVersionSelector.setAdapter(adapterVer);
 
+        this.mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
+            {
+                String version = ((MinecraftProfile)p1.getItemAtPosition(p3)).lastVersionId;
+                thiz.mProfile.selectedVersion = version;
+                PojavProfile.setCurrentProfile(thiz, thiz.mProfile);
+                if (PojavProfile.isFileType(thiz)) {
+                    try {
+                        PojavProfile.setCurrentProfile(thiz, thiz.mProfile.save());
+                    } catch (IOException e) {
+                        Tools.showError(thiz, e);
+                    }
+                }
+
+                thiz.mTextVersion.setText(thiz.getString(R.string.mcl_version_msg, version));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> p1)
+            {
+                // TODO: Implement this method
+            }
+        });
+        this.mVersionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
+            {
+                // Implement copy, remove, reinstall,...
+                popup.show();
+                return true;
+            }
+        });
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                return true;
+            }
+        });
+
+        this.mTextVersion.setText(this.getString(R.string.mcl_version_msg,this.mVersionSelector.getSelectedItem()));
+    }
     protected abstract void initTabs(int pageIndex);
 }
