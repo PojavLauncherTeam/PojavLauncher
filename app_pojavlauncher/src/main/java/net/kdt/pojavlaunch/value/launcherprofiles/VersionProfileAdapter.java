@@ -37,7 +37,9 @@ public class VersionProfileAdapter extends ArrayAdapter<MinecraftProfile> {
         }else{
                 ((TextView)layout.findViewById(R.id.vprof_version_id_view)).setText(getItem(pos).lastVersionId);
         }
-        if(getItem(pos).icon != null && getItem(pos).icon.startsWith("data:")) ((ImageView)layout.findViewById(R.id.vprof_icon_view)).setImageBitmap(decodeIcon(getItem(pos).icon));
+        if(getItem(pos).icon != null && getItem(pos).icon.startsWith("data:")){
+            ((ImageView)layout.findViewById(R.id.vprof_icon_view)).setImageBitmap(decodeIcon(getItem(pos).icon));
+        }
         return layout;
     }
 

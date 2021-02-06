@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.graphics.Bitmap;
 import android.text.*;
 import android.text.method.*;
 import android.view.*;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.prefs.*;
@@ -36,7 +39,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 	public MinecraftDownloaderTask mTask;
 	public MinecraftAccount mProfile;
 	public ArrayList<String> mVersionStringList;
-    
+    public static Map<String, Bitmap> versionIcons = new HashMap<>();
 	public boolean mIsAssetsProcessing = false;
     protected boolean canBack = false;
     

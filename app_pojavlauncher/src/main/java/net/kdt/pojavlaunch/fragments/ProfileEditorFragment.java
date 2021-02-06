@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +32,7 @@ public class ProfileEditorFragment extends Fragment {
     String currentProfile;
     String selectedVersion;
     Map<String,MinecraftProfile> profiles;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,8 +60,35 @@ public class ProfileEditorFragment extends Fragment {
         //refreshVersions();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("onPause");
+        if(getView() != null) {
+            RecyclerView v = getView().findViewById(R.id.profileRecyclerView);
+            v.setAdapter(new RecyclerView.Adapter() {
+                @NonNull
+                @Override
+                public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    return null;
+                }
+
+                @Override
+                public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+                }
+
+                @Override
+                public int getItemCount() {
+                    return 0;
+                }
+            });
+            System.gc();
+        }
+    }
+
     public void refreshVersions() {
-        if(getActivity() instanceof BaseLauncherActivity) {
+        if(getView() != null) if(getActivity() instanceof BaseLauncherActivity) {
             BaseLauncherActivity activity = (BaseLauncherActivity) getActivity();
             RecyclerView v = getView().findViewById(R.id.versionRecyclerView);
             if(!(v.getAdapter() instanceof RecyclerViewVersionAdapter)) {
@@ -68,6 +98,7 @@ public class ProfileEditorFragment extends Fragment {
             System.out.println("Updating...");
             ((RecyclerViewVersionAdapter) v.getAdapter()).itemList = activity.mVersionStringList;
             v.getAdapter().notifyDataSetChanged();
+            System.gc();
         }
     }
     public void refreshProfiles() {
@@ -81,6 +112,7 @@ public class ProfileEditorFragment extends Fragment {
         //System.out.println(LauncherProfiles.mainProfileJson.profiles.values().getClass().getName());
         ((ProfileRecyclerAdapter) v.getAdapter()).keys = profiles.keySet().toArray(new String[0]);
         v.getAdapter().notifyDataSetChanged();
+        System.gc();
     }
     public void selectProfile(String profile) {
         currentProfile = profile;
@@ -155,6 +187,7 @@ public class ProfileEditorFragment extends Fragment {
         ProfileClickListener lst;
         final ProfileEditorFragment host;
         String[] keys;
+
         public ProfileRecyclerAdapter(Context ctx,ProfileEditorFragment host) {
             this.ctx = ctx;
             lst = new ProfileClickListener();
@@ -186,7 +219,11 @@ public class ProfileEditorFragment extends Fragment {
                     ((TextView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_version_id_view)).setText(profileData.lastVersionId);
                 }
                 if(profileData.icon != null && profileData.icon.startsWith("data:")) {
-                    ((ImageView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_icon_view)).setImageBitmap(decodeIcon(profileData.icon));
+                    if(!BaseLauncherActivity.versionIcons.containsKey(keys[position])) {
+                        BaseLauncherActivity.versionIcons.put(keys[position], decodeIcon(profileData.icon));
+                    }
+                    ((ImageView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_icon_view)).setImageBitmap(BaseLauncherActivity.versionIcons.get(keys[position]));
+
                 }else{
                     ((ImageView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_icon_view)).setImageResource(R.drawable.ic_menu_java);
                 }
