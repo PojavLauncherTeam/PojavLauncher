@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.kdt.pojavlaunch.BaseLauncherActivity;
+import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
@@ -33,6 +34,11 @@ public class ProfileEditorFragment extends Fragment {
     String selectedVersion;
     Map<String,MinecraftProfile> profiles;
 
+    BaseLauncherActivity activity;
+    RecyclerView versionRecyclerView;
+    RecyclerView profileRecyclerView;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,8 +48,13 @@ public class ProfileEditorFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((RecyclerView)getView().findViewById(R.id.versionRecyclerView)).setLayoutManager(new LinearLayoutManager(getContext()));
-        ((RecyclerView)getView().findViewById(R.id.profileRecyclerView)).setLayoutManager(new LinearLayoutManager(getContext()));
+        versionRecyclerView = getView().findViewById(R.id.versionRecyclerView);
+        profileRecyclerView = getView().findViewById(R.id.profileRecyclerView);
+        activity = (BaseLauncherActivity) getActivity();
+
+        versionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        profileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         getView().findViewById(R.id.mineButtonSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,64 +71,37 @@ public class ProfileEditorFragment extends Fragment {
         //refreshVersions();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        System.out.println("onPause");
-        if(getView() != null) {
-            RecyclerView v = getView().findViewById(R.id.profileRecyclerView);
-            v.setAdapter(new RecyclerView.Adapter() {
-                @NonNull
-                @Override
-                public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                    return null;
-                }
-
-                @Override
-                public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-                }
-
-                @Override
-                public int getItemCount() {
-                    return 0;
-                }
-            });
-            System.gc();
-        }
-    }
 
     public void refreshVersions() {
-        if(getView() != null) if(getActivity() instanceof BaseLauncherActivity) {
-            BaseLauncherActivity activity = (BaseLauncherActivity) getActivity();
-            RecyclerView v = getView().findViewById(R.id.versionRecyclerView);
-            if(!(v.getAdapter() instanceof RecyclerViewVersionAdapter)) {
-                System.out.println("Created a new Adapter for profile version list!");
-                v.setAdapter(new RecyclerViewVersionAdapter(getContext(),this));
-            }
-            System.out.println("Updating...");
-            ((RecyclerViewVersionAdapter) v.getAdapter()).itemList = activity.mVersionStringList;
-            v.getAdapter().notifyDataSetChanged();
-            System.gc();
-        }
-    }
-    public void refreshProfiles() {
-        LauncherProfiles.update();
-        RecyclerView v = getView().findViewById(R.id.profileRecyclerView);
-        if(!(v.getAdapter() instanceof ProfileRecyclerAdapter)) {
+        if(activity == null) return;
+
+        if(versionRecyclerView.getAdapter() == null){
             System.out.println("Created a new Adapter for profile version list!");
-            v.setAdapter(new ProfileRecyclerAdapter(getContext(),this));
+            versionRecyclerView.setAdapter(new RecyclerViewVersionAdapter(getContext(),this));
         }
-        profiles = LauncherProfiles.mainProfileJson.profiles;
-        //System.out.println(LauncherProfiles.mainProfileJson.profiles.values().getClass().getName());
-        ((ProfileRecyclerAdapter) v.getAdapter()).keys = profiles.keySet().toArray(new String[0]);
-        v.getAdapter().notifyDataSetChanged();
+
+        System.out.println("Created a new Adapter for profile version list!");
+        ((RecyclerViewVersionAdapter)versionRecyclerView.getAdapter()).itemList = activity.mVersionStringList;
+        versionRecyclerView.getAdapter().notifyDataSetChanged();
         System.gc();
     }
+
+    public void refreshProfiles() {
+        LauncherProfiles.update();
+        if (profileRecyclerView.getAdapter() == null){
+            System.out.println("Created a new Adapter for profile version list!");
+            profileRecyclerView.setAdapter(new ProfileRecyclerAdapter(getContext(),this));
+        }
+        profiles = LauncherProfiles.mainProfileJson.profiles;
+        ((ProfileRecyclerAdapter) profileRecyclerView.getAdapter()).keys = profiles.keySet().toArray(new String[0]);
+        profileRecyclerView.getAdapter().notifyDataSetChanged();
+        System.gc();
+    }
+
     public void selectProfile(String profile) {
         currentProfile = profile;
         MinecraftProfile p = profiles.get(profile);
-        if(p.name != null && !p.name.isEmpty()) {
+        if(p.name != null) {
             ((EditText)getView().findViewById(R.id.mineEditTextProfileName)).setText(p.name);
             ((TextView)getView().findViewById(R.id.mineCurrentProfile)).setText(p.name);
         }else{
@@ -135,9 +119,11 @@ public class ProfileEditorFragment extends Fragment {
             refreshProfiles();
         }
     }
-    static TypedValue selectableItemBackground;
+
+
     public static class RecyclerViewVersionAdapter extends RecyclerView.Adapter {
         final Context ctx;
+
         List<String> itemList;
         final ProfileEditorFragment host;
         public RecyclerViewVersionAdapter(Context ctx, ProfileEditorFragment host) {
@@ -168,20 +154,18 @@ public class ProfileEditorFragment extends Fragment {
         public int getItemCount() {
             return itemList.size();
         }
+
         public static class ViewHolder extends RecyclerView.ViewHolder {
             View v;
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                if(selectableItemBackground == null) {
-                    selectableItemBackground = new TypedValue();
-                    itemView.getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, selectableItemBackground, true);
-                }
-                itemView.setBackground(itemView.getContext().getDrawable(selectableItemBackground.resourceId));
-                //itemView.setBackgroundResource(android.R.attr.selectableItemBackground);
                 this.v = itemView;
             }
         }
+
+
     }
+
     public static class ProfileRecyclerAdapter extends RecyclerView.Adapter {
         final Context ctx;
         ProfileClickListener lst;
@@ -223,7 +207,6 @@ public class ProfileEditorFragment extends Fragment {
                         BaseLauncherActivity.versionIcons.put(keys[position], decodeIcon(profileData.icon));
                     }
                     ((ImageView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_icon_view)).setImageBitmap(BaseLauncherActivity.versionIcons.get(keys[position]));
-
                 }else{
                     ((ImageView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_icon_view)).setImageResource(R.drawable.ic_menu_java);
                 }
