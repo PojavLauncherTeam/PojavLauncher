@@ -177,6 +177,9 @@
     
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Toggleable</string>
+    <string name="customctrl_size">Size</string>
+    <string name="customctrl_size_width">Width</string>
+    <string name="customctrl_size_height">Height</string>
     
     <string name="customctrl_dynamicpos">Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>
