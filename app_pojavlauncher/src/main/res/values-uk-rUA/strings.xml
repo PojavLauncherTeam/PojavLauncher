@@ -153,6 +153,9 @@
     <string name="customctrl_remove">Видалити «%s»?</string>
     <string name="customctrl_keyname">Код клавіші</string>
     <string name="customctrl_toggle">Перемикач</string>
+    <string name="customctrl_size">Розмір</string>
+    <string name="customctrl_size_width">Ширина</string>
+    <string name="customctrl_size_height">Висота</string>
     <string name="customctrl_dynamicpos">Динамічне розташування</string>
     <string name="customctrl_dynamicpos_x">Динаміка Х</string>
     <string name="customctrl_dynamicpos_y">Динаміка Y</string>
