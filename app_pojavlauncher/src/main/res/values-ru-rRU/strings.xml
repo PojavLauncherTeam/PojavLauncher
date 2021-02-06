@@ -153,6 +153,9 @@
     <string name="customctrl_remove">Удалить «%s»?</string>
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_toggle">Переключаемый</string>
+    <string name="customctrl_size">Размер</string>
+    <string name="customctrl_size_width">Ширина</string>
+    <string name="customctrl_size_height">Высота</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
