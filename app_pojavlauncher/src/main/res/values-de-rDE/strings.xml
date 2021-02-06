@@ -153,6 +153,9 @@
     <string name="customctrl_remove">Soll %s entfernt werden?</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Umschaltbar</string>
+    <string name="customctrl_size">Größe</string>
+    <string name="customctrl_size_width">Breite</string>
+    <string name="customctrl_size_height">Höhe</string>
     <string name="customctrl_dynamicpos">Dynamische Position</string>
     <string name="customctrl_dynamicpos_x">Dynamische X-Achse</string>
     <string name="customctrl_dynamicpos_y">Dynamische Y-Achse</string>
