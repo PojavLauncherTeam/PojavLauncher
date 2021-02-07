@@ -4,43 +4,60 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.R;
 
-public class VersionProfileAdapter extends ArrayAdapter<MinecraftProfile> {
+public class VersionProfileAdapter extends BaseAdapter {
     final Context ctx;
-    public VersionProfileAdapter(@NonNull Context context, int resource, @NonNull MinecraftProfile[] objects) {
-        super(context, resource, objects);
-        this.ctx = context;
+    String[] profileKeys;
+    public VersionProfileAdapter(Context ctx) {
+        this.ctx = ctx;
+        profileKeys = LauncherProfiles.mainProfileJson.profiles.keySet().toArray(new String[0]);
     }
-    public VersionProfileAdapter(@NonNull Context context, int resource,int r2, @NonNull MinecraftProfile[] objects) {
-        super(context, resource,r2, objects);
-        this.ctx = context;
-    }
+
     private View prepareView(int pos, ViewGroup parent) {
         View layout = ((Activity)ctx).getLayoutInflater().inflate(R.layout.version_profile_layout,parent,false);
-        if(getItem(pos).name != null && !getItem(pos).name.isEmpty()) ((TextView)layout.findViewById(R.id.vprof_profile_name_view)).setText(getItem(pos).name);
-        if(getItem(pos).lastVersionId.equals("latest-snapshot")) {
+        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(profileKeys[pos]);
+        if(prof.name != null && !prof.name.isEmpty()) ((TextView)layout.findViewById(R.id.vprof_profile_name_view)).setText(prof.name);
+        if(prof.lastVersionId.equals("latest-snapshot")) {
                 ((TextView) layout.findViewById(R.id.vprof_version_id_view)).setText(R.string.vp_latest_snapshot);
-        }else if(getItem(pos).lastVersionId.equals("latest-release")) {
+        }else if(prof.lastVersionId.equals("latest-release")) {
                 ((TextView)layout.findViewById(R.id.vprof_version_id_view)).setText(R.string.vp_latest_release);
         }else{
-                ((TextView)layout.findViewById(R.id.vprof_version_id_view)).setText(getItem(pos).lastVersionId);
+                ((TextView)layout.findViewById(R.id.vprof_version_id_view)).setText(prof.lastVersionId);
         }
-        if(getItem(pos).icon != null && getItem(pos).icon.startsWith("data:")){
-            ((ImageView)layout.findViewById(R.id.vprof_icon_view)).setImageBitmap(decodeIcon(getItem(pos).icon));
+        if(prof.icon != null && prof.icon.startsWith("data:")){
+            if(!BaseLauncherActivity.versionIcons.containsKey(profileKeys[pos])) {
+                BaseLauncherActivity.versionIcons.put(profileKeys[pos], decodeIcon(prof.icon));
+            }
+            ((ImageView)layout.findViewById(R.id.vprof_icon_view)).setImageBitmap(BaseLauncherActivity.versionIcons.get(profileKeys[pos]));
         }
         return layout;
+    }
+
+    @Override
+    public int getCount() {
+        return profileKeys.length;
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return LauncherProfiles.mainProfileJson.profiles.get(profileKeys[i]);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
     }
 
     @NonNull

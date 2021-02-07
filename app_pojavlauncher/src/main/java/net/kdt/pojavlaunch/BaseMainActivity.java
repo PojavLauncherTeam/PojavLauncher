@@ -861,6 +861,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     // private FileObserver mLogObserver;
     private void runCraft() throws Throwable {
+        System.gc();
         /* Old logger
         if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
             currLogFile = JREUtils.redirectStdio(true);

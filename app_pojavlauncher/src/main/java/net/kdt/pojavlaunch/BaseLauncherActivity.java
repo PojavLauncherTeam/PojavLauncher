@@ -265,7 +265,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());
         LauncherProfiles.update();
         MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
-        VersionProfileAdapter adapterVer = new VersionProfileAdapter(this,R.layout.version_profile_layout, profs);
+        VersionProfileAdapter adapterVer = new VersionProfileAdapter(this);
         this.mVersionSelector.setAdapter(adapterVer);
 
         this.mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){

@@ -75,7 +75,7 @@ public class ProfileEditorFragment extends Fragment {
     public void refreshVersions() {
         if(activity == null) return;
 
-        if(versionRecyclerView.getAdapter() == null){
+        if(!(versionRecyclerView.getAdapter() instanceof RecyclerViewVersionAdapter)){
             System.out.println("Created a new Adapter for profile version list!");
             versionRecyclerView.setAdapter(new RecyclerViewVersionAdapter(getContext(),this));
         }
@@ -88,7 +88,7 @@ public class ProfileEditorFragment extends Fragment {
 
     public void refreshProfiles() {
         LauncherProfiles.update();
-        if (profileRecyclerView.getAdapter() == null){
+        if (!(profileRecyclerView.getAdapter() instanceof ProfileRecyclerAdapter)){
             System.out.println("Created a new Adapter for profile version list!");
             profileRecyclerView.setAdapter(new ProfileRecyclerAdapter(getContext(),this));
         }
