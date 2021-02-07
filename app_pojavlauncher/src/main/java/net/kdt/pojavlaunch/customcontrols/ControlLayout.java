@@ -70,7 +70,7 @@ public class ControlLayout extends FrameLayout
 		final ControlButton view = new ControlButton(this, controlButton);
 		view.setModifiable(mModifiable);
         if (!mModifiable) {
-            view.setAlpha(1f - view.getProperties().transparency / 100);
+            view.setAlpha(1f - view.getProperties().transparency / 100f);
 			view.setFocusable(false);
 			view.setFocusableInTouchMode(false);
         }
@@ -116,7 +116,7 @@ public class ControlLayout extends FrameLayout
 				ControlButton cv = ((ControlButton) v);
 				cv.setModifiable(z);
                 if (!z) {
-				    cv.setAlpha(1f - cv.getProperties().transparency / 100);
+				    cv.setAlpha(1f - cv.getProperties().transparency / 100f);
                 }
 			}
 		}

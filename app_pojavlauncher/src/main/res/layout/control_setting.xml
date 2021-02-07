@@ -30,11 +30,11 @@
 			android:singleLine="true"
 			android:id="@+id/controlsetting_edit_name"/>
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/customctrl_transparency_bg"/>
-        
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/customctrl_transparency_bg"/>
+
 		<SeekBar
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
@@ -45,6 +45,41 @@
 			android:layout_width="match_parent"
 			android:text="@string/customctrl_toggle"
 			android:id="@+id/controlsetting_checkbox_toggle"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/customctrl_size"/>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1.0"
+				android:id="@+id/controlsetting_edit_width"
+				android:hint="@string/customctrl_size_width"
+				android:inputType="numberDecimal"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="×"
+				android:gravity="center"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1.0"
+				android:id="@+id/controlsetting_edit_height"
+				android:hint="@string/customctrl_size_height"
+				android:inputType="numberDecimal"/>
+
+		</LinearLayout>
 
 		<CheckBox
 			android:layout_height="wrap_content"

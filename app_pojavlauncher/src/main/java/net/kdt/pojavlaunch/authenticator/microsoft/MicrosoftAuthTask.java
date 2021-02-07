@@ -5,6 +5,7 @@ import android.content.*;
 import android.os.*;
 import android.util.*;
 
+import java.lang.ref.WeakReference;
 import java.net.*;
 import java.text.*;
 import java.util.*;
@@ -29,20 +30,20 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
 */
 
     //private Gson gson = new Gson();
-    private RefreshListener listener;
+    private final RefreshListener listener;
 
-    private Context ctx;
+    private final WeakReference<Context> ctx;
     private ProgressDialog build;
 
     public MicrosoftAuthTask(Context ctx, RefreshListener listener) {
-        this.ctx = ctx;
+        this.ctx = new WeakReference<>(ctx);
         this.listener = listener;
     }
 
     @Override
     public void onPreExecute() {
-        build = new ProgressDialog(ctx);
-        build.setMessage(ctx.getString(R.string.global_waiting));
+        build = new ProgressDialog(ctx.get());
+        build.setMessage(ctx.get().getString(R.string.global_waiting));
         build.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         build.setCancelable(false);
         build.setMax(6);
