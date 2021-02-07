@@ -154,6 +154,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             statusIsLaunching(false);
         } else if (canBack) {
             v.setEnabled(false);
+            //Tools.setCustomGameDir(Tools.DIR_GAME_HOME+"/pojav_aux_test");
             mTask = new MinecraftDownloaderTask(this);
             mTask.execute(mProfile.selectedVersion);
             mCrashView.resetCrashLog = true;
@@ -264,7 +265,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         final BaseLauncherActivity thiz = this;
         popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());
         LauncherProfiles.update();
-        MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
         VersionProfileAdapter adapterVer = new VersionProfileAdapter(this);
         this.mVersionSelector.setAdapter(adapterVer);
 

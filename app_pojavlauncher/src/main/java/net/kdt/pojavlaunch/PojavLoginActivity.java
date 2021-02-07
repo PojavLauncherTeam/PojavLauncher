@@ -606,7 +606,7 @@ public class PojavLoginActivity extends BaseActivity
         tarIn.close();
     }
     
-    private static boolean mkdirs(String path)
+    public static boolean mkdirs(String path)
     {
         File file = new File(path);
         // check necessary???

@@ -42,7 +42,7 @@ public final class Tools
     public static String DIR_ACCOUNT_NEW;
     public static String DIR_ACCOUNT_OLD;
     public static final String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
-    public static final String DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
+    public static String DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
     public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
     
     // New since 3.0.0
@@ -50,13 +50,13 @@ public final class Tools
     public static String DIRNAME_HOME_JRE = "lib";
 
     // New since 2.4.2
-    public static final String DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
-    public static final String DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
+    public static String DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
+    public static String DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
 
-    public static final String DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
+    public static String DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
 
-    public static final String ASSETS_PATH = DIR_GAME_NEW + "/assets";
-    public static final String OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
+    public static String ASSETS_PATH = DIR_GAME_NEW + "/assets";
+    public static String OBSOLETE_RESOURCES_PATH = DIR_GAME_NEW + "/resources";
     public static final String CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
     public static final String CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
     
@@ -847,5 +847,16 @@ public final class Tools
             Tools.updateWindowSize(ctx);
         }
     }
-
+    public static void setCustomGameDir(String directory) {
+        DIR_GAME_NEW = directory;
+        DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
+        DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
+        DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
+        ASSETS_PATH = DIR_GAME_NEW + "/assets";
+        OBSOLETE_RESOURCES_PATH = DIR_GAME_NEW + "/resources";
+        PojavLoginActivity.mkdirs(DIR_HOME_VERSION);
+        PojavLoginActivity.mkdirs(DIR_HOME_LIBRARY);
+        PojavLoginActivity.mkdirs(DIR_HOME_CRASH);
+        PojavLoginActivity.mkdirs(ASSETS_PATH);
+    }
 }

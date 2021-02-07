@@ -1009,22 +1009,6 @@ public class BaseMainActivity extends LoggableActivity {
                 }
             });
     }
-
-    public String getMinecraftOption(String key) {
-        try {
-            String[] options = Tools.read(Tools.DIR_GAME_NEW + "/options.txt").split("\n");
-            for (String option : options) {
-                String[] optionKeyValue = option.split(":");
-                if (optionKeyValue[0].equals(key)) {
-                    return optionKeyValue[1];
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
     public int mcscale(int input) {
         return (int)((this.guiScale * input)/scaleFactor);
     }
