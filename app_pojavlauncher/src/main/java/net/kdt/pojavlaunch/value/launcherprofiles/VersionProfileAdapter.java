@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 
 import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.fragments.ProfileEditorFragment;
 
 public class VersionProfileAdapter extends BaseAdapter {
     final Context ctx;
@@ -29,12 +30,14 @@ public class VersionProfileAdapter extends BaseAdapter {
         View layout = ((Activity)ctx).getLayoutInflater().inflate(R.layout.version_profile_layout,parent,false);
         MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(profileKeys[pos]);
         if(prof.name != null && !prof.name.isEmpty()) ((TextView)layout.findViewById(R.id.vprof_profile_name_view)).setText(prof.name);
-        if(prof.lastVersionId.equals("latest-snapshot")) {
+        if(prof.lastVersionId != null) {if(prof.lastVersionId.equals("latest-snapshot")) {
                 ((TextView) layout.findViewById(R.id.vprof_version_id_view)).setText(R.string.vp_latest_snapshot);
         }else if(prof.lastVersionId.equals("latest-release")) {
                 ((TextView)layout.findViewById(R.id.vprof_version_id_view)).setText(R.string.vp_latest_release);
         }else{
                 ((TextView)layout.findViewById(R.id.vprof_version_id_view)).setText(prof.lastVersionId);
+        }}else{
+            ((TextView) (layout.findViewById(R.id.vprof_version_id_view))).setText(android.R.string.unknownName);
         }
         if(prof.icon != null && prof.icon.startsWith("data:")){
             if(!BaseLauncherActivity.versionIcons.containsKey(profileKeys[pos])) {

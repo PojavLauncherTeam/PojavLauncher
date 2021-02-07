@@ -195,12 +195,14 @@ public class ProfileEditorFragment extends Fragment {
                 }else{
                     ((TextView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_profile_name_view)).setText(android.R.string.unknownName);
                 }
-                if(profileData.lastVersionId.equals("latest-snapshot")) {
+                if(profileData.lastVersionId != null) {if(profileData.lastVersionId.equals("latest-snapshot")) {
                     ((TextView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_version_id_view)).setText(R.string.vp_latest_snapshot);
                 }else if(profileData.lastVersionId.equals("latest-release")) {
                     ((TextView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_version_id_view)).setText(R.string.vp_latest_release);
                 }else{
                     ((TextView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_version_id_view)).setText(profileData.lastVersionId);
+                }}else {
+                    ((TextView) ((RecyclerViewVersionAdapter.ViewHolder) holder).v.findViewById(R.id.vprof_version_id_view)).setText(android.R.string.unknownName);
                 }
                 if(profileData.icon != null && profileData.icon.startsWith("data:")) {
                     if(!BaseLauncherActivity.versionIcons.containsKey(keys[position])) {
