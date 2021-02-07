@@ -164,7 +164,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
                 
-            logFile = new File(Tools.DIR_GAME_NEW, "latestlog.txt");
+            logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
             logStream = new PrintStream(logFile.getAbsolutePath());

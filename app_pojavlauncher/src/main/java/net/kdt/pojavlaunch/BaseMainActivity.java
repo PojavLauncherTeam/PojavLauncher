@@ -120,7 +120,7 @@ public class BaseMainActivity extends LoggableActivity {
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             
-            logFile = new File(Tools.DIR_GAME_NEW, "latestlog.txt");
+            logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
             logStream = new PrintStream(logFile.getAbsolutePath());
@@ -931,7 +931,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     private void checkLWJGL3Installed() {
-        File lwjgl3dir = new File(Tools.DIR_GAME_NEW, "lwjgl3");
+        File lwjgl3dir = new File(Tools.DIR_GAME_HOME, "lwjgl3");
         if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {
             appendlnToLog("Error: LWJGL3 was not installed!");
             throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
