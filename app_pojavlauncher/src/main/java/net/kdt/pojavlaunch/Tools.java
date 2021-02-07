@@ -57,8 +57,8 @@ public final class Tools
 
     public static final String ASSETS_PATH = DIR_GAME_NEW + "/assets";
     public static final String OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
-    public static final String CTRLMAP_PATH = DIR_GAME_NEW + "/controlmap";
-    public static final String CTRLDEF_FILE = DIR_GAME_NEW + "/controlmap/default.json";
+    public static final String CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
+    public static final String CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
     
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
@@ -105,7 +105,7 @@ public final class Tools
 
         StringBuilder cacioClasspath = new StringBuilder();
         cacioClasspath.append("-Xbootclasspath/p");
-        File cacioDir = new File(DIR_GAME_NEW + "/caciocavallo");
+        File cacioDir = new File(DIR_GAME_HOME + "/caciocavallo");
         if (cacioDir.exists() && cacioDir.isDirectory()) {
             for (File file : cacioDir.listFiles()) {
                 if (file.getName().endsWith(".jar")) {
@@ -262,7 +262,7 @@ public final class Tools
 
     private static String getLWJGL3ClassPath() {
         StringBuilder libStr = new StringBuilder();
-        File lwjgl3Folder = new File(Tools.DIR_GAME_NEW, "lwjgl3");
+        File lwjgl3Folder = new File(Tools.DIR_GAME_HOME, "lwjgl3");
         if (/* info.arguments != null && */ lwjgl3Folder.exists()) {
             for (File file: lwjgl3Folder.listFiles()) {
                 if (file.getName().endsWith(".jar")) {

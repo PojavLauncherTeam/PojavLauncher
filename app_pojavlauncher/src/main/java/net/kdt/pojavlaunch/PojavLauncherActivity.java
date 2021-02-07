@@ -186,7 +186,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         */
         //mAvailableVersions;
         LauncherProfiles.update();
-        MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
+        //MinecraftProfile[] profs = LauncherProfiles.mainProfileJson.profiles.values().toArray(new MinecraftProfile[0]);
         VersionProfileAdapter adapterVer = new VersionProfileAdapter(this);
         //ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
         //adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);

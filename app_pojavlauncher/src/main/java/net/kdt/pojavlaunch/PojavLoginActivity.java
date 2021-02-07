@@ -326,7 +326,7 @@ public class PojavLoginActivity extends BaseActivity
     }
    
     private void unpackComponent(AssetManager am, String component) throws IOException {
-        File versionFile = new File(Tools.DIR_GAME_NEW + "/" + component + "/version");
+        File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
         InputStream is = am.open("components/" + component + "/version");
         if(!versionFile.exists()) {
             if (versionFile.getParentFile().exists() && versionFile.getParentFile().isDirectory()) {
@@ -337,7 +337,7 @@ public class PojavLoginActivity extends BaseActivity
             Log.i("UnpackPrep", component + ": Pack was installed manually, or does not exist, unpacking new...");
             String[] fileList = am.list("components/" + component);
             for(String s : fileList) {
-                Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_NEW + "/" + component, true);
+                Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_HOME + "/" + component, true);
             }
         } else {
             FileInputStream fis = new FileInputStream(versionFile);
@@ -351,28 +351,15 @@ public class PojavLoginActivity extends BaseActivity
                 
                 String[] fileList = am.list("components/" + component);
                 for (String s : fileList) {
-                    Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_NEW + "/" + component, true);
+                    Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_HOME + "/" + component, true);
                 }
             } else {
                 Log.i("UnpackPrep", component + ": Pack is up-to-date with the launcher, continuing...");
             }
         }
     }
-    
-    private void initMain() throws Throwable {
-        mkdirs(Tools.DIR_ACCOUNT_NEW);
-        PojavMigrator.migrateAccountData(this);
-        
-        mkdirs(Tools.DIR_GAME_HOME);
-        if (!PojavMigrator.migrateGameDir()) {
-            mkdirs(Tools.DIR_GAME_NEW);
-            mkdirs(Tools.DIR_GAME_NEW + "/config");
-            mkdirs(Tools.DIR_GAME_NEW + "/lwjgl3");
-            mkdirs(Tools.DIR_GAME_NEW + "/mods");
-            mkdirs(Tools.DIR_HOME_VERSION);
-            mkdirs(Tools.DIR_HOME_LIBRARY);
-        }
-        
+    public static void disableSplash() {
+        mkdirs(Tools.DIR_GAME_NEW + "/config");
         File forgeSplashFile = new File(Tools.DIR_GAME_NEW, "config/splash.properties");
         String forgeSplashContent = "enabled=true";
         try {
@@ -381,21 +368,35 @@ public class PojavLoginActivity extends BaseActivity
             }
             if (forgeSplashContent.contains("enabled=true")) {
                 Tools.write(forgeSplashFile.getAbsolutePath(),
-                    forgeSplashContent.replace("enabled=true", "enabled=false"));
+                        forgeSplashContent.replace("enabled=true", "enabled=false"));
             }
         } catch (IOException e) {
             Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
         }
+    }
+    private void initMain() throws Throwable {
+        mkdirs(Tools.DIR_ACCOUNT_NEW);
+        PojavMigrator.migrateAccountData(this);
         
+        mkdirs(Tools.DIR_GAME_HOME);
+        mkdirs(Tools.DIR_GAME_HOME + "/lwjgl3");
+        mkdirs(Tools.DIR_GAME_HOME + "/config");
+        if (!PojavMigrator.migrateGameDir()) {
+            mkdirs(Tools.DIR_GAME_NEW);
+            mkdirs(Tools.DIR_GAME_NEW + "/mods");
+            mkdirs(Tools.DIR_HOME_VERSION);
+            mkdirs(Tools.DIR_HOME_LIBRARY);
+        }
+
         mkdirs(Tools.CTRLMAP_PATH);
         
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
             Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar",
-                Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
+                Tools.DIR_GAME_HOME + "/config", "forge-installer-headless.jar", true);
             Tools.copyAssetFile(this, "components/OptiInst.jar",
-                    Tools.DIR_GAME_NEW + "/config", "OptiInst.jar", true);
+                    Tools.DIR_GAME_HOME + "/config", "OptiInst.jar", true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
@@ -605,7 +606,7 @@ public class PojavLoginActivity extends BaseActivity
         tarIn.close();
     }
     
-    private boolean mkdirs(String path)
+    private static boolean mkdirs(String path)
     {
         File file = new File(path);
         // check necessary???

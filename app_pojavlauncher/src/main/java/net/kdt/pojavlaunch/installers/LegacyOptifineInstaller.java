@@ -14,6 +14,6 @@ public class LegacyOptifineInstaller extends BaseInstaller {
         mJarFile.close();
         ctx.appendlnToLog("Launching JVM");
         return ctx.launchJavaRuntime(null,
-                "-jar "+Tools.DIR_GAME_NEW+"/config/OptiInst.jar " + mFile.getAbsolutePath() +" .");
+                "-jar "+Tools.DIR_GAME_HOME+"/config/OptiInst.jar " + mFile.getAbsolutePath() +" .");
     }
 }
