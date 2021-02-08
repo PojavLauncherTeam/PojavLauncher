@@ -67,6 +67,7 @@ public final class Tools
 
     public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile,MinecraftProfile gameProfile) throws Throwable {
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,gameProfile.lastVersionId);
+        PojavLoginActivity.disableSplash(gameProfile.gameDir);
         String[] launchArgs = getMinecraftArgs(profile,gameProfile, versionInfo);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
