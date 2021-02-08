@@ -101,19 +101,31 @@
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/mineButtonSave"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/mine_button_background"
         android:onClick="launchGame"
         android:text="@string/mcl_profile_editor_save"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="@+id/guidelineVerticalMiddle"
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalBottom"
         app:layout_constraintVertical_bias="0.529" />
+
+    <com.kdt.mcgui.MineButton
+        android:id="@+id/mineButtonNew"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/mine_button_background"
+        android:text="New"
+        app:layout_constraintBottom_toBottomOf="@+id/mineButtonSave"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVerticalMiddle"
+        app:layout_constraintTop_toTopOf="@+id/mineButtonSave" />
 
     <TextView
         android:id="@+id/mineCurrentProfile"

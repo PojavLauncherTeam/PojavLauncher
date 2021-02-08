@@ -1,8 +1,7 @@
 {
   "profiles": {
     "(Default)": {
-      "name": "(Default)",
-      "lastVersionId": "Unknown"
+      "name": "(Default)"
     }
   },
   "selectedProfile": "(Default)"

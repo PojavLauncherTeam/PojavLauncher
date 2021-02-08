@@ -22,7 +22,7 @@ public class PojavMigrator
                     newAccStruct.clientToken = oldAccStruct.getClientID();
                     newAccStruct.isMicrosoft = false;
                     newAccStruct.profileId = oldAccStruct.getProfileID();
-                    newAccStruct.selectedVersion = oldAccStruct.getVersion();
+                    //newAccStruct.selectedVersion = oldAccStruct.getVersion();
                     newAccStruct.username = oldAccStruct.getUsername();
                     newAccStruct.save();
                 } catch (IOException e) {

@@ -11,6 +11,7 @@ import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -156,7 +157,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             v.setEnabled(false);
             //Tools.setCustomGameDir(Tools.DIR_GAME_HOME+"/pojav_aux_test");
             mTask = new MinecraftDownloaderTask(this);
-            mTask.execute(mProfile.selectedVersion);
+            mTask.execute(LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile).lastVersionId);
             mCrashView.resetCrashLog = true;
         }
     }
@@ -267,6 +268,10 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         LauncherProfiles.update();
         VersionProfileAdapter adapterVer = new VersionProfileAdapter(this);
         this.mVersionSelector.setAdapter(adapterVer);
+        int selectedProfile = Arrays.binarySearch(adapterVer.profileKeys,mProfile.selectedProfile);
+        if(selectedProfile > -1) {
+            this.mVersionSelector.setSelection(selectedProfile);
+        }
 
         this.mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
@@ -274,7 +279,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
             {
                 String version = ((MinecraftProfile)p1.getItemAtPosition(p3)).lastVersionId;
-                thiz.mProfile.selectedVersion = version;
+                thiz.mProfile.selectedProfile = ((VersionProfileAdapter)p1.getAdapter()).profileKeys[p3];
                 PojavProfile.setCurrentProfile(thiz, thiz.mProfile);
                 if (PojavProfile.isFileType(thiz)) {
                     try {

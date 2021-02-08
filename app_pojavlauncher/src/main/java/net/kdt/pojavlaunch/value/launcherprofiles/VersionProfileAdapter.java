@@ -20,9 +20,10 @@ import net.kdt.pojavlaunch.fragments.ProfileEditorFragment;
 
 public class VersionProfileAdapter extends BaseAdapter {
     final Context ctx;
-    String[] profileKeys;
+    public String[] profileKeys;
     public VersionProfileAdapter(Context ctx) {
         this.ctx = ctx;
+        LauncherProfiles.update();
         profileKeys = LauncherProfiles.mainProfileJson.profiles.keySet().toArray(new String[0]);
     }
 
@@ -76,5 +77,8 @@ public class VersionProfileAdapter extends BaseAdapter {
     public static Bitmap decodeIcon(String icon) {
       byte[] image = Base64.decode(icon.split(",")[1],Base64.DEFAULT);
       return BitmapFactory.decodeByteArray(image,0,image.length);
+    }
+    public void update() {
+        notifyDataSetChanged();
     }
 }

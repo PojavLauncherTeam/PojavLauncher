@@ -20,8 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.tasks.RefreshVersionListTask;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+import net.kdt.pojavlaunch.value.launcherprofiles.VersionProfileAdapter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +44,7 @@ public class ProfileEditorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        new RefreshVersionListTask((BaseLauncherActivity)getActivity()).execute();
         return inflater.inflate(R.layout.lmaintab_profileeditor,container,false);
     }
 
@@ -59,6 +62,20 @@ public class ProfileEditorFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 saveCurrentProfile();
+            }
+        });
+        getView().findViewById(R.id.mineButtonNew).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newname = "";
+                boolean isUnique = false;
+                while(!isUnique) {
+                    newname = "pojav-"+(Math.random() *10000);
+                    if(!LauncherProfiles.mainProfileJson.profiles.containsKey(newname)) isUnique = true;
+                }
+                profiles.put(newname,new MinecraftProfile());
+                LauncherProfiles.update();
+                refreshProfiles();
             }
         });
         //////////////////////////////////////////
@@ -87,7 +104,9 @@ public class ProfileEditorFragment extends Fragment {
     }
 
     public void refreshProfiles() {
-        LauncherProfiles.update();
+        if(activity != null) {
+            activity.updateProfileList();
+        }
         if (!(profileRecyclerView.getAdapter() instanceof ProfileRecyclerAdapter)){
             System.out.println("Created a new Adapter for profile version list!");
             profileRecyclerView.setAdapter(new ProfileRecyclerAdapter(getContext(),this));

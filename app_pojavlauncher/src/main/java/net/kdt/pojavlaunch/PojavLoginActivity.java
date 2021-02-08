@@ -358,9 +358,9 @@ public class PojavLoginActivity extends BaseActivity
             }
         }
     }
-    public static void disableSplash() {
-        mkdirs(Tools.DIR_GAME_NEW + "/config");
-        File forgeSplashFile = new File(Tools.DIR_GAME_NEW, "config/splash.properties");
+    public static void disableSplash(String gameFolder) {
+        mkdirs(gameFolder + "/config");
+        File forgeSplashFile = new File(gameFolder, "config/splash.properties");
         String forgeSplashContent = "enabled=true";
         try {
             if (forgeSplashFile.exists()) {
@@ -836,7 +836,7 @@ public class PojavLoginActivity extends BaseActivity
                             builder.clientToken = result[2];
                             builder.profileId = result[3];
                             builder.username = result[4];
-                            builder.selectedVersion = "1.12.2";
+                            builder.selectedProfile = "(Default)";
                             builder.updateSkinFace();
                             mProfile = builder;
                         }

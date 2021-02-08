@@ -20,6 +20,9 @@ import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+
 import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
@@ -72,7 +75,7 @@ public class BaseMainActivity extends LoggableActivity {
     //private EditText hiddenEditor;
     // private ViewGroup overlayView;
     private MinecraftAccount mProfile;
-    
+    private MinecraftProfile mGameProfile;
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
     
@@ -126,9 +129,10 @@ public class BaseMainActivity extends LoggableActivity {
             logStream = new PrintStream(logFile.getAbsolutePath());
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
+            mGameProfile = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile);
+            mVersionInfo = Tools.getVersionInfo(null,mGameProfile.lastVersionId);
             
-            setTitle("Minecraft " + mProfile.selectedVersion);
+            setTitle("Minecraft " + mGameProfile.lastVersionId);
             
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;
@@ -892,7 +896,7 @@ public class BaseMainActivity extends LoggableActivity {
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
         JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
-        Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
+        Tools.launchMinecraft(this, mProfile, mGameProfile);
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {

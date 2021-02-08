@@ -13,7 +13,8 @@ public class MinecraftAccount
     public String clientToken = "0"; // clientID: refresh and invalidate
     public String profileId = "0"; // authenticate UUID
     public String username = "Steve";
-    public String selectedVersion = "1.7.10";
+    //public String selectedVersion = "1.7.10";
+    public String selectedProfile = "(Default)";
     public boolean isMicrosoft = false;
     public String msaRefreshToken = "0";
     public String skinFaceBase64;
@@ -73,8 +74,8 @@ public class MinecraftAccount
             if (acc.username == null) {
                 acc.username = "0";
             }
-            if (acc.selectedVersion == null) {
-                acc.selectedVersion = "1.7.10";
+            if (acc.selectedProfile == null) {
+                acc.selectedProfile = "1.7.10";
             }
             if (acc.msaRefreshToken == null) {
                 acc.msaRefreshToken = "0";

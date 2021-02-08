@@ -259,7 +259,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                  jvmArgs.add("-Xms128M");
                  jvmArgs.add("-Xmx1G");
                  */
-                PojavLoginActivity.disableSplash();
+
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
                 // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);

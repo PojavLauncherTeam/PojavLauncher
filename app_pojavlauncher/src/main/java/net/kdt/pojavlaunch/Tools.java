@@ -18,6 +18,8 @@ import java.util.zip.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+
 import org.lwjgl.glfw.*;
 import android.view.*;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ public final class Tools
     public static String DIR_ACCOUNT_OLD;
     public static final String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
     public static String DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
+    public static final String DIR_GAME_DEFAULT = DIR_GAME_HOME + "/.minecraft";
     public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
     
     // New since 3.0.0
@@ -62,13 +65,13 @@ public final class Tools
     
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
-    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
-        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
-        String[] launchArgs = getMinecraftArgs(profile, versionInfo);
+    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile,MinecraftProfile gameProfile) throws Throwable {
+        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,gameProfile.lastVersionId);
+        String[] launchArgs = getMinecraftArgs(profile,gameProfile, versionInfo);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
-        String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
+        String launchClassPath = generateLaunchClassPath(versionInfo, gameProfile.lastVersionId);
 
         List<String> javaArgList = new ArrayList<String>();
         
@@ -171,16 +174,22 @@ public final class Tools
         javaArgList.addAll(overrideableArgList);
     }
 
-    public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {
+    public static String[] getMinecraftArgs(MinecraftAccount profile, MinecraftProfile gameProfile, JMinecraftVersionList.Version versionInfo) {
         String username = profile.username;
         String versionName = versionInfo.id;
+        String mGameDir;
+        if(gameProfile.gameDir != null && !gameProfile.gameDir.isEmpty()) {
+            mGameDir = gameProfile.gameDir;
+        }else{
+            mGameDir = DIR_GAME_NEW;
+        }
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
         }
         
         String userType = "mojang";
 
-        File gameDir = new File(Tools.DIR_GAME_NEW);
+        File gameDir = new File(mGameDir);
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
@@ -847,6 +856,7 @@ public final class Tools
             Tools.updateWindowSize(ctx);
         }
     }
+    /*
     public static void setCustomGameDir(String directory) {
         DIR_GAME_NEW = directory;
         DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
@@ -859,4 +869,5 @@ public final class Tools
         PojavLoginActivity.mkdirs(DIR_HOME_CRASH);
         PojavLoginActivity.mkdirs(ASSETS_PATH);
     }
+    */
 }
