@@ -153,6 +153,9 @@
     <string name="customctrl_remove">移除 %s ？</string>
     <string name="customctrl_keyname">键码</string>
     <string name="customctrl_toggle">可切换</string>
+    <string name="customctrl_size">大小</string>
+    <string name="customctrl_size_width">宽度</string>
+    <string name="customctrl_size_height">高度</string>
     <string name="customctrl_dynamicpos">动态位置</string>
     <string name="customctrl_dynamicpos_x">动态 X 轴</string>
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
