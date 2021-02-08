@@ -1182,7 +1182,10 @@ public class GLFW
     }
 
     public static int glfwGetKey(@NativeType("GLFWwindow *") long window, int key) {
-        return keyDownBuffer[key-32];
+    	if(key-32 < -1 && key-32 > keyDownBuffer.length)
+        	return keyDownBuffer[key-32];
+    	else
+    		return 0;
     }
 
     public static int glfwGetMouseButton(@NativeType("GLFWwindow *") long window, int button) {

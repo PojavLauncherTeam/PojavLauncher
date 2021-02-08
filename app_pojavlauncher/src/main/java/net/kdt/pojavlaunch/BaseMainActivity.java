@@ -671,6 +671,7 @@ public class BaseMainActivity extends LoggableActivity {
                         MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
                         MCOptionUtils.save();
                         getMcScale();
+                        if(mGameProfile.javaArgs != null && !mGameProfile.javaArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = mGameProfile.javaArgs;
                         // Should we do that?
                         if (!isCalled) {
                             isCalled = true;
