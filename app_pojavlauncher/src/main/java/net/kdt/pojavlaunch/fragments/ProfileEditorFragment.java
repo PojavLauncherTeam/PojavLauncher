@@ -7,15 +7,19 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.BaseMainActivity;
@@ -54,7 +58,6 @@ public class ProfileEditorFragment extends Fragment {
         versionRecyclerView = getView().findViewById(R.id.versionRecyclerView);
         profileRecyclerView = getView().findViewById(R.id.profileRecyclerView);
         activity = (BaseLauncherActivity) getActivity();
-
         versionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -73,9 +76,23 @@ public class ProfileEditorFragment extends Fragment {
                     newname = "pojav-"+(Math.random() *10000);
                     if(!LauncherProfiles.mainProfileJson.profiles.containsKey(newname)) isUnique = true;
                 }
-                profiles.put(newname,new MinecraftProfile());
+                MinecraftProfile prof = new MinecraftProfile();
+                if(selectedVersion != null) prof.lastVersionId = selectedVersion;
+                prof.name = ((EditText)getView().findViewById(R.id.mineEditTextProfileName)).getText().toString();
+            profiles.put(newname,prof);
                 LauncherProfiles.update();
                 refreshProfiles();
+                selectProfile(newname);
+            }
+        });
+        getView().findViewById(R.id.mineButtonRemove).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 if(currentProfile != null) {
+                     LauncherProfiles.mainProfileJson.profiles.remove(currentProfile);
+                     currentProfile = null;
+                     refreshProfiles();
+                 }
             }
         });
         //////////////////////////////////////////
@@ -120,10 +137,12 @@ public class ProfileEditorFragment extends Fragment {
     public void selectProfile(String profile) {
         currentProfile = profile;
         MinecraftProfile p = profiles.get(profile);
-        if(p.name != null) {
+        if(p != null && p.name != null) {
+            Toast.makeText(getContext(),String.format(getString(R.string.profedit_selected_profile),p.name),Toast.LENGTH_SHORT).show();
             ((EditText)getView().findViewById(R.id.mineEditTextProfileName)).setText(p.name);
             ((TextView)getView().findViewById(R.id.mineCurrentProfile)).setText(p.name);
         }else{
+            Toast.makeText(getContext(),String.format(getString(R.string.profedit_selected_profile),getString(android.R.string.unknownName)),Toast.LENGTH_SHORT).show();
             ((EditText)getView().findViewById(R.id.mineEditTextProfileName)).setText(android.R.string.unknownName);
             ((TextView)getView().findViewById(R.id.mineCurrentProfile)).setText(android.R.string.unknownName);
         }
@@ -152,7 +171,7 @@ public class ProfileEditorFragment extends Fragment {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(ctx).inflate(android.R.layout.simple_list_item_1,parent,false));
+            return new ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.animated_text_view,parent,false));
         }
 
         @Override
@@ -162,6 +181,7 @@ public class ProfileEditorFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         host.selectedVersion = ((TextView)view).getText().toString();
+                        Toast.makeText(host.getContext(),String.format(host.getString(R.string.profedit_selected_version),host.selectedVersion),Toast.LENGTH_SHORT).show();
                         ((TextView)host.getView().findViewById(R.id.mineCurrentVersion)).setText(host.selectedVersion);
                     }
                 });

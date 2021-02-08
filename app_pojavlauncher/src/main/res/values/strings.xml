@@ -216,4 +216,7 @@
     <string name="mcl_profile_editor_title_version">VERSIONS</string>
     <string name="mcl_profile_editor_edit_text_title">Profile name</string>
     <string name="mcl_profile_editor_save">save</string>
+    <string name="profedit_selected_version">Selected version: %s</string>
+    <string name="profedit_selected_profile">Selected profile: %s</string>
+    <string name="global_new">New</string>
 </resources>
