@@ -17,7 +17,7 @@
     <string name="login_microsoft">Увійти через Microsoft</string>
     <string name="login_select_account">Виберіть обліковий запис</string>
     <string name="login_title_no_saved_account">Акаунт не знайдено !</string>
-    <string name="login_dialog_no_saved_account">У вас немає жодного збереженого акаунта.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
+    <string name="login_dialog_no_saved_account">У вас немає жодного збереженого аккаунта.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміну розміру або видалення."</string>
     <!-- Warnings -->
