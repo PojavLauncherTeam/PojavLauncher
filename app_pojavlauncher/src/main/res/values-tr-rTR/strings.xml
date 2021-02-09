@@ -67,7 +67,7 @@
     <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
     <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
@@ -174,8 +174,8 @@
     <string name="main_version">Sürüm:</string>
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
-    <string name="main_no_news_feed">Haberler bilgileri sağlanamadı !</string>
-    <string name="auto_ram_subtitle">Otomatik BELLEK yükselticiyi aktifleştirir</string>
-    <string name="auto_ram_title">Otomatik BELLEK</string>
-    <string name="autoram_info_msg">Bellek %d MB olarak ayarlandı</string>
+    <string name="main_no_news_feed">Haberler bilgileri getirilemedi !</string>
+    <string name="auto_ram_subtitle">Otomatik RAM yükselticiyi aktifleştirir</string>
+    <string name="auto_ram_title">Otomatik RAM</string>
+    <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
 </resources>
