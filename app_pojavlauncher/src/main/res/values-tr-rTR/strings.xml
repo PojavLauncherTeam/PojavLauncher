@@ -75,7 +75,7 @@
     <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
-    <string name="mcl_setting_category_scaling">Boyut Seçenekleri</string>
+    <string name="mcl_setting_category_scaling">Ölçekleme Seçenekleri</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
@@ -90,7 +90,7 @@
     <string name="global_remove">Kaldır</string>
     <string name="global_restart">Yeniden başlat</string>
     <string name="global_save">Kaydet</string>
-    <string name="global_unpacking">Açılıyor %s</string>
+    <string name="global_unpacking">%s Paketten çıkarılıyor</string>
     <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
     <string name="global_waiting">Bekleyin</string>
     <!--
@@ -153,6 +153,9 @@
     <string name="customctrl_remove">%s kaldırılsın mı?</string>
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_toggle">Değiştirilebilir</string>
+    <string name="customctrl_size">Boyut</string>
+    <string name="customctrl_size_width">Genişlik</string>
+    <string name="customctrl_size_height">Yükseklik</string>
     <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
