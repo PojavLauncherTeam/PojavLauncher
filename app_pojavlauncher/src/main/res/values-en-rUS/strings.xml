@@ -60,6 +60,12 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This lets you re-install Java Runtime</string>
     <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
     <string name="mcl_setting_subtitle_freeform">Launch Minecraft in a floating window (Requires Android 7.0 or newer)</string>
+    <string name="mcl_setting_title_hide_sidebar">Hide Sidebar</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folks preferring the old v1 UI might like this. Gives you a more fullscreen experience.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignore notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignore the notch and extends the screen under it.\nGives you a more immersive experience.</string>
+    <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
     <string name="mcl_setting_title_longpresstrigger">Trigger press duration</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Trigger press duration for destroying blocks and dropping items.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
@@ -147,6 +153,9 @@
     <string name="customctrl_remove">Remove %s?</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Toggleable</string>
+    <string name="customctrl_size">Size</string>
+    <string name="customctrl_size_width">Width</string>
+    <string name="customctrl_size_height">Height</string>
     <string name="customctrl_dynamicpos">Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X-axis</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y-axis</string>
@@ -165,4 +174,8 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
+    <string name="main_no_news_feed">Failed to fetch the news feed !</string>
+    <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memory set to %d MB</string>
 </resources>
