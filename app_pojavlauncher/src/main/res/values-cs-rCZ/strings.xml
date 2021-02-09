@@ -153,6 +153,9 @@
     <string name="customctrl_remove">Odstranit %s?</string>
     <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_toggle">Přepnutelné</string>
+    <string name="customctrl_size">Velikost</string>
+    <string name="customctrl_size_width">Šířka</string>
+    <string name="customctrl_size_height">Výška</string>
     <string name="customctrl_dynamicpos">Dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
