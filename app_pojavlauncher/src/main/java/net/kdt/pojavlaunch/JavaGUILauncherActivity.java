@@ -11,7 +11,6 @@ import android.widget.*;
 import androidx.appcompat.app.*;
 import java.io.*;
 import java.util.*;
-import net.kdt.pojavlaunch.installers.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
@@ -270,46 +269,6 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         this.mousePointer.setTranslationY(y);
     }
 
-    
-    public String dialogInput(final String title, final int message) {
-        final StringBuilder str = new StringBuilder();
-        
-        runOnUiThread(new Runnable(){
-                @Override
-                public void run() {
-                    final EditText editText = new EditText(JavaGUILauncherActivity.this);
-                    editText.setHint(message);
-                    editText.setSingleLine();
-                    
-                    AlertDialog.Builder d = new AlertDialog.Builder(JavaGUILauncherActivity.this);
-                    d.setCancelable(false);
-                    d.setTitle(title);
-                    d.setView(editText);
-                    d.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                            @Override
-                            public void onClick(DialogInterface i, int id) {
-                                str.append(editText.getText().toString());
-                                synchronized (mDialogLock) {
-                                    mDialogLock.notifyAll();
-                                }
-                            }
-                        });
-                    d.show();
-                }
-            });
-
-        try {
-            synchronized (mDialogLock) {
-                mDialogLock.wait();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        
-        return str.toString();
-    }
-
     public void forceClose(View v) {
         BaseMainActivity.dialogForceClose(this);
     }
@@ -328,32 +287,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     
     private int doCustomInstall(File modFile, String javaArgs) throws IOException {
         isLogAllow = true;
-        
-        // Attempt to detects some mod installers 
-        BaseInstaller installer = new BaseInstaller();
-        installer.setInput(modFile);
-        
-        if (InstallerDetector.isForgeLegacy(installer)) {
-            appendlnToLog("Detected Forge Installer 1.12.1 or below!");
-            return new LegacyForgeInstaller(installer).install(this);
-        } else if (InstallerDetector.isForge1p12p2(installer)) {
-            appendlnToLog("Detected Forge Installer 1.12.2!");
-            return new Legacy1p12p2ForgeInstaller(installer).install(this);
-        } else if (InstallerDetector.isForgeNew(installer)) {
-            appendlnToLog("Detected Forge Installer 1.13 or above!");
-            return new NewForgeInstaller(installer).install(this);
-        } else if (InstallerDetector.isFabric(installer)) {
-            appendlnToLog("Detected Fabric Installer!");
-            return new FabricInstaller(installer).install(this);
-        }else if (InstallerDetector.isOptiFine(installer)) {
-            appendlnToLog("Detected OptiFine Installer!");
-            return new LegacyOptifineInstaller(installer).install(this);
-        } else {
-            appendlnToLog("No mod detected. Starting JVM");
-            isLogAllow = false;
-            mSkipDetectMod = true;
-            return launchJavaRuntime(modFile, javaArgs);
-        }
+        mSkipDetectMod = true;
+        return launchJavaRuntime(modFile, javaArgs);
     }
 
     public int launchJavaRuntime(File modFile, String javaArgs) {
@@ -370,8 +305,6 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 javaArgList.add("-jar");
                 javaArgList.add(modFile.getAbsolutePath());
             }
-            
-            // System.out.println(Arrays.toString(javaArgList.toArray(new String[0])));
 
             appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
             
