@@ -17,7 +17,7 @@
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecionar conta</string>
     <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
-    <string name="login_dialog_no_saved_account">Você não tem nenhuma conta salva.\nUse a opção <b>\"Me mantenha logado\"</b> para salvar uma conta após o primeiro login.</string>
+    <string name="login_dialog_no_saved_account">Você não tem nenhuma conta salva.\nUse a opção <b>\"Manter conectado\"</b> para salvar uma conta após o primeiro login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀\nSegure um botão para personalizar: editar, redimensionar ou excluir."</string>
     <!-- Warnings -->
@@ -38,7 +38,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Notícias</string>
+    <string name="mcl_tab_news">Novidades</string>
     <string name="mcl_tab_console">Console de desenvolvedor</string>
     <string name="mcl_tab_crash">Log de crash</string>
     <!-- MCLauncherActivity: Account status -->
@@ -52,7 +52,7 @@
     <string name="mcl_launch_download_assets">Preparando para baixar os recursos</string>
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modinstall">Iniciar um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">Inicie um instalador de mods (com argumentos personalizados)</string>
+    <string name="mcl_option_modinstallwitharg">Iniciar um instalador de mods (com argumentos personalizados)</string>
     <string name="mcl_option_customcontrol">Controles Personalizados</string>
     <string name="mcl_option_settings">Configurações</string>
     <string name="mcl_option_about">Sobre</string>
@@ -68,7 +68,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Permite que você reduza a resolução do jogo. 100% é resolução total</string>
     <string name="mcl_setting_title_longpresstrigger">Tempo para acionar função ao manter pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
-    <string name="mcl_setting_title_buttonscale">Aumentar escala de botões</string>
+    <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
     <string name="mcl_setting_subtitle_buttonscale">Aumentar se os botões estiverem muito pequenos.</string>
     <string name="mcl_setting_title_mousescale">Escala do mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Alterar o tamanho do mouse virtual.</string>
@@ -153,6 +153,9 @@
     <string name="customctrl_remove">Remover %s?</string>
     <string name="customctrl_keyname">Código chave</string>
     <string name="customctrl_toggle">Alternável</string>
+    <string name="customctrl_size">Tamanho</string>
+    <string name="customctrl_size_width">Largura</string>
+    <string name="customctrl_size_height">Altura</string>
     <string name="customctrl_dynamicpos">Posição dinâmica</string>
     <string name="customctrl_dynamicpos_x">X Dinâmico</string>
     <string name="customctrl_dynamicpos_y">Y Dinâmico</string>
