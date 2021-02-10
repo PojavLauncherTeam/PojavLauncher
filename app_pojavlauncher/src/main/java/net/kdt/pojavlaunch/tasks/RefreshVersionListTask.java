@@ -28,6 +28,10 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     protected ArrayList<String> doInBackground(Void[] p1)
     {
         try {
+            mActivity.mVersionStringList = filter(null,new File(Tools.DIR_HOME_VERSION).listFiles());
+            if(mActivity.mProfileEditView != null) {
+                mActivity.mProfileEditView.refreshVersions();
+            }
             mActivity.mVersionList = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
             ArrayList<String> versionStringList = filter(mActivity.mVersionList.versions, new File(Tools.DIR_HOME_VERSION).listFiles());
 
@@ -53,8 +57,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     
     private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {
         ArrayList<String> output = new ArrayList<String>();
-
-        for (JMinecraftVersionList.Version value1: list1) {
+        if(list1 != null) for (JMinecraftVersionList.Version value1: list1) {
             if ((value1.type.equals("release") && LauncherPreferences.PREF_VERTYPE_RELEASE) ||
                 (value1.type.equals("snapshot") && LauncherPreferences.PREF_VERTYPE_SNAPSHOT) ||
                 (value1.type.equals("old_alpha") && LauncherPreferences.PREF_VERTYPE_OLDALPHA) ||
@@ -64,7 +67,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
         }
 
         if(list2 != null) for (File value2: list2) {
-            if (!output.contains(value2.getName())) {
+            if(value2.isDirectory()) if (!output.contains(value2.getName())) {
                 output.add(value2.getName());
             }
         }
