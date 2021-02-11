@@ -7,6 +7,16 @@ assignees: ''
 
 ---
 
+<!--
+If you don't fill in this template, this issue will be marked as invalid and closed.
+-->
+
+<details> <summary><b>Read before submit</b></summary>
+<br>
+- Make sure there was not duplicated issues.<br>
+- Make sure you have filled this issue template, or this will get rejected.
+</details>
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
