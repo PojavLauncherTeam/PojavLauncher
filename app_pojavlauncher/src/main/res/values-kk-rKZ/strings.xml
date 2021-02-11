@@ -153,6 +153,7 @@
     <string name="customctrl_toggle">Ауыстырғыш</string>
     <string name="customctrl_size">Өлшемі</string>
     <string name="customctrl_size_width">Ені</string>
+    <string name="customctrl_size_height">Биіктік</string>
     <string name="customctrl_dynamicpos">Динамикалық позиция</string>
     <string name="customctrl_dynamicpos_x">Динамикалық X</string>
     <string name="customctrl_dynamicpos_y">Динамикалық Y</string>
