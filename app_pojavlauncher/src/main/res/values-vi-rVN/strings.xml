@@ -62,6 +62,8 @@
     <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa cửa sổ nổi. Đề nghị Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ẩn thanh trượt</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Cái cũ giao diện người dùng v1 cũ có thể thích điều này. Mang đến cho bạn trải nghiệm toàn màn hình hơn.</string>
+    <string name="mcl_setting_title_ignore_notch">Bỏ notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Bỏ notch và mở rộng màn hình bên dưới.\nMang đến cho bạn trải nghiệm phong phú hơn.</string>
     <string name="mcl_setting_title_resolution_scaler">Độ phân giải</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Cho phép bạn giảm độ phân giải của game. 100% là max độ phân giải</string>
     <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn dài</string>
@@ -151,6 +153,9 @@
     <string name="customctrl_remove">Xóa %s?</string>
     <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_toggle">Chuyển đổi</string>
+    <string name="customctrl_size">Kích thước</string>
+    <string name="customctrl_size_width">Chiều rộng</string>
+    <string name="customctrl_size_height">Độ cao</string>
     <string name="customctrl_dynamicpos">Điểm động</string>
     <string name="customctrl_dynamicpos_x">Động X</string>
     <string name="customctrl_dynamicpos_y">Động Y</string>
