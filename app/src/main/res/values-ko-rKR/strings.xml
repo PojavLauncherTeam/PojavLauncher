@@ -11,9 +11,9 @@
     <!-- Logging output -->
     <string name="log_title">로그 확인</string>
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email or username</string>
+    <string name="login_online_username_hint">이메일 또는 유저명</string>
     <string name="login_online_username_question">(어떤 것을 사용할까요?)</string>
-    <string name="login_online_password_hint">Password</string>
+    <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_password_question">비밀번호를 잊으셨습니까?</string>
     <string name="login_online_remember">계정 저장하기</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
