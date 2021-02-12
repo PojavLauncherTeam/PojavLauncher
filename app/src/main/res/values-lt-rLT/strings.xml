@@ -140,9 +140,9 @@
     <string name="control_keyboard">Klaviatūra</string>
     <string name="control_chat">Pokalbiai</string>
     <string name="control_debug">Debug</string>
-    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Priartinti (C)</string>
-    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">Kairė</string>
-    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">Deš.</string>
+    <string name="control_zoom">Priartinti (C)</string>
+    <string name="control_primary">Kairė</string>
+    <string name="control_secondary">Deš.</string>
     <string name="control_inventory">Inv</string>
     <string name="control_thirdperson">3</string>
     <string name="control_listplayers">TAB</string>
