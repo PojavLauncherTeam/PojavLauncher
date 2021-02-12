@@ -39,7 +39,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Новости лаунчера</string>
-    <string name="mcl_tab_console">Консоль разработки</string>
+    <string name="mcl_tab_console">Консоль разработчика</string>
     <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
@@ -59,19 +59,23 @@
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
-    <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
-    <string name="mcl_setting_title_hide_sidebar">Скрыть боковую панель</string>
+    <string name="mcl_setting_subtitle_freeform">Запускает Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
+    <string name="mcl_setting_title_hide_sidebar">Скрытие боковой панели</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
+    <string name="mcl_setting_title_ignore_notch">Игнорирование выреза под фронтальную камеру</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Игнорирует вырез под фронтальную камеру и расширяет экран под неё.\nДает большее погружение в игру.</string>
+    <string name="mcl_setting_title_resolution_scaler">Уменьшение разрешения</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Позволяет уменьшить разрешение игры. Максимальное разрешение: 100%</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
     <string name="mcl_setting_subtitle_mousescale">Изменяет размер курсора мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
+    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если изменить их без особых знаний.</string>
     <string name="mcl_setting_category_general">Общие настройки</string>
-    <string name="mcl_setting_category_scaling">Масштабирование</string>
+    <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
@@ -149,6 +153,9 @@
     <string name="customctrl_remove">Удалить «%s»?</string>
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_toggle">Переключаемый</string>
+    <string name="customctrl_size">Размер</string>
+    <string name="customctrl_size_width">Ширина</string>
+    <string name="customctrl_size_height">Высота</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
@@ -180,11 +187,4 @@
     <string name="profedit_selected_version">Выбранная версия: %s</string>
     <string name="profedit_selected_profile">Выбранный профиль: %s</string>
     <string name="global_new">Новый</string>
-    <string name="mcl_setting_title_ignore_notch">Игнорировать вырез</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Игнорирует вырез и позволяет изображению выходить за вырез, давая более полноэкранный экспириенс.</string>
-    <string name="mcl_setting_title_resolution_scaler">Регулировка разрешения</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Позволяет регулировать разрешение. 100% - оригинальное разрешение.</string>
-    <string name="customctrl_size">Размер</string>
-    <string name="customctrl_size_width">Ширина</string>
-    <string name="customctrl_size_height">Высота</string>
 </resources>
