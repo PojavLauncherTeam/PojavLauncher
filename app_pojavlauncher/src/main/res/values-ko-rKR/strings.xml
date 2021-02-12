@@ -7,8 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email or username</string>
-    <string name="login_online_password_hint">Password</string>
+    <string name="login_online_username_hint">이메일 또는 유저명</string>
+    <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
