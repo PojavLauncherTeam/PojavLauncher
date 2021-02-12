@@ -140,9 +140,9 @@
     <string name="control_keyboard">键盘</string>
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
-    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">缩放 (C)</string>
-    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">主</string>
-    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">副</string>
+    <string name="control_zoom">缩放 (C)</string>
+    <string name="control_primary">主</string>
+    <string name="control_secondary">副</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">背包</string>
     <string name="control_up">▲</string>
