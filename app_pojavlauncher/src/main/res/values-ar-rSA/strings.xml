@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
     <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
     <string name="login_select_account">اختر الحساب</string>
+    <string name="login_title_no_saved_account">لم يتم العثور على حسابات!</string>
+    <string name="login_dialog_no_saved_account">ليس لديك أي حساب محفوظ.\nاستخدم الخيار <b>\"ابقوني مسجلاً\"</b> لحفظ حساب عند تسجيل الدخول الأول.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر لتخصيص: تحرير أو تغيير الحجم أو حذفه."</string>
     <!-- Warnings -->
@@ -40,10 +42,13 @@
     <string name="mcl_tab_console">وحدة التحكم البرمجية</string>
     <string name="mcl_tab_crash">سجل توقف العمل</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">متصل</string>
+    <string name="mcl_account_offline">غير متصل</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
     <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
     <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
+    <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
     <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
     <string name="mcl_options">الخيارات</string>
     <string name="mcl_option_modinstall">تشغيل مثبت مورد (Forge, LabyMod, Fabric, الخ...)</string>
@@ -55,6 +60,12 @@
     <string name="mcl_setting_subtitle_uninstalljre">[مطلوب إعادة تشغيل التطبيق] هذا يسمح لك بإعادة تثبيت محرك تشغيل جافا</string>
     <string name="mcl_setting_title_freeform">تشغيل ماين كرافت في وضع حر</string>
     <string name="mcl_setting_subtitle_freeform">تشغيل ماين كرافت في النافذة العائمة. يتطلب أندرويد 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">أخفِ الشّريط الجانبيّ</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">أشخاص يفضلون واجهة المستخدم v1 القديمة. تعطيك المزيد من تجربة ملء الشاشة.</string>
+    <string name="mcl_setting_title_ignore_notch">تجاهل النبرة</string>
+    <string name="mcl_setting_subtitle_ignore_notch">تجاهل النبرة وتوسيع الشاشة أسفلها.\nيعطيك تجربة أكثر انغماساً.</string>
+    <string name="mcl_setting_title_resolution_scaler">مقياس الدقة</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتقليل دقة اللعبة. 100% دقة كاملة</string>
     <string name="mcl_setting_title_longpresstrigger">كم من الوقت سيتم تشغيله بعد الضغط المطول</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغيير وقت التشغيل للضغط المطول في كتلة التحطيم وإسقاط الموارد.</string>
     <string name="mcl_setting_title_buttonscale">ضبط حجم أزرار التحكم</string>
@@ -136,6 +147,9 @@
     <string name="customctrl_remove">حذف %s؟</string>
     <string name="customctrl_keyname">رمز مفتاحي</string>
     <string name="customctrl_toggle">تبديلي</string>
+    <string name="customctrl_size">الحجم</string>
+    <string name="customctrl_size_width">العرض</string>
+    <string name="customctrl_size_height">ارتفاع</string>
     <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
@@ -154,4 +168,8 @@
     <string name="main_version">الإصدار:</string>
     <string name="main_nocrash">لم يتم اكتشاف توقف</string>
     <string name="main_nolog">لا توجد سجلات.</string>
+    <string name="main_no_news_feed">فشل في جلب موجز الأخبار!</string>
+    <string name="auto_ram_subtitle">تمكين مشرف ذاكرة الوصول العشوائي التلقائي</string>
+    <string name="auto_ram_title">ذاكرة الوصول العشوائية التلقائية</string>
+    <string name="autoram_info_msg">تم تعيين الذاكرة إلى %d ميغابايت</string>
 </resources>
