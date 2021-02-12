@@ -77,8 +77,8 @@
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
-    <string name="mcl_setting_veroption_release">Release</string>
-    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_release">Vollversionen</string>
+    <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
     <string name="mcl_version_clone">Duplizieren</string>
