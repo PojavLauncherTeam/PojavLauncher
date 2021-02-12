@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Selecteer account</string>
+    <string name="login_title_no_saved_account">Geen account gevonden!</string>
+    <string name="login_dialog_no_saved_account">U hebt geen opgeslagen account.\nGebruik de optie <b>\"Ingelogd blijven\"</b> om een account op te slaan bij de eerste aanmelding.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
     <!-- Warnings -->
@@ -40,6 +42,8 @@
     <string name="mcl_tab_console">Ontwikkelings console</string>
     <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Verbonden</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Klaar om Minecraft %s te spelen</string>
     <string name="mcl_launch_cleancache">Cache bestanden opschonen</string>
@@ -58,6 +62,10 @@
     <string name="mcl_setting_subtitle_freeform">Start Minecraft in zwevend venster. Vereist Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Zijbalk verbergen</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgische mensen die liever de oude v1 UI hebben. Geeft je een meer ervaring met volledig scherm.</string>
+    <string name="mcl_setting_title_ignore_notch">Notch negeren</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Negeer de notch en verbreed het scherm.\ngeeft je een meer meeslepende ervaring.</string>
+    <string name="mcl_setting_title_resolution_scaler">Resolutie Schaaler</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">sta toe om de resolutie van het spel te verlagen. 100% is de volledige resolutie</string>
     <string name="mcl_setting_title_longpresstrigger">Hoe lang zal starten na lange indrukken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Verander de triggertijd voor lang indrukken van vernietig blok en laten vallen.</string>
     <string name="mcl_setting_title_buttonscale">Controle knoppen schalen</string>
@@ -164,4 +172,7 @@
     <string name="main_nocrash">Geen crash gedetecteerd</string>
     <string name="main_nolog">Geen log.</string>
     <string name="main_no_news_feed">Kon nieuwsfeed niet ophalen!</string>
+    <string name="auto_ram_subtitle">Schakel in de automatische RAM aanpasser in</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Geheugen ingesteld op %d MB</string>
 </resources>
