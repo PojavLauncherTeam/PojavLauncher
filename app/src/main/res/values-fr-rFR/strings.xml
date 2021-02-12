@@ -140,9 +140,9 @@
     <string name="control_keyboard">Clavier</string>
     <string name="control_chat">Tchat</string>
     <string name="control_debug">Débog.</string>
-    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Zoom (C)</string>
-    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">Pri</string>
-    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">Sec</string>
+    <string name="control_zoom">Zoom (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
