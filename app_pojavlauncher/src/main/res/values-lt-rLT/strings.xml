@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition skirta Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Paleiskite Minecraft: Java Edition savo įrenginyje!</string>
     <!-- Action bar part -->
@@ -62,6 +62,10 @@
     <string name="mcl_setting_subtitle_freeform">Paleisti Minecraft skraidančiame lange. Reikia Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Slėpti lentelę šone</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Gali atrodyti nostalgiškai kaip senasis v1 UI. Duoda pilnesnio ekrano išvaizdą.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoruoti kamerą</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoruojant kamerą ištempia vaizdą po ja.\nDuodą geresnį vaizdą.</string>
+    <string name="mcl_setting_title_resolution_scaler">Rezoliucijos redagavimas</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Leidžia keisti ekrano rezoliuciją. 100% yra numatytasis nustatymas.</string>
     <string name="mcl_setting_title_longpresstrigger">Kaip ilgai suveiks po palaikymo</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Pakeisti veikimo laiką po palaikymo panaikinti ir išmesti daiktą.</string>
     <string name="mcl_setting_title_buttonscale">Kontroliuoti mygtukų dydį</string>
@@ -143,6 +147,9 @@
     <string name="customctrl_remove">Panaikinti %s?</string>
     <string name="customctrl_keyname">Mygtuko kodas</string>
     <string name="customctrl_toggle">Perjungiama</string>
+    <string name="customctrl_size">Dydis</string>
+    <string name="customctrl_size_width">Plotis</string>
+    <string name="customctrl_size_height">Aukštis</string>
     <string name="customctrl_dynamicpos">Dinamiška pozicija</string>
     <string name="customctrl_dynamicpos_x">Dinamiška X</string>
     <string name="customctrl_dynamicpos_y">Dinamiška Y</string>
