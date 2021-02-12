@@ -178,4 +178,14 @@
     <string name="auto_ram_subtitle">Menyalakan pengatur RAM otomatis</string>
     <string name="auto_ram_title">RAM otomatis</string>
     <string name="autoram_info_msg">Memori disetel ke %d MB</string>
+    <string name="vp_latest_snapshot">Snapshot terbaru</string>
+    <string name="vp_latest_release">Release terbaru</string>
+    <string name="mcl_tab_profiles">Profil</string>
+    <string name="mcl_profile_editor_title_profile">PROFIL</string>
+    <string name="mcl_profile_editor_title_version">VERSI</string>
+    <string name="mcl_profile_editor_edit_text_title">Nama profil</string>
+    <string name="mcl_profile_editor_save">simpan</string>
+    <string name="profedit_selected_version">Versi dipilih: %s</string>
+    <string name="profedit_selected_profile">Profil dipilih: %s</string>
+    <string name="global_new">Baru</string>
 </resources>
