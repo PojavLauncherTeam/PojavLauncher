@@ -184,6 +184,7 @@
     <string name="mcl_profile_editor_title_profile">ПРОФИЛИ</string>
     <string name="mcl_profile_editor_title_version">ВЕРСИИ</string>
     <string name="mcl_profile_editor_edit_text_title">Название профиля</string>
+    <string name="mcl_profile_editor_save">сохранить</string>
     <string name="profedit_selected_version">Выбранная версия: %s</string>
     <string name="profedit_selected_profile">Выбранный профиль: %s</string>
     <string name="global_new">Новый</string>
