@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
+    <string name="login_title_no_saved_account">Hesap bulunamadı !</string>
+    <string name="login_dialog_no_saved_account">Hiçbir kayıtlı hesabın yok.\n&lt;b&gt;\"Beni hatırla\"&lt;b&gt;\'yı seçerek hesaplarını kaydedebilirsin.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warnings -->
@@ -60,8 +62,12 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
     <string name="mcl_setting_title_hide_sidebar">Kenar çubuğunu gizle</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Eski v1 Menüsünü hatırlayan eski arkadaşlar bunu tercih ediyor. Daha çok tam ekran deneyimi verir.</string>
+    <string name="mcl_setting_title_ignore_notch">Çentiği görmezden gel</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve altındaki ekranı genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
+    <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
     <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
@@ -69,7 +75,7 @@
     <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
-    <string name="mcl_setting_category_scaling">Boyut Seçenekleri</string>
+    <string name="mcl_setting_category_scaling">Ölçekleme Seçenekleri</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
@@ -84,7 +90,7 @@
     <string name="global_remove">Kaldır</string>
     <string name="global_restart">Yeniden başlat</string>
     <string name="global_save">Kaydet</string>
-    <string name="global_unpacking">Açılıyor %s</string>
+    <string name="global_unpacking">%s Paketten çıkarılıyor</string>
     <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
     <string name="global_waiting">Bekleyin</string>
     <!--
@@ -147,6 +153,9 @@
     <string name="customctrl_remove">%s kaldırılsın mı?</string>
     <string name="customctrl_keyname">AnahtarKodu</string>
     <string name="customctrl_toggle">Değiştirilebilir</string>
+    <string name="customctrl_size">Boyut</string>
+    <string name="customctrl_size_width">Genişlik</string>
+    <string name="customctrl_size_height">Yükseklik</string>
     <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
@@ -165,8 +174,8 @@
     <string name="main_version">Sürüm:</string>
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
-    <string name="main_no_news_feed">Haberler bilgileri sağlanamadı !</string>
-    <string name="auto_ram_subtitle">Otomatik BELLEK yükselticiyi aktifleştirir</string>
-    <string name="auto_ram_title">Otomatik BELLEK</string>
-    <string name="autoram_info_msg">Bellek %d MB olarak ayarlandı</string>
+    <string name="main_no_news_feed">Haberler bilgileri getirilemedi !</string>
+    <string name="auto_ram_subtitle">Otomatik RAM yükselticiyi aktifleştirir</string>
+    <string name="auto_ram_title">Otomatik RAM</string>
+    <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
 </resources>
