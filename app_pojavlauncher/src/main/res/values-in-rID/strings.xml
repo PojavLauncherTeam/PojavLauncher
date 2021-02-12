@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">Username ini sudah ada</string>
     <string name="login_microsoft">Login Microsoft</string>
     <string name="login_select_account">Pilih akun</string>
+    <string name="login_title_no_saved_account">Tidak ada akun yang ditemukan!</string>
+    <string name="login_dialog_no_saved_account">Anda tidak punya akun yang sudah disimpan.\nGunakan opsi <b>\"Tetap masuk\"</b> untuk menyimpan sebuah akun waktu login pertama kali.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Geser dari kanan ke kiri untuk membuka menu ◀\nPencet lama sebuah tombol untuk memodifikasi: edit, modifikasi ukuran, atau hapus."</string>
     <!-- Warnings -->
@@ -40,6 +42,8 @@
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Terhubung</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan berkas-berkas cache</string>
@@ -57,7 +61,11 @@
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Sembunyikan sidebar</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Orang yang telah lama menggunakan UI lama v1 mungkin akan menyukai ini. Memberi kamu sebuah experimen layar penuh.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Orang-orang nostalgia yang lebih memilih UI v1 lama mungkin akan menyukai ini. Memberi kamu sebuah experimen layar penuh.</string>
+    <string name="mcl_setting_title_ignore_notch">Abaikan notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Abaikan notch dan melebarkan layar dibawah notch itu.\nMemberi anda experimen yang lebih luas.</string>
+    <string name="mcl_setting_title_resolution_scaler">Pengskala resolusi</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Membolehkan anda untuk menurunkan resolusi permainan. 100% itu resolusi penuh</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_buttonscale">Skala tombol kontrol</string>
@@ -145,6 +153,9 @@
     <string name="customctrl_remove">Hapus %s?</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Bisa beralih</string>
+    <string name="customctrl_size">Ukuran</string>
+    <string name="customctrl_size_width">Lebar</string>
+    <string name="customctrl_size_height">Tinggi</string>
     <string name="customctrl_dynamicpos">Posisi dinamis</string>
     <string name="customctrl_dynamicpos_x">Dinamis X</string>
     <string name="customctrl_dynamicpos_y">Dinamis Y</string>
@@ -163,5 +174,8 @@
     <string name="main_version">Versi:</string>
     <string name="main_nocrash">Tidak ada crash terdeteksi</string>
     <string name="main_nolog">Tidak ada catatan log.</string>
-    <string name="main_no_news_feed">Gagal mengambil news feed !</string>
+    <string name="main_no_news_feed">Gagal mengambil umpan berita !</string>
+    <string name="auto_ram_subtitle">Menyalakan pengatur RAM otomatis</string>
+    <string name="auto_ram_title">RAM otomatis</string>
+    <string name="autoram_info_msg">Memori disetel ke %d MB</string>
 </resources>
