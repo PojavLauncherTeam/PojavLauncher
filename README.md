@@ -6,9 +6,8 @@ An open source Minecraft: Java Edition launcher for Android based from Boardwalk
 
 Discord server: https://discord.gg/6RpEJda
 
-## iOS version?
-- Impossible for directly run. There's RoboVM but is AOT Compiler. You could also try UTM with Android-x86.
-- OpenJDK 9 and GL4ES has iOS port so maybe run in a jailbreaked device. I don't have a Mac OS X device to build one.
+## Note
+V2 is discontinued due to too many problems. Please use v3 instead.
 
 ## Installing OptiFine?
 Follow steps [here](https://github.com/khanhduytran0/PojavLauncher/wiki/Install-OptiFine).
