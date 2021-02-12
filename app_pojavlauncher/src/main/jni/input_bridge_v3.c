@@ -79,7 +79,7 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
 #define ADD_CALLBACK_WWIN(NAME) \
 GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
-    void** oldCallback = &GLFW_invoke_##NAME; \
+    void** oldCallback = (void**) &GLFW_invoke_##NAME; \
     GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
     return (jlong) (uintptr_t) *oldCallback; \
 }
