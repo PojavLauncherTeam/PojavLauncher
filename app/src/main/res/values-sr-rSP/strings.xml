@@ -91,9 +91,9 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Изађи</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Зумирање (Ц)</string>
-    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">При</string>
-    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">Сек</string>
+    <string name="control_zoom">Зумирање (Ц)</string>
+    <string name="control_primary">При</string>
+    <string name="control_secondary">Сек</string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Лог Избацивано</string>
     <!-- Update part (unused now) -->
