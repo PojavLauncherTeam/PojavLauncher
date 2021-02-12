@@ -178,4 +178,14 @@
     <string name="auto_ram_subtitle">Otomatik RAM yükselticiyi aktifleştirir</string>
     <string name="auto_ram_title">Otomatik RAM</string>
     <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
+    <string name="vp_latest_snapshot">En Son Snapshot</string>
+    <string name="vp_latest_release">En son sürüm</string>
+    <string name="mcl_tab_profiles">Profiller</string>
+    <string name="mcl_profile_editor_title_profile">PROFİLLER</string>
+    <string name="mcl_profile_editor_title_version">SÜRÜMLER</string>
+    <string name="mcl_profile_editor_edit_text_title">Profil adı</string>
+    <string name="mcl_profile_editor_save">kaydet</string>
+    <string name="profedit_selected_version">Seçili sürüm: %s</string>
+    <string name="profedit_selected_profile">Seçili profil: %s</string>
+    <string name="global_new">Yeni</string>
 </resources>
