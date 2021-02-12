@@ -178,4 +178,14 @@
     <string name="auto_ram_subtitle">Вмикає автоматичне регулювання оперативної пам\'яті</string>
     <string name="auto_ram_title">Авто ОЗУ</string>
     <string name="autoram_info_msg">Пам\'ять встановлено на %d МБ</string>
+    <string name="vp_latest_snapshot">Останній снапшот</string>
+    <string name="vp_latest_release">Останній Реліз</string>
+    <string name="mcl_tab_profiles">Профілі</string>
+    <string name="mcl_profile_editor_title_profile">ПРОФІЛІ</string>
+    <string name="mcl_profile_editor_title_version">ВЕРСІЇ</string>
+    <string name="mcl_profile_editor_edit_text_title">Ім\'я профілю</string>
+    <string name="mcl_profile_editor_save">зберегти</string>
+    <string name="profedit_selected_version">Обрана версія: %s</string>
+    <string name="profedit_selected_profile">Вибраний профіль: %s</string>
+    <string name="global_new">Нове</string>
 </resources>
