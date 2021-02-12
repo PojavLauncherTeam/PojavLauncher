@@ -2,56 +2,110 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pentru Android)</string>
-    <string name="app_motd">Lanseaza Minecraft: Java Edition in propriul telefon al tau!</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Lanseaza Minecraft: Java Edition in propriul dispozitiv!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">AJUTOR</string>
     <!-- Languages list part -->
     <string name="language_name">ROMÂNĂ - RO</string>
     <!-- Logging output -->
+    <string name="log_title">Ieșire jurnal</string>
     <!-- Login strings -->
-    <string name="login_online_username_hint">Emailul sau numele de utilizator</string>
-    <string name="login_online_username_question">(Care sa il folosesc?)</string>
+    <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
+    <string name="login_online_username_question">(Care sa îl folosesc?)</string>
     <string name="login_online_password_hint">Parola</string>
     <string name="login_online_password_question">Ai uitat parola?</string>
-    <string name="login_online_remember">Tine-ma minte?</string>
-    <string name="login_online_check_keeplogin">Tine-ma logat</string>
-    <string name="login_online_login_label">Autentificate</string>
-    <string name="login_online_create_account">(Creaza cont nou?)</string>
+    <string name="login_online_remember">Ține minte?</string>
+    <string name="login_online_check_keeplogin">Ține-mă logat</string>
+    <string name="login_online_login_label">Autentificate/Loghează-te</string>
+    <string name="login_online_create_account">(Creează cont nou?)</string>
     <string name="login_offline_switch">Cont offline?</string>
     <string name="login_offline_label">Autentificate ca cont offline</string>
     <string name="login_offline_alert_skip">Treci peste</string>
-    <string name="login_error_short_username">Numele de utilizator trebuie sa fie macar 3 caractere</string>
+    <string name="login_error_short_username">Numele de utilizator trebuie sa fie format din macar 3 caractere</string>
     <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
-    <string name="login_select_account">Selecteaza contul</string>
+    <string name="login_select_account">Selectează contul</string>
     <!-- Hint -->
-    <string name="hint_select_account">Pentru al selecta, apasa pe el. Pentru al sterge, tine apasat pe el.</string>
+    <string name="hint_select_account">Pentru a selecta, apasă-l. Pentru a șterge, ține apăsat pe el.</string>
+    <string name="hint_control_mapping">"Această caracteristică nu este încă finalizată așa că nu se poate aplica control personalizat în acest moment!\nGlisați de la dreapta la stânga pentru a deschide meniul ◀\nȚineți apăsat un buton pentru a personaliza: editare, redimensionare sau ștergere."</string>
     <!-- Warning -->
     <string name="warning_title">Avertisment</string>
-    <string name="warning_msg">Aceasta aplicatie s-ar putea sa nu fie compatibila cu versiunea dumneavoastra de Android (peste sau egal cu Android 7.0). Trebuie sa folositi VMOS iar atuncia sa instalati aceasta aplicatie acolo. Dar VMOS a fost sters de pe Play Store, asa ca va trebuit instalat manual.</string>
-    <string name="warning_noshowagain">Nu mai arata din nou</string>
-    <string name="warning_action_install">Instalati VMOS</string>
-    <string name="warning_action_tryanyway">Incearca oricum</string>
-    <string name="warning_action_exit">Iesire</string>
+    <string name="warning_msg">Aceasta aplicație s-ar putea sa nu fie compatibilă cu versiunea dumneavoastră de Android (peste sau egal cu Android 7.0). Puteți folosi VMOS și după să instalați această aplicație în VMOS. Dar VMOS a fost șters de pe Play Store, așa că va trebui instalat manual.</string>
+    <string name="warning_noshowagain">Nu mai arăta</string>
+    <string name="warning_action_install">Instalați VMOS</string>
+    <string name="warning_action_tryanyway">Încearcă oricum</string>
+    <string name="warning_action_exit">Ieșire</string>
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Selectează o hartă de butoane json</string>
     <string name="alerttitle_installmod">Selecteaza un mod de adaugat</string>
+    <string name="alerttitle_installoptifine">Selectează Optifine fișier jar</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher s-a oprit neasteptat</string>
-    <string name="error_checklog">Eroare! Te rog sa verifici jurnalul de mai jos: %s</string>
-    <string name="error_no_version">Nici-o versiune!</string>
-    <string name="error_load_version">Versiunea nu poate fi incarcata %s</string>
-    <string name="error_convert_lib">Libraria nu a putut fi convertita %s</string>
+    <string name="error_fatal">PojavLauncher s-a oprit neașteptat</string>
+    <string name="error_checklog">Eroare! Vă rugăm sa verificați jurnalul de mai jos: %s</string>
+    <string name="error_no_version">Nicio versiune!</string>
+    <string name="error_load_version">Versiunea nu poate fi incarcată %s</string>
+    <string name="error_convert_lib">Library nu a putut fi convertita %s</string>
     <string name="error_convert_client">Minecraft nu a putut fi convertit %s</string>
-    <string name="error_show_more">Arata mai mult</string>
-    <string name="error_show_less">Arata mai putin</string>
+    <string name="error_show_more">Arată mai mult</string>
+    <string name="error_show_less">Arată mai puțin</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Permisiunea de citire/scriere la stocare este necesară!</string>
+    <string name="toast_permission_denied">Permisiunea de citire/scriere stocare este necesară!</string>
+    <string name="toast_login_error">Ceva nu a mers după logare. Vă rugăm ziceții developerului.\nEroare:%s</string>
+    <string name="toast_optifine_success">Instalare reușită</string>
+    <string name="toast_shiftmode">Shift (a strecura) mod de buton schimbat la %s</string>
+    <string name="toast_shiftmode_hold">Mod ține apăsat</string>
+    <string name="toast_shiftmode_toggle">Schimbă modul de click</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Știri lansator</string>
+    <string name="mcl_tab_console">Consolă developer</string>
+    <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
+    <string name="mcl_launch_downloading">Se descarcă %s</string>
+    <string name="mcl_launch_download_lib">Se descarcă library %s</string>
+    <string name="mcl_launch_download_client">Se descarcă Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Se convertează library %s</string>
+    <string name="mcl_launch_convert_client">Se convertează Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Patching Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Se pregătește pentru a descărca resursele</string>
+    <string name="mcl_options">Opțiuni</string>
+    <string name="mcl_option_modmgr">Manager de mod (nicio funcție)</string>
+    <string name="mcl_option_optifineinstall">Instalează Optifine</string>
+    <string name="mcl_option_checkupdate">Verifică actualizare</string>
+    <string name="mcl_option_customcontrol">Controale personalizate</string>
+    <string name="mcl_option_settings">Setări</string>
+    <string name="mcl_option_about">Despre</string>
+    <string name="mcl_setting_title_setmaxdxref">Setează maximul de referințe DX</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Crește dacă o eroare s-a întâmplat în timpul conversiei: Prea Multe ... referințe. Ai putea încerca opțiunea multi-dex. Recomandat: 4096 sau 8192.</string>
+    <string name="mcl_setting_title_freeform">Deschide Minecraft-ul în modul de fereastră</string>
+    <string name="mcl_setting_subtitle_freeform">Deschide Minecraft-ul în modul de fereastră plutitoare. Necesită Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
+    <string name="mcl_setting_title_controlsize">Setaţi dimensiunea butoanelor de control</string>
+    <string name="mcl_setting_title_forgetoptifpath">Fă ca Optifine să nu se poată localiza pe el însuși</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Folositor pentru a face Optifine să ruleze pe unele dispozitive.</string>
+    <string name="mcl_setting_category_general">Setări generale</string>
+    <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
+    <string name="mcl_setting_veroption_release">Lansat oficial</string>
+    <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha-vechi</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-vechi</string>
+    <string name="mcl_version_clone">Clonă</string>
     <!-- Global strings -->
+    <string name="global_add">Adaugă</string>
+    <string name="global_edit">Editează</string>
+    <string name="global_error">Eroare</string>
+    <string name="global_load">Incarcă</string>
+    <string name="global_name">Nume</string>
+    <string name="global_remove">Șterge</string>
+    <string name="global_restart">Repornire</string>
+    <string name="global_save">Salvează</string>
+    <string name="global_error_field_empty">Această propoziție nu poate fi goală</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -75,7 +129,46 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Jocul s-a oprit</string>
+    <string name="mcn_exit_call">Ieșire</string>
+    <string name="mcn_exit_crash">Jocul s-a oprit din cauza unei erori! Apasă OK pentru ieși.</string>
+    <string name="mcn_exit_errcrash">Nu se poate găsi eroarea! Ai putea să ignori acest lucru.</string>
+    <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="controls">Controale</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Tastatură</string>
+    <string name="control_chat">Mesaje (Chat)</string>
+    <string name="control_debug">Depanare</string>
+    <string name="control_zoom">Zoom (C)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: oprit</string>
+    <string name="control_mouseon">Mouse: pornit </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Oprește forțat</string>
+    <string name="control_viewout">Ieșire jurnal</string>
+    <string name="control_adebug">Depanator PointerCapture</string>
+    <string name="control_customkey">Trimite personalizat cod cheie</string>
+    <string name="control_shiftmodechg">Schimbă Shift (a strecura) mod</string>
+    <string name="customctrl_keyname">Cod cheie</string>
+    <string name="customctrl_specialkey">Cheie specială</string>
+    <string name="customctrl_hidden">Ascuns</string>
+    <string name="customctrl_addbutton">Adaugă buton</string>
+    <string name="customctrl_title_selectctrl">Selectează normalul Control json</string>
+    <string name="customctrl_selectdefault">Selectează normalul Control json</string>
     <!-- Update part (unused now) -->
+    <string name="update_console">Actualizează consola</string>
+    <string name="main_options">Opțiuni</string>
+    <string name="main_play">Joacă</string>
+    <string name="main_welcome">Bun venit,</string>
+    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_switchuser">Schimba cont/utilizator</string>
+    <string name="main_version_">Versiune:</string>
+    <string name="main_nocrash">Nicio eroare detectată</string>
+    <string name="main_nolog">Niciun jurnal.</string>
 </resources>

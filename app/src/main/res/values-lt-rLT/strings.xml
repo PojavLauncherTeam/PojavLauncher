@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Paleiskite Minecraft: Java Edition savo įrenginyje!</string>
+    <!-- Action bar part -->
+    <string name="actionbar_help">PAGALBA</string>
+    <!-- Languages list part -->
+    <string name="language_name">LIETUVIŲ - LT</string>
+    <!-- Logging output -->
+    <string name="log_title">Žurnalo įrašai</string>
+    <!-- Login strings -->
+    <string name="login_online_username_hint">El. paštas arba slapyvardis</string>
+    <string name="login_online_username_question">(Kurį naudoti?)</string>
+    <string name="login_online_password_hint">Slaptažodis</string>
+    <string name="login_online_password_question">Pamiršote slaptažodį?</string>
+    <string name="login_online_remember">Atsiminti?</string>
+    <string name="login_online_check_keeplogin">Likti prisijungus</string>
+    <string name="login_online_login_label">Prisijungti</string>
+    <string name="login_online_create_account">(Sukurti naują paskyrą?)</string>
+    <string name="login_offline_switch">Netikra paskyra?</string>
+    <string name="login_offline_label">Prisijungti naudojant netikrą paskyrą</string>
+    <string name="login_offline_alert_skip">Praleisti</string>
+    <string name="login_error_short_username">Slapyvardis turi būti bent iš 3 simbolių</string>
+    <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
+    <string name="login_select_account">Pasirinkti paskyrą</string>
+    <!-- Hint -->
+    <string name="hint_select_account">Kad pasirinktumėte, paspauskite. Spauskite ir laikykite, jei norite ištrinti paskyrą.</string>
+    <string name="hint_control_mapping">"Ši funkcija neužbaigta, tad negalima kurti kontrolių.\nVilkite iš kairės į dešinę kad atidarytumėte meniu. ◀\nLaikykite mygtuką jei norite pritaikyti: redaguoti, padidinti ar ištrinti."</string>
+    <!-- Warning -->
+    <string name="warning_title">Įspėjimas</string>
+    <string name="warning_msg">Ši programa gali būti nepalaikoma dėl jūsų Android versijos (aukštesnė ar lygi Android 7.0). Jūs galite naudoti VMOS ir instaliuoti šią programą į VMOS, bet VMOS buvo pašalinta iš Play Parduotuvės, jūs turite instaliuoti ją rankiniu būdu.</string>
+    <string name="warning_noshowagain">Daugiau neberodyti</string>
+    <string name="warning_action_install">Instaliuoti VMOS</string>
+    <string name="warning_action_tryanyway">Bandyti vistiek</string>
+    <string name="warning_action_exit">Išeiti</string>
+    <string name="warning_remove_account">Ši paskyra bus pašalinta!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Pasirinkti kontrolių JSON</string>
+    <string name="alerttitle_installmod">Pasirinkite modifikaciją pridėjimui</string>
+    <string name="alerttitle_installoptifine">Pasirinkti OptiFine JAR failą</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher netikėtai išsijungė</string>
+    <string name="error_checklog">Klaida! Prašome pažiūrėti įrašus žemiau: %s</string>
+    <string name="error_no_version">Nėra versijos!</string>
+    <string name="error_load_version">Negalima įkelti versijos %s</string>
+    <string name="error_convert_lib">Neįmanoma konvertuoti paketo %s</string>
+    <string name="error_convert_client">Neįmanoma konvertuoti Minecraft %s</string>
+    <string name="error_show_more">Rodyti daugiau</string>
+    <string name="error_show_less">Rodyti mažiau</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Skaitymo/rašymo atmintyje leidimas yra būtinas!</string>
+    <string name="toast_login_error">Kažkas blogo atsitiko po prisijungimo. Prašome palikti žinutę kūrejui.\nKlaida: %s</string>
+    <string name="toast_optifine_success">Instaliavimas sėkmingas</string>
+    <string name="toast_shiftmode">Shift (pritūpti) mygtuko režimas pakeistas į %s</string>
+    <string name="toast_shiftmode_hold">Laikymo režimas</string>
+    <string name="toast_shiftmode_toggle">Perjungimo režimas</string>
+    <!--
+	<string name="toast_3">Exit</string>
+	-->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Žinios</string>
+    <string name="mcl_tab_console">Kūrėjo konsolė</string>
+    <string name="mcl_tab_crash">Išsijungimo įrašai</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Pasiruošta žaisti Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Valomi nereikalingi failai</string>
+    <string name="mcl_launch_downloading">Atsisiunčiama %s</string>
+    <string name="mcl_launch_download_lib">Atsisiunčiamas paketas %s</string>
+    <string name="mcl_launch_download_client">Atsisiunčiama Minecraft %s</string>
+    <string name="mcl_launch_convert_lib">Konvertuojama paketas %s</string>
+    <string name="mcl_launch_convert_client">Konvertuojama Minecraft %s</string>
+    <string name="mcl_launch_patch_client">Taisoma Minecraft %s</string>
+    <string name="mcl_launch_download_assets">Rengiamasi atsisiųsti resursus</string>
+    <string name="mcl_options">Pasirinkimai</string>
+    <string name="mcl_option_modmgr">Modifikacijos (neveikia)</string>
+    <string name="mcl_option_optifineinstall">Instaliuoti Optifine</string>
+    <string name="mcl_option_checkupdate">Ieškoti atnaujinimų</string>
+    <string name="mcl_option_customcontrol">Kontrolės</string>
+    <string name="mcl_option_settings">Nustatymai</string>
+    <string name="mcl_option_about">Apie</string>
+    <string name="mcl_setting_title_setmaxdxref">Nustatyti maksimalią DX nuorodų skaičių</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Padidinti jei atsitinka klaida konvertuojant: Per daug ... nuorodų. Jūs galite bandyti Multi-DEX pasirinkimą. Rekomenduojama: 4096 arba 8192.</string>
+    <string name="mcl_setting_title_freeform">Paleisti laisvoje formoje</string>
+    <string name="mcl_setting_subtitle_freeform">Paleisti Minecraft skraidančiame lange. Reikia Android 7.0+</string>
+    <string name="mcl_setting_title_longpresstrigger">Kaip ilgai suveiks po palaikymo</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Pakeisti veikimo laiką po palaikymo panaikinti ir išmesti daiktą.</string>
+    <string name="mcl_setting_title_controlsize">Pakeisti kontrolių dydį</string>
+    <string name="mcl_setting_title_forgetoptifpath">Padaryti OptiFine nerasti savęs</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Padeda OptiFine būti naudojama ant kai kurių prietaisų.</string>
+    <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
+    <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
+    <string name="mcl_setting_veroption_release">Leidimai</string>
+    <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta</string>
+    <string name="mcl_version_clone">Klonuoti</string>
+    <!-- Global strings -->
+    <string name="global_add">Pridėti</string>
+    <string name="global_edit">Redaguoti</string>
+    <string name="global_error">Klaida</string>
+    <string name="global_load">Įjungti</string>
+    <string name="global_name">Pavadinimas</string>
+    <string name="global_remove">Pašalinti</string>
+    <string name="global_restart">Perkrauti</string>
+    <string name="global_save">Išsaugoti</string>
+    <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
+    <!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Žaidimas išjungiamas</string>
+    <string name="mcn_exit_call">Išeiti</string>
+    <string name="mcn_exit_crash">Žaidimo išsijungimas rastas! Paspauskite OK išėjimui.</string>
+    <string name="mcn_exit_errcrash">Negalima rasti išsijungimo! Jūs galite tai ignoruoti.</string>
+    <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="controls">Kontrolės</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Klaviatūra</string>
+    <string name="control_chat">Pokalbiai</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_zoom">Priartinti (C)</string>
+    <string name="control_primary">Kairė</string>
+    <string name="control_secondary">Deš.</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3</string>
+    <string name="control_listplayers">TAB</string>
+    <string name="control_mouse">Pelė</string>
+    <string name="control_mouseoff">Pelė: išjungta</string>
+    <string name="control_mouseon">Pelė: įjungta </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Priverstinai išjungti</string>
+    <string name="control_viewout">Žurnalo įrašai</string>
+    <string name="control_adebug">PointerCapture Debug</string>
+    <string name="control_customkey">Siųsti mygtuko kodą</string>
+    <string name="control_shiftmodechg">Pakeisti Shift (Pritūpimo) režimą</string>
+    <string name="customctrl_keyname">Mygtuko kodas</string>
+    <string name="customctrl_specialkey">Specialus kodas</string>
+    <string name="customctrl_hidden">Paslėpta</string>
+    <string name="customctrl_addbutton">Pridėti mygtuką</string>
+    <string name="customctrl_title_selectctrl">Pasirinkti pagrindinį kontrolių JSON</string>
+    <string name="customctrl_selectdefault">Pasirinkti pagrindinį kontrolių JSON</string>
+    <!-- Update part (unused now) -->
+    <string name="update_console">Atnaujinti konsolę</string>
+    <string name="main_options">Pasirinkimai</string>
+    <string name="main_play">Žaisti</string>
+    <string name="main_welcome">Sveiki,</string>
+    <string name="main_infodev">Informacija</string>
+    <string name="main_switchuser">Perjungti žaidėją</string>
+    <string name="main_version_">Versija:</string>
+    <string name="main_nocrash">Nerasta netikėtų išsijungimų</string>
+    <string name="main_nolog">Nėra įrašų.</string>
+</resources>

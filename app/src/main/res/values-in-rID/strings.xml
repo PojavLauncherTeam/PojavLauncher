@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
+    <string name="app_motd">Menjalankan Minecraft: Java Edition di perangkat anda!</string>
     <!-- Action bar part -->
     <string name="actionbar_help">BANTUAN</string>
     <!-- Languages list part -->
@@ -16,21 +16,21 @@
     <string name="login_online_password_hint">Kata sandi</string>
     <string name="login_online_password_question">Lupa kata sandi?</string>
     <string name="login_online_remember">Ingat saya?</string>
-    <string name="login_online_check_keeplogin">Tetapkan login saya?</string>
+    <string name="login_online_check_keeplogin">Tetap masuk</string>
     <string name="login_online_login_label">Masuk</string>
     <string name="login_online_create_account">(Buat akun baru?)</string>
     <string name="login_offline_switch">Akun offline?</string>
     <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_offline_alert_skip">Lewati</string>
-    <string name="login_error_short_username">Username harus ada 3 karakter</string>
+    <string name="login_error_short_username">Username minimal harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
     <string name="login_select_account">Pilih akun</string>
     <!-- Hint -->
-    <string name="hint_select_account">Untuk memilih akun, di-klik. Untuk menghapus akun, dipencet dengan ditahan.</string>
-    <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum busa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
+    <string name="hint_select_account">Pencet untuk memilih akun. Untuk menghapus akun, dipencet dengan ditahan.</string>
+    <string name="hint_control_mapping">"Fitur ini belum di-dukung, jadi kontrol kustom belum bisa dipakai!\nGeser dari kanan ke kiri untuk membuka menu ◀\nTahan sebuah tombol untuk menyesuaikan: edit, mengubah ukuran atau menghapus."</string>
     <!-- Warning -->
     <string name="warning_title">Peringatan</string>
-    <string name="warning_msg">Aplikasi ini mungkin tidak bisa dipakai di perangkat anda (lebih atau sama dari Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
+    <string name="warning_msg">Aplikasi ini mungkin tidak bisa dipakai di perangkat anda (lebih dari atau sama dengan Android 7.0). Anda bisa menggunakan VMOS kemudian memasang aplikasi ini di VMOS. Tetapi VMOS dihapus dari Play Store, anda harus memasangnya secara manual.</string>
     <string name="warning_noshowagain">Jangan tunjukkan lagi</string>
     <string name="warning_action_install">Pasang VMOS</string>
     <string name="warning_action_tryanyway">Coba saja</string>
@@ -38,10 +38,10 @@
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Pilih sebuah keymap json</string>
-    <string name="alerttitle_installmod">Pilih sebuah mod untuk di tambah</string>
+    <string name="alerttitle_installmod">Pilih sebuah mod untuk di tambahkan</string>
     <string name="alerttitle_installoptifine">Pilih jar OptiFine</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher tiba-tiba crash!</string>
+    <string name="error_fatal">PojavLauncher tiba-tiba crash</string>
     <string name="error_checklog">Error! Mohon cek catatan log: %s</string>
     <string name="error_no_version">Tidak ada versi!</string>
     <string name="error_load_version">Tidak bisa memuat versi! %s</string>
@@ -50,7 +50,7 @@
     <string name="error_show_more">Tunjukkan lebih</string>
     <string name="error_show_less">Tunjukkan sedikit</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Permisi untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
+    <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_login_error">Sesuatu buruk terjadi setelah login. Mohon feedback kepada developer. \nError: %s</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
     <string name="toast_shiftmode">Mode tombol shift (menunduk) diganti menjadi %s</string>
@@ -64,8 +64,8 @@
     <string name="mcl_tab_console">Konsol debug</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Siap meluncurkan Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Membersihkan file-file cache</string>
+    <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Membersihkan berkas-berkas cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_download_lib">Mengunduh library %s</string>
     <string name="mcl_launch_download_client">Mengunduh Minecraft %s</string>
@@ -80,32 +80,32 @@
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
     <string name="mcl_option_about">Tentang</string>
-    <string name="mcl_setting_title_setmaxdxref">Set maksimal referensi DX</string>
-    <string name="mcl_setting_subtitle_setmaxdxref">Tambahkan jika ada error waktu melakukan konversi: Terlalu banyak ... referensi. Anda bisa mencoba untuk menggunakan pilihan multi dex. Rekomendasi: 4096 atau 8192.</string>
+    <string name="mcl_setting_title_setmaxdxref">Set referensi maksimal DX</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Tambahkan jika ada error waktu melakukan konversi: Terlalu banyak ... referensi. Anda bisa mencoba untuk menggunakan pilihan multi-dex. Rekomendasi: 4096 atau 8192.</string>
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
     <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_controlsize">Set ukuran tombol untuk kontrol.</string>
     <string name="mcl_setting_title_forgetoptifpath">Buat OptiFine tidak bisa mencari diri sendiri</string>
-    <string name="mcl_setting_subtitle_forgetoptifpath">Bisa dipakai untuk meluncurkan OptiFine di beberapa device</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">Bisa dipakai untuk meluncurkan OptiFine di beberapa perangkat.</string>
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
-    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_add">Tambah</string>
     <string name="global_edit">Edit</string>
-    <string name="global_error">Error</string>
-    <string name="global_load">Muat</string>
+    <string name="global_error">Eror</string>
+    <string name="global_load">Memuat</string>
     <string name="global_name">Nama</string>
     <string name="global_remove">Hapus</string>
     <string name="global_restart">Buka ulang</string>
     <string name="global_save">Simpan</string>
-    <string name="global_error_field_empty">Tempat ini tidak boleh kosong.</string>
+    <string name="global_error_field_empty">Tempat ini tidak boleh kosong</string>
     <!--
 	<string name="mcl_about">
 %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -156,24 +156,24 @@
     <string name="control_mouseoff">Mouse: mati</string>
     <string name="control_mouseon">Mouse: nyala </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Tutp secara paksa</string>
+    <string name="control_forceclose">Tutup secara paksa</string>
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">PointerCapture Debug</string>
-    <string name="control_customkey">Kirim kode kunci kustom</string>
+    <string name="control_customkey">Kirim keycode kustom</string>
     <string name="control_shiftmodechg">Ganti mode shift (menunduk)</string>
-    <string name="customctrl_keyname">Kode kunci</string>
-    <string name="customctrl_specialkey">Key spesial</string>
+    <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_specialkey">Kunci spesial</string>
     <string name="customctrl_hidden">Tersembunyi</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
-    <string name="customctrl_title_selectctrl">Pilih json kontrol default</string>
+    <string name="customctrl_title_selectctrl">Pilih \". json\" kontrol default</string>
     <string name="customctrl_selectdefault">Pilih json kontrol default</string>
     <!-- Update part (unused now) -->
-    <string name="update_console">Perbarui konsol</string>
-    <string name="main_options">Pilihan</string>
+    <string name="update_console">Memperbarui konsol</string>
+    <string name="main_options">Pengaturan</string>
     <string name="main_play">Main</string>
     <string name="main_welcome">Selamat datang,</string>
     <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Beralih/ganti user</string>
+    <string name="main_switchuser">Beralih/ganti pengguna</string>
     <string name="main_version_">Versi:</string>
     <string name="main_nocrash">Tidak ada crash terdeteksi</string>
     <string name="main_nolog">Tidak ada catatan log.</string>

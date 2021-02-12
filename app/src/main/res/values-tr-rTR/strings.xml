@@ -39,7 +39,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_selectkeymap">Bir keymap json dosyası seçin</string>
     <string name="alerttitle_installmod">Eklenecek bir mod seçin</string>
-    <string name="alerttitle_installoptifine">Bir optifine jar dosyası seçin</string>
+    <string name="alerttitle_installoptifine">Bir OptiFine jar dosyası seçin</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
     <string name="error_checklog">Hata! Lütfen aşağıdaki günlüğe bakınız: %s</string>
@@ -75,7 +75,7 @@
     <string name="mcl_launch_download_assets">Kaynakları yüklemeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
     <string name="mcl_option_modmgr">Mod yöneticisi (işlevsiz)</string>
-    <string name="mcl_option_optifineinstall">OptiFine indir</string>
+    <string name="mcl_option_optifineinstall">OptiFine yükle</string>
     <string name="mcl_option_checkupdate">Güncellemeleri kontrol et</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
@@ -86,7 +86,7 @@
     <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_controlsize">Kontrol düğmelerinin büyüklüğünü ayarla</string>
     <string name="mcl_setting_title_forgetoptifpath">OptiFine\'ın kendisini bulmasını engelle</string>
     <string name="mcl_setting_subtitle_forgetoptifpath">Bazı cihazlarda OptiFine\'ın çalışması için kullanışlıdır.</string>

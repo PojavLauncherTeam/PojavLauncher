@@ -9,14 +9,14 @@
     <!-- Languages list part -->
     <string name="language_name">NEDERLANDS - NL</string>
     <!-- Logging output -->
-    <string name="log_title">Log output</string>
+    <string name="log_title">Logboekuitvoer</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail of gebruikersnaam</string>
-    <string name="login_online_username_question">(Welke gebruik ik dan?)</string>
+    <string name="login_online_username_question">(Welke moet ik gebruiken?)</string>
     <string name="login_online_password_hint">Wachtwoord</string>
     <string name="login_online_password_question">Wachtwoord vergeten?</string>
     <string name="login_online_remember">Mijn gegevens onthouden?</string>
-    <string name="login_online_check_keeplogin">Houd mij ingelogd</string>
+    <string name="login_online_check_keeplogin">Ingelogd blijven</string>
     <string name="login_online_login_label">Aanmelden</string>
     <string name="login_online_create_account">(Nieuw account aanmaken?)</string>
     <string name="login_offline_switch">Offline account?</string>
@@ -24,9 +24,9 @@
     <string name="login_offline_alert_skip">Overslaan</string>
     <string name="login_error_short_username">Gebruikersnaam moet uit minstens 3 tekens bestaan</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
-    <string name="login_select_account">Selecteer gebruiker</string>
+    <string name="login_select_account">Selecteer account</string>
     <!-- Hint -->
-    <string name="hint_select_account">Om te selecteren, klik erop. Om een account te verwijderen, houd deze ingedrukt.</string>
+    <string name="hint_select_account">Klik om te selecteren. Om een account te verwijderen, houd je deze ingedrukt.</string>
     <string name="hint_control_mapping">"Deze functie is nog niet voltooid, dus kan aangepaste bediening op dit moment niet toepassen!\nVeeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, aanpassen of aanpassen of aanpassen."</string>
     <!-- Warning -->
     <string name="warning_title">Waarschuwing</string>

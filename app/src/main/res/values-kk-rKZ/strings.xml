@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Android-ке арналған Minecraft: Java Edition)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Minecraft: Java Edition-ді өз құрылғыңызда қосыңыз!</string>
+    <!-- Action bar part -->
+    <string name="actionbar_help">КӨМЕК</string>
+    <!-- Languages list part -->
+    <string name="language_name">ҚАЗАҚША - KZ</string>
+    <!-- Logging output -->
+    <string name="log_title">Жорнал шығысы</string>
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email я пайдаланушы аты</string>
+    <string name="login_online_username_question">(Қайсысын қолданайын?)</string>
+    <string name="login_online_password_hint">Құпиясөз</string>
+    <string name="login_online_password_question">Құпиясөзді ұмыттыңыз ба?</string>
+    <string name="login_online_remember">Мені есте сақтау?</string>
+    <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
+    <string name="login_online_login_label">Кіру</string>
+    <string name="login_online_create_account">(Жаңа тіркелгі құрасыз ба?)</string>
+    <string name="login_offline_switch">Offline-тіркелгі?</string>
+    <string name="login_offline_label">Offline-тіркелгімен кіру</string>
+    <string name="login_offline_alert_skip">Өткізіп жіберу</string>
+    <string name="login_error_short_username">Қолданушы аты кем дегенде 3 таңбадан тұруы керек</string>
+    <string name="login_error_exist_username">Бұл ат бос емес</string>
+    <string name="login_select_account">Тіркелгі таңдау</string>
+    <!-- Hint -->
+    <string name="hint_select_account">Таңдау үшін басыңыз, жойып тастау үшін басып ұстаңыз.</string>
+    <string name="hint_control_mapping">"Бұл мүмкіндік әлі әзірленіп біткен жоқ, қазір сіз өзгертілген басқаруды қолдана алмайсыз!\nМәзірді ашу үшін экранды оңнан солға сипаңыз◀\nБаптау (өңдеу, көлем өзгерту я жою) үшін батырманы басып ұстаңыз."</string>
+    <!-- Warning -->
+    <string name="warning_title">Назар аударыңыз</string>
+    <string name="warning_msg">Бұл қолданба құрылғыңыздағы Android нұсқасымен үйлесімді болмауы мүмкін (Android 7.0+). Оның орнына сіз VMOS-ты пайдаланып, осы қолданбаны VMOS-қа орната аласыз. Бірақ VMOS Play Store-дан жойылған, оны қолдан орнатуыңыз керек.</string>
+    <string name="warning_noshowagain">Ендігәрі көрсетпеу</string>
+    <string name="warning_action_install">VMOS-ты орнату</string>
+    <string name="warning_action_tryanyway">Сонда да көру</string>
+    <string name="warning_action_exit">Шығу</string>
+    <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">json пішімді жаймады таңдау</string>
+    <string name="alerttitle_installmod">Қосылатын мод таңдаңыз</string>
+    <string name="alerttitle_installoptifine">OptiFine jar файлын таңдаңыз</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher кенет іркілді</string>
+    <string name="error_checklog">Қате! Астыңғы жорналды көріңізші: %s</string>
+    <string name="error_no_version">Нұсқа жоқ!</string>
+    <string name="error_load_version">%s нұсқасын жүктеу мүмкін емес</string>
+    <string name="error_convert_lib">%s кітапханасын түрлендіру мүмкін емес</string>
+    <string name="error_convert_client">Minecraft %s түрлендіру мүмкін емес</string>
+    <string name="error_show_more">Көрсету</string>
+    <string name="error_show_less">Жасыру</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Қоймадан оқу/жазу рұқсаты керек!</string>
+    <string name="toast_login_error">Кіргеннен кейін бірдеңе істемей қалды. Әзірлеушіге жазыңызшы.\nҚате:%s</string>
+    <string name="toast_optifine_success">Орнату сәтті өтті</string>
+    <string name="toast_shiftmode">Shift пернесінің режімі %sне ауыстырылған</string>
+    <string name="toast_shiftmode_hold">ұстау режімі</string>
+    <string name="toast_shiftmode_toggle">ауыстыру режімі</string>
+    <!--
+	<string name="toast_3">Exit</string>
+	-->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Лаунчер жаңалығы</string>
+    <string name="mcl_tab_console">Әзірлеу консолі</string>
+    <string name="mcl_tab_crash">Іркіліс жорналы</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
+    <string name="mcl_launch_cleancache">Кәш файлдары жойылуда</string>
+    <string name="mcl_launch_downloading">%s жүктелуде</string>
+    <string name="mcl_launch_download_lib">%s кітапханасы жүктелуде</string>
+    <string name="mcl_launch_download_client">Minecraft %s жүктелуде</string>
+    <string name="mcl_launch_convert_lib">%s кітапханасы түрленуде</string>
+    <string name="mcl_launch_convert_client">Minecraft %s түрленуде</string>
+    <string name="mcl_launch_patch_client">Minecraft %s түзетілуде</string>
+    <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
+    <string name="mcl_options">Баптау</string>
+    <string name="mcl_option_modmgr">Мод меңгеруші (істемейді)</string>
+    <string name="mcl_option_optifineinstall">OptiFine орнату</string>
+    <string name="mcl_option_checkupdate">Жаңару тексеру</string>
+    <string name="mcl_option_customcontrol">Өңделген басқару</string>
+    <string name="mcl_option_settings">Баптау</string>
+    <string name="mcl_option_about">Лаунчер жайлы</string>
+    <string name="mcl_setting_title_setmaxdxref">DX сұратымның макс. санын баптау</string>
+    <string name="mcl_setting_subtitle_setmaxdxref">Түрлену барысында қате пайда болғанда көбейтіңіз: Тым көп ... сұратым. Multi-dex опциясын қолданып көріңіз. 4096 я 8192 ұсынамыз.</string>
+    <string name="mcl_setting_title_freeform">Minecraft\'ті терезе режімінде қосу</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
+    <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
+    <string name="mcl_setting_title_controlsize">Басқару батырмаларының көлемін баптау</string>
+    <string name="mcl_setting_title_forgetoptifpath">OptiFine-ді өзін таба алмас қылу</string>
+    <string name="mcl_setting_subtitle_forgetoptifpath">OptiFine-ді кейбір құрылғыда қосуға мүмкіндік береді.</string>
+    <string name="mcl_setting_category_general">Негізгі баптамалар</string>
+    <string name="mcl_setting_category_veroption">Нұсқа тізімінде көрсетілетін нұсқа түрлері</string>
+    <string name="mcl_setting_veroption_release">Релиз</string>
+    <string name="mcl_setting_veroption_snapshot">Снапшот</string>
+    <string name="mcl_setting_veroption_oldalpha">Ескі альфа</string>
+    <string name="mcl_setting_veroption_oldbeta">Ескі бета</string>
+    <string name="mcl_version_clone">Клондау</string>
+    <!-- Global strings -->
+    <string name="global_add">Қосу</string>
+    <string name="global_edit">Өңдеу</string>
+    <string name="global_error">Қате</string>
+    <string name="global_load">Жүктеу</string>
+    <string name="global_name">Атауы</string>
+    <string name="global_remove">Алып тастау</string>
+    <string name="global_restart">Қайта жүктеу</string>
+    <string name="global_save">Сақтау</string>
+    <string name="global_error_field_empty">Бұл өріс бос бола алмайды</string>
+    <!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Ойын жабылды</string>
+    <string name="mcn_exit_call">Шығу</string>
+    <string name="mcn_exit_crash">Ойын іркілісі табылды! Шығу үшін OK\'ті басыңыз.</string>
+    <string name="mcn_exit_errcrash">Іркілісті табу мүмкін емес! Бұған мән бермей-ақ қойыңыз.</string>
+    <string name="mcn_exit_confirm">Мәжбүрлеп жапқыңыз келе ме?</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="controls">Басқару</string>
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Пернетақта</string>
+    <string name="control_chat">Чат</string>
+    <string name="control_debug">Оңдау</string>
+    <string name="control_zoom">Зум (С)</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Инв</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">F5</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Тінтуір</string>
+    <string name="control_mouseoff">Тінтуір: өшір.</string>
+    <string name="control_mouseon">Тінтуір: қос.</string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Мәжбүрлеп жабу</string>
+    <string name="control_viewout">Жорнал шығысы</string>
+    <string name="control_adebug">PointerCapture-ді оңдау</string>
+    <string name="control_customkey">Өзгертілген жайманы жіберу</string>
+    <string name="control_shiftmodechg">Shift пернесінің режімін ауыстыру</string>
+    <string name="customctrl_keyname">Перне коды</string>
+    <string name="customctrl_specialkey">Арнайы перне</string>
+    <string name="customctrl_hidden">Жасырын</string>
+    <string name="customctrl_addbutton">Батырма қосу</string>
+    <string name="customctrl_title_selectctrl">Ctrl-дың әдепкі json-ын таңдау</string>
+    <string name="customctrl_selectdefault">Ctrl-дың әдепкі json-ын таңдау</string>
+    <!-- Update part (unused now) -->
+    <string name="update_console">Консольді жаңарту</string>
+    <string name="main_options">Баптау</string>
+    <string name="main_play">Ойнау</string>
+    <string name="main_welcome">Сәлем,</string>
+    <string name="main_infodev">Ақпар (Әзірлеуші)</string>
+    <string name="main_switchuser">Пайдаланушы ауыстыру</string>
+    <string name="main_version_">Нұсқасы:</string>
+    <string name="main_nocrash">Іркіліс табылмады</string>
+    <string name="main_nolog">Лог жоқ.</string>
+</resources>

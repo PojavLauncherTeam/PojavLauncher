@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Android өсөн Minecraft: Java Edition)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Minecraft: Java Edition үҙегеҙҙең яйланмала ебәрегеҙ!</string>
+    <!-- Action bar part -->
+    <string name="actionbar_help">ЯРҘАМ</string>
+    <!-- Languages list part -->
+    <string name="language_name">БАШҠОРТСА - RU</string>
+    <!-- Logging output -->
+    <string name="log_title">Журнал</string>
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email йәки ҡулланыусы исеме</string>
+    <string name="login_online_username_question">(Ҡайһын ҡулланырға?)</string>
+    <string name="login_online_password_hint">Серһүҙ</string>
+    <string name="login_online_password_question">Серһүҙҙе оноттоғоҙ мы?</string>
+    <string name="login_online_remember">Хәтерҙә ҡалдырырға мы?</string>
+    <string name="login_online_check_keeplogin">Хәтерҙә ҡалдырырға</string>
+    <string name="login_online_login_label">Керергә</string>
+    <string name="login_online_create_account">(Яңы хисап яҙманы яҙырға мы?)</string>
+    <string name="login_offline_alert_skip">Үтеәрергә</string>
+    <string name="login_error_short_username">Ҡулланыусы исеме 3 хәрефтән аҙ булмаҫҡа тейеш</string>
+    <string name="login_error_exist_username">Был ҡулланыусы исеме инде бар</string>
+    <string name="login_select_account">Хисап яҙмалар</string>
+    <!-- Hint -->
+    <!-- Warning -->
+    <string name="warning_noshowagain">Бөтән күрһәтмеҫкә</string>
+    <string name="warning_action_install">VMOS-ты урынлаштырығыҙ</string>
+    <string name="warning_action_exit">Сығырға</string>
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <string name="error_no_version">Версиялар юҡ!</string>
+    <string name="error_show_more">Күберәк</string>
+    <string name="error_show_less">Әҙерәк</string>
+    <!-- Toast messages -->
+    <string name="toast_optifine_success">Урынлаштырылды</string>
+    <!--
+	<string name="toast_3">Exit</string>
+	-->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Яңылыҡтар</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading">Йөкләү %s</string>
+    <string name="mcl_options">Опциялар</string>
+    <string name="mcl_option_optifineinstall">OptiFine-ды урынлаштырырға</string>
+    <string name="mcl_option_checkupdate">Яңыртыуҙарҙы тикшерергә</string>
+    <string name="mcl_option_settings">Көйләүҙәр</string>
+    <string name="mcl_option_about">Лаунчер тураһында</string>
+    <string name="mcl_setting_veroption_release">Релиздар</string>
+    <string name="mcl_setting_veroption_snapshot">Снапшотттар</string>
+    <string name="mcl_setting_veroption_oldalpha">Иҫке альфалар</string>
+    <string name="mcl_setting_veroption_oldbeta">Иҫке беталар</string>
+    <!-- Global strings -->
+    <string name="global_add">Өҫтәргә</string>
+    <string name="global_edit">Үҙгәртергә</string>
+    <string name="global_error">Хата</string>
+    <string name="global_load">Йөкләү</string>
+    <string name="global_name">Исем</string>
+    <string name="global_remove">Юйырға</string>
+    <string name="global_save">Һаҡларға</string>
+    <!--
+	<string name="mcl_about">
+%1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+		" - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+		"Using libraries:\n" +
+		" • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+		//" • Boardwalk memory manager (not used now).\n" +
+		" • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+		" • dx: tool to convert.\n" +
+		" • Java AWT Implementation includes:\n" +
+		"  - Boardwalk's makeshift.\n" +
+		"  - Apache Harmony AWT Framework.\n" +
+		"  - OpenJDK 7 codes implementation.\n" +
+		"  - Developer code implement (copy text, open browser,...)\n" +
+		"\n" +
+		"* Notes:\n" +
+		" - This app is currently BETA, it will not be stable.\n" +
+		//"* This app will unstable on Android 7.0 or higher devices.\n" +
+		" - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+		" - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+	</string>
+-->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Уйын ябылды</string>
+    <string name="mcn_exit_call">Сығырға</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_chat">Сүбхәт</string>
+    <string name="control_zoom" comment="control_zoom&#10;&quot;C&quot; is key name">Зум (С)</string>
+    <string name="control_primary" comment="control_primary&#10;Maybe translate as LMB (Left Mouse Button)" maxLength="5">ҺСТ</string>
+    <string name="control_secondary" comment="control_secondary&#10;Maybe translate as RMB (Right Mouse Button)" maxLength="5">УСТ</string>
+    <string name="control_shift">◇</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">F5</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Сысҡан</string>
+    <string name="control_mouseoff">Сысҡан: Һүн</string>
+    <string name="control_mouseon">Сысҡан: Ҡаб </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Журнал</string>
+    <string name="customctrl_hidden">Йәшеренгән</string>
+    <string name="customctrl_addbutton">Төймәне булдырырға</string>
+    <!-- Update part (unused now) -->
+    <string name="main_options">Опциялар</string>
+    <string name="main_play">Уйнарға</string>
+    <string name="main_welcome">Рәхим итегеҙ,</string>
+    <string name="main_infodev">Инфо (Эшк.)</string>
+    <string name="main_switchuser">Ҡулланыусыны алмаштырырға</string>
+    <string name="main_version_">Версия:</string>
+</resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition per Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition su Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Avvia Minecraft: Java Edition sul tuo dispositivo!</string>
     <!-- Action bar part -->
@@ -21,28 +21,28 @@
     <string name="login_online_create_account">(Creare nuovo account?)</string>
     <string name="login_offline_switch">Account Offline?</string>
     <string name="login_offline_label">Accedi come account Offline</string>
-    <string name="login_offline_alert_skip">Ignora</string>
+    <string name="login_offline_alert_skip">Salta</string>
     <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
-    <string name="login_error_exist_username">Il nome utente esiste già</string>
+    <string name="login_error_exist_username">Nome utente già esistente</string>
     <string name="login_select_account">Seleziona account</string>
     <!-- Hint -->
-    <string name="hint_select_account">Per selezionarlo, cliccalo. Per cancellare un account, tieni premuto.</string>
-    <string name="hint_control_mapping">"Questa funzione non è stata ancora finita quindi quindi i controlli personalizzati non sono utilizzabili!\nScorri da destra a sinistra per aprire il menu ◀\n Premi un pulsante per personalizzare: modifica, ridimensiona o cancella."</string>
+    <string name="hint_select_account">Tieni premuto per cancellare oppure clicca per selezionarlo.</string>
+    <string name="hint_control_mapping">"Questa è una funzione sperimentale perciò i controlli personalizzati non sono ancora disponibili!\nScorri da destra verso sinistra per aprire il menu ◀\n Premi un pulsante per personalizzare: modificare, ridimensionare o cancellare."</string>
     <!-- Warning -->
     <string name="warning_title">Avviso</string>
-    <string name="warning_msg">Questa applicazione potrebbe non essere compatibile con la tua versione di android (Successiva o uguale ad Android 7.0). Puoi utilizzare VMOS e poi installare questa app a VMOS. Però VMOS non è più disponibile sul Play Store, devi installarlo manualmente.</string>
-    <string name="warning_noshowagain">Non chiedere più</string>
+    <string name="warning_msg">Ci potrebbero essere incompatbilità con questa versione Android (Android 7.0 o più recente). Puoi installare VMOS e poi quest\'app. Dal momento che VMOS è stato rimosso dal Play Store, dovrai installarlo manualmente.</string>
+    <string name="warning_noshowagain">Non mostrare più</string>
     <string name="warning_action_install">Installa VMOS</string>
     <string name="warning_action_tryanyway">Prova comunque</string>
     <string name="warning_action_exit">Esci</string>
-    <string name="warning_remove_account">Questo account verrà rimosso!</string>
+    <string name="warning_remove_account">L\'account sarà cancellato!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_selectkeymap">Seleziona un keymap json</string>
-    <string name="alerttitle_installmod">Seleziona una mod da aggiungere</string>
-    <string name="alerttitle_installoptifine">Seleziona il file jar Optifine</string>
+    <string name="alerttitle_selectkeymap">Seleziona mappatura (keymap) json</string>
+    <string name="alerttitle_installmod">Selezionare mod da aggiungere</string>
+    <string name="alerttitle_installoptifine">Seleziona file jar Optifine</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher è crashato in modo imprevisto</string>
-    <string name="error_checklog">Errore! Per favore controlla i log sotto: %s</string>
+    <string name="error_fatal">PojavLauncher è crashato</string>
+    <string name="error_checklog">Errore! Per favore controlla i log in basso: %s</string>
     <string name="error_no_version">Nessuna versione!</string>
     <string name="error_load_version">Impossibile caricare la versione %s</string>
     <string name="error_convert_lib">Impossibile convertire la libreria %s</string>
@@ -50,22 +50,22 @@
     <string name="error_show_more">Mostra altro</string>
     <string name="error_show_less">Mostra meno</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">È necessario il permesso di lettura/scrittura sulla archiviazione!</string>
+    <string name="toast_permission_denied">Permesso di scrittura/lettura sulla memoria necessario!</string>
     <string name="toast_login_error">Qualcosa è andato storto dopo l\'accesso. Per favore segnalalo allo sviluppatore.\nErrore: %s</string>
     <string name="toast_optifine_success">Installato con successo</string>
     <string name="toast_shiftmode">La modalità del pulsante Shift (shiftati) è stata modificata a %s</string>
-    <string name="toast_shiftmode_hold">Modalità Hold</string>
+    <string name="toast_shiftmode_hold">Mantieni modalità</string>
     <string name="toast_shiftmode_toggle">Clicca cambia modalità</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Notizie sul launcher</string>
-    <string name="mcl_tab_console">Console di sviluppo</string>
+    <string name="mcl_tab_news">Notizie launcher</string>
+    <string name="mcl_tab_console">Console sviluppatore</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Pronto a giocare Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Ripulendo i file di cache</string>
+    <string name="mcl_version_msg">Minecraft %s pronto</string>
+    <string name="mcl_launch_cleancache">Pulizia dei file di cache in corso</string>
     <string name="mcl_launch_downloading">Scaricando %s</string>
     <string name="mcl_launch_download_lib">Scaricando libreria %s</string>
     <string name="mcl_launch_download_client">Scaricando Minecraft %s</string>

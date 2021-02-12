@@ -1,20 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition за Андроид)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Покрените Minecraft: Java Edition на вашем уређају!</string>
     <!-- Action bar part -->
+    <string name="actionbar_help">ПОМОЋ</string>
     <!-- Languages list part -->
+    <string name="language_name">СРПСКИ - RS</string>
     <!-- Logging output -->
+    <string name="log_title">Лог Избацивано</string>
     <!-- Login strings -->
+    <string name="login_online_username_hint">Е-пошта или ваше Минецрафт име</string>
+    <string name="login_online_username_question">(Шта да користим?)</string>
+    <string name="login_online_password_hint">Шифра</string>
+    <string name="login_online_password_question">Заборавили шифру?</string>
+    <string name="login_online_remember">Запамти ме?</string>
+    <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
+    <string name="login_online_login_label">Пријава</string>
+    <string name="login_online_create_account">(Направити нови налог?)</string>
+    <string name="login_offline_switch">Офлајн налог?(Некористи Мојанг Налог)?</string>
+    <string name="login_offline_label">Пријавите се као офлајн налог</string>
+    <string name="login_offline_alert_skip">Прескочите</string>
+    <string name="login_error_short_username">Корисничко име мора имати најмање 3 карактера</string>
+    <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
+    <string name="login_select_account">Изаберите налог</string>
     <!-- Hint -->
+    <string name="hint_select_account">Да селектујете, притисните. Да избришете налог, дршжите изабрани налог.</string>
+    <string name="hint_control_mapping">"Ова функција још није готова, тако да тренутно не можете применити прилагођену контролу!\nПревуците здесна налево да бисте отворили мени ◀\nДржите дугме за прилагођавање: измените, промените величину или избришите."</string>
     <!-- Warning -->
+    <string name="warning_title">Упозорење</string>
+    <string name="warning_msg">Ова апликација можда није компатибилна са вашом верзијом Андроида (изнад или једнака је Андроиду 7.0). Можете да користите VMOS, а затим уместо тога инсталирајте ову апликацију на VMOS. Али VMOS је уклањен са Плеј Сторе, морате га инсталирати ручно.</string>
+    <string name="warning_noshowagain">Не приказуј поново</string>
+    <string name="warning_action_install">Инсталирајте VMOS</string>
+    <string name="warning_action_tryanyway">Ипак пробај</string>
+    <string name="warning_action_exit">Изађи</string>
+    <string name="warning_remove_account">Овај налог ће бити уклоњен!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_selectkeymap">Селектујте keymap json</string>
+    <string name="alerttitle_installmod">Изаберите мод да додате</string>
+    <string name="alerttitle_installoptifine">Селектујте Оптифине јар фајл</string>
     <!-- Error messages -->
+    <string name="error_fatal">ПојавЛаунчер је неочекивано угасио</string>
+    <string name="error_checklog">Грешка! Молим вас да провјерите лог испод: %s</string>
+    <string name="error_no_version">Нема верзије!</string>
+    <string name="error_load_version">Није могло да се учита верзија %s</string>
+    <string name="error_convert_lib">Није могло да се ковертује библиотека %s</string>
+    <string name="error_convert_client">Није могло да се ковертује библиотека %s</string>
+    <string name="error_show_more">Прикажи више</string>
+    <string name="error_show_less">Прикажи мање</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">ПојавЛаунчер треба пиши/читај дозволу!</string>
+    <string name="toast_login_error">Грешка се десила послије пријаве. Молим вас да ово пријавите девелоперу.\nГрешка: %s</string>
+    <string name="toast_optifine_success">Инсталирање успјешно</string>
+    <string name="toast_shiftmode">Shift (чучање) дугме мод промјењен на %s</string>
+    <string name="toast_shiftmode_hold">Холд моде</string>
+    <string name="toast_shiftmode_toggle">Клик тоггле мод</string>
     <!--
 	<string name="toast_3">Exit</string>
 	-->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Лаунчер новости</string>
+    <string name="mcl_tab_console">Програмерска конзола</string>
+    <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
     <!-- Global strings -->
     <!--
 	<string name="mcl_about">
@@ -39,7 +89,12 @@
 	</string>
 -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Изађи</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_zoom">Зумирање (Ц)</string>
+    <string name="control_primary">При</string>
+    <string name="control_secondary">Сек</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Лог Избацивано</string>
     <!-- Update part (unused now) -->
 </resources>
