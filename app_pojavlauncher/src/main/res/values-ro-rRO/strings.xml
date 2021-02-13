@@ -42,6 +42,8 @@
     <string name="mcl_tab_console">Consolă developer</string>
     <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Conectat</string>
+    <string name="mcl_account_offline">Deconectat</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
     <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
@@ -142,7 +144,7 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Editează %s</string>
-    <string name="customctrl_remove">Șterge %s?</string>
+    <string name="customctrl_remove">Ștergi %s?</string>
     <string name="customctrl_keyname">Cod cheie</string>
     <string name="customctrl_toggle">Comutabil</string>
     <string name="customctrl_size">Dimensiune</string>
