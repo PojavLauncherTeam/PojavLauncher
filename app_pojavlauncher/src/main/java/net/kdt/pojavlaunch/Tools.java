@@ -18,6 +18,8 @@ import java.util.zip.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+
 import org.lwjgl.glfw.*;
 import android.view.*;
 import android.widget.Toast;
@@ -64,7 +66,13 @@ public final class Tools
 
     public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
-        String[] launchArgs = getMinecraftArgs(profile, versionInfo);
+        PerVersionConfig.update();
+        PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
+        String gamedirPath;
+        if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
+        else gamedirPath = Tools.DIR_GAME_NEW;
+        if(pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
+        String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
@@ -171,7 +179,7 @@ public final class Tools
         javaArgList.addAll(overrideableArgList);
     }
 
-    public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {
+    public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, String strGameDir) {
         String username = profile.username;
         String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
@@ -180,7 +188,7 @@ public final class Tools
         
         String userType = "mojang";
 
-        File gameDir = new File(Tools.DIR_GAME_NEW);
+        File gameDir = new File(strGameDir);
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
