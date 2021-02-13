@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Дозволяє зменшити роздільну здатність гри. 100% - роздільна здатність смартфона</string>
     <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
+    <string name="mcl_setting_title_backtorightmouse">Враховувати кнопку \"Назад\" як праву кнопку миші</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Деякі пристрої використовують зовнішню праву кнопку миші як кнопку \"Назад\". Якщо ви використовуєте зовнішню мишу, то потрібно це увімкнути.</string>
     <string name="mcl_setting_title_buttonscale">Масштабування кнопок керування</string>
     <string name="mcl_setting_subtitle_buttonscale">Збільшити їх, якщо кнопки замалі.</string>
     <string name="mcl_setting_title_mousescale">Масштабування курсору</string>
