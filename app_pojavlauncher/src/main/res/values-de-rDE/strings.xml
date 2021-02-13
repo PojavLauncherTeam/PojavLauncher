@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht es dir die Spielauflösung zu verringern. 100% ist die normale Auflösung</string>
     <string name="mcl_setting_title_longpresstrigger">Wie lange wird nach langem Drücken ausgelöst</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
+    <string name="mcl_setting_title_backtorightmouse">Die Zurück-Taste als Rechte Maustaste werten</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Manche Geräte werten den Rechtsklick einer externen Maus als Zurück-Taste. Solltest du eine externe Maus verwenden, solltest du diese Einstellung aktivieren.</string>
     <string name="mcl_setting_title_buttonscale">Größe der Steuerungsschaltflächen</string>
     <string name="mcl_setting_subtitle_buttonscale">Vergrößere die Schaltflächen, wenn sie zu klein sind.</string>
     <string name="mcl_setting_title_mousescale">Größe der Maus</string>
