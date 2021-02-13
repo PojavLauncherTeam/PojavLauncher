@@ -42,6 +42,8 @@
     <string name="mcl_tab_console">Consolă developer</string>
     <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Conectat</string>
+    <string name="mcl_account_offline">Deconectat</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
     <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
@@ -66,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Permite descreșterea rezoluției jocului. 100% este o rezoluție completă</string>
     <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratează butonul înapoi ca butonul click dreapta</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Unele dispozitive trateaza butonul click dreapta al mouse-ului extern ca butonul înapoi. Dacă folosiți mouse-ul extern, ar trebui să activați acest lucru.</string>
     <string name="mcl_setting_title_buttonscale">Redimensionare butoane de control</string>
     <string name="mcl_setting_subtitle_buttonscale">Fă mai mare dacă butoanele sunt prea mici.</string>
     <string name="mcl_setting_title_mousescale">Redimensionarea mouse-ului</string>
@@ -142,7 +146,7 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Editează %s</string>
-    <string name="customctrl_remove">Șterge %s?</string>
+    <string name="customctrl_remove">Ștergi %s?</string>
     <string name="customctrl_keyname">Cod cheie</string>
     <string name="customctrl_toggle">Comutabil</string>
     <string name="customctrl_size">Dimensiune</string>
@@ -170,4 +174,14 @@
     <string name="auto_ram_subtitle">Activează ajustarea automată RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memorie setată la %d MB</string>
+    <string name="vp_latest_snapshot">Ultimul snapshot</string>
+    <string name="vp_latest_release">Ultima Versiune Stabilă</string>
+    <string name="mcl_tab_profiles">Profiluri</string>
+    <string name="mcl_profile_editor_title_profile">PROFILURI</string>
+    <string name="mcl_profile_editor_title_version">VERSIUNI</string>
+    <string name="mcl_profile_editor_edit_text_title">Nume profil</string>
+    <string name="mcl_profile_editor_save">salvează</string>
+    <string name="profedit_selected_version">Versiunea selectată: %s</string>
+    <string name="profedit_selected_profile">Profilul selectat: %s</string>
+    <string name="global_new">Nou</string>
 </resources>
