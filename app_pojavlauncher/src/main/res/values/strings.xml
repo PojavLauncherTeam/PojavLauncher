@@ -85,6 +85,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
     <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Treat back button as right mouse</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treats external right mouse as back button. If you are using external mouse, you should enable this.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
     <string name="mcl_setting_subtitle_buttonscale">Upscale them if buttons are too small.</string>
     <string name="mcl_setting_title_mousescale">Mouse scaling</string>

@@ -49,6 +49,11 @@
             android:key="autoRam"
             android:summary="@string/auto_ram_subtitle"
             android:title="@string/auto_ram_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="backToRightMouse"
+            android:summary="@string/mcl_setting_subtitle_backtorightmouse"
+            android:title="@string/mcl_setting_title_backtorightmouse" />
 
         <androidx.preference.EditTextPreference
             android:dialogTitle="@string/mcl_setting_title_javaargs"

@@ -5,6 +5,8 @@ import android.view.*;
 
 import java.net.CookieHandler;
 import java.util.*;
+
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import org.lwjgl.glfw.*;
 
 public class AndroidLWJGLKeycode {
@@ -173,12 +175,16 @@ public class AndroidLWJGLKeycode {
 
         try {
                 //System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
-                 if(keyEvent.getUnicodeChar() != 0) {
-                     char key = (char)keyEvent.getUnicodeChar();
+            if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK && LauncherPreferences.PREF_BACK_TO_RIGHT_MOUSE) {
+                BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, keyEvent.getAction() == KeyEvent.ACTION_DOWN);
+            } else {
+                if(keyEvent.getUnicodeChar() != 0) {
+                    char key = (char)keyEvent.getUnicodeChar();
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),key,0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
-                 }else{
+                }else{
                      BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),CallbackBridge.getCurrentMods(),keyEvent.getAction()==KeyEvent.ACTION_DOWN);
-                 }
+                }
+            }
         } catch (Throwable th) {
             th.printStackTrace();
         }
