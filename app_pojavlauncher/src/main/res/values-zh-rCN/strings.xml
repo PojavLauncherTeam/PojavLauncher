@@ -178,4 +178,14 @@
     <string name="auto_ram_subtitle">启用 RAM 自动调节器</string>
     <string name="auto_ram_title">自动 RAM</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
+    <string name="vp_latest_snapshot">最新快照</string>
+    <string name="vp_latest_release">最新发行</string>
+    <string name="mcl_tab_profiles">配置</string>
+    <string name="mcl_profile_editor_title_profile">配置</string>
+    <string name="mcl_profile_editor_title_version">版本</string>
+    <string name="mcl_profile_editor_edit_text_title">配置名称</string>
+    <string name="mcl_profile_editor_save">保存</string>
+    <string name="profedit_selected_version">选中版本：%s</string>
+    <string name="profedit_selected_profile">选中配置：%s</string>
+    <string name="global_new">新建</string>
 </resources>
