@@ -176,4 +176,14 @@
     <string name="auto_ram_subtitle">Автоматты түрде ОЕСҚ-ны басқарады</string>
     <string name="auto_ram_title">Авто ОЕСҚ</string>
     <string name="autoram_info_msg">%d МБ жад берілді</string>
+    <string name="vp_latest_snapshot">Соңғы снапшот</string>
+    <string name="vp_latest_release">Соңғы релиз</string>
+    <string name="mcl_tab_profiles">Бейін</string>
+    <string name="mcl_profile_editor_title_profile">БЕЙІН</string>
+    <string name="mcl_profile_editor_title_version">НҰСҚА</string>
+    <string name="mcl_profile_editor_edit_text_title">Бейін атауы</string>
+    <string name="mcl_profile_editor_save">сақтау</string>
+    <string name="profedit_selected_version">Таңдалған нұсқа: %s</string>
+    <string name="profedit_selected_profile">Таңдалған бейін: %s</string>
+    <string name="global_new">Жаңа</string>
 </resources>
