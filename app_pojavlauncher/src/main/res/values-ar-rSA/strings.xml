@@ -17,23 +17,23 @@
     <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
     <string name="login_select_account">اختر الحساب</string>
     <string name="login_title_no_saved_account">لم يتم العثور على حسابات!</string>
-    <string name="login_dialog_no_saved_account">ليس لديك أي حساب محفوظ.\nاستخدم الخيار <b>\"ابقوني مسجلاً\"</b> لحفظ حساب عند تسجيل الدخول الأول.</string>
+    <string name="login_dialog_no_saved_account">ليس لديك أي حساب محفوظ.\nاستخدم الخيار <b>\"أبق تسجيل دخولي\"</b> لحفظ حساب عند تسجيل الدخول الأول.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر لتخصيص: تحرير أو تغيير الحجم أو حذفه."</string>
+    <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر التخصيص: تحريره أو تغيير حجمه أو حذفه."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">تثبيت محرك تشغيل جافا %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">حدد مود للتثبيت</string>
+    <string name="alerttitle_installmod">حدد مشغل مودات للتثبيت</string>
     <!-- Error messages -->
     <string name="error_fatal">لقد توقف PojavLauncher بشكل غير متوقع</string>
-    <string name="error_no_version">لا يوجد اصدار!</string>
+    <string name="error_no_version">لا يوجد إصدار!</string>
     <string name="error_show_more">اظهر المزيد</string>
     <string name="error_show_less">أظهِر أقل</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">مطلوب إذن القراءة و الكتابة للتخزين!</string>
     <string name="toast_optifine_success">تم التثبيت بنجاح</string>
-    <string name="toast_uninstalljre_done">تم إلغاء محرك تشغيل جافا</string>
+    <string name="toast_uninstalljre_done">تم إلغاء تثبيت محرك تشغيل جافا</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -51,12 +51,12 @@
     <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
     <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
     <string name="mcl_options">الخيارات</string>
-    <string name="mcl_option_modinstall">تشغيل مثبت مورد (Forge, LabyMod, Fabric, الخ...)</string>
-    <string name="mcl_option_modinstallwitharg">تشغيل مثبت Mod (مع حجج مخصصة)</string>
+    <string name="mcl_option_modinstall">تشغيل مثبت مود (Forge, LabyMod, Fabric, الخ...)</string>
+    <string name="mcl_option_modinstallwitharg">تشغيل مثبت مود (مع حجج مخصصة)</string>
     <string name="mcl_option_customcontrol">تخصيص التحكم</string>
     <string name="mcl_option_settings">الاعدادات</string>
     <string name="mcl_option_about">حول التطبيق</string>
-    <string name="mcl_setting_title_uninstalljre">إلغاء محرك تشغيل جافا</string>
+    <string name="mcl_setting_title_uninstalljre">إلغاء تثبيت محرك تشغيل جافا</string>
     <string name="mcl_setting_subtitle_uninstalljre">[مطلوب إعادة تشغيل التطبيق] هذا يسمح لك بإعادة تثبيت محرك تشغيل جافا</string>
     <string name="mcl_setting_title_freeform">تشغيل ماين كرافت في وضع حر</string>
     <string name="mcl_setting_subtitle_freeform">تشغيل ماين كرافت في النافذة العائمة. يتطلب أندرويد 7.0+</string>
@@ -178,4 +178,10 @@
     <string name="vp_latest_release">آخر إصدار</string>
     <string name="mcl_tab_profiles">ملفات شخصية</string>
     <string name="mcl_profile_editor_title_profile">ملفات شخصية</string>
+    <string name="mcl_profile_editor_title_version">إصدارات</string>
+    <string name="mcl_profile_editor_edit_text_title">اسم الملف الشخصي</string>
+    <string name="mcl_profile_editor_save">حفظ</string>
+    <string name="profedit_selected_version">الإصدار المحدد: %s</string>
+    <string name="profedit_selected_profile">الملف الشخصي المحدد: %s</string>
+    <string name="global_new">جديد</string>
 </resources>
