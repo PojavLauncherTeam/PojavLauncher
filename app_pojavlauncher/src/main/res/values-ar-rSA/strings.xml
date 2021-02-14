@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتقليل دقة اللعبة. 100% دقة كاملة</string>
     <string name="mcl_setting_title_longpresstrigger">كم من الوقت سيتم تشغيله بعد الضغط المطول</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغيير وقت التشغيل للضغط المطول في كتلة التحطيم وإسقاط الموارد.</string>
+    <string name="mcl_setting_title_backtorightmouse">التعامل مع زر الرجوع كزر الماوس الأيمن</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">بعض الأجهزة تتعامل مع زر الفأرة الخارجية اليمنى كزر للعودة. إذا كنت تستخدم الماوس الخارجي، يجب عليك تمكين هذا.</string>
     <string name="mcl_setting_title_buttonscale">ضبط حجم أزرار التحكم</string>
     <string name="mcl_setting_subtitle_buttonscale">قم بتكبير الأزرار إذا كانت صغيرة جداً.</string>
     <string name="mcl_setting_title_mousescale">توسيع حجم الفأرة</string>
@@ -172,4 +174,8 @@
     <string name="auto_ram_subtitle">تمكين مشرف ذاكرة الوصول العشوائي التلقائي</string>
     <string name="auto_ram_title">ذاكرة الوصول العشوائية التلقائية</string>
     <string name="autoram_info_msg">تم تعيين الذاكرة إلى %d ميغابايت</string>
+    <string name="vp_latest_snapshot">آخر لمحة (سنابشوت)</string>
+    <string name="vp_latest_release">آخر إصدار</string>
+    <string name="mcl_tab_profiles">ملفات شخصية</string>
+    <string name="mcl_profile_editor_title_profile">ملفات شخصية</string>
 </resources>
