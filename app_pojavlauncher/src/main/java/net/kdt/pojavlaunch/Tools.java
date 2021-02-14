@@ -87,7 +87,7 @@ public final class Tools
             ctx.appendlnToLog("AWT-enabled version detected! ("+mcReleaseDate+")");
             getCacioJavaArgs(javaArgList,false);
         }else{
-            getCacioJavaArgs(javaArgList,true);
+            getCacioJavaArgs(javaArgList,false); // true
             ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
         
