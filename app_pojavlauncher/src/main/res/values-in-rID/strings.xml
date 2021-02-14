@@ -69,7 +69,7 @@
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_backtorightmouse">Perlakukan tombol kembali sebagai mouse kanan</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Beberapa perangkat memperlakukan mouse kanan external sebagai tombol kembali. Jika anda memakai mouse external, anda harus menyalakan ini.</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Beberapa perangkat memperlakukan mouse kanan external sebagai tombol kembali. Jika anda memakai mouse external, anda sebaiknya menyalakan ini.</string>
     <string name="mcl_setting_title_buttonscale">Skala tombol kontrol</string>
     <string name="mcl_setting_subtitle_buttonscale">Tingkatkan skala jika tombol terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Penskalaan mouse</string>
