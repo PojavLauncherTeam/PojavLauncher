@@ -1139,7 +1139,7 @@ public class GLFW
             mGLFWCursorLastY = mGLFWCursorY;
             for (Long ptr : mGLFWWindowMap.keySet()) {
                 if (!mGLFWIsGrabbing && mGLFWWindowSizeCallback != null) {
-                    mGLFWWindowSizeCallback.invoke(window, mGLFWWindowWidth, mGLFWWindowHeight);
+                    mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
                 }
                 mGLFWCursorPosCallback.invoke(ptr, mGLFWCursorX, mGLFWCursorY);
             }
