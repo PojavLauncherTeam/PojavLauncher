@@ -180,4 +180,6 @@
     <string name="auto_ram_subtitle">Вмикає автоматичне регулювання оперативної пам\'яті</string>
     <string name="auto_ram_title">Авто ОЗУ</string>
     <string name="autoram_info_msg">Пам\'ять встановлено на %d МБ</string>
+    <string name="mcl_setting_check_libraries">Перевірити бібліотеки після завантаження</string>
+    <string name="dl_library_sha_fail">Бібліотека %s пошкоджена та буде перезавантаженаf</string>
 </resources>
