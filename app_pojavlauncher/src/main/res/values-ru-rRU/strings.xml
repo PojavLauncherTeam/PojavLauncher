@@ -171,4 +171,11 @@
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
+    <string name="mcl_setting_check_libraries">Проверять библиотеки после скачивания</string>
+    <string name="mcl_setting_check_libraries_subtitle">Эта настройка заставляет лаунчера проверить библиотеки если есть контрольная сумма к ним.</string>
+    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет перескачана</string>
+    <string name="dl_library_sha_unknown">Библиотка %s не может быть проверена, пренебрегаем проверкой.</string>
+    <string name="dl_library_sha_pass">Библиотека %s свободна и используема</string>
+    <string name="mcl_disable_gestures">Отключить жесты</string>
+    <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание для ломания блока и нажатие для установки блока</string>
 </resources>

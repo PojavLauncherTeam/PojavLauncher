@@ -18,6 +18,11 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:icon="@drawable/tap_len" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="disableGestures"
+            android:summary="@string/mcl_disable_gestures_subtitle"
+            android:title="@string/mcl_disable_gestures" />
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="resolutionRatio"
             android:summary="@string/mcl_setting_subtitle_resolution_scaler"

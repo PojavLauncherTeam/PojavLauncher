@@ -44,20 +44,22 @@ public class BaseMainActivity extends LoggableActivity {
     private static boolean triggeredLeftMouseButton = false;
     private Handler theHandler = new Handler() {
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_LEFT_MOUSE_BUTTON_CHECK: {
+            if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                switch (msg.what) {
+                    case MSG_LEFT_MOUSE_BUTTON_CHECK: {
                         int x = CallbackBridge.mouseX;
                         int y = CallbackBridge.mouseY;
                         if (CallbackBridge.isGrabbing() &&
-                            Math.abs(initialX - x) < fingerStillThreshold &&
-                            Math.abs(initialY - y) < fingerStillThreshold) {
+                                Math.abs(initialX - x) < fingerStillThreshold &&
+                                Math.abs(initialY - y) < fingerStillThreshold) {
                             triggeredLeftMouseButton = true;
                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
                         }
                     } break;
-                case MSG_DROP_ITEM_BUTTON_CHECK: {
+                    case MSG_DROP_ITEM_BUTTON_CHECK: {
                         sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
                     } break;
+                }
             }
         }
     };
@@ -438,8 +440,10 @@ public class BaseMainActivity extends LoggableActivity {
                                     if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
                                         sendKeyPress(hudKeyHandled, 0, false);
                                     } else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+                                        if(!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
+                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+                                        }
                                     }
                                     if (!isTouchInHotbar) {
                                         if (triggeredLeftMouseButton) {

@@ -23,6 +23,7 @@ public class LauncherPreferences
     public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl04es.so";
     public static String PREF_LANGUAGE = "default";
 	public static boolean PREF_CHECK_LIBRARY_SHA = true;
+	public static boolean PREF_DISABLE_GESTURES = false;
 	public static void loadPreferences() {
 		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
 		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
@@ -38,6 +39,7 @@ public class LauncherPreferences
 		PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
         PREF_LANGUAGE = DEFAULT_PREF.getString("language", "default");
         PREF_CHECK_LIBRARY_SHA = DEFAULT_PREF.getBoolean("checkLibraries",true);
+		PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
 		// Get double of max Android heap to set default heap size
 		int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
         int doubleAndroidHeap = androidHeap * 2;
