@@ -185,4 +185,5 @@
     <string name="dl_library_sha_fail">Die Bibliothek %s ist beschädigt und wird erneut heruntergeladen</string>
     <string name="dl_library_sha_unknown">Die Bibliothek %s konnte nicht überprüft werden. Wir gehen davon aus, dass sie nicht beechädigt ist</string>
     <string name="dl_library_sha_pass">Die Bibliothek %s ist unbeschädigt und verwendbar</string>
+    <string name="mcl_disable_gestures">Gesten deaktivieren</string>
 </resources>
