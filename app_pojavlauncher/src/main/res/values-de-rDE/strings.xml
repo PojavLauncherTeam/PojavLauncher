@@ -180,4 +180,8 @@
     <string name="auto_ram_subtitle">Aktiviert automatische RAM-Einstellungen</string>
     <string name="auto_ram_title">Auto-RAM</string>
     <string name="autoram_info_msg">Der maximale RAM-Verbrauch ist aktuell auf %d MB gesetzt</string>
+    <string name="mcl_setting_check_libraries">Bibliotheken nach dem Download überprüfen</string>
+    <string name="dl_library_sha_fail">Die Bibliothek %s ist beschädigt und wird erneut heruntergeladen</string>
+    <string name="dl_library_sha_unknown">Die Bibliothek %s konnte nicht überprüft werden. Wir gehen davon aus, dass sie nicht beechädigt ist</string>
+    <string name="dl_library_sha_pass">Die Bibliothek %s ist unbeschädigt und verwendbar</string>
 </resources>
