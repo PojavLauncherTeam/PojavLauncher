@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Permite que você reduza a resolução do jogo. 100% é resolução total</string>
     <string name="mcl_setting_title_longpresstrigger">Tempo para acionar função ao manter pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratar o botão voltar como o mouse direito</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Alguns dispositivos tratam o mouse direito externo como botão voltar. Se você estiver usando um mouse externo, você deve ativar isso.</string>
     <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
     <string name="mcl_setting_subtitle_buttonscale">Aumentar se os botões estiverem muito pequenos.</string>
     <string name="mcl_setting_title_mousescale">Escala do mouse</string>
@@ -178,4 +180,14 @@
     <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
+    <string name="vp_latest_snapshot">Snapshot mais recente</string>
+    <string name="vp_latest_release">Último Lançamento</string>
+    <string name="mcl_tab_profiles">Perfis</string>
+    <string name="mcl_profile_editor_title_profile">PERFIS</string>
+    <string name="mcl_profile_editor_title_version">VERSÕES</string>
+    <string name="mcl_profile_editor_edit_text_title">Nome do perfil</string>
+    <string name="mcl_profile_editor_save">salvar</string>
+    <string name="profedit_selected_version">Versão Selecionada:%s</string>
+    <string name="profedit_selected_profile">Perfil selecionado: %s</string>
+    <string name="global_new">Novo</string>
 </resources>
