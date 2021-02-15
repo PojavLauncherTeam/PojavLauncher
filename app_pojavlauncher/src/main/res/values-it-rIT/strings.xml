@@ -180,4 +180,9 @@
     <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory impostata a %d MB</string>
+    <string name="mcl_setting_check_libraries">Controlla le librerie dopo il download</string>
+    <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'hash delle librerie se disponibile. Prevenendo download corrotti.</string>
+    <string name="dl_library_sha_fail">La libreria %s è danneggiata e sarà riscaricata</string>
+    <string name="dl_library_sha_unknown">La libreria %s non può essere controllata, sarà ignorata e applicata comunque</string>
+    <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
 </resources>
