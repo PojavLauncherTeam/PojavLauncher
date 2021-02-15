@@ -57,12 +57,12 @@ scripts\languagelist_updater.bat
 - [ ] More...
 
 ## Known Issues
-- in 1.16 and up spawn eggs banners are white (you can fix this by adding this to your jvm flags 
-``-Dorg.lwjgl.opengl.libname=libgl4es_115.so`` do this only works on 1.16 and up)
-- controller mods arnt working
-- with big modpacks texture could be mest up
+- in 1.16 and up spawn eggs banners are white (you can fix this by adding this to your JVM flags 
+`-Dorg.lwjgl.opengl.libname=libgl4es_115.so`, only works on 1.16 and up, do not use under this version)
+- controller mods aren't working
+- with big modpacks textures could be messed up
 - if your using gl4es 1.1.5 on 1.16 and lower texture will bug out when hit a mob
-- probely more thats why we have a bug tracker ;)
+- probably more, that's why we have a bug tracker ;)
 
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
