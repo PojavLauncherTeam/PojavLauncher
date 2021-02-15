@@ -39,23 +39,44 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             String minecraftMainJar = Tools.DIR_HOME_VERSION + downVName + ".jar";
             JAssets assets = null;
             try {
-                String verJsonDir = Tools.DIR_HOME_VERSION + downVName + ".json";
+                File verJsonDir = new File(Tools.DIR_HOME_VERSION + downVName + ".json");
 
                 verInfo = findVersion(p1[0]);
 
-                if (verInfo.url != null && !new File(verJsonDir).exists()) {
-                    publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, p1[0] + ".json"));
-
-                    Tools.downloadFileMonitored(
-                        verInfo.url,
-                        verJsonDir,
-                            new Tools.DownloaderFeedback(){
-                                @Override
-                                public void updateProgress(int curr, int max) {
-                                    publishDownloadProgress(p1[0] + ".json", curr, max);
+                if (verInfo.url != null) {
+                    boolean isManifestGood = true; // assume it is dy default
+                    if(verJsonDir.exists()) {//if the file exists
+                        if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA) {// check if the checker is on
+                            if (verInfo.sha1 != null) {//check if the SHA is available
+                                if (Tools.compareSHA1(verJsonDir, verInfo.sha1)) // check the SHA
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass, p1[0] + ".json")); // and say that SHA was verified
+                                else{
+                                    verJsonDir.delete(); // if it wasn't, delete the old one
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail, p1[0] + ".json")); // put it into log
+                                    isManifestGood = false;  // and mark manifest as bad
                                 }
+                            }else{
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_unknown, p1[0] + ".json")); // say that the sha is unknown, but assume that the manifest is good
                             }
-                    );
+                        }else{
+                            Log.w("Chk","Checker is off");// if the checker is off, manifest will be always good, unless it doesn't exist
+                        }
+                    } else {
+                         isManifestGood = false;
+                    }
+                    if(!isManifestGood) {
+                        publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, p1[0] + ".json"));
+                        Tools.downloadFileMonitored(
+                                verInfo.url,
+                                verJsonDir.getAbsolutePath(),
+                                new Tools.DownloaderFeedback() {
+                                    @Override
+                                    public void updateProgress(int curr, int max) {
+                                        publishDownloadProgress(p1[0] + ".json", curr, max);
+                                    }
+                                }
+                        );
+                    }
                 }
 
                 verInfo = Tools.getVersionInfo(mActivity,p1[0]);
@@ -200,7 +221,10 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         try {
             libPathURL = libItem.downloads.artifact.url;
             boolean isFileGood = false;
+            byte timesChecked=0;
             while(!isFileGood) {
+                timesChecked++;
+                if(timesChecked > 5) throw new RuntimeException("Library download failed after 5 retries");
                 Tools.downloadFileMonitored(
                         libPathURL,
                         outLib.getAbsolutePath(),
