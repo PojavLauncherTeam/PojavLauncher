@@ -61,16 +61,22 @@ public class PojavApplication extends Application
             
             File nativeLibDir = new File(getApplicationInfo().nativeLibraryDir);
             
-            Tools.CURRENT_ARCHITECTURE = nativeLibDir.getName();
+            Tools.CURRENT_ARCHITECTURE = Build.CPU_ABI;
 			switch (Tools.CURRENT_ARCHITECTURE) {
-                case "arm": Tools.CURRENT_ARCHITECTURE = "arm/aarch32"; break;
-                case "arm64": Tools.CURRENT_ARCHITECTURE = "arm64/aarch64"; break;
+                case "armeabi-v7a": Tools.CURRENT_ARCHITECTURE = "arm/aarch32"; break;
+                case "arm64-v8a": Tools.CURRENT_ARCHITECTURE = "arm64/aarch64"; break;
                 case "x86": Tools.CURRENT_ARCHITECTURE = "x86/i*86"; break;
                 case "x86_64": Tools.CURRENT_ARCHITECTURE = "x86_64/amd64"; break;
             }
             
             // Special case for Asus x86 devixes
-            if (Build.SUPPORTED_ABIS[0].equals("x86")) {
+			String mainAbi = "";
+			if(Build.VERSION.SDK_INT < 20) {
+				mainAbi = Build.CPU_ABI;
+			}else{
+				mainAbi = Build.SUPPORTED_ABIS[0];
+			}
+            if (mainAbi.equals("x86")) {
                 getApplicationInfo().nativeLibraryDir = nativeLibDir.getParent() + "/x86";
                 Tools.CURRENT_ARCHITECTURE = "x86/i*86";
             }
@@ -79,6 +85,7 @@ public class PojavApplication extends Application
 		} catch (Throwable th) {
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", th);
+			ferrorIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(ferrorIntent);
 		}
 	}

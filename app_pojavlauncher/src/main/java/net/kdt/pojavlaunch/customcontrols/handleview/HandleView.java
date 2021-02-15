@@ -84,11 +84,15 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         mContainer = new PopupWindow(view.getContext(), null, android.R.attr.textSelectHandleWindowStyle);
         mContainer.setSplitTouchEnabled(true);
         mContainer.setClippingEnabled(false);
-        mContainer.setWindowLayoutType(WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
+        if(Build.VERSION.SDK_INT > 22) mContainer.setWindowLayoutType(WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
         mContainer.setContentView(this);
-
-        mDrawableLtr = view.getContext().getDrawable(R.drawable.text_select_handle_left_material);
-        mDrawableRtl = view.getContext().getDrawable(R.drawable.text_select_handle_right_material);
+        if(Build.VERSION.SDK_INT > 20) {
+            mDrawableLtr = view.getContext().getDrawable(R.drawable.text_select_handle_left_material);
+            mDrawableRtl = view.getContext().getDrawable(R.drawable.text_select_handle_right_material);
+        }else{
+            mDrawableLtr = view.getResources().getDrawable(R.drawable.text_select_handle_left_material);
+            mDrawableRtl = view.getResources().getDrawable(R.drawable.text_select_handle_right_material);
+        }
         mMinSize = view.getContext().getResources().getDimensionPixelSize(R.dimen.text_handle_min_size);
 
         setOnLongClickListener(this);

@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.utils;
 
 import android.app.*;
 import android.content.*;
+import android.os.Build;
 import android.system.*;
 import android.util.*;
 import android.widget.Toast;
@@ -39,7 +40,8 @@ public class JREUtils
     }
     
     public static String findInLdLibPath(String libName) {
-        for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
+        String ldlibPath = Build.VERSION.SDK_INT > 20 ? Os.getenv("LD_LIBRARY_PATH") : ReflectLibcore.getenv("LD_LIBRARY_PATH");
+        for (String libPath : ldlibPath.split(":")) {
             File f = new File(libPath, libName);
             if (f.exists() && f.isFile()) {
                 return f.getAbsolutePath();
@@ -218,7 +220,8 @@ public class JREUtils
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
-        envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
+        if(Build.VERSION.SDK_INT > 20) envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
+        else envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + ReflectLibcore.getenv("PATH"));
         
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");
@@ -242,7 +245,8 @@ public class JREUtils
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             try {
                 if (shell == null) {
-                    Os.setenv(env.getKey(), env.getValue(), true);
+                    if(Build.VERSION.SDK_INT > 20) Os.setenv(env.getKey(), env.getValue(), true);
+                    else ReflectLibcore.setenv(env.getKey(), env.getValue(), true);
                 } else {
                     shell.writeToProcess("export " + env.getKey() + "=" + env.getValue());
                 }

@@ -25,11 +25,11 @@ android {
 	
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 156239
         versionName "3.3.1.1_rel_" + getDate()
-        multiDexEnabled true //important
+        multiDexEnabled false //important
     }
 
     buildTypes {
@@ -70,6 +70,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
+    implementation 'androidx.collection:collection:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.browser:browser:1.3.0'

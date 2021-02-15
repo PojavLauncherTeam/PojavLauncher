@@ -40,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.kdt.pickafile.FileListView;
@@ -97,7 +98,14 @@ public class PojavLoginActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false);
-
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+        if(Build.VERSION.SDK_INT < 20) {
+            try {
+                ReflectLibcore.prepare();
+            } catch (Exception e) {
+                Log.e("LibcoreReflector","Failed to initialize!",e);
+            }
+        }
         Tools.updateWindowSize(this);
 
         ControlData[] specialButtons = ControlData.getSpecialButtons();
@@ -579,8 +587,12 @@ public class PojavLoginActivity extends BaseActivity
                 destPath.getParentFile().mkdirs();
                 try {
                     // android.system.Os
-                    // Libcore one support all Android versions
-                    Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    // libcore.io.Libcore one support all Android versions
+                    if(Build.VERSION.SDK_INT > 20) {
+                        Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    }else{
+                        ReflectLibcore.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    }
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
