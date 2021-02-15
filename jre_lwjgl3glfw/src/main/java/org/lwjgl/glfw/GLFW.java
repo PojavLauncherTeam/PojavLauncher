@@ -1138,6 +1138,9 @@ public class GLFW
             mGLFWCursorLastX = mGLFWCursorX;
             mGLFWCursorLastY = mGLFWCursorY;
             for (Long ptr : mGLFWWindowMap.keySet()) {
+                if (!mGLFWIsGrabbing && mGLFWWindowSizeCallback != null) {
+                    mGLFWWindowSizeCallback.invoke(window, mGLFWWindowWidth, mGLFWWindowHeight);
+                }
                 mGLFWCursorPosCallback.invoke(ptr, mGLFWCursorX, mGLFWCursorY);
             }
             // System.out.println("CursorPos updated to x=" + mGLFWCursorX + ",y=" + mGLFWCursorY);
