@@ -180,4 +180,9 @@
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
+    <string name="mcl_setting_check_libraries">Проверка библиотеки после загрузки</string>
+    <string name="mcl_setting_check_libraries_subtitle">Эта настройка принуждает лаунчер проверять хеш библиотеки, если он доступен. Предотвращает прерывание загрузки.</string>
+    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет перезагружена</string>
+    <string name="dl_library_sha_unknown">Библиотека %s не может быть проверена, придется предположить, что с ней все хорошо</string>
+    <string name="dl_library_sha_pass">Библиотека %s преверена и может быть использована</string>
 </resources>
