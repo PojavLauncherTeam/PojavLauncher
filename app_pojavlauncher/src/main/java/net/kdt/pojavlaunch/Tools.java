@@ -13,6 +13,8 @@ import java.lang.reflect.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.zip.*;
 import net.kdt.pojavlaunch.prefs.*;
@@ -20,6 +22,9 @@ import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.*;
 import android.view.*;
 import android.widget.Toast;
@@ -72,6 +77,7 @@ public final class Tools
         if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
         else gamedirPath = Tools.DIR_GAME_NEW;
         if(pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
+        PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
@@ -759,20 +765,40 @@ public final class Tools
         public abstract void updateProgress(int curr, int max);
     }
     public static void downloadFileMonitored(String urlInput,String nameOutput, DownloaderFeedback monitor) throws IOException {
-        if(!new File(nameOutput).exists()){
-            new File(nameOutput).getParentFile().mkdirs();
+        File nameOutputFile = new File(nameOutput);
+        if (!nameOutputFile.exists()) {
+            nameOutputFile.getParentFile().mkdirs();
         }
         HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
         InputStream readStr = conn.getInputStream();
-        FileOutputStream fos = new FileOutputStream(new File(nameOutput));
-        int cur = 0; int oval=0; int len = conn.getContentLength(); byte[] buf = new byte[65535];
-        while((cur = readStr.read(buf)) != -1) {
+        FileOutputStream fos = new FileOutputStream(nameOutputFile);
+        int cur = 0;
+        int oval = 0;
+        int len = conn.getContentLength();
+        byte[] buf = new byte[65535];
+        while ((cur = readStr.read(buf)) != -1) {
             oval += cur;
-            fos.write(buf,0,cur);
-            monitor.updateProgress(oval,len);
+            fos.write(buf, 0, cur);
+            monitor.updateProgress(oval, len);
         }
         fos.close();
         conn.disconnect();
+    }
+    public static boolean compareSHA1(File f, String sourceSHA) {
+        try {
+            String sha1_dst;
+            try (InputStream is = new FileInputStream(f)) {
+                 sha1_dst = new String(Hex.encodeHex(org.apache.commons.codec.digest.DigestUtils.sha1(is)));
+            }
+            if(sha1_dst != null && sourceSHA != null) {
+                return sha1_dst.equalsIgnoreCase(sourceSHA);
+            } else{
+                return true; // fake match
+            }
+        }catch (IOException e) {
+            Log.i("SHA1","Fake-matching a hash due to a read error",e);
+            return true;
+        }
     }
     public static class ZipTool
     {

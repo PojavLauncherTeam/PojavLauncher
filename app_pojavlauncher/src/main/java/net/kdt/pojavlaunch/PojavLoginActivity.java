@@ -358,9 +358,9 @@ public class PojavLoginActivity extends BaseActivity
             }
         }
     }
-    public static void disableSplash() {
-        mkdirs(Tools.DIR_GAME_NEW + "/config");
-        File forgeSplashFile = new File(Tools.DIR_GAME_NEW, "config/splash.properties");
+    public static void disableSplash(String dir) {
+        mkdirs(dir + "/config");
+        File forgeSplashFile = new File(dir, "config/splash.properties");
         String forgeSplashContent = "enabled=true";
         try {
             if (forgeSplashFile.exists()) {

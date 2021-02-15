@@ -66,7 +66,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
 
                 File outLib;
-                String libPathURL;
+
 
                 setMax(verInfo.libraries.length);
                 zeroProgress();
@@ -85,37 +85,18 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         outLib.getParentFile().mkdirs();
 
                         if (!outLib.exists()) {
-                            publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, libItem.name));
-
-                            boolean skipIfFailed = false;
-
-                            if (libItem.downloads == null || libItem.downloads.artifact == null) {
-                                System.out.println("UnkLib:"+libArtifact);
-                                MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
-                                artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url.replace("http://","https://")) + libArtifact;
-                                libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
-
-                                skipIfFailed = true;
-                            }
-                            try {
-                                libPathURL = libItem.downloads.artifact.url;
-                                Tools.downloadFileMonitored(
-                                    libPathURL,
-                                    outLib.getAbsolutePath(),
-                                        new Tools.DownloaderFeedback() {
-                                            @Override
-                                            public void updateProgress(int curr, int max) {
-                                                publishDownloadProgress(libItem.name, curr, max);
-                                            }
-                                        }
-                                );
-                            } catch (Throwable th) {
-                                if (!skipIfFailed) {
-                                    throw th;
-                                } else {
-                                    th.printStackTrace();
-                                    publishProgress("0", th.getMessage());
+                            downloadLibrary(libItem,libArtifact,outLib);
+                        }else{
+                            if(libItem.downloads != null && libItem.downloads.artifact != null && libItem.downloads.artifact.sha1 != null && !libItem.downloads.artifact.sha1.isEmpty()) {
+                                if(!Tools.compareSHA1(outLib,libItem.downloads.artifact.sha1)) {
+                                    outLib.delete();
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,libItem.name));
+                                    downloadLibrary(libItem,libArtifact,outLib);
+                                }else{
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,libItem.name));
                                 }
+                            }else{
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_unknown,libItem.name));
                             }
                         }
                     }
@@ -203,7 +184,51 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
     public void zeroProgress() {
         addProgress = 0;
     }
+    protected void downloadLibrary(DependentLibrary libItem,String libArtifact,File outLib) throws Throwable{
+        publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, libItem.name));
+        String libPathURL;
+        boolean skipIfFailed = false;
 
+        if (libItem.downloads == null || libItem.downloads.artifact == null) {
+            System.out.println("UnkLib:"+libArtifact);
+            MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
+            artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url.replace("http://","https://")) + libArtifact;
+            libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
+
+            skipIfFailed = true;
+        }
+        try {
+            libPathURL = libItem.downloads.artifact.url;
+            boolean isFileGood = false;
+            while(!isFileGood) {
+                Tools.downloadFileMonitored(
+                        libPathURL,
+                        outLib.getAbsolutePath(),
+                        new Tools.DownloaderFeedback() {
+                            @Override
+                            public void updateProgress(int curr, int max) {
+                                publishDownloadProgress(libItem.name, curr, max);
+                            }
+                        }
+                );
+                if(libItem.downloads.artifact.sha1 != null) {
+                    isFileGood = LauncherPreferences.PREF_CHECK_LIBRARY_SHA ? Tools.compareSHA1(outLib,libItem.downloads.artifact.sha1) : true;
+                    if(!isFileGood) publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,libItem.name));
+                    else publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,libItem.name));
+                }else{
+                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_unknown,libItem.name));
+                    isFileGood = true;
+                }
+            }
+        } catch (Throwable th) {
+            if (!skipIfFailed) {
+                throw th;
+            } else {
+                th.printStackTrace();
+                publishProgress("0", th.getMessage());
+            }
+        }
+    }
     public void setMax(final int value)
     {
         mActivity.mLaunchProgress.post(new Runnable(){
@@ -259,7 +284,6 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                  jvmArgs.add("-Xms128M");
                  jvmArgs.add("-Xmx1G");
                  */
-                PojavLoginActivity.disableSplash();
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
                 // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
