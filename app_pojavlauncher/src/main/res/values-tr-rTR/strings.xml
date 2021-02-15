@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
+    <string name="mcl_setting_title_backtorightmouse">Geri tuşunu fare sağ tıkı gibi algıla</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Bazı cihazlar farenin sağ tıkını geri tuşu olarak algılar. Eğer fiziksel fare kullanıyorsanız, bunu aktifleştirmelisiniz.</string>
     <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
     <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
@@ -178,4 +180,11 @@
     <string name="auto_ram_subtitle">Otomatik RAM yükselticiyi aktifleştirir</string>
     <string name="auto_ram_title">Otomatik RAM</string>
     <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
+    <string name="mcl_setting_check_libraries">İndirmeden sonra kütüphaneleri kontrol et</string>
+    <string name="mcl_setting_check_libraries_subtitle">Bu seçenek eğer hazırsa başlatıcıyı kütüphane hash\'ini kontrol etmeye zorlar. Kırık indirmeleri engeller.</string>
+    <string name="dl_library_sha_fail">Kütüphane %s hasarlı ve yeniden indirilecek</string>
+    <string name="dl_library_sha_unknown">Kütüphane %s kontrol edilemez, düzgün olduğu varsayılmak zorunda</string>
+    <string name="dl_library_sha_pass">Kütüphane %s iyi durumda ve kullanılabilir</string>
+    <string name="mcl_disable_gestures">İşaretleri devre dışı bırak</string>
+    <string name="mcl_disable_gestures_subtitle">İşaretleri devre dışarı bırakır, blok kırma ve blok koymak için basma gibi.</string>
 </resources>
