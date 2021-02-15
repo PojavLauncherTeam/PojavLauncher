@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Permite que você reduza a resolução do jogo. 100% é resolução total</string>
     <string name="mcl_setting_title_longpresstrigger">Tempo para acionar função ao manter pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratar o botão voltar como o mouse direito</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Alguns dispositivos tratam o mouse direito externo como botão voltar. Se você estiver usando um mouse externo, você deve ativar isso.</string>
     <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
     <string name="mcl_setting_subtitle_buttonscale">Aumentar se os botões estiverem muito pequenos.</string>
     <string name="mcl_setting_title_mousescale">Escala do mouse</string>
@@ -178,4 +180,11 @@
     <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
+    <string name="mcl_setting_check_libraries">Verificar bibliotecas após baixar</string>
+    <string name="mcl_setting_check_libraries_subtitle">Esta opção força o launcher a verificar o hash da biblioteca se ele estiver disponível. Impede downloads com problemas.</string>
+    <string name="dl_library_sha_fail">A biblioteca %s está danificada e será baixada novamente</string>
+    <string name="dl_library_sha_unknown">A biblioteca %s não pode ser verificada, precisa assumir que está boa</string>
+    <string name="dl_library_sha_pass">Biblioteca %s está boa e utilizável</string>
+    <string name="mcl_disable_gestures">Desativar gestos</string>
+    <string name="mcl_disable_gestures_subtitle">Desabilita gestos, como \"segure para quebrar bloco\" e \"toque para colocar um bloco\".</string>
 </resources>
