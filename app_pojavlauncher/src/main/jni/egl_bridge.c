@@ -63,9 +63,13 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIEnv* env, jclass clazz) {
     return eglGetCurrentContext();
 }
-static const EGLint ctx_attribs[] = {
-        EGL_CONTEXT_CLIENT_VERSION, 2,
-        EGL_NONE
+static const EGLint es3_ctx_attribs[] = {
+    EGL_CONTEXT_CLIENT_VERSION, 3,
+    EGL_NONE
+};
+static const EGLint es2_ctx_attribs[] = {
+    EGL_CONTEXT_CLIENT_VERSION, 2,
+    EGL_NONE
 };
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
     if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
@@ -179,7 +183,11 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 }
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
-    EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,ctx_attribs);
+    EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,es3_ctx_attribs);
+    if (ctx == EGL_NO_CONTEXT) {
+        printf("Could not create ES3 context, fallbacking to ES2\n");
+        ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,es2_ctx_attribs);
+    }
     printf("Created CTX pointer = %p\n",ctx);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
     return (long)ctx;
