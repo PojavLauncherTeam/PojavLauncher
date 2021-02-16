@@ -180,4 +180,11 @@
     <string name="auto_ram_subtitle">Menyalakan pengatur RAM otomatis</string>
     <string name="auto_ram_title">RAM otomatis</string>
     <string name="autoram_info_msg">Memori disetel ke %d MB</string>
+    <string name="mcl_setting_check_libraries">Periksa library setelah mengunduh</string>
+    <string name="mcl_setting_check_libraries_subtitle">Opsi ini memaksa launcher untuk memeriksa hash library jika ada. Mencegah download rusak.</string>
+    <string name="dl_library_sha_fail">Library %s rusak dan akan di-unduh ulang</string>
+    <string name="dl_library_sha_unknown">Library %s tidak bisa diperiksa, harus meng-asumsi bahwa baik-baik saja</string>
+    <string name="dl_library_sha_pass">Library %s baik-baik saja dan dapat digunakan</string>
+    <string name="mcl_disable_gestures">Matikan gestures</string>
+    <string name="mcl_disable_gestures_subtitle">Mematikan gestures, seperti pencet lama untuk menghancurkan block, dan pencet untuk menempatkan block.</string>
 </resources>
