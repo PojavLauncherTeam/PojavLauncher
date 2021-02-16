@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">تغيير وقت التشغيل للضغط المطول في كتلة التحطيم وإسقاط الموارد.</string>
     <string name="mcl_setting_title_backtorightmouse">التعامل مع زر الرجوع كزر الماوس الأيمن</string>
     <string name="mcl_setting_subtitle_backtorightmouse">بعض الأجهزة تتعامل مع زر الفأرة الخارجية اليمنى كزر للعودة. إذا كنت تستخدم الماوس الخارجي، يجب عليك تمكين هذا.</string>
+    <string name="mcl_setting_title_flat_button_style">نمط زر مسطح</string>
+    <string name="mcl_setting_subtitle_flat_button_style">قم بتمكين هذا لتغيير نمط زر التحكم إلى مسطح.</string>
     <string name="mcl_setting_title_buttonscale">ضبط حجم أزرار التحكم</string>
     <string name="mcl_setting_subtitle_buttonscale">قم بتكبير الأزرار إذا كانت صغيرة جداً.</string>
     <string name="mcl_setting_title_mousescale">توسيع حجم الفأرة</string>
@@ -169,4 +171,7 @@
     <string name="auto_ram_subtitle">تمكين مشرف ذاكرة الوصول العشوائي التلقائي</string>
     <string name="auto_ram_title">ذاكرة الوصول العشوائية التلقائية</string>
     <string name="autoram_info_msg">تم تعيين الذاكرة إلى %d ميغابايت</string>
+    <string name="dl_library_sha_fail">المكتبة %s تالفة وسيتم إعادة تحميلها</string>
+    <string name="dl_library_sha_pass">المكتبة %s جيدة وقابلة للاستخدام</string>
+    <string name="mcl_disable_gestures">تعطيل الإيماءات</string>
 </resources>
