@@ -31,7 +31,7 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
         seek3.setSuffix(" %");
 
         CustomSeekBarPreference seek4 = (CustomSeekBarPreference) findPreference("mousescale");
-        seek4.setMin(100);
+        seek4.setMin(25);
         seek4.setMax(300);
         seek4.setValue((int) LauncherPreferences.PREF_MOUSESCALE);
         seek4.setSuffix(" %");

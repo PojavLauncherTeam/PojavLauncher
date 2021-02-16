@@ -33,7 +33,11 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         
         mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
 
-        setBackgroundResource(R.drawable.control_button);
+        if (!LauncherPreferences.PREF_BUTTON_FLAT) {
+            setBackgroundResource(R.drawable.control_button);
+        } else {
+            setBackgroundColor(0x4D000000);
+        }
         setOnLongClickListener(this);
 
         setProperties(properties);

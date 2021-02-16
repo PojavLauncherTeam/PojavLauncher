@@ -18,6 +18,14 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:icon="@drawable/tap_len" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="flatButtonStyle"
+            android:summary="@string/mcl_setting_subtitle_flat_button_style"
+            android:title="@string/mcl_setting_title_flat_button_style"
+            app2:icon="@drawable/hide_sidebar" />
+
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="disableGestures"
