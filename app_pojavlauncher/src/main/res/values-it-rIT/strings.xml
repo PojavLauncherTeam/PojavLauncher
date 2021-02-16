@@ -185,4 +185,6 @@
     <string name="dl_library_sha_fail">La libreria %s è danneggiata e sarà riscaricata</string>
     <string name="dl_library_sha_unknown">La libreria %s non può essere controllata, sarà ignorata e applicata comunque</string>
     <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
+    <string name="mcl_disable_gestures">Disattiva gestures</string>
+    <string name="mcl_disable_gestures_subtitle">Disattiva gestures, ad esempio premere per rompere un blocco, e cliccare per piazzarlo.</string>
 </resources>
