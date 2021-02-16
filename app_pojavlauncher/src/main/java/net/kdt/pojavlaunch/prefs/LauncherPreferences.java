@@ -20,7 +20,7 @@ public class LauncherPreferences
 	public static int PREF_LONGPRESS_TRIGGER = 500;
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
-    public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl04es.so";
+    public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
     public static String PREF_LANGUAGE = "default";
 	public static boolean PREF_CHECK_LIBRARY_SHA = true;
 	public static boolean PREF_DISABLE_GESTURES = false;
