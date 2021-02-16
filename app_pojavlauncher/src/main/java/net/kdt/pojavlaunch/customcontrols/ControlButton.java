@@ -7,6 +7,7 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
