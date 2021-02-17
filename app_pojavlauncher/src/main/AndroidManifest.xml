@@ -68,11 +68,6 @@
 			android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-
-		<activity
-			android:screenOrientation="sensorLandscape"
-			android:name=".prefs.LauncherPreferenceActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
     </application>
 
 </manifest>
