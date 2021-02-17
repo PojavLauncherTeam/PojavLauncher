@@ -39,7 +39,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Новости лаунчера</string>
-    <string name="mcl_tab_console">Консоль разработки</string>
+    <string name="mcl_tab_console">Консоль разработчика</string>
     <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
@@ -59,19 +59,27 @@
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
-    <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
-    <string name="mcl_setting_title_hide_sidebar">Скрыть боковую панель</string>
+    <string name="mcl_setting_subtitle_freeform">Запускает Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
+    <string name="mcl_setting_title_hide_sidebar">Скрытие боковой панели</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
+    <string name="mcl_setting_title_ignore_notch">Игнорирование выреза под фронтальную камеру</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Игнорирует вырез под фронтальную камеру и расширяет экран под неё.\nДает большее погружение в игру.</string>
+    <string name="mcl_setting_title_resolution_scaler">Уменьшение разрешения</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Позволяет уменьшить разрешение игры. Максимальное разрешение: 100%</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
+    <string name="mcl_setting_title_backtorightmouse">Считывание кнопки назад как правую кнопку мыши</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Некоторые устройства считают правую кнопку внешней мыши как кнопку назад. Если вы используете внешнюю мышь, рекомендуется включить эту функцию.</string>
+    <string name="mcl_setting_title_flat_button_style">Плоский стиль кнопок</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцию, чтобы изменить стиль кнопок управления на плоский.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
     <string name="mcl_setting_subtitle_mousescale">Изменяет размер курсора мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
+    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если изменить их без особых знаний.</string>
     <string name="mcl_setting_category_general">Общие настройки</string>
-    <string name="mcl_setting_category_scaling">Масштабирование</string>
+    <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
@@ -97,12 +105,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -149,6 +152,9 @@
     <string name="customctrl_remove">Удалить «%s»?</string>
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_toggle">Переключаемый</string>
+    <string name="customctrl_size">Размер</string>
+    <string name="customctrl_size_width">Ширина</string>
+    <string name="customctrl_size_height">Высота</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
@@ -171,11 +177,11 @@
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
-    <string name="mcl_setting_check_libraries">Проверять библиотеки после скачивания</string>
-    <string name="mcl_setting_check_libraries_subtitle">Эта настройка заставляет лаунчера проверить библиотеки если есть контрольная сумма к ним.</string>
-    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет перескачана</string>
-    <string name="dl_library_sha_unknown">Библиотка %s не может быть проверена, пренебрегаем проверкой.</string>
-    <string name="dl_library_sha_pass">Библиотека %s свободна и используема</string>
-    <string name="mcl_disable_gestures">Отключить жесты</string>
-    <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание для ломания блока и нажатие для установки блока</string>
+    <string name="mcl_setting_check_libraries">Проверка библиотеки после загрузки</string>
+    <string name="mcl_setting_check_libraries_subtitle">Эта опция принуждает лаунчер проверять хеш библиотеки, если он доступен. Предотвращает прерывание загрузки.</string>
+    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет скачено повторно</string>
+    <string name="dl_library_sha_unknown">Библиотека %s не может быть проверена; придется предположить, что с ней все хорошо</string>
+    <string name="dl_library_sha_pass">Библиотека %s преверена и может быть использована</string>
+    <string name="mcl_disable_gestures">Отключение жестов</string>
+    <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
 </resources>

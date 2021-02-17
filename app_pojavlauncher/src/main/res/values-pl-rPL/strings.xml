@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
+    <string name="login_title_no_saved_account">konta nie znalezione!</string>
+    <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"pozostań zalogowanym\"</b> aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Przesuń od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.
 "</string>
@@ -41,6 +43,8 @@
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">połączono</string>
+    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
@@ -94,12 +98,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +

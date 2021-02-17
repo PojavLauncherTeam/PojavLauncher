@@ -62,6 +62,10 @@
     <string name="mcl_setting_subtitle_freeform">Lance Minecraft dans une fenêtre flottante. Requiert Android 7.0 +</string>
     <string name="mcl_setting_title_hide_sidebar">Masquer la barre latérale</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Les gens nostalgiques qui préfèrent l\'ancienne interface utilisateur (v1) peuvent aimer cette option. Vous donne une expérience orienté plein écran.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorer l\'encoche</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignore l\'encoche et étend l\'écran en dessous de celle ci.\nVous donne une expérience plus immersive.</string>
+    <string name="mcl_setting_title_resolution_scaler">Échelle de résolution</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Vous permet de diminuer la résolution du jeu. 100% représente la pleine résolution</string>
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_buttonscale">Mise à l\'échelle des boutons de contrôle</string>
@@ -97,12 +101,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -168,7 +167,7 @@
     <string name="main_nocrash">Aucune erreur détectée.</string>
     <string name="main_nolog">Pas de journal.</string>
     <string name="main_no_news_feed">Impossible de récupérer le fil d\'actualités !</string>
-    <string name="auto_ram_subtitle">Active le régulateur automatique de la mémoire RAM</string>
+    <string name="auto_ram_subtitle">Active le régulateur automatique de la mémoire vive</string>
     <string name="auto_ram_title">Mémoire RAM automatique</string>
     <string name="autoram_info_msg">Mémoire définie à %d Mo</string>
 </resources>

@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
     <string name="login_microsoft">Microsoft přihlášení</string>
     <string name="login_select_account">Vybrat účet</string>
+    <string name="login_title_no_saved_account">Nenalezen žádný účet !</string>
+    <string name="login_dialog_no_saved_account">Nemáte žádný uložený účet.\nPoužijte možnost <b>\"Ponechat mě přihlášeno\"</b> pro uložení účtu při prvním přihlášení.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Přejetím zprava doleva otevřete nabídku ◀\nPodrž tlačítko pro úpravu: upravení, změnění velikosti nebo smazání."</string>
     <!-- Warnings -->
@@ -48,7 +50,7 @@
     <string name="mcl_launch_downloading">Stahování %s</string>
     <string name="mcl_launch_downloading_progress">"Stahuji %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
-    <string name="mcl_options">Možnosti</string>
+    <string name="mcl_options">Nastavení</string>
     <string name="mcl_option_modinstall">Spusťte instalátor módů (Forge, LabyMod, Fabric, atd...)</string>
     <string name="mcl_option_modinstallwitharg">Spustit instalátor módů (s vlastními argumenty)</string>
     <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
@@ -60,8 +62,14 @@
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Skrýt postranní panel</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňující staré uživatelské rozhraní v1. Dá vám více celo-obrazné prostředí.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorovat výřez</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignorovat výřez a rozšířit obrazovku pod ním.\nDá vám více celo-obrazný zážitek.</string>
+    <string name="mcl_setting_title_resolution_scaler">Škála rozlišení</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Umožňuje snížit rozlišení hry. 100% je plné rozlišení</string>
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
+    <string name="mcl_setting_title_backtorightmouse">Považovat tlačítko zpět za tlačítko pravé myši</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Některá zařízení přistupují k externímu pravému tlačítku jako k tlačítku zpět. Pokud používáte externí myš, měli byste toto povolit.</string>
     <string name="mcl_setting_title_buttonscale">Škálování kontrolních tlačítek</string>
     <string name="mcl_setting_subtitle_buttonscale">Zvětšit je, pokud jsou tlačítka příliš malá.</string>
     <string name="mcl_setting_title_mousescale">Škálování myši</string>
@@ -95,12 +103,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -147,6 +150,9 @@
     <string name="customctrl_remove">Odstranit %s?</string>
     <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_toggle">Přepnutelné</string>
+    <string name="customctrl_size">Velikost</string>
+    <string name="customctrl_size_width">Šířka</string>
+    <string name="customctrl_size_height">Výška</string>
     <string name="customctrl_dynamicpos">Dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
@@ -157,7 +163,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
-    <string name="main_options">Možnosti</string>
+    <string name="main_options">Nastavení</string>
     <string name="main_play">Hrát</string>
     <string name="main_welcome">Vítejte, %s</string>
     <string name="main_infodev">Údaje (DEV)</string>
@@ -169,4 +175,9 @@
     <string name="auto_ram_subtitle">Automaticky bude měnit množství RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">RAM byla nastavena na %d MB</string>
+    <string name="mcl_setting_check_libraries">Zkontrolovat knihovny po stažení</string>
+    <string name="mcl_setting_check_libraries_subtitle">Tato možnost donutí spouštěč zkontrolovat hash knihovny, pokud je k dispozici. Zabraňuje rozbitému stažení.</string>
+    <string name="dl_library_sha_fail">Knihovna %s je poškozena a bude znovu stažena</string>
+    <string name="dl_library_sha_unknown">Knihovna %s nemůže být kontrolována, musíme předpokládat, že je v pořádku</string>
+    <string name="dl_library_sha_pass">Knihovna %s je v pořádku a použitelná</string>
 </resources>
