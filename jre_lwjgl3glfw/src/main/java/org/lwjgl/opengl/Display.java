@@ -853,7 +853,7 @@ public class Display {
 
     public static void setDisplayMode(DisplayMode dm) throws LWJGLException {
         mode = dm;
-        newCurrentWindow(GLFW.glfwCreateWindow(dm.getWidth(), dm.getHeight(), windowTitle, 0, 0));
+        GLFW.glfwSetWindowSize(Window.handle, dm.getWidth(), dm.getHeight());
     }
 
     public static DisplayMode getDisplayMode() {
@@ -917,7 +917,9 @@ public class Display {
     public static void setTitle(String title) {
         windowTitle = title;
     }
-    public static String getTitle() { return windowTitle; }
+
+    public static String getTitle() { return windowTitle; }	
+
     public static boolean isCloseRequested() {
         return glfwWindowShouldClose(Window.handle) == true;
     }
@@ -965,8 +967,7 @@ public class Display {
                 glfwWindowHint(GLFW_RESIZABLE, displayResizable ? GL_TRUE : GL_FALSE);
                 glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-                newCurrentWindow(GLFW.glfwCreateWindow(width.get(), height.get(), windowTitle,
-                                                       GLFW.glfwGetWindowMonitor(Window.handle), NULL));
+                GLFW.glfwSetWindowSize(Window.handle, width.get(), height.get());
             }
         }
         displayResizable = resizable;
@@ -976,10 +977,9 @@ public class Display {
         return displayResizable;
     }
 
-    public static void setDisplayModeAndFullscreen(DisplayMode mode) throws LWJGLException {
-        Display.mode = mode;
-        newCurrentWindow(glfwCreateWindow(mode.getWidth(), mode.getHeight(), windowTitle,
-                                          mode.isFullscreenCapable() ? glfwGetPrimaryMonitor() : NULL, NULL));
+    public static void setDisplayModeAndFullscreen(DisplayMode dm) throws LWJGLException {
+        Display.mode = dm;
+        GLFW.glfwSetWindowSize(Window.handle, dm.getWidth(), dm.getHeight());
     }
 
     public static void setFullscreen(boolean fullscreen) throws LWJGLException {
@@ -999,11 +999,7 @@ public class Display {
                 glfwWindowHint(GLFW_RESIZABLE, displayResizable ? GL_TRUE : GL_FALSE);
                 glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-                if (fullscreen)
-                    newCurrentWindow(glfwCreateWindow(width.get(), height.get(), windowTitle,
-                                                      glfwGetPrimaryMonitor(), NULL));
-                else
-                    newCurrentWindow(glfwCreateWindow(width.get(), height.get(), windowTitle, NULL, NULL));
+                GLFW.glfwSetWindowSize(Window.handle, width.get(), height.get());
             }
         }
         displayFullscreen = fullscreen;
@@ -1055,26 +1051,6 @@ public class Display {
 
     static DisplayImplementation getImplementation() {
         return display_impl;
-    }
-
-    private static void newCurrentWindow(long newWindow) {
-        if (Window.handle != MemoryUtil.NULL)
-            glfwDestroyWindow(Window.handle);
-        Window.handle = newWindow;
-        //try {
-            //Mouse.setNativeCursor(Mouse.getCurrentCursor());
-        //} catch (LWJGLException e) {
-        //    System.err.println("Failed to set new window cursor!");
-        //    e.printStackTrace();
-        //}
-        GLFW.glfwSetWindowTitle(newWindow, windowTitle);
-        Window.setCallbacks();
-
-        // glfwMakeContextCurrent(Window.handle);
-        context = org.lwjgl.opengl.GLContext.createFromCurrent();
-
-        glfwSwapInterval(0);
-        glfwShowWindow(Window.handle);
     }
 
     static class Window {
