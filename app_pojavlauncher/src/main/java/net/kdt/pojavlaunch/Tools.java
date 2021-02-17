@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.*;
 import android.net.*;
 import android.os.*;
 import android.system.*;
@@ -14,13 +13,25 @@ import java.lang.reflect.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.zip.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.*;
 import android.view.*;
+import android.widget.Toast;
+
+import static android.os.Build.VERSION_CODES.P;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 public final class Tools
 {
@@ -52,29 +63,73 @@ public final class Tools
     public static final String DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
 
     public static final String ASSETS_PATH = DIR_GAME_NEW + "/assets";
-    public static final String CTRLMAP_PATH = DIR_GAME_NEW + "/controlmap";
-    public static final String CTRLDEF_FILE = DIR_GAME_NEW + "/controlmap/default.json";
+    public static final String OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
+    public static final String CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
+    public static final String CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
     
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
-    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) throws Throwable {
-        String[] launchArgs = getMinecraftArgs(profile, versionInfo);
+    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
+        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
+        PerVersionConfig.update();
+        PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
+        String gamedirPath;
+        if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
+        else gamedirPath = Tools.DIR_GAME_NEW;
+        if(pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
+        PojavLoginActivity.disableSplash(gamedirPath);
+        String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
-        String launchClassPath = generateLaunchClassPath(profile.selectedVersion);
+        String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
 
         List<String> javaArgList = new ArrayList<String>();
+        
+        int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
+        // 13w17a: 20130425
+        // 13w18a: 20130502
+        if (mcReleaseDate < 20130502 && versionInfo.minimumLauncherVersion < 9){
+            ctx.appendlnToLog("AWT-enabled version detected! ("+mcReleaseDate+")");
+            getCacioJavaArgs(javaArgList,false);
+        }else{
+            getCacioJavaArgs(javaArgList,false); // true
+            ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
+        }
         
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
-
+        // ctx.appendlnToLog("full args: "+javaArgList.toString());
         JREUtils.launchJavaVM(ctx, javaArgList);
     }
     
+    public static void getCacioJavaArgs(List<String> javaArgList, boolean isHeadless) {
+        javaArgList.add("-Djava.awt.headless="+isHeadless);
+        // Caciocavallo config AWT-enabled version
+        javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.physicalWidth + "x" + CallbackBridge.physicalHeight);
+        // javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
+        javaArgList.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
+        javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
+        javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
+        javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
+        javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+
+        StringBuilder cacioClasspath = new StringBuilder();
+        cacioClasspath.append("-Xbootclasspath/p");
+        File cacioDir = new File(DIR_GAME_HOME + "/caciocavallo");
+        if (cacioDir.exists() && cacioDir.isDirectory()) {
+            for (File file : cacioDir.listFiles()) {
+                if (file.getName().endsWith(".jar")) {
+                    cacioClasspath.append(":" + file.getAbsolutePath());
+                }
+            }
+        }
+        javaArgList.add(cacioClasspath.toString());
+    }
+
     public static void getJavaArgs(Context ctx, List<String> javaArgList) {
         List<String> overrideableArgList = new ArrayList<String>();
 
@@ -94,7 +149,7 @@ public final class Tools
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
        
-        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_114.so");
         // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
         
         // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
@@ -130,7 +185,7 @@ public final class Tools
         javaArgList.addAll(overrideableArgList);
     }
 
-    public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {
+    public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, String strGameDir) {
         String username = profile.username;
         String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
@@ -139,7 +194,7 @@ public final class Tools
         
         String userType = "mojang";
 
-        File gameDir = new File(Tools.DIR_GAME_NEW);
+        File gameDir = new File(strGameDir);
         gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<String, String>();
@@ -221,7 +276,7 @@ public final class Tools
 
     private static String getLWJGL3ClassPath() {
         StringBuilder libStr = new StringBuilder();
-        File lwjgl3Folder = new File(Tools.DIR_GAME_NEW, "lwjgl3");
+        File lwjgl3Folder = new File(Tools.DIR_GAME_HOME, "lwjgl3");
         if (/* info.arguments != null && */ lwjgl3Folder.exists()) {
             for (File file: lwjgl3Folder.listFiles()) {
                 if (file.getName().endsWith(".jar")) {
@@ -235,10 +290,9 @@ public final class Tools
     }
 
     private static boolean isClientFirst = false;
-    public static String generateLaunchClassPath(String version) {
+    public static String generateLaunchClassPath(JMinecraftVersionList.Version info,String actualname) {
         StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 
-        JMinecraftVersionList.Version info = getVersionInfo(version);
         String[] classpath = generateLibClasspath(info);
 
         // Debug: LWJGL 3 override
@@ -262,7 +316,7 @@ public final class Tools
          */
 
         if (isClientFirst) {
-            libStr.append(getPatchedFile(version));
+            libStr.append(getPatchedFile(actualname));
         }
         for (String perJar : classpath) {
             if (!new File(perJar).exists()) {
@@ -272,7 +326,7 @@ public final class Tools
             libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
         }
         if (!isClientFirst) {
-            libStr.append(getPatchedFile(version));
+            libStr.append(getPatchedFile(actualname));
         }
 
         return libStr.toString();
@@ -280,7 +334,21 @@ public final class Tools
 
     public static DisplayMetrics getDisplayMetrics(Activity ctx) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ctx.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && (ctx.isInMultiWindowMode() || ctx.isInPictureInPictureMode())){
+            //For devices with free form/split screen, we need window size, not screen size.
+            displayMetrics = ctx.getResources().getDisplayMetrics();
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                ctx.getDisplay().getRealMetrics(displayMetrics);
+            } else {
+                 ctx.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+            }
+            if(!PREF_IGNORE_NOTCH){
+                //Remove notch width when it isn't ignored.
+                displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
+            }
+        }
         return displayMetrics;
     }
 
@@ -302,15 +370,12 @@ public final class Tools
     }
 
     public static DisplayMetrics currentDisplayMetrics;
+
     public static void updateWindowSize(Activity ctx) {
         currentDisplayMetrics = getDisplayMetrics(ctx);
-        CallbackBridge.windowWidth = currentDisplayMetrics.widthPixels;
-        CallbackBridge.windowHeight = currentDisplayMetrics.heightPixels;
-        
-        if (CallbackBridge.windowWidth < CallbackBridge.windowHeight) {
-            CallbackBridge.windowWidth = currentDisplayMetrics.heightPixels;
-            CallbackBridge.windowHeight = currentDisplayMetrics.widthPixels;
-        }
+
+        CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
+        CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
     }
 
     public static float dpToPx(float dp) {
@@ -381,7 +446,7 @@ public final class Tools
             public void run()
             {
                 final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
-                new AlertDialog.Builder((Context) ctx)
+                AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
                     .setTitle(titleId)
                     .setMessage(errMsg)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
@@ -423,8 +488,12 @@ public final class Tools
                         }
                     })
                     //.setNegativeButton("Report (not available)", null)
-                    .setCancelable(!exitIfOk)
-                    .show();
+                    .setCancelable(!exitIfOk);
+                try {
+                    builder.show();
+                } catch (Throwable th) {
+                    th.printStackTrace();
+                }
             }
         };
 
@@ -491,7 +560,7 @@ public final class Tools
         return libDir.toArray(new String[0]);
     }
 
-    public static JMinecraftVersionList.Version getVersionInfo(String versionName) {
+    public static JMinecraftVersionList.Version getVersionInfo(BaseLauncherActivity bla, String versionName) {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             for (DependentLibrary lib : customVer.libraries) {
@@ -502,9 +571,20 @@ public final class Tools
             if (customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
-                JMinecraftVersionList.Version inheritsVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
+                JMinecraftVersionList.Version inheritsVer = null;
+                if(bla != null) if (bla.mVersionList != null) {
+                    for (JMinecraftVersionList.Version valueVer : bla.mVersionList.versions) {
+                        if (valueVer.id.equals(customVer.inheritsFrom) && (!new File(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json").exists()) && (valueVer.url != null)) {
+                            Tools.downloadFile(valueVer.url,DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json");
+                        }
+                    }
+                }//If it won't download, just search for it
+                   try{
+                      inheritsVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
+                   }catch(IOException e) {
+                       throw new RuntimeException("Can't find the source version for "+ versionName +" (req version="+customVer.inheritsFrom+")");
+                   }
                 inheritsVer.inheritsFrom = inheritsVer.id;
-                
                 insertSafety(inheritsVer, customVer,
                              "assetIndex", "assets", "id",
                              "mainClass", "minecraftArguments",
@@ -685,20 +765,40 @@ public final class Tools
         public abstract void updateProgress(int curr, int max);
     }
     public static void downloadFileMonitored(String urlInput,String nameOutput, DownloaderFeedback monitor) throws IOException {
-        if(!new File(nameOutput).exists()){
-            new File(nameOutput).getParentFile().mkdirs();
+        File nameOutputFile = new File(nameOutput);
+        if (!nameOutputFile.exists()) {
+            nameOutputFile.getParentFile().mkdirs();
         }
         HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
         InputStream readStr = conn.getInputStream();
-        FileOutputStream fos = new FileOutputStream(new File(nameOutput));
-        int cur = 0; int oval=0; int len = conn.getContentLength(); byte[] buf = new byte[65535];
-        while((cur = readStr.read(buf)) != -1) {
+        FileOutputStream fos = new FileOutputStream(nameOutputFile);
+        int cur = 0;
+        int oval = 0;
+        int len = conn.getContentLength();
+        byte[] buf = new byte[65535];
+        while ((cur = readStr.read(buf)) != -1) {
             oval += cur;
-            fos.write(buf,0,cur);
-            monitor.updateProgress(oval,len);
+            fos.write(buf, 0, cur);
+            monitor.updateProgress(oval, len);
         }
         fos.close();
         conn.disconnect();
+    }
+    public static boolean compareSHA1(File f, String sourceSHA) {
+        try {
+            String sha1_dst;
+            try (InputStream is = new FileInputStream(f)) {
+                 sha1_dst = new String(Hex.encodeHex(org.apache.commons.codec.digest.DigestUtils.sha1(is)));
+            }
+            if(sha1_dst != null && sourceSHA != null) {
+                return sha1_dst.equalsIgnoreCase(sourceSHA);
+            } else{
+                return true; // fake match
+            }
+        }catch (IOException e) {
+            Log.i("SHA1","Fake-matching a hash due to a read error",e);
+            return true;
+        }
     }
     public static class ZipTool
     {
@@ -769,4 +869,17 @@ public final class Tools
             }
         }
     }
+
+    public static void ignoreNotch(boolean shouldIgnore, Activity ctx){
+        if (Build.VERSION.SDK_INT >= P) {
+            if (shouldIgnore) {
+                ctx.getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            } else {
+                ctx.getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
+            }
+            ctx.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+            Tools.updateWindowSize(ctx);
+        }
+    }
+
 }

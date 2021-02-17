@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.*;
 import androidx.appcompat.widget.*;
 import android.view.*;
@@ -11,6 +13,7 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
+import net.kdt.pojavlaunch.value.PerVersionConfig;
 
 import androidx.appcompat.widget.PopupMenu;
 
@@ -26,7 +29,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     protected ArrayList<String> doInBackground(Void[] p1)
     {
         try {
-            mActivity.mVersionList = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest.json"), JMinecraftVersionList.class);
+            mActivity.mVersionList = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest_v2.json"), JMinecraftVersionList.class);
             ArrayList<String> versionStringList = filter(mActivity.mVersionList.versions, new File(Tools.DIR_HOME_VERSION).listFiles());
 
             return versionStringList;
@@ -52,6 +55,51 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
         } else {
             mActivity.mVersionSelector.setSelection(selectAt(mActivity.mAvailableVersions, mActivity.mProfile.selectedVersion));
         }
+        View.OnLongClickListener listener = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                final View v = LayoutInflater.from(view.getContext()).inflate(R.layout.pvc_popup,null);
+                try {
+                    PerVersionConfig.update();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+                PerVersionConfig.VersionConfig conf = PerVersionConfig.configMap.get(mActivity.mProfile.selectedVersion);
+                if(conf != null) {
+                    ((EditText)v.findViewById(R.id.pvc_customDir)).setText(conf.gamePath);
+                    ((EditText)v.findViewById(R.id.pvc_jvmArgs)).setText(conf.jvmArgs);
+                }
+                builder.setView(v);
+                builder.setTitle("Per-version settings");
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        PerVersionConfig.VersionConfig conf = PerVersionConfig.configMap.get(mActivity.mProfile.selectedVersion);
+                            if(conf == null) {
+                                conf = new PerVersionConfig.VersionConfig();
+                            }
+                            conf.jvmArgs = ((EditText)v.findViewById(R.id.pvc_jvmArgs)).getText().toString();
+                            conf.gamePath  = ((EditText)v.findViewById(R.id.pvc_customDir)).getText().toString();
+                            PerVersionConfig.configMap.put(mActivity.mProfile.selectedVersion,conf);
+                            try {
+                               PerVersionConfig.update();
+                            }catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                });
+                builder.show();
+                return true;
+            }
+        };
+        mActivity.mVersionSelector.setOnLongClickListener(listener);
         mActivity.mVersionSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
 
                 @Override
@@ -78,23 +126,24 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                     // TODO: Implement this method
                 }
             });
-        mActivity.mVersionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        /*mActivity.mVersionSelector.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
                 @Override
                 public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
                 {
                     // Implement copy, remove, reinstall,...
-                    popup.show();
+
+
                     return true;
                 }
             });
-
+        */
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
                 public boolean onMenuItemClick(MenuItem item) {  
                     return true;  
                 }  
             });  
 
-        mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg) + mActivity.mVersionSelector.getSelectedItem());
+        mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg,mActivity.mVersionSelector.getSelectedItem()));
     }
     
     private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {
@@ -109,7 +158,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
             }
         }
 
-        for (File value2: list2) {
+        if(list2 != null) for (File value2: list2) {
             if (!output.contains(value2.getName())) {
                 output.add(value2.getName());
             }

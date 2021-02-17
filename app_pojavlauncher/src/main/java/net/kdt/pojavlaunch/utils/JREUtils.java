@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.system.*;
 import android.util.*;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -46,8 +47,20 @@ public class JREUtils
         }
         return libName;
     }
-    
+    public static ArrayList<File> locateLibs(File path) {
+        ArrayList<File> ret = new ArrayList<>();
+        File[] list = path.listFiles();
+        if(list != null) {for(File f : list) {
+            if(f.isFile() && f.getName().endsWith(".so")) {
+                ret.add(f);
+            }else if(f.isDirectory()) {
+                ret.addAll(locateLibs(f));
+            }
+        }}
+        return ret;
+    }
     public static void initJavaRuntime() {
+
         dlopen(findInLdLibPath("libjli.so"));
         dlopen(findInLdLibPath("libjvm.so"));
         dlopen(findInLdLibPath("libverify.so"));
@@ -59,15 +72,17 @@ public class JREUtils
         dlopen(findInLdLibPath("libawt_headless.so"));
         dlopen(findInLdLibPath("libfreetype.so"));
         dlopen(findInLdLibPath("libfontmanager.so"));
-
+        for(File f : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
+            dlopen(f.getAbsolutePath());
+        }
         dlopen(nativeLibDir + "/libopenal.so");
         
-        if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl04es.so")) {
-            LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = nativeLibDir + "/libgl04es.so";
+        if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl4es_114.so")) {
+            LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = nativeLibDir + "/libgl4es_114.so";
         }
         if (!dlopen(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME) && !dlopen(findInLdLibPath(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME))) {
             System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
-            dlopen(nativeLibDir + "/libgl04es.so");
+            dlopen(nativeLibDir + "/libgl4es_114.so");
         }
     }
 
@@ -96,7 +111,7 @@ public class JREUtils
             public void run() {
                 try {
                     if (logcatPb == null) {
-                        logcatPb = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "*:S").redirectErrorStream(true);
+                        logcatPb = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "-s", "jrelog:I", "LIBGL:I").redirectErrorStream(true);
                     }
                     
                     Log.i("jrelog-logcat","Clearing logcat");
@@ -172,9 +187,11 @@ public class JREUtils
         
         String libName = Tools.CURRENT_ARCHITECTURE.contains("64") ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
+        File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
+        // To make libjli.so ignore re-execute
         ldLibraryPath.append(
-            // To make libjli.so ignore re-execute
-            Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server:" +
+            Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client") + ":");
+        ldLibraryPath.append(
             Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
             Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":"
         );
@@ -207,10 +224,10 @@ public class JREUtils
         envMap.put("REGAL_GL_RENDERER", "Regal");
         envMap.put("REGAL_GL_VERSION", "4.5");
 
-        envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth));
-        envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight));
+        envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
+        envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
         
-        File customEnvFile = new File(Tools.DIR_GAME_NEW, "custom_env.txt");
+        File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
             BufferedReader reader = new BufferedReader(new FileReader(customEnvFile));
             String line;
@@ -248,7 +265,25 @@ public class JREUtils
         List<String> javaArgList = new ArrayList<String>();
         javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
         Tools.getJavaArgs(ctx, javaArgList);
-
+        if(LauncherPreferences.DEFAULT_PREF.getBoolean("autoRam",true)) {
+            ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+            ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
+            purgeArg(javaArgList,"-Xms");
+            purgeArg(javaArgList,"-Xmx");
+            if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 750) {
+                javaArgList.add("-Xms750M");
+                javaArgList.add("-Xmx750M");
+            }else {
+                javaArgList.add("-Xms" + ((mi.availMem / 1048576L) - 50) + "M");
+                javaArgList.add("-Xmx" + ((mi.availMem / 1048576L) - 50) + "M");
+            }
+            ctx.runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,((mi.availMem / 1048576L)-50)), Toast.LENGTH_SHORT).show();
+                }
+            });
+            System.out.println(javaArgList);
+        }
         javaArgList.addAll(args);
         
         // For debugging only!
@@ -259,6 +294,7 @@ public class JREUtils
         }
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 */
+
         JREUtils.setJavaEnvironment(ctx, null);
         JREUtils.initJavaRuntime();
         JREUtils.chdir(Tools.DIR_GAME_NEW);
@@ -284,7 +320,14 @@ public class JREUtils
         }
         return exitCode;
     }
-
+    private static void purgeArg(List<String> argList, String argStart) {
+        for(int i = 0; i < argList.size(); i++) {
+            final String arg = argList.get(i);
+            if(arg.startsWith(argStart)) {
+                argList.remove(i);
+            }
+        }
+    }
     public static native int chdir(String path);
     public static native boolean dlopen(String libPath);
     public static native void redirectLogcat();
@@ -296,5 +339,6 @@ public class JREUtils
 
     static {
         System.loadLibrary("pojavexec");
+        System.loadLibrary("pojavexec_awt");
     }
 }

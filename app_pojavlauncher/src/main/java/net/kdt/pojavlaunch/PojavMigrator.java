@@ -3,6 +3,9 @@ import android.content.*;
 import java.io.*;
 import net.kdt.pojavlaunch.value.*;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
 public class PojavMigrator
 {
     public static void migrateAccountData(Context ctx) {
@@ -31,26 +34,31 @@ public class PojavMigrator
         }
     }
     
-    public static boolean migrateGameDir() throws IOException, InterruptedException {
+    public static boolean migrateGameDir() throws IOException {
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
         
         boolean moved = oldGameDir.exists() && oldGameDir.isDirectory();
+        /*
         if (!migrateBugFix20201217() && moved) {
             command("mv " + Tools.DIR_GAME_OLD + " " + Tools.DIR_GAME_HOME + "/");
         }
-
+        */
+        if(moved) {
+            oldGameDir.renameTo(new File(Tools.DIR_GAME_NEW + "/"));
+            FileUtils.deleteDirectory(new File(Tools.DIR_GAME_NEW + "/lwjgl3"));
+        }
         return moved;
     }
-    
+    /*
     public static boolean migrateBugFix20201217() throws IOException, InterruptedException {
         File bugGameDir = new File(Tools.DIR_GAME_NEW + "/.minecraft");
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
         boolean moved = bugGameDir.exists() && bugGameDir.isDirectory();
-        /*
+
         if (oldGameDir.exists() && oldGameDir.isDirectory() && moved) {
             command("rm -rf " + oldGameDir.getAbsolutePath());
         }
-        */
+
         if (moved) {
             command("mv " + bugGameDir.getAbsolutePath() + " " + Tools.DIR_GAME_OLD);
             command("rm -rf " + Tools.DIR_GAME_HOME + "/*");
@@ -59,7 +67,7 @@ public class PojavMigrator
 
         return moved;
     }
-    
+    */
     private static void command(String cmd) throws IOException, InterruptedException {
         Process p = Runtime.getRuntime().exec(cmd);
         int exitCode = p.waitFor();

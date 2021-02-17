@@ -4,13 +4,14 @@ import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.util.*;
-import com.kdt.mojangauth.*;
-import com.kdt.mojangauth.yggdrasil.*;
 
+import java.lang.ref.WeakReference;
 import java.net.*;
 import java.text.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.authenticator.mojang.*;
+import net.kdt.pojavlaunch.authenticator.microsoft.*;
 import org.json.*;
 
 import java.text.ParseException;
@@ -29,20 +30,20 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
 */
 
     //private Gson gson = new Gson();
-    private RefreshListener listener;
+    private final RefreshListener listener;
 
-    private Context ctx;
+    private final WeakReference<Context> ctx;
     private ProgressDialog build;
 
     public MicrosoftAuthTask(Context ctx, RefreshListener listener) {
-        this.ctx = ctx;
+        this.ctx = new WeakReference<>(ctx);
         this.listener = listener;
     }
 
     @Override
     public void onPreExecute() {
-        build = new ProgressDialog(ctx);
-        build.setMessage(ctx.getString(R.string.global_waiting));
+        build = new ProgressDialog(ctx.get());
+        build.setMessage(ctx.get().getString(R.string.global_waiting));
         build.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         build.setCancelable(false);
         build.setMax(6);
@@ -78,6 +79,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
                 acc.profileId = msa.mcUuid;
                 acc.isMicrosoft = true;
                 acc.msaRefreshToken = msa.msRefreshToken;
+                acc.updateSkinFace();
             }
             acc.save();
            

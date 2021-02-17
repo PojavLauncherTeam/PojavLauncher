@@ -10,6 +10,7 @@
  * - Implements glfwSetCursorPos() to handle grab camera pos correctly.
  */
  
+#include <stdlib.h>
 #include <jni.h>
 #include <assert.h>
 
@@ -36,11 +37,11 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
-int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
+static int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
-
+jclass bridgeClazz;
 jboolean isGrabbing;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
@@ -48,7 +49,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         //Save dalvik global JavaVM pointer
         dalvikJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr_ANDROID, JNI_VERSION_1_4);
-        
+        bridgeClazz = (*dalvikJNIEnvPtr_ANDROID)->NewGlobalRef(dalvikJNIEnvPtr_ANDROID,(*dalvikJNIEnvPtr_ANDROID) ->FindClass(dalvikJNIEnvPtr_ANDROID,"org/lwjgl/glfw/CallbackBridge"));
+        assert(bridgeClazz != NULL);
         isUseStackQueueCall = JNI_FALSE;
     } else if (dalvikJavaVMPtr != vm) {
         runtimeJavaVMPtr = vm;
@@ -77,7 +79,7 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
 #define ADD_CALLBACK_WWIN(NAME) \
 GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME; \
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
-    void** oldCallback = &GLFW_invoke_##NAME; \
+    void** oldCallback = (void**) &GLFW_invoke_##NAME; \
     GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
     return (jlong) (uintptr_t) *oldCallback; \
 }
@@ -175,22 +177,30 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
     if (isUseStackQueueCall && isAndroid && result) {
         isPrepareGrabPos = true;
     }
-        getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
+    getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
     
     return result;
 }
 
-JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jstring copy) {
+JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jstring copySrc) {
 #ifdef DEBUG
     LOGD("Debug: Clipboard access is going on\n", isUseStackQueueCall);
 #endif
-    // TODO: if crash here, then convert jstring to jstring (diff JVM)
-    jclass bridgeClazz = (*dalvikJNIEnvPtr_JRE)->FindClass(dalvikJNIEnvPtr_JRE, "org/lwjgl/glfw/CallbackBridge");
+
+    JNIEnv *dalvikEnv;
+    (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, &dalvikEnv, NULL);
+    assert(dalvikEnv != NULL);
     assert(bridgeClazz != NULL);
-    jmethodID bridgeMethod = (*dalvikJNIEnvPtr_JRE)->GetStaticMethodID(dalvikJNIEnvPtr_JRE, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
+    LOGD("Clipboard: Obtaining method\n");
+    jmethodID bridgeMethod = (* dalvikEnv)->GetStaticMethodID(dalvikEnv, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
     assert(bridgeMethod != NULL);
     
-    return (jstring) (*dalvikJNIEnvPtr_JRE)->CallStaticObjectMethod(dalvikJNIEnvPtr_JRE, bridgeClazz, bridgeMethod, action, copy);
+    LOGD("Clipboard: Converting string\n");
+    jstring copyDst = convertStringJVM(env, dalvikEnv, copySrc);
+    LOGD("Clipboard: Calling 2nd\n");
+    jstring pasteDst = convertStringJVM(dalvikEnv, env, (jstring) (*dalvikEnv)->CallStaticObjectMethod(dalvikEnv, bridgeClazz, bridgeMethod, action, copyDst));
+    (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
+    return pasteDst;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(JNIEnv* env, jclass clazz, jboolean inputReady) {
@@ -261,7 +271,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
                 isCursorEntered = true;
             }
         }
-        
+
         if (isGrabbing) {
             if (!isPrepareGrabPos) {
                 grabCursorX += x - lastCursorX;
@@ -276,9 +286,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
                 return;
             }
         }
-        
+
         if (!isUseStackQueueCall) {
-            GLFW_invoke_CursorPos(showingWindow, (double) (isGrabbing ? grabCursorX : x), (double) (isGrabbing ? grabCursorY : y));
+            GLFW_invoke_CursorPos(showingWindow, (double) (x), (double) (y));
         } else {
             sendData(EVENT_TYPE_CURSOR_POS, (isGrabbing ? grabCursorX : x), (isGrabbing ? grabCursorY : y), 0, 0);
         }
@@ -298,14 +308,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKeycode(JNIEnv* env, jclass clazz, jint keycode, jchar keychar, jint scancode, jint action, jint mods) {
-    if (isInputReady) {
-        Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(env, clazz, keycode, scancode, action, mods);
-        if (!Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(env, clazz, keychar, mods)) {
-            Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(env, clazz, keychar);
-        }
-    }
-}
+
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(JNIEnv* env, jclass clazz, jint button, jint action, jint mods) {
     if (isInputReady) {
@@ -360,4 +363,43 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEn
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
     showingWindow = (long) window;
 }
-
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_nativePutControllerAxes(JNIEnv *env, jclass clazz,
+                                                           jobject ax_buf) {
+    // TODO: implement nativePutControllerAxes()
+    if(isInputReady) {
+    jbyte *src = (jbyte *)((*env)->GetDirectBufferAddress(*env,ax_buf));
+    jclass glfw_joystick_class = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID,"org/lwjgl/glfw/GLFW");
+    if(glfw_joystick_class == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","GLFW is not attached!");
+        return;
+    }
+    jfieldID glfw_controller_axis_data = (*runtimeJNIEnvPtr_ANDROID)->GetStaticFieldID(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,"joystickData",
+                                                                                       "Ljava/nio/FloatBuffer;");
+    if(glfw_controller_axis_data == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","Unable to find the field!");
+        return;
+    }
+    (*runtimeJNIEnvPtr_ANDROID)->SetStaticObjectField(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,glfw_controller_axis_data,(*runtimeJNIEnvPtr_ANDROID)->NewDirectByteBuffer(runtimeJNIEnvPtr_ANDROID,src,(*env)->GetDirectBufferCapacity(env,ax_buf)));
+    }
+}
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_nativePutControllerButtons(JNIEnv *env, jclass clazz,
+                                                              jobject ax_buf) {
+    // TODO: implement nativePutControllerButtons()
+    if(isInputReady) {
+    jbyte *src = (jbyte *)((*env)->GetDirectBufferAddress(*env,ax_buf));
+    jclass glfw_joystick_class = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID,"org/lwjgl/glfw/GLFW");
+    if(glfw_joystick_class == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","GLFW is not attached!");
+        return;
+    }
+    jfieldID glfw_controller_button_data = (*runtimeJNIEnvPtr_ANDROID)->GetStaticFieldID(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,"buttonData",
+                                                                                       "Ljava/nio/ByteBuffer;");
+    if(glfw_controller_button_data == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","Unable to find the field!");
+        return;
+    }
+    (*runtimeJNIEnvPtr_ANDROID)->SetStaticObjectField(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,glfw_controller_button_data,(*runtimeJNIEnvPtr_ANDROID)->NewDirectByteBuffer(runtimeJNIEnvPtr_ANDROID,src,(*env)->GetDirectBufferCapacity(env,ax_buf)));
+    }
+}

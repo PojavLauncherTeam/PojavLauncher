@@ -6,6 +6,7 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
 		android:name=".PojavApplication"
@@ -44,11 +45,6 @@
 			android:theme="@style/MenuDialog"
 			android:screenOrientation="sensorLandscape"
 			android:name=".FatalErrorActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-		
-		<activity
-			android:screenOrientation="sensorLandscape"
-			android:name=".MCLauncherActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity

@@ -14,15 +14,6 @@ import org.json.*;
 
 
 public class Msa {
-    /*
-     private static final String loginUrl = "https://login.live.com/oauth20_authorize.srf" +
-     "?client_id=00000000402b5328" +
-     "&response_type=code" +
-     "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
-     "&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf";
-
-     private static final String redirectUrlSuffix = "https://login.live.com/oauth20_desktop.srf?code=";
-     */
     private static final String authTokenUrl = "https://login.live.com/oauth20_token.srf";
     private static final String xblAuthUrl = "https://user.auth.xboxlive.com/user/authenticate";
     private static final String xstsAuthUrl = "https://xsts.auth.xboxlive.com/xsts/authorize";
@@ -49,7 +40,8 @@ public class Msa {
 
         URL url = new URL(authTokenUrl);
         Log.i("MicroAuth", "isRefresh=" + isRefresh + ", authCode= "+authcode);
-        Map<Object, Object> data = new HashMap<>();/*Map.of(
+        Map<Object, Object> data = new HashMap<>();
+        /*Map.of(
          "client_id", "00000000402b5328",
          "code", authcode,
          "grant_type", "authorization_code",
@@ -232,18 +224,6 @@ public class Msa {
         }else{
             throwResponseError(conn);
         }
-        /*
-         HttpRequest request = HttpRequest.newBuilder(uri)
-         .header("Authorization", "Bearer " + mcAccessToken)
-         .GET().build();
-
-         HttpClient.newBuilder().build().sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenAccept(resp -> {
-         if (resp.statusCode() >= 200 && resp.statusCode() < 300) {
-         String body = resp.body();
-         Log.i("MicroAuth","store: " + body);
-         }
-         });
-         */
     }
 
     private void checkMcProfile(String mcAccessToken) throws IOException, JSONException {
@@ -299,9 +279,17 @@ public class Msa {
     }
 
     private static void throwResponseError(HttpURLConnection conn) throws IOException {
+        String otherErrStr = "";
         String errStr = Tools.read(conn.getErrorStream());
         Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
-        throw new RuntimeException("MSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);
+        
+        if (errStr.contains("NOT_FOUND") &&
+            errStr.contains("The server has not found anything matching the request URI"))
+        {
+            otherErrStr = "Can't login a demo account!";
+        }
+        
+        throw new RuntimeException(otherErrStr + "\n\nMSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);
     }
 }
 

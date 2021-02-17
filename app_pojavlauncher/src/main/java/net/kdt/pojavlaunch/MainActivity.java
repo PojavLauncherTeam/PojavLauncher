@@ -2,24 +2,30 @@ package net.kdt.pojavlaunch;
 
 import android.os.*;
 import android.view.*;
-import android.view.View.*;
-import android.widget.*;
+
+import androidx.annotation.Nullable;
+
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.utils.MCOptionUtils;
+
 import org.lwjgl.glfw.*;
 import java.io.*;
-import com.google.gson.*;
+
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
 public class MainActivity extends BaseMainActivity {
     private ControlLayout mControlLayout;
     
     private View.OnClickListener mClickListener;
     private View.OnTouchListener mTouchListener;
+    private FileObserver fileObserver;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initLayout(R.layout.main_with_customctrl);
+
 
         mClickListener = new View.OnClickListener(){
             @Override
@@ -95,6 +101,28 @@ public class MainActivity extends BaseMainActivity {
                 return false;
             }
         };
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    //FIXME Make sure the multithreading nature of this event doesn't cause any problems ?
+                    MCOptionUtils.load();
+                    getMcScale();
+                }
+            };
+        }else{
+            fileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    //FIXME Make sure the multithreading nature of this event doesn't cause any problems ?
+                    MCOptionUtils.load();
+                    getMcScale();
+                }
+            };
+        }
+
+        fileObserver.startWatching();
         
         ControlData[] specialButtons = ControlData.getSpecialButtons();
         specialButtons[0].specialButtonListener
@@ -113,6 +141,13 @@ public class MainActivity extends BaseMainActivity {
         mControlLayout.setModifiable(false);
         try {
             mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+        } catch(IOException e) {
+            try {
+                mControlLayout.loadLayout(Tools.CTRLDEF_FILE);
+                DEFAULT_PREF.edit().putString("defaultCtrl",Tools.CTRLDEF_FILE).commit();
+            } catch (IOException ioException) {
+                Tools.showError(this, ioException);
+            }
         } catch (Throwable th) {
             Tools.showError(this, th);
         }

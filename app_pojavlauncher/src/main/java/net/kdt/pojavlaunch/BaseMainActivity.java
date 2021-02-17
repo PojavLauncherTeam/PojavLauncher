@@ -9,10 +9,13 @@ import android.view.*;
 import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
+
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
 import java.lang.reflect.*;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -31,7 +34,7 @@ public class BaseMainActivity extends LoggableActivity {
         LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
 
     private boolean rightOverride = false;
-    private int scaleFactor = 1;
+    private float scaleFactor = 1;
     private int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
@@ -41,20 +44,22 @@ public class BaseMainActivity extends LoggableActivity {
     private static boolean triggeredLeftMouseButton = false;
     private Handler theHandler = new Handler() {
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_LEFT_MOUSE_BUTTON_CHECK: {
+            if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                switch (msg.what) {
+                    case MSG_LEFT_MOUSE_BUTTON_CHECK: {
                         int x = CallbackBridge.mouseX;
                         int y = CallbackBridge.mouseY;
                         if (CallbackBridge.isGrabbing() &&
-                            Math.abs(initialX - x) < fingerStillThreshold &&
-                            Math.abs(initialY - y) < fingerStillThreshold) {
+                                Math.abs(initialX - x) < fingerStillThreshold &&
+                                Math.abs(initialY - y) < fingerStillThreshold) {
                             triggeredLeftMouseButton = true;
                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
                         }
                     } break;
-                case MSG_DROP_ITEM_BUTTON_CHECK: {
+                    case MSG_DROP_ITEM_BUTTON_CHECK: {
                         sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
                     } break;
+                }
             }
         }
     };
@@ -117,13 +122,13 @@ public class BaseMainActivity extends LoggableActivity {
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             
-            logFile = new File(Tools.DIR_GAME_NEW, "latestlog.txt");
+            logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
             logStream = new PrintStream(logFile.getAbsolutePath());
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            mVersionInfo = Tools.getVersionInfo(mProfile.selectedVersion);
+            mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
             
             setTitle("Minecraft " + mProfile.selectedVersion);
             
@@ -131,14 +136,10 @@ public class BaseMainActivity extends LoggableActivity {
             isInputStackCall = mVersionInfo.arguments != null;
             
             this.displayMetrics = Tools.getDisplayMetrics(this);
-            CallbackBridge.windowWidth = displayMetrics.widthPixels / scaleFactor;
-            CallbackBridge.windowHeight = displayMetrics.heightPixels / scaleFactor;
+            CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels * scaleFactor);
+            CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels * scaleFactor);
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
-            MCOptionUtils.load();
-            MCOptionUtils.set("overrideWidth", Integer.toString(CallbackBridge.windowWidth));
-            MCOptionUtils.set("overrideHeight", Integer.toString(CallbackBridge.windowHeight));
-            MCOptionUtils.save();
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
@@ -208,7 +209,6 @@ public class BaseMainActivity extends LoggableActivity {
             this.debugText = findViewById(R.id.content_text_debug);
 
             this.minecraftGLView = findViewById(R.id.main_game_render_view);
-           
             // toggleGui(null);
             this.drawerLayout.closeDrawers();
 /*
@@ -218,10 +218,10 @@ public class BaseMainActivity extends LoggableActivity {
             
             AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
 */
-            placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
+            placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
             new Thread(new Runnable(){
 
-                    private boolean isCapturing = false;
+                    //private boolean isCapturing = false;
                     @Override
                     public void run()
                     {
@@ -233,7 +233,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     {
                                         if (lastGrab && !CallbackBridge.isGrabbing() && lastEnabled) {
                                             touchPad.setVisibility(View.VISIBLE);
-                                            placeMouseAt(CallbackBridge.windowWidth / 2, CallbackBridge.windowHeight / 2);
+                                            placeMouseAt(displayMetrics.widthPixels / 2, displayMetrics.heightPixels / 2);
                                         }
 
                                         if (!CallbackBridge.isGrabbing()) {
@@ -241,7 +241,7 @@ public class BaseMainActivity extends LoggableActivity {
                                         } else if (touchPad.getVisibility() != View.GONE) {
                                             touchPad.setVisibility(View.GONE);
                                         }
-
+                                        /*
                                         if (isAndroid8OrHigher()) {
                                             if (!CallbackBridge.isGrabbing() && isCapturing) {
                                                 minecraftGLView.releasePointerCapture();
@@ -253,7 +253,7 @@ public class BaseMainActivity extends LoggableActivity {
                                                 isCapturing = true;
                                             }
                                         }
-
+                                        */
                                         lastGrab = CallbackBridge.isGrabbing();
                                     }
                                 });
@@ -265,6 +265,10 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                 }).start();
 
+
+            if (isAndroid8OrHigher()) {
+                touchPad.setDefaultFocusHighlightEnabled(false);
+            }
             touchPad.setOnTouchListener(new OnTouchListener(){
                     private float prevX, prevY;
                     @Override
@@ -273,17 +277,24 @@ public class BaseMainActivity extends LoggableActivity {
                         // and other input controls. In this case, you are only
                         // interested in events where the touch position changed.
                         // int index = event.getActionIndex();
+
                         int action = event.getActionMasked();
 
                         float x = event.getX();
                         float y = event.getY();
-
+                        if(event.getHistorySize() > 0) {
+                            prevX = event.getHistoricalX(0);
+                            prevY = event.getHistoricalY(0);
+                        }else{
+                            prevX = x;
+                            prevY = y;
+                        }
                         float mouseX = mousePointer.getTranslationX();
                         float mouseY = mousePointer.getTranslationY();
 
                         if (gestureDetector.onTouchEvent(event)) {
 
-                            CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
+                            CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor), (int) (mouseY *scaleFactor));
                             CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
@@ -299,11 +310,11 @@ public class BaseMainActivity extends LoggableActivity {
                                     }
                                     break;
                                 case MotionEvent.ACTION_MOVE: // 2
-                                    mouseX = Math.max(0, Math.min(CallbackBridge.windowWidth, mouseX + x - prevX));
-                                    mouseY = Math.max(0, Math.min(CallbackBridge.windowHeight, mouseY + y - prevY));
+                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + x - prevX));
+                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
                                     placeMouseAt(mouseX, mouseY);
 
-                                    CallbackBridge.sendCursorPos((int) mouseX, (int) mouseY);
+                                    CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
                                     /*
                                     if (!CallbackBridge.isGrabbing()) {
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
@@ -313,8 +324,6 @@ public class BaseMainActivity extends LoggableActivity {
                                     break;
                             }
                         }
-                        prevX = x;
-                        prevY = y;
                         
                         debugText.setText(CallbackBridge.DEBUG_STRING.toString());
                         CallbackBridge.DEBUG_STRING.setLength(0);
@@ -327,23 +336,51 @@ public class BaseMainActivity extends LoggableActivity {
 
             minecraftGLView.setFocusable(true);
             // minecraftGLView.setEGLContextClientVersion(2);
-            
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
                 private int scrollInitialX, scrollInitialY;
+                private int x,y;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
+
+                    {
+                        int mptrIndex = -1;
+                        for (int i = 0; i < e.getPointerCount(); i++) {
+                            if (e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) { //if there's at least one mouse...
+                                mptrIndex = i; //index it
+                            }
+                        }
+                        if (mptrIndex != -1) {
+                            //handle mouse events by just sending the coords of the new point in touch event
+                            int x = (int) (e.getX(mptrIndex) * scaleFactor);
+                            int y = (int) (e.getY(mptrIndex) * scaleFactor);
+                            CallbackBridge.mouseX = x;
+                            CallbackBridge.mouseY = y;
+                            CallbackBridge.sendCursorPos(x, y);
+                            return true; // event handled sucessfully
+                        }//if index IS -1, continue handling as an usual touch event
+                    }
+
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
-                    int x = ((int) e.getX()) / scaleFactor;
-                    int y = ((int) e.getY()) / scaleFactor;
-                    int hudKeyHandled = handleGuiBar(x, y);
+                   /* int x = ((int) e.getX()) * scaleFactor;
+                    int y = ((int) e.getY()) * scaleFactor;*/
+                    if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
+                        x += (int)(e.getX() - e.getHistoricalX(0));
+                        y += (int)(e.getY() - e.getHistoricalY(0));
+                    }
+                    if(!CallbackBridge.isGrabbing()) {
+                        x = (int) (e.getX() * scaleFactor);
+                        y = (int) (e.getY() * scaleFactor);
+                    }
+
+                    int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
                         if (hudKeyHandled != -1) {
                             sendKeyPress(hudKeyHandled);
                         } else {
-                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, x, y);
+                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0,x,y);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
                             }
@@ -357,8 +394,8 @@ public class BaseMainActivity extends LoggableActivity {
                                 isTouchInHotbar = hudKeyHandled != -1;
                                 if (isTouchInHotbar) {
                                     sendKeyPress(hudKeyHandled, 0, true);
-                                    hotbarX = x;
-                                    hotbarY = y;
+                                    hotbarX = (int)e.getX();
+                                    hotbarY = (int)e.getY();
 
                                     theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                 } else {
@@ -403,8 +440,10 @@ public class BaseMainActivity extends LoggableActivity {
                                     if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
                                         sendKeyPress(hudKeyHandled, 0, false);
                                     } else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+                                        if(!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
+                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
+                                        }
                                     }
                                     if (!isTouchInHotbar) {
                                         if (triggeredLeftMouseButton) {
@@ -435,7 +474,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = x;
                                     CallbackBridge.mouseY = y;
-                                    
+
                                     CallbackBridge.sendCursorPos(x, y);
                                     
                                     if (!CallbackBridge.isGrabbing()) {
@@ -453,8 +492,8 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                     
 /*
-                    int x = ((int) e.getX()) / scaleFactor;
-                    int y = (minecraftGLView.getHeight() - ((int) e.getY())) / scaleFactor;
+                    int x = ((int) e.getX()) * scaleFactor;
+                    int y = (minecraftGLView.getHeight() - ((int) e.getY())) * scaleFactor;
                     int hudKeyHandled = handleGuiBar(x, y, e);
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
                         if (hudKeyHandled != -1) {
@@ -566,8 +605,11 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
-                            x += ((int) e.getX()) / scaleFactor;
-                            y -= ((int) e.getY()) / scaleFactor;
+                            x += ((int) e.getX()) * scaleFactor;
+                            y += ((int) e.getY()) * scaleFactor;
+                            if(!CallbackBridge.isGrabbing()){
+                                view.releasePointerCapture();
+                            }
 
                             if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
                                 StringBuilder builder = new StringBuilder();
@@ -593,92 +635,42 @@ public class BaseMainActivity extends LoggableActivity {
                                     builder.setLength(0);
                                 }
                             }
-
-                            boolean isDown = false;
-                            switch (e.getActionMasked()) {
-                                /*
-                                case MotionEvent.ACTION_DOWN: // 0
-                                case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                    CallbackBridge.sendPrepareGrabInitialPos();
-
-                                    CallbackBridge.sendMouseKeycode(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, CallbackBridge.getCurrentMods(), true);
-                                    initialX = x;
-                                    initialY = y;
-
-                                    sendMouseButton(CallbackBridge.mouseLeft ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-
-                                    // theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                    break;
-
-                                case MotionEvent.ACTION_UP: // 1
-                                case MotionEvent.ACTION_CANCEL: // 3
-                                case MotionEvent.ACTION_POINTER_UP: // 6
-                                    // CallbackBridge.sendCursorPos(x, y);
-                                    // CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
-                                    CallbackBridge.putMouseEventWithCoords(CallbackBridge.mouseLeft ? (byte) 0 : (byte) 1, (byte) 1, x, y);
-                                  
-                                    // triggeredLeftMouseButton = false;
-                                    // theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-                                    break;
-                                */
-                                
-                                case MotionEvent.ACTION_DOWN: // 0
-                                case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                    isDown = true;
-                                    break;
-                                    
-                                case MotionEvent.ACTION_UP: // 1
-                                case MotionEvent.ACTION_CANCEL: // 3
-                                case MotionEvent.ACTION_POINTER_UP: // 6
-                                    isDown = false;
-                                    break;
-                                
-                                case MotionEvent.ACTION_MOVE:
-                                    CallbackBridge.sendCursorPos(x, y);
-                                    break;
-                                
-                                case MotionEvent.ACTION_BUTTON_PRESS:
-                                    sendMouseButtonUnconverted(e.getActionButton(), isDown);
-                                    break;
-                                
-                                case MotionEvent.ACTION_SCROLL:
-                                    CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
-                                    break;
-                            }
-
                             debugText.setText(CallbackBridge.DEBUG_STRING.toString());
                             CallbackBridge.DEBUG_STRING.setLength(0);
-
-                            return true;
-                        // If onClick fail with false, change back to true
+                            switch (e.getActionMasked()) {
+                                case MotionEvent.ACTION_MOVE:
+                                    CallbackBridge.sendCursorPos(x, y);
+                                    return true;
+                                case MotionEvent.ACTION_BUTTON_PRESS:
+                                    return sendMouseButtonUnconverted(e.getActionButton(), true);
+                                case MotionEvent.ACTION_BUTTON_RELEASE:
+                                    return sendMouseButtonUnconverted(e.getActionButton(), false);
+                                case MotionEvent.ACTION_SCROLL:
+                                    CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
+                                    return true;
+                                default:
+                                    return false;
+                            }
                         }
                     });
             }
-
-            minecraftGLView.setOnHoverListener(new View.OnHoverListener(){
-                    @Override
-                    public boolean onHover(View v, MotionEvent e) {
-                        if (!CallbackBridge.isGrabbing() && mIsResuming) {
-                            // return glTouchListener.onTouch(v, e);
-                            int x = ((int) e.getX()) / scaleFactor;
-                            int y = ((int) e.getY()) / scaleFactor;
-                            CallbackBridge.mouseX = x;
-                            CallbackBridge.mouseY = y;
-                            CallbackBridge.sendCursorPos(x, y);
-                        }
-                        return true;
-                    }
-                });
             minecraftGLView.setOnTouchListener(glTouchListener);
             minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
                 
                     private boolean isCalled = false;
                     @Override
                     public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-                        CallbackBridge.windowWidth = width;
-                        CallbackBridge.windowHeight = height;
-                        calculateMcScale();
-                        
+                        scaleFactor = (LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f);
+                        texture.setDefaultBufferSize((int)(width*scaleFactor),(int)(height*scaleFactor));
+                        CallbackBridge.windowWidth = (int)(width*scaleFactor);
+                        CallbackBridge.windowHeight = (int)(height*scaleFactor);
+
+                        //Load Minecraft options:
+                        MCOptionUtils.load();
+                        MCOptionUtils.set("overrideWidth", ""+CallbackBridge.windowWidth);
+                        MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
+                        MCOptionUtils.save();
+                        getMcScale();
                         // Should we do that?
                         if (!isCalled) {
                             isCalled = true;
@@ -707,38 +699,23 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-                        CallbackBridge.windowWidth = width;
-                        CallbackBridge.windowHeight = height;
-                        CallbackBridge.sendUpdateWindowSize(width, height);
-                        calculateMcScale();
-                        
-                        // TODO: Implement this method for GLFW window size callback
+                        CallbackBridge.windowWidth = (int)(width*scaleFactor);
+                        CallbackBridge.windowHeight = (int)(height*scaleFactor);
+                        CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
+                        getMcScale();
                     }
 
                     @Override
                     public void onSurfaceTextureUpdated(SurfaceTexture texture) {
-                        
+                        texture.setDefaultBufferSize(CallbackBridge.windowWidth,CallbackBridge.windowHeight);
                     }
                 });
-            
-            OnGenericMotionListener gmlistener = new OnGenericMotionListener(){
-                    @Override
-                    public boolean onGenericMotion(View v, MotionEvent event) {
-                        switch (event.getActionMasked()) {
-                            case MotionEvent.ACTION_SCROLL:
-                                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
-                                break;
-                        }
-                        return true;
-                    }
-                };
-            minecraftGLView.setOnGenericMotionListener(gmlistener);
-            touchPad.setOnGenericMotionListener(gmlistener);
         } catch (Throwable e) {
             Tools.showError(this, e, true);
         }
     }
 
+    /*
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         switch (event.getAction()) {
@@ -753,9 +730,82 @@ public class BaseMainActivity extends LoggableActivity {
         
         return super.dispatchKeyEvent(event);
     }
+    */
+    @Override
+    public boolean dispatchGenericMotionEvent(MotionEvent ev) {
+        int mouseCursorIndex = -1;
+        if(ev.getSource() == InputDevice.SOURCE_CLASS_JOYSTICK) {
+            CallbackBridge.nativePutControllerAxes((FloatBuffer)FloatBuffer.allocate(8)
+                    .put(ev.getAxisValue(MotionEvent.AXIS_X))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_Y))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_Z))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_RX))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_RY))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_RZ))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_HAT_X))
+                    .put(ev.getAxisValue(MotionEvent.AXIS_HAT_Y))
+            .flip());
+            return true;//consume the cum chalice
+        }else {
+            for(int i = 0; i < ev.getPointerCount(); i++) {
+                if(ev.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) {
+                    mouseCursorIndex = i;
+                }
+            }
+            if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
+            if(CallbackBridge.isGrabbing()) {
+                if(BaseMainActivity.isAndroid8OrHigher()) minecraftGLView.requestPointerCapture();
+            }
+            switch(ev.getActionMasked()) {
+                case MotionEvent.ACTION_HOVER_MOVE:
+                    CallbackBridge.mouseX = (int) (ev.getX(mouseCursorIndex)*scaleFactor);
+                    CallbackBridge.mouseY = (int) (ev.getY(mouseCursorIndex)*scaleFactor);
+                    CallbackBridge.sendCursorPos((int) (ev.getX(mouseCursorIndex)*scaleFactor), (int) (ev.getY(mouseCursorIndex)*scaleFactor));
+                    return true;
+                case MotionEvent.ACTION_SCROLL:
+                    CallbackBridge.sendScroll((double) ev.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) ev.getAxisValue(MotionEvent.AXIS_HSCROLL));
+                    return true;
+                case MotionEvent.ACTION_BUTTON_PRESS:
+
+                     return sendMouseButtonUnconverted(ev.getActionButton(),true);
+                case MotionEvent.ACTION_BUTTON_RELEASE:
+                    return sendMouseButtonUnconverted(ev.getActionButton(),false);
+                default:
+                    return false;
+            }
+        }
+    }
+    byte[] kevArray = new byte[8];
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getSource() == InputDevice.SOURCE_CLASS_JOYSTICK) {
+            switch(event.getKeyCode()) {
+                case KeyEvent.KEYCODE_BUTTON_A:
+                    kevArray[0]= (byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_BUTTON_B:
+                    kevArray[1]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_BUTTON_X:
+                    kevArray[2]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_BUTTON_Y:
+                    kevArray[3]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_LEFT:
+                    kevArray[4]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_RIGHT:
+                    kevArray[5]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_UP:
+                    kevArray[6]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+                case KeyEvent.KEYCODE_DPAD_DOWN:
+                    kevArray[7]=(byte) ((event.getAction() == KeyEvent.ACTION_DOWN)?1:0);
+            }
+            CallbackBridge.nativePutControllerButtons(ByteBuffer.wrap(kevArray));
+            return true;
+        }else if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD || event.getSource() == InputDevice.SOURCE_KEYBOARD) {
+             AndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
+            return false;
+        }else return false;
+    }
 
     //private Dialog menuDial;
-
     @Override
     public void onResume() {
         super.onResume();
@@ -787,7 +837,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public static void fullyExit() {
-        System.exit(0);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     public void forceUserHome(String s) throws Exception {
@@ -808,7 +858,7 @@ public class BaseMainActivity extends LoggableActivity {
         }
     }
 
-    private boolean isAndroid8OrHigher() {
+    public static boolean isAndroid8OrHigher() {
         return Build.VERSION.SDK_INT >= 26; 
     }
 
@@ -845,7 +895,7 @@ public class BaseMainActivity extends LoggableActivity {
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
         JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
-        Tools.launchMinecraft(this, mProfile, mVersionInfo);
+        Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
@@ -885,7 +935,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     private void checkLWJGL3Installed() {
-        File lwjgl3dir = new File(Tools.DIR_GAME_NEW, "lwjgl3");
+        File lwjgl3dir = new File(Tools.DIR_GAME_HOME, "lwjgl3");
         if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {
             appendlnToLog("Error: LWJGL3 was not installed!");
             throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
@@ -979,7 +1029,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public int mcscale(int input) {
-        return this.guiScale * input;
+        return (int)((this.guiScale * input)/scaleFactor);
     }
 
     /*
@@ -1039,7 +1089,7 @@ public class BaseMainActivity extends LoggableActivity {
         // Prevent back
         // Catch back as Esc keycode at another place
 
-        // sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
     }
     
     public void hideKeyboard() {
@@ -1055,6 +1105,8 @@ public class BaseMainActivity extends LoggableActivity {
 
     public void showKeyboard() {
         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        minecraftGLView.requestFocusFromTouch();
+        minecraftGLView.requestFocus();
     }
 
     protected void setRightOverride(boolean val) {
@@ -1065,7 +1117,7 @@ public class BaseMainActivity extends LoggableActivity {
     public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
         sendKeyPress(keyCode, 0, modifiers, status);
     }
-    
+
     public static void sendKeyPress(int keyCode, int scancode, int modifiers, boolean status) {
         sendKeyPress(keyCode, '\u0000', scancode, modifiers, status);
     }
@@ -1073,10 +1125,27 @@ public class BaseMainActivity extends LoggableActivity {
     public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
         CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
     }
-
+    public static boolean doesObjectContainField(Class objectClass, String fieldName) {
+        for (Field field : objectClass.getFields()) {
+            if (field.getName().equals(fieldName)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void sendKeyPress(char keyChar) {
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
+        if(doesObjectContainField(KeyEvent.class,"KEYCODE_" + Character.toUpperCase(keyChar))) {
+            try {
+                int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
+                sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
+                sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+
+            }
+        }else{
+            sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
+            sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
+        }
     }
 
     public void sendKeyPress(int keyCode) {
@@ -1088,8 +1157,8 @@ public class BaseMainActivity extends LoggableActivity {
         CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
     }
     
-    public static void sendMouseButtonUnconverted(int button, boolean status) {
-        int glfwButton = 0;
+    public static boolean sendMouseButtonUnconverted(int button, boolean status) {
+        int glfwButton = -256;
         switch (button) {
             case MotionEvent.BUTTON_PRIMARY:
                 glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT;
@@ -1101,44 +1170,34 @@ public class BaseMainActivity extends LoggableActivity {
                 glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT;
                 break;
         }
-        
+        if(glfwButton == -256) return false;
         sendMouseButton(glfwButton, status);
+        return true;
     }
 
-    public void calculateMcScale() {
-        int scale = 1;
-        while (CallbackBridge.windowWidth / (scale + 1) >= 320 && CallbackBridge.windowHeight / (scale + 1) >= 240) {
-            scale++;
+    public void getMcScale() {
+        //Get the scale stored in game files, used auto scale if found or if the stored scaled is bigger than the authorized size.
+        String str = MCOptionUtils.get("guiScale");
+        this.guiScale = (str == null ? 0 :Integer.parseInt(str));
+        
+
+        int scale = Math.max(Math.min(CallbackBridge.windowWidth / 320, CallbackBridge.windowHeight / 240), 1);
+        if(scale < this.guiScale || guiScale == 0){
+            this.guiScale = scale;
         }
-        this.guiScale = scale;
     }
 
     public int handleGuiBar(int x, int y) {
         if (!CallbackBridge.isGrabbing()) return -1;
-        
-        int barheight = mcscale(20);
-        int barwidth = mcscale(180);
-        int barx = (CallbackBridge.windowWidth / 2) - (barwidth / 2);
-        int bary = CallbackBridge.windowHeight - barheight;
-        if (x < barx || x >= barx + barwidth || y < bary || y >= bary + barheight) {
-            return -1;
-        }
-        return hotbarKeys[((x - barx) / mcscale(180 / 9)) % 9];
-    }
-/*
-    public int handleGuiBar(int x, int y, MotionEvent e) {
-        if (!CallbackBridge.isGrabbing()) {
-            return -1;
-        }
 
-        // int screenHeight = CallbackBridge.windowHeight;
-        int barheight = mcscale(20);
-        int barwidth = mcscale(180);
-        int barx = (CallbackBridge.windowWidth / 2) - (barwidth / 2);
-        if (x < barx || x >= barx + barwidth || y < 0 || y >= 0 + barheight) {
+        int barHeight = mcscale(20);
+        int barWidth = mcscale(180);
+        int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
+        int barY = CallbackBridge.physicalHeight - barHeight;
+        if (x < barX || x >= barX + barWidth || y < barY || y >= barY + barHeight) {
             return -1;
         }
-        return hotbarKeys[((x - barx) / mcscale(20)) % 9];
+        return hotbarKeys[((x - barX) / mcscale(180 / 9)) % 9];
     }
-*/
+
 }

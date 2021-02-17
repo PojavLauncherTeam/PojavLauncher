@@ -47,7 +47,16 @@ static const char** const_appclasspath = NULL;
 static const jboolean const_javaw = JNI_FALSE;
 static const jboolean const_cpwildcard = JNI_TRUE;
 static const jint const_ergo_class = 0; // DEFAULT_POLICY
-
+static struct sigaction old_sa[NSIG];
+static const char* tag = "jrelog";
+void android_sigaction(int signal, siginfo_t *info, void *reserved)
+{
+    void* ret = malloc(128);
+    memset(ret,0,128);
+    sprintf(ret,"signal %d code %p addr %p", signal,info->si_code,info->si_addr);
+    __android_log_write(ANDROID_LOG_INFO,tag,ret);
+    exit(1);
+}
 typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
 
 typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
@@ -111,6 +120,20 @@ static jint launchJVM(int margc, char** margv) {
 JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, jclass clazz, jobjectArray argsArray) {
    jint res = 0;
    // int i;
+   //Prepare the signal trapper
+   struct sigaction catcher;
+   memset(&catcher,0,sizeof(sigaction));
+   catcher.sa_sigaction = android_sigaction;
+   catcher.sa_flags = SA_RESETHAND;
+#define CATCHSIG(X) sigaction(X, &catcher, &old_sa[X])
+    CATCHSIG(SIGILL);
+    CATCHSIG(SIGABRT);
+    CATCHSIG(SIGBUS);
+    CATCHSIG(SIGFPE);
+    CATCHSIG(SIGSEGV);
+    CATCHSIG(SIGSTKFLT);
+    CATCHSIG(SIGPIPE);
+   //Signal trapper ready
 
     // Save dalvik JNIEnv pointer for JVM launch thread
     dalvikJNIEnvPtr_ANDROID = env;
@@ -137,7 +160,6 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
 }
 static int pfd[2];
 static pthread_t logger;
-static const char* tag = "jrelog";
 
 static void *logger_thread() {
     ssize_t  rsize;
@@ -147,7 +169,7 @@ static void *logger_thread() {
             rsize=rsize-1;
         }
         buf[rsize]=0x00;
-        __android_log_write(ANDROID_LOG_SILENT,tag,buf);
+        __android_log_write(ANDROID_LOG_INFO,tag,buf);
     }
 }
 

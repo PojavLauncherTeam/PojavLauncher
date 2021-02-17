@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.prefs;
 
 import android.content.*;
-import java.util.*;
 import net.kdt.pojavlaunch.*;
 
 public class LauncherPreferences
@@ -12,18 +11,28 @@ public class LauncherPreferences
 	public static boolean PREF_VERTYPE_OLDALPHA = false;
 	public static boolean PREF_VERTYPE_OLDBETA = false;
 	public static boolean PREF_FREEFORM = false;
+	public static boolean PREF_HIDE_SIDEBAR = false;
+	public static boolean PREF_IGNORE_NOTCH = false;
+	public static boolean PREF_BACK_TO_RIGHT_MOUSE = false;
+	public static boolean PREF_BUTTON_FLAT = false;
+	public static int PREF_NOTCH_SIZE = 0;
 	public static float PREF_BUTTONSIZE = 100f;
 	public static float PREF_MOUSESCALE = 100f;
 	public static int PREF_LONGPRESS_TRIGGER = 500;
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
-    public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl04es.so";
+    public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
     public static String PREF_LANGUAGE = "default";
-	
+	public static boolean PREF_CHECK_LIBRARY_SHA = true;
+	public static boolean PREF_DISABLE_GESTURES = false;
 	public static void loadPreferences() {
 		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
 		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
 		PREF_FREEFORM = DEFAULT_PREF.getBoolean("freeform", false);
+		PREF_HIDE_SIDEBAR = DEFAULT_PREF.getBoolean("hideSidebar", false);
+		PREF_IGNORE_NOTCH = DEFAULT_PREF.getBoolean("ignoreNotch", false);
+		PREF_BACK_TO_RIGHT_MOUSE = DEFAULT_PREF.getBoolean("backToRightMouse", true);
+		PREF_BUTTON_FLAT = DEFAULT_PREF.getBoolean("flatButtonStyle", false);
 		PREF_VERTYPE_RELEASE = DEFAULT_PREF.getBoolean("vertype_release", true);
 		PREF_VERTYPE_SNAPSHOT = DEFAULT_PREF.getBoolean("vertype_snapshot", false);
 		PREF_VERTYPE_OLDALPHA = DEFAULT_PREF.getBoolean("vertype_oldalpha", false);
@@ -31,7 +40,8 @@ public class LauncherPreferences
 		PREF_LONGPRESS_TRIGGER = DEFAULT_PREF.getInt("timeLongPressTrigger", 500);
 		PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
         PREF_LANGUAGE = DEFAULT_PREF.getString("language", "default");
-        
+        PREF_CHECK_LIBRARY_SHA = DEFAULT_PREF.getBoolean("checkLibraries",true);
+		PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
 		// Get double of max Android heap to set default heap size
 		int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
         int doubleAndroidHeap = androidHeap * 2;
@@ -40,7 +50,8 @@ public class LauncherPreferences
             String DEFAULT_JAVA_ARGS =
                 "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
                 // (32bit) More than 800mb may make JVM not allocateable and crash
-                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m " +
+                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m"; /* "m " +
+
                 "-XX:+UseG1GC " +
                 "-XX:+ParallelRefProcEnabled " +
                 "-XX:MaxGCPauseMillis=200 " +
@@ -58,6 +69,7 @@ public class LauncherPreferences
 		"-XX:SurvivorRatio=32 " +
 		"-XX:+PerfDisableSharedMem " +
                 "-XX:MaxTenuringThreshold=1";
+*/
             
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();

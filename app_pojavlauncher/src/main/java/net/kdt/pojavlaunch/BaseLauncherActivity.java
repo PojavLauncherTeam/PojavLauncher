@@ -75,10 +75,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                         case 2: // Custom controls
                             startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
                             break;
-                        case 3: // Settings
-                            startActivity(new Intent(BaseLauncherActivity.this, LauncherPreferenceActivity.class));
-                            break;
-                        case 4: { // About
+                        case 3: { // About
                                 final AlertDialog.Builder aboutB = new AlertDialog.Builder(BaseLauncherActivity.this);
                                 aboutB.setTitle(R.string.mcl_option_about);
                                 try {
@@ -124,16 +121,15 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             dialog.setView(edit);
         } else {
             dialog = builder.create();
-            FileListView flv = new FileListView(dialog);
+            FileListView flv = new FileListView(dialog,"jar");
             flv.setFileSelectedListener(new FileSelectedListener(){
                     @Override
                     public void onFileSelected(File file, String path) {
-                        if (file.getName().endsWith(".jar")) {
-                            Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
-                            intent.putExtra("modFile", file);
-                            startActivity(intent);
-                            dialog.dismiss();
-                        }
+                        Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
+                        intent.putExtra("modFile", file);
+                        startActivity(intent);
+                        dialog.dismiss();
+
                     }
                 });
             dialog.setView(flv);
@@ -177,10 +173,23 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         decorView.setSystemUiVisibility(uiOptions);
         System.out.println("call to onResume; E");
     }
-
+    SharedPreferences.OnSharedPreferenceChangeListener listRefreshListener = null;
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
+        if(listRefreshListener == null) {
+            final BaseLauncherActivity thiz = this;
+            listRefreshListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                    if(key.startsWith("vertype_")) {
+                        System.out.println("Verlist update needed!");
+                        new RefreshVersionListTask(thiz).execute();
+                    }
+                }
+            };
+            LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
+        }
         new RefreshVersionListTask(this).execute();
         System.out.println("call to onResumeFragments");
         try{
@@ -224,11 +233,11 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             File lastCrashFile = Tools.lastFileModified(Tools.DIR_HOME_CRASH);
             if(CrashFragment.isNewCrash(lastCrashFile) || !mCrashView.getLastCrash().isEmpty()){
                 mCrashView.resetCrashLog = false;
-                selectTabPage(2);
+                initTabs(2);
+
             } /*else throw new Exception();*/
         } catch(Throwable e) {
             e.printStackTrace();
-            // selectTabPage(tabLayout.getSelectedTabPosition());
         }
         System.out.println("call to onResumeFragments; E");
     }
@@ -239,6 +248,5 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         return super.onTouchEvent(event);
     }
 
-    protected abstract void selectTabPage(int pageIndex);
-    protected abstract float updateWidthHeight();
+    protected abstract void initTabs(int pageIndex);
 }

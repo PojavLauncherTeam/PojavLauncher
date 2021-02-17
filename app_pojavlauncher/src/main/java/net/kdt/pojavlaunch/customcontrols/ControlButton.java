@@ -7,10 +7,11 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
-public class ControlButton extends Button implements OnLongClickListener, OnTouchListener
+public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
 {
     private Paint mRectPaint;
     
@@ -33,9 +34,12 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         
         mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
 
-        setBackgroundResource(R.drawable.control_button);
+        if (!LauncherPreferences.PREF_BUTTON_FLAT) {
+            setBackgroundResource(R.drawable.control_button);
+        } else {
+            setBackgroundColor(0x4D000000);
+        }
         setOnLongClickListener(this);
-        setOnTouchListener(this);
 
         setProperties(properties);
         setModified(false);
@@ -47,6 +51,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
         
         mRectPaint = new Paint();
         mRectPaint.setColor(value.data);
+        mRectPaint.setAlpha(128);
     }
 
     public HandleView getHandleView() {
@@ -112,7 +117,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
         if (!mProperties.isDynamicBtn) {
             mProperties.x = x;
-            mProperties.dynamicX = Float.toString(x / CallbackBridge.windowWidth) + " * ${screen_width}";
+            mProperties.dynamicX = Float.toString(x / CallbackBridge.physicalWidth) + " * ${screen_width}";
             setModified(true);
         }
     }
@@ -123,7 +128,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
 
         if (!mProperties.isDynamicBtn) {
             mProperties.y = y;
-            mProperties.dynamicY = Float.toString(y / CallbackBridge.windowHeight) + " * ${screen_height}";
+            mProperties.dynamicY = Float.toString(y / CallbackBridge.physicalHeight) + " * ${screen_height}";
             setModified(true);
         }
     }
@@ -162,45 +167,56 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
     }
     
     private void setHolding(boolean isDown) {
-        if (mProperties.holdAlt || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_ALT) {
+        if (mProperties.holdAlt) {
             CallbackBridge.holdingAlt = isDown;
+            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT,0,isDown);
+            System.out.println("holdingAlt="+CallbackBridge.holdingAlt);
         } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK) {
             CallbackBridge.holdingCapslock = isDown;
-        } if (mProperties.holdCtrl || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_CONTROL) {
+            //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK,0,isDown);
+            System.out.println("holdingCapslock="+CallbackBridge.holdingCapslock);
+        } if (mProperties.holdCtrl) {
             CallbackBridge.holdingCtrl = isDown;
+            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL,0,isDown);
+            System.out.println("holdingCtrl="+CallbackBridge.holdingCtrl);
         } if (mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK) {
             CallbackBridge.holdingNumlock = isDown;
-        } if (mProperties.holdShift || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT || mProperties.keycode == LWJGLGLFWKeycode.GLFW_KEY_RIGHT_SHIFT) {
+            //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK,0,isDown);
+            System.out.println("holdingNumlock="+CallbackBridge.holdingNumlock);
+        } if (mProperties.holdShift) {
             CallbackBridge.holdingShift = isDown;
+            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT,0,isDown);
+            System.out.println("holdingShift="+CallbackBridge.holdingShift);
         } 
     }
 
     private float moveX, moveY;
     private float downX, downY;
     @Override
-    public boolean onTouch(View view, MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         if (!mModifiable) {
             mCanTriggerLongClick = false;
             if (mProperties.keycode >= 0) {
                 if (!mProperties.isToggle) {
-                    boolean isDown;
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN: // 0
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            isDown = true;
+                            setHolding(true);
+                            MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), true);
                             break;
                         case MotionEvent.ACTION_UP: // 1
                         case MotionEvent.ACTION_CANCEL: // 3
                         case MotionEvent.ACTION_POINTER_UP: // 6
-                            isDown = false;
+                            setHolding(false);
+                            MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), false);
                             break;
                         default:
                             return false;
                     }
-                    setHolding(isDown);
-                    MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), isDown);
+
                 } else if (mGestureDetector.onTouchEvent(event)) {
                     mChecked = !mChecked;
+                    invalidate();
                     setHolding(mChecked);
                     MainActivity.sendKeyPress(mProperties.keycode, CallbackBridge.getCurrentMods(), mChecked);
                 }
@@ -211,7 +227,7 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                 mCanTriggerLongClick = true;
                 onLongClick(this);
             }
-            
+
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_DOWN:
@@ -233,8 +249,8 @@ public class ControlButton extends Button implements OnLongClickListener, OnTouc
                     break;
             }
         }
-        
-        return false;
+
+        return super.onTouchEvent(event);
     }
 
     public void setModifiable(boolean z) {

@@ -39,6 +39,20 @@ public class MCOptionUtils
         
         mLineList.add(key + ":" + value);
     }
+
+    public static String get(String key){
+        if (mLineList == null){
+            load();
+        }
+        for (int i = 0; i < mLineList.size(); i++) {
+            String line = mLineList.get(i);
+            if (line.startsWith(key + ":")) {
+                String value = mLineList.get(i);
+                return value.substring(value.indexOf(":")+1);
+            }
+        }
+        return null;
+    }
     
     public static void save() {
         StringBuilder result = new StringBuilder();

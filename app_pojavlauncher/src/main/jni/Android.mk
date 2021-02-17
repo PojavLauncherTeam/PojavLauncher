@@ -14,11 +14,16 @@ LOCAL_MODULE := pojavexec
 # LOCAL_CFLAGS += -DDEBUG
 # -DGLES_TEST
 LOCAL_SRC_FILES := \
-    awt_bridge.c \
     egl_bridge.c \
     input_bridge_v3.c \
     jre_launcher.c \
     utils.c
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := pojavexec_awt
+LOCAL_SRC_FILES := \
+    awt_bridge.c
 include $(BUILD_SHARED_LIBRARY)
 
 # Helper to get current thread
@@ -27,24 +32,21 @@ include $(BUILD_SHARED_LIBRARY)
 # LOCAL_SRC_FILES := thread_helper.cpp
 # include $(BUILD_SHARED_LIBRARY)
 
+# fake lib for linker
+include $(CLEAR_VARS)
+LOCAL_MODULE := awt_headless
+include $(BUILD_SHARED_LIBRARY)
+
 # libawt_xawt without X11, used to get Caciocavallo working
 LOCAL_PATH := $(HERE_PATH)/awt_xawt
 include $(CLEAR_VARS)
 LOCAL_MODULE := awt_xawt
 # LOCAL_CFLAGS += -DHEADLESS
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
-LOCAL_SRC_FILES := \
-    xawt_fake.c \
-    awt_AWTEvent.c \
-    awt_Event.c \
-    awt_GraphicsEnv.c \
-    awt_InputMethod.c \
-    awt_Insets.c \
-    awt_Robot.c \
-    awt_UNIXToolkit.c \
-    awt_Desktop.c \
-    awt_Taskbar.c \
-    XlibWrapper.c \
-    XToolkit.c
+LOCAL_SHARED_LIBRARIES := awt_headless
+LOCAL_SRC_FILES := xawt_fake.c
 include $(BUILD_SHARED_LIBRARY)
+
+# delete fake libs after linked
+$(info $(shell (rm $(HERE_PATH)/../jniLibs/*/libawt_headless.so)))
 

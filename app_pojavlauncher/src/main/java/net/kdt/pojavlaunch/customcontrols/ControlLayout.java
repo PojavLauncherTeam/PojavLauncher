@@ -50,8 +50,8 @@ public class ControlLayout extends FrameLayout
             button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             if (!button.isDynamicBtn) {
-                button.dynamicX = Float.toString(button.x / CallbackBridge.windowWidth) + " * ${screen_width}";
-                button.dynamicY = Float.toString(button.y / CallbackBridge.windowHeight) + " * ${screen_height}";
+                button.dynamicX = Float.toString(button.x / CallbackBridge.physicalWidth) + " * ${screen_width}";
+                button.dynamicY = Float.toString(button.y / CallbackBridge.physicalHeight) + " * ${screen_height}";
             }
             button.update();
 			addControlView(button);
@@ -70,7 +70,9 @@ public class ControlLayout extends FrameLayout
 		final ControlButton view = new ControlButton(this, controlButton);
 		view.setModifiable(mModifiable);
         if (!mModifiable) {
-            view.setAlpha(1f - view.getProperties().transparency / 100);
+            view.setAlpha(1f - view.getProperties().transparency / 100f);
+			view.setFocusable(false);
+			view.setFocusableInTouchMode(false);
         }
 		addView(view);
 
@@ -114,7 +116,7 @@ public class ControlLayout extends FrameLayout
 				ControlButton cv = ((ControlButton) v);
 				cv.setModifiable(z);
                 if (!z) {
-				    cv.setAlpha(1f - cv.getProperties().transparency / 100);
+				    cv.setAlpha(1f - cv.getProperties().transparency / 100f);
                 }
 			}
 		}

@@ -24,10 +24,12 @@
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">تثبيت محرك تشغيل جافا %s (.tar.xz)</string>
+
     <string name="alerttitle_installmod">حدد مشغل مودات للتثبيت</string>
     <!-- Error messages -->
     <string name="error_fatal">لقد توقف PojavLauncher بشكل غير متوقع</string>
     <string name="error_no_version">لا يوجد إصدار!</string>
+
     <string name="error_show_more">اظهر المزيد</string>
     <string name="error_show_less">أظهِر أقل</string>
     <!-- Toast messages -->
@@ -51,8 +53,10 @@
     <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
     <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
     <string name="mcl_options">الخيارات</string>
+
     <string name="mcl_option_modinstall">تشغيل مثبت مود (Forge, LabyMod, Fabric, الخ...)</string>
     <string name="mcl_option_modinstallwitharg">تشغيل مثبت مود (مع حجج مخصصة)</string>
+
     <string name="mcl_option_customcontrol">تخصيص التحكم</string>
     <string name="mcl_option_settings">الاعدادات</string>
     <string name="mcl_option_about">حول التطبيق</string>

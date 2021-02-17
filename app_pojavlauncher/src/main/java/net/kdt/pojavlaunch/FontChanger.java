@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import android.content.res.*;
 import android.graphics.*;
 import android.view.*;
 import android.widget.*;

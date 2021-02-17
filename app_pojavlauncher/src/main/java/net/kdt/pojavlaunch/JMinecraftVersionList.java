@@ -30,6 +30,7 @@ public class JMinecraftVersionList {
         public String time;
         public String type;
 		public String url;
+		public String sha1;
     }
 
 	// Since 1.13

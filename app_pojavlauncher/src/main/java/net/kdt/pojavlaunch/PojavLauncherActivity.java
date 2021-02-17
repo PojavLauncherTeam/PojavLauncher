@@ -1,116 +1,128 @@
 package net.kdt.pojavlaunch;
 
-import android.os.*;
-import android.support.design.widget.*;
-import android.support.design.widget.VerticalTabLayout.*;
-import androidx.core.view.*;
-import androidx.appcompat.app.*;
+import android.animation.ValueAnimator;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.design.widget.VerticalTabLayout.ViewPagerAdapter;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import android.util.*;
-import android.view.*;
-import android.widget.*;
 
-import java.io.*;
-import java.util.*;
-
-import net.kdt.pojavlaunch.fragments.*;
-import net.kdt.pojavlaunch.prefs.*;
-
-import org.lwjgl.glfw.*;
-
-import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.viewpager.widget.ViewPager;
-import net.kdt.pojavlaunch.value.*;
-//import android.support.v7.view.menu.*;
-//import net.zhuoweizhang.boardwalk.downloader.*;
+
+import net.kdt.pojavlaunch.fragments.ConsoleFragment;
+import net.kdt.pojavlaunch.fragments.CrashFragment;
+import net.kdt.pojavlaunch.fragments.LauncherFragment;
+import net.kdt.pojavlaunch.prefs.LauncherPreferenceFragment;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.os.Build.VERSION_CODES.P;
+import static net.kdt.pojavlaunch.Tools.ignoreNotch;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_HIDE_SIDEBAR;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 public class PojavLauncherActivity extends BaseLauncherActivity
 {
-    //private FragmentTabHost mTabHost;
-    private LinearLayout fullTab, leftTab;
-    /*
-     private PojavLauncherViewPager viewPager;
-     private VerticalTabLayout tabLayout;
-     */
 
     private ViewPager viewPager;
-    private VerticalTabLayout tabLayout;
 
-    private TextView tvUsernameView;
+    private TextView tvUsernameView, tvConnectStatus;
     private Spinner accountSelector;
-    private String profilePath = null;
     private ViewPagerAdapter viewPageAdapter;
+    private final Button[] Tabs = new Button[4];
+    private View selected;
 
     private Button switchUsrBtn, logoutBtn; // MineButtons
-    private ViewGroup leftView, rightView;
+
+    public PojavLauncherActivity() {
+    }
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.launcher_main_v4);
+
 
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
         }
-        
-        setContentView(R.layout.launcher_main_v3);
-        // setContentView(R.layout.launcher_main);
 
-        leftTab = findViewById(R.id.launchermain_layout_leftmenu);
-        leftTab.setLayoutParams(new LinearLayout.LayoutParams(
-            CallbackBridge.windowWidth / 4,
-            LinearLayout.LayoutParams.MATCH_PARENT));
-        
-        fullTab = findViewById(R.id.launchermain_layout_viewpager);
-        tabLayout = findViewById(R.id.launchermainTabLayout);
+
         viewPager = findViewById(R.id.launchermainTabPager);
+        selected = findViewById(R.id.viewTabSelected);
 
         mConsoleView = new ConsoleFragment();
         mCrashView = new CrashFragment();
 
         viewPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPageAdapter.addFragment(new LauncherFragment(), R.drawable.ic_menu_news, getString(R.string.mcl_tab_news));
-        viewPageAdapter.addFragment(mConsoleView, R.drawable.ic_menu_java, getString(R.string.mcl_tab_console));
+        viewPageAdapter.addFragment(new LauncherFragment(), 0, getString(R.string.mcl_tab_news));
+        viewPageAdapter.addFragment(mConsoleView, 0, getString(R.string.mcl_tab_console));
         viewPageAdapter.addFragment(mCrashView, 0, getString(R.string.mcl_tab_crash));
-        viewPageAdapter.addFragment(new LauncherPreferenceFragment(), R.drawable.ic_menu_settings, getString(R.string.mcl_option_settings));
-        
-        viewPager.setAdapter(viewPageAdapter);
-        // tabLayout.setTabMode(VerticalTabLayout.MODE_SCROLLABLE);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setLastTabAsBottom();
+        viewPageAdapter.addFragment(new LauncherPreferenceFragment(), 0, getString(R.string.mcl_option_settings));
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                setTabActive(position);
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        viewPager.setAdapter(viewPageAdapter);
+
+        tvConnectStatus = (TextView) findViewById(R.id.launchermain_text_accountstatus);
         tvUsernameView = (TextView) findViewById(R.id.launchermain_text_welcome);
         mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
 
-        pickAccount();
-        
-/*
-        File logFile = new File(Tools.MAIN_PATH, "latestlog.txt");
-        if (logFile.exists() && logFile.length() < 20480) {
-            String errMsg = "Error occurred during initialization of ";
-            try {
-                String logContent = Tools.read(logFile.getAbsolutePath());
-                if (logContent.contains(errMsg + "VM") && 
-                    logContent.contains("Could not reserve enough space for")) {
-                    OutOfMemoryError ex = new OutOfMemoryError("Java error: " + logContent);
-                    ex.setStackTrace(null);
-                    Tools.showError(PojavLauncherActivity.this, ex);
+        //The following line is used to make this TextView horizontally scroll if the version name is larger than the view
+        mTextVersion.setSelected(true);
 
-                    // Do it so dialog will not shown for second time
-                    Tools.write(logFile.getAbsolutePath(), logContent.replace(errMsg + "VM", errMsg + "JVM"));
-                }
-            } catch (Throwable th) {
-                Log.w(Tools.APP_NAME, "Could not detect java crash", th);
-            }
-        }
-*/
-        //showProfileInfo();
+        Tabs[0] = findViewById(R.id.btnTab1);
+        Tabs[1] = findViewById(R.id.btnTab2);
+        Tabs[2] = findViewById(R.id.btnTab3);
+        Tabs[3] = findViewById(R.id.btnTab4);
+
+
+        pickAccount();
+
 
         final List<String> accountList = new ArrayList<String>();
         final MinecraftAccount tempProfile = PojavProfile.getTempProfileContent(this);
         if (tempProfile != null) {
             accountList.add(tempProfile.username);
         }
-        accountList.addAll(Arrays.asList(new File(Tools.DIR_ACCOUNT_OLD).list()));
+        for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
+            accountList.add(s.substring(0, s.length() - 5));
+        }
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -126,13 +138,15 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 }
             }
         }
+
         accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> p1, View p2, int position, long p4) {
                 if (tempProfile != null && position == 0) {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, Tools.DIR_ACCOUNT_OLD + "/" + accountList.get(position + (tempProfile != null ? 1 : 0)));
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this,
+                        accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
                 pickAccount();
             }
@@ -164,7 +178,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }
 
         //mAvailableVersions;
-
         ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
         adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         mVersionSelector = (Spinner) findViewById(R.id.launchermain_spinner_version);
@@ -172,64 +185,141 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         mLaunchProgress = (ProgressBar) findViewById(R.id.progressDownloadBar);
         mLaunchTextStatus = (TextView) findViewById(R.id.progressDownloadText);
-        LinearLayout exitLayout = (LinearLayout) findViewById(R.id.launcherMainExitbtns);
-        switchUsrBtn = (Button) exitLayout.getChildAt(0);
-        logoutBtn = (Button) exitLayout.getChildAt(1);
+        switchUsrBtn = (Button) findViewById(R.id.infoDevBtn);
+        logoutBtn = (Button) findViewById(R.id.switchUserBtn);
 
-        leftView = (LinearLayout) findViewById(R.id.launcherMainLeftLayout);
-        mPlayButton = (Button) findViewById(R.id.launcherMainPlayButton);
-        rightView = (ViewGroup) findViewById(R.id.launcherMainRightLayout);
+        mPlayButton = (Button) findViewById(R.id.launchermainPlayButton);
 
         statusIsLaunching(false);
+
+
+        initTabs(0);
+        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                if(key.equals("hideSidebar")){
+                    restoreOldLook(sharedPreferences.getBoolean("hideSidebar",false));
+                    return;
+                }
+
+                if(key.equals("ignoreNotch")){
+                    ignoreNotch(sharedPreferences.getBoolean("ignoreNotch", true), PojavLauncherActivity.this);
+                    return;
+                }
+            }
+        });
+        restoreOldLook(PREF_HIDE_SIDEBAR);
+        ignoreNotch(PREF_IGNORE_NOTCH, PojavLauncherActivity.this);
     }
 
-    @Override
-    protected float updateWidthHeight() {
-        float leftRightWidth = (float) CallbackBridge.windowWidth / 100f * 32f;
-        float mPlayButtonWidth = CallbackBridge.windowWidth - leftRightWidth * 2f;
-        LinearLayout.LayoutParams leftRightParams = new LinearLayout.LayoutParams((int) leftRightWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
-        LinearLayout.LayoutParams mPlayButtonParams = new LinearLayout.LayoutParams((int) mPlayButtonWidth, (int) Tools.dpToPx(CallbackBridge.windowHeight / 9));
-        leftView.setLayoutParams(leftRightParams);
-        rightView.setLayoutParams(leftRightParams);
-        mPlayButton.setLayoutParams(mPlayButtonParams);
 
-        return leftRightWidth;
+    private void selectTabPage(int pageIndex){
+        viewPager.setCurrentItem(pageIndex);
+        setTabActive(pageIndex);
     }
 
-    @Override
-    protected void selectTabPage(int pageIndex){
-        if (tabLayout.getSelectedTabPosition() != pageIndex) {
-            tabLayout.setScrollPosition(pageIndex,0f,true);
-            viewPager.setCurrentItem(pageIndex);
-        }
-    }
-    
     private void pickAccount() {
         try {
-            profilePath = PojavProfile.getCurrentProfilePath(this);
             mProfile = PojavProfile.getCurrentProfileContent(this);
 
             tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));
+            tvConnectStatus.setText(mProfile.accessToken.equals("0") ? R.string.mcl_account_offline : R.string.mcl_account_connected);
         } catch(Exception e) {
-            profilePath = "";
             mProfile = new MinecraftAccount();
             Tools.showError(this, e, true);
         }
     }
 
     public void statusIsLaunching(boolean isLaunching) {
-        LinearLayout.LayoutParams reparam = new LinearLayout.LayoutParams((int) updateWidthHeight(), LinearLayout.LayoutParams.WRAP_CONTENT);
-        ViewGroup.MarginLayoutParams lmainTabParam = (ViewGroup.MarginLayoutParams) fullTab.getLayoutParams();
         int launchVisibility = isLaunching ? View.VISIBLE : View.GONE;
         mLaunchProgress.setVisibility(launchVisibility);
         mLaunchTextStatus.setVisibility(launchVisibility);
-        lmainTabParam.bottomMargin = reparam.height;
-        leftView.setLayoutParams(reparam);
 
         switchUsrBtn.setEnabled(!isLaunching);
         logoutBtn.setEnabled(!isLaunching);
         mVersionSelector.setEnabled(!isLaunching);
         canBack = !isLaunching;
     }
+
+    public void onTabClicked(View view) {
+        for(int i=0; i<Tabs.length;i++){
+            if(view.getId() == Tabs[i].getId()) {
+                selectTabPage(i);
+                return;
+            }
+        }
+    }
+
+    private void setTabActive(int index){
+        for (Button tab : Tabs) {
+            tab.setTypeface(null, Typeface.NORMAL);
+            tab.setTextColor(Color.rgb(220,220,220)); //Slightly less bright white.
+        }
+        Tabs[index].setTypeface(Tabs[index].getTypeface(), Typeface.BOLD);
+        Tabs[index].setTextColor(Color.WHITE);
+
+        //Animating the white bar on the left
+        ValueAnimator animation = ValueAnimator.ofFloat(selected.getY(), Tabs[index].getY()+(Tabs[index].getHeight()-selected.getHeight())/2f);
+        animation.setDuration(250);
+        animation.addUpdateListener(animation1 -> selected.setY((float) animation1.getAnimatedValue()));
+        animation.start();
+    }
+
+    protected void initTabs(int activeTab){
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                selectTabPage(activeTab);
+            }
+        }, 500);
+    }
+
+    private void restoreOldLook(boolean oldLookState){
+        Guideline guideLine = findViewById(R.id.guidelineLeft);
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
+        if(oldLookState){
+            //UI v1 Style
+            //Hide the sidebar
+            params.guidePercent = 0; // 0%, range: 0 <-> 1
+            guideLine.setLayoutParams(params);
+
+            //Remove the selected Tab
+            selected.setVisibility(View.GONE);
+
+            //Enlarge the button, but just a bit.
+            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
+            params.matchConstraintPercentWidth = 0.35f;
+        }else{
+            //UI v2 Style
+            //Show the sidebar back
+            params.guidePercent = 0.23f; // 23%, range: 0 <-> 1
+            guideLine.setLayoutParams(params);
+
+            //Show the selected Tab
+            selected.setVisibility(View.VISIBLE);
+
+            //Set the default button size
+            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
+            params.matchConstraintPercentWidth = 0.25f;
+        }
+        mPlayButton.setLayoutParams(params);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (Build.VERSION.SDK_INT >= P){
+            //Get the fucking notch height:
+            try {
+                PREF_NOTCH_SIZE = getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0).width();
+            }catch (Exception e){
+                Log.i("NOTCH DETECTION", "No notch detected, or the device if in split screen mode");
+            }
+            Tools.updateWindowSize(this);
+        }
+    }
+
 }
 

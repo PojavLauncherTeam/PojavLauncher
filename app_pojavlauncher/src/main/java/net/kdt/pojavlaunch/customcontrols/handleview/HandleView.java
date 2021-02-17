@@ -238,7 +238,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
     public abstract void updatePosition(float x, float y);
 
     protected void positionAtCursorOffset(int offset, boolean parentScrolled) {
-        mPositionX = (int) (mView.getWidth() / 1.1);
+        mPositionX = mView.getWidth();
         mPositionY = mView.getHeight();
         
         mPositionHasChanged = true;
@@ -372,6 +372,9 @@ public abstract class HandleView extends View implements ViewPositionListener, V
                     int newWidth = (int) (mDownWidth + (rawX - mDownX));
                     int newHeight = (int) (mDownHeight + (rawY - mDownY));
                     
+                    // mDownX = rawX;
+                    // mDownY = rawY;
+                    
                     params.width = Math.max(50, newWidth);
                     params.height = Math.max(50, newHeight);
                     
@@ -391,7 +394,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
                 mIsDragging = false;
                 break;
         }
-        return false; // super.onTouchEvent(ev);
+        return true;
     }
 
     public boolean isDragging() {

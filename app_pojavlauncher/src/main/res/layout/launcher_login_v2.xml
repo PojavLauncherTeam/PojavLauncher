@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:background="@drawable/sign_in_background"
+	android:scaleType="centerCrop"
+	android:adjustViewBounds="true"
 	android:layout_height="match_parent"
 	android:layout_width="match_parent">
 
-	<ImageView
-		android:layout_height="match_parent"
-		android:layout_width="match_parent"
-		android:scaleType="centerCrop"
-		android:adjustViewBounds="true"
-		android:background="@drawable/sign_in_background"/>
+
 
 	<Spinner
 		android:layout_height="wrap_content"
@@ -30,7 +28,7 @@
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:text="@string/login_online_username_hint"
-			android:layout_gravity="left"/>
+			android:layout_gravity="start"/>
 
 		<com.kdt.mcgui.MineEditText
 			android:imeOptions="flagNoExtractUi"
@@ -43,28 +41,40 @@
 		<TextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_gravity="left"
+			android:layout_gravity="start"
 			android:text="@string/login_online_password_hint"/>
 
-		<com.kdt.mcgui.MineEditText
-			android:imeOptions="flagNoExtractUi"
+		<com.google.android.material.textfield.TextInputLayout
 			android:layout_width="match_parent"
-			android:layout_height="30dp"
-			android:id="@+id/login_edit_password"
-			android:inputType="textPassword"
-			android:layout_marginBottom="5dp"/>
+			android:layout_height="match_parent"
+			android:layout_marginTop="-10dp"
+			app:passwordToggleEnabled="true"
+			app:passwordToggleTint="@android:color/white"
+			>
+
+			<com.kdt.mcgui.MineEditText
+				android:imeOptions="flagNoExtractUi"
+				android:layout_width="match_parent"
+				android:layout_height="30dp"
+				android:id="@+id/login_edit_password"
+				android:inputType="textPassword"
+				/>
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+
 
 		<CheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_gravity="left"
+			android:layout_gravity="start"
 			android:text="@string/login_online_check_keeplogin"
 			android:id="@+id/login_switch_remember"/>
 
 		<CheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_gravity="left"
+			android:layout_gravity="start"
 			android:text="@string/login_offline_label"
 			android:id="@+id/login_switch_offline"/>
 
@@ -83,9 +93,12 @@
 				<com.kdt.mcgui.MineButton
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
+					android:background="@drawable/mine_button_background"
 					android:text="@string/login_online_login_label"
+					android:textColor="@android:color/white"
 					android:onClick="loginMC"
-					android:gravity="center"/>
+					android:gravity="center"
+					/>
 
 				<ProgressBar
 					android:layout_width="match_parent"
@@ -100,16 +113,22 @@
 			<com.kdt.mcgui.MineButton
 				android:layout_width="210dip"
 				android:layout_height="match_parent"
+				android:background="@drawable/mine_button_background"
 				android:text="@string/login_select_account"
-				android:onClick="loginSavedAcc"/>
+				android:textColor="@android:color/white"
+				android:onClick="loginSavedAcc"
+				/>
 
 		</LinearLayout>
 
 		<com.kdt.mcgui.MineButton
 			android:layout_height="42dp"
 			android:layout_width="match_parent"
+			android:background="@drawable/mine_button_background"
 			android:text="@string/login_microsoft"
-			android:onClick="loginMicrosoft"/>
+			android:textColor="@android:color/white"
+			android:onClick="loginMicrosoft"
+			/>
 
 	</LinearLayout>
 

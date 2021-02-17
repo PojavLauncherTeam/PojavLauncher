@@ -1,38 +1,75 @@
 package net.kdt.pojavlaunch;
 
-import android.*;
-import android.content.*;
-import android.content.pm.*;
-import android.content.res.*;
-import android.net.*;
-import android.os.*;
-
+import android.Manifest;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.system.Os;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.util.Base64;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.core.app.*;
-import androidx.core.content.*;
-import androidx.appcompat.app.*;
-import android.system.*;
-import android.text.*;
-import android.text.style.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-import android.widget.CompoundButton.*;
-import com.kdt.mojangauth.*;
-import com.kdt.pickafile.*;
-import java.io.*;
-import java.util.*;
-import net.kdt.pojavlaunch.authenticator.microsoft.*;
-import net.kdt.pojavlaunch.customcontrols.*;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.utils.*;
-import org.apache.commons.compress.archivers.tar.*;
-import org.apache.commons.compress.compressors.xz.*;
-import org.apache.commons.io.*;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import com.kdt.pickafile.FileListView;
+import com.kdt.pickafile.FileSelectedListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Locale;
+import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthTask;
+import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
+import net.kdt.pojavlaunch.authenticator.mojang.LoginListener;
+import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
+import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.CustomControls;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.LocaleUtils;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
+import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
 import org.apache.commons.io.FileUtils;
-import net.kdt.pojavlaunch.value.*;
-import com.google.gson.*;
+import org.apache.commons.io.IOUtils;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -53,20 +90,16 @@ public class PojavLoginActivity extends BaseActivity
     
     private static boolean isSkipInit = false;
     
-    // private final String PREF_IS_DONOTSHOWAGAIN_WARN = "isWarnDoNotShowAgain";
+
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
     public static final String PREF_JAVARUNTIME_VER = "javaRuntimeVersion";
     
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false);
-        
+
         Tools.updateWindowSize(this);
-        
-        ControlData.pixelOf2dp = (int) Tools.dpToPx(2);
-        ControlData.pixelOf30dp = (int) Tools.dpToPx(30);
-        ControlData.pixelOf50dp = (int) Tools.dpToPx(50);
-        ControlData.pixelOf80dp = (int) Tools.dpToPx(80);
+
         ControlData[] specialButtons = ControlData.getSpecialButtons();
         specialButtons[0].name = getString(R.string.control_keyboard);
         specialButtons[1].name = getString(R.string.control_toggle);
@@ -83,7 +116,6 @@ public class PojavLoginActivity extends BaseActivity
         private ProgressBar progress;
 
         private ProgressBar progressSpin;
-        // private EditText progressLog;
         private AlertDialog progDlg;
 
         @Override
@@ -96,7 +128,7 @@ public class PojavLoginActivity extends BaseActivity
 
             progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
             startupTextView = (TextView) startScr.findViewById(R.id.startscreen_text);
-            //startScr.addView(progress);
+
 
             AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this, R.style.AppTheme);
             startDlg.setView(startScr);
@@ -157,9 +189,7 @@ public class PojavLoginActivity extends BaseActivity
         {
             if (obj[0].equals("visible")) {
                 progress.setVisibility(View.VISIBLE);
-            } /* else if (obj.length == 2 && obj[1] != null) {
-                progressLog.append(obj[1]);
-            } */
+            }
         }
 
         @Override
@@ -169,9 +199,7 @@ public class PojavLoginActivity extends BaseActivity
             if (obj == 0) {
                 if (progDlg != null) progDlg.dismiss();
                 uiInit();
-            } /* else if (progressLog != null) {
-                progressLog.setText(getResources().getString(R.string.error_checklog, "\n\n" + progressLog.getText()));
-            } */
+            }
         }
     }
     
@@ -283,35 +311,56 @@ public class PojavLoginActivity extends BaseActivity
         
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
-        
-        
     }
 
     private boolean isJavaRuntimeInstalled(AssetManager am) {
         boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
         try {
-            return prefValue && (am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz") == null || Tools.read(new FileInputStream(Tools.DIR_HOME_JRE+"/version")).equals(Tools.read(am.open("components/jre/version"))));
+            return prefValue && (
+                am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz") == null ||
+                Tools.read(new FileInputStream(Tools.DIR_HOME_JRE+"/version")).equals(Tools.read(am.open("components/jre/version"))));
         } catch(IOException e) {
             Log.e("JVMCtl","failed to read file",e);
             return prefValue;
         }
     }
    
-    private void initMain() throws Throwable {
-        mkdirs(Tools.DIR_ACCOUNT_NEW);
-        PojavMigrator.migrateAccountData(this);
-        
-        mkdirs(Tools.DIR_GAME_HOME);
-        if (!PojavMigrator.migrateGameDir()) {
-            mkdirs(Tools.DIR_GAME_NEW);
-            mkdirs(Tools.DIR_GAME_NEW + "/config");
-            mkdirs(Tools.DIR_GAME_NEW + "/lwjgl3");
-            mkdirs(Tools.DIR_GAME_NEW + "/mods");
-            mkdirs(Tools.DIR_HOME_VERSION);
-            mkdirs(Tools.DIR_HOME_LIBRARY);
+    private void unpackComponent(AssetManager am, String component) throws IOException {
+        File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
+        InputStream is = am.open("components/" + component + "/version");
+        if(!versionFile.exists()) {
+            if (versionFile.getParentFile().exists() && versionFile.getParentFile().isDirectory()) {
+                FileUtils.deleteDirectory(versionFile.getParentFile());
+            }
+            versionFile.getParentFile().mkdir();
+            
+            Log.i("UnpackPrep", component + ": Pack was installed manually, or does not exist, unpacking new...");
+            String[] fileList = am.list("components/" + component);
+            for(String s : fileList) {
+                Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_HOME + "/" + component, true);
+            }
+        } else {
+            FileInputStream fis = new FileInputStream(versionFile);
+            String release1 = Tools.read(is);
+            String release2 = Tools.read(fis);
+            if (!release1.equals(release2)) {
+                if (versionFile.getParentFile().exists() && versionFile.getParentFile().isDirectory()) {
+                    FileUtils.deleteDirectory(versionFile.getParentFile());
+                }
+                versionFile.getParentFile().mkdir();
+                
+                String[] fileList = am.list("components/" + component);
+                for (String s : fileList) {
+                    Tools.copyAssetFile(this, "components/" + component + "/" + s, Tools.DIR_GAME_HOME + "/" + component, true);
+                }
+            } else {
+                Log.i("UnpackPrep", component + ": Pack is up-to-date with the launcher, continuing...");
+            }
         }
-        
-        File forgeSplashFile = new File(Tools.DIR_GAME_NEW, "config/splash.properties");
+    }
+    public static void disableSplash(String dir) {
+        mkdirs(dir + "/config");
+        File forgeSplashFile = new File(dir, "config/splash.properties");
         String forgeSplashContent = "enabled=true";
         try {
             if (forgeSplashFile.exists()) {
@@ -319,18 +368,31 @@ public class PojavLoginActivity extends BaseActivity
             }
             if (forgeSplashContent.contains("enabled=true")) {
                 Tools.write(forgeSplashFile.getAbsolutePath(),
-                    forgeSplashContent.replace("enabled=true", "enabled=false"));
+                        forgeSplashContent.replace("enabled=true", "enabled=false"));
             }
         } catch (IOException e) {
             Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
         }
+    }
+    private void initMain() throws Throwable {
+        mkdirs(Tools.DIR_ACCOUNT_NEW);
+        PojavMigrator.migrateAccountData(this);
         
+        mkdirs(Tools.DIR_GAME_HOME);
+        mkdirs(Tools.DIR_GAME_HOME + "/lwjgl3");
+        mkdirs(Tools.DIR_GAME_HOME + "/config");
+        if (!PojavMigrator.migrateGameDir()) {
+            mkdirs(Tools.DIR_GAME_NEW);
+            mkdirs(Tools.DIR_GAME_NEW + "/mods");
+            mkdirs(Tools.DIR_HOME_VERSION);
+            mkdirs(Tools.DIR_HOME_LIBRARY);
+        }
+
         mkdirs(Tools.CTRLMAP_PATH);
         
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
-            Tools.copyAssetFile(this, "components/ForgeInstallerHeadless/forge-installer-headless-1.0.1.jar", Tools.DIR_GAME_NEW + "/config", "forge-installer-headless.jar", true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
@@ -339,35 +401,8 @@ public class PojavLoginActivity extends BaseActivity
 
             AssetManager am = this.getAssets();
             
-            InputStream is = am.open("components/lwjgl3/version");
-            if(!new File(Tools.DIR_GAME_NEW + "/lwjgl3/version").exists()) {
-                Log.i("LWJGL3Prep","Pack was installed manually, or does not exist, unpacking new...");
-                String[] lwjglFileList = am.list("components/lwjgl3");
-                // FileOutputStream fos;
-                // InputStream iis;
-                for(String s : lwjglFileList) {
-                    Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW + "/lwjgl3", true);
-                    /*
-                    iis = am.open("components/lwjgl3/"+s);
-                    fos = new FileOutputStream(new File(Tools.DIR_GAME_NEW+"/lwjgl3/"+s));
-                    IOUtils.copy(iis,fos);
-                    fos.close();
-                    iis.close();
-                    */
-                }
-            } else {
-                FileInputStream fis = new FileInputStream(new File(Tools.DIR_GAME_NEW + "/lwjgl3/version"));
-                String release1 = Tools.read(is);
-                String release2 = Tools.read(fis);
-                if (!release1.equals(release2)) {
-                    String[] lwjglFileList = am.list("components/lwjgl3");
-                    for (String s : lwjglFileList) {
-                        Tools.copyAssetFile(this, "components/lwjgl3/" + s, Tools.DIR_GAME_NEW + "/lwjgl3", true);
-                    }
-                } else {
-                    Log.i("LWJGL3Prep","Pack is up-to-date with the launcher, continuing...");
-                }
-            }
+            unpackComponent(am, "caciocavallo");
+            unpackComponent(am, "lwjgl3");
             if (!isJavaRuntimeInstalled(am)) {
                 if(!installRuntimeAutomatically(am)) {
                     File jreTarFile = selectJreTarFile();
@@ -440,7 +475,8 @@ public class PojavLoginActivity extends BaseActivity
             os.close();
             uncompressTarXZ(rtPlatformDependent, new File(Tools.DIR_HOME_JRE));
         } catch (IOException e) {
-            //Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?), in both cases, redirecting to manual install, and removing the universal stuff
+            // Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?),
+            // in both cases, redirecting to manual install, and removing the universal stuff
             for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
                 if (f.isDirectory()){
                     try {
@@ -477,19 +513,18 @@ public class PojavLoginActivity extends BaseActivity
                 builder.setCancelable(false);
 
                 final AlertDialog dialog = builder.create();
-                FileListView flv = new FileListView(dialog);
+                FileListView flv = new FileListView(dialog, "tar.xz");
                 flv.setFileSelectedListener(new FileSelectedListener(){
 
                         @Override
                         public void onFileSelected(File file, String path) {
-                            if (file.getName().endsWith(".tar.xz")) {
-                                selectedFile.append(path);
-                                dialog.dismiss();
-                                
-                                synchronized (mLockSelectJRE) {
-                                    mLockSelectJRE.notifyAll();
-                                }
+                            selectedFile.append(path);
+                            dialog.dismiss();
+
+                            synchronized (mLockSelectJRE) {
+                                mLockSelectJRE.notifyAll();
                             }
+
                         }
                     });
                 dialog.setView(flv);
@@ -549,39 +584,25 @@ public class PojavLoginActivity extends BaseActivity
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
-                // unpackShell.writeToProcess("ln -s " + tarEntry.getName() + " " + tarEntry.getLinkName());
+
             } else if (tarEntry.isDirectory()) {
                 destPath.mkdirs();
                 destPath.setExecutable(true);
             } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
                 destPath.getParentFile().mkdirs();
                 destPath.createNewFile();
-                // destPath.setExecutable(true);
                 
                 FileOutputStream os = new FileOutputStream(destPath);
                 IOUtils.copy(tarIn, os);
                 os.close();
 
-/*
-                byte[] btoRead = new byte[2048];
-                BufferedOutputStream bout = 
-                    new BufferedOutputStream(new FileOutputStream(destPath));
-                int len = 0;
-
-                while((len = tarIn.read(btoRead)) != -1) {
-                    bout.write(btoRead,0,len);
-                }
-
-                bout.close();
-                btoRead = null;
-*/
             }
             tarEntry = tarIn.getNextTarEntry();
         }
         tarIn.close();
     }
     
-    private boolean mkdirs(String path)
+    private static boolean mkdirs(String path)
     {
         File file = new File(path);
         // check necessary???
@@ -589,26 +610,15 @@ public class PojavLoginActivity extends BaseActivity
              return file.mkdir();
         else return file.mkdirs();
     }
-    
-    /*
-    public void loginUsername(View view)
-    {
-        LinearLayout mainLaun = new LinearLayout(this);
-        LayoutInflater.from(this).inflate(R.layout.launcher_user, mainLaun, true);
-        replaceFonts(mainLaun);
-        
-        //edit1 = mainLaun.findViewById(R.id.launcherAccUsername);
-        
-        new AlertDialog.Builder(this)
-            .setTitle("Register with username")
-            .setView(mainLaun)
-            .show();
-        
-    }
-    */
+
     
     public void loginMicrosoft(View view) {
-        CustomTabs.openTab(this, "https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+        CustomTabs.openTab(this,
+            "https://login.live.com/oauth20_authorize.srf" + 
+            "?client_id=00000000402b5328" +
+            "&response_type=code" +
+            "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
+            "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
     }
     
     @Override
@@ -616,7 +626,7 @@ public class PojavLoginActivity extends BaseActivity
         super.onNewIntent(intent);
         
         Uri data = intent.getData();
-        Log.i("MicroAuth", data.toString());
+        //Log.i("MicroAuth", data.toString());
         if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
             String error = data.getQueryParameter("error");
             String error_description = data.getQueryParameter("error_description");
@@ -644,121 +654,135 @@ public class PojavLoginActivity extends BaseActivity
         }
     }
     
-    public void loginSavedAcc(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    private View getViewFromList(int pos, ListView listView) {
+        final int firstItemPos = listView.getFirstVisiblePosition();
+        final int lastItemPos = firstItemPos + listView.getChildCount() - 1;
 
-        if (Tools.ENABLE_DEV_FEATURES) {
-            builder.setNegativeButton("Toggle UI v2", new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface p1, int p2)
-                    {
-                        int ver = PojavV2ActivityManager.getLauncherRemakeInt(PojavLoginActivity.this) == 0 ? 1 : 0;
-                        PojavV2ActivityManager.setLauncherRemakeVer(PojavLoginActivity.this, ver);
-                        Toast.makeText(PojavLoginActivity.this, "Changed to use v" + (ver + 1), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        if (pos < firstItemPos || pos > lastItemPos ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstItemPos;
+            return listView.getChildAt(childIndex);
         }
-        
-        builder.setPositiveButton(android.R.string.cancel, null);
-        builder.setTitle(this.getString(R.string.login_select_account));
-        final AlertDialog dialog = builder.create();
+    }
+    
+    public void loginSavedAcc(View view) {
+        String[] accountArr = new File(Tools.DIR_ACCOUNT_NEW).list();
+        if(accountArr.length == 0){
+           showNoAccountDialog();
+           return;
+        }
 
-        /*
-        LinearLayout.LayoutParams lpHint, lpFlv;
-        
-        lpHint = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lpFlv = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lpHint.weight = 1;
-        lpFlv.weight = 1;
-        */
-        dialog.setTitle(this.getString(R.string.login_select_account));
-        System.out.println("Setting title...");
-        LinearLayout dialay = new LinearLayout(this);
-        dialay.setOrientation(LinearLayout.VERTICAL);
-        TextView fhint = new TextView(this);
-        fhint.setText(R.string.hint_select_account);
-        // fhint.setLayoutParams(lpHint);
-        
-        final FileListView flv = new FileListView(dialog);
-        // flv.setLayoutParams(lpFlv);
-        
-        flv.lockPathAt(Tools.DIR_ACCOUNT_NEW);
-        flv.setFileSelectedListener(new FileSelectedListener(){
+        final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
+        int xScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().widthPixels;
+        int yScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().heightPixels;
+
+        accountDialog.setContentView(R.layout.simple_account_list_holder);
+
+
+        LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+
+        for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
+            String s = accountArr[accountIndex];
+            View child = inflater.inflate(R.layout.simple_account_list_item, null);
+            TextView accountName = child.findViewById(R.id.accountitem_text_name);
+            ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
+
+            String accNameStr = s.substring(0, s.length() - 5);
+            String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
+            Bitmap bitmap = Bitmap.createBitmap(8, 8, Bitmap.Config.ARGB_8888);
+            if (skinFaceBase64 != null) {
+                byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
+                bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+            } else {
+                try {
+                    bitmap = BitmapFactory.decodeStream(getAssets().open("ic_steve.png"));
+                } catch (IOException e) {
+                    // Should never happen
+                    e.printStackTrace();
+                }
+            }
+            accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
+                    Bitmap.createScaledBitmap(bitmap, 80, 80, false)),
+                    null, null, null);
+            
+            accountName.setText(accNameStr);
+
+            accountListLayout.addView(child);
+
+            accountName.setOnClickListener(new View.OnClickListener() {
+                final String selectedAccName = accountName.getText().toString();
                 @Override
-                public void onFileLongClick(final File file, String path)
-                {
-                    AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
-                    builder2.setTitle(file.getName());
-                    builder2.setMessage(R.string.warning_remove_account);
-                    builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+                public void onClick(View v) {
+                    try {
+                        RefreshListener authListener = new RefreshListener(){
+                            @Override
+                            public void onFailed(Throwable e) {
+                                Tools.showError(PojavLoginActivity.this, e);
+                            }
 
                             @Override
-                            public void onClick(DialogInterface p1, int p2) {
-                                new InvalidateTokenTask(PojavLoginActivity.this).execute(file.getAbsolutePath());
-                                flv.refreshPath();
+                            public void onSuccess(MinecraftAccount out) {
+                                accountDialog.dismiss();
+                                mProfile = out;
+                                playProfile(true);
                             }
-                        });
-                    builder2.setNegativeButton(android.R.string.cancel, null);
-                    builder2.show();
-                }
-                @Override
-                public void onFileSelected(File file, final String path) {
-                    try {
-                        MinecraftAccount acc = MinecraftAccount.load(path);
+                        };
+
+                        MinecraftAccount acc = MinecraftAccount.load(selectedAccName);
                         if (acc.isMicrosoft){
-                            new MicrosoftAuthTask(PojavLoginActivity.this, new RefreshListener(){
-                                    @Override
-                                    public void onFailed(Throwable e) {
-                                        Tools.showError(PojavLoginActivity.this, e);
-                                    }
-
-                                    @Override
-                                    public void onSuccess(MinecraftAccount b) {
-                                        mProfile = b;
-                                        playProfile(true);
-                                    }
-                                }).execute("true", acc.msaRefreshToken);
+                            new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
+                                    .execute("true", acc.msaRefreshToken);
                         } else if (acc.accessToken.length() >= 5) {
-                            MCProfile.updateTokens(PojavLoginActivity.this, path, new RefreshListener(){
-
-                                    @Override
-                                    public void onFailed(Throwable e)
-                                    {
-                                        Tools.showError(PojavLoginActivity.this, e);
-                                    }
-
-                                    @Override
-                                    public void onSuccess(MinecraftAccount unused)
-                                    {
-                                        try {
-                                            mProfile = MinecraftAccount.load(path);
-                                            playProfile(true);
-                                        } catch (Throwable e) {
-                                            Tools.showError(PojavLoginActivity.this, e);
-                                        }
-                                    }
-                                });
+                            PojavProfile.updateTokens(PojavLoginActivity.this, selectedAccName, authListener);
                         } else {
-                            MCProfile.launch(PojavLoginActivity.this, path);
+                            accountDialog.dismiss();
+                            PojavProfile.launch(PojavLoginActivity.this, selectedAccName);
                         }
-                        
-                        dialog.hide();
-                        //Tools.throwError(MCLoginActivity.this, new Exception(builder.getAccessToken() + "," + builder.getUUID() + "," + builder.getNickname() + "," + builder.getEmail() + "," + builder.getPassword()));
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         Tools.showError(PojavLoginActivity.this, e);
                     }
                 }
             });
-        dialay.addView(fhint);
-        dialay.addView(flv);
-        
-        dialog.setView(dialay);
-        dialog.setTitle(this.getString(R.string.login_select_account));
-        dialog.show();
+
+            // Tiny trick to avoid 'const' field
+            final int accountIndex_final = accountIndex;
+
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                final String selectedAccName = accountName.getText().toString();
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
+                    builder2.setTitle(selectedAccName);
+                    builder2.setMessage(R.string.warning_remove_account);
+                    builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface p1, int p2) {
+                            new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
+                            accountListLayout.removeViewsInLayout(accountIndex_final, 1);
+                            //Resize the window
+                            if (accountListLayout.getChildCount() == 0) {
+                                accountDialog.dismiss(); //No need to keep it, since there is no account
+                                return;
+                            }
+                            accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int) Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*55)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
+                        }
+                    });
+                    builder2.setNegativeButton(android.R.string.cancel, null);
+                    builder2.show();
+                }
+            });
+
+        }
+
+        //The value 73 and 56 are dp numbers, converted into px in order to resize the layout.
+        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*56)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
+        accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        accountDialog.show();
     }
     
     private MinecraftAccount loginOffline() {
@@ -769,7 +793,7 @@ public class PojavLoginActivity extends BaseActivity
             edit2.setError(getResources().getString(R.string.global_error_field_empty));
         } else if(text.length() <= 2){
             edit2.setError(getResources().getString(R.string.login_error_short_username));
-        } else if(new File(Tools.DIR_ACCOUNT_OLD + "/" + text).exists()){
+        } else if(new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()){
             edit2.setError(getResources().getString(R.string.login_error_exist_username));
         } else{
             MinecraftAccount builder = new MinecraftAccount();
@@ -784,11 +808,6 @@ public class PojavLoginActivity extends BaseActivity
     private MinecraftAccount mProfile = null;
     public void loginMC(final View v)
     {
-        /*skip it
-
-        String proFilePath = MCProfile.build(builder);
-        MCProfile.launchWithProfile(this, proFilePath);
-        end skip*/
         
         if (sOffline.isChecked()) {
             mProfile = loginOffline();
@@ -805,20 +824,23 @@ public class PojavLoginActivity extends BaseActivity
                     @Override
                     public void onLoginDone(String[] result) {
                         if(result[0].equals("ERROR")){
-                            Tools.dialogOnUiThread(PojavLoginActivity.this, getResources().getString(R.string.global_error), strArrToString(result));
+                            Tools.dialogOnUiThread(PojavLoginActivity.this,
+                                getResources().getString(R.string.global_error), strArrToString(result));
                         } else{
                             MinecraftAccount builder = new MinecraftAccount();
                             builder.accessToken = result[1];
                             builder.clientToken = result[2];
                             builder.profileId = result[3];
                             builder.username = result[4];
-
+                            builder.selectedVersion = "1.12.2";
+                            builder.updateSkinFace();
                             mProfile = builder;
                         }
-                        v.setEnabled(true);
-                        prb.setVisibility(View.GONE);
-                        
-                        playProfile(false);
+                        runOnUiThread(() -> {
+                            v.setEnabled(true);
+                            prb.setVisibility(View.GONE);
+                            playProfile(false);
+                        });
                     }
                 }).execute(edit2.getText().toString(), edit3.getText().toString());
         }
@@ -827,12 +849,12 @@ public class PojavLoginActivity extends BaseActivity
     private void playProfile(boolean notOnLogin) {
         if (mProfile != null) {
             try {
-                String profilePath = null;
+                String profileName = null;
                 if (sRemember.isChecked() || notOnLogin) {
-                    profilePath = mProfile.save();
+                    profileName = mProfile.save();
                 }
-
-                MCProfile.launch(PojavLoginActivity.this, profilePath == null ? mProfile : profilePath);
+                
+                PojavProfile.launch(PojavLoginActivity.this, profileName == null ? mProfile : profileName);
             } catch (IOException e) {
                 Tools.showError(this, e);
             }
@@ -855,6 +877,7 @@ public class PojavLoginActivity extends BaseActivity
         int result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
+
         //If permission is granted returning true
         return result1 == PackageManager.PERMISSION_GRANTED &&
             result2 == PackageManager.PERMISSION_GRANTED;
@@ -863,7 +886,8 @@ public class PojavLoginActivity extends BaseActivity
     //Requesting permission
     private void requestStoragePermission()
     {
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
     }
 
     // This method will be called when the user will tap on allow or deny
@@ -875,4 +899,21 @@ public class PojavLoginActivity extends BaseActivity
             }
         }
     }
+
+    //When the user have no saved account, you can show him this dialog
+    private void showNoAccountDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
+
+
+        builder.setMessage(R.string.login_dialog_no_saved_account)
+                .setTitle(R.string.login_title_no_saved_account)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    //Fucking nothing
+                });
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

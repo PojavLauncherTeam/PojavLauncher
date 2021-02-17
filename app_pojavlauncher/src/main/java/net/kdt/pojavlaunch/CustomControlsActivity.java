@@ -3,7 +3,6 @@ package net.kdt.pojavlaunch;
 import android.content.*;
 import android.os.*;
 
-import androidx.core.widget.*;
 import androidx.appcompat.app.*;
 import androidx.preference.*;
 import android.view.*;
@@ -17,6 +16,8 @@ import java.io.*;
 
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.customcontrols.*;
+
+
 
 public class CustomControlsActivity extends BaseActivity
 {
@@ -100,16 +101,14 @@ public class CustomControlsActivity extends BaseActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(dialog);
+		FileListView flv = new FileListView(dialog, "json");
 		flv.lockPathAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
 				public void onFileSelected(File file, String path) {
-					if (file.getName().endsWith(".json")) {
-						setDefaultControlJson(path);
-						dialog.dismiss();
-					}
+					setDefaultControlJson(path);
+					dialog.dismiss();
 				}
 			});
 		dialog.setView(flv);
@@ -182,16 +181,14 @@ public class CustomControlsActivity extends BaseActivity
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
-		FileListView flv = new FileListView(dialog);
+		FileListView flv = new FileListView(dialog, "json");
 		flv.listFileAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
 				public void onFileSelected(File file, String path) {
-					if (file.getName().endsWith(".json")) {
-						loadControl(path);
-						dialog.dismiss();
-					}
+					loadControl(path);
+					dialog.dismiss();
 				}
 			});
 		dialog.setView(flv);

@@ -2,14 +2,19 @@ package net.kdt.pojavlaunch;
 
 import android.util.*;
 import android.view.*;
+
+import java.net.CookieHandler;
 import java.util.*;
+
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import org.lwjgl.glfw.*;
 
 public class AndroidLWJGLKeycode {
     // Fix double letters on MC 1.9 and above
     public static boolean isBackspaceAfterChar = true;
-    private static final ArrayMap<Integer, Integer> androidToLwjglMap;
-    private static String[] androidKeyNameArray;
+    public static final ArrayMap<Integer, Integer> androidToLwjglMap;
+    public static String[] androidKeyNameArray;
+
     static {
         // Mapping Android Keycodes to LWJGL Keycodes
         androidToLwjglMap = new ArrayMap<Integer, Integer>();
@@ -40,7 +45,7 @@ public class AndroidLWJGLKeycode {
         androidToLwjglMap.put(KeyEvent.KEYCODE_K, LWJGLGLFWKeycode.GLFW_KEY_K);
         androidToLwjglMap.put(KeyEvent.KEYCODE_L, LWJGLGLFWKeycode.GLFW_KEY_L);
         androidToLwjglMap.put(KeyEvent.KEYCODE_M, LWJGLGLFWKeycode.GLFW_KEY_M);
-        androidToLwjglMap.put(KeyEvent.KEYCODE_N, LWJGLGLFWKeycode.GLFW_KEY_M);
+        androidToLwjglMap.put(KeyEvent.KEYCODE_N, LWJGLGLFWKeycode.GLFW_KEY_N);
         androidToLwjglMap.put(KeyEvent.KEYCODE_O, LWJGLGLFWKeycode.GLFW_KEY_O);
         androidToLwjglMap.put(KeyEvent.KEYCODE_P, LWJGLGLFWKeycode.GLFW_KEY_P);
         androidToLwjglMap.put(KeyEvent.KEYCODE_Q, LWJGLGLFWKeycode.GLFW_KEY_Q);
@@ -162,16 +167,6 @@ public class AndroidLWJGLKeycode {
     }
     
     public static void execKey(KeyEvent keyEvent, int i, boolean isDown) {
-        for (Map.Entry<Integer, Integer> perKey : androidToLwjglMap.entrySet()) {
-            if (i == 1 && (keyEvent.getSource() == InputDevice.SOURCE_MOUSE)) {
-                // Right mouse detection
-                BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
-                // BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-            } else if (perKey.getKey() == i) {
-                BaseMainActivity.sendKeyPress(perKey.getValue(), keyEvent.getModifiers(), isDown);
-            }
-        }
-
         CallbackBridge.holdingAlt = keyEvent.isAltPressed();
         CallbackBridge.holdingCapslock = keyEvent.isCapsLockOn();
         CallbackBridge.holdingCtrl = keyEvent.isCtrlPressed();
@@ -179,24 +174,25 @@ public class AndroidLWJGLKeycode {
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
         try {
-            if (!CallbackBridge.isGrabbing()) {
-                if (keyEvent.isPrintingKey()) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getUnicodeChar(keyEvent.getMetaState()), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
-                } else if ((int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN) {
-                    BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()), (char) keyEvent.getDisplayLabel(), keyEvent.getScanCode(), CallbackBridge.getCurrentMods(), isDown);
+                //System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
+            if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK && LauncherPreferences.PREF_BACK_TO_RIGHT_MOUSE) {
+                BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, keyEvent.getAction() == KeyEvent.ACTION_DOWN);
+            } else {
+                if(keyEvent.getUnicodeChar() != 0) {
+                    char key = (char)keyEvent.getUnicodeChar();
+                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),key,0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
+                }else{
+                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),CallbackBridge.getCurrentMods(),keyEvent.getAction()==KeyEvent.ACTION_DOWN);
                 }
             }
         } catch (Throwable th) {
             th.printStackTrace();
         }
-
-        if (isBackspaceAfterChar && (int) keyEvent.getDisplayLabel() != KeyEvent.KEYCODE_UNKNOWN && !CallbackBridge.isGrabbing() && i != KeyEvent.KEYCODE_DEL) {
-            BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, 0, isDown);
-        }
     }
 
     public static void execKeyIndex(BaseMainActivity mainActivity, int index) {
         mainActivity.sendKeyPress(getKeyByIndex(index));
+
     }
     
     public static int getKeyByIndex(int index) {
