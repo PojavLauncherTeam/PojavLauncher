@@ -775,9 +775,17 @@ public class BaseMainActivity extends LoggableActivity {
             }
         }
     }
+    boolean isKeyboard(KeyEvent evt) {
+        if((evt.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD) return true;
+        if(evt.getSource() == InputDevice.SOURCE_KEYBOARD) return true;
+        if(evt.getUnicodeChar() != 0) return true;
+        if(AndroidLWJGLKeycode.androidToLwjglMap.containsKey(evt.getKeyCode())) return true;
+        return false;
+    }
     byte[] kevArray = new byte[8];
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        System.out.println(event.getSource() + " "+ event.getFlags());
         if(event.getSource() == InputDevice.SOURCE_CLASS_JOYSTICK) {
             switch(event.getKeyCode()) {
                 case KeyEvent.KEYCODE_BUTTON_A:
@@ -799,9 +807,9 @@ public class BaseMainActivity extends LoggableActivity {
             }
             CallbackBridge.nativePutControllerButtons(ByteBuffer.wrap(kevArray));
             return true;
-        }else if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD || event.getSource() == InputDevice.SOURCE_KEYBOARD) {
+        }else if(isKeyboard(event)) {
              AndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
-            return false;
+            return true;
         }else return false;
     }
 
