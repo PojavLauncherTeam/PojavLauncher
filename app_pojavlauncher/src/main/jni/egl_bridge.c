@@ -186,8 +186,12 @@ Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong
     EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,es3_ctx_attribs);
     if (ctx == EGL_NO_CONTEXT) {
         printf("Could not create ES3 context, fallbacking to ES2\n");
+        setenv("LIBGL_ES", "2", 1);
         ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,es2_ctx_attribs);
+    } else {
+        setenv("LIBGL_ES", "3", 1);
     }
+
     printf("Created CTX pointer = %p\n",ctx);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
     return (long)ctx;
