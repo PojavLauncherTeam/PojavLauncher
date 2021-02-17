@@ -110,8 +110,8 @@ public class JREUtils
     
     private static boolean checkAccessTokenLeak = true;
     public static void redirectAndPrintJRELog(final LoggableActivity act, final String accessToken) {
-        JREUtils.redirectLogcat();
         Log.v("jrelog","Log starts here");
+        JREUtils.logToActivity(act);
         Thread t = new Thread(new Runnable(){
             int failTime = 0;
             ProcessBuilder logcatPb;
@@ -418,8 +418,8 @@ public class JREUtils
         }
     }
     public static native int chdir(String path);
+    public static native void logToActivity(final LoggableActivity a);
     public static native boolean dlopen(String libPath);
-    public static native void redirectLogcat();
     public static native void setLdLibraryPath(String ldLibraryPath);
     public static native void setupBridgeWindow(Object surface);
     
@@ -429,5 +429,6 @@ public class JREUtils
     static {
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");
+        System.loadLibrary("istdio");
     }
 }
