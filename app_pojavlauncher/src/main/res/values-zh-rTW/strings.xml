@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">用戶名已存在</string>
     <string name="login_microsoft">微軟帳號登入</string>
     <string name="login_select_account">選擇賬號</string>
+    <string name="login_title_no_saved_account">賬戶未找到！</string>
+    <string name="login_dialog_no_saved_account">尚未保存任何賬號。\n使用<b>“保持登錄狀態”</b>選項以在首次登錄后保存賬號。</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"左滑開啟選單 ◀\n長按按鍵以自訂：編輯，縮放或刪除。"</string>
     <!-- Warnings -->
@@ -25,30 +27,73 @@
     <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩潰</string>
+    <string name="error_no_version">無版本！</string>
+    <string name="error_show_more">顯示細節</string>
+    <string name="error_show_less">隱藏細節</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">需要儲存讀寫授權！</string>
+    <string name="toast_optifine_success">安裝成功</string>
     <string name="toast_uninstalljre_done">Java 執行時環境解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">新聞</string>
+    <string name="mcl_tab_console">開發控制台</string>
+    <string name="mcl_tab_crash">崩潰日誌</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">已連接</string>
+    <string name="mcl_account_offline">離線</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s 就緒</string>
+    <string name="mcl_launch_cleancache">正在清理快取</string>
+    <string name="mcl_launch_downloading">正在下載 %s</string>
+    <string name="mcl_launch_downloading_progress">"正在下載 %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">正在準備下載資源</string>
+    <string name="mcl_options">選項</string>
     <string name="mcl_option_modinstall">啟動 Mod 安裝器（例如 Forge, LabyMod, Fabric...）</string>
     <string name="mcl_option_modinstallwitharg">以自訂引數啟動 Mod 安裝器</string>
+    <string name="mcl_option_customcontrol">自訂控制鍵</string>
+    <string name="mcl_option_settings">設定</string>
+    <string name="mcl_option_about">關於</string>
     <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行時環境</string>
     <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 得以重新安裝 Java 執行時環境。</string>
-    <string name="mcl_setting_title_backtorightmouse">將返回鍵視爲鼠標右鍵</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">某些設備將外置鼠標右鍵作爲返回鍵處理。如果您使用外置鼠標，您應該啓用此功能。</string>
+    <string name="mcl_setting_title_freeform">以自由窗口模式啟動 Minecraft</string>
+    <string name="mcl_setting_subtitle_freeform">在浮動視窗中啟動 Minecraft。需要 Android 7.0+。</string>
+    <string name="mcl_setting_title_hide_sidebar">隱藏側邊欄</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">懷念舊 v1 界面的用戶可能喜歡這樣。提供了更接近全屏的體驗。</string>
+    <string name="mcl_setting_title_ignore_notch">忽略劉海屏</string>
+    <string name="mcl_setting_subtitle_ignore_notch">忽略劉海屏並將畫面擴展至其下方。\n給您以更完整的沉浸感。</string>
+    <string name="mcl_setting_title_resolution_scaler">分辨率縮放</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">允許降低游戲畫面分辨率。原生分辨率為 100%</string>
+    <string name="mcl_setting_title_longpresstrigger">長按觸發時長</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">修改長按摧毀方塊、丟棄物品的觸發時長。</string>
+    <string name="mcl_setting_title_backtorightmouse">將返回鍵視爲滑鼠右鍵</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">某些設備將外置滑鼠右鍵作爲返回鍵處理。如果您使用外置滑鼠，您應該啓用此功能。</string>
     <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
     <string name="mcl_setting_subtitle_buttonscale">若按鍵太小，將其放大。</string>
     <string name="mcl_setting_title_mousescale">滑鼠縮放</string>
     <string name="mcl_setting_subtitle_mousescale">更改虛擬滑鼠的大小。</string>
     <string name="mcl_setting_title_javaargs">JVM 啟動引數</string>
     <string name="mcl_setting_subtitle_javaargs">注意，非專業人士修改此值可能導致遊戲崩潰。</string>
+    <string name="mcl_setting_category_general">常規設定</string>
     <string name="mcl_setting_category_scaling">縮放設定</string>
+    <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
+    <string name="mcl_setting_veroption_release">正式版</string>
+    <string name="mcl_setting_veroption_snapshot">快照</string>
+    <string name="mcl_setting_veroption_oldalpha">遠古alpha版</string>
+    <string name="mcl_setting_veroption_oldbeta">遠古beta版</string>
+    <string name="mcl_version_clone">複製</string>
     <!-- Global strings -->
+    <string name="global_edit">修改</string>
+    <string name="global_error">錯誤</string>
+    <string name="global_load">載入</string>
+    <string name="global_name">名稱</string>
+    <string name="global_remove">移除</string>
+    <string name="global_restart">重啟</string>
+    <string name="global_save">儲存</string>
     <string name="global_unpacking">正在解包 %s</string>
+    <string name="global_error_field_empty">此處表單不能為空</string>
     <string name="global_waiting">等待中</string>
     <!--
     <string name="mcl_about">
@@ -75,27 +120,60 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
     <string name="mcn_exit_call">退出</string>
+    <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">鍵盤</string>
+    <string name="control_chat">聊天</string>
+    <string name="control_debug">调试</string>
+    <string name="control_primary">主</string>
+    <string name="control_secondary">副</string>
+    <string name="control_inventory">揹包</string>
+    <string name="control_thirdperson">視角</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">滑鼠</string>
+    <string name="control_mouseoff">滑鼠：關</string>
+    <string name="control_mouseon">滑鼠：開</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">強制關閉</string>
     <string name="control_viewout">日誌輸出</string>
     <string name="control_adebug">輸入除錯</string>
+    <string name="control_customkey">傳送自訂鍵碼</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">編輯 %s</string>
     <string name="customctrl_remove">移除 %s ？</string>
+    <string name="customctrl_keyname">鍵碼</string>
     <string name="customctrl_toggle">可切換</string>
+    <string name="customctrl_size">大小</string>
+    <string name="customctrl_size_width">寬度</string>
+    <string name="customctrl_size_height">高度</string>
     <string name="customctrl_dynamicpos">動態位置</string>
     <string name="customctrl_dynamicpos_x">動態 X 軸</string>
     <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
     <string name="customctrl_transparency_bg">背景透明度</string>
     <string name="customctrl_keycombine">按鍵組合</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">添加按鈕</string>
+    <string name="customctrl_selectdefault">選擇默認 .json 控制鍵位</string>
+    <string name="main_options">選項</string>
+    <string name="main_play">啟動遊戲</string>
     <string name="main_welcome">歡迎， %s</string>
+    <string name="main_infodev">資訊（開發）</string>
+    <string name="main_switchuser">切換用戶</string>
+    <string name="main_version">版本：</string>
+    <string name="main_nocrash">未偵測到崩潰。</string>
+    <string name="main_nolog">無日誌。</string>
+    <string name="main_no_news_feed">新聞獲取失敗！</string>
+    <string name="auto_ram_subtitle">啓用 RAM 自動調節</string>
+    <string name="auto_ram_title">自動 RAM</string>
+    <string name="autoram_info_msg">内存已設爲 %d MB</string>
     <string name="vp_latest_snapshot">最新快照</string>
     <string name="vp_latest_release">最新版本</string>
     <string name="mcl_tab_profiles">配置</string>
@@ -104,4 +182,6 @@
     <string name="mcl_profile_editor_edit_text_title">配置名稱</string>
     <string name="mcl_profile_editor_save">保存</string>
     <string name="profedit_selected_version">選中版本：%s</string>
+    <string name="profedit_selected_profile">選中配置：%s</string>
+    <string name="global_new">新建</string>
 </resources>
