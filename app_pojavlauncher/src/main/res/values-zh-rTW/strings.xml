@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">在您的設備上啟動《Minecraft：Java版》！</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">電子郵箱或用戶名</string>
+    <string name="login_online_password_hint">密碼</string>
+    <string name="login_online_check_keeplogin">保持登入狀態</string>
+    <string name="login_online_login_label">登入</string>
+    <string name="login_offline_label">以離線賬號登入</string>
+    <string name="login_error_short_username">用戶名至少為3個字元</string>
+    <string name="login_error_exist_username">用戶名已存在</string>
     <string name="login_microsoft">微軟帳號登入</string>
+    <string name="login_select_account">選擇賬號</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"左滑開啟選單 ◀\n長按按鍵以自訂：編輯，縮放或刪除。"</string>
     <!-- Warnings -->
+    <string name="warning_remove_account">此賬號將被移除！</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">安裝 Java 執行時環境 %s (.tar.xz)</string>
     <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher 意外崩潰</string>
     <!-- Toast messages -->
     <string name="toast_uninstalljre_done">Java 執行時環境解除安裝成功</string>
     <!--
@@ -25,6 +38,8 @@
     <string name="mcl_option_modinstallwitharg">以自訂引數啟動 Mod 安裝器</string>
     <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行時環境</string>
     <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 得以重新安裝 Java 執行時環境。</string>
+    <string name="mcl_setting_title_backtorightmouse">將返回鍵視爲鼠標右鍵</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">某些設備將外置鼠標右鍵作爲返回鍵處理。如果您使用外置鼠標，您應該啓用此功能。</string>
     <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
     <string name="mcl_setting_subtitle_buttonscale">若按鍵太小，將其放大。</string>
     <string name="mcl_setting_title_mousescale">滑鼠縮放</string>
@@ -54,10 +69,12 @@
     -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
+    <string name="mcn_exit_call">退出</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">日誌輸出</string>
     <string name="control_adebug">輸入除錯</string>
     <!--
     <string name="control_more3"></string>
@@ -71,7 +88,7 @@
     <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
     <string name="customctrl_transparency_bg">背景透明度</string>
     <string name="customctrl_keycombine">按鍵組合</string>
-    <string name="customctrl_keycombine_control">控制</string>
-    <string name="customctrl_keycombine_shift">上檔</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="main_welcome">歡迎， %s</string>
 </resources>
