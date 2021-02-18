@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">sta toe om de resolutie van het spel te verlagen. 100% is de volledige resolutie</string>
     <string name="mcl_setting_title_longpresstrigger">Hoe lang zal starten na lange indrukken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Verander de triggertijd voor lang indrukken van vernietig blok en laten vallen.</string>
+    <string name="mcl_setting_title_backtorightmouse">Behandel de terugknop als rechter muis</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Sommige apparaten behandelen externe rechtermuis als terugknop. Als u een externe muis gebruikt, moet u dit activeren.</string>
     <string name="mcl_setting_title_buttonscale">Controle knoppen schalen</string>
     <string name="mcl_setting_subtitle_buttonscale">Vergroot ze als knoppen te klein zijn.</string>
     <string name="mcl_setting_title_mousescale">Muis schaling</string>
@@ -153,6 +155,9 @@
     <string name="customctrl_remove">Verwijderen %s?</string>
     <string name="customctrl_keyname">Sleutelcode</string>
     <string name="customctrl_toggle">Omschakelbaar</string>
+    <string name="customctrl_size">Grootte</string>
+    <string name="customctrl_size_width">Breedte</string>
+    <string name="customctrl_size_height">Hoogte</string>
     <string name="customctrl_dynamicpos">Dynamische positie</string>
     <string name="customctrl_dynamicpos_x">Dynamisch X</string>
     <string name="customctrl_dynamicpos_y">Dynamisch Y</string>
@@ -175,4 +180,9 @@
     <string name="auto_ram_subtitle">Schakel in de automatische RAM aanpasser in</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Geheugen ingesteld op %d MB</string>
+    <string name="vp_latest_snapshot">Laatste snapshot</string>
+    <string name="vp_latest_release">Laatste Release</string>
+    <string name="mcl_tab_profiles">Profielen</string>
+    <string name="mcl_profile_editor_title_profile">PROFIELEN</string>
+    <string name="mcl_profile_editor_title_version">VERSIES</string>
 </resources>
