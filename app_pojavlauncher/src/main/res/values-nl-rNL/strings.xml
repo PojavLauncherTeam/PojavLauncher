@@ -144,7 +144,7 @@
     <string name="control_mouseon">Mouse: aan </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Geforceerd sluiten</string>
-    <string name="control_viewout">Logboekuitvoer</string>
+    <string name="control_viewout">Logboek output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Verstuur aangepaste sleutelcode</string>
     <!--
@@ -180,9 +180,14 @@
     <string name="auto_ram_subtitle">Schakel in de automatische RAM aanpasser in</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Geheugen ingesteld op %d MB</string>
-    <string name="vp_latest_snapshot">Laatste snapshot</string>
+    <string name="vp_latest_snapshot">Laatste Snapshot</string>
     <string name="vp_latest_release">Laatste Release</string>
     <string name="mcl_tab_profiles">Profielen</string>
     <string name="mcl_profile_editor_title_profile">PROFIELEN</string>
     <string name="mcl_profile_editor_title_version">VERSIES</string>
+    <string name="mcl_profile_editor_edit_text_title">Profielnaam</string>
+    <string name="mcl_profile_editor_save">opslaan</string>
+    <string name="profedit_selected_version">Geselecteerde versie: %s</string>
+    <string name="profedit_selected_profile">Geselecteerd profiel: %s</string>
+    <string name="global_new">Nieuw</string>
 </resources>
