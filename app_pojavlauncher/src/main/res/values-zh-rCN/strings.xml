@@ -174,14 +174,14 @@
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
     <string name="main_no_news_feed">新闻获取失败！</string>
-    <string name="auto_ram_subtitle">启用 RAM 自动调节器</string>
+    <string name="auto_ram_subtitle">启用 RAM 自动调节</string>
     <string name="auto_ram_title">自动 RAM</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
     <string name="mcl_setting_check_libraries">在下载后检查运行库</string>
     <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库。防止下载错误。</string>
     <string name="dl_library_sha_fail">运行库 %s 已损坏，将被重新下载</string>
     <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
-    <string name="dl_library_sha_pass">运行库 %s 一切正常</string>
+    <string name="dl_library_sha_pass">运行库 %s 正常</string>
     <string name="mcl_disable_gestures">禁用手势</string>
     <string name="mcl_disable_gestures_subtitle">禁用手势，例如长按破坏方块和点击放置方块。</string>
 </resources>
