@@ -56,8 +56,8 @@ public class CallbackBridge {
     }
     
     public static void sendPrepareGrabInitialPos() {
-        DEBUG_STRING.append("Prepare set grab initial posititon");
-        sendMouseKeycode(-1, CallbackBridge.getCurrentMods(), false);
+        DEBUG_STRING.append("Prepare set grab initial posititon: ignored");
+        //sendMouseKeycode(-1, CallbackBridge.getCurrentMods(), false);
     }
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {

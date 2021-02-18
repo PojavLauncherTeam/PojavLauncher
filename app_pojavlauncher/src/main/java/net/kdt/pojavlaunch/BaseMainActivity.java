@@ -106,6 +106,8 @@ public class BaseMainActivity extends LoggableActivity {
     private boolean lastGrab = false;
     private boolean isExited = false;
     private boolean isLogAllow = false;
+    private int mouse_x, mouse_y;
+    private boolean ignorePad = false;
     // private int navBarHeight = 40;
     
     // private static Collection<? extends Provider.Service> rsaPkcs1List;
@@ -340,7 +342,6 @@ public class BaseMainActivity extends LoggableActivity {
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
                 private int scrollInitialX, scrollInitialY;
-                private int x,y;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
@@ -353,6 +354,9 @@ public class BaseMainActivity extends LoggableActivity {
                             }
                         }
                         if (mptrIndex != -1) {
+                            if(CallbackBridge.isGrabbing()) {
+                                return false;
+                            }
                             //handle mouse events by just sending the coords of the new point in touch event
                             int x = (int) (e.getX(mptrIndex) * scaleFactor);
                             int y = (int) (e.getY(mptrIndex) * scaleFactor);
@@ -367,12 +371,12 @@ public class BaseMainActivity extends LoggableActivity {
                    /* int x = ((int) e.getX()) * scaleFactor;
                     int y = ((int) e.getY()) * scaleFactor;*/
                     if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
-                        x += (int)(e.getX() - e.getHistoricalX(0));
-                        y += (int)(e.getY() - e.getHistoricalY(0));
+                        mouse_x += (int)(e.getX() - e.getHistoricalX(0));
+                        mouse_y += (int)(e.getY() - e.getHistoricalY(0));
                     }
                     if(!CallbackBridge.isGrabbing()) {
-                        x = (int) (e.getX() * scaleFactor);
-                        y = (int) (e.getY() * scaleFactor);
+                        mouse_x = (int) (e.getX() * scaleFactor);
+                        mouse_y = (int) (e.getY() * scaleFactor);
                     }
 
                     int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
@@ -380,7 +384,7 @@ public class BaseMainActivity extends LoggableActivity {
                         if (hudKeyHandled != -1) {
                             sendKeyPress(hudKeyHandled);
                         } else {
-                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0,x,y);
+                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, mouse_x, mouse_y);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
                             }
@@ -399,9 +403,9 @@ public class BaseMainActivity extends LoggableActivity {
 
                                     theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                 } else {
-                                    CallbackBridge.mouseX = x;
-                                    CallbackBridge.mouseY = y;
-                                    CallbackBridge.sendCursorPos(x, y);
+                                    CallbackBridge.mouseX = mouse_x;
+                                    CallbackBridge.mouseY = mouse_y;
+                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                     if (!rightOverride) {
                                         CallbackBridge.mouseLeft = true;
                                     }
@@ -409,13 +413,13 @@ public class BaseMainActivity extends LoggableActivity {
                                     if (CallbackBridge.isGrabbing()) {
                                         // It cause hold left mouse while moving camera
                                         // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y);
-                                        initialX = x;
-                                        initialY = y;
+                                        initialX = mouse_x;
+                                        initialY = mouse_y;
                                         theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                     }
                                    
-                                    scrollInitialX = x;
-                                    scrollInitialY = y;
+                                    scrollInitialX = mouse_x;
+                                    scrollInitialY = mouse_y;
                                 }
                                 break;
                                 
@@ -423,12 +427,12 @@ public class BaseMainActivity extends LoggableActivity {
                             case MotionEvent.ACTION_POINTER_UP: // 6
                             case MotionEvent.ACTION_CANCEL: // 3
                                 if (!isTouchInHotbar) {
-                                    CallbackBridge.mouseX = x;
-                                    CallbackBridge.mouseY = y;
+                                    CallbackBridge.mouseX = mouse_x;
+                                    CallbackBridge.mouseY = mouse_y;
                                     
                                     // -TODO uncomment after fix wrong trigger
                                     // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y);
-                                    CallbackBridge.sendCursorPos(x, y);
+                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                     if (!rightOverride) {
                                         CallbackBridge.mouseLeft = false;
                                     }
@@ -437,9 +441,9 @@ public class BaseMainActivity extends LoggableActivity {
                                 if (CallbackBridge.isGrabbing()) {
                                     // System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
                                     // System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
-                                    if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
+                                    if (isTouchInHotbar && Math.abs(hotbarX - mouse_x) < fingerStillThreshold && Math.abs(hotbarY - mouse_y) < fingerStillThreshold) {
                                         sendKeyPress(hudKeyHandled, 0, false);
-                                    } else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
+                                    } else if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
                                         if(!LauncherPreferences.PREF_DISABLE_GESTURES) {
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
@@ -472,19 +476,19 @@ public class BaseMainActivity extends LoggableActivity {
  */
                             case MotionEvent.ACTION_MOVE:
                                 if (!isTouchInHotbar) {
-                                    CallbackBridge.mouseX = x;
-                                    CallbackBridge.mouseY = y;
+                                    CallbackBridge.mouseX = mouse_x;
+                                    CallbackBridge.mouseY = mouse_y;
 
-                                    CallbackBridge.sendCursorPos(x, y);
+                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                     
                                     if (!CallbackBridge.isGrabbing()) {
                                         /*
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
                                         */
-                                        CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
-                                        scrollInitialX = x;
-                                        scrollInitialY = y;
+                                        CallbackBridge.sendScroll(mouse_x - scrollInitialX, mouse_y - scrollInitialY);
+                                        scrollInitialX = mouse_x;
+                                        scrollInitialY = mouse_y;
                                     }
                                 }
                                 break;
@@ -590,7 +594,7 @@ public class BaseMainActivity extends LoggableActivity {
             if (isAndroid8OrHigher()) {
                 minecraftGLView.setDefaultFocusHighlightEnabled(false);
                 minecraftGLView.setOnCapturedPointerListener(new View.OnCapturedPointerListener() {
-                    private int x, y;
+                    //private int x, y;
                     private boolean debugErrored = false;
 
                     private String getMoving(float pos, boolean xOrY) {
@@ -605,10 +609,15 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
-                            x += ((int) e.getX()) * scaleFactor;
-                            y += ((int) e.getY()) * scaleFactor;
+                            if(e.getHistorySize() > 0) {
+                                mouse_x += (int)(e.getX());
+                                mouse_y += (int)(e.getY());
+                            }
+                            CallbackBridge.mouseX = mouse_x;
+                            CallbackBridge.mouseY = mouse_y;
                             if(!CallbackBridge.isGrabbing()){
                                 view.releasePointerCapture();
+
                             }
 
                             if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
@@ -623,8 +632,8 @@ public class BaseMainActivity extends LoggableActivity {
                                     builder.append("RawX=" + e.getRawX() + "\n");
                                     builder.append("RawY=" + e.getRawY() + "\n\n");
 
-                                    builder.append("XPos=" + x + "\n");
-                                    builder.append("YPos=" + y + "\n\n");
+                                    builder.append("XPos=" + mouse_x + "\n");
+                                    builder.append("YPos=" + mouse_y + "\n\n");
                                     builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
                                     builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
                                 } catch (Throwable th) {
@@ -639,7 +648,7 @@ public class BaseMainActivity extends LoggableActivity {
                             CallbackBridge.DEBUG_STRING.setLength(0);
                             switch (e.getActionMasked()) {
                                 case MotionEvent.ACTION_MOVE:
-                                    CallbackBridge.sendCursorPos(x, y);
+                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                     return true;
                                 case MotionEvent.ACTION_BUTTON_PRESS:
                                     return sendMouseButtonUnconverted(e.getActionButton(), true);
