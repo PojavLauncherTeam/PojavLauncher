@@ -106,7 +106,7 @@ public class BaseMainActivity extends LoggableActivity {
     private boolean lastGrab = false;
     private boolean isExited = false;
     private boolean isLogAllow = false;
-    private int mouse_x, mouse_y;
+    private volatile int mouse_x, mouse_y;
     private boolean ignorePad = false;
     // private int navBarHeight = 40;
     
@@ -617,7 +617,6 @@ public class BaseMainActivity extends LoggableActivity {
                             CallbackBridge.mouseY = mouse_y;
                             if(!CallbackBridge.isGrabbing()){
                                 view.releasePointerCapture();
-
                             }
 
                             if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
@@ -767,15 +766,18 @@ public class BaseMainActivity extends LoggableActivity {
             }
             switch(ev.getActionMasked()) {
                 case MotionEvent.ACTION_HOVER_MOVE:
-                    CallbackBridge.mouseX = (int) (ev.getX(mouseCursorIndex)*scaleFactor);
-                    CallbackBridge.mouseY = (int) (ev.getY(mouseCursorIndex)*scaleFactor);
-                    CallbackBridge.sendCursorPos((int) (ev.getX(mouseCursorIndex)*scaleFactor), (int) (ev.getY(mouseCursorIndex)*scaleFactor));
+                    mouse_x = (int) (ev.getX(mouseCursorIndex) * scaleFactor);
+                    mouse_y = (int) (ev.getY(mouseCursorIndex) * scaleFactor);
+                    CallbackBridge.mouseX = mouse_x;
+                    CallbackBridge.mouseY = mouse_y;
+                    CallbackBridge.sendCursorPos(mouse_x,mouse_y);
+                    debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                    CallbackBridge.DEBUG_STRING.setLength(0);
                     return true;
                 case MotionEvent.ACTION_SCROLL:
                     CallbackBridge.sendScroll((double) ev.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) ev.getAxisValue(MotionEvent.AXIS_HSCROLL));
                     return true;
                 case MotionEvent.ACTION_BUTTON_PRESS:
-
                      return sendMouseButtonUnconverted(ev.getActionButton(),true);
                 case MotionEvent.ACTION_BUTTON_RELEASE:
                     return sendMouseButtonUnconverted(ev.getActionButton(),false);
@@ -783,6 +785,7 @@ public class BaseMainActivity extends LoggableActivity {
                     return false;
             }
         }
+
     }
     boolean isKeyboard(KeyEvent evt) {
         if((evt.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD) return true;
