@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
     <string name="mcl_setting_title_backtorightmouse">Považovat tlačítko zpět za tlačítko pravé myši</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Některá zařízení přistupují k externímu pravému tlačítku jako k tlačítku zpět. Pokud používáte externí myš, měli byste toto povolit.</string>
+    <string name="mcl_setting_title_flat_button_style">Styl plochých tlačítek</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Povolte pro změnu stylu ovládacího tlačítka na ploché.</string>
     <string name="mcl_setting_title_buttonscale">Škálování kontrolních tlačítek</string>
     <string name="mcl_setting_subtitle_buttonscale">Zvětšit je, pokud jsou tlačítka příliš malá.</string>
     <string name="mcl_setting_title_mousescale">Škálování myši</string>
@@ -180,4 +182,6 @@
     <string name="dl_library_sha_fail">Knihovna %s je poškozena a bude znovu stažena</string>
     <string name="dl_library_sha_unknown">Knihovna %s nemůže být kontrolována, musíme předpokládat, že je v pořádku</string>
     <string name="dl_library_sha_pass">Knihovna %s je v pořádku a použitelná</string>
+    <string name="mcl_disable_gestures">Vypnout gesta</string>
+    <string name="mcl_disable_gestures_subtitle">Zakáže gesta, například podržením pro rozbití bloku a klepnutím položíte blok.</string>
 </resources>
