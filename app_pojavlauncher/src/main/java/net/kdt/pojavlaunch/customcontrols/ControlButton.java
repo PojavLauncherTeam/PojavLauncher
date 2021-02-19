@@ -28,6 +28,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
+        setPadding(4, 4, 4, 4);
         setWillNotDraw(false);
 
         mScaleAt = layout.mLayout.scaledAt;
