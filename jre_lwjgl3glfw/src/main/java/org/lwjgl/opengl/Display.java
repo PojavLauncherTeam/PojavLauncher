@@ -61,7 +61,7 @@ public class Display {
     private static boolean window_created;
 
     /** The Drawable instance that tracks the current Display context */
-    private static DrawableLWJGL drawable;
+    private static volatile DrawableLWJGL drawable;
     
     private static Canvas parent;
 

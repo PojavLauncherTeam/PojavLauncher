@@ -24,10 +24,11 @@
             android:key="flatButtonStyle"
             android:summary="@string/mcl_setting_subtitle_flat_button_style"
             android:title="@string/mcl_setting_title_flat_button_style"
-            app2:icon="@drawable/hide_sidebar" />
+            app2:icon="@drawable/ic_flatstyle" />
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
+            android:icon="@drawable/ic_disable_gestures"
             android:key="disableGestures"
             android:summary="@string/mcl_disable_gestures_subtitle"
             android:title="@string/mcl_disable_gestures" />
@@ -53,11 +54,13 @@
             app2:icon="@drawable/ignore_notch" />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
+            android:icon="@drawable/ic_auto_ram"
             android:key="autoRam"
             android:summary="@string/auto_ram_subtitle"
             android:title="@string/auto_ram_title" />
         <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="true"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_map_rmb"
             android:key="backToRightMouse"
             android:summary="@string/mcl_setting_subtitle_backtorightmouse"
             android:title="@string/mcl_setting_title_backtorightmouse" />
@@ -71,6 +74,7 @@
             android:title="@string/mcl_setting_title_javaargs" />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
+            android:icon="@drawable/ic_lib_check"
             android:key="checkLibraries"
             android:summary="@string/mcl_setting_check_libraries_subtitle"
             android:title="@string/mcl_setting_check_libraries" />
