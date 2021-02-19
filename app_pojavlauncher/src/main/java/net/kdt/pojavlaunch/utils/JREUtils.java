@@ -312,9 +312,9 @@ public class JREUtils
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 */
 
-        JREUtils.setJavaEnvironment(ctx, null);
-        JREUtils.initJavaRuntime();
-        JREUtils.chdir(Tools.DIR_GAME_NEW);
+        setJavaEnvironment(ctx, null);
+        initJavaRuntime();
+        chdir(Tools.DIR_GAME_NEW);
 
         final int exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);
