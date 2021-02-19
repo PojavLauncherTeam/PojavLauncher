@@ -279,7 +279,11 @@ public class BaseMainActivity extends LoggableActivity {
                         // and other input controls. In this case, you are only
                         // interested in events where the touch position changed.
                         // int index = event.getActionIndex();
-
+                        if(CallbackBridge.isGrabbing()) {
+                            minecraftGLView.dispatchTouchEvent(MotionEvent.obtain(event));
+                            System.out.println("Transitioned event" + event.hashCode() + " to MinecraftGLView");
+                            return false;
+                        }
                         int action = event.getActionMasked();
 
                         float x = event.getX();
@@ -295,7 +299,8 @@ public class BaseMainActivity extends LoggableActivity {
                         float mouseY = mousePointer.getTranslationY();
 
                         if (gestureDetector.onTouchEvent(event)) {
-
+                            mouse_x = (int) (mouseX * scaleFactor);
+                            mouse_y = (int) (mouseY * scaleFactor);
                             CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor), (int) (mouseY *scaleFactor));
                             CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
                             if (!rightOverride) {
@@ -314,8 +319,9 @@ public class BaseMainActivity extends LoggableActivity {
                                 case MotionEvent.ACTION_MOVE: // 2
                                     mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + x - prevX));
                                     mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
+                                    mouse_x = (int) (mouseX * scaleFactor);
+                                    mouse_y = (int) (mouseY * scaleFactor);
                                     placeMouseAt(mouseX, mouseY);
-
                                     CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
                                     /*
                                     if (!CallbackBridge.isGrabbing()) {
@@ -610,8 +616,8 @@ public class BaseMainActivity extends LoggableActivity {
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
                             if(e.getHistorySize() > 0) {
-                                mouse_x += (int)(e.getX());
-                                mouse_y += (int)(e.getY());
+                                mouse_x += (int)(e.getX()*scaleFactor);
+                                mouse_y += (int)(e.getY()*scaleFactor);
                             }
                             CallbackBridge.mouseX = mouse_x;
                             CallbackBridge.mouseY = mouse_y;
@@ -788,9 +794,10 @@ public class BaseMainActivity extends LoggableActivity {
 
     }
     boolean isKeyboard(KeyEvent evt) {
-        if((evt.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD) return true;
-        if(evt.getSource() == InputDevice.SOURCE_KEYBOARD) return true;
-        if(evt.getUnicodeChar() != 0) return true;
+        System.out.println("Event:" +evt);
+        //if((evt.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD) return true;
+        //if(evt.getSource() == InputDevice.SOURCE_KEYBOARD) return true;
+        //if(evt.getUnicodeChar() != 0) return true;
         if(AndroidLWJGLKeycode.androidToLwjglMap.containsKey(evt.getKeyCode())) return true;
         return false;
     }
