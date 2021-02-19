@@ -24,12 +24,10 @@
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">تثبيت محرك تشغيل جافا %s (.tar.xz)</string>
-
     <string name="alerttitle_installmod">حدد مشغل مودات للتثبيت</string>
     <!-- Error messages -->
     <string name="error_fatal">لقد توقف PojavLauncher بشكل غير متوقع</string>
     <string name="error_no_version">لا يوجد إصدار!</string>
-
     <string name="error_show_more">اظهر المزيد</string>
     <string name="error_show_less">أظهِر أقل</string>
     <!-- Toast messages -->
@@ -53,10 +51,8 @@
     <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
     <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
     <string name="mcl_options">الخيارات</string>
-
     <string name="mcl_option_modinstall">تشغيل مثبت مود (Forge, LabyMod, Fabric, الخ...)</string>
     <string name="mcl_option_modinstallwitharg">تشغيل مثبت مود (مع حجج مخصصة)</string>
-
     <string name="mcl_option_customcontrol">تخصيص التحكم</string>
     <string name="mcl_option_settings">الاعدادات</string>
     <string name="mcl_option_about">حول التطبيق</string>
@@ -175,7 +171,11 @@
     <string name="auto_ram_subtitle">تمكين مشرف ذاكرة الوصول العشوائي التلقائي</string>
     <string name="auto_ram_title">ذاكرة الوصول العشوائية التلقائية</string>
     <string name="autoram_info_msg">تم تعيين الذاكرة إلى %d ميغابايت</string>
+    <string name="mcl_setting_check_libraries">التحقق من المكتبيات بعد التحميل</string>
+    <string name="mcl_setting_check_libraries_subtitle">هذا الخيار يجبر المشغل على التحقق من تجزئة الملفات المكتبية إذا كانت متاحة. يمنع التنزيلات المعطلة.</string>
     <string name="dl_library_sha_fail">المكتبة %s تالفة وسيتم إعادة تحميلها</string>
+    <string name="dl_library_sha_unknown">لا يمكن التحقق من الملفات المكتبية %s ، يجب أن تفترض أنها جيدة</string>
     <string name="dl_library_sha_pass">المكتبة %s جيدة وقابلة للاستخدام</string>
     <string name="mcl_disable_gestures">تعطيل الإيماءات</string>
+    <string name="mcl_disable_gestures_subtitle">تعطيل الإيماءات، مثل تثبيت الضغط لكسر بلوكة، والنقر لوضع يلوكة.</string>
 </resources>
