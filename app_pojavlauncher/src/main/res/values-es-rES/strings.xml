@@ -14,8 +14,12 @@
     <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
     <string name="login_error_short_username">El nombre de usuario debe tener al menos 3 letras o mas</string>
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
+    <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
+    <string name="login_title_no_saved_account">No se encontraron cuentas!</string>
+    <string name="login_dialog_no_saved_account">No tienes ninguna cuenta guardada.\nUsa la opción <b>\"Mantenme conectado\"</b> para guardar una cuenta al iniciar sesión por primera vez.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Desliza de derecha a izquierda para abrir el menú ◀\nMantén pulsado un botón para personalizar: editar, redimensionar o eliminar."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
@@ -38,10 +42,13 @@
     <string name="mcl_tab_console">Consola de desarrollador</string>
     <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Conectado</string>
+    <string name="mcl_account_offline">Desconectado</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Listo para jugar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Limpiando archivos de caché</string>
     <string name="mcl_launch_downloading">Descargando %s</string>
+    <string name="mcl_launch_downloading_progress">"Descargando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparando para descargar los recursos</string>
     <string name="mcl_options">Opciones</string>
     <string name="mcl_option_modinstall">Usar un instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
@@ -53,11 +60,24 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Reiniciar el lanzador] Esto te permitirá reinstalar Java Runtime</string>
     <string name="mcl_setting_title_freeform">Lanzar Minecraft en ventana flotante</string>
     <string name="mcl_setting_subtitle_freeform">Lanzar Minecraft en ventana flotante. Requiere Android 7.0 o superior</string>
+    <string name="mcl_setting_title_hide_sidebar">Ocultar barra lateral</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">A la gente nostálgica que prefiere la antigua interfaz de usuario v1 le podría gustar. Te da una experiencia más a pantalla completa.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorar notch (Para teléfonos con pantalla irregular)</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignorar el notch y extender la pantalla debajo de él.\nTe da una experiencia más inmersiva.</string>
+    <string name="mcl_setting_title_resolution_scaler">Escala de resolución</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Te permite reducir la resolución del juego. 100% es resolución completa</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia el tiempo de activación durante una pulsación larga en destruir bloques y soltar objetos.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratar botón atrás como ratón derecho</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Algunos dispositivos tratan el ratón derecho externo como botón atrás. Si está usando ratón externo, debería habilitarlo.</string>
+    <string name="mcl_setting_title_buttonscale">Escala de botones de control</string>
+    <string name="mcl_setting_subtitle_buttonscale">Auméntales el tamaño si los botones son muy pequeños.</string>
+    <string name="mcl_setting_title_mousescale">Escala del ratón</string>
+    <string name="mcl_setting_subtitle_mousescale">Cambiar el tamaño del ratón virtual.</string>
     <string name="mcl_setting_title_javaargs">JRE Argumentos de lanzamiento</string>
     <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
     <string name="mcl_setting_category_general">Opciones generales</string>
+    <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzadas</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -74,6 +94,7 @@
     <string name="global_save">Guardar</string>
     <string name="global_unpacking">Descomprimiendo</string>
     <string name="global_error_field_empty">Este campo es obligarorio</string>
+    <string name="global_waiting">Espere</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -130,14 +151,43 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Editando %s</string>
+    <string name="customctrl_remove">¿Eliminar %s?</string>
     <string name="customctrl_keyname">Tecla</string>
+    <string name="customctrl_toggle">Activable</string>
+    <string name="customctrl_size">Tamaño</string>
+    <string name="customctrl_size_width">Anchura</string>
+    <string name="customctrl_size_height">Altura</string>
+    <string name="customctrl_dynamicpos">Posición dinámica</string>
+    <string name="customctrl_dynamicpos_x">X Dinámica</string>
+    <string name="customctrl_dynamicpos_y">Y Dinámica</string>
+    <string name="customctrl_transparency_bg">Transparencia del fondo</string>
+    <string name="customctrl_keycombine">Combinación de teclas</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Añadir botón</string>
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
+    <string name="main_welcome">Bienvenido, %s</string>
     <string name="main_infodev">Información (DEV)</string>
     <string name="main_switchuser">Cambiar de usuario</string>
     <string name="main_version">Versión:</string>
     <string name="main_nocrash">No se han detectado errores</string>
     <string name="main_nolog">Sin registros.</string>
+    <string name="main_no_news_feed">¡Error al obtener el feed de noticias!</string>
+    <string name="auto_ram_subtitle">Habilita el ajuste automático de RAM</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memoria establecida a %d MB</string>
+    <string name="vp_latest_snapshot">Snapshot más reciente</string>
+    <string name="vp_latest_release">Versión más reciente</string>
+    <string name="mcl_tab_profiles">Perfiles</string>
+    <string name="mcl_profile_editor_title_profile">PERFILES</string>
+    <string name="mcl_profile_editor_title_version">VERSIONES</string>
+    <string name="mcl_profile_editor_edit_text_title">Nombre del perfil</string>
+    <string name="mcl_profile_editor_save">guardar</string>
+    <string name="profedit_selected_version">Versión seleccionada: %s</string>
+    <string name="profedit_selected_profile">Perfil seleccionado: %s</string>
+    <string name="global_new">Nuevo</string>
 </resources>
