@@ -71,7 +71,7 @@
     <string name="mcl_setting_title_backtorightmouse">将返回键视为鼠标右键</string>
     <string name="mcl_setting_subtitle_backtorightmouse">某些设备将外置鼠标右键作为返回键处理。如果您使用外置鼠标，您应该启用此功能。</string>
     <string name="mcl_setting_title_flat_button_style">扁平化风格按键</string>
-    <string name="mcl_setting_subtitle_flat_button_style">启用此选项可以使按键风格扁平化</string>
+    <string name="mcl_setting_subtitle_flat_button_style">启用此选项可以使按键风格扁平化。</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
     <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其放大。</string>
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
@@ -178,7 +178,7 @@
     <string name="auto_ram_title">自动 RAM</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
     <string name="mcl_setting_check_libraries">在下载后检查运行库</string>
-    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库。防止下载错误。</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
     <string name="dl_library_sha_fail">运行库 %s 已损坏，将被重新下载</string>
     <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
     <string name="dl_library_sha_pass">运行库 %s 正常</string>
