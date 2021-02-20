@@ -303,7 +303,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
             } else {
                 javaArgList.add("-jar");
-                javaArgList.add("\"" + modFile.getAbsolutePath() + "\"");
+                javaArgList.add(modFile.getAbsolutePath());
             }
 
             appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
