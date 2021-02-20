@@ -180,4 +180,6 @@
     <string name="dl_library_sha_fail">La bibliothèque %s est endommagée et sera retéléchargée</string>
     <string name="dl_library_sha_unknown">La bibliothèque %s ne peut pas être vérifiée, et est supposée bonne</string>
     <string name="dl_library_sha_pass">La bibliothèque %s est en bon état et utilisable</string>
+    <string name="mcl_disable_gestures">Désactiver les gestes</string>
+    <string name="mcl_disable_gestures_subtitle">Désactive les gestes tels que maintenir enfoncé pour casser le bloc, et appuyer pour placer un bloc.</string>
 </resources>
