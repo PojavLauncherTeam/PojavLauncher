@@ -23,6 +23,7 @@ public class LauncherPreferences
 	public static String PREF_CUSTOM_JAVA_ARGS;
     public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
     public static String PREF_LANGUAGE = "default";
+    public static String PREF_VERSION_REPOS = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json";
 	public static boolean PREF_CHECK_LIBRARY_SHA = true;
 	public static boolean PREF_DISABLE_GESTURES = false;
 	public static void loadPreferences() {
