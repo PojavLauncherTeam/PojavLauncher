@@ -153,6 +153,9 @@
     <string name="customctrl_remove">Supprimer %s ?</string>
     <string name="customctrl_keyname">Touche</string>
     <string name="customctrl_toggle">Basculable</string>
+    <string name="customctrl_size">Taille</string>
+    <string name="customctrl_size_width">Largeur</string>
+    <string name="customctrl_size_height">Hauteur</string>
     <string name="customctrl_dynamicpos">Position dynamique</string>
     <string name="customctrl_dynamicpos_x">X dynamique</string>
     <string name="customctrl_dynamicpos_y">Y dynamique</string>
