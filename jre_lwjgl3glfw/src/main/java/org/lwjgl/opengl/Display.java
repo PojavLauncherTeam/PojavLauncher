@@ -61,7 +61,7 @@ public class Display {
     private static boolean window_created;
 
     /** The Drawable instance that tracks the current Display context */
-    private static volatile DrawableLWJGL drawable;
+    private static volatile DrawableLWJGL drawable = null;
     
     private static Canvas parent;
 
@@ -206,30 +206,13 @@ public class Display {
         // System.out.println("TODO: Implement Display.create(PixelFormat,
         // Drawable)"); // TODO
         create(pixel_format);
-        
-        final DrawableGL drawable = new DrawableGL() {
-            public void destroy() {
-                synchronized ( GlobalLock.lock ) {
-                    if ( !isCreated() )
-                        return;
-
-                    releaseDrawable();
-                    super.destroy();
-                    destroyWindow();
-                    // x = y = -1;
-                    // cached_icons = null;
-                    reset();
-                }
-            }
-        };
-        Display.drawable = drawable;
 
         try {
             drawable.setPixelFormat(pixel_format, null);
             try {
                 createWindow();
                 try {
-                    drawable.context = new ContextGL(drawable.peer_info, null /* attribs */, shared_drawable != null ? ((DrawableGL)shared_drawable).getContext() : null);
+                    ((DrawableGL) drawable).context = new ContextGL(((DrawableGL) drawable).peer_info, null /* attribs */, shared_drawable != null ? ((DrawableGL)shared_drawable).getContext() : null);
                     try {
                         makeCurrentAndSetSwapInterval();
                         initContext();
@@ -731,6 +714,24 @@ public class Display {
 
             }
         };
+        
+        final DrawableGL drawable = new DrawableGL() {
+            public void destroy() {
+                synchronized ( GlobalLock.lock ) {
+                    if ( !isCreated() )
+                        return;
+
+                    releaseDrawable();
+                    super.destroy();
+                    destroyWindow();
+                    // x = y = -1;
+                    // cached_icons = null;
+                    reset();
+                }
+            }
+        };
+        drawable.context = new ContextGL(null, null, null);
+        Display.drawable = drawable;
 
         displayCreated = true;
 
