@@ -963,6 +963,7 @@ public class GLFW
             e.printStackTrace();
         }
         nativeEglMakeCurrent(window);
+        System.out.println(Long.toString(nativeEglGetCurrentContext(),16));
     }
 
     public static void glfwSwapBuffers(long window) {

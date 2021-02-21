@@ -396,7 +396,25 @@ public class Display {
             displayY = (monitorHeight - mode.getHeight()) / 2;
         }
 
-        glfwMakeContextCurrent(Window.handle);
+        //glfwMakeContextCurrent(Window.handle);
+        final DrawableGL drawable = new DrawableGL() {
+            public void destroy() {
+                synchronized ( GlobalLock.lock ) {
+                    if ( !isCreated() )
+                        return;
+
+                    releaseDrawable();
+                    super.destroy();
+                    destroyWindow();
+                    // x = y = -1;
+                    // cached_icons = null;
+                    reset();
+                }
+            }
+        };
+        drawable.context = new ContextGL(null, null, null);
+        drawable.context.makeCurrent();
+        Display.drawable = drawable;
         context = org.lwjgl.opengl.GLContext.createFromCurrent();
 
         glfwSwapInterval(0);
@@ -714,24 +732,7 @@ public class Display {
 
             }
         };
-        
-        final DrawableGL drawable = new DrawableGL() {
-            public void destroy() {
-                synchronized ( GlobalLock.lock ) {
-                    if ( !isCreated() )
-                        return;
 
-                    releaseDrawable();
-                    super.destroy();
-                    destroyWindow();
-                    // x = y = -1;
-                    // cached_icons = null;
-                    reset();
-                }
-            }
-        };
-        drawable.context = new ContextGL(null, null, null);
-        Display.drawable = drawable;
 
         displayCreated = true;
 
