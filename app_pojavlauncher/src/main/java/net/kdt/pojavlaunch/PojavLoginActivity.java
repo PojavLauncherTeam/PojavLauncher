@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -75,16 +76,12 @@ import org.apache.commons.io.IOUtils;
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
 {
-    private Object mLockStoragePerm = new Object(),
-        mLockSelectJRE = new Object();
+    private final Object mLockStoragePerm = new Object();
+    private final Object mLockSelectJRE = new Object();
     
     private EditText edit2, edit3;
-    private int REQUEST_STORAGE_REQUEST_CODE = 1;
-    private ProgressBar prb;
+    private final int REQUEST_STORAGE_REQUEST_CODE = 1;
     private CheckBox sRemember, sOffline;
-    private LinearLayout loginLayout;
-    private Spinner spinnerChgLang;
-    private ImageView imageLogo;
     private TextView startupTextView;
     
     private SharedPreferences firstLaunchPrefs;
@@ -116,12 +113,8 @@ public class PojavLoginActivity extends BaseActivity
         private AlertDialog startAle;
         private ProgressBar progress;
 
-        private ProgressBar progressSpin;
-        private AlertDialog progDlg;
-
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
             LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
 
@@ -196,9 +189,7 @@ public class PojavLoginActivity extends BaseActivity
         @Override
         protected void onPostExecute(Integer obj) {
             startAle.dismiss();
-            if (progressSpin != null) progressSpin.setVisibility(View.GONE);
             if (obj == 0) {
-                if (progDlg != null) progDlg.dismiss();
                 uiInit();
             }
         }
@@ -207,7 +198,7 @@ public class PojavLoginActivity extends BaseActivity
     private void uiInit() {
         setContentView(R.layout.launcher_login_v3);
 
-        spinnerChgLang = findViewById(R.id.login_spinner_language);
+        Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
 
         String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
         SpannableString defaultLangChar = new SpannableString(defaultLang);
@@ -276,7 +267,6 @@ public class PojavLoginActivity extends BaseActivity
             
         edit2 = (EditText) findViewById(R.id.login_edit_email);
         edit3 = (EditText) findViewById(R.id.login_edit_password);
-        if(prb == null) prb = (ProgressBar) findViewById(R.id.launcherAccProgress);
         
         sRemember = findViewById(R.id.login_switch_remember);
         sOffline  = findViewById(R.id.login_switch_offline);
@@ -557,6 +547,7 @@ public class PojavLoginActivity extends BaseActivity
             }
             final String tarEntryName = tarEntry.getName();
             runOnUiThread(new Runnable(){
+                @SuppressLint("StringFormatInvalid")
                 @Override
                 public void run() {
                     startupTextView.setText(getString(R.string.global_unpacking, tarEntryName));
@@ -797,7 +788,9 @@ public class PojavLoginActivity extends BaseActivity
             mProfile = loginOffline();
             playProfile(false);
         } else {
+            ProgressBar prb = findViewById(R.id.launcherAccProgress);
             new LoginTask().setLoginListener(new LoginListener(){
+
 
                     @Override
                     public void onBeforeLogin() {
