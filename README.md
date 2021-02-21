@@ -27,15 +27,15 @@ Will be moved to **BUILDING.md**
 - Follow build instruction on build script [README.md](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/blob/buildjre8/README.md).
 - You can also get [CI auto builds](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/actions).
 - Spliting JRE and put to the launcher: 
-        - Get JREs for all of 4 supported architectures (arm, arm64, x86, x86_64)
-        - Split JRE into parts:
-                Platform-independent: .jar files, libraries, configs, etc...
-                Platform-dependent: .so files, etc...
-        - Create:
-                file named `universal.tar.xz` with all platform-independent files
-                4 files named `bin-<arch>.tar.xz` with all platform-dependent files per-architecture
-        - Put these in `assets/components/jre/` folder
-        - (If needed) update the Version file with the current date
+        - Get JREs for all of 4 supported architectures (arm, arm64, x86, x86_64) </br>
+        - Split JRE into parts:</br>
+                Platform-independent: .jar files, libraries, configs, etc...</br>
+                Platform-dependent: .so files, etc...</br>
+        - Create:</br>
+                file named `universal.tar.xz` with all platform-independent files</br>
+                4 files named `bin-<arch>.tar.xz` with all platform-dependent files per-architecture</br>
+        - Put these in `assets/components/jre/` folder</br>
+        - (If needed) update the Version file with the current date</br>
 
 ### LWJGL
 - **Coming soon**
