@@ -150,8 +150,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
     EGLContext *currCtx = eglGetCurrentContext();
     printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
-    if (window != 0x1 && currCtx == EGL_NO_CONTEXT || currCtx == (EGLContext *) window) {
-        if (potatoBridge.eglContextOld != NULL && potatoBridge.eglContextOld != (void *) window) {
+    if (window != 0x1 && (window == 0x0 || currCtx == EGL_NO_CONTEXT || currCtx == (EGLContext *) window)) {
+        if (window != 0x0 && potatoBridge.eglContextOld != NULL && potatoBridge.eglContextOld != (void *) window) {
             // Create new pbuffer per thread
             // TODO get window size for 2nd+ window!
             int surfaceWidth, surfaceHeight;
