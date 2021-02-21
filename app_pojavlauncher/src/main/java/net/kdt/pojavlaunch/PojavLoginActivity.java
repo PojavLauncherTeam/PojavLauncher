@@ -205,17 +205,9 @@ public class PojavLoginActivity extends BaseActivity
     }
     
     private void uiInit() {
-        setContentView(R.layout.launcher_login_v2);
+        setContentView(R.layout.launcher_login_v3);
 
-        loginLayout = findViewById(R.id.login_layout_linear);
         spinnerChgLang = findViewById(R.id.login_spinner_language);
-        imageLogo = findViewById(R.id.login_image_logo);
-        loginLayout.postDelayed(new Runnable(){
-                @Override
-                public void run(){
-                    imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
-                }
-            }, 100);
 
         String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
         SpannableString defaultLangChar = new SpannableString(defaultLang);
@@ -305,10 +297,6 @@ public class PojavLoginActivity extends BaseActivity
         super.onResume();
         
         Tools.updateWindowSize(this);
-        
-        if (loginLayout != null && imageLogo != null) {
-            imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
-        }
         
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
