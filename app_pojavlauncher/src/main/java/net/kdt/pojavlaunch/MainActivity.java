@@ -89,11 +89,11 @@ public class MainActivity extends BaseMainActivity {
                             break;
                             
                         case ControlData.SPECIALBTN_SCROLLDOWN:
-                            CallbackBridge.sendScroll(0, 0.1d);
+                            if(!isDown)CallbackBridge.sendScroll(0, 1d);
                             break;
                             
                         case ControlData.SPECIALBTN_SCROLLUP:
-                            CallbackBridge.sendScroll(0, -0.1d);
+                            if(!isDown)CallbackBridge.sendScroll(0, -1d);
                             break;
                     }
                 }
