@@ -229,7 +229,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNI
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
         } else {
-            GLFW_invoke_Char(showingWindow, (unsigned int) codepoint);
+            GLFW_invoke_Char((void*) showingWindow, (unsigned int) codepoint);
             // return lwjgl2_triggerCharEvent(codepoint);
         }
         return JNI_TRUE;
@@ -242,7 +242,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR_MODS, (unsigned int) codepoint, mods, 0, 0);
         } else {
-            GLFW_invoke_CharMods(showingWindow, codepoint, mods);
+            GLFW_invoke_CharMods((void*) showingWindow, codepoint, mods);
         }
         return JNI_TRUE;
     }
@@ -263,7 +263,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
                 if (isUseStackQueueCall) {
                     sendData(EVENT_TYPE_CURSOR_ENTER, 1, 0, 0, 0);
                 } else {
-                    GLFW_invoke_CursorEnter(showingWindow, 1);
+                    GLFW_invoke_CursorEnter((void*) showingWindow, 1);
                 }
             } else if (isGrabbing) {
                 // Some Minecraft versions does not use GLFWCursorEnterCallback
@@ -288,7 +288,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
         }
 
         if (!isUseStackQueueCall) {
-            GLFW_invoke_CursorPos(showingWindow, (double) (x), (double) (y));
+            GLFW_invoke_CursorPos((void*) showingWindow, (double) (x), (double) (y));
         } else {
             sendData(EVENT_TYPE_CURSOR_POS, (isGrabbing ? grabCursorX : x), (isGrabbing ? grabCursorY : y), 0, 0);
         }
@@ -303,7 +303,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_KEY, key, scancode, action, mods);
         } else {
-            GLFW_invoke_Key(showingWindow, key, scancode, action, mods);
+            GLFW_invoke_Key((void*) showingWindow, key, scancode, action, mods);
         }
     }
 }
@@ -319,7 +319,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
             if (isUseStackQueueCall) {
                 sendData(EVENT_TYPE_MOUSE_BUTTON, button, action, mods, 0);
             } else {
-                GLFW_invoke_MouseButton(showingWindow, button, action, mods);
+                GLFW_invoke_MouseButton((void*) showingWindow, button, action, mods);
             }
         }
     }
@@ -334,7 +334,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(J
             if (isUseStackQueueCall) {
                 sendData(EVENT_TYPE_FRAMEBUFFER_SIZE, width, height, 0, 0);
             } else {
-                GLFW_invoke_FramebufferSize(showingWindow, width, height);
+                GLFW_invoke_FramebufferSize((void*) showingWindow, width, height);
             }
         }
         
@@ -342,7 +342,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(J
             if (isUseStackQueueCall) {
                 sendData(EVENT_TYPE_WINDOW_SIZE, width, height, 0, 0);
             } else {
-                GLFW_invoke_WindowSize(showingWindow, width, height);
+                GLFW_invoke_WindowSize((void*) showingWindow, width, height);
             }
         }
     }
@@ -355,7 +355,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEn
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_SCROLL, xoffset, yoffset, 0, 0);
         } else {
-            GLFW_invoke_Scroll(showingWindow, (double) xoffset, (double) yoffset);
+            GLFW_invoke_Scroll((void*) showingWindow, (double) xoffset, (double) yoffset);
         }
     }
 }

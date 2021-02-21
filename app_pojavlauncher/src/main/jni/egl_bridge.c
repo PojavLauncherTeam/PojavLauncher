@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 #include <EGL/egl.h>
 
@@ -61,7 +62,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIEnv* env, jclass clazz) {
-    return eglGetCurrentContext();
+    return (jlong) eglGetCurrentContext();
 }
 static const EGLint es3_ctx_attribs[] = {
     EGL_CONTEXT_CLIENT_VERSION, 3,
@@ -147,34 +148,53 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
 
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
-
-    if (window != 0x1) {
-        printf("Making current on window %p\n", window);
-    EGLBoolean success = eglMakeCurrent(
+    EGLContext *currCtx = eglGetCurrentContext();
+    printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
+    if (window != 0x1 && currCtx == EGL_NO_CONTEXT || currCtx == (EGLContext *) window) {
+        if (potatoBridge.eglContextOld != NULL && potatoBridge.eglContextOld != (void *) window) {
+            // Create new pbuffer per thread
+            // TODO get window size for 2nd+ window!
+            int surfaceWidth, surfaceHeight;
+            eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_WIDTH, &surfaceWidth);
+            eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_HEIGHT, &surfaceHeight);
+            int surfaceAttr[] = {
+                EGL_WIDTH, surfaceWidth,
+                EGL_HEIGHT, surfaceHeight,
+                EGL_NONE
+            };
+            potatoBridge.eglSurface = eglCreatePbufferSurface(potatoBridge.eglDisplay, config, surfaceAttr);
+            printf("EGLBridge: created pbuffer surface %p for context %p\n", potatoBridge.eglSurface, window);
+        }
+        potatoBridge.eglContextOld = (void *) window;
+        // eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+        printf("EGLBridge: Making current on window %p on thread %d\n", window, gettid());
+        EGLBoolean success = eglMakeCurrent(
             potatoBridge.eglDisplay,
             potatoBridge.eglSurface,
             potatoBridge.eglSurface,
             /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
-    );
-    if (success == EGL_FALSE) {
-        printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
-    }
+        );
+        if (success == EGL_FALSE) {
+            printf("EGLBridge: Error: eglMakeCurrent() failed: %p\n", eglGetError());
+        } else {
+            printf("EGLBridge: eglMakeCurrent() succeed!\n");
+        }
 
     // Test
 #ifdef GLES_TEST
-    glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
-    printf("First frame error: %p\n", eglGetError());
+        glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+        printf("First frame error: %p\n", eglGetError());
 #endif
 
-    // idk this should convert or just `return success;`...
-    return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
-    }else{
-        (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-        //return JNI_TRUE;
+        // idk this should convert or just `return success;`...
+        return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
+    } else {
+        // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+        return JNI_FALSE;
     }
-    }
+}
 
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass clazz) {
@@ -185,14 +205,14 @@ JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
     EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,es3_ctx_attribs);
     if (ctx == EGL_NO_CONTEXT) {
-        printf("Could not create ES3 context, fallbacking to ES2\n");
+        printf("EGLBridge: Could not create ES3 context, fallbacking to ES2\n");
         setenv("LIBGL_ES", "2", 1);
         ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,es2_ctx_attribs);
     } else {
         setenv("LIBGL_ES", "3", 1);
     }
 
-    printf("Created CTX pointer = %p\n",ctx);
+    printf("EGLBridge: Created CTX pointer = %p\n",ctx);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
     return (long)ctx;
 }
