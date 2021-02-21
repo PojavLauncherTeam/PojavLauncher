@@ -151,6 +151,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
     EGLContext *currCtx = eglGetCurrentContext();
     printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
     if (window != 0x1 && (window == 0x0 || currCtx == EGL_NO_CONTEXT || currCtx == (EGLContext *) window)) {
+/*
         if (window != 0x0 && potatoBridge.eglContextOld != NULL && potatoBridge.eglContextOld != (void *) window) {
             // Create new pbuffer per thread
             // TODO get window size for 2nd+ window!
@@ -165,13 +166,14 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
             potatoBridge.eglSurface = eglCreatePbufferSurface(potatoBridge.eglDisplay, config, surfaceAttr);
             printf("EGLBridge: created pbuffer surface %p for context %p\n", potatoBridge.eglSurface, window);
         }
+*/
         potatoBridge.eglContextOld = (void *) window;
         // eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         printf("EGLBridge: Making current on window %p on thread %d\n", window, gettid());
         EGLBoolean success = eglMakeCurrent(
             potatoBridge.eglDisplay,
-            potatoBridge.eglSurface,
-            potatoBridge.eglSurface,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
             /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
         );
         if (success == EGL_FALSE) {
