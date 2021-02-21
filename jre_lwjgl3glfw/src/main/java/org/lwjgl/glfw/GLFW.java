@@ -641,6 +641,7 @@ public class GLFW
     public static void internalChangeMonitorSize(int width, int height) {
          mGLFWWindowWidth = width;
          mGLFWWindowHeight = height;
+         if (mGLFWVideoMode == null) return;
          memPutInt(mGLFWVideoMode.address() + (long) mGLFWVideoMode.WIDTH, mGLFWWindowWidth);
          memPutInt(mGLFWVideoMode.address() + (long) mGLFWVideoMode.HEIGHT, mGLFWWindowHeight);
     }
