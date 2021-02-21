@@ -24,7 +24,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,7 +32,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -83,27 +81,17 @@ public class PojavLoginActivity extends BaseActivity
     private final int REQUEST_STORAGE_REQUEST_CODE = 1;
     private CheckBox sRemember, sOffline;
     private TextView startupTextView;
-    
     private SharedPreferences firstLaunchPrefs;
     
     private static boolean isSkipInit = false;
-    
 
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
-    public static final String PREF_JAVARUNTIME_VER = "javaRuntimeVersion";
     
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState); // false);
+        super.onCreate(savedInstanceState); // false;
 
         Tools.updateWindowSize(this);
-
-        ControlData[] specialButtons = ControlData.getSpecialButtons();
-        specialButtons[0].name = getString(R.string.control_keyboard);
-        specialButtons[1].name = getString(R.string.control_toggle);
-        specialButtons[2].name = getString(R.string.control_primary);
-        specialButtons[3].name = getString(R.string.control_secondary);
-        specialButtons[4].name = getString(R.string.control_mouse);
         
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
         new InitTask().execute(isSkipInit);
@@ -141,13 +129,12 @@ public class PojavLoginActivity extends BaseActivity
         @Override
         protected Integer doInBackground(Boolean[] params) {
             // If trigger a quick restart
-            if (params[0] == true) {
-                return 0;
-            }
+            if (params[0]) return 0;
             
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {}
+
 
             publishProgress("visible");
 
@@ -189,9 +176,7 @@ public class PojavLoginActivity extends BaseActivity
         @Override
         protected void onPostExecute(Integer obj) {
             startAle.dismiss();
-            if (obj == 0) {
-                uiInit();
-            }
+            if (obj == 0) uiInit();
         }
     }
     
@@ -254,7 +239,7 @@ public class PojavLoginActivity extends BaseActivity
                 }
                 
                 LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
-                LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).commit();
+                LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).apply();
                 
                 // Restart to apply language change
                 finish();
