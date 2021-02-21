@@ -23,6 +23,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -675,11 +676,7 @@ public class PojavLoginActivity extends BaseActivity
 
         final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
-        int xScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().widthPixels;
-        int yScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().heightPixels;
-
         accountDialog.setContentView(R.layout.simple_account_list_holder);
-
 
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -764,12 +761,14 @@ public class PojavLoginActivity extends BaseActivity
                         public void onClick(DialogInterface p1, int p2) {
                             new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
                             accountListLayout.removeViewsInLayout(accountIndex_final, 1);
-                            //Resize the window
+
                             if (accountListLayout.getChildCount() == 0) {
                                 accountDialog.dismiss(); //No need to keep it, since there is no account
                                 return;
                             }
-                            accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int) Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*55)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
+                            //Refreshes the layout with the same settings so it take the missing child into account.
+                            accountListLayout.setLayoutParams(accountListLayout.getLayoutParams());
+
                         }
                     });
                     builder2.setNegativeButton(android.R.string.cancel, null);
@@ -778,9 +777,6 @@ public class PojavLoginActivity extends BaseActivity
             });
 
         }
-
-        //The value 73 and 56 are dp numbers, converted into px in order to resize the layout.
-        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*56)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
         accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         accountDialog.show();
     }

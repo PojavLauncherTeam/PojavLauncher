@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#424242"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="match_parent">
 
 
     <TextView
         android:id="@+id/TextViewTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
+
+        android:paddingTop="15dp"
         android:paddingBottom="20dp"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
+        android:gravity="center"
 
         android:text="@string/login_select_account"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,8 +27,10 @@
 
 
     <ScrollView
+        android:id="@+id/accountScrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHeight_max="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -36,7 +40,8 @@
         <LinearLayout
             android:id="@+id/accountListLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:maxHeight="100dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
