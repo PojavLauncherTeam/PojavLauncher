@@ -41,7 +41,18 @@ bash scripts/languagelist_updater.sh
 # On Windows:
 scripts\languagelist_updater.bat
 ```
-- Then, build use Android Studio.
+- Then, run these commands ~~build use Android Studio~~.
+```
+# Build GLFW stub
+./gradlew :jre_lwjgl3glfw:build
+# mkdir app_pojavlauncher/src/main/assets/components/internal_libs
+rm app_pojavlauncher/src/main/assets/components/lwjgl3/lwjgl-glfw-classes.jar
+cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main/assets/components/lwjgl3/lwjgl-glfw-classes.jar
+        
+# Build the launcher
+./gradlew :app_pojavlauncher:assembleDebug
+```
+(Replace `gradlew` to `gradlew.bat` if you are building on Windows).
 
 ## Current status
 - [x] ~~OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.~~ Replaced by JRE8.
