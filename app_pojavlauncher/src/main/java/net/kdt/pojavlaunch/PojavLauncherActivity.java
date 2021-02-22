@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.animation.ValueAnimator;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -197,7 +198,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 if(key.equals("hideSidebar")){
-                    restoreOldLook(sharedPreferences.getBoolean("hideSidebar",false));
+                    changeLookAndFeel(sharedPreferences.getBoolean("hideSidebar",false));
                     return;
                 }
 
@@ -207,7 +208,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 }
             }
         });
-        restoreOldLook(PREF_HIDE_SIDEBAR);
+        changeLookAndFeel(PREF_HIDE_SIDEBAR);
         ignoreNotch(PREF_IGNORE_NOTCH, PojavLauncherActivity.this);
     }
 
@@ -275,10 +276,11 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }, 500);
     }
 
-    private void restoreOldLook(boolean oldLookState){
+    private void changeLookAndFeel(boolean useOldLook){
         Guideline guideLine = findViewById(R.id.guidelineLeft);
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
-        if(oldLookState){
+
+        if(useOldLook || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             //UI v1 Style
             //Hide the sidebar
             params.guidePercent = 0; // 0%, range: 0 <-> 1
