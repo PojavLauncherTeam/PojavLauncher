@@ -177,7 +177,7 @@
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
     <string name="main_no_news_feed">新闻获取失败！</string>
-    <string name="auto_ram_subtitle">启用 RAM 自动调节器</string>
+    <string name="auto_ram_subtitle">启用 RAM 自动调节</string>
     <string name="auto_ram_title">自动 RAM</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
     <string name="vp_latest_snapshot">最新快照</string>
