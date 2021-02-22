@@ -141,7 +141,7 @@
     <string name="control_mouseon">Mouse: aan </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Geforceerd sluiten</string>
-    <string name="control_viewout">Logboekuitvoer</string>
+    <string name="control_viewout">Logboek output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Verstuur aangepaste sleutelcode</string>
     <!--
