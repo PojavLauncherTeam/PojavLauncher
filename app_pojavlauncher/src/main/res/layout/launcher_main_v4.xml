@@ -205,20 +205,6 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/lMTVVer"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:text="@string/main_version"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
-
 
     <Spinner
         android:id="@+id/launchermain_spinner_version"
@@ -226,15 +212,19 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom2"
         app:layout_constraintEnd_toStartOf="@+id/launchermainPlayButton"
-        app:layout_constraintStart_toEndOf="@+id/lMTVVer"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
     <Button
-        style="?android:attr/buttonBarButtonStyle"
+
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="launcherMenu"
         android:text="@string/main_options"
+
+        style="?android:attr/buttonBarButtonStyle"
+        android:background="?attr/selectableItemBackground"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/launchermainPlayButton"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
@@ -259,8 +249,8 @@
 
     <TextView
         android:id="@+id/launchermain_text_welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/main_welcome"
         android:textSize="12sp"
@@ -285,22 +275,13 @@
         app:layout_constraintStart_toEndOf="@+id/launchermainPlayButton"
         app:layout_constraintTop_toBottomOf="@+id/launchermain_text_welcome" />
 
-    <Button
-        android:id="@+id/infoDevBtn"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:onClick="mcaccSwitchUser"
-        android:text="@string/main_infodev"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toEndOf="@+id/launchermainPlayButton"
-        app:layout_constraintTop_toTopOf="@+id/guidelineBottom2" />
 
     <Button
         android:id="@+id/switchUserBtn"
+
         style="?android:attr/buttonBarButtonStyle"
+        android:background="?attr/selectableItemBackground"
+
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="mcaccLogout"
@@ -308,7 +289,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toEndOf="@+id/launchermainPlayButton"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom2" />
 
     <View

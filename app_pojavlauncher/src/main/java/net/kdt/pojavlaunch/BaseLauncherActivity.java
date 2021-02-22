@@ -34,28 +34,11 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     
     public abstract void statusIsLaunching(boolean isLaunching);
 
-    public void mcaccSwitchUser(View view) {
-        showProfileInfo();
-    }
-
     public void mcaccLogout(View view) {
         //PojavProfile.reset();
         finish();
     }
 
-    private void showProfileInfo() {
-        /*
-         new AlertDialog.Builder(this)
-         .setTitle("Info player")
-         .setMessage(
-         "AccessToken=" + profile.getAccessToken() + "\n" +
-         "ClientID=" + profile.getClientID() + "\n" +
-         "ProfileID=" + profile.getProfileID() + "\n" +
-         "Username=" + profile.getUsername() + "\n" +
-         "Version=" + profile.getVersion()
-         ).show();
-         */
-    }
     
     public void launcherMenu(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

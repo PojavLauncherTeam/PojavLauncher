@@ -52,7 +52,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private final Button[] Tabs = new Button[4];
     private View selected;
 
-    private Button switchUsrBtn, logoutBtn; // MineButtons
+    private Button logoutBtn; // MineButtons
 
     public PojavLauncherActivity() {
     }
@@ -185,7 +185,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         mLaunchProgress = (ProgressBar) findViewById(R.id.progressDownloadBar);
         mLaunchTextStatus = (TextView) findViewById(R.id.progressDownloadText);
-        switchUsrBtn = (Button) findViewById(R.id.infoDevBtn);
         logoutBtn = (Button) findViewById(R.id.switchUserBtn);
 
         mPlayButton = (Button) findViewById(R.id.launchermainPlayButton);
@@ -235,7 +234,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         mLaunchProgress.setVisibility(launchVisibility);
         mLaunchTextStatus.setVisibility(launchVisibility);
 
-        switchUsrBtn.setEnabled(!isLaunching);
+
         logoutBtn.setEnabled(!isLaunching);
         mVersionSelector.setEnabled(!isLaunching);
         canBack = !isLaunching;

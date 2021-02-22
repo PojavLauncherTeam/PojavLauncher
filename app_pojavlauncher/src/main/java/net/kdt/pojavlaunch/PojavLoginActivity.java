@@ -82,6 +82,7 @@ public class PojavLoginActivity extends BaseActivity
     private CheckBox sRemember, sOffline;
     private TextView startupTextView;
     private SharedPreferences firstLaunchPrefs;
+    private MinecraftAccount mProfile = null;
     
     private static boolean isSkipInit = false;
 
@@ -765,7 +766,7 @@ public class PojavLoginActivity extends BaseActivity
         return null;
     }
     
-    private MinecraftAccount mProfile = null;
+
     public void loginMC(final View v)
     {
         
