@@ -184,4 +184,6 @@
     <string name="dl_library_sha_pass">%s 라이브러리를 이용할 수 있습니다.</string>
     <string name="mcl_disable_gestures">제스쳐 비활성화</string>
     <string name="mcl_disable_gestures_subtitle">탭하여 블록 설치, 길게 눌러 블록 파괴와 같은 제스쳐를 비활성화 합니다</string>
+    <string name="mcl_setting_title_mousespeed">마우스 속도</string>
+    <string name="mcl_setting_subtitle_mousespeed">소프트웨어 마우스 속도 변경</string>
 </resources>
