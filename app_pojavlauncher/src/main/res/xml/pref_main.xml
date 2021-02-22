@@ -104,6 +104,13 @@
             app2:icon="@drawable/mouse_pointer_1"
             app2:selectable="false"
             app2:showSeekBarValue="true" />
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="mousespeed"
+            android:summary="@string/mcl_setting_subtitle_mousespeed"
+            android:title="@string/mcl_setting_title_mousespeed"
+            app2:icon="@drawable/mouse_pointer_spd"
+            app2:selectable="false"
+            app2:showSeekBarValue="true" />
         
     </androidx.preference.PreferenceCategory>
 	

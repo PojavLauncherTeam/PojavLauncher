@@ -161,6 +161,9 @@ public class BaseMainActivity extends LoggableActivity {
                             case R.id.nav_debug: toggleDebug();
                                 break;
                             case R.id.nav_customkey: dialogSendCustomKey();
+                                break;
+                            case R.id.nav_mousespd: adjustMouseSpeedLive();
+                                break;
                         }
                         //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
 
@@ -317,8 +320,8 @@ public class BaseMainActivity extends LoggableActivity {
                                     }
                                     break;
                                 case MotionEvent.ACTION_MOVE: // 2
-                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + x - prevX));
-                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
+                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX)*LauncherPreferences.PREF_MOUSESPEED));
+                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + (y - prevY)*LauncherPreferences.PREF_MOUSESPEED));
                                     mouse_x = (int) (mouseX * scaleFactor);
                                     mouse_y = (int) (mouseY * scaleFactor);
                                     placeMouseAt(mouseX, mouseY);
@@ -1226,5 +1229,46 @@ public class BaseMainActivity extends LoggableActivity {
         }
         return hotbarKeys[((x - barX) / mcscale(180 / 9)) % 9];
     }
+    int tmpMouseSpeed;
 
+    public void adjustMouseSpeedLive() {
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        b.setTitle(R.string.mcl_setting_title_mousespeed);
+        View v = LayoutInflater.from(this).inflate(R.layout.live_mouse_speed_editor,null);
+        final SeekBar sb = v.findViewById(R.id.mouseSpeed);
+        final TextView tv = v.findViewById(R.id.mouseSpeedTV);
+        sb.setMax(275);
+        tmpMouseSpeed = (int) ((LauncherPreferences.PREF_MOUSESPEED*100));
+        sb.setProgress(tmpMouseSpeed-25);
+        tv.setText(tmpMouseSpeed +" %");
+        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                tmpMouseSpeed = i+25;
+                tv.setText(tmpMouseSpeed +" %");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+        b.setView(v);
+        b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                LauncherPreferences.PREF_MOUSESPEED = ((float)tmpMouseSpeed)/100f;
+                LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).commit();
+                dialogInterface.dismiss();
+                System.gc();
+            }
+        });
+        b.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                System.gc();
+            }
+        });
+        b.show();
+    }
 }

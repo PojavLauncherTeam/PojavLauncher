@@ -39,7 +39,12 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
         CustomSeekBarPreference seek5 = (CustomSeekBarPreference) findPreference("resolutionRatio");
         seek5.setMin(25);
         seek5.setSuffix(" %");
-	
+
+	    CustomSeekBarPreference seek6 = (CustomSeekBarPreference) findPreference("mousespeed");
+        seek6.setMin(25);
+        seek6.setValue((int)(LauncherPreferences.PREF_MOUSESPEED*100f));
+        seek6.setMax(300);
+        seek6.setSuffix(" %");
 	// #724 bug fix
         if (seek5.getValue() < 25) {
             seek5.setValue(100);

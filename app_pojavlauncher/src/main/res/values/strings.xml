@@ -213,4 +213,6 @@
     <string name="dl_library_sha_pass">Library %s is fine and usable</string>
     <string name="mcl_disable_gestures">Disable gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disables gestures, such as hold to break block, and tap to place a block.</string>
+    <string name="mcl_setting_title_mousespeed">Mouse Speed</string>
+    <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
 </resources>
