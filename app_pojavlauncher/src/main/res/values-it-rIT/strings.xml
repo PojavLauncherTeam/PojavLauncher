@@ -184,4 +184,6 @@
     <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
     <string name="mcl_disable_gestures">Disattiva gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disattiva gestures, ad esempio premere per rompere un blocco, e cliccare per piazzarlo.</string>
+    <string name="mcl_setting_title_mousespeed">Velocità mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Cambia la velocità del mouse via software</string>
 </resources>
