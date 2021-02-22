@@ -184,4 +184,6 @@
     <string name="dl_library_sha_pass">Die Bibliothek %s ist unbeschädigt und verwendbar</string>
     <string name="mcl_disable_gestures">Gesten deaktivieren</string>
     <string name="mcl_disable_gestures_subtitle">Diese Einstellung deaktiviert Gesten, wie zum Beispiel gedrückt halten, um einen Block zu zerstören und eine kurze Berührung, um einen Block zu platzieren.</string>
+    <string name="mcl_setting_title_mousespeed">Geschwindigkeit der Maus</string>
+    <string name="mcl_setting_subtitle_mousespeed">Ändert die Geschwindigkeit der Software-Maus</string>
 </resources>
