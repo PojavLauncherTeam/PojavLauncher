@@ -178,4 +178,6 @@
     <string name="dl_library_sha_pass">Ang library %s ay mabuti at magagamit</string>
     <string name="mcl_disable_gestures">Paganahin ang mga galaw</string>
     <string name="mcl_disable_gestures_subtitle">Hindi pinagagana ang mga kilos, tulad ng pagpindot upang masira ang bloke, at i-tap upang maglagay ng isang bloke.</string>
+    <string name="mcl_setting_title_mousespeed">Bilis ng Mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Binabago ang bilis ng mouse ng software</string>
 </resources>
