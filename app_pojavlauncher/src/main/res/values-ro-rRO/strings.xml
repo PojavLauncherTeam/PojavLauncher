@@ -180,4 +180,5 @@
     <string name="mcl_disable_gestures_subtitle">Dezactivează gesturile, cum ar fi tine apasat pentru a sparge blocul, și apasă pentru a pune un bloc.</string>
     <string name="mcl_setting_title_mousespeed">Viteza mouse-ului</string>
     <string name="mcl_setting_subtitle_mousespeed">Schimbă viteza mouse-ului de software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
 </resources>
