@@ -184,4 +184,6 @@
     <string name="dl_library_sha_pass">运行库 %s 正常</string>
     <string name="mcl_disable_gestures">禁用手势</string>
     <string name="mcl_disable_gestures_subtitle">禁用手势，例如长按破坏方块和点击放置方块。</string>
+    <string name="mcl_setting_title_mousespeed">鼠标速度</string>
+    <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
 </resources>
