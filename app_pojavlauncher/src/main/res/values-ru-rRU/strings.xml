@@ -179,7 +179,7 @@
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
     <string name="mcl_setting_check_libraries">Проверка библиотеки после загрузки</string>
     <string name="mcl_setting_check_libraries_subtitle">Эта опция принуждает лаунчер проверять хеш библиотеки, если он доступен. Предотвращает прерывание загрузки.</string>
-    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет скачено повторно</string>
+    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет скачена повторно</string>
     <string name="dl_library_sha_unknown">Библиотека %s не может быть проверена; придется предположить, что с ней все хорошо</string>
     <string name="dl_library_sha_pass">Библиотека %s преверена и может быть использована</string>
     <string name="mcl_disable_gestures">Отключение жестов</string>
