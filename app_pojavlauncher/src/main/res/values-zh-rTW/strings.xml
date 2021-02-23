@@ -178,4 +178,6 @@
     <string name="dl_library_sha_pass">執行庫 %s 正常</string>
     <string name="mcl_disable_gestures">禁用手勢</string>
     <string name="mcl_disable_gestures_subtitle">局部手勢，例如長按破壞方塊和點擊放置方塊。</string>
+    <string name="mcl_setting_title_mousespeed">滑鼠速度</string>
+    <string name="mcl_setting_subtitle_mousespeed">更改虛擬滑鼠的速度</string>
 </resources>
