@@ -197,6 +197,13 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public boolean onTouchEvent(MotionEvent event) {
         if (!mModifiable) {
             mCanTriggerLongClick = false;
+            if(event.getAction() == MotionEvent.ACTION_MOVE && CallbackBridge.isGrabbing() && mProperties.passThruEnabled) {
+                MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
+                if(v != null) {
+                    v.dispatchTouchEvent(event);
+                    return true;
+                }
+            }
             if (mProperties.keycode >= 0) {
                 if (!mProperties.isToggle) {
                     switch (event.getActionMasked()) {
