@@ -184,4 +184,6 @@
     <string name="dl_library_sha_pass">Kütüphane %s iyi durumda ve kullanılabilir</string>
     <string name="mcl_disable_gestures">İşaretleri devre dışı bırak</string>
     <string name="mcl_disable_gestures_subtitle">İşaretleri devre dışarı bırakır, blok kırma ve blok koymak için basma gibi.</string>
+    <string name="mcl_setting_title_mousespeed">Fare Hızı</string>
+    <string name="mcl_setting_subtitle_mousespeed">Uygulamadaki farenin hızını değiştirir</string>
 </resources>
