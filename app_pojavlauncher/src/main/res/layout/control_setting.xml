@@ -51,7 +51,13 @@
 			android:id="@+id/controlsetting_checkbox_passthru"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			tools:text="@string/customctrl_passthru" />
+			android:text="@string/customctrl_passthru" />
+
+		<CheckBox
+			android:id="@+id/controlsetting_checkbox_round"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/customctrl_rounded" />
 
 		<TextView
 			android:layout_width="wrap_content"
