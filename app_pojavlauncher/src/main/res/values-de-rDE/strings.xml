@@ -186,4 +186,5 @@
     <string name="mcl_disable_gestures_subtitle">Diese Einstellung deaktiviert Gesten, wie zum Beispiel gedrückt halten, um einen Block zu zerstören und eine kurze Berührung, um einen Block zu platzieren.</string>
     <string name="mcl_setting_title_mousespeed">Geschwindigkeit der Maus</string>
     <string name="mcl_setting_subtitle_mousespeed">Ändert die Geschwindigkeit der Software-Maus</string>
+    <string name="customctrl_passthru">Maus ignoriert Schaltflächen</string>
 </resources>
