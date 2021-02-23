@@ -63,8 +63,16 @@
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ludzie Nostalgic preferujący stary interfejs v1 może to podobać. Daje ci więcej wrażeń w trybie pełnoekranowym.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoruj notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoruj notch i rozszerza pod nim ekran.\nDaje Ci więcej wrażeń.</string>
+    <string name="mcl_setting_title_resolution_scaler">Skala rozdzielczości</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Pozwala zmniejszyć rozdzielczość gry. 100% to pełna rozdzielczość</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
+    <string name="mcl_setting_title_backtorightmouse">Traktuj przycisk wstecz jako prawy mysz</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Niektóre urządzenia traktują zewnętrzny prawy przycisk myszy jako przycisk wstecz. Jeśli używasz zewnętrznego myszki, powinieneś to włączyć.</string>
+    <string name="mcl_setting_title_flat_button_style">Użyj stylu przycisku</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Włącz to, aby zmienić styl przycisku kontrolnego na płaskie.</string>
     <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
     <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
@@ -145,6 +153,9 @@
     <string name="customctrl_remove">Usunąć %s?</string>
     <string name="customctrl_keyname">Kod Klucza</string>
     <string name="customctrl_toggle">Przełączalne</string>
+    <string name="customctrl_size">Rozmiar</string>
+    <string name="customctrl_size_width">Szerokość</string>
+    <string name="customctrl_size_height">Wysokość</string>
     <string name="customctrl_dynamicpos">Dynamiczna pozycja</string>
     <string name="customctrl_dynamicpos_x">Dynamiczne X</string>
     <string name="customctrl_dynamicpos_y">Dynamiczne Y</string>
@@ -167,4 +178,14 @@
     <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
     <string name="auto_ram_title">Automatyczny ram</string>
     <string name="autoram_info_msg">Pamięć ustawiona na %d MB</string>
+    <string name="mcl_setting_check_libraries">Sprawdź biblioteki po pobraniu</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ta opcja zmusza launcher do sprawdzenia skrótu biblioteki, jeśli jest dostępna. Zapobiega poszkodowanym pobraniom.</string>
+    <string name="dl_library_sha_fail">Biblioteka %s jest uszkodzona i zostanie ponownie pobrana</string>
+    <string name="dl_library_sha_unknown">Biblioteka %s nie może zostać sprawdzona, należy założyć, że jest dobra</string>
+    <string name="dl_library_sha_pass">Biblioteka %s jest dobra i użyteczna</string>
+    <string name="mcl_disable_gestures">Wyłącz gesty</string>
+    <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak przytrzymaj aby zniszczyć blok i stuknij, aby umieścić blok.</string>
+    <string name="mcl_setting_title_mousespeed">Prędkość myszki (%)</string>
+    <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość myszy oprogramowania</string>
+    <string name="customctrl_passthru">Myszka przelotka</string>
 </resources>
