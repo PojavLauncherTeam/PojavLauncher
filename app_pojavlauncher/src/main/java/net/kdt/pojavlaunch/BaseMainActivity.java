@@ -239,7 +239,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     @Override
                                     public void run()
                                     {
-                                        if (lastGrab && !CallbackBridge.isGrabbing() && lastEnabled) {
+                                        if (!CallbackBridge.isGrabbing() && lastEnabled) {
                                             touchPad.setVisibility(View.VISIBLE);
                                             placeMouseAt(displayMetrics.widthPixels / 2, displayMetrics.heightPixels / 2);
                                         }
@@ -988,6 +988,7 @@ public class BaseMainActivity extends LoggableActivity {
     
     private void openCustomControls() {
         Intent intent = new Intent(this, CustomControlsActivity.class);
+        intent.putExtra("fromMainActivity", true);
         startActivity(intent);
     }
 
