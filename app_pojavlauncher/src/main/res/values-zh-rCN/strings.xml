@@ -186,4 +186,6 @@
     <string name="mcl_disable_gestures_subtitle">禁用手势，例如长按破坏方块和点击放置方块。</string>
     <string name="mcl_setting_title_mousespeed">鼠标速度</string>
     <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
+    <string name="customctrl_passthru">鼠标透传</string>
+    <string name="customctrl_rounded">圆角</string>
 </resources>
