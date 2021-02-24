@@ -15,7 +15,7 @@ import java.io.*;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
 public class MainActivity extends BaseMainActivity {
-    private ControlLayout mControlLayout;
+    public ControlLayout mControlLayout;
     
     private View.OnClickListener mClickListener;
     private View.OnTouchListener mTouchListener;
@@ -154,5 +154,16 @@ public class MainActivity extends BaseMainActivity {
         
         // toggleGui(null);
         mControlLayout.toggleControlVisible();
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            // Reload PREF_DEFAULTCTRL_PATH
+            LauncherPreferences.loadPreferences();
+            mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+        }
     }
 }

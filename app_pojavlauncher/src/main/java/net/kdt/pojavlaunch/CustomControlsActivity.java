@@ -28,6 +28,7 @@ public class CustomControlsActivity extends BaseActivity
 	private SharedPreferences mPref;
 
 	public boolean isModified = false;
+	public boolean isFromMainActivity = false;
 	private String selectedName = "new_control";
 
 	@Override
@@ -83,6 +84,7 @@ public class CustomControlsActivity extends BaseActivity
 	@Override
 	public void onBackPressed() {
 		if (!isModified) {
+		    setResult(Activity.RESULT_OK, new Intent());
 			super.onBackPressed();
 			return;
 		}
@@ -142,6 +144,7 @@ public class CustomControlsActivity extends BaseActivity
 			builder.setNeutralButton(R.string.mcn_exit_call, new AlertDialog.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface p1, int p2) {
+					    setResult(Activity.RESULT_OK, new Intent());
 						CustomControlsActivity.super.onBackPressed();
 					}
 				});

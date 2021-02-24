@@ -17,6 +17,7 @@ import java.lang.reflect.*;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.*;
+import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
@@ -986,9 +987,12 @@ public class BaseMainActivity extends LoggableActivity {
     }
     
     private void openCustomControls() {
+        if (this instanceof MainActivity) {
+            ((MainActivity) this).mControlLayout.loadLayout((CustomControls) null);
+        }
         Intent intent = new Intent(this, CustomControlsActivity.class);
         intent.putExtra("fromMainActivity", true);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     private void openLogOutput() {
