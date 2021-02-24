@@ -184,4 +184,8 @@
     <string name="dl_library_sha_pass">Biblioteca %s está boa e utilizável</string>
     <string name="mcl_disable_gestures">Desativar gestos</string>
     <string name="mcl_disable_gestures_subtitle">Desabilita gestos, como \"segure para quebrar bloco\" e \"toque para colocar um bloco\".</string>
+    <string name="mcl_setting_title_mousespeed">Velocidade do mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do mouse do software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Arredondado</string>
 </resources>
