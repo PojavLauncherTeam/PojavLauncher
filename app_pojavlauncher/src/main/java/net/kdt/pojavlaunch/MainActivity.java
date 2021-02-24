@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.*;
 import android.view.*;
 
@@ -163,7 +165,11 @@ public class MainActivity extends BaseMainActivity {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             // Reload PREF_DEFAULTCTRL_PATH
             LauncherPreferences.loadPreferences();
-            mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+            try {
+                mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

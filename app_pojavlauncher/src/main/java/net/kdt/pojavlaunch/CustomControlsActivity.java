@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch;
 
+import android.app.Activity;
 import android.content.*;
 import android.os.*;
 
