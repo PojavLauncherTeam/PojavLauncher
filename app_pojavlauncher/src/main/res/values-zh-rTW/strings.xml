@@ -180,4 +180,6 @@
     <string name="mcl_disable_gestures_subtitle">局部手勢，例如長按破壞方塊和點擊放置方塊。</string>
     <string name="mcl_setting_title_mousespeed">滑鼠速度</string>
     <string name="mcl_setting_subtitle_mousespeed">更改虛擬滑鼠的速度</string>
+    <string name="customctrl_passthru">滑鼠透傳</string>
+    <string name="customctrl_rounded">圓角</string>
 </resources>
