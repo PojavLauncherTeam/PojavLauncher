@@ -15,4 +15,7 @@
     <item
         android:id="@+id/nav_mousespd"
         android:title="@string/mcl_setting_title_mousespeed" />
+    <item
+        android:id="@+id/nav_customctrl"
+        android:title="@string/mcl_setting_title_mousespeed" />
 </menu>

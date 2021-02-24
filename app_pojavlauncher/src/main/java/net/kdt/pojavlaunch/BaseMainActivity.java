@@ -164,6 +164,8 @@ public class BaseMainActivity extends LoggableActivity {
                                 break;
                             case R.id.nav_mousespd: adjustMouseSpeedLive();
                                 break;
+                            case R.id.nav_customctrl: openCustomControls();
+                                break;
                         }
                         //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
 
@@ -231,6 +233,7 @@ public class BaseMainActivity extends LoggableActivity {
                     public void run()
                     {
                         while (!isExited) {
+                            if (lastGrab != CallbackBridge.isGrabbing())
                             mousePointer.post(new Runnable(){
 
                                     @Override
@@ -263,9 +266,9 @@ public class BaseMainActivity extends LoggableActivity {
                                     }
                                 });
 
-                            try {
-                                Thread.sleep(100);
-                            } catch (Throwable th) {}
+                            // try {
+                            //     Thread.sleep(100);
+                            // } catch (Throwable th) {}
                         }
                     }
                 }).start();
@@ -705,7 +708,7 @@ public class BaseMainActivity extends LoggableActivity {
                                             Tools.showError(BaseMainActivity.this, e, true);
                                         }
                                     }
-                                }).start();
+                                }, "JVM Main thread").start();
                         }
                     }
 
@@ -847,16 +850,6 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        /*
-         if (hasFocus && minecraftGLView.getVisibility() == View.GONE) {
-         minecraftGLView.setVisibility(View.VISIBLE);
-         }
-         */
-    }
-
-    @Override
     protected void onPause()
     {
         if (CallbackBridge.isGrabbing()){
@@ -868,24 +861,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     public static void fullyExit() {
         android.os.Process.killProcess(android.os.Process.myPid());
-    }
-
-    public void forceUserHome(String s) throws Exception {
-        Properties props = System.getProperties();
-        Class clazz = props.getClass();
-        Field f = null;
-        while (clazz != null) {
-            try {
-                f = clazz.getDeclaredField("defaults");
-                break;
-            } catch (Exception e) {
-                clazz = clazz.getSuperclass();
-            }
-        }
-        if (f != null) {
-            f.setAccessible(true);
-            ((Properties) f.get(props)).put("user.home", s);
-        }
     }
 
     public static boolean isAndroid8OrHigher() {
@@ -931,7 +906,7 @@ public class BaseMainActivity extends LoggableActivity {
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
         
-        if (jreVersion.equals("1.9.0")) return;
+        if (jreVersion.equals("1.8.0")) return;
         
     /*
         // Test java
@@ -1009,6 +984,11 @@ public class BaseMainActivity extends LoggableActivity {
                 }
             });
         dialog.show();
+    }
+    
+    private void openCustomControls() {
+        Intent intent = new Intent(this, CustomControlsActivity.class);
+        startActivity(intent);
     }
 
     private void openLogOutput() {

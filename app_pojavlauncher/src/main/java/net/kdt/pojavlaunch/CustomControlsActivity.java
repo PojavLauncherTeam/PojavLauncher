@@ -32,9 +32,15 @@ public class CustomControlsActivity extends BaseActivity
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        
+        if (getIntent().getExtras().getBoolean("fromMainActivity", false)) {
+            // TODO translucent!
+            // setTheme(androidx.appcompat.R.style.Theme_AppCompat_Translucent);
+        }
+        
 		setContentView(R.layout.control_mapping);
-
+        
 		mPref = PreferenceManager.getDefaultSharedPreferences(this);
 
 		ctrlLayout = (ControlLayout) findViewById(R.id.customctrl_controllayout);

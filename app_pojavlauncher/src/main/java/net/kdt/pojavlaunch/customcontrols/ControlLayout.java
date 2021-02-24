@@ -40,9 +40,25 @@ public class ControlLayout extends FrameLayout
 	public void loadLayout(CustomControls controlLayout) {
         if (mModifiable) {
             hideAllHandleViews();
+        }
+        if (getChildAt(0) instanceof MinecraftGLView) {
+            View viewGL = getChildAt(0);
+            View viewTouchpad = getChildAt(1);
+            removeAllViews();
+            addView(viewGL);
+            addView(viewTouchpad);
+        } else {
             removeAllViews();
         }
+        if (mLayout != null) {
+            mLayout.mControlDataList = null;
+            mLayout = null;
+        }
+        System.gc();
 
+        // Cleanup buttons only when input layout is null
+        if (controlLayout == null) return;
+        
 		mLayout = controlLayout;
         
 		for (ControlData button : controlLayout.mControlDataList) {
