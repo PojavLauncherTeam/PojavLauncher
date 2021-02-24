@@ -34,7 +34,7 @@ public class CustomControlsActivity extends BaseActivity
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        if (getIntent().getExtras().getBoolean("fromMainActivity", false)) {
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("fromMainActivity", false)) {
             // TODO translucent!
             // setTheme(androidx.appcompat.R.style.Theme_AppCompat_Translucent);
         }
