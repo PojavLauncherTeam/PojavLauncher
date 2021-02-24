@@ -7,6 +7,8 @@ import android.view.*;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.navigation.NavigationView;
+
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
@@ -27,7 +29,27 @@ public class MainActivity extends BaseMainActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initLayout(R.layout.main_with_customctrl);
-
+        super.ingameControlsEditorListener = new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_ctrl_load:
+                        CustomControlsActivity.load(mControlLayout);
+                        break;
+                    case R.id.menu_ctrl_add:
+                        mControlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
+                        break;
+                    case R.id.menu_ctrl_selectdefault:
+                        CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
+                        break;
+                    case R.id.menu_ctrl_save:
+                        CustomControlsActivity.save(true,mControlLayout);
+                        break;
+                }
+                //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        };
 
         mClickListener = new View.OnClickListener(){
             @Override
@@ -171,5 +193,10 @@ public class MainActivity extends BaseMainActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if(isInEditor) CustomControlsActivity.save(true,mControlLayout);
     }
 }

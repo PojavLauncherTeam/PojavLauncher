@@ -10,6 +10,7 @@ import android.view.View.*;
 import android.view.inputmethod.*;
 import android.widget.*;
 
+import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
@@ -89,7 +90,8 @@ public class BaseMainActivity extends LoggableActivity {
     private GestureDetector gestureDetector;
 
     private TextView debugText;
-
+    private NavigationView.OnNavigationItemSelectedListener gameActionListener;
+    public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
     // private String mQueueText = new String();
 
     protected JMinecraftVersionList.Version mVersionInfo;
@@ -151,30 +153,31 @@ public class BaseMainActivity extends LoggableActivity {
             drawerLayout = findViewById(R.id.main_drawer_options);
 
             navDrawer = findViewById(R.id.main_navigation_view);
-            navDrawer.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.nav_forceclose: dialogForceClose(BaseMainActivity.this);
-                                break;
-                            case R.id.nav_viewlog: openLogOutput();
-                                break;
-                            case R.id.nav_debug: toggleDebug();
-                                break;
-                            case R.id.nav_customkey: dialogSendCustomKey();
-                                break;
-                            case R.id.nav_mousespd: adjustMouseSpeedLive();
-                                break;
-                            case R.id.nav_customctrl: openCustomControls();
-                                break;
-                        }
-                        //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-
-                        drawerLayout.closeDrawers();
-                        return true;
+            gameActionListener = new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_forceclose: dialogForceClose(BaseMainActivity.this);
+                            break;
+                        case R.id.nav_viewlog: openLogOutput();
+                            break;
+                        case R.id.nav_debug: toggleDebug();
+                            break;
+                        case R.id.nav_customkey: dialogSendCustomKey();
+                            break;
+                        case R.id.nav_mousespd: adjustMouseSpeedLive();
+                            break;
+                        case R.id.nav_customctrl: openCustomControls();
+                            break;
                     }
-                });
+                    //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
+
+                    drawerLayout.closeDrawers();
+                    return true;
+                }
+            };
+            navDrawer.setNavigationItemSelectedListener(
+                gameActionListener);
 
             // this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
 
@@ -985,16 +988,25 @@ public class BaseMainActivity extends LoggableActivity {
             });
         dialog.show();
     }
-    
+    boolean isInEditor;
     private void openCustomControls() {
-        if (this instanceof MainActivity) {
-            ((MainActivity) this).mControlLayout.loadLayout((CustomControls) null);
+        if(ingameControlsEditorListener != null) {
+            ((MainActivity)this).mControlLayout.setModifiable(true);
+            navDrawer.getMenu().clear();
+            navDrawer.inflateMenu(R.menu.menu_customctrl);
+            navDrawer.setNavigationItemSelectedListener(ingameControlsEditorListener);
+            isInEditor = true;
         }
-        Intent intent = new Intent(this, CustomControlsActivity.class);
-        intent.putExtra("fromMainActivity", true);
-        startActivityForResult(intent, 1);
     }
-
+    public void leaveCustomControls() {
+        if(this instanceof MainActivity) {
+            ((MainActivity) this).mControlLayout.setModifiable(false);
+        }
+        navDrawer.getMenu().clear();
+        navDrawer.inflateMenu(R.menu.menu_runopt);
+        navDrawer.setNavigationItemSelectedListener(gameActionListener);
+        isInEditor = false;
+    }
     private void openLogOutput() {
         contentLog.setVisibility(View.VISIBLE);
         mIsResuming = false;
@@ -1102,7 +1114,6 @@ public class BaseMainActivity extends LoggableActivity {
     public void onBackPressed() {
         // Prevent back
         // Catch back as Esc keycode at another place
-
         sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
     }
     

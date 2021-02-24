@@ -5,6 +5,9 @@ import android.view.*;
 import android.widget.*;
 import com.google.gson.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
@@ -41,15 +44,15 @@ public class ControlLayout extends FrameLayout
         if (mModifiable) {
             hideAllHandleViews();
         }
-        if (getChildAt(0) instanceof MinecraftGLView) {
-            View viewGL = getChildAt(0);
-            View viewTouchpad = getChildAt(1);
-            removeAllViews();
-            addView(viewGL);
-            addView(viewTouchpad);
-        } else {
-            removeAllViews();
-        }
+        //if (getChildAt(0) instanceof MinecraftGLView) {
+        //    View viewGL = getChildAt(0);
+        //    View viewTouchpad = getChildAt(1);
+        //    removeAllViews();
+        //    addView(viewGL);
+        //    addView(viewTouchpad);
+        //} else {
+            removeAllButtons();
+        //}
         if (mLayout != null) {
             mLayout.mControlDataList = null;
             mLayout = null;
@@ -94,7 +97,21 @@ public class ControlLayout extends FrameLayout
 
 		setModified(true);
 	}
-
+    private void removeAllButtons() {
+		List<View> viewList = new ArrayList<>();
+		for(int i = 0; i < getChildCount(); i++) {
+			viewList.add(getChildAt(i));
+		}
+		for(View v : viewList) {
+			if(v instanceof ControlButton) {
+				removeView(v);
+			}
+		}
+		viewList = null;
+		System.gc();
+		//i wanna be sure that all the removed Views will be removed after a reload
+		//because if frames will slowly go down after many control changes it will be warm and bad
+	}
 	public void removeControlButton(ControlButton controlButton) {
 		mLayout.mControlDataList.remove(controlButton.getProperties());
 		controlButton.setVisibility(View.GONE);

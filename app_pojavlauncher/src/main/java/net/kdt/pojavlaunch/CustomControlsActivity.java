@@ -30,7 +30,7 @@ public class CustomControlsActivity extends BaseActivity
 
 	public boolean isModified = false;
 	public boolean isFromMainActivity = false;
-	private String selectedName = "new_control";
+	private static String selectedName = "new_control";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +57,16 @@ public class CustomControlsActivity extends BaseActivity
 				public boolean onNavigationItemSelected(MenuItem menuItem) {
 					switch (menuItem.getItemId()) {
 						case R.id.menu_ctrl_load:
-							actionLoad();
+							load(ctrlLayout);
 							break;
 						case R.id.menu_ctrl_add:
 							ctrlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
 							break;
 						case R.id.menu_ctrl_selectdefault:
-							dialogSelectDefaultCtrl();
+							dialogSelectDefaultCtrl(ctrlLayout);
 							break;
 						case R.id.menu_ctrl_save:
-							save(false);
+							save(false,ctrlLayout);
 							break;
 					}
 					//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
@@ -79,7 +79,7 @@ public class CustomControlsActivity extends BaseActivity
 		ctrlLayout.setActivity(this);
 		ctrlLayout.setModifiable(true);
 
-		loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+		loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH,ctrlLayout);
 	}
 
 	@Override
@@ -90,22 +90,22 @@ public class CustomControlsActivity extends BaseActivity
 			return;
 		}
 
-		save(true);
+		save(true,ctrlLayout);
 	}
 
-	private void setDefaultControlJson(String path) {
+	private static void setDefaultControlJson(String path,ControlLayout ctrlLayout) {
 		try {
 			// Load before save to make sure control is not error
 			ctrlLayout.loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(path), CustomControls.class));
 			LauncherPreferences.DEFAULT_PREF.edit().putString("defaultCtrl", path).commit();
 			LauncherPreferences.PREF_DEFAULTCTRL_PATH = path;
 		} catch (Throwable th) {
-			Tools.showError(this, th);
+			Tools.showError(ctrlLayout.getContext(), th);
 		}
 	}
     
-	private void dialogSelectDefaultCtrl() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	public static void dialogSelectDefaultCtrl(final ControlLayout layout) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(layout.getContext());
 		builder.setTitle(R.string.customctrl_selectdefault);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
@@ -116,7 +116,7 @@ public class CustomControlsActivity extends BaseActivity
 
 				@Override
 				public void onFileSelected(File file, String path) {
-					setDefaultControlJson(path);
+					setDefaultControlJson(path,layout);
 					dialog.dismiss();
 				}
 			});
@@ -124,19 +124,20 @@ public class CustomControlsActivity extends BaseActivity
 		dialog.show();
 	}
 
-	private String doSaveCtrl(String name) throws Exception {
+	private static String doSaveCtrl(String name, final ControlLayout layout) throws Exception {
 		String jsonPath = Tools.CTRLMAP_PATH + "/" + name + ".json";
-		ctrlLayout.saveLayout(jsonPath);
+		layout.saveLayout(jsonPath);
 
 		return jsonPath;
 	}
 
-	private void save(final boolean exit) {
-		final EditText edit = new EditText(this);
+	public static void save(final boolean exit, final ControlLayout layout) {
+		final Context ctx = layout.getContext();
+		final EditText edit = new EditText(ctx);
 		edit.setSingleLine();
 		edit.setText(selectedName);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(R.string.global_save);
 		builder.setView(edit);
 		builder.setPositiveButton(android.R.string.ok, null);
@@ -145,8 +146,14 @@ public class CustomControlsActivity extends BaseActivity
 			builder.setNeutralButton(R.string.mcn_exit_call, new AlertDialog.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface p1, int p2) {
-					    setResult(Activity.RESULT_OK, new Intent());
-						CustomControlsActivity.super.onBackPressed();
+						layout.setModifiable(false);
+						if(ctx instanceof MainActivity) {
+							((MainActivity) ctx).leaveCustomControls();
+						}else{
+							((Activity)ctx).onBackPressed();
+						}
+		//			    setResult(Activity.RESULT_OK, new Intent());
+		//				CustomControlsActivity.super.onBackPressed();
 					}
 				});
 		}
@@ -162,19 +169,19 @@ public class CustomControlsActivity extends BaseActivity
 							@Override
 							public void onClick(View view) {
 								if (edit.getText().toString().isEmpty()) {
-									edit.setError(getResources().getString(R.string.global_error_field_empty));
+									edit.setError(ctx.getResources().getString(R.string.global_error_field_empty));
 								} else {
 									try {
-										String jsonPath = doSaveCtrl(edit.getText().toString());
+										String jsonPath = doSaveCtrl(edit.getText().toString(),layout);
 
-										Toast.makeText(CustomControlsActivity.this, getString(R.string.global_save) + ": " + jsonPath, Toast.LENGTH_SHORT).show();
+										Toast.makeText(ctx, ctx.getString(R.string.global_save) + ": " + jsonPath, Toast.LENGTH_SHORT).show();
 
 										dialog.dismiss();
 										if (exit) {
-											CustomControlsActivity.super.onBackPressed();
+											//CustomControlsActivity.super.onBackPressed();
 										}
 									} catch (Throwable th) {
-										Tools.showError(CustomControlsActivity.this, th, exit);
+										Tools.showError(ctx, th, exit);
 									}
 								}
 							}
@@ -185,8 +192,8 @@ public class CustomControlsActivity extends BaseActivity
 
 	}
 
-	private void actionLoad() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	public static void load(final ControlLayout layout) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(layout.getContext());
 		builder.setTitle(R.string.global_load);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
@@ -197,7 +204,7 @@ public class CustomControlsActivity extends BaseActivity
 
 				@Override
 				public void onFileSelected(File file, String path) {
-					loadControl(path);
+					loadControl(path,layout);
 					dialog.dismiss();
 				}
 			});
@@ -205,15 +212,14 @@ public class CustomControlsActivity extends BaseActivity
 		dialog.show();
 	}
 
-	private void loadControl(String path) {
+	private static void loadControl(String path,ControlLayout layout) {
 		try {
-			ctrlLayout.loadLayout(path);
-
+			layout.loadLayout(path);
 			selectedName = new File(path).getName();
 			// Remove `.json`
 			selectedName = selectedName.substring(0, selectedName.length() - 5);
 		} catch (Exception e) {
-			Tools.showError(CustomControlsActivity.this, e);
+			Tools.showError(layout.getContext(), e);
 		}
 	}
 }
