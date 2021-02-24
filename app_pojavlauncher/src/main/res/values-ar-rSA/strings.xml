@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">تشغيل ماين Minecraft: Java Edition على جهازك!</string>
+    <string name="app_motd">تَشْغِيلُ Minecraft: Java Edition عَلَى جِهَازِكَ!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -68,7 +68,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتقليل دقة اللعبة. 100% دقة كاملة</string>
     <string name="mcl_setting_title_longpresstrigger">كم من الوقت سيتم تشغيله بعد الضغط المطول</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغيير وقت التشغيل للضغط المطول في كتلة التحطيم وإسقاط الموارد.</string>
-    <string name="mcl_setting_title_backtorightmouse">التعامل مع زر الرجوع كزر الماوس الأيمن</string>
+    <string name="mcl_setting_title_backtorightmouse">التعامل مع زر الرجوع كزر الفأرة اليمنى</string>
     <string name="mcl_setting_subtitle_backtorightmouse">بعض الأجهزة تتعامل مع زر الفأرة الخارجية اليمنى كزر للعودة. إذا كنت تستخدم الماوس الخارجي، يجب عليك تمكين هذا.</string>
     <string name="mcl_setting_title_flat_button_style">نمط زر مسطح</string>
     <string name="mcl_setting_subtitle_flat_button_style">قم بتمكين هذا لتغيير نمط زر التحكم إلى مسطح.</string>
@@ -178,4 +178,5 @@
     <string name="dl_library_sha_pass">المكتبة %s جيدة وقابلة للاستخدام</string>
     <string name="mcl_disable_gestures">تعطيل الإيماءات</string>
     <string name="mcl_disable_gestures_subtitle">تعطيل الإيماءات، مثل تثبيت الضغط لكسر بلوكة، والنقر لوضع يلوكة.</string>
+    <string name="mcl_setting_title_mousespeed">سرعة الفأرة</string>
 </resources>
