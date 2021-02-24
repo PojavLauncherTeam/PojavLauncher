@@ -69,6 +69,7 @@ public class BaseMainActivity extends LoggableActivity {
     public boolean hiddenTextIgnoreUpdate = true;
     public String hiddenTextContents = initText;
     
+    private boolean isVirtualMouseEnabled;
     private LinearLayout touchPad;
     private ImageView mousePointer;
     //private EditText hiddenEditor;
@@ -239,14 +240,12 @@ public class BaseMainActivity extends LoggableActivity {
                                     @Override
                                     public void run()
                                     {
-                                        if (!CallbackBridge.isGrabbing() && lastEnabled) {
+                                        if (!CallbackBridge.isGrabbing() && isVirtualMouseEnabled) {
                                             touchPad.setVisibility(View.VISIBLE);
                                             placeMouseAt(displayMetrics.widthPixels / 2, displayMetrics.heightPixels / 2);
                                         }
 
-                                        if (!CallbackBridge.isGrabbing()) {
-                                            lastEnabled = touchPad.getVisibility() == View.VISIBLE;
-                                        } else if (touchPad.getVisibility() != View.GONE) {
+                                        if (CallbackBridge.isGrabbing() && touchPad.getVisibility() != View.GONE) {
                                             touchPad.setVisibility(View.GONE);
                                         }
                                         /*
@@ -271,7 +270,7 @@ public class BaseMainActivity extends LoggableActivity {
                             // } catch (Throwable th) {}
                         }
                     }
-                }).start();
+                }, "VirtualMouseGrabThread").start();
 
 
             if (isAndroid8OrHigher()) {
@@ -1066,9 +1065,9 @@ public class BaseMainActivity extends LoggableActivity {
     public void toggleMouse(View view) {
         if (CallbackBridge.isGrabbing()) return;
 
-        boolean isVis = touchPad.getVisibility() == View.VISIBLE;
-        touchPad.setVisibility(isVis ? View.GONE : View.VISIBLE);
-        ((Button) view).setText(isVis ? R.string.control_mouseoff: R.string.control_mouseon);
+        isVirtualMouseEnabled = !isVirtualMouseEnabled;
+        touchPad.setVisibility(isVirtualMouseEnabled ? View.VISIBLE : View.GONE);
+        ((Button) view).setText(isVirtualMouseEnabled ? R.string.control_mouseon: R.string.control_mouseoff);
     }
 
     public static void dialogForceClose(Context ctx) {
