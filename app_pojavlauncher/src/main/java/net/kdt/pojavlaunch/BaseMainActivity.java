@@ -1001,6 +1001,7 @@ public class BaseMainActivity extends LoggableActivity {
     public void leaveCustomControls() {
         if(this instanceof MainActivity) {
             try {
+                ((MainActivity) this).mControlLayout.hideAllHandleViews();
                 ((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
                 ((MainActivity) this).mControlLayout.setModifiable(false);
                 System.gc();
