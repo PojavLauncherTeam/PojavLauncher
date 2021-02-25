@@ -181,4 +181,5 @@
     <string name="mcl_setting_title_mousespeed">Viteza mouse-ului</string>
     <string name="mcl_setting_subtitle_mousespeed">Schimbă viteza mouse-ului de software</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Rotund</string>
 </resources>
