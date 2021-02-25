@@ -1000,7 +1000,15 @@ public class BaseMainActivity extends LoggableActivity {
     }
     public void leaveCustomControls() {
         if(this instanceof MainActivity) {
-            ((MainActivity) this).mControlLayout.setModifiable(false);
+            try {
+                ((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
+                ((MainActivity) this).mControlLayout.setModifiable(false);
+                System.gc();
+                ((MainActivity) this).mControlLayout.loadLayout(LauncherPreferences.DEFAULT_PREF.getString("defaultCtrl",Tools.CTRLDEF_FILE));
+            } catch (IOException e) {
+                Tools.showError(this,e);
+            }
+            //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
         }
         navDrawer.getMenu().clear();
         navDrawer.inflateMenu(R.menu.menu_runopt);
