@@ -178,7 +178,11 @@ public class CustomControlsActivity extends BaseActivity
 
 										dialog.dismiss();
 										if (exit) {
-											((MainActivity) ctx).leaveCustomControls();
+											if(ctx instanceof MainActivity) {
+												((MainActivity) ctx).leaveCustomControls();
+											}else{
+												((Activity)ctx).onBackPressed();
+											}
 											//CustomControlsActivity.super.onBackPressed();
 										}
 									} catch (Throwable th) {
