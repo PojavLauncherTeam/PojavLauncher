@@ -184,4 +184,8 @@
     <string name="dl_library_sha_pass">Knihovna %s je v pořádku a použitelná</string>
     <string name="mcl_disable_gestures">Vypnout gesta</string>
     <string name="mcl_disable_gestures_subtitle">Zakáže gesta, například podržením pro rozbití bloku a klepnutím položíte blok.</string>
+    <string name="mcl_setting_title_mousespeed">Rychlost myši</string>
+    <string name="mcl_setting_subtitle_mousespeed">Změnit rychlost softwarové myši</string>
+    <string name="customctrl_passthru">Převod myši</string>
+    <string name="customctrl_rounded">Zaoblené</string>
 </resources>
