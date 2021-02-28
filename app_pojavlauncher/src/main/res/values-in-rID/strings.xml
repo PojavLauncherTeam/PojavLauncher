@@ -184,4 +184,8 @@
     <string name="dl_library_sha_pass">Library %s baik-baik saja dan dapat digunakan</string>
     <string name="mcl_disable_gestures">Matikan gestures</string>
     <string name="mcl_disable_gestures_subtitle">Mematikan gestures, seperti pencet lama untuk menghancurkan block, dan pencet untuk menempatkan block.</string>
+    <string name="mcl_setting_title_mousespeed">Kecepatan Mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Mengubah kecepatan perangkat lunak mouse</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Melengkung</string>
 </resources>
