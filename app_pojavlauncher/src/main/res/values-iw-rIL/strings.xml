@@ -15,6 +15,7 @@
     <!-- MCLauncherActivity: Tabs -->
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_setting_title_backtorightmouse">תתייחס ל\"אחורה\" ככפתור ימני במקלדת</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
