@@ -186,4 +186,5 @@
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши (в%)</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет скорость виртуальной мыши</string>
+    <string name="customctrl_rounded">Скругленный</string>
 </resources>
