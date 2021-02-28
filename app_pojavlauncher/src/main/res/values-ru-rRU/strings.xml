@@ -177,14 +177,14 @@
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
-    <string name="mcl_setting_check_libraries">Проверка библиотеки после загрузки</string>
-    <string name="mcl_setting_check_libraries_subtitle">Эта опция принуждает лаунчер проверять хеш библиотеки, если он доступен. Предотвращает прерывание загрузки.</string>
-    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет скачена повторно</string>
+    <string name="mcl_setting_check_libraries">Проверка библиотек после загрузки</string>
+    <string name="mcl_setting_check_libraries_subtitle">Эта опция принуждает лаунчер проверять хеш библиотеки, если он доступен. Предотвращает использование поврежденных библиотек.</string>
+    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет загружена повторно</string>
     <string name="dl_library_sha_unknown">Библиотека %s не может быть проверена; придется предположить, что с ней все хорошо</string>
-    <string name="dl_library_sha_pass">Библиотека %s преверена и может быть использована</string>
+    <string name="dl_library_sha_pass">Библиотека %s проверена и может быть использована</string>
     <string name="mcl_disable_gestures">Отключение жестов</string>
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
-    <string name="mcl_setting_title_mousespeed">Чувствительность мыши (в%)</string>
-    <string name="mcl_setting_subtitle_mousespeed">Изменяет скорость виртуальной мыши</string>
-    <string name="customctrl_rounded">Скругленный</string>
+    <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
+    <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
+    <string name="customctrl_rounded">Скругленные</string>
 </resources>
