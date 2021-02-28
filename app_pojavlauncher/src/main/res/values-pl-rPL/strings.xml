@@ -188,4 +188,5 @@
     <string name="mcl_setting_title_mousespeed">Prędkość myszki (%)</string>
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość myszy oprogramowania</string>
     <string name="customctrl_passthru">Myszka przelotka</string>
+    <string name="customctrl_rounded">Zaokrąglone</string>
 </resources>
