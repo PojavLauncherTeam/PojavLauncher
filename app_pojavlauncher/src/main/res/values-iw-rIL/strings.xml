@@ -4,19 +4,48 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_microsoft">התחברות דרך מייקרוסופט</string>
+    <string name="login_title_no_saved_account">לא נמצאו חשבונות!</string>
+    <string name="login_dialog_no_saved_account">אין לך אף חשבון שמור.\nהשתמש באפשרות &lt;b&gt; \"זכור אותי\" &lt;b&gt; כדי לשמור את החשבון לפני הכניסה הראשונה.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"החלק מצד ימין לשמאל כדי לפתוח תפריט \n החזק כפתור כדי לעצב: לערוך, לשנות גודל, או למחוק."</string>
     <!-- Warnings -->
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">התקן \"Java Runtime \" %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">בחר את אשף התקנת ה-mod שלך</string>
     <!-- Error messages -->
     <!-- Toast messages -->
+    <string name="toast_uninstalljre_done">הסרת ההתקנה של \"Java Runtime\" בוצעה</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">חדשות</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">מחובר</string>
+    <string name="mcl_account_offline">לא מקוון</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading_progress">"מתקין %s (%.2f MB/ %.2f MB)"</string>
+    <string name="mcl_option_modinstall">הפעל אשף התקנה ל-mod (למשל: Forge, LabyMod, Fabric, וכדומה)</string>
+    <string name="mcl_option_modinstallwitharg">הפעל אשף התקנה ל-mod (עם הגדרות הניתנות לשינוי)</string>
+    <string name="mcl_setting_title_uninstalljre">הסר התקנה Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייתן לך להסיר את ההתקנה של Java Runtime</string>
+    <string name="mcl_setting_title_hide_sidebar">הסתר סרגל צד</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">אנשים נוסטלגיים יעדיפו את ממשק המשתמש v1 יאהבו את זה. מעניק לך חווית מסך מלא גדולה יותר.</string>
+    <string name="mcl_setting_title_ignore_notch">אל תשים לב לפגם</string>
+    <string name="mcl_setting_subtitle_ignore_notch">אל תשים לב לפגם, ותגדיל את המסך מתחת אליו.\n מעניק חוויה סוחפת.</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">עוזר לשנות את תצורת המשחק. 100% הינה תצורה מלאה.</string>
     <string name="mcl_setting_title_backtorightmouse">תתייחס ל\"אחורה\" ככפתור ימני במקלדת</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, נדרש להפעיל זאת.</string>
+    <string name="mcl_setting_title_flat_button_style">סגנון כפתור מחוץ</string>
+    <string name="mcl_setting_subtitle_flat_button_style">הפעל את זה כדי לשלוט בסגנון כפתורי השליטה למחוצים.</string>
+    <string name="mcl_setting_title_buttonscale">תצורת כפתורי השליטה</string>
+    <string name="mcl_setting_subtitle_mousescale">שנה גודל של העכבר הווירטואלי.</string>
+    <string name="mcl_setting_title_javaargs">JVM פרטי הפעלה</string>
+    <string name="mcl_setting_subtitle_javaargs">זהירות! זה עלול לגרום למשחק לקרוס עם משתנה ללא ידע.</string>
     <!-- Global strings -->
+    <string name="global_unpacking">פותח %s</string>
+    <string name="global_waiting">המתן</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -35,10 +64,44 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">יישומון/המשחק היה קיים גם ללא קוד %d</string>
+    <string name="mcn_check_fail_lwjgl">LWLJGL3 לא הותקן!</string>
+    <string name="mcn_check_fail_incompatiblearch">ארכיטקטורה %1$s לא תומכת ב Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_adebug">ניפוי קלט</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">עורך %s</string>
+    <string name="customctrl_remove">למחוק %s?</string>
+    <string name="customctrl_toggle">ניתן להחלפה</string>
+    <string name="customctrl_size">גודל</string>
+    <string name="customctrl_size_width">עובי</string>
+    <string name="customctrl_size_height">גובה</string>
+    <string name="customctrl_dynamicpos">מקום דינמי</string>
+    <string name="customctrl_dynamicpos_x">דינמי</string>
+    <string name="customctrl_dynamicpos_y">דינמי y</string>
+    <string name="customctrl_transparency_bg">שקיפות רקע</string>
+    <string name="customctrl_keycombine">צירוף מקשים</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="main_welcome">ברוך בואך, %s</string>
+    <string name="main_no_news_feed">לא הצלחנו לקבל עדכוני חדשות!</string>
+    <string name="auto_ram_subtitle">מפעיל התאמת זיכרון אוטומטי</string>
+    <string name="auto_ram_title">זיכרון אוטומטי</string>
+    <string name="autoram_info_msg">זיכרון הוגדר ל %d MB</string>
+    <string name="mcl_setting_check_libraries">בודק ספריות לאחר ההורדה</string>
+    <string name="mcl_setting_check_libraries_subtitle">האפשרות הזו מכריחה את המשגר לבדוק את הספרייה אם היא לא קיימת, מונע הורדות שבורות.</string>
+    <string name="dl_library_sha_fail">הספרייה %s שבורה, ותתותקן מחדש</string>
+    <string name="dl_library_sha_unknown">ספרייה %s לא יכולה להבדק, אנו מניחים שהיא בסדר.</string>
+    <string name="dl_library_sha_pass">הספרייה %s תקינה, ואפשר להשתמש בה.</string>
+    <string name="mcl_disable_gestures">בטל מחוות</string>
+    <string name="mcl_disable_gestures_subtitle">בטל מחוות, למשל: החזק כדי לשבור בלוק, וגע כדי לבנות בלוק.</string>
+    <string name="mcl_setting_title_mousespeed">מהירות העכבר</string>
+    <string name="mcl_setting_subtitle_mousespeed">משנה את המהירות של תוכנת העכבר</string>
+    <string name="customctrl_passthru">עכבר עובר דרך</string>
+    <string name="customctrl_rounded">מעוגל</string>
 </resources>
