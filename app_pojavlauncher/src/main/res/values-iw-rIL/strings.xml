@@ -66,14 +66,30 @@
     <string name="mcl_setting_subtitle_ignore_notch">אל תשים לב לפגם, ותגדיל את המסך מתחת אליו.\n מעניק חוויה סוחפת.</string>
     <string name="mcl_setting_subtitle_resolution_scaler">עוזר לשנות את תצורת המשחק. 100% הינה תצורה מלאה.</string>
     <string name="mcl_setting_title_longpresstrigger">אחרי כמה זמן לחיצה ארוכה תתחיל</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">שנה זמן לחיצה ארוכה לשבירת בלוקים ולזריקת חפצים.</string>
     <string name="mcl_setting_title_backtorightmouse">תתייחס ל\"אחורה\" ככפתור ימני במקלדת</string>
     <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, נדרש להפעיל זאת.</string>
     <string name="mcl_setting_title_buttonscale">תצורת כפתורי השליטה</string>
     <string name="mcl_setting_subtitle_mousescale">שנה גודל של העכבר הווירטואלי.</string>
     <string name="mcl_setting_title_javaargs">JVM פרטי הפעלה</string>
     <string name="mcl_setting_subtitle_javaargs">זהירות! זה עלול לגרום למשחק לקרוס עם משתנה ללא ידע.</string>
+    <string name="mcl_setting_category_general">הגדרות כלליות</string>
+    <string name="mcl_setting_category_veroption">גרסא תופיע ברשימת הגרסאות</string>
+    <string name="mcl_setting_veroption_release">מהדורה</string>
+    <string name="mcl_setting_veroption_snapshot">לכידה</string>
+    <string name="mcl_setting_veroption_oldalpha">אלפא: גרסא ישנה</string>
+    <string name="mcl_setting_veroption_oldbeta">בטא: גרסא ישנה</string>
+    <string name="mcl_version_clone">שכפול</string>
     <!-- Global strings -->
+    <string name="global_edit">ערוך</string>
+    <string name="global_error">שגיאה</string>
+    <string name="global_load">טעינה</string>
+    <string name="global_name">שם</string>
+    <string name="global_remove">הסר</string>
+    <string name="global_restart">אתחול</string>
+    <string name="global_save">שמור</string>
     <string name="global_unpacking">פותח %s</string>
+    <string name="global_error_field_empty">שדה זה אינו יכול להיות ריק</string>
     <string name="global_waiting">המתן</string>
     <!--
     <string name="mcl_about">
@@ -100,9 +116,14 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">יישומון/המשחק היה קיים גם ללא קוד %d</string>
     <string name="mcn_exit_call">צא</string>
+    <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_lwjgl">LWLJGL3 לא הותקן!</string>
     <string name="mcn_check_fail_incompatiblearch">ארכיטקטורה %1$s לא תומכת ב Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">ממשק משתמש</string>
+    <string name="control_keyboard">מקלדת</string>
+    <string name="control_chat">צ\'אט</string>
+    <string name="control_debug">נפה באגים</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_inventory">Inv</string>
