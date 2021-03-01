@@ -72,7 +72,7 @@ public class MinecraftAccount
                 acc.msaRefreshToken = "0";
             }
             if (acc.skinFaceBase64 == null) {
-                acc.updateSkinFace("MHF_Steve");
+                // acc.updateSkinFace("MHF_Steve");
             }
             return acc;
         } catch(IOException e) {

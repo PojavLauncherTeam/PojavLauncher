@@ -654,12 +654,13 @@ public class PojavLoginActivity extends BaseActivity
 
             String accNameStr = s.substring(0, s.length() - 5);
             String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
-            byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+            if (skinFaceBase64 != null) {
+                byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
             
-            accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
-                    bitmap),
-                    null, null, null);
+                accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
+                        bitmap), null, null, null);
+            }
             accountName.setText(accNameStr);
 
             accountListLayout.addView(child);
