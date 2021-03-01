@@ -1,9 +1,9 @@
 %s (Minecraft Java Launcher for Android), version %s by Tran Khanh Duy (based on "Boardwalk" app)<br>
 
 * License:<br>
- • This application is licensed under <a href="https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE">GNU GPLv3</a>.<br>
+ • This application is licensed under <a href="https://github.com/PojavLauncherTeam/PojavLauncher/blob/master/LICENSE">GNU GPLv3</a>.<br>
  
-* Third party components and their licenses:<br>
+* Credits / Third party components and their licenses:<br>
  • Apache Commons Compress (unknown or Apache License 2.0).<br>
  • exp4j: <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.<br>
  • GL4ES: <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a>.<br>
@@ -11,9 +11,12 @@
  • OpenJDK: <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2 License</a>.<br>
  • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's License</a>.<br><br>
  • pro-gradle: <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a>.<br>
+ • <a href="https://github.com/PojavLauncherTeam/PojavLauncher#credits--third-party-components-and-their-licenses">More (check at GitHub)</a>.
+ • <a href="https://raw.githubusercontent.com/PojavLauncherTeam/PojavLauncher/v3_openjdk/GPLAY_PRIVACY_POLICY">Privacy policy</a>.
+ • Thanks to <a href="https://mc-heads.net">MCHeads</a> for providing Minecraft avatars.
  
 * Notes:<br>
- - This app is under development and will not be stable.<br>
+ - This app is under development and might not be stable.<br>
  - This app is not affiliated with Minecraft, Mojang or Microsoft.<br><br>
  
 * Translators can be found at <a href="https://crowdin.com/project/pojavlauncher">Crowdin</a>
