@@ -62,7 +62,7 @@
     <string name="mcl_setting_subtitle_freeform">Start Minecraft in zwevend venster. Vereist Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Zijbalk verbergen</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgische mensen die liever de oude v1 UI hebben. Geeft je een meer ervaring met volledig scherm.</string>
-    <string name="mcl_setting_title_ignore_notch">Notch negeren</string>
+    <string name="mcl_setting_title_ignore_notch">Negeer notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Negeer de notch en verbreed het scherm.\ngeeft je een meer meeslepende ervaring.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolutie Schaaler</string>
     <string name="mcl_setting_subtitle_resolution_scaler">sta toe om de resolutie van het spel te verlagen. 100% is de volledige resolutie</string>
@@ -175,7 +175,7 @@
     <string name="main_nolog">Geen log.</string>
     <string name="main_no_news_feed">Kon nieuwsfeed niet ophalen!</string>
     <string name="auto_ram_subtitle">Schakel in de automatische RAM aanpasser in</string>
-    <string name="auto_ram_title">Auto RAM</string>
+    <string name="auto_ram_title">Automatische RAM</string>
     <string name="autoram_info_msg">Geheugen ingesteld op %d MB</string>
     <string name="mcl_setting_check_libraries">Bibliotheken controleren na het downloaden</string>
     <string name="mcl_setting_check_libraries_subtitle">Deze optie zorgt ervoor dat launcher de bibliotheek hash controleert als deze beschikbaar is. Voorkomt defecte downloads.</string>
