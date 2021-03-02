@@ -180,4 +180,5 @@
     <string name="mcl_disable_gestures_subtitle">تعطيل الإيماءات، مثل تثبيت الضغط لكسر بلوكة، والنقر لوضع يلوكة.</string>
     <string name="mcl_setting_title_mousespeed">سرعة الفأرة</string>
     <string name="mcl_setting_subtitle_mousespeed">يغير سرعة الفأرة البرمجية</string>
+    <string name="customctrl_rounded">مدوّر</string>
 </resources>
