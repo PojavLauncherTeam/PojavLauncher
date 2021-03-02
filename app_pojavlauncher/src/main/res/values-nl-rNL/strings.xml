@@ -184,4 +184,8 @@
     <string name="dl_library_sha_pass">Bibliotheek %s is prima en bruikbaar</string>
     <string name="mcl_disable_gestures">Gebaren uitschakelen</string>
     <string name="mcl_disable_gestures_subtitle">Schakelt gebaren uit, zoals vasthouden om blok te breken en tikken om een blok te plaatsen.</string>
+    <string name="mcl_setting_title_mousespeed">Muis Snelheid</string>
+    <string name="mcl_setting_subtitle_mousespeed">Veranderd de snelheid van de virtuele muis</string>
+    <string name="customctrl_passthru">Muis pass-thru</string>
+    <string name="customctrl_rounded">Afgerond</string>
 </resources>
