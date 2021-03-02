@@ -64,6 +64,7 @@
     <string name="mcl_setting_subtitle_hide_sidebar">אנשים נוסטלגיים יעדיפו את ממשק המשתמש v1 יאהבו את זה. מעניק לך חווית מסך מלא גדולה יותר.</string>
     <string name="mcl_setting_title_ignore_notch">אל תשים לב לפגם</string>
     <string name="mcl_setting_subtitle_ignore_notch">אל תשים לב לפגם, ותגדיל את המסך מתחת אליו.\n מעניק חוויה סוחפת.</string>
+    <string name="mcl_setting_title_resolution_scaler">שינוי גודל ואיכות תצוגה</string>
     <string name="mcl_setting_subtitle_resolution_scaler">עוזר לשנות את תצורת המשחק. 100% הינה תצורה מלאה.</string>
     <string name="mcl_setting_title_longpresstrigger">אחרי כמה זמן לחיצה ארוכה תתחיל</string>
     <string name="mcl_setting_subtitle_longpresstrigger">שנה זמן לחיצה ארוכה לשבירת בלוקים ולזריקת חפצים.</string>
