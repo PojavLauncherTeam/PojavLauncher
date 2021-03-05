@@ -176,6 +176,12 @@
     <string name="auto_ram_title">RAM tự động</string>
     <string name="autoram_info_msg">Đặt bộ nhớ %d MB</string>
     <string name="mcl_setting_check_libraries">Kiểm tra libraries sau khi tải</string>
+    <string name="mcl_setting_check_libraries_subtitle">Cài đặt này buộc trình khởi chạy kiểm tra hàm băm của library nếu nó có sẵn. Ngăn chặn tải xuống bị hỏng.</string>
+    <string name="dl_library_sha_fail">Library %s bị hỏng và sẽ tải lại</string>
+    <string name="dl_library_sha_unknown">Library %s không thể kiểm tra, cho rằng nó tốt</string>
+    <string name="dl_library_sha_pass">Library %s tốt và có thể sử dụng được</string>
+    <string name="mcl_disable_gestures">Tắt cử chỉ</string>
+    <string name="mcl_disable_gestures_subtitle">Tắt cử chỉ, ví dụ như giữ để phá block, và tap để đặt block.</string>
     <string name="mcl_setting_title_mousespeed">Tốc độ chuột</string>
     <string name="mcl_setting_subtitle_mousespeed">Chỉnh tốc độ của phầm mềm chuột</string>
     <string name="customctrl_passthru">Di chuyển chuột</string>
