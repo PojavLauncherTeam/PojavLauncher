@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Cho phép bạn giảm độ phân giải của game. 100% là max độ phân giải</string>
     <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn dài</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong khối phá hủy và thả vật phẩm.</string>
+    <string name="mcl_setting_title_flat_button_style">Kiểu nút phẳng</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Bật cái này để đổi sang kiểu nút phẳng.</string>
     <string name="mcl_setting_title_buttonscale">Độ rộng nút điều khiển</string>
     <string name="mcl_setting_subtitle_buttonscale">Tăng độ rộng nếu nút quá nhỏ.</string>
     <string name="mcl_setting_title_mousescale">Độ rộng chuột</string>
@@ -173,4 +175,9 @@
     <string name="auto_ram_subtitle">Bật tự động điều chỉnh RAM</string>
     <string name="auto_ram_title">RAM tự động</string>
     <string name="autoram_info_msg">Đặt bộ nhớ %d MB</string>
+    <string name="mcl_setting_check_libraries">Kiểm tra libraries sau khi tải</string>
+    <string name="mcl_setting_title_mousespeed">Tốc độ chuột</string>
+    <string name="mcl_setting_subtitle_mousespeed">Chỉnh tốc độ của phầm mềm chuột</string>
+    <string name="customctrl_passthru">Di chuyển chuột</string>
+    <string name="customctrl_rounded">Làm tròn</string>
 </resources>
