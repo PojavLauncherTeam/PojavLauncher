@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
-    <string name="login_title_no_saved_account">konta nie znalezione!</string>
+    <string name="login_title_no_saved_account">Konta nie znalezione!</string>
     <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"pozostań zalogowanym\"</b> aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Przesuń od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.
@@ -24,7 +24,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Zainstaluj Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Zainstaluj środowisko uruchomieniowe Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Wybierz instalator modów</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
@@ -34,7 +34,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Wymagane jest uprawnienie do odczytu / zapisu w pamięci!</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
-    <string name="toast_uninstalljre_done">Zakończono odinstalowywanie Java Runtime</string>
+    <string name="toast_uninstalljre_done">Zakończono odinstalowywanie środowiska uruchomieniowego Java</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -57,14 +57,14 @@
     <string name="mcl_option_customcontrol">Niestandardowe kontrole</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">O aplikacji</string>
-    <string name="mcl_setting_title_uninstalljre">Odinstaluj Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować Java Runtime</string>
+    <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko uruchomieniowe Java</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować środowisko uruchomieniowe Java</string>
     <string name="mcl_setting_title_freeform">Uruchom Minecraft w trybie swobodnym</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Ludzie Nostalgic preferujący stary interfejs v1 może to podobać. Daje ci więcej wrażeń w trybie pełnoekranowym.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignoruj notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignoruj notch i rozszerza pod nim ekran.\nDaje Ci więcej wrażeń.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgicznym osobom, którzy preferowali stare UI v1, może się to spodobać. Daje ci lepsze pełnoekranowe doświadczenie.</string>
+    <string name="mcl_setting_title_ignore_notch">Zignoruj wycięcie</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wycięcie i rozszerza pod nim ekran.\nDaje Ci bardziej wciągającą rozgrywke.</string>
     <string name="mcl_setting_title_resolution_scaler">Skala rozdzielczości</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Pozwala zmniejszyć rozdzielczość gry. 100% to pełna rozdzielczość</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
@@ -77,7 +77,7 @@
     <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
     <string name="mcl_setting_subtitle_mousescale">Zmień rozmiar myszy wirtualnej.</string>
-    <string name="mcl_setting_title_javaargs">JVM Uruchom argumenty</string>
+    <string name="mcl_setting_title_javaargs">Argumenty uruchomiające JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostanie ona zmodyfikowana bez wiedzy.</string>
     <string name="mcl_setting_category_general">Ustawienia główne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
@@ -120,7 +120,7 @@
     <string name="mcn_exit_call">Wyjście</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niezgodna z Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niekompatybilna ze środowiskiem uruchomieniowym Java %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
