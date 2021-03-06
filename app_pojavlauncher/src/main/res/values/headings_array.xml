@@ -11,4 +11,9 @@
         <item name="2">@string/mcl_setting_renderer_gles2</item>
         <item name="3">@string/mcl_setting_renderer_gles3</item>
     </string-array>
+    
+    <string-array name="renderer_values">
+        <item>opengles2</item>
+        <item>opengles3</item>
+    </string-array>
 </resources>

@@ -15,7 +15,8 @@
             android:title="@string/mcl_setting_category_renderer"
             android:key="renderer"
             android:defaultValue="2"
-            android:entries="@array/renderer" />
+            android:entries="@array/renderer"
+            android:entryValues="renderer_values"/>
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="timeLongPressTrigger"
