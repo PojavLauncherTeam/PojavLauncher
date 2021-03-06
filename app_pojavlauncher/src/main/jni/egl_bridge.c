@@ -198,7 +198,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
     const EGLint ctx_attribs[] = {
-        EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES", "2")),
+        EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
         EGL_NONE
     };
     EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
