@@ -203,7 +203,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong
     };
     EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
 
-    if (potatoBridge.eglContext == NULL) potatoBridge.eglContext = ctx;
+    potatoBridge.eglContext = ctx;
     
     printf("EGLBridge: Created CTX pointer = %p\n",ctx);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
