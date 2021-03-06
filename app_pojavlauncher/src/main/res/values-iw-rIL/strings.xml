@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">זהירות! זה עלול לגרום למשחק לקרוס עם משתנה ללא ידע.</string>
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות מידה ואיכות</string>
+    <string name="mcl_setting_category_renderer">מעבד</string>
     <string name="mcl_setting_category_veroption">גרסא תופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">מהדורה</string>
     <string name="mcl_setting_veroption_snapshot">לכידה</string>
