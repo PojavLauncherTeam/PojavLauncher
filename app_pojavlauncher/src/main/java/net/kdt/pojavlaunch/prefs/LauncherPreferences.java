@@ -6,7 +6,7 @@ import net.kdt.pojavlaunch.*;
 public class LauncherPreferences
 {
 	public static SharedPreferences DEFAULT_PREF;
-    public static int PREF_RENDERER = 2;
+    public static String PREF_RENDERER = "2";
 	public static boolean PREF_VERTYPE_RELEASE = true;
 	public static boolean PREF_VERTYPE_SNAPSHOT = false;
 	public static boolean PREF_VERTYPE_OLDALPHA = false;
@@ -29,7 +29,7 @@ public class LauncherPreferences
 	public static boolean PREF_DISABLE_GESTURES = false;
 	public static float PREF_MOUSESPEED = 1f;
 	public static void loadPreferences() {
-        PREF_RENDERER = DEFAULT_PREF.getInt("renderer", 2);
+        PREF_RENDERER = DEFAULT_PREF.getString("renderer", "2");
 		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
 		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
 		PREF_MOUSESPEED = ((float)DEFAULT_PREF.getInt("mousespeed",100))/100f;

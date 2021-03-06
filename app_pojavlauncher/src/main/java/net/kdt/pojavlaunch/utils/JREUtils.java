@@ -253,7 +253,7 @@ public class JREUtils
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else {
-                envMap.put("LIBGL_ES", Integer.toString(LauncherPreferences.PREF_RENDERER));
+                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER);
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
