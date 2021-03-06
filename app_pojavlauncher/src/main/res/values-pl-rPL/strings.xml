@@ -43,7 +43,7 @@
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">połączono</string>
+    <string name="mcl_account_connected">Połączono</string>
     <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
@@ -71,8 +71,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
     <string name="mcl_setting_title_backtorightmouse">Traktuj przycisk wstecz jako prawy mysz</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Niektóre urządzenia traktują zewnętrzny prawy przycisk myszy jako przycisk wstecz. Jeśli używasz zewnętrznego myszki, powinieneś to włączyć.</string>
-    <string name="mcl_setting_title_flat_button_style">Użyj stylu przycisku</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Włącz to, aby zmienić styl przycisku kontrolnego na płaskie.</string>
+    <string name="mcl_setting_title_flat_button_style">Styl płaskich przycisków</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Włącz to, aby zmienić styl przycisków kontrolnych na płaskie.</string>
     <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
     <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
