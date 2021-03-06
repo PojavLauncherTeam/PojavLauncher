@@ -6,4 +6,9 @@
         <item>@string/mcl_option_customcontrol</item>
         <item>@string/mcl_option_about</item>
     </string-array>
+    
+    <string-array name="renderer">
+        <item name="2">@string/mcl_setting_renderer_gles2</item>
+        <item name="3">@string/mcl_setting_renderer_gles3</item>
+    </string-array>
 </resources>

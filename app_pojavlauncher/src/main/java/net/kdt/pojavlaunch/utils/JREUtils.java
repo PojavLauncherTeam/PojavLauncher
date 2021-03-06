@@ -249,11 +249,11 @@ public class JREUtils
         if(!envMap.containsKey("LIBGL_ES")) {
             int glesMajor = getDetectedVersion();
             Log.i("glesDetect","GLES version detected: "+glesMajor);
-            if(glesMajor < 2) {
+            if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            }else{
-                envMap.put("LIBGL_ES",""+glesMajor);
+            } else {
+                envMap.put("LIBGL_ES", Integer.toString(LauncherPreferences.PREF_RENDERER));
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {

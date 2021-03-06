@@ -10,6 +10,12 @@
             android:summary="@string/mcl_setting_subtitle_uninstalljre"
             android:title="@string/mcl_setting_title_uninstalljre"
             app2:icon="@drawable/rm_jre" />
+        
+        <androidx.preference.ListPreference
+            android:title="@string/mcl_setting_category_renderer"
+            android:key="renderer"
+            android:defaultValue="2"
+            android:entries="@array/renderer" />
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="timeLongPressTrigger"
