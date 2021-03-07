@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, pokud je upraveno bez znalostí.</string>
     <string name="mcl_setting_category_general">Obecná nastavení</string>
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
+    <string name="mcl_setting_category_renderer">Vykreslovač</string>
     <string name="mcl_setting_category_veroption">Typ verze bude v seznamu verzí</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
