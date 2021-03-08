@@ -44,13 +44,14 @@ public class ControlLayout extends FrameLayout
         if (mModifiable) {
             hideAllHandleViews();
         }
-        //if (getChildAt(0) instanceof MinecraftGLView) {
-        //    View viewGL = getChildAt(0);
-        //    View viewTouchpad = getChildAt(1);
-        //    removeAllViews();
-        //    addView(viewGL);
-        //    addView(viewTouchpad);
-        //} else {
+        /*if (getChildAt(0) instanceof MinecraftGLView) {
+            View viewGL = getChildAt(0);
+            View viewTouchpad = getChildAt(1);
+            removeAllViews();
+            addView(viewGL);
+            addView(viewTouchpad);
+        } else {
+		removeAllViews();*/
             removeAllButtons();
         //}
         if (mLayout != null) {
@@ -99,13 +100,14 @@ public class ControlLayout extends FrameLayout
 	}
     private void removeAllButtons() {
 		List<View> viewList = new ArrayList<>();
+		View v;
 		for(int i = 0; i < getChildCount(); i++) {
-			viewList.add(getChildAt(i));
+			v = getChildAt(i);
+			if(v instanceof ControlButton) viewList.add(v);
 		}
-		for(View v : viewList) {
-			if(v instanceof ControlButton) {
-				removeView(v);
-			}
+		v = null;
+		for(View v2 : viewList) {
+			removeView(v2);
 		}
 		viewList = null;
 		System.gc();
