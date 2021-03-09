@@ -68,8 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Pozwala zmniejszyć rozdzielczość gry. 100% to pełna rozdzielczość</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
-    <string name="mcl_setting_title_backtorightmouse">Traktuj przycisk wstecz jako prawy mysz</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Niektóre urządzenia traktują zewnętrzny prawy przycisk myszy jako przycisk wstecz. Jeśli używasz zewnętrznego myszki, powinieneś to włączyć.</string>
+    <string name="mcl_setting_title_backtorightmouse">Traktuj przycisk wstecz jako prawy przycisk myszy</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Niektóre urządzenia traktują prawy przycisk myszy jako przycisk wstecz. Jeśli używasz zewnętrznej myszki, powinieneś to włączyć.</string>
     <string name="mcl_setting_title_flat_button_style">Styl płaskich przycisków</string>
     <string name="mcl_setting_subtitle_flat_button_style">Włącz to, aby zmienić styl przycisków kontrolnych na płaskie.</string>
     <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
@@ -81,11 +81,11 @@
     <string name="mcl_setting_category_general">Ustawienia główne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_category_veroption">Typ wersji będzie na liście wersji</string>
+    <string name="mcl_setting_category_veroption">Typ wersji jaka będzie na liście wersji</string>
     <string name="mcl_setting_veroption_release">Wydanie</string>
-    <string name="mcl_setting_veroption_snapshot">Migawka</string>
+    <string name="mcl_setting_veroption_snapshot">Wersja eksperymentalna</string>
     <string name="mcl_setting_veroption_oldalpha">Stara alfa</string>
-    <string name="mcl_setting_veroption_oldbeta">Stara wersja beta</string>
+    <string name="mcl_setting_veroption_oldbeta">Stara beta</string>
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
     <string name="global_edit">Edytować</string>
@@ -126,8 +126,8 @@
     <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
     <string name="control_debug">Debug</string>
-    <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_primary">LPM</string>
+    <string name="control_secondary">PPM</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Ekw</string>
     <string name="control_up">▲</string>
@@ -186,7 +186,7 @@
     <string name="mcl_disable_gestures">Wyłącz gesty</string>
     <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak przytrzymaj aby zniszczyć blok i stuknij, aby umieścić blok.</string>
     <string name="mcl_setting_title_mousespeed">Prędkość myszki (%)</string>
-    <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość myszy oprogramowania</string>
+    <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszki</string>
     <string name="customctrl_passthru">Myszka przelotka</string>
     <string name="customctrl_rounded">Zaokrąglone</string>
 </resources>
