@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Android өчен Minecraft: Java Edition)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Minecraft: Java Edition үзегезнең җайланма кушыгыз!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Электрон почтасы яки кулланучы исеме</string>
+    <string name="login_online_password_hint">Серсүз</string>
+    <string name="login_online_login_label">Керергә</string>
     <string name="login_microsoft">Microsoft өчен керергә</string>
     <string name="login_title_no_saved_account">Аккаунт табылмады!</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_no_version">Версиялар юк!</string>
     <!-- Toast messages -->
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Яңалыклар</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_option_about">Лаунчер турында</string>
+    <string name="mcl_setting_veroption_release">Соңгы</string>
+    <string name="mcl_setting_veroption_snapshot">Ярдәмче</string>
+    <string name="mcl_setting_veroption_oldalpha">Иске альфа</string>
+    <string name="mcl_setting_veroption_oldbeta">Иске бета</string>
     <!-- Global strings -->
+    <string name="global_error">Хата</string>
+    <string name="global_load">Йөкләү</string>
+    <string name="global_name">Исем</string>
+    <string name="global_save">Сакларга</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -41,10 +59,28 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Чыгу</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Төймәсар</string>
+    <string name="control_chat">Чат</string>
+    <string name="control_debug">Төзәтү</string>
+    <string name="control_inventory">Инв</string>
+    <string name="control_thirdperson">F5</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Тычкан</string>
     <!-- MainActivity: Menu advanced controls -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_size_height">Биеклек</string>
+    <string name="main_play">Уйнарга</string>
+    <string name="main_welcome">Рәхим итегез, %s</string>
+    <string name="main_version">Версия:</string>
+    <string name="main_nolog">Журнал буш.</string>
+    <string name="vp_latest_snapshot">Соңгы ярдәмче версия</string>
+    <string name="vp_latest_release">Соңгы версия</string>
+    <string name="mcl_profile_editor_edit_text_title">Профиль исеме</string>
+    <string name="global_new">Яңа</string>
 </resources>
