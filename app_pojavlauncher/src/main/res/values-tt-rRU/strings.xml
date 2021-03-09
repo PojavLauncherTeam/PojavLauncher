@@ -4,6 +4,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_microsoft">Microsoft өчен керергә</string>
+    <string name="login_title_no_saved_account">Аккаунт табылмады!</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
