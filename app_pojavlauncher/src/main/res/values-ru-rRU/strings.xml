@@ -11,17 +11,17 @@
     <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_offline_label">Войти как офлайн учетная запись</string>
+    <string name="login_offline_label">Войти как офлайн учётная запись</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_microsoft">Войти через Microsoft</string>
-    <string name="login_select_account">Учетные записи</string>
-    <string name="login_title_no_saved_account">Учетные записи не найдены!</string>
-    <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцию <b>«Запомнить меня»</b>, чтобы сохранить учетную запись при первом входе.</string>
+    <string name="login_select_account">Учётные записи</string>
+    <string name="login_title_no_saved_account">Учётные записи не найдены!</string>
+    <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учётную запись.\nИспользуйте опцию <b>«Запомнить меня»</b>, чтобы сохранить учётную запись при первом входе.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warnings -->
-    <string name="warning_remove_account">Эта учетная запись будет удалена!</string>
+    <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Выберите установщик мода</string>
@@ -190,5 +190,5 @@
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
     <string name="customctrl_passthru">Указатель мышки</string>
-    <string name="customctrl_rounded">Скругленные</string>
+    <string name="customctrl_rounded">Скруглённые</string>
 </resources>
