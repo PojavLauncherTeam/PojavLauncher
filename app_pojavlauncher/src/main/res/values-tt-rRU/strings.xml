@@ -26,6 +26,8 @@
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_options">Көйләүләр</string>
+    <string name="mcl_option_settings">Көйләүләр</string>
     <string name="mcl_option_about">Лаунчер турында</string>
     <string name="mcl_setting_veroption_release">Соңгы</string>
     <string name="mcl_setting_veroption_snapshot">Ярдәмче</string>
@@ -75,6 +77,7 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_size_height">Биеклек</string>
+    <string name="main_options">Көйләүләр</string>
     <string name="main_play">Уйнарга</string>
     <string name="main_welcome">Рәхим итегез, %s</string>
     <string name="main_version">Версия:</string>
