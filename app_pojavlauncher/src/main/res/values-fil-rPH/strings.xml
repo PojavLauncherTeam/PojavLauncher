@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Mag-ingat, maaari itong mag-crash ng laro kung binago nang walang kaalaman.</string>
     <string name="mcl_setting_category_general">Pangkalahatang mga Setting</string>
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
