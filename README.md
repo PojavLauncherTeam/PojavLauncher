@@ -20,7 +20,6 @@ We do not exist on TikTok. No one from the dev team makes TikTok videos.
 
 ## Introduction
 PojavLauncher is a Minecraft: Java Edition launcher for Android based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher can launch almost all available Minecraft versions (from rd-132211 to latest 1.17 snapshot, including Combat Test versions). Modding via Forge and Fabric are also supported.
-- Note that `21w10a` or newer is currently not yet supported due to the new GLSL usage.
 
 ## Building
 To get started, you can just get prebuilt app from [stable release](https://github.com/PojavLauncherTeam/PojavLauncher/releases) or [automatic builds](https://github.com/PojavLauncherTeam/PojavLauncher/actions). If you want to build after launcher code changes, follow steps below.
@@ -81,6 +80,7 @@ cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main
 - [ ] More...
 
 ## Known Issues
+- Minecraft `21w10a` or newer are currently not yet supported due to the new GLSL usage.
 - in 1.16 and up spawn eggs banners are white (you can fix this by adding this to your JVM flags 
 `-Dorg.lwjgl.opengl.libname=libgl4es_115.so`, only works on 1.16 and up, do not use under this version)
 - controller mods aren't working
