@@ -9,26 +9,41 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">Электрон почтасы яки кулланучы исеме</string>
     <string name="login_online_password_hint">Серсүз</string>
+    <string name="login_online_check_keeplogin">Хәтердә калдырырга</string>
     <string name="login_online_login_label">Керергә</string>
+    <string name="login_offline_label">Офлайн аккаунт белән керу</string>
+    <string name="login_error_short_username">Кулланучы исеме 3 хәрефтән аз булмаска тиеш</string>
     <string name="login_microsoft">Microsoft өчен керергә</string>
+    <string name="login_select_account">Аккаунтлар</string>
     <string name="login_title_no_saved_account">Аккаунт табылмады!</string>
+    <string name="login_dialog_no_saved_account">Сакланган аккаунтлар юк.\nАккаунтны беренче керү вакытында саклап өчен <b>«Хәтердә калдырырга»</b> опциясен кулланыгыз.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Мод утырткычын сайлагыз</string>
     <!-- Error messages -->
     <string name="error_no_version">Версиялар юк!</string>
+    <string name="error_show_more">Күбрәк күрсәтү</string>
+    <string name="error_show_less">Әзрәк күрсәтү</string>
     <!-- Toast messages -->
+    <string name="toast_optifine_success">Утыртылды</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Яңалыклар</string>
+    <string name="mcl_tab_crash">Сафтан чыгарулар журналы</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Тоташкан</string>
     <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s кушылуга әзер</string>
+    <string name="mcl_launch_downloading">%s йөкләтүе</string>
+    <string name="mcl_launch_download_assets">Ресурс йөкләүгә әзерләнү</string>
     <string name="mcl_options">Көйләүләр</string>
     <string name="mcl_option_settings">Көйләүләр</string>
     <string name="mcl_option_about">Лаунчер турында</string>
+    <string name="mcl_setting_category_general">Төп көйләүләр</string>
     <string name="mcl_setting_veroption_release">Соңгы</string>
     <string name="mcl_setting_veroption_snapshot">Ярдәмче</string>
     <string name="mcl_setting_veroption_oldalpha">Иске альфа</string>
@@ -38,6 +53,7 @@
     <string name="global_load">Йөкләү</string>
     <string name="global_name">Исем</string>
     <string name="global_save">Сакларга</string>
+    <string name="global_waiting">Көтегез</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -57,6 +73,7 @@
     -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Чыгу</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 утыртмалды!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Төймәсар</string>
@@ -67,14 +84,20 @@
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Тычкан</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Журнал</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_size">Зурлык</string>
     <string name="customctrl_size_height">Биеклек</string>
+    <string name="customctrl_keycombine">Төймә комбинациясы</string>
+    <string name="customctrl_addbutton">Төймәне булдырырга</string>
     <string name="main_options">Көйләүләр</string>
     <string name="main_play">Уйнарга</string>
     <string name="main_welcome">Рәхим итегез, %s</string>
     <string name="main_version">Версия:</string>
     <string name="main_nolog">Журнал буш.</string>
+    <string name="mcl_disable_gestures">Ишарә сүндерергә</string>
+    <string name="mcl_setting_title_mousespeed">Тычкан сизгерлеге</string>
 </resources>
