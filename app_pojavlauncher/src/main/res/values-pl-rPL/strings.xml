@@ -88,13 +88,13 @@
     <string name="mcl_setting_veroption_oldbeta">Stara beta</string>
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
-    <string name="global_edit">Edytować</string>
+    <string name="global_edit">Edytuj</string>
     <string name="global_error">Błąd</string>
     <string name="global_load">Załaduj</string>
     <string name="global_name">Nazwa</string>
-    <string name="global_remove">Usunąć</string>
+    <string name="global_remove">Usuń</string>
     <string name="global_restart">Uruchom ponownie</string>
-    <string name="global_save">Zapisać</string>
+    <string name="global_save">Zapisz</string>
     <string name="global_unpacking">Rozpakowywanie %s</string>
     <string name="global_error_field_empty">To pole nie może być puste</string>
     <string name="global_waiting">Czekaj</string>
@@ -144,14 +144,14 @@
     <string name="control_forceclose">Wymuś zamknięcie</string>
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Wejście debugowania</string>
-    <string name="control_customkey">Wyślij własny kod klucza</string>
+    <string name="control_customkey">Wyślij własny klawisz</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Edytowanie %s</string>
     <string name="customctrl_remove">Usunąć %s?</string>
-    <string name="customctrl_keyname">Kod Klucza</string>
+    <string name="customctrl_keyname">Klawisz</string>
     <string name="customctrl_toggle">Przełączalne</string>
     <string name="customctrl_size">Rozmiar</string>
     <string name="customctrl_size_width">Szerokość</string>
