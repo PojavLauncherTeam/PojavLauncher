@@ -20,9 +20,11 @@
     <string name="login_dialog_no_saved_account">Сакланган аккаунтлар юк.\nАккаунтны беренче керү вакытында саклап өчен <b>«Хәтердә калдырырга»</b> опциясен кулланыгыз.</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">Бу аккаунт бетереләчәк!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Мод утырткычын сайлагыз</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher сафтан чыкты</string>
     <string name="error_no_version">Версиялар юк!</string>
     <string name="error_show_more">Күбрәк күрсәтү</string>
     <string name="error_show_less">Әзрәк күрсәтү</string>
@@ -42,6 +44,7 @@
     <string name="mcl_launch_downloading">%s йөкләтүе</string>
     <string name="mcl_launch_download_assets">Ресурс йөкләүгә әзерләнү</string>
     <string name="mcl_options">Көйләүләр</string>
+    <string name="mcl_option_customcontrol">Көйләнелгән идарә</string>
     <string name="mcl_option_settings">Көйләүләр</string>
     <string name="mcl_option_about">Лаунчер турында</string>
     <string name="mcl_setting_category_general">Төп көйләүләр</string>
