@@ -78,7 +78,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     // printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
     if (!eglInitialize(potatoBridge.eglDisplay, NULL, NULL)) {
-        printf("EGLBridge: Error eglInitialize() failed\n");
+        printf("EGLBridge: Error eglInitialize() failed: %s\n", eglGetError());
         return JNI_FALSE;
     }
 
@@ -97,7 +97,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     EGLint vid;
 
     if (!eglChooseConfig(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
-        printf("EGLBridge: Error couldn't get an EGL visual config\n");
+        printf("EGLBridge: Error couldn't get an EGL visual config: %s\n", eglGetError());
         return JNI_FALSE;
     }
 
@@ -105,7 +105,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     assert(num_configs > 0);
 
     if (!eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
-        printf("EGLBridge: Error eglGetConfigAttrib() failed\n");
+        printf("EGLBridge: Error eglGetConfigAttrib() failed: %s\n", eglGetError());
         return JNI_FALSE;
     }
 
