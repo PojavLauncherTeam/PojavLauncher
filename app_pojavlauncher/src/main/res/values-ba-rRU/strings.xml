@@ -18,6 +18,7 @@
     <string name="login_select_account">Хисап яҙмалар</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">Был хисап яҙма юйыла!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <string name="error_no_version">Версиялар юҡ!</string>
