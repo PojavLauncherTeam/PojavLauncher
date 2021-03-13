@@ -22,14 +22,16 @@
     <!-- Warnings -->
     <string name="warning_remove_account">Бу аккаунт бетереләчәк!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Java Runtime уртыртуы %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Мод утырткычын сайлагыз</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher сафтан чыкты</string>
-    <string name="error_no_version">Версиялар юк!</string>
+    <string name="error_no_version">Версияләр юк!</string>
     <string name="error_show_more">Күбрәк күрсәтү</string>
     <string name="error_show_less">Әзрәк күрсәтү</string>
     <!-- Toast messages -->
     <string name="toast_optifine_success">Утыртылды</string>
+    <string name="toast_uninstalljre_done">Java Runtime бетерелде</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -42,12 +44,20 @@
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s кушылуга әзер</string>
     <string name="mcl_launch_downloading">%s йөкләтүе</string>
+    <string name="mcl_launch_downloading_progress">"%s йөкләтүе (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Ресурс йөкләүгә әзерләнү</string>
     <string name="mcl_options">Көйләүләр</string>
+    <string name="mcl_option_modinstall">Мод утырткычын кушу (Forge, LabyMod, Fabric, h. б.)</string>
+    <string name="mcl_option_modinstallwitharg">Мод утырткычын кушу (көйләнелгән аргументлар белән)</string>
     <string name="mcl_option_customcontrol">Көйләнелгән идарә</string>
     <string name="mcl_option_settings">Көйләүләр</string>
     <string name="mcl_option_about">Лаунчер турында</string>
+    <string name="mcl_setting_title_uninstalljre">Java Runtime-ны бетерергә</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Лаунчерны яңадан кушу кирәк] Ул Java Runtime-ны яңадан утыртырга рөхсәт ителә</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы кешеләргә бу иске v1 интерфейсы ошауы кирәк. Күбрәк тулы экран тәҗрибәсен бирелде.</string>
+    <string name="mcl_setting_title_javaargs">JVM кушу аргументлары</string>
     <string name="mcl_setting_category_general">Төп көйләүләр</string>
+    <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
     <string name="mcl_setting_veroption_release">Соңгы</string>
     <string name="mcl_setting_veroption_snapshot">Ярдәмче</string>
     <string name="mcl_setting_veroption_oldalpha">Иске альфа</string>
@@ -61,6 +71,7 @@
     <string name="global_remove">Бетерергә</string>
     <string name="global_restart">Яңадан кушу</string>
     <string name="global_save">Сакларга</string>
+    <string name="global_error_field_empty">Бу кыр буш булап алмады</string>
     <string name="global_waiting">Көтегез</string>
     <!--
     <string name="mcl_about">
@@ -92,29 +103,48 @@
     <string name="control_keyboard">Төймәсар</string>
     <string name="control_chat">Чат</string>
     <string name="control_debug">Төзәтү</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Инв</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Тычкан</string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Журнал</string>
+    <string name="control_adebug">Кертү төзәтүе</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_keyname">Төймә коды</string>
     <string name="customctrl_size">Зурлык</string>
+    <string name="customctrl_size_width">Киңлек</string>
     <string name="customctrl_size_height">Биеклек</string>
+    <string name="customctrl_transparency_bg">Артның тоныклыгы</string>
     <string name="customctrl_keycombine">Төймә комбинациясы</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Төймәне булдырырга</string>
     <string name="main_options">Көйләүләр</string>
     <string name="main_play">Уйнарга</string>
     <string name="main_welcome">Рәхим итегез, %s</string>
+    <string name="main_switchuser">Кулланучыны алыштырырга</string>
     <string name="main_version">Версия:</string>
+    <string name="main_nocrash">Сафтан чыгару табылмады</string>
     <string name="main_nolog">Журнал буш.</string>
+    <string name="main_no_news_feed">Яңалыклар тасмасын алып булмады!</string>
     <string name="vp_latest_snapshot">Соңгы ярдәмче версия</string>
     <string name="vp_latest_release">Соңгы версия</string>
     <string name="mcl_tab_profiles">Профиль</string>
+    <string name="mcl_profile_editor_title_profile">ПРОФИЛЬЛӘР</string>
+    <string name="mcl_profile_editor_title_version">ВЕРСИЯЛӘР</string>
     <string name="mcl_profile_editor_edit_text_title">Профиль исеме</string>
+    <string name="mcl_profile_editor_save">сакларга</string>
     <string name="profedit_selected_version">Сайланган версия: %s</string>
     <string name="profedit_selected_profile">Сайланган профиль: %s</string>
     <string name="global_new">Яңа</string>
