@@ -52,10 +52,14 @@
     <string name="mcl_setting_veroption_snapshot">Ярдәмче</string>
     <string name="mcl_setting_veroption_oldalpha">Иске альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Иске бета</string>
+    <string name="mcl_version_clone">Клонларга</string>
     <!-- Global strings -->
+    <string name="global_edit">Үзгәртергә</string>
     <string name="global_error">Хата</string>
     <string name="global_load">Йөкләү</string>
     <string name="global_name">Исем</string>
+    <string name="global_remove">Бетерергә</string>
+    <string name="global_restart">Яңадан кушу</string>
     <string name="global_save">Сакларга</string>
     <string name="global_waiting">Көтегез</string>
     <!--
