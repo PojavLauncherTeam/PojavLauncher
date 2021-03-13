@@ -146,7 +146,7 @@
     <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
-    <string name="control_customkey">Отправить пользовательскую раскладку</string>
+    <string name="control_customkey">Отправить пользовательский код клавиши</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -185,8 +185,8 @@
     <string name="dl_library_sha_fail">Библиотека %s повреждена и будет загружена повторно</string>
     <string name="dl_library_sha_unknown">Библиотека %s не может быть проверена; придется предположить, что с ней все хорошо</string>
     <string name="dl_library_sha_pass">Библиотека %s проверена и может быть использована</string>
-    <string name="mcl_disable_gestures">Отключение жестов</string>
-    <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
+    <string name="mcl_disable_gestures">Выключить жесты</string>
+    <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание и нажатие.</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
     <string name="customctrl_passthru">Указатель мышки</string>
