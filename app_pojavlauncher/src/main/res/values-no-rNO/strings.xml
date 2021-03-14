@@ -68,6 +68,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Lar deg redusere spillets oppløsning. 100% er full oppløsning</string>
     <string name="mcl_setting_title_longpresstrigger">Hvor lenge vil utløse etter langt trykk</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Endre utløsertid for langt trykk i ødelegge blokk og slipp-gjenstand.</string>
+    <string name="mcl_setting_title_buttonscale">Krontrollknapper skalering</string>
     <string name="mcl_setting_category_general">Generelle innstillinger</string>
     <string name="mcl_setting_category_veroption">Versjonstype vil være i versjonslisten</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -82,6 +83,8 @@
     <string name="global_name">Navn</string>
     <string name="global_remove">Slett</string>
     <string name="global_restart">Start på nytt</string>
+    <string name="global_save">Lagre</string>
+    <string name="global_error_field_empty">Feltet kan ikke stå tomt</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -106,7 +109,11 @@
     -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Avslutt</string>
+    <string name="mcn_exit_confirm">Er du sikker på at du vil tvinge avslutte?</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Tastatur</string>
+    <string name="control_chat">Chat</string>
     <string name="control_debug">Avlusing</string>
     <string name="control_primary">LMB</string>
     <string name="control_secondary">RMB</string>
