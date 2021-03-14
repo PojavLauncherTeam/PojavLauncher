@@ -27,10 +27,11 @@
     <string name="alerttitle_installmod">Мод утырткычын сайлагыз</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher сафтан чыкты</string>
-    <string name="error_no_version">Версияләр юк!</string>
+    <string name="error_no_version">Версия юк!</string>
     <string name="error_show_more">Күбрәк күрсәтү</string>
     <string name="error_show_less">Әзрәк күрсәтү</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Саклау урыныннан уку/ясу рөхсәте кирәк!</string>
     <string name="toast_optifine_success">Утыртылды</string>
     <string name="toast_uninstalljre_done">Java Runtime бетерелде</string>
     <!--
@@ -44,6 +45,7 @@
     <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s кушылуга әзер</string>
+    <string name="mcl_launch_cleancache">Кеш-файллар бетерүе</string>
     <string name="mcl_launch_downloading">%s йөкләтүе</string>
     <string name="mcl_launch_downloading_progress">"%s йөкләтүе (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Ресурс йөкләүгә әзерләнү</string>
@@ -72,11 +74,12 @@
     <!-- Global strings -->
     <string name="global_edit">Үзгәртергә</string>
     <string name="global_error">Хата</string>
-    <string name="global_load">Йөкләү</string>
+    <string name="global_load">Йөкләргә</string>
     <string name="global_name">Исем</string>
     <string name="global_remove">Бетерергә</string>
     <string name="global_restart">Яңадан кушу</string>
     <string name="global_save">Сакларга</string>
+    <string name="global_unpacking">%s ачылу</string>
     <string name="global_error_field_empty">Бу кыр буш булап алмады</string>
     <string name="global_waiting">Көтегез</string>
     <!--
@@ -125,10 +128,13 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">«%s» үзгәртү</string>
+    <string name="customctrl_remove">«%s» бетерергәме?</string>
     <string name="customctrl_keyname">Төймә коды</string>
     <string name="customctrl_size">Зурлык</string>
     <string name="customctrl_size_width">Киңлек</string>
     <string name="customctrl_size_height">Биеклек</string>
+    <string name="customctrl_dynamicpos">Динамик позициясе</string>
     <string name="customctrl_transparency_bg">Артның тоныклыгы</string>
     <string name="customctrl_keycombine">Төймә комбинациясы</string>
     <string name="customctrl_keycombine_alt">Alt</string>
@@ -141,9 +147,12 @@
     <string name="main_switchuser">Кулланучыны алыштырырга</string>
     <string name="main_version">Версия:</string>
     <string name="main_nocrash">Сафтан чыгару табылмады</string>
-    <string name="main_nolog">Журнал буш.</string>
+    <string name="main_nolog">Журнал буш</string>
     <string name="main_no_news_feed">Яңалыклар тасмасын алып булмады!</string>
     <string name="mcl_setting_check_libraries">Йөкләтүдән соң китапханәләрне тикшерергә</string>
+    <string name="dl_library_sha_fail">%s китапханәсе ватылган һәм яңадан йөкләтәчәк</string>
+    <string name="dl_library_sha_unknown">%s китапханәсе тикшереп булмады; аның белән барысы да яхшы дип уйларга туры килә</string>
+    <string name="dl_library_sha_pass">%s китапханәсе тикшерелде һәм кулланырга мөмкин</string>
     <string name="mcl_disable_gestures">Ишарә сүндерергә</string>
     <string name="mcl_setting_title_mousespeed">Тычкан сизгерлеге</string>
     <string name="customctrl_passthru">Тычкан күрсәткече</string>
