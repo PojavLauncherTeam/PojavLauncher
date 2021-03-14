@@ -129,7 +129,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
     CATCHSIG(SIGABRT);
     CATCHSIG(SIGBUS);
     CATCHSIG(SIGFPE);
-    CATCHSIG(SIGSEGV);
+    //CATCHSIG(SIGSEGV);
     CATCHSIG(SIGSTKFLT);
     CATCHSIG(SIGPIPE);
    //Signal trapper ready
