@@ -14,7 +14,7 @@
     <string name="login_offline_label">Mag-login bilang offline na account</string>
     <string name="login_error_short_username">Ang username ay dapat na hindi bababa sa 3 mga character</string>
     <string name="login_error_exist_username">Mayroon nang username na ito</string>
-    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_microsoft">Log in sa Microsoft</string>
     <string name="login_select_account">Piliin ang account</string>
     <string name="login_title_no_saved_account">Walang nahanap na account!</string>
     <string name="login_dialog_no_saved_account">Wala kang nai-save na account. \nGamitin ang pagpipiliang <b> \"Panatilihin akong naka-log in\" </b> upang makatipid ng isang account sa unang pag-login.</string>
