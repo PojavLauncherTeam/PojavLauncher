@@ -15,7 +15,6 @@
         android:icon="@drawable/ic_launcher"
 		android:roundIcon="@drawable/ic_launcher"
 		android:resizeableActivity="true"
-		android:largeHeap="true"
                 android:requestLegacyExternalStorage="true">
     <meta-data 
 	    android:name="android.max_aspect"
