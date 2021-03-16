@@ -291,9 +291,9 @@ public class JREUtils
             ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
             purgeArg(javaArgList,"-Xms");
             purgeArg(javaArgList,"-Xmx");
-            if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 750) {
-                javaArgList.add("-Xms750M");
-                javaArgList.add("-Xmx750M");
+            if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 300) {
+                javaArgList.add("-Xms300M");
+                javaArgList.add("-Xmx300M");
             }else {
                 javaArgList.add("-Xms" + ((mi.availMem / 1048576L) - 50) + "M");
                 javaArgList.add("-Xmx" + ((mi.availMem / 1048576L) - 50) + "M");
