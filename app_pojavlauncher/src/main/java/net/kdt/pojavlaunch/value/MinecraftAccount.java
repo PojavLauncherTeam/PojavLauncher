@@ -12,7 +12,7 @@ public class MinecraftAccount
 {
     public String accessToken = "0"; // access token
     public String clientToken = "0"; // clientID: refresh and invalidate
-    public String profileId = "0"; // profile UUID, for obtaining skin
+    public String profileId = "00000000-0000-0000-0000-000000000000"; // profile UUID, for obtaining skin
     public String username = "Steve";
     public String selectedVersion = "1.7.10";
     public boolean isMicrosoft = false;
@@ -60,7 +60,7 @@ public class MinecraftAccount
                 acc.clientToken = "0";
             }
             if (acc.profileId == null) {
-                acc.profileId = "0";
+                acc.profileId = "00000000-0000-0000-0000-000000000000";
             }
             if (acc.username == null) {
                 acc.username = "0";
