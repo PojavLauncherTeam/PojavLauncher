@@ -14,7 +14,7 @@
     <string name="login_offline_label">Inloggen als offline account</string>
     <string name="login_error_short_username">Gebruikersnaam moet uit minstens 3 tekens bestaan</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
-    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_microsoft">Microsoft-login</string>
     <string name="login_select_account">Selecteer account</string>
     <string name="login_title_no_saved_account">Geen account gevonden!</string>
     <string name="login_dialog_no_saved_account">U hebt geen opgeslagen account.\nGebruik de optie <b>\"Ingelogd blijven\"</b> om een account op te slaan bij de eerste aanmelding.</string>
@@ -61,7 +61,7 @@
     <string name="mcl_setting_title_freeform">Start Minecraft in Freeform modus</string>
     <string name="mcl_setting_subtitle_freeform">Start Minecraft in zwevend venster. Vereist Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Zijbalk verbergen</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgische mensen die liever de oude v1 UI hebben. Geeft je een meer ervaring met volledig scherm.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Mensen die liever de v1-interface gebruiken vinden dit wellicht leuk. Dit geeft je het volledig scherm-gevoel.</string>
     <string name="mcl_setting_title_ignore_notch">Negeer notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Negeer de notch en verbreed het scherm.\ngeeft je een meer meeslepende ervaring.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolutie Schaaler</string>
@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
     <string name="mcl_setting_category_general">Algemene instellingen</string>
     <string name="mcl_setting_category_scaling">Schaalinstellingen</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Versietype zal in de versielijst staan</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
