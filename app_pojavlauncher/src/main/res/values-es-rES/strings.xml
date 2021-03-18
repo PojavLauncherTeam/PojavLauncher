@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
     <string name="mcl_setting_category_general">Opciones generales</string>
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
+    <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzadas</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
