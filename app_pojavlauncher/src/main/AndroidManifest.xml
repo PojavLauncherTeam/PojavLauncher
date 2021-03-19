@@ -16,7 +16,8 @@
 		android:roundIcon="@drawable/ic_launcher"
 		android:resizeableActivity="true"
 		android:usesCleartextTraffic="true"
-                android:requestLegacyExternalStorage="true">
+		android:extractNativeLibs="true"
+		android:requestLegacyExternalStorage="true">
 		<!-- cleartext traffic: For campbell's debugging only -->
     <meta-data
 	    android:name="android.max_aspect"
