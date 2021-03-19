@@ -9,11 +9,11 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
-	
+
     lintOptions {
         abortOnError false
     }
-	
+
     signingConfigs {
         customDebug {
             storeFile file("debug.keystore")
@@ -22,7 +22,7 @@ android {
             keyPassword "android"
         }
     }
-	
+
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
@@ -30,6 +30,16 @@ android {
         versionCode 156247
         versionName "3.3.1.1_rel_" + getDate()
         multiDexEnabled true //important
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++17"
+            }
+        }
+
+        ndk {
+            abiFilters 'arm64-v8a' // can also use 'armeabi-v7a'
+        }
     }
 
     buildTypes {
@@ -38,7 +48,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
         }
-		
+
         release {
 	    // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
@@ -48,10 +58,11 @@ android {
            // debuggable = true
         }
     }
-	
-	externalNativeBuild {
-        ndkBuild {
-            path file('src/main/jni/Android.mk')
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/jni/CMakeLists.txt"
+            version "3.17.4"
         }
     }
 
@@ -59,7 +70,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildToolsVersion '30.0.2'
+    buildToolsVersion '30.0.3'
 }
 
 dependencies {
@@ -76,12 +87,12 @@ dependencies {
 
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
 
-    
+
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
     implementation 'org.tukaani:xz:1.8'
-    
+
     implementation 'net.objecthunter:exp4j:0.4.8'
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
