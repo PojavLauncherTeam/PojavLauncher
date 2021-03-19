@@ -274,7 +274,7 @@ public final class Tools
         return DIR_HOME_VERSION + "/" + version + "/" + version + ".jar";
     }
 
-    private static String getLWJGL3ClassPath() {
+    public static String getLWJGL3ClassPath() {
         StringBuilder libStr = new StringBuilder();
         File lwjgl3Folder = new File(Tools.DIR_GAME_HOME, "lwjgl3");
         if (/* info.arguments != null && */ lwjgl3Folder.exists()) {

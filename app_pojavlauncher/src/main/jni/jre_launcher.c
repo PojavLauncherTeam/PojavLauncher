@@ -31,6 +31,8 @@
 #include <unistd.h>
 // Boardwalk: missing include
 #include <string.h>
+#include <fcntl.h>
+#include <errno.h>
 
 #include "log.h"
 
@@ -73,7 +75,7 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
 
 static jint launchJVM(int margc, char** margv) {
    void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
-   
+
    // Boardwalk: silence
    // LOGD("JLI lib = %x", (int)libjli);
    if (NULL == libjli) {
@@ -91,6 +93,23 @@ static jint launchJVM(int margc, char** margv) {
        LOGE("JLI_Launch = NULL");
        return -1;
    }
+
+   // send stderr and stdout to a log
+   // FIXME test code, remove for prod - the non-test mode captures this output properly
+   int fd = open("/storage/emulated/0/games/PojavLauncher/logout", O_CREAT|O_TRUNC|O_RDWR, 0666);
+   if (fd == -1) {
+       LOGE("open failed!");
+   } else {
+       int res;
+       if ((res = dup2(fd, 1)) == -1)
+           LOGE("dup2 stdout failed %d %d", res, errno);
+       if ((res = dup2(fd, 2)) == -1)
+           LOGE("dup2 stderr failed %d %d", res, errno);
+   }
+
+   printf("Testing!\n");
+   fflush(stdout);
+   write(1, "hi:\n", 4);
 
    LOGD("Calling JLI_Launch");
 
@@ -145,15 +164,15 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
 
     int argc = (*env)->GetArrayLength(env, argsArray);
     char **argv = convert_to_char_array(env, argsArray);
-    
+
     LOGD("Done processing args");
 
     res = launchJVM(argc, argv);
 
     LOGD("Going to free args");
     free_char_array(env, argsArray, argv);
-    
+
     LOGD("Free done");
-   
+
     return res;
 }

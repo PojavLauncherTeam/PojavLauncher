@@ -15,11 +15,13 @@
         android:icon="@drawable/ic_launcher"
 		android:roundIcon="@drawable/ic_launcher"
 		android:resizeableActivity="true"
+		android:usesCleartextTraffic="true"
                 android:requestLegacyExternalStorage="true">
-    <meta-data 
+		<!-- cleartext traffic: For campbell's debugging only -->
+    <meta-data
 	    android:name="android.max_aspect"
         android:value="ratio_float"/>
-		
+
 		<activity
             android:launchMode="singleTop"
 			android:screenOrientation="sensorLandscape"
@@ -30,10 +32,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-               
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="ms-xal-00000000402b5328"
@@ -51,12 +53,12 @@
             android:screenOrientation="sensorLandscape"
             android:name=".PojavLauncherActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-        
+
 		<activity
 			android:screenOrientation="sensorLandscape"
 			android:name=".JavaGUILauncherActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-		
+
 		<activity
 			android:screenOrientation="sensorLandscape"
 			android:name=".CustomControlsActivity"
@@ -68,6 +70,27 @@
 			android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-    </application>
+
+		<activity
+			android:name=".RenderingTestActivity"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+
+				<!--<category android:name="android.intent.category.DEFAULT" />-->
+				<category android:name="android.intent.category.BROWSABLE" />
+
+				<data
+					android:host="auth"
+					android:scheme="ms-xal-00000000402b5328" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name=".RenderingTestRunActivity"
+			/>
+
+
+	</application>
 
 </manifest>
