@@ -1,0 +1,3 @@
+[submodule "libs/OpenComposite"]
+	path = libs/OpenComposite
+	url = https://gitlab.com/znixian/OpenOVR.git
