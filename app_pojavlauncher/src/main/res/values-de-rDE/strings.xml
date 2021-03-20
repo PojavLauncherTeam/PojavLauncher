@@ -62,7 +62,7 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Seitenleiste ausblenden</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgiker, die die alte v1-Benutzeroberfläche bevorzugen, könnten dies mögen. Gibt dir ein besseres Vollbild-Erlebnis.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignoriere die Kameraleiste</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoriere die Kameraeinkerbung</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Einbuchtung im Bildschirm und erweitert das Bild unter ihr.\nDie Spielerfahrung wird dadurch immersiver.</string>
     <string name="mcl_setting_title_resolution_scaler">Auflösungsskalator</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht es dir die Spielauflösung zu verringern. 100% ist die normale Auflösung</string>
@@ -143,7 +143,7 @@
     <string name="control_mouseoff">Maus: Aus</string>
     <string name="control_mouseon">Maus: An </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Erwinge das Beenden</string>
+    <string name="control_forceclose">Erzwinge das Beenden</string>
     <string name="control_viewout">Protokoll-Ausgabe</string>
     <string name="control_adebug">Eingabe-Debug</string>
     <string name="control_customkey">Sende Keycode</string>
