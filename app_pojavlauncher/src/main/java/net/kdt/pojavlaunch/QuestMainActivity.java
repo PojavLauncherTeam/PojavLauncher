@@ -1,32 +1,57 @@
 package net.kdt.pojavlaunch;
 
-import android.os.Bundle;
+import android.app.Activity;
+import android.app.NativeActivity;
 import android.util.Log;
 
-public class QuestMainActivity extends LoggableActivity {
+import net.kdt.pojavlaunch.utils.JREUtils;
+
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class QuestMainActivity extends NativeActivity implements ILoggableActivity {
     private static final String TAG = "QuestActivity";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    // Called from native code
+    public void setup() {
+        File jarPath = new File(Tools.DIR_GAME_HOME, "test.jar");
 
-        // Oculus says to do it and we're getting mysterious errors, maybe this will help:
-        // https://developer.oculus.com/downloads/package/oculus-openxr-mobile-sdk/
-        System.loadLibrary("openxr_loader");
+        try (OutputStream out = new FileOutputStream(jarPath)) {
+            URL url = new URL("http://10.0.2.24:8001/GraphicsTest.jar");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        Log.i(TAG, "Start activity bind");
-        OpenComposite.bindActivity(this);
+            if (conn.getResponseCode() != 200)
+                throw new IOException("Bad response code " + conn.getResponseCode());
 
-        Thread thread = new Thread(() -> RenderingTestRunActivity.runJava(this));
-        thread.setName("minecraft-java-start-thread");
-        thread.start();
+            try (InputStream in = conn.getInputStream()) {
+                IOUtils.copy(in, out);
+            }
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to download test.jar", e);
+            return;
+        }
+
+        try {
+            JREUtils.relocateLibPath(this);
+            JREUtils.setJavaEnvironment(this, null);
+        } catch (Throwable throwable) {
+            throw new RuntimeException("Could not setup Java environment", throwable);
+        }
+
+        Log.e(TAG, "Calling Java setup");
+        JREUtils.initJavaRuntime();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Log.d(TAG, "Quest activity was destroyed, this may be bad news if the runtime tries to use a GC'd handle to us");
+    public Activity asActivity() {
+        return this;
     }
 
     @Override

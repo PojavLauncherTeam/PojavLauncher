@@ -214,17 +214,17 @@ public class JREUtils
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
-    public static void setJavaEnvironment(LoggableActivity ctx, @Nullable ShellProcessOperation shell) throws Throwable {
+    public static void setJavaEnvironment(ILoggableActivity ctx, @Nullable ShellProcessOperation shell) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
-        envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("TMPDIR", ctx.asActivity().getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
    
-        envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("MESA_GLSL_CACHE_DIR", ctx.asActivity().getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
         
@@ -234,6 +234,14 @@ public class JREUtils
 
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
+
+        // Remove any null values to avoid crashes
+        // This can occur with AWTSTUB_WIDTH and height on the Quest
+        for (String key : new ArrayList<>(envMap.keySet())) {
+            if (envMap.get(key) == null) {
+                envMap.remove(key);
+            }
+        }
         
         File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
@@ -263,6 +271,7 @@ public class JREUtils
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             try {
                 if (shell == null) {
+                    ctx.appendlnToLog("set envvar '"+env.getKey() + "' = '" + env.getValue() + "'");
                     Os.setenv(env.getKey(), env.getValue(), true);
                 } else {
                     shell.writeToProcess("export " + env.getKey() + "=" + env.getValue());

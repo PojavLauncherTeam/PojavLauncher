@@ -50,12 +50,12 @@ static const jboolean const_javaw = JNI_FALSE;
 static const jboolean const_cpwildcard = JNI_TRUE;
 static const jint const_ergo_class = 0; // DEFAULT_POLICY
 static struct sigaction old_sa[NSIG];
-void (*__old_sa)(int signal, siginfo_t *info, void *reserved);
+void (*old_sa_func)(int signal, siginfo_t *info, void *reserved);
 void android_sigaction(int signal, siginfo_t *info, void *reserved)
 {
     printf("process killed with signal %d code %p addr %p", signal,info->si_code,info->si_addr);
-    __old_sa = old_sa[signal].sa_sigaction;
-    __old_sa(signal,info,reserved);
+    old_sa_func = old_sa[signal].sa_sigaction;
+    old_sa_func(signal, info, reserved);
     exit(1);
 }
 typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);

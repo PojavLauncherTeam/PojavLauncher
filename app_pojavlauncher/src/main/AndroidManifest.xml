@@ -35,10 +35,10 @@
 			android:label="@string/app_short_name"
 			android:name=".PojavLoginActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -95,14 +95,31 @@
 
         <activity android:name=".RenderingTestRunActivity" />
 
-        <activity android:name=".QuestMainActivity">
+		<!-- The activity is the built-in NativeActivity framework class. -->
+		<!-- launchMode is set to singleTask because there should never be multiple copies of the app running. -->
+		<!-- Theme.Black.NoTitleBar.Fullscreen gives solid black instead of a (bad stereoscopic) gradient on app transition. -->
+		<activity
+			android:name=".QuestMainActivity"
+			android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode|density"
+			android:excludeFromRecents="false"
+			android:launchMode="singleTask"
+			android:resizeableActivity="false"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+			<!-- Tell NativeActivity the name of the .so -->
+			<meta-data
+				android:name="android.app.lib_name"
+				android:value="vr_launcher" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.oculus.intent.category.VR" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
 
-	</application>
+    </application>
 
 </manifest>

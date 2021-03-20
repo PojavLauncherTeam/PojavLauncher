@@ -16,7 +16,11 @@ typedef struct {
 
 void OCWrapper_InitEGL(const OCWrapper_EGLInitInfo *info);
 
+void OCWrapper_InitActivity(JavaVM *vm, jobject activity);
+
 void OCWrapper_Cleanup();
+
+void OCWrapper_IgnoreNextVRInitCall();
 
 #ifdef __cplusplus
 }
