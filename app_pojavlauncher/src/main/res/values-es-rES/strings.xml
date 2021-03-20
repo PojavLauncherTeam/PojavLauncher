@@ -64,7 +64,7 @@
     <string name="mcl_setting_subtitle_hide_sidebar">A la gente nostálgica que prefiere la antigua interfaz de usuario v1 le podría gustar. Te da una experiencia más a pantalla completa.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar notch (Para teléfonos con pantalla irregular)</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignora el notch y extiende la pantalla debajo de él.\nTe da una experiencia más inmersiva.</string>
-    <string name="mcl_setting_title_resolution_scaler">Escala de resolución</string>
+    <string name="mcl_setting_title_resolution_scaler">Escalador de resolución</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Te permite reducir la resolución del juego. 100% es resolución completa</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia el tiempo de activación durante una pulsación larga en destruir bloques y soltar objetos.</string>
