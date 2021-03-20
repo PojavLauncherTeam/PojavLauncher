@@ -2,11 +2,11 @@ name: Android CI
 
 on:
   pull_request:
-      branches-ignore:
-      - 'l10n_*'
+    branches-ignore:
+      - 'l10n_v3_openjdk2'
   push:
     branches-ignore:
-      - 'l10n_*'
+      - 'l10n_v3_openjdk2'
   workflow_dispatch:
 
 jobs:

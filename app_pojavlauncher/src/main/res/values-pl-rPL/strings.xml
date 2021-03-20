@@ -16,15 +16,14 @@
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
-    <string name="login_title_no_saved_account">konta nie znalezione!</string>
+    <string name="login_title_no_saved_account">Konta nie znalezione!</string>
     <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"pozostań zalogowanym\"</b> aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Przesuń od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby dostosować: edytować, zmienić rozmiar lub usunąć.
-"</string>
+    <string name="hint_control_mapping">"Przesuń palcem od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Zainstaluj Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Zainstaluj środowisko uruchomieniowe Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Wybierz instalator modów</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
@@ -34,7 +33,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Wymagane jest uprawnienie do odczytu / zapisu w pamięci!</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
-    <string name="toast_uninstalljre_done">Zakończono odinstalowywanie Java Runtime</string>
+    <string name="toast_uninstalljre_done">Zakończono odinstalowywanie środowiska uruchomieniowego Java</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -43,7 +42,7 @@
     <string name="mcl_tab_console">Konsola programistyczna</string>
     <string name="mcl_tab_crash">Dziennik awarii</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">połączono</string>
+    <string name="mcl_account_connected">Połączono</string>
     <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
@@ -57,36 +56,45 @@
     <string name="mcl_option_customcontrol">Niestandardowe kontrole</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">O aplikacji</string>
-    <string name="mcl_setting_title_uninstalljre">Odinstaluj Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować Java Runtime</string>
+    <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko uruchomieniowe Java</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować środowisko uruchomieniowe Java</string>
     <string name="mcl_setting_title_freeform">Uruchom Minecraft w trybie swobodnym</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Ludzie Nostalgic preferujący stary interfejs v1 może to podobać. Daje ci więcej wrażeń w trybie pełnoekranowym.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgicznym osobom, którzy preferowali stare UI v1, może się to spodobać. Daje ci lepsze pełnoekranowe doświadczenie.</string>
+    <string name="mcl_setting_title_ignore_notch">Zignoruj wycięcie</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wycięcie i rozszerza pod nim ekran.\nDaje Ci bardziej wciągającą rozgrywke.</string>
+    <string name="mcl_setting_title_resolution_scaler">Skala rozdzielczości</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Pozwala zmniejszyć rozdzielczość gry. 100% to pełna rozdzielczość</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
+    <string name="mcl_setting_title_backtorightmouse">Traktuj przycisk wstecz jako prawy przycisk myszy</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Niektóre urządzenia traktują prawy przycisk myszy jako przycisk wstecz. Jeśli używasz zewnętrznej myszki, powinieneś to włączyć.</string>
+    <string name="mcl_setting_title_flat_button_style">Styl płaskich przycisków</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Włącz to, aby zmienić styl przycisków kontrolnych na płaskie.</string>
     <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
     <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
     <string name="mcl_setting_subtitle_mousescale">Zmień rozmiar myszy wirtualnej.</string>
-    <string name="mcl_setting_title_javaargs">JVM Uruchom argumenty</string>
+    <string name="mcl_setting_title_javaargs">Argumenty uruchomiające JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostanie ona zmodyfikowana bez wiedzy.</string>
     <string name="mcl_setting_category_general">Ustawienia główne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
-    <string name="mcl_setting_category_veroption">Typ wersji będzie na liście wersji</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_category_veroption">Typ wersji jaka będzie na liście wersji</string>
     <string name="mcl_setting_veroption_release">Wydanie</string>
-    <string name="mcl_setting_veroption_snapshot">Migawka</string>
+    <string name="mcl_setting_veroption_snapshot">Wersja eksperymentalna</string>
     <string name="mcl_setting_veroption_oldalpha">Stara alfa</string>
-    <string name="mcl_setting_veroption_oldbeta">Stara wersja beta</string>
+    <string name="mcl_setting_veroption_oldbeta">Stara beta</string>
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
-    <string name="global_edit">Edytować</string>
+    <string name="global_edit">Edytuj</string>
     <string name="global_error">Błąd</string>
     <string name="global_load">Załaduj</string>
     <string name="global_name">Nazwa</string>
-    <string name="global_remove">Usunąć</string>
+    <string name="global_remove">Usuń</string>
     <string name="global_restart">Uruchom ponownie</string>
-    <string name="global_save">Zapisać</string>
+    <string name="global_save">Zapisz</string>
     <string name="global_unpacking">Rozpakowywanie %s</string>
     <string name="global_error_field_empty">To pole nie może być puste</string>
     <string name="global_waiting">Czekaj</string>
@@ -112,14 +120,14 @@
     <string name="mcn_exit_call">Wyjście</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niezgodna z Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niekompatybilna ze środowiskiem uruchomieniowym Java %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
     <string name="control_debug">Debug</string>
-    <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_primary">LPM</string>
+    <string name="control_secondary">PPM</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Ekw</string>
     <string name="control_up">▲</string>
@@ -136,15 +144,18 @@
     <string name="control_forceclose">Wymuś zamknięcie</string>
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Wejście debugowania</string>
-    <string name="control_customkey">Wyślij własny kod klucza</string>
+    <string name="control_customkey">Wyślij własny klawisz</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Edytowanie %s</string>
     <string name="customctrl_remove">Usunąć %s?</string>
-    <string name="customctrl_keyname">Kod Klucza</string>
+    <string name="customctrl_keyname">Klawisz</string>
     <string name="customctrl_toggle">Przełączalne</string>
+    <string name="customctrl_size">Rozmiar</string>
+    <string name="customctrl_size_width">Szerokość</string>
+    <string name="customctrl_size_height">Wysokość</string>
     <string name="customctrl_dynamicpos">Dynamiczna pozycja</string>
     <string name="customctrl_dynamicpos_x">Dynamiczne X</string>
     <string name="customctrl_dynamicpos_y">Dynamiczne Y</string>
@@ -167,4 +178,15 @@
     <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
     <string name="auto_ram_title">Automatyczny ram</string>
     <string name="autoram_info_msg">Pamięć ustawiona na %d MB</string>
+    <string name="mcl_setting_check_libraries">Sprawdź biblioteki po pobraniu</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ta opcja zmusza launcher do sprawdzenia skrótu biblioteki, jeśli jest dostępna. Zapobiega poszkodowanym pobraniom.</string>
+    <string name="dl_library_sha_fail">Biblioteka %s jest uszkodzona i zostanie ponownie pobrana</string>
+    <string name="dl_library_sha_unknown">Biblioteka %s nie może zostać sprawdzona, należy założyć, że jest dobra</string>
+    <string name="dl_library_sha_pass">Biblioteka %s jest dobra i użyteczna</string>
+    <string name="mcl_disable_gestures">Wyłącz gesty</string>
+    <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak przytrzymaj aby zniszczyć blok i stuknij, aby umieścić blok.</string>
+    <string name="mcl_setting_title_mousespeed">Prędkość myszki (%)</string>
+    <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszki</string>
+    <string name="customctrl_passthru">Myszka przelotka</string>
+    <string name="customctrl_rounded">Zaokrąglone</string>
 </resources>

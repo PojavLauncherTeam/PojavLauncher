@@ -178,4 +178,5 @@
     <string name="mcl_setting_check_libraries">Перевірити бібліотеки після завантаження</string>
     <string name="dl_library_sha_fail">Бібліотека %s пошкоджена та буде перезавантаженаf</string>
     <string name="mcl_disable_gestures">Вимкнути жести</string>
+    <string name="mcl_setting_title_mousespeed">Швидкість Миші</string>
 </resources>

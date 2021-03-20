@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Vous permet de diminuer la résolution du jeu. 100% représente la pleine résolution</string>
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
+    <string name="mcl_setting_title_flat_button_style">Style de bouton plat</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Activez cette option pour changer le style des boutons virtuels pour être plat.</string>
     <string name="mcl_setting_title_buttonscale">Mise à l\'échelle des boutons de contrôle</string>
     <string name="mcl_setting_subtitle_buttonscale">Mettre à l\'échelle si les boutons sont trop petits.</string>
     <string name="mcl_setting_title_mousescale">Mise à l\'échelle de la souris</string>
@@ -148,6 +150,9 @@
     <string name="customctrl_remove">Supprimer %s ?</string>
     <string name="customctrl_keyname">Touche</string>
     <string name="customctrl_toggle">Basculable</string>
+    <string name="customctrl_size">Taille</string>
+    <string name="customctrl_size_width">Largeur</string>
+    <string name="customctrl_size_height">Hauteur</string>
     <string name="customctrl_dynamicpos">Position dynamique</string>
     <string name="customctrl_dynamicpos_x">X dynamique</string>
     <string name="customctrl_dynamicpos_y">Y dynamique</string>
@@ -170,4 +175,11 @@
     <string name="auto_ram_subtitle">Active le régulateur automatique de la mémoire vive</string>
     <string name="auto_ram_title">Mémoire RAM automatique</string>
     <string name="autoram_info_msg">Mémoire définie à %d Mo</string>
+    <string name="mcl_setting_check_libraries">Vérifier les bibliothèques après téléchargement</string>
+    <string name="mcl_setting_check_libraries_subtitle">Cette option force le lanceur à vérifier le hachage de la bibliothèque s\'il est disponible. Empêche les téléchargements défectueux.</string>
+    <string name="dl_library_sha_fail">La bibliothèque %s est endommagée et sera retéléchargée</string>
+    <string name="dl_library_sha_unknown">La bibliothèque %s ne peut pas être vérifiée, et est supposée bonne</string>
+    <string name="dl_library_sha_pass">La bibliothèque %s est en bon état et utilisable</string>
+    <string name="mcl_disable_gestures">Désactiver les gestes</string>
+    <string name="mcl_disable_gestures_subtitle">Désactive les gestes tels que maintenir enfoncé pour casser le bloc, et appuyer pour placer un bloc.</string>
 </resources>

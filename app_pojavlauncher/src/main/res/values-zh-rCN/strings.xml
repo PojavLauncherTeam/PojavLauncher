@@ -64,10 +64,14 @@
     <string name="mcl_setting_subtitle_hide_sidebar">怀念旧 v1 界面的用户可能喜欢这样。提供了更接近全屏的体验。</string>
     <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
     <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将画面扩展至其下方。\n给您以更完整的沉浸感。</string>
-    <string name="mcl_setting_title_resolution_scaler">分辨率缩放器</string>
+    <string name="mcl_setting_title_resolution_scaler">分辨率缩放</string>
     <string name="mcl_setting_subtitle_resolution_scaler">允许降低游戏画面分辨率。原生分辨率为 100%</string>
     <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长</string>
+    <string name="mcl_setting_title_backtorightmouse">将返回键视为鼠标右键</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">某些设备将外置鼠标右键作为返回键处理。如果您使用外置鼠标，您应该启用此功能。</string>
+    <string name="mcl_setting_title_flat_button_style">扁平化风格按键</string>
+    <string name="mcl_setting_subtitle_flat_button_style">启用此选项可以使按键风格扁平化。</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
     <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其放大。</string>
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
@@ -76,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
     <string name="mcl_setting_category_general">常规设置</string>
     <string name="mcl_setting_category_scaling">缩放设置</string>
+    <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
@@ -170,7 +175,18 @@
     <string name="main_nocrash">未检测到崩溃</string>
     <string name="main_nolog">无日志。</string>
     <string name="main_no_news_feed">新闻获取失败！</string>
-    <string name="auto_ram_subtitle">启用 RAM 自动调节器</string>
+    <string name="auto_ram_subtitle">启用 RAM 自动调节</string>
     <string name="auto_ram_title">自动 RAM</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
+    <string name="mcl_setting_check_libraries">在下载后检查运行库</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
+    <string name="dl_library_sha_fail">运行库 %s 已损坏，将被重新下载</string>
+    <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
+    <string name="dl_library_sha_pass">运行库 %s 正常</string>
+    <string name="mcl_disable_gestures">禁用手势</string>
+    <string name="mcl_disable_gestures_subtitle">禁用手势，例如长按破坏方块和点击放置方块。</string>
+    <string name="mcl_setting_title_mousespeed">鼠标速度</string>
+    <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
+    <string name="customctrl_passthru">鼠标透传</string>
+    <string name="customctrl_rounded">圆角</string>
 </resources>

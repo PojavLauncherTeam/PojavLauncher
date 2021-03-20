@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Hati-hati, ini bisa meng-crash permainan jika di-ubah tanpa pengetahuan.</string>
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -184,4 +185,11 @@
     <string name="dl_library_sha_pass">Library %s baik-baik saja dan dapat digunakan</string>
     <string name="mcl_disable_gestures">Matikan gestures</string>
     <string name="mcl_disable_gestures_subtitle">Mematikan gestures, seperti pencet lama untuk menghancurkan block, dan pencet untuk menempatkan block.</string>
+    <string name="mcl_setting_title_mousespeed">Kecepatan Mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Mengubah kecepatan perangkat lunak mouse</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Melengkung</string>
+    <string name="memory_warning_msg">Alokasi ram bebas sekarang (%d) kurang dari ram yang di-alokasi (%d), ini bisa menyebabkan kecelakaan. Ubah alokasinya jika gamenya kecelakaan.</string>
+    <string name="mcl_memory_allocation">Alokasi Memori</string>
+    <string name="mcl_memory_allocation_subtitle">Mengkontrol berapa banyak memori yang diberikan ke Minecraft</string>
 </resources>

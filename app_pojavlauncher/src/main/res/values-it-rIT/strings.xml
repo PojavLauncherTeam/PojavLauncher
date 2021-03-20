@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Fa attenzione, se effettui modifiche senza sapere quello che fai potresti crashare.</string>
     <string name="mcl_setting_category_general">Impostazioni generali</string>
     <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno visibili nella lista delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -184,4 +185,11 @@
     <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
     <string name="mcl_disable_gestures">Disattiva gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disattiva gestures, ad esempio premere per rompere un blocco, e cliccare per piazzarlo.</string>
+    <string name="mcl_setting_title_mousespeed">Velocità mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Cambia la velocità del mouse via software</string>
+    <string name="customctrl_passthru">Bypassa mouse</string>
+    <string name="customctrl_rounded">Arrotondato</string>
+    <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
+    <string name="mcl_memory_allocation">Memoria allocata</string>
+    <string name="mcl_memory_allocation_subtitle">Controlla quanta memoria dedicare a Minecraft</string>
 </resources>
