@@ -27,3 +27,8 @@ add_library(awt_xawt SHARED
         # xawt_fake.c # doesn't exist?
         )
 # target_link_libraries(awt_xawt PRIVATE awt_headless) # FIXME
+
+include(OpenCompositeStub/CMakeLists.txt)
+
+# Required so it can send the EGL info to OC
+target_link_libraries(pojavexec PRIVATE openvr_api)

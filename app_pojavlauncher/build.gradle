@@ -25,7 +25,14 @@ android {
 
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
-        minSdkVersion 21
+
+        // Oculus says to set this to 23, but we need at least 24 to use the libraries in this version of the NDK, and my Q2 is on 29
+        // The original Quest is apparently 25, but I wonder if different regions are still on different versions
+        // or something like that?
+        // Also Vulkan 1.1 is only available on 28 and up. We could load the symbols properly, but this is easier.
+        // FIXME switch down to 24 or 25 and implement the Vulkan symbol loading for the original quest
+        minSdkVersion 28
+
         targetSdkVersion 29
         versionCode 156247
         versionName "3.3.1.1_rel_" + getDate()
@@ -50,12 +57,12 @@ android {
         }
 
         release {
-	    // Don't set to true or java.awt will be a.a or something similar.
+            // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-	    // defaultConfig already set
+            // defaultConfig already set
             // multiDexEnabled = true
-           // debuggable = true
+            // debuggable = true
         }
     }
 
