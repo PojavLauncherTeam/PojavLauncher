@@ -189,4 +189,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Mengubah kecepatan perangkat lunak mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_rounded">Melengkung</string>
+    <string name="memory_warning_msg">Alokasi ram bebas sekarang (%d) kurang dari ram yang di-alokasi (%d), ini bisa menyebabkan kecelakaan. Ubah alokasinya jika gamenya kecelakaan.</string>
+    <string name="mcl_memory_allocation">Alokasi Memori</string>
+    <string name="mcl_memory_allocation_subtitle">Mengkontrol berapa banyak memori yang diberikan ke Minecraft</string>
 </resources>
