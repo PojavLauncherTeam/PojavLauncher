@@ -189,4 +189,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do mouse do software</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_rounded">Arredondado</string>
+    <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), oque pode causar crashes. Altere a quantidade se o jogo crashar.</string>
+    <string name="mcl_memory_allocation">Alocação de memória</string>
+    <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será dado ao Minecraft</string>
 </resources>
