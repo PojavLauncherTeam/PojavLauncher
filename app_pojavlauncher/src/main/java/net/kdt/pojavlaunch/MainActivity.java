@@ -1,9 +1,13 @@
 package net.kdt.pojavlaunch;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.*;
 import android.view.*;
 
 import androidx.annotation.Nullable;
+
+import com.google.android.material.navigation.NavigationView;
 
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
@@ -15,7 +19,7 @@ import java.io.*;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
 public class MainActivity extends BaseMainActivity {
-    private ControlLayout mControlLayout;
+    public ControlLayout mControlLayout;
     
     private View.OnClickListener mClickListener;
     private View.OnTouchListener mTouchListener;
@@ -25,7 +29,27 @@ public class MainActivity extends BaseMainActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initLayout(R.layout.main_with_customctrl);
-
+        super.ingameControlsEditorListener = new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_ctrl_load:
+                        CustomControlsActivity.load(mControlLayout);
+                        break;
+                    case R.id.menu_ctrl_add:
+                        mControlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
+                        break;
+                    case R.id.menu_ctrl_selectdefault:
+                        CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
+                        break;
+                    case R.id.menu_ctrl_save:
+                        CustomControlsActivity.save(true,mControlLayout);
+                        break;
+                }
+                //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        };
 
         mClickListener = new View.OnClickListener(){
             @Override
@@ -89,11 +113,11 @@ public class MainActivity extends BaseMainActivity {
                             break;
                             
                         case ControlData.SPECIALBTN_SCROLLDOWN:
-                            CallbackBridge.sendScroll(0, 0.1d);
+                            if(!isDown)CallbackBridge.sendScroll(0, 1d);
                             break;
                             
                         case ControlData.SPECIALBTN_SCROLLUP:
-                            CallbackBridge.sendScroll(0, -0.1d);
+                            if(!isDown)CallbackBridge.sendScroll(0, -1d);
                             break;
                     }
                 }
@@ -154,5 +178,25 @@ public class MainActivity extends BaseMainActivity {
         
         // toggleGui(null);
         mControlLayout.toggleControlVisible();
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            // Reload PREF_DEFAULTCTRL_PATH
+            LauncherPreferences.loadPreferences();
+            try {
+                mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if(isInEditor) CustomControlsActivity.save(true,mControlLayout);
     }
 }

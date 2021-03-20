@@ -48,13 +48,12 @@ static const jboolean const_javaw = JNI_FALSE;
 static const jboolean const_cpwildcard = JNI_TRUE;
 static const jint const_ergo_class = 0; // DEFAULT_POLICY
 static struct sigaction old_sa[NSIG];
-static const char* tag = "jrelog";
+void (*__old_sa)(int signal, siginfo_t *info, void *reserved);
 void android_sigaction(int signal, siginfo_t *info, void *reserved)
 {
-    void* ret = malloc(128);
-    memset(ret,0,128);
-    sprintf(ret,"signal %d code %p addr %p", signal,info->si_code,info->si_addr);
-    __android_log_write(ANDROID_LOG_INFO,tag,ret);
+    printf("process killed with signal %d code %p addr %p", signal,info->si_code,info->si_addr);
+    __old_sa = old_sa[signal].sa_sigaction;
+    __old_sa(signal,info,reserved);
     exit(1);
 }
 typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
@@ -130,7 +129,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
     CATCHSIG(SIGABRT);
     CATCHSIG(SIGBUS);
     CATCHSIG(SIGFPE);
-    CATCHSIG(SIGSEGV);
+    //CATCHSIG(SIGSEGV);
     CATCHSIG(SIGSTKFLT);
     CATCHSIG(SIGPIPE);
    //Signal trapper ready
@@ -158,38 +157,3 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
    
     return res;
 }
-static int pfd[2];
-static pthread_t logger;
-
-static void *logger_thread() {
-    ssize_t  rsize;
-    char buf[512];
-    while((rsize = read(pfd[0], buf, sizeof(buf)-1)) > 0) {
-        if(buf[rsize-1]=='\n') {
-            rsize=rsize-1;
-        }
-        buf[rsize]=0x00;
-        __android_log_write(ANDROID_LOG_INFO,tag,buf);
-    }
-}
-
-JNIEXPORT void JNICALL
-Java_net_kdt_pojavlaunch_utils_JREUtils_redirectLogcat(JNIEnv *env, jclass clazz) {
-    // TODO: implement redirectLogcat()
-    setvbuf(stdout, 0, _IOLBF, 0); // make stdout line-buffered
-    setvbuf(stderr, 0, _IONBF, 0); // make stderr unbuffered
-
-    /* create the pipe and redirect stdout and stderr */
-    pipe(pfd);
-    dup2(pfd[1], 1);
-    dup2(pfd[1], 2);
-
-    /* spawn the logging thread */
-    if(pthread_create(&logger, 0, logger_thread, 0) == -1) {
-        __android_log_write(ANDROID_LOG_ERROR,tag,"Error while spawning logging thread. JRE output won't be logged.");
-    }
-
-    pthread_detach(logger);
-    __android_log_write(ANDROID_LOG_INFO,tag,"Starting logging STDIO as jrelog:V");
-}
-

@@ -2,6 +2,7 @@
 [![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
 [![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/6RpEJda)
 [![Reddit](https://img.shields.io/badge/dynamic/json.svg?label=r/PojavLauncher%20member%20count&query=$.data.subscribers&url=https://www.reddit.com/r/PojavLauncher/about.json)](https://reddit.com/r/PojavLauncher)
+[![Google Play](https://gist.githubusercontent.com/meefik/54a54afa7cc1dc600bdb855cb7895a4a/raw/ad617c006a1ac28d067c9a87cec60199ca8fef7c/get-it-on-google-play.png)](https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch)
 # PojavLauncher
 
 ## Note
@@ -26,9 +27,18 @@ Will be moved to **BUILDING.md**
 - JRE for Android is [here](https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u), also the build script [here](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch).
 - Follow build instruction on build script [README.md](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/blob/buildjre8/README.md).
 - You can also get [CI auto builds](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/actions).
-- Spliting JRE and put to the launcher: **coming soon**.
+- Spliting JRE and put to the launcher: 
+        - Get JREs for all of 4 supported architectures (arm, arm64, x86, x86_64) </br>
+        - Split JRE into parts:</br>
+                Platform-independent: .jar files, libraries, configs, etc...</br>
+                Platform-dependent: .so files, etc...</br>
+        - Create:</br>
+                file named `universal.tar.xz` with all platform-independent files</br>
+                4 files named `bin-<arch>.tar.xz` with all platform-dependent files per-architecture</br>
+        - Put these in `assets/components/jre/` folder</br>
+        - (If needed) update the Version file with the current date</br>
 
-### LWJGL and GLFW
+### LWJGL
 - **Coming soon**
 
 ### The Launcher
@@ -41,7 +51,18 @@ bash scripts/languagelist_updater.sh
 # On Windows:
 scripts\languagelist_updater.bat
 ```
-- Then, build use Android Studio.
+- Then, run these commands ~~build use Android Studio~~.
+```
+# Build GLFW stub
+./gradlew :jre_lwjgl3glfw:build
+# mkdir app_pojavlauncher/src/main/assets/components/internal_libs
+rm app_pojavlauncher/src/main/assets/components/lwjgl3/lwjgl-glfw-classes.jar
+cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main/assets/components/lwjgl3/lwjgl-glfw-classes.jar
+        
+# Build the launcher
+./gradlew :app_pojavlauncher:assembleDebug
+```
+(Replace `gradlew` to `gradlew.bat` if you are building on Windows).
 
 ## Current status
 - [x] ~~OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.~~ Replaced by JRE8.
@@ -57,6 +78,7 @@ scripts\languagelist_updater.bat
 - [ ] More...
 
 ## Known Issues
+- Minecraft `21w10a` or newer are currently not yet supported due to the new GLSL usage.
 - in 1.16 and up spawn eggs banners are white (you can fix this by adding this to your JVM flags 
 `-Dorg.lwjgl.opengl.libname=libgl4es_115.so`, only works on 1.16 and up, do not use under this version)
 - controller mods aren't working

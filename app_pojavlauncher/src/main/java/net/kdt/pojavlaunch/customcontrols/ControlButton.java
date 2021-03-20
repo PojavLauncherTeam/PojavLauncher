@@ -28,6 +28,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
+        setPadding(4, 4, 4, 4);
         setWillNotDraw(false);
 
         mScaleAt = layout.mLayout.scaledAt;
@@ -37,7 +38,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         if (!LauncherPreferences.PREF_BUTTON_FLAT) {
             setBackgroundResource(R.drawable.control_button);
         } else {
-            setBackgroundColor(0x4D000000);
+            setBackgroundResource(R.drawable.control_button_black);
         }
         setOnLongClickListener(this);
 
@@ -78,7 +79,11 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             setTranslationX(moveX = properties.x);
             setTranslationY(moveY = properties.y);
         }
-
+        if (!LauncherPreferences.PREF_BUTTON_FLAT) {
+            setBackgroundResource(mProperties.isRound ? R.drawable.control_button_round : R.drawable.control_button);
+        } else {
+            setBackgroundResource(mProperties.isRound ? R.drawable.control_button_round_black : R.drawable.control_button_black);
+        }
         if (properties.specialButtonListener == null) {
             // A non-special button or inside custom controls screen so skip listener
         } else if (properties.specialButtonListener instanceof View.OnClickListener) {
@@ -196,6 +201,13 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public boolean onTouchEvent(MotionEvent event) {
         if (!mModifiable) {
             mCanTriggerLongClick = false;
+            if(event.getAction() == MotionEvent.ACTION_MOVE && CallbackBridge.isGrabbing() && mProperties.passThruEnabled) {
+                MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
+                if(v != null) {
+                    v.dispatchTouchEvent(event);
+                    return true;
+                }
+            }
             if (mProperties.keycode >= 0) {
                 if (!mProperties.isToggle) {
                     switch (event.getActionMasked()) {

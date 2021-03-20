@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,7 +32,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -74,38 +74,25 @@ import org.apache.commons.io.IOUtils;
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
 {
-    private Object mLockStoragePerm = new Object(),
-        mLockSelectJRE = new Object();
+    private final Object mLockStoragePerm = new Object();
+    private final Object mLockSelectJRE = new Object();
     
     private EditText edit2, edit3;
-    private int REQUEST_STORAGE_REQUEST_CODE = 1;
-    private ProgressBar prb;
+    private final int REQUEST_STORAGE_REQUEST_CODE = 1;
     private CheckBox sRemember, sOffline;
-    private LinearLayout loginLayout;
-    private Spinner spinnerChgLang;
-    private ImageView imageLogo;
     private TextView startupTextView;
-    
     private SharedPreferences firstLaunchPrefs;
+    private MinecraftAccount mProfile = null;
     
     private static boolean isSkipInit = false;
-    
 
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
-    public static final String PREF_JAVARUNTIME_VER = "javaRuntimeVersion";
     
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState); // false);
+        super.onCreate(savedInstanceState); // false;
 
         Tools.updateWindowSize(this);
-
-        ControlData[] specialButtons = ControlData.getSpecialButtons();
-        specialButtons[0].name = getString(R.string.control_keyboard);
-        specialButtons[1].name = getString(R.string.control_toggle);
-        specialButtons[2].name = getString(R.string.control_primary);
-        specialButtons[3].name = getString(R.string.control_secondary);
-        specialButtons[4].name = getString(R.string.control_mouse);
         
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
         new InitTask().execute(isSkipInit);
@@ -115,12 +102,8 @@ public class PojavLoginActivity extends BaseActivity
         private AlertDialog startAle;
         private ProgressBar progress;
 
-        private ProgressBar progressSpin;
-        private AlertDialog progDlg;
-
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
             LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
 
@@ -147,9 +130,7 @@ public class PojavLoginActivity extends BaseActivity
         @Override
         protected Integer doInBackground(Boolean[] params) {
             // If trigger a quick restart
-            if (params[0] == true) {
-                return 0;
-            }
+            if (params[0]) return 0;
             
             try {
                 Thread.sleep(2000);
@@ -195,26 +176,14 @@ public class PojavLoginActivity extends BaseActivity
         @Override
         protected void onPostExecute(Integer obj) {
             startAle.dismiss();
-            if (progressSpin != null) progressSpin.setVisibility(View.GONE);
-            if (obj == 0) {
-                if (progDlg != null) progDlg.dismiss();
-                uiInit();
-            }
+            if (obj == 0) uiInit();
         }
     }
     
     private void uiInit() {
-        setContentView(R.layout.launcher_login_v2);
+        setContentView(R.layout.launcher_login_v3);
 
-        loginLayout = findViewById(R.id.login_layout_linear);
-        spinnerChgLang = findViewById(R.id.login_spinner_language);
-        imageLogo = findViewById(R.id.login_image_logo);
-        loginLayout.postDelayed(new Runnable(){
-                @Override
-                public void run(){
-                    imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
-                }
-            }, 100);
+        Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
 
         String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
         SpannableString defaultLangChar = new SpannableString(defaultLang);
@@ -270,7 +239,7 @@ public class PojavLoginActivity extends BaseActivity
                 }
                 
                 LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
-                LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).commit();
+                LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).apply();
                 
                 // Restart to apply language change
                 finish();
@@ -283,7 +252,6 @@ public class PojavLoginActivity extends BaseActivity
             
         edit2 = (EditText) findViewById(R.id.login_edit_email);
         edit3 = (EditText) findViewById(R.id.login_edit_password);
-        if(prb == null) prb = (ProgressBar) findViewById(R.id.launcherAccProgress);
         
         sRemember = findViewById(R.id.login_switch_remember);
         sOffline  = findViewById(R.id.login_switch_offline);
@@ -304,10 +272,6 @@ public class PojavLoginActivity extends BaseActivity
         super.onResume();
         
         Tools.updateWindowSize(this);
-        
-        if (loginLayout != null && imageLogo != null) {
-            imageLogo.setTranslationY(loginLayout.getY() - (imageLogo.getHeight() / 2f));
-        }
         
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
@@ -568,6 +532,7 @@ public class PojavLoginActivity extends BaseActivity
             }
             final String tarEntryName = tarEntry.getName();
             runOnUiThread(new Runnable(){
+                @SuppressLint("StringFormatInvalid")
                 @Override
                 public void run() {
                     startupTextView.setText(getString(R.string.global_unpacking, tarEntryName));
@@ -675,11 +640,7 @@ public class PojavLoginActivity extends BaseActivity
 
         final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
-        int xScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().widthPixels;
-        int yScreen = PojavLoginActivity.this.getResources().getDisplayMetrics().heightPixels;
-
         accountDialog.setContentView(R.layout.simple_account_list_holder);
-
 
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -693,22 +654,13 @@ public class PojavLoginActivity extends BaseActivity
 
             String accNameStr = s.substring(0, s.length() - 5);
             String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
-            Bitmap bitmap = Bitmap.createBitmap(8, 8, Bitmap.Config.ARGB_8888);
             if (skinFaceBase64 != null) {
                 byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
-                bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
-            } else {
-                try {
-                    bitmap = BitmapFactory.decodeStream(getAssets().open("ic_steve.png"));
-                } catch (IOException e) {
-                    // Should never happen
-                    e.printStackTrace();
-                }
-            }
-            accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
-                    Bitmap.createScaledBitmap(bitmap, 80, 80, false)),
-                    null, null, null);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
             
+                accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
+                        bitmap), null, null, null);
+            }
             accountName.setText(accNameStr);
 
             accountListLayout.addView(child);
@@ -764,12 +716,14 @@ public class PojavLoginActivity extends BaseActivity
                         public void onClick(DialogInterface p1, int p2) {
                             new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
                             accountListLayout.removeViewsInLayout(accountIndex_final, 1);
-                            //Resize the window
+
                             if (accountListLayout.getChildCount() == 0) {
                                 accountDialog.dismiss(); //No need to keep it, since there is no account
                                 return;
                             }
-                            accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int) Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*55)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
+                            //Refreshes the layout with the same settings so it take the missing child into account.
+                            accountListLayout.setLayoutParams(accountListLayout.getLayoutParams());
+
                         }
                     });
                     builder2.setNegativeButton(android.R.string.cancel, null);
@@ -778,9 +732,6 @@ public class PojavLoginActivity extends BaseActivity
             });
 
         }
-
-        //The value 73 and 56 are dp numbers, converted into px in order to resize the layout.
-        accountDialog.getWindow().setLayout((int)(xScreen*0.4),(int)Math.min((yScreen*0.8), (73 + accountListLayout.getChildCount()*56)*(PojavLoginActivity.this.getResources().getDisplayMetrics().densityDpi/160f) ));
         accountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         accountDialog.show();
     }
@@ -805,7 +756,7 @@ public class PojavLoginActivity extends BaseActivity
         return null;
     }
     
-    private MinecraftAccount mProfile = null;
+
     public void loginMC(final View v)
     {
         
@@ -813,7 +764,9 @@ public class PojavLoginActivity extends BaseActivity
             mProfile = loginOffline();
             playProfile(false);
         } else {
+            ProgressBar prb = findViewById(R.id.launcherAccProgress);
             new LoginTask().setLoginListener(new LoginListener(){
+
 
                     @Override
                     public void onBeforeLogin() {

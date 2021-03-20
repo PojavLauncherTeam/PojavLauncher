@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.*;
 import androidx.appcompat.widget.*;
+
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
@@ -20,7 +22,6 @@ import androidx.appcompat.widget.PopupMenu;
 public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<String>>
 {
     private BaseLauncherActivity mActivity;
-    
     public RefreshVersionListTask(BaseLauncherActivity activity) {
         mActivity = activity;
     }
@@ -29,7 +30,21 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     protected ArrayList<String> doInBackground(Void[] p1)
     {
         try {
-            mActivity.mVersionList = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString("https://launchermeta.mojang.com/mc/game/version_manifest_v2.json"), JMinecraftVersionList.class);
+            //mActivity.mVersionList = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString(""), JMinecraftVersionList.class);
+            {
+                ArrayList<JMinecraftVersionList.Version> versions = new ArrayList<>();
+                String[] repositories = LauncherPreferences.PREF_VERSION_REPOS.split(";");
+                for (String url : repositories) {
+                    JMinecraftVersionList list;
+                    Log.i("ExtVL", "Syncing to external: " + url);
+                    list = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString(url), JMinecraftVersionList.class);
+                    Log.i("ExtVL","Downloaded the version list, len="+list.versions.length);
+                    Collections.addAll(versions,list.versions);
+                }
+                mActivity.mVersionList = new JMinecraftVersionList();
+                mActivity.mVersionList.versions = versions.toArray(new JMinecraftVersionList.Version[versions.size()]);
+                Log.i("ExtVL","Final list size: " + mActivity.mVersionList.versions.length);
+            }
             ArrayList<String> versionStringList = filter(mActivity.mVersionList.versions, new File(Tools.DIR_HOME_VERSION).listFiles());
 
             return versionStringList;
@@ -43,7 +58,6 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     protected void onPostExecute(ArrayList<String> result)
     {
         super.onPostExecute(result);
-
         final PopupMenu popup = new PopupMenu(mActivity, mActivity.mVersionSelector);  
         popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());  
 
@@ -153,7 +167,8 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
             if ((value1.type.equals("release") && LauncherPreferences.PREF_VERTYPE_RELEASE) ||
                 (value1.type.equals("snapshot") && LauncherPreferences.PREF_VERTYPE_SNAPSHOT) ||
                 (value1.type.equals("old_alpha") && LauncherPreferences.PREF_VERTYPE_OLDALPHA) ||
-                (value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA)) {
+                (value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA) ||
+                (value1.type.equals("modified"))) {
                 output.add(value1.id);
             }
         }

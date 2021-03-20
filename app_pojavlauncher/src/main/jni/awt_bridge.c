@@ -6,7 +6,7 @@ static JavaVM* dalvikJavaVMPtr;
 static JavaVM* runtimeJavaVMPtr;
 static JNIEnv* runtimeJNIEnvPtr_GRAPHICS;
 static JNIEnv* runtimeJNIEnvPtr_INPUT;
-
+static JNIEnv* runtimeJNIEnvPtr_CLIPBOARD;
 jclass class_CTCScreen;
 jmethodID method_GetRGB;
 
@@ -88,4 +88,33 @@ JNIEXPORT jintArray JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_renderAWTScr
     // free(rgbArray);
     
     return androidRgbArray;
-} 
+}
+
+jobject clipboard = NULL;
+jclass clipboardClass;
+static jobject obtainClipboard(JNIEnv *env) {
+    jclass toolkitClass = (*runtimeJNIEnvPtr_CLIPBOARD)->FindClass(runtimeJNIEnvPtr_CLIPBOARD,"java/awt/Toolkit");
+    jobject toolkit = (*runtimeJNIEnvPtr_CLIPBOARD)->CallStaticObjectMethod(runtimeJNIEnvPtr_CLIPBOARD,toolkitClass,(*runtimeJNIEnvPtr_CLIPBOARD)->GetStaticMethodID(runtimeJNIEnvPtr_CLIPBOARD,toolkitClass,"getDefaultToolkit", "()Ljava/awt/Toolkit;"));
+    clipboardClass = (*runtimeJNIEnvPtr_CLIPBOARD)->NewGlobalRef(runtimeJNIEnvPtr_CLIPBOARD,(*runtimeJNIEnvPtr_CLIPBOARD)->FindClass(runtimeJNIEnvPtr_CLIPBOARD,"java/awt/datatransfer/Clipboard"));
+    clipboard = (*runtimeJNIEnvPtr_CLIPBOARD)->NewGlobalRef(runtimeJNIEnvPtr_CLIPBOARD,(*runtimeJNIEnvPtr_CLIPBOARD)->CallObjectMethod(runtimeJNIEnvPtr_CLIPBOARD,toolkit,(*runtimeJNIEnvPtr_CLIPBOARD)->GetMethodID(runtimeJNIEnvPtr_CLIPBOARD,toolkitClass,"getSystemClipboard", "()Ljava/awt/datatransfer/Clipboard;")));
+    (*runtimeJNIEnvPtr_CLIPBOARD)->DeleteLocalRef(runtimeJNIEnvPtr_CLIPBOARD,toolkitClass);
+    (*runtimeJNIEnvPtr_CLIPBOARD)->DeleteLocalRef(runtimeJNIEnvPtr_CLIPBOARD,toolkit);
+}
+
+JNIEXPORT void JNICALL
+Java_net_kdt_pojavlaunch_AWTInputBridge_nativePutClipboard(JNIEnv *env, jclass clazz,
+                                                           jstring data) {
+    if (runtimeJNIEnvPtr_CLIPBOARD == NULL) {
+        if (runtimeJavaVMPtr != NULL) {
+            (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr_CLIPBOARD, NULL);
+        }else{
+            return;
+        }
+    }
+    if(clipboard == NULL) obtainClipboard(runtimeJNIEnvPtr_CLIPBOARD);
+    jclass stringSelection = (*runtimeJNIEnvPtr_CLIPBOARD)->FindClass(runtimeJNIEnvPtr_CLIPBOARD,"java/awt/datatransfer/StringSelection");
+    jobject o_stringSelection = (*runtimeJNIEnvPtr_CLIPBOARD)->NewObject(runtimeJNIEnvPtr_CLIPBOARD,stringSelection,(*runtimeJNIEnvPtr_CLIPBOARD)->GetMethodID(runtimeJNIEnvPtr_CLIPBOARD,stringSelection,"<init>", "(Ljava/lang/String;)V"),NULL);
+    (*runtimeJNIEnvPtr_CLIPBOARD)->CallVoidMethod(runtimeJNIEnvPtr_CLIPBOARD,clipboard,(*runtimeJNIEnvPtr_CLIPBOARD)->GetMethodID(env,clipboardClass,"setContents", "(Ljava/awt/datatransfer/Transferable;Ljava/awt/datatransfer/ClipboardOwner;)V"),o_stringSelection,NULL);
+    (*runtimeJNIEnvPtr_CLIPBOARD)->DeleteLocalRef(runtimeJNIEnvPtr_CLIPBOARD,stringSelection);
+    (*runtimeJNIEnvPtr_CLIPBOARD)->DeleteLocalRef(runtimeJNIEnvPtr_CLIPBOARD,o_stringSelection);
+}

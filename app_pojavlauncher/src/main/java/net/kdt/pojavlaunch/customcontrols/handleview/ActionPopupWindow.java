@@ -115,7 +115,10 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
                         final CheckBox checkToggle = dialog.findViewById(R.id.controlsetting_checkbox_toggle);
                         checkToggle.setChecked(properties.isToggle);
-
+                        final CheckBox checkPassthru = dialog.findViewById(R.id.controlsetting_checkbox_passthru);
+                        checkPassthru.setChecked(properties.passThruEnabled);
+                        final CheckBox checkRound = dialog.findViewById(R.id.controlsetting_checkbox_round);
+                        checkRound.setChecked(properties.isRound);
                         final EditText editWidth = dialog.findViewById(R.id.controlsetting_edit_width);
                         final EditText editHeight = dialog.findViewById(R.id.controlsetting_edit_height);
                         editWidth.setText(Float.toString(properties.width));
@@ -205,6 +208,8 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
                                         
 										properties.hidden = false;
                                         properties.isToggle = checkToggle.isChecked();
+                                        properties.passThruEnabled = checkPassthru.isChecked();
+                                        properties.isRound = checkRound.isChecked();
                                         properties.isDynamicBtn = checkDynamicPos.isChecked();
                                         properties.width = Float.parseFloat(editWidth.getText().toString());
                                         properties.height = Float.parseFloat(editHeight.getText().toString());

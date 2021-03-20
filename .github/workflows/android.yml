@@ -7,6 +7,7 @@ on:
   push:
     branches-ignore:
       - 'l10n_v3_openjdk2'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -34,7 +35,7 @@ jobs:
         git checkout master
         git merge upstream/main || echo "Merge exit code $?"
         export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
-        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
+        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
         cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
         
     - name: Build APK with Gradle

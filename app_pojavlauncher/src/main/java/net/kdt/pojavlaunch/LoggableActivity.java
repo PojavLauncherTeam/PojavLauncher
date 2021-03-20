@@ -13,6 +13,5 @@ public abstract class LoggableActivity extends BaseActivity {
     public void appendlnToLog(String text, boolean checkAllow) {
         appendToLog(text + "\n", checkAllow);
     }
-    
     public abstract void appendToLog(final String text, boolean checkAllow);
 }

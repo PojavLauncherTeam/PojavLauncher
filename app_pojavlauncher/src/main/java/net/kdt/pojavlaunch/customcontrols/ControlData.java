@@ -38,7 +38,7 @@ public class ControlData implements Cloneable
      * bigger device or vice versa.
      */
     public String dynamicX, dynamicY;
-    public boolean isDynamicBtn, isToggle;
+    public boolean isDynamicBtn, isToggle, passThruEnabled, isRound;
     
     public static ControlData[] getSpecialButtons(){
         if (SPECIAL_BUTTONS == null) {
