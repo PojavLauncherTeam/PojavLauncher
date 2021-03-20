@@ -2,7 +2,7 @@ name: Android CI
 
 on:
   pull_request:
-      branches-ignore:
+    branches-ignore:
       - 'l10n_v3_openjdk'
   push:
     branches-ignore:
