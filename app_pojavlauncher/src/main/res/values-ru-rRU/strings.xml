@@ -184,4 +184,6 @@
     <string name="dl_library_sha_pass">Библиотека %s преверена и может быть использована</string>
     <string name="mcl_disable_gestures">Отключение жестов</string>
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
+    <string name="mcl_memory_allocation">Выделение памяти</string>
+    <string name="mcl_memory_allocation_subtitle">Управляет количеством выделенной игре памяти</string>
 </resources>

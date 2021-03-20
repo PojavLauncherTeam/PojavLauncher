@@ -53,18 +53,19 @@
             android:summary="@string/mcl_setting_subtitle_hide_sidebar"
             android:title="@string/mcl_setting_title_hide_sidebar"
             app2:icon="@drawable/hide_sidebar" />
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="allocation"
+            android:icon="@drawable/ic_auto_ram"
+            android:summary="@string/mcl_memory_allocation_subtitle"
+            android:title="@string/mcl_memory_allocation"
+            app2:showSeekBarValue="true"
+            app2:selectable="false"/>
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="ignoreNotch"
             android:summary="@string/mcl_setting_subtitle_ignore_notch"
             android:title="@string/mcl_setting_title_ignore_notch"
             app2:icon="@drawable/ignore_notch" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_auto_ram"
-            android:key="autoRam"
-            android:summary="@string/auto_ram_subtitle"
-            android:title="@string/auto_ram_title" />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_map_rmb"

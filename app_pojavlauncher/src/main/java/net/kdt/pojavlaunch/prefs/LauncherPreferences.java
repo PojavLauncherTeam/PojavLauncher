@@ -28,6 +28,7 @@ public class LauncherPreferences
 	public static boolean PREF_CHECK_LIBRARY_SHA = true;
 	public static boolean PREF_DISABLE_GESTURES = false;
 	public static float PREF_MOUSESPEED = 1f;
+	public static int PREF_RAM_ALLOCATION=300;
 	public static void loadPreferences() {
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
 		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
@@ -47,6 +48,7 @@ public class LauncherPreferences
         PREF_LANGUAGE = DEFAULT_PREF.getString("language", "default");
         PREF_CHECK_LIBRARY_SHA = DEFAULT_PREF.getBoolean("checkLibraries",true);
 		PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
+		PREF_RAM_ALLOCATION = DEFAULT_PREF.getInt("allocation",300);
 		// Get double of max Android heap to set default heap size
 		int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
         int doubleAndroidHeap = androidHeap * 2;
