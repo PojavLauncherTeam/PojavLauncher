@@ -183,4 +183,7 @@
     <string name="mcl_setting_subtitle_mousespeed">يغير سرعة الفأرة البرمجية</string>
     <string name="customctrl_passthru">سماح تحريك أزرار الشاشة</string>
     <string name="customctrl_rounded">مدوّر</string>
+    <string name="memory_warning_msg">الكمية الحالية من ذاكرة الوصول العشوائي المجانية (الرام) (%d) أقل من ذاكرة الوصول العشوائي (الرام) المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. قم بتغيير التخصيص إذا تحطمت اللعبة.</string>
+    <string name="mcl_memory_allocation">تخصيص الذاكرة (الميموري)</string>
+    <string name="mcl_memory_allocation_subtitle">يتحكم في كمية الذاكرة المعطاة لـ Minecraft</string>
 </resources>
