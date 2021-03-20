@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">This username already exist</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
-    <string name="login_title_no_saved_account">No account found !</string>
+    <string name="login_title_no_saved_account">No accounts found!</string>
     <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
     <string name="mcl_setting_title_longpresstrigger">Trigger press duration</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Trigger press duration for destroying blocks and dropping items.</string>
+    <string name="mcl_setting_title_backtorightmouse">Trear back button as right mouse</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treats external right mouse as back button. If you are using external mouse, you should enable this.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
     <string name="mcl_setting_subtitle_buttonscale">Upscale them if buttons are too small.</string>
     <string name="mcl_setting_title_mousescale">Mouse scaling</string>
@@ -178,4 +180,13 @@
     <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory set to %d MB</string>
+    <string name="vp_latest_snapshot">Last snapshot</string>
+    <string name="vp_latest_release">LatestReleases</string>
+    <string name="mcl_tab_profiles">Profile</string>
+    <string name="mcl_profile_editor_title_profile">PROFILE</string>
+    <string name="mcl_profile_editor_title_version">VERSION</string>
+    <string name="mcl_profile_editor_edit_text_title">Profile Name</string>
+    <string name="mcl_profile_editor_save">saved</string>
+    <string name="profedit_selected_version">Selected version:%s</string>
+    <string name="global_new">New</string>
 </resources>
