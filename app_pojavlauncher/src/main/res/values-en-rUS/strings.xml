@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">This username already exist</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
-    <string name="login_title_no_saved_account">No account found !</string>
+    <string name="login_title_no_saved_account">No accounts found!</string>
     <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
     <string name="mcl_setting_title_longpresstrigger">Trigger press duration</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Trigger press duration for destroying blocks and dropping items.</string>
+    <string name="mcl_setting_title_backtorightmouse">Treat back button as right mouse</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treats external right mouse as back button. If you are using external mouse, you should enable this.</string>
     <string name="mcl_setting_title_flat_button_style">Flat button style</string>
     <string name="mcl_setting_subtitle_flat_button_style">Enable this to change control button style to flat.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
@@ -185,4 +187,9 @@
     <string name="mcl_disable_gestures_subtitle">Disables gestures, such as hold to break block, and tap to place a block.</string>
     <string name="mcl_setting_title_mousespeed">Mouse Speed</string>
     <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
+    <string name="customctrl_passthru">Mouse pass</string>
+    <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">The current amount of free RAM (%d) is lower than allocated RAM (%d), which may lead to crashes. Change the allocation if the game crashes.</string>
+    <string name="mcl_memory_allocation">Memory allocation</string>
+    <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft</string>
 </resources>
