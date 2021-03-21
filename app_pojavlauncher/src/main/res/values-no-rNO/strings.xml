@@ -180,4 +180,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Endrer hastigheten på programvare-musen</string>
     <string name="customctrl_passthru">Mus passe-thru</string>
     <string name="customctrl_rounded">Avrundet</string>
+    <string name="memory_warning_msg">Den nåværende mengden ledig RAM (%d) er lavere enn allokert RAM (%d), noe som kan føre til krasj. Endre allokeringen hvis spillet krasjer.</string>
+    <string name="mcl_memory_allocation">Minne tildeling</string>
+    <string name="mcl_memory_allocation_subtitle">Kontrollerer hvor mye minne som blir gitt til Minecraft</string>
 </resources>

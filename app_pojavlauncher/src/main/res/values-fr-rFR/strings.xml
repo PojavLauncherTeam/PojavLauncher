@@ -78,6 +78,7 @@
     <string name="mcl_setting_subtitle_javaargs">Attention, cela peut faire planter le jeu si ce paramètre est modifié sans connaissance.</string>
     <string name="mcl_setting_category_general">Paramètres généraux</string>
     <string name="mcl_setting_category_scaling">Paramètres de mise à l\'échelle</string>
+    <string name="mcl_setting_category_renderer">Moteur de rendu</string>
     <string name="mcl_setting_category_veroption">Type de versions visible dans la liste des versions</string>
     <string name="mcl_setting_veroption_release">Version officielle</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -182,4 +183,9 @@
     <string name="dl_library_sha_pass">La bibliothèque %s est en bon état et utilisable</string>
     <string name="mcl_disable_gestures">Désactiver les gestes</string>
     <string name="mcl_disable_gestures_subtitle">Désactive les gestes tels que maintenir enfoncé pour casser le bloc, et appuyer pour placer un bloc.</string>
+    <string name="mcl_setting_title_mousespeed">Vitesse du curseur</string>
+    <string name="mcl_setting_subtitle_mousespeed">Change la vitesse de la souris logicielle</string>
+    <string name="memory_warning_msg">La quantité actuelle de RAM libre (%d) est inférieure à la RAM allouée (%d), ce qui peut entraîner des plantages. Changez l\'allocation si le jeu plante.</string>
+    <string name="mcl_memory_allocation">Allocation de mémoire</string>
+    <string name="mcl_memory_allocation_subtitle">Contrôle la quantité de mémoire donnée à Minecraft</string>
 </resources>

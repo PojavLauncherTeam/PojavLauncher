@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
     <string name="mcl_setting_category_scaling">Ölçekleme Seçenekleri</string>
+    <string name="mcl_setting_category_renderer">İşleyici</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
@@ -186,4 +187,9 @@
     <string name="mcl_disable_gestures_subtitle">İşaretleri devre dışarı bırakır, blok kırma ve blok koymak için basma gibi.</string>
     <string name="mcl_setting_title_mousespeed">Fare Hızı</string>
     <string name="mcl_setting_subtitle_mousespeed">Uygulamadaki farenin hızını değiştirir</string>
+    <string name="customctrl_passthru">Mouse geçişi</string>
+    <string name="customctrl_rounded">Kenarlı</string>
+    <string name="memory_warning_msg">Şuanki boş RAM (%d) verilecek RAM\'den (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilecek RAM\'i değiştirin.</string>
+    <string name="mcl_memory_allocation">Bellek verme</string>
+    <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini değiştirir</string>
 </resources>
