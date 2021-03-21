@@ -187,3 +187,9 @@ void android_main(struct android_app *app) {
     OpenComposite_Android_Create_Info = nullptr;
     current_app = nullptr;
 }
+
+// FIXME make a JNI method and try and get Vivecraft to stop rendering frames when the headset is not present
+bool vrl_is_paused() {
+    auto *appState = (AndroidAppState *) current_app->userData;
+    return !appState->Resumed;
+}

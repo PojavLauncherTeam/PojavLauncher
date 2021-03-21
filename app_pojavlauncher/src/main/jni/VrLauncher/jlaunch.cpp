@@ -2,6 +2,9 @@
 // Created by znix on 20/03/21.
 //
 
+#include <android/native_activity.h>
+#include <android_native_app_glue.h>
+
 #include "vrl_main.h"
 #include "log.h"
 #include "start_java.h"
@@ -14,6 +17,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <errno.h>
+#include <thread>
 
 #include <openxr/openxr_platform.h>
 
@@ -38,6 +42,11 @@ public:
     bool HandleInput() override;
 
     void RenderFrame() override;
+
+    bool SleepPoll() override;
+
+private:
+    int RunJVM(std::vector<std::string> args);
 
 private:
     vr::IVRSystem *openvr = nullptr;
@@ -65,7 +74,7 @@ bool CMainApplication::BInit() {
         return false;
     }
 
-    // First call JREUtils.setupFUnc
+    // First call JREUtils.setupFunc
 
     JNIEnv *env;
     int res = current_app->activity->vm->AttachCurrentThread(&env, nullptr);
@@ -110,6 +119,17 @@ bool CMainApplication::BInit() {
 
     ////
 
+    std::thread thread([this](std::vector<std::string> args) {
+        LOGI("Start JVM");
+        int result = RunJVM(std::move(args));
+        LOGE("JVM exited with error code: %d", result);
+    }, std::move(args));
+    thread.detach();
+
+    return true;
+}
+
+int CMainApplication::RunJVM(std::vector<std::string> args) {
     // Create a mutable version of the args for Java to fiddle with
     int argv_size = (int) (sizeof(char *) * (args.size() + 1));
     char **argv = (char **) malloc(argv_size);
@@ -120,7 +140,7 @@ bool CMainApplication::BInit() {
     }
 
     // START OPENJDK
-    start_java(args.size(), argv);
+    int res = start_java(args.size(), argv);
 
     // Destroy our mutable version of the args
     for (int i = 0; i < args.size(); i++) {
@@ -128,7 +148,7 @@ bool CMainApplication::BInit() {
     }
     free(argv);
 
-    return true;
+    return res;
 }
 
 void CMainApplication::Shutdown() {
@@ -141,4 +161,9 @@ bool CMainApplication::HandleInput() {
 
 void CMainApplication::RenderFrame() {
     // TODO
+}
+
+bool CMainApplication::SleepPoll() {
+    // TODO
+    return false;
 }

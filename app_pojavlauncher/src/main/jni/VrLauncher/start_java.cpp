@@ -111,9 +111,18 @@ static jint launchJVMRaw(int margc, char **margv) {
             LOGE("dup2 stderr failed %d %d", res, errno);
     }
 
+    // Don't buffer output
+    setvbuf(stdout, nullptr, _IONBF, 0);
+    setvbuf(stderr, nullptr, _IONBF, 0);
+
     printf("Testing!\n");
     fflush(stdout);
     write(1, "hi:\n", 4);
+
+    printf("Arg count: %d\n", margc);
+    for (int i = 0; i < margc; i++) {
+        printf("arg %d: %s\n", i, margv[i]);
+    }
 
     LOGD("Calling JLI_Launch");
 
