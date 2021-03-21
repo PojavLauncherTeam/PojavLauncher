@@ -22,6 +22,8 @@ void OCWrapper_Cleanup();
 
 void OCWrapper_IgnoreNextVRInitCall();
 
+void OCWrapper_PollEventsXR();
+
 #ifdef __cplusplus
 }
 #endif

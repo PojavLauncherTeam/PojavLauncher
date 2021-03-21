@@ -61,14 +61,6 @@ static void app_handle_cmd(struct android_app *app, int32_t cmd) {
         case APP_CMD_STOP: {
             LOGI("onStop()");
             LOGI("    APP_CMD_STOP");
-
-            if (appState->app) {
-                LOGI("Destroying app");
-                appState->app->Shutdown();
-                delete appState->app;
-                appState->app = nullptr;
-            }
-
             break;
         }
         case APP_CMD_DESTROY: {
@@ -81,25 +73,6 @@ static void app_handle_cmd(struct android_app *app, int32_t cmd) {
             LOGI("surfaceCreated()");
             LOGI("    APP_CMD_INIT_WINDOW");
             appState->NativeWindow = app->window;
-
-            if (appState->app) {
-                appState->app->Shutdown();
-                delete appState->app;
-                appState->app = nullptr;
-                LOGW("Shutting down previous app");
-            }
-
-            // Start the app
-            appState->app = CreateApplication();
-
-            if (!appState->app->BInit()) {
-                LOGE("Failed to BInit app");
-                appState->app->Shutdown();
-                delete appState->app;
-                appState->app = nullptr;
-                return;
-            }
-
             break;
         }
         case APP_CMD_TERM_WINDOW: {
@@ -155,6 +128,14 @@ void android_main(struct android_app *app) {
             initializeLoader((const XrLoaderInitInfoBaseHeaderKHR *) &loaderInitInfoAndroid);
         }
 
+        // Start the app
+        userData.app = CreateApplication();
+        if (!userData.app->BInit()) {
+            LOGI("Failed to BInit app");
+            // Leaks resources, but who cares at this point
+            return;
+        }
+
         while (app->destroyRequested == 0) {
             // Read all pending events.
             for (;;) {
@@ -177,8 +158,10 @@ void android_main(struct android_app *app) {
             }
 
             // Throttle while not displaying anything
-            if (!userData.app) {
+            if (!userData.Resumed) {
                 usleep(100 * 1000);
+                bool shouldExit = userData.app->SleepPoll();
+                if (shouldExit) break;
                 continue;
             }
 
@@ -188,6 +171,11 @@ void android_main(struct android_app *app) {
 
             userData.app->RenderFrame();
         }
+
+        LOGI("Destroying app");
+        userData.app->Shutdown();
+        delete userData.app;
+        userData.app = nullptr;
 
         app->activity->vm->DetachCurrentThread();
     } catch (const std::exception &ex) {

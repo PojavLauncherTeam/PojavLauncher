@@ -10,8 +10,6 @@
 
 #include <openxr/openxr_platform.h>
 
-//#include <Misc/android_api.h>
-
 #include <GLES3/gl32.h>
 
 #include "openvr.h"
@@ -34,6 +32,8 @@ public:
     bool HandleInput() override;
 
     void RenderFrame() override;
+
+    bool SleepPoll() override;
 
 private:
     vr::IVRSystem *openvr = nullptr;
@@ -116,11 +116,14 @@ bool CMainApplication::BInit() {
         LOGE("eglGetConfigAttrib() returned error %d", eglGetError());
         return false;
     }
-    // TODO do we need this?
-    ANativeWindow_setBuffersGeometry(current_app->window, 0, 0, format);
 
-    if (!(surface = eglCreateWindowSurface(display, config, current_app->window, 0))) {
-        LOGE("eglCreateWindowSurface() returned error %d", eglGetError());
+    // Copying the hellovr example, make a pbuffer surface - we don't plan to render
+    // onto it so the resolution doesn't matter, but it means android can destroy and
+    // recreate the surface all it wants without disturbing us.
+    const EGLint surfaceAttribs[] = {EGL_WIDTH, 16, EGL_HEIGHT, 16, EGL_NONE};
+    surface = eglCreatePbufferSurface(display, config, surfaceAttribs);
+    if (surface == EGL_NO_SURFACE) {
+        LOGE("eglCreatePbufferSurface() failed: %d", eglGetError());
         return false;
     }
     EGLint attrs[] = {EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE};
@@ -177,6 +180,11 @@ void CMainApplication::RenderFrame() {
         tex.handle = (void *) (uint64_t) (eyes[i]->tex);
         vr::VRCompositor()->Submit((vr::EVREye) i, &tex);
     }
+}
+
+bool CMainApplication::SleepPoll() {
+    OCWrapper_PollEventsXR();
+    return false;
 }
 
 // Eye targets

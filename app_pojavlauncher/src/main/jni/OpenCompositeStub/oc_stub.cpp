@@ -142,3 +142,7 @@ VR_INTERFACE uint32_t VR_CALLTYPE VR_InitInternal(EVRInitError *err, EVRApplicat
 void OCWrapper_IgnoreNextVRInitCall() {
     ignoreNextInitCall = true;
 }
+
+void OCWrapper_PollEventsXR() {
+    OpenComposite_Android_EventPoll();
+}
