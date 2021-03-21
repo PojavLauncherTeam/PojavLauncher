@@ -77,12 +77,31 @@ bool CMainApplication::BInit() {
     jclass clss = env->GetObjectClass(current_app->activity->clazz);
     jmethodID setupFunc = env->GetMethodID(clss, "setup", "()V");
     if (setupFunc == nullptr) {
-        LOGD("Cannot find QuestMainActivity.setup");
+        LOGE("Cannot find QuestMainActivity.setup");
         return false;
     }
 
     env->CallVoidMethod(current_app->activity->clazz, setupFunc);
 
+    // Get the Java arguments list
+    jmethodID getArgsFunc = env->GetMethodID(clss, "getJavaArgs", "()[Ljava/lang/String;");
+    if (getArgsFunc == nullptr) {
+        LOGE("Cannot find QuestMainActivity.getJavaArgs");
+        return false;
+    }
+    auto arr = (jobjectArray) env->CallObjectMethod(current_app->activity->clazz, getArgsFunc);
+
+    // Read out the items
+    std::vector<std::string> args(env->GetArrayLength(arr));
+    LOGI("Arg count: %d", args.size());
+    for (int i = 0; i < args.size(); i++) {
+        auto arg = (jstring) env->GetObjectArrayElement(arr, i);
+        const char *str = env->GetStringUTFChars(arg, nullptr);
+        args.at(i) = str;
+        env->ReleaseStringUTFChars(arg, str);
+    }
+
+    // Cleanup
     res = current_app->activity->vm->DetachCurrentThread();
     if (res) {
         LOGE("Failed to detach from ART: %d", res);
@@ -91,23 +110,13 @@ bool CMainApplication::BInit() {
 
     ////
 
-    std::vector<std::string> args;
-
-    // FIXME hardcoded blob, find all the jars there by calling Tools.getLWJGL3ClassPath
-    std::string lwjgl = "/storage/emulated/0/games/PojavLauncher/lwjgl3/jsr305.jar:/storage/emulated/0/games/PojavLauncher/lwjgl3/lwjgl-glfw-classes.jar:/storage/emulated/0/games/PojavLauncher/lwjgl3/lwjgl-jemalloc.jar:/storage/emulated/0/games/PojavLauncher/lwjgl3/lwjgl-openal.jar:/storage/emulated/0/games/PojavLauncher/lwjgl3/lwjgl-opengl.jar:/storage/emulated/0/games/PojavLauncher/lwjgl3/lwjgl-stb.jar:/storage/emulated/0/games/PojavLauncher/lwjgl3/lwjgl-tinyfd.jar:/storage/emulated/0/games/PojavLauncher/lwjgl3/lwjgl.jar";
-
-    args.emplace_back("java");
-    args.emplace_back("-Dorg.lwjgl.opengl.libname=libgl4es_114.so");
-    args.emplace_back("-cp");
-    args.emplace_back(lwjgl + ":/storage/emulated/0/games/PojavLauncher/test.jar");
-    args.emplace_back("xyz.znix.graphicstest.Main");
-
     // Create a mutable version of the args for Java to fiddle with
     int argv_size = (int) (sizeof(char *) * (args.size() + 1));
     char **argv = (char **) malloc(argv_size);
     memset(argv, 0, argv_size);
     for (int i = 0; i < args.size(); i++) {
         argv[i] = strdup(args.at(i).c_str());
+        LOGI("launch arg: %s", argv[i]);
     }
 
     // START OPENJDK
