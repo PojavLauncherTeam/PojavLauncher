@@ -189,4 +189,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Cambia la velocidad del ratón de software</string>
     <string name="customctrl_passthru">Passthrough del ratón</string>
     <string name="customctrl_rounded">Redondeado</string>
+    <string name="memory_warning_msg">La cantidad actual de memoria RAM libre (%d) es menor que la memoria RAM asignada (%d), lo que puede provocar cierres forzados. Cambia la asignación si el juego se cierra.</string>
+    <string name="mcl_memory_allocation">Asignación de memoria</string>
+    <string name="mcl_memory_allocation_subtitle">Controla cuánta memoria se le da a Minecraft</string>
 </resources>
