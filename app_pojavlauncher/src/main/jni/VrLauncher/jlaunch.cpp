@@ -110,6 +110,21 @@ bool CMainApplication::BInit() {
         env->ReleaseStringUTFChars(arg, str);
     }
 
+    // Get the target working directory
+    jmethodID getWorkDir = env->GetMethodID(clss, "getTargetWorkingDirectory",
+                                            "()Ljava/lang/String;");
+    if (getArgsFunc == nullptr) {
+        LOGE("Cannot find QuestMainActivity.getTargetWorkingDirectory");
+        return false;
+    }
+    std::string workDir;
+    {
+        auto workDirStr = (jstring) env->CallObjectMethod(current_app->activity->clazz, getWorkDir);
+        const char *workDirCstr = env->GetStringUTFChars(workDirStr, nullptr);
+        workDir = workDirCstr;
+        env->ReleaseStringUTFChars(workDirStr, workDirCstr);
+    }
+
     // Cleanup
     res = current_app->activity->vm->DetachCurrentThread();
     if (res) {
@@ -118,6 +133,12 @@ bool CMainApplication::BInit() {
     }
 
     ////
+
+    // Change the entire process's working directory - hopefully android doesn't mind
+    if (chdir(workDir.c_str())) {
+        LOGE("Failed to set working directory: %d %s", errno, strerror(errno));
+        return false;
+    }
 
     std::thread thread([this](std::vector<std::string> args) {
         LOGI("Start JVM");

@@ -26,6 +26,7 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
     private static final String TAG = "QuestActivity";
 
     private static final File APP_JAR = new File(Tools.DIR_GAME_HOME, "test.jar");
+    private static final File WORK_DIR = new File(Tools.DIR_GAME_HOME, "workdir");
 
     // Called from native code
     @SuppressWarnings("unused")
@@ -95,6 +96,21 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
         }
 
         return args.toArray(new String[0]);
+    }
+
+    /**
+     * Get the directory Java should change to in order to avoid breaking Vivecraft trying
+     * to extract some files.
+     */
+    @SuppressWarnings("unused")
+    public String getTargetWorkingDirectory() {
+        if (!WORK_DIR.exists()) {
+            boolean success = WORK_DIR.mkdirs();
+            if (!success) {
+                Log.e(TAG, "Failed to create " + WORK_DIR + " - chdir will fail");
+            }
+        }
+        return WORK_DIR.getAbsolutePath();
     }
 
     @Override
