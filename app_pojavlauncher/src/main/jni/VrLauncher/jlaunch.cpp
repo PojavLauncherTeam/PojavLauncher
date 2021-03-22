@@ -48,6 +48,8 @@ public:
 private:
     int RunJVM(std::vector<std::string> args);
 
+    bool PokeOpenVR();
+
 private:
     vr::IVRSystem *openvr = nullptr;
     EGLContext context = nullptr;
@@ -140,6 +142,11 @@ bool CMainApplication::BInit() {
         return false;
     }
 
+    if (!PokeOpenVR()) {
+        LOGE("Failed to call PokeOpenVR");
+        return false;
+    }
+
     std::thread thread([this](std::vector<std::string> args) {
         LOGI("Start JVM");
         int result = RunJVM(std::move(args));
@@ -187,4 +194,40 @@ void CMainApplication::RenderFrame() {
 bool CMainApplication::SleepPoll() {
     // TODO
     return false;
+}
+
+bool CMainApplication::PokeOpenVR() {
+    // Grab and throw away a handle to openvr_api to make sure it's always loaded. Also force all
+    // symbols to be resolved.
+    void *handle = dlopen("libopenvr_api.so", RTLD_NOW);
+    if (!handle) {
+        LOGE("Could not load openvr_api.so!");
+        return false;
+    }
+
+    // Make sure all the symbols are indeed loaded
+    std::vector<std::string> syms = {
+            "VR_GetGenericInterface",
+            "VR_GetInitToken",
+            "VR_GetStringForHmdError",
+            "VR_GetVRInitErrorAsEnglishDescription",
+            "VR_GetVRInitErrorAsSymbol",
+            "VR_InitInternal",
+            "VR_InitInternal2",
+            "VR_IsHmdPresent",
+            "VR_IsInterfaceVersionValid",
+            "VR_IsRuntimeInstalled",
+            "VR_RuntimePath",
+            "VR_ShutdownInternal",
+            "VRClientCoreFactory",
+    };
+
+    for (const std::string &sym : syms) {
+        if (dlsym(RTLD_DEFAULT, sym.c_str()) == nullptr) {
+            LOGE("Could not find sample OpenVR method '%s'!", sym.c_str());
+            return false;
+        }
+    }
+
+    return true;
 }

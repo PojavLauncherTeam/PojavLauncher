@@ -20,6 +20,26 @@ target_link_libraries(openvr_api PRIVATE android log)
 # Also rename the original InitInternal otherwise it'll helpfully call the original one too
 target_compile_options(OCOVR PRIVATE -DVR_InitInternal2=VR_InitInternal2_orig -DVR_InitInternal=VR_InitInternal_orig)
 
+# Ensure all the OpenVR ABI functions are exported
+set(exported_funcs
+        VR_GetGenericInterface
+        VR_GetInitToken
+        VR_GetStringForHmdError
+        VR_GetVRInitErrorAsEnglishDescription
+        VR_GetVRInitErrorAsSymbol
+        VR_InitInternal
+        VR_InitInternal2
+        VR_IsHmdPresent
+        VR_IsInterfaceVersionValid
+        VR_IsRuntimeInstalled
+        VR_RuntimePath
+        VR_ShutdownInternal
+        VRClientCoreFactory
+        )
+foreach (func_name IN LISTS exported_funcs)
+    target_link_options(openvr_api PRIVATE -Wl,--require-defined=${func_name})
+endforeach ()
+
 # Link to Oculus's OpenXR loader
 set(oculus_openxr ${app_root}/libs/OculusOpenXR/OpenXR)
 target_link_libraries(openvr_api PUBLIC ${oculus_openxr}/Libs/Android/${ANDROID_ABI}/Release/libopenxr_loader.so)

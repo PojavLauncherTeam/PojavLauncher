@@ -79,15 +79,21 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
             // HACK: Add in Vanilla since vivecraft doesn't include it
             // launchClassPath += ":/sdcard/games/PojavLauncher/.minecraft/versions/1.12.2/1.12.2.jar";
 
+            // FIXME HAAAACK move the tweaker into this repo
+            launchClassPath += ":" + APP_JAR;
+
             args.add("-cp");
             args.add(Tools.getLWJGL3ClassPath() + ":" + launchClassPath);
 
-            // args.add("net.minecraft.client.main.Main");
             args.add(versionInfo.mainClass);
 
             MinecraftAccount profile = MinecraftAccount.load("ZNixian");
             String[] launchArgs = Tools.getMinecraftArgs(profile, versionInfo, Tools.DIR_GAME_NEW);
             args.addAll(Arrays.asList(launchArgs));
+
+            // Add our custom tweaker to modify JNI so openvr loads
+            args.add("--tweakClass");
+            args.add("xyz.znix.graphicstest.QuestcraftLaunchTweaker");
         } else {
             args.add("-cp");
             args.add(Tools.getLWJGL3ClassPath() + ":" + APP_JAR);
