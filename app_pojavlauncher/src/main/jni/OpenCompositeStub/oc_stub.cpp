@@ -1,6 +1,9 @@
 #include "oc_stub.h"
 
 #include <string>
+#include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include <openxr/openxr.h>
 #include <openxr/openxr_platform.h>
@@ -102,9 +105,34 @@ void OCWrapper_Cleanup() {
 }
 
 static std::string load_file(const char *path) {
-    LOGE("questcraft stub: Cannot load input manifest file '%s', OpenComposite_Android_Load_Input_File not implemented",
-         path);
-    abort();
+    // Just read the file from the filesystem, we changed the working directory earlier so
+    // Vivecraft can extract it's manifest files.
+
+    int fd = open(path, O_RDONLY);
+    if (!fd) {
+        LOGE("Failed to load manifest file %s: %d %s", path, errno, strerror(errno));
+
+        // Bring it down!
+        throw std::exception();
+    }
+
+    int length = lseek(fd, 0, SEEK_END);
+    lseek(fd, 0, SEEK_SET);
+
+    std::string data;
+    data.resize(length);
+    if (!read(fd, data.data(), data.size())) {
+        LOGE("Failed to load manifest file %s failed to read: %d %s", path, errno, strerror(errno));
+        throw std::exception();
+    }
+
+    if (close(fd)) {
+        LOGE("Failed to load manifest file %s failed to close: %d %s", path, errno,
+             strerror(errno));
+        throw std::exception();
+    }
+
+    return std::move(data);
 }
 
 // The original implementation that we renamed with a sneaky define :) - see our cmakelists file
