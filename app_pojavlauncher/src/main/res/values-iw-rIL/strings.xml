@@ -51,8 +51,8 @@
     <string name="mcl_launch_downloading_progress">"מתקין %s (%.2f MB/ %.2f MB)"</string>
     <string name="mcl_launch_download_assets">מתכונן להורדת משאבים</string>
     <string name="mcl_options">אפשרויות</string>
-    <string name="mcl_option_modinstall">הפעל אשף התקנה ל-mod (למשל: Forge, LabyMod, Fabric, וכדומה)</string>
-    <string name="mcl_option_modinstallwitharg">הפעל אשף התקנה ל-mod (עם הגדרות הניתנות לשינוי)</string>
+    <string name="mcl_option_modinstall">הפעל את אשף התקנה ל-mod (למשל: Forge, LabyMod, Fabric, וכדומה)</string>
+    <string name="mcl_option_modinstallwitharg">הפעל אשף ההתקנה ל-mod (עם הגדרות הניתנות לשינוי)</string>
     <string name="mcl_option_customcontrol">שליטה מותאמת אישית</string>
     <string name="mcl_option_settings">הגדרות</string>
     <string name="mcl_option_about">אודות</string>
@@ -61,7 +61,7 @@
     <string name="mcl_setting_title_freeform">פתח מיינקראפט במצב PiP</string>
     <string name="mcl_setting_subtitle_freeform">פתח מיינקראפט בחלון מרחף. אנדרואיד 7.0 ומעלה נדרש</string>
     <string name="mcl_setting_title_hide_sidebar">הסתר סרגל צד</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">אנשים נוסטלגיים יעדיפו את ממשק המשתמש v1 יאהבו את זה. מעניק לך חווית מסך מלא גדולה יותר.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">אנשים נוסטלגיים יעדיפו את ממשק המשתמש v1 המעניק לך חווית מסך מלא גדולה יותר.</string>
     <string name="mcl_setting_title_ignore_notch">אל תשים לב לפגם</string>
     <string name="mcl_setting_subtitle_ignore_notch">אל תשים לב לפגם, ותגדיל את המסך מתחת אליו.\n מעניק חוויה סוחפת.</string>
     <string name="mcl_setting_title_resolution_scaler">שינוי מידת איכות התצוגה</string>
@@ -73,9 +73,9 @@
     <string name="mcl_setting_title_flat_button_style">סגנון כפתור מחוץ</string>
     <string name="mcl_setting_subtitle_flat_button_style">הפעל את זה כדי לשלוט בסגנון כפתורי השליטה למחוצים.</string>
     <string name="mcl_setting_title_buttonscale">תצורת כפתורי השליטה</string>
-    <string name="mcl_setting_subtitle_buttonscale">הגדל כפתורים אם הם קטנים מדי.</string>
+    <string name="mcl_setting_subtitle_buttonscale">הגדל את הכפתורים אם הם קטנים מדי.</string>
     <string name="mcl_setting_title_mousescale">מידת עכבר</string>
-    <string name="mcl_setting_subtitle_mousescale">שנה גודל של העכבר הווירטואלי.</string>
+    <string name="mcl_setting_subtitle_mousescale">שנה את גודלו של העכבר הווירטואלי.</string>
     <string name="mcl_setting_title_javaargs">JVM פרטי הפעלה</string>
     <string name="mcl_setting_subtitle_javaargs">זהירות! זה עלול לגרום למשחק לקרוס עם משתנה ללא ידע.</string>
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
@@ -95,7 +95,7 @@
     <string name="global_remove">הסר</string>
     <string name="global_restart">אתחול</string>
     <string name="global_save">שמור</string>
-    <string name="global_unpacking">פותח %s</string>
+    <string name="global_unpacking">מחלץ את %s</string>
     <string name="global_error_field_empty">שדה זה אינו יכול להיות ריק</string>
     <string name="global_waiting">המתן</string>
     <!--
@@ -138,7 +138,7 @@
     <string name="control_forceclose">כפה כיבוי</string>
     <string name="control_viewout">יומן פלט</string>
     <string name="control_adebug">ניפוי קלט</string>
-    <string name="control_customkey">שלח keycode מותאם אישית</string>
+    <string name="control_customkey">שלח קידוד מקש מותאם אישית</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -161,7 +161,7 @@
     <string name="customctrl_addbutton">הוסף כפתור</string>
     <string name="customctrl_selectdefault">בחר בברירת מחדל control json</string>
     <string name="main_options">אפשרויות</string>
-    <string name="main_play">שחק</string>
+    <string name="main_play">התחל לשחק</string>
     <string name="main_welcome">ברוך בואך, %s</string>
     <string name="main_infodev">מידע (מפתח)</string>
     <string name="main_switchuser">החלף משתמש</string>
