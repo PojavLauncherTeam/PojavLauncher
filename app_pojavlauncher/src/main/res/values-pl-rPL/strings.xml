@@ -189,7 +189,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszki</string>
     <string name="customctrl_passthru">Myszka przelotka</string>
     <string name="customctrl_rounded">Zaokrąglone</string>
-    <string name="memory_warning_msg">Obecna ilość darmowego RAM (%d) jest mniejsza niż przydzielona pamięć RAM (%d), co może prowadzić do awarii. Zmień alokację w przypadku awarii gry.</string>
+    <string name="memory_warning_msg">Obecna ilość wolnej pamięci RAM (%d) jest mniejsza niż przydzielona ilość (%d), co może prowadzić do awarii. Zmień alokację w przypadku awarii gry.</string>
     <string name="mcl_memory_allocation">Przydział pamięci</string>
-    <string name="mcl_memory_allocation_subtitle">Kontroluje ilość pamięci jaką daje Minecraft</string>
+    <string name="mcl_memory_allocation_subtitle">Kontroluje ilość pamięci przydzielonej Minecraft</string>
 </resources>
