@@ -15,6 +15,8 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
+import static net.kdt.pojavlaunch.utils.MathUtils.map;
+
 public class JavaGUILauncherActivity extends LoggableActivity implements View.OnTouchListener {
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     
@@ -37,8 +39,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     private boolean isLogAllow, mSkipDetectMod;
 
     private boolean rightOverride = false;
-    private float scaleFactor = 1;
-    private int fingerStillThreshold = 8;
+    private float[] scaleFactor = initScaleFactors();
+    private final int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
     private static boolean triggeredLeftMouseButton = false;
@@ -70,8 +72,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
             
             this.displayMetrics = Tools.getDisplayMetrics(this);
-            CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels * scaleFactor);
-            CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels * scaleFactor);
+            CallbackBridge.windowWidth = displayMetrics.widthPixels;
+            CallbackBridge.windowHeight = displayMetrics.heightPixels ;
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
             findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
@@ -81,24 +83,13 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
             touchPad.setFocusable(false);
 
             this.mousePointer = findViewById(R.id.main_mouse_pointer);
-            this.mousePointer.post(new Runnable(){
-
-                    @Override
-                    public void run() {
-                        ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
-                        params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                        params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                    }
-                });
-/*
-            touchPad.setOnHoverListener(new OnHoverListener() {
-                    @Override
-                    public boolean onHover(View v, MotionEvent event) {
-                        AWTInputBridge.sendMousePos((int) event.getX(), (int) event.getY());
-                        return false;
-                    }
+            this.mousePointer.post(() -> {
+                ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
+                params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
             });
-*/
+
+
             touchPad.setOnTouchListener(new OnTouchListener(){
                     private float prevX, prevY;
                     @Override
@@ -124,7 +115,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
 
                         if (gestureDetector.onTouchEvent(event)) {
 
-                            AWTInputBridge.sendMousePos((int) (mouseX * scaleFactor), (int) (mouseY *scaleFactor));
+                            sendScaledMousePlaced(mouseX,mouseY);
+
                             AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
@@ -144,7 +136,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                                     mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
                                     placeMouseAt(mouseX, mouseY);
 
-                                    AWTInputBridge.sendMousePos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
+                                    sendScaledMousePlaced(mouseX,mouseY);
                                     /*
                                      if (!CallbackBridge.isGrabbing()) {
                                      CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
@@ -269,6 +261,11 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         this.mousePointer.setTranslationY(y);
     }
 
+    void sendScaledMousePlaced(float x, float y){
+        AWTInputBridge.sendMousePos((int) map((x * scaleFactor),0,CallbackBridge.physicalWidth,scale,2*(CallbackBridge.physicalWidth/3)),
+                (int) map((y * scaleFactor),0,CallbackBridge.physicalHeight,CallbackBridge.physicalHeight/3,2*(CallbackBridge.physicalHeight/3)));
+    }
+
     public void forceClose(View v) {
         BaseMainActivity.dialogForceClose(this);
     }
@@ -342,4 +339,26 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 }
             });
     }
+
+    float[] initScaleFactors(){
+        //Could be optimized
+        int minDimension = Math.min(CallbackBridge.physicalHeight,CallbackBridge.physicalHeight);
+        float scaleFactor = (3*minDimension)/1080f;
+        float[] scales = new float[4]; //Left, Top, Right, Bottom
+
+        scales[0] = (CallbackBridge.physicalWidth/2f);
+        scales[0] -= scales[0]/scaleFactor;
+
+        scales[1] = (CallbackBridge.physicalHeight/2f);
+        scales[1] -= scales[1]/scaleFactor;
+
+        scales[2] = (CallbackBridge.physicalWidth/2f);
+        scales[2] += scales[2]/scaleFactor;
+
+        scales[3] = (CallbackBridge.physicalHeight/2f);
+        scales[3] += scales[3]/scaleFactor;
+
+        return scales;
+    }
+
 }

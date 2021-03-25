@@ -10,6 +10,8 @@ import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
+    private float mScaleFactor = 3.f;
+
     private int mWidth, mHeight;
     private boolean mIsDestroyed = false;
     
@@ -91,7 +93,12 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                     int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
                     mDrawing = rgbArray != null;
                     if (rgbArray != null) {
+                        canvas.scale(mScaleFactor, mScaleFactor);
+                        canvas.translate(-CallbackBridge.physicalWidth/3,-CallbackBridge.physicalHeight/3);
+
                         canvas.drawBitmap(rgbArray, 0, CallbackBridge.physicalWidth, 0, 0, CallbackBridge.physicalWidth, CallbackBridge.physicalHeight, true, null);
+
+
                     }
                     rgbArray = null;
                     // System.gc();
@@ -105,3 +112,5 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         }
     }
 }
+
+
