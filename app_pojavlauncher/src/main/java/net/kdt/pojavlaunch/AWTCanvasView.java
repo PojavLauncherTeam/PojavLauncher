@@ -111,11 +111,14 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                     int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
                     mDrawing = rgbArray != null;
                     if (rgbArray != null) {
+
+                        canvas.save();
                         canvas.scale(mScaleFactor, mScaleFactor);
                         canvas.translate(-mScales[0],-mScales[1]);
 
-                        canvas.drawBitmap(rgbArray, 0, CallbackBridge.physicalWidth, 0, 0, CallbackBridge.physicalWidth, CallbackBridge.physicalHeight, true, null);
 
+                        canvas.drawBitmap(rgbArray, 0, CallbackBridge.physicalWidth, 0, 0, CallbackBridge.physicalWidth, CallbackBridge.physicalHeight, true, null);
+                        canvas.restore();
 
                     }
                     rgbArray = null;
