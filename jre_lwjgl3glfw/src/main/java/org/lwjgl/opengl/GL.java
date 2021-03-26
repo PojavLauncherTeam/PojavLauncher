@@ -330,7 +330,8 @@ public final class GL {
     public static GLCapabilities createCapabilities() {
         return createCapabilities(false);
     }
-
+    private static native long getGraphicsBufferAddr();
+    private static native int[] getNativeWidthHeight();
     /**
      * Creates a new {@link GLCapabilities} instance for the OpenGL context that is current in the current thread.
      *
@@ -346,8 +347,7 @@ public final class GL {
     @SuppressWarnings("AssignmentToMethodParameter")
     public static GLCapabilities createCapabilities(boolean forwardCompatible) {
         // This fixed framebuffer issue on 1.13+ 64-bit by another making current
-        GLFW.nativeEglMakeCurrent(GLFW.mainContext);
-        
+        //GLFW.nativeEglMakeCurrent(GLFW.mainContext);
         if (isUsingRegal /* && Long.parseLong(System.getProperty("glfwstub.internal.glthreadid", "-1")) != Thread.currentThread().getId() */) {
             nativeRegalMakeCurrent();
         }
@@ -361,6 +361,8 @@ public final class GL {
         GLCapabilities caps = null;
 
         try {
+            int[] dims = getNativeWidthHeight();
+            callJPI(GLFW.glfwGetCurrentContext(),getGraphicsBufferAddr(),GL_UNSIGNED_BYTE,dims[0],dims[1],functionProvider.getFunctionAddress("OSMesaMakeCurrent"));
             // We don't have a current ContextCapabilities when this method is called
             // so we have to use the native bindings directly.
             long GetError    = functionProvider.getFunctionAddress("glGetError");

@@ -39,6 +39,7 @@ GLboolean (*OSMesaMakeCurrent_p) (OSMesaContext ctx, void *buffer, GLenum type,
                                   GLsizei width, GLsizei height);
 OSMesaContext (*OSMesaGetCurrentContext_p) (void);
 OSMesaContext  (*OSMesaCreateContext_p) (GLenum format, OSMesaContext sharelist);
+void (*OSMesaPixelStore_p) ( GLint pname, GLint value );
 GLubyte* (*glGetString_p) (GLenum name);
 void (*glFinish_p) (void);
 void (*glClearColor_p) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
@@ -67,7 +68,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIE
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
     setenv("GALLIUM_DRIVER","zink",1);
-    void* dl_handle = dlopen("libOSMesa.so.8",RTLD_LAZY);
+    void* dl_handle = dlopen("libOSMesa.so.8",RTLD_NOLOAD|RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
     if(dl_handle == NULL) {
         printf("OSMDroid: unable to load: %s\n",dlerror());
         return JNI_FALSE;
@@ -75,6 +76,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     OSMesaMakeCurrent_p = dlsym(dl_handle,"OSMesaMakeCurrent");
     OSMesaGetCurrentContext_p = dlsym(dl_handle,"OSMesaGetCurrentContext");
     OSMesaCreateContext_p = dlsym(dl_handle, "OSMesaCreateContext");
+    OSMesaPixelStore_p = dlsym(dl_handle,"OSMesaPixelStore");
     glGetString_p = dlsym(dl_handle,"glGetString");
     glClearColor_p = dlsym(dl_handle, "glClearColor");
     glClear_p = dlsym(dl_handle,"glClear");
@@ -86,10 +88,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     ANativeWindow_acquire(potatoBridge.androidWindow);
     width = ANativeWindow_getWidth(potatoBridge.androidWindow);
     height = ANativeWindow_getHeight(potatoBridge.androidWindow);
-    ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,width,height,AHARDWAREBUFFER_FORMAT_R8G8B8_UNORM);
+    ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,width,height,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
     printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", width, height,
-           width * 3 * height);
-    gbuffer = malloc(width * 3 * height);
+           width * 4 * height);
+    gbuffer = malloc(width * 4 * height+1);
     if (gbuffer) {
         printf("OSMDroid: created frame buffer\n");
         return JNI_TRUE;
@@ -103,7 +105,7 @@ ANativeWindow_Buffer buf;
 void flipFrame() {
     glFinish_p();
     ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
-    memcpy(buf.bits,gbuffer,width*3*height);
+    memcpy(buf.bits,gbuffer,width*4*height);
     ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
 }
 bool stopSwapBuffers;
@@ -115,8 +117,14 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv 
 }
 bool locked = false;
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
+    //if(OSMesaGetCurrentContext_p() != NULL) {
+    //    printf("OSMDroid: skipped context reset\n");
+    //    return JNI_TRUE;
+    //}
     printf("OSMDroid: making current\n");
     OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,width,height);
+    OSMesaPixelStore_p(OSMESA_ROW_LENGTH,atoi(getenv("OSMESA_IMAGE_OFFSET")));
+
     printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
     printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
     glClear_p(GL_COLOR_BUFFER_BIT);
@@ -134,7 +142,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
     printf("OSMDroid: generating context\n");
-    void* ctx = OSMesaCreateContext_p(OSMESA_RGB,contextSrc);
+    void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
     printf("OSMDroid: context=%p",ctx);
     return ctx;
 }
@@ -150,7 +158,17 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *e
     RegalMakeCurrent_func *RegalMakeCurrent = (RegalMakeCurrent_func *) dlsym(RTLD_DEFAULT, "RegalMakeCurrent");
     RegalMakeCurrent(potatoBridge.eglContext);*/
 }
-
+JNIEXPORT jlong JNICALL
+Java_org_lwjgl_opengl_GL_getGraphicsBufferAddr(JNIEnv *env, jobject thiz) {
+    return &gbuffer;
+}
+JNIEXPORT jintArray JNICALL
+Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, jobject thiz) {
+    jintArray ret = (*env)->NewIntArray(env,2);
+    jint arr[] = {width,height};
+    (*env)->SetIntArrayRegion(env,ret,0,2,arr);
+    return ret;
+}
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv *env, jclass clazz, jint interval) {
     printf("eglSwapInterval: NOT IMPLEMENTED YET!\n");
     //return eglSwapInterval(potatoBridge.eglDisplay, interval);
