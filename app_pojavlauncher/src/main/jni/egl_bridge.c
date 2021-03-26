@@ -38,24 +38,20 @@ struct PotatoBridge potatoBridge;
 GLboolean (*OSMesaMakeCurrent_p) (OSMesaContext ctx, void *buffer, GLenum type,
                                   GLsizei width, GLsizei height);
 OSMesaContext (*OSMesaGetCurrentContext_p) (void);
-OSMesaContext  (*OSMesaCreateContextAttribs_p) (const int *attribList, OSMesaContext sharelist);
+OSMesaContext  (*OSMesaCreateContext_p) (GLenum format, OSMesaContext sharelist);
 GLubyte* (*glGetString_p) (GLenum name);
+void (*glFinish_p) (void);
 void (*glClearColor_p) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 void (*glClear_p) (GLbitfield mask);
+
 void pojav_openGLOnLoad() {
 }
 void pojav_openGLOnUnload() {
 
 }
-static void* gbuffer;
-static int width;
-static int height;
-static int osmesa_attribs[] = {
-        OSMESA_CONTEXT_MAJOR_VERSION,2,
-        //OSMESA_CONTEXT_MINOR_VERSION,1,
-        OSMESA_PROFILE, OSMESA_CORE_PROFILE,
-        0
-};
+void* gbuffer;
+int width;
+int height;
 void terminateEgl() {
     printf("EGLBridge: Terminating\n");
     //OSMesaDestroyContext(potatoBridge.eglContext);
@@ -78,11 +74,12 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     }
     OSMesaMakeCurrent_p = dlsym(dl_handle,"OSMesaMakeCurrent");
     OSMesaGetCurrentContext_p = dlsym(dl_handle,"OSMesaGetCurrentContext");
-    OSMesaCreateContextAttribs_p = dlsym(dl_handle, "OSMesaCreateContextAttribs");
+    OSMesaCreateContext_p = dlsym(dl_handle, "OSMesaCreateContext");
     glGetString_p = dlsym(dl_handle,"glGetString");
     glClearColor_p = dlsym(dl_handle, "glClearColor");
     glClear_p = dlsym(dl_handle,"glClear");
-    if(OSMesaCreateContextAttribs_p == NULL) {
+    glFinish_p = dlsym(dl_handle,"glFinish");
+    if(OSMesaCreateContext_p == NULL) {
         printf("OSMDroid: %s\n",dlerror());
         return JNI_FALSE;
     }
@@ -102,10 +99,11 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     }
 
 }
+ANativeWindow_Buffer buf;
 void flipFrame() {
-    ANativeWindow_Buffer buf;
+    glFinish_p();
     ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
-    memcpy(buf.bits,gbuffer,width * 3 *height);
+    memcpy(buf.bits,gbuffer,width*3*height);
     ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
 }
 bool stopSwapBuffers;
@@ -121,8 +119,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
     OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,width,height);
     printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
     printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
-    glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
     glClear_p(GL_COLOR_BUFFER_BIT);
+    glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
     flipFrame();
     return JNI_TRUE;
 }
@@ -136,7 +134,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
     printf("OSMDroid: generating context\n");
-    void* ctx = OSMesaCreateContextAttribs_p(osmesa_attribs,contextSrc);
+    void* ctx = OSMesaCreateContext_p(OSMESA_RGB,contextSrc);
     printf("OSMDroid: context=%p",ctx);
     return ctx;
 }
