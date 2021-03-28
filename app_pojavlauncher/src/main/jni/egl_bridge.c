@@ -38,11 +38,11 @@ struct zink_device_info
 {
    bool have_EXT_conditional_rendering;
    bool have_EXT_transform_feedback;
-}
+};
 struct zink_screen
 {
    struct zink_device_info info;
-}
+};
 
 enum st_attachment_type {
     ST_ATTACHMENT_FRONT_LEFT,
