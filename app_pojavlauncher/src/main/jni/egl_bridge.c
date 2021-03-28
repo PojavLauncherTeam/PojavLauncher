@@ -490,6 +490,7 @@ enum pipe_format {
 
     PIPE_FORMAT_COUNT
 };
+
 struct st_visual
 {
     bool no_config;
@@ -632,8 +633,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     height = ANativeWindow_getHeight(potatoBridge.androidWindow);
     ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,width,height,AHARDWAREBUFFER_FORMAT_R8G8B8_UNORM);
     printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", width, height,
-           width * 4 * height);
-    gbuffer = malloc(width * 4 * height+1);
+           width * 3 * height);
+    gbuffer = malloc(width * 3 * height+1);
     if (gbuffer) {
         printf("OSMDroid: created frame buffer\n");
         return JNI_TRUE;
