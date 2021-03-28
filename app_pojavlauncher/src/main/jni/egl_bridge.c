@@ -671,6 +671,19 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
     OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
     stride = buf.stride;
     //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+/*
+    if (getenv("ZINK_FORCEGL") == "1") {
+        printf("OSMDroid: Forcing enable Vulkan extensions for Zink\n");
+        struct zink_screen *zscreen = ((struct st_manager*)((OSMesaContext)window)->stctx->st_context_private)->screen;
+
+        // OpenGL 3.0
+        zscreen->info.have_EXT_transform_feedback = true;
+        zscreen->info.have_EXT_conditional_rendering = true;
+
+        // OpenGL 3.1
+    }
+*/
+
     OSMesaPixelStore_p(OSMESA_Y_UP,0);
     printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
     printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
