@@ -679,8 +679,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         // OpenGL 3.0
         zscreen->info.have_EXT_transform_feedback = true;
         zscreen->info.have_EXT_conditional_rendering = true;
+        // zscreen->info.feats.features.independentBlend = true;
 
         // OpenGL 3.1
+        
     }
 */
 
