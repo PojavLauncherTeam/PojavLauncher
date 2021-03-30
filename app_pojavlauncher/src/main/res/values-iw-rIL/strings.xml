@@ -151,7 +151,7 @@
     <string name="customctrl_size_width">עובי</string>
     <string name="customctrl_size_height">גובה</string>
     <string name="customctrl_dynamicpos">מקום דינמי</string>
-    <string name="customctrl_dynamicpos_x">דינמי</string>
+    <string name="customctrl_dynamicpos_x">דינמי X</string>
     <string name="customctrl_dynamicpos_y">דינמי y</string>
     <string name="customctrl_transparency_bg">שקיפות רקע</string>
     <string name="customctrl_keycombine">צירוף מקשים</string>
