@@ -62,6 +62,7 @@
     <string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Hide Sidebar</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folks preferring the old v1 UI might like this. Gives you a more fullscreen experience.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignore notch</string>
     <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
