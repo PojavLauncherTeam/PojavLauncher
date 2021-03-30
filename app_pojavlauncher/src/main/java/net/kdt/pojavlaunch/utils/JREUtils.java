@@ -225,6 +225,8 @@ public class JREUtils
         envMap.put("LIBGL_NORMALIZE", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
+
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
         
