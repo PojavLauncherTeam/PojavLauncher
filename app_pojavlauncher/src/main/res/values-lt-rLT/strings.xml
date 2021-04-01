@@ -65,9 +65,11 @@
     <string name="mcl_setting_title_ignore_notch">Ignoruoti kamerą</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoruojant kamerą ištempia vaizdą po ja.\nDuodą geresnį vaizdą.</string>
     <string name="mcl_setting_title_resolution_scaler">Rezoliucijos redagavimas</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Leidžia keisti ekrano rezoliuciją. 100% yra numatytasis nustatymas.</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Leidžia keisti ekrano rezoliuciją. 100% yra pilna rezoliucija</string>
     <string name="mcl_setting_title_longpresstrigger">Kaip ilgai suveiks po palaikymo</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Pakeisti veikimo laiką po palaikymo panaikinti ir išmesti daiktą.</string>
+    <string name="mcl_setting_title_backtorightmouse">Laikyti atgal mygtuką kaip dešinįjį pelės mygtuką</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Kai kurie įrenginiai laiko išorinės pelės dešinįjį mygtuką kaip atgal mygtuką. Jei naudojate išorinę pelę, jūs tūretūmėtė įjungti šį nustatymą.</string>
     <string name="mcl_setting_title_buttonscale">Kontroliuoti mygtukų dydį</string>
     <string name="mcl_setting_subtitle_buttonscale">Padidinkite jei mygtukai per maži.</string>
     <string name="mcl_setting_title_mousescale">Pelės dydis</string>
