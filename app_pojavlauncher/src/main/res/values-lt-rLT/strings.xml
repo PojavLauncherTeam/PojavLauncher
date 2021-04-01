@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition skirta Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Paleiskite Minecraft: Java Edition savo įrenginyje!</string>
     <!-- Action bar part -->
@@ -127,7 +127,7 @@
     <string name="control_chat">Pokalbiai</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Kairė</string>
-    <string name="control_secondary">Deš.</string>
+    <string name="control_secondary">Deš</string>
     <string name="control_inventory">Inv</string>
     <string name="control_thirdperson">3</string>
     <string name="control_listplayers">TAB</string>
@@ -172,4 +172,14 @@
     <string name="auto_ram_subtitle">Įjungia automatišką RAM keitėją</string>
     <string name="auto_ram_title">Automatiškas RAM</string>
     <string name="autoram_info_msg">Atmintis pakeista į %d MB</string>
+    <string name="vp_latest_snapshot">Naujausias Snapshotas</string>
+    <string name="vp_latest_release">Naujausias Leidinys</string>
+    <string name="mcl_tab_profiles">Profiliai</string>
+    <string name="mcl_profile_editor_title_profile">PROFILIAI</string>
+    <string name="mcl_profile_editor_title_version">VERSIJOS</string>
+    <string name="mcl_profile_editor_edit_text_title">Profilio vardas</string>
+    <string name="mcl_profile_editor_save">išsaugoti</string>
+    <string name="profedit_selected_version">Pasirinkta versija: %s</string>
+    <string name="profedit_selected_profile">Pasirinktas profilis: %s</string>
+    <string name="global_new">Nauja</string>
 </resources>
