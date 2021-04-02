@@ -661,7 +661,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
 
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles", renderer, 8) == 0) {
-        config_renderer = RENDERER_GL4ES;\
+        config_renderer = RENDERER_GL4ES;
 
         if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
             potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -733,7 +733,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
                potatoBridge.eglSurface
         );
         return JNI_TRUE;
-    } else if (strcmp(renderer, "vulkan_zink")) {
+    } else if (strcmp(renderer, "vulkan_zink") == 0) {
         config_renderer = RENDERER_VK_ZINK;
         
         setenv("GALLIUM_DRIVER","zink",1);
@@ -766,8 +766,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         }
         
         printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", savedWidth, savedHeight,
-             savedWidth * 3 * savedHeight);
-        gbuffer = malloc(savedWidth * 3 * savedHeight+1);
+             savedWidth * 4 * savedHeight);
+        gbuffer = malloc(savedWidth * 4 * savedHeight+1);
         if (gbuffer) {
             printf("OSMDroid: created frame buffer\n");
             return JNI_TRUE;
