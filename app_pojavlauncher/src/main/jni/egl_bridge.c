@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <dlfcn.h>
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +22,28 @@
 #include <string.h>
 #include "utils.h"
 // region OSMESA internals
+
+struct pipe_screen;
+
+//only get what we need to access/modify
+struct st_manager
+{
+   struct pipe_screen *screen;
+};
+struct st_context_iface
+{
+   void *st_context_private;
+};
+struct zink_device_info
+{
+   bool have_EXT_conditional_rendering;
+   bool have_EXT_transform_feedback;
+};
+struct zink_screen
+{
+   struct zink_device_info info;
+};
+
 enum st_attachment_type {
     ST_ATTACHMENT_FRONT_LEFT,
     ST_ATTACHMENT_BACK_LEFT,
@@ -672,6 +695,20 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
     OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
     stride = buf.stride;
     //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+
+    if (getenv("ZINK_FORCEGL") == "1") {
+        printf("OSMDroid: Forcing enable Vulkan extensions for Zink\n");
+        struct zink_screen *zscreen = ((struct st_manager*)((OSMesaContext)window)->stctx->st_context_private)->screen;
+
+        // OpenGL 3.0
+        zscreen->info.have_EXT_transform_feedback = true;
+        zscreen->info.have_EXT_conditional_rendering = true;
+        // zscreen->info.feats.features.independentBlend = true;
+
+        // OpenGL 3.1
+        
+    }
+
     OSMesaPixelStore_p(OSMESA_Y_UP,0);
     printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
     printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
