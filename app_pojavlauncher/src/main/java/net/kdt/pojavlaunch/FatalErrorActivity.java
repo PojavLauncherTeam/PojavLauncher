@@ -7,7 +7,7 @@ import androidx.appcompat.app.*;
 import android.util.*;
 import androidx.appcompat.app.AlertDialog;
 
-public class FatalErrorActivity extends BaseActivity
+public class FatalErrorActivity extends AppCompatActivity
 {
 	public static void showError(Context ctx, String savePath, boolean storageAllow, /* boolean isFatalErr, */ Throwable th) {
 		Intent ferrorIntent = new Intent(ctx, FatalErrorActivity.class);

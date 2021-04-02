@@ -895,6 +895,7 @@ public class BaseMainActivity extends LoggableActivity {
         */
         
         appendlnToLog("--------- beggining with launcher debug");
+        appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         checkLWJGL3Installed();
         
         Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
