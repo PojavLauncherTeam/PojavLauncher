@@ -189,7 +189,7 @@
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
-    <string name="customctrl_passthru">Указатель мышки</string>
+    <string name="customctrl_passthru">Указатель мыши</string>
     <string name="customctrl_rounded">Скруглённые</string>
     <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
     <string name="mcl_memory_allocation">Выделение памяти</string>
