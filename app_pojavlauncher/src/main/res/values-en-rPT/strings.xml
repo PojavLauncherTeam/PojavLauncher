@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition fer Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Launch Minecraft: Java Edition in yer device!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Eymail orr yusername</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
@@ -36,6 +40,7 @@
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Log output</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
