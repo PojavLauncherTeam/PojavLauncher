@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">Ԁoɾɐʌ⅂ɐnuɔɥǝɹ (wᴉuǝɔɹɐɟʇ: ſɐʌɐ ǝpᴉʇᴉou ⅎoɹ ∀upɹoᴉp)</string>
+    <string name="app_short_name">Ԁoɾɐʌ⅂ɐnuɔɥǝɹ</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
