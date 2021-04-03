@@ -18,6 +18,7 @@
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Chooz mod installr</string>
     <!-- Error messages -->
     <!-- Toast messages -->
     <!--
@@ -26,6 +27,9 @@
     <!-- MCLauncherActivity: Tabs -->
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_option_modinstall">Launch mod installr (Foreg, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Launch mod installr (wif custom arguments)</string>
+    <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform moed</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
@@ -48,8 +52,10 @@
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">tree input</string>
+    <string name="control_customkey">Send custom keycoed</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="main_no_news_feed">Faild 2 fetch teh newz fed !</string>
 </resources>
