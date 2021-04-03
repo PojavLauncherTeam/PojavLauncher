@@ -38,6 +38,21 @@
     <string name="mcl_version_msg">ᴚǝɐpʎ ʇo dlɐʎ wᴉuǝɔɹɐɟʇ %s</string>
     <string name="mcl_launch_cleancache">Ɔlǝɐuᴉuɓ ɔɐɔɥǝ ɟᴉlǝs</string>
     <string name="mcl_launch_downloading">ᗡoʍuloɐpᴉuɓ %s</string>
+    <string name="mcl_launch_download_assets">sǝɔɹnosǝɹ pɐoꞁuʍop oʇ ᵷuᴉɹɐdǝɹԀ</string>
+    <string name="mcl_options">suoᴉʇdO</string>
+    <string name="mcl_option_customcontrol">sꞁoɹʇuoɔ ɯoʇsnƆ</string>
+    <string name="mcl_option_settings">sᵷuᴉʇʇǝS</string>
+    <string name="mcl_option_about">ʇnoqⱯ</string>
+    <string name="mcl_setting_title_freeform">ǝpoɯ ɯɹoɟǝǝɹℲ uᴉ ʇɟɐɹɔǝuᴉW ɥɔunɐꞀ</string>
+    <string name="mcl_setting_subtitle_freeform">+0˙ㄥ pᴉoɹpuⱯ sǝɹᴉnbǝᴚ ˙ʍopuᴉʍ ᵷuᴉʇɐoꞁɟ uᴉ ʇɟɐɹɔǝuᴉW ɥɔunɐꞀ</string>
+    <string name="mcl_setting_title_longpresstrigger">ssǝɹd ᵷuoꞁ ɹǝʇɟɐ ɹǝᵷᵷᴉɹʇ ꞁꞁᴉʍ ᵷuoꞁ ʍoH</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">˙ɯǝʇᴉ doɹp puɐ ʞɔoꞁq ʎoɹʇsǝp uᴉ ssǝɹd ᵷuoꞁ ɹoɟ ǝɯᴉʇ ɹǝᵷᵷᴉɹʇ ǝᵷuɐɥƆ.</string>
+    <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
+    <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
+    <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
+    <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
+    <string name="mcl_setting_veroption_oldalpha">ɐɥdꞁɐ-pꞁO</string>
+    <string name="mcl_setting_veroption_oldbeta">ɐʇǝq-pꞁO</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
@@ -65,4 +80,5 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="main_options">suoᴉʇdO</string>
 </resources>
