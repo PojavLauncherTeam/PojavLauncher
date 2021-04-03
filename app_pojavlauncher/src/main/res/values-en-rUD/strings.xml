@@ -3,20 +3,41 @@
     <!-- App name part -->
     <string name="app_name">Ԁoɾɐʌ⅂ɐnuɔɥǝɹ (wᴉuǝɔɹɐɟʇ: ſɐʌɐ ǝpᴉʇᴉou ⅎoɹ ∀upɹoᴉp)</string>
     <string name="app_short_name">Ԁoɾɐʌ⅂ɐnuɔɥǝɹ</string>
+    <string name="app_motd">⅂ɐnuɔɥ wᴉuǝɔɹɐɟʇ: ſɐʌɐ ǝpᴉʇᴉou ᴉu ʎonɹ pǝʌᴉɔǝ!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Ǝɯɐᴉl oɹ nsǝɹuɐɯǝ</string>
+    <string name="login_online_password_hint">Ԁɐssʍoɹp</string>
+    <string name="login_online_check_keeplogin">Ʞǝǝd ɯǝ loɓɓǝp ᴉu</string>
+    <string name="login_online_login_label">⅂oɓᴉu</string>
+    <string name="login_offline_label">⅂oɓᴉu ɐs oɟɟlᴉuǝ ɐɔɔonuʇ</string>
+    <string name="login_error_short_username">∩sǝɹuɐɯǝ ɯnsʇ qǝ ɐʇ lǝɐsʇ ɛ ɔɥɐɹɐɔʇǝɹs</string>
+    <string name="login_error_exist_username">ʇɥᴉs nsǝɹuɐɯǝ ɐlɹǝɐpʎ ǝxᴉsʇ</string>
+    <string name="login_select_account">Sǝlǝɔʇ ɐɔɔonuʇ</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">┴ɥᴉs ɐɔɔonuʇ ʍᴉll qǝ ɹǝɯoʌǝp!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_fatal">Ԁoɾɐʌ⅂ɐnuɔɥǝɹ ɥɐs nuǝxdǝɔʇǝplʎ ɔɹɐsɥǝp</string>
+    <string name="error_no_version">No ʌǝɹsᴉou!</string>
+    <string name="error_show_more">Sɥoʍ ɯoɹǝ</string>
+    <string name="error_show_less">Sɥoʍ lǝss</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">┴ɥǝ ɹǝɐp/ʍɹᴉʇǝ ʇo sʇoɹɐɓǝ dǝɹɯᴉssᴉou ᴉs ɹǝbnᴉɹǝp!</string>
+    <string name="toast_optifine_success">Iusʇɐll snɔɔǝssɟnl</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_console">ᗡǝʌǝlodɯǝuʇ ɔousolǝ</string>
+    <string name="mcl_tab_crash">Ɔɹɐsɥ loɓ</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">ᴚǝɐpʎ ʇo dlɐʎ wᴉuǝɔɹɐɟʇ %s</string>
+    <string name="mcl_launch_cleancache">Ɔlǝɐuᴉuɓ ɔɐɔɥǝ ɟᴉlǝs</string>
+    <string name="mcl_launch_downloading">ᗡoʍuloɐpᴉuɓ %s</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
@@ -41,8 +62,10 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Ǝxᴉʇ</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">⅂oɓ onʇdnʇ</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
