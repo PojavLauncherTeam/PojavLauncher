@@ -2,9 +2,19 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">pajaw launcher (Mc4Android)</string>
+    <string name="app_short_name">pajavlauncher</string>
+    <string name="app_motd">go MC at your mobile!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">gmail or usrnaem</string>
+    <string name="login_online_password_hint">passwd</string>
+    <string name="login_online_check_keeplogin">kep i kog inside</string>
+    <string name="login_online_login_label">logout</string>
+    <string name="login_offline_label">Login as offloin akownt</string>
+    <string name="login_error_short_username">usrname mst b at list 3 chr</string>
+    <string name="login_error_exist_username">ohno, this usrname is registred :(</string>
+    <string name="login_select_account">what acc?</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
@@ -37,6 +47,7 @@
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">tree input</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
