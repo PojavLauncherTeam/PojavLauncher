@@ -7,11 +7,11 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email ou nome de usuário</string>
+    <string name="login_online_username_hint">E-mail ou nome de usuário</string>
     <string name="login_online_password_hint">Senha</string>
     <string name="login_online_check_keeplogin">Manter conectado</string>
     <string name="login_online_login_label">Entrar</string>
-    <string name="login_offline_label">Entrar com conta offline</string>
+    <string name="login_offline_label">Entrar com conta off-line</string>
     <string name="login_error_short_username">Nome de usuário deve ter no mínimo 3 caracteres</string>
     <string name="login_error_exist_username">Este usuário já existe</string>
     <string name="login_microsoft">Microsoft login</string>
@@ -53,7 +53,7 @@
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modinstall">Iniciar um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Iniciar um instalador de mods (com argumentos personalizados)</string>
-    <string name="mcl_option_customcontrol">Controles Personalizados</string>
+    <string name="mcl_option_customcontrol">Controles personalizados</string>
     <string name="mcl_option_settings">Configurações</string>
     <string name="mcl_option_about">Sobre</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java Runtime</string>
@@ -138,8 +138,8 @@
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mouse</string>
-    <string name="control_mouseoff">Mouse: off</string>
-    <string name="control_mouseon">Mouse: on </string>
+    <string name="control_mouseoff">Mouse: Não</string>
+    <string name="control_mouseon">Mouse: Sim </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Forçar encerramento</string>
     <string name="control_viewout">Saída do log</string>
