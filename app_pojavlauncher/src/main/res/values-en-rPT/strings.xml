@@ -8,6 +8,8 @@
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Eymail orr yusername</string>
+    <string name="login_online_password_hint">Secret Key</string>
+    <string name="login_online_login_label">Get Aboard</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
@@ -17,9 +19,16 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">News</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_offline">Out fishin\'</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading">Downloadin %s</string>
+    <string name="mcl_option_settings">Settings</string>
+    <string name="mcl_option_about">\'Bout me</string>
     <!-- Global strings -->
+    <string name="global_name">Title on yer forhead</string>
+    <string name="global_restart">Yar ship needs a lookover</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -39,6 +48,8 @@
     -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
+    <string name="control_keyboard">Keyboard</string>
+    <string name="control_chat">Chat</string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Log output</string>
     <!--
