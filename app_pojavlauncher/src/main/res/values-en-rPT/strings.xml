@@ -9,6 +9,7 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">Eymail orr yusername</string>
     <string name="login_online_password_hint">Secret Key</string>
+    <string name="login_online_check_keeplogin">Be keepin\' ye on board fer next time</string>
     <string name="login_online_login_label">Get Aboard</string>
     <!-- Hint -->
     <!-- Warnings -->
