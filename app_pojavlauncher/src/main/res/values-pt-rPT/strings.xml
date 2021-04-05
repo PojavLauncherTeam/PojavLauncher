@@ -20,6 +20,10 @@
     <string name="warning_remove_account">Esta conta será removida!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_fatal">O PojavLauncher parou de funcionar</string>
+    <string name="error_no_version">Não há versão!</string>
+    <string name="error_show_more">Mostrar mais</string>
+    <string name="error_show_less">Mostrar menos</string>
     <!-- Toast messages -->
     <!--
     <string name="toast_3">Exit</string>
@@ -27,6 +31,9 @@
     <!-- MCLauncherActivity: Tabs -->
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_setting_veroption_release">Oficial</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
@@ -59,4 +66,5 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="vp_latest_release">Versão mais recente</string>
 </resources>
