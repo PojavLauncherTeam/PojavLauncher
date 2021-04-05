@@ -32,6 +32,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -651,15 +652,16 @@ public class PojavLoginActivity extends BaseActivity
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
+            ImageView imageView = child.findViewById(R.id.account_head);
 
             String accNameStr = s.substring(0, s.length() - 5);
             String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
             if (skinFaceBase64 != null) {
                 byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
-            
-                accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
-                        bitmap), null, null, null);
+
+                imageView.setImageDrawable(new BitmapDrawable(getResources(),
+                        bitmap));
             }
             accountName.setText(accNameStr);
 
