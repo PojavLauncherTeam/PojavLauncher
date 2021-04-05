@@ -132,10 +132,4 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
             Tools.showError(getContext(), th);
         }
     }
-
-
-
-
 }
-
-
