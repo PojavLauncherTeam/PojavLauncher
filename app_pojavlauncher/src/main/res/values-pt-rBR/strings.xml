@@ -13,15 +13,15 @@
     <string name="login_online_login_label">Entrar</string>
     <string name="login_offline_label">Entrar com conta off-line</string>
     <string name="login_error_short_username">Nome de usuário deve ter no mínimo 3 caracteres</string>
-    <string name="login_error_exist_username">Este usuário já existe</string>
-    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_error_exist_username">Esse usuário já existe</string>
+    <string name="login_microsoft">Entrar com uma conta Microsoft</string>
     <string name="login_select_account">Selecionar conta</string>
     <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
     <string name="login_dialog_no_saved_account">Você não tem nenhuma conta salva.\nUse a opção <b>\"Manter conectado\"</b> para salvar uma conta após o primeiro login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀\nSegure um botão para personalizar: editar, redimensionar ou remover."</string>
     <!-- Warnings -->
-    <string name="warning_remove_account">Esta conta será removida!</string>
+    <string name="warning_remove_account">Essa conta será removida!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Instalar Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Selecione um instalador de mod</string>
