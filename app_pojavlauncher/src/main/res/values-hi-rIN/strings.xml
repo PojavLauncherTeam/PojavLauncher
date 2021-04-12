@@ -6,6 +6,11 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_password_hint">पासवर्ड/कुंजिका</string>
+    <string name="login_online_check_keeplogin">मुझे लोग्ड इन रखें</string>
+    <string name="login_online_login_label">लॉगिन</string>
+    <string name="login_offline_label">ऑफ़लाइन अकाउंट के रूप में लॉगिन करें</string>
+    <string name="login_error_short_username">प्रयोगकर्ता नाम कम से कम ३ अक्षर का होना चाहिए।</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
