@@ -226,6 +226,9 @@ public class JREUtils
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
+        envMap.put("force_glsl_extensions_warn", "true");
+        envMap.put("allow_glsl_extension_directive_midshader", "true");
+
 
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
