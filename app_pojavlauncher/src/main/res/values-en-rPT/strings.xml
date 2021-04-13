@@ -39,6 +39,7 @@
     <string name="mcl_version_msg">Be Ready to sail dock %s</string>
     <string name="mcl_launch_downloading">Downloadin %s</string>
     <string name="mcl_launch_download_assets">Gettin\' th\' treasure ready</string>
+    <string name="mcl_option_customcontrol">custom trigger</string>
     <string name="mcl_option_settings">Settings</string>
     <string name="mcl_option_about">\'Bout me</string>
     <!-- Global strings -->
