@@ -17,8 +17,8 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
 		
         // Disable freeform mode in Android 6.0 and below.
         findPreference("freeform").setVisible(Build.VERSION.SDK_INT >= 24);
-        //Disable notch checking behavior on android 8.0 and below.
-        findPreference("ignoreNotch").setVisible(Build.VERSION.SDK_INT >= 29);
+        //Disable notch checking behavior on android 8.1 and below.
+        findPreference("ignoreNotch").setVisible(Build.VERSION.SDK_INT >= 28);
 		
         CustomSeekBarPreference seek2 = (CustomSeekBarPreference) findPreference("timeLongPressTrigger");
         seek2.setMin(100);
