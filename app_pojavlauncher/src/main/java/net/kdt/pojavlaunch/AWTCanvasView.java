@@ -37,10 +37,19 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     }
 
     /** Computes the scale to better fit the screen */
-    int[] initScaleFactors(){
+    void initScaleFactors(){
+        initScaleFactors(0);
+    }
+
+    void initScaleFactors(int forcedScale){
         //Could be optimized
-        int minDimension = Math.min(CallbackBridge.physicalHeight,CallbackBridge.physicalWidth);
-        mScaleFactor = (3*minDimension)/1080;
+        if(forcedScale < 1) { //Auto scale
+            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
+            mScaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
+        }else{
+            mScaleFactor = forcedScale;
+        }
+
         int[] scales = new int[2]; //Left, Top
 
         scales[0] = (CallbackBridge.physicalWidth/2);
@@ -49,7 +58,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         scales[1] = (CallbackBridge.physicalHeight/2);
         scales[1] -= scales[1]/mScaleFactor;
 
-        return scales;
+        mScales = scales;
     }
     
     public AWTCanvasView(Context ctx) {
@@ -65,7 +74,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         fpsPaint.setTextSize(20);
         
         setSurfaceTextureListener(this);
-        mScales = initScaleFactors();
+        initScaleFactors();
     }
 
     @Override
