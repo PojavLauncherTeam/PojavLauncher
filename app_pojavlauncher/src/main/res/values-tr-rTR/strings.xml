@@ -27,7 +27,7 @@
     <string name="alerttitle_installmod">Bir mod yükleyicisi seç</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
-    <string name="error_no_version">Sürüm yok!</string>
+    <string name="error_no_version">Sürümler yok!</string>
     <string name="error_show_more">Daha fazla göster</string>
     <string name="error_show_less">Daha az göster</string>
     <!-- Toast messages -->
@@ -64,7 +64,7 @@
     <string name="mcl_setting_subtitle_hide_sidebar">Eski v1 Menüsünü hatırlayan eski arkadaşlar bunu tercih ediyor. Daha çok tam ekran deneyimi verir.</string>
     <string name="mcl_setting_title_ignore_notch">Çentiği görmezden gel</string>
     <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve altındaki ekranı genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
-    <string name="mcl_setting_title_resolution_scaler">Çözünürlük boyutlayıcısı</string>
+    <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar zaman sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
@@ -82,7 +82,7 @@
     <string name="mcl_setting_category_scaling">Boyutlama Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
-    <string name="mcl_setting_veroption_release">Sürümler</string>
+    <string name="mcl_setting_veroption_release">Çıkan sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
