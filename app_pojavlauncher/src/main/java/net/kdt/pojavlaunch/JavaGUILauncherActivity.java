@@ -36,7 +36,9 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     private boolean isLogAllow, mSkipDetectMod;
 
     private boolean rightOverride = false;
-    private int[] scaleFactor = initScaleFactors();
+    private int scaleFactor;
+    private int[] scaleFactors = initScaleFactors();
+
     private final int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
@@ -254,8 +256,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     }
 
     void sendScaledMousePosition(float x, float y){
-        AWTInputBridge.sendMousePos((int) map(x,0,CallbackBridge.physicalWidth,scaleFactor[0],scaleFactor[2]),
-                (int) map(y,0,CallbackBridge.physicalHeight,scaleFactor[1],scaleFactor[3]));
+        AWTInputBridge.sendMousePos((int) map(x,0,CallbackBridge.physicalWidth, scaleFactors[0], scaleFactors[2]),
+                (int) map(y,0,CallbackBridge.physicalHeight, scaleFactors[1], scaleFactors[3]));
     }
 
     public void forceClose(View v) {
@@ -330,9 +332,17 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     }
 
     int[] initScaleFactors(){
+        return initScaleFactors(true);
+    }
+
+    int[] initScaleFactors(boolean autoScale){
         //Could be optimized
-        int minDimension = Math.min(CallbackBridge.physicalHeight,CallbackBridge.physicalWidth);
-        int scaleFactor = (3*minDimension)/1080;
+
+        if(autoScale) { //Auto scale
+            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
+            scaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
+        }
+
         int[] scales = new int[4]; //Left, Top, Right, Bottom
 
         scales[0] = (CallbackBridge.physicalWidth/2);
@@ -350,4 +360,17 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         return scales;
     }
 
+    public void scaleDown(View view) {
+        scaleFactor = Math.max(scaleFactor - 1, 1);
+        scaleFactors = initScaleFactors(false);
+        mTextureView.initScaleFactors(scaleFactor);
+        sendScaledMousePosition(mousePointer.getX(),mousePointer.getY());
+    }
+
+    public void scaleUp(View view) {
+        scaleFactor = Math.min(scaleFactor + 1, 6);
+        scaleFactors = initScaleFactors(false);
+        mTextureView.initScaleFactors(scaleFactor);
+        sendScaledMousePosition(mousePointer.getX(),mousePointer.getY());
+    }
 }
