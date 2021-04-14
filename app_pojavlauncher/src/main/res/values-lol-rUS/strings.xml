@@ -2,18 +2,18 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">pajaw launcher (Mc4Android)</string>
-    <string name="app_short_name">pajavlauncher</string>
+    <string name="app_short_name">PojawLunchr</string>
     <string name="app_motd">go MC at your mobile!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">gmail or usrnaem</string>
+    <string name="login_online_username_hint">Emol or osornoim</string>
     <string name="login_online_password_hint">passwd</string>
     <string name="login_online_check_keeplogin">kep i kog inside</string>
     <string name="login_online_login_label">logout</string>
     <string name="login_offline_label">Login as offloin akownt</string>
-    <string name="login_error_short_username">usrname mst b at list 3 chr</string>
-    <string name="login_error_exist_username">ohno, this usrname is registred :(</string>
+    <string name="login_error_short_username">Usernoim must be at liest 3 characters</string>
+    <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">what acc?</string>
     <string name="login_title_no_saved_account">No akownt findz !</string>
@@ -28,7 +28,7 @@
     <!-- Error messages -->
     <string name="error_fatal">Pojaw Launcher haz unexpectadly crashd</string>
     <string name="error_no_version">No vershun!</string>
-    <string name="error_show_more">Show moar</string>
+    <string name="error_show_more">Show mor</string>
     <string name="error_show_less">Show les</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Teh riid/rite 2 storage permishun iz requird!</string>
@@ -40,7 +40,7 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Newz</string>
     <string name="mcl_tab_console">Developmnt consol</string>
-    <string name="mcl_tab_crash">Crash log</string>
+    <string name="mcl_tab_crash">Crash trunk</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connectd</string>
     <string name="mcl_account_offline">Offlien</string>
@@ -54,7 +54,7 @@
     <string name="mcl_option_modinstall">Launch mod installr (Foreg, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Launch mod installr (wif custom arguments)</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
-    <string name="mcl_option_settings">Settins</string>
+    <string name="mcl_option_settings">Settinz</string>
     <string name="mcl_option_about">Bout</string>
     <string name="mcl_setting_title_uninstalljre">Uninstal Jaav Runtiem</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launchah restart requird] dis letz u re-install Jaav Runtiem</string>
