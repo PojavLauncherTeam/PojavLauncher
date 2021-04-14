@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android) Translation By Justine Victorino or EnderProJustine</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Ilunsad ang Minecraft: Java Edition sa iyong aparato!</string>
     <!-- Action bar part -->
