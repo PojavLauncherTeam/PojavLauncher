@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (마인크래프트: 자바 에디션, 안드로이드를 위한)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
     <!-- Action bar part -->
