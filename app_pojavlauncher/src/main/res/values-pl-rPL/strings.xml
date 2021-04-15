@@ -145,6 +145,8 @@
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
+    <string name="control_scaleup">Skalowanie w górę</string>
+    <string name="control_scaledown">Skalowanie w dół</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
