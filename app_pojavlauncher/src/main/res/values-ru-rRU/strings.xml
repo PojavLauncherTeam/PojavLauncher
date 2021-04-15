@@ -147,6 +147,8 @@
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
     <string name="control_customkey">Отправить пользовательский код клавиши</string>
+    <string name="control_scaleup">Увеличить</string>
+    <string name="control_scaledown">Уменьшить</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
