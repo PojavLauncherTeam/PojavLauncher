@@ -139,6 +139,8 @@
     <string name="control_viewout">日誌輸出</string>
     <string name="control_adebug">輸入除錯</string>
     <string name="control_customkey">傳送自訂鍵碼</string>
+    <string name="control_scaleup">放大</string>
+    <string name="control_scaledown">縮小</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
