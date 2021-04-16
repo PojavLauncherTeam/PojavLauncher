@@ -139,6 +139,8 @@
     <string name="control_viewout">Output ng log</string>
     <string name="control_adebug">Pag-input ng Debug</string>
     <string name="control_customkey">Magpadala ng pasadyang keycode</string>
+    <string name="control_scaleup">Scale up</string>
+    <string name="control_scaledown">Scale down</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
