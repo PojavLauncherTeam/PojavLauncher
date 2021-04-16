@@ -145,6 +145,8 @@
     <string name="control_viewout">日志输出</string>
     <string name="control_adebug">输入调试</string>
     <string name="control_customkey">发送自定义键码</string>
+    <string name="control_scaleup">放大</string>
+    <string name="control_scaledown">缩小</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
