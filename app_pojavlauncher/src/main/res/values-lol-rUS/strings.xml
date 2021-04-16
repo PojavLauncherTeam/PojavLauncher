@@ -139,6 +139,8 @@
     <string name="control_viewout">tree input</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send custom keycoed</string>
+    <string name="control_scaleup">Bigging go up</string>
+    <string name="control_scaledown">Bigging go down</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
