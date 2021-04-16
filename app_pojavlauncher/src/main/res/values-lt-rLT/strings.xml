@@ -139,6 +139,8 @@
     <string name="control_viewout">Žurnalo įrašai</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Siųsti mygtuko kodą</string>
+    <string name="control_scaleup">Padidinti</string>
+    <string name="control_scaledown">Sumažinti</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
