@@ -145,6 +145,8 @@
     <string name="control_viewout">Konsol çıktısı</string>
     <string name="control_adebug">Hata ayıklama tuşu gir</string>
     <string name="control_customkey">Özel anahtarkodu gönder</string>
+    <string name="control_scaleup">Boyutu Arttır</string>
+    <string name="control_scaledown">Boyutu Küçült</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
