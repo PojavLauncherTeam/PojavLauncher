@@ -139,6 +139,8 @@
     <string name="control_viewout">ʇndʇno ᵷoꞀ</string>
     <string name="control_adebug">ᵷnqǝᗡ ʇnduI</string>
     <string name="control_customkey">ǝpoɔʎǝʞ ɯoʇsnɔ puǝS</string>
+    <string name="control_scaleup">ScaleUp</string>
+    <string name="control_scaledown">ScaleDown</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
