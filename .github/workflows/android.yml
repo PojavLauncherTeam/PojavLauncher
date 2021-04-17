@@ -85,8 +85,8 @@ jobs:
             mkdir -p $jrepath
             work=$GITHUB_WORKSPACE/jre/work
             work1=$GITHUB_WORKSPACE/jre/work1
-            makearch () { echo "Making $2..."; cd $work; tar xf $(ls ../jre8-$2-*release.tar.xz) > /dev/null 2>&1; mv bin $work1/;  mkdir -p $work1/lib; mv lib/$1 $work1/lib/; mv lib/jexec $work1/lib/; mv release $work1/; tar cJf bin-$2.tar.xz $work1/* > /dev/null 2>&1; mv bin-$2.tar.xz $jrepath/; rm -rf $work/*; rm -rf $work1/*; }
-            makeuni () { echo "Making universal..."; cd $work; tar xf $(ls ../jre8-arm64-*release.tar.xz) > /dev/null 2>&1; rm -rf bin; rm -rf lib/aarch64; rm lib/jexec; rm release; tar cJf universal.tar.xz * > /dev/null 2>&1; mv universal.tar.xz $jrepath/; rm -rf $work/*; }
+            makearch () { echo "Making $2..."; cd $work; tar xf $(ls ../jre8-$2-*release.tar.xz) > /dev/null 2>&1; mv bin $work1/;  mkdir -p $work1/lib; mv lib/$1 $work1/lib/; mv lib/jexec $work1/lib/; tar cJf bin-$2.tar.xz $work1/* > /dev/null 2>&1; mv bin-$2.tar.xz $jrepath/; rm -rf $work/*; rm -rf $work1/*; }
+            makeuni () { echo "Making universal..."; cd $work; tar xf $(ls ../jre8-arm64-*release.tar.xz) > /dev/null 2>&1; rm -rf bin; rm -rf lib/aarch64; rm lib/jexec; tar cJf universal.tar.xz * > /dev/null 2>&1; mv universal.tar.xz $jrepath/; rm -rf $work/*; }
             makeuni
             makearch aarch32 arm
             makearch aarch64 arm64
