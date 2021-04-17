@@ -86,8 +86,8 @@ jobs:
             cd work
             jrepath=$GITHUB_WORKSPACE/app_pojavlauncher/src/main/assets/components/jre
             mkdir -p $jrepath
-            work=$GITHUB_WORKSPACE/work
-            work1=$GITHUB_WORKSPACE/work1
+            work=$GITHUB_WORKSPACE/jre/work
+            work1=$GITHUB_WORKSPACE/jre/work1
             makearch () { cd $work; tar xf $(ls ../jre8-$2-*release.tar.xz); mv bin $work1/;  mkdir -p $work1/lib; mv lib/$1 $work1/lib/; mv release $work1/; tar cJf bin-$2.tar.xz $work1/*; mv bin-$2.tar.xz $jrepath/;, rm -rf $work/*; rm -rf $work1/*; }
             makeuni () { cd $work; tar xf $(ls ../jre8-arm64-*release.tar.xz); rm -rf bin; rm -rf lib/aarch64; rm release; tar cJf universal.tar.xz *; mv universal.tar.xz $jrepath/;, rm -rf $work/*; }
             makeuni
