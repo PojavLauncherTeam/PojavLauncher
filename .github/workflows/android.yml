@@ -37,7 +37,33 @@ jobs:
         export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
         cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
-        
+    
+    - name: Get JRE 8 tarballs
+      uses: dawidd6/action-download-artifact@v2
+      with:
+            github_token: ${{secrets.GITHUB_TOKEN}}
+            workflow: build.yml
+            path: jre
+            workflow_conclusion: success
+            repo: PojavLauncherTeam/android-openjdk-build-multiarch
+    
+    - name: Repack JRE
+      run: |
+            cd jre
+            mkdir work
+            mkdir work1
+            cd work
+            jrepath=$GITHUB_WORKSPACE/app_pojavlauncher/src/main/assets/components/jre
+            mkdir -p $jrepath
+            work=$GITHUB_WORKSPACE/work
+            work1=$GITHUB_WORKSPACE/work1
+            makearch () { cd $work; tar xf $(ls ../jre8-$2-*release.tar.xz); mv bin $work1/;  mkdir -p $work1/lib; mv lib/$1 $work1/lib/; mv release $work1/; tar cJf bin-$2.tar.xz $work1/*; mv bin-$2.tar.xz $jrepath/;, rm -rf $work/*; rm -rf $work1/*; }
+            makeuni () { cd $work; tar xf $(ls ../jre8-arm64-*release.tar.xz); rm -rf bin; rm -rf lib/aarch64; rm release; tar cJf universal.tar.xz *; mv universal.tar.xz $jrepath/;, rm -rf $work/*; }
+            makeuni
+            makearch aarch32 arm
+            makearch aarch64 arm64
+            makearch x86 x86
+            makearch x86_64 x86_64
     - name: Build APK with Gradle
       run: |
         chmod +x scripts/languagelist_updater.sh
