@@ -501,7 +501,8 @@ public class BaseMainActivity extends LoggableActivity {
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
                                         CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
                                         */
-                                        CallbackBridge.sendScroll(mouse_x - scrollInitialX, mouse_y - scrollInitialY);
+
+                                        // CallbackBridge.sendScroll(mouse_x - scrollInitialX, mouse_y - scrollInitialY);
                                         scrollInitialX = mouse_x;
                                         scrollInitialY = mouse_y;
                                     }
