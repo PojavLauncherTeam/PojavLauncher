@@ -93,8 +93,8 @@ jobs:
             makeuni
             makearch aarch32 arm
             makearch aarch64 arm64
-            makearch x86 x86
-            makearch x86_64 x86_64
+            makearch i386 x86
+            makearch amd64 x86_64
     - name: Build APK with Gradle
       run: |
         chmod +x scripts/languagelist_updater.sh
