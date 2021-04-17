@@ -26,17 +26,19 @@ jobs:
       with:
         java-version: 1.8
 
-#    - name: Build latest GL4ES
-#      continue-on-error: true
-#      run: |
-#        cd gl4es
-#        git remote add upstream https://github.com/ptitSeb/gl4es
-#        git fetch upstream
-#        git checkout master
-#        git merge upstream/main || echo "Merge exit code $?"
-#        export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
-#        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
-#        cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
+    - name: Get gl4es
+      uses: actions/checkout@v2
+      with:
+        repository: 'ptitSeb/gl4es'
+        path: 'gl4es'
+
+    - name: Build latest GL4ES
+      continue-on-error: true
+      run: |
+        cd gl4es
+        mv ../Android_gl4es.mk Android.mk
+        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
+        cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
     
     - name: Get jre8-aarch32
       uses: dawidd6/action-download-artifact@v2
