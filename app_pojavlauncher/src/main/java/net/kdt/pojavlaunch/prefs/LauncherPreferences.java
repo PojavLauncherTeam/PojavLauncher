@@ -81,14 +81,17 @@ public class LauncherPreferences
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
         }
-        
+
+        if (PREF_RENDERER.equals("vulkan_zink") /* && arg.substring(argLwjglLibname.length()).startsWith("libgl4es_11") */) {
+            PREF_CUSTOM_OPENGL_LIBNAME = "libOSMesa_8.so";
+        }
+
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             if (arg.startsWith(argLwjglLibname)) {
                 // TODO together with EGL, currently force to OSMesa only if users leave set gl4es
                 if (PREF_RENDERER.equals("vulkan_zink") /* && arg.substring(argLwjglLibname.length()).startsWith("libgl4es_11") */) {
                     PREF_CUSTOM_JAVA_ARGS.replace(arg, argLwjglLibname + "libOSMesa_8.so");
-                    PREF_CUSTOM_OPENGL_LIBNAME = "libOSMesa_8.so";
                 } else {
                     PREF_CUSTOM_OPENGL_LIBNAME = arg.substring(argLwjglLibname.length());
                 }
