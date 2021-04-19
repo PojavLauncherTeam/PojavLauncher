@@ -147,6 +147,8 @@
     <string name="control_viewout">Nhật ký ra</string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
+    <string name="control_scaleup">Down</string>
+    <string name="control_scaledown">Right </string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
