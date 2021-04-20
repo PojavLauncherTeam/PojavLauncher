@@ -21,77 +21,46 @@ jobs:
       with:
         java-version: 1.8
 
+    - name: Get gl4es latest commit hash
+      id: gl4es-sha
+      run: echo "::set-output name=sha::$(git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*')"
+      shell: bash
+      
+    - name: Cache gl4es
+      uses: actions/cache@v2
+      id: gl4es-cache
+      with:
+        path: gl4es/libs
+        key: gl4es-android-shared-${{ steps.gl4es-sha.outputs.sha }}
+
     - name: Get gl4es
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
         repository: 'ptitSeb/gl4es'
         path: 'gl4es'
 
-    - name: Build latest GL4ES
+    - name: Build gl4es
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
       continue-on-error: true
       run: |
         cd gl4es
         mv ../Android_gl4es.mk Android.mk
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
-        cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
     
-    - name: Get jre8-aarch32
+    - name: Install gl4es
+      run: cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
+    
+    - name: Get JRE
       uses: dawidd6/action-download-artifact@v2
       with:
-            github_token: ${{secrets.GITHUB_TOKEN}}
-            workflow: build.yml
-            path: jre
-            workflow_conclusion: success
-            repo: PojavLauncherTeam/android-openjdk-build-multiarch
-            name: jre8-aarch32
-            
-    - name: Get jre8-aarch64
-      uses: dawidd6/action-download-artifact@v2
-      with:
-            github_token: ${{secrets.GITHUB_TOKEN}}
-            workflow: build.yml
-            path: jre
-            workflow_conclusion: success
-            repo: PojavLauncherTeam/android-openjdk-build-multiarch
-            name: jre8-aarch64
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          name: jre8-pojav
     
-    - name: Get jre8-x86
-      uses: dawidd6/action-download-artifact@v2
-      with:
-            github_token: ${{secrets.GITHUB_TOKEN}}
-            workflow: build.yml
-            path: jre
-            workflow_conclusion: success
-            repo: PojavLauncherTeam/android-openjdk-build-multiarch
-            name: jre8-x86
-    
-    - name: Get jre8-x86_64
-      uses: dawidd6/action-download-artifact@v2
-      with:
-            github_token: ${{secrets.GITHUB_TOKEN}}
-            workflow: build.yml
-            path: jre
-            workflow_conclusion: success
-            repo: PojavLauncherTeam/android-openjdk-build-multiarch
-            name: jre8-x86_64
-    
-    - name: Repack JRE
-      run: |
-            cd jre
-            mkdir work
-            mkdir work1
-            cd work
-            jrepath=$GITHUB_WORKSPACE/app_pojavlauncher/src/main/assets/components/jre
-            mkdir -p $jrepath
-            work=$GITHUB_WORKSPACE/jre/work
-            work1=$GITHUB_WORKSPACE/jre/work1
-            makearch () { echo "Making $2..."; cd $work; tar xf $(ls ../jre8-$2-*release.tar.xz) > /dev/null 2>&1; mv bin $work1/;  mkdir -p $work1/lib; mv lib/$1 $work1/lib/; mv lib/jexec $work1/lib/; tar cJf bin-$2.tar.xz -C $work1 . > /dev/null 2>&1; mv bin-$2.tar.xz $jrepath/; rm -rf $work/*; rm -rf $work1/*; }
-            makeuni () { echo "Making universal..."; cd $work; tar xf $(ls ../jre8-arm64-*release.tar.xz) > /dev/null 2>&1; rm -rf bin; rm -rf lib/aarch64; rm lib/jexec; tar cJf universal.tar.xz * > /dev/null 2>&1; mv universal.tar.xz $jrepath/; rm -rf $work/*; }
-            makeuni
-            makearch aarch32 arm
-            makearch aarch64 arm64
-            makearch i386 x86
-            makearch amd64 x86_64
     - name: Build APK with Gradle
       run: |
         chmod +x scripts/languagelist_updater.sh
