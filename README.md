@@ -28,7 +28,7 @@ Will be moved to **BUILDING.md**
 - JRE for Android is [here](https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u), also the build script [here](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch).
 - Follow build instruction on build script [README.md](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/blob/buildjre8/README.md).
 - You can also get [CI auto builds](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/actions).
-- Either get `jre8-pojav` artifact from auto builds, or do splitting by yourself:
+- Either get `jre8-pojav` artifact from auto builds, or do splitting by yourself:</br>
         - Get JREs for all of 4 supported architectures (arm, arm64, x86, x86_64) </br>
         - Split JRE into parts:</br>
                 Platform-independent: .jar files, libraries, configs, etc...</br>
