@@ -41,7 +41,7 @@ jobs:
         path: 'gl4es'
 
     - name: Build gl4es
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
       continue-on-error: true
       run: |
         cd gl4es
