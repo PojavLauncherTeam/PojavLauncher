@@ -155,6 +155,9 @@ public class AndroidLWJGLKeycode {
         // androidToLwjglMap.put(KeyEvent.KEYCODE_BUTTON_1, LWJGLGLFWKeycode.G
         androidToLwjglMap.put(KeyEvent.KEYCODE_AT,LWJGLGLFWKeycode.GLFW_KEY_2);
         androidToLwjglMap.put(KeyEvent.KEYCODE_POUND,LWJGLGLFWKeycode.GLFW_KEY_3);
+
+        androidToLwjglMap.put(KeyEvent.KEYCODE_UNKNOWN,LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN);
+
     }
     
     public static String[] generateKeyName() {
