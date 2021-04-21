@@ -60,7 +60,7 @@ public class CustomControlsActivity extends BaseActivity
 							load(ctrlLayout);
 							break;
 						case R.id.menu_ctrl_add:
-							ctrlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
+							ctrlLayout.addControlButton(new ControlData("New", new int[] {LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN}, 100, 100));
 							break;
 						case R.id.menu_ctrl_selectdefault:
 							dialogSelectDefaultCtrl(ctrlLayout);
