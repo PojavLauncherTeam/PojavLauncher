@@ -106,7 +106,7 @@ public class AndroidLWJGLKeycode {
         androidToLwjglMap.put(KeyEvent.KEYCODE_GRAVE, LWJGLGLFWKeycode.GLFW_KEY_GRAVE_ACCENT);
         androidToLwjglMap.put(KeyEvent.KEYCODE_HOME, LWJGLGLFWKeycode.GLFW_KEY_HOME);
         androidToLwjglMap.put(KeyEvent.KEYCODE_INSERT, LWJGLGLFWKeycode.GLFW_KEY_INSERT);
-        androidToLwjglMap.put(KeyEvent.KEYCODE_KANA, LWJGLGLFWKeycode.GLFW_KEY_K);
+        //androidToLwjglMap.put(KeyEvent.KEYCODE_KANA, LWJGLGLFWKeycode.GLFW_KEY_K);
         androidToLwjglMap.put(KeyEvent.KEYCODE_LEFT_BRACKET, LWJGLGLFWKeycode.GLFW_KEY_LEFT_BRACKET);
         androidToLwjglMap.put(KeyEvent.KEYCODE_MINUS, LWJGLGLFWKeycode.GLFW_KEY_MINUS);
         
