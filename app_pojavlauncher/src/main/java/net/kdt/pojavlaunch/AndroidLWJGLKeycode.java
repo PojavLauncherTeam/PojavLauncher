@@ -160,8 +160,8 @@ public class AndroidLWJGLKeycode {
     public static String[] generateKeyName() {
         if (androidKeyNameArray == null) {
             List<String> keyName = new ArrayList<String>();
-            for (Integer perKey : androidToLwjglMap.keySet()) {
-                keyName.add(KeyEvent.keyCodeToString(perKey.intValue()).replace("KEYCODE_", ""));
+            for (int perKey : androidToLwjglMap.keySet()) {
+                keyName.add(KeyEvent.keyCodeToString(perKey).replace("KEYCODE_", ""));
             }
             androidKeyNameArray = keyName.toArray(new String[0]);
         }
