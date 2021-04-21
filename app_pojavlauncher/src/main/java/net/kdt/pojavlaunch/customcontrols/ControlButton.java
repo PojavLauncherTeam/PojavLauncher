@@ -205,29 +205,29 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 }
             }
 
-
-            if (!mProperties.isToggle) {
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN: // 0
-                    case MotionEvent.ACTION_POINTER_DOWN: // 5
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN: // 0
+                case MotionEvent.ACTION_POINTER_DOWN: // 5
+                    if(!mProperties.isToggle){
                         setHolding(true);
                         sendKeyPresses(event, true);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP: // 1
+                case MotionEvent.ACTION_CANCEL: // 3
+                case MotionEvent.ACTION_POINTER_UP: // 6
+                    if(mProperties.isToggle){
+                        mChecked = !mChecked;
+                        invalidate();
+                        setHolding(mChecked);
+                        sendKeyPresses(event, mChecked);
                         break;
-                    case MotionEvent.ACTION_UP: // 1
-                    case MotionEvent.ACTION_CANCEL: // 3
-                    case MotionEvent.ACTION_POINTER_UP: // 6
-                        setHolding(false);
-                        sendKeyPresses(event,false);
-                        break;
-                    default:
-                        return false;
-                }
-
-            } else if (mGestureDetector.onTouchEvent(event)) {
-                mChecked = !mChecked;
-                invalidate();
-                setHolding(mChecked);
-                sendKeyPresses(event, mChecked);
+                    }
+                    setHolding(false);
+                    sendKeyPresses(event,false);
+                    break;
+                default:
+                    return false;
             }
             return true;
 
