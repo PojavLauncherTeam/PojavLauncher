@@ -263,7 +263,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     private void sendKeyPresses(MotionEvent event, boolean isDown){
         for(int keycode : mProperties.keycodes){
-            if(keycode > 0){
+            if(keycode >= 0){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
             }else {
                 super.onTouchEvent(event);
