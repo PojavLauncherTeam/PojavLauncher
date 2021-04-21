@@ -25,14 +25,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     private boolean mCanTriggerLongClick = true;
     
     private boolean mChecked = false;
-    
-    private float mScaleAt;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
         setPadding(4, 4, 4, 4);
-
-        mScaleAt = layout.mLayout.scaledAt;
         
         mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
 
@@ -146,7 +142,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mChecked) {
-            canvas.drawRect(0, getHeight() - 10 * mScaleAt, getWidth(), getHeight(), mRectPaint);
+            canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mProperties.cornerRadius, mProperties.cornerRadius, mRectPaint);
         }
     }
 
