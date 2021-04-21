@@ -66,7 +66,7 @@ public class ControlLayout extends FrameLayout
 		mLayout = controlLayout;
         
 		for (ControlData button : controlLayout.mControlDataList) {
-            button.isHideable = button.keycode != ControlData.SPECIALBTN_TOGGLECTRL && button.keycode != ControlData.SPECIALBTN_VIRTUALMOUSE;
+            button.isHideable = button.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && button.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
             button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             if (!button.isDynamicBtn) {
@@ -90,7 +90,7 @@ public class ControlLayout extends FrameLayout
 		final ControlButton view = new ControlButton(this, controlButton);
 		view.setModifiable(mModifiable);
         if (!mModifiable) {
-            view.setAlpha(1f - view.getProperties().transparency / 100f);
+            view.setAlpha(view.getProperties().opacity);
 			view.setFocusable(false);
 			view.setFocusableInTouchMode(false);
         }
@@ -151,7 +151,7 @@ public class ControlLayout extends FrameLayout
 				ControlButton cv = ((ControlButton) v);
 				cv.setModifiable(z);
                 if (!z) {
-				    cv.setAlpha(1f - cv.getProperties().transparency / 100f);
+				    cv.setAlpha(cv.getProperties().opacity);
                 }
 			}
 		}
