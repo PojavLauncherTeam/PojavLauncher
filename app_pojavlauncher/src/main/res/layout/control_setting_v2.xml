@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="500dp">
+
+    <!-- Yeah I know I'm using a lot of nested LinearLayouts -->
+    <!-- Should be around 2 layers deep max -->
+    <!-- However this allows a lot of flexibility to switch setting position for now -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <!-- EDIT NAME SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Name:"
+                android:gravity="center"/>
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:id="@+id/controlsetting_edit_name"/>
+
+        </LinearLayout>
+
+        <!-- SIZE SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Size:"
+                android:gravity="center"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:id="@+id/controlsetting_edit_width"
+                android:hint="@string/customctrl_size_width"
+                android:inputType="numberDecimal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="×"
+                android:gravity="center"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:id="@+id/controlsetting_edit_height"
+                android:hint="@string/customctrl_size_height"
+                android:inputType="numberDecimal"/>
+
+        </LinearLayout>
+
+
+        <!-- MAPPING SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Mapping:"
+                android:gravity="center"/>
+
+            <Spinner
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:id="@+id/controlsetting_spinner_lwjglkeycode"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="+"
+                android:gravity="center"/>
+
+            <Spinner
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:id="@+id/controlsetting_spinner_lwjglkeycode2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="+"
+                android:gravity="center"/>
+
+            <Spinner
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:id="@+id/controlsetting_spinner_lwjglkeycode3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="+"
+                android:gravity="center"/>
+
+            <Spinner
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:id="@+id/controlsetting_spinner_lwjglkeycode4"/>
+
+        </LinearLayout>
+
+        <!-- TOGGLE SECTION -->
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_toggle"
+            android:id="@+id/controlsetting_checkbox_toggle"/>
+
+        <CheckBox
+            android:id="@+id/controlsetting_checkbox_passthru"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customctrl_passthru" />
+
+        <!-- BACKGROUND COLOR SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Background color:"
+                android:gravity="center"/>
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginVertical="2dp"
+                android:background="#FFFFFFFF"
+                android:id="@+id/controlsetting_background_color"/>
+
+        </LinearLayout>
+
+
+        <!-- STROKE WIDTH SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Stroke width:"
+                android:gravity="center"/>
+
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/controlsetting_seek_stroke_width"/>
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="100"
+                android:id="@+id/controlsetting_text_stroke_width"/>
+
+        </LinearLayout>
+
+        <!-- STROKE COLOR SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Stroke color:" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#FFFFFFFF"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginVertical="2dp"
+                android:id="@+id/controlsetting_stroke_color" />
+
+        </LinearLayout>
+
+        <!-- CORNER RADIUS SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Corner radius"
+                android:gravity="center"/>
+
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/controlsetting_seek_corner_radius"/>
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="100 %"
+                android:id="@+id/controlsetting_text_corner_radius"/>
+
+        </LinearLayout>
+
+        <!-- CORNER RADIUS SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Button opacity"
+                android:gravity="center"/>
+
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/controlsetting_seek_opacity"/>
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="100 %"
+                android:id="@+id/controlsetting_text_opacity"/>
+
+        </LinearLayout>
+
+
+        <!-- DYNAMIC POSITION SECTION -->
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_dynamicpos"
+            android:id="@+id/controlsetting_checkbox_dynamicpos"/>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/customctrl_dynamicpos_x"/>
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:id="@+id/controlsetting_edit_dynamicpos_x"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/customctrl_dynamicpos_y"/>
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:id="@+id/controlsetting_edit_dynamicpos_y"/>
+
+        </LinearLayout>
+
+        <!-- KEY COMBINATION SECTION -->
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/customctrl_keycombine"/>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_keycombine_alt"
+            android:id="@+id/controlsetting_checkbox_keycombine_alt"/>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_keycombine_control"
+            android:id="@+id/controlsetting_checkbox_keycombine_control"/>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/customctrl_keycombine_shift"
+            android:id="@+id/controlsetting_checkbox_keycombine_shift"/>
+
+    </LinearLayout>
+
+</ScrollView>
