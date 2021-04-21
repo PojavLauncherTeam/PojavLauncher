@@ -164,7 +164,6 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	}
 
 	private void initializeEditDialog(Context ctx){
-		//TODO: Support the color picker, stroke width/color and corner radius
 		//Create the editing dialog
 		LayoutInflater layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = layoutInflater.inflate(R.layout.control_setting_v2,null);
@@ -193,6 +192,55 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		seekBarOpacity = v.findViewById(R.id.controlsetting_seek_opacity);
 		seekBarCornerRadius = v.findViewById(R.id.controlsetting_seek_corner_radius);
 		seekBarStrokeWidth = v.findViewById(R.id.controlsetting_seek_stroke_width);
+
+		//Add listeners, too bad I don't need all the methods
+		seekBarOpacity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+				setPercentageText(textOpacity, i);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				//AUTO GENERATED STUN
+			}
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				//AUTO GENERATED STUN
+			}
+		});
+
+		seekBarCornerRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+				setPercentageText(textCornerRadius, i);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				//AUTO GENERATED STUN
+			}
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				//AUTO GENERATED STUN
+			}
+		});
+
+		seekBarStrokeWidth.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+				setPercentageText(textStrokeWidth, i);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				//AUTO GENERATED STUN
+			}
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				//AUTO GENERATED STUN
+			}
+		});
 
 		buttonBackgroundColor = v.findViewById(R.id.controlsetting_background_color);
 		buttonStrokeColor = v.findViewById(R.id.controlsetting_stroke_color);
@@ -271,6 +319,10 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 		buttonBackgroundColor.setBackgroundColor(properties.bgColor);
 		buttonStrokeColor.setBackgroundColor(properties.strokeColor);
+
+		setPercentageText(textCornerRadius,seekBarCornerRadius.getProgress());
+		setPercentageText(textOpacity,seekBarOpacity.getProgress());
+		setPercentageText(textStrokeWidth,seekBarStrokeWidth.getProgress());
 
 		checkHoldAlt.setChecked(properties.holdAlt);
 		checkHoldCtrl.setChecked(properties.holdCtrl);
@@ -374,6 +426,10 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		dialog.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> buttonStrokeColor.setBackgroundColor(picker.getColor()));
 
 		dialog.show();
+	}
+
+	private void setPercentageText(TextView textView, int progress){
+		textView.setText(progress + " %");
 	}
 
 }
