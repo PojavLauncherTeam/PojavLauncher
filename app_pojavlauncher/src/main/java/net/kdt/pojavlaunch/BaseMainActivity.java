@@ -28,11 +28,10 @@ import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
-    
-    public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
+
     volatile public static boolean isInputStackCall;
 
-    private static int[] hotbarKeys = {
+    private static final int[] hotbarKeys = {
         LWJGLGLFWKeycode.GLFW_KEY_1, LWJGLGLFWKeycode.GLFW_KEY_2,   LWJGLGLFWKeycode.GLFW_KEY_3,
         LWJGLGLFWKeycode.GLFW_KEY_4, LWJGLGLFWKeycode.GLFW_KEY_5,   LWJGLGLFWKeycode.GLFW_KEY_6,
         LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
@@ -72,7 +71,6 @@ public class BaseMainActivity extends LoggableActivity {
     private int guiScale;
     private DisplayMetrics displayMetrics;
     public boolean hiddenTextIgnoreUpdate = true;
-    public String hiddenTextContents = initText;
     
     private boolean isVirtualMouseEnabled;
     private LinearLayout touchPad;
@@ -383,8 +381,7 @@ public class BaseMainActivity extends LoggableActivity {
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
                 @Override
-                public boolean onTouch(View p1, MotionEvent e)
-                {
+                public boolean onTouch(View p1, MotionEvent e) {
 
                     {
                         int mptrIndex = -1;
@@ -520,94 +517,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 break;
                         }
                     }
-                    
-/*
-                    int x = ((int) e.getX()) * scaleFactor;
-                    int y = (minecraftGLView.getHeight() - ((int) e.getY())) * scaleFactor;
-                    int hudKeyHandled = handleGuiBar(x, y, e);
-                    if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
-                        if (hudKeyHandled != -1) {
-                            sendKeyPress(hudKeyHandled);
-                        } else {
-                            CallbackBridge.sendMouseEvent(
-                                x, CallbackBridge.windowHeight - y,
-                                rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT
-                            );
-                            if (!rightOverride) {
-                                CallbackBridge.mouseLeft = true;
-                            }
-                        }
-                    } else {
-                        switch (e.getActionMasked()) {
-                            case MotionEvent.ACTION_DOWN: // 0
-                            case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                isTouchInHotbar = hudKeyHandled != -1;
-                                if (isTouchInHotbar) {
-                                    sendKeyPress(hudKeyHandled, 0, true);
-                                    hotbarX = x;
-                                    hotbarY = y;
 
-                                    theHandler.sendEmptyMessageDelayed(MainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                } else {
-                                    CallbackBridge.sendCursorPos(x, CallbackBridge.windowHeight - y);
-                                    
-                                    // if (!rightOverride)
-                                        // CallbackBridge.mouseLeft = true;
-                                    
-                                    
-
-                                    if (CallbackBridge.isGrabbing()) {
-                                        CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, true);
-                                        initialX = x;
-                                        initialY = y;
-                                        theHandler.sendEmptyMessageDelayed(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                    }
-                                }
-                                break;
-                            case MotionEvent.ACTION_UP: // 1
-                            case MotionEvent.ACTION_CANCEL: // 3
-                            case MotionEvent.ACTION_POINTER_UP: // 6
-                                if (!isTouchInHotbar) {
-                                    CallbackBridge.sendCursorPos(x, CallbackBridge.windowHeight - y);
-
-                                    // TODO uncomment after fix wrong trigger
-                                    // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y);
-                                    if (!rightOverride) {
-                                        // CallbackBridge.mouseLeft = false;
-                                    }
-                                } 
-
-                                if (CallbackBridge.isGrabbing()) {
-                                    // System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
-                                    // System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
-                                    if (isTouchInHotbar && Math.abs(hotbarX - x) < fingerStillThreshold && Math.abs(hotbarY - y) < fingerStillThreshold) {
-                                        sendKeyPress(hudKeyHandled, 0, false);
-                                    } else if (!triggeredLeftMouseButton && Math.abs(initialX - x) < fingerStillThreshold && Math.abs(initialY - y) < fingerStillThreshold) {
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-                                    }
-                                    if (!isTouchInHotbar) {
-                                        if (triggeredLeftMouseButton) {
-                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
-                                        }
-                                        triggeredLeftMouseButton = false;
-                                        theHandler.removeMessages(MainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-                                    } else {
-                                        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, false);
-                                        theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
-                                    }
-                                }
-                                break;
-
-                            default:
-                                if (!isTouchInHotbar) {
-                                    CallbackBridge.sendCursorPos(x, CallbackBridge.windowHeight - y);
-                                }
-                                break;
-                                
-                        }
-                    }
-                    */
                     
                     debugText.setText(CallbackBridge.DEBUG_STRING.toString());
                     CallbackBridge.DEBUG_STRING.setLength(0);
