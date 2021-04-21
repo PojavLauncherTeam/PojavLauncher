@@ -37,7 +37,7 @@ public class MainActivity extends BaseMainActivity {
                         CustomControlsActivity.load(mControlLayout);
                         break;
                     case R.id.menu_ctrl_add:
-                        mControlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
+                        mControlLayout.addControlButton(new ControlData("New", new int[] {LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN}, 100, 100));
                         break;
                     case R.id.menu_ctrl_selectdefault:
                         CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
@@ -56,18 +56,20 @@ public class MainActivity extends BaseMainActivity {
             public void onClick(View view) {
                 if (view instanceof ControlButton) {
                     ControlButton button = (ControlButton) view;
-                    switch (button.getProperties().keycode) {
-                        case ControlData.SPECIALBTN_KEYBOARD:
-                            showKeyboard();
-                            break;
+                    for(int keycode : button.getProperties().keycodes){
+                        switch (keycode) {
+                            case ControlData.SPECIALBTN_KEYBOARD:
+                                showKeyboard();
+                                break;
 
-                        case ControlData.SPECIALBTN_TOGGLECTRL:
-                            mControlLayout.toggleControlVisible();
-                            break;
+                            case ControlData.SPECIALBTN_TOGGLECTRL:
+                                mControlLayout.toggleControlVisible();
+                                break;
 
-                        case ControlData.SPECIALBTN_VIRTUALMOUSE:
-                            toggleMouse(button);
-                            break;
+                            case ControlData.SPECIALBTN_VIRTUALMOUSE:
+                                toggleMouse(button);
+                                break;
+                        }
                     }
                 }
             }
@@ -93,32 +95,34 @@ public class MainActivity extends BaseMainActivity {
 
                 if (view instanceof ControlButton) {
                     ControlButton button = (ControlButton) view;
-                    switch (button.getProperties().keycode) {
-                        case ControlData.SPECIALBTN_MOUSEPRI:
-                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
-                            break;
+                    for(int keycode : button.getProperties().keycodes) {
+                        switch (keycode) {
+                            case ControlData.SPECIALBTN_MOUSEPRI:
+                                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
+                                break;
 
-                        case ControlData.SPECIALBTN_MOUSEMID:
-                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_MIDDLE, isDown);
-                            break;
+                            case ControlData.SPECIALBTN_MOUSEMID:
+                                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_MIDDLE, isDown);
+                                break;
 
-                        case ControlData.SPECIALBTN_MOUSESEC:
-                            if (CallbackBridge.isGrabbing()) {
-                                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
-                            } else {
-                                CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown ? 1 : 0, CallbackBridge.mouseX, CallbackBridge.mouseY);
+                            case ControlData.SPECIALBTN_MOUSESEC:
+                                if (CallbackBridge.isGrabbing()) {
+                                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                                } else {
+                                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown ? 1 : 0, CallbackBridge.mouseX, CallbackBridge.mouseY);
 
-                                setRightOverride(isDown);
-                            } 
-                            break;
-                            
-                        case ControlData.SPECIALBTN_SCROLLDOWN:
-                            if(!isDown)CallbackBridge.sendScroll(0, 1d);
-                            break;
-                            
-                        case ControlData.SPECIALBTN_SCROLLUP:
-                            if(!isDown)CallbackBridge.sendScroll(0, -1d);
-                            break;
+                                    setRightOverride(isDown);
+                                }
+                                break;
+
+                            case ControlData.SPECIALBTN_SCROLLDOWN:
+                                if (!isDown) CallbackBridge.sendScroll(0, 1d);
+                                break;
+
+                            case ControlData.SPECIALBTN_SCROLLUP:
+                                if (!isDown) CallbackBridge.sendScroll(0, -1d);
+                                break;
+                        }
                     }
                 }
 
