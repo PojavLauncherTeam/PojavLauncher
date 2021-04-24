@@ -145,6 +145,8 @@
     <string name="control_viewout">Saída do log</string>
     <string name="control_adebug">Entrada de Depuração</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
+    <string name="control_scaleup">Aumentar</string>
+    <string name="control_scaledown">Diminuir</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
