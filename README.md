@@ -85,7 +85,7 @@ cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main
 - controller mods aren't working
 - with big modpacks textures could be messed up
 - if your using gl4es 1.1.5 on 1.16 and lower texture will bug out when hit a mob
-- probably more, that's why we have a bug tracker ;)
+- probably more, that's why we have a bug tracker ;) 
 
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
