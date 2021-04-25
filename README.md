@@ -80,11 +80,11 @@ cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main
 
 ## Known Issues
 - Minecraft `21w10a` or newer are currently not yet supported due to the new GLSL usage.
-- in 1.16 and up spawn eggs banners are white (you can fix this by adding this to your JVM flags 
+- In 1.16 and up spawn eggs banners are white (you can fix this by adding this to your JVM flags 
 `-Dorg.lwjgl.opengl.libname=libgl4es_115.so`, only works on 1.16 and up, do not use under this version)
 - controller mods aren't working
-- with big modpacks textures could be messed up
-- if your using gl4es 1.1.5 on 1.16 and lower texture will bug out when hit a mob
+- With big modpacks textures could be messed up
+- If you're using gl4es 1.1.5 on 1.16 and lower texture will bug out when hit a mob
 - probably more, that's why we have a bug tracker ;) 
 
 ## License
