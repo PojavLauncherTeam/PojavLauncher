@@ -407,7 +407,6 @@ public class BaseMainActivity extends LoggableActivity {
                     } else {
                         switch (e.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN: // 0
-                            case MotionEvent.ACTION_POINTER_DOWN: // 5
                                 CallbackBridge.sendPrepareGrabInitialPos();
                                 
                                 isTouchInHotbar = hudKeyHandled != -1;
@@ -439,7 +438,6 @@ public class BaseMainActivity extends LoggableActivity {
                                 break;
                                 
                             case MotionEvent.ACTION_UP: // 1
-                            case MotionEvent.ACTION_POINTER_UP: // 6
                             case MotionEvent.ACTION_CANCEL: // 3
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = mouse_x;
@@ -459,7 +457,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     if (isTouchInHotbar && Math.abs(hotbarX - mouse_x) < fingerStillThreshold && Math.abs(hotbarY - mouse_y) < fingerStillThreshold) {
                                         sendKeyPress(hudKeyHandled, 0, false);
                                     } else if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
-                                        if(!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                        if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
                                         }
@@ -477,35 +475,25 @@ public class BaseMainActivity extends LoggableActivity {
                                 }
                                 
                                 break;
-/*
+
                             case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
-                                scrollInitialX = x;
-                                scrollInitialY = y;
+                                scrollInitialX = CallbackBridge.mouseX;
+                                scrollInitialY = CallbackBridge.mouseY;
                                 break;
                                 
                             case MotionEvent.ACTION_POINTER_UP: // 6
-                                scrollInitialX = x;
-                                scrollInitialY = y;
                                 break;
- */
+
                             case MotionEvent.ACTION_MOVE:
-                                if (!isTouchInHotbar) {
+                                if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                    CallbackBridge.sendScroll(CallbackBridge.mouseX - scrollInitialX, CallbackBridge.mouseY - scrollInitialY);
+                                    scrollInitialX = CallbackBridge.mouseX;
+                                    scrollInitialY = CallbackBridge.mouseY;
+                                } else if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = mouse_x;
                                     CallbackBridge.mouseY = mouse_y;
 
                                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    
-                                    if (!CallbackBridge.isGrabbing()) {
-                                        /*
-                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
-                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
-                                        */
-
-                                        // CallbackBridge.sendScroll(mouse_x - scrollInitialX, mouse_y - scrollInitialY);
-                                        scrollInitialX = mouse_x;
-                                        scrollInitialY = mouse_y;
-                                    }
                                 }
                                 break;
                         }
