@@ -264,9 +264,7 @@ public class JREUtils
             Os.setenv(env.getKey(), env.getValue(), true);
         }
         
-        if (shell == null) {
-            setLdLibraryPath(LD_LIBRARY_PATH);
-        }
+        setLdLibraryPath(LD_LIBRARY_PATH);
         
         // return ldLibraryPath;
     }
