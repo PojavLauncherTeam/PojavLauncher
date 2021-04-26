@@ -63,6 +63,7 @@
     <string name="mcl_setting_title_flat_button_style">Тигез төймә стиле</string>
     <string name="mcl_setting_title_javaargs">JVM кушу аргументлары</string>
     <string name="mcl_setting_category_general">Төп көйләүләр</string>
+    <string name="mcl_setting_category_renderer">Рендерер</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
