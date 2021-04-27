@@ -333,7 +333,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     break;
                                     
                                 case MotionEvent.ACTION_MOVE: // 2
-                                    if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                    if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
                                         CallbackBridge.sendScroll(CallbackBridge.mouseX - scrollInitialX, CallbackBridge.mouseY - scrollInitialY);
                                         scrollInitialX = CallbackBridge.mouseX;
                                         scrollInitialY = CallbackBridge.mouseY;
