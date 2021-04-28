@@ -225,7 +225,7 @@ public class JREUtils
         envMap.put("LIBGL_NORMALIZE", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-        envMap.put("MESA_GL_VERSION_OVERRIDE", "2.1");
+        envMap.put("MESA_GL_VERSION_OVERRIDE", "3.1");
         //envMap.put("MESA_GLSL_VERSION_OVERRIDE", "460");
         envMap.put("force_glsl_extensions_warn", "true");
    //     envMap.put("allow_higher_compat_version", "true");
