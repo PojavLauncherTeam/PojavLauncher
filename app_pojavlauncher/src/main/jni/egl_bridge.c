@@ -713,7 +713,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
-           / printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError());
+             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError());
            // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
             return JNI_FALSE;
         }
