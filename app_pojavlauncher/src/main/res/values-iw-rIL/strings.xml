@@ -24,7 +24,7 @@
     <string name="warning_remove_account">החשבון יוסר!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">התקן Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">בחר אשף התקנה ל-mod</string>
+    <string name="alerttitle_installmod">בחר מתקין mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher קרס באופן בלתי צפוי</string>
     <string name="error_no_version">אין גרסה!</string>
@@ -45,7 +45,7 @@
     <string name="mcl_account_connected">מחובר</string>
     <string name="mcl_account_offline">לא מקוון</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">מוכן לשחק מיינקראפט %s</string>
+    <string name="mcl_version_msg">מוכן להפעיל Minecraft %s</string>
     <string name="mcl_launch_cleancache">מנקה קבצי מטמון</string>
     <string name="mcl_launch_downloading">מוריד %s</string>
     <string name="mcl_launch_downloading_progress">"מתקין %s (%.2f MB / %.2f MB)"</string>
@@ -58,8 +58,8 @@
     <string name="mcl_option_about">אודות</string>
     <string name="mcl_setting_title_uninstalljre">הסר התקנת Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייתן לך להתקין מחדש את Java Runtime</string>
-    <string name="mcl_setting_title_freeform">פתח מיינקראפט במצב PiP</string>
-    <string name="mcl_setting_subtitle_freeform">פתח מיינקראפט בחלון מרחף. אנדרואיד 7.0 ומעלה נדרש</string>
+    <string name="mcl_setting_title_freeform">פתח Minecraft במצב Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">פתח Minecraft בחלון מרחף. Android 7.0 ומעלה נדרש</string>
     <string name="mcl_setting_title_hide_sidebar">הסתר את סרגל הצד</string>
     <string name="mcl_setting_subtitle_hide_sidebar">אנשים נוסטלגיים שמעדיפים את ממשק המשתמש v1 הישן עשויים לחבב זאת. נותן לך חוויה במסך מלא יותר.</string>
     <string name="mcl_setting_title_ignore_notch">התעלם מהחתך</string>
@@ -68,8 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">מאפשר לשנות את רזולוציית המשחק. 100% הינה רזולוציה מלאה</string>
     <string name="mcl_setting_title_longpresstrigger">אחרי כמה זמן יופעל לאחר לחיצה ארוכה</string>
     <string name="mcl_setting_subtitle_longpresstrigger">שנה את הזמן ללחיצה ארוכה בשבירת בלוקים וזריקת חפצים.</string>
-    <string name="mcl_setting_title_backtorightmouse">תתייחס ל\"אחורה\" ככפתור ימני במקלדת</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, עליך להפעיל זאת.</string>
+    <string name="mcl_setting_title_backtorightmouse">התייחס ל\"אחורה\" ככפתור ימני במקלדת</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לכפתור הימני בעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, עליך להפעיל זאת.</string>
     <string name="mcl_setting_title_flat_button_style">סגנון כפתור שטוח</string>
     <string name="mcl_setting_subtitle_flat_button_style">הפעל זאת כדי לשנות את סגנון כפתורי השליטה לשטוח.</string>
     <string name="mcl_setting_title_buttonscale">קנה המידה של כפתורי השליטה</string>
@@ -83,7 +83,7 @@
     <string name="mcl_setting_category_renderer">מעבד</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה יופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
-    <string name="mcl_setting_veroption_snapshot">קדם-הפצה</string>
+    <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
     <string name="mcl_setting_veroption_oldbeta">בטא: גרסה ישנה</string>
     <string name="mcl_version_clone">שכפול</string>
@@ -180,7 +180,7 @@
     <string name="dl_library_sha_unknown">לא ניתן לבדוק את הספרייה %s, אנו מניחים שהיא בסדר</string>
     <string name="dl_library_sha_pass">הספרייה %s תקינה ואפשר להשתמש בה</string>
     <string name="mcl_disable_gestures">השבת מחוות</string>
-    <string name="mcl_disable_gestures_subtitle">השבת מחוות, למשל: החזק כדי לשבור בלוק, וגע כדי לבנות בלוק.</string>
+    <string name="mcl_disable_gestures_subtitle">השבת מחוות, למשל: החזק כדי לשבור בלוק, וגע כדי לשים בלוק.</string>
     <string name="mcl_setting_title_mousespeed">מהירות העכבר</string>
     <string name="mcl_setting_subtitle_mousespeed">משנה את המהירות של עכבר התוכנה</string>
     <string name="customctrl_passthru">עכבר עובר דרך</string>
