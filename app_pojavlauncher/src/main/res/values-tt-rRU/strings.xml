@@ -103,6 +103,7 @@
     -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Чыгу</string>
+    <string name="mcn_exit_confirm">Сез мәҗбүри ябырга телисезме?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 утыртмалды!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -124,6 +125,7 @@
     <string name="control_mouseoff">Тычкан: Сүнек</string>
     <string name="control_mouseon">Тычкан: Кушык </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Мәҗбүри ябу</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Кертү төзәтүе</string>
     <!--
