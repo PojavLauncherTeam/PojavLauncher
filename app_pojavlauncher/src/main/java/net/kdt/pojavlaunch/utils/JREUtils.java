@@ -214,7 +214,7 @@ public class JREUtils
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
-    public static void setJavaEnvironment(LoggableActivity ctx, @Nullable ShellProcessOperation shell) throws Throwable {
+    public static void setJavaEnvironment(LoggableActivity ctx) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
@@ -270,20 +270,10 @@ public class JREUtils
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
-            try {
-                if (shell == null) {
-                    Os.setenv(env.getKey(), env.getValue(), true);
-                } else {
-                    shell.writeToProcess("export " + env.getKey() + "=" + env.getValue());
-                }
-            } catch (Throwable th) {
-                ctx.appendlnToLog(Log.getStackTraceString(th));
-            }
+            Os.setenv(env.getKey(), env.getValue(), true);
         }
         
-        if (shell == null) {
-            setLdLibraryPath(LD_LIBRARY_PATH);
-        }
+        setLdLibraryPath(LD_LIBRARY_PATH);
         
         // return ldLibraryPath;
     }
@@ -321,7 +311,7 @@ public class JREUtils
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 */
 
-        setJavaEnvironment(ctx, null);
+        setJavaEnvironment(ctx);
         initJavaRuntime();
         chdir(Tools.DIR_GAME_NEW);
 
