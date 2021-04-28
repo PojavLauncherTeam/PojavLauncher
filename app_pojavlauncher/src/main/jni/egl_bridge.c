@@ -713,8 +713,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
-            printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError());
-            (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+           / printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError());
+           // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
             return JNI_FALSE;
         }
 
@@ -926,7 +926,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong
             potatoBridge.eglContext = ctx;
     
             printf("EGLBridge: Created CTX pointer = %p\n",ctx);
-            (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+    //        (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
             return (long)ctx;
         }
         
