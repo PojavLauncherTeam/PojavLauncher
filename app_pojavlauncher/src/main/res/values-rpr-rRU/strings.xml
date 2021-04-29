@@ -7,17 +7,31 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email или Имя Пользователя</string>
+    <string name="login_online_password_hint">Пароль</string>
+    <string name="login_online_check_keeplogin">Запомнить меня</string>
+    <string name="login_online_login_label">Войти</string>
+    <string name="login_offline_label">Войти какъ ​офлайнъ​ учетная запись</string>
+    <string name="login_error_short_username">Имя пользователя должно быть не менѣе трехъ ​символовъ​</string>
+    <string name="login_error_exist_username">Это имя пользователя уже существуетъ</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
+    <string name="login_select_account">Учетныя​ записи</string>
     <string name="login_title_no_saved_account">​Учетныя​ записи не найдены!</string>
     <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцію <b>\"Запомнить меня\"</b>, чтобъ сохранить учетную запись при первомъ входѣ.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налѣво, чтобъ открыть меню ◀\nУдерживайте кнопку для настройки: редактированія, измѣненія размѣра или удаленія."</string>
     <!-- Warnings -->
+    <string name="warning_remove_account">Эта учетная запись будетъ удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Выберите ​установщикъ​ модификаціи</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher неожиданно потерпѣлъ сбой</string>
+    <string name="error_no_version">Нѣтъ версій!</string>
+    <string name="error_show_more">Развернуть</string>
+    <string name="error_show_less">Свернуть</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Требуется разрѣшеніе на чтеніе/запись хранилища!</string>
     <string name="toast_uninstalljre_done">Удаленіе Java Runtime завершено</string>
     <!--
     <string name="toast_3">Exit</string>
@@ -73,10 +87,12 @@
     -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошелъ сбой приложенія/игры съ кодомъ %d</string>
+    <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовмѣстима съ Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Журналъ</string>
     <string name="control_adebug">Отладка ввода</string>
     <!--
     <string name="control_more3"></string>
