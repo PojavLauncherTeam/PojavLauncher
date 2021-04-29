@@ -5,17 +5,37 @@
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_microsoft">Войти черезъ Microsoft</string>
+    <string name="login_title_no_saved_account">​Учетныя​ записи не найдены!</string>
+    <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцію <b>\"Запомнить меня\"</b>, чтобъ сохранить учетную запись при первомъ входѣ.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Проведите справа налѣво, чтобъ открыть меню ◀\nУдерживайте кнопку для настройки: редактированія, измѣненія размѣра или удаленія."</string>
     <!-- Warnings -->
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Выберите ​установщикъ​ модификаціи</string>
     <!-- Error messages -->
     <!-- Toast messages -->
+    <string name="toast_uninstalljre_done">Удаленіе Java Runtime завершено</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Извѣстія лаунчера</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Подключено</string>
+    <string name="mcl_account_offline">Офлайнъ</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f ​Мбайтъ​ / %.2f ​Мбайтъ​)"</string>
+    <string name="mcl_option_modinstall">Запустить ​установщикъ​ модификаціи (Forge, LabyMod, Fabric, другіе...)</string>
+    <string name="mcl_option_modinstallwitharg">Запустить ​установщикъ​ модификаціи (съ пользовательскими аргументами)</string>
+    <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапускъ ​лаунчера​] это позволитъ вамъ переустановить Java Runtime</string>
+    <string name="mcl_setting_title_hide_sidebar">Сокрытіе боковой панели</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Можетъ понравиться людямъ, испытывающимъ ностальгію, ​которые​ предпочитаютъ старый интерфейсъ v1. Даетъ вамъ болѣе ​полноэкранное​ использованіе.</string>
+    <string name="mcl_setting_title_ignore_notch">Игнорированіе вырѣза подъ фронтальную камеру</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Игнорируетъ вырѣзъ подъ фронтальную камеру и расширяетъ экранъ подъ нее.\nДаетъ большее погруженіе въ игру.</string>
+    <string name="mcl_setting_title_resolution_scaler">Уменьшеніе разрѣшенія</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Позволяетъ уменьшить разрѣшеніе игры. Максимальное разрѣшеніе: 100%</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
