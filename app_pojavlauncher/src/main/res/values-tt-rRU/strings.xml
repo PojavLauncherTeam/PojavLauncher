@@ -14,7 +14,7 @@
     <string name="login_offline_label">Офлайн аккаунт белән керу</string>
     <string name="login_error_short_username">Кулланучы исеме 3 хәрефтән аз булмаска тиеш</string>
     <string name="login_error_exist_username">Бу кулланучы исеме бар инде</string>
-    <string name="login_microsoft">Microsoft өчен керергә</string>
+    <string name="login_microsoft">Microsoft аша керергә</string>
     <string name="login_select_account">Аккаунтлар</string>
     <string name="login_title_no_saved_account">Аккаунт табылмады!</string>
     <string name="login_dialog_no_saved_account">Сакланган аккаунтлар юк.\nАккаунтны беренче керү вакытында саклап өчен <b>«Хәтердә калдырырга»</b> опциясен кулланыгыз.</string>
@@ -57,7 +57,7 @@
     <string name="mcl_option_about">Лаунчер турында</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime-ны бетерергә</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Лаунчерны яңадан кушу кирәк] Ул Java Runtime-ны яңадан утыртырга рөхсәт ителә</string>
-    <string name="mcl_setting_subtitle_freeform">Minecraft-ны йөзмә тәрәзәсе шартында кушу. Android 7.0+ кирәк</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft-ны йөзмә тәрәзәдә ача. Android 7.0+ кирәк</string>
     <string name="mcl_setting_title_hide_sidebar">Кырый панелен яшерү</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы кешеләргә бу иске v1 интерфейсы ошауы кирәк. Күбрәк тулы экран тәҗрибәсен бирелде.</string>
     <string name="mcl_setting_title_flat_button_style">Тигез төймә стиле</string>
@@ -67,8 +67,8 @@
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
-    <string name="mcl_setting_veroption_release">Соңгы</string>
-    <string name="mcl_setting_veroption_snapshot">Ярдәмче</string>
+    <string name="mcl_setting_veroption_release">Чыгарылыш</string>
+    <string name="mcl_setting_veroption_snapshot">Снапшотлар</string>
     <string name="mcl_setting_veroption_oldalpha">Иске альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Иске бета</string>
     <string name="mcl_version_clone">Клонларга</string>
