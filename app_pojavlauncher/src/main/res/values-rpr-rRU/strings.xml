@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Запустите Minecraft: Java Edition на вашемъ устройствѣ!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -95,5 +98,18 @@
     <string name="auto_ram_subtitle">Включаетъ автоматическое управленіе выдѣленной Оперативной Памятью</string>
     <string name="auto_ram_title">Автоматическое выдѣленіе ОЗУ</string>
     <string name="autoram_info_msg">Выдѣлено ​%d Мбайтъ​ Оперативной Памяти</string>
+    <string name="mcl_setting_check_libraries">Провѣрка библіотекъ послѣ загрузки</string>
+    <string name="mcl_setting_check_libraries_subtitle">Данная опція принуждаетъ ​лаунчеръ​ провѣрять ​хешъ​ библіотеки, если ​таковыя​ доступны. Предотвращаетъ использованіе поврежденныхъ библіотекъ.</string>
+    <string name="dl_library_sha_fail">Библіотека %s повреждена и будетъ загружена повторно</string>
+    <string name="dl_library_sha_unknown">Библіотека %s не можетъ быть провѣрена; смѣю предположить, что она работаетъ корректно</string>
+    <string name="dl_library_sha_pass">Библіотека %s провѣрена. Она полностью функціонируетъ и можетъ быть использована</string>
+    <string name="mcl_disable_gestures">Отключеніе​ жестовъ</string>
+    <string name="mcl_disable_gestures_subtitle">Отключаетъ жесты, такіе какъ удержаніе, чтобы сломать блокъ, и нажатіе, чтобы размѣстить блок.</string>
+    <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
+    <string name="mcl_setting_subtitle_mousespeed">Измѣняетъ чувствительность виртуальной мыши</string>
+    <string name="customctrl_passthru">Указатель мыши</string>
+    <string name="customctrl_rounded">Округленность​ кнопки</string>
+    <string name="memory_warning_msg">Текущій ​объемъ​ свободной оперативной памяти (%d) меньше, ​чѣмъ​ выдѣленная (%d), что можетъ привести къ сбоямъ. Измѣните количество выдѣленной памяти при сбоѣ игры.</string>
+    <string name="mcl_memory_allocation">выдѣленіе памяти</string>
     <string name="mcl_memory_allocation_subtitle">Управляетъ выдѣленіемъ памяти для Minecraft</string>
 </resources>
