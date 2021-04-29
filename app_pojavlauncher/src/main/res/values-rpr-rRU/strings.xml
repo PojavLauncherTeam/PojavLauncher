@@ -32,17 +32,25 @@
     <string name="error_show_less">Свернуть</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Требуется разрѣшеніе на чтеніе/запись хранилища!</string>
+    <string name="toast_optifine_success">Установка прошла успѣшно</string>
     <string name="toast_uninstalljre_done">Удаленіе Java Runtime завершено</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Извѣстія лаунчера</string>
+    <string name="mcl_tab_console">Консоль разработчика</string>
+    <string name="mcl_tab_crash">Журналъ сбоевъ</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
     <string name="mcl_account_offline">Офлайнъ</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s готовъ къ запуску</string>
+    <string name="mcl_launch_cleancache">Очистка файловъ ​кэша​</string>
+    <string name="mcl_launch_downloading">Загрузка %s</string>
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f ​Мбайтъ​ / %.2f ​Мбайтъ​)"</string>
+    <string name="mcl_launch_download_assets">Подготовка къ загрузкѣ рессурсовъ</string>
+    <string name="mcl_options">Настройки</string>
     <string name="mcl_option_modinstall">Запустить ​установщикъ​ модификаціи (Forge, LabyMod, Fabric, другіе...)</string>
     <string name="mcl_option_modinstallwitharg">Запустить ​установщикъ​ модификаціи (съ пользовательскими аргументами)</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
@@ -109,6 +117,7 @@
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
     <string name="customctrl_keycombine">Комбинація клавишъ</string>
+    <string name="main_options">Настройки</string>
     <string name="main_welcome">Разрѣшите васъ попривѣтствовать, %s</string>
     <string name="main_no_news_feed">Не удалось получить ленту извѣстій!</string>
     <string name="auto_ram_subtitle">Включаетъ автоматическое управленіе выдѣленной Оперативной Памятью</string>
