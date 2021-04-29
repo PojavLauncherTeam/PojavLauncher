@@ -4,6 +4,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_microsoft">Войти черезъ Microsoft</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
