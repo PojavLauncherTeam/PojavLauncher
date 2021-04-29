@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Запустите Minecraft: Java Edition на вашемъ устройствѣ!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -95,4 +98,10 @@
     <string name="auto_ram_subtitle">Включаетъ автоматическое управленіе выдѣленной Оперативной Памятью</string>
     <string name="auto_ram_title">Автоматическое выдѣленіе ОЗУ</string>
     <string name="autoram_info_msg">Выдѣлено ​%d Мбайтъ​ Оперативной Памяти</string>
+    <string name="mcl_profile_editor_title_version">ВЕРСІИ</string>
+    <string name="mcl_profile_editor_edit_text_title">Названіе профиля</string>
+    <string name="mcl_profile_editor_save">сохранить</string>
+    <string name="profedit_selected_version">Выбранная версія: %s</string>
+    <string name="profedit_selected_profile">Выбранный профиль: %s</string>
+    <string name="global_new">Новый</string>
 </resources>
