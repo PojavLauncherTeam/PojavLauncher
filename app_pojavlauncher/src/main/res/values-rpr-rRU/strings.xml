@@ -38,7 +38,17 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Позволяетъ уменьшить разрѣшеніе игры. Максимальное разрѣшеніе: 100%</string>
     <string name="mcl_setting_title_flat_button_style">Плоскій стиль кнопокъ</string>
     <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцію, чтобы измѣнить стиль кнопокъ управленія на плоскій.</string>
+    <string name="mcl_setting_title_buttonscale">Масштабированіе кнопокъ</string>
+    <string name="mcl_setting_subtitle_buttonscale">Увеличьте ихъ, если ​онѣ слишкомъ малы.</string>
+    <string name="mcl_setting_title_mousescale">Масштабированіе курсора</string>
+    <string name="mcl_setting_subtitle_mousescale">Измѣняетъ размѣръ курсора мыши.</string>
+    <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это можетъ привести къ сбою игры, если редактировать значенія безъ особыхъ знаній.</string>
+    <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
+    <string name="mcl_setting_category_renderer">Рендереръ</string>
     <!-- Global strings -->
+    <string name="global_unpacking">Распаковка %s</string>
+    <string name="global_waiting">Подождите, пожалуйста</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -57,10 +67,33 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Произошелъ сбой приложенія/игры съ кодомъ %d</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
+    <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовмѣстима съ Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_adebug">Отладка ввода</string>
+    <string name="control_scaleup">Увеличить</string>
+    <string name="control_scaledown">Уменьшить</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Редактированіе %s</string>
+    <string name="customctrl_remove">Удалить %s?</string>
+    <string name="customctrl_toggle">Переключаемъ</string>
+    <string name="customctrl_size">Размѣръ</string>
+    <string name="customctrl_size_width">Ширина</string>
+    <string name="customctrl_size_height">Высота</string>
+    <string name="customctrl_dynamicpos">Динамическая позиція</string>
+    <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
+    <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
+    <string name="customctrl_transparency_bg">Прозрачность фона</string>
+    <string name="customctrl_keycombine">Комбинація клавишъ</string>
+    <string name="main_welcome">Разрѣшите васъ попривѣтствовать, %s</string>
+    <string name="main_no_news_feed">Не удалось получить ленту извѣстій!</string>
+    <string name="auto_ram_subtitle">Включаетъ автоматическое управленіе выдѣленной Оперативной Памятью</string>
+    <string name="auto_ram_title">Автоматическое выдѣленіе ОЗУ</string>
+    <string name="autoram_info_msg">Выдѣлено ​%d Мбайтъ​ Оперативной Памяти</string>
+    <string name="mcl_memory_allocation_subtitle">Управляетъ выдѣленіемъ памяти для Minecraft</string>
 </resources>
