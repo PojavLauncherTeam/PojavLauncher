@@ -56,7 +56,8 @@ public class ControlLayout extends FrameLayout
         if (controlLayout == null) return;
         
 		mLayout = controlLayout;
-        
+
+		//CONTROL BUTTON
 		for (ControlData button : controlLayout.mControlDataList) {
             button.isHideable = button.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && button.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
             button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
@@ -68,11 +69,43 @@ public class ControlLayout extends FrameLayout
             button.update();
 			addControlView(button);
 		}
+
+		//CONTROL DRAWER
+		for(ControlDrawerData drawerData : controlLayout.mDrawerDataList){
+			drawerData.properties.isHideable = true;
+			drawerData.properties.width = drawerData.properties.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+			drawerData.properties.height = drawerData.properties.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+			if (!drawerData.properties.isDynamicBtn) {
+				drawerData.properties.dynamicX = drawerData.properties.x / CallbackBridge.physicalWidth + " * ${screen_width}";
+				drawerData.properties.dynamicY = drawerData.properties.y / CallbackBridge.physicalHeight + " * ${screen_height}";
+			}
+
+			ControlDrawer drawer = addDrawerView(drawerData);
+
+			//CONTROL SUB BUTTON
+			for (ControlData subButton : drawerData.buttonProperties){
+				subButton.isHideable = subButton.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && subButton.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
+				subButton.width = subButton.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+				subButton.height = subButton.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+				if (!subButton.isDynamicBtn) {
+					subButton.dynamicX = subButton.x / CallbackBridge.physicalWidth + " * ${screen_width}";
+					subButton.dynamicY = subButton.y / CallbackBridge.physicalHeight + " * ${screen_height}";
+				}
+				subButton.update();
+				addSubView(drawer, subButton);
+			}
+
+
+
+		}
+
+
         mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
 
 		setModified(false);
-	}
+	} // loadLayout
 
+	//CONTROL BUTTON
 	public void addControlButton(ControlData controlButton) {
 		mLayout.mControlDataList.add(controlButton);
 		addControlView(controlButton);
@@ -90,6 +123,53 @@ public class ControlLayout extends FrameLayout
 
 		setModified(true);
 	}
+
+	// CONTROL DRAWER
+	public void addDrawer(ControlDrawerData drawerData){
+		mLayout.mDrawerDataList.add(drawerData);
+		addDrawerView();
+	}
+
+	private void addDrawerView(){
+		addDrawerView(null);
+	}
+
+	private ControlDrawer addDrawerView(ControlDrawerData drawerData){
+
+		final ControlDrawer view = new ControlDrawer(this,drawerData == null ? mLayout.mDrawerDataList.get(mLayout.mDrawerDataList.size()-1) : drawerData);
+		view.setModifiable(mModifiable);
+		if (!mModifiable) {
+			view.setAlpha(view.getProperties().opacity);
+			view.setFocusable(false);
+			view.setFocusableInTouchMode(false);
+		}
+		addView(view);
+
+		setModified(true);
+		return view;
+	}
+
+	//CONTROL SUB-BUTTON
+	public void addSubButton(ControlDrawer drawer, ControlData controlButton){
+		//Yep there isn't much here
+		drawer.getDrawerData().buttonProperties.add(controlButton);
+		addSubView(drawer, drawer.getDrawerData().buttonProperties.get(drawer.getDrawerData().buttonProperties.size()-1 ));
+	}
+
+	public void addSubView(ControlDrawer drawer, ControlData controlButton){
+		final ControlSubButton view = new ControlSubButton(this, controlButton, drawer);
+		view.setModifiable(mModifiable);
+		if (!mModifiable) {
+			view.setAlpha(view.getProperties().opacity);
+			view.setFocusable(false);
+			view.setFocusableInTouchMode(false);
+		}
+		drawer.addButton(view);
+		addView(view);
+
+		setModified(true);
+	}
+
     private void removeAllButtons() {
 		List<View> viewList = new ArrayList<>();
 		View v;
@@ -106,12 +186,29 @@ public class ControlLayout extends FrameLayout
 		//i wanna be sure that all the removed Views will be removed after a reload
 		//because if frames will slowly go down after many control changes it will be warm and bad
 	}
+
 	public void removeControlButton(ControlButton controlButton) {
 		mLayout.mControlDataList.remove(controlButton.getProperties());
 		controlButton.setVisibility(View.GONE);
 		removeView(controlButton);
 
 		setModified(true);
+	}
+
+	public void removeControlDrawer(ControlDrawer controlDrawer){
+		mLayout.mDrawerDataList.remove(controlDrawer.getDrawerData());
+		controlDrawer.setVisibility(GONE);
+		removeView(controlDrawer);
+
+		setModified(true);
+	}
+
+	public void removeControlSubButton(ControlSubButton subButton){
+		subButton.parentDrawer.drawerData.buttonProperties.remove(subButton.getProperties());
+		subButton.parentDrawer.buttons.remove(subButton);
+
+		subButton.setVisibility(GONE);
+		removeView(subButton);
 	}
 
 	public void saveLayout(String path) throws Exception {
