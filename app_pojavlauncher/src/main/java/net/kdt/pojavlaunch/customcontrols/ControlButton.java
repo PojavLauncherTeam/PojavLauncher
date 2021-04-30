@@ -271,8 +271,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         }
     }
 
-    public void setModifiable(boolean z) {
-        mModifiable = z;
+    public void setModifiable(boolean isModifiable) {
+        mModifiable = isModifiable;
     }
     
     private void setModified(boolean modified) {
