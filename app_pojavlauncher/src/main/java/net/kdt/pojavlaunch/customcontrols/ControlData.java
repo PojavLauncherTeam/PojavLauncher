@@ -79,8 +79,6 @@ public class ControlData implements Cloneable
     public int strokeWidth;
     public float cornerRadius;
 
-    @Deprecated
-    public boolean hidden;
     public boolean holdCtrl;
     public boolean holdAlt;
     public boolean holdShift;

@@ -17,14 +17,14 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 {
     private Paint mRectPaint;
     
-    private GestureDetector mGestureDetector;
-    private ControlData mProperties;
-    private SelectionEndHandleView mHandleView;
+    protected GestureDetector mGestureDetector;
+    protected ControlData mProperties;
+    protected SelectionEndHandleView mHandleView;
 
-    private boolean mModifiable = false;
-    private boolean mCanTriggerLongClick = true;
-    
-    private boolean mChecked = false;
+    protected boolean mModifiable = false;
+    protected boolean mCanTriggerLongClick = true;
+
+    protected boolean mChecked = false;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
@@ -61,7 +61,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     public void setProperties(ControlData properties, boolean changePos) {
         mProperties = properties;
-        mProperties.opacity = mProperties.hidden ? 1 : mProperties.opacity;
 
         properties.update();
 
@@ -72,13 +71,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             setTranslationX(moveX = properties.x);
             setTranslationY(moveY = properties.y);
         }
-
-        GradientDrawable gd = new GradientDrawable();
-        gd.setColor(mProperties.bgColor);
-        gd.setStroke(mProperties.strokeWidth, mProperties.strokeColor);
-        gd.setCornerRadius(mProperties.cornerRadius);
-        setBackground(gd);
-
 
         if (properties.specialButtonListener == null) {
             // A non-special button or inside custom controls screen so skip listener
@@ -97,12 +89,33 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         setLayoutParams(new FrameLayout.LayoutParams((int) properties.width, (int) properties.height));
     }
 
+    public void setBackground(){
+        GradientDrawable gd = new GradientDrawable();
+        gd.setColor(mProperties.bgColor);
+        gd.setStroke(computeStrokeWidth(mProperties.strokeWidth), mProperties.strokeColor);
+        gd.setCornerRadius(computeCornerRadius(mProperties.cornerRadius));
+
+        setBackground(gd);
+    }
+
+    public int computeStrokeWidth(float widthInPercent){
+        float maxSize = Math.max(mProperties.width, mProperties.height);
+        return (int)((maxSize/2) * (widthInPercent/100));
+    }
+
+    public float computeCornerRadius(float radiusInPercent){
+        float minSize = Math.min(mProperties.width, mProperties.height);
+        return (minSize/2) * (radiusInPercent/100);
+    }
+
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
         super.setLayoutParams(params);
 
         mProperties.width = params.width;
         mProperties.height = params.height;
+        setBackground();
+
         
         // Re-calculate position
         mProperties.update();
@@ -147,7 +160,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     @Override
-    public boolean onLongClick(View p1) {
+    public boolean onLongClick(View v) {
         if (mCanTriggerLongClick && mModifiable) {
             if (mHandleView.isShowing()) {
                 mHandleView.hide();
@@ -157,7 +170,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 }
                 
                 try {
-                    mHandleView.show();
+                    mHandleView.show(this);
                 } catch (Throwable th) {
                     th.printStackTrace();
                 }
@@ -166,7 +179,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         
         return mCanTriggerLongClick;
     }
-    
+
+
     private void setHolding(boolean isDown) {
         if (mProperties.holdAlt) {
             CallbackBridge.holdingAlt = isDown;
@@ -191,8 +205,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         } 
     }
 
-    private float moveX, moveY;
-    private float downX, downY;
+    protected float moveX, moveY;
+    protected float downX, downY;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!mModifiable) {
@@ -261,7 +275,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         return super.onTouchEvent(event);
     }
 
-    private void sendKeyPresses(MotionEvent event, boolean isDown){
+    public void sendKeyPresses(MotionEvent event, boolean isDown){
         for(int keycode : mProperties.keycodes){
             if(keycode >= 0){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
