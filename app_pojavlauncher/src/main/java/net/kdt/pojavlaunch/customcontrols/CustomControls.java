@@ -9,12 +9,16 @@ public class CustomControls
 {
     public float scaledAt;
 	public List<ControlData> mControlDataList;
+	public List<ControlDrawerData> mDrawerDataList;
 	public CustomControls() {
-		this(new ArrayList<ControlData>());
+		this(new ArrayList<ControlData>(), new ArrayList<ControlDrawerData>());
 	}
-	
-	public CustomControls(List<ControlData> mControlDataList) {
+
+
+
+	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList) {
 		this.mControlDataList = mControlDataList;
+		this.mDrawerDataList = mDrawerDataList;
         this.scaledAt = 100f;
 	}
 	
