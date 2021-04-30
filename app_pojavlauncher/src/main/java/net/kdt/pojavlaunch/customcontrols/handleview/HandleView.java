@@ -30,6 +30,7 @@ import java.lang.reflect.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
+
 public abstract class HandleView extends View implements ViewPositionListener, View.OnLongClickListener
  {
     protected Drawable mDrawable;
@@ -99,6 +100,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         mTouchOffsetY = -0.3f * handleHeight;
         mIdealVerticalOffset = 0.7f * handleHeight;
     }
+
 
     protected void updateDrawable() {
         // final int offset = getCurrentCursorOffset();
@@ -189,9 +191,9 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         getPositionListener().removeSubscriber(this);
     }
 
-    void showActionPopupWindow(int delay) {
+    void showActionPopupWindow(int delay, Object object) {
         if (mActionPopupWindow == null) {
-            mActionPopupWindow = new ActionPopupWindow(this);
+            mActionPopupWindow = new ActionPopupWindow(this, object);
         }
         if (mActionPopupShower == null) {
             mActionPopupShower = new Runnable() {
@@ -313,13 +315,6 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 
     protected int getCursorOffset() {
         return 0;  
-    }
-    
-    // Addition
-    @Override
-    public boolean onLongClick(View view) {
-        showActionPopupWindow(0);
-        return true;
     }
 
     // Addition
