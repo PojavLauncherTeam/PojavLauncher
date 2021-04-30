@@ -53,6 +53,7 @@
     <string name="mcl_options">Настройки</string>
     <string name="mcl_option_modinstall">Запустить ​установщикъ​ модификаціи (Forge, LabyMod, Fabric, другіе...)</string>
     <string name="mcl_option_modinstallwitharg">Запустить ​установщикъ​ модификаціи (съ пользовательскими аргументами)</string>
+    <string name="mcl_option_customcontrol">Пользовательское управленіе</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапускъ ​лаунчера​] это позволитъ вамъ переустановить Java Runtime</string>
     <string name="mcl_setting_title_hide_sidebar">Сокрытіе боковой панели</string>
