@@ -44,20 +44,12 @@ public class ControlLayout extends FrameLayout
         if (mModifiable) {
             hideAllHandleViews();
         }
-        /*if (getChildAt(0) instanceof MinecraftGLView) {
-            View viewGL = getChildAt(0);
-            View viewTouchpad = getChildAt(1);
-            removeAllViews();
-            addView(viewGL);
-            addView(viewTouchpad);
-        } else {
-		removeAllViews();*/
-            removeAllButtons();
-        //}
-        if (mLayout != null) {
-            mLayout.mControlDataList = null;
-            mLayout = null;
-        }
+        removeAllButtons();
+		if(mLayout != null) {
+			mLayout.mControlDataList = null;
+			mLayout = null;
+		}
+
         System.gc();
 
         // Cleanup buttons only when input layout is null
@@ -70,8 +62,8 @@ public class ControlLayout extends FrameLayout
             button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
             if (!button.isDynamicBtn) {
-                button.dynamicX = Float.toString(button.x / CallbackBridge.physicalWidth) + " * ${screen_width}";
-                button.dynamicY = Float.toString(button.y / CallbackBridge.physicalHeight) + " * ${screen_height}";
+                button.dynamicX = button.x / CallbackBridge.physicalWidth + " * ${screen_width}";
+                button.dynamicY = button.y / CallbackBridge.physicalHeight + " * ${screen_height}";
             }
             button.update();
 			addControlView(button);
@@ -138,7 +130,7 @@ public class ControlLayout extends FrameLayout
 		for (int i = 0; i < getChildCount(); i++) {
 			View view = getChildAt(i);
 			if (view instanceof ControlButton && ((ControlButton) view).getProperties().isHideable) {
-				((ControlButton) view).setVisibility(mControlVisible ? View.VISIBLE : View.GONE);
+				view.setVisibility(mControlVisible ? View.VISIBLE : View.GONE);
 			}
 		}
 	}
