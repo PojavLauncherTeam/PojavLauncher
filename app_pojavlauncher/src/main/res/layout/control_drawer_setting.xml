@@ -35,6 +35,25 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Orientation:"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/controlsetting_orientation"/>
+
+        </LinearLayout>
+
         <!-- SIZE SECTION -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,81 +90,6 @@
                 android:inputType="numberDecimal"/>
 
         </LinearLayout>
-
-
-        <!-- MAPPING SECTION -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:orientation="horizontal"
-            android:id="@+id/controlsetting_layout_mapping">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Mapping:"
-                android:gravity="center"/>
-
-            <Spinner
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:id="@+id/controlsetting_spinner_lwjglkeycode"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="+"
-                android:gravity="center"/>
-
-            <Spinner
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:id="@+id/controlsetting_spinner_lwjglkeycode2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="+"
-                android:gravity="center"/>
-
-            <Spinner
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:id="@+id/controlsetting_spinner_lwjglkeycode3"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="+"
-                android:gravity="center"/>
-
-            <Spinner
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:id="@+id/controlsetting_spinner_lwjglkeycode4"/>
-
-        </LinearLayout>
-
-        <!-- TOGGLE SECTION -->
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_toggle"
-            android:id="@+id/controlsetting_checkbox_toggle"/>
-
-        <CheckBox
-            android:id="@+id/controlsetting_checkbox_passthru"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/customctrl_passthru" />
 
         <!-- BACKGROUND COLOR SECTION -->
         <LinearLayout
@@ -312,29 +256,6 @@
 
         </LinearLayout>
 
-        <!-- KEY COMBINATION SECTION -->
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/customctrl_keycombine"/>
-
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_keycombine_alt"
-            android:id="@+id/controlsetting_checkbox_keycombine_alt"/>
-
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_keycombine_control"
-            android:id="@+id/controlsetting_checkbox_keycombine_control"/>
-
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_keycombine_shift"
-            android:id="@+id/controlsetting_checkbox_keycombine_shift"/>
 
     </LinearLayout>
 

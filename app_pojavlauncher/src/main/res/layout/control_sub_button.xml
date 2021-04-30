@@ -35,43 +35,6 @@
 
         </LinearLayout>
 
-        <!-- SIZE SECTION -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/controlsetting_layout_size">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Size:"
-                android:gravity="center"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:id="@+id/controlsetting_edit_width"
-                android:hint="@string/customctrl_size_width"
-                android:inputType="numberDecimal"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="×"
-                android:gravity="center"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:id="@+id/controlsetting_edit_height"
-                android:hint="@string/customctrl_size_height"
-                android:inputType="numberDecimal"/>
-
-        </LinearLayout>
-
 
         <!-- MAPPING SECTION -->
         <LinearLayout
@@ -272,43 +235,6 @@
                 android:gravity="center"
                 android:text="100 %"
                 android:id="@+id/controlsetting_text_opacity"/>
-
-        </LinearLayout>
-
-
-        <!-- DYNAMIC POSITION SECTION -->
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/customctrl_dynamicpos"
-            android:id="@+id/controlsetting_checkbox_dynamicpos"/>
-
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/customctrl_dynamicpos_x"/>
-
-            <EditText
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:singleLine="true"
-                android:id="@+id/controlsetting_edit_dynamicpos_x"/>
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/customctrl_dynamicpos_y"/>
-
-            <EditText
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:singleLine="true"
-                android:id="@+id/controlsetting_edit_dynamicpos_y"/>
 
         </LinearLayout>
 
