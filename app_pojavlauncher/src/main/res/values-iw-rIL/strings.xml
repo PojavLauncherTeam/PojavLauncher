@@ -68,7 +68,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">מאפשר לשנות את רזולוציית המשחק. 100% הינה רזולוציה מלאה</string>
     <string name="mcl_setting_title_longpresstrigger">אחרי כמה זמן יופעל לאחר לחיצה ארוכה</string>
     <string name="mcl_setting_subtitle_longpresstrigger">שנה את הזמן ללחיצה ארוכה בשבירת בלוקים וזריקת חפצים.</string>
-    <string name="mcl_setting_title_backtorightmouse">התייחס ל\"אחורה\" ככפתור ימני במקלדת</string>
+    <string name="mcl_setting_title_backtorightmouse">התייחס ל\"אחורה\" ככפתור ימני בעכבר</string>
     <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לכפתור הימני בעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, עליך להפעיל זאת.</string>
     <string name="mcl_setting_title_buttonscale">קנה המידה של כפתורי השליטה</string>
     <string name="mcl_setting_subtitle_buttonscale">הגדל את הכפתורים אם הם קטנים מדי.</string>
