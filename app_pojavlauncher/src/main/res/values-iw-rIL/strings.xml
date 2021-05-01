@@ -68,7 +68,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">מאפשר לשנות את רזולוציית המשחק. 100% הינה רזולוציה מלאה</string>
     <string name="mcl_setting_title_longpresstrigger">אחרי כמה זמן יופעל לאחר לחיצה ארוכה</string>
     <string name="mcl_setting_subtitle_longpresstrigger">שנה את הזמן ללחיצה ארוכה בשבירת בלוקים וזריקת חפצים.</string>
-    <string name="mcl_setting_title_backtorightmouse">התייחס ל\"אחורה\" ככפתור ימני במקלדת</string>
+    <string name="mcl_setting_title_backtorightmouse">התייחס ל\"אחורה\" ככפתור ימני בעכבר</string>
     <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לכפתור הימני בעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, עליך להפעיל זאת.</string>
     <string name="mcl_setting_title_flat_button_style">סגנון כפתור שטוח</string>
     <string name="mcl_setting_subtitle_flat_button_style">הפעל זאת כדי לשנות את סגנון כפתורי השליטה לשטוח.</string>
@@ -80,7 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">זהירות! שינוי ערכים אלה ללא ידע מתאים עלול לגרום למשחק לקרוס.</string>
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
-    <string name="mcl_setting_category_renderer">מעבד</string>
+    <string name="mcl_setting_category_renderer">רינדור</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה יופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
@@ -185,7 +185,7 @@
     <string name="mcl_setting_subtitle_mousespeed">משנה את המהירות של עכבר התוכנה</string>
     <string name="customctrl_passthru">עכבר עובר דרך</string>
     <string name="customctrl_rounded">מעוגל</string>
-    <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM הקיים (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את כמות הזיכרון במידה והמשחק קורס.</string>
+    <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM שהוקצתה (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את ההקצאה במידה והמשחק קורס.</string>
     <string name="mcl_memory_allocation">הקצאת זיכרון</string>
     <string name="mcl_memory_allocation_subtitle">שולט בכמות הזיכרון הניתנת ל- Minecraft</string>
 </resources>
