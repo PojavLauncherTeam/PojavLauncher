@@ -766,8 +766,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         }
         
         printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", savedWidth, savedHeight,
-             savedWidth * 3 * savedHeight);
-        gbuffer = malloc(savedWidth * 3 * savedHeight+1);
+             savedWidth * 1 * savedHeight);
+        gbuffer = malloc(savedWidth * 1 * savedHeight+1);
         if (gbuffer) {
             printf("OSMDroid: created frame buffer\n");
             return JNI_TRUE;
