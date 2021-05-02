@@ -49,7 +49,7 @@ public final class Tools
     public static String DIR_ACCOUNT_NEW;
     public static String DIR_ACCOUNT_OLD;
     public static final String DIR_GAME_HOME = Build.VERSION.SDK_INT >= 30 ?
-      Environment.getExternalFilesDir().getAbsolutePath() :
+      PojavApplication.externalStorageDir :
       Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
     public static final String DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
     public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
