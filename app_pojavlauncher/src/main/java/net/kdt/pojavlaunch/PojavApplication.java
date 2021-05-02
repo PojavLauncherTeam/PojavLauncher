@@ -16,8 +16,8 @@ import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application
 {
-	public static String CRASH_REPORT_TAG = "PojavCrashReport";
-	
+	public static final String CRASH_REPORT_TAG = "PojavCrashReport";
+	public static String externalStoragePath;
 	@Override
 	public void onCreate() {
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
@@ -51,6 +51,9 @@ public class PojavApplication extends Application
 		
 		try {
 			super.onCreate();
+                        // externalStorageDir must be non-null before calling to Tools.java
+                        externalStorageDir = getExternalFilesDir(null).getAbsolutePath();
+
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
 			
 			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
