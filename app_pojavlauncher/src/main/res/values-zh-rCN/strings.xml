@@ -189,4 +189,7 @@
     <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
     <string name="customctrl_passthru">鼠标透传</string>
     <string name="customctrl_rounded">圆角</string>
+    <string name="memory_warning_msg">当前空闲的RAM (%d) 低于分配的RAM (%d)， 可能会导致崩溃。 如果游戏崩溃，请更改分配的内存</string>
+    <string name="mcl_memory_allocation">内存分配</string>
+    <string name="mcl_memory_allocation_subtitle">控制分配给Minecraft的内存大小</string>
 </resources>
