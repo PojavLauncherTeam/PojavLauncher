@@ -26,7 +26,7 @@ android {
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 156249
         versionName "3.3.1.1_rel_" + getDate()
         multiDexEnabled true //important
