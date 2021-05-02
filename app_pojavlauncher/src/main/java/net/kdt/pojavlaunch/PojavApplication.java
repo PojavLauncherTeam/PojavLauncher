@@ -16,47 +16,50 @@ import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application
 {
-	public static final String CRASH_REPORT_TAG = "PojavCrashReport";
-	public static String externalStorageDir;
-	@Override
-	public void onCreate() {
-		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
-			@Override
-			public void uncaughtException(Thread thread, Throwable th) {
-				boolean storagePermAllowed = Build.VERSION.SDK_INT < 23 || ActivityCompat.checkSelfPermission(PojavApplication.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-				File crashFile = new File(storagePermAllowed ? Tools.DIR_GAME_HOME : Tools.DIR_DATA, "latestcrash.txt");
-				try {
-					// Write to file, since some devices may not able to show error
-                    crashFile.getParentFile().mkdirs();
-					crashFile.createNewFile();
-					PrintStream crashStream = new PrintStream(crashFile);
-					crashStream.append("PojavLauncher crash report\n");
-					crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()) + "\n");
-					crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL + "\n");
-					crashStream.append(" - Android version: " + Build.VERSION.RELEASE + "\n");
-					crashStream.append(" - Crash stack trace:\n");
-					crashStream.append(Log.getStackTraceString(th));
-					crashStream.close();
-				} catch (Throwable th2) {
-					Log.e(CRASH_REPORT_TAG, " - Exception attempt saving crash stack trace:", th2);
-					Log.e(CRASH_REPORT_TAG, " - The crash stack trace was:", th);
-				}
-				
-				FatalErrorActivity.showError(PojavApplication.this, crashFile.getAbsolutePath(), storagePermAllowed, th);
-				// android.os.Process.killProcess(android.os.Process.myPid());
-				
-				BaseMainActivity.fullyExit();
-			}
-		});
-		
-		try {
-			super.onCreate();
-                        // externalStorageDir must be non-null before calling to Tools.java
-                        externalStorageDir = getExternalFilesDir(null).getAbsolutePath();
+    public static final String CRASH_REPORT_TAG = "PojavCrashReport";
+    @Override
+    public void onCreate() {
+         super.onCreate();
 
-			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
+         if (Build.VERSION.SDK_INT < 30) {
+             Tools.setHomePath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher");
+         } else {
+             Tools.setHomePath(getExternalFilesDir(null).getAbsolutePath());
+         }
+
+         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
+             @Override
+             public void uncaughtException(Thread thread, Throwable th) {
+                 boolean storagePermAllowed = Build.VERSION.SDK_INT < 23 || ActivityCompat.checkSelfPermission(PojavApplication.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                 File crashFile = new File(storagePermAllowed ? Tools.DIR_GAME_HOME : Tools.DIR_DATA, "latestcrash.txt");
+                 try {
+                    // Write to file, since some devices may not able to show error
+                    crashFile.getParentFile().mkdirs();
+                    crashFile.createNewFile();
+                    PrintStream crashStream = new PrintStream(crashFile);
+                    crashStream.append("PojavLauncher crash report\n");
+                    crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()) + "\n");
+                    crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL + "\n");
+                    crashStream.append(" - Android version: " + Build.VERSION.RELEASE + "\n");
+                    crashStream.append(" - Crash stack trace:\n");
+                    crashStream.append(Log.getStackTraceString(th));
+                    crashStream.close();
+                } catch (Throwable th2) {
+                    Log.e(CRASH_REPORT_TAG, " - Exception attempt saving crash stack trace:", th2);
+                    Log.e(CRASH_REPORT_TAG, " - The crash stack trace was:", th);
+                }
+				
+                FatalErrorActivity.showError(PojavApplication.this, crashFile.getAbsolutePath(), storagePermAllowed, th);
+                // android.os.Process.killProcess(android.os.Process.myPid());
+				
+                BaseMainActivity.fullyExit();
+            }
+        });
+
+        try {
+            Tools.APP_NAME = getResources().getString(R.string.app_short_name);
 			
-			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
+            Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
             Tools.DIR_HOME_JRE = Tools.DIR_DATA + "/jre_runtime";
             Tools.DIR_ACCOUNT_OLD = Tools.DIR_DATA + "/Users";
             Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
@@ -65,7 +68,7 @@ public class PojavApplication extends Application
             File nativeLibDir = new File(getApplicationInfo().nativeLibraryDir);
             
             Tools.CURRENT_ARCHITECTURE = nativeLibDir.getName();
-			switch (Tools.CURRENT_ARCHITECTURE) {
+            switch (Tools.CURRENT_ARCHITECTURE) {
                 case "arm": Tools.CURRENT_ARCHITECTURE = "arm/aarch32"; break;
                 case "arm64": Tools.CURRENT_ARCHITECTURE = "arm64/aarch64"; break;
                 case "x86": Tools.CURRENT_ARCHITECTURE = "x86/i*86"; break;
@@ -78,13 +81,13 @@ public class PojavApplication extends Application
                 Tools.CURRENT_ARCHITECTURE = "x86/i*86";
             }
 
-			FontChanger.initFonts(this);
-		} catch (Throwable th) {
-			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
-			ferrorIntent.putExtra("throwable", th);
-			startActivity(ferrorIntent);
-		}
-	}
+            FontChanger.initFonts(this);
+        } catch (Throwable th) {
+            Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
+            ferrorIntent.putExtra("throwable", th);
+            startActivity(ferrorIntent);
+        }
+    }
     
     @Override
     protected void attachBaseContext(Context base) {
