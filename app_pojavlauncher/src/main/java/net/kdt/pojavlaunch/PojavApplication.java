@@ -17,7 +17,7 @@ import net.kdt.pojavlaunch.utils.*;
 public class PojavApplication extends Application
 {
 	public static final String CRASH_REPORT_TAG = "PojavCrashReport";
-	public static String externalStoragePath;
+	public static String externalStorageDir;
 	@Override
 	public void onCreate() {
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
