@@ -48,10 +48,8 @@ public final class Tools
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
     public static String DIR_ACCOUNT_OLD;
-    public static final String DIR_GAME_HOME = Build.VERSION.SDK_INT >= 30 ?
-      PojavApplication.externalStorageDir :
-      Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
-    public static final String DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
+    public static String DIR_GAME_HOME; // = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
+    public static String DIR_GAME_NEW;
     public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
     
     // New since 3.0.0
@@ -59,17 +57,29 @@ public final class Tools
     public static String DIRNAME_HOME_JRE = "lib";
 
     // New since 2.4.2
-    public static final String DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
-    public static final String DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
+    public static String DIR_HOME_VERSION;
+    public static String DIR_HOME_LIBRARY;
 
-    public static final String DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
+    public static String DIR_HOME_CRASH;
 
-    public static final String ASSETS_PATH = DIR_GAME_NEW + "/assets";
-    public static final String OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
-    public static final String CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
-    public static final String CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
+    public static String ASSETS_PATH;
+    public static String OBSOLETE_RESOURCES_PATH;
+    public static String CTRLMAP_PATH;
+    public static String CTRLDEF_FILE;
     
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
+
+    public static void setHomePath(String path) {
+        DIR_GAME_HOME = path;
+        DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
+        DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
+        DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
+        DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
+        ASSETS_PATH = DIR_GAME_NEW + "/assets";
+        OBSOLETE_RESOURCES_PATH = DIR_GAME_NEW + "/resources";
+        CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
+        CTRLDEF_FILE = CTRLMAP_PATH + "/default.json";
+    }
 
     public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
