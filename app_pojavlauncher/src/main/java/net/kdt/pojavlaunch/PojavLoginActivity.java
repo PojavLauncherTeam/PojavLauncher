@@ -829,9 +829,8 @@ public class PojavLoginActivity extends BaseActivity
     //We are calling this method to check the permission status
     private boolean isStorageAllowed() {
         //Getting the permission status
-        int result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int result1 = Build.VERSION.SDK_INT >= 30 ? PackageManager.PERMISSION_GRANTED : ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-
 
         //If permission is granted returning true
         return result1 == PackageManager.PERMISSION_GRANTED &&
@@ -841,8 +840,10 @@ public class PojavLoginActivity extends BaseActivity
     //Requesting permission
     private void requestStoragePermission()
     {
-        ActivityCompat.requestPermissions(this, new String[]{
-            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, Build.VERSION.SDK_INT >= 30 ?
+          new String[]{Manifest.permission.READ_EXTERNAL_STORAGE} :
+          new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+          REQUEST_STORAGE_REQUEST_CODE);
     }
 
     // This method will be called when the user will tap on allow or deny
