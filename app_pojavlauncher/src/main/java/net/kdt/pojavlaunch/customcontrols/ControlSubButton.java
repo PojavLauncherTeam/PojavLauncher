@@ -21,4 +21,14 @@ public class ControlSubButton extends ControlButton {
 
 
 
+    @Override
+    public void setLayoutParams(ViewGroup.LayoutParams params) {
+        if(parentDrawer != null){
+            params.width = (int)parentDrawer.mProperties.width;
+            params.height = (int)parentDrawer.mProperties.height;
+        }
+
+        super.setLayoutParams(params);
+
+    }
 }
