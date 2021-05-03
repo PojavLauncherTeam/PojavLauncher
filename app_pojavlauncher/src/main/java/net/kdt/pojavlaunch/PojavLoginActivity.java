@@ -343,7 +343,7 @@ public class PojavLoginActivity extends BaseActivity
         mkdirs(Tools.DIR_ACCOUNT_NEW);
         PojavMigrator.migrateAccountData(this);
 
-        if (!PojavMigrator.migrateGameDir()) {
+        if (!LauncherPreferences.DEFAULT_PREF.getBoolean("directoryMigrated", false) && !PojavMigrator.migrateGameDir(PojavLoginActivity.this)) {
             mkdirs(Tools.DIR_GAME_HOME);
             mkdirs(Tools.DIR_GAME_HOME + "/lwjgl3");
             mkdirs(Tools.DIR_GAME_HOME + "/config");
@@ -356,7 +356,7 @@ public class PojavLoginActivity extends BaseActivity
             LauncherPreferences.DEFAULT_PREF.edit().putString("defaultCtrl",
               LauncherPreferences.DEFAULT_PREF.getString("defaultCtrl", "")
               .replace(Tools.DIR_GAME_HOME + "/controlmap", Tools.CTRLMAP_PATH)
-            ).commit();
+            ).putBoolean("directoryMigrated", true).commit();
         }
 
         mkdirs(Tools.CTRLMAP_PATH);
