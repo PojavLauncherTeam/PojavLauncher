@@ -34,40 +34,23 @@ public class PojavMigrator
         }
     }
     
-    public static boolean migrateGameDir() throws IOException {
+    public static boolean migrateGameDir(PojavLoginActivity ctx) throws IOException {
+        if (Build.VERSION.SDK_INT < 30) return false;
+
+        ctx.runOnUiThread(r -> {
+            ctx.startupTextView.setText(ctx.getString(R.string.toast_copy_home_dir, Tools.DIR_GAME_OLD, Tools.DIR_GAME_NEW));
+            // Toast.makeText(ctx, ctx.getString(R.string.b), Toast.LENGTH_LONG).show();
+        });
+
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
-        
-        boolean moved = oldGameDir.exists() && oldGameDir.isDirectory();
-        /*
-        if (!migrateBugFix20201217() && moved) {
-            command("mv " + Tools.DIR_GAME_OLD + " " + Tools.DIR_GAME_HOME + "/");
+
+        if (oldGameDir.exists() && oldGameDir.isDirectory()) {
+            FileUtils.copyDirectory(oldGameDir, new File(Tools.DIR_GAME_NEW));
         }
-        */
-        if(moved) {
-            oldGameDir.renameTo(new File(Tools.DIR_GAME_NEW + "/"));
-            FileUtils.deleteDirectory(new File(Tools.DIR_GAME_NEW + "/lwjgl3"));
-        }
-        return moved;
+
+        return true;
     }
-    /*
-    public static boolean migrateBugFix20201217() throws IOException, InterruptedException {
-        File bugGameDir = new File(Tools.DIR_GAME_NEW + "/.minecraft");
-        File oldGameDir = new File(Tools.DIR_GAME_OLD);
-        boolean moved = bugGameDir.exists() && bugGameDir.isDirectory();
 
-        if (oldGameDir.exists() && oldGameDir.isDirectory() && moved) {
-            command("rm -rf " + oldGameDir.getAbsolutePath());
-        }
-
-        if (moved) {
-            command("mv " + bugGameDir.getAbsolutePath() + " " + Tools.DIR_GAME_OLD);
-            command("rm -rf " + Tools.DIR_GAME_HOME + "/*");
-            command("mv " + Tools.DIR_GAME_OLD + " " + Tools.DIR_GAME_HOME + "/");
-        }
-
-        return moved;
-    }
-    */
     private static void command(String cmd) throws IOException, InterruptedException {
         Process p = Runtime.getRuntime().exec(cmd);
         int exitCode = p.waitFor();
