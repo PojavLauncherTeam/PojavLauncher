@@ -81,7 +81,7 @@ public class PojavLoginActivity extends BaseActivity
     private EditText edit2, edit3;
     private final int REQUEST_STORAGE_REQUEST_CODE = 1;
     private CheckBox sRemember, sOffline;
-    private TextView startupTextView;
+    public TextView startupTextView;
     private SharedPreferences firstLaunchPrefs;
     private MinecraftAccount mProfile = null;
     
