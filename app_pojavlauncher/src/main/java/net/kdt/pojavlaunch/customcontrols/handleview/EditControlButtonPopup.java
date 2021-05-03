@@ -25,39 +25,41 @@ import static net.kdt.pojavlaunch.customcontrols.handleview.ActionPopupWindow.se
 
 public class EditControlButtonPopup {
 
-    private Dialog dialog;
+    protected Dialog dialog;
+    protected View v;
+    protected AlertDialog.Builder builder;
 
-    private EditText editName;
-    private Spinner[] spinnersKeycode;
+    protected EditText editName;
+    protected Spinner[] spinnersKeycode;
 
-    private CheckBox checkToggle;
-    private CheckBox checkPassThrough;
-    private CheckBox checkDynamicPosition;
-    private CheckBox checkHoldAlt;
-    private CheckBox checkHoldCtrl;
-    private CheckBox checkHoldShift;
+    protected CheckBox checkToggle;
+    protected CheckBox checkPassThrough;
+    protected CheckBox checkDynamicPosition;
+    protected CheckBox checkHoldAlt;
+    protected CheckBox checkHoldCtrl;
+    protected CheckBox checkHoldShift;
 
-    private EditText editWidth;
-    private EditText editHeight;
-    private EditText editDynamicX;
-    private EditText editDynamicY;
+    protected EditText editWidth;
+    protected EditText editHeight;
+    protected EditText editDynamicX;
+    protected EditText editDynamicY;
 
-    private SeekBar seekBarOpacity;
-    private SeekBar seekBarCornerRadius;
-    private SeekBar seekBarStrokeWidth;
+    protected SeekBar seekBarOpacity;
+    protected SeekBar seekBarCornerRadius;
+    protected SeekBar seekBarStrokeWidth;
 
-    private ImageButton buttonBackgroundColor;
-    private ImageButton buttonStrokeColor;
+    protected ImageButton buttonBackgroundColor;
+    protected ImageButton buttonStrokeColor;
 
-    private TextView textOpacity;
-    private TextView textCornerRadius;
-    private TextView textStrokeWidth;
+    protected TextView textOpacity;
+    protected TextView textCornerRadius;
+    protected TextView textStrokeWidth;
 
-    private final ControlButton button;
-    private final ControlData properties;
+    protected final ControlButton button;
+    protected final ControlData properties;
 
-    private ArrayAdapter<String> adapter;
-    private String[] specialArr;
+    protected ArrayAdapter<String> adapter;
+    protected String[] specialArr;
 
 
     public EditControlButtonPopup(ControlButton button){
@@ -65,43 +67,46 @@ public class EditControlButtonPopup {
         this.properties = button.getProperties();
 
         initializeEditDialog(button.getContext());
-        setEditDialogValues();
+
+        //Create the finalized dialog
+        dialog = builder.create();
+        dialog.setOnShowListener(dialogInterface -> setEditDialogValues());
+
 
         dialog.show();
     }
 
-
-    public void initializeEditDialog(Context ctx){
+    protected void initializeEditDialog(Context ctx){
         //Create the editing dialog
         LayoutInflater layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = layoutInflater.inflate(R.layout.control_setting_v2,null);
+        v = layoutInflater.inflate(R.layout.control_button_setting,null);
 
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx);
-        alertBuilder.setTitle(ctx.getResources().getString(R.string.customctrl_edit, properties.name));
-        alertBuilder.setView(v);
+        builder = new AlertDialog.Builder(ctx);
+        builder.setTitle(ctx.getResources().getString(R.string.customctrl_edit, properties.name));
+        builder.setView(v);
 
         //Linking a lot of stuff
-        editName = v.findViewById(R.id.controlsetting_edit_name);
+        editName = v.findViewById(R.id.editName_editText);
 
         spinnersKeycode = new Spinner[]{
-                v.findViewById(R.id.controlsetting_spinner_lwjglkeycode),
-                v.findViewById(R.id.controlsetting_spinner_lwjglkeycode2),
-                v.findViewById(R.id.controlsetting_spinner_lwjglkeycode3),
-                v.findViewById(R.id.controlsetting_spinner_lwjglkeycode4)
+                v.findViewById(R.id.editMapping_spinner_1),
+                v.findViewById(R.id.editMapping_spinner_2),
+                v.findViewById(R.id.editMapping_spinner_3),
+                v.findViewById(R.id.editMapping_spinner_4)
         };
 
-        checkToggle = v.findViewById(R.id.controlsetting_checkbox_toggle);
-        checkPassThrough = v.findViewById(R.id.controlsetting_checkbox_passthru);
+        checkToggle = v.findViewById(R.id.checkboxToggle);
+        checkPassThrough = v.findViewById(R.id.checkboxPassThrough);
 
-        editWidth = v.findViewById(R.id.controlsetting_edit_width);
-        editHeight = v.findViewById(R.id.controlsetting_edit_height);
+        editWidth = v.findViewById(R.id.editSize_editTextX);
+        editHeight = v.findViewById(R.id.editSize_editTextY);
 
-        editDynamicX = v.findViewById(R.id.controlsetting_edit_dynamicpos_x);
-        editDynamicY = v.findViewById(R.id.controlsetting_edit_dynamicpos_y);
+        editDynamicX = v.findViewById(R.id.editDynamicPositionX_editText);
+        editDynamicY = v.findViewById(R.id.editDynamicPositionY_editText);
 
-        seekBarOpacity = v.findViewById(R.id.controlsetting_seek_opacity);
-        seekBarCornerRadius = v.findViewById(R.id.controlsetting_seek_corner_radius);
-        seekBarStrokeWidth = v.findViewById(R.id.controlsetting_seek_stroke_width);
+        seekBarOpacity = v.findViewById(R.id.editButtonOpacity_seekbar);
+        seekBarCornerRadius = v.findViewById(R.id.editCornerRadius_seekbar);
+        seekBarStrokeWidth = v.findViewById(R.id.editStrokeWidth_seekbar);
 
         //Add listeners, too bad I don't need all the methods
         seekBarOpacity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -152,23 +157,23 @@ public class EditControlButtonPopup {
             }
         });
 
-        buttonBackgroundColor = v.findViewById(R.id.controlsetting_background_color);
-        buttonStrokeColor = v.findViewById(R.id.controlsetting_stroke_color);
+        buttonBackgroundColor = v.findViewById(R.id.editBackgroundColor_imageButton);
+        buttonStrokeColor = v.findViewById(R.id.editStrokeColor_imageButton);
 
-        textOpacity = v.findViewById(R.id.controlsetting_text_opacity);
-        textCornerRadius = v.findViewById(R.id.controlsetting_text_corner_radius);
-        textStrokeWidth = v.findViewById(R.id.controlsetting_text_stroke_width);
+        textOpacity = v.findViewById(R.id.editButtonOpacity_textView_percent);
+        textCornerRadius = v.findViewById(R.id.editCornerRadius_textView_percent);
+        textStrokeWidth = v.findViewById(R.id.editStrokeWidth_textView_percent);
 
-        checkDynamicPosition = v.findViewById(R.id.controlsetting_checkbox_dynamicpos);
+        checkDynamicPosition = v.findViewById(R.id.checkboxDynamicPosition);
         checkDynamicPosition.setOnCheckedChangeListener((btn, checked) -> {
             editDynamicX.setEnabled(checked);
             editDynamicY.setEnabled(checked);
         });
 
 
-        checkHoldAlt = v.findViewById(R.id.controlsetting_checkbox_keycombine_alt);
-        checkHoldCtrl = v.findViewById(R.id.controlsetting_checkbox_keycombine_control);
-        checkHoldShift = v.findViewById(R.id.controlsetting_checkbox_keycombine_shift);
+        checkHoldAlt = v.findViewById(R.id.checkBoxKeyCombination_alt);
+        checkHoldCtrl = v.findViewById(R.id.checkBoxKeyCombination_ctrl);
+        checkHoldShift = v.findViewById(R.id.checkBoxKeyCombination_shift);
 
         //Initialize adapter for keycodes
         adapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item);
@@ -190,24 +195,29 @@ public class EditControlButtonPopup {
         buttonStrokeColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit stroke color", false, ((ColorDrawable) buttonStrokeColor.getBackground()).getColor(), buttonStrokeColor));
 
 
+
         //Set dialog buttons behavior
-        alertBuilder.setPositiveButton(android.R.string.ok, (dialogInterface1, i) -> {
+        setupDialogButtons();
+
+        hideUselessViews();
+
+    }
+
+    protected void setupDialogButtons(){
+        //Set dialog buttons behavior
+        builder.setPositiveButton(android.R.string.ok, (dialogInterface1, i) -> {
             if(!hasPropertiesErrors(dialog.getContext())){
                 saveProperties();
             }
         });
-        alertBuilder.setNegativeButton(android.R.string.cancel, null);
-
-        //Create the finalized dialog
-        dialog = alertBuilder.create();
-
-        dialog.setOnShowListener(dialogInterface -> {
-            //setEditDialogValues();
-        });
-
+        builder.setNegativeButton(android.R.string.cancel, null);
     }
 
-    private void setEditDialogValues(){
+    protected void hideUselessViews(){
+        (v.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
+    }
+
+    protected void setEditDialogValues(){
 
         editName.setText(properties.name);
 
@@ -250,7 +260,7 @@ public class EditControlButtonPopup {
     }
 
 
-    private boolean hasPropertiesErrors(Context ctx){
+    protected boolean hasPropertiesErrors(Context ctx){
         if (editName.getText().toString().isEmpty()) {
             editName.setError(ctx.getResources().getString(R.string.global_error_field_empty));
             return true;
@@ -273,7 +283,7 @@ public class EditControlButtonPopup {
         return false;
     }
 
-    private void saveProperties(){
+    protected void saveProperties(){
         //This method assumes there are no error.
         properties.name = editName.getText().toString();
 
