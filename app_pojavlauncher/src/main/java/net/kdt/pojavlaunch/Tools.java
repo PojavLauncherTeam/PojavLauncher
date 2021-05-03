@@ -48,9 +48,9 @@ public final class Tools
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
     public static String DIR_ACCOUNT_OLD;
-    public static String DIR_GAME_HOME; // = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
+    public static String DIR_GAME_HOME;
     public static String DIR_GAME_NEW;
-    public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
+    public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
     
     // New since 3.0.0
     public static String DIR_HOME_JRE;
