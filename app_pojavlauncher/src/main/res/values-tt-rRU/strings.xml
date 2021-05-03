@@ -39,6 +39,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Яңалыклар</string>
+    <string name="mcl_tab_console">Ясаучы консоле</string>
     <string name="mcl_tab_crash">Сафтан чыгарулар журналы</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Тоташкан</string>
