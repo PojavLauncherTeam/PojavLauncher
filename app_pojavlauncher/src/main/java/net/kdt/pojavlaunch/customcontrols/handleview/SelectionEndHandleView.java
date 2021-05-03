@@ -67,10 +67,11 @@ public class SelectionEndHandleView extends HandleView
         // updatePosition((int) x, (int) y, false, false);
         positionAtCursorOffset(0, false);
     }
-    /*
-     public void setActionPopupWindow(ActionPopupWindow actionPopupWindow) {
-     mActionPopupWindow = actionPopupWindow;
-     }
-     */
+
+    @Override
+    public boolean onLongClick(View view) {
+        //TODO stub
+        return false;
+    }
 }
 
