@@ -43,7 +43,8 @@
     <string name="error_show_less">Show less</string>
 
     <!-- Toast messages -->
-    <string name="toast_permission_denied">The read/write to storage permission is required!</string>
+    <string name="toast_permission_denied">The read storage permission is required!</string>
+    <string name="toast_copy_home_dir">Old home directory detected (%s). Will copy to %s</string>
     <string name="toast_optifine_success">Install successful</string>
     <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
     <!--
