@@ -35,9 +35,9 @@ public class PojavMigrator
     }
 
     public static boolean migrateGameDir(PojavLoginActivity ctx) throws IOException {
-        if (Build.VERSION.SDK_INT < 30) return false;
+        if (android.os.Build.VERSION.SDK_INT < 30) return false;
 
-        ctx.runOnUiThread(r -> {
+        ctx.runOnUiThread(() -> {
             ctx.startupTextView.setText(ctx.getString(R.string.toast_copy_home_dir, Tools.DIR_GAME_OLD, Tools.DIR_GAME_NEW));
             // Toast.makeText(ctx, ctx.getString(R.string.b), Toast.LENGTH_LONG).show();
         });
