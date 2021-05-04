@@ -33,22 +33,21 @@ public class PojavMigrator
             }
         }
     }
-    
-    public static boolean migrateGameDir(PojavLoginActivity ctx) throws IOException {
-        if (Build.VERSION.SDK_INT < 30) return false;
 
-        ctx.runOnUiThread(r -> {
-            ctx.startupTextView.setText(ctx.getString(R.string.toast_copy_home_dir, Tools.DIR_GAME_OLD, Tools.DIR_GAME_NEW));
-            // Toast.makeText(ctx, ctx.getString(R.string.b), Toast.LENGTH_LONG).show();
-        });
-
+    public static boolean migrateGameDir() throws IOException {
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
-
-        if (oldGameDir.exists() && oldGameDir.isDirectory()) {
-            FileUtils.copyDirectory(oldGameDir, new File(Tools.DIR_GAME_NEW));
+        
+        boolean moved = oldGameDir.exists() && oldGameDir.isDirectory();
+        /*
+        if (!migrateBugFix20201217() && moved) {
+            command("mv " + Tools.DIR_GAME_OLD + " " + Tools.DIR_GAME_HOME + "/");
         }
-
-        return true;
+        */
+        if(moved) {
+            oldGameDir.renameTo(new File(Tools.DIR_GAME_NEW + "/"));
+            FileUtils.deleteDirectory(new File(Tools.DIR_GAME_NEW + "/lwjgl3"));
+        }
+        return moved;
     }
 
     private static void command(String cmd) throws IOException, InterruptedException {
