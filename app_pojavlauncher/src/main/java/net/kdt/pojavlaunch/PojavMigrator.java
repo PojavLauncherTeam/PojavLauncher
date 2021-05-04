@@ -38,14 +38,14 @@ public class PojavMigrator
         if (android.os.Build.VERSION.SDK_INT < 30) return false;
 
         ctx.runOnUiThread(() -> {
-            ctx.startupTextView.setText(ctx.getString(R.string.toast_copy_home_dir, Tools.DIR_GAME_OLD, Tools.DIR_GAME_NEW));
+            ctx.startupTextView.setText(ctx.getString(R.string.toast_copy_home_dir, Tools.DIR_GAME_OLD, Tools.DIR_GAME_HOME));
             // Toast.makeText(ctx, ctx.getString(R.string.b), Toast.LENGTH_LONG).show();
         });
 
         File oldGameDir = new File(Tools.DIR_GAME_OLD);
 
         if (oldGameDir.exists() && oldGameDir.isDirectory()) {
-            FileUtils.copyDirectory(oldGameDir, new File(Tools.DIR_GAME_NEW));
+            FileUtils.copyDirectory(oldGameDir, new File(Tools.DIR_GAME_HOME));
         }
 
         return true;
