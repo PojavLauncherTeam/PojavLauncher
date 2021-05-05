@@ -7,7 +7,8 @@
 # PojavLauncher
 
 ## Note
-We do not exist on TikTok. No one from the dev team makes TikTok videos.
+- We do not exist on TikTok. No one from the dev team makes TikTok videos.
+- We don't own [@PojavLauncher](https://twitter.com/pojavlauncher) Twitter account, they are impersonating us, please report that account to Twitter team.
 
 ## Navigation
 - [Introduction](#introduction)
