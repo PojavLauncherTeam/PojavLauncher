@@ -49,7 +49,10 @@
     <string name="mcl_option_settings">Tetapan</string>
     <string name="mcl_option_about">Tentang</string>
     <string name="mcl_setting_title_uninstalljre">Nyahpasang Java Runtime</string>
+    <string name="mcl_setting_title_hide_sidebar">Sembunyi Palang sisi</string>
     <string name="mcl_setting_title_resolution_scaler">Pengskala Resolusi</string>
+    <string name="mcl_setting_title_backtorightmouse">Anggap butang kembali sebagai butang tetikus kanan</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Sesetengah peranti menganggap butang tetikus kanan eksternal sebagai butang kembali. Jikalau anda menggunakan tetikus eksternal, kamu harus mengaktifkan ini.</string>
     <string name="mcl_setting_title_flat_button_style">Gaya butang datar</string>
     <string name="mcl_setting_title_mousescale">Skala tetikus</string>
     <string name="mcl_setting_subtitle_mousescale">Tukar saiz tetikus virtual.</string>
