@@ -24,10 +24,12 @@
     <string name="alerttitle_install_jre">Pasang Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Pilih sebuah pemasang mod</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher terhenti tanpa diduga</string>
     <string name="error_no_version">Tiada versi!</string>
     <string name="error_show_more">Tunjuk lebih banyak</string>
     <string name="error_show_less">Tunjuk lebih sedikit</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Kebenaran untuk membaca/menulis kepada storan diperlukan!</string>
     <string name="toast_optifine_success">Pemasangan berjaya</string>
     <string name="toast_uninstalljre_done">Selesai menyahpasang Java Runtime</string>
     <!--
@@ -35,6 +37,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Berita</string>
+    <string name="mcl_tab_crash">Log ranap</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Tersambung</string>
     <string name="mcl_account_offline">Luar talian</string>
@@ -54,6 +57,8 @@
     <string name="mcl_setting_title_backtorightmouse">Anggap butang kembali sebagai butang tetikus kanan</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Sesetengah peranti menganggap butang tetikus kanan eksternal sebagai butang kembali. Jikalau anda menggunakan tetikus eksternal, kamu harus mengaktifkan ini.</string>
     <string name="mcl_setting_title_flat_button_style">Gaya butang datar</string>
+    <string name="mcl_setting_title_buttonscale">Skala butang kawalan</string>
+    <string name="mcl_setting_subtitle_buttonscale">Naikkan skala mereka jika butangnya terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Skala tetikus</string>
     <string name="mcl_setting_subtitle_mousescale">Tukar saiz tetikus virtual.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
@@ -94,6 +99,7 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan kod %d</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak terpasang!</string>
     <string name="mcn_check_fail_incompatiblearch">Arkitektur %1$s tidak kompatibel dengan Java Runtime %2$s.</string>
@@ -146,10 +152,12 @@
     <string name="mcl_setting_check_libraries">Periksa library selepas muat turun</string>
     <string name="mcl_setting_check_libraries_subtitle">Pilihan ini memaksa pelancar untuk memeriksa hash library jika ianya tersedia. Boleh mencegah muat turun yang rosak.</string>
     <string name="dl_library_sha_fail">Library %s ini rosak dan akan dimuat turun semula</string>
+    <string name="dl_library_sha_unknown">Library %s tidak boleh diperiksa, harus menganggap bahawa ianya baik</string>
     <string name="dl_library_sha_pass">Library %s adalah baik dan boleh digunakan</string>
     <string name="mcl_disable_gestures">Nyahdayakan gerak isyarat</string>
     <string name="mcl_disable_gestures_subtitle">Menyahdayakan gerak isyarat, seperti menahan untuk menhancurkan blok, dan tekan untuk meletakkan blok.</string>
     <string name="mcl_setting_title_mousespeed">Kecepatan Tetikus</string>
+    <string name="mcl_setting_subtitle_mousespeed">Ubah kelajuan tetikus software</string>
     <string name="customctrl_rounded">Dibundar</string>
     <string name="memory_warning_msg">Bilangan RAM yang ada (%d) lebih rendah daripada RAM yang diperuntuk (%d), yang mungkin akan menyebabkan ranap. Tukar peruntukan jikalau permainan ranap.</string>
     <string name="mcl_memory_allocation">Peruntukan memori</string>
