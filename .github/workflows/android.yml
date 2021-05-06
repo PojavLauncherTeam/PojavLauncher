@@ -1,4 +1,4 @@
-name: Android 47
+name: Android CI
 
 on:
   pull_request:
@@ -15,53 +15,29 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-            actions/checkout@v2
+
+    - uses: actions/checkout@v2
+      with:
+        repository: PojavLauncherTeam/gl4es 
+        path: gl4es
 
     - name: set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
 
-    - name: Get gl4es latest commit hash
-      id: gl4es-sha
-      run: echo "::set-output name=sha::$(git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*')"
-      shell: bash
-      
-    - name: Cache gl4es
-      uses: actions/cache@v2
-      id: gl4es-cache
-      with:
-        path: gl4es/libs
-        key: gl4es-android-shared-${{ steps.gl4es-sha.outputs.sha }}
-
-    - name: Get gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: 'ptitSeb/gl4es'
-        path: 'gl4es'
-
-    - name: Build gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
+    - name: Build latest GL4ES
       continue-on-error: true
       run: |
         cd gl4es
-        mv ../Android_gl4es.mk Android.mk
+        git remote add upstream https://github.com/ptitSeb/gl4es
+        git fetch upstream
+        git checkout master
+        git merge upstream/main || echo "Merge exit code $?"
+        export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
-    
-    - name: Install gl4es
-      run: cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
-    
-    - name: Get JRE
-      uses: dawidd6/action-download-artifact@v2
-      with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: build.yml
-          path: app_pojavlauncher/src/main/assets/components/jre
-          workflow_conclusion: success
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          name: jre8-pojav
-    
+        cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
+        
     - name: Build APK with Gradle
       run: |
         chmod +x scripts/languagelist_updater.sh
@@ -70,7 +46,6 @@ jobs:
         mkdir -p out
         chmod +x gradlew
         ./gradlew clean
-
         # Build JRE JAR files (security manager, etc...)
         ./gradlew :jre_lwjgl3glfw:build
         # mkdir app_pojavlauncher/src/main/assets/components/internal_libs
@@ -81,13 +56,11 @@ jobs:
         ./gradlew :app_pojavlauncher:assembleDebug
         mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
         # mv app_pojavlauncher/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
-
     - name: Build APK without runtime
       run: | 
         rm -r app_pojavlauncher/src/main/assets/components/jre
         ./gradlew assembleDebug
         mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
-
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
