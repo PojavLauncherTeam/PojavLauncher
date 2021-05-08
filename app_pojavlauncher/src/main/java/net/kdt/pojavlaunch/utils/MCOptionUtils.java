@@ -43,7 +43,7 @@ public class MCOptionUtils
     public static String get(String key){
         if (mLineList == null){
             load();
-        }
+        } if (mLineList.size() == 0) return null; // why it empty?
         for (int i = 0; i < mLineList.size(); i++) {
             String line = mLineList.get(i);
             if (line.startsWith(key + ":")) {
