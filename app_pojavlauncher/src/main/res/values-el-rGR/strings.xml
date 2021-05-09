@@ -3,9 +3,18 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition για Android)</string>
     <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Εκκινήστε το Minecraft: Java Edition στη συσκευή σας!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Ηλεκτρονικό ταχυδρομείο ή όνομα χρήστη</string>
+    <string name="login_online_password_hint">Κωδικός Πρόσβασης</string>
+    <string name="login_online_check_keeplogin">Να παραμείνω συνδεδεμένος</string>
+    <string name="login_online_login_label">Είσοδος</string>
+    <string name="login_offline_label">Είσοδος ως λογαριασμός εκτός σύνδεσης</string>
+    <string name="login_error_short_username">Το όνομα πρέπει να είναι τουλάχιστον 3 χαρακτήρες</string>
+    <string name="login_error_exist_username">Αυτό το όνομα χρήστη υπάρχει ήδη</string>
+    <string name="login_select_account">Επιλέξτε λογαριασμό</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
@@ -43,6 +52,7 @@
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Αρχείο Καταγραφής</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
