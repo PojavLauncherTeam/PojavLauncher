@@ -14,7 +14,7 @@
     <string name="login_offline_label">Είσοδος ως λογαριασμός εκτός σύνδεσης</string>
     <string name="login_error_short_username">Το όνομα πρέπει να είναι τουλάχιστον 3 χαρακτήρες</string>
     <string name="login_error_exist_username">Αυτό το όνομα χρήστη υπάρχει ήδη</string>
-    <string name="login_microsoft">Minecraft Είσοδος</string>
+    <string name="login_microsoft">Microsoft Είσοδος</string>
     <string name="login_select_account">Επιλέξτε λογαριασμό</string>
     <string name="login_title_no_saved_account">Δεν βρέθηκε κανένας λογαριασμός !</string>
     <string name="login_dialog_no_saved_account">Δεν έχετε αποθηκευμένο λογαριασμό.\nΧρησιμοποιήστε την επιλογή <b>\"Κρατήστε με συνδεδεμένο\"</b> για να αποθηκεύσετε έναν λογαριασμό κατά την πρώτη σύνδεση.</string>
@@ -174,4 +174,15 @@
     <string name="mcl_setting_check_libraries">Έλεγχος βιβλιοθηκών μετά τη λήψη</string>
     <string name="mcl_setting_check_libraries_subtitle">Αυτή η επιλογή αναγκάζει το launcher να ελέγξει την βιβλιοθήκη hash αν είναι διαθέσιμο. Αποτρέπει τις κατεστραμμένες λήψεις.</string>
     <string name="dl_library_sha_fail">Η βιβλιοθήκη %s έχει υποστεί ζημιά και θα γίνει ξανά λήψη</string>
+    <string name="dl_library_sha_unknown">Η βιβλιοθήκη %s δεν μπορεί να ελεγχθεί, πρέπει να υποθέσουμε ότι είναι καλή</string>
+    <string name="dl_library_sha_pass">Η βιβλιοθήκη %s είναι καλή και χρησιμοποιήσιμη</string>
+    <string name="mcl_disable_gestures">Απενεργοποίηση χειρονομιών</string>
+    <string name="mcl_disable_gestures_subtitle">Απενεργοποιεί χειρονομίες, όπως κράτημα για να σπάσεις έναν κύβο και πατήστε για να τοποθετήσετε κύβο.</string>
+    <string name="mcl_setting_title_mousespeed">Ταχύτητα Ποντικιού</string>
+    <string name="mcl_setting_subtitle_mousespeed">Αλλάζει την ταχύτητα του ποντικιού του λογισμικού</string>
+    <string name="customctrl_passthru">Pass-thru ποντικιού</string>
+    <string name="customctrl_rounded">Στρογγυλεμένο</string>
+    <string name="memory_warning_msg">Το τρέχον ποσό της δωρεάν μνήμης RAM (%d) είναι μικρότερο από το κατανεμημένο RAM (%d), το οποίο μπορεί να οδηγήσει σε καταρρεύσεις. Αλλάξτε την κατανομή αν το παιχνίδι καταρρεύσει.</string>
+    <string name="mcl_memory_allocation">Κατανομή μνήμης</string>
+    <string name="mcl_memory_allocation_subtitle">Ελέγχει πόση μνήμη δίνεται στο Minecraft</string>
 </resources>
