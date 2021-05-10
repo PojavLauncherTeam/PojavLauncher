@@ -172,4 +172,6 @@
     <string name="auto_ram_title">Αυτόματη RAM</string>
     <string name="autoram_info_msg">Η μνήμη ορίστηκε σε %d MB</string>
     <string name="mcl_setting_check_libraries">Έλεγχος βιβλιοθηκών μετά τη λήψη</string>
+    <string name="mcl_setting_check_libraries_subtitle">Αυτή η επιλογή αναγκάζει το launcher να ελέγξει την βιβλιοθήκη hash αν είναι διαθέσιμο. Αποτρέπει τις κατεστραμμένες λήψεις.</string>
+    <string name="dl_library_sha_fail">Η βιβλιοθήκη %s έχει υποστεί ζημιά και θα γίνει ξανά λήψη</string>
 </resources>
