@@ -8,6 +8,8 @@
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_show_more">Näytä Lisää</string>
+    <string name="error_show_less">Näytä Vähemmän</string>
     <!-- Toast messages -->
     <!--
     <string name="toast_3">Exit</string>
