@@ -17,15 +17,26 @@
     <string name="login_select_account">Επιλέξτε λογαριασμό</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">Αυτός ο λογαριασμός θα αφαιρεθεί!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_fatal">Ο PojavLauncher κατέρρευσε απροσδόκητα</string>
+    <string name="error_no_version">Καμία έκδοση!</string>
+    <string name="error_show_more">Εμφάνιση περισσότερων</string>
+    <string name="error_show_less">Εμφάνιση λιγότερων</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Απαιτείται η ανάγνωση/εγγραφή στον χώρο αποθήκευσης!</string>
+    <string name="toast_optifine_success">Επιτυχής εγκατάσταση</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_console">Κονσόλα προγραμματιστή</string>
+    <string name="mcl_tab_crash">Αρχείο καταγραφής κατάρρευσης</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Ετοιμο για να παίξεις Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Εκκαθάριση χώρου προσωρινής αποθήκευσης αρχείων</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
@@ -50,6 +61,7 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Έξοδος</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Αρχείο Καταγραφής</string>
