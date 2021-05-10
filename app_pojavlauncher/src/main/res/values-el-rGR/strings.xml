@@ -62,11 +62,25 @@
     <string name="mcl_setting_subtitle_freeform">Εκκινήστε το Minecraft σε αιωρούμενο παράθυρο. Απαιτεί Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Απόκρυψη πλευρικής μπάρας</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Νοσταλγικοί άνθρωποι που προτιμούν το παλιό περιβάλλον χρήστη v1 μπορεί να τους αρέσει. Σας δίνει μια πιο πλήρη εμπειρία οθόνης.</string>
+    <string name="mcl_setting_title_ignore_notch">Αγνόηση εγκοπής</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Αγνοήστε την εγκοπή και επεκτείνετε την οθόνη κάτω από αυτήν.\nΣας δίνει μια πιο συναρπαστική εμπειρία.</string>
+    <string name="mcl_setting_title_resolution_scaler">Κλίμακα Ανάλυσης</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Σας επιτρέπει να μειώσετε την ανάλυση του παιχνιδιού. Το 100% είναι πλήρης ανάλυση</string>
     <string name="mcl_setting_title_longpresstrigger">Πόση ώρα θα ενεργοποιηθεί μετά από παρατεταμένο πάτημα</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Αλλαγή χρόνου ενεργοποίησης για παρατεταμένο πάτημα σε μπλοκ και απόθεση αντικειμένου.</string>
     <string name="mcl_setting_title_backtorightmouse">Αντιμετωπίστε το κουμπί πίσω ως δεξί ποντίκι</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Ορισμένες συσκευές αντιμετωπίζουν το εξωτερικό δεξί ποντίκι ως πίσω κουμπί. Αν χρησιμοποιείτε εξωτερικό ποντίκι, θα πρέπει να το ενεργοποιήσετε.</string>
+    <string name="mcl_setting_title_flat_button_style">Στύλ επίπεδου κουμπιού</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Ενεργοποιήστε αυτό για να αλλάξετε το στυλ κουμπιού ελέγχου σε επίπεδο.</string>
+    <string name="mcl_setting_title_buttonscale">Κλίμακα των κουμπιών ελέγχου</string>
+    <string name="mcl_setting_subtitle_buttonscale">Μεγάλωσε τα κουμπιά αν είναι πολύ μικρά.</string>
+    <string name="mcl_setting_title_mousescale">Κλιμάκωση ποντικιού</string>
+    <string name="mcl_setting_subtitle_mousescale">Αλλαγή μεγέθους εικονικού ποντικιού.</string>
+    <string name="mcl_setting_title_javaargs">JVM Εντολές εκκίνησης</string>
+    <string name="mcl_setting_subtitle_javaargs">Να είστε προσεκτικοί, αυτό μπορεί να προκαλέσει συντριβή στο παιχνίδι αν τροποποιηθεί χωρίς γνώση.</string>
     <string name="mcl_setting_category_general">Γενικές ρυθμίσεις</string>
+    <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
+    <string name="mcl_setting_category_renderer">Απόδοση</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
     <string name="mcl_setting_veroption_snapshot">Στιγμιότυπο</string>
@@ -81,7 +95,9 @@
     <string name="global_remove">Αφαίρεσε</string>
     <string name="global_restart">Επανεκκίνηση</string>
     <string name="global_save">Αποθήκευση</string>
+    <string name="global_unpacking">Αποσυμπίεση %s</string>
     <string name="global_error_field_empty">Αυτό το πεδίο δεν μπορεί να είναι κενό</string>
+    <string name="global_waiting">Περιμένετε</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -100,8 +116,11 @@
     </string>
     -->
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερματίστηκε με κωδικό %d</string>
     <string name="mcn_exit_call">Έξοδος</string>
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
+    <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
+    <string name="mcn_check_fail_incompatiblearch">Η αρχιτεκτονική %1$s δεν είναι συμβατή με το Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Πληκτρολόγιο</string>
@@ -118,19 +137,39 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Αναγκαστικό κλείσιμο εφαρμογής</string>
     <string name="control_viewout">Αρχείο Καταγραφής</string>
+    <string name="control_adebug">Είσοδος Σφάλματος</string>
     <string name="control_customkey">Αποστολή προσαρμοσμένου κωδικού κλειδιού</string>
+    <string name="control_scaleup">Κλιμάκωση πάνω</string>
+    <string name="control_scaledown">Κλιμάκωση προς τα κάτω</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">Επεξεργάζεστε %s</string>
+    <string name="customctrl_remove">Αφαίρεση %s;</string>
     <string name="customctrl_keyname">Κωδικός κλειδί</string>
+    <string name="customctrl_toggle">Εναλλασσόμενο</string>
+    <string name="customctrl_size">Μέγεθος</string>
+    <string name="customctrl_size_width">Πλάτος</string>
+    <string name="customctrl_size_height">Ύψος</string>
+    <string name="customctrl_dynamicpos">Δυναμική θέση</string>
+    <string name="customctrl_dynamicpos_x">Δυναμικό Χ</string>
+    <string name="customctrl_dynamicpos_y">Δυναμικό Υ</string>
+    <string name="customctrl_transparency_bg">Διαφάνεια φόντου</string>
+    <string name="customctrl_keycombine">Συνδυασμός πλήκτρων</string>
     <string name="customctrl_addbutton">Προσθήκη κουμπιού</string>
     <string name="customctrl_selectdefault">Επιλογή προεπιλεγμένου ελέγχου json</string>
     <string name="main_options">Ρυθμίσεις</string>
     <string name="main_play">Παίξε</string>
+    <string name="main_welcome">Καλωσόρισες, %s</string>
     <string name="main_infodev">Πληροφορίες (DEV)</string>
     <string name="main_switchuser">Εναλλαγή χρήστη</string>
     <string name="main_version">Έκδοση:</string>
     <string name="main_nocrash">Δεν εντοπίστηκε κατάρρευση</string>
     <string name="main_nolog">Δεν υπάρχουν αρχεία καταγραφής.</string>
+    <string name="main_no_news_feed">Απέτυχε η λήψη της ροής ειδήσεων!</string>
+    <string name="auto_ram_subtitle">Ενεργοποιεί τον αυτόματο ρυθμιστή RAM</string>
+    <string name="auto_ram_title">Αυτόματη RAM</string>
+    <string name="autoram_info_msg">Η μνήμη ορίστηκε σε %d MB</string>
+    <string name="mcl_setting_check_libraries">Έλεγχος βιβλιοθηκών μετά τη λήψη</string>
 </resources>
