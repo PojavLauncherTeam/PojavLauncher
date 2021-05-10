@@ -1,5 +1,9 @@
 package net.kdt.pojavlaunch.customcontrols;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.view.ViewGroup;
+
 public class ControlSubButton extends ControlButton {
 
     public ControlDrawer parentDrawer;
@@ -7,6 +11,10 @@ public class ControlSubButton extends ControlButton {
     public ControlSubButton(ControlLayout layout, ControlData properties, ControlDrawer parentDrawer) {
         super(layout, properties);
         this.parentDrawer = parentDrawer;
+
+        //Delayed to let the button inflate first
+        new Handler(Looper.getMainLooper()).postDelayed(() -> setVisibility(parentDrawer.areButtonsVisible ? VISIBLE : GONE), 0);
+
         filterProperties();
     }
 

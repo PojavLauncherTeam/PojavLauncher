@@ -18,7 +18,7 @@ public class ControlDrawer extends ControlButton {
     public ArrayList<ControlSubButton> buttons;
     public ControlDrawerData drawerData;
     public ControlLayout mLayout;
-    private boolean areButtonsVisible = false;
+    public boolean areButtonsVisible = false;
 
 
     public ControlDrawer(ControlLayout layout, ControlDrawerData drawerData) {
