@@ -224,8 +224,8 @@ public class EditControlButtonPopup {
         checkToggle.setChecked(properties.isToggle);
         checkPassThrough.setChecked(properties.passThruEnabled);
 
-        editWidth.setText(Float.toString(properties.width));
-        editHeight.setText(Float.toString(properties.height));
+        editWidth.setText(Float.toString(properties.getWidth()));
+        editHeight.setText(Float.toString(properties.getHeight()));
 
         editDynamicX.setEnabled(properties.isDynamicBtn);
         editDynamicY.setEnabled(properties.isDynamicBtn);
@@ -306,8 +306,8 @@ public class EditControlButtonPopup {
         properties.isToggle = checkToggle.isChecked();
         properties.passThruEnabled = checkPassThrough.isChecked();
 
-        properties.width = Float.parseFloat(editWidth.getText().toString());
-        properties.height = Float.parseFloat(editHeight.getText().toString());
+        properties.setWidth(Float.parseFloat(editWidth.getText().toString()));
+        properties.setHeight(Float.parseFloat(editHeight.getText().toString()));
 
         properties.isDynamicBtn = checkDynamicPosition.isChecked();
         properties.dynamicX = editDynamicX.getText().toString().isEmpty() ? properties.dynamicX = Float.toString(properties.x) : editDynamicX.getText().toString();
