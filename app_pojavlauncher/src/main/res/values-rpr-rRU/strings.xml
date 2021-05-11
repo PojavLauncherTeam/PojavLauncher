@@ -67,7 +67,9 @@
     <string name="mcl_setting_title_resolution_scaler">Уменьшеніе разрѣшенія</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Позволяетъ уменьшить разрѣшеніе игры. Максимальное разрѣшеніе: 100%</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгаго нажатія</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Измѣнить длительность долгаго нажатія для ​ломанія блоковъ и выбрасыванія предметовъ.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Измѣнить длительность долгаго нажатія для ломанія блоковъ и выбрасыванія предметовъ.</string>
+    <string name="mcl_setting_title_backtorightmouse">Считываніе кнопки назадъ какъ правую кнопку мыши</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Нѣкоторыя устройства считаютъ правую кнопку внѣшней мыши какъ кнопку назадъ. Если вы используете внѣшнюю мышь, рекомендуется включить сію функцію.</string>
     <string name="mcl_setting_title_buttonscale">Масштабированіе кнопокъ</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте ихъ, если ​онѣ слишкомъ малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабированіе курсора</string>
@@ -76,9 +78,22 @@
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это можетъ привести къ сбою игры, если редактировать значенія безъ особыхъ знаній.</string>
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
-    <string name="mcl_setting_category_veroption">Типы версій, ​которыя будутъ отображаться въ спискѣ версій</string>
+    <string name="mcl_setting_category_veroption">Типы версій, которыя будутъ отображаться въ спискѣ версій</string>
+    <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
+    <string name="mcl_setting_veroption_snapshot">Пробныя версіи</string>
+    <string name="mcl_setting_veroption_oldalpha">Старыя альфа</string>
+    <string name="mcl_setting_veroption_oldbeta">Старыя бета</string>
+    <string name="mcl_version_clone">Скопировать</string>
     <!-- Global strings -->
+    <string name="global_edit">Редактировать</string>
+    <string name="global_error">Ошибка</string>
+    <string name="global_load">Загрузка</string>
+    <string name="global_name">Имя</string>
+    <string name="global_remove">Удалить</string>
+    <string name="global_restart">Перезапускъ</string>
+    <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
+    <string name="global_error_field_empty">Это поле не можетъ быть пустымъ</string>
     <string name="global_waiting">Подождите, пожалуйста</string>
     <!--
     <string name="mcl_about">
@@ -105,18 +120,34 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошелъ сбой приложенія/игры съ кодомъ %d</string>
     <string name="mcn_exit_call">Выйти</string>
+    <string name="mcn_exit_confirm">Вы увѣрены, что хотите закрыть игру и выйти на главную лаунчера?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовмѣстима съ Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">G.U.I.</string>
+    <string name="control_keyboard">Клавиатура</string>
+    <string name="control_chat">Чатъ</string>
+    <string name="control_debug">Отладка</string>
+    <string name="control_primary">Л.К.М</string>
+    <string name="control_secondary">П.К.М</string>
+    <string name="control_inventory">Инв</string>
+    <string name="control_thirdperson">F5</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Мышь</string>
+    <string name="control_mouseoff">Мышь: Выкл</string>
+    <string name="control_mouseon">Мышь: Вкл </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Закрыть игру</string>
     <string name="control_viewout">Журналъ</string>
     <string name="control_adebug">Отладка ввода</string>
+    <string name="control_customkey">Отправить пользовательскій кодъ клавиши</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Редактированіе %s</string>
     <string name="customctrl_remove">Удалить %s?</string>
+    <string name="customctrl_keyname">Кодъ клавиши</string>
     <string name="customctrl_toggle">Переключаемъ</string>
     <string name="customctrl_size">Размѣръ</string>
     <string name="customctrl_size_width">Ширина</string>
@@ -126,12 +157,24 @@
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
     <string name="customctrl_keycombine">Комбинація клавишъ</string>
+    <string name="customctrl_addbutton">Добавить кнопку</string>
+    <string name="customctrl_selectdefault">Выбрать управленіе по умолчанію</string>
     <string name="main_options">Настройки</string>
+    <string name="main_play">Играть</string>
     <string name="main_welcome">Разрѣшите васъ попривѣтствовать, %s</string>
+    <string name="main_infodev">Инфо (Разраб.)</string>
+    <string name="main_switchuser">Смѣнить пользователя</string>
+    <string name="main_version">Версія:</string>
+    <string name="main_nocrash">Сбоевъ не обнаружено</string>
+    <string name="main_nolog">Нет записей.</string>
     <string name="main_no_news_feed">Не удалось получить ленту извѣстій!</string>
     <string name="auto_ram_subtitle">Включаетъ автоматическое управленіе выдѣленной Оперативной Памятью</string>
     <string name="auto_ram_title">Автоматическое выдѣленіе ОЗУ</string>
     <string name="autoram_info_msg">Выдѣлено ​%d Мбайтъ​ Оперативной Памяти</string>
+    <string name="vp_latest_snapshot">Послѣдняя пробная версія</string>
+    <string name="vp_latest_release">Последняя версія</string>
+    <string name="mcl_tab_profiles">Профили</string>
+    <string name="mcl_profile_editor_title_profile">ПРОФИЛИ</string>
     <string name="mcl_profile_editor_title_version">ВЕРСІИ</string>
     <string name="mcl_profile_editor_edit_text_title">Названіе профиля</string>
     <string name="mcl_profile_editor_save">сохранить</string>
