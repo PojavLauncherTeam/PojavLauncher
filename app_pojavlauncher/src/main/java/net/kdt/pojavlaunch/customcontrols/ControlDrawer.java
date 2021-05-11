@@ -42,8 +42,8 @@ public class ControlDrawer extends ControlButton {
 
     private ControlData filterProperties(ControlData properties){
         properties.isDynamicBtn = false;
-        properties.width = drawerData.properties.width;
-        properties.height = drawerData.properties.height;
+        properties.setWidth(drawerData.properties.getWidth());
+        properties.setHeight(drawerData.properties.getHeight());
 
         return properties;
     }
@@ -97,22 +97,22 @@ public class ControlDrawer extends ControlButton {
         for(int i=0; i < buttons.size(); ++i){
             switch (drawerData.orientation){
                 case RIGHT:
-                    buttons.get(i).setTranslationX( (drawerData.properties.x + drawerData.properties.width) + drawerData.properties.width*i );
+                    buttons.get(i).setTranslationX( (drawerData.properties.x + drawerData.properties.getWidth()) + drawerData.properties.getWidth()*i );
                     buttons.get(i).setTranslationY(drawerData.properties.y);
                     break;
 
                 case LEFT:
-                    buttons.get(i).setTranslationX( (drawerData.properties.x - drawerData.properties.width) - drawerData.properties.width*i );
+                    buttons.get(i).setTranslationX( (drawerData.properties.x - drawerData.properties.getWidth()) - drawerData.properties.getWidth()*i );
                     buttons.get(i).setTranslationY(drawerData.properties.y);
                     break;
 
                 case UP:
-                    buttons.get(i).setTranslationY( (drawerData.properties.y - drawerData.properties.height) - drawerData.properties.height*i );
+                    buttons.get(i).setTranslationY( (drawerData.properties.y - drawerData.properties.getHeight()) - drawerData.properties.getHeight()*i );
                     buttons.get(i).setTranslationX(drawerData.properties.x);
                     break;
 
                 case DOWN:
-                    buttons.get(i).setTranslationY( (drawerData.properties.y + drawerData.properties.height) + drawerData.properties.height*i );
+                    buttons.get(i).setTranslationY( (drawerData.properties.y + drawerData.properties.getHeight()) + drawerData.properties.getHeight()*i );
                     buttons.get(i).setTranslationX(drawerData.properties.x);
                     break;
             }
@@ -124,8 +124,8 @@ public class ControlDrawer extends ControlButton {
     private void resizeButtons(){
         if (buttons == null) return;
         for(ControlSubButton subButton : buttons){
-            subButton.mProperties.width = mProperties.width;
-            subButton.mProperties.height = mProperties.height;
+            subButton.mProperties.setWidth(mProperties.getWidth());
+            subButton.mProperties.setHeight(mProperties.getHeight());
 
             subButton.updateProperties();
         }

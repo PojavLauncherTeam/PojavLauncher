@@ -60,8 +60,8 @@ public class ControlLayout extends FrameLayout
 		//CONTROL BUTTON
 		for (ControlData button : controlLayout.mControlDataList) {
             button.isHideable = button.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && button.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
-            button.width = button.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
-            button.height = button.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+            button.setWidth(button.getWidth() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
+            button.setHeight(button.getHeight() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
             if (!button.isDynamicBtn) {
                 button.dynamicX = button.x / CallbackBridge.physicalWidth + " * ${screen_width}";
                 button.dynamicY = button.y / CallbackBridge.physicalHeight + " * ${screen_height}";
@@ -73,8 +73,8 @@ public class ControlLayout extends FrameLayout
 		//CONTROL DRAWER
 		for(ControlDrawerData drawerData : controlLayout.mDrawerDataList){
 			drawerData.properties.isHideable = true;
-			drawerData.properties.width = drawerData.properties.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
-			drawerData.properties.height = drawerData.properties.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+			drawerData.properties.setWidth(drawerData.properties.getWidth() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
+			drawerData.properties.setHeight(drawerData.properties.getHeight() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
 			if (!drawerData.properties.isDynamicBtn) {
 				drawerData.properties.dynamicX = drawerData.properties.x / CallbackBridge.physicalWidth + " * ${screen_width}";
 				drawerData.properties.dynamicY = drawerData.properties.y / CallbackBridge.physicalHeight + " * ${screen_height}";
@@ -85,8 +85,8 @@ public class ControlLayout extends FrameLayout
 			//CONTROL SUB BUTTON
 			for (ControlData subButton : drawerData.buttonProperties){
 				subButton.isHideable = subButton.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && subButton.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
-				subButton.width = subButton.width / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
-				subButton.height = subButton.height / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE;
+				subButton.setWidth(subButton.getWidth() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
+				subButton.setHeight(subButton.getHeight() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
 				if (!subButton.isDynamicBtn) {
 					subButton.dynamicX = subButton.x / CallbackBridge.physicalWidth + " * ${screen_width}";
 					subButton.dynamicY = subButton.y / CallbackBridge.physicalHeight + " * ${screen_height}";

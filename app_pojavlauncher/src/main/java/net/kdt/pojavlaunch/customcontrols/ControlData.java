@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch.customcontrols;
 
-import android.graphics.Color;
 import android.util.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
@@ -70,14 +69,14 @@ public class ControlData implements Cloneable
     public String name;
     public float x;
     public float y;
-    public float width;
-    public float height;
-    public int[] keycodes; //Should store up to 4 keys
-    public float opacity; //Alpha value from 0 to 1;
+    private float width;         //Dp instead of Px now
+    private float height;        //Dp instead of Px now
+    public int[] keycodes;      //Should store up to 4 keys
+    public float opacity;       //Alpha value from 0 to 1;
     public int bgColor;
     public int strokeColor;
-    public int strokeWidth;
-    public float cornerRadius;
+    public int strokeWidth;     //0-100%
+    public float cornerRadius;  //0-100%
 
     public boolean holdCtrl;
     public boolean holdAlt;
@@ -93,7 +92,7 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int[] keycodes, float x, float y) {
-        this(name, keycodes, x, y, Tools.dpToPx(50), Tools.dpToPx(50));
+        this(name, keycodes, x, y, 50, 50);
     }
 
     public ControlData(android.content.Context ctx, int resId, int[] keycodes, float x, float y, boolean isSquare) {
@@ -101,7 +100,7 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int[] keycodes, float x, float y, boolean isSquare) {
-        this(name, keycodes, x, y, isSquare ? Tools.dpToPx(50) : Tools.dpToPx(80), isSquare ? Tools.dpToPx(50) : Tools.dpToPx(30));
+        this(name, keycodes, x, y, isSquare ? 50 : 80, isSquare ? 50 : 30);
     }
 
     public ControlData(String name, int[] keycodes, float x, float y, float width, float height) {
@@ -110,7 +109,7 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY) {
-        this(name, keycodes, dynamicX, dynamicY, Tools.dpToPx(50), Tools.dpToPx(50), false);
+        this(name, keycodes, dynamicX, dynamicY, 50, 50, false);
     }
 
     public ControlData(android.content.Context ctx, int resId, int[] keycodes, String dynamicX, String dynamicY, boolean isSquare) {
@@ -118,11 +117,11 @@ public class ControlData implements Cloneable
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, boolean isSquare) {
-        this(name, keycodes, dynamicX, dynamicY, isSquare ? Tools.dpToPx(50) : Tools.dpToPx(80), isSquare ? Tools.dpToPx(50) : Tools.dpToPx(30), false);
+        this(name, keycodes, dynamicX, dynamicY, isSquare ? 50 : 80, isSquare ? 50 : 30, false);
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle){
-        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1,0x4D000000, 0xFFFFFFFF,0,Tools.dpToPx(0));
+        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1,0x4D000000, 0xFFFFFFFF,0,0);
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, int strokeWidth, float cornerRadius) {
@@ -161,10 +160,10 @@ public class ControlData implements Cloneable
         Map<String, String> keyValueMap = new ArrayMap<>();
         keyValueMap.put("top", "0");
         keyValueMap.put("left", "0");
-        keyValueMap.put("right", Float.toString(CallbackBridge.physicalWidth - width));
-        keyValueMap.put("bottom", Float.toString(CallbackBridge.physicalHeight - height));
-        keyValueMap.put("width", Float.toString(width));
-        keyValueMap.put("height", Float.toString(height));
+        keyValueMap.put("right", Float.toString(CallbackBridge.physicalWidth - getWidth()));
+        keyValueMap.put("bottom", Float.toString(CallbackBridge.physicalHeight - getHeight()));
+        keyValueMap.put("width", Float.toString(getWidth()));
+        keyValueMap.put("height", Float.toString(getHeight()));
         keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
         keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
         keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
@@ -212,5 +211,24 @@ public class ControlData implements Cloneable
             inflatedArray[i] = LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
         }
         return inflatedArray;
+    }
+
+
+    //Getters || setters (with conversion for ease of use)
+    public float getWidth() {
+        return Tools.dpToPx(width);
+    }
+
+    public float getHeight(){
+        return Tools.dpToPx(height);
+    }
+
+
+    public void setWidth(float widthInPx){
+        width = Tools.pxToDp(widthInPx);
+    }
+
+    public void setHeight(float heightInPx){
+        height = Tools.pxToDp(heightInPx);
     }
 }

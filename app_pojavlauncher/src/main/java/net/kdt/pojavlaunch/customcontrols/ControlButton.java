@@ -86,7 +86,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 properties.specialButtonListener.getClass().getName());
         }
 
-        setLayoutParams(new FrameLayout.LayoutParams((int) properties.width, (int) properties.height));
+        setLayoutParams(new FrameLayout.LayoutParams((int) properties.getWidth(), (int) properties.getHeight() ));
     }
 
     public void setBackground(){
@@ -99,12 +99,12 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     public int computeStrokeWidth(float widthInPercent){
-        float maxSize = Math.max(mProperties.width, mProperties.height);
+        float maxSize = Math.max(mProperties.getWidth(), mProperties.getHeight());
         return (int)((maxSize/2) * (widthInPercent/100));
     }
 
     public float computeCornerRadius(float radiusInPercent){
-        float minSize = Math.min(mProperties.width, mProperties.height);
+        float minSize = Math.min(mProperties.getWidth(), mProperties.getHeight());
         return (minSize/2) * (radiusInPercent/100);
     }
 
@@ -112,8 +112,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public void setLayoutParams(ViewGroup.LayoutParams params) {
         super.setLayoutParams(params);
 
-        mProperties.width = params.width;
-        mProperties.height = params.height;
+        mProperties.setWidth(params.width);
+        mProperties.setHeight(params.height);
         setBackground();
 
         
