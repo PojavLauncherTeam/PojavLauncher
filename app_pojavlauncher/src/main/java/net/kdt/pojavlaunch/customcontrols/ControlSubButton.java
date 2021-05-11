@@ -13,7 +13,8 @@ public class ControlSubButton extends ControlButton {
         this.parentDrawer = parentDrawer;
 
         //Delayed to let the button inflate first
-        new Handler(Looper.getMainLooper()).postDelayed(() -> setVisibility(parentDrawer.areButtonsVisible ? VISIBLE : GONE), 0);
+        if(!layout.getModifiable())
+            new Handler(Looper.getMainLooper()).postDelayed(() -> setVisibility(parentDrawer.areButtonsVisible ? VISIBLE : GONE), 0);
 
         filterProperties();
     }
