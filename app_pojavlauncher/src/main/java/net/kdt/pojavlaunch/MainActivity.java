@@ -37,7 +37,10 @@ public class MainActivity extends BaseMainActivity {
                         CustomControlsActivity.load(mControlLayout);
                         break;
                     case R.id.menu_ctrl_add:
-                        mControlLayout.addControlButton(new ControlData("New", new int[] {LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN}, 100, 100));
+                        mControlLayout.addControlButton(new ControlData("New"));
+                        break;
+                    case R.id.menu_ctrl_add_drawer:
+                        mControlLayout.addDrawer(new ControlDrawerData());
                         break;
                     case R.id.menu_ctrl_selectdefault:
                         CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
