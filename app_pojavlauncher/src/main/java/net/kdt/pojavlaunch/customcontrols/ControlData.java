@@ -84,11 +84,15 @@ public class ControlData implements Cloneable
     public Object specialButtonListener;
 
     public ControlData() {
-        this("", new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN}, 0, 0);
+        this("button");
+    }
+
+    public ControlData(String name){
+        this(name, new int[] {});
     }
 
     public ControlData(String name, int[] keycodes) {
-        this(name, keycodes, 0, 0);
+        this(name, keycodes, Tools.currentDisplayMetrics.widthPixels/2, Tools.currentDisplayMetrics.heightPixels/2);
     }
 
     public ControlData(String name, int[] keycodes, float x, float y) {
