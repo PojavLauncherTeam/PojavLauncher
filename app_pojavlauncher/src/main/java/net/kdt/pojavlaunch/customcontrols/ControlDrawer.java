@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import net.kdt.pojavlaunch.Tools;
+
 import java.util.ArrayList;
 
 
@@ -37,8 +39,6 @@ public class ControlDrawer extends ControlButton {
         }
 
     }
-
-
 
     private ControlData filterProperties(ControlData properties){
         properties.isDynamicBtn = false;
@@ -97,22 +97,22 @@ public class ControlDrawer extends ControlButton {
         for(int i=0; i < buttons.size(); ++i){
             switch (drawerData.orientation){
                 case RIGHT:
-                    buttons.get(i).setTranslationX( (drawerData.properties.x + drawerData.properties.getWidth()) + drawerData.properties.getWidth()*i );
+                    buttons.get(i).setTranslationX(drawerData.properties.x + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
                     buttons.get(i).setTranslationY(drawerData.properties.y);
                     break;
 
                 case LEFT:
-                    buttons.get(i).setTranslationX( (drawerData.properties.x - drawerData.properties.getWidth()) - drawerData.properties.getWidth()*i );
+                    buttons.get(i).setTranslationX(drawerData.properties.x - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
                     buttons.get(i).setTranslationY(drawerData.properties.y);
                     break;
 
                 case UP:
-                    buttons.get(i).setTranslationY( (drawerData.properties.y - drawerData.properties.getHeight()) - drawerData.properties.getHeight()*i );
+                    buttons.get(i).setTranslationY(drawerData.properties.y - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
                     buttons.get(i).setTranslationX(drawerData.properties.x);
                     break;
 
                 case DOWN:
-                    buttons.get(i).setTranslationY( (drawerData.properties.y + drawerData.properties.getHeight()) + drawerData.properties.getHeight()*i );
+                    buttons.get(i).setTranslationY(drawerData.properties.y + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
                     buttons.get(i).setTranslationX(drawerData.properties.x);
                     break;
             }
