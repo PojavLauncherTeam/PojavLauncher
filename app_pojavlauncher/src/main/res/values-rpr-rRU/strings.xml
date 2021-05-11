@@ -58,12 +58,16 @@
     <string name="mcl_option_about">О лаунчере</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапускъ ​лаунчера​] это позволитъ вамъ переустановить Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Запускъ Minecraft въ плавающемъ окнѣ</string>
+    <string name="mcl_setting_subtitle_freeform">Запускаетъ Minecraft въ плавающемъ окнѣ. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_hide_sidebar">Сокрытіе боковой панели</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Можетъ понравиться людямъ, испытывающимъ ностальгію, ​которые​ предпочитаютъ старый интерфейсъ v1. Даетъ вамъ болѣе ​полноэкранное​ использованіе.</string>
     <string name="mcl_setting_title_ignore_notch">Игнорированіе вырѣза подъ фронтальную камеру</string>
     <string name="mcl_setting_subtitle_ignore_notch">Игнорируетъ вырѣзъ подъ фронтальную камеру и расширяетъ экранъ подъ нее.\nДаетъ большее погруженіе въ игру.</string>
     <string name="mcl_setting_title_resolution_scaler">Уменьшеніе разрѣшенія</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Позволяетъ уменьшить разрѣшеніе игры. Максимальное разрѣшеніе: 100%</string>
+    <string name="mcl_setting_title_longpresstrigger">Длительность долгаго нажатія</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Измѣнить длительность долгаго нажатія для ​ломанія блоковъ и выбрасыванія предметовъ.</string>
     <string name="mcl_setting_title_flat_button_style">Плоскій стиль кнопокъ</string>
     <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцію, чтобы измѣнить стиль кнопокъ управленія на плоскій.</string>
     <string name="mcl_setting_title_buttonscale">Масштабированіе кнопокъ</string>
@@ -72,8 +76,10 @@
     <string name="mcl_setting_subtitle_mousescale">Измѣняетъ размѣръ курсора мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это можетъ привести къ сбою игры, если редактировать значенія безъ особыхъ знаній.</string>
+    <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Рендереръ</string>
+    <string name="mcl_setting_category_veroption">Типы версій, ​которыя будутъ отображаться въ спискѣ версій</string>
     <!-- Global strings -->
     <string name="global_unpacking">Распаковка %s</string>
     <string name="global_waiting">Подождите, пожалуйста</string>
