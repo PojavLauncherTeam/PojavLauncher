@@ -10,7 +10,7 @@
     </facet>
     <facet type="native-android-gradle" name="Native-Android-Gradle">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="debug-x86" />
+        <option name="SELECTED_BUILD_VARIANT" value="debug-arm64" />
       </configuration>
     </facet>
     <facet type="android" name="Android">
