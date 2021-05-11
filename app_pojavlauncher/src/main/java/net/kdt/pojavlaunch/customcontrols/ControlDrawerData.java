@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.customcontrols;
 
+import net.kdt.pojavlaunch.Tools;
+
 import java.util.ArrayList;
 
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.DOWN;
@@ -57,7 +59,7 @@ public class ControlDrawerData {
     }
 
     public ControlDrawerData(ArrayList<ControlData> buttonProperties){
-        this(buttonProperties, new ControlData());
+        this(buttonProperties, new ControlData("Drawer", new int[] {}, Tools.currentDisplayMetrics.widthPixels/2, Tools.currentDisplayMetrics.heightPixels/2));
     }
 
     public ControlDrawerData(ArrayList<ControlData> buttonProperties, ControlData properties){
