@@ -73,8 +73,9 @@ public class EditControlDrawerPopup extends EditControlButtonPopup{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ControlLayout layout = (ControlLayout) drawer.getParent();
-                layout.addSubButton(drawer, new ControlData());
-
+                ControlData controlData =  drawerData.properties.clone();
+                controlData.name = "new";
+                layout.addSubButton(drawer, controlData);
             }
         });
 
