@@ -1,4 +1,4 @@
-name: Android M
+name: Update Android M
 
 on:
   pull_request:
@@ -72,5 +72,4 @@ jobs:
       with:
           name: app-debug-noruntime
           path: out/app-debug-noruntime.apk
-
 
