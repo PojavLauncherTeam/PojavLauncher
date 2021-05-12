@@ -69,7 +69,7 @@ public class EditControlDrawerPopup extends EditControlButtonPopup{
     protected void setupDialogButtons() {
         super.setupDialogButtons();
 
-        builder.setNeutralButton("Add sub-button", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(v.getResources().getString(R.string.customctrl_addsubbutton), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ControlLayout layout = (ControlLayout) drawer.getParent();
