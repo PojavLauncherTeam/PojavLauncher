@@ -29,6 +29,7 @@
     <string name="error_show_more">Keep th\' knowledge out on table</string>
     <string name="error_show_less">Keep th\' knowledge inside th\' table</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">The read/write t\' hold permission be required!</string>
     <string name="toast_optifine_success">Success in th\' ship</string>
     <string name="toast_uninstalljre_done">Finished unsettlin\' Java Runtime</string>
     <!--
