@@ -62,6 +62,8 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
     <string name="mcl_setting_title_hide_sidebar">Бүйір пәнелін жасыру</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы адамдарға бұл ескі v1 интерфейсі ұнауы керек. Көбірек толық экран тәжірибесін береді.</string>
+    <string name="mcl_setting_title_ignore_notch">Камера ойығын елемеу</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Камера ойығын елемей, экранды астына шығарып кеңейтеді.\nКүштірек тәжірибе береді.</string>
     <string name="mcl_setting_title_resolution_scaler">Өлшем масштабтау</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ойын өлшемін азайтуға мүмкіндік береді. 100% деген толық өлшем</string>
     <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
@@ -151,7 +153,7 @@
     <string name="customctrl_remove">%s алып тастайсыз ба?</string>
     <string name="customctrl_keyname">Перне коды</string>
     <string name="customctrl_toggle">Ауысқыш</string>
-    <string name="customctrl_size">Өлшемі</string>
+    <string name="customctrl_size">Көлемі</string>
     <string name="customctrl_size_width">Ені</string>
     <string name="customctrl_size_height">Биіктік</string>
     <string name="customctrl_dynamicpos">Динамикалық позиция</string>
