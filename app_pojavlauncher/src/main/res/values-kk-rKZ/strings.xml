@@ -178,5 +178,7 @@
     <string name="auto_ram_subtitle">Автоматты түрде ОЕСҚ-ны басқарады</string>
     <string name="auto_ram_title">Авто ОЕСҚ</string>
     <string name="autoram_info_msg">%d МБ жад берілді</string>
+    <string name="mcl_setting_check_libraries">Жүктегеннен кейін кітапханаларды тексереді</string>
+    <string name="dl_library_sha_pass">%s кітапханасы жақсы және қолдануға жарамды</string>
     <string name="mcl_setting_title_mousespeed">Тінтуір жылдамдығы</string>
 </resources>
