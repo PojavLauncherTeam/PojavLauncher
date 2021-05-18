@@ -61,8 +61,12 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft-ны йөзмә тәрәзәдә ача. Android 7.0+ кирәк</string>
     <string name="mcl_setting_title_hide_sidebar">Кырый панелен яшерү</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы кешеләргә бу иске v1 интерфейсы ошауы кирәк. Күбрәк тулы экран тәҗрибәсен бирелде.</string>
+    <string name="mcl_setting_title_flat_button_style">Тигез төймә стиле</string>
     <string name="mcl_setting_title_javaargs">JVM кушу аргументлары</string>
     <string name="mcl_setting_category_general">Төп көйләүләр</string>
+    <string name="mcl_setting_category_renderer">Рендерер</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
     <string name="mcl_setting_veroption_release">Чыгарылыш</string>
     <string name="mcl_setting_veroption_snapshot">Снапшотлар</string>
@@ -88,12 +92,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -154,14 +153,13 @@
     <string name="main_nocrash">Сафтан чыгару табылмады</string>
     <string name="main_nolog">Журнал буш</string>
     <string name="main_no_news_feed">Яңалыклар тасмасын алып булмады!</string>
-    <string name="vp_latest_snapshot">Соңгы ярдәмче версия</string>
-    <string name="vp_latest_release">Соңгы версия</string>
-    <string name="mcl_tab_profiles">Профиль</string>
-    <string name="mcl_profile_editor_title_profile">ПРОФИЛЬЛӘР</string>
-    <string name="mcl_profile_editor_title_version">ВЕРСИЯЛӘР</string>
-    <string name="mcl_profile_editor_edit_text_title">Профиль исеме</string>
-    <string name="mcl_profile_editor_save">сакларга</string>
-    <string name="profedit_selected_version">Сайланган версия: %s</string>
-    <string name="profedit_selected_profile">Сайланган профиль: %s</string>
-    <string name="global_new">Яңа</string>
+    <string name="mcl_setting_check_libraries">Йөкләтүдән соң китапханәләрне тикшерергә</string>
+    <string name="dl_library_sha_fail">%s китапханәсе ватылган һәм яңадан йөкләтәчәк</string>
+    <string name="dl_library_sha_unknown">%s китапханәсе тикшереп булмады; аның белән барысы да яхшы дип уйларга туры килә</string>
+    <string name="dl_library_sha_pass">%s китапханәсе тикшерелде һәм кулланырга мөмкин</string>
+    <string name="mcl_disable_gestures">Ишарә сүндерергә</string>
+    <string name="mcl_setting_title_mousespeed">Тычкан сизгерлеге</string>
+    <string name="customctrl_passthru">Тычкан күрсәткече</string>
+    <string name="customctrl_rounded">Түгәрәкләнгән</string>
+    <string name="mcl_memory_allocation">Компьютер хәтере бүлеп бирү</string>
 </resources>
