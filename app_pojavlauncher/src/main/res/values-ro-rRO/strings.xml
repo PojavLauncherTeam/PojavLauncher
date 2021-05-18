@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
     <string name="mcl_setting_title_backtorightmouse">Tratează butonul înapoi ca butonul click dreapta</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Unele dispozitive trateaza butonul click dreapta al mouse-ului extern ca butonul înapoi. Dacă folosiți mouse-ul extern, ar trebui să activați acest lucru.</string>
+    <string name="mcl_setting_title_flat_button_style">Stil buton plat</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Activează acest lucru pentru a schimba stilul butonului de control în plat.</string>
     <string name="mcl_setting_title_buttonscale">Redimensionare butoane de control</string>
     <string name="mcl_setting_subtitle_buttonscale">Fă mai mare dacă butoanele sunt prea mici.</string>
     <string name="mcl_setting_title_mousescale">Redimensionarea mouse-ului</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Aveți grijă, acest lucru poate face ca jocul să se oprească dacă este modificat fără cunoștințe.</string>
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
+    <string name="mcl_setting_category_renderer">Motor de redare</string>
     <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
     <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -174,14 +172,18 @@
     <string name="auto_ram_subtitle">Activează ajustarea automată RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memorie setată la %d MB</string>
-    <string name="vp_latest_snapshot">Ultimul snapshot</string>
-    <string name="vp_latest_release">Ultima Versiune Stabilă</string>
-    <string name="mcl_tab_profiles">Profiluri</string>
-    <string name="mcl_profile_editor_title_profile">PROFILURI</string>
-    <string name="mcl_profile_editor_title_version">VERSIUNI</string>
-    <string name="mcl_profile_editor_edit_text_title">Nume profil</string>
-    <string name="mcl_profile_editor_save">salvează</string>
-    <string name="profedit_selected_version">Versiunea selectată: %s</string>
-    <string name="profedit_selected_profile">Profilul selectat: %s</string>
-    <string name="global_new">Nou</string>
+    <string name="mcl_setting_check_libraries">Verifică bibliotecile după descărcare</string>
+    <string name="mcl_setting_check_libraries_subtitle">Această opțiune forțează lansatorul să verifice hash-ul bibliotecii dacă este disponibil. Previne descărcările rupte.</string>
+    <string name="dl_library_sha_fail">Biblioteca %s este deteriorată și va fi redescărcată</string>
+    <string name="dl_library_sha_unknown">Biblioteca %s nu poate fi verificată, trebuie să presupunem că este bună</string>
+    <string name="dl_library_sha_pass">Biblioteca %s este bună și utilizabilă</string>
+    <string name="mcl_disable_gestures">Dezactivează gesturi</string>
+    <string name="mcl_disable_gestures_subtitle">Dezactivează gesturile, cum ar fi tine apasat pentru a sparge blocul, și apasă pentru a pune un bloc.</string>
+    <string name="mcl_setting_title_mousespeed">Viteza mouse-ului</string>
+    <string name="mcl_setting_subtitle_mousespeed">Schimbă viteza mouse-ului de software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Rotund</string>
+    <string name="memory_warning_msg">Cantitatea curentă de RAM liber (%d) este mai mică decât cantitatea alocată de RAM (%d), care ar putea duce la oprire. Schimbă cantitatea alocată dacă jocul se oprește.</string>
+    <string name="mcl_memory_allocation">Memorie alocată</string>
+    <string name="mcl_memory_allocation_subtitle">Controlează cât de multă memorie este dată la Minecraft</string>
 </resources>
