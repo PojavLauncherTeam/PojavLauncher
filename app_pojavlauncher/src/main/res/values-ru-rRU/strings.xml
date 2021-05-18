@@ -207,7 +207,4 @@
     <string name="mcl_setting_subtitle_ignore_notch">Игнорирует вырез и позволяет изображению выходить за вырез, давая более полноэкранный экспириенс.</string>
     <string name="mcl_setting_title_resolution_scaler">Регулировка разрешения</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Позволяет регулировать разрешение. 100% - оригинальное разрешение.</string>
-    <string name="customctrl_size">Размер</string>
-    <string name="customctrl_size_width">Ширина</string>
-    <string name="customctrl_size_height">Высота</string>
 </resources>
