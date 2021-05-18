@@ -38,6 +38,7 @@
     <string name="mcl_options">Опциялар</string>
     <string name="mcl_option_settings">Көйләүҙәр</string>
     <string name="mcl_option_about">Лаунчер тураһында</string>
+    <string name="mcl_setting_category_renderer">Рендерер</string>
     <string name="mcl_setting_veroption_release">Релиздар</string>
     <string name="mcl_setting_veroption_snapshot">Снапшотттар</string>
     <string name="mcl_setting_veroption_oldalpha">Иҫке альфалар</string>
@@ -58,12 +59,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -105,6 +101,4 @@
     <string name="main_infodev">Инфо (Эшк.)</string>
     <string name="main_switchuser">Ҡулланыусыны алмаштырырға</string>
     <string name="main_version">Версия:</string>
-    <string name="mcl_profile_editor_save">һаҡларға</string>
-    <string name="global_new">Яңы</string>
 </resources>
