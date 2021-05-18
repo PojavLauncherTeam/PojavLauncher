@@ -1,4 +1,4 @@
-name: Android CI
+name: Android 9
 
 on:
   pull_request:
