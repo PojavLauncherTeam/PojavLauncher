@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">שנה את הזמן ללחיצה ארוכה בשבירת בלוקים וזריקת חפצים.</string>
     <string name="mcl_setting_title_backtorightmouse">התייחס ל\"אחורה\" ככפתור ימני בעכבר</string>
     <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לכפתור הימני בעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, עליך להפעיל זאת.</string>
+    <string name="mcl_setting_title_flat_button_style">סגנון כפתור שטוח</string>
+    <string name="mcl_setting_subtitle_flat_button_style">הפעל זאת כדי לשנות את סגנון כפתורי השליטה לשטוח.</string>
     <string name="mcl_setting_title_buttonscale">קנה המידה של כפתורי השליטה</string>
     <string name="mcl_setting_subtitle_buttonscale">הגדל את הכפתורים אם הם קטנים מדי.</string>
     <string name="mcl_setting_title_mousescale">קנה המידה של העכבר</string>
@@ -78,7 +80,8 @@
     <string name="mcl_setting_subtitle_javaargs">זהירות! שינוי ערכים אלה ללא ידע מתאים עלול לגרום למשחק לקרוס.</string>
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
-    <string name="mcl_setting_category_veroption">סוג הגרסה יופיע ברשימת הגרסאות</string>
+    <string name="mcl_setting_category_renderer">רינדור</string>
+    <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">לוג פלט</string>
     <string name="control_adebug">ניפוי שגיאות קלט</string>
     <string name="control_customkey">שלח קוד מקש מותאם אישית</string>
+    <string name="control_scaleup">הגדל</string>
+    <string name="control_scaledown">הקטן</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -161,7 +161,7 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">הוסף כפתור</string>
-    <string name="customctrl_selectdefault">בחר קובץ בקרה כברירת מחדל</string>
+    <string name="customctrl_selectdefault">בחר קובץ שליטה כברירת מחדל</string>
     <string name="main_options">אפשרויות</string>
     <string name="main_play">הפעל</string>
     <string name="main_welcome">ברוך הבא, %s</string>
@@ -174,14 +174,18 @@
     <string name="auto_ram_subtitle">מפעיל התאמת RAM אוטומטית</string>
     <string name="auto_ram_title">זיכרון אוטומטי</string>
     <string name="autoram_info_msg">זיכרון הוגדר ל %d MB</string>
-    <string name="vp_latest_snapshot">הסנאפשוט העדכני</string>
-    <string name="vp_latest_release">הגרסה העדכנית</string>
-    <string name="mcl_tab_profiles">פרופילים</string>
-    <string name="mcl_profile_editor_title_profile">פרופילים</string>
-    <string name="mcl_profile_editor_title_version">גרסאות</string>
-    <string name="mcl_profile_editor_edit_text_title">שם הפרופיל</string>
-    <string name="mcl_profile_editor_save">שמור</string>
-    <string name="profedit_selected_version">הגרסה שנבחרה: %s</string>
-    <string name="profedit_selected_profile">הפרופיל שנבחר: %s</string>
-    <string name="global_new">חדש</string>
+    <string name="mcl_setting_check_libraries">בדוק ספריות לאחר ההורדה</string>
+    <string name="mcl_setting_check_libraries_subtitle">אפשרות זו מכריחה בדיקה של מהימנות הספריות. מונע הורדות פגומות.</string>
+    <string name="dl_library_sha_fail">הספרייה %s פגומה ולכן תורד מחדש</string>
+    <string name="dl_library_sha_unknown">לא ניתן לבדוק את הספרייה %s, אנו מניחים שהיא בסדר</string>
+    <string name="dl_library_sha_pass">הספרייה %s תקינה ואפשר להשתמש בה</string>
+    <string name="mcl_disable_gestures">השבת מחוות</string>
+    <string name="mcl_disable_gestures_subtitle">השבת מחוות, למשל: החזק כדי לשבור בלוק, וגע כדי לשים בלוק.</string>
+    <string name="mcl_setting_title_mousespeed">מהירות העכבר</string>
+    <string name="mcl_setting_subtitle_mousespeed">משנה את המהירות של עכבר התוכנה</string>
+    <string name="customctrl_passthru">עכבר עובר דרך</string>
+    <string name="customctrl_rounded">מעוגל</string>
+    <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM שהוקצתה (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את ההקצאה במידה והמשחק קורס.</string>
+    <string name="mcl_memory_allocation">הקצאת זיכרון</string>
+    <string name="mcl_memory_allocation_subtitle">שולט בכמות הזיכרון הניתנת ל- Minecraft</string>
 </resources>
