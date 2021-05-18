@@ -41,7 +41,7 @@ public class PojavProfile
                 acc.clientToken = "0";
             }
             if (acc.profileId == null) {
-                acc.profileId = "0";
+                acc.profileId = "00000000-0000-0000-0000-000000000000";
             }
             if (acc.username == null) {
                 acc.username = "0";

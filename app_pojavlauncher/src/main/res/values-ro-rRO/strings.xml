@@ -42,6 +42,8 @@
     <string name="mcl_tab_console">Consolă developer</string>
     <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Conectat</string>
+    <string name="mcl_account_offline">Deconectat</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
     <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
@@ -60,8 +62,16 @@
     <string name="mcl_setting_subtitle_freeform">Deschide Minecraft-ul în modul de fereastră plutitoare. Necesită Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ascunde Bara Laterală</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Oamenii nostalgici care preferă vechiul v1 UI ar putea să îi placă aceasta. Îți dă mai multă impresie fullscreen.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoră notița</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoră notița și extinde ecranul sub ea.\nÎți oferă o experiență mai imersivă.</string>
+    <string name="mcl_setting_title_resolution_scaler">Scalator de rezolutie</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite descreșterea rezoluției jocului. 100% este o rezoluție completă</string>
     <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratează butonul înapoi ca butonul click dreapta</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Unele dispozitive trateaza butonul click dreapta al mouse-ului extern ca butonul înapoi. Dacă folosiți mouse-ul extern, ar trebui să activați acest lucru.</string>
+    <string name="mcl_setting_title_flat_button_style">Stil buton plat</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Activează acest lucru pentru a schimba stilul butonului de control în plat.</string>
     <string name="mcl_setting_title_buttonscale">Redimensionare butoane de control</string>
     <string name="mcl_setting_subtitle_buttonscale">Fă mai mare dacă butoanele sunt prea mici.</string>
     <string name="mcl_setting_title_mousescale">Redimensionarea mouse-ului</string>
@@ -95,12 +105,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -138,9 +143,12 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Editează %s</string>
-    <string name="customctrl_remove">Șterge %s?</string>
+    <string name="customctrl_remove">Ștergi %s?</string>
     <string name="customctrl_keyname">Cod cheie</string>
     <string name="customctrl_toggle">Comutabil</string>
+    <string name="customctrl_size">Dimensiune</string>
+    <string name="customctrl_size_width">Lățime</string>
+    <string name="customctrl_size_height">Înălţime</string>
     <string name="customctrl_dynamicpos">Poziție dinamică</string>
     <string name="customctrl_dynamicpos_x">Dinamica X</string>
     <string name="customctrl_dynamicpos_y">Dinamica Y</string>
@@ -163,4 +171,15 @@
     <string name="auto_ram_subtitle">Activează ajustarea automată RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memorie setată la %d MB</string>
+    <string name="mcl_setting_check_libraries">Verifică bibliotecile după descărcare</string>
+    <string name="mcl_setting_check_libraries_subtitle">Această opțiune forțează lansatorul să verifice hash-ul bibliotecii dacă este disponibil. Previne descărcările rupte.</string>
+    <string name="dl_library_sha_fail">Biblioteca %s este deteriorată și va fi redescărcată</string>
+    <string name="dl_library_sha_unknown">Biblioteca %s nu poate fi verificată, trebuie să presupunem că este bună</string>
+    <string name="dl_library_sha_pass">Biblioteca %s este bună și utilizabilă</string>
+    <string name="mcl_disable_gestures">Dezactivează gesturi</string>
+    <string name="mcl_disable_gestures_subtitle">Dezactivează gesturile, cum ar fi tine apasat pentru a sparge blocul, și apasă pentru a pune un bloc.</string>
+    <string name="mcl_setting_title_mousespeed">Viteza mouse-ului</string>
+    <string name="mcl_setting_subtitle_mousespeed">Schimbă viteza mouse-ului de software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Rotund</string>
 </resources>

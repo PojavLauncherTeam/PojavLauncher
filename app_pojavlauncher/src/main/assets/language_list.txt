@@ -9,6 +9,7 @@ values-el-rGR
 values-en-rGB
 values-en-rUS
 values-es-rES
+values-fil-rPH
 values-fi-rFI
 values-fr-rFR
 values-hu-rHU
@@ -18,6 +19,8 @@ values-iw-rIL
 values-ja-rJP
 values-kk-rKZ
 values-ko-rKR
+values-la-rLA
+values-lt-rLT
 values-nl-rNL
 values-no-rNO
 values-pl-rPL
@@ -27,7 +30,9 @@ values-ro-rRO
 values-ru-rRU
 values-sr-rSP
 values-sv-rSE
+values-th-rTH
 values-tr-rTR
+values-tt-rRU
 values-uk-rUA
 values-vi-rVN
 values-zh-rCN

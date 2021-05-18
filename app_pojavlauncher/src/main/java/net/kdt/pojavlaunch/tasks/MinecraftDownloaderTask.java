@@ -39,23 +39,44 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             String minecraftMainJar = Tools.DIR_HOME_VERSION + downVName + ".jar";
             JAssets assets = null;
             try {
-                String verJsonDir = Tools.DIR_HOME_VERSION + downVName + ".json";
+                File verJsonDir = new File(Tools.DIR_HOME_VERSION + downVName + ".json");
 
                 verInfo = findVersion(p1[0]);
 
-                if (verInfo.url != null && !new File(verJsonDir).exists()) {
-                    publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, p1[0] + ".json"));
-
-                    Tools.downloadFileMonitored(
-                        verInfo.url,
-                        verJsonDir,
-                            new Tools.DownloaderFeedback(){
-                                @Override
-                                public void updateProgress(int curr, int max) {
-                                    publishDownloadProgress(p1[0] + ".json", curr, max);
+                if (verInfo.url != null) {
+                    boolean isManifestGood = true; // assume it is dy default
+                    if(verJsonDir.exists()) {//if the file exists
+                        if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA) {// check if the checker is on
+                            if (verInfo.sha1 != null) {//check if the SHA is available
+                                if (Tools.compareSHA1(verJsonDir, verInfo.sha1)) // check the SHA
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass, p1[0] + ".json")); // and say that SHA was verified
+                                else{
+                                    verJsonDir.delete(); // if it wasn't, delete the old one
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail, p1[0] + ".json")); // put it into log
+                                    isManifestGood = false;  // and mark manifest as bad
                                 }
+                            }else{
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_unknown, p1[0] + ".json")); // say that the sha is unknown, but assume that the manifest is good
                             }
-                    );
+                        }else{
+                            Log.w("Chk","Checker is off");// if the checker is off, manifest will be always good, unless it doesn't exist
+                        }
+                    } else {
+                         isManifestGood = false;
+                    }
+                    if(!isManifestGood) {
+                        publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, p1[0] + ".json"));
+                        Tools.downloadFileMonitored(
+                                verInfo.url,
+                                verJsonDir.getAbsolutePath(),
+                                new Tools.DownloaderFeedback() {
+                                    @Override
+                                    public void updateProgress(int curr, int max) {
+                                        publishDownloadProgress(p1[0] + ".json", curr, max);
+                                    }
+                                }
+                        );
+                    }
                 }
 
                 verInfo = Tools.getVersionInfo(mActivity,p1[0]);
@@ -66,7 +87,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
 
                 File outLib;
-                String libPathURL;
+
 
                 setMax(verInfo.libraries.length);
                 zeroProgress();
@@ -85,37 +106,18 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         outLib.getParentFile().mkdirs();
 
                         if (!outLib.exists()) {
-                            publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, libItem.name));
-
-                            boolean skipIfFailed = false;
-
-                            if (libItem.downloads == null || libItem.downloads.artifact == null) {
-                                System.out.println("UnkLib:"+libArtifact);
-                                MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
-                                artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url.replace("http://","https://")) + libArtifact;
-                                libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
-
-                                skipIfFailed = true;
-                            }
-                            try {
-                                libPathURL = libItem.downloads.artifact.url;
-                                Tools.downloadFileMonitored(
-                                    libPathURL,
-                                    outLib.getAbsolutePath(),
-                                        new Tools.DownloaderFeedback() {
-                                            @Override
-                                            public void updateProgress(int curr, int max) {
-                                                publishDownloadProgress(libItem.name, curr, max);
-                                            }
-                                        }
-                                );
-                            } catch (Throwable th) {
-                                if (!skipIfFailed) {
-                                    throw th;
-                                } else {
-                                    th.printStackTrace();
-                                    publishProgress("0", th.getMessage());
+                            downloadLibrary(libItem,libArtifact,outLib);
+                        }else{
+                            if(libItem.downloads != null && libItem.downloads.artifact != null && libItem.downloads.artifact.sha1 != null && !libItem.downloads.artifact.sha1.isEmpty()) {
+                                if(!Tools.compareSHA1(outLib,libItem.downloads.artifact.sha1)) {
+                                    outLib.delete();
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,libItem.name));
+                                    downloadLibrary(libItem,libArtifact,outLib);
+                                }else{
+                                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,libItem.name));
                                 }
+                            }else{
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_unknown,libItem.name));
                             }
                         }
                     }
@@ -203,7 +205,54 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
     public void zeroProgress() {
         addProgress = 0;
     }
+    protected void downloadLibrary(DependentLibrary libItem,String libArtifact,File outLib) throws Throwable{
+        publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, libItem.name));
+        String libPathURL;
+        boolean skipIfFailed = false;
 
+        if (libItem.downloads == null || libItem.downloads.artifact == null) {
+            System.out.println("UnkLib:"+libArtifact);
+            MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
+            artifact.url = (libItem.url == null ? "https://libraries.minecraft.net/" : libItem.url.replace("http://","https://")) + libArtifact;
+            libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
+
+            skipIfFailed = true;
+        }
+        try {
+            libPathURL = libItem.downloads.artifact.url;
+            boolean isFileGood = false;
+            byte timesChecked=0;
+            while(!isFileGood) {
+                timesChecked++;
+                if(timesChecked > 5) throw new RuntimeException("Library download failed after 5 retries");
+                Tools.downloadFileMonitored(
+                        libPathURL,
+                        outLib.getAbsolutePath(),
+                        new Tools.DownloaderFeedback() {
+                            @Override
+                            public void updateProgress(int curr, int max) {
+                                publishDownloadProgress(libItem.name, curr, max);
+                            }
+                        }
+                );
+                if(libItem.downloads.artifact.sha1 != null) {
+                    isFileGood = LauncherPreferences.PREF_CHECK_LIBRARY_SHA ? Tools.compareSHA1(outLib,libItem.downloads.artifact.sha1) : true;
+                    if(!isFileGood) publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,libItem.name));
+                    else publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,libItem.name));
+                }else{
+                    publishProgress("0", mActivity.getString(R.string.dl_library_sha_unknown,libItem.name));
+                    isFileGood = true;
+                }
+            }
+        } catch (Throwable th) {
+            if (!skipIfFailed) {
+                throw th;
+            } else {
+                th.printStackTrace();
+                publishProgress("0", th.getMessage());
+            }
+        }
+    }
     public void setMax(final int value)
     {
         mActivity.mLaunchProgress.post(new Runnable(){

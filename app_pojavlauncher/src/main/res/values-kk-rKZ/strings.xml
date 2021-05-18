@@ -16,6 +16,8 @@
     <string name="login_error_exist_username">Бұл ат бос емес</string>
     <string name="login_microsoft">Microsoft-пен кіру</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
+    <string name="login_title_no_saved_account">Тіркелгі табылмады!</string>
+    <string name="login_dialog_no_saved_account">Сақталған тіркелгіңіз жоқ.\n<b>\"Мені кірген күйде қалдыру\"</b> функциясын қолданып, кірген күйде қала беріңіз.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Мәзірді ашу үшін экранды оңнан солға сипаңыз ◀\nБаптау (өңдеу, көлем өзгерту я жою) үшін батырманы басып ұстаңыз."</string>
     <!-- Warnings -->
@@ -60,8 +62,11 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
     <string name="mcl_setting_title_hide_sidebar">Бүйір пәнелін жасыру</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы адамдарға бұл ескі v1 интерфейсі ұнауы керек. Көбірек толық экран тәжірибесін береді.</string>
+    <string name="mcl_setting_title_resolution_scaler">Өлшем масштабтау</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Ойын өлшемін азайтуға мүмкіндік береді. 100% деген толық өлшем</string>
     <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
+    <string name="mcl_setting_title_flat_button_style">Тегіс батырма стилі</string>
     <string name="mcl_setting_title_buttonscale">Батырма масштабы</string>
     <string name="mcl_setting_subtitle_buttonscale">Батырма тым кішкентай болса, үлкейтіңіз.</string>
     <string name="mcl_setting_title_mousescale">Меңзер масштабы</string>
@@ -70,6 +75,7 @@
     <string name="mcl_setting_subtitle_javaargs">Абайлаңыз, мұны түсінбей баптасаңыз, ойын іркілуі мүмкін.</string>
     <string name="mcl_setting_category_general">Негізгі баптамалар</string>
     <string name="mcl_setting_category_scaling">Масштаб</string>
+    <string name="mcl_setting_category_renderer">Рендерер</string>
     <string name="mcl_setting_category_veroption">Нұсқа тізімінде көрсетілетін нұсқа түрлері</string>
     <string name="mcl_setting_veroption_release">Релиз</string>
     <string name="mcl_setting_veroption_snapshot">Снапшот</string>
@@ -95,12 +101,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -146,7 +147,10 @@
     <string name="customctrl_edit">%s өңделуде</string>
     <string name="customctrl_remove">%s алып тастайсыз ба?</string>
     <string name="customctrl_keyname">Перне коды</string>
-    <string name="customctrl_toggle">Ауыстырғыш</string>
+    <string name="customctrl_toggle">Ауысқыш</string>
+    <string name="customctrl_size">Өлшемі</string>
+    <string name="customctrl_size_width">Ені</string>
+    <string name="customctrl_size_height">Биіктік</string>
     <string name="customctrl_dynamicpos">Динамикалық позиция</string>
     <string name="customctrl_dynamicpos_x">Динамикалық X</string>
     <string name="customctrl_dynamicpos_y">Динамикалық Y</string>
@@ -169,4 +173,5 @@
     <string name="auto_ram_subtitle">Автоматты түрде ОЕСҚ-ны басқарады</string>
     <string name="auto_ram_title">Авто ОЕСҚ</string>
     <string name="autoram_info_msg">%d МБ жад берілді</string>
+    <string name="mcl_setting_title_mousespeed">Тінтуір жылдамдығы</string>
 </resources>

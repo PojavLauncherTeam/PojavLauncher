@@ -7,8 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email or username</string>
-    <string name="login_online_password_hint">Password</string>
+    <string name="login_online_username_hint">이메일 또는 유저명</string>
+    <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
@@ -17,6 +17,7 @@
     <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
     <string name="login_title_no_saved_account">계정을 찾을 수 없습니다.</string>
+    <string name="login_dialog_no_saved_account">저장된 계정이 없습니다.\n <b>\"로그인 상태 유지\"</b> 옵션은 첫 로그인시 계정을 저장합니다.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"오른쪽에서 왼쪽으로 스와이프 하여 메뉴를 여세요. ◀\n 버튼을 눌러 수정,  크기 조절,  삭제를 할 수 있습니다."</string>
     <!-- Warnings -->
@@ -61,8 +62,16 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다. Android 7.0 이상을 요구합니다.</string>
     <string name="mcl_setting_title_hide_sidebar">사이드바 숨기기</string>
     <string name="mcl_setting_subtitle_hide_sidebar">과거 v1 UI를 선호하는 사람을 위한 설정입니다.</string>
+    <string name="mcl_setting_title_ignore_notch">노치 무시하기</string>
+    <string name="mcl_setting_subtitle_ignore_notch">노치를 무시하여 넓은 화면으로 플레이할 수 있습니다</string>
+    <string name="mcl_setting_title_resolution_scaler">해상도 비율</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">최대 해상도 100% 이하로 게임 해상도를 낮출 수 있습니다.</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">블럭 파괴와 아이템 던지기를 위한 길게 누르기 시간 변경</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">블록 파괴와 아이템 던지기를 위한 길게 누르기 시간 변경</string>
+    <string name="mcl_setting_title_backtorightmouse">뒤로가기 버튼을 우클릭으로 다루기</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">몇몇 기기들은 외장 마우스 우클릭을 뒤로 가기 버튼으로 이용합니다. 외장 마우스를 이용하시면 활성화해주세요.</string>
+    <string name="mcl_setting_title_flat_button_style">플랫 버튼 스타일</string>
+    <string name="mcl_setting_subtitle_flat_button_style">컨트롤 버튼을 플랫 스타일로 변경</string>
     <string name="mcl_setting_title_buttonscale">컨트롤 버튼 크기</string>
     <string name="mcl_setting_subtitle_buttonscale">버튼이 너무 작다면 크기를 키우세요.</string>
     <string name="mcl_setting_title_mousescale">마우스 크기</string>
@@ -71,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">조심하세요, 정보 없이 수정하면 게임 충돌이 발생할 수 있습니다.</string>
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
+    <string name="mcl_setting_category_renderer">렌더러</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -96,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -148,6 +153,9 @@
     <string name="customctrl_remove">%s(을)를 제거하시겠습니까?</string>
     <string name="customctrl_keyname">키</string>
     <string name="customctrl_toggle">토글</string>
+    <string name="customctrl_size">크기</string>
+    <string name="customctrl_size_width">너비</string>
+    <string name="customctrl_size_height">높이</string>
     <string name="customctrl_dynamicpos">동적 위치</string>
     <string name="customctrl_dynamicpos_x">동적 X 값</string>
     <string name="customctrl_dynamicpos_y">동적 Y 값</string>
@@ -170,4 +178,15 @@
     <string name="auto_ram_subtitle">자동 램 할당 활성화하기</string>
     <string name="auto_ram_title">자동 램 할당</string>
     <string name="autoram_info_msg">메모리가 %dMB 할당되었습니다.</string>
+    <string name="mcl_setting_check_libraries">다운로드 후 라이브러리 확인</string>
+    <string name="mcl_setting_check_libraries_subtitle">이 옵션은 라이브러리 해시를 강제로 확인합니다. 잘못된 다운로드를 막을 수 있습니다.</string>
+    <string name="dl_library_sha_fail">%s 라이브러리를 재다운로드합니다</string>
+    <string name="dl_library_sha_unknown">%s 라이브러리를 확인할 수 없습니다.</string>
+    <string name="dl_library_sha_pass">%s 라이브러리를 이용할 수 있습니다.</string>
+    <string name="mcl_disable_gestures">제스쳐 비활성화</string>
+    <string name="mcl_disable_gestures_subtitle">탭하여 블록 설치, 길게 눌러 블록 파괴와 같은 제스쳐를 비활성화 합니다</string>
+    <string name="mcl_setting_title_mousespeed">마우스 속도</string>
+    <string name="mcl_setting_subtitle_mousespeed">소프트웨어 마우스 속도 변경</string>
+    <string name="customctrl_passthru">마우스 패스스루</string>
+    <string name="customctrl_rounded">둥글게</string>
 </resources>

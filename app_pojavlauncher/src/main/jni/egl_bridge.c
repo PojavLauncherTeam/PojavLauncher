@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 #include <EGL/egl.h>
 
@@ -61,12 +62,9 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIEnv* env, jclass clazz) {
-    return eglGetCurrentContext();
+    return (jlong) eglGetCurrentContext();
 }
-static const EGLint ctx_attribs[] = {
-        EGL_CONTEXT_CLIENT_VERSION, 2,
-        EGL_NONE
-};
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
     if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
         potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -80,7 +78,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     // printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
     if (!eglInitialize(potatoBridge.eglDisplay, NULL, NULL)) {
-        printf("EGLBridge: Error eglInitialize() failed\n");
+        printf("EGLBridge: Error eglInitialize() failed: %s\n", eglGetError());
         return JNI_FALSE;
     }
 
@@ -99,7 +97,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     EGLint vid;
 
     if (!eglChooseConfig(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
-        printf("EGLBridge: Error couldn't get an EGL visual config\n");
+        printf("EGLBridge: Error couldn't get an EGL visual config: %s\n", eglGetError());
         return JNI_FALSE;
     }
 
@@ -107,7 +105,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     assert(num_configs > 0);
 
     if (!eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
-        printf("EGLBridge: Error eglGetConfigAttrib() failed\n");
+        printf("EGLBridge: Error eglGetConfigAttrib() failed: %s\n", eglGetError());
         return JNI_FALSE;
     }
 
@@ -143,47 +141,75 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
 
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
-
-    if (window != 0x1) {
-        printf("Making current on window %p\n", window);
-    EGLBoolean success = eglMakeCurrent(
+    EGLContext *currCtx = eglGetCurrentContext();
+    printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
+    if (currCtx == NULL || window == 0) {
+        /*if (window != 0x0 && potatoBridge.eglContextOld != NULL && potatoBridge.eglContextOld != (void *) window) {
+            // Create new pbuffer per thread
+            // TODO get window size for 2nd+ window!
+            int surfaceWidth, surfaceHeight;
+            eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_WIDTH, &surfaceWidth);
+            eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_HEIGHT, &surfaceHeight);
+            int surfaceAttr[] = {
+                EGL_WIDTH, surfaceWidth,
+                EGL_HEIGHT, surfaceHeight,
+                EGL_NONE
+            };
+            potatoBridge.eglSurface = eglCreatePbufferSurface(potatoBridge.eglDisplay, config, surfaceAttr);
+            printf("EGLBridge: created pbuffer surface %p for context %p\n", potatoBridge.eglSurface, window);
+        }*/
+        //potatoBridge.eglContextOld = (void *) window;
+        // eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+        printf("EGLBridge: Making current on window %p on thread %d\n", window, gettid());
+        EGLBoolean success = eglMakeCurrent(
             potatoBridge.eglDisplay,
-            potatoBridge.eglSurface,
-            potatoBridge.eglSurface,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
             /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
-    );
-    if (success == EGL_FALSE) {
-        printf("Error: eglMakeCurrent() failed: %p\n", eglGetError());
-    }
+        );
+        if (success == EGL_FALSE) {
+            printf("EGLBridge: Error: eglMakeCurrent() failed: %p\n", eglGetError());
+        } else {
+            printf("EGLBridge: eglMakeCurrent() succeed!\n");
+        }
 
     // Test
 #ifdef GLES_TEST
-    glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
-    printf("First frame error: %p\n", eglGetError());
+        glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+        printf("First frame error: %p\n", eglGetError());
 #endif
 
-    // idk this should convert or just `return success;`...
-    return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
-    }else{
-        (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-        //return JNI_TRUE;
+        // idk this should convert or just `return success;`...
+        return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
+    } else {
+        // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+        return JNI_FALSE;
     }
-    }
+}
 
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass clazz) {
     //Obstruct the context on the current thread
     eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 }
+
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
-    EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay,config,(void*)contextSrc,ctx_attribs);
-    printf("Created CTX pointer = %p\n",ctx);
+    const EGLint ctx_attribs[] = {
+        EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
+        EGL_NONE
+    };
+    EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
+
+    potatoBridge.eglContext = ctx;
+    
+    printf("EGLBridge: Created CTX pointer = %p\n",ctx);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
     return (long)ctx;
 }
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglTerminate(JNIEnv* env, jclass clazz) {
     terminateEgl();
     return JNI_TRUE;
@@ -196,16 +222,16 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *e
     RegalMakeCurrent(potatoBridge.eglContext);
 }
 
-bool stopMakeCurrent;
+bool stopSwapBuffers;
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv *env, jclass clazz) {
-    if (stopMakeCurrent) {
+    if (stopSwapBuffers) {
         return JNI_FALSE;
     }
     
-    jboolean result = (jboolean) eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
+    jboolean result = (jboolean) eglSwapBuffers(potatoBridge.eglDisplay, eglGetCurrentSurface(EGL_DRAW));
     if (!result) {
         if (eglGetError() == EGL_BAD_SURFACE) {
-            stopMakeCurrent = true;
+            stopSwapBuffers = true;
             closeGLFWWindow();
         }
     }
@@ -213,6 +239,6 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv 
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv *env, jclass clazz, jint interval) {
-	  return eglSwapInterval(potatoBridge.eglDisplay, interval);
+    return eglSwapInterval(potatoBridge.eglDisplay, interval);
 }
 

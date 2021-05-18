@@ -7,6 +7,7 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
@@ -27,13 +28,18 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
+        setPadding(4, 4, 4, 4);
         setWillNotDraw(false);
 
         mScaleAt = layout.mLayout.scaledAt;
         
         mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
 
-        setBackgroundResource(R.drawable.control_button);
+        if (!LauncherPreferences.PREF_BUTTON_FLAT) {
+            setBackgroundResource(R.drawable.control_button);
+        } else {
+            setBackgroundResource(R.drawable.control_button_black);
+        }
         setOnLongClickListener(this);
 
         setProperties(properties);
@@ -73,7 +79,11 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             setTranslationX(moveX = properties.x);
             setTranslationY(moveY = properties.y);
         }
-
+        if (!LauncherPreferences.PREF_BUTTON_FLAT) {
+            setBackgroundResource(mProperties.isRound ? R.drawable.control_button_round : R.drawable.control_button);
+        } else {
+            setBackgroundResource(mProperties.isRound ? R.drawable.control_button_round_black : R.drawable.control_button_black);
+        }
         if (properties.specialButtonListener == null) {
             // A non-special button or inside custom controls screen so skip listener
         } else if (properties.specialButtonListener instanceof View.OnClickListener) {
@@ -191,6 +201,13 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public boolean onTouchEvent(MotionEvent event) {
         if (!mModifiable) {
             mCanTriggerLongClick = false;
+            if(event.getAction() == MotionEvent.ACTION_MOVE && CallbackBridge.isGrabbing() && mProperties.passThruEnabled) {
+                MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
+                if(v != null) {
+                    v.dispatchTouchEvent(event);
+                    return true;
+                }
+            }
             if (mProperties.keycode >= 0) {
                 if (!mProperties.isToggle) {
                     switch (event.getActionMasked()) {

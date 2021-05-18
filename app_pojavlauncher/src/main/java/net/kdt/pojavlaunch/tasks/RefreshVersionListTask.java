@@ -1,7 +1,11 @@
 package net.kdt.pojavlaunch.tasks;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.*;
 import androidx.appcompat.widget.*;
+
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
@@ -11,6 +15,7 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
+import net.kdt.pojavlaunch.value.PerVersionConfig;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 import net.kdt.pojavlaunch.value.launcherprofiles.VersionProfileAdapter;
@@ -61,7 +66,8 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
             if ((value1.type.equals("release") && LauncherPreferences.PREF_VERTYPE_RELEASE) ||
                 (value1.type.equals("snapshot") && LauncherPreferences.PREF_VERTYPE_SNAPSHOT) ||
                 (value1.type.equals("old_alpha") && LauncherPreferences.PREF_VERTYPE_OLDALPHA) ||
-                (value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA)) {
+                (value1.type.equals("old_beta") && LauncherPreferences.PREF_VERTYPE_OLDBETA) ||
+                (value1.type.equals("modified"))) {
                 output.add(value1.id);
             }
         }

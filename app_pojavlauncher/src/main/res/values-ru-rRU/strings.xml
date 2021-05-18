@@ -11,17 +11,17 @@
     <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_offline_label">Войти как офлайн учетная запись</string>
+    <string name="login_offline_label">Войти как офлайн учётная запись</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_microsoft">Войти через Microsoft</string>
-    <string name="login_select_account">Учетные записи</string>
-    <string name="login_title_no_saved_account">Учетные записи не найдены!</string>
-    <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцию <b>«Запомнить меня»</b>, чтобы сохранить учетную запись при первом входе.</string>
+    <string name="login_select_account">Учётные записи</string>
+    <string name="login_title_no_saved_account">Учётные записи не найдены!</string>
+    <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учётную запись.\nИспользуйте опцию <b>«Запомнить меня»</b>, чтобы сохранить учётную запись при первом входе.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
     <!-- Warnings -->
-    <string name="warning_remove_account">Эта учетная запись будет удалена!</string>
+    <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Выберите установщик мода</string>
@@ -39,7 +39,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Новости лаунчера</string>
-    <string name="mcl_tab_console">Консоль разработки</string>
+    <string name="mcl_tab_console">Консоль разработчика</string>
     <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
@@ -59,19 +59,30 @@
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
-    <string name="mcl_setting_subtitle_freeform">Запустите Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
-    <string name="mcl_setting_title_hide_sidebar">Скрыть боковую панель</string>
+    <string name="mcl_setting_subtitle_freeform">Запускает Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
+    <string name="mcl_setting_title_hide_sidebar">Скрытие боковой панели</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
+    <string name="mcl_setting_title_ignore_notch">Игнорирование выреза под фронтальную камеру</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Игнорирует вырез под фронтальную камеру и расширяет экран под неё.\nДает большее погружение в игру.</string>
+    <string name="mcl_setting_title_resolution_scaler">Уменьшение разрешения</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Позволяет уменьшить разрешение игры. Максимальное разрешение: 100%</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгого нажатия</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Изменить длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Изменяет длительность долгого нажатия для ломания блоков и выбрасывания предметов.</string>
+    <string name="mcl_setting_title_backtorightmouse">Считывание кнопки назад как правую кнопку мыши</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Некоторые устройства считают правую кнопку внешней мыши как кнопку назад. Если вы используете внешнюю мышь, рекомендуется включить эту функцию.</string>
+    <string name="mcl_setting_title_flat_button_style">Плоский стиль кнопок</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцию, чтобы изменить стиль кнопок управления на плоский.</string>
     <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
     <string name="mcl_setting_subtitle_mousescale">Изменяет размер курсора мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если она будет модифицирована без знаний.</string>
+    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если изменить их без особых знаний.</string>
     <string name="mcl_setting_category_general">Общие настройки</string>
-    <string name="mcl_setting_category_scaling">Масштабирование</string>
+    <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
+    <string name="mcl_setting_category_renderer">Рендерер</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
@@ -97,12 +108,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -140,7 +146,7 @@
     <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
-    <string name="control_customkey">Отправить пользовательскую раскладку</string>
+    <string name="control_customkey">Отправить пользовательский код клавиши</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -149,6 +155,9 @@
     <string name="customctrl_remove">Удалить «%s»?</string>
     <string name="customctrl_keyname">Код клавиши</string>
     <string name="customctrl_toggle">Переключаемый</string>
+    <string name="customctrl_size">Размер</string>
+    <string name="customctrl_size_width">Ширина</string>
+    <string name="customctrl_size_height">Высота</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
@@ -171,6 +180,20 @@
     <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
     <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
     <string name="autoram_info_msg">Выделено %d Мбайт ОЗУ</string>
+    <string name="mcl_setting_check_libraries">Проверка библиотек после загрузки</string>
+    <string name="mcl_setting_check_libraries_subtitle">Эта опция принуждает лаунчер проверять хеш библиотеки, если он доступен. Предотвращает использование поврежденных библиотек.</string>
+    <string name="dl_library_sha_fail">Библиотека %s повреждена и будет загружена повторно</string>
+    <string name="dl_library_sha_unknown">Библиотека %s не может быть проверена; придется предположить, что с ней все хорошо</string>
+    <string name="dl_library_sha_pass">Библиотека %s проверена и может быть использована</string>
+    <string name="mcl_disable_gestures">Отключение жестов</string>
+    <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
+    <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
+    <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
+    <string name="customctrl_passthru">Указатель мышки</string>
+    <string name="customctrl_rounded">Скруглённые</string>
+    <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
+    <string name="mcl_memory_allocation">Выделение памяти</string>
+    <string name="mcl_memory_allocation_subtitle">Управляет тем, сколько памяти выделится для Minecraft</string>
     <string name="vp_latest_snapshot">Последний снапшот</string>
     <string name="vp_latest_release">Последний релиз</string>
     <string name="mcl_tab_profiles">Профили</string>

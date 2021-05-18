@@ -59,4 +59,8 @@ public final class SharedDrawable extends DrawableGL {
         // throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void makeCurrent() throws LWJGLException {
+        //stub
+    }
 }

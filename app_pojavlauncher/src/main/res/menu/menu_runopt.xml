@@ -12,4 +12,10 @@
     <item
         android:id="@+id/nav_customkey"
         android:title="@string/control_customkey" />
+    <item
+        android:id="@+id/nav_mousespd"
+        android:title="@string/mcl_setting_title_mousespeed" />
+    <item
+        android:id="@+id/nav_customctrl"
+        android:title="@string/mcl_option_customcontrol" />
 </menu>

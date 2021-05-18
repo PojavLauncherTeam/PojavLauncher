@@ -153,6 +153,8 @@ public class AndroidLWJGLKeycode {
         // androidToLwjglMap.put(KeyEvent.KEYCODE_YEN, LWJGLGLFWKeycode.GLFW_KEY_YEN);
         
         // androidToLwjglMap.put(KeyEvent.KEYCODE_BUTTON_1, LWJGLGLFWKeycode.G
+        androidToLwjglMap.put(KeyEvent.KEYCODE_AT,LWJGLGLFWKeycode.GLFW_KEY_2);
+        androidToLwjglMap.put(KeyEvent.KEYCODE_POUND,LWJGLGLFWKeycode.GLFW_KEY_3);
     }
     
     public static String[] generateKeyName() {
@@ -174,15 +176,23 @@ public class AndroidLWJGLKeycode {
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
         try {
-                //System.out.println(((int)keyEvent.getDisplayLabel()) + " " +keyEvent.getDisplayLabel());
+                System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
             if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK && LauncherPreferences.PREF_BACK_TO_RIGHT_MOUSE) {
                 BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, keyEvent.getAction() == KeyEvent.ACTION_DOWN);
             } else {
                 if(keyEvent.getUnicodeChar() != 0) {
                     char key = (char)keyEvent.getUnicodeChar();
-                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),key,0,CallbackBridge.getCurrentMods(),keyEvent.getAction() == KeyEvent.ACTION_DOWN);
+                     BaseMainActivity.sendKeyPress(
+                             androidToLwjglMap.get(keyEvent.getKeyCode()),
+                             key,
+                             0,
+                             CallbackBridge.getCurrentMods(),
+                             keyEvent.getAction() == KeyEvent.ACTION_DOWN);
                 }else{
-                     BaseMainActivity.sendKeyPress(androidToLwjglMap.get(keyEvent.getKeyCode()),CallbackBridge.getCurrentMods(),keyEvent.getAction()==KeyEvent.ACTION_DOWN);
+                     BaseMainActivity.sendKeyPress(
+                             androidToLwjglMap.get(keyEvent.getKeyCode()),
+                             CallbackBridge.getCurrentMods(),
+                             keyEvent.getAction()==KeyEvent.ACTION_DOWN);
                 }
             }
         } catch (Throwable th) {

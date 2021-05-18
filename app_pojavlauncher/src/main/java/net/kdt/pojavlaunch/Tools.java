@@ -13,6 +13,8 @@ import java.lang.reflect.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.zip.*;
 import net.kdt.pojavlaunch.prefs.*;
@@ -83,7 +85,7 @@ public final class Tools
             ctx.appendlnToLog("AWT-enabled version detected! ("+mcReleaseDate+")");
             getCacioJavaArgs(javaArgList,false);
         }else{
-            getCacioJavaArgs(javaArgList,true);
+            getCacioJavaArgs(javaArgList,false); // true
             ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
         
@@ -139,7 +141,7 @@ public final class Tools
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
        
-        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl04es.so");
+        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_114.so");
         // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
         
         // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
@@ -761,20 +763,40 @@ public final class Tools
         public abstract void updateProgress(int curr, int max);
     }
     public static void downloadFileMonitored(String urlInput,String nameOutput, DownloaderFeedback monitor) throws IOException {
-        if(!new File(nameOutput).exists()){
-            new File(nameOutput).getParentFile().mkdirs();
+        File nameOutputFile = new File(nameOutput);
+        if (!nameOutputFile.exists()) {
+            nameOutputFile.getParentFile().mkdirs();
         }
         HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
         InputStream readStr = conn.getInputStream();
-        FileOutputStream fos = new FileOutputStream(new File(nameOutput));
-        int cur = 0; int oval=0; int len = conn.getContentLength(); byte[] buf = new byte[65535];
-        while((cur = readStr.read(buf)) != -1) {
+        FileOutputStream fos = new FileOutputStream(nameOutputFile);
+        int cur = 0;
+        int oval = 0;
+        int len = conn.getContentLength();
+        byte[] buf = new byte[65535];
+        while ((cur = readStr.read(buf)) != -1) {
             oval += cur;
-            fos.write(buf,0,cur);
-            monitor.updateProgress(oval,len);
+            fos.write(buf, 0, cur);
+            monitor.updateProgress(oval, len);
         }
         fos.close();
         conn.disconnect();
+    }
+    public static boolean compareSHA1(File f, String sourceSHA) {
+        try {
+            String sha1_dst;
+            try (InputStream is = new FileInputStream(f)) {
+                 sha1_dst = new String(Hex.encodeHex(org.apache.commons.codec.digest.DigestUtils.sha1(is)));
+            }
+            if(sha1_dst != null && sourceSHA != null) {
+                return sha1_dst.equalsIgnoreCase(sourceSHA);
+            } else{
+                return true; // fake match
+            }
+        }catch (IOException e) {
+            Log.i("SHA1","Fake-matching a hash due to a read error",e);
+            return true;
+        }
     }
     public static class ZipTool
     {
