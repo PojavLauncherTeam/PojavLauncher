@@ -103,12 +103,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -180,14 +175,8 @@
     <string name="auto_ram_subtitle">Вмикає автоматичне регулювання оперативної пам\'яті</string>
     <string name="auto_ram_title">Авто ОЗУ</string>
     <string name="autoram_info_msg">Пам\'ять встановлено на %d МБ</string>
-    <string name="vp_latest_snapshot">Останній снапшот</string>
-    <string name="vp_latest_release">Останній Реліз</string>
-    <string name="mcl_tab_profiles">Профілі</string>
-    <string name="mcl_profile_editor_title_profile">ПРОФІЛІ</string>
-    <string name="mcl_profile_editor_title_version">ВЕРСІЇ</string>
-    <string name="mcl_profile_editor_edit_text_title">Ім\'я профілю</string>
-    <string name="mcl_profile_editor_save">зберегти</string>
-    <string name="profedit_selected_version">Обрана версія: %s</string>
-    <string name="profedit_selected_profile">Вибраний профіль: %s</string>
-    <string name="global_new">Нове</string>
+    <string name="mcl_setting_check_libraries">Перевірити бібліотеки після завантаження</string>
+    <string name="dl_library_sha_fail">Бібліотека %s пошкоджена та буде перезавантаженаf</string>
+    <string name="mcl_disable_gestures">Вимкнути жести</string>
+    <string name="mcl_setting_title_mousespeed">Швидкість Миші</string>
 </resources>
