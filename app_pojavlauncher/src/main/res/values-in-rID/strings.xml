@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_backtorightmouse">Perlakukan tombol kembali sebagai mouse kanan</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Beberapa perangkat memperlakukan mouse kanan external sebagai tombol kembali. Jika anda memakai mouse external, anda sebaiknya menyalakan ini.</string>
+    <string name="mcl_setting_title_flat_button_style">Gaya tombol flat</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Aktifkan ini untuk mengganti gaya tombol kontrol ke flat.</string>
     <string name="mcl_setting_title_buttonscale">Skala tombol kontrol</string>
     <string name="mcl_setting_subtitle_buttonscale">Tingkatkan skala jika tombol terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Penskalaan mouse</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Hati-hati, ini bisa meng-crash permainan jika di-ubah tanpa pengetahuan.</string>
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -147,6 +145,8 @@
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Kirim keycode kustom</string>
+    <string name="control_scaleup">Besarkan skala</string>
+    <string name="control_scaledown">Kecilkan skala</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -180,14 +180,18 @@
     <string name="auto_ram_subtitle">Menyalakan pengatur RAM otomatis</string>
     <string name="auto_ram_title">RAM otomatis</string>
     <string name="autoram_info_msg">Memori disetel ke %d MB</string>
-    <string name="vp_latest_snapshot">Snapshot terbaru</string>
-    <string name="vp_latest_release">Release terbaru</string>
-    <string name="mcl_tab_profiles">Profil</string>
-    <string name="mcl_profile_editor_title_profile">PROFIL</string>
-    <string name="mcl_profile_editor_title_version">VERSI</string>
-    <string name="mcl_profile_editor_edit_text_title">Nama profil</string>
-    <string name="mcl_profile_editor_save">simpan</string>
-    <string name="profedit_selected_version">Versi dipilih: %s</string>
-    <string name="profedit_selected_profile">Profil dipilih: %s</string>
-    <string name="global_new">Baru</string>
+    <string name="mcl_setting_check_libraries">Periksa library setelah mengunduh</string>
+    <string name="mcl_setting_check_libraries_subtitle">Opsi ini memaksa launcher untuk memeriksa hash library jika ada. Mencegah download rusak.</string>
+    <string name="dl_library_sha_fail">Library %s rusak dan akan di-unduh ulang</string>
+    <string name="dl_library_sha_unknown">Library %s tidak bisa diperiksa, harus meng-asumsi bahwa baik-baik saja</string>
+    <string name="dl_library_sha_pass">Library %s baik-baik saja dan dapat digunakan</string>
+    <string name="mcl_disable_gestures">Matikan gestures</string>
+    <string name="mcl_disable_gestures_subtitle">Mematikan gestures, seperti pencet lama untuk menghancurkan block, dan pencet untuk menempatkan block.</string>
+    <string name="mcl_setting_title_mousespeed">Kecepatan Mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Mengubah kecepatan perangkat lunak mouse</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Melengkung</string>
+    <string name="memory_warning_msg">Alokasi ram bebas sekarang (%d) kurang dari ram yang di-alokasi (%d), ini bisa menyebabkan kecelakaan. Ubah alokasinya jika gamenya kecelakaan.</string>
+    <string name="mcl_memory_allocation">Alokasi Memori</string>
+    <string name="mcl_memory_allocation_subtitle">Mengkontrol berapa banyak memori yang diberikan ke Minecraft</string>
 </resources>
