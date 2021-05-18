@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Pakeisti veikimo laiką po palaikymo panaikinti ir išmesti daiktą.</string>
     <string name="mcl_setting_title_backtorightmouse">Laikyti atgal mygtuką kaip dešinįjį pelės mygtuką</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Kai kurie įrenginiai laiko išorinės pelės dešinįjį mygtuką kaip atgal mygtuką. Jei naudojate išorinę pelę, jūs tūretūmėtė įjungti šį nustatymą.</string>
+    <string name="mcl_setting_title_flat_button_style">Plokščias Mygtukų Stilius</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Įjungti, kad pakeisti kontrolių stilių į plokščią.</string>
     <string name="mcl_setting_title_buttonscale">Kontroliuoti mygtukų dydį</string>
     <string name="mcl_setting_subtitle_buttonscale">Padidinkite jei mygtukai per maži.</string>
     <string name="mcl_setting_title_mousescale">Pelės dydis</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Būkite atsargūs, tai gali paveikti žaidimą jei modifikuota be išmonės.</string>
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
+    <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
     <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">Žurnalo įrašai</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Siųsti mygtuko kodą</string>
+    <string name="control_scaleup">Padidinti</string>
+    <string name="control_scaledown">Sumažinti</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -174,14 +174,18 @@
     <string name="auto_ram_subtitle">Įjungia automatišką RAM keitėją</string>
     <string name="auto_ram_title">Automatiškas RAM</string>
     <string name="autoram_info_msg">Atmintis pakeista į %d MB</string>
-    <string name="vp_latest_snapshot">Naujausias Snapshotas</string>
-    <string name="vp_latest_release">Naujausias Leidinys</string>
-    <string name="mcl_tab_profiles">Profiliai</string>
-    <string name="mcl_profile_editor_title_profile">PROFILIAI</string>
-    <string name="mcl_profile_editor_title_version">VERSIJOS</string>
-    <string name="mcl_profile_editor_edit_text_title">Profilio vardas</string>
-    <string name="mcl_profile_editor_save">išsaugoti</string>
-    <string name="profedit_selected_version">Pasirinkta versija: %s</string>
-    <string name="profedit_selected_profile">Pasirinktas profilis: %s</string>
-    <string name="global_new">Nauja</string>
+    <string name="mcl_setting_check_libraries">Patikrinti depozitoriumo bibliotekas po atsisiuntimo</string>
+    <string name="mcl_setting_check_libraries_subtitle">Šis nustatymas priverčia PojavLauncher patikrintį depozitoriumo bibliotekos hashą jeigu jis pasiekiamas. Neleidžia blogų atsisiuntimų.</string>
+    <string name="dl_library_sha_fail">Depozitoriumo biblioteka %s yra sugedusi ir būs persiųsta</string>
+    <string name="dl_library_sha_unknown">Depozitoriumo biblioteka %s negali būti patikrinta, privaloma tikėti kad ji gera</string>
+    <string name="dl_library_sha_pass">Depozitoriumo biblioteka %s yra gera ir naudojama</string>
+    <string name="mcl_disable_gestures">Išjungti gestus</string>
+    <string name="mcl_disable_gestures_subtitle">Išjungti gestus, kaip prilaikyti, kad griautum bloką, ir paspausti, kad pastatytum bloką.</string>
+    <string name="mcl_setting_title_mousespeed">Pelės Greitis</string>
+    <string name="mcl_setting_subtitle_mousespeed">Pakeičia virtualios pelės greitį</string>
+    <string name="customctrl_passthru">Pelės praileidimas</string>
+    <string name="customctrl_rounded">Suapvalinta</string>
+    <string name="memory_warning_msg">Dabartinis kiekis laisvo RAM (%d) yra mažesnis negu paskirtas RAM (%d), kas gali baigtis išsijungimais. Pakeiskite paskirtą kiekį jeigu išsijungia žaidimas.</string>
+    <string name="mcl_memory_allocation">Atminties skirtstymas</string>
+    <string name="mcl_memory_allocation_subtitle">Kontroliuoja kiek RAM atminties duodama Minecraft</string>
 </resources>
