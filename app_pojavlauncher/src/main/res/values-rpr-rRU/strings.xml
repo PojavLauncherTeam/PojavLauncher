@@ -7,21 +7,21 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email или Имя Пользователя</string>
-    <string name="login_online_password_hint">Пароль</string>
+    <string name="login_online_username_hint">Email или имя пользователя</string>
+    <string name="login_online_password_hint">Ключъ-фраза</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_offline_label">Войти какъ ​офлайнъ​ учетная запись</string>
-    <string name="login_error_short_username">Имя пользователя должно быть не менѣе трехъ ​символовъ​</string>
-    <string name="login_error_exist_username">Это имя пользователя уже существуетъ</string>
+    <string name="login_offline_label">Войти по внѣсѣтевымъ документамъ</string>
+    <string name="login_error_short_username">Имя пользователя должно быть не менѣе трехъ символовъ</string>
+    <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
-    <string name="login_select_account">Учетныя​ записи</string>
+    <string name="login_select_account">Документы</string>
     <string name="login_title_no_saved_account">​Учетныя​ записи не найдены!</string>
     <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцію <b>\"Запомнить меня\"</b>, чтобъ сохранить учетную запись при первомъ входѣ.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налѣво, чтобъ открыть меню ◀\nУдерживайте кнопку для настройки: редактированія, измѣненія размѣра или удаленія."</string>
     <!-- Warnings -->
-    <string name="warning_remove_account">Эта учетная запись будетъ удалена!</string>
+    <string name="warning_remove_account">Сіи документы будутъ удалены!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Выберите ​установщикъ​ модификаціи</string>
@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Измѣнить длительность долгаго нажатія для ломанія блоковъ и выбрасыванія предметовъ.</string>
     <string name="mcl_setting_title_backtorightmouse">Считываніе кнопки назадъ какъ правую кнопку мыши</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Нѣкоторыя устройства считаютъ правую кнопку внѣшней мыши какъ кнопку назадъ. Если вы используете внѣшнюю мышь, рекомендуется включить сію функцію.</string>
+    <string name="mcl_setting_title_flat_button_style">Плоскій стиль кнопокъ</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцію, чтобы измѣнить стиль кнопокъ управленія на плоскій.</string>
     <string name="mcl_setting_title_buttonscale">Масштабированіе кнопокъ</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте ихъ, если ​онѣ слишкомъ малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабированіе курсора</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это можетъ привести къ сбою игры, если редактировать значенія безъ особыхъ знаній.</string>
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
+    <string name="mcl_setting_category_renderer">Рендереръ</string>
     <string name="mcl_setting_category_veroption">Типы версій, которыя будутъ отображаться въ спискѣ версій</string>
     <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
     <string name="mcl_setting_veroption_snapshot">Пробныя версіи</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">Журналъ</string>
     <string name="control_adebug">Отладка ввода</string>
     <string name="control_customkey">Отправить пользовательскій кодъ клавиши</string>
+    <string name="control_scaleup">Увеличить</string>
+    <string name="control_scaledown">Уменьшить</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -171,14 +171,18 @@
     <string name="auto_ram_subtitle">Включаетъ автоматическое управленіе выдѣленной Оперативной Памятью</string>
     <string name="auto_ram_title">Автоматическое выдѣленіе ОЗУ</string>
     <string name="autoram_info_msg">Выдѣлено ​%d Мбайтъ​ Оперативной Памяти</string>
-    <string name="vp_latest_snapshot">Послѣдняя пробная версія</string>
-    <string name="vp_latest_release">Последняя версія</string>
-    <string name="mcl_tab_profiles">Профили</string>
-    <string name="mcl_profile_editor_title_profile">ПРОФИЛИ</string>
-    <string name="mcl_profile_editor_title_version">ВЕРСІИ</string>
-    <string name="mcl_profile_editor_edit_text_title">Названіе профиля</string>
-    <string name="mcl_profile_editor_save">сохранить</string>
-    <string name="profedit_selected_version">Выбранная версія: %s</string>
-    <string name="profedit_selected_profile">Выбранный профиль: %s</string>
-    <string name="global_new">Новый</string>
+    <string name="mcl_setting_check_libraries">Провѣрка библіотекъ послѣ загрузки</string>
+    <string name="mcl_setting_check_libraries_subtitle">Данная опція принуждаетъ ​лаунчеръ​ провѣрять ​хешъ​ библіотеки, если ​таковыя​ доступны. Предотвращаетъ использованіе поврежденныхъ библіотекъ.</string>
+    <string name="dl_library_sha_fail">Библіотека %s повреждена и будетъ загружена повторно</string>
+    <string name="dl_library_sha_unknown">Библіотека %s не можетъ быть провѣрена; смѣю предположить, что она работаетъ корректно</string>
+    <string name="dl_library_sha_pass">Библіотека %s провѣрена. Она полностью функціонируетъ и можетъ быть использована</string>
+    <string name="mcl_disable_gestures">Отключеніе​ жестовъ</string>
+    <string name="mcl_disable_gestures_subtitle">Отключаетъ жесты, такіе какъ удержаніе, чтобы сломать блокъ, и нажатіе, чтобы размѣстить блок.</string>
+    <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
+    <string name="mcl_setting_subtitle_mousespeed">Измѣняетъ чувствительность виртуальной мыши</string>
+    <string name="customctrl_passthru">Указатель мыши</string>
+    <string name="customctrl_rounded">Округленность​ кнопки</string>
+    <string name="memory_warning_msg">Текущій ​объемъ​ свободной оперативной памяти (%d) меньше, ​чѣмъ​ выдѣленная (%d), что можетъ привести къ сбоямъ. Измѣните количество выдѣленной памяти при сбоѣ игры.</string>
+    <string name="mcl_memory_allocation">выдѣленіе памяти</string>
+    <string name="mcl_memory_allocation_subtitle">Управляетъ выдѣленіемъ памяти для Minecraft</string>
 </resources>
