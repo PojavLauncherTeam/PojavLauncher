@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">修改長按摧毀方塊、丟棄物品的觸發時長。</string>
     <string name="mcl_setting_title_backtorightmouse">將返回鍵視爲滑鼠右鍵</string>
     <string name="mcl_setting_subtitle_backtorightmouse">某些設備將外置滑鼠右鍵作爲返回鍵處理。如果您使用外置滑鼠，您應該啓用此功能。</string>
+    <string name="mcl_setting_title_flat_button_style">扁平化風格按鍵</string>
+    <string name="mcl_setting_subtitle_flat_button_style">啓用此選項可以使按鍵風格扁平化</string>
     <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
     <string name="mcl_setting_subtitle_buttonscale">若按鍵太小，將其放大。</string>
     <string name="mcl_setting_title_mousescale">滑鼠縮放</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">注意，非專業人士修改此值可能導致遊戲崩潰。</string>
     <string name="mcl_setting_category_general">常規設定</string>
     <string name="mcl_setting_category_scaling">縮放設定</string>
+    <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">日誌輸出</string>
     <string name="control_adebug">輸入除錯</string>
     <string name="control_customkey">傳送自訂鍵碼</string>
+    <string name="control_scaleup">放大</string>
+    <string name="control_scaledown">縮小</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -174,14 +174,18 @@
     <string name="auto_ram_subtitle">啓用 RAM 自動調節</string>
     <string name="auto_ram_title">自動 RAM</string>
     <string name="autoram_info_msg">内存已設爲 %d MB</string>
-    <string name="vp_latest_snapshot">最新快照</string>
-    <string name="vp_latest_release">最新版本</string>
-    <string name="mcl_tab_profiles">配置</string>
-    <string name="mcl_profile_editor_title_profile">配置</string>
-    <string name="mcl_profile_editor_title_version">版本</string>
-    <string name="mcl_profile_editor_edit_text_title">配置名稱</string>
-    <string name="mcl_profile_editor_save">保存</string>
-    <string name="profedit_selected_version">選中版本：%s</string>
-    <string name="profedit_selected_profile">選中配置：%s</string>
-    <string name="global_new">新建</string>
+    <string name="mcl_setting_check_libraries">在下載后檢查執行庫</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库。防止下载错误。</string>
+    <string name="dl_library_sha_fail">執行庫 %s 已損壞，將被重新下載</string>
+    <string name="dl_library_sha_unknown">無法檢查執行庫 %s ，希望它正常</string>
+    <string name="dl_library_sha_pass">執行庫 %s 正常</string>
+    <string name="mcl_disable_gestures">禁用手勢</string>
+    <string name="mcl_disable_gestures_subtitle">局部手勢，例如長按破壞方塊和點擊放置方塊。</string>
+    <string name="mcl_setting_title_mousespeed">滑鼠速度</string>
+    <string name="mcl_setting_subtitle_mousespeed">更改虛擬滑鼠的速度</string>
+    <string name="customctrl_passthru">滑鼠透傳</string>
+    <string name="customctrl_rounded">圓角</string>
+    <string name="memory_warning_msg">當前可用運存 (%d) 低於分配的運存 (%d)，這可能導致崩潰。 如果遊戲崩潰請更改配置。</string>
+    <string name="mcl_memory_allocation">運存分配</string>
+    <string name="mcl_memory_allocation_subtitle">控制給 Minecraft 分配多少運存</string>
 </resources>
