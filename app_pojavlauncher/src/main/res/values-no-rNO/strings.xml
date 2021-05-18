@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Endre utløsertid for langt trykk i ødelegge blokk og slipp-gjenstand.</string>
     <string name="mcl_setting_title_backtorightmouse">Behadle tilbake-knappen som RMB</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Noen enheter behandler ytre høyre mus som tilbakeknapp. Hvis du bruker en ekstern mus, bør du aktivere dette.</string>
+    <string name="mcl_setting_title_flat_button_style">Flat knapp-stil</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Aktiver dette for å endre kontroll-stilen till flat.</string>
     <string name="mcl_setting_title_buttonscale">Krontrollknapper skalering</string>
     <string name="mcl_setting_subtitle_buttonscale">Oppskalere dem hvis knappene er for små.</string>
     <string name="mcl_setting_title_mousescale">Mus skalering</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Vær forsiktig, dette kan gjøre spillet krasj dersom det endres uten kunnskap.</string>
     <string name="mcl_setting_category_general">Generelle innstillinger</string>
     <string name="mcl_setting_category_scaling">Innstillinger for skalering</string>
+    <string name="mcl_setting_category_renderer">Gjengir</string>
     <string name="mcl_setting_category_veroption">Versjonstype vil være i versjonslisten</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">Logg utdata</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send tilpasset kode</string>
+    <string name="control_scaleup">Skaler opp</string>
+    <string name="control_scaledown">Skalere ned</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -171,14 +171,18 @@
     <string name="auto_ram_subtitle">Aktiverer automatisk RAM-justering</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Minne satt til %d MB</string>
-    <string name="vp_latest_snapshot">Senest Snapshot</string>
-    <string name="vp_latest_release">Senest Versjon</string>
-    <string name="mcl_tab_profiles">Kontoer</string>
-    <string name="mcl_profile_editor_title_profile">KONTOER</string>
-    <string name="mcl_profile_editor_title_version">VERSJONER</string>
-    <string name="mcl_profile_editor_edit_text_title">Profilnavn</string>
-    <string name="mcl_profile_editor_save">lagre</string>
-    <string name="profedit_selected_version">Valgt versjon: %s</string>
-    <string name="profedit_selected_profile">Valgt konto: %s</string>
-    <string name="global_new">Ny</string>
+    <string name="mcl_setting_check_libraries">Sjekk libaryer etter nedlasting</string>
+    <string name="mcl_setting_check_libraries_subtitle">Dette valget fremtvinger launcheren for å sjekke bibliotek hash hvis den er tilgjengelig. Hindrer ødelagte nedlastinger.</string>
+    <string name="dl_library_sha_fail">Library %s er skadet og vil bli lastet på nytt</string>
+    <string name="dl_library_sha_unknown">Library %s kan ikke skjekkes, må anta det er bra</string>
+    <string name="dl_library_sha_pass">Library %s er bra og kan brukes</string>
+    <string name="mcl_disable_gestures">Deaktiver gester</string>
+    <string name="mcl_disable_gestures_subtitle">Deaktiverer gester, som for å knuse blokker og trykk for å plassere en blokk.</string>
+    <string name="mcl_setting_title_mousespeed">Mus Hastighet</string>
+    <string name="mcl_setting_subtitle_mousespeed">Endrer hastigheten på programvare-musen</string>
+    <string name="customctrl_passthru">Mus passe-thru</string>
+    <string name="customctrl_rounded">Avrundet</string>
+    <string name="memory_warning_msg">Den nåværende mengden ledig RAM (%d) er lavere enn allokert RAM (%d), noe som kan føre til krasj. Endre allokeringen hvis spillet krasjer.</string>
+    <string name="mcl_memory_allocation">Minne tildeling</string>
+    <string name="mcl_memory_allocation_subtitle">Kontrollerer hvor mye minne som blir gitt til Minecraft</string>
 </resources>
