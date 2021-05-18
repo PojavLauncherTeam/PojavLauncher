@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Change triggr tiem 4 long pres in destroy block an drop item.</string>
     <string name="mcl_setting_title_backtorightmouse">Treat bak butn as rite mouse</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Sum devicez treats external rite mouse as bak butn. If u r usin external mouse, u shud enable dis.</string>
+    <string name="mcl_setting_title_flat_button_style">Flat button styel</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Enabel dis 2 chaneg control button styel 2 flat.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scalin</string>
     <string name="mcl_setting_subtitle_buttonscale">Upscael dem if buttons r 2 small.</string>
     <string name="mcl_setting_title_mousescale">Mouse scalin</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Bees careful, dis can mak teh gaem crash if modified wifout any prior knowledeg.</string>
     <string name="mcl_setting_category_general">General settingz</string>
     <string name="mcl_setting_category_scaling">Scalin settingz</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
     <string name="mcl_setting_veroption_release">RELEASD</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">tree input</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send custom keycoed</string>
+    <string name="control_scaleup">Bigging go up</string>
+    <string name="control_scaledown">Bigging go down</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -171,14 +171,18 @@
     <string name="auto_ram_subtitle">Enablez automatic Mices adjustah</string>
     <string name="auto_ram_title">Auot Mices</string>
     <string name="autoram_info_msg">Mices set 2 %d MB</string>
-    <string name="vp_latest_snapshot">Latest Snapshot</string>
-    <string name="vp_latest_release">Latest Release</string>
-    <string name="mcl_tab_profiles">Profiles</string>
-    <string name="mcl_profile_editor_title_profile">PROFILES</string>
-    <string name="mcl_profile_editor_title_version">VERSIONS</string>
-    <string name="mcl_profile_editor_edit_text_title">Profile name</string>
-    <string name="mcl_profile_editor_save">save</string>
-    <string name="profedit_selected_version">Selected version: %s</string>
-    <string name="profedit_selected_profile">Selected profile: %s</string>
-    <string name="global_new">New</string>
+    <string name="mcl_setting_check_libraries">Check libraries aftr downloadin</string>
+    <string name="mcl_setting_check_libraries_subtitle">Dis opshun forces launchah 2 check teh librawee hash if iz availabel. preventz brokd downloadz.</string>
+    <string name="dl_library_sha_fail">Librawee %s iz damaged an will bees redownloaded</string>
+    <string name="dl_library_sha_unknown">Librawee %s can\'t bees checked, haz 2 assuem idz gud</string>
+    <string name="dl_library_sha_pass">Librawee %s iz fien an usabel</string>
+    <string name="mcl_disable_gestures">Disabel gesturez</string>
+    <string name="mcl_disable_gestures_subtitle">Disables gesturez, such as hold 2 break block, an tap 2 plaec block.</string>
+    <string name="mcl_setting_title_mousespeed">Mouses sped</string>
+    <string name="mcl_setting_subtitle_mousespeed">Changez teh sped ov teh softwaer moues</string>
+    <string name="customctrl_passthru">Mouses pas-thur</string>
+    <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">Teh current amount ov free ram (%d) iz lowr than allocatd ram (%d), which cud lead 2 crashez. Change teh allocashun if teh game crashez.</string>
+    <string name="mcl_memory_allocation">Mices allocashun</string>
+    <string name="mcl_memory_allocation_subtitle">Controls how mutch mices iz given 2 minecraft</string>
 </resources>
