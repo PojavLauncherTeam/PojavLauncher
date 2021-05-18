@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email или имя пользователя</string>
+    <string name="login_online_username_hint">Почта или имя пользователя</string>
     <string name="login_online_password_hint">Ключъ-фраза</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
     <string name="login_select_account">Документы</string>
-    <string name="login_title_no_saved_account">​Учетныя​ записи не найдены!</string>
+    <string name="login_title_no_saved_account"> Учетныя  записи не найдены!</string>
     <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учетную запись.\nИспользуйте опцію <b>\"Запомнить меня\"</b>, чтобъ сохранить учетную запись при первомъ входѣ.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Проведите справа налѣво, чтобъ открыть меню ◀\nУдерживайте кнопку для настройки: редактированія, измѣненія размѣра или удаленія."</string>
@@ -24,7 +24,7 @@
     <string name="warning_remove_account">Сіи документы будутъ удалены!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Выберите ​установщикъ​ модификаціи</string>
+    <string name="alerttitle_installmod">Выберите  установщикъ  модификаціи</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher неожиданно потерпѣлъ сбой</string>
     <string name="error_no_version">Нѣтъ версій!</string>
@@ -46,22 +46,22 @@
     <string name="mcl_account_offline">Офлайнъ</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готовъ къ запуску</string>
-    <string name="mcl_launch_cleancache">Очистка файловъ ​кэша​</string>
+    <string name="mcl_launch_cleancache">Очистка файловъ  кэша </string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
-    <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f ​Мбайтъ​ / %.2f ​Мбайтъ​)"</string>
+    <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f  Мбайтъ  / %.2f  Мбайтъ )"</string>
     <string name="mcl_launch_download_assets">Подготовка къ загрузкѣ рессурсовъ</string>
     <string name="mcl_options">Настройки</string>
-    <string name="mcl_option_modinstall">Запустить ​установщикъ​ модификаціи (Forge, LabyMod, Fabric, другіе...)</string>
-    <string name="mcl_option_modinstallwitharg">Запустить ​установщикъ​ модификаціи (съ пользовательскими аргументами)</string>
+    <string name="mcl_option_modinstall">Запустить  установщикъ  модификаціи (Forge, LabyMod, Fabric, другіе...)</string>
+    <string name="mcl_option_modinstallwitharg">Запустить  установщикъ  модификаціи (съ пользовательскими аргументами)</string>
     <string name="mcl_option_customcontrol">Пользовательское управленіе</string>
     <string name="mcl_option_settings">Настройки</string>
     <string name="mcl_option_about">О лаунчере</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапускъ ​лаунчера​] это позволитъ вамъ переустановить Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапускъ  лаунчера ] это позволитъ вамъ переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запускъ Minecraft въ плавающемъ окнѣ</string>
     <string name="mcl_setting_subtitle_freeform">Запускаетъ Minecraft въ плавающемъ окнѣ. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_hide_sidebar">Сокрытіе боковой панели</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Можетъ понравиться людямъ, испытывающимъ ностальгію, ​которые​ предпочитаютъ старый интерфейсъ v1. Даетъ вамъ болѣе ​полноэкранное​ использованіе.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Можетъ понравиться людямъ, испытывающимъ ностальгію,  которые  предпочитаютъ старый интерфейсъ v1. Даетъ вамъ болѣе  полноэкранное  использованіе.</string>
     <string name="mcl_setting_title_ignore_notch">Игнорированіе вырѣза подъ фронтальную камеру</string>
     <string name="mcl_setting_subtitle_ignore_notch">Игнорируетъ вырѣзъ подъ фронтальную камеру и расширяетъ экранъ подъ нее.\nДаетъ большее погруженіе въ игру.</string>
     <string name="mcl_setting_title_resolution_scaler">Уменьшеніе разрѣшенія</string>
@@ -73,7 +73,7 @@
     <string name="mcl_setting_title_flat_button_style">Плоскій стиль кнопокъ</string>
     <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцію, чтобы измѣнить стиль кнопокъ управленія на плоскій.</string>
     <string name="mcl_setting_title_buttonscale">Масштабированіе кнопокъ</string>
-    <string name="mcl_setting_subtitle_buttonscale">Увеличьте ихъ, если ​онѣ слишкомъ малы.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Увеличьте ихъ, если  онѣ слишкомъ малы.</string>
     <string name="mcl_setting_title_mousescale">Масштабированіе курсора</string>
     <string name="mcl_setting_subtitle_mousescale">Измѣняетъ размѣръ курсора мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
@@ -170,19 +170,19 @@
     <string name="main_no_news_feed">Не удалось получить ленту извѣстій!</string>
     <string name="auto_ram_subtitle">Включаетъ автоматическое управленіе выдѣленной Оперативной Памятью</string>
     <string name="auto_ram_title">Автоматическое выдѣленіе ОЗУ</string>
-    <string name="autoram_info_msg">Выдѣлено ​%d Мбайтъ​ Оперативной Памяти</string>
+    <string name="autoram_info_msg">Выдѣлено  %d Мбайтъ  Оперативной Памяти</string>
     <string name="mcl_setting_check_libraries">Провѣрка библіотекъ послѣ загрузки</string>
-    <string name="mcl_setting_check_libraries_subtitle">Данная опція принуждаетъ ​лаунчеръ​ провѣрять ​хешъ​ библіотеки, если ​таковыя​ доступны. Предотвращаетъ использованіе поврежденныхъ библіотекъ.</string>
+    <string name="mcl_setting_check_libraries_subtitle">Данная опція принуждаетъ  лаунчеръ  провѣрять  хешъ  библіотеки, если  таковыя  доступны. Предотвращаетъ использованіе поврежденныхъ библіотекъ.</string>
     <string name="dl_library_sha_fail">Библіотека %s повреждена и будетъ загружена повторно</string>
     <string name="dl_library_sha_unknown">Библіотека %s не можетъ быть провѣрена; смѣю предположить, что она работаетъ корректно</string>
     <string name="dl_library_sha_pass">Библіотека %s провѣрена. Она полностью функціонируетъ и можетъ быть использована</string>
-    <string name="mcl_disable_gestures">Отключеніе​ жестовъ</string>
+    <string name="mcl_disable_gestures">Отключеніе  жестовъ</string>
     <string name="mcl_disable_gestures_subtitle">Отключаетъ жесты, такіе какъ удержаніе, чтобы сломать блокъ, и нажатіе, чтобы размѣстить блок.</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
     <string name="mcl_setting_subtitle_mousespeed">Измѣняетъ чувствительность виртуальной мыши</string>
     <string name="customctrl_passthru">Указатель мыши</string>
-    <string name="customctrl_rounded">Округленность​ кнопки</string>
-    <string name="memory_warning_msg">Текущій ​объемъ​ свободной оперативной памяти (%d) меньше, ​чѣмъ​ выдѣленная (%d), что можетъ привести къ сбоямъ. Измѣните количество выдѣленной памяти при сбоѣ игры.</string>
+    <string name="customctrl_rounded">Округленность  кнопки</string>
+    <string name="memory_warning_msg">Текущій  объемъ  свободной оперативной памяти (%d) меньше,  чѣмъ  выдѣленная (%d), что можетъ привести къ сбоямъ. Измѣните количество выдѣленной памяти при сбоѣ игры.</string>
     <string name="mcl_memory_allocation">выдѣленіе памяти</string>
     <string name="mcl_memory_allocation_subtitle">Управляетъ выдѣленіемъ памяти для Minecraft</string>
 </resources>
