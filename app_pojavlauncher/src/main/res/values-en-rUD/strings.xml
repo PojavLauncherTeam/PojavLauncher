@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">˙ɯǝʇᴉ doɹp puɐ ʞɔoꞁq ʎoɹʇsǝp uᴉ ssǝɹd ᵷuoꞁ ɹoɟ ǝɯᴉʇ ɹǝᵷᵷᴉɹʇ ǝᵷuɐɥƆ.</string>
     <string name="mcl_setting_title_backtorightmouse">ǝsnoɯ ʇɥᵷᴉɹ sɐ uoʇʇnq ʞɔɐq ʇɐǝɹ⟘</string>
     <string name="mcl_setting_subtitle_backtorightmouse">˙sᴉɥʇ ǝꞁqɐuǝ pꞁnoɥs noʎ \'ǝsnoɯ ꞁɐuɹǝʇxǝ ᵷuᴉsn ǝɹɐ noʎ ɟI ˙uoʇʇnq ʞɔɐq sɐ ǝsnoɯ ʇɥᵷᴉɹ ꞁɐuɹǝʇxǝ sʇɐǝɹʇ sǝɔᴉʌǝp ǝɯoS</string>
+    <string name="mcl_setting_title_flat_button_style">ǝꞁʎʇs uoʇʇnq ʇɐꞁℲ</string>
+    <string name="mcl_setting_subtitle_flat_button_style">˙ʇɐꞁɟ oʇ ǝꞁʎʇs uoʇʇnq ꞁoɹʇuoɔ ǝᵷuɐɥɔ oʇ sᴉɥʇ ǝꞁqɐuƎ</string>
     <string name="mcl_setting_title_buttonscale">ᵷuᴉꞁɐɔs suoʇʇnq ꞁoɹʇuoƆ</string>
     <string name="mcl_setting_subtitle_buttonscale">˙ꞁꞁɐɯs ooʇ ǝɹɐ suoʇʇnq ɟᴉ ɯǝɥʇ ǝꞁɐɔsd∩</string>
     <string name="mcl_setting_title_mousescale">ᵷuᴉꞁɐɔs ǝsnoW</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">˙ǝᵷpǝꞁʍouʞ ʇnoɥʇᴉʍ pǝᴉɟᴉpoɯ ɟᴉ ɥsɐɹɔ ǝɯɐᵷ ǝʞɐɯ ʎɐɯ sᴉɥʇ \'ꞁnɟǝɹɐɔ ǝᗺ</string>
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
+    <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
     <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">ʇndʇno ᵷoꞀ</string>
     <string name="control_adebug">ᵷnqǝᗡ ʇnduI</string>
     <string name="control_customkey">ǝpoɔʎǝʞ ɯoʇsnɔ puǝS</string>
+    <string name="control_scaleup">dn ǝlɐɔS</string>
+    <string name="control_scaledown">uʍop ǝlɐɔS</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -171,14 +171,18 @@
     <string name="auto_ram_subtitle">ɹǝʇsnɾpɐ WⱯᴚ ɔᴉʇɐɯoʇnɐ sǝꞁqɐuƎ</string>
     <string name="auto_ram_title">WⱯᴚ oʇnⱯ</string>
     <string name="autoram_info_msg">ᗺW %d oʇ ʇǝs ʎɹoɯǝW</string>
-    <string name="vp_latest_snapshot">ʇoɥsdɐuS ʇsǝʇɐꞀ</string>
-    <string name="vp_latest_release">ǝsɐǝꞁǝᴚ ʇsǝʇɐꞀ</string>
-    <string name="mcl_tab_profiles">sǝꞁᴉɟoɹԀ</string>
-    <string name="mcl_profile_editor_title_profile">SƎꞀIℲOᴚԀ</string>
-    <string name="mcl_profile_editor_title_version">SNOISᴚƎɅ</string>
-    <string name="mcl_profile_editor_edit_text_title">ǝɯɐu ǝꞁᴉɟoɹԀ</string>
-    <string name="mcl_profile_editor_save">ǝʌɐs</string>
-    <string name="profedit_selected_version">%s :uoᴉsɹǝʌ pǝʇɔǝꞁǝS</string>
-    <string name="profedit_selected_profile">%s :ǝꞁᴉɟoɹd pǝʇɔǝꞁǝS</string>
-    <string name="global_new">ʍǝN</string>
+    <string name="mcl_setting_check_libraries">ᵷuᴉpɐoꞁuʍop ɹǝʇɟɐ sǝᴉɹɐɹqᴉꞁ ʞɔǝɥƆ</string>
+    <string name="mcl_setting_check_libraries_subtitle">˙spɐoꞁuʍop uǝʞoɹq sʇuǝʌǝɹԀ ˙ǝꞁqɐꞁᴉɐʌɐ s,ʇᴉ ɟᴉ ɥsɐɥ ʎɹɐɹqᴉꞁ ǝɥʇ ʞɔǝɥɔ oʇ ɹǝɥɔunɐꞁ sǝɔɹoɟ uoᴉʇdo sᴉɥ⟘</string>
+    <string name="dl_library_sha_fail">pǝpɐoꞁuʍopǝɹ ǝq ꞁꞁᴉʍ puɐ pǝᵷɐɯɐp sᴉ %s ʎɹɐɹqᴉꞀ</string>
+    <string name="dl_library_sha_unknown">pooᵷ s,ʇᴉ ǝɯnssɐ oʇ ǝʌɐɥ \'pǝʞɔǝɥɔ ǝq ʇ,uɐɔ %s ʎɹɐɹqᴉꞀ</string>
+    <string name="dl_library_sha_pass">ǝꞁqɐsn puɐ ǝuᴉɟ sᴉ %s ʎɹɐɹqᴉꞀ</string>
+    <string name="mcl_disable_gestures">sǝɹnʇsǝᵷ ǝꞁqɐsᴉᗡ</string>
+    <string name="mcl_disable_gestures_subtitle">˙ʞɔoꞁq ɐ ǝɔɐꞁd oʇ dɐʇ puɐ \'ʞɔoꞁq ʞɐǝɹq oʇ pꞁoɥ sɐ ɥɔns \'sǝɹnʇsǝᵷ sǝꞁqɐsᴉᗡ</string>
+    <string name="mcl_setting_title_mousespeed">pǝǝdS ǝsnoW</string>
+    <string name="mcl_setting_subtitle_mousespeed">ǝsnoɯ ǝɹɐʍʇɟos ǝɥʇ ɟo pǝǝds ǝɥʇ sǝᵷuɐɥƆ</string>
+    <string name="customctrl_passthru">nɹɥʇ-ssɐd ǝsnoW</string>
+    <string name="customctrl_rounded">pǝpunoᴚ</string>
+    <string name="memory_warning_msg">˙sǝɥsɐɹɔ ǝɯɐᵷ ǝɥʇ ɟᴉ uoᴉʇɐɔoꞁꞁɐ ǝɥʇ ǝᵷuɐɥƆ ˙sǝɥsɐɹɔ oʇ pɐǝꞁ ʎɐɯ ɥɔᴉɥʍ \'(%d) WⱯᴚ pǝʇɐɔoꞁꞁɐ uɐɥʇ ɹǝʍoꞁ sᴉ (%d) WⱯᴚ ǝǝɹɟ ɟo ʇunoɯɐ ʇuǝɹɹnɔ ǝɥ⟘</string>
+    <string name="mcl_memory_allocation">uoᴉʇɐɔoꞁꞁɐ ʎɹoɯǝW</string>
+    <string name="mcl_memory_allocation_subtitle">ʇɟɐɹɔǝuᴉW oʇ uǝʌᴉᵷ sᴉ ʎɹoɯǝɯ ɥɔnɯ ʍoɥ sꞁoɹʇuoƆ</string>
 </resources>
