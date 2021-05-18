@@ -203,8 +203,4 @@
     <string name="profedit_selected_version">Выбранная версия: %s</string>
     <string name="profedit_selected_profile">Выбранный профиль: %s</string>
     <string name="global_new">Новый</string>
-    <string name="mcl_setting_title_ignore_notch">Игнорировать вырез</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Игнорирует вырез и позволяет изображению выходить за вырез, давая более полноэкранный экспириенс.</string>
-    <string name="mcl_setting_title_resolution_scaler">Регулировка разрешения</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Позволяет регулировать разрешение. 100% - оригинальное разрешение.</string>
 </resources>
