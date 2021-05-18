@@ -12,7 +12,7 @@
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
     <string name="login_offline_label">Войти по внѣсѣтевымъ документамъ</string>
-    <string name="login_error_short_username">Имя пользователя должно быть не менѣе трехъ символовъ</string>
+    <string name="login_error_short_username">Имя пользователя должно быть не менѣе 3-хъ символовъ</string>
     <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
     <string name="login_select_account">Документы</string>
@@ -26,7 +26,7 @@
     <string name="alerttitle_install_jre">Установка Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Выберите  установщикъ  модификаціи</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher неожиданно потерпѣлъ сбой</string>
+    <string name="error_fatal">PojavLauncher былъ остановленъ въ результатѣ курьёза</string>
     <string name="error_no_version">Нѣтъ версій!</string>
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>
