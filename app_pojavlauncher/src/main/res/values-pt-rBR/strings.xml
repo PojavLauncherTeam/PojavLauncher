@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
     <string name="mcl_setting_title_backtorightmouse">Usar o botão voltar como o mouse direito</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Alguns dispositivos usam o botão direito do mouse externo como botão voltar. Se você estiver usando um mouse externo, você deve ativar isso.</string>
+    <string name="mcl_setting_title_flat_button_style">Estilo de botão plano</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Ative isto para alterar o estilo do botão de controle para plano.</string>
     <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
     <string name="mcl_setting_subtitle_buttonscale">Aumentar se os botões estiverem muito pequenos.</string>
     <string name="mcl_setting_title_mousescale">Escala do mouse</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Cuidado, isso pode fazer seu jogo ser interrompido se modificado sem conhecimento.</string>
     <string name="mcl_setting_category_general">Configurações gerais</string>
     <string name="mcl_setting_category_scaling">Configurações de escala</string>
+    <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -147,6 +145,8 @@
     <string name="control_viewout">Saída do log</string>
     <string name="control_adebug">Entrada de Depuração</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
+    <string name="control_scaleup">Aumentar</string>
+    <string name="control_scaledown">Diminuir</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -180,14 +180,18 @@
     <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
     <string name="auto_ram_title">RAM automática</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
-    <string name="vp_latest_snapshot">Última snapshot</string>
-    <string name="vp_latest_release">Última versão</string>
-    <string name="mcl_tab_profiles">Perfis</string>
-    <string name="mcl_profile_editor_title_profile">PERFIS</string>
-    <string name="mcl_profile_editor_title_version">VERSÕES</string>
-    <string name="mcl_profile_editor_edit_text_title">Nome do perfil</string>
-    <string name="mcl_profile_editor_save">salvar</string>
-    <string name="profedit_selected_version">Versão selecionada: %s</string>
-    <string name="profedit_selected_profile">Perfil selecionado: %s</string>
-    <string name="global_new">Novo</string>
+    <string name="mcl_setting_check_libraries">Verificar bibliotecas após baixar</string>
+    <string name="mcl_setting_check_libraries_subtitle">Esta opção força o launcher a verificar o hash da biblioteca se ele estiver disponível. Impede downloads com problemas.</string>
+    <string name="dl_library_sha_fail">A biblioteca %s está danificada e será baixada novamente</string>
+    <string name="dl_library_sha_unknown">A biblioteca %s não pode ser verificada, precisa assumir que está boa</string>
+    <string name="dl_library_sha_pass">Biblioteca %s está boa e utilizável</string>
+    <string name="mcl_disable_gestures">Desativar gestos</string>
+    <string name="mcl_disable_gestures_subtitle">Desabilita gestos, como \"segure para quebrar bloco\" e \"toque para colocar um bloco\".</string>
+    <string name="mcl_setting_title_mousespeed">Velocidade do mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do mouse do software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Arredondado</string>
+    <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), o que pode causar interrupções. Altere a quantidade se o jogo for interrompido.</string>
+    <string name="mcl_memory_allocation">Alocação de memória</string>
+    <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será dado ao Minecraft</string>
 </resources>
