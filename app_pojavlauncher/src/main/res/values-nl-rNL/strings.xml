@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Verander de triggertijd voor lang indrukken van vernietig blok en laten vallen.</string>
     <string name="mcl_setting_title_backtorightmouse">Behandel de terugknop als rechter muis</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Sommige apparaten behandelen externe rechtermuis als terugknop. Als u een externe muis gebruikt, moet u dit activeren.</string>
+    <string name="mcl_setting_title_flat_button_style">Verander knopstijl</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Schakel dit in om de control-knop stijl te veranderen naar plat.</string>
     <string name="mcl_setting_title_buttonscale">Controle knoppen schalen</string>
     <string name="mcl_setting_subtitle_buttonscale">Vergroot ze als knoppen te klein zijn.</string>
     <string name="mcl_setting_title_mousescale">Muis schaling</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
     <string name="mcl_setting_category_general">Algemene instellingen</string>
     <string name="mcl_setting_category_scaling">Schaalinstellingen</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Versietype zal in de versielijst staan</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -180,14 +178,15 @@
     <string name="auto_ram_subtitle">Schakel in de automatische RAM aanpasser in</string>
     <string name="auto_ram_title">Automatische RAM</string>
     <string name="autoram_info_msg">Geheugen ingesteld op %d MB</string>
-    <string name="vp_latest_snapshot">Laatste Snapshot</string>
-    <string name="vp_latest_release">Laatste Release</string>
-    <string name="mcl_tab_profiles">Profielen</string>
-    <string name="mcl_profile_editor_title_profile">PROFIELEN</string>
-    <string name="mcl_profile_editor_title_version">VERSIES</string>
-    <string name="mcl_profile_editor_edit_text_title">Profielnaam</string>
-    <string name="mcl_profile_editor_save">opslaan</string>
-    <string name="profedit_selected_version">Geselecteerde versie: %s</string>
-    <string name="profedit_selected_profile">Geselecteerd profiel: %s</string>
-    <string name="global_new">Nieuw</string>
+    <string name="mcl_setting_check_libraries">Bibliotheken controleren na het downloaden</string>
+    <string name="mcl_setting_check_libraries_subtitle">Deze optie zorgt ervoor dat launcher de bibliotheek hash controleert als deze beschikbaar is. Voorkomt defecte downloads.</string>
+    <string name="dl_library_sha_fail">Bibliotheek %s is beschadigd en zal opnieuw worden gedownload</string>
+    <string name="dl_library_sha_unknown">Bibliotheek %s kan niet worden gecontroleerd, we nemen aan dat het goed is</string>
+    <string name="dl_library_sha_pass">Bibliotheek %s is prima en bruikbaar</string>
+    <string name="mcl_disable_gestures">Gebaren uitschakelen</string>
+    <string name="mcl_disable_gestures_subtitle">Schakelt gebaren uit, zoals vasthouden om blok te breken en tikken om een blok te plaatsen.</string>
+    <string name="mcl_setting_title_mousespeed">Muis Snelheid</string>
+    <string name="mcl_setting_subtitle_mousespeed">Veranderd de snelheid van de virtuele muis</string>
+    <string name="customctrl_passthru">Muis pass-thru</string>
+    <string name="customctrl_rounded">Afgerond</string>
 </resources>
