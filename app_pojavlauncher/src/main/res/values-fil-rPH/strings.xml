@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Baguhin ang oras ng pag-trigger para sa mahabang pagpindot sa sirain ang block at drop item.</string>
     <string name="mcl_setting_title_backtorightmouse">Tratuhin ang back button bilang kanang mouse</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Ang ilang mga aparato ay tinatrato ang panlabas na kanang mouse bilang back button. Kung gumagamit ka ng panlabas na mouse, dapat mo itong paganahin.</string>
+    <string name="mcl_setting_title_flat_button_style">Estilo ng flat button</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Paganahin ito upang baguhin ang istilo ng pindutan ng kontrol sa flat.</string>
     <string name="mcl_setting_title_buttonscale">Pagkontrol sa pag-scale ng mga pindutan</string>
     <string name="mcl_setting_subtitle_buttonscale">I-Upgrade ang mga ito kung ang mga pindutan ay masyadong maliit.</string>
     <string name="mcl_setting_title_mousescale">Pag-scale ng mouse</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Mag-ingat, maaari itong mag-crash ng laro kung binago nang walang kaalaman.</string>
     <string name="mcl_setting_category_general">Pangkalahatang mga Setting</string>
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -103,12 +106,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -141,6 +139,8 @@
     <string name="control_viewout">Output ng log</string>
     <string name="control_adebug">Pag-input ng Debug</string>
     <string name="control_customkey">Magpadala ng pasadyang keycode</string>
+    <string name="control_scaleup">Scale up</string>
+    <string name="control_scaledown">Scale down</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -174,14 +174,18 @@
     <string name="auto_ram_subtitle">Pinapagana ang awtomatikong pagsasaayos ng RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Naitakda ang memorya sa %d MB</string>
-    <string name="vp_latest_snapshot">Pinakabagong Snapshot</string>
-    <string name="vp_latest_release">Pinakabagong Release</string>
-    <string name="mcl_tab_profiles">Mga Profile</string>
-    <string name="mcl_profile_editor_title_profile">PROFILES</string>
-    <string name="mcl_profile_editor_title_version">VERSIONS</string>
-    <string name="mcl_profile_editor_edit_text_title">Pangalan ng Profile</string>
-    <string name="mcl_profile_editor_save">Save</string>
-    <string name="profedit_selected_version">Napiling bersyon: %s</string>
-    <string name="profedit_selected_profile">Napiling bersyon: %s</string>
-    <string name="global_new">Bago</string>
+    <string name="mcl_setting_check_libraries">Suriin ang mga libraries pagkatapos mag-download</string>
+    <string name="mcl_setting_check_libraries_subtitle">Pinipilit ng opsyong ito ang launcher na suriin ang hash ng library kung magagamit ito. Pinipigilan ang mga sirang pag-download.</string>
+    <string name="dl_library_sha_fail">Ang library ay nasira %s at mai-download</string>
+    <string name="dl_library_sha_unknown">Hindi masuri ang library %s, kailangang ipalagay na mabuti ito</string>
+    <string name="dl_library_sha_pass">Ang library %s ay mabuti at magagamit</string>
+    <string name="mcl_disable_gestures">Paganahin ang mga galaw</string>
+    <string name="mcl_disable_gestures_subtitle">Hindi pinagagana ang mga kilos, tulad ng pagpindot upang masira ang bloke, at i-tap upang maglagay ng isang bloke.</string>
+    <string name="mcl_setting_title_mousespeed">Bilis ng Mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Binabago ang bilis ng mouse ng software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">Ang kasalukuyang dami ng libreng RAM (%d) ay mas mababa kaysa sa inilalaan na RAM (%d), na maaaring humantong sa mga pag-crash. Baguhin ang paglalaan kung ang laro ay nag-crash.</string>
+    <string name="mcl_memory_allocation">Paglalaan ng memorya</string>
+    <string name="mcl_memory_allocation_subtitle">Kinokontrol kung magkano ang memorya na ibinibigay sa Minecraft</string>
 </resources>
