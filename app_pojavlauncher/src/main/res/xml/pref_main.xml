@@ -76,6 +76,7 @@
             android:key="backToRightMouse"
             android:summary="@string/mcl_setting_subtitle_backtorightmouse"
             android:title="@string/mcl_setting_title_backtorightmouse" />
+        <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_map_rmb"
             android:key="backToRightMouse"
