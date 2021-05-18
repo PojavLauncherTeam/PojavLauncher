@@ -68,6 +68,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Tukar masa cetusan untuk tekanan lama dalam penghancuran blok dan pelemparan item.</string>
     <string name="mcl_setting_title_backtorightmouse">Anggap butang kembali sebagai butang tetikus kanan</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Sesetengah peranti menganggap butang tetikus kanan eksternal sebagai butang kembali. Jikalau anda menggunakan tetikus eksternal, kamu harus mengaktifkan ini.</string>
+    <string name="mcl_setting_title_flat_button_style">Gaya butang datar</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Aktifkan ini untuk menukar gaya butang kawalan kepada datar.</string>
     <string name="mcl_setting_title_buttonscale">Skala butang kawalan</string>
     <string name="mcl_setting_subtitle_buttonscale">Naikkan skala mereka jika butangnya terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Skala tetikus</string>
@@ -76,6 +78,7 @@
     <string name="mcl_setting_subtitle_javaargs">Berhati-hati, ini mungkin menyebabkan permainan menjadi ranap jika diubah tanpa pengetahuan.</string>
     <string name="mcl_setting_category_general">Tetapan umum</string>
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Petikan</string>
@@ -101,12 +104,7 @@
     " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
     //" • Boardwalk memory manager (not used now).\n" +
     " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • dx: tool to convert.\n" +
-    " • Java AWT Implementation includes:\n" +
-    "  - Boardwalk's makeshift.\n" +
-    "  - Apache Harmony AWT Framework.\n" +
-    "  - OpenJDK 7 codes implementation.\n" +
-    "  - Developer code implement (copy text, open browser,...)\n" +
+    " • OpenJDK" +
     "\n" +
     "* Notes:\n" +
     " - This app is currently BETA, it will not be stable.\n" +
@@ -139,6 +137,8 @@
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">Nyahpepijat Input</string>
     <string name="control_customkey">Hantar kod kunci custom</string>
+    <string name="control_scaleup">Naikkan skala</string>
+    <string name="control_scaledown">Turunkan skala</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -169,14 +169,18 @@
     <string name="auto_ram_subtitle">Membenarkan pelaras RAM automatik</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memori ditetapkan kepada %d MB</string>
-    <string name="vp_latest_snapshot">Petikan Terkini</string>
-    <string name="vp_latest_release">Terbitan Terkini</string>
-    <string name="mcl_tab_profiles">Profil</string>
-    <string name="mcl_profile_editor_title_profile">PROFIL</string>
-    <string name="mcl_profile_editor_title_version">VERSI</string>
-    <string name="mcl_profile_editor_edit_text_title">Nama profil</string>
-    <string name="mcl_profile_editor_save">simpan</string>
-    <string name="profedit_selected_version">Versi yang Dipilih: %s</string>
-    <string name="profedit_selected_profile">Profil yang Dipilih: %s</string>
-    <string name="global_new">Baharu</string>
+    <string name="mcl_setting_check_libraries">Periksa library selepas muat turun</string>
+    <string name="mcl_setting_check_libraries_subtitle">Pilihan ini memaksa pelancar untuk memeriksa hash library jika ianya tersedia. Boleh mencegah muat turun yang rosak.</string>
+    <string name="dl_library_sha_fail">Library %s ini rosak dan akan dimuat turun semula</string>
+    <string name="dl_library_sha_unknown">Library %s tidak boleh diperiksa, harus menganggap bahawa ianya baik</string>
+    <string name="dl_library_sha_pass">Library %s adalah baik dan boleh digunakan</string>
+    <string name="mcl_disable_gestures">Nyahdayakan gerak isyarat</string>
+    <string name="mcl_disable_gestures_subtitle">Menyahdayakan gerak isyarat, seperti menahan untuk menhancurkan blok, dan tekan untuk meletakkan blok.</string>
+    <string name="mcl_setting_title_mousespeed">Kecepatan Tetikus</string>
+    <string name="mcl_setting_subtitle_mousespeed">Ubah kelajuan tetikus software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Dibundar</string>
+    <string name="memory_warning_msg">Bilangan RAM yang ada (%d) lebih rendah daripada RAM yang diperuntuk (%d), yang mungkin akan menyebabkan ranap. Tukar peruntukan jikalau permainan ranap.</string>
+    <string name="mcl_memory_allocation">Peruntukan memori</string>
+    <string name="mcl_memory_allocation_subtitle">Mengawal berapa banyak memori yang diberikan kepada Minecraft</string>
 </resources>
