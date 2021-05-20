@@ -222,8 +222,9 @@ public class JREUtils
         envMap.put("LIBGL_MIPMAP", "0");
 		
 		//gl4es testing stuff
-		envMap.put("LIBGL_NOINTOVLHACK", "1")
-        envMap.put("LIBGL_BLITFB0", "1")
+		envMap.put("LIBGL_NOINTOVLHACK", "1");
+        envMap.put("LIBGL_BLITFB0", "1");
+		envMap.put("LIBGL_FB", "3");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
