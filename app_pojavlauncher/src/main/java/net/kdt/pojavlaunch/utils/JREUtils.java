@@ -221,7 +221,6 @@ public class JREUtils
         envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 	
-        //gl4es testing stuff
         envMap.put("LIBGL_NOTEXMAT", "1");
         envMap.put("LIBGL_BLITFB0", "1");
         envMap.put("LIBGL_FB", "3");
