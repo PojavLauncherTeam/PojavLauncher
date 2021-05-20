@@ -215,6 +215,7 @@ public class Gamepad {
     private void update(MotionEvent event){
         updateDirectionalJoystick(event);
         updateMouseJoystick(event);
+        updateAnalogTriggers(event);
     }
 
     private void updateMouseJoystick(MotionEvent event){
@@ -240,8 +241,8 @@ public class Gamepad {
     }
 
     private void updateAnalogTriggers(MotionEvent event){
-        //sendInput(getCurrentMap().TRIGGER_RIGHT, event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
-        //sendInput(getCurrentMap().TRIGGER_LEFT, event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5);
+        getCurrentMap().TRIGGER_LEFT.update(event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5);
+        getCurrentMap().TRIGGER_RIGHT.update(event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
 
     }
 
