@@ -46,9 +46,6 @@ public class Gamepad {
     private final GamepadMapping menuMap = new GamepadMapping();
     private GamepadMapping currentMap = menuMap;
 
-    private boolean leftThumbstickToggle = false;
-    private boolean rightThumbstickToggle = false;
-
     private boolean isGrabbing = false;
 
 
@@ -122,9 +119,11 @@ public class Gamepad {
             if(isGrabbing){
                 //TODO hide the cursor
                 currentMap = gameMap;
+                menuMap.resetPressedState();
             }else{
                 //TODO place the cursor at the center
                 currentMap = menuMap;
+                gameMap.resetPressedState();
 
                 gameActivity.mouse_x = CallbackBridge.windowWidth/2;
                 gameActivity.mouse_y = CallbackBridge.windowHeight/2;
@@ -140,61 +139,61 @@ public class Gamepad {
         //create mappings to fit our needs
 
         //GAMEMAP
-        gameMap.BUTTON_A = new int[]{LWJGLGLFWKeycode.GLFW_KEY_SPACE};
-        gameMap.BUTTON_B = new int[]{LWJGLGLFWKeycode.GLFW_KEY_Q};
-        gameMap.BUTTON_X = new int[]{LWJGLGLFWKeycode.GLFW_KEY_F};
-        gameMap.BUTTON_Y = new int[]{LWJGLGLFWKeycode.GLFW_KEY_E};
+        gameMap.BUTTON_A.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_SPACE};
+        gameMap.BUTTON_B.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_Q};
+        gameMap.BUTTON_X.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_F};
+        gameMap.BUTTON_Y.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_E};
 
         gameMap.DIRECTION_FORWARD = new int[]{LWJGLGLFWKeycode.GLFW_KEY_W};
         gameMap.DIRECTION_BACKWARD = new int[]{LWJGLGLFWKeycode.GLFW_KEY_S};
         gameMap.DIRECTION_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_D};
         gameMap.DIRECTION_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_A};
 
-        gameMap.DPAD_UP = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        gameMap.DPAD_DOWN = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        gameMap.DPAD_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        gameMap.DPAD_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        gameMap.DPAD_UP.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        gameMap.DPAD_DOWN.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        gameMap.DPAD_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        gameMap.DPAD_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
 
-        gameMap.SHOULDER_LEFT = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
-        gameMap.SHOULDER_RIGHT = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
+        gameMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
+        gameMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
 
-        gameMap.TRIGGER_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT};
-        gameMap.TRIGGER_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT};
+        gameMap.TRIGGER_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT};
+        gameMap.TRIGGER_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT};
 
-        gameMap.THUMBSTICK_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT};
-        gameMap.THUMBSTICK_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_F5};
+        gameMap.THUMBSTICK_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT};
+        gameMap.THUMBSTICK_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_F5};
 
-        gameMap.BUTTON_START = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
-        gameMap.BUTTON_SELECT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        gameMap.BUTTON_START.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
+        gameMap.BUTTON_SELECT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
 
 
         //MENU MAP
-        menuMap.BUTTON_A = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT};
-        menuMap.BUTTON_B = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
-        menuMap.BUTTON_X = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT};
-        menuMap.BUTTON_Y = new int[]{LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT}; //Oops, doesn't work since left shift isn't properly applied.
+        menuMap.BUTTON_A.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT};
+        menuMap.BUTTON_B.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
+        menuMap.BUTTON_X.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT};
+        menuMap.BUTTON_Y.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT}; //Oops, doesn't work since left shift isn't properly applied.
 
         menuMap.DIRECTION_FORWARD = new int[]{GamepadMapping.MOUSE_SCROLL_UP, GamepadMapping.MOUSE_SCROLL_UP, GamepadMapping.MOUSE_SCROLL_UP,GamepadMapping.MOUSE_SCROLL_UP,GamepadMapping.MOUSE_SCROLL_UP};
         menuMap.DIRECTION_BACKWARD = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN, GamepadMapping.MOUSE_SCROLL_DOWN, GamepadMapping.MOUSE_SCROLL_DOWN,GamepadMapping.MOUSE_SCROLL_DOWN,GamepadMapping.MOUSE_SCROLL_DOWN};
         menuMap.DIRECTION_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
         menuMap.DIRECTION_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
 
-        menuMap.DPAD_UP = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.DPAD_DOWN = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.DPAD_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.DPAD_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.DPAD_UP.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.DPAD_DOWN.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.DPAD_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.DPAD_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
 
-        menuMap.SHOULDER_LEFT = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
-        menuMap.SHOULDER_RIGHT = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
+        menuMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
+        menuMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
 
-        menuMap.TRIGGER_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.TRIGGER_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.TRIGGER_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.TRIGGER_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
 
-        menuMap.THUMBSTICK_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.THUMBSTICK_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.THUMBSTICK_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.THUMBSTICK_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
 
-        menuMap.BUTTON_START = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
-        menuMap.BUTTON_SELECT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.BUTTON_START.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
+        menuMap.BUTTON_SELECT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
 
 
     }
@@ -210,7 +209,7 @@ public class Gamepad {
     }
 
     private void update(KeyEvent event){
-        sendButton(event.getKeyCode(), event.getAction() == KeyEvent.ACTION_DOWN, getCurrentMap());
+        sendButton(event);
     }
 
     private void update(MotionEvent event){
@@ -241,8 +240,8 @@ public class Gamepad {
     }
 
     private void updateAnalogTriggers(MotionEvent event){
-        sendInput(getCurrentMap().TRIGGER_RIGHT, event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
-        sendInput(getCurrentMap().TRIGGER_LEFT, event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5);
+        //sendInput(getCurrentMap().TRIGGER_RIGHT, event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
+        //sendInput(getCurrentMap().TRIGGER_LEFT, event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5);
 
     }
 
@@ -284,62 +283,61 @@ public class Gamepad {
     }
 
 
-    private void sendButton(int keycode, boolean isDown, GamepadMapping map){
+    private void sendButton(KeyEvent event){
+        int keycode = event.getKeyCode();
         switch (keycode){
             case KeyEvent.KEYCODE_BUTTON_A:
-                sendInput(map.BUTTON_A, isDown);
+                getCurrentMap().BUTTON_A.update(event);
                 break;
             case KeyEvent.KEYCODE_BUTTON_B:
-                sendInput(map.BUTTON_B, isDown);
+                getCurrentMap().BUTTON_B.update(event);
                 break;
             case KeyEvent.KEYCODE_BUTTON_X:
-                sendInput(map.BUTTON_X, isDown);
+                getCurrentMap().BUTTON_X.update(event);
                 break;
             case KeyEvent.KEYCODE_BUTTON_Y:
-                sendInput(map.BUTTON_Y, isDown);
+                getCurrentMap().BUTTON_Y.update(event);
                 break;
 
                 //Shoulders
             case KeyEvent.KEYCODE_BUTTON_L1:
-                sendInput(map.SHOULDER_LEFT, isDown);
+                getCurrentMap().SHOULDER_LEFT.update(event);
                 break;
             case KeyEvent.KEYCODE_BUTTON_R1:
-                sendInput(map.SHOULDER_RIGHT, isDown);
+                getCurrentMap().SHOULDER_RIGHT.update(event);
                 break;
 
                 //Triggers
             case KeyEvent.KEYCODE_BUTTON_L2:
-                sendInput(map.TRIGGER_LEFT, isDown);
+                getCurrentMap().TRIGGER_LEFT.update(event);
                 break;
             case KeyEvent.KEYCODE_BUTTON_R2:
-                sendInput(map.TRIGGER_RIGHT, isDown);
+                getCurrentMap().TRIGGER_RIGHT.update(event);
                 break;
 
                 //L3 || R3
             case KeyEvent.KEYCODE_BUTTON_THUMBL:
-                leftThumbstickToggle = !leftThumbstickToggle;
-                if(leftThumbstickToggle) sendInput(map.THUMBSTICK_LEFT, isDown);
+                getCurrentMap().THUMBSTICK_LEFT.update(event);
                 break;
             case KeyEvent.KEYCODE_BUTTON_THUMBR:
-                rightThumbstickToggle = !rightThumbstickToggle;
-                if(rightThumbstickToggle) sendInput(map.THUMBSTICK_RIGHT, isDown);
+                getCurrentMap().THUMBSTICK_RIGHT.update(event);
                 break;
 
             case KeyEvent.KEYCODE_BUTTON_START:
-                sendInput(map.BUTTON_START, isDown);
+                getCurrentMap().BUTTON_START.update(event);
                 break;
             case KeyEvent.KEYCODE_BUTTON_SELECT:
-                sendInput(map.BUTTON_SELECT, isDown);
+                getCurrentMap().BUTTON_SELECT.update(event);
                 break;
 
 
             default:
-                BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), isDown);
+                BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), event.getAction() == KeyEvent.ACTION_DOWN);
                 break;
         }
     }
 
-    private static void sendInput(int[] keycodes, boolean isDown){
+    public static void sendInput(int[] keycodes, boolean isDown){
         for(int keycode : keycodes){
             switch (keycode){
                 case GamepadMapping.MOUSE_SCROLL_DOWN:

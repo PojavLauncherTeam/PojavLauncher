@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.customcontrols.gamepad;
 
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
 
+import java.security.PublicKey;
 import java.util.HashMap;
 
 public class GamepadMapping {
@@ -19,34 +20,58 @@ public class GamepadMapping {
 
    */
 
-    public int[] BUTTON_A;
-    public int[] BUTTON_B;
-    public int[] BUTTON_X;
-    public int[] BUTTON_Y;
+    public GamepadButton BUTTON_A = new GamepadButton();
+    public GamepadButton BUTTON_B = new GamepadButton();
+    public GamepadButton BUTTON_X = new GamepadButton();
+    public GamepadButton BUTTON_Y = new GamepadButton();
     
-    public int[] BUTTON_START;
-    public int[] BUTTON_SELECT;
+    public GamepadButton BUTTON_START = new GamepadButton();
+    public GamepadButton BUTTON_SELECT = new GamepadButton();
 
-    public int[] TRIGGER_RIGHT;         //R2
-    public int[] TRIGGER_LEFT;          //L2
+    public GamepadButton TRIGGER_RIGHT = new GamepadButton();         //R2
+    public GamepadButton TRIGGER_LEFT = new GamepadButton();          //L2
     
-    public int[] SHOULDER_RIGHT;        //R1
-    public int[] SHOULDER_LEFT;         //L1
+    public GamepadButton SHOULDER_RIGHT = new GamepadButton();        //R1
+    public GamepadButton SHOULDER_LEFT = new GamepadButton();         //L1
     
     public int[] DIRECTION_FORWARD;
     public int[] DIRECTION_BACKWARD;
     public int[] DIRECTION_RIGHT;
     public int[] DIRECTION_LEFT;
     
-    public int[] THUMBSTICK_RIGHT;      //R3
-    public int[] THUMBSTICK_LEFT;       //L3
+    public GamepadButton THUMBSTICK_RIGHT = new GamepadButton();      //R3
+    public GamepadButton THUMBSTICK_LEFT = new GamepadButton();       //L3
     
-    public int[] DPAD_UP;
-    public int[] DPAD_RIGHT;
-    public int[] DPAD_DOWN;
-    public int[] DPAD_LEFT;
+    public GamepadButton DPAD_UP = new GamepadButton();
+    public GamepadButton DPAD_RIGHT = new GamepadButton();
+    public GamepadButton DPAD_DOWN = new GamepadButton();
+    public GamepadButton DPAD_LEFT = new GamepadButton();
     
 
+    public void resetPressedState(){
+        BUTTON_A.resetButtonState();
+        BUTTON_B.resetButtonState();
+        BUTTON_X.resetButtonState();
+        BUTTON_Y.resetButtonState();
+
+        BUTTON_START.resetButtonState();
+        BUTTON_SELECT.resetButtonState();
+
+        TRIGGER_LEFT.resetButtonState();
+        TRIGGER_RIGHT.resetButtonState();
+
+        SHOULDER_LEFT.resetButtonState();
+        SHOULDER_RIGHT.resetButtonState();
+
+        THUMBSTICK_LEFT.resetButtonState();
+        THUMBSTICK_RIGHT.resetButtonState();
+
+        DPAD_UP.resetButtonState();
+        DPAD_RIGHT.resetButtonState();
+        DPAD_DOWN.resetButtonState();
+        DPAD_LEFT.resetButtonState();
+
+    }
 
 
 }
