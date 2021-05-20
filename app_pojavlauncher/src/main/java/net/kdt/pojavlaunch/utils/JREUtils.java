@@ -227,6 +227,7 @@ public class JREUtils
         envMap.put("LIBGL_FB", "3");
         envMap.put("LIBGL_AVOID16BITS", "1");
         envMap.put("LIBGL_FBONOALPHA", "1");
+		envMap.put("LIBGL_USEVBO", "0");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
