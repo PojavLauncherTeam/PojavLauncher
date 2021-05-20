@@ -219,14 +219,14 @@ public class JREUtils
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
-        envMap.put("LIBGL_MIPMAP", "1");
+        envMap.put("LIBGL_MIPMAP", "3");
 	
 		//gl4es testing stuff
-        envMap.put("LIBGL_NOINTOVLHACK", "1");
+       // envMap.put("LIBGL_NOINTOVLHACK", "1");
         envMap.put("LIBGL_BLITFB0", "1");
         envMap.put("LIBGL_FB", "3");
         envMap.put("LIBGL_AVOID16BITS", "1");
-        envMap.put("LIBGL_FORCE16BITS", "1");
+        //envMap.put("LIBGL_FORCE16BITS", "1");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
        // envMap.put("LIBGL_NORMALIZE", "1");
