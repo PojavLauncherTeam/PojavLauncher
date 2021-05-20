@@ -221,7 +221,7 @@ public class JREUtils
         envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 	
-		//gl4es testing stuff
+        //gl4es testing stuff
         envMap.put("LIBGL_NOTEXMAT", "1");
         envMap.put("LIBGL_BLITFB0", "1");
         envMap.put("LIBGL_FB", "3");
@@ -229,7 +229,7 @@ public class JREUtils
         envMap.put("LIBGL_FBONOALPHA", "1");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
-       // envMap.put("LIBGL_NORMALIZE", "1");
+        envMap.put("LIBGL_NORMALIZE", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
