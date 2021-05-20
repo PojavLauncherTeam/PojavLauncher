@@ -231,6 +231,7 @@ public class ControlLayout extends FrameLayout
 
 			if(view instanceof ControlSubButton){
 				view.setVisibility(mControlVisible ? (((ControlSubButton)view).parentDrawer.areButtonsVisible ? VISIBLE : GONE) : View.GONE);
+				continue;
 			}
 
 			if(view instanceof ControlDrawer){
