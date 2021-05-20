@@ -222,9 +222,9 @@ public class JREUtils
         envMap.put("LIBGL_MIPMAP", "1");
 	
 		//gl4es testing stuff
-		envMap.put("LIBGL_NOINTOVLHACK", "1");
-		envMap.put("LIBGL_BLITFB0", "1");
-		envMap.put("LIBGL_FB", "3");
+        envMap.put("LIBGL_NOINTOVLHACK", "1");
+        envMap.put("LIBGL_BLITFB0", "1");
+        envMap.put("LIBGL_FB", "3");
         envMap.put("LIBGL_AVOID16BITS", "1");
         envMap.put("LIBGL_FORCE16BITS", "1");
         
