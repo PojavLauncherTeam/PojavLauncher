@@ -11,12 +11,15 @@ public class GamepadButton {
     private boolean isDown = false;
 
     public void update(KeyEvent event){
-        boolean down = (event.getAction() == KeyEvent.ACTION_DOWN);
-        if(down != isDown){
-            isDown = down;
+        boolean isKeyDown = (event.getAction() == KeyEvent.ACTION_DOWN);
+        update(isKeyDown);
+    }
+
+    public void update(boolean isKeyDown){
+        if(isKeyDown != isDown){
+            isDown = isKeyDown;
             Gamepad.sendInput(keycodes, isDown);
         }
-
     }
 
     public void resetButtonState(){
