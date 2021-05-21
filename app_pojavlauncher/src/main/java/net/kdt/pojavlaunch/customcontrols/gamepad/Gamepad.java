@@ -128,6 +128,7 @@ public class Gamepad {
                 //TODO place the cursor at the center
                 currentMap = menuMap;
                 gameMap.resetPressedState();
+                sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
 
                 gameActivity.mouse_x = CallbackBridge.windowWidth/2;
                 gameActivity.mouse_y = CallbackBridge.windowHeight/2;

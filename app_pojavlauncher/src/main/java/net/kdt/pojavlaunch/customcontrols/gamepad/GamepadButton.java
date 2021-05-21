@@ -35,6 +35,7 @@ public class GamepadButton {
     public void resetButtonState(){
         isDown = false;
         toggled = false;
+        Gamepad.sendInput(keycodes, false);
     }
     public boolean isDown(){
         return isToggleable ? toggled : isDown;
