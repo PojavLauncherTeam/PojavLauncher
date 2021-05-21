@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
+import net.kdt.pojavlaunch.Tools;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -19,7 +20,6 @@ import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTI
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_SOUTH_EAST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_SOUTH_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_WEST;
-import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.JOYSTICK_DEADZONE;
 
 public class Gamepad {
 
@@ -28,10 +28,10 @@ public class Gamepad {
 
     private GamepadDpad gamepadDpad = new GamepadDpad();
 
-    private final GamepadJoystick leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y);
+    private final GamepadJoystick leftJoystick;
     private int currentJoystickDirection = DIRECTION_NONE;
 
-    private final GamepadJoystick rightJoystick = new GamepadJoystick(MotionEvent.AXIS_Z, MotionEvent.AXIS_RZ);
+    private final GamepadJoystick rightJoystick;
     private float lastHorizontalValue = 0.0f;
     private float lastVerticalValue = 0.0f;
 
@@ -51,7 +51,11 @@ public class Gamepad {
 
     private Thread mouseThread;
 
-    public Gamepad(BaseMainActivity gameActivity){
+    public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
+        leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
+        rightJoystick = new GamepadJoystick(MotionEvent.AXIS_Z, MotionEvent.AXIS_RZ, inputDevice);
+
+
         this.gameActivity = gameActivity;
         createMapping();
 
@@ -63,7 +67,6 @@ public class Gamepad {
 
             @Override
             public void run() {
-
 
                 while (!isInterrupted()) {
                     long now = System.nanoTime();
@@ -89,8 +92,9 @@ public class Gamepad {
 
             private void tick(){
                 if(lastHorizontalValue != 0 || lastVerticalValue != 0){
+                    GamepadJoystick currentJoystick = isGrabbing ? leftJoystick : rightJoystick;
 
-                    acceleration = (mouseMagnitude - JOYSTICK_DEADZONE)/(1 - JOYSTICK_DEADZONE);
+                    acceleration = (mouseMagnitude - currentJoystick.getDeadzone())/(1 - currentJoystick.getDeadzone());
                     acceleration = Math.pow(acceleration, mouseMaxAcceleration);
 
                     if(acceleration > 1){
@@ -220,8 +224,7 @@ public class Gamepad {
     }
 
     private void updateMouseJoystick(MotionEvent event){
-        GamepadJoystick currentJoystick = CallbackBridge.isGrabbing() ? rightJoystick : leftJoystick;
-
+        GamepadJoystick currentJoystick = isGrabbing ? rightJoystick : leftJoystick;
         lastHorizontalValue = currentJoystick.getHorizontalAxis(event);
         lastVerticalValue = currentJoystick.getVerticalAxis(event);
 
@@ -230,7 +233,7 @@ public class Gamepad {
     }
 
     private void updateDirectionalJoystick(MotionEvent event){
-        GamepadJoystick currentJoystick = CallbackBridge.isGrabbing() ? leftJoystick : rightJoystick;
+        GamepadJoystick currentJoystick = isGrabbing ? leftJoystick : rightJoystick;
 
         int lastJoystickDirection = currentJoystickDirection;
         currentJoystickDirection = currentJoystick.getHeightDirection(event);

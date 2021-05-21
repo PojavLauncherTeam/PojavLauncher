@@ -38,6 +38,8 @@ public class BaseMainActivity extends LoggableActivity {
         LWJGLGLFWKeycode.GLFW_KEY_4, LWJGLGLFWKeycode.GLFW_KEY_5,   LWJGLGLFWKeycode.GLFW_KEY_6,
         LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
 
+    private Gamepad gamepad;
+
     private boolean rightOverride = false;
     public float scaleFactor = 1;
     private int fingerStillThreshold = 8;
@@ -651,12 +653,16 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
 
-    private final Gamepad gamepad = new Gamepad(this);
+
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent ev) {
         int mouseCursorIndex = -1;
 
         if(Gamepad.isGamepadEvent(ev)){
+            if(gamepad == null){
+                gamepad = new Gamepad(this, Tools.grabFirstGamepad());
+            }
+
             gamepad.update(ev);
             return true;
         }
@@ -709,6 +715,10 @@ public class BaseMainActivity extends LoggableActivity {
         System.out.println(event);
 
         if(Gamepad.isGamepadEvent(event)){
+            if(gamepad == null){
+                gamepad = new Gamepad(this, Tools.grabFirstGamepad());
+            }
+
             gamepad.update(event);
             return true;
         }
