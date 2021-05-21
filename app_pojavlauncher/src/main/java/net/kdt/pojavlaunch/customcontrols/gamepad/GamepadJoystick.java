@@ -18,14 +18,17 @@ public class GamepadJoystick {
     public static final int DIRECTION_WEST = 2;
     public static final int DIRECTION_NORTH_WEST = 1;
 
-    public static final float JOYSTICK_DEADZONE = 0.20f;
+    private float deadzone;
 
     private final int verticalAxis;
     private final int horizontalAxis;
 
-    public GamepadJoystick(int horizontalAxis, int verticalAxis){
+    public GamepadJoystick(int horizontalAxis, int verticalAxis, InputDevice device){
         this.verticalAxis = verticalAxis;
         this.horizontalAxis = horizontalAxis;
+
+        deadzone = Math.max(device.getMotionRange(verticalAxis).getFlat(),
+                            device.getMotionRange(horizontalAxis).getFlat() );
     }
 
     public double getAngleRadian(MotionEvent event){
@@ -63,18 +66,17 @@ public class GamepadJoystick {
     }
 
     private float applyDeadzone(MotionEvent event, int axis){
-        //TODO: tweakable deadzone ?
         /*
             This piece of code also modifies the value
             to make it seem like there was no deadzone in the first place
          */
+
         double magnitude = getMagnitude(event);
-        if (magnitude < JOYSTICK_DEADZONE){
+        if (magnitude < deadzone){
             return 0;
-        }else{
-            //if( Math.abs(event.getAxisValue(axis)) < 0.035) return 0;
-            return (float) ((event.getAxisValue(axis) / magnitude) * ((magnitude - JOYSTICK_DEADZONE) / (1 - JOYSTICK_DEADZONE)));
         }
+
+        return (float) ((event.getAxisValue(axis) / magnitude) * ((magnitude - deadzone) / (1 - deadzone)));
     }
 
     public static boolean isJoystickEvent(MotionEvent event){
@@ -84,10 +86,12 @@ public class GamepadJoystick {
 
 
     public int getHeightDirection(MotionEvent event){
-        if(getMagnitude(event) <= JOYSTICK_DEADZONE ) return DIRECTION_NONE;
+        if(getMagnitude(event) <= deadzone) return DIRECTION_NONE;
         return ((int) ((getAngle(event)+22.5)/45)) % 8;
     }
 
 
-
+    public float getDeadzone() {
+        return deadzone;
+    }
 }
