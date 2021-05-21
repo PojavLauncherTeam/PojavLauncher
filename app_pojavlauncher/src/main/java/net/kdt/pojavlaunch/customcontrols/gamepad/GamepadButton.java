@@ -35,5 +35,8 @@ public class GamepadButton {
     public void resetButtonState(){
         isDown = false;
     }
+    public boolean isDown(){
+        return isToggleable ? toggled : isDown;
+    }
 
 }
