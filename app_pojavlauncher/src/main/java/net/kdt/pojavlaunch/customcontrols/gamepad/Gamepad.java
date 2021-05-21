@@ -80,7 +80,7 @@ public class Gamepad {
 
                         delta--;
                         try {
-                            sleep((long) ((1 - delta)/ticks));
+                            sleep(Math.max((long) ((1 - delta)/ticks), 0));
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
