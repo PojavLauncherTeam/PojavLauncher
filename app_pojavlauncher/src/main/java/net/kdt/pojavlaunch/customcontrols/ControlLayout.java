@@ -219,18 +219,23 @@ public class ControlLayout extends FrameLayout
 	public void setActivity(CustomControlsActivity activity) {
 		mActivity = activity;
 	}
-	
-	public void toggleControlVisible() {
-		if (mModifiable) return; // Not using on custom controls activity
-		
+
+	public void toggleControlVisible(){
 		mControlVisible = !mControlVisible;
-		int visibilityState = mControlVisible ? View.VISIBLE : View.GONE;
+		setControlVisible(mControlVisible);
+	}
+
+	public void setControlVisible(boolean isVisible) {
+		if (mModifiable) return; // Not using on custom controls activity
+
+		mControlVisible = isVisible;
+		int visibilityState = isVisible ? View.VISIBLE : View.GONE;
 
 		for (int i = 0; i < getChildCount(); i++) {
 			View view = getChildAt(i);
 
 			if(view instanceof ControlSubButton){
-				view.setVisibility(mControlVisible ? (((ControlSubButton)view).parentDrawer.areButtonsVisible ? VISIBLE : GONE) : View.GONE);
+				view.setVisibility(isVisible ? (((ControlSubButton)view).parentDrawer.areButtonsVisible ? VISIBLE : GONE) : View.GONE);
 				continue;
 			}
 
