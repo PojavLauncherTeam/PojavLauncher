@@ -343,22 +343,22 @@ public class Gamepad {
             switch (keycode){
                 case GamepadMapping.MOUSE_SCROLL_DOWN:
                     if(isDown) CallbackBridge.sendScroll(0, -1);
-                    return;
+                    break;
                 case GamepadMapping.MOUSE_SCROLL_UP:
                     if(isDown) CallbackBridge.sendScroll(0, 1);
-                    return;
+                    break;
 
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT:
                     BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
-                    return;
+                    break;
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT:
                     BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
-                    return;
+                    break;
 
 
                 default:
                     BaseMainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
-                    return;
+                    break;
             }
         }
 
