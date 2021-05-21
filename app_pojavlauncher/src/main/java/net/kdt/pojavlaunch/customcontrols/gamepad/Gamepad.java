@@ -154,10 +154,10 @@ public class Gamepad {
         gameMap.DIRECTION_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_D};
         gameMap.DIRECTION_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_A};
 
-        gameMap.DPAD_UP.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        gameMap.DPAD_DOWN.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        gameMap.DPAD_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        gameMap.DPAD_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        gameMap.DPAD_UP.keycodes = new int[]{};
+        gameMap.DPAD_DOWN.keycodes = new int[]{};
+        gameMap.DPAD_RIGHT.keycodes = new int[]{};
+        gameMap.DPAD_LEFT.keycodes = new int[]{};
 
         gameMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
         gameMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
@@ -170,7 +170,7 @@ public class Gamepad {
         gameMap.THUMBSTICK_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_F5};
 
         gameMap.BUTTON_START.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
-        gameMap.BUTTON_SELECT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        gameMap.BUTTON_SELECT.keycodes = new int[]{};
 
 
         //MENU MAP
@@ -181,25 +181,25 @@ public class Gamepad {
 
         menuMap.DIRECTION_FORWARD = new int[]{GamepadMapping.MOUSE_SCROLL_UP, GamepadMapping.MOUSE_SCROLL_UP, GamepadMapping.MOUSE_SCROLL_UP,GamepadMapping.MOUSE_SCROLL_UP,GamepadMapping.MOUSE_SCROLL_UP};
         menuMap.DIRECTION_BACKWARD = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN, GamepadMapping.MOUSE_SCROLL_DOWN, GamepadMapping.MOUSE_SCROLL_DOWN,GamepadMapping.MOUSE_SCROLL_DOWN,GamepadMapping.MOUSE_SCROLL_DOWN};
-        menuMap.DIRECTION_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.DIRECTION_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.DIRECTION_RIGHT = new int[]{};
+        menuMap.DIRECTION_LEFT = new int[]{};
 
-        menuMap.DPAD_UP.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.DPAD_DOWN.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.DPAD_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.DPAD_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.DPAD_UP.keycodes = new int[]{};
+        menuMap.DPAD_DOWN.keycodes = new int[]{};
+        menuMap.DPAD_RIGHT.keycodes = new int[]{};
+        menuMap.DPAD_LEFT.keycodes = new int[]{};
 
         menuMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
         menuMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
 
-        menuMap.TRIGGER_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.TRIGGER_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.TRIGGER_LEFT.keycodes = new int[]{};
+        menuMap.TRIGGER_RIGHT.keycodes = new int[]{};
 
-        menuMap.THUMBSTICK_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
-        menuMap.THUMBSTICK_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.THUMBSTICK_LEFT.keycodes = new int[]{};
+        menuMap.THUMBSTICK_RIGHT.keycodes = new int[]{};
 
         menuMap.BUTTON_START.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_ESCAPE};
-        menuMap.BUTTON_SELECT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+        menuMap.BUTTON_SELECT.keycodes = new int[]{};
 
 
     }
