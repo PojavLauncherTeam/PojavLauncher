@@ -318,6 +318,7 @@ public class BaseMainActivity extends LoggableActivity {
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
+                private float prevX, prevY;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
@@ -344,14 +345,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
 
-                    if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
-                        mouse_x += (int)(e.getX() - e.getHistoricalX(0));
-                        mouse_y += (int)(e.getY() - e.getHistoricalY(0));
-                    }
-                    if(!CallbackBridge.isGrabbing()) {
-                        mouse_x = (int) (e.getX() * scaleFactor);
-                        mouse_y = (int) (e.getY() * scaleFactor);
-                    }
+
 
                     int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
@@ -378,6 +372,8 @@ public class BaseMainActivity extends LoggableActivity {
                                 } else {
                                     CallbackBridge.mouseX = mouse_x;
                                     CallbackBridge.mouseY = mouse_y;
+                                    prevX =  e.getX();
+                                    prevY =  e.getY();
                                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                     if (!rightOverride) {
                                         CallbackBridge.mouseLeft = true;
@@ -449,6 +445,23 @@ public class BaseMainActivity extends LoggableActivity {
                                 }
                                 break;
                         }
+                    }
+
+                    /*if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
+                        mouse_x += (int)(e.getX() - e.getHistoricalX(0))*4;
+                        mouse_y += (int)(e.getY() - e.getHistoricalY(0))*4;
+                    }*/
+                    if(CallbackBridge.isGrabbing()){
+                        if(e.getActionMasked() == MotionEvent.ACTION_MOVE){
+                            mouse_x += (int) (e.getX() - prevX);
+                            mouse_y += (int) (e.getY() - prevY);
+                            prevX = e.getX();
+                            prevY = e.getY();
+                        }
+                    }
+                    if(!CallbackBridge.isGrabbing()) {
+                        mouse_x = (int) (e.getX() * scaleFactor);
+                        mouse_y = (int) (e.getY() * scaleFactor);
                     }
 
                     
