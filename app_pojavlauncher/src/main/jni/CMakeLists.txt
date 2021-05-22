@@ -7,7 +7,8 @@ add_library(pojavexec SHARED
         jre_launcher.c
         utils.c
         )
-target_link_libraries(pojavexec PRIVATE -ldl -llog -landroid -lEGL)
+# gles for the debug string stuff
+target_link_libraries(pojavexec PRIVATE -ldl -llog -landroid -lEGL -lGLESv3)
 
 add_library(istdio SHARED
         stdio_is.c
@@ -27,6 +28,9 @@ add_library(awt_xawt SHARED
         # xawt_fake.c # doesn't exist?
         )
 # target_link_libraries(awt_xawt PRIVATE awt_headless) # FIXME
+
+set(gl4es_dir /mnt/ssd/znix/static/programming/android/gl4es)
+include(${gl4es_dir}/android.cmake)
 
 include(OpenCompositeStub/CMakeLists.txt)
 include(VrLauncher/CMakeLists.txt)

@@ -31,6 +31,22 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
     // Called from native code
     @SuppressWarnings("unused")
     public void setup() {
+        // LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114_dbg.so";
+
+        downloadGraphicsTest();
+
+        try {
+            JREUtils.relocateLibPath(this);
+            JREUtils.setJavaEnvironment(this, null);
+        } catch (Throwable throwable) {
+            throw new RuntimeException("Could not setup Java environment", throwable);
+        }
+
+        Log.e(TAG, "Calling Java setup");
+        JREUtils.initJavaRuntime();
+    }
+
+    private void downloadGraphicsTest() {
         try (OutputStream out = new FileOutputStream(APP_JAR)) {
             URL url = new URL("http://10.0.2.24:8001/GraphicsTest.jar");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -45,16 +61,6 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
             Log.w(TAG, "Failed to download test.jar", e);
             return;
         }
-
-        try {
-            JREUtils.relocateLibPath(this);
-            JREUtils.setJavaEnvironment(this, null);
-        } catch (Throwable throwable) {
-            throw new RuntimeException("Could not setup Java environment", throwable);
-        }
-
-        Log.e(TAG, "Calling Java setup");
-        JREUtils.initJavaRuntime();
     }
 
     /**
@@ -80,7 +86,7 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
             // launchClassPath += ":/sdcard/games/PojavLauncher/.minecraft/versions/1.12.2/1.12.2.jar";
 
             // FIXME HAAAACK move the tweaker into this repo
-            launchClassPath += ":" + APP_JAR;
+            launchClassPath = APP_JAR + ":" + launchClassPath;
 
             args.add("-cp");
             args.add(Tools.getLWJGL3ClassPath() + ":" + launchClassPath);
@@ -90,6 +96,9 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
             MinecraftAccount profile = MinecraftAccount.load("ZNixian");
             String[] launchArgs = Tools.getMinecraftArgs(profile, versionInfo, Tools.DIR_GAME_NEW);
             args.addAll(Arrays.asList(launchArgs));
+
+            args.add("--server");
+            args.add("10.0.2.24");
 
             // Add our custom tweaker to modify JNI so openvr loads
             args.add("--tweakClass");

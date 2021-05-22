@@ -14,6 +14,8 @@
 #include <GLES2/gl2.h>
 #endif
 
+#include <GLES3/gl32.h>
+
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 
@@ -21,6 +23,14 @@
 
 #include "OpenCompositeStub/oc_stub.h"
 #include "log.h"
+
+static void GL_APIENTRY glDebugOutput(GLenum source,
+                               GLenum type,
+                               unsigned int id,
+                               GLenum severity,
+                               GLsizei length,
+                               const char *message,
+                               const void *userParam);
 
 struct PotatoBridge {
 	/* ANativeWindow */ void* androidWindow;
@@ -220,11 +230,17 @@ JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
     const EGLint ctx_attribs[] = {
         EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
+        EGL_CONTEXT_OPENGL_DEBUG, EGL_TRUE,
         EGL_NONE
     };
     EGLContext* ctx = eglCreateContext(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
 
     potatoBridge.eglContext = ctx;
+
+    // glEnable(GL_DEBUG_OUTPUT);
+    // glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+    // glDebugMessageCallback(glDebugOutput, NULL);
+    // glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, GL_TRUE);
 
     printf("EGLBridge: Created CTX pointer = %p\n",ctx);
     //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
@@ -264,3 +280,96 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv
     return eglSwapInterval(potatoBridge.eglDisplay, interval);
 }
 
+static void GL_APIENTRY glDebugOutput(GLenum source,
+                               GLenum type,
+                               unsigned int id,
+                               GLenum severity,
+                               GLsizei length,
+                               const char *message,
+                               const void *userParam) {
+// ignore non-significant error/warning codes
+    if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
+
+    printf("Debug message (%d): %s", id, message);
+
+    const char *srcString = NULL;
+    switch (source) {
+        case GL_DEBUG_SOURCE_API:
+            srcString = "Source: API";
+            break;
+        case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
+            srcString = "Source: Window System";
+            break;
+        case GL_DEBUG_SOURCE_SHADER_COMPILER:
+            srcString = "Source: Shader Compiler";
+            break;
+        case GL_DEBUG_SOURCE_THIRD_PARTY:
+            srcString = "Source: Third Party";
+            break;
+        case GL_DEBUG_SOURCE_APPLICATION:
+            srcString = "Source: Application";
+            break;
+        case GL_DEBUG_SOURCE_OTHER:
+            srcString = "Source: Other";
+            break;
+        default:
+            srcString = "Source: <invalid enum>";
+            break;
+    }
+    printf("%s\n", srcString);
+
+    const char *typeStr;
+    switch (type) {
+        case GL_DEBUG_TYPE_ERROR:
+            typeStr = "Type: Error";
+            break;
+        case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+            typeStr = "Type: Deprecated Behaviour";
+            break;
+        case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+            typeStr = "Type: Undefined Behaviour";
+            break;
+        case GL_DEBUG_TYPE_PORTABILITY:
+            typeStr = "Type: Portability";
+            break;
+        case GL_DEBUG_TYPE_PERFORMANCE:
+            typeStr = "Type: Performance";
+            break;
+        case GL_DEBUG_TYPE_MARKER:
+            typeStr = "Type: Marker";
+            break;
+        case GL_DEBUG_TYPE_PUSH_GROUP:
+            typeStr = "Type: Push Group";
+            break;
+        case GL_DEBUG_TYPE_POP_GROUP:
+            typeStr = "Type: Pop Group";
+            break;
+        case GL_DEBUG_TYPE_OTHER:
+            typeStr = "Type: Other";
+            break;
+        default:
+            typeStr = "Type: <invalid enum>";
+            break;
+    }
+    printf("%s\n", typeStr);
+
+    const char *severityStr;
+    switch (severity) {
+        case GL_DEBUG_SEVERITY_HIGH:
+            severityStr = "Severity: high";
+            break;
+        case GL_DEBUG_SEVERITY_MEDIUM:
+            severityStr = "Severity: medium";
+            break;
+        case GL_DEBUG_SEVERITY_LOW:
+            severityStr = "Severity: low";
+            break;
+        case GL_DEBUG_SEVERITY_NOTIFICATION:
+            severityStr = "Severity: notification";
+            break;
+        default:
+            severityStr = "Severity: <invalid enum>";
+            break;
+    }
+    printf("%s\n", severityStr);
+}

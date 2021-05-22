@@ -38,9 +38,9 @@ public final class Tools
     public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
 
     public static String APP_NAME = "null";
-    
+
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
-    
+
     public static final String URL_HOME = "https://pojavlauncherteam.github.io/PojavLauncher";
     public static String DIR_DATA = "/data/data/" + BuildConfig.APPLICATION_ID;
     public static String CURRENT_ARCHITECTURE;
@@ -51,7 +51,7 @@ public final class Tools
     public static final String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
     public static final String DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
     public static final String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
-    
+
     // New since 3.0.0
     public static String DIR_HOME_JRE;
     public static String DIRNAME_HOME_JRE = "lib";
@@ -66,7 +66,7 @@ public final class Tools
     public static final String OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
     public static final String CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
     public static final String CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
-    
+
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
     public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
@@ -85,7 +85,7 @@ public final class Tools
         String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
 
         List<String> javaArgList = new ArrayList<String>();
-        
+
         int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
         // 13w17a: 20130425
         // 13w18a: 20130502
@@ -96,7 +96,7 @@ public final class Tools
             getCacioJavaArgs(javaArgList,false); // true
             ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
-        
+
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
@@ -105,7 +105,7 @@ public final class Tools
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
         JREUtils.launchJavaVM(ctx, javaArgList);
     }
-    
+
     public static void getCacioJavaArgs(List<String> javaArgList, boolean isHeadless) {
         javaArgList.add("-Djava.awt.headless="+isHeadless);
         // Caciocavallo config AWT-enabled version
@@ -135,7 +135,7 @@ public final class Tools
 
         overrideableArgList.add("-Djava.home=" + Tools.DIR_HOME_JRE);
         overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
-        
+
         overrideableArgList.add("-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent());
         overrideableArgList.add("-Duser.language=" + System.getProperty("user.language"));
         // overrideableArgList.add("-Duser.timezone=GMT");
@@ -151,7 +151,8 @@ public final class Tools
        
         overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_114.so");
         // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
-        
+        // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_114_dbg.so");
+
         // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
 
         // Enable LWJGL3 debug
@@ -191,7 +192,7 @@ public final class Tools
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
         }
-        
+
         String userType = "mojang";
 
         File gameDir = new File(strGameDir);
@@ -233,7 +234,7 @@ public final class Tools
                 }
             }
         }
-        
+
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(
                 versionInfo.minecraftArguments == null ?
@@ -439,7 +440,7 @@ public final class Tools
 
     private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         e.printStackTrace();
-        
+
         Runnable runnable = new Runnable(){
 
             @Override
@@ -599,9 +600,9 @@ public final class Tools
                         for (int i = 0; i < libList.size(); i++) {
                             DependentLibrary libAdded = libList.get(i);
                             String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
-                            
+
                             if (libAddedName.equals(libName)) {
-                                Log.d(APP_NAME, "Library " + libName + ": Replaced version " + 
+                                Log.d(APP_NAME, "Library " + libName + ": Replaced version " +
                                     libName.substring(libName.lastIndexOf(":") + 1) + " with " +
                                     libAddedName.substring(libAddedName.lastIndexOf(":") + 1));
                                 libList.set(i, lib);
@@ -619,14 +620,14 @@ public final class Tools
                 if (inheritsVer.arguments != null && customVer.arguments != null) {
                     List totalArgList = new ArrayList();
                     totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
-                    
+
                     int nskip = 0;
                     for (int i = 0; i < customVer.arguments.game.length; i++) {
                         if (nskip > 0) {
                             nskip--;
                             continue;
                         }
-                        
+
                         Object perCustomArg = customVer.arguments.game[i];
                         if (perCustomArg instanceof String) {
                             String perCustomArgStr = (String) perCustomArg;
@@ -674,11 +675,11 @@ public final class Tools
             }
         }
     }
-    
+
     public static String convertStream(InputStream inputStream) throws IOException {
         return convertStream(inputStream, Charset.forName("UTF-8"));
     }
-    
+
     public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
         String out = "";
         int len;
@@ -692,7 +693,7 @@ public final class Tools
     public static File lastFileModified(String dir) {
         File fl = new File(dir);
 
-        File[] files = fl.listFiles(new FileFilter() {          
+        File[] files = fl.listFiles(new FileFilter() {
                 public boolean accept(File file) {
                     return file.isFile();
                 }

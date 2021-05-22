@@ -1,7 +1,9 @@
 
 get_filename_component(app_root ${CMAKE_SOURCE_DIR}/../../../.. ABSOLUTE)
 #set(xr_sdk ${app_root}/libs/openxr-sdk)
-add_subdirectory(${app_root}/libs/OpenComposite OpenComposite)
+
+#add_subdirectory(${app_root}/libs/OpenComposite OpenComposite)
+add_subdirectory(/mnt/ssd/znix/static/programming/android/xrtest/OpenComposite OpenComposite)
 
 add_library(openvr_api SHARED
         OpenCompositeStub/oc_stub.cpp
