@@ -319,6 +319,7 @@ public class BaseMainActivity extends LoggableActivity {
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
                 private float prevX, prevY;
+                private int currentPointerID;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
@@ -373,6 +374,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                                     theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                 } else {
+                                    currentPointerID = e.getPointerId(0);
                                     CallbackBridge.mouseX = mouse_x;
                                     CallbackBridge.mouseY = mouse_y;
                                     prevX =  e.getX();
@@ -450,17 +452,15 @@ public class BaseMainActivity extends LoggableActivity {
                         }
                     }
 
-                    /*if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
-                        mouse_x += (int)(e.getX() - e.getHistoricalX(0))*4;
-                        mouse_y += (int)(e.getY() - e.getHistoricalY(0))*4;
-                    }*/
                     if(CallbackBridge.isGrabbing()){
-                        if(e.getActionMasked() == MotionEvent.ACTION_MOVE){
+                        if(e.getPointerId(0) != currentPointerID){
+                            currentPointerID = e.getPointerId(0);
+                        }else{
                             mouse_x += (int) (e.getX() - prevX);
                             mouse_y += (int) (e.getY() - prevY);
-                            prevX = e.getX();
-                            prevY = e.getY();
                         }
+                        prevX = e.getX();
+                        prevY = e.getY();
                     }
 
 
