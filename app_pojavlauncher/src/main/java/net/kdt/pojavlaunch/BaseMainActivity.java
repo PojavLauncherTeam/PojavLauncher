@@ -21,7 +21,6 @@ import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
-import net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick;
 
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -42,14 +41,14 @@ public class BaseMainActivity extends LoggableActivity {
 
     private boolean rightOverride = false;
     public float scaleFactor = 1;
-    private int fingerStillThreshold = 8;
+    private final int fingerStillThreshold = 8;
     private int initialX, initialY;
     private int scrollInitialX, scrollInitialY;
     private boolean mIsResuming = false;
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
     private static boolean triggeredLeftMouseButton = false;
-    private Handler theHandler = new Handler() {
+    private final Handler theHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
                 switch (msg.what) {
@@ -79,14 +78,10 @@ public class BaseMainActivity extends LoggableActivity {
     private boolean isVirtualMouseEnabled;
     private LinearLayout touchPad;
     private ImageView mousePointer;
-    //private EditText hiddenEditor;
-    // private ViewGroup overlayView;
     private MinecraftAccount mProfile;
     
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
-    
-    // protected CapturedEditText mKeyHandlerView;
 
     private LinearLayout contentLog;
     private TextView textLog;
@@ -97,7 +92,6 @@ public class BaseMainActivity extends LoggableActivity {
     private TextView debugText;
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
     public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
-    // private String mQueueText = new String();
 
     protected volatile JMinecraftVersionList.Version mVersionInfo;
 
@@ -106,21 +100,13 @@ public class BaseMainActivity extends LoggableActivity {
     private File logFile;
     private PrintStream logStream;
     
-    /*
-     private LinearLayout contentCanvas;
-     private AWTSurfaceView contentCanvasView;
-     */
-    private boolean resuming;
-    private boolean lastEnabled = false;
+
+    private final boolean lastEnabled = false;
     private boolean lastGrab = false;
-    private boolean isExited = false;
+    private final boolean isExited = false;
     private boolean isLogAllow = false;
 
     public volatile int mouse_x, mouse_y;
-
-    // private int navBarHeight = 40;
-    
-    // private static Collection<? extends Provider.Service> rsaPkcs1List;
 
     // @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -169,50 +155,36 @@ public class BaseMainActivity extends LoggableActivity {
             drawerLayout = findViewById(R.id.main_drawer_options);
 
             navDrawer = findViewById(R.id.main_navigation_view);
-            gameActionListener = new NavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(MenuItem menuItem) {
-                    switch (menuItem.getItemId()) {
-                        case R.id.nav_forceclose: dialogForceClose(BaseMainActivity.this);
-                            break;
-                        case R.id.nav_viewlog: openLogOutput();
-                            break;
-                        case R.id.nav_debug: toggleDebug();
-                            break;
-                        case R.id.nav_customkey: dialogSendCustomKey();
-                            break;
-                        case R.id.nav_mousespd: adjustMouseSpeedLive();
-                            break;
-                        case R.id.nav_customctrl: openCustomControls();
-                            break;
-                    }
-                    //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-
-                    drawerLayout.closeDrawers();
-                    return true;
+            gameActionListener = menuItem -> {
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_forceclose: dialogForceClose(BaseMainActivity.this);
+                        break;
+                    case R.id.nav_viewlog: openLogOutput();
+                        break;
+                    case R.id.nav_debug: toggleDebug();
+                        break;
+                    case R.id.nav_customkey: dialogSendCustomKey();
+                        break;
+                    case R.id.nav_mousespd: adjustMouseSpeedLive();
+                        break;
+                    case R.id.nav_customctrl: openCustomControls();
+                        break;
                 }
+
+                drawerLayout.closeDrawers();
+                return true;
             };
             navDrawer.setNavigationItemSelectedListener(
                 gameActionListener);
 
-            // this.overlayView = (ViewGroup) findViewById(R.id.main_control_overlay);
-
-            //this.hiddenEditor = findViewById(R.id.hiddenTextbox);
-
-            // Mouse pointer part
-            //this.mouseToggleButton = findButton(R.id.control_togglemouse);
             this.touchPad = findViewById(R.id.main_touchpad);
             touchPad.setFocusable(false);
             
             this.mousePointer = findViewById(R.id.main_mouse_pointer);
-            this.mousePointer.post(new Runnable(){
-
-                @Override
-                public void run() {
-                    ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
-                    params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                    params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                }
+            this.mousePointer.post(() -> {
+                ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
+                params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
             });
 
             this.contentLog = findViewById(R.id.content_log_layout);
@@ -220,63 +192,37 @@ public class BaseMainActivity extends LoggableActivity {
             this.textLog = (TextView) contentScroll.getChildAt(0);
             this.toggleLog = findViewById(R.id.content_log_toggle_log);
             this.toggleLog.setChecked(false);
-            // this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
-            // this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
 
             this.textLog.setTypeface(Typeface.MONOSPACE);
-            this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
-
-                    @Override
-                    public void onCheckedChanged(CompoundButton button, boolean isChecked)
-                    {
-                        isLogAllow = isChecked;
-                        appendToLog("");
-                    }
-                });
+            this.toggleLog.setOnCheckedChangeListener((button, isChecked) -> {
+                isLogAllow = isChecked;
+                appendToLog("");
+            });
 
             this.debugText = findViewById(R.id.content_text_debug);
 
             this.minecraftGLView = findViewById(R.id.main_game_render_view);
-            // toggleGui(null);
             this.drawerLayout.closeDrawers();
-/*
-            mKeyHandlerView = findViewById(R.id.main_key_handler);
-            mKeyHandlerView.setSingleLine(false);
-            mKeyHandlerView.clearFocus();
-            
-            AndroidLWJGLKeycode.isBackspaceAfterChar = true; // mVersionInfo.minimumLauncherVersion >= 18;
-*/
+
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
-            new Thread(new Runnable(){
-
-                    //private boolean isCapturing = false;
-                    @Override
-                    public void run()
-                    {
-                        while (!isExited) {
-                            if (lastGrab != CallbackBridge.isGrabbing())
-                            mousePointer.post(new Runnable(){
-
-                                @Override
-                                public void run()
-                                {
-                                    if (!CallbackBridge.isGrabbing() && isVirtualMouseEnabled) {
-                                        touchPad.setVisibility(View.VISIBLE);
-                                        placeMouseAt(displayMetrics.widthPixels / 2, displayMetrics.heightPixels / 2);
-                                    }
-
-                                    if (CallbackBridge.isGrabbing() && touchPad.getVisibility() != View.GONE) {
-                                        touchPad.setVisibility(View.GONE);
-                                    }
-
-                                    lastGrab = CallbackBridge.isGrabbing();
-                                }
-                            });
-
-
+            new Thread(() -> {
+                while (!isExited) {
+                    if (lastGrab != CallbackBridge.isGrabbing())
+                    mousePointer.post(() -> {
+                        if (!CallbackBridge.isGrabbing() && isVirtualMouseEnabled) {
+                            touchPad.setVisibility(View.VISIBLE);
+                            placeMouseAt(displayMetrics.widthPixels / 2, displayMetrics.heightPixels / 2);
                         }
-                    }
-                }, "VirtualMouseGrabThread").start();
+
+                        if (CallbackBridge.isGrabbing() && touchPad.getVisibility() != View.GONE) {
+                            touchPad.setVisibility(View.GONE);
+                        }
+
+                        lastGrab = CallbackBridge.isGrabbing();
+                    });
+
+                }
+            }, "VirtualMouseGrabThread").start();
 
 
             if (isAndroid8OrHigher()) {
@@ -369,7 +315,6 @@ public class BaseMainActivity extends LoggableActivity {
             // System.loadLibrary("Regal");
 
             minecraftGLView.setFocusable(true);
-            // minecraftGLView.setEGLContextClientVersion(2);
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
@@ -398,8 +343,7 @@ public class BaseMainActivity extends LoggableActivity {
                     }
 
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
-                   /* int x = ((int) e.getX()) * scaleFactor;
-                    int y = ((int) e.getY()) * scaleFactor;*/
+
                     if(e.getHistorySize() > 0 && CallbackBridge.isGrabbing()) {
                         mouse_x += (int)(e.getX() - e.getHistoricalX(0));
                         mouse_y += (int)(e.getY() - e.getHistoricalY(0));
@@ -441,7 +385,6 @@ public class BaseMainActivity extends LoggableActivity {
 
                                     if (CallbackBridge.isGrabbing()) {
                                         // It cause hold left mouse while moving camera
-                                        // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 1, x, y);
                                         initialX = mouse_x;
                                         initialY = mouse_y;
                                         theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
@@ -456,7 +399,6 @@ public class BaseMainActivity extends LoggableActivity {
                                     CallbackBridge.mouseY = mouse_y;
                                     
                                     // -TODO uncomment after fix wrong trigger
-                                    // CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (byte) 0, x, y);
                                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                     if (!rightOverride) {
                                         CallbackBridge.mouseLeft = false;
@@ -464,8 +406,6 @@ public class BaseMainActivity extends LoggableActivity {
                                 } 
 
                                 if (CallbackBridge.isGrabbing()) {
-                                    // System.out.println((String) ("[Math.abs(" + initialX + " - " + x + ") = " + Math.abs(initialX - x) + "] < " + fingerStillThreshold));
-                                    // System.out.println((String) ("[Math.abs(" + initialY + " - " + y + ") = " + Math.abs(initialY - y) + "] < " + fingerStillThreshold));
                                     if (isTouchInHotbar && Math.abs(hotbarX - mouse_x) < fingerStillThreshold && Math.abs(hotbarY - mouse_y) < fingerStillThreshold) {
                                         sendKeyPress(hudKeyHandled, 0, false);
                                     } else if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
@@ -516,7 +456,6 @@ public class BaseMainActivity extends LoggableActivity {
                     CallbackBridge.DEBUG_STRING.setLength(0);
 
                     return true;
-                    // return !CallbackBridge.isGrabbing();
                 }
             };
             
@@ -527,13 +466,9 @@ public class BaseMainActivity extends LoggableActivity {
                     private boolean debugErrored = false;
 
                     private String getMoving(float pos, boolean xOrY) {
-                        if (pos == 0) {
-                            return "STOPPED";
-                        } else if (pos > 0) {
-                            return xOrY ? "RIGHT" : "DOWN";
-                        } else { // if (pos3 < 0) {
-                            return xOrY ? "LEFT" : "UP";
-                        }
+                        if (pos == 0) return "STOPPED";
+                        if (pos > 0) return xOrY ? "RIGHT" : "DOWN";
+                        return xOrY ? "LEFT" : "UP";
                     }
 
                     @Override
@@ -614,18 +549,14 @@ public class BaseMainActivity extends LoggableActivity {
                             
                             JREUtils.setupBridgeWindow(new Surface(texture));
                             
-                            new Thread(new Runnable(){
-
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            Thread.sleep(200);
-                                            runCraft();
-                                        } catch (Throwable e) {
-                                            Tools.showError(BaseMainActivity.this, e, true);
-                                        }
-                                    }
-                                }, "JVM Main thread").start();
+                            new Thread(() -> {
+                                try {
+                                    Thread.sleep(200);
+                                    runCraft();
+                                } catch (Throwable e) {
+                                    Tools.showError(BaseMainActivity.this, e, true);
+                                }
+                            }, "JVM Main thread").start();
                         }
                     }
 
@@ -702,11 +633,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     boolean isKeyboard(KeyEvent evt) {
         System.out.println("Event:" +evt);
-        //if((evt.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD) return true;
-        //if(evt.getSource() == InputDevice.SOURCE_KEYBOARD) return true;
-        //if(evt.getUnicodeChar() != 0) return true;
-        if(AndroidLWJGLKeycode.androidToLwjglMap.containsKey(evt.getKeyCode())) return true;
-        return false;
+        return AndroidLWJGLKeycode.androidToLwjglMap.containsKey(evt.getKeyCode());
     }
 
 
@@ -731,20 +658,18 @@ public class BaseMainActivity extends LoggableActivity {
         return false;
     }
 
-    //private Dialog menuDial;
+
     @Override
     public void onResume() {
         super.onResume();
         mIsResuming = true;
-        // if (minecraftGLView != null) minecraftGLView.requestRender();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
         }
@@ -760,30 +685,7 @@ public class BaseMainActivity extends LoggableActivity {
         return Build.VERSION.SDK_INT >= 26; 
     }
 
-    // private FileObserver mLogObserver;
     private void runCraft() throws Throwable {
-        /* Old logger
-        if (Tools.LAUNCH_TYPE != Tools.LTYPE_PROCESS) {
-            currLogFile = JREUtils.redirectStdio(true);
-            // DEPRECATED constructor (String) api 29
-            mLogObserver = new FileObserver(currLogFile.getAbsolutePath(), FileObserver.MODIFY){
-                @Override
-                public void onEvent(int event, String file) {
-                    try {
-                        if (event == FileObserver.MODIFY && currLogFile.length() > 0l) {
-                            System.out.println(Tools.read(currLogFile.getAbsolutePath()));
-                            Tools.write(currLogFile.getAbsolutePath(), "");
-                        }
-                    } catch (Throwable th) {
-                        Tools.showError(MainActivity.this, th);
-                        mLogObserver.stopWatching();
-                    }
-                }
-            };
-            mLogObserver.startWatching();
-        }
-        */
-        
         appendlnToLog("--------- beggining with launcher debug");
         appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         if (LauncherPreferences.PREF_RENDERER.equals("vulkan_zink")) {
@@ -806,38 +708,6 @@ public class BaseMainActivity extends LoggableActivity {
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-
-/*
-        if (jreVersion.equals("1.8.0")) return;
-
-        // Test java
-        ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
-            @Override
-            public void onPrintLine(String text){
-                appendlnToLog("[JRETest] " + text);
-            }
-        });
-        JREUtils.setJavaEnvironment(this, shell);
-        
-        List<String> testArgs = new ArrayList<String>();
-        testArgs.add(Tools.homeJreDir + "/bin/java");
-        Tools.getJavaArgs(this, testArgs);
-        testArgs.add("-version");
-        
-        new File(Tools.homeJreDir + "/bin/java").setExecutable(true);
-        
-        // shell.writeToProcess("chmod 777 " + Tools.homeJreDir + "/bin/java");
-        shell.writeToProcess("set -e");
-        shell.writeToProcess(testArgs.toArray(new String[0]));
-        
-        int exitCode = shell.waitFor();
-        appendlnToLog("Info: java test command exited with " + exitCode);
-        
-        if (exitCode != 0) {
-            appendlnToLog("Error: the test returned non-zero exit code.");
-            // throw new RuntimeException(getString(R.string.mcn_check_fail_java));
-        }
-    */
     }
 
     private void checkLWJGL3Installed() {
@@ -873,11 +743,11 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     public static String fromArray(List<String> arr) {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (String exec : arr) {
-            s = s + " " + exec;
+            s.append(" ").append(exec);
         }
-        return s;
+        return s.toString();
     }
 
     private void toggleDebug() {
@@ -887,15 +757,10 @@ public class BaseMainActivity extends LoggableActivity {
     private void dialogSendCustomKey() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(R.string.control_customkey);
-        dialog.setItems(AndroidLWJGLKeycode.generateKeyName(), new DialogInterface.OnClickListener(){
-
-                @Override
-                public void onClick(DialogInterface dInterface, int position) {
-                    AndroidLWJGLKeycode.execKeyIndex(BaseMainActivity.this, position);
-                }
-            });
+        dialog.setItems(AndroidLWJGLKeycode.generateKeyName(), (dInterface, position) -> AndroidLWJGLKeycode.execKeyIndex(BaseMainActivity.this, position));
         dialog.show();
     }
+
     boolean isInEditor;
     private void openCustomControls() {
         if(ingameControlsEditorListener != null) {
@@ -906,6 +771,7 @@ public class BaseMainActivity extends LoggableActivity {
             isInEditor = true;
         }
     }
+
     public void leaveCustomControls() {
         if(this instanceof MainActivity) {
             try {
@@ -933,53 +799,21 @@ public class BaseMainActivity extends LoggableActivity {
         contentLog.setVisibility(View.GONE);
         mIsResuming = true;
     }
-    /*
-     private void openCanvasOutput() {
-     WindowAnimation.fadeIn(contentCanvas, 500);
-     }
-
-     public void closeCanvasOutput(View view) {
-     WindowAnimation.fadeOut(contentCanvas, 500);
-     }
-     */
      
     @Override
     public void appendToLog(final String text, boolean checkAllow) {
         logStream.print(text);
         if (checkAllow && !isLogAllow) return;
-        textLog.post(new Runnable(){
-                @Override
-                public void run() {
-                    textLog.append(text);
-                    contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
-                }
-            });
-    }
-
-    public String getMinecraftOption(String key) {
-        try {
-            String[] options = Tools.read(Tools.DIR_GAME_NEW + "/options.txt").split("\n");
-            for (String option : options) {
-                String[] optionKeyValue = option.split(":");
-                if (optionKeyValue[0].equals(key)) {
-                    return optionKeyValue[1];
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+        textLog.post(() -> {
+            textLog.append(text);
+            contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
+        });
     }
 
     public int mcscale(int input) {
         return (int)((this.guiScale * input)/scaleFactor);
     }
 
-    /*
-     public int randomInRange(int min, int max) {
-     return min + (int)(Math.random() * (max - min + 1));
-     }
-     */
 
     public void toggleMenu(View v) {
         drawerLayout.openDrawer(Gravity.RIGHT);
@@ -1007,24 +841,13 @@ public class BaseMainActivity extends LoggableActivity {
         new AlertDialog.Builder(ctx)
             .setMessage(R.string.mcn_exit_confirm)
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                @Override
-                public void onClick(DialogInterface p1, int p2)
-                {
-                    try {
-                        fullyExit();
-                    } catch (Throwable th) {
-                        Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
-                    }
-
-                    // If we are unable to enable exit, use method: kill myself.
-                    // android.os.Process.killProcess(android.os.Process.myPid());
-
-                    // Toast.makeText(MainActivity.this, "Could not exit. Please force close this app.", Toast.LENGTH_LONG).show();
+            .setPositiveButton(android.R.string.ok, (p1, p2) -> {
+                try {
+                    fullyExit();
+                } catch (Throwable th) {
+                    Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
                 }
-            })
-            .show();
+            }).show();
     }
 
     @Override
@@ -1053,7 +876,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     protected void setRightOverride(boolean val) {
         this.rightOverride = val;
-        // this.secondaryButton.setBackgroundDrawable(this.rightOverride ? this.secondaryButtonColorBackground : this.secondaryButtonDefaultBackground);
     }
 
     public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
@@ -1084,10 +906,11 @@ public class BaseMainActivity extends LoggableActivity {
             } catch (IllegalAccessException | NoSuchFieldException e) {
 
             }
-        }else{
-            sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
-            sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
+            return;
         }
+
+        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
+        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
     }
 
     public void sendKeyPress(int keyCode) {
@@ -1166,21 +989,15 @@ public class BaseMainActivity extends LoggableActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
         b.setView(v);
-        b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                LauncherPreferences.PREF_MOUSESPEED = ((float)tmpMouseSpeed)/100f;
-                LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).commit();
-                dialogInterface.dismiss();
-                System.gc();
-            }
+        b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+            LauncherPreferences.PREF_MOUSESPEED = ((float)tmpMouseSpeed)/100f;
+            LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).commit();
+            dialogInterface.dismiss();
+            System.gc();
         });
-        b.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                System.gc();
-            }
+        b.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            System.gc();
         });
         b.show();
     }
