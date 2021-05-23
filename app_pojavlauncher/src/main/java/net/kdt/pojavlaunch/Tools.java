@@ -187,12 +187,12 @@ public final class Tools
         
         // Override args
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
-            for (int i = 0; i < overrideableArgList.size(); i++) {
+            for (int i = overrideableArgList.size() - 1; i >= 0; i--) {
                 String arg = overrideableArgList.get(i);
                 if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
                     overrideableArgList.set(i, argOverride);
                     break;
-                } else if (!argOverride.isEmpty() && i+1 == overrideableArgList.size()) {
+                } else if (!argOverride.isEmpty() && i == 0) {
                     javaArgList.add(argOverride);
                 }
             }
