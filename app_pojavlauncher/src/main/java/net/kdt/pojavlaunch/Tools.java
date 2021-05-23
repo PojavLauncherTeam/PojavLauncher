@@ -189,6 +189,8 @@ public final class Tools
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             for (int i = overrideableArgList.size() - 1; i >= 0; i--) {
                 String arg = overrideableArgList.get(i);
+                // Currently, only java property is supported overridable argument, other such as "-X:" are handled by the JVM.
+                // Althought java properties are also handled by JVM, but duplicate bug from parser may occurs, so replace them.
                 if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
                     // Override the matched argument
                     overrideableArgList.set(i, argOverride);
