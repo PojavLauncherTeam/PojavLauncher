@@ -192,7 +192,7 @@ public final class Tools
                 if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
                     overrideableArgList.set(i, argOverride);
                     break;
-                } else if (i+1 == overrideableArgList.size()) {
+                } else if (!argOverride.isEmpty() && i+1 == overrideableArgList.size()) {
                     javaArgList.add(argOverride);
                 }
             }
