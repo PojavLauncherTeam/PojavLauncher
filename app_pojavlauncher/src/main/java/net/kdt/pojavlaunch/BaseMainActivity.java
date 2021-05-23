@@ -346,9 +346,7 @@ public class BaseMainActivity extends LoggableActivity {
                             sendKeyPress(hudKeyHandled);
                         } else {
                             CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, mouse_x, mouse_y);
-                            if (!rightOverride) {
-                                CallbackBridge.mouseLeft = true;
-                            }
+                            if (!rightOverride) CallbackBridge.mouseLeft = true;
                         }
                     } else {
                         switch (e.getActionMasked()) {
@@ -362,23 +360,22 @@ public class BaseMainActivity extends LoggableActivity {
                                     hotbarY = (int)e.getY();
 
                                     theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                } else {
-                                    currentPointerID = e.getPointerId(0);
-                                    CallbackBridge.mouseX = mouse_x;
-                                    CallbackBridge.mouseY = mouse_y;
-                                    prevX =  e.getX();
-                                    prevY =  e.getY();
-                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    if (!rightOverride) {
-                                        CallbackBridge.mouseLeft = true;
-                                    }
+                                    break;
+                                }
 
-                                    if (CallbackBridge.isGrabbing()) {
-                                        // It cause hold left mouse while moving camera
-                                        initialX = mouse_x;
-                                        initialY = mouse_y;
-                                        theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                    }
+                                currentPointerID = e.getPointerId(0);
+                                CallbackBridge.mouseX = mouse_x;
+                                CallbackBridge.mouseY = mouse_y;
+                                prevX =  e.getX();
+                                prevY =  e.getY();
+                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                if (!rightOverride) CallbackBridge.mouseLeft = true;
+
+                                if (CallbackBridge.isGrabbing()) {
+                                    // It cause hold left mouse while moving camera
+                                    initialX = mouse_x;
+                                    initialY = mouse_y;
+                                    theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                 }
                                 break;
                                 
@@ -390,9 +387,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     
                                     // -TODO uncomment after fix wrong trigger
                                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    if (!rightOverride) {
-                                        CallbackBridge.mouseLeft = false;
-                                    }
+                                    if (!rightOverride) CallbackBridge.mouseLeft = false;
                                 } 
 
                                 if (CallbackBridge.isGrabbing()) {
@@ -584,7 +579,6 @@ public class BaseMainActivity extends LoggableActivity {
             Tools.showError(this, e, true);
         }
     }
-
 
 
     @Override
