@@ -190,9 +190,11 @@ public final class Tools
             for (int i = overrideableArgList.size() - 1; i >= 0; i--) {
                 String arg = overrideableArgList.get(i);
                 if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
+                    // Override the matched argument
                     overrideableArgList.set(i, argOverride);
                     break;
                 } else if (!argOverride.isEmpty() && i == 0) {
+                    // Overridable argument has mismatched, so add the custom argument to overridable argument list
                     javaArgList.add(argOverride);
                 }
             }
