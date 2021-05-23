@@ -44,6 +44,9 @@ public class BaseMainActivity extends LoggableActivity {
     private final int fingerStillThreshold = 8;
     private int initialX, initialY;
     private int scrollInitialX, scrollInitialY;
+    private float prevX, prevY;
+    private int currentPointerID;
+
     private boolean mIsResuming = false;
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
@@ -228,89 +231,77 @@ public class BaseMainActivity extends LoggableActivity {
             if (isAndroid8OrHigher()) {
                 touchPad.setDefaultFocusHighlightEnabled(false);
             }
-            touchPad.setOnTouchListener(new OnTouchListener(){
-                    private float prevX, prevY;
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        // MotionEvent reports input details from the touch screen
-                        // and other input controls. In this case, you are only
-                        // interested in events where the touch position changed.
-                        // int index = event.getActionIndex();
-                        if(CallbackBridge.isGrabbing()) {
-                            minecraftGLView.dispatchTouchEvent(MotionEvent.obtain(event));
-                            System.out.println("Transitioned event" + event.hashCode() + " to MinecraftGLView");
-                            return false;
-                        }
-                        int action = event.getActionMasked();
+            touchPad.setOnTouchListener((v, event) -> {
+                // MotionEvent reports input details from the touch screen
+                // and other input controls. In this case, you are only
+                // interested in events where the touch position changed.
+                // int index = event.getActionIndex();
+                if(CallbackBridge.isGrabbing()) {
+                    minecraftGLView.dispatchTouchEvent(MotionEvent.obtain(event));
+                    System.out.println("Transitioned event" + event.hashCode() + " to MinecraftGLView");
+                    return false;
+                }
+                int action = event.getActionMasked();
 
-                        float x = event.getX();
-                        float y = event.getY();
-                        if(event.getHistorySize() > 0) {
-                            prevX = event.getHistoricalX(0);
-                            prevY = event.getHistoricalY(0);
-                        }else{
+                float x = event.getX();
+                float y = event.getY();
+                float mouseX = mousePointer.getTranslationX();
+                float mouseY = mousePointer.getTranslationY();
+
+                if (gestureDetector.onTouchEvent(event)) {
+                    mouse_x = (int) (mouseX * scaleFactor);
+                    mouse_y = (int) (mouseY * scaleFactor);
+                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                    CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
+                    if (!rightOverride) CallbackBridge.mouseLeft = true;
+
+
+                } else {
+                    switch (action) {
+                        case MotionEvent.ACTION_UP: // 1
+                        case MotionEvent.ACTION_CANCEL: // 3
+                            if (!rightOverride) CallbackBridge.mouseLeft = false;
+                            break;
+
+                        case MotionEvent.ACTION_POINTER_DOWN: // 5
+                            scrollInitialX = CallbackBridge.mouseX;
+                            scrollInitialY = CallbackBridge.mouseY;
+                            break;
+
+                        case MotionEvent.ACTION_DOWN:
                             prevX = x;
                             prevY = y;
-                        }
-                        float mouseX = mousePointer.getTranslationX();
-                        float mouseY = mousePointer.getTranslationY();
+                            currentPointerID = event.getPointerId(0);
+                            break;
 
-                        if (gestureDetector.onTouchEvent(event)) {
-                            mouse_x = (int) (mouseX * scaleFactor);
-                            mouse_y = (int) (mouseY * scaleFactor);
-                            CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor), (int) (mouseY *scaleFactor));
-                            CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
-                            if (!rightOverride) {
-                                CallbackBridge.mouseLeft = true;
+                        case MotionEvent.ACTION_MOVE: // 2
+
+                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                CallbackBridge.sendScroll(CallbackBridge.mouseX - scrollInitialX, CallbackBridge.mouseY - scrollInitialY);
+                                scrollInitialX = CallbackBridge.mouseX;
+                                scrollInitialY = CallbackBridge.mouseY;
+                            } else {
+                                if(currentPointerID == event.getPointerId(0)) {
+                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
+                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
+                                    mouse_x = (int) (mouseX * scaleFactor);
+                                    mouse_y = (int) (mouseY * scaleFactor);
+                                    placeMouseAt(mouseX, mouseY);
+                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                }else currentPointerID = event.getPointerId(0);
+
+                                prevX = x;
+                                prevY = y;
                             }
-
-                        } else {
-                            switch (action) {
-                                case MotionEvent.ACTION_UP: // 1
-                                case MotionEvent.ACTION_CANCEL: // 3
-                                    if (!rightOverride) {
-                                        CallbackBridge.mouseLeft = false;
-                                    }
-                                    break;
-
-                                case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                    scrollInitialX = CallbackBridge.mouseX;
-                                    scrollInitialY = CallbackBridge.mouseY;
-                                    break;
-
-                                case MotionEvent.ACTION_POINTER_UP: // 6
-                                    break;
-                                    
-                                case MotionEvent.ACTION_MOVE: // 2
-
-                                    if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
-                                        CallbackBridge.sendScroll(CallbackBridge.mouseX - scrollInitialX, CallbackBridge.mouseY - scrollInitialY);
-                                        scrollInitialX = CallbackBridge.mouseX;
-                                        scrollInitialY = CallbackBridge.mouseY;
-                                    } else {
-                                        mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX)*LauncherPreferences.PREF_MOUSESPEED));
-                                        mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + (y - prevY)*LauncherPreferences.PREF_MOUSESPEED));
-                                        mouse_x = (int) (mouseX * scaleFactor);
-                                        mouse_y = (int) (mouseY * scaleFactor);
-                                        placeMouseAt(mouseX, mouseY);
-                                        CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
-                                        /*
-                                        if (!CallbackBridge.isGrabbing()) {
-                                            CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
-                                            CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
-                                        }
-                                        */
-
-                                    break;
-                            }
-                        }
-                        
-                        debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                        CallbackBridge.DEBUG_STRING.setLength(0);
-                        
-                        return true;
+                            break;
                     }
-                });
+                }
+
+                debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                CallbackBridge.DEBUG_STRING.setLength(0);
+
+                return true;
+            });
 
             // System.loadLibrary("Regal");
 
@@ -318,8 +309,6 @@ public class BaseMainActivity extends LoggableActivity {
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
-                private float prevX, prevY;
-                private int currentPointerID;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
