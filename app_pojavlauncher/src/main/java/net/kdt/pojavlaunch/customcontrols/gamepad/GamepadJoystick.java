@@ -28,8 +28,8 @@ public class GamepadJoystick {
         this.horizontalAxis = horizontalAxis;
 
         //Some controllers aren't recognized as such by android, so we fallback to a default value of 0.2
-        deadzone = device != null ? Math.max(device.getMotionRange(verticalAxis).getFlat(),
-                            device.getMotionRange(horizontalAxis).getFlat()) * 2f : 0.2f;
+        try { deadzone = Math.max(device.getMotionRange(verticalAxis).getFlat(), device.getMotionRange(horizontalAxis).getFlat()); }
+        catch (NullPointerException e){ deadzone = 0.2f; }
 
         if(deadzone < 0.15) deadzone = 0.15f;
     }
