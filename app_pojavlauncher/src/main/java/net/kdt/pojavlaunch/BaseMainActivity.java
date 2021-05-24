@@ -590,7 +590,7 @@ public class BaseMainActivity extends LoggableActivity {
 
         if(Gamepad.isGamepadEvent(ev)){
             if(gamepad == null){
-                gamepad = new Gamepad(this, Tools.grabFirstGamepad());
+                gamepad = new Gamepad(this, ev.getDevice());
             }
 
             gamepad.update(ev);
@@ -642,7 +642,7 @@ public class BaseMainActivity extends LoggableActivity {
 
         if(Gamepad.isGamepadEvent(event)){
             if(gamepad == null){
-                gamepad = new Gamepad(this, Tools.grabFirstGamepad());
+                gamepad = new Gamepad(this, event.getDevice());
             }
 
             gamepad.update(event);
