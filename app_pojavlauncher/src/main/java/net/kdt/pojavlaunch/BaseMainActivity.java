@@ -40,7 +40,9 @@ public class BaseMainActivity extends LoggableActivity {
     private Gamepad gamepad;
 
     private boolean rightOverride = false;
+    private DisplayMetrics displayMetrics;
     public float scaleFactor = 1;
+    public double sensitivityFactor;
     private final int fingerStillThreshold = 8;
     private int initialX, initialY;
     private int scrollInitialX, scrollInitialY;
@@ -75,7 +77,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     private MinecraftGLView minecraftGLView;
     private int guiScale;
-    private DisplayMetrics displayMetrics;
+
     public boolean hiddenTextIgnoreUpdate = true;
     
     private boolean isVirtualMouseEnabled;
@@ -146,7 +148,8 @@ public class BaseMainActivity extends LoggableActivity {
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;
             
-            this.displayMetrics = Tools.getDisplayMetrics(this);
+            displayMetrics = Tools.getDisplayMetrics(this);
+            sensitivityFactor = 1.4 * (1080f/ displayMetrics.heightPixels);
             CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels * scaleFactor);
             CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels * scaleFactor);
             System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
@@ -440,8 +443,8 @@ public class BaseMainActivity extends LoggableActivity {
                         if(e.getPointerId(0) != currentPointerID){
                             currentPointerID = e.getPointerId(0);
                         }else{
-                            mouse_x += (int) (e.getX() - prevX);
-                            mouse_y += (int) (e.getY() - prevY);
+                            mouse_x += (int) (e.getX() - prevX) * sensitivityFactor;
+                            mouse_y += (int) (e.getY() - prevY) * sensitivityFactor;
                         }
                         prevX = e.getX();
                         prevY = e.getY();
