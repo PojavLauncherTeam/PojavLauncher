@@ -31,7 +31,7 @@
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Требуется разрѣшеніе на чтеніе/запись хранилища!</string>
+    <string name="toast_permission_denied">Требуется разрѣшеніе на чтеніе/запись въ хранилищѣ!</string>
     <string name="toast_optifine_success">Установка прошла успѣшно</string>
     <string name="toast_uninstalljre_done">Удаленіе Java Runtime завершено</string>
     <!--
