@@ -62,7 +62,7 @@
     <string name="mcl_setting_subtitle_freeform">تشغيل ماينكرافت في النافذة العائمة. يتطلب أندرويد 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">أخفِ الشّريط الجانبيّ</string>
     <string name="mcl_setting_subtitle_hide_sidebar">قد يعجب الأشخاص الذين يفضلون واجهة المستخدم القديمة v1 بهذا. يمنحك تجربة ملء الشاشة بشكل أكبر.</string>
-    <string name="mcl_setting_title_ignore_notch">تجاهل النبرة</string>
+    <string name="mcl_setting_title_ignore_notch">تجاهل notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">تجاهل النبرة وتوسيع الشاشة أسفلها.\nيعطيك تجربة أكثر انغماساً.</string>
     <string name="mcl_setting_title_resolution_scaler">مقياس الدقة</string>
     <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتقليل دقة اللعبة. 100% هي دقة كاملة</string>
@@ -139,6 +139,8 @@
     <string name="control_viewout">سجل الإخراج</string>
     <string name="control_adebug">مدخل الـDebug</string>
     <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
+    <string name="control_scaleup">رفع المستوى</string>
+    <string name="control_scaledown">خفض المستوئ</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
