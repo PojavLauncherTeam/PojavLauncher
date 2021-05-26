@@ -137,10 +137,10 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">فرض الإغلاق</string>
     <string name="control_viewout">سجل الإخراج</string>
-    <string name="control_adebug">مدخل الـDebug</string>
+    <string name="control_adebug">مدخل التصحيح</string>
     <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
-    <string name="control_scaleup">رفع المستوى</string>
-    <string name="control_scaledown">خفض المستوئ</string>
+    <string name="control_scaleup">رفع المستوى التحكم</string>
+    <string name="control_scaledown">خفض مستوى التحكم</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -155,7 +155,7 @@
     <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
-    <string name="customctrl_transparency_bg">شفافية الخلفية</string>
+    <string name="customctrl_transparency_bg">شفافيه الخلفية</string>
     <string name="customctrl_keycombine">مجموعة المفاتيح</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
