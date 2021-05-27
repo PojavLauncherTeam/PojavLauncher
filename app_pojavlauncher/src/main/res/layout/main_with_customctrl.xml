@@ -39,6 +39,12 @@
 
 			</LinearLayout>
 
+			<ImageView
+				android:id="@+id/console_pointer"
+				android:layout_width="64px"
+				android:layout_height="64px"
+				app:srcCompat="@drawable/pointer" />
+
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 
 		<LinearLayout
