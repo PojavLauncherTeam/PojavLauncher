@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">pajaw launcher (Mc4Android)</string>
+    <string name="app_short_name">PojawLunchr</string>
+    <string name="app_motd">go MC at your mobile!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Emol or osornoim</string>
+    <string name="login_online_password_hint">passwd</string>
+    <string name="login_online_check_keeplogin">kep i kog inside</string>
+    <string name="login_online_login_label">logout</string>
+    <string name="login_offline_label">Login as offloin akownt</string>
+    <string name="login_error_short_username">Usernoim must be at liest 3 characters</string>
+    <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
+    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_select_account">what acc?</string>
+    <string name="login_title_no_saved_account">No akownt findz !</string>
+    <string name="login_dialog_no_saved_account">U doan has any savd akownt.\nUse teh opshun <b>\"Keep me loggd in\"</b> 2 save an akownt upon furst login.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Swiep frum riet 2 left 2 open meun ◀\nHold button 2 customiez: edit, resiez or deleet."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Dis akownt wil be removed!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Install Jaav Runtiem %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Chooz mod installr</string>
+    <!-- Error messages -->
+    <string name="error_fatal">Pojaw Launcher haz unexpectadly crashd</string>
+    <string name="error_no_version">No vershun!</string>
+    <string name="error_show_more">Show mor</string>
+    <string name="error_show_less">Show les</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Teh riid/rite 2 storage permishun iz requird!</string>
+    <string name="toast_optifine_success">Instal succesful</string>
+    <string name="toast_uninstalljre_done">Doen Uninstal Jaav Runtiem</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Newz</string>
+    <string name="mcl_tab_console">Developmnt consol</string>
+    <string name="mcl_tab_crash">Crash trunk</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connectd</string>
+    <string name="mcl_account_offline">Offlien</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Ready 2 pulay minecraft %s</string>
+    <string name="mcl_launch_cleancache">Cleanin cache filez</string>
+    <string name="mcl_launch_downloading">Downloadin %s</string>
+    <string name="mcl_launch_downloading_progress">"Downloadin %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Preparin 2 download resourcez</string>
+    <string name="mcl_options">Opshuns</string>
+    <string name="mcl_option_modinstall">Launch mod installr (Foreg, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Launch mod installr (wif custom arguments)</string>
+    <string name="mcl_option_customcontrol">Custom controls</string>
+    <string name="mcl_option_settings">Settinz</string>
+    <string name="mcl_option_about">Bout</string>
+    <string name="mcl_setting_title_uninstalljre">Uninstal Jaav Runtiem</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launchah restart requird] dis letz u re-install Jaav Runtiem</string>
+    <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform moed</string>
+    <string name="mcl_setting_subtitle_freeform">Launch minecraft in floatin window. Requirez android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Hied Sidebar</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folkz preferring teh old v1 UI miet likes dis. Srsly givez u moar fullscreen experienec.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoer notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoer teh notch an extendz teh screen undr it, Srsly.\nGivez u moar immersiev experienec.</string>
+    <string name="mcl_setting_title_resolution_scaler">Resolushun Scalah</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Allowz u 2 decreaes teh gaem resolushun. 100% iz fol resolushun</string>
+    <string name="mcl_setting_title_longpresstrigger">How long will triggr aftr long pres</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Change triggr tiem 4 long pres in destroy block an drop item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Treat bak butn as rite mouse</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Sum devicez treats external rite mouse as bak butn. If u r usin external mouse, u shud enable dis.</string>
+    <string name="mcl_setting_title_flat_button_style">Flat button styel</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Enabel dis 2 chaneg control button styel 2 flat.</string>
+    <string name="mcl_setting_title_buttonscale">Control buttons scalin</string>
+    <string name="mcl_setting_subtitle_buttonscale">Upscael dem if buttons r 2 small.</string>
+    <string name="mcl_setting_title_mousescale">Mouse scalin</string>
+    <string name="mcl_setting_subtitle_mousescale">Chaneg siez ov vurtual moues.</string>
+    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
+    <string name="mcl_setting_subtitle_javaargs">Bees careful, dis can mak teh gaem crash if modified wifout any prior knowledeg.</string>
+    <string name="mcl_setting_category_general">General settingz</string>
+    <string name="mcl_setting_category_scaling">Scalin settingz</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
+    <string name="mcl_setting_veroption_release">RELEASD</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alaf</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beat</string>
+    <string name="mcl_version_clone">Cloen</string>
+    <!-- Global strings -->
+    <string name="global_edit">Edit</string>
+    <string name="global_error">Eror</string>
+    <string name="global_load">Load</string>
+    <string name="global_name">Naym</string>
+    <string name="global_remove">Remoev</string>
+    <string name="global_restart">Re-start</string>
+    <string name="global_save">Saev</string>
+    <string name="global_unpacking">Unpacking %s</string>
+    <string name="global_error_field_empty">Dis field can\'t bees empty</string>
+    <string name="global_waiting">Wait</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Application/Gaem Exitd wif cod %d</string>
+    <string name="mcn_exit_call">Exit</string>
+    <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
+    <string name="mcn_check_fail_incompatiblearch">Architecchur %1$s iz incompatibel wif Jaav Runtiem %2$s.</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Keyboard</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Force close</string>
+    <string name="control_viewout">tree input</string>
+    <string name="control_adebug">Input Debug</string>
+    <string name="control_customkey">Send custom keycoed</string>
+    <string name="control_scaleup">Bigging go up</string>
+    <string name="control_scaledown">Bigging go down</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">Editin %s</string>
+    <string name="customctrl_remove">Remoev %s?</string>
+    <string name="customctrl_keyname">Keycoed</string>
+    <string name="customctrl_toggle">Toggleabel</string>
+    <string name="customctrl_size">Siez</string>
+    <string name="customctrl_size_width">Width</string>
+    <string name="customctrl_size_height">Height</string>
+    <string name="customctrl_dynamicpos">Dynamic position</string>
+    <string name="customctrl_dynamicpos_x">Dynamic X</string>
+    <string name="customctrl_dynamicpos_y">Dynamic Y</string>
+    <string name="customctrl_transparency_bg">Background transparency</string>
+    <string name="customctrl_keycombine">Key combination</string>
+    <string name="customctrl_addbutton">Add button</string>
+    <string name="customctrl_selectdefault">Select defaul Control json</string>
+    <string name="main_options">Opshuns</string>
+    <string name="main_play">Pulay</string>
+    <string name="main_welcome">Welcom, %s</string>
+    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_switchuser">Switch usr</string>
+    <string name="main_version">Vershun:</string>
+    <string name="main_nocrash">No crash detected</string>
+    <string name="main_nolog">No log.</string>
+    <string name="main_no_news_feed">Faild 2 fetch teh newz fed !</string>
+    <string name="auto_ram_subtitle">Enablez automatic Mices adjustah</string>
+    <string name="auto_ram_title">Auot Mices</string>
+    <string name="autoram_info_msg">Mices set 2 %d MB</string>
+    <string name="mcl_setting_check_libraries">Check libraries aftr downloadin</string>
+    <string name="mcl_setting_check_libraries_subtitle">Dis opshun forces launchah 2 check teh librawee hash if iz availabel. preventz brokd downloadz.</string>
+    <string name="dl_library_sha_fail">Librawee %s iz damaged an will bees redownloaded</string>
+    <string name="dl_library_sha_unknown">Librawee %s can\'t bees checked, haz 2 assuem idz gud</string>
+    <string name="dl_library_sha_pass">Librawee %s iz fien an usabel</string>
+    <string name="mcl_disable_gestures">Disabel gesturez</string>
+    <string name="mcl_disable_gestures_subtitle">Disables gesturez, such as hold 2 break block, an tap 2 plaec block.</string>
+    <string name="mcl_setting_title_mousespeed">Mouses sped</string>
+    <string name="mcl_setting_subtitle_mousespeed">Changez teh sped ov teh softwaer moues</string>
+    <string name="customctrl_passthru">Mouses pas-thur</string>
+    <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">Teh current amount ov free ram (%d) iz lowr than allocatd ram (%d), which cud lead 2 crashez. Change teh allocashun if teh game crashez.</string>
+    <string name="mcl_memory_allocation">Mices allocashun</string>
+    <string name="mcl_memory_allocation_subtitle">Controls how mutch mices iz given 2 minecraft</string>
+</resources>

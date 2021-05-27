@@ -2,8 +2,8 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Menjalankan Minecraft: Java Edition di perangkat anda!</string>
+    <string name="app_short_name">Peluncur Pojav</string>
+    <string name="app_motd">Luncurkan Minecraft: Java Edition di perangkat Anda!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -27,9 +27,9 @@
     <string name="alerttitle_installmod">Pilih sebuah instaler mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher tiba-tiba crash</string>
-    <string name="error_no_version">Tidak ada versi!</string>
-    <string name="error_show_more">Tunjukkan lebih</string>
-    <string name="error_show_less">Tunjukkan sedikit</string>
+    <string name="error_no_version">Versi tidak ada!</string>
+    <string name="error_show_more">Selengkapnya</string>
+    <string name="error_show_less">Tampilkan Sedikit</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
@@ -50,7 +50,7 @@
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_downloading_progress">"Mengunduh %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
-    <string name="mcl_options">Pilihan</string>
+    <string name="mcl_options">Opsi</string>
     <string name="mcl_option_modinstall">Luncurkan sebuah installer mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Luncurkan sebuah installer mod (dengan argumen buatan sendiri)</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
@@ -145,6 +145,8 @@
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Kirim keycode kustom</string>
+    <string name="control_scaleup">Besarkan skala</string>
+    <string name="control_scaledown">Kecilkan skala</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -166,7 +168,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
     <string name="customctrl_selectdefault">Pilih \". json\" kontrol default</string>
-    <string name="main_options">Pilihan</string>
+    <string name="main_options">Opsi</string>
     <string name="main_play">Main</string>
     <string name="main_welcome">Selamat datang, %s</string>
     <string name="main_infodev">Info (DEV)</string>

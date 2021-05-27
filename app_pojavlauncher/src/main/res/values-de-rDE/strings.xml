@@ -145,6 +145,8 @@
     <string name="control_viewout">Protokoll-Ausgabe</string>
     <string name="control_adebug">Eingabe-Debug</string>
     <string name="control_customkey">Sende Keycode</string>
+    <string name="control_scaleup">Vergrößern</string>
+    <string name="control_scaledown">Verkleinern</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>

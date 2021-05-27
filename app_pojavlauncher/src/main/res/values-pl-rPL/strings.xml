@@ -145,6 +145,8 @@
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
+    <string name="control_scaleup">Skalowanie w górę</string>
+    <string name="control_scaledown">Skalowanie w dół</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -189,4 +191,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszki</string>
     <string name="customctrl_passthru">Myszka przelotka</string>
     <string name="customctrl_rounded">Zaokrąglone</string>
+    <string name="memory_warning_msg">Obecna ilość wolnej pamięci RAM (%d) jest mniejsza niż przydzielona ilość (%d), co może prowadzić do awarii. Zmień alokację w przypadku awarii gry.</string>
+    <string name="mcl_memory_allocation">Przydział pamięci</string>
+    <string name="mcl_memory_allocation_subtitle">Kontroluje ilość pamięci przydzielonej Minecraft</string>
 </resources>

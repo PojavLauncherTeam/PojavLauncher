@@ -145,6 +145,8 @@
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">PointerCapture Debug</string>
     <string name="control_customkey">Send custom keycode</string>
+    <string name="control_scaleup">Scale up</string>
+    <string name="control_scaledown">Scale down</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>

@@ -139,6 +139,8 @@
     <string name="control_viewout">日誌輸出</string>
     <string name="control_adebug">輸入除錯</string>
     <string name="control_customkey">傳送自訂鍵碼</string>
+    <string name="control_scaleup">放大</string>
+    <string name="control_scaledown">縮小</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -183,4 +185,7 @@
     <string name="mcl_setting_subtitle_mousespeed">更改虛擬滑鼠的速度</string>
     <string name="customctrl_passthru">滑鼠透傳</string>
     <string name="customctrl_rounded">圓角</string>
+    <string name="memory_warning_msg">當前可用運存 (%d) 低於分配的運存 (%d)，這可能導致崩潰。 如果遊戲崩潰請更改配置。</string>
+    <string name="mcl_memory_allocation">運存分配</string>
+    <string name="mcl_memory_allocation_subtitle">控制給 Minecraft 分配多少運存</string>
 </resources>
