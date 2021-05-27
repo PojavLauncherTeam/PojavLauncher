@@ -1,9 +1,12 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.InputDevice;
 import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
