@@ -4,10 +4,11 @@ import android.view.InputDevice;
 import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
-import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.R;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -24,7 +25,7 @@ import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTI
 public class Gamepad {
 
     private BaseMainActivity gameActivity;
-
+    private ImageView pointerView;
 
     private GamepadDpad gamepadDpad = new GamepadDpad();
 
@@ -57,6 +58,7 @@ public class Gamepad {
 
 
         this.gameActivity = gameActivity;
+        pointerView = this.gameActivity.findViewById(R.id.console_pointer);
         createMapping();
 
         mouseThread = new Thread("Gamepad Thread"){
@@ -97,16 +99,15 @@ public class Gamepad {
                     acceleration = (mouseMagnitude - currentJoystick.getDeadzone())/(1 - currentJoystick.getDeadzone());
                     acceleration = Math.pow(acceleration, mouseMaxAcceleration);
 
-                    if(acceleration > 1){
-                        acceleration = 1;
-                    }
+                    if(acceleration > 1) acceleration = 1;
+
 
                     gameActivity.mouse_x += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
                     gameActivity.mouse_y -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
 
                     CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
                     if(!isGrabbing){
-                        gameActivity.placeMouseAt(gameActivity.mouse_x / gameActivity.scaleFactor, gameActivity.mouse_y  / gameActivity.scaleFactor);
+                        placePointerView((int)(gameActivity.mouse_x / gameActivity.scaleFactor), (int) (gameActivity.mouse_y  / gameActivity.scaleFactor));
                     }
                 }
 
@@ -133,7 +134,7 @@ public class Gamepad {
                 gameActivity.mouse_x = CallbackBridge.windowWidth/2;
                 gameActivity.mouse_y = CallbackBridge.windowHeight/2;
                 CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
-                gameActivity.placeMouseAt(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+                placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
             }
 
         }
@@ -288,6 +289,10 @@ public class Gamepad {
         }
     }
 
+    private void placePointerView(int x, int y){
+        pointerView.setTranslationX(x-32);
+        pointerView.setTranslationY(y-32);
+    }
 
     private void sendButton(KeyEvent event){
         int keycode = event.getKeyCode();
