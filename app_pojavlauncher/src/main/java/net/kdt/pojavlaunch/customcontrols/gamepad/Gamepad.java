@@ -47,7 +47,7 @@ public class Gamepad {
     private final GamepadMapping menuMap = new GamepadMapping();
     private GamepadMapping currentMap = menuMap;
 
-    private boolean isGrabbing = false;
+    private boolean isGrabbing = true;
 
 
     private Thread mouseThread;
@@ -125,6 +125,7 @@ public class Gamepad {
                 //TODO hide the cursor
                 currentMap = gameMap;
                 menuMap.resetPressedState();
+                setPointerViewVisible(false);
             }else{
                 //TODO place the cursor at the center
                 currentMap = menuMap;
@@ -135,6 +136,7 @@ public class Gamepad {
                 gameActivity.mouse_y = CallbackBridge.windowHeight/2;
                 CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
                 placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+                setPointerViewVisible(true);
             }
 
         }
@@ -292,6 +294,11 @@ public class Gamepad {
     private void placePointerView(int x, int y){
         pointerView.setTranslationX(x-32);
         pointerView.setTranslationY(y-32);
+    }
+
+    private void setPointerViewVisible(boolean state){
+        new Handler(Looper.getMainLooper()).post(() -> pointerView.setVisibility( state ? View.VISIBLE : View.INVISIBLE));
+
     }
 
     private void sendButton(KeyEvent event){
