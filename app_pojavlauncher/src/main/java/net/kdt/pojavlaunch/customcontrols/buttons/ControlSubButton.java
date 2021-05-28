@@ -1,8 +1,11 @@
-package net.kdt.pojavlaunch.customcontrols;
+package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.view.ViewGroup;
+
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 
 public class ControlSubButton extends ControlButton {
 

@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.customcontrols;
+package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.content.*;
 import android.graphics.*;
@@ -8,6 +8,9 @@ import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
+
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.*;

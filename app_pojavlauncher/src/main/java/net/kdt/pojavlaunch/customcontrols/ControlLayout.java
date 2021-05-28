@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
 
@@ -268,7 +271,7 @@ public class ControlLayout extends FrameLayout
 		return mModifiable;
 	}
 
-	protected void setModified(boolean z) {
-		if (mActivity != null) mActivity.isModified = z;
+	public void setModified(boolean isModified) {
+		if (mActivity != null) mActivity.isModified = isModified;
 	}
 }

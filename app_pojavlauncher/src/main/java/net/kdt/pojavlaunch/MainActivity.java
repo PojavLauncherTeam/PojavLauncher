@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.navigation.NavigationView;
 
 import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
