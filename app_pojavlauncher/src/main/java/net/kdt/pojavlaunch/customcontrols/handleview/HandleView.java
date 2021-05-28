@@ -22,13 +22,11 @@ package net.kdt.pojavlaunch.customcontrols.handleview;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.os.*;
-import android.text.*;
 import android.view.*;
 import android.widget.*;
-import android.content.*;
-import java.lang.reflect.*;
+
 import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 
 
 public abstract class HandleView extends View implements ViewPositionListener, View.OnLongClickListener

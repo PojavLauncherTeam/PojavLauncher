@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.kdt.pojavlaunch.AndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.customcontrols.ControlButton;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 
 import static net.kdt.pojavlaunch.customcontrols.handleview.ActionPopupWindow.setPercentageText;

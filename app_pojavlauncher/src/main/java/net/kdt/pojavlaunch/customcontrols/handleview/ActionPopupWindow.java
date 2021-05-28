@@ -19,10 +19,7 @@
  */
 package net.kdt.pojavlaunch.customcontrols.handleview;
 
-import android.app.Dialog;
 import android.content.*;
-import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.*;
 import android.view.ViewGroup.*;
 import android.widget.*;
@@ -31,6 +28,10 @@ import net.kdt.pojavlaunch.*;
 
 import android.view.View.OnClickListener;
 import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
+
 import androidx.appcompat.app.*;
 
 import com.rarepebble.colorpicker.ColorPickerView;

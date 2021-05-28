@@ -20,10 +20,9 @@
 package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.graphics.drawable.*;
-import android.text.*;
 import android.view.*;
-import android.os.*;
-import net.kdt.pojavlaunch.customcontrols.*;
+
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 
 
 public class SelectionEndHandleView extends HandleView

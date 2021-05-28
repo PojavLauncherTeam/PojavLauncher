@@ -1,14 +1,13 @@
-package net.kdt.pojavlaunch.customcontrols;
+package net.kdt.pojavlaunch.customcontrols.buttons;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 
 import java.util.ArrayList;
 

@@ -1,28 +1,16 @@
 package net.kdt.pojavlaunch.customcontrols.handleview;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AlertDialog;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
-import net.kdt.pojavlaunch.customcontrols.ControlDrawer;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
-
-import static net.kdt.pojavlaunch.customcontrols.handleview.ActionPopupWindow.setPercentageText;
 
 public class EditControlDrawerPopup extends EditControlButtonPopup{
     private Spinner spinnerOrientation;
