@@ -5,13 +5,13 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
-public class CustomControls
-{
+public class CustomControls {
+	public int version = -1;
     public float scaledAt;
 	public List<ControlData> mControlDataList;
 	public List<ControlDrawerData> mDrawerDataList;
 	public CustomControls() {
-		this(new ArrayList<ControlData>(), new ArrayList<ControlDrawerData>());
+		this(new ArrayList<>(), new ArrayList<>());
 	}
 
 
@@ -47,7 +47,9 @@ public class CustomControls
         shiftData.isToggle = true;
 		this.mControlDataList.add(shiftData);
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, new int[]{LWJGLGLFWKeycode.GLFW_KEY_SPACE}, "${right} - ${margin} * 2 - ${width}", "${bottom} - ${margin} * 2 - ${height}", true));
-		
+
+		//The default controls are conform to the V2
+		version = 2;
 	}
     
     public ControlData findControlData(int keycode) {
@@ -62,6 +64,9 @@ public class CustomControls
     }
 	
 	public void save(String path) throws Exception {
+		//Current version is the V2 so the version as to be marked as 2 !
+		version = 2;
+
 		Tools.write(path, Tools.GLOBAL_GSON.toJson(this));
 	}
 }
