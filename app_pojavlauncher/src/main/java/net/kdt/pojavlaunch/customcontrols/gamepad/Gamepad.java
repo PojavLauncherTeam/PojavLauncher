@@ -129,6 +129,7 @@ public class Gamepad {
                 currentMap = gameMap;
                 menuMap.resetPressedState();
                 setPointerViewVisible(false);
+                mouseSensitivity = 19;
             }else{
                 //TODO place the cursor at the center
                 currentMap = menuMap;
@@ -140,6 +141,7 @@ public class Gamepad {
                 CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
                 placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
                 setPointerViewVisible(true);
+                mouseSensitivity = 15;
             }
 
         }
