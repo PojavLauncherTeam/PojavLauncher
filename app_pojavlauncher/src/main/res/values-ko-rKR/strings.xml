@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (마인크래프트: 자바 에디션, 안드로이드를 위한)</string>
+    <string name="app_name">PojavLauncher (Android를 위한 Minecraft: Java Edition 구동기)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
     <!-- Action bar part -->
@@ -45,18 +45,18 @@
     <string name="mcl_account_connected">연결됨</string>
     <string name="mcl_account_offline">오프라인</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었다.</string>
+    <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었습니다.</string>
     <string name="mcl_launch_cleancache">캐시 파일 삭제</string>
     <string name="mcl_launch_downloading">다운로드 중 %s</string>
     <string name="mcl_launch_downloading_progress">"다운로드중 %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">다운로드 준비 중</string>
     <string name="mcl_options">설정</string>
-    <string name="mcl_option_modinstall">모드 설치기 실행 (Forge, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">모드 설치기 실행 (with custom arguments)</string>
+    <string name="mcl_option_modinstall">모드 설치기 실행 (Forge, LabyMod, Fabric 등...)</string>
+    <string name="mcl_option_modinstallwitharg">모드 설치기 실행 (사용자 지정 설치 스크립트)</string>
     <string name="mcl_option_customcontrol">사용자 지정 조작</string>
     <string name="mcl_option_settings">설정</string>
     <string name="mcl_option_about">정보</string>
-    <string name="mcl_setting_title_uninstalljre">Java Runtime 삭제</string>
+    <string name="mcl_setting_title_uninstalljre">Java 런타임 삭제</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher 재 실행 요구] Java 런타임 재 설치하기</string>
     <string name="mcl_setting_title_freeform">Minecraft를 Freeform mode로 실행하기</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다. Android 7.0 이상을 요구합니다.</string>
@@ -67,7 +67,7 @@
     <string name="mcl_setting_title_resolution_scaler">해상도 비율</string>
     <string name="mcl_setting_subtitle_resolution_scaler">최대 해상도 100% 이하로 게임 해상도를 낮출 수 있습니다.</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">블록 파괴와 아이템 던지기를 위한 길게 누르기 시간 변경</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">블록 파괴와 아이템 던지기 등의 동작을 위한 길게 누르기 시간 변경</string>
     <string name="mcl_setting_title_backtorightmouse">뒤로가기 버튼을 우클릭으로 다루기</string>
     <string name="mcl_setting_subtitle_backtorightmouse">몇몇 기기들은 외장 마우스 우클릭을 뒤로 가기 버튼으로 이용합니다. 외장 마우스를 이용하시면 활성화해주세요.</string>
     <string name="mcl_setting_title_flat_button_style">플랫 버튼 스타일</string>
@@ -76,7 +76,7 @@
     <string name="mcl_setting_subtitle_buttonscale">버튼이 너무 작다면 크기를 키우세요.</string>
     <string name="mcl_setting_title_mousescale">마우스 크기</string>
     <string name="mcl_setting_subtitle_mousescale">가상 마우스 크기 변경.</string>
-    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
+    <string name="mcl_setting_title_javaargs">JVM 시작 스크립트</string>
     <string name="mcl_setting_subtitle_javaargs">조심하세요, 정보 없이 수정하면 게임 충돌이 발생할 수 있습니다.</string>
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
@@ -118,7 +118,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">앱/게임이 나가졌습니다. code %d</string>
     <string name="mcn_exit_call">나가기</string>
-    <string name="mcn_exit_confirm">강제로 닫기를 원합니까?</string>
+    <string name="mcn_exit_confirm">강제로 종료하시겠습니까?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 이 설치되지 않았습니다!</string>
     <string name="mcn_check_fail_incompatiblearch">Architecture %1$s 은(는)  Java Runtime %2$s에 호환되지 않습니다.</string>
     <!-- MainActivity: Control buttons -->
@@ -126,8 +126,8 @@
     <string name="control_keyboard">키보드</string>
     <string name="control_chat">챗</string>
     <string name="control_debug">디버그</string>
-    <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_primary">LMB</string>
+    <string name="control_secondary">RMB</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
@@ -138,8 +138,8 @@
     <string name="control_thirdperson">3인칭</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">마우스</string>
-    <string name="control_mouseoff">Mouse: 끔</string>
-    <string name="control_mouseon">Mouse: 켬 </string>
+    <string name="control_mouseoff">마우스: 끔</string>
+    <string name="control_mouseon">마우스: 켬 </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">강제 종료</string>
     <string name="control_viewout">로그 확인</string>
@@ -176,9 +176,9 @@
     <string name="main_version">버전:</string>
     <string name="main_nocrash">발견된 충돌 없음</string>
     <string name="main_nolog">기록 없음.</string>
-    <string name="main_no_news_feed">소식을 불러오는데 실패하였습니다!</string>
-    <string name="auto_ram_subtitle">자동 램 할당 활성화하기</string>
-    <string name="auto_ram_title">자동 램 할당</string>
+    <string name="main_no_news_feed">소식을 불러오지 못했습니다 !</string>
+    <string name="auto_ram_subtitle">자동 RAM 할당 활성화하기</string>
+    <string name="auto_ram_title">자동 RAM 할당</string>
     <string name="autoram_info_msg">메모리가 %dMB 할당되었습니다.</string>
     <string name="mcl_setting_check_libraries">다운로드 후 라이브러리 확인</string>
     <string name="mcl_setting_check_libraries_subtitle">이 옵션은 라이브러리 해시를 강제로 확인합니다. 잘못된 다운로드를 막을 수 있습니다.</string>
