@@ -668,7 +668,6 @@ public class PojavLoginActivity extends BaseActivity
 
             accountName.setOnClickListener(new View.OnClickListener() {
                 final String selectedAccName = accountName.getText().toString();
-                final int accountIndex_final = accountIndex;
                 @Override
                 public void onClick(View v) {
                     try {
@@ -704,6 +703,7 @@ public class PojavLoginActivity extends BaseActivity
 
             removeButton.setOnClickListener(new View.OnClickListener() {
                 final String selectedAccName = accountName.getText().toString();
+                final int accountIndex_final = accountIndex;
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
