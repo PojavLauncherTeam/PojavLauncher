@@ -14,6 +14,7 @@
     <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
     <string name="login_error_short_username">Ім\'я користувача повинно мати хоча б 3 символи</string>
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
+    <string name="login_error_offline_password">Оффлайн аккаунт не може включати пароль!</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
     <string name="login_select_account">Виберіть обліковий запис</string>
     <string name="login_title_no_saved_account">Акаунт не знайдено !</string>
