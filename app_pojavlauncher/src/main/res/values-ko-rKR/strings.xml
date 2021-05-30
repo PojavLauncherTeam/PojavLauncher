@@ -14,6 +14,7 @@
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
     <string name="login_error_short_username">사용자명은 최소 3자 이상이어야 합니다</string>
     <string name="login_error_exist_username">이미 존재하는 사용자명입니다</string>
+    <string name="login_error_offline_password">오프라인 계정은 비밀번호를 요구하지 않습니다!</string>
     <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
     <string name="login_title_no_saved_account">계정을 찾을 수 없습니다.</string>
