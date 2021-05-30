@@ -70,6 +70,8 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
     <string name="mcl_setting_title_backtorightmouse">Враховувати кнопку \"Назад\" як праву кнопку миші</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Деякі пристрої використовують зовнішню праву кнопку миші як кнопку \"Назад\". Якщо ви використовуєте зовнішню мишу, то потрібно це увімкнути.</string>
+    <string name="mcl_setting_title_flat_button_style">Плоский стиль кнопок</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Увімкніть це, щоб змінити стиль кнопок на плаский.</string>
     <string name="mcl_setting_title_buttonscale">Масштабування кнопок керування</string>
     <string name="mcl_setting_subtitle_buttonscale">Збільшити їх, якщо кнопки замалі.</string>
     <string name="mcl_setting_title_mousescale">Масштабування курсору</string>
@@ -78,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Будьте обережні, це може призвести до збоїв у грі, якщо це замінити без знань.</string>
     <string name="mcl_setting_category_general">Загальні налаштування</string>
     <string name="mcl_setting_category_scaling">Масштабування</string>
+    <string name="mcl_setting_category_renderer">Візуалізація</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
@@ -142,6 +145,8 @@
     <string name="control_viewout">Показати вивід журналу</string>
     <string name="control_adebug">Вкладка PointerCapture</string>
     <string name="control_customkey">Надіслати користувацьку розкладку</string>
+    <string name="control_scaleup">Збільшити розмір</string>
+    <string name="control_scaledown">Зменшити розмір</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -176,7 +181,17 @@
     <string name="auto_ram_title">Авто ОЗУ</string>
     <string name="autoram_info_msg">Пам\'ять встановлено на %d МБ</string>
     <string name="mcl_setting_check_libraries">Перевірити бібліотеки після завантаження</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ця опція змушує лаунчер перевіряти хеш бібліотеки, якщо вона доступна. Запобігає пошкодженню завантажень.</string>
     <string name="dl_library_sha_fail">Бібліотека %s пошкоджена та буде перезавантаженаf</string>
+    <string name="dl_library_sha_unknown">Бібліотека %s не може бути перевірена, припустимо, що це добре</string>
+    <string name="dl_library_sha_pass">Бібліотека %s готова і придатна для використання</string>
     <string name="mcl_disable_gestures">Вимкнути жести</string>
+    <string name="mcl_disable_gestures_subtitle">Вимикає жести, наприклад утримувати, щоб розбити блок та торкнутися щоб поставити.</string>
     <string name="mcl_setting_title_mousespeed">Швидкість Миші</string>
+    <string name="mcl_setting_subtitle_mousespeed">Змінює швидкість програмної мишки</string>
+    <string name="customctrl_passthru">Мишка pass-thru</string>
+    <string name="customctrl_rounded">Округлий</string>
+    <string name="memory_warning_msg">Поточна кількість вільної оперативної пам\'яті (%d) менша, ніж виділена оперативна пам\'ять (%d), що може призвести до крашу. Змініть розміщення якщо гра вилетить.</string>
+    <string name="mcl_memory_allocation">Розподіл пам\'яті</string>
+    <string name="mcl_memory_allocation_subtitle">Визначає, скільки пам\'яті буде дано для Minecraft</string>
 </resources>
