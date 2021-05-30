@@ -14,6 +14,7 @@
     <string name="login_offline_label">以离线账号登录</string>
     <string name="login_error_short_username">用户名至少为3字符长</string>
     <string name="login_error_exist_username">用户名已存在</string>
+    <string name="login_error_offline_password">离线账号不能填写密码！</string>
     <string name="login_microsoft">微软帐号登录</string>
     <string name="login_select_account">选择账号</string>
     <string name="login_title_no_saved_account">帐户未找到！</string>
