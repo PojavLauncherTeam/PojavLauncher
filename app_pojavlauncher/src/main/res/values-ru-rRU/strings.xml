@@ -14,6 +14,7 @@
     <string name="login_offline_label">Войти как офлайн учётная запись</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
+    <string name="login_error_offline_password">Офлайн учётная запись не может содержать пароль!</string>
     <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учётные записи</string>
     <string name="login_title_no_saved_account">Учётные записи не найдены!</string>
