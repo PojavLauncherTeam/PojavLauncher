@@ -14,6 +14,7 @@
     <string name="login_offline_label">Çevrimdışı hesapla girin</string>
     <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmalıdır</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
+    <string name="login_error_offline_password">Çevrimdışı hesaplar şifre içeremez!</string>
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
     <string name="login_title_no_saved_account">Hiç hesap bulunamadı !</string>
