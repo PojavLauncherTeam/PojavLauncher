@@ -14,6 +14,7 @@
     <string name="login_offline_label">Είσοδος ως λογαριασμός εκτός σύνδεσης</string>
     <string name="login_error_short_username">Το όνομα πρέπει να είναι τουλάχιστον 3 χαρακτήρες</string>
     <string name="login_error_exist_username">Αυτό το όνομα χρήστη υπάρχει ήδη</string>
+    <string name="login_error_offline_password">Ο λογαριασμός εκτός σύνδεσης δεν μπορεί να περιλαμβάνει κωδικό πρόσβασης!</string>
     <string name="login_microsoft">Microsoft Είσοδος</string>
     <string name="login_select_account">Επιλέξτε λογαριασμό</string>
     <string name="login_title_no_saved_account">Δεν βρέθηκε κανένας λογαριασμός !</string>
