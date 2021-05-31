@@ -41,22 +41,22 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Извѣстія лаунчера</string>
     <string name="mcl_tab_console">Консоль разработчика</string>
-    <string name="mcl_tab_crash">Журналъ сбоевъ</string>
+    <string name="mcl_tab_crash">Регистръ сбоевъ</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
     <string name="mcl_account_offline">Офлайнъ</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готовъ къ запуску</string>
-    <string name="mcl_launch_cleancache">Очистка файловъ  кэша </string>
+    <string name="mcl_launch_cleancache">Очистка файловъ кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f  Мбайтъ  / %.2f  Мбайтъ )"</string>
-    <string name="mcl_launch_download_assets">Подготовка къ загрузкѣ рессурсовъ</string>
+    <string name="mcl_launch_download_assets">Подготовка къ загрузкѣ ресурсовъ</string>
     <string name="mcl_options">Настройки</string>
     <string name="mcl_option_modinstall">Запустить  установщикъ  модификаціи (Forge, LabyMod, Fabric, другіе...)</string>
     <string name="mcl_option_modinstallwitharg">Запустить  установщикъ  модификаціи (съ пользовательскими аргументами)</string>
     <string name="mcl_option_customcontrol">Пользовательское управленіе</string>
     <string name="mcl_option_settings">Настройки</string>
-    <string name="mcl_option_about">О лаунчере</string>
+    <string name="mcl_option_about">О лаунчерѣ</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапускъ  лаунчера ] это позволитъ вамъ переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запускъ Minecraft въ плавающемъ окнѣ</string>
@@ -68,7 +68,7 @@
     <string name="mcl_setting_title_resolution_scaler">Уменьшеніе разрѣшенія</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Позволяетъ уменьшить разрѣшеніе игры. Максимальное разрѣшеніе: 100%</string>
     <string name="mcl_setting_title_longpresstrigger">Длительность долгаго нажатія</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Измѣнить длительность долгаго нажатія для ломанія блоковъ и выбрасыванія предметовъ.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Измѣнить длительность долгаго нажатія для ломанія блоковъ и выбрасыванія вещей.</string>
     <string name="mcl_setting_title_backtorightmouse">Считываніе кнопки назадъ какъ правую кнопку мыши</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Нѣкоторыя устройства считаютъ правую кнопку внѣшней мыши какъ кнопку назадъ. Если вы используете внѣшнюю мышь, рекомендуется включить сію функцію.</string>
     <string name="mcl_setting_title_flat_button_style">Плоскій стиль кнопокъ</string>
@@ -82,22 +82,22 @@
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Рендереръ</string>
-    <string name="mcl_setting_category_veroption">Типы версій, которыя будутъ отображаться въ спискѣ версій</string>
+    <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
     <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
     <string name="mcl_setting_veroption_snapshot">Пробныя версіи</string>
     <string name="mcl_setting_veroption_oldalpha">Старыя альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старыя бета</string>
-    <string name="mcl_version_clone">Скопировать</string>
+    <string name="mcl_version_clone">Раздвоить</string>
     <!-- Global strings -->
-    <string name="global_edit">Редактировать</string>
-    <string name="global_error">Ошибка</string>
+    <string name="global_edit">Править</string>
+    <string name="global_error">Курьёзъ</string>
     <string name="global_load">Загрузка</string>
     <string name="global_name">Имя</string>
     <string name="global_remove">Удалить</string>
     <string name="global_restart">Перезапускъ</string>
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
-    <string name="global_error_field_empty">Это поле не можетъ быть пустымъ</string>
+    <string name="global_error_field_empty">Сіе поле не можетъ быть пустымъ</string>
     <string name="global_waiting">Подождите, пожалуйста</string>
     <!--
     <string name="mcl_about">
