@@ -14,6 +14,7 @@
     <string name="login_offline_label">Als Offline-Konto anmelden</string>
     <string name="login_error_short_username">Der Nutzername muss mindestens 3 Zeichen lang sein</string>
     <string name="login_error_exist_username">Dieser Benutzername existiert bereits</string>
+    <string name="login_error_offline_password">Offline Konten können kein Kennwort haben!</string>
     <string name="login_microsoft">Microsoft-Login</string>
     <string name="login_select_account">Konto auswählen</string>
     <string name="login_title_no_saved_account">Es konnte kein Konto gefunden werden!</string>
