@@ -145,6 +145,7 @@
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
+    <string name="control_scaleup">Scale up</string>
     <string name="control_scaledown">Baje la pantatalla proporcionalmente2</string>
     <!--
     <string name="control_more3"></string>
