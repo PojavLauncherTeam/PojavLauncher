@@ -158,9 +158,9 @@ public final class Tools
 
         overrideableArgList.add("-Dos.name=Linux");
         overrideableArgList.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
-
-        overrideableArgList.add("-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW);
-        overrideableArgList.add("-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW);
+        overrideableArgList.add("-Dminecraft.launcher.brand=" + APP_NAME + " " + BuildConfig.VERSION_NAME);
+        overrideableArgList.add("-Dpojav.path.minecraft=" + DIR_GAME_NEW);
+        overrideableArgList.add("-Dpojav.path.private.account=" + DIR_ACCOUNT_NEW);
         
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
