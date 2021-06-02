@@ -746,7 +746,7 @@ public class PojavLoginActivity extends BaseActivity
         } else if (new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()) {
             edit2.setError(getString(R.string.login_error_exist_username));
         } else if (!edit3.getText().toString().isEmpty()) {
-            edit2.setError(getString(R.string.login_error_offline_password));
+            edit3.setError(getString(R.string.login_error_offline_password));
         } else {
             MinecraftAccount builder = new MinecraftAccount();
             builder.isMicrosoft = false;
