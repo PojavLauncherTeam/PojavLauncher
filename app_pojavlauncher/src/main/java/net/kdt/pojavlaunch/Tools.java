@@ -253,6 +253,14 @@ public final class Tools
                 }
             }
         }
+        minecraftArgs.add("--width");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
+        minecraftArgs.add("--height");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
+        minecraftArgs.add("--fullscreenWidth");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
+        minecraftArgs.add("--fullscreenHeight");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
         
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(
