@@ -14,6 +14,7 @@
     <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_error_short_username">Username minimal harus ada 3 karakter</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>
+    <string name="login_error_offline_password">Akun offline tidak bisa menyertakan kata sandi!</string>
     <string name="login_microsoft">Login Microsoft</string>
     <string name="login_select_account">Pilih akun</string>
     <string name="login_title_no_saved_account">Tidak ada akun yang ditemukan!</string>
