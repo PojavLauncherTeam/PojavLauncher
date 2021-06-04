@@ -14,6 +14,7 @@
     <string name="login_offline_label">Entrar com conta off-line</string>
     <string name="login_error_short_username">Nome de usuário deve ter no mínimo 3 caracteres</string>
     <string name="login_error_exist_username">Esse usuário já existe</string>
+    <string name="login_error_offline_password">Conta offline não pode conter senha!</string>
     <string name="login_microsoft">Entrar com uma conta Microsoft</string>
     <string name="login_select_account">Selecionar conta</string>
     <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
