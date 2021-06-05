@@ -2,39 +2,42 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.kdt.pojavlaunch">
 
-	<uses-feature android:glEsVersion="0x00030002" android:required="true"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.INTERNET"/>
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature
+        android:glEsVersion="0x00030002"
+        android:required="true" />
 
-	<!-- Tell the system this app works in either 3dof or 6dof mode -->
-	<uses-feature
-		android:name="android.hardware.vr.headtracking"
-		android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-	<application
+    <!-- Tell the system this app works in either 3dof or 6dof mode -->
+    <uses-feature
+        android:name="android.hardware.vr.headtracking"
+        android:required="true" />
+
+    <application
+        android:name=".PojavApplication"
         android:allowBackup="true"
-		android:name=".PojavApplication"
-		android:theme="@style/AppTheme"
-        android:label="@string/app_name"
+        android:extractNativeLibs="true"
         android:icon="@drawable/ic_launcher"
-		android:roundIcon="@drawable/ic_launcher"
-		android:resizeableActivity="true"
-		android:usesCleartextTraffic="true"
-		android:extractNativeLibs="true"
-		android:requestLegacyExternalStorage="true">
-		<!-- cleartext traffic: For campbell's debugging only -->
-    <meta-data
-	    android:name="android.max_aspect"
-        android:value="ratio_float"/>
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:resizeableActivity="true"
+        android:roundIcon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <!-- cleartext traffic: For campbell's debugging only -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="ratio_float" />
 
-		<activity
+        <activity
+            android:name=".PojavLoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:label="@string/app_short_name"
             android:launchMode="singleTop"
-			android:screenOrientation="sensorLandscape"
-			android:label="@string/app_short_name"
-			android:name=".PojavLoginActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
+            android:screenOrientation="sensorLandscape">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -45,71 +48,73 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="ms-xal-00000000402b5328"
-                    android:host="auth"/>
+
+                <data
+                    android:host="auth"
+                    android:scheme="ms-xal-00000000402b5328" />
             </intent-filter>
-		</activity>
-
-		<activity
-			android:theme="@style/MenuDialog"
-			android:screenOrientation="sensorLandscape"
-			android:name=".FatalErrorActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+        </activity>
 
         <activity
+            android:name=".FatalErrorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
             android:screenOrientation="sensorLandscape"
-            android:name=".PojavLauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-
-		<activity
-			android:screenOrientation="sensorLandscape"
-			android:name=".JavaGUILauncherActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-
-		<activity
-			android:screenOrientation="sensorLandscape"
-			android:name=".CustomControlsActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+            android:theme="@style/MenuDialog" />
 
         <activity
-			android:launchMode="standard"
-			android:multiprocess="true"
-			android:screenOrientation="sensorLandscape"
+            android:name=".PojavLauncherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+
+        <activity
+            android:name=".JavaGUILauncherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+
+        <activity
+            android:name=".CustomControlsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:screenOrientation="sensorLandscape" />
+
+        <activity
             android:name=".MainActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:launchMode="standard"
+            android:multiprocess="true"
+            android:screenOrientation="sensorLandscape" />
 
-		<activity
-			android:name=".RenderingTestActivity"
-			android:exported="true">
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
+        <activity
+            android:name=".RenderingTestActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-				<!--<category android:name="android.intent.category.DEFAULT" />-->
-				<category android:name="android.intent.category.BROWSABLE" />
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <category android:name="android.intent.category.BROWSABLE" />
 
-				<data
-					android:host="auth"
-					android:scheme="ms-xal-00000000402b5328" />
-			</intent-filter>
-		</activity>
+                <data
+                    android:host="auth"
+                    android:scheme="ms-xal-00000000402b5328" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".RenderingTestRunActivity" />
 
-		<!-- The activity is the built-in NativeActivity framework class. -->
-		<!-- launchMode is set to singleTask because there should never be multiple copies of the app running. -->
-		<!-- Theme.Black.NoTitleBar.Fullscreen gives solid black instead of a (bad stereoscopic) gradient on app transition. -->
-		<activity
-			android:name=".QuestMainActivity"
-			android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode|density"
-			android:excludeFromRecents="false"
-			android:launchMode="singleTask"
-			android:resizeableActivity="false"
-			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-			<!-- Tell NativeActivity the name of the .so -->
-			<meta-data
-				android:name="android.app.lib_name"
-				android:value="vr_launcher" />
+        <!-- The activity is the built-in NativeActivity framework class. -->
+        <!-- launchMode is set to singleTask because there should never be multiple copies of the app running. -->
+        <!-- Theme.Black.NoTitleBar.Fullscreen gives solid black instead of a (bad stereoscopic) gradient on app transition. -->
+        <activity
+            android:name=".QuestMainActivity"
+            android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode|density"
+            android:excludeFromRecents="false"
+            android:launchMode="singleTask"
+            android:resizeableActivity="false"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+            <!-- Tell NativeActivity the name of the .so -->
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="vr_launcher" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
