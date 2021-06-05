@@ -14,6 +14,7 @@
     <string name="login_offline_label">Logg inn som frakoblet konto</string>
     <string name="login_error_short_username">Usernavnet må være minst 3 tegn</string>
     <string name="login_error_exist_username">Dette brukernavn er allerede i bruk</string>
+    <string name="login_error_offline_password">Frakoblet konto kan ikke inkludere passord!</string>
     <string name="login_microsoft">Logg inn med Microsoft</string>
     <string name="login_select_account">Velg konto</string>
     <string name="login_title_no_saved_account">Ingen konto funnet!</string>
