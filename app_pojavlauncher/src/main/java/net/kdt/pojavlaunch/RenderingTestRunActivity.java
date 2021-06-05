@@ -6,6 +6,8 @@ import android.opengl.EGL14;
 import android.opengl.EGL15;
 import android.os.Build;
 import android.os.Bundle;
+import android.system.ErrnoException;
+import android.system.Os;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
@@ -72,6 +74,13 @@ public class RenderingTestRunActivity extends LoggableActivity {
             }
         } catch (IOException e) {
             Log.w(TAG, "Failed to download test.jar", e);
+            return;
+        }
+
+        try {
+            Os.setenv("QUESTCRAFT_TEST_NOVR", "true", true);
+        } catch (ErrnoException e) {
+            Log.w(TAG, "Failed to set QUESTCRAFT_TEST_NOVR env var", e);
             return;
         }
 
