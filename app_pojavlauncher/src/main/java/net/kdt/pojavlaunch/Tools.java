@@ -70,6 +70,22 @@ public final class Tools
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
 
     public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
+        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+        ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
+        if(LauncherPreferences.PREF_RAM_ALLOCATION > (mi.availMem/1048576L)) {
+            ctx.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
+                            .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {}
+                            });
+                    b.show();
+                }
+            });
+        }
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
         PerVersionConfig.update();
         PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
@@ -142,13 +158,12 @@ public final class Tools
 
         overrideableArgList.add("-Dos.name=Linux");
         overrideableArgList.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
+        overrideableArgList.add("-Dpojav.path.minecraft=" + DIR_GAME_NEW);
+        overrideableArgList.add("-Dpojav.path.private.account=" + DIR_ACCOUNT_NEW);
 
-        overrideableArgList.add("-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW);
-        overrideableArgList.add("-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW);
-        
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
-       
+
         overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_114.so");
         // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
         // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_114_dbg.so");
@@ -166,18 +181,22 @@ public final class Tools
         overrideableArgList.add("-Dglfwstub.initEgl=false");
 
         overrideableArgList.add("-Dnet.minecraft.clientmodname=" + Tools.APP_NAME);
-        
+
         // Disable FML Early Loading Screen to get Forge 1.14+ works
         overrideableArgList.add("-Dfml.earlyprogresswindow=false");
-        
+
         // Override args
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
-            for (int i = 0; i < overrideableArgList.size(); i++) {
+            for (int i = overrideableArgList.size() - 1; i >= 0; i--) {
                 String arg = overrideableArgList.get(i);
+                // Currently, only java property is supported overridable argument, other such as "-X:" are handled by the JVM.
+                // Althought java properties are also handled by JVM, but duplicate bug from parser may occurs, so replace them.
                 if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
+                    // Override the matched argument
                     overrideableArgList.set(i, argOverride);
                     break;
-                } else if (i+1 == overrideableArgList.size()) {
+                } else if (!argOverride.isEmpty() && i == 0) {
+                    // Overridable argument has mismatched, so add the custom argument to overridable argument list
                     javaArgList.add(argOverride);
                 }
             }
@@ -234,6 +253,15 @@ public final class Tools
                 }
             }
         }
+
+        minecraftArgs.add("--width");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
+        minecraftArgs.add("--height");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
+        minecraftArgs.add("--fullscreenWidth");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
+        minecraftArgs.add("--fullscreenHeight");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
 
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(

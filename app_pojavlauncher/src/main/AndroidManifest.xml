@@ -17,27 +17,29 @@
         android:required="true" />
 
     <application
-        android:name=".PojavApplication"
         android:allowBackup="true"
-        android:extractNativeLibs="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
-        android:resizeableActivity="true"
-        android:roundIcon="@drawable/ic_launcher"
+        android:name=".PojavApplication"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
+        android:resizeableActivity="true"
+        android:hasFragileUserData="true"
+        android:extractNativeLibs="true"
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
         <!-- cleartext traffic: For campbell's debugging only -->
+
         <meta-data
             android:name="android.max_aspect"
-            android:value="ratio_float" />
+            android:value="ratio_float"/>
 
         <activity
-            android:name=".PojavLoginActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
-            android:label="@string/app_short_name"
             android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape">
+            android:screenOrientation="sensorLandscape"
+            android:label="@string/app_short_name"
+            android:name=".PojavLoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,40 +50,37 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="auth"
-                    android:scheme="ms-xal-00000000402b5328" />
+                <data android:scheme="ms-xal-00000000402b5328" android:host="auth"/>
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".FatalErrorActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:theme="@style/MenuDialog"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/MenuDialog" />
+            android:name=".FatalErrorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
+            android:screenOrientation="sensorLandscape"
             android:name=".PojavLauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
-            android:screenOrientation="sensorLandscape" />
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
+            android:screenOrientation="sensorLandscape"
             android:name=".JavaGUILauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
-            android:screenOrientation="sensorLandscape" />
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
+            android:screenOrientation="sensorLandscape"
             android:name=".CustomControlsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
-            android:screenOrientation="sensorLandscape" />
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
-            android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
             android:launchMode="standard"
             android:multiprocess="true"
-            android:screenOrientation="sensorLandscape" />
+            android:screenOrientation="sensorLandscape"
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
             android:name=".RenderingTestActivity"

@@ -1,19 +1,19 @@
 package net.kdt.pojavlaunch;
 
-import android.*;
-import android.content.*;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
-import androidx.appcompat.app.*;
+
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
+
+import static net.kdt.pojavlaunch.utils.MathUtils.map;
 
 public class JavaGUILauncherActivity extends LoggableActivity implements View.OnTouchListener {
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
@@ -33,12 +33,13 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     
     private final Object mDialogLock = new Object();
 
-    private DisplayMetrics displayMetrics;
     private boolean isLogAllow, mSkipDetectMod;
 
     private boolean rightOverride = false;
-    private float scaleFactor = 1;
-    private int fingerStillThreshold = 8;
+    private int scaleFactor;
+    private int[] scaleFactors = initScaleFactors();
+
+    private final int fingerStillThreshold = 8;
     private int initialX;
     private int initialY;
     private static boolean triggeredLeftMouseButton = false;
@@ -68,11 +69,6 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         
         try {
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
-            
-            this.displayMetrics = Tools.getDisplayMetrics(this);
-            CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels * scaleFactor);
-            CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels * scaleFactor);
-            System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
 
             findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
             findViewById(R.id.installmod_mouse_sec).setOnTouchListener(this);
@@ -81,24 +77,13 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
             touchPad.setFocusable(false);
 
             this.mousePointer = findViewById(R.id.main_mouse_pointer);
-            this.mousePointer.post(new Runnable(){
-
-                    @Override
-                    public void run() {
-                        ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
-                        params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                        params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                    }
-                });
-/*
-            touchPad.setOnHoverListener(new OnHoverListener() {
-                    @Override
-                    public boolean onHover(View v, MotionEvent event) {
-                        AWTInputBridge.sendMousePos((int) event.getX(), (int) event.getY());
-                        return false;
-                    }
+            this.mousePointer.post(() -> {
+                ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
+                params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+                params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
             });
-*/
+
+
             touchPad.setOnTouchListener(new OnTouchListener(){
                     private float prevX, prevY;
                     @Override
@@ -124,7 +109,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
 
                         if (gestureDetector.onTouchEvent(event)) {
 
-                            AWTInputBridge.sendMousePos((int) (mouseX * scaleFactor), (int) (mouseY *scaleFactor));
+                            sendScaledMousePosition(mouseX,mouseY);
+
                             AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
                             if (!rightOverride) {
                                 CallbackBridge.mouseLeft = true;
@@ -140,11 +126,11 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                                     }
                                     break;
                                 case MotionEvent.ACTION_MOVE: // 2
-                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + x - prevX));
-                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + y - prevY));
+                                    mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
+                                    mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
                                     placeMouseAt(mouseX, mouseY);
 
-                                    AWTInputBridge.sendMousePos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
+                                    sendScaledMousePosition(mouseX,mouseY);
                                     /*
                                      if (!CallbackBridge.isGrabbing()) {
                                      CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
@@ -269,6 +255,11 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         this.mousePointer.setTranslationY(y);
     }
 
+    void sendScaledMousePosition(float x, float y){
+        AWTInputBridge.sendMousePos((int) map(x,0,CallbackBridge.physicalWidth, scaleFactors[0], scaleFactors[2]),
+                (int) map(y,0,CallbackBridge.physicalHeight, scaleFactors[1], scaleFactors[3]));
+    }
+
     public void forceClose(View v) {
         BaseMainActivity.dialogForceClose(this);
     }
@@ -334,12 +325,52 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     public void appendToLog(final String text, boolean checkAllow) {
         logStream.print(text);
         if (checkAllow && !isLogAllow) return;
-        textLog.post(new Runnable(){
-                @Override
-                public void run() {
-                    textLog.append(text);
-                    contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
-                }
-            });
+        textLog.post(() -> {
+            textLog.append(text);
+            contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
+        });
+    }
+
+    int[] initScaleFactors(){
+        return initScaleFactors(true);
+    }
+
+    int[] initScaleFactors(boolean autoScale){
+        //Could be optimized
+
+        if(autoScale) { //Auto scale
+            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
+            scaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
+        }
+
+        int[] scales = new int[4]; //Left, Top, Right, Bottom
+
+        scales[0] = (CallbackBridge.physicalWidth/2);
+        scales[0] -= scales[0]/scaleFactor;
+
+        scales[1] = (CallbackBridge.physicalHeight/2);
+        scales[1] -= scales[1]/scaleFactor;
+
+        scales[2] = (CallbackBridge.physicalWidth/2);
+        scales[2] += scales[2]/scaleFactor;
+
+        scales[3] = (CallbackBridge.physicalHeight/2);
+        scales[3] += scales[3]/scaleFactor;
+
+        return scales;
+    }
+
+    public void scaleDown(View view) {
+        scaleFactor = Math.max(scaleFactor - 1, 1);
+        scaleFactors = initScaleFactors(false);
+        mTextureView.initScaleFactors(scaleFactor);
+        sendScaledMousePosition(mousePointer.getX(),mousePointer.getY());
+    }
+
+    public void scaleUp(View view) {
+        scaleFactor = Math.min(scaleFactor + 1, 6);
+        scaleFactors = initScaleFactors(false);
+        mTextureView.initScaleFactors(scaleFactor);
+        sendScaledMousePosition(mousePointer.getX(),mousePointer.getY());
     }
 }

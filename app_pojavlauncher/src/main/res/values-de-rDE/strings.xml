@@ -62,7 +62,7 @@
     <string name="mcl_setting_subtitle_freeform">Minecraft im schwebenden Fenster starten. Benötigt Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Seitenleiste ausblenden</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgiker, die die alte v1-Benutzeroberfläche bevorzugen, könnten dies mögen. Gibt dir ein besseres Vollbild-Erlebnis.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignoriere die Kameraleiste</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoriere die Kameraeinkerbung</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Einbuchtung im Bildschirm und erweitert das Bild unter ihr.\nDie Spielerfahrung wird dadurch immersiver.</string>
     <string name="mcl_setting_title_resolution_scaler">Auflösungsskalator</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht es dir die Spielauflösung zu verringern. 100% ist die normale Auflösung</string>
@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Passen Sie auf. Sollten Sie die Argumente wahrlos verändern, könnte dies zu Abstürzen führen.</string>
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Vollversionen</string>
     <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
@@ -140,10 +141,12 @@
     <string name="control_mouseoff">Maus: Aus</string>
     <string name="control_mouseon">Maus: An </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Erwinge das Beenden</string>
+    <string name="control_forceclose">Erzwinge das Beenden</string>
     <string name="control_viewout">Protokoll-Ausgabe</string>
     <string name="control_adebug">Eingabe-Debug</string>
     <string name="control_customkey">Sende Keycode</string>
+    <string name="control_scaleup">Vergrößern</string>
+    <string name="control_scaledown">Verkleinern</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -184,4 +187,11 @@
     <string name="dl_library_sha_pass">Die Bibliothek %s ist unbeschädigt und verwendbar</string>
     <string name="mcl_disable_gestures">Gesten deaktivieren</string>
     <string name="mcl_disable_gestures_subtitle">Diese Einstellung deaktiviert Gesten, wie zum Beispiel gedrückt halten, um einen Block zu zerstören und eine kurze Berührung, um einen Block zu platzieren.</string>
+    <string name="mcl_setting_title_mousespeed">Geschwindigkeit der Maus</string>
+    <string name="mcl_setting_subtitle_mousespeed">Ändert die Geschwindigkeit der Software-Maus</string>
+    <string name="customctrl_passthru">Maus ignoriert Schaltflächen</string>
+    <string name="customctrl_rounded">Abgerundet</string>
+    <string name="memory_warning_msg">Die aktuelle Menge an freiem RAM (%d) ist niedriger als zugewiesener RAM (%d), was zu Abstürzen führen kann. Ändere die Zuordnung, wenn das Spiel abstürzt.</string>
+    <string name="mcl_memory_allocation">Zugewiesener RAM</string>
+    <string name="mcl_memory_allocation_subtitle">Legt fest, wie viel RAM Minecraft gegeben wird</string>
 </resources>

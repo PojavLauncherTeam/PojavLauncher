@@ -37,7 +37,7 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
 
         try {
             JREUtils.relocateLibPath(this);
-            JREUtils.setJavaEnvironment(this, null);
+            JREUtils.setJavaEnvironment(this);
         } catch (Throwable throwable) {
             throw new RuntimeException("Could not setup Java environment", throwable);
         }

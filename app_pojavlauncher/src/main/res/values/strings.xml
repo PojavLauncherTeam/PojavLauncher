@@ -19,6 +19,7 @@
 
     <string name="login_error_short_username">Username must be at least 3 characters</string>
     <string name="login_error_exist_username">This username already exist</string>
+    <string name="login_error_offline_password">Offline account can\'t include password!</string>
 
     <string name="login_microsoft">Microsoft login</string>
 
@@ -170,6 +171,8 @@
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send custom keycode</string>
+    <string name="control_scaleup">Scale up</string>
+    <string name="control_scaledown">Scale down</string>
 <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -220,4 +223,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">The current amount of free RAM (%d) is lower than allocated RAM (%d), which may lead to crashes. Change the allocation if the game crashes.</string>
+    <string name="mcl_memory_allocation">Memory allocation</string>
+    <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft</string>
 </resources>

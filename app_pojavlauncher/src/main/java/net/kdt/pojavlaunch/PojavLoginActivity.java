@@ -32,6 +32,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -645,21 +646,21 @@ public class PojavLoginActivity extends BaseActivity
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
+            ImageView imageView = child.findViewById(R.id.account_head);
 
             String accNameStr = s.substring(0, s.length() - 5);
             String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
             if (skinFaceBase64 != null) {
                 byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
-            
-                accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
-                        bitmap), null, null, null);
+
+                imageView.setImageDrawable(new BitmapDrawable(getResources(),
+                        bitmap));
             }
             accountName.setText(accNameStr);
 
@@ -700,9 +701,7 @@ public class PojavLoginActivity extends BaseActivity
                 }
             });
 
-            // Tiny trick to avoid 'const' field
             final int accountIndex_final = accountIndex;
-
             removeButton.setOnClickListener(new View.OnClickListener() {
                 final String selectedAccName = accountName.getText().toString();
                 @Override
@@ -740,13 +739,15 @@ public class PojavLoginActivity extends BaseActivity
         new File(Tools.DIR_ACCOUNT_OLD).mkdir();
         
         String text = edit2.getText().toString();
-        if(text.isEmpty()){
-            edit2.setError(getResources().getString(R.string.global_error_field_empty));
-        } else if(text.length() <= 2){
-            edit2.setError(getResources().getString(R.string.login_error_short_username));
-        } else if(new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()){
-            edit2.setError(getResources().getString(R.string.login_error_exist_username));
-        } else{
+        if (text.isEmpty()) {
+            edit2.setError(getString(R.string.global_error_field_empty));
+        } else if (text.length() <= 2) {
+            edit2.setError(getString(R.string.login_error_short_username));
+        } else if (new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()) {
+            edit2.setError(getString(R.string.login_error_exist_username));
+        } else if (!edit3.getText().toString().isEmpty()) {
+            edit3.setError(getString(R.string.login_error_offline_password));
+        } else {
             MinecraftAccount builder = new MinecraftAccount();
             builder.isMicrosoft = false;
             builder.username = text;

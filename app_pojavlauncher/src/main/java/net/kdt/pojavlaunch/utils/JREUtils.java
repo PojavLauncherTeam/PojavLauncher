@@ -26,9 +26,9 @@ import javax.microedition.khronos.egl.EGLDisplay;
 public class JREUtils
 {
     private JREUtils() {}
-    
+
     public static String JRE_ARCHITECTURE;
-    
+
     public static String LD_LIBRARY_PATH;
     private static String nativeLibDir;
 
@@ -45,7 +45,7 @@ public class JREUtils
             throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, Tools.CURRENT_ARCHITECTURE, jreArch));
         }
     }
-    
+
     public static String findInLdLibPath(String libName) {
         for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
             File f = new File(libPath, libName);
@@ -84,7 +84,7 @@ public class JREUtils
             dlopen(f.getAbsolutePath());
         }
         dlopen(nativeLibDir + "/libopenal.so");
-        
+
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl4es_114.so")) {
             LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = nativeLibDir + "/libgl4es_114.so";
         }
@@ -107,7 +107,7 @@ public class JREUtils
         jreReleaseReader.close();
         return jreReleaseMap;
     }
-    
+
     private static boolean checkAccessTokenLeak = true;
     public static void redirectAndPrintJRELog(final LoggableActivity act, final String accessToken) {
         Log.v("jrelog","Log starts here");
@@ -121,7 +121,7 @@ public class JREUtils
                     if (logcatPb == null) {
                         logcatPb = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "-s", "jrelog:I", "LIBGL:I").redirectErrorStream(true);
                     }
-                    
+
                     Log.i("jrelog-logcat","Clearing logcat");
                     new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
                     Log.i("jrelog-logcat","Starting logcat");
@@ -141,7 +141,7 @@ public class JREUtils
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
                         String currStr = new String(buf, 0, len);
-                        
+
                         // Avoid leaking access token to log by replace it.
                         // Also, Minecraft will just print it once.
                         if (checkAccessTokenLeak) {
@@ -150,10 +150,10 @@ public class JREUtils
                                 currStr = currStr.replace(accessToken, "ACCESS_TOKEN_HIDDEN");
                             }
                         }
-                        
+
                         act.appendToLog(currStr);
                     }
-                    
+
                     if (p.waitFor() != 0) {
                         Log.e("jrelog-logcat", "Logcat exited with code " + p.exitValue());
                         failTime++;
@@ -174,7 +174,7 @@ public class JREUtils
         t.start();
         Log.i("jrelog-logcat","Logcat thread started");
     }
-    
+
     public static void relocateLibPath(Context ctx) throws Exception {
         if (JRE_ARCHITECTURE == null) {
             Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
@@ -183,7 +183,7 @@ public class JREUtils
                 JRE_ARCHITECTURE = "i386/i486/i586";
             }
         }
-        
+
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 
         for (String arch : JRE_ARCHITECTURE.split("/")) {
@@ -192,7 +192,7 @@ public class JREUtils
                 Tools.DIRNAME_HOME_JRE = "lib/" + arch;
             }
         }
-        
+
         String libName = Tools.CURRENT_ARCHITECTURE.contains("64") ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
         File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
@@ -210,24 +210,24 @@ public class JREUtils
 
             nativeLibDir
         );
-        
+
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
-    
-    public static void setJavaEnvironment(ILoggableActivity ctx, @Nullable ShellProcessOperation shell) throws Throwable {
+
+    public static void setJavaEnvironment(ILoggableActivity ctx) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", ctx.asActivity().getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
-        
+
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
-   
+
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.asActivity().getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
-        
+
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");
         envMap.put("REGAL_GL_VERSION", "4.5");
@@ -242,7 +242,7 @@ public class JREUtils
                 envMap.remove(key);
             }
         }
-        
+
         File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
             BufferedReader reader = new BufferedReader(new FileReader(customEnvFile));
@@ -269,25 +269,14 @@ public class JREUtils
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
-            try {
-                if (shell == null) {
-                    ctx.appendlnToLog("set envvar '"+env.getKey() + "' = '" + env.getValue() + "'");
-                    Os.setenv(env.getKey(), env.getValue(), true);
-                } else {
-                    shell.writeToProcess("export " + env.getKey() + "=" + env.getValue());
-                }
-            } catch (Throwable th) {
-                ctx.appendlnToLog(Log.getStackTraceString(th));
-            }
+            Os.setenv(env.getKey(), env.getValue(), true);
         }
-        
-        if (shell == null) {
-            setLdLibraryPath(LD_LIBRARY_PATH);
-        }
-        
+
+        setLdLibraryPath(LD_LIBRARY_PATH);
+
         // return ldLibraryPath;
     }
-    
+
     public static int launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
         JREUtils.relocateLibPath(ctx);
         // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
@@ -295,27 +284,23 @@ public class JREUtils
         List<String> javaArgList = new ArrayList<String>();
         javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
         Tools.getJavaArgs(ctx, javaArgList);
-        if(LauncherPreferences.DEFAULT_PREF.getBoolean("autoRam",true)) {
-            ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-            ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
             purgeArg(javaArgList,"-Xms");
             purgeArg(javaArgList,"-Xmx");
-            if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 300) {
+            /*if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 300) {
                 javaArgList.add("-Xms300M");
                 javaArgList.add("-Xmx300M");
-            }else {
-                javaArgList.add("-Xms" + ((mi.availMem / 1048576L) - 50) + "M");
-                javaArgList.add("-Xmx" + ((mi.availMem / 1048576L) - 50) + "M");
-            }
+            }else {*/
+                javaArgList.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+                javaArgList.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+            //}
             ctx.runOnUiThread(new Runnable() {
                 public void run() {
-                    Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,((mi.availMem / 1048576L)-50)), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show();
                 }
             });
             System.out.println(javaArgList);
-        }
         javaArgList.addAll(args);
-        
+
         // For debugging only!
 /*
         StringBuilder sbJavaArgs = new StringBuilder();
@@ -325,7 +310,7 @@ public class JREUtils
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 */
 
-        setJavaEnvironment(ctx, null);
+        setJavaEnvironment(ctx);
         initJavaRuntime();
         chdir(Tools.DIR_GAME_NEW);
 
@@ -435,7 +420,7 @@ public class JREUtils
     public static native boolean dlopen(String libPath);
     public static native void setLdLibraryPath(String ldLibraryPath);
     public static native void setupBridgeWindow(Object surface);
-    
+
     // Obtain AWT screen pixels to render on Android SurfaceView
     public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
 

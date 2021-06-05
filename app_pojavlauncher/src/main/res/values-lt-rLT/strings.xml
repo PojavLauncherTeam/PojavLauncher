@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition skirta Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Paleiskite Minecraft: Java Edition savo įrenginyje!</string>
     <!-- Action bar part -->
@@ -65,9 +65,13 @@
     <string name="mcl_setting_title_ignore_notch">Ignoruoti kamerą</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoruojant kamerą ištempia vaizdą po ja.\nDuodą geresnį vaizdą.</string>
     <string name="mcl_setting_title_resolution_scaler">Rezoliucijos redagavimas</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Leidžia keisti ekrano rezoliuciją. 100% yra numatytasis nustatymas.</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Leidžia keisti ekrano rezoliuciją. 100% yra pilna rezoliucija</string>
     <string name="mcl_setting_title_longpresstrigger">Kaip ilgai suveiks po palaikymo</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Pakeisti veikimo laiką po palaikymo panaikinti ir išmesti daiktą.</string>
+    <string name="mcl_setting_title_backtorightmouse">Laikyti atgal mygtuką kaip dešinįjį pelės mygtuką</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Kai kurie įrenginiai laiko išorinės pelės dešinįjį mygtuką kaip atgal mygtuką. Jei naudojate išorinę pelę, jūs tūretūmėtė įjungti šį nustatymą.</string>
+    <string name="mcl_setting_title_flat_button_style">Plokščias Mygtukų Stilius</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Įjungti, kad pakeisti kontrolių stilių į plokščią.</string>
     <string name="mcl_setting_title_buttonscale">Kontroliuoti mygtukų dydį</string>
     <string name="mcl_setting_subtitle_buttonscale">Padidinkite jei mygtukai per maži.</string>
     <string name="mcl_setting_title_mousescale">Pelės dydis</string>
@@ -76,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Būkite atsargūs, tai gali paveikti žaidimą jei modifikuota be išmonės.</string>
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
+    <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
     <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
@@ -122,7 +127,7 @@
     <string name="control_chat">Pokalbiai</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Kairė</string>
-    <string name="control_secondary">Deš.</string>
+    <string name="control_secondary">Deš</string>
     <string name="control_inventory">Inv</string>
     <string name="control_thirdperson">3</string>
     <string name="control_listplayers">TAB</string>
@@ -134,6 +139,8 @@
     <string name="control_viewout">Žurnalo įrašai</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Siųsti mygtuko kodą</string>
+    <string name="control_scaleup">Padidinti</string>
+    <string name="control_scaledown">Sumažinti</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -167,4 +174,18 @@
     <string name="auto_ram_subtitle">Įjungia automatišką RAM keitėją</string>
     <string name="auto_ram_title">Automatiškas RAM</string>
     <string name="autoram_info_msg">Atmintis pakeista į %d MB</string>
+    <string name="mcl_setting_check_libraries">Patikrinti depozitoriumo bibliotekas po atsisiuntimo</string>
+    <string name="mcl_setting_check_libraries_subtitle">Šis nustatymas priverčia PojavLauncher patikrintį depozitoriumo bibliotekos hashą jeigu jis pasiekiamas. Neleidžia blogų atsisiuntimų.</string>
+    <string name="dl_library_sha_fail">Depozitoriumo biblioteka %s yra sugedusi ir būs persiųsta</string>
+    <string name="dl_library_sha_unknown">Depozitoriumo biblioteka %s negali būti patikrinta, privaloma tikėti kad ji gera</string>
+    <string name="dl_library_sha_pass">Depozitoriumo biblioteka %s yra gera ir naudojama</string>
+    <string name="mcl_disable_gestures">Išjungti gestus</string>
+    <string name="mcl_disable_gestures_subtitle">Išjungti gestus, kaip prilaikyti, kad griautum bloką, ir paspausti, kad pastatytum bloką.</string>
+    <string name="mcl_setting_title_mousespeed">Pelės Greitis</string>
+    <string name="mcl_setting_subtitle_mousespeed">Pakeičia virtualios pelės greitį</string>
+    <string name="customctrl_passthru">Pelės praileidimas</string>
+    <string name="customctrl_rounded">Suapvalinta</string>
+    <string name="memory_warning_msg">Dabartinis kiekis laisvo RAM (%d) yra mažesnis negu paskirtas RAM (%d), kas gali baigtis išsijungimais. Pakeiskite paskirtą kiekį jeigu išsijungia žaidimas.</string>
+    <string name="mcl_memory_allocation">Atminties skirtstymas</string>
+    <string name="mcl_memory_allocation_subtitle">Kontroliuoja kiek RAM atminties duodama Minecraft</string>
 </resources>

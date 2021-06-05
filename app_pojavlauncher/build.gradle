@@ -34,7 +34,7 @@ android {
         minSdkVersion 28
 
         targetSdkVersion 29
-        versionCode 156247
+        versionCode 156249
         versionName "3.3.1.1_rel_" + getDate()
         multiDexEnabled true //important
 
