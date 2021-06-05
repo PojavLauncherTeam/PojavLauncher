@@ -791,7 +791,7 @@ void flipFrame() {
                     closeGLFWWindow();
                 }
             }
-        }
+        } break;
         
         case RENDERER_VK_ZINK: {
             ((struct osmesa_context)*OSMesaGetCurrentContext_p())
