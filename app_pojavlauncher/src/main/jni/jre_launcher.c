@@ -107,6 +107,10 @@ static jint launchJVM(int margc, char** margv) {
            LOGE("dup2 stderr failed %d %d", res, errno);
    }
 
+   // Don't buffer output
+   setvbuf(stdout, NULL, _IONBF, 0);
+   setvbuf(stderr, NULL, _IONBF, 0);
+
    printf("Testing!\n");
    fflush(stdout);
    write(1, "hi:\n", 4);
