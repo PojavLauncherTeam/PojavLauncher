@@ -5,12 +5,12 @@ import android.view.KeyEvent;
 public class GamepadButton {
 
     /*
-    Just a simple button, that auto deal with the great habit from android to just SPAAAM input events
+    Just a simple button, that auto deal with the great habit from android to just SPAAAMS input events
      */
     public int[] keycodes;
     public boolean isToggleable = false;
     private boolean isDown = false;
-    private boolean toggled = false;
+    private boolean isToggled = false;
 
     public void update(KeyEvent event){
         boolean isKeyDown = (event.getAction() == KeyEvent.ACTION_DOWN);
@@ -22,23 +22,25 @@ public class GamepadButton {
             isDown = isKeyDown;
             if(isToggleable){
                 if(isKeyDown){
-                    toggled = !toggled;
-                    Gamepad.sendInput(keycodes, toggled);
+                    isToggled = !isToggled;
+                    Gamepad.sendInput(keycodes, isToggled);
                 }
                 return;
             }
-            
             Gamepad.sendInput(keycodes, isDown);
         }
     }
 
     public void resetButtonState(){
+        if(isDown || isToggled){
+            Gamepad.sendInput(keycodes, false);
+        }
         isDown = false;
-        toggled = false;
-        Gamepad.sendInput(keycodes, false);
+        isToggled = false;
     }
+
     public boolean isDown(){
-        return isToggleable ? toggled : isDown;
+        return isToggleable ? isToggled : isDown;
     }
 
 }
