@@ -14,6 +14,7 @@
     <string name="login_offline_label">התחבר כחשבון לא מקוון</string>
     <string name="login_error_short_username">שם המשתמש חייב להיות לפחות 3 תווים</string>
     <string name="login_error_exist_username">שם המשתמש כבר קיים</string>
+    <string name="login_error_offline_password">חשבונות במצב \"לא מקוון\" לא כוללים סיסמא!</string>
     <string name="login_microsoft">התחברות Microsoft</string>
     <string name="login_select_account">בחר חשבון</string>
     <string name="login_title_no_saved_account">לא נמצאו חשבונות!</string>
