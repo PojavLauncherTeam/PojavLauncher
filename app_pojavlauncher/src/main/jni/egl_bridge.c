@@ -738,10 +738,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         
         setenv("GALLIUM_DRIVER","zink",1);
         void* dl_handle = dlopen("libOSMesa.so.8",RTLD_NOLOAD|RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
-        if (!dl_handle) {
-            dl_handle = dlopen("libOSMesa_8.so",RTLD_NOLOAD|RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
-            printf("OSMDroid: using built-in libOSMesa_8.so\n");
-        } else {
+      //  if (!dl_handle) {
+      //      dl_handle = dlopen("libOSMesa_8.so",RTLD_NOLOAD|RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
+      //      printf("OSMDroid: using built-in libOSMesa_8.so\n");
+      //  } else {
             printf("OSMDroid: using developer libOSMesa.so.8 instead of built-in\n");
         }
 
