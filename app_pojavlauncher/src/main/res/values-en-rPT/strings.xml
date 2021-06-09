@@ -56,6 +56,8 @@
     <string name="mcl_setting_title_ignore_notch">Don\'t see notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Don\'t see notch and make big the sail under it.\nGives you more treasure.</string>
     <string name="mcl_setting_title_resolution_scaler">Map size scaler</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <!-- Global strings -->
     <string name="global_name">Title on yer forhead</string>
     <string name="global_restart">Yar ship needs a lookover</string>
