@@ -59,6 +59,7 @@
     <string name="global_load">โหลด</string>
     <string name="global_name">ชื่อ</string>
     <string name="global_save">บันทึก</string>
+    <string name="global_error_field_empty">สนามนี้ไม่สามารถว่าง</string>
     <string name="global_waiting">รอ</string>
     <!--
     <string name="mcl_about">
@@ -104,6 +105,7 @@
     <string name="customctrl_dynamicpos_x">พลวัต X</string>
     <string name="customctrl_dynamicpos_y">พลวัต Y</string>
     <string name="customctrl_transparency_bg">ความโปร่งใสพื้นหลัง</string>
+    <string name="customctrl_keycombine">การรวมคีย์</string>
     <string name="customctrl_addbutton">เพิ่มปุ่ม</string>
     <string name="main_options">ตัวเลือก</string>
     <string name="main_play">เล่น</string>
