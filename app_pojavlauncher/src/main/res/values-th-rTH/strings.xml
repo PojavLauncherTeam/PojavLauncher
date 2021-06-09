@@ -45,6 +45,7 @@
     <string name="global_load">โหลด</string>
     <string name="global_name">ชื่อ</string>
     <string name="global_save">บันทึก</string>
+    <string name="global_waiting">รอ</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
