@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
+import net.kdt.pojavlaunch.MainActivity;
 import net.kdt.pojavlaunch.R;
 
 import org.lwjgl.glfw.CallbackBridge;
@@ -48,12 +49,14 @@ public class Gamepad {
 
     private final GamepadMapping gameMap = new GamepadMapping();
     private final GamepadMapping menuMap = new GamepadMapping();
-    private GamepadMapping currentMap = menuMap;
+    private GamepadMapping currentMap = gameMap;
 
-    private boolean isGrabbing = true;
+    private boolean lastGrabbingState = true;
 
 
-    private Thread mouseThread;
+    private final Thread mouseThread;
+    private final Runnable mouseRunnable;
+    private final Runnable switchStateRunnable;
 
     public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
         leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
@@ -77,8 +80,8 @@ public class Gamepad {
                     long now = System.nanoTime();
                     delta += (now - lastTime) / ns;
                     lastTime = now;
-                    if(delta >= 1) {
 
+                    if(delta >= 1) {
                         updateGrabbingState();
 
                         tick();
@@ -93,11 +96,9 @@ public class Gamepad {
                 }
             }
 
-
-
             private void tick(){
                 if(lastHorizontalValue != 0 || lastVerticalValue != 0){
-                    GamepadJoystick currentJoystick = isGrabbing ? leftJoystick : rightJoystick;
+                    GamepadJoystick currentJoystick = CallbackBridge.isGrabbing() ? leftJoystick : rightJoystick;
 
                     acceleration = (mouseMagnitude - currentJoystick.getDeadzone())/(1 - currentJoystick.getDeadzone());
                     acceleration = Math.pow(acceleration, mouseMaxAcceleration);
@@ -105,12 +106,15 @@ public class Gamepad {
                     if(acceleration > 1) acceleration = 1;
 
 
-                    gameActivity.mouse_x += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
-                    gameActivity.mouse_y -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
+                    CallbackBridge.mouseX += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
+                    CallbackBridge.mouseY -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
+                    gameActivity.mouse_x = CallbackBridge.mouseX;
+                    gameActivity.mouse_y = CallbackBridge.mouseY;
 
-                    CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
-                    if(!isGrabbing){
-                        placePointerView((int)(gameActivity.mouse_x / gameActivity.scaleFactor), (int) (gameActivity.mouse_y  / gameActivity.scaleFactor));
+                    gameActivity.runOnUiThread(mouseRunnable);
+
+                    if(!CallbackBridge.isGrabbing()){
+                        placePointerView((int)(CallbackBridge.mouseX  / gameActivity.scaleFactor), (int) (CallbackBridge.mouseY  / gameActivity.scaleFactor));
                     }
                 }
 
@@ -118,32 +122,37 @@ public class Gamepad {
         };
         mouseThread.setPriority(1);
         mouseThread.start();
+
+
+        //Initialize runnables to be used by the input system, avoiding generating one each time is better memory.
+        mouseRunnable = () -> CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
+        switchStateRunnable = () -> {
+            if(lastGrabbingState){
+                currentMap = gameMap;
+                menuMap.resetPressedState();
+                pointerView.setVisibility(View.INVISIBLE);
+                mouseSensitivity = 19;
+                return;
+            }
+
+            currentMap = menuMap;
+            gameMap.resetPressedState();
+            sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
+
+            gameActivity.mouse_x = CallbackBridge.windowWidth/2;
+            gameActivity.mouse_y = CallbackBridge.windowHeight/2;
+            CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
+            placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+            pointerView.setVisibility(View.VISIBLE);
+            mouseSensitivity = 15;
+        };
     }
 
     private void updateGrabbingState() {
-        boolean lastGrabbingValue = isGrabbing;
-        isGrabbing = CallbackBridge.isGrabbing();
-        if(lastGrabbingValue != isGrabbing){
-            if(isGrabbing){
-                //TODO hide the cursor
-                currentMap = gameMap;
-                menuMap.resetPressedState();
-                setPointerViewVisible(false);
-                mouseSensitivity = 19;
-            }else{
-                //TODO place the cursor at the center
-                currentMap = menuMap;
-                gameMap.resetPressedState();
-                sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
-
-                gameActivity.mouse_x = CallbackBridge.windowWidth/2;
-                gameActivity.mouse_y = CallbackBridge.windowHeight/2;
-                CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
-                placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
-                setPointerViewVisible(true);
-                mouseSensitivity = 15;
-            }
-
+        boolean lastGrabbingValue = lastGrabbingState;
+        lastGrabbingState = CallbackBridge.isGrabbing();
+        if(lastGrabbingValue != lastGrabbingState){
+            gameActivity.runOnUiThread(switchStateRunnable);
         }
 
     }
@@ -233,7 +242,7 @@ public class Gamepad {
     }
 
     private void updateMouseJoystick(MotionEvent event){
-        GamepadJoystick currentJoystick = isGrabbing ? rightJoystick : leftJoystick;
+        GamepadJoystick currentJoystick = CallbackBridge.isGrabbing() ? rightJoystick : leftJoystick;
         lastHorizontalValue = currentJoystick.getHorizontalAxis(event);
         lastVerticalValue = currentJoystick.getVerticalAxis(event);
 
@@ -242,7 +251,7 @@ public class Gamepad {
     }
 
     private void updateDirectionalJoystick(MotionEvent event){
-        GamepadJoystick currentJoystick = isGrabbing ? leftJoystick : rightJoystick;
+        GamepadJoystick currentJoystick = CallbackBridge.isGrabbing() ? leftJoystick : rightJoystick;
 
         int lastJoystickDirection = currentJoystickDirection;
         currentJoystickDirection = currentJoystick.getHeightDirection(event);
@@ -256,7 +265,6 @@ public class Gamepad {
     private void updateAnalogTriggers(MotionEvent event){
         getCurrentMap().TRIGGER_LEFT.update(event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5);
         getCurrentMap().TRIGGER_RIGHT.update(event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
-
     }
 
     private GamepadMapping getCurrentMap(){
@@ -301,10 +309,6 @@ public class Gamepad {
         pointerView.setTranslationY(y-32);
     }
 
-    private void setPointerViewVisible(boolean state){
-        new Handler(Looper.getMainLooper()).post(() -> pointerView.setVisibility( state ? View.VISIBLE : View.INVISIBLE));
-
-    }
 
     private void sendButton(KeyEvent event){
         int keycode = event.getKeyCode();
@@ -355,7 +359,7 @@ public class Gamepad {
 
 
             default:
-                BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), event.getAction() == KeyEvent.ACTION_DOWN);
+                MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), event.getAction() == KeyEvent.ACTION_DOWN);
                 break;
         }
     }
@@ -371,15 +375,17 @@ public class Gamepad {
                     break;
 
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT:
-                    BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
+                    //MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                     break;
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT:
-                    BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
+                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
+                    //MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                     break;
 
 
                 default:
-                    BaseMainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
+                    MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
                     break;
             }
         }
