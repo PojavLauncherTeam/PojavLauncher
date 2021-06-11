@@ -26,7 +26,6 @@ import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
-    public Map<String, String> jreReleaseList;
     
     public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
     volatile public static boolean isInputStackCall;
