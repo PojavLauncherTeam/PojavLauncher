@@ -66,8 +66,6 @@ public class BaseMainActivity extends LoggableActivity {
         }
     };
 
-    public Map<String, String> jreReleaseList;
-
     private MinecraftGLView minecraftGLView;
     private int guiScale;
     private DisplayMetrics displayMetrics;
