@@ -901,8 +901,8 @@ public class BaseMainActivity extends LoggableActivity {
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
 
         appendlnToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
-            (mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
-            "" : " (" + mVersionInfo.inheritsFrom + ")");
+            ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
+            "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
         JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
         Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
