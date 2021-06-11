@@ -26,6 +26,7 @@ import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
+    public Map<String, String> jreReleaseList;
     
     public static final String initText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ";
     volatile public static boolean isInputStackCall;
@@ -895,7 +896,7 @@ public class BaseMainActivity extends LoggableActivity {
         appendlnToLog("--------- beggining with launcher debug");
         checkLWJGL3Installed();
         
-        Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
+        jreReleaseList = JREUtils.readJREReleaseProperties();
         JREUtils.checkJavaArchitecture(this, jreReleaseList.get("OS_ARCH"));
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
