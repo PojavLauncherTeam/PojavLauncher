@@ -68,7 +68,7 @@ public class JREUtils
         return ret;
     }
     public static void initJavaRuntime() {
-
+        dlopen(findInLdLibPath("libtinyiconv.so"));
         dlopen(findInLdLibPath("libjli.so"));
         dlopen(findInLdLibPath("libjvm.so"));
         dlopen(findInLdLibPath("libverify.so"));
@@ -85,9 +85,11 @@ public class JREUtils
         }
         dlopen(nativeLibDir + "/libopenal.so");
         
+        // may not necessary
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl4es_114.so")) {
             LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = nativeLibDir + "/libgl4es_114.so";
         }
+
         if (!dlopen(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME) && !dlopen(findInLdLibPath(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME))) {
             System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
             dlopen(nativeLibDir + "/libgl4es_114.so");
@@ -175,10 +177,9 @@ public class JREUtils
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
-    public static void relocateLibPath(Context ctx) throws Exception {
+    public static void relocateLibPath(final LoggableActivity ctx) throws Exception {
         if (JRE_ARCHITECTURE == null) {
-            Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
-            JRE_ARCHITECTURE = jreReleaseList.get("OS_ARCH");
+            JRE_ARCHITECTURE = ctx.jreReleaseList.get("OS_ARCH");
             if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.CURRENT_ARCHITECTURE.contains("x86") && !Tools.CURRENT_ARCHITECTURE.contains("64")) {
                 JRE_ARCHITECTURE = "i386/i486/i586";
             }
