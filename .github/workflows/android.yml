@@ -16,28 +16,51 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
-      with:
-        repository: PojavLauncherTeam/gl4es 
-        path: gl4es
-
     - name: set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
 
-    - name: Build latest GL4ES
+    - name: Get gl4es latest commit hash
+      id: gl4es-sha
+      run: echo "::set-output name=sha::$(git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*')"
+      shell: bash
+      
+    - name: Cache gl4es
+      uses: actions/cache@v2
+      id: gl4es-cache
+      with:
+        path: gl4es/libs
+        key: gl4es-android-shared-${{ steps.gl4es-sha.outputs.sha }}
+
+    - name: Get gl4es
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        repository: 'ptitSeb/gl4es'
+        path: 'gl4es'
+
+    - name: Build gl4es
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
       continue-on-error: true
       run: |
         cd gl4es
-        git remote add upstream https://github.com/ptitSeb/gl4es
-        git fetch upstream
-        git checkout master
-        git merge upstream/main || echo "Merge exit code $?"
-        export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
+        mv ../Android_gl4es.mk Android.mk
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
-        cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
-        
+    
+    - name: Install gl4es
+      run: cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
+    
+    - name: Get JRE
+      uses: dawidd6/action-download-artifact@v2
+      with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          name: jre8-pojav
+    
     - name: Build APK with Gradle
       run: |
         chmod +x scripts/languagelist_updater.sh

@@ -11,27 +11,27 @@
     <string name="login_online_password_hint">Şifre</string>
     <string name="login_online_check_keeplogin">Oturumu Açık Tut</string>
     <string name="login_online_login_label">Giriş yap</string>
-    <string name="login_offline_label">Çevrimdışı olarak oturum açın</string>
-    <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmak zorundadır</string>
+    <string name="login_offline_label">Çevrimdışı hesapla girin</string>
+    <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmalıdır</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
-    <string name="login_title_no_saved_account">Hesap bulunamadı !</string>
+    <string name="login_title_no_saved_account">Hiç hesap bulunamadı !</string>
     <string name="login_dialog_no_saved_account">Hiçbir kayıtlı hesabın yok.\n&lt;b&gt;\"Beni hatırla\"&lt;b&gt;\'yı seçerek hesaplarını kaydedebilirsin.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warnings -->
-    <string name="warning_remove_account">Bu hesap silinecek!</string>
+    <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java Runtime kur %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Bir mod yükleyicisi seçin</string>
+    <string name="alerttitle_install_jre">Java Runtime\'ı kur %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Bir mod yükleyicisi seç</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
-    <string name="error_no_version">Sürüm yok!</string>
+    <string name="error_no_version">Sürümler yok!</string>
     <string name="error_show_more">Daha fazla göster</string>
     <string name="error_show_less">Daha az göster</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Okuma/yazma izinleri depolama için gerekli!</string>
+    <string name="toast_permission_denied">Depolamaya okuma/yazma izni gerekli!</string>
     <string name="toast_optifine_success">Yükleme başarılı</string>
     <string name="toast_uninstalljre_done">Java Runtime kaldırması tamamlandı</string>
     <!--
@@ -49,7 +49,7 @@
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
     <string name="mcl_launch_downloading">%s indiriliyor</string>
     <string name="mcl_launch_downloading_progress">"%s indiriliyor (%.2f MB / %.2f MB)"</string>
-    <string name="mcl_launch_download_assets">Kaynakları yüklemeye hazırlanılıyor</string>
+    <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
     <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümânlarla)</string>
@@ -57,7 +57,7 @@
     <string name="mcl_option_settings">Ayarlar</string>
     <string name="mcl_option_about">Launcher hakkında</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime\'ı kaldır</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Başlatıcı için yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
     <string name="mcl_setting_title_hide_sidebar">Kenar çubuğunu gizle</string>
@@ -66,23 +66,23 @@
     <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve altındaki ekranı genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
     <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
-    <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar sonra tetiklenecek</string>
+    <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar zaman sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_backtorightmouse">Geri tuşunu fare sağ tıkı gibi algıla</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Bazı cihazlar farenin sağ tıkını geri tuşu olarak algılar. Eğer fiziksel fare kullanıyorsanız, bunu aktifleştirmelisiniz.</string>
     <string name="mcl_setting_title_flat_button_style">Düz düğme tarzı</string>
     <string name="mcl_setting_subtitle_flat_button_style">Düğme tarzını düz yapmak için bunu etkinleştir.</string>
-    <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
+    <string name="mcl_setting_title_buttonscale">Düğmelerin boyutlayıcısını ayarla</string>
     <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
     <string name="mcl_setting_subtitle_mousescale">Sanal farenin boyutunu ayarlayın.</string>
     <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
-    <string name="mcl_setting_category_scaling">Ölçekleme Seçenekleri</string>
+    <string name="mcl_setting_category_scaling">Boyutlama Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
-    <string name="mcl_setting_veroption_release">Sürümler</string>
+    <string name="mcl_setting_veroption_release">Çıkan sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
@@ -129,7 +129,7 @@
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
-    <string name="control_inventory">Inv</string>
+    <string name="control_inventory">Env</string>
     <string name="control_up">▲</string>
     <string name="control_left">◀</string>
     <string name="control_right">▶</string>
@@ -142,9 +142,11 @@
     <string name="control_mouseon">Fare: açık </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Kapatmaya zorla</string>
-    <string name="control_viewout">Günlük çıktısı</string>
+    <string name="control_viewout">Konsol çıktısı</string>
     <string name="control_adebug">Hata ayıklama tuşu gir</string>
     <string name="control_customkey">Özel anahtarkodu gönder</string>
+    <string name="control_scaleup">Boyutu Arttır</string>
+    <string name="control_scaledown">Boyutu Küçült</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -175,7 +177,7 @@
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
     <string name="main_no_news_feed">Haberler bilgileri getirilemedi !</string>
-    <string name="auto_ram_subtitle">Otomatik RAM yükselticiyi aktifleştirir</string>
+    <string name="auto_ram_subtitle">Otomatik RAM ayarlayıcısını aktifleştirir</string>
     <string name="auto_ram_title">Otomatik RAM</string>
     <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
     <string name="mcl_setting_check_libraries">İndirmeden sonra kütüphaneleri kontrol et</string>
@@ -186,10 +188,10 @@
     <string name="mcl_disable_gestures">İşaretleri devre dışı bırak</string>
     <string name="mcl_disable_gestures_subtitle">İşaretleri devre dışarı bırakır, blok kırma ve blok koymak için basma gibi.</string>
     <string name="mcl_setting_title_mousespeed">Fare Hızı</string>
-    <string name="mcl_setting_subtitle_mousespeed">Uygulamadaki farenin hızını değiştirir</string>
+    <string name="mcl_setting_subtitle_mousespeed">Farenin hızını değiştirir</string>
     <string name="customctrl_passthru">Mouse geçişi</string>
     <string name="customctrl_rounded">Kenarlı</string>
     <string name="memory_warning_msg">Şuanki boş RAM (%d) verilecek RAM\'den (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilecek RAM\'i değiştirin.</string>
     <string name="mcl_memory_allocation">Bellek verme</string>
-    <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini değiştirir</string>
+    <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder</string>
 </resources>

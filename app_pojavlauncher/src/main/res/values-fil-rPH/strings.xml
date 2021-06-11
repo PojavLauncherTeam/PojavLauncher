@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android) Translation By Justine Victorino or EnderProJustine</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Ilunsad ang Minecraft: Java Edition sa iyong aparato!</string>
     <!-- Action bar part -->
@@ -139,6 +139,8 @@
     <string name="control_viewout">Output ng log</string>
     <string name="control_adebug">Pag-input ng Debug</string>
     <string name="control_customkey">Magpadala ng pasadyang keycode</string>
+    <string name="control_scaleup">Scale up</string>
+    <string name="control_scaledown">Scale down</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -183,4 +185,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Binabago ang bilis ng mouse ng software</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">Ang kasalukuyang dami ng libreng RAM (%d) ay mas mababa kaysa sa inilalaan na RAM (%d), na maaaring humantong sa mga pag-crash. Baguhin ang paglalaan kung ang laro ay nag-crash.</string>
+    <string name="mcl_memory_allocation">Paglalaan ng memorya</string>
+    <string name="mcl_memory_allocation_subtitle">Kinokontrol kung magkano ang memorya na ibinibigay sa Minecraft</string>
 </resources>

@@ -13,44 +13,45 @@ public class JMinecraftVersionList {
     public Version[] versions;
 
     public static class Version {
-		// Since 1.13, so it's one of ways to check
-		public Arguments arguments;
+        // Since 1.13, so it's one of ways to check
+        public Arguments arguments;
+
         public AssetIndex assetIndex;
 
         public String assets;
-		public Map<String, MinecraftClientInfo> downloads;
+        public Map<String, MinecraftClientInfo> downloads;
         public String id;
-		public String inheritsFrom;
-		public DependentLibrary[] libraries;
-		public String mainClass;
-		public String minecraftArguments;
-		public int minimumLauncherVersion;
-		public DependentLibrary optifineLib;
+        public String inheritsFrom;
+        public DependentLibrary[] libraries;
+        public String mainClass;
+        public String minecraftArguments;
+        public int minimumLauncherVersion;
+        public DependentLibrary optifineLib;
         public String releaseTime;
         public String time;
         public String type;
-		public String url;
-		public String sha1;
+        public String url;
+        public String sha1;
     }
 
-	// Since 1.13
-	public static class Arguments {
-		public Object[] game;
-		public Object[] jvm;
+    // Since 1.13
+    public static class Arguments {
+        public Object[] game;
+        public Object[] jvm;
 
-		public static class ArgValue {
-			public ArgRules[] rules;
-			public String value;
+        public static class ArgValue {
+            public ArgRules[] rules;
+            public String value;
             
             // TLauncher styled argument...
             public String[] values;
 
-			public static class ArgRules {
-				public String action;
-				public String features;
-			}
-		}
-	}
+            public static class ArgRules {
+                public String action;
+                public String features;
+            }
+        }
+    }
     public static class AssetIndex {
         public String id, sha1, url;
         public long size, totalSize;
