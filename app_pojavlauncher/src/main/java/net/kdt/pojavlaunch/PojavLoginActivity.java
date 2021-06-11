@@ -646,7 +646,6 @@ public class PojavLoginActivity extends BaseActivity
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
             View child = inflater.inflate(R.layout.simple_account_list_item, null);
@@ -702,9 +701,7 @@ public class PojavLoginActivity extends BaseActivity
                 }
             });
 
-            // Tiny trick to avoid 'const' field
             final int accountIndex_final = accountIndex;
-
             removeButton.setOnClickListener(new View.OnClickListener() {
                 final String selectedAccName = accountName.getText().toString();
                 @Override
@@ -742,13 +739,15 @@ public class PojavLoginActivity extends BaseActivity
         new File(Tools.DIR_ACCOUNT_OLD).mkdir();
         
         String text = edit2.getText().toString();
-        if(text.isEmpty()){
-            edit2.setError(getResources().getString(R.string.global_error_field_empty));
-        } else if(text.length() <= 2){
-            edit2.setError(getResources().getString(R.string.login_error_short_username));
-        } else if(new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()){
-            edit2.setError(getResources().getString(R.string.login_error_exist_username));
-        } else{
+        if (text.isEmpty()) {
+            edit2.setError(getString(R.string.global_error_field_empty));
+        } else if (text.length() <= 2) {
+            edit2.setError(getString(R.string.login_error_short_username));
+        } else if (new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()) {
+            edit2.setError(getString(R.string.login_error_exist_username));
+        } else if (!edit3.getText().toString().isEmpty()) {
+            edit3.setError(getString(R.string.login_error_offline_password));
+        } else {
             MinecraftAccount builder = new MinecraftAccount();
             builder.isMicrosoft = false;
             builder.username = text;

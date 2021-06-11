@@ -48,10 +48,12 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
         seek6.setMax(300);
         seek6.setSuffix(" %");
 
+        int freeMem = (int) (Runtime.getRuntime().freeMemory() / 1048576l);
+
         CustomSeekBarPreference seek7 = (CustomSeekBarPreference) findPreference("allocation");
         seek7.setMin(256);
-        if(Tools.CURRENT_ARCHITECTURE.contains("32")) seek7.setMax(800);
-        else seek7.setMax(4096);
+        if(Tools.CURRENT_ARCHITECTURE.contains("32")) seek7.setMax(1100);
+        else seek7.setMax(freeMem > 4096 ? freeMem : 4096);
         seek7.setValue(LauncherPreferences.PREF_RAM_ALLOCATION);
         seek7.setSuffix(" MB");
 

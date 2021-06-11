@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_name">PojavLauncher (마인크래프트: 자바 에디션, 안드로이드를 위한)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
     <!-- Action bar part -->
@@ -145,6 +145,8 @@
     <string name="control_viewout">로그 확인</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">사용자 지정 키 보내기</string>
+    <string name="control_scaleup">확장</string>
+    <string name="control_scaledown">축소</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -189,4 +191,7 @@
     <string name="mcl_setting_subtitle_mousespeed">소프트웨어 마우스 속도 변경</string>
     <string name="customctrl_passthru">마우스 패스스루</string>
     <string name="customctrl_rounded">둥글게</string>
+    <string name="memory_warning_msg">현재 사용 가능한 RAM 크기(%d) 가 할당된 RAM 크기(%d) 보다 낮습니다. 게임이 충돌할 경우 할당량을 변경하세요.</string>
+    <string name="mcl_memory_allocation">메모리 할당</string>
+    <string name="mcl_memory_allocation_subtitle">Minecraft 메모리 할당 조절</string>
 </resources>

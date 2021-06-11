@@ -139,6 +139,8 @@
     <string name="control_viewout">Logg utdata</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send tilpasset kode</string>
+    <string name="control_scaleup">Skaler opp</string>
+    <string name="control_scaledown">Skalere ned</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>

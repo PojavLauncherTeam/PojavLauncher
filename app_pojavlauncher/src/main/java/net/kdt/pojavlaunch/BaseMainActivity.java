@@ -38,8 +38,8 @@ public class BaseMainActivity extends LoggableActivity {
     private boolean rightOverride = false;
     private float scaleFactor = 1;
     private int fingerStillThreshold = 8;
-    private int initialX;
-    private int initialY;
+    private int initialX, initialY;
+    private int scrollInitialX, scrollInitialY;
     private boolean mIsResuming = false;
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
@@ -95,7 +95,7 @@ public class BaseMainActivity extends LoggableActivity {
     public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
     // private String mQueueText = new String();
 
-    protected JMinecraftVersionList.Version mVersionInfo;
+    protected volatile JMinecraftVersionList.Version mVersionInfo;
 
     private View.OnTouchListener glTouchListener;
 
@@ -112,7 +112,6 @@ public class BaseMainActivity extends LoggableActivity {
     private boolean isExited = false;
     private boolean isLogAllow = false;
     private volatile int mouse_x, mouse_y;
-    private boolean ignorePad = false;
     // private int navBarHeight = 40;
     
     // private static Collection<? extends Provider.Service> rsaPkcs1List;
@@ -321,24 +320,38 @@ public class BaseMainActivity extends LoggableActivity {
                             switch (action) {
                                 case MotionEvent.ACTION_UP: // 1
                                 case MotionEvent.ACTION_CANCEL: // 3
-                                case MotionEvent.ACTION_POINTER_UP: // 6
                                     if (!rightOverride) {
                                         CallbackBridge.mouseLeft = false;
                                     }
                                     break;
+
+                                case MotionEvent.ACTION_POINTER_DOWN: // 5
+                                    scrollInitialX = CallbackBridge.mouseX;
+                                    scrollInitialY = CallbackBridge.mouseY;
+                                    break;
+
+                                case MotionEvent.ACTION_POINTER_UP: // 6
+                                    break;
+                                    
                                 case MotionEvent.ACTION_MOVE: // 2
-                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX)*LauncherPreferences.PREF_MOUSESPEED));
-                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + (y - prevY)*LauncherPreferences.PREF_MOUSESPEED));
-                                    mouse_x = (int) (mouseX * scaleFactor);
-                                    mouse_y = (int) (mouseY * scaleFactor);
-                                    placeMouseAt(mouseX, mouseY);
-                                    CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
-                                    /*
-                                    if (!CallbackBridge.isGrabbing()) {
-                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
-                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
+                                    if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                        CallbackBridge.sendScroll(CallbackBridge.mouseX - scrollInitialX, CallbackBridge.mouseY - scrollInitialY);
+                                        scrollInitialX = CallbackBridge.mouseX;
+                                        scrollInitialY = CallbackBridge.mouseY;
+                                    } else {
+                                        mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX)*LauncherPreferences.PREF_MOUSESPEED));
+                                        mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + (y - prevY)*LauncherPreferences.PREF_MOUSESPEED));
+                                        mouse_x = (int) (mouseX * scaleFactor);
+                                        mouse_y = (int) (mouseY * scaleFactor);
+                                        placeMouseAt(mouseX, mouseY);
+                                        CallbackBridge.sendCursorPos((int) (mouseX * scaleFactor),  (int) (mouseY *scaleFactor));
+                                        /*
+                                        if (!CallbackBridge.isGrabbing()) {
+                                            CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
+                                            CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
+                                        }
+                                        */
                                     }
-                                    */
                                     break;
                             }
                         }
@@ -357,7 +370,6 @@ public class BaseMainActivity extends LoggableActivity {
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int hotbarX, hotbarY;
-                private int scrollInitialX, scrollInitialY;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e)
                 {
@@ -408,7 +420,6 @@ public class BaseMainActivity extends LoggableActivity {
                     } else {
                         switch (e.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN: // 0
-                            case MotionEvent.ACTION_POINTER_DOWN: // 5
                                 CallbackBridge.sendPrepareGrabInitialPos();
                                 
                                 isTouchInHotbar = hudKeyHandled != -1;
@@ -433,14 +444,10 @@ public class BaseMainActivity extends LoggableActivity {
                                         initialY = mouse_y;
                                         theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                                     }
-                                   
-                                    scrollInitialX = mouse_x;
-                                    scrollInitialY = mouse_y;
                                 }
                                 break;
                                 
                             case MotionEvent.ACTION_UP: // 1
-                            case MotionEvent.ACTION_POINTER_UP: // 6
                             case MotionEvent.ACTION_CANCEL: // 3
                                 if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = mouse_x;
@@ -460,7 +467,7 @@ public class BaseMainActivity extends LoggableActivity {
                                     if (isTouchInHotbar && Math.abs(hotbarX - mouse_x) < fingerStillThreshold && Math.abs(hotbarY - mouse_y) < fingerStillThreshold) {
                                         sendKeyPress(hudKeyHandled, 0, false);
                                     } else if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
-                                        if(!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                        if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
                                         }
@@ -478,34 +485,25 @@ public class BaseMainActivity extends LoggableActivity {
                                 }
                                 
                                 break;
-/*
+
                             case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                CallbackBridge.sendScroll(x - scrollInitialX, y - scrollInitialY);
-                                scrollInitialX = x;
-                                scrollInitialY = y;
+                                scrollInitialX = CallbackBridge.mouseX;
+                                scrollInitialY = CallbackBridge.mouseY;
                                 break;
                                 
                             case MotionEvent.ACTION_POINTER_UP: // 6
-                                scrollInitialX = x;
-                                scrollInitialY = y;
                                 break;
- */
+
                             case MotionEvent.ACTION_MOVE:
-                                if (!isTouchInHotbar) {
+                                if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                    CallbackBridge.sendScroll(mouse_x - scrollInitialX, mouse_y - scrollInitialY);
+                                    scrollInitialX = mouse_x;
+                                    scrollInitialY = mouse_y;
+                                } else if (!isTouchInHotbar) {
                                     CallbackBridge.mouseX = mouse_x;
                                     CallbackBridge.mouseY = mouse_y;
 
                                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    
-                                    if (!CallbackBridge.isGrabbing()) {
-                                        /*
-                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
-                                        CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
-                                        */
-                                        CallbackBridge.sendScroll(mouse_x - scrollInitialX, mouse_y - scrollInitialY);
-                                        scrollInitialX = mouse_x;
-                                        scrollInitialY = mouse_y;
-                                    }
                                 }
                                 break;
                         }
@@ -899,21 +897,25 @@ public class BaseMainActivity extends LoggableActivity {
         appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         checkLWJGL3Installed();
         
-        Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
+        jreReleaseList = JREUtils.readJREReleaseProperties();
         JREUtils.checkJavaArchitecture(this, jreReleaseList.get("OS_ARCH"));
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-        
+
+        appendlnToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
+            (mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
+            "" : " (" + mVersionInfo.inheritsFrom + ")");
+
         JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
         Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-        
+
+/*
         if (jreVersion.equals("1.8.0")) return;
-        
-    /*
+
         // Test java
         ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
             @Override

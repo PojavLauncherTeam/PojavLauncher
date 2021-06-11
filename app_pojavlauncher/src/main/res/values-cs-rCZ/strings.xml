@@ -145,6 +145,8 @@
     <string name="control_viewout">Záznam výstupu</string>
     <string name="control_adebug">Ladění Vstupu</string>
     <string name="control_customkey">Poslat vlastní klávesu</string>
+    <string name="control_scaleup">Zvětšit</string>
+    <string name="control_scaledown">Zmenšit</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>

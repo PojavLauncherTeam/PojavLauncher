@@ -147,6 +147,8 @@
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
     <string name="control_customkey">Отправить пользовательский код клавиши</string>
+    <string name="control_scaleup">Увеличить</string>
+    <string name="control_scaledown">Уменьшить</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -189,9 +191,9 @@
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
-    <string name="customctrl_passthru">Указатель мышки</string>
+    <string name="customctrl_passthru">Указатель мыши</string>
     <string name="customctrl_rounded">Скруглённые</string>
-    <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
+    <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям приложения. Измените количество выделенной памяти при сбое игры.</string>
     <string name="mcl_memory_allocation">Выделение памяти</string>
-    <string name="mcl_memory_allocation_subtitle">Управляет тем, сколько памяти выделится для Minecraft</string>
+    <string name="mcl_memory_allocation_subtitle">Управляет выделением памяти для Minecraft</string>
 </resources>
