@@ -657,7 +657,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     ANativeWindow_acquire(potatoBridge.androidWindow);
     savedWidth = ANativeWindow_getWidth(potatoBridge.androidWindow);
     savedHeight = ANativeWindow_getHeight(potatoBridge.androidWindow);
-    ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8_UNORM);
+    ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
 
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles", renderer, 8) == 0) {
@@ -932,7 +932,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong
         
         case RENDERER_VK_ZINK: {
             printf("OSMDroid: generating context\n");
-            void* ctx = OSMesaCreateContext_p(OSMESA_RGB,contextSrc);
+            void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
             printf("OSMDroid: context=%p",ctx);
             return ctx;
         }
