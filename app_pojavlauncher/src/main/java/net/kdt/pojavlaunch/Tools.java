@@ -134,7 +134,7 @@ public final class Tools
         javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
 
         StringBuilder cacioClasspath = new StringBuilder();
-        cacioClasspath.append("-Xbootclasspath/p");
+        cacioClasspath.append("-Xbootclasspath/a");
         File cacioDir = new File(DIR_GAME_HOME + "/caciocavallo");
         if (cacioDir.exists() && cacioDir.isDirectory()) {
             for (File file : cacioDir.listFiles()) {
