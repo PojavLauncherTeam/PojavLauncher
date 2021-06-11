@@ -86,9 +86,11 @@ public final class Tools
                 }
             });
         }
+
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
         PerVersionConfig.update();
         PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
+
         String gamedirPath;
         if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
         else gamedirPath = Tools.DIR_GAME_NEW;
@@ -101,7 +103,13 @@ public final class Tools
         String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
 
         List<String> javaArgList = new ArrayList<String>();
-        
+
+        // Only Java 8 supports headful AWT for now
+        if (ctx.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
+            getCacioJavaArgs(javaArgList, false);
+        }
+
+/*
         int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
         // 13w17a: 20130425
         // 13w18a: 20130502
@@ -112,7 +120,8 @@ public final class Tools
             getCacioJavaArgs(javaArgList,false); // true
             ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
-        
+*/
+
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
