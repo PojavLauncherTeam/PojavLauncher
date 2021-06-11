@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import java.util.Map;
+
 public abstract class LoggableActivity extends BaseActivity {
     public Map<String, String> jreReleaseList;
     public void appendToLog(String text) {
