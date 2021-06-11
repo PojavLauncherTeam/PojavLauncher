@@ -94,7 +94,7 @@ public class BaseMainActivity extends LoggableActivity {
     public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
     // private String mQueueText = new String();
 
-    protected JMinecraftVersionList.Version mVersionInfo;
+    protected volatile JMinecraftVersionList.Version mVersionInfo;
 
     private View.OnTouchListener glTouchListener;
 
@@ -899,17 +899,21 @@ public class BaseMainActivity extends LoggableActivity {
         JREUtils.checkJavaArchitecture(this, jreReleaseList.get("OS_ARCH"));
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-        
+
+        appendlnToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
+            (mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
+            "" : " (" + mVersionInfo.inheritsFrom + ")");
+
         JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
         Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-        
+
+/*
         if (jreVersion.equals("1.8.0")) return;
-        
-    /*
+
         // Test java
         ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
             @Override
