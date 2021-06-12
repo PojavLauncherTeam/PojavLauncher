@@ -22,11 +22,12 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-#include <jni.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <android/log.h>
 #include <dlfcn.h>
+#include <errno.h>
+#include <jni.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
 // Boardwalk: missing include
