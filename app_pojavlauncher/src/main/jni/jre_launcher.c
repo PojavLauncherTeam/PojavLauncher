@@ -34,8 +34,10 @@
 #include <string.h>
 
 #include "log.h"
-
 #include "utils.h"
+
+// Uncomment to try redirect signal handling to JVM
+// #define TRY_SIG2JVM
 
 // PojavLancher: fixme: are these wrong?
 #define FULL_VERSION "1.8.0-internal"
@@ -54,8 +56,8 @@ void (*__old_sa)(int signal, siginfo_t *info, void *reserved);
 int (*JVM_handle_linux_signal)(int signo, siginfo_t* siginfo, void* ucontext, int abort_if_unrecognized);
 
 void android_sigaction(int signal, siginfo_t *info, void *reserved) {
+  printf("process killed with signal %d code %p addr %p\n", signal,info->si_code,info->si_addr);
   if (JVM_handle_linux_signal == NULL) { // should not happen, but still
-      printf("process killed with signal %d code %p addr %p\n", signal,info->si_code,info->si_addr);
       __old_sa = old_sa[signal].sa_sigaction;
       __old_sa(signal,info,reserved);
       exit(1);
@@ -127,12 +129,14 @@ static jint launchJVM(int margc, char** margv) {
  * Signature: ([Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, jclass clazz, jobjectArray argsArray) {
+#ifdef TRY_SIG2JVM
   void* libjvm = dlopen("libjvm.so", RTLD_LAZY | RTLD_GLOBAL);
   if (NULL == libjvm) {
       LOGE("JVM lib = NULL: %s", dlerror());
       return -1;
   }
   JVM_handle_linux_signal = dlsym(libjvm, "JVM_handle_linux_signal");
+#endif
 
    jint res = 0;
    // int i;
@@ -147,7 +151,9 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
     CATCHSIG(SIGABRT);
     CATCHSIG(SIGBUS);
     CATCHSIG(SIGFPE);
+#ifdef TRY_SIG2JVM
     CATCHSIG(SIGSEGV);
+#endif
     CATCHSIG(SIGSTKFLT);
     CATCHSIG(SIGPIPE);
     CATCHSIG(SIGXFSZ);
