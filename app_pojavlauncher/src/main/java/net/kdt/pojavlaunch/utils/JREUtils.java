@@ -68,7 +68,6 @@ public class JREUtils
         return ret;
     }
     public static void initJavaRuntime() {
-        dlopen(findInLdLibPath("libtinyiconv.so"));
         dlopen(findInLdLibPath("libjli.so"));
         dlopen(findInLdLibPath("libjvm.so"));
         dlopen(findInLdLibPath("libverify.so"));
