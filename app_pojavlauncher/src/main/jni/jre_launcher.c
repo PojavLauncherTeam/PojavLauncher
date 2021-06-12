@@ -54,7 +54,7 @@ int (*JVM_handle_linux_signal)(int signo, siginfo_t* siginfo, void* ucontext, in
 
 void android_sigaction(int signal, siginfo_t *info, void *reserved) {
   if (JVM_handle_linux_signal == NULL) { // should not happen, but still
-      printf("process killed with signal %d code %p addr %p", signal,info->si_code,info->si_addr);
+      printf("process killed with signal %d code %p addr %p\n", signal,info->si_code,info->si_addr);
       __old_sa = old_sa[signal].sa_sigaction;
       __old_sa(signal,info,reserved);
       exit(1);
