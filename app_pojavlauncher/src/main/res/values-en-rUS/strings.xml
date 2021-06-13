@@ -14,6 +14,7 @@
     <string name="login_offline_label">Login as a offline account</string>
     <string name="login_error_short_username">Username must be at least 3 characters long</string>
     <string name="login_error_exist_username">This username already exist</string>
+    <string name="login_error_offline_password">Offline account can\'t include password!</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
     <string name="login_title_no_saved_account">No accounts found!</string>
