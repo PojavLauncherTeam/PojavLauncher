@@ -231,7 +231,6 @@ public class JREUtils
 	envMap.put("LIBGL_FB", "3");
         envMap.put("LIBGL_NOTEXMAT", "1");
         envMap.put("LIBGL_FASTMATH", "1");
-        envMap.put("LIBGL_SHRINK", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
