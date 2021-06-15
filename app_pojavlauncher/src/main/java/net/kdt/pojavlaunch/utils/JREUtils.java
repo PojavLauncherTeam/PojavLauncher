@@ -68,7 +68,6 @@ public class JREUtils
         return ret;
     }
     public static void initJavaRuntime() {
-
         dlopen(findInLdLibPath("libjli.so"));
         dlopen(findInLdLibPath("libjvm.so"));
         dlopen(findInLdLibPath("libverify.so"));
@@ -85,9 +84,11 @@ public class JREUtils
         }
         dlopen(nativeLibDir + "/libopenal.so");
         
+        // may not necessary
         if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl4es_114.so")) {
             LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = nativeLibDir + "/libgl4es_114.so";
         }
+
         if (!dlopen(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME) && !dlopen(findInLdLibPath(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME))) {
             System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
             dlopen(nativeLibDir + "/libgl4es_114.so");
@@ -175,10 +176,9 @@ public class JREUtils
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
-    public static void relocateLibPath(Context ctx) throws Exception {
+    public static void relocateLibPath(final Context ctx) throws Exception {
         if (JRE_ARCHITECTURE == null) {
-            Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
-            JRE_ARCHITECTURE = jreReleaseList.get("OS_ARCH");
+            JRE_ARCHITECTURE = readJREReleaseProperties().get("OS_ARCH");
             if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.CURRENT_ARCHITECTURE.contains("x86") && !Tools.CURRENT_ARCHITECTURE.contains("64")) {
                 JRE_ARCHITECTURE = "i386/i486/i586";
             }
@@ -225,11 +225,12 @@ public class JREUtils
         envMap.put("LIBGL_NORMALIZE", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-        envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6COMPAT");
+        envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
         envMap.put("MESA_GLSL_VERSION_OVERRIDE", "460");
         envMap.put("force_glsl_extensions_warn", "true");
         envMap.put("allow_higher_compat_version", "true");
         envMap.put("allow_glsl_extension_directive_midshader", "true");
+        envMap.put("MESA_LOADER_DRIVER_OVERRIDE", "zink");
 
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
@@ -262,7 +263,7 @@ public class JREUtils
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else if (LauncherPreferences.PREF_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER.replace("opengles", ""));
+                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.

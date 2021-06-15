@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.content.pm.PackageManager;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
@@ -65,6 +66,7 @@ public class BaseMainActivity extends LoggableActivity {
             }
         }
     };
+
     private MinecraftGLView minecraftGLView;
     private int guiScale;
     private DisplayMetrics displayMetrics;
@@ -94,7 +96,7 @@ public class BaseMainActivity extends LoggableActivity {
     public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
     // private String mQueueText = new String();
 
-    protected JMinecraftVersionList.Version mVersionInfo;
+    protected volatile JMinecraftVersionList.Version mVersionInfo;
 
     private View.OnTouchListener glTouchListener;
 
@@ -894,23 +896,30 @@ public class BaseMainActivity extends LoggableActivity {
         
         appendlnToLog("--------- beggining with launcher debug");
         appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        if (LauncherPreferences.PREF_RENDERER.equals("vulkan_zink")) {
+            checkVulkanZinkIsSupported();
+        }
         checkLWJGL3Installed();
         
-        Map<String, String> jreReleaseList = JREUtils.readJREReleaseProperties();
+        jreReleaseList = JREUtils.readJREReleaseProperties();
         JREUtils.checkJavaArchitecture(this, jreReleaseList.get("OS_ARCH"));
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-        
+
+        appendlnToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
+            ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
+            "" : " (" + mVersionInfo.inheritsFrom + ")"));
+
         JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
         Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
         appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-        
+
+/*
         if (jreVersion.equals("1.8.0")) return;
-        
-    /*
+
         // Test java
         ShellProcessOperation shell = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
             @Override
@@ -948,6 +957,16 @@ public class BaseMainActivity extends LoggableActivity {
             throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
         } else {
             appendlnToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
+        }
+    }
+
+    private void checkVulkanZinkIsSupported() {
+        if (Tools.CURRENT_ARCHITECTURE.equals("x86")
+         || Build.VERSION.SDK_INT < 25
+         || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
+         || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
+            appendlnToLog("Error: Vulkan Zink renderer is not supported!");
+            throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
         }
     }
     

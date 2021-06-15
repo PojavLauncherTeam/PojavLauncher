@@ -16,8 +16,8 @@
     <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
     <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
     <string name="login_select_account">اختر الحساب</string>
-    <string name="login_title_no_saved_account">لم يتم العثور على حسابات!</string>
-    <string name="login_dialog_no_saved_account">ليس لديك أي حساب محفوظ.\nاستخدم الخيار <b>\"أبق تسجيل دخولي\"</b> لحفظ حساب عند تسجيل الدخول الأول.</string>
+    <string name="login_title_no_saved_account">لم يتم العثور على الحساب!</string>
+    <string name="login_dialog_no_saved_account">ليس لديك أي حساب محفوظ.\nاستخدم الخيار <b>\"تذكر تسجيل دخولي\"</b> لحفظ حساب عند تسجيل الدخول الأول.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر التخصيص: تحريره أو تغيير حجمه أو حذفه."</string>
     <!-- Warnings -->
@@ -38,7 +38,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">أخبار</string>
+    <string name="mcl_tab_news">الأخبار</string>
     <string name="mcl_tab_console">وحدة التحكم البرمجية</string>
     <string name="mcl_tab_crash">سجل توقف العمل</string>
     <!-- MCLauncherActivity: Account status -->
@@ -56,16 +56,16 @@
     <string name="mcl_option_customcontrol">تخصيص التحكم</string>
     <string name="mcl_option_settings">الاعدادات</string>
     <string name="mcl_option_about">حول التطبيق</string>
-    <string name="mcl_setting_title_uninstalljre">إلغاء تثبيت محرك تشغيل جافا</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[مطلوب إعادة تشغيل التطبيق] هذا يسمح لك بإعادة تثبيت محرك تشغيل جافا</string>
+    <string name="mcl_setting_title_uninstalljre">إلغاء تثبيت محرك جافا</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[يتطلب إعادة تشغيل التطبيق] هذا يسمح لك بإعادة تثبيت محرك تشغيل جافا</string>
     <string name="mcl_setting_title_freeform">تشغيل ماينكرافت في وضع حر</string>
     <string name="mcl_setting_subtitle_freeform">تشغيل ماينكرافت في النافذة العائمة. يتطلب أندرويد 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">أخفِ الشّريط الجانبيّ</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">أشخاص يفضلون واجهة المستخدم v1 القديمة. تعطيك المزيد من تجربة ملء الشاشة.</string>
-    <string name="mcl_setting_title_ignore_notch">تجاهل النبرة</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">قد يعجب الأشخاص الذين يفضلون واجهة المستخدم القديمة v1 بهذا. يمنحك تجربة ملء الشاشة بشكل أكبر.</string>
+    <string name="mcl_setting_title_ignore_notch">تجاهل notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">تجاهل النبرة وتوسيع الشاشة أسفلها.\nيعطيك تجربة أكثر انغماساً.</string>
     <string name="mcl_setting_title_resolution_scaler">مقياس الدقة</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتقليل دقة اللعبة. 100% دقة كاملة</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتقليل دقة اللعبة. 100% هي دقة كاملة</string>
     <string name="mcl_setting_title_longpresstrigger">كم من الوقت سيتم تشغيله بعد الضغط المطول</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغيير وقت التشغيل للضغط المطول في كتلة التحطيم وإسقاط الموارد.</string>
     <string name="mcl_setting_title_backtorightmouse">التعامل مع زر الرجوع كزر الفأرة اليمنى</string>
@@ -116,11 +116,11 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">تم الخروج من اللعبة مع الرمز %d</string>
+    <string name="mcn_exit_title">تم الخروج من التطبيق/ اللعبة برمز %d</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
-    <string name="mcn_check_fail_incompatiblearch">المعمارية %1$s غير متوافقة مع محرك تشغيل جافا %2$s.</string>
+    <string name="mcn_check_fail_incompatiblearch">البنية %1$s غير متوافقة مع محرك تشغيل جافا %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">واجهة المستخدم الرسومية</string>
     <string name="control_keyboard">لوحة المفاتيح</string>
@@ -137,23 +137,25 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">فرض الإغلاق</string>
     <string name="control_viewout">سجل الإخراج</string>
-    <string name="control_adebug">مدخل الDebug</string>
+    <string name="control_adebug">مدخل التصحيح</string>
     <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
+    <string name="control_scaleup">رفع المستوى التحكم</string>
+    <string name="control_scaledown">خفض مستوى التحكم</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">التعديل %s</string>
+    <string name="customctrl_edit">يتم تعديل %s</string>
     <string name="customctrl_remove">حذف %s؟</string>
     <string name="customctrl_keyname">رمز مفتاحي</string>
     <string name="customctrl_toggle">تبديلي</string>
     <string name="customctrl_size">الحجم</string>
     <string name="customctrl_size_width">العرض</string>
-    <string name="customctrl_size_height">ارتفاع</string>
+    <string name="customctrl_size_height">الارتفاع</string>
     <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
-    <string name="customctrl_transparency_bg">شفافية الخلفية</string>
+    <string name="customctrl_transparency_bg">شفافيه الخلفية</string>
     <string name="customctrl_keycombine">مجموعة المفاتيح</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
@@ -169,21 +171,21 @@
     <string name="main_nocrash">لم يتم اكتشاف توقف</string>
     <string name="main_nolog">لا توجد سجلات.</string>
     <string name="main_no_news_feed">فشل في جلب موجز الأخبار!</string>
-    <string name="auto_ram_subtitle">تمكين مشرف ذاكرة الوصول العشوائي التلقائي</string>
+    <string name="auto_ram_subtitle">تمكين  ذاكرة الوصول العشوائي التلقائي</string>
     <string name="auto_ram_title">ذاكرة الوصول العشوائية التلقائية</string>
     <string name="autoram_info_msg">تم تعيين الذاكرة إلى %d ميغابايت</string>
-    <string name="mcl_setting_check_libraries">التحقق من المكتبيات بعد التحميل</string>
-    <string name="mcl_setting_check_libraries_subtitle">هذا الخيار يجبر المشغل على التحقق من تجزئة الملفات المكتبية إذا كانت متاحة. يمنع التنزيلات المعطلة.</string>
+    <string name="mcl_setting_check_libraries">التحقق من المكتبات بعد التحميل</string>
+    <string name="mcl_setting_check_libraries_subtitle">يفرض هذا الخيار على المشغل التحقق من تجزئة المكتبة إذا كانت متوفرة. يمنع التنزيلات المعطلة.</string>
     <string name="dl_library_sha_fail">المكتبة %s تالفة وسيتم إعادة تحميلها</string>
     <string name="dl_library_sha_unknown">لا يمكن التحقق من الملفات المكتبية %s ، يجب أن تفترض أنها جيدة</string>
     <string name="dl_library_sha_pass">المكتبة %s جيدة وقابلة للاستخدام</string>
     <string name="mcl_disable_gestures">تعطيل الإيماءات</string>
-    <string name="mcl_disable_gestures_subtitle">تعطيل الإيماءات، مثل تثبيت الضغط لكسر بلوكة، والنقر لوضع يلوكة.</string>
+    <string name="mcl_disable_gestures_subtitle">تعطيل الإيماءات، مثل تثبيت الضغط لكسر كتلة، والنقر لوضع كتلة.</string>
     <string name="mcl_setting_title_mousespeed">سرعة الفأرة</string>
     <string name="mcl_setting_subtitle_mousespeed">يغير سرعة الفأرة البرمجية</string>
     <string name="customctrl_passthru">سماح تحريك أزرار الشاشة</string>
     <string name="customctrl_rounded">مدوّر</string>
-    <string name="memory_warning_msg">الكمية الحالية من ذاكرة الوصول العشوائي المجانية (الرام) (%d) أقل من ذاكرة الوصول العشوائي (الرام) المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. قم بتغيير التخصيص إذا تحطمت اللعبة.</string>
-    <string name="mcl_memory_allocation">تخصيص الذاكرة (الميموري)</string>
+    <string name="memory_warning_msg">الكمية الحالية من ذاكرة الوصول العشوائي المجانية (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. قم بتغيير التخصيص إذا تحطمت اللعبة.</string>
+    <string name="mcl_memory_allocation">تخصيص الذاكرة.</string>
     <string name="mcl_memory_allocation_subtitle">يتحكم في كمية الذاكرة المعطاة لـ Minecraft</string>
 </resources>

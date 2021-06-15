@@ -86,9 +86,11 @@ public final class Tools
                 }
             });
         }
+
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
         PerVersionConfig.update();
         PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
+
         String gamedirPath;
         if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
         else gamedirPath = Tools.DIR_GAME_NEW;
@@ -101,7 +103,13 @@ public final class Tools
         String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
 
         List<String> javaArgList = new ArrayList<String>();
-        
+
+        // Only Java 8 supports headful AWT for now
+        if (ctx.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
+            getCacioJavaArgs(javaArgList, false);
+        }
+
+/*
         int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
         // 13w17a: 20130425
         // 13w18a: 20130502
@@ -112,7 +120,8 @@ public final class Tools
             getCacioJavaArgs(javaArgList,false); // true
             ctx.appendlnToLog("Headless version detected! ("+mcReleaseDate+")");
         }
-        
+*/
+
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
@@ -134,7 +143,7 @@ public final class Tools
         javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
 
         StringBuilder cacioClasspath = new StringBuilder();
-        cacioClasspath.append("-Xbootclasspath/p");
+        cacioClasspath.append("-Xbootclasspath/a");
         File cacioDir = new File(DIR_GAME_HOME + "/caciocavallo");
         if (cacioDir.exists() && cacioDir.isDirectory()) {
             for (File file : cacioDir.listFiles()) {
@@ -158,9 +167,8 @@ public final class Tools
 
         overrideableArgList.add("-Dos.name=Linux");
         overrideableArgList.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
-
-        overrideableArgList.add("-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW);
-        overrideableArgList.add("-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW);
+        overrideableArgList.add("-Dpojav.path.minecraft=" + DIR_GAME_NEW);
+        overrideableArgList.add("-Dpojav.path.private.account=" + DIR_ACCOUNT_NEW);
         
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
@@ -187,12 +195,16 @@ public final class Tools
         
         // Override args
         for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
-            for (int i = 0; i < overrideableArgList.size(); i++) {
+            for (int i = overrideableArgList.size() - 1; i >= 0; i--) {
                 String arg = overrideableArgList.get(i);
+                // Currently, only java property is supported overridable argument, other such as "-X:" are handled by the JVM.
+                // Althought java properties are also handled by JVM, but duplicate bug from parser may occurs, so replace them.
                 if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
+                    // Override the matched argument
                     overrideableArgList.set(i, argOverride);
                     break;
-                } else if (i+1 == overrideableArgList.size()) {
+                } else if (!argOverride.isEmpty() && i == 0) {
+                    // Overridable argument has mismatched, so add the custom argument to overridable argument list
                     javaArgList.add(argOverride);
                 }
             }
@@ -249,6 +261,14 @@ public final class Tools
                 }
             }
         }
+        minecraftArgs.add("--width");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
+        minecraftArgs.add("--height");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
+        minecraftArgs.add("--fullscreenWidth");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
+        minecraftArgs.add("--fullscreenHeight");
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
         
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(

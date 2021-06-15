@@ -7,7 +7,8 @@
 # PojavLauncher
 
 ## Note
-We do not exist on TikTok. No one from the dev team makes TikTok videos.
+- We do not exist on TikTok. No one from the dev team makes TikTok videos.
+- The official Twitter for PojavLauncher is [@PLaunchTeam](https://twitter.com/PLaunchTeam). Any others (most notably @PojavLauncher) are fake, please report them to Twitter's moderation team.
 
 ## Navigation
 - [Introduction](#introduction)
@@ -82,7 +83,8 @@ cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main
 - Minecraft `21w10a` or newer are currently not yet supported due to the new GLSL usage.
 - In 1.16 and up spawn eggs banners are white (you can fix this by adding this to your JVM flags 
 `-Dorg.lwjgl.opengl.libname=libgl4es_115.so`, only works on 1.16 and up, do not use under this version)
-- controller mods aren't working
+- Controller mods aren't working
+- Random crashes could happen very often on Android 5.x during game load or join world.
 - With big modpacks textures could be messed up
 - If you're using gl4es 1.1.5 on 1.16 and lower texture will bug out when hit a mob
 - probably more, that's why we have a bug tracker ;) 

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition ɹoɟ Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">¡ǝɔᴉʌǝp ɹnoʎ uᴉ Minecraft: Java Edition ɥɔunɐꞀ</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">ǝɯɐuɹǝsn ɹo ꞁᴉɐɯƎ</string>
+    <string name="login_online_password_hint">pɹoʍssɐԀ</string>
+    <string name="login_online_check_keeplogin">uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ</string>
+    <string name="login_online_login_label">uᴉᵷoꞀ</string>
+    <string name="login_offline_label">ʇunoɔɔɐ ǝuᴉꞁɟɟo sɐ uᴉᵷoꞀ</string>
+    <string name="login_error_short_username">sɹǝʇɔɐɹɐɥɔ Ɛ ʇsɐǝꞁ ʇɐ ǝq ʇsnɯ ǝɯɐuɹǝs∩</string>
+    <string name="login_error_exist_username">ʇsᴉxǝ ʎpɐǝɹꞁɐ ǝɯɐuɹǝsn sᴉɥ⟘</string>
+    <string name="login_microsoft">uᴉᵷoꞁ ʇɟosoɹɔᴉW</string>
+    <string name="login_select_account">ʇunoɔɔɐ ʇɔǝꞁǝS</string>
+    <string name="login_title_no_saved_account">¡ punoɟ ʇunoɔɔɐ oN</string>
+    <string name="login_dialog_no_saved_account">˙uᴉᵷoꞁ ʇsɹᴉɟ uodn ʇunoɔɔɐ uɐ ǝʌɐs oʇ &lt;/b&gt;,, uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ,,&lt;b&gt; uoᴉʇdo ǝɥʇ ǝs∩\n˙ʇunoɔɔɐ pǝʌɐs ʎuɐ ǝʌɐɥ ʇ, uop no⅄.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"˙ǝʇǝꞁǝp ɹo ǝzᴉsǝɹ 'ʇᴉpǝ :ǝzᴉɯoʇsnɔ oʇ uoʇʇnq ɐ pꞁoH\n◀ nuǝɯ uǝdo oʇ ʇɟǝꞁ oʇ ʇɥᵷᴉɹ ɯoɹɟ ǝdᴉʍS"</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">¡pǝʌoɯǝɹ ǝq ꞁꞁᴉʍ ʇunoɔɔɐ sᴉɥ⟘</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">(zx˙ɹɐʇ˙) %s ǝɯᴉʇunᴚ ɐʌɐՐ ꞁꞁɐʇsuI</string>
+    <string name="alerttitle_installmod">ɹǝꞁꞁɐʇsuᴉ poɯ ɐ ʇɔǝꞁǝS</string>
+    <!-- Error messages -->
+    <string name="error_fatal">pǝɥsɐɹɔ ʎꞁpǝʇɔǝdxǝun sɐɥ ɹǝɥɔunɐꞀʌɐɾoԀ</string>
+    <string name="error_no_version">¡uoᴉsɹǝʌ oN</string>
+    <string name="error_show_more">ǝɹoɯ ʍoɥS</string>
+    <string name="error_show_less">ssǝꞁ ʍoɥS</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">¡pǝɹᴉnbǝɹ sᴉ uoᴉssᴉɯɹǝd ǝᵷɐɹoʇs oʇ ǝʇᴉɹʍ/pɐǝɹ ǝɥ⟘</string>
+    <string name="toast_optifine_success">ꞁnɟssǝɔɔns ꞁꞁɐʇsuI</string>
+    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">sʍǝN</string>
+    <string name="mcl_tab_console">ǝꞁosuoɔ ʇuǝɯdoꞁǝʌǝᗡ</string>
+    <string name="mcl_tab_crash">ᵷoꞁ ɥsɐɹƆ</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">pǝʇɔǝuuoƆ</string>
+    <string name="mcl_account_offline">ǝuᴉꞁɟɟO</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">%s ʇɟɐɹɔǝuᴉW ʎɐꞁd oʇ ʎpɐǝᴚ</string>
+    <string name="mcl_launch_cleancache">sǝꞁᴉɟ ǝɥɔɐɔ ᵷuᴉuɐǝꞁƆ</string>
+    <string name="mcl_launch_downloading">%s ᵷuᴉpɐoꞁuʍoᗡ</string>
+    <string name="mcl_launch_downloading_progress">"(ᗺW %.2f / ᗺW %.2f) %s ᵷuᴉpɐoꞁuʍoᗡ"</string>
+    <string name="mcl_launch_download_assets">sǝɔɹnosǝɹ pɐoꞁuʍop oʇ ᵷuᴉɹɐdǝɹԀ</string>
+    <string name="mcl_options">suoᴉʇdO</string>
+    <string name="mcl_option_modinstall">(˙˙˙ɔʇǝ \'ɔᴉɹqɐℲ \'poWʎqɐꞀ \'ǝᵷɹoℲ) ɹǝꞁꞁɐʇsuᴉ poɯ ɐ ɥɔunɐꞀ</string>
+    <string name="mcl_option_modinstallwitharg">(sʇuǝɯnᵷɹɐ ɯoʇsnɔ ɥʇᴉʍ) ɹǝꞁꞁɐʇsuᴉ poɯ ɐ ɥɔunɐꞀ</string>
+    <string name="mcl_option_customcontrol">sꞁoɹʇuoɔ ɯoʇsnƆ</string>
+    <string name="mcl_option_settings">sᵷuᴉʇʇǝS</string>
+    <string name="mcl_option_about">ʇnoqⱯ</string>
+    <string name="mcl_setting_title_uninstalljre">ǝɯᴉʇunᴚ ɐʌɐՐ ꞁꞁɐʇsuᴉu∩</string>
+    <string name="mcl_setting_subtitle_uninstalljre">ǝɯᴉʇunᴚ ɐʌɐՐ ꞁꞁɐʇsuᴉ-ǝɹ noʎ ʇǝꞁ sᴉɥ⟘ [pǝɹᴉnbǝɹ ʇɹɐʇsǝɹ ɹǝɥɔunɐꞀ]</string>
+    <string name="mcl_setting_title_freeform">ǝpoɯ ɯɹoɟǝǝɹℲ uᴉ ʇɟɐɹɔǝuᴉW ɥɔunɐꞀ</string>
+    <string name="mcl_setting_subtitle_freeform">+0˙ㄥ pᴉoɹpuⱯ sǝɹᴉnbǝᴚ ˙ʍopuᴉʍ ᵷuᴉʇɐoꞁɟ uᴉ ʇɟɐɹɔǝuᴉW ɥɔunɐꞀ</string>
+    <string name="mcl_setting_title_hide_sidebar">ɹɐqǝpᴉS ǝpᴉH</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">˙ǝɔuǝᴉɹǝdxǝ uǝǝɹɔsꞁꞁnɟ ǝɹoɯ ɐ noʎ sǝʌᴉ⅁ ˙sᴉɥʇ ǝʞᴉꞁ ʇɥᵷᴉɯ I∩ ⥝ʌ pꞁo ǝɥʇ ᵷuᴉɹɹǝɟǝɹd sʞꞁoɟ ɔᴉᵷꞁɐʇsoN</string>
+    <string name="mcl_setting_title_ignore_notch">ɥɔʇou ǝɹouᵷI</string>
+    <string name="mcl_setting_subtitle_ignore_notch">˙ǝɔuǝᴉɹǝdxǝ ǝʌᴉsɹǝɯɯᴉ ǝɹoɯ ɐ noʎ sǝʌᴉ⅁\n˙ʇᴉ ɹǝpun uǝǝɹɔs ǝɥʇ spuǝʇxǝ puɐ ɥɔʇou ǝɥʇ ǝɹouᵷI</string>
+    <string name="mcl_setting_title_resolution_scaler">ɹǝꞁɐɔS uoᴉʇnꞁosǝᴚ</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">uoᴉʇnꞁosǝɹ ꞁꞁnɟ sᴉ %00⥝ ˙uoᴉʇnꞁosǝɹ ǝɯɐᵷ ǝɥʇ ǝsɐǝɹɔǝp oʇ noʎ sʍoꞁꞁⱯ</string>
+    <string name="mcl_setting_title_longpresstrigger">ssǝɹd ᵷuoꞁ ɹǝʇɟɐ ɹǝᵷᵷᴉɹʇ ꞁꞁᴉʍ ᵷuoꞁ ʍoH</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">˙ɯǝʇᴉ doɹp puɐ ʞɔoꞁq ʎoɹʇsǝp uᴉ ssǝɹd ᵷuoꞁ ɹoɟ ǝɯᴉʇ ɹǝᵷᵷᴉɹʇ ǝᵷuɐɥƆ.</string>
+    <string name="mcl_setting_title_backtorightmouse">ǝsnoɯ ʇɥᵷᴉɹ sɐ uoʇʇnq ʞɔɐq ʇɐǝɹ⟘</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">˙sᴉɥʇ ǝꞁqɐuǝ pꞁnoɥs noʎ \'ǝsnoɯ ꞁɐuɹǝʇxǝ ᵷuᴉsn ǝɹɐ noʎ ɟI ˙uoʇʇnq ʞɔɐq sɐ ǝsnoɯ ʇɥᵷᴉɹ ꞁɐuɹǝʇxǝ sʇɐǝɹʇ sǝɔᴉʌǝp ǝɯoS</string>
+    <string name="mcl_setting_title_flat_button_style">ǝꞁʎʇs uoʇʇnq ʇɐꞁℲ</string>
+    <string name="mcl_setting_subtitle_flat_button_style">˙ʇɐꞁɟ oʇ ǝꞁʎʇs uoʇʇnq ꞁoɹʇuoɔ ǝᵷuɐɥɔ oʇ sᴉɥʇ ǝꞁqɐuƎ</string>
+    <string name="mcl_setting_title_buttonscale">ᵷuᴉꞁɐɔs suoʇʇnq ꞁoɹʇuoƆ</string>
+    <string name="mcl_setting_subtitle_buttonscale">˙ꞁꞁɐɯs ooʇ ǝɹɐ suoʇʇnq ɟᴉ ɯǝɥʇ ǝꞁɐɔsd∩</string>
+    <string name="mcl_setting_title_mousescale">ᵷuᴉꞁɐɔs ǝsnoW</string>
+    <string name="mcl_setting_subtitle_mousescale">˙ǝsnoɯ ꞁɐnʇɹᴉʌ ɟo ǝzᴉs ǝᵷuɐɥƆ</string>
+    <string name="mcl_setting_title_javaargs">sʇuǝɯnᵷɹɐ ɥɔunɐꞀ WɅՐ</string>
+    <string name="mcl_setting_subtitle_javaargs">˙ǝᵷpǝꞁʍouʞ ʇnoɥʇᴉʍ pǝᴉɟᴉpoɯ ɟᴉ ɥsɐɹɔ ǝɯɐᵷ ǝʞɐɯ ʎɐɯ sᴉɥʇ \'ꞁnɟǝɹɐɔ ǝᗺ</string>
+    <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
+    <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
+    <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
+    <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
+    <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
+    <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
+    <string name="mcl_setting_veroption_oldalpha">ɐɥdꞁɐ-pꞁO</string>
+    <string name="mcl_setting_veroption_oldbeta">ɐʇǝq-pꞁO</string>
+    <string name="mcl_version_clone">ǝuoꞁƆ</string>
+    <!-- Global strings -->
+    <string name="global_edit">ʇᴉpƎ</string>
+    <string name="global_error">ɹoɹɹƎ</string>
+    <string name="global_load">pɐoꞀ</string>
+    <string name="global_name">ǝɯɐN</string>
+    <string name="global_remove">ǝʌoɯǝᴚ</string>
+    <string name="global_restart">ʇɹɐʇsǝᴚ</string>
+    <string name="global_save">ǝʌɐS</string>
+    <string name="global_unpacking">%s ᵷuᴉʞɔɐdu∩</string>
+    <string name="global_error_field_empty">ʎʇdɯǝ ǝq ʇ,uɐɔ pꞁǝᴉɟ sᴉɥ⟘</string>
+    <string name="global_waiting">ʇᴉɐM</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">%d ǝpoɔ ɥʇᴉʍ pǝʇᴉxǝ ǝɯɐ⅁/uoᴉʇɐɔᴉꞁddⱯ</string>
+    <string name="mcn_exit_call">ʇᴉxƎ</string>
+    <string name="mcn_exit_confirm">¿ǝsoꞁɔ ǝɔɹoɟ oʇ ʇuɐʍ ǝɹns noʎ ǝɹⱯ</string>
+    <string name="mcn_check_fail_lwjgl">¡pǝꞁꞁɐʇsuᴉ ʇou sɐʍ ƐꞀ⅁ՐMꞀ</string>
+    <string name="mcn_check_fail_incompatiblearch">˙%2$s ǝɯᴉʇunᴚ ɐʌɐՐ ɥʇᴉʍ ǝꞁqᴉʇɐdɯoɔuᴉ sᴉ %1$s ǝɹnʇɔǝʇᴉɥɔɹⱯ</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">I∩⅁</string>
+    <string name="control_keyboard">pɹɐoqʎǝꞰ</string>
+    <string name="control_chat">ʇɐɥƆ</string>
+    <string name="control_debug">ᵷnqǝᗡ</string>
+    <string name="control_primary">ᴉɹԀ</string>
+    <string name="control_secondary">ɔǝS</string>
+    <string name="control_inventory">ʌuI</string>
+    <string name="control_thirdperson">pɹƐ</string>
+    <string name="control_listplayers">qɐ⟘</string>
+    <string name="control_mouse">ǝsnoW</string>
+    <string name="control_mouseoff">ɟɟo :ǝsnoW</string>
+    <string name="control_mouseon"> uo :ǝsnoW</string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">ǝsoꞁɔ ǝɔɹoℲ</string>
+    <string name="control_viewout">ʇndʇno ᵷoꞀ</string>
+    <string name="control_adebug">ᵷnqǝᗡ ʇnduI</string>
+    <string name="control_customkey">ǝpoɔʎǝʞ ɯoʇsnɔ puǝS</string>
+    <string name="control_scaleup">dn ǝlɐɔS</string>
+    <string name="control_scaledown">uʍop ǝlɐɔS</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">%s ᵷuᴉʇᴉpƎ</string>
+    <string name="customctrl_remove">¿%s ǝʌoɯǝᴚ</string>
+    <string name="customctrl_keyname">ǝpoɔʎǝꞰ</string>
+    <string name="customctrl_toggle">ǝꞁqɐǝꞁᵷᵷo⟘</string>
+    <string name="customctrl_size">ǝzᴉS</string>
+    <string name="customctrl_size_width">ɥʇpᴉM</string>
+    <string name="customctrl_size_height">ʇɥᵷᴉǝH</string>
+    <string name="customctrl_dynamicpos">uoᴉʇᴉsod ɔᴉɯɐuʎᗡ</string>
+    <string name="customctrl_dynamicpos_x">X ɔᴉɯɐuʎᗡ</string>
+    <string name="customctrl_dynamicpos_y">⅄ ɔᴉɯɐuʎᗡ</string>
+    <string name="customctrl_transparency_bg">ʎɔuǝɹɐdsuɐɹʇ punoɹᵷʞɔɐᗺ</string>
+    <string name="customctrl_keycombine">uoᴉʇɐuᴉqɯoɔ ʎǝꞰ</string>
+    <string name="customctrl_addbutton">uoʇʇnq ppⱯ</string>
+    <string name="customctrl_selectdefault">uosɾ ꞁoɹʇuoƆ ʇꞁnɐɟǝp ʇɔǝꞁǝS</string>
+    <string name="main_options">suoᴉʇdO</string>
+    <string name="main_play">ʎɐꞁԀ</string>
+    <string name="main_welcome">%s \'ǝɯoɔꞁǝM</string>
+    <string name="main_infodev">(ɅƎᗡ) oɟuI</string>
+    <string name="main_switchuser">ɹǝsn ɥɔʇᴉʍS</string>
+    <string name="main_version">:uoᴉsɹǝɅ</string>
+    <string name="main_nocrash">pǝʇɔǝʇǝp ɥsɐɹɔ oN</string>
+    <string name="main_nolog">˙ᵷoꞁ oN</string>
+    <string name="main_no_news_feed">¡ pǝǝɟ sʍǝu ǝɥʇ ɥɔʇǝɟ oʇ pǝꞁᴉɐℲ</string>
+    <string name="auto_ram_subtitle">ɹǝʇsnɾpɐ WⱯᴚ ɔᴉʇɐɯoʇnɐ sǝꞁqɐuƎ</string>
+    <string name="auto_ram_title">WⱯᴚ oʇnⱯ</string>
+    <string name="autoram_info_msg">ᗺW %d oʇ ʇǝs ʎɹoɯǝW</string>
+    <string name="mcl_setting_check_libraries">ᵷuᴉpɐoꞁuʍop ɹǝʇɟɐ sǝᴉɹɐɹqᴉꞁ ʞɔǝɥƆ</string>
+    <string name="mcl_setting_check_libraries_subtitle">˙spɐoꞁuʍop uǝʞoɹq sʇuǝʌǝɹԀ ˙ǝꞁqɐꞁᴉɐʌɐ s,ʇᴉ ɟᴉ ɥsɐɥ ʎɹɐɹqᴉꞁ ǝɥʇ ʞɔǝɥɔ oʇ ɹǝɥɔunɐꞁ sǝɔɹoɟ uoᴉʇdo sᴉɥ⟘</string>
+    <string name="dl_library_sha_fail">pǝpɐoꞁuʍopǝɹ ǝq ꞁꞁᴉʍ puɐ pǝᵷɐɯɐp sᴉ %s ʎɹɐɹqᴉꞀ</string>
+    <string name="dl_library_sha_unknown">pooᵷ s,ʇᴉ ǝɯnssɐ oʇ ǝʌɐɥ \'pǝʞɔǝɥɔ ǝq ʇ,uɐɔ %s ʎɹɐɹqᴉꞀ</string>
+    <string name="dl_library_sha_pass">ǝꞁqɐsn puɐ ǝuᴉɟ sᴉ %s ʎɹɐɹqᴉꞀ</string>
+    <string name="mcl_disable_gestures">sǝɹnʇsǝᵷ ǝꞁqɐsᴉᗡ</string>
+    <string name="mcl_disable_gestures_subtitle">˙ʞɔoꞁq ɐ ǝɔɐꞁd oʇ dɐʇ puɐ \'ʞɔoꞁq ʞɐǝɹq oʇ pꞁoɥ sɐ ɥɔns \'sǝɹnʇsǝᵷ sǝꞁqɐsᴉᗡ</string>
+    <string name="mcl_setting_title_mousespeed">pǝǝdS ǝsnoW</string>
+    <string name="mcl_setting_subtitle_mousespeed">ǝsnoɯ ǝɹɐʍʇɟos ǝɥʇ ɟo pǝǝds ǝɥʇ sǝᵷuɐɥƆ</string>
+    <string name="customctrl_passthru">nɹɥʇ-ssɐd ǝsnoW</string>
+    <string name="customctrl_rounded">pǝpunoᴚ</string>
+    <string name="memory_warning_msg">˙sǝɥsɐɹɔ ǝɯɐᵷ ǝɥʇ ɟᴉ uoᴉʇɐɔoꞁꞁɐ ǝɥʇ ǝᵷuɐɥƆ ˙sǝɥsɐɹɔ oʇ pɐǝꞁ ʎɐɯ ɥɔᴉɥʍ \'(%d) WⱯᴚ pǝʇɐɔoꞁꞁɐ uɐɥʇ ɹǝʍoꞁ sᴉ (%d) WⱯᴚ ǝǝɹɟ ɟo ʇunoɯɐ ʇuǝɹɹnɔ ǝɥ⟘</string>
+    <string name="mcl_memory_allocation">uoᴉʇɐɔoꞁꞁɐ ʎɹoɯǝW</string>
+    <string name="mcl_memory_allocation_subtitle">ʇɟɐɹɔǝuᴉW oʇ uǝʌᴉᵷ sᴉ ʎɹoɯǝɯ ɥɔnɯ ʍoɥ sꞁoɹʇuoƆ</string>
+</resources>

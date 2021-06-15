@@ -22,7 +22,7 @@ A clear and concise description of what the bug is.
 
 **Add a log file if you want to see your bug fixed !**
 
-The log file called *lastlog.txt* is located under "*games/PojavLauncher/.minecraft*" .
+The log file called *latestlog.txt* is located under "*Android/data/net.kdt.pojavlaunch/files*", "*games/PojavLauncher/*" or "*games/PojavLauncher/.minecraft*" .
 You may need to activate an option in your file explorer to see hidden files and folders.
 
 Do NOT paste the whole log text ! Instead, add it as a file on this issue.

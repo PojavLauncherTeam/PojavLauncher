@@ -80,6 +80,7 @@
     <string name="mcl_setting_subtitle_javaargs">Aveți grijă, acest lucru poate face ca jocul să se oprească dacă este modificat fără cunoștințe.</string>
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
+    <string name="mcl_setting_category_renderer">Motor de redare</string>
     <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
     <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
@@ -182,4 +183,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Schimbă viteza mouse-ului de software</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_rounded">Rotund</string>
+    <string name="memory_warning_msg">Cantitatea curentă de RAM liber (%d) este mai mică decât cantitatea alocată de RAM (%d), care ar putea duce la oprire. Schimbă cantitatea alocată dacă jocul se oprește.</string>
+    <string name="mcl_memory_allocation">Memorie alocată</string>
+    <string name="mcl_memory_allocation_subtitle">Controlează cât de multă memorie este dată la Minecraft</string>
 </resources>
