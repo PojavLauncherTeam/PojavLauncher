@@ -895,6 +895,9 @@ public class BaseMainActivity extends LoggableActivity {
         
         appendlnToLog("--------- beggining with launcher debug");
         appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        if (LauncherPreferences.PREF_RENDERER.equals("vulkan_zink")) {
+            checkVulkanZinkIsSupported();
+        }
         checkLWJGL3Installed();
         
         jreReleaseList = JREUtils.readJREReleaseProperties();
