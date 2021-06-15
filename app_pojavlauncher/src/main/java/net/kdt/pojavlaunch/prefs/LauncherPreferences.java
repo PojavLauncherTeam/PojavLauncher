@@ -95,7 +95,6 @@ public class LauncherPreferences
                 break;
             default:
                 throw new RuntimeException("Undefined renderer: " + PREF_RENDERER);
-                break;
         }
 
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
