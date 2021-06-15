@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.content.pm.PackageManager;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
@@ -962,8 +963,9 @@ public class BaseMainActivity extends LoggableActivity {
     private void checkVulkanZinkIsSupported() {
         if (Tools.CURRENT_ARCHITECTURE.equals("x86")
          || Build.VERSION.SDK_INT < 25
-         ) {
-            appendlnToLog("Error: Vulkan is not supported!");
+         || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
+         || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
+            appendlnToLog("Error: Vulkan Zink renderer is not supported!");
             throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
         }
     }
