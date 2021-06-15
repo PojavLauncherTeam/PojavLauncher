@@ -8,9 +8,9 @@
     </string-array>
     
     <string-array name="renderer">
-        <item name="2">@string/mcl_setting_renderer_gles2</item>
+        <item name="2">@string/mcl_setting_renderer_gles2_4</item>
         <item name="3">@string/mcl_setting_renderer_gles2_5</item>
-        <item name="3">@string/mcl_setting_renderer_gles3</item>
+        <item name="3">@string/mcl_setting_renderer_gles3_5</item>
         <item name="4">@string/mcl_setting_renderer_vulkan_zink</item>
     </string-array>
     
