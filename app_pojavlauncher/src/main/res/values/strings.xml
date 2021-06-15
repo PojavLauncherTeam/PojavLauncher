@@ -146,6 +146,7 @@
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
     <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer is not supported on this device!</string>
 
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
