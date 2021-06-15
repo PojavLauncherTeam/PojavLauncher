@@ -955,6 +955,15 @@ public class BaseMainActivity extends LoggableActivity {
             appendlnToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
         }
     }
+
+    private void checkVulkanZinkIsSupported() {
+        if (Tools.CURRENT_ARCHITECTURE.equals("x86")
+         || Build.VERSION.SDK_INT < 25
+         ) {
+            appendlnToLog("Error: Vulkan is not supported!");
+            throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
+        }
+    }
     
     public void printStream(InputStream stream) {
         try {
