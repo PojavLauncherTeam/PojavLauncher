@@ -57,8 +57,8 @@ public class LauncherPreferences
             String DEFAULT_JAVA_ARGS =
                 "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
                 // (32bit) More than 800mb may make JVM not allocateable and crash
-                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m"; /* "m " +
-
+                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m";
+/* "m " +
                 "-XX:+UseG1GC " +
                 "-XX:+ParallelRefProcEnabled " +
                 "-XX:MaxGCPauseMillis=200 " +
@@ -82,19 +82,28 @@ public class LauncherPreferences
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
         }
 
-        if (PREF_RENDERER.equals("vulkan_zink") /* && arg.substring(argLwjglLibname.length()).startsWith("libgl4es_11") */) {
-            PREF_CUSTOM_OPENGL_LIBNAME = "libOSMesa_8.so";
+        switch (PREF_RENDERER) {
+            case "opengles2":
+            case "opengles2_5":
+                PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
+                break;
+            case "opengles3":
+                PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_115.so";
+                break;
+            case "vulkan_zink":
+                PREF_CUSTOM_OPENGL_LIBNAME = "libOSMesa_8.so";
+                break;
+            default:
+                throw new RuntimeException("Undefined renderer: " + PREF_RENDERER);
+                break;
         }
 
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             if (arg.startsWith(argLwjglLibname)) {
-                // TODO together with EGL, currently force to OSMesa only if users leave set gl4es
-                if (PREF_RENDERER.equals("vulkan_zink") /* && arg.substring(argLwjglLibname.length()).startsWith("libgl4es_11") */) {
-                    PREF_CUSTOM_JAVA_ARGS.replace(arg, argLwjglLibname + "libOSMesa_8.so");
-                } else {
-                    PREF_CUSTOM_OPENGL_LIBNAME = arg.substring(argLwjglLibname.length());
-                }
+                // purge arg
+                DEFAULT_PREF.edit().putString("javaArgs",
+                    PREF_CUSTOM_JAVA_ARGS.replace(arg, "")).commit();
             }
         }
     }
