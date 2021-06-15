@@ -263,7 +263,7 @@ public class JREUtils
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else if (LauncherPreferences.PREF_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER.replace("opengles", ""));
+                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
