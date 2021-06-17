@@ -153,7 +153,6 @@ public class Gamepad {
         if(lastGrabbingValue != lastGrabbingState){
             gameActivity.runOnUiThread(switchStateRunnable);
         }
-
     }
 
     private void createMapping(){
@@ -339,6 +338,7 @@ public class Gamepad {
                 getCurrentMap().THUMBSTICK_RIGHT.update(event);
                 break;
 
+                //Start/select
             case KeyEvent.KEYCODE_BUTTON_START:
                 getCurrentMap().BUTTON_START.update(event);
                 break;
@@ -382,14 +382,9 @@ public class Gamepad {
     }
 
     public static boolean isGamepadEvent(InputEvent event){
-        if(event instanceof KeyEvent){
-            return (event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD;
-        }
-        if(event instanceof MotionEvent){
-            return GamepadJoystick.isJoystickEvent((MotionEvent) event) || GamepadDpad.isDpadEvent(event);
-        }
-
-        return false;
+        return ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
+                || GamepadJoystick.isJoystickEvent((MotionEvent) event)
+                || GamepadDpad.isDpadEvent(event));
     }
 
 }

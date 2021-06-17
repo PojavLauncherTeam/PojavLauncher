@@ -27,7 +27,10 @@ public class GamepadJoystick {
         this.verticalAxis = verticalAxis;
         this.horizontalAxis = horizontalAxis;
 
-        //Some controllers aren't recognized as such by android, so we fallback to a default value of 0.2
+        /*
+            Some controllers aren't recognized as such by android, so we fallback to a default value of 0.2
+            And some others don't report their MotionRange. This was the case with the xbox one series S controller.
+         */
         try { deadzone = Math.max(device.getMotionRange(verticalAxis).getFlat(), device.getMotionRange(horizontalAxis).getFlat()) * 1.9f; }
         catch (NullPointerException e){ deadzone = 0.2f; }
 
@@ -40,8 +43,7 @@ public class GamepadJoystick {
         if(x == y && x == 0)
             return 0.00; //atan2 don't like when x and y == 0
 
-        double angle = -Math.atan2(y, x);
-        return angle;
+        return -Math.atan2(y, x);
     }
 
     public double getAngle(MotionEvent event){
