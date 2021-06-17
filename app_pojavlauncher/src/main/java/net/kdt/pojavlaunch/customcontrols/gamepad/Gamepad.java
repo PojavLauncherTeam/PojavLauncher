@@ -221,21 +221,11 @@ public class Gamepad {
 
     }
 
-
-    public void update(InputEvent event){
-        if(event instanceof MotionEvent){
-            update((MotionEvent) event);
-        }
-        if(event instanceof KeyEvent){
-            update((KeyEvent) event);
-        }
-    }
-
-    private void update(KeyEvent event){
+    public void update(KeyEvent event){
         sendButton(event);
     }
 
-    private void update(MotionEvent event){
+    public void update(MotionEvent event){
         updateDirectionalJoystick(event);
         updateMouseJoystick(event);
         updateAnalogTriggers(event);
