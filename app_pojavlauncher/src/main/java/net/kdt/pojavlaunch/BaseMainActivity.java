@@ -320,8 +320,6 @@ public class BaseMainActivity extends LoggableActivity {
                             if(CallbackBridge.isGrabbing()) return false;
                             int x = (int) (e.getX(i) * scaleFactor);
                             int y = (int) (e.getY(i) * scaleFactor);
-                            CallbackBridge.mouseX = x;
-                            CallbackBridge.mouseY = y;
                             CallbackBridge.sendCursorPos(x, y);
                             return true; //mouse event handled successfully
                         }
