@@ -384,7 +384,8 @@ public class BaseMainActivity extends LoggableActivity {
                             if (CallbackBridge.isGrabbing()) {
                                 if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
                                     if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
-                                        sendKeyPress(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT);
+                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
+                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
                                     }
                                 }
                                 if (!isTouchInHotbar) {
