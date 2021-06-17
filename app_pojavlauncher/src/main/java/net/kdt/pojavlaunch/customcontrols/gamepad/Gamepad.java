@@ -127,16 +127,15 @@ public class Gamepad {
         //Initialize runnables to be used by the input system, avoiding generating one each time is better memory.
         mouseRunnable = () -> CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
         switchStateRunnable = () -> {
+            currentMap.resetPressedState();
             if(lastGrabbingState){
                 currentMap = gameMap;
-                menuMap.resetPressedState();
                 pointerView.setVisibility(View.INVISIBLE);
-                mouseSensitivity = 19;
+                mouseSensitivity = 26 / gameActivity.sensitivityFactor; //sensitivity in menus is resolution dependent.
                 return;
             }
 
             currentMap = menuMap;
-            gameMap.resetPressedState();
             sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
 
             gameActivity.mouse_x = CallbackBridge.windowWidth/2;
@@ -144,7 +143,7 @@ public class Gamepad {
             CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
             placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
             pointerView.setVisibility(View.VISIBLE);
-            mouseSensitivity = 15;
+            mouseSensitivity = 15; //sensitivity in game doesn't need to be resolution dependent
         };
     }
 
