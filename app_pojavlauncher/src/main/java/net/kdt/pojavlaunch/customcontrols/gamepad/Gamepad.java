@@ -25,6 +25,7 @@ import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTI
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_SOUTH_EAST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_SOUTH_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_WEST;
+import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.isJoystickEvent;
 
 public class Gamepad {
 
@@ -381,9 +382,12 @@ public class Gamepad {
 
     }
 
-    public static boolean isGamepadEvent(InputEvent event){
+    public static boolean isGamepadEvent(MotionEvent event){
+        return isJoystickEvent(event);
+    }
+
+    public static boolean isGamepadEvent(KeyEvent event){
         return ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
-                || GamepadJoystick.isJoystickEvent((MotionEvent) event)
                 || GamepadDpad.isDpadEvent(event));
     }
 
