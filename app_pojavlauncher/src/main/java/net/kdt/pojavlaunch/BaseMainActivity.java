@@ -306,7 +306,6 @@ public class BaseMainActivity extends LoggableActivity {
                 return true;
             });
 
-            // System.loadLibrary("Regal");
 
             minecraftGLView.setFocusable(true);
             glTouchListener = new OnTouchListener(){
@@ -315,25 +314,18 @@ public class BaseMainActivity extends LoggableActivity {
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
-                    {
-                        int mptrIndex = -1;
-                        for (int i = 0; i < e.getPointerCount(); i++) {
-                            if (e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) { //if there's at least one mouse...
-                                mptrIndex = i; //index it
-                            }
-                        }
-                        if (mptrIndex != -1) {
-                            if(CallbackBridge.isGrabbing()) {
-                                return false;
-                            }
-                            //handle mouse events by just sending the coords of the new point in touch event
-                            int x = (int) (e.getX(mptrIndex) * scaleFactor);
-                            int y = (int) (e.getY(mptrIndex) * scaleFactor);
+                    //Looking for a mouse to handle, won't have an effect if no mouse exists.
+                    for (int i = 0; i < e.getPointerCount(); i++) {
+                        if (e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) {
+
+                            if(CallbackBridge.isGrabbing()) return false;
+                            int x = (int) (e.getX(i) * scaleFactor);
+                            int y = (int) (e.getY(i) * scaleFactor);
                             CallbackBridge.mouseX = x;
                             CallbackBridge.mouseY = y;
                             CallbackBridge.sendCursorPos(x, y);
-                            return true; // event handled sucessfully
-                        }//if index IS -1, continue handling as an usual touch event
+                            return true; //mouse event handled successfully
+                        }
                     }
 
                     // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
@@ -355,10 +347,11 @@ public class BaseMainActivity extends LoggableActivity {
                         switch (e.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN: // 0
                                 CallbackBridge.sendPrepareGrabInitialPos();
-                                
+
                                 isTouchInHotbar = hudKeyHandled != -1;
                                 if (isTouchInHotbar) {
                                     sendKeyPress(hudKeyHandled, 0, true);
+                                    sendKeyPress(hudKeyHandled, 0, false);
                                     hotbarX = (int)e.getX();
                                     hotbarY = (int)e.getY();
 
@@ -394,9 +387,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 } 
 
                                 if (CallbackBridge.isGrabbing()) {
-                                    if (isTouchInHotbar && Math.abs(hotbarX - mouse_x) < fingerStillThreshold && Math.abs(hotbarY - mouse_y) < fingerStillThreshold) {
-                                        sendKeyPress(hudKeyHandled, 0, false);
-                                    } else if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
+                                    if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
                                         if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
                                             sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
@@ -420,12 +411,9 @@ public class BaseMainActivity extends LoggableActivity {
                                 scrollInitialX = CallbackBridge.mouseX;
                                 scrollInitialY = CallbackBridge.mouseY;
                                 break;
-                                
-                            case MotionEvent.ACTION_POINTER_UP: // 6
-                                break;
 
                             case MotionEvent.ACTION_MOVE:
-                                if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
                                     CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
                                     scrollInitialX = mouse_x;
                                     scrollInitialY = mouse_y;
@@ -439,6 +427,7 @@ public class BaseMainActivity extends LoggableActivity {
                         }
                     }
 
+                    //Camera movement
                     if(CallbackBridge.isGrabbing()){
                         if(e.getPointerId(0) != currentPointerID){
                             currentPointerID = e.getPointerId(0);
@@ -450,8 +439,6 @@ public class BaseMainActivity extends LoggableActivity {
                         prevY = e.getY();
                     }
 
-
-                    
                     debugText.setText(CallbackBridge.DEBUG_STRING.toString());
                     CallbackBridge.DEBUG_STRING.setLength(0);
 
