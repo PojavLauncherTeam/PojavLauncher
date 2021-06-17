@@ -280,7 +280,7 @@ public class BaseMainActivity extends LoggableActivity {
                         case MotionEvent.ACTION_MOVE: // 2
 
                             if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
-                                CallbackBridge.sendScroll(CallbackBridge.mouseX - scrollInitialX, CallbackBridge.mouseY - scrollInitialY);
+                                CallbackBridge.sendScroll( Tools.pxToDp(CallbackBridge.mouseX - scrollInitialX)/30, Tools.pxToDp(CallbackBridge.mouseY - scrollInitialY)/30);
                                 scrollInitialX = CallbackBridge.mouseX;
                                 scrollInitialY = CallbackBridge.mouseY;
                             } else {
@@ -426,7 +426,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                             case MotionEvent.ACTION_MOVE:
                                 if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
-                                    CallbackBridge.sendScroll(mouse_x - scrollInitialX, mouse_y - scrollInitialY);
+                                    CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
                                     scrollInitialX = mouse_x;
                                     scrollInitialY = mouse_y;
                                 } else if (!isTouchInHotbar) {
