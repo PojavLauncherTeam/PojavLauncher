@@ -333,7 +333,7 @@ public class BaseMainActivity extends LoggableActivity {
                     }
 
                     int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
-                    if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)){
+                    if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e) && hudKeyHandled == -1){
                         CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, mouse_x, mouse_y);
                         if (!rightOverride) CallbackBridge.mouseLeft = true;
                         return true;
