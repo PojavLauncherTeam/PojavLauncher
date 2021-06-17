@@ -279,7 +279,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                         case MotionEvent.ACTION_MOVE: // 2
 
-                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) {
+                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
                                 CallbackBridge.sendScroll( Tools.pxToDp(CallbackBridge.mouseX - scrollInitialX)/30, Tools.pxToDp(CallbackBridge.mouseY - scrollInitialY)/30);
                                 scrollInitialX = CallbackBridge.mouseX;
                                 scrollInitialY = CallbackBridge.mouseY;
@@ -310,7 +310,6 @@ public class BaseMainActivity extends LoggableActivity {
             minecraftGLView.setFocusable(true);
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
-                private int hotbarX, hotbarY;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
@@ -336,107 +335,102 @@ public class BaseMainActivity extends LoggableActivity {
                     }
 
                     int hudKeyHandled = handleGuiBar((int)e.getX(), (int)e.getY());
-                    if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)) {
-                        if (hudKeyHandled != -1) {
-                            sendKeyPress(hudKeyHandled);
-                        } else {
-                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, mouse_x, mouse_y);
-                            if (!rightOverride) CallbackBridge.mouseLeft = true;
-                        }
-                    } else {
-                        switch (e.getActionMasked()) {
-                            case MotionEvent.ACTION_DOWN: // 0
-                                CallbackBridge.sendPrepareGrabInitialPos();
-
-                                isTouchInHotbar = hudKeyHandled != -1;
-                                if (isTouchInHotbar) {
-                                    sendKeyPress(hudKeyHandled, 0, true);
-                                    sendKeyPress(hudKeyHandled, 0, false);
-                                    hotbarX = (int)e.getX();
-                                    hotbarY = (int)e.getY();
-
-                                    theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                    break;
-                                }
-
-                                currentPointerID = e.getPointerId(0);
-                                CallbackBridge.mouseX = mouse_x;
-                                CallbackBridge.mouseY = mouse_y;
-                                prevX =  e.getX();
-                                prevY =  e.getY();
-                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                if (!rightOverride) CallbackBridge.mouseLeft = true;
-
-                                if (CallbackBridge.isGrabbing()) {
-                                    // It cause hold left mouse while moving camera
-                                    initialX = mouse_x;
-                                    initialY = mouse_y;
-                                    theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                                }
-                                break;
-                                
-                            case MotionEvent.ACTION_UP: // 1
-                            case MotionEvent.ACTION_CANCEL: // 3
-                                if (!isTouchInHotbar) {
-                                    CallbackBridge.mouseX = mouse_x;
-                                    CallbackBridge.mouseY = mouse_y;
-                                    
-                                    // -TODO uncomment after fix wrong trigger
-                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    if (!rightOverride) CallbackBridge.mouseLeft = false;
-                                } 
-
-                                if (CallbackBridge.isGrabbing()) {
-                                    if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
-                                        if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
-                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-                                        }
-                                    }
-                                    if (!isTouchInHotbar) {
-                                        if (triggeredLeftMouseButton) {
-                                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
-                                        }
-                                        triggeredLeftMouseButton = false;
-                                        theHandler.removeMessages(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-                                    } else {
-                                        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, false);
-                                        theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
-                                    }
-                                }
-                                
-                                break;
-
-                            case MotionEvent.ACTION_POINTER_DOWN: // 5
-                                scrollInitialX = CallbackBridge.mouseX;
-                                scrollInitialY = CallbackBridge.mouseY;
-                                break;
-
-                            case MotionEvent.ACTION_MOVE:
-                                if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
-                                    CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
-                                    scrollInitialX = mouse_x;
-                                    scrollInitialY = mouse_y;
-                                } else if (!isTouchInHotbar) {
-                                    CallbackBridge.mouseX = mouse_x;
-                                    CallbackBridge.mouseY = mouse_y;
-
-                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                }
-                                break;
-                        }
+                    if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)){
+                        CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, mouse_x, mouse_y);
+                        if (!rightOverride) CallbackBridge.mouseLeft = true;
+                        return true;
                     }
 
-                    //Camera movement
-                    if(CallbackBridge.isGrabbing()){
-                        if(e.getPointerId(0) != currentPointerID){
+                    switch (e.getActionMasked()) {
+                        case MotionEvent.ACTION_DOWN: // 0
+                            CallbackBridge.sendPrepareGrabInitialPos();
+
                             currentPointerID = e.getPointerId(0);
-                        }else{
-                            mouse_x += (int) (e.getX() - prevX) * sensitivityFactor;
-                            mouse_y += (int) (e.getY() - prevY) * sensitivityFactor;
-                        }
-                        prevX = e.getX();
-                        prevY = e.getY();
+                            CallbackBridge.mouseX = mouse_x;
+                            CallbackBridge.mouseY = mouse_y;
+                            prevX =  e.getX();
+                            prevY =  e.getY();
+
+                            //Compute the touchbar after
+                            // to avoid mouse jumps.
+                            isTouchInHotbar = hudKeyHandled != -1;
+                            if (isTouchInHotbar) {
+                                sendKeyPress(hudKeyHandled);
+
+                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                break;
+                            }
+
+                            if (!rightOverride) CallbackBridge.mouseLeft = true;
+
+                            if (CallbackBridge.isGrabbing()) {
+                                // It cause hold left mouse while moving camera
+                                initialX = mouse_x;
+                                initialY = mouse_y;
+                                if(!isTouchInHotbar) theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+                            }
+                            break;
+
+                        case MotionEvent.ACTION_UP: // 1
+                        case MotionEvent.ACTION_CANCEL: // 3
+                            if (!isTouchInHotbar) {
+                                CallbackBridge.mouseX = mouse_x;
+                                CallbackBridge.mouseY = mouse_y;
+
+                                // -TODO uncomment after fix wrong trigger
+                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                if (!rightOverride) CallbackBridge.mouseLeft = false;
+                            }
+
+                            if (CallbackBridge.isGrabbing()) {
+                                if (!triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
+                                    if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                                        sendKeyPress(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT);
+                                    }
+                                }
+                                if (!isTouchInHotbar) {
+                                    if (triggeredLeftMouseButton) sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
+
+                                    triggeredLeftMouseButton = false;
+                                    theHandler.removeMessages(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
+                                } else {
+                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, false);
+                                    theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
+                                }
+                            }
+
+                            break;
+
+                        case MotionEvent.ACTION_POINTER_DOWN: // 5
+                            scrollInitialX = CallbackBridge.mouseX;
+                            scrollInitialY = CallbackBridge.mouseY;
+                            //Checking if we are pressing the hotbar to select the item
+                            hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
+                            if(hudKeyHandled != -1) sendKeyPress(hudKeyHandled);
+                            break;
+
+                        case MotionEvent.ACTION_MOVE:
+                            if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
+                                CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
+                                scrollInitialX = mouse_x;
+                                scrollInitialY = mouse_y;
+                            } else if (!isTouchInHotbar) {
+                                //Camera movement
+                                if(CallbackBridge.isGrabbing()){
+                                    if(e.getPointerId(0) != currentPointerID){
+                                        currentPointerID = e.getPointerId(0);
+                                    }else{
+                                        mouse_x += (int) (e.getX() - prevX) * sensitivityFactor;
+                                        mouse_y += (int) (e.getY() - prevY) * sensitivityFactor;
+                                    }
+                                    prevX = e.getX();
+                                    prevY = e.getY();
+                                }
+
+                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                            }
+                            break;
                     }
 
                     debugText.setText(CallbackBridge.DEBUG_STRING.toString());
