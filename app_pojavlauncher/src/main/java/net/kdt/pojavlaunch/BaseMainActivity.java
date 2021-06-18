@@ -211,7 +211,7 @@ public class BaseMainActivity extends LoggableActivity {
             this.drawerLayout.closeDrawers();
 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
-            new Thread(() -> {
+            Thread virtualMouseGrabThread = new Thread(() -> {
                 while (!isExited) {
                     if (lastGrab != CallbackBridge.isGrabbing())
                     mousePointer.post(() -> {
@@ -228,8 +228,9 @@ public class BaseMainActivity extends LoggableActivity {
                     });
 
                 }
-            }, "VirtualMouseGrabThread").start();
-
+            }, "VirtualMouseGrabThread");
+            virtualMouseGrabThread.setPriority(Thread.MIN_PRIORITY);
+            virtualMouseGrabThread.start();
 
             if (isAndroid8OrHigher()) {
                 touchPad.setDefaultFocusHighlightEnabled(false);
