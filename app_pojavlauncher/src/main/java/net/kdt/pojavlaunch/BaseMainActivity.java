@@ -373,11 +373,7 @@ public class BaseMainActivity extends LoggableActivity {
                         case MotionEvent.ACTION_UP: // 1
                         case MotionEvent.ACTION_CANCEL: // 3
                             if (!isTouchInHotbar) {
-                                CallbackBridge.mouseX = mouse_x;
-                                CallbackBridge.mouseY = mouse_y;
-
                                 // -TODO uncomment after fix wrong trigger
-                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 if (!rightOverride) CallbackBridge.mouseLeft = false;
                             }
 
