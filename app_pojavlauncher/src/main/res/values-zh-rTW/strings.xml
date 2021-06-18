@@ -14,6 +14,7 @@
     <string name="login_offline_label">以離線賬號登入</string>
     <string name="login_error_short_username">用戶名至少為3個字元</string>
     <string name="login_error_exist_username">用戶名已存在</string>
+    <string name="login_error_offline_password">離線賬戶不能填寫密碼！</string>
     <string name="login_microsoft">微軟帳號登入</string>
     <string name="login_select_account">選擇賬號</string>
     <string name="login_title_no_saved_account">賬戶未找到！</string>
