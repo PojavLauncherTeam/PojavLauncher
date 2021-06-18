@@ -180,8 +180,7 @@ public class BaseMainActivity extends LoggableActivity {
                 drawerLayout.closeDrawers();
                 return true;
             };
-            navDrawer.setNavigationItemSelectedListener(
-                gameActionListener);
+            navDrawer.setNavigationItemSelectedListener(gameActionListener);
 
             this.touchPad = findViewById(R.id.main_touchpad);
             touchPad.setFocusable(false);
@@ -346,8 +345,7 @@ public class BaseMainActivity extends LoggableActivity {
                             CallbackBridge.sendPrepareGrabInitialPos();
 
                             currentPointerID = e.getPointerId(0);
-                            CallbackBridge.mouseX = mouse_x;
-                            CallbackBridge.mouseY = mouse_y;
+                            CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                             prevX =  e.getX();
                             prevY =  e.getY();
 
