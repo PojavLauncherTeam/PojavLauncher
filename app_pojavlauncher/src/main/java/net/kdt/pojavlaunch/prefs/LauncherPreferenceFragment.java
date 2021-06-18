@@ -44,8 +44,8 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
 
 	    CustomSeekBarPreference seek6 = (CustomSeekBarPreference) findPreference("mousespeed");
         seek6.setMin(25);
-        seek6.setValue((int)(LauncherPreferences.PREF_MOUSESPEED*100f));
         seek6.setMax(300);
+	  seek6.setValue((int)(LauncherPreferences.PREF_MOUSESPEED*100f));
         seek6.setSuffix(" %");
 
         int freeMem = (int) (Runtime.getRuntime().freeMemory() / 1048576l);
