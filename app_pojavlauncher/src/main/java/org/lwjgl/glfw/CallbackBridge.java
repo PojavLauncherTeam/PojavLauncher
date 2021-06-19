@@ -179,8 +179,6 @@ public class CallbackBridge {
     private static native void nativeSendScreenSize(int width, int height);
     
     public static native boolean nativeIsGrabbing();
-    public static native void nativePutControllerAxes(FloatBuffer axBuf);
-    public static native void nativePutControllerButtons(ByteBuffer axBuf);
     static {
         System.loadLibrary("pojavexec");
     }
