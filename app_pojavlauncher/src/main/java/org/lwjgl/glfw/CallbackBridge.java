@@ -49,7 +49,7 @@ public class CallbackBridge {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
         
-        DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
+        DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
         mouseX = x;
         mouseY = y;
         nativeSendCursorPos(x, y);
@@ -61,7 +61,7 @@ public class CallbackBridge {
     }
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
-        DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
+        DEBUG_STRING.append("KeyCode=").append(keycode).append(", Char=").append(keychar);
         // TODO CHECK: This may cause input issue, not receive input!
 /*
         if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar(keychar)) {
@@ -81,7 +81,7 @@ public class CallbackBridge {
     }
 
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
-        DEBUG_STRING.append("MouseKey=" + button + ", down=" + isDown + "\n");
+        DEBUG_STRING.append("MouseKey=").append(button).append(", down=").append(isDown).append("\n");
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
         nativeSendMouseButton(button, isDown ? 1 : 0, modifiers);
     }
@@ -92,7 +92,7 @@ public class CallbackBridge {
     }
     
     public static void sendScroll(double xoffset, double yoffset) {
-        DEBUG_STRING.append("ScrollX=" + xoffset + ",ScrollY=" + yoffset);
+        DEBUG_STRING.append("ScrollX=").append(xoffset).append(",ScrollY=").append(yoffset);
         nativeSendScroll(xoffset, yoffset);
     }
 
