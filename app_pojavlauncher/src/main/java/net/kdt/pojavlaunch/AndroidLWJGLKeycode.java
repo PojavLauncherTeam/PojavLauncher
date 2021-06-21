@@ -12,12 +12,12 @@ import org.lwjgl.glfw.*;
 public class AndroidLWJGLKeycode {
     // Fix double letters on MC 1.9 and above
     public static boolean isBackspaceAfterChar = true;
-    public static final ArrayMap<Integer, Integer> androidToLwjglMap;
+    public static final ArrayMap<Integer, Short> androidToLwjglMap;
     public static String[] androidKeyNameArray;
 
     static {
         // Mapping Android Keycodes to LWJGL Keycodes
-        androidToLwjglMap = new ArrayMap<Integer, Integer>();
+        androidToLwjglMap = new ArrayMap<>();
         
         // 0-9 keys
         androidToLwjglMap.put(KeyEvent.KEYCODE_0, LWJGLGLFWKeycode.GLFW_KEY_0);
