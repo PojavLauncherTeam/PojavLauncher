@@ -61,7 +61,7 @@
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
     <string name="mcl_setting_subtitle_freeform">Запускает Minecraft в плавающем окне. Требуется Android 7.0 или выше</string>
     <string name="mcl_setting_title_hide_sidebar">Скрытие боковой панели</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Может понравится ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Может понравиться ностальгическим людям, предпочитающие старый интерфейс v1. Дает вам более полноэкранное использование.</string>
     <string name="mcl_setting_title_ignore_notch">Игнорирование выреза под фронтальную камеру</string>
     <string name="mcl_setting_subtitle_ignore_notch">Игнорирует вырез под фронтальную камеру и расширяет экран под неё.\nДает большее погружение в игру.</string>
     <string name="mcl_setting_title_resolution_scaler">Уменьшение разрешения</string>
@@ -193,7 +193,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
     <string name="customctrl_passthru">Указатель мыши</string>
     <string name="customctrl_rounded">Скруглённые</string>
-    <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям приложения. Измените количество выделенной памяти при сбое игры.</string>
+    <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
     <string name="mcl_memory_allocation">Выделение памяти</string>
-    <string name="mcl_memory_allocation_subtitle">Управляет выделением памяти для Minecraft</string>
+    <string name="mcl_memory_allocation_subtitle">Управляет тем, сколько памяти выделится для Minecraft</string>
 </resources>
