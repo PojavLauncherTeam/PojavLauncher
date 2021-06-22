@@ -81,8 +81,6 @@
     <string name="mcl_setting_category_general">Thiết lập chung</string>
     <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
-    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
-    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được ở trong danh sách phiên bản</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -100,23 +98,6 @@
     <string name="global_unpacking">Đang giải nén %s</string>
     <string name="global_error_field_empty">Trường này không được để trống</string>
     <string name="global_waiting">Đợi</string>
-    <!--
-    <string name="mcl_about">
-    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
-    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-    "Using libraries:\n" +
-    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-    //" • Boardwalk memory manager (not used now).\n" +
-    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • OpenJDK" +
-    "\n" +
-    "* Notes:\n" +
-    " - This app is currently BETA, it will not be stable.\n" +
-    //"* This app will unstable on Android 7.0 or higher devices.\n" +
-    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
-    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
-    </string>
-    -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d</string>
     <string name="mcn_exit_call">Thoát</string>
