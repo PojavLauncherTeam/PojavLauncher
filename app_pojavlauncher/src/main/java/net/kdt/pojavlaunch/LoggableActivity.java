@@ -11,6 +11,7 @@ public abstract class LoggableActivity extends BaseActivity {
     
     public void appendlnToLog(String text) {
         // Filter out Session ID here
+        int index;
         if (!filteredSessionID && (index = text.indexOf("(Session ID is ")) != -1) {
             text = text.substring(0, index) + "(Session ID is <censored>)";
             filteredSessionID = true;
