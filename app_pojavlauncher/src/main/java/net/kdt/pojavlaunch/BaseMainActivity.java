@@ -463,21 +463,21 @@ public class BaseMainActivity extends LoggableActivity {
                                 StringBuilder builder = new StringBuilder();
                                 try {
                                     builder.append("PointerCapture debug\n");
-                                    builder.append("MotionEvent=" + e.getActionMasked() + "\n");
-                                    builder.append("PressingBtn=" + MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState()) + "\n\n");
+                                    builder.append("MotionEvent=").append(e.getActionMasked()).append("\n");
+                                    builder.append("PressingBtn=").append(MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState())).append("\n\n");
 
-                                    builder.append("PointerX=" + e.getX() + "\n");
-                                    builder.append("PointerY=" + e.getY() + "\n");
-                                    builder.append("RawX=" + e.getRawX() + "\n");
-                                    builder.append("RawY=" + e.getRawY() + "\n\n");
+                                    builder.append("PointerX=").append(e.getX()).append("\n");
+                                    builder.append("PointerY=").append(e.getY()).append("\n");
+                                    builder.append("RawX=").append(e.getRawX()).append("\n");
+                                    builder.append("RawY=").append(e.getRawY()).append("\n\n");
 
-                                    builder.append("XPos=" + mouse_x + "\n");
-                                    builder.append("YPos=" + mouse_y + "\n\n");
-                                    builder.append("MovingX=" + getMoving(e.getX(), true) + "\n");
-                                    builder.append("MovingY=" + getMoving(e.getY(), false) + "\n");
+                                    builder.append("XPos=").append(mouse_x).append("\n");
+                                    builder.append("YPos=").append(mouse_y).append("\n\n");
+                                    builder.append("MovingX=").append(getMoving(e.getX(), true)).append("\n");
+                                    builder.append("MovingY=").append(getMoving(e.getY(), false)).append("\n");
                                 } catch (Throwable th) {
                                     debugErrored = true;
-                                    builder.append("Error getting debug. The debug will be stopped!\n" + Log.getStackTraceString(th));
+                                    builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
                                 } finally {
                                     debugText.setText(builder.toString());
                                     builder.setLength(0);
