@@ -1,11 +1,19 @@
 apply plugin: 'com.android.application'
 
+def getDate() { return new Date().format('yyyyMMdd')}
+
 def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
     def stdout = new ByteArrayOutputStream()
     exec {
-        commandLine 'git', 'describe', '--tags'
-        standardOutput = stdout
+        try {
+            commandLine 'git', 'describe', '--tags'
+            standardOutput = stdout
+        }catch(Exception e){
+            stdout.write("no-git-" + "${getDate()}");
+        }
+
+
     }
     return stdout.toString().trim().replace("-g", "-")
 }
