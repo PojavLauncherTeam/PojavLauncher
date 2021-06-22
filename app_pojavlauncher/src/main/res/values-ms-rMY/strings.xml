@@ -14,6 +14,7 @@
     <string name="login_offline_label">Log masuk sebagai akaun luar talian</string>
     <string name="login_error_short_username">Nama pengguna mesti mempunyai sekurang-kurangnya 3 aksara</string>
     <string name="login_error_exist_username">Nama pengguna ini sudah diguna</string>
+    <string name="login_error_offline_password">Akaun luar talian tidak boleh dimasukkan kata laluan!</string>
     <string name="login_microsoft">Log masuk Microsoft</string>
     <string name="login_select_account">Pilih akaun</string>
     <string name="login_title_no_saved_account">Tiada akaun dijumpai!</string>
@@ -57,9 +58,11 @@
     <string name="mcl_option_settings">Tetapan</string>
     <string name="mcl_option_about">Tentang</string>
     <string name="mcl_setting_title_uninstalljre">Nyahpasang Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Pemulaan semula Pelancar diperlukan] Ini membenarkan anda untuk memasang semula Java Runtime</string>
     <string name="mcl_setting_title_freeform">Lancarkan Minecraft dalam mod Freeform</string>
     <string name="mcl_setting_subtitle_freeform">Lancarkan Minecraft di dalam mod window melayang. Memerlukan Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Sembunyi Palang sisi</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Orang bernostalgia yang lebih memilih UI v1 yang lama mungkin akan menyukai ini. Memberikan anda lebih banyak pengalaman skrin penuh.</string>
     <string name="mcl_setting_title_ignore_notch">Abaikan takik</string>
     <string name="mcl_setting_subtitle_ignore_notch">Abaikan takik dan panjangkan skrin dibawahnya.\nMemberikan anda pengalaman yang lebih mengasyikkan.</string>
     <string name="mcl_setting_title_resolution_scaler">Pengskala Resolusi</string>
@@ -79,6 +82,10 @@
     <string name="mcl_setting_category_general">Tetapan umum</string>
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksport OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksport OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksport OpenGL 2.1 + partial 3.2 (belum ada sokongan 1.17)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksport OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Petikan</string>
@@ -102,6 +109,7 @@
     <string name="mcn_exit_confirm">Adakah anda mahu paksa tutup aplikasi?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak terpasang!</string>
     <string name="mcn_check_fail_incompatiblearch">Arkitektur %1$s tidak kompatibel dengan Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink tidak disokong pada peranti ini!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Papan Kekunci</string>
