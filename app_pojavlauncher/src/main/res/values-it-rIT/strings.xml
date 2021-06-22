@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">Impostazioni generali</string>
     <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): esporta OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): esporta OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): esporta OpenGL 2.1 + parziale 3.2 (1.17 non ancora supportata)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): esporta OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno visibili nella lista delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 non installato!</string>
     <string name="mcn_check_fail_incompatiblearch">L\'architettura %1$s non è compatibile con il Runtime Java %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Il renderer Vulkan Zink non è supportato su questo dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastiera</string>
