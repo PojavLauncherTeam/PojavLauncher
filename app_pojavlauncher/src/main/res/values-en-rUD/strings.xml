@@ -14,6 +14,7 @@
     <string name="login_offline_label">ʇunoɔɔɐ ǝuᴉꞁɟɟo sɐ uᴉᵷoꞀ</string>
     <string name="login_error_short_username">sɹǝʇɔɐɹɐɥɔ Ɛ ʇsɐǝꞁ ʇɐ ǝq ʇsnɯ ǝɯɐuɹǝs∩</string>
     <string name="login_error_exist_username">ʇsᴉxǝ ʎpɐǝɹꞁɐ ǝɯɐuɹǝsn sᴉɥ⟘</string>
+    <string name="login_error_offline_password">Oɟɟlᴉuǝ ɐɔɔonuʇ ɔɐu,ʇ ᴉuɔlnpǝ dɐssʍoɹp¡</string>
     <string name="login_microsoft">uᴉᵷoꞁ ʇɟosoɹɔᴉW</string>
     <string name="login_select_account">ʇunoɔɔɐ ʇɔǝꞁǝS</string>
     <string name="login_title_no_saved_account">¡ punoɟ ʇunoɔɔɐ oN</string>
@@ -81,6 +82,10 @@
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
+    <string name="mcl_setting_renderer_gles2_4">ƃlㄣǝs Ɩ˙Ɩ˙ㄣ (Odǝuפ˥ ƎS ᄅ): ǝxdoɹʇs Odǝuפ˥ ᄅ˙Ɩ</string>
+    <string name="mcl_setting_renderer_gles2_5">ƃlㄣǝs Ɩ˙Ɩ˙ϛ (Odǝuפ˥ ƎS ᄅ): ǝxdoɹʇs Odǝuפ˥ ᄅ˙Ɩ</string>
+    <string name="mcl_setting_renderer_gles3_5">ƃlㄣǝs Ɩ˙Ɩ˙ϛ (Odǝuפ˥ ƎS Ɛ): ǝxdoɹʇs Odǝuפ˥ ᄅ˙Ɩ + dɐɹʇᴉɐl Ɛ˙ᄅ (uo Ɩ˙Ɩㄥ snddoɹʇǝp ʎǝʇ)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zᴉuʞ (Λnlʞɐu): ǝxdoɹʇs Odǝuפ˥ ㄣ˙9</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
     <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
@@ -104,6 +109,7 @@
     <string name="mcn_exit_confirm">¿ǝsoꞁɔ ǝɔɹoɟ oʇ ʇuɐʍ ǝɹns noʎ ǝɹⱯ</string>
     <string name="mcn_check_fail_lwjgl">¡pǝꞁꞁɐʇsuᴉ ʇou sɐʍ ƐꞀ⅁ՐMꞀ</string>
     <string name="mcn_check_fail_incompatiblearch">˙%2$s ǝɯᴉʇunᴚ ɐʌɐՐ ɥʇᴉʍ ǝꞁqᴉʇɐdɯoɔuᴉ sᴉ %1$s ǝɹnʇɔǝʇᴉɥɔɹⱯ</string>
+    <string name="mcn_check_fail_vulkan_support">Λnlʞɐu Zᴉuʞ ɹǝupǝɹǝɹ ᴉs uoʇ snddoɹʇǝp ou ʇɥᴉs pǝʌᴉɔǝ¡</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">I∩⅁</string>
     <string name="control_keyboard">pɹɐoqʎǝꞰ</string>
