@@ -13,7 +13,7 @@ def getVersionName = {
         }catch(Exception e){}
     }
     if(stdout.toString() == ""){
-        stdout.write("no-git-" + "${getName}")
+        stdout.write("no-git-" + "${getDate()}")
     }
     return stdout.toString().trim().replace("-g", "-")
 }
