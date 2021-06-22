@@ -1,7 +1,13 @@
 apply plugin: 'com.android.application'
 
-def getDate() {
-    return new Date().format('yyyyMMdd')
+def getVersionName = {
+    // Get the last version tag, as well as the short head of the last commit
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
 }
 
 android {
@@ -28,7 +34,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156249
-        versionName "3.3.1.1_rel_" + getDate()
+        versionName "${getVersionName()}"
         multiDexEnabled true //important
     }
 
