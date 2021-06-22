@@ -904,7 +904,7 @@ public class BaseMainActivity extends LoggableActivity {
             ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
             "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
-        JREUtils.redirectAndPrintJRELog(this, mProfile.accessToken);
+        JREUtils.redirectAndPrintJRELog(this);
         Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
