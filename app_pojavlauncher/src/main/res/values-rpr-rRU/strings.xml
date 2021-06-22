@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>
     <string name="login_error_offline_password">Внѣсѣтевые документы не могутъ содержать ключъ-фразу!</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
-    <string name="login_select_account">Документы</string>
+    <string name="login_select_account">Выбрать документъ</string>
     <string name="login_title_no_saved_account">Документы не найдены!</string>
     <string name="login_dialog_no_saved_account">Вы не сохраняли ни одни документы.\nИспользуйте настройку <b>\"Запомнить меня\"</b>, чтобы сохранить документы при первомъ входѣ.</string>
     <!-- Hint -->
@@ -105,6 +105,7 @@
     <string name="mcn_exit_confirm">Вы увѣрены, что хотите принудительно закрыть оный?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовмѣстима съ Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Визуализаторъ Vulkan Zink не катируется на сёмъ аппаратѣ!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Интерфейсъ</string>
     <string name="control_keyboard">Клавіатура</string>
