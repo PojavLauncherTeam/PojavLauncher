@@ -4,17 +4,22 @@ def getDate() { return new Date().format('yyyyMMdd')}
 
 def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
-    def stdout = new ByteArrayOutputStream()
+    ByteArrayOutputStream TAG = new ByteArrayOutputStream()
+    ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
     exec {
-        try {
-            commandLine 'git', 'describe', '--tags'
-            standardOutput = stdout
-        }catch(Exception e){}
+        commandLine 'git', 'describe', '--tags'
+        standardOutput = TAG
     }
-    if(stdout.toString() == ""){
+    exec{
+        commandLine 'git', 'branch', '--show-current'
+        standardOutput = BRANCH
+    }
+
+    if(TAG.toString() == ""){
         return ("LOCAL-" + "${getDate()}")
     }
-    return stdout.toString().trim().replace("-g", "-")
+
+    return TAG.toString().trim().replace("-g","-") + "-" + BRANCH.toString().trim();
 }
 
 android {
