@@ -14,7 +14,7 @@
     <string name="login_offline_label">Войти как офлайн учётная запись</string>
     <string name="login_error_short_username">Имя пользователя должно быть не менее 3-х символов</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
-    <string name="login_error_offline_password">Оффлайн аккаунт не может содержать пароль!</string>
+    <string name="login_error_offline_password">Офлайн учётная запись не может содержать пароль!</string>
     <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учётные записи</string>
     <string name="login_title_no_saved_account">Учётные записи не найдены!</string>
@@ -81,7 +81,11 @@
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если изменить их без особых знаний.</string>
     <string name="mcl_setting_category_general">Общие настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
-    <string name="mcl_setting_category_renderer">Рендерер</string>
+    <string name="mcl_setting_category_renderer">Визуализатор</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): экспортирует OpenGL 2.1 + частично 3.2 (пока без поддержки 1.17)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортирует OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовместима с Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Визуализатор Vulkan Zink не поддерживается на этом устройстве!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Клавиатура</string>
