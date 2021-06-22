@@ -15,11 +15,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
     
-    - name: get Git
-      run: sudo apt-get install -q -y git
+    - name: Fetch tags
+      run: git fetch 'refs/tags/*:refs/tags/*'
       shell: bash
 
     - name: set up JDK 1.8
