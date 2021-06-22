@@ -57,9 +57,11 @@
     <string name="mcl_option_settings">Tetapan</string>
     <string name="mcl_option_about">Tentang</string>
     <string name="mcl_setting_title_uninstalljre">Nyahpasang Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Pemulaan semula Pelancar diperlukan] Ini membenarkan anda untuk memasang semula Java Runtime</string>
     <string name="mcl_setting_title_freeform">Lancarkan Minecraft dalam mod Freeform</string>
     <string name="mcl_setting_subtitle_freeform">Lancarkan Minecraft di dalam mod window melayang. Memerlukan Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Sembunyi Palang sisi</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Orang bernostalgia yang lebih memilih UI v1 yang lama mungkin akan menyukai ini. Memberikan anda lebih banyak pengalaman skrin penuh.</string>
     <string name="mcl_setting_title_ignore_notch">Abaikan takik</string>
     <string name="mcl_setting_subtitle_ignore_notch">Abaikan takik dan panjangkan skrin dibawahnya.\nMemberikan anda pengalaman yang lebih mengasyikkan.</string>
     <string name="mcl_setting_title_resolution_scaler">Pengskala Resolusi</string>
@@ -79,6 +81,8 @@
     <string name="mcl_setting_category_general">Tetapan umum</string>
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Petikan</string>
