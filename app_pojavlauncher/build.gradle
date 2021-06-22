@@ -8,7 +8,7 @@ def getVersionName = {
     exec {
         try {
             commandLine 'git', 'describe', '--tags'
-            ignoreExitValue true
+            //ignoreExitValue true
             standardOutput = stdout
         }catch(Exception e){}
     }
