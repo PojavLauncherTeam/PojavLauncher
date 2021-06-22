@@ -6,9 +6,11 @@ def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
     def stdout = new ByteArrayOutputStream()
     exec {
-        commandLine 'git', 'describe', '--tags'
-        ignoreExitValue true
-        standardOutput = stdout
+        try {
+            commandLine 'git', 'describe', '--tags'
+            ignoreExitValue true
+            standardOutput = stdout
+        }catch(Exception e){}
     }
     if(stdout.toString() == ""){
         stdout.write("no-git-" + "${getName}")
