@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
+    <string name="mcl_setting_renderer_gles2">Odǝuפ˥ ƎS ᄅ</string>
+    <string name="mcl_setting_renderer_gles3">Odǝuפ˥ ƎS Ɛ</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
     <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
