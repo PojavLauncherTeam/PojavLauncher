@@ -109,9 +109,8 @@ public class JREUtils
         jreReleaseReader.close();
         return jreReleaseMap;
     }
-    
-    private static boolean checkAccessTokenLeak = true;
-    public static void redirectAndPrintJRELog(final LoggableActivity act, final String accessToken) {
+   
+    public static void redirectAndPrintJRELog(final LoggableActivity act) {
         Log.v("jrelog","Log starts here");
         JREUtils.logToActivity(act);
         Thread t = new Thread(new Runnable(){
@@ -143,16 +142,6 @@ public class JREUtils
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
                         String currStr = new String(buf, 0, len);
-                        
-                        // Avoid leaking access token to log by replace it.
-                        // Also, Minecraft will just print it once.
-                        if (checkAccessTokenLeak) {
-                            if (accessToken != null && accessToken.length() > 5 && currStr.contains(accessToken)) {
-                                checkAccessTokenLeak = false;
-                                currStr = currStr.replace(accessToken, "ACCESS_TOKEN_HIDDEN");
-                            }
-                        }
-                        
                         act.appendToLog(currStr);
                     }
                     
