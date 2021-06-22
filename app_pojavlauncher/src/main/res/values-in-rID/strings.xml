@@ -105,6 +105,7 @@
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak dipasang!</string>
     <string name="mcn_check_fail_incompatiblearch">Arsitektur %1$s tidak kompatibel dengan Runtime Java %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink tidak didukung di perangkat ini!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
