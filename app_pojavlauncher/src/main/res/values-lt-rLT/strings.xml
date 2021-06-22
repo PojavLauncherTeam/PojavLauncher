@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition skirta Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Paleiskite Minecraft: Java Edition savo įrenginyje!</string>
+    <string name="app_motd">Paleiskite Minecraft:Java Edition savo įrenginyje!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -11,7 +11,7 @@
     <string name="login_online_password_hint">Slaptažodis</string>
     <string name="login_online_check_keeplogin">Likti prisijungus</string>
     <string name="login_online_login_label">Prisijungti</string>
-    <string name="login_offline_label">Prisijungti naudojant netikrą paskyrą</string>
+    <string name="login_offline_label">Prisijungti naudojant be interneto paskyrą</string>
     <string name="login_error_short_username">Slapyvardis turi būti bent iš 3 simbolių</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
     <string name="login_microsoft">Microsoft prisijungimas</string>
@@ -26,7 +26,7 @@
     <string name="alerttitle_install_jre">Instaliuoti Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Pasirinkite modifikacijų įdiegimui</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher netikėtai išsijungė</string>
+    <string name="error_fatal">PojavLauncher netikėtai išsijungė arba užlužo</string>
     <string name="error_no_version">Nėra versijos!</string>
     <string name="error_show_more">Rodyti daugiau</string>
     <string name="error_show_less">Rodyti mažiau</string>
@@ -125,8 +125,8 @@
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klaviatūra</string>
     <string name="control_chat">Pokalbiai</string>
-    <string name="control_debug">Debug</string>
-    <string name="control_primary">Kairė</string>
+    <string name="control_debug">Taisyti</string>
+    <string name="control_primary">Pro.</string>
     <string name="control_secondary">Deš</string>
     <string name="control_inventory">Inv</string>
     <string name="control_thirdperson">3</string>
