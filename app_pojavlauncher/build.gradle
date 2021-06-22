@@ -7,7 +7,7 @@ def getVersionName = {
         commandLine 'git', 'describe', '--tags'
         standardOutput = stdout
     }
-    return stdout.toString().trim()
+    return stdout.toString().trim().replace("-g", "-")
 }
 
 android {
