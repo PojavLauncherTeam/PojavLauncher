@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.content.pm.PackageManager;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
@@ -65,6 +66,7 @@ public class BaseMainActivity extends LoggableActivity {
             }
         }
     };
+
     private MinecraftGLView minecraftGLView;
     private int guiScale;
     private DisplayMetrics displayMetrics;
@@ -893,6 +895,10 @@ public class BaseMainActivity extends LoggableActivity {
         */
         
         appendlnToLog("--------- beggining with launcher debug");
+        appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        if (LauncherPreferences.PREF_RENDERER.equals("vulkan_zink")) {
+            checkVulkanZinkIsSupported();
+        }
         checkLWJGL3Installed();
         
         jreReleaseList = JREUtils.readJREReleaseProperties();
@@ -951,6 +957,16 @@ public class BaseMainActivity extends LoggableActivity {
             throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
         } else {
             appendlnToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
+        }
+    }
+
+    private void checkVulkanZinkIsSupported() {
+        if (Tools.CURRENT_ARCHITECTURE.equals("x86")
+         || Build.VERSION.SDK_INT < 25
+         || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
+         || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
+            appendlnToLog("Error: Vulkan Zink renderer is not supported!");
+            throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
         }
     }
     
