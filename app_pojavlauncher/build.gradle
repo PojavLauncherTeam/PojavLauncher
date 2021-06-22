@@ -8,6 +8,7 @@ def getVersionName = {
     exec {
         try {
             commandLine 'git', 'describe', '--tags'
+            ignoreExitValue true
             standardOutput = stdout
         }catch(Exception e){
             stdout.write("no-git-" + "${getDate()}");
