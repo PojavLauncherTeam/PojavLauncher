@@ -105,6 +105,7 @@
     <string name="mcn_exit_confirm">确定强制关闭？</string>
     <string name="mcn_check_fail_lwjgl">未安装LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架构不与 Java 运行时环境 %2$s 兼容。</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink渲染在该设备上不可用！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">键盘</string>
