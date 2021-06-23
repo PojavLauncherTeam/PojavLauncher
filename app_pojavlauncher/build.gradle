@@ -7,12 +7,18 @@ def getVersionName = {
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
     ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
     exec {
-        commandLine 'git', 'describe', '--tags'
-        standardOutput = TAG
+        try{
+            commandLine 'git', 'describe', '--tags'
+            ignoreExitValue true
+            standardOutput = TAG
+        }catch(Exception e){}
     }
     exec{
-        commandLine 'git', 'branch', '--show-current'
-        standardOutput = BRANCH
+        try{
+            commandLine 'git', 'branch', '--show-current'
+            ignoreExitValue true
+            standardOutput = BRANCH
+        }catch(Exception e){}
     }
 
     if(TAG.toString() == ""){
