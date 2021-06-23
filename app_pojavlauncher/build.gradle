@@ -52,7 +52,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156249
-        versionName "${getVersionName()}"
+        versionName getVersionName()
         multiDexEnabled true //important
     }
 
