@@ -44,15 +44,15 @@ public class CallbackBridge {
     }
 
     private static boolean threadAttached;
-    public static void sendCursorPos(int x, int y) {
+    public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
         
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
-        mouseX = x;
-        mouseY = y;
-        nativeSendCursorPos(x, y);
+        mouseX = (int) x;
+        mouseY = (int) y;
+        nativeSendCursorPos(mouseX, mouseY);
     }
     
     public static void sendPrepareGrabInitialPos() {
