@@ -65,12 +65,12 @@
     <string name="mcl_setting_subtitle_hide_sidebar">Orang-orang nostalgia yang lebih memilih UI v1 lama mungkin akan menyukai ini. Memberi kamu sebuah experimen layar penuh.</string>
     <string name="mcl_setting_title_ignore_notch">Abaikan notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Abaikan notch dan melebarkan layar dibawah notch itu.\nMemberi anda experimen yang lebih luas.</string>
-    <string name="mcl_setting_title_resolution_scaler">Pengskala resolusi</string>
+    <string name="mcl_setting_title_resolution_scaler">Resolusi Timbangan</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Membolehkan anda untuk menurunkan resolusi permainan. 100% itu resolusi penuh</string>
     <string name="mcl_setting_title_longpresstrigger">Berapa lama untuk melakukan trigger setelah dipencet dengan ditahan</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ganti waktu trigger setelah melakukan pencetan dengan ditahan untuk menghancurkan dan menjatuhkan item.</string>
     <string name="mcl_setting_title_backtorightmouse">Perlakukan tombol kembali sebagai mouse kanan</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Beberapa perangkat memperlakukan mouse kanan external sebagai tombol kembali. Jika anda memakai mouse external, anda sebaiknya menyalakan ini.</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Beberapa perangkat memperlakukan mouse kanan eksternal sebagai tombol kembali. Jika Anda menggunakan tetikus eksternal, Sebaiknya Anda harus mengaktifkan ini.</string>
     <string name="mcl_setting_title_flat_button_style">Gaya tombol flat</string>
     <string name="mcl_setting_subtitle_flat_button_style">Aktifkan ini untuk mengganti gaya tombol kontrol ke flat.</string>
     <string name="mcl_setting_title_buttonscale">Skala tombol kontrol</string>
@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): mengekspor OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): mengekspor OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): mengekspor OpenGL 2.1 + parsial 3.2 (belum mendukung 1.17)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): mengekspor OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
