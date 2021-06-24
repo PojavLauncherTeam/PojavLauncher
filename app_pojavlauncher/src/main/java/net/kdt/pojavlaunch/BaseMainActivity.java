@@ -44,7 +44,7 @@ public class BaseMainActivity extends LoggableActivity {
     public float scaleFactor = 1;
     public double sensitivityFactor;
     private final int fingerStillThreshold = 8;
-    private int initialX, initialY;
+    private float initialX, initialY;
     private int scrollInitialX, scrollInitialY;
     private float prevX, prevY;
     private int currentPointerID;
@@ -111,7 +111,7 @@ public class BaseMainActivity extends LoggableActivity {
     private final boolean isExited = false;
     private boolean isLogAllow = false;
 
-    public volatile int mouse_x, mouse_y;
+    public volatile float mouse_x, mouse_y;
 
     // @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -252,8 +252,8 @@ public class BaseMainActivity extends LoggableActivity {
                 float mouseY = mousePointer.getTranslationY();
 
                 if (gestureDetector.onTouchEvent(event)) {
-                    mouse_x = (int) (mouseX * scaleFactor);
-                    mouse_y = (int) (mouseY * scaleFactor);
+                    mouse_x = (mouseX * scaleFactor);
+                    mouse_y = (mouseY * scaleFactor);
                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                     CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
                     if (!rightOverride) CallbackBridge.mouseLeft = true;
@@ -287,8 +287,8 @@ public class BaseMainActivity extends LoggableActivity {
                                 if(currentPointerID == event.getPointerId(0)) {
                                     mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
                                     mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
-                                    mouse_x = (int) (mouseX * scaleFactor);
-                                    mouse_y = (int) (mouseY * scaleFactor);
+                                    mouse_x = (mouseX * scaleFactor);
+                                    mouse_y = (mouseY * scaleFactor);
                                     placeMouseAt(mouseX, mouseY);
                                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 }else currentPointerID = event.getPointerId(0);
@@ -318,9 +318,8 @@ public class BaseMainActivity extends LoggableActivity {
                         if (e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) {
 
                             if(CallbackBridge.isGrabbing()) return false;
-                            int x = (int) (e.getX(i) * scaleFactor);
-                            int y = (int) (e.getY(i) * scaleFactor);
-                            CallbackBridge.sendCursorPos(x, y);
+                            CallbackBridge.sendCursorPos(   e.getX(i) * scaleFactor,
+                                                            e.getY(i) * scaleFactor);
                             return true; //mouse event handled successfully
                         }
                     }
@@ -329,13 +328,13 @@ public class BaseMainActivity extends LoggableActivity {
 
                     //Getting scaled position from the event
                     if(!CallbackBridge.isGrabbing()) {
-                        mouse_x = (int) (e.getX() * scaleFactor);
-                        mouse_y = (int) (e.getY() * scaleFactor);
+                        mouse_x =  (e.getX() * scaleFactor);
+                        mouse_y =  (e.getY() * scaleFactor);
                     }
 
                     int hudKeyHandled;
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)){
-                        CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, mouse_x, mouse_y);
+                        CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
                         if (!rightOverride) CallbackBridge.mouseLeft = true;
                         return true;
                     }
@@ -408,16 +407,16 @@ public class BaseMainActivity extends LoggableActivity {
                         case MotionEvent.ACTION_MOVE:
                             if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
                                 CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
-                                scrollInitialX = mouse_x;
-                                scrollInitialY = mouse_y;
+                                scrollInitialX = (int)mouse_x;
+                                scrollInitialY = (int)mouse_y;
                             } else if (!isTouchInHotbar) {
                                 //Camera movement
                                 if(CallbackBridge.isGrabbing()){
                                     if(e.getPointerId(0) != currentPointerID){
                                         currentPointerID = e.getPointerId(0);
                                     }else{
-                                        mouse_x += (int) (e.getX() - prevX) * sensitivityFactor;
-                                        mouse_y += (int) (e.getY() - prevY) * sensitivityFactor;
+                                        mouse_x += (e.getX() - prevX) * sensitivityFactor;
+                                        mouse_y += (e.getY() - prevY) * sensitivityFactor;
                                     }
                                     prevX = e.getX();
                                     prevY = e.getY();
@@ -450,11 +449,11 @@ public class BaseMainActivity extends LoggableActivity {
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
                             if(e.getHistorySize() > 0) {
-                                mouse_x += (int)(e.getX()*scaleFactor);
-                                mouse_y += (int)(e.getY()*scaleFactor);
+                                mouse_x += (e.getX()*scaleFactor);
+                                mouse_y += (e.getY()*scaleFactor);
                             }
-                            CallbackBridge.mouseX = mouse_x;
-                            CallbackBridge.mouseY = mouse_y;
+                            CallbackBridge.mouseX = (int) mouse_x;
+                            CallbackBridge.mouseY = (int) mouse_y;
                             if(!CallbackBridge.isGrabbing()){
                                 view.releasePointerCapture();
                             }
@@ -584,11 +583,9 @@ public class BaseMainActivity extends LoggableActivity {
         }
         switch(ev.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
-                mouse_x = (int) (ev.getX(mouseCursorIndex) * scaleFactor);
-                mouse_y = (int) (ev.getY(mouseCursorIndex) * scaleFactor);
-                CallbackBridge.mouseX = mouse_x;
-                CallbackBridge.mouseY = mouse_y;
-                CallbackBridge.sendCursorPos(mouse_x,mouse_y);
+                mouse_x = (ev.getX(mouseCursorIndex) * scaleFactor);
+                mouse_y = (ev.getY(mouseCursorIndex) * scaleFactor);
+                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                 debugText.setText(CallbackBridge.DEBUG_STRING.toString());
                 CallbackBridge.DEBUG_STRING.setLength(0);
                 return true;
