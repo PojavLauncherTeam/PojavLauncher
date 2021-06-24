@@ -4,7 +4,7 @@ import java.util.Map;
 
 public abstract class LoggableActivity extends BaseActivity {
     public Map<String, String> jreReleaseList;
-    public boolean filteredSessionID = false;
+    private boolean filteredSessionID = false;
     public void appendToLog(String text) {
         appendToLog(text, true);
     }

@@ -1,7 +1,31 @@
 apply plugin: 'com.android.application'
 
-def getDate() {
-    return new Date().format('yyyyMMdd')
+def getDate() { return new Date().format('yyyyMMdd')}
+
+def getVersionName = {
+    // Get the last version tag, as well as the short head of the last commit
+    ByteArrayOutputStream TAG = new ByteArrayOutputStream()
+    ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
+    exec {
+        try{
+            commandLine 'git', 'describe', '--tags'
+            ignoreExitValue true
+            standardOutput = TAG
+        }catch(Exception e){}
+    }
+    exec{
+        try{
+            commandLine 'git', 'branch', '--show-current'
+            ignoreExitValue true
+            standardOutput = BRANCH
+        }catch(Exception e){}
+    }
+
+    if(TAG.toString() == ""){
+        return ("LOCAL-" + "${getDate()}")
+    }
+
+    return TAG.toString().trim().replace("-g","-") + "-" + BRANCH.toString().trim();
 }
 
 android {
@@ -28,7 +52,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 156249
-        versionName "3.3.1.1_rel_" + getDate()
+        versionName getVersionName()
         multiDexEnabled true //important
     }
 
