@@ -266,6 +266,7 @@ public class JREUtils
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
+            ctx.appendlnToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             Os.setenv(env.getKey(), env.getValue(), true);
         }
         
