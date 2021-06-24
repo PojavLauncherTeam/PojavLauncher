@@ -84,9 +84,9 @@ public class LauncherPreferences
 
         switch (PREF_RENDERER) {
             case "opengles2":
-            case "opengles2_5":
                 PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
                 break;
+            case "opengles2_5":
             case "opengles3":
                 PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_115.so";
                 break;
