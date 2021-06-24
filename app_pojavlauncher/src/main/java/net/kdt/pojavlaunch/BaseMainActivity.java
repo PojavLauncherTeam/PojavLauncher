@@ -690,8 +690,8 @@ public class BaseMainActivity extends LoggableActivity {
 
                         //Load Minecraft options:
                         MCOptionUtils.load();
-                        MCOptionUtils.set("overrideWidth", ""+CallbackBridge.windowWidth);
-                        MCOptionUtils.set("overrideHeight", ""+CallbackBridge.windowHeight);
+                        MCOptionUtils.set("overrideWidth", String.valueOf(CallbackBridge.windowWidth));
+                        MCOptionUtils.set("overrideHeight", String.valueOf(CallbackBridge.windowHeight));
                         MCOptionUtils.save();
                         getMcScale();
                         // Should we do that?

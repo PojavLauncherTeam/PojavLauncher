@@ -7,14 +7,10 @@ import net.kdt.pojavlaunch.*;
 
 public class MCOptionUtils
 {
-    private static List<String> mLineList;
+    private static final List<String> mLineList = new ArrayList<>();
     
     public static void load() {
-        if (mLineList == null) {
-            mLineList = new ArrayList<String>();
-        } else {
-            mLineList.clear();
-        }
+        mLineList.clear();
         
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Tools.DIR_GAME_NEW + "/options.txt"));
@@ -41,27 +37,19 @@ public class MCOptionUtils
     }
 
     public static String get(String key){
-        if (mLineList == null){
-            load();
-        } if (mLineList.size() == 0) return null; // why it empty?
-        for (int i = 0; i < mLineList.size(); i++) {
-            String line = mLineList.get(i);
-            if (line.startsWith(key + ":")) {
-                String value = mLineList.get(i);
-                return value.substring(value.indexOf(":")+1);
-            }
+        if(mLineList.isEmpty()) load();
+
+        for(String line : mLineList){
+            if(line.startsWith(key + ":"))
+                return line.substring(line.indexOf(':') + 1);
         }
         return null;
     }
     
     public static void save() {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < mLineList.size(); i++) {
-            result.append(mLineList.get(i));
-            if (i + 1 < mLineList.size()) {
-                result.append("\n");
-            }
-        }
+        for(String line : mLineList)
+            result.append(line).append('\n');
         
         try {
             Tools.write(Tools.DIR_GAME_NEW + "/options.txt", result.toString());
