@@ -105,6 +105,7 @@
     <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie die Beendung erzwingen möchten?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wurde nicht installiert!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektur %1$s ist inkompatibel mit Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink-Renderer wird auf diesem Gerät nicht unterstützt!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Benutzeroberfläche</string>
     <string name="control_keyboard">Tastatur</string>
