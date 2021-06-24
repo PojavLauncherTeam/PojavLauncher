@@ -57,8 +57,8 @@ public class LauncherPreferences
             String DEFAULT_JAVA_ARGS =
                 "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
                 // (32bit) More than 800mb may make JVM not allocateable and crash
-                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m"; /* "m " +
-
+                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m";
+/* "m " +
                 "-XX:+UseG1GC " +
                 "-XX:+ParallelRefProcEnabled " +
                 "-XX:MaxGCPauseMillis=200 " +
@@ -81,11 +81,28 @@ public class LauncherPreferences
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
         }
-        
+
+        switch (PREF_RENDERER) {
+            case "opengles2":
+            case "opengles2_5":
+                PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
+                break;
+            case "opengles3":
+                PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_115.so";
+                break;
+            case "vulkan_zink":
+                PREF_CUSTOM_OPENGL_LIBNAME = "libOSMesa_8.so";
+                break;
+            default:
+                throw new RuntimeException("Undefined renderer: " + PREF_RENDERER);
+        }
+
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             if (arg.startsWith(argLwjglLibname)) {
-                PREF_CUSTOM_OPENGL_LIBNAME = arg.substring(argLwjglLibname.length());
+                // purge arg
+                DEFAULT_PREF.edit().putString("javaArgs",
+                    PREF_CUSTOM_JAVA_ARGS.replace(arg, "")).commit();
             }
         }
     }

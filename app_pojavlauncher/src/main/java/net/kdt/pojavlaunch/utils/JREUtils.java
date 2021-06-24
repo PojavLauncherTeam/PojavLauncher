@@ -68,7 +68,6 @@ public class JREUtils
         return ret;
     }
     public static void initJavaRuntime() {
-        dlopen(findInLdLibPath("libtinyiconv.so"));
         dlopen(findInLdLibPath("libjli.so"));
         dlopen(findInLdLibPath("libjvm.so"));
         dlopen(findInLdLibPath("libverify.so"));
@@ -221,12 +220,21 @@ public class JREUtils
         envMap.put("LIBGL_NOTEXMAT", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
+        envMap.put("MESA_GLSL_VERSION_OVERRIDE", "460");
+        envMap.put("force_glsl_extensions_warn", "true");
+        envMap.put("allow_higher_compat_version", "true");
+        envMap.put("allow_glsl_extension_directive_midshader", "true");
+        envMap.put("MESA_LOADER_DRIVER_OVERRIDE", "zink");
+
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
         
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");
         envMap.put("REGAL_GL_VERSION", "4.5");
+        
+        envMap.put("POJAV_RENDERER", LauncherPreferences.PREF_RENDERER);
 
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
@@ -245,11 +253,12 @@ public class JREUtils
         if(!envMap.containsKey("LIBGL_ES")) {
             int glesMajor = getDetectedVersion();
             Log.i("glesDetect","GLES version detected: "+glesMajor);
+
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else if (LauncherPreferences.PREF_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER.replace("opengles", ""));
+                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
@@ -257,6 +266,7 @@ public class JREUtils
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
+            ctx.appendlnToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             Os.setenv(env.getKey(), env.getValue(), true);
         }
         
