@@ -88,11 +88,15 @@ public class Gamepad {
                         tick();
 
                         delta--;
+
+
                         try {
-                            sleep(Math.max((long) ((1 - delta)/ticks), 0));
+                            sleep(Math.max((long) ( (1 - delta) * (1000/ticks) ), 0));
+
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+
                     }
                 }
             }
@@ -121,7 +125,7 @@ public class Gamepad {
 
             }
         };
-        mouseThread.setPriority(1);
+        mouseThread.setPriority(Thread.MAX_PRIORITY);
         mouseThread.start();
 
 
