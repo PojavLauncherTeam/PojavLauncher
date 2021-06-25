@@ -69,9 +69,10 @@ public class JREUtils
     }
     public static void initJavaRuntime() {
         dlopen(findInLdLibPath("libjli.so"));
-        File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
-        dlopen(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client") + "/libjvm.so");
-        dlopen(findInLdLibPath("libjvm.so"));
+        if(!dlopen("libjvm.so")){
+            Log.w("DynamicLoader","Failed to load with no path, trying with full path");
+            dlopen(jvmLibraryPath+"/libjvm.so");
+        }
         dlopen(findInLdLibPath("libverify.so"));
         dlopen(findInLdLibPath("libjava.so"));
         // dlopen(findInLdLibPath("libjsig.so"));
@@ -110,7 +111,7 @@ public class JREUtils
         jreReleaseReader.close();
         return jreReleaseMap;
     }
-   
+    public static String jvmLibraryPath;
     public static void redirectAndPrintJRELog(final LoggableActivity act) {
         Log.v("jrelog","Log starts here");
         JREUtils.logToActivity(act);
@@ -186,10 +187,6 @@ public class JREUtils
         
         String libName = Tools.CURRENT_ARCHITECTURE.contains("64") ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
-        File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
-        // To make libjli.so ignore re-execute
-        /*ldLibraryPath.append(
-            Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client") + ":");*/
         ldLibraryPath.append(
             Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
             Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":"
@@ -198,10 +195,8 @@ public class JREUtils
             "/system/" + libName + ":" +
             "/vendor/" + libName + ":" +
             "/vendor/" + libName + "/hw:" +
-
             nativeLibDir
         );
-        
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
@@ -271,9 +266,13 @@ public class JREUtils
             ctx.appendlnToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             Os.setenv(env.getKey(), env.getValue(), true);
         }
-        
-        setLdLibraryPath(LD_LIBRARY_PATH);
-        
+
+        File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
+        jvmLibraryPath = Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client");
+        Log.d("DynamicLoader","Base LD_LIBRARY_PATH: "+LD_LIBRARY_PATH);
+        Log.d("DynamicLoader","Internal LD_LIBRARY_PATH: "+jvmLibraryPath+":"+LD_LIBRARY_PATH);
+        setLdLibraryPath(jvmLibraryPath+":"+LD_LIBRARY_PATH);
+
         // return ldLibraryPath;
     }
     
