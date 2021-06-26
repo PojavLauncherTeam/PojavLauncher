@@ -105,6 +105,7 @@
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niekompatybilna ze środowiskiem uruchomieniowym Java %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink nie jest obsługiwany na tym urządzeniu!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
