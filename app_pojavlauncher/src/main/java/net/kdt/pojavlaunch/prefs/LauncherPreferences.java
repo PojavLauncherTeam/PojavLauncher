@@ -82,6 +82,10 @@ public class LauncherPreferences
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
         }
 
+        if (PREF_RENDERER.equals("2") || PREF_RENDERER.equals("3")) {
+            PREF_RENDERER = "opengles" + PREF_RENDERER;
+	}
+
         switch (PREF_RENDERER) {
             case "opengles2":
                 PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
