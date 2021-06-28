@@ -311,8 +311,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
+        //Try to get the notch so it can be taken into account in settings
         if (Build.VERSION.SDK_INT >= P){
-            //Get the fucking notch height:
             try {
                 PREF_NOTCH_SIZE = getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0).width();
             }catch (Exception e){
