@@ -14,7 +14,7 @@
         <androidx.preference.ListPreference
             android:title="@string/mcl_setting_category_renderer"
             android:key="renderer"
-            android:defaultValue="2"
+            android:defaultValue="opengles2"
             android:entries="@array/renderer"
             android:entryValues="@array/renderer_values"/>
 
