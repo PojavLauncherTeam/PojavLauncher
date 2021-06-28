@@ -14,7 +14,7 @@
     <string name="login_offline_label">Zaloguj się jako konto offline</string>
     <string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
-    <string name="login_error_offline_password">Konto Offline nie może zawierać hasła!</string>
+    <string name="login_error_offline_password">Konto offline nie może zawierać hasła!</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
     <string name="login_title_no_saved_account">Konta nie znalezione!</string>
@@ -64,7 +64,7 @@
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgicznym osobom, którzy preferowali stare UI v1, może się to spodobać. Daje ci lepsze pełnoekranowe doświadczenie.</string>
     <string name="mcl_setting_title_ignore_notch">Zignoruj wycięcie</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wycięcie i rozszerza pod nim ekran.\nDaje Ci bardziej wciągającą rozgrywke.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wycięcie i rozszerza ekran pod nim.\nDaje Ci bardziej wciągającą rozgrywkę.</string>
     <string name="mcl_setting_title_resolution_scaler">Skala rozdzielczości</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Pozwala zmniejszyć rozdzielczość gry. 100% to pełna rozdzielczość</string>
     <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
@@ -77,11 +77,15 @@
     <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
     <string name="mcl_setting_subtitle_mousescale">Zmień rozmiar myszy wirtualnej.</string>
-    <string name="mcl_setting_title_javaargs">Argumenty uruchomiające JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostanie ona zmodyfikowana bez wiedzy.</string>
+    <string name="mcl_setting_title_javaargs">Argumenty uruchomienia JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostaną one zmodyfikowane bez wiedzy.</string>
     <string name="mcl_setting_category_general">Ustawienia główne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksportuje OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksportuje OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksportuje OpenGL 2.1 + częściowo 3.2 (na razie brak wsparcia dla 1.17)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Typ wersji jaka będzie na liście wersji</string>
     <string name="mcl_setting_veroption_release">Wydanie</string>
     <string name="mcl_setting_veroption_snapshot">Wersja eksperymentalna</string>
@@ -130,8 +134,8 @@
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
-    <string name="control_scaleup">Skalowanie w górę</string>
-    <string name="control_scaledown">Skalowanie w dół</string>
+    <string name="control_scaleup">Skaluj w górę</string>
+    <string name="control_scaledown">Skaluj w dół</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -163,15 +167,15 @@
     <string name="main_nolog">Brak logów.</string>
     <string name="main_no_news_feed">Nie udało się pobrać kanału informacyjnego!</string>
     <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
-    <string name="auto_ram_title">Automatyczny ram</string>
+    <string name="auto_ram_title">Automatyczny RAM</string>
     <string name="autoram_info_msg">Pamięć ustawiona na %d MB</string>
     <string name="mcl_setting_check_libraries">Sprawdź biblioteki po pobraniu</string>
-    <string name="mcl_setting_check_libraries_subtitle">Ta opcja zmusza launcher do sprawdzenia skrótu biblioteki, jeśli jest dostępna. Zapobiega poszkodowanym pobraniom.</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ta opcja zmusza launcher do sprawdzenia hashu biblioteki, jeśli jest dostępny. Zapobiega uszkodzonym pobraniom.</string>
     <string name="dl_library_sha_fail">Biblioteka %s jest uszkodzona i zostanie ponownie pobrana</string>
     <string name="dl_library_sha_unknown">Biblioteka %s nie może zostać sprawdzona, należy założyć, że jest dobra</string>
-    <string name="dl_library_sha_pass">Biblioteka %s jest dobra i użyteczna</string>
+    <string name="dl_library_sha_pass">Biblioteka %s jest dobra i nadaje się do użytku</string>
     <string name="mcl_disable_gestures">Wyłącz gesty</string>
-    <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak przytrzymaj aby zniszczyć blok i stuknij, aby umieścić blok.</string>
+    <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak przytrzymaj aby zniszczyć blok i stuknij aby umieścić blok.</string>
     <string name="mcl_setting_title_mousespeed">Prędkość myszki (%)</string>
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszki</string>
     <string name="customctrl_passthru">Myszka przelotka</string>
