@@ -25,7 +25,7 @@ jobs:
 
     - name: Get gl4es latest commit hash
       id: gl4es-sha
-      run: echo "::set-output name=sha::$(git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*')"
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*' && git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es
@@ -39,7 +39,7 @@ jobs:
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
-        repository: 'ptitSeb/gl4es'
+        repository: 'PojavLauncherTeam/gl4es'
         path: 'gl4es'
 
     - name: Build gl4es
@@ -47,6 +47,10 @@ jobs:
       continue-on-error: true
       run: |
         cd gl4es
+        git remote add upstream https://github.com/ptitSeb/gl4es
+        git fetch upstream
+        git checkout master
+        git merge upstream/main || echo "Merge exit code $?"
         mv ../Android_gl4es.mk Android.mk
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
     
