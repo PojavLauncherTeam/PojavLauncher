@@ -83,6 +83,8 @@
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 输出 OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 输出 OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
