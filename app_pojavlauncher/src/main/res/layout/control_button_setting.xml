@@ -282,7 +282,7 @@
 
         <TextView
             android:id="@+id/editStrokeWidth_textView_percent"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="0dp"
             android:text="100%"
             android:gravity="center"
@@ -346,7 +346,7 @@
 
         <TextView
             android:id="@+id/editCornerRadius_textView_percent"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="0dp"
             android:text="100%"
             android:gravity="center"
@@ -382,7 +382,7 @@
 
         <TextView
             android:id="@+id/editButtonOpacity_textView_percent"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="0dp"
             android:text="100%"
             android:gravity="center"
