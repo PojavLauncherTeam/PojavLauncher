@@ -39,7 +39,7 @@ jobs:
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
-        repository: 'PojavLauncherTeam/gl4es'
+        repository: 'ptitSeb/gl4es'
         path: 'gl4es'
 
     - name: Build gl4es
@@ -47,7 +47,7 @@ jobs:
       continue-on-error: true
       run: |
         cd gl4es
-        git remote add upstream https://github.com/ptitSeb/gl4es
+        git remote add upstream https://github.com/PojavLauncherTeam/gl4es
         git fetch upstream
         git checkout master
         git merge upstream/master || echo "Merge exit code $?"
