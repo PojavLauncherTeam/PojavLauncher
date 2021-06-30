@@ -37,7 +37,7 @@ public class ControlData implements Cloneable
     
     public static ControlData[] getSpecialButtons(){
         if (SPECIAL_BUTTONS == null) {
-            ControlData[] specialButtons = new ControlData[]{
+            SPECIAL_BUTTONS = new ControlData[]{
                 new ControlData("Keyboard", new int[]{SPECIALBTN_KEYBOARD}, "${margin} * 3 + ${width} * 2", "${margin}", false),
                 new ControlData("GUI", new int[]{SPECIALBTN_TOGGLECTRL}, "${margin}", "${bottom} - ${margin}"),
                 new ControlData("PRI", new int[]{SPECIALBTN_MOUSEPRI}, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
@@ -48,7 +48,6 @@ public class ControlData implements Cloneable
                 new ControlData("SCROLLUP", new int[]{SPECIALBTN_SCROLLUP}, "${margin}", "${margin}"),
                 new ControlData("SCROLLDOWN", new int[]{SPECIALBTN_SCROLLDOWN}, "${margin}", "${margin}")
             };
-            SPECIAL_BUTTONS = specialButtons;
         }
 
         return SPECIAL_BUTTONS;
@@ -146,18 +145,15 @@ public class ControlData implements Cloneable
         update();
     }
     
-    public void execute(BaseMainActivity act, boolean isDown) {
+    public void execute(boolean isDown) {
         for(int keycode : keycodes){
-            act.sendKeyPress(keycode, 0, isDown);
+            BaseMainActivity.sendKeyPress(keycode, 0, isDown);
         }
     }
 
+
     public ControlData clone() {
-        if (this instanceof ControlData) {
-            return new ControlData(name, keycodes, ((ControlData) this).dynamicX, ((ControlData) this).dynamicY, width, height, isToggle, opacity, bgColor, strokeColor,strokeWidth, cornerRadius);
-        } else {
-            return new ControlData(name, keycodes, x, y, width, height);
-        }
+        return new ControlData(name, keycodes, dynamicX, dynamicY, width, height, isToggle, opacity, bgColor, strokeColor,strokeWidth, cornerRadius);
     }
     
     public float insertDynamicPos(String dynamicPos) {
@@ -181,15 +177,12 @@ public class ControlData implements Cloneable
     }
     
     public void update() {
-        if(SPECIAL_BUTTONS != null){
-            for(int keycode : keycodes){
-                for (ControlData data : getSpecialButtons()) {
-                    if (keycode == data.keycodes[0]) {
+        if(SPECIAL_BUTTONS != null)
+            for(int keycode : keycodes)
+                for (ControlData data : getSpecialButtons())
+                    if (keycode == data.keycodes[0])
                         specialButtonListener = data.specialButtonListener;
-                    }
-                }
-            }
-        }
+
 
         if (dynamicX == null) {
             dynamicX = Float.toString(x);
