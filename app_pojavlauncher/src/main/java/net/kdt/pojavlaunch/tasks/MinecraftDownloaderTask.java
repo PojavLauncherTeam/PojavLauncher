@@ -14,6 +14,8 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import org.apache.commons.io.*;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable>
@@ -280,8 +282,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         if (addedProg != -1) {
             addProgress = addProgress + addedProg;
             mActivity.mLaunchProgress.setProgress(addProgress);
-
-            mActivity.mLaunchTextStatus.setText(p1[1]);
+            if(p1[1] != null) mActivity.mLaunchTextStatus.setText(p1[1]);
         }
 
         if (p1.length < 3) {
@@ -350,57 +351,86 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
     }
 
-    public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException {
+    public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
-        if (!outFile.exists()) {
-            DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
-        }
+        Tools.downloadFileMonitored(MINECRAFT_RES + assetPath, outFile.getAbsolutePath(), new Tools.DownloaderFeedback() {
+            int prevCurr;
+            @Override
+            public void updateProgress(int curr, int max) {
+                downloadCounter.addAndGet(curr - prevCurr);
+                prevCurr = curr;
+            }
+        });
     }
-    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir) throws IOException {
+    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
-        if (!outFile.exists()) {
-            DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
-        }
+        Tools.downloadFileMonitored(MINECRAFT_RES + assetPath, outFile.getAbsolutePath(), new Tools.DownloaderFeedback() {
+            int prevCurr;
+            @Override
+            public void updateProgress(int curr, int max) {
+                downloadCounter.addAndGet(curr - prevCurr);
+                prevCurr = curr;
+            }
+        });
     }
 
     public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
-        ArrayBlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(100);
-        RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
-        final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 50, 100, TimeUnit.SECONDS, workQueue, handler);
-
-        File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
-        if (!hasDownloadedFile.exists()) {
+        LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(50, 50, 500, TimeUnit.MILLISECONDS, workQueue);
+        mActivity.mIsAssetsProcessing = true;
+        //File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
+        //if (!hasDownloadedFile.exists()) {
             System.out.println("Assets begin time: " + System.currentTimeMillis());
             Map<String, JAssetInfo> assetsObjects = assets.objects;
-            mActivity.mLaunchProgress.setMax(assetsObjects.size());
-            zeroProgress();
-            AtomicInteger downloaded = new AtomicInteger(0);
+            int assetsSizeBytes=0;
+            AtomicInteger downloadedSize = new AtomicInteger(0);
+            AtomicBoolean localInterrupt = new AtomicBoolean(false);
             File objectsDir = new File(outputDir, "objects");
-            for (JAssetInfo asset : assetsObjects.values()) {
-                executor.execute(() -> {
-                    if (!mActivity.mIsAssetsProcessing) {
-                        executor.shutdownNow();
-                        return;
-                    }
-
-                    try {
-                        if(!assets.map_to_resources) downloadAsset(asset, objectsDir);
-                        else downloadAssetMapped(asset,(assetsObjects.keySet().toArray(new String[0])[downloaded.get()]),outputDir);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        mActivity.mIsAssetsProcessing = false;
-                    }
-                    downloaded.incrementAndGet();
-                });
+            zeroProgress();
+            for(String assetKey : assetsObjects.keySet()) {
+                JAssetInfo asset = assetsObjects.get(assetKey);
+                assetsSizeBytes+=asset.size;
+                String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
+                File outFile = assets.map_to_resources?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
+                boolean isSHAFailure = false;
+                if(outFile.exists() && LauncherPreferences.PREF_CHECK_LIBRARY_SHA?(isSHAFailure = Tools.compareSHA1(outFile,asset.hash)):true) {
+                    downloadedSize.addAndGet(asset.size);
+                }else{
+                    if(isSHAFailure)publishProgress("0",mActivity.getString(R.string.dl_library_sha_fail,assetKey));
+                    executor.execute(()->{
+                        try {
+                            if (!assets.map_to_resources) {
+                                downloadAsset(asset, objectsDir, downloadedSize);
+                            } else {
+                                downloadAssetMapped(asset, assetKey, outputDir, downloadedSize);
+                            }
+                        }catch (IOException e) {
+                            e.printStackTrace();
+                            localInterrupt.set(true);
+                        }
+                    });
+                }
             }
+            mActivity.mLaunchProgress.setMax(assetsSizeBytes);
             executor.shutdown();
-            while (!executor.isTerminated()) { }
-            hasDownloadedFile.getParentFile().mkdirs();
-            hasDownloadedFile.createNewFile();
+            try {
+                int prevDLSize=0;
+                while ((!executor.awaitTermination(250, TimeUnit.MILLISECONDS))&&(!localInterrupt.get())&&mActivity.mIsAssetsProcessing) {
+                    int DLSize = downloadedSize.get();
+                    publishProgress(Integer.toString(DLSize-prevDLSize),null,"");
+                    publishDownloadProgress("assets", DLSize, assetsSizeBytes);
+                    prevDLSize = downloadedSize.get();
+                }
+                executor.shutdownNow();
+                while (!executor.awaitTermination(250, TimeUnit.MILLISECONDS)) {}
+                System.out.println("Fully shut down!");
+            }catch(InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Assets end time: " + System.currentTimeMillis());
-        }
+        //}
     }
 
     private JMinecraftVersionList.Version findVersion(String version) {
