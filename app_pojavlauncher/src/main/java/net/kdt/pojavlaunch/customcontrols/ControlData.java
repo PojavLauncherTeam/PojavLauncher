@@ -77,6 +77,7 @@ public class ControlData implements Cloneable
     public int strokeColor;
     public int strokeWidth;     //0-100%
     public float cornerRadius;  //0-100%
+    public boolean isSwipeable;
 
     public boolean holdCtrl;
     public boolean holdAlt;
