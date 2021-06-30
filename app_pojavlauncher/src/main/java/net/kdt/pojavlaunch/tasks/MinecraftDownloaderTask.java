@@ -363,7 +363,11 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         }
     }
 
-    public void downloadAssets(JAssets assets, String assetsVersion, File outputDir) throws IOException, Throwable {
+    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
+        ArrayBlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(100);
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 40, 100, TimeUnit.SECONDS, workQueue, handler);
+
         File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
         if (!hasDownloadedFile.exists()) {
             System.out.println("Assets begin time: " + System.currentTimeMillis());
@@ -371,23 +375,29 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             mActivity.mLaunchProgress.setMax(assetsObjects.size());
             zeroProgress();
             File objectsDir = new File(outputDir, "objects");
-            int downloadedSs = 0;
             for (JAssetInfo asset : assetsObjects.values()) {
-                if (!mActivity.mIsAssetsProcessing) {
-                    return;
-                }
+                executor.execute(() -> {
+                    if (!mActivity.mIsAssetsProcessing) {
+                        return;
+                    }
 
-                if(!assets.map_to_resources) downloadAsset(asset, objectsDir);
-                else downloadAssetMapped(asset,(assetsObjects.keySet().toArray(new String[0])[downloadedSs]),outputDir);
-                publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, assetsObjects.keySet().toArray(new String[0])[downloadedSs]));
-                downloadedSs++;
+                    try {
+                        if(!assets.map_to_resources) downloadAsset(asset, objectsDir);
+                        else downloadAssetMapped(asset,(assetsObjects.keySet().toArray(new String[0])[downloadedSs]),outputDir);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        mIsAssetsProcessing = false;
+                    }
+                    currProgress++;
+                    downloadedSs++;
+
+                });
             }
             hasDownloadedFile.getParentFile().mkdirs();
             hasDownloadedFile.createNewFile();
             System.out.println("Assets end time: " + System.currentTimeMillis());
         }
     }
-    
 
     private JMinecraftVersionList.Version findVersion(String version) {
         if (mActivity.mVersionList != null) {
