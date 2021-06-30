@@ -375,11 +375,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             Map<String, JAssetInfo> assetsObjects = assets.objects;
             mActivity.mLaunchProgress.setMax(assetsObjects.size());
             zeroProgress();
-            int downloaded;
+            int downloaded = 0;
             File objectsDir = new File(outputDir, "objects");
             for (JAssetInfo asset : assetsObjects.values()) {
                 executor.execute(() -> {
                     if (!mActivity.mIsAssetsProcessing) {
+                        executor.shutdownNow();
                         return;
                     }
 
@@ -388,11 +389,13 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         else downloadAssetMapped(asset,(assetsObjects.keySet().toArray(new String[0])[downloaded]),outputDir);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        mIsAssetsProcessing = false;
+                        mActivity.mIsAssetsProcessing = false;
                     }
                     downloaded++;
                 });
             }
+            executor.shutdown();
+            while (!executor.isTerminated()) { }
             hasDownloadedFile.getParentFile().mkdirs();
             hasDownloadedFile.createNewFile();
             System.out.println("Assets end time: " + System.currentTimeMillis());
