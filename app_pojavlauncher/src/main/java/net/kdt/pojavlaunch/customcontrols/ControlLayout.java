@@ -31,11 +31,8 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void hideAllHandleViews() {
-		for (int i = 0; i < getChildCount(); i++) {
-			View view = getChildAt(i);
-			if (view instanceof ControlButton) {
-				((ControlButton) view).getHandleView().hide();
-			}
+		for(ControlButton button : getButtonChildren()){
+			button.getHandleView().hide();
 		}
 	}
 
@@ -44,9 +41,9 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
-        if (mModifiable) {
+        if (mModifiable)
             hideAllHandleViews();
-        }
+
         removeAllButtons();
 		if(mLayout != null) {
 			mLayout.mControlDataList = null;
@@ -174,17 +171,10 @@ public class ControlLayout extends FrameLayout
 	}
 
     private void removeAllButtons() {
-		List<View> viewList = new ArrayList<>();
-		View v;
-		for(int i = 0; i < getChildCount(); i++) {
-			v = getChildAt(i);
-			if(v instanceof ControlButton) viewList.add(v);
+		for(View v : getButtonChildren()){
+			removeView(v);
 		}
-		v = null;
-		for(View v2 : viewList) {
-			removeView(v2);
-		}
-		viewList = null;
+
 		System.gc();
 		//i wanna be sure that all the removed Views will be removed after a reload
 		//because if frames will slowly go down after many control changes it will be warm and bad
@@ -232,38 +222,17 @@ public class ControlLayout extends FrameLayout
 		if (mModifiable) return; // Not using on custom controls activity
 
 		mControlVisible = isVisible;
-		int visibilityState = isVisible ? View.VISIBLE : View.GONE;
-
-		for (int i = 0; i < getChildCount(); i++) {
-			View view = getChildAt(i);
-
-			if(view instanceof ControlSubButton){
-				view.setVisibility(isVisible ? (((ControlSubButton)view).parentDrawer.areButtonsVisible ? VISIBLE : GONE) : View.GONE);
-				continue;
-			}
-
-			if(view instanceof ControlDrawer){
-				view.setVisibility(visibilityState);
-				continue;
-			}
-
-			if (view instanceof ControlButton && ((ControlButton) view).getProperties().isHideable) {
-				view.setVisibility(visibilityState);
-			}
+		for(ControlButton button : getButtonChildren()){
+			button.setVisible(isVisible);
 		}
 	}
 	
-	public void setModifiable(boolean z) {
-		mModifiable = z;
-		for (int i = 0; i < getChildCount(); i++) {
-			View v = getChildAt(i);
-			if (v instanceof ControlButton) {
-				ControlButton cv = ((ControlButton) v);
-				cv.setModifiable(z);
-                if (!z) {
-				    cv.setAlpha(cv.getProperties().opacity);
-                }
-			}
+	public void setModifiable(boolean isModifiable) {
+		mModifiable = isModifiable;
+		for(ControlButton button : getButtonChildren()){
+			button.setModifiable(isModifiable);
+			if (!isModifiable)
+				button.setAlpha(button.getProperties().opacity);
 		}
 	}
 
@@ -273,5 +242,71 @@ public class ControlLayout extends FrameLayout
 
 	public void setModified(boolean isModified) {
 		if (mActivity != null) mActivity.isModified = isModified;
+
+	}
+
+	private ArrayList<ControlButton> getButtonChildren(){
+		ArrayList<ControlButton> children = new ArrayList<>();
+		for(int i=0; i<getChildCount(); ++i){
+			View v = getChildAt(i);
+			if(v instanceof ControlButton)
+				children.add(((ControlButton) v));
+		}
+		return children;
+	}
+
+	ControlButton lastControlButton = null;
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		System.out.println("ON_TOUCH_LAYOUT");
+		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
+			if(lastControlButton != null) lastControlButton.onTouchEvent(ev);
+			lastControlButton = null;
+			return true;
+		}
+
+		if(ev.getActionMasked() != MotionEvent.ACTION_MOVE) return false;
+		ArrayList<ControlButton> children = getButtonChildren();
+
+		Log.d("getX LAYOUT_CONTROL", String.valueOf(ev.getX()));
+		Log.d("getY LAYOUT_CONTROL", String.valueOf(ev.getY()));
+		Log.d("getRawX LAYOUT_CONTROL", String.valueOf(ev.getRawX()));
+		Log.d("getRawY LAYOUT_CONTROL", String.valueOf(ev.getRawY()));
+		if(lastControlButton != null){
+			if(	ev.getRawX() > lastControlButton.getX() && ev.getRawX() < lastControlButton.getX() + lastControlButton.getWidth() &&
+				ev.getRawY() > lastControlButton.getY() && ev.getRawY() < lastControlButton.getY() + lastControlButton.getHeight()){
+				return true;
+			}
+		}
+
+		for(ControlButton button : children){
+			/*
+			Log.d("Left: LAYOUT_CONTROL", String.valueOf(button.getLeft()));
+			Log.d("TOP: LAYOUT_CONTROL", String.valueOf(button.getTop()));
+			Log.d("RIGHT: LAYOUT_CONTROL", String.valueOf(button.getRight()));
+			Log.d("BOTTOM: LAYOUT_CONTROL", String.valueOf(button.getBottom()));
+
+			 */
+
+			if(	ev.getRawX() > button.getX() && ev.getRawX() < button.getX() + button.getWidth() &&
+				ev.getRawY() > button.getY() && ev.getRawY() < button.getY() + button.getHeight()){
+				System.out.println("FOUND ONE !");
+				//Button hovered;
+				if(!button.equals(lastControlButton)){
+					ev.setAction(MotionEvent.ACTION_POINTER_UP);
+					if (lastControlButton != null) lastControlButton.onTouchEvent(ev);
+
+					ev.setAction(MotionEvent.ACTION_POINTER_DOWN);
+					button.onTouchEvent(ev);
+
+					lastControlButton = button;
+				}
+				return true;
+			}
+		}
+		return false;
+		//We actually could go through all our children here.
+		//This isn't the most performance friendly stuff though.
+		//return true;
 	}
 }

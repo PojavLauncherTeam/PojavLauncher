@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.view.ViewGroup;
 
 import net.kdt.pojavlaunch.customcontrols.ControlData;
@@ -30,8 +31,10 @@ public class ControlSubButton extends ControlButton {
         setProperties(mProperties, false);
     }
 
-
-
+    @Override
+    public void setVisible(boolean isVisible) {
+        setVisibility(isVisible ? (parentDrawer.areButtonsVisible ? VISIBLE : GONE) : View.GONE);
+    }
 
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
