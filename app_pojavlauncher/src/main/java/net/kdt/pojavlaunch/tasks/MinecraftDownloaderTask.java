@@ -341,7 +341,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
 
-    public JAssets downloadIndex(String versionName, File output) throws Throwable {
+    public JAssets downloadIndex(String versionName, File output) throws IOException {
         if (!output.exists()) {
             output.getParentFile().mkdirs();
             DownloadUtils.downloadFile(verInfo.assetIndex != null ? verInfo.assetIndex.url : "https://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json", output);
@@ -350,7 +350,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
     }
 
-    public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException, Throwable {
+    public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
         if (!outFile.exists()) {
