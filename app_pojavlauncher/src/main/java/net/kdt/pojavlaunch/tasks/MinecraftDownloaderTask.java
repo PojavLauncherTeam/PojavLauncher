@@ -357,7 +357,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
         }
     }
-    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir) throws Throwable {
+    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
         if (!outFile.exists()) {
