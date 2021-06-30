@@ -59,34 +59,14 @@ public class ControlDrawer extends ControlButton {
     }
 
     private void setControlButtonVisibility(ControlButton button, boolean isVisible){
-        button.setVisibility(isVisible ? VISIBLE : GONE);
+        button.setVisible(isVisible);
     }
 
     private void switchButtonVisibility(){
         areButtonsVisible = !areButtonsVisible;
-        int visibility = areButtonsVisible ? View.VISIBLE : View.GONE;
         for(ControlButton button : buttons){
-            button.setVisibility(visibility);
+            button.setVisible(areButtonsVisible);
         }
-    }
-
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if(!mModifiable){
-            switch (event.getActionMasked()){
-                case MotionEvent.ACTION_UP: // 1
-                case MotionEvent.ACTION_POINTER_UP: // 6
-                    switchButtonVisibility();
-                    break;
-            }
-
-            return true;
-        }
-
-        boolean isHandled = super.onTouchEvent(event);
-        //syncButtons();
-        return isHandled;
     }
 
     //Syncing stuff
@@ -133,6 +113,27 @@ public class ControlDrawer extends ControlButton {
     private void syncButtons(){
         alignButtons();
         resizeButtons();
+    }
+
+    @Override
+    public void setVisible(boolean isVisible) {
+        //TODO replicate changes to his children ?
+        setVisibility(isVisible ? VISIBLE : GONE);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(!mModifiable){
+            switch (event.getActionMasked()){
+                case MotionEvent.ACTION_UP: // 1
+                case MotionEvent.ACTION_POINTER_UP: // 6
+                    switchButtonVisibility();
+                    break;
+            }
+            return true;
+        }
+
+        return super.onTouchEvent(event);
     }
 
     @Override
