@@ -56,7 +56,7 @@ jobs:
     - name: Install gl4es
       run: cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
     
-    - name: Get JRE
+    - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
       with:
           github_token: ${{secrets.GITHUB_TOKEN}}
@@ -64,6 +64,7 @@ jobs:
           path: app_pojavlauncher/src/main/assets/components/jre
           workflow_conclusion: success
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: buildjre8
           name: jre8-pojav
     
     - name: Build APK with Gradle
