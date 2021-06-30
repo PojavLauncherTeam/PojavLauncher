@@ -8,6 +8,7 @@ import android.util.*;
 import com.google.gson.*;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -366,7 +367,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
     public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
         ArrayBlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(100);
         RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
-        final ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 40, 100, TimeUnit.SECONDS, workQueue, handler);
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 50, 100, TimeUnit.SECONDS, workQueue, handler);
 
         File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
         if (!hasDownloadedFile.exists()) {
