@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.customcontrols.buttons;
 
+import android.annotation.SuppressLint;
 import android.graphics.*;
 import android.graphics.drawable.GradientDrawable;
 import android.util.*;
@@ -11,8 +12,11 @@ import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+
 import org.lwjgl.glfw.*;
 
+@SuppressLint("ViewConstructor")
 public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
 {
     private Paint mRectPaint;
@@ -34,15 +38,18 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
 
         setOnLongClickListener(this);
+        //When a button is created, the width/height has yet to be processed to fit the scaling.
 
-        setProperties(properties);
+        setProperties(preProcessProperties(properties, layout));
         setModified(false);
 
         mHandleView = new SelectionEndHandleView(this);
-        
+
+
+        //For the toggle layer
         final TypedValue value = new TypedValue();
         getContext().getTheme().resolveAttribute(R.attr.colorAccent, value, true);
-        
+
         mRectPaint = new Paint();
         mRectPaint.setColor(value.data);
         mRectPaint.setAlpha(128);
@@ -58,6 +65,24 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     public void setProperties(ControlData properties) {
         setProperties(properties, true);
+    }
+
+    public ControlData preProcessProperties(ControlData properties, ControlLayout layout){
+        //Size
+        properties.setWidth(properties.getWidth() / layout.getLayoutScale() * LauncherPreferences.PREF_BUTTONSIZE);
+        properties.setHeight(properties.getHeight() / layout.getLayoutScale() * LauncherPreferences.PREF_BUTTONSIZE);
+
+        //Visibility
+        properties.isHideable = properties.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && properties.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
+
+        //Position
+        if (!properties.isDynamicBtn) {
+            properties.dynamicX = properties.x / CallbackBridge.physicalWidth + " * ${screen_width}";
+            properties.dynamicY = properties.y / CallbackBridge.physicalHeight + " * ${screen_height}";
+        }
+
+        properties.update();
+        return properties;
     }
 
     public void setProperties(ControlData properties, boolean changePos) {

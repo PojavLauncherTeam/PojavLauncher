@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.customcontrols.buttons;
 
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 
 
+@SuppressLint("ViewConstructor")
 public class ControlDrawer extends ControlButton {
 
 
@@ -113,6 +115,13 @@ public class ControlDrawer extends ControlButton {
     private void syncButtons(){
         alignButtons();
         resizeButtons();
+    }
+
+    @Override
+    public ControlData preProcessProperties(ControlData properties, ControlLayout layout) {
+        ControlData data = super.preProcessProperties(properties, layout);
+        data.isHideable = true;
+        return data;
     }
 
     @Override

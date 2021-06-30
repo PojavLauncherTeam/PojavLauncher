@@ -59,46 +59,19 @@ public class ControlLayout extends FrameLayout
 
 		//CONTROL BUTTON
 		for (ControlData button : controlLayout.mControlDataList) {
-            button.isHideable = button.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && button.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
-            button.setWidth(button.getWidth() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
-            button.setHeight(button.getHeight() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
-            if (!button.isDynamicBtn) {
-                button.dynamicX = button.x / CallbackBridge.physicalWidth + " * ${screen_width}";
-                button.dynamicY = button.y / CallbackBridge.physicalHeight + " * ${screen_height}";
-            }
-            button.update();
 			addControlView(button);
 		}
 
 		//CONTROL DRAWER
 		for(ControlDrawerData drawerData : controlLayout.mDrawerDataList){
-			drawerData.properties.isHideable = true;
-			drawerData.properties.setWidth(drawerData.properties.getWidth() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
-			drawerData.properties.setHeight(drawerData.properties.getHeight() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
-			if (!drawerData.properties.isDynamicBtn) {
-				drawerData.properties.dynamicX = drawerData.properties.x / CallbackBridge.physicalWidth + " * ${screen_width}";
-				drawerData.properties.dynamicY = drawerData.properties.y / CallbackBridge.physicalHeight + " * ${screen_height}";
-			}
-
 			ControlDrawer drawer = addDrawerView(drawerData);
+			if(mModifiable) drawer.areButtonsVisible = true;
 
 			//CONTROL SUB BUTTON
 			for (ControlData subButton : drawerData.buttonProperties){
-				subButton.isHideable = subButton.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && subButton.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
-				subButton.setWidth(subButton.getWidth() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
-				subButton.setHeight(subButton.getHeight() / controlLayout.scaledAt * LauncherPreferences.PREF_BUTTONSIZE);
-				if (!subButton.isDynamicBtn) {
-					subButton.dynamicX = subButton.x / CallbackBridge.physicalWidth + " * ${screen_width}";
-					subButton.dynamicY = subButton.y / CallbackBridge.physicalHeight + " * ${screen_height}";
-				}
-				subButton.update();
 				addSubView(drawer, subButton);
 			}
-
-
-
 		}
-
 
         mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
 
@@ -216,6 +189,10 @@ public class ControlLayout extends FrameLayout
 	public void toggleControlVisible(){
 		mControlVisible = !mControlVisible;
 		setControlVisible(mControlVisible);
+	}
+
+	public float getLayoutScale(){
+		return mLayout.scaledAt;
 	}
 
 	public void setControlVisible(boolean isVisible) {
