@@ -14,6 +14,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import org.apache.commons.io.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable>
  {
