@@ -212,6 +212,14 @@ public class ControlData implements Cloneable
     }
 
 
+    public boolean containsKeycode(int keycodeToCheck){
+        for(int keycode : keycodes)
+            if(keycodeToCheck == keycode)
+                return true;
+
+        return false;
+    }
+
     //Getters || setters (with conversion for ease of use)
     public float getWidth() {
         return Tools.dpToPx(width);
