@@ -78,23 +78,23 @@ public class ControlDrawer extends ControlButton {
         for(int i=0; i < buttons.size(); ++i){
             switch (drawerData.orientation){
                 case RIGHT:
-                    buttons.get(i).setTranslationX(drawerData.properties.x + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setTranslationY(drawerData.properties.y);
+                    buttons.get(i).setX(drawerData.properties.x + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setY(drawerData.properties.y);
                     break;
 
                 case LEFT:
-                    buttons.get(i).setTranslationX(drawerData.properties.x - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setTranslationY(drawerData.properties.y);
+                    buttons.get(i).setX(drawerData.properties.x - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setY(drawerData.properties.y);
                     break;
 
                 case UP:
-                    buttons.get(i).setTranslationY(drawerData.properties.y - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setTranslationX(drawerData.properties.x);
+                    buttons.get(i).setY(drawerData.properties.y - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setX(drawerData.properties.x);
                     break;
 
                 case DOWN:
-                    buttons.get(i).setTranslationY(drawerData.properties.y + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setTranslationX(drawerData.properties.x);
+                    buttons.get(i).setY(drawerData.properties.y + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setX(drawerData.properties.x);
                     break;
             }
             buttons.get(i).updateProperties();
@@ -146,14 +146,14 @@ public class ControlDrawer extends ControlButton {
     }
 
     @Override
-    public void setTranslationX(float x) {
-        super.setTranslationX(x);
+    public void setX(float x) {
+        super.setX(x);
         alignButtons();
     }
 
     @Override
-    public void setTranslationY(float y) {
-        super.setTranslationY(y);
+    public void setY(float y) {
+        super.setY(y);
         alignButtons();
     }
 
