@@ -107,54 +107,33 @@ public class EditControlButtonPopup {
         seekBarCornerRadius = v.findViewById(R.id.editCornerRadius_seekbar);
         seekBarStrokeWidth = v.findViewById(R.id.editStrokeWidth_seekbar);
 
+        SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(seekBar.equals(seekBarCornerRadius)) {
+                    setPercentageText(textCornerRadius, i);
+                    return;
+                }
+                if(seekBar.equals(seekBarOpacity)) {
+                    setPercentageText(textOpacity, i);
+                    return;
+                }
+                if(seekBar.equals(seekBarStrokeWidth)) {
+                    setPercentageText(textStrokeWidth, i);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {/*STUB*/}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {/*STUB*/}
+        };
+
         //Add listeners, too bad I don't need all the methods
-        seekBarOpacity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                setPercentageText(textOpacity, i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //AUTO GENERATED STUB
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //AUTO GENERATED STUB
-            }
-        });
-
-        seekBarCornerRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                setPercentageText(textCornerRadius, i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //AUTO GENERATED STUB
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //AUTO GENERATED STUB
-            }
-        });
-
-        seekBarStrokeWidth.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                setPercentageText(textStrokeWidth, i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //AUTO GENERATED STUB
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //AUTO GENERATED STUB
-            }
-        });
+        seekBarOpacity.setOnSeekBarChangeListener(changeListener);
+        seekBarCornerRadius.setOnSeekBarChangeListener(changeListener);
+        seekBarStrokeWidth.setOnSeekBarChangeListener(changeListener);
 
         buttonBackgroundColor = v.findViewById(R.id.editBackgroundColor_imageButton);
         buttonStrokeColor = v.findViewById(R.id.editStrokeColor_imageButton);
