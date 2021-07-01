@@ -109,7 +109,7 @@
     <string name="mcn_exit_confirm">Вы увѣрены, что хотите принудительно закрыть оный?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовмѣстима съ Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_vulkan_support">Визуализаторъ Vulkan Zink не катируется на сёмъ аппаратѣ!</string>
+    <string name="mcn_check_fail_vulkan_support">Визуализаторъ Vulkan Zink не ​котируется​ на семъ аппаратѣ!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Интерфейсъ</string>
     <string name="control_keyboard">Клавіатура</string>
