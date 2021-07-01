@@ -15,7 +15,7 @@
     <string name="login_error_short_username">Имя пользователя должно быть не менѣе 3-хъ символовъ</string>
     <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
-    <string name="login_select_account">Документы</string>
+    <string name="login_select_account">Выбрать документъ</string>
     <string name="login_title_no_saved_account">Документы не найдены!</string>
     <string name="login_dialog_no_saved_account">Вы не сохраняли ни одни документы.\nИспользуйте настройку <b>\"Запомнить меня\"</b>, чтобы сохранить документы при первомъ входѣ.</string>
     <!-- Hint -->
@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Визуализаторъ</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
     <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
     <string name="mcl_setting_veroption_snapshot">Пробныя версіи</string>
