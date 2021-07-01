@@ -38,12 +38,15 @@ public class MCOptionUtils
 
     public static String get(String key){
         if(mLineList.isEmpty()) load();
-
+        String searchedLine=null;
         for(String line : mLineList){
-            if(line.startsWith(key + ":"))
-                return line.substring(line.indexOf(':') + 1);
+            if(line.startsWith(key + ":")) {
+                searchedLine = line;
+                break;
+            }
         }
-        return null;
+        if(searchedLine != null) return searchedLine.substring(searchedLine.indexOf(':') + 1);
+        else return null;
     }
     
     public static void save() {
