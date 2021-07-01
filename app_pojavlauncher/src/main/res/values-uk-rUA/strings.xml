@@ -14,18 +14,18 @@
     <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
     <string name="login_error_short_username">Ім\'я користувача повинно мати хоча б 3 символи</string>
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
-    <string name="login_error_offline_password">Оффлайн аккаунт не може включати пароль!</string>
+    <string name="login_error_offline_password">Офлайн акаунт не може мати пароль!</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
     <string name="login_select_account">Виберіть обліковий запис</string>
-    <string name="login_title_no_saved_account">Акаунт не знайдено !</string>
-    <string name="login_dialog_no_saved_account">У вас немає жодного збереженого аккаунта.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
+    <string name="login_title_no_saved_account">Акаунтів не знайдено!</string>
+    <string name="login_dialog_no_saved_account">У вас немає жодного збереженого акаунту.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміну розміру або видалення."</string>
+    <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміни розміру або видалення."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Цей обліковий запис буде видалено!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Встановити Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Вибрати установщик моду</string>
+    <string name="alerttitle_installmod">Вибрати інсталятор моду</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher був зупинений в результаті збою</string>
     <string name="error_no_version">Немає версії!</string>
@@ -52,15 +52,15 @@
     <string name="mcl_launch_downloading_progress">"Завантаження %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
     <string name="mcl_options">Опції</string>
-    <string name="mcl_option_modinstall">Запустити установщик модів (Forge, LabyMod, Fabric, інші...)</string>
+    <string name="mcl_option_modinstall">Запустити інсталятор модів (Forge, LabyMod, Fabric, інші...)</string>
     <string name="mcl_option_modinstallwitharg">Запустити інсталятор модів (зі своїми аргументами)</string>
     <string name="mcl_option_customcontrol">Користувацьке управління</string>
     <string name="mcl_option_settings">Налаштування</string>
     <string name="mcl_option_about">Про лаунчер</string>
     <string name="mcl_setting_title_uninstalljre">Видалити Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Необхідно перезапустити лаунчер] Це допоможе вам перевстановити Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Запуск Minecraft в плаваючому вікні</string>
-    <string name="mcl_setting_subtitle_freeform">Запустити Minecraft в плаваючому вікні. Треба Android 7.0 чи вище</string>
+    <string name="mcl_setting_title_freeform">Запуск Minecraft у плаваючому вікні</string>
+    <string name="mcl_setting_subtitle_freeform">Запустити Minecraft у плаваючому вікні. Потрібен Android 7.0 чи вище</string>
     <string name="mcl_setting_title_hide_sidebar">Приховати бічну панель</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Може сподобатися людям, які відчувають ностальгію та віддають перевагу старому інтерфейсу v1. Дає вам більш повноекранний досвід.</string>
     <string name="mcl_setting_title_ignore_notch">Ігнорувати виріз фронтальної камери</string>
@@ -82,7 +82,7 @@
     <string name="mcl_setting_category_general">Загальні налаштування</string>
     <string name="mcl_setting_category_scaling">Масштабування</string>
     <string name="mcl_setting_category_renderer">Візуалізація</string>
-    <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
+    <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися у списку версій</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
     <string name="mcl_setting_veroption_oldalpha">Старі альфи</string>
@@ -91,10 +91,10 @@
     <!-- Global strings -->
     <string name="global_edit">Редагувати</string>
     <string name="global_error">Помилка</string>
-    <string name="global_load">Звантаження</string>
+    <string name="global_load">Завантаження</string>
     <string name="global_name">Ім\'я</string>
     <string name="global_remove">Видалити</string>
-    <string name="global_restart">Перезапуск</string>
+    <string name="global_restart">Перезавантаження</string>
     <string name="global_save">Зберегти</string>
     <string name="global_unpacking">Розпакування %s</string>
     <string name="global_error_field_empty">Це поле не може бути порожнім</string>
@@ -119,16 +119,16 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3-я особа</string>
+    <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
-    <string name="control_mouse">Мишка</string>
-    <string name="control_mouseoff">Мишка: Викл</string>
-    <string name="control_mouseon">Мишка: Вкл </string>
+    <string name="control_mouse">Миша</string>
+    <string name="control_mouseoff">Миша: Вимкн.</string>
+    <string name="control_mouseon">Миша: Увімк.</string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Закрити примусово</string>
     <string name="control_viewout">Показати вивід журналу</string>
     <string name="control_adebug">Налагодження введення</string>
-    <string name="control_customkey">Надіслати користувацьку розкладку</string>
+    <string name="control_customkey">Надіслати власну розкладку</string>
     <string name="control_scaleup">Збільшити розмір</string>
     <string name="control_scaledown">Зменшити розмір</string>
     <!--
@@ -159,7 +159,7 @@
     <string name="main_switchuser">Змінити користувача</string>
     <string name="main_version">Версія:</string>
     <string name="main_nocrash">Збоїв не виявлено</string>
-    <string name="main_nolog">Нема записів.</string>
+    <string name="main_nolog">Немає записів.</string>
     <string name="main_no_news_feed">Не вдалося отримати стрічку новин!</string>
     <string name="auto_ram_subtitle">Вмикає автоматичне регулювання оперативної пам\'яті</string>
     <string name="auto_ram_title">Авто ОЗП</string>
