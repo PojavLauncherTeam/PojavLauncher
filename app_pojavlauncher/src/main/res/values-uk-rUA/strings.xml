@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрою!</string>
+    <string name="app_motd">Запустіть Minecraft: Java Edition на вашому пристрої!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -16,30 +16,30 @@
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
     <string name="login_select_account">Виберіть обліковий запис</string>
-    <string name="login_title_no_saved_account">Акаунт не знайдено !</string>
-    <string name="login_dialog_no_saved_account">У вас немає жодного збереженого аккаунта.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
+    <string name="login_title_no_saved_account">Акаунтів не знайдено!</string>
+    <string name="login_dialog_no_saved_account">У вас немає жодного збереженого акаунту.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміну розміру або видалення."</string>
+    <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміни розміру або видалення."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Цей обліковий запис буде видалено!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Встановити Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Вибрати установщик моду</string>
+    <string name="alerttitle_installmod">Вибрати інсталятор моду</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher був зупинений в результаті збою</string>
     <string name="error_no_version">Немає версії!</string>
-    <string name="error_show_more">Розвенути</string>
+    <string name="error_show_more">Розвернути</string>
     <string name="error_show_less">Звернути</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Потрібен дозвіл на читання/запис в сховище!</string>
-    <string name="toast_optifine_success">Установка пройшла успішно</string>
+    <string name="toast_optifine_success">Інсталяція пройшла успішно</string>
     <string name="toast_uninstalljre_done">Видалення Java Runtime завершено</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Новини</string>
-    <string name="mcl_tab_console">Консоль розробки</string>
+    <string name="mcl_tab_console">Консоль розробника</string>
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">З\'єднано</string>
@@ -51,29 +51,29 @@
     <string name="mcl_launch_downloading_progress">"Завантаження %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
     <string name="mcl_options">Опції</string>
-    <string name="mcl_option_modinstall">Запустити установщик модів (Forge, LabyMod, Fabric, інші...)</string>
-    <string name="mcl_option_modinstallwitharg">Запустити установщик модів (з своїми аргументи)</string>
-    <string name="mcl_option_customcontrol">Користувацьке управління</string>
+    <string name="mcl_option_modinstall">Запустити інсталятор модів (Forge, LabyMod, Fabric, інші...)</string>
+    <string name="mcl_option_modinstallwitharg">Запустити інсталятор модів (зі своїми аргументами)</string>
+    <string name="mcl_option_customcontrol">Користувацьке керування</string>
     <string name="mcl_option_settings">Налаштування</string>
     <string name="mcl_option_about">Про лаунчер</string>
     <string name="mcl_setting_title_uninstalljre">Видалити Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Необхідно перезапустити лаунчер] Це допоможе вам перевстановити Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Запуск Minecraft в плаваючому вікні</string>
-    <string name="mcl_setting_subtitle_freeform">Запустити Minecraft в плаваючому вікні. Треба Android 7.0 чи вище</string>
+    <string name="mcl_setting_title_freeform">Запуск Minecraft у плаваючому вікні</string>
+    <string name="mcl_setting_subtitle_freeform">Запустити Minecraft у плаваючому вікні. Потрібен Android 7.0 чи вище</string>
     <string name="mcl_setting_title_hide_sidebar">Приховати бічну панель</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Ностальгічні люди віддають перевагу старому інтерфейсу v1, який може їм подобатися. Дає вам більш повноекранний досвід.</string>
-    <string name="mcl_setting_title_ignore_notch">Ігнорувати виріз фронт. камери</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ігнорує виріз фронт. камери і розширює екран за неї.\nДає вам більш захоплюючий досвід.</string>
-    <string name="mcl_setting_title_resolution_scaler">Масштабування роздільності</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Може сподобатися людям, які відчувають ностальгію та віддають перевагу старому інтерфейсу v1. Дає вам більш повноекранний досвід.</string>
+    <string name="mcl_setting_title_ignore_notch">Ігнорувати виріз фронтальної камери</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ігнорує виріз фронтальної камери і розширює екран до неї.\nДає вам більш поглиблений досвід.</string>
+    <string name="mcl_setting_title_resolution_scaler">Масштабування роздільної здатності</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Дозволяє зменшити роздільну здатність гри. 100% - роздільна здатність смартфона</string>
     <string name="mcl_setting_title_longpresstrigger">Тривалість довгого натискання</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Змінити тривалість довгого натискання для ламання блоків і викидування предметів.</string>
     <string name="mcl_setting_title_backtorightmouse">Враховувати кнопку \"Назад\" як праву кнопку миші</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Деякі пристрої використовують зовнішню праву кнопку миші як кнопку \"Назад\". Якщо ви використовуєте зовнішню мишу, то потрібно це увімкнути.</string>
-    <string name="mcl_setting_title_flat_button_style">Плоский стиль кнопок</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Увімкніть це, щоб змінити стиль кнопок на плаский.</string>
+    <string name="mcl_setting_title_flat_button_style">Плаский стиль кнопок</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Увімкніть це, щоб змінити стиль кнопок керування на плаский.</string>
     <string name="mcl_setting_title_buttonscale">Масштабування кнопок керування</string>
-    <string name="mcl_setting_subtitle_buttonscale">Збільшити їх, якщо кнопки замалі.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Збільште це, якщо кнопки замалі.</string>
     <string name="mcl_setting_title_mousescale">Масштабування курсору</string>
     <string name="mcl_setting_subtitle_mousescale">Змінює розмір курсора миші.</string>
     <string name="mcl_setting_title_javaargs">Аргументи запуску JVM</string>
@@ -81,7 +81,9 @@
     <string name="mcl_setting_category_general">Загальні налаштування</string>
     <string name="mcl_setting_category_scaling">Масштабування</string>
     <string name="mcl_setting_category_renderer">Візуалізація</string>
-    <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
+    <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися у списку версій</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
     <string name="mcl_setting_veroption_oldalpha">Старі альфи</string>
@@ -90,10 +92,10 @@
     <!-- Global strings -->
     <string name="global_edit">Редагувати</string>
     <string name="global_error">Помилка</string>
-    <string name="global_load">Звантаження</string>
+    <string name="global_load">Завантаження</string>
     <string name="global_name">Ім\'я</string>
     <string name="global_remove">Видалити</string>
-    <string name="global_restart">Перезапуск</string>
+    <string name="global_restart">Перезавантаження</string>
     <string name="global_save">Зберегти</string>
     <string name="global_unpacking">Розпакування %s</string>
     <string name="global_error_field_empty">Це поле не може бути порожнім</string>
@@ -116,7 +118,7 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Застосування/гра завершилась з кодом %d</string>
+    <string name="mcn_exit_title">Програма/гра завершилась з кодом %d</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_confirm">Ви впевнені, що хочете примусово закрити його?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не встановлено!</string>
@@ -135,16 +137,16 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3-я особа</string>
+    <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
-    <string name="control_mouse">Мишка</string>
-    <string name="control_mouseoff">Мишка: Викл</string>
-    <string name="control_mouseon">Мишка: Вкл </string>
+    <string name="control_mouse">Миша</string>
+    <string name="control_mouseoff">Миша: Вимкн.</string>
+    <string name="control_mouseon">Миша: Увімк.</string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Закрити примусово</string>
     <string name="control_viewout">Показати вивід журналу</string>
-    <string name="control_adebug">Вкладка PointerCapture</string>
-    <string name="control_customkey">Надіслати користувацьку розкладку</string>
+    <string name="control_adebug">Налагодження введення</string>
+    <string name="control_customkey">Надіслати власну розкладку</string>
     <string name="control_scaleup">Збільшити розмір</string>
     <string name="control_scaledown">Зменшити розмір</string>
     <!--
@@ -159,10 +161,10 @@
     <string name="customctrl_size_width">Ширина</string>
     <string name="customctrl_size_height">Висота</string>
     <string name="customctrl_dynamicpos">Динамічне розташування</string>
-    <string name="customctrl_dynamicpos_x">Динаміка Х</string>
-    <string name="customctrl_dynamicpos_y">Динаміка Y</string>
+    <string name="customctrl_dynamicpos_x">Динаміка за віссю Х</string>
+    <string name="customctrl_dynamicpos_y">Динаміка за віссю Y</string>
     <string name="customctrl_transparency_bg">Прозорість фону</string>
-    <string name="customctrl_keycombine">Сполучення клавіш</string>
+    <string name="customctrl_keycombine">Комбінація клавіш</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
@@ -175,21 +177,21 @@
     <string name="main_switchuser">Змінити користувача</string>
     <string name="main_version">Версія:</string>
     <string name="main_nocrash">Збоїв не виявлено</string>
-    <string name="main_nolog">Нема записів.</string>
-    <string name="main_no_news_feed">Не вдалося обновити останні новини!</string>
+    <string name="main_nolog">Немає записів.</string>
+    <string name="main_no_news_feed">Не вдалося отримати стрічку новин!</string>
     <string name="auto_ram_subtitle">Вмикає автоматичне регулювання оперативної пам\'яті</string>
-    <string name="auto_ram_title">Авто ОЗУ</string>
+    <string name="auto_ram_title">Авто ОЗП</string>
     <string name="autoram_info_msg">Пам\'ять встановлено на %d МБ</string>
     <string name="mcl_setting_check_libraries">Перевірити бібліотеки після завантаження</string>
-    <string name="mcl_setting_check_libraries_subtitle">Ця опція змушує лаунчер перевіряти хеш бібліотеки, якщо вона доступна. Запобігає пошкодженню завантажень.</string>
-    <string name="dl_library_sha_fail">Бібліотека %s пошкоджена та буде перезавантаженаf</string>
-    <string name="dl_library_sha_unknown">Бібліотека %s не може бути перевірена, припустимо, що це добре</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ця опція змушує лаунчер перевіряти хеш бібліотеки, якщо він доступний. Запобігає використанню пошкоджених бібліотек.</string>
+    <string name="dl_library_sha_fail">Бібліотека %s пошкоджена та буде перезавантажена</string>
+    <string name="dl_library_sha_unknown">Бібліотека %s не може бути перевірена, припустимо, що з нею усе добре</string>
     <string name="dl_library_sha_pass">Бібліотека %s готова і придатна для використання</string>
     <string name="mcl_disable_gestures">Вимкнути жести</string>
     <string name="mcl_disable_gestures_subtitle">Вимикає жести, наприклад утримувати, щоб розбити блок та торкнутися щоб поставити.</string>
     <string name="mcl_setting_title_mousespeed">Швидкість Миші</string>
-    <string name="mcl_setting_subtitle_mousespeed">Змінює швидкість програмної мишки</string>
-    <string name="customctrl_passthru">Мишка pass-thru</string>
+    <string name="mcl_setting_subtitle_mousespeed">Змінює швидкість програмної миші</string>
+    <string name="customctrl_passthru">Миша pass-thru</string>
     <string name="customctrl_rounded">Округлий</string>
     <string name="memory_warning_msg">Поточна кількість вільної оперативної пам\'яті (%d) менша, ніж виділена оперативна пам\'ять (%d), що може призвести до крашу. Змініть розміщення якщо гра вилетить.</string>
     <string name="mcl_memory_allocation">Розподіл пам\'яті</string>
