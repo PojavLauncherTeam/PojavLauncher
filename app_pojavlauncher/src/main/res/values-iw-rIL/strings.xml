@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
     <string name="mcl_setting_category_renderer">רינדור</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
