@@ -63,10 +63,16 @@
     <string name="mcl_setting_title_hide_sidebar">Сакриј бочну траку</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Сакривање бочне траке прави лаунчер да изгледа као верзија 1.</string>
     <string name="mcl_setting_title_ignore_notch">Игнориши ноч екрана</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Игнороше ноч и продужи игру испод.\nДаје већу величину игри.</string>
+    <string name="mcl_setting_title_resolution_scaler">Резолуција</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Промени резолуцију игре. 100% је пуна
+резолуција</string>
     <string name="mcl_setting_title_longpresstrigger">Колико дуго ће се активирати након дугог притиска</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Промените време за дуготрајни притисак за уништавање блока и испуштању предмета.</string>
     <string name="mcl_setting_title_backtorightmouse">Дугме назад је леви клик</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Неки уређаји третирају леви клик од миша као дугме назад, ако користите миш, требали би ово укључити.</string>
+    <string name="mcl_setting_title_flat_button_style">Изаберите стил дугмета</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Промени стил контрола на стил флат.</string>
     <string name="mcl_setting_title_buttonscale">Величина дугма (контрола)</string>
     <string name="mcl_setting_subtitle_buttonscale">Повећајте ако су премали.</string>
     <string name="mcl_setting_title_mousescale">Величина Миша</string>
@@ -75,6 +81,7 @@
     <string name="mcl_setting_subtitle_javaargs">Будите пажљиви, ваша игра се може покварити ако незнате ово користити.</string>
     <string name="mcl_setting_category_general">Општа подешавања</string>
     <string name="mcl_setting_category_scaling">Подешавања величине</string>
+    <string name="mcl_setting_category_renderer">Рендерер</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
@@ -93,6 +100,7 @@
     <string name="global_save">Сачувај</string>
     <string name="global_unpacking">Распакивање %s</string>
     <string name="global_error_field_empty">Ово поље не може остати празно</string>
+    <string name="global_waiting">Чекај</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -134,13 +142,19 @@
     <string name="control_viewout">Лог Избацивано</string>
     <string name="control_adebug">Инпут дебаг</string>
     <string name="control_customkey">Пошаљи прилагоћени типка-код</string>
+    <string name="control_scaleup">Зумирање</string>
+    <string name="control_scaledown">Смањивање</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">уређивање %s</string>
     <string name="customctrl_remove">Уклони %s?</string>
     <string name="customctrl_keyname">Код тастера</string>
     <string name="customctrl_toggle">Тогелабле</string>
+    <string name="customctrl_size">Величина</string>
+    <string name="customctrl_size_width">Ширина</string>
+    <string name="customctrl_size_height">Висина</string>
     <string name="customctrl_dynamicpos">Динамична позиција</string>
     <string name="customctrl_dynamicpos_x">Динамични Х</string>
     <string name="customctrl_dynamicpos_y">Динамични У</string>
@@ -158,4 +172,22 @@
     <string name="main_version">Верзија:</string>
     <string name="main_nocrash">Није пронаћена грешка</string>
     <string name="main_nolog">Нема лог.</string>
+    <string name="main_no_news_feed">Нису се могле добити вести!</string>
+    <string name="auto_ram_subtitle">Укључије аутомстски подешавање RAM-а</string>
+    <string name="auto_ram_title">Аутпматски RAM</string>
+    <string name="autoram_info_msg">Меморија подешена на %d МБ</string>
+    <string name="mcl_setting_check_libraries">Провери библиотеке послије скидања</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ова опција форсира лаунчер да провери библиотекин хеш ако је доступна. Штити од покварених скидања.</string>
+    <string name="dl_library_sha_fail">Библиотека %s је оштећена и опет ће се скидати</string>
+    <string name="dl_library_sha_unknown">Библиотека %s се не може проверити, надамо се да је добро</string>
+    <string name="dl_library_sha_pass">Библиотека %s је добро и може се користити</string>
+    <string name="mcl_disable_gestures">Искључи покрете</string>
+    <string name="mcl_disable_gestures_subtitle">Искључи покрете, као држи да се уништи блок, и притисни да се стави блок.</string>
+    <string name="mcl_setting_title_mousespeed">Брзина миша</string>
+    <string name="mcl_setting_subtitle_mousespeed">Промјени брзину софтверског миша</string>
+    <string name="customctrl_passthru">Миш прпћи-кроз</string>
+    <string name="customctrl_rounded">Заобљени</string>
+    <string name="memory_warning_msg">Слободна меморија (%d) је нижа од подешене меморије (%d), то можда заустави функцију игре. Промените подешену меморију ако се то деси.</string>
+    <string name="mcl_memory_allocation">Подешена меморија</string>
+    <string name="mcl_memory_allocation_subtitle">Колико меморије може да корости Minecraft</string>
 </resources>
