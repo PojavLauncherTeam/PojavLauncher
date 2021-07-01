@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
     <string name="mcl_setting_category_renderer">רינדור</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): מייצא את OpenGL 2.1 + חלק מגירסת 3.2 (אין תמיכה ב 1.17 כרגע)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): מייצא את OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 לא הותקן!</string>
     <string name="mcn_check_fail_incompatiblearch">ארכיטקטורה %1$s לא נתמכת ב Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">מרנדר Vulkan Zink לא נתמך במכשיר זה!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">מקלדת</string>
