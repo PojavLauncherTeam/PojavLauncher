@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Визуализаторъ</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортируетъ OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): экспортируетъ OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): экспортируетъ OpenGL 2.1 + частично 3.2 (пока безъ поддержки 1.17)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортируетъ OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
     <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
     <string name="mcl_setting_veroption_snapshot">Пробныя версіи</string>
