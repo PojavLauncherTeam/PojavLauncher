@@ -98,8 +98,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         setText(properties.name);
 
         if (changePos) {
-            setTranslationX(moveX = properties.x);
-            setTranslationY(moveY = properties.y);
+            setX(properties.x);
+            setY(properties.y);
         }
 
         if (properties.specialButtonListener == null) {
@@ -172,8 +172,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         
         // Re-calculate position
         mProperties.update();
-        setTranslationX(mProperties.x);
-        setTranslationY(mProperties.y);
+        setX(mProperties.x);
+        setY(mProperties.y);
         
         setModified(true);
     }
@@ -184,8 +184,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     @Override
-    public void setTranslationX(float x) {
-        super.setTranslationX(x);
+    public void setX(float x) {
+        super.setX(x);
 
         if (!mProperties.isDynamicBtn) {
             mProperties.x = x;
@@ -195,8 +195,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     @Override
-    public void setTranslationY(float y) {
-        super.setTranslationY(y);
+    public void setY(float y) {
+        super.setY(y);
 
         if (!mProperties.isDynamicBtn) {
             mProperties.y = y;
@@ -238,27 +238,23 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         return mCanTriggerLongClick;
     }
 
-    protected float moveX, moveY;
     protected float downX, downY;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        System.out.println("IS BEING TOUCHED");
-        if (!mModifiable) {
+        if(!mModifiable){
             mCanTriggerLongClick = false;
-            if (event.getAction() == MotionEvent.ACTION_MOVE && CallbackBridge.isGrabbing() && mProperties.passThruEnabled) {
-                MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
-                if (v != null) {
-                    v.dispatchTouchEvent(event);
-                    return true;
-                }
-            }
 
-            switch (event.getActionMasked()) {
-
+            switch (event.getActionMasked()){
                 case MotionEvent.ACTION_MOVE:
+                    //Send the event to be taken as a mouse action
+                    if(mProperties.passThruEnabled && CallbackBridge.isGrabbing()){
+                        MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
+                        if (v != null) v.dispatchTouchEvent(event);
+                    }
+
                     //If out of bounds
                     if(event.getX() < getLeft() || event.getX() > getRight() ||
-                            event.getY() < getTop()  || event.getY() > getBottom()){
+                       event.getY() < getTop()  || event.getY() > getBottom()){
                         if(mProperties.isSwipeable && !isPointerOutOfBounds){
                             //Remove keys
                             if(!triggerToggle(event)) {
@@ -290,6 +286,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         sendKeyPresses(event, true);
                     }
                     break;
+
                 case MotionEvent.ACTION_UP: // 1
                 case MotionEvent.ACTION_CANCEL: // 3
                 case MotionEvent.ACTION_POINTER_UP: // 6
@@ -306,32 +303,30 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                     return false;
             }
             return true;
+        }
 
-        } else {
-            if (mGestureDetector.onTouchEvent(event)) {
+        //If the button can be modified/moved
+        if (mGestureDetector.onTouchEvent(event)) {
+            mCanTriggerLongClick = true;
+            onLongClick(this);
+        }
+
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_DOWN:
                 mCanTriggerLongClick = true;
-                onLongClick(this);
-            }
+                downX = event.getRawX() - getX();
+                downY = event.getRawY() - getY();
+                break;
 
-            switch (event.getActionMasked()) {
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_DOWN:
-                    mCanTriggerLongClick = true;
-                    downX = event.getX();
-                    downY = event.getY();
-                    break;
+            case MotionEvent.ACTION_MOVE:
+                mCanTriggerLongClick = false;
 
-                case MotionEvent.ACTION_MOVE:
-                    mCanTriggerLongClick = false;
-                    moveX += event.getX() - downX;
-                    moveY += event.getY() - downY;
-
-                    if (!mProperties.isDynamicBtn) {
-                        setTranslationX(moveX);
-                        setTranslationY(moveY);
-                    }
-                    break;
-            }
+                if (!mProperties.isDynamicBtn) {
+                    setX(event.getRawX() - downX);
+                    setY(event.getRawY() - downY);
+                }
+                break;
         }
 
         return super.onTouchEvent(event);
