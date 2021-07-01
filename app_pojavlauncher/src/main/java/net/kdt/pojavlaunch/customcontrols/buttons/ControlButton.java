@@ -16,6 +16,8 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.*;
 
+import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
+
 @SuppressLint("ViewConstructor")
 public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
 {
@@ -68,12 +70,13 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     public ControlData preProcessProperties(ControlData properties, ControlLayout layout){
+        //When a button is created, properties have to be modified to fit the screen.
         //Size
         properties.setWidth(properties.getWidth() / layout.getLayoutScale() * LauncherPreferences.PREF_BUTTONSIZE);
         properties.setHeight(properties.getHeight() / layout.getLayoutScale() * LauncherPreferences.PREF_BUTTONSIZE);
 
         //Visibility
-        properties.isHideable = properties.keycodes[0] != ControlData.SPECIALBTN_TOGGLECTRL && properties.keycodes[0] != ControlData.SPECIALBTN_VIRTUALMOUSE;
+        properties.isHideable = !properties.containsKeycode(ControlData.SPECIALBTN_TOGGLECTRL) && !properties.containsKeycode(ControlData.SPECIALBTN_VIRTUALMOUSE);
 
         //Position
         if (!properties.isDynamicBtn) {
@@ -139,7 +142,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             CallbackBridge.holdingAlt = isDown;
             MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT,0,isDown);
             System.out.println("holdingAlt="+CallbackBridge.holdingAlt);
-        } if (mProperties.keycodes[0] == LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK) {
+        } if (mProperties.containsKeycode(LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK)) {
             CallbackBridge.holdingCapslock = isDown;
             //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK,0,isDown);
             System.out.println("holdingCapslock="+CallbackBridge.holdingCapslock);
@@ -147,7 +150,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             CallbackBridge.holdingCtrl = isDown;
             MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL,0,isDown);
             System.out.println("holdingCtrl="+CallbackBridge.holdingCtrl);
-        } if (mProperties.keycodes[0] == LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK) {
+        } if (mProperties.containsKeycode(LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK)) {
             CallbackBridge.holdingNumlock = isDown;
             //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK,0,isDown);
             System.out.println("holdingNumlock="+CallbackBridge.holdingNumlock);
@@ -358,7 +361,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     public void sendKeyPresses(MotionEvent event, boolean isDown){
         for(int keycode : mProperties.keycodes){
-            if(keycode >= 0){
+            if(keycode >= GLFW_KEY_UNKNOWN){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
             }else {
                 super.onTouchEvent(event);
