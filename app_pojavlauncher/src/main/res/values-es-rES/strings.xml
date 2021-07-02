@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">¡Juega Minecraft: Java en tu celular!</string>
+    <string name="app_motd">¡Juega Minecraft: Java Edition en tu celular!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -14,6 +14,7 @@
     <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
     <string name="login_error_short_username">El nombre de usuario debe tener al menos 3 letras o mas</string>
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
+    <string name="login_error_offline_password">Las cuentas sin conexión no pueden tener contraseña!</string>
     <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
     <string name="login_title_no_saved_account">No se encontraron cuentas!</string>
@@ -81,6 +82,7 @@
     <string name="mcl_setting_category_general">Opciones generales</string>
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (No, la versión 1.17 sigue sin funcionar todavía)</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzadas</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -104,8 +106,9 @@
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_lwjgl">¡LWJGL3 no ha sido instalado!</string>
     <string name="mcn_check_fail_incompatiblearch">La arquitectura %1$s es incompatible con Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">El renderizador de Vulkan no es compatible con este dispositivo!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
+    <string name="control_toggle">Interfaz</string>
     <string name="control_keyboard">Teclado</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
