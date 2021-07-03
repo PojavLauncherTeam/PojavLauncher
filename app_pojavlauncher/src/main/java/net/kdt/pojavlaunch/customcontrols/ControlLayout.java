@@ -234,9 +234,8 @@ public class ControlLayout extends FrameLayout
 	}
 
 	ControlButton lastControlButton = null;
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		System.out.println("ON_TOUCH_LAYOUT");
+	//While this is called onTouch, this should only be called from a ControlButton.
+	public boolean onTouch(MotionEvent ev) {
 		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
 			if(lastControlButton != null) lastControlButton.onTouchEvent(ev);
 			lastControlButton = null;
@@ -245,11 +244,13 @@ public class ControlLayout extends FrameLayout
 
 		if(ev.getActionMasked() != MotionEvent.ACTION_MOVE) return false;
 		ArrayList<ControlButton> children = getButtonChildren();
-
+		/*
 		Log.d("getX LAYOUT_CONTROL", String.valueOf(ev.getX()));
 		Log.d("getY LAYOUT_CONTROL", String.valueOf(ev.getY()));
 		Log.d("getRawX LAYOUT_CONTROL", String.valueOf(ev.getRawX()));
 		Log.d("getRawY LAYOUT_CONTROL", String.valueOf(ev.getRawY()));
+		 */
+		//Optimization pass to avoid looking at all children again
 		if(lastControlButton != null){
 			if(	ev.getRawX() > lastControlButton.getX() && ev.getRawX() < lastControlButton.getX() + lastControlButton.getWidth() &&
 				ev.getRawY() > lastControlButton.getY() && ev.getRawY() < lastControlButton.getY() + lastControlButton.getHeight()){
@@ -265,7 +266,7 @@ public class ControlLayout extends FrameLayout
 			Log.d("BOTTOM: LAYOUT_CONTROL", String.valueOf(button.getBottom()));
 
 			 */
-
+			if(!button.getProperties().isSwipeable) continue;
 			if(	ev.getRawX() > button.getX() && ev.getRawX() < button.getX() + button.getWidth() &&
 				ev.getRawY() > button.getY() && ev.getRawY() < button.getY() + button.getHeight()){
 				System.out.println("FOUND ONE !");
@@ -283,8 +284,5 @@ public class ControlLayout extends FrameLayout
 			}
 		}
 		return false;
-		//We actually could go through all our children here.
-		//This isn't the most performance friendly stuff though.
-		//return true;
 	}
 }
