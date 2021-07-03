@@ -45,7 +45,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         setProperties(preProcessProperties(properties, layout));
         setModified(false);
 
-        mHandleView = new SelectionEndHandleView(this);
+
 
 
         //For the toggle layer
@@ -212,13 +212,15 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (isToggled) {
+        if (isToggled)
             canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mProperties.cornerRadius, mProperties.cornerRadius, mRectPaint);
-        }
     }
 
     @Override
     public boolean onLongClick(View v) {
+
+        if(mHandleView == null) mHandleView = new SelectionEndHandleView(this);
+
         if (mCanTriggerLongClick && mModifiable) {
             if (mHandleView.isShowing()) {
                 mHandleView.hide();
