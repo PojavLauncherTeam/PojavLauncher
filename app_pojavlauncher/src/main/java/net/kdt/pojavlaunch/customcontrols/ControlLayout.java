@@ -32,7 +32,8 @@ public class ControlLayout extends FrameLayout
 
 	public void hideAllHandleViews() {
 		for(ControlButton button : getButtonChildren()){
-			button.getHandleView().hide();
+			HandleView hv = button.getHandleView();
+			if(hv != null) hv.hide();
 		}
 	}
 
