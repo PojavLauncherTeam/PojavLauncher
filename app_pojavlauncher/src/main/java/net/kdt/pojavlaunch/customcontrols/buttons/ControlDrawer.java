@@ -27,26 +27,9 @@ public class ControlDrawer extends ControlButton {
     public ControlDrawer(ControlLayout layout, ControlDrawerData drawerData) {
         super(layout, drawerData.properties);
 
-        buttons = new ArrayList<>(/*drawerData.buttonProperties.size()*/);
+        buttons = new ArrayList<>(drawerData.buttonProperties.size());
         mLayout = layout;
         this.drawerData = drawerData;
-
-
-        //Filter unwanted values before instantiating the button
-        for(int i=0; i < drawerData.buttonProperties.size(); ++i){
-            drawerData.buttonProperties.set(i, filterProperties(drawerData.buttonProperties.get(i)));
-
-            addButton(drawerData.buttonProperties.get(i));
-        }
-
-    }
-
-    private ControlData filterProperties(ControlData properties){
-        properties.isDynamicBtn = false;
-        properties.setWidth(drawerData.properties.getWidth());
-        properties.setHeight(drawerData.properties.getHeight());
-
-        return properties;
     }
 
 
