@@ -209,12 +209,6 @@ public class JREUtils
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
-        
-        //gl4es testing stuff
-	envMap.put("LIBGL_BLITFULLSCREEN", "1");
-	envMap.put("LIBGL_BLITFB0", "1");
-	envMap.put("LIBGL_FB", "3");
-        envMap.put("LIBGL_NOTEXMAT", "1");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
