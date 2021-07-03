@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">常規設定</string>
     <string name="mcl_setting_category_scaling">縮放設定</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (1.17 暫不支持)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
+    <string name="mcn_check_fail_vulkan_support">該設備不支持 Vulkan Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">鍵盤</string>
