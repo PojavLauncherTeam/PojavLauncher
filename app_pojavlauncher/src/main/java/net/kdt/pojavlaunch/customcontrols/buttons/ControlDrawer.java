@@ -33,7 +33,7 @@ public class ControlDrawer extends ControlButton {
 
 
         //Filter unwanted values before instantiating the button
-        for(int i=0; i < buttons.size(); ++i){
+        for(int i=0; i < drawerData.buttonProperties.size(); ++i){
             drawerData.buttonProperties.set(i, filterProperties(drawerData.buttonProperties.get(i)));
 
             addButton(drawerData.buttonProperties.get(i));
