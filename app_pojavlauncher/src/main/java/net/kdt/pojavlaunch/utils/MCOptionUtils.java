@@ -1,11 +1,12 @@
 package net.kdt.pojavlaunch.utils;
 import java.io.*;
+import java.util.*;
 import android.util.*;
 import net.kdt.pojavlaunch.*;
 
 public class MCOptionUtils
 {
-    private static final ArrayMap<String,String> parameterMap = new ArrayMap<>();
+    private static final HashMap<String,String> parameterMap = new HashMap<>();
     
     public static void load() {
         parameterMap.clear();
