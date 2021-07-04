@@ -375,10 +375,9 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             }
         });
     }
-
     public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
-        final ThreadPoolExecutor executor = new ThreadPoolExecutor(50, 50, 500, TimeUnit.MILLISECONDS, workQueue);
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 500, TimeUnit.MILLISECONDS, workQueue);
         mActivity.mIsAssetsProcessing = true;
         //File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
         //if (!hasDownloadedFile.exists()) {
@@ -394,11 +393,13 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 assetsSizeBytes+=asset.size;
                 String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
                 File outFile = assets.map_to_resources?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
-                boolean isSHAFailure = false;
-                if(outFile.exists() && LauncherPreferences.PREF_CHECK_LIBRARY_SHA?(isSHAFailure = Tools.compareSHA1(outFile,asset.hash)):true) {
+                boolean skip = outFile.exists();// skip if the file exists
+                if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  //if sha checking is enabled
+                    if(skip) skip = Tools.compareSHA1(outFile, asset.hash); //check hash
+                if(skip) {
                     downloadedSize.addAndGet(asset.size);
                 }else{
-                    if(isSHAFailure)publishProgress("0",mActivity.getString(R.string.dl_library_sha_fail,assetKey));
+                    if(outFile.exists()) publishProgress("0",mActivity.getString(R.string.dl_library_sha_fail,assetKey));
                     executor.execute(()->{
                         try {
                             if (!assets.map_to_resources) {
@@ -417,12 +418,14 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             executor.shutdown();
             try {
                 int prevDLSize=0;
+                System.out.println("Queue size: "+workQueue.size());
                 while ((!executor.awaitTermination(250, TimeUnit.MILLISECONDS))&&(!localInterrupt.get())&&mActivity.mIsAssetsProcessing) {
                     int DLSize = downloadedSize.get();
                     publishProgress(Integer.toString(DLSize-prevDLSize),null,"");
                     publishDownloadProgress("assets", DLSize, assetsSizeBytes);
                     prevDLSize = downloadedSize.get();
                 }
+
                 executor.shutdownNow();
                 while (!executor.awaitTermination(250, TimeUnit.MILLISECONDS)) {}
                 System.out.println("Fully shut down!");
