@@ -7,7 +7,7 @@ import net.kdt.pojavlaunch.*;
 
 public class MCOptionUtils
 {
-    private static volatile final List<String> mLineList = Collections.synchronizedList(new ArrayList<>());
+    private static final List<String> mLineList = Collections.synchronizedList(new ArrayList<>());
     
     public static void load() {
         mLineList.clear();
