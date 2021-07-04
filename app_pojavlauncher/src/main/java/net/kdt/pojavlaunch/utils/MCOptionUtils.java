@@ -1,22 +1,25 @@
 package net.kdt.pojavlaunch.utils;
-
-import java.util.*;
 import java.io.*;
 import android.util.*;
 import net.kdt.pojavlaunch.*;
 
 public class MCOptionUtils
 {
-    private static final List<String> mLineList = Collections.synchronizedList(new ArrayList<>());
+    private static final ArrayMap<String,String> parameterMap = new ArrayMap<>();
     
     public static void load() {
-        mLineList.clear();
-        
+        parameterMap.clear();
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Tools.DIR_GAME_NEW + "/options.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
-                mLineList.add(line);
+                int firstColonIndex = line.indexOf(':');
+                if(firstColonIndex < 0) {
+                    Log.w(Tools.APP_NAME, "No colon on line \""+line+"\", skipping");
+                    continue;
+                }
+                parameterMap.put(line.substring(0,firstColonIndex), line.substring(firstColonIndex+1));
             }
             reader.close();
         } catch (IOException e) {
@@ -25,34 +28,20 @@ public class MCOptionUtils
     }
     
     public static void set(String key, String value) {
-        for (int i = 0; i < mLineList.size(); i++) {
-            String line = mLineList.get(i);
-            if (line.startsWith(key + ":")) {
-                mLineList.set(i, key + ":" + value);
-                return;
-            }
-        }
-        
-        mLineList.add(key + ":" + value);
+        parameterMap.put(key,value);
     }
 
     public static String get(String key){
-        if(mLineList.isEmpty()) load();
-        String searchedLine=null;
-        for(String line : mLineList){
-            if(line.startsWith(key + ":")) {
-                searchedLine = line;
-                break;
-            }
-        }
-        if(searchedLine != null) return searchedLine.substring(searchedLine.indexOf(':') + 1);
-        else return null;
+        return parameterMap.get(key);
     }
     
     public static void save() {
         StringBuilder result = new StringBuilder();
-        for(String line : mLineList)
-            result.append(line).append('\n');
+        for(String key : parameterMap.keySet())
+            result.append(key)
+                    .append(':')
+                    .append(parameterMap.get(key))
+                    .append('\n');
         
         try {
             Tools.write(Tools.DIR_GAME_NEW + "/options.txt", result.toString());
