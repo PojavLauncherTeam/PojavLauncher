@@ -36,7 +36,7 @@ public class ControlSubButton extends ControlButton {
 
     @Override
     public void setVisible(boolean isVisible) {
-        setVisibility(isVisible ? (parentDrawer.areButtonsVisible ? VISIBLE : GONE) : View.GONE);
+        setVisibility(isVisible ? (parentDrawer.areButtonsVisible ? VISIBLE : GONE) : (!mProperties.isHideable && parentDrawer.getVisibility() == GONE) ? VISIBLE : View.GONE);
     }
 
     @Override
