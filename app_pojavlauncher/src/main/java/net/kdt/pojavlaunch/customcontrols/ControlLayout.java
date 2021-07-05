@@ -6,12 +6,14 @@ import android.widget.*;
 import com.google.gson.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
+import net.kdt.pojavlaunch.customcontrols.handleview.HandleView;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
 
@@ -52,6 +54,7 @@ public class ControlLayout extends FrameLayout
 		}
 
         System.gc();
+		mapTable.clear();
 
         // Cleanup buttons only when input layout is null
         if (controlLayout == null) return;
@@ -68,8 +71,9 @@ public class ControlLayout extends FrameLayout
 			ControlDrawer drawer = addDrawerView(drawerData);
 			if(mModifiable) drawer.areButtonsVisible = true;
 
+
 			//CONTROL SUB BUTTON
-			for (ControlData subButton : drawerData.buttonProperties){
+			for (ControlData subButton : drawerData.buttonProperties) {
 				addSubView(drawer, subButton);
 			}
 		}
@@ -233,23 +237,20 @@ public class ControlLayout extends FrameLayout
 		return children;
 	}
 
-	ControlButton lastControlButton = null;
+	HashMap<View, ControlButton> mapTable = new HashMap<>();
 	//While this is called onTouch, this should only be called from a ControlButton.
-	public boolean onTouch(MotionEvent ev) {
+	public boolean onTouch(View v, MotionEvent ev) {
+		ControlButton lastControlButton = mapTable.get(v);
+
+		//Check if the action is cancelling, reset the lastControl button associated to the view
 		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
 			if(lastControlButton != null) lastControlButton.onTouchEvent(ev);
-			lastControlButton = null;
+			mapTable.put(v, null);
 			return true;
 		}
 
 		if(ev.getActionMasked() != MotionEvent.ACTION_MOVE) return false;
-		ArrayList<ControlButton> children = getButtonChildren();
-		/*
-		Log.d("getX LAYOUT_CONTROL", String.valueOf(ev.getX()));
-		Log.d("getY LAYOUT_CONTROL", String.valueOf(ev.getY()));
-		Log.d("getRawX LAYOUT_CONTROL", String.valueOf(ev.getRawX()));
-		Log.d("getRawY LAYOUT_CONTROL", String.valueOf(ev.getRawY()));
-		 */
+
 		//Optimization pass to avoid looking at all children again
 		if(lastControlButton != null){
 			if(	ev.getRawX() > lastControlButton.getX() && ev.getRawX() < lastControlButton.getX() + lastControlButton.getWidth() &&
@@ -258,19 +259,17 @@ public class ControlLayout extends FrameLayout
 			}
 		}
 
-		for(ControlButton button : children){
-			/*
-			Log.d("Left: LAYOUT_CONTROL", String.valueOf(button.getLeft()));
-			Log.d("TOP: LAYOUT_CONTROL", String.valueOf(button.getTop()));
-			Log.d("RIGHT: LAYOUT_CONTROL", String.valueOf(button.getRight()));
-			Log.d("BOTTOM: LAYOUT_CONTROL", String.valueOf(button.getBottom()));
 
-			 */
+
+
+		//Look for another SWIPEABLE button
+		for(ControlButton button : getButtonChildren()){
 			if(!button.getProperties().isSwipeable) continue;
+
 			if(	ev.getRawX() > button.getX() && ev.getRawX() < button.getX() + button.getWidth() &&
 				ev.getRawY() > button.getY() && ev.getRawY() < button.getY() + button.getHeight()){
-				System.out.println("FOUND ONE !");
-				//Button hovered;
+
+				//Release the last key, press the new one
 				if(!button.equals(lastControlButton)){
 					ev.setAction(MotionEvent.ACTION_POINTER_UP);
 					if (lastControlButton != null) lastControlButton.onTouchEvent(ev);
@@ -278,7 +277,7 @@ public class ControlLayout extends FrameLayout
 					ev.setAction(MotionEvent.ACTION_POINTER_DOWN);
 					button.onTouchEvent(ev);
 
-					lastControlButton = button;
+					mapTable.put(v, button);
 				}
 				return true;
 			}

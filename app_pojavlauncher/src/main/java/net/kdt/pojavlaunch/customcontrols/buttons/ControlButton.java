@@ -260,13 +260,13 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                             }
                         }
                         isPointerOutOfBounds = true;
-                        ((ControlLayout) getParent()).onTouch(event);
+                        ((ControlLayout) getParent()).onTouch(this, event);
                         break;
                     }
 
                     //Else if we now are in bounds
                     if(isPointerOutOfBounds) {
-                        ((ControlLayout) getParent()).onTouch(event);
+                        ((ControlLayout) getParent()).onTouch(this, event);
                         //RE-press the button
                         if(mProperties.isSwipeable && !mProperties.isToggle){
                             setHolding(true);
@@ -287,7 +287,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 case MotionEvent.ACTION_UP: // 1
                 case MotionEvent.ACTION_CANCEL: // 3
                 case MotionEvent.ACTION_POINTER_UP: // 6
-                    if(isPointerOutOfBounds) ((ControlLayout) getParent()).onTouch(event);
+                    if(isPointerOutOfBounds) ((ControlLayout) getParent()).onTouch(this, event);
                     isPointerOutOfBounds = false;
 
                     if(!triggerToggle(event)) {
