@@ -218,10 +218,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     @Override
     public boolean onLongClick(View v) {
-
-        if(mHandleView == null) mHandleView = new SelectionEndHandleView(this);
-
         if (mCanTriggerLongClick && mModifiable) {
+            //Instantiate on need only
+            if(mHandleView == null) mHandleView = new SelectionEndHandleView(this);
+
             if (mHandleView.isShowing()) {
                 mHandleView.hide();
             } else {
