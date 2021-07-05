@@ -33,6 +33,7 @@ public class EditControlButtonPopup {
 
     protected CheckBox checkToggle;
     protected CheckBox checkPassThrough;
+    protected CheckBox checkBoxSwipeable;
     protected CheckBox checkDynamicPosition;
     protected CheckBox checkHoldAlt;
     protected CheckBox checkHoldCtrl;
@@ -96,6 +97,7 @@ public class EditControlButtonPopup {
 
         checkToggle = v.findViewById(R.id.checkboxToggle);
         checkPassThrough = v.findViewById(R.id.checkboxPassThrough);
+        checkBoxSwipeable = v.findViewById(R.id.checkboxSwipeable);
 
         editWidth = v.findViewById(R.id.editSize_editTextX);
         editHeight = v.findViewById(R.id.editSize_editTextY);
@@ -201,6 +203,7 @@ public class EditControlButtonPopup {
 
         checkToggle.setChecked(properties.isToggle);
         checkPassThrough.setChecked(properties.passThruEnabled);
+        checkBoxSwipeable.setChecked(properties.isSwipeable);
 
         editWidth.setText(Float.toString(properties.getWidth()));
         editHeight.setText(Float.toString(properties.getHeight()));
@@ -283,6 +286,7 @@ public class EditControlButtonPopup {
 
         properties.isToggle = checkToggle.isChecked();
         properties.passThruEnabled = checkPassThrough.isChecked();
+        properties.isSwipeable = checkBoxSwipeable.isChecked();
 
         properties.setWidth(Float.parseFloat(editWidth.getText().toString()));
         properties.setHeight(Float.parseFloat(editHeight.getText().toString()));

@@ -218,6 +218,7 @@
             app:layout_constraintTop_toBottomOf="@id/editOrientation_textView"
             />
 
+        <!-- MOUSE PASS THROUGH SECTION -->
         <CheckBox
             android:id="@+id/checkboxPassThrough"
             android:layout_width="match_parent"
@@ -226,6 +227,17 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/checkboxToggle"
+            />
+
+        <!-- SWIPEABLE BUTTON SECTION -->
+        <CheckBox
+            android:id="@+id/checkboxSwipeable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customctrl_swipeable"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkboxPassThrough"
             />
 
         <!-- BACKGROUND COLOR SECTION -->
@@ -238,7 +250,7 @@
             android:paddingEnd="5dp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkboxPassThrough"
+            app:layout_constraintTop_toBottomOf="@id/checkboxSwipeable"
             />
 
         <ImageButton
