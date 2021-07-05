@@ -259,8 +259,10 @@ public class ControlLayout extends FrameLayout
 			}
 		}
 
-
-
+		//Release the last key
+		ev.setAction(MotionEvent.ACTION_POINTER_UP);
+		if (lastControlButton != null) lastControlButton.onTouchEvent(ev);
+		mapTable.put(v, null);
 
 		//Look for another SWIPEABLE button
 		for(ControlButton button : getButtonChildren()){
@@ -269,11 +271,8 @@ public class ControlLayout extends FrameLayout
 			if(	ev.getRawX() > button.getX() && ev.getRawX() < button.getX() + button.getWidth() &&
 				ev.getRawY() > button.getY() && ev.getRawY() < button.getY() + button.getHeight()){
 
-				//Release the last key, press the new one
+				//Press the new key
 				if(!button.equals(lastControlButton)){
-					ev.setAction(MotionEvent.ACTION_POINTER_UP);
-					if (lastControlButton != null) lastControlButton.onTouchEvent(ev);
-
 					ev.setAction(MotionEvent.ACTION_POINTER_DOWN);
 					button.onTouchEvent(ev);
 
