@@ -36,16 +36,12 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
         setPadding(4, 4, 4, 4);
-        
-        mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
 
         setOnLongClickListener(this);
-        //When a button is created, the width/height has yet to be processed to fit the scaling.
 
+        //When a button is created, the width/height has yet to be processed to fit the scaling.
         setProperties(preProcessProperties(properties, layout));
         setModified(false);
-
-
 
 
         //For the toggle layer
@@ -168,7 +164,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         mProperties.setWidth(params.width);
         mProperties.setHeight(params.height);
         setBackground();
-
         
         // Re-calculate position
         mProperties.update();
@@ -307,7 +302,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             return true;
         }
 
-        //If the button can be modified/moved
+        /* If the button can be modified/moved */
+        //Instantiate the gesture detector only when needed
+        if(mGestureDetector == null) mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
+
         if (mGestureDetector.onTouchEvent(event)) {
             mCanTriggerLongClick = true;
             onLongClick(this);
