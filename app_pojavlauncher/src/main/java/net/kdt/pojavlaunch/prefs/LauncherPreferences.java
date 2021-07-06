@@ -53,12 +53,12 @@ public class LauncherPreferences
         int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
         int doubleAndroidHeap = androidHeap * 2;
         PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs", "");
+/*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
-            String DEFAULT_JAVA_ARGS =
+            String DEFAULT_JAVA_ARGS = "";
                 "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
                 // (32bit) More than 800mb may make JVM not allocateable and crash
-                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m";
-/* "m " +
+                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m" +
                 "-XX:+UseG1GC " +
                 "-XX:+ParallelRefProcEnabled " +
                 "-XX:MaxGCPauseMillis=200 " +
@@ -76,11 +76,10 @@ public class LauncherPreferences
 		"-XX:SurvivorRatio=32 " +
 		"-XX:+PerfDisableSharedMem " +
                 "-XX:MaxTenuringThreshold=1";
-*/
-            
             PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
             DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
         }
+*/
 
         if (PREF_RENDERER.equals("2") || PREF_RENDERER.equals("3")) {
             PREF_RENDERER = "opengles" + PREF_RENDERER;
