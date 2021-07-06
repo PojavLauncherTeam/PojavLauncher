@@ -607,7 +607,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     boolean isKeyboard(KeyEvent evt) {
         System.out.println("Event:" +evt);
-        return AndroidLWJGLKeycode.androidToLwjglMap.containsKey(evt.getKeyCode());
+        return EfficientAndroidLWJGLKeycode.containsKey(evt.getKeyCode());
     }
 
 
@@ -625,7 +625,7 @@ public class BaseMainActivity extends LoggableActivity {
         }
 
         if(isKeyboard(event)) {
-            AndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
+            EfficientAndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
             return true;
         }
 
@@ -734,7 +734,7 @@ public class BaseMainActivity extends LoggableActivity {
     private void dialogSendCustomKey() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(R.string.control_customkey);
-        dialog.setItems(AndroidLWJGLKeycode.generateKeyName(), (dInterface, position) -> AndroidLWJGLKeycode.execKeyIndex(BaseMainActivity.this, position));
+        dialog.setItems(EfficientAndroidLWJGLKeycode.generateKeyName(), (dInterface, position) -> EfficientAndroidLWJGLKeycode.execKeyIndex(BaseMainActivity.this, position));
         dialog.show();
     }
 
@@ -878,8 +878,8 @@ public class BaseMainActivity extends LoggableActivity {
         if(doesObjectContainField(KeyEvent.class,"KEYCODE_" + Character.toUpperCase(keyChar))) {
             try {
                 int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
-                sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
-                sendKeyPress(AndroidLWJGLKeycode.androidToLwjglMap.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
+                sendKeyPress(EfficientAndroidLWJGLKeycode.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
+                sendKeyPress(EfficientAndroidLWJGLKeycode.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
             } catch (IllegalAccessException | NoSuchFieldException e) {
 
             }
