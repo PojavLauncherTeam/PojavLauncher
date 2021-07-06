@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import net.kdt.pojavlaunch.AndroidLWJGLKeycode;
+import net.kdt.pojavlaunch.EfficientAndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
@@ -163,7 +163,7 @@ public class EditControlButtonPopup {
             specialArr[i] = "SPECIAL_" + oldSpecialArr[specialArr.length - i - 1];
         }
         adapter.addAll(specialArr);
-        adapter.addAll(AndroidLWJGLKeycode.generateKeyName());
+        adapter.addAll(EfficientAndroidLWJGLKeycode.generateKeyName());
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 
         for (Spinner spinner : spinnersKeycode) {
@@ -173,7 +173,6 @@ public class EditControlButtonPopup {
         //Set color imageButton behavior
         buttonBackgroundColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit background color", true, ((ColorDrawable) buttonBackgroundColor.getBackground()).getColor(), buttonBackgroundColor));
         buttonStrokeColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit stroke color", false, ((ColorDrawable) buttonStrokeColor.getBackground()).getColor(), buttonStrokeColor));
-
 
 
         //Set dialog buttons behavior
@@ -235,7 +234,7 @@ public class EditControlButtonPopup {
             if (properties.keycodes[i] < 0) {
                 spinnersKeycode[i].setSelection(properties.keycodes[i] + specialArr.length);
             } else {
-                spinnersKeycode[i].setSelection(AndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycodes[i]) + specialArr.length);
+                spinnersKeycode[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycodes[i]) + specialArr.length);
             }
         }
     }
@@ -273,7 +272,7 @@ public class EditControlButtonPopup {
             if (spinnersKeycode[i].getSelectedItemPosition() < specialArr.length) {
                 properties.keycodes[i] = spinnersKeycode[i].getSelectedItemPosition() - specialArr.length;
             } else {
-                properties.keycodes[i] = AndroidLWJGLKeycode.getKeyByIndex(spinnersKeycode[i].getSelectedItemPosition() - specialArr.length);
+                properties.keycodes[i] = EfficientAndroidLWJGLKeycode.getKeyByIndex(spinnersKeycode[i].getSelectedItemPosition() - specialArr.length);
             }
         }
 
