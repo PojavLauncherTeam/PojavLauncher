@@ -416,8 +416,8 @@ public class BaseMainActivity extends LoggableActivity {
                                     if(pointerIndex == -1){
                                         currentPointerID = e.getPointerId(0);
                                     }else{
-                                        mouse_x += (e.getX(currentPointerID) - prevX) * sensitivityFactor;
-                                        mouse_y += (e.getY(currentPointerID) - prevY) * sensitivityFactor;
+                                        mouse_x += (e.getX(pointerIndex) - prevX) * sensitivityFactor;
+                                        mouse_y += (e.getY(pointerIndex) - prevY) * sensitivityFactor;
                                     }
                                     prevX = e.getX();
                                     prevY = e.getY();
