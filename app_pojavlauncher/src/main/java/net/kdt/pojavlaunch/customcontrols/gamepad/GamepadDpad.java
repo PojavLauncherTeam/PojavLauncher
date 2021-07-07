@@ -5,20 +5,38 @@ import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import java.lang.reflect.Field;
+
 /*
     Code from the android documentation
  */
 
 public class GamepadDpad {
-    final static int UP       = 0;
-    final static int LEFT     = 1;
-    final static int RIGHT    = 2;
-    final static int DOWN     = 3;
-    final static int CENTER   = 4;
+    final static int UP       = 999;
+    final static int LEFT     = 9999;
+    final static int RIGHT    = 99999;
+    final static int DOWN     = 999999;
+    final static int CENTER   = 9999999;
 
     int pressedDirection = -1;
+    Gamepad parentPad;
+    KeyEvent dummyevent = new KeyEvent(KeyEvent.ACTION_DOWN, CENTER);
+    Field eventCodeField;
 
-    public int getDirectionPressed(InputEvent event) {
+    {
+        try {
+            eventCodeField = dummyevent.getClass().getDeclaredField("mKeyCode");
+            eventCodeField.setAccessible(true);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public GamepadDpad(Gamepad parentPad){
+        this.parentPad = parentPad;
+    }
+
+    public int update(InputEvent event) {
         if (!isDpadEvent(event)) {
             return -1;
         }
@@ -34,16 +52,18 @@ public class GamepadDpad {
             // Check if the AXIS_HAT_X value is -1 or 1, and set the D-pad
             // LEFT and RIGHT direction accordingly.
             if (Float.compare(xaxis, -1.0f) == 0) {
-                pressedDirection = GamepadDpad.LEFT;
+                pressedDirection = LEFT;
             } else if (Float.compare(xaxis, 1.0f) == 0) {
-                pressedDirection = GamepadDpad.RIGHT;
+                pressedDirection = RIGHT;
             }
             // Check if the AXIS_HAT_Y value is -1 or 1, and set the D-pad
             // UP and DOWN direction accordingly.
             else if (Float.compare(yaxis, -1.0f) == 0) {
-                pressedDirection =  GamepadDpad.UP;
+                pressedDirection =  UP;
             } else if (Float.compare(yaxis, 1.0f) == 0) {
-                pressedDirection =  GamepadDpad.DOWN;
+                pressedDirection =  DOWN;
+            }else {
+                pressedDirection = CENTER;
             }
         }
 
@@ -53,17 +73,24 @@ public class GamepadDpad {
             // Use the key code to find the D-pad direction.
             KeyEvent keyEvent = (KeyEvent) event;
             if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT) {
-                pressedDirection = GamepadDpad.LEFT;
+                pressedDirection = LEFT;
             } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                pressedDirection = GamepadDpad.RIGHT;
+                pressedDirection = RIGHT;
             } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP) {
-                pressedDirection = GamepadDpad.UP;
+                pressedDirection = UP;
             } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN) {
-                pressedDirection = GamepadDpad.DOWN;
+                pressedDirection = DOWN;
             } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER) {
-                pressedDirection = GamepadDpad.CENTER;
+                pressedDirection = CENTER;
             }
         }
+
+        try {
+            eventCodeField.setInt(dummyevent, pressedDirection);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        parentPad.sendButton(dummyevent);
         return pressedDirection;
     }
 

@@ -1,9 +1,6 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.view.InputDevice;
-import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,7 +29,7 @@ public class Gamepad {
     private BaseMainActivity gameActivity;
     private ImageView pointerView;
 
-    private GamepadDpad gamepadDpad = new GamepadDpad();
+    private GamepadDpad gamepadDpad = new GamepadDpad(this);
 
     private final GamepadJoystick leftJoystick;
     private int currentJoystickDirection = DIRECTION_NONE;
@@ -48,9 +45,9 @@ public class Gamepad {
     private double mouseAngle;
     private double mouseSensitivity = 19;
 
-    private final GamepadMapping gameMap = new GamepadMapping();
-    private final GamepadMapping menuMap = new GamepadMapping();
-    private GamepadMapping currentMap = gameMap;
+    private final GamepadMap gameMap = new GamepadMap();
+    private final GamepadMap menuMap = new GamepadMap();
+    private GamepadMap currentMap = gameMap;
 
     private boolean lastGrabbingState = true;
 
@@ -174,13 +171,13 @@ public class Gamepad {
         gameMap.DIRECTION_RIGHT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_D};
         gameMap.DIRECTION_LEFT = new int[]{LWJGLGLFWKeycode.GLFW_KEY_A};
 
-        gameMap.DPAD_UP.keycodes = new int[]{};
+        gameMap.DPAD_UP.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_W};
         gameMap.DPAD_DOWN.keycodes = new int[]{};
         gameMap.DPAD_RIGHT.keycodes = new int[]{};
         gameMap.DPAD_LEFT.keycodes = new int[]{};
 
-        gameMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
-        gameMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
+        gameMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMap.MOUSE_SCROLL_UP};
+        gameMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMap.MOUSE_SCROLL_DOWN};
 
         gameMap.TRIGGER_LEFT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT};
         gameMap.TRIGGER_RIGHT.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT};
@@ -199,8 +196,8 @@ public class Gamepad {
         menuMap.BUTTON_X.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT};
         menuMap.BUTTON_Y.keycodes = new int[]{LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT, LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT}; //Oops, doesn't work since left shift isn't properly applied.
 
-        menuMap.DIRECTION_FORWARD = new int[]{GamepadMapping.MOUSE_SCROLL_UP, GamepadMapping.MOUSE_SCROLL_UP, GamepadMapping.MOUSE_SCROLL_UP,GamepadMapping.MOUSE_SCROLL_UP,GamepadMapping.MOUSE_SCROLL_UP};
-        menuMap.DIRECTION_BACKWARD = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN, GamepadMapping.MOUSE_SCROLL_DOWN, GamepadMapping.MOUSE_SCROLL_DOWN,GamepadMapping.MOUSE_SCROLL_DOWN,GamepadMapping.MOUSE_SCROLL_DOWN};
+        menuMap.DIRECTION_FORWARD = new int[]{GamepadMap.MOUSE_SCROLL_UP, GamepadMap.MOUSE_SCROLL_UP, GamepadMap.MOUSE_SCROLL_UP, GamepadMap.MOUSE_SCROLL_UP, GamepadMap.MOUSE_SCROLL_UP};
+        menuMap.DIRECTION_BACKWARD = new int[]{GamepadMap.MOUSE_SCROLL_DOWN, GamepadMap.MOUSE_SCROLL_DOWN, GamepadMap.MOUSE_SCROLL_DOWN, GamepadMap.MOUSE_SCROLL_DOWN, GamepadMap.MOUSE_SCROLL_DOWN};
         menuMap.DIRECTION_RIGHT = new int[]{};
         menuMap.DIRECTION_LEFT = new int[]{};
 
@@ -209,8 +206,8 @@ public class Gamepad {
         menuMap.DPAD_RIGHT.keycodes = new int[]{};
         menuMap.DPAD_LEFT.keycodes = new int[]{};
 
-        menuMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_UP};
-        menuMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMapping.MOUSE_SCROLL_DOWN};
+        menuMap.SHOULDER_LEFT.keycodes = new int[]{GamepadMap.MOUSE_SCROLL_UP};
+        menuMap.SHOULDER_RIGHT.keycodes = new int[]{GamepadMap.MOUSE_SCROLL_DOWN};
 
         menuMap.TRIGGER_LEFT.keycodes = new int[]{};
         menuMap.TRIGGER_RIGHT.keycodes = new int[]{};
@@ -225,10 +222,12 @@ public class Gamepad {
     }
 
     public void update(KeyEvent event){
+        gamepadDpad.update(event);
         sendButton(event);
     }
 
     public void update(MotionEvent event){
+        gamepadDpad.update(event);
         updateDirectionalJoystick(event);
         updateMouseJoystick(event);
         updateAnalogTriggers(event);
@@ -260,11 +259,11 @@ public class Gamepad {
         getCurrentMap().TRIGGER_RIGHT.update(event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
     }
 
-    private GamepadMapping getCurrentMap(){
+    private GamepadMap getCurrentMap(){
         return currentMap;
     }
 
-    private static void sendDirectionalKeycode(int direction, boolean isDown, GamepadMapping map){
+    private static void sendDirectionalKeycode(int direction, boolean isDown, GamepadMap map){
         switch (direction){
             case DIRECTION_NORTH:
                 sendInput(map.DIRECTION_FORWARD, isDown);
@@ -303,7 +302,7 @@ public class Gamepad {
     }
 
 
-    private void sendButton(KeyEvent event){
+    public void sendButton(KeyEvent event){
         int keycode = event.getKeyCode();
         switch (keycode){
             case KeyEvent.KEYCODE_BUTTON_A:
@@ -343,6 +342,26 @@ public class Gamepad {
                 getCurrentMap().THUMBSTICK_RIGHT.update(event);
                 break;
 
+                //DPAD
+            case GamepadDpad.UP:
+                getCurrentMap().DPAD_UP.update(event);
+                break;
+            case GamepadDpad.DOWN:
+                getCurrentMap().DPAD_DOWN.update(event);
+                break;
+            case GamepadDpad.LEFT:
+                getCurrentMap().DPAD_LEFT.update(event);
+                break;
+            case GamepadDpad.RIGHT:
+                getCurrentMap().DPAD_RIGHT.update(event);
+                break;
+            case GamepadDpad.CENTER:
+                getCurrentMap().DPAD_RIGHT.update(false);
+                getCurrentMap().DPAD_LEFT.update(false);
+                getCurrentMap().DPAD_UP.update(false);
+                getCurrentMap().DPAD_DOWN.update(false);
+                break;
+
                 //Start/select
             case KeyEvent.KEYCODE_BUTTON_START:
                 getCurrentMap().BUTTON_START.update(event);
@@ -361,10 +380,10 @@ public class Gamepad {
     public static void sendInput(int[] keycodes, boolean isDown){
         for(int keycode : keycodes){
             switch (keycode){
-                case GamepadMapping.MOUSE_SCROLL_DOWN:
+                case GamepadMap.MOUSE_SCROLL_DOWN:
                     if(isDown) CallbackBridge.sendScroll(0, -1);
                     break;
-                case GamepadMapping.MOUSE_SCROLL_UP:
+                case GamepadMap.MOUSE_SCROLL_UP:
                     if(isDown) CallbackBridge.sendScroll(0, 1);
                     break;
 
@@ -391,8 +410,13 @@ public class Gamepad {
     }
 
     public static boolean isGamepadEvent(KeyEvent event){
+        //return false;
+
+
         return ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
-                || GamepadDpad.isDpadEvent(event));
+                || GamepadDpad.isDpadEvent(event) );
+
+
     }
 
 }
