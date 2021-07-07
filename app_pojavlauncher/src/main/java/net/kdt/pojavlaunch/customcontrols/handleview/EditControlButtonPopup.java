@@ -234,7 +234,7 @@ public class EditControlButtonPopup {
             if (properties.keycodes[i] < 0) {
                 spinnersKeycode[i].setSelection(properties.keycodes[i] + specialArr.length);
             } else {
-                spinnersKeycode[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByLWJGLKey(properties.keycodes[i]) + specialArr.length);
+                spinnersKeycode[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByValue(properties.keycodes[i]) + specialArr.length);
             }
         }
     }
@@ -272,7 +272,7 @@ public class EditControlButtonPopup {
             if (spinnersKeycode[i].getSelectedItemPosition() < specialArr.length) {
                 properties.keycodes[i] = spinnersKeycode[i].getSelectedItemPosition() - specialArr.length;
             } else {
-                properties.keycodes[i] = EfficientAndroidLWJGLKeycode.getKeyByIndex(spinnersKeycode[i].getSelectedItemPosition() - specialArr.length);
+                properties.keycodes[i] = EfficientAndroidLWJGLKeycode.getValueByIndex(spinnersKeycode[i].getSelectedItemPosition() - specialArr.length);
             }
         }
 
