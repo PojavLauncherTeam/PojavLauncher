@@ -515,8 +515,8 @@ public class GLFW
         }
         
         // Minecraft triggers a glfwPollEvents() on splash screen, so update window size there.
-        CallbackBridge.receiveCallback(CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE, mGLFWWindowWidth, mGLFWWindowHeight, 0, 0);
-        CallbackBridge.receiveCallback(CallbackBridge.EVENT_TYPE_WINDOW_SIZE, mGLFWWindowWidth, mGLFWWindowHeight, 0, 0);
+        // CallbackBridge.receiveCallback(CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE, mGLFWWindowWidth, mGLFWWindowHeight, 0, 0);
+        // CallbackBridge.receiveCallback(CallbackBridge.EVENT_TYPE_WINDOW_SIZE, mGLFWWindowWidth, mGLFWWindowHeight, 0, 0);
 
         try {
             System.loadLibrary("pojavexec");
@@ -960,9 +960,9 @@ public class GLFW
     }
 
     public static void glfwMakeContextCurrent(long window) {
-        //Probably not the best idea to rely on program's internals to share the contexts
+        //Probably not the best idea to rely on program's internals to share the contexts...
         new Exception("Trace exception").printStackTrace();
-        }
+
         nativeEglMakeCurrent(window);
         System.out.println(Long.toString(nativeEglGetCurrentContext(),16));
     }
@@ -1128,12 +1128,17 @@ public class GLFW
                         break;
                     case CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE:
                     case CallbackBridge.EVENT_TYPE_WINDOW_SIZE:
-                        internalChangeMonitorSize(dataArr[1], dataArr[2]);
-                        glfwSetWindowSize(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                        if (dataArr[0] == CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE && mGLFWFramebufferSizeCallback != null) {
-                            mGLFWFramebufferSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                        } else if (dataArr[0] == CallbackBridge.EVENT_TYPE_WINDOW_SIZE && mGLFWWindowSizeCallback != null) {
-                            mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                        try {
+                            internalChangeMonitorSize(dataArr[1], dataArr[2]);
+                            glfwSetWindowSize(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                            if (dataArr[0] == CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE && mGLFWFramebufferSizeCallback != null) {
+                                mGLFWFramebufferSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                            } else if (dataArr[0] == CallbackBridge.EVENT_TYPE_WINDOW_SIZE && mGLFWWindowSizeCallback != null) {
+                                mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                            }
+                        } catch (Throwable th) {
+                            // Some Minecraft versions cause a NPE when setting size, so we will have to ignore them to make game alive
+                            th.printStackTrace();
                         }
                         break;
                     default:
