@@ -622,8 +622,10 @@ public class BaseMainActivity extends LoggableActivity {
             return true;
         }
 
-        if(isKeyboard(event)) {
-            EfficientAndroidLWJGLKeycode.execKey(event,event.getKeyCode(),event.getAction() == KeyEvent.ACTION_DOWN);
+        int index = EfficientAndroidLWJGLKeycode.getIndexByKey(event.getKeyCode());
+        if(index >= 0) {
+            Toast.makeText(this,"THIS IS A KEYBOARD EVENT !", Toast.LENGTH_SHORT).show();
+            EfficientAndroidLWJGLKeycode.execKey(event, index);
             return true;
         }
 
@@ -729,7 +731,7 @@ public class BaseMainActivity extends LoggableActivity {
     private void dialogSendCustomKey() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(R.string.control_customkey);
-        dialog.setItems(EfficientAndroidLWJGLKeycode.generateKeyName(), (dInterface, position) -> EfficientAndroidLWJGLKeycode.execKeyIndex(BaseMainActivity.this, position));
+        dialog.setItems(EfficientAndroidLWJGLKeycode.generateKeyName(), (dInterface, position) -> EfficientAndroidLWJGLKeycode.execKeyIndex(position));
         dialog.show();
     }
 
@@ -873,8 +875,8 @@ public class BaseMainActivity extends LoggableActivity {
         if(doesObjectContainField(KeyEvent.class,"KEYCODE_" + Character.toUpperCase(keyChar))) {
             try {
                 int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
-                sendKeyPress(EfficientAndroidLWJGLKeycode.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
-                sendKeyPress(EfficientAndroidLWJGLKeycode.get(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
+                sendKeyPress(EfficientAndroidLWJGLKeycode.getValue(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
+                sendKeyPress(EfficientAndroidLWJGLKeycode.getValue(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
             } catch (IllegalAccessException | NoSuchFieldException e) {
 
             }
@@ -885,7 +887,7 @@ public class BaseMainActivity extends LoggableActivity {
         sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
     }
 
-    public void sendKeyPress(int keyCode) {
+    public static void sendKeyPress(int keyCode) {
         sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
         sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
     }

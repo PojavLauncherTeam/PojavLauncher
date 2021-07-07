@@ -6,7 +6,14 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.CallbackBridge;
 
+import java.util.Arrays;
+
 public class EfficientAndroidLWJGLKeycode {
+
+    //This old version of this class was using an ArrayMap, a generic Key -> Value data structure.
+    //The key being the android keycode from a KeyEvent
+    //The value its LWJGL equivalent.
+
     private static final int[] androidKeycodes = new int[103];
     private static final short[] LWJGLKeycodes = new short[androidKeycodes.length];
     private static String[] androidKeyNameArray; /* = new String[androidKeycodes.length]; */
@@ -155,34 +162,11 @@ public class EfficientAndroidLWJGLKeycode {
         ++index;
     }
 
-    public static short get(int key){
-        //Taken from: https://www.geeksforgeeks.org/binary-search/
-        //Give the value associated to a key
-        int left = 0, right = androidKeycodes.length - 1;
-        while (left <= right) {
-            int m = left + (right - left) / 2;
-
-            // Check if x is present at mid
-            if (androidKeycodes[m] == key)
-                return LWJGLKeycodes[m];
-
-            // If x greater, ignore left half
-            if (androidKeycodes[m] < key)
-                left = m + 1;
-
-                // If x is smaller, ignore right half
-            else
-                right = m - 1;
-        }
-
-        // if we reach here, then element was
-        // not present
-        return -1;
-    }
 
     public static boolean containsKey(int keycode){
-        return get(keycode) != -1;
+        return getIndexByKey(keycode) >= 0;
     }
+
 
 
     public static String[] generateKeyName() {
@@ -195,7 +179,13 @@ public class EfficientAndroidLWJGLKeycode {
         return androidKeyNameArray;
     }
     
-    public static void execKey(KeyEvent keyEvent, int i, boolean isDown) {
+    public static void execKey(KeyEvent keyEvent) {
+        execKey(keyEvent, getIndexByKey(keyEvent.getKeyCode()));
+    }
+
+
+    public static void execKey(KeyEvent keyEvent, int valueIndex) {
+        //valueIndex points to where the value is stored in the array.
         CallbackBridge.holdingAlt = keyEvent.isAltPressed();
         CallbackBridge.holdingCapslock = keyEvent.isCapsLockOn();
         CallbackBridge.holdingCtrl = keyEvent.isCtrlPressed();
@@ -203,40 +193,43 @@ public class EfficientAndroidLWJGLKeycode {
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
         try {
-                System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
+            System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
             if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK && LauncherPreferences.PREF_BACK_TO_RIGHT_MOUSE) {
                 BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, keyEvent.getAction() == KeyEvent.ACTION_DOWN);
             } else {
-                if(keyEvent.getUnicodeChar() != 0) {
-                    char key = (char)keyEvent.getUnicodeChar();
-                     BaseMainActivity.sendKeyPress(
-                             get(keyEvent.getKeyCode()),
-                             key,
-                             0,
-                             CallbackBridge.getCurrentMods(),
-                             keyEvent.getAction() == KeyEvent.ACTION_DOWN);
-                }else{
-                     BaseMainActivity.sendKeyPress(
-                             get(keyEvent.getKeyCode()),
-                             CallbackBridge.getCurrentMods(),
-                             keyEvent.getAction()==KeyEvent.ACTION_DOWN);
-                }
+                char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
+                BaseMainActivity.sendKeyPress(
+                        getValueByIndex(valueIndex),
+                        key,
+                        0,
+                        CallbackBridge.getCurrentMods(),
+                        keyEvent.getAction() == KeyEvent.ACTION_DOWN);
             }
         } catch (Throwable th) {
             th.printStackTrace();
         }
     }
 
-    public static void execKeyIndex(BaseMainActivity mainActivity, int index) {
-        mainActivity.sendKeyPress(getKeyByIndex(index));
-
+    public static void execKeyIndex(int index){
+        //Send a quick key press.
+        BaseMainActivity.sendKeyPress(getValueByIndex(index));
     }
     
-    public static int getKeyByIndex(int index) {
+    public static int getValueByIndex(int index) {
         return LWJGLKeycodes[index];
     }
 
-    public static int getIndexByLWJGLKey(int lwjglKey) {
+    public static int getIndexByKey(int key){
+        return Arrays.binarySearch(androidKeycodes, key);
+    }
+
+    public static short getValue(int key){
+        return LWJGLKeycodes[Arrays.binarySearch(androidKeycodes, key)];
+    }
+
+    public static int getIndexByValue(int lwjglKey) {
+        //Since the LWJGL keycodes aren't sorted, linear search is used.
+        //You should avoid using this function on performance critical areas
         for (int i = 0; i < LWJGLKeycodes.length; i++) {
             if(LWJGLKeycodes[i] == lwjglKey) return i;
         }
