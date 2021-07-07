@@ -7,7 +7,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_optimizationLevel="standard|dimensions|chains">
 
 
         <!-- EDIT NAME SECTION -->
