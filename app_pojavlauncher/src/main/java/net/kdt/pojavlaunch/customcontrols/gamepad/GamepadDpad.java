@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 
 import java.lang.reflect.Field;
 
+import static android.view.InputDevice.KEYBOARD_TYPE_NON_ALPHABETIC;
+
 /*
     Code from the android documentation
  */
@@ -97,8 +99,7 @@ public class GamepadDpad {
     public static boolean isDpadEvent(InputEvent event) {
         // Check that input comes from a device with directional pads.
         // And... also the joystick since it declares sometimes as a joystick.
-
-        return (event.getSource() & InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD
-                || (event.getSource() & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK;
+        return (event.getSource() & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK &&
+               ((event.getSource() & InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) && (event.getDevice().getKeyboardType() == KEYBOARD_TYPE_NON_ALPHABETIC);
     }
 }
