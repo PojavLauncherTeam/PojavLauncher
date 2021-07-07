@@ -960,11 +960,8 @@ public class GLFW
     }
 
     public static void glfwMakeContextCurrent(long window) {
-        //Probably not the best idea to rely on program's internals to share the contexts...
-        try{
-            throw new Exception("Trace exception");
-        }catch(Exception e) {
-            e.printStackTrace();
+        //Probably not the best idea to rely on program's internals to share the contexts
+        new Exception("Trace exception").printStackTrace();
         }
         nativeEglMakeCurrent(window);
         System.out.println(Long.toString(nativeEglGetCurrentContext(),16));
