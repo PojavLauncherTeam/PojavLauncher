@@ -5,7 +5,7 @@ import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
 import java.security.PublicKey;
 import java.util.HashMap;
 
-public class GamepadMapping {
+public class GamepadMap {
 
     public static final int MOUSE_SCROLL_DOWN = -1;
     public static final int MOUSE_SCROLL_UP = -2;
