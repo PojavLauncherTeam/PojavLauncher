@@ -412,11 +412,12 @@ public class BaseMainActivity extends LoggableActivity {
                             } else if (!isTouchInHotbar) {
                                 //Camera movement
                                 if(CallbackBridge.isGrabbing()){
-                                    if(e.getPointerId(0) != currentPointerID){
+                                    int pointerIndex = e.findPointerIndex(currentPointerID);
+                                    if(pointerIndex == -1){
                                         currentPointerID = e.getPointerId(0);
                                     }else{
-                                        mouse_x += (e.getX() - prevX) * sensitivityFactor;
-                                        mouse_y += (e.getY() - prevY) * sensitivityFactor;
+                                        mouse_x += (e.getX(currentPointerID) - prevX) * sensitivityFactor;
+                                        mouse_y += (e.getY(currentPointerID) - prevY) * sensitivityFactor;
                                     }
                                     prevX = e.getX();
                                     prevY = e.getY();
