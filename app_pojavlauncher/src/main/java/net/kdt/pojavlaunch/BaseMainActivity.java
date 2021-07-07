@@ -613,6 +613,7 @@ public class BaseMainActivity extends LoggableActivity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         System.out.println(event);
+        if(event.getRepeatCount() != 0) return true; //We consume but no need to recheck since it was already sent once.
 
         if(Gamepad.isGamepadEvent(event)){
             if(gamepad == null){
