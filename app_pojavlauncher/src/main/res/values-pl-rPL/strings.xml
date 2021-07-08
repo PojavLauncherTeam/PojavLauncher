@@ -18,7 +18,7 @@
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
     <string name="login_title_no_saved_account">Konta nie znalezione!</string>
-    <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"pozostań zalogowanym\"</b> aby zapisać konto po pierwszym zalogowaniu.</string>
+    <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"Zapamiętaj dane logowania\"</b>, aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Przesuń palcem od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
     <!-- Warnings -->
@@ -95,7 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Edytuj</string>
     <string name="global_error">Błąd</string>
-    <string name="global_load">Załaduj</string>
+    <string name="global_load">Wczytaj</string>
     <string name="global_name">Nazwa</string>
     <string name="global_remove">Usuń</string>
     <string name="global_restart">Uruchom ponownie</string>
@@ -111,10 +111,10 @@
     <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niekompatybilna ze środowiskiem uruchomieniowym Java %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink nie jest obsługiwany na tym urządzeniu!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
+    <string name="control_toggle">Interfejs</string>
     <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
-    <string name="control_debug">Debug</string>
+    <string name="control_debug">Debugowanie</string>
     <string name="control_primary">LPM</string>
     <string name="control_secondary">PPM</string>
     <string name="control_shift">◇</string>
