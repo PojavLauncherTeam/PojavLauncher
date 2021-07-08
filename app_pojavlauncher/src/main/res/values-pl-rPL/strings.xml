@@ -7,9 +7,9 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email lub nazwa użytkownika</string>
+    <string name="login_online_username_hint">E-mail lub nazwa użytkownika</string>
     <string name="login_online_password_hint">Hasło</string>
-    <string name="login_online_check_keeplogin">Pozostaw mnie zalogowanym</string>
+    <string name="login_online_check_keeplogin">Nie wylogowuj</string>
     <string name="login_online_login_label">Zaloguj się</string>
     <string name="login_offline_label">Zaloguj się jako konto offline</string>
     <string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
@@ -24,7 +24,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Zainstaluj środowisko uruchomieniowe Java %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Zainstaluj środowisko wykonawcze Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Wybierz instalator modów</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
@@ -34,19 +34,19 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Wymagane jest uprawnienie do odczytu / zapisu w pamięci!</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
-    <string name="toast_uninstalljre_done">Zakończono odinstalowywanie środowiska uruchomieniowego Java</string>
+    <string name="toast_uninstalljre_done">Odinstalowano środowisko wykonawcze Java</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Aktualności</string>
     <string name="mcl_tab_console">Konsola programistyczna</string>
-    <string name="mcl_tab_crash">Dziennik awarii</string>
+    <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Połączono</string>
     <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Gotowe do uruchomienia Minecrafta %s</string>
+    <string name="mcl_version_msg">Minecraft %s jest gotowy do uruchomienia</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
     <string name="mcl_launch_downloading">Pobieranie %s</string>
     <string name="mcl_launch_downloading_progress">"Pobieranie %s (%.2f MB / %.2f MB)"</string>
@@ -57,7 +57,7 @@
     <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">O aplikacji</string>
-    <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko uruchomieniowe Java</string>
+    <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować środowisko uruchomieniowe Java</string>
     <string name="mcl_setting_title_freeform">Uruchom Minecraft w trybie swobodnym</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
@@ -105,7 +105,7 @@
     <string name="global_waiting">Czekaj</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikacja/Gra zakończyła się z kodem %d</string>
-    <string name="mcn_exit_call">Wyjście</string>
+    <string name="mcn_exit_call">Wyjdź</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niekompatybilna ze środowiskiem uruchomieniowym Java %2$s.</string>
@@ -125,7 +125,7 @@
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
     <string name="control_thirdperson">Widok</string>
-    <string name="control_listplayers">Tab</string>
+    <string name="control_listplayers">Gracze</string>
     <string name="control_mouse">Mysz</string>
     <string name="control_mouseoff">Mysz: wyłączona</string>
     <string name="control_mouseon">Mysz: włączona </string>
