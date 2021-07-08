@@ -17,7 +17,7 @@
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
     <string name="login_title_no_saved_account">Konta nie znalezione!</string>
-    <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"pozostań zalogowanym\"</b> aby zapisać konto po pierwszym zalogowaniu.</string>
+    <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"Zapamiętaj dane logowania\"</b>, aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Przesuń palcem od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
     <!-- Warnings -->
@@ -53,7 +53,7 @@
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modinstall">Uruchom instalator modów (Forge, LabyMod, Fabric itp.)</string>
     <string name="mcl_option_modinstallwitharg">Uruchom instalator modów (z niestandardowymi argumentami)</string>
-    <string name="mcl_option_customcontrol">Niestandardowe kontrole</string>
+    <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">O aplikacji</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko uruchomieniowe Java</string>
@@ -63,36 +63,36 @@
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgicznym osobom, którzy preferowali stare UI v1, może się to spodobać. Daje ci lepsze pełnoekranowe doświadczenie.</string>
     <string name="mcl_setting_title_ignore_notch">Zignoruj wycięcie</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wycięcie i rozszerza pod nim ekran.\nDaje Ci bardziej wciągającą rozgrywke.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wycięcie i rozszerza ekran pod nim.\nDaje Ci bardziej wciągającą rozgrywkę.</string>
     <string name="mcl_setting_title_resolution_scaler">Skala rozdzielczości</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Pozwala zmniejszyć rozdzielczość gry. 100% to pełna rozdzielczość</string>
-    <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
+    <string name="mcl_setting_title_longpresstrigger">Czas wywołania akcji po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
     <string name="mcl_setting_title_backtorightmouse">Traktuj przycisk wstecz jako prawy przycisk myszy</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Niektóre urządzenia traktują prawy przycisk myszy jako przycisk wstecz. Jeśli używasz zewnętrznej myszki, powinieneś to włączyć.</string>
     <string name="mcl_setting_title_flat_button_style">Styl płaskich przycisków</string>
     <string name="mcl_setting_subtitle_flat_button_style">Włącz to, aby zmienić styl przycisków kontrolnych na płaskie.</string>
-    <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
-    <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
+    <string name="mcl_setting_title_buttonscale">Skalowanie przycisków nawigacyjnych</string>
+    <string name="mcl_setting_subtitle_buttonscale">Zwiększ wartość, jeśli przyciski są zbyt małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
     <string name="mcl_setting_subtitle_mousescale">Zmień rozmiar myszy wirtualnej.</string>
-    <string name="mcl_setting_title_javaargs">Argumenty uruchomiające JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostanie ona zmodyfikowana bez wiedzy.</string>
+    <string name="mcl_setting_title_javaargs">Argumenty uruchomienia JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostaną one zmodyfikowane bez wiedzy.</string>
     <string name="mcl_setting_category_general">Ustawienia główne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
-    <string name="mcl_setting_category_veroption">Typ wersji jaka będzie na liście wersji</string>
-    <string name="mcl_setting_veroption_release">Wydanie</string>
-    <string name="mcl_setting_veroption_snapshot">Wersja eksperymentalna</string>
+    <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
+    <string name="mcl_setting_veroption_release">Kompilacja stabilna</string>
+    <string name="mcl_setting_veroption_snapshot">Kompilacja testowa</string>
     <string name="mcl_setting_veroption_oldalpha">Stara alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stara beta</string>
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
     <string name="global_edit">Edytuj</string>
     <string name="global_error">Błąd</string>
-    <string name="global_load">Załaduj</string>
+    <string name="global_load">Wczytaj</string>
     <string name="global_name">Nazwa</string>
     <string name="global_remove">Usuń</string>
     <string name="global_restart">Uruchom ponownie</string>
@@ -137,7 +137,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3-os</string>
+    <string name="control_thirdperson">Widok</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mysz</string>
     <string name="control_mouseoff">Mysz: wyłączona</string>
@@ -147,8 +147,8 @@
     <string name="control_viewout">Wyjście dziennika</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
-    <string name="control_scaleup">Skalowanie w górę</string>
-    <string name="control_scaledown">Skalowanie w dół</string>
+    <string name="control_scaleup">Skaluj w górę</string>
+    <string name="control_scaledown">Skaluj w dół</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -180,15 +180,15 @@
     <string name="main_nolog">Brak logów.</string>
     <string name="main_no_news_feed">Nie udało się pobrać kanału informacyjnego!</string>
     <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
-    <string name="auto_ram_title">Automatyczny ram</string>
+    <string name="auto_ram_title">Automatyczny RAM</string>
     <string name="autoram_info_msg">Pamięć ustawiona na %d MB</string>
     <string name="mcl_setting_check_libraries">Sprawdź biblioteki po pobraniu</string>
-    <string name="mcl_setting_check_libraries_subtitle">Ta opcja zmusza launcher do sprawdzenia skrótu biblioteki, jeśli jest dostępna. Zapobiega poszkodowanym pobraniom.</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ta opcja zmusza launcher do sprawdzenia hashu biblioteki, jeśli jest dostępny. Zapobiega uszkodzonym pobraniom.</string>
     <string name="dl_library_sha_fail">Biblioteka %s jest uszkodzona i zostanie ponownie pobrana</string>
     <string name="dl_library_sha_unknown">Biblioteka %s nie może zostać sprawdzona, należy założyć, że jest dobra</string>
-    <string name="dl_library_sha_pass">Biblioteka %s jest dobra i użyteczna</string>
+    <string name="dl_library_sha_pass">Biblioteka %s jest dobra i nadaje się do użytku</string>
     <string name="mcl_disable_gestures">Wyłącz gesty</string>
-    <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak przytrzymaj aby zniszczyć blok i stuknij, aby umieścić blok.</string>
+    <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak przytrzymaj aby zniszczyć blok i stuknij aby umieścić blok.</string>
     <string name="mcl_setting_title_mousespeed">Prędkość myszki (%)</string>
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszki</string>
     <string name="customctrl_passthru">Myszka przelotka</string>
