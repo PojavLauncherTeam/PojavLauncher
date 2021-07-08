@@ -9,7 +9,7 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail lub nazwa użytkownika</string>
     <string name="login_online_password_hint">Hasło</string>
-    <string name="login_online_check_keeplogin">Nie wylogowuj</string>
+    <string name="login_online_check_keeplogin">Zapamiętaj dane logowania</string>
     <string name="login_online_login_label">Zaloguj się</string>
     <string name="login_offline_label">Zaloguj się jako konto offline</string>
     <string name="login_error_short_username">Nazwa użytkownika musi mieć co najmniej 3 znaki</string>
@@ -17,7 +17,7 @@
     <string name="login_error_offline_password">Konto offline nie może zawierać hasła!</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
-    <string name="login_title_no_saved_account">Konta nie znalezione!</string>
+    <string name="login_title_no_saved_account">Nie znaleziono żadnych kont!</string>
     <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"Zapamiętaj dane logowania\"</b>, aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Przesuń palcem od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
@@ -59,7 +59,7 @@
     <string name="mcl_option_about">O aplikacji</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować środowisko uruchomieniowe Java</string>
-    <string name="mcl_setting_title_freeform">Uruchom Minecraft w trybie swobodnym</string>
+    <string name="mcl_setting_title_freeform">Funkcja Obraz w obrazie</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgicznym osobom, którzy preferowali stare UI v1, może się to spodobać. Daje ci lepsze pełnoekranowe doświadczenie.</string>
