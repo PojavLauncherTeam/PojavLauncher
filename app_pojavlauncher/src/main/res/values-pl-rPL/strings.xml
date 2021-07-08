@@ -56,10 +56,10 @@
     <string name="mcl_option_modinstallwitharg">Uruchom instalator modów (z niestandardowymi argumentami)</string>
     <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
     <string name="mcl_option_settings">Ustawienia</string>
-    <string name="mcl_option_about">O aplikacji</string>
+    <string name="mcl_option_about">Informacje</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagany restart launchera] To pozwoli ponownie zainstalować środowisko uruchomieniowe Java</string>
-    <string name="mcl_setting_title_freeform">Funkcja Obraz w obrazie</string>
+    <string name="mcl_setting_title_freeform">Funkcja \"Obraz w obrazie\"</string>
     <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgicznym osobom, którzy preferowali stare UI v1, może się to spodobać. Daje ci lepsze pełnoekranowe doświadczenie.</string>
@@ -79,7 +79,7 @@
     <string name="mcl_setting_subtitle_mousescale">Zmienia rozmiar wirtualnej myszy.</string>
     <string name="mcl_setting_title_javaargs">Argumenty uruchomienia JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostaną one zmodyfikowane bez wiedzy.</string>
-    <string name="mcl_setting_category_general">Ustawienia główne</string>
+    <string name="mcl_setting_category_general">Ustawienia ogólne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksportuje OpenGL 2.1</string>
@@ -87,10 +87,10 @@
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksportuje OpenGL 2.1 + częściowo 3.2 (na razie brak wsparcia dla 1.17)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
-    <string name="mcl_setting_veroption_release">Kompilacja stabilna</string>
-    <string name="mcl_setting_veroption_snapshot">Kompilacja testowa</string>
-    <string name="mcl_setting_veroption_oldalpha">Stara alfa</string>
-    <string name="mcl_setting_veroption_oldbeta">Stara beta</string>
+    <string name="mcl_setting_veroption_release">Oficjalne wydanie</string>
+    <string name="mcl_setting_veroption_snapshot">Wersja deweloperska</string>
+    <string name="mcl_setting_veroption_oldalpha">Dawna Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Dawna Beta</string>
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
     <string name="global_edit">Edytuj</string>
