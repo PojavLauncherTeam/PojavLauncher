@@ -54,7 +54,7 @@
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modinstall">Uruchom instalator modów (Forge, LabyMod, Fabric itp.)</string>
     <string name="mcl_option_modinstallwitharg">Uruchom instalator modów (z niestandardowymi argumentami)</string>
-    <string name="mcl_option_customcontrol">Niestandardowe kontrole</string>
+    <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">O aplikacji</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko uruchomieniowe Java</string>
@@ -67,14 +67,14 @@
     <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wycięcie i rozszerza ekran pod nim.\nDaje Ci bardziej wciągającą rozgrywkę.</string>
     <string name="mcl_setting_title_resolution_scaler">Skala rozdzielczości</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Pozwala zmniejszyć rozdzielczość gry. 100% to pełna rozdzielczość</string>
-    <string name="mcl_setting_title_longpresstrigger">Jak długo będzie się uruchamiać po długim naciśnięciu</string>
+    <string name="mcl_setting_title_longpresstrigger">Czas wywołania akcji po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wyzwalania na długie naciśnięcie w zniszczeniu bloku i upuszczeniu przedmiotu.</string>
     <string name="mcl_setting_title_backtorightmouse">Traktuj przycisk wstecz jako prawy przycisk myszy</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Niektóre urządzenia traktują prawy przycisk myszy jako przycisk wstecz. Jeśli używasz zewnętrznej myszki, powinieneś to włączyć.</string>
     <string name="mcl_setting_title_flat_button_style">Styl płaskich przycisków</string>
     <string name="mcl_setting_subtitle_flat_button_style">Włącz to, aby zmienić styl przycisków kontrolnych na płaskie.</string>
-    <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
-    <string name="mcl_setting_subtitle_buttonscale">Zwiększ je, jeśli przyciski są za małe.</string>
+    <string name="mcl_setting_title_buttonscale">Skalowanie przycisków nawigacyjnych</string>
+    <string name="mcl_setting_subtitle_buttonscale">Zwiększ wartość, jeśli przyciski są zbyt małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
     <string name="mcl_setting_subtitle_mousescale">Zmień rozmiar myszy wirtualnej.</string>
     <string name="mcl_setting_title_javaargs">Argumenty uruchomienia JVM</string>
@@ -86,9 +86,9 @@
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksportuje OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksportuje OpenGL 2.1 + częściowo 3.2 (na razie brak wsparcia dla 1.17)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuje OpenGL 4.6</string>
-    <string name="mcl_setting_category_veroption">Typ wersji jaka będzie na liście wersji</string>
-    <string name="mcl_setting_veroption_release">Wydanie</string>
-    <string name="mcl_setting_veroption_snapshot">Wersja eksperymentalna</string>
+    <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
+    <string name="mcl_setting_veroption_release">Kompilacja stabilna</string>
+    <string name="mcl_setting_veroption_snapshot">Kompilacja testowa</string>
     <string name="mcl_setting_veroption_oldalpha">Stara alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stara beta</string>
     <string name="mcl_version_clone">Klonuj</string>
@@ -111,7 +111,7 @@
     <string name="mcn_check_fail_incompatiblearch">Architektura %1$s jest niekompatybilna ze środowiskiem uruchomieniowym Java %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink nie jest obsługiwany na tym urządzeniu!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">Interfejs</string>
+    <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
     <string name="control_debug">Debugowanie</string>
@@ -124,7 +124,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3-os</string>
+    <string name="control_thirdperson">Widok</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mysz</string>
     <string name="control_mouseoff">Mysz: wyłączona</string>
