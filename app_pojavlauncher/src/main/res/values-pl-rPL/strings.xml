@@ -114,7 +114,7 @@
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
-    <string name="control_debug">Debugowanie</string>
+    <string name="control_debug">Debug</string>
     <string name="control_primary">LPM</string>
     <string name="control_secondary">PPM</string>
     <string name="control_shift">◇</string>
