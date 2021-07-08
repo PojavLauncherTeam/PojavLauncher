@@ -18,9 +18,9 @@
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
     <string name="login_title_no_saved_account">Nie znaleziono żadnych kont!</string>
-    <string name="login_dialog_no_saved_account">Nie masz żadnego zapisanego konta.\nUżyj opcji <b>\"pozostań zalogowanym\"</b> aby zapisać konto po pierwszym zalogowaniu.</string>
+    <string name="login_dialog_no_saved_account">Nie masz zapisanego żadnego konta.\nZaznacz opcję <b>\"Zapamiętaj dane logowania\"</b>, aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Przesuń palcem od prawej do lewej, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
+    <string name="hint_control_mapping">"Przesuń palcem od prawej krawędzi, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
@@ -165,7 +165,7 @@
     <string name="main_version">Wersja:</string>
     <string name="main_nocrash">Nie wykryto awarii</string>
     <string name="main_nolog">Brak logów.</string>
-    <string name="main_no_news_feed">Nie udało się pobrać kanału informacyjnego!</string>
+    <string name="main_no_news_feed">Błąd pobierania aktualności !</string>
     <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
     <string name="auto_ram_title">Automatyczny RAM</string>
     <string name="autoram_info_msg">Pamięć ustawiona na %d MB</string>
