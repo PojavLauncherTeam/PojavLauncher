@@ -77,10 +77,10 @@
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
     <string name="mcl_setting_subtitle_mousescale">Zmienia rozmiar wirtualnej myszy.</string>
     <string name="mcl_setting_title_javaargs">Argumenty uruchomienia JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Bądź ostrożny, może to spowodować awarię gry, jeśli zostaną one zmodyfikowane bez wiedzy.</string>
+    <string name="mcl_setting_subtitle_javaargs">Zachowaj ostrożność, ponieważ wprowadzenie zmian bez odpowiedniej wiedzy może doprowadzić do awarii.</string>
     <string name="mcl_setting_category_general">Ustawienia ogólne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
-    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_category_renderer">Silnik renderujący</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
