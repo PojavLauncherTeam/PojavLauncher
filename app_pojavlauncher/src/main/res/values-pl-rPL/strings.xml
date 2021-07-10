@@ -24,7 +24,7 @@
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Zainstaluj środowisko wykonawcze Java %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Wybierz instalator modów</string>
+    <string name="alerttitle_installmod">Wybierz instalator modyfikacji</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
     <string name="error_no_version">Brak wersji!</string>
@@ -144,11 +144,11 @@
     <string name="control_mouseon">Mysz: włączona </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Wymuś zamknięcie</string>
-    <string name="control_viewout">Wyjście dziennika</string>
+    <string name="control_viewout">Wyjście danych</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
-    <string name="control_scaleup">Skaluj w górę</string>
-    <string name="control_scaledown">Skaluj w dół</string>
+    <string name="control_scaleup">Zwiększ</string>
+    <string name="control_scaledown">Zmniejsz</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
