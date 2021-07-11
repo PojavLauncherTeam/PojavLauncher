@@ -59,7 +59,7 @@
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagane ponowne uruchomienie launchera] Umożliwi to ponowną instalację środowiska wykonawczego Java</string>
     <string name="mcl_setting_title_freeform">Funkcja \"Obraz w obrazie\"</string>
-    <string name="mcl_setting_subtitle_freeform">Uruchom Minecrafta w pływającym oknie. Wymaga Androida 7.0+</string>
+    <string name="mcl_setting_subtitle_freeform">Uruchom Minecraft w pływającym oknie. Wymagany Android 7.0 lub nowszy</string>
     <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Może to przypaść do gustu osobom preferującym starszy interfejs v1. Uzyskasz lepsze doświadczenie pełnoekranowe.</string>
     <string name="mcl_setting_title_ignore_notch">Ignoruj wcięcie</string>
