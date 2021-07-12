@@ -42,7 +42,9 @@ public final class Tools
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
     
     public static final String URL_HOME = "https://pojavlauncherteam.github.io/PojavLauncher";
+
     public static String DIR_DATA = "/data/data/" + BuildConfig.APPLICATION_ID;
+    public static String MULTIRT_HOME = DIR_DATA+"/runtimes";
     public static String CURRENT_ARCHITECTURE;
 
     // New since 3.3.1
