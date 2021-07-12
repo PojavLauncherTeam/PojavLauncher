@@ -50,7 +50,7 @@ jobs:
         git remote add upstream https://github.com/PojavLauncherTeam/gl4es
         git fetch upstream
         git checkout master
-        git merge upstream/master || echo "Merge exit code $?"
+        git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
     
     - name: Install gl4es
