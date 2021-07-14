@@ -410,7 +410,7 @@ public class PojavLoginActivity extends BaseActivity
         }
         if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
         if(rt_version == null) return false;
-        if(!current_rt_version.equals(rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
+        if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
             try {
                 MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz"), "Internal", rt_version,
                         (resid, vararg) -> {
