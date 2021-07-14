@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
+    <string name="app_motd">Launch Minecraft: Java Edition on your device!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
