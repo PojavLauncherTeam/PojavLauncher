@@ -90,11 +90,11 @@ public class MultiRTUtils {
         }
 
         // Refresh libraries
-        copyDummyNativeLib(ctx,"libawt_xawt.so",libFolder);
+        copyDummyNativeLib(ctx,"libawt_xawt.so",dest,libFolder);
     }
-    private static void copyDummyNativeLib(Context ctx, String name, String libFolder) throws IOException {
+    private static void copyDummyNativeLib(Context ctx, String name, File dest, String libFolder) throws IOException {
 
-        File fileLib = new File(MultiRTUtils.runtimeFolder, "/"+libFolder + "/" + name);
+        File fileLib = new File(dest, "/"+libFolder + "/" + name);
         fileLib.delete();
         FileInputStream is = new FileInputStream(new File(ctx.getApplicationInfo().nativeLibraryDir, name));
         FileOutputStream os = new FileOutputStream(fileLib);
