@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">Γενικές ρυθμίσεις</string>
     <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
     <string name="mcl_setting_category_renderer">Απόδοση</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (no 1.17 supported yet)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
     <string name="mcl_setting_veroption_snapshot">Στιγμιότυπο</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
     <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
     <string name="mcn_check_fail_incompatiblearch">Η αρχιτεκτονική %1$s δεν είναι συμβατή με το Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Το Vulkan Zink renderer δεν υποστηρίζεται σε αυτήν τη συσκευή!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Πληκτρολόγιο</string>
@@ -169,4 +174,13 @@
     <string name="memory_warning_msg">Το τρέχον ποσό της δωρεάν μνήμης RAM (%d) είναι μικρότερο από το κατανεμημένο RAM (%d), το οποίο μπορεί να οδηγήσει σε καταρρεύσεις. Αλλάξτε την κατανομή αν το παιχνίδι καταρρεύσει.</string>
     <string name="mcl_memory_allocation">Κατανομή μνήμης</string>
     <string name="mcl_memory_allocation_subtitle">Ελέγχει πόση μνήμη δίνεται στο Minecraft</string>
+    <string name="multirt_runtime_corrupt">Κατεστραμμένο Java Runtime</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">Προσθήκη νέου</string>
+    <string name="multirt_config_add_subtitle">Εισαγωγή νέου Java VM</string>
+    <string name="multirt_title">Διαχειριστής Runtime</string>
+    <string name="multirt_subtitle">Διαχείριση εγκατεστημένων Java VMs</string>
+    <string name="multirt_progress_caching">Προσωρινή αποθήκευση...</string>
+    <string name="multirt_config_setdefault">Ορισμός ως προεπιλογή</string>
+    <string name="multirt_config_setdefault_already">Προεπιλογή</string>
 </resources>
