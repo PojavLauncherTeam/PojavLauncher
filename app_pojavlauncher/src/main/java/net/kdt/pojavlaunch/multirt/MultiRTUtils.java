@@ -94,7 +94,7 @@ public class MultiRTUtils {
     }
     private static void copyDummyNativeLib(Context ctx, String name, String libFolder) throws IOException {
 
-        File fileLib = new File(MultiRTUtils.runtimeFolder, name+"/"+libFolder + "/" + name);
+        File fileLib = new File(MultiRTUtils.runtimeFolder, "/"+libFolder + "/" + name);
         fileLib.delete();
         FileInputStream is = new FileInputStream(new File(ctx.getApplicationInfo().nativeLibraryDir, name));
         FileOutputStream os = new FileOutputStream(fileLib);
