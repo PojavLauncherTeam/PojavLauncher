@@ -44,6 +44,7 @@ public class MultiRTUtils {
     private static final String JAVA_VERSION_str = "JAVA_VERSION=\"";
     private static final String OS_ARCH_str = "OS_ARCH=\"";
     public static List<Runtime> getRuntimes() {
+        if(!runtimeFolder.exists()) runtimeFolder.mkdirs();
         ArrayList<Runtime> ret = new ArrayList<>();
         System.out.println("Fetch runtime list");
         for(File f : runtimeFolder.listFiles()) {

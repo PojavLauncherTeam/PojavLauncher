@@ -369,6 +369,7 @@ public class PojavLoginActivity extends BaseActivity
                     mLockSelectJRE.wait();
                 }
             }
+            LauncherPreferences.loadPreferences();
         }
         catch(Throwable e){
             Tools.showError(this, e);
