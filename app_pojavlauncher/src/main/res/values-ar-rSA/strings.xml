@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">إعدادات عامة</string>
     <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
     <string name="mcl_setting_category_renderer">العارض</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">نوع الإصدار سيكون في قائمة الإصدارات</string>
     <string name="mcl_setting_veroption_release">إصدار نهائي</string>
     <string name="mcl_setting_veroption_snapshot">اللمحات (سنابشوت)</string>
