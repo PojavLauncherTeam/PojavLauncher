@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
     <string name="login_error_offline_password">Офлайн акаунт не може мати пароль!</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
-    <string name="login_select_account">Виберіть обліковий запис</string>
+    <string name="login_select_account">Оберіть обліковий запис</string>
     <string name="login_title_no_saved_account">Акаунтів не знайдено!</string>
     <string name="login_dialog_no_saved_account">У вас немає жодного збереженого акаунту.\nСкористайтеся опцією <b>\"Залишити мене авторизованим\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
     <!-- Hint -->
