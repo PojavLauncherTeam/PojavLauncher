@@ -183,6 +183,7 @@
     <string name="mcl_memory_allocation">Asignación de memoria</string>
     <string name="mcl_memory_allocation_subtitle">Controla cuánta memoria se le da a Minecraft</string>
     <string name="multirt_runtime_corrupt">Java Runtime Corrompido</string>
+    <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Añadir</string>
     <string name="multirt_config_add_subtitle">Importar un Java VM nuevo</string>
     <string name="multirt_title">Gestor de Runtimes</string>
