@@ -183,4 +183,12 @@
     <string name="memory_warning_msg">Bieżąca ilość wolnej pamięci RAM (%d) jest mniejsza od przydzielonej pamięci RAM (%d), co może prowadzić do awarii. Zmień ilość, jeśli gra ulegnie awarii.</string>
     <string name="mcl_memory_allocation">Przydział pamięci</string>
     <string name="mcl_memory_allocation_subtitle">Kontroluje ilość pamięci przydzielonej Minecraft</string>
+    <string name="multirt_java_ver">%s (Java %d)</string>
+    <string name="multirt_runtime_corrupt">Uszkodzone środowisko wykonawcze Java</string>
+    <string name="multirt_config_title">Maszyny wirtualne Java</string>
+    <string name="multirt_config_add">Dodaj nową</string>
+    <string name="multirt_config_add_subtitle">Importuj nową maszynę wirtualną Java</string>
+    <string name="multirt_title">Menedżer środowiska wykonawczego</string>
+    <string name="multirt_subtitle">Zarządzaj zainstalowanymi maszynami wirtualnymi Java</string>
+    <string name="multirt_progress_caching">Buforowanie...</string>
 </resources>
