@@ -1,11 +1,14 @@
 package net.kdt.pojavlaunch.multirt;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.system.Os;
 import android.util.Log;
 
+import net.kdt.pojavlaunch.PojavLoginActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.utils.JREUtils;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
@@ -31,6 +34,7 @@ public class MultiRTUtils {
         }
         public String name;
         public String versionString;
+        public String arch;
         public int javaVersion;
     }
     public static interface ProgressReporterThingy {
@@ -38,6 +42,7 @@ public class MultiRTUtils {
     }
     private static File runtimeFolder = new File(Tools.MULTIRT_HOME);
     private static final String JAVA_VERSION_str = "JAVA_VERSION=\"";
+    private static final String OS_ARCH_str = "OS_ARCH=\"";
     public static List<Runtime> getRuntimes() {
         ArrayList<Runtime> ret = new ArrayList<>();
         System.out.println("Fetch runtime list");
@@ -61,6 +66,67 @@ public class MultiRTUtils {
         tmp.delete();
         return read(name);
     }
+    private static void __installRuntimeNamed__NoRM(InputStream runtimeInputStream, File dest, ProgressReporterThingy thingy) throws IOException {
+        File tmp = new File(dest,"temporary");
+        FileOutputStream fos = new FileOutputStream(tmp);
+        thingy.reportStringProgress(R.string.multirt_progress_caching);
+        IOUtils.copy(runtimeInputStream,fos);
+        fos.close();
+        runtimeInputStream.close();
+        uncompressTarXZ(tmp,dest,thingy);
+        tmp.delete();
+    }
+    public static void postPrepare(Context ctx, String name) throws IOException {
+        File dest = new File(runtimeFolder,"/"+name);
+        if(!dest.exists()) return;
+        Runtime r = read(name);
+        String libFolder = "lib";
+        if(new File(dest,libFolder+"/"+r.arch).exists()) libFolder = libFolder+"/"+r.arch;
+        File ftIn = new File(dest, libFolder+ "/libfreetype.so.6");
+        File ftOut = new File(dest, libFolder + "/libfreetype.so");
+        if (ftIn.exists() && (!ftOut.exists() || ftIn.length() != ftOut.length())) {
+            ftIn.renameTo(ftOut);
+        }
+
+        // Refresh libraries
+        copyDummyNativeLib(ctx,"libawt_xawt.so",libFolder);
+    }
+    private static void copyDummyNativeLib(Context ctx, String name, String libFolder) throws IOException {
+
+        File fileLib = new File(MultiRTUtils.runtimeFolder, name+"/"+libFolder + "/" + name);
+        fileLib.delete();
+        FileInputStream is = new FileInputStream(new File(ctx.getApplicationInfo().nativeLibraryDir, name));
+        FileOutputStream os = new FileOutputStream(fileLib);
+        IOUtils.copy(is, os);
+        is.close();
+        os.close();
+    }
+    public static Runtime installRuntimeNamedBinpack(InputStream universalFileInputStream, InputStream platformBinsInputStream, String name, String binpackVersion, ProgressReporterThingy thingy) throws IOException {
+        File dest = new File(runtimeFolder,"/"+name);
+        if(dest.exists()) FileUtils.deleteDirectory(dest);
+        dest.mkdirs();
+        __installRuntimeNamed__NoRM(universalFileInputStream,dest,thingy);
+        __installRuntimeNamed__NoRM(platformBinsInputStream,dest,thingy);
+        File binpack_verfile = new File(runtimeFolder,"/"+name+"/pojav_version");
+        FileOutputStream fos = new FileOutputStream(binpack_verfile);
+        fos.write(binpackVersion.getBytes());
+        fos.close();
+        cache.remove(name); // Force reread
+        return read(name);
+    }
+    public static String __internal__readBinpackVersion(String name) {
+        File binpack_verfile = new File(runtimeFolder,"/"+name+"/pojav_version");
+        try {
+            if (binpack_verfile.exists()) {
+                return Tools.read(binpack_verfile.getAbsolutePath());
+            }else{
+                return null;
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static void removeRuntimeNamed(String name) throws IOException {
         File dest = new File(runtimeFolder,"/"+name);
         if(dest.exists()) {
@@ -68,18 +134,27 @@ public class MultiRTUtils {
             cache.remove(name);
         }
     }
+    public static boolean setRuntimeNamed(Context ctx, String name) throws IOException {
+        File dest = new File(runtimeFolder,"/"+name);
+        if(!dest.exists()) return false;
+        Tools.DIR_HOME_JRE = dest.getAbsolutePath();
+        JREUtils.relocateLibPath(ctx);
+        return true;
+    }
     private static Runtime read(String name) {
         if(cache.containsKey(name)) return cache.get(name);
         Runtime retur;
         File release = new File(runtimeFolder,"/"+name+"/release");
         if(!release.exists()) {
-            return null;
+            return new Runtime(name);
         }
         try {
             String content = Tools.read(release.getAbsolutePath());
             int _JAVA_VERSION_index = content.indexOf(JAVA_VERSION_str);
-            if(_JAVA_VERSION_index != -1) {
+            int _OS_ARCH_index = content.indexOf(OS_ARCH_str);
+            if(_JAVA_VERSION_index != -1 && _OS_ARCH_index != -1) {
                 _JAVA_VERSION_index += JAVA_VERSION_str.length();
+                _OS_ARCH_index += OS_ARCH_str.length();
                 String javaVersion = content.substring(_JAVA_VERSION_index,content.indexOf('"',_JAVA_VERSION_index));
                     String[] javaVersionSplit = javaVersion.split("\\.");
                     int javaVersionInt;
@@ -89,6 +164,7 @@ public class MultiRTUtils {
                         javaVersionInt = Integer.parseInt(javaVersionSplit[0]);
                     }
                     Runtime r = new Runtime(name);
+                    r.arch = content.substring(_OS_ARCH_index,content.indexOf('"',_OS_ARCH_index));
                     r.javaVersion = javaVersionInt;
                     r.versionString = javaVersion;
                     retur = r;

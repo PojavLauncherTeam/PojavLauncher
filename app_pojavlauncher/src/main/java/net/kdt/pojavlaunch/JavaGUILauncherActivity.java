@@ -9,6 +9,8 @@ import android.widget.*;
 
 import java.io.*;
 import java.util.*;
+
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
@@ -63,11 +65,13 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.install_mod);
 
         Tools.updateWindowSize(this);
         
         try {
+            MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
             findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);

@@ -6,10 +6,6 @@
     <androidx.preference.PreferenceCategory
 		android:title="@string/mcl_setting_category_general">
 
-        <net.kdt.pojavlaunch.prefs.UninstallJREDialogPreference
-            android:summary="@string/mcl_setting_subtitle_uninstalljre"
-            android:title="@string/mcl_setting_title_uninstalljre"
-            app2:icon="@drawable/rm_jre" />
         <net.kdt.pojavlaunch.prefs.RuntimeManagerPreference
             android:summary="@string/multirt_subtitle"
             android:title="@string/multirt_title"/>

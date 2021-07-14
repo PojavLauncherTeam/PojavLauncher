@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.multirt;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +14,7 @@ import net.kdt.pojavlaunch.R;
 
 public class MultiRTConfigDialog {
     public static final int MULTIRT_PICK_RUNTIME = 2048;
-    public static final int MULTIRT_PICK_RUNTIME_NORETURN = 2049;
+    public static final int MULTIRT_PICK_RUNTIME_STARTUP = 2049;
     public AlertDialog dialog;
     public RecyclerView dialogView;
     public void prepare(BaseLauncherActivity ctx) {
@@ -29,10 +30,7 @@ public class MultiRTConfigDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /* Initialte import */
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("application/x-xz");
-                ctx.startActivityForResult(intent,MULTIRT_PICK_RUNTIME);
+                openRuntimeSelector(ctx,MULTIRT_PICK_RUNTIME);
             }
         });
         builder.setNegativeButton(R.string.mcn_exit_call, new DialogInterface.OnClickListener() {
@@ -45,5 +43,11 @@ public class MultiRTConfigDialog {
     }
     public void refresh() {
         dialogView.getAdapter().notifyDataSetChanged();
+    }
+    public static void openRuntimeSelector(Activity ctx, int code) {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/x-xz");
+        ctx.startActivityForResult(intent,code);
     }
 }

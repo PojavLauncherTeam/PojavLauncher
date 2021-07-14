@@ -234,10 +234,10 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         }
         System.out.println("call to onResumeFragments; E");
     }
-    public String getFileName(Uri uri) {
+    public static String getFileName(Context ctx, Uri uri) {
         String result = null;
         if (uri.getScheme().equals("content")) {
-            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            Cursor cursor = ctx.getContentResolver().query(uri, null, null, null, null);
             try {
                 if (cursor != null && cursor.moveToFirst()) {
                     result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
@@ -268,9 +268,11 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                     barrier.show();
                     Thread t = new Thread(()->{
                         try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(uri),
+                            String name = getFileName(this,uri);
+                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), name,
                                     (resid, stuff) -> BaseLauncherActivity.this.runOnUiThread(
                                             () -> barrier.setMessage(BaseLauncherActivity.this.getString(resid,stuff))));
+                            MultiRTUtils.postPrepare(BaseLauncherActivity.this, name);
                         }catch (IOException e) {
                             Tools.showError(BaseLauncherActivity.this
                                     ,e);

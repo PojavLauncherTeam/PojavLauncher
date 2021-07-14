@@ -39,4 +39,14 @@
         app:layout_constraintTop_toTopOf="@+id/multirt_view_java_version"
         app:srcCompat="@drawable/ic_remove" />
 
+    <Button
+        android:id="@+id/multirt_view_setdefaultbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/multirt_config_setdefault"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/multirt_view_removebtn"
+        app:layout_constraintTop_toTopOf="@+id/multirt_view_removebtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

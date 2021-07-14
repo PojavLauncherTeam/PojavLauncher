@@ -2,7 +2,10 @@ package net.kdt.pojavlaunch;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +43,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -62,6 +66,8 @@ import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
 import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.CustomControls;
+import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
@@ -278,17 +284,6 @@ public class PojavLoginActivity extends BaseActivity
         PojavProfile.setCurrentProfile(this, null);
     }
 
-    private boolean isJavaRuntimeInstalled(AssetManager am) {
-        boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
-        try {
-            return prefValue && (
-                am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz") == null ||
-                Tools.read(new FileInputStream(Tools.DIR_HOME_JRE+"/version")).equals(Tools.read(am.open("components/jre/version"))));
-        } catch(IOException e) {
-            Log.e("JVMCtl","failed to read file",e);
-            return prefValue;
-        }
-    }
    
     private void unpackComponent(AssetManager am, String component) throws IOException {
         File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
@@ -368,206 +363,67 @@ public class PojavLoginActivity extends BaseActivity
             
             unpackComponent(am, "caciocavallo");
             unpackComponent(am, "lwjgl3");
-            if (!isJavaRuntimeInstalled(am)) {
-                if(!installRuntimeAutomatically(am)) {
-                    File jreTarFile = selectJreTarFile();
-                    uncompressTarXZ(jreTarFile, new File(Tools.DIR_HOME_JRE));
-                } else {
-                    Tools.copyAssetFile(this, "components/jre/version", Tools.DIR_HOME_JRE + "/","version", true);
+            if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
+               MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
+                synchronized (mLockSelectJRE) {
+                    mLockSelectJRE.wait();
                 }
-                firstLaunchPrefs.edit().putBoolean(PREF_IS_INSTALLED_JAVARUNTIME, true).commit();
             }
-            
-            JREUtils.relocateLibPath(this);
-
-            File ftIn = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/libfreetype.so.6");
-            File ftOut = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/libfreetype.so");
-            if (ftIn.exists() && (!ftOut.exists() || ftIn.length() != ftOut.length())) {
-                ftIn.renameTo(ftOut);
-            }
-            
-            // Refresh libraries
-            copyDummyNativeLib("libawt_xawt.so");
-            // copyDummyNativeLib("libfontconfig.so");
         }
         catch(Throwable e){
             Tools.showError(this, e);
         }
     }
-    
-    private boolean installRuntimeAutomatically(AssetManager am) {
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                final Uri uri = data.getData();
+                Thread t = new Thread(()->{
+                    try {
+                        MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), BaseLauncherActivity.getFileName(this,uri),
+                                (resid, stuff) ->PojavLoginActivity.this.runOnUiThread(
+                                        () -> startupTextView.setText(PojavLoginActivity.this.getString(resid,stuff))));
+                        synchronized (mLockSelectJRE) {
+                            mLockSelectJRE.notifyAll();
+                        }
+                    }catch (IOException e) {
+                        Tools.showError(PojavLoginActivity.this
+                                ,e);
+                    }
+                });
+                t.start();
+            }
+        }
+    }
+    private boolean installRuntimeAutomatically(AssetManager am, boolean otherRuntimesAvailable) {
+        /* Check if JRE is included */
+        String rt_version = null;
+        String current_rt_version = MultiRTUtils.__internal__readBinpackVersion("Internal");
         try {
-            am.open("components/jre/version");
+            rt_version = Tools.read(am.open("components/jre/version"));
         } catch (IOException e) {
             Log.e("JREAuto", "JRE was not included on this APK.", e);
-            return false;
         }
-        
-        File rtUniversal = new File(Tools.DIR_HOME_JRE+"/universal.tar.xz");
-        File rtPlatformDependent = new File(Tools.DIR_HOME_JRE+"/cust-bin.tar.xz");
-        if(!new File(Tools.DIR_HOME_JRE).exists()) new File(Tools.DIR_HOME_JRE).mkdirs(); else {
-            //SANITY: remove the existing files
-            for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
-                if (f.isDirectory()){
-                    try {
-                        FileUtils.deleteDirectory(f);
-                    } catch(IOException e1) {
-                        Log.e("JREAuto","da fuq is wrong wit ur device? n2",e1);
-                    }
-                } else{
-                    f.delete();
-                }
+        if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
+        if(rt_version == null) return false;
+        if(!current_rt_version.equals(rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
+            try {
+                MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz"), "Internal", rt_version,
+                        (resid, vararg) -> {
+                            runOnUiThread(()->{startupTextView.setText(getString(resid,vararg));});
+                        });
+                MultiRTUtils.postPrepare(PojavLoginActivity.this,"Internal");
+                return true;
+            }catch (IOException e) {
+                Log.e("JREAuto", "Internal JRE unpack failed", e);
+                return false;
             }
-        }
-        InputStream is;
-        FileOutputStream os;
-        try {
-            is = am.open("components/jre/universal.tar.xz");
-            os = new FileOutputStream(rtUniversal);
-            IOUtils.copy(is,os);
-            is.close();
-            os.close();
-            uncompressTarXZ(rtUniversal, new File(Tools.DIR_HOME_JRE));
-        } catch (IOException e){
-            Log.e("JREAuto","Failed to unpack universal. Custom embedded-less build?",e);
-            return false;
-        }
-        try {
-            is = am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz");
-            os = new FileOutputStream(rtPlatformDependent);
-            IOUtils.copy(is, os);
-            is.close();
-            os.close();
-            uncompressTarXZ(rtPlatformDependent, new File(Tools.DIR_HOME_JRE));
-        } catch (IOException e) {
-            // Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?),
-            // in both cases, redirecting to manual install, and removing the universal stuff
-            for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
-                if (f.isDirectory()){
-                    try {
-                        FileUtils.deleteDirectory(f);
-                    } catch(IOException e1) {
-                        Log.e("JREAuto","da fuq is wrong wit ur device?",e1);
-                    }
-                } else{
-                    f.delete();
-                }
-            }
-            return false;
-        }
-        return true;
-    }
-    private void copyDummyNativeLib(String name) throws Throwable {
-        File fileLib = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/" + name);
-        fileLib.delete();
-        FileInputStream is = new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, name));
-        FileOutputStream os = new FileOutputStream(fileLib);
-        IOUtils.copy(is, os);
-        is.close();
-        os.close();
-    }
-    
-    private File selectJreTarFile() throws InterruptedException {
-        final StringBuilder selectedFile = new StringBuilder();
-        
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
-                builder.setTitle(getString(R.string.alerttitle_install_jre, Tools.CURRENT_ARCHITECTURE));
-                builder.setCancelable(false);
-
-                final AlertDialog dialog = builder.create();
-                FileListView flv = new FileListView(dialog, "tar.xz");
-                flv.setFileSelectedListener(new FileSelectedListener(){
-
-                        @Override
-                        public void onFileSelected(File file, String path) {
-                            selectedFile.append(path);
-                            dialog.dismiss();
-
-                            synchronized (mLockSelectJRE) {
-                                mLockSelectJRE.notifyAll();
-                            }
-
-                        }
-                    });
-                dialog.setView(flv);
-                dialog.show();
-            }
-        });
-        
-        synchronized (mLockSelectJRE) {
-            mLockSelectJRE.wait();
-        }
-        
-        return new File(selectedFile.toString());
+        }else return true; // we have at least one runtime, and it's compartible, good to go
     }
 
-    private void uncompressTarXZ(final File tarFile, final File dest) throws IOException {
-
-        dest.mkdirs();
-        TarArchiveInputStream tarIn = null;
-
-        tarIn = new TarArchiveInputStream(
-            new XZCompressorInputStream(
-                new BufferedInputStream(
-                    new FileInputStream(tarFile)
-                )
-            )
-        );
-
-        TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
-        // tarIn is a TarArchiveInputStream
-        while (tarEntry != null) {
-            /*
-             * Unpacking very small files in short time cause
-             * application to ANR or out of memory, so delay
-             * a little if size is below than 20kb (20480 bytes)
-             */
-            if (tarEntry.getSize() <= 20480) {
-                try {
-                    // 40 small files per second
-                    Thread.sleep(25);
-                } catch (InterruptedException e) {}
-            }
-            final String tarEntryName = tarEntry.getName();
-            runOnUiThread(new Runnable(){
-                @SuppressLint("StringFormatInvalid")
-                @Override
-                public void run() {
-                    startupTextView.setText(getString(R.string.global_unpacking, tarEntryName));
-                }
-            });
-            // publishProgress(null, "Unpacking " + tarEntry.getName());
-            File destPath = new File(dest, tarEntry.getName()); 
-            if (tarEntry.isSymbolicLink()) {
-                destPath.getParentFile().mkdirs();
-                try {
-                    // android.system.Os
-                    // Libcore one support all Android versions
-                    Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-
-            } else if (tarEntry.isDirectory()) {
-                destPath.mkdirs();
-                destPath.setExecutable(true);
-            } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
-                destPath.getParentFile().mkdirs();
-                destPath.createNewFile();
-                
-                FileOutputStream os = new FileOutputStream(destPath);
-                IOUtils.copy(tarIn, os);
-                os.close();
-
-            }
-            tarEntry = tarIn.getNextTarEntry();
-        }
-        tarIn.close();
-    }
-    
     private static boolean mkdirs(String path)
     {
         File file = new File(path);

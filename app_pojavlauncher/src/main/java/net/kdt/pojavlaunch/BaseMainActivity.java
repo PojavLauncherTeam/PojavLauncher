@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.*;
 import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
@@ -128,7 +129,8 @@ public class BaseMainActivity extends LoggableActivity {
         try {
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            
+
+            MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
             logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();

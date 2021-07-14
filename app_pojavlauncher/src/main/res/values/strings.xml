@@ -219,4 +219,6 @@
     <string name="multirt_title">Runtime Manager</string>
     <string name="multirt_subtitle">Manage installed Java VMs</string>
     <string name="multirt_progress_caching">Caching...</string>
+    <string name="multirt_config_setdefault">Set default</string>
+    <string name="multirt_config_setdefault_already">Default</string>
 </resources>

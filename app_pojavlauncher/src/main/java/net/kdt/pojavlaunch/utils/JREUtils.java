@@ -168,7 +168,7 @@ public class JREUtils
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
-    public static void relocateLibPath(final Context ctx) throws Exception {
+    public static void relocateLibPath(final Context ctx) throws IOException {
         if (JRE_ARCHITECTURE == null) {
             JRE_ARCHITECTURE = readJREReleaseProperties().get("OS_ARCH");
             if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.CURRENT_ARCHITECTURE.contains("x86") && !Tools.CURRENT_ARCHITECTURE.contains("64")) {
