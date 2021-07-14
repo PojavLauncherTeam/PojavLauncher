@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,22 +20,22 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import java.io.IOException;
 import java.util.List;
 
-public class RTRecyclerViewAdapter extends RecyclerView.Adapter {
+public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAdapter.RTViewHolder> {
     MultiRTConfigDialog dialog;
     public RTRecyclerViewAdapter(MultiRTConfigDialog dialog) {
         this.dialog = dialog;
     }
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RTViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View recyclableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.multirt_recyclable_view,parent,false);
         return new RTViewHolder(recyclableView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RTViewHolder holder, int position) {
         final List<MultiRTUtils.Runtime> runtimes = MultiRTUtils.getRuntimes();
-        ((RTViewHolder)holder).bindRuntime(runtimes.get(position),position);
+        holder.bindRuntime(runtimes.get(position),position);
     }
     public boolean isDefaultRuntime(MultiRTUtils.Runtime rt) {
         return LauncherPreferences.PREF_DEFAULT_RUNTIME.equals(rt.name);
@@ -88,7 +87,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter {
                 if (currentRuntime != null) {
                     final ProgressDialog barrier = new ProgressDialog(ctx);
                     barrier.setMessage(ctx.getString(R.string.global_waiting));
-                    barrier.setProgressStyle(barrier.STYLE_SPINNER);
+                    barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     barrier.setCancelable(false);
                     barrier.show();
                     Thread t = new Thread(() -> {

@@ -1,11 +1,8 @@
 package net.kdt.pojavlaunch.multirt;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.system.Os;
-import android.util.Log;
 
-import net.kdt.pojavlaunch.PojavLoginActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.utils.JREUtils;
@@ -27,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MultiRTUtils {
-    public static HashMap<String,Runtime> cache = new HashMap();
+    public static HashMap<String,Runtime> cache = new HashMap<>();
     public static class Runtime {
         public Runtime(String name) {
             this.name = name;
@@ -40,7 +37,7 @@ public class MultiRTUtils {
     public static interface ProgressReporterThingy {
         void reportStringProgress(int resid, Object ... stuff);
     }
-    private static File runtimeFolder = new File(Tools.MULTIRT_HOME);
+    private static final File runtimeFolder = new File(Tools.MULTIRT_HOME);
     private static final String JAVA_VERSION_str = "JAVA_VERSION=\"";
     private static final String OS_ARCH_str = "OS_ARCH=\"";
     public static List<Runtime> getRuntimes() {
@@ -53,7 +50,7 @@ public class MultiRTUtils {
 
         return ret;
     }
-    public static Runtime installRuntimeNamed(InputStream runtimeInputStream, String name, ProgressReporterThingy thingy) throws IOException {
+    public static void installRuntimeNamed(InputStream runtimeInputStream, String name, ProgressReporterThingy thingy) throws IOException {
         File dest = new File(runtimeFolder,"/"+name);
         File tmp = new File(dest,"temporary");
         if(dest.exists()) FileUtils.deleteDirectory(dest);
@@ -65,7 +62,7 @@ public class MultiRTUtils {
         runtimeInputStream.close();
         uncompressTarXZ(tmp,dest,thingy);
         tmp.delete();
-        return read(name);
+        read(name);
     }
     private static void __installRuntimeNamed__NoRM(InputStream runtimeInputStream, File dest, ProgressReporterThingy thingy) throws IOException {
         File tmp = new File(dest,"temporary");
@@ -135,12 +132,11 @@ public class MultiRTUtils {
             cache.remove(name);
         }
     }
-    public static boolean setRuntimeNamed(Context ctx, String name) throws IOException {
+    public static void setRuntimeNamed(Context ctx, String name) throws IOException {
         File dest = new File(runtimeFolder,"/"+name);
-        if(!dest.exists()) return false;
+        if(!dest.exists()) return;
         Tools.DIR_HOME_JRE = dest.getAbsolutePath();
         JREUtils.relocateLibPath(ctx);
-        return true;
     }
     private static Runtime read(String name) {
         if(cache.containsKey(name)) return cache.get(name);
@@ -201,7 +197,7 @@ public class MultiRTUtils {
                 try {
                     // 40 small files per second
                     Thread.sleep(25);
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException ignored) {}
             }
             final String tarEntryName = tarEntry.getName();
             // publishProgress(null, "Unpacking " + tarEntry.getName());
