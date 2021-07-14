@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">Gjengir</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksporterer OpenGL 2.1 + delvis 3.2 (1.17 støttes ikke ennå)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksporterer OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versjonstype vil være i versjonslisten</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -107,6 +109,7 @@
     <string name="mcn_exit_confirm">Er du sikker på at du vil tvinge avslutte?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 ble ikke installert!</string>
     <string name="mcn_check_fail_incompatiblearch">Arkitektur %1$s er ikke kompatibel med Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink gjengir støttes ikke på denne enheten!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatur</string>
@@ -171,4 +174,13 @@
     <string name="memory_warning_msg">Den nåværende mengden ledig RAM (%d) er lavere enn allokert RAM (%d), noe som kan føre til krasj. Endre allokeringen hvis spillet krasjer.</string>
     <string name="mcl_memory_allocation">Minne tildeling</string>
     <string name="mcl_memory_allocation_subtitle">Kontrollerer hvor mye minne som blir gitt til Minecraft</string>
+    <string name="multirt_runtime_corrupt">Korrupt Java Runtime</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">Legg til ny</string>
+    <string name="multirt_config_add_subtitle">Importer ny Java VM</string>
+    <string name="multirt_title">Runtime Manager</string>
+    <string name="multirt_subtitle">Administrere installerte Java VMs</string>
+    <string name="multirt_progress_caching">Bufrer...</string>
+    <string name="multirt_config_setdefault">Sett som standard</string>
+    <string name="multirt_config_setdefault_already">Standard</string>
 </resources>
