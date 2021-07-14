@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">Γενικές ρυθμίσεις</string>
     <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
     <string name="mcl_setting_category_renderer">Απόδοση</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
     <string name="mcl_setting_veroption_snapshot">Στιγμιότυπο</string>
