@@ -182,4 +182,12 @@
     <string name="memory_warning_msg">La cantidad actual de memoria RAM libre (%d) es menor que la memoria RAM asignada (%d), lo que puede provocar cierres forzados. Cambia la asignación si el juego se cierra.</string>
     <string name="mcl_memory_allocation">Asignación de memoria</string>
     <string name="mcl_memory_allocation_subtitle">Controla cuánta memoria se le da a Minecraft</string>
+    <string name="multirt_runtime_corrupt">Java Runtime Corrompido</string>
+    <string name="multirt_config_add">Añadir</string>
+    <string name="multirt_config_add_subtitle">Importar un Java VM nuevo</string>
+    <string name="multirt_title">Gestor de Runtimes</string>
+    <string name="multirt_subtitle">Gestionar Java VMs instaladas</string>
+    <string name="multirt_progress_caching">Cacheando...</string>
+    <string name="multirt_config_setdefault">Establecer como predeterminado</string>
+    <string name="multirt_config_setdefault_already">Predeterminado</string>
 </resources>
