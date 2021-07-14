@@ -2,14 +2,21 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.OpenableColumns;
 import android.text.*;
 import android.text.method.*;
 import android.view.*;
 import android.widget.*;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
 import net.kdt.pojavlaunch.fragments.*;
+import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.tasks.*;
 
@@ -22,6 +29,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public CrashFragment mCrashView;
     public ProgressBar mLaunchProgress;
 	public Spinner mVersionSelector;
+	public MultiRTConfigDialog mRuntimeConfigDialog;
 	public TextView mLaunchTextStatus, mTextVersion;
     
     public JMinecraftVersionList mVersionList;
@@ -171,10 +179,12 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                     }
                 }
             };
-            LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
         }
+        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
         new RefreshVersionListTask(this).execute();
         System.out.println("call to onResumeFragments");
+        mRuntimeConfigDialog = new MultiRTConfigDialog();
+        mRuntimeConfigDialog.prepare(this);
         try{
             final ProgressDialog barrier = new ProgressDialog(this);
             barrier.setMessage(getString(R.string.global_waiting));
@@ -224,7 +234,61 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         }
         System.out.println("call to onResumeFragments; E");
     }
-    
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME && resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    final Uri uri = data.getData();
+                    final ProgressDialog barrier = new ProgressDialog(this);
+                    barrier.setMessage(getString(R.string.global_waiting));
+                    barrier.setProgressStyle(barrier.STYLE_SPINNER);
+                    barrier.setCancelable(false);
+                    barrier.show();
+                    Thread t = new Thread(()->{
+                        try {
+                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(uri),
+                                    (resid, stuff) -> BaseLauncherActivity.this.runOnUiThread(
+                                            () -> barrier.setMessage(BaseLauncherActivity.this.getString(resid,stuff))));
+                        }catch (IOException e) {
+                            Tools.showError(BaseLauncherActivity.this
+                                    ,e);
+                        }
+                        BaseLauncherActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                barrier.dismiss();
+                                mRuntimeConfigDialog.refresh();
+                                mRuntimeConfigDialog.dialog.show();
+                            }
+                        });
+                    });
+                    t.start();
+                }
+        }
+    }
+
     // Catching touch exception
     @Override
     public boolean onTouchEvent(MotionEvent event) {

@@ -1,7 +1,8 @@
-package net.kdt.pojavlaunch.utils;
+package net.kdt.pojavlaunch.multirt;
 
 import android.annotation.SuppressLint;
 import android.system.Os;
+import android.util.Log;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -32,25 +33,31 @@ public class MultiRTUtils {
         public String versionString;
         public int javaVersion;
     }
+    public static interface ProgressReporterThingy {
+        void reportStringProgress(int resid, Object ... stuff);
+    }
     private static File runtimeFolder = new File(Tools.MULTIRT_HOME);
     private static final String JAVA_VERSION_str = "JAVA_VERSION=\"";
     public static List<Runtime> getRuntimes() {
         ArrayList<Runtime> ret = new ArrayList<>();
+        System.out.println("Fetch runtime list");
         for(File f : runtimeFolder.listFiles()) {
             ret.add(read(f.getName()));
         }
+
         return ret;
     }
-    public static Runtime installRuntimeNamed(InputStream runtimeInputStream, String name) throws IOException {
+    public static Runtime installRuntimeNamed(InputStream runtimeInputStream, String name, ProgressReporterThingy thingy) throws IOException {
         File dest = new File(runtimeFolder,"/"+name);
         File tmp = new File(dest,"temporary");
         if(dest.exists()) FileUtils.deleteDirectory(dest);
         dest.mkdirs();
         FileOutputStream fos = new FileOutputStream(tmp);
+        thingy.reportStringProgress(R.string.multirt_progress_caching);
         IOUtils.copy(runtimeInputStream,fos);
         fos.close();
         runtimeInputStream.close();
-        uncompressTarXZ(tmp,dest);
+        uncompressTarXZ(tmp,dest,thingy);
         tmp.delete();
         return read(name);
     }
@@ -74,17 +81,17 @@ public class MultiRTUtils {
             if(_JAVA_VERSION_index != -1) {
                 _JAVA_VERSION_index += JAVA_VERSION_str.length();
                 String javaVersion = content.substring(_JAVA_VERSION_index,content.indexOf('"',_JAVA_VERSION_index));
-                String[] javaVersionSplit = javaVersion.split(".");
-                int javaVersionInt;
-                if(javaVersionSplit[0].equals("1")) {
-                    javaVersionInt = Integer.parseInt(javaVersionSplit[1]);
-                }else{
-                    javaVersionInt = Integer.parseInt(javaVersionSplit[0]);
-                }
-                Runtime r = new Runtime(name);
-                r.javaVersion = javaVersionInt;
-                r.versionString = javaVersion;
-                retur =  r;
+                    String[] javaVersionSplit = javaVersion.split("\\.");
+                    int javaVersionInt;
+                    if (javaVersionSplit[0].equals("1")) {
+                        javaVersionInt = Integer.parseInt(javaVersionSplit[1]);
+                    } else {
+                        javaVersionInt = Integer.parseInt(javaVersionSplit[0]);
+                    }
+                    Runtime r = new Runtime(name);
+                    r.javaVersion = javaVersionInt;
+                    r.versionString = javaVersion;
+                    retur = r;
             }else{
                 retur =  new Runtime(name);
             }
@@ -94,7 +101,7 @@ public class MultiRTUtils {
         cache.put(name,retur);
         return retur;
     }
-    private static void uncompressTarXZ(final File tarFile, final File dest) throws IOException {
+    private static void uncompressTarXZ(final File tarFile, final File dest, final ProgressReporterThingy thingy) throws IOException {
         dest.mkdirs();
         TarArchiveInputStream tarIn = null;
 
@@ -121,6 +128,7 @@ public class MultiRTUtils {
             }
             final String tarEntryName = tarEntry.getName();
             // publishProgress(null, "Unpacking " + tarEntry.getName());
+            thingy.reportStringProgress(R.string.global_unpacking,tarEntryName);
             File destPath = new File(dest, tarEntry.getName());
             if (tarEntry.isSymbolicLink()) {
                 destPath.getParentFile().mkdirs();
