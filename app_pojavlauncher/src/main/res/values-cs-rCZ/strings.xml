@@ -14,6 +14,7 @@
     <string name="login_offline_label">Přihlásit se za offline účet</string>
     <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
+    <string name="login_error_offline_password">Offline účet nemůže obsahovat heslo!</string>
     <string name="login_microsoft">Microsoft přihlášení</string>
     <string name="login_select_account">Vybrat účet</string>
     <string name="login_title_no_saved_account">Nenalezen žádný účet !</string>
@@ -81,6 +82,10 @@
     <string name="mcl_setting_category_general">Obecná nastavení</string>
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportuje OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exportuje OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exportuje OpenGL 2.1 + částečně 3.2 (1.17 zatím není podporováná)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Typ verze bude v seznamu verzí</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -104,6 +109,7 @@
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebyl nainstalován!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektura %1$s je nekompatibilní s Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink vykreslovač není v tomto zařízení podporován!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klávesnice</string>
