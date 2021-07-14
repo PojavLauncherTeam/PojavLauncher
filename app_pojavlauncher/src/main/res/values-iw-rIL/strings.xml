@@ -185,4 +185,6 @@
     <string name="multirt_title">מנהל Runtime</string>
     <string name="multirt_subtitle">ניהול Java VMs מותקנות</string>
     <string name="multirt_progress_caching">שומר במטמון...</string>
+    <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
+    <string name="multirt_config_setdefault_already">ברירת מחדל</string>
 </resources>
