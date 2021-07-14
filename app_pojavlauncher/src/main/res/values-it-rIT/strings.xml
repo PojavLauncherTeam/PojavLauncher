@@ -183,4 +183,13 @@
     <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
     <string name="mcl_memory_allocation">Memoria allocata</string>
     <string name="mcl_memory_allocation_subtitle">Controlla quanta memoria dedicare a Minecraft</string>
+    <string name="multirt_runtime_corrupt">Corrotto Runtime Java</string>
+    <string name="multirt_config_title">Java VM</string>
+    <string name="multirt_config_add">Aggiungi</string>
+    <string name="multirt_config_add_subtitle">Importa nuova VM Java</string>
+    <string name="multirt_title">Runtime Manager</string>
+    <string name="multirt_subtitle">Gestisci Java VM installate</string>
+    <string name="multirt_progress_caching">Memorizzando nella cache...</string>
+    <string name="multirt_config_setdefault">Imposta predefinito</string>
+    <string name="multirt_config_setdefault_already">Predefinito</string>
 </resources>
