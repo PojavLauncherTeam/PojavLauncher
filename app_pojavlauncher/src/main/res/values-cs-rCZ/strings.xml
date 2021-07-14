@@ -183,4 +183,13 @@
     <string name="memory_warning_msg">Aktuální množství volné RAM (%d) je nižší než přidělená RAM (%d), což může vést k pádu. Změňte alokaci, pokud hra spadne.</string>
     <string name="mcl_memory_allocation">Přidělení paměti</string>
     <string name="mcl_memory_allocation_subtitle">Určete, kolik paměti bude mít Minecraft</string>
+    <string name="multirt_runtime_corrupt">Poškozená Java Runtime</string>
+    <string name="multirt_config_title">Java VMy</string>
+    <string name="multirt_config_add">Přidat</string>
+    <string name="multirt_config_add_subtitle">Naimportovat novou Java VM</string>
+    <string name="multirt_title">Runtime Manažer</string>
+    <string name="multirt_subtitle">Spravovat nainstalované Javy VMy</string>
+    <string name="multirt_progress_caching">Kešování...</string>
+    <string name="multirt_config_setdefault">Nastavit výchozí</string>
+    <string name="multirt_config_setdefault_already">Výchozí</string>
 </resources>
