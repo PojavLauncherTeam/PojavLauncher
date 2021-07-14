@@ -55,7 +55,7 @@
     <string name="mcl_option_modinstall">Iniciar um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Iniciar um instalador de mods (com argumentos personalizados)</string>
     <string name="mcl_option_customcontrol">Controles personalizados</string>
-    <string name="mcl_option_settings">Config.</string>
+    <string name="mcl_option_settings">Config</string>
     <string name="mcl_option_about">Sobre</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reinicialização necessária] Isso te permite reinstalar o Java Runtime</string>
@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">Configurações gerais</string>
     <string name="mcl_setting_category_scaling">Configurações de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exporta o OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta o OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exporta o OpenGL 2.1 + parcialmente o 3.2 (ainda sem suporte para a 1.17)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta o OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">Tem certeza que deseja forçar o encerramento?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 não foi instalado!</string>
     <string name="mcn_check_fail_incompatiblearch">A arquitetura %1$s é incompatível com o Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">O renderizador Vulkan Zink não é suportado neste dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Interface</string>
     <string name="control_keyboard">Teclado</string>
@@ -122,8 +127,8 @@
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mouse</string>
-    <string name="control_mouseoff">Mouse: Não</string>
-    <string name="control_mouseon">Mouse: Sim </string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Forçar encerramento</string>
     <string name="control_viewout">Saída do log</string>
