@@ -183,4 +183,12 @@
     <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), o que pode causar falhas. Altere a quantidade se o jogo apresentar alguma falha.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
     <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será dado ao Minecraft</string>
+    <string name="multirt_java_ver">%s (Java %d)</string>
+    <string name="multirt_runtime_corrupt">Java Runtime corrompido</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">Adicionar novo</string>
+    <string name="multirt_config_add_subtitle">Importar nova Java VM</string>
+    <string name="multirt_title">Gerenciador do Runtime</string>
+    <string name="multirt_subtitle">Gerenciar Java VMs instalados</string>
+    <string name="multirt_progress_caching">Armazenando...</string>
 </resources>
