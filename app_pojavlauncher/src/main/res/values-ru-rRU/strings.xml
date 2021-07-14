@@ -189,7 +189,7 @@
     <string name="multirt_config_add">Добавить новую</string>
     <string name="multirt_config_add_subtitle">Импортировать новую виртуальную машину</string>
     <string name="multirt_title">Менеджер Runtime</string>
-    <string name="multirt_subtitle">Управлять установленными виртуальными машинами</string>
+    <string name="multirt_subtitle">Управляйте установленными виртуальными машинами Java</string>
     <string name="multirt_progress_caching">Кэширование...</string>
     <string name="multirt_config_setdefault">Установить по умолчанию</string>
     <string name="multirt_config_setdefault_already">По умолчанию</string>
