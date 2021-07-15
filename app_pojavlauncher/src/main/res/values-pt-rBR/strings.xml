@@ -191,4 +191,8 @@
     <string name="multirt_title">Gerenciador do Runtime</string>
     <string name="multirt_subtitle">Gerenciar Java VMs instalados</string>
     <string name="multirt_progress_caching">Armazenando...</string>
+    <string name="multirt_config_setdefault">Definir padrão</string>
+    <string name="multirt_config_setdefault_already">Padrão</string>
+    <string name="multirt_config_removeerror_last">Você precisa ter pelo menos um Java Runtime instalado</string>
+    <string name="multirt_nocompartiblert">Não foi possível achar qualquer Java Runtime compatível</string>
 </resources>
