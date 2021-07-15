@@ -1,6 +1,10 @@
+---
 name: Bug report
-description: ' Create a report to help us improve '
-title: [BUG] <Short description>
+about: Create a report to help us improve
+title: "[BUG] <Short description>"
+labels: bug
+assignees: ''
+---
 body:
 - type: textarea
   id: version
