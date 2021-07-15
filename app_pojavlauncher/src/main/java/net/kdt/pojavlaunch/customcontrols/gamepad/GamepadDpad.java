@@ -22,12 +22,12 @@ public class GamepadDpad {
 
     int pressedDirection = -1;
     Gamepad parentPad;
-    KeyEvent dummyevent = new KeyEvent(KeyEvent.ACTION_DOWN, CENTER);
+    KeyEvent dummyEvent = new KeyEvent(KeyEvent.ACTION_DOWN, CENTER);
     Field eventCodeField;
 
     {
         try {
-            eventCodeField = dummyevent.getClass().getDeclaredField("mKeyCode");
+            eventCodeField = dummyEvent.getClass().getDeclaredField("mKeyCode");
             eventCodeField.setAccessible(true);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
@@ -88,11 +88,11 @@ public class GamepadDpad {
         }
 
         try {
-            eventCodeField.setInt(dummyevent, pressedDirection);
+            eventCodeField.setInt(dummyEvent, pressedDirection);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        parentPad.sendButton(dummyevent);
+        parentPad.sendButton(dummyEvent);
         return pressedDirection;
     }
 
