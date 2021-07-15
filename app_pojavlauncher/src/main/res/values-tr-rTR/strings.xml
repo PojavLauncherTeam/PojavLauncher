@@ -82,8 +82,12 @@
     <string name="mcl_setting_category_general">Genel ayarlar</string>
     <string name="mcl_setting_category_scaling">Boyutlama Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 + tam olmayan 3.2 (1.17 henüz desteklenmiyor)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 dışa aktarır</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
-    <string name="mcl_setting_veroption_release">Çıkan sürümler</string>
+    <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 yüklenmemiş!</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s mimarisi Java Runtime %2$s ile uyumsuz.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink işleyicisi bu cihazda desteklenmiyor!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klavye</string>
@@ -172,10 +177,21 @@
     <string name="mcl_disable_gestures">İşaretleri devre dışı bırak</string>
     <string name="mcl_disable_gestures_subtitle">İşaretleri devre dışarı bırakır, blok kırma ve blok koymak için basma gibi.</string>
     <string name="mcl_setting_title_mousespeed">Fare Hızı</string>
-    <string name="mcl_setting_subtitle_mousespeed">Farenin hızını değiştirir</string>
+    <string name="mcl_setting_subtitle_mousespeed">Yazılımsal farenin hızını değiştirir</string>
     <string name="customctrl_passthru">Mouse geçişi</string>
     <string name="customctrl_rounded">Kenarlı</string>
     <string name="memory_warning_msg">Şuanki boş RAM (%d) verilecek RAM\'den (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilecek RAM\'i değiştirin.</string>
-    <string name="mcl_memory_allocation">Bellek verme</string>
+    <string name="mcl_memory_allocation">Bellek ayırma</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder</string>
+    <string name="multirt_java_ver">%s (Java %d)</string>
+    <string name="multirt_runtime_corrupt">Bozuk Java Runtime</string>
+    <string name="multirt_config_title">Java VM\'leri</string>
+    <string name="multirt_config_add">Yeni ekle</string>
+    <string name="multirt_config_add_subtitle">Yeni Java VM\'i içe aktar</string>
+    <string name="multirt_title">Runtime yöneticisi</string>
+    <string name="multirt_subtitle">Yüklü Java VM\'lerini yönet</string>
+    <string name="multirt_progress_caching">Önbelleğe alınıyor...</string>
+    <string name="multirt_config_setdefault">Varsayılan olarak ayarla</string>
+    <string name="multirt_config_setdefault_already">Varsayılan</string>
+    <string name="multirt_config_removeerror_last">En az bir Java Runtime kurmanız gerekir</string>
 </resources>
