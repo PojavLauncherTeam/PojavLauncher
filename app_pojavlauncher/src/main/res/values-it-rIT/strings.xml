@@ -193,4 +193,5 @@
     <string name="multirt_config_setdefault">Imposta predefinito</string>
     <string name="multirt_config_setdefault_already">Predefinito</string>
     <string name="multirt_config_removeerror_last">Devi avere almeno un Runtime Java installato</string>
+    <string name="multirt_nocompartiblert">Non è stata trovata una versione compatibile di Runtime Java</string>
 </resources>
