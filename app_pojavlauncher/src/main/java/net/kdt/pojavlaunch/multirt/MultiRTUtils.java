@@ -162,9 +162,13 @@ public class MultiRTUtils {
     }
     public static void setRuntimeNamed(Context ctx, String name) throws IOException {
         File dest = new File(runtimeFolder,"/"+name);
-        if(!dest.exists()) return;
+        if((!dest.exists()) || MultiRTUtils.forceReread(name).versionString == null) throw new RuntimeException("Selected runtime is broken!");
         Tools.DIR_HOME_JRE = dest.getAbsolutePath();
         JREUtils.relocateLibPath(ctx);
+    }
+    public static Runtime forceReread(String name) {
+        cache.remove(name);
+        return read(name);
     }
     public static Runtime read(String name) {
         if(cache.containsKey(name)) return cache.get(name);

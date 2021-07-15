@@ -130,7 +130,6 @@ public class BaseMainActivity extends LoggableActivity {
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-            MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
             logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
             logFile.delete();
             logFile.createNewFile();
@@ -140,7 +139,16 @@ public class BaseMainActivity extends LoggableActivity {
             mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
             
             setTitle("Minecraft " + mProfile.selectedVersion);
-            
+            PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(mProfile.selectedVersion);
+            String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
+            if(cfg != null) {
+                if(cfg.selectedRuntime != null) {
+                    if(MultiRTUtils.forceReread(cfg.selectedRuntime).versionString != null) {
+                        runtime = cfg.selectedRuntime;
+                    }
+                }
+            }
+            MultiRTUtils.setRuntimeNamed(this,runtime);
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;
             
