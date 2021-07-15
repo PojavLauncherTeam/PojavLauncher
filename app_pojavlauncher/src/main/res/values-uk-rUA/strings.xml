@@ -183,4 +183,14 @@
     <string name="memory_warning_msg">Поточна кількість вільної оперативної пам\'яті (%d) менша, ніж виділена оперативна пам\'ять (%d), що може призвести до крашу. Змініть розміщення якщо гра вилетить.</string>
     <string name="mcl_memory_allocation">Розподіл пам\'яті</string>
     <string name="mcl_memory_allocation_subtitle">Визначає, скільки пам\'яті буде дано для Minecraft</string>
+    <string name="multirt_runtime_corrupt">Пошкоджена Java Runtime</string>
+    <string name="multirt_config_title">Java VM</string>
+    <string name="multirt_config_add">Додати нову</string>
+    <string name="multirt_config_add_subtitle">Імпортувати нову Java VM</string>
+    <string name="multirt_title">Runtime Менеджер</string>
+    <string name="multirt_subtitle">Керування встановленими Java VM</string>
+    <string name="multirt_progress_caching">Кешування...</string>
+    <string name="multirt_config_setdefault">Установити за замовчуванням</string>
+    <string name="multirt_config_setdefault_already">Стандартний</string>
+    <string name="multirt_config_removeerror_last">Ви повинні мати принаймні одну встановленну Java Runtime</string>
 </resources>
