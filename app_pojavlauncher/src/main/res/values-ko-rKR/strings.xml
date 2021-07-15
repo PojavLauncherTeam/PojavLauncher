@@ -16,10 +16,10 @@
     <string name="login_error_exist_username">이미 존재하는 사용자명입니다</string>
     <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
-    <string name="login_title_no_saved_account">계정을 찾을 수 없습니다.</string>
-    <string name="login_dialog_no_saved_account">저장된 계정이 없습니다.\n <b>\"로그인 상태 유지\"</b> 옵션은 첫 로그인시 계정을 저장합니다.</string>
+    <string name="login_title_no_saved_account">계정을 찾을 수 없습니다 !</string>
+    <string name="login_dialog_no_saved_account">저장된 계정이 없습니다.\n <b>\"로그인 상태 유지\"</b> 옵션은 처음으로 로그인 할 시 계정을 저장합니다.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"오른쪽에서 왼쪽으로 스와이프 하여 메뉴를 여세요. ◀\n 버튼을 눌러 수정,  크기 조절,  삭제를 할 수 있습니다."</string>
+    <string name="hint_control_mapping">"오른쪽에서 왼쪽으로 끌어당겨 메뉴를 여세요. ◀\n 버튼을 눌러 수정, 크기 조절, 삭제를 할 수 있습니다."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">이 계정이 제거됩니다!</string>
     <!-- AlertDialog title -->
@@ -68,7 +68,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">최대 해상도 100% 이하로 게임 해상도를 낮출 수 있습니다.</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
     <string name="mcl_setting_subtitle_longpresstrigger">블록 파괴와 아이템 던지기 등의 동작을 위한 길게 누르기 시간 변경</string>
-    <string name="mcl_setting_title_backtorightmouse">뒤로가기 버튼을 우클릭으로 다루기</string>
+    <string name="mcl_setting_title_backtorightmouse">마우스 우클릭으로 뒤로가기</string>
     <string name="mcl_setting_subtitle_backtorightmouse">몇몇 기기들은 외장 마우스 우클릭을 뒤로 가기 버튼으로 이용합니다. 외장 마우스를 이용하시면 활성화해주세요.</string>
     <string name="mcl_setting_title_flat_button_style">플랫 버튼 스타일</string>
     <string name="mcl_setting_subtitle_flat_button_style">컨트롤 버튼을 플랫 스타일로 변경</string>
@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
     <string name="mcl_setting_category_renderer">렌더러</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
