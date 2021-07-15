@@ -576,6 +576,7 @@ public class BaseMainActivity extends LoggableActivity {
         for(int i = 0; i < ev.getPointerCount(); i++) {
             if(ev.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) {
                 mouseCursorIndex = i;
+                break;
             }
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
