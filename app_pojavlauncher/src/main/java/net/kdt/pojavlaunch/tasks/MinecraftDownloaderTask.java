@@ -90,7 +90,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 //Now we have the reliable information to check if our runtime settings are good enough
                 if(verInfo.javaVersion != null) { //1.17+
+                    PerVersionConfig.update();
                     PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
+                    if(cfg == null) {
+                        cfg = new PerVersionConfig.VersionConfig();
+                        PerVersionConfig.configMap.put(p1[0],cfg);
+                    }
                      MultiRTUtils.Runtime r = cfg.selectedRuntime != null?MultiRTUtils.read(cfg.selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
                      if(r.javaVersion < verInfo.javaVersion.majorVersion) {
                          String appropriateRuntime = MultiRTUtils.getNearestJREName(verInfo.javaVersion.majorVersion);
@@ -98,7 +103,16 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                              cfg.selectedRuntime = appropriateRuntime;
                              PerVersionConfig.update();
                          }else{
-                             return new Exception("Unable to find a compatible Java Runtime for this version");
+                             mActivity.runOnUiThread(()->{
+                                 AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
+                                 bldr.setTitle(R.string.global_error);
+                                 bldr.setMessage(R.string.multirt_nocompartiblert);
+                                 bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
+                                     dialog.dismiss();
+                                 });
+                                 bldr.show();
+                             });
+                             throw new SilentException();
                          }
                      } //if else, we are satisfied
                 }
@@ -223,7 +237,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         }
     }
     private int addProgress = 0;
-
+    public static class SilentException extends Exception{}
     public void zeroProgress() {
         addProgress = 0;
     }
@@ -316,7 +330,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         mActivity.mLaunchProgress.setMax(100);
         mActivity.mLaunchProgress.setProgress(0);
         mActivity.statusIsLaunching(false);
-        if(p1 != null) {
+        if(p1 != null && !(p1 instanceof SilentException)) {
             p1.printStackTrace();
             Tools.showError(mActivity, p1);
         }
@@ -407,6 +421,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             File objectsDir = new File(outputDir, "objects");
             zeroProgress();
             for(String assetKey : assetsObjects.keySet()) {
+                if(!mActivity.mIsAssetsProcessing) break;
                 JAssetInfo asset = assetsObjects.get(assetKey);
                 assetsSizeBytes+=asset.size;
                 String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
