@@ -187,4 +187,5 @@
     <string name="multirt_progress_caching">שומר במטמון...</string>
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
+    <string name="multirt_config_removeerror_last">נדרש שיהיה לך לפחות Java Runtime אחת מותקנת</string>
 </resources>
