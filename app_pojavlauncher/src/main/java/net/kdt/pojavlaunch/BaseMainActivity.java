@@ -139,6 +139,7 @@ public class BaseMainActivity extends LoggableActivity {
             mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
             
             setTitle("Minecraft " + mProfile.selectedVersion);
+            PerVersionConfig.update();
             PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(mProfile.selectedVersion);
             String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
             if(cfg != null) {
