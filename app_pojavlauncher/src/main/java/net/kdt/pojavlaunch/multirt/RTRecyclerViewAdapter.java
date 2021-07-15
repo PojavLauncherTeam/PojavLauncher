@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.kdt.pojavlaunch.R;
@@ -39,6 +40,11 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
     }
     public boolean isDefaultRuntime(MultiRTUtils.Runtime rt) {
         return LauncherPreferences.PREF_DEFAULT_RUNTIME.equals(rt.name);
+    }
+    public void setDefault(MultiRTUtils.Runtime rt){
+        LauncherPreferences.PREF_DEFAULT_RUNTIME = rt.name;
+        LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
+        RTRecyclerViewAdapter.this.notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
@@ -85,6 +91,15 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         public void onClick(View v) {
             if(v.getId() == R.id.multirt_view_removebtn) {
                 if (currentRuntime != null) {
+                    if(MultiRTUtils.getRuntimes().size() < 2) {
+                        AlertDialog.Builder bldr = new AlertDialog.Builder(ctx);
+                        bldr.setTitle(R.string.global_error);
+                        bldr.setMessage(R.string.multirt_config_removeerror_last);
+                        bldr.setPositiveButton(android.R.string.ok,(adapter, which)->adapter.dismiss());
+                        bldr.show();
+                        return;
+                    }
+
                     final ProgressDialog barrier = new ProgressDialog(ctx);
                     barrier.setMessage(ctx.getString(R.string.global_waiting));
                     barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -97,8 +112,9 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
                             Tools.showError(itemView.getContext(), e);
                         }
                         v.post(() -> {
+                            if(isDefaultRuntime(currentRuntime)) setDefault(MultiRTUtils.getRuntimes().get(0));
                             barrier.dismiss();
-                            RTRecyclerViewAdapter.this.notifyItemRemoved(currentPosition);
+                            RTRecyclerViewAdapter.this.notifyDataSetChanged();
                             dialog.dialog.show();
                         });
                     });
@@ -106,11 +122,11 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
                 }
             }else if(v.getId() == R.id.multirt_view_setdefaultbtn) {
                 if(currentRuntime != null) {
-                    LauncherPreferences.PREF_DEFAULT_RUNTIME = currentRuntime.name;
-                    LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
+                    setDefault(currentRuntime);
                     RTRecyclerViewAdapter.this.notifyDataSetChanged();
                 }
             }
         }
+
     }
 }

@@ -13,6 +13,8 @@ import android.widget.AdapterView.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
@@ -74,41 +76,48 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 final View v = LayoutInflater.from(view.getContext()).inflate(R.layout.pvc_popup,null);
+                final List<MultiRTUtils.Runtime> runtimes = MultiRTUtils.getRuntimes();
+                final Spinner javaVMSpinner = ((Spinner)v.findViewById(R.id.pvc_javaVm));
+                final EditText customDirText = ((EditText)v.findViewById(R.id.pvc_customDir));
+                final EditText jvmArgsEditText = ((EditText)v.findViewById(R.id.pvc_jvmArgs));
+                javaVMSpinner.setAdapter(new RTSpinnerAdapter(RefreshVersionListTask.this.mActivity,runtimes));
                 try {
                     PerVersionConfig.update();
                 }catch (IOException e) {
                     e.printStackTrace();
                 }
                 PerVersionConfig.VersionConfig conf = PerVersionConfig.configMap.get(mActivity.mProfile.selectedVersion);
+                int index = runtimes.indexOf(new MultiRTUtils.Runtime("<Default>"));
+
                 if(conf != null) {
-                    ((EditText)v.findViewById(R.id.pvc_customDir)).setText(conf.gamePath);
-                    ((EditText)v.findViewById(R.id.pvc_jvmArgs)).setText(conf.jvmArgs);
+                    customDirText.setText(conf.gamePath);
+                    jvmArgsEditText.setText(conf.jvmArgs);
+                    if(conf.selectedRuntime != null) {
+                        int nindex = runtimes.indexOf(new MultiRTUtils.Runtime(conf.selectedRuntime));
+                        if(nindex != -1) index = nindex;
+                    }
                 }
+                javaVMSpinner.setSelection(index);
                 builder.setView(v);
                 builder.setTitle("Per-version settings");
-                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        PerVersionConfig.VersionConfig conf = PerVersionConfig.configMap.get(mActivity.mProfile.selectedVersion);
-                            if(conf == null) {
-                                conf = new PerVersionConfig.VersionConfig();
-                            }
-                            conf.jvmArgs = ((EditText)v.findViewById(R.id.pvc_jvmArgs)).getText().toString();
-                            conf.gamePath  = ((EditText)v.findViewById(R.id.pvc_customDir)).getText().toString();
-                            PerVersionConfig.configMap.put(mActivity.mProfile.selectedVersion,conf);
-                            try {
-                               PerVersionConfig.update();
-                            }catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                builder.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
+                builder.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                        PerVersionConfig.VersionConfig conf1 = PerVersionConfig.configMap.get(mActivity.mProfile.selectedVersion);
+                        if(conf1 == null) {
+                            conf1 = new PerVersionConfig.VersionConfig();
                         }
-                });
+                        conf1.jvmArgs = jvmArgsEditText.getText().toString();
+                        conf1.gamePath  = customDirText.getText().toString();
+                        String runtime = ((MultiRTUtils.Runtime)javaVMSpinner.getSelectedItem()).name;;
+                        if(!runtime.equals("<Default>")) conf1.selectedRuntime = runtime;
+                        else conf1.selectedRuntime = null;
+                        PerVersionConfig.configMap.put(mActivity.mProfile.selectedVersion, conf1);
+                        try {
+                           PerVersionConfig.update();
+                        }catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 builder.show();
                 return true;
             }

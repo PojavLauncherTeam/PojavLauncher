@@ -10,9 +10,12 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+
 import org.apache.commons.io.*;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -84,6 +87,21 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
 
                 verInfo = Tools.getVersionInfo(mActivity,p1[0]);
+
+                //Now we have the reliable information to check if our runtime settings are good enough
+                if(verInfo.javaVersion != null) { //1.17+
+                    PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
+                     MultiRTUtils.Runtime r = cfg.selectedRuntime != null?MultiRTUtils.read(cfg.selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+                     if(r.javaVersion < verInfo.javaVersion.majorVersion) {
+                         String appropriateRuntime = MultiRTUtils.getNearestJREName(verInfo.javaVersion.majorVersion);
+                         if(appropriateRuntime != null) {
+                             cfg.selectedRuntime = appropriateRuntime;
+                             PerVersionConfig.update();
+                         }else{
+                             return new Exception("Unable to find a compatible Java Runtime for this version");
+                         }
+                     } //if else, we are satisfied
+                }
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
                 } catch (IOException e) {

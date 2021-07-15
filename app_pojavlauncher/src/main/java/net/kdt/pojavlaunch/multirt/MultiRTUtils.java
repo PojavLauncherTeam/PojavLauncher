@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MultiRTUtils {
     public static HashMap<String,Runtime> cache = new HashMap<>();
@@ -33,6 +34,18 @@ public class MultiRTUtils {
         public String versionString;
         public String arch;
         public int javaVersion;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Runtime runtime = (Runtime) o;
+            return name.equals(runtime.name);
+        }
+        @Override
+        public int hashCode() {
+            return Objects.hash(name);
+        }
     }
     public static interface ProgressReporterThingy {
         void reportStringProgress(int resid, Object ... stuff);
@@ -49,6 +62,21 @@ public class MultiRTUtils {
         }
 
         return ret;
+    }
+    public static String getNearestJREName(int majorVersion) {
+        List<Runtime> runtimes = getRuntimes();
+        int diff_factor = Integer.MAX_VALUE;
+        String result = null;
+        for(Runtime r : runtimes) {
+            if(r.javaVersion >= majorVersion) { // lower - not useful
+                int currentFactor = r.javaVersion - majorVersion;
+                if(diff_factor > currentFactor) {
+                    result = r.name;
+                    diff_factor = currentFactor;
+                }
+            }
+        }
+        return result;
     }
     public static void installRuntimeNamed(InputStream runtimeInputStream, String name, ProgressReporterThingy thingy) throws IOException {
         File dest = new File(runtimeFolder,"/"+name);
@@ -138,7 +166,7 @@ public class MultiRTUtils {
         Tools.DIR_HOME_JRE = dest.getAbsolutePath();
         JREUtils.relocateLibPath(ctx);
     }
-    private static Runtime read(String name) {
+    public static Runtime read(String name) {
         if(cache.containsKey(name)) return cache.get(name);
         Runtime retur;
         File release = new File(runtimeFolder,"/"+name+"/release");
