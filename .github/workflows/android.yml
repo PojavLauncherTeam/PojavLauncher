@@ -86,7 +86,7 @@ jobs:
         cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main/assets/components/lwjgl3/lwjgl-glfw-classes.jar
         
         ./gradlew :app_pojavlauncher:bundleGplay
-        mv app_pojavlauncher/build/outputs/apk/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
+        mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
         
         # Build the launcher
         ./gradlew :app_pojavlauncher:assembleDebug
