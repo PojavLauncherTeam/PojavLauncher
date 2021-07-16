@@ -55,7 +55,9 @@ jobs:
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
     
     - name: Install gl4es
-      run: cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
+      run: |
+        cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
+        find . -type f -o -name "*.so" | xargs rm -f 
     
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
