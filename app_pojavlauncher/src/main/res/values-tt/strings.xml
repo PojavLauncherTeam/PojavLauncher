@@ -58,6 +58,7 @@
     <string name="mcl_option_about">Лаунчер турында</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime-ны бетерергә</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Лаунчерны яңадан кушу кирәк] Ул Java Runtime-ны яңадан утыртырга рөхсәт ителә</string>
+    <string name="mcl_setting_title_freeform">Йөзүче тәрәзәдә Minecraft ачу</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft-ны йөзмә тәрәзәдә ача. Android 7.0+ кирәк</string>
     <string name="mcl_setting_title_hide_sidebar">Кырый панелен яшерү</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы кешеләргә бу иске v1 интерфейсы ошауы кирәк. Күбрәк тулы экран тәҗрибәсен бирелде.</string>
