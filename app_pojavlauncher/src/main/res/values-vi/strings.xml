@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition cho Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email hoặc tên người dùng</string>
+    <string name="login_online_password_hint">Mật khẩu</string>
+    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
+    <string name="login_online_login_label">Đăng nhập</string>
+    <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
+    <string name="login_error_short_username">Tên người dùng phải co ít nhất 3 kí tự</string>
+    <string name="login_error_exist_username">Tên này đã tồn tại</string>
+    <string name="login_microsoft">Đăng nhập Microsoft</string>
+    <string name="login_select_account">Chọn tài khoản</string>
+    <string name="login_title_no_saved_account">Không tìm thấy tài khoản !</string>
+    <string name="login_dialog_no_saved_account">Bạn không có tài khoản nào được lưu.\nDùng cài đặt <b>\"Giữ đăng nhập\"</b> để giữ tài khoản lúc đầu đăng nhập.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Vuốt từ phải sang trái để mở menu ◀\nGiữ một nút để tùy chỉnh: chỉnh sửa, thay đổi kích thước hoặc xoá."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Tài khoản này sẽ bị loại bỏ!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Cài đặt Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Chọn một bộ cài mod</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher đã bất ngờ bị rớt</string>
+    <string name="error_no_version">Không có phiên bản!</string>
+    <string name="error_show_more">Hiển thị thêm</string>
+    <string name="error_show_less">Hiển thị ít hơn</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Quyền đọc / ghi vào bộ nhớ là bắt buộc!</string>
+    <string name="toast_optifine_success">Cài đặt thành công</string>
+    <string name="toast_uninstalljre_done">Đã gỡ Java Runtime</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Tin tức</string>
+    <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
+    <string name="mcl_tab_crash">Nhật ký sự cố</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Đã kết nối</string>
+    <string name="mcl_account_offline">Ngoại tuyến</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Làm sạch file bộ nhớ đệm</string>
+    <string name="mcl_launch_downloading">Đang tải xuống %s</string>
+    <string name="mcl_launch_downloading_progress">"Đang tải %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
+    <string name="mcl_options">Tùy chọn</string>
+    <string name="mcl_option_modinstall">Chạy một bộ cài mod (Forge, LabyMod, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Chạy một bộ cài mod (với chỉ số tùy chỉnh)</string>
+    <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
+    <string name="mcl_option_settings">Thiết lập</string>
+    <string name="mcl_option_about">Giới thiệu</string>
+    <string name="mcl_setting_title_uninstalljre">Gỡ Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Đề nghị khởi động lại trình khởi chạy] Điều này cho phép bạn cài đặt lại Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ tự do</string>
+    <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa cửa sổ nổi. Yêu cầu Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Ẩn thanh bên</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Cái cũ giao diện người dùng v1 cũ có thể thích điều này. Mang đến cho bạn trải nghiệm toàn màn hình hơn.</string>
+    <string name="mcl_setting_title_ignore_notch">Bỏ notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Bỏ notch và mở rộng màn hình bên dưới.\nMang đến cho bạn trải nghiệm phong phú hơn.</string>
+    <string name="mcl_setting_title_resolution_scaler">Độ phân giải</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Cho phép bạn giảm độ phân giải của game. 100% là max độ phân giải</string>
+    <string name="mcl_setting_title_longpresstrigger">Bao lâu sẽ kích hoạt sau khi nhấn giữ</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian kích hoạt khi nhấn và giữ trong khối phá hủy và thả vật phẩm.</string>
+    <string name="mcl_setting_title_backtorightmouse">Xem nút trở về như chuột phải</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Một số thiết bị xem nút chuột phải bên ngoài như nút quay trở lại. Nếu bạn đang sử dụng chuột ngoài, bạn nên bật tùy chọn này.</string>
+    <string name="mcl_setting_title_flat_button_style">Kiểu nút phẳng</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Bật cái này để đổi sang kiểu nút phẳng.</string>
+    <string name="mcl_setting_title_buttonscale">Độ rộng nút điều khiển</string>
+    <string name="mcl_setting_subtitle_buttonscale">Tăng độ rộng nếu nút quá nhỏ.</string>
+    <string name="mcl_setting_title_mousescale">Độ lớn của chuột</string>
+    <string name="mcl_setting_subtitle_mousescale">Đổi kích thước chuột ảo.</string>
+    <string name="mcl_setting_title_javaargs">Các chỉ số chạy JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
+    <string name="mcl_setting_category_general">Thiết lập chung</string>
+    <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
+    <string name="mcl_setting_category_renderer">Trình kết xuất</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
+    <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được ở trong danh sách phiên bản</string>
+    <string name="mcl_setting_veroption_release">Bản phát hành</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">apha-cũ</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-cũ</string>
+    <string name="mcl_version_clone">Nhân bản</string>
+    <!-- Global strings -->
+    <string name="global_edit">Chỉnh sửa</string>
+    <string name="global_error">Lỗi</string>
+    <string name="global_load">Tải</string>
+    <string name="global_name">Tên</string>
+    <string name="global_remove">Loại bỏ</string>
+    <string name="global_restart">Khởi động lại</string>
+    <string name="global_save">Lưu</string>
+    <string name="global_unpacking">Đang giải nén %s</string>
+    <string name="global_error_field_empty">Trường này không được để trống</string>
+    <string name="global_waiting">Đợi</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d</string>
+    <string name="mcn_exit_call">Thoát</string>
+    <string name="mcn_exit_confirm">Bạn có chắc muốn bắt buộc thoát chương trình?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
+    <string name="mcn_check_fail_incompatiblearch">Kiến trúc %1$s không tương thích với Java Runtime %2$s.</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">Giao diện</string>
+    <string name="control_keyboard">Bàn Phím</string>
+    <string name="control_chat">Trò chuyện</string>
+    <string name="control_debug">Gỡ lỗi</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Túi đồ</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">Thứ ba</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Chuột</string>
+    <string name="control_mouseoff">Chuột: tắt</string>
+    <string name="control_mouseon">Chuột: bật </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Đóng chương trình</string>
+    <string name="control_viewout">Nhật ký ra</string>
+    <string name="control_adebug">Gỡ lỗi đầu vào</string>
+    <string name="control_customkey">Gửi phím tùy chọn</string>
+    <string name="control_scaleup">Phóng to</string>
+    <string name="control_scaledown">Thu nhỏ</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">Chỉnh sửa %s</string>
+    <string name="customctrl_remove">Xóa %s?</string>
+    <string name="customctrl_keyname">Mã phím</string>
+    <string name="customctrl_toggle">Chuyển đổi</string>
+    <string name="customctrl_size">Kích thước</string>
+    <string name="customctrl_size_width">Chiều rộng</string>
+    <string name="customctrl_size_height">Độ cao</string>
+    <string name="customctrl_dynamicpos">Điểm động</string>
+    <string name="customctrl_dynamicpos_x">Động X</string>
+    <string name="customctrl_dynamicpos_y">Động Y</string>
+    <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
+    <string name="customctrl_keycombine">Tổ hợp phím</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">Thêm nút</string>
+    <string name="customctrl_selectdefault">Chọn bộ điều khiển json thông thường</string>
+    <string name="main_options">Tùy chọn</string>
+    <string name="main_play">Chơi</string>
+    <string name="main_welcome">Chào mừng, %s</string>
+    <string name="main_infodev">Thông tin (DEV)</string>
+    <string name="main_switchuser">Đổi người dùng</string>
+    <string name="main_version">Phiên bản:</string>
+    <string name="main_nocrash">Không phát hiện sự cố</string>
+    <string name="main_nolog">Không có bản ghi.</string>
+    <string name="main_no_news_feed">Lỗi tải bài đăng mới !</string>
+    <string name="auto_ram_subtitle">Bật tự động điều chỉnh RAM</string>
+    <string name="auto_ram_title">RAM tự động</string>
+    <string name="autoram_info_msg">Bộ nhớ được đặt thành %d MB</string>
+    <string name="mcl_setting_check_libraries">Kiểm tra libraries sau khi tải</string>
+    <string name="mcl_setting_check_libraries_subtitle">Cài đặt này buộc trình khởi chạy kiểm tra hàm băm của library nếu nó có sẵn. Ngăn chặn tải xuống bị hỏng.</string>
+    <string name="dl_library_sha_fail">Library %s bị hỏng và sẽ tải lại</string>
+    <string name="dl_library_sha_unknown">Library %s không thể kiểm tra, cho rằng nó tốt</string>
+    <string name="dl_library_sha_pass">Library %s tốt và có thể sử dụng được</string>
+    <string name="mcl_disable_gestures">Tắt cử chỉ</string>
+    <string name="mcl_disable_gestures_subtitle">Tắt cử chỉ, ví dụ như giữ để phá block, và tap để đặt block.</string>
+    <string name="mcl_setting_title_mousespeed">Tốc độ chuột</string>
+    <string name="mcl_setting_subtitle_mousespeed">Chỉnh tốc độ của phầm mềm chuột</string>
+    <string name="customctrl_passthru">Di chuyển chuột</string>
+    <string name="customctrl_rounded">Làm tròn</string>
+    <string name="memory_warning_msg">Số lượng RAM trống hiện tại (%d) thấp hơn số lượng RAM được phân bổ (%d), có thể dẫn đến sự cố. Thay đổi số lượng phân bổ nếu trò chơi bị sập.</string>
+    <string name="mcl_memory_allocation">Phân bổ bộ nhớ</string>
+    <string name="mcl_memory_allocation_subtitle">Điều chỉnh số lượng bộ nhớ được cung cấp cho Minecraft</string>
+</resources>
