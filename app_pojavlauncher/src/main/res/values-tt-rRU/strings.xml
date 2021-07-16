@@ -143,4 +143,5 @@
     <string name="customctrl_passthru">Тычкан күрсәткече</string>
     <string name="customctrl_rounded">Түгәрәкләнгән</string>
     <string name="mcl_memory_allocation">Компьютер хәтере бүлеп бирү</string>
+    <string name="multirt_config_title">Java виртуаль машиннар</string>
 </resources>
