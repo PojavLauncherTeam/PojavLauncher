@@ -54,10 +54,10 @@
     <string name="mcl_option_modinstall">Iniciar um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Iniciar um instalador de mods (com argumentos personalizados)</string>
     <string name="mcl_option_customcontrol">Controles personalizados</string>
-    <string name="mcl_option_settings">Config.</string>
+    <string name="mcl_option_settings">Config</string>
     <string name="mcl_option_about">Sobre</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Reinicialização necessária] Isso te permite reinstalar o Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Reinicialização necessária] Isso permite você reinstalar o Java Runtime</string>
     <string name="mcl_setting_title_freeform">Iniciar o Minecraft no modo Livre</string>
     <string name="mcl_setting_subtitle_freeform">Executar Minecraft em janela flutuante. Requer Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ocultar barra lateral</string>
@@ -77,7 +77,7 @@
     <string name="mcl_setting_title_mousescale">Escala do mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Alterar o tamanho do mouse virtual.</string>
     <string name="mcl_setting_title_javaargs">Argumentos JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Cuidado, isso pode fazer seu jogo ser interrompido se modificado sem conhecimento.</string>
+    <string name="mcl_setting_subtitle_javaargs">Cuidado, isso pode causar falhas no seu jogo, se modificado sem conhecimento.</string>
     <string name="mcl_setting_category_general">Configurações gerais</string>
     <string name="mcl_setting_category_scaling">Configurações de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
@@ -140,8 +140,8 @@
     <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mouse</string>
-    <string name="control_mouseoff">Mouse: Não</string>
-    <string name="control_mouseon">Mouse: Sim </string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Forçar encerramento</string>
     <string name="control_viewout">Saída do log</string>
@@ -161,7 +161,7 @@
     <string name="customctrl_size_width">Largura</string>
     <string name="customctrl_size_height">Altura</string>
     <string name="customctrl_dynamicpos">Posição dinâmica</string>
-    <string name="customctrl_dynamicpos_x">X Dinâmico</string>
+    <string name="customctrl_dynamicpos_x">X dinâmico</string>
     <string name="customctrl_dynamicpos_y">Y dinâmico</string>
     <string name="customctrl_transparency_bg">Transparência do fundo</string>
     <string name="customctrl_keycombine">Combinação de teclas</string>
@@ -172,11 +172,11 @@
     <string name="customctrl_selectdefault">Selecione o controle padrão</string>
     <string name="main_options">Opções</string>
     <string name="main_play">Jogar</string>
-    <string name="main_welcome">Boas-vindas, %s</string>
+    <string name="main_welcome">Bem-vindo, %s</string>
     <string name="main_infodev">Info. (DEV)</string>
     <string name="main_switchuser">Trocar usuário</string>
     <string name="main_version">Versão:</string>
-    <string name="main_nocrash">Nenhuma interrupção detectada</string>
+    <string name="main_nocrash">Nenhuma falha detectada</string>
     <string name="main_nolog">Sem log.</string>
     <string name="main_no_news_feed">Falha ao obter as novidades!</string>
     <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
@@ -193,7 +193,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do mouse do software</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_rounded">Arredondado</string>
-    <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), o que pode causar interrupções. Altere a quantidade se o jogo for interrompido.</string>
+    <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), o que pode causar falhas. Altere a quantidade se o jogo apresentar alguma falha.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
     <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será dado ao Minecraft</string>
 </resources>
