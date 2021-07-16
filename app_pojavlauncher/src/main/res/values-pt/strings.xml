@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Joga o Minecraft: Java Edition em seu dispositivo!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">E-mail ou nome de utilizador</string>
+    <string name="login_online_password_hint">Palavra-passe</string>
+    <string name="login_online_check_keeplogin">Manter a sessão iniciada</string>
+    <string name="login_online_login_label">Iniciar sessão</string>
+    <string name="login_offline_label">Iniciar sessão com conta off-line</string>
+    <string name="login_error_short_username">O nome tem de ter pelo menos 3 caracteres</string>
+    <string name="login_error_exist_username">Esse nome já existe</string>
+    <string name="login_select_account">Seleciona a conta</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <string name="warning_remove_account">Esta conta será removida!</string>
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <string name="error_fatal">O PojavLauncher parou de funcionar</string>
+    <string name="error_no_version">Não há versão!</string>
+    <string name="error_show_more">Mostrar mais</string>
+    <string name="error_show_less">Mostrar menos</string>
+    <!-- Toast messages -->
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Account status -->
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_setting_veroption_release">Oficial</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+    <!-- Global strings -->
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Sair</string>
+    <!-- MainActivity: Control buttons -->
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Saída de log</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+</resources>
