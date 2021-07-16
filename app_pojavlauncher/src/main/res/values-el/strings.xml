@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition για Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Εκκινήστε το Minecraft: Java Edition στη συσκευή σας!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Ηλεκτρονικό ταχυδρομείο ή όνομα χρήστη</string>
+    <string name="login_online_password_hint">Κωδικός Πρόσβασης</string>
+    <string name="login_online_check_keeplogin">Να παραμείνω συνδεδεμένος</string>
+    <string name="login_online_login_label">Είσοδος</string>
+    <string name="login_offline_label">Είσοδος ως λογαριασμός εκτός σύνδεσης</string>
+    <string name="login_error_short_username">Το όνομα πρέπει να είναι τουλάχιστον 3 χαρακτήρες</string>
+    <string name="login_error_exist_username">Αυτό το όνομα χρήστη υπάρχει ήδη</string>
+    <string name="login_error_offline_password">Ο λογαριασμός εκτός σύνδεσης δεν μπορεί να περιλαμβάνει κωδικό πρόσβασης!</string>
+    <string name="login_microsoft">Microsoft Είσοδος</string>
+    <string name="login_select_account">Επιλέξτε λογαριασμό</string>
+    <string name="login_title_no_saved_account">Δεν βρέθηκε κανένας λογαριασμός !</string>
+    <string name="login_dialog_no_saved_account">Δεν έχετε αποθηκευμένο λογαριασμό.\nΧρησιμοποιήστε την επιλογή <b>\"Κρατήστε με συνδεδεμένο\"</b> για να αποθηκεύσετε έναν λογαριασμό κατά την πρώτη σύνδεση.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Σύρετε από δεξιά προς τα αριστερά για να ανοίξετε το μενού ◀\nΚρατήστε ένα κουμπί για προσαρμογή: επεξεργασία, αλλαγή μεγέθους ή διαγραφή."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Αυτός ο λογαριασμός θα αφαιρεθεί!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Εγκατάστησε Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Επιλέξτε ένα πρόγραμμα εγκατάστασης mod</string>
+    <!-- Error messages -->
+    <string name="error_fatal">Ο PojavLauncher κατέρρευσε απροσδόκητα</string>
+    <string name="error_no_version">Καμία έκδοση!</string>
+    <string name="error_show_more">Εμφάνιση περισσότερων</string>
+    <string name="error_show_less">Εμφάνιση λιγότερων</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Απαιτείται η ανάγνωση/εγγραφή στον χώρο αποθήκευσης!</string>
+    <string name="toast_optifine_success">Επιτυχής εγκατάσταση</string>
+    <string name="toast_uninstalljre_done">Έγινε κατάργηση εγκατάστασης Java Runtime</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Νέα</string>
+    <string name="mcl_tab_console">Κονσόλα προγραμματιστή</string>
+    <string name="mcl_tab_crash">Αρχείο καταγραφής κατάρρευσης</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Συνδεδεμένος</string>
+    <string name="mcl_account_offline">Εκτός σύνδεσης</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Ετοιμο για να παίξεις Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Εκκαθάριση χώρου προσωρινής αποθήκευσης αρχείων</string>
+    <string name="mcl_launch_downloading">Γίνεται λήψη %s</string>
+    <string name="mcl_launch_downloading_progress">"Λήψη %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Προετοιμασία για λήψη πόρων</string>
+    <string name="mcl_options">Ρυθμίσεις</string>
+    <string name="mcl_option_modinstall">Εκκινήστε ένα πρόγραμμα εγκατάστασης mod (Forge, LabyMod, Fabric, κλπ...)</string>
+    <string name="mcl_option_modinstallwitharg">Εκκινήστε ένα πρόγραμμα εγκατάστασης mod (με προσαρμοσμένες παραμέτρους)</string>
+    <string name="mcl_option_customcontrol">Προσαρμοσμένα controls</string>
+    <string name="mcl_option_settings">Ρυθμίσεις</string>
+    <string name="mcl_option_about">Σχετικά</string>
+    <string name="mcl_setting_title_uninstalljre">Απεγκατάστησε το Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Απαιτείται επανεκκίνηση Launcher] Αυτό σας επιτρέπει να επανεγκαταστήσετε το Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Εκκινήστε το Minecraft σε λειτουργία ελεύθερης μορφής</string>
+    <string name="mcl_setting_subtitle_freeform">Εκκινήστε το Minecraft σε αιωρούμενο παράθυρο. Απαιτεί Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Απόκρυψη πλευρικής μπάρας</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Νοσταλγικοί άνθρωποι που προτιμούν το παλιό περιβάλλον χρήστη v1 μπορεί να τους αρέσει. Σας δίνει μια πιο πλήρη εμπειρία οθόνης.</string>
+    <string name="mcl_setting_title_ignore_notch">Αγνόηση εγκοπής</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Αγνοήστε την εγκοπή και επεκτείνετε την οθόνη κάτω από αυτήν.\nΣας δίνει μια πιο συναρπαστική εμπειρία.</string>
+    <string name="mcl_setting_title_resolution_scaler">Κλίμακα Ανάλυσης</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Σας επιτρέπει να μειώσετε την ανάλυση του παιχνιδιού. Το 100% είναι πλήρης ανάλυση</string>
+    <string name="mcl_setting_title_longpresstrigger">Πόση ώρα θα ενεργοποιηθεί μετά από παρατεταμένο πάτημα</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Αλλαγή χρόνου ενεργοποίησης για παρατεταμένο πάτημα σε μπλοκ και απόθεση αντικειμένου.</string>
+    <string name="mcl_setting_title_backtorightmouse">Αντιμετωπίστε το κουμπί πίσω ως δεξί ποντίκι</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Ορισμένες συσκευές αντιμετωπίζουν το εξωτερικό δεξί ποντίκι ως πίσω κουμπί. Αν χρησιμοποιείτε εξωτερικό ποντίκι, θα πρέπει να το ενεργοποιήσετε.</string>
+    <string name="mcl_setting_title_flat_button_style">Στύλ επίπεδου κουμπιού</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Ενεργοποιήστε αυτό για να αλλάξετε το στυλ κουμπιού ελέγχου σε επίπεδο.</string>
+    <string name="mcl_setting_title_buttonscale">Κλίμακα των κουμπιών ελέγχου</string>
+    <string name="mcl_setting_subtitle_buttonscale">Μεγάλωσε τα κουμπιά αν είναι πολύ μικρά.</string>
+    <string name="mcl_setting_title_mousescale">Κλιμάκωση ποντικιού</string>
+    <string name="mcl_setting_subtitle_mousescale">Αλλαγή μεγέθους εικονικού ποντικιού.</string>
+    <string name="mcl_setting_title_javaargs">JVM Εντολές εκκίνησης</string>
+    <string name="mcl_setting_subtitle_javaargs">Να είστε προσεκτικοί, αυτό μπορεί να προκαλέσει συντριβή στο παιχνίδι αν τροποποιηθεί χωρίς γνώση.</string>
+    <string name="mcl_setting_category_general">Γενικές ρυθμίσεις</string>
+    <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
+    <string name="mcl_setting_category_renderer">Απόδοση</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (no 1.17 supported yet)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
+    <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
+    <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
+    <string name="mcl_setting_veroption_snapshot">Στιγμιότυπο</string>
+    <string name="mcl_setting_veroption_oldalpha">Παλιά-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Παλιά-Beta</string>
+    <string name="mcl_version_clone">Κλώνος</string>
+    <!-- Global strings -->
+    <string name="global_edit">Επεξεργασία</string>
+    <string name="global_error">Σφάλμα</string>
+    <string name="global_load">Φόρτωση</string>
+    <string name="global_name">Όνομα</string>
+    <string name="global_remove">Αφαίρεσε</string>
+    <string name="global_restart">Επανεκκίνηση</string>
+    <string name="global_save">Αποθήκευση</string>
+    <string name="global_unpacking">Αποσυμπίεση %s</string>
+    <string name="global_error_field_empty">Αυτό το πεδίο δεν μπορεί να είναι κενό</string>
+    <string name="global_waiting">Περιμένετε</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερματίστηκε με κωδικό %d</string>
+    <string name="mcn_exit_call">Έξοδος</string>
+    <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
+    <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
+    <string name="mcn_check_fail_incompatiblearch">Η αρχιτεκτονική %1$s δεν είναι συμβατή με το Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Το Vulkan Zink renderer δεν υποστηρίζεται σε αυτήν τη συσκευή!</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Πληκτρολόγιο</string>
+    <string name="control_chat">Συνομιλία</string>
+    <string name="control_debug">Αποσφαλμάτωση</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Κατα</string>
+    <string name="control_thirdperson">3ος</string>
+    <string name="control_listplayers">Καρτέλα</string>
+    <string name="control_mouse">Ποντίκι</string>
+    <string name="control_mouseoff">Ποντίκι: ανενεργό</string>
+    <string name="control_mouseon">Ποντίκι: ενεργό </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Αναγκαστικό κλείσιμο εφαρμογής</string>
+    <string name="control_viewout">Αρχείο Καταγραφής</string>
+    <string name="control_adebug">Είσοδος Σφάλματος</string>
+    <string name="control_customkey">Αποστολή προσαρμοσμένου κωδικού κλειδιού</string>
+    <string name="control_scaleup">Κλιμάκωση πάνω</string>
+    <string name="control_scaledown">Κλιμάκωση προς τα κάτω</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">Επεξεργάζεστε %s</string>
+    <string name="customctrl_remove">Αφαίρεση %s;</string>
+    <string name="customctrl_keyname">Κωδικός κλειδί</string>
+    <string name="customctrl_toggle">Εναλλασσόμενο</string>
+    <string name="customctrl_size">Μέγεθος</string>
+    <string name="customctrl_size_width">Πλάτος</string>
+    <string name="customctrl_size_height">Ύψος</string>
+    <string name="customctrl_dynamicpos">Δυναμική θέση</string>
+    <string name="customctrl_dynamicpos_x">Δυναμικό Χ</string>
+    <string name="customctrl_dynamicpos_y">Δυναμικό Υ</string>
+    <string name="customctrl_transparency_bg">Διαφάνεια φόντου</string>
+    <string name="customctrl_keycombine">Συνδυασμός πλήκτρων</string>
+    <string name="customctrl_addbutton">Προσθήκη κουμπιού</string>
+    <string name="customctrl_selectdefault">Επιλογή προεπιλεγμένου ελέγχου json</string>
+    <string name="main_options">Ρυθμίσεις</string>
+    <string name="main_play">Παίξε</string>
+    <string name="main_welcome">Καλωσόρισες, %s</string>
+    <string name="main_infodev">Πληροφορίες (DEV)</string>
+    <string name="main_switchuser">Εναλλαγή χρήστη</string>
+    <string name="main_version">Έκδοση:</string>
+    <string name="main_nocrash">Δεν εντοπίστηκε κατάρρευση</string>
+    <string name="main_nolog">Δεν υπάρχουν αρχεία καταγραφής.</string>
+    <string name="main_no_news_feed">Απέτυχε η λήψη της ροής ειδήσεων!</string>
+    <string name="auto_ram_subtitle">Ενεργοποιεί τον αυτόματο ρυθμιστή RAM</string>
+    <string name="auto_ram_title">Αυτόματη RAM</string>
+    <string name="autoram_info_msg">Η μνήμη ορίστηκε σε %d MB</string>
+    <string name="mcl_setting_check_libraries">Έλεγχος βιβλιοθηκών μετά τη λήψη</string>
+    <string name="mcl_setting_check_libraries_subtitle">Αυτή η επιλογή αναγκάζει το launcher να ελέγξει την βιβλιοθήκη hash αν είναι διαθέσιμο. Αποτρέπει τις κατεστραμμένες λήψεις.</string>
+    <string name="dl_library_sha_fail">Η βιβλιοθήκη %s έχει υποστεί ζημιά και θα γίνει ξανά λήψη</string>
+    <string name="dl_library_sha_unknown">Η βιβλιοθήκη %s δεν μπορεί να ελεγχθεί, πρέπει να υποθέσουμε ότι είναι καλή</string>
+    <string name="dl_library_sha_pass">Η βιβλιοθήκη %s είναι καλή και χρησιμοποιήσιμη</string>
+    <string name="mcl_disable_gestures">Απενεργοποίηση χειρονομιών</string>
+    <string name="mcl_disable_gestures_subtitle">Απενεργοποιεί χειρονομίες, όπως κράτημα για να σπάσεις έναν κύβο και πατήστε για να τοποθετήσετε κύβο.</string>
+    <string name="mcl_setting_title_mousespeed">Ταχύτητα Ποντικιού</string>
+    <string name="mcl_setting_subtitle_mousespeed">Αλλάζει την ταχύτητα του ποντικιού του λογισμικού</string>
+    <string name="customctrl_passthru">Pass-thru ποντικιού</string>
+    <string name="customctrl_rounded">Στρογγυλεμένο</string>
+    <string name="memory_warning_msg">Το τρέχον ποσό της δωρεάν μνήμης RAM (%d) είναι μικρότερο από το κατανεμημένο RAM (%d), το οποίο μπορεί να οδηγήσει σε καταρρεύσεις. Αλλάξτε την κατανομή αν το παιχνίδι καταρρεύσει.</string>
+    <string name="mcl_memory_allocation">Κατανομή μνήμης</string>
+    <string name="mcl_memory_allocation_subtitle">Ελέγχει πόση μνήμη δίνεται στο Minecraft</string>
+    <string name="multirt_runtime_corrupt">Κατεστραμμένο Java Runtime</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">Προσθήκη νέου</string>
+    <string name="multirt_config_add_subtitle">Εισαγωγή νέου Java VM</string>
+    <string name="multirt_title">Διαχειριστής Runtime</string>
+    <string name="multirt_subtitle">Διαχείριση εγκατεστημένων Java VMs</string>
+    <string name="multirt_progress_caching">Προσωρινή αποθήκευση...</string>
+    <string name="multirt_config_setdefault">Ορισμός ως προεπιλογή</string>
+    <string name="multirt_config_setdefault_already">Προεπιλογή</string>
+</resources>
