@@ -106,11 +106,11 @@ jobs:
     - name: Upload onto the Google Play testing track
       uses: r0adkll/upload-google-play@v1
       with:
-        serviceAccountJson: ${{ secrets.GPLAY_SERVICE_JSON }}
+        serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
         packageName: net.kdt.pojavlaunch
         releaseFiles: out/app-gplay.aab
         track: internal
-        inAppUpdatePriority: 2
+        inAppUpdatePriority: 5
     - name: Upload APK (without runtime)
       uses: actions/upload-artifact@v2
       with:
