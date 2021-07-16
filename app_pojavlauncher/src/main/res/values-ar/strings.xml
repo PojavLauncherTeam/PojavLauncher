@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">إعدادات عامة</string>
     <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
     <string name="mcl_setting_category_renderer">العارض</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (لم يتم دعم 1.17 بعد)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">نوع الإصدار سيكون في قائمة الإصدارات</string>
     <string name="mcl_setting_veroption_release">إصدار نهائي</string>
     <string name="mcl_setting_veroption_snapshot">اللمحات (سنابشوت)</string>
@@ -105,6 +109,7 @@
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
     <string name="mcn_check_fail_incompatiblearch">البنية %1$s غير متوافقة مع محرك تشغيل جافا %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">رندر فولكان زينك غير مدعوم على هذا الجهاز!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">واجهة المستخدم الرسومية</string>
     <string name="control_keyboard">لوحة المفاتيح</string>
@@ -172,4 +177,15 @@
     <string name="memory_warning_msg">الكمية الحالية من ذاكرة الوصول العشوائي المجانية (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. قم بتغيير التخصيص إذا تحطمت اللعبة.</string>
     <string name="mcl_memory_allocation">تخصيص الذاكرة.</string>
     <string name="mcl_memory_allocation_subtitle">يتحكم في كمية الذاكرة المعطاة لـ Minecraft</string>
+    <string name="multirt_runtime_corrupt">مشغل جافا فاسد</string>
+    <string name="multirt_config_title">مشغلات جافا</string>
+    <string name="multirt_config_add">أضف واحدًا جديدا</string>
+    <string name="multirt_config_add_subtitle">اضف محرك جافا جديدة</string>
+    <string name="multirt_title">مدير مشغلات الجافا</string>
+    <string name="multirt_subtitle">إدارة مشغلات جافا المثبتة</string>
+    <string name="multirt_progress_caching">تخزين اامعلومات...</string>
+    <string name="multirt_config_setdefault">تعيين لإستخدام دائم</string>
+    <string name="multirt_config_setdefault_already">مستخدم دائما</string>
+    <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل مشغل جافا واحد مثبت</string>
+    <string name="multirt_nocompartiblert">لا يمكن العثور على مشغل جافا قابل للتشغيل</string>
 </resources>
