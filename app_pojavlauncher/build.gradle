@@ -45,13 +45,19 @@ android {
             keyAlias "androiddebugkey"
             keyPassword "android"
         }
+        googlePlayBuild {
+            storeFile file("upload.jks")
+            storePassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
+            keyAlias "upload"
+            keyPassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
+        }
     }
 	
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 156253
+        versionCode new Date().getSeconds()
         versionName getVersionName()
         multiDexEnabled true //important
     }
@@ -71,6 +77,10 @@ android {
 	    // defaultConfig already set
             // multiDexEnabled = true
            // debuggable = true
+        }
+        gplay {
+            initWith release
+            signingConfig signingConfigs.googlePlayBuild
         }
     }
 	
