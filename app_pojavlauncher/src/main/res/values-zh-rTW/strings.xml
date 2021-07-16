@@ -14,6 +14,7 @@
     <string name="login_offline_label">以離線賬號登入</string>
     <string name="login_error_short_username">用戶名至少為3個字元</string>
     <string name="login_error_exist_username">用戶名已存在</string>
+    <string name="login_error_offline_password">離線賬戶不能填寫密碼！</string>
     <string name="login_microsoft">微軟帳號登入</string>
     <string name="login_select_account">選擇賬號</string>
     <string name="login_title_no_saved_account">賬戶未找到！</string>
@@ -81,6 +82,10 @@
     <string name="mcl_setting_category_general">常規設定</string>
     <string name="mcl_setting_category_scaling">縮放設定</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（1.17 暫不支持）</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
@@ -98,29 +103,13 @@
     <string name="global_unpacking">正在解包 %s</string>
     <string name="global_error_field_empty">此處表單不能為空</string>
     <string name="global_waiting">等待中</string>
-    <!--
-    <string name="mcl_about">
-    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
-    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-    "Using libraries:\n" +
-    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-    //" • Boardwalk memory manager (not used now).\n" +
-    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • OpenJDK" +
-    "\n" +
-    "* Notes:\n" +
-    " - This app is currently BETA, it will not be stable.\n" +
-    //"* This app will unstable on Android 7.0 or higher devices.\n" +
-    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
-    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
-    </string>
-    -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
+    <string name="mcn_check_fail_vulkan_support">該設備不支持 Vulkan Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">鍵盤</string>
@@ -188,4 +177,15 @@
     <string name="memory_warning_msg">當前可用運存 (%d) 低於分配的運存 (%d)，這可能導致崩潰。 如果遊戲崩潰請更改配置。</string>
     <string name="mcl_memory_allocation">運存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制給 Minecraft 分配多少運存</string>
+    <string name="multirt_runtime_corrupt">Java 運行時損壞</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">新建</string>
+    <string name="multirt_config_add_subtitle">導入新的 Java VM</string>
+    <string name="multirt_title">運行時管理器</string>
+    <string name="multirt_subtitle">管理已安裝的 Java VMs</string>
+    <string name="multirt_progress_caching">正在緩存……</string>
+    <string name="multirt_config_setdefault">設為預設</string>
+    <string name="multirt_config_setdefault_already">預設</string>
+    <string name="multirt_config_removeerror_last">您必須至少安裝一個 Java 運行時</string>
+    <string name="multirt_nocompartiblert">找不到任何可壓縮的 Java 運行時</string>
 </resources>

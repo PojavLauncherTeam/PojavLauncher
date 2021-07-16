@@ -14,6 +14,7 @@
     <string name="login_offline_label">ʇunoɔɔɐ ǝuᴉꞁɟɟo sɐ uᴉᵷoꞀ</string>
     <string name="login_error_short_username">sɹǝʇɔɐɹɐɥɔ Ɛ ʇsɐǝꞁ ʇɐ ǝq ʇsnɯ ǝɯɐuɹǝs∩</string>
     <string name="login_error_exist_username">ʇsᴉxǝ ʎpɐǝɹꞁɐ ǝɯɐuɹǝsn sᴉɥ⟘</string>
+    <string name="login_error_offline_password">¡pɹoʍssɐd ǝpnꞁɔuᴉ ʇ,uɐɔ ʇunoɔɔɐ ǝuᴉꞁɟɟO</string>
     <string name="login_microsoft">uᴉᵷoꞁ ʇɟosoɹɔᴉW</string>
     <string name="login_select_account">ʇunoɔɔɐ ʇɔǝꞁǝS</string>
     <string name="login_title_no_saved_account">¡ punoɟ ʇunoɔɔɐ oN</string>
@@ -81,6 +82,10 @@
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
+    <string name="mcl_setting_renderer_gles2_4">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ߈˙⥝˙⥝ sǝ߈ꞁᵷ</string>
+    <string name="mcl_setting_renderer_gles2_5">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
+    <string name="mcl_setting_renderer_gles3_5">(ʇǝʎ pǝʇɹoddns ㄥ⥝˙⥝ ou) ᘔ˙Ɛ ꞁɐᴉʇɹɐd + ⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
+    <string name="mcl_setting_renderer_vulkan_zink">9˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(uɐʞꞁnɅ) ʞuᴉz</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
     <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
@@ -98,29 +103,13 @@
     <string name="global_unpacking">%s ᵷuᴉʞɔɐdu∩</string>
     <string name="global_error_field_empty">ʎʇdɯǝ ǝq ʇ,uɐɔ pꞁǝᴉɟ sᴉɥ⟘</string>
     <string name="global_waiting">ʇᴉɐM</string>
-    <!--
-    <string name="mcl_about">
-    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
-    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-    "Using libraries:\n" +
-    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-    //" • Boardwalk memory manager (not used now).\n" +
-    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • OpenJDK" +
-    "\n" +
-    "* Notes:\n" +
-    " - This app is currently BETA, it will not be stable.\n" +
-    //"* This app will unstable on Android 7.0 or higher devices.\n" +
-    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
-    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
-    </string>
-    -->
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">%d ǝpoɔ ɥʇᴉʍ pǝʇᴉxǝ ǝɯɐ⅁/uoᴉʇɐɔᴉꞁddⱯ</string>
     <string name="mcn_exit_call">ʇᴉxƎ</string>
     <string name="mcn_exit_confirm">¿ǝsoꞁɔ ǝɔɹoɟ oʇ ʇuɐʍ ǝɹns noʎ ǝɹⱯ</string>
     <string name="mcn_check_fail_lwjgl">¡pǝꞁꞁɐʇsuᴉ ʇou sɐʍ ƐꞀ⅁ՐMꞀ</string>
     <string name="mcn_check_fail_incompatiblearch">˙%2$s ǝɯᴉʇunᴚ ɐʌɐՐ ɥʇᴉʍ ǝꞁqᴉʇɐdɯoɔuᴉ sᴉ %1$s ǝɹnʇɔǝʇᴉɥɔɹⱯ</string>
+    <string name="mcn_check_fail_vulkan_support">¡ǝɔᴉʌǝp sᴉɥʇ uo pǝʇɹoddns ʇou sᴉ ɹǝɹǝpuǝɹ ʞuᴉZ uɐʞꞁnɅ</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">I∩⅁</string>
     <string name="control_keyboard">pɹɐoqʎǝꞰ</string>

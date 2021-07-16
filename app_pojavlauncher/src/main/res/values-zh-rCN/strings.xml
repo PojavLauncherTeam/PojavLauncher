@@ -14,6 +14,7 @@
     <string name="login_offline_label">以离线账号登录</string>
     <string name="login_error_short_username">用户名至少为3字符长</string>
     <string name="login_error_exist_username">用户名已存在</string>
+    <string name="login_error_offline_password">离线账号不能填写密码！</string>
     <string name="login_microsoft">微软帐号登录</string>
     <string name="login_select_account">选择账号</string>
     <string name="login_title_no_saved_account">帐户未找到！</string>
@@ -61,7 +62,7 @@
     <string name="mcl_setting_title_freeform">以自由窗口模式启动 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">隐藏侧边栏</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">怀念旧 v1 界面的用户可能喜欢这样。提供了更接近全屏的体验。</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">怀念 v1 旧版界面的用户可能喜欢这样。它提供了更接近全屏的体验。</string>
     <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
     <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将画面扩展至其下方。\n给您以更完整的沉浸感。</string>
     <string name="mcl_setting_title_resolution_scaler">分辨率缩放</string>
@@ -81,6 +82,10 @@
     <string name="mcl_setting_category_general">常规设置</string>
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（尚未支持1.17）</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
@@ -97,30 +102,14 @@
     <string name="global_save">保存</string>
     <string name="global_unpacking">正在解包 %s</string>
     <string name="global_error_field_empty">此处表单不能为空</string>
-    <string name="global_waiting">等待</string>
-    <!--
-    <string name="mcl_about">
-    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
-    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-    "Using libraries:\n" +
-    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-    //" • Boardwalk memory manager (not used now).\n" +
-    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • OpenJDK" +
-    "\n" +
-    "* Notes:\n" +
-    " - This app is currently BETA, it will not be stable.\n" +
-    //"* This app will unstable on Android 7.0 or higher devices.\n" +
-    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
-    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
-    </string>
-    -->
+    <string name="global_waiting">请稍等</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用/游戏以 %d 代码退出</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
-    <string name="mcn_check_fail_lwjgl">未安装LWJGL3！</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不与 Java 运行时环境 %2$s 兼容。</string>
+    <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时环境 %2$s 。</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink 渲染在该设备上不可用！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">键盘</string>
@@ -194,4 +183,15 @@
     <string name="memory_warning_msg">当前可用内存 (%d) 低于分配的内存 (%d)，这可能导致崩溃。 如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存</string>
+    <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">新建</string>
+    <string name="multirt_config_add_subtitle">导入新的 Java VM</string>
+    <string name="multirt_title">运行时管理器</string>
+    <string name="multirt_subtitle">管理已安装的 Java VMs</string>
+    <string name="multirt_progress_caching">正在缓存……</string>
+    <string name="multirt_config_setdefault">设为默认</string>
+    <string name="multirt_config_setdefault_already">默认</string>
+    <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行时</string>
+    <string name="multirt_nocompartiblert">找不到任何可压缩的 Java 运行时</string>
 </resources>
