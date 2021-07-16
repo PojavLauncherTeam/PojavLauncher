@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: ฉบับ Java สำหรับ Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">เปิด Minecraft: ฉบับ Java ในอุปกรณ์ของคุณ!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">อีเมลหรือชื่อผู้ใช้</string>
+    <string name="login_online_password_hint">รหัสผ่าน</string>
+    <string name="login_online_check_keeplogin">คงฉันไว้ในระบบ</string>
+    <string name="login_online_login_label">เข้าสู่ระบบ</string>
+    <string name="login_offline_label">เข้าสู่ระบบในฐานะบัญชีออฟไลน์</string>
+    <string name="login_error_exist_username">ชื่อผู้ใช้นี้มีอยู่แล้ว</string>
+    <string name="login_microsoft">เข้าสู่ระบบ Microsoft</string>
+    <string name="login_select_account">เลือกบัญชี</string>
+    <string name="login_title_no_saved_account">ไม่พบบัญชี !</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher ได้ขัดข้องโดยไม่คาดคิด</string>
+    <string name="error_no_version">ไม่มีเวอร์ชัน!</string>
+    <string name="error_show_more">แสดงเพิ่มเติม</string>
+    <string name="error_show_less">แสดงน้อยลง</string>
+    <!-- Toast messages -->
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">ข่าวสาร</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
+    <string name="mcl_account_offline">ออฟไลน์</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">พร้อมที่จะเล่น Minecraft %s</string>
+    <string name="mcl_launch_cleancache">กำลังล้างแฟ้มแคช</string>
+    <string name="mcl_launch_downloading">กำลังดาวน์โหลด %s</string>
+    <string name="mcl_launch_downloading_progress">"กำลังดาวน์โหลด %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">กำลังเตรียมดาวน์โหลดทรัพยากร</string>
+    <string name="mcl_options">ตัวเลือก</string>
+    <string name="mcl_option_customcontrol">การควบคุมกำหนดเอง</string>
+    <string name="mcl_option_settings">การตั้งค่า</string>
+    <string name="mcl_option_about">เกี่ยวกับ</string>
+    <string name="mcl_setting_subtitle_freeform">เปิด Minecraft ในหน้าต่างลอย. ต้องใช้ Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">ซ่อนแถบด้านข้าง</string>
+    <string name="mcl_setting_title_resolution_scaler">มาตราส่วนความละเอียด</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">อนุญาตให้คุณลดความละเอียดเกมลง. 100% คือความละเอียดเต็มที่</string>
+    <string name="mcl_setting_title_mousescale">การปรับมาตราเมาส์</string>
+    <string name="mcl_setting_subtitle_mousescale">เปลี่ยนขนาดของเมาส์เสมือน.</string>
+    <string name="mcl_setting_category_general">การตั้งค่าทั่วไป</string>
+    <string name="mcl_setting_category_veroption">ประเภทเวอร์ชันจะอยู่ในรายการเวอร์ชัน</string>
+    <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
+    <string name="mcl_setting_veroption_oldbeta">เบตาเก่า</string>
+    <!-- Global strings -->
+    <string name="global_edit">แก้ไข</string>
+    <string name="global_load">โหลด</string>
+    <string name="global_name">ชื่อ</string>
+    <string name="global_save">บันทึก</string>
+    <string name="global_error_field_empty">สนามนี้ไม่สามารถว่าง</string>
+    <string name="global_waiting">รอ</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">ออก</string>
+    <string name="mcn_exit_confirm">คุณแน่ใจหรือไม่ว่าต้องการบังคับปิด?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 ไม่ได้ถูกติดตั้ง!</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">แป้นพิมพ์</string>
+    <string name="control_chat">แชต</string>
+    <string name="control_debug">ดีบั๊ก</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">เมาส์</string>
+    <string name="control_mouseoff">เมาส์: ปิด</string>
+    <string name="control_mouseon">เมาส์: เปิด </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">บังคับปิด</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">การแก้ไข %s</string>
+    <string name="customctrl_size">ขนาด</string>
+    <string name="customctrl_size_width">ความกว้าง</string>
+    <string name="customctrl_size_height">ความสูง</string>
+    <string name="customctrl_dynamicpos">ตำแหน่งพลวัต</string>
+    <string name="customctrl_dynamicpos_x">พลวัต X</string>
+    <string name="customctrl_dynamicpos_y">พลวัต Y</string>
+    <string name="customctrl_transparency_bg">ความโปร่งใสพื้นหลัง</string>
+    <string name="customctrl_keycombine">การรวมคีย์</string>
+    <string name="customctrl_addbutton">เพิ่มปุ่ม</string>
+    <string name="main_options">ตัวเลือก</string>
+    <string name="main_play">เล่น</string>
+    <string name="main_welcome">ยินดีต้อนรับ, %s</string>
+    <string name="main_infodev">ข้อมูล (DEV)</string>
+    <string name="main_switchuser">สลับผู้ใช้</string>
+    <string name="main_version">เวอร์ชัน:</string>
+    <string name="auto_ram_subtitle">เปิดใช้งานตัวปรับ RAM อัตโนมัติ</string>
+    <string name="auto_ram_title">RAM อัตโนมัติ</string>
+    <string name="autoram_info_msg">ตั้งหน่วยความจำเป็น %d MB</string>
+    <string name="mcl_setting_title_mousespeed">ความเร็วเมาส์</string>
+    <string name="customctrl_rounded">โค้งมน</string>
+    <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
+</resources>
