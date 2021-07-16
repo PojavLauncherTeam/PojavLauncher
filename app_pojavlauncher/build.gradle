@@ -51,7 +51,7 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 156249
+        versionCode 156253
         versionName getVersionName()
         multiDexEnabled true //important
     }
@@ -83,6 +83,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    bundle {
+        language {
+            enableSplit = false
+        }
     }
     buildToolsVersion '30.0.2'
 }
