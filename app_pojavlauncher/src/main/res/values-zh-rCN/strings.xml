@@ -99,7 +99,7 @@
     <string name="global_save">保存</string>
     <string name="global_unpacking">正在解包 %s</string>
     <string name="global_error_field_empty">此处表单不能为空</string>
-    <string name="global_waiting">等待</string>
+    <string name="global_waiting">请稍等</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -121,8 +121,8 @@
     <string name="mcn_exit_title">应用/游戏以 %d 代码退出</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
-    <string name="mcn_check_fail_lwjgl">未安装LWJGL3！</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不与 Java 运行时环境 %2$s 兼容。</string>
+    <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时环境 %2$s 。</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">键盘</string>
