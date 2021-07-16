@@ -84,7 +84,7 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (1.17 暫不支持)</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（1.17 暫不支持）</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
@@ -177,4 +177,15 @@
     <string name="memory_warning_msg">當前可用運存 (%d) 低於分配的運存 (%d)，這可能導致崩潰。 如果遊戲崩潰請更改配置。</string>
     <string name="mcl_memory_allocation">運存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制給 Minecraft 分配多少運存</string>
+    <string name="multirt_runtime_corrupt">Java 運行時損壞</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">新建</string>
+    <string name="multirt_config_add_subtitle">導入新的 Java VM</string>
+    <string name="multirt_title">運行時管理器</string>
+    <string name="multirt_subtitle">管理已安裝的 Java VMs</string>
+    <string name="multirt_progress_caching">正在緩存……</string>
+    <string name="multirt_config_setdefault">設為預設</string>
+    <string name="multirt_config_setdefault_already">預設</string>
+    <string name="multirt_config_removeerror_last">您必須至少安裝一個 Java 運行時</string>
+    <string name="multirt_nocompartiblert">找不到任何可壓縮的 Java 運行時</string>
 </resources>
