@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Android için Minecraft: Java Edition)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Cihazınızda Minecraft: Java Edition çalıştırın!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
+    <string name="login_online_password_hint">Şifre</string>
+    <string name="login_online_check_keeplogin">Oturumu Açık Tut</string>
+    <string name="login_online_login_label">Giriş yap</string>
+    <string name="login_offline_label">Çevrimdışı hesapla girin</string>
+    <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmalıdır</string>
+    <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
+    <string name="login_microsoft">Microsoft giriş</string>
+    <string name="login_select_account">Hesap seçin</string>
+    <string name="login_title_no_saved_account">Hiç hesap bulunamadı !</string>
+    <string name="login_dialog_no_saved_account">Hiçbir kayıtlı hesabın yok.\n&lt;b&gt;\"Beni hatırla\"&lt;b&gt;\'yı seçerek hesaplarını kaydedebilirsin.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Java Runtime\'ı kur %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Bir mod yükleyicisi seç</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
+    <string name="error_no_version">Sürümler yok!</string>
+    <string name="error_show_more">Daha fazla göster</string>
+    <string name="error_show_less">Daha az göster</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Depolamaya okuma/yazma izni gerekli!</string>
+    <string name="toast_optifine_success">Yükleme başarılı</string>
+    <string name="toast_uninstalljre_done">Java Runtime kaldırması tamamlandı</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Haberler</string>
+    <string name="mcl_tab_console">Geliştirici konsolu</string>
+    <string name="mcl_tab_crash">Çökme günlüğü</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Bağlandı</string>
+    <string name="mcl_account_offline">Çevrimdışı</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s başlamaya hazır</string>
+    <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
+    <string name="mcl_launch_downloading">%s indiriliyor</string>
+    <string name="mcl_launch_downloading_progress">"%s indiriliyor (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
+    <string name="mcl_options">Ayarlar</string>
+    <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
+    <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümânlarla)</string>
+    <string name="mcl_option_customcontrol">Özel kontroller</string>
+    <string name="mcl_option_settings">Ayarlar</string>
+    <string name="mcl_option_about">Launcher hakkında</string>
+    <string name="mcl_setting_title_uninstalljre">Java Runtime\'ı kaldır</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
+    <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
+    <string name="mcl_setting_title_hide_sidebar">Kenar çubuğunu gizle</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Eski v1 Menüsünü hatırlayan eski arkadaşlar bunu tercih ediyor. Daha çok tam ekran deneyimi verir.</string>
+    <string name="mcl_setting_title_ignore_notch">Çentiği görmezden gel</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve altındaki ekranı genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
+    <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
+    <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar zaman sonra tetiklenecek</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
+    <string name="mcl_setting_title_backtorightmouse">Geri tuşunu fare sağ tıkı gibi algıla</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Bazı cihazlar farenin sağ tıkını geri tuşu olarak algılar. Eğer fiziksel fare kullanıyorsanız, bunu aktifleştirmelisiniz.</string>
+    <string name="mcl_setting_title_flat_button_style">Düz düğme tarzı</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Düğme tarzını düz yapmak için bunu etkinleştir.</string>
+    <string name="mcl_setting_title_buttonscale">Düğmelerin boyutlayıcısını ayarla</string>
+    <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
+    <string name="mcl_setting_title_mousescale">Fare boyutu</string>
+    <string name="mcl_setting_subtitle_mousescale">Sanal farenin boyutunu ayarlayın.</string>
+    <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
+    <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
+    <string name="mcl_setting_category_general">Genel ayarlar</string>
+    <string name="mcl_setting_category_scaling">Boyutlama Seçenekleri</string>
+    <string name="mcl_setting_category_renderer">İşleyici</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
+    <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
+    <string name="mcl_setting_veroption_release">Sürümler</string>
+    <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
+    <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
+    <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
+    <string name="mcl_version_clone">Klon</string>
+    <!-- Global strings -->
+    <string name="global_edit">Düzenle</string>
+    <string name="global_error">Hata</string>
+    <string name="global_load">Yükle</string>
+    <string name="global_name">İsim</string>
+    <string name="global_remove">Kaldır</string>
+    <string name="global_restart">Yeniden başlat</string>
+    <string name="global_save">Kaydet</string>
+    <string name="global_unpacking">%s Paketten çıkarılıyor</string>
+    <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
+    <string name="global_waiting">Bekleyin</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
+    <string name="mcn_exit_call">Çıkış</string>
+    <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 yüklenmemiş!</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s mimarisi Java Runtime %2$s ile uyumsuz.</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Klavye</string>
+    <string name="control_chat">Sohbet</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Env</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Fare</string>
+    <string name="control_mouseoff">Fare: kpl</string>
+    <string name="control_mouseon">Fare: açık </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Kapatmaya zorla</string>
+    <string name="control_viewout">Konsol çıktısı</string>
+    <string name="control_adebug">Hata ayıklama tuşu gir</string>
+    <string name="control_customkey">Özel anahtarkodu gönder</string>
+    <string name="control_scaleup">Boyutu Arttır</string>
+    <string name="control_scaledown">Boyutu Küçült</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">%s düzenleniyor</string>
+    <string name="customctrl_remove">%s kaldırılsın mı?</string>
+    <string name="customctrl_keyname">AnahtarKodu</string>
+    <string name="customctrl_toggle">Değiştirilebilir</string>
+    <string name="customctrl_size">Boyut</string>
+    <string name="customctrl_size_width">Genişlik</string>
+    <string name="customctrl_size_height">Yükseklik</string>
+    <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
+    <string name="customctrl_dynamicpos_x">Dinamik X</string>
+    <string name="customctrl_dynamicpos_y">Dinamik Y</string>
+    <string name="customctrl_transparency_bg">Arkaplan saydamlığı</string>
+    <string name="customctrl_keycombine">Anahtar Kombinasyonu</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">Düğme ekle</string>
+    <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
+    <string name="main_options">Ayarlar</string>
+    <string name="main_play">Oyna</string>
+    <string name="main_welcome">Hoş geldiniz, %s</string>
+    <string name="main_infodev">Bilgi (Geliştirici)</string>
+    <string name="main_switchuser">Kullanıcı değiştir</string>
+    <string name="main_version">Sürüm:</string>
+    <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
+    <string name="main_nolog">Kayıt yok.</string>
+    <string name="main_no_news_feed">Haberler bilgileri getirilemedi !</string>
+    <string name="auto_ram_subtitle">Otomatik RAM ayarlayıcısını aktifleştirir</string>
+    <string name="auto_ram_title">Otomatik RAM</string>
+    <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
+    <string name="mcl_setting_check_libraries">İndirmeden sonra kütüphaneleri kontrol et</string>
+    <string name="mcl_setting_check_libraries_subtitle">Bu seçenek eğer hazırsa başlatıcıyı kütüphane hash\'ini kontrol etmeye zorlar. Kırık indirmeleri engeller.</string>
+    <string name="dl_library_sha_fail">Kütüphane %s hasarlı ve yeniden indirilecek</string>
+    <string name="dl_library_sha_unknown">Kütüphane %s kontrol edilemez, düzgün olduğu varsayılmak zorunda</string>
+    <string name="dl_library_sha_pass">Kütüphane %s iyi durumda ve kullanılabilir</string>
+    <string name="mcl_disable_gestures">İşaretleri devre dışı bırak</string>
+    <string name="mcl_disable_gestures_subtitle">İşaretleri devre dışarı bırakır, blok kırma ve blok koymak için basma gibi.</string>
+    <string name="mcl_setting_title_mousespeed">Fare Hızı</string>
+    <string name="mcl_setting_subtitle_mousespeed">Yazılımsal farenin hızını değiştirir</string>
+    <string name="customctrl_passthru">Mouse geçişi</string>
+    <string name="customctrl_rounded">Kenarlı</string>
+    <string name="memory_warning_msg">Şuanki boş RAM (%d) verilecek RAM\'den (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilecek RAM\'i değiştirin.</string>
+    <string name="mcl_memory_allocation">Bellek ayırma</string>
+    <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder</string>
+</resources>
