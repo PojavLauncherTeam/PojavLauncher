@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
@@ -50,6 +51,7 @@ public class Gamepad {
     private GamepadMap currentMap = gameMap;
 
     private boolean lastGrabbingState = true;
+    private MotionEvent lastMotionEvent = null;
 
 
     private final Thread mouseThread;
@@ -57,6 +59,8 @@ public class Gamepad {
     private final Runnable switchStateRunnable;
 
     public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
+        Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
+
         leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
         rightJoystick = new GamepadJoystick(MotionEvent.AXIS_Z, MotionEvent.AXIS_RZ, inputDevice);
 
@@ -99,6 +103,12 @@ public class Gamepad {
             }
 
             private void tick(){
+                if(lastMotionEvent != null){
+                    updateDirectionalJoystick(lastMotionEvent);
+                    updateMouseJoystick(lastMotionEvent);
+                    updateAnalogTriggers(lastMotionEvent);
+                }
+
                 if(lastHorizontalValue != 0 || lastVerticalValue != 0){
                     GamepadJoystick currentJoystick = CallbackBridge.isGrabbing() ? leftJoystick : rightJoystick;
 
@@ -227,10 +237,9 @@ public class Gamepad {
     }
 
     public void update(MotionEvent event){
-        gamepadDpad.update(event);
-        updateDirectionalJoystick(event);
-        updateMouseJoystick(event);
-        updateAnalogTriggers(event);
+        lastMotionEvent = event;
+        if(gamepadDpad.update(event) != -1) return;
+        //The rest of events are now sent each 1/60 second.
     }
 
     private void updateMouseJoystick(MotionEvent event){
@@ -388,12 +397,12 @@ public class Gamepad {
                     break;
 
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT:
-                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
-                    //MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                    //CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
+                    MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                     break;
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT:
-                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
-                    //MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
+                    //CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
+                    MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                     break;
 
 
@@ -410,7 +419,6 @@ public class Gamepad {
     }
 
     public static boolean isGamepadEvent(KeyEvent event){
-        //return false;
 
 
         return ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
