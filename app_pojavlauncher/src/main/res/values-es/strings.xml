@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (No, la versión 1.17 sigue sin funcionar todavía)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
@@ -191,4 +192,6 @@
     <string name="multirt_progress_caching">Cacheando...</string>
     <string name="multirt_config_setdefault">Establecer como predeterminado</string>
     <string name="multirt_config_setdefault_already">Predeterminado</string>
+    <string name="multirt_config_removeerror_last">Debes tener al menos un Runtime de Java instalado</string>
+    <string name="multirt_nocompartiblert">No se pudo encontrar ningún Runtime de Java compatible</string>
 </resources>
