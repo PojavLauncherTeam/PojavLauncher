@@ -183,4 +183,11 @@
     <string name="memory_warning_msg">当前可用内存 (%d) 低于分配的内存 (%d)，这可能导致崩溃。 如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存</string>
+    <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">新建</string>
+    <string name="multirt_config_add_subtitle">导入新的 Java VM</string>
+    <string name="multirt_title">运行时管理器</string>
+    <string name="multirt_subtitle">管理安装好的 Java VMs</string>
+    <string name="multirt_progress_caching">正在缓存...</string>
 </resources>
