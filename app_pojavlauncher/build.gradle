@@ -57,7 +57,7 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode new Date().getSeconds()
+        versionCode Math.abs(new Random().nextInt() % 10000000) + 1
         versionName getVersionName()
         multiDexEnabled true //important
     }
