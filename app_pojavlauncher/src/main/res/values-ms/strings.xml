@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Lancarkan Minecraft: Java Edition di dalam peranti anda!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">E-mel atau nama pengguna</string>
+    <string name="login_online_password_hint">Kata Laluan</string>
+    <string name="login_online_check_keeplogin">Kekalkan saya dilog masuk</string>
+    <string name="login_online_login_label">Log masuk</string>
+    <string name="login_offline_label">Log masuk sebagai akaun luar talian</string>
+    <string name="login_error_short_username">Nama pengguna mesti mempunyai sekurang-kurangnya 3 aksara</string>
+    <string name="login_error_exist_username">Nama pengguna ini sudah diguna</string>
+    <string name="login_microsoft">Log masuk Microsoft</string>
+    <string name="login_select_account">Pilih akaun</string>
+    <string name="login_title_no_saved_account">Tiada akaun dijumpai!</string>
+    <string name="login_dialog_no_saved_account">Kamu tidak mempunyai sebarang akaun yang disimpan.\nGunakan pilihan <b>\"Kekalkan saya terlog masuk\"</b> untuk menyimpan sebuah akaun pada log masuk pertama.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Leret dari kanan untuk membuka menu ◀\nTekan dan tahan sebuah butang untuk menyesuaikan: edit, mengubah saiz atau padam."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Akaun ini akan dihapus!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Pasang Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Pilih sebuah pemasang mod</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher terhenti tanpa diduga</string>
+    <string name="error_no_version">Tiada versi!</string>
+    <string name="error_show_more">Tunjuk lebih banyak</string>
+    <string name="error_show_less">Tunjuk lebih sedikit</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Kebenaran untuk membaca/menulis kepada storan diperlukan!</string>
+    <string name="toast_optifine_success">Pemasangan berjaya</string>
+    <string name="toast_uninstalljre_done">Selesai menyahpasang Java Runtime</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Berita</string>
+    <string name="mcl_tab_console">Konsol development</string>
+    <string name="mcl_tab_crash">Log ranap</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Tersambung</string>
+    <string name="mcl_account_offline">Luar talian</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Bersedia untuk bermain Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Membersihkan fail cache</string>
+    <string name="mcl_launch_downloading">Memuat turun %s</string>
+    <string name="mcl_launch_downloading_progress">"Memuat turun %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Bersedia untuk memuat turun sumber</string>
+    <string name="mcl_options">Pilihan</string>
+    <string name="mcl_option_modinstall">Lancarkan sebuah pemasang mod (Forge, LabyMod, Fabric, dll...)</string>
+    <string name="mcl_option_modinstallwitharg">Lancarkan sebuah pemasang mod (dengan argumen custom)</string>
+    <string name="mcl_option_customcontrol">Kawalan custom</string>
+    <string name="mcl_option_settings">Tetapan</string>
+    <string name="mcl_option_about">Tentang</string>
+    <string name="mcl_setting_title_uninstalljre">Nyahpasang Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Pemulaan semula Pelancar diperlukan] Ini membenarkan anda untuk memasang semula Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Lancarkan Minecraft dalam mod Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Lancarkan Minecraft di dalam mod window melayang. Memerlukan Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Sembunyi Palang sisi</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Orang bernostalgia yang lebih memilih UI v1 yang lama mungkin akan menyukai ini. Memberikan anda lebih banyak pengalaman skrin penuh.</string>
+    <string name="mcl_setting_title_ignore_notch">Abaikan takik</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Abaikan takik dan panjangkan skrin dibawahnya.\nMemberikan anda pengalaman yang lebih mengasyikkan.</string>
+    <string name="mcl_setting_title_resolution_scaler">Pengskala Resolusi</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Membenarkan anda untuk menurunkan resolusi permainan. 100% adalah resolusi penuh</string>
+    <string name="mcl_setting_title_longpresstrigger">Berapa lama akan dicetus setelah tekanan yang lama</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Tukar masa cetusan untuk tekanan lama dalam penghancuran blok dan pelemparan item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Anggap butang kembali sebagai butang tetikus kanan</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Sesetengah peranti menganggap butang tetikus kanan eksternal sebagai butang kembali. Jikalau anda menggunakan tetikus eksternal, kamu harus mengaktifkan ini.</string>
+    <string name="mcl_setting_title_flat_button_style">Gaya butang datar</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Aktifkan ini untuk menukar gaya butang kawalan kepada datar.</string>
+    <string name="mcl_setting_title_buttonscale">Skala butang kawalan</string>
+    <string name="mcl_setting_subtitle_buttonscale">Naikkan skala mereka jika butangnya terlalu kecil.</string>
+    <string name="mcl_setting_title_mousescale">Skala tetikus</string>
+    <string name="mcl_setting_subtitle_mousescale">Tukar saiz tetikus virtual.</string>
+    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
+    <string name="mcl_setting_subtitle_javaargs">Berhati-hati, ini mungkin menyebabkan permainan menjadi ranap jika diubah tanpa pengetahuan.</string>
+    <string name="mcl_setting_category_general">Tetapan umum</string>
+    <string name="mcl_setting_category_scaling">Tetapan Skala</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
+    <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
+    <string name="mcl_setting_veroption_release">Rilis</string>
+    <string name="mcl_setting_veroption_snapshot">Petikan</string>
+    <string name="mcl_setting_veroption_oldalpha">Alfa-lama</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
+    <string name="mcl_version_clone">Klon</string>
+    <!-- Global strings -->
+    <string name="global_edit">Sunting</string>
+    <string name="global_error">Ralat</string>
+    <string name="global_load">Memuat</string>
+    <string name="global_name">Nama</string>
+    <string name="global_remove">Hapus</string>
+    <string name="global_restart">Mula Semula</string>
+    <string name="global_save">Simpan</string>
+    <string name="global_unpacking">Menyahpek %s</string>
+    <string name="global_error_field_empty">Medan ini tidak boleh dibiarkan kosong</string>
+    <string name="global_waiting">Tunggu</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan kod %d</string>
+    <string name="mcn_exit_call">Keluar</string>
+    <string name="mcn_exit_confirm">Adakah anda mahu paksa tutup aplikasi?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 tidak terpasang!</string>
+    <string name="mcn_check_fail_incompatiblearch">Arkitektur %1$s tidak kompatibel dengan Java Runtime %2$s.</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Papan Kekunci</string>
+    <string name="control_chat">Sembang</string>
+    <string name="control_debug">Nyahpepijat</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Tetikus</string>
+    <string name="control_mouseoff">Tetikus: tutup</string>
+    <string name="control_mouseon">Tetikus: buka </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Paksa tutup</string>
+    <string name="control_viewout">Log output</string>
+    <string name="control_adebug">Nyahpepijat Input</string>
+    <string name="control_customkey">Hantar kod kunci custom</string>
+    <string name="control_scaleup">Naikkan skala</string>
+    <string name="control_scaledown">Turunkan skala</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">Menyunting %s</string>
+    <string name="customctrl_remove">Hapus %s?</string>
+    <string name="customctrl_keyname">Kod kunci</string>
+    <string name="customctrl_toggle">Boleh Ditukar</string>
+    <string name="customctrl_size">Saiz</string>
+    <string name="customctrl_size_width">Lebar</string>
+    <string name="customctrl_size_height">Tinggi</string>
+    <string name="customctrl_dynamicpos">Posisi Dinamik</string>
+    <string name="customctrl_dynamicpos_x">Dinamik X</string>
+    <string name="customctrl_dynamicpos_y">Dinamik Y</string>
+    <string name="customctrl_transparency_bg">Ketelusan latar belakang</string>
+    <string name="customctrl_keycombine">Kombinasi kunci</string>
+    <string name="customctrl_addbutton">Tambah butang</string>
+    <string name="customctrl_selectdefault">Pilih json Kawalan lalai</string>
+    <string name="main_options">Pilihan</string>
+    <string name="main_play">Main</string>
+    <string name="main_welcome">Selamat Datang, %s</string>
+    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_switchuser">Tukar pengguna</string>
+    <string name="main_version">Versi:</string>
+    <string name="main_nocrash">Tiada ranap dikesan</string>
+    <string name="main_nolog">Tiada log.</string>
+    <string name="main_no_news_feed">Gagal mendapatkan berita !</string>
+    <string name="auto_ram_subtitle">Membenarkan pelaras RAM automatik</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memori ditetapkan kepada %d MB</string>
+    <string name="mcl_setting_check_libraries">Periksa library selepas muat turun</string>
+    <string name="mcl_setting_check_libraries_subtitle">Pilihan ini memaksa pelancar untuk memeriksa hash library jika ianya tersedia. Boleh mencegah muat turun yang rosak.</string>
+    <string name="dl_library_sha_fail">Library %s ini rosak dan akan dimuat turun semula</string>
+    <string name="dl_library_sha_unknown">Library %s tidak boleh diperiksa, harus menganggap bahawa ianya baik</string>
+    <string name="dl_library_sha_pass">Library %s adalah baik dan boleh digunakan</string>
+    <string name="mcl_disable_gestures">Nyahdayakan gerak isyarat</string>
+    <string name="mcl_disable_gestures_subtitle">Menyahdayakan gerak isyarat, seperti menahan untuk menhancurkan blok, dan tekan untuk meletakkan blok.</string>
+    <string name="mcl_setting_title_mousespeed">Kecepatan Tetikus</string>
+    <string name="mcl_setting_subtitle_mousespeed">Ubah kelajuan tetikus software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Dibundar</string>
+    <string name="memory_warning_msg">Bilangan RAM yang ada (%d) lebih rendah daripada RAM yang diperuntuk (%d), yang mungkin akan menyebabkan ranap. Tukar peruntukan jikalau permainan ranap.</string>
+    <string name="mcl_memory_allocation">Peruntukan memori</string>
+    <string name="mcl_memory_allocation_subtitle">Mengawal berapa banyak memori yang diberikan kepada Minecraft</string>
+</resources>
