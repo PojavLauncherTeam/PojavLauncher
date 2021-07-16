@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">تشغيل Minecraft: Java Edition على جهازك!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
+    <string name="login_online_password_hint">كلمة المرور</string>
+    <string name="login_online_check_keeplogin">أبق تسجيل دخولي</string>
+    <string name="login_online_login_label">تسجيل الدخول</string>
+    <string name="login_offline_label">تسجيل الدخول كحساب غير متصل</string>
+    <string name="login_error_short_username">يجب أن يحتوي اسم المستخدم على 3 أحرف على الأقل</string>
+    <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
+    <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
+    <string name="login_select_account">اختر الحساب</string>
+    <string name="login_title_no_saved_account">لم يتم العثور على الحساب!</string>
+    <string name="login_dialog_no_saved_account">ليس لديك أي حساب محفوظ.\nاستخدم الخيار <b>\"تذكر تسجيل دخولي\"</b> لحفظ حساب عند تسجيل الدخول الأول.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر التخصيص: تحريره أو تغيير حجمه أو حذفه."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">تثبيت محرك تشغيل جافا %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">حدد مشغل مودات للتثبيت</string>
+    <!-- Error messages -->
+    <string name="error_fatal">لقد توقف PojavLauncher بشكل غير متوقع</string>
+    <string name="error_no_version">لا يوجد إصدار!</string>
+    <string name="error_show_more">اظهر المزيد</string>
+    <string name="error_show_less">أظهِر أقل</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">مطلوب إذن القراءة و الكتابة للتخزين!</string>
+    <string name="toast_optifine_success">تم التثبيت بنجاح</string>
+    <string name="toast_uninstalljre_done">تم إلغاء تثبيت محرك تشغيل جافا</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">الأخبار</string>
+    <string name="mcl_tab_console">وحدة التحكم البرمجية</string>
+    <string name="mcl_tab_crash">سجل توقف العمل</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">متصل</string>
+    <string name="mcl_account_offline">غير متصل</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
+    <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
+    <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
+    <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
+    <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
+    <string name="mcl_options">الخيارات</string>
+    <string name="mcl_option_modinstall">تشغيل مثبت مود (Forge, LabyMod, Fabric, الخ...)</string>
+    <string name="mcl_option_modinstallwitharg">تشغيل مثبت مود (مع حجج مخصصة)</string>
+    <string name="mcl_option_customcontrol">تخصيص التحكم</string>
+    <string name="mcl_option_settings">الاعدادات</string>
+    <string name="mcl_option_about">حول التطبيق</string>
+    <string name="mcl_setting_title_uninstalljre">إلغاء تثبيت محرك جافا</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[يتطلب إعادة تشغيل التطبيق] هذا يسمح لك بإعادة تثبيت محرك تشغيل جافا</string>
+    <string name="mcl_setting_title_freeform">تشغيل ماينكرافت في وضع حر</string>
+    <string name="mcl_setting_subtitle_freeform">تشغيل ماينكرافت في النافذة العائمة. يتطلب أندرويد 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">أخفِ الشّريط الجانبيّ</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">قد يعجب الأشخاص الذين يفضلون واجهة المستخدم القديمة v1 بهذا. يمنحك تجربة ملء الشاشة بشكل أكبر.</string>
+    <string name="mcl_setting_title_ignore_notch">تجاهل notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">تجاهل النبرة وتوسيع الشاشة أسفلها.\nيعطيك تجربة أكثر انغماساً.</string>
+    <string name="mcl_setting_title_resolution_scaler">مقياس الدقة</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتقليل دقة اللعبة. 100% هي دقة كاملة</string>
+    <string name="mcl_setting_title_longpresstrigger">كم من الوقت سيتم تشغيله بعد الضغط المطول</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">تغيير وقت التشغيل للضغط المطول في كتلة التحطيم وإسقاط الموارد.</string>
+    <string name="mcl_setting_title_backtorightmouse">التعامل مع زر الرجوع كزر الفأرة اليمنى</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">بعض الأجهزة تتعامل مع زر الفأرة الخارجية اليمنى كزر للعودة. إذا كنت تستخدم فأرة خارجية، ينبغي عليك تفعيل هذا.</string>
+    <string name="mcl_setting_title_flat_button_style">نمط زر مسطح</string>
+    <string name="mcl_setting_subtitle_flat_button_style">قم بتمكين هذا لتغيير نمط زر التحكم إلى مسطح.</string>
+    <string name="mcl_setting_title_buttonscale">ضبط حجم أزرار التحكم</string>
+    <string name="mcl_setting_subtitle_buttonscale">قم بتكبير الأزرار إذا كانت صغيرة جداً.</string>
+    <string name="mcl_setting_title_mousescale">توسيع حجم الفأرة</string>
+    <string name="mcl_setting_subtitle_mousescale">تغيير حجم الفأرة الافتراضية.</string>
+    <string name="mcl_setting_title_javaargs">حجج إطلاق JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">كن حذرا، قد يجعل هذا اللعبة تتوقف إذا تم تعديلها بدون علم.</string>
+    <string name="mcl_setting_category_general">إعدادات عامة</string>
+    <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
+    <string name="mcl_setting_category_renderer">العارض</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
+    <string name="mcl_setting_category_veroption">نوع الإصدار سيكون في قائمة الإصدارات</string>
+    <string name="mcl_setting_veroption_release">إصدار نهائي</string>
+    <string name="mcl_setting_veroption_snapshot">اللمحات (سنابشوت)</string>
+    <string name="mcl_setting_veroption_oldalpha">نسخ ألفا قديمة</string>
+    <string name="mcl_setting_veroption_oldbeta">نسخ بيتا قديمة</string>
+    <string name="mcl_version_clone">نسخ</string>
+    <!-- Global strings -->
+    <string name="global_edit">تعديل</string>
+    <string name="global_error">خطأ</string>
+    <string name="global_load">تحميل</string>
+    <string name="global_name">الاسم</string>
+    <string name="global_remove">إزالة</string>
+    <string name="global_restart">اعادة تشغيل</string>
+    <string name="global_save">حفظ</string>
+    <string name="global_unpacking">جاري فك الضغط %s</string>
+    <string name="global_error_field_empty">لا يمكن لهذه الخانة ان تكون فارغة</string>
+    <string name="global_waiting">انتظر</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">تم الخروج من التطبيق/ اللعبة برمز %d</string>
+    <string name="mcn_exit_call">خروج</string>
+    <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
+    <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
+    <string name="mcn_check_fail_incompatiblearch">البنية %1$s غير متوافقة مع محرك تشغيل جافا %2$s.</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">واجهة المستخدم الرسومية</string>
+    <string name="control_keyboard">لوحة المفاتيح</string>
+    <string name="control_chat">دردشة</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">الفأرة</string>
+    <string name="control_mouseoff">وضع الفأرة: موقفة</string>
+    <string name="control_mouseon">وضع الفأرة: مفعلة </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">فرض الإغلاق</string>
+    <string name="control_viewout">سجل الإخراج</string>
+    <string name="control_adebug">مدخل التصحيح</string>
+    <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
+    <string name="control_scaleup">رفع المستوى التحكم</string>
+    <string name="control_scaledown">خفض مستوى التحكم</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">يتم تعديل %s</string>
+    <string name="customctrl_remove">حذف %s؟</string>
+    <string name="customctrl_keyname">رمز مفتاحي</string>
+    <string name="customctrl_toggle">تبديلي</string>
+    <string name="customctrl_size">الحجم</string>
+    <string name="customctrl_size_width">العرض</string>
+    <string name="customctrl_size_height">الارتفاع</string>
+    <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
+    <string name="customctrl_dynamicpos_x">ديناميكية X</string>
+    <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
+    <string name="customctrl_transparency_bg">شفافيه الخلفية</string>
+    <string name="customctrl_keycombine">مجموعة المفاتيح</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">إضافة زر</string>
+    <string name="customctrl_selectdefault">حدد رمز تحكم اعتيادي بصيغة json</string>
+    <string name="main_options">الخيارات</string>
+    <string name="main_play">إبدأ اللعب</string>
+    <string name="main_welcome">مرحباً %s</string>
+    <string name="main_infodev">معلومات (المطورين)</string>
+    <string name="main_switchuser">تبديل الحساب</string>
+    <string name="main_version">الإصدار:</string>
+    <string name="main_nocrash">لم يتم اكتشاف توقف</string>
+    <string name="main_nolog">لا توجد سجلات.</string>
+    <string name="main_no_news_feed">فشل في جلب موجز الأخبار!</string>
+    <string name="auto_ram_subtitle">تمكين  ذاكرة الوصول العشوائي التلقائي</string>
+    <string name="auto_ram_title">ذاكرة الوصول العشوائية التلقائية</string>
+    <string name="autoram_info_msg">تم تعيين الذاكرة إلى %d ميغابايت</string>
+    <string name="mcl_setting_check_libraries">التحقق من المكتبات بعد التحميل</string>
+    <string name="mcl_setting_check_libraries_subtitle">يفرض هذا الخيار على المشغل التحقق من تجزئة المكتبة إذا كانت متوفرة. يمنع التنزيلات المعطلة.</string>
+    <string name="dl_library_sha_fail">المكتبة %s تالفة وسيتم إعادة تحميلها</string>
+    <string name="dl_library_sha_unknown">لا يمكن التحقق من الملفات المكتبية %s ، يجب أن تفترض أنها جيدة</string>
+    <string name="dl_library_sha_pass">المكتبة %s جيدة وقابلة للاستخدام</string>
+    <string name="mcl_disable_gestures">تعطيل الإيماءات</string>
+    <string name="mcl_disable_gestures_subtitle">تعطيل الإيماءات، مثل تثبيت الضغط لكسر كتلة، والنقر لوضع كتلة.</string>
+    <string name="mcl_setting_title_mousespeed">سرعة الفأرة</string>
+    <string name="mcl_setting_subtitle_mousespeed">يغير سرعة الفأرة البرمجية</string>
+    <string name="customctrl_passthru">سماح تحريك أزرار الشاشة</string>
+    <string name="customctrl_rounded">مدوّر</string>
+    <string name="memory_warning_msg">الكمية الحالية من ذاكرة الوصول العشوائي المجانية (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. قم بتغيير التخصيص إذا تحطمت اللعبة.</string>
+    <string name="mcl_memory_allocation">تخصيص الذاكرة.</string>
+    <string name="mcl_memory_allocation_subtitle">يتحكم في كمية الذاكرة المعطاة لـ Minecraft</string>
+</resources>
