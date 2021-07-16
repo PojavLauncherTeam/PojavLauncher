@@ -68,8 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Pinapayagan kang bawasan ang resolusyon ng laro. 100% ang buong resolusyon</string>
     <string name="mcl_setting_title_longpresstrigger">Gaano katagal mag-uudyok pagkatapos ng mahabang pindutin</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Baguhin ang oras ng pag-trigger para sa mahabang pagpindot sa sirain ang block at drop item.</string>
-    <string name="mcl_setting_title_backtorightmouse">Tratuhin ang back button bilang kanang mouse</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Ang ilang mga aparato ay tinatrato ang panlabas na kanang mouse bilang back button. Kung gumagamit ka ng panlabas na mouse, dapat mo itong paganahin.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratuhin ang back button bilang isang mouse response</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Ang ilang mga devices ay tinatrato ang pisikal na mouse bilang back button. Kung gumagamit ka ng pisikal na mouse, dapat mo itong i-switch on.</string>
     <string name="mcl_setting_title_flat_button_style">Estilo ng flat button</string>
     <string name="mcl_setting_subtitle_flat_button_style">Paganahin ito upang baguhin ang istilo ng pindutan ng kontrol sa flat.</string>
     <string name="mcl_setting_title_buttonscale">Pagkontrol sa pag-scale ng mga pindutan</string>
@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">Pangkalahatang mga Setting</string>
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
