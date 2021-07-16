@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition su Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Avvia Minecraft: Java Edition sul tuo dispositivo!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Indirizzo Email o nome utente</string>
+    <string name="login_online_password_hint">Password</string>
+    <string name="login_online_check_keeplogin">Resta collegato</string>
+    <string name="login_online_login_label">Accedi</string>
+    <string name="login_offline_label">Accedi come account Offline</string>
+    <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
+    <string name="login_error_exist_username">Nome utente già esistente</string>
+    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_select_account">Seleziona account</string>
+    <string name="login_title_no_saved_account">Non ci sono account !</string>
+    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al login.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Apri il menu scorrendo da destra verso sinistra ◀\nTieni premuto per personalizzare: modificare, ridimensionare o cancellare."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">L\'account sarà cancellato!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Installa Runtime Java %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Seleziona un installer mod</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher è crashato</string>
+    <string name="error_no_version">Nessuna versione!</string>
+    <string name="error_show_more">Mostra altro</string>
+    <string name="error_show_less">Mostra meno</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Permesso di scrittura/lettura sulla memoria necessario!</string>
+    <string name="toast_optifine_success">Installato con successo</string>
+    <string name="toast_uninstalljre_done">Disinstallazione Runtime Java completato</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Notizie</string>
+    <string name="mcl_tab_console">Console sviluppatore</string>
+    <string name="mcl_tab_crash">Crash log</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connesso</string>
+    <string name="mcl_account_offline">Offline</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s pronto</string>
+    <string name="mcl_launch_cleancache">Pulizia dei file di cache in corso</string>
+    <string name="mcl_launch_downloading">Scaricando %s</string>
+    <string name="mcl_launch_downloading_progress">"Scaricando %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
+    <string name="mcl_options">Impostazioni</string>
+    <string name="mcl_option_modinstall">Avvia un mod installer (Forge, LabyMod, Fabric, ecc...)</string>
+    <string name="mcl_option_modinstallwitharg">Avvia un mod installer (personalizzato)</string>
+    <string name="mcl_option_customcontrol">Controlli personalizzati</string>
+    <string name="mcl_option_settings">Impostazioni</string>
+    <string name="mcl_option_about">Informazioni</string>
+    <string name="mcl_setting_title_uninstalljre">Disinstalla Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Riavvio del launcher necessario] Questo ti lascerà reinstallare il Runtime Java</string>
+    <string name="mcl_setting_title_freeform">Avvia Minecraft in modalità finestra</string>
+    <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Nessario Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Nascondi barra laterale</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Potrebbe piacere a coloro che preferivano la vecchia l\'interfaccia v1. Offre un\'esperienza migliore a schermo intero.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignora notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Allarga lo schermo fino al di sotto della notch.\nDandoti un\'esperienza più immersiva.</string>
+    <string name="mcl_setting_title_resolution_scaler">Proporzioni risoluzione</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Ti permetti di diminuire la risoluzione del gioco. 100% è la risoluzione completa</string>
+    <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Usa come tasto destro del mouse il pulsante indietro</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Alcuni dispositivi utilizzano come pulsante indietro il tasto destro del mouse. Se stai usando un mouse esterno, dovresti abilitarlo.</string>
+    <string name="mcl_setting_title_flat_button_style">Stile pulsante piatto</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Abilita l\'opzione per impostare lo stile piatto dei pulsanti di controllo.</string>
+    <string name="mcl_setting_title_buttonscale">Dimensione controlli</string>
+    <string name="mcl_setting_subtitle_buttonscale">Aumenta le dimensioni se i pulsanti sono troppo piccoli.</string>
+    <string name="mcl_setting_title_mousescale">Dimensioni mouse</string>
+    <string name="mcl_setting_subtitle_mousescale">Cambia dimensioni mouse virtuale.</string>
+    <string name="mcl_setting_title_javaargs">Impostazioni di avvio JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Fa attenzione, se effettui modifiche senza sapere quello che fai potresti crashare.</string>
+    <string name="mcl_setting_category_general">Impostazioni generali</string>
+    <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
+    <string name="mcl_setting_category_veroption">Tipo di versioni che saranno visibili nella lista delle versioni</string>
+    <string name="mcl_setting_veroption_release">Finale</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
+    <string name="mcl_version_clone">Clona</string>
+    <!-- Global strings -->
+    <string name="global_edit">Modifica</string>
+    <string name="global_error">Errore</string>
+    <string name="global_load">Carica</string>
+    <string name="global_name">Nome</string>
+    <string name="global_remove">Rimuovi</string>
+    <string name="global_restart">Riavvia</string>
+    <string name="global_save">Salva</string>
+    <string name="global_unpacking">Estrazione %s</string>
+    <string name="global_error_field_empty">Questo campo non può essere vuoto</string>
+    <string name="global_waiting">Attendere</string>
+    <!--
+    <string name="mcl_about">
+    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
+    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
+    "Using libraries:\n" +
+    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
+    //" • Boardwalk memory manager (not used now).\n" +
+    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
+    " • OpenJDK" +
+    "\n" +
+    "* Notes:\n" +
+    " - This app is currently BETA, it will not be stable.\n" +
+    //"* This app will unstable on Android 7.0 or higher devices.\n" +
+    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
+    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
+    </string>
+    -->
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">L\'applicazione/Gioco si è chiuso con il codice %d</string>
+    <string name="mcn_exit_call">Esci</string>
+    <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 non installato!</string>
+    <string name="mcn_check_fail_incompatiblearch">L\'architettura %1$s non è compatibile con il Runtime Java %2$s.</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Tastiera</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3°</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Chiusura forzata</string>
+    <string name="control_viewout">Log output</string>
+    <string name="control_adebug">Debug input</string>
+    <string name="control_customkey">Invia keycode personalizzato</string>
+    <string name="control_scaleup">Aumenta</string>
+    <string name="control_scaledown">Diminuisci</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">Modificando %s</string>
+    <string name="customctrl_remove">Rimuovere %s?</string>
+    <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_toggle">Attivabile</string>
+    <string name="customctrl_size">Dimensione</string>
+    <string name="customctrl_size_width">Larghezza</string>
+    <string name="customctrl_size_height">Altezza</string>
+    <string name="customctrl_dynamicpos">Posizione dinamica</string>
+    <string name="customctrl_dynamicpos_x">X dinamica</string>
+    <string name="customctrl_dynamicpos_y">Y dinamica</string>
+    <string name="customctrl_transparency_bg">Trasparenza sfondo</string>
+    <string name="customctrl_keycombine">Combinazioni tasti</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">Aggiungi pulsante</string>
+    <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
+    <string name="main_options">Impostazioni</string>
+    <string name="main_play">Gioca</string>
+    <string name="main_welcome">Benvenuto/a, %s</string>
+    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_switchuser">Cambia utente</string>
+    <string name="main_version">Versione:</string>
+    <string name="main_nocrash">Nessun crash rilevato</string>
+    <string name="main_nolog">Nessun log.</string>
+    <string name="main_no_news_feed">Collegamento alle news fallito !</string>
+    <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memory impostata a %d MB</string>
+    <string name="mcl_setting_check_libraries">Controlla le librerie dopo il download</string>
+    <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'hash delle librerie se disponibile. Prevenendo download corrotti.</string>
+    <string name="dl_library_sha_fail">La libreria %s è danneggiata e sarà riscaricata</string>
+    <string name="dl_library_sha_unknown">La libreria %s non può essere controllata, sarà ignorata e applicata comunque</string>
+    <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
+    <string name="mcl_disable_gestures">Disattiva gestures</string>
+    <string name="mcl_disable_gestures_subtitle">Disattiva gestures, ad esempio premere per rompere un blocco, e cliccare per piazzarlo.</string>
+    <string name="mcl_setting_title_mousespeed">Velocità mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Cambia la velocità del mouse via software</string>
+    <string name="customctrl_passthru">Bypassa mouse</string>
+    <string name="customctrl_rounded">Arrotondato</string>
+    <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
+    <string name="mcl_memory_allocation">Memoria allocata</string>
+    <string name="mcl_memory_allocation_subtitle">Controlla quanta memoria dedicare a Minecraft</string>
+</resources>
