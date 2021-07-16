@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     env:
-      GPLAY_KEYSTORE_PASSWORD: ${{ GPLAY_KEYSTORE_PASSWORD }}
+      GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
     steps:
     - uses: actions/checkout@v2
       with:
@@ -105,7 +105,7 @@ jobs:
     - name: Upload onto the Google Play testing track
       uses: r0adkll/upload-google-play@v1
       with:
-        serviceAccountJson: ${{ GPLAY_SERVICE_JSON }}
+        serviceAccountJson: ${{ secrets.GPLAY_SERVICE_JSON }}
         packageName: net.kdt.pojavlaunch
         releaseFiles: out/app-gplay.aab
         track: internal
