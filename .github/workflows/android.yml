@@ -57,6 +57,7 @@ jobs:
     
     - name: Install gl4es
       run: |
+        ls gl4es/libs/arm64-v8a
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         
     - name: Get JRE8
