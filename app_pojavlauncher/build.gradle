@@ -2,7 +2,13 @@ apply plugin: 'com.android.application'
 
 def getDate() { return new Date().format('yyyyMMdd')}
 
-def getDateSeconds() { return new Date().format('yMMddHHss')}
+def getDateSeconds() { 
+    if(System.getenv("GITHUB_ACTIONS").equals("true")) {
+        return "$(9934841+Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER")))"
+    }else{
+        return "172005"
+    }
+}
 
 def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
