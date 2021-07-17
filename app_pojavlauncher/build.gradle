@@ -4,9 +4,9 @@ def getDate() { return new Date().format('yyyyMMdd')}
 
 def getDateSeconds() { 
     if(System.getenv("GITHUB_ACTIONS").equals("true")) {
-        return "$(9934841+Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER")))"
+        return 9934841+Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER"))
     }else{
-        return "172005"
+        return 172005
     }
 }
 
@@ -65,7 +65,7 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode Integer.parseInt(getDateSeconds())
+        versionCode getDateSeconds()
         versionName getVersionName()
         multiDexEnabled true //important
     }
