@@ -34,7 +34,7 @@ jobs:
       id: gl4es-cache
       with:
         path: gl4es/libs
-        key: gl4es-android-shared-nogdb2-${{ steps.gl4es-sha.outputs.sha }}
+        key: gl4es-android-shared-nodbg-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
@@ -52,12 +52,10 @@ jobs:
         git fetch upstream
         git checkout master
         git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
-        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
-        find libs/ -type f -not -name "*.so" | xargs rm -f 
+        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
     - name: Install gl4es
       run: |
-        ls gl4es/libs/arm64-v8a
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         
     - name: Get JRE8
