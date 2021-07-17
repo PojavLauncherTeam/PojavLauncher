@@ -9,7 +9,7 @@ body:
     label: Describe the bug
     description: >-
       A clear and concise description of what the bug is.
-    placeholder: 'Application exited with code 1'
+    placeholder: 'Example: Application exited with code 1'
   validations:
     required: true
 
@@ -29,7 +29,7 @@ body:
     label: Steps To Reproduce
     description: Steps to reproduce the behavior.
     placeholder: |
-      1. Start PojavLauncher
+      1. Start PojavLauncher |
       ... *(your set of actions to reproduce the bug)*
     render: markdown
   validations:
@@ -39,6 +39,7 @@ body:
   attributes:
     label: Expected Behavior
     description: A concise description of what you expected to happen.
+    placeholder: Example: I expect the game to launches
   validations:
     required: true
 
@@ -46,7 +47,7 @@ body:
   attributes:
     label: Platform
     description: |
-      examples:
+      Examples:
         - **Device model**: Mi 8 Pro 8/128G
         - **CPU architecture**: aarch64
         - **Android version**: 10
