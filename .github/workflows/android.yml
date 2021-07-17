@@ -53,12 +53,12 @@ jobs:
         git checkout master
         git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
+        find gl4es/libs/ -type f -not -name "*.so" | xargs rm -f 
     
     - name: Install gl4es
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
-        find app_pojavlauncher/src/main/jniLibs/ -type f -not -name "*.so" | xargs rm -f 
-    
+        
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
       with:
