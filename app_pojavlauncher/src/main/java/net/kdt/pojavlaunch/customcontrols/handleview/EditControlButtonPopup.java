@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,11 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.kdt.pojavlaunch.EfficientAndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
+
+import top.defaults.checkerboarddrawable.CheckerboardDrawable;
 
 import static net.kdt.pojavlaunch.customcontrols.handleview.ActionPopupWindow.setPercentageText;
 
@@ -171,8 +175,8 @@ public class EditControlButtonPopup {
         }
 
         //Set color imageButton behavior
-        buttonBackgroundColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit background color", true, ((ColorDrawable) buttonBackgroundColor.getBackground()).getColor(), buttonBackgroundColor));
-        buttonStrokeColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit stroke color", false, ((ColorDrawable) buttonStrokeColor.getBackground()).getColor(), buttonStrokeColor));
+        buttonBackgroundColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit background color", true, buttonBackgroundColor));
+        buttonStrokeColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit stroke color", false, buttonStrokeColor));
 
 
         //Set dialog buttons behavior
@@ -180,6 +184,7 @@ public class EditControlButtonPopup {
 
         hideUselessViews();
 
+        setupCheckerboards();
     }
 
     protected void setupDialogButtons(){
@@ -194,6 +199,17 @@ public class EditControlButtonPopup {
 
     protected void hideUselessViews(){
         (v.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
+    }
+
+    private void setupCheckerboards(){
+        CheckerboardDrawable drawable = new CheckerboardDrawable.Builder()
+                .colorEven(Color.LTGRAY)
+                .colorOdd(Color.WHITE)
+                .size((int) Tools.dpToPx(20))
+                .build();
+
+        buttonBackgroundColor.setBackground(drawable);
+        buttonStrokeColor.setBackground(drawable);
     }
 
     protected void setEditDialogValues(){
@@ -218,8 +234,8 @@ public class EditControlButtonPopup {
         seekBarStrokeWidth.setProgress(properties.strokeWidth);
         seekBarCornerRadius.setProgress((int)properties.cornerRadius);
 
-        buttonBackgroundColor.setBackgroundColor(properties.bgColor);
-        buttonStrokeColor.setBackgroundColor(properties.strokeColor);
+        buttonBackgroundColor.setImageDrawable(new ColorDrawable(properties.bgColor));
+        buttonStrokeColor.setImageDrawable(new ColorDrawable(properties.strokeColor));
 
         setPercentageText(textCornerRadius,seekBarCornerRadius.getProgress());
         setPercentageText(textOpacity,seekBarOpacity.getProgress());
@@ -280,8 +296,8 @@ public class EditControlButtonPopup {
         properties.strokeWidth = seekBarStrokeWidth.getProgress();
         properties.cornerRadius = seekBarCornerRadius.getProgress();
 
-        properties.bgColor = ((ColorDrawable) buttonBackgroundColor.getBackground()).getColor();
-        properties.strokeColor = ((ColorDrawable) buttonStrokeColor.getBackground()).getColor();
+        properties.bgColor = ((ColorDrawable)buttonBackgroundColor.getDrawable()).getColor();
+        properties.strokeColor = ((ColorDrawable) buttonStrokeColor.getDrawable()).getColor();
 
         properties.isToggle = checkToggle.isChecked();
         properties.passThruEnabled = checkPassThrough.isChecked();

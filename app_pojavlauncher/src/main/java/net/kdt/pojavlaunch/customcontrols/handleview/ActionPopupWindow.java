@@ -20,6 +20,7 @@
 package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.content.*;
+import android.graphics.drawable.ColorDrawable;
 import android.view.*;
 import android.view.ViewGroup.*;
 import android.widget.*;
@@ -152,7 +153,9 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	}
 
 
-	public static void showColorPicker(Context ctx,String title, boolean showAlpha, int startColor, View v){
+	public static void showColorPicker(Context ctx,String title, boolean showAlpha, ImageView v){
+		int startColor = ((ColorDrawable)v.getDrawable()).getColor();
+
 		ColorPickerView picker = new ColorPickerView(ctx);
 		picker.setColor(startColor);
 		picker.showAlpha(showAlpha);
@@ -161,7 +164,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		dialog.setTitle(title);
 		dialog.setView(picker);
 		dialog.setNegativeButton(android.R.string.cancel, null);
-		dialog.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> v.setBackgroundColor(picker.getColor()));
+		dialog.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> v.setImageDrawable(new ColorDrawable(picker.getColor())));
 
 		dialog.show();
 	}
