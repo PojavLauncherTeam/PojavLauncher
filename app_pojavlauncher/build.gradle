@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 def getDate() { return new Date().format('yyyyMMdd')}
 
+def getDateSeconds() { return new Date().format('yyMMddHHmm')}
+
 def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
@@ -57,7 +59,7 @@ android {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode Math.abs(new Random().nextInt() % 10000000) + 1
+        versionCode Integer.parseInt(getDateSeconds())
         versionName getVersionName()
         multiDexEnabled true //important
     }
