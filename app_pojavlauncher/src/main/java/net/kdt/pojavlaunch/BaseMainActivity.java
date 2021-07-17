@@ -613,8 +613,9 @@ public class BaseMainActivity extends LoggableActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+
         System.out.println(event);
-        if(event.getRepeatCount() != 0 || event.getAction() == KeyEvent.ACTION_MULTIPLE) return true; //We consume but no need to recheck since it was already sent once.
+        if(event.getRepeatCount() != 0 || event.getAction() == KeyEvent.ACTION_MULTIPLE || event.getFlags() == KeyEvent.FLAG_FALLBACK) return true; //We consume but no need to recheck since it was already sent once.
         
         if(Gamepad.isGamepadEvent(event)){
             if(gamepad == null){
