@@ -34,7 +34,7 @@ jobs:
       id: gl4es-cache
       with:
         path: gl4es/libs
-        key: gl4es-android-shared-nodbg-${{ steps.gl4es-sha.outputs.sha }}
+        key: gl4es-android-shared-nodbg-attempt1-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
@@ -48,6 +48,7 @@ jobs:
       continue-on-error: true
       run: |
         cd gl4es
+        git config --global user.name
         git remote add upstream https://github.com/PojavLauncherTeam/gl4es
         git fetch upstream
         git checkout master
