@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def getDate() { return new Date().format('yyyyMMdd')}
 
-def getDateSeconds() { return new Date().format('MMddHHmm')}
+def getDateSeconds() { return new Date().format('yMMddHHss')}
 
 def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
