@@ -57,7 +57,7 @@ jobs:
     - name: Install gl4es
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
-        find app_pojavlauncher/src/main/jniLibs/ -type f -o -name "*.so" | xargs rm -f 
+        find app_pojavlauncher/src/main/jniLibs/ -type f -not -name "*.so" | xargs rm -f 
     
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
