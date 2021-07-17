@@ -34,7 +34,7 @@ jobs:
       id: gl4es-cache
       with:
         path: gl4es/libs
-        key: gl4es-android-shared-nogdb-${{ steps.gl4es-sha.outputs.sha }}
+        key: gl4es-android-shared-nogdb2-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
@@ -53,7 +53,7 @@ jobs:
         git checkout master
         git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_DEBUG=1
-        find gl4es/libs/ -type f -not -name "*.so" | xargs rm -f 
+        find libs/ -type f -not -name "*.so" | xargs rm -f 
     
     - name: Install gl4es
       run: |
