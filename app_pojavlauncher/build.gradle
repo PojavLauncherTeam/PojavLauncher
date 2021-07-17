@@ -125,6 +125,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
 
     implementation 'com.rarepebble:colorpicker:3.0.1'
+    implementation 'com.github.duanhong169:checkerboarddrawable:1.0.2'
 
     
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
