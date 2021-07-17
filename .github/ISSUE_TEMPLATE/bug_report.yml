@@ -29,7 +29,7 @@ body:
     label: Steps To Reproduce
     description: Steps to reproduce the behavior.
     placeholder: |
-      1. Start PojavLauncher |
+      1. Start PojavLauncher
       ... *(your set of actions to reproduce the bug)*
     render: markdown
   validations:
