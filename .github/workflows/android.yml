@@ -34,7 +34,7 @@ jobs:
       id: gl4es-cache
       with:
         path: gl4es/libs
-        key: gl4es-android-shared-nodbg-attempt2-${{ steps.gl4es-sha.outputs.sha }}
+        key: gl4es-android-shared-nodbg-test1-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
@@ -59,7 +59,11 @@ jobs:
     - name: Install gl4es
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
-        
+        mv gl4es ..
+        git add .
+        git commit -am "CI: Update gl4es"
+        git push
+    
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
       with:
