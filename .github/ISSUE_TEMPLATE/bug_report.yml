@@ -39,7 +39,7 @@ body:
   attributes:
     label: Expected Behavior
     description: A concise description of what you expected to happen.
-    placeholder: Example: I expect the game to launches
+    placeholder: 'Example: I expect the game to launches'
   validations:
     required: true
 
