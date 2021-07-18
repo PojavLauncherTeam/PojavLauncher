@@ -14,6 +14,7 @@
     <string name="login_offline_label">Login as offloin akownt</string>
     <string name="login_error_short_username">Usernoim must be at liest 3 characters</string>
     <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
+    <string name="login_error_offline_password">Offline akownt can\'t include pasword!</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">what acc?</string>
     <string name="login_title_no_saved_account">No akownt findz !</string>
@@ -81,6 +82,8 @@
     <string name="mcl_setting_category_general">General settingz</string>
     <string name="mcl_setting_category_scaling">Scalin settingz</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4ez 1.1.4 (OpenGL EZ 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4ez 1.1.5 (OpenGL EZ 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
     <string name="mcl_setting_veroption_release">RELEASD</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
