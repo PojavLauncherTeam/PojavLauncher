@@ -34,13 +34,13 @@ jobs:
       id: gl4es-cache
       with:
         path: gl4es/libs
-        key: gl4es-android-shared-nodbg-test2-${{ steps.gl4es-sha.outputs.sha }}
+        key: gl4es-android-shared-nodbg-test1-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
-        repository: 'PojavLauncherTeam/gl4es'
+        repository: 'ptitSeb/gl4es'
         path: 'gl4es'
 
     - name: Build gl4es
@@ -48,9 +48,9 @@ jobs:
       continue-on-error: true
       run: |
         cd gl4es
-        # git config --global user.email "PojavLauncherTeam@users.noreply.github.com"
-        # git config --global user.name "PojavLauncherTeam"
-        git remote add upstream git@github.com:ptitSeb/gl4es
+        git config --global user.email "PojavLauncherTeam@users.noreply.github.com"
+        git config --global user.name "PojavLauncherTeam"
+        git remote add upstream https://github.com/PojavLauncherTeam/gl4es
         git fetch upstream
         git checkout master
         git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
@@ -83,7 +83,6 @@ jobs:
         mkdir -p out
         chmod +x gradlew
         ./gradlew clean
-
         # Build JRE JAR files (security manager, etc...)
         ./gradlew :jre_lwjgl3glfw:build
         # mkdir app_pojavlauncher/src/main/assets/components/internal_libs
@@ -102,7 +101,6 @@ jobs:
         rm -r app_pojavlauncher/src/main/assets/components/jre
         ./gradlew assembleDebug
         mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
-
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
