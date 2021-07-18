@@ -308,8 +308,8 @@ public class Gamepad {
     }
 
     private void placePointerView(int x, int y){
-        pointerView.setX(x-32);
-        pointerView.setY(y-32);
+        pointerView.setX(x - pointerView.getWidth()/2);
+        pointerView.setY(y - pointerView.getHeight()/2);
     }
 
 
