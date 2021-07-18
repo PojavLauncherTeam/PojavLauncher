@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.multirt;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.webkit.MimeTypeMap;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,9 @@ public class MultiRTConfigDialog {
     public static void openRuntimeSelector(Activity ctx, int code) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("application/x-xz");
+        String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("xz");
+        if(mimeType == null) mimeType = "*/*";
+        intent.setType(mimeType);
         ctx.startActivityForResult(intent,code);
     }
 }
