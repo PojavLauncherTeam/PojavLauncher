@@ -34,13 +34,13 @@ jobs:
       id: gl4es-cache
       with:
         path: gl4es/libs
-        key: gl4es-android-shared-nodbg-test1-${{ steps.gl4es-sha.outputs.sha }}
+        key: gl4es-android-shared-nodbg-test2-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
-        repository: 'ptitSeb/gl4es'
+        repository: 'PojavLauncherTeam/gl4es'
         path: 'gl4es'
 
     - name: Build gl4es
@@ -48,9 +48,9 @@ jobs:
       continue-on-error: true
       run: |
         cd gl4es
-        git config --global user.email "PojavLauncherTeam@users.noreply.github.com"
-        git config --global user.name "PojavLauncherTeam"
-        git remote add upstream https://github.com/PojavLauncherTeam/gl4es
+        # git config --global user.email "PojavLauncherTeam@users.noreply.github.com"
+        # git config --global user.name "PojavLauncherTeam"
+        git remote add upstream git@github.com:ptitSeb/gl4es
         git fetch upstream
         git checkout master
         git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
