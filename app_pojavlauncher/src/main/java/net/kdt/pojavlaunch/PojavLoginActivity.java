@@ -412,7 +412,13 @@ public class PojavLoginActivity extends BaseActivity
         if(rt_version == null) return false;
         if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
             try {
-                MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz"), "Internal", rt_version,
+                InputStream rt_stream;
+                try {
+                    rt_stream = am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz");
+                } catch (IOException e) {
+                    rt_stream = am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[1] + ".tar.xz");
+                }
+                MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), rt_stream, "Internal", rt_version,
                         (resid, vararg) -> {
                             runOnUiThread(()->{startupTextView.setText(getString(resid,vararg));});
                         });
