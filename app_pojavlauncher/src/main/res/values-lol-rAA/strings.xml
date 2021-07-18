@@ -81,6 +81,7 @@
     <string name="mcl_setting_category_general">General settingz</string>
     <string name="mcl_setting_category_scaling">Scalin settingz</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2">OwenGl EiS 2</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
     <string name="mcl_setting_veroption_release">RELEASD</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
