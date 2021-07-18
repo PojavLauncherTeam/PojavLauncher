@@ -57,6 +57,7 @@ jobs:
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
     - name: Install gl4es
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         mv gl4es ..
