@@ -28,13 +28,6 @@ jobs:
       id: gl4es-sha
       run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*' && git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*'))"
       shell: bash
-      
-    - name: Cache gl4es
-      uses: actions/cache@v2
-      id: gl4es-cache
-      with:
-        path: gl4es/libs
-        key: gl4es-android-shared-nodbg-test2-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
@@ -45,12 +38,11 @@ jobs:
 
     - name: Build gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
       run: |
         cd gl4es
         # git config --global user.email "PojavLauncherTeam@users.noreply.github.com"
         # git config --global user.name "PojavLauncherTeam"
-        git remote add upstream git@github.com:ptitSeb/gl4es
+        git remote add upstream https://github.com/ptitSeb/gl4es
         git fetch upstream
         git checkout master
         git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
@@ -59,6 +51,16 @@ jobs:
     - name: Install gl4es
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
+    
+    - name: Cache gl4es
+      uses: actions/cache@v2
+      id: gl4es-cache
+      with:
+        path: gl4es/libs
+        key: gl4es-android-shared-nodbg-test3-${{ steps.gl4es-sha.outputs.sha }}
+    
+    - name: Push gl4es binaries to the repository
+      run: |
         mv gl4es ..
         git add .
         git commit -am "CI: Update gl4es"
