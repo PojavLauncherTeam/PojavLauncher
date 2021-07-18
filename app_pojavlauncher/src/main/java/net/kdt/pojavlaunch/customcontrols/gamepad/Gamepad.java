@@ -120,6 +120,8 @@ public class Gamepad {
 
                     CallbackBridge.mouseX += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
                     CallbackBridge.mouseY -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
+                    CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
+                    CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
                     gameActivity.mouse_x = CallbackBridge.mouseX;
                     gameActivity.mouse_y = CallbackBridge.mouseY;
 
