@@ -192,6 +192,6 @@
     <string name="multirt_progress_caching">Cacheando...</string>
     <string name="multirt_config_setdefault">Establecer como predeterminado</string>
     <string name="multirt_config_setdefault_already">Predeterminado</string>
-    <string name="multirt_config_removeerror_last">Debes tener al menos un Runtime de Java instalado</string>
-    <string name="multirt_nocompartiblert">No se pudo encontrar ningún Runtime de Java compatible</string>
+    <string name="multirt_config_removeerror_last">Debes tener al menos un Java Runtime instalado</string>
+    <string name="multirt_nocompartiblert">No se pudo encontrar ningún Java Runtime compatible</string>
 </resources>
