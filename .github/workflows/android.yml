@@ -45,7 +45,8 @@ jobs:
         git remote add upstream https://github.com/ptitSeb/gl4es
         git fetch upstream
         git checkout master
-        git merge --allow-unrelated-histories upstream/master 
+        git rebase upstream/master
+        # git merge --allow-unrelated-histories upstream/master 
         # || echo "Merge exit code $?"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
