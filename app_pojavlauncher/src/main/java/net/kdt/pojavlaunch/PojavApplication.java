@@ -66,14 +66,14 @@ public class PojavApplication extends Application
 			switch (Tools.CURRENT_ARCHITECTURE) {
                 case "arm": Tools.CURRENT_ARCHITECTURE = "arm/aarch32"; break;
                 case "arm64": Tools.CURRENT_ARCHITECTURE = "arm64/aarch64"; break;
-                case "x86": Tools.CURRENT_ARCHITECTURE = "x86/i*86"; break;
+                case "x86": Tools.CURRENT_ARCHITECTURE = "x86/i386"; break;
                 case "x86_64": Tools.CURRENT_ARCHITECTURE = "x86_64/amd64"; break;
             }
             
             // Special case for Asus x86 devixes
             if (Build.SUPPORTED_ABIS[0].equals("x86")) {
                 getApplicationInfo().nativeLibraryDir = nativeLibDir.getParent() + "/x86";
-                Tools.CURRENT_ARCHITECTURE = "x86/i*86";
+                Tools.CURRENT_ARCHITECTURE = "x86/i386";
             }
 
 			FontChanger.initFonts(this);
