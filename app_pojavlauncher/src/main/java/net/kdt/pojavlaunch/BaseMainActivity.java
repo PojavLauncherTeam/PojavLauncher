@@ -929,6 +929,8 @@ public class BaseMainActivity extends LoggableActivity {
         if(scale < this.guiScale || guiScale == 0){
             this.guiScale = scale;
         }
+
+        if(gamepad != null) gamepad.notifyGUISizeChange(this.guiScale);
     }
 
     public int handleGuiBar(int x, int y) {
