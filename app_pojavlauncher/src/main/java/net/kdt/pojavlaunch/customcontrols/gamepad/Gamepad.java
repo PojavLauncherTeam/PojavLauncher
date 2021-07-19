@@ -276,6 +276,12 @@ public class Gamepad {
         getCurrentMap().TRIGGER_RIGHT.update(event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
     }
 
+    public void notifyGUISizeChange(int newSize){
+        //Change the pointer size to match UI
+        int size = (int) ((22 * newSize) / gameActivity.scaleFactor);
+        gameActivity.runOnUiThread(() -> pointerView.setLayoutParams(new FrameLayout.LayoutParams(size, size)));
+    }
+
     private GamepadMap getCurrentMap(){
         return currentMap;
     }
