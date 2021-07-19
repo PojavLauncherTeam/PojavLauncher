@@ -48,7 +48,11 @@
             android:screenOrientation="sensorLandscape"
             android:name=".FatalErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-
+        <activity
+            android:theme="@style/MenuDialog"
+            android:screenOrientation="sensorLandscape"
+            android:name=".ExitActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".PojavLauncherActivity"

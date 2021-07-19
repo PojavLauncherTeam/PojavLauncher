@@ -305,6 +305,7 @@ public class JREUtils
 
         setJavaEnvironment(ctx);
         initJavaRuntime();
+        setupExitTrap(ctx.getApplication());
         chdir(Tools.DIR_GAME_NEW);
 
         final int exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
@@ -413,7 +414,7 @@ public class JREUtils
     public static native boolean dlopen(String libPath);
     public static native void setLdLibraryPath(String ldLibraryPath);
     public static native void setupBridgeWindow(Object surface);
-    
+    public static native void setupExitTrap(Context context);
     // Obtain AWT screen pixels to render on Android SurfaceView
     public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
 
