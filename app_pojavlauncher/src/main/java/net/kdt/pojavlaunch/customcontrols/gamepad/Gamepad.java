@@ -124,18 +124,17 @@ public class Gamepad {
 
                     CallbackBridge.mouseX += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
                     CallbackBridge.mouseY -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
-                    if(!CallbackBridge.isGrabbing()) {
-                        CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
-                        CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
-                    }
-                    gameActivity.mouse_x = CallbackBridge.mouseX;
-                    gameActivity.mouse_y = CallbackBridge.mouseY;
 
                     gameActivity.runOnUiThread(mouseRunnable);
 
                     if(!CallbackBridge.isGrabbing()){
-                        placePointerView((int)(CallbackBridge.mouseX  / gameActivity.scaleFactor), (int) (CallbackBridge.mouseY  / gameActivity.scaleFactor));
+                        CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
+                        CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
+                        placePointerView((int) (CallbackBridge.mouseX /gameActivity.scaleFactor), (int) (CallbackBridge.mouseY/gameActivity.scaleFactor));
                     }
+
+                    gameActivity.mouse_x = CallbackBridge.mouseX;
+                    gameActivity.mouse_y = CallbackBridge.mouseY;
                 }
 
             }
@@ -145,7 +144,7 @@ public class Gamepad {
 
 
         //Initialize runnables to be used by the input system, avoiding generating one each time is better memory.
-        mouseRunnable = () -> CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
+        mouseRunnable = () -> CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
         switchStateRunnable = () -> {
             currentMap.resetPressedState();
             if(lastGrabbingState){
@@ -433,12 +432,7 @@ public class Gamepad {
     }
 
     public static boolean isGamepadEvent(KeyEvent event){
-
-
         return ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
                 || GamepadDpad.isDpadEvent(event) );
-
-
     }
-
 }
