@@ -1,11 +1,15 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
+
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.core.math.MathUtils;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
@@ -120,8 +124,10 @@ public class Gamepad {
 
                     CallbackBridge.mouseX += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
                     CallbackBridge.mouseY -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
-                    CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
-                    CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
+                    if(!CallbackBridge.isGrabbing()) {
+                        CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
+                        CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
+                    }
                     gameActivity.mouse_x = CallbackBridge.mouseX;
                     gameActivity.mouse_y = CallbackBridge.mouseY;
 
