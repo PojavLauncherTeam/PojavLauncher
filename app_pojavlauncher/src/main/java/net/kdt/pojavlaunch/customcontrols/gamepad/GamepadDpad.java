@@ -38,68 +38,68 @@ public class GamepadDpad {
         this.parentPad = parentPad;
     }
 
-    public int update(InputEvent event) {
-        if (!isDpadEvent(event)) {
-            return -1;
+    public void update(KeyEvent event){
+
+        //TODO check if the event is valid
+        if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT) {
+            pressedDirection = LEFT;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT) {
+            pressedDirection = RIGHT;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP) {
+            pressedDirection = UP;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN) {
+            pressedDirection = DOWN;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER) {
+            pressedDirection = CENTER;
         }
 
-        // If the input event is a MotionEvent, check its hat axis values.
-        if (event instanceof MotionEvent) {
+        setDummyEventKeyCode(pressedDirection);
+        parentPad.sendButton(dummyEvent);
+    }
 
-            // Use the hat axis value to find the D-pad direction
-            MotionEvent motionEvent = (MotionEvent) event;
-            float xaxis = motionEvent.getAxisValue(MotionEvent.AXIS_HAT_X);
-            float yaxis = motionEvent.getAxisValue(MotionEvent.AXIS_HAT_Y);
+    public void update(MotionEvent event){
+        //TODO check if the event is valid
 
-            // Check if the AXIS_HAT_X value is -1 or 1, and set the D-pad
-            // LEFT and RIGHT direction accordingly.
-            if (Float.compare(xaxis, -1.0f) == 0) {
-                pressedDirection = LEFT;
-            } else if (Float.compare(xaxis, 1.0f) == 0) {
-                pressedDirection = RIGHT;
-            }
-            // Check if the AXIS_HAT_Y value is -1 or 1, and set the D-pad
-            // UP and DOWN direction accordingly.
-            else if (Float.compare(yaxis, -1.0f) == 0) {
-                pressedDirection =  UP;
-            } else if (Float.compare(yaxis, 1.0f) == 0) {
-                pressedDirection =  DOWN;
-            }else {
-                pressedDirection = CENTER;
-            }
+        // Use the hat axis value to find the D-pad direction
+        float xaxis = event.getAxisValue(MotionEvent.AXIS_HAT_X);
+        float yaxis = event.getAxisValue(MotionEvent.AXIS_HAT_Y);
+
+        // Check if the AXIS_HAT_X value is -1 or 1, and set the D-pad
+        // LEFT and RIGHT direction accordingly.
+        if (Float.compare(xaxis, -1.0f) == 0) {
+            pressedDirection = LEFT;
+        } else if (Float.compare(xaxis, 1.0f) == 0) {
+            pressedDirection = RIGHT;
+        }
+        // Check if the AXIS_HAT_Y value is -1 or 1, and set the D-pad
+        // UP and DOWN direction accordingly.
+        else if (Float.compare(yaxis, -1.0f) == 0) {
+            pressedDirection =  UP;
+        } else if (Float.compare(yaxis, 1.0f) == 0) {
+            pressedDirection =  DOWN;
+        }else {
+            pressedDirection = CENTER;
         }
 
-        // If the input event is a KeyEvent, check its key code.
-        else if (event instanceof KeyEvent) {
+        setDummyEventKeyCode(pressedDirection);
+        parentPad.sendButton(dummyEvent);
+    }
 
-            // Use the key code to find the D-pad direction.
-            KeyEvent keyEvent = (KeyEvent) event;
-            if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT) {
-                pressedDirection = LEFT;
-            } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                pressedDirection = RIGHT;
-            } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP) {
-                pressedDirection = UP;
-            } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN) {
-                pressedDirection = DOWN;
-            } else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER) {
-                pressedDirection = CENTER;
-            }
-        }
-
+    private void setDummyEventKeyCode(int fakeKeycode){
         try {
-            eventCodeField.setInt(dummyEvent, pressedDirection);
+            eventCodeField.setInt(dummyEvent, fakeKeycode);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        parentPad.sendButton(dummyEvent);
-        return pressedDirection;
     }
 
-    public static boolean isDpadEvent(InputEvent event) {
+    public static boolean isDpadEvent(MotionEvent event) {
         // Check that input comes from a device with directional pads.
         // And... also the joystick since it declares sometimes as a joystick.
-        return (event.getSource() & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK &&
-               ((event.getSource() & InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) && (event.getDevice().getKeyboardType() == KEYBOARD_TYPE_NON_ALPHABETIC);
+        return (event.getSource() & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK;
+    }
+
+    public static boolean isDpadEvent(KeyEvent event){
+        return ((event.getSource() & InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) && (event.getDevice().getKeyboardType() == KEYBOARD_TYPE_NON_ALPHABETIC);
     }
 }
