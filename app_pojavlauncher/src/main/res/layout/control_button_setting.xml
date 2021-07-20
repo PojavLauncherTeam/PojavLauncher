@@ -454,46 +454,6 @@
             app:layout_constraintTop_toBottomOf="@id/editDynamicPositionY_textView"
             />
 
-        <!-- KEY COMBINATION SECTION -->
-        <TextView
-            android:id="@+id/editKeyCombination_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/customctrl_keycombine"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editDynamicPositionY_editText"
-            />
-
-        <CheckBox
-            android:id="@+id/checkBoxKeyCombination_alt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/customctrl_keycombine_alt"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editKeyCombination_textView" />
-
-        <CheckBox
-            android:id="@+id/checkBoxKeyCombination_ctrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/customctrl_keycombine_control"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxKeyCombination_alt"
-            />
-
-        <CheckBox
-            android:id="@+id/checkBoxKeyCombination_shift"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/customctrl_keycombine_shift"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxKeyCombination_ctrl"
-            />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.kdt.DefocusableScrollView>

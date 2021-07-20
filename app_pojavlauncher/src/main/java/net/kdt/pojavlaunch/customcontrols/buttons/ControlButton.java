@@ -133,27 +133,27 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             ((ControlLayout) getParent()).setModified(modified);
     }
 
-    private void setHolding(boolean isDown) {
-        if (mProperties.holdAlt) {
-            CallbackBridge.holdingAlt = isDown;
-            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT,0,isDown);
-            System.out.println("holdingAlt="+CallbackBridge.holdingAlt);
-        } if (mProperties.containsKeycode(LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK)) {
-            CallbackBridge.holdingCapslock = isDown;
-            //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK,0,isDown);
-            System.out.println("holdingCapslock="+CallbackBridge.holdingCapslock);
-        } if (mProperties.holdCtrl) {
-            CallbackBridge.holdingCtrl = isDown;
-            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL,0,isDown);
-            System.out.println("holdingCtrl="+CallbackBridge.holdingCtrl);
-        } if (mProperties.containsKeycode(LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK)) {
-            CallbackBridge.holdingNumlock = isDown;
-            //MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK,0,isDown);
-            System.out.println("holdingNumlock="+CallbackBridge.holdingNumlock);
-        } if (mProperties.holdShift) {
-            CallbackBridge.holdingShift = isDown;
-            MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT,0,isDown);
-            System.out.println("holdingShift="+CallbackBridge.holdingShift);
+    private void setHolding(int keyCode, boolean isDown){
+        switch (keyCode){
+            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT:
+                CallbackBridge.holdingShift = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL:
+                CallbackBridge.holdingCtrl = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT:
+                CallbackBridge.holdingAlt = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK:
+                CallbackBridge.holdingCapslock = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK:
+                CallbackBridge.holdingNumlock = isDown;
+                return;
         }
     }
 
@@ -255,7 +255,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         if(mProperties.isSwipeable && !isPointerOutOfBounds){
                             //Remove keys
                             if(!triggerToggle(event)) {
-                                setHolding(false);
                                 sendKeyPresses(event, false);
                             }
                         }
@@ -269,7 +268,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         ((ControlLayout) getParent()).onTouch(this, event);
                         //RE-press the button
                         if(mProperties.isSwipeable && !mProperties.isToggle){
-                            setHolding(true);
                             sendKeyPresses(event, true);
                         }
                     }
@@ -279,7 +277,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 case MotionEvent.ACTION_DOWN: // 0
                 case MotionEvent.ACTION_POINTER_DOWN: // 5
                     if(!mProperties.isToggle){
-                        setHolding(true);
                         sendKeyPresses(event, true);
                     }
                     break;
@@ -291,7 +288,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                     isPointerOutOfBounds = false;
 
                     if(!triggerToggle(event)) {
-                        setHolding(false);
                         sendKeyPresses(event, false);
                     }
                     break;
@@ -347,7 +343,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         if(mProperties.isToggle){
             isToggled = !isToggled;
             invalidate();
-            setHolding(isToggled);
             sendKeyPresses(event, isToggled);
             return true;
         }
@@ -358,6 +353,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         for(int keycode : mProperties.keycodes){
             if(keycode >= GLFW_KEY_UNKNOWN){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
+                setHolding(keycode, isDown);
             }else {
                 super.onTouchEvent(event);
             }
