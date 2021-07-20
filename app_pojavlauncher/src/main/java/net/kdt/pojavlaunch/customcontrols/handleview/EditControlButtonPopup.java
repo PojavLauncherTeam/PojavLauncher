@@ -39,9 +39,6 @@ public class EditControlButtonPopup {
     protected CheckBox checkPassThrough;
     protected CheckBox checkBoxSwipeable;
     protected CheckBox checkDynamicPosition;
-    protected CheckBox checkHoldAlt;
-    protected CheckBox checkHoldCtrl;
-    protected CheckBox checkHoldShift;
 
     protected EditText editWidth;
     protected EditText editHeight;
@@ -155,10 +152,6 @@ public class EditControlButtonPopup {
         });
 
 
-        checkHoldAlt = v.findViewById(R.id.checkBoxKeyCombination_alt);
-        checkHoldCtrl = v.findViewById(R.id.checkBoxKeyCombination_ctrl);
-        checkHoldShift = v.findViewById(R.id.checkBoxKeyCombination_shift);
-
         //Initialize adapter for keycodes
         adapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item);
         String[] oldSpecialArr = ControlData.buildSpecialButtonArray();
@@ -241,9 +234,6 @@ public class EditControlButtonPopup {
         setPercentageText(textOpacity,seekBarOpacity.getProgress());
         setPercentageText(textStrokeWidth,seekBarStrokeWidth.getProgress());
 
-        checkHoldAlt.setChecked(properties.holdAlt);
-        checkHoldCtrl.setChecked(properties.holdCtrl);
-        checkHoldShift.setChecked(properties.holdShift);
         checkDynamicPosition.setChecked(properties.isDynamicBtn);
 
         for(int i=0; i< properties.keycodes.length; i++){
@@ -309,10 +299,6 @@ public class EditControlButtonPopup {
         properties.isDynamicBtn = checkDynamicPosition.isChecked();
         properties.dynamicX = editDynamicX.getText().toString().isEmpty() ? properties.dynamicX = Float.toString(properties.x) : editDynamicX.getText().toString();
         properties.dynamicY = editDynamicY.getText().toString().isEmpty() ? properties.dynamicY = Float.toString(properties.y) : editDynamicY.getText().toString();
-
-        properties.holdAlt = checkHoldAlt.isChecked();
-        properties.holdCtrl = checkHoldCtrl.isChecked();
-        properties.holdShift = checkHoldShift.isChecked();
 
         button.updateProperties();
     }

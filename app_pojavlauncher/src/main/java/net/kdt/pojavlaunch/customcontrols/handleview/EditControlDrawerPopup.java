@@ -31,6 +31,7 @@ public class EditControlDrawerPopup extends EditControlButtonPopup{
         (v.findViewById(R.id.editMapping_textView)).setVisibility(View.GONE);
         checkPassThrough.setVisibility(View.GONE);
         checkToggle.setVisibility(View.GONE);
+        checkBoxSwipeable.setVisibility(View.GONE);
     }
 
     @Override
@@ -57,14 +58,11 @@ public class EditControlDrawerPopup extends EditControlButtonPopup{
     protected void setupDialogButtons() {
         super.setupDialogButtons();
 
-        builder.setNeutralButton(v.getResources().getString(R.string.customctrl_addsubbutton), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                ControlLayout layout = (ControlLayout) drawer.getParent();
-                ControlData controlData =  drawerData.properties.clone();
-                controlData.name = "new";
-                layout.addSubButton(drawer, controlData);
-            }
+        builder.setNeutralButton(v.getResources().getString(R.string.customctrl_addsubbutton), (dialogInterface, i) -> {
+            ControlLayout layout = (ControlLayout) drawer.getParent();
+            ControlData controlData =  drawerData.properties.clone();
+            controlData.name = "new";
+            layout.addSubButton(drawer, controlData);
         });
 
     }

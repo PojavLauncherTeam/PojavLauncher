@@ -78,9 +78,6 @@ public class ControlData implements Cloneable
     public float cornerRadius;  //0-100%
     public boolean isSwipeable;
 
-    public boolean holdCtrl;
-    public boolean holdAlt;
-    public boolean holdShift;
     public Object specialButtonListener;
 
     public ControlData() {

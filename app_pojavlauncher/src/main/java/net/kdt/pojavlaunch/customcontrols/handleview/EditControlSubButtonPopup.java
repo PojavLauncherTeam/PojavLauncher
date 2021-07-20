@@ -15,7 +15,6 @@ public class EditControlSubButtonPopup extends EditControlButtonPopup{
     @Override
     protected void hideUselessViews() {
         (v.findViewById(R.id.editSize_textView)).setVisibility(View.GONE);
-
         (v.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
 
         checkDynamicPosition.setVisibility(View.GONE);
