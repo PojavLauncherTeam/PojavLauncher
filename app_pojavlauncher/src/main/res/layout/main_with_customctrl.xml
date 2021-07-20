@@ -41,7 +41,7 @@
 
 			<ImageView
 				android:id="@+id/console_pointer"
-				android:visibility="visible"
+				android:visibility="invisible"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:srcCompat="@drawable/pointer" />

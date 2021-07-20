@@ -70,6 +70,9 @@ public class Gamepad {
 
         this.gameActivity = gameActivity;
         pointerView = this.gameActivity.findViewById(R.id.console_pointer);
+        pointerView.getDrawable().setFilterBitmap(false);
+        notifyGUISizeChange(gameActivity.getMcScale());
+
 
         mouseThread = new Thread("Gamepad Thread"){
             long lastTime = System.nanoTime();

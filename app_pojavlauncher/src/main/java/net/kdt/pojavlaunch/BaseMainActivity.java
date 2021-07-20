@@ -917,7 +917,7 @@ public class BaseMainActivity extends LoggableActivity {
         return true;
     }
 
-    public void getMcScale() {
+    public int getMcScale() {
         //Get the scale stored in game files, used auto scale if found or if the stored scaled is bigger than the authorized size.
         MCOptionUtils.load();
         String str = MCOptionUtils.get("guiScale");
@@ -930,6 +930,7 @@ public class BaseMainActivity extends LoggableActivity {
         }
 
         if(gamepad != null) gamepad.notifyGUISizeChange(this.guiScale);
+        return this.guiScale;
     }
 
     public int handleGuiBar(int x, int y) {
