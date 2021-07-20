@@ -35,7 +35,7 @@ public class GamepadJoystick {
         try { deadzone = Math.max(device.getMotionRange(verticalAxis).getFlat(), device.getMotionRange(horizontalAxis).getFlat()) * 1.9f; }
         catch (NullPointerException e){ deadzone = 0.2f; }
 
-        if(deadzone < 0.15) deadzone = 0.15f;
+        if(deadzone < 0.2) deadzone = 0.2f;
     }
 
     public double getAngleRadian(MotionEvent event){
