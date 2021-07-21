@@ -4,6 +4,10 @@
         android:title="@string/customctrl_addbutton"/>
 
     <item
+        android:id="@+id/menu_ctrl_add_drawer"
+        android:title="@string/customctrl_addbutton_drawer"/>
+
+    <item
         android:id="@+id/menu_ctrl_load"
         android:title="@string/global_load"/>
 

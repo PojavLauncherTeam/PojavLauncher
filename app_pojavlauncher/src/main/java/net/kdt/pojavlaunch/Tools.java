@@ -33,8 +33,7 @@ import static android.os.Build.VERSION_CODES.P;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
-public final class Tools
-{
+public final class Tools {
     public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
 
     public static String APP_NAME = "null";
@@ -75,17 +74,11 @@ public final class Tools
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > (mi.availMem/1048576L)) {
-            ctx.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
-                            .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {}
-                            });
-                    b.show();
-                }
+            ctx.runOnUiThread(() -> {
+                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
+                        .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
+                        .setPositiveButton(android.R.string.ok, null);
+                b.show();
             });
         }
 
@@ -417,10 +410,13 @@ public final class Tools
     }
 
     public static float dpToPx(float dp) {
-        // 921600 = 1280 * 720, default scale
-        // TODO better way to scaling
-        float scaledDp = dp; // / DisplayMetrics.DENSITY_XHIGH * currentDisplayMetrics.densityDpi;
-        return (scaledDp * currentDisplayMetrics.density);
+        //Better hope for the currentDisplayMetrics to be good
+        return dp * currentDisplayMetrics.density;
+    }
+
+    public static float pxToDp(float px){
+        //Better hope for the currentDisplayMetrics to be good
+        return px / currentDisplayMetrics.density;
     }
 
     public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws IOException {
@@ -438,31 +434,7 @@ public final class Tools
             write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
         }
     }
-/*
-    public static void extractAssetFolder(Activity ctx, String path, String output) throws Exception {
-        extractAssetFolder(ctx, path, output, false);
-    }
 
-    public static void extractAssetFolder(Activity ctx, String path, String output, boolean overwrite) throws Exception {
-        AssetManager assetManager = ctx.getAssets();
-        String assets[] = null;
-        try {
-            assets = assetManager.list(path);
-            if (assets.length == 0) {
-                Tools.copyAssetFile(ctx, path, output, overwrite);
-            } else {
-                File dir = new File(output, path);
-                if (!dir.exists())
-                    dir.mkdirs();
-                for (String sub : assets) {
-                    extractAssetFolder(ctx, path + "/" + sub, output, overwrite);
-                }
-            }
-        } catch (Exception e) {
-            showError(ctx, e);
-        }
-    }
-*/
     public static void showError(Context ctx, Throwable e) {
         showError(ctx, e, false);
     }
@@ -487,45 +459,27 @@ public final class Tools
                 AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
                     .setTitle(titleId)
                     .setMessage(errMsg)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface p1, int p2)
-                        {
-                            if(exitIfOk) {
-                                if (ctx instanceof BaseMainActivity) {
-                                    BaseMainActivity.fullyExit();
-                                } else if (ctx instanceof Activity) {
-                                    ((Activity) ctx).finish();
-                                }
+                    .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
+                        if(exitIfOk) {
+                            if (ctx instanceof BaseMainActivity) {
+                                BaseMainActivity.fullyExit();
+                            } else if (ctx instanceof Activity) {
+                                ((Activity) ctx).finish();
                             }
                         }
                     })
-                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface p1, int p2)
-                        {
-                            showError(ctx, titleId, e, exitIfOk, !showMore);
-                        }
-                    })
-                    .setNeutralButton(android.R.string.copy, new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface p1, int p2)
-                        {
-                            android.content.ClipboardManager mgr = (android.content.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
-                            mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
-                            if(exitIfOk) {
-                                if (ctx instanceof BaseMainActivity) {
-                                    BaseMainActivity.fullyExit();
-                                } else {
-                                    ((Activity) ctx).finish();
-                                }
+                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
+                    .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
+                        ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+                        mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
+                        if(exitIfOk) {
+                            if (ctx instanceof BaseMainActivity) {
+                                BaseMainActivity.fullyExit();
+                            } else {
+                                ((Activity) ctx).finish();
                             }
                         }
                     })
-                    //.setNegativeButton("Report (not available)", null)
                     .setCancelable(!exitIfOk);
                 try {
                     builder.show();
@@ -543,18 +497,11 @@ public final class Tools
     }
 
     public static void dialogOnUiThread(final Activity ctx, final CharSequence title, final CharSequence message) {
-        ctx.runOnUiThread(new Runnable(){
-
-                @Override
-                public void run() {
-                    new AlertDialog.Builder(ctx)
-                        .setTitle(title)
-                        .setMessage(message)
-                        .setPositiveButton(android.R.string.ok, null)
-                        .show();
-                }
-            });
-
+        ctx.runOnUiThread(() -> new AlertDialog.Builder(ctx)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, null)
+            .show());
     }
 
     public static void moveInside(String from, String to) {
@@ -919,5 +866,5 @@ public final class Tools
             Tools.updateWindowSize(ctx);
         }
     }
-
+    
 }

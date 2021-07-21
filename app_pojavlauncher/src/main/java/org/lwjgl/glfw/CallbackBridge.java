@@ -44,15 +44,15 @@ public class CallbackBridge {
     }
 
     private static boolean threadAttached;
-    public static void sendCursorPos(int x, int y) {
+    public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
         
-        DEBUG_STRING.append("CursorPos=" + x + ", " + y + "\n");
-        mouseX = x;
-        mouseY = y;
-        nativeSendCursorPos(x, y);
+        DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
+        mouseX = (int) x;
+        mouseY = (int) y;
+        nativeSendCursorPos(mouseX, mouseY);
     }
     
     public static void sendPrepareGrabInitialPos() {
@@ -61,7 +61,7 @@ public class CallbackBridge {
     }
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
-        DEBUG_STRING.append("KeyCode=" + keycode + ", Char=" + keychar);
+        DEBUG_STRING.append("KeyCode=").append(keycode).append(", Char=").append(keychar);
         // TODO CHECK: This may cause input issue, not receive input!
 /*
         if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar(keychar)) {
@@ -71,7 +71,7 @@ public class CallbackBridge {
 
         //nativeSendKeycode(keycode, keychar, scancode, isDown ? 1 : 0, modifiers);
         if(keycode != 0)  nativeSendKey(keycode,scancode,isDown ? 1 : 0, modifiers);
-        else nativeSendKey(32,scancode,isDown ? 1 : 0, modifiers);
+        //else nativeSendKey(32,scancode,isDown ? 1 : 0, modifiers);
         if(isDown && keychar != '\u0000') {
             nativeSendCharMods(keychar,modifiers);
             nativeSendChar(keychar);
@@ -81,7 +81,7 @@ public class CallbackBridge {
     }
 
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
-        DEBUG_STRING.append("MouseKey=" + button + ", down=" + isDown + "\n");
+        DEBUG_STRING.append("MouseKey=").append(button).append(", down=").append(isDown).append("\n");
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
         nativeSendMouseButton(button, isDown ? 1 : 0, modifiers);
     }
@@ -92,7 +92,7 @@ public class CallbackBridge {
     }
     
     public static void sendScroll(double xoffset, double yoffset) {
-        DEBUG_STRING.append("ScrollX=" + xoffset + ",ScrollY=" + yoffset);
+        DEBUG_STRING.append("ScrollX=").append(xoffset).append(",ScrollY=").append(yoffset);
         nativeSendScroll(xoffset, yoffset);
     }
 
@@ -179,8 +179,6 @@ public class CallbackBridge {
     private static native void nativeSendScreenSize(int width, int height);
     
     public static native boolean nativeIsGrabbing();
-    public static native void nativePutControllerAxes(FloatBuffer axBuf);
-    public static native void nativePutControllerButtons(ByteBuffer axBuf);
     static {
         System.loadLibrary("pojavexec");
     }
