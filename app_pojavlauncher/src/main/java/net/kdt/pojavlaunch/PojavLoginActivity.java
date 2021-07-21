@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.system.Os;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -91,102 +92,96 @@ public class PojavLoginActivity extends BaseActivity
     private SharedPreferences firstLaunchPrefs;
     private MinecraftAccount mProfile = null;
     
-    private static boolean isSkipInit = false;
+    private boolean isSkipInit = false;
+    private boolean isStarting = false;
 
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
     
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false;
-
+        if(savedInstanceState != null) {
+            isStarting = savedInstanceState.getBoolean("isStarting");
+            isSkipInit = savedInstanceState.getBoolean("isSkipInit");
+        }
         Tools.updateWindowSize(this);
-        
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
-        new InitTask().execute(isSkipInit);
+        new Thread(new InitRunnable()).start();
     }
 
-    private class InitTask extends AsyncTask<Boolean, String, Integer>{
-        private AlertDialog startAle;
-        private ProgressBar progress;
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("isStarting",isStarting);
+        outState.putBoolean("isSkipInit",isSkipInit);
+    }
 
-        @Override
-        protected void onPreExecute() {
-            LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
-            LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
-
-            FontChanger.changeFonts(startScr);
-
-            progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
-            startupTextView = (TextView) startScr.findViewById(R.id.startscreen_text);
-
-
-            AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this, R.style.AppTheme);
-            startDlg.setView(startScr);
-            startDlg.setCancelable(false);
-
-            startAle = startDlg.create();
-            startAle.show();
-            startAle.getWindow().setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
-            );
-        }
-        
+    public class InitRunnable implements Runnable{
         private int revokeCount = -1;
-        
-        @Override
-        protected Integer doInBackground(Boolean[] params) {
-            // If trigger a quick restart
-            if (params[0]) return 0;
-            
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {}
+        private int proceedState = 0;
+        private ProgressBar progress;
+        public InitRunnable() {
+        }
+        public void initLocalUi() {
+            LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
+            LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen,startScr);
+            PojavLoginActivity.this.setContentView(startScr);
+            FontChanger.changeFonts(startScr);
+            progress = (ProgressBar) findViewById(R.id.startscreenProgress);
+            if(isStarting) progress.setVisibility(View.VISIBLE);
+            startupTextView = (TextView) findViewById(R.id.startscreen_text);
+        }
 
-            publishProgress("visible");
+        public int _start() {
+            Log.i("UITest","START initialization");
+            if(!isStarting) {
+                //try { Thread.sleep(2000); } catch (InterruptedException e) { }
+                runOnUiThread(() -> progress.setVisibility(View.VISIBLE));
+                while (Build.VERSION.SDK_INT >= 23 && !isStorageAllowed()) {
+                    try {
+                        revokeCount++;
+                        if (revokeCount >= 3) {
+                            Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
+                            return 2;
+                        }
+                        requestStoragePermission();
 
-            while (Build.VERSION.SDK_INT >= 23 && !isStorageAllowed()){
-                try {
-                    revokeCount++;
-                    if (revokeCount >= 3) {
-                        Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
-                        finish();
-                        return 0;
+                        synchronized (mLockStoragePerm) {
+                            mLockStoragePerm.wait();
+                        }
+                    } catch (InterruptedException e) {
                     }
-                    
-                    requestStoragePermission();
-                    
-                    synchronized (mLockStoragePerm) {
-                        mLockStoragePerm.wait();
-                    }
-                } catch (InterruptedException e) {}
+                }
+                isStarting = true;
             }
-
             try {
                 initMain();
             } catch (Throwable th) {
                 Tools.showError(PojavLoginActivity.this, th, true);
                 return 1;
             }
-
             return 0;
         }
-
-        @Override
-        protected void onProgressUpdate(String... obj)
-        {
-            if (obj[0].equals("visible")) {
-                progress.setVisibility(View.VISIBLE);
+        public void proceed() {
+            isStarting = false;
+            switch(proceedState) {
+                case 2:
+                    finish();
+                    break;
+                case 0:
+                    uiInit();
+                    break;
             }
         }
-
         @Override
-        protected void onPostExecute(Integer obj) {
-            startAle.dismiss();
-            if (obj == 0) uiInit();
+        public void run() {
+            if(!isSkipInit) {
+                PojavLoginActivity.this.runOnUiThread(this::initLocalUi);
+                proceedState = _start();
+            }
+            PojavLoginActivity.this.runOnUiThread(this::proceed);
         }
     }
-    
     private void uiInit() {
         setContentView(R.layout.launcher_login_v3);
 
@@ -386,7 +381,7 @@ public class PojavLoginActivity extends BaseActivity
                     try {
                         MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), BaseLauncherActivity.getFileName(this,uri),
                                 (resid, stuff) ->PojavLoginActivity.this.runOnUiThread(
-                                        () -> startupTextView.setText(PojavLoginActivity.this.getString(resid,stuff))));
+                                        () -> {if(startupTextView!=null)startupTextView.setText(PojavLoginActivity.this.getString(resid,stuff));}));
                         synchronized (mLockSelectJRE) {
                             mLockSelectJRE.notifyAll();
                         }
@@ -414,7 +409,7 @@ public class PojavLoginActivity extends BaseActivity
             try {
                 MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz"), "Internal", rt_version,
                         (resid, vararg) -> {
-                            runOnUiThread(()->{startupTextView.setText(getString(resid,vararg));});
+                            runOnUiThread(()->{if(startupTextView!=null)startupTextView.setText(getString(resid,vararg));});
                         });
                 MultiRTUtils.postPrepare(PojavLoginActivity.this,"Internal");
                 return true;
