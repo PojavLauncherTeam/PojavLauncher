@@ -1,12 +1,8 @@
 package net.kdt.pojavlaunch;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,23 +13,17 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.system.Os;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,41 +33,35 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.kdt.pickafile.FileListView;
-import com.kdt.pickafile.FileSelectedListener;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Locale;
+
 import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthTask;
 import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
 import net.kdt.pojavlaunch.authenticator.mojang.LoginListener;
 import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
 import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
-import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
-import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
-import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
-import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
+
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Locale;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -191,7 +175,7 @@ public class PojavLoginActivity extends BaseActivity
         SpannableString defaultLangChar = new SpannableString(defaultLang);
         defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(), 0);
         
-        final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<DisplayableLocale>(this, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         langAdapter.add(new DisplayableLocale(LocaleUtils.DEFAULT_LOCALE, defaultLangChar));
         langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
@@ -257,14 +241,10 @@ public class PojavLoginActivity extends BaseActivity
         
         sRemember = findViewById(R.id.login_switch_remember);
         sOffline  = findViewById(R.id.login_switch_offline);
-        sOffline.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-
-                @Override
-                public void onCheckedChanged(CompoundButton p1, boolean p2) {
-                    // May delete later
-                    edit3.setEnabled(!p2);
-                }
-            });
+        sOffline.setOnCheckedChangeListener((p1, p2) -> {
+            // May delete later
+            edit3.setEnabled(!p2);
+        });
             
         isSkipInit = true;
     }
@@ -408,9 +388,7 @@ public class PojavLoginActivity extends BaseActivity
         if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
             try {
                 MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz"), "Internal", rt_version,
-                        (resid, vararg) -> {
-                            runOnUiThread(()->{if(startupTextView!=null)startupTextView.setText(getString(resid,vararg));});
-                        });
+                        (resid, vararg) -> runOnUiThread(()->{if(startupTextView!=null)startupTextView.setText(getString(resid,vararg));}));
                 MultiRTUtils.postPrepare(PojavLoginActivity.this,"Internal");
                 return true;
             }catch (IOException e) {
@@ -500,7 +478,7 @@ public class PojavLoginActivity extends BaseActivity
 
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
-            View child = inflater.inflate(R.layout.simple_account_list_item, null);
+            View child = inflater.inflate(R.layout.simple_account_list_item, accountListLayout,false);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
             ImageView imageView = child.findViewById(R.id.account_head);
@@ -561,21 +539,17 @@ public class PojavLoginActivity extends BaseActivity
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
                     builder2.setTitle(selectedAccName);
                     builder2.setMessage(R.string.warning_remove_account);
-                    builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+                    builder2.setPositiveButton(android.R.string.ok, (p1, p2) -> {
+                        new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
+                        accountListLayout.removeViewsInLayout(accountIndex_final, 1);
 
-                        @Override
-                        public void onClick(DialogInterface p1, int p2) {
-                            new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
-                            accountListLayout.removeViewsInLayout(accountIndex_final, 1);
-
-                            if (accountListLayout.getChildCount() == 0) {
-                                accountDialog.dismiss(); //No need to keep it, since there is no account
-                                return;
-                            }
-                            //Refreshes the layout with the same settings so it take the missing child into account.
-                            accountListLayout.setLayoutParams(accountListLayout.getLayoutParams());
-
+                        if (accountListLayout.getChildCount() == 0) {
+                            accountDialog.dismiss(); //No need to keep it, since there is no account
+                            return;
                         }
+                        //Refreshes the layout with the same settings so it take the missing child into account.
+                        accountListLayout.setLayoutParams(accountListLayout.getLayoutParams());
+
                     });
                     builder2.setNegativeButton(android.R.string.cancel, null);
                     builder2.show();
@@ -669,7 +643,7 @@ public class PojavLoginActivity extends BaseActivity
     
     public static String strArrToString(String[] strArr)
     {
-        String[] strArrEdit = strArr;
+        String[] strArrEdit = strArr.clone();
         strArrEdit[0] = "";
         
         String str = Arrays.toString(strArrEdit);
