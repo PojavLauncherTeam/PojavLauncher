@@ -1,6 +1,8 @@
 package net.kdt.pojavlaunch.customcontrols;
 import android.content.*;
 import com.google.gson.*;
+
+import java.io.IOException;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
@@ -63,7 +65,7 @@ public class CustomControls {
         return null;
     }
 	
-	public void save(String path) throws Exception {
+	public void save(String path) throws IOException {
 		//Current version is the V2 so the version as to be marked as 2 !
 		version = 2;
 

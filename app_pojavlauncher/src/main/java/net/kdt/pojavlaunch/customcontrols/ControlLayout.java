@@ -15,6 +15,10 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.customcontrols.handleview.HandleView;
 import net.kdt.pojavlaunch.prefs.*;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.lwjgl.glfw.*;
 
 public class ControlLayout extends FrameLayout
@@ -40,7 +44,12 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void loadLayout(String jsonPath) throws IOException, JsonSyntaxException {
-		loadLayout(Tools.GLOBAL_GSON.fromJson(Tools.read(jsonPath), CustomControls.class));
+		CustomControls layout = LayoutConverter.loadAndConvertIfNecessary(jsonPath);
+		if(layout != null) {
+			loadLayout(layout);
+		}else{
+			throw new IOException("Unsupported control layout version");
+		}
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
