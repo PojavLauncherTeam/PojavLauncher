@@ -183,7 +183,7 @@
     <string name="customctrl_dynamicpos_y">Dynamic Y</string>
 
     <string name="customctrl_transparency_bg">Background transparency</string>
-    <string name="customctrl_button_opacity">Background Opacity</string>
+    <string name="customctrl_button_opacity">Button Opacity</string>
 
     <string name="customctrl_keycombine">Key combination</string>
     <string name="customctrl_keycombine_alt">Alt</string>
