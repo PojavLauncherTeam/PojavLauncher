@@ -45,7 +45,7 @@ public class LayoutConverter {
             n_button.dynamicY = button.getString("dynamicY");
             n_button.isDynamicBtn = button.getBoolean("isDynamicBtn");
             n_button.name = button.getString("name");
-            n_button.opacity = ((float)button.getInt("transparency"))/100f;
+            n_button.opacity = ((float)((button.getInt("transparency")-100)*-1))/100f;
             n_button.passThruEnabled = button.getBoolean("passThruEnabled");
             n_button.isToggle = button.getBoolean("isToggle");
             n_button.x = button.getInt("x");
