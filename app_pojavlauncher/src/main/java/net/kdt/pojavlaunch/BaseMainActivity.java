@@ -629,7 +629,7 @@ public class BaseMainActivity extends LoggableActivity {
 
         int index = EfficientAndroidLWJGLKeycode.getIndexByKey(event.getKeyCode());
         if(index >= 0) {
-            Toast.makeText(this,"THIS IS A KEYBOARD EVENT !", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"THIS IS A KEYBOARD EVENT !", Toast.LENGTH_SHORT).show();
             EfficientAndroidLWJGLKeycode.execKey(event, index);
             return true;
         }
