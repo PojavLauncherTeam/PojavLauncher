@@ -153,6 +153,7 @@ public class CustomControlsActivity extends BaseActivity
 						if(ctx instanceof MainActivity) {
 							((MainActivity) ctx).leaveCustomControls();
 						}else{
+							((CustomControlsActivity) ctx).isModified = false;
 							((Activity)ctx).onBackPressed();
 						}
 		//			    setResult(Activity.RESULT_OK, new Intent());
