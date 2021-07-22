@@ -88,6 +88,7 @@
     <!-- Global strings -->
     <string name="global_edit">Өңдеу</string>
     <string name="global_error">Қате</string>
+    <string name="global_warinng">Назар аударыңыз</string>
     <string name="global_load">Жүктеу</string>
     <string name="global_name">Атауы</string>
     <string name="global_remove">Алып тастау</string>
