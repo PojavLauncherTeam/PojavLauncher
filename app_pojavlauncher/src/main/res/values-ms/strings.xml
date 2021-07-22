@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Sunting</string>
     <string name="global_error">Ralat</string>
+    <string name="global_warinng">Amaran</string>
     <string name="global_load">Memuat</string>
     <string name="global_name">Nama</string>
     <string name="global_remove">Hapus</string>
