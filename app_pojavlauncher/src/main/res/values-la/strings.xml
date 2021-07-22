@@ -29,6 +29,7 @@
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <!-- Global strings -->
+    <string name="global_warinng">Monitum</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Exitus</string>
     <!-- MainActivity: Control buttons -->
