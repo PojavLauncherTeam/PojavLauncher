@@ -91,6 +91,7 @@
     <!-- Global strings -->
     <string name="global_edit">Redaguoti</string>
     <string name="global_error">Klaida</string>
+    <string name="global_warinng">Įspėjimas</string>
     <string name="global_load">Įjungti</string>
     <string name="global_name">Pavadinimas</string>
     <string name="global_remove">Pašalinti</string>
