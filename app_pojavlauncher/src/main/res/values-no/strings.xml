@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Rediger</string>
     <string name="global_error">Feil</string>
+    <string name="global_warinng">Advarsel</string>
     <string name="global_load">Last inn</string>
     <string name="global_name">Navn</string>
     <string name="global_remove">Slett</string>
