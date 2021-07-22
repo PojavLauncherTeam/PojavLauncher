@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">I-Edit</string>
     <string name="global_error">Error</string>
+    <string name="global_warinng">Babala</string>
     <string name="global_load">I-Load</string>
     <string name="global_name">Pangalan</string>
     <string name="global_remove">Tanggalin</string>
