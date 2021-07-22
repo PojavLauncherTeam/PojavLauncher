@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">تعديل</string>
     <string name="global_error">خطأ</string>
+    <string name="global_warinng">تحذير</string>
     <string name="global_load">تحميل</string>
     <string name="global_name">الاسم</string>
     <string name="global_remove">إزالة</string>
