@@ -215,9 +215,9 @@ public class JREUtils
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");
         envMap.put("REGAL_GL_VERSION", "4.5");
-        
-        envMap.put("POJAV_RENDERER", Tools.LOCAL_RENDERER);
-
+        if(Tools.LOCAL_RENDERER != null) {
+            envMap.put("POJAV_RENDERER", Tools.LOCAL_RENDERER);
+        }
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
         
@@ -232,7 +232,7 @@ public class JREUtils
             }
             reader.close();
         }
-        if(!envMap.containsKey("LIBGL_ES")) {
+        if(!envMap.containsKey("LIBGL_ES") && Tools.LOCAL_RENDERER != null) {
             int glesMajor = getDetectedVersion();
             Log.i("glesDetect","GLES version detected: "+glesMajor);
 
