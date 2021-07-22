@@ -96,6 +96,7 @@
     <!-- Global strings -->
     <string name="global_edit">Измени</string>
     <string name="global_error">Грешка</string>
+    <string name="global_warinng">Упозорење</string>
     <string name="global_load">Учитај</string>
     <string name="global_name">Име</string>
     <string name="global_remove">Уклони</string>
