@@ -45,6 +45,7 @@ public final class Tools
 
     public static String DIR_DATA = "/data/data/" + BuildConfig.APPLICATION_ID;
     public static String MULTIRT_HOME = DIR_DATA+"/runtimes";
+    public static String LOCAL_RENDERER = null;
     public static String CURRENT_ARCHITECTURE;
 
     // New since 3.3.1
@@ -79,7 +80,8 @@ public final class Tools
             ctx.runOnUiThread(() -> {
                 androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
                         .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
-                        .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
+                        .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}})
+                        .setOnCancelListener((i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
                 b.show();
             });
             synchronized (memoryErrorLock) {
@@ -155,7 +157,7 @@ public final class Tools
         javaArgList.add(cacioClasspath.toString());
     }
 
-    public static void getJavaArgs(Context ctx, List<String> javaArgList) {
+    public static void getJavaArgs(Context ctx, List<String> javaArgList, String renderLib) {
         List<String> overrideableArgList = new ArrayList<String>();
 
         overrideableArgList.add("-Djava.home=" + Tools.DIR_HOME_JRE);
@@ -173,7 +175,7 @@ public final class Tools
         // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
         // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
        
-        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=" + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME);
+        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=" + renderLib);
         // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
         
         // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");

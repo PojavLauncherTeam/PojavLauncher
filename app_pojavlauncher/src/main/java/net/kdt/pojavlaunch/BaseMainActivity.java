@@ -103,7 +103,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     private File logFile;
     private PrintStream logStream;
-    
+    private PerVersionConfig.VersionConfig config;
     /*
      private LinearLayout contentCanvas;
      private AWTSurfaceView contentCanvasView;
@@ -140,13 +140,16 @@ public class BaseMainActivity extends LoggableActivity {
             
             setTitle("Minecraft " + mProfile.selectedVersion);
             PerVersionConfig.update();
-            PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(mProfile.selectedVersion);
+            config = PerVersionConfig.configMap.get(mProfile.selectedVersion);
             String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-            if(cfg != null) {
-                if(cfg.selectedRuntime != null) {
-                    if(MultiRTUtils.forceReread(cfg.selectedRuntime).versionString != null) {
-                        runtime = cfg.selectedRuntime;
+            if(config != null) {
+                if(config.selectedRuntime != null) {
+                    if(MultiRTUtils.forceReread(config.selectedRuntime).versionString != null) {
+                        runtime = config.selectedRuntime;
                     }
+                }
+                if(config.renderer != null) {
+                    Tools.LOCAL_RENDERER = config.renderer;
                 }
             }
             MultiRTUtils.setRuntimeNamed(this,runtime);
@@ -904,10 +907,12 @@ public class BaseMainActivity extends LoggableActivity {
             mLogObserver.startWatching();
         }
         */
-        
+        if(Tools.LOCAL_RENDERER == null) {
+            Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
+        }
         appendlnToLog("--------- beggining with launcher debug");
         appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
-        if (LauncherPreferences.PREF_RENDERER.equals("vulkan_zink")) {
+        if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
         checkLWJGL3Installed();

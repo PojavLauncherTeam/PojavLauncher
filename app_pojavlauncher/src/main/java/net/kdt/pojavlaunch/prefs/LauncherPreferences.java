@@ -85,23 +85,7 @@ public class LauncherPreferences
 
         if (PREF_RENDERER.equals("2") || PREF_RENDERER.equals("3")) {
             PREF_RENDERER = "opengles" + PREF_RENDERER;
-	}
-
-        switch (PREF_RENDERER) {
-            case "opengles2":
-                PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
-                break;
-            case "opengles2_5":
-            case "opengles3":
-                PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_115.so";
-                break;
-            case "vulkan_zink":
-                PREF_CUSTOM_OPENGL_LIBNAME = "libOSMesa_8.so";
-                break;
-            default:
-                throw new RuntimeException("Undefined renderer: " + PREF_RENDERER);
-        }
-
+	    }
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : PREF_CUSTOM_JAVA_ARGS.split(" ")) {
             if (arg.startsWith(argLwjglLibname)) {

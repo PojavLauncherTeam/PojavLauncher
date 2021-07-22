@@ -86,16 +86,7 @@ public class JREUtils
             dlopen(f.getAbsolutePath());
         }
         dlopen(nativeLibDir + "/libopenal.so");
-        
-        // may not necessary
-        if (LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME.equals("libgl4es_114.so")) {
-            LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME = nativeLibDir + "/libgl4es_114.so";
-        }
 
-        if (!dlopen(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME) && !dlopen(findInLdLibPath(LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME))) {
-            System.err.println("Failed to load custom OpenGL library " + LauncherPreferences.PREF_CUSTOM_OPENGL_LIBNAME + ". Fallbacking to GL4ES.");
-            dlopen(nativeLibDir + "/libgl4es_114.so");
-        }
     }
 
     public static Map<String, String> readJREReleaseProperties() throws IOException {
@@ -225,7 +216,7 @@ public class JREUtils
         envMap.put("REGAL_GL_RENDERER", "Regal");
         envMap.put("REGAL_GL_VERSION", "4.5");
         
-        envMap.put("POJAV_RENDERER", LauncherPreferences.PREF_RENDERER);
+        envMap.put("POJAV_RENDERER", Tools.LOCAL_RENDERER);
 
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
@@ -248,8 +239,8 @@ public class JREUtils
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            } else if (LauncherPreferences.PREF_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", LauncherPreferences.PREF_RENDERER.replace("opengles", "").replace("_5", ""));
+            } else if (Tools.LOCAL_RENDERER.startsWith("opengles")) {
+                envMap.put("LIBGL_ES", Tools.LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
@@ -273,10 +264,34 @@ public class JREUtils
     public static int launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
         JREUtils.relocateLibPath(ctx);
         // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
+        final String graphicsLib;
+        if(Tools.LOCAL_RENDERER != null){
+            switch (Tools.LOCAL_RENDERER) {
+                case "opengles2":
+                    graphicsLib = "libgl4es_114.so";
+                    break;
+                case "opengles2_5":
+                case "opengles3":
+                    graphicsLib = "libgl4es_115.so";
+                    break;
+                case "vulkan_zink":
+                    graphicsLib = "libOSMesa_8.so";
+                    break;
+                default:
+                    throw new RuntimeException("Undefined renderer: " + Tools.LOCAL_RENDERER);
+            }
+            if (!dlopen(graphicsLib) && !dlopen(findInLdLibPath(graphicsLib))) {
+                System.err.println("Failed to load renderer " + graphicsLib + ". Falling back to GL4ES 1.1.4");
+                Tools.LOCAL_RENDERER = "opengles2";
+                dlopen(nativeLibDir + "/libgl4es_114.so");
+            }
+        }else{
+            graphicsLib = null;
+        }
 
         List<String> javaArgList = new ArrayList<String>();
         javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
-        Tools.getJavaArgs(ctx, javaArgList);
+        Tools.getJavaArgs(ctx, javaArgList,graphicsLib);
             purgeArg(javaArgList,"-Xms");
             purgeArg(javaArgList,"-Xmx");
             /*if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 300) {
@@ -421,6 +436,7 @@ public class JREUtils
     static {
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");
+        dlopen("libxhook.so");
         System.loadLibrary("istdio");
     }
 }
