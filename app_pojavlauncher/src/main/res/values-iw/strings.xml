@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">ערוך</string>
     <string name="global_error">שגיאה</string>
+    <string name="global_warinng">אזהרה</string>
     <string name="global_load">טען</string>
     <string name="global_name">שם</string>
     <string name="global_remove">הסר</string>
