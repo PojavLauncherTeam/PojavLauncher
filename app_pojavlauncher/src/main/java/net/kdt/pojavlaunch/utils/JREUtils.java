@@ -209,6 +209,9 @@ public class JREUtils
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
+        
+        // HACK: fixes the vbo crashes on older versions by force disabling it
+        envMap.put("LIBGL_USEVBO", "0");
    
         envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
         envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
