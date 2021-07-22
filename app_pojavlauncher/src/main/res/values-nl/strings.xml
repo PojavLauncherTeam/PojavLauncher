@@ -90,6 +90,7 @@
     <!-- Global strings -->
     <string name="global_edit">Bewerken</string>
     <string name="global_error">Foutmelding</string>
+    <string name="global_warinng">Waarschuwing</string>
     <string name="global_load">Lading</string>
     <string name="global_name">Naam</string>
     <string name="global_remove">Verwijderen</string>
