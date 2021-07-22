@@ -75,18 +75,16 @@ public final class Tools
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > (mi.availMem/1048576L)) {
-            ctx.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
-                            .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {}
-                            });
-                    b.show();
-                }
+            Object memoryErrorLock = new Object();
+            ctx.runOnUiThread(() -> {
+                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
+                        .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
+                        .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
+                b.show();
             });
+            synchronized (memoryErrorLock) {
+                memoryErrorLock.wait();
+            }
         }
 
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
