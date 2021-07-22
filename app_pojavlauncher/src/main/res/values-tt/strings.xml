@@ -75,6 +75,7 @@
     <!-- Global strings -->
     <string name="global_edit">Үзгәртергә</string>
     <string name="global_error">Хата</string>
+    <string name="global_warinng">Кисәтү</string>
     <string name="global_load">Йөкләргә</string>
     <string name="global_name">Исем</string>
     <string name="global_remove">Бетерергә</string>
