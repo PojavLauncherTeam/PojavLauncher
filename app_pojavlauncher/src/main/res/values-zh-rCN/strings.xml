@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">修改</string>
     <string name="global_error">错误</string>
+    <string name="global_warinng">警告</string>
     <string name="global_load">加载</string>
     <string name="global_name">名称</string>
     <string name="global_remove">移除</string>
