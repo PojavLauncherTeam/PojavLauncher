@@ -139,7 +139,7 @@ public class V117CompatUtil {
             String path = Tools.DIR_GAME_NEW;
             if(cfg.gamePath != null && !cfg.gamePath.isEmpty()) path = cfg.gamePath;
             copyResourcePack(path,ctx.getAssets());
-            packList.add(0,"\"assets-v0.zip\"");
+            if(!packList.contains("\"assets-v0.zip\"")) packList.add(0,"\"assets-v0.zip\"");
             MCOptionUtils.set("resourcePacks",regenPackList(packList));
             MCOptionUtils.save();
             PerVersionConfig.update();
