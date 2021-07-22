@@ -1,6 +1,8 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -34,7 +36,7 @@ public class Gamepad {
     private final BaseMainActivity gameActivity;
     private final ImageView pointerView;
 
-    private final GamepadDpad gamepadDpad = new GamepadDpad(this);
+    private final GamepadDpad gamepadDpad = new GamepadDpad();
 
     private final GamepadJoystick leftJoystick;
     private int currentJoystickDirection = DIRECTION_NONE;
@@ -55,86 +57,37 @@ public class Gamepad {
     private GamepadMap currentMap = gameMap;
 
     private boolean lastGrabbingState = true;
-    private MotionEvent lastMotionEvent = null;
+    private final boolean hasDigitalTriggers;
 
-    private final Thread mouseThread;
-    private final Runnable mouseRunnable;
+    private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable switchStateRunnable;
-    private final Runnable motionEventRunnable;
 
     public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
         Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
 
         leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
         rightJoystick = new GamepadJoystick(MotionEvent.AXIS_Z, MotionEvent.AXIS_RZ, inputDevice);
+        hasDigitalTriggers = inputDevice.hasKeys(KeyEvent.KEYCODE_BUTTON_R2)[0];
 
         this.gameActivity = gameActivity;
         pointerView = this.gameActivity.findViewById(R.id.console_pointer);
         pointerView.getDrawable().setFilterBitmap(false);
         notifyGUISizeChange(gameActivity.getMcScale());
 
-
-        mouseThread = new Thread("Gamepad Thread"){
-            long lastTime = System.nanoTime();
-            final double ticks = 60D;
-            final double ns = 1000000000 / ticks;
-            double delta = 0;
+        Runnable handlerRunnable = new Runnable() {
 
             @Override
             public void run() {
+                updateGrabbingState();
+                tick();
 
-                while (!isInterrupted()) {
-                    long now = System.nanoTime();
-                    delta += (now - lastTime) / ns;
-                    lastTime = now;
-
-                    if(delta >= 1) {
-                        updateGrabbingState();
-                        tick();
-
-                        delta--;
-
-                        try{ sleep(Math.max((long) ( (1 - delta) * (1000/ticks) ), 0)); } catch (InterruptedException e) {e.printStackTrace();}
-                    }
-                }
-            }
-
-            private void tick(){
-                //Update motion events, and the mouse position
-                if(lastMotionEvent != null)gameActivity.runOnUiThread(motionEventRunnable);
-
-                if(lastHorizontalValue != 0 || lastVerticalValue != 0){
-                    GamepadJoystick currentJoystick = lastGrabbingState ? leftJoystick : rightJoystick;
-
-                    acceleration = (mouseMagnitude - currentJoystick.getDeadzone())/(1 - currentJoystick.getDeadzone());
-                    acceleration = Math.pow(acceleration, mouseMaxAcceleration);
-
-                    if(acceleration > 1) acceleration = 1;
-
-
-                    CallbackBridge.mouseX += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
-                    CallbackBridge.mouseY -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
-
-                    gameActivity.runOnUiThread(mouseRunnable);
-
-                    if(!lastGrabbingState){
-                        CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
-                        CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
-                        placePointerView((int) (CallbackBridge.mouseX /gameActivity.scaleFactor), (int) (CallbackBridge.mouseY/gameActivity.scaleFactor));
-                    }
-
-                    gameActivity.mouse_x = CallbackBridge.mouseX;
-                    gameActivity.mouse_y = CallbackBridge.mouseY;
-                }
-
+                handler.postDelayed(this, 16);
             }
         };
-        mouseThread.setPriority(Thread.MAX_PRIORITY);
-        mouseThread.start();
 
+        handler.postDelayed(handlerRunnable, 16);
 
         //Initialize runnables to be used by the input system, avoiding generating one each time is better memory.
-        mouseRunnable = () -> CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
         switchStateRunnable = () -> {
             currentMap.resetPressedState();
             if(lastGrabbingState){
@@ -155,12 +108,34 @@ public class Gamepad {
             mouseSensitivity = 14; //sensitivity in game doesn't need to be resolution dependent
         };
 
-        motionEventRunnable = () -> {
-            updateDirectionalJoystick(lastMotionEvent);
-            updateMouseJoystick(lastMotionEvent);
-            updateAnalogTriggers(lastMotionEvent);
-            gamepadDpad.update(lastMotionEvent);
-        };
+    }
+
+
+
+    private void tick(){
+        //update mouse position
+        if(lastHorizontalValue != 0 || lastVerticalValue != 0){
+            GamepadJoystick currentJoystick = lastGrabbingState ? leftJoystick : rightJoystick;
+
+            acceleration = (mouseMagnitude - currentJoystick.getDeadzone())/(1 - currentJoystick.getDeadzone());
+            acceleration = Math.pow(acceleration, mouseMaxAcceleration);
+            if(acceleration > 1) acceleration = 1;
+
+            CallbackBridge.mouseX += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
+            CallbackBridge.mouseY -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
+
+            if(!lastGrabbingState){
+                CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
+                CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
+                placePointerView((int) (CallbackBridge.mouseX /gameActivity.scaleFactor), (int) (CallbackBridge.mouseY/gameActivity.scaleFactor));
+            }
+
+            gameActivity.mouse_x = CallbackBridge.mouseX;
+            gameActivity.mouse_y = CallbackBridge.mouseY;
+
+            //Send the mouse to the game
+            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+        }
 
     }
 
@@ -173,13 +148,14 @@ public class Gamepad {
     }
 
     public void update(KeyEvent event){
-        gamepadDpad.update(event);
         sendButton(event);
     }
 
     public void update(MotionEvent event){
-        //Motion events are taken into account every 1/60th second
-        lastMotionEvent = event;
+        updateDirectionalJoystick(event);
+        updateMouseJoystick(event);
+        updateAnalogTriggers(event);
+        sendButton(gamepadDpad.convertEvent(event));
     }
 
     private void updateMouseJoystick(MotionEvent event){
@@ -204,8 +180,10 @@ public class Gamepad {
     }
 
     private void updateAnalogTriggers(MotionEvent event){
-        getCurrentMap().TRIGGER_LEFT.update(event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5);
-        getCurrentMap().TRIGGER_RIGHT.update(event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5);
+        if(!hasDigitalTriggers){
+            getCurrentMap().TRIGGER_LEFT.update((event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5) || (event.getAxisValue(MotionEvent.AXIS_BRAKE) > 0.5));
+            getCurrentMap().TRIGGER_RIGHT.update((event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5) || (event.getAxisValue(MotionEvent.AXIS_GAS) > 0.5));
+        }
     }
 
     public void notifyGUISizeChange(int newSize){
@@ -298,19 +276,19 @@ public class Gamepad {
                 break;
 
                 //DPAD
-            case GamepadDpad.UP:
+            case KeyEvent.KEYCODE_DPAD_UP:
                 getCurrentMap().DPAD_UP.update(event);
                 break;
-            case GamepadDpad.DOWN:
+            case KeyEvent.KEYCODE_DPAD_DOWN:
                 getCurrentMap().DPAD_DOWN.update(event);
                 break;
-            case GamepadDpad.LEFT:
+            case KeyEvent.KEYCODE_DPAD_LEFT:
                 getCurrentMap().DPAD_LEFT.update(event);
                 break;
-            case GamepadDpad.RIGHT:
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
                 getCurrentMap().DPAD_RIGHT.update(event);
                 break;
-            case GamepadDpad.CENTER:
+            case KeyEvent.KEYCODE_DPAD_CENTER:
                 getCurrentMap().DPAD_RIGHT.update(false);
                 getCurrentMap().DPAD_LEFT.update(false);
                 getCurrentMap().DPAD_UP.update(false);

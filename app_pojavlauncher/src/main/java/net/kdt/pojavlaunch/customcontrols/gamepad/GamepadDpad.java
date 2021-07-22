@@ -1,93 +1,87 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
 import android.view.InputDevice;
-import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+
+import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
 
 import java.lang.reflect.Field;
 
 import static android.view.InputDevice.KEYBOARD_TYPE_NON_ALPHABETIC;
+import static android.view.InputDevice.SOURCE_DPAD;
+import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
+import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
+import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
+import static android.view.KeyEvent.KEYCODE_DPAD_RIGHT;
+import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
 /*
-    Code from the android documentation
+    Reflection is used to avoid memory churning, and only has an negative impact at start
  */
 
 public class GamepadDpad {
-    final static int UP       = 999;
-    final static int LEFT     = 9999;
-    final static int RIGHT    = 99999;
-    final static int DOWN     = 999999;
-    final static int CENTER   = 9999999;
 
-    int pressedDirection = -1;
-    Gamepad parentPad;
-    KeyEvent dummyEvent = new KeyEvent(KeyEvent.ACTION_DOWN, CENTER);
-    Field eventCodeField;
+
+    private int lastKeycode = KEYCODE_DPAD_CENTER;
+    private KeyEvent dummyEvent = new KeyEvent(KeyEvent.ACTION_DOWN, lastKeycode);
+    private Field eventCodeField;
+    private Field eventActionField;
 
     {
         try {
             eventCodeField = dummyEvent.getClass().getDeclaredField("mKeyCode");
             eventCodeField.setAccessible(true);
+
+            eventActionField = dummyEvent.getClass().getDeclaredField("mAction");
+            eventActionField.setAccessible(true);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
 
-    public GamepadDpad(Gamepad parentPad){
-        this.parentPad = parentPad;
-    }
-
-    public void update(KeyEvent event){
-
-        //TODO check if the event is valid
-        if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT) {
-            pressedDirection = LEFT;
-        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT) {
-            pressedDirection = RIGHT;
-        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP) {
-            pressedDirection = UP;
-        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN) {
-            pressedDirection = DOWN;
-        } else if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER) {
-            pressedDirection = CENTER;
-        }
-
-        setDummyEventKeyCode(pressedDirection);
-        parentPad.sendButton(dummyEvent);
-    }
-
-    public void update(MotionEvent event){
-        //TODO check if the event is valid
-
+    public KeyEvent convertEvent(MotionEvent event){
         // Use the hat axis value to find the D-pad direction
         float xaxis = event.getAxisValue(MotionEvent.AXIS_HAT_X);
         float yaxis = event.getAxisValue(MotionEvent.AXIS_HAT_Y);
+        int action = KeyEvent.ACTION_DOWN;
 
         // Check if the AXIS_HAT_X value is -1 or 1, and set the D-pad
         // LEFT and RIGHT direction accordingly.
         if (Float.compare(xaxis, -1.0f) == 0) {
-            pressedDirection = LEFT;
+            lastKeycode = KEYCODE_DPAD_LEFT;
         } else if (Float.compare(xaxis, 1.0f) == 0) {
-            pressedDirection = RIGHT;
+            lastKeycode = KEYCODE_DPAD_RIGHT;
         }
         // Check if the AXIS_HAT_Y value is -1 or 1, and set the D-pad
         // UP and DOWN direction accordingly.
         else if (Float.compare(yaxis, -1.0f) == 0) {
-            pressedDirection =  UP;
+            lastKeycode = KEYCODE_DPAD_UP;
         } else if (Float.compare(yaxis, 1.0f) == 0) {
-            pressedDirection =  DOWN;
+            lastKeycode = KEYCODE_DPAD_DOWN;
         }else {
-            pressedDirection = CENTER;
+            //No keycode change
+            action = KeyEvent.ACTION_UP;
         }
 
-        setDummyEventKeyCode(pressedDirection);
-        parentPad.sendButton(dummyEvent);
+        setDummyEventKeycode(lastKeycode);
+        setDummyEventAction(action);
+        dummyEvent.setSource(SOURCE_DPAD);
+        return dummyEvent;
+
     }
 
-    private void setDummyEventKeyCode(int fakeKeycode){
+    private void setDummyEventKeycode(int fakeKeycode){
         try {
             eventCodeField.setInt(dummyEvent, fakeKeycode);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setDummyEventAction(int action){
+        try {
+            eventActionField.setInt(dummyEvent, action);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
