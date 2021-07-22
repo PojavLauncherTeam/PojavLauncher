@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Düzenle</string>
     <string name="global_error">Hata</string>
+    <string name="global_warinng">Uyarı</string>
     <string name="global_load">Yükle</string>
     <string name="global_name">İsim</string>
     <string name="global_remove">Kaldır</string>
