@@ -195,4 +195,6 @@
     <string name="multirt_config_setdefault_already">Predefinito</string>
     <string name="multirt_config_removeerror_last">Devi avere almeno un Runtime Java installato</string>
     <string name="multirt_nocompartiblert">Non è stata trovata una versione compatibile di Runtime Java</string>
+    <string name="compat_117_message">Minecraft 21w10a+ necessità del profilo core OpenGL 3.2. Purtroppo, il wrapper GL4ES non è completamente supportato al momento, ma ci sono altre risorse aggiuntive installabili per usare quelle versioni.
+Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
 </resources>
