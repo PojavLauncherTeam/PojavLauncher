@@ -35,6 +35,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <!-- Global strings -->
+    <string name="global_warinng">Aviso</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Sair</string>
     <!-- MainActivity: Control buttons -->
