@@ -90,6 +90,7 @@
     <!-- Global strings -->
     <string name="global_edit">Editează</string>
     <string name="global_error">Eroare</string>
+    <string name="global_warinng">Avertisment</string>
     <string name="global_load">Incarcă</string>
     <string name="global_name">Nume</string>
     <string name="global_remove">Șterge</string>
