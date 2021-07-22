@@ -93,6 +93,7 @@
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
     <string name="global_error">Eror</string>
+    <string name="global_warinng">Aelert!!!</string>
     <string name="global_load">Load</string>
     <string name="global_name">Naym</string>
     <string name="global_remove">Remoev</string>
