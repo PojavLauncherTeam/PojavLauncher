@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Editovat</string>
     <string name="global_error">Chyba</string>
+    <string name="global_warinng">Varování</string>
     <string name="global_load">Načíst</string>
     <string name="global_name">Název</string>
     <string name="global_remove">Odstranit</string>
