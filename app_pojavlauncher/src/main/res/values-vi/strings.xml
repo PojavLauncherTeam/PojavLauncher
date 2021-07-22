@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Chỉnh sửa</string>
     <string name="global_error">Lỗi</string>
+    <string name="global_warinng">Cảnh báo</string>
     <string name="global_load">Tải</string>
     <string name="global_name">Tên</string>
     <string name="global_remove">Loại bỏ</string>
