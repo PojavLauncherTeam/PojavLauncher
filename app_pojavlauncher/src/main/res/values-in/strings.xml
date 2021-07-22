@@ -41,7 +41,7 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Berita</string>
     <string name="mcl_tab_console">Konsol debug</string>
-    <string name="mcl_tab_crash">Catatan crash</string>
+    <string name="mcl_tab_crash">Catatan cras</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Terhubung</string>
     <string name="mcl_account_offline">Offline</string>
@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
     <string name="global_error">Eror</string>
+    <string name="global_warinng">Peringatan</string>
     <string name="global_load">Memuat</string>
     <string name="global_name">Nama</string>
     <string name="global_remove">Hapus</string>
