@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Modifica</string>
     <string name="global_error">Errore</string>
+    <string name="global_warinng">Avviso</string>
     <string name="global_load">Carica</string>
     <string name="global_name">Nome</string>
     <string name="global_remove">Rimuovi</string>
