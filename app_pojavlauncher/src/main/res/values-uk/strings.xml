@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Редагувати</string>
     <string name="global_error">Помилка</string>
+    <string name="global_warinng">Увага</string>
     <string name="global_load">Завантаження</string>
     <string name="global_name">Ім\'я</string>
     <string name="global_remove">Видалити</string>
