@@ -56,6 +56,7 @@
     <string name="mcl_setting_veroption_oldbeta">เบตาเก่า</string>
     <!-- Global strings -->
     <string name="global_edit">แก้ไข</string>
+    <string name="global_warinng">คำเตือน</string>
     <string name="global_load">โหลด</string>
     <string name="global_name">ชื่อ</string>
     <string name="global_save">บันทึก</string>
