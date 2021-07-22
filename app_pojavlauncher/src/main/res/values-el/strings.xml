@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Επεξεργασία</string>
     <string name="global_error">Σφάλμα</string>
+    <string name="global_warinng">Προειδοποίηση</string>
     <string name="global_load">Φόρτωση</string>
     <string name="global_name">Όνομα</string>
     <string name="global_remove">Αφαίρεσε</string>
