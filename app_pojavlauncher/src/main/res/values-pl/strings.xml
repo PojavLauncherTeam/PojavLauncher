@@ -95,6 +95,7 @@
     <!-- Global strings -->
     <string name="global_edit">Edytuj</string>
     <string name="global_error">Błąd</string>
+    <string name="global_warinng">Ostrzeżenie</string>
     <string name="global_load">Wczytaj</string>
     <string name="global_name">Nazwa</string>
     <string name="global_remove">Usuń</string>
