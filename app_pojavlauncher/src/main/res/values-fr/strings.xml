@@ -89,6 +89,7 @@
     <!-- Global strings -->
     <string name="global_edit">Modifier</string>
     <string name="global_error">Erreur</string>
+    <string name="global_warinng">Avertissement</string>
     <string name="global_load">Charger</string>
     <string name="global_name">Nom</string>
     <string name="global_remove">Supprimer</string>
