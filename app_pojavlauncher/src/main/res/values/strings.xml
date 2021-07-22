@@ -108,12 +108,12 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
+    <string name="global_warinng">Warning</string>
     <string name="global_load">Load</string>
     <string name="global_name">Name</string>
     <string name="global_remove">Remove</string>
@@ -223,4 +223,7 @@
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed</string>
     <string name="multirt_nocompartiblert">Can\'t find any compartible Java Runtime</string>
+
+    <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, GL4ES wrapper doesn\'t fully support it at the moment, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
+
 </resources>
