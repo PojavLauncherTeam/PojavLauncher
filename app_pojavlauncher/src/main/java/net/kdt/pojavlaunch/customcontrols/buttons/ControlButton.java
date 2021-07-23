@@ -133,29 +133,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             ((ControlLayout) getParent()).setModified(modified);
     }
 
-    private void setHolding(int keyCode, boolean isDown){
-        switch (keyCode){
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT:
-                CallbackBridge.holdingShift = isDown;
-                return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL:
-                CallbackBridge.holdingCtrl = isDown;
-                return;
-
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT:
-                CallbackBridge.holdingAlt = isDown;
-                return;
-
-            case LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK:
-                CallbackBridge.holdingCapslock = isDown;
-                return;
-
-            case LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK:
-                CallbackBridge.holdingNumlock = isDown;
-                return;
-        }
-    }
 
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
@@ -353,7 +331,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         for(int keycode : mProperties.keycodes){
             if(keycode >= GLFW_KEY_UNKNOWN){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
-                setHolding(keycode, isDown);
+                CallbackBridge.setModifiers(keycode, isDown);
             }else {
                 super.onTouchEvent(event);
             }

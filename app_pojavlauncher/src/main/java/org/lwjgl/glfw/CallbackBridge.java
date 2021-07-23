@@ -166,6 +166,30 @@ public class CallbackBridge {
         return currMods;
     }
 
+    public static void setModifiers(int keyCode, boolean isDown){
+        switch (keyCode){
+            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT:
+                CallbackBridge.holdingShift = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL:
+                CallbackBridge.holdingCtrl = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT:
+                CallbackBridge.holdingAlt = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK:
+                CallbackBridge.holdingCapslock = isDown;
+                return;
+
+            case LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK:
+                CallbackBridge.holdingNumlock = isDown;
+                return;
+        }
+    }
+
     public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
 
     private static native boolean nativeSendChar(char codepoint);
