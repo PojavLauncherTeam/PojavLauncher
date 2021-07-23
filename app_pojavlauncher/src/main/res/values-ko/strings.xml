@@ -105,11 +105,11 @@
     <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
     <string name="global_waiting">기다려주세요</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">앱/게임이 나가졌습니다. code %d</string>
+    <string name="mcn_exit_title">앱/게임이 코드 %d와 함께 종료되었습니다</string>
     <string name="mcn_exit_call">나가기</string>
     <string name="mcn_exit_confirm">강제로 종료하시겠습니까?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 이 설치되지 않았습니다!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecture %1$s 은(는)  Java Runtime %2$s에 호환되지 않습니다.</string>
+    <string name="mcn_check_fail_incompatiblearch">아키텍처 %1$s 은(는)  Java 런타임 %2$s(와)과 호환되지 않습니다.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink 렌더러는 해당 기기를 지원하지 않습니다!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -133,7 +133,7 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">강제 종료</string>
     <string name="control_viewout">로그 확인</string>
-    <string name="control_adebug">Input Debug</string>
+    <string name="control_adebug">디버그 표시</string>
     <string name="control_customkey">사용자 지정 키 보내기</string>
     <string name="control_scaleup">확장</string>
     <string name="control_scaledown">축소</string>
@@ -141,7 +141,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">%s 수정중</string>
+    <string name="customctrl_edit">%s(을)를 수정하는 중</string>
     <string name="customctrl_remove">%s(을)를 제거하시겠습니까?</string>
     <string name="customctrl_keyname">키</string>
     <string name="customctrl_toggle">토글</string>
@@ -172,7 +172,7 @@
     <string name="autoram_info_msg">메모리가 %dMB 할당되었습니다.</string>
     <string name="mcl_setting_check_libraries">다운로드 후 라이브러리 확인</string>
     <string name="mcl_setting_check_libraries_subtitle">이 옵션은 라이브러리 해시를 강제로 확인합니다. 잘못된 다운로드를 막을 수 있습니다.</string>
-    <string name="dl_library_sha_fail">%s 라이브러리를 재다운로드합니다</string>
+    <string name="dl_library_sha_fail">라이브러리 %s가 손상되었기 때문에 다시 다운로드 합니다</string>
     <string name="dl_library_sha_unknown">%s 라이브러리를 확인할 수 없습니다.</string>
     <string name="dl_library_sha_pass">%s 라이브러리를 이용할 수 있습니다.</string>
     <string name="mcl_disable_gestures">제스쳐 비활성화</string>
