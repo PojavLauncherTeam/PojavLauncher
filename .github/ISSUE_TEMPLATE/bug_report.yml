@@ -21,6 +21,7 @@ body:
       You can also upload here screenshots or videos of the buggy behavior, if possible.
       
       Tip: You can attach files by clicking this area to highlight it and then dragging files in or select them on 🖼 option at the toolbar.
+    render: markdown
   validations:
     required: false
 
