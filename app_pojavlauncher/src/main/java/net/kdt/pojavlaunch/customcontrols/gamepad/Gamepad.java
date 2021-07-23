@@ -63,7 +63,7 @@ public class Gamepad {
     private final Runnable switchStateRunnable;
 
     public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
-        Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
+        //Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
 
         leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
         rightJoystick = new GamepadJoystick(MotionEvent.AXIS_Z, MotionEvent.AXIS_RZ, inputDevice);
@@ -321,11 +321,9 @@ public class Gamepad {
                     break;
 
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT:
-                    //CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
                     MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                     break;
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT:
-                    //CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown?1:0, CallbackBridge.mouseX, CallbackBridge.mouseY);
                     MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                     break;
 
