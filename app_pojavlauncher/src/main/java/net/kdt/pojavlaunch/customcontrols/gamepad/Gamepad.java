@@ -334,6 +334,7 @@ public class Gamepad {
                     MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
                     break;
             }
+            CallbackBridge.setModifiers(keycode, isDown);
         }
 
     }
