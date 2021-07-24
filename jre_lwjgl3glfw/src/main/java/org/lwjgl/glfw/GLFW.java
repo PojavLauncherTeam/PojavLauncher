@@ -1254,6 +1254,9 @@ public class GLFW
         return CallbackBridge.nativeClipboard(CallbackBridge.CLIPBOARD_PASTE, null);
     }
 
+    public static void glfwRequestWindowAttention(@NativeType("GLFWwindow *") long window) {
+    }
+
     public static boolean glfwJoystickPresent(int jid) {
 		if(jid == 0) {
 			return true;
