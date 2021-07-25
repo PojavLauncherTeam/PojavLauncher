@@ -7,6 +7,8 @@ import net.kdt.pojavlaunch.utils.*;
 import net.objecthunter.exp4j.*;
 import org.lwjgl.glfw.*;
 
+import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
+
 public class ControlData implements Cloneable
 {
 
@@ -197,14 +199,8 @@ public class ControlData implements Cloneable
     }
 
     private static int[] inflateKeycodeArray(int[] keycodes){
-        int[] inflatedArray = new int[4];
-        int i;
-        for(i=0; i<keycodes.length; ++i){
-            inflatedArray[i] = keycodes[i];
-        }
-        for(;i<4;++i){
-            inflatedArray[i] = LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
-        }
+        int[] inflatedArray = new int[]{GLFW_KEY_UNKNOWN, GLFW_KEY_UNKNOWN, GLFW_KEY_UNKNOWN, GLFW_KEY_UNKNOWN};
+        System.arraycopy(keycodes, 0, inflatedArray, 0, keycodes.length);
         return inflatedArray;
     }
 
