@@ -20,10 +20,10 @@
 package net.kdt.pojavlaunch.customcontrols.handleview;
 
 import android.graphics.drawable.*;
-import android.text.*;
 import android.view.*;
-import android.os.*;
-import net.kdt.pojavlaunch.customcontrols.*;
+
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
+
 
 public class SelectionEndHandleView extends HandleView
 {
@@ -50,11 +50,9 @@ public class SelectionEndHandleView extends HandleView
         return 0; // mView.getSelectionEnd();
     }
 
-    @Override
-    public void show() {
+    public void show(Object object){
         super.show();
-
-        showActionPopupWindow(0);
+        showActionPopupWindow(0, object);
     }
 
     @Override
@@ -68,10 +66,11 @@ public class SelectionEndHandleView extends HandleView
         // updatePosition((int) x, (int) y, false, false);
         positionAtCursorOffset(0, false);
     }
-    /*
-     public void setActionPopupWindow(ActionPopupWindow actionPopupWindow) {
-     mActionPopupWindow = actionPopupWindow;
-     }
-     */
+
+    @Override
+    public boolean onLongClick(View view) {
+        //TODO stub
+        return false;
+    }
 }
 

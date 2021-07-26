@@ -33,10 +33,10 @@ package net.kdt.pojavlaunch;
 public class LWJGLGLFWKeycode
 {
     /** The unknown key. */
-    public static final int GLFW_KEY_UNKNOWN = 0; // should be -1
+    public static final short GLFW_KEY_UNKNOWN = 0; // should be -1
 
     /** Printable keys. */
-    public static final int
+    public static final short
     GLFW_KEY_SPACE         = 32,
     GLFW_KEY_APOSTROPHE    = 39,
     GLFW_KEY_COMMA         = 44,
@@ -89,7 +89,7 @@ public class LWJGLGLFWKeycode
     GLFW_KEY_WORLD_2       = 162;
 
     /** Function keys. */
-    public static final int
+    public static final short
     GLFW_KEY_ESCAPE        = 256,
     GLFW_KEY_ENTER         = 257,
     GLFW_KEY_TAB           = 258,
@@ -182,7 +182,7 @@ public class LWJGLGLFWKeycode
 
 
     /** Mouse buttons. See <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#input_mouse_button">mouse button input</a> for how these are used. */
-    public static final int
+    public static final short
     GLFW_MOUSE_BUTTON_1      = 0,
     GLFW_MOUSE_BUTTON_2      = 1,
     GLFW_MOUSE_BUTTON_3      = 2,
