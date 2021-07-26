@@ -208,5 +208,5 @@
     <string name="compat_117_message">Minecraft 21w10a+ membutuhkan OpenGL 3.3 core profil. Sayangnya, Gl4ES wrapper tidak sepenuhnya mendukung OpenGL 3.3 untuk sekarang, tetapi masih ada tambahan yang bisa dipasang untuk menjalankan versi tersebut. Pencet OK untuk mengkonfirmasi pemasangan, dan pencet Batalkan untuk membatalkan peluncuran.</string>
     <string name="pvc_gameDirectory">Direktori permainan</string>
     <string name="pvc_jvmArgs">Argumen JVM</string>
-    <string name="pvc_title">Pengaturan pra-versi</string>
+    <string name="pvc_title">Pengaturan per-versi</string>
 </resources>
