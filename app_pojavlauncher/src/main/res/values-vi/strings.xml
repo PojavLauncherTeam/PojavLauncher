@@ -205,7 +205,7 @@
     <string name="multirt_config_setdefault_already">Mặc định</string>
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
     <string name="multirt_nocompartiblert">Không thể tìm thấy bất kì phiên bản Java Runtime nào tương thích với phiên bản Minecraft này</string>
-    <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù GL4ES chưa hỗ trợ nó ở thời điểm này, tuy nhiên bạn có thể tải về một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu tải về, hoặc Huỷ để huỷ khởi chạy.</string>
+    <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù GL4ES chưa hỗ trợ nó ở thời điểm này, tuy nhiên bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
     <string name="pvc_jvmArgs">Các chỉ số JVM</string>
     <string name="pvc_title">Cài đặt theo từng phiên bản</string>
