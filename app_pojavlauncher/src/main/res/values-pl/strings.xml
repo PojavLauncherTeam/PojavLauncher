@@ -148,15 +148,22 @@
     <string name="customctrl_size">Rozmiar</string>
     <string name="customctrl_size_width">Szerokość</string>
     <string name="customctrl_size_height">Wysokość</string>
+    <string name="customctrl_mapping">Mapowanie klawiszy</string>
+    <string name="customctrl_orientation">Orientacja</string>
+    <string name="customctrl_background_color">Kolor tła</string>
+    <string name="customctrl_corner_radius">Zaokrąglenie narożników</string>
     <string name="customctrl_dynamicpos">Dynamiczna pozycja</string>
     <string name="customctrl_dynamicpos_x">Dynamiczne X</string>
     <string name="customctrl_dynamicpos_y">Dynamiczne Y</string>
     <string name="customctrl_transparency_bg">Przezroczystość tła</string>
+    <string name="customctrl_button_opacity">Przezroczystość przycisku</string>
     <string name="customctrl_keycombine">Kombinacja klawiszy</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Dodaj przycisk</string>
+    <string name="customctrl_addbutton_drawer">Dodaj panel przycisków</string>
+    <string name="customctrl_addsubbutton">Dodaj przycisk podrzędny</string>
     <string name="customctrl_selectdefault">Wybierz domyślny plik json dla sterowania</string>
     <string name="main_options">Opcje</string>
     <string name="main_play">Graj</string>
@@ -196,4 +203,7 @@
     <string name="multirt_config_setdefault_already">Domyślny</string>
     <string name="multirt_config_removeerror_last">Należy mieć zainstalowane co najmniej jedno środowisko wykonawcze Java</string>
     <string name="multirt_nocompartiblert">Nie znaleziono żadnego kompatybilnego środowiska wykonawczego Java</string>
+    <string name="pvc_gameDirectory">Katalog gry</string>
+    <string name="pvc_jvmArgs">Argumenty JVM</string>
+    <string name="pvc_title">Ustawienia dla wersji</string>
 </resources>
