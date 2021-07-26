@@ -148,15 +148,24 @@
     <string name="customctrl_size">Boyut</string>
     <string name="customctrl_size_width">Genişlik</string>
     <string name="customctrl_size_height">Yükseklik</string>
+    <string name="customctrl_mapping">Eşleme</string>
+    <string name="customctrl_orientation">Yönü</string>
+    <string name="customctrl_background_color">Arkaplan rengi</string>
+    <string name="customctrl_corner_radius">Köşe alanı</string>
+    <string name="customctrl_stroke_width">Vurgu genişliği</string>
+    <string name="customctrl_stroke_color">Vurgu rengi</string>
     <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
     <string name="customctrl_transparency_bg">Arkaplan saydamlığı</string>
+    <string name="customctrl_button_opacity">Düğme saydamlığı</string>
     <string name="customctrl_keycombine">Anahtar Kombinasyonu</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
+    <string name="customctrl_addbutton_drawer">Düğme saklama menüsü ekle</string>
+    <string name="customctrl_addsubbutton">Yan-düğme ekle</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
     <string name="main_options">Ayarlar</string>
     <string name="main_play">Oyna</string>
@@ -180,6 +189,7 @@
     <string name="mcl_setting_title_mousespeed">Fare Hızı</string>
     <string name="mcl_setting_subtitle_mousespeed">Yazılımsal farenin hızını değiştirir</string>
     <string name="customctrl_passthru">Mouse geçişi</string>
+    <string name="customctrl_swipeable">Kaydırılabilir</string>
     <string name="customctrl_rounded">Kenarlı</string>
     <string name="memory_warning_msg">Şuanki boş RAM (%d) verilecek RAM\'den (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilecek RAM\'i değiştirin.</string>
     <string name="mcl_memory_allocation">Bellek ayırma</string>
@@ -197,4 +207,7 @@
     <string name="multirt_config_removeerror_last">En az bir Java Runtime kurmanız gerekir</string>
     <string name="multirt_nocompartiblert">Uyumlu Java Runtime bulunamadı</string>
     <string name="compat_117_message">Minecraft 21w10a ve üstü artık OpenGL 3.2 core profilini gerektiriyor. Ne yazık ki, GL4ES wrapper\'ı onu şuanda tamamen desteklemiyor, fakat bu sürümleri çalıştırabilmek için bazı ek kaynaklar indirilebilir. Indirmeyi onaylamak için TAMAM\'a tıklayın, iptal etmek için IPTAL\'e basın.</string>
+    <string name="pvc_gameDirectory">Oyun dizini</string>
+    <string name="pvc_jvmArgs">JVM argümanları</string>
+    <string name="pvc_title">Sürüm-başına ayarlar</string>
 </resources>
