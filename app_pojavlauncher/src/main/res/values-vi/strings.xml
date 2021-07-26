@@ -148,15 +148,24 @@
     <string name="customctrl_size">Kích thước</string>
     <string name="customctrl_size_width">Chiều rộng</string>
     <string name="customctrl_size_height">Độ cao</string>
+    <string name="customctrl_mapping">Sơ đồ phím</string>
+    <string name="customctrl_orientation">Hướng</string>
+    <string name="customctrl_background_color">Màu nền</string>
+    <string name="customctrl_corner_radius">Bán kính góc cong</string>
+    <string name="customctrl_stroke_width">Độ rộng viền phím</string>
+    <string name="customctrl_stroke_color">Màu viền phím</string>
     <string name="customctrl_dynamicpos">Vị trí động</string>
     <string name="customctrl_dynamicpos_x">Vị trí động theo chiều X</string>
     <string name="customctrl_dynamicpos_y">Vị trí động theo chiều Y</string>
     <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
+    <string name="customctrl_button_opacity">Độ trong suốt của phím</string>
     <string name="customctrl_keycombine">Tổ hợp phím</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Thêm nút</string>
+    <string name="customctrl_addbutton_drawer">Thêm bộ phím</string>
+    <string name="customctrl_addsubbutton">Thêm phím phụ</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
     <string name="main_options">Tùy chọn</string>
     <string name="main_play">Chơi</string>
@@ -180,6 +189,7 @@
     <string name="mcl_setting_title_mousespeed">Tốc độ chuột</string>
     <string name="mcl_setting_subtitle_mousespeed">Chỉnh tốc độ của phầm mềm chuột</string>
     <string name="customctrl_passthru">Di chuyển chuột</string>
+    <string name="customctrl_swipeable">Có thể vuốt</string>
     <string name="customctrl_rounded">Làm tròn</string>
     <string name="memory_warning_msg">Số lượng RAM trống hiện tại (%d) thấp hơn số lượng RAM được phân bổ (%d), có thể dẫn đến sự cố. Thay đổi số lượng phân bổ nếu trò chơi bị sập.</string>
     <string name="mcl_memory_allocation">Phân bổ bộ nhớ</string>
@@ -196,4 +206,7 @@
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
     <string name="multirt_nocompartiblert">Không thể tìm thấy bất kì phiên bản Java Runtime nào tương thích với phiên bản Minecraft này</string>
     <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù GL4ES chưa hỗ trợ nó ở thời điểm này, tuy nhiên bạn có thể tải về một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu tải về, hoặc Huỷ để huỷ khởi chạy.</string>
+    <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
+    <string name="pvc_jvmArgs">Các chỉ số JVM</string>
+    <string name="pvc_title">Cài đặt theo từng phiên bản</string>
 </resources>
