@@ -68,8 +68,6 @@ public class ControlData implements Cloneable
     }
 
     public String name;
-    public float x;
-    public float y;
     private float width;         //Dp instead of Px now
     private float height;        //Dp instead of Px now
     public int[] keycodes;      //Should store up to 4 keys
@@ -181,17 +179,6 @@ public class ControlData implements Cloneable
                 for (ControlData data : getSpecialButtons())
                     if (keycode == data.keycodes[0])
                         specialButtonListener = data.specialButtonListener;
-
-
-        if (dynamicX == null) {
-            dynamicX = Float.toString(x);
-        }
-        if (dynamicY == null) {
-            dynamicY = Float.toString(y);
-        }
-        
-        x = insertDynamicPos(dynamicX);
-        y = insertDynamicPos(dynamicY);
     }
 
     private static float calculate(String math) {

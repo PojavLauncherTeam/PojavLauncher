@@ -62,23 +62,23 @@ public class ControlDrawer extends ControlButton {
         for(int i=0; i < buttons.size(); ++i){
             switch (drawerData.orientation){
                 case RIGHT:
-                    buttons.get(i).setX(drawerData.properties.x + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setY(drawerData.properties.y);
+                    buttons.get(i).setX(getX() + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setY(getY());
                     break;
 
                 case LEFT:
-                    buttons.get(i).setX(drawerData.properties.x - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setY(drawerData.properties.y);
+                    buttons.get(i).setX(getX() - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setY(getY());
                     break;
 
                 case UP:
-                    buttons.get(i).setY(drawerData.properties.y - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setX(drawerData.properties.x);
+                    buttons.get(i).setY(getY() - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setX(getX());
                     break;
 
                 case DOWN:
-                    buttons.get(i).setY(drawerData.properties.y + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setX(drawerData.properties.x);
+                    buttons.get(i).setY(getY() + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
+                    buttons.get(i).setX(getX());
                     break;
             }
             buttons.get(i).updateProperties();
