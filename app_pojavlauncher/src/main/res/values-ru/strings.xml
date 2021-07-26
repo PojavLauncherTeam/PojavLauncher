@@ -148,15 +148,24 @@
     <string name="customctrl_size">Размер</string>
     <string name="customctrl_size_width">Ширина</string>
     <string name="customctrl_size_height">Высота</string>
+    <string name="customctrl_mapping">Кнопки</string>
+    <string name="customctrl_orientation">Положение</string>
+    <string name="customctrl_background_color">Цвет фона</string>
+    <string name="customctrl_corner_radius">Радиус скругления</string>
+    <string name="customctrl_stroke_width">Толщина обводки</string>
+    <string name="customctrl_stroke_color">Цвет обводки</string>
     <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
+    <string name="customctrl_button_opacity">Прозрачность кнопки</string>
     <string name="customctrl_keycombine">Комбинация клавиш</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
+    <string name="customctrl_addbutton_drawer">Добавить разворачиваемую кнопку</string>
+    <string name="customctrl_addsubbutton">Добавить под-кнопку</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
@@ -180,6 +189,7 @@
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
     <string name="customctrl_passthru">Указатель мыши</string>
+    <string name="customctrl_swipeable">Пролистываемый</string>
     <string name="customctrl_rounded">Скруглённые</string>
     <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
     <string name="mcl_memory_allocation">Выделение памяти</string>
@@ -197,4 +207,7 @@
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы один Java Runtime</string>
     <string name="multirt_nocompartiblert">Не удалось найти совместимую Java Runtime</string>
     <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. К сожалению, на данный момент GL4ES не полностью поддерживает её, но есть некоторые дополнительные ресурсы, которые вы можете установить, чтобы запустить эти версии. Нажмите на кнопку «ОК», чтобы подтвердить установку или «Отмена», чтобы прервать запуск.</string>
+    <string name="pvc_gameDirectory">Папка игры</string>
+    <string name="pvc_jvmArgs">Аргументы JVM</string>
+    <string name="pvc_title">Поверсионные настройки</string>
 </resources>
