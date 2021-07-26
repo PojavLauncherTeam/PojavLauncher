@@ -82,6 +82,10 @@
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksportuoja OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksportuoja OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksportuoja OpenGL 2.1 + dalies 3.2 (1.17 nepalaikoma)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuoja OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
     <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
@@ -106,6 +110,7 @@
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebuvo instaliuota!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektūra %1$s nėra palaikomas su Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink atvaizduotojas nėra palaikomas ant šio įrenginio!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klaviatūra</string>
@@ -137,10 +142,17 @@
     <string name="customctrl_size">Dydis</string>
     <string name="customctrl_size_width">Plotis</string>
     <string name="customctrl_size_height">Aukštis</string>
+    <string name="customctrl_mapping">Mygtukų sąrašas</string>
+    <string name="customctrl_orientation">Orientacija</string>
+    <string name="customctrl_background_color">Fono spalva</string>
+    <string name="customctrl_corner_radius">Kampo spinduliuotė</string>
+    <string name="customctrl_stroke_width">Linijos plotis</string>
+    <string name="customctrl_stroke_color">Linijos spalva</string>
     <string name="customctrl_dynamicpos">Dinamiška pozicija</string>
     <string name="customctrl_dynamicpos_x">Dinamiška X</string>
     <string name="customctrl_dynamicpos_y">Dinamiška Y</string>
     <string name="customctrl_transparency_bg">Fono skaidrumas</string>
+    <string name="customctrl_button_opacity">Mygtuko skaidrumas</string>
     <string name="customctrl_keycombine">Mygtukų kombinacija</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
@@ -169,8 +181,22 @@
     <string name="mcl_setting_title_mousespeed">Pelės Greitis</string>
     <string name="mcl_setting_subtitle_mousespeed">Pakeičia virtualios pelės greitį</string>
     <string name="customctrl_passthru">Pelės praileidimas</string>
+    <string name="customctrl_swipeable">Perbraukiamas</string>
     <string name="customctrl_rounded">Suapvalinta</string>
     <string name="memory_warning_msg">Dabartinis kiekis laisvo RAM (%d) yra mažesnis negu paskirtas RAM (%d), kas gali baigtis išsijungimais. Pakeiskite paskirtą kiekį jeigu išsijungia žaidimas.</string>
     <string name="mcl_memory_allocation">Atminties skirtstymas</string>
     <string name="mcl_memory_allocation_subtitle">Kontroliuoja kiek RAM atminties duodama Minecraft</string>
+    <string name="multirt_runtime_corrupt">Sugadintas Java Modulis</string>
+    <string name="multirt_config_title">Java Moduliai</string>
+    <string name="multirt_config_add">Pridėti naują</string>
+    <string name="multirt_config_add_subtitle">Importuoti naują Java Modulį</string>
+    <string name="multirt_title">Java Modulių Tvarkytojas</string>
+    <string name="multirt_subtitle">Valdyti įdiegtus Java modulius</string>
+    <string name="multirt_progress_caching">Talpinama...</string>
+    <string name="multirt_config_setdefault">Nustatyti numatytą</string>
+    <string name="multirt_config_setdefault_already">Numatytasis</string>
+    <string name="multirt_config_removeerror_last">Jūs privalote turėti bent vieną Java Modulį įdiegtą</string>
+    <string name="multirt_nocompartiblert">Negalima rasti tinkamo Java Runtime</string>
+    <string name="compat_117_message">Minecraft 21w10+ reikalauja OpenGL 3.2 branduolio profilio. Gaila, GL4ES wrapperis dabar pilnai nepalaiko jo, bet yra dar pridėtinių resursų kuriuos galima įdiegti, kad būtų galima paleisti šias versijas. Paspauskite Gerai, kad patvirtintumėte įdiegimą, paspauskite Atšaukti, kad sustabdytumėte įdiegimą.</string>
+    <string name="pvc_jvmArgs">JVM argumentai</string>
 </resources>
