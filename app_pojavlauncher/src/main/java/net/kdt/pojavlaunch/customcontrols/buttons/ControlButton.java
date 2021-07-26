@@ -8,6 +8,8 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 
+import androidx.core.math.MathUtils;
+
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
@@ -304,8 +306,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 mCanTriggerLongClick = false;
 
                 if (!mProperties.isDynamicBtn) {
-                    setX(event.getRawX() - downX);
-                    setY(event.getRawY() - downY);
+                    setX(MathUtils.clamp(event.getRawX() - downX,0, CallbackBridge.physicalWidth));
+                    setY(MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight));
                 }
                 break;
         }
