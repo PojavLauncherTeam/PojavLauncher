@@ -152,6 +152,8 @@
     <string name="customctrl_orientation">方向</string>
     <string name="customctrl_background_color">背景颜色</string>
     <string name="customctrl_corner_radius">圆角半径</string>
+    <string name="customctrl_stroke_width">边框宽度</string>
+    <string name="customctrl_stroke_color">边框颜色</string>
     <string name="customctrl_dynamicpos">动态位置</string>
     <string name="customctrl_dynamicpos_x">动态 X 轴</string>
     <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
@@ -162,6 +164,7 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">添加按键</string>
+    <string name="customctrl_addbutton_drawer">添加组合框</string>
     <string name="customctrl_addsubbutton">添加子按钮</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
     <string name="main_options">选项</string>
@@ -202,4 +205,8 @@
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行时</string>
     <string name="multirt_nocompartiblert">找不到任何可压缩的 Java 运行时</string>
+    <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置文件。 遗憾的是，GL4ES 包装器目前并不完全支持它，但是您可以安装一些额外的资源来运行这些版本。 按 确认 确认安装，然后按 取消键 中止启动。</string>
+    <string name="pvc_gameDirectory">游戏目录</string>
+    <string name="pvc_jvmArgs">JVM 参数</string>
+    <string name="pvc_title">Per-version 设置</string>
 </resources>
