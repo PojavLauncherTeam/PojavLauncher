@@ -50,7 +50,7 @@ public class PerVersionConfigDialog{
         jvmArgsEditText = v.findViewById(R.id.pvc_jvmArgs);
         AlertDialog.Builder builder =   new AlertDialog.Builder(ctx);
         builder.setView(v);
-        builder.setTitle("Per-version settings");
+        builder.setTitle(R.string.pvc_title);
         builder.setNegativeButton(android.R.string.cancel,(dialogInterface,i)->dialogInterface.dismiss());
         builder.setPositiveButton(android.R.string.ok,this::save);
         dialog = builder.create();
