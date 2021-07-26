@@ -142,12 +142,21 @@
     <string name="customctrl_size">Μέγεθος</string>
     <string name="customctrl_size_width">Πλάτος</string>
     <string name="customctrl_size_height">Ύψος</string>
+    <string name="customctrl_mapping">Χαρτογράφηση</string>
+    <string name="customctrl_orientation">Προσανατολισμός</string>
+    <string name="customctrl_background_color">Χρώμα φόντου</string>
+    <string name="customctrl_corner_radius">Ακτίνα γωνίας</string>
+    <string name="customctrl_stroke_width">Πλάτος περιγράμματος</string>
+    <string name="customctrl_stroke_color">Χρώμα περιγράμματος</string>
     <string name="customctrl_dynamicpos">Δυναμική θέση</string>
     <string name="customctrl_dynamicpos_x">Δυναμικό Χ</string>
     <string name="customctrl_dynamicpos_y">Δυναμικό Υ</string>
     <string name="customctrl_transparency_bg">Διαφάνεια φόντου</string>
+    <string name="customctrl_button_opacity">Αδιαφάνεια Κουμπιού</string>
     <string name="customctrl_keycombine">Συνδυασμός πλήκτρων</string>
     <string name="customctrl_addbutton">Προσθήκη κουμπιού</string>
+    <string name="customctrl_addbutton_drawer">Προσθήκη συρταριού πλήκτρων</string>
+    <string name="customctrl_addsubbutton">Προσθήκη κουμπιού</string>
     <string name="customctrl_selectdefault">Επιλογή προεπιλεγμένου ελέγχου json</string>
     <string name="main_options">Ρυθμίσεις</string>
     <string name="main_play">Παίξε</string>
@@ -171,6 +180,7 @@
     <string name="mcl_setting_title_mousespeed">Ταχύτητα Ποντικιού</string>
     <string name="mcl_setting_subtitle_mousespeed">Αλλάζει την ταχύτητα του ποντικιού του λογισμικού</string>
     <string name="customctrl_passthru">Pass-thru ποντικιού</string>
+    <string name="customctrl_swipeable">Ευέλικτο</string>
     <string name="customctrl_rounded">Στρογγυλεμένο</string>
     <string name="memory_warning_msg">Το τρέχον ποσό της δωρεάν μνήμης RAM (%d) είναι μικρότερο από το κατανεμημένο RAM (%d), το οποίο μπορεί να οδηγήσει σε καταρρεύσεις. Αλλάξτε την κατανομή αν το παιχνίδι καταρρεύσει.</string>
     <string name="mcl_memory_allocation">Κατανομή μνήμης</string>
@@ -184,4 +194,10 @@
     <string name="multirt_progress_caching">Προσωρινή αποθήκευση...</string>
     <string name="multirt_config_setdefault">Ορισμός ως προεπιλογή</string>
     <string name="multirt_config_setdefault_already">Προεπιλογή</string>
+    <string name="multirt_config_removeerror_last">Πρέπει να έχετε τουλάχιστον ένα Java Runtime εγκατεστημένο</string>
+    <string name="multirt_nocompartiblert">Δεν είναι δυνατή η εύρεση οποιουδήποτε περιβάλλοντος Java Runtime</string>
+    <string name="compat_117_message">Το Minecraft 21w10a+ απαιτεί το προφίλ πυρήνα OpenGL 3.2. Δυστυχώς, το GL4ES wrapper δεν το υποστηρίζει πλήρως αυτή τη στιγμή, αλλά υπάρχουν μερικοί πρόσθετοι πόροι που μπορείτε να εγκαταστήσετε για να εκτελέσετε αυτές τις εκδόσεις. Πατήστε OK για να επιβεβαιώσετε την εγκατάσταση και πατήστε Ακύρωση για να ακυρώσετε την εκκίνηση.</string>
+    <string name="pvc_gameDirectory">Κατάλογος παιχνιδιού</string>
+    <string name="pvc_jvmArgs">Παράμετροι εκκίνησης JVM</string>
+    <string name="pvc_title">Ρυθμίσεις Per-version</string>
 </resources>
