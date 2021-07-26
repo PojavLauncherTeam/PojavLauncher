@@ -148,15 +148,24 @@
     <string name="customctrl_size">Velikost</string>
     <string name="customctrl_size_width">Šířka</string>
     <string name="customctrl_size_height">Výška</string>
+    <string name="customctrl_mapping">Mapování</string>
+    <string name="customctrl_orientation">Orientace</string>
+    <string name="customctrl_background_color">Barva pozadí</string>
+    <string name="customctrl_corner_radius">Poloměr rohu</string>
+    <string name="customctrl_stroke_width">Šířka obrysu</string>
+    <string name="customctrl_stroke_color">Barva obrysu</string>
     <string name="customctrl_dynamicpos">Dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
     <string name="customctrl_transparency_bg">Průhlednost pozadí</string>
+    <string name="customctrl_button_opacity">Průhlednost tlačítka</string>
     <string name="customctrl_keycombine">Kombinace kláves</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Přidat tlačítko</string>
+    <string name="customctrl_addbutton_drawer">Přidat šuplík tlačítek</string>
+    <string name="customctrl_addsubbutton">Přidat podtlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
     <string name="main_options">Nastavení</string>
     <string name="main_play">Hrát</string>
@@ -180,6 +189,7 @@
     <string name="mcl_setting_title_mousespeed">Rychlost myši</string>
     <string name="mcl_setting_subtitle_mousespeed">Změnit rychlost softwarové myši</string>
     <string name="customctrl_passthru">Převod myši</string>
+    <string name="customctrl_swipeable">Posunovatelné</string>
     <string name="customctrl_rounded">Zaoblené</string>
     <string name="memory_warning_msg">Aktuální množství volné RAM (%d) je nižší než přidělená RAM (%d), což může vést k pádu. Změňte alokaci, pokud hra spadne.</string>
     <string name="mcl_memory_allocation">Přidělení paměti</string>
@@ -195,4 +205,8 @@
     <string name="multirt_config_setdefault_already">Výchozí</string>
     <string name="multirt_config_removeerror_last">Musíte mít nainstalovanou alespoň jednu Java Runtime</string>
     <string name="multirt_nocompartiblert">Nelze najít žádnou kompatibilní Java Runtime</string>
+    <string name="compat_117_message">Minecraft 21w10a+ vyžaduje základní profil OpenGL 3.2. Bohužel, GL4ES překladač ho v tuto chvíli plně nepodporuje, ale existují nějaké další možnosti, které můžete nainstalovat pro spuštění těchto verzí. Stisknutím tlačítka OK potvrďte instalaci a stisknutím tlačítka Zrušit ukončíte spouštění.</string>
+    <string name="pvc_gameDirectory">Složka hry</string>
+    <string name="pvc_jvmArgs">JVM argumenty</string>
+    <string name="pvc_title">Nastavení po verzi</string>
 </resources>
