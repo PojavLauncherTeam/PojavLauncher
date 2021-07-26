@@ -74,12 +74,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         //Visibility
         properties.isHideable = !properties.containsKeycode(ControlData.SPECIALBTN_TOGGLECTRL) && !properties.containsKeycode(ControlData.SPECIALBTN_VIRTUALMOUSE);
 
-        //Position
-        if (!properties.isDynamicBtn) {
-            properties.dynamicX = properties.x / CallbackBridge.physicalWidth + " * ${screen_width}";
-            properties.dynamicY = properties.y / CallbackBridge.physicalHeight + " * ${screen_height}";
-        }
-
         properties.update();
         return properties;
     }
@@ -94,18 +88,15 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         setText(properties.name);
 
         if (changePos) {
-            setX(properties.x);
-            setY(properties.y);
+            setX(properties.insertDynamicPos(mProperties.dynamicX));
+            setY(properties.insertDynamicPos(mProperties.dynamicY));
         }
 
         if (properties.specialButtonListener == null) {
             // A non-special button or inside custom controls screen so skip listener
         } else if (properties.specialButtonListener instanceof View.OnClickListener) {
             setOnClickListener((View.OnClickListener) properties.specialButtonListener);
-            // setOnLongClickListener(null);
-            // setOnTouchListener(null);
         } else if (properties.specialButtonListener instanceof View.OnTouchListener) {
-            // setOnLongClickListener(null);
             setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
         } else {
             throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but was " +
@@ -145,8 +136,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         
         // Re-calculate position
         mProperties.update();
-        setX(mProperties.x);
-        setY(mProperties.y);
+        setX(mProperties.insertDynamicPos(mProperties.dynamicX));
+        setY(mProperties.insertDynamicPos(mProperties.dynamicY));
         
         setModified(true);
     }
@@ -161,8 +152,14 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         super.setX(x);
 
         if (!mProperties.isDynamicBtn) {
-            mProperties.x = x;
-            mProperties.dynamicX = x / CallbackBridge.physicalWidth + " * ${screen_width}";
+
+            if(x + (mProperties.getWidth()/2f) > CallbackBridge.physicalWidth/2f){
+                System.out.println(mProperties.getWidth());
+                mProperties.dynamicX = (x + mProperties.getWidth()) / CallbackBridge.physicalWidth + " * ${screen_width} - ${width}";
+            }else{
+                mProperties.dynamicX = x / CallbackBridge.physicalWidth + " * ${screen_width}";
+            }
+
             setModified(true);
         }
     }
@@ -172,8 +169,14 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         super.setY(y);
 
         if (!mProperties.isDynamicBtn) {
-            mProperties.y = y;
-            mProperties.dynamicY = y / CallbackBridge.physicalHeight + " * ${screen_height}";
+
+            if(y + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
+                System.out.println(mProperties.getHeight());
+                mProperties.dynamicY = (y + mProperties.getHeight()) / CallbackBridge.physicalHeight + " * ${screen_height} - ${height}";
+            }else{
+                mProperties.dynamicY = y / CallbackBridge.physicalHeight + " * ${screen_height}";
+            }
+
             setModified(true);
         }
     }

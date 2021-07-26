@@ -218,9 +218,8 @@ public class EditControlButtonPopup {
 
         editDynamicX.setEnabled(properties.isDynamicBtn);
         editDynamicY.setEnabled(properties.isDynamicBtn);
-        editDynamicX.setHint(Float.toString(properties.x));
         editDynamicX.setText(properties.dynamicX);
-        editDynamicY.setHint(Float.toString(properties.y));
+
         editDynamicY.setText(properties.dynamicY);
 
         seekBarOpacity.setProgress((int) (properties.opacity*100));
@@ -297,8 +296,8 @@ public class EditControlButtonPopup {
         properties.setHeight(Float.parseFloat(editHeight.getText().toString()));
 
         properties.isDynamicBtn = checkDynamicPosition.isChecked();
-        properties.dynamicX = editDynamicX.getText().toString().isEmpty() ? properties.dynamicX = Float.toString(properties.x) : editDynamicX.getText().toString();
-        properties.dynamicY = editDynamicY.getText().toString().isEmpty() ? properties.dynamicY = Float.toString(properties.y) : editDynamicY.getText().toString();
+        if(!editDynamicX.getText().toString().isEmpty()) properties.dynamicX = editDynamicX.getText().toString();
+        if(!editDynamicY.getText().toString().isEmpty()) properties.dynamicY = editDynamicY.getText().toString();
 
         button.updateProperties();
     }

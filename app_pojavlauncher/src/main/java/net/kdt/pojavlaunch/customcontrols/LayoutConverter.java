@@ -41,15 +41,13 @@ public class LayoutConverter {
                     LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN,
                     LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN,
                     LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+            n_button.isDynamicBtn = button.getBoolean("isDynamicBtn");
             n_button.dynamicX = button.getString("dynamicX");
             n_button.dynamicY = button.getString("dynamicY");
-            n_button.isDynamicBtn = button.getBoolean("isDynamicBtn");
             n_button.name = button.getString("name");
             n_button.opacity = ((float)((button.getInt("transparency")-100)*-1))/100f;
             n_button.passThruEnabled = button.getBoolean("passThruEnabled");
             n_button.isToggle = button.getBoolean("isToggle");
-            n_button.x = button.getInt("x");
-            n_button.y = button.getInt("y");
             n_button.setHeight(button.getInt("height"));
             n_button.setWidth(button.getInt("width"));
             if(convertLookType) {
