@@ -148,15 +148,24 @@
     <string name="customctrl_size">Dimensione</string>
     <string name="customctrl_size_width">Larghezza</string>
     <string name="customctrl_size_height">Altezza</string>
+    <string name="customctrl_mapping">Mapping</string>
+    <string name="customctrl_orientation">Orientazione</string>
+    <string name="customctrl_background_color">Colore sfondo</string>
+    <string name="customctrl_corner_radius">Raggio angolo</string>
+    <string name="customctrl_stroke_width">Spessore tratto</string>
+    <string name="customctrl_stroke_color">Colore tratto</string>
     <string name="customctrl_dynamicpos">Posizione dinamica</string>
     <string name="customctrl_dynamicpos_x">X dinamica</string>
     <string name="customctrl_dynamicpos_y">Y dinamica</string>
     <string name="customctrl_transparency_bg">Trasparenza sfondo</string>
+    <string name="customctrl_button_opacity">Opacità pulsante</string>
     <string name="customctrl_keycombine">Combinazioni tasti</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
+    <string name="customctrl_addbutton_drawer">Aggiungi pulsante drawer</string>
+    <string name="customctrl_addsubbutton">Aggiungi sub-pulsante</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
     <string name="main_options">Impostazioni</string>
     <string name="main_play">Gioca</string>
@@ -180,6 +189,7 @@
     <string name="mcl_setting_title_mousespeed">Velocità mouse</string>
     <string name="mcl_setting_subtitle_mousespeed">Cambia la velocità del mouse via software</string>
     <string name="customctrl_passthru">Bypassa mouse</string>
+    <string name="customctrl_swipeable">Swipabile</string>
     <string name="customctrl_rounded">Arrotondato</string>
     <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
     <string name="mcl_memory_allocation">Memoria allocata</string>
@@ -197,4 +207,7 @@
     <string name="multirt_nocompartiblert">Non è stata trovata una versione compatibile di Runtime Java</string>
     <string name="compat_117_message">Minecraft 21w10a+ necessità del profilo core OpenGL 3.2. Purtroppo, il wrapper GL4ES non è completamente supportato al momento, ma ci sono altre risorse aggiuntive installabili per usare quelle versioni.
 Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
+    <string name="pvc_gameDirectory">Cartella gioco</string>
+    <string name="pvc_jvmArgs">Parametri JVM</string>
+    <string name="pvc_title">Impostazioni per-versione</string>
 </resources>
