@@ -148,15 +148,24 @@
     <string name="customctrl_size">크기</string>
     <string name="customctrl_size_width">너비</string>
     <string name="customctrl_size_height">높이</string>
+    <string name="customctrl_mapping">매핑</string>
+    <string name="customctrl_orientation">방향</string>
+    <string name="customctrl_background_color">배경 색상</string>
+    <string name="customctrl_corner_radius">모서리 반지름</string>
+    <string name="customctrl_stroke_width">선 굵기</string>
+    <string name="customctrl_stroke_color">강조 색</string>
     <string name="customctrl_dynamicpos">동적 위치</string>
     <string name="customctrl_dynamicpos_x">동적 X 값</string>
     <string name="customctrl_dynamicpos_y">동적 Y 값</string>
     <string name="customctrl_transparency_bg">배경 투명도</string>
+    <string name="customctrl_button_opacity">버튼 투명도</string>
     <string name="customctrl_keycombine">키 조합</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">버튼 추가</string>
+    <string name="customctrl_addbutton_drawer">버튼 드로어 추가</string>
+    <string name="customctrl_addsubbutton">부속 버튼 추가</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
     <string name="main_options">설정</string>
     <string name="main_play">시작하기</string>
@@ -180,6 +189,7 @@
     <string name="mcl_setting_title_mousespeed">마우스 속도</string>
     <string name="mcl_setting_subtitle_mousespeed">소프트웨어 마우스 속도 변경</string>
     <string name="customctrl_passthru">마우스 패스스루</string>
+    <string name="customctrl_swipeable">끌어당기기</string>
     <string name="customctrl_rounded">둥글게</string>
     <string name="memory_warning_msg">현재 사용 가능한 RAM 크기(%d) 가 할당된 RAM 크기(%d) 보다 낮습니다. 게임이 충돌할 경우 할당량을 변경하세요.</string>
     <string name="mcl_memory_allocation">메모리 할당</string>
@@ -196,4 +206,7 @@
     <string name="multirt_config_removeerror_last">하나 이상의 Java 런타임이 필요합니다</string>
     <string name="multirt_nocompartiblert">호환되는 Java 런타임을 찾을 수 없습니다</string>
     <string name="compat_117_message">Minecraft 21w10a 이상 버전은 OpenGL 3.2 코어 프로필이 필요합니다. 슬프게도, GL4ES는 현재 OpenGL 3.2 코어 프로필을 완전히 지원하지 않습니다, 하지만 해당 버전을 실행하기 위해 설치할 수 있는 추가 리소스가 있습니다. 확인 버튼을 눌러 설치하거나 취소 버튼을 눌러 취소하세요.</string>
+    <string name="pvc_gameDirectory">게임 디렉토리</string>
+    <string name="pvc_jvmArgs">JVM 실행 설정</string>
+    <string name="pvc_title">버전마다 설정</string>
 </resources>
