@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4ez 1.1.4 (OpenGL EZ 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4ez 1.1.5 (OpenGL EZ 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): givz OpenGL 2.1 + ur pat of 3.2 (1.17 needz moredakka!)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): givez OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
     <string name="mcl_setting_veroption_release">RELEASD</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -108,6 +110,7 @@
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
     <string name="mcn_check_fail_incompatiblearch">Architecchur %1$s iz incompatibel wif Jaav Runtiem %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Catz mobile cant’ handel Vulkan Zink renderer!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
@@ -139,6 +142,8 @@
     <string name="customctrl_size">Siez</string>
     <string name="customctrl_size_width">Width</string>
     <string name="customctrl_size_height">Height</string>
+    <string name="customctrl_mapping">Mapping</string>
+    <string name="customctrl_orientation">Direksion</string>
     <string name="customctrl_dynamicpos">Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y</string>
@@ -172,4 +177,9 @@
     <string name="memory_warning_msg">Teh current amount ov free ram (%d) iz lowr than allocatd ram (%d), which cud lead 2 crashez. Change teh allocashun if teh game crashez.</string>
     <string name="mcl_memory_allocation">Mices allocashun</string>
     <string name="mcl_memory_allocation_subtitle">Controls how mutch mices iz given 2 minecraft</string>
+    <string name="multirt_runtime_corrupt">Derti Coffee Cup</string>
+    <string name="multirt_config_title">Coffee Cup Unreal Machinez</string>
+    <string name="multirt_config_add_subtitle">Add new Coffee Cup Unreal Machine</string>
+    <string name="multirt_subtitle">Maniz drunk Coffee Cupz</string>
+    <string name="multirt_config_setdefault">Set favoritz</string>
 </resources>
