@@ -12,6 +12,7 @@
         <item name="3">@string/mcl_setting_renderer_gles2_5</item>
         <item name="3">@string/mcl_setting_renderer_gles3_5</item>
         <item name="4">@string/mcl_setting_renderer_vulkan_zink</item>
+		<item name="5">@string/mcl_setting_renderer_vgpu_1.2_beta</item>
     </string-array>
     
     <string-array name="renderer_values">
@@ -19,5 +20,6 @@
         <item>opengles2_5</item>  <!-- gl4es 1.1.5 with OpenGL ES 2 -->
         <item>opengles3</item> <!-- gl4es 1.1.5 with OpenGL ES 3 -->
         <item>vulkan_zink</item>
+		<item>vgpu_1.2_beta</item>
     </string-array>
 </resources>
