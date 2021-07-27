@@ -277,6 +277,9 @@ public class JREUtils
                 case "vulkan_zink":
                     graphicsLib = "libOSMesa_8.so";
                     break;
+                case "vgpu_1.2_beta":
+                    graphicsLib = "vgpu_1.2.so";
+                    break;
                 default:
                     throw new RuntimeException("Undefined renderer: " + Tools.LOCAL_RENDERER);
             }
