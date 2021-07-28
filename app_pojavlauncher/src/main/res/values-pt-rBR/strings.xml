@@ -148,7 +148,7 @@
     <string name="customctrl_size">Tamanho</string>
     <string name="customctrl_size_width">Largura</string>
     <string name="customctrl_size_height">Altura</string>
-    <string name="customctrl_mapping">Mapeando</string>
+    <string name="customctrl_mapping">Mapeamento</string>
     <string name="customctrl_orientation">Orientação</string>
     <string name="customctrl_background_color">Cor de fundo</string>
     <string name="customctrl_corner_radius">Raio do canto</string>
@@ -164,6 +164,7 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
+    <string name="customctrl_addbutton_drawer">Adicionar botão gaveta</string>
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
     <string name="customctrl_selectdefault">Selecione o controle padrão</string>
     <string name="main_options">Opções</string>
