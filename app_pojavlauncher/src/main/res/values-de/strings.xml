@@ -148,6 +148,9 @@
     <string name="customctrl_size">Größe</string>
     <string name="customctrl_size_width">Breite</string>
     <string name="customctrl_size_height">Höhe</string>
+    <string name="customctrl_mapping">Zuordnung</string>
+    <string name="customctrl_orientation">Ausrichtung</string>
+    <string name="customctrl_background_color">Hintergrundfarbe</string>
     <string name="customctrl_dynamicpos">Dynamische Position</string>
     <string name="customctrl_dynamicpos_x">Dynamische X-Achse</string>
     <string name="customctrl_dynamicpos_y">Dynamische Y-Achse</string>
@@ -196,4 +199,7 @@
     <string name="multirt_config_removeerror_last">Es muss mindestens eine Java-Runtime installiert sein</string>
     <string name="multirt_nocompartiblert">Keine kompartible Java-Runtime gefunden</string>
     <string name="compat_117_message">Minecraft 21w10a+ benötigt das OpenGL 3.2-Kernprofil, welches derzeitig leider nicht vollständig vom GL4ES-Wrapper unterstützt wird. Jedoch gibt es einige zusätzliche Ressourcen, die installiert werden können, um diese Versionen trotzdem auszuführen. Drücke auf OK, um die Installation zu bestätigen oder auf Abbrechen, um den Start-Vorgang zu beenden.</string>
+    <string name="pvc_gameDirectory">Spielverzeichnis</string>
+    <string name="pvc_jvmArgs">JVM-Argumente</string>
+    <string name="pvc_title">Einstellungen pro Version</string>
 </resources>
