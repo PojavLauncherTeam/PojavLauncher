@@ -312,6 +312,11 @@ public class BaseMainActivity extends LoggableActivity {
             minecraftGLView.setFocusable(true);
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
+                /*
+                 * Events can start with only a move instead of an pointerDown
+                 * It is due to the mouse passthrough option bundled with the control button.
+                 */
+                private boolean shouldBeDown = false;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
@@ -343,6 +348,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                     switch (e.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN: // 0
+                            shouldBeDown = true;
                             CallbackBridge.sendPrepareGrabInitialPos();
 
                             currentPointerID = e.getPointerId(0);
@@ -373,6 +379,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                         case MotionEvent.ACTION_UP: // 1
                         case MotionEvent.ACTION_CANCEL: // 3
+                            shouldBeDown = false;
                             if (!isTouchInHotbar) {
                                 // -TODO uncomment after fix wrong trigger
                                 if (!rightOverride) CallbackBridge.mouseLeft = false;
@@ -415,7 +422,8 @@ public class BaseMainActivity extends LoggableActivity {
                                 //Camera movement
                                 if(CallbackBridge.isGrabbing()){
                                     int pointerIndex = e.findPointerIndex(currentPointerID);
-                                    if(pointerIndex == -1){
+                                    if(pointerIndex == -1 || !shouldBeDown){
+                                        shouldBeDown = true;
                                         currentPointerID = e.getPointerId(0);
                                     }else{
                                         mouse_x += (e.getX(pointerIndex) - prevX) * sensitivityFactor;
