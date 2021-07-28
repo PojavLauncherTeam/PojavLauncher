@@ -14,7 +14,7 @@
     <string name="login_offline_label">Login as offloin akownt</string>
     <string name="login_error_short_username">Usernoim must be at liest 3 characters</string>
     <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
-    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_microsoft">Microsoft entrunz</string>
     <string name="login_select_account">what acc?</string>
     <string name="login_title_no_saved_account">No akownt findz !</string>
     <string name="login_dialog_no_saved_account">U doan has any savd akownt.\nUse teh opshun <b>\"Keep me loggd in\"</b> 2 save an akownt upon furst login.</string>
@@ -23,7 +23,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">Dis akownt wil be removed!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Install Jaav Runtiem %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Install Coffee Cupz’ Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Chooz mod installr</string>
     <!-- Error messages -->
     <string name="error_fatal">Pojaw Launcher haz unexpectadly crashd</string>
@@ -33,7 +33,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Teh riid/rite 2 storage permishun iz requird!</string>
     <string name="toast_optifine_success">Instal succesful</string>
-    <string name="toast_uninstalljre_done">Doen Uninstal Jaav Runtiem</string>
+    <string name="toast_uninstalljre_done">Dun uninstall Coffee Cupz’ Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -51,16 +51,16 @@
     <string name="mcl_launch_downloading_progress">"Downloadin %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparin 2 download resourcez</string>
     <string name="mcl_options">Opshuns</string>
-    <string name="mcl_option_modinstall">Launch mod installr (Foreg, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">Launch mod installr (wif custom arguments)</string>
+    <string name="mcl_option_modinstall">L’unch mod installr (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">L’unch mod installr (wif cuztoum argumentz)</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_option_settings">Settinz</string>
     <string name="mcl_option_about">Bout</string>
-    <string name="mcl_setting_title_uninstalljre">Uninstal Jaav Runtiem</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Launchah restart requird] dis letz u re-install Jaav Runtiem</string>
+    <string name="mcl_setting_title_uninstalljre">Uninstall Coffee Cupz’ Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launchah restart requird] dis letz u re-install Coffee Cupz’ Runtime</string>
     <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform moed</string>
     <string name="mcl_setting_subtitle_freeform">Launch minecraft in floatin window. Requirez android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Hied Sidebar</string>
+    <string name="mcl_setting_title_hide_sidebar">Dunt’ Show Sidebar</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folkz preferring teh old v1 UI miet likes dis. Srsly givez u moar fullscreen experienec.</string>
     <string name="mcl_setting_title_ignore_notch">Ignoer notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoer teh notch an extendz teh screen undr it, Srsly.\nGivez u moar immersiev experienec.</string>
@@ -76,8 +76,8 @@
     <string name="mcl_setting_subtitle_buttonscale">Upscael dem if buttons r 2 small.</string>
     <string name="mcl_setting_title_mousescale">Mouse scalin</string>
     <string name="mcl_setting_subtitle_mousescale">Chaneg siez ov vurtual moues.</string>
-    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
-    <string name="mcl_setting_subtitle_javaargs">Bees careful, dis can mak teh gaem crash if modified wifout any prior knowledeg.</string>
+    <string name="mcl_setting_title_javaargs">CCz’UM L’unch argumentz</string>
+    <string name="mcl_setting_subtitle_javaargs">Bees careful, dis can mak teh game crash if modified witout knowledge.</string>
     <string name="mcl_setting_category_general">General settingz</string>
     <string name="mcl_setting_category_scaling">Scalin settingz</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
@@ -99,7 +99,7 @@
     <string name="global_save">Saev</string>
     <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">Dis field can\'t bees empty</string>
-    <string name="global_waiting">Wait</string>
+    <string name="global_waiting">Waitin’, meow~</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -118,7 +118,7 @@
     </string>
     -->
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Application/Gaem Exitd wif cod %d</string>
+    <string name="mcn_exit_title">Application/Game Escapd witf code %d</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
@@ -153,38 +153,38 @@
     <string name="customctrl_toggle">Toggleabel</string>
     <string name="customctrl_size">Siez</string>
     <string name="customctrl_size_width">Width</string>
-    <string name="customctrl_size_height">Height</string>
-    <string name="customctrl_dynamicpos">Dynamic position</string>
-    <string name="customctrl_dynamicpos_x">Dynamic X</string>
-    <string name="customctrl_dynamicpos_y">Dynamic Y</string>
-    <string name="customctrl_transparency_bg">Background transparency</string>
-    <string name="customctrl_keycombine">Key combination</string>
+    <string name="customctrl_size_height">Hait</string>
+    <string name="customctrl_dynamicpos">Movin’ pozision</string>
+    <string name="customctrl_dynamicpos_x">Movin’ X pozision</string>
+    <string name="customctrl_dynamicpos_y">Movin’ Y pozision</string>
+    <string name="customctrl_transparency_bg">Bakground tranzperensi</string>
+    <string name="customctrl_keycombine">Ki combinasion</string>
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_selectdefault">Select defaul Control json</string>
     <string name="main_options">Opshuns</string>
     <string name="main_play">Pulay</string>
-    <string name="main_welcome">Welcom, %s</string>
+    <string name="main_welcome">Welcom, catz %s</string>
     <string name="main_infodev">Info (DEV)</string>
     <string name="main_switchuser">Switch usr</string>
     <string name="main_version">Vershun:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
     <string name="main_no_news_feed">Faild 2 fetch teh newz fed !</string>
-    <string name="auto_ram_subtitle">Enablez automatic Mices adjustah</string>
-    <string name="auto_ram_title">Auot Mices</string>
-    <string name="autoram_info_msg">Mices set 2 %d MB</string>
+    <string name="auto_ram_subtitle">Enablez automatic RAM adjustah</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memori setd 2 %d MB</string>
     <string name="mcl_setting_check_libraries">Check libraries aftr downloadin</string>
-    <string name="mcl_setting_check_libraries_subtitle">Dis opshun forces launchah 2 check teh librawee hash if iz availabel. preventz brokd downloadz.</string>
-    <string name="dl_library_sha_fail">Librawee %s iz damaged an will bees redownloaded</string>
-    <string name="dl_library_sha_unknown">Librawee %s can\'t bees checked, haz 2 assuem idz gud</string>
-    <string name="dl_library_sha_pass">Librawee %s iz fien an usabel</string>
+    <string name="mcl_setting_check_libraries_subtitle">Dis opshun forcez launchah 2 check teh library hash if iz’ availabel. Preventz brekd downloadz.</string>
+    <string name="dl_library_sha_fail">Library %s iz breakd and wil’ be redownloaded</string>
+    <string name="dl_library_sha_unknown">Library %s cant’ be checkd, haz 2 assuem iz’ gud</string>
+    <string name="dl_library_sha_pass">Library %s iz prfekt an usabel</string>
     <string name="mcl_disable_gestures">Disabel gesturez</string>
-    <string name="mcl_disable_gestures_subtitle">Disables gesturez, such as hold 2 break block, an tap 2 plaec block.</string>
-    <string name="mcl_setting_title_mousespeed">Mouses sped</string>
-    <string name="mcl_setting_subtitle_mousespeed">Changez teh sped ov teh softwaer moues</string>
+    <string name="mcl_disable_gestures_subtitle">Disablez gesturez, laik hold 2 break block, an tap 2 plaec block.</string>
+    <string name="mcl_setting_title_mousespeed">Mice speed</string>
+    <string name="mcl_setting_subtitle_mousespeed">Changez teh speed of teh software mice</string>
     <string name="customctrl_passthru">Mouses pas-thur</string>
     <string name="customctrl_rounded">Rounded</string>
-    <string name="memory_warning_msg">Teh current amount ov free ram (%d) iz lowr than allocatd ram (%d), which cud lead 2 crashez. Change teh allocashun if teh game crashez.</string>
-    <string name="mcl_memory_allocation">Mices allocashun</string>
-    <string name="mcl_memory_allocation_subtitle">Controls how mutch mices iz given 2 minecraft</string>
+    <string name="memory_warning_msg">WURNING: Catz iz becomin’ une of teh Memory Muncherz, wich may leid tu game crash! (Free %d, munch’d %d MB) Change teh allocasion if teh game crashez.</string>
+    <string name="mcl_memory_allocation">RAM allocasion</string>
+    <string name="mcl_memory_allocation_subtitle">Controls how mutch RAM iz given 2 Minecraft</string>
 </resources>
