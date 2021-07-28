@@ -243,7 +243,7 @@ public class ControlLayout extends FrameLayout
 
 	}
 
-	private ArrayList<ControlButton> getButtonChildren(){
+	public ArrayList<ControlButton> getButtonChildren(){
 		ArrayList<ControlButton> children = new ArrayList<>();
 		for(int i=0; i<getChildCount(); ++i){
 			View v = getChildAt(i);
