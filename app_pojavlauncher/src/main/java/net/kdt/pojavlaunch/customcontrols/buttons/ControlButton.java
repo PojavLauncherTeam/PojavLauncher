@@ -306,73 +306,79 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 mCanTriggerLongClick = false;
 
                 if (!mProperties.isDynamicBtn) {
-                    //Time to snap !
-                    float MIN_DISTANCE = Tools.dpToPx(10);
-                    float currentX = event.getRawX() - downX;
-                    float currentY = event.getRawY() - downY;
-
-                    setX(currentX);
-                    setY(currentY);
-
-                    ControlButton nearButton;
-
-                    for(ControlButton button :  ((ControlLayout) getParent()).getButtonChildren()){
-                        if(button == this) continue;
-                        if(MathUtils.dist(button.getX() + button.getProperties().getWidth()/2,
-                                button.getY() + button.getProperties().getHeight()/2,
-                                getX() + getProperties().getWidth()/2,
-                                getY() + getProperties().getHeight()/2) > Math.max(button.getProperties().getWidth()/2 + getProperties().getWidth()/2, button.getProperties().getHeight()/2 + getProperties().getHeight()/2) + MIN_DISTANCE) continue;
-
-                        float button_top = button.getY();
-                        float button_bottom = button.getY() + button.getProperties().getHeight();
-                        float button_left = button.getX();
-                        float button_right = button.getX() + button.getProperties().getWidth();
-
-                        float top = getY();
-                        float bottom = getY() + getProperties().getHeight();
-                        float left = getX();
-                        float right = getX() + getProperties().getWidth();
-
-                        /*
-                         * For each axis, we try to snap to the nearest
-                         */
-                        if(Math.abs(top - button_bottom) < MIN_DISTANCE){ // Bottom snap
-                            currentY = button_bottom;
-                        }else if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
-                            currentY = button_top - getProperties().getHeight();
-                        }
-                        if(currentY != getY()){ //If we snapped
-                            if(Math.abs(button_left - left) < MIN_DISTANCE/2){ //Left align snap
-                                currentX = button_left;
-                            }else if(Math.abs(button_right - right) < MIN_DISTANCE/2){ //Right align snap
-                                currentX = button_right - getProperties().getWidth();
-                            }
-                        }
-
-                        if(Math.abs(button_left - right) < MIN_DISTANCE){ //Left snap
-                            currentX = button_left - getProperties().getWidth();
-                        }else if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
-                            currentX = button_right;
-                        }
-                        if(currentX != getX()){
-                            if(Math.abs(button_top - top) < MIN_DISTANCE/2){
-                                currentY = button_top;
-                            }else if(Math.abs(button_bottom - bottom) < MIN_DISTANCE/2){
-                                currentY = button_bottom - getProperties().getHeight();
-                            }
-                        }
-
-                    }
-
-                    setX(currentX);
-                    setY(currentY);
-
-
+                    snapAndAlign(event.getRawX() - downX, event.getRawY() - downY);
                 }
                 break;
         }
 
         return super.onTouchEvent(event);
+    }
+
+    /**
+     * Try to snap, then align to neighboring buttons, given the provided coordinates.
+     * The new position is automatically applied to the View,
+     * regardless of if the View snapped or not.
+     *
+     * @param x Coordinate on the x axis
+     * @param y Coordinate on the y axis
+     */
+    protected void snapAndAlign(float x, float y){
+        //Time to snap !
+        float MIN_DISTANCE = Tools.dpToPx(10);
+
+        setX(x);
+        setY(y);
+
+        for(ControlButton button :  ((ControlLayout) getParent()).getButtonChildren()){
+            //Step 1: Filter unwanted buttons
+            if(button == this) continue;
+            if(MathUtils.dist(button.getX() + button.getWidth()/2f,
+                    button.getY() + button.getHeight()/2f,
+                    getX() + getWidth()/2f,
+                    getY() + getHeight()/2f) > Math.max(button.getWidth()/2f + getWidth()/2f, button.getHeight()/2f + getHeight()/2f) + MIN_DISTANCE) continue;
+
+            //Step 2: Get Coordinates
+            float button_top = button.getY();
+            float button_bottom = button_top + button.getBottom();
+            float button_left = button.getX();
+            float button_right = button_left + button.getRight();
+
+            float top = getY();
+            float bottom = getY() + getBottom();
+            float left = getX();
+            float right = getX() + getRight();
+
+            //Step 3: For each axis, we try to snap to the nearest
+            if(Math.abs(top - button_bottom) < MIN_DISTANCE){ // Bottom snap
+                y = button_bottom;
+            }else if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
+                y = button_top - getHeight();
+            }
+            if(y != getY()){ //If we snapped
+                if(Math.abs(button_left - left) < MIN_DISTANCE){ //Left align snap
+                    x = button_left;
+                }else if(Math.abs(button_right - right) < MIN_DISTANCE){ //Right align snap
+                    x = button_right - getWidth();
+                }
+            }
+
+            if(Math.abs(button_left - right) < MIN_DISTANCE){ //Left snap
+                x = button_left - getWidth();
+            }else if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
+                x = button_right;
+            }
+            if(x != getX()){
+                if(Math.abs(button_top - top) < MIN_DISTANCE){ //Top align snap
+                    y = button_top;
+                }else if(Math.abs(button_bottom - bottom) < MIN_DISTANCE){ //Bottom align snap
+                    y = button_bottom - getHeight();
+                }
+            }
+
+        }
+
+        setX(x);
+        setY(y);
     }
 
     public int computeStrokeWidth(float widthInPercent){
@@ -405,45 +411,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 super.onTouchEvent(event);
             }
         }
-    }
-
-    /*
-     * Returns the distance based on the bounding boxes
-     */
-    private static float distanceBetweenViews(View v1, View v2){
-        float distX, distY;
-        if(v1.getPivotX() < v2.getPivotX()){
-            distX = v2.getLeft() - v1.getRight();
-        }else{
-            distX = v1.getLeft() - v2.getRight();
-        }
-        //if(distX < 0) distX = 0;
-
-        if(v1.getPivotY() < v2.getPivotY()){
-            distY = v2.getTop() - v1.getBottom();
-        }else{
-            distY = v1.getTop() - v2.getBottom();
-        }
-        //if(distY < 0) distY = 0;
-        //System.out.println("DISTX: " + distX);
-        //System.out.println("DISTY: " + distY);
-
-        return distX + distY;
-    }
-
-    private static boolean isViewOverlapping(View firstView, View secondView) {
-        int[] firstPosition = new int[2];
-        int[] secondPosition = new int[2];
-
-        firstView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        firstView.getLocationOnScreen(firstPosition);
-        secondView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        secondView.getLocationOnScreen(secondPosition);
-
-        return firstPosition[0] < secondPosition[0] + secondView.getMeasuredWidth()
-                && firstPosition[0] + firstView.getMeasuredWidth() > secondPosition[0]
-                && firstPosition[1] < secondPosition[1] + secondView.getMeasuredHeight()
-                && firstPosition[1] + firstView.getMeasuredHeight() > secondPosition[1];
     }
 
 }
