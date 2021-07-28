@@ -40,7 +40,7 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Berita</string>
     <string name="mcl_tab_console">Konsol debug</string>
-    <string name="mcl_tab_crash">Catatan crash</string>
+    <string name="mcl_tab_crash">Catatan cras</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Terhubung</string>
     <string name="mcl_account_offline">Offline</string>
