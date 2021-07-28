@@ -369,11 +369,32 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
                             currentY = button_top - getProperties().getHeight();
                         }
+                        if(currentY != getY()){ //If we snapped
+                            if(Math.abs(button_left - left) < MIN_DISTANCE){ //Left align snap
+                                currentX = button_left;
+
+                            }
+                            if(Math.abs(button_right - right) < MIN_DISTANCE){ //Right align snap
+                                currentX = button_right - getProperties().getWidth();
+
+                            }
+                        }
+
                         if(Math.abs(button_left - right) < MIN_DISTANCE){ //Left snap
                             currentX = button_left - getProperties().getWidth();
                         }
                         if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
                             currentX = button_right;
+                        }
+                        if(currentX != getX()){
+                            if(Math.abs(button_top - top) < MIN_DISTANCE){
+                                currentY = button_top;
+
+                            }
+                            if(Math.abs(button_bottom - bottom) < MIN_DISTANCE){
+                                currentY = button_bottom - getProperties().getHeight();
+
+                            }
                         }
 
                     }
