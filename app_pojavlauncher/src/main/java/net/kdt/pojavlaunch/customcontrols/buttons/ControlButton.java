@@ -8,7 +8,7 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 
-import androidx.core.math.MathUtils;
+import com.google.android.material.math.MathUtils;
 
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
@@ -306,8 +306,82 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 mCanTriggerLongClick = false;
 
                 if (!mProperties.isDynamicBtn) {
-                    setX(MathUtils.clamp(event.getRawX() - downX,0, CallbackBridge.physicalWidth));
-                    setY(MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight));
+                    //Time to snap !
+                    float MIN_DISTANCE = Tools.dpToPx(10);
+                    float currentX = event.getRawX() - downX;
+                    float currentY = event.getRawY() - downY;
+
+                    setX(currentX);
+                    setY(currentY);
+
+                    ControlButton nearButton;
+                    /*
+                    for(ControlButton button : ((ControlLayout) getParent()).getButtonChildren()){
+                        if(button == ControlButton.this){
+                            continue;
+                        }
+                        if(distanceBetweenViews(ControlButton.this, button) < MIN_DISTANCE){
+                            if(Math.abs(getTop() - button.getBottom()) < MIN_DISTANCE){ // Bottom snap
+                                currentY = button.getBottom();
+                            }
+                            //System.out.println(button.getTop() - getBottom());
+                            if(Math.abs(button.getTop() - getBottom()) < MIN_DISTANCE){ //Top snap
+                                currentY = button.getTop() - getHeight();
+                            }
+                            if(Math.abs(button.getLeft() - getRight()) < MIN_DISTANCE){ //Left snap
+                                currentX = button.getLeft() - getWidth();
+                            }
+                            if(Math.abs(getLeft() - button.getRight()) < MIN_DISTANCE){ //Right snap
+                                currentX = button.getRight();
+                            }
+                        }
+                     */
+                    for(ControlButton button :  ((ControlLayout) getParent()).getButtonChildren()){
+                        if(button == this) continue;
+                        if(MathUtils.dist(button.getX() + button.getProperties().getWidth()/2,
+                                button.getY() + button.getProperties().getHeight()/2,
+                                getX() + getProperties().getWidth()/2,
+                                getY() + getProperties().getHeight()/2) > Math.max(button.getProperties().getWidth()/2 + getProperties().getWidth()/2, button.getProperties().getHeight()/2 + getProperties().getHeight()/2) + MIN_DISTANCE) continue;
+
+                        float button_top = button.getY();
+                        float button_bottom = button.getY() + button.getProperties().getHeight();
+                        float button_left = button.getX();
+                        float button_right = button.getX() + button.getProperties().getWidth();
+
+                        float top = getY();
+                        float bottom = getY() + getProperties().getHeight();
+                        float left = getX();
+                        float right = getX() + getProperties().getWidth();
+
+
+
+                        /*
+                        if(MathUtils.dist(button.getX(), button.getY(), currentX, currentY) < MIN_DISTANCE){
+                            currentX = button.getX();
+                            currentY = button.getY();
+                        }
+                        */
+
+                        if(Math.abs(top - button_bottom) < MIN_DISTANCE){ // Bottom snap
+                            currentY = button_bottom;
+                        }
+                        //System.out.println(button.getTop() - getBottom());
+                        if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
+                            currentY = button_top - getProperties().getHeight();
+                        }
+                        if(Math.abs(button_left - right) < MIN_DISTANCE){ //Left snap
+                            currentX = button_left - getProperties().getWidth();
+                        }
+                        if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
+                            currentX = button_right;
+                        }
+
+                    }
+
+                    setX(currentX);
+                    setY(currentY);
+
+
                 }
                 break;
         }
@@ -345,6 +419,45 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 super.onTouchEvent(event);
             }
         }
+    }
+
+    /*
+     * Returns the distance based on the bounding boxes
+     */
+    private static float distanceBetweenViews(View v1, View v2){
+        float distX, distY;
+        if(v1.getPivotX() < v2.getPivotX()){
+            distX = v2.getLeft() - v1.getRight();
+        }else{
+            distX = v1.getLeft() - v2.getRight();
+        }
+        //if(distX < 0) distX = 0;
+
+        if(v1.getPivotY() < v2.getPivotY()){
+            distY = v2.getTop() - v1.getBottom();
+        }else{
+            distY = v1.getTop() - v2.getBottom();
+        }
+        //if(distY < 0) distY = 0;
+        //System.out.println("DISTX: " + distX);
+        //System.out.println("DISTY: " + distY);
+
+        return distX + distY;
+    }
+
+    private static boolean isViewOverlapping(View firstView, View secondView) {
+        int[] firstPosition = new int[2];
+        int[] secondPosition = new int[2];
+
+        firstView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        firstView.getLocationOnScreen(firstPosition);
+        secondView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        secondView.getLocationOnScreen(secondPosition);
+
+        return firstPosition[0] < secondPosition[0] + secondView.getMeasuredWidth()
+                && firstPosition[0] + firstView.getMeasuredWidth() > secondPosition[0]
+                && firstPosition[1] < secondPosition[1] + secondView.getMeasuredHeight()
+                && firstPosition[1] + firstView.getMeasuredHeight() > secondPosition[1];
     }
 
 }
