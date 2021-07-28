@@ -5,6 +5,8 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.objecthunter.exp4j.*;
+import net.objecthunter.exp4j.function.Function;
+
 import org.lwjgl.glfw.*;
 
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
@@ -182,7 +184,20 @@ public class ControlData implements Cloneable
     }
 
     private static float calculate(String math) {
-        return (float) new ExpressionBuilder(math).build().evaluate();
+        return (float) new ExpressionBuilder(math)
+                .function(new Function("dp", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.pxToDp((float) args[0]);
+                    }
+                })
+                .function(new Function("px", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.dpToPx((float) args[0]);
+                    }
+                })
+                .build().evaluate();
     }
 
     private static int[] inflateKeycodeArray(int[] keycodes){
