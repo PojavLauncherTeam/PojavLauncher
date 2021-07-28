@@ -315,27 +315,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                     setY(currentY);
 
                     ControlButton nearButton;
-                    /*
-                    for(ControlButton button : ((ControlLayout) getParent()).getButtonChildren()){
-                        if(button == ControlButton.this){
-                            continue;
-                        }
-                        if(distanceBetweenViews(ControlButton.this, button) < MIN_DISTANCE){
-                            if(Math.abs(getTop() - button.getBottom()) < MIN_DISTANCE){ // Bottom snap
-                                currentY = button.getBottom();
-                            }
-                            //System.out.println(button.getTop() - getBottom());
-                            if(Math.abs(button.getTop() - getBottom()) < MIN_DISTANCE){ //Top snap
-                                currentY = button.getTop() - getHeight();
-                            }
-                            if(Math.abs(button.getLeft() - getRight()) < MIN_DISTANCE){ //Left snap
-                                currentX = button.getLeft() - getWidth();
-                            }
-                            if(Math.abs(getLeft() - button.getRight()) < MIN_DISTANCE){ //Right snap
-                                currentX = button.getRight();
-                            }
-                        }
-                     */
+
                     for(ControlButton button :  ((ControlLayout) getParent()).getButtonChildren()){
                         if(button == this) continue;
                         if(MathUtils.dist(button.getX() + button.getProperties().getWidth()/2,
@@ -353,47 +333,32 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         float left = getX();
                         float right = getX() + getProperties().getWidth();
 
-
-
                         /*
-                        if(MathUtils.dist(button.getX(), button.getY(), currentX, currentY) < MIN_DISTANCE){
-                            currentX = button.getX();
-                            currentY = button.getY();
-                        }
-                        */
-
+                         * For each axis, we try to snap to the nearest
+                         */
                         if(Math.abs(top - button_bottom) < MIN_DISTANCE){ // Bottom snap
                             currentY = button_bottom;
-                        }
-                        //System.out.println(button.getTop() - getBottom());
-                        if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
+                        }else if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
                             currentY = button_top - getProperties().getHeight();
                         }
                         if(currentY != getY()){ //If we snapped
-                            if(Math.abs(button_left - left) < MIN_DISTANCE){ //Left align snap
+                            if(Math.abs(button_left - left) < MIN_DISTANCE/2){ //Left align snap
                                 currentX = button_left;
-
-                            }
-                            if(Math.abs(button_right - right) < MIN_DISTANCE){ //Right align snap
+                            }else if(Math.abs(button_right - right) < MIN_DISTANCE/2){ //Right align snap
                                 currentX = button_right - getProperties().getWidth();
-
                             }
                         }
 
                         if(Math.abs(button_left - right) < MIN_DISTANCE){ //Left snap
                             currentX = button_left - getProperties().getWidth();
-                        }
-                        if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
+                        }else if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
                             currentX = button_right;
                         }
                         if(currentX != getX()){
-                            if(Math.abs(button_top - top) < MIN_DISTANCE){
+                            if(Math.abs(button_top - top) < MIN_DISTANCE/2){
                                 currentY = button_top;
-
-                            }
-                            if(Math.abs(button_bottom - bottom) < MIN_DISTANCE){
+                            }else if(Math.abs(button_bottom - bottom) < MIN_DISTANCE/2){
                                 currentY = button_bottom - getProperties().getHeight();
-
                             }
                         }
 
