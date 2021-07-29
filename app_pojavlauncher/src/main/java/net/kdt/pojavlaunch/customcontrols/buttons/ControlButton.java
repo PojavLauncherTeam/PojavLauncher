@@ -138,8 +138,14 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         
         // Re-calculate position
         mProperties.update();
-        setX(mProperties.insertDynamicPos(mProperties.dynamicX));
-        setY(mProperties.insertDynamicPos(mProperties.dynamicY));
+        if(!mProperties.isDynamicBtn){
+            setX(getX());
+            setY(getY());
+        }else {
+            setX(mProperties.insertDynamicPos(mProperties.dynamicX));
+            setY(mProperties.insertDynamicPos(mProperties.dynamicY));
+        }
+
         
         setModified(true);
     }
