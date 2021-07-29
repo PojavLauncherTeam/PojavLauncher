@@ -148,15 +148,24 @@
     <string name="customctrl_size">Tamaño</string>
     <string name="customctrl_size_width">Anchura</string>
     <string name="customctrl_size_height">Altura</string>
+    <string name="customctrl_mapping">Mapeado</string>
+    <string name="customctrl_orientation">Orientación</string>
+    <string name="customctrl_background_color">Color del fondo</string>
+    <string name="customctrl_corner_radius">Radio de las esquinas</string>
+    <string name="customctrl_stroke_width">Tamaño del trazo</string>
+    <string name="customctrl_stroke_color">Color del trazo</string>
     <string name="customctrl_dynamicpos">Posición dinámica</string>
     <string name="customctrl_dynamicpos_x">X Dinámica</string>
     <string name="customctrl_dynamicpos_y">Y Dinámica</string>
     <string name="customctrl_transparency_bg">Transparencia del fondo</string>
+    <string name="customctrl_button_opacity">Opacidad del botón</string>
     <string name="customctrl_keycombine">Combinación de teclas</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Añadir botón</string>
+    <string name="customctrl_addbutton_drawer">Añadir cajón de botones</string>
+    <string name="customctrl_addsubbutton">Añadir sub-botón</string>
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
@@ -180,6 +189,7 @@
     <string name="mcl_setting_title_mousespeed">Velocidad del ratón</string>
     <string name="mcl_setting_subtitle_mousespeed">Cambia la velocidad del ratón de software</string>
     <string name="customctrl_passthru">Passthrough del ratón</string>
+    <string name="customctrl_swipeable">Deslizable</string>
     <string name="customctrl_rounded">Redondeado</string>
     <string name="memory_warning_msg">La cantidad actual de memoria RAM libre (%d) es menor que la memoria RAM asignada (%d), lo que puede provocar cierres forzados. Cambia la asignación si el juego se cierra.</string>
     <string name="mcl_memory_allocation">Asignación de memoria</string>
@@ -195,4 +205,8 @@
     <string name="multirt_config_setdefault_already">Predeterminado</string>
     <string name="multirt_config_removeerror_last">Debes tener al menos un Java Runtime instalado</string>
     <string name="multirt_nocompartiblert">No se pudo encontrar ningún Java Runtime compatible</string>
+    <string name="compat_117_message">Las versiones a partir de Minecraft 21w10a en adelante requieren OpenGL 3.2. Lamentablemente, el wrapper de GL4ES no lo soporta totalmente en estos momentos, pero hay varios recursos adicionales que puedes instalar para ejecutar estas versiones.
+Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abortar el lanzamiento.</string>
+    <string name="pvc_jvmArgs">Argumentos JVM</string>
+    <string name="pvc_title">Configuración para esta versión</string>
 </resources>
