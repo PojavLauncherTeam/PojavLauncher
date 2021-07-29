@@ -101,6 +101,19 @@ public class ControlDrawer extends ControlButton {
         resizeButtons();
     }
 
+    /**
+     * Check whether or not the button passed as a parameter belongs to this drawer.
+     *
+     * @param button The button to look for
+     * @return Whether the button is in the buttons list of the drawer.
+     */
+    public boolean containsChild(ControlButton button){
+        for(ControlButton childButton : buttons){
+            if (childButton == button) return true;
+        }
+        return false;
+    }
+
     @Override
     public ControlData preProcessProperties(ControlData properties, ControlLayout layout) {
         ControlData data = super.preProcessProperties(properties, layout);
@@ -127,6 +140,11 @@ public class ControlDrawer extends ControlButton {
         }
 
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected boolean canSnap(ControlButton button) {
+        return super.canSnap(button) && !containsChild(button);
     }
 
     @Override

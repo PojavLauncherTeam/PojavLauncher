@@ -326,6 +326,25 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     /**
+     * Passe a series of checks to determine if the ControlButton is available to be snapped on.
+     *
+     * @param button
+     * @return whether or not the button
+     */
+    protected boolean canSnap(ControlButton button){
+        float MIN_DISTANCE = Tools.dpToPx(8);
+
+        if(button == this) return false;
+        if(com.google.android.material.math.MathUtils.dist(
+                button.getX() + button.getWidth()/2f,
+                button.getY() + button.getHeight()/2f,
+                getX() + getWidth()/2f,
+                getY() + getHeight()/2f) > Math.max(button.getWidth()/2f + getWidth()/2f, button.getHeight()/2f + getHeight()/2f) + MIN_DISTANCE) return false;
+
+        return true;
+    }
+
+    /**
      * Try to snap, then align to neighboring buttons, given the provided coordinates.
      * The new position is automatically applied to the View,
      * regardless of if the View snapped or not.
@@ -335,19 +354,14 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
      */
     protected void snapAndAlign(float x, float y){
         //Time to snap !
-        float MIN_DISTANCE = Tools.dpToPx(10);
+        float MIN_DISTANCE = Tools.dpToPx(8);
 
         setX(x);
         setY(y);
 
         for(ControlButton button :  ((ControlLayout) getParent()).getButtonChildren()){
             //Step 1: Filter unwanted buttons
-            if(button == this) continue;
-            if(com.google.android.material.math.MathUtils.dist(
-                    button.getX() + button.getWidth()/2f,
-                    button.getY() + button.getHeight()/2f,
-                    getX() + getWidth()/2f,
-                    getY() + getHeight()/2f) > Math.max(button.getWidth()/2f + getWidth()/2f, button.getHeight()/2f + getHeight()/2f) + MIN_DISTANCE) continue;
+            if(!canSnap(button)) continue;
 
             //Step 2: Get Coordinates
             float button_top = button.getY();
