@@ -8,7 +8,9 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 
-import com.google.android.material.math.MathUtils;
+
+
+import androidx.core.math.MathUtils;
 
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
@@ -312,7 +314,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 mCanTriggerLongClick = false;
 
                 if (!mProperties.isDynamicBtn) {
-                    snapAndAlign(event.getRawX() - downX, event.getRawY() - downY);
+                    snapAndAlign(
+                        MathUtils.clamp(event.getRawX() - downX, 0, CallbackBridge.physicalWidth - getWidth()),
+                        MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight - getHeight())
+                    );
                 }
                 break;
         }
@@ -338,7 +343,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         for(ControlButton button :  ((ControlLayout) getParent()).getButtonChildren()){
             //Step 1: Filter unwanted buttons
             if(button == this) continue;
-            if(MathUtils.dist(button.getX() + button.getWidth()/2f,
+            if(com.google.android.material.math.MathUtils.dist(
+                    button.getX() + button.getWidth()/2f,
                     button.getY() + button.getHeight()/2f,
                     getX() + getWidth()/2f,
                     getY() + getHeight()/2f) > Math.max(button.getWidth()/2f + getWidth()/2f, button.getHeight()/2f + getHeight()/2f) + MIN_DISTANCE) continue;
@@ -373,7 +379,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             }else if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
                 x = button_right;
             }
-            if(x != getX()){
+            if(x != getX()){ //If we snapped
                 if(Math.abs(button_top - top) < MIN_DISTANCE){ //Top align snap
                     y = button_top;
                 }else if(Math.abs(button_bottom - bottom) < MIN_DISTANCE){ //Bottom align snap
