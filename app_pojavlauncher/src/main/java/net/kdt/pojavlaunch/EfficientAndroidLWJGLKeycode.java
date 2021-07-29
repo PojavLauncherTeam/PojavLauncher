@@ -13,12 +13,13 @@ public class EfficientAndroidLWJGLKeycode {
     //This old version of this class was using an ArrayMap, a generic Key -> Value data structure.
     //The key being the android keycode from a KeyEvent
     //The value its LWJGL equivalent.
-    private static final int KEYCODE_COUNT = 102;
+    private static final int KEYCODE_COUNT = 103;
     private static final int[] androidKeycodes = new int[KEYCODE_COUNT];
     private static final short[] LWJGLKeycodes = new short[KEYCODE_COUNT];
     private static String[] androidKeyNameArray; /* = new String[androidKeycodes.length]; */
 
     static {
+
         /*  BINARY SEARCH IS PERFORMED ON THE androidKeycodes ARRAY !
             WHEN ADDING A MAPPING, ADD IT SO THE androidKeycodes ARRAY STAYS SORTED ! */
         // Mapping Android Keycodes to LWJGL Keycodes
@@ -77,6 +78,7 @@ public class EfficientAndroidLWJGLKeycode {
 
 
         add(KeyEvent.KEYCODE_COMMA, LWJGLGLFWKeycode.GLFW_KEY_COMMA);
+        add(KeyEvent.KEYCODE_PERIOD, LWJGLGLFWKeycode.GLFW_KEY_PERIOD);
 
         // Alt keys
         add(KeyEvent.KEYCODE_ALT_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT);
