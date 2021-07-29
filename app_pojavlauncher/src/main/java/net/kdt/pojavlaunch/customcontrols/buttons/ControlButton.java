@@ -351,14 +351,14 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
             //Step 2: Get Coordinates
             float button_top = button.getY();
-            float button_bottom = button_top + button.getBottom();
+            float button_bottom = button_top + button.getHeight();
             float button_left = button.getX();
-            float button_right = button_left + button.getRight();
+            float button_right = button_left + button.getWidth();
 
             float top = getY();
-            float bottom = getY() + getBottom();
+            float bottom = getY() + getHeight();
             float left = getX();
-            float right = getX() + getRight();
+            float right = getX() + getWidth();
 
             //Step 3: For each axis, we try to snap to the nearest
             if(Math.abs(top - button_bottom) < MIN_DISTANCE){ // Bottom snap
