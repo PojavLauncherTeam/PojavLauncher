@@ -21,7 +21,7 @@ public class ControlDrawer extends ControlButton {
     public ArrayList<ControlSubButton> buttons;
     public ControlDrawerData drawerData;
     public ControlLayout mLayout;
-    public boolean areButtonsVisible = false;
+    public boolean areButtonsVisible;
 
 
     public ControlDrawer(ControlLayout layout, ControlDrawerData drawerData) {
@@ -30,6 +30,7 @@ public class ControlDrawer extends ControlButton {
         buttons = new ArrayList<>(drawerData.buttonProperties.size());
         mLayout = layout;
         this.drawerData = drawerData;
+        areButtonsVisible = layout.getModifiable();
     }
 
 
