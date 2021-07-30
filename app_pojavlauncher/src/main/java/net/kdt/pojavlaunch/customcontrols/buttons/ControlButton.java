@@ -440,8 +440,11 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
      * @return
      */
     private static String applySize(String equation, ControlButton button){
-        return equation.replace("${height}", " px(" + Tools.pxToDp(button.getProperties().getHeight()) + ") /" + PREF_BUTTONSIZE + " * ${preferred_scale}")
-                .replace("${width}", " px(" + Tools.pxToDp(button.getProperties().getWidth()) + ") / " + PREF_BUTTONSIZE + " * ${preferred_scale}");
+        return equation
+                .replace("${right}", "(${screen_width} - ${width})")
+                .replace("${bottom}","(${screen_height} - ${height})")
+                .replace("${height}", "(px(" + Tools.pxToDp(button.getProperties().getHeight()) + ") /" + PREF_BUTTONSIZE + " * ${preferred_scale})")
+                .replace("${width}", "(px(" + Tools.pxToDp(button.getProperties().getWidth()) + ") / " + PREF_BUTTONSIZE + " * ${preferred_scale})");
     }
 
     public int computeStrokeWidth(float widthInPercent){
