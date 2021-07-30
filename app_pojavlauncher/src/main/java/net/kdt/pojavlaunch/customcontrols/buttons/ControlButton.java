@@ -21,6 +21,7 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import org.lwjgl.glfw.*;
 
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
 
 @SuppressLint("ViewConstructor")
 public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
@@ -72,8 +73,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public ControlData preProcessProperties(ControlData properties, ControlLayout layout){
         //When a button is created, properties have to be modified to fit the screen.
         //Size
-        properties.setWidth(properties.getWidth() / layout.getLayoutScale() * LauncherPreferences.PREF_BUTTONSIZE);
-        properties.setHeight(properties.getHeight() / layout.getLayoutScale() * LauncherPreferences.PREF_BUTTONSIZE);
+        properties.setWidth(properties.getWidth() / layout.getLayoutScale() * PREF_BUTTONSIZE);
+        properties.setHeight(properties.getHeight() / layout.getLayoutScale() * PREF_BUTTONSIZE);
 
         //Visibility
         properties.isHideable = !properties.containsKeycode(ControlData.SPECIALBTN_TOGGLECTRL) && !properties.containsKeycode(ControlData.SPECIALBTN_VIRTUALMOUSE);
@@ -160,37 +161,59 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     @Override
     public void setX(float x) {
         super.setX(x);
-
-        if (!mProperties.isDynamicBtn) {
-
-            if(x + (mProperties.getWidth()/2f) > CallbackBridge.physicalWidth/2f){
-                System.out.println(mProperties.getWidth());
-                mProperties.dynamicX = (x + mProperties.getWidth()) / CallbackBridge.physicalWidth + " * ${screen_width} - ${width}";
-            }else{
-                mProperties.dynamicX = x / CallbackBridge.physicalWidth + " * ${screen_width}";
-            }
-
-            setModified(true);
-        }
+        setModified(true);
     }
 
     @Override
     public void setY(float y) {
         super.setY(y);
+        setModified(true);
+    }
 
-        if (!mProperties.isDynamicBtn) {
+    /**
+     * Apply the dynamic equation on the x axis.
+     * @param dynamicX The equation to compute the position from
+     */
+    public void setDynamicX(String dynamicX){
+        mProperties.dynamicX = dynamicX;
+        setX(mProperties.insertDynamicPos(dynamicX));
+    }
 
-            if(y + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
-                System.out.println(mProperties.getHeight());
-                mProperties.dynamicY = (y + mProperties.getHeight()) / CallbackBridge.physicalHeight + " * ${screen_height} - ${height}";
-            }else{
-                mProperties.dynamicY = y / CallbackBridge.physicalHeight + " * ${screen_height}";
-            }
+    /**
+     * Apply the dynamic equation on the y axis.
+     * @param dynamicY The equation to compute the position from
+     */
+    public void setDynamicY(String dynamicY){
+        mProperties.dynamicY = dynamicY;
+        setY(mProperties.insertDynamicPos(dynamicY));
+    }
 
-            setModified(true);
+    /**
+     * Generate a dynamic equation from an absolute position, used to scale properly across devices
+     * @param x The absolute position on the horizontal axis
+     * @return The equation as a String
+     */
+    public String generateDynamicX(float x){
+        if(x + (mProperties.getWidth()/2f) > CallbackBridge.physicalWidth/2f){
+            return (x + mProperties.getWidth()) / CallbackBridge.physicalWidth + " * ${screen_width} - ${width}";
+        }else{
+            return x / CallbackBridge.physicalWidth + " * ${screen_width}";
         }
     }
-    
+
+    /**
+     * Generate a dynamic equation from an absolute position, used to scale properly across devices
+     * @param y The absolute position on the vertical axis
+     * @return The equation as a String
+     */
+    public String generateDynamicY(float y){
+        if(y + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
+            return  (y + mProperties.getHeight()) / CallbackBridge.physicalHeight + " * ${screen_height} - ${height}";
+        }else{
+            return y / CallbackBridge.physicalHeight + " * ${screen_height}";
+        }
+    }
+
     public void updateProperties() {
         setProperties(mProperties);
     }
@@ -328,7 +351,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     /**
      * Passe a series of checks to determine if the ControlButton is available to be snapped on.
      *
-     * @param button
+     * @param button The button to check
      * @return whether or not the button
      */
     protected boolean canSnap(ControlButton button){
@@ -349,12 +372,16 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
      * The new position is automatically applied to the View,
      * regardless of if the View snapped or not.
      *
+     * The new position is always dynamic, thus replacing previous dynamic positions
+     *
      * @param x Coordinate on the x axis
      * @param y Coordinate on the y axis
      */
     protected void snapAndAlign(float x, float y){
-        //Time to snap !
         float MIN_DISTANCE = Tools.dpToPx(8);
+        boolean success = false;
+        String dynamicX = generateDynamicX(x);
+        String dynamicY = generateDynamicY(y);
 
         setX(x);
         setY(y);
@@ -374,37 +401,62 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             float left = getX();
             float right = getX() + getWidth();
 
+            //For context aware snapping
+            boolean atTopArea = button.getY() + getHeight()/2 < CallbackBridge.physicalHeight/2;
+            boolean atLeftArea = button.getX() + getWidth()/2 < CallbackBridge.physicalWidth/2;
+
             //Step 3: For each axis, we try to snap to the nearest
             if(Math.abs(top - button_bottom) < MIN_DISTANCE){ // Bottom snap
-                y = button_bottom;
+                //y = button_bottom;
+                dynamicY = applySize(button.getProperties().dynamicY, button) + applySize(" + ${height}", button) ;
+
             }else if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
-                y = button_top - getHeight();
+                //y = button_top - getHeight();
+                dynamicY = applySize(button.getProperties().dynamicY, button) + " - ${height}";
             }
             if(y != getY()){ //If we snapped
+                success = true;
                 if(Math.abs(button_left - left) < MIN_DISTANCE){ //Left align snap
-                    x = button_left;
+                    //x = button_left;
+                    dynamicX = applySize(button.getProperties().dynamicX, button);
                 }else if(Math.abs(button_right - right) < MIN_DISTANCE){ //Right align snap
-                    x = button_right - getWidth();
+                    //x = button_right - getWidth();
+                    dynamicX = applySize(button.getProperties().dynamicX, button) + applySize(" + ${width}", button) + " - ${width}";
                 }
             }
 
             if(Math.abs(button_left - right) < MIN_DISTANCE){ //Left snap
-                x = button_left - getWidth();
+                //x = button_left - getWidth();
+                dynamicX = applySize(button.getProperties().dynamicX, button) + " - ${width}";
             }else if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
-                x = button_right;
+                //x = button_right;
+                dynamicX = applySize(button.getProperties().dynamicX, button) + applySize(" + ${width}", button);
             }
             if(x != getX()){ //If we snapped
                 if(Math.abs(button_top - top) < MIN_DISTANCE){ //Top align snap
-                    y = button_top;
+                    //y = button_top;
+                    dynamicY = applySize(button.getProperties().dynamicY, button);
                 }else if(Math.abs(button_bottom - bottom) < MIN_DISTANCE){ //Bottom align snap
-                    y = button_bottom - getHeight();
+                    //y = button_bottom - getHeight();
+                    dynamicY = applySize(button.getProperties().dynamicY, button) + applySize(" + ${height}", button) + " - ${height}";
                 }
             }
 
         }
 
-        setX(x);
-        setY(y);
+        setDynamicX(dynamicX);
+        setDynamicY(dynamicY);
+    }
+
+    /**
+     *
+     * @param equation
+     * @param button
+     * @return
+     */
+    private static String applySize(String equation, ControlButton button){
+        return equation.replace("${height}", " px(" + Tools.pxToDp(button.getProperties().getHeight()) / PREF_BUTTONSIZE + ") * ${preferred_scale}")
+                .replace("${width}", " px(" + button.getProperties().getWidth() / PREF_BUTTONSIZE + ") * ${preferred_scale}");
     }
 
     public int computeStrokeWidth(float widthInPercent){
