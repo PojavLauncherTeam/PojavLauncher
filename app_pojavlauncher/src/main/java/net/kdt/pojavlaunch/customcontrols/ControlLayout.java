@@ -191,8 +191,11 @@ public class ControlLayout extends FrameLayout
 		subButton.parentDrawer.drawerData.buttonProperties.remove(subButton.getProperties());
 		subButton.parentDrawer.buttons.remove(subButton);
 
+		subButton.parentDrawer.syncButtons();
+
 		subButton.setVisibility(GONE);
 		removeView(subButton);
+
 	}
 
 	public void saveLayout(String path) throws Exception {

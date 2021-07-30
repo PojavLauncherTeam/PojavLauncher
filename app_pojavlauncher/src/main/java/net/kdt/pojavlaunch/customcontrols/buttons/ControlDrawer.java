@@ -96,7 +96,7 @@ public class ControlDrawer extends ControlButton {
         }
     }
 
-    private void syncButtons(){
+    public void syncButtons(){
         alignButtons();
         resizeButtons();
     }
