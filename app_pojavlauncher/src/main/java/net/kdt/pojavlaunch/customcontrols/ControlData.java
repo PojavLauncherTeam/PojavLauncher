@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.customcontrols;
 import android.util.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.*;
 import net.objecthunter.exp4j.*;
 import net.objecthunter.exp4j.function.Function;
@@ -167,7 +168,8 @@ public class ControlData implements Cloneable
         keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
         keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
         keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
-        
+        keyValueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
+
         // Insert value to ${variable}
         String insertedPos = JSONUtils.insertSingleJSONValue(dynamicPos, keyValueMap);
         
