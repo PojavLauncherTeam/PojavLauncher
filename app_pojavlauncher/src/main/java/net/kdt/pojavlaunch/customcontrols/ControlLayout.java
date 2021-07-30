@@ -176,6 +176,10 @@ public class ControlLayout extends FrameLayout
 	}
 
 	public void removeControlDrawer(ControlDrawer controlDrawer){
+		for(ControlSubButton subButton : controlDrawer.buttons){
+			subButton.setVisibility(GONE);
+			removeView(subButton);
+		}
 		mLayout.mDrawerDataList.remove(controlDrawer.getDrawerData());
 		controlDrawer.setVisibility(GONE);
 		removeView(controlDrawer);
