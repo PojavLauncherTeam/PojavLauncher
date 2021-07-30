@@ -379,7 +379,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
      */
     protected void snapAndAlign(float x, float y){
         float MIN_DISTANCE = Tools.dpToPx(8);
-        boolean success = false;
         String dynamicX = generateDynamicX(x);
         String dynamicY = generateDynamicY(y);
 
@@ -415,7 +414,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 dynamicY = applySize(button.getProperties().dynamicY, button) + " - ${height}";
             }
             if(y != getY()){ //If we snapped
-                success = true;
                 if(Math.abs(button_left - left) < MIN_DISTANCE){ //Left align snap
                     //x = button_left;
                     dynamicX = applySize(button.getProperties().dynamicX, button);
@@ -455,8 +453,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
      * @return
      */
     private static String applySize(String equation, ControlButton button){
-        return equation.replace("${height}", " px(" + Tools.pxToDp(button.getProperties().getHeight()) / PREF_BUTTONSIZE + ") * ${preferred_scale}")
-                .replace("${width}", " px(" + button.getProperties().getWidth() / PREF_BUTTONSIZE + ") * ${preferred_scale}");
+        return equation.replace("${height}", " px(" + Tools.pxToDp(button.getProperties().getHeight()) + ") /" + PREF_BUTTONSIZE + " * ${preferred_scale}")
+                .replace("${width}", " px(" + Tools.pxToDp(button.getProperties().getWidth()) + ") / " + PREF_BUTTONSIZE + " * ${preferred_scale}");
     }
 
     public int computeStrokeWidth(float widthInPercent){
