@@ -623,7 +623,16 @@ public class BaseMainActivity extends LoggableActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if(event.getRepeatCount() != 0 || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN || (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true; //We consume but no need to recheck since it was already sent once.
+        //Filtering useless events
+        if(event.getRepeatCount() != 0 || event.getAction() == KeyEvent.ACTION_MULTIPLE || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN || (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
+
+        //Sometimes, key events may come from the mouse
+        if((event.getDevice().getSources() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE){
+            if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, event.getAction() == KeyEvent.ACTION_DOWN);
+                return true;
+            }
+        }
         System.out.println(event);
 
         if(Gamepad.isGamepadEvent(event)){

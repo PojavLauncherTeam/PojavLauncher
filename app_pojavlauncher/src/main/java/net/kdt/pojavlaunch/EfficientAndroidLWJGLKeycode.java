@@ -196,17 +196,14 @@ public class EfficientAndroidLWJGLKeycode {
 
         try {
             System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
-            if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK && LauncherPreferences.PREF_BACK_TO_RIGHT_MOUSE) {
-                BaseMainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, keyEvent.getAction() == KeyEvent.ACTION_DOWN);
-            } else {
-                char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
-                BaseMainActivity.sendKeyPress(
-                        getValueByIndex(valueIndex),
-                        key,
-                        0,
-                        CallbackBridge.getCurrentMods(),
-                        keyEvent.getAction() == KeyEvent.ACTION_DOWN);
-            }
+            char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
+            BaseMainActivity.sendKeyPress(
+                    getValueByIndex(valueIndex),
+                    key,
+                    0,
+                    CallbackBridge.getCurrentMods(),
+                    keyEvent.getAction() == KeyEvent.ACTION_DOWN);
+
         } catch (Throwable th) {
             th.printStackTrace();
         }

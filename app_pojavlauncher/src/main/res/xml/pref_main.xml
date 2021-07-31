@@ -58,12 +58,6 @@
             android:summary="@string/mcl_setting_subtitle_ignore_notch"
             android:title="@string/mcl_setting_title_ignore_notch"
             app2:icon="@drawable/ignore_notch" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_map_rmb"
-            android:key="backToRightMouse"
-            android:summary="@string/mcl_setting_subtitle_backtorightmouse"
-            android:title="@string/mcl_setting_title_backtorightmouse" />
 
         <androidx.preference.EditTextPreference
             android:dialogTitle="@string/mcl_setting_title_javaargs"
