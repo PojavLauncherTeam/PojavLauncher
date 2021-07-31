@@ -96,7 +96,7 @@ public final class Tools {
         if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
         else gamedirPath = Tools.DIR_GAME_NEW;
         if(pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
-        PojavLoginActivity.disableSplash(gamedirPath);
+        //PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));

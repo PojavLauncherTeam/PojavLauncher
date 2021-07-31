@@ -412,7 +412,7 @@ public class Display {
                 }
             }
         };
-        drawable.context = new ContextGL(null, null, null);
+        drawable.context = new ContextGL(Window.handle);
         drawable.context.makeCurrent();
         Display.drawable = drawable;
         context = org.lwjgl.opengl.GLContext.createFromCurrent();
