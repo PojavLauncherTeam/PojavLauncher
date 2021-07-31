@@ -28,7 +28,7 @@
     <string name="alerttitle_installmod">Bir mod yükleyicisi seç</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
-    <string name="error_no_version">Sürümler yok!</string>
+    <string name="error_no_version">Sürüm yok!</string>
     <string name="error_show_more">Daha fazla göster</string>
     <string name="error_show_less">Daha az göster</string>
     <!-- Toast messages -->
@@ -53,7 +53,7 @@
     <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
-    <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümânlarla)</string>
+    <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümanlarla)</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
     <string name="mcl_option_about">Launcher hakkında</string>
@@ -115,7 +115,7 @@
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klavye</string>
     <string name="control_chat">Sohbet</string>
-    <string name="control_debug">Debug</string>
+    <string name="control_debug">Hata Ayıklama</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
     <string name="control_shift">◇</string>
@@ -125,7 +125,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3rd</string>
+    <string name="control_thirdperson">3.</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Fare</string>
     <string name="control_mouseoff">Fare: kpl</string>
@@ -134,7 +134,7 @@
     <string name="control_forceclose">Kapatmaya zorla</string>
     <string name="control_viewout">Konsol çıktısı</string>
     <string name="control_adebug">Hata ayıklama tuşu gir</string>
-    <string name="control_customkey">Özel anahtarkodu gönder</string>
+    <string name="control_customkey">Özel anahtar kodu gönder</string>
     <string name="control_scaleup">Boyutu Arttır</string>
     <string name="control_scaledown">Boyutu Küçült</string>
     <!--
@@ -143,7 +143,7 @@
 -->
     <string name="customctrl_edit">%s düzenleniyor</string>
     <string name="customctrl_remove">%s kaldırılsın mı?</string>
-    <string name="customctrl_keyname">AnahtarKodu</string>
+    <string name="customctrl_keyname">Anahtar Kodu</string>
     <string name="customctrl_toggle">Değiştirilebilir</string>
     <string name="customctrl_size">Boyut</string>
     <string name="customctrl_size_width">Genişlik</string>
@@ -190,13 +190,13 @@
     <string name="mcl_setting_subtitle_mousespeed">Yazılımsal farenin hızını değiştirir</string>
     <string name="customctrl_passthru">Mouse geçişi</string>
     <string name="customctrl_swipeable">Kaydırılabilir</string>
-    <string name="customctrl_rounded">Kenarlı</string>
+    <string name="customctrl_rounded">Yuvarlatılmış</string>
     <string name="memory_warning_msg">Şuanki boş RAM (%d) verilecek RAM\'den (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilecek RAM\'i değiştirin.</string>
     <string name="mcl_memory_allocation">Bellek ayırma</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Bozuk Java Runtime</string>
-    <string name="multirt_config_title">Java VM\'leri</string>
+    <string name="multirt_config_title">Java SM\'leri</string>
     <string name="multirt_config_add">Yeni ekle</string>
     <string name="multirt_config_add_subtitle">Yeni Java VM\'i içe aktar</string>
     <string name="multirt_title">Runtime yöneticisi</string>
