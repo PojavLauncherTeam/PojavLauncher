@@ -142,10 +142,13 @@
     <string name="customctrl_size">الحجم</string>
     <string name="customctrl_size_width">العرض</string>
     <string name="customctrl_size_height">الارتفاع</string>
+    <string name="customctrl_mapping">تخطيط الأزرار</string>
+    <string name="customctrl_background_color">لون الخلفية</string>
     <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
     <string name="customctrl_transparency_bg">شفافيه الخلفية</string>
+    <string name="customctrl_button_opacity">شفافية الزر</string>
     <string name="customctrl_keycombine">مجموعة المفاتيح</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
@@ -174,6 +177,7 @@
     <string name="mcl_setting_title_mousespeed">سرعة الفأرة</string>
     <string name="mcl_setting_subtitle_mousespeed">يغير سرعة الفأرة البرمجية</string>
     <string name="customctrl_passthru">سماح تحريك أزرار الشاشة</string>
+    <string name="customctrl_swipeable">قابل للسحب</string>
     <string name="customctrl_rounded">مدوّر</string>
     <string name="memory_warning_msg">الكمية الحالية من ذاكرة الوصول العشوائي المجانية (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. قم بتغيير التخصيص إذا تحطمت اللعبة.</string>
     <string name="mcl_memory_allocation">تخصيص الذاكرة.</string>
@@ -189,4 +193,7 @@
     <string name="multirt_config_setdefault_already">مستخدم دائما</string>
     <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل مشغل جافا واحد مثبت</string>
     <string name="multirt_nocompartiblert">لا يمكن العثور على مشغل جافا قابل للتشغيل</string>
+    <string name="compat_117_message">ماينكرافت 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن تغليف GL4ES لا يدعمه بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لإجهاض الإطلاق.</string>
+    <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
+    <string name="pvc_jvmArgs">مدخلات JVM</string>
 </resources>
