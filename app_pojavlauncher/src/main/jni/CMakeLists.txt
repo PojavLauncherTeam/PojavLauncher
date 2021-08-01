@@ -29,8 +29,8 @@ add_library(awt_xawt SHARED
         )
 # target_link_libraries(awt_xawt PRIVATE awt_headless) # FIXME
 
-set(gl4es_dir /mnt/ssd/znix/static/programming/android/gl4es)
-include(${gl4es_dir}/android.cmake)
+#set(gl4es_dir /mnt/ssd/znix/static/programming/android/gl4es)
+#include(${gl4es_dir}/android.cmake)
 
 include(OpenCompositeStub/CMakeLists.txt)
 include(VrLauncher/CMakeLists.txt)

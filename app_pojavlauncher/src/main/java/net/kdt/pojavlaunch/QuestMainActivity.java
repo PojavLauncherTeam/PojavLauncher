@@ -116,8 +116,8 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
             String[] launchArgs = Tools.getMinecraftArgs(profile, versionInfo, Tools.DIR_GAME_NEW);
             args.addAll(Arrays.asList(launchArgs));
 
-            args.add("--server");
-            args.add("10.0.2.24");
+            //args.add("--server");
+            //args.add("10.0.2.24");
 
             // Add our custom tweaker to modify JNI so openvr loads
             args.add("--tweakClass");
