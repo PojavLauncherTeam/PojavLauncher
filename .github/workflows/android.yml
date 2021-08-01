@@ -29,6 +29,13 @@ jobs:
       run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*' && git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*'))"
       shell: bash
       
+    - name: Cache gl4es
+      uses: actions/cache@v2
+      id: gl4es-cache
+      with:
+        path: gl4es/libs
+        key: gl4es-android-shared-nodbg-test1-2-${{ steps.gl4es-sha.outputs.sha }}
+
     - name: Get gl4es
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
@@ -58,13 +65,6 @@ jobs:
         git commit -am "CI: Update gl4es"
         git push
     
-    - name: Cache gl4es
-      uses: actions/cache@v2
-      id: gl4es-cache
-      with:
-        path: gl4es/libs
-        key: gl4es-android-shared-nodbg-test1-2-${{ steps.gl4es-sha.outputs.sha }}
-
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
       with:
