@@ -402,9 +402,9 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
             //Step 3: For each axis, we try to snap to the nearest
             if(Math.abs(top - button_bottom) < MIN_DISTANCE){ // Bottom snap
-                dynamicY = applySize(button.getProperties().dynamicY, button) + applySize(" + ${height}", button) ;
+                dynamicY = applySize(button.getProperties().dynamicY, button) + applySize(" + ${height}", button) + " + ${margin}" ;
             }else if(Math.abs(button_top - bottom) < MIN_DISTANCE){ //Top snap
-                dynamicY = applySize(button.getProperties().dynamicY, button) + " - ${height}";
+                dynamicY = applySize(button.getProperties().dynamicY, button) + " - ${height} - ${margin}";
             }
             if(!dynamicY.equals(generateDynamicY(getY()))){ //If we snapped
                 if(Math.abs(button_left - left) < MIN_DISTANCE){ //Left align snap
@@ -415,9 +415,9 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             }
 
             if(Math.abs(button_left - right) < MIN_DISTANCE){ //Left snap
-                dynamicX = applySize(button.getProperties().dynamicX, button) + " - ${width}";
+                dynamicX = applySize(button.getProperties().dynamicX, button) + " - ${width} - ${margin}";
             }else if(Math.abs(left - button_right) < MIN_DISTANCE){ //Right snap
-                dynamicX = applySize(button.getProperties().dynamicX, button) + applySize(" + ${width}", button);
+                dynamicX = applySize(button.getProperties().dynamicX, button) + applySize(" + ${width}", button) + " + ${margin}";
             }
             if(!dynamicX.equals(generateDynamicX(getX()))){ //If we snapped
                 if(Math.abs(button_top - top) < MIN_DISTANCE){ //Top align snap
@@ -434,10 +434,13 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     /**
+     * Do a pre-conversion of an equation using values from a button,
+     * so the variables can be used for another button
      *
-     * @param equation
-     * @param button
-     * @return
+     * Internal use only.
+     * @param equation The dynamic position as a String
+     * @param button The button to get the values from.
+     * @return The pre-processed equation as a String.
      */
     private static String applySize(String equation, ControlButton button){
         return equation
