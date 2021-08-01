@@ -348,7 +348,7 @@ public class BaseMainActivity extends LoggableActivity {
 
                     switch (e.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN: // 0
-                            shouldBeDown = true;
+                            //shouldBeDown = true;
                             CallbackBridge.sendPrepareGrabInitialPos();
 
                             currentPointerID = e.getPointerId(0);

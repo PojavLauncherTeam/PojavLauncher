@@ -262,6 +262,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 case MotionEvent.ACTION_UP: // 1
                 case MotionEvent.ACTION_CANCEL: // 3
                 case MotionEvent.ACTION_POINTER_UP: // 6
+                    if(mProperties.passThruEnabled){
+                        MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
+                        if (v != null) v.dispatchTouchEvent(event);
+                    }
                     if(isPointerOutOfBounds) ((ControlLayout) getParent()).onTouch(this, event);
                     isPointerOutOfBounds = false;
 
