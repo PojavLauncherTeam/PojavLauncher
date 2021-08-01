@@ -28,6 +28,17 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
     private static final File APP_JAR = new File(Tools.DIR_GAME_HOME, "test.jar");
     private static final File WORK_DIR = new File(Tools.DIR_GAME_HOME, "workdir");
 
+    /**
+     * The URL of the 'bringup helper' JAR file to download. This is great for development
+     * where it can save you from repeatedly installing the app via adb which gets old
+     * very quick.
+     * <p>
+     * Set it to something like this: http://10.0.2.24:8001/GraphicsTest.jar
+     * <p>
+     * Leaving it as null will extract the JAR contained inside the APK.
+     */
+    public static String APP_URL = null;
+
     // Called from native code
     @SuppressWarnings("unused")
     public void setup() {
@@ -48,7 +59,15 @@ public class QuestMainActivity extends NativeActivity implements ILoggableActivi
 
     private void downloadGraphicsTest() {
         try (OutputStream out = new FileOutputStream(APP_JAR)) {
-            URL url = new URL("http://10.0.2.24:8001/GraphicsTest.jar");
+            if (APP_URL == null) {
+                Log.d(TAG, "Extracting integrated vrstartup jarfile");
+                try (InputStream in = getApplicationContext().getAssets().open("launch_helper.jar")) {
+                    IOUtils.copy(in, out);
+                }
+                return;
+            }
+
+            URL url = new URL(APP_URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             if (conn.getResponseCode() != 200)

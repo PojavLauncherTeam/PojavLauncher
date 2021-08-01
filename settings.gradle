@@ -1,4 +1,7 @@
-rootProject.name='PojavLauncher'
+rootProject.name = 'PojavLauncher'
 include ':jre_lwjgl3glfw'
 include ':app_pojavlauncher'
 
+// Include the VR startup project - this is so we can use those artefacts in the PL build
+include ':launch_helper'
+project(':launch_helper').projectDir = new File("libs/JavaLaunchHelper")
