@@ -69,7 +69,6 @@ android {
     externalNativeBuild {
         cmake {
             path "src/main/jni/CMakeLists.txt"
-            version "3.18.1"
         }
     }
 
@@ -87,7 +86,6 @@ android {
                 def launchHelperJar = project(':launch_helper').tasks.getByName('jar')
                 def jarFile = launchHelperJar.archiveFile.get().asFile
                 assert jarFile.exists()
-                println(outputDir.get())
 
                 copy {
                     from([jarFile])

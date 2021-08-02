@@ -39,7 +39,7 @@ set(exported_funcs
         VRClientCoreFactory
         )
 foreach (func_name IN LISTS exported_funcs)
-    target_link_options(openvr_api PRIVATE -Wl,--require-defined=${func_name})
+    target_link_libraries(openvr_api PRIVATE -Wl,--require-defined=${func_name})
 endforeach ()
 
 # Link to Oculus's OpenXR loader
