@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class V117CompatUtil {
     /*
@@ -108,18 +109,22 @@ public class V117CompatUtil {
         if(packList.contains("\"assets-v0.zip\"") && renderer.equals("opengles2_5")) return;
 
         Object lock = new Object();
-        AtomicBoolean proceed = new AtomicBoolean(false);
-
+        AtomicInteger proceed = new AtomicInteger(0);
         ctx.runOnUiThread(() -> {
             AlertDialog.Builder bldr = new AlertDialog.Builder(ctx);
             bldr.setTitle(R.string.global_warinng);
             bldr.setMessage(R.string.compat_117_message);
             bldr.setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                proceed.set(true);
+                proceed.set(1);
                 synchronized (lock) { lock.notifyAll(); }
                 dialog.dismiss();
             });
             bldr.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                synchronized (lock) { lock.notifyAll(); }
+                dialog.dismiss();
+            });
+            bldr.setNeutralButton(R.string.compat_11x_playanyway, (dialog, which) -> {
+                proceed.set(2);
                 synchronized (lock) { lock.notifyAll(); }
                 dialog.dismiss();
             });
@@ -130,21 +135,23 @@ public class V117CompatUtil {
         synchronized (lock) {
             lock.wait();
         }
-        if(proceed.get()) {
-            if (cfg == null) {
-                cfg = new PerVersionConfig.VersionConfig();
-                PerVersionConfig.configMap.put(version, cfg);
-            }
-            cfg.renderer = "opengles2_5";
-            String path = Tools.DIR_GAME_NEW;
-            if(cfg.gamePath != null && !cfg.gamePath.isEmpty()) path = cfg.gamePath;
-            copyResourcePack(path,ctx.getAssets());
-            if(!packList.contains("\"assets-v0.zip\"")) packList.add(0,"\"assets-v0.zip\"");
-            MCOptionUtils.set("resourcePacks",regenPackList(packList));
-            MCOptionUtils.save();
-            PerVersionConfig.update();
-        }else{
-            throw new MinecraftDownloaderTask.SilentException();
+        switch(proceed.get()) {
+            case 1:
+                if (cfg == null) {
+                    cfg = new PerVersionConfig.VersionConfig();
+                    PerVersionConfig.configMap.put(version, cfg);
+                }
+                cfg.renderer = "opengles2_5";
+                String path = Tools.DIR_GAME_NEW;
+                if(cfg.gamePath != null && !cfg.gamePath.isEmpty()) path = cfg.gamePath;
+                copyResourcePack(path,ctx.getAssets());
+                if(!packList.contains("\"assets-v0.zip\"")) packList.add(0,"\"assets-v0.zip\"");
+                MCOptionUtils.set("resourcePacks",regenPackList(packList));
+                MCOptionUtils.save();
+                PerVersionConfig.update();
+                break;
+            case 0:
+                throw new MinecraftDownloaderTask.SilentException();
         }
     }
     public static void copyResourcePack(String gameDir, AssetManager am) throws IOException {

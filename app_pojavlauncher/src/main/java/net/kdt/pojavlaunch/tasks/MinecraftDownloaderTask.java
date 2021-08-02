@@ -117,9 +117,10 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                          }
                      } //if else, we are satisfied
                 }
-                {
+                { //run the checks to detect if we have a *brand new* engine
                     int mcReleaseDate = Integer.parseInt(verInfo.releaseTime.substring(0, 10).replace("-", ""));
-                    if(mcReleaseDate > 20210225) V117CompatUtil.runCheck(p1[0],mActivity);
+                    if(mcReleaseDate > 20210225 && verInfo.javaVersion != null && verInfo.javaVersion.majorVersion > 15)
+                        V117CompatUtil.runCheck(p1[0],mActivity);
                 }
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
@@ -416,8 +417,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 500, TimeUnit.MILLISECONDS, workQueue);
         mActivity.mIsAssetsProcessing = true;
-        //File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
-        //if (!hasDownloadedFile.exists()) {
+        File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
+        if (!hasDownloadedFile.exists()) {
             System.out.println("Assets begin time: " + System.currentTimeMillis());
             Map<String, JAssetInfo> assetsObjects = assets.objects;
             int assetsSizeBytes=0;
@@ -463,7 +464,13 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     publishDownloadProgress("assets", DLSize, assetsSizeBytes);
                     prevDLSize = downloadedSize.get();
                 }
-
+                if(mActivity.mIsAssetsProcessing) {
+                    System.out.println("Unskipped download done!");
+                    if(!hasDownloadedFile.getParentFile().exists())hasDownloadedFile.getParentFile().mkdirs();
+                    hasDownloadedFile.createNewFile();
+                }else{
+                    System.out.println("Skipped!");
+                }
                 executor.shutdownNow();
                 while (!executor.awaitTermination(250, TimeUnit.MILLISECONDS)) {}
                 System.out.println("Fully shut down!");
@@ -471,7 +478,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 e.printStackTrace();
             }
             System.out.println("Assets end time: " + System.currentTimeMillis());
-        //}
+        }
     }
 
     private JMinecraftVersionList.Version findVersion(String version) {
