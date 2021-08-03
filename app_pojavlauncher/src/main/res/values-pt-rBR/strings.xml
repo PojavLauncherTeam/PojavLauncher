@@ -117,6 +117,16 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">Última snapshot</string>
+    <string name="vp_latest_release">Última versão</string>
+    <string name="mcl_tab_profiles">Perfis</string>
+    <string name="mcl_profile_editor_title_profile">PERFIS</string>
+    <string name="mcl_profile_editor_title_version">VERSÕES</string>
+    <string name="mcl_profile_editor_edit_text_title">Nome do perfil</string>
+    <string name="mcl_profile_editor_save">salvar</string>
+    <string name="profedit_selected_version">Versão selecionada: %s</string>
+    <string name="profedit_selected_profile">Perfil selecionado: %s</string>
+    <string name="global_new">Novo</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplicativo/Jogo fechou com código %d</string>
     <string name="mcn_exit_call">Sair</string>
