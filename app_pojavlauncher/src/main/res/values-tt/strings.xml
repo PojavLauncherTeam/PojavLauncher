@@ -102,6 +102,16 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">Соңгы ярдәмче версия</string>
+    <string name="vp_latest_release">Соңгы версия</string>
+    <string name="mcl_tab_profiles">Профильләр</string>
+    <string name="mcl_profile_editor_title_profile">ПРОФИЛЬЛӘР</string>
+    <string name="mcl_profile_editor_title_version">ВЕРСИЯЛӘР</string>
+    <string name="mcl_profile_editor_edit_text_title">Профиль исеме</string>
+    <string name="mcl_profile_editor_save">сакларга</string>
+    <string name="profedit_selected_version">Сайланган версия: %s</string>
+    <string name="profedit_selected_profile">Сайланган профиль: %s</string>
+    <string name="global_new">Яңа</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Чыгу</string>
     <string name="mcn_exit_confirm">Сез мәҗбүри ябырга телисезме?</string>
