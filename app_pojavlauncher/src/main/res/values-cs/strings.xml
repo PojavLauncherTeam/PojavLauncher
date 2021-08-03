@@ -206,6 +206,7 @@
     <string name="multirt_config_removeerror_last">Musíte mít nainstalovanou alespoň jednu Java Runtime</string>
     <string name="multirt_nocompartiblert">Nelze najít žádnou kompatibilní Java Runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ vyžaduje základní profil OpenGL 3.2. Bohužel, GL4ES překladač ho v tuto chvíli plně nepodporuje, ale existují nějaké další možnosti, které můžete nainstalovat pro spuštění těchto verzí. Stisknutím tlačítka OK potvrďte instalaci a stisknutím tlačítka Zrušit ukončíte spouštění.</string>
+    <string name="compat_11x_playanyway">I tak hrát</string>
     <string name="pvc_gameDirectory">Složka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
     <string name="pvc_title">Nastavení po verzi</string>
