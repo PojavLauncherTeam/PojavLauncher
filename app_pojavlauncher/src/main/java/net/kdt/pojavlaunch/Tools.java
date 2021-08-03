@@ -22,6 +22,9 @@ import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.*;
 import android.view.*;
 import android.widget.Toast;
