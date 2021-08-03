@@ -203,6 +203,7 @@
     <string name="multirt_config_setdefault_already">Domyślny</string>
     <string name="multirt_config_removeerror_last">Należy mieć zainstalowane co najmniej jedno środowisko wykonawcze Java</string>
     <string name="multirt_nocompartiblert">Nie znaleziono żadnego kompatybilnego środowiska wykonawczego Java</string>
+    <string name="compat_11x_playanyway">Uruchom mimo to</string>
     <string name="pvc_gameDirectory">Katalog gry</string>
     <string name="pvc_jvmArgs">Argumenty JVM</string>
     <string name="pvc_title">Ustawienia dla wersji</string>
