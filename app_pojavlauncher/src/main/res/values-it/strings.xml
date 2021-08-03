@@ -69,7 +69,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Ti permetti di diminuire la risoluzione del gioco. 100% è la risoluzione completa</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
-    <string name="mcl_setting_title_backtorightmouse">Usa come tasto destro del mouse il pulsante indietro</string>
+    <string name="mcl_setting_title_backtorightmouse">Usa il pulsante dietro come mouse destro</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Alcuni dispositivi utilizzano come pulsante indietro il tasto destro del mouse. Se stai usando un mouse esterno, dovresti abilitarlo.</string>
     <string name="mcl_setting_title_flat_button_style">Stile pulsante piatto</string>
     <string name="mcl_setting_subtitle_flat_button_style">Abilita l\'opzione per impostare lo stile piatto dei pulsanti di controllo.</string>
@@ -207,6 +207,7 @@
     <string name="multirt_nocompartiblert">Non è stata trovata una versione compatibile di Runtime Java</string>
     <string name="compat_117_message">Minecraft 21w10a+ necessità del profilo core OpenGL 3.2. Purtroppo, il wrapper GL4ES non è completamente supportato al momento, ma ci sono altre risorse aggiuntive installabili per usare quelle versioni.
 Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
+    <string name="compat_11x_playanyway">Gioca comunque</string>
     <string name="pvc_gameDirectory">Cartella gioco</string>
     <string name="pvc_jvmArgs">Parametri JVM</string>
     <string name="pvc_title">Impostazioni per-versione</string>
