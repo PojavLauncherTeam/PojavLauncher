@@ -207,6 +207,7 @@
     <string name="multirt_config_removeerror_last">Você precisa ter pelo menos um Java Runtime instalado</string>
     <string name="multirt_nocompartiblert">Não foi possível achar qualquer Java Runtime compatível</string>
     <string name="compat_117_message">Minecraft 21w10a+ necessita do OpenGL 3.2 para funcionar. Infelizmente o GL4ES não suporta ele completamente no momento, porém possui alguns recursos adicionais que você pode instalar para executar essas versões. Pressione OK para confirmar a instalação, e Cancelar para abortar a inicialização.</string>
+    <string name="compat_11x_playanyway">Jogar mesmo assim</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="pvc_title">Configurações por versão</string>
