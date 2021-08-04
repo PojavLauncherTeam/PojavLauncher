@@ -29,6 +29,7 @@ import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
+    public TouchCharInput touchCharInput;
 
     volatile public static boolean isInputStackCall;
 
@@ -121,8 +122,10 @@ public class BaseMainActivity extends LoggableActivity {
         setContentView(resId);
 
         try {
+
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            touchCharInput = findViewById(R.id.editTextTextPersonName2);
 
             logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
             logFile.delete();
@@ -623,8 +626,29 @@ public class BaseMainActivity extends LoggableActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        /*
+        Toast.makeText(this, event.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, event.getUnicodeChar() + "",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_LONG).show();
+
+         */
+
+
         //Filtering useless events
-        if(event.getRepeatCount() != 0 || event.getAction() == KeyEvent.ACTION_MULTIPLE || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN || (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
+        if(event.getRepeatCount() != 0
+                || event.getAction() == KeyEvent.ACTION_MULTIPLE
+                || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN
+                || (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
+        Toast.makeText(this, "FIRST VERIF PASSED", Toast.LENGTH_LONG).show();
+
+        //Sometimes, key events comes from SOME keys of the software keyboard
+        //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
+        if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
+            touchCharInput.dispatchKeyEvent(event);
+            return true;
+        }
+        Toast.makeText(this, "SECOND VERIF PASSED", Toast.LENGTH_LONG).show();
+
 
         //Sometimes, key events may come from the mouse
         if(event.getDevice() != null && (event.getDevice().getSources() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE){
