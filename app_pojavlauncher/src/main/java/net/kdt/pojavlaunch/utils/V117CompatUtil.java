@@ -82,7 +82,7 @@ public class V117CompatUtil {
         if (param == null) {
             Log.i("V117CompatDebug","null, defaulting to vanilla");
             List<String> arr = new ArrayList<>();
-            arr.add("vanilla");
+            arr.add("\"vanilla\"");
             return arr;
         }
         Log.i("V117CompatDebug",param);
