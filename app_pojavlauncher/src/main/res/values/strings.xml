@@ -178,7 +178,7 @@
     <string name="customctrl_stroke_width">Stroke width</string>
     <string name="customctrl_stroke_color">Stroke color</string>
     
-    <string name="customctrl_dynamicpos">Dynamic position</string>
+    <string name="customctrl_dynamicpos">Manual Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y</string>
 
