@@ -117,6 +117,15 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">Nu\'est Snapshot</string>
+    <string name="vp_latest_release">Nu\'est Relis</string>
+    <string name="mcl_tab_profiles">Profilez</string>
+    <string name="mcl_profile_editor_title_profile">PROFILEZ</string>
+    <string name="mcl_profile_editor_title_version">VERSHUNZ</string>
+    <string name="mcl_profile_editor_edit_text_title">Profile neim</string>
+    <string name="mcl_profile_editor_save">seiv</string>
+    <string name="profedit_selected_version">Chozen vershun: %s</string>
+    <string name="profedit_selected_profile">Chozen profile: %s</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game Escapd witf code %d</string>
     <string name="mcn_exit_call">Exit</string>
