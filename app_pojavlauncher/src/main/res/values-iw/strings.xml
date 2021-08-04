@@ -142,15 +142,24 @@
     <string name="customctrl_size">גודל</string>
     <string name="customctrl_size_width">רוחב</string>
     <string name="customctrl_size_height">גובה</string>
+    <string name="customctrl_mapping">מיפוי</string>
+    <string name="customctrl_orientation">כיוון</string>
+    <string name="customctrl_background_color">צבע הרקע</string>
+    <string name="customctrl_corner_radius">רדיוס פינה</string>
+    <string name="customctrl_stroke_width">עובי קו המתאר</string>
+    <string name="customctrl_stroke_color">צבע קו המתאר</string>
     <string name="customctrl_dynamicpos">מיקום דינמי</string>
     <string name="customctrl_dynamicpos_x">X דינמי</string>
     <string name="customctrl_dynamicpos_y">Y דינמי</string>
     <string name="customctrl_transparency_bg">שקיפות רקע</string>
+    <string name="customctrl_button_opacity">שקיפות הכפתור</string>
     <string name="customctrl_keycombine">צירוף מקשים</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">הוסף כפתור</string>
+    <string name="customctrl_addbutton_drawer">הוסף צייר של כפתור</string>
+    <string name="customctrl_addsubbutton">הוסף תת-כפתור</string>
     <string name="customctrl_selectdefault">בחר קובץ שליטה כברירת מחדל</string>
     <string name="main_options">אפשרויות</string>
     <string name="main_play">התחל לשחק!</string>
@@ -174,6 +183,7 @@
     <string name="mcl_setting_title_mousespeed">מהירות העכבר</string>
     <string name="mcl_setting_subtitle_mousespeed">משנה את המהירות של העכבר הווירטואלי</string>
     <string name="customctrl_passthru">עכבר עובר דרך</string>
+    <string name="customctrl_swipeable">ניתן להחלקה</string>
     <string name="customctrl_rounded">מעוגל</string>
     <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM שהוקצתה (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את ההקצאה במידה והמשחק קורס.</string>
     <string name="mcl_memory_allocation">הקצאת זיכרון</string>
@@ -189,4 +199,10 @@
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
     <string name="multirt_config_removeerror_last">נדרש שיהיה לך לפחות Java Runtime אחת מותקנת</string>
+    <string name="multirt_nocompartiblert">לא נמצאה Java Runtime תואמת</string>
+    <string name="compat_117_message">מיינקראפט 21w10a+ דורש את פרופיל הליבה שלOpenGL 3.2. למרבה הצער, המעטפת GL4ES אינה תומכת בו במלואה כרגע, אך ישנם כמה משאבים נוספים שתוכל להתקין להפעלת גרסאות אלה. לחץ על אישור כדי לאשר את ההתקנה ולחץ על ביטול כדי לבטל את ההפעלה.</string>
+    <string name="compat_11x_playanyway">הפעל בכל זאת</string>
+    <string name="pvc_gameDirectory">תיקיית המשחק</string>
+    <string name="pvc_jvmArgs">פרמטרים של JVM</string>
+    <string name="pvc_title">הגדרות לפי גירסה</string>
 </resources>
