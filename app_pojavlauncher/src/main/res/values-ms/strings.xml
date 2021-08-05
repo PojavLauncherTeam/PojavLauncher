@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Kekalkan saya dilog masuk</string>
     <string name="login_online_login_label">Log masuk</string>
     <string name="login_offline_label">Log masuk sebagai akaun luar talian</string>
-    <string name="login_error_short_username">Nama pengguna mesti mempunyai sekurang-kurangnya 3 aksara</string>
     <string name="login_error_exist_username">Nama pengguna ini sudah diguna</string>
     <string name="login_error_offline_password">Akaun luar talian tidak boleh dimasukkan kata laluan!</string>
     <string name="login_microsoft">Log masuk Microsoft</string>
