@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Zůstat přihlášen</string>
     <string name="login_online_login_label">Přihlásit se</string>
     <string name="login_offline_label">Přihlásit se za offline účet</string>
-    <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
     <string name="login_error_offline_password">Offline účet nemůže obsahovat heslo!</string>
     <string name="login_microsoft">Microsoft přihlášení</string>
