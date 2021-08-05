@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
     <string name="login_online_login_label">Đăng nhập</string>
     <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
-    <string name="login_error_short_username">Tên người dùng phải có ít nhất 3 kí tự</string>
     <string name="login_error_exist_username">Tên người dùng này đã tồn tại</string>
     <string name="login_error_offline_password">Không thể đặt mật khẩu cho tài khoản ngoại tuyến!</string>
     <string name="login_microsoft">Đăng nhập Microsoft</string>
