@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Rester connecté</string>
     <string name="login_online_login_label">Se connecter</string>
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
-    <string name="login_error_short_username">Le nom d\'utilisateur doit contenir au moins 3 caractères</string>
     <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_microsoft">Connexion Microsoft</string>
     <string name="login_select_account">Choisir un compte</string>
