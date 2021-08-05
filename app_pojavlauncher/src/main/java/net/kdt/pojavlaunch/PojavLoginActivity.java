@@ -567,8 +567,8 @@ public class PojavLoginActivity extends BaseActivity
         String text = edit2.getText().toString();
         if (text.isEmpty()) {
             edit2.setError(getString(R.string.global_error_field_empty));
-        } else if (text.length() <= 2) {
-            edit2.setError(getString(R.string.login_error_short_username));
+        } else if (text.length() < 3 || text.length() > 16 || !text.matches("\\w+")) {
+            edit2.setError(getString(R.string.login_error_invalid_username));
         } else if (new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()) {
             edit2.setError(getString(R.string.login_error_exist_username));
         } else if (!edit3.getText().toString().isEmpty()) {
