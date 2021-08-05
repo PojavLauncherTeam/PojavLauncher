@@ -17,7 +17,7 @@
 
     <string name="login_offline_label">Login as offline account</string>
 
-    <string name="login_error_short_username">Username must be at least 3 characters</string>
+    <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
     <string name="login_error_exist_username">This username already exist</string>
     <string name="login_error_offline_password">Offline account can\'t include password!</string>
 
