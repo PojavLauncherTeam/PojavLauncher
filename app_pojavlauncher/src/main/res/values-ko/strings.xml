@@ -12,7 +12,7 @@
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
-    <string name="login_error_short_username">사용자명은 최소 3자 이상이어야 합니다</string>
+    <string name="login_error_invalid_username">잘못된 사용자 이름입니다. 사용자 이름은 3~16글자여야 하며, 대/소문자 알파벳과 숫자, _로 구성되어야 합니다.</string>
     <string name="login_error_exist_username">이미 존재하는 사용자명입니다</string>
     <string name="login_error_offline_password">오프라인 계정은 비밀번호를 요구하지 않습니다!</string>
     <string name="login_microsoft">Microsoft 로그인</string>
