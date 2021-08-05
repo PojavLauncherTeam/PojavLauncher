@@ -12,7 +12,7 @@
     <string name="login_online_check_keeplogin">השאר אותי מחובר</string>
     <string name="login_online_login_label">התחבר</string>
     <string name="login_offline_label">התחבר כחשבון לא מקוון</string>
-    <string name="login_error_short_username">שם המשתמש חייב להיות לפחות 3 תווים</string>
+    <string name="login_error_invalid_username">שם המשתמש לא תקין. שם המשתמש צריך להיות בטווח של 3-16 תווים, לכלול רק A-Z, a-z, 0-9 וקו תחתון.</string>
     <string name="login_error_exist_username">שם המשתמש כבר קיים</string>
     <string name="login_error_offline_password">חשבונות במצב \"לא מקוון\" לא כוללים סיסמא!</string>
     <string name="login_microsoft">התחברות Microsoft</string>
