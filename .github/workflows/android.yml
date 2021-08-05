@@ -61,6 +61,7 @@ jobs:
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         mv gl4es ..
+        git pull
         git add .
         git commit -am "CI: Update gl4es"
         git push
@@ -90,6 +91,7 @@ jobs:
       run: |
         cp -R vgpu/libs/* app_pojavlauncher/src/main/jniLibs/
         mv vgpu ..
+        git pull
         git add .
         git commit -am "CI: Update vgpu"
         git push
