@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Manter a sessão iniciada</string>
     <string name="login_online_login_label">Iniciar sessão</string>
     <string name="login_offline_label">Iniciar sessão com conta off-line</string>
-    <string name="login_error_short_username">O nome tem de ter pelo menos 3 caracteres</string>
     <string name="login_error_exist_username">Esse nome já existe</string>
     <string name="login_select_account">Seleciona a conta</string>
     <!-- Hint -->
