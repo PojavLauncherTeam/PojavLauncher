@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Зберегти мене авторизованим</string>
     <string name="login_online_login_label">Вхід</string>
     <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
-    <string name="login_error_short_username">Ім\'я користувача повинно мати хоча б 3 символи</string>
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
     <string name="login_error_offline_password">Офлайн акаунт не може мати пароль!</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
