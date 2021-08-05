@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">मुझे लोग्ड इन रखें</string>
     <string name="login_online_login_label">लॉगिन</string>
     <string name="login_offline_label">ऑफ़लाइन अकाउंट के रूप में लॉगिन करें</string>
-    <string name="login_error_short_username">प्रयोगकर्ता नाम कम से कम ३ अक्षर का होना चाहिए।</string>
     <string name="login_error_exist_username">यह उपयोगकर्तानाम/username पहले से मौजूद है।</string>
     <string name="login_select_account">एकाउंट का चयन करें </string>
     <!-- Hint -->
