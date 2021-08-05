@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Oturumu Açık Tut</string>
     <string name="login_online_login_label">Giriş yap</string>
     <string name="login_offline_label">Çevrimdışı hesapla girin</string>
-    <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmalıdır</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
     <string name="login_error_offline_password">Çevrimdışı hesaplar şifre içeremez!</string>
     <string name="login_microsoft">Microsoft giriş</string>
