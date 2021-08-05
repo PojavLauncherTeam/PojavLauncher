@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Panatilihin akong naka-log in</string>
     <string name="login_online_login_label">Mag log in</string>
     <string name="login_offline_label">Mag-login bilang offline na account</string>
-    <string name="login_error_short_username">Ang username ay dapat na hindi bababa sa 3 mga character</string>
     <string name="login_error_exist_username">Mayroon nang username na ito</string>
     <string name="login_error_offline_password">Hinde pwedeng magkaroon ng password ang isang Offline Account!</string>
     <string name="login_microsoft">Log in sa Microsoft</string>
