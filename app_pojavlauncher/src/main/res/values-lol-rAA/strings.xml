@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">kep i kog inside</string>
     <string name="login_online_login_label">logout</string>
     <string name="login_offline_label">Login as offloin akownt</string>
-    <string name="login_error_short_username">Usernoim must be at liest 3 characters</string>
     <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
     <string name="login_error_offline_password">Offline akownt can\'t include pasword!</string>
     <string name="login_microsoft">Microsoft entrunz</string>
