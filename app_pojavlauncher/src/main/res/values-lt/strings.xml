@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Likti prisijungus</string>
     <string name="login_online_login_label">Prisijungti</string>
     <string name="login_offline_label">Prisijungti naudojant be interneto paskyrą</string>
-    <string name="login_error_short_username">Slapyvardis turi būti bent iš 3 simbolių</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
     <string name="login_error_offline_password">Netikros pasakytos negali turėti slaptažodžio</string>
     <string name="login_microsoft">Microsoft prisijungimas</string>
