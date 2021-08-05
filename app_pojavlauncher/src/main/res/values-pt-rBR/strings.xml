@@ -12,7 +12,7 @@
     <string name="login_online_check_keeplogin">Manter conectado</string>
     <string name="login_online_login_label">Entrar</string>
     <string name="login_offline_label">Entrar com conta off-line</string>
-    <string name="login_error_short_username">Nome de usuário deve ter no mínimo 3 caracteres</string>
+    <string name="login_error_invalid_username">Nome de usuário inválido. O nome de usuário deve conter 3-16 caracteres, contendo apenas A-Z, a-z, 0-9 e o sublinhado.</string>
     <string name="login_error_exist_username">Esse usuário já existe</string>
     <string name="login_error_offline_password">Conta off-line não pode conter senha!</string>
     <string name="login_microsoft">Entrar com uma conta Microsoft</string>
