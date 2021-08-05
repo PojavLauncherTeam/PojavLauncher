@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Хәтердә калдырырга</string>
     <string name="login_online_login_label">Керергә</string>
     <string name="login_offline_label">Офлайн аккаунт белән керу</string>
-    <string name="login_error_short_username">Кулланучы исеме 3 хәрефтән аз булмаска тиеш</string>
     <string name="login_error_exist_username">Бу кулланучы исеме бар инде</string>
     <string name="login_microsoft">Microsoft аша керергә</string>
     <string name="login_select_account">Аккаунтлар</string>
