@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Be keepin\' ye on board fer next time</string>
     <string name="login_online_login_label">Get Aboard</string>
     <string name="login_offline_label">Hop aboard as out of th\' ship</string>
-    <string name="login_error_short_username">Passport must be like \'t least 3 chars</string>
     <string name="login_error_exist_username">This passport already \'ere</string>
     <string name="login_microsoft">Hop aboard with Microsoft</string>
     <string name="login_select_account">Be usin\' buccaneer</string>
