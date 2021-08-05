@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
     <string name="login_online_login_label">Пријава</string>
     <string name="login_offline_label">Пријавите се као офлајн налог</string>
-    <string name="login_error_short_username">Корисничко име мора имати најмање 3 карактера</string>
     <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
     <string name="login_error_offline_password">Офлајн налог ме може имати лозинку!</string>
     <string name="login_microsoft">Microsoft Пријава</string>
