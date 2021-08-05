@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Custodi me apud log</string>
     <string name="login_online_login_label">Login</string>
     <string name="login_offline_label">Propter quod login offline</string>
-    <string name="login_error_short_username">Esse certe necesse est nomen tuum III characteribus</string>
     <string name="login_error_exist_username">Hoc nomen iam exi</string>
     <string name="login_select_account">Ob selectos</string>
     <!-- Hint -->
