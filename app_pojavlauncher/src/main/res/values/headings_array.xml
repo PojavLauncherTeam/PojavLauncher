@@ -18,6 +18,6 @@
         <item>opengles2</item> <!-- gl4es 1.1.4 with OpenGL ES 2 -->
         <item>opengles2_5</item>  <!-- gl4es 1.1.5 with OpenGL ES 2 -->
         <item>vulkan_zink</item>
-        <item>opengles3_vgpu_1.X_beta</item> <!-- vgpu 1.X beta with OpenGL ES 3 -->
+        <item>opengles3_vgpu_1.3.0_beta</item> <!-- vgpu 1.3.0 beta with OpenGL ES 3 -->
     </string-array>
 </resources>
