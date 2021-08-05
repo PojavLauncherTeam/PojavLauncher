@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
     <string name="login_offline_label">Offline-тіркелгімен кіру</string>
-    <string name="login_error_short_username">Қолданушы аты кем дегенде 3 таңбадан тұруы керек</string>
     <string name="login_error_exist_username">Бұл ат бос емес</string>
     <string name="login_microsoft">Microsoft-пен кіру</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
