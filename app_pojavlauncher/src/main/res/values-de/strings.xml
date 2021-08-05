@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
     <string name="login_offline_label">Als Offline-Konto anmelden</string>
-    <string name="login_error_short_username">Der Nutzername muss mindestens 3 Zeichen lang sein</string>
     <string name="login_error_exist_username">Dieser Benutzername ist bereits vergeben</string>
     <string name="login_error_offline_password">Offline Konten können kein Kennwort haben!</string>
     <string name="login_microsoft">Microsoft-Login</string>
