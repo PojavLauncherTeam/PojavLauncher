@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Hold meg pålogget</string>
     <string name="login_online_login_label">Logg inn</string>
     <string name="login_offline_label">Logg inn som frakoblet konto</string>
-    <string name="login_error_short_username">Usernavnet må være minst 3 tegn</string>
     <string name="login_error_exist_username">Dette brukernavn er allerede i bruk</string>
     <string name="login_error_offline_password">Frakoblet konto kan ikke inkludere passord!</string>
     <string name="login_microsoft">Logg inn med Microsoft</string>
