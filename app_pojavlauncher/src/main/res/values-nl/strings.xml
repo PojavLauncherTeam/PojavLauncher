@@ -12,7 +12,6 @@
     <string name="login_online_check_keeplogin">Ingelogd blijven</string>
     <string name="login_online_login_label">Aanmelden</string>
     <string name="login_offline_label">Inloggen als offline account</string>
-    <string name="login_error_short_username">Gebruikersnaam moet uit minstens 3 tekens bestaan</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
     <string name="login_microsoft">Microsoft-login</string>
     <string name="login_select_account">Selecteer account</string>
