@@ -52,7 +52,7 @@
     <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
-    <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümânlarla)</string>
+    <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümanlarla)</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
     <string name="mcl_option_about">Launcher hakkında</string>
@@ -117,6 +117,16 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">En yeni Test Sürümü</string>
+    <string name="vp_latest_release">En yeni Sürüm</string>
+    <string name="mcl_tab_profiles">Profiller</string>
+    <string name="mcl_profile_editor_title_profile">PROFİLLER</string>
+    <string name="mcl_profile_editor_title_version">SÜRÜMLER</string>
+    <string name="mcl_profile_editor_edit_text_title">Profil adı</string>
+    <string name="mcl_profile_editor_save">kaydet</string>
+    <string name="profedit_selected_version">Seçili sürüm: %s</string>
+    <string name="profedit_selected_profile">Seçili profil: %s</string>
+    <string name="global_new">Yeni</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
     <string name="mcn_exit_call">Çıkış</string>
