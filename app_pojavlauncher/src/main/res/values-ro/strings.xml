@@ -12,7 +12,9 @@
     <string name="login_online_check_keeplogin">Ține-mă logat</string>
     <string name="login_online_login_label">Autentificate/Loghează-te</string>
     <string name="login_offline_label">Autentificate ca cont offline</string>
+    <string name="login_error_invalid_username">Nume de utilizator invalid. Numele de utilizator trebuie să fie în intervalul 3-16 caractere, trebuie să conțină doar A-Z, a-z, 0-9 și underscore.</string>
     <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
+    <string name="login_error_offline_password">Contul offline nu poate include parolă!</string>
     <string name="login_microsoft">Conectare Microsoft</string>
     <string name="login_select_account">Selectează contul</string>
     <string name="login_title_no_saved_account">Nu s-a găsit nici un cont!</string>
@@ -80,6 +82,10 @@
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
     <string name="mcl_setting_category_renderer">Motor de redare</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): export OpenGL 2,1 + parțial 3.2 (nu este încă 1.17)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
     <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
@@ -104,6 +110,7 @@
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nu se poate instala!</string>
     <string name="mcn_check_fail_incompatiblearch">Arhitectura %1$s nu este compatibilă cu Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer nu este suportat pe acest dispozitiv!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatură</string>
@@ -122,6 +129,8 @@
     <string name="control_viewout">Ieșire jurnal</string>
     <string name="control_adebug">Depanare intrare</string>
     <string name="control_customkey">Trimite personalizat cod cheie</string>
+    <string name="control_scaleup">Mărire</string>
+    <string name="control_scaledown">Reducere</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -133,15 +142,24 @@
     <string name="customctrl_size">Dimensiune</string>
     <string name="customctrl_size_width">Lățime</string>
     <string name="customctrl_size_height">Înălţime</string>
+    <string name="customctrl_mapping">Asocieri</string>
+    <string name="customctrl_orientation">Orientare</string>
+    <string name="customctrl_background_color">Culoarea de fundal</string>
+    <string name="customctrl_corner_radius">Raza de colț</string>
+    <string name="customctrl_stroke_width">Lățimea conturului</string>
+    <string name="customctrl_stroke_color">Culoarea conturului</string>
     <string name="customctrl_dynamicpos">Poziție dinamică</string>
     <string name="customctrl_dynamicpos_x">Dinamica X</string>
     <string name="customctrl_dynamicpos_y">Dinamica Y</string>
     <string name="customctrl_transparency_bg">Transparenţa fundalului</string>
+    <string name="customctrl_button_opacity">Opacitate Buton</string>
     <string name="customctrl_keycombine">Combinația de butoane</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Adaugă buton</string>
+    <string name="customctrl_addbutton_drawer">Adauga buton sertar</string>
+    <string name="customctrl_addsubbutton">Adaugă sub-buton</string>
     <string name="customctrl_selectdefault">Selectează normalul Control json</string>
     <string name="main_options">Opțiuni</string>
     <string name="main_play">Joacă</string>
@@ -165,8 +183,25 @@
     <string name="mcl_setting_title_mousespeed">Viteza mouse-ului</string>
     <string name="mcl_setting_subtitle_mousespeed">Schimbă viteza mouse-ului de software</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_swipeable">Glisabil</string>
     <string name="customctrl_rounded">Rotund</string>
     <string name="memory_warning_msg">Cantitatea curentă de RAM liber (%d) este mai mică decât cantitatea alocată de RAM (%d), care ar putea duce la oprire. Schimbă cantitatea alocată dacă jocul se oprește.</string>
     <string name="mcl_memory_allocation">Memorie alocată</string>
     <string name="mcl_memory_allocation_subtitle">Controlează cât de multă memorie este dată la Minecraft</string>
+    <string name="multirt_runtime_corrupt">Java Runtime Corupt</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">Adăugare nouă</string>
+    <string name="multirt_config_add_subtitle">Importă noul Java VM</string>
+    <string name="multirt_title">Manager Runtime</string>
+    <string name="multirt_subtitle">Gestionează module Java VMs instalate</string>
+    <string name="multirt_progress_caching">Caching...</string>
+    <string name="multirt_config_setdefault">Setaţi ca prestabilit</string>
+    <string name="multirt_config_setdefault_already">Prestabilit</string>
+    <string name="multirt_config_removeerror_last">Trebuie să aveți cel puțin un Java Runtime instalat</string>
+    <string name="multirt_nocompartiblert">Nu se poate găsi Java Runtime compatibil</string>
+    <string name="compat_117_message">Minecraft 21w10a+ necesită un profil de bază OpenGL 3.2. Din păcate, GL4ES nu îl acceptă pe deplin în acest moment, dar există unele resurse suplimentare pe care le puteți instala pentru a rula aceste versiuni. Apăsaţi OK pentru a confirma instalarea, apăsaţi Anulare pentru a abandona lansarea.</string>
+    <string name="compat_11x_playanyway">Jucați oricum</string>
+    <string name="pvc_gameDirectory">Directorul jocului</string>
+    <string name="pvc_jvmArgs">Argumente JVM</string>
+    <string name="pvc_title">Setări per-versiune</string>
 </resources>
