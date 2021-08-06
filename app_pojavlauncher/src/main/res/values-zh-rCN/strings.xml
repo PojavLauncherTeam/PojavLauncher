@@ -126,6 +126,7 @@
     <string name="mcl_profile_editor_save">保存</string>
     <string name="profedit_selected_version">选中的版本：%s</string>
     <string name="profedit_selected_profile">选中的配置文件：%s</string>
+    <string name="global_new">新建</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用/游戏以 %d 代码退出</string>
     <string name="mcn_exit_call">退出</string>
