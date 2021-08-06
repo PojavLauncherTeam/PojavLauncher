@@ -1,20 +1,14 @@
 package net.kdt.pojavlaunch.customcontrols;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.inputmethod.EditorInfoCompat;
-import androidx.core.view.inputmethod.InputConnectionCompat;
-import androidx.core.view.inputmethod.InputContentInfoCompat;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
@@ -38,13 +32,13 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         setup();
     }
 
-    private boolean isClearingText = false;
+    private boolean isDoingInternalChanges = false;
 
     TextWatcher mTextWatcher = new TextWatcher() {
         //TODO Engineer a more performant system
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            if(isClearingText) return;
+            if(isDoingInternalChanges) return;
 
             for(int j=0; j<charSequence.length(); ++j){
                 CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
@@ -53,7 +47,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
         @Override
         public void onTextChanged(CharSequence charSequence, int start, int lengthBefore, int lengthAfter) {
-            if(isClearingText) return;
+            if(isDoingInternalChanges) return;
 
             for (int i=0; i<charSequence.length(); ++i){
                 CallbackBridge.sendChar(charSequence.charAt(i));
@@ -63,10 +57,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if(isClearingText){
-                isClearingText = false;
-                editable.clear();
-            }
+            isDoingInternalChanges = false;
         }
     };
 
@@ -76,8 +67,8 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * It does not affect the in-game input
      */
     public void clear(){
-        isClearingText = true;
-        setText(" ");
+        isDoingInternalChanges = true;
+        setText("");
     }
 
     /**
@@ -88,6 +79,30 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ENTER);
         clear();
     }
+
+    /**
+     * Regain ability to exist, take focus and have some text being input
+     */
+    public void enable(){
+        setEnabled(true);
+        setFocusable(true);
+        setVisibility(VISIBLE);
+        requestFocus();
+
+    }
+
+    /**
+     * Lose ability to exist, take focus and have some text being input
+     */
+    public void disable(){
+
+        setVisibility(GONE);
+        clearFocus();
+        //setFocusable(false);
+        setEnabled(false);
+    }
+
+
 
     /**
      * This function deals with anything that has to be executed when the constructor is called
@@ -101,6 +116,10 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
             send();
             return false;
         });
+        isDoingInternalChanges = true;
+        setText("");
+
+        disable();
     }
 
 }
