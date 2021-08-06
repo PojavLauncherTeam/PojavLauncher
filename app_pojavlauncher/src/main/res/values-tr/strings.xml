@@ -52,7 +52,7 @@
     <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
     <string name="mcl_options">Ayarlar</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
-    <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümânlarla)</string>
+    <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümanlarla)</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
     <string name="mcl_option_about">Launcher hakkında</string>
