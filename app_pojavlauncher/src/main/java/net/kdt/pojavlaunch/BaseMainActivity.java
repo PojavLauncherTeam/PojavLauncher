@@ -879,22 +879,23 @@ public class BaseMainActivity extends LoggableActivity {
         // Catch back as Esc keycode at another place
         sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
     }
-    
-    public void hideKeyboard() {
-        try {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-            if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
-                ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this).getCurrentFocus().getWindowToken(), 0);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void showKeyboard() {
-        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-        minecraftGLView.requestFocusFromTouch();
-        minecraftGLView.requestFocus();
+
+    /**
+     * Toggle on and off the soft keyboard, depending of the state
+     * The condition is prone to errors if the keyboard is being hidden without the consent
+     * of the current TouchCharInput
+     */
+    public void switchKeyboardState(){
+        if(touchCharInput.hasFocus()){
+            touchCharInput.clear();
+            touchCharInput.disable();
+
+        }else{
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            touchCharInput.enable();
+            touchCharInput.postDelayed(() -> imm.showSoftInput(touchCharInput, InputMethodManager.SHOW_IMPLICIT), 200);
+        }
     }
 
     protected void setRightOverride(boolean val) {
