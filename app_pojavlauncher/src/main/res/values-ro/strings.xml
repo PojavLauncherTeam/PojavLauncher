@@ -81,6 +81,8 @@
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
     <string name="mcl_setting_category_renderer">Motor de redare</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
     <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
@@ -115,6 +117,16 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">Ultimul snapshot</string>
+    <string name="vp_latest_release">Ultima Versiune Stabilă</string>
+    <string name="mcl_tab_profiles">Profiluri</string>
+    <string name="mcl_profile_editor_title_profile">PROFILURI</string>
+    <string name="mcl_profile_editor_title_version">VERSIUNI</string>
+    <string name="mcl_profile_editor_edit_text_title">Nume profil</string>
+    <string name="mcl_profile_editor_save">salvează</string>
+    <string name="profedit_selected_version">Versiunea selectată: %s</string>
+    <string name="profedit_selected_profile">Profilul selectat: %s</string>
+    <string name="global_new">Nou</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplicația/Jocul s-a oprit cu codul %d</string>
     <string name="mcn_exit_call">Ieșire</string>
@@ -139,6 +151,8 @@
     <string name="control_viewout">Ieșire jurnal</string>
     <string name="control_adebug">Depanare intrare</string>
     <string name="control_customkey">Trimite personalizat cod cheie</string>
+    <string name="control_scaleup">Mărire</string>
+    <string name="control_scaledown">Reducere</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
