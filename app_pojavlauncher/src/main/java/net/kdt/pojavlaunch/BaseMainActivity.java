@@ -891,7 +891,9 @@ public class BaseMainActivity extends LoggableActivity {
      * of the current TouchCharInput
      */
     public void switchKeyboardState(){
-        if(touchCharInput.hasFocus()){
+        //If an hard keyboard is present, never trigger the soft one
+        if(touchCharInput.hasFocus()
+        || getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY){
             touchCharInput.clear();
             touchCharInput.disable();
 
