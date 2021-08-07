@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
     <string name="login_online_login_label">Đăng nhập</string>
     <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
+    <string name="login_error_invalid_username">Tên người dùng không hợp lệ. Nó phải có từ 3-16 kí tự, và chỉ bao gồm các kí tự A-Z, a-z, 0-9 và dấu gạch dưới.</string>
     <string name="login_error_exist_username">Tên người dùng này đã tồn tại</string>
     <string name="login_error_offline_password">Không thể đặt mật khẩu cho tài khoản ngoại tuyến!</string>
     <string name="login_microsoft">Đăng nhập Microsoft</string>
@@ -205,6 +206,7 @@
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
     <string name="multirt_nocompartiblert">Không thể tìm thấy bất kì phiên bản Java Runtime nào tương thích với phiên bản Minecraft này</string>
     <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù GL4ES chưa hỗ trợ nó ở thời điểm này, tuy nhiên bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
+    <string name="compat_11x_playanyway">Vẫn chơi</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
     <string name="pvc_jvmArgs">Các chỉ số JVM</string>
     <string name="pvc_title">Cài đặt theo từng phiên bản</string>
