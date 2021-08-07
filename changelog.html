@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>PojavLauncher</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style type="text/css">
-	    body {
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {margin:0;}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.main {
+  padding: 16px;
+  margin-top: 30px;
+  height: 1500px; /* Used in this example to enable scrolling */
+}
+
+body {
 		  margin: 0;
 		  padding: 0;
 		  background-color: #fdfdff;
@@ -35,30 +60,19 @@
 			width: auto;
 		  }
 	    }
-    </style>
-  </head>
-  <body>
-  
-  <!-- Navbar -->
-  <div class="w3-top">
-    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-      <a href="https://pojavlauncherteam.github.io/updates/local.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Recent Update</a>
-      <a href="https://pojavlauncherteam.github.io/" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Website</a>
-      <a href="https://drive.google.com/drive/u/0/mobile/folders/1Sk_GXoXmLwruPTFgVUUeYkPQ5voWHmkv?sort=13&direction=a" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Archives</a>
-      <a href="https://www.minecraft.net/en-us" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Minecraft Website</a>
-    </div>
-  </div>
-  
-  <!-- Overlay effect when opening sidebar on small screens -->
-  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-  
-  <!--
-	<h3 style="padding-left: 20px;">PojavLauncher</h3>
--->
-	<div class="changelog">
-          <b>Congratulations! You found this well-hidden Easter Egg!<b>
-          <b>Your reward? Nothing.<b>
-	  <h2>PojavLauncher</h2>
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="https://pojavlauncherteam.github.io/updates/local.html">Recent Update</a>
+  <a href="https://pojavlauncherteam.github.io/">Website</a>
+  <a href="https://www.minecraft.net/en-us/store/minecraft-java-edition/buy">Account Generator</a>
+</div>
+
+<div class="changelog">
+  <h6>Oh No! This is not the way that this should display! Report anything about this <a href="#">here.</a></h6>
+  <h2>PojavLauncher</h2>
 	  <b>• Original: Zhuowei Zhang, Boardwalk app.</b><br>
 	  <b>• Developers:</b><br>
     <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a>, <a href="https://github.com/LegacyGamerHD">LegacyGamerHD</a>.<br>
@@ -175,8 +189,7 @@
 	  <h2>▶ v1.0 ALPHA</h2>
 	  <b>• Initial release. Name as Minecraft Launcher</b><br>
 	  <b>• Only pre-converted 1.9 version is added.</b>
-	</div>
-  </body>
-</html>
+</div>
 
-  
+</body>
+</html>
