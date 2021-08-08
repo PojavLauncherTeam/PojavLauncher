@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
