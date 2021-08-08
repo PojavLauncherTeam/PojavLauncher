@@ -51,12 +51,9 @@
 				android:inputType="text|textNoSuggestions|textImeMultiLine"
 				android:background="@android:color/darker_gray"
 				android:id="@+id/editTextTextPersonName2"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:ems="10"
-				android:layout_marginTop="20px"
-
-				android:text="" />
+				android:layout_width="1dp"
+				android:layout_height="1dp"
+				android:ems="10" />
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 
