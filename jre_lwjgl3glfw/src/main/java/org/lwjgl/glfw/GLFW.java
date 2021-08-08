@@ -1166,12 +1166,12 @@ public class GLFW
     public static void glfwWaitEventsTimeout(double timeout) {
         // Boardwalk: this isn't how you do a frame limiter, but oh well
         // System.out.println("Frame limiter");
-
+    /*
         try {
             Thread.sleep((long)(timeout * 1000));
         } catch (InterruptedException ie) {
         }
-
+    */
         // System.out.println("Out of the frame limiter");
 
     }
