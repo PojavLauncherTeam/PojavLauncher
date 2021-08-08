@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ</string>
     <string name="login_online_login_label">uᴉᵷoꞀ</string>
     <string name="login_offline_label">ʇunoɔɔɐ ǝuᴉꞁɟɟo sɐ uᴉᵷoꞀ</string>
+    <string name="login_error_invalid_username">˙ǝɹoɔsɹǝpun puɐ 6-0 \'z-ɐ \'Z-∀ suıɐʇuoɔ ʎluo plnoɥs \'sɹǝʇɔɐɹɐɥɔ 9⇂-Ɛ ɟo ǝƃuɐɹ uı ǝq ʇsnɯ ǝɯɐuɹǝs∩ ˙ǝɯɐuɹǝsn pılɐʌuI</string>
     <string name="login_error_exist_username">ʇsᴉxǝ ʎpɐǝɹꞁɐ ǝɯɐuɹǝsn sᴉɥ⟘</string>
     <string name="login_error_offline_password">¡pɹoʍssɐd ǝpnꞁɔuᴉ ʇ,uɐɔ ʇunoɔɔɐ ǝuᴉꞁɟɟO</string>
     <string name="login_microsoft">uᴉᵷoꞁ ʇɟosoɹɔᴉW</string>
@@ -196,6 +197,7 @@
     <string name="multirt_config_removeerror_last">pǝʃʃɐʇsuı ǝɯıʇunᴚ ɐʌɐſ ǝuo ʇsɐǝʃ ʇɐ ǝʌɐɥ ʇsnɯ no⅄</string>
     <string name="multirt_nocompartiblert">ǝɯıʇunᴚ ɐʌɐſ ǝʃqıʇɹɐdɯoɔ ʎuɐ puıɟ ʇ,uɐↃ</string>
     <string name="compat_117_message">˙ɥɔunɐʃ ʇɹoqɐ oʇ ʃǝɔuɐↃ ssǝɹd puɐ \'uoıʇɐʃʃɐʇsuı ɯɹıɟuoɔ oʇ ⋊O ssǝɹԀ ˙suoısɹǝʌ ǝsǝɥʇ unɹ oʇ ʃʃɐʇsuı uɐɔ noʎ sǝɔɹnosǝɹ ʃɐuoıʇıppɐ ǝɯos ǝɹɐ ǝɹǝɥʇ ʇnq \'ʇuǝɯoɯ ǝɥʇ ʇɐ ʇı ʇɹoddns ʎʃʃnɟ ʇ,usǝop ɹǝddɐɹʍ SƎᔭ⅂⅁ \'ʎʃpɐS ˙ǝʃıɟoɹd ǝɹoɔ 2˙Ɛ ⅂⅁uǝdO ǝɥʇ sǝɹınbǝɹ +ɐ01ʍ12 ʇɟɐɹɔǝuıW</string>
+    <string name="compat_11x_playanyway">ʎɐʍʎuɐ ʎɐlԀ</string>
     <string name="pvc_gameDirectory">ʎɹoʇɔǝɹıp ǝɯɐ⅁</string>
     <string name="pvc_jvmArgs">sʇuǝɯnƃɹɐ Wᴧſ</string>
     <string name="pvc_title">sƃuıʇʇǝs uoısɹǝʌ-ɹǝԀ</string>
