@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.customcontrols;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,12 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
 
     private boolean isDoingInternalChanges = false;
+
+    /**
+     * We take the new chars, and send them to the game.
+     * If less chars are present, remove some.
+     * The text is always cleaned up.
+     */
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
@@ -50,6 +57,33 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         clear();
     }
 
+
+    /**
+     * When we change from app to app, the keyboard gets disabled.
+     * So, we disable the object
+     */
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        disable();
+    }
+
+    /**
+     * Intercepts the back key to disable focus
+     * Does not affect the rest of the activity.
+     */
+    @Override
+    public boolean onKeyPreIme(final int keyCode, final KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            disable();
+        }
+        return super.onKeyPreIme(keyCode, event);
+    }
+
+    @Override
+    public void setSelection(int index) {
+        super.setSelection(5);
+    }
 
     /**
      * Clear the EditText from any leftover inputs
@@ -84,6 +118,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * Lose ability to exist, take focus and have some text being input
      */
     public void disable(){
+        clear();
         setVisibility(GONE);
         clearFocus();
         setEnabled(false);
