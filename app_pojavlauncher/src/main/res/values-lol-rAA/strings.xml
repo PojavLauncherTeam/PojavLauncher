@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">kep i kog inside</string>
     <string name="login_online_login_label">logout</string>
     <string name="login_offline_label">Login as offloin akownt</string>
+    <string name="login_error_invalid_username">Invalid catz\' neim. Catz\' neim hav tu be in rein\'g uf 3-16 kerekturs, shud only kontainz A-Z, a-z, 0-9 and undrskore.</string>
     <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
     <string name="login_error_offline_password">Offline akownt can\'t include pasword!</string>
     <string name="login_microsoft">Microsoft entrunz</string>
@@ -196,6 +197,7 @@
     <string name="multirt_config_removeerror_last">Catz cant’ si any Coffee Cup’s Runtime in kleksion</string>
     <string name="multirt_nocompartiblert">Catz cant’ si ani drunkabl’ Coffee Cup’s Runtime</string>
     <string name="compat_117_message">Minecraft 21w10a ur newer needz OpenGL 3.2 Core Profile (ur newer). GL4ES wrapper doeznt’ furly surport it at momentz, but their iz sume additivz resourcez catz can inztall tu run the’z version. Scratch OK tu confurm inztallursion, ur Cancel to abort l’unch.</string>
+    <string name="compat_11x_playanyway">Cat stil\' won tu play</string>
     <string name="pvc_gameDirectory">Gamez’ direktory</string>
     <string name="pvc_jvmArgs">CCz’UM argumentz</string>
     <string name="pvc_title">Itch-version settinz’</string>
