@@ -126,6 +126,7 @@
     <string name="mcl_profile_editor_save">seiv</string>
     <string name="profedit_selected_version">Chozen vershun: %s</string>
     <string name="profedit_selected_profile">Chozen profile: %s</string>
+    <string name="global_new">Nu\'</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game Escapd witf code %d</string>
     <string name="mcn_exit_call">Exit</string>
