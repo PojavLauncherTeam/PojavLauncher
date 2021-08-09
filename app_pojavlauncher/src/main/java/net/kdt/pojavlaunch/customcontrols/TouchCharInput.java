@@ -132,6 +132,8 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     private void setup(){
         setOnEditorActionListener((textView, i, keyEvent) -> {
             sendEnter();
+            clear();
+            disable();
             return false;
         });
         clear();

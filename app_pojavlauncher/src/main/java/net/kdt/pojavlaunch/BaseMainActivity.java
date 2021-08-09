@@ -631,24 +631,23 @@ public class BaseMainActivity extends LoggableActivity {
         Toast.makeText(this, event.toString(),Toast.LENGTH_LONG).show();
         Toast.makeText(this, event.getUnicodeChar() + "",Toast.LENGTH_LONG).show();
         Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_LONG).show();
-
          */
-
 
         //Filtering useless events
         if(event.getRepeatCount() != 0
                 || event.getAction() == KeyEvent.ACTION_MULTIPLE
                 || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN
                 || (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
-        Toast.makeText(this, "FIRST VERIF PASSED", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "FIRST VERIF PASSED", Toast.LENGTH_LONG).show();
 
         //Sometimes, key events comes from SOME keys of the software keyboard
         //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
         if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
+            if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
             touchCharInput.dispatchKeyEvent(event);
             return true;
         }
-        Toast.makeText(this, "SECOND VERIF PASSED", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "SECOND VERIF PASSED", Toast.LENGTH_LONG).show();
 
 
         //Sometimes, key events may come from the mouse
