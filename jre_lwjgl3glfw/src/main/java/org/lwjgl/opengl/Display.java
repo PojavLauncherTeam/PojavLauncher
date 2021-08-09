@@ -1044,7 +1044,8 @@ public class Display {
      */
     public static void sync(int fps) {
         if (vsyncEnabled)
-            Sync.sync(fps);
+            Sync.sync(60);
+        else Sync.sync(fps);
     }
 
     public static Drawable getDrawable() {
