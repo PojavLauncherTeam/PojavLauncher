@@ -50,9 +50,9 @@ public class LayoutConverter {
                 n_button.dynamicX = ratio + " * ${screen_width}";
             }
             if((n_button.dynamicY == null || n_button.dynamicY.isEmpty())&&button.has("y")) {
-                double buttonC = button.getDouble("x");
-                double ratio = buttonC/CallbackBridge.physicalWidth;
-                n_button.dynamicX = ratio + " * ${screen_height}";
+                double buttonC = button.getDouble("y");
+                double ratio = buttonC/CallbackBridge.physicalHeight;
+                n_button.dynamicY = ratio + " * ${screen_height}";
             }
             layout.mControlDataList.add(n_button);
         }
@@ -68,9 +68,9 @@ public class LayoutConverter {
                 n_button.properties.dynamicX = ratio + " * ${screen_width}";
             }
             if((n_button.properties.dynamicY == null || n_button.properties.dynamicY.isEmpty())&&buttonProperties.has("y")) {
-                double buttonC = buttonProperties.getDouble("x");
-                double ratio = buttonC/CallbackBridge.physicalWidth;
-                n_button.properties.dynamicX = ratio + " * ${screen_height}";
+                double buttonC = buttonProperties.getDouble("y");
+                double ratio = buttonC/CallbackBridge.physicalHeight;
+                n_button.properties.dynamicY = ratio + " * ${screen_height}";
             }
             layout.mDrawerDataList.add(n_button);
         }
@@ -96,9 +96,9 @@ public class LayoutConverter {
                 n_button.dynamicX = ratio + " * ${screen_width}";
             }
             if((n_button.dynamicY == null || n_button.dynamicY.isEmpty())&&button.has("y")) {
-                double buttonC = button.getDouble("x");
-                double ratio = buttonC/CallbackBridge.physicalWidth;
-                n_button.dynamicX = ratio + " * ${screen_height}";
+                double buttonC = button.getDouble("y");
+                double ratio = buttonC/CallbackBridge.physicalHeight;
+                n_button.dynamicY = ratio + " * ${screen_height}";
             }
             n_button.name = button.getString("name");
             n_button.opacity = ((float)((button.getInt("transparency")-100)*-1))/100f;
