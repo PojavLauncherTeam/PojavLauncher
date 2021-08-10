@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">Zůstat přihlášen</string>
     <string name="login_online_login_label">Přihlásit se</string>
     <string name="login_offline_label">Přihlásit se za offline účet</string>
+    <string name="login_error_invalid_username">Neplatné uživatelské jméno. Uživatelské jméno musí být v rozsahu 3-16 znaků, obsahovat pouze A-Z, a-z, (bez diakritiky) 0-9 a podtržítko.</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
     <string name="login_error_offline_password">Offline účet nemůže obsahovat heslo!</string>
     <string name="login_microsoft">Microsoft přihlášení</string>
@@ -50,7 +51,7 @@
     <string name="mcl_launch_downloading">Stahování %s</string>
     <string name="mcl_launch_downloading_progress">"Stahuji %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
-    <string name="mcl_options">Nastavení</string>
+    <string name="mcl_options">Možnosti</string>
     <string name="mcl_option_modinstall">Spusťte instalátor módů (Forge, LabyMod, Fabric, atd...)</string>
     <string name="mcl_option_modinstallwitharg">Spustit instalátor módů (s vlastními argumenty)</string>
     <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
@@ -85,7 +86,7 @@
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exportuje OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exportuje OpenGL 2.1 + částečně 3.2 (1.17 zatím není podporováná)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
-    <string name="mcl_setting_category_veroption">Typ verze bude v seznamu verzí</string>
+    <string name="mcl_setting_category_veroption">Jaké typy verzí budou v seznamu verzí</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
@@ -116,7 +117,7 @@
     <string name="control_chat">Chat</string>
     <string name="control_debug">Ladění</string>
     <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_secondary">Sek</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
@@ -127,8 +128,8 @@
     <string name="control_thirdperson">3-tí</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Myš</string>
-    <string name="control_mouseoff">Myš: vypnuta</string>
-    <string name="control_mouseon">Myš: zapnuta </string>
+    <string name="control_mouseoff">Myš: ano</string>
+    <string name="control_mouseon">Myš: ne </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Vynutit zavření</string>
     <string name="control_viewout">Záznam výstupu</string>
@@ -153,7 +154,6 @@
     <string name="customctrl_corner_radius">Poloměr rohu</string>
     <string name="customctrl_stroke_width">Šířka obrysu</string>
     <string name="customctrl_stroke_color">Barva obrysu</string>
-    <string name="customctrl_dynamicpos">Dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
     <string name="customctrl_transparency_bg">Průhlednost pozadí</string>
@@ -166,7 +166,7 @@
     <string name="customctrl_addbutton_drawer">Přidat šuplík tlačítek</string>
     <string name="customctrl_addsubbutton">Přidat podtlačítko</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
-    <string name="main_options">Nastavení</string>
+    <string name="main_options">Možnosti</string>
     <string name="main_play">Hrát</string>
     <string name="main_welcome">Vítejte, %s</string>
     <string name="main_infodev">Údaje (DEV)</string>
