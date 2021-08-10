@@ -154,7 +154,7 @@
     <string name="customctrl_corner_radius">Raio do canto</string>
     <string name="customctrl_stroke_width">Largura do traço</string>
     <string name="customctrl_stroke_color">Cor do traço</string>
-    <string name="customctrl_dynamicpos">Posição dinâmica</string>
+    <string name="customctrl_dynamicpos">Posição dinâmica manual</string>
     <string name="customctrl_dynamicpos_x">X dinâmico</string>
     <string name="customctrl_dynamicpos_y">Y dinâmico</string>
     <string name="customctrl_transparency_bg">Transparência do fundo</string>
