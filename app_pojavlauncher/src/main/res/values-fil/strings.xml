@@ -141,7 +141,6 @@
     <string name="customctrl_size">Sukat</string>
     <string name="customctrl_size_width">Lapad</string>
     <string name="customctrl_size_height">Taas</string>
-    <string name="customctrl_dynamicpos">Dynamic na posisyon</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y</string>
     <string name="customctrl_transparency_bg">Transparency ng Background</string>
