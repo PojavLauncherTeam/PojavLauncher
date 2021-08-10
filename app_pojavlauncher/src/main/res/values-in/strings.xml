@@ -153,7 +153,6 @@
     <string name="customctrl_corner_radius">Radius sudut</string>
     <string name="customctrl_stroke_width">Tebal garis</string>
     <string name="customctrl_stroke_color">Warna garis</string>
-    <string name="customctrl_dynamicpos">Posisi dinamis</string>
     <string name="customctrl_dynamicpos_x">Dinamis X</string>
     <string name="customctrl_dynamicpos_y">Dinamis Y</string>
     <string name="customctrl_transparency_bg">Transparansi latar belakang</string>
