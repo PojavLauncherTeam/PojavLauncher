@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
     <string name="login_offline_label">Войти по внѣсѣтевымъ документамъ</string>
+    <string name="login_error_invalid_username">Невѣрное имя пользователя. Имя пользователя должно состоять изъ 3-16 символовъ, должно содержать только A-Z, a-z, 0-9 и подчеркиваніе.</string>
     <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>
     <string name="login_error_offline_password">Внѣсѣтевые документы не могутъ содержать ключъ-фразу!</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
@@ -141,13 +142,13 @@
     <string name="customctrl_size">Размѣръ</string>
     <string name="customctrl_size_width">Ширина</string>
     <string name="customctrl_size_height">Высота</string>
-    <string name="customctrl_mapping">Отображеніе</string>
+    <string name="customctrl_mapping">Кнопки</string>
     <string name="customctrl_orientation">Положеніе</string>
     <string name="customctrl_background_color">Цвѣтъ фона</string>
     <string name="customctrl_corner_radius">Радіусъ угла</string>
     <string name="customctrl_stroke_width">​Толщина​ обведенія</string>
     <string name="customctrl_stroke_color">Цвѣтъ обведенія</string>
-    <string name="customctrl_dynamicpos">Динамическая позиція</string>
+    <string name="customctrl_dynamicpos">Ручная динамическая позиція</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
@@ -197,6 +198,7 @@
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы одинъ Java Runtime</string>
     <string name="multirt_nocompartiblert">Не удалось найти совмѣстимую Java Runtime</string>
     <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. Къ глубочайшему огорченію, на сегодняшній день GL4ES не полностью поддерживаетъ ея, но есть нѣкоторые дополнительные рессурсы, которые вы можете установить, чтобы запустить этѣ версіи. Нажмите на кнопку «ОКЪ», чтобы одобрить установку или «Отмѣна», чтобы наложить вето на запускъ.</string>
+    <string name="compat_11x_playanyway">Все равно запустить</string>
     <string name="pvc_gameDirectory">Папка игры</string>
     <string name="pvc_jvmArgs">Аргументы JVM</string>
     <string name="pvc_title">​Поверсіонныя опціи</string>
