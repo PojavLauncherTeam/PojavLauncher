@@ -85,7 +85,6 @@
     <string name="customctrl_size">ขนาด</string>
     <string name="customctrl_size_width">ความกว้าง</string>
     <string name="customctrl_size_height">ความสูง</string>
-    <string name="customctrl_dynamicpos">ตำแหน่งพลวัต</string>
     <string name="customctrl_dynamicpos_x">พลวัต X</string>
     <string name="customctrl_dynamicpos_y">พลวัต Y</string>
     <string name="customctrl_transparency_bg">ความโปร่งใสพื้นหลัง</string>
