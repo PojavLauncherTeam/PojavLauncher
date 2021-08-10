@@ -147,7 +147,6 @@
     <string name="customctrl_corner_radius">Ακτίνα γωνίας</string>
     <string name="customctrl_stroke_width">Πλάτος περιγράμματος</string>
     <string name="customctrl_stroke_color">Χρώμα περιγράμματος</string>
-    <string name="customctrl_dynamicpos">Δυναμική θέση</string>
     <string name="customctrl_dynamicpos_x">Δυναμικό Χ</string>
     <string name="customctrl_dynamicpos_y">Δυναμικό Υ</string>
     <string name="customctrl_transparency_bg">Διαφάνεια φόντου</string>
