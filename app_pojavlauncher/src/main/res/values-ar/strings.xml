@@ -143,7 +143,6 @@
     <string name="customctrl_size_height">الارتفاع</string>
     <string name="customctrl_mapping">تخطيط الأزرار</string>
     <string name="customctrl_background_color">لون الخلفية</string>
-    <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
     <string name="customctrl_transparency_bg">شفافيه الخلفية</string>
