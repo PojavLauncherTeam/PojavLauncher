@@ -141,7 +141,6 @@
     <string name="customctrl_size">Saiz</string>
     <string name="customctrl_size_width">Lebar</string>
     <string name="customctrl_size_height">Tinggi</string>
-    <string name="customctrl_dynamicpos">Posisi Dinamik</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
     <string name="customctrl_transparency_bg">Ketelusan latar belakang</string>
