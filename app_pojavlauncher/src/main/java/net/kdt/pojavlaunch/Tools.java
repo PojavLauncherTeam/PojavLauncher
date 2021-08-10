@@ -195,7 +195,7 @@ public final class Tools {
         overrideableArgList.add("-Dfml.earlyprogresswindow=false");
         
         // Override args
-        for (String argOverride : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")) {
+        for (String argOverride : JREUtils.parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS)) {
             for (int i = overrideableArgList.size() - 1; i >= 0; i--) {
                 String arg = overrideableArgList.get(i);
                 // Currently, only java property is supported overridable argument, other such as "-X:" are handled by the JVM.
