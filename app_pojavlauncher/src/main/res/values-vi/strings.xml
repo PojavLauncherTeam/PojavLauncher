@@ -154,7 +154,6 @@
     <string name="customctrl_corner_radius">Bán kính góc cong</string>
     <string name="customctrl_stroke_width">Độ rộng viền phím</string>
     <string name="customctrl_stroke_color">Màu viền phím</string>
-    <string name="customctrl_dynamicpos">Vị trí động</string>
     <string name="customctrl_dynamicpos_x">Vị trí động theo chiều X</string>
     <string name="customctrl_dynamicpos_y">Vị trí động theo chiều Y</string>
     <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
