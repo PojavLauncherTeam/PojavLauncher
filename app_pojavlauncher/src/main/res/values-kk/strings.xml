@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email я пайдаланушы аты</string>
+    <string name="login_online_username_hint">Email я қолданушы аты</string>
     <string name="login_online_password_hint">Құпиясөз</string>
     <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
@@ -139,7 +139,6 @@
     <string name="customctrl_size">Көлемі</string>
     <string name="customctrl_size_width">Ені</string>
     <string name="customctrl_size_height">Биіктігі</string>
-    <string name="customctrl_dynamicpos">Динамикалық позиция</string>
     <string name="customctrl_dynamicpos_x">Динамикалық X</string>
     <string name="customctrl_dynamicpos_y">Динамикалық Y</string>
     <string name="customctrl_transparency_bg">Фон мөлдірлігі</string>
