@@ -154,7 +154,6 @@
     <string name="customctrl_corner_radius">Köşe alanı</string>
     <string name="customctrl_stroke_width">Vurgu genişliği</string>
     <string name="customctrl_stroke_color">Vurgu rengi</string>
-    <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
     <string name="customctrl_transparency_bg">Arkaplan saydamlığı</string>
