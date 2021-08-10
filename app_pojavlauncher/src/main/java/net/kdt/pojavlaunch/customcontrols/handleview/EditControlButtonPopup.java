@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -177,6 +178,8 @@ public class EditControlButtonPopup {
 
         hideUselessViews();
 
+        defineDynamicCheckChange();
+
         setupCheckerboards();
     }
 
@@ -192,6 +195,22 @@ public class EditControlButtonPopup {
 
     protected void hideUselessViews(){
         (v.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
+
+        (v.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
+        (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
+        editDynamicX.setVisibility(View.GONE);
+        editDynamicY.setVisibility(View.GONE);
+    }
+
+    protected void defineDynamicCheckChange(){
+        checkDynamicPosition.setOnCheckedChangeListener((compoundButton, b) -> {
+            int visibility = b ? View.VISIBLE : View.GONE;
+
+            (v.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(visibility);
+            (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(visibility);
+            editDynamicX.setVisibility(visibility);
+            editDynamicY.setVisibility(visibility);
+        });
     }
 
     private void setupCheckerboards(){
@@ -218,9 +237,8 @@ public class EditControlButtonPopup {
 
         editDynamicX.setEnabled(properties.isDynamicBtn);
         editDynamicY.setEnabled(properties.isDynamicBtn);
-        editDynamicX.setHint(Float.toString(properties.x));
         editDynamicX.setText(properties.dynamicX);
-        editDynamicY.setHint(Float.toString(properties.y));
+
         editDynamicY.setText(properties.dynamicY);
 
         seekBarOpacity.setProgress((int) (properties.opacity*100));
@@ -297,8 +315,8 @@ public class EditControlButtonPopup {
         properties.setHeight(Float.parseFloat(editHeight.getText().toString()));
 
         properties.isDynamicBtn = checkDynamicPosition.isChecked();
-        properties.dynamicX = editDynamicX.getText().toString().isEmpty() ? properties.dynamicX = Float.toString(properties.x) : editDynamicX.getText().toString();
-        properties.dynamicY = editDynamicY.getText().toString().isEmpty() ? properties.dynamicY = Float.toString(properties.y) : editDynamicY.getText().toString();
+        if(!editDynamicX.getText().toString().isEmpty()) properties.dynamicX = editDynamicX.getText().toString();
+        if(!editDynamicY.getText().toString().isEmpty()) properties.dynamicY = editDynamicY.getText().toString();
 
         button.updateProperties();
     }

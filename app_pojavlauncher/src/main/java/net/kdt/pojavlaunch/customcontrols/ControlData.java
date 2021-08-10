@@ -3,8 +3,11 @@ package net.kdt.pojavlaunch.customcontrols;
 import android.util.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.*;
 import net.objecthunter.exp4j.*;
+import net.objecthunter.exp4j.function.Function;
+
 import org.lwjgl.glfw.*;
 
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
@@ -68,8 +71,6 @@ public class ControlData implements Cloneable
     }
 
     public String name;
-    public float x;
-    public float y;
     private float width;         //Dp instead of Px now
     private float height;        //Dp instead of Px now
     public int[] keycodes;      //Should store up to 4 keys
@@ -167,7 +168,8 @@ public class ControlData implements Cloneable
         keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
         keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
         keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
-        
+        keyValueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
+
         // Insert value to ${variable}
         String insertedPos = JSONUtils.insertSingleJSONValue(dynamicPos, keyValueMap);
         
@@ -181,21 +183,23 @@ public class ControlData implements Cloneable
                 for (ControlData data : getSpecialButtons())
                     if (keycode == data.keycodes[0])
                         specialButtonListener = data.specialButtonListener;
-
-
-        if (dynamicX == null) {
-            dynamicX = Float.toString(x);
-        }
-        if (dynamicY == null) {
-            dynamicY = Float.toString(y);
-        }
-        
-        x = insertDynamicPos(dynamicX);
-        y = insertDynamicPos(dynamicY);
     }
 
     private static float calculate(String math) {
-        return (float) new ExpressionBuilder(math).build().evaluate();
+        return (float) new ExpressionBuilder(math)
+                .function(new Function("dp", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.pxToDp((float) args[0]);
+                    }
+                })
+                .function(new Function("px", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.dpToPx((float) args[0]);
+                    }
+                })
+                .build().evaluate();
     }
 
     private static int[] inflateKeycodeArray(int[] keycodes){

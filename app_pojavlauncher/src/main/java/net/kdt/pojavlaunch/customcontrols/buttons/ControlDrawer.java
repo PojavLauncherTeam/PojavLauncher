@@ -62,23 +62,23 @@ public class ControlDrawer extends ControlButton {
         for(int i=0; i < buttons.size(); ++i){
             switch (drawerData.orientation){
                 case RIGHT:
-                    buttons.get(i).setX(drawerData.properties.x + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setY(drawerData.properties.y);
+                    buttons.get(i).setDynamicX(generateDynamicX(getX() + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) ));
+                    buttons.get(i).setDynamicY(generateDynamicY(getY()));
                     break;
 
                 case LEFT:
-                    buttons.get(i).setX(drawerData.properties.x - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setY(drawerData.properties.y);
+                    buttons.get(i).setDynamicX(generateDynamicX(getX() - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicY(generateDynamicY(getY()));
                     break;
 
                 case UP:
-                    buttons.get(i).setY(drawerData.properties.y - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setX(drawerData.properties.x);
+                    buttons.get(i).setDynamicY(generateDynamicY(getY() - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicX(generateDynamicX(getX()));
                     break;
 
                 case DOWN:
-                    buttons.get(i).setY(drawerData.properties.y + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1) );
-                    buttons.get(i).setX(drawerData.properties.x);
+                    buttons.get(i).setDynamicY(generateDynamicY(getY() + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicX(generateDynamicX(getX()));
                     break;
             }
             buttons.get(i).updateProperties();
@@ -99,6 +99,19 @@ public class ControlDrawer extends ControlButton {
     public void syncButtons(){
         alignButtons();
         resizeButtons();
+    }
+
+    /**
+     * Check whether or not the button passed as a parameter belongs to this drawer.
+     *
+     * @param button The button to look for
+     * @return Whether the button is in the buttons list of the drawer.
+     */
+    public boolean containsChild(ControlButton button){
+        for(ControlButton childButton : buttons){
+            if (childButton == button) return true;
+        }
+        return false;
     }
 
     @Override
@@ -127,6 +140,11 @@ public class ControlDrawer extends ControlButton {
         }
 
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected boolean canSnap(ControlButton button) {
+        return super.canSnap(button) && !containsChild(button);
     }
 
     @Override

@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
@@ -29,6 +30,7 @@ import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
+    public TouchCharInput touchCharInput;
 
     volatile public static boolean isInputStackCall;
 
@@ -121,8 +123,10 @@ public class BaseMainActivity extends LoggableActivity {
         setContentView(resId);
 
         try {
+
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            touchCharInput = findViewById(R.id.editTextTextPersonName2);
 
             logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
             logFile.delete();
@@ -623,11 +627,35 @@ public class BaseMainActivity extends LoggableActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        /*
+        Toast.makeText(this, event.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, event.getUnicodeChar() + "",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_LONG).show();
+         */
+
         //Filtering useless events
-        if(event.getRepeatCount() != 0 || event.getAction() == KeyEvent.ACTION_MULTIPLE || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN || (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
+        if(event.getRepeatCount() != 0
+                || event.getAction() == KeyEvent.ACTION_MULTIPLE
+                || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN
+                || (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
+        //Toast.makeText(this, "FIRST VERIF PASSED", Toast.LENGTH_LONG).show();
+
+        //Sometimes, key events comes from SOME keys of the software keyboard
+        //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
+        if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
+            if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
+            touchCharInput.dispatchKeyEvent(event);
+            return true;
+        }
+        //Toast.makeText(this, "SECOND VERIF PASSED", Toast.LENGTH_LONG).show();
+
 
         //Sometimes, key events may come from the mouse
-        if((event.getDevice().getSources() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE){
+        if(event.getDevice() != null
+                && ( (event.getDevice().getSources() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
+                ||   (event.getDevice().getSources() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
+
+
             if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
                 sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, event.getAction() == KeyEvent.ACTION_DOWN);
                 return true;
@@ -855,22 +883,25 @@ public class BaseMainActivity extends LoggableActivity {
         // Catch back as Esc keycode at another place
         sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
     }
-    
-    public void hideKeyboard() {
-        try {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-            if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
-                ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this).getCurrentFocus().getWindowToken(), 0);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void showKeyboard() {
-        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-        minecraftGLView.requestFocusFromTouch();
-        minecraftGLView.requestFocus();
+
+    /**
+     * Toggle on and off the soft keyboard, depending of the state
+     * The condition is prone to errors if the keyboard is being hidden without the consent
+     * of the current TouchCharInput
+     */
+    public void switchKeyboardState(){
+        //If an hard keyboard is present, never trigger the soft one
+        if(touchCharInput.hasFocus()
+        || getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY){
+            touchCharInput.clear();
+            touchCharInput.disable();
+
+        }else{
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            touchCharInput.enable();
+            touchCharInput.postDelayed(() -> imm.showSoftInput(touchCharInput, InputMethodManager.SHOW_IMPLICIT), 200);
+        }
     }
 
     protected void setRightOverride(boolean val) {
