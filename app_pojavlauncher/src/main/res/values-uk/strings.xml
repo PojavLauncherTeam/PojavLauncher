@@ -153,7 +153,6 @@
     <string name="customctrl_corner_radius">Радіус кута</string>
     <string name="customctrl_stroke_width">Товщина контуру</string>
     <string name="customctrl_stroke_color">Колір контуру</string>
-    <string name="customctrl_dynamicpos">Динамічне розташування</string>
     <string name="customctrl_dynamicpos_x">Динаміка за віссю Х</string>
     <string name="customctrl_dynamicpos_y">Динаміка за віссю Y</string>
     <string name="customctrl_transparency_bg">Прозорість фону</string>
