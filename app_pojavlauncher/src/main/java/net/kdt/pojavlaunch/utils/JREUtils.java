@@ -372,7 +372,7 @@ public class JREUtils
 
                 //Check if two args aren't bundled together by mistake
                 if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('='))
-                    parsedArguments.add(args.substring(start,end));
+                    parsedArguments.add(parsedSubString);
                 else Log.w("JAVA ARGS PARSER", "Removed improper arguments: " + parsedSubString);
             }
         }
