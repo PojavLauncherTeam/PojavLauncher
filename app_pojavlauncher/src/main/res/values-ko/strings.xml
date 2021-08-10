@@ -154,7 +154,6 @@
     <string name="customctrl_corner_radius">모서리 반지름</string>
     <string name="customctrl_stroke_width">선 굵기</string>
     <string name="customctrl_stroke_color">강조 색</string>
-    <string name="customctrl_dynamicpos">동적 위치</string>
     <string name="customctrl_dynamicpos_x">동적 X 값</string>
     <string name="customctrl_dynamicpos_y">동적 Y 값</string>
     <string name="customctrl_transparency_bg">배경 투명도</string>
