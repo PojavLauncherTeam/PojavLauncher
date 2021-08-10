@@ -142,7 +142,6 @@
     <string name="customctrl_size">Величина</string>
     <string name="customctrl_size_width">Ширина</string>
     <string name="customctrl_size_height">Висина</string>
-    <string name="customctrl_dynamicpos">Динамична позиција</string>
     <string name="customctrl_dynamicpos_x">Динамични Х</string>
     <string name="customctrl_dynamicpos_y">Динамични У</string>
     <string name="customctrl_transparency_bg">Провидна позадина</string>
