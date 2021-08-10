@@ -346,6 +346,39 @@ public class JREUtils
         }
         return exitCode;
     }
+
+    /**
+     * Parse and separate java arguments in a user friendly fashion
+     * It supports multi line and absence of spaces between arguments
+     * The function also supports auto-removal of improper arguments.
+     *
+     * @param args The un-parsed argument list.
+     * @return Parsed args as an ArrayList
+     */
+    public static ArrayList<String> parseJavaArguments(String args){
+        ArrayList<String> parsedArguments = new ArrayList<>(0);
+        args = args.trim().replace(" ", "");
+        //For each prefixes, we separate args.
+        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","-"}){
+            while (true){
+                int start = args.indexOf(prefix);
+                if(start == -1) break;
+                //Get the end of the current argument
+                int end = args.indexOf("-", start + prefix.length());
+                if(end == -1) end = args.length();
+                //Extract it
+                String parsedSubString = args.substring(start, end);
+                args = args.replace(parsedSubString, "");
+
+                //Check if two args aren't bundled together by mistake
+                if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('='))
+                    parsedArguments.add(args.substring(start,end));
+                else Log.w("JAVA ARGS PARSER", "Removed improper arguments: " + parsedSubString);
+            }
+        }
+        return parsedArguments;
+    }
+
     private static void purgeArg(List<String> argList, String argStart) {
         for(int i = 0; i < argList.size(); i++) {
             final String arg = argList.get(i);
