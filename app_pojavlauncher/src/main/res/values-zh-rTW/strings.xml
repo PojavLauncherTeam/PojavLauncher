@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）</string>
+    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）,</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">在您的設備上啟動《Minecraft：Java版》！</string>
     <!-- Action bar part -->
@@ -148,7 +148,6 @@
     <string name="customctrl_corner_radius">圓角半徑</string>
     <string name="customctrl_stroke_width">邊框粗細</string>
     <string name="customctrl_stroke_color">邊框顏色</string>
-    <string name="customctrl_dynamicpos">動態位置</string>
     <string name="customctrl_dynamicpos_x">動態 X 軸</string>
     <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
     <string name="customctrl_transparency_bg">背景透明度</string>
