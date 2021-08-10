@@ -148,7 +148,7 @@
     <string name="customctrl_corner_radius">רדיוס פינה</string>
     <string name="customctrl_stroke_width">עובי קו המתאר</string>
     <string name="customctrl_stroke_color">צבע קו המתאר</string>
-    <string name="customctrl_dynamicpos">מיקום דינמי</string>
+    <string name="customctrl_dynamicpos">מיקום דינמי ידני</string>
     <string name="customctrl_dynamicpos_x">X דינמי</string>
     <string name="customctrl_dynamicpos_y">Y דינמי</string>
     <string name="customctrl_transparency_bg">שקיפות רקע</string>
