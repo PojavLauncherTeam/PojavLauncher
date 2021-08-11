@@ -148,6 +148,7 @@
     <string name="customctrl_corner_radius">圓角半徑</string>
     <string name="customctrl_stroke_width">邊框粗細</string>
     <string name="customctrl_stroke_color">邊框顏色</string>
+    <string name="customctrl_dynamicpos">手動動態位置</string>
     <string name="customctrl_dynamicpos_x">動態 X 軸</string>
     <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
     <string name="customctrl_transparency_bg">背景透明度</string>
