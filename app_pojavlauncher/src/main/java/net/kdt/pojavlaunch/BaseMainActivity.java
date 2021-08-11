@@ -321,6 +321,12 @@ public class BaseMainActivity extends LoggableActivity {
                  * It is due to the mouse passthrough option bundled with the control button.
                  */
                 private boolean shouldBeDown = false;
+                /*
+                 * When the android system has fingers really near to each other, it tends to
+                 * either swap or remove a pointer.
+                 * This variable is here to mitigate the issue.
+                 */
+                private int lastPointerCount = 0;
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
@@ -384,6 +390,8 @@ public class BaseMainActivity extends LoggableActivity {
                         case MotionEvent.ACTION_UP: // 1
                         case MotionEvent.ACTION_CANCEL: // 3
                             shouldBeDown = false;
+                            currentPointerID = -1;
+
                             if (!isTouchInHotbar) {
                                 // -TODO uncomment after fix wrong trigger
                                 if (!rightOverride) CallbackBridge.mouseLeft = false;
@@ -426,19 +434,26 @@ public class BaseMainActivity extends LoggableActivity {
                                 //Camera movement
                                 if(CallbackBridge.isGrabbing()){
                                     int pointerIndex = e.findPointerIndex(currentPointerID);
-                                    if(pointerIndex == -1 || !shouldBeDown){
+                                    if(pointerIndex == -1 || lastPointerCount != e.getPointerCount() || !shouldBeDown){
                                         shouldBeDown = true;
                                         currentPointerID = e.getPointerId(0);
+                                        prevX = e.getX();
+                                        prevY = e.getY();
                                     }else{
                                         mouse_x += (e.getX(pointerIndex) - prevX) * sensitivityFactor;
                                         mouse_y += (e.getY(pointerIndex) - prevY) * sensitivityFactor;
+
+                                        prevX = e.getX(pointerIndex);
+                                        prevY = e.getY(pointerIndex);
+
+                                        CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                     }
-                                    prevX = e.getX();
-                                    prevY = e.getY();
+
                                 }
 
-                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+
                             }
+                            lastPointerCount = e.getPointerCount();
                             break;
                     }
 
