@@ -17,7 +17,7 @@ public class MineButton extends androidx.appcompat.widget.AppCompatButton
 	}
 
 	public void init() {
-		setTypeface(Typeface.createFromAsset(getContext().getAssets(), "font/NotoSans-Bold.ttf"));
+		setTypeface(Typeface.createFromAsset(getContext().getAssets(), "font/noto_sans_bold.ttf"));
 	}
 
 }

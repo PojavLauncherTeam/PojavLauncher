@@ -110,7 +110,7 @@ public class PojavLoginActivity extends BaseActivity
             LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
             LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen,startScr);
             PojavLoginActivity.this.setContentView(startScr);
-            FontChanger.changeFonts(startScr);
+            
             progress = (ProgressBar) findViewById(R.id.startscreenProgress);
             if(isStarting) progress.setVisibility(View.VISIBLE);
             startupTextView = (TextView) findViewById(R.id.startscreen_text);

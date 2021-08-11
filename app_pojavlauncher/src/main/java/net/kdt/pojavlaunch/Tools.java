@@ -45,7 +45,7 @@ public final class Tools {
     public static String DIR_DATA = "/data/data/" + BuildConfig.APPLICATION_ID;
     public static String MULTIRT_HOME = DIR_DATA+"/runtimes";
     public static String LOCAL_RENDERER = null;
-    public static String CURRENT_ARCHITECTURE;
+    public static int CURRENT_ARCHITECTURE;
 
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
@@ -191,7 +191,7 @@ public final class Tools {
 
         overrideableArgList.add("-Dnet.minecraft.clientmodname=" + Tools.APP_NAME);
         
-        // Disable FML Early Loading Screen to get Forge 1.14+ works
+        // Disable FML Early Loading Screen to get Forge 1.14+ to work
         overrideableArgList.add("-Dfml.earlyprogresswindow=false");
         
         // Override args
