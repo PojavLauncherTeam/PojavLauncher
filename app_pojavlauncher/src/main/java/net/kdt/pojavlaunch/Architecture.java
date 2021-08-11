@@ -5,8 +5,7 @@ import android.os.Build;
 import java.util.Locale;
 
 
-public class Architecture
-{
+public class Architecture {
 	public static int UNSUPPORTED_ARCH = -1;
 	public static int ARCH_ARM64 = 0x1;
 	public static int ARCH_ARM = 0x2;
@@ -49,15 +48,11 @@ public class Architecture
 	 */
 	public static boolean isx86Device(){
 		//We check the whole range of supported ABIs,
-		//Since zenfones can place arm before their native instruction set.
-		if(is64BitsDevice()){
-			for(String str : Build.SUPPORTED_64_BIT_ABIS){
-				if(archAsInt(str) == ARCH_X86_64) return true;
-			}
-		}else{
-			for(String str : Build.SUPPORTED_32_BIT_ABIS){
-				if(archAsInt(str) == ARCH_X86) return true;
-			}
+		//Since asus zenfones can place arm before their native instruction set.
+		String[] ABI = is64BitsDevice() ? Build.SUPPORTED_64_BIT_ABIS : Build.SUPPORTED_32_BIT_ABIS;
+		int comparedArch = is64BitsDevice() ? ARCH_X86_64 : ARCH_X86;
+		for (String str : ABI) {
+			if (archAsInt(str) == comparedArch) return true;
 		}
 		return false;
 	}
@@ -75,16 +70,29 @@ public class Architecture
 	/**
 	 * Convert an architecture from a String to an int.
 	 * @param arch The architecture as a String
-	 * @return The architecture as an int.
+	 * @return The architecture as an int, can be UNSUPPORTED_ARCH if unknown.
 	 */
 	public static int archAsInt(String arch){
 		arch = arch.toLowerCase().trim().replace(" ", "");
 		if(arch.contains("arm64") || arch.equals("aarch64")) return ARCH_ARM64;
 		if(arch.contains("arm")) return ARCH_ARM;
-		if(arch.equals("x86_64") || arch.equals("amd64")) return ARCH_X86_64;
+		if(arch.contains("x86_64") || arch.contains("amd64")) return ARCH_X86_64;
 		if(arch.contains("x86") || (arch.startsWith("i") && arch.endsWith("86"))) return ARCH_X86;
 		//Shouldn't happen
 		return UNSUPPORTED_ARCH;
+	}
+
+	/**
+	 * Convert to a string an architecture.
+	 * @param arch The architecture as an int.
+	 * @return "arm64" || "arm" || "x86_64" || "x86" || "UNSUPPORTED_ARCH"
+	 */
+	public static String archAsString(int arch){
+		if(arch == ARCH_ARM64) return "arm64";
+		if(arch == ARCH_ARM) return "arm";
+		if(arch == ARCH_X86_64) return "x86_64";
+		if(arch == ARCH_X86) return "x86";
+		return "UNSUPPORTED_ARCH";
 	}
 
 }
