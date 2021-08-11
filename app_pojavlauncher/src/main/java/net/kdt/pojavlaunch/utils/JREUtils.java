@@ -1,5 +1,9 @@
 package net.kdt.pojavlaunch.utils;
 
+import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
+import static net.kdt.pojavlaunch.Architecture.archAsString;
+import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
+
 import android.app.*;
 import android.content.*;
 import android.opengl.EGL14;
@@ -37,11 +41,11 @@ public class JREUtils {
      * @param jreArch The java architecture to compare as a String.
      */
     public static void checkJavaArchitecture(LoggableActivity act, String jreArch) {
-        act.appendlnToLog("Architecture: " + Tools.CURRENT_ARCHITECTURE);
+        act.appendlnToLog("Architecture: " + archAsString(Tools.CURRENT_ARCHITECTURE));
         if(Tools.CURRENT_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
 
-        act.appendlnToLog("Architecture " + Tools.CURRENT_ARCHITECTURE + " is incompatible with Java Runtime " + jreArch);
-        throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, String.valueOf(Tools.CURRENT_ARCHITECTURE), jreArch));
+        act.appendlnToLog("Architecture " + archAsString(Tools.CURRENT_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
+        throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.CURRENT_ARCHITECTURE), jreArch));
 
     }
     
@@ -161,7 +165,7 @@ public class JREUtils {
     public static void relocateLibPath(final Context ctx) throws IOException {
         if (JRE_ARCHITECTURE == null) {
             JRE_ARCHITECTURE = readJREReleaseProperties().get("OS_ARCH");
-            if (JRE_ARCHITECTURE.startsWith("i") && JRE_ARCHITECTURE.endsWith("86") && Tools.CURRENT_ARCHITECTURE.contains("x86") && !Tools.CURRENT_ARCHITECTURE.contains("64")) {
+            if (Architecture.archAsInt(JRE_ARCHITECTURE) == ARCH_X86){
                 JRE_ARCHITECTURE = "i386/i486/i586";
             }
         }
@@ -175,7 +179,7 @@ public class JREUtils {
             }
         }
         
-        String libName = Tools.CURRENT_ARCHITECTURE.contains("64") ? "lib64" : "lib";
+        String libName = is64BitsDevice() ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
         ldLibraryPath.append(
             Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
