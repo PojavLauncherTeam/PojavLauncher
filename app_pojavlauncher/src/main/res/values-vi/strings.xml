@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition cho Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">Khởi chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
     <!-- Action bar part -->
@@ -154,6 +154,7 @@
     <string name="customctrl_corner_radius">Bán kính góc cong</string>
     <string name="customctrl_stroke_width">Độ rộng viền phím</string>
     <string name="customctrl_stroke_color">Màu viền phím</string>
+    <string name="customctrl_dynamicpos">Vị trí động tùy chỉnh</string>
     <string name="customctrl_dynamicpos_x">Vị trí động theo chiều X</string>
     <string name="customctrl_dynamicpos_y">Vị trí động theo chiều Y</string>
     <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
