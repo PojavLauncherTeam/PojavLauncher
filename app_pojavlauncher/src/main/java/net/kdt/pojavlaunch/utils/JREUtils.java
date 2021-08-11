@@ -3,17 +3,14 @@ package net.kdt.pojavlaunch.utils;
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
+import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 
 import android.app.*;
 import android.content.*;
-import android.opengl.EGL14;
-import android.opengl.EGLExt;
-import android.opengl.GLES10;
+import android.os.Build;
 import android.system.*;
 import android.util.*;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 
 import com.oracle.dalvik.*;
 import java.io.*;
@@ -29,9 +26,7 @@ import javax.microedition.khronos.egl.EGLDisplay;
 
 public class JREUtils {
     private JREUtils() {}
-    
-    public static String JRE_ARCHITECTURE;
-    
+
     public static String LD_LIBRARY_PATH;
     private static String nativeLibDir;
 
@@ -163,11 +158,9 @@ public class JREUtils {
     }
     
     public static void relocateLibPath(final Context ctx) throws IOException {
-        if (JRE_ARCHITECTURE == null) {
-            JRE_ARCHITECTURE = readJREReleaseProperties().get("OS_ARCH");
-            if (Architecture.archAsInt(JRE_ARCHITECTURE) == ARCH_X86){
-                JRE_ARCHITECTURE = "i386/i486/i586";
-            }
+        String JRE_ARCHITECTURE = readJREReleaseProperties().get("OS_ARCH");
+        if (Architecture.archAsInt(JRE_ARCHITECTURE) == ARCH_X86){
+            JRE_ARCHITECTURE = "i386/i486/i586";
         }
         
         nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
@@ -218,8 +211,8 @@ public class JREUtils {
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");
         envMap.put("REGAL_GL_VERSION", "4.5");
-        if(Tools.LOCAL_RENDERER != null) {
-            envMap.put("POJAV_RENDERER", Tools.LOCAL_RENDERER);
+        if(LOCAL_RENDERER != null) {
+            envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
         }
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
@@ -235,15 +228,15 @@ public class JREUtils {
             }
             reader.close();
         }
-        if(!envMap.containsKey("LIBGL_ES") && Tools.LOCAL_RENDERER != null) {
+        if(!envMap.containsKey("LIBGL_ES") && LOCAL_RENDERER != null) {
             int glesMajor = getDetectedVersion();
             Log.i("glesDetect","GLES version detected: "+glesMajor);
 
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            } else if (Tools.LOCAL_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", Tools.LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
+            } else if (LOCAL_RENDERER.startsWith("opengles")) {
+                envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
@@ -264,56 +257,26 @@ public class JREUtils {
         // return ldLibraryPath;
     }
     
-    public static int launchJavaVM(final LoggableActivity ctx, final List<String> args) throws Throwable {
+    public static int launchJavaVM(final LoggableActivity ctx, List<String> JVMArguments) throws Throwable {
         JREUtils.relocateLibPath(ctx);
-        // ctx.appendlnToLog("LD_LIBRARY_PATH = " + JREUtils.LD_LIBRARY_PATH);
-        final String graphicsLib;
-        if(Tools.LOCAL_RENDERER != null){
-            switch (Tools.LOCAL_RENDERER) {
-                case "opengles2":
-                    graphicsLib = "libgl4es_114.so";
-                    break;
-                case "opengles2_5":
-                    graphicsLib = "libgl4es_115.so";
-                    break;
-                case "vulkan_zink":
-                    graphicsLib = "libOSMesa_8.so";
-                    break;
-                case "opengles3_vgpu":
-                    graphicsLib = "libvgpu.so";
-                    break;
-                default:
-                    throw new RuntimeException("Undefined renderer: " + Tools.LOCAL_RENDERER);
-            }
-            if (!dlopen(graphicsLib) && !dlopen(findInLdLibPath(graphicsLib))) {
-                System.err.println("Failed to load renderer " + graphicsLib + ". Falling back to GL4ES 1.1.4");
-                Tools.LOCAL_RENDERER = "opengles2";
-                dlopen(nativeLibDir + "/libgl4es_114.so");
-            }
-        }else{
-            graphicsLib = null;
-        }
+        final String graphicsLib = loadGraphicsLibrary();
 
-        List<String> javaArgList = new ArrayList<String>();
-
-
-
+        //List<String> javaArgList = new ArrayList<>();
         //Remove arguments that can interfere with the good working of the launcher
-        purgeArg(javaArgList,"-Xms");
-        purgeArg(javaArgList,"-Xmx");
-        purgeArg(javaArgList,"-d32");
-        purgeArg(javaArgList,"-d64");
+        purgeArg(JVMArguments,"-Xms");
+        purgeArg(JVMArguments,"-Xmx");
+        purgeArg(JVMArguments,"-d32");
+        purgeArg(JVMArguments,"-d64");
 
         //Add automatically generated args
-        javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
-        Tools.getJavaArgs(ctx, javaArgList,graphicsLib);
+        JVMArguments.add(Tools.DIR_HOME_JRE + "/bin/java");
+        getJavaArgs(ctx, JVMArguments,graphicsLib);
 
-        javaArgList.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
-        javaArgList.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+        JVMArguments.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+        JVMArguments.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
 
         ctx.runOnUiThread(() -> Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
-        System.out.println(javaArgList);
-        javaArgList.addAll(args);
+        System.out.println(JVMArguments);
         
         // For debugging only!
 /*
@@ -329,7 +292,7 @@ public class JREUtils {
         setupExitTrap(ctx.getApplication());
         chdir(Tools.DIR_GAME_NEW);
 
-        final int exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
+        final int exitCode = VMLauncher.launchJVM(JVMArguments.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
             ctx.runOnUiThread(() -> {
@@ -341,6 +304,56 @@ public class JREUtils {
             });
         }
         return exitCode;
+    }
+
+    /**
+     *  Fills up the <b>javaArgList</b> passed in parameter with the user arguments
+     *  and the auto-generated ones (eg. the window resolution).
+     * @param ctx The application context
+     * @param javaArgList The current list of arguments
+     * @param renderLib The name of the renderer used.
+     */
+    public static void getJavaArgs(Context ctx, List<String> javaArgList, String renderLib) {
+        List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+        String[] overridableArguments = new String[]{
+                "-Djava.home=" + Tools.DIR_HOME_JRE,
+                "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
+                "-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent(),
+                "-Duser.language=" + System.getProperty("user.language"),
+                "-Dos.name=Linux",
+                "-Dos.version=Android-" + Build.VERSION.RELEASE,
+                "-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW,
+                "-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW,
+                "-Dorg.lwjgl.opengl.libname=" + renderLib,
+
+                //LWJGL 3 DEBUG FLAGS
+                //"-Dorg.lwjgl.util.Debug=true",
+                //"-Dorg.lwjgl.util.DebugFunctions=true",
+                //"-Dorg.lwjgl.util.DebugLoader=true",
+                // GLFW Stub width height
+                "-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth,
+                "-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight,
+                "-Dglfwstub.initEgl=false",
+
+                "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
+                "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
+        };
+
+
+        for (String userArgument : userArguments) {
+            for(int i=0; i < overridableArguments.length; ++i){
+                String overridableArgument = overridableArguments[i];
+                //Only java properties are considered overridable for now
+                if(userArgument.startsWith("-D") && userArgument.startsWith(overridableArgument.substring(0, overridableArgument.indexOf("=")))){
+                    overridableArguments[i] = ""; //Remove the argument since it is overridden
+                    break;
+                }
+            }
+        }
+
+        //Add all the arguments
+        javaArgList.addAll(userArguments);
+        javaArgList.addAll(Arrays.asList(overridableArguments));
     }
 
     /**
@@ -375,6 +388,39 @@ public class JREUtils {
         return parsedArguments;
     }
 
+    /**
+     * Open the render library in accordance to the settings.
+     * It will fallback if it fails to load the library.
+     * @return The name of the loaded library
+     */
+    public static String loadGraphicsLibrary(){
+        String renderLibrary;
+        switch (LOCAL_RENDERER){
+            case "opengles2": renderLibrary = "libgl4es_114.so"; break;
+            case "opengles2_5": renderLibrary = "libgl4es_115.so"; break;
+            case "vulkan_zink": renderLibrary = "libOSMesa_8.so"; break;
+			case "opengles3_vgpu" : renderLibrary = "libvgpu.so"; break;
+            default:
+                Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
+                renderLibrary = "libgl4es_114.so";
+                break;
+        }
+
+        if (!dlopen(renderLibrary) && !dlopen(findInLdLibPath(renderLibrary))) {
+            Log.e("RENDER_LIBRARY","Failed to load renderer " + renderLibrary + ". Falling back to GL4ES 1.1.4");
+            LOCAL_RENDERER = "opengles2";
+            renderLibrary = "libgl4es_114.so";
+            dlopen(nativeLibDir + "/libgl4es_114.so");
+        }
+        return renderLibrary;
+    }
+
+    /**
+     * Remove the argument from the list, if it exists
+     * If the argument exists multiple times, they will all be removed.
+     * @param argList The argument list to purge
+     * @param argStart The argument to purge from the list.
+     */
     private static void purgeArg(List<String> argList, String argStart) {
         for(int i = 0; i < argList.size(); i++) {
             final String arg = argList.get(i);

@@ -156,64 +156,6 @@ public final class Tools {
         javaArgList.add(cacioClasspath.toString());
     }
 
-    public static void getJavaArgs(Context ctx, List<String> javaArgList, String renderLib) {
-        List<String> overrideableArgList = new ArrayList<String>();
-
-        overrideableArgList.add("-Djava.home=" + Tools.DIR_HOME_JRE);
-        overrideableArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
-        
-        overrideableArgList.add("-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent());
-        overrideableArgList.add("-Duser.language=" + System.getProperty("user.language"));
-        // overrideableArgList.add("-Duser.timezone=GMT");
-
-        overrideableArgList.add("-Dos.name=Linux");
-        overrideableArgList.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
-        overrideableArgList.add("-Dpojav.path.minecraft=" + DIR_GAME_NEW);
-        overrideableArgList.add("-Dpojav.path.private.account=" + DIR_ACCOUNT_NEW);
-        
-        // javaArgList.add("-Dorg.lwjgl.libname=liblwjgl3.so");
-        // javaArgList.add("-Dorg.lwjgl.system.jemalloc.libname=libjemalloc.so");
-       
-        overrideableArgList.add("-Dorg.lwjgl.opengl.libname=" + renderLib);
-        // overrideableArgList.add("-Dorg.lwjgl.opengl.libname=libgl4es_115.so");
-        
-        // javaArgList.add("-Dorg.lwjgl.opengl.libname=libRegal.so");
-
-        // Enable LWJGL3 debug
-        // overrideableArgList.add("-Dorg.lwjgl.util.Debug=true");
-        // overrideableArgList.add("-Dorg.lwjgl.util.DebugFunctions=true");
-        // overrideableArgList.add("-Dorg.lwjgl.util.DebugLoader=true");
-
-        // GLFW Stub width height
-        overrideableArgList.add("-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth);
-        overrideableArgList.add("-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight);
-        overrideableArgList.add("-Dglfwstub.initEgl=false");
-
-        overrideableArgList.add("-Dnet.minecraft.clientmodname=" + Tools.APP_NAME);
-        
-        // Disable FML Early Loading Screen to get Forge 1.14+ to work
-        overrideableArgList.add("-Dfml.earlyprogresswindow=false");
-        
-        // Override args
-        for (String argOverride : JREUtils.parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS)) {
-            for (int i = overrideableArgList.size() - 1; i >= 0; i--) {
-                String arg = overrideableArgList.get(i);
-                // Currently, only java property is supported overridable argument, other such as "-X:" are handled by the JVM.
-                // Althought java properties are also handled by JVM, but duplicate bug from parser may occurs, so replace them.
-                if (arg.startsWith("-D") && argOverride.startsWith(arg.substring(0, arg.indexOf('=') + 1))) {
-                    // Override the matched argument
-                    overrideableArgList.set(i, argOverride);
-                    break;
-                } else if (!argOverride.isEmpty() && i == 0) {
-                    // Overridable argument has mismatched, so add the custom argument to overridable argument list
-                    javaArgList.add(argOverride);
-                }
-            }
-        }
-
-        javaArgList.addAll(overrideableArgList);
-    }
-
     public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, String strGameDir) {
         String username = profile.username;
         String versionName = versionInfo.id;
@@ -226,7 +168,7 @@ public final class Tools {
         File gameDir = new File(strGameDir);
         gameDir.mkdirs();
 
-        Map<String, String> varArgMap = new ArrayMap<String, String>();
+        Map<String, String> varArgMap = new ArrayMap<>();
         varArgMap.put("auth_access_token", profile.accessToken);
         varArgMap.put("auth_player_name", username);
         varArgMap.put("auth_uuid", profile.profileId);
