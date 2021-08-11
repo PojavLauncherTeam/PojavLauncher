@@ -148,6 +148,7 @@
     <string name="customctrl_corner_radius">Cornur round saiz</string>
     <string name="customctrl_stroke_width">Strok witz</string>
     <string name="customctrl_stroke_color">Strok colour</string>
+    <string name="customctrl_dynamicpos">Skratchy Dynamic pozishun</string>
     <string name="customctrl_dynamicpos_x">Movin’ X pozision</string>
     <string name="customctrl_dynamicpos_y">Movin’ Y pozision</string>
     <string name="customctrl_transparency_bg">Bakground tranzperensi</string>
