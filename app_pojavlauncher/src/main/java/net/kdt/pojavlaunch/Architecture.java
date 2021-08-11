@@ -79,10 +79,10 @@ public class Architecture
 	 */
 	public static int archAsInt(String arch){
 		arch = arch.toLowerCase().trim().replace(" ", "");
-		if(arch.contains("arm64") || arch.equals("aarch64") || arch.equals("adm64")) return ARCH_ARM64;
+		if(arch.contains("arm64") || arch.equals("aarch64")) return ARCH_ARM64;
 		if(arch.contains("arm")) return ARCH_ARM;
-		if(arch.equals("x86_64")) return ARCH_X86_64;
-		if(arch.equals("x86") || (arch.startsWith("i") && arch.endsWith("86"))) return ARCH_X86;
+		if(arch.equals("x86_64") || arch.equals("amd64")) return ARCH_X86_64;
+		if(arch.contains("x86") || (arch.startsWith("i") && arch.endsWith("86"))) return ARCH_X86;
 		//Shouldn't happen
 		return UNSUPPORTED_ARCH;
 	}

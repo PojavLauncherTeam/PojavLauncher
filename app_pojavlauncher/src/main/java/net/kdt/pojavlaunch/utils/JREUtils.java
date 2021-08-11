@@ -23,8 +23,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 
-public class JREUtils
-{
+public class JREUtils {
     private JREUtils() {}
     
     public static String JRE_ARCHITECTURE;
@@ -32,18 +31,18 @@ public class JREUtils
     public static String LD_LIBRARY_PATH;
     private static String nativeLibDir;
 
-    public static void checkJavaArchitecture(LoggableActivity act, String jreArch) throws Exception {
-        String[] argName = Tools.CURRENT_ARCHITECTURE.split("/");
+    /**
+     * Checks if the java architecture is correct for the device architecture.
+     * @param act An Activity with logging capabilities
+     * @param jreArch The java architecture to compare as a String.
+     */
+    public static void checkJavaArchitecture(LoggableActivity act, String jreArch) {
         act.appendlnToLog("Architecture: " + Tools.CURRENT_ARCHITECTURE);
-        if (!(jreArch.contains(argName[0]) || jreArch.contains(argName[1]))) {
-            // x86 check workaround
-            if (jreArch.startsWith("i") && jreArch.endsWith("86") && Tools.CURRENT_ARCHITECTURE.contains("x86") && !Tools.CURRENT_ARCHITECTURE.contains("64")) {
-                return;
-            }
+        if(Tools.CURRENT_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
 
-            act.appendlnToLog("Architecture " + Tools.CURRENT_ARCHITECTURE + " is incompatible with Java Runtime " + jreArch);
-            throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, Tools.CURRENT_ARCHITECTURE, jreArch));
-        }
+        act.appendlnToLog("Architecture " + Tools.CURRENT_ARCHITECTURE + " is incompatible with Java Runtime " + jreArch);
+        throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, String.valueOf(Tools.CURRENT_ARCHITECTURE), jreArch));
+
     }
     
     public static String findInLdLibPath(String libName) {
