@@ -292,23 +292,24 @@ public class JREUtils
         }
 
         List<String> javaArgList = new ArrayList<String>();
+
+
+
+        //Remove arguments that can interfere with the good working of the launcher
+        purgeArg(javaArgList,"-Xms");
+        purgeArg(javaArgList,"-Xmx");
+        purgeArg(javaArgList,"-d32");
+        purgeArg(javaArgList,"-d64");
+
+        //Add automatically generated args
         javaArgList.add(Tools.DIR_HOME_JRE + "/bin/java");
         Tools.getJavaArgs(ctx, javaArgList,graphicsLib);
-            purgeArg(javaArgList,"-Xms");
-            purgeArg(javaArgList,"-Xmx");
-            /*if(Tools.CURRENT_ARCHITECTURE.contains("32") && ((mi.availMem / 1048576L)-50) > 300) {
-                javaArgList.add("-Xms300M");
-                javaArgList.add("-Xmx300M");
-            }else {*/
-                javaArgList.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
-                javaArgList.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
-            //}
-            ctx.runOnUiThread(new Runnable() {
-                public void run() {
-                    Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show();
-                }
-            });
-            System.out.println(javaArgList);
+
+        javaArgList.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+        javaArgList.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+
+        ctx.runOnUiThread(() -> Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
+        System.out.println(javaArgList);
         javaArgList.addAll(args);
         
         // For debugging only!
@@ -328,21 +329,13 @@ public class JREUtils
         final int exitCode = VMLauncher.launchJVM(javaArgList.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
-            ctx.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-                        dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
-                        dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+            ctx.runOnUiThread(() -> {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+                dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
 
-                                @Override
-                                public void onClick(DialogInterface p1, int p2){
-                                    BaseMainActivity.fullyExit();
-                                }
-                            });
-                        dialog.show();
-                    }
-                });
+                dialog.setPositiveButton(android.R.string.ok, (p1, p2) -> BaseMainActivity.fullyExit());
+                dialog.show();
+            });
         }
         return exitCode;
     }
@@ -350,7 +343,7 @@ public class JREUtils
     /**
      * Parse and separate java arguments in a user friendly fashion
      * It supports multi line and absence of spaces between arguments
-     * The function also supports auto-removal of improper arguments.
+     * The function also supports auto-removal of improper arguments, although it may miss some.
      *
      * @param args The un-parsed argument list.
      * @return Parsed args as an ArrayList
