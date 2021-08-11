@@ -36,11 +36,11 @@ public class JREUtils {
      * @param jreArch The java architecture to compare as a String.
      */
     public static void checkJavaArchitecture(LoggableActivity act, String jreArch) {
-        act.appendlnToLog("Architecture: " + archAsString(Tools.CURRENT_ARCHITECTURE));
-        if(Tools.CURRENT_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
+        act.appendlnToLog("Architecture: " + archAsString(Tools.DEVICE_ARCHITECTURE));
+        if(Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
 
-        act.appendlnToLog("Architecture " + archAsString(Tools.CURRENT_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
-        throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.CURRENT_ARCHITECTURE), jreArch));
+        act.appendlnToLog("Architecture " + archAsString(Tools.DEVICE_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
+        throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
 
     }
     

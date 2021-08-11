@@ -45,7 +45,7 @@ public final class Tools {
     public static String DIR_DATA = "/data/data/" + BuildConfig.APPLICATION_ID;
     public static String MULTIRT_HOME = DIR_DATA+"/runtimes";
     public static String LOCAL_RENDERER = null;
-    public static int CURRENT_ARCHITECTURE;
+    public static int DEVICE_ARCHITECTURE;
 
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;

@@ -6,7 +6,7 @@ import android.content.pm.*;
 import android.content.res.*;
 import android.os.*;
 import androidx.core.app.*;
-import androidx.preference.*;
+
 import android.util.*;
 import java.io.*;
 import java.text.*;
@@ -61,7 +61,7 @@ public class PojavApplication extends Application
             // Tools.FILE_ACCOUNT_JSON = getFilesDir().getAbsolutePath() + "/account_profiles.json";
 
 
-			Tools.CURRENT_ARCHITECTURE = Architecture.getDeviceArchitecture();
+			Tools.DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
 			//Force x86 lib directory for Asus x86 based zenfones
 			if(Architecture.isx86Device() && Architecture.is32BitsDevice()){
 				String originalJNIDirectory = getApplicationInfo().nativeLibraryDir;
