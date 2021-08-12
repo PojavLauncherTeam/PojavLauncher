@@ -16,6 +16,4 @@ public class MinecraftGLView extends TextureView
         //since it forces android to used the background color of the view/layout behind it.
         setOpaque(false);
     }
-
-    
 }

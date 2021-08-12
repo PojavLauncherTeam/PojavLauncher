@@ -315,7 +315,7 @@ public class BaseMainActivity extends LoggableActivity {
             });
 
 
-            minecraftGLView.setFocusable(true);
+
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 /*
@@ -325,7 +325,7 @@ public class BaseMainActivity extends LoggableActivity {
                 private boolean shouldBeDown = false;
                 /*
                  * When the android system has fingers really near to each other, it tends to
-                 * either swap or remove a pointer.
+                 * either swap or remove a pointer !
                  * This variable is here to mitigate the issue.
                  */
                 private int lastPointerCount = 0;
@@ -636,12 +636,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     }
 
-    boolean isKeyboard(KeyEvent evt) {
-        System.out.println("Event:" +evt);
-        return EfficientAndroidLWJGLKeycode.containsKey(evt.getKeyCode());
-    }
-
-
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         /*
@@ -916,29 +910,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
         CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
-    }
-    public static boolean doesObjectContainField(Class objectClass, String fieldName) {
-        for (Field field : objectClass.getFields()) {
-            if (field.getName().equals(fieldName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public void sendKeyPress(char keyChar) {
-        if(doesObjectContainField(KeyEvent.class,"KEYCODE_" + Character.toUpperCase(keyChar))) {
-            try {
-                int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
-                sendKeyPress(EfficientAndroidLWJGLKeycode.getValue(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
-                sendKeyPress(EfficientAndroidLWJGLKeycode.getValue(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-
-            }
-            return;
-        }
-
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
     }
 
     public static void sendKeyPress(int keyCode) {

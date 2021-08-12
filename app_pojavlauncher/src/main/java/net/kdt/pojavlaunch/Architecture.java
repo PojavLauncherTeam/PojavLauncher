@@ -4,7 +4,9 @@ import android.os.Build;
 
 import java.util.Locale;
 
-
+/**
+ * This class aims at providing a simple and easy way to deal with the device architecture.
+ */
 public class Architecture {
 	public static int UNSUPPORTED_ARCH = -1;
 	public static int ARCH_ARM64 = 0x1;
@@ -30,7 +32,8 @@ public class Architecture {
 	}
 
 	/**
-	 * Tells the device supported architecture
+	 * Tells the device supported architecture.
+	 * Since mips(/64) has been phased out long ago, is isn't checked here.
 	 *
 	 * @return ARCH_ARM || ARCH_ARM64 || ARCH_X86 || ARCH_86_64
 	 */
