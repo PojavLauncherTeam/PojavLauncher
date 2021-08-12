@@ -114,7 +114,7 @@
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klávesnice</string>
-    <string name="control_chat">Chat</string>
+    <string name="control_chat">čat</string>
     <string name="control_debug">Ladění</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sek</string>
@@ -154,6 +154,7 @@
     <string name="customctrl_corner_radius">Poloměr rohu</string>
     <string name="customctrl_stroke_width">Šířka obrysu</string>
     <string name="customctrl_stroke_color">Barva obrysu</string>
+    <string name="customctrl_dynamicpos">Manuální dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
     <string name="customctrl_transparency_bg">Průhlednost pozadí</string>
