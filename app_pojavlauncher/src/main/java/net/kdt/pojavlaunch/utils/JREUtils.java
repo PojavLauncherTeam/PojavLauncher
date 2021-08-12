@@ -257,26 +257,25 @@ public class JREUtils {
         // return ldLibraryPath;
     }
     
-    public static int launchJavaVM(final LoggableActivity ctx, List<String> JVMArguments) throws Throwable {
+    public static int launchJavaVM(final LoggableActivity ctx,final List<String> JVMArgs) throws Throwable {
         JREUtils.relocateLibPath(ctx);
         final String graphicsLib = loadGraphicsLibrary();
+        List<String> userArgs = getJavaArgs(ctx,graphicsLib);
 
-        //List<String> javaArgList = new ArrayList<>();
         //Remove arguments that can interfere with the good working of the launcher
-        purgeArg(JVMArguments,"-Xms");
-        purgeArg(JVMArguments,"-Xmx");
-        purgeArg(JVMArguments,"-d32");
-        purgeArg(JVMArguments,"-d64");
+        purgeArg(userArgs,"-Xms");
+        purgeArg(userArgs,"-Xmx");
+        purgeArg(userArgs,"-d32");
+        purgeArg(userArgs,"-d64");
 
         //Add automatically generated args
-        JVMArguments.add(Tools.DIR_HOME_JRE + "/bin/java");
-        getJavaArgs(ctx, JVMArguments,graphicsLib);
+        userArgs.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+        userArgs.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
 
-        JVMArguments.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
-        JVMArguments.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+        userArgs.addAll(JVMArgs);
 
         ctx.runOnUiThread(() -> Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
-        System.out.println(JVMArguments);
+        System.out.println(JVMArgs);
         
         // For debugging only!
 /*
@@ -292,7 +291,7 @@ public class JREUtils {
         setupExitTrap(ctx.getApplication());
         chdir(Tools.DIR_GAME_NEW);
 
-        final int exitCode = VMLauncher.launchJVM(JVMArguments.toArray(new String[0]));
+        final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
             ctx.runOnUiThread(() -> {
@@ -307,13 +306,13 @@ public class JREUtils {
     }
 
     /**
-     *  Fills up the <b>javaArgList</b> passed in parameter with the user arguments
+     *  Gives an argument list filled with both the user args
      *  and the auto-generated ones (eg. the window resolution).
      * @param ctx The application context
-     * @param javaArgList The current list of arguments
      * @param renderLib The name of the renderer used.
+     * @return A list filled with args.
      */
-    public static void getJavaArgs(Context ctx, List<String> javaArgList, String renderLib) {
+    public static List<String> getJavaArgs(Context ctx, String renderLib) {
         List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         String[] overridableArguments = new String[]{
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
@@ -352,8 +351,8 @@ public class JREUtils {
         }
 
         //Add all the arguments
-        javaArgList.addAll(userArguments);
-        javaArgList.addAll(Arrays.asList(overridableArguments));
+        userArguments.addAll(Arrays.asList(overridableArguments));
+        return userArguments;
     }
 
     /**
