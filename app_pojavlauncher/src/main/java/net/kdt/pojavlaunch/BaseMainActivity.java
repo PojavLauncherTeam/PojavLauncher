@@ -902,25 +902,6 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
 
-    /**
-     * Toggle on and off the soft keyboard, depending of the state
-     * The condition is prone to errors if the keyboard is being hidden without the consent
-     * of the current TouchCharInput
-     */
-    public void switchKeyboardState(){
-        //If an hard keyboard is present, never trigger the soft one
-        if(touchCharInput.hasFocus()
-        || getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY){
-            touchCharInput.clear();
-            touchCharInput.disable();
-
-        }else{
-            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            touchCharInput.enable();
-            touchCharInput.postDelayed(() -> imm.showSoftInput(touchCharInput, InputMethodManager.SHOW_IMPLICIT), 200);
-        }
-    }
-
     protected void setRightOverride(boolean val) {
         this.rightOverride = val;
     }

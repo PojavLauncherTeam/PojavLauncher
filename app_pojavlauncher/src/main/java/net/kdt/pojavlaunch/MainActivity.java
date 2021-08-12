@@ -63,7 +63,7 @@ public class MainActivity extends BaseMainActivity {
                     for(int keycode : button.getProperties().keycodes){
                         switch (keycode) {
                             case ControlData.SPECIALBTN_KEYBOARD:
-                                switchKeyboardState();
+                                touchCharInput.switchKeyboardState();
                                 break;
 
                             case ControlData.SPECIALBTN_TOGGLECTRL:
