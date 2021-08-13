@@ -154,6 +154,7 @@
     <string name="customctrl_corner_radius">Eckenradius</string>
     <string name="customctrl_stroke_width">Strichbreite</string>
     <string name="customctrl_stroke_color">Strichfarbe</string>
+    <string name="customctrl_dynamicpos">Manuelle dynamische Position</string>
     <string name="customctrl_dynamicpos_x">Dynamische X-Achse</string>
     <string name="customctrl_dynamicpos_y">Dynamische Y-Achse</string>
     <string name="customctrl_transparency_bg">Hintergrund-Transparenz</string>
