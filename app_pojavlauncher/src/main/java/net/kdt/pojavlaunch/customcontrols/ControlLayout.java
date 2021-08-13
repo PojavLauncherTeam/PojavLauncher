@@ -260,7 +260,7 @@ public class ControlLayout extends FrameLayout
 
 		//Check if the action is cancelling, reset the lastControl button associated to the view
 		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
-			if(lastControlButton != null) lastControlButton.sendKeyPresses(false);
+			if(lastControlButton != null) lastControlButton.sendKeyPresses(ev,false);
 			mapTable.put(v, null);
 			return true;
 		}
@@ -276,7 +276,7 @@ public class ControlLayout extends FrameLayout
 		}
 
 		//Release last keys
-		if (lastControlButton != null) lastControlButton.sendKeyPresses(false);
+		if (lastControlButton != null) lastControlButton.sendKeyPresses(ev,false);
 		mapTable.put(v, null);
 
 		//Look for another SWIPEABLE button
@@ -288,7 +288,7 @@ public class ControlLayout extends FrameLayout
 
 				//Press the new key
 				if(!button.equals(lastControlButton)){
-					button.sendKeyPresses(true);
+					button.sendKeyPresses(ev,true);
 
 					mapTable.put(v, button);
 				}
