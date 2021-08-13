@@ -13,16 +13,14 @@ public class LauncherPreferences
 	public static boolean PREF_VERTYPE_SNAPSHOT = false;
 	public static boolean PREF_VERTYPE_OLDALPHA = false;
 	public static boolean PREF_VERTYPE_OLDBETA = false;
-	public static boolean PREF_FREEFORM = false;
 	public static boolean PREF_HIDE_SIDEBAR = false;
 	public static boolean PREF_IGNORE_NOTCH = false;
 	public static int PREF_NOTCH_SIZE = 0;
 	public static float PREF_BUTTONSIZE = 100f;
 	public static float PREF_MOUSESCALE = 100f;
-	public static int PREF_LONGPRESS_TRIGGER = 500;
+	public static int PREF_LONGPRESS_TRIGGER = 300;
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
-    public static String PREF_CUSTOM_OPENGL_LIBNAME = "libgl4es_114.so";
     public static String PREF_LANGUAGE = "default";
     public static String PREF_VERSION_REPOS = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json";
     public static boolean PREF_CHECK_LIBRARY_SHA = true;
@@ -36,7 +34,6 @@ public class LauncherPreferences
 		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
 		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
 		PREF_MOUSESPEED = ((float)DEFAULT_PREF.getInt("mousespeed",100))/100f;
-		PREF_FREEFORM = DEFAULT_PREF.getBoolean("freeform", false);
 		PREF_HIDE_SIDEBAR = DEFAULT_PREF.getBoolean("hideSidebar", false);
 		PREF_IGNORE_NOTCH = DEFAULT_PREF.getBoolean("ignoreNotch", false);
 		PREF_VERTYPE_RELEASE = DEFAULT_PREF.getBoolean("vertype_release", true);

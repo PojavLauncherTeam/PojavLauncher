@@ -31,13 +31,6 @@
             android:key="disableGestures"
             android:summary="@string/mcl_disable_gestures_subtitle"
             android:title="@string/mcl_disable_gestures" />
-        
-        <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="freeform"
-            android:summary="@string/mcl_setting_subtitle_freeform"
-            android:title="@string/mcl_setting_title_freeform"
-            app2:icon="@drawable/freeform_opt" />
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
