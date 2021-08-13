@@ -344,26 +344,15 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             mActivity.mCrashView.setLastCrash("");
 
             try {
-                /*
-                 List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
-                 jvmArgs.add("-Xms128M");
-                 jvmArgs.add("-Xmx1G");
-                 */
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
                 // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
-
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);
             }
-
-            /*
-             FloatingIntent maini = new FloatingIntent(PojavLauncherActivity.this, MainActivity.class);
-             maini.startFloatingActivity();
-             */
         }
 
         mActivity.mTask = null;

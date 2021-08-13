@@ -1,28 +1,37 @@
 package net.kdt.pojavlaunch.prefs;
 
-import android.app.ActivityManager;
+
+import android.graphics.Color;
 import android.os.*;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.*;
-
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.fragments.LauncherFragment;
 
 import android.content.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import static net.kdt.pojavlaunch.Architecture.is32BitsDevice;
-import static net.kdt.pojavlaunch.Tools.getFreeDeviceMemory;
 import static net.kdt.pojavlaunch.Tools.getTotalDeviceMemory;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 public class LauncherPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener
 {
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        view.setBackgroundColor(Color.parseColor("#44000000"));
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         addPreferencesFromResource(R.xml.pref_main);
-		
-        // Disable freeform mode in Android 6.0 and below.
-        findPreference("freeform").setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N);
+
         //Disable notch checking behavior on android 8.1 and below.
         findPreference("ignoreNotch").setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && PREF_NOTCH_SIZE != 0);
 		
