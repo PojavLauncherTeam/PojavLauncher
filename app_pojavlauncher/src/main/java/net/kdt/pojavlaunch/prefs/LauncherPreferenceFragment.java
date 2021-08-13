@@ -11,6 +11,8 @@ import net.kdt.pojavlaunch.Tools;
 import android.content.*;
 
 import static net.kdt.pojavlaunch.Architecture.is32BitsDevice;
+import static net.kdt.pojavlaunch.Tools.getFreeDeviceMemory;
+import static net.kdt.pojavlaunch.Tools.getTotalDeviceMemory;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 public class LauncherPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener
@@ -50,16 +52,14 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
 
 
         int maxRAM;
-        int freeMem = (int) (Runtime.getRuntime().freeMemory() / 1048576L);
-        ActivityManager actManager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-        actManager.getMemoryInfo(memInfo);
+        int deviceRam = getTotalDeviceMemory(getContext());
+
 
         CustomSeekBarPreference seek7 = findPreference("allocation");
         seek7.setMin(256);
 
-        if(is32BitsDevice()) maxRAM = Math.min(1100, (int)(memInfo.totalMem /1024 /1024));
-        else maxRAM = freeMem > 4096 ? freeMem : (int)(memInfo.totalMem /1024 /1024);
+        if(is32BitsDevice()) maxRAM = Math.min(1100, deviceRam);
+        else maxRAM = deviceRam - (deviceRam < 3064 ? 800 : 1024); //To have a minimum for the device to breathe
 
         seek7.setMax(maxRAM);
         seek7.setValue(LauncherPreferences.PREF_RAM_ALLOCATION);
@@ -90,6 +90,6 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences p, String s) {
-        LauncherPreferences.loadPreferences();
+        LauncherPreferences.loadPreferences(getContext());
     }
 }

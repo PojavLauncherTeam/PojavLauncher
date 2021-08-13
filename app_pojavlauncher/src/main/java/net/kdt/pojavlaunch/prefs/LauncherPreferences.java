@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.prefs;
 import android.content.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.utils.JREUtils;
 
 public class LauncherPreferences
 {
@@ -26,9 +27,9 @@ public class LauncherPreferences
     public static boolean PREF_CHECK_LIBRARY_SHA = true;
     public static boolean PREF_DISABLE_GESTURES = false;
     public static float PREF_MOUSESPEED = 1f;
-    public static int PREF_RAM_ALLOCATION=300;
+    public static int PREF_RAM_ALLOCATION;
     public static String PREF_DEFAULT_RUNTIME;
-    public static void loadPreferences() {
+    public static void loadPreferences(Context ctx) {
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
 
 		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
@@ -45,10 +46,7 @@ public class LauncherPreferences
         PREF_LANGUAGE = DEFAULT_PREF.getString("language", "default");
         PREF_CHECK_LIBRARY_SHA = DEFAULT_PREF.getBoolean("checkLibraries",true);
         PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
-        PREF_RAM_ALLOCATION = DEFAULT_PREF.getInt("allocation",300);
-		// Get double of max Android heap to set default heap size
-        int androidHeap = (int) (Runtime.getRuntime().maxMemory() / 1024l / 512l);
-        int doubleAndroidHeap = androidHeap * 2;
+        PREF_RAM_ALLOCATION = DEFAULT_PREF.getInt("allocation", findBestRAMAllocation(ctx));
         PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs", "");
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
@@ -82,7 +80,7 @@ public class LauncherPreferences
             PREF_RENDERER = "opengles" + PREF_RENDERER;
 	    }
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
-        for (String arg : PREF_CUSTOM_JAVA_ARGS.split(" ")) {
+        for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {
             if (arg.startsWith(argLwjglLibname)) {
                 // purge arg
                 DEFAULT_PREF.edit().putString("javaArgs",
@@ -99,5 +97,25 @@ public class LauncherPreferences
             PREF_DEFAULT_RUNTIME = MultiRTUtils.getRuntimes().get(0).name;
             LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
         }
+    }
+
+    /**
+     * This functions aims at finding the best default RAM amount,
+     * according to the RAM amount of the physical device.
+     * Put not enough RAM ? Minecraft will lag and crash.
+     * Put too much RAM ?
+     * The GC will lag, android won't be able to breathe properly.
+     * @param ctx Context needed to get the total memory of the device.
+     * @return The best default value found.
+     */
+    private static int findBestRAMAllocation(Context ctx){
+        int deviceRam = Tools.getTotalDeviceMemory(ctx);
+        if (deviceRam < 1024) return 300;
+        if (deviceRam < 1536) return 450;
+        if (deviceRam < 2048) return 600;
+        if (deviceRam < 3064) return 936;
+        if (deviceRam < 4096) return 1148;
+        if (deviceRam < 6144) return 1536;
+        return 2048; //Default RAM allocation for 64 bits
     }
 }
