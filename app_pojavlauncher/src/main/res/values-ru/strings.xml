@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
     <string name="login_offline_label">Войти как офлайн учётная запись</string>
+    <string name="login_error_invalid_username">Наверное имя пользователя. Оно должно быть длиной от 3 до 16 символов и содержать только латинские буквы, цифры или нижнее подчёркивание.</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_error_offline_password">Офлайн учётная запись не может содержать пароль!</string>
     <string name="login_microsoft">Войти через Microsoft</string>
@@ -153,6 +154,7 @@
     <string name="customctrl_corner_radius">Радиус скругления</string>
     <string name="customctrl_stroke_width">Толщина обводки</string>
     <string name="customctrl_stroke_color">Цвет обводки</string>
+    <string name="customctrl_dynamicpos">Ручная настройка динамической позиции</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
@@ -205,6 +207,7 @@
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы один Java Runtime</string>
     <string name="multirt_nocompartiblert">Не удалось найти совместимую Java Runtime</string>
     <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. К сожалению, на данный момент GL4ES не полностью поддерживает её, но есть некоторые дополнительные ресурсы, которые вы можете установить, чтобы запустить эти версии. Нажмите на кнопку «ОК», чтобы подтвердить установку или «Отмена», чтобы прервать запуск.</string>
+    <string name="compat_11x_playanyway">Запустить в любом случае</string>
     <string name="pvc_gameDirectory">Папка игры</string>
     <string name="pvc_jvmArgs">Аргументы JVM</string>
     <string name="pvc_title">Поверсионные настройки</string>
