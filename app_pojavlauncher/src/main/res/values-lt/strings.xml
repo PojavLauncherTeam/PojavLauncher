@@ -83,7 +83,6 @@
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksportuoja OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksportuoja OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksportuoja OpenGL 2.1 + dalies 3.2 (1.17 nepalaikoma)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuoja OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
