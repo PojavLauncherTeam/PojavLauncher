@@ -80,15 +80,6 @@ public class CallbackBridge {
         // sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
     }
 
-    /**
-     * Send only the char to the input bridge
-     * Intended for chat functions, or anything that only requires writing text
-     * @param keychar the char to send
-     */
-    public static void sendChar(char keychar){
-        nativeSendChar(keychar);
-    }
-
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
         DEBUG_STRING.append("MouseKey=").append(button).append(", down=").append(isDown).append("\n");
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
