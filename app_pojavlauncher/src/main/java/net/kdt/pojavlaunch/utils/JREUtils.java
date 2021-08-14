@@ -271,11 +271,13 @@ public class JREUtils
                     graphicsLib = "libgl4es_114.so";
                     break;
                 case "opengles2_5":
-                case "opengles3":
                     graphicsLib = "libgl4es_115.so";
                     break;
                 case "vulkan_zink":
                     graphicsLib = "libOSMesa_8.so";
+                    break;
+                case "opengles3_vgpu":
+                    graphicsLib = "libvgpu.so";
                     break;
                 default:
                     throw new RuntimeException("Undefined renderer: " + Tools.LOCAL_RENDERER);

@@ -12,7 +12,7 @@
 
 ## Navigation
 - [Introduction](#introduction)
-- [Building](#building)
+- [Building](#building) 
 - [Current status](#current-status)
 - [License](#license)
 - [Contributing](#contributing)

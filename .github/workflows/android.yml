@@ -64,6 +64,35 @@ jobs:
         git add .
         git commit -am "CI: Update gl4es"
         git push
+ 
+    - name: Get vgpu
+      if: steps.vgpu-cache.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        repository: 'luo9674/VGPU'
+        path: 'vgpu'
+        
+    - name: Build vgpu
+      if: steps.vgpu-cache.outputs.cache-hit != 'true'
+      continue-on-error: true
+      run: |
+        cd vgpu
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git config --global user.name "github-actions"
+        git remote add upstream https://github.com/luo9674/VGPU
+        git fetch upstream
+        git checkout main
+        git merge --allow-unrelated-histories upstream/main || echo "Merge exit code $?"
+        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
+    
+    - name: Install vgpu
+      if: steps.vgpu-cache.outputs.cache-hit != 'true'
+      run: |
+        cp -R vgpu/libs/* app_pojavlauncher/src/main/jniLibs/
+        mv vgpu ..
+        git add .
+        git commit -am "CI: Update vgpu"
+        git push
     
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
@@ -120,4 +149,3 @@ jobs:
       with:
           name: app-debug-noruntime
           path: out/app-debug-noruntime.apk
-
