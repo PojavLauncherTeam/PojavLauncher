@@ -84,7 +84,6 @@
     <string name="mcl_setting_category_renderer">Motor de redare</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): export OpenGL 2,1 + parțial 3.2 (nu este încă 1.17)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
