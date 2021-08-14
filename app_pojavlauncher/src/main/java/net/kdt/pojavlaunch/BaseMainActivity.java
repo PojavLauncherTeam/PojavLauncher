@@ -59,22 +59,22 @@ public class BaseMainActivity extends LoggableActivity {
     private static boolean triggeredLeftMouseButton = false;
     private final Handler theHandler = new Handler() {
         public void handleMessage(Message msg) {
-            if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
-                switch (msg.what) {
-                    case MSG_LEFT_MOUSE_BUTTON_CHECK: {
-                        int x = CallbackBridge.mouseX;
-                        int y = CallbackBridge.mouseY;
-                        if (CallbackBridge.isGrabbing() &&
-                                Math.abs(initialX - x) < fingerStillThreshold &&
-                                Math.abs(initialY - y) < fingerStillThreshold) {
-                            triggeredLeftMouseButton = true;
-                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
-                        }
-                    } break;
-                    case MSG_DROP_ITEM_BUTTON_CHECK: {
-                        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
-                    } break;
-                }
+            switch (msg.what) {
+                case MSG_LEFT_MOUSE_BUTTON_CHECK:
+                    if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
+                    int x = CallbackBridge.mouseX;
+                    int y = CallbackBridge.mouseY;
+                    if (CallbackBridge.isGrabbing() &&
+                            Math.abs(initialX - x) < fingerStillThreshold &&
+                            Math.abs(initialY - y) < fingerStillThreshold) {
+                        triggeredLeftMouseButton = true;
+                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+                    }
+                    break;
+                case MSG_DROP_ITEM_BUTTON_CHECK:
+                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
+                 break;
+
             }
         }
     };
