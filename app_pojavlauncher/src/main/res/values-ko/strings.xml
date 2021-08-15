@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_renderer">렌더러</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 4.6 내보내기 (불안정함, 1.17 미지원)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 내보내기</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
     <string name="mcl_setting_veroption_release">Release</string>
