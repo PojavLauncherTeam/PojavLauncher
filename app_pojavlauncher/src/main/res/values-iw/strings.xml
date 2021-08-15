@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_renderer">מעבד</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): מייצא את OpenGL 4.6 (לא יציב ואין תמיכה ב 1.17 כרגע)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): מייצא את OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
