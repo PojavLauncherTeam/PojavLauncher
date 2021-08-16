@@ -63,7 +63,7 @@ public class MainActivity extends BaseMainActivity {
                     for(int keycode : button.getProperties().keycodes){
                         switch (keycode) {
                             case ControlData.SPECIALBTN_KEYBOARD:
-                                switchKeyboardState();
+                                touchCharInput.switchKeyboardState();
                                 break;
 
                             case ControlData.SPECIALBTN_TOGGLECTRL:
@@ -194,7 +194,7 @@ public class MainActivity extends BaseMainActivity {
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             // Reload PREF_DEFAULTCTRL_PATH
-            LauncherPreferences.loadPreferences();
+            LauncherPreferences.loadPreferences(getApplicationContext());
             try {
                 mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
             } catch (IOException e) {

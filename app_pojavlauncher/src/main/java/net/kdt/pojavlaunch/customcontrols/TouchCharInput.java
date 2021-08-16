@@ -1,8 +1,13 @@
 package net.kdt.pojavlaunch.customcontrols;
 
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,6 +91,27 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     public void setSelection(int index) {
         super.setSelection(5);
     }
+
+    /**
+     * Toggle on and off the soft keyboard, depending of the state
+     *
+     * @return if the keyboard is set to be shown.
+     */
+    public boolean switchKeyboardState(){
+        //If an hard keyboard is present, never trigger the soft one
+        if(hasFocus()
+                || getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY){
+            clear();
+            disable();
+            return false;
+        }else{
+            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
+            enable();
+            postDelayed(() -> imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT), 200);
+            return true;
+        }
+    }
+
 
     /**
      * Clear the EditText from any leftover inputs

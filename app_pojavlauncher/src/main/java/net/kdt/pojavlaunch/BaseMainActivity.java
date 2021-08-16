@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
+
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
@@ -57,22 +59,22 @@ public class BaseMainActivity extends LoggableActivity {
     private static boolean triggeredLeftMouseButton = false;
     private final Handler theHandler = new Handler() {
         public void handleMessage(Message msg) {
-            if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
-                switch (msg.what) {
-                    case MSG_LEFT_MOUSE_BUTTON_CHECK: {
-                        int x = CallbackBridge.mouseX;
-                        int y = CallbackBridge.mouseY;
-                        if (CallbackBridge.isGrabbing() &&
-                                Math.abs(initialX - x) < fingerStillThreshold &&
-                                Math.abs(initialY - y) < fingerStillThreshold) {
-                            triggeredLeftMouseButton = true;
-                            sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
-                        }
-                    } break;
-                    case MSG_DROP_ITEM_BUTTON_CHECK: {
-                        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
-                    } break;
-                }
+            switch (msg.what) {
+                case MSG_LEFT_MOUSE_BUTTON_CHECK:
+                    if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
+                    int x = CallbackBridge.mouseX;
+                    int y = CallbackBridge.mouseY;
+                    if (CallbackBridge.isGrabbing() &&
+                            Math.abs(initialX - x) < fingerStillThreshold &&
+                            Math.abs(initialY - y) < fingerStillThreshold) {
+                        triggeredLeftMouseButton = true;
+                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+                    }
+                    break;
+                case MSG_DROP_ITEM_BUTTON_CHECK:
+                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
+                 break;
+
             }
         }
     };
@@ -313,7 +315,7 @@ public class BaseMainActivity extends LoggableActivity {
             });
 
 
-            minecraftGLView.setFocusable(true);
+
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 /*
@@ -323,7 +325,7 @@ public class BaseMainActivity extends LoggableActivity {
                 private boolean shouldBeDown = false;
                 /*
                  * When the android system has fingers really near to each other, it tends to
-                 * either swap or remove a pointer.
+                 * either swap or remove a pointer !
                  * This variable is here to mitigate the issue.
                  */
                 private int lastPointerCount = 0;
@@ -634,12 +636,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     }
 
-    boolean isKeyboard(KeyEvent evt) {
-        System.out.println("Event:" +evt);
-        return EfficientAndroidLWJGLKeycode.containsKey(evt.getKeyCode());
-    }
-
-
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         /*
@@ -763,7 +759,7 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     private void checkVulkanZinkIsSupported() {
-        if (Tools.CURRENT_ARCHITECTURE.equals("x86")
+        if (Tools.DEVICE_ARCHITECTURE == ARCH_X86
          || Build.VERSION.SDK_INT < 25
          || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
          || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
@@ -900,25 +896,6 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
 
-    /**
-     * Toggle on and off the soft keyboard, depending of the state
-     * The condition is prone to errors if the keyboard is being hidden without the consent
-     * of the current TouchCharInput
-     */
-    public void switchKeyboardState(){
-        //If an hard keyboard is present, never trigger the soft one
-        if(touchCharInput.hasFocus()
-        || getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY){
-            touchCharInput.clear();
-            touchCharInput.disable();
-
-        }else{
-            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            touchCharInput.enable();
-            touchCharInput.postDelayed(() -> imm.showSoftInput(touchCharInput, InputMethodManager.SHOW_IMPLICIT), 200);
-        }
-    }
-
     protected void setRightOverride(boolean val) {
         this.rightOverride = val;
     }
@@ -933,29 +910,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
         CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
-    }
-    public static boolean doesObjectContainField(Class objectClass, String fieldName) {
-        for (Field field : objectClass.getFields()) {
-            if (field.getName().equals(fieldName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public void sendKeyPress(char keyChar) {
-        if(doesObjectContainField(KeyEvent.class,"KEYCODE_" + Character.toUpperCase(keyChar))) {
-            try {
-                int keyCode = KeyEvent.class.getField("KEYCODE_" + Character.toUpperCase(keyChar)).getInt(null);
-                sendKeyPress(EfficientAndroidLWJGLKeycode.getValue(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), true);
-                sendKeyPress(EfficientAndroidLWJGLKeycode.getValue(keyCode), keyChar, 0, CallbackBridge.getCurrentMods(), false);
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-
-            }
-            return;
-        }
-
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), true);
-        sendKeyPress(0, keyChar, 0, CallbackBridge.getCurrentMods(), false);
     }
 
     public static void sendKeyPress(int keyCode) {

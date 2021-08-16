@@ -344,35 +344,15 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             mActivity.mCrashView.setLastCrash("");
 
             try {
-                /*
-                 List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
-                 jvmArgs.add("-Xms128M");
-                 jvmArgs.add("-Xmx1G");
-                 */
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
                 // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                if (LauncherPreferences.PREF_FREEFORM) {
-                    DisplayMetrics dm = new DisplayMetrics();
-                    mActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-                    ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
-                    Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
-                    options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
-                    mActivity.startActivity(mainIntent, options.toBundle());
-                } else {
-                    mActivity.startActivity(mainIntent);
-                }
+                mActivity.startActivity(mainIntent);
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);
             }
-
-            /*
-             FloatingIntent maini = new FloatingIntent(PojavLauncherActivity.this, MainActivity.class);
-             maini.startFloatingActivity();
-             */
         }
 
         mActivity.mTask = null;

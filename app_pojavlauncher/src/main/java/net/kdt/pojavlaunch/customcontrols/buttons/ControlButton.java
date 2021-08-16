@@ -269,7 +269,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         if(mProperties.isSwipeable && !isPointerOutOfBounds){
                             //Remove keys
                             if(!triggerToggle(event)) {
-                                sendKeyPresses(event, false);
+                                sendKeyPresses(event,false);
                             }
                         }
                         isPointerOutOfBounds = true;
@@ -282,7 +282,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         ((ControlLayout) getParent()).onTouch(this, event);
                         //RE-press the button
                         if(mProperties.isSwipeable && !mProperties.isToggle){
-                            sendKeyPresses(event, true);
+                            sendKeyPresses(event,true);
                         }
                     }
                     isPointerOutOfBounds = false;
@@ -291,7 +291,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 case MotionEvent.ACTION_DOWN: // 0
                 case MotionEvent.ACTION_POINTER_DOWN: // 5
                     if(!mProperties.isToggle){
-                        sendKeyPresses(event, true);
+                        sendKeyPresses(event,true);
                     }
                     break;
 
@@ -306,7 +306,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                     isPointerOutOfBounds = false;
 
                     if(!triggerToggle(event)) {
-                        sendKeyPresses(event, false);
+                        sendKeyPresses(event,false);
                     }
                     break;
 
@@ -476,7 +476,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             if(keycode >= GLFW_KEY_UNKNOWN){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
                 CallbackBridge.setModifiers(keycode, isDown);
-            }else {
+            }else{
                 super.onTouchEvent(event);
             }
         }
