@@ -96,6 +96,8 @@ jobs:
       run: |
         cp -R vgpu/libs/* app_pojavlauncher/src/main/jniLibs/
         mv vgpu ..
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git config --global user.name "github-actions"
         git add .
         git commit -am "CI: Update vgpu"
         git push
