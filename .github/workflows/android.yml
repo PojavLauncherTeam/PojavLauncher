@@ -75,7 +75,7 @@ jobs:
       id: vgpu-cache
       with:
         path: vgpu/libs
-        key: vgpu-android-shared-${{ steps.vgpu-sha.outputs.sha }}
+        key: vgpu-android-shared-1-${{ steps.vgpu-sha.outputs.sha }}
         
     - name: Get vgpu
       if: steps.vgpu-cache.outputs.cache-hit != 'true'
