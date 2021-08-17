@@ -260,17 +260,19 @@ public class JREUtils {
     public static int launchJavaVM(final LoggableActivity ctx,final List<String> JVMArgs) throws Throwable {
         JREUtils.relocateLibPath(ctx);
         final String graphicsLib = loadGraphicsLibrary();
-        List<String> userArgs = getJavaArgs(ctx,graphicsLib);
+        List<String> userArgs = getJavaArgs(ctx);
 
         //Remove arguments that can interfere with the good working of the launcher
         purgeArg(userArgs,"-Xms");
         purgeArg(userArgs,"-Xmx");
         purgeArg(userArgs,"-d32");
         purgeArg(userArgs,"-d64");
+        purgeArg(userArgs, "-Dorg.lwjgl.opengl.libname");
 
         //Add automatically generated args
         userArgs.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
         userArgs.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
+        if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
 
         userArgs.addAll(JVMArgs);
 
@@ -309,10 +311,9 @@ public class JREUtils {
      *  Gives an argument list filled with both the user args
      *  and the auto-generated ones (eg. the window resolution).
      * @param ctx The application context
-     * @param renderLib The name of the renderer used.
      * @return A list filled with args.
      */
-    public static List<String> getJavaArgs(Context ctx, String renderLib) {
+    public static List<String> getJavaArgs(Context ctx) {
         List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         String[] overridableArguments = new String[]{
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
@@ -323,7 +324,6 @@ public class JREUtils {
                 "-Dos.version=Android-" + Build.VERSION.RELEASE,
                 "-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW,
                 "-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW,
-                "-Dorg.lwjgl.opengl.libname=" + renderLib,
 
                 //LWJGL 3 DEBUG FLAGS
                 //"-Dorg.lwjgl.util.Debug=true",
@@ -393,6 +393,7 @@ public class JREUtils {
      * @return The name of the loaded library
      */
     public static String loadGraphicsLibrary(){
+        if(LOCAL_RENDERER == null) return null;
         String renderLibrary;
         switch (LOCAL_RENDERER){
             case "opengles2": renderLibrary = "libgl4es_114.so"; break;
