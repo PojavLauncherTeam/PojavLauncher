@@ -89,12 +89,6 @@ jobs:
       continue-on-error: true
       run: |
         cd vgpu
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global user.name "github-actions"
-        git remote add upstream https://github.com/luo9674/VGPU
-        git fetch upstream
-        git checkout main
-        git merge --allow-unrelated-histories upstream/main || echo "Merge exit code $?"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
     - name: Install vgpu
