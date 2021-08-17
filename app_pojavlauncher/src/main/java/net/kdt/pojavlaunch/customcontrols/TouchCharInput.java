@@ -107,7 +107,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         }else{
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
             enable();
-            postDelayed(() -> imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT), 200);
+            imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
             return true;
         }
     }
