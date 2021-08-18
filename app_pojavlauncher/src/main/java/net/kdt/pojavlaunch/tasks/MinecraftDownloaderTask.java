@@ -136,7 +136,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 for (final DependentLibrary libItem : verInfo.libraries) {
 
                     if (
-                        libItem.name.startsWith("net.java.jinput") ||
+                        // libItem.name.startsWith("net.java.jinput") ||
                         libItem.name.startsWith("org.lwjgl")
                     ) { // Black list
                         publishProgress("1", "Ignored " + libItem.name);
