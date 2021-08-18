@@ -78,7 +78,7 @@ public class Architecture {
 	public static int archAsInt(String arch){
 		arch = arch.toLowerCase().trim().replace(" ", "");
 		if(arch.contains("arm64") || arch.equals("aarch64")) return ARCH_ARM64;
-		if(arch.contains("arm")) return ARCH_ARM;
+		if(arch.contains("arm") || arch.equals("aarch32")) return ARCH_ARM;
 		if(arch.contains("x86_64") || arch.contains("amd64")) return ARCH_X86_64;
 		if(arch.contains("x86") || (arch.startsWith("i") && arch.endsWith("86"))) return ARCH_X86;
 		//Shouldn't happen
