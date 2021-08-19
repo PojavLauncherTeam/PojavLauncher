@@ -202,13 +202,19 @@ public class CustomControlsActivity extends BaseActivity
 	}
 
 	public static void load(final ControlLayout layout) {
+		/*ControlJsonSelector sel = new ControlJsonSelector(layout.getContext(), R.string.global_load);
+		sel.setFinishCallback((f)->{
+			loadControl(f.getAbsolutePath(),layout);
+		});
+		sel.show();*/
 		AlertDialog.Builder builder = new AlertDialog.Builder(layout.getContext());
 		builder.setTitle(R.string.global_load);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(dialog, "json");
-		flv.listFileAt(Tools.CTRLMAP_PATH);
+		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(Tools.CTRLMAP_PATH);
+		else flv.lockPathAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override

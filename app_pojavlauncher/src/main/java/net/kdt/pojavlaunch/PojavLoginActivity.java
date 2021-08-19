@@ -123,7 +123,7 @@ public class PojavLoginActivity extends BaseActivity
             if(!isStarting) {
                 //try { Thread.sleep(2000); } catch (InterruptedException e) { }
                 runOnUiThread(() -> progress.setVisibility(View.VISIBLE));
-                while (Build.VERSION.SDK_INT >= 23 && !isStorageAllowed()) {
+                while (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 && !isStorageAllowed()) { //Do not ask for storage at all on Android 10+
                     try {
                         revokeCount++;
                         if (revokeCount >= 3) {
