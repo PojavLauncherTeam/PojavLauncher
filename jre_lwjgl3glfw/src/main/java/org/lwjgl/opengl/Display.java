@@ -1025,6 +1025,10 @@ public class Display {
         }
     }
 
+    public static void setDisplayConfiguration(float gamma, float brightness, float contrast) throws LWJGLException {
+        // ignore call, this is required for a1.1.1
+    }
+
     public static java.lang.String getAdapter() {
         // TODO
         return "GeNotSupportedAdapter";
