@@ -42,8 +42,8 @@ public final class Tools {
     
     public static final String URL_HOME = "https://pojavlauncherteam.github.io/PojavLauncher";
 
-    public static String DIR_DATA = "/data/data/" + BuildConfig.APPLICATION_ID;
-    public static String MULTIRT_HOME = DIR_DATA+"/runtimes";
+    public static String DIR_DATA; //Initialized later to get context
+    public static String MULTIRT_HOME;
     public static String LOCAL_RENDERER = null;
     public static int DEVICE_ARCHITECTURE;
 
@@ -70,6 +70,18 @@ public final class Tools {
     public static final String CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
     
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
+
+    /**
+     * Since some constant requires the use of the Context object
+     * You can call this function to initialize them.
+     * Any value (in)directly dependant on DIR_DATA should be set only here.
+     */
+    public static void initContextConstants(Context ctx){
+        DIR_DATA = ctx.getFilesDir().getParent();
+        MULTIRT_HOME = DIR_DATA+"/runtimes";
+
+    }
+
 
     public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
