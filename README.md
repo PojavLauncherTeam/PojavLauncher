@@ -11,7 +11,7 @@
 - The official Twitter for PojavLauncher is [@PLaunchTeam](https://twitter.com/PLaunchTeam). Any others (most notably @PojavLauncher) are fake, please report them to Twitter's moderation team.
 
 ## Navigation
-- [Introduction](#introduction)
+- [Introduction](#introduction) 
 - [Building](#building) 
 - [Current status](#current-status)
 - [License](#license)
