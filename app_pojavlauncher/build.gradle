@@ -76,6 +76,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
+            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder.debug'
         }
 		
         release {
@@ -85,6 +86,7 @@ android {
 	    // defaultConfig already set
             // multiDexEnabled = true
            // debuggable = true
+            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder'
         }
         gplay {
             initWith release

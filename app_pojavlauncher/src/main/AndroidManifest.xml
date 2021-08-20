@@ -3,8 +3,10 @@
     package="net.kdt.pojavlaunch">
 
     <uses-feature android:glEsVersion="0x00020000"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -77,7 +79,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
         <provider
             android:name=".scoped.GameFolderProvider"
-            android:authorities="net.kdt.pojavlaunch.scoped.gamefolder"
+            android:authorities="@string/storageProviderAuthorities"
             android:exported="true"
             android:grantUriPermissions="true"
             android:permission="android.permission.MANAGE_DOCUMENTS"
