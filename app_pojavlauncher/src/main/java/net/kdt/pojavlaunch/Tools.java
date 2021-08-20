@@ -80,7 +80,7 @@ public final class Tools {
         DIR_DATA = ctx.getFilesDir().getParent();
         MULTIRT_HOME = DIR_DATA+"/runtimes";
         if(Build.VERSION.SDK_INT >= 29) {
-            DIR_GAME_HOME = ctx.getFilesDir().getAbsolutePath();
+            DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
         }else{
             DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
         }
