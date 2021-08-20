@@ -10,7 +10,7 @@
 - We do not exist on TikTok. No one from the dev team makes TikTok videos.
 - The official Twitter for PojavLauncher is [@PLaunchTeam](https://twitter.com/PLaunchTeam). Any others (most notably @PojavLauncher) are fake, please report them to Twitter's moderation team.
 
-## Navigation
+## Navigation 
 - [Introduction](#introduction)  
 - [Building](#building) 
 - [Current status](#current-status)
