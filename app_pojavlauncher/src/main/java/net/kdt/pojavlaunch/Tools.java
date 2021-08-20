@@ -82,7 +82,7 @@ public final class Tools {
         if(Build.VERSION.SDK_INT >= 29) {
             DIR_GAME_HOME = ctx.getFilesDir().getAbsolutePath();
         }else{
-            DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath();
+            DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
         }
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
         DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
