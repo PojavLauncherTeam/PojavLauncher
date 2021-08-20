@@ -45,6 +45,7 @@ public class JREUtils {
     }
     
     public static String findInLdLibPath(String libName) {
+        if(Os.getenv("LD_LIBRARY_PATH")==null) return libName;
         for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
             File f = new File(libPath, libName);
             if (f.exists() && f.isFile()) {
