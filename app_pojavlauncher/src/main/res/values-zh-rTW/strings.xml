@@ -84,7 +84,6 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 輸出OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): 匯出OpenGL 4.6 (不穩定且不支援1.17)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
