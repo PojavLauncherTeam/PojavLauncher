@@ -248,7 +248,7 @@ public class JREUtils {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else if (LOCAL_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", Character.toString(LOCAL_RENDERER.charAt(8));
+                envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
@@ -271,8 +271,19 @@ public class JREUtils {
     
     public static int launchJavaVM(final LoggableActivity ctx,final List<String> JVMArgs) throws Throwable {
         JREUtils.relocateLibPath(ctx);
+        // For debugging only!
+/*
+        StringBuilder sbJavaArgs = new StringBuilder();
+        for (String s : javaArgList) {
+            sbJavaArgs.append(s + " ");
+        }
+        ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
+*/
+
+        setJavaEnvironment(ctx);
+        
         final String graphicsLib = loadGraphicsLibrary();
-        List<String> userArgs = getJavaArgs(ctx);
+         List<String> userArgs = getJavaArgs(ctx);
 
         //Remove arguments that can interfere with the good working of the launcher
         purgeArg(userArgs,"-Xms");
@@ -287,20 +298,9 @@ public class JREUtils {
         if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
 
         userArgs.addAll(JVMArgs);
-
         ctx.runOnUiThread(() -> Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
         System.out.println(JVMArgs);
         
-        // For debugging only!
-/*
-        StringBuilder sbJavaArgs = new StringBuilder();
-        for (String s : javaArgList) {
-            sbJavaArgs.append(s + " ");
-        }
-        ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
-*/
-
-        setJavaEnvironment(ctx);
         initJavaRuntime();
         setupExitTrap(ctx.getApplication());
         chdir(Tools.DIR_GAME_NEW);
