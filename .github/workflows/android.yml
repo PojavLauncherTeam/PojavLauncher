@@ -67,7 +67,7 @@ jobs:
     
     - name: Get vgpu latest commit hash
       id: vgpu-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/luo9674/VGPU refs/heads/main | grep -io '^\S*'))"
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/VGPU refs/heads/main | grep -io '^\S*'))"
       shell: bash
     
     - name: Cache vgpu
@@ -81,7 +81,7 @@ jobs:
       if: steps.vgpu-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
-        repository: 'luo9674/VGPU'
+        repository: 'PojavLauncherTeam/VGPU'
         path: 'vgpu'
         
     - name: Build vgpu
