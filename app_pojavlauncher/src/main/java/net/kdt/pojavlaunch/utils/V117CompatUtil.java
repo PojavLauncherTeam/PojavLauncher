@@ -110,7 +110,7 @@ public class V117CompatUtil {
         String renderer = cfg != null && cfg.renderer != null?cfg.renderer:LauncherPreferences.PREF_RENDERER;
 
         if(renderer.equals("vulkan_zink")) return; //don't install for zink users;
-        if(packList.contains("\"assets-v0.zip\"") && renderer.equals("opengles2_5")) return;
+        if(packList.contains("\"assets-v0.zip\"") && renderer.equals("opengles3")) return;
 
         Object lock = new Object();
         AtomicInteger proceed = new AtomicInteger(0);
@@ -145,7 +145,7 @@ public class V117CompatUtil {
                     cfg = new PerVersionConfig.VersionConfig();
                     PerVersionConfig.configMap.put(version, cfg);
                 }
-                cfg.renderer = "opengles2_5";
+                cfg.renderer = "opengles3";
                 String path = Tools.DIR_GAME_NEW;
                 if(cfg.gamePath != null && !cfg.gamePath.isEmpty()) path = cfg.gamePath;
                 copyResourcePack(path,ctx.getAssets());
