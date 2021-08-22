@@ -43,6 +43,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthTask;
+import net.kdt.pojavlaunch.authenticator.microsoft.ui.MicrosoftLoginGUIActivity;
 import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
 import net.kdt.pojavlaunch.authenticator.mojang.LoginListener;
 import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
@@ -356,23 +357,31 @@ public class PojavLoginActivity extends BaseActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                final Uri uri = data.getData();
-                Thread t = new Thread(()->{
-                    try {
-                        MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), BaseLauncherActivity.getFileName(this,uri),
-                                (resid, stuff) ->PojavLoginActivity.this.runOnUiThread(
-                                        () -> {if(startupTextView!=null)startupTextView.setText(PojavLoginActivity.this.getString(resid,stuff));}));
-                        synchronized (mLockSelectJRE) {
-                            mLockSelectJRE.notifyAll();
+        if(resultCode == Activity.RESULT_OK) {
+            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP) {
+                if (data != null) {
+                    final Uri uri = data.getData();
+                    Thread t = new Thread(() -> {
+                        try {
+                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), BaseLauncherActivity.getFileName(this, uri),
+                                    (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
+                                            () -> {
+                                                if (startupTextView != null)
+                                                    startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
+                                            }));
+                            synchronized (mLockSelectJRE) {
+                                mLockSelectJRE.notifyAll();
+                            }
+                        } catch (IOException e) {
+                            Tools.showError(PojavLoginActivity.this
+                                    , e);
                         }
-                    }catch (IOException e) {
-                        Tools.showError(PojavLoginActivity.this
-                                ,e);
-                    }
-                });
-                t.start();
+                    });
+                    t.start();
+                }
+            }else if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
+                //Log.i("MicroLoginWrap","Got microsoft login result:" + data);
+                performMicroLogin(data);
             }
         }
     }
@@ -411,18 +420,15 @@ public class PojavLoginActivity extends BaseActivity
 
     
     public void loginMicrosoft(View view) {
-        CustomTabs.openTab(this,
-            "https://login.live.com/oauth20_authorize.srf" + 
-            "?client_id=00000000402b5328" +
-            "&response_type=code" +
-            "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
-            "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+        Intent i = new Intent(this,MicrosoftLoginGUIActivity.class);
+        startActivityForResult(i,MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST);
     }
     
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        
+    }
+    public void performMicroLogin(Intent intent) {
         Uri data = intent.getData();
         //Log.i("MicroAuth", data.toString());
         if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
@@ -436,22 +442,21 @@ public class PojavLoginActivity extends BaseActivity
             } else {
                 String code = data.getQueryParameter("code");
                 new MicrosoftAuthTask(this, new RefreshListener(){
-                        @Override
-                        public void onFailed(Throwable e) {
-                            Tools.showError(PojavLoginActivity.this, e);
-                        }
+                    @Override
+                    public void onFailed(Throwable e) {
+                        Tools.showError(PojavLoginActivity.this, e);
+                    }
 
-                        @Override
-                        public void onSuccess(MinecraftAccount b) {
-                            mProfile = b;
-                            playProfile(false);
-                        }
-                    }).execute("false", code);
+                    @Override
+                    public void onSuccess(MinecraftAccount b) {
+                        mProfile = b;
+                        playProfile(false);
+                    }
+                }).execute("false", code);
                 // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
             }
         }
     }
-    
     private View getViewFromList(int pos, ListView listView) {
         final int firstItemPos = listView.getFirstVisiblePosition();
         final int lastItemPos = firstItemPos + listView.getChildCount() - 1;

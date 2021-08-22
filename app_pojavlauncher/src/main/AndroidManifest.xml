@@ -69,7 +69,9 @@
             android:screenOrientation="sensorLandscape"
             android:name=".CustomControlsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-
+        <activity
+            android:screenOrientation="sensorLandscape"
+            android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
