@@ -155,7 +155,7 @@
     <string name="customctrl_corner_radius">Радиус скругления</string>
     <string name="customctrl_stroke_width">Толщина обводки</string>
     <string name="customctrl_stroke_color">Цвет обводки</string>
-    <string name="customctrl_dynamicpos">Ручная настройка динамической позиции</string>
+    <string name="customctrl_dynamicpos">Динамическая позиция</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
