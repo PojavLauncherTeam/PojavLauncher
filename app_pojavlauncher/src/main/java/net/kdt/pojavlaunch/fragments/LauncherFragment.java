@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -34,6 +37,7 @@ public class LauncherFragment extends Fragment
 	private View view;
 	private Thread validUrlSelectorThread;
 	private String validChangelog = "/changelog.html";
+	private Handler mainHandler = new Handler(Looper.getMainLooper());
 	private boolean interruptLoad = false;
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -46,7 +50,7 @@ public class LauncherFragment extends Fragment
 		final String localizedUrl = "/changelog-"+lang+".html";
 		if(!tryUrl(Tools.URL_HOME+localizedUrl)) return;
 		else  {
-			requireActivity().runOnUiThread(()->{
+			mainHandler.post(()->{
 				interruptLoad = true;
 				validChangelog = localizedUrl;
 				webNews.loadUrl(Tools.URL_HOME+validChangelog);
@@ -69,6 +73,7 @@ public class LauncherFragment extends Fragment
 	public void onActivityCreated(Bundle p1)
 	{
 		super.onActivityCreated(p1);
+		mainHandler = new Handler(Looper.myLooper());
 		webNews = (WebView) getView().findViewById(R.id.lmaintabnewsNewsView);
 		webNews.setWebViewClient(new WebViewClient(){
 
