@@ -1,0 +1,3 @@
+files:
+  - source: /changelog.html
+    translation: /changelog-%android_code%.html
