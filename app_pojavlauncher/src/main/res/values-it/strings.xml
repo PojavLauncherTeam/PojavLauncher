@@ -155,7 +155,7 @@
     <string name="customctrl_corner_radius">Raggio angolo</string>
     <string name="customctrl_stroke_width">Spessore tratto</string>
     <string name="customctrl_stroke_color">Colore tratto</string>
-    <string name="customctrl_dynamicpos">Posizione Dinamica Manuale</string>
+    <string name="customctrl_dynamicpos">Posizione dinamica</string>
     <string name="customctrl_dynamicpos_x">X dinamica</string>
     <string name="customctrl_dynamicpos_y">Y dinamica</string>
     <string name="customctrl_transparency_bg">Trasparenza sfondo</string>
