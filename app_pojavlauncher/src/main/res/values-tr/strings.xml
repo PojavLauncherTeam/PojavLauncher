@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_renderer">İşleyici</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 + tam olmayan 3.2 (1.17 henüz desteklenmiyor)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 dışa aktarır</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
@@ -153,6 +154,7 @@
     <string name="customctrl_corner_radius">Köşe alanı</string>
     <string name="customctrl_stroke_width">Vurgu genişliği</string>
     <string name="customctrl_stroke_color">Vurgu rengi</string>
+    <string name="customctrl_dynamicpos">Dinamik pozisyon</string>
     <string name="customctrl_dynamicpos_x">Dinamik X</string>
     <string name="customctrl_dynamicpos_y">Dinamik Y</string>
     <string name="customctrl_transparency_bg">Arkaplan saydamlığı</string>
