@@ -82,7 +82,7 @@ public class LauncherFragment extends Fragment
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				Log.i("WebNews",failingUrl + ": "+description);
 				if(webNews != null){
-					if(validUrlSelectorThread.isAlive()) validUrlSelectorThread.stop();
+					if(validUrlSelectorThread.isAlive()) validUrlSelectorThread.interrupt();
 					removeWebView();
 					//Change the background to match the other pages.
 					//We change it only when the webView is removed to avoid huge overdraw.
@@ -105,7 +105,7 @@ public class LauncherFragment extends Fragment
 			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
 				Log.i("WebNews",error.getDescription()+"");
 				if(webNews != null){
-					if(validUrlSelectorThread.isAlive()) validUrlSelectorThread.stop();
+					if(validUrlSelectorThread.isAlive()) validUrlSelectorThread.interrupt();
 					removeWebView();
 					LauncherFragment.this.view.setBackgroundColor(Color.parseColor("#44000000"));
 				}
