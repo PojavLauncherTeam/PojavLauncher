@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (No, la versión 1.17 sigue sin funcionar todavía)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzadas</string>
@@ -152,6 +153,7 @@
     <string name="customctrl_corner_radius">Radio de las esquinas</string>
     <string name="customctrl_stroke_width">Tamaño del trazo</string>
     <string name="customctrl_stroke_color">Color del trazo</string>
+    <string name="customctrl_dynamicpos">Posición dinámica</string>
     <string name="customctrl_dynamicpos_x">X Dinámica</string>
     <string name="customctrl_dynamicpos_y">Y Dinámica</string>
     <string name="customctrl_transparency_bg">Transparencia del fondo</string>
