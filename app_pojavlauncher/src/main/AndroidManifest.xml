@@ -18,8 +18,7 @@
         android:icon="@drawable/ic_launcher"
         android:roundIcon="@drawable/ic_launcher"
         android:resizeableActivity="true"
-        android:hasFragileUserData="true"
-        android:requestLegacyExternalStorage="true">
+        android:hasFragileUserData="true">
 
         <meta-data 
             android:name="android.max_aspect"
@@ -34,14 +33,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-               
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="ms-xal-00000000402b5328" android:host="auth"/>
             </intent-filter>
         </activity>
 
