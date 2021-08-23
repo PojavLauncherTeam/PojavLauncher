@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): mengekspor OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): mengekspor OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): mengekspor OpenGL 2.1 + parsial 3.2 (belum mendukung 1.17)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): mengekspor OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
@@ -153,7 +154,7 @@
     <string name="customctrl_corner_radius">Radius sudut</string>
     <string name="customctrl_stroke_width">Tebal garis</string>
     <string name="customctrl_stroke_color">Warna garis</string>
-    <string name="customctrl_dynamicpos">Posisi Manual Dinamis</string>
+    <string name="customctrl_dynamicpos">Posisi dinamis</string>
     <string name="customctrl_dynamicpos_x">Dinamis X</string>
     <string name="customctrl_dynamicpos_y">Dinamis Y</string>
     <string name="customctrl_transparency_bg">Transparansi latar belakang</string>
