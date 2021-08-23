@@ -62,7 +62,7 @@
     <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Volného okna</string>
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Skrýt postranní panel</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Lidé kteří upřednostňují v1 rozhraní možnou budou mít tuto možnost rádi. Dává více celo-obrazné prostředí.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňující staré uživatelské rozhraní v1. Dá vám více celo-obrazné prostředí.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorovat výřez</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignorovat výřez a rozšířit obrazovku pod ním.\nDá vám více celo-obrazný zážitek.</string>
     <string name="mcl_setting_title_resolution_scaler">Škála rozlišení</string>
@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportuje OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exportuje OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exportuje OpenGL 2.1 + částečně 3.2 (1.17 zatím není podporováná)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Jaké typy verzí budou v seznamu verzí</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
@@ -153,7 +154,7 @@
     <string name="customctrl_corner_radius">Poloměr rohu</string>
     <string name="customctrl_stroke_width">Šířka obrysu</string>
     <string name="customctrl_stroke_color">Barva obrysu</string>
-    <string name="customctrl_dynamicpos">Manuální dynamická pozice</string>
+    <string name="customctrl_dynamicpos">Dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
     <string name="customctrl_transparency_bg">Průhlednost pozadí</string>
