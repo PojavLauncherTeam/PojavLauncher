@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_renderer">Gjengir</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksporterer OpenGL 2.1 + delvis 3.2 (1.17 støttes ikke ennå)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksporterer OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versjonstype vil være i versjonslisten</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -140,6 +141,7 @@
     <string name="customctrl_size">Størrelse</string>
     <string name="customctrl_size_width">Bredde</string>
     <string name="customctrl_size_height">Høyde</string>
+    <string name="customctrl_dynamicpos">Dynamisk posisjon</string>
     <string name="customctrl_dynamicpos_x">Dynamisk X</string>
     <string name="customctrl_dynamicpos_y">Dynamisk Y</string>
     <string name="customctrl_transparency_bg">Gjennomsiktighet på bakgrunn</string>
