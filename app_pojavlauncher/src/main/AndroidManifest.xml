@@ -25,6 +25,7 @@
             android:value="ratio_float"/>
 		
         <activity
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape"
             android:label="@string/app_short_name"
