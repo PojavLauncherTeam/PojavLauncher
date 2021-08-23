@@ -14,19 +14,19 @@
     <string name="login_offline_label">Accedi come account Offline</string>
     <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
     <string name="login_error_exist_username">Nome utente già esistente</string>
-    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_microsoft">Accedi Da Microsoft</string>
     <string name="login_select_account">Seleziona account</string>
     <string name="login_title_no_saved_account">Non ci sono account !</string>
     <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al login.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Apri il menu scorrendo da destra verso sinistra ◀\nTieni premuto per personalizzare: modificare, ridimensionare o cancellare."</string>
+    <string name="hint_control_mapping">"Apri il menu scorrendo da destra verso sinistra ◀\nTieni premuto per personalizzare: modificare, ridimensionare o rimuovere."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installa Runtime Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Seleziona un installer mod</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher è crashato</string>
+    <string name="error_fatal">PojavLauncher è accidentalmente crashato</string>
     <string name="error_no_version">Nessuna versione!</string>
     <string name="error_show_more">Mostra altro</string>
     <string name="error_show_less">Mostra meno</string>
@@ -59,10 +59,10 @@
     <string name="mcl_setting_title_uninstalljre">Disinstalla Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Riavvio del launcher necessario] Questo ti lascerà reinstallare il Runtime Java</string>
     <string name="mcl_setting_title_freeform">Avvia Minecraft in modalità finestra</string>
-    <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Nessario Android 7.0+</string>
+    <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Necessario Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Nascondi barra laterale</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Potrebbe piacere a coloro che preferivano la vecchia l\'interfaccia v1. Offre un\'esperienza migliore a schermo intero.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignora notch</string>
+    <string name="mcl_setting_title_ignore_notch">Ignora il notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Allarga lo schermo fino al di sotto della notch.\nDandoti un\'esperienza più immersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Proporzioni risoluzione</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ti permetti di diminuire la risoluzione del gioco. 100% è la risoluzione completa</string>
@@ -83,7 +83,7 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
-    <string name="mcl_setting_category_veroption">Tipo di versioni che saranno visibili nella lista delle versioni</string>
+    <string name="mcl_setting_category_veroption">Tipo di versioni che saranno nell\'elenco delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
@@ -154,7 +154,7 @@
     <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Chiusura forzata</string>
-    <string name="control_viewout">Log output</string>
+    <string name="control_viewout">Uscita</string>
     <string name="control_adebug">Debug input</string>
     <string name="control_customkey">Invia keycode personalizzato</string>
     <string name="control_scaleup">Aumenta</string>
