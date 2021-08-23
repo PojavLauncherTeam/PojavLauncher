@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 輸出OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（1.17 暫不支持）</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
@@ -147,7 +148,7 @@
     <string name="customctrl_corner_radius">圓角半徑</string>
     <string name="customctrl_stroke_width">邊框粗細</string>
     <string name="customctrl_stroke_color">邊框顏色</string>
-    <string name="customctrl_dynamicpos">手動動態位置</string>
+    <string name="customctrl_dynamicpos">動態位置</string>
     <string name="customctrl_dynamicpos_x">動態 X 軸</string>
     <string name="customctrl_dynamicpos_y">動態 Y 軸</string>
     <string name="customctrl_transparency_bg">背景透明度</string>
