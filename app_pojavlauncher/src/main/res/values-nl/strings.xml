@@ -139,6 +139,7 @@
     <string name="customctrl_size">Grootte</string>
     <string name="customctrl_size_width">Breedte</string>
     <string name="customctrl_size_height">Hoogte</string>
+    <string name="customctrl_dynamicpos">Dynamische positie</string>
     <string name="customctrl_dynamicpos_x">Dynamisch X</string>
     <string name="customctrl_dynamicpos_y">Dynamisch Y</string>
     <string name="customctrl_transparency_bg">Achtergrondtransparantie</string>
