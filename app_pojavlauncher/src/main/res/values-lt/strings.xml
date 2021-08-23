@@ -146,6 +146,7 @@
     <string name="customctrl_corner_radius">Kampo spinduliuotė</string>
     <string name="customctrl_stroke_width">Linijos plotis</string>
     <string name="customctrl_stroke_color">Linijos spalva</string>
+    <string name="customctrl_dynamicpos">Dinamiška pozicija</string>
     <string name="customctrl_dynamicpos_x">Dinamiška X</string>
     <string name="customctrl_dynamicpos_y">Dinamiška Y</string>
     <string name="customctrl_transparency_bg">Fono skaidrumas</string>
