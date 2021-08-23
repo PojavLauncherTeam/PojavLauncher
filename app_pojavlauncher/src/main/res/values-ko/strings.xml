@@ -82,11 +82,11 @@
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
     <string name="mcl_setting_category_renderer">렌더러</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 사용</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 사용</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 + partial 3.2 사용 (1.17 미지원)</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 내보내기 + 3.2 포함 (1.17 미지원)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 4.6 사용</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 사용</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 내보내기</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -155,6 +155,7 @@
     <string name="customctrl_corner_radius">모서리 반지름</string>
     <string name="customctrl_stroke_width">선 굵기</string>
     <string name="customctrl_stroke_color">강조 색</string>
+    <string name="customctrl_dynamicpos">동적 위치</string>
     <string name="customctrl_dynamicpos_x">동적 X 값</string>
     <string name="customctrl_dynamicpos_y">동적 Y 값</string>
     <string name="customctrl_transparency_bg">배경 투명도</string>
