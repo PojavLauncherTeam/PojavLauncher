@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_renderer">Рендерер</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): ехпортира OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.4 (OpenGL ES 2): ехпортира OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): експортира OpenGL 2.1 + мало 3.2 (1.17 није подржан)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eкспортира OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
     <string name="mcl_setting_veroption_release">Стабилно</string>
@@ -141,6 +142,7 @@
     <string name="customctrl_size">Величина</string>
     <string name="customctrl_size_width">Ширина</string>
     <string name="customctrl_size_height">Висина</string>
+    <string name="customctrl_dynamicpos">Динамична позиција</string>
     <string name="customctrl_dynamicpos_x">Динамични Х</string>
     <string name="customctrl_dynamicpos_y">Динамични У</string>
     <string name="customctrl_transparency_bg">Провидна позадина</string>
