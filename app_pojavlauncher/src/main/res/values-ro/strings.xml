@@ -147,6 +147,7 @@
     <string name="customctrl_corner_radius">Raza de colț</string>
     <string name="customctrl_stroke_width">Lățimea conturului</string>
     <string name="customctrl_stroke_color">Culoarea conturului</string>
+    <string name="customctrl_dynamicpos">Poziție dinamică</string>
     <string name="customctrl_dynamicpos_x">Dinamica X</string>
     <string name="customctrl_dynamicpos_y">Dinamica Y</string>
     <string name="customctrl_transparency_bg">Transparenţa fundalului</string>
