@@ -84,7 +84,7 @@
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): xuất ra OpenGL 2.1 và một phần của 3.2 (chưa hỗ trợ 1.17)</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): xuất ra OpenGL 2.1 + partial 3.2 (1.17 chưa được hỗ trợ)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): xuất ra OpenGL 4.6</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): xuất ra OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
@@ -155,7 +155,7 @@
     <string name="customctrl_corner_radius">Bán kính góc cong</string>
     <string name="customctrl_stroke_width">Độ rộng viền phím</string>
     <string name="customctrl_stroke_color">Màu viền phím</string>
-    <string name="customctrl_dynamicpos">Vị trí động tùy chỉnh</string>
+    <string name="customctrl_dynamicpos">Điểm động</string>
     <string name="customctrl_dynamicpos_x">Vị trí động theo chiều X</string>
     <string name="customctrl_dynamicpos_y">Vị trí động theo chiều Y</string>
     <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
