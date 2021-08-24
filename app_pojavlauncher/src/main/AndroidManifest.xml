@@ -18,7 +18,8 @@
         android:icon="@drawable/ic_launcher"
         android:roundIcon="@drawable/ic_launcher"
         android:resizeableActivity="true"
-        android:hasFragileUserData="true">
+        android:hasFragileUserData="true"
+        android:allowNativeHeapPointerTagging="false">
 
         <meta-data 
             android:name="android.max_aspect"
