@@ -117,9 +117,11 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * Clear the EditText from any leftover inputs
      * It does not affect the in-game input
      */
+    @SuppressLint("SetTextI18n")
     public void clear(){
         isDoingInternalChanges = true;
-        setText("          ");
+        //Braille space, doesn't trigger keyboard auto-complete
+        setText("\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800");
         setSelection(5);
     }
 

@@ -48,7 +48,7 @@
 
 			<net.kdt.pojavlaunch.customcontrols.TouchCharInput
 				android:imeOptions="flagNoFullscreen|flagNoPersonalizedLearning|actionSend"
-				android:inputType="text|textNoSuggestions|textImeMultiLine"
+				android:inputType="textFilter|textNoSuggestions|textImeMultiLine"
 				android:background="@android:color/darker_gray"
 				android:id="@+id/editTextTextPersonName2"
 				android:layout_width="1dp"
