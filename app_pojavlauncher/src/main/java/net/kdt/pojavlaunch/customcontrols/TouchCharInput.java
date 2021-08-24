@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.customcontrols;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.AttributeSet;
@@ -11,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.SuppressLint;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
