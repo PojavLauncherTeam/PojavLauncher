@@ -12,8 +12,7 @@ import org.lwjgl.glfw.*;
 
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
 
-public class ControlData implements Cloneable
-{
+public class ControlData {
 
     public static final int SPECIALBTN_KEYBOARD = -1;
     public static final int SPECIALBTN_TOGGLECTRL = -2;
@@ -141,6 +140,24 @@ public class ControlData implements Cloneable
         this.strokeWidth = strokeWidth;
         this.cornerRadius = cornerRadius;
     }
+
+    //Deep copy constructor
+    public ControlData(ControlData controlData){
+        this(
+                controlData.name,
+                controlData.keycodes,
+                controlData.dynamicX,
+                controlData.dynamicY,
+                controlData.width,
+                controlData.height,
+                controlData.isToggle,
+                controlData.opacity,
+                controlData.bgColor,
+                controlData.strokeColor,
+                controlData.strokeWidth,
+                controlData.cornerRadius
+        );
+    }
     
     public void execute(boolean isDown) {
         for(int keycode : keycodes){
@@ -148,10 +165,6 @@ public class ControlData implements Cloneable
         }
     }
 
-
-    public ControlData clone() {
-        return new ControlData(name, keycodes, dynamicX, dynamicY, width, height, isToggle, opacity, bgColor, strokeColor,strokeWidth, cornerRadius);
-    }
     
     public float insertDynamicPos(String dynamicPos) {
         // Values in the map below may be always changed

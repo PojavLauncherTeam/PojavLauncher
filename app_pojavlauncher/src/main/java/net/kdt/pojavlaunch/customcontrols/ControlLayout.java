@@ -76,10 +76,7 @@ public class ControlLayout extends FrameLayout
 			if(mModifiable) drawer.areButtonsVisible = true;
 
 
-			//CONTROL SUB BUTTON
-			for (ControlData subButton : drawerData.buttonProperties) {
-				addSubView(drawer, subButton);
-			}
+
 		}
 
         mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
@@ -126,6 +123,10 @@ public class ControlLayout extends FrameLayout
 			view.setFocusableInTouchMode(false);
 		}
 		addView(view);
+		//CONTROL SUB BUTTON
+		for (ControlData subButton : view.getDrawerData().buttonProperties) {
+			addSubView(view, subButton);
+		}
 
 		setModified(true);
 		return view;

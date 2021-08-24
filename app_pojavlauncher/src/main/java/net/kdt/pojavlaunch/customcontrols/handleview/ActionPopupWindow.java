@@ -140,10 +140,18 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 			alertBuilder.setNegativeButton(android.R.string.cancel, null);
 			alertBuilder.show();
 		}else if(view == mCloneTextView) {
-			ControlData cloneData = editedButton.getProperties().clone();
-			cloneData.dynamicX = "0.5 * ${screen_width}";
-			cloneData.dynamicY = "0.5 * ${screen_height}";
-			((ControlLayout) mHandleView.mView.getParent()).addControlButton(cloneData);
+			if(editedButton instanceof ControlDrawer){
+				ControlDrawerData cloneData = new ControlDrawerData(((ControlDrawer)editedButton).getDrawerData());
+				cloneData.properties.dynamicX = "0.5 * ${screen_width}";
+				cloneData.properties.dynamicY = "0.5 * ${screen_height}";
+				((ControlLayout) mHandleView.mView.getParent()).addDrawer(cloneData);
+			}else{
+				ControlData cloneData = new ControlData(editedButton.getProperties());
+				cloneData.dynamicX = "0.5 * ${screen_width}";
+				cloneData.dynamicY = "0.5 * ${screen_height}";
+				((ControlLayout) mHandleView.mView.getParent()).addControlButton(cloneData);
+			}
+
 		}
 		
 		hide();
