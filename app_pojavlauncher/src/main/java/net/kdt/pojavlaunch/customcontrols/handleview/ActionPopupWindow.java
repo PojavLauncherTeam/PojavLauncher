@@ -41,12 +41,13 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 
 	private TextView mEditTextView;
 	private TextView mDeleteTextView;
+	private TextView mCloneTextView;
 
-	private Object editedButton;
+	private ControlButton editedButton;
 
-	public ActionPopupWindow(HandleView handleView, Object object){
+	public ActionPopupWindow(HandleView handleView, ControlButton button){
 		super(handleView);
-		this.editedButton = object;
+		this.editedButton = button;
 	}
 
 	@Override
@@ -79,6 +80,12 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 		mContentView.addView(mDeleteTextView);
 		mDeleteTextView.setText(R.string.global_remove);
 		mDeleteTextView.setOnClickListener(this);
+
+		mCloneTextView = (TextView) inflater.inflate(R.layout.control_action_popup_text, null);
+		mCloneTextView.setLayoutParams(wrapContent);
+		mContentView.addView(mCloneTextView);
+		mCloneTextView.setText(R.string.global_clone);
+		mCloneTextView.setOnClickListener(this);
 	}
 
 	@Override
@@ -132,6 +139,11 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 			});
 			alertBuilder.setNegativeButton(android.R.string.cancel, null);
 			alertBuilder.show();
+		}else if(view == mCloneTextView) {
+			ControlData cloneData = editedButton.getProperties().clone();
+			cloneData.dynamicX = "0.5 * ${screen_width}";
+			cloneData.dynamicY = "0.5 * ${screen_height}";
+			((ControlLayout) mHandleView.mView.getParent()).addControlButton(cloneData);
 		}
 		
 		hide();

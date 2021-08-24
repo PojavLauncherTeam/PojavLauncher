@@ -118,6 +118,7 @@
     <string name="global_load">Load</string>
     <string name="global_name">Name</string>
     <string name="global_remove">Remove</string>
+    <string name="global_clone">Clone</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Save</string>
     <string name="global_unpacking">Unpacking %s</string>

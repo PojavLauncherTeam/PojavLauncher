@@ -50,9 +50,9 @@ public class SelectionEndHandleView extends HandleView
         return 0; // mView.getSelectionEnd();
     }
 
-    public void show(Object object){
+    public void show(ControlButton button){
         super.show();
-        showActionPopupWindow(0, object);
+        showActionPopupWindow(0, button);
     }
 
     @Override

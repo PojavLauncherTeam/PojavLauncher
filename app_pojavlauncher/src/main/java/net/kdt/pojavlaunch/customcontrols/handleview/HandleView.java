@@ -189,9 +189,9 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         getPositionListener().removeSubscriber(this);
     }
 
-    void showActionPopupWindow(int delay, Object object) {
+    void showActionPopupWindow(int delay, ControlButton button) {
         if (mActionPopupWindow == null) {
-            mActionPopupWindow = new ActionPopupWindow(this, object);
+            mActionPopupWindow = new ActionPopupWindow(this, button);
         }
         if (mActionPopupShower == null) {
             mActionPopupShower = new Runnable() {
