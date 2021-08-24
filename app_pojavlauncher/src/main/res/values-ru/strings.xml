@@ -85,7 +85,6 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): экспортирует OpenGL 2.1 + частично 3.2 (пока без поддержки 1.17)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортирует OpenGL 4.6</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортирует OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
@@ -150,12 +149,12 @@
     <string name="customctrl_size_width">Ширина</string>
     <string name="customctrl_size_height">Высота</string>
     <string name="customctrl_mapping">Кнопки</string>
-    <string name="customctrl_orientation">Положение</string>
+    <string name="customctrl_orientation">Сторона разворота</string>
     <string name="customctrl_background_color">Цвет фона</string>
     <string name="customctrl_corner_radius">Радиус скругления</string>
     <string name="customctrl_stroke_width">Толщина обводки</string>
     <string name="customctrl_stroke_color">Цвет обводки</string>
-    <string name="customctrl_dynamicpos">Динамическая позиция</string>
+    <string name="customctrl_dynamicpos">Ручная настройка динамической позиции</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
@@ -189,7 +188,7 @@
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
-    <string name="customctrl_passthru">Указатель мыши</string>
+    <string name="customctrl_passthru">Пропуск мыши</string>
     <string name="customctrl_swipeable">Пролистываемый</string>
     <string name="customctrl_rounded">Скруглённые</string>
     <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
