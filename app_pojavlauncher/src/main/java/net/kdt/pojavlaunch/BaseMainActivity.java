@@ -32,7 +32,7 @@ import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends LoggableActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
-    public TouchCharInput touchCharInput;
+    public static TouchCharInput touchCharInput;
 
     volatile public static boolean isInputStackCall;
 
@@ -84,8 +84,8 @@ public class BaseMainActivity extends LoggableActivity {
 
     public boolean hiddenTextIgnoreUpdate = true;
     
-    private boolean isVirtualMouseEnabled;
-    private LinearLayout touchPad;
+    private static boolean isVirtualMouseEnabled;
+    private static LinearLayout touchPad;
     private ImageView mousePointer;
     private MinecraftAccount mProfile;
     
@@ -867,12 +867,14 @@ public class BaseMainActivity extends LoggableActivity {
         this.mousePointer.setY(y);
     }
 
-    public void toggleMouse(View view) {
+    public static void toggleMouse(Context ctx) {
         if (CallbackBridge.isGrabbing()) return;
 
         isVirtualMouseEnabled = !isVirtualMouseEnabled;
         touchPad.setVisibility(isVirtualMouseEnabled ? View.VISIBLE : View.GONE);
-        ((Button) view).setText(isVirtualMouseEnabled ? R.string.control_mouseon: R.string.control_mouseoff);
+        Toast.makeText(ctx,
+                isVirtualMouseEnabled ? R.string.control_mouseon : R.string.control_mouseoff,
+                Toast.LENGTH_SHORT).show();
     }
 
     public static void dialogForceClose(Context ctx) {
@@ -894,6 +896,12 @@ public class BaseMainActivity extends LoggableActivity {
         // Catch back as Esc keycode at another place
         sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
     }
+
+    public static void switchKeyboardState() {
+        if(touchCharInput != null) touchCharInput.switchKeyboardState();
+    }
+
+
 
 
     protected void setRightOverride(boolean val) {

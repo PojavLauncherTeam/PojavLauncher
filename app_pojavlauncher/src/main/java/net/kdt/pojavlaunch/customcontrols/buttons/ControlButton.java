@@ -20,6 +20,7 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.*;
 
+import static net.kdt.pojavlaunch.BaseMainActivity.sendMouseButton;
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
 
@@ -79,33 +80,17 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         //Visibility
         properties.isHideable = !properties.containsKeycode(ControlData.SPECIALBTN_TOGGLECTRL) && !properties.containsKeycode(ControlData.SPECIALBTN_VIRTUALMOUSE);
 
-        properties.update();
         return properties;
     }
 
     public void setProperties(ControlData properties, boolean changePos) {
         mProperties = properties;
 
-        properties.update();
-
-        // com.android.internal.R.string.delete
-        // android.R.string.
         setText(properties.name);
 
         if (changePos) {
             setX(properties.insertDynamicPos(mProperties.dynamicX));
             setY(properties.insertDynamicPos(mProperties.dynamicY));
-        }
-
-        if (properties.specialButtonListener == null) {
-            // A non-special button or inside custom controls screen so skip listener
-        } else if (properties.specialButtonListener instanceof View.OnClickListener) {
-            setOnClickListener((View.OnClickListener) properties.specialButtonListener);
-        } else if (properties.specialButtonListener instanceof View.OnTouchListener) {
-            setOnTouchListener((View.OnTouchListener) properties.specialButtonListener);
-        } else {
-            throw new IllegalArgumentException("Field " + ControlData.class.getName() + ".specialButtonListener must be View.OnClickListener or View.OnTouchListener, but was " +
-                properties.specialButtonListener.getClass().getName());
         }
 
         setLayoutParams(new FrameLayout.LayoutParams((int) properties.getWidth(), (int) properties.getHeight() ));
@@ -140,7 +125,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         setBackground();
         
         // Re-calculate position
-        mProperties.update();
         if(!mProperties.isDynamicBtn){
             setX(getX());
             setY(getY());
@@ -269,7 +253,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         if(mProperties.isSwipeable && !isPointerOutOfBounds){
                             //Remove keys
                             if(!triggerToggle(event)) {
-                                sendKeyPresses(event,false);
+                                sendKeyPresses(false);
                             }
                         }
                         isPointerOutOfBounds = true;
@@ -282,7 +266,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         ((ControlLayout) getParent()).onTouch(this, event);
                         //RE-press the button
                         if(mProperties.isSwipeable && !mProperties.isToggle){
-                            sendKeyPresses(event,true);
+                            sendKeyPresses(true);
                         }
                     }
                     isPointerOutOfBounds = false;
@@ -291,7 +275,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 case MotionEvent.ACTION_DOWN: // 0
                 case MotionEvent.ACTION_POINTER_DOWN: // 5
                     if(!mProperties.isToggle){
-                        sendKeyPresses(event,true);
+                        sendKeyPresses(true);
                     }
                     break;
 
@@ -306,7 +290,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                     isPointerOutOfBounds = false;
 
                     if(!triggerToggle(event)) {
-                        sendKeyPresses(event,false);
+                        sendKeyPresses(false);
                     }
                     break;
 
@@ -465,20 +449,62 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         if(mProperties.isToggle){
             isToggled = !isToggled;
             invalidate();
-            sendKeyPresses(event, isToggled);
+            sendKeyPresses(isToggled);
             return true;
         }
         return false;
     }
 
-    public void sendKeyPresses(MotionEvent event, boolean isDown){
+    public void sendKeyPresses(boolean isDown){
         for(int keycode : mProperties.keycodes){
             if(keycode >= GLFW_KEY_UNKNOWN){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
                 CallbackBridge.setModifiers(keycode, isDown);
             }else{
-                super.onTouchEvent(event);
+                sendSpecialKey(keycode, isDown);
             }
+        }
+    }
+
+    private void sendSpecialKey(int keycode, boolean isDown){
+        switch (keycode) {
+            case ControlData.SPECIALBTN_KEYBOARD:
+               if(isDown)BaseMainActivity.switchKeyboardState();
+                break;
+
+            case ControlData.SPECIALBTN_TOGGLECTRL:
+                if(isDown)MainActivity.mControlLayout.toggleControlVisible();
+                break;
+
+            case ControlData.SPECIALBTN_VIRTUALMOUSE:
+                if(isDown)BaseMainActivity.toggleMouse(getContext());
+                break;
+
+            case ControlData.SPECIALBTN_MOUSEPRI:
+                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
+                break;
+
+            case ControlData.SPECIALBTN_MOUSEMID:
+                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_MIDDLE, isDown);
+                break;
+
+            case ControlData.SPECIALBTN_MOUSESEC:
+                if (CallbackBridge.isGrabbing()) {
+                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                } else {
+                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown , CallbackBridge.mouseX, CallbackBridge.mouseY);
+
+                    //setRightOverride(isDown);
+                }
+                break;
+
+            case ControlData.SPECIALBTN_SCROLLDOWN:
+                if (!isDown) CallbackBridge.sendScroll(0, 1d);
+                break;
+
+            case ControlData.SPECIALBTN_SCROLLUP:
+                if (!isDown) CallbackBridge.sendScroll(0, -1d);
+                break;
         }
     }
 

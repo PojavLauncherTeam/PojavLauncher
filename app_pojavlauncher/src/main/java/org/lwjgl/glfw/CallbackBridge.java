@@ -29,18 +29,18 @@ public class CallbackBridge {
         }
         @Override
         public void run() {
-            putMouseEventWithCoords(button, 1, x, y);
+            putMouseEventWithCoords(button, true, x, y);
             try { Thread.sleep(40); } catch (InterruptedException e) {}
-            putMouseEventWithCoords(button, 0, x, y);
+            putMouseEventWithCoords(button, false, x, y);
         }
     }
     public static void putMouseEventWithCoords(int button, int x, int y /* , int dz, long nanos */) {
         new Thread(new PusherRunnable(button,x,y)).run();
     }
     
-    public static void putMouseEventWithCoords(int button, int state, int x, int y /* , int dz, long nanos */) {
+    public static void putMouseEventWithCoords(int button, boolean isDown, int x, int y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
-        sendMouseKeycode(button, CallbackBridge.getCurrentMods(), state == 1);
+        sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
     }
 
     private static boolean threadAttached;

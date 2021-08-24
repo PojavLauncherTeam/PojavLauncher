@@ -121,7 +121,6 @@ public class LayoutConverter {
             if(button.getBoolean("holdAlt")) { keycodes[next_idx] = LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT; next_idx++; }
             keycodes[next_idx] = button.getInt("keycode");
             n_button.keycodes = keycodes;
-            n_button.update();
             empty.mControlDataList.add(n_button);
         }
         empty.scaledAt = (float)oldLayoutJson.getDouble("scaledAt");
