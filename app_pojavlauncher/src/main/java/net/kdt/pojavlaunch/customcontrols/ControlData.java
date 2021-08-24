@@ -133,7 +133,7 @@ public class ControlData implements Cloneable
         this.dynamicY = dynamicY;
         this.width = width;
         this.height = height;
-        this.isDynamicBtn = true;
+        this.isDynamicBtn = false;
         this.isToggle = isToggle;
         this.opacity = opacity;
         this.bgColor = bgColor;
