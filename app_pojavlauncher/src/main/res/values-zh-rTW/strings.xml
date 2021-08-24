@@ -198,7 +198,7 @@
     <string name="multirt_config_setdefault">設為預設</string>
     <string name="multirt_config_setdefault_already">預設</string>
     <string name="multirt_config_removeerror_last">您必須至少安裝一個Java運行庫</string>
-    <string name="multirt_nocompartiblert">找不到任何可壓縮的 Java 運行時</string>
+    <string name="multirt_nocompartiblert">找不到任何可壓縮的 Java 運行環境</string>
     <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置檔案。 遺憾的是，GL4ES 包裝器目前並不支援，但是您可以安裝一些額外的資源來運行這些版本。 按 確認鍵 確認安裝，然後按 取消鍵 中止啟動。</string>
     <string name="compat_11x_playanyway">仍然開始遊戲</string>
     <string name="pvc_gameDirectory">遊戲目錄</string>
