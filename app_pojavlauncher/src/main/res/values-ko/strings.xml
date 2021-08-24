@@ -7,13 +7,13 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">이메일 또는 유저명</string>
+    <string name="login_online_username_hint">이메일 또는 사용자 이름</string>
     <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
     <string name="login_error_invalid_username">잘못된 사용자 이름입니다. 사용자 이름은 3~16글자여야 하며, 대/소문자 알파벳과 숫자, _로 구성되어야 합니다.</string>
-    <string name="login_error_exist_username">이미 존재하는 사용자명입니다</string>
+    <string name="login_error_exist_username">이미 존재하는 사용자 이름입니다</string>
     <string name="login_error_offline_password">오프라인 계정은 비밀번호를 요구하지 않습니다!</string>
     <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
@@ -47,9 +47,9 @@
     <string name="mcl_account_offline">오프라인</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었습니다.</string>
-    <string name="mcl_launch_cleancache">캐시 파일 삭제</string>
-    <string name="mcl_launch_downloading">다운로드 중 %s</string>
-    <string name="mcl_launch_downloading_progress">"다운로드중 %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_cleancache">캐시 비우기</string>
+    <string name="mcl_launch_downloading">%s 다운로드 중</string>
+    <string name="mcl_launch_downloading_progress">"%s 다운로드 중 (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">다운로드 준비 중</string>
     <string name="mcl_options">설정</string>
     <string name="mcl_option_modinstall">모드 설치기 실행 (Forge, LabyMod, Fabric 등...)</string>
@@ -64,7 +64,7 @@
     <string name="mcl_setting_title_hide_sidebar">사이드바 숨기기</string>
     <string name="mcl_setting_subtitle_hide_sidebar">과거 v1 UI를 선호하는 사람을 위한 설정입니다.</string>
     <string name="mcl_setting_title_ignore_notch">노치 무시하기</string>
-    <string name="mcl_setting_subtitle_ignore_notch">노치를 무시하여 넓은 화면으로 플레이할 수 있습니다</string>
+    <string name="mcl_setting_subtitle_ignore_notch">노치를 무시하여 넓은 화면으로 플레이할 수 있습니다.\n</string>
     <string name="mcl_setting_title_resolution_scaler">해상도 비율</string>
     <string name="mcl_setting_subtitle_resolution_scaler">최대 해상도 100% 이하로 게임 해상도를 낮출 수 있습니다.</string>
     <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
@@ -85,11 +85,11 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 내보내기 + 3.2 포함 (1.17 미지원)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 4.6 사용</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 사용</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 내보내기</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
-    <string name="mcl_setting_veroption_release">Release</string>
-    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_release">릴리즈</string>
+    <string name="mcl_setting_veroption_snapshot">스냅숏</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">복제</string>
