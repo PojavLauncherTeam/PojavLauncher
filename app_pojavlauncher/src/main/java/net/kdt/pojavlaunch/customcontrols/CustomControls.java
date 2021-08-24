@@ -66,7 +66,7 @@ public class CustomControls {
     }
 	
 	public void save(String path) throws IOException {
-		//Current version is the V2 so the version as to be marked as 2 !
+		//Current version is the V2.3 so the version as to be marked as 3 !
 		version = 3;
 
 		Tools.write(path, Tools.GLOBAL_GSON.toJson(this));

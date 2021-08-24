@@ -81,8 +81,6 @@ public class ControlData implements Cloneable
     public float cornerRadius;  //0-100%
     public boolean isSwipeable;
 
-    public Object specialButtonListener;
-
     public ControlData() {
         this("button");
     }
@@ -142,7 +140,6 @@ public class ControlData implements Cloneable
         this.strokeColor = strokeColor;
         this.strokeWidth = strokeWidth;
         this.cornerRadius = cornerRadius;
-        update();
     }
     
     public void execute(boolean isDown) {
@@ -175,14 +172,6 @@ public class ControlData implements Cloneable
         
         // Calculate, because the dynamic position contains some math equations
         return calculate(insertedPos);
-    }
-    
-    public void update() {
-        if(SPECIAL_BUTTONS != null)
-            for(int keycode : keycodes)
-                for (ControlData data : getSpecialButtons())
-                    if (keycode == data.keycodes[0])
-                        specialButtonListener = data.specialButtonListener;
     }
 
     private static float calculate(String math) {

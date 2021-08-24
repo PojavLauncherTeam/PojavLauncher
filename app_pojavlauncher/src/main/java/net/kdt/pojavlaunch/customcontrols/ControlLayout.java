@@ -7,7 +7,7 @@ import com.google.gson.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
@@ -15,11 +15,6 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.customcontrols.handleview.HandleView;
 import net.kdt.pojavlaunch.prefs.*;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.lwjgl.glfw.*;
 
 public class ControlLayout extends FrameLayout
 {
@@ -260,7 +255,7 @@ public class ControlLayout extends FrameLayout
 
 		//Check if the action is cancelling, reset the lastControl button associated to the view
 		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
-			if(lastControlButton != null) lastControlButton.sendKeyPresses(ev,false);
+			if(lastControlButton != null) lastControlButton.sendKeyPresses(false);
 			mapTable.put(v, null);
 			return true;
 		}
@@ -276,7 +271,7 @@ public class ControlLayout extends FrameLayout
 		}
 
 		//Release last keys
-		if (lastControlButton != null) lastControlButton.sendKeyPresses(ev,false);
+		if (lastControlButton != null) lastControlButton.sendKeyPresses(false);
 		mapTable.put(v, null);
 
 		//Look for another SWIPEABLE button
@@ -288,7 +283,7 @@ public class ControlLayout extends FrameLayout
 
 				//Press the new key
 				if(!button.equals(lastControlButton)){
-					button.sendKeyPresses(ev,true);
+					button.sendKeyPresses(true);
 
 					mapTable.put(v, button);
 				}
