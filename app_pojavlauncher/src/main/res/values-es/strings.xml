@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
+    <string name="login_error_invalid_username">Nombre de usuario inválido. Los nombres de usuario deben tener entre 3-16 caracteres, y solo contienen: A-Z, a-z, 0-9 y guión bajo.</string>
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
     <string name="login_error_offline_password">Las cuentas sin conexión no pueden tener contraseña!</string>
     <string name="login_microsoft">Cuenta de Microsoft</string>
@@ -206,6 +207,7 @@
     <string name="multirt_nocompartiblert">No se pudo encontrar ningún Java Runtime compatible</string>
     <string name="compat_117_message">Las versiones a partir de Minecraft 21w10a en adelante requieren OpenGL 3.2. Lamentablemente, el wrapper de GL4ES no lo soporta totalmente en estos momentos, pero hay varios recursos adicionales que puedes instalar para ejecutar estas versiones.
 Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abortar el lanzamiento.</string>
+    <string name="compat_11x_playanyway">Jugar de todas formas</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="pvc_title">Configuración para esta versión</string>
 </resources>
