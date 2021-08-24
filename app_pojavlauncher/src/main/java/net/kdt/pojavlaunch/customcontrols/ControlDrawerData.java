@@ -9,6 +9,8 @@ import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.L
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.RIGHT;
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.UP;
 
+import androidx.annotation.NonNull;
+
 public class ControlDrawerData {
 
     public ArrayList<ControlData> buttonProperties;
@@ -71,6 +73,15 @@ public class ControlDrawerData {
         this.buttonProperties = buttonProperties;
         this.properties = properties;
         this.orientation = orientation;
+    }
+
+    public ControlDrawerData(ControlDrawerData drawerData){
+        buttonProperties = new ArrayList<>(drawerData.buttonProperties.size());
+        for(ControlData controlData : drawerData.buttonProperties){
+            buttonProperties.add(new ControlData(controlData));
+        }
+        properties = new ControlData(drawerData.properties);
+        orientation = drawerData.orientation;
     }
 
 }

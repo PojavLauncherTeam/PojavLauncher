@@ -27,11 +27,11 @@ public class CustomControls {
 	// Generate default control
 	public CustomControls(Context ctx) {
 		this();
-		this.mControlDataList.add(ControlData.getSpecialButtons()[0].clone()); // Keyboard
-		this.mControlDataList.add(ControlData.getSpecialButtons()[1].clone()); // GUI
-		this.mControlDataList.add(ControlData.getSpecialButtons()[2].clone()); // Primary Mouse mControlDataList
-		this.mControlDataList.add(ControlData.getSpecialButtons()[3].clone()); // Secondary Mouse mControlDataList
-		this.mControlDataList.add(ControlData.getSpecialButtons()[4].clone()); // Virtual mouse toggle
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[0])); // Keyboard
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[1])); // GUI
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[2])); // Primary Mouse mControlDataList
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[3])); // Secondary Mouse mControlDataList
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[4])); // Virtual mouse toggle
 
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_debug, new int[]{LWJGLGLFWKeycode.GLFW_KEY_F3}, "${margin}", "${margin}", false));
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_chat, new int[]{LWJGLGLFWKeycode.GLFW_KEY_T}, "${margin} * 2 + ${width}", "${margin}", false));
@@ -53,17 +53,7 @@ public class CustomControls {
 		//The default controls are conform to the V2
 		version = 3;
 	}
-    
-    public ControlData findControlData(int keycode) {
-        for (ControlData data : mControlDataList) {
-        	for(int dataKeycode : data.keycodes){
-				if (dataKeycode == keycode) {
-					return data;
-				}
-			}
-        }
-        return null;
-    }
+
 	
 	public void save(String path) throws IOException {
 		//Current version is the V2.3 so the version as to be marked as 3 !
