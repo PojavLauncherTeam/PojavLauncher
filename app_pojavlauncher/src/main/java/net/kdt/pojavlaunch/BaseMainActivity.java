@@ -2,6 +2,9 @@ package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 
+import static org.lwjgl.glfw.CallbackBridge.windowHeight;
+import static org.lwjgl.glfw.CallbackBridge.windowWidth;
+
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
@@ -157,9 +160,9 @@ public class BaseMainActivity extends LoggableActivity {
             
             displayMetrics = Tools.getDisplayMetrics(this);
             sensitivityFactor = 1.4 * (1080f/ displayMetrics.heightPixels);
-            CallbackBridge.windowWidth = (int) ((float)displayMetrics.widthPixels * scaleFactor);
-            CallbackBridge.windowHeight = (int) ((float)displayMetrics.heightPixels * scaleFactor);
-            System.out.println("WidthHeight: " + CallbackBridge.windowWidth + ":" + CallbackBridge.windowHeight);
+            windowWidth = Tools.getDisplayFriendlyRes(displayMetrics.widthPixels, scaleFactor);
+            windowHeight = Tools.getDisplayFriendlyRes(displayMetrics.heightPixels, scaleFactor);
+            System.out.println("WidthHeight: " + windowWidth + ":" + windowHeight);
 
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
@@ -527,14 +530,14 @@ public class BaseMainActivity extends LoggableActivity {
                     @Override
                     public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
                         scaleFactor = (LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f);
-                        texture.setDefaultBufferSize((int)(width*scaleFactor),(int)(height*scaleFactor));
-                        CallbackBridge.windowWidth = (int)(width*scaleFactor);
-                        CallbackBridge.windowHeight = (int)(height*scaleFactor);
+                        windowWidth = Tools.getDisplayFriendlyRes(width, scaleFactor);
+                        windowHeight = Tools.getDisplayFriendlyRes(height, scaleFactor);
+                        texture.setDefaultBufferSize(windowWidth, windowHeight);
 
                         //Load Minecraft options:
                         MCOptionUtils.load();
-                        MCOptionUtils.set("overrideWidth", String.valueOf(CallbackBridge.windowWidth));
-                        MCOptionUtils.set("overrideHeight", String.valueOf(CallbackBridge.windowHeight));
+                        MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
+                        MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
                         MCOptionUtils.save();
                         getMcScale();
                         // Should we do that?
@@ -561,15 +564,15 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-                        CallbackBridge.windowWidth = (int)(width*scaleFactor);
-                        CallbackBridge.windowHeight = (int)(height*scaleFactor);
-                        CallbackBridge.sendUpdateWindowSize((int)(width*scaleFactor),(int)(height*scaleFactor));
+                        windowWidth = Tools.getDisplayFriendlyRes(width, scaleFactor);
+                        windowHeight = Tools.getDisplayFriendlyRes(height, scaleFactor);
+                        CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
                         getMcScale();
                     }
 
                     @Override
                     public void onSurfaceTextureUpdated(SurfaceTexture texture) {
-                        texture.setDefaultBufferSize(CallbackBridge.windowWidth,CallbackBridge.windowHeight);
+                        texture.setDefaultBufferSize(windowWidth, windowHeight);
                     }
                 });
         } catch (Throwable e) {
@@ -941,7 +944,7 @@ public class BaseMainActivity extends LoggableActivity {
         this.guiScale = (str == null ? 0 :Integer.parseInt(str));
         
 
-        int scale = Math.max(Math.min(CallbackBridge.windowWidth / 320, CallbackBridge.windowHeight / 240), 1);
+        int scale = Math.max(Math.min(windowWidth / 320, windowHeight / 240), 1);
         if(scale < this.guiScale || guiScale == 0){
             this.guiScale = scale;
         }
