@@ -852,4 +852,10 @@ public final class Tools {
         actManager.getMemoryInfo(memInfo);
         return (int) (memInfo.availMem / 1048576L);
     }
+
+    public static int getDisplayFriendlyRes(int displaySideRes, float scaling){
+        displaySideRes *= scaling;
+        if(displaySideRes % 2 != 0) displaySideRes ++;
+        return displaySideRes;
+    }
 }
