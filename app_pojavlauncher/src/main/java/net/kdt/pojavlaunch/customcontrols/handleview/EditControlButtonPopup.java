@@ -56,6 +56,7 @@ public class EditControlButtonPopup {
     protected TextView textOpacity;
     protected TextView textCornerRadius;
     protected TextView textStrokeWidth;
+    protected TextView textStrokeColor;
 
     protected final ControlButton button;
     protected final ControlData properties;
@@ -125,6 +126,7 @@ public class EditControlButtonPopup {
                 }
                 if(seekBar.equals(seekBarStrokeWidth)) {
                     setPercentageText(textStrokeWidth, i);
+                    textStrokeColor.setVisibility(i == 0 ? View.GONE : View.VISIBLE);
                 }
             }
 
@@ -145,6 +147,7 @@ public class EditControlButtonPopup {
         textOpacity = v.findViewById(R.id.editButtonOpacity_textView_percent);
         textCornerRadius = v.findViewById(R.id.editCornerRadius_textView_percent);
         textStrokeWidth = v.findViewById(R.id.editStrokeWidth_textView_percent);
+        textStrokeColor = v.findViewById(R.id.editStrokeColor_textView);
 
         checkDynamicPosition = v.findViewById(R.id.checkboxDynamicPosition);
         checkDynamicPosition.setOnCheckedChangeListener((btn, checked) -> {
@@ -200,6 +203,9 @@ public class EditControlButtonPopup {
         (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
         editDynamicX.setVisibility(View.GONE);
         editDynamicY.setVisibility(View.GONE);
+
+        //Hide the color choice if the width is 0.
+        textStrokeColor.setVisibility(properties.strokeWidth == 0 ? View.GONE : View.VISIBLE);
     }
 
     protected void defineDynamicCheckChange(){
