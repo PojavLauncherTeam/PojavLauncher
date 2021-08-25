@@ -47,7 +47,7 @@ public class BaseMainActivity extends LoggableActivity {
     private DisplayMetrics displayMetrics;
     public float scaleFactor = 1;
     public double sensitivityFactor;
-    private final int fingerStillThreshold = 8;
+    private final int fingerStillThreshold = (int) Tools.dpToPx(9);
     private float initialX, initialY;
     private int scrollInitialX, scrollInitialY;
     private float prevX, prevY;
