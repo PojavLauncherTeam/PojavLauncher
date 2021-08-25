@@ -217,6 +217,7 @@ public class EditControlButtonPopup {
             editDynamicX.setVisibility(visibility);
             editDynamicY.setVisibility(visibility);
         });
+
     }
 
     private void setupCheckerboards(){

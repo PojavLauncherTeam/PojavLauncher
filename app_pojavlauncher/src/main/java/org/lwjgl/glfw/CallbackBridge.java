@@ -16,7 +16,6 @@ public class CallbackBridge {
     public static volatile int windowWidth, windowHeight;
     public static volatile int physicalWidth, physicalHeight;
     public static int mouseX, mouseY;
-    public static boolean mouseLeft;
     public static StringBuilder DEBUG_STRING = new StringBuilder();
     
     // volatile private static boolean isGrabbing = false;
