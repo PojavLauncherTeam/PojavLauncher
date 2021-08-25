@@ -85,6 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): esporta OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): esporta OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): esporta OpenGL 2.1 + parziale 3.2 (1.17 non ancora supportata)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): esporta OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): esporta OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno nell\'elenco delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
