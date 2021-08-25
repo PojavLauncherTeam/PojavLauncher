@@ -116,18 +116,13 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                             sendScaledMousePosition(mouseX,mouseY);
 
                             AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
-                            if (!rightOverride) {
-                                CallbackBridge.mouseLeft = true;
-                            }
+
 
                         } else {
                             switch (action) {
                                 case MotionEvent.ACTION_UP: // 1
                                 case MotionEvent.ACTION_CANCEL: // 3
                                 case MotionEvent.ACTION_POINTER_UP: // 6
-                                    if (!rightOverride) {
-                                        CallbackBridge.mouseLeft = false;
-                                    }
                                     break;
                                 case MotionEvent.ACTION_MOVE: // 2
                                     mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));

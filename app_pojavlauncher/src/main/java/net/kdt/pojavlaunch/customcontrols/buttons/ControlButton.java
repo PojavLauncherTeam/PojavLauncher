@@ -205,8 +205,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (isToggled)
+        if (isToggled) {
             canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mProperties.cornerRadius, mProperties.cornerRadius, mRectPaint);
+            return;
+        }
     }
 
     @Override
@@ -494,7 +496,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 } else {
                     CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown , CallbackBridge.mouseX, CallbackBridge.mouseY);
 
-                    //setRightOverride(isDown);
+                    BaseMainActivity.setRightOverride(isDown);
                 }
                 break;
 

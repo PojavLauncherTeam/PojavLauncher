@@ -43,7 +43,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     private Gamepad gamepad;
 
-    private boolean rightOverride = false;
+    private static boolean rightOverride = false;
     private DisplayMetrics displayMetrics;
     public float scaleFactor = 1;
     public double sensitivityFactor;
@@ -82,7 +82,6 @@ public class BaseMainActivity extends LoggableActivity {
     private MinecraftGLView minecraftGLView;
     private int guiScale;
 
-    public boolean hiddenTextIgnoreUpdate = true;
     
     private static boolean isVirtualMouseEnabled;
     private static LinearLayout touchPad;
@@ -264,16 +263,11 @@ public class BaseMainActivity extends LoggableActivity {
                     mouse_y = (mouseY * scaleFactor);
                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                     CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
-                    if (!rightOverride) CallbackBridge.mouseLeft = true;
+
 
 
                 } else {
                     switch (action) {
-                        case MotionEvent.ACTION_UP: // 1
-                        case MotionEvent.ACTION_CANCEL: // 3
-                            if (!rightOverride) CallbackBridge.mouseLeft = false;
-                            break;
-
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
                             scrollInitialX = CallbackBridge.mouseX;
                             scrollInitialY = CallbackBridge.mouseY;
@@ -354,7 +348,6 @@ public class BaseMainActivity extends LoggableActivity {
                     int hudKeyHandled;
                     if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)){
                         CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
-                        if (!rightOverride) CallbackBridge.mouseLeft = true;
                         return true;
                     }
 
@@ -379,7 +372,6 @@ public class BaseMainActivity extends LoggableActivity {
                                 break;
                             }
 
-                            if (!rightOverride) CallbackBridge.mouseLeft = true;
 
                             if (CallbackBridge.isGrabbing()) {
                                 // It cause hold left mouse while moving camera
@@ -393,11 +385,6 @@ public class BaseMainActivity extends LoggableActivity {
                         case MotionEvent.ACTION_CANCEL: // 3
                             shouldBeDown = false;
                             currentPointerID = -1;
-
-                            if (!isTouchInHotbar) {
-                                // -TODO uncomment after fix wrong trigger
-                                if (!rightOverride) CallbackBridge.mouseLeft = false;
-                            }
 
                             if (CallbackBridge.isGrabbing()) {
                                 if (!isTouchInHotbar && !triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
@@ -813,11 +800,11 @@ public class BaseMainActivity extends LoggableActivity {
     public void leaveCustomControls() {
         if(this instanceof MainActivity) {
             try {
-                ((MainActivity) this).mControlLayout.hideAllHandleViews();
-                ((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
-                ((MainActivity) this).mControlLayout.setModifiable(false);
+                MainActivity.mControlLayout.hideAllHandleViews();
+                MainActivity.mControlLayout.loadLayout((CustomControls)null);
+                MainActivity.mControlLayout.setModifiable(false);
                 System.gc();
-                ((MainActivity) this).mControlLayout.loadLayout(LauncherPreferences.DEFAULT_PREF.getString("defaultCtrl",Tools.CTRLDEF_FILE));
+                MainActivity.mControlLayout.loadLayout(LauncherPreferences.DEFAULT_PREF.getString("defaultCtrl",Tools.CTRLDEF_FILE));
             } catch (IOException e) {
                 Tools.showError(this,e);
             }
@@ -904,8 +891,8 @@ public class BaseMainActivity extends LoggableActivity {
 
 
 
-    protected void setRightOverride(boolean val) {
-        this.rightOverride = val;
+    public static void setRightOverride(boolean val) {
+        rightOverride = val;
     }
 
     public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
