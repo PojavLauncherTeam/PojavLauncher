@@ -27,7 +27,7 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
 @SuppressLint("ViewConstructor")
 public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
 {
-    private Paint mRectPaint;
+    private final Paint mRectPaint = new Paint();;
     
     protected GestureDetector mGestureDetector;
     protected ControlData mProperties;
@@ -48,15 +48,6 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         //When a button is created, the width/height has yet to be processed to fit the scaling.
         setProperties(preProcessProperties(properties, layout));
         setModified(false);
-
-
-        //For the toggle layer
-        final TypedValue value = new TypedValue();
-        getContext().getTheme().resolveAttribute(R.attr.colorAccent, value, true);
-
-        mRectPaint = new Paint();
-        mRectPaint.setColor(value.data);
-        mRectPaint.setAlpha(128);
     }
 
     public HandleView getHandleView() {
@@ -85,6 +76,17 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     public void setProperties(ControlData properties, boolean changePos) {
         mProperties = properties;
+
+        if(mProperties.isToggle){
+            //For the toggle layer
+            final TypedValue value = new TypedValue();
+            getContext().getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+            mRectPaint.setColor(value.data);
+            mRectPaint.setAlpha(128);
+        }else{
+            mRectPaint.setColor(Color.WHITE);
+            mRectPaint.setAlpha(60);
+        }
 
         setText(properties.name);
 
@@ -205,10 +207,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (isToggled) {
+        if (isToggled || (!mProperties.isToggle && isActivated()))
             canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mProperties.cornerRadius, mProperties.cornerRadius, mRectPaint);
-            return;
-        }
     }
 
     @Override
@@ -254,7 +254,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                        event.getY() < getTop()  || event.getY() > getBottom()){
                         if(mProperties.isSwipeable && !isPointerOutOfBounds){
                             //Remove keys
-                            if(!triggerToggle(event)) {
+                            if(!triggerToggle()) {
                                 sendKeyPresses(false);
                             }
                         }
@@ -291,7 +291,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                     if(isPointerOutOfBounds) ((ControlLayout) getParent()).onTouch(this, event);
                     isPointerOutOfBounds = false;
 
-                    if(!triggerToggle(event)) {
+                    if(!triggerToggle()) {
                         sendKeyPresses(false);
                     }
                     break;
@@ -446,7 +446,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         return (minSize/2) * (radiusInPercent/100);
     }
 
-    public boolean triggerToggle(MotionEvent event){
+    public boolean triggerToggle(){
         //returns true a the toggle system is triggered
         if(mProperties.isToggle){
             isToggled = !isToggled;
@@ -458,6 +458,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     public void sendKeyPresses(boolean isDown){
+        setActivated(isDown);
         for(int keycode : mProperties.keycodes){
             if(keycode >= GLFW_KEY_UNKNOWN){
                 MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
