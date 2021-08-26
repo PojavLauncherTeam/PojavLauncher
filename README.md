@@ -81,8 +81,8 @@ cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main
 
 ## Known Issues
 - Minecraft `21w10a` or newer are currently not yet supported due to the new GLSL usage.
-- In 1.16 and up spawn eggs banners are white (you can fix this by adding this to your JVM flags 
-`-Dorg.lwjgl.opengl.libname=libgl4es_115.so`, only works on 1.16 and up, do not use under this version)
+- In 1.16 and up spawn eggs banners are white (you can fix this by switching renderer
+to `gl4es 1.1.5`, only works on 1.16 and up, do not use under this version)
 - Controller mods aren't working
 - Random crashes could happen very often on Android 5.x during game load or join world.
 - With big modpacks textures could be messed up
@@ -93,7 +93,8 @@ cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
 ## Contributing
-Contributions are welcome! We welcome any type of contribution, not only code. Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
+Contributions are welcome! We welcome any type of contribution, not only code.
+Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
 ## Credits & Third party components and their licenses
 - [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
