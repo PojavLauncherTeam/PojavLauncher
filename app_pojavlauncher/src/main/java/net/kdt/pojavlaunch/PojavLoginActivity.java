@@ -17,7 +17,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.util.Log;
@@ -327,7 +329,7 @@ public class PojavLoginActivity extends BaseActivity
         }
 
         mkdirs(Tools.CTRLMAP_PATH);
-        
+
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
@@ -347,13 +349,27 @@ public class PojavLoginActivity extends BaseActivity
                     mLockSelectJRE.wait();
                 }
             }
+            if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
             LauncherPreferences.loadPreferences(getApplicationContext());
         }
         catch(Throwable e){
             Tools.showError(this, e);
         }
     }
-
+    private void showStorageDialog() {
+        if(!firstLaunchPrefs.getBoolean("storageDialogShown",false)) {
+            AlertDialog.Builder bldr = new AlertDialog.Builder(this);
+            bldr.setTitle(R.string.storage_warning_title);
+            Spanned sp = Html.fromHtml(getString(R.string.storage_warning_text,BuildConfig.APPLICATION_ID));
+            bldr.setMessage(sp);
+            bldr.setCancelable(false);
+            bldr.setPositiveButton(android.R.string.ok, (dialog, which)->{
+               firstLaunchPrefs.edit().putBoolean("storageDialogShown",true).apply();
+               dialog.dismiss();
+            });
+            bldr.show();
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
