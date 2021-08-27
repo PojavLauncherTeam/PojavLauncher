@@ -100,6 +100,7 @@
     <string name="global_load">Tải</string>
     <string name="global_name">Tên</string>
     <string name="global_remove">Loại bỏ</string>
+    <string name="global_clone">Nhân bản</string>
     <string name="global_restart">Khởi động lại</string>
     <string name="global_save">Lưu</string>
     <string name="global_unpacking">Đang giải nén %s</string>
@@ -211,4 +212,6 @@
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
     <string name="pvc_jvmArgs">Các chỉ số JVM</string>
     <string name="pvc_title">Cài đặt theo từng phiên bản</string>
+    <string name="storage_warning_title">Thay đổi về lưu trữ</string>
+    <string name="storage_warning_text"><![CDATA[Vì Google đã bắt buộc sử dụng lưu trữ nội bộ, một tính năng được thêm vào Android 10 trở lên, chúng tôi cần phải chuyển thư mục của trò chơi tới một thư mục riêng tư của ứng dụng.<br /> Thư mục mới của PojavLauncher là <b>Android/data/%s/files/</b> (cũng có thể truy cập được bằng cách sử dụng dịch vụ cung cấp lưu trữ trong trình quản lí tệp của bạn).<br /> Nếu bạn muốn sao chép các tệp trò chơi của bạn, hãy sao chép tất cả từ thư mục <b>games/PojavLauncher</b> một cách thủ công.]]></string>
 </resources>
