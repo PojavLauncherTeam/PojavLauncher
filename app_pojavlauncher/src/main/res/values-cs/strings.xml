@@ -100,6 +100,7 @@
     <string name="global_load">Načíst</string>
     <string name="global_name">Název</string>
     <string name="global_remove">Odstranit</string>
+    <string name="global_clone">Klon</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Uložit</string>
     <string name="global_unpacking">Rozbalování %s</string>
