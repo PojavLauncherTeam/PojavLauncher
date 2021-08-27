@@ -99,6 +99,7 @@
     <string name="global_load">載入</string>
     <string name="global_name">名稱</string>
     <string name="global_remove">移除</string>
+    <string name="global_clone">複製</string>
     <string name="global_restart">重啟</string>
     <string name="global_save">儲存</string>
     <string name="global_unpacking">正在解包 %s</string>
