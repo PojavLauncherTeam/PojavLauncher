@@ -99,6 +99,7 @@
     <string name="global_load">Учитај</string>
     <string name="global_name">Име</string>
     <string name="global_remove">Уклони</string>
+    <string name="global_clone">Клонирај</string>
     <string name="global_restart">Рестарт</string>
     <string name="global_save">Сачувај</string>
     <string name="global_unpacking">Распакивање %s</string>
