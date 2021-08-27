@@ -78,6 +78,7 @@
     <string name="global_load">Йөкләргә</string>
     <string name="global_name">Исем</string>
     <string name="global_remove">Бетерергә</string>
+    <string name="global_clone">Клонларга</string>
     <string name="global_restart">Яңадан кушу</string>
     <string name="global_save">Сакларга</string>
     <string name="global_unpacking">%s ачылу</string>
