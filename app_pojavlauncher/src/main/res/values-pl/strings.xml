@@ -100,6 +100,7 @@
     <string name="global_load">Wczytaj</string>
     <string name="global_name">Nazwa</string>
     <string name="global_remove">Usuń</string>
+    <string name="global_clone">Klonuj</string>
     <string name="global_restart">Uruchom ponownie</string>
     <string name="global_save">Zapisz</string>
     <string name="global_unpacking">Wypakowywanie %s</string>
