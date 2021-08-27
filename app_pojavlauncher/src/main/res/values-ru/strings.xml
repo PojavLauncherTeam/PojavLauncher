@@ -100,6 +100,7 @@
     <string name="global_load">Загрузка</string>
     <string name="global_name">Имя</string>
     <string name="global_remove">Удалить</string>
+    <string name="global_clone">Клонировать</string>
     <string name="global_restart">Перезапуск</string>
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
