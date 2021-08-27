@@ -92,6 +92,7 @@
     <string name="global_load">Charger</string>
     <string name="global_name">Nom</string>
     <string name="global_remove">Supprimer</string>
+    <string name="global_clone">Dupliquer</string>
     <string name="global_restart">Redémarrer</string>
     <string name="global_save">Sauvegarder</string>
     <string name="global_unpacking">Décompression de %s</string>
