@@ -99,6 +99,7 @@
     <string name="global_load">Memuat</string>
     <string name="global_name">Nama</string>
     <string name="global_remove">Hapus</string>
+    <string name="global_clone">Klon</string>
     <string name="global_restart">Buka ulang</string>
     <string name="global_save">Simpan</string>
     <string name="global_unpacking">Membongkar %s</string>
