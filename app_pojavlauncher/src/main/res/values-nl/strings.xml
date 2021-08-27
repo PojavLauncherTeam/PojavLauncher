@@ -93,6 +93,7 @@
     <string name="global_load">Lading</string>
     <string name="global_name">Naam</string>
     <string name="global_remove">Verwijderen</string>
+    <string name="global_clone">Dupliceren</string>
     <string name="global_restart">Opnieuw starten</string>
     <string name="global_save">Opslaan</string>
     <string name="global_unpacking">Uitpakken %s</string>
