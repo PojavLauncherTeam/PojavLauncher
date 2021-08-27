@@ -98,6 +98,7 @@
     <string name="global_load">Last inn</string>
     <string name="global_name">Navn</string>
     <string name="global_remove">Slett</string>
+    <string name="global_clone">Klone</string>
     <string name="global_restart">Start på nytt</string>
     <string name="global_save">Lagre</string>
     <string name="global_unpacking">Pakker ut %s</string>
