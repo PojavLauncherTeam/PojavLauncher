@@ -97,6 +97,7 @@
     <string name="global_load">Įjungti</string>
     <string name="global_name">Pavadinimas</string>
     <string name="global_remove">Pašalinti</string>
+    <string name="global_clone">Klonuoti</string>
     <string name="global_restart">Perkrauti</string>
     <string name="global_save">Išsaugoti</string>
     <string name="global_unpacking">Išpakuojama %s</string>
