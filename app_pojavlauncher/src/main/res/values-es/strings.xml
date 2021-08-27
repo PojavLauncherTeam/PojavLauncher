@@ -99,6 +99,7 @@
     <string name="global_load">Cargar</string>
     <string name="global_name">Nombre</string>
     <string name="global_remove">Remover</string>
+    <string name="global_clone">Clonar</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Guardar</string>
     <string name="global_unpacking">Descomprimiendo</string>
