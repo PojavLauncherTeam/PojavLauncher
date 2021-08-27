@@ -97,6 +97,7 @@
     <string name="global_load">Φόρτωση</string>
     <string name="global_name">Όνομα</string>
     <string name="global_remove">Αφαίρεσε</string>
+    <string name="global_clone">Κλώνος</string>
     <string name="global_restart">Επανεκκίνηση</string>
     <string name="global_save">Αποθήκευση</string>
     <string name="global_unpacking">Αποσυμπίεση %s</string>
