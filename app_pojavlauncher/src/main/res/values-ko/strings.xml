@@ -100,6 +100,7 @@
     <string name="global_load">불러오기</string>
     <string name="global_name">이름</string>
     <string name="global_remove">제거</string>
+    <string name="global_clone">복제</string>
     <string name="global_restart">재시작</string>
     <string name="global_save">저장</string>
     <string name="global_unpacking">압축 해제 중 %s</string>
