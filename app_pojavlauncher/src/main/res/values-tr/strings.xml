@@ -99,6 +99,7 @@
     <string name="global_load">Yükle</string>
     <string name="global_name">İsim</string>
     <string name="global_remove">Kaldır</string>
+    <string name="global_clone">Klon</string>
     <string name="global_restart">Yeniden başlat</string>
     <string name="global_save">Kaydet</string>
     <string name="global_unpacking">%s Paketten çıkarılıyor</string>
