@@ -98,6 +98,7 @@
     <string name="global_load">I-Load</string>
     <string name="global_name">Pangalan</string>
     <string name="global_remove">Tanggalin</string>
+    <string name="global_clone">I-Clone</string>
     <string name="global_restart">I-Restart</string>
     <string name="global_save">Save</string>
     <string name="global_unpacking">Inaalis ang %s</string>
