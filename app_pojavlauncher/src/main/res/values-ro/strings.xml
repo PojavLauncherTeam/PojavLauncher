@@ -98,6 +98,7 @@
     <string name="global_load">Incarcă</string>
     <string name="global_name">Nume</string>
     <string name="global_remove">Șterge</string>
+    <string name="global_clone">Clonă</string>
     <string name="global_restart">Repornire</string>
     <string name="global_save">Salvează</string>
     <string name="global_unpacking">Se despachetează %s</string>
