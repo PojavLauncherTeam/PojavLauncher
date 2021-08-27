@@ -91,6 +91,7 @@
     <string name="global_load">Жүктеу</string>
     <string name="global_name">Атауы</string>
     <string name="global_remove">Алып тастау</string>
+    <string name="global_clone">Клондау</string>
     <string name="global_restart">Қайта жүктеу</string>
     <string name="global_save">Сақтау</string>
     <string name="global_unpacking">%s ашылуда</string>
