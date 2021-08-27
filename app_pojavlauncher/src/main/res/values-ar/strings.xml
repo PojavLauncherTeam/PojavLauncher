@@ -98,6 +98,7 @@
     <string name="global_load">تحميل</string>
     <string name="global_name">الاسم</string>
     <string name="global_remove">إزالة</string>
+    <string name="global_clone">نسخ</string>
     <string name="global_restart">اعادة تشغيل</string>
     <string name="global_save">حفظ</string>
     <string name="global_unpacking">جاري فك الضغط %s</string>
