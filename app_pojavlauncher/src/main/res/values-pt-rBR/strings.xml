@@ -99,6 +99,7 @@
     <string name="global_load">Carregar</string>
     <string name="global_name">Nome</string>
     <string name="global_remove">Remover</string>
+    <string name="global_clone">Clonar</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Salvar</string>
     <string name="global_unpacking">Descompactando %s</string>
@@ -211,4 +212,6 @@
     <string name="pvc_gameDirectory">Diretório do jogo</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="pvc_title">Configurações por versão</string>
+    <string name="storage_warning_title">Alterações de armazenamento</string>
+    <string name="storage_warning_text"><![CDATA[Devido às novas execuções de armazenamento com escopo do Google adicionadas no Android 10 ou superior, somos necessários para mover o diretório do jogo para uma pasta de aplicativos privados.<br /> A nova pasta para arquivos Pojav é <b>Android/data/%s/files/</b> (também acessível usando um provedor de armazenamento em seu explorador de arquivos).<br /> Se você precisa copiar os arquivos do seu jogo, copie tudo a partir da pasta original em <b>games/PojavLauncher</b> manualmente.]]></string>
 </resources>
