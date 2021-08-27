@@ -100,6 +100,7 @@
     <string name="global_load">Carica</string>
     <string name="global_name">Nome</string>
     <string name="global_remove">Rimuovi</string>
+    <string name="global_clone">Clona</string>
     <string name="global_restart">Riavvia</string>
     <string name="global_save">Salva</string>
     <string name="global_unpacking">Estrazione %s</string>
@@ -212,4 +213,6 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="pvc_gameDirectory">Cartella gioco</string>
     <string name="pvc_jvmArgs">Parametri JVM</string>
     <string name="pvc_title">Impostazioni per-versione</string>
+    <string name="storage_warning_title">Modifiche archiviazione</string>
+    <string name="storage_warning_text"><![CDATA[A causa delle nuove applicazioni di archiviazione di Google aggiunte in Android 10 e superiore, siamo tenuti a spostare la directory di gioco in una cartella privata.<br /> La nuova cartella per i file Pojav è <b>Android/data/%s/files/</b> (anche accessibile tramite un provider di archiviazione nel tuo file explorer).<br /> Se hai bisogno di copiare i file di gioco, copia tutto dalla cartella originale a <b>giochi/PojavLauncher</b> manualmente.]]></string>
 </resources>
