@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">رندر کننده</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): خروجی گرفتن از OpenGL 2.1 + قسمتی از 3.2 (بدون پشتیبانی از 1.17)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): خروجی گرفتن از OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">نوع ورژن برای نمایش در لیست ورژن‌ها</string>
     <string name="mcl_setting_veroption_release">ریلیز</string>
@@ -98,6 +100,7 @@
     <string name="global_load">بارگذاری</string>
     <string name="global_name">نام</string>
     <string name="global_remove">حذف</string>
+    <string name="global_clone">شبیه‌سازی</string>
     <string name="global_restart">راه‌اندازی مجدد</string>
     <string name="global_save">ذخیره</string>
     <string name="global_unpacking">در حال باز کردن %s</string>
