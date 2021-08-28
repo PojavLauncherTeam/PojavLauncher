@@ -7,8 +7,8 @@ import java.nio.FloatBuffer;
 
 public class GLFWController implements Controller{
     int jid;
-    FloatBuffer axisData;
-    ByteBuffer buttonData;
+    FloatBuffer axisData = FloatBuffer.allocate(8);
+    ByteBuffer buttonData = ByteBuffer.allocate(8);
     @Override
     public String getName() {
         return GLFW.glfwGetJoystickName(jid);
@@ -57,8 +57,9 @@ public class GLFWController implements Controller{
 
     @Override
     public void poll() {
-        axisData = GLFW.glfwGetJoystickAxes(jid);
-        buttonData = GLFW.glfwGetJoystickButtons(jid);
+        
+        //axisData = GLFW.glfwGetJoystickAxes(jid);
+        //buttonData = GLFW.glfwGetJoystickButtons(jid);
     }
 
     @Override
