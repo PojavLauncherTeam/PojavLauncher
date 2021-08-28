@@ -213,4 +213,5 @@
     <string name="pvc_jvmArgs">Аргументи JVM</string>
     <string name="pvc_title">Налаштування окремої версії</string>
     <string name="storage_warning_title">Зміни сховища</string>
+    <string name="storage_warning_text"><![CDATA[Через нові обсяги зберігання Google, які діють в Android 10 і вище, нам необхідно перемістити гру із теки гри у приватну папку.<br /> Нова папка для файлів PojavLauncher:<b>Android/data/%s/files/</b> (також можна використовувати сховище у провіднику ваших файлів).<br /> Якщо вам потрібно скопіювати свої ігрові файли, будь ласка, скопіюйте усе з вихідної папки з <b>games/PojavLauncher</b> вручну.]]></string>
 </resources>
