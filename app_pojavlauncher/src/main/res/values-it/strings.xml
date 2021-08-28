@@ -68,7 +68,7 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Ti permetti di diminuire la risoluzione del gioco. 100% è la risoluzione completa</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
-    <string name="mcl_setting_title_backtorightmouse">Usa il pulsante dietro come mouse destro</string>
+    <string name="mcl_setting_title_backtorightmouse">Usa il pulsante indietro come destro mouse</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Alcuni dispositivi utilizzano come pulsante indietro il tasto destro del mouse. Se stai usando un mouse esterno, dovresti abilitarlo.</string>
     <string name="mcl_setting_title_flat_button_style">Stile pulsante piatto</string>
     <string name="mcl_setting_subtitle_flat_button_style">Abilita l\'opzione per impostare lo stile piatto dei pulsanti di controllo.</string>
