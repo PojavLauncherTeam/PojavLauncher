@@ -212,4 +212,6 @@
     <string name="pvc_gameDirectory">游戏目录</string>
     <string name="pvc_jvmArgs">JVM 参数</string>
     <string name="pvc_title">Per-version 设置</string>
+    <string name="storage_warning_title">存储变更</string>
+    <string name="storage_warning_text"><![CDATA[由于 Google 在 Android 10 及更高版本中添加了新的存储范围强制措施，我们需要将游戏目录移动到应用私有文件夹中。<br />新的 Pojav 文件夹是 <b>Android/data/%s/files/</b> （同样可以通过您的文件管理器访问）。<br />如果您需要复制您的游戏文件，请从 <b>games/PojavLauncher</b> 中手动复制所有内容]]></string>
 </resources>
