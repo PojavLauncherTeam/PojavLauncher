@@ -212,4 +212,6 @@
     <string name="pvc_gameDirectory">Složka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
     <string name="pvc_title">Nastavení po verzi</string>
+    <string name="storage_warning_title">Změny úložiště</string>
+    <string name="storage_warning_text"><![CDATA[Kvůli nově vynucovaném rozsahovém úložišti od Googlu přidanému v Androidu 10 a vyšším jsme přinuceni přesunout složku hry do privátní složky aplikace.<br /> Nová složka pro soubory Pojavu je <b>Android/data/%s/files/</b> (také přístupná pomocí poskytovatele úložiště v Průzkumníku souborů).<br /> Pokud potřebujete zkopírovat své herní soubory, prosím zkopírujte vše z původní složky na <b>games/PojavLauncher</b> ručně.]]></string>
 </resources>
