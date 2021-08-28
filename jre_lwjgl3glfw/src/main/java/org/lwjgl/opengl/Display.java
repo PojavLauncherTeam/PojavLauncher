@@ -82,12 +82,15 @@ public class Display {
 
         mode = desktopDisplayMode = new DisplayMode(monitorWidth, monitorHeight, monitorBitPerPixel, monitorRefreshRate);
         LWJGLUtil.log("Initial mode: " + desktopDisplayMode);
-
-        // additional code workaround not called yet!
-        LWJGLUtil.log("Calling Display.create()");
-        try {
-            create();
-        } catch (LWJGLException e) {throw new RuntimeException(e);}
+	if("true".equals(System.getProperty("org.lwjgl.opengl.disableStaticInit"))) {
+		LWJGLUtil.log("Static Display.create() disabled");
+	}else{
+        	// additional code workaround not called yet!
+        	LWJGLUtil.log("Calling Display.create()");
+        	try {
+        	    create();
+        	} catch (LWJGLException e) {throw new RuntimeException(e);}
+	}
     }
     
     public static void setSwapInterval(int value) {
