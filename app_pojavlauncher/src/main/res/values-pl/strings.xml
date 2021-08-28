@@ -210,4 +210,6 @@
     <string name="pvc_gameDirectory">Katalog gry</string>
     <string name="pvc_jvmArgs">Argumenty JVM</string>
     <string name="pvc_title">Ustawienia dla wersji</string>
+    <string name="storage_warning_title">Zmiany w przechowywaniu</string>
+    <string name="storage_warning_text"><![CDATA[Ze względu na nowe wymagania Google skupione na pamięci dodane w systemie Android 10 i wyższych, musimy przenieść katalog gry do prywatnego folderu aplikacji.<br /> Nowy folder Pojav to <b>Android/data/%s/files/</b> (dostępny również poprzez posiadany eksplorator plików).<br /> Jeśli potrzebujesz kopii swoich plików gry, skopiuj wszystko ręcznie z oryginalnego folderu <b>games/PojavLauncher</b>.]]></string>
 </resources>
