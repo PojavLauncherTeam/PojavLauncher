@@ -50,7 +50,9 @@ public class GLFWController implements Controller{
 
     @Override
     public boolean isButtonPressed(int index) {
-        return (buttonData.get(index) == 1);
+        if(index < 8){
+           return (buttonData.get(index) == 1);
+        }else return false;
     }
 
     @Override
