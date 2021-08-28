@@ -14,7 +14,7 @@
     <string name="login_offline_label">以離線帳號登入</string>
     <string name="login_error_invalid_username">無效的用戶名。用戶名必須在3-16個字節的範圍內，只能包含A-Z、a-z、0-9和下劃線。</string>
     <string name="login_error_exist_username">用戶名已存在</string>
-    <string name="login_error_offline_password">離線帳號不能填寫密碼！</string>
+    <string name="login_error_offline_password">離線帳戶不能填寫密碼！</string>
     <string name="login_microsoft">微軟帳號登入</string>
     <string name="login_select_account">選擇帳號</string>
     <string name="login_title_no_saved_account">找不到帳戶!</string>
@@ -24,7 +24,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">將移除此帳號！</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">安裝 Java 執行時環境 %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">安裝 Java 執行環境 %s (.tar.xz)</string>
     <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩潰</string>
@@ -34,7 +34,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要儲存寫入權限！</string>
     <string name="toast_optifine_success">安裝成功</string>
-    <string name="toast_uninstalljre_done">Java 執行時環境解除安裝成功</string>
+    <string name="toast_uninstalljre_done">Java 執行環境解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -57,8 +57,8 @@
     <string name="mcl_option_customcontrol">自訂控制鍵</string>
     <string name="mcl_option_settings">設定</string>
     <string name="mcl_option_about">關於</string>
-    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行時環境</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 得以重新安裝 Java 執行時環境。</string>
+    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行環境</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 才能重新安裝 Java 執行環境</string>
     <string name="mcl_setting_title_freeform">以自由窗口模式啟動 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮動視窗中啟動 Minecraft。需要 Android 7.0+。</string>
     <string name="mcl_setting_title_hide_sidebar">隱藏側邊欄</string>
@@ -66,13 +66,13 @@
     <string name="mcl_setting_title_ignore_notch">忽略瀏海螢幕</string>
     <string name="mcl_setting_subtitle_ignore_notch">忽略瀏海螢幕並將畫面擴展至其下方。\n給您更完整的沉浸感。</string>
     <string name="mcl_setting_title_resolution_scaler">解析度縮放</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">允許降低游戲畫面解析度。原生解析度為 100%</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">允許降低遊戲畫面解析度。原生解析度為 100%</string>
     <string name="mcl_setting_title_longpresstrigger">長按觸發時長</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改長按摧毀方塊、丟棄物品的觸發時長。</string>
     <string name="mcl_setting_title_backtorightmouse">將返回鍵視爲滑鼠右鍵</string>
     <string name="mcl_setting_subtitle_backtorightmouse">某些設備將外置滑鼠右鍵作爲返回鍵處理。如果您使用外置滑鼠，您應該啓用此功能。</string>
     <string name="mcl_setting_title_flat_button_style">扁平化風格按鍵</string>
-    <string name="mcl_setting_subtitle_flat_button_style">啓用此選項可以使按鍵風格扁平化</string>
+    <string name="mcl_setting_subtitle_flat_button_style">啟用此選項可以使按鍵風格扁平化</string>
     <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
     <string name="mcl_setting_subtitle_buttonscale">若按鍵太小，將其放大。</string>
     <string name="mcl_setting_title_mousescale">滑鼠縮放</string>
@@ -85,6 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（1.17 暫不支持）</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
@@ -102,7 +103,7 @@
     <string name="global_clone">複製</string>
     <string name="global_restart">重啟</string>
     <string name="global_save">儲存</string>
-    <string name="global_unpacking">正在解包 %s</string>
+    <string name="global_unpacking">正在解壓縮套件 %s</string>
     <string name="global_error_field_empty">此欄位為必填</string>
     <string name="global_waiting">等待中</string>
     <!-- MainActivity: strings -->
@@ -110,7 +111,7 @@
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s 架構不與 Java 執行時環境 %2$s 相容。</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s 架構與 Java 執行環境 %2$s 不相容。</string>
     <string name="mcn_check_fail_vulkan_support">該設備不支援 Vulkan Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -171,11 +172,11 @@
     <string name="main_nocrash">未偵測到崩潰。</string>
     <string name="main_nolog">無日誌。</string>
     <string name="main_no_news_feed">新聞獲取失敗！</string>
-    <string name="auto_ram_subtitle">啓用 RAM 自動調節</string>
+    <string name="auto_ram_subtitle">啟用 RAM 自動調節</string>
     <string name="auto_ram_title">自動 RAM</string>
     <string name="autoram_info_msg">記憶體已設爲 %d MB</string>
     <string name="mcl_setting_check_libraries">在下載後檢查執行庫</string>
-    <string name="mcl_setting_check_libraries_subtitle">此選項會強制啟動器在下載後檢查運行庫的雜湊值，避免下載錯誤。</string>
+    <string name="mcl_setting_check_libraries_subtitle">此選項會強制啟動器在下載後檢查執行庫的雜湊值，避免下載錯誤。</string>
     <string name="dl_library_sha_fail">執行庫 %s 已損壞，將重新下載</string>
     <string name="dl_library_sha_unknown">無法檢查執行庫 %s 的狀態</string>
     <string name="dl_library_sha_pass">執行庫 %s 正常</string>
@@ -186,7 +187,7 @@
     <string name="customctrl_passthru">滑鼠透傳</string>
     <string name="customctrl_swipeable">可滑動</string>
     <string name="customctrl_rounded">圓角</string>
-    <string name="memory_warning_msg">當前可用RAM (%d) 低於分配的RAM (%d)，遊戲可能會崩潰。 如果遊戲崩潰請更改分配的記憶體大小。</string>
+    <string name="memory_warning_msg">目前可用RAM (%d) 低於分配的RAM (%d)，遊戲可能會崩潰。 如果遊戲崩潰請更改分配的記憶體大小。</string>
     <string name="mcl_memory_allocation">分配記憶體</string>
     <string name="mcl_memory_allocation_subtitle">分配多少記憶體給Minecraft</string>
     <string name="multirt_runtime_corrupt">Java運行庫毀損</string>
@@ -205,4 +206,6 @@
     <string name="pvc_gameDirectory">遊戲目錄</string>
     <string name="pvc_jvmArgs">JVM 參數</string>
     <string name="pvc_title">Per-version 設定</string>
+    <string name="storage_warning_title">儲存位置已變更</string>
+    <string name="storage_warning_text"><![CDATA[由於Google在Android 10所加入的儲存規範，我們把遊戲的目錄移動到app的私有資料夾下了。.<br />Pojav的新資料夾位於<b>Android/data/%s/files/</b> (可用檔案瀏覽器存取) <br /> 如果有需要移動先前的遊戲檔案，請手動從<b>/games/PojavLauncher</b>將資料複製到新的位置。]]></string>
 </resources>
