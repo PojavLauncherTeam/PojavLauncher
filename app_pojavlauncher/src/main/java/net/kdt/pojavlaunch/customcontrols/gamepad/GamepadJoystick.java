@@ -32,10 +32,9 @@ public class GamepadJoystick {
         //Some controllers aren't recognized as such by android, so we fallback to a default value of 0.2
         //And some others don't report their MotionRange. This was the case with the xbox one series S controller.
 
-        try { deadzone = Math.max(device.getMotionRange(verticalAxis).getFlat(), device.getMotionRange(horizontalAxis).getFlat()) * 1.9f; }
-        catch (NullPointerException e){ deadzone = 0.2f; }
-
-        if(deadzone < 0.2) deadzone = 0.2f;
+        //try { deadzone = Math.max(device.getMotionRange(verticalAxis).getFlat(), device.getMotionRange(horizontalAxis).getFlat()) * 1.9f; }
+        //catch (NullPointerException e){ deadzone = 0.2f; }
+        deadzone = 0.2f;
     }
 
     public double getAngleRadian(MotionEvent event){
