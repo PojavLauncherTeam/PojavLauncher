@@ -204,4 +204,6 @@
     <string name="pvc_gameDirectory">پوشه بازی</string>
     <string name="pvc_jvmArgs">آرگومان‌های JVM</string>
     <string name="pvc_title">تنظیمات مختص هر ورژن</string>
+    <string name="storage_warning_title">تغییرات محل ذخیره‌سازی</string>
+    <string name="storage_warning_text"><![CDATA[به دلیل تغییرات در محل ذخیره‌سازی توسط گوگل در اندروید 10 و بالاتر، ما مجبور به تغییر پوشه بازی به یک پوشه شخصی هستیم.<br /> پوشه جدید برای فایل‌های پوجاو لانچر این است: <b>Android/data/%s/files/</b> (اجازه دسترسی به مرورگر فایل خود، می‌توانید به این فایل‌ها دسترسی پیدا کنید).<br /> اگر می‌خواهید فایل‌های بازی را کپی کنید، باید فایل‌های پوشه <b>games/PojavLauncher</b> را به صورت دستی کپی کنید.]]></string>
 </resources>
