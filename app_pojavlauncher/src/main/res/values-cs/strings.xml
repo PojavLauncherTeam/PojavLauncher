@@ -25,7 +25,7 @@
     <string name="warning_remove_account">Tento účet bude odstraněn!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Nainstalovat Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Vyberat instalatér módu</string>
+    <string name="alerttitle_installmod">Vybrat instalatér módu</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
     <string name="error_no_version">Žádná verze!</string>
