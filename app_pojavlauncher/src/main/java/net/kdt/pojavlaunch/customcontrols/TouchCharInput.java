@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -101,7 +102,8 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     public boolean switchKeyboardState(){
         //If an hard keyboard is present, never trigger the soft one
         if(hasFocus()
-                || getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY){
+                || (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY
+                && getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES)){
             clear();
             disable();
             return false;
