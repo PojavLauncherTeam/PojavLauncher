@@ -24,7 +24,7 @@
     <string name="warning_remove_account">Tento účet bude odstraněn!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Nainstalovat Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Vyberat instalatér módu</string>
+    <string name="alerttitle_installmod">Vybrat instalatér módu</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
     <string name="error_no_version">Žádná verze!</string>
@@ -81,8 +81,8 @@
     <string name="mcl_setting_category_general">Obecná nastavení</string>
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
-    <string name="mcl_setting_renderer_gles2">mcl_nastavení_vykreslovač_gles2</string>
-    <string name="mcl_setting_renderer_gles3">mcl_nastavení_vykreslovač_gles3</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">Jaké typy verzí budou v seznamu verzí</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
