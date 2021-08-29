@@ -85,6 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ߈˙⥝˙⥝ sǝ߈ꞁᵷ</string>
     <string name="mcl_setting_renderer_gles2_5">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
     <string name="mcl_setting_renderer_gles3_5">(ʇǝʎ pǝʇɹoddns ㄥ⥝˙⥝ ou) ᘔ˙Ɛ ꞁɐᴉʇɹɐd + ⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
+    <string name="mcl_setting_renderer_vgpu">0˙Ɛ ˥פuǝdO sʇɹodxǝ :(Ɛ SƎ ˥פuǝdO) ndƃʌ</string>
     <string name="mcl_setting_renderer_vulkan_zink">9˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(uɐʞꞁnɅ) ʞuᴉz</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
@@ -202,4 +203,6 @@
     <string name="pvc_gameDirectory">ʎɹoʇɔǝɹıp ǝɯɐ⅁</string>
     <string name="pvc_jvmArgs">sʇuǝɯnƃɹɐ Wᴧſ</string>
     <string name="pvc_title">sƃuıʇʇǝs uoısɹǝʌ-ɹǝԀ</string>
+    <string name="storage_warning_title">sǝƃuɐɥɔ ǝƃɐɹoʇS</string>
+    <string name="storage_warning_text"><![CDATA[˙ʎllɐnuɐɯ <q/>ɹǝɥɔunɐ˥ʌɐɾoԀ/sǝɯɐƃ<b> ʇɐ ɹǝploɟ lɐuᴉƃᴉɹo ǝɥʇ ɯoɹɟ ƃuᴉɥʇʎɹǝʌǝ ʎdoɔ ǝsɐǝld 'sǝlᴉɟ ǝɯɐƃ ɹnoʎ ʎdoɔ oʇ pǝǝu noʎ ɟI <br/>˙(ɹǝɹoldxǝ ǝlᴉɟ ɹnoʎ uᴉ ɹǝpᴉʌoɹd ǝƃɐɹoʇs ɐ ƃuᴉsn ǝlqᴉssǝɔɔɐ oslɐ) </b>/sǝlᴉɟ/%s/ɐʇɐp/pᴉoɹpu∀<b> sᴉ sǝlᴉɟ ʌɐɾoԀ ɹoɟ ɹǝploɟ ʍǝu ǝɥ┴ <br/>˙ɹǝploɟ ǝʇɐʌᴉɹd-ddɐ uɐ oʇuᴉ ʎɹoʇɔǝɹᴉp ǝɯɐƃ ǝɥʇ ǝʌoɯ oʇ pǝɹᴉnbǝɹ ǝɹɐ ǝʍ 'ɹǝɥƃᴉɥ puɐ 0Ɩ pᴉoɹpu∀ uᴉ pǝppɐ sʇuǝɯǝɔɹoɟuǝ ǝƃɐɹoʇs pǝdoɔs ʍǝu s,\ǝlƃooפ oʇ ǝnp]]></string>
 </resources>
