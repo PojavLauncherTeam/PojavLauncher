@@ -6,7 +6,7 @@
 	android:layout_width="match_parent"
 	android:layout_alignParentRight="true"
 	android:id="@+id/main_drawer_options"
-	android:background="#FF000000"
+	android:background="@drawable/no_focus_shown"
 	android:keepScreenOn="true">
 
 	<FrameLayout
