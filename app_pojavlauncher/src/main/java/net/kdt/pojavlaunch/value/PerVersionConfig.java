@@ -27,5 +27,7 @@ public class PerVersionConfig {
     public static class VersionConfig {
         public String jvmArgs;
         public String gamePath;
+        public String selectedRuntime;
+        public String renderer;
     }
 }

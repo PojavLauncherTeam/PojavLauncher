@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdio.h>
+#include <xhook.h>
 
 //
 // Created by maks on 17.02.21.
@@ -11,6 +12,10 @@
 static JavaVM *_______jvm;
 static volatile jmethodID _______method;
 static volatile jobject _______obj;
+static volatile jobject exitTrap_ctx;
+static volatile jclass exitTrap_exitClass;
+static volatile jmethodID exitTrap_staticMethod;
+static JavaVM *exitTrap_jvm;
 static int pfd[2];
 static pthread_t logger;
 static void *logger_thread() {
@@ -58,4 +63,26 @@ Java_net_kdt_pojavlaunch_utils_JREUtils_logToActivity(JNIEnv *env, jclass clazz,
     }
     pthread_detach(logger);
 
+}
+void (*old_exit)(int code);
+void custom_exit(int code) {
+    if(code != 0) {
+        JNIEnv *env;
+        (*exitTrap_jvm)->AttachCurrentThread(exitTrap_jvm, &env, NULL);
+        (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx,
+                                     code);
+        (*env)->DeleteGlobalRef(env, exitTrap_ctx);
+        (*env)->DeleteGlobalRef(env, exitTrap_exitClass);
+        (*exitTrap_jvm)->DetachCurrentThread(exitTrap_jvm);
+    }
+    old_exit(code);
+}
+JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupExitTrap(JNIEnv *env, jclass clazz, jobject context) {
+    exitTrap_ctx = (*env)->NewGlobalRef(env,context);
+    (*env)->GetJavaVM(env,&exitTrap_jvm);
+    exitTrap_exitClass = (*env)->NewGlobalRef(env,(*env)->FindClass(env,"net/kdt/pojavlaunch/ExitActivity"));
+    exitTrap_staticMethod = (*env)->GetStaticMethodID(env,exitTrap_exitClass,"showExitMessage","(Landroid/content/Context;I)V");
+    xhook_enable_debug(1);
+    xhook_register(".*\\.so$","exit",custom_exit,&old_exit);
+    xhook_refresh(1);
 }

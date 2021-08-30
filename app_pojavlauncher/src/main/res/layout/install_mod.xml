@@ -45,6 +45,24 @@
 			android:layout_toLeftOf="@id/installmod_btn2"/>
 
 		<Button
+			android:id="@+id/installmod_scale_down"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentStart="true"
+			android:background="@drawable/control_button"
+			android:onClick="scaleDown"
+			android:text="@string/control_scaledown" />
+
+		<Button
+			android:id="@+id/installmod_scale_up"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toEndOf="@+id/installmod_scale_down"
+			android:background="@drawable/control_button"
+			android:onClick="scaleUp"
+			android:text="@string/control_scaleup" />
+
+		<Button
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:background="@drawable/control_button"

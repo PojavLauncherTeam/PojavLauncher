@@ -2,19 +2,29 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.OpenableColumns;
 import android.text.*;
 import android.text.method.*;
 import android.view.*;
+import android.webkit.MimeTypeMap;
 import android.widget.*;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
 import net.kdt.pojavlaunch.fragments.*;
+import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.tasks.*;
 
 import androidx.appcompat.app.AlertDialog;
 import net.kdt.pojavlaunch.value.*;
+
+import org.apache.commons.io.IOUtils;
 
 public abstract class BaseLauncherActivity extends BaseActivity {
 	public Button mPlayButton;
@@ -22,6 +32,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public CrashFragment mCrashView;
     public ProgressBar mLaunchProgress;
 	public Spinner mVersionSelector;
+	public MultiRTConfigDialog mRuntimeConfigDialog;
 	public TextView mLaunchTextStatus, mTextVersion;
     
     public JMinecraftVersionList mVersionList;
@@ -80,14 +91,13 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             });
         builder.show();
     }
-
+    public static final int RUN_MOD_INSTALLER = 2050;
     private void installMod(boolean customJavaArgs) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.alerttitle_installmod);
-        builder.setNegativeButton(android.R.string.cancel, null);
-
-        final AlertDialog dialog;
         if (customJavaArgs) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.alerttitle_installmod);
+            builder.setNegativeButton(android.R.string.cancel, null);
+            final AlertDialog dialog;
             final EditText edit = new EditText(this);
             edit.setSingleLine();
             edit.setHint("-jar/-cp /path/to/file.jar ...");
@@ -102,22 +112,16 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                 });
             dialog = builder.create();
             dialog.setView(edit);
+            dialog.show();
         } else {
-            dialog = builder.create();
-            FileListView flv = new FileListView(dialog,"jar");
-            flv.setFileSelectedListener(new FileSelectedListener(){
-                    @Override
-                    public void onFileSelected(File file, String path) {
-                        Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
-                        intent.putExtra("modFile", file);
-                        startActivity(intent);
-                        dialog.dismiss();
-
-                    }
-                });
-            dialog.setView(flv);
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("jar");
+            if(mimeType == null) mimeType = "*/*";
+            intent.setType(mimeType);
+            startActivityForResult(intent,RUN_MOD_INSTALLER);
         }
-        dialog.show();
+
     }
 
     public void launchGame(View v) {
@@ -171,10 +175,12 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                     }
                 }
             };
-            LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
         }
+        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
         new RefreshVersionListTask(this).execute();
         System.out.println("call to onResumeFragments");
+        mRuntimeConfigDialog = new MultiRTConfigDialog();
+        mRuntimeConfigDialog.prepare(this);
         try{
             final ProgressDialog barrier = new ProgressDialog(this);
             barrier.setMessage(getString(R.string.global_waiting));
@@ -224,7 +230,88 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         }
         System.out.println("call to onResumeFragments; E");
     }
-    
+    public static String getFileName(Context ctx, Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = ctx.getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode == Activity.RESULT_OK) {
+            final ProgressDialog barrier = new ProgressDialog(this);
+            barrier.setMessage(getString(R.string.global_waiting));
+            barrier.setProgressStyle(barrier.STYLE_SPINNER);
+            barrier.setCancelable(false);
+            barrier.show();
+            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME) {
+                if (data != null) {
+                    final Uri uri = data.getData();
+                    Thread t = new Thread(() -> {
+                        try {
+                            String name = getFileName(this, uri);
+                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), name,
+                                    (resid, stuff) -> BaseLauncherActivity.this.runOnUiThread(
+                                            () -> barrier.setMessage(BaseLauncherActivity.this.getString(resid, stuff))));
+                            MultiRTUtils.postPrepare(BaseLauncherActivity.this, name);
+                        } catch (IOException e) {
+                            Tools.showError(BaseLauncherActivity.this
+                                    , e);
+                        }
+                        BaseLauncherActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                barrier.dismiss();
+                                mRuntimeConfigDialog.refresh();
+                                mRuntimeConfigDialog.dialog.show();
+                            }
+                        });
+                    });
+                    t.start();
+                }
+            } else if (requestCode == RUN_MOD_INSTALLER) {
+                if (data != null) {
+                    final Uri uri = data.getData();
+                    barrier.setMessage(BaseLauncherActivity.this.getString(R.string.multirt_progress_caching));
+                    Thread t = new Thread(()->{
+                        try {
+                            final String name = getFileName(this, uri);
+                            final File modInstallerFile = new File(getCacheDir(), name);
+                            FileOutputStream fos = new FileOutputStream(modInstallerFile);
+                            IOUtils.copy(getContentResolver().openInputStream(uri), fos);
+                            fos.close();
+                            BaseLauncherActivity.this.runOnUiThread(() -> {
+                                barrier.dismiss();
+                                Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
+                                intent.putExtra("modFile", modInstallerFile);
+                                startActivity(intent);
+                            });
+                        }catch(IOException e) {
+                            Tools.showError(BaseLauncherActivity.this,e);
+                        }
+                    });
+                    t.start();
+                }
+            }
+        }
+    }
+
     // Catching touch exception
     @Override
     public boolean onTouchEvent(MotionEvent event) {

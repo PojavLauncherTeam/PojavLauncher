@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,20 +7,19 @@
 
     <TextView
         android:id="@+id/accountitem_text_name"
-        android:layout_width="240dp"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
+        android:maxHeight="?android:attr/listPreferredItemHeightSmall"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:text="Name Placeholder"
 
+        android:text="Name Placeholder"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:drawablePadding="20dp"
 
         app:layout_constraintEnd_toStartOf="@+id/accountitem_button_remove"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -36,6 +34,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_remove" />
+
+    <ImageView
+        android:id="@+id/account_head"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:maxHeight="?android:attr/listPreferredItemHeightSmall"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        app:layout_constraintEnd_toStartOf="@+id/accountitem_text_name"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

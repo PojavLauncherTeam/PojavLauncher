@@ -6,7 +6,7 @@ import android.content.pm.*;
 import android.content.res.*;
 import android.os.*;
 import androidx.core.app.*;
-import androidx.preference.*;
+
 import android.util.*;
 import java.io.*;
 import java.text.*;
@@ -34,7 +34,8 @@ public class PojavApplication extends Application
 					crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()) + "\n");
 					crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL + "\n");
 					crashStream.append(" - Android version: " + Build.VERSION.RELEASE + "\n");
-					crashStream.append(" - Crash stack trace:\n");
+                    crashStream.append(" - Crash stack trace:\n");
+                    crashStream.append(" - Launcher version: " + BuildConfig.VERSION_NAME + "\n");
 					crashStream.append(Log.getStackTraceString(th));
 					crashStream.close();
 				} catch (Throwable th2) {
@@ -54,28 +55,22 @@ public class PojavApplication extends Application
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
 			
 			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
-            Tools.DIR_HOME_JRE = Tools.DIR_DATA + "/jre_runtime";
+            //Tools.DIR_HOME_JRE = Tools.DIR_DATA + "/jre_runtime".replace("/data/user/0", "/data/data");
             Tools.DIR_ACCOUNT_OLD = Tools.DIR_DATA + "/Users";
             Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
             // Tools.FILE_ACCOUNT_JSON = getFilesDir().getAbsolutePath() + "/account_profiles.json";
-            
-            File nativeLibDir = new File(getApplicationInfo().nativeLibraryDir);
-            
-            Tools.CURRENT_ARCHITECTURE = nativeLibDir.getName();
-			switch (Tools.CURRENT_ARCHITECTURE) {
-                case "arm": Tools.CURRENT_ARCHITECTURE = "arm/aarch32"; break;
-                case "arm64": Tools.CURRENT_ARCHITECTURE = "arm64/aarch64"; break;
-                case "x86": Tools.CURRENT_ARCHITECTURE = "x86/i*86"; break;
-                case "x86_64": Tools.CURRENT_ARCHITECTURE = "x86_64/amd64"; break;
-            }
-            
-            // Special case for Asus x86 devixes
-            if (Build.SUPPORTED_ABIS[0].equals("x86")) {
-                getApplicationInfo().nativeLibraryDir = nativeLibDir.getParent() + "/x86";
-                Tools.CURRENT_ARCHITECTURE = "x86/i*86";
-            }
 
-			FontChanger.initFonts(this);
+
+			Tools.DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
+			//Force x86 lib directory for Asus x86 based zenfones
+			if(Architecture.isx86Device() && Architecture.is32BitsDevice()){
+				String originalJNIDirectory = getApplicationInfo().nativeLibraryDir;
+				getApplicationInfo().nativeLibraryDir = originalJNIDirectory.substring(0,
+												originalJNIDirectory.lastIndexOf("/"))
+												.concat("/x86");
+			}
+
+
 		} catch (Throwable th) {
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", th);

@@ -54,7 +54,62 @@ public final class AL {
 	static ALCapabilities alCaps;
     
     private static boolean created_lwjgl2 = false;
-    
+
+    /**
+     * Creates an OpenAL instance. Using this constructor will cause OpenAL to
+     * open the device using supplied device argument, and create a context using the context values
+     * supplied.
+     *
+     * @param deviceArguments Arguments supplied to native device
+     * @param contextFrequency Frequency for mixing output buffer, in units of Hz (Common values include 11025, 22050, and 44100).
+     * @param contextRefresh Refresh intervalls, in units of Hz.
+     * @param contextSynchronized Flag, indicating a synchronous context.*
+     */
+    public static void create(String deviceArguments, int contextFrequency, int contextRefresh, boolean contextSynchronized)
+        throws LWJGLException {
+        create(deviceArguments, contextFrequency, contextRefresh, contextSynchronized, true);
+    }
+
+    /**
+     * @param openDevice Whether to automatically open the device
+     * @see #create(String, int, int, boolean)
+     */
+    public static void create(String deviceArguments, int contextFrequency, int contextRefresh, boolean contextSynchronized, boolean openDevice)
+        throws LWJGLException {
+        if (alContext == MemoryUtil.NULL && openDevice) {
+            //ALDevice alDevice = ALDevice.create();
+            long alDevice = ALC10.alcOpenDevice(deviceArguments);
+            if(alDevice == MemoryUtil.NULL){
+                throw new LWJGLException("Cannot open the device");
+            }
+
+            IntBuffer attribs = BufferUtils.createIntBuffer(16);
+
+            attribs.put(ALC10.ALC_FREQUENCY);
+            attribs.put(contextFrequency);
+
+            attribs.put(ALC10.ALC_REFRESH);
+            attribs.put(contextRefresh);
+
+            attribs.put(ALC10.ALC_SYNC);
+            attribs.put(contextSynchronized ? ALC10.ALC_TRUE : ALC10.ALC_FALSE);
+
+            attribs.put(0);
+            attribs.flip();
+
+            long contextHandle = ALC10.alcCreateContext(alDevice, attribs);
+            ALC10.alcMakeContextCurrent(contextHandle);
+            //alContext = new ALContext(alDevice, contextHandle);
+            alContext = ALC10.alcCreateContext(contextHandle, (IntBuffer)null);
+            alContextCaps = ALC.createCapabilities(alContext);
+
+            alCaps = AL.createCapabilities(alContextCaps);
+
+            alcDevice = new ALCdevice(alDevice);
+            created_lwjgl2 = true;
+        }
+    }
+
     public static void create() throws LWJGLException {
         if (alContext == MemoryUtil.NULL) {
             //ALDevice alDevice = ALDevice.create();

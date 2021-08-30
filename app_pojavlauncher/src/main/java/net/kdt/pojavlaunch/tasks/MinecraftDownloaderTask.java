@@ -2,17 +2,25 @@ package net.kdt.pojavlaunch.tasks;
 
 import android.app.*;
 import android.content.*;
+import android.content.res.AssetManager;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import com.google.gson.*;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+
 import org.apache.commons.io.*;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable>
  {
@@ -80,6 +88,40 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
 
                 verInfo = Tools.getVersionInfo(mActivity,p1[0]);
+
+                //Now we have the reliable information to check if our runtime settings are good enough
+                if(verInfo.javaVersion != null) { //1.17+
+                    PerVersionConfig.update();
+                    PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
+                    if(cfg == null) {
+                        cfg = new PerVersionConfig.VersionConfig();
+                        PerVersionConfig.configMap.put(p1[0],cfg);
+                    }
+                     MultiRTUtils.Runtime r = cfg.selectedRuntime != null?MultiRTUtils.read(cfg.selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+                     if(r.javaVersion < verInfo.javaVersion.majorVersion) {
+                         String appropriateRuntime = MultiRTUtils.getNearestJREName(verInfo.javaVersion.majorVersion);
+                         if(appropriateRuntime != null) {
+                             cfg.selectedRuntime = appropriateRuntime;
+                             PerVersionConfig.update();
+                         }else{
+                             mActivity.runOnUiThread(()->{
+                                 AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
+                                 bldr.setTitle(R.string.global_error);
+                                 bldr.setMessage(R.string.multirt_nocompartiblert);
+                                 bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
+                                     dialog.dismiss();
+                                 });
+                                 bldr.show();
+                             });
+                             throw new SilentException();
+                         }
+                     } //if else, we are satisfied
+                }
+                { //run the checks to detect if we have a *brand new* engine
+                    int mcReleaseDate = Integer.parseInt(verInfo.releaseTime.substring(0, 10).replace("-", ""));
+                    if(mcReleaseDate > 20210225 && verInfo.javaVersion != null && verInfo.javaVersion.majorVersion > 15)
+                        V117CompatUtil.runCheck(p1[0],mActivity);
+                }
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
                 } catch (IOException e) {
@@ -94,7 +136,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 for (final DependentLibrary libItem : verInfo.libraries) {
 
                     if (
-                        libItem.name.startsWith("net.java.jinput") ||
+                        // libItem.name.startsWith("net.java.jinput") ||
                         libItem.name.startsWith("org.lwjgl")
                     ) { // Black list
                         publishProgress("1", "Ignored " + libItem.name);
@@ -201,7 +243,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         }
     }
     private int addProgress = 0;
-
+    public static class SilentException extends Exception{}
     public void zeroProgress() {
         addProgress = 0;
     }
@@ -278,8 +320,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         if (addedProg != -1) {
             addProgress = addProgress + addedProg;
             mActivity.mLaunchProgress.setProgress(addProgress);
-
-            mActivity.mLaunchTextStatus.setText(p1[1]);
+            if(p1[1] != null) mActivity.mLaunchTextStatus.setText(p1[1]);
         }
 
         if (p1.length < 3) {
@@ -295,7 +336,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         mActivity.mLaunchProgress.setMax(100);
         mActivity.mLaunchProgress.setProgress(0);
         mActivity.statusIsLaunching(false);
-        if(p1 != null) {
+        if(p1 != null && !(p1 instanceof SilentException)) {
             p1.printStackTrace();
             Tools.showError(mActivity, p1);
         }
@@ -303,35 +344,15 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             mActivity.mCrashView.setLastCrash("");
 
             try {
-                /*
-                 List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
-                 jvmArgs.add("-Xms128M");
-                 jvmArgs.add("-Xmx1G");
-                 */
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
                 // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                if (LauncherPreferences.PREF_FREEFORM) {
-                    DisplayMetrics dm = new DisplayMetrics();
-                    mActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-                    ActivityOptions options = (ActivityOptions) ActivityOptions.class.getMethod("makeBasic").invoke(null);
-                    Rect freeformRect = new Rect(0, 0, dm.widthPixels / 2, dm.heightPixels / 2);
-                    options.getClass().getDeclaredMethod("setLaunchBounds", Rect.class).invoke(options, freeformRect);
-                    mActivity.startActivity(mainIntent, options.toBundle());
-                } else {
-                    mActivity.startActivity(mainIntent);
-                }
+                mActivity.startActivity(mainIntent);
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);
             }
-
-            /*
-             FloatingIntent maini = new FloatingIntent(PojavLauncherActivity.this, MainActivity.class);
-             maini.startFloatingActivity();
-             */
         }
 
         mActivity.mTask = null;
@@ -339,7 +360,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
 
-    public JAssets downloadIndex(String versionName, File output) throws Throwable {
+    public JAssets downloadIndex(String versionName, File output) throws IOException {
         if (!output.exists()) {
             output.getParentFile().mkdirs();
             DownloadUtils.downloadFile(verInfo.assetIndex != null ? verInfo.assetIndex.url : "https://s3.amazonaws.com/Minecraft.Download/indexes/" + versionName + ".json", output);
@@ -348,46 +369,97 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
     }
 
-    public void downloadAsset(JAssetInfo asset, File objectsDir) throws IOException, Throwable {
+    public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
-        if (!outFile.exists()) {
-            DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
-        }
+        Tools.downloadFileMonitored(MINECRAFT_RES + assetPath, outFile.getAbsolutePath(), new Tools.DownloaderFeedback() {
+            int prevCurr;
+            @Override
+            public void updateProgress(int curr, int max) {
+                downloadCounter.addAndGet(curr - prevCurr);
+                prevCurr = curr;
+            }
+        });
     }
-    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir) throws Throwable {
+    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
-        if (!outFile.exists()) {
-            DownloadUtils.downloadFile(MINECRAFT_RES + assetPath, outFile);
-        }
+        Tools.downloadFileMonitored(MINECRAFT_RES + assetPath, outFile.getAbsolutePath(), new Tools.DownloaderFeedback() {
+            int prevCurr;
+            @Override
+            public void updateProgress(int curr, int max) {
+                downloadCounter.addAndGet(curr - prevCurr);
+                prevCurr = curr;
+            }
+        });
     }
-
-    public void downloadAssets(JAssets assets, String assetsVersion, File outputDir) throws IOException, Throwable {
+    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
+        LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 500, TimeUnit.MILLISECONDS, workQueue);
+        mActivity.mIsAssetsProcessing = true;
         File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
         if (!hasDownloadedFile.exists()) {
             System.out.println("Assets begin time: " + System.currentTimeMillis());
             Map<String, JAssetInfo> assetsObjects = assets.objects;
-            mActivity.mLaunchProgress.setMax(assetsObjects.size());
-            zeroProgress();
+            int assetsSizeBytes=0;
+            AtomicInteger downloadedSize = new AtomicInteger(0);
+            AtomicBoolean localInterrupt = new AtomicBoolean(false);
             File objectsDir = new File(outputDir, "objects");
-            int downloadedSs = 0;
-            for (JAssetInfo asset : assetsObjects.values()) {
-                if (!mActivity.mIsAssetsProcessing) {
-                    return;
+            zeroProgress();
+            for(String assetKey : assetsObjects.keySet()) {
+                if(!mActivity.mIsAssetsProcessing) break;
+                JAssetInfo asset = assetsObjects.get(assetKey);
+                assetsSizeBytes+=asset.size;
+                String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
+                File outFile = assets.map_to_resources?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
+                boolean skip = outFile.exists();// skip if the file exists
+                if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  //if sha checking is enabled
+                    if(skip) skip = Tools.compareSHA1(outFile, asset.hash); //check hash
+                if(skip) {
+                    downloadedSize.addAndGet(asset.size);
+                }else{
+                    if(outFile.exists()) publishProgress("0",mActivity.getString(R.string.dl_library_sha_fail,assetKey));
+                    executor.execute(()->{
+                        try {
+                            if (!assets.map_to_resources) {
+                                downloadAsset(asset, objectsDir, downloadedSize);
+                            } else {
+                                downloadAssetMapped(asset, assetKey, outputDir, downloadedSize);
+                            }
+                        }catch (IOException e) {
+                            e.printStackTrace();
+                            localInterrupt.set(true);
+                        }
+                    });
                 }
-
-                if(!assets.map_to_resources) downloadAsset(asset, objectsDir);
-                else downloadAssetMapped(asset,(assetsObjects.keySet().toArray(new String[0])[downloadedSs]),outputDir);
-                publishProgress("1", mActivity.getString(R.string.mcl_launch_downloading, assetsObjects.keySet().toArray(new String[0])[downloadedSs]));
-                downloadedSs++;
             }
-            hasDownloadedFile.getParentFile().mkdirs();
-            hasDownloadedFile.createNewFile();
+            mActivity.mLaunchProgress.setMax(assetsSizeBytes);
+            executor.shutdown();
+            try {
+                int prevDLSize=0;
+                System.out.println("Queue size: "+workQueue.size());
+                while ((!executor.awaitTermination(250, TimeUnit.MILLISECONDS))&&(!localInterrupt.get())&&mActivity.mIsAssetsProcessing) {
+                    int DLSize = downloadedSize.get();
+                    publishProgress(Integer.toString(DLSize-prevDLSize),null,"");
+                    publishDownloadProgress("assets", DLSize, assetsSizeBytes);
+                    prevDLSize = downloadedSize.get();
+                }
+                if(mActivity.mIsAssetsProcessing) {
+                    System.out.println("Unskipped download done!");
+                    if(!hasDownloadedFile.getParentFile().exists())hasDownloadedFile.getParentFile().mkdirs();
+                    hasDownloadedFile.createNewFile();
+                }else{
+                    System.out.println("Skipped!");
+                }
+                executor.shutdownNow();
+                while (!executor.awaitTermination(250, TimeUnit.MILLISECONDS)) {}
+                System.out.println("Fully shut down!");
+            }catch(InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Assets end time: " + System.currentTimeMillis());
         }
     }
-    
 
     private JMinecraftVersionList.Version findVersion(String version) {
         if (mActivity.mVersionList != null) {

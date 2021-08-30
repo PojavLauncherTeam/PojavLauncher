@@ -6,7 +6,7 @@
 	android:layout_width="match_parent"
 	android:layout_alignParentRight="true"
 	android:id="@+id/main_drawer_options"
-	android:background="#FF000000"
+	android:background="@drawable/no_focus_shown"
 	android:keepScreenOn="true">
 
 	<FrameLayout
@@ -38,6 +38,22 @@
 					android:id="@+id/main_mouse_pointer"/>
 
 			</LinearLayout>
+
+			<ImageView
+				android:id="@+id/console_pointer"
+				android:visibility="invisible"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/pointer" />
+
+			<net.kdt.pojavlaunch.customcontrols.TouchCharInput
+				android:imeOptions="flagNoFullscreen|flagNoPersonalizedLearning|actionSend"
+				android:inputType="textFilter|textNoSuggestions|textImeMultiLine"
+				android:background="@android:color/darker_gray"
+				android:id="@+id/editTextTextPersonName2"
+				android:layout_width="1dp"
+				android:layout_height="1dp"
+				android:ems="10" />
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 
