@@ -214,5 +214,5 @@
     <string name="pvc_jvmArgs">JVM argümanları</string>
     <string name="pvc_title">Sürüm-başına ayarlar</string>
     <string name="storage_warning_title">Depolama değişiklikleri</string>
-    <string name="storage_warning_text"><![CDATA[Google\'ın Android 10 ve sonraki sürümlerde eklenen yeni scoped storage yaptırımları nedeniyle, oyun dizinini app-private klasörüne taşımamız gerekiyor.<br /> Pojav dosyalari için yeni dizin <b>Android/data/%s/files/</b> (Ayrıca dosya yöneticisindeki dosya sağlayıcısından da erişmek mümkün).<br /> Eğer oyun dosyalarınızı kopyalamanız gerekirse, lütfen <b>games/PojavLauncher</b>'daki orijinal klasördeki her şeyi manuel olarak kopyalayın.]]></string>
+    <string name="storage_warning_text"><![CDATA[Google\'ın Android 10 ve sonraki sürümlerde eklenen yeni scoped storage yaptırımları nedeniyle, oyun dizinini app-private klasörüne taşımamız gerekiyor.<br /> Pojav dosyalari için yeni dizin <b>Android/data/%s/files/</b> (Ayrıca dosya yöneticisindeki dosya sağlayıcısından da erişmek mümkün).<br /> Eğer oyun dosyalarınızı kopyalamanız gerekirse, lütfen <b>games/PojavLauncher</b>\'daki orijinal klasördeki her şeyi manuel olarak kopyalayın.]]></string>
 </resources>
