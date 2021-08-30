@@ -1,9 +1,10 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.Architecture.archAsString;
+
 import android.Manifest;
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,62 +15,58 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.system.Os;
+import android.text.Html;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.kdt.pickafile.FileListView;
-import com.kdt.pickafile.FileSelectedListener;
-import java.io.BufferedInputStream;
+
+import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthTask;
+import net.kdt.pojavlaunch.authenticator.microsoft.ui.MicrosoftLoginGUIActivity;
+import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
+import net.kdt.pojavlaunch.authenticator.mojang.LoginListener;
+import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
+import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
+import net.kdt.pojavlaunch.customcontrols.CustomControls;
+import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.LocaleUtils;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
+
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Locale;
-import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthTask;
-import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
-import net.kdt.pojavlaunch.authenticator.mojang.LoginListener;
-import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
-import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
-import net.kdt.pojavlaunch.customcontrols.ControlData;
-import net.kdt.pojavlaunch.customcontrols.CustomControls;
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.utils.JREUtils;
-import net.kdt.pojavlaunch.utils.LocaleUtils;
-import net.kdt.pojavlaunch.value.MinecraftAccount;
-import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
-import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
-import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -84,102 +81,96 @@ public class PojavLoginActivity extends BaseActivity
     private SharedPreferences firstLaunchPrefs;
     private MinecraftAccount mProfile = null;
     
-    private static boolean isSkipInit = false;
+    private boolean isSkipInit = false;
+    private boolean isStarting = false;
 
     public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
     
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false;
-
+        if(savedInstanceState != null) {
+            isStarting = savedInstanceState.getBoolean("isStarting");
+            isSkipInit = savedInstanceState.getBoolean("isSkipInit");
+        }
         Tools.updateWindowSize(this);
-        
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
-        new InitTask().execute(isSkipInit);
+        new Thread(new InitRunnable()).start();
     }
 
-    private class InitTask extends AsyncTask<Boolean, String, Integer>{
-        private AlertDialog startAle;
-        private ProgressBar progress;
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("isStarting",isStarting);
+        outState.putBoolean("isSkipInit",isSkipInit);
+    }
 
-        @Override
-        protected void onPreExecute() {
-            LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
-            LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen, startScr);
-
-            FontChanger.changeFonts(startScr);
-
-            progress = (ProgressBar) startScr.findViewById(R.id.startscreenProgress);
-            startupTextView = (TextView) startScr.findViewById(R.id.startscreen_text);
-
-
-            AlertDialog.Builder startDlg = new AlertDialog.Builder(PojavLoginActivity.this, R.style.AppTheme);
-            startDlg.setView(startScr);
-            startDlg.setCancelable(false);
-
-            startAle = startDlg.create();
-            startAle.show();
-            startAle.getWindow().setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
-            );
-        }
-        
+    public class InitRunnable implements Runnable{
         private int revokeCount = -1;
-        
-        @Override
-        protected Integer doInBackground(Boolean[] params) {
-            // If trigger a quick restart
-            if (params[0]) return 0;
-            
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {}
+        private int proceedState = 0;
+        private ProgressBar progress;
+        public InitRunnable() {
+        }
+        public void initLocalUi() {
+            LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
+            LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen,startScr);
+            PojavLoginActivity.this.setContentView(startScr);
 
-            publishProgress("visible");
+            progress = (ProgressBar) findViewById(R.id.startscreenProgress);
+            if(isStarting) progress.setVisibility(View.VISIBLE);
+            startupTextView = (TextView) findViewById(R.id.startscreen_text);
+        }
 
-            while (Build.VERSION.SDK_INT >= 23 && !isStorageAllowed()){
-                try {
-                    revokeCount++;
-                    if (revokeCount >= 3) {
-                        Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
-                        finish();
-                        return 0;
+        public int _start() {
+            Log.i("UITest","START initialization");
+            if(!isStarting) {
+                //try { Thread.sleep(2000); } catch (InterruptedException e) { }
+                runOnUiThread(() -> progress.setVisibility(View.VISIBLE));
+                while (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 && !isStorageAllowed()) { //Do not ask for storage at all on Android 10+
+                    try {
+                        revokeCount++;
+                        if (revokeCount >= 3) {
+                            Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
+                            return 2;
+                        }
+                        requestStoragePermission();
+
+                        synchronized (mLockStoragePerm) {
+                            mLockStoragePerm.wait();
+                        }
+                    } catch (InterruptedException e) {
                     }
-                    
-                    requestStoragePermission();
-                    
-                    synchronized (mLockStoragePerm) {
-                        mLockStoragePerm.wait();
-                    }
-                } catch (InterruptedException e) {}
+                }
+                isStarting = true;
             }
-
             try {
                 initMain();
             } catch (Throwable th) {
                 Tools.showError(PojavLoginActivity.this, th, true);
                 return 1;
             }
-
             return 0;
         }
-
-        @Override
-        protected void onProgressUpdate(String... obj)
-        {
-            if (obj[0].equals("visible")) {
-                progress.setVisibility(View.VISIBLE);
+        public void proceed() {
+            isStarting = false;
+            switch(proceedState) {
+                case 2:
+                    finish();
+                    break;
+                case 0:
+                    uiInit();
+                    break;
             }
         }
-
         @Override
-        protected void onPostExecute(Integer obj) {
-            startAle.dismiss();
-            if (obj == 0) uiInit();
+        public void run() {
+            if(!isSkipInit) {
+                PojavLoginActivity.this.runOnUiThread(this::initLocalUi);
+                proceedState = _start();
+            }
+            PojavLoginActivity.this.runOnUiThread(this::proceed);
         }
     }
-    
     private void uiInit() {
         setContentView(R.layout.launcher_login_v3);
 
@@ -189,7 +180,7 @@ public class PojavLoginActivity extends BaseActivity
         SpannableString defaultLangChar = new SpannableString(defaultLang);
         defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(), 0);
         
-        final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<DisplayableLocale>(this, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         langAdapter.add(new DisplayableLocale(LocaleUtils.DEFAULT_LOCALE, defaultLangChar));
         langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
@@ -255,14 +246,10 @@ public class PojavLoginActivity extends BaseActivity
         
         sRemember = findViewById(R.id.login_switch_remember);
         sOffline  = findViewById(R.id.login_switch_offline);
-        sOffline.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-
-                @Override
-                public void onCheckedChanged(CompoundButton p1, boolean p2) {
-                    // May delete later
-                    edit3.setEnabled(!p2);
-                }
-            });
+        sOffline.setOnCheckedChangeListener((p1, p2) -> {
+            // May delete later
+            edit3.setEnabled(!p2);
+        });
             
         isSkipInit = true;
     }
@@ -277,17 +264,6 @@ public class PojavLoginActivity extends BaseActivity
         PojavProfile.setCurrentProfile(this, null);
     }
 
-    private boolean isJavaRuntimeInstalled(AssetManager am) {
-        boolean prefValue = firstLaunchPrefs.getBoolean(PREF_IS_INSTALLED_JAVARUNTIME, false);
-        try {
-            return prefValue && (
-                am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz") == null ||
-                Tools.read(new FileInputStream(Tools.DIR_HOME_JRE+"/version")).equals(Tools.read(am.open("components/jre/version"))));
-        } catch(IOException e) {
-            Log.e("JVMCtl","failed to read file",e);
-            return prefValue;
-        }
-    }
    
     private void unpackComponent(AssetManager am, String component) throws IOException {
         File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
@@ -353,7 +329,7 @@ public class PojavLoginActivity extends BaseActivity
         }
 
         mkdirs(Tools.CTRLMAP_PATH);
-        
+
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
@@ -367,206 +343,88 @@ public class PojavLoginActivity extends BaseActivity
             
             unpackComponent(am, "caciocavallo");
             unpackComponent(am, "lwjgl3");
-            if (!isJavaRuntimeInstalled(am)) {
-                if(!installRuntimeAutomatically(am)) {
-                    File jreTarFile = selectJreTarFile();
-                    uncompressTarXZ(jreTarFile, new File(Tools.DIR_HOME_JRE));
-                } else {
-                    Tools.copyAssetFile(this, "components/jre/version", Tools.DIR_HOME_JRE + "/","version", true);
+            if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
+               MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
+                synchronized (mLockSelectJRE) {
+                    mLockSelectJRE.wait();
                 }
-                firstLaunchPrefs.edit().putBoolean(PREF_IS_INSTALLED_JAVARUNTIME, true).commit();
             }
-            
-            JREUtils.relocateLibPath(this);
-
-            File ftIn = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/libfreetype.so.6");
-            File ftOut = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/libfreetype.so");
-            if (ftIn.exists() && (!ftOut.exists() || ftIn.length() != ftOut.length())) {
-                ftIn.renameTo(ftOut);
-            }
-            
-            // Refresh libraries
-            copyDummyNativeLib("libawt_xawt.so");
-            // copyDummyNativeLib("libfontconfig.so");
+            if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
+            LauncherPreferences.loadPreferences(getApplicationContext());
         }
         catch(Throwable e){
             Tools.showError(this, e);
         }
     }
-    
-    private boolean installRuntimeAutomatically(AssetManager am) {
-        try {
-            am.open("components/jre/version");
-        } catch (IOException e) {
-            Log.e("JREAuto", "JRE was not included on this APK.", e);
-            return false;
+    private void showStorageDialog() {
+        if(!firstLaunchPrefs.getBoolean("storageDialogShown",false)) {
+            AlertDialog.Builder bldr = new AlertDialog.Builder(this);
+            bldr.setTitle(R.string.storage_warning_title);
+            Spanned sp = Html.fromHtml(getString(R.string.storage_warning_text,BuildConfig.APPLICATION_ID));
+            bldr.setMessage(sp);
+            bldr.setCancelable(false);
+            bldr.setPositiveButton(android.R.string.ok, (dialog, which)->{
+               firstLaunchPrefs.edit().putBoolean("storageDialogShown",true).apply();
+               dialog.dismiss();
+            });
+            bldr.show();
         }
-        
-        File rtUniversal = new File(Tools.DIR_HOME_JRE+"/universal.tar.xz");
-        File rtPlatformDependent = new File(Tools.DIR_HOME_JRE+"/cust-bin.tar.xz");
-        if(!new File(Tools.DIR_HOME_JRE).exists()) new File(Tools.DIR_HOME_JRE).mkdirs(); else {
-            //SANITY: remove the existing files
-            for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
-                if (f.isDirectory()){
-                    try {
-                        FileUtils.deleteDirectory(f);
-                    } catch(IOException e1) {
-                        Log.e("JREAuto","da fuq is wrong wit ur device? n2",e1);
-                    }
-                } else{
-                    f.delete();
-                }
-            }
-        }
-        InputStream is;
-        FileOutputStream os;
-        try {
-            is = am.open("components/jre/universal.tar.xz");
-            os = new FileOutputStream(rtUniversal);
-            IOUtils.copy(is,os);
-            is.close();
-            os.close();
-            uncompressTarXZ(rtUniversal, new File(Tools.DIR_HOME_JRE));
-        } catch (IOException e){
-            Log.e("JREAuto","Failed to unpack universal. Custom embedded-less build?",e);
-            return false;
-        }
-        try {
-            is = am.open("components/jre/bin-" + Tools.CURRENT_ARCHITECTURE.split("/")[0] + ".tar.xz");
-            os = new FileOutputStream(rtPlatformDependent);
-            IOUtils.copy(is, os);
-            is.close();
-            os.close();
-            uncompressTarXZ(rtPlatformDependent, new File(Tools.DIR_HOME_JRE));
-        } catch (IOException e) {
-            // Something's very wrong, or user's using an unsupported arch (MIPS phone? ARMv6 phone?),
-            // in both cases, redirecting to manual install, and removing the universal stuff
-            for (File f : new File(Tools.DIR_HOME_JRE).listFiles()) {
-                if (f.isDirectory()){
-                    try {
-                        FileUtils.deleteDirectory(f);
-                    } catch(IOException e1) {
-                        Log.e("JREAuto","da fuq is wrong wit ur device?",e1);
-                    }
-                } else{
-                    f.delete();
-                }
-            }
-            return false;
-        }
-        return true;
     }
-    private void copyDummyNativeLib(String name) throws Throwable {
-        File fileLib = new File(Tools.DIR_HOME_JRE, Tools.DIRNAME_HOME_JRE + "/" + name);
-        fileLib.delete();
-        FileInputStream is = new FileInputStream(new File(getApplicationInfo().nativeLibraryDir, name));
-        FileOutputStream os = new FileOutputStream(fileLib);
-        IOUtils.copy(is, os);
-        is.close();
-        os.close();
-    }
-    
-    private File selectJreTarFile() throws InterruptedException {
-        final StringBuilder selectedFile = new StringBuilder();
-        
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
-                builder.setTitle(getString(R.string.alerttitle_install_jre, Tools.CURRENT_ARCHITECTURE));
-                builder.setCancelable(false);
-
-                final AlertDialog dialog = builder.create();
-                FileListView flv = new FileListView(dialog, "tar.xz");
-                flv.setFileSelectedListener(new FileSelectedListener(){
-
-                        @Override
-                        public void onFileSelected(File file, String path) {
-                            selectedFile.append(path);
-                            dialog.dismiss();
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK) {
+            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP) {
+                if (data != null) {
+                    final Uri uri = data.getData();
+                    Thread t = new Thread(() -> {
+                        try {
+                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), BaseLauncherActivity.getFileName(this, uri),
+                                    (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
+                                            () -> {
+                                                if (startupTextView != null)
+                                                    startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
+                                            }));
                             synchronized (mLockSelectJRE) {
                                 mLockSelectJRE.notifyAll();
                             }
-
+                        } catch (IOException e) {
+                            Tools.showError(PojavLoginActivity.this
+                                    , e);
                         }
                     });
-                dialog.setView(flv);
-                dialog.show();
+                    t.start();
+                }
+            }else if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
+                //Log.i("MicroLoginWrap","Got microsoft login result:" + data);
+                performMicroLogin(data);
             }
-        });
-        
-        synchronized (mLockSelectJRE) {
-            mLockSelectJRE.wait();
         }
-        
-        return new File(selectedFile.toString());
+    }
+    private boolean installRuntimeAutomatically(AssetManager am, boolean otherRuntimesAvailable) {
+        /* Check if JRE is included */
+        String rt_version = null;
+        String current_rt_version = MultiRTUtils.__internal__readBinpackVersion("Internal");
+        try {
+            rt_version = Tools.read(am.open("components/jre/version"));
+        } catch (IOException e) {
+            Log.e("JREAuto", "JRE was not included on this APK.", e);
+        }
+        if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
+        if(rt_version == null) return false;
+        if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
+            try {
+                MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + archAsString(Tools.DEVICE_ARCHITECTURE) + ".tar.xz"), "Internal", rt_version,
+                        (resid, vararg) -> runOnUiThread(()->{if(startupTextView!=null)startupTextView.setText(getString(resid,vararg));}));
+                MultiRTUtils.postPrepare(PojavLoginActivity.this,"Internal");
+                return true;
+            }catch (IOException e) {
+                Log.e("JREAuto", "Internal JRE unpack failed", e);
+                return false;
+            }
+        }else return true; // we have at least one runtime, and it's compartible, good to go
     }
 
-    private void uncompressTarXZ(final File tarFile, final File dest) throws IOException {
-
-        dest.mkdirs();
-        TarArchiveInputStream tarIn = null;
-
-        tarIn = new TarArchiveInputStream(
-            new XZCompressorInputStream(
-                new BufferedInputStream(
-                    new FileInputStream(tarFile)
-                )
-            )
-        );
-
-        TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
-        // tarIn is a TarArchiveInputStream
-        while (tarEntry != null) {
-            /*
-             * Unpacking very small files in short time cause
-             * application to ANR or out of memory, so delay
-             * a little if size is below than 20kb (20480 bytes)
-             */
-            if (tarEntry.getSize() <= 20480) {
-                try {
-                    // 40 small files per second
-                    Thread.sleep(25);
-                } catch (InterruptedException e) {}
-            }
-            final String tarEntryName = tarEntry.getName();
-            runOnUiThread(new Runnable(){
-                @SuppressLint("StringFormatInvalid")
-                @Override
-                public void run() {
-                    startupTextView.setText(getString(R.string.global_unpacking, tarEntryName));
-                }
-            });
-            // publishProgress(null, "Unpacking " + tarEntry.getName());
-            File destPath = new File(dest, tarEntry.getName()); 
-            if (tarEntry.isSymbolicLink()) {
-                destPath.getParentFile().mkdirs();
-                try {
-                    // android.system.Os
-                    // Libcore one support all Android versions
-                    Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-
-            } else if (tarEntry.isDirectory()) {
-                destPath.mkdirs();
-                destPath.setExecutable(true);
-            } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
-                destPath.getParentFile().mkdirs();
-                destPath.createNewFile();
-                
-                FileOutputStream os = new FileOutputStream(destPath);
-                IOUtils.copy(tarIn, os);
-                os.close();
-
-            }
-            tarEntry = tarIn.getNextTarEntry();
-        }
-        tarIn.close();
-    }
-    
     private static boolean mkdirs(String path)
     {
         File file = new File(path);
@@ -578,18 +436,15 @@ public class PojavLoginActivity extends BaseActivity
 
     
     public void loginMicrosoft(View view) {
-        CustomTabs.openTab(this,
-            "https://login.live.com/oauth20_authorize.srf" + 
-            "?client_id=00000000402b5328" +
-            "&response_type=code" +
-            "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
-            "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+        Intent i = new Intent(this,MicrosoftLoginGUIActivity.class);
+        startActivityForResult(i,MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST);
     }
     
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        
+    }
+    public void performMicroLogin(Intent intent) {
         Uri data = intent.getData();
         //Log.i("MicroAuth", data.toString());
         if (data != null && data.getScheme().equals("ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
@@ -603,22 +458,21 @@ public class PojavLoginActivity extends BaseActivity
             } else {
                 String code = data.getQueryParameter("code");
                 new MicrosoftAuthTask(this, new RefreshListener(){
-                        @Override
-                        public void onFailed(Throwable e) {
-                            Tools.showError(PojavLoginActivity.this, e);
-                        }
+                    @Override
+                    public void onFailed(Throwable e) {
+                        Tools.showError(PojavLoginActivity.this, e);
+                    }
 
-                        @Override
-                        public void onSuccess(MinecraftAccount b) {
-                            mProfile = b;
-                            playProfile(false);
-                        }
-                    }).execute("false", code);
+                    @Override
+                    public void onSuccess(MinecraftAccount b) {
+                        mProfile = b;
+                        playProfile(false);
+                    }
+                }).execute("false", code);
                 // Toast.makeText(this, "Logged in to Microsoft account, but NYI", Toast.LENGTH_LONG).show();
             }
         }
     }
-    
     private View getViewFromList(int pos, ListView listView) {
         final int firstItemPos = listView.getFirstVisiblePosition();
         final int lastItemPos = firstItemPos + listView.getChildCount() - 1;
@@ -645,21 +499,21 @@ public class PojavLoginActivity extends BaseActivity
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
-            View child = inflater.inflate(R.layout.simple_account_list_item, null);
+            View child = inflater.inflate(R.layout.simple_account_list_item, accountListLayout,false);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
+            ImageView imageView = child.findViewById(R.id.account_head);
 
             String accNameStr = s.substring(0, s.length() - 5);
             String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
             if (skinFaceBase64 != null) {
                 byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
-            
-                accountName.setCompoundDrawablesWithIntrinsicBounds(new BitmapDrawable(getResources(),
-                        bitmap), null, null, null);
+
+                imageView.setImageDrawable(new BitmapDrawable(getResources(),
+                        bitmap));
             }
             accountName.setText(accNameStr);
 
@@ -700,9 +554,7 @@ public class PojavLoginActivity extends BaseActivity
                 }
             });
 
-            // Tiny trick to avoid 'const' field
             final int accountIndex_final = accountIndex;
-
             removeButton.setOnClickListener(new View.OnClickListener() {
                 final String selectedAccName = accountName.getText().toString();
                 @Override
@@ -710,21 +562,17 @@ public class PojavLoginActivity extends BaseActivity
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(PojavLoginActivity.this);
                     builder2.setTitle(selectedAccName);
                     builder2.setMessage(R.string.warning_remove_account);
-                    builder2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+                    builder2.setPositiveButton(android.R.string.ok, (p1, p2) -> {
+                        new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
+                        accountListLayout.removeViewsInLayout(accountIndex_final, 1);
 
-                        @Override
-                        public void onClick(DialogInterface p1, int p2) {
-                            new InvalidateTokenTask(PojavLoginActivity.this).execute(selectedAccName);
-                            accountListLayout.removeViewsInLayout(accountIndex_final, 1);
-
-                            if (accountListLayout.getChildCount() == 0) {
-                                accountDialog.dismiss(); //No need to keep it, since there is no account
-                                return;
-                            }
-                            //Refreshes the layout with the same settings so it take the missing child into account.
-                            accountListLayout.setLayoutParams(accountListLayout.getLayoutParams());
-
+                        if (accountListLayout.getChildCount() == 0) {
+                            accountDialog.dismiss(); //No need to keep it, since there is no account
+                            return;
                         }
+                        //Refreshes the layout with the same settings so it take the missing child into account.
+                        accountListLayout.setLayoutParams(accountListLayout.getLayoutParams());
+
                     });
                     builder2.setNegativeButton(android.R.string.cancel, null);
                     builder2.show();
@@ -740,13 +588,15 @@ public class PojavLoginActivity extends BaseActivity
         new File(Tools.DIR_ACCOUNT_OLD).mkdir();
         
         String text = edit2.getText().toString();
-        if(text.isEmpty()){
-            edit2.setError(getResources().getString(R.string.global_error_field_empty));
-        } else if(text.length() <= 2){
-            edit2.setError(getResources().getString(R.string.login_error_short_username));
-        } else if(new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()){
-            edit2.setError(getResources().getString(R.string.login_error_exist_username));
-        } else{
+        if (text.isEmpty()) {
+            edit2.setError(getString(R.string.global_error_field_empty));
+        } else if (text.length() < 3 || text.length() > 16 || !text.matches("\\w+")) {
+            edit2.setError(getString(R.string.login_error_invalid_username));
+        } else if (new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()) {
+            edit2.setError(getString(R.string.login_error_exist_username));
+        } else if (!edit3.getText().toString().isEmpty()) {
+            edit3.setError(getString(R.string.login_error_offline_password));
+        } else {
             MinecraftAccount builder = new MinecraftAccount();
             builder.isMicrosoft = false;
             builder.username = text;
@@ -816,7 +666,7 @@ public class PojavLoginActivity extends BaseActivity
     
     public static String strArrToString(String[] strArr)
     {
-        String[] strArrEdit = strArr;
+        String[] strArrEdit = strArr.clone();
         strArrEdit[0] = "";
         
         String str = Arrays.toString(strArrEdit);

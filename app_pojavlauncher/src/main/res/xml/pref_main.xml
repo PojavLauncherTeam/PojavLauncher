@@ -6,15 +6,13 @@
     <androidx.preference.PreferenceCategory
 		android:title="@string/mcl_setting_category_general">
 
-        <net.kdt.pojavlaunch.prefs.UninstallJREDialogPreference
-            android:summary="@string/mcl_setting_subtitle_uninstalljre"
-            android:title="@string/mcl_setting_title_uninstalljre"
-            app2:icon="@drawable/rm_jre" />
-        
+        <net.kdt.pojavlaunch.prefs.RuntimeManagerPreference
+            android:summary="@string/multirt_subtitle"
+            android:title="@string/multirt_title"/>
         <androidx.preference.ListPreference
             android:title="@string/mcl_setting_category_renderer"
             android:key="renderer"
-            android:defaultValue="2"
+            android:defaultValue="opengles2"
             android:entries="@array/renderer"
             android:entryValues="@array/renderer_values"/>
 
@@ -26,12 +24,6 @@
             app2:selectable="false"
             app2:icon="@drawable/tap_len" />
 
-        <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="flatButtonStyle"
-            android:summary="@string/mcl_setting_subtitle_flat_button_style"
-            android:title="@string/mcl_setting_title_flat_button_style"
-            app2:icon="@drawable/ic_flatstyle" />
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
@@ -39,13 +31,6 @@
             android:key="disableGestures"
             android:summary="@string/mcl_disable_gestures_subtitle"
             android:title="@string/mcl_disable_gestures" />
-        
-        <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="freeform"
-            android:summary="@string/mcl_setting_subtitle_freeform"
-            android:title="@string/mcl_setting_title_freeform"
-            app2:icon="@drawable/freeform_opt" />
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
@@ -61,17 +46,11 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"/>
         <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="ignoreNotch"
             android:summary="@string/mcl_setting_subtitle_ignore_notch"
             android:title="@string/mcl_setting_title_ignore_notch"
             app2:icon="@drawable/ignore_notch" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_map_rmb"
-            android:key="backToRightMouse"
-            android:summary="@string/mcl_setting_subtitle_backtorightmouse"
-            android:title="@string/mcl_setting_title_backtorightmouse" />
 
         <androidx.preference.EditTextPreference
             android:dialogTitle="@string/mcl_setting_title_javaargs"

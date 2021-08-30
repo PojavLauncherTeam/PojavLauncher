@@ -16,7 +16,7 @@ public class LocaleUtils {
     public static Context setLocale(Context context) {
         if (LauncherPreferences.DEFAULT_PREF == null) {
             LauncherPreferences.DEFAULT_PREF = PreferenceManager.getDefaultSharedPreferences(context);
-			LauncherPreferences.loadPreferences();
+			LauncherPreferences.loadPreferences(context);
         }
         
         Locale locale;

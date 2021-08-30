@@ -10,6 +10,9 @@ import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
+    private int mScaleFactor;
+    private int[] mScales;
+
     private int mWidth, mHeight;
     private boolean mIsDestroyed = false;
     
@@ -32,6 +35,31 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         }
         return difference > 0 ? times.size() / difference : 0.0;
     }
+
+    /** Computes the scale to better fit the screen */
+    void initScaleFactors(){
+        initScaleFactors(0);
+    }
+
+    void initScaleFactors(int forcedScale){
+        //Could be optimized
+        if(forcedScale < 1) { //Auto scale
+            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
+            mScaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
+        }else{
+            mScaleFactor = forcedScale;
+        }
+
+        int[] scales = new int[2]; //Left, Top
+
+        scales[0] = (CallbackBridge.physicalWidth/2);
+        scales[0] -= scales[0]/mScaleFactor;
+
+        scales[1] = (CallbackBridge.physicalHeight/2);
+        scales[1] -= scales[1]/mScaleFactor;
+
+        mScales = scales;
+    }
     
     public AWTCanvasView(Context ctx) {
         this(ctx, null);
@@ -46,6 +74,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         fpsPaint.setTextSize(20);
         
         setSurfaceTextureListener(this);
+        initScaleFactors();
     }
 
     @Override
@@ -91,7 +120,15 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                     int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
                     mDrawing = rgbArray != null;
                     if (rgbArray != null) {
+
+                        canvas.save();
+                        canvas.scale(mScaleFactor, mScaleFactor);
+                        canvas.translate(-mScales[0],-mScales[1]);
+
+
                         canvas.drawBitmap(rgbArray, 0, CallbackBridge.physicalWidth, 0, 0, CallbackBridge.physicalWidth, CallbackBridge.physicalHeight, true, null);
+                        canvas.restore();
+
                     }
                     rgbArray = null;
                     // System.gc();

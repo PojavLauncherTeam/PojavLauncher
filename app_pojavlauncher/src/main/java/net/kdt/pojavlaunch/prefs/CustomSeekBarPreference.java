@@ -44,9 +44,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
     public void setMin(int min) {
         //Note: since the max (setMax is a final function) is not taken into account properly, setting the min over the max may produce funky results
         super.setMin(min);
-        if (min != mMin) {
-            mMin = min;
-        }
+        if (min != mMin) mMin = min;
     }
 
 
@@ -92,7 +90,21 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
     }
 
+    /**
+     * Set a suffix to be appended on the TextView associated to the value
+     * @param suffix The suffix to append as a String
+     */
     public void setSuffix(String suffix) {
         this.suffix = suffix;
+    }
+
+    /**
+     * Convenience function to set both min and max at the same time.
+     * @param min The minimum value
+     * @param max The maximum value
+     */
+    public void setRange(int min, int max){
+        setMin(min);
+        setMax(max);
     }
 }

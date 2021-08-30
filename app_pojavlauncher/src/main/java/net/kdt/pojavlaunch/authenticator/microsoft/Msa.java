@@ -286,7 +286,8 @@ public class Msa {
         if (errStr.contains("NOT_FOUND") &&
             errStr.contains("The server has not found anything matching the request URI"))
         {
-            otherErrStr = "Can't login a demo account!";
+            // TODO localize this
+            otherErrStr = "It seems that this Microsoft Account does not own the game. Make sure that you have bought/migrated to your Microsoft account.";
         }
         
         throw new RuntimeException(otherErrStr + "\n\nMSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);

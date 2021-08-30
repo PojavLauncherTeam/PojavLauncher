@@ -11,12 +11,14 @@
 		android:layout_height="wrap_content"
 		android:text="@string/app_short_name"
 		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:fontFamily="@font/noto_sans_bold"
 		android:textSize="40sp"/>
 
 	<TextView
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:text="@string/app_motd"
+		android:fontFamily="@font/noto_sans_bold"
 		android:id="@+id/startscreen_text"/>
 
 	<ProgressBar

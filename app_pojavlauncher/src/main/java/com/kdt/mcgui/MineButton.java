@@ -4,6 +4,10 @@ import android.content.*;
 import android.graphics.*;
 import android.util.*;
 
+import androidx.core.content.res.ResourcesCompat;
+
+import net.kdt.pojavlaunch.R;
+
 public class MineButton extends androidx.appcompat.widget.AppCompatButton
 {
 	
@@ -17,7 +21,7 @@ public class MineButton extends androidx.appcompat.widget.AppCompatButton
 	}
 
 	public void init() {
-		setTypeface(Typeface.createFromAsset(getContext().getAssets(), "font/NotoSans-Bold.ttf"));
+		setTypeface(ResourcesCompat.getFont(getContext(), R.font.noto_sans_bold));
 	}
 
 }

@@ -60,7 +60,10 @@ public class CustomControlsActivity extends BaseActivity
 							load(ctrlLayout);
 							break;
 						case R.id.menu_ctrl_add:
-							ctrlLayout.addControlButton(new ControlData("New", LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN, 100, 100));
+							ctrlLayout.addControlButton(new ControlData("New"));
+							break;
+						case R.id.menu_ctrl_add_drawer:
+							ctrlLayout.addDrawer(new ControlDrawerData());
 							break;
 						case R.id.menu_ctrl_selectdefault:
 							dialogSelectDefaultCtrl(ctrlLayout);
@@ -150,6 +153,7 @@ public class CustomControlsActivity extends BaseActivity
 						if(ctx instanceof MainActivity) {
 							((MainActivity) ctx).leaveCustomControls();
 						}else{
+							((CustomControlsActivity) ctx).isModified = false;
 							((Activity)ctx).onBackPressed();
 						}
 		//			    setResult(Activity.RESULT_OK, new Intent());
@@ -198,13 +202,19 @@ public class CustomControlsActivity extends BaseActivity
 	}
 
 	public static void load(final ControlLayout layout) {
+		/*ControlJsonSelector sel = new ControlJsonSelector(layout.getContext(), R.string.global_load);
+		sel.setFinishCallback((f)->{
+			loadControl(f.getAbsolutePath(),layout);
+		});
+		sel.show();*/
 		AlertDialog.Builder builder = new AlertDialog.Builder(layout.getContext());
 		builder.setTitle(R.string.global_load);
 		builder.setPositiveButton(android.R.string.cancel, null);
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(dialog, "json");
-		flv.listFileAt(Tools.CTRLMAP_PATH);
+		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(Tools.CTRLMAP_PATH);
+		else flv.lockPathAt(Tools.CTRLMAP_PATH);
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 				@Override
