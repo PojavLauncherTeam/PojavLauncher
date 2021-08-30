@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition Android के लिए)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">ईमेल या उपयोगकर्ता का नाम</string>
+    <string name="login_online_password_hint">पासवर्ड/कुंजिका</string>
+    <string name="login_online_check_keeplogin">मुझे लोग्ड इन रखें</string>
+    <string name="login_online_login_label">लॉगिन</string>
+    <string name="login_offline_label">ऑफ़लाइन अकाउंट के रूप में लॉगिन करें</string>
+    <string name="login_error_exist_username">यह उपयोगकर्तानाम/username पहले से मौजूद है।</string>
+    <string name="login_select_account">एकाउंट का चयन करें </string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <!-- Toast messages -->
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Account status -->
+    <!-- MCLauncherActivity: Strings -->
+    <!-- Global strings -->
+    <!-- MainActivity: strings -->
+    <!-- MainActivity: Control buttons -->
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">लॉग आउटपुट</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+</resources>

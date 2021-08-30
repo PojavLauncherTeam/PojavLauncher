@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Joga o Minecraft: Java Edition no teu dispositivo!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">E-mail ou nome de utilizador</string>
+    <string name="login_online_password_hint">Palavra-passe</string>
+    <string name="login_online_check_keeplogin">Manter a sessão iniciada</string>
+    <string name="login_online_login_label">Iniciar sessão</string>
+    <string name="login_offline_label">Iniciar sessão com conta off-line</string>
+    <string name="login_error_invalid_username">Nome de utilizador inválido. Um nome de utilizador deve ser entre 3 e 16 caracteres, deve conter apenas A-Z, a-z, 0-9 e underscore.</string>
+    <string name="login_error_exist_username">Esse nome já existe</string>
+    <string name="login_error_offline_password">Contas off-line não podem incluir palavras-passe!</string>
+    <string name="login_microsoft">Iniciar sessão pela Microsoft</string>
+    <string name="login_select_account">Seleciona a conta</string>
+    <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
+    <string name="login_dialog_no_saved_account">Tu não tens nenhuma conta guardada.\nUsa a opção <b>\"Manter a sessão iniciada\" </b>para guardar uma conta depois do primeiro início de sessão.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Desliza da direita para a esquerda para abrir o menu ◀ \nSegura num botão para personalizar: editar, redimensionar ou remover."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Esta conta será removida!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Instalar Runtime do Java %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Seleciona um Instalador de mods</string>
+    <!-- Error messages -->
+    <string name="error_fatal">O PojavLauncher falhou inesperadamente</string>
+    <string name="error_no_version">Não existem versões!</string>
+    <string name="error_show_more">Mostrar mais</string>
+    <string name="error_show_less">Mostrar menos</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">A permissão de leitura/escrita no armazenamento é necessária!</string>
+    <string name="toast_optifine_success">Instalação completa com sucesso</string>
+    <string name="toast_uninstalljre_done">Desinstalação da Runtime do Java concluída</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Notícias</string>
+    <string name="mcl_tab_console">Consola de Desenvolvedor</string>
+    <string name="mcl_tab_crash">Registro de falhas</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Conectado</string>
+    <string name="mcl_account_offline">Off-line</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
+    <string name="mcl_launch_cleancache">A limpar os ficheiros em cache</string>
+    <string name="mcl_launch_downloading">A transferir %s</string>
+    <string name="mcl_launch_downloading_progress">"A transferir %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">A preparar para transferir os recursos</string>
+    <string name="mcl_options">Opções</string>
+    <string name="mcl_option_modinstall">Executa um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Executa um instalador de mods (com argumentos personalizados)</string>
+    <string name="mcl_option_customcontrol">Controlos personalizados</string>
+    <string name="mcl_option_settings">Definições</string>
+    <string name="mcl_option_about">Acerca</string>
+    <string name="mcl_setting_title_uninstalljre">Desinstalar Runtime do Java</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Reinicio do lançador requirido] Isto te permite reinstalar a Runtime do Java</string>
+    <string name="mcl_setting_title_freeform">Executar o Minecraft no modo Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Executar o Minecraft numa janela flutuante. Requere Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Esconder a barra lateral</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Pessoas nostálgicas preferem a interface antiga da v1 parecida com isto.
+Dá-te uma experiência de tela cheia melhorada.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorar o entalhe</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignorar o entalhe e estender a tela até lá. \nDá-te uma experiência mais imersiva.</string>
+    <string name="mcl_setting_title_resolution_scaler">Escala da Resolução</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite-te reduzir a resolução do jogo. 100% é a resolução total</string>
+    <string name="mcl_setting_title_longpresstrigger">Quanto tempo será acionado depois de pressionar e segurar</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Alterar o tempo de ativação de um toque longo entre destruir um bloco e soltar itens.</string>
+    <string name="mcl_setting_category_general">Definições gerais</string>
+    <string name="mcl_setting_category_veroption">O tipo de versões que estarão na lista de versões</string>
+    <string name="mcl_setting_veroption_release">Oficial</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta antiga</string>
+    <string name="mcl_version_clone">Clonar</string>
+    <!-- Global strings -->
+    <string name="global_edit">Editar</string>
+    <string name="global_error">Erro</string>
+    <string name="global_warinng">Aviso</string>
+    <string name="global_load">Carregar</string>
+    <string name="global_name">Nome</string>
+    <string name="global_remove">Remover</string>
+    <string name="global_clone">Clonar</string>
+    <string name="global_restart">Reiniciar</string>
+    <string name="global_save">Guardar</string>
+    <string name="global_error_field_empty">Este campo não pode estar vazio</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Sair</string>
+    <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">Interface</string>
+    <string name="control_keyboard">Teclado</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Depuração</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Seg</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">terceira</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Rato</string>
+    <string name="control_mouseoff">Rato: desligado</string>
+    <string name="control_mouseon">Rato: ligado </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Forçar encerramento</string>
+    <string name="control_viewout">Saída de log</string>
+    <string name="control_customkey">Enviar tecla personalizada</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_keyname">Tecla</string>
+    <string name="customctrl_addbutton">Adicionar botão</string>
+    <string name="customctrl_selectdefault">Selecionar o json de controlo padrão</string>
+    <string name="main_options">Opções</string>
+    <string name="main_play">Jogar</string>
+    <string name="main_infodev">Informação (DEV)</string>
+    <string name="main_switchuser">Trocar de utilizador</string>
+    <string name="main_version">Versão:</string>
+    <string name="main_nocrash">Nenhuma falha detetada</string>
+    <string name="main_nolog">Sem registros.</string>
+</resources>

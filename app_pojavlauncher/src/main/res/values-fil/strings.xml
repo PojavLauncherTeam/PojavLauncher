@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android) Translation By Justine Victorino or EnderProJustine</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Ilunsad ang Minecraft: Java Edition sa iyong aparato!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email o pangalan</string>
+    <string name="login_online_password_hint">Password</string>
+    <string name="login_online_check_keeplogin">Panatilihin akong naka-log in</string>
+    <string name="login_online_login_label">Mag log in</string>
+    <string name="login_offline_label">Mag-login bilang offline na account</string>
+    <string name="login_error_exist_username">Mayroon nang username na ito</string>
+    <string name="login_error_offline_password">Hinde pwedeng magkaroon ng password ang isang Offline Account!</string>
+    <string name="login_microsoft">Log in sa Microsoft</string>
+    <string name="login_select_account">Piliin ang account</string>
+    <string name="login_title_no_saved_account">Walang nahanap na account!</string>
+    <string name="login_dialog_no_saved_account">Wala kang nai-save na account. \nGamitin ang pagpipiliang <b> \"Panatilihin akong naka-log in\" </b> upang makatipid ng isang account sa unang pag-login.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Mag-swipe mula kanan pakanan upang buksan ang menu ◀\nHold isang pindutan upang ipasadya: i-edit, baguhin ang laki o tanggalin."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Aalisin ang account na ito!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">I-install ang Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Pumili ng isang installer ng mod</string>
+    <!-- Error messages -->
+    <string name="error_fatal">Ang PojavLauncher ay hindi inaasahang nag-crash</string>
+    <string name="error_no_version">Walang bersyon!</string>
+    <string name="error_show_more">Magpakita ng higit pa</string>
+    <string name="error_show_less">Magpakita ng kaunti</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Kinakailangan ang basahin / sumulat sa pahintulot sa pag-iimbak!</string>
+    <string name="toast_optifine_success">Ang pag-install ay matagumpay</string>
+    <string name="toast_uninstalljre_done">Tapos na i-uninstall ang Java Runtime</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Balita</string>
+    <string name="mcl_tab_console">Development console</string>
+    <string name="mcl_tab_crash">Crash log</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Nakakonekta</string>
+    <string name="mcl_account_offline">Offline</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Handa nang maglaro ng Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Nililinis ang mga file ng cache</string>
+    <string name="mcl_launch_downloading">Nagda-download %s</string>
+    <string name="mcl_launch_downloading_progress">"Pagda-download ng %s (%.2f MB /%.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Paghahanda upang mag-download ng mga mapagkukunan</string>
+    <string name="mcl_options">Mga pagpipilian</string>
+    <string name="mcl_option_modinstall">I lunsad ang isang installer ng mod (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Ilunsad ang isang installer ng mod (na may pasadyang mga argumento)</string>
+    <string name="mcl_option_customcontrol">Pasadyang mga kontrol</string>
+    <string name="mcl_option_settings">Mga Setting</string>
+    <string name="mcl_option_about">Tungkol sa</string>
+    <string name="mcl_setting_title_uninstalljre">I-uninstall ang Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Kinakailangan ang pag-restart ng launcher] Hinahayaan ka nitong muling i-install ang Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Ilunsad ang Minecraft sa mode na Freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Ilunsad ang Minecraft sa lumulutang na Window. Nangangailangan ng Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Itago ang Sidebar</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Mas gusto ng mga nostalhic na tao ang lumang v1 UI na maaaring gusto ito. Nagbibigay sa iyo ng mas karanasan sa buong screen.</string>
+    <string name="mcl_setting_title_ignore_notch">Huwag pansinin and notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Balewalain ang notch at pinahaba ang screen sa ilalim nito. \n Binibigyan ka ng isang mas nakaka-engganyong karanasan.</string>
+    <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Pinapayagan kang bawasan ang resolusyon ng laro. 100% ang buong resolusyon</string>
+    <string name="mcl_setting_title_longpresstrigger">Gaano katagal mag-uudyok pagkatapos ng mahabang pindutin</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Baguhin ang oras ng pag-trigger para sa mahabang pagpindot sa sirain ang block at drop item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratuhin ang back button bilang isang mouse response</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Ang ilang mga devices ay tinatrato ang pisikal na mouse bilang back button. Kung gumagamit ka ng pisikal na mouse, dapat mo itong i-switch on.</string>
+    <string name="mcl_setting_title_flat_button_style">Estilo ng flat button</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Paganahin ito upang baguhin ang istilo ng pindutan ng kontrol sa flat.</string>
+    <string name="mcl_setting_title_buttonscale">Pagkontrol sa pag-scale ng mga pindutan</string>
+    <string name="mcl_setting_subtitle_buttonscale">I-Upgrade ang mga ito kung ang mga pindutan ay masyadong maliit.</string>
+    <string name="mcl_setting_title_mousescale">Pag-scale ng mouse</string>
+    <string name="mcl_setting_subtitle_mousescale">Baguhin ang laki ng virtual mouse.</string>
+    <string name="mcl_setting_title_javaargs">JVM Ilunsad ang mga argumento</string>
+    <string name="mcl_setting_subtitle_javaargs">Mag-ingat, maaari itong mag-crash ng laro kung binago nang walang kaalaman.</string>
+    <string name="mcl_setting_category_general">Pangkalahatang mga Setting</string>
+    <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): i-convert sa OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): i-convert sa OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): i-convert sa OpenGL 2.1 + partial na 3.2 (hindi pa gagana sa 1.17 kung walang modifications)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): i-convert sa OpenGL 4.6 (dapat merong vulkan layer ang GPU mo.)</string>
+    <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_version_clone">I-Clone</string>
+    <!-- Global strings -->
+    <string name="global_edit">I-Edit</string>
+    <string name="global_error">Error</string>
+    <string name="global_warinng">Babala</string>
+    <string name="global_load">I-Load</string>
+    <string name="global_name">Pangalan</string>
+    <string name="global_remove">Tanggalin</string>
+    <string name="global_clone">I-Clone</string>
+    <string name="global_restart">I-Restart</string>
+    <string name="global_save">Save</string>
+    <string name="global_unpacking">Inaalis ang %s</string>
+    <string name="global_error_field_empty">Ang patlang na ito ay hindi maaaring walang laman</string>
+    <string name="global_waiting">Teka lang</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Application/Laro na lumabas sa code %d</string>
+    <string name="mcn_exit_call">Umalis</string>
+    <string name="mcn_exit_confirm">Sigurado ka bang nais na pilitin malapit?</string>
+    <string name="mcn_check_fail_lwjgl">Ang LWJGL3 ay hindi na-install!</string>
+    <string name="mcn_check_fail_incompatiblearch">Ang arkitektura %1$s ay hindi tugma sa Java Runtime%2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Hindi supported ang Vulkan - Zink dito!</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Keyboard</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Pag-debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Bag</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: naka-on</string>
+    <string name="control_mouseon">Mouse: naka-off </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Pilit na isara</string>
+    <string name="control_viewout">Output ng log</string>
+    <string name="control_adebug">Pag-input ng Debug</string>
+    <string name="control_customkey">Magpadala ng pasadyang keycode</string>
+    <string name="control_scaleup">Scale up</string>
+    <string name="control_scaledown">Scale down</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">Ang pag-edit %s</string>
+    <string name="customctrl_remove">Tanggalin %s?</string>
+    <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_toggle">Toggleable</string>
+    <string name="customctrl_size">Sukat</string>
+    <string name="customctrl_size_width">Lapad</string>
+    <string name="customctrl_size_height">Taas</string>
+    <string name="customctrl_mapping">Pag mapa</string>
+    <string name="customctrl_orientation">Oryentasyon</string>
+    <string name="customctrl_background_color">Kulay ng likuran</string>
+    <string name="customctrl_corner_radius">sulok ng radyos</string>
+    <string name="customctrl_stroke_width">Kalapad sa guhit</string>
+    <string name="customctrl_stroke_color">Kulay sa guhit</string>
+    <string name="customctrl_dynamicpos">Dynamic na posisyon</string>
+    <string name="customctrl_dynamicpos_x">Dynamic X</string>
+    <string name="customctrl_dynamicpos_y">Dynamic Y</string>
+    <string name="customctrl_transparency_bg">Transparency ng Background</string>
+    <string name="customctrl_button_opacity">Kalubuan ng pindutan</string>
+    <string name="customctrl_keycombine">Key Kombinasyon</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">Magdagdag ng pindotan</string>
+    <string name="customctrl_addbutton_drawer">Magdagdag ng drawer ng pindutan</string>
+    <string name="customctrl_selectdefault">Piliin ang default Control json</string>
+    <string name="main_options">Mga pagpipilian</string>
+    <string name="main_play">Maglaro</string>
+    <string name="main_welcome">Welcome, %s</string>
+    <string name="main_infodev">Impormasyon (DEV)</string>
+    <string name="main_switchuser">Paglipat ng gumagamit</string>
+    <string name="main_version">Bersyon:</string>
+    <string name="main_nocrash">Walang nakitang pag-crash</string>
+    <string name="main_nolog">Walang log.</string>
+    <string name="main_no_news_feed">Nabigong makuha ang news feed!</string>
+    <string name="auto_ram_subtitle">Pinapagana ang awtomatikong pagsasaayos ng RAM</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Naitakda ang memorya sa %d MB</string>
+    <string name="mcl_setting_check_libraries">Suriin ang mga libraries pagkatapos mag-download</string>
+    <string name="mcl_setting_check_libraries_subtitle">Pinipilit ng opsyong ito ang launcher na suriin ang hash ng library kung magagamit ito. Pinipigilan ang mga sirang pag-download.</string>
+    <string name="dl_library_sha_fail">Ang library ay nasira %s at mai-download</string>
+    <string name="dl_library_sha_unknown">Hindi masuri ang library %s, kailangang ipalagay na mabuti ito</string>
+    <string name="dl_library_sha_pass">Ang library %s ay mabuti at magagamit</string>
+    <string name="mcl_disable_gestures">Paganahin ang mga galaw</string>
+    <string name="mcl_disable_gestures_subtitle">Hindi pinagagana ang mga kilos, tulad ng pagpindot upang masira ang bloke, at i-tap upang maglagay ng isang bloke.</string>
+    <string name="mcl_setting_title_mousespeed">Bilis ng Mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Binabago ang bilis ng mouse ng software</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">Ang kasalukuyang dami ng libreng RAM (%d) ay mas mababa kaysa sa inilalaan na RAM (%d), na maaaring humantong sa mga pag-crash. Baguhin ang paglalaan kung ang laro ay nag-crash.</string>
+    <string name="mcl_memory_allocation">Paglalaan ng memorya</string>
+    <string name="mcl_memory_allocation_subtitle">Kinokontrol kung magkano ang memorya na ibinibigay sa Minecraft</string>
+    <string name="multirt_runtime_corrupt">Ang runtime na ito ay sira</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">Magdagdag</string>
+    <string name="multirt_config_add_subtitle">Mag-import ng bagong Java VM</string>
+    <string name="multirt_title">Runtime Manager</string>
+    <string name="multirt_subtitle">I-manage ang naka-install na Java VMs</string>
+    <string name="multirt_progress_caching">Nag-cacache...</string>
+    <string name="multirt_config_setdefault">I-set bilang default</string>
+    <string name="multirt_config_setdefault_already">Default</string>
+    <string name="multirt_config_removeerror_last">Dapat may naka-install sa launcher na isang Java Runtime</string>
+    <string name="multirt_nocompartiblert">Hindi makahanap ng isang compatible na Java Runtime</string>
+    <string name="compat_11x_playanyway">Subukan pa rin</string>
+    <string name="storage_warning_title">Bago sa i-storage</string>
+</resources>
