@@ -85,6 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 + tam olmayan 3.2 (1.17 henüz desteklenmiyor)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 dışa aktarır</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 dışa aktarır</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
@@ -212,4 +213,6 @@
     <string name="pvc_gameDirectory">Oyun dizini</string>
     <string name="pvc_jvmArgs">JVM argümanları</string>
     <string name="pvc_title">Sürüm-başına ayarlar</string>
+    <string name="storage_warning_title">Depolama değişiklikleri</string>
+    <string name="storage_warning_text"><![CDATA[Google\'ın Android 10 ve sonraki sürümlerde eklenen yeni scoped storage yaptırımları nedeniyle, oyun dizinini app-private klasörüne taşımamız gerekiyor.<br /> Pojav dosyalari için yeni dizin <b>Android/data/%s/files/</b> (Ayrıca dosya yöneticisindeki dosya sağlayıcısından da erişmek mümkün).<br /> Eğer oyun dosyalarınızı kopyalamanız gerekirse, lütfen <b>games/PojavLauncher</b>'daki orijinal klasördeki her şeyi manuel olarak kopyalayın.]]></string>
 </resources>
