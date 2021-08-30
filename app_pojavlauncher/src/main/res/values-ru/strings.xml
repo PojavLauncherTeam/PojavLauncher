@@ -213,4 +213,6 @@
     <string name="pvc_gameDirectory">Папка игры</string>
     <string name="pvc_jvmArgs">Аргументы JVM</string>
     <string name="pvc_title">Поверсионные настройки</string>
+    <string name="storage_warning_title">Изменения в работе хранилища</string>
+    <string name="storage_warning_text"><![CDATA[Из-за новых ограничений хранилища добавленных компанией Google в Android 10, приложению нужно переместить папку игры во внутреннюю папку приложения.<br /> Новая папка для файлов Pojav - <b>Android/data/%s/files/</b> (также доступна из провайдера хранилища в вашем проводнике).<br /> Если вам необходимо перенести файлы игры, пожалуйста скопируйте их вручную из папки <b>games/PojavLauncher</b>.]]></string>
 </resources>
