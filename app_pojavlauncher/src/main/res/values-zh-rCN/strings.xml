@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher（适用于 Android 的《Minecraft：Java版》）</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">在您的设备上启动《Minecraft：Java版》！</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">电子邮件或用户名</string>
+    <string name="login_online_password_hint">密码</string>
+    <string name="login_online_check_keeplogin">保持登录状态</string>
+    <string name="login_online_login_label">登录</string>
+    <string name="login_offline_label">以离线账号登录</string>
+    <string name="login_error_invalid_username">无效的用户名。用户名必须在3-16个字符的范围内，只能包含A-Z、a-z、0-9和下划线。</string>
+    <string name="login_error_exist_username">用户名已存在</string>
+    <string name="login_error_offline_password">离线账号不能填写密码！</string>
+    <string name="login_microsoft">微软帐号登录</string>
+    <string name="login_select_account">选择账号</string>
+    <string name="login_title_no_saved_account">帐户未找到！</string>
+    <string name="login_dialog_no_saved_account">尚未保存任何帐号。\n使用<b>“保持登录状态”</b>选项以在首次登录后保存帐号。</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">此账号将被移除！</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">安装 Java 运行时环境 %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">选择 Mod 安装器</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher 意外崩溃</string>
+    <string name="error_no_version">无版本！</string>
+    <string name="error_show_more">显示细节</string>
+    <string name="error_show_less">隐藏细节</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">需要存储读写权限！</string>
+    <string name="toast_optifine_success">安装成功</string>
+    <string name="toast_uninstalljre_done">Java 运行时环境卸载成功</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">新闻</string>
+    <string name="mcl_tab_console">开发控制台</string>
+    <string name="mcl_tab_crash">崩溃日志</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">已连接</string>
+    <string name="mcl_account_offline">离线</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s 就绪</string>
+    <string name="mcl_launch_cleancache">正在清理缓存</string>
+    <string name="mcl_launch_downloading">正在下载 %s</string>
+    <string name="mcl_launch_downloading_progress">"正在下载 %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">正在准备下载资源</string>
+    <string name="mcl_options">选项</string>
+    <string name="mcl_option_modinstall">启动 Mod 安装器（例如 Forge, LabyMod, Fabric...）</string>
+    <string name="mcl_option_modinstallwitharg">以自定义参数启动 Mod 安装器</string>
+    <string name="mcl_option_customcontrol">自定义控制键</string>
+    <string name="mcl_option_settings">设置</string>
+    <string name="mcl_option_about">关于</string>
+    <string name="mcl_setting_title_uninstalljre">卸载 Java 运行时环境</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[需要重启启动器] 得以重新安装 Java 运行时环境。</string>
+    <string name="mcl_setting_title_freeform">以自由窗口模式启动 Minecraft</string>
+    <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">隐藏侧边栏</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">怀念 v1 旧版界面的用户可能喜欢这样。它提供了更接近全屏的体验。</string>
+    <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
+    <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将画面扩展至其下方。\n给您以更完整的沉浸感。</string>
+    <string name="mcl_setting_title_resolution_scaler">分辨率缩放</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">允许降低游戏画面分辨率。原生分辨率为 100%</string>
+    <string name="mcl_setting_title_longpresstrigger">长按触发时长</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">修改长按摧毁方块、丢弃物品的触发时长</string>
+    <string name="mcl_setting_title_backtorightmouse">将返回键视为鼠标右键</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">某些设备将外置鼠标右键作为返回键处理。如果您使用外置鼠标，您应该启用此功能。</string>
+    <string name="mcl_setting_title_flat_button_style">扁平化风格按键</string>
+    <string name="mcl_setting_subtitle_flat_button_style">启用此选项可以使按键风格扁平化。</string>
+    <string name="mcl_setting_title_buttonscale">控制键缩放</string>
+    <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其放大。</string>
+    <string name="mcl_setting_title_mousescale">鼠标缩放</string>
+    <string name="mcl_setting_subtitle_mousescale">更改虚拟鼠标的大小。</string>
+    <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
+    <string name="mcl_setting_subtitle_javaargs">当心，非专业人士修改此值可能导致游戏崩溃。</string>
+    <string name="mcl_setting_category_general">常规设置</string>
+    <string name="mcl_setting_category_scaling">缩放设置</string>
+    <string name="mcl_setting_category_renderer">渲染器</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（尚未支持1.17）</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
+    <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
+    <string name="mcl_setting_veroption_release">正式版</string>
+    <string name="mcl_setting_veroption_snapshot">快照</string>
+    <string name="mcl_setting_veroption_oldalpha">远古alpha版</string>
+    <string name="mcl_setting_veroption_oldbeta">远古beta版</string>
+    <string name="mcl_version_clone">复制</string>
+    <!-- Global strings -->
+    <string name="global_edit">修改</string>
+    <string name="global_error">错误</string>
+    <string name="global_warinng">警告</string>
+    <string name="global_load">加载</string>
+    <string name="global_name">名称</string>
+    <string name="global_remove">移除</string>
+    <string name="global_clone">复制</string>
+    <string name="global_restart">重启</string>
+    <string name="global_save">保存</string>
+    <string name="global_unpacking">正在解包 %s</string>
+    <string name="global_error_field_empty">此处表单不能为空</string>
+    <string name="global_waiting">请稍等</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">应用/游戏以 %d 代码退出</string>
+    <string name="mcn_exit_call">退出</string>
+    <string name="mcn_exit_confirm">确定强制关闭？</string>
+    <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时环境 %2$s 。</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink 渲染在该设备上不可用！</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">键盘</string>
+    <string name="control_chat">聊天</string>
+    <string name="control_debug">调试</string>
+    <string name="control_primary">主</string>
+    <string name="control_secondary">副</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">背包</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">视角</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">鼠标</string>
+    <string name="control_mouseoff">鼠标：关</string>
+    <string name="control_mouseon">鼠标：开</string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">强制关闭</string>
+    <string name="control_viewout">日志输出</string>
+    <string name="control_adebug">输入调试</string>
+    <string name="control_customkey">发送自定义键码</string>
+    <string name="control_scaleup">放大</string>
+    <string name="control_scaledown">缩小</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">正在编辑 %s</string>
+    <string name="customctrl_remove">移除 %s ？</string>
+    <string name="customctrl_keyname">键码</string>
+    <string name="customctrl_toggle">可切换</string>
+    <string name="customctrl_size">大小</string>
+    <string name="customctrl_size_width">宽度</string>
+    <string name="customctrl_size_height">高度</string>
+    <string name="customctrl_mapping">映射</string>
+    <string name="customctrl_orientation">方向</string>
+    <string name="customctrl_background_color">背景颜色</string>
+    <string name="customctrl_corner_radius">圆角半径</string>
+    <string name="customctrl_stroke_width">边框宽度</string>
+    <string name="customctrl_stroke_color">边框颜色</string>
+    <string name="customctrl_dynamicpos">动态位置</string>
+    <string name="customctrl_dynamicpos_x">动态 X 轴</string>
+    <string name="customctrl_dynamicpos_y">动态 Y 轴</string>
+    <string name="customctrl_transparency_bg">背景透明度</string>
+    <string name="customctrl_button_opacity">按钮不透明度</string>
+    <string name="customctrl_keycombine">按键组合</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">添加按键</string>
+    <string name="customctrl_addbutton_drawer">添加组合框</string>
+    <string name="customctrl_addsubbutton">添加子按钮</string>
+    <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
+    <string name="main_options">选项</string>
+    <string name="main_play">启动游戏</string>
+    <string name="main_welcome">欢迎， %s</string>
+    <string name="main_infodev">信息（开发）</string>
+    <string name="main_switchuser">切换用户</string>
+    <string name="main_version">版本：</string>
+    <string name="main_nocrash">未检测到崩溃</string>
+    <string name="main_nolog">无日志。</string>
+    <string name="main_no_news_feed">新闻获取失败！</string>
+    <string name="auto_ram_subtitle">启用 RAM 自动调节</string>
+    <string name="auto_ram_title">自动 RAM</string>
+    <string name="autoram_info_msg">内存已设为 %d MB</string>
+    <string name="mcl_setting_check_libraries">在下载后检查运行库</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
+    <string name="dl_library_sha_fail">运行库 %s 已损坏，将被重新下载</string>
+    <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
+    <string name="dl_library_sha_pass">运行库 %s 正常</string>
+    <string name="mcl_disable_gestures">禁用手势</string>
+    <string name="mcl_disable_gestures_subtitle">禁用手势，例如长按破坏方块和点击放置方块。</string>
+    <string name="mcl_setting_title_mousespeed">鼠标速度</string>
+    <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
+    <string name="customctrl_passthru">鼠标透传</string>
+    <string name="customctrl_swipeable">可滑动的</string>
+    <string name="customctrl_rounded">圆角</string>
+    <string name="memory_warning_msg">当前可用内存 (%d) 低于分配的内存 (%d)，这可能导致崩溃。 如果游戏崩溃请更改配置。</string>
+    <string name="mcl_memory_allocation">内存分配</string>
+    <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存</string>
+    <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">新建</string>
+    <string name="multirt_config_add_subtitle">导入新的 Java VM</string>
+    <string name="multirt_title">运行时管理器</string>
+    <string name="multirt_subtitle">管理已安装的 Java VMs</string>
+    <string name="multirt_progress_caching">正在缓存……</string>
+    <string name="multirt_config_setdefault">设为默认</string>
+    <string name="multirt_config_setdefault_already">默认</string>
+    <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行时</string>
+    <string name="multirt_nocompartiblert">找不到任何可压缩的 Java 运行时</string>
+    <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置文件。 遗憾的是，GL4ES 包装器目前并不完全支持它，但是您可以安装一些额外的资源来运行这些版本。 按 确认 确认安装，然后按 取消键 中止启动。</string>
+    <string name="compat_11x_playanyway">仍然开始游戏</string>
+    <string name="pvc_gameDirectory">游戏目录</string>
+    <string name="pvc_jvmArgs">JVM 参数</string>
+    <string name="pvc_title">Per-version 设置</string>
+    <string name="storage_warning_title">存储变更</string>
+    <string name="storage_warning_text"><![CDATA[由于 Google 在 Android 10 及更高版本中添加了新的存储范围强制措施，我们需要将游戏目录移动到应用私有文件夹中。<br />新的 Pojav 文件夹是 <b>Android/data/%s/files/</b> （同样可以通过您的文件管理器访问）。<br />如果您需要复制您的游戏文件，请从 <b>games/PojavLauncher</b> 中手动复制所有内容]]></string>
+</resources>
