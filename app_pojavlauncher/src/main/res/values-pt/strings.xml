@@ -70,7 +70,18 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Permite-te reduzir a resolução do jogo. 100% é a resolução total</string>
     <string name="mcl_setting_title_longpresstrigger">Quanto tempo será acionado depois de pressionar e segurar</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Alterar o tempo de ativação de um toque longo entre destruir um bloco e soltar itens.</string>
+    <string name="mcl_setting_title_mousescale">Escala do rato</string>
+    <string name="mcl_setting_subtitle_mousescale">Alterar o tamanho do rato virtual.</string>
+    <string name="mcl_setting_title_javaargs">Argumentos JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Tem cuidado, isto pode fazer o jogo falhar se modificado sem conhecimento.</string>
     <string name="mcl_setting_category_general">Definições gerais</string>
+    <string name="mcl_setting_category_scaling">Definições de escala</string>
+    <string name="mcl_setting_category_renderer">Renderizador</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exporta o OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta o OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exporta o OpenGL 2.1 + parcialmente o 3.2 (não há suporte para 1.17 ainda)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta o OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta o OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">O tipo de versões que estarão na lista de versões</string>
     <string name="mcl_setting_veroption_release">Oficial</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -87,10 +98,16 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="global_clone">Clonar</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Guardar</string>
+    <string name="global_unpacking">A descompactar %s</string>
     <string name="global_error_field_empty">Este campo não pode estar vazio</string>
+    <string name="global_waiting">Aguarda</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplicação/Jogo saiu com o código %d</string>
     <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
+    <string name="mcn_check_fail_lwjgl">O LWJGL3 não foi instalado!</string>
+    <string name="mcn_check_fail_incompatiblearch">A arquitetura %1$s é incompatível com a Runtime do Java %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">O renderizador Vulkan Zink não é suportado neste dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Interface</string>
     <string name="control_keyboard">Teclado</string>
