@@ -602,7 +602,10 @@ public class BaseMainActivity extends LoggableActivity {
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
         if(CallbackBridge.isGrabbing()) {
-            if(BaseMainActivity.isAndroid8OrHigher()) minecraftGLView.requestPointerCapture();
+            if(BaseMainActivity.isAndroid8OrHigher()){
+                minecraftGLView.requestFocus();
+                minecraftGLView.requestPointerCapture();
+            }
         }
         switch(ev.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
