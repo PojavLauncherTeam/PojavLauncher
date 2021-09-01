@@ -207,5 +207,5 @@
     <string name="pvc_jvmArgs">JVM 參數</string>
     <string name="pvc_title">Per-version 設定</string>
     <string name="storage_warning_title">儲存位置已變更</string>
-    <string name="storage_warning_text"><![CDATA[由於Google在Android 10所加入的儲存規範，我們把遊戲的目錄移動到app的私有資料夾下了。.<br />Pojav的新資料夾位於<b>Android/data/%s/files/</b> (可用檔案瀏覽器存取) <br /> 如果有需要移動先前的遊戲檔案，請手動從<b>/games/PojavLauncher</b>將資料複製到新的位置。]]></string>
+    <string name="storage_warning_text"><![CDATA[由於Google在Android 10所加入的儲存規範，我們把遊戲的目錄移動到app的私有資料夾下了。<br />Pojav的新資料夾位於<b>Android/data/%s/files/</b> (可用檔案瀏覽器存取) <br /> 如果有需要移動先前的遊戲檔案，請手動從<b>/games/PojavLauncher</b>將資料複製到新的位置。]]></string>
 </resources>
