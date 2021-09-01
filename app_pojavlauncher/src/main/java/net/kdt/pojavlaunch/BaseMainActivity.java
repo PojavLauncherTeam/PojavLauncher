@@ -635,6 +635,7 @@ public class BaseMainActivity extends LoggableActivity {
          */
 
         //Filtering useless events
+        if(event.getFlags() == KeyEvent.FLAG_FROM_SYSTEM) return false; //Volume keys and stuff
         if(event.getRepeatCount() != 0
                 || event.getAction() == KeyEvent.ACTION_MULTIPLE
                 || event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN
