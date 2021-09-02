@@ -100,15 +100,16 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * @return if the keyboard is set to be shown.
      */
     public boolean switchKeyboardState(){
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
         //If an hard keyboard is present, never trigger the soft one
         if(hasFocus()
                 || (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY
                 && getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES)){
+            imm.hideSoftInputFromWindow(getWindowToken(), 0);
             clear();
             disable();
             return false;
         }else{
-            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
             enable();
             imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
             return true;
