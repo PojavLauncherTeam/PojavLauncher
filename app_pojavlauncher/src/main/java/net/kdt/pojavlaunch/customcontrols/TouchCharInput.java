@@ -125,7 +125,8 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     public void clear(){
         isDoingInternalChanges = true;
         //Braille space, doesn't trigger keyboard auto-complete
-        setText("\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800");
+        //replacing directly the text without though setText avoids notifying changes
+        getText().replace(0, getText().length(),"\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800");
         setSelection(5);
     }
 
