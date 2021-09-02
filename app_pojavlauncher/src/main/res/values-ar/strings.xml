@@ -145,7 +145,11 @@
     <string name="customctrl_size_width">العرض</string>
     <string name="customctrl_size_height">الارتفاع</string>
     <string name="customctrl_mapping">تخطيط الأزرار</string>
+    <string name="customctrl_orientation">الإتجاة</string>
     <string name="customctrl_background_color">لون الخلفية</string>
+    <string name="customctrl_corner_radius">تقوس الزاوية</string>
+    <string name="customctrl_stroke_width">عرض الخط</string>
+    <string name="customctrl_stroke_color">لون الخط</string>
     <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
@@ -156,6 +160,8 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">إضافة زر</string>
+    <string name="customctrl_addbutton_drawer">اضافة زر بعدة ازرار</string>
+    <string name="customctrl_addsubbutton">إضافة زر فرعي</string>
     <string name="customctrl_selectdefault">حدد رمز تحكم اعتيادي بصيغة json</string>
     <string name="main_options">الخيارات</string>
     <string name="main_play">إبدأ اللعب</string>
@@ -196,6 +202,10 @@
     <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل مشغل جافا واحد مثبت</string>
     <string name="multirt_nocompartiblert">لا يمكن العثور على مشغل جافا قابل للتشغيل</string>
     <string name="compat_117_message">ماينكرافت 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن تغليف GL4ES لا يدعمه بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لإجهاض الإطلاق.</string>
+    <string name="compat_11x_playanyway">تشغيل على أي حال</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
     <string name="pvc_jvmArgs">مدخلات JVM</string>
+    <string name="pvc_title">إعدادات لكل إصدار</string>
+    <string name="storage_warning_title">تغييرات التخزين</string>
+    <string name="storage_warning_text"><![CDATA[بسبب تطبيق Google الجديد لتخزين النطاق المضاف في أندرويد 10 وما فوق، نحن مطالبون بنقل ملفات اللعبة إلى مجلد تطبيق-خاص.<br /> المجلد الجديد لملفات Pojav هو <b>Android/data/%s/files/</b> (يمكن الوصول إليه أيضًا باستخدام موفر تخزين في مستكشف الملفات الخاص بك).<br /> إذا كنت بحاجة إلى نسخ ملفات اللعبة الخاصة بك، يرجى نسخ كل شيء من المجلد الأصلي في <b>الألعاب/ojavLauncher</b> يدويا.]]></string>
 </resources>
