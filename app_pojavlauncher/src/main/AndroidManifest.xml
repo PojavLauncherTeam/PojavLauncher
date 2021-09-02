@@ -70,7 +70,7 @@
             android:multiprocess="true"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateVisible"
+
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
         <provider
             android:name=".scoped.GameFolderProvider"
