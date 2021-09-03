@@ -617,12 +617,12 @@ EGLBoolean (*eglInitialize_p) (EGLDisplay dpy, EGLint *major, EGLint *minor);
 EGLBoolean (*eglChooseConfig_p) (EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config);
 EGLBoolean (*eglGetConfigAttrib_p) (EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint *value);
 EGLBoolean (*eglBindAPI_p) (EGLenum api);
-EGLBoolean (*eglCreateWindowSurface_p) (EGLDisplay dpy, EGLConfig config, NativeWindowType window, const EGLint *attrib_list);
+EGLSurface (*eglCreateWindowSurface_p) (EGLDisplay dpy, EGLConfig config, NativeWindowType window, const EGLint *attrib_list);
 EGLBoolean (*eglSwapBuffers_p) (EGLDisplay dpy, EGLSurface draw);
 EGLint (*eglGetError_p) (void);
 EGLContext (*eglCreateContext_p) (EGLDisplay dpy, EGLConfig config, EGLContext share_list, const EGLint *attrib_list);
 EGLBoolean (*eglSwapInterval_p) (EGLDisplay dpy, EGLint interval);
-
+EGLSurface (*eglGetCurrentSurface_p) (EGLint readdraw);
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
 
@@ -716,15 +716,16 @@ bool loadSymbols() {
             eglDestroyContext_p = dlsym(dl_handle, "eglDestroyContext");
             eglDestroySurface_p = dlsym(dl_handle, "eglDestroySurface");
             eglGetConfigAttrib_p = dlsym(dl_handle, "eglGetConfigAttrib");
-            eglGetCurrentContext_p = dlsym(dl_handle, "eglCurrentContext");
+            eglGetCurrentContext_p = dlsym(dl_handle, "eglGetCurrentContext");
             eglGetDisplay_p = dlsym(dl_handle, "eglGetDisplay");
-            eglGetError_p = dlsym(dl_handle, "eglGertError");
+            eglGetError_p = dlsym(dl_handle, "eglGetError");
             eglInitialize_p = dlsym(dl_handle, "eglInitialize");
             eglMakeCurrent_p = dlsym(dl_handle, "eglMakeCurrent");
             eglSwapBuffers_p = dlsym(dl_handle, "eglSwapBuffers");
             eglReleaseThread_p = dlsym(dl_handle, "eglReleaseThread");
-            eglSwapInterval_p = dlsym(dl_handle, "eglSwapTerminal");
+            eglSwapInterval_p = dlsym(dl_handle, "eglSwapInterval");
             eglTerminate_p = dlsym(dl_handle, "eglTerminate");
+            eglGetCurrentSurface_p = dlsym(dl_handle,"eglGetCurrentSurface");
             break;
     }
 }
@@ -838,7 +839,7 @@ bool stopSwapBuffers;
 void flipFrame() {
     switch (config_renderer) {
         case RENDERER_GL4ES: {
-            if (!eglSwapBuffers_p(potatoBridge.eglDisplay, eglGetCurrentSurface(EGL_DRAW))) {
+            if (!eglSwapBuffers_p(potatoBridge.eglDisplay, eglGetCurrentSurface_p(EGL_DRAW))) {
                 if (eglGetError_p() == EGL_BAD_SURFACE) {
                     stopSwapBuffers = true;
                     closeGLFWWindow();
@@ -901,7 +902,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
                     /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
                 );
                 if (success == EGL_FALSE) {
-                    printf("EGLBridge: Error: eglMakeCurrent() failed: %p\n", eglGetError());
+                    printf("EGLBridge: Error: eglMakeCurrent() failed: %p\n", eglGetError_p());
                 } else {
                     printf("EGLBridge: eglMakeCurrent() succeed!\n");
                 }
