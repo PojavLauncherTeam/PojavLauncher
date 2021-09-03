@@ -680,8 +680,9 @@ bool loadSymbols() {
             fileName = "libOSMesa_8.so";
             fileNameExt = "libOSMesa.so.8";
         case RENDERER_GL4ES:
-            fileName = "lbEGL.so";
-            fileNameExt = getenv("POJAVEXEC_EGL");
+            fileName = "libEGL.so";
+            char* eglLib = getenv("POJAVEXEC_EGL");
+            fileNameExt = eglLib == NULL?"":eglLib;
     }
     void* dl_handle = dlopen(fileNameExt,RTLD_NOLOAD|RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
     if (!dl_handle) {
