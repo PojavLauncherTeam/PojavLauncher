@@ -8,8 +8,8 @@
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <!-- Error messages -->
-    <string name="error_show_more">Näytä Lisää</string>
-    <string name="error_show_less">Näytä Vähemmän</string>
+    <string name="error_show_more">Näytä lisää</string>
+    <string name="error_show_less">Näytä vähemmän</string>
     <!-- Toast messages -->
     <!--
     <string name="toast_3">Exit</string>
@@ -17,6 +17,9 @@
     <!-- MCLauncherActivity: Tabs -->
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_options">Valinnat</string>
+    <string name="mcl_option_settings">Asetukset</string>
+    <string name="mcl_setting_category_general">Yleiset asetukset</string>
     <!-- Global strings -->
     <string name="global_warinng">Varoitus</string>
     <!-- MainActivity: strings -->
@@ -26,4 +29,6 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="main_options">Valinnat</string>
+    <string name="main_version">Versio:</string>
 </resources>
