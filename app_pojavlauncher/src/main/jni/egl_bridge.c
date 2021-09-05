@@ -785,9 +785,17 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         }
 
         ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow, 0, 0, vid);
-
-        eglBindAPI_p(EGL_OPENGL_ES_API);
-
+        {
+            EGLBoolean bindResult;
+            if (strncmp(renderer, "opengles3_desktopgl", 19) == 0) {
+                printf("EGLBridge: Binding to desktop OpenGL\n");
+                bindResult = eglBindAPI_p(EGL_OPENGL_API);
+            } else {
+                printf("EGLBridge: Binding to OpenGL ES\n");
+                bindResult = eglBindAPI_p(EGL_OPENGL_ES_API);
+            }
+            if(!bindResult) printf("EGLBridge: bind failed: %p\n", eglGetError_p());
+        }
         potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
 
         if (!potatoBridge.eglSurface) {

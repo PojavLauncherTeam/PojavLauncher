@@ -22,6 +22,6 @@
         <item>opengles3</item> <!-- gl4es 1.1.5 with OpenGL ES 3 -->
         <item>vulkan_zink</item>
         <item>opengles3_vgpu</item> <!-- vgpu with OpenGL ES 3 -->
-        <item>opengles3_angle_vulkan</item>
+        <item>opengles3_desktopgl_angle_vulkan</item>
     </string-array>
 </resources>
