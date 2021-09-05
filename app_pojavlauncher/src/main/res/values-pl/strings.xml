@@ -154,6 +154,7 @@
     <string name="customctrl_orientation">Orientacja</string>
     <string name="customctrl_background_color">Kolor tła</string>
     <string name="customctrl_corner_radius">Zaokrąglenie narożników</string>
+    <string name="customctrl_stroke_width">Szerokość obrysu</string>
     <string name="customctrl_dynamicpos">Dynamiczna pozycja</string>
     <string name="customctrl_dynamicpos_x">Dynamiczne X</string>
     <string name="customctrl_dynamicpos_y">Dynamiczne Y</string>
