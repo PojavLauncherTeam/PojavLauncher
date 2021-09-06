@@ -75,7 +75,8 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                     break;
                 case MSG_DROP_ITEM_BUTTON_CHECK:
-                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
+                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q);
+                    theHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
                  break;
 
             }
