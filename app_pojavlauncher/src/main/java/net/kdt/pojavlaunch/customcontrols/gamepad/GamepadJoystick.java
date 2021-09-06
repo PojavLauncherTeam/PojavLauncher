@@ -91,7 +91,7 @@ public class GamepadJoystick {
      */
     public float getDeadzone() {
         try{
-            return Math.max(device.getMotionRange(horizontalAxis).getFlat() * 1.8f, 0.15f);
+            return Math.max(device.getMotionRange(horizontalAxis).getFlat() * 1.9f, 0.2f);
         }catch (Exception e){
             return 0.2f;
         }
