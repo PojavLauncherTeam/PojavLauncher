@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
+import net.kdt.pojavlaunch.R;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -24,12 +25,10 @@ import org.lwjgl.glfw.CallbackBridge;
  */
 public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText {
     public TouchCharInput(@NonNull Context context) {
-        super(context);
-        setup();
+        this(context, null);
     }
     public TouchCharInput(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        setup();
+        this(context, attrs, R.attr.editTextStyle);
     }
     public TouchCharInput(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
