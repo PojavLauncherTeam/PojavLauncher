@@ -43,7 +43,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	private TextView mDeleteTextView;
 	private TextView mCloneTextView;
 
-	private ControlButton editedButton;
+	private final ControlButton editedButton;
 
 	public ActionPopupWindow(HandleView handleView, ControlButton button){
 		super(handleView);
