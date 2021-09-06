@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import net.kdt.pojavlaunch.SingleTapConfirm;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 
 public class ControlSubButton extends ControlButton {
@@ -50,7 +51,7 @@ public class ControlSubButton extends ControlButton {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!mModifiable){
+        if(!mModifiable || parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE){
             return super.onTouchEvent(event);
         }
 

@@ -59,6 +59,7 @@ public class ControlDrawer extends ControlButton {
     private void alignButtons(){
 
         if(buttons == null) return;
+        if(drawerData.orientation == ControlDrawerData.Orientation.FREE) return;
         for(int i=0; i < buttons.size(); ++i){
             switch (drawerData.orientation){
                 case RIGHT:
