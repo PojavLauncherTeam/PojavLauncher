@@ -20,7 +20,7 @@ public class GamepadJoystick {
     public static final int DIRECTION_SOUTH = 6;
     public static final int DIRECTION_SOUTH_EAST = 7;
 
-    private float deadzone;
+    private final InputDevice device;
 
     private final int verticalAxis;
     private final int horizontalAxis;
@@ -28,13 +28,9 @@ public class GamepadJoystick {
     public GamepadJoystick(int horizontalAxis, int verticalAxis, InputDevice device){
         this.verticalAxis = verticalAxis;
         this.horizontalAxis = horizontalAxis;
+        this.device = device;
 
-        //Some controllers aren't recognized as such by android, so we fallback to a default value of 0.2
-        //And some others don't report their MotionRange. This was the case with the xbox one series S controller.
 
-        //try { deadzone = Math.max(device.getMotionRange(verticalAxis).getFlat(), device.getMotionRange(horizontalAxis).getFlat()) * 1.9f; }
-        //catch (NullPointerException e){ deadzone = 0.2f; }
-        deadzone = 0.2f;
     }
 
     public double getAngleRadian(MotionEvent event){
@@ -71,6 +67,7 @@ public class GamepadJoystick {
         //to make it seem like there was no deadzone in the first place
 
         double magnitude = getMagnitude(event);
+        float deadzone = getDeadzone();
         if (magnitude < deadzone) return 0;
 
         return (float) ( (event.getAxisValue(axis) / magnitude) * ((magnitude - deadzone) / (1 - deadzone)) );
@@ -83,12 +80,20 @@ public class GamepadJoystick {
 
 
     public int getHeightDirection(MotionEvent event){
-        if(getMagnitude(event) <= deadzone) return DIRECTION_NONE;
+        if(getMagnitude(event) <= getDeadzone()) return DIRECTION_NONE;
         return ((int) ((getAngleDegree(event)+22.5)/45)) % 8;
     }
 
-
+    /**
+     * Get the dedzone from the Input device linked to this joystick
+     * Some controller aren't supported, fallback to 0.2 if that the case.
+     * @return the deadzone of the joystick
+     */
     public float getDeadzone() {
-        return deadzone;
+        try{
+            return Math.max(device.getMotionRange(horizontalAxis).getFlat() * 1.5f, 0.15f);
+        }catch (Exception e){
+            return 0.2f;
+        }
     }
 }

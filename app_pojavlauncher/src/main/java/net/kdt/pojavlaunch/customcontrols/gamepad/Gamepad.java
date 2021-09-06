@@ -46,7 +46,6 @@ public class Gamepad {
     private float lastVerticalValue = 0.0f;
 
     private final double mouseMaxAcceleration = 2f;
-    private double acceleration = 0.0f;
 
     private double mouseMagnitude;
     private double mouseAngle;
