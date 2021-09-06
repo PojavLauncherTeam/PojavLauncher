@@ -107,8 +107,7 @@ public class Gamepad {
             if(lastGrabbingState){
                 currentMap = gameMap;
                 pointerView.setVisibility(View.INVISIBLE);
-                //sensitivity in game is HARDWARE resolution dependent.
-                mouseSensitivity = 24 / gameActivity.sensitivityFactor;
+                mouseSensitivity = 18;
                 return;
             }
 
@@ -120,8 +119,8 @@ public class Gamepad {
             CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
             placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
             pointerView.setVisibility(View.VISIBLE);
-            //sensitivity in menu is MC resolution dependent
-            mouseSensitivity = 19 * gameActivity.scaleFactor;
+            //sensitivity in menu is MC and HARDWARE resolution dependent
+            mouseSensitivity = 19 * gameActivity.scaleFactor / gameActivity.sensitivityFactor;
         };
 
     }
