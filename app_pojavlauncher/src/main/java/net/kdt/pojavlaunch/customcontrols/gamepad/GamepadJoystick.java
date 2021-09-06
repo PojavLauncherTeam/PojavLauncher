@@ -85,13 +85,13 @@ public class GamepadJoystick {
     }
 
     /**
-     * Get the dedzone from the Input device linked to this joystick
+     * Get the deadzone from the Input device linked to this joystick
      * Some controller aren't supported, fallback to 0.2 if that the case.
      * @return the deadzone of the joystick
      */
     public float getDeadzone() {
         try{
-            return Math.max(device.getMotionRange(horizontalAxis).getFlat() * 1.5f, 0.15f);
+            return Math.max(device.getMotionRange(horizontalAxis).getFlat() * 1.8f, 0.15f);
         }catch (Exception e){
             return 0.2f;
         }
