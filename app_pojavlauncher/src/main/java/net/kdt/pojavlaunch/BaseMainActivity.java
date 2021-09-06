@@ -370,7 +370,7 @@ public class BaseMainActivity extends LoggableActivity {
                             if (isTouchInHotbar) {
                                 sendKeyPress(hudKeyHandled);
 
-                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, 350);
                                 CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 break;
                             }
