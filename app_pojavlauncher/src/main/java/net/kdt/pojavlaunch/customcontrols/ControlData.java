@@ -199,8 +199,8 @@ public class ControlData {
     }
 
     private static float calculate(String math) {
-        setExpression(math);
         if(builder.get() == null) bypassExpressionBuilder();
+        setExpression(math);
         return (float) builder.get().build().evaluate();
     }
 
