@@ -1,6 +1,10 @@
 package net.kdt.pojavlaunch.customcontrols;
 
 import android.util.*;
+
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -28,7 +32,14 @@ public class ControlData {
 
     // Internal usage only
     public boolean isHideable;
-    
+
+    private static WeakReference<ExpressionBuilder> builder;
+    private static WeakReference<Field> expression;
+    static {
+        bypassExpressionBuilder();
+    }
+
+
     /**
      * Both fields below are dynamic position data, auto updates
      * X and Y position, unlike the original one which uses fixed
@@ -188,20 +199,9 @@ public class ControlData {
     }
 
     private static float calculate(String math) {
-        return (float) new ExpressionBuilder(math)
-                .function(new Function("dp", 1) {
-                    @Override
-                    public double apply(double... args) {
-                        return Tools.pxToDp((float) args[0]);
-                    }
-                })
-                .function(new Function("px", 1) {
-                    @Override
-                    public double apply(double... args) {
-                        return Tools.dpToPx((float) args[0]);
-                    }
-                })
-                .build().evaluate();
+        setExpression(math);
+        if(builder.get() == null) bypassExpressionBuilder();
+        return (float) builder.get().build().evaluate();
     }
 
     private static int[] inflateKeycodeArray(int[] keycodes){
@@ -236,4 +236,43 @@ public class ControlData {
     public void setHeight(float heightInPx){
         height = Tools.pxToDp(heightInPx);
     }
+
+    /**
+     * Create a weak reference to a builder and its expression field.
+     * Although VERY bad practice it isn't slower due to saved GC time.
+     * The normal way requires us to create ONE builder and TWO functions for EACH button.
+     */
+    private static void bypassExpressionBuilder(){
+        ExpressionBuilder expressionBuilder = new ExpressionBuilder("1 + 1")
+                .function(new Function("dp", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.pxToDp((float) args[0]);
+                    }
+                })
+                .function(new Function("px", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.dpToPx((float) args[0]);
+                    }
+                });
+        builder = new WeakReference<>(expressionBuilder);
+        try {
+            expression = new WeakReference<>(builder.get().getClass().getDeclaredField("expression"));
+            expression.get().setAccessible(true);
+            expression.get().set(expression.get(), expression.get().getModifiers() & ~Modifier.FINAL);
+        }catch (Exception ignored){}
+    }
+
+    /**
+     * wrapper for the WeakReference to the expressionField.
+     * @param stringExpression the expression to set.
+     */
+    private static void setExpression(String stringExpression){
+        try {
+            expression.get().set(builder.get(), (String) stringExpression);
+        }catch (IllegalAccessException e){}
+    }
+
+
 }
