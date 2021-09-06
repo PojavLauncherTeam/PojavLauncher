@@ -155,6 +155,7 @@
     <string name="customctrl_background_color">Kolor tła</string>
     <string name="customctrl_corner_radius">Zaokrąglenie narożników</string>
     <string name="customctrl_stroke_width">Szerokość obrysu</string>
+    <string name="customctrl_stroke_color">Kolor obrysu</string>
     <string name="customctrl_dynamicpos">Dynamiczna pozycja</string>
     <string name="customctrl_dynamicpos_x">Dynamiczne X</string>
     <string name="customctrl_dynamicpos_y">Dynamiczne Y</string>
@@ -190,6 +191,7 @@
     <string name="mcl_setting_title_mousespeed">Prędkość myszy</string>
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszy</string>
     <string name="customctrl_passthru">Przekaz sygnału myszy</string>
+    <string name="customctrl_swipeable">Przesuwalny</string>
     <string name="customctrl_rounded">Zaokrąglony</string>
     <string name="memory_warning_msg">Bieżąca ilość wolnej pamięci RAM (%d) jest mniejsza od przydzielonej pamięci RAM (%d), co może prowadzić do awarii. Zmień ilość, jeśli gra ulegnie awarii.</string>
     <string name="mcl_memory_allocation">Przydział pamięci</string>
