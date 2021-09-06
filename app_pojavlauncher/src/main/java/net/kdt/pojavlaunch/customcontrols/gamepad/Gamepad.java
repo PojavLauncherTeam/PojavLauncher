@@ -57,7 +57,7 @@ public class Gamepad {
 
     private boolean lastGrabbingState = true;
     private final boolean mModifierDigitalTriggers;
-    private boolean mModifierSwappedAxis = false; //Triggers and right stick axis are swapped.
+    private boolean mModifierSwappedAxis = true; //Triggers and right stick axis are swapped.
 
     private final Handler inputHandler = new Handler(Looper.getMainLooper());
     private final Runnable switchStateRunnable;
@@ -65,10 +65,14 @@ public class Gamepad {
     public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
         //Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
         for(InputDevice.MotionRange range : inputDevice.getMotionRanges()){
-            if(range.getAxis() == MotionEvent.AXIS_RX || range.getAxis() == MotionEvent.AXIS_RY){
-                mModifierSwappedAxis = true;
+            if(range.getAxis() == MotionEvent.AXIS_RTRIGGER
+                    || range.getAxis() == MotionEvent.AXIS_LTRIGGER
+                    || range.getAxis() == MotionEvent.AXIS_GAS
+                    || range.getAxis() == MotionEvent.AXIS_BRAKE){
+                mModifierSwappedAxis = false;
                 break;
             }
+
         }
 
         leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
@@ -193,8 +197,14 @@ public class Gamepad {
 
     private void updateAnalogTriggers(MotionEvent event){
         if(!mModifierDigitalTriggers){
-            getCurrentMap().TRIGGER_LEFT.update((event.getAxisValue(mModifierSwappedAxis ? MotionEvent.AXIS_Z : MotionEvent.AXIS_LTRIGGER) > 0.5) || (event.getAxisValue(MotionEvent.AXIS_BRAKE) > 0.5));
-            getCurrentMap().TRIGGER_RIGHT.update((event.getAxisValue(mModifierSwappedAxis ? MotionEvent.AXIS_RZ : MotionEvent.AXIS_RTRIGGER) > 0.5) || (event.getAxisValue(MotionEvent.AXIS_GAS) > 0.5));
+            getCurrentMap().TRIGGER_LEFT.update(
+                    (event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5)
+                            || (event.getAxisValue(MotionEvent.AXIS_BRAKE) > 0.5)
+                            || (mModifierSwappedAxis &&(event.getAxisValue(MotionEvent.AXIS_Z) > 0.5)) );
+            getCurrentMap().TRIGGER_RIGHT.update(
+                    (event.getAxisValue( MotionEvent.AXIS_RTRIGGER) > 0.5)
+                            || (event.getAxisValue(MotionEvent.AXIS_GAS) > 0.5)
+                            || (mModifierSwappedAxis && event.getAxisValue(MotionEvent.AXIS_RZ) > 0.5) );
         }
     }
 
