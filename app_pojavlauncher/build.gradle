@@ -69,7 +69,7 @@ android {
         versionName getVersionName()
         multiDexEnabled true //important
         ndk {
-            abiFilters 'arm64-v8a'
+            abiFilters 'arm64-v8a', 'x86_64'
         }
     }
 
