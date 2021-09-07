@@ -317,6 +317,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 PREF_NOTCH_SIZE = getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0).width();
             }catch (Exception e){
                 Log.i("NOTCH DETECTION", "No notch detected, or the device if in split screen mode");
+                PREF_NOTCH_SIZE = -1;
             }
             Tools.updateWindowSize(this);
         }

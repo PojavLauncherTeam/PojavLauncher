@@ -29,7 +29,9 @@ import org.lwjgl.glfw.*;
 import android.view.*;
 import android.widget.Toast;
 
+import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
+import static android.os.Build.VERSION_CODES.Q;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
@@ -79,7 +81,7 @@ public final class Tools {
     public static void initContextConstants(Context ctx){
         DIR_DATA = ctx.getFilesDir().getParent();
         MULTIRT_HOME = DIR_DATA+"/runtimes";
-        if(Build.VERSION.SDK_INT >= 29) {
+        if(SDK_INT >= 29) {
             DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
         }else{
             DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
@@ -338,11 +340,12 @@ public final class Tools {
     public static DisplayMetrics getDisplayMetrics(Activity ctx) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && (ctx.isInMultiWindowMode() || ctx.isInPictureInPictureMode())){
+        if(SDK_INT >= Build.VERSION_CODES.N && (ctx.isInMultiWindowMode() || ctx.isInPictureInPictureMode())
+        || PREF_NOTCH_SIZE == -1 ){
             //For devices with free form/split screen, we need window size, not screen size.
             displayMetrics = ctx.getResources().getDisplayMetrics();
         }else{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (SDK_INT >= Build.VERSION_CODES.R) {
                 ctx.getDisplay().getRealMetrics(displayMetrics);
             } else {
                  ctx.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
@@ -828,7 +831,7 @@ public final class Tools {
     }
 
     public static void ignoreNotch(boolean shouldIgnore, Activity ctx){
-        if (Build.VERSION.SDK_INT >= P) {
+        if (SDK_INT >= P) {
             if (shouldIgnore) {
                 ctx.getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
             } else {
