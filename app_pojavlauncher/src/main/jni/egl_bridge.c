@@ -686,9 +686,9 @@ bool loadSymbols() {
             fileNameExt = eglLib == NULL?"":eglLib;
             break;
     }
-    void* dl_handle = dlopen(fileNameExt,RTLD_NOLOAD|RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
+    void* dl_handle = dlopen(fileNameExt,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
     if (!dl_handle) {
-        dl_handle = dlopen(fileName,RTLD_NOLOAD|RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
+        dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
         printf("DlLoader: using default %s\n", fileName);
     } else {
         printf("DlLoader: using external %s\n", fileNameExt);
