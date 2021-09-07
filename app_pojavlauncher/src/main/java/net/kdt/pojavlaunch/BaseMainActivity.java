@@ -479,6 +479,7 @@ public class BaseMainActivity extends LoggableActivity {
                             CallbackBridge.mouseY = (int) mouse_y;
                             if(!CallbackBridge.isGrabbing()){
                                 view.releasePointerCapture();
+                                view.clearFocus();
                             }
 
                             if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
