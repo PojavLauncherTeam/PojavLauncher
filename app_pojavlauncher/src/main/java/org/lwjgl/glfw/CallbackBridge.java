@@ -79,6 +79,11 @@ public class CallbackBridge {
         // sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
     }
 
+    public static void sendChar(char keychar, int modifiers){
+        nativeSendCharMods(keychar,modifiers);
+        nativeSendChar(keychar);
+    }
+
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
         DEBUG_STRING.append("MouseKey=").append(button).append(", down=").append(isDown).append("\n");
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
