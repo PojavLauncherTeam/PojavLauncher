@@ -47,7 +47,7 @@
         app:layout_constraintWidth_max="480dp"
         android:layout_height="300dp"
 
-        android:background="#272727"
+        android:background="@drawable/menu_background"
         android:translationZ="-1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -259,12 +259,12 @@ public class ControlData {
     private static void setExpression(String stringExpression){
         if(builder.get() == null) bypassExpressionBuilder();
         try {
-            expression.get().set(builder.get(), (String) stringExpression);
+            expression.get().set(builder.get(), stringExpression);
         }catch (IllegalAccessException e){}
     }
 
     /**
-     * Build a shared conversion map without the view dependent values
+     * Build a shared conversion map without the ControlData dependent values
      * You need to set the view dependent values before using it.
      */
     private static void buildConversionMap() {
@@ -285,7 +285,9 @@ public class ControlData {
     }
 
     /**
-     * Fill the conversionMap with
+     * Fill the conversionMap with controlData dependent values.
+     * The returned valueMap should NOT be kept in memory.
+     * @return the valueMap to use.
      */
     private Map<String, String> fillConversionMap(){
         ArrayMap<String, String> valueMap = conversionMap.get();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="net.kdt.pojavlaunch">
 
     <uses-feature android:glEsVersion="0x00020000"/>
@@ -35,6 +36,22 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ImportControlActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible"
+            android:configChanges="keyboard|keyboardHidden"
+            >
+
+            <intent-filter android:scheme="content"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/json"/>
+                <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
 
