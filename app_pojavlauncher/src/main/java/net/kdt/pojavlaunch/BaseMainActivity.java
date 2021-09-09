@@ -97,7 +97,7 @@ public class BaseMainActivity extends LoggableActivity {
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
     private GestureDetector gestureDetector;
-    private GestureDetector doubleTapDetector;
+    private DoubleTapDetector doubleTapDetector;
 
     private TextView debugText;
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
@@ -165,7 +165,7 @@ public class BaseMainActivity extends LoggableActivity {
 
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
-            doubleTapDetector = new GestureDetector(this, new DoubleTapConfirm());
+            doubleTapDetector = new DoubleTapDetector();
 
 
             // Menu
@@ -317,6 +317,9 @@ public class BaseMainActivity extends LoggableActivity {
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
                 private int lastHotbarKey = -1;
+                /*
+                 * Tells if a double tap happened [MOUSE GRAB ONLY]. Doesn't tell where though.
+                 */
                 private boolean hasDoubleTapped = false;
                 /*
                  * Events can start with only a move instead of an pointerDown
@@ -425,7 +428,15 @@ public class BaseMainActivity extends LoggableActivity {
                             scrollInitialY = CallbackBridge.mouseY;
                             //Checking if we are pressing the hotbar to select the item
                             hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
-                            if(hudKeyHandled != -1) sendKeyPress(hudKeyHandled);
+                            if(hudKeyHandled != -1){
+                                sendKeyPress(hudKeyHandled);
+                                if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
+                                    //Prevent double tapping Event on two different slots
+                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F);
+                                }
+                            }
+
+                            lastHotbarKey = hudKeyHandled;
                             break;
 
                         case MotionEvent.ACTION_MOVE:
