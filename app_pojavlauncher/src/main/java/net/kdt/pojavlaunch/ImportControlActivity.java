@@ -10,8 +10,16 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.JsonSyntaxException;
+
+import net.kdt.pojavlaunch.customcontrols.CustomControls;
+import net.kdt.pojavlaunch.customcontrols.LayoutConverter;
 import net.kdt.pojavlaunch.utils.FileUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +32,7 @@ public class ImportControlActivity extends Activity {
 
     private Uri mUriData;
     private boolean mHasIntentChanged = true;
+    private volatile boolean mIsFileVerified = false;
 
     private EditText mEditText;
 
@@ -48,44 +57,56 @@ public class ImportControlActivity extends Activity {
     }
 
     /**
-     * Update if the intent changed
+     * Update all over again if the intent changed.
      */
     @Override
     protected void onPostResume() {
         super.onPostResume();
         if(!mHasIntentChanged) return;
+        mIsFileVerified = false;
         getUriData();
         //Set the name of the file in the editText.
         String editTextString = mUriData.toString().replaceAll("%..", "/");
         editTextString = editTextString.substring(editTextString.lastIndexOf('/') + 1);
         mEditText.setText(trimFileName(editTextString));
         mHasIntentChanged = false;
+
+        //Import and verify thread
+        //Kill the app if the file isn't valid.
+        new Thread(() -> {
+            importControlFile("TMP_IMPORT_FILE");
+
+            if(verify())mIsFileVerified = true;
+            else runOnUiThread(() -> {
+                Toast.makeText(
+                        ImportControlActivity.this,
+                        "Invalid or corrupted file",
+                        Toast.LENGTH_SHORT).show();
+                finishAndRemoveTask();
+            });
+        }).start();
     }
 
     /**
      * Start the import.
      * @param view the view which called the function
-     * @return wether the import has started
      */
-    public boolean startImport(View view) {
+    public void startImport(View view) {
         String fileName = trimFileName(mEditText.getText().toString());
         //Step 1 check for suffixes.
         if(!isFileNameValid(fileName)){
             Toast.makeText(this, "Invalid name or file already exists", Toast.LENGTH_SHORT).show();
-            return false;
+            return;
+        }
+        if(!mIsFileVerified){
+            Toast.makeText(this, "The file is being verified, please wait and retry", Toast.LENGTH_LONG).show();
+            return;
         }
 
         Toast.makeText(getApplicationContext(), "Starting importation", Toast.LENGTH_SHORT).show();
 
-        //Import thread
-        new Thread(() -> {
-            importControlFile(fileName);
-            runOnUiThread(() -> {
-                Toast.makeText(getApplicationContext(), "Importation finished", Toast.LENGTH_SHORT).show();
-                finishAndRemoveTask();
-            });
-        }).start();
-        return true;
+        new File(Tools.CTRLMAP_PATH + "/TMP_IMPORT_FILE.json").renameTo(new File(Tools.CTRLMAP_PATH + "/" + fileName + ".json"));
+        finishAndRemoveTask();
     }
 
     /**
@@ -149,6 +170,23 @@ public class ImportControlActivity extends Activity {
         try {
             mUriData = getIntent().getClipData().getItemAt(0).getUri();
         }catch (Exception ignored){}
+    }
+
+    /**
+     * Verify if the control file is valid
+     * @return Whether the control file is valid
+     */
+    private static boolean verify(){
+        try{
+            String jsonLayoutData = Tools.read(Tools.CTRLMAP_PATH + "/TMP_IMPORT_FILE.json");
+            JSONObject layoutJobj = new JSONObject(jsonLayoutData);
+            return layoutJobj.has("version") && layoutJobj.has("mControlDataList");
+
+        }catch (JSONException | IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
 }
