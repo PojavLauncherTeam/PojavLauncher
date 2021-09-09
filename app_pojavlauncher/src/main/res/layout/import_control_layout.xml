@@ -57,7 +57,7 @@
             android:background="@drawable/mine_button_background"
             android:onClick="startImport"
 
-            android:text="IMPORT"
+            android:text="@string/import_control_import_button"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/editText_import_control_file_name"

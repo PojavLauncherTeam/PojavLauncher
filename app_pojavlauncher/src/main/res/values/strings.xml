@@ -160,6 +160,13 @@
     <string name="control_customkey">Send custom keycode</string>
     <string name="control_scaleup">Scale up</string>
     <string name="control_scaledown">Scale down</string>
+
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_invalid_file">Invalid or corrupted file</string>
+    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">File is being verified, please wait and try again…</string>
+    <string name="import_control_invalid_name">Invalid name or file already exists</string>
+    <string name="import_control_done">Importation done</string>
 <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>

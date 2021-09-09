@@ -80,7 +80,7 @@ public class ImportControlActivity extends Activity {
             else runOnUiThread(() -> {
                 Toast.makeText(
                         ImportControlActivity.this,
-                        "Invalid or corrupted file",
+                        getText(R.string.import_control_invalid_file),
                         Toast.LENGTH_SHORT).show();
                 finishAndRemoveTask();
             });
@@ -95,17 +95,16 @@ public class ImportControlActivity extends Activity {
         String fileName = trimFileName(mEditText.getText().toString());
         //Step 1 check for suffixes.
         if(!isFileNameValid(fileName)){
-            Toast.makeText(this, "Invalid name or file already exists", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getText(R.string.import_control_invalid_name), Toast.LENGTH_SHORT).show();
             return;
         }
         if(!mIsFileVerified){
-            Toast.makeText(this, "The file is being verified, please wait and retry", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getText(R.string.import_control_verifying_file), Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(getApplicationContext(), "Starting importation", Toast.LENGTH_SHORT).show();
-
         new File(Tools.CTRLMAP_PATH + "/TMP_IMPORT_FILE.json").renameTo(new File(Tools.CTRLMAP_PATH + "/" + fileName + ".json"));
+        Toast.makeText(getApplicationContext(), getText(R.string.import_control_done), Toast.LENGTH_SHORT).show();
         finishAndRemoveTask();
     }
 
