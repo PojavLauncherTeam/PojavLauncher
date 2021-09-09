@@ -42,6 +42,7 @@
         <activity android:name=".ImportControlActivity"
             android:exported="true"
             android:windowSoftInputMode="stateVisible"
+            android:launchMode="singleInstance"
             android:configChanges="keyboard|keyboardHidden"
             >
 
@@ -51,6 +52,7 @@
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="application/json"/>
+                <data android:mimeType="text/json"/>
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
