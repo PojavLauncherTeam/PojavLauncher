@@ -659,9 +659,10 @@ public class BaseMainActivity extends LoggableActivity {
 
         //Filtering useless events by order of probability
         if((event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
-        if(event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN) return true;
-        if(event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
-        if(event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP) return false;
+        int eventKeycode = event.getKeyCode();
+        if(eventKeycode == KeyEvent.KEYCODE_UNKNOWN) return true;
+        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
+        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_UP) return false;
         if(event.getRepeatCount() != 0) return true;
         if(event.getAction() == KeyEvent.ACTION_MULTIPLE) return true;
 
