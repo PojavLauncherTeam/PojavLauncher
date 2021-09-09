@@ -8,19 +8,16 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
-import android.view.inputmethod.*;
 import android.widget.*;
 
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
-import java.lang.reflect.*;
 import java.util.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
@@ -100,6 +97,7 @@ public class BaseMainActivity extends LoggableActivity {
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
     private GestureDetector gestureDetector;
+    private GestureDetector doubleTapDetector;
 
     private TextView debugText;
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
@@ -167,6 +165,8 @@ public class BaseMainActivity extends LoggableActivity {
 
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+            doubleTapDetector = new GestureDetector(this, new DoubleTapConfirm());
+
 
             // Menu
             drawerLayout = findViewById(R.id.main_drawer_options);
@@ -316,6 +316,8 @@ public class BaseMainActivity extends LoggableActivity {
 
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
+                private int lastHotbarKey = -1;
+                private boolean hasDoubleTapped = false;
                 /*
                  * Events can start with only a move instead of an pointerDown
                  * It is due to the mouse passthrough option bundled with the control button.
@@ -345,14 +347,16 @@ public class BaseMainActivity extends LoggableActivity {
 
                     //Getting scaled position from the event
                     if(!CallbackBridge.isGrabbing()) {
+                        hasDoubleTapped = false;
                         mouse_x =  (e.getX() * scaleFactor);
                         mouse_y =  (e.getY() * scaleFactor);
-                    }
-
-                    int hudKeyHandled;
-                    if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)){
-                        CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
-                        return true;
+                        //One android click = one MC click
+                        if(gestureDetector.onTouchEvent(e)){
+                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
+                            return true;
+                        }
+                    }else{
+                        hasDoubleTapped = doubleTapDetector.onTouchEvent(e);
                     }
 
                     switch (e.getActionMasked()) {
@@ -365,14 +369,19 @@ public class BaseMainActivity extends LoggableActivity {
                             prevX =  e.getX();
                             prevY =  e.getY();
 
-
+                            int hudKeyHandled;
                             hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
                             isTouchInHotbar = hudKeyHandled != -1;
                             if (isTouchInHotbar) {
                                 sendKeyPress(hudKeyHandled);
+                                if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
+                                    //Prevent double tapping Event on two different slots
+                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F);
+                                }
 
                                 theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, 350);
                                 CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                lastHotbarKey = hudKeyHandled;
                                 break;
                             }
 
@@ -383,6 +392,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 initialY = mouse_y;
                                 if(!isTouchInHotbar) theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                             }
+                            lastHotbarKey = hudKeyHandled;
                             break;
 
                         case MotionEvent.ACTION_UP: // 1
