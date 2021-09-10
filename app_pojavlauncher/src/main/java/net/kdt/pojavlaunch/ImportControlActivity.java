@@ -2,18 +2,16 @@ package net.kdt.pojavlaunch;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.google.gson.JsonSyntaxException;
-
-import net.kdt.pojavlaunch.customcontrols.CustomControls;
-import net.kdt.pojavlaunch.customcontrols.LayoutConverter;
 import net.kdt.pojavlaunch.utils.FileUtils;
 
 import org.json.JSONException;
@@ -65,10 +63,7 @@ public class ImportControlActivity extends Activity {
         if(!mHasIntentChanged) return;
         mIsFileVerified = false;
         getUriData();
-        //Set the name of the file in the editText.
-        String editTextString = mUriData.toString().replaceAll("%..", "/");
-        editTextString = editTextString.substring(editTextString.lastIndexOf('/') + 1);
-        mEditText.setText(trimFileName(editTextString));
+        mEditText.setText(getNameFromURI(mUriData));
         mHasIntentChanged = false;
 
         //Import and verify thread
@@ -186,6 +181,14 @@ public class ImportControlActivity extends Activity {
             return false;
         }
 
+    }
+
+    public String getNameFromURI(Uri uri) {
+        Cursor c = getContentResolver().query(uri, null, null, null, null);
+        c.moveToFirst();
+        String fileName = c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+        c.close();
+        return trimFileName(fileName);
     }
 
 }
