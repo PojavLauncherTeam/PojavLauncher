@@ -162,6 +162,7 @@
     <string name="control_scaledown">Scale down</string>
 
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import controls</string>
     <string name="import_control_invalid_file">Invalid or corrupted file</string>
     <string name="import_control_import_button">import controls</string>
     <string name="import_control_verifying_file">File is being verified, please wait and try again…</string>

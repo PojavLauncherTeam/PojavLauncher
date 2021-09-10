@@ -47,6 +47,7 @@
             >
 
             <intent-filter android:scheme="content"
+                android:label="@string/import_control_label"
                 tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW"/>
                 <action android:name="android.intent.action.SEND"/>
