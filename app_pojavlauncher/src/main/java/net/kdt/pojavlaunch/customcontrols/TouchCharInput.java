@@ -52,7 +52,6 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
             CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
         }
         for(int i=start, count = 0; count < lengthAfter; ++i){
-            //I didn't know F25 existed before that. I just need a full fat keycode for mc 1.13+
             CallbackBridge.sendChar(text.charAt(i), 0);
             ++count;
         }
