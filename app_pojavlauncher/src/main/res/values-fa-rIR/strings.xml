@@ -66,7 +66,7 @@
     <string name="mcl_setting_title_ignore_notch">حفره دوربین را نادیده بگیر</string>
     <string name="mcl_setting_subtitle_ignore_notch">حفره دوربین را نادیده می‌گیرد و صفحه زیر آن را گسترش می‌دهد.\nتجربه کنترل بهتری به شما می‌دهد.</string>
     <string name="mcl_setting_title_resolution_scaler">تغییر مقیاس رزولوشن</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">به شنا اجازه می‌دهد رزولوشن (کیفیت) بازی را کاهش دهید. 100% به معنای کیفیت تمام صفحه است</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">به شما اجازه می‌دهد رزولوشن (کیفیت) بازی را کاهش دهید. 100% به معنای کیفیت تمام صفحه است</string>
     <string name="mcl_setting_title_longpresstrigger">زمان مورد نیاز برای فعال کردن فشردن طولانی</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغییر زمان برای فعال شدن فشردن طولانی جهت کَندَن بلاک و دراپ کردن آیتم.</string>
     <string name="mcl_setting_title_backtorightmouse">دکمه برگشت به عنوان راست کلیک ماوس</string>
@@ -168,7 +168,7 @@
     <string name="main_version">ورژن:</string>
     <string name="main_nocrash">هیچ کرشی شناسایی نشد</string>
     <string name="main_nolog">بدون لاگ.</string>
-    <string name="main_no_news_feed">ناتوانی در دریافت اخبار!</string>
+    <string name="main_no_news_feed">خطا در دریافت اخبار!</string>
     <string name="auto_ram_subtitle">تنظیم‌کننده اتوماتیک رم را فعال می‌کند</string>
     <string name="auto_ram_title">رم اتوماتیک</string>
     <string name="autoram_info_msg">مموری تنظیم شد روی %d مگابایت</string>
