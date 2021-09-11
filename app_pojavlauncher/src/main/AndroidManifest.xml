@@ -15,8 +15,8 @@
         android:name=".PojavApplication"
         android:theme="@style/AppTheme"
         android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher"
-        android:roundIcon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:resizeableActivity="true"
         android:hasFragileUserData="true"
         android:allowNativeHeapPointerTagging="false">
