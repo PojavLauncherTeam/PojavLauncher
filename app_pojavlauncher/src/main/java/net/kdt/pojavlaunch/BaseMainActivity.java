@@ -492,59 +492,57 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
-                            if(e.getHistorySize() > 0) {
-                                mouse_x += (e.getX()*scaleFactor);
-                                mouse_y += (e.getY()*scaleFactor);
-                            }
-                            CallbackBridge.mouseX = (int) mouse_x;
-                            CallbackBridge.mouseY = (int) mouse_y;
-                            if(!CallbackBridge.isGrabbing()){
-                                view.releasePointerCapture();
-                                view.clearFocus();
-                            }
+                        mouse_x += (e.getX()*scaleFactor);
+                        mouse_y += (e.getY()*scaleFactor);
+                        CallbackBridge.mouseX = (int) mouse_x;
+                        CallbackBridge.mouseY = (int) mouse_y;
+                        if(!CallbackBridge.isGrabbing()){
+                            view.releasePointerCapture();
+                            view.clearFocus();
+                        }
 
-                            if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
-                                StringBuilder builder = new StringBuilder();
-                                try {
-                                    builder.append("PointerCapture debug\n");
-                                    builder.append("MotionEvent=").append(e.getActionMasked()).append("\n");
-                                    builder.append("PressingBtn=").append(MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState())).append("\n\n");
+                        if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
+                            StringBuilder builder = new StringBuilder();
+                            try {
+                                builder.append("PointerCapture debug\n");
+                                builder.append("MotionEvent=").append(e.getActionMasked()).append("\n");
+                                builder.append("PressingBtn=").append(MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState())).append("\n\n");
 
-                                    builder.append("PointerX=").append(e.getX()).append("\n");
-                                    builder.append("PointerY=").append(e.getY()).append("\n");
-                                    builder.append("RawX=").append(e.getRawX()).append("\n");
-                                    builder.append("RawY=").append(e.getRawY()).append("\n\n");
+                                builder.append("PointerX=").append(e.getX()).append("\n");
+                                builder.append("PointerY=").append(e.getY()).append("\n");
+                                builder.append("RawX=").append(e.getRawX()).append("\n");
+                                builder.append("RawY=").append(e.getRawY()).append("\n\n");
 
-                                    builder.append("XPos=").append(mouse_x).append("\n");
-                                    builder.append("YPos=").append(mouse_y).append("\n\n");
-                                    builder.append("MovingX=").append(getMoving(e.getX(), true)).append("\n");
-                                    builder.append("MovingY=").append(getMoving(e.getY(), false)).append("\n");
-                                } catch (Throwable th) {
-                                    debugErrored = true;
-                                    builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
-                                } finally {
-                                    debugText.setText(builder.toString());
-                                    builder.setLength(0);
-                                }
-                            }
-                            debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                            CallbackBridge.DEBUG_STRING.setLength(0);
-                            switch (e.getActionMasked()) {
-                                case MotionEvent.ACTION_MOVE:
-                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    return true;
-                                case MotionEvent.ACTION_BUTTON_PRESS:
-                                    return sendMouseButtonUnconverted(e.getActionButton(), true);
-                                case MotionEvent.ACTION_BUTTON_RELEASE:
-                                    return sendMouseButtonUnconverted(e.getActionButton(), false);
-                                case MotionEvent.ACTION_SCROLL:
-                                    CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
-                                    return true;
-                                default:
-                                    return false;
+                                builder.append("XPos=").append(mouse_x).append("\n");
+                                builder.append("YPos=").append(mouse_y).append("\n\n");
+                                builder.append("MovingX=").append(getMoving(e.getX(), true)).append("\n");
+                                builder.append("MovingY=").append(getMoving(e.getY(), false)).append("\n");
+                            } catch (Throwable th) {
+                                debugErrored = true;
+                                builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
+                            } finally {
+                                debugText.setText(builder.toString());
+                                builder.setLength(0);
                             }
                         }
-                    });
+                        debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                        CallbackBridge.DEBUG_STRING.setLength(0);
+                        switch (e.getActionMasked()) {
+                            case MotionEvent.ACTION_MOVE:
+                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                return true;
+                            case MotionEvent.ACTION_BUTTON_PRESS:
+                                return sendMouseButtonUnconverted(e.getActionButton(), true);
+                            case MotionEvent.ACTION_BUTTON_RELEASE:
+                                return sendMouseButtonUnconverted(e.getActionButton(), false);
+                            case MotionEvent.ACTION_SCROLL:
+                                CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
             }
             minecraftGLView.setOnTouchListener(glTouchListener);
             minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
