@@ -8,19 +8,16 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
 import android.view.View.*;
-import android.view.inputmethod.*;
 import android.widget.*;
 
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import java.io.*;
-import java.lang.reflect.*;
 import java.util.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
@@ -75,7 +72,8 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                     break;
                 case MSG_DROP_ITEM_BUTTON_CHECK:
-                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, true);
+                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q);
+                    theHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
                  break;
 
             }
@@ -99,6 +97,7 @@ public class BaseMainActivity extends LoggableActivity {
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
     private GestureDetector gestureDetector;
+    private DoubleTapDetector doubleTapDetector;
 
     private TextView debugText;
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
@@ -166,6 +165,8 @@ public class BaseMainActivity extends LoggableActivity {
 
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+            doubleTapDetector = new DoubleTapDetector();
+
 
             // Menu
             drawerLayout = findViewById(R.id.main_drawer_options);
@@ -315,6 +316,11 @@ public class BaseMainActivity extends LoggableActivity {
 
             glTouchListener = new OnTouchListener(){
                 private boolean isTouchInHotbar = false;
+                private int lastHotbarKey = -1;
+                /*
+                 * Tells if a double tap happened [MOUSE GRAB ONLY]. Doesn't tell where though.
+                 */
+                private boolean hasDoubleTapped = false;
                 /*
                  * Events can start with only a move instead of an pointerDown
                  * It is due to the mouse passthrough option bundled with the control button.
@@ -344,14 +350,16 @@ public class BaseMainActivity extends LoggableActivity {
 
                     //Getting scaled position from the event
                     if(!CallbackBridge.isGrabbing()) {
+                        hasDoubleTapped = false;
                         mouse_x =  (e.getX() * scaleFactor);
                         mouse_y =  (e.getY() * scaleFactor);
-                    }
-
-                    int hudKeyHandled;
-                    if (!CallbackBridge.isGrabbing() && gestureDetector.onTouchEvent(e)){
-                        CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
-                        return true;
+                        //One android click = one MC click
+                        if(gestureDetector.onTouchEvent(e)){
+                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
+                            return true;
+                        }
+                    }else{
+                        hasDoubleTapped = doubleTapDetector.onTouchEvent(e);
                     }
 
                     switch (e.getActionMasked()) {
@@ -364,14 +372,19 @@ public class BaseMainActivity extends LoggableActivity {
                             prevX =  e.getX();
                             prevY =  e.getY();
 
-
+                            int hudKeyHandled;
                             hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
                             isTouchInHotbar = hudKeyHandled != -1;
                             if (isTouchInHotbar) {
                                 sendKeyPress(hudKeyHandled);
+                                if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
+                                    //Prevent double tapping Event on two different slots
+                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F);
+                                }
 
-                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, 350);
                                 CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                lastHotbarKey = hudKeyHandled;
                                 break;
                             }
 
@@ -382,6 +395,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 initialY = mouse_y;
                                 if(!isTouchInHotbar) theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                             }
+                            lastHotbarKey = hudKeyHandled;
                             break;
 
                         case MotionEvent.ACTION_UP: // 1
@@ -414,7 +428,15 @@ public class BaseMainActivity extends LoggableActivity {
                             scrollInitialY = CallbackBridge.mouseY;
                             //Checking if we are pressing the hotbar to select the item
                             hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
-                            if(hudKeyHandled != -1) sendKeyPress(hudKeyHandled);
+                            if(hudKeyHandled != -1){
+                                sendKeyPress(hudKeyHandled);
+                                if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
+                                    //Prevent double tapping Event on two different slots
+                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F);
+                                }
+                            }
+
+                            lastHotbarKey = hudKeyHandled;
                             break;
 
                         case MotionEvent.ACTION_MOVE:
@@ -470,58 +492,57 @@ public class BaseMainActivity extends LoggableActivity {
 
                     @Override
                     public boolean onCapturedPointer (View view, MotionEvent e) {
-                            if(e.getHistorySize() > 0) {
-                                mouse_x += (e.getX()*scaleFactor);
-                                mouse_y += (e.getY()*scaleFactor);
-                            }
-                            CallbackBridge.mouseX = (int) mouse_x;
-                            CallbackBridge.mouseY = (int) mouse_y;
-                            if(!CallbackBridge.isGrabbing()){
-                                view.releasePointerCapture();
-                            }
+                        mouse_x += (e.getX()*scaleFactor);
+                        mouse_y += (e.getY()*scaleFactor);
+                        CallbackBridge.mouseX = (int) mouse_x;
+                        CallbackBridge.mouseY = (int) mouse_y;
+                        if(!CallbackBridge.isGrabbing()){
+                            view.releasePointerCapture();
+                            view.clearFocus();
+                        }
 
-                            if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
-                                StringBuilder builder = new StringBuilder();
-                                try {
-                                    builder.append("PointerCapture debug\n");
-                                    builder.append("MotionEvent=").append(e.getActionMasked()).append("\n");
-                                    builder.append("PressingBtn=").append(MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState())).append("\n\n");
+                        if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
+                            StringBuilder builder = new StringBuilder();
+                            try {
+                                builder.append("PointerCapture debug\n");
+                                builder.append("MotionEvent=").append(e.getActionMasked()).append("\n");
+                                builder.append("PressingBtn=").append(MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState())).append("\n\n");
 
-                                    builder.append("PointerX=").append(e.getX()).append("\n");
-                                    builder.append("PointerY=").append(e.getY()).append("\n");
-                                    builder.append("RawX=").append(e.getRawX()).append("\n");
-                                    builder.append("RawY=").append(e.getRawY()).append("\n\n");
+                                builder.append("PointerX=").append(e.getX()).append("\n");
+                                builder.append("PointerY=").append(e.getY()).append("\n");
+                                builder.append("RawX=").append(e.getRawX()).append("\n");
+                                builder.append("RawY=").append(e.getRawY()).append("\n\n");
 
-                                    builder.append("XPos=").append(mouse_x).append("\n");
-                                    builder.append("YPos=").append(mouse_y).append("\n\n");
-                                    builder.append("MovingX=").append(getMoving(e.getX(), true)).append("\n");
-                                    builder.append("MovingY=").append(getMoving(e.getY(), false)).append("\n");
-                                } catch (Throwable th) {
-                                    debugErrored = true;
-                                    builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
-                                } finally {
-                                    debugText.setText(builder.toString());
-                                    builder.setLength(0);
-                                }
-                            }
-                            debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                            CallbackBridge.DEBUG_STRING.setLength(0);
-                            switch (e.getActionMasked()) {
-                                case MotionEvent.ACTION_MOVE:
-                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    return true;
-                                case MotionEvent.ACTION_BUTTON_PRESS:
-                                    return sendMouseButtonUnconverted(e.getActionButton(), true);
-                                case MotionEvent.ACTION_BUTTON_RELEASE:
-                                    return sendMouseButtonUnconverted(e.getActionButton(), false);
-                                case MotionEvent.ACTION_SCROLL:
-                                    CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
-                                    return true;
-                                default:
-                                    return false;
+                                builder.append("XPos=").append(mouse_x).append("\n");
+                                builder.append("YPos=").append(mouse_y).append("\n\n");
+                                builder.append("MovingX=").append(getMoving(e.getX(), true)).append("\n");
+                                builder.append("MovingY=").append(getMoving(e.getY(), false)).append("\n");
+                            } catch (Throwable th) {
+                                debugErrored = true;
+                                builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
+                            } finally {
+                                debugText.setText(builder.toString());
+                                builder.setLength(0);
                             }
                         }
-                    });
+                        debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                        CallbackBridge.DEBUG_STRING.setLength(0);
+                        switch (e.getActionMasked()) {
+                            case MotionEvent.ACTION_MOVE:
+                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                                return true;
+                            case MotionEvent.ACTION_BUTTON_PRESS:
+                                return sendMouseButtonUnconverted(e.getActionButton(), true);
+                            case MotionEvent.ACTION_BUTTON_RELEASE:
+                                return sendMouseButtonUnconverted(e.getActionButton(), false);
+                            case MotionEvent.ACTION_SCROLL:
+                                CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
             }
             minecraftGLView.setOnTouchListener(glTouchListener);
             minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
@@ -636,9 +657,10 @@ public class BaseMainActivity extends LoggableActivity {
 
         //Filtering useless events by order of probability
         if((event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
-        if(event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN) return true;
-        if(event.getAction() == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
-        if(event.getAction() == KeyEvent.KEYCODE_VOLUME_UP) return false;
+        int eventKeycode = event.getKeyCode();
+        if(eventKeycode == KeyEvent.KEYCODE_UNKNOWN) return true;
+        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
+        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_UP) return false;
         if(event.getRepeatCount() != 0) return true;
         if(event.getAction() == KeyEvent.ACTION_MULTIPLE) return true;
 

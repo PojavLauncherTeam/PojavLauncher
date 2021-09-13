@@ -53,8 +53,8 @@
 				android:layout_height="1dp"
 				android:background="@android:color/darker_gray"
 				android:ems="10"
-				android:imeOptions="flagNoFullscreen|flagNoExtractUi|flagNoPersonalizedLearning|actionSend"
-				android:inputType="textVisiblePassword"
+				android:imeOptions="flagNoFullscreen|flagNoExtractUi|flagNoPersonalizedLearning|actionDone"
+				android:inputType="textFilter|textImeMultiLine|textAutoComplete|textAutoCorrect"
 				tools:ignore="TouchTargetSizeCheck" />
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>

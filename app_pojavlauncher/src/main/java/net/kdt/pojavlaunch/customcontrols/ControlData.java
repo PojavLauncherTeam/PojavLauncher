@@ -1,6 +1,10 @@
 package net.kdt.pojavlaunch.customcontrols;
 
 import android.util.*;
+
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -28,7 +32,16 @@ public class ControlData {
 
     // Internal usage only
     public boolean isHideable;
-    
+
+    private static WeakReference<ExpressionBuilder> builder = new WeakReference<>(null);
+    private static WeakReference<Field> expression = new WeakReference<>(null);
+    private static WeakReference<ArrayMap<String , String>> conversionMap = new WeakReference<>(null);
+    static {
+        bypassExpressionBuilder();
+        buildConversionMap();
+    }
+
+
     /**
      * Both fields below are dynamic position data, auto updates
      * X and Y position, unlike the original one which uses fixed
@@ -167,41 +180,16 @@ public class ControlData {
 
     
     public float insertDynamicPos(String dynamicPos) {
-        // Values in the map below may be always changed
-        Map<String, String> keyValueMap = new ArrayMap<>();
-        keyValueMap.put("top", "0");
-        keyValueMap.put("left", "0");
-        keyValueMap.put("right", Float.toString(CallbackBridge.physicalWidth - getWidth()));
-        keyValueMap.put("bottom", Float.toString(CallbackBridge.physicalHeight - getHeight()));
-        keyValueMap.put("width", Float.toString(getWidth()));
-        keyValueMap.put("height", Float.toString(getHeight()));
-        keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
-        keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
-        keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
-        keyValueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
-
         // Insert value to ${variable}
-        String insertedPos = JSONUtils.insertSingleJSONValue(dynamicPos, keyValueMap);
+        String insertedPos = JSONUtils.insertSingleJSONValue(dynamicPos, fillConversionMap());
         
         // Calculate, because the dynamic position contains some math equations
         return calculate(insertedPos);
     }
 
     private static float calculate(String math) {
-        return (float) new ExpressionBuilder(math)
-                .function(new Function("dp", 1) {
-                    @Override
-                    public double apply(double... args) {
-                        return Tools.pxToDp((float) args[0]);
-                    }
-                })
-                .function(new Function("px", 1) {
-                    @Override
-                    public double apply(double... args) {
-                        return Tools.dpToPx((float) args[0]);
-                    }
-                })
-                .build().evaluate();
+        setExpression(math);
+        return (float) builder.get().build().evaluate();
     }
 
     private static int[] inflateKeycodeArray(int[] keycodes){
@@ -236,4 +224,84 @@ public class ControlData {
     public void setHeight(float heightInPx){
         height = Tools.pxToDp(heightInPx);
     }
+
+    /**
+     * Create a weak reference to a builder and its expression field.
+     * Although VERY bad practice it isn't slower due to saved GC time.
+     * The normal way requires us to create ONE builder and TWO functions for EACH button.
+     */
+    private static void bypassExpressionBuilder(){
+        ExpressionBuilder expressionBuilder = new ExpressionBuilder("1 + 1")
+                .function(new Function("dp", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.pxToDp((float) args[0]);
+                    }
+                })
+                .function(new Function("px", 1) {
+                    @Override
+                    public double apply(double... args) {
+                        return Tools.dpToPx((float) args[0]);
+                    }
+                });
+        builder = new WeakReference<>(expressionBuilder);
+        try {
+            expression = new WeakReference<>(builder.get().getClass().getDeclaredField("expression"));
+            expression.get().setAccessible(true);
+            expression.get().set(expression.get(), expression.get().getModifiers() & ~Modifier.FINAL);
+        }catch (Exception ignored){}
+    }
+
+    /**
+     * wrapper for the WeakReference to the expressionField.
+     * @param stringExpression the expression to set.
+     */
+    private static void setExpression(String stringExpression){
+        if(builder.get() == null) bypassExpressionBuilder();
+        try {
+            expression.get().set(builder.get(), stringExpression);
+        }catch (IllegalAccessException e){}
+    }
+
+    /**
+     * Build a shared conversion map without the ControlData dependent values
+     * You need to set the view dependent values before using it.
+     */
+    private static void buildConversionMap() {
+        // Values in the map below may be always changed
+        ArrayMap<String, String> keyValueMap = new ArrayMap<>(10);
+        keyValueMap.put("top", "0");
+        keyValueMap.put("left", "0");
+        keyValueMap.put("right", "DUMMY_RIGHT");
+        keyValueMap.put("bottom", "DUMMY_BOTTOM");
+        keyValueMap.put("width", "DUMMY_WIDTH");
+        keyValueMap.put("height", "DUMMY_HEIGHT");
+        keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
+        keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
+        keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
+        keyValueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
+
+        conversionMap = new WeakReference<>(keyValueMap);
+    }
+
+    /**
+     * Fill the conversionMap with controlData dependent values.
+     * The returned valueMap should NOT be kept in memory.
+     * @return the valueMap to use.
+     */
+    private Map<String, String> fillConversionMap(){
+        ArrayMap<String, String> valueMap = conversionMap.get();
+        if (valueMap == null){
+            buildConversionMap();
+            valueMap = conversionMap.get();
+        }
+
+        valueMap.put("right", Float.toString(CallbackBridge.physicalWidth - getWidth()));
+        valueMap.put("bottom", Float.toString(CallbackBridge.physicalHeight - getHeight()));
+        valueMap.put("width", Float.toString(getWidth()));
+        valueMap.put("height", Float.toString(getHeight()));
+
+        return valueMap;
+    }
+
 }

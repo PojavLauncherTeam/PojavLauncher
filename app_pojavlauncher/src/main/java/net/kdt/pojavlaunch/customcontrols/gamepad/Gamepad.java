@@ -46,7 +46,6 @@ public class Gamepad {
     private float lastVerticalValue = 0.0f;
 
     private final double mouseMaxAcceleration = 2f;
-    private double acceleration = 0.0f;
 
     private double mouseMagnitude;
     private double mouseAngle;
@@ -57,17 +56,32 @@ public class Gamepad {
     private GamepadMap currentMap = gameMap;
 
     private boolean lastGrabbingState = true;
-    private final boolean hasDigitalTriggers;
+    private final boolean mModifierDigitalTriggers;
+    private boolean mModifierSwappedAxis = true; //Triggers and right stick axis are swapped.
 
-    private final Handler handler = new Handler(Looper.getMainLooper());
+    private final Handler inputHandler = new Handler(Looper.getMainLooper());
     private final Runnable switchStateRunnable;
 
     public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
         //Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
+        for(InputDevice.MotionRange range : inputDevice.getMotionRanges()){
+            if(range.getAxis() == MotionEvent.AXIS_RTRIGGER
+                    || range.getAxis() == MotionEvent.AXIS_LTRIGGER
+                    || range.getAxis() == MotionEvent.AXIS_GAS
+                    || range.getAxis() == MotionEvent.AXIS_BRAKE){
+                mModifierSwappedAxis = false;
+                break;
+            }
+
+        }
 
         leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
-        rightJoystick = new GamepadJoystick(MotionEvent.AXIS_Z, MotionEvent.AXIS_RZ, inputDevice);
-        hasDigitalTriggers = inputDevice.hasKeys(KeyEvent.KEYCODE_BUTTON_R2)[0];
+        if(!mModifierSwappedAxis)
+            rightJoystick = new GamepadJoystick(MotionEvent.AXIS_Z, MotionEvent.AXIS_RZ, inputDevice);
+        else
+            rightJoystick = new GamepadJoystick(MotionEvent.AXIS_RX, MotionEvent.AXIS_RY, inputDevice);
+
+        mModifierDigitalTriggers = inputDevice.hasKeys(KeyEvent.KEYCODE_BUTTON_R2)[0];
 
         this.gameActivity = gameActivity;
         pointerView = this.gameActivity.findViewById(R.id.console_pointer);
@@ -81,11 +95,11 @@ public class Gamepad {
                 updateGrabbingState();
                 tick();
 
-                handler.postDelayed(this, 16);
+                inputHandler.postDelayed(this, 16);
             }
         };
 
-        handler.postDelayed(handlerRunnable, 16);
+        inputHandler.postDelayed(handlerRunnable, 16);
 
         //Initialize runnables to be used by the input system, avoiding generating one each time is better memory.
         switchStateRunnable = () -> {
@@ -93,7 +107,7 @@ public class Gamepad {
             if(lastGrabbingState){
                 currentMap = gameMap;
                 pointerView.setVisibility(View.INVISIBLE);
-                mouseSensitivity = 22 / gameActivity.sensitivityFactor; //sensitivity in menus is resolution dependent.
+                mouseSensitivity = 18;
                 return;
             }
 
@@ -105,7 +119,8 @@ public class Gamepad {
             CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
             placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
             pointerView.setVisibility(View.VISIBLE);
-            mouseSensitivity = 14; //sensitivity in game doesn't need to be resolution dependent
+            //sensitivity in menu is MC and HARDWARE resolution dependent
+            mouseSensitivity = 19 * gameActivity.scaleFactor / gameActivity.sensitivityFactor;
         };
 
     }
@@ -117,7 +132,7 @@ public class Gamepad {
         if(lastHorizontalValue != 0 || lastVerticalValue != 0){
             GamepadJoystick currentJoystick = lastGrabbingState ? leftJoystick : rightJoystick;
 
-            acceleration = (mouseMagnitude - currentJoystick.getDeadzone())/(1 - currentJoystick.getDeadzone());
+            double acceleration = (mouseMagnitude - currentJoystick.getDeadzone()) / (1 - currentJoystick.getDeadzone());
             acceleration = Math.pow(acceleration, mouseMaxAcceleration);
             if(acceleration > 1) acceleration = 1;
 
@@ -180,9 +195,15 @@ public class Gamepad {
     }
 
     private void updateAnalogTriggers(MotionEvent event){
-        if(!hasDigitalTriggers){
-            getCurrentMap().TRIGGER_LEFT.update((event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5) || (event.getAxisValue(MotionEvent.AXIS_BRAKE) > 0.5));
-            getCurrentMap().TRIGGER_RIGHT.update((event.getAxisValue(MotionEvent.AXIS_RTRIGGER) > 0.5) || (event.getAxisValue(MotionEvent.AXIS_GAS) > 0.5));
+        if(!mModifierDigitalTriggers){
+            getCurrentMap().TRIGGER_LEFT.update(
+                    (event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5)
+                            || (event.getAxisValue(MotionEvent.AXIS_BRAKE) > 0.5)
+                            || (mModifierSwappedAxis &&(event.getAxisValue(MotionEvent.AXIS_Z) > 0.5)) );
+            getCurrentMap().TRIGGER_RIGHT.update(
+                    (event.getAxisValue( MotionEvent.AXIS_RTRIGGER) > 0.5)
+                            || (event.getAxisValue(MotionEvent.AXIS_GAS) > 0.5)
+                            || (mModifierSwappedAxis && event.getAxisValue(MotionEvent.AXIS_RZ) > 0.5) );
         }
     }
 

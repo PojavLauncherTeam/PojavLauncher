@@ -46,23 +46,18 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
-        if(isDoingInternalChanges){
-            isDoingInternalChanges = false;
-            return;
+        if(isDoingInternalChanges)return;
+
+        for(int i=0; i< lengthBefore; ++i){
+            CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
         }
-        if(lengthAfter < lengthBefore){
-            for(int i=0; i< lengthBefore-lengthAfter; ++i){
-                CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
-            }
-        }else{
-            for(int i=lengthBefore, index=lengthBefore+start; i < lengthAfter; ++i){
-                //I didn't know F25 existed before that. I just need a full fat keycode for mc 1.13+
-                CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_F25, text.charAt(index), 0, 0, true);
-                index ++;
-            }
+        for(int i=start, count = 0; count < lengthAfter; ++i){
+            CallbackBridge.sendChar(text.charAt(i), 0);
+            ++count;
         }
 
-        clear();
+        //Reset the keyboard state
+        if(text.length() < 1) clear();
     }
 
 
@@ -88,10 +83,6 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         return super.onKeyPreIme(keyCode, event);
     }
 
-    @Override
-    public void setSelection(int index) {
-        super.setSelection(5);
-    }
 
     /**
      * Toggle on and off the soft keyboard, depending of the state
@@ -125,8 +116,9 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         isDoingInternalChanges = true;
         //Braille space, doesn't trigger keyboard auto-complete
         //replacing directly the text without though setText avoids notifying changes
-        getText().replace(0, getText().length(),"\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800");
-        setSelection(5);
+        setText("                              ");
+        setSelection(getText().length());
+        isDoingInternalChanges = false;
     }
 
     /**
@@ -157,7 +149,6 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         clearFocus();
         setEnabled(false);
     }
-
 
 
     /**

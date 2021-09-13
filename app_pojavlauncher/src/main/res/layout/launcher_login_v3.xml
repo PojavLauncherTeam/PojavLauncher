@@ -27,6 +27,11 @@
         android:id="@+id/login_spinner_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/menu_background"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:paddingVertical="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +52,7 @@
         app:layout_constraintWidth_max="480dp"
         android:layout_height="300dp"
 
-        android:background="#272727"
+        android:background="@drawable/menu_background"
         android:translationZ="-1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

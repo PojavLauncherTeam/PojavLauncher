@@ -145,6 +145,12 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     }
 
     @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        setWillNotDraw(visibility == GONE);
+    }
+
+    @Override
     public void setX(float x) {
         super.setX(x);
         setModified(true);
