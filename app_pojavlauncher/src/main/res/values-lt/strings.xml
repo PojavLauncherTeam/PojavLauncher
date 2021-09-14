@@ -130,6 +130,7 @@
     <string name="control_customkey">Siųsti mygtuko kodą</string>
     <string name="control_scaleup">Padidinti</string>
     <string name="control_scaledown">Sumažinti</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
