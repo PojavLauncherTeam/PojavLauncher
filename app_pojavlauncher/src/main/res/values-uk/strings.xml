@@ -139,6 +139,13 @@
     <string name="control_customkey">Надіслати користувацьку розкладку</string>
     <string name="control_scaleup">Збільшити</string>
     <string name="control_scaledown">Зменшити</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Імпортування керування</string>
+    <string name="import_control_invalid_file">Неприпустимий або пошкоджений файл</string>
+    <string name="import_control_import_button">імпортувати керування</string>
+    <string name="import_control_verifying_file">Файл перевіряється; будь ласка, зачекайте та спробуйте ще раз…</string>
+    <string name="import_control_invalid_name">Неприпустиме ім\'я файлу або файл з таким ім\'ям вже існує</string>
+    <string name="import_control_done">Імпортування виконано</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
