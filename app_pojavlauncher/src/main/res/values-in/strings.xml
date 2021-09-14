@@ -138,6 +138,7 @@
     <string name="control_customkey">Kirim keycode kustom</string>
     <string name="control_scaleup">Besarkan skala</string>
     <string name="control_scaledown">Kecilkan skala</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
