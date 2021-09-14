@@ -139,6 +139,13 @@
     <string name="control_customkey">Wyślij własny klawisz</string>
     <string name="control_scaleup">Zwiększ</string>
     <string name="control_scaledown">Zmniejsz</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importuj sterowanie</string>
+    <string name="import_control_invalid_file">Niepoprawny lub uszkodzony plik</string>
+    <string name="import_control_import_button">Importuj sterowanie</string>
+    <string name="import_control_verifying_file">Plik jest w trakcie weryfikacji, proszę poczekać i spróbować jeszcze raz…</string>
+    <string name="import_control_invalid_name">Niepoprawna nazwa lub plik już istnieje</string>
+    <string name="import_control_done">Importowanie zakończone</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
