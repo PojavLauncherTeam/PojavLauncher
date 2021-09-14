@@ -51,7 +51,7 @@
     <string name="mcl_launch_downloading">%s indiriliyor</string>
     <string name="mcl_launch_downloading_progress">"%s indiriliyor (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
-    <string name="mcl_options">Ayarlar</string>
+    <string name="mcl_options">Seçenekler</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
     <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümanlarla)</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
@@ -139,6 +139,7 @@
     <string name="control_customkey">Özel anahtar kodu gönder</string>
     <string name="control_scaleup">Boyutu Arttır</string>
     <string name="control_scaledown">Boyutu Küçült</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -169,7 +170,7 @@
     <string name="customctrl_addbutton_drawer">Düğme saklama menüsü ekle</string>
     <string name="customctrl_addsubbutton">Yan-düğme ekle</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
-    <string name="main_options">Ayarlar</string>
+    <string name="main_options">Seçenekler</string>
     <string name="main_play">Oyna</string>
     <string name="main_welcome">Hoş geldiniz, %s</string>
     <string name="main_infodev">Bilgi (Geliştirici)</string>
