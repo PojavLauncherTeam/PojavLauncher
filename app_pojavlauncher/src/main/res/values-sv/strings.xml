@@ -79,6 +79,7 @@
     <string name="control_forceclose">Tvingad avslutning</string>
     <string name="control_viewout">Logga utdata</string>
     <string name="control_customkey">Skicka anpassad nyckelkod</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
