@@ -139,6 +139,13 @@
     <string name="control_customkey">Отправить пользовательский код клавиши</string>
     <string name="control_scaleup">Увеличить</string>
     <string name="control_scaledown">Уменьшить</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Импортирование управления</string>
+    <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
+    <string name="import_control_import_button">импортировать управление</string>
+    <string name="import_control_verifying_file">Идёт проверка файла; пожалуйста, подождите и попробуйте снова…</string>
+    <string name="import_control_invalid_name">Недопустимое имя файла или файл с таким именем уже существует</string>
+    <string name="import_control_done">Импортирование завершено</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
