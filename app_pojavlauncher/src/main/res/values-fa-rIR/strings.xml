@@ -133,6 +133,7 @@
     <string name="control_customkey">ارسال keycode شخصی</string>
     <string name="control_scaleup">بزرگنمایی</string>
     <string name="control_scaledown">کوچکنمایی</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
