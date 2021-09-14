@@ -139,6 +139,13 @@
     <string name="control_customkey">Sende Keycode</string>
     <string name="control_scaleup">Vergrößern</string>
     <string name="control_scaledown">Verkleinern</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importiere Steuerung</string>
+    <string name="import_control_invalid_file">Ungültige oder beschädigte Datei</string>
+    <string name="import_control_import_button">Importiere Steuerung</string>
+    <string name="import_control_verifying_file">Datei wird verifiziert, bitte warten und erneut versuchen…</string>
+    <string name="import_control_invalid_name">Ungültiger Dateiname oder Datei bereits vorhanden</string>
+    <string name="import_control_done">Import abgeschlossen</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
