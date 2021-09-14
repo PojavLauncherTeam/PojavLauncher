@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition ɹoɟ Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">¡ǝɔᴉʌǝp ɹnoʎ uᴉ Minecraft: Java Edition ɥɔunɐꞀ</string>
+    <string name="app_name">(pᴉoɹpuⱯ ɹoɟ uoᴉʇᴉpƎ ɐʌɐՐ :ʇɟɐɹɔǝuᴉW) ɹǝɥɔunɐꞀʌɐɾoԀ</string>
+    <string name="app_short_name">ɹǝɥɔunɐꞀʌɐɾoԀ</string>
+    <string name="app_motd">¡ǝɔᴉʌǝp ɹnoʎ uᴉ uoᴉʇᴉpƎ ɐʌɐՐ :ʇɟɐɹɔǝuᴉW ɥɔunɐꞀ</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -33,7 +33,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">¡pǝɹᴉnbǝɹ sᴉ uoᴉssᴉɯɹǝd ǝᵷɐɹoʇs oʇ ǝʇᴉɹʍ/pɐǝɹ ǝɥ⟘</string>
     <string name="toast_optifine_success">ꞁnɟssǝɔɔns ꞁꞁɐʇsuI</string>
-    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
+    <string name="toast_uninstalljre_done">ǝɯᴉʇunᴚ ɐʌɐՐ ꞁꞁɐʇsuᴉun ǝuoᗡ</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -67,7 +67,7 @@
     <string name="mcl_setting_title_resolution_scaler">ɹǝꞁɐɔS uoᴉʇnꞁosǝᴚ</string>
     <string name="mcl_setting_subtitle_resolution_scaler">uoᴉʇnꞁosǝɹ ꞁꞁnɟ sᴉ %00⥝ ˙uoᴉʇnꞁosǝɹ ǝɯɐᵷ ǝɥʇ ǝsɐǝɹɔǝp oʇ noʎ sʍoꞁꞁⱯ</string>
     <string name="mcl_setting_title_longpresstrigger">ssǝɹd ᵷuoꞁ ɹǝʇɟɐ ɹǝᵷᵷᴉɹʇ ꞁꞁᴉʍ ᵷuoꞁ ʍoH</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">˙ɯǝʇᴉ doɹp puɐ ʞɔoꞁq ʎoɹʇsǝp uᴉ ssǝɹd ᵷuoꞁ ɹoɟ ǝɯᴉʇ ɹǝᵷᵷᴉɹʇ ǝᵷuɐɥƆ.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">˙ɯǝʇᴉ doɹp puɐ ʞɔoꞁq ʎoɹʇsǝp uᴉ ssǝɹd ᵷuoꞁ ɹoɟ ǝɯᴉʇ ɹǝᵷᵷᴉɹʇ ǝᵷuɐɥƆ</string>
     <string name="mcl_setting_title_backtorightmouse">ǝsnoɯ ʇɥᵷᴉɹ sɐ uoʇʇnq ʞɔɐq ʇɐǝɹ⟘</string>
     <string name="mcl_setting_subtitle_backtorightmouse">˙sᴉɥʇ ǝꞁqɐuǝ pꞁnoɥs noʎ \'ǝsnoɯ ꞁɐuɹǝʇxǝ ᵷuᴉsn ǝɹɐ noʎ ɟI ˙uoʇʇnq ʞɔɐq sɐ ǝsnoɯ ʇɥᵷᴉɹ ꞁɐuɹǝʇxǝ sʇɐǝɹʇ sǝɔᴉʌǝp ǝɯoS</string>
     <string name="mcl_setting_title_flat_button_style">ǝꞁʎʇs uoʇʇnq ʇɐꞁℲ</string>
@@ -81,8 +81,8 @@
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
-    <string name="mcl_setting_renderer_gles2">Odǝuפ˥ ƎS ᄅ</string>
-    <string name="mcl_setting_renderer_gles3">Odǝuפ˥ ƎS Ɛ</string>
+    <string name="mcl_setting_renderer_gles2">ᘔ SƎ Ꞁ⅁uǝdO</string>
+    <string name="mcl_setting_renderer_gles3">Ɛ SƎ Ꞁ⅁uǝdO</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
     <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
@@ -117,10 +117,10 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
-    <string name="vp_latest_snapshot">ʇoɥsdɐuS ʇsǝʇɐ˥</string>
-    <string name="vp_latest_release">ǝsɐǝlǝɹ ʇsǝʇɐ˥</string>
+    <string name="vp_latest_snapshot">ʇoɥsdɐuS ʇsǝʇɐꞀ</string>
+    <string name="vp_latest_release">ǝsɐǝꞁǝᴚ ʇsǝʇɐꞀ</string>
     <string name="mcl_tab_profiles">sǝlᴉɟoɹԀ</string>
-    <string name="mcl_profile_editor_title_profile">SƎ˥IℲOᴚԀ</string>
+    <string name="mcl_profile_editor_title_profile">SƎꞀIℲOᴚԀ</string>
     <string name="mcl_profile_editor_title_version">SNOISᴚƎΛ</string>
     <string name="mcl_profile_editor_edit_text_title">ǝɯɐu ǝlıɟoɹԀ</string>
     <string name="mcl_profile_editor_save">ǝʌɐs</string>
