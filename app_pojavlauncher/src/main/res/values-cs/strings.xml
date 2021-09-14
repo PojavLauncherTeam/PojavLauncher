@@ -139,6 +139,13 @@
     <string name="control_customkey">Poslat vlastní klávesu</string>
     <string name="control_scaleup">Zvětšit</string>
     <string name="control_scaledown">Zmenšit</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importovat ovládací prvky</string>
+    <string name="import_control_invalid_file">Neplatný nebo poškozený soubor</string>
+    <string name="import_control_import_button">importovat ovládací prvky</string>
+    <string name="import_control_verifying_file">Soubor se ověřuje, počkejte a zkuste to znovu…</string>
+    <string name="import_control_invalid_name">Neplatný název nebo soubor již existuje</string>
+    <string name="import_control_done">Import dokončen</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
