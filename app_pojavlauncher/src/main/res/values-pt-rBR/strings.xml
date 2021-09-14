@@ -139,6 +139,13 @@
     <string name="control_customkey">Enviar tecla personalizada</string>
     <string name="control_scaleup">Aumentar</string>
     <string name="control_scaledown">Diminuir</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importar controles</string>
+    <string name="import_control_invalid_file">Arquivo inválido ou corrompido</string>
+    <string name="import_control_import_button">Importar controles</string>
+    <string name="import_control_verifying_file">O arquivo está sendo verificado, por favor aguarde e tente novamente…</string>
+    <string name="import_control_invalid_name">O nome é invalido ou o arquivo já existe</string>
+    <string name="import_control_done">Importado com sucesso</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
