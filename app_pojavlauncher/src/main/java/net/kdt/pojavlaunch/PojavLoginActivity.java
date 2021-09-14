@@ -707,14 +707,9 @@ public class PojavLoginActivity extends BaseActivity
     private void showNoAccountDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(PojavLoginActivity.this);
 
-
         builder.setMessage(R.string.login_dialog_no_saved_account)
                 .setTitle(R.string.login_title_no_saved_account)
-                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    //Fucking nothing
-                });
-
-
+                .setPositiveButton(android.R.string.ok, null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
