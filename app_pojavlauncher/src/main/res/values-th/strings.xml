@@ -77,6 +77,7 @@
     <string name="control_mouseon">เมาส์: เปิด </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">บังคับปิด</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
