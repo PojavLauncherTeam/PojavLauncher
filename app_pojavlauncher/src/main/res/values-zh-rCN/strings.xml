@@ -139,6 +139,13 @@
     <string name="control_customkey">发送自定义键码</string>
     <string name="control_scaleup">放大</string>
     <string name="control_scaledown">缩小</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">导入控制</string>
+    <string name="import_control_invalid_file">文件无效或损坏</string>
+    <string name="import_control_import_button">导入控制</string>
+    <string name="import_control_verifying_file">文件正在验证中，请稍候重试…</string>
+    <string name="import_control_invalid_name">无效的名称或文件已存在</string>
+    <string name="import_control_done">导入完成</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
