@@ -133,6 +133,7 @@
     <string name="control_customkey">Отправить пользовательскій кодъ кнопки</string>
     <string name="control_scaleup">Увеличить</string>
     <string name="control_scaledown">Уменьшить</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
