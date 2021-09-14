@@ -157,6 +157,8 @@
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
+    <string name="control_scaleup">Ampliar</string>
+    <string name="control_scaledown">Reducir</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
