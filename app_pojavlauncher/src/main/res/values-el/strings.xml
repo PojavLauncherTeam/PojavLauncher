@@ -130,6 +130,7 @@
     <string name="control_customkey">Αποστολή προσαρμοσμένου κωδικού κλειδιού</string>
     <string name="control_scaleup">Κλιμάκωση πάνω</string>
     <string name="control_scaledown">Κλιμάκωση προς τα κάτω</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
