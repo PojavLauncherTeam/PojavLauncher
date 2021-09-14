@@ -12,8 +12,12 @@
     <string name="login_online_check_keeplogin">मुझे लोग्ड इन रखें</string>
     <string name="login_online_login_label">लॉगिन</string>
     <string name="login_offline_label">ऑफ़लाइन अकाउंट के रूप में लॉगिन करें</string>
+    <string name="login_error_invalid_username">लॉगिन समस्या अवैध वापरकर्ता नाम</string>
     <string name="login_error_exist_username">यह उपयोगकर्तानाम/username पहले से मौजूद है।</string>
+    <string name="login_error_offline_password">लॉगिन समस्या ऑफलाइन पासवर्ड</string>
+    <string name="login_microsoft">लॉगिन माइक्रोसॉफ्ट</string>
     <string name="login_select_account">एकाउंट का चयन करें </string>
+    <string name="login_title_no_saved_account">खाता नहीं मिला</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
@@ -30,6 +34,7 @@
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">लॉग आउटपुट</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
