@@ -136,6 +136,15 @@
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
+    <string name="control_scaleup">Ampliar</string>
+    <string name="control_scaledown">Reducir</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importar controles</string>
+    <string name="import_control_invalid_file">Archivo inválido o dañado</string>
+    <string name="import_control_import_button">importar controles</string>
+    <string name="import_control_verifying_file">El archivo está siendo verificado, por favor espere y vuelva a intentarlo…</string>
+    <string name="import_control_invalid_name">El nombre es inválido o el archivo ya existe</string>
+    <string name="import_control_done">Importación realizada</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -207,6 +216,7 @@
     <string name="compat_117_message">Las versiones a partir de Minecraft 21w10a en adelante requieren OpenGL 3.2. Lamentablemente, el wrapper de GL4ES no lo soporta totalmente en estos momentos, pero hay varios recursos adicionales que puedes instalar para ejecutar estas versiones.
 Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abortar el lanzamiento.</string>
     <string name="compat_11x_playanyway">Jugar de todas formas</string>
+    <string name="pvc_gameDirectory">Directorio del juego</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="pvc_title">Configuración para esta versión</string>
 </resources>
