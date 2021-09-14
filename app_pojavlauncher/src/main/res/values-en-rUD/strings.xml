@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition ɹoɟ Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">¡ǝɔᴉʌǝp ɹnoʎ uᴉ Minecraft: Java Edition ɥɔunɐꞀ</string>
+    <string name="app_name">(pᴉoɹpuⱯ ɹoɟ uoᴉʇᴉpƎ ɐʌɐՐ :ʇɟɐɹɔǝuᴉW) ɹǝɥɔunɐꞀʌɐɾoԀ</string>
+    <string name="app_short_name">ɹǝɥɔunɐꞀʌɐɾoԀ</string>
+    <string name="app_motd">¡ǝɔᴉʌǝp ɹnoʎ uᴉ uoᴉʇᴉpƎ ɐʌɐՐ :ʇɟɐɹɔǝuᴉW ɥɔunɐꞀ</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -12,7 +12,7 @@
     <string name="login_online_check_keeplogin">uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ</string>
     <string name="login_online_login_label">uᴉᵷoꞀ</string>
     <string name="login_offline_label">ʇunoɔɔɐ ǝuᴉꞁɟɟo sɐ uᴉᵷoꞀ</string>
-    <string name="login_error_invalid_username">˙ǝɹoɔsɹǝpun puɐ 6-0 \'z-ɐ \'Z-∀ suıɐʇuoɔ ʎluo plnoɥs \'sɹǝʇɔɐɹɐɥɔ 9⇂-Ɛ ɟo ǝƃuɐɹ uı ǝq ʇsnɯ ǝɯɐuɹǝs∩ ˙ǝɯɐuɹǝsn pılɐʌuI</string>
+    <string name="login_error_invalid_username">˙ǝɹoɔsɹǝpun puɐ 6-0 \'z-ɐ \'Z-Ɐ suᴉɐʇuoɔ ʎꞁuo pꞁnoɥs \'sɹǝʇɔɐɹɐɥɔ 9⥝-Ɛ ɟo ǝᵷuɐɹ uᴉ ǝq ʇsnɯ ǝɯɐuɹǝs∩ ˙ǝɯɐuɹǝsn pᴉꞁɐʌuI</string>
     <string name="login_error_exist_username">ʇsᴉxǝ ʎpɐǝɹꞁɐ ǝɯɐuɹǝsn sᴉɥ⟘</string>
     <string name="login_error_offline_password">¡pɹoʍssɐd ǝpnꞁɔuᴉ ʇ,uɐɔ ʇunoɔɔɐ ǝuᴉꞁɟɟO</string>
     <string name="login_microsoft">uᴉᵷoꞁ ʇɟosoɹɔᴉW</string>
@@ -34,7 +34,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">¡pǝɹᴉnbǝɹ sᴉ uoᴉssᴉɯɹǝd ǝᵷɐɹoʇs oʇ ǝʇᴉɹʍ/pɐǝɹ ǝɥ⟘</string>
     <string name="toast_optifine_success">ꞁnɟssǝɔɔns ꞁꞁɐʇsuI</string>
-    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
+    <string name="toast_uninstalljre_done">ǝɯᴉʇunᴚ ɐʌɐՐ ꞁꞁɐʇsuᴉun ǝuoᗡ</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -68,7 +68,7 @@
     <string name="mcl_setting_title_resolution_scaler">ɹǝꞁɐɔS uoᴉʇnꞁosǝᴚ</string>
     <string name="mcl_setting_subtitle_resolution_scaler">uoᴉʇnꞁosǝɹ ꞁꞁnɟ sᴉ %00⥝ ˙uoᴉʇnꞁosǝɹ ǝɯɐᵷ ǝɥʇ ǝsɐǝɹɔǝp oʇ noʎ sʍoꞁꞁⱯ</string>
     <string name="mcl_setting_title_longpresstrigger">ssǝɹd ᵷuoꞁ ɹǝʇɟɐ ɹǝᵷᵷᴉɹʇ ꞁꞁᴉʍ ᵷuoꞁ ʍoH</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">˙ɯǝʇᴉ doɹp puɐ ʞɔoꞁq ʎoɹʇsǝp uᴉ ssǝɹd ᵷuoꞁ ɹoɟ ǝɯᴉʇ ɹǝᵷᵷᴉɹʇ ǝᵷuɐɥƆ.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">˙ɯǝʇᴉ doɹp puɐ ʞɔoꞁq ʎoɹʇsǝp uᴉ ssǝɹd ᵷuoꞁ ɹoɟ ǝɯᴉʇ ɹǝᵷᵷᴉɹʇ ǝᵷuɐɥƆ</string>
     <string name="mcl_setting_title_backtorightmouse">ǝsnoɯ ʇɥᵷᴉɹ sɐ uoʇʇnq ʞɔɐq ʇɐǝɹ⟘</string>
     <string name="mcl_setting_subtitle_backtorightmouse">˙sᴉɥʇ ǝꞁqɐuǝ pꞁnoɥs noʎ \'ǝsnoɯ ꞁɐuɹǝʇxǝ ᵷuᴉsn ǝɹɐ noʎ ɟI ˙uoʇʇnq ʞɔɐq sɐ ǝsnoɯ ʇɥᵷᴉɹ ꞁɐuɹǝʇxǝ sʇɐǝɹʇ sǝɔᴉʌǝp ǝɯoS</string>
     <string name="mcl_setting_title_flat_button_style">ǝꞁʎʇs uoʇʇnq ʇɐꞁℲ</string>
@@ -85,7 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ߈˙⥝˙⥝ sǝ߈ꞁᵷ</string>
     <string name="mcl_setting_renderer_gles2_5">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
     <string name="mcl_setting_renderer_gles3_5">(ʇǝʎ pǝʇɹoddns ㄥ⥝˙⥝ ou) ᘔ˙Ɛ ꞁɐᴉʇɹɐd + ⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
-    <string name="mcl_setting_renderer_vgpu">0˙Ɛ ˥פuǝdO sʇɹodxǝ :(Ɛ SƎ ˥פuǝdO) ndƃʌ</string>
+    <string name="mcl_setting_renderer_vgpu">0˙Ɛ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ndᵷʌ</string>
     <string name="mcl_setting_renderer_vulkan_zink">9˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(uɐʞꞁnɅ) ʞuᴉz</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
@@ -133,6 +133,13 @@
     <string name="control_customkey">ǝpoɔʎǝʞ ɯoʇsnɔ puǝS</string>
     <string name="control_scaleup">dn ǝlɐɔS</string>
     <string name="control_scaledown">uʍop ǝlɐɔS</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">sloɹʇuoɔ ʇɹodɯI</string>
+    <string name="import_control_invalid_file">ǝlᴉɟ pǝʇdnɹɹoɔ ɹo pᴉlɐʌuI</string>
+    <string name="import_control_import_button">sloɹʇuoɔ ʇɹodɯᴉ</string>
+    <string name="import_control_verifying_file">…uᴉɐᵷɐ ʎɹʇ puɐ ʇᴉɐʍ ǝsɐǝꞁd \'pǝᴉɟᴉɹǝʌ ᵷuᴉǝq sᴉ ǝꞁᴉℲ</string>
+    <string name="import_control_invalid_name">sʇsᴉxǝ ʎpɐǝɹꞁɐ ǝꞁᴉɟ ɹo ǝɯɐu pᴉꞁɐʌuI</string>
+    <string name="import_control_done">ǝuop uoᴉʇɐʇɹodɯI</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -144,17 +151,17 @@
     <string name="customctrl_size">ǝzᴉS</string>
     <string name="customctrl_size_width">ɥʇpᴉM</string>
     <string name="customctrl_size_height">ʇɥᵷᴉǝH</string>
-    <string name="customctrl_mapping">ƃuıddɐW</string>
-    <string name="customctrl_orientation">uoıʇɐʇuǝıɹO</string>
-    <string name="customctrl_background_color">ɹoʃoɔ punoɹƃʞɔɐ𐐒</string>
-    <string name="customctrl_corner_radius">snıpɐɹ ɹǝuɹoↃ</string>
-    <string name="customctrl_stroke_width">ɥʇpıʍ ǝʞoɹʇS</string>
-    <string name="customctrl_stroke_color">ɹoʃoɔ ǝʞoɹʇS</string>
-    <string name="customctrl_dynamicpos">uoᴉʇᴉsod ɔᴉɯɐuʎᗡ</string>
+    <string name="customctrl_mapping">ᵷuᴉddɐW</string>
+    <string name="customctrl_orientation">uoᴉʇɐʇuǝᴉɹO</string>
+    <string name="customctrl_background_color">ɹoꞁoɔ punoɹᵷʞɔɐᗺ</string>
+    <string name="customctrl_corner_radius">snᴉpɐɹ ɹǝuɹoƆ</string>
+    <string name="customctrl_stroke_width">ɥʇpᴉʍ ǝʞoɹʇS</string>
+    <string name="customctrl_stroke_color">ɹoꞁoɔ ǝʞoɹʇS</string>
+    <string name="customctrl_dynamicpos">uoᴉʇᴉsod ɔᴉɯɐuʎᗡ ꞁɐnuɐW</string>
     <string name="customctrl_dynamicpos_x">X ɔᴉɯɐuʎᗡ</string>
     <string name="customctrl_dynamicpos_y">⅄ ɔᴉɯɐuʎᗡ</string>
     <string name="customctrl_transparency_bg">ʎɔuǝɹɐdsuɐɹʇ punoɹᵷʞɔɐᗺ</string>
-    <string name="customctrl_button_opacity">ʎʇıɔɐdo uoʇʇn𐐒</string>
+    <string name="customctrl_button_opacity">ʎʇᴉɔɐdO uoʇʇnᗺ</string>
     <string name="customctrl_keycombine">uoᴉʇɐuᴉqɯoɔ ʎǝꞰ</string>
     <string name="customctrl_addbutton">uoʇʇnq ppⱯ</string>
     <string name="customctrl_addbutton_drawer">ɹǝʍɐɹp uoʇʇnq pp∀</string>
@@ -182,27 +189,27 @@
     <string name="mcl_setting_title_mousespeed">pǝǝdS ǝsnoW</string>
     <string name="mcl_setting_subtitle_mousespeed">ǝsnoɯ ǝɹɐʍʇɟos ǝɥʇ ɟo pǝǝds ǝɥʇ sǝᵷuɐɥƆ</string>
     <string name="customctrl_passthru">nɹɥʇ-ssɐd ǝsnoW</string>
-    <string name="customctrl_swipeable">ǝʃqɐǝdıʍS</string>
+    <string name="customctrl_swipeable">ǝꞁqɐǝdᴉʍS</string>
     <string name="customctrl_rounded">pǝpunoᴚ</string>
     <string name="memory_warning_msg">˙sǝɥsɐɹɔ ǝɯɐᵷ ǝɥʇ ɟᴉ uoᴉʇɐɔoꞁꞁɐ ǝɥʇ ǝᵷuɐɥƆ ˙sǝɥsɐɹɔ oʇ pɐǝꞁ ʎɐɯ ɥɔᴉɥʍ \'(%d) WⱯᴚ pǝʇɐɔoꞁꞁɐ uɐɥʇ ɹǝʍoꞁ sᴉ (%d) WⱯᴚ ǝǝɹɟ ɟo ʇunoɯɐ ʇuǝɹɹnɔ ǝɥ⟘</string>
     <string name="mcl_memory_allocation">uoᴉʇɐɔoꞁꞁɐ ʎɹoɯǝW</string>
     <string name="mcl_memory_allocation_subtitle">ʇɟɐɹɔǝuᴉW oʇ uǝʌᴉᵷ sᴉ ʎɹoɯǝɯ ɥɔnɯ ʍoɥ sꞁoɹʇuoƆ</string>
-    <string name="multirt_runtime_corrupt">ǝɯıʇunᴚ ɐʌɐſ pǝʇdnɹɹoↃ</string>
-    <string name="multirt_config_title">sWᴧ ɐʌɐſ</string>
+    <string name="multirt_runtime_corrupt">ǝɯᴉʇunᴚ ɐʌɐՐ pǝʇdnɹɹoƆ</string>
+    <string name="multirt_config_title">sWɅ ɐʌɐՐ</string>
     <string name="multirt_config_add">ʍǝu pp∀</string>
-    <string name="multirt_config_add_subtitle">Wᴧ ɐʌɐſ ʍǝu ʇɹodɯI</string>
-    <string name="multirt_title">ɹǝƃɐuɐW ǝɯıʇunᴚ</string>
-    <string name="multirt_subtitle">sWᴧ ɐʌɐſ pǝʃʃɐʇsuı ǝƃɐuɐW</string>
-    <string name="multirt_progress_caching">˙˙˙ƃuıɥɔɐↃ</string>
-    <string name="multirt_config_setdefault">ʇʃnɐɟǝp ʇǝS</string>
-    <string name="multirt_config_setdefault_already">ʇʃnɐɟǝp</string>
-    <string name="multirt_config_removeerror_last">pǝʃʃɐʇsuı ǝɯıʇunᴚ ɐʌɐſ ǝuo ʇsɐǝʃ ʇɐ ǝʌɐɥ ʇsnɯ no⅄</string>
-    <string name="multirt_nocompartiblert">ǝɯıʇunᴚ ɐʌɐſ ǝʃqıʇɹɐdɯoɔ ʎuɐ puıɟ ʇ,uɐↃ</string>
-    <string name="compat_117_message">˙ɥɔunɐʃ ʇɹoqɐ oʇ ʃǝɔuɐↃ ssǝɹd puɐ \'uoıʇɐʃʃɐʇsuı ɯɹıɟuoɔ oʇ ⋊O ssǝɹԀ ˙suoısɹǝʌ ǝsǝɥʇ unɹ oʇ ʃʃɐʇsuı uɐɔ noʎ sǝɔɹnosǝɹ ʃɐuoıʇıppɐ ǝɯos ǝɹɐ ǝɹǝɥʇ ʇnq \'ʇuǝɯoɯ ǝɥʇ ʇɐ ʇı ʇɹoddns ʎʃʃnɟ ʇ,usǝop ɹǝddɐɹʍ SƎᔭ⅂⅁ \'ʎʃpɐS ˙ǝʃıɟoɹd ǝɹoɔ 2˙Ɛ ⅂⅁uǝdO ǝɥʇ sǝɹınbǝɹ +ɐ01ʍ12 ʇɟɐɹɔǝuıW</string>
+    <string name="multirt_config_add_subtitle">WɅ ɐʌɐՐ ʍǝu ʇɹodɯI</string>
+    <string name="multirt_title">ɹǝᵷɐuɐW ǝɯᴉʇunᴚ</string>
+    <string name="multirt_subtitle">sWɅ ɐʌɐՐ pǝꞁꞁɐʇsuᴉ ǝᵷɐuɐW</string>
+    <string name="multirt_progress_caching">˙˙˙ᵷuᴉɥɔɐƆ</string>
+    <string name="multirt_config_setdefault">ʇꞁnɐɟǝp ʇǝS</string>
+    <string name="multirt_config_setdefault_already">ʇꞁnɐɟǝᗡ</string>
+    <string name="multirt_config_removeerror_last">pǝꞁꞁɐʇsuᴉ ǝɯᴉʇunᴚ ɐʌɐՐ ǝuo ʇsɐǝꞁ ʇɐ ǝʌɐɥ ʇsnɯ no⅄</string>
+    <string name="multirt_nocompartiblert">ǝɯᴉʇunᴚ ɐʌɐՐ ǝꞁqᴉʇɹɐdɯoɔ ʎuɐ puᴉɟ ʇ,uɐƆ</string>
+    <string name="compat_117_message">˙ɥɔunɐꞁ ʇɹoqɐ oʇ ꞁǝɔuɐƆ ssǝɹd puɐ \'uoᴉʇɐꞁꞁɐʇsuᴉ ɯɹᴉɟuoɔ oʇ ꞰO ssǝɹԀ ˙suoᴉsɹǝʌ ǝsǝɥʇ unɹ oʇ ꞁꞁɐʇsuᴉ uɐɔ noʎ sǝɔɹnosǝɹ ꞁɐuoᴉʇᴉppɐ ǝɯos ǝɹɐ ǝɹǝɥʇ ʇnq \'ʇuǝɯoɯ ǝɥʇ ʇɐ ʇᴉ ʇɹoddns ʎꞁꞁnɟ ʇ,usǝop ɹǝddɐɹʍ SƎ߈Ꞁ⅁ \'ʎꞁpɐS ˙ǝꞁᴉɟoɹd ǝɹoɔ ᘔ˙Ɛ Ꞁ⅁uǝdO ǝɥʇ sǝɹᴉnbǝɹ +ɐ0⥝ʍ⥝ᘔ ʇɟɐɹɔǝuᴉW</string>
     <string name="compat_11x_playanyway">ʎɐʍʎuɐ ʎɐlԀ</string>
-    <string name="pvc_gameDirectory">ʎɹoʇɔǝɹıp ǝɯɐ⅁</string>
-    <string name="pvc_jvmArgs">sʇuǝɯnƃɹɐ Wᴧſ</string>
-    <string name="pvc_title">sƃuıʇʇǝs uoısɹǝʌ-ɹǝԀ</string>
-    <string name="storage_warning_title">sǝƃuɐɥɔ ǝƃɐɹoʇS</string>
+    <string name="pvc_gameDirectory">ʎɹoʇɔǝɹᴉp ǝɯɐ⅁</string>
+    <string name="pvc_jvmArgs">sʇuǝɯnᵷɹɐ WɅՐ</string>
+    <string name="pvc_title">sᵷuᴉʇʇǝs uoᴉsɹǝʌ-ɹǝԀ</string>
+    <string name="storage_warning_title">sǝᵷuɐɥɔ ǝᵷɐɹoʇS</string>
     <string name="storage_warning_text"><![CDATA[˙ʎllɐnuɐɯ </b>ɹǝɥɔunɐ˥ʌɐɾoԀ/sǝɯɐƃ<b> ʇɐ ɹǝploɟ lɐuᴉƃᴉɹo ǝɥʇ ɯoɹɟ ƃuᴉɥʇʎɹǝʌǝ ʎdoɔ ǝsɐǝld \'sǝlᴉɟ ǝɯɐƃ ɹnoʎ ʎdoɔ oʇ pǝǝu noʎ ɟI <br />˙(ɹǝɹoldxǝ ǝlᴉɟ ɹnoʎ uᴉ ɹǝpᴉʌoɹd ǝƃɐɹoʇs ɐ ƃuᴉsn ǝlqᴉssǝɔɔɐ oslɐ) </b>/sǝlᴉɟ/%s/ɐʇɐp/pᴉoɹpu∀<b> sᴉ sǝlᴉɟ ʌɐɾoԀ ɹoɟ ɹǝploɟ ʍǝu ǝɥ┴ <br />˙ɹǝploɟ ǝʇɐʌᴉɹd-ddɐ uɐ oʇuᴉ ʎɹoʇɔǝɹᴉp ǝɯɐƃ ǝɥʇ ǝʌoɯ oʇ pǝɹᴉnbǝɹ ǝɹɐ ǝʍ \'ɹǝɥƃᴉɥ puɐ 0Ɩ pᴉoɹpu∀ uᴉ pǝppɐ sʇuǝɯǝɔɹoɟuǝ ǝƃɐɹoʇs pǝdoɔs ʍǝu s,\ǝlƃooפ oʇ ǝnp]]></string>
 </resources>
