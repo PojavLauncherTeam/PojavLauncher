@@ -139,6 +139,10 @@
     <string name="control_customkey">Gửi phím tùy chọn</string>
     <string name="control_scaleup">Phóng to</string>
     <string name="control_scaledown">Thu nhỏ</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_invalid_file">Tệp không hợp lệ hoặc đã bị lỗi</string>
+    <string name="import_control_verifying_file">Tệp đang được xác minh, xin đợi và thử lại…</string>
+    <string name="import_control_invalid_name">Tên không hợp lệ hoặc tệp đã tồn tại</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
