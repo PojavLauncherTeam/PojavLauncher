@@ -139,6 +139,13 @@
     <string name="control_customkey">Invia keycode personalizzato</string>
     <string name="control_scaleup">Aumenta</string>
     <string name="control_scaledown">Diminuisci</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importa controlli</string>
+    <string name="import_control_invalid_file">File corrotto o non valido</string>
+    <string name="import_control_import_button">importa controlli</string>
+    <string name="import_control_verifying_file">Verifica del File in corso, per favore attendere e riprovare…</string>
+    <string name="import_control_invalid_name">Nome non valido oppure File già esistente</string>
+    <string name="import_control_done">Importazione completata</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
