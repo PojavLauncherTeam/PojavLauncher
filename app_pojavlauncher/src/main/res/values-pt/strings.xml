@@ -133,6 +133,13 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
     <string name="control_scaleup">Ampliar</string>
     <string name="control_scaledown">Diminuir</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importar Controlos</string>
+    <string name="import_control_invalid_file">Ficheiro inválido ou corrompido</string>
+    <string name="import_control_import_button">importar controlos</string>
+    <string name="import_control_verifying_file">O ficheiro está a ser verificado, por favor aguarda e tenta outra vez…</string>
+    <string name="import_control_invalid_name">Nome inválido ou o ficheiro já existe</string>
+    <string name="import_control_done">Importação concluída</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -146,6 +153,10 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="customctrl_size_height">Altura</string>
     <string name="customctrl_orientation">Orientação</string>
     <string name="customctrl_background_color">Cor do fundo</string>
+    <string name="customctrl_corner_radius">Raio dos cantos</string>
+    <string name="customctrl_dynamicpos">Posição Dinâmica manual</string>
+    <string name="customctrl_dynamicpos_x">X Dinâmico</string>
+    <string name="customctrl_dynamicpos_y">Y Dinâmico</string>
     <string name="customctrl_transparency_bg">Transparência do fundo</string>
     <string name="customctrl_button_opacity">Opacidade do botão</string>
     <string name="customctrl_keycombine">Combinação de teclas</string>
@@ -160,6 +171,8 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="main_nocrash">Nenhuma falha detetada</string>
     <string name="main_nolog">Sem registros.</string>
     <string name="main_no_news_feed">Não foi possível obter o feed de notícias!</string>
+    <string name="auto_ram_subtitle">Ativa o ajuste automático de RAM</string>
+    <string name="auto_ram_title">RAM automática</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
     <string name="mcl_setting_check_libraries">Verificar as bibliotecas depois de transferir</string>
     <string name="mcl_setting_check_libraries_subtitle">Esta opção força o lançador a verificar o banco de bibliotecas se este estiver disponível. Previne transferências com problemas.</string>
