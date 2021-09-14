@@ -133,6 +133,7 @@
     <string name="control_customkey">Send custom keycoed</string>
     <string name="control_scaleup">Bigging go up</string>
     <string name="control_scaledown">Bigging go down</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
