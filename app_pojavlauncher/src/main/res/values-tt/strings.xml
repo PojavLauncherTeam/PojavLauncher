@@ -111,6 +111,7 @@
     <string name="control_forceclose">Мәҗбүри ябу</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Кертү төзәтүе</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
