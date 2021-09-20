@@ -140,6 +140,12 @@
     <string name="control_scaleup">Boyutu Arttır</string>
     <string name="control_scaledown">Boyutu Küçült</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Kontrol içeri aktar</string>
+    <string name="import_control_invalid_file">Geçersiz veya bozuk dosya</string>
+    <string name="import_control_import_button">kontrol içeri aktar</string>
+    <string name="import_control_verifying_file">Dosya doğrulanıyor, lütfen bekleyin ve tekrar deneyin…</string>
+    <string name="import_control_invalid_name">Geçersiz ad ya da dosya zaten var</string>
+    <string name="import_control_done">İçeri aktarma tamamlandı</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
