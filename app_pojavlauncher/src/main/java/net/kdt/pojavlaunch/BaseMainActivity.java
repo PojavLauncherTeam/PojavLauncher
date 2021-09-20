@@ -669,7 +669,7 @@ public class BaseMainActivity extends LoggableActivity {
         //Sometimes, key events comes from SOME keys of the software keyboard
         //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
         if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
-            if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
+            if(eventKeycode == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
             touchCharInput.dispatchKeyEvent(event);
             return true;
         }
@@ -678,11 +678,12 @@ public class BaseMainActivity extends LoggableActivity {
 
         //Sometimes, key events may come from the mouse
         if(event.getDevice() != null
-                && ( (event.getDevice().getSources() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
-                ||   (event.getDevice().getSources() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
+                && ( (event.getSource() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
+                ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
+            Toast.makeText(this, "THE EVENT COMES FROM A MOUSE", Toast.LENGTH_SHORT).show();
 
 
-            if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+            if(eventKeycode == KeyEvent.KEYCODE_BACK){
                 sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, event.getAction() == KeyEvent.ACTION_DOWN);
                 return true;
             }
@@ -698,7 +699,7 @@ public class BaseMainActivity extends LoggableActivity {
             return true;
         }
 
-        int index = EfficientAndroidLWJGLKeycode.getIndexByKey(event.getKeyCode());
+        int index = EfficientAndroidLWJGLKeycode.getIndexByKey(eventKeycode);
         if(index >= 0) {
             //Toast.makeText(this,"THIS IS A KEYBOARD EVENT !", Toast.LENGTH_SHORT).show();
             EfficientAndroidLWJGLKeycode.execKey(event, index);
