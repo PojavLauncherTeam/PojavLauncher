@@ -680,7 +680,7 @@ public class BaseMainActivity extends LoggableActivity {
         if(event.getDevice() != null
                 && ( (event.getSource() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
                 ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
-            Toast.makeText(this, "THE EVENT COMES FROM A MOUSE", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "THE EVENT COMES FROM A MOUSE", Toast.LENGTH_SHORT).show();
 
 
             if(eventKeycode == KeyEvent.KEYCODE_BACK){
