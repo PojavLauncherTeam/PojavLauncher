@@ -12,6 +12,7 @@
     <string name="login_online_check_keeplogin">Kekalkan saya dilog masuk</string>
     <string name="login_online_login_label">Log masuk</string>
     <string name="login_offline_label">Log masuk sebagai akaun luar talian</string>
+    <string name="login_error_invalid_username">Nama pengguna tidak sah. Nama pengguna mestilah dalam lingkungan 3-16 aksara, hanya boleh mengandungi A-Z, a-z, 0-9 dan garis bawah.</string>
     <string name="login_error_exist_username">Nama pengguna ini sudah diguna</string>
     <string name="login_error_offline_password">Akaun luar talian tidak boleh dimasukkan kata laluan!</string>
     <string name="login_microsoft">Log masuk Microsoft</string>
@@ -84,6 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksport OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksport OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksport OpenGL 2.1 + partial 3.2 (belum ada sokongan 1.17)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): eksport OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksport OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
@@ -132,6 +134,9 @@
     <string name="control_scaleup">Naikkan skala</string>
     <string name="control_scaledown">Turunkan skala</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import Kawalan</string>
+    <string name="import_control_invalid_file">Fail tidak sah atau rosak</string>
+    <string name="import_control_import_button">import kawalan</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -176,4 +181,11 @@
     <string name="memory_warning_msg">Bilangan RAM yang ada (%d) lebih rendah daripada RAM yang diperuntuk (%d), yang mungkin akan menyebabkan ranap. Tukar peruntukan jikalau permainan ranap.</string>
     <string name="mcl_memory_allocation">Peruntukan memori</string>
     <string name="mcl_memory_allocation_subtitle">Mengawal berapa banyak memori yang diberikan kepada Minecraft</string>
+    <string name="compat_117_message">Minecraft 21w10a+ memerlukan profil teras OpenGL 3.2. Malangnya, pembungkus GL4ES tidak menyokongnya pada masa ini, tetapi terdapat beberapa sumber tambahan yang boleh anda pasangkan untuk menjalankan versi ini. Tekan OK untuk mengesahkan pemasangan, dan tekan Batal untuk membatalkan pelancaran.</string>
+    <string name="compat_11x_playanyway">Mainkan saja</string>
+    <string name="pvc_gameDirectory">Direktori permainan</string>
+    <string name="pvc_jvmArgs">Argumen JVM</string>
+    <string name="pvc_title">Tetapan per-versi</string>
+    <string name="storage_warning_title">Tetapan Storan</string>
+    <string name="storage_warning_text"><![CDATA[Oleh kerana penguatkuasaan penyimpanan skop baru Google yang ditambahkan dalam Android 10 dan yang lebih tinggi, kami diminta untuk memindahkan direktori permainan ke folder peribadi aplikasi. <br/>Folder baru untuk fail Pojav adalah <b>Android/data/%s/files/</b> (juga dapat diakses menggunakan penyedia penyimpanan di penjelajah fail anda).<br/>Sekiranya anda perlu menyalin fail permainan anda, sila salin semuanya dari folder asal di <b>games/PojavLauncher</b> secara manual.]]></string>
 </resources>
