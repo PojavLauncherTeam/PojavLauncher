@@ -145,7 +145,7 @@ jobs:
           name: app-debug
           path: out/app-debug.apk
     - name: Upload onto the Google Play testing track
-      uses: r0adkll/upload-google-play@v1
+      uses: r0adkll/upload-google-play@v1.0.15
       with:
         serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
         packageName: net.kdt.pojavlaunch
