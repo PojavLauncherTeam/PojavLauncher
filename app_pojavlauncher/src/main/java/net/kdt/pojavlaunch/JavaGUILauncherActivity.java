@@ -285,6 +285,13 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         JREUtils.redirectAndPrintJRELog(this);
         try {
             jreReleaseList = JREUtils.readJREReleaseProperties();
+            
+            // Fail immediately when Java 8 is not selected
+            // TODO: auto override Java 8 if installed
+            if (!jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
+                throw new RuntimeException("Cannot use the mod installer. In order to use the mod installer, you need to install Java 8 and specify it in the Preferences menu.");
+            }
+            
             List<String> javaArgList = new ArrayList<String>();
 
             // Enable Caciocavallo
