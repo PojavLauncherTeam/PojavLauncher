@@ -688,7 +688,13 @@ bool loadSymbols() {
     }
     void* dl_handle = dlopen(fileNameExt,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
     if (!dl_handle) {
+        dl_handle = dlopen(fileNameExt,RTLD_NOW|RTLD_GLOBAL);
+    }
+    if (!dl_handle) {
         dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
+        if (!dl_handle) {
+            dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL);
+        }
         printf("DlLoader: using default %s\n", fileName);
     } else {
         printf("DlLoader: using external %s\n", fileNameExt);
