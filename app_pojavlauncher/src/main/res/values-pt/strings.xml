@@ -151,6 +151,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="customctrl_size">Tamanho</string>
     <string name="customctrl_size_width">Largura</string>
     <string name="customctrl_size_height">Altura</string>
+    <string name="customctrl_mapping">Mapeamento</string>
     <string name="customctrl_orientation">Orientação</string>
     <string name="customctrl_background_color">Cor do fundo</string>
     <string name="customctrl_corner_radius">Raio dos cantos</string>
