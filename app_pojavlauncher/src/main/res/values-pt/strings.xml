@@ -149,7 +149,8 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="control_mouseon">Rato: ligado </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Forçar encerramento</string>
-    <string name="control_viewout">Saída de log</string>
+    <string name="control_viewout">Registro de saída</string>
+    <string name="control_adebug">Inserir Depuração</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
     <string name="control_scaleup">Ampliar</string>
     <string name="control_scaledown">Diminuir</string>
@@ -192,6 +193,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcl_disable_gestures_subtitle">Desativa gestos, como segurar para quebrar blocos e tocar para colocar um bloco.</string>
     <string name="mcl_setting_title_mousespeed">Velocidade do rato</string>
     <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do rato do software</string>
+    <string name="customctrl_passthru">Rato pode passar através</string>
     <string name="customctrl_rounded">Arredondado</string>
     <string name="memory_warning_msg">A quantidade atual de memória RAM livre (%d) é menor do que a memória RAM alocada (%d), o que pode levar a falhas. Altera a alocação se o jogo falhar.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
