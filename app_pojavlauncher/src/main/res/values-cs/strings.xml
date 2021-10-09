@@ -163,7 +163,7 @@
     <string name="customctrl_corner_radius">Poloměr rohu</string>
     <string name="customctrl_stroke_width">Šířka obrysu</string>
     <string name="customctrl_stroke_color">Barva obrysu</string>
-    <string name="customctrl_dynamicpos">Dynamická pozice</string>
+    <string name="customctrl_dynamicpos">Manuální Dynamická pozice</string>
     <string name="customctrl_dynamicpos_x">Dynamický X</string>
     <string name="customctrl_dynamicpos_y">Dynamický Y</string>
     <string name="customctrl_transparency_bg">Průhlednost pozadí</string>
