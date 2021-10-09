@@ -10,14 +10,14 @@
     <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
     <string name="login_online_password_hint">Parola</string>
     <string name="login_online_check_keeplogin">Ține-mă logat</string>
-    <string name="login_online_login_label">Autentificate/Loghează-te</string>
-    <string name="login_offline_label">Autentificate ca cont offline</string>
-    <string name="login_error_short_username">Numele de utilizator trebuie sa fie format din macar 3 caractere</string>
-    <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
-    <string name="login_microsoft">Conectare Microsoft</string>
+    <string name="login_online_login_label">Autentificare</string>
+    <string name="login_offline_label">Autentificare ca cont offline</string>
+    <string name="login_error_short_username">Numele de utilizator trebuie să fie de cel puțin 3 caractere</string>
+    <string name="login_error_exist_username">Acest nume de utilizator există deja</string>
+    <string name="login_microsoft">Autentificare Microsoft</string>
     <string name="login_select_account">Selectează contul</string>
     <string name="login_title_no_saved_account">Nu s-a găsit nici un cont!</string>
-    <string name="login_dialog_no_saved_account">Nu ai niciun cont salvat.\nFolosește opțiunea <b>\"tine-ma conectat\"</b> pentru a salva contul din prima conectare.</string>
+    <string name="login_dialog_no_saved_account">Nu ai niciun cont salvat.\nUtilizează opțiunea <b>\"Ține-mă logat\"</b> pentru a salva un cont la prima autentificare.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Glisează de la dreapta la stânga pentru a deschide meniul ◀\n Ține apăsat un buton pentru a personaliza: editează, schimbă mărimea sau șterge."</string>
     <!-- Warnings -->
@@ -27,11 +27,11 @@
     <string name="alerttitle_installmod">Selectează un instalator de mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher s-a oprit neașteptat</string>
-    <string name="error_no_version">Nicio versiune!</string>
+    <string name="error_no_version">Fără versiune!</string>
     <string name="error_show_more">Arată mai mult</string>
     <string name="error_show_less">Arată mai puțin</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Permisiunea de citire/scriere stocare este necesară!</string>
+    <string name="toast_permission_denied">Este necesară permisiunea de citire/scriere în memorie!</string>
     <string name="toast_optifine_success">Instalare reușită</string>
     <string name="toast_uninstalljre_done">S-a terminat de dezinstalat Java Runtime</string>
     <!--
@@ -39,17 +39,17 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Știri</string>
-    <string name="mcl_tab_console">Consolă developer</string>
+    <string name="mcl_tab_console">Consolă de dezvoltare</string>
     <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectat</string>
     <string name="mcl_account_offline">Deconectat</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
+    <string name="mcl_launch_cleancache">Se șterg fișierele cache</string>
     <string name="mcl_launch_downloading">Se descarcă %s</string>
     <string name="mcl_launch_downloading_progress">"Se descarcă %s (%.2f MB / %.2f MB)"</string>
-    <string name="mcl_launch_download_assets">Se pregătește pentru a descărca resursele</string>
+    <string name="mcl_launch_download_assets">Se pregătește pentru descărcarea resurselor</string>
     <string name="mcl_options">Opțiuni</string>
     <string name="mcl_option_modinstall">Deschide un instalator de mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Deschide un instalator de mod (cu argument personalizat)</string>
@@ -57,33 +57,33 @@
     <string name="mcl_option_settings">Setări</string>
     <string name="mcl_option_about">Despre</string>
     <string name="mcl_setting_title_uninstalljre">Dezinstalează Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[repornire lansator necesar] Acest lucru vă re-instalează Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Deschide Minecraft-ul în modul de fereastră</string>
-    <string name="mcl_setting_subtitle_freeform">Deschide Minecraft-ul în modul de fereastră plutitoare. Necesită Android 7.0+</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Repornirea lansatorului necesară] Acest lucru îți permite să reinstalezi Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Deschide Minecraft în modul de fereastră</string>
+    <string name="mcl_setting_subtitle_freeform">Deschide Minecraft în modul de fereastră plutitoare. Necesită Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ascunde Bara Laterală</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Oamenii nostalgici care preferă vechiul v1 UI ar putea să îi placă aceasta. Îți dă mai multă impresie fullscreen.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignoră notița</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignoră notița și extinde ecranul sub ea.\nÎți oferă o experiență mai imersivă.</string>
-    <string name="mcl_setting_title_resolution_scaler">Scalator de rezolutie</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Permite descreșterea rezoluției jocului. 100% este o rezoluție completă</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Oamenilor nostalgici care preferă vechea interfață v1 le-ar putea plăcea acest lucru. Oferă o experiență mai mult pe tot ecranul.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoră notch-ul</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoră notch-ul și extinde ecranul sub el.\nÎți oferă o experiență mai captivantă.</string>
+    <string name="mcl_setting_title_resolution_scaler">Scaler de rezoluție</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite reducerea rezoluției jocului. 100% este rezoluția maximă</string>
     <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Modifică timpul de declanșare pentru apăsarea lungă a butonului de distrugere a blocului și de aruncare a obiectului.</string>
     <string name="mcl_setting_title_backtorightmouse">Tratează butonul înapoi ca butonul click dreapta</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Unele dispozitive trateaza butonul click dreapta al mouse-ului extern ca butonul înapoi. Dacă folosiți mouse-ul extern, ar trebui să activați acest lucru.</string>
-    <string name="mcl_setting_title_flat_button_style">Stil buton plat</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Activează acest lucru pentru a schimba stilul butonului de control în plat.</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Unele dispozitive tratează butonul drept al mouse-ului extern ca fiind butonul înapoi. Dacă folosești un mouse extern, trebuie să activezi această opțiune.</string>
+    <string name="mcl_setting_title_flat_button_style">Stil de buton plat</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Activează această opțiune pentru a schimba stilul butonului de control în plat.</string>
     <string name="mcl_setting_title_buttonscale">Redimensionare butoane de control</string>
-    <string name="mcl_setting_subtitle_buttonscale">Fă mai mare dacă butoanele sunt prea mici.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Mărește-le dacă butoanele sunt prea mici.</string>
     <string name="mcl_setting_title_mousescale">Redimensionarea mouse-ului</string>
     <string name="mcl_setting_subtitle_mousescale">Schimbă dimensiunea mouse-ului virtual.</string>
-    <string name="mcl_setting_title_javaargs">Argumente lansare JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Aveți grijă, acest lucru poate face ca jocul să se oprească dacă este modificat fără cunoștințe.</string>
+    <string name="mcl_setting_title_javaargs">Argumente de lansare JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Ai grijă, acest lucru poate face ca jocul să se oprească dacă este modificat fără cunoștințe.</string>
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
-    <string name="mcl_setting_category_renderer">Motor de redare</string>
+    <string name="mcl_setting_category_renderer">Randator</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
-    <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
+    <string name="mcl_setting_category_veroption">Tipul de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
     <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-vechi</string>
@@ -98,7 +98,7 @@
     <string name="global_restart">Repornire</string>
     <string name="global_save">Salvează</string>
     <string name="global_unpacking">Se despachetează %s</string>
-    <string name="global_error_field_empty">Această propoziție nu poate fi goală</string>
+    <string name="global_error_field_empty">Acest câmp nu poate fi gol</string>
     <string name="global_waiting">Așteptați</string>
     <!--
     <string name="mcl_about">
@@ -118,7 +118,7 @@
     </string>
     -->
     <string name="vp_latest_snapshot">Ultimul snapshot</string>
-    <string name="vp_latest_release">Ultima Versiune Stabilă</string>
+    <string name="vp_latest_release">Ultima versiune stabilă</string>
     <string name="mcl_tab_profiles">Profiluri</string>
     <string name="mcl_profile_editor_title_profile">PROFILURI</string>
     <string name="mcl_profile_editor_title_version">VERSIUNI</string>
@@ -131,12 +131,12 @@
     <string name="mcn_exit_title">Aplicația/Jocul s-a oprit cu codul %d</string>
     <string name="mcn_exit_call">Ieșire</string>
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 nu se poate instala!</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 nu a fost instalat!</string>
     <string name="mcn_check_fail_incompatiblearch">Arhitectura %1$s nu este compatibilă cu Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatură</string>
-    <string name="control_chat">Mesaje (Chat)</string>
+    <string name="control_chat">Mesaje</string>
     <string name="control_debug">Depanare</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
@@ -173,12 +173,12 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Adaugă buton</string>
-    <string name="customctrl_selectdefault">Selectează normalul Control json</string>
+    <string name="customctrl_selectdefault">Selectați controlul implicit json</string>
     <string name="main_options">Opțiuni</string>
     <string name="main_play">Joacă</string>
     <string name="main_welcome">Bun venit, %s</string>
     <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Schimba cont/utilizator</string>
+    <string name="main_switchuser">Comută utilizatorul</string>
     <string name="main_version">Versiune:</string>
     <string name="main_nocrash">Nicio eroare detectată</string>
     <string name="main_nolog">Niciun jurnal.</string>
