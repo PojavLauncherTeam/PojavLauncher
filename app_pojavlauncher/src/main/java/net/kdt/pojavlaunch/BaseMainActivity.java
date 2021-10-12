@@ -444,6 +444,8 @@ public class BaseMainActivity extends LoggableActivity {
                                 CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
                                 scrollInitialX = (int)mouse_x;
                                 scrollInitialY = (int)mouse_y;
+                            } else if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 1) { //Touch hover
+                                CallbackBridge.sendCursorPos(e.getX(), e.getY());
                             } else if (!isTouchInHotbar) {
                                 //Camera movement
                                 if(CallbackBridge.isGrabbing()){
