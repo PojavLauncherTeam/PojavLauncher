@@ -445,7 +445,7 @@ public class BaseMainActivity extends LoggableActivity {
                                 scrollInitialX = (int)mouse_x;
                                 scrollInitialY = (int)mouse_y;
                             } else if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 1) { //Touch hover
-                                CallbackBridge.sendCursorPos(e.getX(), e.getY());
+                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 prevX =  e.getX();
                                 prevY =  e.getY();
                             } else if (!isTouchInHotbar) {
