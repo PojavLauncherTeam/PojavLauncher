@@ -305,7 +305,7 @@ public class JREUtils {
         setupExitTrap(ctx.getApplication());
         chdir(Tools.DIR_GAME_NEW);
 
-        ctx.appendlnToLog("FULL ARGS: " + Arrays.toString(userArgs.toArray(new String[0]))):
+        ctx.appendlnToLog("FULL ARGS: " + Arrays.toString(userArgs.toArray(new String[0])));
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         ctx.appendlnToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
