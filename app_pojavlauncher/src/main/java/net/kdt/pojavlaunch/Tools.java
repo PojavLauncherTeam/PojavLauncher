@@ -125,7 +125,7 @@ public final class Tools {
         PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftClientArgs(profile, versionInfo, gamedirPath);
 
-        // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
+        ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
         String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
 
