@@ -192,6 +192,7 @@ public final class Tools {
         Map<String, String> varArgMap = new ArrayMap<>();
         varArgMap.put("classpath_separator", ":");
         varArgMap.put("library_directory", strGameDir + "/libraries");
+        varArgMap.put("version_name", versionInfo.id);
 
         List<String> minecraftArgs = new ArrayList<String>();
         if (versionInfo.arguments != null) {
