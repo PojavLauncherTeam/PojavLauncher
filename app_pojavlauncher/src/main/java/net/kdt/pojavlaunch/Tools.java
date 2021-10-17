@@ -186,7 +186,7 @@ public final class Tools {
     public static String[] getMinecraftJVMArgs(JMinecraftVersionList.Version versionInfo, String strGameDir) {
         // Parse Forge 1.17+ additional JVM Arguments
         if (versionInfo.inheritsFrom == null || versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
-            return;
+            return new String[0];
         }
 
         Map<String, String> varArgMap = new ArrayMap<>();
