@@ -365,7 +365,6 @@ public final class Tools {
             libStr.append(getPatchedFile(actualname));
         }
         for (String perJar : classpath) {
-            Log.d(APP_NAME, "ADDED lib = " + perJar);
             if (!new File(perJar).exists()) {
                 Log.d(APP_NAME, "Ignored non-exists file: " + perJar);
                 continue;
@@ -556,6 +555,13 @@ public final class Tools {
         List<String> libDir = new ArrayList<String>();
 
         for (DependentLibrary libItem: info.libraries) {
+            if (libItem.rules != null) {
+                for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : libItem.rules) {
+                    if (rule.action.equals("allow") && rule.os.name.equals("osx")) {
+                        continue;
+                    }
+                }
+            }
             String[] libInfos = libItem.name.split(":");
             libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         }
