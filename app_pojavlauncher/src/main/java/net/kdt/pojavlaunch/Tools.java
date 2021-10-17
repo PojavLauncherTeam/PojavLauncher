@@ -217,7 +217,7 @@ public final class Tools {
             }
         }
 
-        String[] argsFromJson = JSONUtils.insertJSONValueList(splitAndFilterEmpty(minecraftArgs.toArray(new String[0])), varArgMap);
+        String[] argsFromJson = JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
         // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
         return argsFromJson;
     }
