@@ -125,7 +125,7 @@ public final class Tools {
         PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftClientArgs(profile, versionInfo, gamedirPath);
 
-        ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
+        // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
         String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
 
@@ -149,7 +149,7 @@ public final class Tools {
         }
 */
 
-        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionInfo, gamedirPath)));
+        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionName, gamedirPath)));
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
@@ -183,7 +183,8 @@ public final class Tools {
         javaArgList.add(cacioClasspath.toString());
     }
 
-    public static String[] getMinecraftJVMArgs(JMinecraftVersionList.Version versionInfo, String strGameDir) {
+    public static String[] getMinecraftJVMArgs(String versionName, String strGameDir) {
+        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null, versionName, true);
         // Parse Forge 1.17+ additional JVM Arguments
         if (versionInfo.inheritsFrom == null || versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
             return new String[0];
@@ -561,6 +562,10 @@ public final class Tools {
     }
 
     public static JMinecraftVersionList.Version getVersionInfo(BaseLauncherActivity bla, String versionName) {
+        return getVersionInfo(bla, versionName, false);
+    }
+
+    public static JMinecraftVersionList.Version getVersionInfo(BaseLauncherActivity bla, String versionName, boolean skipInheriting) {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             for (DependentLibrary lib : customVer.libraries) {
@@ -568,7 +573,7 @@ public final class Tools {
                     customVer.optifineLib = lib;
                 }
             }
-            if (customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
+            if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer = null;
