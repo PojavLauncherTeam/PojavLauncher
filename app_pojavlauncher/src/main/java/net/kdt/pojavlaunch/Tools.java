@@ -557,7 +557,7 @@ public final class Tools {
         for (DependentLibrary libItem: info.libraries) {
             if (libItem.rules != null) {
                 for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : libItem.rules) {
-                    if (rule.action.equals("allow") && rule.os.name.equals("osx")) {
+                    if (rule.action.equals("allow") && rule.os != null && rule.os.name.equals("osx")) {
                         continue;
                     }
                 }
