@@ -365,6 +365,7 @@ public final class Tools {
             libStr.append(getPatchedFile(actualname));
         }
         for (String perJar : classpath) {
+            Log.d(APP_NAME, "ADDED lib = " + perJar);
             if (!new File(perJar).exists()) {
                 Log.d(APP_NAME, "Ignored non-exists file: " + perJar);
                 continue;
