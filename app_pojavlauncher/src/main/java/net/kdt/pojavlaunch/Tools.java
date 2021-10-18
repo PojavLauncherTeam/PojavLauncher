@@ -558,7 +558,7 @@ public final class Tools {
             if (libItem.rules != null) {
                 System.out.println("LIBRARY " +libItem.name+" rules NOT NULL");
                 for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : libItem.rules) {
-                System.out.println("LIBRARY rule action " +rule.action+" OS "+ rule.os);
+                System.out.println("LIBRARY rule action " +rule.action+" OS "+ rule.os==null?"NULL":rule.os.name);
                     if (rule.action.equals("allow") && rule.os != null && rule.os.name.equals("osx")) {
                         continue;
                     }
