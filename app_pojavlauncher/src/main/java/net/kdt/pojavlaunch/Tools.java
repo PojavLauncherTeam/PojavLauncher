@@ -554,21 +554,17 @@ public final class Tools {
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<String>();
 
+        libLoop:
         for (DependentLibrary libItem: info.libraries) {
             if (libItem.rules != null) {
-                System.out.println("LIBRARY " +libItem.name+" rules NOT NULL");
                 for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : libItem.rules) {
-                System.out.println("LIBRARY rule action " +rule.action);
-                    if(rule.os!=null) System.out.println("LIBRARY OS name " +rule.os.name);
                     if (rule.action.equals("allow") && rule.os != null && rule.os.name.equals("osx")) {
-                        System.out.println("LIBRARY SKIPPED " + libItem.name);
-                        continue;
+                        continue libLoop;
                     }
                 }
             }
             String[] libInfos = libItem.name.split(":");
             libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
-            System.out.println("LIBRARY ADDED " + libItem.name);
         }
         return libDir.toArray(new String[0]);
     }
