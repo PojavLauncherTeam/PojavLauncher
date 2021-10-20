@@ -90,8 +90,7 @@
             android:multiprocess="true"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
-
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+            android:configChanges="keyboardHidden|orientation|screenSize|smallesScreenSize|screenLayout|keyboard|navigation"/>
         <provider
             android:name=".scoped.GameFolderProvider"
             android:authorities="@string/storageProviderAuthorities"
