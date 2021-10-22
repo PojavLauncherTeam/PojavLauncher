@@ -36,8 +36,9 @@ public class TapDetector {
      * @param detectionMethod Method used to detect touches. See DETECTION_METHOD constants above.
      */
     public TapDetector(int tapNumberToDetect, int detectionMethod){
-        this.tapNumberToDetect = tapNumberToDetect;
         this.detectionMethod = detectionMethod;
+        //We expect both ACTION_DOWN and ACTION_UP for the DETECTION_METHOD_BOTH
+        this.tapNumberToDetect = detectBothTouch() ? 2*tapNumberToDetect : tapNumberToDetect;
     }
 
     /**
@@ -47,22 +48,19 @@ public class TapDetector {
      */
     public boolean onTouchEvent(MotionEvent e){
         int eventAction = e.getActionMasked();
-        int pointerIndex;
-        int base_action, alternate_action;
+        int pointerIndex = -1;
 
         //Get the event to look forward
         if(detectDownTouch()){
-           base_action = ACTION_DOWN;
-           alternate_action = ACTION_POINTER_DOWN;
-        }else if(detectUpTouch()){
-           base_action = ACTION_UP;
-           alternate_action = ACTION_POINTER_UP;
-        }else return false;
+            if(eventAction == ACTION_DOWN) pointerIndex = 0;
+            else if(eventAction == ACTION_POINTER_DOWN) pointerIndex = e.getActionIndex();
+        }
+        if(detectUpTouch()){
+            if(eventAction == ACTION_UP) pointerIndex = 0;
+            else if(eventAction == ACTION_POINTER_UP) pointerIndex = e.getActionIndex();
+        }
 
-        //Get the pointer index we want to look at
-        if(eventAction == base_action) pointerIndex = 0;
-        else if(eventAction == alternate_action) pointerIndex = e.getActionIndex();
-        else return false;
+        if(pointerIndex == -1) return false; // Useless event
 
         //Store current event info
         float eventX = e.getX(pointerIndex);
@@ -116,5 +114,9 @@ public class TapDetector {
 
    private boolean detectUpTouch(){
        return (detectionMethod & DETECTION_METHOD_UP) == DETECTION_METHOD_UP;
+   }
+
+   private boolean detectBothTouch(){
+       return detectionMethod == DETECTION_METHOD_BOTH;
    }
 }
