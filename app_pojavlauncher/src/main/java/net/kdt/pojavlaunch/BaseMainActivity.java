@@ -166,7 +166,7 @@ public class BaseMainActivity extends LoggableActivity {
 
             
 
-            singleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_UP);
+            singleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
             doubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
 
 
