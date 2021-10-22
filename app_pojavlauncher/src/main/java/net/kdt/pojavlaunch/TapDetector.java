@@ -24,7 +24,9 @@ public class TapDetector {
 
     private final int tapNumberToDetect;
     private int currentTapNumber = 0;
+
     private final int detectionMethod;
+
     private long mLastEventTime = 0;
     private float mLastX = 9999;
     private float mLastY = 9999;
@@ -43,57 +45,59 @@ public class TapDetector {
      * @param e The MotionEvent to inspect
      * @return whether or not a X-tap happened for a pointer
      */
-   public boolean onTouchEvent(MotionEvent e){
-       int eventAction = e.getActionMasked();
-       int pointerIndex;
-       int base_action, alternate_action;
+    public boolean onTouchEvent(MotionEvent e){
+        int eventAction = e.getActionMasked();
+        int pointerIndex;
+        int base_action, alternate_action;
 
-       //Get the event to look forward
-       if(detectDownTouch()){
+        //Get the event to look forward
+        if(detectDownTouch()){
            base_action = ACTION_DOWN;
            alternate_action = ACTION_POINTER_DOWN;
-       }else if(detectUpTouch()){
+        }else if(detectUpTouch()){
            base_action = ACTION_UP;
            alternate_action = ACTION_POINTER_UP;
-       }else return false;
+        }else return false;
 
-       //Get the pointer index we want to look at
-       if(eventAction == base_action) pointerIndex = 0;
-       else if(eventAction == alternate_action) pointerIndex = e.getActionIndex();
-       else return false;
+        //Get the pointer index we want to look at
+        if(eventAction == base_action) pointerIndex = 0;
+        else if(eventAction == alternate_action) pointerIndex = e.getActionIndex();
+        else return false;
 
-       //Store current event info
-       float eventX = e.getX(pointerIndex);
-       float eventY = e.getY(pointerIndex);
-       long eventTime = e.getEventTime();
+        //Store current event info
+        float eventX = e.getX(pointerIndex);
+        float eventY = e.getY(pointerIndex);
+        long eventTime = e.getEventTime();
 
-       //Compute deltas
-       long deltaTime = eventTime - mLastEventTime;
-       int deltaX = (int) mLastX - (int) eventX;
-       int deltaY = (int) mLastY - (int) eventY;
+        //Compute deltas
+        long deltaTime = eventTime - mLastEventTime;
+        int deltaX = (int) mLastX - (int) eventX;
+        int deltaY = (int) mLastY - (int) eventY;
 
-       //Store current event info to persist on next event
-       mLastEventTime = eventTime;
-       mLastX = eventX;
-       mLastY = eventY;
+        //Store current event info to persist on next event
+        mLastEventTime = eventTime;
+        mLastX = eventX;
+        mLastY = eventY;
 
-       //Check for high enough speed and precision
-        if  ((deltaTime < DOUBLE_TAP_MIN_DELTA_MS || deltaTime > DOUBLE_TAP_MAX_DELTA_MS) ||
-            ((deltaX*deltaX + deltaY*deltaY) > DOUBLE_TAP_SLOP_SQUARE_PX)) {
-            currentTapNumber = 0;
-            return false;
+        //Check for high enough speed and precision
+        if(currentTapNumber > 0){
+            if  ((deltaTime < DOUBLE_TAP_MIN_DELTA_MS || deltaTime > DOUBLE_TAP_MAX_DELTA_MS) ||
+                ((deltaX*deltaX + deltaY*deltaY) > DOUBLE_TAP_SLOP_SQUARE_PX)) {
+                currentTapNumber = 0;
+                return false;
+            }
         }
 
         //A worthy tap happened
-       currentTapNumber += 1;
-       if(currentTapNumber == tapNumberToDetect){
+        currentTapNumber += 1;
+        if(currentTapNumber == tapNumberToDetect){
            resetTapDetectionState();
            return true;
-       }
+        }
 
-       //If not enough taps are reached
-       return false;
-   }
+        //If not enough taps are reached
+        return false;
+    }
 
     /**
      * Reset the double tap values.
