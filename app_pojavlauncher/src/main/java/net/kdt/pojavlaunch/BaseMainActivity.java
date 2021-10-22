@@ -97,7 +97,7 @@ public class BaseMainActivity extends LoggableActivity {
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
     private GestureDetector gestureDetector;
-    private DoubleTapDetector doubleTapDetector;
+    private TapDetector doubleTapDetector;
 
     private TextView debugText;
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
@@ -165,7 +165,7 @@ public class BaseMainActivity extends LoggableActivity {
 
             
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
-            doubleTapDetector = new DoubleTapDetector();
+            doubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
 
 
             // Menu
