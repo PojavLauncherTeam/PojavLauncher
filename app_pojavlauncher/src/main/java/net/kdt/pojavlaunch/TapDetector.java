@@ -18,7 +18,7 @@ public class TapDetector {
     public final static int DETECTION_METHOD_UP = 0x2;
     public final static int DETECTION_METHOD_BOTH = 0x3; //Unused for now
 
-    private final static int DOUBLE_TAP_MIN_DELTA_MS = 50;
+    private final static int DOUBLE_TAP_MIN_DELTA_MS = 10;
     private final static int DOUBLE_TAP_MAX_DELTA_MS = 300;
     private final static int DOUBLE_TAP_SLOP_SQUARE_PX = (int) Math.pow(Tools.dpToPx(100), 2);
 
