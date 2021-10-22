@@ -29,7 +29,7 @@ public class CallbackBridge {
         @Override
         public void run() {
             putMouseEventWithCoords(button, true, x, y);
-            try { Thread.sleep(40); } catch (InterruptedException e) {}
+            //try { Thread.sleep(1); } catch (InterruptedException e) {}
             putMouseEventWithCoords(button, false, x, y);
         }
     }
