@@ -96,7 +96,8 @@ public class BaseMainActivity extends LoggableActivity {
     private TextView textLog;
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
-    private GestureDetector gestureDetector;
+
+    private TapDetector singleTapDetector;
     private TapDetector doubleTapDetector;
 
     private TextView debugText;
@@ -164,7 +165,8 @@ public class BaseMainActivity extends LoggableActivity {
             System.out.println("WidthHeight: " + windowWidth + ":" + windowHeight);
 
             
-            gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+
+            singleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_UP);
             doubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
 
 
@@ -262,7 +264,7 @@ public class BaseMainActivity extends LoggableActivity {
                 float mouseX = mousePointer.getX();
                 float mouseY = mousePointer.getY();
 
-                if (gestureDetector.onTouchEvent(event)) {
+                if (singleTapDetector.onTouchEvent(event)) {
                     mouse_x = (mouseX * scaleFactor);
                     mouse_y = (mouseY * scaleFactor);
                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
@@ -354,7 +356,7 @@ public class BaseMainActivity extends LoggableActivity {
                         mouse_x =  (e.getX() * scaleFactor);
                         mouse_y =  (e.getY() * scaleFactor);
                         //One android click = one MC click
-                        if(gestureDetector.onTouchEvent(e)){
+                        if(singleTapDetector.onTouchEvent(e)){
                             CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
                             return true;
                         }
