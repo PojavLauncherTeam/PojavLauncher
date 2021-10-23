@@ -14,7 +14,7 @@
 - [Introduction](#introduction)  
 - [Building](#building) 
 - [Current status](#current-status) 
-- [License](#license)
+- [License](#license) 
 - [Contributing](#contributing) 
 - [Credits & Third party components and their licenses](#credits--third-party-components-and-their-licenses)
 
