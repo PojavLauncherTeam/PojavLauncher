@@ -444,8 +444,8 @@ public class BaseMainActivity extends LoggableActivity {
                         case MotionEvent.ACTION_MOVE:
                             if (!CallbackBridge.isGrabbing() && e.getPointerCount() >= 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
                                 CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
-                                scrollInitialX = (int)mouse_x;
-                                scrollInitialY = (int)mouse_y;
+                                scrollInitialX = mouse_x;
+                                scrollInitialY = mouse_y;
                             } else if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 1) { //Touch hover
                                 CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 prevX =  e.getX();

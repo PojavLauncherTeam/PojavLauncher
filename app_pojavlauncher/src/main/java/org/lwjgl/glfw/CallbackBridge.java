@@ -126,13 +126,6 @@ public class CallbackBridge {
             default: return null;
         }
     }
-    public static void receiveCallback(int type, String data) {
-        switch (type) {
-            case ANDROID_TYPE_GRAB_STATE:
-                // isGrabbing = Boolean.parseBoolean(data);
-                break;
-        }
-    }
 /*
     private static String currData;
     public static void sendData(int type, Object... dataArr) {

@@ -121,7 +121,7 @@ void getJavaInputBridge(jclass* clazz, jmethodID* method) {
     if (*method == NULL && runtimeJNIEnvPtr_ANDROID != NULL) {
         *clazz = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/glfw/CallbackBridge");
         assert(*clazz != NULL);
-        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IIIII)V");
+        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IFFII)V");
         assert(*method != NULL);
     }
 }
