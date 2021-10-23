@@ -15,7 +15,7 @@ public class CallbackBridge {
     
     public static volatile int windowWidth, windowHeight;
     public static volatile int physicalWidth, physicalHeight;
-    public static int mouseX, mouseY;
+    public static float mouseX, mouseY;
     public static StringBuilder DEBUG_STRING = new StringBuilder();
     
     // volatile private static boolean isGrabbing = false;
@@ -37,7 +37,7 @@ public class CallbackBridge {
         new Thread(new PusherRunnable(button,x,y)).run();
     }
     
-    public static void putMouseEventWithCoords(int button, boolean isDown, int x, int y /* , int dz, long nanos */) {
+    public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
         sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
     }
@@ -49,8 +49,8 @@ public class CallbackBridge {
         }
         
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
-        mouseX = (int) x;
-        mouseY = (int) y;
+        mouseX = x;
+        mouseY = y;
         nativeSendCursorPos(mouseX, mouseY);
     }
     
@@ -201,7 +201,7 @@ public class CallbackBridge {
     private static native boolean nativeSendCharMods(char codepoint, int mods);
     private static native void nativeSendKey(int key, int scancode, int action, int mods);
     // private static native void nativeSendCursorEnter(int entered);
-    private static native void nativeSendCursorPos(int x, int y);
+    private static native void nativeSendCursorPos(float x, float y);
     private static native void nativeSendMouseButton(int button, int action, int mods);
     private static native void nativeSendScroll(double xoffset, double yoffset);
     private static native void nativeSendScreenSize(int width, int height);

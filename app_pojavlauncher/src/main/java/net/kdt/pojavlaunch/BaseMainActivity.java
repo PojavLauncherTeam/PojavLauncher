@@ -49,7 +49,7 @@ public class BaseMainActivity extends LoggableActivity {
     public double sensitivityFactor;
     private final int fingerStillThreshold = (int) Tools.dpToPx(9);
     private float initialX, initialY;
-    private int scrollInitialX, scrollInitialY;
+    private float scrollInitialX, scrollInitialY;
     private float prevX, prevY;
     private int currentPointerID;
 
@@ -62,8 +62,8 @@ public class BaseMainActivity extends LoggableActivity {
             switch (msg.what) {
                 case MSG_LEFT_MOUSE_BUTTON_CHECK:
                     if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
-                    int x = CallbackBridge.mouseX;
-                    int y = CallbackBridge.mouseY;
+                    float x = CallbackBridge.mouseX;
+                    float y = CallbackBridge.mouseY;
                     if (CallbackBridge.isGrabbing() &&
                             Math.abs(initialX - x) < fingerStillThreshold &&
                             Math.abs(initialY - y) < fingerStillThreshold) {
