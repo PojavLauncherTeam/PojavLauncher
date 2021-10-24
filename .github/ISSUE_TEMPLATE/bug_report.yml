@@ -1,3 +1,28 @@
+# Making A Bug Issue 101:
+
+# • First, and most important: Only Use English
+
+# There's no one in the team who knows your [[specific]] language, so please translate them as necessary. This also applies at our Discord Support tickets.
+
+# • Provide everything
+
+# Never say this word: latest
+
+# Never say that word upon determining your Android and PojavLauncher version.
+
+# To check your Android Version, head over to Settings, then About Phone.
+
+# For the PojavLauncher version, go to Settings, then Manage Apps (or anything like that), then PojavLauncher
+
+# The log file is NOT named as latest.log, it is named latestlog.txt
+
+# If you're on Android 10^, head over to sdcard/Android/data/net.kdt.pojavlaunch(.debug)/files/latestlog.txt.
+
+# If you're below Android 10, then the directory is sdcard/games/PojavLauncher/
+
+# • No Offtopic
+
+# Instead of us helping, we will lock the issue to contributors instead. Please refrain from doing this
 name: Bug report
 description: ' Create a report to help us improve '
 title: "[BUG] <Short description>"
