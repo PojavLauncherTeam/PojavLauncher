@@ -134,6 +134,9 @@
     <string name="control_scaleup">放大</string>
     <string name="control_scaledown">縮小</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import controls</string>
+    <string name="import_control_invalid_file">Neplatný nebo poškozený souborgey</string>
+    <string name="import_control_import_button">import controls</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
