@@ -48,8 +48,9 @@ public class BaseMainActivity extends LoggableActivity {
     public float scaleFactor = 1;
     public double sensitivityFactor;
     private final int fingerStillThreshold = (int) Tools.dpToPx(9);
+    private final int fingerScrollThreshold = (int) Tools.dpToPx(6);
     private float initialX, initialY;
-    private float scrollInitialX, scrollInitialY;
+    private float scrollLastInitialX, scrollLastInitialY;
     private float prevX, prevY;
     private int currentPointerID;
 
@@ -275,8 +276,8 @@ public class BaseMainActivity extends LoggableActivity {
                 } else {
                     switch (action) {
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            scrollInitialX = CallbackBridge.mouseX;
-                            scrollInitialY = CallbackBridge.mouseY;
+                            scrollLastInitialX = event.getX();
+                            scrollLastInitialY = event.getY();
                             break;
 
                         case MotionEvent.ACTION_DOWN:
@@ -287,10 +288,15 @@ public class BaseMainActivity extends LoggableActivity {
 
                         case MotionEvent.ACTION_MOVE: // 2
 
-                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
-                                CallbackBridge.sendScroll( Tools.pxToDp(CallbackBridge.mouseX - scrollInitialX)/30, Tools.pxToDp(CallbackBridge.mouseY - scrollInitialY)/30);
-                                scrollInitialX = CallbackBridge.mouseX;
-                                scrollInitialY = CallbackBridge.mouseY;
+                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() >= 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
+                                int hScroll =  ((int) (event.getX() - scrollLastInitialX)) / fingerScrollThreshold;
+                                int vScroll = ((int) (event.getY() - scrollLastInitialY)) / fingerScrollThreshold;
+
+                                if(vScroll != 0 || hScroll != 0){
+                                    CallbackBridge.sendScroll(hScroll, vScroll);
+                                    scrollLastInitialX = event.getX();
+                                    scrollLastInitialY = event.getY();
+                                }
                             } else {
                                 if(currentPointerID == event.getPointerId(0)) {
                                     mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
@@ -426,8 +432,8 @@ public class BaseMainActivity extends LoggableActivity {
                             break;
 
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            scrollInitialX = CallbackBridge.mouseX;
-                            scrollInitialY = CallbackBridge.mouseY;
+                            scrollLastInitialX = e.getX();
+                            scrollLastInitialY = e.getY();
                             //Checking if we are pressing the hotbar to select the item
                             hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
                             if(hudKeyHandled != -1){
@@ -443,9 +449,16 @@ public class BaseMainActivity extends LoggableActivity {
 
                         case MotionEvent.ACTION_MOVE:
                             if (!CallbackBridge.isGrabbing() && e.getPointerCount() >= 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
-                                CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
-                                scrollInitialX = mouse_x;
-                                scrollInitialY = mouse_y;
+                                int hScroll =  ((int) (e.getX() - scrollLastInitialX)) / fingerScrollThreshold;
+                                int vScroll = ((int) (e.getY() - scrollLastInitialY)) / fingerScrollThreshold;
+
+                                if(vScroll != 0 || hScroll != 0){
+                                    CallbackBridge.sendScroll(hScroll, vScroll);
+                                    scrollLastInitialX = e.getX();
+                                    scrollLastInitialY = e.getY();
+                                }
+
+
                             } else if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 1) { //Touch hover
                                 CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 prevX =  e.getX();
