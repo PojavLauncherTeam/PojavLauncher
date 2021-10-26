@@ -507,14 +507,8 @@ public class PojavLoginActivity extends BaseActivity
             ImageView imageView = child.findViewById(R.id.account_head);
 
             String accNameStr = s.substring(0, s.length() - 5);
-            String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
-            if (skinFaceBase64 != null) {
-                byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+            imageView.setImageBitmap(MinecraftAccount.load(accNameStr).getSkinFace());
 
-                imageView.setImageDrawable(new BitmapDrawable(getResources(),
-                        bitmap));
-            }
             accountName.setText(accNameStr);
 
             accountListLayout.addView(child);
@@ -635,7 +629,6 @@ public class PojavLoginActivity extends BaseActivity
                             builder.clientToken = result[2];
                             builder.profileId = result[3];
                             builder.username = result[4];
-                            builder.selectedVersion = "1.12.2";
                             builder.updateSkinFace();
                             mProfile = builder;
                         }
