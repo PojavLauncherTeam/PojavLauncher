@@ -33,7 +33,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public ProgressBar mLaunchProgress;
 	public Spinner mVersionSelector;
 	public MultiRTConfigDialog mRuntimeConfigDialog;
-	public TextView mLaunchTextStatus, mTextVersion;
+	public TextView mLaunchTextStatus;
     
     public JMinecraftVersionList mVersionList;
 	public MinecraftDownloaderTask mTask;
@@ -45,52 +45,24 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     
     public abstract void statusIsLaunching(boolean isLaunching);
 
-    public void mcaccLogout(View view) {
-        //PojavProfile.reset();
-        finish();
+
+    /**
+     * Used by the custom control button from the layout_main_v4
+     * @param view The view triggering the function
+     */
+    public void launchCustomControlsActivity(View view){
+        startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
     }
 
-    
-    public void launcherMenu(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.mcl_options);
-        builder.setItems(R.array.mcl_options, new DialogInterface.OnClickListener(){
-
-                @Override
-                public void onClick(DialogInterface p1, int p2)
-                {
-                    switch (p2) {
-                        case 0: // Mod installer
-                            installMod(false);
-                            break;
-                        case 1: // Mod installer with java args 
-                            installMod(true);
-                            break;
-                        case 2: // Custom controls
-                            startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
-                            break;
-                        case 3: { // About
-                                final AlertDialog.Builder aboutB = new AlertDialog.Builder(BaseLauncherActivity.this);
-                                aboutB.setTitle(R.string.mcl_option_about);
-                                try {
-                                    aboutB.setMessage(Html.fromHtml(String.format(Tools.read(getAssets().open("about_en.txt")),
-                                                                                  Tools.APP_NAME,
-                                                                                  BuildConfig.VERSION_NAME,
-                                                                                  "3.2.3")
-                                                                    ));
-                                } catch (Exception e) {
-                                    throw new RuntimeException(e);
-                                }
-                                aboutB.setPositiveButton(android.R.string.ok, null);
-                                AlertDialog aboutDialog = aboutB.show();
-                                TextView aboutTv = aboutDialog.findViewById(android.R.id.message);
-                                aboutTv.setMovementMethod(LinkMovementMethod.getInstance());
-                            } break;
-                    }
-                }
-            });
-        builder.show();
+    /**
+     * Used by the install button from the layout_main_v4
+     * @param view The view triggering the function
+     */
+    public void installJarFile(View view){
+        installMod(false);
     }
+
+
     public static final int RUN_MOD_INSTALLER = 2050;
     private void installMod(boolean customJavaArgs) {
         if (customJavaArgs) {
@@ -166,13 +138,10 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         super.onResumeFragments();
         if(listRefreshListener == null) {
             final BaseLauncherActivity thiz = this;
-            listRefreshListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                    if(key.startsWith("vertype_")) {
-                        System.out.println("Verlist update needed!");
-                        new RefreshVersionListTask(thiz).execute();
-                    }
+            listRefreshListener = (sharedPreferences, key) -> {
+                if(key.startsWith("vertype_")) {
+                    System.out.println("Verlist update needed!");
+                    new RefreshVersionListTask(thiz).execute();
                 }
             };
         }

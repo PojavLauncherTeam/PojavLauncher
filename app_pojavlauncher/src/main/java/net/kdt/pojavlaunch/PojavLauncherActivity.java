@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch;
 
 import android.animation.ValueAnimator;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -15,7 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,11 +46,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
     private ViewPager viewPager;
 
-    private TextView tvUsernameView, tvConnectStatus;
+    private TextView tvConnectStatus;
     private Spinner accountSelector;
     private ViewPagerAdapter viewPageAdapter;
     private final Button[] Tabs = new Button[4];
     private View selected;
+    private ImageView accountFaceImageView;
 
     private Button logoutBtn; // MineButtons
 
@@ -64,14 +64,26 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launcher_main_v4);
 
+        //Boilerplate linking/initialisation
+        viewPager = findViewById(R.id.launchermainTabPager);
+        selected = findViewById(R.id.viewTabSelected);
+        tvConnectStatus = findViewById(R.id.launchermain_text_accountstatus);
+        accountFaceImageView = findViewById(R.id.launchermain_account_image);
+        accountSelector = findViewById(R.id.launchermain_spinner_account);
+        mVersionSelector = findViewById(R.id.launchermain_spinner_version);
+        mLaunchProgress = findViewById(R.id.progressDownloadBar);
+        mLaunchTextStatus = findViewById(R.id.progressDownloadText);
+        logoutBtn = findViewById(R.id.installJarButton);
+        mPlayButton = findViewById(R.id.launchermainPlayButton);
+        Tabs[0] = findViewById(R.id.btnTab1);
+        Tabs[1] = findViewById(R.id.btnTab2);
+        Tabs[2] = findViewById(R.id.btnTab3);
+        Tabs[3] = findViewById(R.id.btnTab4);
+
 
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
         }
-
-
-        viewPager = findViewById(R.id.launchermainTabPager);
-        selected = findViewById(R.id.viewTabSelected);
 
         mConsoleView = new ConsoleFragment();
         mCrashView = new CrashFragment();
@@ -89,28 +101,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
 
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels){}
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
         viewPager.setAdapter(viewPageAdapter);
-
-        tvConnectStatus = (TextView) findViewById(R.id.launchermain_text_accountstatus);
-        tvUsernameView = (TextView) findViewById(R.id.launchermain_text_welcome);
-        mTextVersion = (TextView) findViewById(R.id.launcherMainVersionView);
-
-        //The following line is used to make this TextView horizontally scroll if the version name is larger than the view
-        mTextVersion.setSelected(true);
-
-        Tabs[0] = findViewById(R.id.btnTab1);
-        Tabs[1] = findViewById(R.id.btnTab2);
-        Tabs[2] = findViewById(R.id.btnTab3);
-        Tabs[3] = findViewById(R.id.btnTab4);
 
 
         pickAccount();
@@ -127,7 +123,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         
         ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        accountSelector = (Spinner) findViewById(R.id.launchermain_spinner_account);
+
+        //TODO AUTHENTICATION WHEN CHANGING ACCOUNT
+        //TODO SHOW ACCOUNT IMAGE IF AVAILABLE
         accountSelector.setAdapter(adapterAcc);
         if (tempProfile != null) {
             accountSelector.setSelection(0);
@@ -158,7 +156,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
         });
         
-        List<String> versions = new ArrayList<String>();
+        List<String> versions = new ArrayList<>();
         final File fVers = new File(Tools.DIR_HOME_VERSION);
 
         try {
@@ -179,39 +177,28 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }
 
         //mAvailableVersions;
-        ArrayAdapter<String> adapterVer = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
+        ArrayAdapter<String> adapterVer = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
         adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        mVersionSelector = (Spinner) findViewById(R.id.launchermain_spinner_version);
         mVersionSelector.setAdapter(adapterVer);
-
-        mLaunchProgress = (ProgressBar) findViewById(R.id.progressDownloadBar);
-        mLaunchTextStatus = (TextView) findViewById(R.id.progressDownloadText);
-        logoutBtn = (Button) findViewById(R.id.switchUserBtn);
-
-        mPlayButton = (Button) findViewById(R.id.launchermainPlayButton);
 
         statusIsLaunching(false);
 
-
         initTabs(0);
-        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if(key.equals("hideSidebar")){
-                    changeLookAndFeel(sharedPreferences.getBoolean("hideSidebar",false));
-                    return;
-                }
 
-                if(key.equals("ignoreNotch")){
-                    ignoreNotch(sharedPreferences.getBoolean("ignoreNotch", true), PojavLauncherActivity.this);
-                    return;
-                }
+        //Add the preference changed listener
+        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> {
+            if(key.equals("hideSidebar")){
+                changeLookAndFeel(sharedPreferences.getBoolean("hideSidebar",false));
+                return;
+            }
+
+            if(key.equals("ignoreNotch")){
+                ignoreNotch(sharedPreferences.getBoolean("ignoreNotch", true), PojavLauncherActivity.this);
+                return;
             }
         });
         changeLookAndFeel(PREF_HIDE_SIDEBAR);
-        ignoreNotch(PREF_IGNORE_NOTCH, PojavLauncherActivity.this);
     }
-
 
     private void selectTabPage(int pageIndex){
         viewPager.setCurrentItem(pageIndex);
@@ -221,8 +208,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private void pickAccount() {
         try {
             mProfile = PojavProfile.getCurrentProfileContent(this);
+            accountFaceImageView.setImageBitmap(mProfile.getSkinFace());
 
-            tvUsernameView.setText(getString(R.string.main_welcome, mProfile.username));
+            //TODO FULL BACKGROUND LOGIN
             tvConnectStatus.setText(mProfile.accessToken.equals("0") ? R.string.mcl_account_offline : R.string.mcl_account_connected);
         } catch(Exception e) {
             mProfile = new MinecraftAccount();
@@ -267,13 +255,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
     protected void initTabs(int activeTab){
         final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //Do something after 100ms
-                selectTabPage(activeTab);
-            }
-        }, 500);
+        handler.post(() -> {
+            //Do something after 100ms
+            selectTabPage(activeTab);
+        });
     }
 
     private void changeLookAndFeel(boolean useOldLook){
@@ -286,8 +271,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             params.guidePercent = 0; // 0%, range: 0 <-> 1
             guideLine.setLayoutParams(params);
 
-            //Remove the selected Tab
+            //Remove the selected Tab and the head image
             selected.setVisibility(View.GONE);
+            accountFaceImageView.setVisibility(View.GONE);
 
             //Enlarge the button, but just a bit.
             params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
@@ -300,6 +286,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
             //Show the selected Tab
             selected.setVisibility(View.VISIBLE);
+            accountFaceImageView.setVisibility(View.VISIBLE);
 
             //Set the default button size
             params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
