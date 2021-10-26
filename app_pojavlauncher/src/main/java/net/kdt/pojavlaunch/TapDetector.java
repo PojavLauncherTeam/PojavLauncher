@@ -88,7 +88,7 @@ public class TapDetector {
 
         //A worthy tap happened
         currentTapNumber += 1;
-        if(currentTapNumber == tapNumberToDetect){
+        if(currentTapNumber >= tapNumberToDetect){
            resetTapDetectionState();
            return true;
         }
