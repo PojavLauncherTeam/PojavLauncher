@@ -18,9 +18,9 @@ public class TapDetector {
     public final static int DETECTION_METHOD_UP = 0x2;
     public final static int DETECTION_METHOD_BOTH = 0x3; //Unused for now
 
-    private final static int DOUBLE_TAP_MIN_DELTA_MS = 10;
-    private final static int DOUBLE_TAP_MAX_DELTA_MS = 300;
-    private final static int DOUBLE_TAP_SLOP_SQUARE_PX = (int) Math.pow(Tools.dpToPx(100), 2);
+    private final static int TAP_MIN_DELTA_MS = 10;
+    private final static int TAP_MAX_DELTA_MS = 300;
+    private final static int TAP_SLOP_SQUARE_PX = (int) Math.pow(Tools.dpToPx(100), 2);
 
     private final int tapNumberToDetect;
     private int currentTapNumber = 0;
@@ -79,8 +79,8 @@ public class TapDetector {
 
         //Check for high enough speed and precision
         if(currentTapNumber > 0){
-            if  ((deltaTime < DOUBLE_TAP_MIN_DELTA_MS || deltaTime > DOUBLE_TAP_MAX_DELTA_MS) ||
-                ((deltaX*deltaX + deltaY*deltaY) > DOUBLE_TAP_SLOP_SQUARE_PX)) {
+            if  ((deltaTime < TAP_MIN_DELTA_MS || deltaTime > TAP_MAX_DELTA_MS) ||
+                ((deltaX*deltaX + deltaY*deltaY) > TAP_SLOP_SQUARE_PX)) {
                 currentTapNumber = 0;
                 return false;
             }
