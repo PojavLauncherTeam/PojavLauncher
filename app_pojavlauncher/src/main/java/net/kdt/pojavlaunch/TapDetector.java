@@ -81,8 +81,8 @@ public class TapDetector {
         if(currentTapNumber > 0){
             if  ((deltaTime < TAP_MIN_DELTA_MS || deltaTime > TAP_MAX_DELTA_MS) ||
                 ((deltaX*deltaX + deltaY*deltaY) > TAP_SLOP_SQUARE_PX)) {
+                // We invalidate previous taps, not this one though
                 currentTapNumber = 0;
-                return false;
             }
         }
 
