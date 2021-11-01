@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto">
+
+    <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
+
+    <PreferenceCategory android:title="Miscellaneous settings">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="hideSidebar"
+            android:summary="@string/mcl_setting_subtitle_hide_sidebar"
+            android:title="@string/mcl_setting_title_hide_sidebar"
+            app2:icon="@drawable/hide_sidebar" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_lib_check"
+            android:key="checkLibraries"
+            android:summary="@string/mcl_setting_check_libraries_subtitle"
+            android:title="@string/mcl_setting_check_libraries" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/mcl_setting_category_veroption">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="vertype_release"
+            android:title="@string/mcl_setting_veroption_release" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_snapshot"
+            android:title="@string/mcl_setting_veroption_snapshot" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_oldalpha"
+            android:title="@string/mcl_setting_veroption_oldalpha" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vertype_oldbeta"
+            android:title="@string/mcl_setting_veroption_oldbeta" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

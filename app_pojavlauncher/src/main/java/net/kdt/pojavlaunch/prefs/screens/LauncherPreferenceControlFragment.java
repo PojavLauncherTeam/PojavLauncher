@@ -1,0 +1,36 @@
+package net.kdt.pojavlaunch.prefs.screens;
+
+import android.os.Bundle;
+
+import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+
+public class LauncherPreferenceControlFragment extends LauncherPreferenceFragment {
+
+    @Override
+    public void onCreatePreferences(Bundle b, String str) {
+        addPreferencesFromResource(R.xml.pref_control);
+
+        CustomSeekBarPreference seek2 = findPreference("timeLongPressTrigger");
+        seek2.setRange(100, 1000);
+        seek2.setValue(LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+        seek2.setSuffix(" ms");
+
+        CustomSeekBarPreference seek3 = findPreference("buttonscale");
+        seek3.setRange(80, 250);
+        seek3.setValue((int) LauncherPreferences.PREF_BUTTONSIZE);
+        seek3.setSuffix(" %");
+
+        CustomSeekBarPreference seek4 = findPreference("mousescale");
+        seek4.setRange(25, 300);
+        seek4.setValue((int) LauncherPreferences.PREF_MOUSESCALE);
+        seek4.setSuffix(" %");
+
+        CustomSeekBarPreference seek6 = findPreference("mousespeed");
+        seek6.setRange(25, 300);
+        seek6.setValue((int)(LauncherPreferences.PREF_MOUSESPEED*100f));
+        seek6.setSuffix(" %");
+
+    }
+}
