@@ -2,8 +2,10 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.database.Cursor;
 import android.net.*;
 import android.os.*;
+import android.provider.OpenableColumns;
 import android.system.*;
 import android.util.*;
 import com.google.gson.*;
@@ -860,5 +862,27 @@ public final class Tools {
         displaySideRes *= scaling;
         if(displaySideRes % 2 != 0) displaySideRes ++;
         return displaySideRes;
+    }
+
+    public static String getFileName(Context ctx, Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = ctx.getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
 }
