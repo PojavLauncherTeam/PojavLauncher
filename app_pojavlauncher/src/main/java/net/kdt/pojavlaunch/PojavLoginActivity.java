@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Architecture.archAsString;
+import static net.kdt.pojavlaunch.Tools.getFileName;
 
 import android.Manifest;
 import android.app.Activity;
@@ -379,7 +380,7 @@ public class PojavLoginActivity extends BaseActivity
                     final Uri uri = data.getData();
                     Thread t = new Thread(() -> {
                         try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), BaseLauncherActivity.getFileName(this, uri),
+                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(this, uri),
                                     (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
                                             () -> {
                                                 if (startupTextView != null)
