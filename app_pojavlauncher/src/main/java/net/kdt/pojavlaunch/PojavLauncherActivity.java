@@ -338,13 +338,13 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
-        if (count == 0 && viewPager.getCurrentItem() == 3) {
+        if(count > 0 && viewPager.getCurrentItem() == 3){
+            getSupportFragmentManager().popBackStack();
+        }else{
             super.onBackPressed();
             //additional code
             ExtraCore.removeExtraListener("back_preference", backPreferenceListener);
             finish();
-        } else {
-            getSupportFragmentManager().popBackStack();
         }
     }
 }
