@@ -324,7 +324,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         }
 
         if (p1.length < 3) {
-            mActivity.mConsoleView.putLog(p1[1] + "\n");
+            //mActivity.mConsoleView.putLog(p1[1] + "\n");
         }
     }
 
@@ -341,7 +341,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             Tools.showError(mActivity, p1);
         }
         if(!launchWithError) {
-            mActivity.mCrashView.setLastCrash("");
+            //mActivity.mCrashView.setLastCrash("");
 
             try {
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);

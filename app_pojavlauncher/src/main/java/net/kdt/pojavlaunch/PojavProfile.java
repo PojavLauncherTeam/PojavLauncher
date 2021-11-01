@@ -25,13 +25,13 @@ public class PojavProfile
 	public static MinecraftAccount getCurrentProfileContent(Context ctx) throws JsonSyntaxException {
 		MinecraftAccount build = MinecraftAccount.load(getCurrentProfileName(ctx));
         if (build == null) {
-            System.out.println("isTempProfile null? " + (getTempProfileContent(ctx) == null));
-            return getTempProfileContent(ctx);
+            System.out.println("isTempProfile null? " + (getTempProfileContent() == null));
+            return getTempProfileContent();
         }
         return build;
 	}
 
-    public static MinecraftAccount getTempProfileContent(Context ctx) {
+    public static MinecraftAccount getTempProfileContent() {
 	    try {
             MinecraftAccount acc = MinecraftAccount.parse(Tools.read(Tools.DIR_DATA+"/cache/tempacc.json"));
             if (acc.accessToken == null) {
