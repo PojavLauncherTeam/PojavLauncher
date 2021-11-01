@@ -36,7 +36,7 @@ public final class ExtraCore {
      * @param key The key
      * @param value The value
      */
-    public synchronized static void setValue(String key, String value){
+    public static void setValue(String key, String value){
         getInstance().valueMap.put(key, value);
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> extraListenerList = getInstance().listenerMap.get(key);
         for(WeakReference<ExtraListener> listener : extraListenerList){
@@ -49,7 +49,7 @@ public final class ExtraCore {
     }
 
     /** @return The value behind the key */
-    public synchronized static String getValue(String key){
+    public static String getValue(String key){
         return getInstance().valueMap.get(key);
     }
 
@@ -58,7 +58,7 @@ public final class ExtraCore {
      * @param key The value key to look for
      * @param listener The ExtraListener to link
      */
-    public synchronized static void addExtraListener(String key, ExtraListener listener){
+    public static void addExtraListener(String key, ExtraListener listener){
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
@@ -76,7 +76,7 @@ public final class ExtraCore {
      * @param key The value key to ignore now
      * @param listener The ExtraListener to unlink
      */
-    public synchronized static void removeExtraListener(String key, ExtraListener listener){
+    public static void removeExtraListener(String key, ExtraListener listener){
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
