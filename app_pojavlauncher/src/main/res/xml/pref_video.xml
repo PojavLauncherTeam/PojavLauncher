@@ -10,7 +10,8 @@
             android:key="renderer"
             android:defaultValue="opengles2"
             android:entries="@array/renderer"
-            android:entryValues="@array/renderer_values"/>
+            android:entryValues="@array/renderer_values"
+            app2:useSimpleSummaryProvider="true"/>
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
