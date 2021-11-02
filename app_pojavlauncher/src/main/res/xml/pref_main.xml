@@ -33,7 +33,7 @@
         android:key="experimental_screen_setting"
         android:title="Experimental Stuff"
         android:summary="Use things there with consideration, no support."
-        android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceMiscellaneousFragment"
+        android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceExperimentalFragment"
         />
 
 </PreferenceScreen>
