@@ -15,6 +15,9 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
     @Override
     public void onCreatePreferences(Bundle b, String str) {
+        int ramAllocation = LauncherPreferences.PREF_RAM_ALLOCATION;
+
+        // Triggers a write for some reason
         addPreferencesFromResource(R.xml.pref_java);
 
         int maxRAM;
@@ -27,7 +30,7 @@ public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
         else maxRAM = deviceRam - (deviceRam < 3064 ? 800 : 1024); //To have a minimum for the device to breathe
 
         seek7.setMax(maxRAM);
-        seek7.setValue(LauncherPreferences.PREF_RAM_ALLOCATION);
+        seek7.setValue(ramAllocation);
         seek7.setSuffix(" MB");
 
 

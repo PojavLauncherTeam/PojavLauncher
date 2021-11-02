@@ -10,26 +10,33 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
 
     @Override
     public void onCreatePreferences(Bundle b, String str) {
+        // Get values
+        int longPressTrigger = LauncherPreferences.PREF_LONGPRESS_TRIGGER;
+        int prefButtonSize = (int) LauncherPreferences.PREF_BUTTONSIZE;
+        int mouseScale = (int) LauncherPreferences.PREF_MOUSESCALE;
+        float mouseSpeed = LauncherPreferences.PREF_MOUSESPEED;
+
+        //Triggers a write for some reason which resets the value
         addPreferencesFromResource(R.xml.pref_control);
 
         CustomSeekBarPreference seek2 = findPreference("timeLongPressTrigger");
         seek2.setRange(100, 1000);
-        seek2.setValue(LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+        seek2.setValue(longPressTrigger);
         seek2.setSuffix(" ms");
 
         CustomSeekBarPreference seek3 = findPreference("buttonscale");
         seek3.setRange(80, 250);
-        seek3.setValue((int) LauncherPreferences.PREF_BUTTONSIZE);
+        seek3.setValue(prefButtonSize);
         seek3.setSuffix(" %");
 
         CustomSeekBarPreference seek4 = findPreference("mousescale");
         seek4.setRange(25, 300);
-        seek4.setValue((int) LauncherPreferences.PREF_MOUSESCALE);
+        seek4.setValue(mouseScale);
         seek4.setSuffix(" %");
 
         CustomSeekBarPreference seek6 = findPreference("mousespeed");
         seek6.setRange(25, 300);
-        seek6.setValue((int)(LauncherPreferences.PREF_MOUSESPEED*100f));
+        seek6.setValue((int)(mouseSpeed *100f));
         seek6.setSuffix(" %");
 
     }
