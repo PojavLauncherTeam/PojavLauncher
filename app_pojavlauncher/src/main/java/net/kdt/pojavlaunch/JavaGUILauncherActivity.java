@@ -193,6 +193,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                                 break;
                         }
                     }
+                    return true;
                 }
             });
            
