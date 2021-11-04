@@ -183,7 +183,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                         sendScaledMousePosition(x, y);
                         AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
                     } else {
-                        switch (action) {
+                        switch (event.getActionMasked()) {
                             case MotionEvent.ACTION_UP: // 1
                             case MotionEvent.ACTION_CANCEL: // 3
                             case MotionEvent.ACTION_POINTER_UP: // 6
@@ -299,7 +299,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     public void toggleVirtualMouse(View v) {
         isVirtualMouseEnabled = !isVirtualMouseEnabled;
         touchPad.setVisibility(isVirtualMouseEnabled ? View.VISIBLE : View.GONE);
-        Toast.makeText(ctx,
+        Toast.makeText(this,
                 isVirtualMouseEnabled ? R.string.control_mouseon : R.string.control_mouseoff,
                 Toast.LENGTH_SHORT).show();
     }
