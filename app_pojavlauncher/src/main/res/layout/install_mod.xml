@@ -42,7 +42,16 @@
 			android:background="@drawable/control_button"
 			android:text="@string/control_viewout"
 			android:onClick="openLogOutput"
-			android:layout_toLeftOf="@id/installmod_btn2"/>
+			android:layout_toLeftOf="@id/installmod_btn2"
+			android:id="@+id/installmod_btn3"/>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:background="@drawable/control_button"
+			android:text="@string/control_mouse"
+			android:onClick="toggleVirtualMouse"
+			android:layout_toLeftOf="@id/installmod_btn3"/>
 
 		<Button
 			android:id="@+id/installmod_scale_down"
