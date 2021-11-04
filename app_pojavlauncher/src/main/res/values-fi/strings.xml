@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition Androidille)</string>
+    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_login_label">Kirjaudu sisään</string>
+    <string name="login_select_account">Valitse tili</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
@@ -15,21 +19,27 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_crash">Kaatumisloki</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_options">Valinnat</string>
+    <string name="mcl_version_msg">Valmiina pelaamaan Minecraft %s-versiota</string>
+    <string name="mcl_options">Asetukset</string>
     <string name="mcl_option_settings">Asetukset</string>
     <string name="mcl_setting_category_general">Yleiset asetukset</string>
     <!-- Global strings -->
     <string name="global_warinng">Varoitus</string>
+    <string name="global_save">Tallenna</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Poistu</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_mouse">Hiiri</string>
     <!-- MainActivity: Menu advanced controls -->
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="main_options">Valinnat</string>
+    <string name="main_options">Asetukset</string>
+    <string name="main_switchuser">Vaihda käyttäjää</string>
     <string name="main_version">Versio:</string>
 </resources>
