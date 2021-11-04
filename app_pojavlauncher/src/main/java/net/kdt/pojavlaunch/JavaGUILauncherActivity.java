@@ -35,7 +35,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     
     private final Object mDialogLock = new Object();
 
-    private boolean isLogAllow, mSkipDetectMod;
+    private boolean isLogAllow, mSkipDetectMod, isVirtualMouseEnabled;
 
     private boolean rightOverride = false;
     private int scaleFactor;
@@ -79,6 +79,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
             
             this.touchPad = findViewById(R.id.main_touchpad);
             touchPad.setFocusable(false);
+            touchPad.setVisibility(View.GONE);
 
             this.mousePointer = findViewById(R.id.main_mouse_pointer);
             this.mousePointer.post(() -> {
@@ -86,7 +87,6 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
                 params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
             });
-
 
             touchPad.setOnTouchListener(new OnTouchListener(){
                     private float prevX, prevY;
@@ -174,6 +174,27 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
 
             mTextureView = findViewById(R.id.installmod_surfaceview);
+            mTextureView.setOnTouchListener(new OnTouchListener(){
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    float x = event.getX();
+                    float y = event.getY();
+                    if (gestureDetector.onTouchEvent(event)) {
+                        sendScaledMousePosition(x, y);
+                        AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
+                    } else {
+                        switch (action) {
+                            case MotionEvent.ACTION_UP: // 1
+                            case MotionEvent.ACTION_CANCEL: // 3
+                            case MotionEvent.ACTION_POINTER_UP: // 6
+                                break;
+                            case MotionEvent.ACTION_MOVE: // 2
+                                sendScaledMousePosition(x, y);
+                                break;
+                        }
+                    }
+                }
+            });
            
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
             if (mSkipDetectMod) {
@@ -273,6 +294,14 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         } else {
             forceClose(null);
         }
+    }
+
+    public void toggleVirtualMouse(View v) {
+        isVirtualMouseEnabled = !isVirtualMouseEnabled;
+        touchPad.setVisibility(isVirtualMouseEnabled ? View.VISIBLE : View.GONE);
+        Toast.makeText(ctx,
+                isVirtualMouseEnabled ? R.string.control_mouseon : R.string.control_mouseoff,
+                Toast.LENGTH_SHORT).show();
     }
     
     private int doCustomInstall(File modFile, String javaArgs) throws IOException {
