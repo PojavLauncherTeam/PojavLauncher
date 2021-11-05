@@ -623,8 +623,10 @@ EGLint (*eglGetError_p) (void);
 EGLContext (*eglCreateContext_p) (EGLDisplay dpy, EGLConfig config, EGLContext share_list, const EGLint *attrib_list);
 EGLBoolean (*eglSwapInterval_p) (EGLDisplay dpy, EGLint interval);
 EGLSurface (*eglGetCurrentSurface_p) (EGLint readdraw);
+int (*virgl_main_p) ();
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
+#define RENDERER_VIRGL 3
 
 int config_renderer;
 
@@ -672,6 +674,39 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIE
         default: return (jlong) 0;
     }
 }
+
+void dlsym_EGL(void* dl_handle) {
+    eglBindAPI_p = dlsym(dl_handle,"eglBindAPI");
+    eglChooseConfig_p = dlsym(dl_handle, "eglChooseConfig");
+    eglCreateContext_p = dlsym(dl_handle, "eglCreateContext");
+    eglCreateWindowSurface_p = dlsym(dl_handle, "eglCreateWindowSurface");
+    eglDestroyContext_p = dlsym(dl_handle, "eglDestroyContext");
+    eglDestroySurface_p = dlsym(dl_handle, "eglDestroySurface");
+    eglGetConfigAttrib_p = dlsym(dl_handle, "eglGetConfigAttrib");
+    eglGetCurrentContext_p = dlsym(dl_handle, "eglGetCurrentContext");
+    eglGetDisplay_p = dlsym(dl_handle, "eglGetDisplay");
+    eglGetError_p = dlsym(dl_handle, "eglGetError");
+    eglInitialize_p = dlsym(dl_handle, "eglInitialize");
+    eglMakeCurrent_p = dlsym(dl_handle, "eglMakeCurrent");
+    eglSwapBuffers_p = dlsym(dl_handle, "eglSwapBuffers");
+    eglReleaseThread_p = dlsym(dl_handle, "eglReleaseThread");
+    eglSwapInterval_p = dlsym(dl_handle, "eglSwapInterval");
+    eglTerminate_p = dlsym(dl_handle, "eglTerminate");
+    eglGetCurrentSurface_p = dlsym(dl_handle,"eglGetCurrentSurface");
+}
+
+void dlsym_OSMesa(void* dl_handle) {
+    OSMesaMakeCurrent_p = dlsym(dl_handle,"OSMesaMakeCurrent");
+    OSMesaGetCurrentContext_p = dlsym(dl_handle,"OSMesaGetCurrentContext");
+    OSMesaCreateContext_p = dlsym(dl_handle, "OSMesaCreateContext");
+    OSMesaDestroyContext_p = dlsym(dl_handle, "OSMesaDestroyContext");
+    OSMesaPixelStore_p = dlsym(dl_handle,"OSMesaPixelStore");
+    glGetString_p = dlsym(dl_handle,"glGetString");
+    glClearColor_p = dlsym(dl_handle, "glClearColor");
+    glClear_p = dlsym(dl_handle,"glClear");
+    glFinish_p = dlsym(dl_handle,"glFinish");
+}
+
 bool loadSymbols() {
     char* fileName;
     char* fileNameExt;
@@ -706,47 +741,53 @@ bool loadSymbols() {
     }
     switch(config_renderer) {
         case RENDERER_VK_ZINK:
-            OSMesaMakeCurrent_p = dlsym(dl_handle,"OSMesaMakeCurrent");
-            OSMesaGetCurrentContext_p = dlsym(dl_handle,"OSMesaGetCurrentContext");
-            OSMesaCreateContext_p = dlsym(dl_handle, "OSMesaCreateContext");
-            OSMesaDestroyContext_p = dlsym(dl_handle, "OSMesaDestroyContext");
-            OSMesaPixelStore_p = dlsym(dl_handle,"OSMesaPixelStore");
-            glGetString_p = dlsym(dl_handle,"glGetString");
-            glClearColor_p = dlsym(dl_handle, "glClearColor");
-            glClear_p = dlsym(dl_handle,"glClear");
-            glFinish_p = dlsym(dl_handle,"glFinish");
+            dlsym_OSMesa(dl_handle);
             break;
         case RENDERER_GL4ES:
-            eglBindAPI_p = dlsym(dl_handle,"eglBindAPI");
-            eglChooseConfig_p = dlsym(dl_handle, "eglChooseConfig");
-            eglCreateContext_p = dlsym(dl_handle, "eglCreateContext");
-            eglCreateWindowSurface_p = dlsym(dl_handle, "eglCreateWindowSurface");
-            eglDestroyContext_p = dlsym(dl_handle, "eglDestroyContext");
-            eglDestroySurface_p = dlsym(dl_handle, "eglDestroySurface");
-            eglGetConfigAttrib_p = dlsym(dl_handle, "eglGetConfigAttrib");
-            eglGetCurrentContext_p = dlsym(dl_handle, "eglGetCurrentContext");
-            eglGetDisplay_p = dlsym(dl_handle, "eglGetDisplay");
-            eglGetError_p = dlsym(dl_handle, "eglGetError");
-            eglInitialize_p = dlsym(dl_handle, "eglInitialize");
-            eglMakeCurrent_p = dlsym(dl_handle, "eglMakeCurrent");
-            eglSwapBuffers_p = dlsym(dl_handle, "eglSwapBuffers");
-            eglReleaseThread_p = dlsym(dl_handle, "eglReleaseThread");
-            eglSwapInterval_p = dlsym(dl_handle, "eglSwapInterval");
-            eglTerminate_p = dlsym(dl_handle, "eglTerminate");
-            eglGetCurrentSurface_p = dlsym(dl_handle,"eglGetCurrentSurface");
+            dlsym_EGL(dl_handle);
             break;
     }
 }
+
+bool loadSymbolsVirGL() {
+    char *fileName = "libEGL.so";
+    void* dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
+    if (!dl_handle) {
+        dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL);
+    }
+    dlsym_EGL(dl_handle);
+
+    fileName = "libOSMesa_8.so";
+    void* dl_handle2 = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
+    if (!dl_handle2) {
+        dl_handle2 = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL);
+    }
+    dlsym_OSMesa(dl_handle2);
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
     ANativeWindow_acquire(potatoBridge.androidWindow);
     savedWidth = ANativeWindow_getWidth(potatoBridge.androidWindow);
     savedHeight = ANativeWindow_getHeight(potatoBridge.androidWindow);
     ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
 
-    const char *renderer = getenv("POJAV_RENDERER");
-    if (strncmp("opengles", renderer, 8) == 0) {
+    // NOTE: Override for now.
+    const char *renderer = "opengles3_virgl";
+    //getenv("POJAV_RENDERER");
+    if (strncmp("opengles3_virgl", renderer, 15) == 0) {
+        config_renderer = RENDERER_VIRGL;
+        setenv("GALLIUM_DRIVER","virpipe",1);
+        setenv("VTEST_USE_GLES","1",1);
+        loadSymbolsVirGL();
+    } else if (strncmp("opengles", renderer, 8) == 0) {
         config_renderer = RENDERER_GL4ES;
         loadSymbols();
+    } else if (strcmp(renderer, "vulkan_zink") == 0) {
+        config_renderer = RENDERER_VK_ZINK;
+        setenv("GALLIUM_DRIVER","zink",1);
+    }
+
+    if (config_renderer == RENDERER_GL4ES || config_renderer == RENDERER_VIRGL) {
         if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
             potatoBridge.eglDisplay = eglGetDisplay_p(EGL_DEFAULT_DISPLAY);
             if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
@@ -817,10 +858,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
                potatoBridge.eglSurface
         );
         return JNI_TRUE;
-    } else if (strcmp(renderer, "vulkan_zink") == 0) {
-        config_renderer = RENDERER_VK_ZINK;
-        
-        setenv("GALLIUM_DRIVER","zink",1);
+    }
+    if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
         loadSymbols();
         if(OSMesaCreateContext_p == NULL) {
             printf("OSMDroid: %s\n",dlerror());
@@ -846,7 +885,8 @@ int32_t stride;
 bool stopSwapBuffers;
 void flipFrame() {
     switch (config_renderer) {
-        case RENDERER_GL4ES: {
+        case RENDERER_GL4ES:
+        case RENDERER_VIRGL: {
             if (!eglSwapBuffers_p(potatoBridge.eglDisplay, eglGetCurrentSurface_p(EGL_DRAW))) {
                 if (eglGetError_p() == EGL_BAD_SURFACE) {
                     stopSwapBuffers = true;
@@ -874,6 +914,30 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv 
     return JNI_TRUE;
 }
 
+void* egl_make_current(void* window) {
+    EGLBoolean success = eglMakeCurrent_p(
+        potatoBridge.eglDisplay,
+        window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+        window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+        /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
+    );
+
+    if (success == EGL_FALSE) {
+        printf("EGLBridge: Error: eglMakeCurrent() failed: %p\n", eglGetError_p());
+    } else {
+        printf("EGLBridge: eglMakeCurrent() succeed!\n");
+    }
+
+    if (config_renderer == RENDERER_VIRGL) {
+        void *virgl = dlopen("libvirgl_vtest_server.so", RTLD_GLOBAL);
+        if (virgl) {
+            virgl_main_p = dlsym(virgl, "vtest_main");
+            printf("virgl_main_p %p\n", virgl_main_p);
+            virgl_main_p();
+        }
+    }
+}
+
 bool locked = false;
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
     //if(OSMesaGetCurrentContext_p() != NULL) {
@@ -881,8 +945,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
     //    return JNI_TRUE;
     //}
     
-    switch (config_renderer) {
-        case RENDERER_GL4ES: {
+    if (config_renderer == RENDERER_GL4ES || config_renderer == RENDERER_VIRGL) {
             EGLContext *currCtx = eglGetCurrentContext_p();
             printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
             if (currCtx == NULL || window == 0) {
@@ -903,16 +966,15 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         //potatoBridge.eglContextOld = (void *) window;
         // eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
                 printf("EGLBridge: Making current on window %p on thread %d\n", window, gettid());
-                EGLBoolean success = eglMakeCurrent_p(
-                    potatoBridge.eglDisplay,
-                    window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
-                    window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
-                    /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
-                );
-                if (success == EGL_FALSE) {
-                    printf("EGLBridge: Error: eglMakeCurrent() failed: %p\n", eglGetError_p());
+                if (config_renderer != RENDERER_VIRGL) {
+                    egl_make_current((void *)window);
                 } else {
-                    printf("EGLBridge: eglMakeCurrent() succeed!\n");
+                    pthread_t t;
+                    pthread_create(&t, NULL, egl_make_current, (void *)window);
+                    pthread_join(t, NULL);
+
+                    // make sure to have enough time for vtest server to init
+                    usleep(100*1000);
                 }
 
                 // Test
@@ -924,29 +986,21 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 #endif
 
                 // idk this should convert or just `return success;`...
-                return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
+                return JNI_TRUE; //success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
             } else {
                 // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
                 return JNI_FALSE;
             }
-        }
-        
-        case RENDERER_VK_ZINK: {
+    }
+
+    if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: making current\n");
             OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
-            ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
-            OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
-            stride = buf.stride;
-            //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
-
-            if (getenv("ZINK_FORCEGL") == "1") {
-                printf("OSMDroid: Forcing enable Vulkan extensions for Zink\n");
-                struct zink_screen *zscreen = ((struct st_manager*)((OSMesaContext)window)->stctx->st_context_private)->screen;
-
-                // OpenGL 3.0
-                zscreen->info.have_EXT_transform_feedback = true;
-                zscreen->info.have_EXT_conditional_rendering = true;
-                // zscreen->info.feats.features.independentBlend = true; 
+            if (config_renderer == RENDERER_VK_ZINK) {
+                ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
+                OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
+                stride = buf.stride;
+                //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
             }
 
             OSMesaPixelStore_p(OSMESA_Y_UP,0);
@@ -956,7 +1010,6 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
             glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
             flipFrame();
             return JNI_TRUE;
-        }
     }
 }
 
@@ -965,7 +1018,8 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
     //Obstruct the context on the current thread
     
     switch (config_renderer) {
-        case RENDERER_GL4ES: {
+        case RENDERER_GL4ES:
+        case RENDERER_VIRGL: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         } break;
         
@@ -977,10 +1031,9 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
-    switch (config_renderer) {
-        case RENDERER_GL4ES: {
+    if (config_renderer == RENDERER_GL4ES || config_renderer == RENDERER_VIRGL) {
             const EGLint ctx_attribs[] = {
-                EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
+                EGL_CONTEXT_CLIENT_VERSION, (config_renderer == RENDERER_VIRGL ? 3 : atoi(getenv("LIBGL_ES"))),
                 EGL_NONE
             };
             EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
@@ -990,14 +1043,13 @@ Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong
             printf("EGLBridge: Created CTX pointer = %p\n",ctx);
             //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
             return (long)ctx;
-        }
+    }
         
-        case RENDERER_VK_ZINK: {
+    if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: generating context\n");
             void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
             printf("OSMDroid: context=%p",ctx);
             return ctx;
-        }
     }
 }
 
@@ -1028,7 +1080,8 @@ Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, jobject thiz) {
 }
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv *env, jclass clazz, jint interval) {
     switch (config_renderer) {
-        case RENDERER_GL4ES: {
+        case RENDERER_GL4ES:
+        case RENDERER_VIRGL: {
             return eglSwapInterval_p(potatoBridge.eglDisplay, interval);
         } break;
         
