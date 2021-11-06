@@ -343,7 +343,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }else{
             super.onBackPressed();
             //additional code
-            ExtraCore.removeExtraListener("back_preference", backPreferenceListener);
+            ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
             finish();
         }
     }

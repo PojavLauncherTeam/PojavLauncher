@@ -53,6 +53,16 @@ public final class ExtraCore {
         return getInstance().valueMap.get(key);
     }
 
+    /** Remove the key and its value from the valueMap */
+    public static void removeValue(String key){
+        getInstance().valueMap.remove(key);
+    }
+
+    /** Remove all values */
+    public static void removeAllValues(){
+        getInstance().valueMap.clear();
+    }
+
     /**
      * Link an ExtraListener to a value
      * @param key The value key to look for
@@ -76,7 +86,7 @@ public final class ExtraCore {
      * @param key The value key to ignore now
      * @param listener The ExtraListener to unlink
      */
-    public static void removeExtraListener(String key, ExtraListener listener){
+    public static void removeExtraListenerFromValue(String key, ExtraListener listener){
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
@@ -93,4 +103,27 @@ public final class ExtraCore {
             }
         }
     }
+
+    /**
+     * Unlink all ExtraListeners from a value
+     * @param key The key to which ExtraListener are linked
+     */
+    public static void removeAllExtraListenersFromValue(String key){
+        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
+        // Look for new sets
+        if(listenerList == null){
+            listenerList = new ConcurrentLinkedQueue<>();
+            getInstance().listenerMap.put(key, listenerList);
+        }
+
+        listenerList.clear();
+    }
+
+    /**
+     * Remove all ExtraListeners from listening to any value
+     */
+    public static void removeAllExtraListeners(){
+        getInstance().listenerMap.clear();
+    }
+
 }

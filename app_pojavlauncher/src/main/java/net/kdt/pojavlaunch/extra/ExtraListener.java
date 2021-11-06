@@ -12,7 +12,7 @@ public abstract class ExtraListener {
      */
     public final void notifyDataChanged(String key, String value){
         if(onValueSet(key, value)){
-            ExtraCore.removeExtraListener(key, this);
+            ExtraCore.removeExtraListenerFromValue(key, this);
         }
     }
 
