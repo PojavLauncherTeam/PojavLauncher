@@ -255,4 +255,26 @@
     <string name="pvc_title">Per-version settings</string>
     <string name="storage_warning_title">Storage changes</string>
     <string name="storage_warning_text"> <![CDATA[Due to Google\'s new scoped storage enforcements added in Android 10 and higher, we are required to move the game directory into an app-private folder.<br /> The new folder for Pojav files is <b>Android/data/%s/files/</b> (also accessible using a storage provider in your file explorer).<br /> If you need to copy your game files, please copy everything from the original folder at <b>games/PojavLauncher</b> manually.]]></string>
+
+    <string name="control_offset_title">Control offset</string>
+    <string name="control_top_offset">Top offset: </string>
+    <string name="control_right_offset">right offset: </string>
+    <string name="control_bottom_offset">bottom offset: </string>
+    <string name="control_left_offset">left offset: </string>
+
+    <string name="preference_control_offset_title">Control side offsets</string>
+    <string name="preference_control_offset_description">Set a custom offset to each side of the screen</string>
+    <string name="preference_video_title">Video and renderer</string>
+    <string name="preference_video_description">Resolution, scaling type, and renderer</string>
+    <string name="preference_control_title">Control customization</string>
+    <string name="preference_control_description">Gestures types, triggers, and scaling</string>
+    <string name="preference_java_title">Java Tweaks</string>
+    <string name="preference_java_description">Java versions, JVM Arguments, and RAM amount</string>
+    <string name="preference_misc_title">Miscellaneous settings</string>
+    <string name="preference_misc_description">Version list, and libs checks</string>
+    <string name="preference_experimental_title">Experimental Stuff</string>
+    <string name="preference_experimental_description">Use things there with consideration, no support.</string>
+
+    <string name="preference_back_title">Back to the last screen</string>
+
 </resources>

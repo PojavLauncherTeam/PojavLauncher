@@ -38,7 +38,7 @@ public class ControlOffsetPreference extends Preference {
     private void init(){
         // Setup visual values
         if(getTitle() == null){
-            setTitle("Control side offsets");
+            setTitle(R.string.preference_back_title);
         }
         if(getIcon() == null){
             setIcon(android.R.drawable.radiobutton_off_background);
@@ -47,7 +47,7 @@ public class ControlOffsetPreference extends Preference {
         // Prepare Alert dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         dialogBuilder.setView(R.layout.control_offset_preference_dialog);
-        dialogBuilder.setTitle("Control offset");
+        dialogBuilder.setTitle(getContext().getString(R.string.control_offset_title));
 
         dialogBuilder.setPositiveButton(android.R.string.ok, null);
         dialogBuilder.setNegativeButton(android.R.string.cancel, null);
@@ -75,19 +75,23 @@ public class ControlOffsetPreference extends Preference {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if(seekBar == topOffsetSeekbar){
-                    topOffsetTextView.setText("Top offset: " + i);
+                    String text = String.format("%s%d", getContext().getString(R.string.control_top_offset), i);
+                    topOffsetTextView.setText(text);
                     return;
                 }
                 if(seekBar == rightOffsetSeekbar){
-                    rightOffsetTextView.setText("Right offset: " + i);
+                    String text = String.format("%s%d", getContext().getString(R.string.control_right_offset), i);
+                    rightOffsetTextView.setText(text);
                     return;
                 }
                 if(seekBar == bottomOffsetSeekbar){
-                    bottomOffsetTextView.setText("Bottom offset: " + i);
+                    String text = String.format("%s%d", getContext().getString(R.string.control_bottom_offset), i);
+                    bottomOffsetTextView.setText(text);
                     return;
                 }
                 if(seekBar == leftOffsetSeekbar){
-                    leftOffsetTextView.setText("Left offset: " + i);
+                    String text = String.format("%s%d", getContext().getString(R.string.control_left_offset), i);
+                    leftOffsetTextView.setText(text);
                     return;
                 }
             }

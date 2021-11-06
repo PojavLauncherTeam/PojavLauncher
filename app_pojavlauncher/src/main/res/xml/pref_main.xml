@@ -3,36 +3,36 @@
 
     <Preference
         android:key="video_screen_setting"
-        android:title="Video and renderer"
-        android:summary="Resolution, scaling type, and renderer"
+        android:title="@string/preference_video_title"
+        android:summary="@string/preference_video_description"
         android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceVideoFragment"
         />
 
     <Preference
         android:key="control_screen_setting"
-        android:title="Control customization"
-        android:summary="Gestures types, triggers, and scaling"
+        android:title="@string/preference_control_title"
+        android:summary="@string/preference_control_description"
         android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceControlFragment"
         />
 
     <Preference
         android:key="java_screen_setting"
-        android:title="Java Tweaks"
-        android:summary="Java versions, JVM Arguments, and RAM amount"
+        android:title="@string/preference_java_title"
+        android:summary="@string/preference_java_description"
         android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceJavaFragment"
         />
 
     <Preference
         android:key="misc_screen_setting"
-        android:title="Miscellaneous settings"
-        android:summary="Version list, and libs checks"
+        android:title="@string/preference_misc_title"
+        android:summary="@string/preference_misc_description"
         android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceMiscellaneousFragment"
         />
 
     <Preference
         android:key="experimental_screen_setting"
-        android:title="Experimental Stuff"
-        android:summary="Use things there with consideration, no support."
+        android:title="@string/preference_experimental_title"
+        android:summary="@string/preference_experimental_description"
         android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceExperimentalFragment"
         />
 

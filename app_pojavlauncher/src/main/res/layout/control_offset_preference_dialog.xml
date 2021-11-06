@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginHorizontal="15dp">
 
@@ -13,7 +13,7 @@
             android:id="@+id/control_offset_top_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Top offset:"
+            android:text="@string/control_top_offset"
             />
 
         <SeekBar
@@ -26,7 +26,7 @@
             android:id="@+id/control_offset_right_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Right offset:"
+            android:text="@string/control_right_offset"
             />
 
         <SeekBar
@@ -39,7 +39,7 @@
             android:id="@+id/control_offset_bottom_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bottom offset:"
+            android:text="@string/control_bottom_offset"
             />
 
         <SeekBar
@@ -51,7 +51,7 @@
             android:id="@+id/control_offset_left_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Left offset:"
+            android:text="@string/control_left_offset"
             />
 
         <SeekBar
