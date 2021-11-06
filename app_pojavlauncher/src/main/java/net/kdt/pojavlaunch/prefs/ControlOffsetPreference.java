@@ -38,7 +38,8 @@ public class ControlOffsetPreference extends Preference {
     private void init(){
         // Setup visual values
         if(getTitle() == null){
-            setTitle(R.string.preference_back_title);
+            setTitle(R.string.preference_control_offset_title);
+            setSummary(R.string.preference_control_offset_description);
         }
         if(getIcon() == null){
             setIcon(android.R.drawable.radiobutton_off_background);
