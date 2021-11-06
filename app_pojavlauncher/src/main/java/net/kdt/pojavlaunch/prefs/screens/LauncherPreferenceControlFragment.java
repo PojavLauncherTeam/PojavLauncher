@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.prefs.screens;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import net.kdt.pojavlaunch.R;
@@ -39,5 +40,19 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         seek6.setValue((int)(mouseSpeed *100f));
         seek6.setSuffix(" %");
 
+
+        computeVisibility();
     }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences p, String s) {
+        super.onSharedPreferenceChanged(p, s);
+        computeVisibility();
+    }
+
+    private void computeVisibility(){
+        CustomSeekBarPreference seek2 = findPreference("timeLongPressTrigger");
+        seek2.setVisible(!LauncherPreferences.PREF_DISABLE_GESTURES);
+    }
+
 }

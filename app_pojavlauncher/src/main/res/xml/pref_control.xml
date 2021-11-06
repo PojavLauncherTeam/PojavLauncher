@@ -20,7 +20,23 @@
             android:title="@string/mcl_setting_title_longpresstrigger"
             app2:showSeekBarValue="true"
             app2:selectable="false"
+            app2:seekBarIncrement="10"
             app2:icon="@drawable/tap_len" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Buttons">
+
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="buttonscale"
+            android:title="@string/mcl_setting_title_buttonscale"
+            android:summary="@string/mcl_setting_subtitle_buttonscale"
+            app2:showSeekBarValue="true"
+            app2:selectable="false"
+            app2:icon="@drawable/btn_scale"/>
+
+        <net.kdt.pojavlaunch.prefs.ControlOffsetPreference/>
 
     </PreferenceCategory>
 
@@ -43,18 +59,7 @@
             app2:showSeekBarValue="true" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="Buttons">
 
-        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
-            android:key="buttonscale"
-            android:title="@string/mcl_setting_title_buttonscale"
-            android:summary="@string/mcl_setting_subtitle_buttonscale"
-            app2:showSeekBarValue="true"
-            app2:selectable="false"
-            app2:icon="@drawable/btn_scale"/>
-
-    </PreferenceCategory>
 
 
 </PreferenceScreen>
