@@ -752,19 +752,11 @@ bool loadSymbols() {
 }
 
 bool loadSymbolsVirGL() {
-    char *fileName = "libEGL.so";
-    void* dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
-    if (!dl_handle) {
-        dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL);
-    }
-    dlsym_EGL(dl_handle);
-
-    fileName = "libOSMesa_8.so";
-    void* dl_handle2 = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
-    if (!dl_handle2) {
-        dl_handle2 = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL);
-    }
-    dlsym_OSMesa(dl_handle2);
+    config_renderer = RENDERER_GL4ES;
+    loadSymbols();
+    config_renderer = RENDERER_VK_ZINK;
+    loadSymbols();
+    config_renderer = RENDERER_VIRGL;
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
