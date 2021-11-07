@@ -655,6 +655,7 @@ void terminateEgl() {
             potatoBridge.eglSurface = EGL_NO_SURFACE;
         } break;
         
+        //case RENDERER_VIRGL:
         case RENDERER_VK_ZINK: {
             // Nothing to do here
         } break;
@@ -670,6 +671,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIE
         case RENDERER_GL4ES:
             return (jlong) eglGetCurrentContext_p();
 
+        case RENDERER_VIRGL:
         case RENDERER_VK_ZINK:
             return (jlong) OSMesaGetCurrentContext_p();
 
@@ -1055,7 +1057,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: generating context\n");
             void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
-            printf("OSMDroid: context=%p",ctx);
+            printf("OSMDroid: context=%p\n",ctx);
             return ctx;
     }
 }
