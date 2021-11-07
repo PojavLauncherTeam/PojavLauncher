@@ -623,19 +623,21 @@ EGLint (*eglGetError_p) (void);
 EGLContext (*eglCreateContext_p) (EGLDisplay dpy, EGLConfig config, EGLContext share_list, const EGLint *attrib_list);
 EGLBoolean (*eglSwapInterval_p) (EGLDisplay dpy, EGLint interval);
 EGLSurface (*eglGetCurrentSurface_p) (EGLint readdraw);
-int (*virgl_main_p) ();
+int (*vtest_main_p) (int argc, char** argv);
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
 #define RENDERER_VIRGL 3
 
 int config_renderer;
+void* gbuffer;
+
+void* egl_make_current(void* window);
 
 void pojav_openGLOnLoad() {
 }
 void pojav_openGLOnUnload() {
 
 }
-void* gbuffer;
 
 void terminateEgl() {
     printf("EGLBridge: Terminating\n");
@@ -857,8 +859,25 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
                potatoBridge.eglDisplay,
                potatoBridge.eglSurface
         );
-        return JNI_TRUE;
+        if (config_renderer != RENDERER_VIRGL) {
+            return JNI_TRUE;
+        }
     }
+
+    if (config_renderer == RENDERER_VIRGL) {
+        // Init EGL context and vtest server
+        const EGLint ctx_attribs[] = {
+            EGL_CONTEXT_CLIENT_VERSION, 3,
+            EGL_NONE
+        };
+        EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, NULL, ctx_attribs);
+        printf("VirGL: created EGL context %p\n", ctx);
+
+        pthread_t t;
+        pthread_create(&t, NULL, egl_make_current, (void *)ctx);
+        usleep(100*1000); // need enough time for the server to init
+    }
+
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
         loadSymbols();
         if(OSMesaCreateContext_p == NULL) {
@@ -885,8 +904,7 @@ int32_t stride;
 bool stopSwapBuffers;
 void flipFrame() {
     switch (config_renderer) {
-        case RENDERER_GL4ES:
-        case RENDERER_VIRGL: {
+        case RENDERER_GL4ES: {
             if (!eglSwapBuffers_p(potatoBridge.eglDisplay, eglGetCurrentSurface_p(EGL_DRAW))) {
                 if (eglGetError_p() == EGL_BAD_SURFACE) {
                     stopSwapBuffers = true;
@@ -895,6 +913,8 @@ void flipFrame() {
             }
         } break;
         
+        case RENDERER_VIRGL:
+        // VirGL TODO: hook glFinish as eglSwapBuffers
         case RENDERER_VK_ZINK: {
             ((struct osmesa_context)*OSMesaGetCurrentContext_p())
             .current_buffer->map = buf.bits;
@@ -929,11 +949,15 @@ void* egl_make_current(void* window) {
     }
 
     if (config_renderer == RENDERER_VIRGL) {
-        void *virgl = dlopen("libvirgl_vtest_server.so", RTLD_GLOBAL);
+        void *virgl = dlopen("libvirgl_test_server.so", RTLD_GLOBAL);
+        printf("VirGL: libvirgl_test_server = %p\n", virgl);
         if (virgl) {
-            virgl_main_p = dlsym(virgl, "vtest_main");
-            printf("virgl_main_p %p\n", virgl_main_p);
-            virgl_main_p();
+            vtest_main_p = dlsym(virgl, "vtest_main");
+            printf("VirGL: vtest_main = %p\n", vtest_main_p);
+            printf("VirGL: Calling VTest server's main function\n");
+            vtest_main_p(3, (const char*[]){"vtest", "--no-loop-or-fork", "--use-gles", NULL, NULL});
+        } else {
+            printf("VirGL: %s\n", dlerror());
         }
     }
 }
@@ -945,7 +969,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
     //    return JNI_TRUE;
     //}
     
-    if (config_renderer == RENDERER_GL4ES || config_renderer == RENDERER_VIRGL) {
+    if (config_renderer == RENDERER_GL4ES) {
             EGLContext *currCtx = eglGetCurrentContext_p();
             printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
             if (currCtx == NULL || window == 0) {
@@ -966,16 +990,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
         //potatoBridge.eglContextOld = (void *) window;
         // eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
                 printf("EGLBridge: Making current on window %p on thread %d\n", window, gettid());
-                if (config_renderer != RENDERER_VIRGL) {
-                    egl_make_current((void *)window);
-                } else {
-                    pthread_t t;
-                    pthread_create(&t, NULL, egl_make_current, (void *)window);
-                    pthread_join(t, NULL);
-
-                    // make sure to have enough time for vtest server to init
-                    usleep(100*1000);
-                }
+                egl_make_current((void *)window);
 
                 // Test
 #ifdef GLES_TEST
@@ -1018,11 +1033,11 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
     //Obstruct the context on the current thread
     
     switch (config_renderer) {
-        case RENDERER_GL4ES:
-        case RENDERER_VIRGL: {
+        case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         } break;
-        
+
+        case RENDERER_VIRGL:
         case RENDERER_VK_ZINK: {
             // Nothing to do here
         } break;
@@ -1031,9 +1046,9 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
-    if (config_renderer == RENDERER_GL4ES || config_renderer == RENDERER_VIRGL) {
+    if (config_renderer == RENDERER_GL4ES) {
             const EGLint ctx_attribs[] = {
-                EGL_CONTEXT_CLIENT_VERSION, (config_renderer == RENDERER_VIRGL ? 3 : atoi(getenv("LIBGL_ES"))),
+                EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
                 EGL_NONE
             };
             EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
