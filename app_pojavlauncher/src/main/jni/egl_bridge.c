@@ -787,6 +787,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     } else if (strcmp(renderer, "vulkan_zink") == 0) {
         config_renderer = RENDERER_VK_ZINK;
         setenv("GALLIUM_DRIVER","zink",1);
+        loadSymbols();
     }
 
     if (config_renderer == RENDERER_GL4ES || config_renderer == RENDERER_VIRGL) {
@@ -879,7 +880,6 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     }
 
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
-        loadSymbols();
         if(OSMesaCreateContext_p == NULL) {
             printf("OSMDroid: %s\n",dlerror());
             return JNI_FALSE;
