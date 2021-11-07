@@ -144,14 +144,15 @@ jobs:
       with:
           name: app-debug
           path: out/app-debug.apk
-#    - name: Upload onto the Google Play testing track
-#      uses: r0adkll/upload-google-play@v1.0.15
-#      with:
-#        serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
-#        packageName: net.kdt.pojavlaunch
-#        releaseFiles: out/app-gplay.aab
-#        track: internal
-#        inAppUpdatePriority: 5
+    - name: Upload onto the Google Play testing track
+      if: github.ref == 'refs/heads/v3_openjdk'
+      uses: r0adkll/upload-google-play@v1.0.15
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
+        packageName: net.kdt.pojavlaunch
+        releaseFiles: out/app-gplay.aab
+        track: internal
+        inAppUpdatePriority: 5
     - name: Upload APK (without runtime)
       uses: actions/upload-artifact@v2
       with:
