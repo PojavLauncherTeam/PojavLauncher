@@ -363,8 +363,8 @@ public final class GL {
                     nativeRegalMakeCurrent();
                 }
             } else if (System.getenv("POJAV_RENDERER").equals("vulkan_zink")) {
-                int[] dims = getNativeWidthHeight();
-                callJPI(GLFW.glfwGetCurrentContext(),getGraphicsBufferAddr(),GL_UNSIGNED_BYTE,dims[0],dims[1],functionProvider.getFunctionAddress("OSMesaMakeCurrent"));
+                //int[] dims = getNativeWidthHeight();
+                //callJPI(GLFW.glfwGetCurrentContext(),getGraphicsBufferAddr(),GL_UNSIGNED_BYTE,dims[0],dims[1],functionProvider.getFunctionAddress("OSMesaMakeCurrent"));
             }
 
             // We don't have a current ContextCapabilities when this method is called
