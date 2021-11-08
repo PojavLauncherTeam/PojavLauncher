@@ -935,7 +935,7 @@ void* egl_make_current(void* window) {
     }
 
     if (config_renderer == RENDERER_VIRGL) {
-        void *virgl = dlopen("libvirgl_test_server.so", RTLD_GLOBAL);
+        void *virgl = dlopen("libvirgl_test_server.so", RTLD_LAZY);
         printf("VirGL: libvirgl_test_server = %p\n", virgl);
         if (virgl) {
             vtest_main_p = dlsym(virgl, "vtest_main");
