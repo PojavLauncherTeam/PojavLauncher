@@ -639,7 +639,7 @@ void pojav_openGLOnUnload() {
 
 }
 
-void terminateEgl() {
+void pojavTerminate() {
     printf("EGLBridge: Terminating\n");
     
     switch (config_renderer) {
@@ -666,16 +666,16 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow
     potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglGetCurrentContext(JNIEnv* env, jclass clazz) {
+void* pojavGetCurrentContext() {
     switch (config_renderer) {
         case RENDERER_GL4ES:
-            return (jlong) eglGetCurrentContext_p();
+            return (void *)eglGetCurrentContext_p();
 
         case RENDERER_VIRGL:
         case RENDERER_VK_ZINK:
-            return (jlong) OSMesaGetCurrentContext_p();
+            return (void *)OSMesaGetCurrentContext_p();
 
-        default: return (jlong) 0;
+        default: return NULL;
     }
 }
 
@@ -761,19 +761,17 @@ bool loadSymbolsVirGL() {
     config_renderer = RENDERER_VIRGL;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, jclass clazz) {
+int pojavInit() {
     ANativeWindow_acquire(potatoBridge.androidWindow);
     savedWidth = ANativeWindow_getWidth(potatoBridge.androidWindow);
     savedHeight = ANativeWindow_getHeight(potatoBridge.androidWindow);
     ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
 
     // NOTE: Override for now.
-    const char *renderer = "opengles3_virgl";
-    //getenv("POJAV_RENDERER");
+    const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles3_virgl", renderer, 15) == 0) {
         config_renderer = RENDERER_VIRGL;
         setenv("GALLIUM_DRIVER","virpipe",1);
-        setenv("VTEST_USE_GLES","1",1);
         loadSymbolsVirGL();
     } else if (strncmp("opengles", renderer, 8) == 0) {
         config_renderer = RENDERER_GL4ES;
@@ -789,7 +787,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
             potatoBridge.eglDisplay = eglGetDisplay_p(EGL_DEFAULT_DISPLAY);
             if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
                 printf("EGLBridge: Error eglGetDefaultDisplay() failed: %p\n", eglGetError_p());
-                return JNI_FALSE;
+                return 0;
             }
         }
 
@@ -798,7 +796,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
         if (!eglInitialize_p(potatoBridge.eglDisplay, NULL, NULL)) {
             printf("EGLBridge: Error eglInitialize() failed: %s\n", eglGetError_p());
-            return JNI_FALSE;
+            return 0;
         }
 
         static const EGLint attribs[] = {
@@ -817,7 +815,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
 
         if (!eglChooseConfig_p(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
             printf("EGLBridge: Error couldn't get an EGL visual config: %s\n", eglGetError_p());
-            return JNI_FALSE;
+            return 0;
         }
 
         assert(config);
@@ -825,7 +823,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
 
         if (!eglGetConfigAttrib_p(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
             printf("EGLBridge: Error eglGetConfigAttrib() failed: %s\n", eglGetError_p());
-            return JNI_FALSE;
+            return 0;
         }
 
         ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow, 0, 0, vid);
@@ -837,7 +835,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         if (!potatoBridge.eglSurface) {
             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
             //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-            return JNI_FALSE;
+            return 0;
         }
 
         // sanity checks
@@ -855,7 +853,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
                potatoBridge.eglSurface
         );
         if (config_renderer != RENDERER_VIRGL) {
-            return JNI_TRUE;
+            return 1;
         }
     }
 
@@ -876,7 +874,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
         if(OSMesaCreateContext_p == NULL) {
             printf("OSMDroid: %s\n",dlerror());
-            return JNI_FALSE;
+            return 0;
         }
         
         printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", savedWidth, savedHeight,
@@ -884,19 +882,22 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglInit(JNIEnv* env, j
         gbuffer = malloc(savedWidth * 4 * savedHeight+1);
         if (gbuffer) {
             printf("OSMDroid: created frame buffer\n");
-            return JNI_TRUE;
+            return 1;
         } else {
             printf("OSMDroid: can't generate frame buffer\n");
-            return JNI_FALSE;
+            return 0;
         }
     }
     
-    return JNI_FALSE;
+    return 0;
 }
 ANativeWindow_Buffer buf;
 int32_t stride;
 bool stopSwapBuffers;
-void flipFrame() {
+void pojavSwapBuffers() {
+    if (stopSwapBuffers) {
+        return;
+    }
     switch (config_renderer) {
         case RENDERER_GL4ES: {
             if (!eglSwapBuffers_p(potatoBridge.eglDisplay, eglGetCurrentSurface_p(EGL_DRAW))) {
@@ -917,15 +918,6 @@ void flipFrame() {
             ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
         } break;
     }
-}
-
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapBuffers(JNIEnv *env, jclass clazz) {
-    if (stopSwapBuffers) {
-        return JNI_FALSE;
-    }
-    flipFrame();
-    
-    return JNI_TRUE;
 }
 
 void* egl_make_current(void* window) {
@@ -957,7 +949,7 @@ void* egl_make_current(void* window) {
 }
 
 bool locked = false;
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv* env, jclass clazz, jlong window) {
+void pojavMakeCurrent(void* window) {
     //if(OSMesaGetCurrentContext_p() != NULL) {
     //    printf("OSMDroid: skipped context reset\n");
     //    return JNI_TRUE;
@@ -1017,11 +1009,12 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
             printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
             glClear_p(GL_COLOR_BUFFER_BIT);
             glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
-            flipFrame();
+            pojavSwapBuffers();
             return JNI_TRUE;
     }
 }
 
+/*
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass clazz) {
     //Obstruct the context on the current thread
@@ -1037,6 +1030,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
         } break;
     }
 }
+*/
 
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
@@ -1062,11 +1056,6 @@ Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong
     }
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglTerminate(JNIEnv* env, jclass clazz) {
-    terminateEgl();
-    return JNI_TRUE;
-}
-
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *env, jclass clazz) {
     /*printf("Regal: making current");
     
@@ -1087,7 +1076,7 @@ Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, jobject thiz) {
     (*env)->SetIntArrayRegion(env,ret,0,2,arr);
     return ret;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglSwapInterval(JNIEnv *env, jclass clazz, jint interval) {
+void pojavSwapInterval(int interval) {
     switch (config_renderer) {
         case RENDERER_GL4ES:
         case RENDERER_VIRGL: {

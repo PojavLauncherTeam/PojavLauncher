@@ -501,6 +501,7 @@ public class GLFW
     private static final String PROP_WINDOW_WIDTH = "glfwstub.windowWidth";
     private static final String PROP_WINDOW_HEIGHT= "glfwstub.windowHeight";
     public static long mainContext = 0;
+
     static {
         String windowWidth = System.getProperty(PROP_WINDOW_WIDTH);
         String windowHeight = System.getProperty(PROP_WINDOW_HEIGHT);
@@ -550,7 +551,7 @@ public class GLFW
                 }
             }
         } catch (IllegalAccessException e) {
-            // This will never happend since this is accessing itself
+            // This will never happen since this is accessing itself
         }
 
 		/*
@@ -568,14 +569,7 @@ public class GLFW
 		 */
 	}
 
-    private static native long nativeEglGetCurrentContext();
-	private static native boolean nativeEglInit();
-	public static native boolean nativeEglMakeCurrent(long window);
-	public static native void nativeEglDetachOnCurrentThread();
 	public static native long nativeEglCreateContext(long contextSrc);
-	private static native boolean nativeEglTerminate();
-	private static native boolean nativeEglSwapBuffers();
-	private static native boolean nativeEglSwapInterval(int inverval);
 
     private static native long nglfwSetCharCallback(long window, long ptr);
     private static native long nglfwSetCharModsCallback(long window, long ptr);
@@ -605,34 +599,23 @@ public class GLFW
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary GLFW = new SharedLibrary() {
-		@java.lang.Override
-		public String getName() {
-			return "GLFW";
-		}
+    private static final SharedLibrary GLFW = Library.loadNative(GLFW.class, "org.lwjgl.glfw", "libpojavexec.so", true);
 
-		@Nullable
-		@java.lang.Override
-		public String getPath() {
-			return null;
-		}
+    /** Contains the function pointers loaded from the glfw {@link SharedLibrary}. */
+    public static final class Functions {
 
-		@java.lang.Override
-		public long getFunctionAddress(ByteBuffer functionName) {
-			return 1;
-		}
+        private Functions() {}
 
-		@java.lang.Override
-		public void free() {
-
-		}
-
-		@java.lang.Override
-		public long address() {
-			return 1;
-		}
-	};
-	// Library.loadNative(GLFW.class, "org.lwjgl.glfw", Configuration.GLFW_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("glfw")), true);
+        /** Function address. */
+        public static final long
+            Init = apiGetFunctionAddress(GLFW, "pojavInit"),
+            GetCurrentContext = apiGetFunctionAddress(GLFW, "pojavGetCurrentContext"),
+            //DetachOnCurrentThread = apiGetFunctionAddress(GLFW, "pojavDetachOnCurrentThread"),
+            MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
+            Terminate = apiGetFunctionAddress(GLFW, "pojavTerminate"),
+            SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
+            SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInternal");
+    }
 
 	public static SharedLibrary getLibrary() {
         return GLFW;
@@ -827,29 +810,31 @@ public class GLFW
     }
 
     static boolean isGLFWReady;
-	public static boolean glfwInit() {
-		if (!isGLFWReady) {
+    public static boolean glfwInit() {
+        if (!isGLFWReady) {
             CallbackBridge.nativeAttachThreadToOther(false, false);
-			mGLFWInitialTime = (double) System.nanoTime();
-			isGLFWReady = nativeEglInit();
+            mGLFWInitialTime = (double) System.nanoTime();
+            long __functionAddress = Functions.Init;
+            isGLFWReady = invokeI(__functionAddress) != 0;
 	    }
 	    return isGLFWReady;
-    }
+   }
 
 	public static void glfwTerminate() {
         mGLFWIsInputReady = false;
         CallbackBridge.nativeSetInputReady(false);
         
-		nativeEglTerminate();
+        long __functionAddress = Functions.Terminate;
+        invokeV(__functionAddress);
 	}
 
 	public static void glfwInitHint(int hint, int value) { }
 
-	@NativeType("GLFWwindow *")
-	public static long glfwGetCurrentContext() {
-		// Stub prevent NULL check
-		return nativeEglGetCurrentContext();
-	}
+    @NativeType("GLFWwindow *")
+    public static long glfwGetCurrentContext() {
+        long __functionAddress = Functions.GetCurrentContext;
+        return invokeP(__functionAddress);
+    }
 
 	public static void glfwGetFramebufferSize(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("int *") IntBuffer width, @Nullable @NativeType("int *") IntBuffer height) {
         if (CHECKS) {
@@ -999,22 +984,24 @@ public class GLFW
         mGLFWGammaRamp = ramp;
     }
 
-    public static void glfwMakeContextCurrent(long window) {
-        //Probably not the best idea to rely on program's internals to share the contexts...
-        new Exception("Trace exception").printStackTrace();
-
-        nativeEglMakeCurrent(window);
-        System.out.println(Long.toString(nativeEglGetCurrentContext(),16));
+    public static void glfwMakeContextCurrent(@NativeType("GLFWwindow *") long window) {
+        long __functionAddress = Functions.MakeContextCurrent;
+        invokePV(window, __functionAddress);
     }
 
-    public static void glfwSwapBuffers(long window) {
-        nativeEglSwapBuffers();
+    public static void glfwSwapBuffers(@NativeType("GLFWwindow *") long window) {
+        long __functionAddress = Functions.SwapBuffers;
+        if (CHECKS) {
+            check(window);
+        }
+        invokePV(window, __functionAddress);
     }
 
     public static void glfwSwapInterval(int interval) {
-        nativeEglSwapInterval(interval);
+        long __functionAddress = Functions.SwapInterval;
+        invokeV(interval, __functionAddress);
     }
-    
+
     // private static double mTime = 0d;
     public static double glfwGetTime() {
         // Boardwalk: just use system timer
