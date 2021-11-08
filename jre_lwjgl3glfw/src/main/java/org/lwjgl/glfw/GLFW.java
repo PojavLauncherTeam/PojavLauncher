@@ -614,7 +614,7 @@ public class GLFW
             MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
             Terminate = apiGetFunctionAddress(GLFW, "pojavTerminate"),
             SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
-            SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInternal");
+            SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval");
     }
 
 	public static SharedLibrary getLibrary() {
