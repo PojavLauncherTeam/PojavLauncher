@@ -361,7 +361,7 @@ public final class GL {
                 callJPI(GLFW.glfwGetCurrentContext(),getGraphicsBufferAddr(),GL_UNSIGNED_BYTE,dims[0],dims[1],functionProvider.getFunctionAddress("OSMesaMakeCurrent"));
             } else if (System.getenv("POJAV_RENDERER").startsWith("opengles")) {
                 // This fixed framebuffer issue on 1.13+ 64-bit by another making current
-                GLFW.glfwMakeCurrentContext(GLFW.mainContext);
+                GLFW.glfwMakeContextCurrent(GLFW.mainContext);
                 if (isUsingRegal) {
                     nativeRegalMakeCurrent();
                 }
