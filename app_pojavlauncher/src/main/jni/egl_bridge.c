@@ -987,10 +987,10 @@ void pojavMakeCurrent(void* window) {
 #endif
 
                 // idk this should convert or just `return success;`...
-                return JNI_TRUE; //success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
+                return; //success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
             } else {
                 // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-                return JNI_FALSE;
+                return;
             }
     }
 
@@ -1010,7 +1010,7 @@ void pojavMakeCurrent(void* window) {
             glClear_p(GL_COLOR_BUFFER_BIT);
             glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
             pojavSwapBuffers();
-            return JNI_TRUE;
+            return;
     }
 }
 
@@ -1080,7 +1080,7 @@ void pojavSwapInterval(int interval) {
     switch (config_renderer) {
         case RENDERER_GL4ES:
         case RENDERER_VIRGL: {
-            return eglSwapInterval_p(potatoBridge.eglDisplay, interval);
+            eglSwapInterval_p(potatoBridge.eglDisplay, interval);
         } break;
         
         case RENDERER_VK_ZINK: {
