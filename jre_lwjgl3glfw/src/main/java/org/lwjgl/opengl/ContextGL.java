@@ -131,7 +131,7 @@ final class ContextGL implements Context {
                 if(shared_context != null) {
                     share = shared_context.handle;
                 }
-                this.handle = GLFW.nativeEglCreateContext(share);
+                this.handle = GLFW.nglfwCreateContext(share);
                 // implementation.create(peer_info, attribList, shared_context != null ? shared_context.handle : null);
             /* } catch (LWJGLException e) {
                 // GLContext.unloadOpenGLLibrary();

@@ -1019,10 +1019,13 @@ public class GLFW
     }
 
     // GLFW Window functions
+    public static long nglfwCreateContext(long share) {
+        return invokePP(share, Functions.CreateContext);
+    }
     public static long glfwCreateWindow(int width, int height, CharSequence title, long monitor, long share) {
         EventLoop.OffScreen.check();
         // Create an ACTUAL EGL context
-        long ptr = invokePP(window, Functions.CreateContext);
+        long ptr = nglfwCreateContext(share);
         //nativeEglMakeCurrent(ptr);
         GLFWWindowProperties win = new GLFWWindowProperties();
         // win.width = width;
