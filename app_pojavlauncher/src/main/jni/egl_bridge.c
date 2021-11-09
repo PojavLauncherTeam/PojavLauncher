@@ -845,7 +845,7 @@ int pojavInit() {
                 savedHeight,
                 EGL_NONE,
             };
-            potatoBridge.eglSurface = eglCreatePbufferSurface_p(potatoBridge.eglDisplay, pbufferConfig);
+            potatoBridge.eglSurface = eglCreatePbufferSurface_p(potatoBridge.eglDisplay, config, pbufferAttribs);
         } else {
             potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
         }
