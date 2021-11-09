@@ -36,6 +36,8 @@ LOCAL_SRC_FILES := \
     input_bridge_v3.c \
     jre_launcher.c \
     utils.c
+LOCAL_SHARED_LIBRARIES := xhook
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/xhook
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
