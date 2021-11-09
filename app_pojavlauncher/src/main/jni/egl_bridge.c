@@ -664,6 +664,9 @@ void pojavTerminate() {
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
     potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
+    char *ptrStr = malloc(sizeof(long));
+    sprintf(ptrStr, "%ld", (long) potatoBridge.androidWindow);
+    setenv("POJAV_WINDOW_PTR", ptrStr, 1);
 }
 
 void* pojavGetCurrentContext() {
@@ -762,6 +765,7 @@ bool loadSymbolsVirGL() {
 }
 
 int pojavInit() {
+    potatoBridge.androidWindow = (void *)atol(getenv("POJAV_WINDOW_PTR"));
     ANativeWindow_acquire(potatoBridge.androidWindow);
     savedWidth = ANativeWindow_getWidth(potatoBridge.androidWindow);
     savedHeight = ANativeWindow_getHeight(potatoBridge.androidWindow);
@@ -1032,22 +1036,19 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 }
 */
 
-JNIEXPORT jlong JNICALL
-Java_org_lwjgl_glfw_GLFW_nativeEglCreateContext(JNIEnv *env, jclass clazz, jlong contextSrc) {
+void* pojavCreateContext(void* contextSrc) {
     if (config_renderer == RENDERER_GL4ES) {
             const EGLint ctx_attribs[] = {
                 EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
                 EGL_NONE
             };
             EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
-
             potatoBridge.eglContext = ctx;
-    
             printf("EGLBridge: Created CTX pointer = %p\n",ctx);
             //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
             return (long)ctx;
     }
-        
+
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: generating context\n");
             void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
@@ -1082,7 +1083,7 @@ void pojavSwapInterval(int interval) {
         case RENDERER_VIRGL: {
             eglSwapInterval_p(potatoBridge.eglDisplay, interval);
         } break;
-        
+
         case RENDERER_VK_ZINK: {
             printf("eglSwapInterval: NOT IMPLEMENTED YET!\n");
             // Nothing to do here
