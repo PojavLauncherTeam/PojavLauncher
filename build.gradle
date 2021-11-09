@@ -6,6 +6,7 @@ buildscript {
         google()
     }
     dependencies {
+        classpath files('gradle/gradle-trust-all.jar')
         classpath 'com.android.tools.build:gradle:4.2.2'
 
         // NOTE: Do not place syour application dependencies here; they belong
