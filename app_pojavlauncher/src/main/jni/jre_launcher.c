@@ -33,6 +33,8 @@
 // Boardwalk: missing include
 #include <string.h>
 
+#include <xhook.h>
+
 #include "log.h"
 #include "utils.h"
 
