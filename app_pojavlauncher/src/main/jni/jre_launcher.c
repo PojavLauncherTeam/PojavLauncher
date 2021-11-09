@@ -83,6 +83,15 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
         jint ergo                               /* ergonomics class policy */
 );
 
+void* (*old_dlopen)(const char *filename, int flags);
+void* custom_dlopen(const char *filename, int flags) {
+    if (flags == (RTLD_LAZY | RTLD_LOCAL)) {
+        return old_dlopen(filename, RTLD_LAZY | RTLD_GLOBAL);
+    } else {
+        return old_dlopen(filename, flags);
+    }
+}
+
 static jint launchJVM(int margc, char** margv) {
    void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
    
@@ -158,6 +167,13 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
     CATCHSIG(SIGPIPE);
     CATCHSIG(SIGXFSZ);
    //Signal trapper ready
+
+    // Since we have moved from JNI call to LWJGL call for fixing GL context
+    // set incorrectly, we're facing another problem: fields in the previously
+    // loaded pojavexec aren't shared to LWJGL loaded one, is it because
+    // of RTLD_LOCAL? hook moment.
+    xhook_register(".*/liblwjgl.so$","dlopen",custom_dlopen,&old_dlopen);
+    xhook_refresh(1);
 
     // Save dalvik JNIEnv pointer for JVM launch thread
     dalvikJNIEnvPtr_ANDROID = env;
