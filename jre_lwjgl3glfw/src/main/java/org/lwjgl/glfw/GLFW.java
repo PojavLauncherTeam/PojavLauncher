@@ -569,8 +569,6 @@ public class GLFW
 		 */
 	}
 
-	public static native long nativeEglCreateContext(long contextSrc);
-
     private static native long nglfwSetCharCallback(long window, long ptr);
     private static native long nglfwSetCharModsCallback(long window, long ptr);
     private static native long nglfwSetCursorEnterCallback(long window, long ptr);
@@ -609,6 +607,7 @@ public class GLFW
         /** Function address. */
         public static final long
             Init = apiGetFunctionAddress(GLFW, "pojavInit"),
+            CreateContext = apiGetFunctionAddress(GLFW, "pojavCreateContext"),
             GetCurrentContext = apiGetFunctionAddress(GLFW, "pojavGetCurrentContext"),
             //DetachOnCurrentThread = apiGetFunctionAddress(GLFW, "pojavDetachOnCurrentThread"),
             MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
@@ -991,9 +990,6 @@ public class GLFW
 
     public static void glfwSwapBuffers(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.SwapBuffers;
-        if (CHECKS) {
-            check(window);
-        }
         invokePV(window, __functionAddress);
     }
 
@@ -1021,27 +1017,26 @@ public class GLFW
         // FIXME set correct value!!
         return 60;
     }
-    
-	// GLFW Window functions
+
+    // GLFW Window functions
     public static long glfwCreateWindow(int width, int height, CharSequence title, long monitor, long share) {
         EventLoop.OffScreen.check();
-			// Create an ACTUAL EGL context
-			long ptr = nativeEglCreateContext(share);
-            //nativeEglMakeCurrent(ptr);
-			GLFWWindowProperties win = new GLFWWindowProperties();
-			// win.width = width;
-			// win.height = height;
+        // Create an ACTUAL EGL context
+        long ptr = invokePP(window, Functions.CreateContext);
+        //nativeEglMakeCurrent(ptr);
+        GLFWWindowProperties win = new GLFWWindowProperties();
+        // win.width = width;
+        // win.height = height;
 
-			win.width = mGLFWWindowWidth;
-			win.height = mGLFWWindowHeight;
+        win.width = mGLFWWindowWidth;
+        win.height = mGLFWWindowHeight;
 
-			win.title = title;
+        win.title = title;
 
-			mGLFWWindowMap.put(ptr, win);
-			mainContext = ptr;
-			return ptr;
+        mGLFWWindowMap.put(ptr, win);
+        mainContext = ptr;
+        return ptr;
         //Return our context
-
 	}
 
 	public static void glfwDestroyWindow(long window) {

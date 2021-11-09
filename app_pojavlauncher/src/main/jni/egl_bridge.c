@@ -579,15 +579,15 @@ typedef struct osmesa_context
 };
 // endregion OSMESA internals
 struct PotatoBridge {
-	 /*ANativeWindow */ void* androidWindow;
-	    
-	/* EGLContext */ void* eglContextOld;
-	/* EGLContext */ void* eglContext;
-	/* EGLDisplay */ void* eglDisplay;
-	/* EGLSurface */ void* eglSurface;
+     /*ANativeWindow */ void* androidWindow;
+        
+    /* EGLContext */ void* eglContextOld;
+    /* EGLContext */ void* eglContext;
+    /* EGLDisplay */ void* eglDisplay;
+    /* EGLSurface */ void* eglSurface;
 /*
-	void* eglSurfaceRead;
-	void* eglSurfaceDraw;
+    void* eglSurfaceRead;
+    void* eglSurfaceDraw;
 */
 };
 EGLConfig config;
@@ -617,6 +617,7 @@ EGLBoolean (*eglInitialize_p) (EGLDisplay dpy, EGLint *major, EGLint *minor);
 EGLBoolean (*eglChooseConfig_p) (EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config);
 EGLBoolean (*eglGetConfigAttrib_p) (EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint *value);
 EGLBoolean (*eglBindAPI_p) (EGLenum api);
+EGLSurface (*eglCreatePbufferSurface_p) (EGLDisplay dpy, EGLConfig config, const EGLint *attrib_list);
 EGLSurface (*eglCreateWindowSurface_p) (EGLDisplay dpy, EGLConfig config, NativeWindowType window, const EGLint *attrib_list);
 EGLBoolean (*eglSwapBuffers_p) (EGLDisplay dpy, EGLSurface draw);
 EGLint (*eglGetError_p) (void);
@@ -686,6 +687,7 @@ void dlsym_EGL(void* dl_handle) {
     eglBindAPI_p = dlsym(dl_handle,"eglBindAPI");
     eglChooseConfig_p = dlsym(dl_handle, "eglChooseConfig");
     eglCreateContext_p = dlsym(dl_handle, "eglCreateContext");
+    eglCreatePbufferSurface_p = dlsym(dl_handle, "eglCreatePbufferSurface");
     eglCreateWindowSurface_p = dlsym(dl_handle, "eglCreateWindowSurface");
     eglDestroyContext_p = dlsym(dl_handle, "eglDestroyContext");
     eglDestroySurface_p = dlsym(dl_handle, "eglDestroySurface");
@@ -834,7 +836,19 @@ int pojavInit() {
 
         eglBindAPI_p(EGL_OPENGL_ES_API);
 
-        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
+        // VirGL TODO: switch to WindowSurface once fingure out how to call eglSwapBuffers from the loop
+        if (config_renderer == RENDERER_VIRGL) {
+            const EGLint pbufferAttribs[] = {
+                EGL_WIDTH,
+                savedWidth,
+                EGL_HEIGHT,
+                savedHeight,
+                EGL_NONE,
+            };
+            potatoBridge.eglSurface = eglCreatePbufferSurface_p(potatoBridge.eglDisplay, pbufferConfig);
+        } else {
+            potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
+        }
 
         if (!potatoBridge.eglSurface) {
             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
