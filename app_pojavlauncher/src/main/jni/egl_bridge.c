@@ -924,7 +924,7 @@ void pojavSwapBuffers() {
         } break;
         
         case RENDERER_VIRGL: {
-            vtest_swap_buffers();
+            vtest_swap_buffers_p();
         } break;
 
         case RENDERER_VK_ZINK: {
