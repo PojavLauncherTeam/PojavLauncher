@@ -625,6 +625,8 @@ EGLContext (*eglCreateContext_p) (EGLDisplay dpy, EGLConfig config, EGLContext s
 EGLBoolean (*eglSwapInterval_p) (EGLDisplay dpy, EGLint interval);
 EGLSurface (*eglGetCurrentSurface_p) (EGLint readdraw);
 int (*vtest_main_p) (int argc, char** argv);
+void (*vtest_swap_buffers_p) (void);
+
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
 #define RENDERER_VIRGL 3
@@ -764,6 +766,13 @@ bool loadSymbolsVirGL() {
     config_renderer = RENDERER_VK_ZINK;
     loadSymbols();
     config_renderer = RENDERER_VIRGL;
+    void *handle = dlopen("libvirgl_test_server.so", RTLD_LAZY);
+    printf("VirGL: libvirgl_test_server = %p\n", handle);
+    if (!handle) {
+        printf("VirGL: %s\n", dlerror());
+    }
+    vtest_main_p = dlsym(handle, "vtest_main");
+    vtest_swap_buffers_p = dlsym(handle, "vtest_swap_buffers");
 }
 
 int pojavInit() {
@@ -836,19 +845,7 @@ int pojavInit() {
 
         eglBindAPI_p(EGL_OPENGL_ES_API);
 
-        // VirGL TODO: switch to WindowSurface once fingure out how to call eglSwapBuffers from the loop
-        if (config_renderer == RENDERER_VIRGL) {
-            const EGLint pbufferAttribs[] = {
-                EGL_WIDTH,
-                savedWidth,
-                EGL_HEIGHT,
-                savedHeight,
-                EGL_NONE,
-            };
-            potatoBridge.eglSurface = eglCreatePbufferSurface_p(potatoBridge.eglDisplay, config, pbufferAttribs);
-        } else {
-            potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
-        }
+        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
@@ -926,8 +923,10 @@ void pojavSwapBuffers() {
             }
         } break;
         
-        case RENDERER_VIRGL:
-        // VirGL TODO: hook glFinish as eglSwapBuffers
+        case RENDERER_VIRGL: {
+            vtest_swap_buffers();
+        } break;
+
         case RENDERER_VK_ZINK: {
             ((struct osmesa_context)*OSMesaGetCurrentContext_p())
             .current_buffer->map = buf.bits;
@@ -953,16 +952,9 @@ void* egl_make_current(void* window) {
     }
 
     if (config_renderer == RENDERER_VIRGL) {
-        void *virgl = dlopen("libvirgl_test_server.so", RTLD_LAZY);
-        printf("VirGL: libvirgl_test_server = %p\n", virgl);
-        if (virgl) {
-            vtest_main_p = dlsym(virgl, "vtest_main");
-            printf("VirGL: vtest_main = %p\n", vtest_main_p);
-            printf("VirGL: Calling VTest server's main function\n");
-            vtest_main_p(3, (const char*[]){"vtest", "--no-loop-or-fork", "--use-gles", NULL, NULL});
-        } else {
-            printf("VirGL: %s\n", dlerror());
-        }
+        printf("VirGL: vtest_main = %p\n", vtest_main_p);
+        printf("VirGL: Calling VTest server's main function\n");
+        vtest_main_p(3, (const char*[]){"vtest", "--no-loop-or-fork", "--use-gles", NULL, NULL});
     }
 }
 
