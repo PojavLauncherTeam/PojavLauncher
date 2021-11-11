@@ -924,6 +924,7 @@ void pojavSwapBuffers() {
         } break;
         
         case RENDERER_VIRGL: {
+            glFinish_p();
             vtest_swap_buffers_p();
         } break;
 
