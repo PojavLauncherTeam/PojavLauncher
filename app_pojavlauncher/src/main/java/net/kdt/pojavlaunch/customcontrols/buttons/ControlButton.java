@@ -23,6 +23,10 @@ import org.lwjgl.glfw.*;
 import static net.kdt.pojavlaunch.BaseMainActivity.sendMouseButton;
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_BOTTOM_OFFSET;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_LEFT_OFFSET;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_RIGHT_OFFSET;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_TOP_OFFSET;
 
 @SuppressLint("ViewConstructor")
 public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
@@ -152,14 +156,55 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
     @Override
     public void setX(float x) {
+        // We have to account for control offset preference
+        if(x + (mProperties.getWidth()/2f) > CallbackBridge.physicalWidth/2f){
+            x -= PREF_CONTROL_RIGHT_OFFSET;
+        }else{
+            x += PREF_CONTROL_LEFT_OFFSET;
+        }
+
         super.setX(x);
         setModified(true);
     }
 
     @Override
     public void setY(float y) {
+        // We have to account for control offset preference
+        if(y - PREF_CONTROL_TOP_OFFSET + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
+            y -= PREF_CONTROL_BOTTOM_OFFSET;
+        }else{
+            y += PREF_CONTROL_TOP_OFFSET;
+        }
+
         super.setY(y);
         setModified(true);
+    }
+
+    @Override
+    public float getX() {
+        float x = super.getX();
+        // We have to account for control offset preference
+        if(x  + (mProperties.getWidth()/2f) > (CallbackBridge.physicalWidth)/2f){
+            x += PREF_CONTROL_RIGHT_OFFSET;
+        }else{
+            x -= PREF_CONTROL_LEFT_OFFSET;
+        }
+
+        return x;
+    }
+
+    @Override
+    public float getY(){
+        // We have to account for control offset preference
+        float y = super.getY();
+        if(y + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
+            y += PREF_CONTROL_BOTTOM_OFFSET;
+        }else{
+            y -= PREF_CONTROL_TOP_OFFSET;
+        }
+
+
+        return y;
     }
 
     /**

@@ -1,4 +1,7 @@
 package net.kdt.pojavlaunch.value;
+
+
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import net.kdt.pojavlaunch.*;
@@ -49,8 +52,9 @@ public class MinecraftAccount
     public static MinecraftAccount parse(String content) throws JsonSyntaxException {
         return Tools.GLOBAL_GSON.fromJson(content, MinecraftAccount.class);
     }
-    
+
     public static MinecraftAccount load(String name) throws JsonSyntaxException {
+        if(!accountExists(name)) return new MinecraftAccount();
         try {
             MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
             if (acc.accessToken == null) {
@@ -80,7 +84,19 @@ public class MinecraftAccount
             return null;
         }
     }
-    
+
+    public Bitmap getSkinFace(){
+        if(skinFaceBase64 == null){
+            return Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
+        }
+        byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+    }
+
+    private static boolean accountExists(String username){
+        return new File(Tools.DIR_ACCOUNT_NEW + "/" + username + ".json").exists();
+    }
+
     public static void clearTempAccount() {
         File tempAccFile = new File(Tools.DIR_DATA, "cache/tempacc.json");
         tempAccFile.delete();

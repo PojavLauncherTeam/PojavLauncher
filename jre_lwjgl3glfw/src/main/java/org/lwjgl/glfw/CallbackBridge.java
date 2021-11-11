@@ -53,7 +53,7 @@ public class CallbackBridge {
     }
     
 	// Called from Android side
-	public static void receiveCallback(int type, int i1, int i2, int i3, int i4) {
+	public static void receiveCallback(int type, float i1, float i2, int i3, int i4) {
        /*
         if (INPUT_DEBUG_ENABLED) {
             System.out.println("LWJGL GLFW Callback received type=" + Integer.toString(type) + ", data=" + i1 + ", " + i2 + ", " + i3 + ", " + i4);
@@ -61,10 +61,10 @@ public class CallbackBridge {
         */
         if (PENDING_EVENT_READY) {
             if (type == EVENT_TYPE_CURSOR_POS) {
-                GLFW.mGLFWCursorX = i1;
-                GLFW.mGLFWCursorY = i2;
+                GLFW.mGLFWCursorX = (double) i1;
+                GLFW.mGLFWCursorY = (double) i2;
             } else {
-                PENDING_EVENT_LIST.add(new Integer[]{type, i1, i2, i3, i4});
+                PENDING_EVENT_LIST.add(new Integer[]{type, (int) i1, (int)i2, i3, i4});
             }
         } // else System.out.println("Event input is not ready yet!");
 	}

@@ -77,8 +77,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                 @Override
                 public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
                 {
-                    String version = p1.getItemAtPosition(p3).toString();
-                    mActivity.mProfile.selectedVersion = version;
+                    mActivity.mProfile.selectedVersion = p1.getItemAtPosition(p3).toString();
 
                     PojavProfile.setCurrentProfile(mActivity, mActivity.mProfile);
                     if (PojavProfile.isFileType(mActivity)) {
@@ -89,7 +88,6 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                         }
                     }
 
-                    mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg, version));
                 }
 
                 @Override
@@ -109,13 +107,8 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                 }
             });
         */
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
-                public boolean onMenuItemClick(MenuItem item) {  
-                    return true;  
-                }  
-            });  
+        popup.setOnMenuItemClickListener(item -> true);
 
-        mActivity.mTextVersion.setText(mActivity.getString(R.string.mcl_version_msg,mActivity.mVersionSelector.getSelectedItem()));
     }
     
     private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {
@@ -145,9 +138,8 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
         for(String str : strArr){
             if (str.equals(select)) {
                 return count;
-            } else {
-                count++;
             }
+            count++;
         }
         return -1;
 	}

@@ -29,6 +29,12 @@ public class LauncherPreferences
     public static float PREF_MOUSESPEED = 1f;
     public static int PREF_RAM_ALLOCATION;
     public static String PREF_DEFAULT_RUNTIME;
+    public static int PREF_CONTROL_TOP_OFFSET = 0;
+    public static int PREF_CONTROL_RIGHT_OFFSET = 0;
+    public static int PREF_CONTROL_BOTTOM_OFFSET = 0;
+    public static int PREF_CONTROL_LEFT_OFFSET = 0;
+
+
     public static void loadPreferences(Context ctx) {
         //Required for the data folder.
         Tools.initContextConstants(ctx);
@@ -51,6 +57,11 @@ public class LauncherPreferences
         PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
         PREF_RAM_ALLOCATION = DEFAULT_PREF.getInt("allocation", findBestRAMAllocation(ctx));
         PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs", "");
+        PREF_CONTROL_TOP_OFFSET = DEFAULT_PREF.getInt("controlTopOffset", 0);
+        PREF_CONTROL_RIGHT_OFFSET = DEFAULT_PREF.getInt("controlRightOffset", 0);
+        PREF_CONTROL_BOTTOM_OFFSET = DEFAULT_PREF.getInt("controlBottomOffset", 0);
+        PREF_CONTROL_LEFT_OFFSET = DEFAULT_PREF.getInt("controlTopOffset", 0);
+
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
             String DEFAULT_JAVA_ARGS = "";

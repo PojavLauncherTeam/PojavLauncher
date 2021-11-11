@@ -48,8 +48,9 @@ public class BaseMainActivity extends LoggableActivity {
     public float scaleFactor = 1;
     public double sensitivityFactor;
     private final int fingerStillThreshold = (int) Tools.dpToPx(9);
+    private final int fingerScrollThreshold = (int) Tools.dpToPx(6);
     private float initialX, initialY;
-    private int scrollInitialX, scrollInitialY;
+    private float scrollLastInitialX, scrollLastInitialY;
     private float prevX, prevY;
     private int currentPointerID;
 
@@ -62,8 +63,8 @@ public class BaseMainActivity extends LoggableActivity {
             switch (msg.what) {
                 case MSG_LEFT_MOUSE_BUTTON_CHECK:
                     if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
-                    int x = CallbackBridge.mouseX;
-                    int y = CallbackBridge.mouseY;
+                    float x = CallbackBridge.mouseX;
+                    float y = CallbackBridge.mouseY;
                     if (CallbackBridge.isGrabbing() &&
                             Math.abs(initialX - x) < fingerStillThreshold &&
                             Math.abs(initialY - y) < fingerStillThreshold) {
@@ -96,8 +97,9 @@ public class BaseMainActivity extends LoggableActivity {
     private TextView textLog;
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
-    private GestureDetector gestureDetector;
-    private DoubleTapDetector doubleTapDetector;
+
+    private TapDetector singleTapDetector;
+    private TapDetector doubleTapDetector;
 
     private TextView debugText;
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
@@ -164,8 +166,9 @@ public class BaseMainActivity extends LoggableActivity {
             System.out.println("WidthHeight: " + windowWidth + ":" + windowHeight);
 
             
-            gestureDetector = new GestureDetector(this, new SingleTapConfirm());
-            doubleTapDetector = new DoubleTapDetector();
+
+            singleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
+            doubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
 
 
             // Menu
@@ -262,7 +265,7 @@ public class BaseMainActivity extends LoggableActivity {
                 float mouseX = mousePointer.getX();
                 float mouseY = mousePointer.getY();
 
-                if (gestureDetector.onTouchEvent(event)) {
+                if (singleTapDetector.onTouchEvent(event)) {
                     mouse_x = (mouseX * scaleFactor);
                     mouse_y = (mouseY * scaleFactor);
                     CallbackBridge.sendCursorPos(mouse_x, mouse_y);
@@ -273,8 +276,8 @@ public class BaseMainActivity extends LoggableActivity {
                 } else {
                     switch (action) {
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            scrollInitialX = CallbackBridge.mouseX;
-                            scrollInitialY = CallbackBridge.mouseY;
+                            scrollLastInitialX = event.getX();
+                            scrollLastInitialY = event.getY();
                             break;
 
                         case MotionEvent.ACTION_DOWN:
@@ -285,10 +288,15 @@ public class BaseMainActivity extends LoggableActivity {
 
                         case MotionEvent.ACTION_MOVE: // 2
 
-                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
-                                CallbackBridge.sendScroll( Tools.pxToDp(CallbackBridge.mouseX - scrollInitialX)/30, Tools.pxToDp(CallbackBridge.mouseY - scrollInitialY)/30);
-                                scrollInitialX = CallbackBridge.mouseX;
-                                scrollInitialY = CallbackBridge.mouseY;
+                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() >= 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
+                                int hScroll =  ((int) (event.getX() - scrollLastInitialX)) / fingerScrollThreshold;
+                                int vScroll = ((int) (event.getY() - scrollLastInitialY)) / fingerScrollThreshold;
+
+                                if(vScroll != 0 || hScroll != 0){
+                                    CallbackBridge.sendScroll(hScroll, vScroll);
+                                    scrollLastInitialX = event.getX();
+                                    scrollLastInitialY = event.getY();
+                                }
                             } else {
                                 if(currentPointerID == event.getPointerId(0)) {
                                     mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
@@ -354,7 +362,7 @@ public class BaseMainActivity extends LoggableActivity {
                         mouse_x =  (e.getX() * scaleFactor);
                         mouse_y =  (e.getY() * scaleFactor);
                         //One android click = one MC click
-                        if(gestureDetector.onTouchEvent(e)){
+                        if(singleTapDetector.onTouchEvent(e)){
                             CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
                             return true;
                         }
@@ -424,8 +432,8 @@ public class BaseMainActivity extends LoggableActivity {
                             break;
 
                         case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            scrollInitialX = CallbackBridge.mouseX;
-                            scrollInitialY = CallbackBridge.mouseY;
+                            scrollLastInitialX = e.getX();
+                            scrollLastInitialY = e.getY();
                             //Checking if we are pressing the hotbar to select the item
                             hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
                             if(hudKeyHandled != -1){
@@ -440,10 +448,17 @@ public class BaseMainActivity extends LoggableActivity {
                             break;
 
                         case MotionEvent.ACTION_MOVE:
-                            if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
-                                CallbackBridge.sendScroll(Tools.pxToDp(mouse_x - scrollInitialX)/30 , Tools.pxToDp(mouse_y - scrollInitialY)/30);
-                                scrollInitialX = (int)mouse_x;
-                                scrollInitialY = (int)mouse_y;
+                            if (!CallbackBridge.isGrabbing() && e.getPointerCount() >= 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
+                                int hScroll =  ((int) (e.getX() - scrollLastInitialX)) / fingerScrollThreshold;
+                                int vScroll = ((int) (e.getY() - scrollLastInitialY)) / fingerScrollThreshold;
+
+                                if(vScroll != 0 || hScroll != 0){
+                                    CallbackBridge.sendScroll(hScroll, vScroll);
+                                    scrollLastInitialX = e.getX();
+                                    scrollLastInitialY = e.getY();
+                                }
+
+
                             } else if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 1) { //Touch hover
                                 CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 prevX =  e.getX();
