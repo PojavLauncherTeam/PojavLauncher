@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
@@ -32,6 +33,11 @@ public class EditControlDrawerPopup extends EditControlButtonPopup{
         checkPassThrough.setVisibility(View.GONE);
         checkToggle.setVisibility(View.GONE);
         checkBoxSwipeable.setVisibility(View.GONE);
+
+        (v.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
+        (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
+        editDynamicX.setVisibility(View.GONE);
+        editDynamicY.setVisibility(View.GONE);
     }
 
     @Override
@@ -52,18 +58,27 @@ public class EditControlDrawerPopup extends EditControlButtonPopup{
         super.setEditDialogValues();
 
         spinnerOrientation.setSelection(ControlDrawerData.orientationToInt(drawerData.orientation));
+
+
+        //Using the dialog to replace the button behavior allows us not to dismiss the window
+        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v -> {
+            ControlLayout layout = (ControlLayout) drawer.getParent();
+            ControlData controlData =  new ControlData(drawerData.properties);
+            controlData.name = "new";
+            layout.addSubButton(drawer, controlData);
+
+            Context ctx = dialog.getContext();
+            Toast.makeText(ctx, ctx.getString(R.string.customctrl_add_subbutton_message,
+                    drawer.getDrawerData().buttonProperties.size()), Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     @Override
     protected void setupDialogButtons() {
         super.setupDialogButtons();
 
-        builder.setNeutralButton(v.getResources().getString(R.string.customctrl_addsubbutton), (dialogInterface, i) -> {
-            ControlLayout layout = (ControlLayout) drawer.getParent();
-            ControlData controlData =  new ControlData(drawerData.properties);
-            controlData.name = "new";
-            layout.addSubButton(drawer, controlData);
-        });
+        builder.setNeutralButton(v.getResources().getString(R.string.customctrl_addsubbutton), null);
 
     }
 

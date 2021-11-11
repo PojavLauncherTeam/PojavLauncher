@@ -33,17 +33,33 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.86" />
 
+    <ImageView
+        android:id="@+id/launchermain_account_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+
+        android:src="@mipmap/ic_launcher"
+
+        app:layout_constraintEnd_toEndOf="@id/launchermain_spinner_account"
+        app:layout_constraintHorizontal_bias="0.00"
+
+        app:layout_constraintStart_toStartOf="@id/launchermain_spinner_account"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/launchermain_spinner_account"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
         android:spinnerMode="dropdown"
+        android:paddingLeft="43dp"
 
+        app:layout_constraintBottom_toBottomOf="@+id/launchermain_account_image"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/launchermain_account_image" />
 
     <TextView
         android:id="@+id/launchermain_text_accountstatus"
@@ -89,18 +105,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:paddingStart="12dp"
-        android:paddingEnd="0dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-
         android:drawableStart="@drawable/ic_menu_java"
         android:focusable="true"
+
         android:gravity="center"
         android:onClick="onTabClicked"
+
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
         android:text="@string/mcl_tab_console"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -118,18 +134,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:paddingStart="12dp"
-        android:paddingEnd="0dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-
         android:drawableStart="@drawable/ic_menu_warning"
         android:focusable="true"
+
         android:gravity="center"
         android:onClick="onTabClicked"
+
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
         android:text="@string/mcl_tab_crash"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -172,7 +188,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/launchermainTabPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -217,13 +233,13 @@
 
     <Button
 
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:onClick="launcherMenu"
-        android:text="@string/main_options"
-
-        style="?android:attr/buttonBarButtonStyle"
         android:background="?attr/selectableItemBackground"
+
+        android:onClick="launchCustomControlsActivity"
+        android:text="@string/mcl_option_customcontrol"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/launchermainPlayButton"
@@ -231,61 +247,32 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom2" />
 
     <com.kdt.mcgui.MineButton
-        android:background="@drawable/mine_button_background"
         android:id="@+id/launchermainPlayButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/mine_button_background"
         android:onClick="launchGame"
         android:text="@string/main_play"
         android:textColor="@android:color/white"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
-        />
-
-    <TextView
-        android:id="@+id/launchermain_text_welcome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/main_welcome"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/launchermainPlayButton"
-        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
-
-    <TextView
-        android:id="@+id/launcherMainVersionView"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:gravity="center"
-        android:text="@string/global_waiting"
-        android:textSize="12sp"
-        android:singleLine="true"
-        android:scrollHorizontally="true"
-        android:ellipsize="marquee"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/launchermainPlayButton"
-        app:layout_constraintTop_toBottomOf="@+id/launchermain_text_welcome" />
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25" />
 
 
     <Button
-        android:id="@+id/switchUserBtn"
+        android:id="@+id/installJarButton"
 
         style="?android:attr/buttonBarButtonStyle"
-        android:background="?attr/selectableItemBackground"
-
         android:layout_width="0dp"
+
         android:layout_height="0dp"
-        android:onClick="mcaccLogout"
-        android:text="@string/main_switchuser"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="installJarFile"
+        android:text="@string/main_install_jar_file"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

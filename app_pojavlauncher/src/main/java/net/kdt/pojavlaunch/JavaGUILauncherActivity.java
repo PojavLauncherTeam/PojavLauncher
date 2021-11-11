@@ -49,8 +49,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_LEFT_MOUSE_BUTTON_CHECK: {
-                        int x = CallbackBridge.mouseX;
-                        int y = CallbackBridge.mouseY;
+                        float x = CallbackBridge.mouseX;
+                        float y = CallbackBridge.mouseY;
                         if (CallbackBridge.isGrabbing() &&
                             Math.abs(initialX - x) < fingerStillThreshold &&
                             Math.abs(initialY - y) < fingerStillThreshold) {

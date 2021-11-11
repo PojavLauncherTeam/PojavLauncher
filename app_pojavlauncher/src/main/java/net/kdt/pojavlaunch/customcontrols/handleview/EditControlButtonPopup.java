@@ -29,7 +29,7 @@ import static net.kdt.pojavlaunch.customcontrols.handleview.ActionPopupWindow.se
 
 public class EditControlButtonPopup {
 
-    protected Dialog dialog;
+    protected AlertDialog dialog;
     protected View v;
     protected AlertDialog.Builder builder;
 
@@ -74,7 +74,6 @@ public class EditControlButtonPopup {
         //Create the finalized dialog
         dialog = builder.create();
         dialog.setOnShowListener(dialogInterface -> setEditDialogValues());
-
 
         dialog.show();
     }

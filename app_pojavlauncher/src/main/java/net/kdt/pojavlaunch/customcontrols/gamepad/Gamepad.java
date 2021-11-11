@@ -3,6 +3,8 @@ package net.kdt.pojavlaunch.customcontrols.gamepad;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+import android.view.Choreographer;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -59,10 +61,22 @@ public class Gamepad {
     private final boolean mModifierDigitalTriggers;
     private boolean mModifierSwappedAxis = true; //Triggers and right stick axis are swapped.
 
-    private final Handler inputHandler = new Handler(Looper.getMainLooper());
-    private final Runnable switchStateRunnable;
+    private final Choreographer screenChoreographer;
+    private long lastFrameTime;
 
     public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
+        screenChoreographer = Choreographer.getInstance();
+        Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() {
+            @Override
+            public void doFrame(long frameTimeNanos) {
+                updateGrabbingState();
+                tick(frameTimeNanos);
+                screenChoreographer.postFrameCallback(this);
+            }
+        };
+        screenChoreographer.postFrameCallback(frameCallback);
+        lastFrameTime = System.nanoTime();
+
         //Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
         for(InputDevice.MotionRange range : inputDevice.getMotionRanges()){
             if(range.getAxis() == MotionEvent.AXIS_RTRIGGER
@@ -88,46 +102,11 @@ public class Gamepad {
         pointerView.getDrawable().setFilterBitmap(false);
         notifyGUISizeChange(gameActivity.getMcScale());
 
-        Runnable handlerRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                updateGrabbingState();
-                tick();
-
-                inputHandler.postDelayed(this, 16);
-            }
-        };
-
-        inputHandler.postDelayed(handlerRunnable, 16);
-
-        //Initialize runnables to be used by the input system, avoiding generating one each time is better memory.
-        switchStateRunnable = () -> {
-            currentMap.resetPressedState();
-            if(lastGrabbingState){
-                currentMap = gameMap;
-                pointerView.setVisibility(View.INVISIBLE);
-                mouseSensitivity = 18;
-                return;
-            }
-
-            currentMap = menuMap;
-            sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
-
-            gameActivity.mouse_x = CallbackBridge.windowWidth/2;
-            gameActivity.mouse_y = CallbackBridge.windowHeight/2;
-            CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
-            placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
-            pointerView.setVisibility(View.VISIBLE);
-            //sensitivity in menu is MC and HARDWARE resolution dependent
-            mouseSensitivity = 19 * gameActivity.scaleFactor / gameActivity.sensitivityFactor;
-        };
 
     }
 
 
-
-    private void tick(){
+    public void tick(long frameTimeNanos){
         //update mouse position
         if(lastHorizontalValue != 0 || lastVerticalValue != 0){
             GamepadJoystick currentJoystick = lastGrabbingState ? leftJoystick : rightJoystick;
@@ -136,8 +115,15 @@ public class Gamepad {
             acceleration = Math.pow(acceleration, mouseMaxAcceleration);
             if(acceleration > 1) acceleration = 1;
 
-            CallbackBridge.mouseX += Math.cos(mouseAngle) * acceleration * mouseSensitivity;
-            CallbackBridge.mouseY -= Math.sin(mouseAngle) * acceleration * mouseSensitivity;
+            // Compute delta since last tick time
+            float deltaX = (float) (Math.cos(mouseAngle) * acceleration * mouseSensitivity);
+            float deltaY = (float) (Math.sin(mouseAngle) * acceleration * mouseSensitivity);
+            float deltaTimeScale = ((frameTimeNanos - lastFrameTime) / 16666666f); // Scale of 1 = 60Hz
+            deltaX *= deltaTimeScale;
+            deltaY *= deltaTimeScale;
+
+            CallbackBridge.mouseX += deltaX;
+            CallbackBridge.mouseY -= deltaY;
 
             if(!lastGrabbingState){
                 CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
@@ -152,14 +138,36 @@ public class Gamepad {
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
         }
 
+        // Update last nano time
+        lastFrameTime = frameTimeNanos;
     }
 
+    /** Update the grabbing state, and change the currentMap, mouse position and sensibility */
     private void updateGrabbingState() {
         boolean lastGrabbingValue = lastGrabbingState;
         lastGrabbingState = CallbackBridge.isGrabbing();
-        if(lastGrabbingValue != lastGrabbingState){
-            gameActivity.runOnUiThread(switchStateRunnable);
+        if(lastGrabbingValue == lastGrabbingState) return;
+
+        // Switch grabbing state then
+        currentMap.resetPressedState();
+        if(lastGrabbingState){
+            currentMap = gameMap;
+            pointerView.setVisibility(View.INVISIBLE);
+            mouseSensitivity = 18;
+            return;
         }
+
+        currentMap = menuMap;
+        sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
+
+        gameActivity.mouse_x = CallbackBridge.windowWidth/2;
+        gameActivity.mouse_y = CallbackBridge.windowHeight/2;
+        CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
+        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+        pointerView.setVisibility(View.VISIBLE);
+        // Sensitivity in menu is MC and HARDWARE resolution dependent
+        mouseSensitivity = 19 * gameActivity.scaleFactor / gameActivity.sensitivityFactor;
+
     }
 
     public void update(KeyEvent event){
@@ -188,10 +196,10 @@ public class Gamepad {
         int lastJoystickDirection = currentJoystickDirection;
         currentJoystickDirection = currentJoystick.getHeightDirection(event);
 
-        if(currentJoystickDirection != lastJoystickDirection){
-            sendDirectionalKeycode(lastJoystickDirection, false, getCurrentMap());
-            sendDirectionalKeycode(currentJoystickDirection, true, getCurrentMap());
-        }
+        if(currentJoystickDirection == lastJoystickDirection) return;
+
+        sendDirectionalKeycode(lastJoystickDirection, false, getCurrentMap());
+        sendDirectionalKeycode(currentJoystickDirection, true, getCurrentMap());
     }
 
     private void updateAnalogTriggers(MotionEvent event){
