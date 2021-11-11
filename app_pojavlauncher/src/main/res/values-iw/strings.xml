@@ -56,7 +56,7 @@
     <string name="mcl_option_modinstallwitharg">הפעל אשף התקנה ל-mod (עם פרמטרים מותאמים אישית)</string>
     <string name="mcl_option_customcontrol">פקדים מותאמים אישית</string>
     <string name="mcl_option_settings">הגדרות</string>
-    <string name="mcl_option_about">אודות</string>
+    <string name="mcl_option_about">על אודות</string>
     <string name="mcl_setting_title_uninstalljre">הסר התקנת Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייתן לך להתקין מחדש את Java Runtime</string>
     <string name="mcl_setting_title_freeform">פתח Minecraft במצב Freeform</string>
