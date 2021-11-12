@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Tambah tombol</string>
     <string name="customctrl_addbutton_drawer">Tambah tombol drawer</string>
     <string name="customctrl_addsubbutton">Tambahkan tombol</string>
+    <string name="customctrl_add_subbutton_message">Tombol sub n°%d telah ditambahkan!</string>
     <string name="customctrl_selectdefault">Pilih \". json\" kontrol default</string>
+    <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Opsi</string>
     <string name="main_play">Main</string>
     <string name="main_welcome">Selamat datang, %s</string>
@@ -221,4 +223,22 @@
     <string name="pvc_title">Pengaturan per-versi</string>
     <string name="storage_warning_title">Perubahan penyimpanan</string>
     <string name="storage_warning_text"><![CDATA[Karena fitur baru "scoped storage" dari Google ditambah di Android 10 dan lebih tinggi, kita butuh memindahkan direktori permainan ke sebuah "app-private" folder.<br /> Folder baru untuk file Pojav berada di <b>Android/data/%s/files/</b> (juga bisa diakses menggunakan provider penyimpanan di file explorer anda).<br /> Jika anda butuh mengkopi file permainan, mohon mengkopi semuanya dari folder original di <b>games/PojavLauncher</b> secara manual.]]></string>
+    <string name="control_offset_title">Kontrol offset</string>
+    <string name="control_top_offset">Offset atas: </string>
+    <string name="control_right_offset">Offset kanan: </string>
+    <string name="control_bottom_offset">Offset bawah: </string>
+    <string name="control_left_offset">Offset kiri: </string>
+    <string name="preference_control_offset_title">Kontrol sisi offset</string>
+    <string name="preference_control_offset_description">Atur offset khusus ke setiap sisi layar</string>
+    <string name="preference_video_title">Video dan renderer</string>
+    <string name="preference_video_description">Resolusi, jenis penskalaan, dan renderer</string>
+    <string name="preference_control_title">Kustomisasi kontrol</string>
+    <string name="preference_control_description">Jenis gerakan, pemicu, dan penskalaan</string>
+    <string name="preference_java_title">Tweak Java</string>
+    <string name="preference_java_description">Versi Java, Argumen JVM, dan jumlah RAM</string>
+    <string name="preference_misc_title">Pengaturan lain-lain</string>
+    <string name="preference_misc_description">Daftar versi, dan pemeriksaan lib</string>
+    <string name="preference_experimental_title">Barang Eksperimental</string>
+    <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tanpa dukungan.</string>
+    <string name="preference_back_title">Kembali ke layar terakhir</string>
 </resources>
