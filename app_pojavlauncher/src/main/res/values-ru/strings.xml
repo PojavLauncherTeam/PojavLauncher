@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_addbutton_drawer">Добавить разворачиваемую кнопку</string>
     <string name="customctrl_addsubbutton">Добавить под-кнопку</string>
+    <string name="customctrl_add_subbutton_message">Подкнопка №%d добавлена!</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
+    <string name="main_install_jar_file">Установите .jar</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать, %s</string>
@@ -222,4 +224,22 @@
     <string name="pvc_title">Поверсионные настройки</string>
     <string name="storage_warning_title">Изменения в работе хранилища</string>
     <string name="storage_warning_text"><![CDATA[Из-за новых ограничений хранилища добавленных компанией Google в Android 10, приложению нужно переместить папку игры во внутреннюю папку приложения.<br /> Новая папка для файлов Pojav - <b>Android/data/%s/files/</b> (также доступна из провайдера хранилища в вашем проводнике).<br /> Если вам необходимо перенести файлы игры, пожалуйста скопируйте их вручную из папки <b>games/PojavLauncher</b>.]]></string>
+    <string name="control_offset_title">Смещение управления</string>
+    <string name="control_top_offset">Сверху: </string>
+    <string name="control_right_offset">справа: </string>
+    <string name="control_bottom_offset">снизу: </string>
+    <string name="control_left_offset">слева: </string>
+    <string name="preference_control_offset_title">Смещение управления</string>
+    <string name="preference_control_offset_description">Устанавливает пользовательское смещение для каждой стороны экрана</string>
+    <string name="preference_video_title">Видео и визуализатор</string>
+    <string name="preference_video_description">Разрешение, тип масштабирования и визуализатор</string>
+    <string name="preference_control_title">Настройка управления</string>
+    <string name="preference_control_description">Типы жестов, флажки и масштабирование</string>
+    <string name="preference_java_title">Корректировка Java</string>
+    <string name="preference_java_description">Версии Java, аргументы JVM и объём ОЗУ</string>
+    <string name="preference_misc_title">Другие настройки</string>
+    <string name="preference_misc_description">Список версий и проверки библиотек</string>
+    <string name="preference_experimental_title">Экспериментальные штуки</string>
+    <string name="preference_experimental_description">Используйте эти функции с осторожностью; поддержка не предоставляется.</string>
+    <string name="preference_back_title">Вернуться назад</string>
 </resources>
