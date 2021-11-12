@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
     <string name="customctrl_addbutton_drawer">Aggiungi pulsante drawer</string>
     <string name="customctrl_addsubbutton">Aggiungi sub-pulsante</string>
+    <string name="customctrl_add_subbutton_message">Il sub-pulsante n°%d è stato aggiunto!</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
+    <string name="main_install_jar_file">Installa .jar</string>
     <string name="main_options">Impostazioni</string>
     <string name="main_play">Gioca</string>
     <string name="main_welcome">Benvenuto/a, %s</string>
@@ -222,4 +224,22 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="pvc_title">Impostazioni per-versione</string>
     <string name="storage_warning_title">Modifiche archiviazione</string>
     <string name="storage_warning_text"><![CDATA[A causa delle nuove applicazioni di archiviazione di Google aggiunte in Android 10 e superiore, siamo tenuti a spostare la directory di gioco in una cartella privata.<br /> La nuova cartella per i file Pojav è <b>Android/data/%s/files/</b> (anche accessibile tramite un provider di archiviazione nel tuo file explorer).<br /> Se hai bisogno di copiare i file di gioco, copia tutto dalla cartella originale a <b>giochi/PojavLauncher</b> manualmente.]]></string>
+    <string name="control_offset_title">Controlli offset</string>
+    <string name="control_top_offset">Offset sopra: </string>
+    <string name="control_right_offset">Offset destro: </string>
+    <string name="control_bottom_offset">Offset in basso: </string>
+    <string name="control_left_offset">Offset sinistro: </string>
+    <string name="preference_control_offset_title">Controlli offset laterali</string>
+    <string name="preference_control_offset_description">Imposta un offset personalizza ad ogni lato dello schermo</string>
+    <string name="preference_video_title">Video e render</string>
+    <string name="preference_video_description">Risoluzione, scala, e render</string>
+    <string name="preference_control_title">Controlla personalizzazioni</string>
+    <string name="preference_control_description">Gestures, trigger, e scala</string>
+    <string name="preference_java_title">Tweaks Java</string>
+    <string name="preference_java_description">Versioni Java, argomenti JVM, e quantità RAM</string>
+    <string name="preference_misc_title">Impostazioni miste</string>
+    <string name="preference_misc_description">Lista versioni, e controlli librerie</string>
+    <string name="preference_experimental_title">Sperimentale</string>
+    <string name="preference_experimental_description">Utilizza le impostazioni a tuo rischio, non si garantisce il supporto.</string>
+    <string name="preference_back_title">Ritorna indietro</string>
 </resources>
