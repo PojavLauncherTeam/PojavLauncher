@@ -169,7 +169,9 @@
     <string name="customctrl_addbutton">Adaugă buton</string>
     <string name="customctrl_addbutton_drawer">Adauga buton sertar</string>
     <string name="customctrl_addsubbutton">Adaugă sub-buton</string>
+    <string name="customctrl_add_subbutton_message">Subbutonul nr. %d a fost adăugat!</string>
     <string name="customctrl_selectdefault">Selectați controlul implicit json</string>
+    <string name="main_install_jar_file">Instalează .jar</string>
     <string name="main_options">Opțiuni</string>
     <string name="main_play">Joacă</string>
     <string name="main_welcome">Bun venit, %s</string>
@@ -215,4 +217,5 @@
     <string name="pvc_title">Setări per versiune</string>
     <string name="storage_warning_title">Modificări de stocare</string>
     <string name="storage_warning_text"><![CDATA[Din cauza noilor reglementări de stocare cu domeniu de aplicare ale Google adăugate în Android 10 și versiunile ulterioare, trebuie să mutăm directorul de joc într-un dosar privat al aplicației.<br /> Noul dosar pentru fișierele Pojav este <b>Android/data/%s/files/</b> (accesibil și prin intermediul unui furnizor de stocare în exploratorul de fișiere).<br /> Dacă trebuie să copiați fișierele de joc, vă rugăm să copiați manual totul din dosarul original de la <b>games/PojavLauncher</b>.]]></string>
+    <string name="control_offset_title">Decalaj de control</string>
 </resources>
