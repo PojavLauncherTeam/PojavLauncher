@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Dodaj przycisk</string>
     <string name="customctrl_addbutton_drawer">Dodaj panel przycisków</string>
     <string name="customctrl_addsubbutton">Dodaj przycisk podrzędny</string>
+    <string name="customctrl_add_subbutton_message">Pod-przycisk n°%d został dodany!</string>
     <string name="customctrl_selectdefault">Wybierz domyślny plik json dla sterowania</string>
+    <string name="main_install_jar_file">Zainstaluj .jar</string>
     <string name="main_options">Opcje</string>
     <string name="main_play">Graj</string>
     <string name="main_welcome">Witaj, %s</string>
@@ -222,4 +224,22 @@
     <string name="pvc_title">Ustawienia dla wersji</string>
     <string name="storage_warning_title">Zmiany w przechowywaniu</string>
     <string name="storage_warning_text"><![CDATA[Ze względu na nowe wymagania Google skupione na pamięci dodane w systemie Android 10 i wyższych, musimy przenieść katalog gry do prywatnego folderu aplikacji.<br /> Nowy folder Pojav to <b>Android/data/%s/files/</b> (dostępny również poprzez posiadany eksplorator plików).<br /> Jeśli potrzebujesz kopii swoich plików gry, skopiuj wszystko ręcznie z oryginalnego folderu <b>games/PojavLauncher</b>.]]></string>
+    <string name="control_offset_title">Przesunięcie sterowania</string>
+    <string name="control_top_offset">Górne przesunięcie: </string>
+    <string name="control_right_offset">prawe przesunięcie: </string>
+    <string name="control_bottom_offset">dolne przesunięcie: </string>
+    <string name="control_left_offset">lewe przesunięcie: </string>
+    <string name="preference_control_offset_title">Przesunięcia boczne sterowania</string>
+    <string name="preference_control_offset_description">Ustaw niestandardowe przesunięcie na każdą stronę ekranu</string>
+    <string name="preference_video_title">Wideo i renderowanie</string>
+    <string name="preference_video_description">Rozdzielczość, typ skalowania i renderowanie</string>
+    <string name="preference_control_title">Kontroluj dostosowywanie</string>
+    <string name="preference_control_description">Typy gestów, wyzwalacze i skalowanie</string>
+    <string name="preference_java_title">Ulepszenia Javy</string>
+    <string name="preference_java_description">Wersje Java, Argumenty JVM i ilość RAM</string>
+    <string name="preference_misc_title">Pozostałe ustawienia</string>
+    <string name="preference_misc_description">Sprawdzanie listy wersji i lib</string>
+    <string name="preference_experimental_title">Eksperymentalna faza</string>
+    <string name="preference_experimental_description">Używaj tam rzeczy z rozwagą, bez wsparcia.</string>
+    <string name="preference_back_title">Powrót do ostatniego ekranu</string>
 </resources>
