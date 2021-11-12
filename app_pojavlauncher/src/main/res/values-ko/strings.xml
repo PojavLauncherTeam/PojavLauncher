@@ -176,6 +176,7 @@
     <string name="customctrl_addbutton_drawer">버튼 드로어 추가</string>
     <string name="customctrl_addsubbutton">부속 버튼 추가</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
+    <string name="main_install_jar_file">.jar 설치</string>
     <string name="main_options">설정</string>
     <string name="main_play">시작하기</string>
     <string name="main_welcome">환영합니다, %s!</string>
@@ -219,4 +220,9 @@
     <string name="pvc_gameDirectory">게임 디렉토리</string>
     <string name="pvc_jvmArgs">JVM 실행 설정</string>
     <string name="pvc_title">버전마다 설정</string>
+    <string name="control_offset_title">조작 오프셋</string>
+    <string name="control_top_offset">상단 시작점: </string>
+    <string name="control_right_offset">우측 시작점: </string>
+    <string name="control_bottom_offset">하단 시작점: </string>
+    <string name="control_left_offset">좌측 시작점: </string>
 </resources>
