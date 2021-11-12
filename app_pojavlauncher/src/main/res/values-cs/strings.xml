@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Přidat tlačítko</string>
     <string name="customctrl_addbutton_drawer">Přidat šuplík tlačítek</string>
     <string name="customctrl_addsubbutton">Přidat podtlačítko</string>
+    <string name="customctrl_add_subbutton_message">Podtlačítko č.%d bylo přidáno!</string>
     <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
+    <string name="main_install_jar_file">Instalovat .jar</string>
     <string name="main_options">Možnosti</string>
     <string name="main_play">Hrát</string>
     <string name="main_welcome">Vítejte, %s</string>
@@ -221,4 +223,22 @@
     <string name="pvc_title">Nastavení po verzi</string>
     <string name="storage_warning_title">Změny úložiště</string>
     <string name="storage_warning_text"><![CDATA[Kvůli nově vynucovaném rozsahovém úložišti od Googlu přidanému v Androidu 10 a vyšším jsme přinuceni přesunout složku hry do privátní složky aplikace.<br /> Nová složka pro soubory Pojavu je <b>Android/data/%s/files/</b> (také přístupná pomocí poskytovatele úložiště v Průzkumníku souborů).<br /> Pokud potřebujete zkopírovat své herní soubory, prosím zkopírujte vše z původní složky na <b>games/PojavLauncher</b> ručně.]]></string>
+    <string name="control_offset_title">Odsazení ovládání</string>
+    <string name="control_top_offset">Horní odsazení: </string>
+    <string name="control_right_offset">pravé odsazení: </string>
+    <string name="control_bottom_offset">spodní odsazení: </string>
+    <string name="control_left_offset">levé odsazení: </string>
+    <string name="preference_control_offset_title">Stana odsazení ovládání</string>
+    <string name="preference_control_offset_description">Nastavit vlastní odsazení pro každou stranu obrazovky</string>
+    <string name="preference_video_title">Video a vykreslovač</string>
+    <string name="preference_video_description">Rozlišení, typ škálování, a vykreslovač</string>
+    <string name="preference_control_title">Přizpůsobení ovládání</string>
+    <string name="preference_control_description">Typy gest, spouštěče a škálování</string>
+    <string name="preference_java_title">Vyladění Javy</string>
+    <string name="preference_java_description">Verze Javy, Argumenty JVM, a množství RAM</string>
+    <string name="preference_misc_title">Různé nastavení</string>
+    <string name="preference_misc_description">Seznam verzí, a kontrola knihoven</string>
+    <string name="preference_experimental_title">Experimentální Věci</string>
+    <string name="preference_experimental_description">Používejte této věci s uvážením, nepodporujeme.</string>
+    <string name="preference_back_title">Zpět na poslední stránku</string>
 </resources>
