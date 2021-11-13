@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_addbutton_drawer">Düğme saklama menüsü ekle</string>
     <string name="customctrl_addsubbutton">Yan-düğme ekle</string>
+    <string name="customctrl_add_subbutton_message">Ek-Düğme n°%d eklendi !</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
+    <string name="main_install_jar_file">.jar kur</string>
     <string name="main_options">Seçenekler</string>
     <string name="main_play">Oyna</string>
     <string name="main_welcome">Hoş geldiniz, %s</string>
@@ -222,4 +224,15 @@
     <string name="pvc_title">Sürüm-başına ayarlar</string>
     <string name="storage_warning_title">Depolama değişiklikleri</string>
     <string name="storage_warning_text"><![CDATA[Google\'ın Android 10 ve sonraki sürümlerde eklenen yeni scoped storage yaptırımları nedeniyle, oyun dizinini app-private klasörüne taşımamız gerekiyor.<br /> Pojav dosyalari için yeni dizin <b>Android/data/%s/files/</b> (Ayrıca dosya yöneticisindeki dosya sağlayıcısından da erişmek mümkün).<br /> Eğer oyun dosyalarınızı kopyalamanız gerekirse, lütfen <b>games/PojavLauncher</b>\'daki orijinal klasördeki her şeyi manuel olarak kopyalayın.]]></string>
+    <string name="preference_video_title">Video ve işleyici</string>
+    <string name="preference_video_description">Çözünürlük, ölçekleme türü, ve işleyici</string>
+    <string name="preference_control_title">Kontrol özelleştirmesi</string>
+    <string name="preference_control_description">İşaret türleri, tetikleyiciler ve ölçekleme</string>
+    <string name="preference_java_title">Java Ayarlamaları</string>
+    <string name="preference_java_description">Java sürümleri, JVM Argümanları, ve RAM Miktarı</string>
+    <string name="preference_misc_title">Çeşitli ayarlar</string>
+    <string name="preference_misc_description">Sürüm listesi ve lib kontrolü</string>
+    <string name="preference_experimental_title">Deneysel Ayarlar</string>
+    <string name="preference_experimental_description">Buradaki ayarları düşünerek kullanın, destek yoktur.</string>
+    <string name="preference_back_title">Son ekrana geri dön</string>
 </resources>
