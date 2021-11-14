@@ -7,6 +7,13 @@
     <PreferenceCategory android:title="Miscellaneous settings">
 
         <SwitchPreference
+            android:title="@string/preference_sustained_performance_title"
+            android:summary="@string/preference_sustained_performance_description"
+            android:key="sustainedPerformance"
+            android:defaultValue="false"
+            />
+
+        <SwitchPreference
             android:defaultValue="false"
             android:key="hideSidebar"
             android:summary="@string/mcl_setting_subtitle_hide_sidebar"

@@ -14,6 +14,7 @@ import net.kdt.pojavlaunch.utils.MCOptionUtils;
 import java.io.*;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 
 public class MainActivity extends BaseMainActivity {
     public static ControlLayout mControlLayout;
@@ -24,6 +25,11 @@ public class MainActivity extends BaseMainActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initLayout(R.layout.main_with_customctrl);
+
+        // Set the sustained performance mode for available APIs
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            getWindow().setSustainedPerformanceMode(PREF_SUSTAINED_PERFORMANCE);
+
         super.ingameControlsEditorListener = menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.menu_ctrl_load:

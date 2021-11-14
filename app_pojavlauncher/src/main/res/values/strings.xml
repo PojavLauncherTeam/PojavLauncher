@@ -274,6 +274,8 @@
     <string name="preference_misc_description">Version list, and libs checks</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
     <string name="preference_experimental_description">Use things there with consideration, no support.</string>
+    <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
+    <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
 
     <string name="preference_back_title">Back to the last screen</string>
 
