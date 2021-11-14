@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Thêm nút</string>
     <string name="customctrl_addbutton_drawer">Thêm bộ phím</string>
     <string name="customctrl_addsubbutton">Thêm phím phụ</string>
+    <string name="customctrl_add_subbutton_message">Phím phụ %d đã được thêm!</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
+    <string name="main_install_jar_file">Cài đặt tệp .jar</string>
     <string name="main_options">Tùy chọn</string>
     <string name="main_play">Chơi</string>
     <string name="main_welcome">Chào mừng, %s</string>
@@ -221,4 +223,22 @@
     <string name="pvc_title">Cài đặt theo từng phiên bản</string>
     <string name="storage_warning_title">Thay đổi về lưu trữ</string>
     <string name="storage_warning_text"><![CDATA[Vì Google đã bắt buộc sử dụng lưu trữ nội bộ, một tính năng được thêm vào Android 10 trở lên, chúng tôi cần phải chuyển thư mục của trò chơi tới một thư mục riêng tư của ứng dụng.<br /> Thư mục mới của PojavLauncher là <b>Android/data/%s/files/</b> (cũng có thể truy cập được bằng cách sử dụng dịch vụ cung cấp lưu trữ trong trình quản lí tệp của bạn).<br /> Nếu bạn muốn sao chép các tệp trò chơi của bạn, hãy sao chép tất cả từ thư mục <b>games/PojavLauncher</b> một cách thủ công.]]></string>
+    <string name="control_offset_title">Khoảng bù trừ của bộ điều khiển</string>
+    <string name="control_top_offset">Khoảng bù trừ trên: </string>
+    <string name="control_right_offset">Khoảng bù trừ phải: </string>
+    <string name="control_bottom_offset">Khoảng bù trừ dưới: </string>
+    <string name="control_left_offset">Khoảng bù trừ trái: </string>
+    <string name="preference_control_offset_title">Khoảng bù trừ theo cạnh của bộ điều khiển</string>
+    <string name="preference_control_offset_description">Đặt khoảng bù trừ tuỳ chỉnh cho mỗi cạnh của màn hình</string>
+    <string name="preference_video_title">Hình ảnh và trình kết xuất</string>
+    <string name="preference_video_description">Độ phân giải, dạng thu phóng, và trình kết xuất</string>
+    <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
+    <string name="preference_control_description">Dạng cử chỉ, phím kích hoạt, và thu phóng</string>
+    <string name="preference_java_title">Điều chỉnh Java</string>
+    <string name="preference_java_description">Phiên bản Java, các tham số JVM, và lượng RAM</string>
+    <string name="preference_misc_title">Các cài đặt khác</string>
+    <string name="preference_misc_description">Danh sách phiên bản, và kiểm tra thư viện</string>
+    <string name="preference_experimental_title">Những cài đặt thử nghiệm</string>
+    <string name="preference_experimental_description">Cân nhắc sử dụng các tuỳ chọn này. Chúng không được hỗ trợ.</string>
+    <string name="preference_back_title">Quay về màn hình trước đó</string>
 </resources>
