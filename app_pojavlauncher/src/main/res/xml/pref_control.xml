@@ -34,6 +34,7 @@
             android:summary="@string/mcl_setting_subtitle_buttonscale"
             app2:showSeekBarValue="true"
             app2:selectable="false"
+            app2:seekBarIncrement="5"
             app2:icon="@drawable/btn_scale"/>
 
         <net.kdt.pojavlaunch.prefs.ControlOffsetPreference/>
@@ -49,6 +50,7 @@
             android:title="@string/mcl_setting_title_mousescale"
             app2:icon="@drawable/mouse_pointer_1"
             app2:selectable="false"
+            app2:seekBarIncrement="5"
             app2:showSeekBarValue="true" />
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="mousespeed"
@@ -56,6 +58,7 @@
             android:title="@string/mcl_setting_title_mousespeed"
             app2:icon="@drawable/mouse_pointer_spd"
             app2:selectable="false"
+            app2:seekBarIncrement="5"
             app2:showSeekBarValue="true" />
     </PreferenceCategory>
 

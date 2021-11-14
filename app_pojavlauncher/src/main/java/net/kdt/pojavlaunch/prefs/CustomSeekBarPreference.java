@@ -66,8 +66,10 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progress += mMin;
                 progress = progress / getSeekBarIncrement();
                 progress = progress * getSeekBarIncrement();
+                progress -= mMin;
 
                 textView.setText(String.valueOf(progress + mMin));
                 updateTextViewWithSuffix();
@@ -78,8 +80,11 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int progress = seekBar.getProgress() / getSeekBarIncrement();
+
+                int progress = seekBar.getProgress() + mMin;
+                progress /= getSeekBarIncrement();
                 progress *= getSeekBarIncrement();
+                progress -= mMin;
 
                 setValue(progress + mMin);
                 updateTextViewWithSuffix();

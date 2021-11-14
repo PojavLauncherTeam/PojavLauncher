@@ -26,6 +26,7 @@
             android:title="@string/mcl_setting_title_resolution_scaler"
             app2:showSeekBarValue="true"
             app2:selectable="false"
+            app2:seekBarIncrement="5"
             app2:icon="@drawable/resolution_scaler"/>
     </PreferenceCategory>
 </PreferenceScreen>
