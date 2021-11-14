@@ -323,7 +323,6 @@ public class BaseMainActivity extends LoggableActivity {
 
 
             glTouchListener = new OnTouchListener(){
-                private boolean isTouchInHotbar = false;
                 private int lastHotbarKey = -1;
                 /*
                  * Tells if a double tap happened [MOUSE GRAB ONLY]. Doesn't tell where though.
@@ -375,14 +374,9 @@ public class BaseMainActivity extends LoggableActivity {
                             //shouldBeDown = true;
                             CallbackBridge.sendPrepareGrabInitialPos();
 
-                            currentPointerID = e.getPointerId(0);
-                            CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                            prevX =  e.getX();
-                            prevY =  e.getY();
 
-                            int hudKeyHandled;
-                            hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
-                            isTouchInHotbar = hudKeyHandled != -1;
+                            int hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
+                            boolean isTouchInHotbar = hudKeyHandled != -1;
                             if (isTouchInHotbar) {
                                 sendKeyPress(hudKeyHandled);
                                 if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
@@ -396,12 +390,16 @@ public class BaseMainActivity extends LoggableActivity {
                                 break;
                             }
 
+                            CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                            prevX =  e.getX();
+                            prevY =  e.getY();
 
                             if (CallbackBridge.isGrabbing()) {
+                                currentPointerID = e.getPointerId(0);
                                 // It cause hold left mouse while moving camera
                                 initialX = mouse_x;
                                 initialY = mouse_y;
-                                if(!isTouchInHotbar) theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
                             }
                             lastHotbarKey = hudKeyHandled;
                             break;
@@ -410,6 +408,9 @@ public class BaseMainActivity extends LoggableActivity {
                         case MotionEvent.ACTION_CANCEL: // 3
                             shouldBeDown = false;
                             currentPointerID = -1;
+
+                            hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
+                            isTouchInHotbar = hudKeyHandled != -1;
 
                             if (CallbackBridge.isGrabbing()) {
                                 if (!isTouchInHotbar && !triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
@@ -463,18 +464,25 @@ public class BaseMainActivity extends LoggableActivity {
                                 CallbackBridge.sendCursorPos(mouse_x, mouse_y);
                                 prevX =  e.getX();
                                 prevY =  e.getY();
-                            } else if (!isTouchInHotbar) {
+                            } else {
                                 //Camera movement
-                                if(CallbackBridge.isGrabbing()){
+                                if (CallbackBridge.isGrabbing()) {
                                     int pointerIndex = e.findPointerIndex(currentPointerID);
-                                    if(pointerIndex == -1 || lastPointerCount != e.getPointerCount() || !shouldBeDown){
+                                    if (pointerIndex == -1 || lastPointerCount != e.getPointerCount() || !shouldBeDown) {
                                         shouldBeDown = true;
+
+                                        hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
+                                        if(hudKeyHandled != -1) break; //No camera movement on hotbar
+
                                         currentPointerID = e.getPointerId(0);
                                         prevX = e.getX();
                                         prevY = e.getY();
-                                    }else{
-                                        mouse_x += (e.getX(pointerIndex) - prevX) * sensitivityFactor;
-                                        mouse_y += (e.getY(pointerIndex) - prevY) * sensitivityFactor;
+                                    } else {
+                                        hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
+                                        if(hudKeyHandled == -1){ //No camera on hotbar
+                                            mouse_x += (e.getX(pointerIndex) - prevX) * sensitivityFactor;
+                                            mouse_y += (e.getY(pointerIndex) - prevY) * sensitivityFactor;
+                                        }
 
                                         prevX = e.getX(pointerIndex);
                                         prevY = e.getY(pointerIndex);
@@ -483,9 +491,10 @@ public class BaseMainActivity extends LoggableActivity {
                                     }
 
                                 }
-
-
                             }
+
+
+
                             lastPointerCount = e.getPointerCount();
                             break;
                     }
