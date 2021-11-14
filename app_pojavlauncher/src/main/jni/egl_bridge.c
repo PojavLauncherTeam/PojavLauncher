@@ -1013,9 +1013,9 @@ void pojavMakeCurrent(void* window) {
                 OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
                 stride = buf.stride;
                 //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+                OSMesaPixelStore_p(OSMESA_Y_UP,0);
             }
 
-            OSMesaPixelStore_p(OSMESA_Y_UP,0);
             printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
             printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
             glClear_p(GL_COLOR_BUFFER_BIT);
