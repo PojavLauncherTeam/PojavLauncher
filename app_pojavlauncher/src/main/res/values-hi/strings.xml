@@ -21,6 +21,9 @@
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_fatal">पोजावलांचर अप्रत्याशित क्रैश हो गया है</string>
+    <string name="error_show_more">ज्यादा देखे</string>
+    <string name="error_show_less">कम देखे</string>
     <!-- Toast messages -->
     <!--
     <string name="toast_3">Exit</string>
