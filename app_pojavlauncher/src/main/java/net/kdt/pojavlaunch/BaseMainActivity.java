@@ -311,6 +311,12 @@ public class BaseMainActivity extends LoggableActivity {
                                 prevY = y;
                             }
                             break;
+
+                        case MotionEvent.ACTION_UP:
+                            prevX = x;
+                            prevY = y;
+                            currentPointerID = -1000;
+                            break;
                     }
                 }
 
