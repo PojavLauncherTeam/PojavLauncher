@@ -109,7 +109,7 @@ public class V117CompatUtil {
         List<String> packList =getTexturePackList(MCOptionUtils.get("resourcePacks"));
         String renderer = cfg != null && cfg.renderer != null?cfg.renderer:LauncherPreferences.PREF_RENDERER;
 
-        if(renderer.equals("vulkan_zink")) return; //don't install for zink users;
+        if(renderer.equals("vulkan_zink") || renderer.equals("opengles3_virgl")) return; //don't install for zink/virgl users;
         if(packList.contains("\"assets-v0.zip\"") && renderer.equals("opengles3")) return;
 
         Object lock = new Object();

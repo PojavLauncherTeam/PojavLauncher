@@ -85,7 +85,7 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
 
 static jint launchJVM(int margc, char** margv) {
    void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
-   
+
    // Boardwalk: silence
    // LOGD("JLI lib = %x", (int)libjli);
    if (NULL == libjli) {
@@ -170,15 +170,15 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
 
     int argc = (*env)->GetArrayLength(env, argsArray);
     char **argv = convert_to_char_array(env, argsArray);
-    
+
     LOGD("Done processing args");
 
     res = launchJVM(argc, argv);
 
     LOGD("Going to free args");
     free_char_array(env, argsArray, argv);
-    
+
     LOGD("Free done");
-   
+
     return res;
 }
