@@ -241,5 +241,7 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="preference_misc_description">Lista versioni, e controlli librerie</string>
     <string name="preference_experimental_title">Sperimentale</string>
     <string name="preference_experimental_description">Utilizza le impostazioni a tuo rischio, non si garantisce il supporto.</string>
+    <string name="preference_sustained_performance_title">Attiva modalità performance sostenute</string>
+    <string name="preference_sustained_performance_description">Limita il thermal throttling limitando le performance massime</string>
     <string name="preference_back_title">Ritorna indietro</string>
 </resources>
