@@ -47,39 +47,11 @@ public class BaseMainActivity extends LoggableActivity {
     private DisplayMetrics displayMetrics;
     public float scaleFactor = 1;
     public double sensitivityFactor;
-    private final int fingerStillThreshold = (int) Tools.dpToPx(9);
     private final int fingerScrollThreshold = (int) Tools.dpToPx(6);
-    private float initialX, initialY;
-    private float scrollLastInitialX, scrollLastInitialY;
-    private float prevX, prevY;
-    private int currentPointerID;
 
     private boolean mIsResuming = false;
-    private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
-    private static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
-    private static boolean triggeredLeftMouseButton = false;
-    private final Handler theHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_LEFT_MOUSE_BUTTON_CHECK:
-                    if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
-                    float x = CallbackBridge.mouseX;
-                    float y = CallbackBridge.mouseY;
-                    if (CallbackBridge.isGrabbing() &&
-                            Math.abs(initialX - x) < fingerStillThreshold &&
-                            Math.abs(initialY - y) < fingerStillThreshold) {
-                        triggeredLeftMouseButton = true;
-                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
-                    }
-                    break;
-                case MSG_DROP_ITEM_BUTTON_CHECK:
-                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q);
-                    theHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
-                 break;
 
-            }
-        }
-    };
+
 
     private MinecraftGLView minecraftGLView;
     private int guiScale;
@@ -97,9 +69,6 @@ public class BaseMainActivity extends LoggableActivity {
     private TextView textLog;
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
-
-    private TapDetector singleTapDetector;
-    private TapDetector doubleTapDetector;
 
     private TextView debugText;
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
@@ -329,186 +298,11 @@ public class BaseMainActivity extends LoggableActivity {
 
 
             glTouchListener = new OnTouchListener(){
-                private int lastHotbarKey = -1;
-                /*
-                 * Tells if a double tap happened [MOUSE GRAB ONLY]. Doesn't tell where though.
-                 */
-                private boolean hasDoubleTapped = false;
-                /*
-                 * Events can start with only a move instead of an pointerDown
-                 * It is due to the mouse passthrough option bundled with the control button.
-                 */
-                private boolean shouldBeDown = false;
-                /*
-                 * When the android system has fingers really near to each other, it tends to
-                 * either swap or remove a pointer !
-                 * This variable is here to mitigate the issue.
-                 */
-                private int lastPointerCount = 0;
+
                 @Override
                 public boolean onTouch(View p1, MotionEvent e) {
 
-                    //Looking for a mouse to handle, won't have an effect if no mouse exists.
-                    for (int i = 0; i < e.getPointerCount(); i++) {
-                        if (e.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) {
 
-                            if(CallbackBridge.isGrabbing()) return false;
-                            CallbackBridge.sendCursorPos(   e.getX(i) * scaleFactor,
-                                                            e.getY(i) * scaleFactor);
-                            return true; //mouse event handled successfully
-                        }
-                    }
-
-                    // System.out.println("Pre touch, isTouchInHotbar=" + Boolean.toString(isTouchInHotbar) + ", action=" + MotionEvent.actionToString(e.getActionMasked()));
-
-                    //Getting scaled position from the event
-                    if(!CallbackBridge.isGrabbing()) {
-                        hasDoubleTapped = false;
-                        mouse_x =  (e.getX() * scaleFactor);
-                        mouse_y =  (e.getY() * scaleFactor);
-                        //One android click = one MC click
-                        if(singleTapDetector.onTouchEvent(e)){
-                            CallbackBridge.putMouseEventWithCoords(rightOverride ? (byte) 1 : (byte) 0, (int)mouse_x, (int)mouse_y);
-                            return true;
-                        }
-                    }else{
-                        hasDoubleTapped = doubleTapDetector.onTouchEvent(e);
-                    }
-
-                    switch (e.getActionMasked()) {
-                        case MotionEvent.ACTION_DOWN: // 0
-                            //shouldBeDown = true;
-                            CallbackBridge.sendPrepareGrabInitialPos();
-
-
-                            int hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
-                            boolean isTouchInHotbar = hudKeyHandled != -1;
-                            if (isTouchInHotbar) {
-                                sendKeyPress(hudKeyHandled);
-                                if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
-                                    //Prevent double tapping Event on two different slots
-                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F);
-                                }
-
-                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_DROP_ITEM_BUTTON_CHECK, 350);
-                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                lastHotbarKey = hudKeyHandled;
-                                break;
-                            }
-
-                            CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                            prevX =  e.getX();
-                            prevY =  e.getY();
-
-                            if (CallbackBridge.isGrabbing()) {
-                                currentPointerID = e.getPointerId(0);
-                                // It cause hold left mouse while moving camera
-                                initialX = mouse_x;
-                                initialY = mouse_y;
-                                theHandler.sendEmptyMessageDelayed(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
-                            }
-                            lastHotbarKey = hudKeyHandled;
-                            break;
-
-                        case MotionEvent.ACTION_UP: // 1
-                        case MotionEvent.ACTION_CANCEL: // 3
-                            shouldBeDown = false;
-                            currentPointerID = -1;
-
-                            hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
-                            isTouchInHotbar = hudKeyHandled != -1;
-
-                            if (CallbackBridge.isGrabbing()) {
-                                if (!isTouchInHotbar && !triggeredLeftMouseButton && Math.abs(initialX - mouse_x) < fingerStillThreshold && Math.abs(initialY - mouse_y) < fingerStillThreshold) {
-                                    if (!LauncherPreferences.PREF_DISABLE_GESTURES) {
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
-                                        sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
-                                    }
-                                }
-                                if (!isTouchInHotbar) {
-                                    if (triggeredLeftMouseButton) sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
-
-                                    triggeredLeftMouseButton = false;
-                                    theHandler.removeMessages(BaseMainActivity.MSG_LEFT_MOUSE_BUTTON_CHECK);
-                                } else {
-                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q, 0, false);
-                                    theHandler.removeMessages(MSG_DROP_ITEM_BUTTON_CHECK);
-                                }
-                            }
-
-                            break;
-
-                        case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            scrollLastInitialX = e.getX();
-                            scrollLastInitialY = e.getY();
-                            //Checking if we are pressing the hotbar to select the item
-                            hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
-                            if(hudKeyHandled != -1){
-                                sendKeyPress(hudKeyHandled);
-                                if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
-                                    //Prevent double tapping Event on two different slots
-                                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_F);
-                                }
-                            }
-
-                            lastHotbarKey = hudKeyHandled;
-                            break;
-
-                        case MotionEvent.ACTION_MOVE:
-                            if (!CallbackBridge.isGrabbing() && e.getPointerCount() >= 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
-                                int hScroll =  ((int) (e.getX() - scrollLastInitialX)) / fingerScrollThreshold;
-                                int vScroll = ((int) (e.getY() - scrollLastInitialY)) / fingerScrollThreshold;
-
-                                if(vScroll != 0 || hScroll != 0){
-                                    CallbackBridge.sendScroll(hScroll, vScroll);
-                                    scrollLastInitialX = e.getX();
-                                    scrollLastInitialY = e.getY();
-                                }
-
-
-                            } else if (!CallbackBridge.isGrabbing() && e.getPointerCount() == 1) { //Touch hover
-                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                prevX =  e.getX();
-                                prevY =  e.getY();
-                            } else {
-                                //Camera movement
-                                if (CallbackBridge.isGrabbing()) {
-                                    int pointerIndex = e.findPointerIndex(currentPointerID);
-                                    if (pointerIndex == -1 || lastPointerCount != e.getPointerCount() || !shouldBeDown) {
-                                        shouldBeDown = true;
-
-                                        hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
-                                        if(hudKeyHandled != -1) break; //No camera movement on hotbar
-
-                                        currentPointerID = e.getPointerId(0);
-                                        prevX = e.getX();
-                                        prevY = e.getY();
-                                    } else {
-                                        hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
-                                        if(hudKeyHandled == -1){ //No camera on hotbar
-                                            mouse_x += (e.getX(pointerIndex) - prevX) * sensitivityFactor;
-                                            mouse_y += (e.getY(pointerIndex) - prevY) * sensitivityFactor;
-                                        }
-
-                                        prevX = e.getX(pointerIndex);
-                                        prevY = e.getY(pointerIndex);
-
-                                        CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                    }
-
-                                }
-                            }
-
-
-
-                            lastPointerCount = e.getPointerCount();
-                            break;
-                    }
-
-                    debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                    CallbackBridge.DEBUG_STRING.setLength(0);
-
-                    return true;
                 }
             };
             
