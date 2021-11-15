@@ -240,5 +240,7 @@
     <string name="preference_misc_description">Seznam verzí, a kontrola knihoven</string>
     <string name="preference_experimental_title">Experimentální Věci</string>
     <string name="preference_experimental_description">Používejte této věci s uvážením, nepodporujeme.</string>
+    <string name="preference_sustained_performance_title">Zapnout režim výkonu trvalého</string>
+    <string name="preference_sustained_performance_description">Limitovat termální zpomalování limitováním výkonu</string>
     <string name="preference_back_title">Zpět na poslední stránku</string>
 </resources>
