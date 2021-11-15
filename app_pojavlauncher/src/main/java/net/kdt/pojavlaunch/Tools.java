@@ -339,18 +339,18 @@ public final class Tools {
         return libStr.toString();
     }
 
-    public static DisplayMetrics getDisplayMetrics(Activity ctx) {
+    public static DisplayMetrics getDisplayMetrics(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
-        if(SDK_INT >= Build.VERSION_CODES.N && (ctx.isInMultiWindowMode() || ctx.isInPictureInPictureMode())
+        if(SDK_INT >= Build.VERSION_CODES.N && (activity.isInMultiWindowMode() || activity.isInPictureInPictureMode())
         || PREF_NOTCH_SIZE == -1 ){
             //For devices with free form/split screen, we need window size, not screen size.
-            displayMetrics = ctx.getResources().getDisplayMetrics();
+            displayMetrics = activity.getResources().getDisplayMetrics();
         }else{
             if (SDK_INT >= Build.VERSION_CODES.R) {
-                ctx.getDisplay().getRealMetrics(displayMetrics);
+                activity.getDisplay().getRealMetrics(displayMetrics);
             } else {
-                 ctx.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+                 activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
