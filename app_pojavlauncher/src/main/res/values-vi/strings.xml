@@ -240,5 +240,7 @@
     <string name="preference_misc_description">Danh sách phiên bản, và kiểm tra thư viện</string>
     <string name="preference_experimental_title">Những cài đặt thử nghiệm</string>
     <string name="preference_experimental_description">Cân nhắc sử dụng các tuỳ chọn này. Chúng không được hỗ trợ.</string>
+    <string name="preference_sustained_performance_title">Bật chế độ duy trì hiệu suất</string>
+    <string name="preference_sustained_performance_description">Hạn chế giảm hiệu suất vì nhiệt bằng cách giới hạn hiệu suất tối đa</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
 </resources>
