@@ -787,6 +787,10 @@ int pojavInit() {
     if (strncmp("opengles3_virgl", renderer, 15) == 0) {
         config_renderer = RENDERER_VIRGL;
         setenv("GALLIUM_DRIVER","virpipe",1);
+        setenv("OSMESA_NO_FLUSH_FRONTBUFFER","1",false);
+        if(strcmp(getenv("OSMESA_NO_FLUSH_FRONTBUFFER"),"1") == 0) {
+            printf("VirGL: OSMesa buffer flush is DISABLED!\n");
+        }
         loadSymbolsVirGL();
     } else if (strncmp("opengles", renderer, 8) == 0) {
         config_renderer = RENDERER_GL4ES;
@@ -929,10 +933,15 @@ void pojavSwapBuffers() {
         } break;
 
         case RENDERER_VK_ZINK: {
-            ((struct osmesa_context)*OSMesaGetCurrentContext_p())
-            .current_buffer->map = buf.bits;
+            OSMesaContext ctx = OSMesaGetCurrentContext_p();
+            if(ctx == NULL) {
+                printf("Zink: attempted to swap buffers without context!");
+                break;
+            }
+            OSMesaMakeCurrent_p(ctx,buf.bits,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
             glFinish_p();
             ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+            //OSMesaMakeCurrent_p(ctx,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
             ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
         } break;
     }
