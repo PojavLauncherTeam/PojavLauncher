@@ -240,5 +240,7 @@
     <string name="preference_misc_description">Versionsliste und Bibliotheksüberprüfungen</string>
     <string name="preference_experimental_title">Experimentell</string>
     <string name="preference_experimental_description">Benutze diese Einstellungen mit Bedacht, wir leisten keinen Support für diese Features.</string>
+    <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
+    <string name="preference_sustained_performance_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
 </resources>
