@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_addbutton_drawer">添加组合框</string>
     <string name="customctrl_addsubbutton">添加子按钮</string>
+    <string name="customctrl_add_subbutton_message">子按钮 n°%d 已添加！</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
+    <string name="main_install_jar_file">安装 .jar</string>
     <string name="main_options">选项</string>
     <string name="main_play">启动游戏</string>
     <string name="main_welcome">欢迎， %s</string>
@@ -221,4 +223,24 @@
     <string name="pvc_title">Per-version 设置</string>
     <string name="storage_warning_title">存储变更</string>
     <string name="storage_warning_text"><![CDATA[由于 Google 在 Android 10 及更高版本中添加了新的存储范围强制措施，我们需要将游戏目录移动到应用私有文件夹中。<br />新的 Pojav 文件夹是 <b>Android/data/%s/files/</b> （同样可以通过您的文件管理器访问）。<br />如果您需要复制您的游戏文件，请从 <b>games/PojavLauncher</b> 中手动复制所有内容]]></string>
+    <string name="control_offset_title">控件偏移</string>
+    <string name="control_top_offset">顶端偏移： </string>
+    <string name="control_right_offset">右偏移： </string>
+    <string name="control_bottom_offset">底部偏移： </string>
+    <string name="control_left_offset">左偏移： </string>
+    <string name="preference_control_offset_title">控件侧偏移</string>
+    <string name="preference_control_offset_description">设置屏幕每边的自定义偏移</string>
+    <string name="preference_video_title">视频和渲染器</string>
+    <string name="preference_video_description">分辨率、缩放类型和渲染器</string>
+    <string name="preference_control_title">控制自定义</string>
+    <string name="preference_control_description">手势类型、触发器和缩放</string>
+    <string name="preference_java_title">Java 调整</string>
+    <string name="preference_java_description">Java 版本，JVM 参数和 RAM 配额</string>
+    <string name="preference_misc_title">其他设置</string>
+    <string name="preference_misc_description">版本列表和 libs 检查</string>
+    <string name="preference_experimental_title">实验性的补丁</string>
+    <string name="preference_experimental_description">使用这里的内容是不受支持的。</string>
+    <string name="preference_sustained_performance_title">启用持续性能模式</string>
+    <string name="preference_sustained_performance_description">通过限制峰值性能来限制热节流</string>
+    <string name="preference_back_title">返回最后一个屏幕</string>
 </resources>
