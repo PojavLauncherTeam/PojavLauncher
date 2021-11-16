@@ -84,7 +84,8 @@
     <string name="mcl_setting_category_renderer">Визуализатор</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): экспортирует OpenGL 2.1 + частично 3.2 (пока без поддержки 1.17)</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): экспортирует OpenGL 2.1 + частично 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): экспортирует OpenGL 4.5</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортирует OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортирует OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
@@ -241,5 +242,7 @@
     <string name="preference_misc_description">Список версий и проверки библиотек</string>
     <string name="preference_experimental_title">Экспериментальные штуки</string>
     <string name="preference_experimental_description">Используйте эти функции с осторожностью; поддержка не предоставляется.</string>
+    <string name="preference_sustained_performance_title">Включить режим стабилизации производительности</string>
+    <string name="preference_sustained_performance_description">Уменьшает троллинг от нагрева путём уменьшения производительности</string>
     <string name="preference_back_title">Вернуться назад</string>
 </resources>
