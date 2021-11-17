@@ -1,14 +1,34 @@
 package net.kdt.pojavlaunch.utils;
+import static org.lwjgl.glfw.CallbackBridge.windowHeight;
+import static org.lwjgl.glfw.CallbackBridge.windowWidth;
+
 import java.io.*;
+import java.lang.ref.WeakReference;
 import java.util.*;
+
+import android.os.Build;
+import android.os.FileObserver;
 import android.util.*;
+
+import androidx.annotation.Nullable;
+
 import net.kdt.pojavlaunch.*;
 
 public class MCOptionUtils
 {
     private static final HashMap<String,String> parameterMap = new HashMap<>();
+    private static final ArrayList<WeakReference<MCOptionListener>> optionListeners = new ArrayList<>();
+    private static FileObserver fileObserver;
+    public interface MCOptionListener {
+         /** Called when an option is changed. Don't know which one though */
+        void onOptionChanged();
+    }
     
     public static void load() {
+        if(fileObserver == null){
+            setupFileObserver();
+        }
+
         parameterMap.clear();
 
         try {
@@ -50,4 +70,63 @@ public class MCOptionUtils
             Log.w(Tools.APP_NAME, "Could not save options.txt", e);
         }
     }
+
+    /** @return The stored Minecraft GUI scale, also auto-computed if on auto-mode or improper setting */
+    public static int getMcScale() {
+        MCOptionUtils.load();
+        String str = MCOptionUtils.get("guiScale");
+        int guiScale = (str == null ? 0 :Integer.parseInt(str));
+
+        int scale = Math.max(Math.min(windowWidth / 320, windowHeight / 240), 1);
+        if(scale < guiScale || guiScale == 0){
+            guiScale = scale;
+        }
+
+        return guiScale;
+    }
+
+    private static void setupFileObserver(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    MCOptionUtils.load();
+                    notifyListeners();
+                }
+            };
+        }else{
+            fileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    MCOptionUtils.load();
+                    notifyListeners();
+                }
+            };
+        }
+    }
+
+    public static void notifyListeners(){
+        for(WeakReference<MCOptionListener> weakReference : optionListeners){
+            MCOptionListener optionListener = weakReference.get();
+            if(optionListener == null) continue;
+
+            optionListener.onOptionChanged();
+        }
+    }
+
+    public static void addMCOptionListener(MCOptionListener listener){
+        optionListeners.add(new WeakReference<>(listener));
+    }
+
+    public static void removeMCOptionListener(MCOptionListener listener){
+        for(WeakReference<MCOptionListener> weakReference : optionListeners){
+            MCOptionListener optionListener = weakReference.get();
+            if(optionListener == null) continue;
+            if(optionListener == listener){
+                optionListeners.remove(weakReference);
+                return;
+            }
+        }
+    }
+
 }
