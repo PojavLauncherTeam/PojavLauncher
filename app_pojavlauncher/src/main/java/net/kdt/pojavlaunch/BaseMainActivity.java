@@ -12,7 +12,6 @@ import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 
 import androidx.drawerlayout.widget.*;
@@ -36,18 +35,11 @@ public class BaseMainActivity extends LoggableActivity {
 
     volatile public static boolean isInputStackCall;
 
-    private static final int[] hotbarKeys = {
-        LWJGLGLFWKeycode.GLFW_KEY_1, LWJGLGLFWKeycode.GLFW_KEY_2,   LWJGLGLFWKeycode.GLFW_KEY_3,
-        LWJGLGLFWKeycode.GLFW_KEY_4, LWJGLGLFWKeycode.GLFW_KEY_5,   LWJGLGLFWKeycode.GLFW_KEY_6,
-        LWJGLGLFWKeycode.GLFW_KEY_7, LWJGLGLFWKeycode.GLFW_KEY_8, LWJGLGLFWKeycode.GLFW_KEY_9};
-
     private Gamepad gamepad;
 
-    private static boolean rightOverride = false;
     private DisplayMetrics displayMetrics;
     public float scaleFactor = 1;
     public double sensitivityFactor;
-    private final int fingerScrollThreshold = (int) Tools.dpToPx(6);
 
     private boolean mIsResuming = false;
 
@@ -58,7 +50,7 @@ public class BaseMainActivity extends LoggableActivity {
 
     
     private static boolean isVirtualMouseEnabled;
-    private static LinearLayout touchPad;
+    private static Touchpad touchpad;
     private ImageView mousePointer;
     private MinecraftAccount mProfile;
     
@@ -75,8 +67,6 @@ public class BaseMainActivity extends LoggableActivity {
     public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
 
     protected volatile JMinecraftVersionList.Version mVersionInfo;
-
-    private View.OnTouchListener glTouchListener;
 
     private File logFile;
     private PrintStream logStream;
@@ -134,10 +124,6 @@ public class BaseMainActivity extends LoggableActivity {
             windowHeight = Tools.getDisplayFriendlyRes(displayMetrics.heightPixels, scaleFactor);
             System.out.println("WidthHeight: " + windowWidth + ":" + windowHeight);
 
-            
-
-            singleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
-            doubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
 
 
             // Menu
@@ -165,15 +151,7 @@ public class BaseMainActivity extends LoggableActivity {
             };
             navDrawer.setNavigationItemSelectedListener(gameActionListener);
 
-            this.touchPad = findViewById(R.id.main_touchpad);
-            touchPad.setFocusable(false);
-            
-            this.mousePointer = findViewById(R.id.main_mouse_pointer);
-            this.mousePointer.post(() -> {
-                ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
-                params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-            });
+            touchpad = findViewById(R.id.main_touchpad);
 
             this.contentLog = findViewById(R.id.content_log_layout);
             this.contentScroll = findViewById(R.id.content_log_scroll);
@@ -192,119 +170,6 @@ public class BaseMainActivity extends LoggableActivity {
             this.minecraftGLView = findViewById(R.id.main_game_render_view);
             this.drawerLayout.closeDrawers();
 
-            placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
-            Thread virtualMouseGrabThread = new Thread(() -> {
-                while (!isExited) {
-                    if (lastGrab != CallbackBridge.isGrabbing())
-                    mousePointer.post(() -> {
-                        if (!CallbackBridge.isGrabbing() && isVirtualMouseEnabled) {
-                            touchPad.setVisibility(View.VISIBLE);
-                            placeMouseAt(displayMetrics.widthPixels / 2, displayMetrics.heightPixels / 2);
-                        }
-
-                        if (CallbackBridge.isGrabbing() && touchPad.getVisibility() != View.GONE) {
-                            touchPad.setVisibility(View.GONE);
-                        }
-
-                        lastGrab = CallbackBridge.isGrabbing();
-                    });
-
-                }
-            }, "VirtualMouseGrabThread");
-            virtualMouseGrabThread.setPriority(Thread.MIN_PRIORITY);
-            virtualMouseGrabThread.start();
-
-            if (isAndroid8OrHigher()) {
-                touchPad.setDefaultFocusHighlightEnabled(false);
-            }
-            touchPad.setOnTouchListener((v, event) -> {
-                // MotionEvent reports input details from the touch screen
-                // and other input controls. In this case, you are only
-                // interested in events where the touch position changed.
-                // int index = event.getActionIndex();
-                if(CallbackBridge.isGrabbing()) {
-                    minecraftGLView.dispatchTouchEvent(MotionEvent.obtain(event));
-                    System.out.println("Transitioned event" + event.hashCode() + " to MinecraftGLView");
-                    return false;
-                }
-                int action = event.getActionMasked();
-
-                float x = event.getX();
-                float y = event.getY();
-                float mouseX = mousePointer.getX();
-                float mouseY = mousePointer.getY();
-
-                if (singleTapDetector.onTouchEvent(event)) {
-                    mouse_x = (mouseX * scaleFactor);
-                    mouse_y = (mouseY * scaleFactor);
-                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                    CallbackBridge.sendMouseKeycode(rightOverride ? LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT : LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
-
-
-
-                } else {
-                    switch (action) {
-                        case MotionEvent.ACTION_POINTER_DOWN: // 5
-                            scrollLastInitialX = event.getX();
-                            scrollLastInitialY = event.getY();
-                            break;
-
-                        case MotionEvent.ACTION_DOWN:
-                            prevX = x;
-                            prevY = y;
-                            currentPointerID = event.getPointerId(0);
-                            break;
-
-                        case MotionEvent.ACTION_MOVE: // 2
-
-                            if (!CallbackBridge.isGrabbing() && event.getPointerCount() >= 2 && !LauncherPreferences.PREF_DISABLE_GESTURES) { //Scrolling feature
-                                int hScroll =  ((int) (event.getX() - scrollLastInitialX)) / fingerScrollThreshold;
-                                int vScroll = ((int) (event.getY() - scrollLastInitialY)) / fingerScrollThreshold;
-
-                                if(vScroll != 0 || hScroll != 0){
-                                    CallbackBridge.sendScroll(hScroll, vScroll);
-                                    scrollLastInitialX = event.getX();
-                                    scrollLastInitialY = event.getY();
-                                }
-                            } else {
-                                if(currentPointerID == event.getPointerId(0)) {
-                                    mouseX = Math.max(0, Math.min(displayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
-                                    mouseY = Math.max(0, Math.min(displayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
-                                    mouse_x = (mouseX * scaleFactor);
-                                    mouse_y = (mouseY * scaleFactor);
-                                    placeMouseAt(mouseX, mouseY);
-                                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                }else currentPointerID = event.getPointerId(0);
-
-                                prevX = x;
-                                prevY = y;
-                            }
-                            break;
-
-                        case MotionEvent.ACTION_UP:
-                            prevX = x;
-                            prevY = y;
-                            currentPointerID = -1000;
-                            break;
-                    }
-                }
-
-                debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                CallbackBridge.DEBUG_STRING.setLength(0);
-
-                return true;
-            });
-
-
-
-            glTouchListener = new OnTouchListener(){
-
-                @Override
-                public boolean onTouch(View p1, MotionEvent e) {
-
-
-                }
-            };
             
             if (isAndroid8OrHigher()) {
                 minecraftGLView.setDefaultFocusHighlightEnabled(false);
@@ -372,58 +237,17 @@ public class BaseMainActivity extends LoggableActivity {
                     }
                 });
             }
-            minecraftGLView.setOnTouchListener(glTouchListener);
-            minecraftGLView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
-                
-                    private boolean isCalled = false;
-                    @Override
-                    public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-                        scaleFactor = (LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f);
-                        windowWidth = Tools.getDisplayFriendlyRes(width, scaleFactor);
-                        windowHeight = Tools.getDisplayFriendlyRes(height, scaleFactor);
-                        texture.setDefaultBufferSize(windowWidth, windowHeight);
 
-                        //Load Minecraft options:
-                        MCOptionUtils.load();
-                        MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
-                        MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
-                        MCOptionUtils.save();
-                        getMcScale();
-                        // Should we do that?
-                        if (!isCalled) {
-                            isCalled = true;
-                            
-                            JREUtils.setupBridgeWindow(new Surface(texture));
-                            
-                            new Thread(() -> {
-                                try {
-                                    Thread.sleep(200);
-                                    runCraft();
-                                } catch (Throwable e) {
-                                    Tools.showError(BaseMainActivity.this, e, true);
-                                }
-                            }, "JVM Main thread").start();
-                        }
-                    }
+            minecraftGLView.setSurfaceReadyListener(() -> {
+                try {
+                    runCraft();
+                }catch (Throwable e){
+                    Tools.showError(getApplicationContext(), e, true);
+                }
+            });
 
-                    @Override
-                    public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
-                        return true;
-                    }
+            minecraftGLView.init();
 
-                    @Override
-                    public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-                        windowWidth = Tools.getDisplayFriendlyRes(width, scaleFactor);
-                        windowHeight = Tools.getDisplayFriendlyRes(height, scaleFactor);
-                        CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
-                        getMcScale();
-                    }
-
-                    @Override
-                    public void onSurfaceTextureUpdated(SurfaceTexture texture) {
-                        texture.setDefaultBufferSize(windowWidth, windowHeight);
-                    }
-                });
         } catch (Throwable e) {
             Tools.showError(this, e, true);
         }
@@ -692,10 +516,6 @@ public class BaseMainActivity extends LoggableActivity {
         });
     }
 
-    public int mcscale(int input) {
-        return (int)((this.guiScale * input)/scaleFactor);
-    }
-
 
     public void toggleMenu(View v) {
         drawerLayout.openDrawer(Gravity.RIGHT);
@@ -706,18 +526,13 @@ public class BaseMainActivity extends LoggableActivity {
         this.mousePointer.setY(mousePointer.getY() + y);
     }
 
-    public void placeMouseAt(float x, float y) {
-        this.mousePointer.setX(x);
-        this.mousePointer.setY(y);
-    }
+
 
     public static void toggleMouse(Context ctx) {
         if (CallbackBridge.isGrabbing()) return;
 
-        isVirtualMouseEnabled = !isVirtualMouseEnabled;
-        touchPad.setVisibility(isVirtualMouseEnabled ? View.VISIBLE : View.GONE);
-        Toast.makeText(ctx,
-                isVirtualMouseEnabled ? R.string.control_mouseon : R.string.control_mouseoff,
+        Toast.makeText(ctx, touchpad.switchState()
+                 ? R.string.control_mouseon : R.string.control_mouseoff,
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -745,12 +560,6 @@ public class BaseMainActivity extends LoggableActivity {
         if(touchCharInput != null) touchCharInput.switchKeyboardState();
     }
 
-
-
-
-    public static void setRightOverride(boolean val) {
-        rightOverride = val;
-    }
 
     public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
         sendKeyPress(keyCode, 0, modifiers, status);
@@ -791,36 +600,8 @@ public class BaseMainActivity extends LoggableActivity {
         return true;
     }
 
-    public int getMcScale() {
-        //Get the scale stored in game files, used auto scale if found or if the stored scaled is bigger than the authorized size.
-        MCOptionUtils.load();
-        String str = MCOptionUtils.get("guiScale");
-        this.guiScale = (str == null ? 0 :Integer.parseInt(str));
-        
 
-        int scale = Math.max(Math.min(windowWidth / 320, windowHeight / 240), 1);
-        if(scale < this.guiScale || guiScale == 0){
-            this.guiScale = scale;
-        }
-
-        if(gamepad != null) gamepad.notifyGUISizeChange(this.guiScale);
-        return this.guiScale;
-    }
-
-    public int handleGuiBar(int x, int y) {
-        if (!CallbackBridge.isGrabbing()) return -1;
-
-        int barHeight = mcscale(20);
-        int barWidth = mcscale(180);
-        int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
-        int barY = CallbackBridge.physicalHeight - barHeight;
-        if (x < barX || x >= barX + barWidth || y < barY || y >= barY + barHeight) {
-            return -1;
-        }
-        return hotbarKeys[((x - barX) / mcscale(180 / 9)) % 9];
-    }
     int tmpMouseSpeed;
-
     public void adjustMouseSpeedLive() {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setTitle(R.string.mcl_setting_title_mousespeed);
