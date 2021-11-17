@@ -20,8 +20,8 @@ public class CallbackBridge {
     
     // volatile private static boolean isGrabbing = false;
     public static class PusherRunnable implements Runnable {
-        int button; int x; int y;
-        public PusherRunnable(int button, int x, int y) {
+        int button; float x; float y;
+        public PusherRunnable(int button, float x, float y) {
            this.button = button;
            this.x = x;
            this.y = y;
@@ -33,7 +33,7 @@ public class CallbackBridge {
             putMouseEventWithCoords(button, false, x, y);
         }
     }
-    public static void putMouseEventWithCoords(int button, int x, int y /* , int dz, long nanos */) {
+    public static void putMouseEventWithCoords(int button, float x, float y /* , int dz, long nanos */) {
         new Thread(new PusherRunnable(button,x,y)).run();
     }
     
