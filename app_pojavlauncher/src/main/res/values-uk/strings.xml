@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">Візуалізатор</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): експортує OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): експортує OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): експортує OpenGL 2.1 + частково  3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): експортує OpenGL 4.5</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): експортує OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): експортує OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
