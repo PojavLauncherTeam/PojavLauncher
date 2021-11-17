@@ -32,6 +32,7 @@ import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTI
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_SOUTH_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.isJoystickEvent;
+import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 
 public class Gamepad {
 
@@ -100,7 +101,7 @@ public class Gamepad {
         this.gameActivity = gameActivity;
         pointerView = this.gameActivity.findViewById(R.id.console_pointer);
         pointerView.getDrawable().setFilterBitmap(false);
-        notifyGUISizeChange(gameActivity.getMcScale());
+        notifyGUISizeChange(getMcScale());
 
 
     }

@@ -15,6 +15,7 @@ import java.io.*;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
+import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 
 public class MainActivity extends BaseMainActivity {
     public static ControlLayout mControlLayout;
