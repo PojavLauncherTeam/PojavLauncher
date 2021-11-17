@@ -543,13 +543,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 break;
 
             case ControlData.SPECIALBTN_MOUSESEC:
-                if (CallbackBridge.isGrabbing()) {
-                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
-                } else {
-                    CallbackBridge.putMouseEventWithCoords(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown , CallbackBridge.mouseX, CallbackBridge.mouseY);
-
-                    BaseMainActivity.setRightOverride(isDown);
-                }
+                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                 break;
 
             case ControlData.SPECIALBTN_SCROLLDOWN:
