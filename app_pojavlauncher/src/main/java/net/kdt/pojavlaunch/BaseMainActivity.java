@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
+import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
@@ -37,21 +38,14 @@ public class BaseMainActivity extends LoggableActivity {
 
     private Gamepad gamepad;
 
-    private DisplayMetrics displayMetrics;
     public float scaleFactor = 1;
     public double sensitivityFactor;
 
     private boolean mIsResuming = false;
 
-
-
     private MinecraftGLView minecraftGLView;
-    private int guiScale;
 
-    
-    private static boolean isVirtualMouseEnabled;
     private static Touchpad touchpad;
-    private ImageView mousePointer;
     private MinecraftAccount mProfile;
     
     private DrawerLayout drawerLayout;
@@ -72,7 +66,6 @@ public class BaseMainActivity extends LoggableActivity {
     private PrintStream logStream;
     private PerVersionConfig.VersionConfig config;
     private final boolean lastEnabled = false;
-    private boolean lastGrab = false;
     private final boolean isExited = false;
     private boolean isLogAllow = false;
 
@@ -118,10 +111,10 @@ public class BaseMainActivity extends LoggableActivity {
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;
             
-            displayMetrics = Tools.getDisplayMetrics(this);
-            sensitivityFactor = 1.4 * (1080f/ displayMetrics.heightPixels);
-            windowWidth = Tools.getDisplayFriendlyRes(displayMetrics.widthPixels, scaleFactor);
-            windowHeight = Tools.getDisplayFriendlyRes(displayMetrics.heightPixels, scaleFactor);
+            Tools.getDisplayMetrics(this);
+            sensitivityFactor = 1.4 * (1080f/ currentDisplayMetrics.heightPixels);
+            windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, scaleFactor);
+            windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, scaleFactor);
             System.out.println("WidthHeight: " + windowWidth + ":" + windowHeight);
 
 
@@ -520,13 +513,6 @@ public class BaseMainActivity extends LoggableActivity {
     public void toggleMenu(View v) {
         drawerLayout.openDrawer(Gravity.RIGHT);
     }
-
-    public void placeMouseAdd(float x, float y) {
-        this.mousePointer.setX(mousePointer.getX() + x);
-        this.mousePointer.setY(mousePointer.getY() + y);
-    }
-
-
 
     public static void toggleMouse(Context ctx) {
         if (CallbackBridge.isGrabbing()) return;
