@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exporta o OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta o OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta o OpenGL 4.5</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): usa OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta o OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
@@ -240,5 +242,7 @@
     <string name="preference_misc_description">Lista de versões e verificação de libs</string>
     <string name="preference_experimental_title">Opções experimentais</string>
     <string name="preference_experimental_description">Use estas opções com consideração, não daremos suporte.</string>
+    <string name="preference_sustained_performance_title">Gghuu</string>
+    <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_back_title">Voltar para última tela</string>
 </resources>
