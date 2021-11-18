@@ -36,8 +36,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     volatile public static boolean isInputStackCall;
 
-    private Gamepad gamepad;
-
     public float scaleFactor = 1;
     public double sensitivityFactor;
 
@@ -65,8 +63,6 @@ public class BaseMainActivity extends LoggableActivity {
     private File logFile;
     private PrintStream logStream;
     private PerVersionConfig.VersionConfig config;
-    private final boolean lastEnabled = false;
-    private final boolean isExited = false;
     private boolean isLogAllow = false;
 
     public volatile float mouse_x, mouse_y;
@@ -118,7 +114,6 @@ public class BaseMainActivity extends LoggableActivity {
             System.out.println("WidthHeight: " + windowWidth + ":" + windowHeight);
 
 
-
             // Menu
             drawerLayout = findViewById(R.id.main_drawer_options);
 
@@ -163,74 +158,6 @@ public class BaseMainActivity extends LoggableActivity {
             this.minecraftGLView = findViewById(R.id.main_game_render_view);
             this.drawerLayout.closeDrawers();
 
-            
-            if (isAndroid8OrHigher()) {
-                minecraftGLView.setDefaultFocusHighlightEnabled(false);
-                minecraftGLView.setOnCapturedPointerListener(new View.OnCapturedPointerListener() {
-                    //private int x, y;
-                    private boolean debugErrored = false;
-
-                    private String getMoving(float pos, boolean xOrY) {
-                        if (pos == 0) return "STOPPED";
-                        if (pos > 0) return xOrY ? "RIGHT" : "DOWN";
-                        return xOrY ? "LEFT" : "UP";
-                    }
-
-                    @Override
-                    public boolean onCapturedPointer (View view, MotionEvent e) {
-                        mouse_x += (e.getX()*scaleFactor);
-                        mouse_y += (e.getY()*scaleFactor);
-                        CallbackBridge.mouseX = (int) mouse_x;
-                        CallbackBridge.mouseY = (int) mouse_y;
-                        if(!CallbackBridge.isGrabbing()){
-                            view.releasePointerCapture();
-                            view.clearFocus();
-                        }
-
-                        if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
-                            StringBuilder builder = new StringBuilder();
-                            try {
-                                builder.append("PointerCapture debug\n");
-                                builder.append("MotionEvent=").append(e.getActionMasked()).append("\n");
-                                builder.append("PressingBtn=").append(MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState())).append("\n\n");
-
-                                builder.append("PointerX=").append(e.getX()).append("\n");
-                                builder.append("PointerY=").append(e.getY()).append("\n");
-                                builder.append("RawX=").append(e.getRawX()).append("\n");
-                                builder.append("RawY=").append(e.getRawY()).append("\n\n");
-
-                                builder.append("XPos=").append(mouse_x).append("\n");
-                                builder.append("YPos=").append(mouse_y).append("\n\n");
-                                builder.append("MovingX=").append(getMoving(e.getX(), true)).append("\n");
-                                builder.append("MovingY=").append(getMoving(e.getY(), false)).append("\n");
-                            } catch (Throwable th) {
-                                debugErrored = true;
-                                builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
-                            } finally {
-                                debugText.setText(builder.toString());
-                                builder.setLength(0);
-                            }
-                        }
-                        debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                        CallbackBridge.DEBUG_STRING.setLength(0);
-                        switch (e.getActionMasked()) {
-                            case MotionEvent.ACTION_MOVE:
-                                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                                return true;
-                            case MotionEvent.ACTION_BUTTON_PRESS:
-                                return sendMouseButtonUnconverted(e.getActionButton(), true);
-                            case MotionEvent.ACTION_BUTTON_RELEASE:
-                                return sendMouseButtonUnconverted(e.getActionButton(), false);
-                            case MotionEvent.ACTION_SCROLL:
-                                CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-            }
-
             minecraftGLView.setSurfaceReadyListener(() -> {
                 try {
                     runCraft();
@@ -239,121 +166,12 @@ public class BaseMainActivity extends LoggableActivity {
                 }
             });
 
-            minecraftGLView.init();
+            minecraftGLView.start();
 
         } catch (Throwable e) {
             Tools.showError(this, e, true);
         }
     }
-
-
-    @Override
-    public boolean dispatchGenericMotionEvent(MotionEvent ev) {
-        int mouseCursorIndex = -1;
-
-        if(Gamepad.isGamepadEvent(ev)){
-            if(gamepad == null){
-                gamepad = new Gamepad(this, ev.getDevice());
-            }
-
-            gamepad.update(ev);
-            return true;
-        }
-
-        for(int i = 0; i < ev.getPointerCount(); i++) {
-            if(ev.getToolType(i) == MotionEvent.TOOL_TYPE_MOUSE) {
-                mouseCursorIndex = i;
-                break;
-            }
-        }
-        if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
-        if(CallbackBridge.isGrabbing()) {
-            if(BaseMainActivity.isAndroid8OrHigher()){
-                minecraftGLView.requestFocus();
-                minecraftGLView.requestPointerCapture();
-            }
-        }
-        switch(ev.getActionMasked()) {
-            case MotionEvent.ACTION_HOVER_MOVE:
-                mouse_x = (ev.getX(mouseCursorIndex) * scaleFactor);
-                mouse_y = (ev.getY(mouseCursorIndex) * scaleFactor);
-                CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-                debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                CallbackBridge.DEBUG_STRING.setLength(0);
-                return true;
-            case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll((double) ev.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) ev.getAxisValue(MotionEvent.AXIS_HSCROLL));
-                return true;
-            case MotionEvent.ACTION_BUTTON_PRESS:
-                 return sendMouseButtonUnconverted(ev.getActionButton(),true);
-            case MotionEvent.ACTION_BUTTON_RELEASE:
-                return sendMouseButtonUnconverted(ev.getActionButton(),false);
-            default:
-                return false;
-        }
-
-
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        //Toast.makeText(this, event.toString(),Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_SHORT).show();
-
-        //Filtering useless events by order of probability
-        if((event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
-        int eventKeycode = event.getKeyCode();
-        if(eventKeycode == KeyEvent.KEYCODE_UNKNOWN) return true;
-        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
-        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_UP) return false;
-        if(event.getRepeatCount() != 0) return true;
-        if(event.getAction() == KeyEvent.ACTION_MULTIPLE) return true;
-
-        //Toast.makeText(this, "FIRST VERIF PASSED", Toast.LENGTH_SHORT).show();
-
-        //Sometimes, key events comes from SOME keys of the software keyboard
-        //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
-        if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
-            if(eventKeycode == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
-            touchCharInput.dispatchKeyEvent(event);
-            return true;
-        }
-        //Toast.makeText(this, "SECOND VERIF PASSED", Toast.LENGTH_SHORT).show();
-
-
-        //Sometimes, key events may come from the mouse
-        if(event.getDevice() != null
-                && ( (event.getSource() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
-                ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
-            //Toast.makeText(this, "THE EVENT COMES FROM A MOUSE", Toast.LENGTH_SHORT).show();
-
-
-            if(eventKeycode == KeyEvent.KEYCODE_BACK){
-                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, event.getAction() == KeyEvent.ACTION_DOWN);
-                return true;
-            }
-        }
-        System.out.println(event);
-
-        if(Gamepad.isGamepadEvent(event)){
-            if(gamepad == null){
-                gamepad = new Gamepad(this, event.getDevice());
-            }
-
-            gamepad.update(event);
-            return true;
-        }
-
-        int index = EfficientAndroidLWJGLKeycode.getIndexByKey(eventKeycode);
-        if(index >= 0) {
-            //Toast.makeText(this,"THIS IS A KEYBOARD EVENT !", Toast.LENGTH_SHORT).show();
-            EfficientAndroidLWJGLKeycode.execKey(event, index);
-            return true;
-        }
-
-        return false;
-    }
-
 
     @Override
     public void onResume() {
@@ -568,23 +386,7 @@ public class BaseMainActivity extends LoggableActivity {
         CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
     }
     
-    public static boolean sendMouseButtonUnconverted(int button, boolean status) {
-        int glfwButton = -256;
-        switch (button) {
-            case MotionEvent.BUTTON_PRIMARY:
-                glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT;
-                break;
-            case MotionEvent.BUTTON_TERTIARY:
-                glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_MIDDLE;
-                break;
-            case MotionEvent.BUTTON_SECONDARY:
-                glfwButton = LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT;
-                break;
-        }
-        if(glfwButton == -256) return false;
-        sendMouseButton(glfwButton, status);
-        return true;
-    }
+
 
 
     int tmpMouseSpeed;

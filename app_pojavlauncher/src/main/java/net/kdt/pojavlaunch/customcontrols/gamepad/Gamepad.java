@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -9,19 +10,23 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.math.MathUtils;
 
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
 import net.kdt.pojavlaunch.MainActivity;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.CallbackBridge;
 
+import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_EAST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_NONE;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_NORTH;
@@ -36,7 +41,13 @@ import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 
 public class Gamepad {
 
-    private final BaseMainActivity gameActivity;
+    /* Resolution scaler option, allow downsizing a window */
+    private final float scaleFactor = LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
+    /* Mouse positions, scaled by the scaleFactor */
+    private float mouse_x, mouse_y;
+    /* Sensitivity, adjusted according to screen size */
+    private final double sensitivityFactor = (1.4 * (1080f/ currentDisplayMetrics.heightPixels));
+
     private final ImageView pointerView;
 
     private final GamepadDpad gamepadDpad = new GamepadDpad();
@@ -65,7 +76,7 @@ public class Gamepad {
     private final Choreographer screenChoreographer;
     private long lastFrameTime;
 
-    public Gamepad(BaseMainActivity gameActivity, InputDevice inputDevice){
+    public Gamepad(View contextView, InputDevice inputDevice){
         screenChoreographer = Choreographer.getInstance();
         Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() {
             @Override
@@ -78,7 +89,7 @@ public class Gamepad {
         screenChoreographer.postFrameCallback(frameCallback);
         lastFrameTime = System.nanoTime();
 
-        //Toast.makeText(gameActivity.getApplicationContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
+        Toast.makeText(contextView.getContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
         for(InputDevice.MotionRange range : inputDevice.getMotionRanges()){
             if(range.getAxis() == MotionEvent.AXIS_RTRIGGER
                     || range.getAxis() == MotionEvent.AXIS_LTRIGGER
@@ -87,7 +98,6 @@ public class Gamepad {
                 mModifierSwappedAxis = false;
                 break;
             }
-
         }
 
         leftJoystick = new GamepadJoystick(MotionEvent.AXIS_X, MotionEvent.AXIS_Y, inputDevice);
@@ -98,12 +108,20 @@ public class Gamepad {
 
         mModifierDigitalTriggers = inputDevice.hasKeys(KeyEvent.KEYCODE_BUTTON_R2)[0];
 
-        this.gameActivity = gameActivity;
-        pointerView = this.gameActivity.findViewById(R.id.console_pointer);
+        Context ctx = contextView.getContext();
+        pointerView = new ImageView(contextView.getContext());
+        pointerView.setImageDrawable(ResourcesCompat.getDrawable(ctx.getResources(), R.drawable.pointer, ctx.getTheme()));
         pointerView.getDrawable().setFilterBitmap(false);
-        notifyGUISizeChange(getMcScale());
 
+        int size = (int) ((22 * getMcScale()) / scaleFactor);
+        pointerView.setLayoutParams(new FrameLayout.LayoutParams(size, size));
 
+        mouse_x = CallbackBridge.windowWidth/2;
+        mouse_y = CallbackBridge.windowHeight/2;
+        CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+
+        ((ViewGroup)contextView.getParent()).addView(pointerView);
     }
 
 
@@ -129,11 +147,11 @@ public class Gamepad {
             if(!lastGrabbingState){
                 CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
                 CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
-                placePointerView((int) (CallbackBridge.mouseX /gameActivity.scaleFactor), (int) (CallbackBridge.mouseY/gameActivity.scaleFactor));
+                placePointerView((int) (CallbackBridge.mouseX / scaleFactor), (int) (CallbackBridge.mouseY/ scaleFactor));
             }
 
-            gameActivity.mouse_x = CallbackBridge.mouseX;
-            gameActivity.mouse_y = CallbackBridge.mouseY;
+            mouse_x = CallbackBridge.mouseX;
+            mouse_y = CallbackBridge.mouseY;
 
             //Send the mouse to the game
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
@@ -161,13 +179,13 @@ public class Gamepad {
         currentMap = menuMap;
         sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
 
-        gameActivity.mouse_x = CallbackBridge.windowWidth/2;
-        gameActivity.mouse_y = CallbackBridge.windowHeight/2;
-        CallbackBridge.sendCursorPos(gameActivity.mouse_x, gameActivity.mouse_y);
+        mouse_x = CallbackBridge.windowWidth/2;
+        mouse_y = CallbackBridge.windowHeight/2;
+        CallbackBridge.sendCursorPos(mouse_x, mouse_y);
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
         pointerView.setVisibility(View.VISIBLE);
         // Sensitivity in menu is MC and HARDWARE resolution dependent
-        mouseSensitivity = 19 * gameActivity.scaleFactor / gameActivity.sensitivityFactor;
+        mouseSensitivity = 19 * scaleFactor / sensitivityFactor;
 
     }
 
@@ -218,8 +236,9 @@ public class Gamepad {
 
     public void notifyGUISizeChange(int newSize){
         //Change the pointer size to match UI
-        int size = (int) ((22 * newSize) / gameActivity.scaleFactor);
-        gameActivity.runOnUiThread(() -> pointerView.setLayoutParams(new FrameLayout.LayoutParams(size, size)));
+        int size = (int) ((22 * newSize) / scaleFactor);
+        pointerView.post(() -> pointerView.setLayoutParams(new FrameLayout.LayoutParams(size, size)));
+
     }
 
     private GamepadMap getCurrentMap(){
