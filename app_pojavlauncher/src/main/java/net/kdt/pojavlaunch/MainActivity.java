@@ -20,7 +20,7 @@ import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 public class MainActivity extends BaseMainActivity {
     public static ControlLayout mControlLayout;
 
-    private FileObserver fileObserver;
+    private MCOptionUtils.MCOptionListener optionListener;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,26 +53,9 @@ public class MainActivity extends BaseMainActivity {
             return true;
         };
 
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
-                @Override
-                public void onEvent(int i, @Nullable String s) {
-                    MCOptionUtils.load();
-                    getMcScale();
-                }
-            };
-        }else{
-            fileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
-                @Override
-                public void onEvent(int i, @Nullable String s) {
-                    MCOptionUtils.load();
-                    getMcScale();
-                }
-            };
-        }
-
-        fileObserver.startWatching();
+        // Recompute the gui scale when options are changed
+        optionListener = MCOptionUtils::getMcScale;
+        MCOptionUtils.addMCOptionListener(optionListener);
         
         mControlLayout = findViewById(R.id.main_control_layout);
         mControlLayout.setModifiable(false);
