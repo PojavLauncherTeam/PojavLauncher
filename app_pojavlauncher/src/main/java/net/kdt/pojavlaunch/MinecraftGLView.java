@@ -80,8 +80,7 @@ public class MinecraftGLView extends TextureView {
                 float x = CallbackBridge.mouseX;
                 float y = CallbackBridge.mouseY;
                 if (CallbackBridge.isGrabbing() &&
-                        Math.abs(initialX - x) < FINGER_STILL_THRESHOLD &&
-                        Math.abs(initialY - y) < FINGER_STILL_THRESHOLD) {
+                        MathUtils.dist(x, y, mouse_x, mouse_y) < FINGER_STILL_THRESHOLD) {
                     triggeredLeftMouseButton = true;
                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
                 }
