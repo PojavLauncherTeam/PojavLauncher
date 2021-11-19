@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+
 import android.view.KeyEvent;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -197,7 +199,7 @@ public class EfficientAndroidLWJGLKeycode {
         try {
             System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
             char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
-            BaseMainActivity.sendKeyPress(
+            sendKeyPress(
                     getValueByIndex(valueIndex),
                     key,
                     0,
@@ -211,7 +213,7 @@ public class EfficientAndroidLWJGLKeycode {
 
     public static void execKeyIndex(int index){
         //Send a quick key press.
-        BaseMainActivity.sendKeyPress(getValueByIndex(index));
+        sendKeyPress(getValueByIndex(index));
     }
     
     public static int getValueByIndex(int index) {

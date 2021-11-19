@@ -1,10 +1,10 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.BaseMainActivity.sendKeyPress;
-import static net.kdt.pojavlaunch.BaseMainActivity.sendMouseButton;
 import static net.kdt.pojavlaunch.BaseMainActivity.touchCharInput;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
@@ -17,6 +17,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.*;
 import android.view.*;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -37,6 +38,8 @@ import org.lwjgl.glfw.CallbackBridge;
 public class MinecraftGLView extends TextureView {
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad gamepad = null;
+    /* Pointer Debug textview, used to show info about the pointer state */
+    private TextView pointerDebugText;
 
     /* Resolution scaler option, allow downsizing a window */
     private final float scaleFactor = LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
@@ -88,7 +91,7 @@ public class MinecraftGLView extends TextureView {
                 float x = CallbackBridge.mouseX;
                 float y = CallbackBridge.mouseY;
                 if (CallbackBridge.isGrabbing() &&
-                        MathUtils.dist(x, y, mouse_x, mouse_y) < FINGER_STILL_THRESHOLD) {
+                        MathUtils.dist(x, y, initialX, initialY) < FINGER_STILL_THRESHOLD) {
                     triggeredLeftMouseButton = true;
                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
                 }
@@ -122,6 +125,13 @@ public class MinecraftGLView extends TextureView {
 
     /** Initialize the view and all its settings */
     public void start(){
+        // Add the pointer debug textview
+        pointerDebugText = new TextView(getContext());
+        pointerDebugText.setX(0);
+        pointerDebugText.setY(0);
+        pointerDebugText.setVisibility(GONE);
+        ((ViewGroup)getParent()).addView(pointerDebugText);
+
         setSurfaceTextureListener(new SurfaceTextureListener() {
             private boolean isCalled = false;
             @Override
@@ -418,8 +428,8 @@ public class MinecraftGLView extends TextureView {
             releasePointerCapture();
             clearFocus();
         }
-    /*
-        if (debugText.getVisibility() == View.VISIBLE && !debugErrored) {
+
+        if (pointerDebugText.getVisibility() == View.VISIBLE && !debugErrored) {
             StringBuilder builder = new StringBuilder();
             try {
                 builder.append("PointerCapture debug\n");
@@ -439,12 +449,12 @@ public class MinecraftGLView extends TextureView {
                 debugErrored = true;
                 builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
             } finally {
-                debugText.setText(builder.toString());
+                pointerDebugText.setText(builder.toString());
                 builder.setLength(0);
             }
-        }*/
+        }
 
-        //debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+        pointerDebugText.setText(CallbackBridge.DEBUG_STRING.toString());
         CallbackBridge.DEBUG_STRING.setLength(0);
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
@@ -523,6 +533,21 @@ public class MinecraftGLView extends TextureView {
         return false;
     }
 
+    @Override
+    public boolean dispatchKeyEventPreIme(KeyEvent event) {
+        return super.dispatchKeyEventPreIme(event);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean dispatchKeyShortcutEvent(KeyEvent event) {
+        return super.dispatchKeyShortcutEvent(event);
+    }
+
     /** Get the mouse direction as a string */
     private String getMoving(float pos, boolean xOrY) {
         if (pos == 0) return "STOPPED";
@@ -571,11 +596,10 @@ public class MinecraftGLView extends TextureView {
         return (int)((GUIScale * input)/scaleFactor);
     }
 
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        return super.dispatchKeyEvent(event);
+    /** Toggle the pointerDebugText visibility state */
+    public void togglepointerDebugging() {
+        pointerDebugText.setVisibility(pointerDebugText.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
     }
-
 
     /** A small interface called when the listener is ready for the first time */
     public interface SurfaceReadyListener {

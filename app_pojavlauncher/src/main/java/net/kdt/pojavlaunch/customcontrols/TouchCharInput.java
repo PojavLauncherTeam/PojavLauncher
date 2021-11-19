@@ -3,6 +3,8 @@ package net.kdt.pojavlaunch.customcontrols;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -125,7 +127,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * Send the enter key.
      */
     private void sendEnter(){
-        BaseMainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ENTER);
+        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ENTER);
         clear();
     }
 

@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
@@ -54,7 +55,7 @@ public class BaseMainActivity extends LoggableActivity {
     private ScrollView contentScroll;
     private ToggleButton toggleLog;
 
-    private TextView debugText;
+
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
     public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
 
@@ -124,7 +125,7 @@ public class BaseMainActivity extends LoggableActivity {
                         break;
                     case R.id.nav_viewlog: openLogOutput();
                         break;
-                    case R.id.nav_debug: toggleDebug();
+                    case R.id.nav_debug: minecraftGLView.togglepointerDebugging();
                         break;
                     case R.id.nav_customkey: dialogSendCustomKey();
                         break;
@@ -153,7 +154,6 @@ public class BaseMainActivity extends LoggableActivity {
                 appendToLog("");
             });
 
-            this.debugText = findViewById(R.id.content_text_debug);
 
             this.minecraftGLView = findViewById(R.id.main_game_render_view);
             this.drawerLayout.closeDrawers();
@@ -267,10 +267,6 @@ public class BaseMainActivity extends LoggableActivity {
         return s.toString();
     }
 
-    private void toggleDebug() {
-        debugText.setVisibility(debugText.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-    }
-
     private void dialogSendCustomKey() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(R.string.control_customkey);
@@ -280,13 +276,13 @@ public class BaseMainActivity extends LoggableActivity {
 
     boolean isInEditor;
     private void openCustomControls() {
-        if(ingameControlsEditorListener != null) {
-            ((MainActivity)this).mControlLayout.setModifiable(true);
-            navDrawer.getMenu().clear();
-            navDrawer.inflateMenu(R.menu.menu_customctrl);
-            navDrawer.setNavigationItemSelectedListener(ingameControlsEditorListener);
-            isInEditor = true;
-        }
+        if(ingameControlsEditorListener == null) return;
+
+        ((MainActivity)this).mControlLayout.setModifiable(true);
+        navDrawer.getMenu().clear();
+        navDrawer.inflateMenu(R.menu.menu_customctrl);
+        navDrawer.setNavigationItemSelectedListener(ingameControlsEditorListener);
+        isInEditor = true;
     }
 
     public void leaveCustomControls() {
@@ -364,27 +360,6 @@ public class BaseMainActivity extends LoggableActivity {
         if(touchCharInput != null) touchCharInput.switchKeyboardState();
     }
 
-
-    public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
-        sendKeyPress(keyCode, 0, modifiers, status);
-    }
-
-    public static void sendKeyPress(int keyCode, int scancode, int modifiers, boolean status) {
-        sendKeyPress(keyCode, '\u0000', scancode, modifiers, status);
-    }
-
-    public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
-        CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
-    }
-
-    public static void sendKeyPress(int keyCode) {
-        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
-        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
-    }
-    
-    public static void sendMouseButton(int button, boolean status) {
-        CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
-    }
     
 
 

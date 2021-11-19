@@ -38,6 +38,8 @@ import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTI
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.isJoystickEvent;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 
 public class Gamepad {
 
@@ -354,7 +356,7 @@ public class Gamepad {
 
 
             default:
-                MainActivity.sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), event.getAction() == KeyEvent.ACTION_DOWN);
+                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), event.getAction() == KeyEvent.ACTION_DOWN);
                 break;
         }
     }
@@ -370,15 +372,15 @@ public class Gamepad {
                     break;
 
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT:
-                    MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                     break;
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT:
-                    MainActivity.sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
+                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                     break;
 
 
                 default:
-                    MainActivity.sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
+                    sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
                     break;
             }
             CallbackBridge.setModifiers(keycode, isDown);
