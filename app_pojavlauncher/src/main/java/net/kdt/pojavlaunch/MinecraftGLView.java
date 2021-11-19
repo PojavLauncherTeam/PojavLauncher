@@ -325,9 +325,9 @@ public class MinecraftGLView extends TextureView {
                 if(triggeredLeftMouseButton){
                     sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
                     triggeredLeftMouseButton = false;
-                    theHandler.removeMessages(MSG_LEFT_MOUSE_BUTTON_CHECK);
                     break;
                 }
+                theHandler.removeMessages(MSG_LEFT_MOUSE_BUTTON_CHECK);
 
                 // In case of a short click, just send a quick right click
                 if(!LauncherPreferences.PREF_DISABLE_GESTURES &&
@@ -533,21 +533,6 @@ public class MinecraftGLView extends TextureView {
         return false;
     }
 
-    @Override
-    public boolean dispatchKeyEventPreIme(KeyEvent event) {
-        return super.dispatchKeyEventPreIme(event);
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        return super.dispatchKeyEvent(event);
-    }
-
-    @Override
-    public boolean dispatchKeyShortcutEvent(KeyEvent event) {
-        return super.dispatchKeyShortcutEvent(event);
-    }
-
     /** Get the mouse direction as a string */
     private String getMoving(float pos, boolean xOrY) {
         if (pos == 0) return "STOPPED";
@@ -575,6 +560,8 @@ public class MinecraftGLView extends TextureView {
         sendMouseButton(glfwButton, status);
         return true;
     }
+
+
 
     /** @return the hotbar key, given the position. -1 if no key are pressed */
     public int handleGuiBar(int x, int y) {
