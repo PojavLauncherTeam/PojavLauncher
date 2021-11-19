@@ -350,10 +350,12 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        // Prevent back
-        // Catch back as Esc keycode at another place
-        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
+            sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     public static void switchKeyboardState() {
