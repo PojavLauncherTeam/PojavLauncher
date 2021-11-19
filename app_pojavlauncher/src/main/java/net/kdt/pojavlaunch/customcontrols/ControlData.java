@@ -15,6 +15,7 @@ import net.objecthunter.exp4j.function.Function;
 import org.lwjgl.glfw.*;
 
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 public class ControlData {
 
@@ -174,7 +175,7 @@ public class ControlData {
     
     public void execute(boolean isDown) {
         for(int keycode : keycodes){
-            BaseMainActivity.sendKeyPress(keycode, 0, isDown);
+            sendKeyPress(keycode, 0, isDown);
         }
     }
 

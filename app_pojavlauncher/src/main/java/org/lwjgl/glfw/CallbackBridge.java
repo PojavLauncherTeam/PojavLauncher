@@ -84,6 +84,27 @@ public class CallbackBridge {
         nativeSendChar(keychar);
     }
 
+    public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
+        sendKeyPress(keyCode, 0, modifiers, status);
+    }
+
+    public static void sendKeyPress(int keyCode, int scancode, int modifiers, boolean status) {
+        sendKeyPress(keyCode, '\u0000', scancode, modifiers, status);
+    }
+
+    public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
+        CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
+    }
+
+    public static void sendKeyPress(int keyCode) {
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
+    }
+
+    public static void sendMouseButton(int button, boolean status) {
+        CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
+    }
+
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
         DEBUG_STRING.append("MouseKey=").append(button).append(", down=").append(isDown).append("\n");
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
