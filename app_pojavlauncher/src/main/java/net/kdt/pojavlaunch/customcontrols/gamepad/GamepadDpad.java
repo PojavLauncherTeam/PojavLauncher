@@ -4,10 +4,6 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
-
-import java.lang.reflect.Field;
-
 import static android.view.InputDevice.KEYBOARD_TYPE_NON_ALPHABETIC;
 import static android.view.InputDevice.SOURCE_DPAD;
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
@@ -16,31 +12,16 @@ import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
 import static android.view.KeyEvent.KEYCODE_DPAD_RIGHT;
 import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
-/*
-    Reflection is used to avoid memory churning, and only has an negative impact at start
- */
 
 public class GamepadDpad {
-
-
     private int lastKeycode = KEYCODE_DPAD_CENTER;
-    private KeyEvent dummyEvent = new KeyEvent(KeyEvent.ACTION_DOWN, lastKeycode);
-    private Field eventCodeField;
-    private Field eventActionField;
 
-    {
-        try {
-            eventCodeField = dummyEvent.getClass().getDeclaredField("mKeyCode");
-            eventCodeField.setAccessible(true);
-
-            eventActionField = dummyEvent.getClass().getDeclaredField("mAction");
-            eventActionField.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public KeyEvent convertEvent(MotionEvent event){
+    /**
+     * Convert the event to a 2 int array: keycode and keyAction, similar to a keyEvent
+     * @param event The motion to convert
+     * @return int[0] keycode, int[1] keyAction
+     */
+    public int[] convertEvent(MotionEvent event){
         // Use the hat axis value to find the D-pad direction
         float xaxis = event.getAxisValue(MotionEvent.AXIS_HAT_X);
         float yaxis = event.getAxisValue(MotionEvent.AXIS_HAT_Y);
@@ -64,27 +45,8 @@ public class GamepadDpad {
             action = KeyEvent.ACTION_UP;
         }
 
-        setDummyEventKeycode(lastKeycode);
-        setDummyEventAction(action);
-        dummyEvent.setSource(SOURCE_DPAD);
-        return dummyEvent;
+        return new int[]{lastKeycode, action};
 
-    }
-
-    private void setDummyEventKeycode(int fakeKeycode){
-        try {
-            eventCodeField.setInt(dummyEvent, fakeKeycode);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setDummyEventAction(int action){
-        try {
-            eventActionField.setInt(dummyEvent, action);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 
     public static boolean isDpadEvent(MotionEvent event) {

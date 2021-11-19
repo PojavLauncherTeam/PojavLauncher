@@ -199,7 +199,9 @@ public class Gamepad {
         updateDirectionalJoystick(event);
         updateMouseJoystick(event);
         updateAnalogTriggers(event);
-        sendButton(gamepadDpad.convertEvent(event));
+
+        int[] dpadEvent = gamepadDpad.convertEvent(event);
+        sendButton(dpadEvent[0], dpadEvent[1]);
     }
 
     private void updateMouseJoystick(MotionEvent event){
@@ -285,59 +287,62 @@ public class Gamepad {
         pointerView.setY(y - pointerView.getHeight()/2);
     }
 
-
     public void sendButton(KeyEvent event){
-        int keycode = event.getKeyCode();
+        sendButton(event.getKeyCode(), event.getAction());
+    }
+
+    public void sendButton(int keycode, int action){
+        boolean isDown = action == KeyEvent.ACTION_DOWN;
         switch (keycode){
             case KeyEvent.KEYCODE_BUTTON_A:
-                getCurrentMap().BUTTON_A.update(event);
+                getCurrentMap().BUTTON_A.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_B:
-                getCurrentMap().BUTTON_B.update(event);
+                getCurrentMap().BUTTON_B.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_X:
-                getCurrentMap().BUTTON_X.update(event);
+                getCurrentMap().BUTTON_X.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_Y:
-                getCurrentMap().BUTTON_Y.update(event);
+                getCurrentMap().BUTTON_Y.update(isDown);
                 break;
 
                 //Shoulders
             case KeyEvent.KEYCODE_BUTTON_L1:
-                getCurrentMap().SHOULDER_LEFT.update(event);
+                getCurrentMap().SHOULDER_LEFT.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_R1:
-                getCurrentMap().SHOULDER_RIGHT.update(event);
+                getCurrentMap().SHOULDER_RIGHT.update(isDown);
                 break;
 
                 //Triggers
             case KeyEvent.KEYCODE_BUTTON_L2:
-                getCurrentMap().TRIGGER_LEFT.update(event);
+                getCurrentMap().TRIGGER_LEFT.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_R2:
-                getCurrentMap().TRIGGER_RIGHT.update(event);
+                getCurrentMap().TRIGGER_RIGHT.update(isDown);
                 break;
 
                 //L3 || R3
             case KeyEvent.KEYCODE_BUTTON_THUMBL:
-                getCurrentMap().THUMBSTICK_LEFT.update(event);
+                getCurrentMap().THUMBSTICK_LEFT.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_THUMBR:
-                getCurrentMap().THUMBSTICK_RIGHT.update(event);
+                getCurrentMap().THUMBSTICK_RIGHT.update(isDown);
                 break;
 
                 //DPAD
             case KeyEvent.KEYCODE_DPAD_UP:
-                getCurrentMap().DPAD_UP.update(event);
+                getCurrentMap().DPAD_UP.update(isDown);
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                getCurrentMap().DPAD_DOWN.update(event);
+                getCurrentMap().DPAD_DOWN.update(isDown);
                 break;
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                getCurrentMap().DPAD_LEFT.update(event);
+                getCurrentMap().DPAD_LEFT.update(isDown);
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                getCurrentMap().DPAD_RIGHT.update(event);
+                getCurrentMap().DPAD_RIGHT.update(isDown);
                 break;
             case KeyEvent.KEYCODE_DPAD_CENTER:
                 getCurrentMap().DPAD_RIGHT.update(false);
@@ -348,15 +353,15 @@ public class Gamepad {
 
                 //Start/select
             case KeyEvent.KEYCODE_BUTTON_START:
-                getCurrentMap().BUTTON_START.update(event);
+                getCurrentMap().BUTTON_START.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_SELECT:
-                getCurrentMap().BUTTON_SELECT.update(event);
+                getCurrentMap().BUTTON_SELECT.update(isDown);
                 break;
 
 
             default:
-                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), event.getAction() == KeyEvent.ACTION_DOWN);
+                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), isDown);
                 break;
         }
     }
