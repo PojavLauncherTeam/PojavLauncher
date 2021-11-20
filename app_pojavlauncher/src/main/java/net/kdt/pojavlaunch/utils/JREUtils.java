@@ -32,15 +32,15 @@ public class JREUtils {
 
     /**
      * Checks if the java architecture is correct for the device architecture.
-     * @param act An Activity with logging capabilities
+     * @param context Some context to load resources from
      * @param jreArch The java architecture to compare as a String.
      */
-    public static void checkJavaArchitecture(LoggableActivity act, String jreArch) {
-        act.appendlnToLog("Architecture: " + archAsString(Tools.DEVICE_ARCHITECTURE));
+    public static void checkJavaArchitecture(Context context, String jreArch) {
+        Logger.getInstance().appendToLog("Architecture: " + archAsString(Tools.DEVICE_ARCHITECTURE));
         if(Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
 
-        act.appendlnToLog("Architecture " + archAsString(Tools.DEVICE_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
-        throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
+        Logger.getInstance().appendToLog("Architecture " + archAsString(Tools.DEVICE_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
+        throw new RuntimeException(context.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
 
     }
     
@@ -145,7 +145,7 @@ public class JREUtils {
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
                         String currStr = new String(buf, 0, len);
-                        act.appendToLog(currStr);
+                        Logger.getInstance().appendToLog(currStr);
                     }
                     
                     if (p.waitFor() != 0) {
@@ -155,13 +155,13 @@ public class JREUtils {
                         if (failTime <= 10) {
                             run();
                         } else {
-                            act.appendlnToLog("ERROR: Unable to get more log.");
+                            Logger.getInstance().appendToLog("ERROR: Unable to get more log.");
                         }
                         return;
                     }
                 } catch (Throwable e) {
                     Log.e("jrelog-logcat", "Exception on logging thread", e);
-                    act.appendlnToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
+                    Logger.getInstance().appendToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
                 }
             }
         });
@@ -259,7 +259,7 @@ public class JREUtils {
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
-            ctx.appendlnToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
+            Logger.getInstance().appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             Os.setenv(env.getKey(), env.getValue(), true);
         }
 
@@ -309,7 +309,7 @@ public class JREUtils {
         chdir(Tools.DIR_GAME_NEW);
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
-        ctx.appendlnToLog("Java Exit code: " + exitCode);
+        Logger.getInstance().appendToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
             ctx.runOnUiThread(() -> {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
