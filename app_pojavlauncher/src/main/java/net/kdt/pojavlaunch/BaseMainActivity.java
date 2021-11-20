@@ -61,8 +61,6 @@ public class BaseMainActivity extends LoggableActivity {
 
     protected volatile JMinecraftVersionList.Version mVersionInfo;
 
-    private File logFile;
-    private PrintStream logStream;
     private PerVersionConfig.VersionConfig config;
     private boolean isLogAllow = false;
 
@@ -81,11 +79,6 @@ public class BaseMainActivity extends LoggableActivity {
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             touchCharInput = findViewById(R.id.editTextTextPersonName2);
-
-            logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
-            logFile.delete();
-            logFile.createNewFile();
-            logStream = new PrintStream(logFile.getAbsolutePath());
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
             mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
@@ -151,7 +144,7 @@ public class BaseMainActivity extends LoggableActivity {
             this.textLog.setTypeface(Typeface.MONOSPACE);
             this.toggleLog.setOnCheckedChangeListener((button, isChecked) -> {
                 isLogAllow = isChecked;
-                appendToLog("");
+                Logger.getInstance().appendToLog("");
             });
 
 
@@ -200,11 +193,12 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     private void runCraft() throws Throwable {
+        Logger logger = Logger.getInstance();
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
-        appendlnToLog("--------- beggining with launcher debug");
-        appendlnToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        logger.appendToLog("--------- beggining with launcher debug");
+        logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
@@ -215,7 +209,7 @@ public class BaseMainActivity extends LoggableActivity {
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
 
-        appendlnToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
+        logger.appendToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
             ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
             "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
@@ -224,16 +218,16 @@ public class BaseMainActivity extends LoggableActivity {
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
-        appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
+        Logger.getInstance().appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
     }
 
     private void checkLWJGL3Installed() {
         File lwjgl3dir = new File(Tools.DIR_GAME_HOME, "lwjgl3");
         if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {
-            appendlnToLog("Error: LWJGL3 was not installed!");
+            Logger.getInstance().appendToLog("Error: LWJGL3 was not installed!");
             throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
         } else {
-            appendlnToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
+            Logger.getInstance().appendToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
         }
     }
 
@@ -242,7 +236,7 @@ public class BaseMainActivity extends LoggableActivity {
          || Build.VERSION.SDK_INT < 25
          || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
          || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
-            appendlnToLog("Error: Vulkan Zink renderer is not supported!");
+            Logger.getInstance().appendToLog("Error: Vulkan Zink renderer is not supported!");
             throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
         }
     }
@@ -252,7 +246,7 @@ public class BaseMainActivity extends LoggableActivity {
             BufferedReader buffStream = new BufferedReader(new InputStreamReader(stream));
             String line = null;
             while ((line = buffStream.readLine()) != null) {
-                appendlnToLog(line);
+                Logger.getInstance().appendToLog(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -313,9 +307,9 @@ public class BaseMainActivity extends LoggableActivity {
         mIsResuming = true;
     }
      
-    @Override
-    public void appendToLog(final String text, boolean checkAllow) {
-        logStream.print(text);
+
+    public void brokenNameOnPurpose(final String text, boolean checkAllow) {
+
         if (checkAllow && !isLogAllow) return;
         textLog.post(() -> {
             textLog.append(text);
@@ -361,9 +355,6 @@ public class BaseMainActivity extends LoggableActivity {
     public static void switchKeyboardState() {
         if(touchCharInput != null) touchCharInput.switchKeyboardState();
     }
-
-    
-
 
 
     int tmpMouseSpeed;

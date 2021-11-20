@@ -30,9 +30,6 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     private ImageView mousePointer;
     private GestureDetector gestureDetector;
     
-    private File logFile;
-    private PrintStream logStream;
-    
     private final Object mDialogLock = new Object();
 
     private boolean isLogAllow, mSkipDetectMod, isVirtualMouseEnabled;
@@ -148,11 +145,6 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 });
                 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
-                
-            logFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
-            logFile.delete();
-            logFile.createNewFile();
-            logStream = new PrintStream(logFile.getAbsolutePath());
             
             this.contentLog = findViewById(R.id.content_log_layout);
             this.contentScroll = (ScrollView) findViewById(R.id.content_log_scroll);
@@ -166,7 +158,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                     @Override
                     public void onCheckedChanged(CompoundButton button, boolean isChecked) {
                         isLogAllow = isChecked;
-                        appendToLog("");
+                        Logger.getInstance().appendToLog("");
                     }
                 });
             
@@ -212,7 +204,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                         public void run() {
                             try {
                                 final int exit = doCustomInstall(modFile, javaArgs);
-                                appendlnToLog(getString(R.string.toast_optifine_success));
+                                Logger.getInstance().appendToLog(getString(R.string.toast_optifine_success));
                                 if (exit == 0) {
                                     runOnUiThread(new Runnable(){
                                             @Override
@@ -225,8 +217,8 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                                     throw new ErrnoException(getString(R.string.glo, exit);
                                 } */
                             } catch (Throwable e) {
-                                appendlnToLog("Install failed:");
-                                appendlnToLog(Log.getStackTraceString(e));
+                                Logger.getInstance().appendToLog("Install failed:");
+                                Logger.getInstance().appendToLog(Log.getStackTraceString(e));
                                 Tools.showError(JavaGUILauncherActivity.this, e);
                             }
                         }
@@ -334,7 +326,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 javaArgList.add(modFile.getAbsolutePath());
             }
 
-            appendlnToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
+            Logger.getInstance().appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
             
             // Run java on sandbox, non-overrideable.
             Collections.reverse(javaArgList);
@@ -358,9 +350,9 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         decorView.setSystemUiVisibility(uiOptions);
     }
 
-    @Override
-    public void appendToLog(final String text, boolean checkAllow) {
-        logStream.print(text);
+
+    public void purposefullybrokenName(final String text, boolean checkAllow) {
+
         if (checkAllow && !isLogAllow) return;
         textLog.post(() -> {
             textLog.append(text);
