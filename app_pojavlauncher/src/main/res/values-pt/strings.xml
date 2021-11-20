@@ -85,6 +85,8 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exporta o OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta o OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exporta o OpenGL 2.1 + parcialmente o 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta o OpenGL 4.5</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta o OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta o OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">O tipo de versões que estarão na lista de versões</string>
@@ -166,7 +168,9 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
     <string name="customctrl_addbutton_drawer">Adicionar desenhador de botão</string>
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
+    <string name="customctrl_add_subbutton_message">Sub-botão n°%d foi adicionado!</string>
     <string name="customctrl_selectdefault">Selecionar o json de controlo padrão</string>
+    <string name="main_install_jar_file">Instalar .jar</string>
     <string name="main_options">Opções</string>
     <string name="main_play">Jogar</string>
     <string name="main_welcome">Bem-vindo(a), %s</string>
@@ -213,4 +217,13 @@ Infelizmente, o wrapper do GL4ES não suporta totalmente isso no momento, mas ex
     <string name="pvc_title">Definições da versão</string>
     <string name="storage_warning_title">Alterações de armazenamento</string>
     <string name="storage_warning_text"><![CDATA[Devido aos novos reforços ao armazenamento adicionados no Android 10 e superiores, nós fomos obrigados a mover o diretório do jogo para uma pasta privada. <br /> A nova pasta para os ficheiros do Pojav é <b>Android/data/%s/files/</b> (também acessível usando um explorador de ficheiros).<br /> Se tu precisares de copiar os ficheiros do teu jogo, por favor copia tudo da página original em <b>games/PojavLauncher</b> manualmente.]]></string>
+    <string name="preference_video_title">Vídeo e renderizador</string>
+    <string name="preference_video_description">Resolução, tipo de escala, e renderizador</string>
+    <string name="preference_control_title">Customização dos controlos</string>
+    <string name="preference_java_title">Ajustes do Java</string>
+    <string name="preference_java_description">Versões do Java, Argumentos JVM, e quantidade de RAM</string>
+    <string name="preference_misc_title">Definições diversas</string>
+    <string name="preference_misc_description">Lista de versões, e verificações das bibliotecas</string>
+    <string name="preference_experimental_title">Coisas experimentais</string>
+    <string name="preference_experimental_description">Use estas coisas com consideração, sem suporte.</string>
 </resources>
