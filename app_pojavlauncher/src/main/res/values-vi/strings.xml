@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Khởi chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
+    <string name="app_name">PojavLauncher</string>
+    <string name="app_short_name">PojavLauncher </string>
+    <string name="app_motd">Khởi chạy Minecraft: Java Edition trên thiết bị của bạn! </string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email hoặc tên người dùng</string>
-    <string name="login_online_password_hint">Mật khẩu</string>
-    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
+    <string name="login_online_username_hint">Email hoặc tên người dùng </string>
+    <string name="login_online_password_hint">Mật khẩu </string>
+    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập </string>
     <string name="login_online_login_label">Đăng nhập</string>
     <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
     <string name="login_error_invalid_username">Tên người dùng không hợp lệ. Nó phải có từ 3-16 kí tự, và chỉ bao gồm các kí tự A-Z, a-z, 0-9 và dấu gạch dưới.</string>
@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): xuất ra OpenGL 2.1+partial 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): xuất ra OpenGL 4.5</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): xuất ra OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): xuất ra OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
@@ -133,7 +135,7 @@
     <string name="control_mouseon">Chuột: bật </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Đóng chương trình</string>
-    <string name="control_viewout">Nhật ký ra</string>
+    <string name="control_viewout">Nhật ký ra </string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
     <string name="control_scaleup">Phóng to</string>
