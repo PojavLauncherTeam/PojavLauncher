@@ -66,6 +66,10 @@ public class LoggerView extends ConstraintLayout {
         Logger.getInstance().setLogListener(logListener);
     }
 
-
-
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        // Triggers the log view shown state by default when viewing it
+        toggleButton.setChecked(visibility == VISIBLE);
+    }
 }
