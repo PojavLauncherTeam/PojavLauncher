@@ -17,14 +17,13 @@ import org.lwjgl.glfw.*;
 
 import static net.kdt.pojavlaunch.utils.MathUtils.map;
 
+import com.kdt.LoggerView;
+
 public class JavaGUILauncherActivity extends LoggableActivity implements View.OnTouchListener {
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     
     private AWTCanvasView mTextureView;
-    private LinearLayout contentLog;
-    private TextView textLog;
-    private ScrollView contentScroll;
-    private ToggleButton toggleLog; 
+    private LoggerView loggerView;
 
     private LinearLayout touchPad;
     private ImageView mousePointer;
@@ -68,6 +67,7 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         Tools.updateWindowSize(this);
         
         try {
+            loggerView = findViewById(R.id.launcherLoggerView);
             MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
@@ -145,85 +145,58 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
                 });
                 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
-            
-            this.contentLog = findViewById(R.id.content_log_layout);
-            this.contentScroll = (ScrollView) findViewById(R.id.content_log_scroll);
-            this.textLog = (TextView) contentScroll.getChildAt(0);
-            this.toggleLog = (ToggleButton) findViewById(R.id.content_log_toggle_log);
-            this.toggleLog.setChecked(false);
+
             // this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
             // this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
-            this.textLog.setTypeface(Typeface.MONOSPACE);
-            this.toggleLog.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
-                    @Override
-                    public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-                        isLogAllow = isChecked;
-                        Logger.getInstance().appendToLog("");
-                    }
-                });
             
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
 
             mTextureView = findViewById(R.id.installmod_surfaceview);
-            mTextureView.setOnTouchListener(new OnTouchListener(){
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    float x = event.getX();
-                    float y = event.getY();
-                    if (gestureDetector.onTouchEvent(event)) {
-                        sendScaledMousePosition(x, y);
-                        AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
-                    } else {
-                        switch (event.getActionMasked()) {
-                            case MotionEvent.ACTION_UP: // 1
-                            case MotionEvent.ACTION_CANCEL: // 3
-                            case MotionEvent.ACTION_POINTER_UP: // 6
-                                break;
-                            case MotionEvent.ACTION_MOVE: // 2
-                                sendScaledMousePosition(x, y);
-                                break;
-                        }
-                    }
+            mTextureView.setOnTouchListener((v, event) -> {
+                float x = event.getX();
+                float y = event.getY();
+                if (gestureDetector.onTouchEvent(event)) {
+                    sendScaledMousePosition(x, y);
+                    AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
                     return true;
                 }
+
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_UP: // 1
+                    case MotionEvent.ACTION_CANCEL: // 3
+                    case MotionEvent.ACTION_POINTER_UP: // 6
+                        break;
+                    case MotionEvent.ACTION_MOVE: // 2
+                        sendScaledMousePosition(x, y);
+                        break;
+                }
+                return true;
             });
            
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
             if (mSkipDetectMod) {
-                new Thread(new Runnable(){
-                        @Override
-                        public void run() {
-                            launchJavaRuntime(modFile, javaArgs);
-                        }
-                    }, "JREMainThread").start();
-            } else {
-                openLogOutput(null);
-                new Thread(new Runnable(){
-                        @Override
-                        public void run() {
-                            try {
-                                final int exit = doCustomInstall(modFile, javaArgs);
-                                Logger.getInstance().appendToLog(getString(R.string.toast_optifine_success));
-                                if (exit == 0) {
-                                    runOnUiThread(new Runnable(){
-                                            @Override
-                                            public void run() {
-                                                Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
-                                                MainActivity.fullyExit();
-                                            }
-                                        });
-                                } /* else {
-                                    throw new ErrnoException(getString(R.string.glo, exit);
-                                } */
-                            } catch (Throwable e) {
-                                Logger.getInstance().appendToLog("Install failed:");
-                                Logger.getInstance().appendToLog(Log.getStackTraceString(e));
-                                Tools.showError(JavaGUILauncherActivity.this, e);
-                            }
-                        }
-                    }, "Installer").start();
+                new Thread(() -> launchJavaRuntime(modFile, javaArgs), "JREMainThread").start();
+                return;
             }
+            // No skip detection
+            openLogOutput(null);
+            new Thread(() -> {
+                try {
+                    final int exit = doCustomInstall(modFile, javaArgs);
+                    Logger.getInstance().appendToLog(getString(R.string.toast_optifine_success));
+                    if (exit != 0) return;
+                    runOnUiThread(() -> {
+                        Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
+                        MainActivity.fullyExit();
+                    });
+
+                } catch (Throwable e) {
+                    Logger.getInstance().appendToLog("Install failed:");
+                    Logger.getInstance().appendToLog(Log.getStackTraceString(e));
+                    Tools.showError(JavaGUILauncherActivity.this, e);
+                }
+            }, "Installer").start();
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
@@ -278,12 +251,12 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     }
 
     public void openLogOutput(View v) {
-        contentLog.setVisibility(View.VISIBLE);
+        loggerView.setVisibility(View.VISIBLE);
     }
 
     public void closeLogOutput(View view) {
         if (mSkipDetectMod) {
-            contentLog.setVisibility(View.GONE);
+            loggerView.setVisibility(View.GONE);
         } else {
             forceClose(null);
         }
@@ -348,16 +321,6 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
-    }
-
-
-    public void purposefullybrokenName(final String text, boolean checkAllow) {
-
-        if (checkAllow && !isLogAllow) return;
-        textLog.post(() -> {
-            textLog.append(text);
-            contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
-        });
     }
 
     int[] initScaleFactors(){
