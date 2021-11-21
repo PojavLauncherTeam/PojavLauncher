@@ -18,13 +18,13 @@ import android.widget.*;
 
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
+import com.kdt.LoggerView;
+
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
-
-import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -38,23 +38,17 @@ public class BaseMainActivity extends LoggableActivity {
     volatile public static boolean isInputStackCall;
 
     public float scaleFactor = 1;
-    public double sensitivityFactor;
 
     private boolean mIsResuming = false;
 
     private MinecraftGLView minecraftGLView;
-
     private static Touchpad touchpad;
+    private LoggerView loggerView;
+
     private MinecraftAccount mProfile;
     
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
-
-    private LinearLayout contentLog;
-    private TextView textLog;
-    private ScrollView contentScroll;
-    private ToggleButton toggleLog;
-
 
     private NavigationView.OnNavigationItemSelectedListener gameActionListener;
     public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
@@ -62,23 +56,15 @@ public class BaseMainActivity extends LoggableActivity {
     protected volatile JMinecraftVersionList.Version mVersionInfo;
 
     private PerVersionConfig.VersionConfig config;
-    private boolean isLogAllow = false;
-
-    public volatile float mouse_x, mouse_y;
-
-    // @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     protected void initLayout(int resId) {
         setContentView(resId);
 
         try {
-
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            touchCharInput = findViewById(R.id.editTextTextPersonName2);
+            touchCharInput = findViewById(R.id.mainTouchCharInput);
+            loggerView = findViewById(R.id.mainLoggerView);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
             mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
@@ -102,7 +88,6 @@ public class BaseMainActivity extends LoggableActivity {
             isInputStackCall = mVersionInfo.arguments != null;
             
             Tools.getDisplayMetrics(this);
-            sensitivityFactor = 1.4 * (1080f/ currentDisplayMetrics.heightPixels);
             windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, scaleFactor);
             windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, scaleFactor);
             System.out.println("WidthHeight: " + windowWidth + ":" + windowHeight);
@@ -134,18 +119,6 @@ public class BaseMainActivity extends LoggableActivity {
             navDrawer.setNavigationItemSelectedListener(gameActionListener);
 
             touchpad = findViewById(R.id.main_touchpad);
-
-            this.contentLog = findViewById(R.id.content_log_layout);
-            this.contentScroll = findViewById(R.id.content_log_scroll);
-            this.textLog = (TextView) contentScroll.getChildAt(0);
-            this.toggleLog = findViewById(R.id.content_log_toggle_log);
-            this.toggleLog.setChecked(false);
-
-            this.textLog.setTypeface(Typeface.MONOSPACE);
-            this.toggleLog.setOnCheckedChangeListener((button, isChecked) -> {
-                isLogAllow = isChecked;
-                Logger.getInstance().appendToLog("");
-            });
 
 
             this.minecraftGLView = findViewById(R.id.main_game_render_view);
@@ -193,12 +166,11 @@ public class BaseMainActivity extends LoggableActivity {
     }
 
     private void runCraft() throws Throwable {
-        Logger logger = Logger.getInstance();
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
-        logger.appendToLog("--------- beggining with launcher debug");
-        logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        Logger.getInstance().appendToLog("--------- beggining with launcher debug");
+        Logger.getInstance().appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
@@ -209,7 +181,7 @@ public class BaseMainActivity extends LoggableActivity {
         checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
 
-        logger.appendToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
+        Logger.getInstance().appendToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
             ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
             "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
@@ -298,25 +270,14 @@ public class BaseMainActivity extends LoggableActivity {
         isInEditor = false;
     }
     private void openLogOutput() {
-        contentLog.setVisibility(View.VISIBLE);
+        loggerView.setVisibility(View.VISIBLE);
         mIsResuming = false;
     }
 
     public void closeLogOutput(View view) {
-        contentLog.setVisibility(View.GONE);
+        loggerView.setVisibility(View.GONE);
         mIsResuming = true;
     }
-     
-
-    public void brokenNameOnPurpose(final String text, boolean checkAllow) {
-
-        if (checkAllow && !isLogAllow) return;
-        textLog.post(() -> {
-            textLog.append(text);
-            contentScroll.fullScroll(ScrollView.FOCUS_DOWN);
-        });
-    }
-
 
     public void toggleMenu(View v) {
         drawerLayout.openDrawer(Gravity.RIGHT);

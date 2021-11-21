@@ -34,7 +34,7 @@
 
 
 			<net.kdt.pojavlaunch.customcontrols.TouchCharInput
-				android:id="@+id/editTextTextPersonName2"
+				android:id="@+id/mainTouchCharInput"
 				android:layout_width="1dp"
 				android:layout_height="1dp"
 				android:background="@android:color/darker_gray"
@@ -46,6 +46,7 @@
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 
 		<com.kdt.LoggerView
+			android:id="@+id/mainLoggerView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:visibility="gone"
