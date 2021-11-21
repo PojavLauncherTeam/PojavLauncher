@@ -31,7 +31,7 @@ import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import org.lwjgl.glfw.*;
 
-public class BaseMainActivity extends LoggableActivity {
+public class BaseMainActivity extends BaseActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static TouchCharInput touchCharInput;
 
@@ -176,9 +176,9 @@ public class BaseMainActivity extends LoggableActivity {
         }
         checkLWJGL3Installed();
         
-        jreReleaseList = JREUtils.readJREReleaseProperties();
-        JREUtils.checkJavaArchitecture(this, jreReleaseList.get("OS_ARCH"));
-        checkJavaArgsIsLaunchable(jreReleaseList.get("JAVA_VERSION"));
+        JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
+        JREUtils.checkJavaArchitecture(this, JREUtils.jreReleaseList.get("OS_ARCH"));
+        checkJavaArgsIsLaunchable(JREUtils.jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
 
         Logger.getInstance().appendToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
