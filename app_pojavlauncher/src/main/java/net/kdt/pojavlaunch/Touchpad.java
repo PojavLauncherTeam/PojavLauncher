@@ -32,6 +32,8 @@ import org.lwjgl.glfw.CallbackBridge;
  * Class dealing with the virtual mouse
  */
 public class Touchpad extends FrameLayout {
+    /* Whether the Touchpad should be displayed */
+    private boolean displayState;
 
     /* Mouse pointer icon used by the touchpad */
     private final ImageView mousePointer = new ImageView(getContext());
@@ -71,6 +73,19 @@ public class Touchpad extends FrameLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setDefaultFocusHighlightEnabled(false);
         }
+
+        // When the game is grabbing, we should not display the mouse
+        Thread isGrabbingThread = new Thread(() -> {
+            while(true){
+                if(!displayState || CallbackBridge.isGrabbing()){
+                    disable();
+                }else {
+                    if(displayState) enable();
+                }
+            }
+        });
+        isGrabbingThread.setPriority(Thread.MIN_PRIORITY);
+        isGrabbingThread.start();
     }
 
     /** Enable the touchpad */
@@ -84,15 +99,10 @@ public class Touchpad extends FrameLayout {
         setVisibility(GONE);
     }
 
-    /** @return: The new state, enabled or disabled */
+    /** @return The new state, enabled or disabled */
     public boolean switchState(){
-        if(getVisibility() == VISIBLE){
-            disable();
-            return false;
-        } else{
-            enable();
-            return true;
-        }
+        displayState = !displayState;
+        return displayState;
     }
 
     @Override
