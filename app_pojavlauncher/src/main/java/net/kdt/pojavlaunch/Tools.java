@@ -99,14 +99,14 @@ public final class Tools {
     }
 
 
-    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
+    public static void launchMinecraft(final Activity activity, MinecraftAccount profile, String versionName) throws Throwable {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
+        ((ActivityManager)activity.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > (mi.availMem/1048576L)) {
             Object memoryErrorLock = new Object();
-            ctx.runOnUiThread(() -> {
-                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
-                        .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
+            activity.runOnUiThread(() -> {
+                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(activity)
+                        .setMessage(activity.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
                         .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}})
                         .setOnCancelListener((i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
                 b.show();
@@ -134,7 +134,7 @@ public final class Tools {
         List<String> javaArgList = new ArrayList<String>();
 
         // Only Java 8 supports headful AWT for now
-        if (ctx.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
+        if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
             getCacioJavaArgs(javaArgList, false);
         }
 
@@ -157,7 +157,7 @@ public final class Tools {
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
-        JREUtils.launchJavaVM(ctx, javaArgList);
+        JREUtils.launchJavaVM(activity, javaArgList);
     }
     
     public static void getCacioJavaArgs(List<String> javaArgList, boolean isHeadless) {

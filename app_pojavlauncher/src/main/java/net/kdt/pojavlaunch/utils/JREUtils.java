@@ -30,6 +30,7 @@ public class JREUtils {
 
     public static String LD_LIBRARY_PATH;
     private static String nativeLibDir;
+    public static Map<String, String> jreReleaseList;
 
     /**
      * Checks if the java architecture is correct for the device architecture.

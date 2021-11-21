@@ -19,7 +19,7 @@ import static net.kdt.pojavlaunch.utils.MathUtils.map;
 
 import com.kdt.LoggerView;
 
-public class JavaGUILauncherActivity extends LoggableActivity implements View.OnTouchListener {
+public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouchListener {
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     
     private AWTCanvasView mTextureView;
@@ -279,11 +279,11 @@ public class JavaGUILauncherActivity extends LoggableActivity implements View.On
     public int launchJavaRuntime(File modFile, String javaArgs) {
         JREUtils.redirectAndPrintJRELog(this);
         try {
-            jreReleaseList = JREUtils.readJREReleaseProperties();
+            JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
             
             // Fail immediately when Java 8 is not selected
             // TODO: auto override Java 8 if installed
-            if (!jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
+            if (!JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
                 throw new RuntimeException("Cannot use the mod installer. In order to use the mod installer, you need to install Java 8 and specify it in the Preferences menu.");
             }
             
