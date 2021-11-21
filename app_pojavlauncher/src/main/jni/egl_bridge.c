@@ -730,7 +730,7 @@ bool loadSymbols() {
             sprintf(fileName, "libEGL.so");
             char* eglLib = getenv("POJAVEXEC_EGL");
             if (eglLib) {
-                sprintf(fileNameExt, eglLib);
+                sprintf(fileNameExt, "%s", eglLib);
             }
             break;
     }
