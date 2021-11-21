@@ -3,7 +3,9 @@ package com.kdt;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -20,6 +22,8 @@ import net.kdt.pojavlaunch.R;
  */
 public class LoggerView extends ConstraintLayout {
     private Logger.eventLogListener logListener;
+    private ToggleButton toggleButton;
+    private ScrollView scrollView;
     private TextView log;
 
 
@@ -45,7 +49,7 @@ public class LoggerView extends ConstraintLayout {
         log.setVisibility(GONE);
 
         // Toggle log visibility
-        ToggleButton toggleButton = findViewById(R.id.content_log_toggle_log);
+        toggleButton = findViewById(R.id.content_log_toggle_log);
         toggleButton.setOnCheckedChangeListener(
                 (compoundButton, isChecked) -> {
                     log.setVisibility(isChecked ? VISIBLE : GONE);
@@ -57,10 +61,16 @@ public class LoggerView extends ConstraintLayout {
         ImageButton cancelButton = findViewById(R.id.log_view_cancel);
         cancelButton.setOnClickListener(view -> LoggerView.this.setVisibility(GONE));
 
+        // Set the scroll view
+        scrollView = findViewById(R.id.content_log_scroll);
+
         // Listen to logs
         logListener = text -> {
             if(log.getVisibility() != VISIBLE) return;
-            post(() -> log.append(text));
+            post(() -> {
+                log.append(text);
+                scrollView.fullScroll(View.FOCUS_DOWN);
+            });
 
         };
         Logger.getInstance().setLogListener(logListener);
