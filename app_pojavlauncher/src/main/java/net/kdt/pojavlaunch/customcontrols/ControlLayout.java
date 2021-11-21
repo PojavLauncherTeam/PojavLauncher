@@ -146,7 +146,10 @@ public class ControlLayout extends FrameLayout
 			view.setAlpha(view.getProperties().opacity);
 			view.setFocusable(false);
 			view.setFocusableInTouchMode(false);
+		}else{
+			view.setVisible(drawer.areButtonsVisible);
 		}
+
 		drawer.addButton(view);
 		addView(view);
 

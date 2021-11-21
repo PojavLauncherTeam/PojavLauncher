@@ -71,7 +71,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
              */
             Msa msa = new Msa(this, Boolean.parseBoolean(args[0]), args[1]);
 
-            MinecraftAccount acc = new MinecraftAccount();
+            MinecraftAccount acc = MinecraftAccount.load(msa.mcName);
             if (msa.doesOwnGame) {
                 acc.clientToken = "0"; /* FIXME */
                 acc.accessToken = msa.mcToken;

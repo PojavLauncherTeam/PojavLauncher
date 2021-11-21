@@ -2,6 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_height="match_parent"
 	android:layout_width="match_parent"
 	android:layout_alignParentRight="true"
@@ -47,13 +48,14 @@
 				app:srcCompat="@drawable/pointer" />
 
 			<net.kdt.pojavlaunch.customcontrols.TouchCharInput
-				android:imeOptions="flagNoFullscreen|flagNoPersonalizedLearning|actionSend"
-				android:inputType="textFilter|textNoSuggestions|textImeMultiLine"
-				android:background="@android:color/darker_gray"
 				android:id="@+id/editTextTextPersonName2"
 				android:layout_width="1dp"
 				android:layout_height="1dp"
-				android:ems="10" />
+				android:background="@android:color/darker_gray"
+				android:ems="10"
+				android:imeOptions="flagNoFullscreen|flagNoExtractUi|flagNoPersonalizedLearning|actionDone"
+				android:inputType="textFilter|textImeMultiLine|textAutoComplete|textAutoCorrect"
+				tools:ignore="TouchTargetSizeCheck" />
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 

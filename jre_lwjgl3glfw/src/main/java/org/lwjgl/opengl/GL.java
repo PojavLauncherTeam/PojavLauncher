@@ -356,15 +356,15 @@ public final class GL {
         GLCapabilities caps = null;
 
         try {
-            if (System.getenv("POJAV_RENDERER").startsWith("opengles")) {
-                // This fixed framebuffer issue on 1.13+ 64-bit by another making current
-                GLFW.nativeEglMakeCurrent(GLFW.mainContext);
-                if (isUsingRegal /* && Long.parseLong(System.getProperty("glfwstub.internal.glthreadid", "-1")) != Thread.currentThread().getId() */) {
-                    nativeRegalMakeCurrent();
-                }
-            } else if (System.getenv("POJAV_RENDERER").equals("vulkan_zink")) {
+            if (System.getenv("POJAV_RENDERER").equals("opengles3_virgl") || System.getenv("POJAV_RENDERER").equals("vulkan_zink")) {
                 int[] dims = getNativeWidthHeight();
                 callJPI(GLFW.glfwGetCurrentContext(),getGraphicsBufferAddr(),GL_UNSIGNED_BYTE,dims[0],dims[1],functionProvider.getFunctionAddress("OSMesaMakeCurrent"));
+            } else if (System.getenv("POJAV_RENDERER").startsWith("opengles")) {
+                // This fixed framebuffer issue on 1.13+ 64-bit by another making current
+                GLFW.glfwMakeContextCurrent(GLFW.mainContext);
+                if (isUsingRegal) {
+                    nativeRegalMakeCurrent();
+                }
             }
 
             // We don't have a current ContextCapabilities when this method is called

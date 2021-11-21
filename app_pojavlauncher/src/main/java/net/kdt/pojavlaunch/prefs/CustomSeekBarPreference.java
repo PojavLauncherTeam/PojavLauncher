@@ -15,9 +15,13 @@ import net.kdt.pojavlaunch.R;
 
 public class CustomSeekBarPreference extends SeekBarPreference {
 
+    /** The suffix displayed */
     private String suffix = "";
+    /** Custom minimum value to provide the same behavior as the usual setMin */
     private int mMin;
+    /** The textview associated by default to the preference */
     private TextView textView;
+
 
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -59,28 +63,36 @@ public class CustomSeekBarPreference extends SeekBarPreference {
         SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekbar);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progress += mMin;
+                progress = progress / getSeekBarIncrement();
+                progress = progress * getSeekBarIncrement();
+                progress -= mMin;
+
                 textView.setText(String.valueOf(progress + mMin));
                 updateTextViewWithSuffix();
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                setValue(seekBar.getProgress() + mMin);
-                updateTextViewWithSuffix();
 
+                int progress = seekBar.getProgress() + mMin;
+                progress /= getSeekBarIncrement();
+                progress *= getSeekBarIncrement();
+                progress -= mMin;
+
+                setValue(progress + mMin);
+                updateTextViewWithSuffix();
             }
         });
 
         updateTextViewWithSuffix();
     }
-
 
 
     private void updateTextViewWithSuffix(){

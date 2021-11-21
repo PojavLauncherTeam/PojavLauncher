@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto">
+
+    <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
+
+    <PreferenceCategory
+        android:title="Gestures ">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_disable_gestures"
+            android:key="disableGestures"
+            android:summary="@string/mcl_disable_gestures_subtitle"
+            android:title="@string/mcl_disable_gestures" />
+
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="timeLongPressTrigger"
+            android:summary="@string/mcl_setting_subtitle_longpresstrigger"
+            android:title="@string/mcl_setting_title_longpresstrigger"
+            app2:showSeekBarValue="true"
+            app2:selectable="false"
+            app2:seekBarIncrement="10"
+            app2:icon="@drawable/tap_len" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Buttons">
+
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="buttonscale"
+            android:title="@string/mcl_setting_title_buttonscale"
+            android:summary="@string/mcl_setting_subtitle_buttonscale"
+            app2:showSeekBarValue="true"
+            app2:selectable="false"
+            app2:seekBarIncrement="5"
+            app2:icon="@drawable/btn_scale"/>
+
+        <net.kdt.pojavlaunch.prefs.ControlOffsetPreference/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Virtual mouse">
+
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="mousescale"
+            android:summary="@string/mcl_setting_subtitle_mousescale"
+            android:title="@string/mcl_setting_title_mousescale"
+            app2:icon="@drawable/mouse_pointer_1"
+            app2:selectable="false"
+            app2:seekBarIncrement="5"
+            app2:showSeekBarValue="true" />
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="mousespeed"
+            android:summary="@string/mcl_setting_subtitle_mousespeed"
+            android:title="@string/mcl_setting_title_mousespeed"
+            app2:icon="@drawable/mouse_pointer_spd"
+            app2:selectable="false"
+            app2:seekBarIncrement="5"
+            app2:showSeekBarValue="true" />
+    </PreferenceCategory>
+
+
+
+
+</PreferenceScreen>

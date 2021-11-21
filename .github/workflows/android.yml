@@ -26,7 +26,7 @@ jobs:
 
     - name: Get gl4es latest commit hash
       id: gl4es-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*' && git ls-remote https://github.com/ptitSeb/gl4es refs/heads/master | grep -io '^\S*'))"
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es
@@ -145,7 +145,8 @@ jobs:
           name: app-debug
           path: out/app-debug.apk
     - name: Upload onto the Google Play testing track
-      uses: r0adkll/upload-google-play@v1
+      if: github.ref == 'refs/heads/v3_openjdk'
+      uses: r0adkll/upload-google-play@v1.0.15
       with:
         serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
         packageName: net.kdt.pojavlaunch

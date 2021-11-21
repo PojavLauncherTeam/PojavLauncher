@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto">
+
+    <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
+
+    <PreferenceCategory android:title="Java Tweaks">
+        <net.kdt.pojavlaunch.prefs.RuntimeManagerPreference
+            android:summary="@string/multirt_subtitle"
+            android:title="@string/multirt_title"/>
+
+        <androidx.preference.EditTextPreference
+            android:dialogTitle="@string/mcl_setting_title_javaargs"
+            android:icon="@drawable/jre_args"
+            android:key="javaArgs"
+            android:singleLine="true"
+            android:summary="@string/mcl_setting_subtitle_javaargs"
+            android:title="@string/mcl_setting_title_javaargs" />
+
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="allocation"
+            android:icon="@drawable/ic_auto_ram"
+            android:summary="@string/mcl_memory_allocation_subtitle"
+            android:title="@string/mcl_memory_allocation"
+            app2:showSeekBarValue="true"
+            app2:seekBarIncrement="10"
+            app2:selectable="false"/>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

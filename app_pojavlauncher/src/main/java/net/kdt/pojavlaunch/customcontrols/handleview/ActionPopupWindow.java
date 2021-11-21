@@ -43,7 +43,7 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	private TextView mDeleteTextView;
 	private TextView mCloneTextView;
 
-	private ControlButton editedButton;
+	private final ControlButton editedButton;
 
 	public ActionPopupWindow(HandleView handleView, ControlButton button){
 		super(handleView);
@@ -145,6 +145,11 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 				cloneData.properties.dynamicX = "0.5 * ${screen_width}";
 				cloneData.properties.dynamicY = "0.5 * ${screen_height}";
 				((ControlLayout) mHandleView.mView.getParent()).addDrawer(cloneData);
+			}else if(editedButton instanceof ControlSubButton){
+				ControlData cloneData = new ControlData(editedButton.getProperties());
+				cloneData.dynamicX = "0.5 * ${screen_width}";
+				cloneData.dynamicY = "0.5 * ${screen_height}";
+				((ControlLayout) mHandleView.mView.getParent()).addSubButton(((ControlSubButton) editedButton).parentDrawer, cloneData);
 			}else{
 				ControlData cloneData = new ControlData(editedButton.getProperties());
 				cloneData.dynamicX = "0.5 * ${screen_width}";

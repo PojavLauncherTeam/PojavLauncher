@@ -61,10 +61,10 @@ public class CallbackBridge {
         */
         if (PENDING_EVENT_READY) {
             if (type == EVENT_TYPE_CURSOR_POS) {
-                GLFW.mGLFWCursorX = i1;
-                GLFW.mGLFWCursorY = i2;
+                GLFW.mGLFWCursorX = (double) i1;
+                GLFW.mGLFWCursorY = (double) i2;
             } else {
-                PENDING_EVENT_LIST.add(new Integer[]{type, i1, i2, i3, i4});
+                PENDING_EVENT_LIST.add(new Integer[]{type, (int) i1, (int)i2, i3, i4});
             }
         } // else System.out.println("Event input is not ready yet!");
 	}
