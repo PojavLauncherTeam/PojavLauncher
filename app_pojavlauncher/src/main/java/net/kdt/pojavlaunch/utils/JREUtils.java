@@ -12,6 +12,7 @@ import android.system.*;
 import android.util.*;
 import android.widget.Toast;
 
+import com.kdt.LoggerView;
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
@@ -113,9 +114,9 @@ public class JREUtils {
         return jreReleaseMap;
     }
     public static String jvmLibraryPath;
-    public static void redirectAndPrintJRELog(final LoggableActivity act) {
+    public static void redirectAndPrintJRELog(final Context ctx) {
         Log.v("jrelog","Log starts here");
-        JREUtils.logToActivity(act);
+        JREUtils.logToLogger(Logger.getInstance());
         Thread t = new Thread(new Runnable(){
             int failTime = 0;
             ProcessBuilder logcatPb;
@@ -199,18 +200,18 @@ public class JREUtils {
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
-    public static void setJavaEnvironment(LoggableActivity ctx) throws Throwable {
+    public static void setJavaEnvironment(Activity activity) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("POJAV_NATIVEDIR", ctx.getApplicationInfo().nativeLibraryDir);
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
-        envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
    
-        envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("MESA_GLSL_CACHE_DIR", activity.getCacheDir().getAbsolutePath());
         if (LOCAL_RENDERER != null) {
             envMap.put("MESA_GL_VERSION_OVERRIDE", LOCAL_RENDERER.equals("opengles3_virgl")?"4.5":"4.6");
             envMap.put("MESA_GLSL_VERSION_OVERRIDE", LOCAL_RENDERER.equals("opengles3_virgl")?"450":"460");
@@ -219,7 +220,7 @@ public class JREUtils {
         envMap.put("allow_higher_compat_version", "true");
         envMap.put("allow_glsl_extension_directive_midshader", "true");
         envMap.put("MESA_LOADER_DRIVER_OVERRIDE", "zink");
-        envMap.put("VTEST_SOCKET_NAME", ctx.getCacheDir().getAbsolutePath() + "/.virgl_test");
+        envMap.put("VTEST_SOCKET_NAME", activity.getCacheDir().getAbsolutePath() + "/.virgl_test");
 
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
@@ -273,8 +274,8 @@ public class JREUtils {
         // return ldLibraryPath;
     }
     
-    public static int launchJavaVM(final LoggableActivity ctx,final List<String> JVMArgs) throws Throwable {
-        JREUtils.relocateLibPath(ctx);
+    public static int launchJavaVM(final Activity activity,final List<String> JVMArgs) throws Throwable {
+        JREUtils.relocateLibPath(activity);
         // For debugging only!
 /*
         StringBuilder sbJavaArgs = new StringBuilder();
@@ -284,10 +285,10 @@ public class JREUtils {
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 */
 
-        setJavaEnvironment(ctx);
+        setJavaEnvironment(activity);
         
         final String graphicsLib = loadGraphicsLibrary();
-         List<String> userArgs = getJavaArgs(ctx);
+         List<String> userArgs = getJavaArgs(activity);
 
         //Remove arguments that can interfere with the good working of the launcher
         purgeArg(userArgs,"-Xms");
@@ -302,19 +303,19 @@ public class JREUtils {
         if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
 
         userArgs.addAll(JVMArgs);
-        ctx.runOnUiThread(() -> Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
+        activity.runOnUiThread(() -> Toast.makeText(activity, activity.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
         System.out.println(JVMArgs);
         
         initJavaRuntime();
-        setupExitTrap(ctx.getApplication());
+        setupExitTrap(activity.getApplication());
         chdir(Tools.DIR_GAME_NEW);
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         Logger.getInstance().appendToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
-            ctx.runOnUiThread(() -> {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-                dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
+            activity.runOnUiThread(() -> {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+                dialog.setMessage(activity.getString(R.string.mcn_exit_title, exitCode));
 
                 dialog.setPositiveButton(android.R.string.ok, (p1, p2) -> BaseMainActivity.fullyExit());
                 dialog.show();
@@ -522,7 +523,7 @@ public class JREUtils {
         }
     }
     public static native int chdir(String path);
-    public static native void logToActivity(final LoggableActivity a);
+    public static native void logToLogger(final Logger logger);
     public static native boolean dlopen(String libPath);
     public static native void setLdLibraryPath(String ldLibraryPath);
     public static native void setupBridgeWindow(Object surface);
