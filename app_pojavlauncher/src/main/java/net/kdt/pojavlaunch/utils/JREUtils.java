@@ -201,6 +201,7 @@ public class JREUtils {
     
     public static void setJavaEnvironment(LoggableActivity ctx) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
+        envMap.put("POJAV_NATIVEDIR", ctx.getApplicationInfo().nativeLibraryDir);
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());

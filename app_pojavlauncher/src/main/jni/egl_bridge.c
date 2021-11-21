@@ -719,17 +719,19 @@ void dlsym_OSMesa(void* dl_handle) {
 }
 
 bool loadSymbols() {
-    char* fileName;
-    char* fileNameExt;
+    char* fileName = calloc(1, 1024);
+    char* fileNameExt = calloc(1, 1024);
     switch (config_renderer) {
         case RENDERER_VK_ZINK:
-            fileName = "libOSMesa_8.so";
-            fileNameExt = "libOSMesa.so.8";
+            sprintf(fileName, "%s/libOSMesa_8.so", getenv("POJAV_NATIVEDIR"));
+            sprintf(fileNameExt, "%s/libOSMesa.so.8", getenv("POJAV_NATIVEDIR"));
             break;
         case RENDERER_GL4ES:
-            fileName = "libEGL.so";
+            sprintf(fileName, "libEGL.so");
             char* eglLib = getenv("POJAVEXEC_EGL");
-            fileNameExt = eglLib == NULL?"":eglLib;
+            if (eglLib) {
+                sprintf(fileNameExt, eglLib);
+            }
             break;
     }
     void* dl_handle = dlopen(fileNameExt,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
@@ -758,6 +760,9 @@ bool loadSymbols() {
             dlsym_EGL(dl_handle);
             break;
     }
+
+    free(fileName);
+    free(fileNameExt);
 }
 
 bool loadSymbolsVirGL() {
@@ -766,13 +771,19 @@ bool loadSymbolsVirGL() {
     config_renderer = RENDERER_VK_ZINK;
     loadSymbols();
     config_renderer = RENDERER_VIRGL;
-    void *handle = dlopen("libvirgl_test_server.so", RTLD_LAZY);
+
+    char* fileName = calloc(1, 1024);
+
+    sprintf(fileName, "%s/libvirgl_test_server.so", getenv("POJAV_NATIVEDIR"));
+    void *handle = dlopen(fileName, RTLD_LAZY);
     printf("VirGL: libvirgl_test_server = %p\n", handle);
     if (!handle) {
         printf("VirGL: %s\n", dlerror());
     }
     vtest_main_p = dlsym(handle, "vtest_main");
     vtest_swap_buffers_p = dlsym(handle, "vtest_swap_buffers");
+
+    free(fileName);
 }
 
 int pojavInit() {
