@@ -65,6 +65,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         setContentView(R.layout.install_mod);
 
         Tools.updateWindowSize(this);
+        Logger.getInstance().reset();
         
         try {
             loggerView = findViewById(R.id.launcherLoggerView);
