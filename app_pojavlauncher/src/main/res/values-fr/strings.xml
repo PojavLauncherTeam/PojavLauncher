@@ -12,7 +12,9 @@
     <string name="login_online_check_keeplogin">Rester connecté</string>
     <string name="login_online_login_label">Se connecter</string>
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
+    <string name="login_error_invalid_username">Nom d\'utilisateur invalide. Le nom d\'utilisateur doit être compris entre 3 et 16 caractères, ne doit contenir que A-Z, a-z, 0-9 et underscore.</string>
     <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
+    <string name="login_error_offline_password">Le compte hors ligne ne peut pas inclure de mot de passe !</string>
     <string name="login_microsoft">Connexion Microsoft</string>
     <string name="login_select_account">Choisir un compte</string>
     <string name="login_title_no_saved_account">Aucun compte trouvé !</string>
@@ -79,6 +81,12 @@
     <string name="mcl_setting_category_general">Paramètres généraux</string>
     <string name="mcl_setting_category_scaling">Paramètres de mise à l\'échelle</string>
     <string name="mcl_setting_category_renderer">Moteur de rendu</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.5</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Type de versions visible dans la liste des versions</string>
     <string name="mcl_setting_veroption_release">Version officielle</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -104,6 +112,7 @@
     <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 n\'a pas été installé !</string>
     <string name="mcn_check_fail_incompatiblearch">L\'architecture %1$s est incompatible avec l\'environnement d\'exécution Java %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Le moteur de rendu Vulkan Zink n\'est pas pris en charge sur cet appareil!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Clavier</string>
@@ -128,6 +137,8 @@
     <string name="control_viewout">Sortie du journal</string>
     <string name="control_adebug">Entrée de débogage</string>
     <string name="control_customkey">Envoyer une touche personnalisée</string>
+    <string name="control_scaleup">Agrandir</string>
+    <string name="control_scaledown">Réduire</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
@@ -174,4 +185,7 @@
     <string name="memory_warning_msg">La quantité actuelle de RAM libre (%d) est inférieure à la RAM allouée (%d), ce qui peut entraîner des plantages. Changez l\'allocation si le jeu plante.</string>
     <string name="mcl_memory_allocation">Allocation de mémoire</string>
     <string name="mcl_memory_allocation_subtitle">Contrôle la quantité de mémoire donnée à Minecraft</string>
+    <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
+    <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
+    <string name="preference_back_title">Retour au dernier écran</string>
 </resources>
