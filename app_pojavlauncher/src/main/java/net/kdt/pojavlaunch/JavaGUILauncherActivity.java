@@ -31,9 +31,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     
     private final Object mDialogLock = new Object();
 
-    private boolean isLogAllow, mSkipDetectMod, isVirtualMouseEnabled;
+    private boolean mSkipDetectMod, isVirtualMouseEnabled;
 
-    private boolean rightOverride = false;
     private int scaleFactor;
     private int[] scaleFactors = initScaleFactors();
 
@@ -113,7 +112,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
                             sendScaledMousePosition(mouseX,mouseY);
 
-                            AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
+                            AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
 
 
                         } else {
@@ -159,7 +158,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 float y = event.getY();
                 if (gestureDetector.onTouchEvent(event)) {
                     sendScaledMousePosition(x, y);
-                    AWTInputBridge.sendMousePress(rightOverride ? AWTInputEvent.BUTTON3_DOWN_MASK : AWTInputEvent.BUTTON1_DOWN_MASK);
+                    AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
                     return true;
                 }
 
@@ -272,7 +271,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
     
     private int doCustomInstall(File modFile, String javaArgs) throws IOException {
-        isLogAllow = true;
         mSkipDetectMod = true;
         return launchJavaRuntime(modFile, javaArgs);
     }
