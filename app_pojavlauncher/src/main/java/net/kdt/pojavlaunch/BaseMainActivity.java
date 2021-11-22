@@ -308,6 +308,7 @@ public class BaseMainActivity extends BaseActivity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
+            if(event.getAction() != KeyEvent.ACTION_UP) return true; // We eat it anyway
             sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
             return true;
         }
