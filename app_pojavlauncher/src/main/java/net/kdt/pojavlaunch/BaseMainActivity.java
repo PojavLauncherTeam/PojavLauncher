@@ -61,6 +61,7 @@ public class BaseMainActivity extends BaseActivity {
         setContentView(resId);
 
         try {
+            Logger.getInstance().reset();
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             touchCharInput = findViewById(R.id.mainTouchCharInput);
