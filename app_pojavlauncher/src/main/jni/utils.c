@@ -82,7 +82,9 @@ JNIEXPORT jint JNICALL Java_android_os_OpenJDKNativeRegister_nativeRegisterNativ
 	return (jint) result;
 }
 
-void setLdLibraryPath(const char* ldLibPathUtf) {
+JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setLdLibraryPath(JNIEnv *env, jclass clazz, jstring ldLibraryPath) {
+	// jclass exception_cls = (*env)->FindClass(env, "java/lang/UnsatisfiedLinkError");
+	
 	android_update_LD_LIBRARY_PATH_t android_update_LD_LIBRARY_PATH;
 	
 	void *libdl_handle = dlopen("libdl.so", RTLD_LAZY);
@@ -97,14 +99,8 @@ void setLdLibraryPath(const char* ldLibPathUtf) {
 	}
 	
 	android_update_LD_LIBRARY_PATH = (android_update_LD_LIBRARY_PATH_t) updateLdLibPath;
-	android_update_LD_LIBRARY_PATH(ldLibPathUtf);
-}
-
-JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setLdLibraryPath(JNIEnv *env, jclass clazz, jstring ldLibraryPath) {
-	// jclass exception_cls = (*env)->FindClass(env, "java/lang/UnsatisfiedLinkError");
-
 	const char* ldLibPathUtf = (*env)->GetStringUTFChars(env, ldLibraryPath, 0);
-	setLdLibraryPath(ldLibPathUtf);
+	android_update_LD_LIBRARY_PATH(ldLibPathUtf);
 	(*env)->ReleaseStringUTFChars(env, ldLibraryPath, ldLibPathUtf);
 }
 

@@ -772,10 +772,10 @@ bool loadSymbolsVirGL() {
     loadSymbols();
     config_renderer = RENDERER_VIRGL;
 
-    // hack: set LD_LIBRARY_PATH back to workaround a dlopen bug(?) in Android 7.0
-    setLdLibraryPath(getenv("POJAV_NATIVEDIR"));
+    char* fileName = calloc(1, 1024);
 
-    void *handle = dlopen("libvirgl_test_server.so", RTLD_LAZY);
+    sprintf(fileName, "%s/libvirgl_test_server.so", getenv("POJAV_NATIVEDIR"));
+    void *handle = dlopen(fileName, RTLD_LAZY);
     printf("VirGL: libvirgl_test_server = %p\n", handle);
     if (!handle) {
         printf("VirGL: %s\n", dlerror());
@@ -783,7 +783,7 @@ bool loadSymbolsVirGL() {
     vtest_main_p = dlsym(handle, "vtest_main");
     vtest_swap_buffers_p = dlsym(handle, "vtest_swap_buffers");
 
-    setLdLibraryPath(getenv("LD_LIBRARY_PATH"));
+    free(fileName);
 }
 
 int pojavInit() {
