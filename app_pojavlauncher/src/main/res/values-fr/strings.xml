@@ -188,6 +188,8 @@
     <string name="mcl_disable_gestures_subtitle">Désactive les gestes tels que maintenir enfoncé pour casser le bloc, et appuyer pour placer un bloc.</string>
     <string name="mcl_setting_title_mousespeed">Vitesse du curseur</string>
     <string name="mcl_setting_subtitle_mousespeed">Change la vitesse de la souris logicielle</string>
+    <string name="customctrl_passthru">Souris pass-thru</string>
+    <string name="customctrl_rounded">Arrondi</string>
     <string name="memory_warning_msg">La quantité actuelle de RAM libre (%d) est inférieure à la RAM allouée (%d), ce qui peut entraîner des plantages. Changez l\'allocation si le jeu plante.</string>
     <string name="mcl_memory_allocation">Allocation de mémoire</string>
     <string name="mcl_memory_allocation_subtitle">Contrôle la quantité de mémoire donnée à Minecraft</string>
