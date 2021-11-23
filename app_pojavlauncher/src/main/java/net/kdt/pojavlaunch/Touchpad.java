@@ -78,9 +78,13 @@ public class Touchpad extends FrameLayout {
         Thread isGrabbingThread = new Thread(() -> {
             while(true){
                 if(!displayState || CallbackBridge.isGrabbing()){
-                    disable();
+                    post(() -> disable());
+
                 }else {
-                    if(displayState) enable();
+                    post(() -> {
+                        if(displayState) enable();
+                    });
+
                 }
             }
         });
