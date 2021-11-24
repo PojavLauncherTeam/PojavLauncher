@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.BaseMainActivity.isAndroid8OrHigher;
 import static net.kdt.pojavlaunch.MinecraftGLView.FINGER_SCROLL_THRESHOLD;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
@@ -19,11 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
-import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
-import net.kdt.pojavlaunch.MinecraftGLView;
-import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.SingleTapConfirm;
-import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.CallbackBridge;
@@ -34,8 +28,6 @@ import org.lwjgl.glfw.CallbackBridge;
 public class Touchpad extends FrameLayout {
     /* Whether the Touchpad should be displayed */
     private boolean displayState;
-    /* The last grabbed state from the CallbackBridge */
-    boolean lastGrab = false;
 
     /* Mouse pointer icon used by the touchpad */
     private final ImageView mousePointer = new ImageView(getContext());
@@ -81,17 +73,14 @@ public class Touchpad extends FrameLayout {
         displayState = false;
         Thread virtualMouseGrabThread = new Thread(() -> {
             while (true) {
-                if (lastGrab != CallbackBridge.isGrabbing())
-                    post(() -> {
-                        if (!CallbackBridge.isGrabbing() && displayState) {
-                            enable();
-                        }else{
-                            if (CallbackBridge.isGrabbing() && getVisibility() != View.GONE) {
-                                disable();
-                            }
-                        }
-                        lastGrab = CallbackBridge.isGrabbing();
-                    });
+                if (!CallbackBridge.isGrabbing() && displayState && getVisibility() != VISIBLE) {
+                    post(this::enable);
+                }else{
+                    if ((CallbackBridge.isGrabbing() && getVisibility() != View.GONE) || !displayState && getVisibility() == VISIBLE) {
+                        post(this::disable);
+                    }
+                }
+
             }
         }, "VirtualMouseGrabThread");
         virtualMouseGrabThread.setPriority(Thread.MIN_PRIORITY);
