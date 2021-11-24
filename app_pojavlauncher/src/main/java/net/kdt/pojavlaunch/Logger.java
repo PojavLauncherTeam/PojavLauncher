@@ -22,7 +22,7 @@ public class Logger {
     }
 
     private Logger(String fileName){
-        logFile = new File(Tools.ASSETS_PATH, fileName);
+        logFile = new File(Tools.DIR_GAME_HOME, fileName);
         // Make a new instance of the log file
         logFile.delete();
         try {
@@ -61,6 +61,7 @@ public class Logger {
         try{
             logFile.delete();
             logFile.createNewFile();
+            logStream = new PrintStream(logFile.getAbsolutePath());
         }catch (IOException e){ e.printStackTrace();}
     }
 
