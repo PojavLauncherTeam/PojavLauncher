@@ -3,6 +3,9 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.*;
+
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.*;
 import net.kdt.pojavlaunch.*;
 import android.content.*;
@@ -17,25 +20,12 @@ public class CallbackBridge {
     public static volatile int physicalWidth, physicalHeight;
     public static float mouseX, mouseY;
     public static StringBuilder DEBUG_STRING = new StringBuilder();
-    
-    // volatile private static boolean isGrabbing = false;
-    public static class PusherRunnable implements Runnable {
-        int button; float x; float y;
-        public PusherRunnable(int button, float x, float y) {
-           this.button = button;
-           this.x = x;
-           this.y = y;
-        }
-        @Override
-        public void run() {
-            putMouseEventWithCoords(button, true, x, y);
-            //try { Thread.sleep(1); } catch (InterruptedException e) {}
-            putMouseEventWithCoords(button, false, x, y);
-        }
-    }
-    public static void putMouseEventWithCoords(int button, float x, float y /* , int dz, long nanos */) {
-        new Thread(new PusherRunnable(button,x,y)).run();
-    }
+
+
+    public static void putMouseEventWithCoords(int button, float x, float y) {
+        putMouseEventWithCoords(button, true, x, y);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> putMouseEventWithCoords(button, false, x, y), 18);
     
     public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
