@@ -206,11 +206,24 @@ public class Gamepad {
 
     private void updateMouseJoystick(MotionEvent event){
         GamepadJoystick currentJoystick = lastGrabbingState ? rightJoystick : leftJoystick;
-        lastHorizontalValue = currentJoystick.getHorizontalAxis(event);
-        lastVerticalValue = currentJoystick.getVerticalAxis(event);
+        float horizontalValue = currentJoystick.getHorizontalAxis(event);
+        float verticalValue = currentJoystick.getVerticalAxis(event);
+        if(horizontalValue != lastHorizontalValue || verticalValue != lastVerticalValue){
+            lastHorizontalValue = horizontalValue;
+            lastVerticalValue = verticalValue;
+
+            mouseMagnitude = currentJoystick.getMagnitude(event);
+            mouseAngle = currentJoystick.getAngleRadian(event);
+
+            tick(System.nanoTime());
+            return;
+        }
+        lastHorizontalValue = horizontalValue;
+        lastVerticalValue = verticalValue;
 
         mouseMagnitude = currentJoystick.getMagnitude(event);
         mouseAngle = currentJoystick.getAngleRadian(event);
+
     }
 
     private void updateDirectionalJoystick(MotionEvent event){
