@@ -176,6 +176,7 @@
     <string name="customctrl_addbutton">Додати кнопку</string>
     <string name="customctrl_addbutton_drawer">Додати розгортаєму кнопку</string>
     <string name="customctrl_addsubbutton">Додати під-кнопку</string>
+    <string name="customctrl_add_subbutton_message">Підлегла кнопка n°%d була додана!</string>
     <string name="customctrl_selectdefault">Вибрати керування за замовчуванням</string>
     <string name="main_install_jar_file">Встановити .jar</string>
     <string name="main_options">Опції</string>
@@ -223,5 +224,10 @@
     <string name="pvc_title">Налаштування окремої версії</string>
     <string name="storage_warning_title">Зміни сховища</string>
     <string name="storage_warning_text"><![CDATA[Через нові обсяги зберігання Google, які діють в Android 10 і вище, нам необхідно перемістити гру із теки гри у приватну папку.<br /> Нова папка для файлів PojavLauncher:<b>Android/data/%s/files/</b> (також можна використовувати сховище у провіднику ваших файлів).<br /> Якщо вам потрібно скопіювати свої ігрові файли, будь ласка, скопіюйте усе з вихідної папки з <b>games/PojavLauncher</b> вручну.]]></string>
+    <string name="control_offset_title">Зміщення керування</string>
+    <string name="control_top_offset">Зверху: </string>
+    <string name="control_right_offset">праворуч: </string>
+    <string name="control_bottom_offset">знизу: </string>
+    <string name="control_left_offset">зліва: </string>
     <string name="preference_back_title">Повернутися назад</string>
 </resources>
