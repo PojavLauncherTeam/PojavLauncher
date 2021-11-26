@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
     <string name="mcl_setting_renderer_gles2_4">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ߈˙⥝˙⥝ sǝ߈ꞁᵷ</string>
     <string name="mcl_setting_renderer_gles2_5">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
+    <string name="mcl_setting_renderer_gles3_5">ᘔ˙Ɛ ꞁɐᴉʇɹɐd + ⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
+    <string name="mcl_setting_renderer_virgl">ϛ˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ɹǝɹǝpuǝɹꞁᵷɹᴉʌ</string>
     <string name="mcl_setting_renderer_vgpu">0˙Ɛ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ndᵷʌ</string>
     <string name="mcl_setting_renderer_vulkan_zink">9˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(uɐʞꞁnɅ) ʞuᴉz</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
@@ -165,7 +167,9 @@
     <string name="customctrl_addbutton">uoʇʇnq ppⱯ</string>
     <string name="customctrl_addbutton_drawer">ɹǝʍɐɹp uoʇʇnq pp∀</string>
     <string name="customctrl_addsubbutton">uoʇʇnq-qns pp∀</string>
+    <string name="customctrl_add_subbutton_message">¡ pǝppɐ uǝǝq sɐɥ %d°u uoʇʇnq-qnS</string>
     <string name="customctrl_selectdefault">uosɾ ꞁoɹʇuoƆ ʇꞁnɐɟǝp ʇɔǝꞁǝS</string>
+    <string name="main_install_jar_file">ɹɐɾ˙ ꞁꞁɐʇsuI</string>
     <string name="main_options">suoᴉʇdO</string>
     <string name="main_play">ʎɐꞁԀ</string>
     <string name="main_welcome">%s \'ǝɯoɔꞁǝM</string>
@@ -211,4 +215,24 @@
     <string name="pvc_title">sᵷuᴉʇʇǝs uoᴉsɹǝʌ-ɹǝԀ</string>
     <string name="storage_warning_title">sǝᵷuɐɥɔ ǝᵷɐɹoʇS</string>
     <string name="storage_warning_text"><![CDATA[˙ʎllɐnuɐɯ </b>ɹǝɥɔunɐ˥ʌɐɾoԀ/sǝɯɐƃ<b> ʇɐ ɹǝploɟ lɐuᴉƃᴉɹo ǝɥʇ ɯoɹɟ ƃuᴉɥʇʎɹǝʌǝ ʎdoɔ ǝsɐǝld \'sǝlᴉɟ ǝɯɐƃ ɹnoʎ ʎdoɔ oʇ pǝǝu noʎ ɟI <br />˙(ɹǝɹoldxǝ ǝlᴉɟ ɹnoʎ uᴉ ɹǝpᴉʌoɹd ǝƃɐɹoʇs ɐ ƃuᴉsn ǝlqᴉssǝɔɔɐ oslɐ) </b>/sǝlᴉɟ/%s/ɐʇɐp/pᴉoɹpu∀<b> sᴉ sǝlᴉɟ ʌɐɾoԀ ɹoɟ ɹǝploɟ ʍǝu ǝɥ┴ <br />˙ɹǝploɟ ǝʇɐʌᴉɹd-ddɐ uɐ oʇuᴉ ʎɹoʇɔǝɹᴉp ǝɯɐƃ ǝɥʇ ǝʌoɯ oʇ pǝɹᴉnbǝɹ ǝɹɐ ǝʍ \'ɹǝɥƃᴉɥ puɐ 0Ɩ pᴉoɹpu∀ uᴉ pǝppɐ sʇuǝɯǝɔɹoɟuǝ ǝƃɐɹoʇs pǝdoɔs ʍǝu s,\ǝlƃooפ oʇ ǝnp]]></string>
+    <string name="control_offset_title">ʇǝsɟɟo ꞁoɹʇuoƆ</string>
+    <string name="control_top_offset"> :ʇǝsɟɟo do⟘</string>
+    <string name="control_right_offset"> :ʇǝsɟɟo ʇɥᵷᴉɹ</string>
+    <string name="control_bottom_offset"> :ʇǝsɟɟo ɯoʇʇoq</string>
+    <string name="control_left_offset"> :ʇǝsɟɟo ʇɟǝꞁ</string>
+    <string name="preference_control_offset_title">sʇǝsɟɟo ǝpᴉs ꞁoɹʇuoƆ</string>
+    <string name="preference_control_offset_description">uǝǝɹɔs ǝɥʇ ɟo ǝpᴉs ɥɔɐǝ oʇ ʇǝsɟɟo ɯoʇsnɔ ɐ ʇǝS</string>
+    <string name="preference_video_title">ɹǝɹǝpuǝɹ puɐ oǝpᴉɅ</string>
+    <string name="preference_video_description">ɹǝɹǝpuǝɹ puɐ \'ǝdʎʇ ᵷuᴉꞁɐɔs \'uoᴉʇnꞁosǝᴚ</string>
+    <string name="preference_control_title">uoᴉʇɐzᴉɯoʇsnɔ ꞁoɹʇuoƆ</string>
+    <string name="preference_control_description">ᵷuᴉꞁɐɔs puɐ \'sɹǝᵷᵷᴉɹʇ \'sǝdʎʇ sǝɹnʇsǝ⅁</string>
+    <string name="preference_java_title">sʞɐǝʍ⟘ ɐʌɐՐ</string>
+    <string name="preference_java_description">ʇunoɯɐ WⱯᴚ puɐ \'sʇuǝɯnᵷɹⱯ WɅՐ \'suoᴉsɹǝʌ ɐʌɐՐ</string>
+    <string name="preference_misc_title">sᵷuᴉʇʇǝs snoǝuɐꞁꞁǝɔsᴉW</string>
+    <string name="preference_misc_description">sʞɔǝɥɔ sqᴉꞁ puɐ \'ʇsᴉꞁ uoᴉsɹǝɅ</string>
+    <string name="preference_experimental_title">ɟɟnʇS ꞁɐʇuǝɯᴉɹǝdxƎ</string>
+    <string name="preference_experimental_description">˙ʇɹoddns ou \'uoᴉʇɐɹǝpᴉsuoɔ ɥʇᴉʍ ǝɹǝɥʇ sᵷuᴉɥʇ ǝs∩</string>
+    <string name="preference_sustained_performance_title">ǝpoɯ ǝɔuɐɯɹoɟɹǝd pǝuᴉɐʇsns ǝꞁqɐuƎ</string>
+    <string name="preference_sustained_performance_description">ǝɔuɐɯɹoɟɹǝd ʞɐǝd ᵷuᴉʇᴉɯᴉꞁ ʎq ᵷuᴉꞁʇʇoɹɥʇ ꞁɐɯɹǝɥʇ ʇᴉɯᴉꞀ</string>
+    <string name="preference_back_title">uǝǝɹɔs ʇsɐꞁ ǝɥʇ oʇ ʞɔɐᗺ</string>
 </resources>
