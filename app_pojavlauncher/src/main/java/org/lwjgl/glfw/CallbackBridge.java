@@ -25,7 +25,8 @@ public class CallbackBridge {
     public static void putMouseEventWithCoords(int button, float x, float y) {
         putMouseEventWithCoords(button, true, x, y);
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> putMouseEventWithCoords(button, false, x, y), 18);
+        handler.postDelayed(() -> putMouseEventWithCoords(button, false, x, y), 22);
+
     }
     
     public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
