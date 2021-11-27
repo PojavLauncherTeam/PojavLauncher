@@ -34,16 +34,15 @@ public class JREUtils {
 
     /**
      * Checks if the java architecture is correct for the device architecture.
-     * @param context Some context to load resources from
+     * @param activity Some context to load resources from
      * @param jreArch The java architecture to compare as a String.
      */
-    public static void checkJavaArchitecture(Context context, String jreArch) {
+    public static void checkJavaArchitecture(Activity activity, String jreArch) {
         Logger.getInstance().appendToLog("Architecture: " + archAsString(Tools.DEVICE_ARCHITECTURE));
         if(Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
 
         Logger.getInstance().appendToLog("Architecture " + archAsString(Tools.DEVICE_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
-        throw new RuntimeException(context.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
-
+        Tools.dialogOnUiThread(activity, "", activity.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
     }
     
     public static String findInLdLibPath(String libName) {
@@ -203,7 +202,7 @@ public class JREUtils {
     
     public static void setJavaEnvironment(Activity activity) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
-        envMap.put("POJAV_NATIVEDIR", ctx.getApplicationInfo().nativeLibraryDir);
+        envMap.put("POJAV_NATIVEDIR", activity.getApplicationInfo().nativeLibraryDir);
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
