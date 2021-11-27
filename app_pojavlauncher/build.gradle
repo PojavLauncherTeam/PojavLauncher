@@ -74,9 +74,15 @@ android {
         debug {
             applicationIdSuffix '.debug'
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
             resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder.debug'
+        }
+        proguard {
+            initWith debug
+            minifyEnabled true
+            shrinkResources true
         }
 		
         release {
