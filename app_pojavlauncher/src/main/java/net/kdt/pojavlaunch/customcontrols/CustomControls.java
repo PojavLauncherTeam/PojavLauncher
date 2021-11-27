@@ -1,5 +1,8 @@
 package net.kdt.pojavlaunch.customcontrols;
 import android.content.*;
+
+import androidx.annotation.Keep;
+
 import com.google.gson.*;
 
 import java.io.IOException;
@@ -7,6 +10,7 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import org.lwjgl.glfw.*;
 
+@Keep
 public class CustomControls {
 	public int version = -1;
     public float scaledAt;

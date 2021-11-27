@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+@Keep
 public class ExitActivity extends AppCompatActivity {
     public static void showExitMessage(Context ctx, int code) {
         Intent i = new Intent(ctx,ExitActivity.class);

@@ -47,10 +47,10 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                 mActivity.mVersionList.versions = versions.toArray(new JMinecraftVersionList.Version[versions.size()]);
                 Log.i("ExtVL","Final list size: " + mActivity.mVersionList.versions.length);
             }
-            ArrayList<String> versionStringList = filter(mActivity.mVersionList.versions, new File(Tools.DIR_HOME_VERSION).listFiles());
 
-            return versionStringList;
+            return filter(mActivity.mVersionList.versions, new File(Tools.DIR_HOME_VERSION).listFiles());
         } catch (Exception e){
+            System.out.println("Refreshing version list failed !");
             e.printStackTrace();
         }
         return null;

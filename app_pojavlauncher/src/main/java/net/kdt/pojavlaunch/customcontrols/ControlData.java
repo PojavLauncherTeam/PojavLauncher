@@ -17,6 +17,11 @@ import org.lwjgl.glfw.*;
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
+import androidx.annotation.Keep;
+
+import com.google.gson.annotations.SerializedName;
+
+@Keep
 public class ControlData {
 
     public static final int SPECIALBTN_KEYBOARD = -1;
@@ -250,7 +255,9 @@ public class ControlData {
             expression = new WeakReference<>(builder.get().getClass().getDeclaredField("expression"));
             expression.get().setAccessible(true);
             expression.get().set(expression.get(), expression.get().getModifiers() & ~Modifier.FINAL);
-        }catch (Exception ignored){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

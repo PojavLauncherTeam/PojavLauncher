@@ -10,14 +10,16 @@ import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.R
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.UP;
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.FREE;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Keep;
 
+@Keep
 public class ControlDrawerData {
 
     public ArrayList<ControlData> buttonProperties;
     public ControlData properties;
     public Orientation orientation;
 
+    @Keep
     public enum Orientation {
         DOWN,
         LEFT,

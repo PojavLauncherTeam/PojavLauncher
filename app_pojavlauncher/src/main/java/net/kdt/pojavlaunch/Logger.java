@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import androidx.annotation.Keep;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -8,6 +10,7 @@ import java.lang.ref.WeakReference;
 /** Singleton class made to log on one file
  * The singleton part can be removed but will require more implementation from the end-dev
  */
+@Keep
 public class Logger {
     private static Logger loggerSingleton = null;
 
