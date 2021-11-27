@@ -279,5 +279,8 @@
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
 
     <string name="preference_back_title">Back to the last screen</string>
+    <string name="gles_hack_none">Don\'t shrink textures</string>
+    <string name="gles_hack_always">Divides all textures by 2</string>
+    <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>
 
 </resources>

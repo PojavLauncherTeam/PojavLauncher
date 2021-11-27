@@ -4,6 +4,7 @@ import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GLES_SHRINK_HACK;
 
 import android.app.*;
 import android.content.*;
@@ -207,6 +208,9 @@ public class JREUtils {
         envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
+
+        // The shrink hack can be enabled from the experimental settings
+        envMap.put("LIBGL_SHRINK", PREF_GLES_SHRINK_HACK);
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
