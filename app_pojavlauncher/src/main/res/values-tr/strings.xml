@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">İşleyici</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 ve kısmı 3.2 dışa aktarır</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): OpenGL 4.5 dışa aktarır</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 dışa aktarır</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 dışa aktarır</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
@@ -223,6 +225,13 @@
     <string name="pvc_title">Sürüm-başına ayarlar</string>
     <string name="storage_warning_title">Depolama değişiklikleri</string>
     <string name="storage_warning_text"><![CDATA[Google\'ın Android 10 ve sonraki sürümlerde eklenen yeni scoped storage yaptırımları nedeniyle, oyun dizinini app-private klasörüne taşımamız gerekiyor.<br /> Pojav dosyalari için yeni dizin <b>Android/data/%s/files/</b> (Ayrıca dosya yöneticisindeki dosya sağlayıcısından da erişmek mümkün).<br /> Eğer oyun dosyalarınızı kopyalamanız gerekirse, lütfen <b>games/PojavLauncher</b>\'daki orijinal klasördeki her şeyi manuel olarak kopyalayın.]]></string>
+    <string name="control_offset_title">Kontrol uzaklığı</string>
+    <string name="control_top_offset">Üst uzaklık: </string>
+    <string name="control_right_offset">Sağ uzaklık: </string>
+    <string name="control_bottom_offset">Alt uzaklık: </string>
+    <string name="control_left_offset">Sol uzaklık: </string>
+    <string name="preference_control_offset_title">Kontrol köşe uzaklıkları</string>
+    <string name="preference_control_offset_description">Ekranın her köşesine özel uzaklık ayarla</string>
     <string name="preference_video_title">Video ve işleyici</string>
     <string name="preference_video_description">Çözünürlük, ölçekleme türü, ve işleyici</string>
     <string name="preference_control_title">Kontrol özelleştirmesi</string>
