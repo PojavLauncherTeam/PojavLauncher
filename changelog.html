@@ -8,8 +8,8 @@ body {font-family: Arial;}
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #1EF37A;
+  border: 1px solid #fffff;
+  background-color: #aaaaaa;
 }
 
 /* Style the buttons inside the tab */
@@ -26,26 +26,26 @@ body {font-family: Arial;}
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #ffffff;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: #333;
 }
 
 /* Style the tab content */
 .tabcontent {
   display: none;
   padding: 6px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   border-top: none;
 }
 </style>
 </head>
 <body>
 
-<h2>PojavLauncher</h2>
+<img src="res/pojav_logo.png"><br>
 	  <b>• Original: Zhuowei Zhang, Boardwalk app.</b><br>
 	  <b>• Developers:</b><br>
     <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a></br>
@@ -63,14 +63,12 @@ body {font-family: Arial;}
 
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Changelog')">Changelog</button>
-  <button class="tablinks" onclick="openCity(event, 'News')">News</button>
-  <button class="tablinks" onclick="openCity(event, 'Credits')">About</button>
-  <button class="tablinks" onclick="openCity(event, 'misc')">Miscellaneous</button>
+  <button class="tablinks" onclick="openCity(event, 'misc')">Misc</button>
   <button class="tablinks" onclick="openCity(event, 'cprt')">Copyright</button>
-  <button class="tablinks" onclick="openCity(event, 'archive')">Archive</button>
 </div>
 
 <div id="Changelog" class="tabcontent">
+  <body background="res/bg-wool-dark.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
   <h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 development builds</a></h2>
 	  <b>• New options:</b><br>
 	  - a fully-functional Mod Installer<br>
@@ -189,25 +187,13 @@ body {font-family: Arial;}
 	  <b>• Only pre-converted 1.9 version is added.</br>
 </div>
 <div id="News" class="tabcontent">
-  <h2>▶ 1.17: Now Works<a></h2>
-	  <b>After many days and nights spent working on a temporary solution (and trust us, this is definitely temporary), we've got something done: support for 1.17 is here. With backporting work done by artdeell and Java 17 ported by DuyKhanhTran, 1.17 is usable and playable with gl4es.
+  <h2>Nothing to see here....<a></h2>
+</div>
 
-Here's how to get it to work. You need to have a GitHub account in order to download the builds and JRE. <strike>Regardless of your platform, you'll need to download<a href="https://cdn.discordapp.com/attachments/724164160761626624/860864619350065162/assets-v0.zip">this resource pack.</a>  This is artdeell's patch for 1.17 on gl4es</strike>
-
-<br>
-
-<h1></h1><b> <a href ="https://pojavlauncherteam.github.io/updates/117.html">Read more ></a></b><br></h1>
-<br>
-
-	  <h2>▶ Offline mode is ending.</h2>
-	  <b><h2>Should we be worried about it now?</h1></b>
-	  Even though offline mode hasn't yet been taken down by Mojang, it's still technically piracy when you're using it, as you're getting the game for free (unless you bought it). Since GitHub and Mojang are owned by the same company, it's time we announce that we're putting our foot down.
-
-<h4>In the future, offline mode will be changed to a new mode we call local mode. Local mode account users have the same restrictions as offline mode, plus some new ones:</h4></h>
-
-<h3>• Local mode accounts will still be offline accounts, meaning that you're still limited by how offline accounts work.</h3>
-<h3>• Local mode accounts are unable to download Minecraft through the launcher.</h3>
-<b><a href="https://pojavlauncherteam.github.io/updates/local.html">Read More ></a></b>
+<div id="misc" class="tabcontent">
+  <h3>PojavLauncher system requirements:<a></h3>
+  Minimum:<br>
+  [ram_image] 1GB
 </div>
 
 <div id="Credits" class="tabcontent">
@@ -218,7 +204,7 @@ Here's how to get it to work. You need to have a GitHub account in order to down
 </div>
 
 <div id="cprt" class="tabcontent">
-  <b>• PojavLauncher is distributed as a freeware, under the [POJAV_GIT-LICENSE].</br> 
+  <b>• PojavLauncher is distributed as a freeware, under the GNU GPLv3 license.</br> 
     <b>-----</br>
   <b>• Modification of code is allowed only on your own fork (if you know what you're doing), but do not ask us if you want to fix what you broke.</br>
     <b>-----</br>
@@ -229,34 +215,6 @@ Here's how to get it to work. You need to have a GitHub account in order to down
   <a>• The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</a>
 </div>
 
-<div id="archive" class="tabcontent">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-
-<title>PojavLauncher ARCHIVES</title>
-
-
-</head>
-<body background="https://www.minecraft.net/content/dam/minecraft/backgrounds/bg-wool-dark.png"></body>
-<table class="main">
-<tbody><tr class="main">
-<td class="body" id="siteContent">
-<h1><strong>Contents of /pojav/archives/</strong></h1>
-<table border="1" class="center">
-<tbody><tr><th class="highlight">Name <th>Date uploaded </th><th>Size </th><th>Type </th></tr>
-<tr><td class="highlight"><a "0">Parent Directory</a></td><td>???</td><td>-</td><td>directory</td></tr>
-<tr><td class="highlight"><a href="https://github.com/PojavLauncherTeam/PojavLauncher/releases/download/v2.4.2-preview.5/PojavLauncher-2.4.2-20200324-preview5.apk">Preview 5</a></td><td>09/14/21</td><td>10.??MB</td><td>apk</td></tr>
-<tr><td class="highlight"><a href="https://github.com/PojavLauncherTeam/PojavLauncher/releases/download/v2.4.2-preview6/PojavLauncher-2.4.2-20200327-preview6.apk">Preview 6</a></td><td>09/14/21</td><td>10.??MB</td><td>apk</td></tr>
-<tr><td class="highlight"><a href="https://github.com/PojavLauncherTeam/PojavLauncher/releases/download/v2.4.2-preview.6.1/PojavLauncher-2.4.2-20200328-preview6.1.apk">Preview 6-1</a></td><td>09/14/21</td></td><td>10.??MB</td><td>apk</td></tr>
-<tr><td class="highlight"><a href="https://github.com/PojavLauncherTeam/PojavLauncher/releases/download/v2.4.2-preview.6.2/PojavLauncher-2.4.2-20200328-preview6.2.apk">Preview 6-2</a></td><td>09/14/21</td><td>10.??MB</td><td>apk</td></tr>
-<tr><td class="highlight">—Welcome to Gboard clipboard, any text you copy will be saved here.</a></td><td>—Tap on a clip to paste it in the text box.</td><td>—Use the edit icon to pin, add or delete clips.</td><td>—Touch and hold a clip to pin it. Unpinned clips will be deleted after 1 hour.</td></tr>
-</tbody></table></td>
-</tr>
-</tbody></table>
-
-</body></html>
-</div>
 
 
 <script>
