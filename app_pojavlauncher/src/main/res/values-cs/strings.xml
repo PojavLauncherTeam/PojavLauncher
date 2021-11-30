@@ -78,7 +78,7 @@
     <string name="mcl_setting_title_mousescale">Škálování myši</string>
     <string name="mcl_setting_subtitle_mousescale">Změnit velikost virtuální myši.</string>
     <string name="mcl_setting_title_javaargs">JVM spouštěcí argumenty</string>
-    <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, pokud je upraveno bez znalostí.</string>
+    <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, jeli upraveno bez znalostí.</string>
     <string name="mcl_setting_category_general">Obecná nastavení</string>
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
@@ -240,7 +240,7 @@
     <string name="preference_misc_title">Různé nastavení</string>
     <string name="preference_misc_description">Seznam verzí, a kontrola knihoven</string>
     <string name="preference_experimental_title">Experimentální Věci</string>
-    <string name="preference_experimental_description">Používejte této věci s uvážením, nepodporujeme.</string>
+    <string name="preference_experimental_description">Používejte tyto věci s uvážením, nepodporujeme.</string>
     <string name="preference_sustained_performance_title">Zapnout režim výkonu trvalého</string>
     <string name="preference_sustained_performance_description">Limitovat termální zpomalování limitováním výkonu</string>
     <string name="preference_back_title">Zpět na poslední stránku</string>
