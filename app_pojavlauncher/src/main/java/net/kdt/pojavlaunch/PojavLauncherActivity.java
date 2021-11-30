@@ -37,6 +37,7 @@ import net.kdt.pojavlaunch.fragments.CrashFragment;
 import net.kdt.pojavlaunch.fragments.LauncherFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
+import net.kdt.pojavlaunch.profiles.ProfileAdapter;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
 import java.io.File;
@@ -198,10 +199,14 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }
 
         //mAvailableVersions;
-        ArrayAdapter<String> adapterVer = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
-        adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        mVersionSelector.setAdapter(adapterVer);
-
+        if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
+            ArrayAdapter<String> adapterVer = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
+            adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+            mVersionSelector.setAdapter(adapterVer);
+        }else{
+            mVersionSelector.setAdapter(new ProfileAdapter(this));
+        }
+        //
         statusIsLaunching(false);
 
 

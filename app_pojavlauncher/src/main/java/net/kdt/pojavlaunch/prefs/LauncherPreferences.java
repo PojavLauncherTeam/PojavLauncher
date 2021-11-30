@@ -34,6 +34,7 @@ public class LauncherPreferences
     public static int PREF_CONTROL_BOTTOM_OFFSET = 0;
     public static int PREF_CONTROL_LEFT_OFFSET = 0;
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
+    public static boolean PREF_ENABLE_PROFILES = true;
     public static String PREF_GLES_SHRINK_HACK = "0";
 
 
