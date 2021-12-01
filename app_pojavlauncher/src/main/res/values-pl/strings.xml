@@ -245,4 +245,7 @@
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
     <string name="preference_sustained_performance_description">Ogranicz przegrzewanie zmniejszając górny próg wydajności</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
+    <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
+    <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
+    <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
 </resources>
