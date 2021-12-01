@@ -3,101 +3,93 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {margin:0;}
+body {font-family: Arial;}
 
-.navbar {
+/* Style the tab */
+.tab {
   overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  border: 1px solid #fffff;
+  background-color: #aaaaaa;
 }
 
-.navbar a {
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
   float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
   padding: 14px 16px;
-  text-decoration: none;
+  transition: 0.3s;
   font-size: 17px;
 }
 
-.navbar a:hover {
-  background: #ddd;
-  color: black;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ffffff;
 }
 
-.main {
-  padding: 16px;
-  margin-top: 30px;
-  height: 1500px; /* Used in this example to enable scrolling */
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #333;
 }
 
-body {
-		  margin: 0;
-		  padding: 0;
-		  background-color: #fdfdff;
-		  
-		  box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
-		  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		}
-	  
-		.changelog {
-		  padding: 10px;
-		  background-color: #f0f0f2;
-		  background-image: url('https://www.minecraft.net/content/dam/minecraft/backgrounds/bg-wool-dark.png');
-		  color: white;
-		}
-		
-		a:link, a:visited {
-		  color: #2198bf;
-		}
-		
-		@media (max-width: 700px) {
-		  div {
-		    margin: 0 auto;
-			width: auto;
-		  }
-	    }
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ffffff;
+  border-top: none;
+}
 </style>
 </head>
 <body>
 
-<div class="navbar">
-  <a href="https://pojavlauncherteam.github.io/updates/local.html">Kemas Kini Terkini</a>
-  <a href="https://pojavlauncherteam.github.io/">Laman Web</a>
-  <a href="https://www.minecraft.net/en-us/store/minecraft-java-edition/buy">Generator Akaun</a>
-  <a href="https://www.patreon.com/pojavlauncher"><b>Derma</b></a>
-</div>
+<img src="res/pojav_logo.png"><br>
+	  <b>• Original: Zhuowei Zhang, Boardwalk app.</b><br>
+	  <b>• Developers:</b><br>
+    <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a></br>
 
-<div class="changelog">
-  <h6>Alamak! Ini bukan cara laman ini patut dipaparkan! Laporkan apa-apa sahaja tentanf ini <a href="#">di sini.</a></h6>
-  <h2>PojavLauncher</h2>
-	<h2>Sekiranya anda ingin menyokong PojavLauncher dan mendapatkan beberapa faedah yang baik dalam prosesnya, pertimbangkan untuk <b><a href="https://www.patreon.com/pojavlauncher">berlanggan ke Patreon kami</a></b></h2>
-	  <b>• Asal: Zhuowei Zhang, apl Boardwalk.</b><br>
-	  <b>• Developer:</b><br>
-    <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a>, <a href="https://github.com/LegacyGamerHD">LegacyGamerHD</a>.<br>
-
-	  <b>• Pereka semasa: </b>
+	  <a><b>• Current designer: </b>
 	  <a href="https://github.com/Mathias-Boulay">Mathias-Boulay</a>.<br>
-
 	  <b>• Best helper for help testing: </b>
-	  <a href="https://github.com/pedrosouzabrasil">Pedro Souza</a>.<br>
-	  <b>• NEW: <a href="https://pojavlauncherteam.github.io/updates/117.html"> Preliminary support for Minecraft 1.17</a></b><br>
+	  <a href="https://github.com/pedrosouzabrasil">Pedro Souza (v2)</a>.<br>
 	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">Bug report</a></b><br>
 	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions">Download latest development build.</a></b><br>
-	  <b>• <a href="https://discord.gg/6RpEJda">Join PojavLauncher Discord server.</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS">PojavLauncher for jailbroken iOS/iPadOS</a>.<br>
-	<h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 development builds</a></h2>
+	  <b> <br>
+	  
+	  
+	  <a><b>PojavLauncher for jailbroken iOS devices: Click Me </b>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Changelog')">Changelog</button>
+  <button class="tablinks" onclick="openCity(event, 'News')">News</button>
+  <button class="tablinks" onclick="openCity(event, 'cprt')">Copyright</button>
+</div>
+
+<div id="Changelog" class="tabcontent">
+  <body background="res/bg-wool-dark.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+  <h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 development builds</a></h2>
 	  <b>• New options:</b><br>
 	  - a fully-functional Mod Installer<br>
+	  	  <b>——————</br>
           <b>• New features:</b><br>
           - Now faster with Java 8.<br>
-	  - Now can run Minecraft 1.13 and above. Hoorah!<br>
-	  - Now can properly launch Forge and Fabric! To install one of these bad boys, just simply download their .jar files.<br>
+	  - Now can run Minecraft 1.13 and above<br>
+	  - Now can properly launch Forge and Fabric! To install one of these "modloaders", just simply download their .jar files.<br>
           - Multi-architecture support: ARMv7, aarch64, x86 and x86_64.<br>
-          - Now properly supports Custom Controls (either made by the Discord community or by you!)<br>
+          - <strike>Now properly supports Custom Controls (either made by the Discord community or by you!)</strike><br>
+          	  <b>——————</br>
+          <b>• What's New</b></br>
+          - Java 17 for running Minecraft Versions above 21w10a<br>
+          - Controls Revision: added new features, such as drawer buttons, and new control editing features.<br>
+          (Note that controls made before this revision will not work.)</br>
+          - New renderers: virgl and vgpu</br>
+          (Though VirGL supports up to OpenGL 4.5, it can't run shaders properly.)</br>
+          - Removed zink. <strike>FTW</strike></br>
+          - Implemented local accounts, after what happened with Doregon/PojavLauncher_iOS, and as such, you can't download Minecraft resources, not even one.</br>
+          <strike>(Make sure to backup your PojavLauncher folder so that you can still play Minecraft after updating)</strike></br>
+          
 	  <br>
 
 	  <h2>▶ v2.5.0 preview (deprecated)</h2>
@@ -189,8 +181,66 @@ body {
 	  
 	  <h2>▶ v1.0 ALPHA</h2>
 	  <b>• Initial release. Name as Minecraft Launcher</b><br>
-	  <b>• Only pre-converted 1.9 version is added.</b>
+	  <b>• Only pre-converted 1.9 version is added.</br>
+</div>
+<div id="News" class="tabcontent">
+  <h2>▶ 1.17: Now Works<a></h2>
+	  <b>After many days and nights spent working on a temporary solution (and trust us, this is definitely temporary), we've got something done: support for 1.17 is here. With backporting work done by artdeell and Java 17 ported by DuyKhanhTran, 1.17 is usable and playable with gl4es.
+
+Here's how to get it to work. You need to have a GitHub account in order to download the builds and JRE. <strike>Regardless of your platform, you'll need to download<a href="https://cdn.discordapp.com/attachments/724164160761626624/860864619350065162/assets-v0.zip">this resource pack.</a>  This is artdeell's patch for 1.17 on gl4es</strike>
+
+<br>
+
+<h1></h1><b> <a href ="https://pojavlauncherteam.github.io/updates/117.html">Read more ></a></b><br></h1>
+<br>
+
+	  <h2>▶ Offline mode is ending.</h2>
+	  <b><h2>Should we be worried about it now?</h1></b>
+	  Even though offline mode hasn't yet been taken down by Mojang, it's still technically piracy when you're using it, as you're getting the game for free (unless you bought it). Since GitHub and Mojang are owned by the same company, it's time we announce that we're putting our foot down.
+
+<h4>In the future, offline mode will be changed to a new mode we call local mode. Local mode account users have the same restrictions as offline mode, plus some new ones:</h4></h>
+
+<h3>• Local mode accounts will still be offline accounts, meaning that you're still limited by how offline accounts work.</h3>
+<h3>• Local mode accounts are unable to download Minecraft through the launcher.</h3>
+<b><a href="https://pojavlauncherteam.github.io/updates/local.html">Read More ></a></b>
 </div>
 
+<div id="Credits" class="tabcontent">
+  <h1>Library credits</h1>
+  <h5>—————</h5>
+  <h3>PojavLauncher uses the following components:</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<div id="cprt" class="tabcontent">
+  <b>• PojavLauncher is distributed as a freeware, under the GNU GPLv3 license.</br> 
+    <b>-----</br>
+  <b>• Modification of code is allowed only on your own fork (if you know what you're doing), but do not ask us if you want to fix what you broke.</br>
+    <b>-----</br>
+  <b>• Distribution of a modified PojavLauncher is allowed, but under the following conditions: 1. you must credit the original work to your own work; 2. your source code must be also accessible by the public; and 3. your code/app should be virus-free/harm-free to the user.</br>
+  <b>-----</br>
+  <b>• If you want to translate PojavLauncher to your language, log in to Crowdin, or tap [this link](under work) for convenience.</br>
+    <b>-----</br>
+  <a>• The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</a>
+</div>
+
+
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+   
 </body>
-</html>
+</html> 
