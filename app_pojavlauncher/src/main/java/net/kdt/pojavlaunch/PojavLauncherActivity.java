@@ -119,15 +119,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         initTabs(0);
 
         //Setup listener to the backPreference system
-        backPreferenceListener = new ExtraListener() {
-            @Override
-            public boolean onValueSet(String key, String value) {
-                if(value.equals("true")){
-                    onBackPressed();
-                    ExtraCore.setValue(key, "false");
-                }
-                return false;
+        backPreferenceListener = (key, value) -> {
+            if(value.equals("true")){
+                onBackPressed();
+                ExtraCore.setValue(key, "false");
             }
+            return false;
         };
         ExtraCore.addExtraListener("back_preference", backPreferenceListener);
 

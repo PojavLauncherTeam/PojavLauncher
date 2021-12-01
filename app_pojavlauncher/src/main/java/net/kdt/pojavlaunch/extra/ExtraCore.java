@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * Class providing callback across all of a program
  * to allow easy thread safe implementations of UI update without context leak
+ * It is also perfectly engineered to make it unpleasant to use.
  *
  * This class uses a singleton pattern to simplify access to it
  */
@@ -16,7 +17,7 @@ public final class ExtraCore {
     private ExtraCore(){}
 
     // Store the key-value pair
-    private final Map<String, String> valueMap = new ConcurrentHashMap<>();
+    private final Map<String, Object> valueMap = new ConcurrentHashMap<>();
 
     // Store what each ExtraListener listen to
     private final Map<String, ConcurrentLinkedQueue<WeakReference<ExtraListener>>> listenerMap = new ConcurrentHashMap<>();
@@ -36,20 +37,25 @@ public final class ExtraCore {
      * @param key The key
      * @param value The value
      */
-    public static void setValue(String key, String value){
+    public static void setValue(String key, Object value){
         getInstance().valueMap.put(key, value);
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> extraListenerList = getInstance().listenerMap.get(key);
+        if(extraListenerList == null) return; //No listeners
         for(WeakReference<ExtraListener> listener : extraListenerList){
             if(listener.get() == null){
                 extraListenerList.remove(listener);
                 continue;
             }
-            listener.get().notifyDataChanged(key, value);
+
+            //Notify the listener about a state change and remove it if asked for
+            if(listener.get().onValueSet(key, value)){
+                ExtraCore.removeExtraListenerFromValue(key, listener.get());
+            }
         }
     }
 
     /** @return The value behind the key */
-    public static String getValue(String key){
+    public static Object getValue(String key){
         return getInstance().valueMap.get(key);
     }
 
