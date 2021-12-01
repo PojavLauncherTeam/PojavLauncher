@@ -187,4 +187,7 @@
     <string name="pvc_title">Tetapan per-versi</string>
     <string name="storage_warning_title">Tetapan Storan</string>
     <string name="storage_warning_text"><![CDATA[Oleh kerana penguatkuasaan penyimpanan skop baru Google yang ditambahkan dalam Android 10 dan yang lebih tinggi, kami diminta untuk memindahkan direktori permainan ke folder peribadi aplikasi. <br/>Folder baru untuk fail Pojav adalah <b>Android/data/%s/files/</b> (juga dapat diakses menggunakan penyedia penyimpanan di penjelajah fail anda).<br/>Sekiranya anda perlu menyalin fail permainan anda, sila salin semuanya dari folder asal di <b>games/PojavLauncher</b> secara manual.]]></string>
+    <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
+    <string name="gles_hack_always">Membahagi semua textur dengan 2</string>
+    <string name="gles_hack_sometimes">Membahagikan tekstur yang besar dengan /2 atau /4</string>
 </resources>
