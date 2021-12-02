@@ -98,8 +98,10 @@ public class MinecraftGLView extends TextureView {
                 return;
             }
             if(msg.what == MSG_DROP_ITEM_BUTTON_CHECK) {
-                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q);
-                theHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
+                if(CallbackBridge.isGrabbing()){
+                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q);
+                    theHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
+                }
                 return;
             }
 
