@@ -19,7 +19,7 @@ public class ControlDrawerData {
     public ControlData properties;
     public Orientation orientation;
 
-    @Keep
+    @androidx.annotation.Keep
     public enum Orientation {
         DOWN,
         LEFT,
