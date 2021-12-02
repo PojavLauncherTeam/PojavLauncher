@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/vprof_editor_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/vprof_editor_icon" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/vprof_editor_version_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profiles_profile_version"
-        app:layout_constraintBottom_toTopOf="@+id/spinner2"
-        app:layout_constraintStart_toStartOf="@+id/spinner2" />
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editor_version_spinner"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_version_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
+import java.util.ArrayList;
+
+import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
@@ -24,6 +28,8 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.tasks.*;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.PopupMenu;
+
 import net.kdt.pojavlaunch.value.*;
 
 import org.apache.commons.io.IOUtils;
@@ -38,7 +44,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public JMinecraftVersionList mVersionList;
 	public MinecraftDownloaderTask mTask;
 	public MinecraftAccount mProfile;
-	public String[] mAvailableVersions;
+	//public String[] mAvailableVersions;
     
 	public boolean mIsAssetsProcessing = false;
     protected boolean canBack = false;
@@ -119,10 +125,73 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         Tools.updateWindowSize(this);
         System.out.println("call to onPostResume; E");
     }
-    
+    public void setupVersionSelector() {
+        final androidx.appcompat.widget.PopupMenu popup = new PopupMenu(this, mVersionSelector);
+        popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());
+        PerVersionConfigDialog dialog = new PerVersionConfigDialog(this);
+        this.mVersionSelector.setOnLongClickListener((v)->dialog.openConfig(this.mProfile.selectedVersion));
+        this.mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
+            {
+                mProfile.selectedVersion = p1.getItemAtPosition(p3).toString();
+
+                PojavProfile.setCurrentProfile(BaseLauncherActivity.this, mProfile);
+                if (PojavProfile.isFileType(BaseLauncherActivity.this)) {
+                    try {
+                        PojavProfile.setCurrentProfile(BaseLauncherActivity.this, mProfile.save());
+                    } catch (IOException e) {
+                        Tools.showError(BaseLauncherActivity.this, e);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> p1)
+            {
+                // TODO: Implement this method
+            }
+        });
+        popup.setOnMenuItemClickListener(item -> true);
+    }
+    ExtraListener<ArrayList<String>> versionListener;
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if((!LauncherPreferences.PREF_ENABLE_PROFILES) && versionListener != null) ExtraCore.removeExtraListenerFromValue("lac_version_list",versionListener);
+    }
+
+    public static void updateVersionSpinner(Context ctx, ArrayList<String> value, Spinner mVersionSelector, String defaultSelection) {
+        if(value != null && value.size() > 0) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, value);
+            adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+            mVersionSelector.setAdapter(adapter);
+            mVersionSelector.setSelection(RefreshVersionListTask.selectAt(value, defaultSelection));
+        } else {
+            mVersionSelector.setSelection(RefreshVersionListTask.selectAt(PojavLauncherActivity.basicVersionList, defaultSelection));
+        }
+    }
     @Override
     protected void onResume(){
         super.onResume();
+
+        if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
+
+            ArrayList<String> vlst = (ArrayList<String>) ExtraCore.getValue("lac_version_list");
+            if(vlst != null) {
+                setupVersionSelector();
+                updateVersionSpinner(this, vlst, mVersionSelector, mProfile.selectedVersion);
+            }
+            versionListener = (key, value) -> {
+                if(value != null) {
+                    setupVersionSelector();
+                    updateVersionSpinner(this, value, mVersionSelector, mProfile.selectedVersion);
+                }
+                return false;
+            };
+            ExtraCore.addExtraListener("lac_version_list",versionListener);
+        }
         System.out.println("call to onResume");
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();

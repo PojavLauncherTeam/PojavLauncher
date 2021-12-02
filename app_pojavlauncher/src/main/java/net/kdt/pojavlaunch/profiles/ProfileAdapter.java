@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.profiles;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -16,23 +17,29 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /*
  * Adapter for listing launcher profiles in a Spinner
  */
 public class ProfileAdapter extends BaseAdapter {
     Map<String, MinecraftProfile> profiles;
-    Map<String, Bitmap> iconCache;
+    ArrayList<DataSetObserver> observers = new ArrayList<>();
+    static final Map<String, Bitmap> iconCache = new HashMap<>();
     static final String BASE64_PNG_HEADER = "data:image/png;base64,";
     static final MinecraftProfile DUMMY = new MinecraftProfile();
-    String[] profileArray;
+    List<String> profileList;
     public ProfileAdapter(Context ctx) {
         LauncherProfiles.update();
         profiles = LauncherProfiles.mainProfileJson.profiles;
-        profileArray = profiles.keySet().toArray(new String[0]);
-        iconCache = new HashMap<>();
-        iconCache.put(null,BitmapFactory.decodeResource(ctx.getResources(),R.drawable.ic_menu_java));
+
+        profileList = Arrays.asList(profiles.keySet().toArray(new String[0]));
+        if(!iconCache.containsKey(null))
+            iconCache.put(null,BitmapFactory.decodeResource(ctx.getResources(),R.drawable.ic_menu_java));
+
     }
     /*
      * Gets how much profiles are loaded in the adapter right now
@@ -40,24 +47,31 @@ public class ProfileAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return profileArray.length;
+        return profileList.size();
     }
 
     /*
      * Gets the profile at a given index
      * @param position index to retreive
-     * @returns MinecraftProfile or null if the index is out of bounds
+     * @returns MinecraftProfile name or null
      */
     @Override
     public Object getItem(int position) {
         //safe since the second check in the and statement will be skipped if the first one fails
-        if(position < profileArray.length && profiles.containsKey(profileArray[position])) {
-            return profiles.get(profileArray[position]);
+        if(position < profileList.size() && profiles.containsKey(profileList.get(position))) {
+            return profileList.get(position);
         }else{
             return null;
         }
     }
 
+    public int resolveProfileIndex(String name) {
+        return profileList.indexOf(name);
+    }
+
+    public void fireProfileEdit() {
+        notifyDataSetChanged();
+    }
     /*
      * Gets the item ID (crc64 hash of the profile name) for a given index
      * @param position index to get the hash for
@@ -65,8 +79,8 @@ public class ProfileAdapter extends BaseAdapter {
      */
     @Override
     public long getItemId(int position) {
-        if(position < profileArray.length) {
-            return StringCRC64.strhash(profileArray[position]);
+        if(position < profileList.size()) {
+            return StringCRC64.strhash(profileList.get(position));
         }else{
             return -1L;
         }
@@ -76,7 +90,7 @@ public class ProfileAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) v = LayoutInflater.from(parent.getContext()).inflate(R.layout.version_profile_layout,parent,false);
-        setViewProfile(v,profileArray[position]);
+        setViewProfile(v,profileList.get(position));
         return v;
     }
     public void setViewProfile(View v, String nm) {
@@ -88,6 +102,7 @@ public class ProfileAdapter extends BaseAdapter {
             if (prof.icon.startsWith(BASE64_PNG_HEADER)) {
                 byte[] pngBytes = Base64.decode(prof.icon.substring(BASE64_PNG_HEADER.length()), Base64.DEFAULT);
                 cachedIcon = BitmapFactory.decodeByteArray(pngBytes,0,pngBytes.length);
+                iconCache.put(nm,cachedIcon);
             }else{
                 Log.i("IconParser","Unsupported icon: "+prof.icon);
                 cachedIcon = iconCache.get(null);
