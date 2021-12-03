@@ -229,5 +229,22 @@
     <string name="control_right_offset">праворуч: </string>
     <string name="control_bottom_offset">знизу: </string>
     <string name="control_left_offset">зліва: </string>
+    <string name="preference_control_offset_title">Керування боковими змінами</string>
+    <string name="preference_control_offset_description">Встановіть настроюване зміщення для кожної сторони екрану</string>
+    <string name="preference_video_title">Відео та рендер</string>
+    <string name="preference_video_description">Роздільна здатність, тип масштабування та рендеринг</string>
+    <string name="preference_control_title">Керування персоналізацією</string>
+    <string name="preference_control_description">Типи жестів, тригерів і масштабування</string>
+    <string name="preference_java_title">Налаштування Java</string>
+    <string name="preference_java_description">Версія Java, JVM Arguments, і об\'єм оперативної пам\'яті</string>
+    <string name="preference_misc_title">Інші параметри</string>
+    <string name="preference_misc_description">Список версій, та перевірка lib-файлів</string>
+    <string name="preference_experimental_title">Експериментальні штуки</string>
+    <string name="preference_experimental_description">Використовуйте речі з увагою, без підтримки.</string>
+    <string name="preference_sustained_performance_title">Увімкнути режим постійної продуктивності</string>
+    <string name="preference_sustained_performance_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
     <string name="preference_back_title">Повернутися назад</string>
+    <string name="gles_hack_none">Не зменшувати текстури</string>
+    <string name="gles_hack_always">Розділяє всі текстури на 2</string>
+    <string name="gles_hack_sometimes">Розділяє великі текстури на 2 або 4</string>
 </resources>
