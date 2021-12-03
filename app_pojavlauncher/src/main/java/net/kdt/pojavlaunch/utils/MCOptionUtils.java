@@ -2,17 +2,21 @@ package net.kdt.pojavlaunch.utils;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
-import java.io.*;
-import java.lang.ref.WeakReference;
-import java.util.*;
-
 import android.os.Build;
 import android.os.FileObserver;
-import android.util.*;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.Tools;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MCOptionUtils
 {
@@ -103,6 +107,8 @@ public class MCOptionUtils
                 }
             };
         }
+
+        fileObserver.startWatching();
     }
 
     public static void notifyListeners(){

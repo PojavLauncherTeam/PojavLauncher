@@ -577,7 +577,7 @@ public class MinecraftGLView extends TextureView {
         int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
         if(x < barX || x >= barX + barWidth) return -1;
 
-        return hotbarKeys[((x - barX) / barWidth / 9) % 9];
+        return hotbarKeys[(int) net.kdt.pojavlaunch.utils.MathUtils.map(x, barX, barX + barWidth, 0, 9)];
     }
 
     /** Return the size, given the UI scale size */
