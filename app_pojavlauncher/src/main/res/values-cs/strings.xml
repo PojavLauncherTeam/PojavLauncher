@@ -229,7 +229,7 @@
     <string name="control_right_offset">pravé odsazení: </string>
     <string name="control_bottom_offset">spodní odsazení: </string>
     <string name="control_left_offset">levé odsazení: </string>
-    <string name="preference_control_offset_title">Stana odsazení ovládání</string>
+    <string name="preference_control_offset_title">Strana odsazení ovládání</string>
     <string name="preference_control_offset_description">Nastavit vlastní odsazení pro každou stranu obrazovky</string>
     <string name="preference_video_title">Video a vykreslovač</string>
     <string name="preference_video_description">Rozlišení, typ škálování, a vykreslovač</string>
