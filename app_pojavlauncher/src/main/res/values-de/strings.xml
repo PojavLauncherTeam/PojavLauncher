@@ -85,7 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): Gibt OpenGL 2.1 aus</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): Gibt OpenGL 2.1 aus</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): Gibt OpenGL 2.1 + partial 3.2 aus</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Gibt OpenGL 4.5 aus</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Exportiert OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): Gibt OpenGL 3.0 aus</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): Gibt OpenGL 4.6 aus</string>
     <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
