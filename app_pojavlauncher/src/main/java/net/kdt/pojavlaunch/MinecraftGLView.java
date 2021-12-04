@@ -340,11 +340,13 @@ public class MinecraftGLView extends TextureView {
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN: // 5
+                //TODO Hey we could have some sort of middle click detection ?
+                
                 scrollLastInitialX = e.getX();
                 scrollLastInitialY = e.getY();
                 //Checking if we are pressing the hotbar to select the item
                 hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
-                if(hudKeyHandled == -1){
+                if(hudKeyHandled != -1){
                     sendKeyPress(hudKeyHandled);
                     if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
                         //Prevent double tapping Event on two different slots
