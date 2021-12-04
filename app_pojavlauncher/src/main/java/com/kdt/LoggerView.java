@@ -68,7 +68,7 @@ public class LoggerView extends ConstraintLayout {
         logListener = text -> {
             if(log.getVisibility() != VISIBLE) return;
             post(() -> {
-                log.append(text);
+                log.append(text + '\n');
                 scrollView.fullScroll(View.FOCUS_DOWN);
             });
 
