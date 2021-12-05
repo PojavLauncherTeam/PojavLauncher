@@ -29,6 +29,8 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class ProfileEditor implements ExtraListener<ArrayList<String>> {
     View mainView;
@@ -40,6 +42,12 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
     String selectedVersionId;
     String editingProfile;
     EditSaveCallback cb;
+    public static MinecraftProfile generateTemplate() {
+        MinecraftProfile TEMPLATE = new MinecraftProfile();
+        TEMPLATE.name = "New";
+        TEMPLATE.lastVersionId = "latest-release";
+        return TEMPLATE;
+    }
     public ProfileEditor(Context _ctx, EditSaveCallback cb) {
         context = _ctx;
         this.cb = cb;
@@ -56,9 +64,20 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         dialog = bldr.create();
     }
     public boolean show(@NonNull String profile) {
-        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(profile);
-        if(prof == null) return true;
-        editingProfile = profile;
+        MinecraftProfile prof;
+        if(!ProfileAdapter.CREATE_PROFILE_MAGIC.equals(profile)) {
+            prof = LauncherProfiles.mainProfileJson.profiles.get(profile);
+            if (prof == null) return true;
+            editingProfile = profile;
+        }else{
+            prof = generateTemplate();
+            String uuid = UUID.randomUUID().toString();
+            while(LauncherProfiles.mainProfileJson.profiles.containsKey(uuid)) {
+                uuid = UUID.randomUUID().toString();
+            }
+            editingProfile = uuid;
+        }
+
         ExtraCore.addExtraListener("lac_version_list",this);
         profileNameView.setText(prof.name);
         if(ProfileAdapter.iconCache.containsKey(profile)) {
@@ -73,9 +92,9 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
             selectedVersionId = prof.lastVersionId;
         else if(prof.lastVersionId != null) switch (prof.lastVersionId) {
             case "latest-release":
-                selectedVersionId = ((HashMap<String,String>)ExtraCore.getValue("release_table")).get("release");
+                selectedVersionId = ((Map<String,String>)ExtraCore.getValue("release_table")).get("release");
             case "latest-snapshot":
-                selectedVersionId = ((HashMap<String,String>)ExtraCore.getValue("release_table")).get("snapshot");
+                selectedVersionId = ((Map<String,String>)ExtraCore.getValue("release_table")).get("snapshot");
         }else{
             if(PojavLauncherActivity.basicVersionList.length > 0) {
                 selectedVersionId = PojavLauncherActivity.basicVersionList[0];
@@ -87,10 +106,22 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         return true;
     }
     public void save(DialogInterface dialog, int which) {
-        cb.onSave(editingProfile);
-        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(editingProfile);
+
+        System.out.println(editingProfile);
+        MinecraftProfile prof;
+        boolean isNew;
+        if(LauncherProfiles.mainProfileJson.profiles.containsKey(editingProfile)) {
+            prof = LauncherProfiles.mainProfileJson.profiles.get(editingProfile);
+            LauncherProfiles.mainProfileJson.profiles.remove(editingProfile);
+            isNew = false;
+        }else{
+            prof = new MinecraftProfile();
+            isNew = true;
+        }
         prof.name = profileNameView.getText().toString();
         prof.lastVersionId = (String)versionSpinner.getSelectedItem();
+        LauncherProfiles.mainProfileJson.profiles.put(editingProfile,prof);
+        cb.onSave(editingProfile,isNew);
         destroy(dialog);
     }
     public void destroy(@NonNull DialogInterface dialog) {
@@ -106,6 +137,6 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         return false;
     }
     public interface EditSaveCallback {
-        void onSave(String name);
+        void onSave(String name, boolean isNew);
     }
 }

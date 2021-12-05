@@ -30,13 +30,21 @@ public class ProfileAdapter extends BaseAdapter {
     ArrayList<DataSetObserver> observers = new ArrayList<>();
     static final Map<String, Bitmap> iconCache = new HashMap<>();
     static final String BASE64_PNG_HEADER = "data:image/png;base64,";
+    public static final String CREATE_PROFILE_MAGIC = "___extra____profile-create";
     static final MinecraftProfile DUMMY = new MinecraftProfile();
+    static MinecraftProfile CREATE_PROFILE;
     List<String> profileList;
     public ProfileAdapter(Context ctx) {
         LauncherProfiles.update();
-        profiles = LauncherProfiles.mainProfileJson.profiles;
-
-        profileList = Arrays.asList(profiles.keySet().toArray(new String[0]));
+        profiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
+        if(CREATE_PROFILE == null) {
+            CREATE_PROFILE = new MinecraftProfile();
+            CREATE_PROFILE.name = "Create new profile";
+            CREATE_PROFILE.lastVersionId = "";
+        }
+        profileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
+        profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
+        profiles.put(CREATE_PROFILE_MAGIC, CREATE_PROFILE);
         if(!iconCache.containsKey(null))
             iconCache.put(null,BitmapFactory.decodeResource(ctx.getResources(),R.drawable.ic_menu_java));
 
@@ -79,11 +87,16 @@ public class ProfileAdapter extends BaseAdapter {
      */
     @Override
     public long getItemId(int position) {
-        if(position < profileList.size()) {
-            return StringCRC64.strhash(profileList.get(position));
-        }else{
-            return -1L;
-        }
+        return position;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        profiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
+        profileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
+        profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
+        profiles.put(CREATE_PROFILE_MAGIC, CREATE_PROFILE);
+        super.notifyDataSetChanged();
     }
 
     @Override

@@ -189,9 +189,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             mVersionSelector.setAdapter(adapterVer);
         }else{
             ProfileAdapter pad = new ProfileAdapter(this);
-            ProfileEditor dialog = new ProfileEditor(this,(name)->{
-                pad.notifyDataSetChanged();
+            ProfileEditor dialog = new ProfileEditor(this,(name, isNew)->{
                 LauncherProfiles.update();
+                if(isNew) {
+                    mVersionSelector.setSelection(0);
+                }
+                pad.notifyDataSetChanged();
             });
             mVersionSelector.setOnLongClickListener((v)->dialog.show(mProfile.selectedProfile));
             mVersionSelector.setAdapter(pad);
@@ -200,13 +203,18 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 @Override
                 public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
                 {
-                    mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile);
-                    if (PojavProfile.isFileType(PojavLauncherActivity.this)) {
-                        try {
-                            PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile.save());
-                        } catch (IOException e) {
-                            Tools.showError(PojavLauncherActivity.this, e);
+                    String profileName = p1.getItemAtPosition(p3).toString();
+                    if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
+                        dialog.show(profileName);
+                    }else {
+                        mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
+                        PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile);
+                        if (PojavProfile.isFileType(PojavLauncherActivity.this)) {
+                            try {
+                                PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile.save());
+                            } catch (IOException e) {
+                                Tools.showError(PojavLauncherActivity.this, e);
+                            }
                         }
                     }
                 }
