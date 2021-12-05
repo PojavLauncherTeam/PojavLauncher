@@ -27,8 +27,11 @@ import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.profiles.ProfileAdapter;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+
 import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends BaseActivity {
@@ -59,7 +62,7 @@ public class BaseMainActivity extends BaseActivity {
 
     protected void initLayout(int resId) {
         setContentView(resId);
-
+        ProfileAdapter.clearIconCache();
         try {
             Logger.getInstance().reset();
             // FIXME: is it safe fot multi thread?
@@ -68,7 +71,13 @@ public class BaseMainActivity extends BaseActivity {
             loggerView = findViewById(R.id.mainLoggerView);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
+            if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
+                mVersionInfo = Tools.getVersionInfo(null, mProfile.selectedVersion);
+            }else{
+                LauncherProfiles.update();
+                mVersionInfo = Tools.getVersionInfo(null, BaseLauncherActivity.getVersionId(
+                        LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile).lastVersionId));
+            }
             
             setTitle("Minecraft " + mProfile.selectedVersion);
             PerVersionConfig.update();
@@ -187,7 +196,14 @@ public class BaseMainActivity extends BaseActivity {
             "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
         JREUtils.redirectAndPrintJRELog(this);
-        Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
+        if(!LauncherPreferences.PREF_ENABLE_PROFILES){
+            Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
+        }else{
+            LauncherProfiles.update();
+            Tools.launchMinecraft(this, mProfile, BaseLauncherActivity.getVersionId(
+                    LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile).lastVersionId));
+        }
+
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {

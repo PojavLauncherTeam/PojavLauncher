@@ -3,7 +3,7 @@ package net.kdt.pojavlaunch.profiles;
 import java.nio.charset.StandardCharsets;
 
 public class StringCRC64 {
-    private final static long POLY = (long) 0xc96c5795d7870f42L; // ECMA-182
+    private final static long POLY = 0xc96c5795d7870f42L; // ECMA-182
     private final static long[][] table;
     static
     {

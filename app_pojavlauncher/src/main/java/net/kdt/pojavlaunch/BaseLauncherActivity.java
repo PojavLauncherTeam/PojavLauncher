@@ -18,6 +18,7 @@ import androidx.appcompat.app.*;
 import com.kdt.pickafile.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
@@ -31,6 +32,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.IOUtils;
 
@@ -106,11 +109,34 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         } else if (canBack) {
             v.setEnabled(false);
             mTask = new MinecraftDownloaderTask(this);
-            mTask.execute(mProfile.selectedVersion);
+            if(LauncherPreferences.PREF_ENABLE_PROFILES) {
+                LauncherProfiles.update();
+                if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(mProfile.selectedProfile + "")) {
+                    MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile + "");
+                    if (prof != null && prof.lastVersionId != null) {
+                        mTask.execute(getVersionId(prof.lastVersionId));
+                    }
+                }
+            }else{
+                mTask.execute(mProfile.selectedProfile);
+            }
 
         }
     }
-    
+
+    public static String getVersionId(String input) {
+        Map<String,String> lReleaseMaps = (Map<String,String>)ExtraCore.getValue("release_table");
+        if(lReleaseMaps == null || lReleaseMaps.isEmpty()) return input;
+        switch(input) {
+            case "latest-release":
+                return lReleaseMaps.get("release");
+            case "latest-snapshot":
+                return lReleaseMaps.get("snapshot");
+            default:
+                return input;
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if (canBack) {

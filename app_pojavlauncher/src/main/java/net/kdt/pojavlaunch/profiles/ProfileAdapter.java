@@ -57,7 +57,15 @@ public class ProfileAdapter extends BaseAdapter {
     public int getCount() {
         return profileList.size();
     }
-
+    public static void clearIconCache() {
+        for(String s : iconCache.keySet()) {
+            Bitmap bmp = iconCache.get(s);
+            if(bmp != null) {
+                bmp.recycle();
+            }
+        }
+        iconCache.clear();
+    }
     /*
      * Gets the profile at a given index
      * @param position index to retreive
