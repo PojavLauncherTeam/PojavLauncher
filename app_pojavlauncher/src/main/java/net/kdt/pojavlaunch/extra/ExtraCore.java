@@ -28,7 +28,7 @@ public final class ExtraCore {
     // All public methods will pass through this one
     private static ExtraCore getInstance(){
         if(extraCoreSingleton == null){
-            synchronized(Logger.class){
+            synchronized(ExtraCore.class){
                 if(extraCoreSingleton == null){
                     extraCoreSingleton = new ExtraCore();
                 }
