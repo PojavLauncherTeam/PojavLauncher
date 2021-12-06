@@ -16,20 +16,25 @@ public final class ExtraCore {
     // No unwanted instantiation
     private ExtraCore(){}
 
+    // Singleton instance
+    private static ExtraCore extraCoreSingleton = null;
+
     // Store the key-value pair
     private final Map<String, Object> valueMap = new ConcurrentHashMap<>();
 
     // Store what each ExtraListener listen to
     private final Map<String, ConcurrentLinkedQueue<WeakReference<ExtraListener>>> listenerMap = new ConcurrentHashMap<>();
 
-    // Inner class for singleton implementation
-    private static class ExtraCoreSingleton {
-        private static final ExtraCore extraCore = new ExtraCore();
-    }
-
     // All public methods will pass through this one
     private static ExtraCore getInstance(){
-        return ExtraCoreSingleton.extraCore;
+        if(extraCoreSingleton == null){
+            synchronized(Logger.class){
+                if(extraCoreSingleton == null){
+                    extraCoreSingleton = new ExtraCore();
+                }
+            }
+        }
+        return extraCoreSingleton;
     }
 
     /**
