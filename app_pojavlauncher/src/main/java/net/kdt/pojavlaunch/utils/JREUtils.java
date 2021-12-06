@@ -5,6 +5,7 @@ import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GLES_SHRINK_HACK;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VBO_DISABLE_HACK;
 
 import android.app.*;
 import android.content.*;
@@ -211,6 +212,9 @@ public class JREUtils {
 
         // The shrink hack can be enabled from the experimental settings
         envMap.put("LIBGL_SHRINK", PREF_GLES_SHRINK_HACK);
+
+        // VBO disable hack
+        if(PREF_VBO_DISABLE_HACK) envMap.put("LIBGL_USEVBO","0");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");

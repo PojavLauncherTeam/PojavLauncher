@@ -279,8 +279,12 @@
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
 
     <string name="preference_back_title">Back to the last screen</string>
+    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Don\'t shrink textures</string>
     <string name="gles_hack_always">Divides all textures by 2</string>
     <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>
+
+    <string name="vbo_hack_title">Disable VBOs</string>
+    <string name="vbo_hack_description">Help with compatibility on some old versions</string>
 
 </resources>

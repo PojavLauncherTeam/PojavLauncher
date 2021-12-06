@@ -35,6 +35,7 @@ public class LauncherPreferences
     public static int PREF_CONTROL_LEFT_OFFSET = 0;
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
     public static String PREF_GLES_SHRINK_HACK = "0";
+    public static boolean PREF_VBO_DISABLE_HACK = false;
 
 
     public static void loadPreferences(Context ctx) {
@@ -65,6 +66,7 @@ public class LauncherPreferences
         PREF_CONTROL_LEFT_OFFSET = DEFAULT_PREF.getInt("controlLeftOffset", 0);
         PREF_SUSTAINED_PERFORMANCE = DEFAULT_PREF.getBoolean("sustainedPerformance", false);
         PREF_GLES_SHRINK_HACK = DEFAULT_PREF.getString("gl4es_shrink_hack", "0");
+        PREF_VBO_DISABLE_HACK = DEFAULT_PREF.getBoolean("vbo_disable_hack", false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
