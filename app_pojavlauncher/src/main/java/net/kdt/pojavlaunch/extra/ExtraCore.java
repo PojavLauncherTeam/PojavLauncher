@@ -43,6 +43,8 @@ public final class ExtraCore {
      * @param value The value
      */
     public static void setValue(String key, Object value){
+        if(value == null || key == null) return; // null values create an NPE on insertion
+
         getInstance().valueMap.put(key, value);
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> extraListenerList = getInstance().listenerMap.get(key);
         if(extraListenerList == null) return; //No listeners
