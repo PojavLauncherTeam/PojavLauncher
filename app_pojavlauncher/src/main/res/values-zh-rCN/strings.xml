@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（尚未支持）</string>
+    <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
@@ -242,7 +244,10 @@
     <string name="preference_sustained_performance_title">启用持续性能模式</string>
     <string name="preference_sustained_performance_description">通过限制峰值性能来限制热节流</string>
     <string name="preference_back_title">返回最后一个屏幕</string>
+    <string name="gles_hack_title">GL4ES 收缩黑名单</string>
     <string name="gles_hack_none">不缩小纹理</string>
     <string name="gles_hack_always">将所有纹理除以 2</string>
     <string name="gles_hack_sometimes">将大纹理除以 2 或 4</string>
+    <string name="vbo_hack_title">禁用 VBO</string>
+    <string name="vbo_hack_description">兼容旧版本</string>
 </resources>
