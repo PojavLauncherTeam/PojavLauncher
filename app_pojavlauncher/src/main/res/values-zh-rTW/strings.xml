@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 輸出OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（暫不支持）</string>
+    <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
@@ -136,6 +138,9 @@
     <string name="import_control_label">Import controls</string>
     <string name="import_control_invalid_file">Neplatný nebo poškozený souborgey</string>
     <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">正在效驗檔案，請稍候再試...</string>
+    <string name="import_control_invalid_name">無效的檔案名或檔案已存在</string>
+    <string name="import_control_done">導入完成</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
