@@ -85,6 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): xuất ra OpenGL 2.1+partial 3.2</string>
+    <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): xuất ra OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): xuất ra OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): xuất ra OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
