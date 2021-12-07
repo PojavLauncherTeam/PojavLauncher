@@ -98,8 +98,10 @@ public class MinecraftGLView extends TextureView {
                 return;
             }
             if(msg.what == MSG_DROP_ITEM_BUTTON_CHECK) {
-                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q);
-                theHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
+                if(CallbackBridge.isGrabbing()){
+                    sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_Q);
+                    theHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
+                }
                 return;
             }
 
@@ -338,11 +340,13 @@ public class MinecraftGLView extends TextureView {
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN: // 5
+                //TODO Hey we could have some sort of middle click detection ?
+                
                 scrollLastInitialX = e.getX();
                 scrollLastInitialY = e.getY();
                 //Checking if we are pressing the hotbar to select the item
                 hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
-                if(hudKeyHandled == -1){
+                if(hudKeyHandled != -1){
                     sendKeyPress(hudKeyHandled);
                     if(hasDoubleTapped && hudKeyHandled == lastHotbarKey){
                         //Prevent double tapping Event on two different slots
@@ -575,7 +579,7 @@ public class MinecraftGLView extends TextureView {
         int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
         if(x < barX || x >= barX + barWidth) return -1;
 
-        return hotbarKeys[((x - barX) / barWidth / 9) % 9];
+        return hotbarKeys[(int) net.kdt.pojavlaunch.utils.MathUtils.map(x, barX, barX + barWidth, 0, 9)];
     }
 
     /** Return the size, given the UI scale size */

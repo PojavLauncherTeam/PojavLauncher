@@ -102,7 +102,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.5</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
@@ -279,6 +279,7 @@
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
 
     <string name="preference_back_title">Back to the last screen</string>
+    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Don\'t shrink textures</string>
     <string name="gles_hack_always">Divides all textures by 2</string>
     <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>
@@ -288,4 +289,6 @@
     <string name="profiles_editing">Editing profile</string>
     <string name="profiles_profile_name">Name</string>
     <string name="profiles_profile_version">Version</string>
+    <string name="vbo_hack_title">Disable VBOs</string>
+    <string name="vbo_hack_description">Help with compatibility on some old versions</string>
 </resources>
