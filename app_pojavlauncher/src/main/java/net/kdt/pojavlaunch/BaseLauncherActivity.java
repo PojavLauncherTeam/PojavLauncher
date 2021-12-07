@@ -118,7 +118,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                     }
                 }
             }else{
-                mTask.execute(mProfile.selectedProfile);
+                mTask.execute(mProfile.selectedVersion);
             }
 
         }
@@ -201,7 +201,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     @Override
     protected void onResume(){
         super.onResume();
-
+        new RefreshVersionListTask(this).execute();
         if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
 
             ArrayList<String> vlst = (ArrayList<String>) ExtraCore.getValue("lac_version_list");
@@ -218,6 +218,31 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             };
             ExtraCore.addExtraListener("lac_version_list",versionListener);
         }
+        if(listRefreshListener != null) {
+            LauncherPreferences.DEFAULT_PREF.unregisterOnSharedPreferenceChangeListener(listRefreshListener);
+        }
+        listRefreshListener = (sharedPreferences, key) -> {
+            if(key.startsWith("vertype_")) {
+                System.out.println("Verlist update needed!");
+                LauncherPreferences.PREF_VERTYPE_RELEASE = sharedPreferences.getBoolean("vertype_release",true);
+                LauncherPreferences.PREF_VERTYPE_SNAPSHOT = sharedPreferences.getBoolean("vertype_snapshot",false);
+                LauncherPreferences.PREF_VERTYPE_OLDALPHA = sharedPreferences.getBoolean("vertype_oldalpha",false);
+                LauncherPreferences.PREF_VERTYPE_OLDBETA = sharedPreferences.getBoolean("vertype_oldbeta",false);
+                new RefreshVersionListTask(this).execute();
+            }
+        };
+        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
+        if(profileEnableListener != null) {
+            LauncherPreferences.DEFAULT_PREF.unregisterOnSharedPreferenceChangeListener(profileEnableListener);
+        }
+        profileEnableListener = ((sharedPreferences, key) -> {
+            if(key.equals("enable_profiles")) {
+                LauncherPreferences.PREF_ENABLE_PROFILES = sharedPreferences.getBoolean("enable_profiles",false);
+                this.recreate();
+                profileEnableListener = null;
+            }
+        });
+        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(profileEnableListener);
         System.out.println("call to onResume");
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
@@ -226,20 +251,10 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     }
 
     SharedPreferences.OnSharedPreferenceChangeListener listRefreshListener = null;
+    SharedPreferences.OnSharedPreferenceChangeListener profileEnableListener = null;
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-        if(listRefreshListener == null) {
-            final BaseLauncherActivity thiz = this;
-            listRefreshListener = (sharedPreferences, key) -> {
-                if(key.startsWith("vertype_")) {
-                    System.out.println("Verlist update needed!");
-                    new RefreshVersionListTask(thiz).execute();
-                }
-            };
-        }
-        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
-        new RefreshVersionListTask(this).execute();
         System.out.println("call to onResumeFragments");
         mRuntimeConfigDialog = new MultiRTConfigDialog();
         mRuntimeConfigDialog.prepare(this);

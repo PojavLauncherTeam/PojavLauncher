@@ -88,6 +88,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     @Override
+    protected void onDestroy() {
+        ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
+        super.onDestroy();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launcher_main_v4);
@@ -189,9 +195,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             mVersionSelector.setAdapter(adapterVer);
         }else{
             ProfileAdapter pad = new ProfileAdapter(this);
-            ProfileEditor dialog = new ProfileEditor(this,(name, isNew)->{
+            ProfileEditor dialog = new ProfileEditor(this,(name, isNew, deleting)->{
                 LauncherProfiles.update();
                 if(isNew) {
+                    mVersionSelector.setSelection(pad.resolveProfileIndex(name));
+                }
+                if(deleting) {
                     mVersionSelector.setSelection(0);
                 }
                 pad.notifyDataSetChanged();
@@ -206,6 +215,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                     String profileName = p1.getItemAtPosition(p3).toString();
                     if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
                         dialog.show(profileName);
+                        mVersionSelector.setSelection(0);
                     }else {
                         mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
                         PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile);
@@ -243,9 +253,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         });
         changeLookAndFeel(PREF_HIDE_SIDEBAR);
     }
-    private void setupProfileSelector() {
-
-    }
     private void selectTabPage(int pageIndex){
         viewPager.setCurrentItem(pageIndex);
         setTabActive(pageIndex);
@@ -270,6 +277,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         } finally {
             basicVersionList = versions.toArray(new String[0]);
+            ExtraCore.setValue("lac_version_list",versions);
         }
     }
     private void pickAccount() {

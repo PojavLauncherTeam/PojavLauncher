@@ -54,6 +54,10 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         profileIconView = mainView.findViewById(R.id.vprof_editor_icon);
         bldr.setPositiveButton(R.string.global_save,this::save);
         bldr.setNegativeButton(android.R.string.cancel,(dialog,which)->destroy(dialog));
+        bldr.setNeutralButton(R.string.global_delete,(dialogInterface, i) -> {
+            LauncherProfiles.mainProfileJson.profiles.remove(editingProfile);
+            this.cb.onSave(editingProfile,false, true);
+        });
         bldr.setOnDismissListener(this::destroy);
         dialog = bldr.create();
     }
@@ -84,12 +88,20 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         if(prof.lastVersionId != null && !"latest-release".equals(prof.lastVersionId) && !"latest-snapshot".equals(prof.lastVersionId))
             selectedVersionId = prof.lastVersionId;
-        else if(prof.lastVersionId != null) switch (prof.lastVersionId) {
-            case "latest-release":
-                selectedVersionId = ((Map<String,String>)ExtraCore.getValue("release_table")).get("release");
-            case "latest-snapshot":
-                selectedVersionId = ((Map<String,String>)ExtraCore.getValue("release_table")).get("snapshot");
+        else if(prof.lastVersionId != null) {
+            Map<String,String> releaseTable = (Map<String,String>)ExtraCore.getValue("release_table");
+            if(releaseTable != null) {
+            switch (prof.lastVersionId) {
+                case "latest-release":
+                    selectedVersionId = releaseTable.get("release");
+                case "latest-snapshot":
+                    selectedVersionId = releaseTable.get("snapshot");
+            }
         }else{
+                selectedVersionId = null;
+            }
+        }
+        else{
             if(PojavLauncherActivity.basicVersionList.length > 0) {
                 selectedVersionId = PojavLauncherActivity.basicVersionList[0];
             }
@@ -115,7 +127,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         prof.name = profileNameView.getText().toString();
         prof.lastVersionId = (String)versionSpinner.getSelectedItem();
         LauncherProfiles.mainProfileJson.profiles.put(editingProfile,prof);
-        cb.onSave(editingProfile,isNew);
+        cb.onSave(editingProfile,isNew, false);
         destroy(dialog);
     }
     public void destroy(@NonNull DialogInterface dialog) {
@@ -131,6 +143,6 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         return false;
     }
     public interface EditSaveCallback {
-        void onSave(String name, boolean isNew);
+        void onSave(String name, boolean isNew, boolean isRemoving);
     }
 }

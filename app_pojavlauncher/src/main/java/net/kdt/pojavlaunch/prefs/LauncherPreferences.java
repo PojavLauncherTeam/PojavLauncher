@@ -68,6 +68,7 @@ public class LauncherPreferences
         PREF_SUSTAINED_PERFORMANCE = DEFAULT_PREF.getBoolean("sustainedPerformance", false);
         PREF_GLES_SHRINK_HACK = DEFAULT_PREF.getString("gl4es_shrink_hack", "0");
         PREF_VBO_DISABLE_HACK = DEFAULT_PREF.getBoolean("vbo_disable_hack", false);
+        PREF_ENABLE_PROFILES = DEFAULT_PREF.getBoolean("enable_profiles", false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
