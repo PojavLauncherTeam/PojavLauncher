@@ -245,7 +245,10 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="preference_sustained_performance_title">Attiva modalità performance sostenute</string>
     <string name="preference_sustained_performance_description">Limita il thermal throttling limitando le performance massime</string>
     <string name="preference_back_title">Ritorna indietro</string>
+    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Non rimpicciolire le textures</string>
     <string name="gles_hack_always">Dividi tutte le texture di 2</string>
     <string name="gles_hack_sometimes">Dividi le texture più grandi di /2 o /4</string>
+    <string name="vbo_hack_title">Disattiva VBOs</string>
+    <string name="vbo_hack_description">Aiuta con la compatibilità di alcune vecchie versioni</string>
 </resources>
