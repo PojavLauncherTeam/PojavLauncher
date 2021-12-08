@@ -244,7 +244,10 @@
     <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
     <string name="preference_sustained_performance_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
+    <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
     <string name="gles_hack_always">Teilt alle Texturen durch 2</string>
     <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
+    <string name="vbo_hack_title">VBOs deaktivieren</string>
+    <string name="vbo_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
 </resources>
