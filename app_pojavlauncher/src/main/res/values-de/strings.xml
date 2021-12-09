@@ -248,6 +248,6 @@
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
     <string name="gles_hack_always">Teilt alle Texturen durch 2</string>
     <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
-    <string name="vbo_hack_title">VBOs deaktivieren</string>
+    <string name="vbo_hack_title">Deaktiviere VBOs</string>
     <string name="vbo_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
 </resources>
