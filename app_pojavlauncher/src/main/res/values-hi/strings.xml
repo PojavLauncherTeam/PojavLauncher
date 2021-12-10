@@ -20,12 +20,16 @@
     <string name="login_title_no_saved_account">खाता नहीं मिला</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">यह खाता हटा दिया जाएगा!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <string name="error_fatal">पोजावलांचर अप्रत्याशित क्रैश हो गया है</string>
+    <string name="error_no_version">कोई संस्करण नहीं!</string>
     <string name="error_show_more">ज्यादा देखे</string>
     <string name="error_show_less">कम देखे</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">भंडारण अनुमति को पढ़ने/लिखने की आवश्यकता है!</string>
+    <string name="toast_optifine_success">सफल स्थापित करें</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -33,7 +37,9 @@
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <!-- Global strings -->
+    <string name="global_warinng">चेतावनी</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">बाहर जाएं</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">लॉग आउटपुट</string>
