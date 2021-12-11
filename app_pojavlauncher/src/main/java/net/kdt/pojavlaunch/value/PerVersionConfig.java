@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.value;
 
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import net.kdt.pojavlaunch.Tools;
@@ -16,7 +17,13 @@ public class PerVersionConfig {
         if(configMap == null) {
             pvcFile = new File(Tools.DIR_GAME_HOME,"per-version-config.json");
             if(pvcFile.exists()) {
-                configMap = Tools.GLOBAL_GSON.fromJson(Tools.read(pvcFile.getAbsolutePath()), new TypeToken<HashMap<String,VersionConfig>>() {}.getType());
+                try {
+                    configMap = Tools.GLOBAL_GSON.fromJson(Tools.read(pvcFile.getAbsolutePath()), new TypeToken<HashMap<String, VersionConfig>>() {
+                    }.getType());
+                }catch(JsonSyntaxException ex) {
+                    ex.printStackTrace();
+                    configMap = new HashMap<>();
+                }
             }else{
                 configMap = new HashMap<>();
             }
