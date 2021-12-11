@@ -16,7 +16,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class MCOptionUtils
 {
@@ -56,8 +58,27 @@ public class MCOptionUtils
         parameterMap.put(key,value);
     }
 
+    /** Set an array of String, instead of a simple value. Not supported on all options */
+    public static void set(String key, List<String> values){
+        parameterMap.put(key, values.toString());
+    }
+
     public static String get(String key){
         return parameterMap.get(key);
+    }
+
+    /** @return A list of values from an array stored as a string */
+    public static List<String> getAsList(String key){
+        String value = get(key);
+
+        // Fallback if the value doesn't exist
+        if (value == null) return new ArrayList<>();
+
+        // Remove the edges
+        value = value.replace("[", "").replace("]", "");
+        if (value.isEmpty()) return new ArrayList<>();
+
+        return Arrays.asList(value.split(","));
     }
     
     public static void save() {
@@ -89,6 +110,8 @@ public class MCOptionUtils
         return guiScale;
     }
 
+    /** Add a file observer to reload options on file change
+     * Listeners get notified of the change */
     private static void setupFileObserver(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
             fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
@@ -111,6 +134,7 @@ public class MCOptionUtils
         fileObserver.startWatching();
     }
 
+    /** Notify the option listeners */
     public static void notifyListeners(){
         for(WeakReference<MCOptionListener> weakReference : optionListeners){
             MCOptionListener optionListener = weakReference.get();
@@ -120,10 +144,12 @@ public class MCOptionUtils
         }
     }
 
+    /** Add an option listener, notice how we don't have a reference to it */
     public static void addMCOptionListener(MCOptionListener listener){
         optionListeners.add(new WeakReference<>(listener));
     }
 
+    /** Remove a listener from existence, or at least, its reference here */
     public static void removeMCOptionListener(MCOptionListener listener){
         for(WeakReference<MCOptionListener> weakReference : optionListeners){
             MCOptionListener optionListener = weakReference.get();
