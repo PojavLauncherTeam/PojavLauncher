@@ -33,8 +33,12 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_console">विकास कंसोल</string>
+    <string name="mcl_tab_crash">क्रैश लॉग</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft  खेलने के लिए तैयार %s</string>
+    <string name="mcl_launch_cleancache">कैशे फ़ाइलों की सफाई</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
