@@ -361,6 +361,8 @@ public class JREUtils {
 
                 "-Dext.net.resolvPath=" +new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath(),
 
+                "-Dlog4j2.formatMsgNoLookup=true", //Log4j RCE mitigation
+
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
         };
