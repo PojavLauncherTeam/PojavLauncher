@@ -361,7 +361,7 @@ public class JREUtils {
 
                 "-Dext.net.resolvPath=" +new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath(),
 
-                "-Dlog4j2.formatMsgNoLookup=true", //Log4j RCE mitigation
+                "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
@@ -540,7 +540,6 @@ public class JREUtils {
     public static native void setupExitTrap(Context context);
     // Obtain AWT screen pixels to render on Android SurfaceView
     public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
-
     static {
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");
