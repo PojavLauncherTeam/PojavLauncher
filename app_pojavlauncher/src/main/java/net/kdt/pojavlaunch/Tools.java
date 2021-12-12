@@ -54,7 +54,7 @@ public final class Tools {
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
     public static String DIR_ACCOUNT_OLD;
-    public static String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
+    public static String DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
     public static String DIR_GAME_NEW;
     public static String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
     
@@ -83,11 +83,7 @@ public final class Tools {
     public static void initContextConstants(Context ctx){
         DIR_DATA = ctx.getFilesDir().getParent();
         MULTIRT_HOME = DIR_DATA+"/runtimes";
-        if(SDK_INT >= 29) {
-            DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
-        }else{
-            DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
-        }
+        DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
         DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
         DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
