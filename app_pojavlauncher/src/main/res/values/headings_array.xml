@@ -33,7 +33,7 @@
         <item name="1">@string/test</item>
     </string-array>
     <string-array name="Default_Pathhh">
-        <item>0</item>
-        <item>1</item>
+        <item>/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/</item>
+        <item>/storage/emulated/0/games/PojavLauncher/</item>
     </string-array>
 </resources>
