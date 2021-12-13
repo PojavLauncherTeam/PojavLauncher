@@ -25,7 +25,12 @@
             android:entryValues="@array/Default_Pathhh"
             android:entries="@array/Default_Pathh"
             app2:useSimpleSummaryProvider="true"/>
-
+<SwitchPreference
+            android:title="Test Path ChangeV2"
+            android:summary="Change Defaulth Path to /Android/data/net.kdt.pojavlaunch.debug"
+            android:defaultValue="true"
+            android:key="Path_V2"
+            />
 
     </PreferenceCategory>
 </PreferenceScreen>
