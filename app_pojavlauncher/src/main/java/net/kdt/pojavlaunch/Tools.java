@@ -83,14 +83,23 @@ public final class Tools {
     public static void initContextConstants(Context ctx){
         DIR_DATA = ctx.getFilesDir().getParent();
         MULTIRT_HOME = DIR_DATA+"/runtimes";
-        if (LauncherPreferences.PREF_PATH_CHANGE_HACK){
+       /* if (LauncherPreferences.PREF_PATH_CHANGE_HACK){
         DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
         } else {
           DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
         }
         if(SDK_INT >= 29 && !LauncherPreferences.PREF_PATH_CHANGE_HACK) {
             DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
+        }*/
+        if(SDK_INT >= 29 && LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/games/PojavLauncher/") {
+            DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
         }
+        if (LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/games/PojavLauncher/"{
+DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
+}
+if (LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/"{
+DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
+}
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
         DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
         DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
