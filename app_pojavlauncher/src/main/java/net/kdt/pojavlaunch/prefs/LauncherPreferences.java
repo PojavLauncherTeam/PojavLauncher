@@ -36,6 +36,7 @@ public class LauncherPreferences
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
     public static String PREF_GLES_SHRINK_HACK = "0";
     public static boolean PREF_VBO_DISABLE_HACK = false;
+    public static boolean PREF_PATH_CHANGE_HACK = true;
     public static String PREF_PATH_SET_HACK = "0";
 
     public static void loadPreferences(Context ctx) {
@@ -68,6 +69,7 @@ public class LauncherPreferences
         PREF_GLES_SHRINK_HACK = DEFAULT_PREF.getString("gl4es_shrink_hack", "0");
         PREF_VBO_DISABLE_HACK = DEFAULT_PREF.getBoolean("vbo_disable_hack", false);
         PREF_PATH_SET_HACK = DEFAULT_PREF.getString("Default-Path", "0");
+PREF_PATH_CHANGE_HACK = DEFAULT_PREF.getBoolean("Path_V2", true);
 
 
 /*
