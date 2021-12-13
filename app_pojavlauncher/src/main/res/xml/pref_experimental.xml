@@ -21,7 +21,7 @@
 <androidx.preference.ListPreference
             android:title="Test Path Change"
             android:key="Default-Path"
-            android:defaultValue="0"
+            android:defaultValue="/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/"
             android:entryValues="@array/Default_Pathhh"
             android:entries="@array/Default_Pathh"
             app2:useSimpleSummaryProvider="true"/>
