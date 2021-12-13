@@ -18,6 +18,14 @@
             android:defaultValue="false"
             android:key="vbo_disable_hack"
             />
+<androidx.preference.ListPreference
+            android:title="Test Path Change"
+            android:key="Default-Path"
+            android:defaultValue="0"
+            android:entryValues="@array/Default_Pathh"
+            android:entries="@array/Default_Pathhh"
+            app2:useSimpleSummaryProvider="true"/>
+
 
     </PreferenceCategory>
 </PreferenceScreen>
