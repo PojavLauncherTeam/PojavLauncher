@@ -28,4 +28,12 @@
         <item>1</item>
         <item>4</item>
     </string-array>
+<string-array name="Default_Pathh">
+        <item name="0">@string/head</item>
+        <item name="1">@string/test</item>
+    </string-array>
+    <string-array name="Default_Pathhh">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
