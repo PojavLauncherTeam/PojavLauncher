@@ -83,12 +83,12 @@ public final class Tools {
     public static void initContextConstants(Context ctx){
         DIR_DATA = ctx.getFilesDir().getParent();
         MULTIRT_HOME = DIR_DATA+"/runtimes";
-        if (LauncherPreferences.PREF_PATH_SET_HACK == "1"){
+        if (LauncherPreferences.PREF_PATH_CHANGE_HACK){
         DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
-        } else if (LauncherPreferences.PREF_PATH_SET_HACK == "0") {
+        } else {
           DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
         }
-        if(SDK_INT >= 29 && LauncherPreferences.PREF_PATH_SET_HACK == "0") {
+        if(SDK_INT >= 29 && !LauncherPreferences.PREF_PATH_CHANGE_HACK) {
             DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
         }
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
