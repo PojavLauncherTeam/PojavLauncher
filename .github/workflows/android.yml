@@ -36,34 +36,7 @@ jobs:
         path: gl4es/libs
         key: gl4es-android-shared-nodbg-test1-2-${{ steps.gl4es-sha.outputs.sha }}
 
-    - name: Get gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: 'ptitSeb/gl4es'
-        path: 'gl4es'
-
-    - name: Build gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
-        cd gl4es
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global user.name "github-actions"
-        git remote add upstream https://github.com/PojavLauncherTeam/gl4es
-        git fetch upstream
-        git checkout master
-        git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
-        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
-    - name: Install gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      run: |
-        cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
-        mv gl4es ..
-        git add .
-        git commit -am "CI: Update gl4es"
-        git push
     
     - name: Get vgpu latest commit hash
       id: vgpu-sha
@@ -77,30 +50,7 @@ jobs:
         path: vgpu/libs
         key: vgpu-android-shared-1-${{ steps.vgpu-sha.outputs.sha }}
         
-    - name: Get vgpu
-      if: steps.vgpu-cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: 'PojavLauncherTeam/VGPU'
-        path: 'vgpu'
-        
-    - name: Build vgpu
-      if: steps.vgpu-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
-        cd vgpu
-        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
-    - name: Install vgpu
-      if: steps.vgpu-cache.outputs.cache-hit != 'true'
-      run: |
-        cp -R vgpu/libs/* app_pojavlauncher/src/main/jniLibs/
-        mv vgpu ..
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global user.name "github-actions"
-        git add .
-        git commit -am "CI: Update vgpu"
-        git push
     
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
