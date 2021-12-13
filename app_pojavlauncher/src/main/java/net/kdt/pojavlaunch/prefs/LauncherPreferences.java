@@ -36,7 +36,7 @@ public class LauncherPreferences
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
     public static String PREF_GLES_SHRINK_HACK = "0";
     public static boolean PREF_VBO_DISABLE_HACK = false;
-
+    public static String PREF_PATH_SET_HACK = "0";
 
     public static void loadPreferences(Context ctx) {
         //Required for the data folder.
