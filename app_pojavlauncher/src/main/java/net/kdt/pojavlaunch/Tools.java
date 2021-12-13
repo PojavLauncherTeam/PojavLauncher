@@ -94,10 +94,10 @@ public final class Tools {
         if(SDK_INT >= 29 && LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/games/PojavLauncher/") {
             DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
         }
-        if (LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/games/PojavLauncher/"{
+        if (LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/games/PojavLauncher/" && !SDK_INT >= 29){
 DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
 }
-if (LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/"{
+if (LauncherPreferences.PREF_PATH_SET_HACK == "/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/" && !SDK_INT >= 29){
 DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
 }
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
