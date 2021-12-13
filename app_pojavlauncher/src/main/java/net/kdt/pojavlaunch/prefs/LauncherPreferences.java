@@ -37,7 +37,7 @@ public class LauncherPreferences
     public static String PREF_GLES_SHRINK_HACK = "0";
     public static boolean PREF_VBO_DISABLE_HACK = false;
     public static boolean PREF_PATH_CHANGE_HACK = true;
-    public static String PREF_PATH_SET_HACK = "0";
+    public static String PREF_PATH_SET_HACK = "/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/";
 
     public static void loadPreferences(Context ctx) {
         //Required for the data folder.
@@ -68,7 +68,7 @@ public class LauncherPreferences
         PREF_SUSTAINED_PERFORMANCE = DEFAULT_PREF.getBoolean("sustainedPerformance", false);
         PREF_GLES_SHRINK_HACK = DEFAULT_PREF.getString("gl4es_shrink_hack", "0");
         PREF_VBO_DISABLE_HACK = DEFAULT_PREF.getBoolean("vbo_disable_hack", false);
-        PREF_PATH_SET_HACK = DEFAULT_PREF.getString("Default-Path", "0");
+        PREF_PATH_SET_HACK = DEFAULT_PREF.getString("Default-Path", "/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/");
 PREF_PATH_CHANGE_HACK = DEFAULT_PREF.getBoolean("Path_V2", true);
 
 
