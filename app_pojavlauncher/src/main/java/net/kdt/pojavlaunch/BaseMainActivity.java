@@ -62,7 +62,6 @@ public class BaseMainActivity extends BaseActivity {
 
     protected void initLayout(int resId) {
         setContentView(resId);
-        ProfileAdapter.clearIconCache();
         try {
             Logger.getInstance().reset();
             // FIXME: is it safe fot multi thread?

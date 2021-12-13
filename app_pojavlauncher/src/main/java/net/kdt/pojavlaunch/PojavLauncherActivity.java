@@ -91,6 +91,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     protected void onDestroy() {
         ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
         super.onDestroy();
+        ProfileAdapter.clearIconCache();
+        Log.i("LauncherActivity","Destroyed!");
     }
 
     @Override
