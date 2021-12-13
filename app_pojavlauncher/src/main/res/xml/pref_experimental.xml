@@ -22,8 +22,8 @@
             android:title="Test Path Change"
             android:key="Default-Path"
             android:defaultValue="0"
-            android:entryValues="@array/Default_Pathh"
-            android:entries="@array/Default_Pathhh"
+            android:entryValues="@array/Default_Pathhh"
+            android:entries="@array/Default_Pathh"
             app2:useSimpleSummaryProvider="true"/>
 
 
