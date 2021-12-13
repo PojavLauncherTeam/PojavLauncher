@@ -283,7 +283,8 @@
     <string name="gles_hack_none">Don\'t shrink textures</string>
     <string name="gles_hack_always">Divides all textures by 2</string>
     <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>
-
+<string name="test">/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/</string>
+    <string name="head">/storage/emulated/0/games/PojavLauncher/</string>
     <string name="vbo_hack_title">Disable VBOs</string>
     <string name="vbo_hack_description">Help with compatibility on some old versions</string>
 
