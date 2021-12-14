@@ -29,8 +29,8 @@
         <item>4</item>
     </string-array>
 <string-array name="Default_Pathh">
-        <item name="0">@string/head</item>
-        <item name="1">@string/test</item>
+        <item name="0">@string/test</item>
+        <item name="1">@string/head</item>
     </string-array>
     <string-array name="Default_Pathhh">
         <item>/storage/emulated/0/Android/data/net.kdt.pojavlaunch.debug/</item>
