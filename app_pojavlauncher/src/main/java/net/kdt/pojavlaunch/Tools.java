@@ -151,7 +151,9 @@ public final class Tools {
         }
 */
 
-        javaArgList.add("-Dlog4j.configurationFile=" + Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id);
+        if (versionInfo.logging != null) {
+            javaArgList.add("-Dlog4j.configurationFile=" + Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id);
+        }
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
