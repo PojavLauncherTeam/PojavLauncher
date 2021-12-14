@@ -131,30 +131,30 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 File outLib;
 
                 // Patch the Log4J RCE (CVE-2021-44228)
-                if (mVersion.logging != null) {
-                    outLib = new File(Tools.DIR_GAME_NEW, mVersion.logging.client.file.id);
+                if (verInfo.logging != null) {
+                    outLib = new File(Tools.DIR_GAME_NEW, verInfo.logging.client.file.id);
                     if (outLib.exists()) {
                         if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA) {
-                            if(!Tools.compareSHA1(outLib,mVersion.logging.client.file.sha1)) {
+                            if(!Tools.compareSHA1(outLib,verInfo.logging.client.file.sha1)) {
                                 outLib.delete();
-                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,mVersion.logging.client.file.id));
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,verInfo.logging.client.file.id));
                             }else{
-                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,mVersion.logging.client.file.id));
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,verInfo.logging.client.file.id));
                             }
-                        } else if (outLib.length() != mVersion.logging.client.file.size) {
+                        } else if (outLib.length() != verInfo.logging.client.file.size) {
                             // force updating anyways
                             outLib.delete();
                         }
                     }
                     if (!outLib.exists()) {
-                        publishProgress("0", mActivity.getString(R.string.mcl_launch_downloading, mVersion.logging.client.file.id));
+                        publishProgress("0", mActivity.getString(R.string.mcl_launch_downloading, verInfo.logging.client.file.id));
                         Tools.downloadFileMonitored(
-                            mVersion.logging.client.file.url,
+                            verInfo.logging.client.file.url,
                             outLib.getAbsolutePath(),
                             new Tools.DownloaderFeedback() {
                                 @Override
                                 public void updateProgress(int curr, int max) {
-                                    publishDownloadProgress(mVersion.logging.client.file.id, curr, max);
+                                    publishDownloadProgress(verInfo.logging.client.file.id, curr, max);
                                 }
                             }
                         );
