@@ -668,7 +668,8 @@ void pojavTerminate() {
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
     potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
-    char *ptrStr = asprintf("%ld", (long) potatoBridge.androidWindow);
+    char *ptrStr;
+    asprintf(&ptrStr, "%ld", (long) potatoBridge.androidWindow);
     setenv("POJAV_WINDOW_PTR", ptrStr, 1);
     free(ptrStr);
 }
