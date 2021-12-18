@@ -668,16 +668,15 @@ void pojavTerminate() {
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
     potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
-    char *ptrStr = malloc(sizeof(long));
-    sprintf(ptrStr, "%ld", (long) potatoBridge.androidWindow);
+    char *ptrStr = asprintf("%ld", (long) potatoBridge.androidWindow);
     setenv("POJAV_WINDOW_PTR", ptrStr, 1);
+    free(ptrStr);
 }
 
 void* pojavGetCurrentContext() {
     switch (config_renderer) {
         case RENDERER_GL4ES:
             return (void *)eglGetCurrentContext_p();
-
         case RENDERER_VIRGL:
         case RENDERER_VK_ZINK:
             return (void *)OSMesaGetCurrentContext_p();
