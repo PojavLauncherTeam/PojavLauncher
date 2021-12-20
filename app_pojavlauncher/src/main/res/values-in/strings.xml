@@ -2,18 +2,18 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
-    <string name="app_short_name">Peluncur Pojav</string>
-    <string name="app_motd">Luncurkan Minecraft: Java Edition di perangkat Anda!</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Mainkan Minecraft: Java Edition di perangkat Anda!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email atau username</string>
+    <string name="login_online_username_hint">Email atau nama pengguna</string>
     <string name="login_online_password_hint">Kata sandi</string>
-    <string name="login_online_check_keeplogin">Tetap masuk</string>
+    <string name="login_online_check_keeplogin">Buat saya tetap masuk</string>
     <string name="login_online_login_label">Masuk</string>
     <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_error_short_username">Username minimal harus ada 3 karakter</string>
-    <string name="login_error_exist_username">Username ini sudah ada</string>
+    <string name="login_error_exist_username">Nama pengguna ini sudah ada</string>
     <string name="login_microsoft">Login Microsoft</string>
     <string name="login_select_account">Pilih akun</string>
     <string name="login_title_no_saved_account">Tidak ada akun yang ditemukan!</string>
@@ -26,12 +26,12 @@
     <string name="alerttitle_install_jre">Pasang Runtime Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Pilih sebuah instaler mod</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher tiba-tiba crash</string>
+    <string name="error_fatal">PojavLauncher tiba-tiba crash tanpa diduga</string>
     <string name="error_no_version">Versi tidak ada!</string>
     <string name="error_show_more">Selengkapnya</string>
     <string name="error_show_less">Tampilkan Sedikit</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan perangkat dibutuhkan!</string>
+    <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan dibutuhkan!</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
     <string name="toast_uninstalljre_done">Selesai mencopot Runtime Java</string>
     <!--
@@ -39,14 +39,14 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Berita</string>
-    <string name="mcl_tab_console">Konsol debug</string>
-    <string name="mcl_tab_crash">Catatan cras</string>
+    <string name="mcl_tab_console">Konsol pengembangan</string>
+    <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Terhubung</string>
     <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Siap bermain Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Membersihkan berkas-berkas cache</string>
+    <string name="mcl_version_msg">Siap untuk bermain Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Membersihkan file cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_downloading_progress">"Mengunduh %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
@@ -58,8 +58,8 @@
     <string name="mcl_option_about">Tentang</string>
     <string name="mcl_setting_title_uninstalljre">Copot Runtime Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Peluncur butuh di buka ulang] Ini membiarkan kamu memasang ulang Runtime Java</string>
-    <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform window.</string>
-    <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform window. Membutuhkan Android 7.0+</string>
+    <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform</string>
+    <string name="mcl_setting_subtitle_freeform">Luncurkan minecraft dalam mode freeform. Membutuhkan Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Sembunyikan sidebar</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Orang-orang nostalgia yang lebih memilih UI v1 lama mungkin akan menyukai ini. Memberi kamu sebuah experimen layar penuh.</string>
     <string name="mcl_setting_title_ignore_notch">Abaikan notch</string>
@@ -147,7 +147,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3rd</string>
+    <string name="control_thirdperson">Ke-3</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mouse</string>
     <string name="control_mouseoff">Mouse: mati</string>
