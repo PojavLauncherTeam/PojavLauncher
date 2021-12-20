@@ -240,4 +240,6 @@
     <string name="preference_experimental_title">Barang Eksperimental</string>
     <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tanpa dukungan.</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
+    <string name="vbo_hack_title">Matikan VBOs</string>
+    <string name="vbo_hack_description">Membantu kesesuaian di beberapa versi lama</string>
 </resources>
