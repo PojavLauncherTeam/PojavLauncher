@@ -236,7 +236,7 @@
     <string name="preference_control_title">Керування персоналізацією</string>
     <string name="preference_control_description">Типи жестів, триґери і масштабування</string>
     <string name="preference_java_title">Оптимізація Java</string>
-    <string name="preference_java_description">Версія Java, JVM Arguments, і об\'єм оперативної пам\'яті</string>
+    <string name="preference_java_description">Версія Java, аргументи JVM, і об\'єм RAM</string>
     <string name="preference_misc_title">Інші параметри</string>
     <string name="preference_misc_description">Список версій, та перевірка lib-файлів</string>
     <string name="preference_experimental_title">Експериментальні штуки</string>
