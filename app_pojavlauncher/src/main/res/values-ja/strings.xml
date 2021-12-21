@@ -12,12 +12,17 @@
     <string name="login_online_check_keeplogin">ログインを保持する</string>
     <string name="login_online_login_label">ログイン</string>
     <string name="login_offline_label">オフラインアカウントでログイン</string>
+    <string name="login_error_invalid_username">ユーザー名が無効です。ユーザー名は 3〜16 文字でなければなりません。半角英数字 (A-Z, a-z, 0-9) およびアンダースコア (_) のみで構成されてる必要があります。</string>
     <string name="login_error_exist_username">このユーザー名は既に存在しています</string>
+    <string name="login_error_offline_password">オフラインアカウントにパスワードを含めることはできません！</string>
+    <string name="login_microsoft">Microsoft でログイン</string>
     <string name="login_select_account">アカウントを選択</string>
+    <string name="login_title_no_saved_account">アカウントが見つかりません！</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">このアカウントが削除されます！</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Mod インストーラーを選択</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher が異常終了しました</string>
     <string name="error_no_version">バージョンがありません</string>
@@ -26,13 +31,17 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">ストレージへの読み書き権限が必要です</string>
     <string name="toast_optifine_success">インストールが完了しました</string>
+    <string name="toast_uninstalljre_done">Java Runtime のアンインストールが完了しました</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">ニュース</string>
     <string name="mcl_tab_console">開発コンソール</string>
     <string name="mcl_tab_crash">クラッシュログ</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">接続済</string>
+    <string name="mcl_account_offline">オフライン</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s をプレイする準備ができました</string>
     <string name="mcl_launch_cleancache">キャッシュファイルを消去中</string>
@@ -42,11 +51,30 @@
     <string name="mcl_option_customcontrol">カスタムコントロール</string>
     <string name="mcl_option_settings">設定</string>
     <string name="mcl_option_about">このアプリについて</string>
+    <string name="mcl_setting_title_uninstalljre">Java Runtime をアンインストールする</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[ランチャー再起動必須] Java Runtime を再インストールできます</string>
     <string name="mcl_setting_title_freeform">Freeform モードで Minecraft を起動</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft をフローティングウィンドウで起動します。Android 7.0以上が必要です。</string>
+    <string name="mcl_setting_title_hide_sidebar">サイドバーを隠す</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">ノスタルジックな方は昔のバージョン1のUIを好むかもしれません。フルスクリーンのエクスペリエンスを提供します。</string>
+    <string name="mcl_setting_title_ignore_notch">ノッチを無視する</string>
+    <string name="mcl_setting_subtitle_ignore_notch">ノッチを無視してその下に画面を拡張します。\nより没入感のあるエクスペリエンスを提供します。</string>
     <string name="mcl_setting_title_longpresstrigger">長押しとして判定するまでの時間 (ミリ秒)</string>
     <string name="mcl_setting_subtitle_longpresstrigger">長押しでブロックを破壊したりアイテムを捨てたりできますが、タッチし始めてから長押しと判定するまでの時間を変更します。</string>
+    <string name="mcl_setting_title_backtorightmouse">戻るボタンをマウスの右クリックとして扱う</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">一部のデバイスでは右クリックを戻るボタンとして扱うので、外部マウスを使用している場合はこれを有効にする必要があります。</string>
+    <string name="mcl_setting_title_mousescale">カーソルのサイズ</string>
+    <string name="mcl_setting_subtitle_mousescale">仮想カーソルのサイズを変更します。</string>
+    <string name="mcl_setting_title_javaargs">JVM 起動引数</string>
     <string name="mcl_setting_category_general">一般的な設定</string>
+    <string name="mcl_setting_category_scaling">スケーリングの設定</string>
+    <string name="mcl_setting_category_renderer">レンダラー</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">バージョンリストに表示する種類</string>
     <string name="mcl_setting_veroption_release">正式</string>
     <string name="mcl_setting_veroption_snapshot">スナップショット</string>
@@ -63,10 +91,14 @@
     <string name="global_clone">複製</string>
     <string name="global_restart">再起動</string>
     <string name="global_save">保存</string>
+    <string name="global_unpacking">%s を解凍中</string>
     <string name="global_error_field_empty">このフィールドは入力必須です</string>
+    <string name="global_waiting">お待ちください</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">アプリケーション/ゲームはコード %d で終了しました</string>
     <string name="mcn_exit_call">閉じる</string>
     <string name="mcn_exit_confirm">強制終了しますか？</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 がインストールされていません！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">UI</string>
     <string name="control_keyboard">キーボード</string>
@@ -83,20 +115,57 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">強制終了</string>
     <string name="control_viewout">ログ</string>
+    <string name="control_adebug">入力デバッグ</string>
     <string name="control_customkey">カスタムキーコードを送信する</string>
+    <string name="control_scaleup">拡大</string>
+    <string name="control_scaledown">縮小</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">操作の読み込み</string>
+    <string name="import_control_invalid_file">ファイルが無効または破損しています。</string>
+    <string name="import_control_import_button">操作の読み込み</string>
+    <string name="import_control_done">読み込み完了</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_edit">%s を編集中</string>
+    <string name="customctrl_remove">%s を削除しますか？</string>
     <string name="customctrl_keyname">キーコード</string>
+    <string name="customctrl_toggle">切り替え可能</string>
+    <string name="customctrl_size">サイズ</string>
+    <string name="customctrl_size_width">横幅</string>
+    <string name="customctrl_size_height">縦幅</string>
+    <string name="customctrl_mapping">割り当て</string>
+    <string name="customctrl_orientation">向き</string>
+    <string name="customctrl_background_color">背景色</string>
     <string name="customctrl_addbutton">ボタンを追加</string>
     <string name="customctrl_selectdefault">デフォルトの Control json を選択</string>
     <string name="main_options">設定</string>
     <string name="main_play">プレイ</string>
+    <string name="main_welcome">ようこそ、 %s さん</string>
     <string name="main_infodev">高度な情報</string>
     <string name="main_switchuser">ユーザー切替</string>
     <string name="main_version">バージョン:</string>
     <string name="main_nocrash">クラッシュは検出されていません</string>
     <string name="main_nolog">ログは空です。</string>
+    <string name="auto_ram_subtitle">メモリの自動調整を有効にする</string>
+    <string name="auto_ram_title">自動RAM調整</string>
+    <string name="autoram_info_msg">メモリを %d MB に設定しました</string>
+    <string name="mcl_setting_check_libraries">ダウンロード後にライブラリを確認する</string>
+    <string name="mcl_setting_title_mousespeed">カーソルの速度</string>
+    <string name="mcl_setting_subtitle_mousespeed">仮想カーソルの速度を変更します</string>
+    <string name="multirt_config_add">新規追加</string>
+    <string name="multirt_progress_caching">キャッシュ中...</string>
+    <string name="multirt_config_setdefault">デフォルトに設定</string>
+    <string name="multirt_config_setdefault_already">デフォルト</string>
+    <string name="pvc_gameDirectory">ゲームのディレクトリ</string>
+    <string name="pvc_jvmArgs">JVM 引数</string>
+    <string name="control_offset_title">オフセットを制御する</string>
+    <string name="control_top_offset">上辺のオフセット: </string>
+    <string name="control_right_offset">右辺のオフセット: </string>
+    <string name="control_bottom_offset">下辺のオフセット: </string>
+    <string name="control_left_offset">左辺のオフセット: </string>
+    <string name="preference_video_title">ビデオとレンダラー</string>
+    <string name="preference_video_description">解像度、スケーリングタイプ、レンダラー</string>
+    <string name="preference_experimental_title">実験的なもの</string>
 </resources>
