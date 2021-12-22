@@ -122,11 +122,11 @@
     <string name="mcl_tab_profiles">Профили</string>
     <string name="mcl_profile_editor_title_profile">ПРОФИЛИ</string>
     <string name="mcl_profile_editor_title_version">ВЕРСИИ</string>
-    <string name="mcl_profile_editor_edit_text_title">Profile name</string>
+    <string name="mcl_profile_editor_edit_text_title">Название профиля</string>
     <string name="mcl_profile_editor_save">сохранить</string>
-    <string name="profedit_selected_version">Selected version: %s</string>
-    <string name="profedit_selected_profile">Selected profile: %s</string>
-    <string name="global_new">New</string>
+    <string name="profedit_selected_version">Выбранная версия: %s</string>
+    <string name="profedit_selected_profile">Выбранный профиль: %s</string>
+    <string name="global_new">Новое</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошел сбой приложения/игры с кодом %d</string>
     <string name="mcn_exit_call">Выйти</string>
