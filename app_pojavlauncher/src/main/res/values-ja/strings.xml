@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Minecraft: Java Editionをあなたのデバイスで楽しもう</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">メールアドレス・ユーザー名</string>
+    <string name="login_online_password_hint">パスワード</string>
+    <string name="login_online_check_keeplogin">ログインを保持する</string>
+    <string name="login_online_login_label">ログイン</string>
+    <string name="login_error_exist_username">このユーザー名は既に存在しています</string>
+    <string name="login_select_account">アカウントを選択</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <string name="warning_remove_account">このアカウントが削除されます</string>
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncherが異常終了しました</string>
+    <string name="error_no_version">バージョンがありません</string>
+    <string name="error_show_more">詳細を表示</string>
+    <string name="error_show_less">詳細を閉じる</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">ストレージへの読み書き権限が必要です</string>
+    <string name="toast_optifine_success">インストールが完了しました</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_console">開発コンソール</string>
+    <string name="mcl_tab_crash">クラッシュログ</string>
+    <!-- MCLauncherActivity: Account status -->
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %sがプレイ可能</string>
+    <string name="mcl_launch_downloading">%sをダウンロード中</string>
+    <string name="mcl_launch_download_assets">リソースのダウンロードを準備中</string>
+    <string name="mcl_option_settings">アプリの設定</string>
+    <string name="mcl_option_about">このアプリについて</string>
+    <!-- Global strings -->
+    <!-- MainActivity: strings -->
+    <!-- MainActivity: Control buttons -->
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">標準出力</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+</resources>

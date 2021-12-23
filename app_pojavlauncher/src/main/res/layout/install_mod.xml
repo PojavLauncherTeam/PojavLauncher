@@ -14,16 +14,16 @@
 			android:id="@+id/installmod_surfaceview"/>
 
 		<LinearLayout
-			android:layout_height="match_parent"
+			android:id="@+id/main_touchpad"
 			android:layout_width="match_parent"
-			android:orientation="vertical"
-			android:id="@+id/main_touchpad">
+			android:layout_height="match_parent"
+			android:orientation="vertical">
 
 			<ImageView
-				android:layout_height="27dp"
+				android:id="@+id/main_mouse_pointer"
 				android:layout_width="18dp"
-				android:src="@drawable/mouse_pointer"
-				android:id="@+id/main_mouse_pointer"/>
+				android:layout_height="27dp"
+				android:src="@drawable/mouse_pointer" />
 
 		</LinearLayout>
 
@@ -42,7 +42,16 @@
 			android:background="@drawable/control_button"
 			android:text="@string/control_viewout"
 			android:onClick="openLogOutput"
-			android:layout_toLeftOf="@id/installmod_btn2"/>
+			android:layout_toLeftOf="@id/installmod_btn2"
+			android:id="@+id/installmod_btn3"/>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:background="@drawable/control_button"
+			android:text="@string/control_mouse"
+			android:onClick="toggleVirtualMouse"
+			android:layout_toLeftOf="@id/installmod_btn3"/>
 
 		<Button
 			android:id="@+id/installmod_scale_down"
@@ -81,58 +90,12 @@
 
 	</RelativeLayout>
 
-	<LinearLayout
-		android:id="@+id/content_log_layout"
+	<com.kdt.LoggerView
+		android:id="@+id/launcherLoggerView"
+		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_width="wrap_content"
 		android:visibility="gone"
-		android:orientation="vertical">
-
-		<RelativeLayout
-			android:layout_height="42dp"
-			android:layout_width="match_parent"
-			android:gravity="center_vertical"
-			android:background="#555555">
-
-			<TextView
-				android:layout_height="wrap_content"
-				android:layout_width="wrap_content"
-				android:text="@string/control_viewout"
-				android:paddingLeft="15dp"
-				android:textAppearance="?android:attr/textAppearanceMedium"
-				android:layout_centerVertical="true"/>
-
-			<ImageView
-				android:layout_height="42dp"
-				android:layout_width="42dp"
-				android:src="@android:drawable/ic_delete"
-				android:onClick="closeLogOutput"
-				android:layout_alignParentRight="true"
-				android:id="@+id/content_log_close_button"/>
-
-			<ToggleButton
-				android:layout_height="wrap_content"
-				android:layout_width="wrap_content"
-				android:layout_toLeftOf="@id/content_log_close_button"
-				android:id="@+id/content_log_toggle_log"/>
-
-		</RelativeLayout>
-
-		<ScrollView
-			android:layout_height="match_parent"
-			android:layout_width="match_parent"
-			android:id="@+id/content_log_scroll"
-			android:alpha="0.8"
-			android:background="#000000">
-
-			<TextView
-				android:layout_height="wrap_content"
-				android:layout_width="match_parent"
-				android:textIsSelectable="true"/>
-
-		</ScrollView>
-
-	</LinearLayout>
+		/>
 
 </FrameLayout>
 

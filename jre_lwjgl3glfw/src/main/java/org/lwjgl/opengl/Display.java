@@ -82,12 +82,15 @@ public class Display {
 
         mode = desktopDisplayMode = new DisplayMode(monitorWidth, monitorHeight, monitorBitPerPixel, monitorRefreshRate);
         LWJGLUtil.log("Initial mode: " + desktopDisplayMode);
-
-        // additional code workaround not called yet!
-        LWJGLUtil.log("Calling Display.create()");
-        try {
-            create();
-        } catch (LWJGLException e) {throw new RuntimeException(e);}
+	if("true".equals(System.getProperty("org.lwjgl.opengl.disableStaticInit"))) {
+		LWJGLUtil.log("Static Display.create() disabled");
+	}else{
+        	// additional code workaround not called yet!
+        	LWJGLUtil.log("Calling Display.create()");
+        	try {
+        	    create();
+        	} catch (LWJGLException e) {throw new RuntimeException(e);}
+	}
     }
     
     public static void setSwapInterval(int value) {
@@ -412,7 +415,7 @@ public class Display {
                 }
             }
         };
-        drawable.context = new ContextGL(null, null, null);
+        drawable.context = new ContextGL(Window.handle);
         drawable.context.makeCurrent();
         Display.drawable = drawable;
         context = org.lwjgl.opengl.GLContext.createFromCurrent();
@@ -1025,6 +1028,10 @@ public class Display {
         }
     }
 
+    public static void setDisplayConfiguration(float gamma, float brightness, float contrast) throws LWJGLException {
+        // ignore call, this is required for a1.1.1
+    }
+
     public static java.lang.String getAdapter() {
         // TODO
         return "GeNotSupportedAdapter";
@@ -1044,7 +1051,8 @@ public class Display {
      */
     public static void sync(int fps) {
         if (vsyncEnabled)
-            Sync.sync(fps);
+            Sync.sync(60);
+        else Sync.sync(fps);
     }
 
     public static Drawable getDrawable() {

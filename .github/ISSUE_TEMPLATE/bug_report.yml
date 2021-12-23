@@ -1,0 +1,70 @@
+name: Bug report
+description: ' Create a report to help us improve '
+title: "[BUG] <Short description>"
+labels: [bug]
+body:
+- type: textarea
+  id: version
+  attributes:
+    label: Describe the bug
+    description: >-
+      A clear and concise description of what the bug is.
+    placeholder: 'Example: Application exited with code 1'
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: The log file and images/videos
+    description: |
+      The log file called `latestlog.txt` is located under `Android/data/net.kdt.pojavlaunch/files`, `games/PojavLauncher/` or `games/PojavLauncher/.minecraft`. You may need to activate an option in your file explorer to see hidden files and folders. |
+      You can also upload here screenshots or videos of the buggy behavior, if possible.
+      
+      Tip: You can attach files by clicking this area to highlight it and then dragging files in or select them on 🖼 option at the toolbar.
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: Steps To Reproduce
+    description: Steps to reproduce the behavior.
+    placeholder: |
+      1. Start PojavLauncher
+      ... *(your set of actions to reproduce the bug)*
+    render: markdown
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Expected Behavior
+    description: A concise description of what you expected to happen.
+    placeholder: 'Example: I expect the game to launches'
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Platform
+    description: |
+      Examples:
+        - **Device model**: Mi 8 Pro 8/128G
+        - **CPU architecture**: aarch64
+        - **Android version**: 10
+        - **PojavLauncher version**: [Latest Release || version 3.3.1.1_rel_20210206 ]
+    value: |
+        - Device model: 
+        - CPU architecture: 
+        - Android version: 
+        - PojavLauncher version: 
+    render: markdown
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Anything else?
+    description: |
+      Add any other context about the problem here.
+  validations:
+    required: false

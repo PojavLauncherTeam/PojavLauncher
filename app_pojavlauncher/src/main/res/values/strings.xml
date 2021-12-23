@@ -17,7 +17,7 @@
 
     <string name="login_offline_label">Login as offline account</string>
 
-    <string name="login_error_short_username">Username must be at least 3 characters</string>
+    <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
     <string name="login_error_exist_username">This username already exist</string>
     <string name="login_error_offline_password">Offline account can\'t include password!</string>
 
@@ -99,52 +99,40 @@
     <string name="mcl_setting_category_general">General settings</string>
     <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
-    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
+    <string name="global_warinng">Warning</string>
     <string name="global_load">Load</string>
     <string name="global_name">Name</string>
     <string name="global_remove">Remove</string>
+    <string name="global_clone">Clone</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Save</string>
     <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Wait</string>
 
-    <!--
-    <string name="mcl_about">
-    %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
-    " - by Khanh Duy Tran (based from \"Boardwalk\" app)\n" +
-    "Using libraries:\n" +
-    " • LWJGL " + org.lwjgl.Sys.getVersion() + "\n" +
-    //" • Boardwalk memory manager (not used now).\n" +
-    " • gl4es: OpenGL for OpenGL ES devices by lunixbochs and ptitSeb.\n" +
-    " • OpenJDK" +
-    "\n" +
-    "* Notes:\n" +
-    " - This app is currently BETA, it will not be stable.\n" +
-    //"* This app will unstable on Android 7.0 or higher devices.\n" +
-    " - This app only use LWJGL2 and don't have a JRE8 desugar, so doesn't support 1.13 or higher versions.\n" +
-    " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
-    </string>
-    -->
-    
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game exited with code %d</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
     <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer is not supported on this device!</string>
 
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -173,6 +161,14 @@
     <string name="control_customkey">Send custom keycode</string>
     <string name="control_scaleup">Scale up</string>
     <string name="control_scaledown">Scale down</string>
+
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import controls</string>
+    <string name="import_control_invalid_file">Invalid or corrupted file</string>
+    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">File is being verified, please wait and try again…</string>
+    <string name="import_control_invalid_name">Invalid name or file already exists</string>
+    <string name="import_control_done">Importation done</string>
 <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -185,21 +181,34 @@
     <string name="customctrl_size">Size</string>
     <string name="customctrl_size_width">Width</string>
     <string name="customctrl_size_height">Height</string>
+
+    <string name="customctrl_mapping">Mapping</string>
+    <string name="customctrl_orientation">Orientation</string>
+    <string name="customctrl_background_color">Background color</string>
+    <string name="customctrl_corner_radius">Corner radius</string>
+    <string name="customctrl_stroke_width">Stroke width</string>
+    <string name="customctrl_stroke_color">Stroke color</string>
     
-    <string name="customctrl_dynamicpos">Dynamic position</string>
+    <string name="customctrl_dynamicpos">Manual Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y</string>
 
     <string name="customctrl_transparency_bg">Background transparency</string>
+    <string name="customctrl_button_opacity">Button Opacity</string>
 
     <string name="customctrl_keycombine">Key combination</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Add button</string>
-    
+    <string name="customctrl_addbutton_drawer">Add button drawer</string>
+    <string name="customctrl_addsubbutton">Add sub-button</string>
+    <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added !</string>
+
     <string name="customctrl_selectdefault">Select default Control json</string>
-    
+
+
+    <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
     <string name="main_welcome">Welcome, %s</string>
@@ -222,8 +231,60 @@
     <string name="mcl_setting_title_mousespeed">Mouse Speed</string>
     <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_swipeable">Swipeable</string>
     <string name="customctrl_rounded">Rounded</string>
     <string name="memory_warning_msg">The current amount of free RAM (%d) is lower than allocated RAM (%d), which may lead to crashes. Change the allocation if the game crashes.</string>
     <string name="mcl_memory_allocation">Memory allocation</string>
     <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft</string>
+    <string name="multirt_java_ver">%s (Java %d)</string>
+    <string name="multirt_runtime_corrupt">Corrupted Java Runtime</string>
+    <string name="multirt_config_title">Java VMs</string>
+    <string name="multirt_config_add">Add new</string>
+    <string name="multirt_config_add_subtitle">Import new Java VM</string>
+    <string name="multirt_title">Runtime Manager</string>
+    <string name="multirt_subtitle">Manage installed Java VMs</string>
+    <string name="multirt_progress_caching">Caching...</string>
+    <string name="multirt_config_setdefault">Set default</string>
+    <string name="multirt_config_setdefault_already">Default</string>
+    <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed</string>
+    <string name="multirt_nocompartiblert">Can\'t find any compartible Java Runtime</string>
+
+    <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, GL4ES wrapper doesn\'t fully support it at the moment, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
+    <string name="compat_11x_playanyway">Play anyway</string>
+    <string name="pvc_gameDirectory">Game directory</string>
+    <string name="pvc_jvmArgs">JVM arguments</string>
+    <string name="pvc_title">Per-version settings</string>
+    <string name="storage_warning_title">Storage changes</string>
+    <string name="storage_warning_text"> <![CDATA[Due to Google\'s new scoped storage enforcements added in Android 10 and higher, we are required to move the game directory into an app-private folder.<br /> The new folder for Pojav files is <b>Android/data/%s/files/</b> (also accessible using a storage provider in your file explorer).<br /> If you need to copy your game files, please copy everything from the original folder at <b>games/PojavLauncher</b> manually.]]></string>
+
+    <string name="control_offset_title">Control offset</string>
+    <string name="control_top_offset">Top offset: </string>
+    <string name="control_right_offset">right offset: </string>
+    <string name="control_bottom_offset">bottom offset: </string>
+    <string name="control_left_offset">left offset: </string>
+
+    <string name="preference_control_offset_title">Control side offsets</string>
+    <string name="preference_control_offset_description">Set a custom offset to each side of the screen</string>
+    <string name="preference_video_title">Video and renderer</string>
+    <string name="preference_video_description">Resolution, scaling type, and renderer</string>
+    <string name="preference_control_title">Control customization</string>
+    <string name="preference_control_description">Gestures types, triggers, and scaling</string>
+    <string name="preference_java_title">Java Tweaks</string>
+    <string name="preference_java_description">Java versions, JVM Arguments, and RAM amount</string>
+    <string name="preference_misc_title">Miscellaneous settings</string>
+    <string name="preference_misc_description">Version list, and libs checks</string>
+    <string name="preference_experimental_title">Experimental Stuff</string>
+    <string name="preference_experimental_description">Use things there with consideration, no support.</string>
+    <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
+    <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
+
+    <string name="preference_back_title">Back to the last screen</string>
+    <string name="gles_hack_title">GL4ES Shrink hack</string>
+    <string name="gles_hack_none">Don\'t shrink textures</string>
+    <string name="gles_hack_always">Divides all textures by 2</string>
+    <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>
+
+    <string name="vbo_hack_title">Disable VBOs</string>
+    <string name="vbo_hack_description">Help with compatibility on some old versions</string>
+
 </resources>

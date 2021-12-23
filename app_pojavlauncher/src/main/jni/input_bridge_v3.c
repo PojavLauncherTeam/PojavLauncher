@@ -37,7 +37,7 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
-static int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
+static float grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
@@ -255,7 +255,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorEnter(
     }
 }
 */
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JNIEnv* env, jclass clazz, jint x, jint y) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JNIEnv* env, jclass clazz, jfloat x, jfloat y) {
     if (GLFW_invoke_CursorPos && isInputReady) {
         if (!isCursorEntered) {
             if (GLFW_invoke_CursorEnter) {
@@ -362,44 +362,4 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEn
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
     showingWindow = (long) window;
-}
-JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_nativePutControllerAxes(JNIEnv *env, jclass clazz,
-                                                           jobject ax_buf) {
-    // TODO: implement nativePutControllerAxes()
-    if(isInputReady) {
-    jbyte *src = (jbyte *)((*env)->GetDirectBufferAddress(*env,ax_buf));
-    jclass glfw_joystick_class = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID,"org/lwjgl/glfw/GLFW");
-    if(glfw_joystick_class == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","GLFW is not attached!");
-        return;
-    }
-    jfieldID glfw_controller_axis_data = (*runtimeJNIEnvPtr_ANDROID)->GetStaticFieldID(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,"joystickData",
-                                                                                       "Ljava/nio/FloatBuffer;");
-    if(glfw_controller_axis_data == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","Unable to find the field!");
-        return;
-    }
-    (*runtimeJNIEnvPtr_ANDROID)->SetStaticObjectField(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,glfw_controller_axis_data,(*runtimeJNIEnvPtr_ANDROID)->NewDirectByteBuffer(runtimeJNIEnvPtr_ANDROID,src,(*env)->GetDirectBufferCapacity(env,ax_buf)));
-    }
-}
-JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_nativePutControllerButtons(JNIEnv *env, jclass clazz,
-                                                              jobject ax_buf) {
-    // TODO: implement nativePutControllerButtons()
-    if(isInputReady) {
-    jbyte *src = (jbyte *)((*env)->GetDirectBufferAddress(*env,ax_buf));
-    jclass glfw_joystick_class = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID,"org/lwjgl/glfw/GLFW");
-    if(glfw_joystick_class == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","GLFW is not attached!");
-        return;
-    }
-    jfieldID glfw_controller_button_data = (*runtimeJNIEnvPtr_ANDROID)->GetStaticFieldID(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,"buttonData",
-                                                                                       "Ljava/nio/ByteBuffer;");
-    if(glfw_controller_button_data == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR,"ControllerPipeNative","Unable to find the field!");
-        return;
-    }
-    (*runtimeJNIEnvPtr_ANDROID)->SetStaticObjectField(runtimeJNIEnvPtr_ANDROID,glfw_joystick_class,glfw_controller_button_data,(*runtimeJNIEnvPtr_ANDROID)->NewDirectByteBuffer(runtimeJNIEnvPtr_ANDROID,src,(*env)->GetDirectBufferCapacity(env,ax_buf)));
-    }
 }

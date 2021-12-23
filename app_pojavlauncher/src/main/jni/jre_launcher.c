@@ -22,21 +22,22 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-#include <jni.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <android/log.h>
 #include <dlfcn.h>
+#include <errno.h>
+#include <jni.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
 // Boardwalk: missing include
 #include <string.h>
-#include <fcntl.h>
-#include <errno.h>
 
 #include "log.h"
-
 #include "utils.h"
+
+// Uncomment to try redirect signal handling to JVM
+// #define TRY_SIG2JVM
 
 // PojavLancher: fixme: are these wrong?
 #define FULL_VERSION "1.8.0-internal"
@@ -50,13 +51,22 @@ static const jboolean const_javaw = JNI_FALSE;
 static const jboolean const_cpwildcard = JNI_TRUE;
 static const jint const_ergo_class = 0; // DEFAULT_POLICY
 static struct sigaction old_sa[NSIG];
-void (*old_sa_func)(int signal, siginfo_t *info, void *reserved);
-void android_sigaction(int signal, siginfo_t *info, void *reserved)
-{
-    printf("process killed with signal %d code %p addr %p", signal,info->si_code,info->si_addr);
-    old_sa_func = old_sa[signal].sa_sigaction;
-    old_sa_func(signal, info, reserved);
-    exit(1);
+
+void (*__old_sa)(int signal, siginfo_t *info, void *reserved);
+int (*JVM_handle_linux_signal)(int signo, siginfo_t* siginfo, void* ucontext, int abort_if_unrecognized);
+
+void android_sigaction(int signal, siginfo_t *info, void *reserved) {
+  printf("process killed with signal %d code %p addr %p\n", signal,info->si_code,info->si_addr);
+  if (JVM_handle_linux_signal == NULL) { // should not happen, but still
+      __old_sa = old_sa[signal].sa_sigaction;
+      __old_sa(signal,info,reserved);
+      exit(1);
+  } else {
+      // Based on https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u/blob/aarch64-shenandoah-jdk8u272-b10/hotspot/src/os/linux/vm/os_linux.cpp#L4688-4693
+      int orig_errno = errno;  // Preserve errno value over signal handler.
+      JVM_handle_linux_signal(signal, info, reserved, true);
+      errno = orig_errno;
+  }
 }
 typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
 
@@ -94,27 +104,6 @@ static jint launchJVM(int margc, char** margv) {
        return -1;
    }
 
-   // send stderr and stdout to a log
-   // FIXME test code, remove for prod - the non-test mode captures this output properly
-   int fd = open("/storage/emulated/0/games/PojavLauncher/logout", O_CREAT|O_TRUNC|O_RDWR, 0666);
-   if (fd == -1) {
-       LOGE("open failed!");
-   } else {
-       int res;
-       if ((res = dup2(fd, 1)) == -1)
-           LOGE("dup2 stdout failed %d %d", res, errno);
-       if ((res = dup2(fd, 2)) == -1)
-           LOGE("dup2 stderr failed %d %d", res, errno);
-   }
-
-   // Don't buffer output
-   setvbuf(stdout, NULL, _IONBF, 0);
-   setvbuf(stderr, NULL, _IONBF, 0);
-
-   printf("Testing!\n");
-   fflush(stdout);
-   write(1, "hi:\n", 4);
-
    LOGD("Calling JLI_Launch");
 
    return pJLI_Launch(margc, margv,
@@ -140,21 +129,34 @@ static jint launchJVM(int margc, char** margv) {
  * Signature: ([Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, jclass clazz, jobjectArray argsArray) {
+#ifdef TRY_SIG2JVM
+  void* libjvm = dlopen("libjvm.so", RTLD_LAZY | RTLD_GLOBAL);
+  if (NULL == libjvm) {
+      LOGE("JVM lib = NULL: %s", dlerror());
+      return -1;
+  }
+  JVM_handle_linux_signal = dlsym(libjvm, "JVM_handle_linux_signal");
+#endif
+
    jint res = 0;
    // int i;
    //Prepare the signal trapper
    struct sigaction catcher;
    memset(&catcher,0,sizeof(sigaction));
    catcher.sa_sigaction = android_sigaction;
-   catcher.sa_flags = SA_RESETHAND;
+   catcher.sa_flags = SA_SIGINFO|SA_RESTART;
+   // SA_RESETHAND;
 #define CATCHSIG(X) sigaction(X, &catcher, &old_sa[X])
     CATCHSIG(SIGILL);
     CATCHSIG(SIGABRT);
     CATCHSIG(SIGBUS);
     CATCHSIG(SIGFPE);
-    //CATCHSIG(SIGSEGV);
+#ifdef TRY_SIG2JVM
+    CATCHSIG(SIGSEGV);
+#endif
     CATCHSIG(SIGSTKFLT);
     CATCHSIG(SIGPIPE);
+    CATCHSIG(SIGXFSZ);
    //Signal trapper ready
 
     // Save dalvik JNIEnv pointer for JVM launch thread

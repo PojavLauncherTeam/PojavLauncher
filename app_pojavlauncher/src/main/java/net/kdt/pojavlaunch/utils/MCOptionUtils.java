@@ -1,26 +1,52 @@
 package net.kdt.pojavlaunch.utils;
+import static org.lwjgl.glfw.CallbackBridge.windowHeight;
+import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
-import java.util.*;
-import java.io.*;
-import android.util.*;
-import net.kdt.pojavlaunch.*;
+import android.os.Build;
+import android.os.FileObserver;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+
+import net.kdt.pojavlaunch.Tools;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class MCOptionUtils
 {
-    private static List<String> mLineList;
+    private static final HashMap<String,String> parameterMap = new HashMap<>();
+    private static final ArrayList<WeakReference<MCOptionListener>> optionListeners = new ArrayList<>();
+    private static FileObserver fileObserver;
+    public interface MCOptionListener {
+         /** Called when an option is changed. Don't know which one though */
+        void onOptionChanged();
+    }
     
     public static void load() {
-        if (mLineList == null) {
-            mLineList = new ArrayList<String>();
-        } else {
-            mLineList.clear();
+        if(fileObserver == null){
+            setupFileObserver();
         }
-        
+
+        parameterMap.clear();
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Tools.DIR_GAME_NEW + "/options.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
-                mLineList.add(line);
+                int firstColonIndex = line.indexOf(':');
+                if(firstColonIndex < 0) {
+                    Log.w(Tools.APP_NAME, "No colon on line \""+line+"\", skipping");
+                    continue;
+                }
+                parameterMap.put(line.substring(0,firstColonIndex), line.substring(firstColonIndex+1));
             }
             reader.close();
         } catch (IOException e) {
@@ -29,39 +55,39 @@ public class MCOptionUtils
     }
     
     public static void set(String key, String value) {
-        for (int i = 0; i < mLineList.size(); i++) {
-            String line = mLineList.get(i);
-            if (line.startsWith(key + ":")) {
-                mLineList.set(i, key + ":" + value);
-                return;
-            }
-        }
-        
-        mLineList.add(key + ":" + value);
+        parameterMap.put(key,value);
+    }
+
+    /** Set an array of String, instead of a simple value. Not supported on all options */
+    public static void set(String key, List<String> values){
+        parameterMap.put(key, values.toString());
     }
 
     public static String get(String key){
-        if (mLineList == null){
-            load();
-        } if (mLineList.size() == 0) return null; // why it empty?
-        for (int i = 0; i < mLineList.size(); i++) {
-            String line = mLineList.get(i);
-            if (line.startsWith(key + ":")) {
-                String value = mLineList.get(i);
-                return value.substring(value.indexOf(":")+1);
-            }
-        }
-        return null;
+        return parameterMap.get(key);
+    }
+
+    /** @return A list of values from an array stored as a string */
+    public static List<String> getAsList(String key){
+        String value = get(key);
+
+        // Fallback if the value doesn't exist
+        if (value == null) return new ArrayList<>();
+
+        // Remove the edges
+        value = value.replace("[", "").replace("]", "");
+        if (value.isEmpty()) return new ArrayList<>();
+
+        return Arrays.asList(value.split(","));
     }
     
     public static void save() {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < mLineList.size(); i++) {
-            result.append(mLineList.get(i));
-            if (i + 1 < mLineList.size()) {
-                result.append("\n");
-            }
-        }
+        for(String key : parameterMap.keySet())
+            result.append(key)
+                    .append(':')
+                    .append(parameterMap.get(key))
+                    .append('\n');
         
         try {
             Tools.write(Tools.DIR_GAME_NEW + "/options.txt", result.toString());
@@ -69,4 +95,70 @@ public class MCOptionUtils
             Log.w(Tools.APP_NAME, "Could not save options.txt", e);
         }
     }
+
+    /** @return The stored Minecraft GUI scale, also auto-computed if on auto-mode or improper setting */
+    public static int getMcScale() {
+        MCOptionUtils.load();
+        String str = MCOptionUtils.get("guiScale");
+        int guiScale = (str == null ? 0 :Integer.parseInt(str));
+
+        int scale = Math.max(Math.min(windowWidth / 320, windowHeight / 240), 1);
+        if(scale < guiScale || guiScale == 0){
+            guiScale = scale;
+        }
+
+        return guiScale;
+    }
+
+    /** Add a file observer to reload options on file change
+     * Listeners get notified of the change */
+    private static void setupFileObserver(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    MCOptionUtils.load();
+                    notifyListeners();
+                }
+            };
+        }else{
+            fileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
+                @Override
+                public void onEvent(int i, @Nullable String s) {
+                    MCOptionUtils.load();
+                    notifyListeners();
+                }
+            };
+        }
+
+        fileObserver.startWatching();
+    }
+
+    /** Notify the option listeners */
+    public static void notifyListeners(){
+        for(WeakReference<MCOptionListener> weakReference : optionListeners){
+            MCOptionListener optionListener = weakReference.get();
+            if(optionListener == null) continue;
+
+            optionListener.onOptionChanged();
+        }
+    }
+
+    /** Add an option listener, notice how we don't have a reference to it */
+    public static void addMCOptionListener(MCOptionListener listener){
+        optionListeners.add(new WeakReference<>(listener));
+    }
+
+    /** Remove a listener from existence, or at least, its reference here */
+    public static void removeMCOptionListener(MCOptionListener listener){
+        for(WeakReference<MCOptionListener> weakReference : optionListeners){
+            MCOptionListener optionListener = weakReference.get();
+            if(optionListener == null) continue;
+            if(optionListener == listener){
+                optionListeners.remove(weakReference);
+                return;
+            }
+        }
+    }
+
 }

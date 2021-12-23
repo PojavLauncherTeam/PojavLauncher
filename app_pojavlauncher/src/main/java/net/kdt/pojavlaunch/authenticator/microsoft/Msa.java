@@ -287,7 +287,7 @@ public class Msa {
             errStr.contains("The server has not found anything matching the request URI"))
         {
             // TODO localize this
-            otherErrStr = "Can't login a demo account! Haven't you bought Minecraft: Java Edition on your account? Don't expect that Microsoft/Xbox account will give you free **paid/premium** MC Java account!";
+            otherErrStr = "It seems that this Microsoft Account does not own the game. Make sure that you have bought/migrated to your Microsoft account.";
         }
         
         throw new RuntimeException(otherErrStr + "\n\nMSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);

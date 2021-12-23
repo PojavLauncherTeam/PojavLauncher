@@ -1,0 +1,31 @@
+name: Feature request
+description: 'Ask for new features.'
+title: "[F-Req] <Short description>"
+labels: [enhancement]
+body:
+- type: textarea
+  id: version
+  attributes:
+    label: Is this request related to a bug?
+    description: |
+      Give us some details into the problem, and how this affects it.
+    placeholder: 'Example: You should add a version selector because of the text box being too small.'
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: Describe the request.
+    description: |
+      What do you want to see changed, added, or removed? Make sure to be specific.
+      placeholder: 'Example: A scrollable version picker.'
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: Anything else?
+    description: |
+      Add any other context about the problem here.
+  validations:
+    required: false

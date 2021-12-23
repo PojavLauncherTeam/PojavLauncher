@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Android를 위한 Minecraft: Java Edition 구동기)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">이메일 또는 사용자 이름</string>
+    <string name="login_online_password_hint">비밀번호</string>
+    <string name="login_online_check_keeplogin">로그인 상태 유지</string>
+    <string name="login_online_login_label">로그인</string>
+    <string name="login_offline_label">오프라인 계정으로 로그인</string>
+    <string name="login_error_invalid_username">잘못된 사용자 이름입니다. 사용자 이름은 3~16글자여야 하며, 대/소문자 알파벳과 숫자, _로 구성되어야 합니다.</string>
+    <string name="login_error_exist_username">이미 존재하는 사용자 이름입니다</string>
+    <string name="login_error_offline_password">오프라인 계정은 비밀번호를 요구하지 않습니다!</string>
+    <string name="login_microsoft">Microsoft 로그인</string>
+    <string name="login_select_account">계정 선택</string>
+    <string name="login_title_no_saved_account">계정을 찾을 수 없습니다 !</string>
+    <string name="login_dialog_no_saved_account">저장된 계정이 없습니다.\n <b>\"로그인 상태 유지\"</b> 옵션은 처음으로 로그인 할 시 계정을 저장합니다.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"오른쪽에서 왼쪽으로 끌어당겨 메뉴를 여세요. ◀\n 버튼을 눌러 수정, 크기 조절, 삭제를 할 수 있습니다."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">이 계정이 제거됩니다!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Java 런타임 설치 %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">모드 설치기를 선택하세요</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher에 예상치 못한 충돌이 발생했습니다</string>
+    <string name="error_no_version">버전이 없습니다!</string>
+    <string name="error_show_more">더 보기</string>
+    <string name="error_show_less">간략히 보기</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">저장소 읽고 쓰기 권한이 필요합니다!</string>
+    <string name="toast_optifine_success">설치 성공</string>
+    <string name="toast_uninstalljre_done">Java 런타임 삭제 완료</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">소식</string>
+    <string name="mcl_tab_console">개발자 콘솔</string>
+    <string name="mcl_tab_crash">충돌 로그</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">연결됨</string>
+    <string name="mcl_account_offline">오프라인</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었습니다.</string>
+    <string name="mcl_launch_cleancache">캐시 비우기</string>
+    <string name="mcl_launch_downloading">%s 다운로드 중</string>
+    <string name="mcl_launch_downloading_progress">"%s 다운로드 중 (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">다운로드 준비 중</string>
+    <string name="mcl_options">설정</string>
+    <string name="mcl_option_modinstall">모드 설치기 실행 (Forge, LabyMod, Fabric 등...)</string>
+    <string name="mcl_option_modinstallwitharg">모드 설치기 실행 (사용자 지정 설치 스크립트)</string>
+    <string name="mcl_option_customcontrol">사용자 지정 조작</string>
+    <string name="mcl_option_settings">설정</string>
+    <string name="mcl_option_about">정보</string>
+    <string name="mcl_setting_title_uninstalljre">Java 런타임 삭제</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launcher 재 실행 요구] Java 런타임 재 설치하기</string>
+    <string name="mcl_setting_title_freeform">Minecraft를 Freeform mode로 실행하기</string>
+    <string name="mcl_setting_subtitle_freeform">Minecraft를 floating window에서 실행합니다. Android 7.0 이상을 요구합니다.</string>
+    <string name="mcl_setting_title_hide_sidebar">사이드바 숨기기</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">과거 v1 UI를 선호하는 사람을 위한 설정입니다.</string>
+    <string name="mcl_setting_title_ignore_notch">노치 무시하기</string>
+    <string name="mcl_setting_subtitle_ignore_notch">노치를 무시하여 넓은 화면으로 플레이할 수 있습니다.\n</string>
+    <string name="mcl_setting_title_resolution_scaler">해상도 비율</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">최대 해상도 100% 이하로 게임 해상도를 낮출 수 있습니다.</string>
+    <string name="mcl_setting_title_longpresstrigger">길게 누르기 시간</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">블록 파괴와 아이템 던지기 등의 동작을 위한 길게 누르기 시간 변경</string>
+    <string name="mcl_setting_title_backtorightmouse">마우스 우클릭으로 뒤로가기</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">몇몇 기기들은 외장 마우스 우클릭을 뒤로 가기 버튼으로 이용합니다. 외장 마우스를 이용하시면 활성화해주세요.</string>
+    <string name="mcl_setting_title_flat_button_style">플랫 버튼 스타일</string>
+    <string name="mcl_setting_subtitle_flat_button_style">컨트롤 버튼을 플랫 스타일로 변경</string>
+    <string name="mcl_setting_title_buttonscale">컨트롤 버튼 크기</string>
+    <string name="mcl_setting_subtitle_buttonscale">버튼이 너무 작다면 크기를 키우세요.</string>
+    <string name="mcl_setting_title_mousescale">마우스 크기</string>
+    <string name="mcl_setting_subtitle_mousescale">가상 마우스 크기 변경.</string>
+    <string name="mcl_setting_title_javaargs">JVM 시작 스크립트</string>
+    <string name="mcl_setting_subtitle_javaargs">조심하세요, 정보 없이 수정하면 게임 충돌이 발생할 수 있습니다.</string>
+    <string name="mcl_setting_category_general">일반 설정</string>
+    <string name="mcl_setting_category_scaling">크기 설정</string>
+    <string name="mcl_setting_category_renderer">렌더러</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 내보내기 + 3.2 포함 (1.17 미지원)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 사용</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 내보내기</string>
+    <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
+    <string name="mcl_setting_veroption_release">릴리즈</string>
+    <string name="mcl_setting_veroption_snapshot">스냅숏</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_version_clone">복제</string>
+    <!-- Global strings -->
+    <string name="global_edit">수정</string>
+    <string name="global_error">오류</string>
+    <string name="global_warinng">경고</string>
+    <string name="global_load">불러오기</string>
+    <string name="global_name">이름</string>
+    <string name="global_remove">제거</string>
+    <string name="global_clone">복제</string>
+    <string name="global_restart">재시작</string>
+    <string name="global_save">저장</string>
+    <string name="global_unpacking">압축 해제 중 %s</string>
+    <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
+    <string name="global_waiting">기다려주세요</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">앱/게임이 코드 %d와 함께 종료되었습니다</string>
+    <string name="mcn_exit_call">나가기</string>
+    <string name="mcn_exit_confirm">강제로 종료하시겠습니까?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 이 설치되지 않았습니다!</string>
+    <string name="mcn_check_fail_incompatiblearch">아키텍처 %1$s 은(는)  Java 런타임 %2$s(와)과 호환되지 않습니다.</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink 렌더러는 해당 기기를 지원하지 않습니다!</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">키보드</string>
+    <string name="control_chat">챗</string>
+    <string name="control_debug">디버그</string>
+    <string name="control_primary">LMB</string>
+    <string name="control_secondary">RMB</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3인칭</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">마우스</string>
+    <string name="control_mouseoff">마우스: 끔</string>
+    <string name="control_mouseon">마우스: 켬 </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">강제 종료</string>
+    <string name="control_viewout">로그 확인</string>
+    <string name="control_adebug">디버그 표시</string>
+    <string name="control_customkey">사용자 지정 키 보내기</string>
+    <string name="control_scaleup">확장</string>
+    <string name="control_scaledown">축소</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">%s(을)를 수정하는 중</string>
+    <string name="customctrl_remove">%s(을)를 제거하시겠습니까?</string>
+    <string name="customctrl_keyname">키</string>
+    <string name="customctrl_toggle">토글</string>
+    <string name="customctrl_size">크기</string>
+    <string name="customctrl_size_width">너비</string>
+    <string name="customctrl_size_height">높이</string>
+    <string name="customctrl_mapping">매핑</string>
+    <string name="customctrl_orientation">방향</string>
+    <string name="customctrl_background_color">배경 색상</string>
+    <string name="customctrl_corner_radius">모서리 반지름</string>
+    <string name="customctrl_stroke_width">선 굵기</string>
+    <string name="customctrl_stroke_color">강조 색</string>
+    <string name="customctrl_dynamicpos">동적 위치</string>
+    <string name="customctrl_dynamicpos_x">동적 X 값</string>
+    <string name="customctrl_dynamicpos_y">동적 Y 값</string>
+    <string name="customctrl_transparency_bg">배경 투명도</string>
+    <string name="customctrl_button_opacity">버튼 투명도</string>
+    <string name="customctrl_keycombine">키 조합</string>
+    <string name="customctrl_keycombine_alt">Alt</string>
+    <string name="customctrl_keycombine_control">Ctrl</string>
+    <string name="customctrl_keycombine_shift">Shift</string>
+    <string name="customctrl_addbutton">버튼 추가</string>
+    <string name="customctrl_addbutton_drawer">버튼 드로어 추가</string>
+    <string name="customctrl_addsubbutton">부속 버튼 추가</string>
+    <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
+    <string name="main_options">설정</string>
+    <string name="main_play">시작하기</string>
+    <string name="main_welcome">환영합니다, %s!</string>
+    <string name="main_infodev">정보 (DEV)</string>
+    <string name="main_switchuser">사용자 전환</string>
+    <string name="main_version">버전:</string>
+    <string name="main_nocrash">발견된 충돌 없음</string>
+    <string name="main_nolog">기록 없음.</string>
+    <string name="main_no_news_feed">소식을 불러오지 못했습니다 !</string>
+    <string name="auto_ram_subtitle">자동 RAM 할당 활성화하기</string>
+    <string name="auto_ram_title">자동 RAM 할당</string>
+    <string name="autoram_info_msg">메모리가 %dMB 할당되었습니다.</string>
+    <string name="mcl_setting_check_libraries">다운로드 후 라이브러리 확인</string>
+    <string name="mcl_setting_check_libraries_subtitle">이 옵션은 라이브러리 해시를 강제로 확인합니다. 잘못된 다운로드를 막을 수 있습니다.</string>
+    <string name="dl_library_sha_fail">라이브러리 %s가 손상되었기 때문에 다시 다운로드 합니다</string>
+    <string name="dl_library_sha_unknown">%s 라이브러리를 확인할 수 없습니다.</string>
+    <string name="dl_library_sha_pass">%s 라이브러리를 이용할 수 있습니다.</string>
+    <string name="mcl_disable_gestures">제스쳐 비활성화</string>
+    <string name="mcl_disable_gestures_subtitle">탭하여 블록 설치, 길게 눌러 블록 파괴와 같은 제스쳐를 비활성화 합니다</string>
+    <string name="mcl_setting_title_mousespeed">마우스 속도</string>
+    <string name="mcl_setting_subtitle_mousespeed">소프트웨어 마우스 속도 변경</string>
+    <string name="customctrl_passthru">마우스 패스스루</string>
+    <string name="customctrl_swipeable">끌어당기기</string>
+    <string name="customctrl_rounded">둥글게</string>
+    <string name="memory_warning_msg">현재 사용 가능한 RAM 크기(%d) 가 할당된 RAM 크기(%d) 보다 낮습니다. 게임이 충돌할 경우 할당량을 변경하세요.</string>
+    <string name="mcl_memory_allocation">메모리 할당</string>
+    <string name="mcl_memory_allocation_subtitle">Minecraft 메모리 할당 조절</string>
+    <string name="multirt_runtime_corrupt">사용 불가능한 Java 런타임</string>
+    <string name="multirt_config_title">Java 가상 머신</string>
+    <string name="multirt_config_add">새로 추가</string>
+    <string name="multirt_config_add_subtitle">새로운 Java 가상 머신 가져오기</string>
+    <string name="multirt_title">런타임 관리자</string>
+    <string name="multirt_subtitle">설치된 Java 가상 머신 관리</string>
+    <string name="multirt_progress_caching">캐시 중...</string>
+    <string name="multirt_config_setdefault">기본으로 설정</string>
+    <string name="multirt_config_setdefault_already">기본값</string>
+    <string name="multirt_config_removeerror_last">하나 이상의 Java 런타임이 필요합니다</string>
+    <string name="multirt_nocompartiblert">호환되는 Java 런타임을 찾을 수 없습니다</string>
+    <string name="compat_117_message">Minecraft 21w10a 이상 버전은 OpenGL 3.2 코어 프로필이 필요합니다. 슬프게도, GL4ES는 현재 OpenGL 3.2 코어 프로필을 완전히 지원하지 않습니다, 하지만 해당 버전을 실행하기 위해 설치할 수 있는 추가 리소스가 있습니다. 확인 버튼을 눌러 설치하거나 취소 버튼을 눌러 취소하세요.</string>
+    <string name="compat_11x_playanyway">무시하고 플레이</string>
+    <string name="pvc_gameDirectory">게임 디렉토리</string>
+    <string name="pvc_jvmArgs">JVM 실행 설정</string>
+    <string name="pvc_title">버전마다 설정</string>
+</resources>

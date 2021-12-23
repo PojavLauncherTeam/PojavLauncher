@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">pajaw launcher (Mc4Android)</string>
+    <string name="app_short_name">PojawLunchr</string>
+    <string name="app_motd">go MC at your mobile!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Emol or osornoim</string>
+    <string name="login_online_password_hint">passwd</string>
+    <string name="login_online_check_keeplogin">kep i kog inside</string>
+    <string name="login_online_login_label">logout</string>
+    <string name="login_offline_label">Login as offloin akownt</string>
+    <string name="login_error_invalid_username">Invalid catz\' neim. Catz\' neim hav tu be in rein\'g uf 3-16 kerekturs, shud only kontainz A-Z, a-z, 0-9 and undrskore.</string>
+    <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
+    <string name="login_error_offline_password">Offline akownt can\'t include pasword!</string>
+    <string name="login_microsoft">Microsoft entrunz</string>
+    <string name="login_select_account">what acc?</string>
+    <string name="login_title_no_saved_account">No akownt findz !</string>
+    <string name="login_dialog_no_saved_account">U doan has any savd akownt.\nUse teh opshun <b>\"Keep me loggd in\"</b> 2 save an akownt upon furst login.</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Swiep frum riet 2 left 2 open meun ◀\nHold button 2 customiez: edit, resiez or deleet."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Dis akownt wil be removed!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Install Coffee Cupz’ Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Chooz mod installr</string>
+    <!-- Error messages -->
+    <string name="error_fatal">Pojaw Launcher haz unexpectadly crashd</string>
+    <string name="error_no_version">No vershun!</string>
+    <string name="error_show_more">Show mor</string>
+    <string name="error_show_less">Show les</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Teh riid/rite 2 storage permishun iz requird!</string>
+    <string name="toast_optifine_success">Instal succesful</string>
+    <string name="toast_uninstalljre_done">Dun uninstall Coffee Cupz’ Runtime</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Newz</string>
+    <string name="mcl_tab_console">Developmnt consol</string>
+    <string name="mcl_tab_crash">Crash trunk</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connectd</string>
+    <string name="mcl_account_offline">Offlien</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Ready 2 pulay minecraft %s</string>
+    <string name="mcl_launch_cleancache">Cleanin cache filez</string>
+    <string name="mcl_launch_downloading">Downloadin %s</string>
+    <string name="mcl_launch_downloading_progress">"Downloadin %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Preparin 2 download resourcez</string>
+    <string name="mcl_options">Opshuns</string>
+    <string name="mcl_option_modinstall">L’unch mod installr (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">L’unch mod installr (wif cuztoum argumentz)</string>
+    <string name="mcl_option_customcontrol">Custom controls</string>
+    <string name="mcl_option_settings">Settinz</string>
+    <string name="mcl_option_about">Bout</string>
+    <string name="mcl_setting_title_uninstalljre">Uninstall Coffee Cupz’ Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launchah restart requird] dis letz u re-install Coffee Cupz’ Runtime</string>
+    <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform moed</string>
+    <string name="mcl_setting_subtitle_freeform">Launch minecraft in floatin window. Requirez android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Dunt’ Show Sidebar</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folkz preferring teh old v1 UI miet likes dis. Srsly givez u moar fullscreen experienec.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoer notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoer teh notch an extendz teh screen undr it, Srsly.\nGivez u moar immersiev experienec.</string>
+    <string name="mcl_setting_title_resolution_scaler">Resolushun Scalah</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Allowz u 2 decreaes teh gaem resolushun. 100% iz fol resolushun</string>
+    <string name="mcl_setting_title_longpresstrigger">How long will triggr aftr long pres</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Change triggr tiem 4 long pres in destroy block an drop item.</string>
+    <string name="mcl_setting_title_backtorightmouse">Treat bak butn as rite mouse</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Sum devicez treats external rite mouse as bak butn. If u r usin external mouse, u shud enable dis.</string>
+    <string name="mcl_setting_title_flat_button_style">Flat button styel</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Enabel dis 2 chaneg control button styel 2 flat.</string>
+    <string name="mcl_setting_title_buttonscale">Control buttons scalin</string>
+    <string name="mcl_setting_subtitle_buttonscale">Upscael dem if buttons r 2 small.</string>
+    <string name="mcl_setting_title_mousescale">Mouse scalin</string>
+    <string name="mcl_setting_subtitle_mousescale">Chaneg siez ov vurtual moues.</string>
+    <string name="mcl_setting_title_javaargs">CCz’UM L’unch argumentz</string>
+    <string name="mcl_setting_subtitle_javaargs">Bees careful, dis can mak teh game crash if modified witout knowledge.</string>
+    <string name="mcl_setting_category_general">General settingz</string>
+    <string name="mcl_setting_category_scaling">Scalin settingz</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): givez OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): givez OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): givz OpenGL 2.1 + partial 3.2 (1.17 needz moredakka!)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): iksportz OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): givez OpenGL 4.6</string>
+    <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
+    <string name="mcl_setting_veroption_release">RELEASD</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alaf</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beat</string>
+    <string name="mcl_version_clone">Cloen</string>
+    <!-- Global strings -->
+    <string name="global_edit">Edit</string>
+    <string name="global_error">Eror</string>
+    <string name="global_warinng">Aelert!!!</string>
+    <string name="global_load">Load</string>
+    <string name="global_name">Naym</string>
+    <string name="global_remove">Remoev</string>
+    <string name="global_clone">Cloen</string>
+    <string name="global_restart">Re-start</string>
+    <string name="global_save">Saev</string>
+    <string name="global_unpacking">Unpacking %s</string>
+    <string name="global_error_field_empty">Dis field can\'t bees empty</string>
+    <string name="global_waiting">Waitin’, meow~</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Application/Game Escapd witf code %d</string>
+    <string name="mcn_exit_call">Exit</string>
+    <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
+    <string name="mcn_check_fail_incompatiblearch">Architecchur %1$s iz incompatibel wif Jaav Runtiem %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">Catz mobile cant’ handel Vulkan Zink renderer!</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">GUI</string>
+    <string name="control_keyboard">Keyboard</string>
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Force close</string>
+    <string name="control_viewout">tree input</string>
+    <string name="control_adebug">Input Debug</string>
+    <string name="control_customkey">Send custom keycoed</string>
+    <string name="control_scaleup">Bigging go up</string>
+    <string name="control_scaledown">Bigging go down</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">Editin %s</string>
+    <string name="customctrl_remove">Remoev %s?</string>
+    <string name="customctrl_keyname">Keycoed</string>
+    <string name="customctrl_toggle">Toggleabel</string>
+    <string name="customctrl_size">Siez</string>
+    <string name="customctrl_size_width">Width</string>
+    <string name="customctrl_size_height">Hait</string>
+    <string name="customctrl_mapping">Mappin’</string>
+    <string name="customctrl_orientation">Direksion</string>
+    <string name="customctrl_background_color">Bakground colour</string>
+    <string name="customctrl_corner_radius">Cornur round saiz</string>
+    <string name="customctrl_stroke_width">Strok witz</string>
+    <string name="customctrl_stroke_color">Strok colour</string>
+    <string name="customctrl_dynamicpos">Skratchy Dynamic pozishun</string>
+    <string name="customctrl_dynamicpos_x">Movin’ X pozision</string>
+    <string name="customctrl_dynamicpos_y">Movin’ Y pozision</string>
+    <string name="customctrl_transparency_bg">Bakground tranzperensi</string>
+    <string name="customctrl_button_opacity">Buton Owpacity</string>
+    <string name="customctrl_keycombine">Ki combinasion</string>
+    <string name="customctrl_addbutton">Add button</string>
+    <string name="customctrl_addbutton_drawer">Add buton drawr’</string>
+    <string name="customctrl_addsubbutton">Add b’low-buton</string>
+    <string name="customctrl_selectdefault">Select defaul Control json</string>
+    <string name="main_options">Opshuns</string>
+    <string name="main_play">Pulay</string>
+    <string name="main_welcome">Welcom, catz %s</string>
+    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_switchuser">Switch usr</string>
+    <string name="main_version">Vershun:</string>
+    <string name="main_nocrash">No crash detected</string>
+    <string name="main_nolog">No log.</string>
+    <string name="main_no_news_feed">Faild 2 fetch teh newz fed !</string>
+    <string name="auto_ram_subtitle">Enablez automatic RAM adjustah</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="autoram_info_msg">Memori setd 2 %d MB</string>
+    <string name="mcl_setting_check_libraries">Check libraries aftr downloadin</string>
+    <string name="mcl_setting_check_libraries_subtitle">Dis opshun forcez launchah 2 check teh library hash if iz’ availabel. Preventz brekd downloadz.</string>
+    <string name="dl_library_sha_fail">Library %s iz breakd and wil’ be redownloaded</string>
+    <string name="dl_library_sha_unknown">Library %s cant’ be checkd, haz 2 assuem iz’ gud</string>
+    <string name="dl_library_sha_pass">Library %s iz prfekt an usabel</string>
+    <string name="mcl_disable_gestures">Disabel gesturez</string>
+    <string name="mcl_disable_gestures_subtitle">Disablez gesturez, laik hold 2 break block, an tap 2 plaec block.</string>
+    <string name="mcl_setting_title_mousespeed">Mice speed</string>
+    <string name="mcl_setting_subtitle_mousespeed">Changez teh speed of teh software mice</string>
+    <string name="customctrl_passthru">Mouses pas-thur</string>
+    <string name="customctrl_swipeable">Scratchable</string>
+    <string name="customctrl_rounded">Rounded</string>
+    <string name="memory_warning_msg">WURNING: Catz iz becomin’ une of teh Memory Muncherz, wich may leid tu game crash! (Free %d, munch’d %d MB) Change teh allocasion if teh game crashez.</string>
+    <string name="mcl_memory_allocation">RAM allocasion</string>
+    <string name="mcl_memory_allocation_subtitle">Controls how mutch RAM iz given 2 Minecraft</string>
+    <string name="multirt_runtime_corrupt">Derti Coffee Cup</string>
+    <string name="multirt_config_title">Coffee Cupz’ Unreal Machinez</string>
+    <string name="multirt_config_add">Add new</string>
+    <string name="multirt_config_add_subtitle">Add new Coffee Cupz’ Unreal Machine</string>
+    <string name="multirt_title">Coffee Cupz klecsion</string>
+    <string name="multirt_subtitle">Maniz drunk Coffee Cupz</string>
+    <string name="multirt_progress_caching">Storin’ tu cache memori...</string>
+    <string name="multirt_config_setdefault">Set favoritz</string>
+    <string name="multirt_config_setdefault_already">My favritz</string>
+    <string name="multirt_config_removeerror_last">Catz cant’ si any Coffee Cup’s Runtime in kleksion</string>
+    <string name="multirt_nocompartiblert">Catz cant’ si ani drunkabl’ Coffee Cup’s Runtime</string>
+    <string name="compat_117_message">Minecraft 21w10a ur newer needz OpenGL 3.2 Core Profile (ur newer). GL4ES wrapper doeznt’ furly surport it at momentz, but their iz sume additivz resourcez catz can inztall tu run the’z version. Scratch OK tu confurm inztallursion, ur Cancel to abort l’unch.</string>
+    <string name="compat_11x_playanyway">Cat stil\' won tu play</string>
+    <string name="pvc_gameDirectory">Gamez’ direktory</string>
+    <string name="pvc_jvmArgs">CCz’UM argumentz</string>
+    <string name="pvc_title">Itch-version settinz’</string>
+    <string name="storage_warning_title">Starags changez</string>
+</resources>

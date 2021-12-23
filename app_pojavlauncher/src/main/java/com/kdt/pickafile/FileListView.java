@@ -89,8 +89,10 @@ public class FileListView extends LinearLayout
                 }
             });
         addView(mainLv, layParam);
-        
-        listFileAt(Environment.getExternalStorageDirectory().getAbsolutePath());
+
+        try {
+            listFileAt(Environment.getExternalStorageDirectory().getAbsolutePath());
+        } catch (NullPointerException e) {} // Android 10+ disallows access to sdcard
     }
     public void setFileSelectedListener(FileSelectedListener listener)
     {
