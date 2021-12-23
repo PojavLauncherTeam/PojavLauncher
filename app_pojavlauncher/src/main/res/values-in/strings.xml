@@ -239,6 +239,7 @@
     <string name="preference_misc_description">Daftar versi, dan pemeriksaan lib</string>
     <string name="preference_experimental_title">Barang Eksperimental</string>
     <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tanpa dukungan.</string>
+    <string name="preference_sustained_performance_title">Aktifkan mode kinerja berkelanjutan</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
     <string name="vbo_hack_title">Matikan VBOs</string>
     <string name="vbo_hack_description">Membantu kesesuaian di beberapa versi lama</string>
