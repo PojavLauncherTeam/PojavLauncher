@@ -17,9 +17,13 @@ import android.widget.Toast;
 import com.kdt.LoggerView;
 import com.oracle.dalvik.*;
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
+import net.sorenon.mcxr.play.MCXRLoader;
+
 import org.lwjgl.glfw.*;
 
 import javax.microedition.khronos.egl.EGL10;
@@ -209,7 +213,8 @@ public class JREUtils {
         envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
-
+        envMap.put("MCXR_APPLICATION_CTX_PTR", String.valueOf(MCXRLoader.getContextPtr()));
+        envMap.put("MCXR_JAVA_VM_PTR", String.valueOf(MCXRLoader.getJavaVMPtr()));
         // The shrink hack can be enabled from the experimental settings
         envMap.put("LIBGL_SHRINK", PREF_GLES_SHRINK_HACK);
 
@@ -273,6 +278,15 @@ public class JREUtils {
             Os.setenv(env.getKey(), env.getValue(), true);
         }
 
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command("set MCXR_JAVA_VM_PTR " + MCXRLoader.getJavaVMPtr());
+        builder.command("set MCXR_APPLICATION_CONTEXT_PTR " + MCXRLoader.getContextPtr());
+
+        for(Map.Entry<String, String> env : envMap.entrySet()) {
+            if(env.getKey().contains("MCXR")) {
+                Logger.getInstance().appendToLog("Added MCXR Enviroment Variable: " + env.getKey() + ", with value: " + env.getValue());
+            }
+        }
         File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
         jvmLibraryPath = Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client");
         Log.d("DynamicLoader","Base LD_LIBRARY_PATH: "+LD_LIBRARY_PATH);
@@ -281,7 +295,7 @@ public class JREUtils {
 
         // return ldLibraryPath;
     }
-    
+
     public static int launchJavaVM(final Activity activity,final List<String> JVMArgs) throws Throwable {
         JREUtils.relocateLibPath(activity);
         // For debugging only!
