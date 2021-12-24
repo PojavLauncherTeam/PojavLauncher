@@ -2,11 +2,11 @@ package net.kdt.pojavlaunch.tasks;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.AssetManager;
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
-import com.google.gson.*;
+
+import com.oracle.dalvik.VMLauncher;
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -15,7 +15,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.sorenon.mcxr.play.MCXRLoader;
 
 import org.apache.commons.io.*;
 
@@ -349,6 +349,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
+                MCXRLoader.setContext(mActivity);
+                MCXRLoader.setJavaVM();
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);
