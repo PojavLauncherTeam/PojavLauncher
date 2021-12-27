@@ -1,5 +1,6 @@
 package org.lwjgl.glfw;
 import java.io.*;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -211,7 +212,6 @@ public class CallbackBridge {
     private static native void nativeSendMouseButton(int button, int action, int mods);
     private static native void nativeSendScroll(double xoffset, double yoffset);
     private static native void nativeSendScreenSize(int width, int height);
-    
     public static native boolean nativeIsGrabbing();
     static {
         System.loadLibrary("pojavexec");

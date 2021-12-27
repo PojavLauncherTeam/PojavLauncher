@@ -1,34 +1,29 @@
-#include <jni.h>
 #include <stdlib.h>
+#include <jni.h>
 
 //
 // Created by Judge on 12/23/2021.
 //
 
-void setContextPtrVar(jobject ctx) {
-    setenv("MCXR_APPLICATION_CONTEXT_PTR", (const char *) ctx, 1);
-}
+jobject* context;
+JavaVM* vm;
 
-void setJavaVMPtrVar(jobject javaVM) {
-    setenv("MCXR_JAVA_VM_PTR", (const char *) javaVM, 1);
-}
-
-JNIEXPORT void JNICALL
-Java_net_sorenon_mcxr_play_MCXRLoader_setJavaVM(JNIEnv *env, jclass clazz) {
-    setJavaVMPtrVar((*env)->GetJavaVM);
+        JNIEXPORT jlong JNICALL
+Java_net_kdt_pojavlaunch_MCXRLoader_getContextPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &context;
 }
 
 JNIEXPORT jlong JNICALL
-Java_net_sorenon_mcxr_play_MCXRLoader_getContextPtr(JNIEnv *env, jclass clazz) {
-    return (long) getenv("MCXR_APPLICATION_CONTEXT_PTR");
+Java_net_kdt_pojavlaunch_MCXRLoader_getJavaVMPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &vm;
 }
 
-JNIEXPORT jlong JNICALL
-Java_net_sorenon_mcxr_play_MCXRLoader_getJavaVMPtr(JNIEnv *env, jclass clazz) {
-    return (long) getenv("MCXR_JAVA_VM_PTR");
+jint JNI_OnLoad(JavaVM *jvm, void *unused) {
+    vm = jvm;
+    return JNI_VERSION_1_6;
 }
 
 JNIEXPORT void JNICALL
-Java_net_sorenon_mcxr_play_MCXRLoader_setContext(JNIEnv *env, jclass clazz, jobject ctx) {
-    setContextPtrVar(ctx);
+Java_net_kdt_pojavlaunch_MCXRLoader_setContext(JNIEnv *env, jclass clazz, jobject ctx) {
+    context = ctx;
 }
