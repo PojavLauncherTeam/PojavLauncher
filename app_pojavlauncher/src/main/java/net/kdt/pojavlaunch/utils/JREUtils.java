@@ -22,7 +22,6 @@ import java.lang.reflect.Method;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
-import net.sorenon.mcxr.play.MCXRLoader;
 
 import org.lwjgl.glfw.*;
 
@@ -277,10 +276,6 @@ public class JREUtils {
             Logger.getInstance().appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             Os.setenv(env.getKey(), env.getValue(), true);
         }
-
-        ProcessBuilder builder = new ProcessBuilder();
-        builder.command("set MCXR_JAVA_VM_PTR " + MCXRLoader.getJavaVMPtr());
-        builder.command("set MCXR_APPLICATION_CONTEXT_PTR " + MCXRLoader.getContextPtr());
 
         for(Map.Entry<String, String> env : envMap.entrySet()) {
             if(env.getKey().contains("MCXR")) {

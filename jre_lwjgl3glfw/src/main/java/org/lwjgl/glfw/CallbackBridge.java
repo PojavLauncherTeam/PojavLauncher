@@ -1,5 +1,8 @@
 package org.lwjgl.glfw;
 import java.io.*;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.*;
 import android.util.*;
 
@@ -77,7 +80,9 @@ public class CallbackBridge {
     public static native boolean nativeSetInputReady(boolean ready);
     public static native String nativeClipboard(int action, String copy);
     public static native void nativeAttachThreadToOther(boolean isAndroid, boolean isUseStackQueueBool);
-    
     private static native void nativeSetGrabbing(boolean grab, int xset, int yset);
+    static {
+        System.loadLibrary("pojavexec");
+    }
 }
 
