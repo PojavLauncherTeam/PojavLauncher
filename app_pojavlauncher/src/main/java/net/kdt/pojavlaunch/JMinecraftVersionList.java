@@ -1,10 +1,8 @@
 package net.kdt.pojavlaunch;
 
 import androidx.annotation.Keep;
-
-import java.util.Map;
-import net.kdt.pojavlaunch.value.*;
 import java.util.*;
+import net.kdt.pojavlaunch.value.*;
 
 @Keep
 public class JMinecraftVersionList {
@@ -16,18 +14,23 @@ public class JMinecraftVersionList {
     public Version[] versions;
 
     @Keep
-    public static class Version {
+    public static class FileProperties {
+        public String id, sha1, url;
+        public long size;
+    }
+
+    @Keep
+    public static class Version extends FileProperties {
         // Since 1.13, so it's one of ways to check
         public Arguments arguments;
-
         public AssetIndex assetIndex;
 
         public String assets;
         public Map<String, MinecraftClientInfo> downloads;
-        public String id;
         public String inheritsFrom;
         public JavaVersionInfo javaVersion;
         public DependentLibrary[] libraries;
+        public LoggingConfig logging;
         public String mainClass;
         public String minecraftArguments;
         public int minimumLauncherVersion;
@@ -35,15 +38,23 @@ public class JMinecraftVersionList {
         public String releaseTime;
         public String time;
         public String type;
-        public String url;
-        public String sha1;
     }
     @Keep
     public static class JavaVersionInfo {
         public String component;
         public int majorVersion;
     }
+    @Keep
+    public static class LoggingConfig {
+        public LoggingClientConfig client;
 
+        @Keep
+        public static class LoggingClientConfig {
+            public String argument;
+            public FileProperties file;
+            public String type;
+        }
+    }
     // Since 1.13
     @Keep
     public static class Arguments {
@@ -66,9 +77,8 @@ public class JMinecraftVersionList {
         }
     }
     @Keep
-    public static class AssetIndex {
-        public String id, sha1, url;
-        public long size, totalSize;
+    public static class AssetIndex extends FileProperties {
+        public long totalSize;
     }
 }
 
