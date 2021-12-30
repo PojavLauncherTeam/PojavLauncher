@@ -242,5 +242,7 @@
     <string name="preference_misc_description">Sürüm listesi ve lib kontrolü</string>
     <string name="preference_experimental_title">Deneysel Ayarlar</string>
     <string name="preference_experimental_description">Buradaki ayarları düşünerek kullanın, destek yoktur.</string>
+    <string name="preference_sustained_performance_title">Stabil performans modunu aç</string>
+    <string name="preference_sustained_performance_description">Üst performansı kısıtlayarak ısınmayı kısıtla</string>
     <string name="preference_back_title">Son ekrana geri dön</string>
 </resources>
