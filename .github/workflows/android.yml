@@ -25,11 +25,13 @@ jobs:
         java-version: 1.8
 
     - name: Get gl4es latest commit hash
+      if: github.ref == 'refs/heads/v3_openjdk'
       id: gl4es-sha
       run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es
+      if: steps.gl4es-sha.outputs.status == 'success'
       uses: actions/cache@v2
       id: gl4es-cache
       with:
@@ -37,14 +39,14 @@ jobs:
         key: gl4es-android-shared-nodbg-test1-2-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
+      if: steps.gl4es-sha.outputs.status == 'success' && steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
         repository: 'ptitSeb/gl4es'
         path: 'gl4es'
 
     - name: Build gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
+      if: steps.gl4es-sha.outputs.status == 'success' && steps.gl4es-cache.outputs.cache-hit != 'true'
       continue-on-error: true
       run: |
         cd gl4es
@@ -57,7 +59,7 @@ jobs:
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
     - name: Install gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
+      if: steps.gl4es-sha.outputs.status == 'success' && steps.gl4es-cache.outputs.cache-hit != 'true'
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         mv gl4es ..
@@ -66,11 +68,13 @@ jobs:
         git push
     
     - name: Get vgpu latest commit hash
+      if: github.ref == 'refs/heads/v3_openjdk'
       id: vgpu-sha
       run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/VGPU refs/heads/main | grep -io '^\S*'))"
       shell: bash
     
     - name: Cache vgpu
+      if: steps.vgpu-sha.outputs.status == 'success'
       uses: actions/cache@v2
       id: vgpu-cache
       with:
@@ -78,21 +82,21 @@ jobs:
         key: vgpu-android-shared-1-${{ steps.vgpu-sha.outputs.sha }}
         
     - name: Get vgpu
-      if: steps.vgpu-cache.outputs.cache-hit != 'true'
+      if: steps.vgpu-sha.outputs.status == 'success' && steps.vgpu-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
         repository: 'PojavLauncherTeam/VGPU'
         path: 'vgpu'
         
     - name: Build vgpu
-      if: steps.vgpu-cache.outputs.cache-hit != 'true'
+      if: steps.vgpu-sha.outputs.status == 'success' && steps.vgpu-cache.outputs.cache-hit != 'true'
       continue-on-error: true
       run: |
         cd vgpu
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
     
     - name: Install vgpu
-      if: steps.vgpu-cache.outputs.cache-hit != 'true'
+      if: steps.vgpu-sha.outputs.status == 'success' && steps.vgpu-cache.outputs.cache-hit != 'true'
       run: |
         cp -R vgpu/libs/* app_pojavlauncher/src/main/jniLibs/
         mv vgpu ..
