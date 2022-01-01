@@ -17,12 +17,9 @@ import android.widget.Toast;
 import com.kdt.LoggerView;
 import com.oracle.dalvik.*;
 import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.prefs.*;
-
 import org.lwjgl.glfw.*;
 
 import javax.microedition.khronos.egl.EGL10;
@@ -212,8 +209,10 @@ public class JREUtils {
         envMap.put("HOME", Tools.DIR_GAME_NEW);
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
-        envMap.put("MCXR_APPLICATION_CTX_PTR", String.valueOf(MCXRLoader.getContextPtr()));
-        envMap.put("MCXR_JAVA_VM_PTR", String.valueOf(MCXRLoader.getJavaVMPtr()));
+
+        // On certain GLES drivers, overloading default functions shader hack fails, so disable it
+        envMap.put("LIBGL_NOINTOVLHACK", "1");
+
         // The shrink hack can be enabled from the experimental settings
         envMap.put("LIBGL_SHRINK", PREF_GLES_SHRINK_HACK);
 
@@ -277,11 +276,6 @@ public class JREUtils {
             Os.setenv(env.getKey(), env.getValue(), true);
         }
 
-        for(Map.Entry<String, String> env : envMap.entrySet()) {
-            if(env.getKey().contains("MCXR")) {
-                Logger.getInstance().appendToLog("Added MCXR Enviroment Variable: " + env.getKey() + ", with value: " + env.getValue());
-            }
-        }
         File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
         jvmLibraryPath = Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client");
         Log.d("DynamicLoader","Base LD_LIBRARY_PATH: "+LD_LIBRARY_PATH);
@@ -290,7 +284,7 @@ public class JREUtils {
 
         // return ldLibraryPath;
     }
-
+    
     public static int launchJavaVM(final Activity activity,final List<String> JVMArgs) throws Throwable {
         JREUtils.relocateLibPath(activity);
         // For debugging only!
@@ -369,6 +363,8 @@ public class JREUtils {
                 "-Dglfwstub.initEgl=false",
 
                 "-Dext.net.resolvPath=" +new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath(),
+
+                "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
@@ -547,7 +543,6 @@ public class JREUtils {
     public static native void setupExitTrap(Context context);
     // Obtain AWT screen pixels to render on Android SurfaceView
     public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
-
     static {
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");

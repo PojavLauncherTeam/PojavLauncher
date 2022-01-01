@@ -8,11 +8,6 @@ HERE_PATH := $(LOCAL_PATH)
 
 LOCAL_PATH := $(HERE_PATH)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := mcxr_loader
-        LOCAL_SRC_FILES := \
-                    mcxr_loader.c
-include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE     := xhook

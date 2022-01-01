@@ -604,6 +604,7 @@ GLubyte* (*glGetString_p) (GLenum name);
 void (*glFinish_p) (void);
 void (*glClearColor_p) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 void (*glClear_p) (GLbitfield mask);
+void (*glReadPixels_p) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void * data);
 
 /*EGL functions */
 EGLBoolean (*eglMakeCurrent_p) (EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx);
@@ -667,16 +668,16 @@ void pojavTerminate() {
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
     potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
-    char *ptrStr = malloc(sizeof(long));
-    sprintf(ptrStr, "%ld", (long) potatoBridge.androidWindow);
+    char *ptrStr;
+    asprintf(&ptrStr, "%ld", (long) potatoBridge.androidWindow);
     setenv("POJAV_WINDOW_PTR", ptrStr, 1);
+    free(ptrStr);
 }
 
 void* pojavGetCurrentContext() {
     switch (config_renderer) {
         case RENDERER_GL4ES:
             return (void *)eglGetCurrentContext_p();
-
         case RENDERER_VIRGL:
         case RENDERER_VK_ZINK:
             return (void *)OSMesaGetCurrentContext_p();
@@ -716,6 +717,7 @@ void dlsym_OSMesa(void* dl_handle) {
     glClearColor_p = dlsym(dl_handle, "glClearColor");
     glClear_p = dlsym(dl_handle,"glClear");
     glFinish_p = dlsym(dl_handle,"glFinish");
+    glReadPixels_p = dlsym(dl_handle,"glReadPixels");
 }
 
 bool loadSymbols() {
@@ -1040,6 +1042,11 @@ void pojavMakeCurrent(void* window) {
             printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
             glClear_p(GL_COLOR_BUFFER_BIT);
             glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
+
+            // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
+            int pixelsArr[4];
+            glReadPixels_p(0, 0, 1, 1, GL_RGB, GL_INT, &pixelsArr);
+
             pojavSwapBuffers();
             return;
     }

@@ -43,7 +43,6 @@ jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
 jclass bridgeClazz;
 jboolean isGrabbing;
-static JNIEnv* runtimeJNIEnvPtr;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     if (dalvikJavaVMPtr == NULL) {
@@ -57,9 +56,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
     }
-    if (runtimeJavaVMPtr != NULL) {
-        (*runtimeJavaVMPtr)->AttachCurrentThread(runtimeJavaVMPtr, &runtimeJNIEnvPtr, NULL);
-    }
+    
     isGrabbing = JNI_FALSE;
     
     return JNI_VERSION_1_4;
@@ -77,7 +74,6 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
 
     dalvikJNIEnvPtr_JRE = NULL;
     runtimeJNIEnvPtr_ANDROID = NULL;
-    runtimeJNIEnvPtr = NULL;
 }
 
 #define ADD_CALLBACK_WWIN(NAME) \
@@ -99,7 +95,6 @@ ADD_CALLBACK_WWIN(Scroll);
 ADD_CALLBACK_WWIN(WindowSize);
 
 #undef ADD_CALLBACK_WWIN
-
 
 jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
 #ifdef DEBUG

@@ -2,17 +2,12 @@ package net.kdt.pojavlaunch.tasks;
 
 import android.app.*;
 import android.content.*;
+import android.content.res.AssetManager;
+import android.graphics.*;
 import android.os.*;
 import android.util.*;
-
-import com.oracle.dalvik.VMLauncher;
-
+import com.google.gson.*;
 import java.io.*;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.*;
 import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
@@ -20,9 +15,9 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
 import org.apache.commons.io.*;
-import org.lwjgl.glfw.CallbackBridge;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -135,6 +130,36 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 File outLib;
 
+                // Patch the Log4J RCE (CVE-2021-44228)
+                if (verInfo.logging != null) {
+                    outLib = new File(Tools.DIR_GAME_NEW, verInfo.logging.client.file.id);
+                    if (outLib.exists()) {
+                        if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA) {
+                            if(!Tools.compareSHA1(outLib,verInfo.logging.client.file.sha1)) {
+                                outLib.delete();
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,verInfo.logging.client.file.id));
+                            }else{
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,verInfo.logging.client.file.id));
+                            }
+                        } else if (outLib.length() != verInfo.logging.client.file.size) {
+                            // force updating anyways
+                            outLib.delete();
+                        }
+                    }
+                    if (!outLib.exists()) {
+                        publishProgress("0", mActivity.getString(R.string.mcl_launch_downloading, verInfo.logging.client.file.id));
+                        Tools.downloadFileMonitored(
+                            verInfo.logging.client.file.url,
+                            outLib.getAbsolutePath(),
+                            new Tools.DownloaderFeedback() {
+                                @Override
+                                public void updateProgress(int curr, int max) {
+                                    publishDownloadProgress(verInfo.logging.client.file.id, curr, max);
+                                }
+                            }
+                        );
+                    }
+                }
 
                 setMax(verInfo.libraries.length);
                 zeroProgress();
@@ -350,32 +375,10 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
             try {
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
+                // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
-                MCXRLoader.setContext(mActivity.getApplicationContext());
-                File file = new File(Tools.DIR_GAME_NEW + "/" + "contextvm.dat");
-
-                //Delete the file; we will create a new file
-                file.delete();
-
-                try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw"))
-                {
-                    // Get file channel in read-write mode
-                    FileChannel fileChannel = randomAccessFile.getChannel();
-
-                    // Get direct byte buffer access using channel.map() operation
-                    MappedByteBuffer buffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 4096 * 8 * 8);
-                    buffer.order(ByteOrder.nativeOrder());
-
-                    //Write the content using put methods
-                    buffer.putLong(0, MCXRLoader.getContextPtr());
-                    buffer.putLong(1, MCXRLoader.getJavaVMPtr());
-                    buffer.putLong(2, MCXRLoader.getJavaVMPtr());
-
-                    System.out.println(buffer.getLong(0));
-                    System.out.println(buffer.getLong(1));
-                }
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);

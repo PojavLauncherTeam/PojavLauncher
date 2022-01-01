@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.kdt.pojavlaunch">
 
-    <uses-feature android:glEsVersion="0x00030001" />
-    <uses-feature
-        android:name="android.hardware.vr.headtracking"
-        android:required="true" />
+    <uses-feature android:glEsVersion="0x00020000"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -25,14 +22,17 @@
         android:hasFragileUserData="true"
         android:allowNativeHeapPointerTagging="false">
 
-        <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
+        <meta-data 
+            android:name="android.max_aspect"
+            android:value="ratio_float"/>
+		
         <activity
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape"
             android:label="@string/app_short_name"
             android:name=".PojavLoginActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
-            android:exported="true">
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -72,12 +72,12 @@
             android:screenOrientation="sensorLandscape"
             android:name=".PojavLauncherActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+        
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".JavaGUILauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
-        </activity>
-
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+		
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".CustomControlsActivity"
@@ -85,18 +85,12 @@
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
-
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:screenOrientation="landscape"
+            android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
-            android:configChanges="density|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|uiMode"
-            android:exported="true">
-            <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
-        </activity>
-
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"/>
         <provider
             android:name=".scoped.GameFolderProvider"
             android:authorities="@string/storageProviderAuthorities"
