@@ -54,7 +54,7 @@
     <string name="mcl_options">选项</string>
     <string name="mcl_option_modinstall">启动 Mod 安装器（例如 Forge, LabyMod, Fabric...）</string>
     <string name="mcl_option_modinstallwitharg">以自定义参数启动 Mod 安装器</string>
-    <string name="mcl_option_customcontrol">自定义控制键</string>
+    <string name="mcl_option_customcontrol">自定义控制按键</string>
     <string name="mcl_option_settings">设置</string>
     <string name="mcl_option_about">关于</string>
     <string name="mcl_setting_title_uninstalljre">卸载 Java 运行时环境</string>
@@ -243,7 +243,7 @@
     <string name="preference_experimental_description">使用这里的内容是不受支持的。</string>
     <string name="preference_sustained_performance_title">启用持续性能模式</string>
     <string name="preference_sustained_performance_description">通过限制峰值性能来限制热节流</string>
-    <string name="preference_back_title">返回最后一个屏幕</string>
+    <string name="preference_back_title">返回上一个页面</string>
     <string name="gles_hack_title">GL4ES 收缩黑名单</string>
     <string name="gles_hack_none">不缩小纹理</string>
     <string name="gles_hack_always">将所有纹理除以 2</string>
