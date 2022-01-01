@@ -210,6 +210,9 @@ public class JREUtils {
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
+        // On certain GLES drivers, overloading default functions shader hack fails, so disable it
+        envMap.put("LIBGL_NOINTOVLHACK", "1");
+
         // The shrink hack can be enabled from the experimental settings
         envMap.put("LIBGL_SHRINK", PREF_GLES_SHRINK_HACK);
 
