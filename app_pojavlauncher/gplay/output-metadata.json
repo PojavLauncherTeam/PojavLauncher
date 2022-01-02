@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "net.kdt.pojavlaunch",
+  "variantName": "gplay",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 172005,
+      "versionName": "v3.3.1.1-2186-4b7c1a86d-oculus_questV2",
+      "outputFile": "app_pojavlauncher-gplay.apk"
+    }
+  ],
+  "elementType": "File"
+}
