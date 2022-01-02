@@ -3,14 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.kdt.pojavlaunch">
 
-    <uses-feature android:glEsVersion="0x00020000"/>
+    <uses-feature android:glEsVersion="0x00030001" />
+    <uses-feature
+        android:name="android.hardware.vr.headtracking"
+        android:required="true" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="org.khronos.openxr.permission.OPENXR" />
 
+    <queries>
+        <provider android:authorities="org.khronos.openxr.runtime_broker;org.khronos.openxr.system_runtime_broker" />
+    </queries>
     <application
         android:allowBackup="true"
         android:name=".PojavApplication"

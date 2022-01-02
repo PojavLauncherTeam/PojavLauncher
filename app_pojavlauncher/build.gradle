@@ -38,14 +38,11 @@ def getVersionName =  {
 
 android {
     compileSdkVersion 31
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
-	
+
     lintOptions {
         abortOnError false
     }
-	
+
     signingConfigs {
         customDebug {
             storeFile file("debug.keystore")

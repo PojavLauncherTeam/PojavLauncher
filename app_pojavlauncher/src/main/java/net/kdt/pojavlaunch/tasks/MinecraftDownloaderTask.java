@@ -8,6 +8,9 @@ import android.os.*;
 import android.util.*;
 import com.google.gson.*;
 import java.io.*;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.*;
 import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
@@ -379,6 +382,29 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
+                MCXRLoader.setContext(mActivity.getApplicationContext());
+                File file = new File(Tools.DIR_GAME_NEW + "/" + "contextvm.dat");
+
+                //Delete the file; we will create a new file
+                file.delete();
+
+                try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw"))
+                {
+                    // Get file channel in read-write mode
+                    FileChannel fileChannel = randomAccessFile.getChannel();
+
+                    // Get direct byte buffer access using channel.map() operation
+                    MappedByteBuffer buffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 4096 * 8 * 8);
+                    buffer.order(ByteOrder.nativeOrder());
+
+                    //Write the content using put methods
+                    buffer.putLong(0, MCXRLoader.getContextPtr());
+                    buffer.putLong(1, MCXRLoader.getJavaVMPtr());
+                    buffer.putLong(2, MCXRLoader.getJavaVMPtr());
+
+                    System.out.println(buffer.getLong(0));
+                    System.out.println(buffer.getLong(1));
+                }
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);
