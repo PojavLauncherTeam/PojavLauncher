@@ -2,9 +2,6 @@ package net.kdt.pojavlaunch.customcontrols.gamepad;
 
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.Choreographer;
 import android.view.InputDevice;
 import android.view.KeyEvent;
@@ -18,11 +15,10 @@ import android.widget.Toast;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.math.MathUtils;
 
-import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
-import net.kdt.pojavlaunch.MainActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -72,11 +68,16 @@ public class Gamepad {
     private GamepadMap currentMap = gameMap;
 
     private boolean lastGrabbingState = true;
-    private final boolean mModifierDigitalTriggers;
+    //private final boolean mModifierDigitalTriggers;
+    private final boolean mModifierAnalogTriggers;
     private boolean mModifierSwappedAxis = true; //Triggers and right stick axis are swapped.
 
+    /* Choreographer with time to compute delta on ticking */
     private final Choreographer screenChoreographer;
     private long lastFrameTime;
+
+    /* Listen for change in gui scale */
+    private MCOptionUtils.MCOptionListener GUIScaleListener = () -> notifyGUISizeChange(getMcScale());
 
     public Gamepad(View contextView, InputDevice inputDevice){
         screenChoreographer = Choreographer.getInstance();
@@ -90,6 +91,9 @@ public class Gamepad {
         };
         screenChoreographer.postFrameCallback(frameCallback);
         lastFrameTime = System.nanoTime();
+
+        /* Add the listener for the cross hair */
+        MCOptionUtils.addMCOptionListener(GUIScaleListener);
 
         Toast.makeText(contextView.getContext(),"GAMEPAD CREATED", Toast.LENGTH_LONG).show();
         for(InputDevice.MotionRange range : inputDevice.getMotionRanges()){
@@ -108,7 +112,8 @@ public class Gamepad {
         else
             rightJoystick = new GamepadJoystick(MotionEvent.AXIS_RX, MotionEvent.AXIS_RY, inputDevice);
 
-        mModifierDigitalTriggers = inputDevice.hasKeys(KeyEvent.KEYCODE_BUTTON_R2)[0];
+       //mModifierDigitalTriggers = inputDevice.hasKeys(KeyEvent.KEYCODE_BUTTON_R2)[0];
+        mModifierAnalogTriggers = supportAnalogTriggers(inputDevice);
 
         Context ctx = contextView.getContext();
         pointerView = new ImageView(contextView.getContext());
@@ -126,7 +131,10 @@ public class Gamepad {
         ((ViewGroup)contextView.getParent()).addView(pointerView);
     }
 
-
+    /**
+     * Send the new mouse position, computing the delta
+     * @param frameTimeNanos The time to render the frame, used to compute mouse delta
+     */
     public void tick(long frameTimeNanos){
         //update mouse position
         if(lastHorizontalValue != 0 || lastVerticalValue != 0){
@@ -239,7 +247,7 @@ public class Gamepad {
     }
 
     private void updateAnalogTriggers(MotionEvent event){
-        if(!mModifierDigitalTriggers){
+        if(mModifierAnalogTriggers){
             getCurrentMap().TRIGGER_LEFT.update(
                     (event.getAxisValue(MotionEvent.AXIS_LTRIGGER) > 0.5)
                             || (event.getAxisValue(MotionEvent.AXIS_BRAKE) > 0.5)
@@ -256,6 +264,25 @@ public class Gamepad {
         int size = (int) ((22 * newSize) / scaleFactor);
         pointerView.post(() -> pointerView.setLayoutParams(new FrameLayout.LayoutParams(size, size)));
 
+    }
+
+    /**
+     * Detect if a gamepad supports analog triggers
+     * @param inputDevice The input device with all the MotionRange
+     * @return Whether the gamepad supports analog triggers
+     */
+    private boolean supportAnalogTriggers(InputDevice inputDevice){
+        for(InputDevice.MotionRange motionRange : inputDevice.getMotionRanges()){
+            int axis = motionRange.getAxis();
+
+            if(     axis == MotionEvent.AXIS_BRAKE || axis == MotionEvent.AXIS_GAS ||
+                    axis ==  MotionEvent.AXIS_LTRIGGER || axis == MotionEvent.AXIS_RTRIGGER ||
+                    (mModifierSwappedAxis && axis == MotionEvent.AXIS_Z) ||
+                    (mModifierSwappedAxis && axis == MotionEvent.AXIS_RZ)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private GamepadMap getCurrentMap(){
@@ -330,9 +357,11 @@ public class Gamepad {
 
                 //Triggers
             case KeyEvent.KEYCODE_BUTTON_L2:
+                if(mModifierAnalogTriggers) break;
                 getCurrentMap().TRIGGER_LEFT.update(isDown);
                 break;
             case KeyEvent.KEYCODE_BUTTON_R2:
+                if(mModifierAnalogTriggers) break;
                 getCurrentMap().TRIGGER_RIGHT.update(isDown);
                 break;
 
