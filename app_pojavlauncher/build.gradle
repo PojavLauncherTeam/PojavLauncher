@@ -52,9 +52,9 @@ android {
         }
         googlePlayBuild {
             storeFile file("upload.jks")
-            storePassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
+            storePassword "questcraft"
             keyAlias "upload"
-            keyPassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
+            keyPassword "questcraft"
         }
     }
 	
