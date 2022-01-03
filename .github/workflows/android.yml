@@ -113,7 +113,7 @@ jobs:
           workflow: build.yml
           path: app_pojavlauncher/src/main/assets/components/jre
           workflow_conclusion: success
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          repo: QuestCraftPlusPlus/android-openjdk-build-multiarch
           branch: buildjre8
           name: jre8-pojav
 
@@ -124,7 +124,7 @@ jobs:
           workflow: build.yml
           path: app_pojavlauncher/src/main/assets/components/jre
           workflow_conclusion: success
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          repo: QuestCraftPlusPlus/android-openjdk-build-multiarch
           branch: buildjre17
           name: jre17-pojav
 
