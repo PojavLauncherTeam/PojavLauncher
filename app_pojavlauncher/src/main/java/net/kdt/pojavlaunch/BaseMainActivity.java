@@ -31,6 +31,7 @@ import net.kdt.pojavlaunch.profiles.ProfileAdapter;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.lwjgl.glfw.*;
 
@@ -48,7 +49,7 @@ public class BaseMainActivity extends BaseActivity {
     private static Touchpad touchpad;
     private LoggerView loggerView;
 
-    private MinecraftAccount mProfile;
+    MinecraftAccount mProfile;
     
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
@@ -58,7 +59,7 @@ public class BaseMainActivity extends BaseActivity {
 
     protected volatile JMinecraftVersionList.Version mVersionInfo;
 
-    private PerVersionConfig.VersionConfig config;
+    //private PerVersionConfig.VersionConfig config;
 
     protected void initLayout(int resId) {
         setContentView(resId);
@@ -70,28 +71,44 @@ public class BaseMainActivity extends BaseActivity {
             loggerView = findViewById(R.id.mainLoggerView);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
+            String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
             if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
                 mVersionInfo = Tools.getVersionInfo(null, mProfile.selectedVersion);
+                PerVersionConfig.update();
+                PerVersionConfig.VersionConfig config = PerVersionConfig.configMap.get(mProfile.selectedVersion);
+                if(config != null) {
+                    if(config.selectedRuntime != null) {
+                        if(MultiRTUtils.forceReread(config.selectedRuntime).versionString != null) {
+                            runtime = config.selectedRuntime;
+                        }
+                    }
+                    if(config.renderer != null) {
+                        Tools.LOCAL_RENDERER = config.renderer;
+                    }
+                }
             }else{
                 LauncherProfiles.update();
+                MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile);
+                if(prof == null) {
+                    Toast.makeText(this,"Attempted to launch nonexistent profile",Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
                 mVersionInfo = Tools.getVersionInfo(null, BaseLauncherActivity.getVersionId(
-                        LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile).lastVersionId));
+                        prof.lastVersionId));
+                if(prof.javaDir != null && prof.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+                    String runtimeName = prof.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+                    if(MultiRTUtils.forceReread(runtimeName).versionString != null) {
+                        runtime = runtimeName;
+                    }
+                }
+                if(prof.__P_renderer_name != null) {
+                    Tools.LOCAL_RENDERER = prof.__P_renderer_name;
+                }
             }
             
             setTitle("Minecraft " + mProfile.selectedVersion);
-            PerVersionConfig.update();
-            config = PerVersionConfig.configMap.get(mProfile.selectedVersion);
-            String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-            if(config != null) {
-                if(config.selectedRuntime != null) {
-                    if(MultiRTUtils.forceReread(config.selectedRuntime).versionString != null) {
-                        runtime = config.selectedRuntime;
-                    }
-                }
-                if(config.renderer != null) {
-                    Tools.LOCAL_RENDERER = config.renderer;
-                }
-            }
+
             MultiRTUtils.setRuntimeNamed(this,runtime);
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;

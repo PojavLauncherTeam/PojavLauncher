@@ -13,5 +13,6 @@ public class MinecraftProfile
 	public String javaArgs;
 	public String logConfig;
 	public boolean logConfigIsXML;
+	public String __P_renderer_name;
 	public MinecraftResolution[] resolution;
 }
