@@ -36,6 +36,7 @@ public class LauncherPreferences
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
     public static String PREF_GLES_SHRINK_HACK = "0";
     public static boolean PREF_VBO_DISABLE_HACK = false;
+    public static boolean PREF_VIRTUAL_MOUSE_START = false;
 
 
     public static void loadPreferences(Context ctx) {
@@ -67,6 +68,7 @@ public class LauncherPreferences
         PREF_SUSTAINED_PERFORMANCE = DEFAULT_PREF.getBoolean("sustainedPerformance", false);
         PREF_GLES_SHRINK_HACK = DEFAULT_PREF.getString("gl4es_shrink_hack", "0");
         PREF_VBO_DISABLE_HACK = DEFAULT_PREF.getBoolean("vbo_disable_hack", false);
+        PREF_VIRTUAL_MOUSE_START = DEFAULT_PREF.getBoolean("mouse_start", false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
