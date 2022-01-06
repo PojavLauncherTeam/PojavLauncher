@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
-    <string name="login_title_no_saved_account">Nie znaleziono żadnych kont!</string>
+    <string name="login_title_no_saved_account">Nie znaleziono żadnego konta!</string>
     <string name="login_dialog_no_saved_account">Nie masz zapisanego żadnego konta.\nZaznacz opcję <b>\"Zapamiętaj dane logowania\"</b>, aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Przesuń palcem od prawej krawędzi, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
@@ -43,7 +43,7 @@
     <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Połączono</string>
-    <string name="mcl_account_offline">Offline</string>
+    <string name="mcl_account_offline">Brak sieci</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s jest gotowy do uruchomienia</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
