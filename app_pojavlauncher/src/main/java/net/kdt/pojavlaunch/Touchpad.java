@@ -28,13 +28,10 @@ import org.lwjgl.glfw.CallbackBridge;
 public class Touchpad extends FrameLayout {
     /* Whether the Touchpad should be displayed */
     private boolean displayState;
-
     /* Mouse pointer icon used by the touchpad */
     private final ImageView mousePointer = new ImageView(getContext());
     /* Detect a classic android Tap */
     private final GestureDetector singleTapDetector = new GestureDetector(getContext(), new SingleTapConfirm());
-    /* Mc mouse position, scaled by the scaleFactor */
-    float mouse_x, mouse_y;
     /* Resolution scaler option, allow downsizing a window */
     private final float scaleFactor = DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
     /* Current pointer ID to move the mouse */
@@ -51,7 +48,6 @@ public class Touchpad extends FrameLayout {
     public Touchpad(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
-
     }
 
     private void init(){
@@ -122,9 +118,9 @@ public class Touchpad extends FrameLayout {
         float mouseY = mousePointer.getY();
 
         if (singleTapDetector.onTouchEvent(event)) {
-            mouse_x = (mouseX * scaleFactor);
-            mouse_y = (mouseY * scaleFactor);
-            CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+            CallbackBridge.mouseX = (mouseX * scaleFactor);
+            CallbackBridge.mouseY = (mouseY * scaleFactor);
+            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
             CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
 
             return true;
@@ -162,7 +158,7 @@ public class Touchpad extends FrameLayout {
                     mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
 
                     placeMouseAt(mouseX, mouseY);
-                    CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+                    CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                 }else currentPointerID = event.getPointerId(0);
 
                 prevX = x;
@@ -186,9 +182,9 @@ public class Touchpad extends FrameLayout {
     public void placeMouseAt(float x, float y) {
         mousePointer.setX(x);
         mousePointer.setY(y);
-        mouse_x = (x * scaleFactor);
-        mouse_y = (y * scaleFactor);
-        CallbackBridge.sendCursorPos(mouse_x, mouse_y);
+        CallbackBridge.mouseX = (x * scaleFactor);
+        CallbackBridge.mouseY = (y * scaleFactor);
+        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
     }
 
 }
