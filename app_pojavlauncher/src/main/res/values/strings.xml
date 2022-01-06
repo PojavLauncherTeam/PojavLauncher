@@ -288,5 +288,7 @@
 
     <string name="vbo_hack_title">Disable VBOs</string>
     <string name="vbo_hack_description">Help with compatibility on some old versions</string>
+    <string name="gles_version_hack_title">Force openGL 1</string>
+    <string name="gles_version_hack_description">Help with compatibility on some old versions</string>
 
 </resources>
