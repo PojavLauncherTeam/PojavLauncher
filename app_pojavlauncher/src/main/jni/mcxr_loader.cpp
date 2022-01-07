@@ -4,8 +4,8 @@
 #include <android/native_activity.h>
 #include <mcxr_loader/android_native_app_glue.h>
 
-#include <openxr_platform.h>
-#include <openxr.h>
+#include <mcxr_loader/openxr_platform.h>
+#include <mcxr_loader/openxr.h>
 
 //
 // Created by Judge on 12/23/2021.
