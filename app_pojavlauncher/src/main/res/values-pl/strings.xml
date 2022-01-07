@@ -11,7 +11,7 @@
     <string name="login_online_password_hint">Hasło</string>
     <string name="login_online_check_keeplogin">Zapamiętaj dane logowania</string>
     <string name="login_online_login_label">Zaloguj się</string>
-    <string name="login_offline_label">Zaloguj się jako konto offline</string>
+    <string name="login_offline_label">Zaloguj jako konto lokalne</string>
     <string name="login_error_short_username">Nazwa użytkownika musi zawierać co najmniej 3 znaki</string>
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
