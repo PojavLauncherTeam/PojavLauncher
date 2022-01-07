@@ -231,6 +231,8 @@
     <string name="control_left_offset">Linke Verschiebung: </string>
     <string name="preference_control_offset_title">Seitliche Verschiebungen steuern</string>
     <string name="preference_control_offset_description">Setzte für jede Seite des Bildschirms eine benutzerdefinierte Verschiebung</string>
+    <string name="preference_mouse_start_title">Mit virtueller Maus starten</string>
+    <string name="preference_mouse_start_description">Mit dieser Option wirst du von Mathias-Boulay beurteilt</string>
     <string name="preference_video_title">Grafik und Renderer</string>
     <string name="preference_video_description">Auflösung, Skalierungstyp und Renderer</string>
     <string name="preference_control_title">Steuerung anpassen</string>
@@ -250,4 +252,6 @@
     <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
     <string name="vbo_hack_title">Deaktiviere VBOs</string>
     <string name="vbo_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
+    <string name="gles_version_hack_title">Erzwinge openGL 1</string>
+    <string name="gles_version_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
 </resources>
