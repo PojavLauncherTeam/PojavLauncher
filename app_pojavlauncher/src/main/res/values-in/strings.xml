@@ -243,4 +243,5 @@
     <string name="preference_back_title">Kembali ke layar terakhir</string>
     <string name="vbo_hack_title">Matikan VBOs</string>
     <string name="vbo_hack_description">Membantu kesesuaian di beberapa versi lama</string>
+    <string name="gles_version_hack_description">Membantu kesesuaian di beberapa versi lama</string>
 </resources>
