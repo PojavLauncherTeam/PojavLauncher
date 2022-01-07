@@ -12,7 +12,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := mcxr_loader
         LOCAL_SRC_FILES := \
                     mcxr_loader.cpp
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../libs/OpenXR-SDK/include/openxr
+        LOCAL_C_INCLUDES := $(LOCAL_PATH)/mcxr_loader
         LOCAL_CFLAGS += -DXR_USE_PLATFORM_ANDROID
 include $(BUILD_SHARED_LIBRARY)
 
