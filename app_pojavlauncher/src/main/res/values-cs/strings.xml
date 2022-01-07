@@ -117,7 +117,7 @@
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klávesnice</string>
-    <string name="control_chat">Čet</string>
+    <string name="control_chat">Chat</string>
     <string name="control_debug">Ladění</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sek</string>
@@ -128,7 +128,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3-tí</string>
+    <string name="control_thirdperson">Třetí</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Myš</string>
     <string name="control_mouseoff">Myš: ano</string>
@@ -153,7 +153,7 @@
 -->
     <string name="customctrl_edit">Upravuji %s</string>
     <string name="customctrl_remove">Odstranit %s?</string>
-    <string name="customctrl_keyname">Kód písmena</string>
+    <string name="customctrl_keyname">Kód znaku</string>
     <string name="customctrl_toggle">Přepnutelné</string>
     <string name="customctrl_size">Velikost</string>
     <string name="customctrl_size_width">Šířka</string>
@@ -231,6 +231,8 @@
     <string name="control_left_offset">levé odsazení: </string>
     <string name="preference_control_offset_title">Strana odsazení ovládání</string>
     <string name="preference_control_offset_description">Nastavit vlastní odsazení pro každou stranu obrazovky</string>
+    <string name="preference_mouse_start_title">Spouštět s zapnutou virtuální myší</string>
+    <string name="preference_mouse_start_description">Pomoci této možnosti budeš souzen Mathiasem-Boulayem</string>
     <string name="preference_video_title">Video a vykreslovač</string>
     <string name="preference_video_description">Rozlišení, typ škálování, a vykreslovač</string>
     <string name="preference_control_title">Přizpůsobení ovládání</string>
@@ -250,4 +252,6 @@
     <string name="gles_hack_sometimes">Vydělit velké textury dvěma či čtyřmi</string>
     <string name="vbo_hack_title">Vypnout VBOy</string>
     <string name="vbo_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
+    <string name="gles_version_hack_title">Vynutit openGL 1</string>
+    <string name="gles_version_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
 </resources>
