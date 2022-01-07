@@ -96,12 +96,6 @@ android {
             signingConfig signingConfigs.googlePlayBuild
         }
     }
-	
-	externalNativeBuild {
-        ndkBuild {
-            path file('src/main/jni/Android.mk')
-        }
-    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -112,7 +106,14 @@ android {
             enableSplit = false
         }
     }
-    buildToolsVersion '30.0.2'
+
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
+        }
+    }
+
+    buildToolsVersion '30.0.3'
     ndkVersion '21.4.7075529'
 }
 

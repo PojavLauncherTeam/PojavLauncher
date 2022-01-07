@@ -1,9 +1,10 @@
 package net.kdt.pojavlaunch;
 
+import android.app.Activity;
+
 public class MCXRLoader {
-    public static native void setContext(Object ctx);
+    public static native void setContext(Activity ctx);
     public static native long getContextPtr();
-    public static native long getJavaVMPtr();
 
     static {
         System.loadLibrary("mcxr_loader");
