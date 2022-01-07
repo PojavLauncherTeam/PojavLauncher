@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VIRTUAL_MOUSE_START;
 
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
@@ -127,6 +128,10 @@ public class BaseMainActivity extends BaseActivity {
 
             minecraftGLView.setSurfaceReadyListener(() -> {
                 try {
+                    // Setup virtual mouse right before launching
+                    if (PREF_VIRTUAL_MOUSE_START)
+                        touchpad.switchState();
+
                     runCraft();
                 }catch (Throwable e){
                     Tools.showError(getApplicationContext(), e, true);

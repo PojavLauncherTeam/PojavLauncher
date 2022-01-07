@@ -76,22 +76,22 @@ public class ControlOffsetPreference extends Preference {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if(seekBar == topOffsetSeekbar){
-                    String text = String.format("%s%d", getContext().getString(R.string.control_top_offset), i);
+                    String text = String.format("%s %d%s", getContext().getString(R.string.control_top_offset), i, " px");
                     topOffsetTextView.setText(text);
                     return;
                 }
                 if(seekBar == rightOffsetSeekbar){
-                    String text = String.format("%s%d", getContext().getString(R.string.control_right_offset), i);
+                    String text = String.format("%s %d%s", getContext().getString(R.string.control_right_offset), i, " px");
                     rightOffsetTextView.setText(text);
                     return;
                 }
                 if(seekBar == bottomOffsetSeekbar){
-                    String text = String.format("%s%d", getContext().getString(R.string.control_bottom_offset), i);
+                    String text = String.format("%s %d%s", getContext().getString(R.string.control_bottom_offset), i, " px");
                     bottomOffsetTextView.setText(text);
                     return;
                 }
                 if(seekBar == leftOffsetSeekbar){
-                    String text = String.format("%s%d", getContext().getString(R.string.control_left_offset), i);
+                    String text = String.format("%s %d%s", getContext().getString(R.string.control_left_offset), i, " px");
                     leftOffsetTextView.setText(text);
                     return;
                 }
@@ -111,6 +111,11 @@ public class ControlOffsetPreference extends Preference {
         rightOffsetSeekbar.setProgress(PREF_CONTROL_RIGHT_OFFSET);
         bottomOffsetSeekbar.setProgress(PREF_CONTROL_BOTTOM_OFFSET);
         leftOffsetSeekbar.setProgress(PREF_CONTROL_LEFT_OFFSET);
+
+        seekBarChangeListener.onProgressChanged(topOffsetSeekbar, PREF_CONTROL_TOP_OFFSET, false);
+        seekBarChangeListener.onProgressChanged(rightOffsetSeekbar, PREF_CONTROL_RIGHT_OFFSET, false);
+        seekBarChangeListener.onProgressChanged(bottomOffsetSeekbar, PREF_CONTROL_BOTTOM_OFFSET, false);
+        seekBarChangeListener.onProgressChanged(leftOffsetSeekbar, PREF_CONTROL_LEFT_OFFSET, false);
 
         // Custom writing to preferences
         preferenceDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
