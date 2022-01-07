@@ -231,6 +231,8 @@
     <string name="control_left_offset">Deslocamento esquerdo: </string>
     <string name="preference_control_offset_title">Deslocamento lateral do controle</string>
     <string name="preference_control_offset_description">Defina um deslocamento personalizado para cada lado da tela</string>
+    <string name="preference_mouse_start_title">Iniciar com o mouse virtual ativado</string>
+    <string name="preference_mouse_start_description">Usar esta opção fará com que você seja julgado pelo Mathias-Boulay</string>
     <string name="preference_video_title">Vídeo e renderizador</string>
     <string name="preference_video_description">Resolução, tipo de escala e renderizador</string>
     <string name="preference_control_title">Personalização do controle</string>
@@ -244,4 +246,5 @@
     <string name="preference_sustained_performance_title">Gghuu</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_back_title">Voltar para última tela</string>
+    <string name="gles_version_hack_title">Forçar OpenGL 1</string>
 </resources>
