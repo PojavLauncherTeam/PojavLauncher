@@ -246,4 +246,5 @@
     <string name="gles_hack_sometimes">큰 텍스쳐를 반 또는 반의 반으로 줄이기</string>
     <string name="vbo_hack_title">VBO 비활성화</string>
     <string name="vbo_hack_description">여러 오래된 버전과의 호환을 돕습니다</string>
+    <string name="gles_version_hack_description">여러 오래된 버전과의 호환을 돕습니다</string>
 </resources>
