@@ -142,10 +142,10 @@
     <string name="control_scaledown">Zmniejsz</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Importuj sterowanie</string>
-    <string name="import_control_invalid_file">Niepoprawny lub uszkodzony plik</string>
-    <string name="import_control_import_button">Importuj sterowanie</string>
-    <string name="import_control_verifying_file">Plik jest w trakcie weryfikacji, proszę poczekać i spróbować jeszcze raz…</string>
-    <string name="import_control_invalid_name">Niepoprawna nazwa lub plik już istnieje</string>
+    <string name="import_control_invalid_file">Nieprawidłowy lub uszkodzony plik</string>
+    <string name="import_control_import_button">importuj sterowanie</string>
+    <string name="import_control_verifying_file">Plik jest weryfikowany. Zaczekaj i spróbuj ponownie…</string>
+    <string name="import_control_invalid_name">Nieprawidłowa nazwa lub plik już istnieje</string>
     <string name="import_control_done">Importowanie zakończone</string>
     <!--
     <string name="control_more3"></string>
@@ -232,6 +232,8 @@
     <string name="control_left_offset">lewe przesunięcie: </string>
     <string name="preference_control_offset_title">Przesunięcia boczne sterowania</string>
     <string name="preference_control_offset_description">Ustaw niestandardowe przesunięcie na każdą stronę ekranu</string>
+    <string name="preference_mouse_start_title">Uruchom z włączoną myszą wirtualną</string>
+    <string name="preference_mouse_start_description">Używanie tej opcji naraża Cię na komentarze ze strony Mathiasa-Boulay\'a</string>
     <string name="preference_video_title">Wideo i renderowanie</string>
     <string name="preference_video_description">Rozdzielczość, typ skalowania i renderowanie</string>
     <string name="preference_control_title">Kontroluj dostosowywanie</string>
@@ -245,9 +247,11 @@
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
     <string name="preference_sustained_performance_description">Ogranicz przegrzewanie zmniejszając górny próg wydajności</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
+    <string name="gles_hack_title">Poprawka zmniejszająca GL4ES</string>
     <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
     <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
     <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
     <string name="vbo_hack_title">Wyłącz VBO</string>
     <string name="vbo_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
+    <string name="gles_version_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
 </resources>
