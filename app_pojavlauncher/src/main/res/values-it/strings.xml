@@ -232,6 +232,8 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="control_left_offset">Offset sinistro: </string>
     <string name="preference_control_offset_title">Controlli offset laterali</string>
     <string name="preference_control_offset_description">Imposta un offset personalizza ad ogni lato dello schermo</string>
+    <string name="preference_mouse_start_title">Inizia con il mouse virtuale attivo</string>
+    <string name="preference_mouse_start_description">Utilizzando questa opzione sarai giudicato da Mathias-Boulay</string>
     <string name="preference_video_title">Video e render</string>
     <string name="preference_video_description">Risoluzione, scala, e render</string>
     <string name="preference_control_title">Controlla personalizzazioni</string>
@@ -251,4 +253,6 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="gles_hack_sometimes">Dividi le texture più grandi di /2 o /4</string>
     <string name="vbo_hack_title">Disattiva VBOs</string>
     <string name="vbo_hack_description">Aiuta con la compatibilità di alcune vecchie versioni</string>
+    <string name="gles_version_hack_title">Forza openGL 1</string>
+    <string name="gles_version_hack_description">Aiuta con la compatibilità di alcune vecchie versioni</string>
 </resources>
