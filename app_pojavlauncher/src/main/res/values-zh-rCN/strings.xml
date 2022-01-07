@@ -250,4 +250,5 @@
     <string name="gles_hack_sometimes">将大纹理除以 2 或 4</string>
     <string name="vbo_hack_title">禁用 VBO</string>
     <string name="vbo_hack_description">兼容旧版本</string>
+    <string name="gles_version_hack_description">兼容旧版本</string>
 </resources>
