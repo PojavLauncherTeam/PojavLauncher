@@ -6,18 +6,14 @@
     <uses-feature android:glEsVersion="0x00030001" />
     <uses-feature
         android:name="android.hardware.vr.headtracking"
-        android:required="true" />
+        android:required="false"
+        android:version="1" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="org.khronos.openxr.permission.OPENXR" />
-
-    <queries>
-        <provider android:authorities="org.khronos.openxr.runtime_broker;org.khronos.openxr.system_runtime_broker" />
-    </queries>
     <application
         android:allowBackup="true"
         android:name=".PojavApplication"
@@ -32,7 +28,7 @@
         <meta-data 
             android:name="android.max_aspect"
             android:value="ratio_float"/>
-		
+        <meta-data android:name="com.oculus.supportedDevices" android:value="all" />
         <activity
             android:exported="true"
             android:launchMode="singleTop"
@@ -43,7 +39,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>Z
         </activity>
 
         <activity android:name=".ImportControlActivity"
@@ -78,13 +74,14 @@
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".PojavLauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-        
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:exported="true">
+        </activity>
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".JavaGUILauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-		
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
+        </activity>
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".CustomControlsActivity"
@@ -109,7 +106,9 @@
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-
+        <meta-data
+            android:name="com.oculus.intent.category.VR"
+            android:value="vr_only" />
     </application>
 
 </manifest>

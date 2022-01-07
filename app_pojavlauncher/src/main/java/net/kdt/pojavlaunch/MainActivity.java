@@ -1,21 +1,20 @@
 package net.kdt.pojavlaunch;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.*;
-
-
-import androidx.annotation.Nullable;
-
-import net.kdt.pojavlaunch.customcontrols.*;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.utils.MCOptionUtils;
-
-import java.io.*;
-
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
-import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.MCOptionUtils;
+
+import java.io.IOException;
 
 public class MainActivity extends BaseMainActivity {
     public static ControlLayout mControlLayout;
@@ -71,7 +70,7 @@ public class MainActivity extends BaseMainActivity {
         } catch (Throwable th) {
             Tools.showError(this, th);
         }
-        
+
         // toggleGui(null);
         mControlLayout.toggleControlVisible();
     }

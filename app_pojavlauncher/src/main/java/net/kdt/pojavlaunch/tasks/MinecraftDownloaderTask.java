@@ -382,7 +382,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
-                MCXRLoader.setContext(mActivity.getApplicationContext());
+                MCXRLoader.setContext(mActivity);
                 File file = new File(Tools.DIR_GAME_NEW + "/" + "contextvm.dat");
 
                 //Delete the file; we will create a new file
@@ -398,12 +398,9 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     buffer.order(ByteOrder.nativeOrder());
 
                     //Write the content using put methods
-                    buffer.putLong(0, MCXRLoader.getContextPtr());
-                    buffer.putLong(1, MCXRLoader.getJavaVMPtr());
-                    buffer.putLong(2, MCXRLoader.getJavaVMPtr());
+                    buffer.putLong(MCXRLoader.getContextPtr());
 
-                    System.out.println(buffer.getLong(0));
-                    System.out.println(buffer.getLong(1));
+                    System.out.println(buffer.getLong());
                 }
             }
             catch (Throwable e) {
