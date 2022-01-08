@@ -232,6 +232,8 @@
     <string name="control_left_offset">слева: </string>
     <string name="preference_control_offset_title">Смещение управления</string>
     <string name="preference_control_offset_description">Устанавливает пользовательское смещение для каждой стороны экрана</string>
+    <string name="preference_mouse_start_title">Запуск с виртуальной мышью</string>
+    <string name="preference_mouse_start_description">Mathias-Boulay осудит вас, если вы будете использовать эту опцию</string>
     <string name="preference_video_title">Видео и визуализатор</string>
     <string name="preference_video_description">Разрешение, тип масштабирования и визуализатор</string>
     <string name="preference_control_title">Настройка управления</string>
@@ -250,5 +252,6 @@
     <string name="gles_hack_sometimes">Сжимать большие текстуры в 2 или 4 раза</string>
     <string name="vbo_hack_title">Отключить VBO</string>
     <string name="vbo_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
+    <string name="gles_version_hack_title">Принудительное использование openGL 1</string>
     <string name="gles_version_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
 </resources>
