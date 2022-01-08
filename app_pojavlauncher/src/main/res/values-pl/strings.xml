@@ -253,5 +253,6 @@
     <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
     <string name="vbo_hack_title">Wyłącz VBO</string>
     <string name="vbo_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
+    <string name="gles_version_hack_title">Wymuś OpenGL 1</string>
     <string name="gles_version_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
 </resources>
