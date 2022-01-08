@@ -27,6 +27,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Tools.updateWindowSize(this);
+    }
+
+    @Override
     protected void onPostResume() {
         super.onPostResume();
         Tools.ignoreNotch(PREF_IGNORE_NOTCH,this);
