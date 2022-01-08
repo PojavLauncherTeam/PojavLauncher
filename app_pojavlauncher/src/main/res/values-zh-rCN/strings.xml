@@ -231,6 +231,8 @@
     <string name="control_left_offset">左偏移： </string>
     <string name="preference_control_offset_title">控件侧偏移</string>
     <string name="preference_control_offset_description">设置屏幕每边的自定义偏移</string>
+    <string name="preference_mouse_start_title">启动游戏时默认打开虚拟鼠标</string>
+    <string name="preference_mouse_start_description">启用该选项将使用 Mathias-Boulay 判断</string>
     <string name="preference_video_title">视频和渲染器</string>
     <string name="preference_video_description">分辨率、缩放类型和渲染器</string>
     <string name="preference_control_title">控制自定义</string>
@@ -250,5 +252,6 @@
     <string name="gles_hack_sometimes">将大纹理除以 2 或 4</string>
     <string name="vbo_hack_title">禁用 VBO</string>
     <string name="vbo_hack_description">兼容旧版本</string>
+    <string name="gles_version_hack_title">强制使用 OpenGL 1</string>
     <string name="gles_version_hack_description">兼容旧版本</string>
 </resources>
