@@ -231,6 +231,8 @@
     <string name="control_left_offset">Khoảng bù trừ trái: </string>
     <string name="preference_control_offset_title">Khoảng bù trừ theo cạnh của bộ điều khiển</string>
     <string name="preference_control_offset_description">Đặt khoảng bù trừ tuỳ chỉnh cho mỗi cạnh của màn hình</string>
+    <string name="preference_mouse_start_title">Khởi động với chuột ảo bật</string>
+    <string name="preference_mouse_start_description">Khi dùng tùy chọn này, bạn sẽ bị *chỉ giáo* bởi Mathias Boulay :)</string>
     <string name="preference_video_title">Hình ảnh và trình kết xuất</string>
     <string name="preference_video_description">Độ phân giải, dạng thu phóng, và trình kết xuất</string>
     <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
@@ -244,7 +246,12 @@
     <string name="preference_sustained_performance_title">Bật chế độ duy trì hiệu suất</string>
     <string name="preference_sustained_performance_description">Hạn chế giảm hiệu suất vì nhiệt bằng cách giới hạn hiệu suất tối đa</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
+    <string name="gles_hack_title">Giải pháp thu nhỏ texture của gl4es</string>
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
     <string name="gles_hack_always">Chia tất cả các kết cấu cho 2</string>
     <string name="gles_hack_sometimes">Chia những kết cấu lớn cho 2 hoặc 4</string>
+    <string name="vbo_hack_title">Tắt VBO</string>
+    <string name="vbo_hack_description">Có thể giúp tương thích với một số phiên bản cũ</string>
+    <string name="gles_version_hack_title">Bắt buộc OpenGL 1</string>
+    <string name="gles_version_hack_description">Có thể giúp tương thích với một số phiên bản cũ</string>
 </resources>
