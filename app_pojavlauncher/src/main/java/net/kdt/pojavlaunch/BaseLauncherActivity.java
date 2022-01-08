@@ -175,63 +175,57 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-        if(resultCode == Activity.RESULT_OK) {
-            final ProgressDialog barrier = new ProgressDialog(this);
-            barrier.setMessage(getString(R.string.global_waiting));
-            barrier.setProgressStyle(barrier.STYLE_SPINNER);
-            barrier.setCancelable(false);
-            barrier.show();
+        if(resultCode != Activity.RESULT_OK) return;
 
-            // Install the runtime
-            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME) {
-                if (data == null) return;
+        // Install the runtime
+        if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME) {
+            if (data == null) return;
 
-                final Uri uri = data.getData();
-                Thread t = new Thread(() -> {
-                    try {
-                        String name = getFileName(this, uri);
-                        MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), name,
-                                (resid, stuff) -> BaseLauncherActivity.this.runOnUiThread(
-                                        () -> barrier.setMessage(BaseLauncherActivity.this.getString(resid, stuff))));
-                        MultiRTUtils.postPrepare(BaseLauncherActivity.this, name);
-                    } catch (IOException e) {
-                        Tools.showError(BaseLauncherActivity.this, e);
-                    }
+            final Uri uri = data.getData();
+            new Thread(() -> {
+                try {
+                    String name = getFileName(this, uri);
+                    MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), name, getApplicationInfo().nativeLibraryDir);
+
+                    // TODO BETTER UPDATE SYSTEM
                     BaseLauncherActivity.this.runOnUiThread(() -> {
-                        barrier.dismiss();
                         mRuntimeConfigDialog.refresh();
                         mRuntimeConfigDialog.mDialog.show();
                     });
-                });
-                t.start();
-            }
+                } catch (IOException e) {
+                    Tools.showError(BaseLauncherActivity.this, e);
+                }
 
-            // Run a mod installer
-            if (requestCode == RUN_MOD_INSTALLER) {
-                if (data == null) return;
+            }).start();
+            return;
+        }
 
-                final Uri uri = data.getData();
-                barrier.setMessage(BaseLauncherActivity.this.getString(R.string.multirt_progress_caching));
-                Thread t = new Thread(()->{
-                    try {
-                        final String name = getFileName(this, uri);
-                        final File modInstallerFile = new File(getCacheDir(), name);
-                        FileOutputStream fos = new FileOutputStream(modInstallerFile);
-                        IOUtils.copy(getContentResolver().openInputStream(uri), fos);
-                        fos.close();
-                        BaseLauncherActivity.this.runOnUiThread(() -> {
-                            barrier.dismiss();
-                            Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
-                            intent.putExtra("modFile", modInstallerFile);
-                            startActivity(intent);
-                        });
-                    }catch(IOException e) {
-                        Tools.showError(BaseLauncherActivity.this,e);
-                    }
-                });
-                t.start();
-            }
+        // TODO Restore the barrier
 
+        // Run a mod installer
+        if (requestCode == RUN_MOD_INSTALLER) {
+            if (data == null) return;
+
+            final Uri uri = data.getData();
+            //barrier.setMessage(BaseLauncherActivity.this.getString(R.string.multirt_progress_caching));
+            Thread t = new Thread(()->{
+                try {
+                    final String name = getFileName(this, uri);
+                    final File modInstallerFile = new File(getCacheDir(), name);
+                    FileOutputStream fos = new FileOutputStream(modInstallerFile);
+                    IOUtils.copy(getContentResolver().openInputStream(uri), fos);
+                    fos.close();
+                    BaseLauncherActivity.this.runOnUiThread(() -> {
+                        //barrier.dismiss();
+                        Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
+                        intent.putExtra("modFile", modInstallerFile);
+                        startActivity(intent);
+                    });
+                }catch(IOException e) {
+                    Tools.showError(BaseLauncherActivity.this,e);
+                }
+            });
+            t.start();
         }
     }
 

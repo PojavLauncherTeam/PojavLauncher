@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -67,28 +68,26 @@ public class PojavLoginActivity extends BaseActivity {
     private final Object mLockStoragePerm = new Object();
     private final Object mLockSelectJRE = new Object();
     
-    private EditText edit2;
+    private EditText emailEditText, passwordEditText;
     private final int REQUEST_STORAGE_REQUEST_CODE = 1;
     private CheckBox sRemember;
-    private TextView startupTextView;
+
     private SharedPreferences firstLaunchPrefs;
     private MinecraftAccount mProfile = null;
     
     private boolean isSkipInit = false;
     private boolean isStarting = false;
-
-    public static final String PREF_IS_INSTALLED_JAVARUNTIME = "isJavaRuntimeInstalled";
     
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState); // false;
+        super.onCreate(savedInstanceState);
         if(savedInstanceState != null) {
             isStarting = savedInstanceState.getBoolean("isStarting");
             isSkipInit = savedInstanceState.getBoolean("isSkipInit");
         }
-        Tools.updateWindowSize(this);
         firstLaunchPrefs = getSharedPreferences("pojav_extract", MODE_PRIVATE);
-        new Thread(new InitRunnable()).start();
+        uiInit();
+        getStoragePermissionThenSetup();
     }
 
     @Override
@@ -98,130 +97,43 @@ public class PojavLoginActivity extends BaseActivity {
         outState.putBoolean("isSkipInit",isSkipInit);
     }
 
-    public class InitRunnable implements Runnable{
-        private int revokeCount = -1;
-        private int proceedState = 0;
-        private ProgressBar progress;
-        public InitRunnable() {
-        }
-        public void initLocalUi() {
-            LinearLayout startScr = new LinearLayout(PojavLoginActivity.this);
-            LayoutInflater.from(PojavLoginActivity.this).inflate(R.layout.start_screen,startScr);
-            PojavLoginActivity.this.setContentView(startScr);
 
-            progress = (ProgressBar) findViewById(R.id.startscreenProgress);
-            if(isStarting) progress.setVisibility(View.VISIBLE);
-            startupTextView = (TextView) findViewById(R.id.startscreen_text);
-        }
-
-        public int _start() {
-            Log.i("UITest","START initialization");
-            if(!isStarting) {
-                //try { Thread.sleep(2000); } catch (InterruptedException e) { }
-                runOnUiThread(() -> progress.setVisibility(View.VISIBLE));
-                while (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 && !isStorageAllowed()) { //Do not ask for storage at all on Android 10+
-                    try {
-                        revokeCount++;
-                        if (revokeCount >= 3) {
-                            Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
-                            return 2;
-                        }
-                        requestStoragePermission();
-
-                        synchronized (mLockStoragePerm) {
-                            mLockStoragePerm.wait();
-                        }
-                    } catch (InterruptedException e) {
-                    }
-                }
-                isStarting = true;
-            }
-            try {
-                initMain();
-            } catch (Throwable th) {
-                Tools.showError(PojavLoginActivity.this, th, true);
-                return 1;
-            }
-            return 0;
-        }
-        public void proceed() {
-            isStarting = false;
-            switch(proceedState) {
-                case 2:
-                    finish();
-                    break;
-                case 0:
-                    uiInit();
-                    break;
-            }
-        }
-        @Override
-        public void run() {
-            if(!isSkipInit) {
-                PojavLoginActivity.this.runOnUiThread(this::initLocalUi);
-                proceedState = _start();
-            }
-            PojavLoginActivity.this.runOnUiThread(this::proceed);
-        }
-    }
     private void uiInit() {
         setContentView(R.layout.activity_pojav_login);
 
         Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
-
-        String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
-        SpannableString defaultLangChar = new SpannableString(defaultLang);
-        defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(), 0);
         
         final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
-        langAdapter.add(new DisplayableLocale(LocaleUtils.DEFAULT_LOCALE, defaultLangChar));
+        langAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        langAdapter.add(new DisplayableLocale(LocaleUtils.DEFAULT_LOCALE, LocaleUtils.DEFAULT_LOCALE.getDisplayName()));
         langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("language_list.txt")));
             String line;
             while ((line = reader.readLine()) != null) {
-                File currFile = new File("/" + line);
-                // System.out.println(currFile.getAbsolutePath());
-                if (currFile.getAbsolutePath().contains("/values-") || currFile.getName().startsWith("values-")) {
-                    // TODO use regex(?)
-                    langAdapter.add(new DisplayableLocale(currFile.getName().replace("values-", "").replace("-r", "-")));
-                }
+                langAdapter.add(new DisplayableLocale(line.replace("values-", "").replace("-r", "-")));
             }
         } catch (IOException e) {
             Tools.showError(this, e);
         }
-        
-        langAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        
+
         int selectedLang = 0;
+        String defaultDisplayName = Locale.getDefault().getDisplayLanguage();
         for (int i = 0; i < langAdapter.getCount(); i++) {
-            if (Locale.getDefault().getDisplayLanguage().equals(langAdapter.getItem(i).mLocale.getDisplayLanguage())) {
+            if (defaultDisplayName.equals(langAdapter.getItem(i).mLocale.getDisplayLanguage())) {
                 selectedLang = i;
                 break;
             }
         }
         
         spinnerChgLang.setAdapter(langAdapter);
-        spinnerChgLang.setSelection(selectedLang);
+        spinnerChgLang.setSelection(selectedLang, false);
         spinnerChgLang.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
-            private boolean isInitCalled;
             @Override
             public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
-                if (!isInitCalled) {
-                    isInitCalled = true;
-                    return;
-                }
-                
-                Locale locale;
-                if (position == 0) {
-                    locale = LocaleUtils.DEFAULT_LOCALE;
-                } else if (position == 1) {
-                    locale = Locale.ENGLISH;
-                } else {
-                    locale = langAdapter.getItem(position).mLocale;
-                }
-                
+
+                Locale locale = langAdapter.getItem(position).mLocale;
                 LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
                 LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).apply();
                 
@@ -233,19 +145,17 @@ public class PojavLoginActivity extends BaseActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapter) {}
         });
-            
-        edit2 = (EditText) findViewById(R.id.login_edit_email);
-        
+
+        emailEditText = findViewById(R.id.login_edit_email);
         sRemember = findViewById(R.id.login_switch_remember);
+            
         isSkipInit = true;
     }
     
     @Override
     public void onResume() {
         super.onResume();
-        
-        Tools.updateWindowSize(this);
-        
+
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
     }
@@ -300,6 +210,7 @@ public class PojavLoginActivity extends BaseActivity {
             Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
         }
     }
+
     private void initMain() throws Throwable {
         mkdirs(Tools.DIR_ACCOUNT_NEW);
         PojavMigrator.migrateAccountData(this);
@@ -343,6 +254,7 @@ public class PojavLoginActivity extends BaseActivity {
             Tools.showError(this, e);
         }
     }
+
     private void showStorageDialog() {
         if(!firstLaunchPrefs.getBoolean("storageDialogShown",false)) {
             AlertDialog.Builder bldr = new AlertDialog.Builder(this);
@@ -357,37 +269,44 @@ public class PojavLoginActivity extends BaseActivity {
             bldr.show();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK) {
-            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP) {
-                if (data != null) {
-                    final Uri uri = data.getData();
-                    Thread t = new Thread(() -> {
-                        try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(this, uri),
-                                    (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
-                                            () -> {
-                                                if (startupTextView != null)
-                                                    startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
-                                            }));
-                            synchronized (mLockSelectJRE) {
-                                mLockSelectJRE.notifyAll();
-                            }
-                        } catch (IOException e) {
-                            Tools.showError(PojavLoginActivity.this
-                                    , e);
-                        }
-                    });
-                    t.start();
+        if(resultCode != Activity.RESULT_OK) return;
+
+        if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP) {
+            if (data == null) return;
+
+            final Uri uri = data.getData();
+            new Thread(() -> {
+                try {
+                    MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri),
+                            getFileName(this, uri),
+                            getApplicationInfo().nativeLibraryDir);
+
+                    synchronized (mLockSelectJRE) {
+                        mLockSelectJRE.notifyAll();
+                    }
+                } catch (IOException e) {
+                    Tools.showError(PojavLoginActivity.this, e);
                 }
-            }else if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
-                //Log.i("MicroLoginWrap","Got microsoft login result:" + data);
-                performMicroLogin(data);
-            }
+            }).start();
+            return;
+        }
+
+        if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
+            //Log.i("MicroLoginWrap","Got microsoft login result:" + data);
+            performMicroLogin(data);
         }
     }
+
+    /**
+     * Install the internal runtime if needed
+     * @param am The AssetManager to get the asset from
+     * @param otherRuntimesAvailable Whether other runtimes are available
+     * @return Hmmm,
+     */
     private boolean installRuntimeAutomatically(AssetManager am, boolean otherRuntimesAvailable) {
         /* Check if JRE is included */
         String rt_version = null;
@@ -399,26 +318,27 @@ public class PojavLoginActivity extends BaseActivity {
         }
         if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
         if(rt_version == null) return false;
-        if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
+
+        //If we already have an integrated one installed, check if it's up-to-date
+        if(!rt_version.equals(current_rt_version)) {
             try {
-                MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + archAsString(Tools.DEVICE_ARCHITECTURE) + ".tar.xz"), "Internal", rt_version,
-                        (resid, vararg) -> runOnUiThread(()->{if(startupTextView!=null)startupTextView.setText(getString(resid,vararg));}));
-                MultiRTUtils.postPrepare(PojavLoginActivity.this,"Internal");
+                MultiRTUtils.installRuntimeNamedBinpack(
+                        am.open("components/jre/universal.tar.xz"),
+                        am.open("components/jre/bin-" + archAsString(Tools.DEVICE_ARCHITECTURE) + ".tar.xz"),
+                        "Internal",
+                        rt_version,
+                        getApplicationInfo().nativeLibraryDir);
                 return true;
             }catch (IOException e) {
                 Log.e("JREAuto", "Internal JRE unpack failed", e);
                 return false;
             }
-        }else return true; // we have at least one runtime, and it's compartible, good to go
+        }else return true; // we have at least one runtime, and it's compatible, good to go
     }
 
-    private static boolean mkdirs(String path)
-    {
+    private static boolean mkdirs(String path) {
         File file = new File(path);
-        // check necessary???
-        if(file.getParentFile().exists())
-             return file.mkdir();
-        else return file.mkdirs();
+        return file.mkdirs();
     }
 
     
@@ -566,13 +486,13 @@ public class PojavLoginActivity extends BaseActivity {
     private MinecraftAccount loginLocal() {
         new File(Tools.DIR_ACCOUNT_OLD).mkdir();
         
-        String text = edit2.getText().toString();
+        String text = emailEditText.getText().toString();
         if (text.isEmpty()) {
-            edit2.setError(getString(R.string.global_error_field_empty));
+            emailEditText.setError(getString(R.string.global_error_field_empty));
         } else if (text.length() < 3 || text.length() > 16 || !text.matches("\\w+")) {
-            edit2.setError(getString(R.string.login_error_invalid_username));
+            emailEditText.setError(getString(R.string.login_error_invalid_username));
         } else if (new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()) {
-            edit2.setError(getString(R.string.login_error_exist_username));
+			emailEditText.setError(getString(R.string.login_error_exist_username));
         } else {
             MinecraftAccount builder = new MinecraftAccount();
             builder.isMicrosoft = false;
@@ -615,6 +535,36 @@ public class PojavLoginActivity extends BaseActivity {
         
         return str;
     }
+
+    /** Setup important files when storage is available */
+    private void getStoragePermissionThenSetup(){
+       new Thread(() -> {
+           int revokeCount = 0;
+           while (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 && !isStorageAllowed()) { //Do not ask for storage at all on Android 10+
+               try {
+                   revokeCount++;
+                   if (revokeCount >= 3) {
+                       Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
+                       finish();
+                   }
+                   requestStoragePermission();
+
+                   synchronized (mLockStoragePerm) {
+                       mLockStoragePerm.wait();
+                   }
+               } catch (InterruptedException e) {}
+           }
+
+           // Storage is allowed, setup stuff
+           try {
+               initMain();
+           } catch (Throwable throwable) {
+               throwable.printStackTrace();
+           }
+       }).start();
+
+    }
+
     //We are calling this method to check the permission status
     private boolean isStorageAllowed() {
         //Getting the permission status
@@ -628,8 +578,7 @@ public class PojavLoginActivity extends BaseActivity {
     }
 
     //Requesting permission
-    private void requestStoragePermission()
-    {
+    private void requestStoragePermission(){
         ActivityCompat.requestPermissions(this, new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
     }
@@ -637,7 +586,8 @@ public class PojavLoginActivity extends BaseActivity {
     // This method will be called when the user will tap on allow or deny
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_STORAGE_REQUEST_CODE){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_STORAGE_REQUEST_CODE) {
             synchronized (mLockStoragePerm) {
                 mLockStoragePerm.notifyAll();
             }
