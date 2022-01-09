@@ -83,6 +83,17 @@ public final class ExtraCore {
      */
     public static void addExtraListener(String key, ExtraListener listener){
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
+        addExtraListener(key, listener, false);
+    }
+
+    /**
+     * Link an ExtraListener to a value
+     * @param key The value key to look for
+     * @param listener The ExtraListener to link
+     * @param immediateTrigger When true, immediately triggers the listener if a value has been set
+     */
+    public static void addExtraListener(String key, ExtraListener listener, boolean immediateTrigger){
+        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
             listenerList = new ConcurrentLinkedQueue<>();
@@ -91,7 +102,11 @@ public final class ExtraCore {
 
         // This is kinda naive, I should look for duplicates
         listenerList.add(new WeakReference<>(listener));
+        if(immediateTrigger && getInstance().valueMap.containsKey(key)){
+            listener.onValueSet(key, getInstance().valueMap.get(key));
+        }
     }
+
 
     /**
      * Unlink an ExtraListener from a value.
