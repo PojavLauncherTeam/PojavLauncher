@@ -147,7 +147,6 @@ public class PojavLoginActivity extends BaseActivity {
 
         emailEditText = findViewById(R.id.login_edit_email);
         sRemember = findViewById(R.id.login_switch_remember);
-            
         isSkipInit = true;
     }
     
@@ -246,7 +245,7 @@ public class PojavLoginActivity extends BaseActivity {
                     mLockSelectJRE.wait();
                 }
             }
-            if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
+
             LauncherPreferences.loadPreferences(getApplicationContext());
         }
         catch(Throwable e){
@@ -538,7 +537,7 @@ public class PojavLoginActivity extends BaseActivity {
                try {
                    revokeCount++;
                    if (revokeCount >= 3) {
-                       Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
+                       runOnUiThread(() -> Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show());
                        finish();
                    }
                    requestStoragePermission();
