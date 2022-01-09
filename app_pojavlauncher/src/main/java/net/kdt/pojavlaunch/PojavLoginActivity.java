@@ -106,7 +106,6 @@ public class PojavLoginActivity extends BaseActivity {
         final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         langAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         langAdapter.add(new DisplayableLocale(LocaleUtils.DEFAULT_LOCALE, LocaleUtils.DEFAULT_LOCALE.getDisplayName()));
-        langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("language_list.txt")));
@@ -119,9 +118,9 @@ public class PojavLoginActivity extends BaseActivity {
         }
 
         int selectedLang = 0;
-        String defaultDisplayName = Locale.getDefault().getDisplayLanguage();
+        String defaultDisplayName = Locale.getDefault().getDisplayName();
         for (int i = 0; i < langAdapter.getCount(); i++) {
-            if (defaultDisplayName.equals(langAdapter.getItem(i).mLocale.getDisplayLanguage())) {
+            if (defaultDisplayName.contentEquals(langAdapter.getItem(i).mName)) {
                 selectedLang = i;
                 break;
             }
@@ -159,7 +158,6 @@ public class PojavLoginActivity extends BaseActivity {
         // Clear current profile
         PojavProfile.setCurrentProfile(this, null);
     }
-
    
     private void unpackComponent(AssetManager am, String component) throws IOException {
         File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
@@ -194,6 +192,7 @@ public class PojavLoginActivity extends BaseActivity {
             }
         }
     }
+
     public static void disableSplash(String dir) {
         mkdirs(dir + "/config");
         File forgeSplashFile = new File(dir, "config/splash.properties");
@@ -341,16 +340,11 @@ public class PojavLoginActivity extends BaseActivity {
         return file.mkdirs();
     }
 
-    
     public void loginMicrosoft(View view) {
         Intent i = new Intent(this,MicrosoftLoginGUIActivity.class);
         startActivityForResult(i,MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST);
     }
-    
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-    }
+
     public void performMicroLogin(Intent intent) {
         Uri data = intent.getData();
         //Log.i("MicroAuth", data.toString());
@@ -562,7 +556,6 @@ public class PojavLoginActivity extends BaseActivity {
                throwable.printStackTrace();
            }
        }).start();
-
     }
 
     //We are calling this method to check the permission status
