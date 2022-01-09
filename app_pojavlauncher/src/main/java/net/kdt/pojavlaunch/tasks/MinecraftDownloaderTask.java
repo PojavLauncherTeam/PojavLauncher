@@ -396,11 +396,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     // Get direct byte buffer access using channel.map() operation
                     MappedByteBuffer buffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 4096 * 8 * 8);
                     buffer.order(ByteOrder.nativeOrder());
-
                     //Write the content using put methods
                     buffer.putLong(MCXRLoader.getContextPtr());
-
-                    System.out.println(buffer.getLong());
                 }
             }
             catch (Throwable e) {

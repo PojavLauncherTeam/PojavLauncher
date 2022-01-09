@@ -39,7 +39,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>Z
+            </intent-filter>
         </activity>
 
         <activity android:name=".ImportControlActivity"
@@ -94,7 +94,9 @@
             android:multiprocess="true"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"/>
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation">
+            <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
+        </activity>
         <provider
             android:name=".scoped.GameFolderProvider"
             android:authorities="@string/storageProviderAuthorities"
@@ -106,9 +108,6 @@
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-        <meta-data
-            android:name="com.oculus.intent.category.VR"
-            android:value="vr_only" />
     </application>
 
 </manifest>
