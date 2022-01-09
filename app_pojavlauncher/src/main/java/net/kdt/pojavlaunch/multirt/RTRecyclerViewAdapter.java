@@ -11,12 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.kdt.pojavlaunch.Architecture;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.IOException;
@@ -42,30 +45,29 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         holder.bindRuntime(runtimes.get(position),position);
     }
 
-    @Override
-    public int getItemCount() {
-        return MultiRTUtils.getRuntimes().size();
-    }
-
-    public boolean isDefaultRuntime(Runtime rt) {
+    public boolean isDefaultRuntime(MultiRTUtils.Runtime rt) {
         return LauncherPreferences.PREF_DEFAULT_RUNTIME.equals(rt.name);
     }
 
-    public void setDefault(Runtime rt){
+    public void setDefault(MultiRTUtils.Runtime rt){
         LauncherPreferences.PREF_DEFAULT_RUNTIME = rt.name;
         LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
         RTRecyclerViewAdapter.this.notifyDataSetChanged();
     }
 
-
+    @Override
+    public int getItemCount() {
+        return MultiRTUtils.getRuntimes().size();
+    }
+	
     public class RTViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        final TextView mJavaVersionTextView;
-        final TextView mFullJavaVersionTextView;
-        final ColorStateList mDefaultColors;
-        final Button mSetDefaultButton;
-        final Context mContext;
-        Runtime mCurrentRuntime;
-        int mCurrentPosition;
+        final TextView javaVersionView;
+        final TextView fullJavaVersionView;
+        final ColorStateList defaultColors;
+        final Button setDefaultButton;
+        final Context ctx;
+        MultiRTUtils.Runtime currentRuntime;
+        int currentPosition;
 
         public RTViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +78,42 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
             mDefaultColors =  mFullJavaVersionTextView.getTextColors();
             mContext = itemView.getContext();
             itemView.findViewById(R.id.multirt_view_removebtn).setOnClickListener(this);
+
+            setDefaultButton = itemView.findViewById(R.id.multirt_view_setdefaultbtn);
+            setDefaultButton.setOnClickListener(this);
+            defaultColors =  fullJavaVersionView.getTextColors();
+            ctx = itemView.getContext();
+        }
+
+        public void bindRuntime(MultiRTUtils.Runtime rt, int pos) {
+            currentRuntime = rt;
+            currentPosition = pos;
+            if(rt.versionString != null && Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(rt.arch)) {
+                javaVersionView.setText(ctx.getString(R.string.multirt_java_ver, rt.name, rt.javaVersion));
+                fullJavaVersionView.setText(rt.versionString);
+                fullJavaVersionView.setTextColor(defaultColors);
+                setDefaultButton.setVisibility(View.VISIBLE);
+                boolean default_ = isDefaultRuntime(rt);
+                setDefaultButton.setEnabled(!default_);
+                setDefaultButton.setText(default_?R.string.multirt_config_setdefault_already:R.string.multirt_config_setdefault);
+            }else{
+                if(rt.versionString == null){
+                    fullJavaVersionView.setText(R.string.multirt_runtime_corrupt);
+                }else{
+                    fullJavaVersionView.setText(ctx.getString(R.string.multirt_runtime_incompatiblearch, rt.arch));
+                }
+                javaVersionView.setText(rt.name);
+
+                Integer runtime_status = (Integer) ExtraCore.getValue("runtime_status");
+                if (runtime_status == null || runtime_status == 0){
+                    fullJavaVersionView.setText(R.string.multirt_runtime_corrupt);
+                }else{
+                    fullJavaVersionView.setText("runtime is being installed");
+                }
+				
+                fullJavaVersionView.setTextColor(Color.RED);
+                setDefaultButton.setVisibility(View.GONE);
+            }
         }
 
         @Override

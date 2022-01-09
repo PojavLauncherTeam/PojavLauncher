@@ -35,6 +35,7 @@ public class MultiRTConfigDialog {
         if(adapter != null) mDialogView.getAdapter().notifyDataSetChanged();
     }
 
+
     public static void openRuntimeSelector(Activity activity, int code) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
