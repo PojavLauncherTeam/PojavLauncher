@@ -162,6 +162,7 @@
         android:id="@+id/btnTab4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.23"
 
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
@@ -183,7 +184,6 @@
 
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
@@ -228,11 +228,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom2"
         app:layout_constraintEnd_toStartOf="@+id/launchermainPlayButton"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toEndOf="@+id/btnTab4"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
     <Button
-
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -243,7 +242,7 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/launchermainPlayButton"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toEndOf="@+id/btnTab4"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom2" />
 
     <com.kdt.mcgui.MineButton
@@ -257,7 +256,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toEndOf="@+id/btnTab4"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.25" />

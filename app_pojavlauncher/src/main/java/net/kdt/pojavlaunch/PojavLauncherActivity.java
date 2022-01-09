@@ -78,8 +78,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private Button logoutBtn; // MineButtons
     private ExtraListener backPreferenceListener;
 
-    public PojavLauncherActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +138,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         // Setup account spinner
         pickAccount();
-        ArrayAdapter<String> adapterAcc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
+        ArrayAdapter<String> adapterAcc = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, accountList);
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         accountSelector.setAdapter(adapterAcc);
 
@@ -271,11 +269,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     protected void initTabs(int activeTab){
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> {
-            //Do something after 100ms
-            selectTabPage(activeTab);
-        });
+        runOnUiThread(() -> selectTabPage(activeTab));
     }
 
     private void changeLookAndFeel(boolean useOldLook){
@@ -291,10 +285,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             //Remove the selected Tab and the head image
             selectedTab.setVisibility(View.GONE);
             accountFaceImageView.setVisibility(View.GONE);
-
-            //Enlarge the button, but just a bit.
-            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
-            params.matchConstraintPercentWidth = 0.35f;
         }else{
             //UI v2 Style
             //Show the sidebar back
@@ -304,12 +294,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             //Show the selected Tab
             selectedTab.setVisibility(View.VISIBLE);
             accountFaceImageView.setVisibility(View.VISIBLE);
-
-            //Set the default button size
-            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
-            params.matchConstraintPercentWidth = 0.25f;
         }
-        mPlayButton.setLayoutParams(params);
     }
 
     @Override
