@@ -103,6 +103,7 @@ public class BaseMainActivity extends BaseActivity {
                     }
                 }
                 if(prof.__P_renderer_name != null) {
+                    Log.i("RdrDebug","__P_renderer="+prof.__P_renderer_name);
                     Tools.LOCAL_RENDERER = prof.__P_renderer_name;
                 }
             }

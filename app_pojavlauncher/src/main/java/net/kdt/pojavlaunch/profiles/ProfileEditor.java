@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,12 +18,18 @@ import androidx.annotation.Nullable;
 import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.PojavLauncherActivity;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,6 +38,10 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
     TextView profileNameView;
     ImageView profileIconView;
     Spinner versionSpinner;
+    Spinner javaRuntimeSpinner;
+    Spinner rendererSpinner;
+    List<MultiRTUtils.Runtime> runtimes;
+    List<String> renderNames;
     AlertDialog dialog;
     Context context;
     String selectedVersionId;
@@ -51,6 +62,15 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         bldr.setView(mainView);
         profileNameView = mainView.findViewById(R.id.vprof_editior_profile_name);
         versionSpinner = mainView.findViewById(R.id.vprof_editor_version_spinner);
+        javaRuntimeSpinner = mainView.findViewById(R.id.vprof_editor_spinner_runtime);
+        rendererSpinner = mainView.findViewById(R.id.vprof_editor_profile_renderer);
+        {
+            List<String> renderList = new ArrayList<>();
+            Collections.addAll(renderList, context.getResources().getStringArray(R.array.renderer));
+            renderList.add("Default");
+            renderNames = Arrays.asList(context.getResources().getStringArray(R.array.renderer_values));
+            rendererSpinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,renderList));
+        }
         profileIconView = mainView.findViewById(R.id.vprof_editor_icon);
         bldr.setPositiveButton(R.string.global_save,this::save);
         bldr.setNegativeButton(android.R.string.cancel,(dialog,which)->destroy(dialog));
@@ -75,7 +95,21 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
             }
             editingProfile = uuid;
         }
-
+        runtimes = MultiRTUtils.getRuntimes();
+        javaRuntimeSpinner.setAdapter(new RTSpinnerAdapter(context, runtimes));
+        int jvm_index = runtimes.indexOf(new MultiRTUtils.Runtime("<Default>"));
+        int rnd_index = rendererSpinner.getAdapter().getCount()-1;
+        if (prof.javaDir != null) {
+            String selectedRuntime = prof.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+            int nindex = runtimes.indexOf(new MultiRTUtils.Runtime(selectedRuntime));
+            if (nindex != -1) jvm_index = nindex;
+        }
+        if(prof.__P_renderer_name != null) {
+            int nindex = renderNames.indexOf(prof.__P_renderer_name);
+            if(nindex != -1) rnd_index = nindex;
+        }
+        javaRuntimeSpinner.setSelection(jvm_index);
+        rendererSpinner.setSelection(rnd_index);
         ExtraCore.addExtraListener("lac_version_list",this);
         profileNameView.setText(prof.name);
         if(ProfileAdapter.iconCache.containsKey(profile)) {
@@ -126,6 +160,16 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         prof.name = profileNameView.getText().toString();
         prof.lastVersionId = (String)versionSpinner.getSelectedItem();
+        MultiRTUtils.Runtime selectedRuntime = (MultiRTUtils.Runtime) javaRuntimeSpinner.getSelectedItem();
+        if(selectedRuntime.name.equals("<Default>")) {
+            prof.javaDir = null;
+        }else if(selectedRuntime.versionString == null) {
+            prof.javaDir = null;
+        }else{
+            prof.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+selectedRuntime.name;
+        }
+        if(rendererSpinner.getSelectedItemPosition() == renderNames.size()) prof.__P_renderer_name = null;
+        else prof.__P_renderer_name = renderNames.get(rendererSpinner.getSelectedItemPosition());
         LauncherProfiles.mainProfileJson.profiles.put(editingProfile,prof);
         cb.onSave(editingProfile,isNew, false);
         destroy(dialog);

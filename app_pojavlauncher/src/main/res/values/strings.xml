@@ -294,4 +294,6 @@
     <string name="vbo_hack_title">Disable VBOs</string>
     <string name="vbo_hack_description">Help with compatibility on some old versions</string>
     <string name="global_delete">Delete</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>
