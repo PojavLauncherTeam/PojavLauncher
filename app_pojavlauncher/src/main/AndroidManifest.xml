@@ -6,7 +6,7 @@
     <uses-feature android:glEsVersion="0x00030001" />
     <uses-feature
         android:name="android.hardware.vr.headtracking"
-        android:required="false"
+        android:required="true"
         android:version="1" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
@@ -28,7 +28,6 @@
         <meta-data 
             android:name="android.max_aspect"
             android:value="ratio_float"/>
-        <meta-data android:name="com.oculus.supportedDevices" android:value="all" />
         <activity
             android:exported="true"
             android:launchMode="singleTop"
@@ -89,13 +88,16 @@
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
+
+        <meta-data android:name="com.oculus.supportedDevices" android:value="all" />
+        <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
+            android:resizeableActivity="false"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation">
-            <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
         </activity>
         <provider
             android:name=".scoped.GameFolderProvider"
