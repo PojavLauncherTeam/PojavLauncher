@@ -265,6 +265,8 @@
 
     <string name="preference_control_offset_title">Control side offsets</string>
     <string name="preference_control_offset_description">Set a custom offset to each side of the screen</string>
+    <string name="preference_mouse_start_title">Start with virtual mouse on</string>
+    <string name="preference_mouse_start_description">Using this option will get you judged by Mathias-Boulay</string>
     <string name="preference_video_title">Video and renderer</string>
     <string name="preference_video_description">Resolution, scaling type, and renderer</string>
     <string name="preference_control_title">Control customization</string>
@@ -296,4 +298,6 @@
     <string name="global_delete">Delete</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Renderer</string>
+    <string name="gles_version_hack_title">Force openGL 1</string>
+    <string name="gles_version_hack_description">Help with compatibility on some old versions</string>
 </resources>

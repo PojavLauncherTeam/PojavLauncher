@@ -5,6 +5,7 @@ import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GLES_SHRINK_HACK;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_OPENGL_VERSION_HACK;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VBO_DISABLE_HACK;
 
 import android.app.*;
@@ -210,11 +211,17 @@ public class JREUtils {
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
+        // On certain GLES drivers, overloading default functions shader hack fails, so disable it
+        envMap.put("LIBGL_NOINTOVLHACK", "1");
+
         // The shrink hack can be enabled from the experimental settings
         envMap.put("LIBGL_SHRINK", PREF_GLES_SHRINK_HACK);
 
         // VBO disable hack
-        if(PREF_VBO_DISABLE_HACK) envMap.put("LIBGL_USEVBO","0");
+        if (PREF_VBO_DISABLE_HACK) envMap.put("LIBGL_USEVBO","0");
+
+        // openGL version hack
+        if (PREF_OPENGL_VERSION_HACK) envMap.put("LIBGL_ES", "1");
         
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
@@ -396,20 +403,32 @@ public class JREUtils {
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
-        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","-"}){
+        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","--","-"}){
             while (true){
                 int start = args.indexOf(prefix);
                 if(start == -1) break;
                 //Get the end of the current argument
                 int end = args.indexOf("-", start + prefix.length());
                 if(end == -1) end = args.length();
+
                 //Extract it
                 String parsedSubString = args.substring(start, end);
                 args = args.replace(parsedSubString, "");
 
                 //Check if two args aren't bundled together by mistake
-                if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('='))
+                if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('=')) {
+                    int arraySize = parsedArguments.size();
+                    if(arraySize > 0){
+                        String lastString = parsedArguments.get(arraySize - 1);
+                        // Looking for list elements
+                        if(lastString.charAt(lastString.length() - 1) == ',' ||
+                                parsedSubString.contains(",")){
+                            parsedArguments.set(arraySize - 1, lastString + parsedSubString);
+                            continue;
+                        }
+                    }
                     parsedArguments.add(parsedSubString);
+                }
                 else Log.w("JAVA ARGS PARSER", "Removed improper arguments: " + parsedSubString);
             }
         }

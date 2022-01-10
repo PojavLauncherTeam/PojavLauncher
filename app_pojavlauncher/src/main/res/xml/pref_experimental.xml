@@ -24,5 +24,12 @@
             android:title="@string/option_enable_profiles"
             android:summary="@string/option_enable_profiles_descritption"/>
 
+        <SwitchPreference
+            android:title="@string/gles_version_hack_title"
+            android:summary="@string/gles_version_hack_description"
+            android:defaultValue="false"
+            android:key="gles_version_hack"
+            />
+
     </PreferenceCategory>
 </PreferenceScreen>
