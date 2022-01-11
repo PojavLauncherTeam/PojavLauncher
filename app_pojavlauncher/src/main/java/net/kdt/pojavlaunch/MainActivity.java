@@ -72,7 +72,6 @@ public class MainActivity extends BaseMainActivity {
         }
 
         // toggleGui(null);
-        mControlLayout.toggleControlVisible();
     }
     
     @Override
