@@ -94,6 +94,7 @@
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
+            android:exported="true"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
             android:resizeableActivity="false"
