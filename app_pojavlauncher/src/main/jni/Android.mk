@@ -12,7 +12,6 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := mcxr_loader
         LOCAL_SRC_FILES := \
                     mcxr_loader.cpp
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/mcxr_loader
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)

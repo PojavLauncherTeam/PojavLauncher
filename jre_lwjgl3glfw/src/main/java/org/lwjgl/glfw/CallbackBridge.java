@@ -75,7 +75,11 @@ public class CallbackBridge {
     public static void sendData(int type, String data) {
         nativeSendData(false, type, data);
     }
-    
+
+    public static native long getEGLDisplayPtr();
+    public static native long getEGLContextPtr();
+    public static native long getEGLConfigPtr();
+
     public static native void nativeSendData(boolean isAndroid, int type, String data);
     public static native boolean nativeSetInputReady(boolean ready);
     public static native String nativeClipboard(int action, String copy);

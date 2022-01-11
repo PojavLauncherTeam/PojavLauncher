@@ -1125,3 +1125,18 @@ void pojavSwapInterval(int interval) {
     }
 }
 
+
+JNIEXPORT jlong JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_getEGLDisplayPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &eglGetDisplay_p;
+}
+
+JNIEXPORT jlong JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_getEGLContextPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &pojavGetCurrentContext;
+}
+
+JNIEXPORT jlong JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_getEGLConfigPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &config;
+}

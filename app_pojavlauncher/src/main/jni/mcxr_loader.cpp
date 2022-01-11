@@ -1,15 +1,4 @@
 #include <jni.h>
-#include <cstdlib>
-#include <vector>
-#include <android/asset_manager_jni.h>
-#include <cstring>
-#include <android/window.h>
-#include <android/native_activity.h>
-#include <mcxr_loader/android_native_app_glue.h>
-
-#include <mcxr_loader/openxr_platform.h>
-#include <mcxr_loader/openxr_platform_defines.h>
-#include <mcxr_loader/openxr.h>
 
 //
 // Created by Judge on 12/23/2021.

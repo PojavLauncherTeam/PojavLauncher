@@ -89,8 +89,8 @@
             android:screenOrientation="sensorLandscape"
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
 
-        <meta-data android:name="com.oculus.supportedDevices" android:value="all" />
         <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
+        <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
