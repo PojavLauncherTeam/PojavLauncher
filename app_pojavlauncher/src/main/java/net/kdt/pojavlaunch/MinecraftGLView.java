@@ -27,6 +27,7 @@ import com.google.android.material.math.MathUtils;
 import net.kdt.pojavlaunch.customcontrols.TouchCharInput;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.tasks.MinecraftVRLauncherTask;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
@@ -152,6 +153,8 @@ public class MinecraftGLView extends TextureView {
                 JREUtils.setupBridgeWindow(new Surface(texture));
 
                 new Thread(() -> {
+                    MinecraftVRLauncherTask task = new MinecraftVRLauncherTask(getContext());
+                    task.execute();
                     try {
                         Thread.sleep(200);
                         if(surfaceReadyListener != null){

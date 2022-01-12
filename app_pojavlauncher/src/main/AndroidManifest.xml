@@ -35,10 +35,6 @@
             android:label="@string/app_short_name"
             android:name=".PojavLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".ImportControlActivity"
@@ -89,8 +85,6 @@
             android:screenOrientation="sensorLandscape"
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
 
-        <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
-        <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
@@ -101,7 +95,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.oculus.intent.category.VR" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <provider
