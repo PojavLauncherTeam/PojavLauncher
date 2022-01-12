@@ -155,6 +155,9 @@ public class MinecraftGLView extends TextureView {
                 new Thread(() -> {
                     MinecraftVRLauncherTask task = new MinecraftVRLauncherTask(getContext());
                     task.execute();
+                }, "VRLauncherThread").start();
+                
+                new Thread(() -> {
                     try {
                         Thread.sleep(200);
                         if(surfaceReadyListener != null){
