@@ -4,8 +4,8 @@
 // Created by Judge on 12/23/2021.
 //
 
-jobject* context;
-JavaVM* jvm;
+static jobject* context;
+static JavaVM* jvm;
 
 JNIEXPORT JNICALL
 extern "C" jlong
@@ -30,4 +30,10 @@ JNIEXPORT JNICALL
 extern "C" jlong
 Java_net_sorenon_mcxr_play_MCXRNativeLoad_getJVMPtr(JNIEnv *env, jclass clazz) {
     return reinterpret_cast<jlong>(&jvm);
+}
+
+JNIEXPORT JNICALL
+extern "C" jlong
+Java_net_sorenon_mcxr_play_MCXRNativeLoad_getCTXPtr(JNIEnv *env, jclass clazz) {
+    return reinterpret_cast<jlong>(&context);
 }
