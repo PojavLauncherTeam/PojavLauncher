@@ -5,7 +5,7 @@
 //
 
 jobject* context;
-static JavaVM* jvm;
+JavaVM* jvm;
 
 JNIEXPORT JNICALL
 extern "C" jlong

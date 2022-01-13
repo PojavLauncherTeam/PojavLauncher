@@ -6,12 +6,12 @@
     <uses-feature android:glEsVersion="0x00030001" />
     <uses-feature
         android:name="android.hardware.vr.headtracking"
-        android:required="false"
+        android:required="true"
         android:version="1" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="31"/>
+        android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="31"/>
+        android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
@@ -35,6 +35,10 @@
             android:label="@string/app_short_name"
             android:name=".PojavLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".ImportControlActivity"
@@ -85,18 +89,15 @@
             android:screenOrientation="sensorLandscape"
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
 
+        <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
+        <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
-            android:exported="true"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
             android:resizeableActivity="false"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <provider
             android:name=".scoped.GameFolderProvider"
