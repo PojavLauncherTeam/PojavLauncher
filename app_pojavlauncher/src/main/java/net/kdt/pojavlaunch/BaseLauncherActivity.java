@@ -101,7 +101,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             v.setEnabled(false);
             mTask = new MinecraftDownloaderTask(this);
             mTask.execute(mProfile.selectedVersion);
-
         }
     }
     

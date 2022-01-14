@@ -11,7 +11,6 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
@@ -58,7 +57,7 @@ public class BaseMainActivity extends BaseActivity {
 
     private PerVersionConfig.VersionConfig config;
 
-    protected void initLayout(int resId) {
+    public void initLayout(int resId) {
         setContentView(resId);
 
         try {
@@ -133,6 +132,7 @@ public class BaseMainActivity extends BaseActivity {
                         touchpad.switchState();
 
                     runCraft();
+
                 }catch (Throwable e){
                     Tools.showError(getApplicationContext(), e, true);
                 }

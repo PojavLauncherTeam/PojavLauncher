@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app_pojavlauncher" />
             <option value="$PROJECT_DIR$/jre_lwjgl3glfw" />
+            <option value="$PROJECT_DIR$/xrlauncher" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

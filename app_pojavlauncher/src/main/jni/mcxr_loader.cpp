@@ -4,14 +4,9 @@
 // Created by Judge on 12/23/2021.
 //
 
-jobject* context;
+static jobject* context;
+static jobject* appActivity;
 static JavaVM* jvm;
-
-JNIEXPORT JNICALL
-extern "C" jlong
-Java_net_kdt_pojavlaunch_MCXRLoader_getContextPtr(JNIEnv *env, jclass clazz) {
-    return reinterpret_cast<jlong>(&context);
-}
 
 JNIEXPORT JNICALL
 extern "C" void
@@ -30,4 +25,23 @@ JNIEXPORT JNICALL
 extern "C" jlong
 Java_net_sorenon_mcxr_play_MCXRNativeLoad_getJVMPtr(JNIEnv *env, jclass clazz) {
     return reinterpret_cast<jlong>(&jvm);
+}
+
+JNIEXPORT JNICALL
+extern "C" jlong
+Java_net_sorenon_mcxr_play_MCXRNativeLoad_getCTXPtr(JNIEnv *env, jclass clazz) {
+    return reinterpret_cast<jlong>(&context);
+}
+
+JNIEXPORT JNICALL
+extern "C" jlong
+Java_net_sorenon_mcxr_play_MCXRNativeLoad_getApplicationActivityPtr(JNIEnv *env, jclass clazz) {
+    return reinterpret_cast<jlong>(&appActivity);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_net_kdt_pojavlaunch_MCXRLoader_setApplicationActivity(JNIEnv *env, jclass clazz,
+                                                           jobject activity) {
+    appActivity = reinterpret_cast<jobject*>(env->NewGlobalRef(activity));
 }

@@ -1,19 +1,16 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.tasks.MinecraftVRLauncherTask;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
 import java.io.IOException;
@@ -25,7 +22,9 @@ public class MainActivity extends BaseMainActivity {
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        MCXRLoader.setContext(this.getApplicationContext());
+        MCXRLoader.setApplicationActivity(this);
+
         initLayout(R.layout.main_with_customctrl);
 
         // Set the sustained performance mode for available APIs
@@ -57,23 +56,9 @@ public class MainActivity extends BaseMainActivity {
         // Recompute the gui scale when options are changed
         optionListener = MCOptionUtils::getMcScale;
         MCOptionUtils.addMCOptionListener(optionListener);
-        
-        mControlLayout = findViewById(R.id.main_control_layout);
-        mControlLayout.setModifiable(false);
-        try {
-            mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
-        } catch(IOException e) {
-            try {
-                mControlLayout.loadLayout(Tools.CTRLDEF_FILE);
-                DEFAULT_PREF.edit().putString("defaultCtrl",Tools.CTRLDEF_FILE).commit();
-            } catch (IOException ioException) {
-                Tools.showError(this, ioException);
-            }
-        } catch (Throwable th) {
-            Tools.showError(this, th);
-        }
 
         // toggleGui(null);
+        super.onCreate(savedInstanceState);
     }
     
     @Override
