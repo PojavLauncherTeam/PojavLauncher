@@ -76,7 +76,7 @@ body {font-family: Arial;}
           <b>• Новые возможности:</b><br>
           - Теперь работает быстрее с Java 8.<br>
 	  - Теперь можно запустить версию Minecraft 1.13 и выше<br>
-	  - Теперь Forge и Fabric запускаются корректно! Чтобы установить один из загрузчиков модов, просто загрузите установочный jar. файл.<br>
+	  - Теперь Forge и Fabric запускаются корректно! Чтобы установить один из загрузчиков модов, просто загрузите установочный .jar файл.<br>
           - Поддержка разных архитектур устройств: ARMv7, aarch64, x86 and x86_64.<br>
           - <strike>Теперь корректно поддерживается настраиваемое управление (сделанные сообществом Дискорд-сервера или вами самими!)</strike><br>
           	  <b>——————</br>
@@ -87,141 +87,141 @@ body {font-family: Arial;}
           - Новые движки: virgl and vgpu</br>
           (Хотя VirGL поддерживает версии OpenGL до 4.5, шейдеры на нём не запускаются корректно!)</br>
           - Удалён zink. <strike>FTW</strike></br>
-          - Implemented local accounts, after what happened with Doregon/PojavLauncher_iOS, and as such, you can't download Minecraft resources, not even one.</br>
-          <strike>(Make sure to backup your PojavLauncher folder so that you can still play Minecraft after updating)</strike></br>
+          - реализованы локальные учётные записи, после того, что случилось с Doregon/PojavLauncher_iOS, и поэтому вы не можете скачать никакие ресурсы Minecraft.</br>
+          <strike>(Обязательно сделайте резервную копию папки PojavLauncher, чтобы вы смогли играть в Minecraft после обновления)</strike></br>
           
 	  <br>
 
-	  <h2>▶ v2.5.0 preview (deprecated)</h2>
-	  <b>• NOTICE: OptiFine Installer is experimental, for some devices will crash at splash screen (Mojang Screen). Don't report bug about OptiFine crash at splash screen, these will not be solved.</b><br>
-	  <b>• New settings:</b><br>
-	  - You can now customize the MS delay of touch gestures (placing block, destroying block.)<br>
-	  <b>• New features:</b><br>
-	  - Scrolling in Minecraft 1.8 or above by tapping the screen and holding SEC button<br>
+	  <h2>▶ v2.5.0 предварительная сборка (устаревшая)</h2>
+	  <b>• ЗАМЕЧАНИЕ: Установка OptiFine экспериментальна, может крашить на некоторых устройствах при загрузке (Mojang Screen). Не отправляйте отчёты об ошибке с OptiFine аварийно завершившимся на экране запуска, они не будут исправлены.</b><br>
+	  <b>• Новые функции:</b><br>
+	  - Теперь можно настраивать задержку (для размещения, ломания блоков) в миллисекундах.<br>
+	  <b>• Новые фишки:</b><br>
+	  - Скроллинг в Minecraft 1.8 и выше теперь делаеться нажатием на экран и удержанием SEC<br>
 	  <br>
 
-	  <h2>▶ v2.4.2 preview</h2>
-	  <b>• Good news: Any Android 7.0+ devices can now run Minecraft normally.</b><br>
-	  <b>• Changes:</b><br>
-	  - <font color="green">Added OptiFine installer!</font><br>
-	  - External mouse and keyboard support (Feature needs Android 8.0+. Can't detect left or right mouse event).<br>
-	  - Launcher UI should now fit correctly in big screens.<br>
-	  - Freeform mode is now working.<br>
-	  - Virtual mouse now works properly.<br>
-	  - Replaced multdoj7 with PojavDX (dx 1.16) for better converter (thanks to <a href="https://github.com/artdeell">artdeell</a> for suggesting).<br>
-	  <b>• Fixes:</b><br>
-	  - Touch event triggered as click event, this bug exist from Boardwalk.<br>
-	  - (In-Game) Mouse event triggered after looking around.<br>
+	  <h2>▶ v2.4.2 предварительная версия</h2>
+	  <b>• Хорошие новости: любое устройство с Android 7.0 и выше может запускать Minecraft без проблем.</b><br>
+	  <b>• Изменения:</b><br>
+	  - <font color="green">Добавлен установщик OptiFine!</font><br>
+	  - Добавлена поддержка внешней клавиатуры и мыши (Для работы требуется Android 8.0+ не видит левый/правый клик).<br>
+	  - Теперь интерфейс лаунчера должен нормально отображаться на больших экранах.<br>
+	  - Режим свободного окна теперь работает корректно.<br>
+	  - Виртуальная мышь теперь работает корректно.<br>
+	  - multdoj7 заменён на PojavDX (dx 1.16) для лучшей конвертации (спасибо <a href="https://github.com/artdeell">artdeell</a> за предложение).<br>
+	  <b>• Исправления:</b><br>
+	  - Нажатие на экран преобразуется в нажатии на мышь, этот баг существует ещё с Boardwalk.<br>
+	  - (В игре) Обзор в игре вызывает нажатие мыши.<br>
 
 	  <br>
 
-	  <h2>▶ v2.4 BETA release</h2>
-	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
+	  <h2>▶ v2.4 бета релиз</h2>
+	  <b>• Запомните: Если версия Android на вашем устройстве равна или выше 7.0, используйте VMOS. VMOS установит ОС Android 5.1 на ваше устройство. Можете использовать VMOS для запуска лаунчера (VMOS удалён из Play Store, нужно устанавливать вручную)</b>
 	  <br>
 
-	  <b>• Changes:</b><br>
-	  - Removed OpenJDK and busybox.<br>
-	  - Re-added ARM 64bit native libraries.<br>
+	  <b>• Изменения:</b><br>
+	  - Удалено: OpenJDK и busybox.<br>
+	  - Возвращены нативные библиотеки для 64-бит ARM.<br>
 	  <br>
 
-	  <b>• Fixes:</b><br>
-	  - Fixed an error that prevent users launch Minecraft without internet connection.<br>
+	  <b>• Исправления:</b><br>
+	  - Исправлена ошибка не дающая пользователям запускать Minecraft без доступа к сети.<br>
 	  <br>
 
-	  <h2>▶ v2.3.1 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Added text selection on OpenJDK install log.<br>
-	  <b>• Fixes:</b><br>
-	  - Devices can't install OpenJDK but able to hide the error.<br>
+	  <h2>▶ v2.3.1 бета релиз</h2>
+	  <b>• Изменения:</b><br>
+	  - Разрешён выбор текста в отладочном выводе установки OpenJDK.<br>
+	  <b>• Исправления:</b><br>
+	  - Устройство не может установить OpenJDK, но может скрыть ошибку.<br>
 	  <br>
 
-	  <h2>▶ v2.3 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Changed some code in update function.<br>
+	  <h2>▶ v2.3 бета релиз</h2>
+	  <b>• Изменения:</b><br>
+	  - Немного изменена функция обновления.<br>
 	  <br>
 	  
-	  <h2>▶ v2.2 BETA (private)</h2>
-	  <b>• Changes:</b><br>
-	  - Added busybox.<br>
-	  - Added OpenJDK for converter (ARM 64bit only).<br>
-	  - Added more AWT functions.<br>
-	  - Screenshot (and F2 key) now capture using directly API (javax.imageio).<br>
+	  <h2>▶ v2.2 бета (личная)</h2>
+	  <b>• Изменения:</b><br>
+	  - Добавлен busybox.<br>
+	  - Добавлен OpenJDK для конвертации (только для ARM 64bit).<br>
+	  - Добавлено больше функций AWT.<br>
+	  - Скриншот (и клавиша F2) теперь снимают с помощью внутренних API (javax.imageio).<br>
 	  <br>
 		
-	  <h2>▶ v2.1 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Added Changelog button!<br>
-	  - Custom versions now visible in the list (not implemented for user)<br>
-	  - In-app Update now usable.<br>
-	  - Replaced glshim with GL4ES for partial OpenGL 2.0 and better performance.<br>
+	  <h2>▶ v2.1 бета релиз</h2>
+	  <b>• Изменения:</b><br>
+	  - Добавлен Журнал изменений!<br>
+	  - Собственные версии теперь видны в списке (не реализовано для пользователей)<br>
+	  - Обновление внутри приложения теперь используется.<br>
+	  - glshim заменён на GL4ES для частичной поддержки OpenGL 2.0 и лучшей производительности.<br>
 	  <br>
 
-	  <h2>▶ v2.0 BETA</h2>
-	  <b>• Changes:</b><br>
-	  - [Partial] New design (copy of 2017 original Minecraft Launcher)<br>
-	  - Changed how users load/save.<br>
-	  - Added Menu for more options to select.<br>
-	  - Added virtual mouse for styling PC mouse.<br>
+	  <h2>▶ v2.0 бета</h2>
+	  <b>• Изменения:</b><br>
+	  - [Частично] Новый дизайн (копия дизайна Minecraft Launcher из 2017)<br>
+	  - Изменена схема загрузки/сохранения пользователей.<br>
+	  - Добавлено Меню для дополнительных опций.<br>
+	  - Добавлена виртуальная мышь для упрощения управления.<br>
 
 	  <br>
-	  <b>• Fixes:</b><br>
-	  - Max progress -1 when converting.<br>
-	  - Verification failed when run some versions (by patch the client file)<br>
+	  <b>• Исправления:</b><br>
+	  - Максимальный прогресс -1 при конвертации.<br>
+	  - Ошибки верификации при запуске некоторых версий (с помощью патча клиента)<br>
 	  <br>
 
-	  <h2>▶ v1.0.4 (lost everything before release)</h2>
-	  - Added Download version option.<br>
-	  - Added virtual mouse (but better than 2.0 rewrite)<br>
+	  <h2>▶ v1.0.4 (всё до выпуска утеряно)</h2>
+	  - Добавлена опция для загрузки версий.<br>
+	  - Добавлена виртуальная мышь (лучше чем переписанная версия в 2.0)<br>
 
-	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
-	  <b>• Changes:</b><br>
-	  - Added 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted versions.<br>
-	  - Added Tab, Screenshot, Force close buttons.<br>
+	  <h2>▶ v1.0.1-v1.0.3 альфа</h2>
+	  <b>• Изменения:</b><br>
+	  - Добавлены версии: 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9.<br>
+	  - Добавлены кнопки: Tab, Скриншот, Аварийное завершение.<br>
 	  <br>
 	  
-	  <h2>▶ v1.0 ALPHA</h2>
-	  <b>• Initial release. Name as Minecraft Launcher</b><br>
-	  <b>• Only pre-converted 1.9 version is added.</br>
+	  <h2>▶ v1.0 альфа</h2>
+	  <b>• Первый выпуск. Название Minecraft Launcher</b><br>
+	  <b>• Только предварительно преобразованная 1.9 версия добавлена.</br>
 </div>
 <div id="News" class="tabcontent">
-  <h2>▶ 1.17: Now Works<a></h2>
-	  <b>After many days and nights spent working on a temporary solution (and trust us, this is definitely temporary), we've got something done: support for 1.17 is here. With backporting work done by artdeell and Java 17 ported by DuyKhanhTran, 1.17 is usable and playable with gl4es.
+  <h2>▶ 1.17: Сейчас работает<a></h2>
+	  <b>Через много дней и ночей, работающих над временным решением (и поверьте нам, это точно временно), у нас что-то получилось: поддержка 1.17 здесь. При обратном портировании работа завершена artdeell и Java 17 портирована DuyKhanhTran, 1.17 юзабельная и играбельная с gl4es.
 
-Here's how to get it to work. You need to have a GitHub account in order to download the builds and JRE. <strike>Regardless of your platform, you'll need to download<a href="https://cdn.discordapp.com/attachments/724164160761626624/860864619350065162/assets-v0.zip">this resource pack.</a>  This is artdeell's patch for 1.17 on gl4es</strike>
+Вот как заставить его работать. Вам нужно иметь учетную запись GitHub, чтобы загрузить сборку и JRE. <strike>Независимо от вашей платформы, вам нужно скачать<a href="https://cdn.discordapp.com/attachments/724164160761626624/860864619350065162/assets-v0.zip">этот набор ресурсов.</a>  Это патч artdeell'а для 1.17 на gl4es</strike>
 
 <br>
 
-<h1></h1><b> <a href ="https://pojavlauncherteam.github.io/updates/117.html">Read more ></a></b><br></h1>
+<h1></h1><b> <a href ="https://pojavlauncherteam.github.io/updates/117.html">Подробнее ></a></b><br></h1>
 <br>
 
-	  <h2>▶ Offline mode is ending.</h2>
-	  <b><h2>Should we be worried about it now?</h1></b>
-	  Even though offline mode hasn't yet been taken down by Mojang, it's still technically piracy when you're using it, as you're getting the game for free (unless you bought it). Since GitHub and Mojang are owned by the same company, it's time we announce that we're putting our foot down.
+	  <h2>▶ Автономный режим заканчивается.</h2>
+	  <b><h2>Будем беспокоиться об этом сейчас?</h1></b>
+	  Хотя автономный режим еще не был отключен Mojang, это все еще технически пиратство, когда вы используете его, так как вы получаете игру бесплатно (если вы ее не купили). Поскольку GitHub и Mojang принадлежат той же компании, пришло время объявить, что мы опускаем наши ноги.
 
-<h4>In the future, offline mode will be changed to a new mode we call local mode. Local mode account users have the same restrictions as offline mode, plus some new ones:</h4></h>
+<h4>В будущем автономный режим будет изменен на новый режим который мы называем локальный режим. Локальный режим пользователи имеют те же ограничения, что и автономный режим, плюс некоторые новые:</h4></h>
 
-<h3>• Local mode accounts will still be offline accounts, meaning that you're still limited by how offline accounts work.</h3>
-<h3>• Local mode accounts are unable to download Minecraft through the launcher.</h3>
-<b><a href="https://pojavlauncherteam.github.io/updates/local.html">Read More ></a></b>
+<h3>• Локальный учетные записи по-прежнему будут отключены, а это означает, что вы все еще ограничены тем, как работают автономные аккаунты.</h3>
+<h3>• Учетные записи локального режима не смогут загрузить Minecraft через лаунчер.</h3>
+<b><a href="https://pojavlauncherteam.github.io/updates/local.html">Подробнее ></a></b>
 </div>
 
 <div id="Credits" class="tabcontent">
-  <h1>Library credits</h1>
-  <h5>—————</h5>
-  <h3>PojavLauncher uses the following components:</h3>
-  <p>Tokyo is the capital of Japan.</p>
+  <h1>Используемые библиотеки</h1>
+  <h5>————— — —</h5>
+  <h3>PojavLauncher использует следующие компоненты:</h3>
+  <p>Токио является столицей Японии.</p>
 </div>
 
 <div id="cprt" class="tabcontent">
-  <b>• PojavLauncher is distributed as a freeware, under the GNU GPLv3 license.</br> 
+  <b>• PojavLauncher распространяется бесплатно, под лицензией GNU GPLv3.</br> 
     <b>-----</br>
-  <b>• Modification of code is allowed only on your own fork (if you know what you're doing), but do not ask us if you want to fix what you broke.</br>
+  <b>• Модификация кода разрешена только на вашем форке (если вы знаете, что делаете), но не спрашивайте нас, если вы хотите исправить то что вы сломали.</br>
     <b>-----</br>
-  <b>• Distribution of a modified PojavLauncher is allowed, but under the following conditions: 1. you must credit the original work to your own work; 2. your source code must be also accessible by the public; and 3. your code/app should be virus-free/harm-free to the user.</br>
+  <b>• Разрешено распространение модифицированного PojavLauncher, но при следующих условиях: 1. вы должны указать оригинал в вашей работе; 2. ваш исходный код должен быть доступен для всех; и 3. ваш код/приложение должно быть вирус-свободным/безвредным для пользователя.</br>
   <b>-----</br>
-  <b>• If you want to translate PojavLauncher to your language, log in to Crowdin, or tap [this link](under work) for convenience.</br>
+  <b>• Если вы хотите перевести PojavLauncher на ваш язык, войдите в Crowdin, или нажмите [эту ссылку](в работе) для удобства.</br>
     <b>-----</br>
-  <a>• The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</a>
+  <a>• Официальный сервер/библиотека загрузки Minecraft предоставляется Microsoft/Mojang, и весь Minecraft работа Mojang/Microsoft, поэтому купите игру, а не пиратьте.</a>
 </div>
 
 
