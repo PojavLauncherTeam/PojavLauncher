@@ -229,9 +229,9 @@
     <string name="control_right_offset">праворуч: </string>
     <string name="control_bottom_offset">знизу: </string>
     <string name="control_left_offset">зліва: </string>
-    <string name="preference_control_offset_title">Керування боковими змінами</string>
-    <string name="preference_control_offset_description">Встановіть настроюване зміщення для кожної сторони екрану</string>
-    <string name="preference_video_title">Відео та рендер</string>
+    <string name="preference_control_offset_title">Зміщення керування</string>
+    <string name="preference_control_offset_description">Встановіть користувацьке зміщення для кожної сторони екрану</string>
+    <string name="preference_video_title">Відео та візуалізатор</string>
     <string name="preference_video_description">Роздільна здатність, тип масштабування та рендеринг</string>
     <string name="preference_control_title">Керування персоналізацією</string>
     <string name="preference_control_description">Типи жестів, триґери і масштабування</string>
