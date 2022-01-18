@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">ไม่พบบัญชี !</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
     <!-- Error messages -->
@@ -26,6 +27,7 @@
     <string name="error_show_more">แสดงเพิ่มเติม</string>
     <string name="error_show_less">แสดงน้อยลง</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -77,6 +79,7 @@
     <string name="control_mouseon">เมาส์: เปิด </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">บังคับปิด</string>
+    <string name="control_viewout">Log output</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
