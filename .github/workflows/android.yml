@@ -60,6 +60,7 @@ jobs:
     
     - name: Install gl4es
       if: github.ref == 'refs/heads/v3_openjdk' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      continue-on-error: true
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         mv gl4es ..
