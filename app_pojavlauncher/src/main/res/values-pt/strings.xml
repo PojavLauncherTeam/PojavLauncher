@@ -109,7 +109,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="global_error_field_empty">Este campo não pode estar vazio</string>
     <string name="global_waiting">Aguarda</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplicação/Jogo saiu com o código %d</string>
     <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
     <string name="mcn_check_fail_lwjgl">O LWJGL3 não foi instalado!</string>
