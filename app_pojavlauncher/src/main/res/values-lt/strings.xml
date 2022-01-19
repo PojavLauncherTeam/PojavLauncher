@@ -104,7 +104,6 @@
     <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <string name="global_waiting">Palaukite</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplikacija/Žaidimas išsijungė su kodu %d</string>
     <string name="mcn_exit_call">Išeiti</string>
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebuvo instaliuota!</string>
