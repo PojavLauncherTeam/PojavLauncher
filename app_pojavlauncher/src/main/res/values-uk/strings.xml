@@ -108,7 +108,6 @@
     <string name="global_error_field_empty">Це поле не може бути порожнім</string>
     <string name="global_waiting">Зачекайте</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Програма/гра завершилась із кодом %d</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_confirm">Ви впевнені, що хочете примусово закрити його?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не встановлено!</string>
