@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch;
 
+import static org.lwjgl.glfw.CallbackBridge.*;
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VIRTUAL_MOUSE_START;
