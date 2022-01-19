@@ -71,7 +71,6 @@
     <string name="global_unpacking">S\'està desempaquetant %s</string>
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Game exited</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 no s\'ha instal·lat!</string>
