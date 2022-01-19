@@ -108,7 +108,6 @@
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
     <string name="global_waiting">Počkejte</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplikace/Hra skončila s kódem %d</string>
     <string name="mcn_exit_call">Odejít</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebyl nainstalován!</string>
