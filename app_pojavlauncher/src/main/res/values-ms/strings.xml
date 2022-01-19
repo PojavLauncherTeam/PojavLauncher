@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">Medan ini tidak boleh dibiarkan kosong</string>
     <string name="global_waiting">Tunggu</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan kod %d</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_confirm">Adakah anda mahu paksa tutup aplikasi?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak terpasang!</string>
