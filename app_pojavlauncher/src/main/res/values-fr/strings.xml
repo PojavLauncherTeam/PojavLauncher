@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">Ce champ ne peut pas être vide</string>
     <string name="global_waiting">Patientez</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">L\'application/la partie a été quittée avec le code %d</string>
     <string name="mcn_exit_call">Quitter</string>
     <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 n\'a pas été installé !</string>
