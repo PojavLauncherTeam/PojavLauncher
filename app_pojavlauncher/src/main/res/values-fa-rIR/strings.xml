@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">این فیلد نمی‌تواند خالی باشد</string>
     <string name="global_waiting">صبر کنید</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">نرم‌افزار/بازی خارج شد با کدِ %d</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 نصب نشده است!</string>
