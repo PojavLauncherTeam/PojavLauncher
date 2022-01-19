@@ -95,7 +95,6 @@
     <string name="global_error_field_empty">このフィールドは入力必須です</string>
     <string name="global_waiting">お待ちください</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">アプリケーション/ゲームはコード %d で終了しました</string>
     <string name="mcn_exit_call">閉じる</string>
     <string name="mcn_exit_confirm">強制終了しますか？</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 がインストールされていません！</string>
