@@ -154,4 +154,5 @@ dependencies {
     implementation 'net.objecthunter:exp4j:0.4.8'
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':jre_lwjgl3glfw')
 }
