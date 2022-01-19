@@ -108,7 +108,6 @@
     <string name="global_error_field_empty">Trường này không được để trống</string>
     <string name="global_waiting">Đợi</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d</string>
     <string name="mcn_exit_call">Thoát</string>
     <string name="mcn_exit_confirm">Bạn có chắc muốn bắt buộc thoát chương trình?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
