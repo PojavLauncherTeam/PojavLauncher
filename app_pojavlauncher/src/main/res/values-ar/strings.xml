@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">لا يمكن لهذه الخانة ان تكون فارغة</string>
     <string name="global_waiting">انتظر</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">تم الخروج من التطبيق/ اللعبة برمز %d</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
