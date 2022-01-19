@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">שדה זה אינו יכול להיות ריק</string>
     <string name="global_waiting">המתן</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">היישומון/משחק יצא עם הקוד %d</string>
     <string name="mcn_exit_call">צא</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 לא הותקן!</string>
