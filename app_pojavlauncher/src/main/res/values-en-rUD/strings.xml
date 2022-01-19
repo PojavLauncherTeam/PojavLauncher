@@ -107,7 +107,6 @@
     <string name="global_error_field_empty">ʎʇdɯǝ ǝq ʇ,uɐɔ pꞁǝᴉɟ sᴉɥ⟘</string>
     <string name="global_waiting">ʇᴉɐM</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">%d ǝpoɔ ɥʇᴉʍ pǝʇᴉxǝ ǝɯɐ⅁/uoᴉʇɐɔᴉꞁddⱯ</string>
     <string name="mcn_exit_call">ʇᴉxƎ</string>
     <string name="mcn_exit_confirm">¿ǝsoꞁɔ ǝɔɹoɟ oʇ ʇuɐʍ ǝɹns noʎ ǝɹⱯ</string>
     <string name="mcn_check_fail_lwjgl">¡pǝꞁꞁɐʇsuᴉ ʇou sɐʍ ƐꞀ⅁ՐMꞀ</string>
