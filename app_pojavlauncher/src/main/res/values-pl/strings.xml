@@ -108,7 +108,6 @@
     <string name="global_error_field_empty">To pole nie może być puste</string>
     <string name="global_waiting">Czekaj</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplikacja/Gra uległa awarii z kodem %d</string>
     <string name="mcn_exit_call">Wyjdź</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
