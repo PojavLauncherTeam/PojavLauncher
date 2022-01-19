@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">Acest câmp nu poate fi gol</string>
     <string name="global_waiting">Așteptați</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplicația/Jocul s-a oprit cu codul %d</string>
     <string name="mcn_exit_call">Ieșire</string>
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nu a fost instalat!</string>
