@@ -100,7 +100,6 @@
     <string name="global_error_field_empty">Dit veld mag niet leeg zijn</string>
     <string name="global_waiting">Wacht</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Applicatie/spel is afgesloten met code %d</string>
     <string name="mcn_exit_call">Afsluiten</string>
     <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 is niet geïnstalleerd!</string>
