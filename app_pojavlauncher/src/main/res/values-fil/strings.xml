@@ -104,7 +104,6 @@
     <string name="global_error_field_empty">Ang patlang na ito ay hindi maaaring walang laman</string>
     <string name="global_waiting">Teka lang</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Application/Laro na lumabas sa code %d</string>
     <string name="mcn_exit_call">Umalis</string>
     <string name="mcn_exit_confirm">Sigurado ka bang nais na pilitin malapit?</string>
     <string name="mcn_check_fail_lwjgl">Ang LWJGL3 ay hindi na-install!</string>
