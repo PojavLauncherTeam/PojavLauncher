@@ -55,7 +55,7 @@
     <string name="mcl_option_modinstallwitharg">הפעל אשף התקנה ל-mod (עם פרמטרים מותאמים אישית)</string>
     <string name="mcl_option_customcontrol">פקדים מותאמים אישית</string>
     <string name="mcl_option_settings">הגדרות</string>
-    <string name="mcl_option_about">אודות</string>
+    <string name="mcl_option_about">על אודות</string>
     <string name="mcl_setting_title_uninstalljre">הסר התקנת Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייתן לך להתקין מחדש את Java Runtime</string>
     <string name="mcl_setting_title_freeform">פתח Minecraft במצב Freeform</string>
@@ -80,12 +80,12 @@
     <string name="mcl_setting_subtitle_javaargs">זהירות! שינוי ערכים אלה ללא ידע מתאים עלול לגרום למשחק לקרוס.</string>
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
-    <string name="mcl_setting_category_renderer">מעבד</string>
+    <string name="mcl_setting_category_renderer">רינדור</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
-    <string name="mcl_setting_veroption_snapshot">בטא</string>
+    <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
     <string name="mcl_setting_veroption_oldbeta">בטא: גרסה ישנה</string>
     <string name="mcl_version_clone">שכפול</string>
@@ -175,7 +175,7 @@
     <string name="customctrl_addbutton">הוסף כפתור</string>
     <string name="customctrl_selectdefault">בחר קובץ שליטה כברירת מחדל</string>
     <string name="main_options">אפשרויות</string>
-    <string name="main_play">התחל לשחק!</string>
+    <string name="main_play">הפעל</string>
     <string name="main_welcome">ברוך הבא, %s</string>
     <string name="main_infodev">מידע (מפתח)</string>
     <string name="main_switchuser">החלף משתמש</string>
