@@ -108,7 +108,7 @@
     <string name="global_error_field_empty">Questo campo non può essere vuoto</string>
     <string name="global_waiting">Attendere</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">L\'applicazione/Gioco si è chiuso con il codice %d</string>
+    <string name="mcn_exit_title">L\'applicazione/gioco si è chiuso con il codice %d, controlla il lastlog.txt per più dettagli.</string>
     <string name="mcn_exit_call">Esci</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 non installato!</string>
