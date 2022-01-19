@@ -108,7 +108,7 @@
     <string name="global_error_field_empty">Dieses Feld darf nicht leer sein</string>
     <string name="global_waiting">Bitte warte einen kleinen Moment</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Anwendung/Spiel mit Code %d beendet</string>
+    <string name="mcn_exit_title">Anwendung/Spiel mit dem Code %d beendet, für weitere Details, latestlog.txt lesen.</string>
     <string name="mcn_exit_call">Beenden</string>
     <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie die Beendung erzwingen möchten?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wurde nicht installiert!</string>
