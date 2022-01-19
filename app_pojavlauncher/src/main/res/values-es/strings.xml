@@ -105,7 +105,6 @@
     <string name="global_error_field_empty">Este campo es obligarorio</string>
     <string name="global_waiting">Espere</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d</string>
     <string name="mcn_exit_call">Salir</string>
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_lwjgl">¡LWJGL3 no ha sido instalado!</string>
