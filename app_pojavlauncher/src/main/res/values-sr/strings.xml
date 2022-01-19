@@ -105,7 +105,6 @@
     <string name="global_error_field_empty">Ово поље не може остати празно</string>
     <string name="global_waiting">Чекај</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Апликација/Игра је изашла са кодом %d</string>
     <string name="mcn_exit_call">Изађи</string>
     <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
