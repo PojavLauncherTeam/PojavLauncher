@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email oder Benutzername</string>
+    <string name="login_online_username_hint">E-Mail oder Benutzername</string>
     <string name="login_online_password_hint">Passwort</string>
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
@@ -48,7 +48,7 @@
     <string name="mcl_version_msg">Bereit um Minecraft Version %s zu spielen</string>
     <string name="mcl_launch_cleancache">Säuberung von Cachedateien</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
-    <string name="mcl_launch_downloading_progress">"%s wird heruntergeladen (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bereite das Herunterladen der Resourcen vor</string>
     <string name="mcl_options">Optionen</string>
     <string name="mcl_option_modinstall">Starte einen Mod-Installer (Forge, LabyMod, Fabric, u.s.w.)</string>
@@ -70,14 +70,14 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
     <string name="mcl_setting_title_backtorightmouse">Die Zurück-Taste als Rechte Maustaste werten</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Manche Geräte werten den Rechtsklick einer externen Maus als Zurück-Taste. Solltest du eine externe Maus verwenden, solltest du diese Einstellung aktivieren.</string>
-    <string name="mcl_setting_title_flat_button_style">Flacher Schaltflächen-Style</string>
+    <string name="mcl_setting_title_flat_button_style">Flacher Schalflächen-Stil</string>
     <string name="mcl_setting_subtitle_flat_button_style">Wenn diese Einstellung aktiviert ist, ändert sich der Style der Steuerungsschaltflächen zu einem flachen Style.</string>
-    <string name="mcl_setting_title_buttonscale">Größe der Steuerungsschaltflächen</string>
-    <string name="mcl_setting_subtitle_buttonscale">Vergrößere die Schaltflächen, wenn sie zu klein sind.</string>
+    <string name="mcl_setting_title_buttonscale">Größe der Steuerelemente</string>
+    <string name="mcl_setting_subtitle_buttonscale">Vergrößere zu kleine Steuerelemente.</string>
     <string name="mcl_setting_title_mousescale">Größe der Maus</string>
     <string name="mcl_setting_subtitle_mousescale">Ändere die Größe der virtuellen Maus.</string>
     <string name="mcl_setting_title_javaargs">JVM-Start-Argumente</string>
-    <string name="mcl_setting_subtitle_javaargs">Passen Sie auf. Sollten Sie die Argumente wahrlos verändern, könnte dies zu Abstürzen führen.</string>
+    <string name="mcl_setting_subtitle_javaargs">Passe auf. Sollten die Argumente ohne Fachwissen einfach verändert werden, kann dies zu Abstürzen führen.</string>
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
@@ -178,7 +178,7 @@
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Strg</string>
     <string name="customctrl_keycombine_shift">Shift</string>
-    <string name="customctrl_addbutton">Taste hinzufügen</string>
+    <string name="customctrl_addbutton">Button hinzufügen</string>
     <string name="customctrl_selectdefault">Wähle die standard Conroll json</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
