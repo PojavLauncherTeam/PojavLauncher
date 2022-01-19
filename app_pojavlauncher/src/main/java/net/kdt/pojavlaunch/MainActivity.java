@@ -24,54 +24,9 @@ public class MainActivity extends BaseMainActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initLayout(R.layout.main_with_customctrl);
-
-        // Set the sustained performance mode for available APIs
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            getWindow().setSustainedPerformanceMode(PREF_SUSTAINED_PERFORMANCE);
-
-        super.ingameControlsEditorListener = menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.menu_ctrl_load:
-                    CustomControlsActivity.load(mControlLayout);
-                    break;
-                case R.id.menu_ctrl_add:
-                    mControlLayout.addControlButton(new ControlData("New"));
-                    break;
-                case R.id.menu_ctrl_add_drawer:
-                    mControlLayout.addDrawer(new ControlDrawerData());
-                    break;
-                case R.id.menu_ctrl_selectdefault:
-                    CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
-                    break;
-                case R.id.menu_ctrl_save:
-                    CustomControlsActivity.save(true,mControlLayout);
-                    break;
-            }
-            //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-            return true;
-        };
-
-        // Recompute the gui scale when options are changed
-        optionListener = MCOptionUtils::getMcScale;
-        MCOptionUtils.addMCOptionListener(optionListener);
-        
-        mControlLayout = findViewById(R.id.main_control_layout);
-        mControlLayout.setModifiable(false);
-        try {
-            mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
-        } catch(IOException e) {
-            try {
-                mControlLayout.loadLayout(Tools.CTRLDEF_FILE);
-                DEFAULT_PREF.edit().putString("defaultCtrl",Tools.CTRLDEF_FILE).commit();
-            } catch (IOException ioException) {
-                Tools.showError(this, ioException);
-            }
-        } catch (Throwable th) {
-            Tools.showError(this, th);
-        }
-
-        // toggleGui(null);
+        MCXRLoader.setApplicationPtr(this);
+        MCXRLoader.setContext(getApplicationContext());
+        MCXRLoader.launch(this);
     }
     
     @Override

@@ -97,7 +97,14 @@
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
             android:resizeableActivity="false"
-            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation">
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
+            android:exported="true">
+            <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
+            <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
+            <intent-filter>
+                <action android:name="android.intent.action.RUN"/>
+                <category android:name="com.oculus.intent.category.VR"/>
+            </intent-filter>
         </activity>
         <provider
             android:name=".scoped.GameFolderProvider"

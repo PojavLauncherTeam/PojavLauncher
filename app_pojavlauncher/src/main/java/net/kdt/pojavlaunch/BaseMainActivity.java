@@ -172,11 +172,17 @@ public class BaseMainActivity extends BaseActivity {
     }
 
     private void runCraft() throws Throwable {
+        mProfile = PojavProfile.getCurrentProfileContent(this);
+        mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
+
+        config = PerVersionConfig.configMap.get(mProfile.selectedVersion);
+        String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
+        MultiRTUtils.setRuntimeNamed(this,runtime);
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
         Logger.getInstance().appendToLog("--------- beggining with launcher debug");
-        Logger.getInstance().appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        Logger.getInstance().appendToLog("Info: Launcher version: " + "null");
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }

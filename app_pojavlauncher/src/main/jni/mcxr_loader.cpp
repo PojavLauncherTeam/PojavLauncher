@@ -1,10 +1,12 @@
 #include <jni.h>
+#include <thread>
 
 //
 // Created by Judge on 12/23/2021.
 //
 
 static jobject* context;
+static jobject* app;
 static JavaVM* jvm;
 
 JNIEXPORT JNICALL
@@ -30,10 +32,4 @@ JNIEXPORT JNICALL
 extern "C" jlong
 Java_net_sorenon_mcxr_play_MCXRNativeLoad_getJVMPtr(JNIEnv *env, jclass clazz) {
     return reinterpret_cast<jlong>(&jvm);
-}
-
-JNIEXPORT JNICALL
-extern "C" jlong
-Java_net_sorenon_mcxr_play_MCXRNativeLoad_getCTXPtr(JNIEnv *env, jclass clazz) {
-    return reinterpret_cast<jlong>(&context);
 }
