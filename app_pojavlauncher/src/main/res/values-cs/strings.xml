@@ -77,7 +77,7 @@
     <string name="mcl_setting_title_mousescale">Škálování myši</string>
     <string name="mcl_setting_subtitle_mousescale">Změnit velikost virtuální myši.</string>
     <string name="mcl_setting_title_javaargs">JVM spouštěcí argumenty</string>
-    <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, pokud je upraveno bez znalostí.</string>
+    <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, jeli upraveno bez znalostí.</string>
     <string name="mcl_setting_category_general">Obecná nastavení</string>
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
@@ -136,7 +136,7 @@
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klávesnice</string>
-    <string name="control_chat">Čet</string>
+    <string name="control_chat">Chat</string>
     <string name="control_debug">Ladění</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sek</string>
@@ -147,7 +147,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3-tí</string>
+    <string name="control_thirdperson">Třetí</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Myš</string>
     <string name="control_mouseoff">Myš: ano</string>
@@ -165,7 +165,7 @@
 -->
     <string name="customctrl_edit">Upravuji %s</string>
     <string name="customctrl_remove">Odstranit %s?</string>
-    <string name="customctrl_keyname">Kód písmena</string>
+    <string name="customctrl_keyname">Kód znaku</string>
     <string name="customctrl_toggle">Přepnutelné</string>
     <string name="customctrl_size">Velikost</string>
     <string name="customctrl_size_width">Šířka</string>
