@@ -104,7 +104,6 @@
     <string name="global_error_field_empty">Αυτό το πεδίο δεν μπορεί να είναι κενό</string>
     <string name="global_waiting">Περιμένετε</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερματίστηκε με κωδικό %d</string>
     <string name="mcn_exit_call">Έξοδος</string>
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
     <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
