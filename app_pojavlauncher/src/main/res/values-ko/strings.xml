@@ -108,7 +108,7 @@
     <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
     <string name="global_waiting">기다려주세요</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">앱/게임이 코드 %d와 함께 종료되었습니다</string>
+    <string name="mcn_exit_title">애플리케이션/게임이 코드 %d와 함께 종료되었습니다, lastestlog.txt를 확인하여 추가 정보를 확인하세요.</string>
     <string name="mcn_exit_call">나가기</string>
     <string name="mcn_exit_confirm">강제로 종료하시겠습니까?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 이 설치되지 않았습니다!</string>
