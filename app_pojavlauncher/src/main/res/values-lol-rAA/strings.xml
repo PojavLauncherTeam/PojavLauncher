@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">Dis field can\'t bees empty</string>
     <string name="global_waiting">Waitin’, meow~</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Application/Game Escapd witf code %d</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
