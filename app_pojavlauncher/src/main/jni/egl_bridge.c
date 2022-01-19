@@ -28,20 +28,20 @@ struct pipe_screen;
 //only get what we need to access/modify
 struct st_manager
 {
-   struct pipe_screen *screen;
+    struct pipe_screen *screen;
 };
 struct st_context_iface
 {
-   void *st_context_private;
+    void *st_context_private;
 };
 struct zink_device_info
 {
-   bool have_EXT_conditional_rendering;
-   bool have_EXT_transform_feedback;
+    bool have_EXT_conditional_rendering;
+    bool have_EXT_transform_feedback;
 };
 struct zink_screen
 {
-   struct zink_device_info info;
+    struct zink_device_info info;
 };
 
 enum st_attachment_type {
@@ -579,8 +579,8 @@ typedef struct osmesa_context
 };
 // endregion OSMESA internals
 struct PotatoBridge {
-     /*ANativeWindow */ void* androidWindow;
-        
+    /*ANativeWindow */ void* androidWindow;
+
     /* EGLContext */ void* eglContextOld;
     /* EGLContext */ void* eglContext;
     /* EGLDisplay */ void* eglDisplay;
@@ -645,7 +645,7 @@ void pojav_openGLOnUnload() {
 
 void pojavTerminate() {
     printf("EGLBridge: Terminating\n");
-    
+
     switch (config_renderer) {
         case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -653,13 +653,13 @@ void pojavTerminate() {
             eglDestroyContext_p(potatoBridge.eglDisplay, potatoBridge.eglContext);
             eglTerminate_p(potatoBridge.eglDisplay);
             eglReleaseThread_p();
-    
+
             potatoBridge.eglContext = EGL_NO_CONTEXT;
             potatoBridge.eglDisplay = EGL_NO_DISPLAY;
             potatoBridge.eglSurface = EGL_NO_SURFACE;
         } break;
-        
-        //case RENDERER_VIRGL:
+
+            //case RENDERER_VIRGL:
         case RENDERER_VK_ZINK: {
             // Nothing to do here
         } break;
@@ -789,140 +789,93 @@ bool loadSymbolsVirGL() {
 }
 
 int pojavInit() {
-    potatoBridge.androidWindow = (void *)atol(getenv("POJAV_WINDOW_PTR"));
-    ANativeWindow_acquire(potatoBridge.androidWindow);
-    savedWidth = ANativeWindow_getWidth(potatoBridge.androidWindow);
-    savedHeight = ANativeWindow_getHeight(potatoBridge.androidWindow);
-    ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
+    config_renderer = RENDERER_GL4ES;
+    loadSymbols();
 
-    // NOTE: Override for now.
-    const char *renderer = getenv("POJAV_RENDERER");
-    if (strncmp("opengles3_virgl", renderer, 15) == 0) {
-        config_renderer = RENDERER_VIRGL;
-        setenv("GALLIUM_DRIVER","virpipe",1);
-        setenv("OSMESA_NO_FLUSH_FRONTBUFFER","1",false);
-        if(strcmp(getenv("OSMESA_NO_FLUSH_FRONTBUFFER"),"1") == 0) {
-            printf("VirGL: OSMesa buffer flush is DISABLED!\n");
+    if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
+        potatoBridge.eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+        if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
+            printf("EGLBridge: Error eglGetDefaultDisplay() failed: %p\n", eglGetError());
+            return 1;
         }
-        loadSymbolsVirGL();
-    } else if (strncmp("opengles", renderer, 8) == 0) {
-        config_renderer = RENDERER_GL4ES;
-        loadSymbols();
-    } else if (strcmp(renderer, "vulkan_zink") == 0) {
-        config_renderer = RENDERER_VK_ZINK;
-        setenv("GALLIUM_DRIVER","zink",1);
-        loadSymbols();
     }
 
-    if (config_renderer == RENDERER_GL4ES || config_renderer == RENDERER_VIRGL) {
-        if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
-            potatoBridge.eglDisplay = eglGetDisplay_p(EGL_DEFAULT_DISPLAY);
-            if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
-                printf("EGLBridge: Error eglGetDefaultDisplay() failed: %p\n", eglGetError_p());
-                return 0;
-            }
-        }
+    printf("EGLBridge: Initializing\n");
+// printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
+//(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+    if (!eglInitialize(potatoBridge.eglDisplay, NULL, NULL)) {
+        printf("EGLBridge: Error eglInitialize() failed: %d\n", eglGetError());
+        return 0;
+    }
 
-        printf("EGLBridge: Initializing\n");
-        // printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
-        //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-        if (!eglInitialize_p(potatoBridge.eglDisplay, NULL, NULL)) {
-            printf("EGLBridge: Error eglInitialize() failed: %s\n", eglGetError_p());
+    static const EGLint attribs[] = {
+            EGL_RED_SIZE, 8,
+            EGL_GREEN_SIZE, 8,
+            EGL_BLUE_SIZE, 8,
+            EGL_ALPHA_SIZE, 8,
+            // Minecraft required on initial 24
+            EGL_DEPTH_SIZE, 24,
+            EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+            EGL_NONE
+    };
+
+    EGLint num_configs;
+    EGLint vid;
+
+    if (!eglChooseConfig(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
+        printf("EGLBridge: Error couldn't get an EGL visual config: %d\n", eglGetError());
+        return 0;
+    }
+
+    assert(config);
+    assert(num_configs > 0);
+
+    if (!eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
+        printf("EGLBridge: Error eglGetConfigAttrib() failed: %d\n", eglGetError());
+        return 0;
+    }
+
+    eglBindAPI(EGL_OPENGL_ES_API);
+
+// If we're in VR there's no active window
+    if (!potatoBridge.androidWindow) {
+        potatoBridge.eglSurface = eglCreatePbufferSurface(potatoBridge.eglDisplay, config, NULL);
+        if (!potatoBridge.eglSurface) {
+            printf("EGLBridge: Error eglCreatePbufferSurface failed: %d\n", eglGetError());
             return 0;
         }
 
-        static const EGLint attribs[] = {
-                EGL_RED_SIZE, 8,
-                EGL_GREEN_SIZE, 8,
-                EGL_BLUE_SIZE, 8,
-                EGL_ALPHA_SIZE, 8,
-                // Minecraft required on initial 24
-                EGL_DEPTH_SIZE, 24,
-                EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-                EGL_NONE
-        };
-
-        EGLint num_configs;
-        EGLint vid;
-
-        if (!eglChooseConfig_p(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
-            printf("EGLBridge: Error couldn't get an EGL visual config: %s\n", eglGetError_p());
-            return 0;
-        }
-
-        assert(config);
-        assert(num_configs > 0);
-
-        if (!eglGetConfigAttrib_p(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
-            printf("EGLBridge: Error eglGetConfigAttrib() failed: %s\n", eglGetError_p());
-            return 0;
-        }
-
+        printf("Created pbuffersurface\n");
+    } else {
         ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow, 0, 0, vid);
 
-        eglBindAPI_p(EGL_OPENGL_ES_API);
-
-        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
+        potatoBridge.eglSurface = eglCreateWindowSurface(potatoBridge.eglDisplay, config,
+                                                         potatoBridge.androidWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
-            printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
-            //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+            printf("EGLBridge: Error eglCreateWindowSurface failed: %d\n", eglGetError());
+//(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
             return 0;
         }
 
-        // sanity checks
+// sanity checks
         {
             EGLint val;
-            assert(eglGetConfigAttrib_p(potatoBridge.eglDisplay, config, EGL_SURFACE_TYPE, &val));
+            assert(eglGetConfigAttrib(potatoBridge.eglDisplay, config, EGL_SURFACE_TYPE, &val));
             assert(val & EGL_WINDOW_BIT);
         }
+    }
 
-        printf("EGLBridge: Initialized!\n");
-        printf("EGLBridge: ThreadID=%d\n", gettid());
-        printf("EGLBridge: EGLDisplay=%p, EGLSurface=%p\n",
+    printf("EGLBridge: Initialized!\n");
+    printf("EGLBridge: ThreadID=%d\n", gettid());
+    printf("EGLBridge: EGLDisplay=%p, EGLSurface=%p\n",
 /* window==0 ? EGL_NO_CONTEXT : */
-               potatoBridge.eglDisplay,
-               potatoBridge.eglSurface
-        );
-        if (config_renderer != RENDERER_VIRGL) {
-            return 1;
-        }
-    }
-
-    if (config_renderer == RENDERER_VIRGL) {
-        // Init EGL context and vtest server
-        const EGLint ctx_attribs[] = {
-            EGL_CONTEXT_CLIENT_VERSION, 3,
-            EGL_NONE
-        };
-        EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, NULL, ctx_attribs);
-        printf("VirGL: created EGL context %p\n", ctx);
-
-        pthread_t t;
-        pthread_create(&t, NULL, egl_make_current, (void *)ctx);
-        usleep(100*1000); // need enough time for the server to init
-    }
-
-    if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
-        if(OSMesaCreateContext_p == NULL) {
-            printf("OSMDroid: %s\n",dlerror());
-            return 0;
-        }
-        
-        printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", savedWidth, savedHeight,
-             savedWidth * 4 * savedHeight);
-        gbuffer = malloc(savedWidth * 4 * savedHeight+1);
-        if (gbuffer) {
-            printf("OSMDroid: created frame buffer\n");
-            return 1;
-        } else {
-            printf("OSMDroid: can't generate frame buffer\n");
-            return 0;
-        }
-    }
-    
-    return 0;
+           potatoBridge.eglDisplay,
+           potatoBridge.eglSurface
+    );
+    return 1;
 }
+
 ANativeWindow_Buffer buf;
 int32_t stride;
 bool stopSwapBuffers;
@@ -939,7 +892,7 @@ void pojavSwapBuffers() {
                 }
             }
         } break;
-        
+
         case RENDERER_VIRGL: {
             glFinish_p();
             vtest_swap_buffers_p();
@@ -962,10 +915,10 @@ void pojavSwapBuffers() {
 
 void* egl_make_current(void* window) {
     EGLBoolean success = eglMakeCurrent_p(
-        potatoBridge.eglDisplay,
-        window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
-        window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
-        /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
+            potatoBridge.eglDisplay,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+            /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
     );
 
     if (success == EGL_FALSE) {
@@ -987,68 +940,68 @@ void pojavMakeCurrent(void* window) {
     //    printf("OSMDroid: skipped context reset\n");
     //    return JNI_TRUE;
     //}
-    
-    if (config_renderer == RENDERER_GL4ES) {
-            EGLContext *currCtx = eglGetCurrentContext_p();
-            printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
-            if (currCtx == NULL || window == 0) {
-        /*if (window != 0x0 && potatoBridge.eglContextOld != NULL && potatoBridge.eglContextOld != (void *) window) {
-            // Create new pbuffer per thread
-            // TODO get window size for 2nd+ window!
-            int surfaceWidth, surfaceHeight;
-            eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_WIDTH, &surfaceWidth);
-            eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_HEIGHT, &surfaceHeight);
-            int surfaceAttr[] = {
-                EGL_WIDTH, surfaceWidth,
-                EGL_HEIGHT, surfaceHeight,
-                EGL_NONE
-            };
-            potatoBridge.eglSurface = eglCreatePbufferSurface(potatoBridge.eglDisplay, config, surfaceAttr);
-            printf("EGLBridge: created pbuffer surface %p for context %p\n", potatoBridge.eglSurface, window);
-        }*/
-        //potatoBridge.eglContextOld = (void *) window;
-        // eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-                printf("EGLBridge: Making current on window %p on thread %d\n", window, gettid());
-                egl_make_current((void *)window);
 
-                // Test
+    if (config_renderer == RENDERER_GL4ES) {
+        EGLContext *currCtx = eglGetCurrentContext_p();
+        printf("EGLBridge: Comparing: thr=%d, this=%p, curr=%p\n", gettid(), window, currCtx);
+        if (currCtx == NULL || window == 0) {
+            /*if (window != 0x0 && potatoBridge.eglContextOld != NULL && potatoBridge.eglContextOld != (void *) window) {
+                // Create new pbuffer per thread
+                // TODO get window size for 2nd+ window!
+                int surfaceWidth, surfaceHeight;
+                eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_WIDTH, &surfaceWidth);
+                eglQuerySurface(potatoBridge.eglDisplay, potatoBridge.eglSurface, EGL_HEIGHT, &surfaceHeight);
+                int surfaceAttr[] = {
+                    EGL_WIDTH, surfaceWidth,
+                    EGL_HEIGHT, surfaceHeight,
+                    EGL_NONE
+                };
+                potatoBridge.eglSurface = eglCreatePbufferSurface(potatoBridge.eglDisplay, config, surfaceAttr);
+                printf("EGLBridge: created pbuffer surface %p for context %p\n", potatoBridge.eglSurface, window);
+            }*/
+            //potatoBridge.eglContextOld = (void *) window;
+            // eglMakeCurrent(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+            printf("EGLBridge: Making current on window %p on thread %d\n", window, gettid());
+            egl_make_current((void *)window);
+
+            // Test
 #ifdef GLES_TEST
-                glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
+            glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
                 glClear(GL_COLOR_BUFFER_BIT);
                 eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
                 printf("First frame error: %p\n", eglGetError());
 #endif
 
-                // idk this should convert or just `return success;`...
-                return; //success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
-            } else {
-                // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-                return;
-            }
+            // idk this should convert or just `return success;`...
+            return; //success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
+        } else {
+            // (*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+            return;
+        }
     }
 
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
-            printf("OSMDroid: making current\n");
-            OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
-            if (config_renderer == RENDERER_VK_ZINK) {
-                ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
-                OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
-                stride = buf.stride;
-                //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
-                OSMesaPixelStore_p(OSMESA_Y_UP,0);
-            }
+        printf("OSMDroid: making current\n");
+        OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
+        if (config_renderer == RENDERER_VK_ZINK) {
+            ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
+            OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
+            stride = buf.stride;
+            //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+            OSMesaPixelStore_p(OSMESA_Y_UP,0);
+        }
 
-            printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
-            printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
-            glClear_p(GL_COLOR_BUFFER_BIT);
-            glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
+        printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
+        printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
+        glClear_p(GL_COLOR_BUFFER_BIT);
+        glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
 
-            // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
-            int pixelsArr[4];
-            glReadPixels_p(0, 0, 1, 1, GL_RGB, GL_INT, &pixelsArr);
+        // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
+        int pixelsArr[4];
+        glReadPixels_p(0, 0, 1, 1, GL_RGB, GL_INT, &pixelsArr);
 
-            pojavSwapBuffers();
-            return;
+        pojavSwapBuffers();
+        return;
     }
 }
 
@@ -1056,7 +1009,7 @@ void pojavMakeCurrent(void* window) {
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass clazz) {
     //Obstruct the context on the current thread
-    
+
     switch (config_renderer) {
         case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -1072,31 +1025,31 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 
 void* pojavCreateContext(void* contextSrc) {
     if (config_renderer == RENDERER_GL4ES) {
-            const EGLint ctx_attribs[] = {
+        const EGLint ctx_attribs[] = {
                 EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
                 EGL_NONE
-            };
-            EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
-            potatoBridge.eglContext = ctx;
-            printf("EGLBridge: Created CTX pointer = %p\n",ctx);
-            //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-            return (long)ctx;
+        };
+        EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
+        potatoBridge.eglContext = ctx;
+        printf("EGLBridge: Created CTX pointer = %p\n",ctx);
+        //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+        return (long)ctx;
     }
 
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
-            printf("OSMDroid: generating context\n");
-            void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
-            printf("OSMDroid: context=%p\n",ctx);
-            return ctx;
+        printf("OSMDroid: generating context\n");
+        void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
+        printf("OSMDroid: context=%p\n",ctx);
+        return ctx;
     }
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *env, jclass clazz) {
     /*printf("Regal: making current");
-    
+
     RegalMakeCurrent_func *RegalMakeCurrent = (RegalMakeCurrent_func *) dlsym(RTLD_DEFAULT, "RegalMakeCurrent");
     RegalMakeCurrent(potatoBridge.eglContext);*/
-    
+
     printf("regal removed\n");
     abort();
 }

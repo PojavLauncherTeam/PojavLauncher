@@ -2,4 +2,3 @@ rootProject.name='PojavLauncher'
 include ':jre_lwjgl3glfw'
 include ':app_pojavlauncher'
 
-include ':xrlauncher'

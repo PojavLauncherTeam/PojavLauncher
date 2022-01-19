@@ -1,10 +1,7 @@
 package org.lwjgl.glfw;
-import java.io.*;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.util.*;
-import android.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CallbackBridge {
     public static final int CLIPBOARD_COPY = 2000;

@@ -11,6 +11,7 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
+import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
@@ -57,7 +58,7 @@ public class BaseMainActivity extends BaseActivity {
 
     private PerVersionConfig.VersionConfig config;
 
-    public void initLayout(int resId) {
+    protected void initLayout(int resId) {
         setContentView(resId);
 
         try {
@@ -132,7 +133,6 @@ public class BaseMainActivity extends BaseActivity {
                         touchpad.switchState();
 
                     runCraft();
-
                 }catch (Throwable e){
                     Tools.showError(getApplicationContext(), e, true);
                 }
@@ -172,11 +172,17 @@ public class BaseMainActivity extends BaseActivity {
     }
 
     private void runCraft() throws Throwable {
+        mProfile = PojavProfile.getCurrentProfileContent(this);
+        mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
+
+        config = PerVersionConfig.configMap.get(mProfile.selectedVersion);
+        String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
+        MultiRTUtils.setRuntimeNamed(this,runtime);
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
         Logger.getInstance().appendToLog("--------- beggining with launcher debug");
-        Logger.getInstance().appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        Logger.getInstance().appendToLog("Info: Launcher version: " + "null");
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
