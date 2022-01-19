@@ -108,7 +108,6 @@
     <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
     <string name="global_waiting">Bekleyin</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
     <string name="mcn_exit_call">Çıkış</string>
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 yüklenmemiş!</string>
