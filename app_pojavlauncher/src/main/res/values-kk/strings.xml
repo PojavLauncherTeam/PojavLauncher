@@ -98,7 +98,6 @@
     <string name="global_error_field_empty">Бұл өріс бос бола алмайды</string>
     <string name="global_waiting">Күте тұрыңыз</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Қолданба/ойын %d кодымен жабылды</string>
     <string name="mcn_exit_call">Шығу</string>
     <string name="mcn_exit_confirm">Мәжбүрлеп жапқыңыз келе ме?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 орнатылмаған!</string>
