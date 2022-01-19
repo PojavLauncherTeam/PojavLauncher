@@ -106,7 +106,6 @@
     <string name="global_error_field_empty">Сіе поле не можетъ быть пустымъ</string>
     <string name="global_waiting">Подождите</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Произошёлъ сбой приложенія/игры съ кодомъ %d</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы увѣрены, что хотите принудительно закрыть оный?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
