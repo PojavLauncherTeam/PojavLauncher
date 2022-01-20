@@ -108,6 +108,7 @@
     <string name="global_error_field_empty">Це поле не може бути порожнім</string>
     <string name="global_waiting">Зачекайте</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Програма/Гра закрилась з кодом %d, глянь в latestlog.txt для більших деталів.</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_confirm">Ви впевнені, що хочете примусово закрити його?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не встановлено!</string>
@@ -231,6 +232,8 @@
     <string name="preference_control_offset_title">Зміщення керування</string>
     <string name="preference_control_offset_description">Встановіть користувацьке зміщення для кожної сторони екрану</string>
     <string name="preference_mouse_start_title">Запуск разом з віртуальною мишею</string>
+    <string name="preference_mouse_start_description">Користуючись цією опцією ви отримаєте 
+осудження від Mathias-Boulay</string>
     <string name="preference_video_title">Відео та візуалізатор</string>
     <string name="preference_video_description">Роздільна здатність, тип масштабування та візуалізатор</string>
     <string name="preference_control_title">Налаштування керування</string>
@@ -249,5 +252,7 @@
     <string name="gles_hack_always">Розділяє всі текстури на 2</string>
     <string name="gles_hack_sometimes">Розділяє великі текстури на 2 або 4</string>
     <string name="vbo_hack_title">Вимкнути VBO</string>
+    <string name="vbo_hack_description">Допомогти з сумісністю на деяких старих версій</string>
     <string name="gles_version_hack_title">Примусове використання openGL 1</string>
+    <string name="gles_version_hack_description">Допомогти з сумісністю на деяких старих версій</string>
 </resources>
