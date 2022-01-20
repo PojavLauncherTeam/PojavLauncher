@@ -15,7 +15,7 @@ import net.objecthunter.exp4j.function.Function;
 import org.lwjgl.glfw.*;
 
 import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+import static org.lwjgl.glfw.Classes.sendKeyPress;
 
 import androidx.annotation.Keep;
 
@@ -282,8 +282,8 @@ public class ControlData {
         keyValueMap.put("bottom", "DUMMY_BOTTOM");
         keyValueMap.put("width", "DUMMY_WIDTH");
         keyValueMap.put("height", "DUMMY_HEIGHT");
-        keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
-        keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
+        keyValueMap.put("screen_width", Integer.toString(Classes.physicalWidth));
+        keyValueMap.put("screen_height", Integer.toString(Classes.physicalHeight));
         keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
         keyValueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
 
@@ -302,8 +302,8 @@ public class ControlData {
             valueMap = conversionMap.get();
         }
 
-        valueMap.put("right", Float.toString(CallbackBridge.physicalWidth - getWidth()));
-        valueMap.put("bottom", Float.toString(CallbackBridge.physicalHeight - getHeight()));
+        valueMap.put("right", Float.toString(Classes.physicalWidth - getWidth()));
+        valueMap.put("bottom", Float.toString(Classes.physicalHeight - getHeight()));
         valueMap.put("width", Float.toString(getWidth()));
         valueMap.put("height", Float.toString(getHeight()));
 

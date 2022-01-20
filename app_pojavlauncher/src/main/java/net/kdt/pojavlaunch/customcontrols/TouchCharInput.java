@@ -3,7 +3,7 @@ package net.kdt.pojavlaunch.customcontrols;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+import static org.lwjgl.glfw.Classes.sendKeyPress;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
 import net.kdt.pojavlaunch.R;
 
-import org.lwjgl.glfw.CallbackBridge;
+import org.lwjgl.glfw.Classes;
 
 /**
  * This class is intended for sending characters used in chat via the virtual keyboard
@@ -49,10 +49,10 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         if(isDoingInternalChanges)return;
 
         for(int i=0; i< lengthBefore; ++i){
-            CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
+            Classes.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
         }
         for(int i=start, count = 0; count < lengthAfter; ++i){
-            CallbackBridge.sendChar(text.charAt(i), 0);
+            Classes.sendChar(text.charAt(i), 0);
             ++count;
         }
 

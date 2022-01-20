@@ -44,7 +44,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     void initScaleFactors(int forcedScale){
         //Could be optimized
         if(forcedScale < 1) { //Auto scale
-            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
+            int minDimension = Math.min(Classes.physicalHeight, Classes.physicalWidth);
             mScaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
         }else{
             mScaleFactor = forcedScale;
@@ -52,10 +52,10 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
 
         int[] scales = new int[2]; //Left, Top
 
-        scales[0] = (CallbackBridge.physicalWidth/2);
+        scales[0] = (Classes.physicalWidth/2);
         scales[0] -= scales[0]/mScaleFactor;
 
-        scales[1] = (CallbackBridge.physicalHeight/2);
+        scales[1] = (Classes.physicalHeight/2);
         scales[1] -= scales[1]/mScaleFactor;
 
         mScales = scales;
@@ -115,7 +115,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                 canvas.drawRGB(0, 0, 0);
 
                 if (!attached) {
-                    CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
+                    Classes.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
                 } else {
                     int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
                     mDrawing = rgbArray != null;
@@ -126,7 +126,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                         canvas.translate(-mScales[0],-mScales[1]);
 
 
-                        canvas.drawBitmap(rgbArray, 0, CallbackBridge.physicalWidth, 0, 0, CallbackBridge.physicalWidth, CallbackBridge.physicalHeight, true, null);
+                        canvas.drawBitmap(rgbArray, 0, Classes.physicalWidth, 0, 0, Classes.physicalWidth, Classes.physicalHeight, true, null);
                         canvas.restore();
 
                     }

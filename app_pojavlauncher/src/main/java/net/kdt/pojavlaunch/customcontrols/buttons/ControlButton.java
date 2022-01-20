@@ -25,8 +25,8 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_BOTTOM_
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_LEFT_OFFSET;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_RIGHT_OFFSET;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_TOP_OFFSET;
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
-import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
+import static org.lwjgl.glfw.Classes.sendKeyPress;
+import static org.lwjgl.glfw.Classes.sendMouseButton;
 
 @SuppressLint("ViewConstructor")
 public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
@@ -157,7 +157,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     @Override
     public void setX(float x) {
         // We have to account for control offset preference
-        if(x + (mProperties.getWidth()/2f) > CallbackBridge.physicalWidth/2f){
+        if(x + (mProperties.getWidth()/2f) > Classes.physicalWidth/2f){
             x -= PREF_CONTROL_RIGHT_OFFSET;
         }else{
             x += PREF_CONTROL_LEFT_OFFSET;
@@ -170,7 +170,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     @Override
     public void setY(float y) {
         // We have to account for control offset preference
-        if(y - PREF_CONTROL_TOP_OFFSET + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
+        if(y - PREF_CONTROL_TOP_OFFSET + (mProperties.getHeight()/2f) > Classes.physicalHeight/2f){
             y -= PREF_CONTROL_BOTTOM_OFFSET;
         }else{
             y += PREF_CONTROL_TOP_OFFSET;
@@ -184,7 +184,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public float getX() {
         float x = super.getX();
         // We have to account for control offset preference
-        if(x  + (mProperties.getWidth()/2f) > (CallbackBridge.physicalWidth)/2f){
+        if(x  + (mProperties.getWidth()/2f) > (Classes.physicalWidth)/2f){
             x += PREF_CONTROL_RIGHT_OFFSET;
         }else{
             x -= PREF_CONTROL_LEFT_OFFSET;
@@ -197,7 +197,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public float getY(){
         // We have to account for control offset preference
         float y = super.getY();
-        if(y + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
+        if(y + (mProperties.getHeight()/2f) > Classes.physicalHeight/2f){
             y += PREF_CONTROL_BOTTOM_OFFSET;
         }else{
             y -= PREF_CONTROL_TOP_OFFSET;
@@ -231,10 +231,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
      * @return The equation as a String
      */
     public String generateDynamicX(float x){
-        if(x + (mProperties.getWidth()/2f) > CallbackBridge.physicalWidth/2f){
-            return (x + mProperties.getWidth()) / CallbackBridge.physicalWidth + " * ${screen_width} - ${width}";
+        if(x + (mProperties.getWidth()/2f) > Classes.physicalWidth/2f){
+            return (x + mProperties.getWidth()) / Classes.physicalWidth + " * ${screen_width} - ${width}";
         }else{
-            return x / CallbackBridge.physicalWidth + " * ${screen_width}";
+            return x / Classes.physicalWidth + " * ${screen_width}";
         }
     }
 
@@ -244,10 +244,10 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
      * @return The equation as a String
      */
     public String generateDynamicY(float y){
-        if(y + (mProperties.getHeight()/2f) > CallbackBridge.physicalHeight/2f){
-            return  (y + mProperties.getHeight()) / CallbackBridge.physicalHeight + " * ${screen_height} - ${height}";
+        if(y + (mProperties.getHeight()/2f) > Classes.physicalHeight/2f){
+            return  (y + mProperties.getHeight()) / Classes.physicalHeight + " * ${screen_height} - ${height}";
         }else{
-            return y / CallbackBridge.physicalHeight + " * ${screen_height}";
+            return y / Classes.physicalHeight + " * ${screen_height}";
         }
     }
 
@@ -295,7 +295,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
             switch (event.getActionMasked()){
                 case MotionEvent.ACTION_MOVE:
                     //Send the event to be taken as a mouse action
-                    if(mProperties.passThruEnabled && CallbackBridge.isGrabbing()){
+                    if(mProperties.passThruEnabled && Classes.isGrabbing()){
                         MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
                         if (v != null) v.dispatchTouchEvent(event);
                     }
@@ -375,8 +375,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
 
                 if (!mProperties.isDynamicBtn) {
                     snapAndAlign(
-                        MathUtils.clamp(event.getRawX() - downX, 0, CallbackBridge.physicalWidth - getWidth()),
-                        MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight - getHeight())
+                        MathUtils.clamp(event.getRawX() - downX, 0, Classes.physicalWidth - getWidth()),
+                        MathUtils.clamp(event.getRawY() - downY, 0, Classes.physicalHeight - getHeight())
                     );
                 }
                 break;
@@ -512,8 +512,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         setActivated(isDown);
         for(int keycode : mProperties.keycodes){
             if(keycode >= GLFW_KEY_UNKNOWN){
-                sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
-                CallbackBridge.setModifiers(keycode, isDown);
+                sendKeyPress(keycode, Classes.getCurrentMods(), isDown);
+                Classes.setModifiers(keycode, isDown);
             }else{
                 sendSpecialKey(keycode, isDown);
             }
@@ -547,11 +547,11 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 break;
 
             case ControlData.SPECIALBTN_SCROLLDOWN:
-                if (!isDown) CallbackBridge.sendScroll(0, 1d);
+                if (!isDown) Classes.sendScroll(0, 1d);
                 break;
 
             case ControlData.SPECIALBTN_SCROLLUP:
-                if (!isDown) CallbackBridge.sendScroll(0, -1d);
+                if (!isDown) Classes.sendScroll(0, -1d);
                 break;
         }
     }

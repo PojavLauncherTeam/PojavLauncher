@@ -7,7 +7,7 @@ import android.os.Looper;
 import net.kdt.pojavlaunch.BaseMainActivity;
 import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
 
-public class CallbackBridge {
+public class Classes {
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
 
     public static final int CLIPBOARD_COPY = 2000;
@@ -28,13 +28,13 @@ public class CallbackBridge {
 
     public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
-        sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
+        sendMouseKeycode(button, Classes.getCurrentMods(), isDown);
     }
 
     private static boolean threadAttached;
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
-            CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
+            Classes.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
 
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
@@ -82,16 +82,16 @@ public class CallbackBridge {
     }
 
     public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
-        CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
+        Classes.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
     }
 
     public static void sendKeyPress(int keyCode) {
-        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
-        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
+        sendKeyPress(keyCode, Classes.getCurrentMods(), true);
+        sendKeyPress(keyCode, Classes.getCurrentMods(), false);
     }
 
     public static void sendMouseButton(int button, boolean status) {
-        CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
+        Classes.sendMouseKeycode(button, Classes.getCurrentMods(), status);
     }
 
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
@@ -101,8 +101,8 @@ public class CallbackBridge {
     }
 
     public static void sendMouseKeycode(int keycode) {
-        sendMouseKeycode(keycode, CallbackBridge.getCurrentMods(), true);
-        sendMouseKeycode(keycode, CallbackBridge.getCurrentMods(), false);
+        sendMouseKeycode(keycode, Classes.getCurrentMods(), true);
+        sendMouseKeycode(keycode, Classes.getCurrentMods(), false);
     }
 
     public static void sendScroll(double xoffset, double yoffset) {
@@ -176,23 +176,23 @@ public class CallbackBridge {
     public static void setModifiers(int keyCode, boolean isDown){
         switch (keyCode){
             case LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT:
-                CallbackBridge.holdingShift = isDown;
+                Classes.holdingShift = isDown;
                 return;
 
             case LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL:
-                CallbackBridge.holdingCtrl = isDown;
+                Classes.holdingCtrl = isDown;
                 return;
 
             case LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT:
-                CallbackBridge.holdingAlt = isDown;
+                Classes.holdingAlt = isDown;
                 return;
 
             case LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK:
-                CallbackBridge.holdingCapslock = isDown;
+                Classes.holdingCapslock = isDown;
                 return;
 
             case LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK:
-                CallbackBridge.holdingNumlock = isDown;
+                Classes.holdingNumlock = isDown;
                 return;
         }
     }

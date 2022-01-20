@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch.utils;
-import static org.lwjgl.glfw.CallbackBridge.windowHeight;
-import static org.lwjgl.glfw.CallbackBridge.windowWidth;
+import static org.lwjgl.glfw.Classes.windowHeight;
+import static org.lwjgl.glfw.Classes.windowWidth;
 
 import android.os.Build;
 import android.os.FileObserver;

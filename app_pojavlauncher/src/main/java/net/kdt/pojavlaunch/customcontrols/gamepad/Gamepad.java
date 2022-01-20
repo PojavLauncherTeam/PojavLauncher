@@ -20,7 +20,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
-import org.lwjgl.glfw.CallbackBridge;
+import org.lwjgl.glfw.Classes;
 
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_EAST;
@@ -34,8 +34,8 @@ import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTI
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.isJoystickEvent;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
-import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
+import static org.lwjgl.glfw.Classes.sendKeyPress;
+import static org.lwjgl.glfw.Classes.sendMouseButton;
 
 public class Gamepad {
 
@@ -123,10 +123,10 @@ public class Gamepad {
         int size = (int) ((22 * getMcScale()) / scaleFactor);
         pointerView.setLayoutParams(new FrameLayout.LayoutParams(size, size));
 
-        mouse_x = CallbackBridge.windowWidth/2;
-        mouse_y = CallbackBridge.windowHeight/2;
-        CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+        mouse_x = Classes.windowWidth/2;
+        mouse_y = Classes.windowHeight/2;
+        Classes.sendCursorPos(mouse_x, mouse_y);
+        placePointerView(Classes.physicalWidth/2, Classes.physicalHeight/2);
 
         ((ViewGroup)contextView.getParent()).addView(pointerView);
     }
@@ -151,20 +151,20 @@ public class Gamepad {
             deltaX *= deltaTimeScale;
             deltaY *= deltaTimeScale;
 
-            CallbackBridge.mouseX += deltaX;
-            CallbackBridge.mouseY -= deltaY;
+            Classes.mouseX += deltaX;
+            Classes.mouseY -= deltaY;
 
             if(!lastGrabbingState){
-                CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
-                CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
-                placePointerView((int) (CallbackBridge.mouseX / scaleFactor), (int) (CallbackBridge.mouseY/ scaleFactor));
+                Classes.mouseX = MathUtils.clamp(Classes.mouseX, 0, Classes.windowWidth);
+                Classes.mouseY = MathUtils.clamp(Classes.mouseY, 0, Classes.windowHeight);
+                placePointerView((int) (Classes.mouseX / scaleFactor), (int) (Classes.mouseY/ scaleFactor));
             }
 
-            mouse_x = CallbackBridge.mouseX;
-            mouse_y = CallbackBridge.mouseY;
+            mouse_x = Classes.mouseX;
+            mouse_y = Classes.mouseY;
 
             //Send the mouse to the game
-            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+            Classes.sendCursorPos(Classes.mouseX, Classes.mouseY);
         }
 
         // Update last nano time
@@ -174,7 +174,7 @@ public class Gamepad {
     /** Update the grabbing state, and change the currentMap, mouse position and sensibility */
     private void updateGrabbingState() {
         boolean lastGrabbingValue = lastGrabbingState;
-        lastGrabbingState = CallbackBridge.isGrabbing();
+        lastGrabbingState = Classes.isGrabbing();
         if(lastGrabbingValue == lastGrabbingState) return;
 
         // Switch grabbing state then
@@ -189,10 +189,10 @@ public class Gamepad {
         currentMap = menuMap;
         sendDirectionalKeycode(currentJoystickDirection, false, gameMap); // removing what we were doing
 
-        mouse_x = CallbackBridge.windowWidth/2;
-        mouse_y = CallbackBridge.windowHeight/2;
-        CallbackBridge.sendCursorPos(mouse_x, mouse_y);
-        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+        mouse_x = Classes.windowWidth/2;
+        mouse_y = Classes.windowHeight/2;
+        Classes.sendCursorPos(mouse_x, mouse_y);
+        placePointerView(Classes.physicalWidth/2, Classes.physicalHeight/2);
         pointerView.setVisibility(View.VISIBLE);
         // Sensitivity in menu is MC and HARDWARE resolution dependent
         mouseSensitivity = 19 * scaleFactor / sensitivityFactor;
@@ -403,7 +403,7 @@ public class Gamepad {
 
 
             default:
-                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), isDown);
+                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, Classes.getCurrentMods(), isDown);
                 break;
         }
     }
@@ -412,10 +412,10 @@ public class Gamepad {
         for(int keycode : keycodes){
             switch (keycode){
                 case GamepadMap.MOUSE_SCROLL_DOWN:
-                    if(isDown) CallbackBridge.sendScroll(0, -1);
+                    if(isDown) Classes.sendScroll(0, -1);
                     break;
                 case GamepadMap.MOUSE_SCROLL_UP:
-                    if(isDown) CallbackBridge.sendScroll(0, 1);
+                    if(isDown) Classes.sendScroll(0, 1);
                     break;
 
                 case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT:
@@ -427,10 +427,10 @@ public class Gamepad {
 
 
                 default:
-                    sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
+                    sendKeyPress(keycode, Classes.getCurrentMods(), isDown);
                     break;
             }
-            CallbackBridge.setModifiers(keycode, isDown);
+            Classes.setModifiers(keycode, isDown);
         }
 
     }
