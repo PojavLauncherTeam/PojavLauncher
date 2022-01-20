@@ -57,7 +57,11 @@ android {
             keyPassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
         }
     }
-	
+
+    packagingOptions {
+        exclude 'META-INF/INDEX.LIST'
+    }
+
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
