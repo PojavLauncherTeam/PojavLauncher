@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
@@ -242,8 +241,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     void sendScaledMousePosition(float x, float y){
-        AWTInputBridge.sendMousePos((int) map(x,0,CallbackBridge.physicalWidth, scaleFactors[0], scaleFactors[2]),
-                (int) map(y,0,CallbackBridge.physicalHeight, scaleFactors[1], scaleFactors[3]));
+        AWTInputBridge.sendMousePos((int) map(x,0, CallbackBridge.physicalWidth, scaleFactors[0], scaleFactors[2]),
+                (int) map(y,0, CallbackBridge.physicalHeight, scaleFactors[1], scaleFactors[3]));
     }
 
     public void forceClose(View v) {
