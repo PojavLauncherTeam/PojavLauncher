@@ -26,7 +26,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.kdt.LoggerView;
 
-import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.CustomControls;
+import net.kdt.pojavlaunch.customcontrols.TouchCharInput;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;

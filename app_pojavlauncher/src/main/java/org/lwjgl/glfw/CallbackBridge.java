@@ -1,22 +1,18 @@
 package org.lwjgl.glfw;
-import java.io.*;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.util.*;
-
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.*;
-import net.kdt.pojavlaunch.*;
-import android.content.*;
+
+import net.kdt.pojavlaunch.BaseMainActivity;
+import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
 
 public class CallbackBridge {
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
-    
+
     public static final int CLIPBOARD_COPY = 2000;
     public static final int CLIPBOARD_PASTE = 2001;
-    
+
     public static volatile int windowWidth, windowHeight;
     public static volatile int physicalWidth, physicalHeight;
     public static float mouseX, mouseY;
@@ -29,7 +25,7 @@ public class CallbackBridge {
         handler.postDelayed(() -> putMouseEventWithCoords(button, false, x, y), 22);
 
     }
-    
+
     public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
         sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
@@ -40,13 +36,13 @@ public class CallbackBridge {
         if (!threadAttached) {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
-        
+
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
         mouseX = x;
         mouseY = y;
         nativeSendCursorPos(mouseX, mouseY);
     }
-    
+
     public static void sendPrepareGrabInitialPos() {
         DEBUG_STRING.append("Prepare set grab initial posititon: ignored");
         //sendMouseKeycode(-1, CallbackBridge.getCurrentMods(), false);
@@ -108,7 +104,7 @@ public class CallbackBridge {
         sendMouseKeycode(keycode, CallbackBridge.getCurrentMods(), true);
         sendMouseKeycode(keycode, CallbackBridge.getCurrentMods(), false);
     }
-    
+
     public static void sendScroll(double xoffset, double yoffset) {
         DEBUG_STRING.append("ScrollX=").append(xoffset).append(",ScrollY=").append(yoffset);
         nativeSendScroll(xoffset, yoffset);
@@ -129,14 +125,14 @@ public class CallbackBridge {
             case CLIPBOARD_COPY:
                 BaseMainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
                 return null;
-                
+
             case CLIPBOARD_PASTE:
                 if (BaseMainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
                     return BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
                 } else {
                     return "";
                 }
-                
+
             default: return null;
         }
     }
@@ -160,7 +156,7 @@ public class CallbackBridge {
 */
 
     public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
-        holdingNumlock, holdingShift;
+            holdingNumlock, holdingShift;
     public static int getCurrentMods() {
         int currMods = 0;
         if (holdingAlt) {
@@ -217,4 +213,3 @@ public class CallbackBridge {
         System.loadLibrary("pojavexec");
     }
 }
-
