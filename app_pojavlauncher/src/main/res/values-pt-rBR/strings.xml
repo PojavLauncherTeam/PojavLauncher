@@ -108,6 +108,7 @@
     <string name="global_error_field_empty">Este campo não pode ficar vazio</string>
     <string name="global_waiting">Aguarde</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplicativo/jogo saiu com código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tem certeza que deseja forçar o encerramento?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 não foi instalado!</string>
