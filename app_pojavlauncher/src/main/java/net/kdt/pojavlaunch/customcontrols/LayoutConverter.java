@@ -46,12 +46,12 @@ public class LayoutConverter {
             ControlData n_button = Tools.GLOBAL_GSON.fromJson(button.toString(), ControlData.class);
             if((n_button.dynamicX == null || n_button.dynamicX.isEmpty())&&button.has("x")) {
                 double buttonC = button.getDouble("x");
-                double ratio = buttonC/CallbackBridge.physicalWidth;
+                double ratio = buttonC/ CallbackBridge.physicalWidth;
                 n_button.dynamicX = ratio + " * ${screen_width}";
             }
             if((n_button.dynamicY == null || n_button.dynamicY.isEmpty())&&button.has("y")) {
                 double buttonC = button.getDouble("y");
-                double ratio = buttonC/CallbackBridge.physicalHeight;
+                double ratio = buttonC/ CallbackBridge.physicalHeight;
                 n_button.dynamicY = ratio + " * ${screen_height}";
             }
             layout.mControlDataList.add(n_button);
@@ -64,12 +64,12 @@ public class LayoutConverter {
             ControlDrawerData n_button = Tools.GLOBAL_GSON.fromJson(button.toString(), ControlDrawerData.class);
             if((n_button.properties.dynamicX == null || n_button.properties.dynamicX.isEmpty())&&buttonProperties.has("x")) {
                 double buttonC = buttonProperties.getDouble("x");
-                double ratio = buttonC/CallbackBridge.physicalWidth;
+                double ratio = buttonC/ CallbackBridge.physicalWidth;
                 n_button.properties.dynamicX = ratio + " * ${screen_width}";
             }
             if((n_button.properties.dynamicY == null || n_button.properties.dynamicY.isEmpty())&&buttonProperties.has("y")) {
                 double buttonC = buttonProperties.getDouble("y");
-                double ratio = buttonC/CallbackBridge.physicalHeight;
+                double ratio = buttonC/ CallbackBridge.physicalHeight;
                 n_button.properties.dynamicY = ratio + " * ${screen_height}";
             }
             layout.mDrawerDataList.add(n_button);
@@ -92,12 +92,12 @@ public class LayoutConverter {
             n_button.dynamicY = button.getString("dynamicY");
             if((n_button.dynamicX == null || n_button.dynamicX.isEmpty())&&button.has("x")) {
                 double buttonC = button.getDouble("x");
-                double ratio = buttonC/CallbackBridge.physicalWidth;
+                double ratio = buttonC/ CallbackBridge.physicalWidth;
                 n_button.dynamicX = ratio + " * ${screen_width}";
             }
             if((n_button.dynamicY == null || n_button.dynamicY.isEmpty())&&button.has("y")) {
                 double buttonC = button.getDouble("y");
-                double ratio = buttonC/CallbackBridge.physicalHeight;
+                double ratio = buttonC/ CallbackBridge.physicalHeight;
                 n_button.dynamicY = ratio + " * ${screen_height}";
             }
             n_button.name = button.getString("name");

@@ -15,7 +15,6 @@ import android.system.*;
 import android.util.*;
 import android.widget.Toast;
 
-import com.kdt.LoggerView;
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;

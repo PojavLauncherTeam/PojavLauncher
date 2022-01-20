@@ -34,7 +34,7 @@ public class CallbackBridge {
     private static boolean threadAttached;
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
-            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
+            CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
 
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
