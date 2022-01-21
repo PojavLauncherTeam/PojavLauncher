@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): mengekspor OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): mengekspor OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): mengekspor OpenGL 2.1 + partial 3.2</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): mengekspor OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): mengeksport OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): mengekspor OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipe versi yang ada di daftar versi</string>
@@ -106,6 +108,7 @@
     <string name="global_error_field_empty">Tempat ini tidak boleh kosong</string>
     <string name="global_waiting">Tunggu</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikasi/permainan keluar dengan kode %d, cek latestlog.txt untuk detail lebih lanjut.</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak dipasang!</string>
@@ -228,6 +231,8 @@
     <string name="control_left_offset">Offset kiri: </string>
     <string name="preference_control_offset_title">Kontrol sisi offset</string>
     <string name="preference_control_offset_description">Atur offset khusus ke setiap sisi layar</string>
+    <string name="preference_mouse_start_title">Mulai dengan mouse virtual nyala</string>
+    <string name="preference_mouse_start_description">Menggunakan opsi ini akan membuat anda dihakimi oleh Mathias-Boulay</string>
     <string name="preference_video_title">Video dan renderer</string>
     <string name="preference_video_description">Resolusi, jenis penskalaan, dan renderer</string>
     <string name="preference_control_title">Kustomisasi kontrol</string>
@@ -239,8 +244,14 @@
     <string name="preference_experimental_title">Barang Eksperimental</string>
     <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tanpa dukungan.</string>
     <string name="preference_sustained_performance_title">Aktifkan mode kinerja berkelanjutan</string>
+    <string name="preference_sustained_performance_description">Limit thermal throttling dengan menglimit perfoma maksimal</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
+    <string name="gles_hack_title">GL4ES Shrink hack</string>
+    <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
+    <string name="gles_hack_always">Membagi semua tekstur dengan 2</string>
+    <string name="gles_hack_sometimes">Membagi tekstur besar dengan /2 atau /4</string>
     <string name="vbo_hack_title">Matikan VBOs</string>
     <string name="vbo_hack_description">Membantu kesesuaian di beberapa versi lama</string>
+    <string name="gles_version_hack_title">Paksa openGL 1</string>
     <string name="gles_version_hack_description">Membantu kesesuaian di beberapa versi lama</string>
 </resources>
