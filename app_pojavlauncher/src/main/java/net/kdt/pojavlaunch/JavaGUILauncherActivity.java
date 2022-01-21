@@ -43,9 +43,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_LEFT_MOUSE_BUTTON_CHECK: {
-                        float x = Classes.mouseX;
-                        float y = Classes.mouseY;
-                        if (Classes.isGrabbing() &&
+                        float x = CallbackBridge.mouseX;
+                        float y = CallbackBridge.mouseY;
+                        if (CallbackBridge.isGrabbing() &&
                             Math.abs(initialX - x) < fingerStillThreshold &&
                             Math.abs(initialY - y) < fingerStillThreshold) {
                             triggeredLeftMouseButton = true;
@@ -121,8 +121,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                                 case MotionEvent.ACTION_POINTER_UP: // 6
                                     break;
                                 case MotionEvent.ACTION_MOVE: // 2
-                                    mouseX = Math.max(0, Math.min(Classes.physicalWidth, mouseX + x - prevX));
-                                    mouseY = Math.max(0, Math.min(Classes.physicalHeight, mouseY + y - prevY));
+                                    mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
+                                    mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
                                     placeMouseAt(mouseX, mouseY);
 
                                     sendScaledMousePosition(mouseX,mouseY);
@@ -137,13 +137,13 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                         }
 
                         // debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                        Classes.DEBUG_STRING.setLength(0);
+                        CallbackBridge.DEBUG_STRING.setLength(0);
 
                         return true;
                     }
                 });
                 
-            placeMouseAt(Classes.physicalWidth / 2, Classes.physicalHeight / 2);
+            placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
 
             // this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
             // this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
@@ -241,8 +241,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     void sendScaledMousePosition(float x, float y){
-        AWTInputBridge.sendMousePos((int) map(x,0, Classes.physicalWidth, scaleFactors[0], scaleFactors[2]),
-                (int) map(y,0, Classes.physicalHeight, scaleFactors[1], scaleFactors[3]));
+        AWTInputBridge.sendMousePos((int) map(x,0, CallbackBridge.physicalWidth, scaleFactors[0], scaleFactors[2]),
+                (int) map(y,0, CallbackBridge.physicalHeight, scaleFactors[1], scaleFactors[3]));
     }
 
     public void forceClose(View v) {
@@ -329,22 +329,22 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         //Could be optimized
 
         if(autoScale) { //Auto scale
-            int minDimension = Math.min(Classes.physicalHeight, Classes.physicalWidth);
+            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
             scaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
         }
 
         int[] scales = new int[4]; //Left, Top, Right, Bottom
 
-        scales[0] = (Classes.physicalWidth/2);
+        scales[0] = (CallbackBridge.physicalWidth/2);
         scales[0] -= scales[0]/scaleFactor;
 
-        scales[1] = (Classes.physicalHeight/2);
+        scales[1] = (CallbackBridge.physicalHeight/2);
         scales[1] -= scales[1]/scaleFactor;
 
-        scales[2] = (Classes.physicalWidth/2);
+        scales[2] = (CallbackBridge.physicalWidth/2);
         scales[2] += scales[2]/scaleFactor;
 
-        scales[3] = (Classes.physicalHeight/2);
+        scales[3] = (CallbackBridge.physicalHeight/2);
         scales[3] += scales[3]/scaleFactor;
 
         return scales;

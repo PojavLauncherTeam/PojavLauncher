@@ -37,7 +37,7 @@ import net.kdt.pojavlaunch.value.PerVersionConfig;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.lwjgl.glfw.Classes;
+import org.lwjgl.glfw.CallbackBridge;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -189,7 +189,7 @@ public final class Tools {
     public static void getCacioJavaArgs(List<String> javaArgList, boolean isHeadless) {
         javaArgList.add("-Djava.awt.headless="+isHeadless);
         // Caciocavallo config AWT-enabled version
-        javaArgList.add("-Dcacio.managed.screensize=" + Classes.physicalWidth + "x" + Classes.physicalHeight);
+        javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.physicalWidth + "x" + CallbackBridge.physicalHeight);
         // javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
         javaArgList.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
         javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
@@ -259,13 +259,13 @@ public final class Tools {
             }
         }
         minecraftArgs.add("--width");
-        minecraftArgs.add(Integer.toString(Classes.windowWidth));
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
         minecraftArgs.add("--height");
-        minecraftArgs.add(Integer.toString(Classes.windowHeight));
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
         minecraftArgs.add("--fullscreenWidth");
-        minecraftArgs.add(Integer.toString(Classes.windowWidth));
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
         minecraftArgs.add("--fullscreenHeight");
-        minecraftArgs.add(Integer.toString(Classes.windowHeight));
+        minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
         
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(
@@ -410,8 +410,8 @@ public final class Tools {
     public static void updateWindowSize(Activity ctx) {
         currentDisplayMetrics = getDisplayMetrics(ctx);
 
-        Classes.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
-        Classes.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
+        CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
+        CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
     }
 
     public static float dpToPx(float dp) {

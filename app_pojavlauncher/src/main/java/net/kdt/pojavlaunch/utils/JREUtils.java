@@ -245,8 +245,8 @@ public class JREUtils {
         if(LOCAL_RENDERER != null) {
             envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
         }
-        envMap.put("AWTSTUB_WIDTH", Integer.toString(Classes.windowWidth > 0 ? Classes.windowWidth : Classes.physicalWidth));
-        envMap.put("AWTSTUB_HEIGHT", Integer.toString(Classes.windowHeight > 0 ? Classes.windowHeight : Classes.physicalHeight));
+        envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
+        envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
         
         File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
@@ -361,8 +361,8 @@ public class JREUtils {
                 //"-Dorg.lwjgl.util.DebugFunctions=true",
                 //"-Dorg.lwjgl.util.DebugLoader=true",
                 // GLFW Stub width height
-                "-Dglfwstub.windowWidth=" + Classes.windowWidth,
-                "-Dglfwstub.windowHeight=" + Classes.windowHeight,
+                "-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth,
+                "-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight,
                 "-Dglfwstub.initEgl=false",
 
                 "-Dext.net.resolvPath=" +new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath(),

@@ -3,9 +3,9 @@ package net.kdt.pojavlaunch;
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VIRTUAL_MOUSE_START;
-import static org.lwjgl.glfw.Classes.sendKeyPress;
-import static org.lwjgl.glfw.Classes.windowHeight;
-import static org.lwjgl.glfw.Classes.windowWidth;
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+import static org.lwjgl.glfw.CallbackBridge.windowHeight;
+import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
 import android.app.AlertDialog;
 import android.content.ClipboardManager;
@@ -34,7 +34,7 @@ import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
 
-import org.lwjgl.glfw.Classes;
+import org.lwjgl.glfw.CallbackBridge;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -168,7 +168,7 @@ public class BaseMainActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-        if (Classes.isGrabbing()){
+        if (CallbackBridge.isGrabbing()){
             sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
         }
         mIsResuming = false;
@@ -308,7 +308,7 @@ public class BaseMainActivity extends BaseActivity {
     }
 
     public static void toggleMouse(Context ctx) {
-        if (Classes.isGrabbing()) return;
+        if (CallbackBridge.isGrabbing()) return;
 
         Toast.makeText(ctx, touchpad.switchState()
                  ? R.string.control_mouseon : R.string.control_mouseoff,

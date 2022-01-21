@@ -1,10 +1,10 @@
 package net.kdt.pojavlaunch;
 
-import static org.lwjgl.glfw.Classes.sendKeyPress;
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import android.view.KeyEvent;
 
-import org.lwjgl.glfw.Classes;
+import org.lwjgl.glfw.CallbackBridge;
 
 import java.util.Arrays;
 
@@ -188,11 +188,11 @@ public class EfficientAndroidLWJGLKeycode {
 
     public static void execKey(KeyEvent keyEvent, int valueIndex) {
         //valueIndex points to where the value is stored in the array.
-        Classes.holdingAlt = keyEvent.isAltPressed();
-        Classes.holdingCapslock = keyEvent.isCapsLockOn();
-        Classes.holdingCtrl = keyEvent.isCtrlPressed();
-        Classes.holdingNumlock = keyEvent.isNumLockOn();
-        Classes.holdingShift = keyEvent.isShiftPressed();
+        CallbackBridge.holdingAlt = keyEvent.isAltPressed();
+        CallbackBridge.holdingCapslock = keyEvent.isCapsLockOn();
+        CallbackBridge.holdingCtrl = keyEvent.isCtrlPressed();
+        CallbackBridge.holdingNumlock = keyEvent.isNumLockOn();
+        CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
         try {
             System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
@@ -201,7 +201,7 @@ public class EfficientAndroidLWJGLKeycode {
                     getValueByIndex(valueIndex),
                     key,
                     0,
-                    Classes.getCurrentMods(),
+                    CallbackBridge.getCurrentMods(),
                     keyEvent.getAction() == KeyEvent.ACTION_DOWN);
 
         } catch (Throwable th) {

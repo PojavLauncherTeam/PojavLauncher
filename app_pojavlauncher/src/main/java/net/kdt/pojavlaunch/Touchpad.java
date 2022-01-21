@@ -20,7 +20,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
-import org.lwjgl.glfw.Classes;
+import org.lwjgl.glfw.CallbackBridge;
 
 /**
  * Class dealing with the virtual mouse
@@ -69,10 +69,10 @@ public class Touchpad extends FrameLayout {
         displayState = false;
         Thread virtualMouseGrabThread = new Thread(() -> {
             while (true) {
-                if (!Classes.isGrabbing() && displayState && getVisibility() != VISIBLE) {
+                if (!CallbackBridge.isGrabbing() && displayState && getVisibility() != VISIBLE) {
                     post(this::enable);
                 }else{
-                    if ((Classes.isGrabbing() && getVisibility() != View.GONE) || !displayState && getVisibility() == VISIBLE) {
+                    if ((CallbackBridge.isGrabbing() && getVisibility() != View.GONE) || !displayState && getVisibility() == VISIBLE) {
                         post(this::disable);
                     }
                 }
@@ -106,7 +106,7 @@ public class Touchpad extends FrameLayout {
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
         // int index = event.getActionIndex();
-        if(Classes.isGrabbing()) {
+        if(CallbackBridge.isGrabbing()) {
             disable();
             return false;
         }
@@ -118,10 +118,10 @@ public class Touchpad extends FrameLayout {
         float mouseY = mousePointer.getY();
 
         if (singleTapDetector.onTouchEvent(event)) {
-            Classes.mouseX = (mouseX * scaleFactor);
-            Classes.mouseY = (mouseY * scaleFactor);
-            Classes.sendCursorPos(Classes.mouseX, Classes.mouseY);
-            Classes.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
+            CallbackBridge.mouseX = (mouseX * scaleFactor);
+            CallbackBridge.mouseY = (mouseY * scaleFactor);
+            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+            CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
 
             return true;
         }
@@ -140,12 +140,12 @@ public class Touchpad extends FrameLayout {
 
             case MotionEvent.ACTION_MOVE: // 2
                 //Scrolling feature
-                if (!LauncherPreferences.PREF_DISABLE_GESTURES && !Classes.isGrabbing() && event.getPointerCount() >= 2) {
+                if (!LauncherPreferences.PREF_DISABLE_GESTURES && !CallbackBridge.isGrabbing() && event.getPointerCount() >= 2) {
                     int hScroll =  ((int) (event.getX() - scrollLastInitialX)) / FINGER_SCROLL_THRESHOLD;
                     int vScroll = ((int) (event.getY() - scrollLastInitialY)) / FINGER_SCROLL_THRESHOLD;
 
                     if(vScroll != 0 || hScroll != 0){
-                        Classes.sendScroll(hScroll, vScroll);
+                        CallbackBridge.sendScroll(hScroll, vScroll);
                         scrollLastInitialX = event.getX();
                         scrollLastInitialY = event.getY();
                     }
@@ -158,7 +158,7 @@ public class Touchpad extends FrameLayout {
                     mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
 
                     placeMouseAt(mouseX, mouseY);
-                    Classes.sendCursorPos(Classes.mouseX, Classes.mouseY);
+                    CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                 }else currentPointerID = event.getPointerId(0);
 
                 prevX = x;
@@ -174,7 +174,7 @@ public class Touchpad extends FrameLayout {
 
 
         //debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-        Classes.DEBUG_STRING.setLength(0);
+        CallbackBridge.DEBUG_STRING.setLength(0);
 
         return true;
     }
@@ -182,9 +182,9 @@ public class Touchpad extends FrameLayout {
     public void placeMouseAt(float x, float y) {
         mousePointer.setX(x);
         mousePointer.setY(y);
-        Classes.mouseX = (x * scaleFactor);
-        Classes.mouseY = (y * scaleFactor);
-        Classes.sendCursorPos(Classes.mouseX, Classes.mouseY);
+        CallbackBridge.mouseX = (x * scaleFactor);
+        CallbackBridge.mouseY = (y * scaleFactor);
+        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
     }
 
 }
