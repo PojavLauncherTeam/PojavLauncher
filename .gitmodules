@@ -1,0 +1,6 @@
+[submodule "libs/OpenComposite"]
+	path = libs/OpenComposite
+	url = https://gitlab.com/znixian/OpenOVR.git
+[submodule "libs/JavaLaunchHelper"]
+	path = libs/JavaLaunchHelper
+	url = https://github.com/quest-craft/JavaLaunchHelper.git
