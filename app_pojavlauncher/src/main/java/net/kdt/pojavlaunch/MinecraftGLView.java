@@ -11,17 +11,20 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.Activity;
 import android.content.*;
 import android.graphics.SurfaceTexture;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.*;
 import android.view.*;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.google.android.material.math.MathUtils;
 
+import net.kdt.pojavlaunch.customcontrols.TouchCharInput;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;

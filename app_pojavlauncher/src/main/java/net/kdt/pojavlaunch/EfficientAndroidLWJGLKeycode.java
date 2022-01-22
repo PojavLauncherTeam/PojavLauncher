@@ -4,6 +4,8 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import android.view.KeyEvent;
 
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+
 import org.lwjgl.glfw.CallbackBridge;
 
 import java.util.Arrays;

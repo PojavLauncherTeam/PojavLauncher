@@ -12,6 +12,7 @@ import java.nio.*;
 import javax.annotation.*;
 
 import org.lwjgl.*;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;

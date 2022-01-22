@@ -36,7 +36,6 @@ static void *logger_thread() {
     (*env)->DeleteGlobalRef(env,_______method);
     (*env)->DeleteGlobalRef(env,_______obj);
     (*_______jvm)->DetachCurrentThread(_______jvm);
-    return 0;
 }
 JNIEXPORT void JNICALL
 Java_net_kdt_pojavlaunch_utils_JREUtils_logToLogger(JNIEnv *env, jclass clazz, jobject javaLogger) {
@@ -84,6 +83,6 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupExitTrap(JNI
     exitTrap_exitClass = (*env)->NewGlobalRef(env,(*env)->FindClass(env,"net/kdt/pojavlaunch/ExitActivity"));
     exitTrap_staticMethod = (*env)->GetStaticMethodID(env,exitTrap_exitClass,"showExitMessage","(Landroid/content/Context;I)V");
     xhook_enable_debug(1);
-    xhook_register(".*\\.so$", "exit", custom_exit, (void **) &old_exit);
+    xhook_register(".*\\.so$","exit",custom_exit,&old_exit);
     xhook_refresh(1);
 }

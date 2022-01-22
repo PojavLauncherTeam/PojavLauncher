@@ -1,11 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-
 buildscript {
     repositories {
         mavenCentral()
         google()
-        maven { url "https://jitpack.io" }
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
@@ -20,5 +19,6 @@ allprojects {
         mavenCentral()
         google()
         maven { url "https://jitpack.io" }
+        jcenter()
     }
 }

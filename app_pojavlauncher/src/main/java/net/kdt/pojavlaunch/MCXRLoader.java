@@ -7,8 +7,6 @@ public class MCXRLoader {
 
     public static native long getContextPtr();
 
-    public static native void setApplicationPtr(MainActivity activity);
-
     static {
         System.loadLibrary("mcxr_loader");
     }

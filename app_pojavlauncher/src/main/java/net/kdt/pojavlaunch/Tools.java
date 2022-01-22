@@ -1,64 +1,41 @@
 package net.kdt.pojavlaunch;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.P;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
-
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.app.*;
+import android.content.*;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
+import android.net.*;
+import android.os.*;
 import android.provider.OpenableColumns;
-import android.util.ArrayMap;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.utils.DownloadUtils;
-import net.kdt.pojavlaunch.utils.JREUtils;
-import net.kdt.pojavlaunch.utils.JSONUtils;
-import net.kdt.pojavlaunch.value.DependentLibrary;
-import net.kdt.pojavlaunch.value.MinecraftAccount;
-import net.kdt.pojavlaunch.value.PerVersionConfig;
+import android.system.*;
+import android.util.*;
+import com.google.gson.*;
+import com.oracle.dalvik.*;
+import java.io.*;
+import java.lang.reflect.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.zip.*;
+import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.utils.*;
+import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.lwjgl.glfw.CallbackBridge;
+import org.apache.commons.io.FileUtils;
+import org.lwjgl.glfw.*;
+import android.view.*;
+import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.P;
+import static android.os.Build.VERSION_CODES.Q;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 public final class Tools {
     public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
@@ -778,7 +755,7 @@ public final class Tools {
         try {
             String sha1_dst;
             try (InputStream is = new FileInputStream(f)) {
-                 sha1_dst = new String(Hex.encodeHex(DigestUtils.sha(String.valueOf(is))));
+                 sha1_dst = new String(Hex.encodeHex(org.apache.commons.codec.digest.DigestUtils.sha1(is)));
             }
             if(sha1_dst != null && sourceSHA != null) {
                 return sha1_dst.equalsIgnoreCase(sourceSHA);

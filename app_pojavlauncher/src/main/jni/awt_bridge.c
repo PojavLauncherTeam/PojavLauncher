@@ -99,7 +99,6 @@ static jobject obtainClipboard(JNIEnv *env) {
     clipboard = (*runtimeJNIEnvPtr_CLIPBOARD)->NewGlobalRef(runtimeJNIEnvPtr_CLIPBOARD,(*runtimeJNIEnvPtr_CLIPBOARD)->CallObjectMethod(runtimeJNIEnvPtr_CLIPBOARD,toolkit,(*runtimeJNIEnvPtr_CLIPBOARD)->GetMethodID(runtimeJNIEnvPtr_CLIPBOARD,toolkitClass,"getSystemClipboard", "()Ljava/awt/datatransfer/Clipboard;")));
     (*runtimeJNIEnvPtr_CLIPBOARD)->DeleteLocalRef(runtimeJNIEnvPtr_CLIPBOARD,toolkitClass);
     (*runtimeJNIEnvPtr_CLIPBOARD)->DeleteLocalRef(runtimeJNIEnvPtr_CLIPBOARD,toolkit);
-    return 0;
 }
 
 JNIEXPORT void JNICALL

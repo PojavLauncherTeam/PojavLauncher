@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.kdt.pojavlaunch">
 
-    <uses-feature android:glEsVersion="0x00030001" />
+    <uses-feature android:glEsVersion="0x00030002" />
     <uses-feature
         android:name="android.hardware.vr.headtracking"
         android:required="true"
@@ -89,8 +89,6 @@
             android:screenOrientation="sensorLandscape"
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
 
-        <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
-        <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
@@ -99,7 +97,7 @@
             android:resizeableActivity="false"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:exported="true">
-            <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
+            <meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>
             <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -117,6 +115,6 @@
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-    </application>
 
+    </application>
 </manifest>

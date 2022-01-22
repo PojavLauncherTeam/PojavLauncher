@@ -19,6 +19,8 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import androidx.annotation.Keep;
 
+import com.google.gson.annotations.SerializedName;
+
 @Keep
 public class ControlData {
 
