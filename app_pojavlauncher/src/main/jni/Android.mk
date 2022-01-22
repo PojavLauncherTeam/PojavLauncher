@@ -4,7 +4,7 @@ HERE_PATH := $(LOCAL_PATH)
 # include $(HERE_PATH)/crash_dump/libbase/Android.mk
 # include $(HERE_PATH)/crash_dump/libbacktrace/Android.mk
 # include $(HERE_PATH)/crash_dump/debuggerd/Android.mk
-include /home/cole/Android/Sdk/ndk/21.4.7075529/sources/android/native_app_glue/Android.mk
+include $(NDK_ROOT)/sources/android/native_app_glue/Android.mk
 
 LOCAL_PATH := $(HERE_PATH)
 
