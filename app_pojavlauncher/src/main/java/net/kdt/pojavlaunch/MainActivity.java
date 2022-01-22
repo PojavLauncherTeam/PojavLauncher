@@ -12,21 +12,12 @@ import java.io.IOException;
 
 public class MainActivity extends BaseMainActivity {
     public static ControlLayout mControlLayout;
-    private static MainActivity self;
-
     private MCOptionUtils.MCOptionListener optionListener;
-
-    public MainActivity() {
-        self = this;
-    }
-
-
-    public static MainActivity getInstance() {
-        return self;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        MCXRLoader.setActivity(this);
+        MCXRLoader.launch(this);
         super.onCreate(savedInstanceState);
     }
 

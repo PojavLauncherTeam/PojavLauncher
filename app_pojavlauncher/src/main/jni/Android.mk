@@ -4,7 +4,7 @@ HERE_PATH := $(LOCAL_PATH)
 # include $(HERE_PATH)/crash_dump/libbase/Android.mk
 # include $(HERE_PATH)/crash_dump/libbacktrace/Android.mk
 # include $(HERE_PATH)/crash_dump/debuggerd/Android.mk
-
+include /home/cole/Android/Sdk/ndk/21.4.7075529/sources/android/native_app_glue/Android.mk
 
 LOCAL_PATH := $(HERE_PATH)
 
@@ -12,15 +12,13 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := mcxr_loader
         LOCAL_SRC_FILES := \
                     mcxr_loader.cpp
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/mcxr_loader
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_SHARED_LIBRARIES := mcxr_loader
+LOCAL_SHARED_LIBRARIES := android_native_app_glue
 LOCAL_MODULE := quest_main
         LOCAL_SRC_FILES := \
                     quest_main.cpp
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/mcxr_loader
 include $(BUILD_SHARED_LIBRARY)
 
 

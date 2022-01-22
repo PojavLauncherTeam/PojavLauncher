@@ -28,6 +28,8 @@
         <meta-data 
             android:name="android.max_aspect"
             android:value="ratio_float"/>
+        <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
+        <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
         <activity
             android:exported="true"
             android:launchMode="singleTop"
@@ -36,7 +38,7 @@
             android:name=".PojavLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -97,8 +99,6 @@
             android:resizeableActivity="false"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:exported="true">
-            <meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>
-            <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
                 <category android:name="com.oculus.intent.category.VR"/>

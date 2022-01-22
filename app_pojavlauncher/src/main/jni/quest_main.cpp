@@ -2,9 +2,9 @@
 // Created by Judge on 1/21/2022.
 //
 
-#include <mcxr_loader/mcxr_loader.h>
-#include <android/native_activity.h>
+#include <android_native_app_glue.h>
 
-void onCreate(ANativeActivity* activity) {
-    setActivityPtr(activity);
+extern "C"
+void android_main(struct android_app* app) {
+
 }
