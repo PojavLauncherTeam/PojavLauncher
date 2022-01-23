@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     env:
-      GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
+      GPLAY_KEYSTORE_PASSWORD: "questcraft"
     steps:
     - uses: actions/checkout@v2
       with:
