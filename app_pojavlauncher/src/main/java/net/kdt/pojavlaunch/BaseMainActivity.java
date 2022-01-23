@@ -154,6 +154,7 @@ public class BaseMainActivity extends BaseActivity {
         decorView.setSystemUiVisibility(uiOptions);
     }
 
+   //terremomo was here
     @Override
     protected void onPause() {
         if (CallbackBridge.isGrabbing()){
