@@ -790,9 +790,6 @@ bool loadSymbolsVirGL() {
 }
 
 int pojavInit() {
-    savedWidth = 1600;
-    savedHeight = 1440;
-
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles3_virgl", renderer, 15) == 0) {
         config_renderer = RENDERER_VIRGL;
