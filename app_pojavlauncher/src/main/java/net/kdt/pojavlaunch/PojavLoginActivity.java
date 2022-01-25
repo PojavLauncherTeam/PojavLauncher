@@ -690,7 +690,8 @@ public class PojavLoginActivity extends BaseActivity
     // This method will be called when the user will tap on allow or deny
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_STORAGE_REQUEST_CODE){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_STORAGE_REQUEST_CODE) {
             synchronized (mLockStoragePerm) {
                 mLockStoragePerm.notifyAll();
             }
