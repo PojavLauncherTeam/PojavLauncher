@@ -1,4 +1,4 @@
-# QuestCraft | Base provided by the PojavLauncher team (Thank You <3).
+# QuestCraft | Base provided by the PojavLauncher team free of charge.
 
 ## Note
 - We do not exist on TikTok. No one from the dev team makes TikTok videos. 
