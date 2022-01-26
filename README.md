@@ -3,8 +3,6 @@
 ## Note
 - We do not exist on TikTok. No one from the dev team makes TikTok videos. 
 
-# THIS IS A MOSTLY NON-WORKING BUILD MEANT FOR QCXR DEVELOPMENT. DO NOT EXPECT THIS TO WORK FOR YOU!
-
 ## Navigation
 - [Introduction](#introduction)  
 - [Building](#building) 
