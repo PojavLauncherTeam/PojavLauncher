@@ -2,6 +2,8 @@
 
 ## Note
 - We do not exist on TikTok. No one from the dev team makes TikTok videos. 
+- QuestCraft (QCXR) is developed and maintained by the QCXR and PojavLauncher team including public and or anonymous outside contributors.
+- All support questions should be asked inside of the QuestCraft Discord or PojavLauncher Discord servers for best experience.
 
 ## Navigation
 - [Introduction](#introduction)  
@@ -18,6 +20,7 @@ PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on
 
 ### The Launcher
 - Coming Soon
+- 
 ## Current status
 - Coming Soon
 
@@ -26,7 +29,7 @@ PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on
 
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
-- QuestCraft (QCXR) is a fork of PojavLauncher and is licensed under the same  [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE) license.
+- QuestCraft (QCXR) is a fork of PojavLauncher and is licensed under the same [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE) license.
 
 ## Contributing
 Contributions are welcome! We welcome any type of contribution, not only code.
@@ -44,4 +47,4 @@ Any code change should be submitted as a pull request. The description should ex
 - [xHook](https://github.com/iqiyi/xHook) (Used for exit code trapping): [MIT and BSD-style licenses](https://github.com/iqiyi/xHook/blob/master/LICENSE).
 - [libepoxy](https://github.com/anholt/libepoxy): [MIT License](https://github.com/anholt/libepoxy/blob/master/COPYING).
 - [virglrenderer](https://github.com/PojavLauncherTeam/virglrenderer): [MIT License](https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING).
-- More Soon
+- [PoajvLauncher](https://github.com/PojavLauncherTeam/PojavLauncher): [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
