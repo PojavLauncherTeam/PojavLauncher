@@ -1,4 +1,4 @@
-# QuestCraft | Base provided by the PojavLauncher team (Thank You <3), Changes have been made for QCXR use and is maintained by both the PojavLauncher team and QCXR team.
+# QuestCraft | Base provided by the PojavLauncher team (Thank You <3).
 
 ## Note
 - We do not exist on TikTok. No one from the dev team makes TikTok videos. 
@@ -12,8 +12,7 @@
 - [Credits & Third party components and their licenses](#credits--third-party-components-and-their-licenses)
 
 ## Introduction 
-PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher can launch almost all available Minecraft versions (from rd-132211 to 1.18 snapshots (kinda)), including Combat Test versions. Modding via Forge (up to 1.16.5) and Fabric are also supported. This repository contains source code for Android. For iOS/iPadOS, check out [PojavLauncher_iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS).
-
+PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher has been modified for use in QuestCraft (QCXR) and all underlying base code is supplied for free by the PojavLauncher Team. 
 ## Building
 - Build Instructions Coming Soon
 
