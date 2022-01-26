@@ -3,7 +3,7 @@
 ## Note
 - We do not exist on TikTok. No one from the dev team makes TikTok videos. 
 - QuestCraft (QCXR) is developed and maintained by the QCXR and PojavLauncher team including public and or anonymous outside contributors.
-- All support questions should be asked inside of the QuestCraft Discord or PojavLauncher Discord servers for best experience.
+- All support questions should be asked inside of the QuestCraft Discord or PojavLauncher Discord servers for the best experience.
 
 ## Navigation
 - [Introduction](#introduction)  
@@ -11,7 +11,7 @@
 - [Current status](#current-status) 
 - [License](#license) 
 - [Contributing](#contributing) 
-- [Credits & Third party components and their licenses](#credits--third-party-components-and-their-licenses)
+- [Credits & Third party components and their licenses](Credits-&-Third-party-components-and-their-licenses-if-available)
 
 ## Introduction 
 PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher has been modified for use in QuestCraft (QCXR) and all underlying base code is supplied for free by the PojavLauncher Team. 
@@ -20,7 +20,7 @@ PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on
 
 ### The Launcher
 - Coming Soon
-- 
+
 ## Current status
 - Coming Soon
 
@@ -35,7 +35,7 @@ PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on
 Contributions are welcome! We welcome any type of contribution, not only code.
 Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
-## Credits & Third party components and their licenses (if available)
+## Credits & Third party components and their licenses if available
 - [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
 - Android Support Libraries: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
 - [GL4ES](https://github.com/PojavLauncherTeam/gl4es): [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
