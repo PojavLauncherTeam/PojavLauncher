@@ -84,6 +84,8 @@
     <string name="mcl_setting_category_renderer">רינדור</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4es 1.15 (OpenGL ES 3): מייצא OpenGL 2.1 + 3.2 (חלקי)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): מייצא את OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): מייצא את OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): מייצא את OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
@@ -106,6 +108,7 @@
     <string name="global_error_field_empty">שדה זה אינו יכול להיות ריק</string>
     <string name="global_waiting">המתן</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">היישומון / המשחק קרס, עם קוד שגיאה %d, בדוק את latestlog.txt למידע נוסף.</string>
     <string name="mcn_exit_call">צא</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 לא הותקן!</string>
@@ -168,6 +171,7 @@
     <string name="customctrl_addbutton_drawer">הוסף צייר של כפתור</string>
     <string name="customctrl_addsubbutton">הוסף תת-כפתור</string>
     <string name="customctrl_selectdefault">בחר קובץ שליטה כברירת מחדל</string>
+    <string name="main_install_jar_file">התקנת .jar</string>
     <string name="main_options">אפשרויות</string>
     <string name="main_play">הפעל</string>
     <string name="main_welcome">ברוך הבא, %s</string>
@@ -214,4 +218,12 @@
     <string name="pvc_title">הגדרות לפי גירסה</string>
     <string name="storage_warning_title">שינויי אחסון</string>
     <string name="storage_warning_text"><![CDATA[בשל אכיפות האחסון החדשות של Google שנוספו ב- Android 10 ואילך, עלינו להעביר את ספריית המשחק לתיקייה פרטית לאפליקציות.<br /> התיקיה החדשה לקובצי Pojav היא <b>Android/data/%s/files/</b> (נגיש גם באמצעות ספק אחסון בסייר הקבצים שלך).<br /> אם אתה צריך להעתיק את קבצי המשחק שלך, העתק הכל מהתיקיה המקורית ב <b>games/PojavLauncher</b> באופן ידני.]]></string>
+    <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
+    <string name="preference_video_description">רזולוציה, סוג קנה מידה, ומעבד (וידאו)</string>
+    <string name="preference_control_description">סוגי מחוות, טריגרים, וקנה מידה</string>
+    <string name="preference_java_title">התאמות ל- Java</string>
+    <string name="preference_java_description">גירסאות Java, JVM arguments, וזיכרון עבודה (RAM)</string>
+    <string name="preference_misc_title">הגדרות שונות</string>
+    <string name="preference_misc_description">רשימת גירסאות, ובדיקת ספריות</string>
+    <string name="preference_experimental_title">דברים ניסיוניים</string>
 </resources>
