@@ -63,9 +63,9 @@
     <string name="mcl_setting_title_hide_sidebar">Kenar çubuğunu gizle</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Eski v1 Menüsünü hatırlayan eski arkadaşlar bunu tercih ediyor. Daha çok tam ekran deneyimi verir.</string>
     <string name="mcl_setting_title_ignore_notch">Çentiği görmezden gel</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve altındaki ekranı genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve ekranı kameranın yanına genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
     <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmenizi sağlar. %100 full çözünürlüktür</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar zaman sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_backtorightmouse">Geri tuşunu fare sağ tıkı gibi algıla</string>
@@ -73,10 +73,10 @@
     <string name="mcl_setting_title_flat_button_style">Düz düğme tarzı</string>
     <string name="mcl_setting_subtitle_flat_button_style">Düğme tarzını düz yapmak için bunu etkinleştir.</string>
     <string name="mcl_setting_title_buttonscale">Düğmelerin boyutlayıcısını ayarla</string>
-    <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Eğer düğmeler çok küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
     <string name="mcl_setting_subtitle_mousescale">Sanal farenin boyutunu ayarlayın.</string>
-    <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
+    <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümanları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
     <string name="mcl_setting_category_scaling">Boyutlama Seçenekleri</string>
