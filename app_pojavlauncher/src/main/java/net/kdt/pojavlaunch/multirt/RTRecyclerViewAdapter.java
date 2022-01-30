@@ -96,7 +96,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         public void onClick(View v) {
             if(v.getId() == R.id.multirt_view_removebtn) {
                 if (currentRuntime != null) {
-                    if(MultiRTUtils.getRuntimes().size() < 2) {
+                    if(MultiRTUtils.getRuntimes().size() < 2 && setDefaultButton.isShown()) {
                         AlertDialog.Builder bldr = new AlertDialog.Builder(ctx);
                         bldr.setTitle(R.string.global_error);
                         bldr.setMessage(R.string.multirt_config_removeerror_last);
