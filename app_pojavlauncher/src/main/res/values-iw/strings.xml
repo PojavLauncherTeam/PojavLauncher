@@ -220,10 +220,17 @@
     <string name="storage_warning_text"><![CDATA[בשל אכיפות האחסון החדשות של Google שנוספו ב- Android 10 ואילך, עלינו להעביר את ספריית המשחק לתיקייה פרטית לאפליקציות.<br /> התיקיה החדשה לקובצי Pojav היא <b>Android/data/%s/files/</b> (נגיש גם באמצעות ספק אחסון בסייר הקבצים שלך).<br /> אם אתה צריך להעתיק את קבצי המשחק שלך, העתק הכל מהתיקיה המקורית ב <b>games/PojavLauncher</b> באופן ידני.]]></string>
     <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
     <string name="preference_video_description">רזולוציה, סוג קנה מידה, ומעבד (וידאו)</string>
+    <string name="preference_control_title">התאמה אישית של פקדים</string>
     <string name="preference_control_description">סוגי מחוות, טריגרים, וקנה מידה</string>
     <string name="preference_java_title">התאמות ל- Java</string>
     <string name="preference_java_description">גירסאות Java, JVM arguments, וזיכרון עבודה (RAM)</string>
     <string name="preference_misc_title">הגדרות שונות</string>
     <string name="preference_misc_description">רשימת גירסאות, ובדיקת ספריות</string>
     <string name="preference_experimental_title">דברים ניסיוניים</string>
+    <string name="preference_experimental_description">אין תמיכה, יש להשתמש באפשרויות לפי שיקול דעתכם.</string>
+    <string name="preference_sustained_performance_title">הפעל \"מצב מאוזן\"</string>
+    <string name="preference_sustained_performance_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
+    <string name="preference_back_title">חזרה אל המסך האחרון</string>
+    <string name="vbo_hack_description">מסייע בתאימות בגירסאות ישנות</string>
+    <string name="gles_version_hack_description">מסייע בתאימות בגירסאות ישנות</string>
 </resources>
