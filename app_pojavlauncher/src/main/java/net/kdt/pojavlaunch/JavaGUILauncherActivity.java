@@ -67,8 +67,15 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         Logger.getInstance().reset();
         
         try {
+            JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
+                MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            } else {
+                MultiRTUtils.setRuntimeNamed(this,MultiRTUtils.getExactJREName(8));
+                JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
+            }
+            
             loggerView = findViewById(R.id.launcherLoggerView);
-            MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
             gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
             findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
@@ -278,14 +285,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     public int launchJavaRuntime(File modFile, String javaArgs) {
         JREUtils.redirectAndPrintJRELog(this);
         try {
-            JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
-            
-            // Fail immediately when Java 8 is not selected
-            // TODO: auto override Java 8 if installed
-            if (!JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
-                throw new RuntimeException("Cannot use the mod installer. In order to use the mod installer, you need to install Java 8 and specify it in the Preferences menu.");
-            }
-            
             List<String> javaArgList = new ArrayList<String>();
 
             // Enable Caciocavallo

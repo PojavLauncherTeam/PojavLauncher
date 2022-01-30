@@ -183,7 +183,7 @@ public class BaseMainActivity extends BaseActivity {
         checkLWJGL3Installed();
         
         JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
-        JREUtils.checkJavaArchitecture(this, JREUtils.jreReleaseList.get("OS_ARCH"));
+        Logger.getInstance().appendToLog("Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
         checkJavaArgsIsLaunchable(JREUtils.jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
 

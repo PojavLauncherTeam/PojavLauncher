@@ -35,19 +35,6 @@ public class JREUtils {
     private static String nativeLibDir;
     public static Map<String, String> jreReleaseList;
 
-    /**
-     * Checks if the java architecture is correct for the device architecture.
-     * @param activity Some context to load resources from
-     * @param jreArch The java architecture to compare as a String.
-     */
-    public static void checkJavaArchitecture(Activity activity, String jreArch) {
-        Logger.getInstance().appendToLog("Architecture: " + archAsString(Tools.DEVICE_ARCHITECTURE));
-        if(Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
-
-        Logger.getInstance().appendToLog("Architecture " + archAsString(Tools.DEVICE_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
-        Tools.dialogOnUiThread(activity, "", activity.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
-    }
-    
     public static String findInLdLibPath(String libName) {
         if(Os.getenv("LD_LIBRARY_PATH")==null) {
             try {
@@ -104,8 +91,14 @@ public class JREUtils {
     }
 
     public static Map<String, String> readJREReleaseProperties() throws IOException {
+        return readJREReleaseProperties(Tools.DIR_HOME_JRE);
+    }
+    public static Map<String, String> readJREReleaseProperties(String name) throws IOException {
         Map<String, String> jreReleaseMap = new ArrayMap<>();
-        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.DIR_HOME_JRE + "/release"));
+        if (!name.contains("/")) {
+            name = Tools.MULTIRT_HOME + "/" + name;
+        }
+        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(name + "/release"));
         String currLine;
         while ((currLine = jreReleaseReader.readLine()) != null) {
             if (!currLine.isEmpty() || currLine.contains("=")) {
