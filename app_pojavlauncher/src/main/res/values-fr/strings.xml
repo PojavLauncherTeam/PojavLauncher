@@ -109,7 +109,6 @@
     <string name="mcn_exit_call">Quitter</string>
     <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 n\'a pas été installé !</string>
-    <string name="mcn_check_fail_incompatiblearch">L\'architecture %1$s est incompatible avec l\'environnement d\'exécution Java %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Le moteur de rendu Vulkan Zink n\'est pas pris en charge sur cet appareil!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
