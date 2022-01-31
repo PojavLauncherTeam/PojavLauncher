@@ -114,7 +114,6 @@
     <string name="multirt_config_setdefault">Ange standard</string>
     <string name="multirt_config_setdefault_already">Standard</string>
     <string name="multirt_config_removeerror_last">Du måste ha minst en Java Runtime installerad</string>
-    <string name="multirt_nocompartiblert">Kan inte hitta någon compartible Java Runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ kräver kärnprofilen OpenGL 3.2. Tyvärr har GL4ES-wrapper inte fullt stöd för det just nu, men det finns ytterligare resurser som du kan installera för att köra dessa versioner. Tryck på OK för att bekräfta installationen och tryck på Avbryt för att avbryta lanseringen.</string>
     <string name="compat_11x_playanyway">Spela ändå</string>
     <string name="pvc_gameDirectory">Spelkatalog</string>
