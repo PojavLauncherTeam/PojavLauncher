@@ -101,7 +101,6 @@
     <string name="mcn_exit_call">Шығу</string>
     <string name="mcn_exit_confirm">Мәжбүрлеп жапқыңыз келе ме?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 орнатылмаған!</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s сәулеті Java Runtime-мен %2$s үйлесе алмайды.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Пернетақта</string>
