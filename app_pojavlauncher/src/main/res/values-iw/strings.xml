@@ -112,7 +112,6 @@
     <string name="mcn_exit_call">צא</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 לא הותקן!</string>
-    <string name="mcn_check_fail_incompatiblearch">ארכיטקטורה %1$s לא נתמכת ב Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">מרנדר Vulkan Zink לא נתמך במכשיר זה!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">ממשק משתמש(GUI)</string>
@@ -210,7 +209,6 @@
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
     <string name="multirt_config_removeerror_last">נדרש שיהיה לך לפחות Java Runtime אחת מותקנת</string>
-    <string name="multirt_nocompartiblert">לא נמצאה Java Runtime תואמת</string>
     <string name="compat_117_message">מיינקראפט 21w10a+ דורש את פרופיל הליבה שלOpenGL 3.2. למרבה הצער, המעטפת GL4ES אינה תומכת בו במלואה כרגע, אך ישנם כמה משאבים נוספים שתוכל להתקין להפעלת גרסאות אלה. לחץ על אישור כדי לאשר את ההתקנה ולחץ על ביטול כדי לבטל את ההפעלה.</string>
     <string name="compat_11x_playanyway">הפעל בכל זאת</string>
     <string name="pvc_gameDirectory">תיקיית המשחק</string>
