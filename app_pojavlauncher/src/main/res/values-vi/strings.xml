@@ -112,7 +112,6 @@
     <string name="mcn_exit_call">Thoát</string>
     <string name="mcn_exit_confirm">Bạn có chắc muốn bắt buộc thoát chương trình?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
-    <string name="mcn_check_fail_incompatiblearch">Kiến trúc %1$s không tương thích với Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Trình kết xuất Vulkan Zink không được hỗ trợ trên thiết bị này!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Giao diện</string>
@@ -216,7 +215,6 @@
     <string name="multirt_config_setdefault">Đặt làm mặc định</string>
     <string name="multirt_config_setdefault_already">Mặc định</string>
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
-    <string name="multirt_nocompartiblert">Không thể tìm thấy bất kì phiên bản Java Runtime nào tương thích với phiên bản Minecraft này</string>
     <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù GL4ES chưa hỗ trợ nó ở thời điểm này, tuy nhiên bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
     <string name="compat_11x_playanyway">Vẫn chơi</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
