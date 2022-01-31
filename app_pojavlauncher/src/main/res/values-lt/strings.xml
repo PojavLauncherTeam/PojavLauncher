@@ -107,7 +107,6 @@
     <string name="mcn_exit_call">Išeiti</string>
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebuvo instaliuota!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektūra %1$s nėra palaikomas su Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink atvaizduotojas nėra palaikomas ant šio įrenginio!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -197,7 +196,6 @@
     <string name="multirt_config_setdefault">Nustatyti numatytą</string>
     <string name="multirt_config_setdefault_already">Numatytasis</string>
     <string name="multirt_config_removeerror_last">Jūs privalote turėti bent vieną Java Modulį įdiegtą</string>
-    <string name="multirt_nocompartiblert">Negalima rasti tinkamo Java Runtime</string>
     <string name="compat_117_message">Minecraft 21w10+ reikalauja OpenGL 3.2 branduolio profilio. Gaila, GL4ES wrapperis dabar pilnai nepalaiko jo, bet yra dar pridėtinių resursų kuriuos galima įdiegti, kad būtų galima paleisti šias versijas. Paspauskite Gerai, kad patvirtintumėte įdiegimą, paspauskite Atšaukti, kad sustabdytumėte įdiegimą.</string>
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>
     <string name="pvc_jvmArgs">JVM argumentai</string>
