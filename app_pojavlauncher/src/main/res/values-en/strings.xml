@@ -109,7 +109,6 @@
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure you want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer is not supported on this device!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -211,7 +210,6 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed</string>
-    <string name="multirt_nocompartiblert">Can\'t find any compatible Java Runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, GL4ES wrapper doesn\'t fully support it at the moment, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
     <string name="compat_11x_playanyway">Play anyway</string>
     <string name="pvc_gameDirectory">Game directory</string>
