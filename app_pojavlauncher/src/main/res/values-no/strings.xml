@@ -107,7 +107,6 @@
     <string name="mcn_exit_call">Avslutt</string>
     <string name="mcn_exit_confirm">Er du sikker på at du vil tvinge avslutte?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 ble ikke installert!</string>
-    <string name="mcn_check_fail_incompatiblearch">Arkitektur %1$s er ikke kompatibel med Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink gjengir støttes ikke på denne enheten!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
