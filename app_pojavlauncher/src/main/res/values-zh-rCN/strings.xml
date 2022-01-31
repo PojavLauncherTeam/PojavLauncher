@@ -112,7 +112,6 @@
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
     <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时环境 %2$s 。</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink 渲染在该设备上不可用！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -207,6 +206,7 @@
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存</string>
     <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
+    <string name="multirt_runtime_incompatiblearch">不兼容的架构： %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">新建</string>
     <string name="multirt_config_add_subtitle">导入新的 Java VM</string>
@@ -216,7 +216,8 @@
     <string name="multirt_config_setdefault">设为默认</string>
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行时</string>
-    <string name="multirt_nocompartiblert">找不到任何可压缩的 Java 运行时</string>
+    <string name="multirt_nocompartiblert">找不到合适的 Java 运行环境。此版本需要 Java %d 或更高版本。</string>
+    <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
     <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置文件。 遗憾的是，GL4ES 包装器目前并不完全支持它，但是您可以安装一些额外的资源来运行这些版本。 按 确认 确认安装，然后按 取消键 中止启动。</string>
     <string name="compat_11x_playanyway">仍然开始游戏</string>
     <string name="pvc_gameDirectory">游戏目录</string>
