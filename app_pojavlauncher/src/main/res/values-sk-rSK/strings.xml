@@ -110,7 +110,6 @@
     <string name="mcn_exit_call">Skončiť</string>
     <string name="mcn_exit_confirm">Ste si istí, že chcete vynútiť ukončenie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebol nainštalovaný!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektúra %1$s je nekompatibilna s Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink vykresľovač nie je v tomto zariadení podporovaný!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -205,7 +204,6 @@
     <string name="multirt_config_setdefault">Nastaviť predvolené</string>
     <string name="multirt_config_setdefault_already">Predvolené</string>
     <string name="multirt_config_removeerror_last">Musíte mať nainštalovanú aspoň jednu Java Runtime</string>
-    <string name="multirt_nocompartiblert">Nemožno nájsť žiadnu kompatibilnu Java Runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ vyžaduje základný profil OpenGL 3.2. Bohužiaľ, GL4ES prekladač ho v tejto chvíli plne nepodporuje, ale existujú nejaké ďalšie možnosti, ktoré môžete nainštalovať pre spustenie týchto verzií. Stlačením tlačidla OK potvrďte inštaláciu a stlačením tlačidla Zrušiť ukončíte spúšťanie.</string>
     <string name="compat_11x_playanyway">Napriek tomu hrať</string>
     <string name="pvc_gameDirectory">Zložka hry</string>
