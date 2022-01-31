@@ -110,7 +110,6 @@
     <string name="mcn_exit_call">ʇᴉxƎ</string>
     <string name="mcn_exit_confirm">¿ǝsoꞁɔ ǝɔɹoɟ oʇ ʇuɐʍ ǝɹns noʎ ǝɹⱯ</string>
     <string name="mcn_check_fail_lwjgl">¡pǝꞁꞁɐʇsuᴉ ʇou sɐʍ ƐꞀ⅁ՐMꞀ</string>
-    <string name="mcn_check_fail_incompatiblearch">˙%2$s ǝɯᴉʇunᴚ ɐʌɐՐ ɥʇᴉʍ ǝꞁqᴉʇɐdɯoɔuᴉ sᴉ %1$s ǝɹnʇɔǝʇᴉɥɔɹⱯ</string>
     <string name="mcn_check_fail_vulkan_support">¡ǝɔᴉʌǝp sᴉɥʇ uo pǝʇɹoddns ʇou sᴉ ɹǝɹǝpuǝɹ ʞuᴉZ uɐʞꞁnɅ</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">I∩⅁</string>
@@ -205,7 +204,6 @@
     <string name="multirt_config_setdefault">ʇꞁnɐɟǝp ʇǝS</string>
     <string name="multirt_config_setdefault_already">ʇꞁnɐɟǝᗡ</string>
     <string name="multirt_config_removeerror_last">pǝꞁꞁɐʇsuᴉ ǝɯᴉʇunᴚ ɐʌɐՐ ǝuo ʇsɐǝꞁ ʇɐ ǝʌɐɥ ʇsnɯ no⅄</string>
-    <string name="multirt_nocompartiblert">ǝɯᴉʇunᴚ ɐʌɐՐ ǝꞁqᴉʇɹɐdɯoɔ ʎuɐ puᴉɟ ʇ,uɐƆ</string>
     <string name="compat_117_message">˙ɥɔunɐꞁ ʇɹoqɐ oʇ ꞁǝɔuɐƆ ssǝɹd puɐ \'uoᴉʇɐꞁꞁɐʇsuᴉ ɯɹᴉɟuoɔ oʇ ꞰO ssǝɹԀ ˙suoᴉsɹǝʌ ǝsǝɥʇ unɹ oʇ ꞁꞁɐʇsuᴉ uɐɔ noʎ sǝɔɹnosǝɹ ꞁɐuoᴉʇᴉppɐ ǝɯos ǝɹɐ ǝɹǝɥʇ ʇnq \'ʇuǝɯoɯ ǝɥʇ ʇɐ ʇᴉ ʇɹoddns ʎꞁꞁnɟ ʇ,usǝop ɹǝddɐɹʍ SƎ߈Ꞁ⅁ \'ʎꞁpɐS ˙ǝꞁᴉɟoɹd ǝɹoɔ ᘔ˙Ɛ Ꞁ⅁uǝdO ǝɥʇ sǝɹᴉnbǝɹ +ɐ0⥝ʍ⥝ᘔ ʇɟɐɹɔǝuᴉW</string>
     <string name="compat_11x_playanyway">ʎɐʍʎuɐ ʎɐlԀ</string>
     <string name="pvc_gameDirectory">ʎɹoʇɔǝɹᴉp ǝɯɐ⅁</string>
