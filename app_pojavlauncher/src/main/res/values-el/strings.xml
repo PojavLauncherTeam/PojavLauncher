@@ -107,7 +107,6 @@
     <string name="mcn_exit_call">Έξοδος</string>
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
     <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
-    <string name="mcn_check_fail_incompatiblearch">Η αρχιτεκτονική %1$s δεν είναι συμβατή με το Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Το Vulkan Zink renderer δεν υποστηρίζεται σε αυτήν τη συσκευή!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -194,7 +193,6 @@
     <string name="multirt_config_setdefault">Ορισμός ως προεπιλογή</string>
     <string name="multirt_config_setdefault_already">Προεπιλογή</string>
     <string name="multirt_config_removeerror_last">Πρέπει να έχετε τουλάχιστον ένα Java Runtime εγκατεστημένο</string>
-    <string name="multirt_nocompartiblert">Δεν είναι δυνατή η εύρεση οποιουδήποτε περιβάλλοντος Java Runtime</string>
     <string name="compat_117_message">Το Minecraft 21w10a+ απαιτεί το προφίλ πυρήνα OpenGL 3.2. Δυστυχώς, το GL4ES wrapper δεν το υποστηρίζει πλήρως αυτή τη στιγμή, αλλά υπάρχουν μερικοί πρόσθετοι πόροι που μπορείτε να εγκαταστήσετε για να εκτελέσετε αυτές τις εκδόσεις. Πατήστε OK για να επιβεβαιώσετε την εγκατάσταση και πατήστε Ακύρωση για να ακυρώσετε την εκκίνηση.</string>
     <string name="pvc_gameDirectory">Κατάλογος παιχνιδιού</string>
     <string name="pvc_jvmArgs">Παράμετροι εκκίνησης JVM</string>
