@@ -112,7 +112,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
     <string name="mcn_check_fail_lwjgl">O LWJGL3 não foi instalado!</string>
-    <string name="mcn_check_fail_incompatiblearch">A arquitetura %1$s é incompatível com a Runtime do Java %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">O renderizador Vulkan Zink não é suportado neste dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Interface</string>
@@ -207,7 +206,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="multirt_config_setdefault">Definir como padrão</string>
     <string name="multirt_config_setdefault_already">Padrão</string>
     <string name="multirt_config_removeerror_last">Tu deves ter pelo menos uma Runtime do Java instalada</string>
-    <string name="multirt_nocompartiblert">Não é possível encontrar nenhuma Runtime do Java compatível</string>
     <string name="compat_117_message">O Minecraft 21w10a+ requere o OpenGL 3.2.
 Infelizmente, o wrapper do GL4ES não suporta totalmente isso no momento, mas existem alguns recursos adicionais que tu podes instalar para executar essas versões. Pressiona em OK para confirmar a instalação, e pressiona em Cancelar para abortar a execução.</string>
     <string name="compat_11x_playanyway">Jogar mesmo assim</string>
