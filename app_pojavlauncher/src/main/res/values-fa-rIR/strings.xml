@@ -109,7 +109,6 @@
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 نصب نشده است!</string>
-    <string name="mcn_check_fail_incompatiblearch">معماریِ %1$s با جاوا ران تایمِ %2$s ناسازگار است.</string>
     <string name="mcn_check_fail_vulkan_support">رندر کننده Vulkan Zink در این دستگاه پشتیبانی نمی‌شود!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -196,7 +195,6 @@
     <string name="multirt_config_setdefault">تنظیم پیش‌فرض</string>
     <string name="multirt_config_setdefault_already">پیش‌فرض</string>
     <string name="multirt_config_removeerror_last">شما باید حداقل یک جاوا ران تایم را نصب داشته باشید</string>
-    <string name="multirt_nocompartiblert">نمی‌توان هیچ جاوا ران تایم سازگاری را پیدا کرد</string>
     <string name="compat_117_message">ماینکرفت 21w10a به بالا نیازمند OpenGL 3.2 است. متاسفانه GL4ES اکنون آن را به طور کامل پشتیبانی نمی‌کند، ولی بعضی منابع دیگر وجود دارد که با نصب آن‌ها می‌توانید این ورژن‌ها را بازی کنید.
 برای تایید نصب روی OK و برای خارج شدن روی Cancel بزنید.</string>
     <string name="compat_11x_playanyway">در هر صورت باز کن</string>
