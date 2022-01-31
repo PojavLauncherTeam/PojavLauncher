@@ -107,7 +107,6 @@
     <string name="mcn_exit_call">Umalis</string>
     <string name="mcn_exit_confirm">Sigurado ka bang nais na pilitin malapit?</string>
     <string name="mcn_check_fail_lwjgl">Ang LWJGL3 ay hindi na-install!</string>
-    <string name="mcn_check_fail_incompatiblearch">Ang arkitektura %1$s ay hindi tugma sa Java Runtime%2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Hindi supported ang Vulkan - Zink dito!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -195,7 +194,6 @@
     <string name="multirt_config_setdefault">I-set bilang default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">Dapat may naka-install sa launcher na isang Java Runtime</string>
-    <string name="multirt_nocompartiblert">Hindi makahanap ng isang compatible na Java Runtime</string>
     <string name="compat_11x_playanyway">Subukan pa rin</string>
     <string name="storage_warning_title">Bago sa i-storage</string>
 </resources>
