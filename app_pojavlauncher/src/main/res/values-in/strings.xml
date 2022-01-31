@@ -112,7 +112,6 @@
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak dipasang!</string>
-    <string name="mcn_check_fail_incompatiblearch">Arsitektur %1$s tidak kompatibel dengan Runtime Java %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink tidak didukung di perangkat ini!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -216,7 +215,6 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">Anda harus memiliki setidaknya satu Java Runtime terpasang</string>
-    <string name="multirt_nocompartiblert">Tidak dapat menemukan Java Runtime yang kompatibel</string>
     <string name="compat_117_message">Minecraft 21w10a+ membutuhkan OpenGL 3.2 core profil. Sayangnya, Gl4ES wrapper tidak sepenuhnya mendukung OpenGL 3.2 untuk sekarang, tetapi masih ada tambahan yang bisa dipasang untuk menjalankan versi tersebut. Pencet OK untuk mengkonfirmasi pemasangan, dan pencet Batalkan untuk membatalkan peluncuran.</string>
     <string name="compat_11x_playanyway">Main saja</string>
     <string name="pvc_gameDirectory">Direktori permainan</string>
