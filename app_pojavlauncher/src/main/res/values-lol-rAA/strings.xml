@@ -109,7 +109,6 @@
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecchur %1$s iz incompatibel wif Jaav Runtiem %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Catz mobile cant’ handel Vulkan Zink renderer!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -196,7 +195,6 @@
     <string name="multirt_config_setdefault">Set favoritz</string>
     <string name="multirt_config_setdefault_already">My favritz</string>
     <string name="multirt_config_removeerror_last">Catz cant’ si any Coffee Cup’s Runtime in kleksion</string>
-    <string name="multirt_nocompartiblert">Catz cant’ si ani drunkabl’ Coffee Cup’s Runtime</string>
     <string name="compat_117_message">Minecraft 21w10a ur newer needz OpenGL 3.2 Core Profile (ur newer). GL4ES wrapper doeznt’ furly surport it at momentz, but their iz sume additivz resourcez catz can inztall tu run the’z version. Scratch OK tu confurm inztallursion, ur Cancel to abort l’unch.</string>
     <string name="compat_11x_playanyway">Cat stil\' won tu play</string>
     <string name="pvc_gameDirectory">Gamez’ direktory</string>
