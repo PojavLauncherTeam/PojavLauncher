@@ -108,10 +108,10 @@
     <string name="global_error_field_empty">To pole nie może być puste</string>
     <string name="global_waiting">Czekaj</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikacja/gra zakończyła się błędem o kodzie %d, sprawdź latestlog.txt, aby uzyskać więcej informacji.</string>
     <string name="mcn_exit_call">Wyjdź</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektura %1$s nie jest kompatybilna ze środowiskiem wykonawczym Java %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink nie jest obsługiwany na tym urządzeniu!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -137,7 +137,7 @@
     <string name="control_viewout">Wyjście danych</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
-    <string name="control_scaleup">Zwiększ</string>
+    <string name="control_scaleup">powiększ</string>
     <string name="control_scaledown">Zmniejsz</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Importuj sterowanie</string>
@@ -207,6 +207,7 @@
     <string name="mcl_memory_allocation_subtitle">Kontroluje ilość pamięci przydzielonej Minecraft</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Uszkodzone środowisko wykonawcze Java</string>
+    <string name="multirt_runtime_incompatiblearch">Niezgodna architektura: %s</string>
     <string name="multirt_config_title">Maszyny wirtualne Java</string>
     <string name="multirt_config_add">Dodaj nową</string>
     <string name="multirt_config_add_subtitle">Importuj nową maszynę wirtualną Java</string>
@@ -216,7 +217,8 @@
     <string name="multirt_config_setdefault">Ustaw jako domyślny</string>
     <string name="multirt_config_setdefault_already">Domyślny</string>
     <string name="multirt_config_removeerror_last">Należy mieć zainstalowane co najmniej jedno środowisko wykonawcze Java</string>
-    <string name="multirt_nocompartiblert">Nie znaleziono żadnego kompatybilnego środowiska wykonawczego Java</string>
+    <string name="multirt_nocompartiblert">Nie można znaleźć wystarczającej wersji Javy. Ta wersja wymaga Javy %d lub nowszej.</string>
+    <string name="multirt_nojava8rt">Nie można znaleźć Javy 8. Aby użyć tej opcji, musisz zainstalować Javę 8.</string>
     <string name="compat_117_message">Minecraft 21w10a i nowsze wymagają profilu OpenGL 3.2 core. Niestety, ale moduł GL4ES obecnie nie wspiera go w pełni, ale istnieją dodatkowe zasoby, które możesz zainstalować, aby uruchomić nowsze wersje. Naciśnij OK, aby potwierdzić instalację lub Anuluj, aby przerwać uruchamianie.</string>
     <string name="compat_11x_playanyway">Uruchom mimo to</string>
     <string name="pvc_gameDirectory">Katalog gry</string>
