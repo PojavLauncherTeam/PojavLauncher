@@ -103,7 +103,6 @@
     <string name="mcn_exit_call">Afsluiten</string>
     <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 is niet geïnstalleerd!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architectuur %1$s is niet compatibel met Java Runtime %2$s,.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Toetsenbord</string>
