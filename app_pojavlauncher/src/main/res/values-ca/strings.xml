@@ -74,7 +74,6 @@
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 no s\'ha instal·lat!</string>
-    <string name="mcn_check_fail_incompatiblearch">L\'arquitectura %1$s no és compatible amb Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
