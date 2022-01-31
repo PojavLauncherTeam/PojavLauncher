@@ -109,7 +109,6 @@
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы увѣрены, что хотите принудительно закрыть оный?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
-    <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовмѣстима съ Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Визуализаторъ Vulkan Zink не ​котируется на семъ аппаратѣ!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Интерфейсъ</string>
@@ -197,7 +196,6 @@
     <string name="multirt_config_setdefault">Установить по умолчанію</string>
     <string name="multirt_config_setdefault_already">По умолчанію</string>
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы одинъ Java Runtime</string>
-    <string name="multirt_nocompartiblert">Не удалось найти совмѣстимую Java Runtime</string>
     <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. Къ глубочайшему огорченію, на сегодняшній день GL4ES не полностью поддерживаетъ ея, но есть нѣкоторые дополнительные рессурсы, которые вы можете установить, чтобы запустить этѣ версіи. Нажмите на кнопку «ОКЪ», чтобы одобрить установку или «Отмѣна», чтобы наложить вето на запускъ.</string>
     <string name="compat_11x_playanyway">Все равно запустить</string>
     <string name="pvc_gameDirectory">Папка игры</string>
