@@ -109,7 +109,6 @@
     <string name="mcn_exit_call">Ieșire</string>
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nu a fost instalat!</string>
-    <string name="mcn_check_fail_incompatiblearch">Arhitectura %1$s nu este compatibilă cu Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer nu este suportat pe acest dispozitiv!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -207,7 +206,6 @@
     <string name="multirt_config_setdefault">Setaţi ca prestabilit</string>
     <string name="multirt_config_setdefault_already">Prestabilit</string>
     <string name="multirt_config_removeerror_last">Trebuie să ai cel puțin un Java Runtime instalat</string>
-    <string name="multirt_nocompartiblert">Nu se poate găsi Java Runtime compatibil</string>
     <string name="compat_117_message">Minecraft 21w10a+ necesită profilul de bază OpenGL 3.2. Din păcate, wrapper-ul GL4ES nu îl suportă pe deplin în acest moment, dar există câteva resurse suplimentare pe care le poți instala pentru a rula aceste versiuni. Apasă OK pentru a confirma instalarea sau apasă Anulare pentru a întrerupe lansarea.</string>
     <string name="compat_11x_playanyway">Joacă oricum</string>
     <string name="pvc_gameDirectory">Dosarul jocului</string>
