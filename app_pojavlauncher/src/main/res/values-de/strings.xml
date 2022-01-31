@@ -112,7 +112,6 @@
     <string name="mcn_exit_call">Beenden</string>
     <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie die Beendung erzwingen möchten?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wurde nicht installiert!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektur %1$s ist inkompatibel mit Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink-Renderer wird auf diesem Gerät nicht unterstützt!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Benutzeroberfläche</string>
@@ -207,6 +206,7 @@
     <string name="mcl_memory_allocation">Zugewiesener RAM</string>
     <string name="mcl_memory_allocation_subtitle">Legt fest, wie viel RAM Minecraft gegeben wird</string>
     <string name="multirt_runtime_corrupt">Beschädigte Java-Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Inkompatible Architektur: %s</string>
     <string name="multirt_config_title">Java-VMs</string>
     <string name="multirt_config_add">Hinzufügen</string>
     <string name="multirt_config_add_subtitle">Neue Java-VM importieren</string>
@@ -216,7 +216,8 @@
     <string name="multirt_config_setdefault">Als Standard festlegen</string>
     <string name="multirt_config_setdefault_already">Standard</string>
     <string name="multirt_config_removeerror_last">Es muss mindestens eine Java-Runtime installiert sein</string>
-    <string name="multirt_nocompartiblert">Keine kompartible Java-Runtime gefunden</string>
+    <string name="multirt_nocompartiblert">Es wurde keine kompatible Java Runtime gefunden. Diese Version benötigt Java %d oder neuer.</string>
+    <string name="multirt_nojava8rt">Java 8 kann nicht gefunden werden. Um diese Option nutzen zu können, musst du Java 8 installieren.</string>
     <string name="compat_117_message">Minecraft 21w10a+ benötigt das OpenGL 3.2-Kernprofil, welches derzeitig leider nicht vollständig vom GL4ES-Wrapper unterstützt wird. Jedoch gibt es einige zusätzliche Ressourcen, die installiert werden können, um diese Versionen trotzdem auszuführen. Drücke auf OK, um die Installation zu bestätigen oder auf Abbrechen, um den Start-Vorgang zu beenden.</string>
     <string name="compat_11x_playanyway">Trotzdem starten</string>
     <string name="pvc_gameDirectory">Spielverzeichnis</string>
