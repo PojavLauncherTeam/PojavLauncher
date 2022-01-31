@@ -109,7 +109,6 @@
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
-    <string name="mcn_check_fail_incompatiblearch">البنية %1$s غير متوافقة مع محرك تشغيل جافا %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">رندر فولكان زينك غير مدعوم على هذا الجهاز!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">واجهة المستخدم الرسومية</string>
@@ -199,7 +198,6 @@
     <string name="multirt_config_setdefault">تعيين لإستخدام دائم</string>
     <string name="multirt_config_setdefault_already">مستخدم دائما</string>
     <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل مشغل جافا واحد مثبت</string>
-    <string name="multirt_nocompartiblert">لا يمكن العثور على مشغل جافا قابل للتشغيل</string>
     <string name="compat_117_message">ماينكرافت 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن تغليف GL4ES لا يدعمه بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لإجهاض الإطلاق.</string>
     <string name="compat_11x_playanyway">تشغيل على أي حال</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
