@@ -112,7 +112,6 @@
     <string name="mcn_exit_call">Esci</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 non installato!</string>
-    <string name="mcn_check_fail_incompatiblearch">L\'architettura %1$s non è compatibile con il Runtime Java %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Il renderer Vulkan Zink non è supportato su questo dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -207,6 +206,7 @@
     <string name="mcl_memory_allocation">Memoria allocata</string>
     <string name="mcl_memory_allocation_subtitle">Controlla quanta memoria dedicare a Minecraft</string>
     <string name="multirt_runtime_corrupt">Corrotto Runtime Java</string>
+    <string name="multirt_runtime_incompatiblearch">Architettura non compatibile: %s</string>
     <string name="multirt_config_title">Java VM</string>
     <string name="multirt_config_add">Aggiungi</string>
     <string name="multirt_config_add_subtitle">Importa nuova VM Java</string>
@@ -216,7 +216,8 @@
     <string name="multirt_config_setdefault">Imposta predefinito</string>
     <string name="multirt_config_setdefault_already">Predefinito</string>
     <string name="multirt_config_removeerror_last">Devi avere almeno un Runtime Java installato</string>
-    <string name="multirt_nocompartiblert">Non è stata trovata una versione compatibile di Runtime Java</string>
+    <string name="multirt_nocompartiblert">Impossibile trovare una versione compatibile di Java Runtime. Questa versione richiede almeno Java %d o più recente.</string>
+    <string name="multirt_nojava8rt">Impossibile trovare Java 8. Per usare questa opzione, è necessario installare Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ necessità del profilo core OpenGL 3.2. Purtroppo, il wrapper GL4ES non è completamente supportato al momento, ma ci sono altre risorse aggiuntive installabili per usare quelle versioni.
 Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="compat_11x_playanyway">Gioca comunque</string>
