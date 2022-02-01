@@ -206,6 +206,7 @@
     <string name="mcl_memory_allocation">Phân bổ bộ nhớ</string>
     <string name="mcl_memory_allocation_subtitle">Điều chỉnh số lượng bộ nhớ được cung cấp cho Minecraft</string>
     <string name="multirt_runtime_corrupt">Java đã gặp xung đột</string>
+    <string name="multirt_runtime_incompatiblearch">Kiến trúc không tương thích: %s</string>
     <string name="multirt_config_title">Các phiên bản Java</string>
     <string name="multirt_config_add">Thêm mới</string>
     <string name="multirt_config_add_subtitle">Thêm vào Java VM mới</string>
@@ -215,6 +216,8 @@
     <string name="multirt_config_setdefault">Đặt làm mặc định</string>
     <string name="multirt_config_setdefault_already">Mặc định</string>
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
+    <string name="multirt_nocompartiblert">Không thể tìm thấy phiên bản Java tương thích. Phiên bản Minecraft này yêu cầu Java %d trở lên.</string>
+    <string name="multirt_nojava8rt">Không thể tìm thấy Java 8. Để sử dụng tùy chọn này, bạn cần cài đặt Java 8.</string>
     <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù GL4ES chưa hỗ trợ nó ở thời điểm này, tuy nhiên bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
     <string name="compat_11x_playanyway">Vẫn chơi</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
