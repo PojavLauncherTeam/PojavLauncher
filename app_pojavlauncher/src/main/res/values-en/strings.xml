@@ -175,7 +175,9 @@
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_addbutton_drawer">Add button drawer</string>
     <string name="customctrl_addsubbutton">Add sub-button</string>
+    <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added !</string>
     <string name="customctrl_selectdefault">Select default Control json</string>
+    <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
     <string name="main_welcome">Welcome, %s</string>
@@ -204,6 +206,7 @@
     <string name="mcl_memory_allocation">Memory allocation</string>
     <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft</string>
     <string name="multirt_runtime_corrupt">Corrupted Java Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Incompatible architecture: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Add New</string>
     <string name="multirt_config_add_subtitle">Import new Java VM</string>
@@ -213,6 +216,8 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed</string>
+    <string name="multirt_nocompartiblert">Can\'t find any compartible Java Runtime. This version requires Java %d or newer.</string>
+    <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, GL4ES wrapper doesn\'t fully support it at the moment, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
     <string name="compat_11x_playanyway">Play anyway</string>
     <string name="pvc_gameDirectory">Game directory</string>
