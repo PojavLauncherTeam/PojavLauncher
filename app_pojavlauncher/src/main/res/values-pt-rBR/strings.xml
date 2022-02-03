@@ -207,6 +207,7 @@
     <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será usado pelo Minecraft</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Java Runtime corrompido</string>
+    <string name="multirt_runtime_incompatiblearch">Arquitetura incompatível: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Adicionar novo</string>
     <string name="multirt_config_add_subtitle">Importar nova Java VM</string>
@@ -216,6 +217,8 @@
     <string name="multirt_config_setdefault">Definir padrão</string>
     <string name="multirt_config_setdefault_already">Padrão</string>
     <string name="multirt_config_removeerror_last">Você precisa ter pelo menos um Java Runtime instalado</string>
+    <string name="multirt_nocompartiblert">Não foi possível encontrar um Java Runtime. Essa versão requer Java %d ou mais recente.</string>
+    <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, você precisa instalar o Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ necessita do OpenGL 3.2 para funcionar. Infelizmente o GL4ES não suporta ele completamente no momento, porém possui alguns recursos adicionais que você pode instalar para executar essas versões. Pressione OK para confirmar a instalação, e Cancelar para abortar a inicialização.</string>
     <string name="compat_11x_playanyway">Jogar mesmo assim</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>
@@ -246,5 +249,11 @@
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_back_title">Voltar para última tela</string>
     <string name="gles_hack_title">Hack de tinta de GL4ES</string>
+    <string name="gles_hack_none">Não encolher texturas</string>
+    <string name="gles_hack_always">Dividir todas texturas por 2</string>
+    <string name="gles_hack_sometimes">Dividir texturas grandes por 2 ou 4</string>
+    <string name="vbo_hack_title">Desativar VBOs</string>
+    <string name="vbo_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
     <string name="gles_version_hack_title">Forçar OpenGL 1</string>
+    <string name="gles_version_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
 </resources>
