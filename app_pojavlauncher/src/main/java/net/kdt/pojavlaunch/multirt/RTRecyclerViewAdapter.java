@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.kdt.pojavlaunch.Architecture;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -71,7 +72,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         public void bindRuntime(MultiRTUtils.Runtime rt, int pos) {
             currentRuntime = rt;
             currentPosition = pos;
-            if(rt.versionString != null) {
+            if(rt.versionString != null && Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(rt.arch)) {
                 javaVersionView.setText(ctx.getString(R.string.multirt_java_ver, rt.name, rt.javaVersion));
                 fullJavaVersionView.setText(rt.versionString);
                 fullJavaVersionView.setTextColor(defaultColors);
@@ -80,8 +81,12 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
                 setDefaultButton.setEnabled(!default_);
                 setDefaultButton.setText(default_?R.string.multirt_config_setdefault_already:R.string.multirt_config_setdefault);
             }else{
+                if(rt.versionString == null){
+                    fullJavaVersionView.setText(R.string.multirt_runtime_corrupt);
+                }else{
+                    fullJavaVersionView.setText(ctx.getString(R.string.multirt_runtime_incompatiblearch, rt.arch));
+                }
                 javaVersionView.setText(rt.name);
-                fullJavaVersionView.setText(R.string.multirt_runtime_corrupt);
                 fullJavaVersionView.setTextColor(Color.RED);
                 setDefaultButton.setVisibility(View.GONE);
             }
@@ -91,7 +96,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         public void onClick(View v) {
             if(v.getId() == R.id.multirt_view_removebtn) {
                 if (currentRuntime != null) {
-                    if(MultiRTUtils.getRuntimes().size() < 2) {
+                    if(MultiRTUtils.getRuntimes().size() < 2 && setDefaultButton.isShown()) {
                         AlertDialog.Builder bldr = new AlertDialog.Builder(ctx);
                         bldr.setTitle(R.string.global_error);
                         bldr.setMessage(R.string.multirt_config_removeerror_last);

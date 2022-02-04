@@ -130,7 +130,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                              mActivity.runOnUiThread(()->{
                                  AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
                                  bldr.setTitle(R.string.global_error);
-                                 bldr.setMessage(R.string.multirt_nocompartiblert);
+                                 bldr.setMessage(mActivity.getString(R.string.multirt_nocompartiblert, verInfo.javaVersion.majorVersion));
                                  bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
                                      dialog.dismiss();
                                  });
