@@ -38,6 +38,7 @@ public class LauncherPreferences
     public static boolean PREF_VBO_DISABLE_HACK = false;
     public static boolean PREF_VIRTUAL_MOUSE_START = false;
     public static boolean PREF_OPENGL_VERSION_HACK = false;
+    public static boolean PREF_ARC_CAPES = false;
 
 
     public static void loadPreferences(Context ctx) {
@@ -71,6 +72,7 @@ public class LauncherPreferences
         PREF_VBO_DISABLE_HACK = DEFAULT_PREF.getBoolean("vbo_disable_hack", false);
         PREF_VIRTUAL_MOUSE_START = DEFAULT_PREF.getBoolean("mouse_start", false);
         PREF_OPENGL_VERSION_HACK = DEFAULT_PREF.getBoolean("gles_version_hack", false);
+        PREF_ARC_CAPES = DEFAULT_PREF.getBoolean("arc_capes",false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {

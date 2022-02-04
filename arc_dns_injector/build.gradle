@@ -1,0 +1,15 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+jar {
+    manifest {
+        attributes("Manifest-Version": "1.0",
+        "PreMain-Class": "git.artdeell.arcdns.ArcDNSInjectorAgent")
+    }
+    destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/"))
+}
