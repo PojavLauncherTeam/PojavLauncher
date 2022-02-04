@@ -317,6 +317,7 @@ public class JREUtils {
         initJavaRuntime();
         setupExitTrap(activity.getApplication());
         chdir(Tools.DIR_GAME_NEW);
+        userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         Logger.getInstance().appendToLog("Java Exit code: " + exitCode);
@@ -340,6 +341,8 @@ public class JREUtils {
      */
     public static List<String> getJavaArgs(Context ctx) {
         List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+        String resolvFile;
+            resolvFile = new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath();
         String[] overridableArguments = new String[]{
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
                 "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
@@ -358,29 +361,30 @@ public class JREUtils {
                 "-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth,
                 "-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight,
                 "-Dglfwstub.initEgl=false",
-
-                "-Dext.net.resolvPath=" +new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath(),
-
+                "-Dext.net.resolvPath=" +resolvFile,
                 "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
         };
-
-
-        for (String userArgument : userArguments) {
-            for(int i=0; i < overridableArguments.length; ++i){
-                String overridableArgument = overridableArguments[i];
-                //Only java properties are considered overridable for now
-                if(userArgument.startsWith("-D") && userArgument.startsWith(overridableArgument.substring(0, overridableArgument.indexOf("=")))){
-                    overridableArguments[i] = ""; //Remove the argument since it is overridden
+        List<String> additionalArguments = new ArrayList<>();
+        for(String arg : overridableArguments) {
+            String strippedArg = arg.substring(0,arg.indexOf('='));
+            boolean add = true;
+            for(String uarg : userArguments) {
+                if(uarg.startsWith(strippedArg)) {
+                    add = false;
                     break;
                 }
             }
+            if(add)
+                additionalArguments.add(arg);
+            else
+                Log.i("ArgProcessor","Arg skipped: "+arg);
         }
 
         //Add all the arguments
-        userArguments.addAll(Arrays.asList(overridableArguments));
+        userArguments.addAll(additionalArguments);
         return userArguments;
     }
 
