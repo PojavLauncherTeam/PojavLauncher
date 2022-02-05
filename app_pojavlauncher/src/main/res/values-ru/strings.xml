@@ -253,4 +253,5 @@
     <string name="vbo_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
     <string name="gles_version_hack_title">Принудительное использование openGL 1</string>
     <string name="gles_version_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
+    <string name="arc_capes_desc">Включает плащи от Arc. Для получения дополнительной информации, пожалуйста, посетите https://arccapes.com. Требуется OptiFine.</string>
 </resources>
