@@ -255,4 +255,6 @@
     <string name="vbo_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
     <string name="gles_version_hack_title">Erzwinge openGL 1</string>
     <string name="gles_version_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
+    <string name="arc_capes_title">Arc-Capes</string>
+    <string name="arc_capes_desc">Aktiviert Umhänge von Arc. Weitere Informationen sind auf https://arccapes.com zu finden. OptiFine wird benötigt.</string>
 </resources>
