@@ -248,4 +248,6 @@
     <string name="vbo_hack_title">VBO 비활성화</string>
     <string name="vbo_hack_description">여러 오래된 버전과의 호환을 돕습니다</string>
     <string name="gles_version_hack_description">여러 오래된 버전과의 호환을 돕습니다</string>
+    <string name="arc_capes_title">아크 망토</string>
+    <string name="arc_capes_desc">아크에서 망토를 활성화하세요. 더 많은 정보는 https://arccapes.com 에서 확인하세요. OptiFine이 필요합니다.</string>
 </resources>
