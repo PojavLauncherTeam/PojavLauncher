@@ -207,6 +207,7 @@
     <string name="mcl_memory_allocation_subtitle">Управляет тем, сколько памяти выделится для Minecraft</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Java Runtime повреждён</string>
+    <string name="multirt_runtime_incompatiblearch">Несовместимая архитектура: %s</string>
     <string name="multirt_config_title">Виртуальные машины Java</string>
     <string name="multirt_config_add">Добавить новую</string>
     <string name="multirt_config_add_subtitle">Импортировать новую виртуальную машину</string>
@@ -216,6 +217,8 @@
     <string name="multirt_config_setdefault">Установить по умолчанию</string>
     <string name="multirt_config_setdefault_already">По умолчанию</string>
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы один Java Runtime</string>
+    <string name="multirt_nocompartiblert">Не удалось найти подходящий Java Runtime. Эта версия требует Java %d версии или позднее.</string>
+    <string name="multirt_nojava8rt">Не удалось найти Java 8. Чтобы использовать эту опцию, необходимо установить Java 8.</string>
     <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. К сожалению, на данный момент GL4ES не полностью поддерживает её, но есть некоторые дополнительные ресурсы, которые вы можете установить, чтобы запустить эти версии. Нажмите на кнопку «ОК», чтобы подтвердить установку или «Отмена», чтобы прервать запуск.</string>
     <string name="compat_11x_playanyway">Запустить в любом случае</string>
     <string name="pvc_gameDirectory">Папка игры</string>
@@ -253,5 +256,6 @@
     <string name="vbo_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
     <string name="gles_version_hack_title">Принудительное использование openGL 1</string>
     <string name="gles_version_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
+    <string name="arc_capes_title">Плащи Arc</string>
     <string name="arc_capes_desc">Включает плащи от Arc. Для получения дополнительной информации, пожалуйста, посетите https://arccapes.com. Требуется OptiFine.</string>
 </resources>
