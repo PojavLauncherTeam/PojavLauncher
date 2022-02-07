@@ -40,6 +40,7 @@
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft  खेलने के लिए तैयार %s</string>
     <string name="mcl_launch_cleancache">कैशे फ़ाइलों की सफाई</string>
+    <string name="mcl_launch_downloading">%s डाउनलोड हो रहा है</string>
     <!-- Global strings -->
     <string name="global_warinng">चेतावनी</string>
     <!-- MainActivity: strings -->
