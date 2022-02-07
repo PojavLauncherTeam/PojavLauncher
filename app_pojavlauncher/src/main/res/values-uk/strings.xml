@@ -254,4 +254,5 @@
     <string name="vbo_hack_description">Допомагає з сумісністю на деяких старих версій</string>
     <string name="gles_version_hack_title">Примусове використання openGL 1</string>
     <string name="gles_version_hack_description">Допомагає з сумісністю на деяких старих версій</string>
+    <string name="arc_capes_title">Плащі Arc</string>
 </resources>
