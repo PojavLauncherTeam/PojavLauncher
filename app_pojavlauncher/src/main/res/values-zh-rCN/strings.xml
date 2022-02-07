@@ -255,4 +255,6 @@
     <string name="vbo_hack_description">兼容旧版本</string>
     <string name="gles_version_hack_title">强制使用 OpenGL 1</string>
     <string name="gles_version_hack_description">兼容旧版本</string>
+    <string name="arc_capes_title">Arc 披风</string>
+    <string name="arc_capes_desc">启用来自 Arc 的披风。欲了解更多信息，请访问 https://arcapes.com。需要OptiFine。</string>
 </resources>
