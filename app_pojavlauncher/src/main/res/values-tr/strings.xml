@@ -207,6 +207,7 @@
     <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Bozuk Java Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Uyumsuz mimari: %s</string>
     <string name="multirt_config_title">Java SM\'leri</string>
     <string name="multirt_config_add">Yeni ekle</string>
     <string name="multirt_config_add_subtitle">Yeni Java VM\'i içe aktar</string>
@@ -216,6 +217,8 @@
     <string name="multirt_config_setdefault">Varsayılan olarak ayarla</string>
     <string name="multirt_config_setdefault_already">Varsayılan</string>
     <string name="multirt_config_removeerror_last">En az bir Java Runtime kurmanız gerekir</string>
+    <string name="multirt_nocompartiblert">Uyumlu Java Runtime bulunamadı. Bu sürüm Java %d ya da daha yenisini gerektiriyor.</string>
+    <string name="multirt_nojava8rt">Java 8 bulunamıyor. Bu seçeneği kullanabilmeniz için, Java 8 kurmanız gerekiyor.</string>
     <string name="compat_117_message">Minecraft 21w10a ve üstü artık OpenGL 3.2 core profilini gerektiriyor. Ne yazık ki, GL4ES wrapper\'ı onu şuanda tamamen desteklemiyor, fakat bu sürümleri çalıştırabilmek için bazı ek kaynaklar indirilebilir. Indirmeyi onaylamak için TAMAM\'a tıklayın, iptal etmek için IPTAL\'e basın.</string>
     <string name="compat_11x_playanyway">Yine de Oyna</string>
     <string name="pvc_gameDirectory">Oyun dizini</string>
@@ -253,4 +256,6 @@
     <string name="vbo_hack_description">Bazı eski sürümler ile uyumluluğu sağlar</string>
     <string name="gles_version_hack_title">openGL 1 zorla</string>
     <string name="gles_version_hack_description">Bazı eski sürümler ile uyumluluğu sağlar</string>
+    <string name="arc_capes_title">Arc Pelerinleri</string>
+    <string name="arc_capes_desc">Arc\'ın Pelerinlerini aktifleştirir. Daha fazla bilgi için lütfen https://arccapes.com\'u ziyaret edin. OptiFine gerektirir.</string>
 </resources>
