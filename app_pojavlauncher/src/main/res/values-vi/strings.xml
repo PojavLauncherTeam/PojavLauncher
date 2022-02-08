@@ -256,4 +256,5 @@
     <string name="gles_version_hack_title">Bắt buộc OpenGL 1</string>
     <string name="gles_version_hack_description">Có thể giúp tương thích với một số phiên bản cũ</string>
     <string name="arc_capes_title">Áo choàng từ Arc</string>
+    <string name="arc_capes_desc">Sử dụng áo choàng từ dịch vụ Arc. Để biết thêm thông tin, truy cập https://arccapes.com. Yêu cầu có OptiFine.</string>
 </resources>
