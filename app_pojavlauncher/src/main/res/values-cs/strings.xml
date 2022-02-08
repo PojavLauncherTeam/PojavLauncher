@@ -12,7 +12,7 @@
     <string name="login_online_check_keeplogin">Zůstat přihlášen/a</string>
     <string name="login_online_login_label">Přihlásit se</string>
     <string name="login_offline_label">Přihlásit se za offline účet</string>
-    <string name="login_error_invalid_username">Neplatné uživatelské jméno. Uživatelské jméno musí být v rozsahu 3-16 znaků, obsahovat pouze A-Z, a-z, (bez diakritiky) 0-9 a podtržítko.</string>
+    <string name="login_error_invalid_username">Neplatné uživatelské jméno. Uživatelské jméno musejíc být v rozsahu 3-16 znaků, musí obsahovat pouze A-Z, a-z, (bez diakritiky) 0-9 a podtržítko.</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
     <string name="login_error_offline_password">Offline účet nemůže obsahovat heslo!</string>
     <string name="login_microsoft">Microsoft přihlášení</string>
@@ -108,6 +108,7 @@
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
     <string name="global_waiting">Počkejte</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikace/Hra skončila s kódem %d, zkontolujte latestlog.txt pro více informací.</string>
     <string name="mcn_exit_call">Odejít</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebyl nainstalován!</string>
@@ -205,6 +206,7 @@
     <string name="mcl_memory_allocation">Přidělení paměti</string>
     <string name="mcl_memory_allocation_subtitle">Určete kolik paměti bude mít Minecraft</string>
     <string name="multirt_runtime_corrupt">Poškozená Java Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Nekompatibilní architektura: %s</string>
     <string name="multirt_config_title">Java VMy</string>
     <string name="multirt_config_add">Přidat</string>
     <string name="multirt_config_add_subtitle">Naimportovat novou Java VM</string>
@@ -214,6 +216,8 @@
     <string name="multirt_config_setdefault">Nastavit výchozí</string>
     <string name="multirt_config_setdefault_already">Výchozí</string>
     <string name="multirt_config_removeerror_last">Musíte mít nainstalovanou alespoň jednu Java Runtime</string>
+    <string name="multirt_nocompartiblert">Nelze najít žádnou podporovanou Java Runtime. Tato verze vyžaduje Javu %d nebo novější.</string>
+    <string name="multirt_nojava8rt">Nelze najít Javu 8. Chcete-li používaje tuto možnost, aby fungovala, musíte mít nainstalovanou Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ vyžaduje jádrový profil OpenGL 3.2. Bohužel, GL4ES překladač ho v tuto chvíli plně nepodporuje, ale existují další možnosti jež můžete použít pro spuštění těchto verzí. Stisknutím tlačítka OK potvrďte použít a stisknutím tlačítka Zrušit ukončíte spouštění.</string>
     <string name="compat_11x_playanyway">Nepoužít ale spustit</string>
     <string name="pvc_gameDirectory">Složka hry</string>
@@ -251,4 +255,6 @@
     <string name="vbo_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
     <string name="gles_version_hack_title">Vynutit openGL 1</string>
     <string name="gles_version_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
+    <string name="arc_capes_title">Arc Kápě</string>
+    <string name="arc_capes_desc">Vyžadujíc OptiFine, zapne kápě z Arcu. Pro více informací navštivte https://arccapes.com.</string>
 </resources>
