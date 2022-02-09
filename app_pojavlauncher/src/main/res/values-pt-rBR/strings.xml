@@ -256,4 +256,5 @@
     <string name="vbo_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
     <string name="gles_version_hack_title">Forçar OpenGL 1</string>
     <string name="gles_version_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
+    <string name="arc_capes_title">E</string>
 </resources>
