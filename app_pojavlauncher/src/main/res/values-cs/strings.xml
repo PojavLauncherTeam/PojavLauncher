@@ -48,7 +48,7 @@
     <string name="mcl_version_msg">Připraveno k spuštení Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čištění souborů mezipaměti</string>
     <string name="mcl_launch_downloading">Stahování %s</string>
-    <string name="mcl_launch_downloading_progress">"Stahuji %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_downloading_progress">"Stahování %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
     <string name="mcl_options">Možnosti</string>
     <string name="mcl_option_modinstall">Spusťte instalátor módů (Forge, LabyMod, Fabric, atd...)</string>
@@ -57,11 +57,11 @@
     <string name="mcl_option_settings">Nastavení</string>
     <string name="mcl_option_about">O aplikaci</string>
     <string name="mcl_setting_title_uninstalljre">Odinstalovat Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Restart launcheru vyžadován] Toto vám umožní přeinstalovati Java Prostředí</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Restart launcheru vyžadován] Toto vám umožní přeinstalovat Java Prostředí</string>
     <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Volného okna</string>
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Skrýt bočnípanel</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňující staré uživatelské rozhraní v1. Dá vám více celo-obrazné prostředí.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňujíce v1 rozhraní, možná budou mít tuto možnost rádi. Dává více celo-obrazné prostředí.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorovat výřez</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignorovat výřez a rozšířit obrazovku pod ním.\nDá vám více celo-obrazný zážitek.</string>
     <string name="mcl_setting_title_resolution_scaler">Škála rozlišení</string>
@@ -73,7 +73,7 @@
     <string name="mcl_setting_title_flat_button_style">Styl plochých tlačítek</string>
     <string name="mcl_setting_subtitle_flat_button_style">Povolte pro změnu stylu ovládacího tlačítka na ploché.</string>
     <string name="mcl_setting_title_buttonscale">Škálování kontrolních tlačítek</string>
-    <string name="mcl_setting_subtitle_buttonscale">Zvětšit je, pokud jsou tlačítka příliš malá.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Zvětšit je, jsou-li tlačítka příliš malá.</string>
     <string name="mcl_setting_title_mousescale">Škálování myši</string>
     <string name="mcl_setting_subtitle_mousescale">Změnit velikost virtuální myši.</string>
     <string name="mcl_setting_title_javaargs">JVM spouštěcí argumenty</string>
