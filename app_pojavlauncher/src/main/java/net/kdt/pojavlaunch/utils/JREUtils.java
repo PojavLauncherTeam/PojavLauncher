@@ -35,19 +35,6 @@ public class JREUtils {
     private static String nativeLibDir;
     public static Map<String, String> jreReleaseList;
 
-    /**
-     * Checks if the java architecture is correct for the device architecture.
-     * @param activity Some context to load resources from
-     * @param jreArch The java architecture to compare as a String.
-     */
-    public static void checkJavaArchitecture(Activity activity, String jreArch) {
-        Logger.getInstance().appendToLog("Architecture: " + archAsString(Tools.DEVICE_ARCHITECTURE));
-        if(Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
-
-        Logger.getInstance().appendToLog("Architecture " + archAsString(Tools.DEVICE_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
-        Tools.dialogOnUiThread(activity, "", activity.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
-    }
-    
     public static String findInLdLibPath(String libName) {
         if(Os.getenv("LD_LIBRARY_PATH")==null) {
             try {
@@ -104,8 +91,14 @@ public class JREUtils {
     }
 
     public static Map<String, String> readJREReleaseProperties() throws IOException {
+        return readJREReleaseProperties(Tools.DIR_HOME_JRE);
+    }
+    public static Map<String, String> readJREReleaseProperties(String name) throws IOException {
         Map<String, String> jreReleaseMap = new ArrayMap<>();
-        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.DIR_HOME_JRE + "/release"));
+        if (!name.contains("/")) {
+            name = Tools.MULTIRT_HOME + "/" + name;
+        }
+        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(name + "/release"));
         String currLine;
         while ((currLine = jreReleaseReader.readLine()) != null) {
             if (!currLine.isEmpty() || currLine.contains("=")) {
@@ -324,6 +317,7 @@ public class JREUtils {
         initJavaRuntime();
         setupExitTrap(activity.getApplication());
         chdir(Tools.DIR_GAME_NEW);
+        userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         Logger.getInstance().appendToLog("Java Exit code: " + exitCode);
@@ -347,7 +341,10 @@ public class JREUtils {
      */
     public static List<String> getJavaArgs(Context ctx) {
         List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
-        String[] overridableArguments = new String[]{
+        String resolvFile;
+            resolvFile = new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath();
+
+        ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
                 "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
                 "-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent(),
@@ -366,29 +363,33 @@ public class JREUtils {
                 "-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth,
                 "-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight,
                 "-Dglfwstub.initEgl=false",
-
-                "-Dext.net.resolvPath=" +new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath(),
-
+                "-Dext.net.resolvPath=" +resolvFile,
                 "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
-        };
-
-
-        for (String userArgument : userArguments) {
-            for(int i=0; i < overridableArguments.length; ++i){
-                String overridableArgument = overridableArguments[i];
-                //Only java properties are considered overridable for now
-                if(userArgument.startsWith("-D") && userArgument.startsWith(overridableArgument.substring(0, overridableArgument.indexOf("=")))){
-                    overridableArguments[i] = ""; //Remove the argument since it is overridden
+        ));
+        if(LauncherPreferences.PREF_ARC_CAPES) {
+            overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
+        }
+        List<String> additionalArguments = new ArrayList<>();
+        for(String arg : overridableArguments) {
+            String strippedArg = arg.substring(0,arg.indexOf('='));
+            boolean add = true;
+            for(String uarg : userArguments) {
+                if(uarg.startsWith(strippedArg)) {
+                    add = false;
                     break;
                 }
             }
+            if(add)
+                additionalArguments.add(arg);
+            else
+                Log.i("ArgProcessor","Arg skipped: "+arg);
         }
 
         //Add all the arguments
-        userArguments.addAll(Arrays.asList(overridableArguments));
+        userArguments.addAll(additionalArguments);
         return userArguments;
     }
 

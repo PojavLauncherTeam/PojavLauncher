@@ -65,6 +65,10 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 
     public static final int RUN_MOD_INSTALLER = 2050;
     private void installMod(boolean customJavaArgs) {
+        if (MultiRTUtils.getExactJREName(8) == null) {
+            Toast.makeText(this, R.string.multirt_nojava8rt, Toast.LENGTH_LONG).show();
+            return;
+        }
         if (customJavaArgs) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.alerttitle_installmod);
@@ -148,6 +152,11 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         System.out.println("call to onResumeFragments");
         mRuntimeConfigDialog = new MultiRTConfigDialog();
         mRuntimeConfigDialog.prepare(this);
+
+        ((Button)findViewById(R.id.installJarButton)).setOnLongClickListener(view -> {
+            installMod(true);
+            return true;
+        });
 
         //TODO ADD CRASH CHECK AND FOCUS
         System.out.println("call to onResumeFragments; E");

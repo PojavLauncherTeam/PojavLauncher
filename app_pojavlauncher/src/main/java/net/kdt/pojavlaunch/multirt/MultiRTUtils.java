@@ -63,6 +63,15 @@ public class MultiRTUtils {
 
         return ret;
     }
+    public static String getExactJREName(int majorVersion) {
+        List<Runtime> runtimes = getRuntimes();
+        for(Runtime r : runtimes) {
+            if(r.javaVersion == majorVersion) {
+                return r.name;
+            }
+        }
+        return null;
+    }
     public static String getNearestJREName(int majorVersion) {
         List<Runtime> runtimes = getRuntimes();
         int diff_factor = Integer.MAX_VALUE;
