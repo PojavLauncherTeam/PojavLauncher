@@ -427,8 +427,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 500, TimeUnit.MILLISECONDS, workQueue);
         mActivity.mIsAssetsProcessing = true;
-        File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
-        if (!hasDownloadedFile.exists()) {
+        //File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
+        if (true) { //(!hasDownloadedFile.exists()) {
             System.out.println("Assets begin time: " + System.currentTimeMillis());
             Map<String, JAssetInfo> assetsObjects = assets.objects;
             int assetsSizeBytes=0;
