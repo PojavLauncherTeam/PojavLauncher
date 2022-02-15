@@ -476,8 +476,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
                 if(mActivity.mIsAssetsProcessing) {
                     System.out.println("Unskipped download done!");
-                    if(!hasDownloadedFile.getParentFile().exists())hasDownloadedFile.getParentFile().mkdirs();
-                    hasDownloadedFile.createNewFile();
+                    //if(!hasDownloadedFile.getParentFile().exists())hasDownloadedFile.getParentFile().mkdirs();
+                    //hasDownloadedFile.createNewFile();
                 }else{
                     System.out.println("Skipped!");
                 }
