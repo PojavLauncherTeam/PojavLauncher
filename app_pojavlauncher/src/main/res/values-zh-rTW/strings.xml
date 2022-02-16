@@ -14,7 +14,7 @@
     <string name="login_offline_label">以離線帳號登入</string>
     <string name="login_error_invalid_username">無效的用戶名。用戶名必須在3-16個字節的範圍內，只能包含A-Z、a-z、0-9和下劃線。</string>
     <string name="login_error_exist_username">用戶名已存在</string>
-    <string name="login_error_offline_password">離線帳戶不能填寫密碼！</string>
+    <string name="login_error_offline_password">離線帳號不能填寫密碼！</string>
     <string name="login_microsoft">微軟帳號登入</string>
     <string name="login_select_account">選擇帳號</string>
     <string name="login_title_no_saved_account">找不到帳戶!</string>
@@ -24,7 +24,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">將移除此帳號！</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">安裝 Java 執行環境 %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">安裝 Java 運行庫 %s (.tar.xz)</string>
     <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩潰</string>
@@ -34,7 +34,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要儲存寫入權限！</string>
     <string name="toast_optifine_success">安裝成功</string>
-    <string name="toast_uninstalljre_done">Java 執行環境解除安裝成功</string>
+    <string name="toast_uninstalljre_done">Java 運行庫解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -57,8 +57,8 @@
     <string name="mcl_option_customcontrol">自訂控制鍵</string>
     <string name="mcl_option_settings">設定</string>
     <string name="mcl_option_about">關於</string>
-    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行環境</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 才能重新安裝 Java 執行環境</string>
+    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 運行庫</string>
+    <string name="mcl_setting_subtitle_uninstalljre">重新安裝Java運行庫 [需要重啟啟動器]</string>
     <string name="mcl_setting_title_freeform">以自由窗口模式啟動 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮動視窗中啟動 Minecraft。需要 Android 7.0+。</string>
     <string name="mcl_setting_title_hide_sidebar">隱藏側邊欄</string>
@@ -85,7 +85,7 @@
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（暫不支持）</string>
-    <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): exports OpenGL 4.3</string>
+    <string name="mcl_setting_renderer_virgl">virgl (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
@@ -108,6 +108,7 @@
     <string name="global_error_field_empty">此欄位為必填</string>
     <string name="global_waiting">等待中</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">程式/遊戲以代碼 %d 退出，詳情請查看latestlog.txt。</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
@@ -199,6 +200,7 @@
     <string name="mcl_memory_allocation">分配記憶體</string>
     <string name="mcl_memory_allocation_subtitle">分配多少記憶體給Minecraft</string>
     <string name="multirt_runtime_corrupt">Java運行庫毀損</string>
+    <string name="multirt_runtime_incompatiblearch">%s 與您的硬體架構不相容</string>
     <string name="multirt_config_title">Java VM</string>
     <string name="multirt_config_add">新建</string>
     <string name="multirt_config_add_subtitle">導入新的 Java VM</string>
@@ -208,6 +210,8 @@
     <string name="multirt_config_setdefault">設為預設</string>
     <string name="multirt_config_setdefault_already">預設</string>
     <string name="multirt_config_removeerror_last">您必須至少安裝一個Java運行庫</string>
+    <string name="multirt_nocompartiblert">無可用Java運行庫。此版本需要Java %d 以上。</string>
+    <string name="multirt_nojava8rt">無可用Java 8。請安裝Java 8以啟用此選項。</string>
     <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置檔案。 遺憾的是，GL4ES 包裝器目前並不支援，但是您可以安裝一些額外的資源來運行這些版本。 按 確認鍵 確認安裝，然後按 取消鍵 中止啟動。</string>
     <string name="compat_11x_playanyway">仍然開始遊戲</string>
     <string name="pvc_gameDirectory">遊戲目錄</string>
@@ -222,6 +226,8 @@
     <string name="control_left_offset">左偏移: </string>
     <string name="preference_control_offset_title">控件側偏移</string>
     <string name="preference_control_offset_description">設置屏幕每邊的自定義偏移</string>
+    <string name="preference_mouse_start_title">啟動時開啟虛擬滑鼠</string>
+    <string name="preference_mouse_start_description">(開啟此選項會受到開發者Mathias-Boulay的審判)</string>
     <string name="preference_video_title">視頻和渲染器</string>
     <string name="preference_video_description">分辨率、縮放類型和渲染器</string>
     <string name="preference_control_title">控制自定義</string>
@@ -241,5 +247,8 @@
     <string name="gles_hack_sometimes">將大紋理除以 2 或 4</string>
     <string name="vbo_hack_title">禁用 VBO</string>
     <string name="vbo_hack_description">相容舊版本</string>
+    <string name="gles_version_hack_title">強制使用OpenGL 1</string>
     <string name="gles_version_hack_description">相容舊版本</string>
+    <string name="arc_capes_title">Arc披風</string>
+    <string name="arc_capes_desc">啟用Arc披風。更多訊息請至 https://arccapes.com 。需要Optifine。</string>
 </resources>
