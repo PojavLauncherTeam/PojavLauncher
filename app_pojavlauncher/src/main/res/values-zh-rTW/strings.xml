@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）,</string>
+    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">在您的設備上啟動《Minecraft：Java版》！</string>
     <!-- Action bar part -->
@@ -80,7 +80,7 @@
     <string name="mcl_setting_title_javaargs">JVM 啟動引數</string>
     <string name="mcl_setting_subtitle_javaargs">注意，非專業人士修改此值可能導致遊戲崩潰。</string>
     <string name="mcl_setting_category_general">一般設定</string>
-    <string name="mcl_setting_category_scaling">縮放設定</string>
+    <string name="mcl_setting_category_scaling">解析度縮放</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 輸出OpenGL 2.1</string>
@@ -134,9 +134,9 @@
     <string name="control_scaleup">放大</string>
     <string name="control_scaledown">縮小</string>
     <!-- ImportControlActivity Strings -->
-    <string name="import_control_label">Import controls</string>
-    <string name="import_control_invalid_file">Neplatný nebo poškozený souborgey</string>
-    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_label">導入控制鍵</string>
+    <string name="import_control_invalid_file">無效或損毀的的檔案</string>
+    <string name="import_control_import_button">導入控制鍵</string>
     <string name="import_control_verifying_file">正在效驗檔案，請稍候再試...</string>
     <string name="import_control_invalid_name">無效的檔案名或檔案已存在</string>
     <string name="import_control_done">導入完成</string>
