@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）,</string>
+    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">在您的設備上啟動《Minecraft：Java版》！</string>
     <!-- Action bar part -->
@@ -23,7 +23,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">將移除此帳號！</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">安裝 Java 執行環境 %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">安裝 Java 運行庫 %s (.tar.xz)</string>
     <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩潰</string>
@@ -33,7 +33,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要儲存寫入權限！</string>
     <string name="toast_optifine_success">安裝成功</string>
-    <string name="toast_uninstalljre_done">Java 執行環境解除安裝成功</string>
+    <string name="toast_uninstalljre_done">Java 運行庫解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -56,8 +56,8 @@
     <string name="mcl_option_customcontrol">自訂控制鍵</string>
     <string name="mcl_option_settings">設定</string>
     <string name="mcl_option_about">關於</string>
-    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行環境</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 才能重新安裝 Java 執行環境</string>
+    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 運行庫</string>
+    <string name="mcl_setting_subtitle_uninstalljre">重新安裝Java運行庫 [需要重啟啟動器]</string>
     <string name="mcl_setting_title_freeform">以自由窗口模式啟動 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮動視窗中啟動 Minecraft。需要 Android 7.0+。</string>
     <string name="mcl_setting_title_hide_sidebar">隱藏側邊欄</string>
@@ -79,7 +79,7 @@
     <string name="mcl_setting_title_javaargs">JVM 啟動引數</string>
     <string name="mcl_setting_subtitle_javaargs">注意，非專業人士修改此值可能導致遊戲崩潰。</string>
     <string name="mcl_setting_category_general">一般設定</string>
-    <string name="mcl_setting_category_scaling">縮放設定</string>
+    <string name="mcl_setting_category_scaling">解析度縮放</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
@@ -128,7 +128,7 @@
     <string name="profedit_selected_profile">選擇的安裝檔：%s</string>
     <string name="global_new">新建</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
+    <string name="mcn_exit_title">程式/遊戲以代碼 %d 退出</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
