@@ -197,6 +197,7 @@
     <string name="mcl_memory_allocation">uoᴉʇɐɔoꞁꞁɐ ʎɹoɯǝW</string>
     <string name="mcl_memory_allocation_subtitle">ʇɟɐɹɔǝuᴉW oʇ uǝʌᴉᵷ sᴉ ʎɹoɯǝɯ ɥɔnɯ ʍoɥ sꞁoɹʇuoƆ</string>
     <string name="multirt_runtime_corrupt">ǝɯᴉʇunᴚ ɐʌɐՐ pǝʇdnɹɹoƆ</string>
+    <string name="multirt_runtime_incompatiblearch"> %s :ǝɹnʇɔǝʇᴉɥɔɹɐ ǝlqᴉʇɐdɯoɔuI</string>
     <string name="multirt_config_title">sWɅ ɐʌɐՐ</string>
     <string name="multirt_config_add">ʍǝu pp∀</string>
     <string name="multirt_config_add_subtitle">WɅ ɐʌɐՐ ʍǝu ʇɹodɯI</string>
@@ -206,6 +207,7 @@
     <string name="multirt_config_setdefault">ʇꞁnɐɟǝp ʇǝS</string>
     <string name="multirt_config_setdefault_already">ʇꞁnɐɟǝᗡ</string>
     <string name="multirt_config_removeerror_last">pǝꞁꞁɐʇsuᴉ ǝɯᴉʇunᴚ ɐʌɐՐ ǝuo ʇsɐǝꞁ ʇɐ ǝʌɐɥ ʇsnɯ no⅄</string>
+    <string name="multirt_nocompartiblert">˙ɹǝʍǝu ɹo %d ɐʌɐſ sǝɹᴉnbǝɹ uoᴉsɹǝʌ sᴉɥ┴ ˙ǝɯᴉʇunɹ ɐʌɐſ ǝlqᴉʇɹɐdɯoɔ ʎuɐ puᴉɟ ʇ,uɐƆ</string>
     <string name="compat_117_message">˙ɥɔunɐꞁ ʇɹoqɐ oʇ ꞁǝɔuɐƆ ssǝɹd puɐ \'uoᴉʇɐꞁꞁɐʇsuᴉ ɯɹᴉɟuoɔ oʇ ꞰO ssǝɹԀ ˙suoᴉsɹǝʌ ǝsǝɥʇ unɹ oʇ ꞁꞁɐʇsuᴉ uɐɔ noʎ sǝɔɹnosǝɹ ꞁɐuoᴉʇᴉppɐ ǝɯos ǝɹɐ ǝɹǝɥʇ ʇnq \'ʇuǝɯoɯ ǝɥʇ ʇɐ ʇᴉ ʇɹoddns ʎꞁꞁnɟ ʇ,usǝop ɹǝddɐɹʍ SƎ߈Ꞁ⅁ \'ʎꞁpɐS ˙ǝꞁᴉɟoɹd ǝɹoɔ ᘔ˙Ɛ Ꞁ⅁uǝdO ǝɥʇ sǝɹᴉnbǝɹ +ɐ0⥝ʍ⥝ᘔ ʇɟɐɹɔǝuᴉW</string>
     <string name="compat_11x_playanyway">ʎɐʍʎuɐ ʎɐlԀ</string>
     <string name="pvc_gameDirectory">ʎɹoʇɔǝɹᴉp ǝɯɐ⅁</string>
@@ -233,4 +235,5 @@
     <string name="preference_sustained_performance_title">ǝpoɯ ǝɔuɐɯɹoɟɹǝd pǝuᴉɐʇsns ǝꞁqɐuƎ</string>
     <string name="preference_sustained_performance_description">ǝɔuɐɯɹoɟɹǝd ʞɐǝd ᵷuᴉʇᴉɯᴉꞁ ʎq ᵷuᴉꞁʇʇoɹɥʇ ꞁɐɯɹǝɥʇ ʇᴉɯᴉꞀ</string>
     <string name="preference_back_title">uǝǝɹɔs ʇsɐꞁ ǝɥʇ oʇ ʞɔɐᗺ</string>
+    <string name="arc_capes_desc">˙ǝuᴉℲᴉʇdO sǝɹᴉnbǝɹ ˙ɯoɔ˙sǝdɐɔɔɹɐ//:sdʇʇɥ ʇᴉsᴉʌ ǝsɐǝld uoᴉʇɐɯɹoɟuᴉ ǝɹoɯ ɹoℲ ˙ɔɹ∀ ɯoɹɟ sǝdɐɔ sǝlqɐuƎ</string>
 </resources>
