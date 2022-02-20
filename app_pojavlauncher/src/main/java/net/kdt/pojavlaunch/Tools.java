@@ -150,6 +150,9 @@ public final class Tools {
         // Only Java 8 supports headful AWT for now
         if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
             getCacioJavaArgs(javaArgList, false);
+        } else if (LauncherPreferences.PREF_ARC_CAPES) {
+            // Opens the java.net package to Arc DNS injector on Java 9+
+            javaArgList.add("--add-opens=java.base/java.net=ALL-UNNAMED");
         }
 
 /*

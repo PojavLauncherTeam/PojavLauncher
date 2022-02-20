@@ -26,6 +26,11 @@
             android:key="checkLibraries"
             android:summary="@string/mcl_setting_check_libraries_subtitle"
             android:title="@string/mcl_setting_check_libraries" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="arc_capes"
+            android:summary="@string/arc_capes_desc"
+            android:title="@string/arc_capes_title" />
 
     </PreferenceCategory>
 

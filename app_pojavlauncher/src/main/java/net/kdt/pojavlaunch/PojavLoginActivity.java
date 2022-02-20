@@ -340,6 +340,7 @@ public class PojavLoginActivity extends BaseActivity
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
             Tools.copyAssetFile(this,"resolv.conf",Tools.DIR_DATA, true);
+            Tools.copyAssetFile(this,"arc_dns_injector.jar",Tools.DIR_DATA, true);
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");

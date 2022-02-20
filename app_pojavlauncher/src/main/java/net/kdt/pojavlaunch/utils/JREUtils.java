@@ -343,7 +343,8 @@ public class JREUtils {
         List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         String resolvFile;
             resolvFile = new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath();
-        String[] overridableArguments = new String[]{
+
+        ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
                 "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
                 "-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent(),
@@ -366,7 +367,10 @@ public class JREUtils {
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
-        };
+        ));
+        if(LauncherPreferences.PREF_ARC_CAPES) {
+            overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
+        }
         List<String> additionalArguments = new ArrayList<>();
         for(String arg : overridableArguments) {
             String strippedArg = arg.substring(0,arg.indexOf('='));
