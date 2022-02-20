@@ -97,7 +97,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 
     public void launchGame(View v) {
         Integer runtime_status = (Integer) ExtraCore.getValue("runtime_status");
-        if(runtime_status != null && runtime_status >= 0){
+        if(runtime_status != null && runtime_status > 0){
             // Don't launch the game while a runtime is being installed
             Toast.makeText(v.getContext(), v.getContext().getText(R.string.wait_runtime_is_being_installed), Toast.LENGTH_SHORT).show();
             return;
