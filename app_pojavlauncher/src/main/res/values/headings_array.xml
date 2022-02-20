@@ -4,7 +4,7 @@
         <item name="2">@string/mcl_setting_renderer_gles2_4</item>
         <item name="3">@string/mcl_setting_renderer_gles2_5</item>
         <item name="3">@string/mcl_setting_renderer_gles3_5</item>
-        <!-- <item name="4">@string/mcl_setting_renderer_vulkan_zink</item> -->
+        <item name="4">@string/mcl_setting_renderer_vulkan_zink</item>
         <item name="5">@string/mcl_setting_renderer_vgpu</item>
         <item name="5">@string/mcl_setting_renderer_virgl</item>
     </string-array>
@@ -13,7 +13,7 @@
         <item>opengles2</item> <!-- gl4es 1.1.4 with OpenGL ES 2 -->
         <item>opengles2_5</item>  <!-- gl4es 1.1.5 with OpenGL ES 2 -->
         <item>opengles3</item> <!-- gl4es 1.1.5 with OpenGL ES 3 -->
-        <!--<item>vulkan_zink</item> -->
+        <item>vulkan_zink</item>
         <item>opengles3_vgpu</item> <!-- vgpu with OpenGL ES 3 -->
         <item>opengles3_virgl</item> <!-- virglrenderer with OpenGL ES 3 -->
     </string-array>

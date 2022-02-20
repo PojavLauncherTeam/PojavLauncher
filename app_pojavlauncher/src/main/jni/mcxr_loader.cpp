@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <thread>
+#include <GLES3/gl3.h>
 
 //
 // Created by Judge on 12/23/2021.
@@ -21,6 +22,13 @@ extern "C" jlong
 Java_net_sorenon_mcxr_play_MCXRNativeLoad_getJVMPtr(JNIEnv *env, jclass clazz) {
     return reinterpret_cast<jlong>(&jvm);
 }
+
+JNIEXPORT JNICALL
+extern "C" void
+Java_net_sorenon_mcxr_play_MCXRNativeLoad_renderImage(JNIEnv *env, jclass clazz, jint colorAttachment) {
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachment, 0);
+}
+
 JNIEXPORT JNICALL
 extern "C" jlong
 Java_net_sorenon_mcxr_play_MCXRNativeLoad_getApplicationActivityPtr(JNIEnv *env, jclass clazz) {

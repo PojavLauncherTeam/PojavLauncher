@@ -174,7 +174,7 @@ public class BaseMainActivity extends BaseActivity {
 
     private void runCraft() throws Throwable {
         windowHeight = 1080;
-        windowWidth = 1920;
+        windowWidth = 1980;
 
         mProfile = PojavProfile.getCurrentProfileContent(this);
         mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);

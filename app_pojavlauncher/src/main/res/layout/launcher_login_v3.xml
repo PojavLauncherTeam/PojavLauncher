@@ -178,11 +178,16 @@
             app:layout_constraintStart_toStartOf="@+id/mineButton"
             app:layout_constraintTop_toBottomOf="@+id/mineButton" android:id="@+id/mineButton3"
             app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.372"/>
+
     <ImageView
-            android:layout_width="1259dp"
-            android:layout_height="533dp" app:srcCompat="@drawable/Questcraftxp" android:id="@+id/imageView3"
-            app:layout_constraintHorizontal_bias="0.761"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="416dp"/>
+        android:id="@+id/imageView3"
+        android:layout_width="1259dp"
+        android:layout_height="533dp"
+        android:layout_marginBottom="416dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/questcraftxp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
