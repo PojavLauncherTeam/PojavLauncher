@@ -85,8 +85,8 @@ public class MultiRTUtils {
     /** Decrement the amount of runtimes being installed */
     private static void decrementRuntimeBeingInstalled(){
         Integer status =  (Integer) ExtraCore.getValue("runtime_status");
-        if(status == null) status = 0;
-        ExtraCore.setValue("runtime_status", status);
+        if(status == null) status = 1;
+        ExtraCore.setValue("runtime_status", status - 1);
     }
 
     // TODO make a function to deal with checking installation in progress ?

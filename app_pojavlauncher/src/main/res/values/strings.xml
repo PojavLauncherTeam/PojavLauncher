@@ -288,6 +288,10 @@
     <string name="vbo_hack_description">Help with compatibility on some old versions</string>
     <string name="gles_version_hack_title">Force openGL 1</string>
     <string name="gles_version_hack_description">Help with compatibility on some old versions</string>
+
     <string name="arc_capes_title">Arc Capes</string>
     <string name="arc_capes_desc">Enables capes from Arc. For more information please visit https://arccapes.com. Requires OptiFine.</string>
+
+    <string name="wait_runtime_is_being_installed">Wait a bit while a runtime is being installed</string>
+
 </resources>
