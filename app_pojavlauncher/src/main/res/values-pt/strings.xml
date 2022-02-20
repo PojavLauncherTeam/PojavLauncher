@@ -109,6 +109,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="global_error_field_empty">Este campo não pode estar vazio</string>
     <string name="global_waiting">Aguarda</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplicação/Jogo saiu com código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
     <string name="mcn_check_fail_lwjgl">O LWJGL3 não foi instalado!</string>
@@ -197,6 +198,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
     <string name="mcl_memory_allocation_subtitle">Controla quanta memória é dada ao Minecraft</string>
     <string name="multirt_runtime_corrupt">Runtime do Java corrompida</string>
+    <string name="multirt_runtime_incompatiblearch">Arquitetura incompatível: %s</string>
     <string name="multirt_config_title">VMs do Java</string>
     <string name="multirt_config_add">Adicionar nova</string>
     <string name="multirt_config_add_subtitle">Importar uma nova VM do Java</string>
@@ -206,6 +208,8 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="multirt_config_setdefault">Definir como padrão</string>
     <string name="multirt_config_setdefault_already">Padrão</string>
     <string name="multirt_config_removeerror_last">Tu deves ter pelo menos uma Runtime do Java instalada</string>
+    <string name="multirt_nocompartiblert">Não foi possível encontrar uma Runtime do Java compatível. Esta versão requere Java %d ou superior.</string>
+    <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, tu precisas de instalar o Java 8.</string>
     <string name="compat_117_message">O Minecraft 21w10a+ requere o OpenGL 3.2.
 Infelizmente, o wrapper do GL4ES não suporta totalmente isso no momento, mas existem alguns recursos adicionais que tu podes instalar para executar essas versões. Pressiona em OK para confirmar a instalação, e pressiona em Cancelar para abortar a execução.</string>
     <string name="compat_11x_playanyway">Jogar mesmo assim</string>
@@ -214,6 +218,7 @@ Infelizmente, o wrapper do GL4ES não suporta totalmente isso no momento, mas ex
     <string name="pvc_title">Definições da versão</string>
     <string name="storage_warning_title">Alterações de armazenamento</string>
     <string name="storage_warning_text"><![CDATA[Devido aos novos reforços ao armazenamento adicionados no Android 10 e superiores, nós fomos obrigados a mover o diretório do jogo para uma pasta privada. <br /> A nova pasta para os ficheiros do Pojav é <b>Android/data/%s/files/</b> (também acessível usando um explorador de ficheiros).<br /> Se tu precisares de copiar os ficheiros do teu jogo, por favor copia tudo da página original em <b>games/PojavLauncher</b> manualmente.]]></string>
+    <string name="preference_mouse_start_title">Iniciar com o rato virtual ligado</string>
     <string name="preference_video_title">Vídeo e renderizador</string>
     <string name="preference_video_description">Resolução, tipo de escala, e renderizador</string>
     <string name="preference_control_title">Customização dos controlos</string>
@@ -223,4 +228,10 @@ Infelizmente, o wrapper do GL4ES não suporta totalmente isso no momento, mas ex
     <string name="preference_misc_description">Lista de versões, e verificações das bibliotecas</string>
     <string name="preference_experimental_title">Coisas experimentais</string>
     <string name="preference_experimental_description">Use estas coisas com consideração, sem suporte.</string>
+    <string name="vbo_hack_title">Desativar VBOs</string>
+    <string name="vbo_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
+    <string name="gles_version_hack_title">Forçar OpenGL 1</string>
+    <string name="gles_version_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
+    <string name="arc_capes_title">Capas Arc</string>
+    <string name="arc_capes_desc">Ativa capas do Arc. Para mais informações, visita https://arccapes.com. Requere OptiFine.</string>
 </resources>
