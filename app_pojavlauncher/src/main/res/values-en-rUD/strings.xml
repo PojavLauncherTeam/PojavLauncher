@@ -208,6 +208,7 @@
     <string name="multirt_config_setdefault_already">ʇꞁnɐɟǝᗡ</string>
     <string name="multirt_config_removeerror_last">pǝꞁꞁɐʇsuᴉ ǝɯᴉʇunᴚ ɐʌɐՐ ǝuo ʇsɐǝꞁ ʇɐ ǝʌɐɥ ʇsnɯ no⅄</string>
     <string name="multirt_nocompartiblert">˙ɹǝʍǝu ɹo %d ɐʌɐſ sǝɹᴉnbǝɹ uoᴉsɹǝʌ sᴉɥ┴ ˙ǝɯᴉʇunɹ ɐʌɐſ ǝlqᴉʇɹɐdɯoɔ ʎuɐ puᴉɟ ʇ,uɐƆ</string>
+    <string name="multirt_nojava8rt">˙8 ɐʌɐſ llɐʇsuᴉ oʇ pǝǝu noʎ \'uoᴉʇdo sᴉɥʇ ǝsn oʇ ɹǝpɹo uI ˙8 ɐʌɐſ puᴉɟ ʇ,uɐƆ</string>
     <string name="compat_117_message">˙ɥɔunɐꞁ ʇɹoqɐ oʇ ꞁǝɔuɐƆ ssǝɹd puɐ \'uoᴉʇɐꞁꞁɐʇsuᴉ ɯɹᴉɟuoɔ oʇ ꞰO ssǝɹԀ ˙suoᴉsɹǝʌ ǝsǝɥʇ unɹ oʇ ꞁꞁɐʇsuᴉ uɐɔ noʎ sǝɔɹnosǝɹ ꞁɐuoᴉʇᴉppɐ ǝɯos ǝɹɐ ǝɹǝɥʇ ʇnq \'ʇuǝɯoɯ ǝɥʇ ʇɐ ʇᴉ ʇɹoddns ʎꞁꞁnɟ ʇ,usǝop ɹǝddɐɹʍ SƎ߈Ꞁ⅁ \'ʎꞁpɐS ˙ǝꞁᴉɟoɹd ǝɹoɔ ᘔ˙Ɛ Ꞁ⅁uǝdO ǝɥʇ sǝɹᴉnbǝɹ +ɐ0⥝ʍ⥝ᘔ ʇɟɐɹɔǝuᴉW</string>
     <string name="compat_11x_playanyway">ʎɐʍʎuɐ ʎɐlԀ</string>
     <string name="pvc_gameDirectory">ʎɹoʇɔǝɹᴉp ǝɯɐ⅁</string>
@@ -222,6 +223,8 @@
     <string name="control_left_offset"> :ʇǝsɟɟo ʇɟǝꞁ</string>
     <string name="preference_control_offset_title">sʇǝsɟɟo ǝpᴉs ꞁoɹʇuoƆ</string>
     <string name="preference_control_offset_description">uǝǝɹɔs ǝɥʇ ɟo ǝpᴉs ɥɔɐǝ oʇ ʇǝsɟɟo ɯoʇsnɔ ɐ ʇǝS</string>
+    <string name="preference_mouse_start_title">uo ǝsnoɯ lɐnʇɹᴉʌ ɥʇᴉʍ ʇɹɐʇS</string>
+    <string name="preference_mouse_start_description">ʎɐlnoq-sɐᴉɥʇɐW ʎq pǝƃpnɾ noʎ ʇǝƃ llᴉʍ uoᴉʇdo sᴉɥʇ ƃuᴉs∩</string>
     <string name="preference_video_title">ɹǝɹǝpuǝɹ puɐ oǝpᴉɅ</string>
     <string name="preference_video_description">ɹǝɹǝpuǝɹ puɐ \'ǝdʎʇ ᵷuᴉꞁɐɔs \'uoᴉʇnꞁosǝᴚ</string>
     <string name="preference_control_title">uoᴉʇɐzᴉɯoʇsnɔ ꞁoɹʇuoƆ</string>
@@ -235,5 +238,14 @@
     <string name="preference_sustained_performance_title">ǝpoɯ ǝɔuɐɯɹoɟɹǝd pǝuᴉɐʇsns ǝꞁqɐuƎ</string>
     <string name="preference_sustained_performance_description">ǝɔuɐɯɹoɟɹǝd ʞɐǝd ᵷuᴉʇᴉɯᴉꞁ ʎq ᵷuᴉꞁʇʇoɹɥʇ ꞁɐɯɹǝɥʇ ʇᴉɯᴉꞀ</string>
     <string name="preference_back_title">uǝǝɹɔs ʇsɐꞁ ǝɥʇ oʇ ʞɔɐᗺ</string>
+    <string name="gles_hack_title">ʞɔɐɥ ʞuᴉɹɥS SƎㄣ˥פ</string>
+    <string name="gles_hack_none">sǝɹnʇxǝʇ ʞuᴉɹɥs ʇ,uop</string>
+    <string name="gles_hack_always">ᄅ ʎq sǝɹnʇxǝʇ llɐ sǝpᴉʌᴉp</string>
+    <string name="gles_hack_sometimes">ㄣ/ ɹo ᄅ/ ʎq sǝɹnʇxǝʇ ƃᴉq sǝpᴉʌᴉp</string>
+    <string name="vbo_hack_title">sOqΛ ǝlqɐsᴉp</string>
+    <string name="vbo_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
+    <string name="gles_version_hack_title">Ɩ ˥פuǝdo ǝɔɹoℲ</string>
+    <string name="gles_version_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
+    <string name="arc_capes_title">sǝdɐƆ ɔɹ∀</string>
     <string name="arc_capes_desc">˙ǝuᴉℲᴉʇdO sǝɹᴉnbǝɹ ˙ɯoɔ˙sǝdɐɔɔɹɐ//:sdʇʇɥ ʇᴉsᴉʌ ǝsɐǝld uoᴉʇɐɯɹoɟuᴉ ǝɹoɯ ɹoℲ ˙ɔɹ∀ ɯoɹɟ sǝdɐɔ sǝlqɐuƎ</string>
 </resources>
