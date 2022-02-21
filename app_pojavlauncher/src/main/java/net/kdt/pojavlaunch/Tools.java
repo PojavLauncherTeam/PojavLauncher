@@ -57,6 +57,7 @@ public final class Tools {
     public static String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
     public static String DIR_GAME_NEW;
     public static String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
+    public static String DIR_GAME_MODS;
     
     // New since 3.0.0
     public static String DIR_HOME_JRE;
@@ -96,6 +97,7 @@ public final class Tools {
         OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
         CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
         CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
+        DIR_GAME_MODS = DIR_GAME_NEW + "/mods";
     }
 
 
