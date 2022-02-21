@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Architecture.archAsString;
+import static net.kdt.pojavlaunch.Tools.DIR_GAME_NEW;
 import static net.kdt.pojavlaunch.Tools.getFileName;
 
 import android.Manifest;
@@ -55,6 +56,7 @@ import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
@@ -66,8 +68,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
+import java.util.zip.ZipFile;
 
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
@@ -337,6 +343,10 @@ public class PojavLoginActivity extends BaseActivity
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
+            Tools.copyAssetFile(this, "artifacts/mcxr-play.jar", Tools.DIR_GAME_NEW + "/mods", false);
+            Tools.copyAssetFile(this, "artifacts/mcxr-core.jar", Tools.DIR_GAME_NEW + "/mods", false);
+            Tools.copyAssetFile(this, "artifacts/title-worlds.jar", Tools.DIR_GAME_NEW + "/mods", false);
+            Tools.copyAssetFile(this, "artifacts/fabric-api.jar", Tools.DIR_GAME_NEW + "/mods", false);
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
             Tools.copyAssetFile(this,"resolv.conf",Tools.DIR_DATA, true);
@@ -350,6 +360,13 @@ public class PojavLoginActivity extends BaseActivity
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();
                 }
+            }
+            Tools.downloadFile("https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.10.2/fabric-installer-0.10.2.jar", DIR_GAME_NEW + "/fabric-installer.jar");
+            File modFile = new File(DIR_GAME_NEW + "/fabric-installer.jar");
+            boolean mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
+            if (mSkipDetectMod) {
+                new Thread(() -> launchJavaRuntime(modFile, "-jar " + modFile.getAbsolutePath() + "client" + "-mcversion 1.18.1" + "-downloadMinecraft" + "-dir " + DIR_GAME_NEW), "JREMainThread").start();
+                return;
             }
             if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
             LauncherPreferences.loadPreferences(getApplicationContext());
@@ -372,6 +389,38 @@ public class PojavLoginActivity extends BaseActivity
             bldr.show();
         }
     }
+
+    public int launchJavaRuntime(File modFile, String javaArgs) {
+        JREUtils.redirectAndPrintJRELog(this);
+        try {
+            List<String> javaArgList = new ArrayList<String>();
+
+            // Enable Caciocavallo
+            Tools.getCacioJavaArgs(javaArgList,false);
+
+            if (javaArgs != null) {
+                javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
+            } else {
+                javaArgList.add("-jar");
+                javaArgList.add(modFile.getAbsolutePath());
+            }
+
+            Logger.getInstance().appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
+
+            // Run java on sandbox, non-overrideable.
+            Collections.reverse(javaArgList);
+            javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/pro-grade.jar");
+            javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
+            javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/java_sandbox.policy");
+            Collections.reverse(javaArgList);
+
+            return JREUtils.launchJavaVM(this, javaArgList);
+        } catch (Throwable th) {
+            Tools.showError(this, th, true);
+            return -1;
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
