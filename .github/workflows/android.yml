@@ -118,6 +118,44 @@ jobs:
           branch: buildjre17
           name: jre17-pojav
 
+      - name: Clean Artifact Folders
+        run: |
+          rm -rf app_pojavlauncher/main/src/assets/artifacts/*
+          rm -rf app_pojavlauncher/main/src/assets/unzippedArtifacts/*
+
+      - name: Collect MCXR (mcxr-core)
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/artifacts
+          workflow_conclusion: success
+          repo: QuestCraftPlusPlus/MCXR
+          branch: master
+          name: mcxr-core
+
+      - name: Collect MCXR (mcxr-play)
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/artifacts
+          workflow_conclusion: success
+          repo: QuestCraftPlusPlus/MCXR
+          branch: master
+          name: mcxr-play
+
+      - name: Collect TitleWorlds
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/artifacts
+          workflow_conclusion: success
+          repo: QuestCraftPlusPlus/TitleWorlds
+          branch: master
+          name: title-worlds
+
       - name: Build APK with Gradle
         run: |
           chmod +x scripts/languagelist_updater.sh
@@ -126,6 +164,10 @@ jobs:
           mkdir -p out
           chmod +x gradlew
           ./gradlew clean
+          # Run unzip tasks
+          ./gradlew unzipMCXRCore
+          ./gradlew unzipMCXRPlay
+          ./gradlew unzipTitleWorlds
           # Build JRE JAR files (security manager, etc...)
           ./gradlew :jre_lwjgl3glfw:build
           # mkdir app_pojavlauncher/src/main/assets/components/internal_libs
