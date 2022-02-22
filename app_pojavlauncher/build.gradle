@@ -118,30 +118,6 @@ android {
     ndkVersion '21.4.7075529'
 }
 
-task unzipMCXRCore(type: Copy) {
-    def zipFile = file('src/main/assets/artifacts/mcxr-core.zip')
-    def outputDir = file('src/main/assets/unzippedArtifacts')
-
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzipMCXRPlay(type: Copy) {
-    def zipFile = file('src/main/assets/artifacts/mcxr-play.zip')
-    def outputDir = file('src/main/assets/unzippedArtifacts')
-
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzipTitleWorlds(type: Copy) {
-    def zipFile = file('src/main/assets/artifacts/title-worlds.zip')
-    def outputDir = file('src/main/assets/unzippedArtifacts')
-
-    from zipTree(zipFile)
-    into outputDir
-}
-
 dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     implementation 'commons-codec:commons-codec:1.14'
