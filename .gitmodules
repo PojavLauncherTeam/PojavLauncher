@@ -1,0 +1,3 @@
+[submodule "app_pojavlauncher/src/main/assets/submodules/mcxr"]
+	path = app_pojavlauncher/src/main/assets/submodules/mcxr
+	url = https://github.com/QuestCraftPlusPlus/MCXR.git
