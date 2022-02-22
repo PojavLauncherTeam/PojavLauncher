@@ -343,10 +343,6 @@ public class PojavLoginActivity extends BaseActivity
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
-            Tools.copyAssetFile(this, "artifacts/mcxr-play.jar", Tools.DIR_GAME_NEW + "/mods", false);
-            Tools.copyAssetFile(this, "artifacts/mcxr-core.jar", Tools.DIR_GAME_NEW + "/mods", false);
-            Tools.copyAssetFile(this, "artifacts/title-worlds.jar", Tools.DIR_GAME_NEW + "/mods", false);
-            Tools.copyAssetFile(this, "artifacts/fabric-api.jar", Tools.DIR_GAME_NEW + "/mods", false);
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
             Tools.copyAssetFile(this,"resolv.conf",Tools.DIR_DATA, true);
@@ -360,13 +356,6 @@ public class PojavLoginActivity extends BaseActivity
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();
                 }
-            }
-            Tools.downloadFile("https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.10.2/fabric-installer-0.10.2.jar", DIR_GAME_NEW + "/fabric-installer.jar");
-            File modFile = new File(DIR_GAME_NEW + "/fabric-installer.jar");
-            boolean mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
-            if (mSkipDetectMod) {
-                new Thread(() -> launchJavaRuntime(modFile, "-jar " + modFile.getAbsolutePath() + "client" + "-mcversion 1.18.1" + "-downloadMinecraft" + "-dir " + DIR_GAME_NEW), "JREMainThread").start();
-                return;
             }
             if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
             LauncherPreferences.loadPreferences(getApplicationContext());
