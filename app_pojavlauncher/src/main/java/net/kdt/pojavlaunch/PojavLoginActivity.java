@@ -340,6 +340,9 @@ public class PojavLoginActivity extends BaseActivity
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
+            Tools.copyAssetFile(this, "artifacts/mcxr-core-0.1.1+null.jar", DIR_GAME_NEW + "/mods", true);
+            Tools.copyAssetFile(this, "artifacts/mcxr-play-0.1.3+null.jar", DIR_GAME_NEW + "/mods", true);
+            Tools.copyAssetFile(this, "artifacts/titleworlds-0.0.1.jar", DIR_GAME_NEW + "/mods", true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
