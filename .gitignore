@@ -7,3 +7,4 @@ local.properties
 app_pojavlauncher/.cxx/
 .vs/
 /app_pojavlauncher/libs/OpenXR-SDK/
+.DS_STORE
