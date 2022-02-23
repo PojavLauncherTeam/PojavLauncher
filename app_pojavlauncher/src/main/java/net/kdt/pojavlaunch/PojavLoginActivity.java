@@ -340,9 +340,6 @@ public class PojavLoginActivity extends BaseActivity
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
-            Tools.copyAssetFile(this, "artifacts/mcxr-core-0.1.1+null.jar", DIR_GAME_NEW + "/mods", true);
-            Tools.copyAssetFile(this, "artifacts/mcxr-play-0.1.3+null.jar", DIR_GAME_NEW + "/mods", true);
-            Tools.copyAssetFile(this, "artifacts/titleworlds-0.0.1.jar", DIR_GAME_NEW + "/mods", true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
@@ -350,6 +347,10 @@ public class PojavLoginActivity extends BaseActivity
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
             Tools.copyAssetFile(this,"resolv.conf",Tools.DIR_DATA, true);
             Tools.copyAssetFile(this,"arc_dns_injector.jar",Tools.DIR_DATA, true);
+            // Install Mods
+            Tools.copyAssetFile(this, "artifacts/mcxr-core-0.1.1+null.jar", DIR_GAME_NEW + "/mods", true);
+            Tools.copyAssetFile(this, "artifacts/mcxr-play-0.1.3+null.jar", DIR_GAME_NEW + "/mods", true);
+            Tools.copyAssetFile(this, "artifacts/titleworlds-0.0.1.jar", DIR_GAME_NEW + "/mods", true);
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
