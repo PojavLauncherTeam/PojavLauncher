@@ -333,6 +333,7 @@ public class PojavLoginActivity extends BaseActivity
             mkdirs(Tools.DIR_GAME_NEW + "/mods");
             mkdirs(Tools.DIR_HOME_VERSION);
             mkdirs(Tools.DIR_HOME_LIBRARY);
+            mkdirs(Tools.DIR_HOME_VERSION + "/fabric");
         }
 
         mkdirs(Tools.CTRLMAP_PATH);
