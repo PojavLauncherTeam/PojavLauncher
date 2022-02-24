@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.Tools.DIR_GAME_NEW;
 import static net.kdt.pojavlaunch.Tools.getFileName;
 
 import android.app.*;
@@ -47,11 +48,16 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 
 
     /**
-     * Used by the custom control button from the layout_main_v4
+     * Used by the reset options button from the layout_main_v4
      * @param view The view triggering the function
      */
-    public void launchCustomControlsActivity(View view){
-        startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
+    public void resetOptionsTXT(View view){
+        Tools.deleteFile(DIR_GAME_NEW, "options.txt");
+        try {
+            Tools.copyAssetFile(view.getContext(), "options.txt", DIR_GAME_NEW, true);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**
