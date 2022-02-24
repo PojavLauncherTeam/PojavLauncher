@@ -78,6 +78,7 @@ import java.util.zip.ZipFile;
 public class PojavLoginActivity extends BaseActivity
 // MineActivity
 {
+    private static final int MY_PERMISSIONS_RECORD_AUDIO = 2;
     private final Object mLockStoragePerm = new Object();
     private final Object mLockSelectJRE = new Object();
     
@@ -362,6 +363,27 @@ public class PojavLoginActivity extends BaseActivity
                MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();
+                }
+            }
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                //When permission is not granted by user, show them message why this permission is needed.
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.RECORD_AUDIO)) {
+                    Toast.makeText(this, "Please grant permissions to record audio", Toast.LENGTH_LONG).show();
+
+                    //Give user option to still opt-in the permissions
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.RECORD_AUDIO},
+                            MY_PERMISSIONS_RECORD_AUDIO);
+
+                } else {
+                    // Show user dialog to grant permission to record audio
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.RECORD_AUDIO},
+                            MY_PERMISSIONS_RECORD_AUDIO);
                 }
             }
             if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);

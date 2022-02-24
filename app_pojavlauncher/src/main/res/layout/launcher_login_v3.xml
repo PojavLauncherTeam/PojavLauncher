@@ -105,22 +105,25 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-            android:id="@+id/login_switch_remember"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/login_online_check_keeplogin"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
+        android:id="@+id/login_switch_remember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:checked="true"
+        android:clickable="false"
+        android:text="@string/login_online_check_keeplogin"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <CheckBox
-            android:id="@+id/login_switch_offline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/login_offline_label"
-            app:layout_constraintStart_toStartOf="@+id/login_switch_remember"
-            app:layout_constraintTop_toBottomOf="@+id/login_switch_remember"/>
+        android:id="@+id/login_switch_offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:clickable="false"
+        android:text="@string/login_offline_label"
+        app:layout_constraintStart_toStartOf="@+id/login_switch_remember"
+        app:layout_constraintTop_toBottomOf="@+id/login_switch_remember" />
 
     <com.kdt.mcgui.MineButton
             android:id="@+id/mineButton"
@@ -181,12 +184,14 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="1259dp"
-        android:layout_height="533dp"
-        android:layout_marginBottom="416dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="176dp"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/questcraftxp" />
 

@@ -249,6 +249,7 @@ public final class Tools {
         if (versionInfo.logging != null) {
             javaArgList.add("-Dlog4j.configurationFile=" + Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id);
         }
+        javaArgList.add("-Djna.library.path=" + activity.getApplicationInfo().nativeLibraryDir + "/libjnadispatch.so");
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
         javaArgList.add(versionInfo.mainClass);
