@@ -52,7 +52,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
      * @param view The view triggering the function
      */
     public void resetOptionsTXT(View view){
-        Tools.deleteFile(DIR_GAME_NEW, "options.txt");
         try {
             Tools.copyAssetFile(view.getContext(), "options.txt", DIR_GAME_NEW, true);
         } catch (IOException exception) {
