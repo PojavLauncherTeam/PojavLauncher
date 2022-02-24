@@ -238,7 +238,7 @@
         android:layout_height="0dp"
         android:background="?attr/selectableItemBackground"
 
-        android:onClick="launchCustomControlsActivity"
+        android:onClick="resetOptionsTXT"
         android:text="@string/mcl_option_customcontrol"
 
         app:layout_constraintBottom_toBottomOf="parent"
