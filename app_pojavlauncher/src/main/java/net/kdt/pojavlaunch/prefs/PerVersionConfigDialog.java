@@ -13,13 +13,12 @@ import androidx.appcompat.app.AlertDialog;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
-import net.kdt.pojavlaunch.tasks.RefreshVersionListTask;
+import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class PerVersionConfigDialog{
     final Context ctx;
     final AlertDialog dialog;
     final View v;
-    List<MultiRTUtils.Runtime> runtimes;
+    List<Runtime> runtimes;
     final Spinner javaVMSpinner;
     final Spinner rendererSpinner;
     final EditText customDirText;
@@ -58,7 +57,7 @@ public class PerVersionConfigDialog{
     public void refreshRuntimes() {
         if(runtimes!=null)runtimes.clear();
         runtimes = MultiRTUtils.getRuntimes();
-        //runtimes.add(new MultiRTUtils.Runtime("<Default>"));
+        //runtimes.add(new Runtime("<Default>"));
     }
     private void save(DialogInterface i, int which) {
         if(selectedGameVersion == null) {
@@ -75,7 +74,7 @@ public class PerVersionConfigDialog{
         if(rendererSpinner.getSelectedItemPosition() == renderNames.size()) conf1.renderer = null;
         else conf1.renderer = renderNames.get(rendererSpinner.getSelectedItemPosition());
 
-        String runtime=((MultiRTUtils.Runtime)javaVMSpinner.getSelectedItem()).name;;
+        String runtime=((Runtime)javaVMSpinner.getSelectedItem()).name;;
         if(!runtime.equals("<Default>"))conf1.selectedRuntime=runtime;
         else conf1.selectedRuntime=null;
 
@@ -97,13 +96,13 @@ public class PerVersionConfigDialog{
         refreshRuntimes();
         javaVMSpinner.setAdapter(new RTSpinnerAdapter(ctx,runtimes));
         {
-            int jvm_index = runtimes.indexOf(new MultiRTUtils.Runtime("<Default>"));
+            int jvm_index = runtimes.indexOf(new Runtime("<Default>"));
             int rnd_index = rendererSpinner.getAdapter().getCount()-1;
             if (conf != null) {
                 customDirText.setText(conf.gamePath);
                 jvmArgsEditText.setText(conf.jvmArgs);
                 if (conf.selectedRuntime != null) {
-                    int nindex = runtimes.indexOf(new MultiRTUtils.Runtime(conf.selectedRuntime));
+                    int nindex = runtimes.indexOf(new Runtime(conf.selectedRuntime));
                     if (nindex != -1) jvm_index = nindex;
                 }
                 if(conf.renderer != null) {

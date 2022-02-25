@@ -2,20 +2,18 @@ package net.kdt.pojavlaunch.tasks;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.AssetManager;
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
-import com.google.gson.*;
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
 import org.apache.commons.io.*;
 
@@ -97,9 +95,10 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         cfg = new PerVersionConfig.VersionConfig();
                         PerVersionConfig.configMap.put(p1[0],cfg);
                     }
-                     MultiRTUtils.Runtime r = cfg.selectedRuntime != null?MultiRTUtils.read(cfg.selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-                     if(r.javaVersion < verInfo.javaVersion.majorVersion) {
-                         String appropriateRuntime = MultiRTUtils.getNearestJREName(verInfo.javaVersion.majorVersion);
+
+                     Runtime runtime = cfg.selectedRuntime != null?MultiRTUtils.read(cfg.selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+                     if(runtime.javaVersion < verInfo.javaVersion.majorVersion) {
+                         String appropriateRuntime = MultiRTUtils.getNearestJreName(verInfo.javaVersion.majorVersion);
                          if(appropriateRuntime != null) {
                              cfg.selectedRuntime = appropriateRuntime;
                              PerVersionConfig.update();

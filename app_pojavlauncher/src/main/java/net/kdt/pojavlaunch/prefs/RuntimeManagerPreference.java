@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import androidx.preference.Preference;
 
 import net.kdt.pojavlaunch.BaseLauncherActivity;
-import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 
 public class RuntimeManagerPreference extends Preference{
     public RuntimeManagerPreference(Context ctx) {
@@ -20,6 +19,6 @@ public class RuntimeManagerPreference extends Preference{
     @Override
     protected void onClick() {
         super.onClick();
-        ((BaseLauncherActivity)this.getContext()).mRuntimeConfigDialog.dialog.show();
+        ((BaseLauncherActivity)this.getContext()).mRuntimeConfigDialog.mDialog.show();
     }
 }
