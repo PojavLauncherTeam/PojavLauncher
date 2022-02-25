@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
@@ -71,7 +70,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
                 MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
             } else {
-                MultiRTUtils.setRuntimeNamed(this,MultiRTUtils.getExactJREName(8));
+                MultiRTUtils.setRuntimeNamed(this,MultiRTUtils.getExactJreName(8));
                 JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
             }
             
