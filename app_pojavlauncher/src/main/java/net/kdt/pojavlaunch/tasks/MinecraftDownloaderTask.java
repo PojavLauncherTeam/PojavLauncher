@@ -256,7 +256,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             setMax(assets.objects.size());
             zeroProgress();
             try {
-                downloadAssets(assets, verInfo.assets, assets.map_to_resources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+                downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -440,7 +440,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 JAssetInfo asset = assetsObjects.get(assetKey);
                 assetsSizeBytes+=asset.size;
                 String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-                File outFile = assets.map_to_resources?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
+                File outFile = assets.mapToResources ?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
                 boolean skip = outFile.exists();// skip if the file exists
                 if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  //if sha checking is enabled
                     if(skip) skip = Tools.compareSHA1(outFile, asset.hash); //check hash
@@ -450,7 +450,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     if(outFile.exists()) publishProgress("0",mActivity.getString(R.string.dl_library_sha_fail,assetKey));
                     executor.execute(()->{
                         try {
-                            if (!assets.map_to_resources) {
+                            if (!assets.mapToResources) {
                                 downloadAsset(asset, objectsDir, downloadedSize);
                             } else {
                                 downloadAssetMapped(asset, assetKey, outputDir, downloadedSize);
