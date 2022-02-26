@@ -204,7 +204,7 @@ public class BaseMainActivity extends BaseActivity {
             ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
             "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
-        JREUtils.redirectAndPrintJRELog(this);
+        JREUtils.redirectAndPrintJRELog();
         Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
