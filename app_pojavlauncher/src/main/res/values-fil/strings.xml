@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android) Translation By Justine Victorino or EnderProJustine</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Ilunsad ang Minecraft: Java Edition sa iyong aparato!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Ilunsad ang Minecraft: Java Edition sa iyong Quest!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email o pangalan</string>
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Panatilihin akong naka-log in</string>
-    <string name="login_online_login_label">Mag log in</string>
+    <string name="login_online_login_label">Mojang Mag log in</string>
     <string name="login_offline_label">Mag-login bilang offline na account</string>
     <string name="login_error_exist_username">Mayroon nang username na ito</string>
     <string name="login_error_offline_password">Hinde pwedeng magkaroon ng password ang isang Offline Account!</string>

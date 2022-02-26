@@ -19,6 +19,7 @@
     <!-- MCLauncherActivity: Strings -->
     <!-- Global strings -->
     <string name="global_warinng">Varoitus</string>
+    <string name="app_motd">Käynnistä Minecraft: Java Edition Questissäsi!</string>
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->

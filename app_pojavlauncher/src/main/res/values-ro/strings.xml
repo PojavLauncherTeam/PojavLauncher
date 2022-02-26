@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pentru Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Lanseaza Minecraft: Java Edition in propriul dispozitiv!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Lansați Minecraft: Java Edition pe Quest!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
     <string name="login_online_password_hint">Parola</string>
     <string name="login_online_check_keeplogin">Ține-mă logat</string>
-    <string name="login_online_login_label">Autentificate/Loghează-te</string>
+    <string name="login_online_login_label">Mojang Autentificate/Loghează-te</string>
     <string name="login_offline_label">Autentificate ca cont offline</string>
     <string name="login_error_invalid_username">Nume de utilizator invalid. Numele de utilizator trebuie să fie în intervalul 3-16 caractere, trebuie să conțină doar A-Z, a-z, 0-9 și underscore.</string>
     <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>

@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Khởi chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Khởi chạy Minecraft: Java Edition trên Quest của bạn!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email hoặc tên người dùng</string>
     <string name="login_online_password_hint">Mật khẩu</string>
     <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
-    <string name="login_online_login_label">Đăng nhập</string>
+    <string name="login_online_login_label">Mojang Đăng nhập</string>
     <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
     <string name="login_error_invalid_username">Tên người dùng không hợp lệ. Nó phải có từ 3-16 kí tự, và chỉ bao gồm các kí tự A-Z, a-z, 0-9 và dấu gạch dưới.</string>
     <string name="login_error_exist_username">Tên người dùng này đã tồn tại</string>

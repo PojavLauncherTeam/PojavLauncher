@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Minecraft: Java Editionをあなたのデバイスで楽しもう</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">QuestでMinecraft：Java Editionをプレイしてください！</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">メールアドレス・ユーザー名</string>
     <string name="login_online_password_hint">パスワード</string>
     <string name="login_online_check_keeplogin">ログインを保持する</string>
-    <string name="login_online_login_label">ログイン</string>
+    <string name="login_online_login_label">Mojang ログイン</string>
     <string name="login_error_exist_username">このユーザー名は既に存在しています</string>
     <string name="login_select_account">アカウントを選択</string>
     <!-- Hint -->

@@ -2,7 +2,7 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android өсөн Minecraft: Java Edition)</string>
-    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_short_name">QuestCraft</string>
     <string name="app_motd">Minecraft: Java Edition үҙегеҙҙең яйланмала ебәрегеҙ!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
@@ -10,7 +10,7 @@
     <string name="login_online_username_hint">Email йәки ҡулланыусы исеме</string>
     <string name="login_online_password_hint">Серһүҙ</string>
     <string name="login_online_check_keeplogin">Хәтерҙә ҡалдырырға</string>
-    <string name="login_online_login_label">Керергә</string>
+    <string name="login_online_login_label">Mojang Керергә</string>
     <string name="login_offline_label">Офлайн хисап яҙмаһы менән кереү</string>
     <string name="login_error_exist_username">Был ҡулланыусы исеме инде бар</string>
     <string name="login_microsoft">Microsoft менән керергә</string>

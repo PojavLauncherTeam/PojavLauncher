@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Запустите Minecraft: Java Edition на вашемъ устройствѣ!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Запустите Minecraft: Java Edition на вашемъ Quest!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Почта или имя пользователя</string>
     <string name="login_online_password_hint">Ключъ-фраза</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
-    <string name="login_online_login_label">Войти</string>
+    <string name="login_online_login_label">Mojang Войти</string>
     <string name="login_offline_label">Войти по внѣсѣтевымъ документамъ</string>
     <string name="login_error_invalid_username">Невѣрное имя пользователя. Имя пользователя должно состоять изъ 3-16 символовъ, должно содержать только A-Z, a-z, 0-9 и подчеркиваніе.</string>
     <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>

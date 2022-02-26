@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）,</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">在您的設備上啟動《Minecraft：Java版》！</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">在您的 Quest 上启动 Minecraft：Java 版！</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">電子郵箱或用戶名</string>
     <string name="login_online_password_hint">密碼</string>
     <string name="login_online_check_keeplogin">保持登入狀態</string>
-    <string name="login_online_login_label">登入</string>
+    <string name="login_online_login_label">Mojang 登入</string>
     <string name="login_offline_label">以離線帳號登入</string>
     <string name="login_error_invalid_username">無效的用戶名。用戶名必須在3-16個字節的範圍內，只能包含A-Z、a-z、0-9和下劃線。</string>
     <string name="login_error_exist_username">用戶名已存在</string>

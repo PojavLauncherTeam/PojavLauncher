@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android를 위한 Minecraft: Java Edition 구동기)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Quest에서 Minecraft: Java Edition을 플레이하세요!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">이메일 또는 사용자 이름</string>
     <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
-    <string name="login_online_login_label">로그인</string>
+    <string name="login_online_login_label">Mojang 로그인</string>
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
     <string name="login_error_invalid_username">잘못된 사용자 이름입니다. 사용자 이름은 3~16글자여야 하며, 대/소문자 알파벳과 숫자, _로 구성되어야 합니다.</string>
     <string name="login_error_exist_username">이미 존재하는 사용자 이름입니다</string>

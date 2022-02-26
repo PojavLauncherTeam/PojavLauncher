@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pour Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Lancez Minecraft: Java Edition sur votre appareil !</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Lancez Minecraft: Java Edition sur votre Quest !</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Adresse e-mail ou nom d\'utilisateur</string>
     <string name="login_online_password_hint">Mot de passe</string>
     <string name="login_online_check_keeplogin">Rester connecté</string>
-    <string name="login_online_login_label">Se connecter</string>
+    <string name="login_online_login_label">Mojang Se connecter</string>
     <string name="login_offline_label">Se connecter en tant que compte hors ligne</string>
     <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_microsoft">Connexion Microsoft</string>

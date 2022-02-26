@@ -3,14 +3,14 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">Peluncur Pojav</string>
-    <string name="app_motd">Luncurkan Minecraft: Java Edition di perangkat Anda!</string>
+    <string name="app_motd">Mainkan Minecraft: Edisi Java di Quest Anda!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email atau username</string>
     <string name="login_online_password_hint">Kata sandi</string>
     <string name="login_online_check_keeplogin">Tetap masuk</string>
-    <string name="login_online_login_label">Masuk</string>
+    <string name="login_online_login_label">Mojang Masuk</string>
     <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_error_invalid_username">Username tidak valid. Username harus berada dalam jangka 3-16 karakter, dan hanya bisa berisi A-Z, a-z, 0-9, dan garis bawah.</string>
     <string name="login_error_exist_username">Username ini sudah ada</string>

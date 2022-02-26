@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition за Андроид)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Покрените Minecraft: Java Edition на вашем уређају!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Покрените Минецрафт: Јава Едитион на свом Куест-у!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Е-пошта или ваше Минецрафт име</string>
     <string name="login_online_password_hint">Шифра</string>
     <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
-    <string name="login_online_login_label">Пријава</string>
+    <string name="login_online_login_label">Mojang Пријава</string>
     <string name="login_offline_label">Пријавите се као офлајн налог</string>
     <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
     <string name="login_error_offline_password">Офлајн налог ме може имати лозинку!</string>
