@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android için Minecraft: Java Edition)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Cihazınızda Minecraft: Java Edition çalıştırın!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Minecraft: Java Edition\'ı Quest\'inizde başlatın!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
     <string name="login_online_password_hint">Şifre</string>
     <string name="login_online_check_keeplogin">Oturumu Açık Tut</string>
-    <string name="login_online_login_label">Giriş yap</string>
+    <string name="login_online_login_label">Mojang Giriş yap</string>
     <string name="login_offline_label">Çevrimdışı hesapla girin</string>
     <string name="login_error_invalid_username">Geçersiz kullanıcı adı. Kullanıcı adı 3-16 karakter aralığında olmalı, sadece A-Z, a-z, 0-9 ve alt tire içermelidir.</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>

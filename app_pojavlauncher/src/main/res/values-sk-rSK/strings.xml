@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edícia pre Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Spustiť Minecraft: Java Edícii vo tvojom zariadenie!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Spustite Minecraft: Java Edition na svojom Quest!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail alebo užívateľské meno</string>
     <string name="login_online_password_hint">Heslo</string>
     <string name="login_online_check_keeplogin">Nechaj ma prihláseného</string>
-    <string name="login_online_login_label">Prihlásiť</string>
+    <string name="login_online_login_label">Mojang Prihlásiť</string>
     <string name="login_offline_label">Prihlásiť sa za offline účet</string>
     <string name="login_error_invalid_username">Neplatné užívateľské meno. Užívateľské meno musí byť v rozsahu 3-16 znakov, obsahovať iba A-Z, a-z, (bez diakritiky) 0-9 a znak podčiarknutia.</string>
     <string name="login_error_exist_username">Toto užívateľské meno už existuje</string>

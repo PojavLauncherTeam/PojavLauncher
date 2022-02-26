@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition voor Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Start Minecraft: Java editie op je apparaat!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Start Minecraft: Java Edition op je Quest!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail of gebruikersnaam</string>
     <string name="login_online_password_hint">Wachtwoord</string>
     <string name="login_online_check_keeplogin">Ingelogd blijven</string>
-    <string name="login_online_login_label">Aanmelden</string>
+    <string name="login_online_login_label">Mojang Aanmelden</string>
     <string name="login_offline_label">Inloggen als offline account</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
     <string name="login_microsoft">Microsoft-login</string>

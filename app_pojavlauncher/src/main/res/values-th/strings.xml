@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: ฉบับ Java สำหรับ Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">เปิด Minecraft: ฉบับ Java ในอุปกรณ์ของคุณ!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">เปิดตัว Minecraft: Java Edition บน Quest ของคุณ!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">อีเมลหรือชื่อผู้ใช้</string>
     <string name="login_online_password_hint">รหัสผ่าน</string>
     <string name="login_online_check_keeplogin">คงฉันไว้ในระบบ</string>
-    <string name="login_online_login_label">เข้าสู่ระบบ</string>
+    <string name="login_online_login_label">Mojang เข้าสู่ระบบ</string>
     <string name="login_offline_label">เข้าสู่ระบบในฐานะบัญชีออฟไลน์</string>
     <string name="login_error_exist_username">ชื่อผู้ใช้นี้มีอยู่แล้ว</string>
     <string name="login_microsoft">เข้าสู่ระบบ Microsoft</string>

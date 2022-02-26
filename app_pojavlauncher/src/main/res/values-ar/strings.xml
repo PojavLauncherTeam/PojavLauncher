@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">تشغيل Minecraft: Java Edition على جهازك!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">العب Minecraft: Java Edition على Quest!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
     <string name="login_online_password_hint">كلمة المرور</string>
     <string name="login_online_check_keeplogin">أبق تسجيل دخولي</string>
-    <string name="login_online_login_label">تسجيل الدخول</string>
+    <string name="login_online_login_label">Mojang تسجيل الدخول</string>
     <string name="login_offline_label">تسجيل الدخول كحساب غير متصل</string>
     <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
     <string name="login_error_offline_password">الحسابات غير المتصلة لا يمكنها تضمن كلمة مرور!</string>

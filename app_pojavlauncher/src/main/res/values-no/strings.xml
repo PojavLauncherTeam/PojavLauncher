@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Start Minecraft: Java Edition på enheten din!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Start Minecraft: Java Edition på din Quest!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-post eller brukernavn</string>
     <string name="login_online_password_hint">Passord</string>
     <string name="login_online_check_keeplogin">Hold meg pålogget</string>
-    <string name="login_online_login_label">Logg inn</string>
+    <string name="login_online_login_label">Mojang Logg inn</string>
     <string name="login_offline_label">Logg inn som frakoblet konto</string>
     <string name="login_error_exist_username">Dette brukernavn er allerede i bruk</string>
     <string name="login_error_offline_password">Frakoblet konto kan ikke inkludere passord!</string>

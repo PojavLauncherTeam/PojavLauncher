@@ -121,23 +121,26 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:clickable="false"
+        android:visibility="invisible"
         android:text="@string/login_offline_label"
         app:layout_constraintStart_toStartOf="@+id/login_switch_remember"
         app:layout_constraintTop_toBottomOf="@+id/login_switch_remember" />
 
     <com.kdt.mcgui.MineButton
-            android:id="@+id/mineButton"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/mine_button_background"
-            android:onClick="loginMC"
-            android:text="@string/login_online_login_label"
+        android:id="@+id/mineButton"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/mine_button_background"
+        android:onClick="loginMC"
 
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
-            app:layout_constraintStart_toStartOf="@+id/login_switch_offline"
-            app:layout_constraintTop_toBottomOf="@+id/login_switch_offline"/>
+        android:text="@string/login_online_login_label"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/login_switch_remember"
+        app:layout_constraintTop_toBottomOf="@+id/login_switch_remember" />
 
     <ProgressBar
             android:id="@+id/launcherAccProgress"

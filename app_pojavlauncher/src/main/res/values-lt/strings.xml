@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition skirta Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Paleiskite Minecraft:Java Edition savo įrenginyje!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Savo Quest paleiskite „Minecraft: Java Edition“!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">El. paštas arba slapyvardis</string>
     <string name="login_online_password_hint">Slaptažodis</string>
     <string name="login_online_check_keeplogin">Likti prisijungus</string>
-    <string name="login_online_login_label">Prisijungti</string>
+    <string name="login_online_login_label">Mojang Prisijungti</string>
     <string name="login_offline_label">Prisijungti naudojant be interneto paskyrą</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
     <string name="login_error_offline_password">Netikros pasakytos negali turėti slaptažodžio</string>

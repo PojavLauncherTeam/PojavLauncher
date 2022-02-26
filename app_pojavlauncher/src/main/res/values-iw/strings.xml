@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">פתח את Minecraft: Java edition במכשירך!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">שחקו את Minecraft: Java Edition ב-Quest שלכם!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">דוא\"ל או שם משתמש</string>
     <string name="login_online_password_hint">סיסמה</string>
     <string name="login_online_check_keeplogin">השאר אותי מחובר</string>
-    <string name="login_online_login_label">התחבר</string>
+    <string name="login_online_login_label">Mojang התחבר</string>
     <string name="login_offline_label">התחבר כחשבון לא מקוון</string>
     <string name="login_error_invalid_username">שם המשתמש לא תקין. שם המשתמש צריך להיות בטווח של 3-16 תווים, לכלול רק A-Z, a-z, 0-9 וקו תחתון.</string>
     <string name="login_error_exist_username">שם המשתמש כבר קיים</string>

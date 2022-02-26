@@ -3,14 +3,14 @@
     <!-- App name part -->
     <string name="app_name">پوجاو لانچر (ماینکرفت: جاوا ادیشن برای اندروید)</string>
     <string name="app_short_name">پوجاو لانچر</string>
-    <string name="app_motd">ماینکرفت: جاوا ادیشن را روی دستگاه خود اجرا کنید!</string>
+    <string name="app_motd">Minecraft: Java Edition را روی Quest خود راه اندازی کنید!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">ایمیل یا یوزرنیم</string>
     <string name="login_online_password_hint">رمز عبور</string>
     <string name="login_online_check_keeplogin">مرا وارد شده نگه دار</string>
-    <string name="login_online_login_label">ورود</string>
+    <string name="login_online_login_label">Mojang ورود</string>
     <string name="login_offline_label">ورود به عنوان اکانت آفلاین</string>
     <string name="login_error_invalid_username">یوزرنیم نامعتبر. یوزرنیم باید بین ۳-۱۶ کاراکتر باشد، و تنها از کاراکترهای A-Z, a-z, 0-9 و _ استفاده شود.</string>
     <string name="login_error_exist_username">این یوزرنیم قبلا استفاده شده</string>

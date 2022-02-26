@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android өчен Minecraft: Java Edition)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Minecraft: Java Edition үзегезнең җайланма кушыгыз!</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">Minecraft-ны эшләтеп җибәрү: Сезнең эзләүдә Java Edition!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Электрон почтасы яки кулланучы исеме</string>
     <string name="login_online_password_hint">Серсүз</string>
     <string name="login_online_check_keeplogin">Хәтердә калдырырга</string>
-    <string name="login_online_login_label">Керергә</string>
+    <string name="login_online_login_label">Mojang Керергә</string>
     <string name="login_offline_label">Офлайн аккаунт белән керу</string>
     <string name="login_error_exist_username">Бу кулланучы исеме бар инде</string>
     <string name="login_microsoft">Microsoft аша керергә</string>

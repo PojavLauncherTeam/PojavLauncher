@@ -2,7 +2,7 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_short_name">QuestCraft</string>
     <string name="app_motd">Lancarkan Minecraft: Java Edition di dalam peranti anda!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
@@ -10,7 +10,7 @@
     <string name="login_online_username_hint">E-mel atau nama pengguna</string>
     <string name="login_online_password_hint">Kata Laluan</string>
     <string name="login_online_check_keeplogin">Kekalkan saya dilog masuk</string>
-    <string name="login_online_login_label">Log masuk</string>
+    <string name="login_online_login_label">Mojang Log masuk</string>
     <string name="login_offline_label">Log masuk sebagai akaun luar talian</string>
     <string name="login_error_exist_username">Nama pengguna ini sudah diguna</string>
     <string name="login_error_offline_password">Akaun luar talian tidak boleh dimasukkan kata laluan!</string>

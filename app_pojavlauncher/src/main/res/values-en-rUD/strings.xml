@@ -2,15 +2,15 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition ɹoɟ Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">¡ǝɔᴉʌǝp ɹnoʎ uᴉ Minecraft: Java Edition ɥɔunɐꞀ</string>
+    <string name="app_short_name">QuestCraft</string>
+    <string name="app_motd">¡ʇsǝnꝹ ɹnoʎ uo Minecraft: Java Edition ɥɔunɐꞀ</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">ǝɯɐuɹǝsn ɹo ꞁᴉɐɯƎ</string>
     <string name="login_online_password_hint">pɹoʍssɐԀ</string>
     <string name="login_online_check_keeplogin">uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ</string>
-    <string name="login_online_login_label">uᴉᵷoꞀ</string>
+    <string name="login_online_login_label">Mojang uᴉᵷoꞀ</string>
     <string name="login_offline_label">ʇunoɔɔɐ ǝuᴉꞁɟɟo sɐ uᴉᵷoꞀ</string>
     <string name="login_error_invalid_username">˙ǝɹoɔsɹǝpun puɐ 6-0 \'z-ɐ \'Z-∀ suıɐʇuoɔ ʎluo plnoɥs \'sɹǝʇɔɐɹɐɥɔ 9⇂-Ɛ ɟo ǝƃuɐɹ uı ǝq ʇsnɯ ǝɯɐuɹǝs∩ ˙ǝɯɐuɹǝsn pılɐʌuI</string>
     <string name="login_error_exist_username">ʇsᴉxǝ ʎpɐǝɹꞁɐ ǝɯɐuɹǝsn sᴉɥ⟘</string>
