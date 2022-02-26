@@ -7,8 +7,7 @@ import net.kdt.pojavlaunch.utils.*;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 
-public class BaseActivity extends AppCompatActivity
-{
+public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,7 @@ public class BaseActivity extends AppCompatActivity
     @Override
     public void startActivity(Intent i) {
         super.startActivity(i);
-        new Throwable("StartActivity").printStackTrace();
+        //new Throwable("StartActivity").printStackTrace();
     }
 
     @Override
