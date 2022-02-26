@@ -1,12 +1,8 @@
 package org.lwjgl.glfw;
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.util.*;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.*;
+
 import net.kdt.pojavlaunch.*;
 import android.content.*;
 
@@ -20,6 +16,9 @@ public class CallbackBridge {
     public static volatile int physicalWidth, physicalHeight;
     public static float mouseX, mouseY;
     public static StringBuilder DEBUG_STRING = new StringBuilder();
+    private static boolean threadAttached;
+    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
+            holdingNumlock, holdingShift;
 
 
     public static void putMouseEventWithCoords(int button, float x, float y) {
@@ -34,7 +33,7 @@ public class CallbackBridge {
         sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
     }
 
-    private static boolean threadAttached;
+
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
@@ -158,8 +157,7 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
-        holdingNumlock, holdingShift;
+
     public static int getCurrentMods() {
         int currMods = 0;
         if (holdingAlt) {
