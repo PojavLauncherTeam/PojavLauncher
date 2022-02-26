@@ -20,17 +20,14 @@ public class GamepadJoystick {
     public static final int DIRECTION_SOUTH = 6;
     public static final int DIRECTION_SOUTH_EAST = 7;
 
-    private final InputDevice device;
-
-    private final int verticalAxis;
-    private final int horizontalAxis;
+    private final InputDevice mInputDevice;
+    private final int mVerticalAxis;
+    private final int mHorizontalAxis;
 
     public GamepadJoystick(int horizontalAxis, int verticalAxis, InputDevice device){
-        this.verticalAxis = verticalAxis;
-        this.horizontalAxis = horizontalAxis;
-        this.device = device;
-
-
+        this.mVerticalAxis = verticalAxis;
+        this.mHorizontalAxis = horizontalAxis;
+        this.mInputDevice = device;
     }
 
     public double getAngleRadian(MotionEvent event){
@@ -48,29 +45,18 @@ public class GamepadJoystick {
     }
 
     public double getMagnitude(MotionEvent event){
-        float x = Math.abs(event.getAxisValue(horizontalAxis));
-        float y = Math.abs(event.getAxisValue(verticalAxis));
+        float x = Math.abs(event.getAxisValue(mHorizontalAxis));
+        float y = Math.abs(event.getAxisValue(mVerticalAxis));
 
         return MathUtils.dist(0,0, x, y);
     }
 
     public float getVerticalAxis(MotionEvent event){
-        return applyDeadzone(event, verticalAxis);
+        return applyDeadzone(event, mVerticalAxis);
     }
 
     public float getHorizontalAxis(MotionEvent event){
-        return applyDeadzone(event, horizontalAxis);
-    }
-
-    private float applyDeadzone(MotionEvent event, int axis){
-        //This piece of code also modifies the value
-        //to make it seem like there was no deadzone in the first place
-
-        double magnitude = getMagnitude(event);
-        float deadzone = getDeadzone();
-        if (magnitude < deadzone) return 0;
-
-        return (float) ( (event.getAxisValue(axis) / magnitude) * ((magnitude - deadzone) / (1 - deadzone)) );
+        return applyDeadzone(event, mHorizontalAxis);
     }
 
     public static boolean isJoystickEvent(MotionEvent event){
@@ -91,9 +77,20 @@ public class GamepadJoystick {
      */
     public float getDeadzone() {
         try{
-            return Math.max(device.getMotionRange(horizontalAxis).getFlat() * 1.9f, 0.2f);
+            return Math.max(mInputDevice.getMotionRange(mHorizontalAxis).getFlat() * 1.9f, 0.2f);
         }catch (Exception e){
             return 0.2f;
         }
+    }
+
+    private float applyDeadzone(MotionEvent event, int axis){
+        //This piece of code also modifies the value
+        //to make it seem like there was no deadzone in the first place
+
+        double magnitude = getMagnitude(event);
+        float deadzone = getDeadzone();
+        if (magnitude < deadzone) return 0;
+
+        return (float) ( (event.getAxisValue(axis) / magnitude) * ((magnitude - deadzone) / (1 - deadzone)) );
     }
 }
