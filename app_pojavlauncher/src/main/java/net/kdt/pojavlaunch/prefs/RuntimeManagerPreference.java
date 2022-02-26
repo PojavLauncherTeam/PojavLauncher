@@ -16,6 +16,7 @@ public class RuntimeManagerPreference extends Preference{
         super(ctx, attrs);
         setPersistent(false);
     }
+
     @Override
     protected void onClick() {
         super.onClick();
