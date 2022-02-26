@@ -16,8 +16,7 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.customcontrols.handleview.HandleView;
 import net.kdt.pojavlaunch.prefs.*;
 
-public class ControlLayout extends FrameLayout
-{
+public class ControlLayout extends FrameLayout {
 	protected CustomControls mLayout;
 	private boolean mModifiable;
 	private CustomControlsActivity mActivity;
