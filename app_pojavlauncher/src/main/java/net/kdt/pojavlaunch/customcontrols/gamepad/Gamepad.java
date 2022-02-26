@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.math.MathUtils;
 
-import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
+import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
@@ -403,7 +403,7 @@ public class Gamepad {
 
 
             default:
-                sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), isDown);
+                sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_SPACE, CallbackBridge.getCurrentMods(), isDown);
                 break;
         }
     }
@@ -418,11 +418,11 @@ public class Gamepad {
                     if(isDown) CallbackBridge.sendScroll(0, 1);
                     break;
 
-                case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT:
-                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                case LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT:
+                    sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                     break;
-                case LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT:
-                    sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
+                case LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT:
+                    sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                     break;
 
 

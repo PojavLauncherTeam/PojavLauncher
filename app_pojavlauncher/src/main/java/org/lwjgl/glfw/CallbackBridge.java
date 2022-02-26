@@ -161,38 +161,38 @@ public class CallbackBridge {
     public static int getCurrentMods() {
         int currMods = 0;
         if (holdingAlt) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_ALT;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_ALT;
         } if (holdingCapslock) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_CAPS_LOCK;
         } if (holdingCtrl) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_CONTROL;
         } if (holdingNumlock) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_NUM_LOCK;
         } if (holdingShift) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_SHIFT;
         }
         return currMods;
     }
 
     public static void setModifiers(int keyCode, boolean isDown){
         switch (keyCode){
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT:
                 CallbackBridge.holdingShift = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_CONTROL:
                 CallbackBridge.holdingCtrl = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_ALT:
                 CallbackBridge.holdingAlt = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK:
+            case LwjglGlfwKeycode.GLFW_KEY_CAPS_LOCK:
                 CallbackBridge.holdingCapslock = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK:
+            case LwjglGlfwKeycode.GLFW_KEY_NUM_LOCK:
                 CallbackBridge.holdingNumlock = isDown;
                 return;
         }

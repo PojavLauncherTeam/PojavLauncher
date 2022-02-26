@@ -11,7 +11,6 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
@@ -158,7 +157,7 @@ public class BaseMainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         if (CallbackBridge.isGrabbing()){
-            sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
         }
         CallbackBridge.nativeSetWindowAttrib(LWJGLGLFWKeycode.GLFW_HOVERED, 0);
         mIsResuming = false;
@@ -328,7 +327,7 @@ public class BaseMainActivity extends BaseActivity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
             if(event.getAction() != KeyEvent.ACTION_UP) return true; // We eat it anyway
-            sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
             return true;
         }
         return super.dispatchKeyEvent(event);
