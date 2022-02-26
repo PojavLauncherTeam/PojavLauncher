@@ -20,22 +20,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class MCOptionUtils
-{
-    private static final HashMap<String,String> parameterMap = new HashMap<>();
-    private static final ArrayList<WeakReference<MCOptionListener>> optionListeners = new ArrayList<>();
-    private static FileObserver fileObserver;
+public class MCOptionUtils {
+    private static final HashMap<String,String> sParameterMap = new HashMap<>();
+    private static final ArrayList<WeakReference<MCOptionListener>> sOptionListeners = new ArrayList<>();
+    private static FileObserver sFileObserver;
     public interface MCOptionListener {
          /** Called when an option is changed. Don't know which one though */
         void onOptionChanged();
     }
     
     public static void load() {
-        if(fileObserver == null){
+        if(sFileObserver == null){
             setupFileObserver();
         }
 
-        parameterMap.clear();
+        sParameterMap.clear();
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Tools.DIR_GAME_NEW + "/options.txt"));
@@ -46,7 +45,7 @@ public class MCOptionUtils
                     Log.w(Tools.APP_NAME, "No colon on line \""+line+"\", skipping");
                     continue;
                 }
-                parameterMap.put(line.substring(0,firstColonIndex), line.substring(firstColonIndex+1));
+                sParameterMap.put(line.substring(0,firstColonIndex), line.substring(firstColonIndex+1));
             }
             reader.close();
         } catch (IOException e) {
@@ -55,16 +54,16 @@ public class MCOptionUtils
     }
     
     public static void set(String key, String value) {
-        parameterMap.put(key,value);
+        sParameterMap.put(key,value);
     }
 
     /** Set an array of String, instead of a simple value. Not supported on all options */
     public static void set(String key, List<String> values){
-        parameterMap.put(key, values.toString());
+        sParameterMap.put(key, values.toString());
     }
 
     public static String get(String key){
-        return parameterMap.get(key);
+        return sParameterMap.get(key);
     }
 
     /** @return A list of values from an array stored as a string */
@@ -83,10 +82,10 @@ public class MCOptionUtils
     
     public static void save() {
         StringBuilder result = new StringBuilder();
-        for(String key : parameterMap.keySet())
+        for(String key : sParameterMap.keySet())
             result.append(key)
                     .append(':')
-                    .append(parameterMap.get(key))
+                    .append(sParameterMap.get(key))
                     .append('\n');
         
         try {
@@ -114,7 +113,7 @@ public class MCOptionUtils
      * Listeners get notified of the change */
     private static void setupFileObserver(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
+            sFileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
                     MCOptionUtils.load();
@@ -122,7 +121,7 @@ public class MCOptionUtils
                 }
             };
         }else{
-            fileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
+            sFileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
                     MCOptionUtils.load();
@@ -131,12 +130,12 @@ public class MCOptionUtils
             };
         }
 
-        fileObserver.startWatching();
+        sFileObserver.startWatching();
     }
 
     /** Notify the option listeners */
     public static void notifyListeners(){
-        for(WeakReference<MCOptionListener> weakReference : optionListeners){
+        for(WeakReference<MCOptionListener> weakReference : sOptionListeners){
             MCOptionListener optionListener = weakReference.get();
             if(optionListener == null) continue;
 
@@ -146,16 +145,16 @@ public class MCOptionUtils
 
     /** Add an option listener, notice how we don't have a reference to it */
     public static void addMCOptionListener(MCOptionListener listener){
-        optionListeners.add(new WeakReference<>(listener));
+        sOptionListeners.add(new WeakReference<>(listener));
     }
 
     /** Remove a listener from existence, or at least, its reference here */
     public static void removeMCOptionListener(MCOptionListener listener){
-        for(WeakReference<MCOptionListener> weakReference : optionListeners){
+        for(WeakReference<MCOptionListener> weakReference : sOptionListeners){
             MCOptionListener optionListener = weakReference.get();
             if(optionListener == null) continue;
             if(optionListener == listener){
-                optionListeners.remove(weakReference);
+                sOptionListeners.remove(weakReference);
                 return;
             }
         }
