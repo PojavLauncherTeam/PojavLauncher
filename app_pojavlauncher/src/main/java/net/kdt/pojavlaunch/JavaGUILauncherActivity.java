@@ -238,7 +238,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     public int launchJavaRuntime(File modFile, String javaArgs) {
-        JREUtils.redirectAndPrintJRELog(this);
+        JREUtils.redirectAndPrintJRELog();
         try {
             List<String> javaArgList = new ArrayList<String>();
 
