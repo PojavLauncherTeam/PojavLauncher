@@ -5,6 +5,8 @@ import net.kdt.pojavlaunch.value.*;
 
 public interface RefreshListener
 {
-	public void onFailed(Throwable e);
-	public void onSuccess(MinecraftAccount profile);
+	void onStart();
+	void onProgressed(double progress);
+	void onFailed(Throwable e);
+	void onSuccess(MinecraftAccount profile);
 }

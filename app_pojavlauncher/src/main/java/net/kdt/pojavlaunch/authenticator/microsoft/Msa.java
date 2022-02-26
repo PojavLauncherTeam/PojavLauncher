@@ -6,9 +6,11 @@
 package net.kdt.pojavlaunch.authenticator.microsoft;
 
 import android.util.*;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
+
 import net.kdt.pojavlaunch.*;
 import org.json.*;
 
@@ -39,7 +41,7 @@ public class Msa {
         task.publishProgressPublic();
 
         URL url = new URL(authTokenUrl);
-        Log.i("MicroAuth", "isRefresh=" + isRefresh + ", authCode= "+authcode);
+        Log.i("MicroAuth", "isRefresh=" + isRefresh + ", authCode= " + authcode);
         Map<Object, Object> data = new HashMap<>();
         /*Map.of(
          "client_id", "00000000402b5328",
@@ -56,7 +58,7 @@ public class Msa {
 
         //да пошла yf[eq1 она ваша джава 11
         String req = ofFormData(data);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setRequestProperty("charset", "utf-8");
         conn.setRequestProperty("Content-Length", Integer.toString(req.getBytes("UTF-8").length));
@@ -65,15 +67,15 @@ public class Msa {
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.connect();
-        try(OutputStream wr = conn.getOutputStream()) {
+        try (OutputStream wr = conn.getOutputStream()) {
             wr.write(req.getBytes("UTF-8"));
         }
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             msRefreshToken = jo.getString("refresh_token");
-            Log.i("MicroAuth","Acess Token = "+jo.getString("access_token"));
+            Log.i("MicroAuth", "Acess Token = " + jo.getString("access_token"));
             acquireXBLToken(jo.getString("access_token"));
-        }else{
+        } else {
             throwResponseError(conn);
         }
 
@@ -89,7 +91,7 @@ public class Msa {
         properties.put("AuthMethod", "RPS");
         properties.put("SiteName", "user.auth.xboxlive.com");
         properties.put("RpsTicket", accessToken);
-        data.put("Properties",properties);
+        data.put("Properties", properties);
         data.put("RelyingParty", "http://auth.xboxlive.com");
         data.put("TokenType", "JWT");
         /*Map.of(
@@ -103,7 +105,7 @@ public class Msa {
          "TokenType", "JWT"
          );*/
         String req = ofJSONData(data);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("charset", "utf-8");
@@ -113,14 +115,14 @@ public class Msa {
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.connect();
-        try(OutputStream wr = conn.getOutputStream()) {
+        try (OutputStream wr = conn.getOutputStream()) {
             wr.write(req.getBytes("UTF-8"));
         }
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
-            Log.i("MicroAuth","Xbl Token = "+jo.getString("Token"));
+            Log.i("MicroAuth", "Xbl Token = " + jo.getString("Token"));
             acquireXsts(jo.getString("Token"));
-        }else{
+        } else {
             throwResponseError(conn);
         }
     }
@@ -132,8 +134,8 @@ public class Msa {
         Map<Object, Object> data = new HashMap<>();
         Map<Object, Object> properties = new HashMap<>();
         properties.put("SandboxId", "RETAIL");
-        properties.put("UserTokens",Collections.singleton(xblToken));
-        data.put("Properties",properties);
+        properties.put("UserTokens", Collections.singleton(xblToken));
+        data.put("Properties", properties);
         data.put("RelyingParty", "rp://api.minecraftservices.com/");
         data.put("TokenType", "JWT");
         /*Map<Object, Object> data = Map.of(
@@ -146,7 +148,7 @@ public class Msa {
          );
          */
         String req = ofJSONData(data);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("charset", "utf-8");
@@ -156,16 +158,16 @@ public class Msa {
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.connect();
-        try(OutputStream wr = conn.getOutputStream()) {
+        try (OutputStream wr = conn.getOutputStream()) {
             wr.write(req.getBytes("UTF-8"));
         }
 
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             String uhs = jo.getJSONObject("DisplayClaims").getJSONArray("xui").getJSONObject(0).getString("uhs");
-            Log.i("MicroAuth","Xbl Xsts = "+jo.getString("Token")+"; Uhs = " + uhs);
-            acquireMinecraftToken(uhs,jo.getString("Token"));
-        }else{
+            Log.i("MicroAuth", "Xbl Xsts = " + jo.getString("Token") + "; Uhs = " + uhs);
+            acquireMinecraftToken(uhs, jo.getString("Token"));
+        } else {
             throwResponseError(conn);
         }
     }
@@ -179,7 +181,7 @@ public class Msa {
         data.put("identityToken", "XBL3.0 x=" + xblUhs + ";" + xblXsts);
 
         String req = ofJSONData(data);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("charset", "utf-8");
@@ -189,39 +191,40 @@ public class Msa {
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.connect();
-        try(OutputStream wr = conn.getOutputStream()) {
+        try (OutputStream wr = conn.getOutputStream()) {
             wr.write(req.getBytes("UTF-8"));
         }
 
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
-            Log.i("MicroAuth","MC token: "+jo.getString("access_token"));
+            Log.i("MicroAuth", "MC token: " + jo.getString("access_token"));
             mcToken = jo.getString("access_token");
             checkMcProfile(jo.getString("access_token"));
             checkMcStore(jo.getString("access_token"));
 
-        }else{
+        } else {
             throwResponseError(conn);
         }
     }
+
     private void checkMcStore(String mcAccessToken) throws IOException, JSONException {
         task.publishProgressPublic();
 
         URL url = new URL(mcStoreUrl);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Authorization", "Bearer " + mcAccessToken);
         conn.setRequestMethod("GET");
         conn.setUseCaches(false);
         conn.connect();
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
             JSONArray ja = jo.getJSONArray("items");
-            Log.i("MicroAuth","Store Len = " + ja.length());
-            for(int i = 0; i < ja.length(); i++) {
+            Log.i("MicroAuth", "Store Len = " + ja.length());
+            for (int i = 0; i < ja.length(); i++) {
                 String prod = ja.getJSONObject(i).getString("name");
-                Log.i("MicroAuth","Product " + i +": " +prod);
+                Log.i("MicroAuth", "Product " + i + ": " + prod);
             }
-        }else{
+        } else {
             throwResponseError(conn);
         }
     }
@@ -231,27 +234,27 @@ public class Msa {
 
         URL url = new URL(mcProfileUrl);
 
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Authorization", "Bearer " + mcAccessToken);
         conn.setUseCaches(false);
         conn.connect();
 
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s= Tools.read(conn.getInputStream());
-            Log.i("MicroAuth","profile:" + s);
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
+            String s = Tools.read(conn.getInputStream());
+            Log.i("MicroAuth", "profile:" + s);
             JSONObject jsonObject = new JSONObject(s);
             String name = (String) jsonObject.get("name");
             String uuid = (String) jsonObject.get("id");
-            String uuidDashes = uuid .replaceFirst(
-                "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5"
+            String uuidDashes = uuid.replaceFirst(
+                    "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5"
             );
             doesOwnGame = true;
-            Log.i("MicroAuth","UserName = " + name);
-            Log.i("MicroAuth","Uuid Minecraft = " + uuidDashes);
-            mcName=name;
-            mcUuid=uuidDashes;
-        }else{
-            Log.i("MicroAuth","It seems that this Microsoft Account does not own the game.");
+            Log.i("MicroAuth", "UserName = " + name);
+            Log.i("MicroAuth", "Uuid Minecraft = " + uuidDashes);
+            mcName = name;
+            mcUuid = uuidDashes;
+        } else {
+            Log.i("MicroAuth", "It seems that this Microsoft Account does not own the game.");
             doesOwnGame = false;
             throwResponseError(conn);
         }
@@ -281,15 +284,14 @@ public class Msa {
     private static void throwResponseError(HttpURLConnection conn) throws IOException {
         String otherErrStr = "";
         String errStr = Tools.read(conn.getErrorStream());
-        Log.i("MicroAuth","Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
-        
+        Log.i("MicroAuth", "Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
+
         if (errStr.contains("NOT_FOUND") &&
-            errStr.contains("The server has not found anything matching the request URI"))
-        {
+                errStr.contains("The server has not found anything matching the request URI")) {
             // TODO localize this
             otherErrStr = "It seems that this Microsoft Account does not own the game. Make sure that you have bought/migrated to your Microsoft account.";
         }
-        
+
         throw new RuntimeException(otherErrStr + "\n\nMSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);
     }
 }

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_online_username_hint"
+            app:layout_constraintBottom_toTopOf="@+id/login_edit_email"
+            app:layout_constraintStart_toStartOf="@+id/login_edit_email"/>
+
+    <com.kdt.mcgui.MineEditText
+            android:id="@+id/login_edit_email"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="25dp"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.088"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_online_password_hint"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/login_edit_email"
+
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/login_edit_email"
+            app:layout_constraintTop_toBottomOf="@+id/login_edit_email"
+            app:layout_constraintVertical_bias="0.08"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@android:color/white">
+
+        <com.kdt.mcgui.MineEditText
+                android:id="@+id/login_edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+            android:id="@+id/login_switch_remember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/login_online_check_keeplogin"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
+
+    <CheckBox
+            android:id="@+id/login_switch_offline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/login_offline_label"
+            app:layout_constraintStart_toStartOf="@+id/login_switch_remember"
+            app:layout_constraintTop_toBottomOf="@+id/login_switch_remember"/>
+
+    <com.kdt.mcgui.MineButton
+            android:id="@+id/mineButton"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginRight="5dp"
+            android:onClick="loginMC"
+            android:text="@string/login_online_login_label"
+
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintStart_toStartOf="@+id/login_switch_offline"
+            app:layout_constraintTop_toBottomOf="@+id/login_switch_offline"/>
+
+    <ProgressBar
+            android:id="@+id/launcherAccProgress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#88000000"
+            android:elevation="1dp"
+            android:translationZ="1dp"
+            android:visibility="invisible"
+
+            app:layout_constraintTop_toTopOf="@+id/mineButton"
+            app:layout_constraintBottom_toBottomOf="@+id/mineButton"
+            app:layout_constraintEnd_toEndOf="@+id/mineButton"
+            app:layout_constraintStart_toStartOf="@+id/mineButton"/>
+
+    <com.kdt.mcgui.MineButton
+            android:id="@+id/mineButton2"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="5dp"
+            android:onClick="loginSavedAcc"
+            android:text="@string/login_select_account"
+            android:textColor="@android:color/white"
+
+            app:layout_constraintBottom_toBottomOf="@+id/mineButton"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="@+id/mineButton"/>
+
+    <com.kdt.mcgui.MineButton
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:onClick="loginMicrosoft"
+            android:text="@string/login_microsoft"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/mineButton2"
+            app:layout_constraintStart_toStartOf="@+id/mineButton"
+            app:layout_constraintTop_toBottomOf="@+id/mineButton"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

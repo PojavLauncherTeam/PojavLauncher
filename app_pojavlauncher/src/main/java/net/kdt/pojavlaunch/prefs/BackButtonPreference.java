@@ -18,11 +18,11 @@ public class BackButtonPreference extends Preference {
         this(context, null);
     }
 
-    private void init(){
-        if(getTitle() == null){
+    private void init() {
+        if (getTitle() == null) {
             setTitle(R.string.preference_back_title);
         }
-        if(getIcon() == null){
+        if (getIcon() == null) {
             setIcon(R.drawable.ic_arrow_back_white);
         }
     }

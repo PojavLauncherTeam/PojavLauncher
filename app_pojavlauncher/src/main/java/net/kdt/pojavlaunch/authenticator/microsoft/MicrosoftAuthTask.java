@@ -33,7 +33,6 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
     private final RefreshListener listener;
 
     private final WeakReference<Context> ctx;
-    private ProgressDialog build;
 
     public MicrosoftAuthTask(Context ctx, RefreshListener listener) {
         this.ctx = new WeakReference<>(ctx);
@@ -42,12 +41,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
 
     @Override
     public void onPreExecute() {
-        build = new ProgressDialog(ctx.get());
-        build.setMessage(ctx.get().getString(R.string.global_waiting));
-        build.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        build.setCancelable(false);
-        build.setMax(6);
-        build.show();
+        listener.onStart();
     }
 
     @Override
@@ -93,15 +87,16 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
         super.publishProgress();
     }
 
+    private double progress = 0;
     @Override
     protected void onProgressUpdate(Void[] p1) {
         super.onProgressUpdate(p1);
-        build.setProgress(build.getProgress() + 1);
+        progress += 0.1666;
+        listener.onProgressed(progress);
     }
     
     @Override
     public void onPostExecute(Object result) {
-        build.dismiss();
         if (result instanceof MinecraftAccount) {
             listener.onSuccess((MinecraftAccount) result);
         } else {

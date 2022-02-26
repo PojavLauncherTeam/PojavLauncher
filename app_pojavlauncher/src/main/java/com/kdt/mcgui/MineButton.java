@@ -2,6 +2,7 @@ package com.kdt.mcgui;
 
 import android.content.*;
 import android.graphics.*;
+import android.graphics.drawable.Drawable;
 import android.util.*;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -21,6 +22,7 @@ public class MineButton extends androidx.appcompat.widget.AppCompatButton
 	}
 
 	public void init() {
+		setBackgroundResource(R.drawable.mine_button_background);
 		setTypeface(ResourcesCompat.getFont(getContext(), R.font.noto_sans_bold));
 	}
 

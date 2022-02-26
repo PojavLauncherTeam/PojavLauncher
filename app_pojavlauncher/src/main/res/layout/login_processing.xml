@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="25dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/login_title"
+              android:textSize="24sp"
+              android:textColor="@android:color/white"
+              android:text="@string/login_microsoft"
+              app:layout_constraintTop_toTopOf="parent"/>
+
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_progress"
+            app:layout_constraintTop_toBottomOf="@id/login_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_wait"
+            android:text="@string/global_waiting"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/login_progress"
+            app:layout_constraintStart_toStartOf="parent"/>
+    <com.kdt.mcgui.MineButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_exit"
+            android:text="@string/mcn_exit_call"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

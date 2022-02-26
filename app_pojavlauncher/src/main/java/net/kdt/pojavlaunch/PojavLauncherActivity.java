@@ -43,8 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PojavLauncherActivity extends BaseLauncherActivity
-{
+public class PojavLauncherActivity extends BaseLauncherActivity {
 
     // An equivalent ViewPager2 adapter class
     private static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
@@ -119,7 +118,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         //Setup listener to the backPreference system
         backPreferenceListener = (key, value) -> {
-            if(value.equals("true")){
+            if (value.equals("true")) {
                 onBackPressed();
                 ExtraCore.setValue(key, "false");
             }
@@ -155,14 +154,14 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
         }
 
-        accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> p1, View p2, int position, long p4) {
                 if (tempProfile != null && position == 0) {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
                 } else {
                     PojavProfile.setCurrentProfile(PojavLauncherActivity.this,
-                        accountList.get(position + (tempProfile != null ? 1 : 0)));
+                            accountList.get(position + (tempProfile != null ? 1 : 0)));
                 }
                 pickAccount();
             }
@@ -204,12 +203,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         //Add the preference changed listener
         LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> {
-            if(key.equals("hideSidebar")){
-                changeLookAndFeel(sharedPreferences.getBoolean("hideSidebar",false));
+            if (key.equals("hideSidebar")) {
+                changeLookAndFeel(sharedPreferences.getBoolean("hideSidebar", false));
                 return;
             }
 
-            if(key.equals("ignoreNotch")){
+            if (key.equals("ignoreNotch")) {
                 ignoreNotch(sharedPreferences.getBoolean("ignoreNotch", true), PojavLauncherActivity.this);
                 return;
             }
@@ -217,7 +216,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         changeLookAndFeel(PREF_HIDE_SIDEBAR);
     }
 
-    private void selectTabPage(int pageIndex){
+    private void selectTabPage(int pageIndex) {
         viewPager.setCurrentItem(pageIndex);
         setTabActive(pageIndex);
     }
@@ -229,7 +228,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
             //TODO FULL BACKGROUND LOGIN
             tvConnectStatus.setText(mProfile.accessToken.equals("0") ? R.string.mcl_account_offline : R.string.mcl_account_connected);
-        } catch(Exception e) {
+        } catch (Exception e) {
             mProfile = new MinecraftAccount();
             Tools.showError(this, e, true);
         }
@@ -247,30 +246,30 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
 
     public void onTabClicked(View view) {
-        for(int i=0; i<Tabs.length;i++){
-            if(view.getId() == Tabs[i].getId()) {
+        for (int i = 0; i < Tabs.length; i++) {
+            if (view.getId() == Tabs[i].getId()) {
                 selectTabPage(i);
                 return;
             }
         }
     }
 
-    private void setTabActive(int index){
+    private void setTabActive(int index) {
         for (Button tab : Tabs) {
             tab.setTypeface(null, Typeface.NORMAL);
-            tab.setTextColor(Color.rgb(220,220,220)); //Slightly less bright white.
+            tab.setTextColor(Color.rgb(220, 220, 220)); //Slightly less bright white.
         }
         Tabs[index].setTypeface(Tabs[index].getTypeface(), Typeface.BOLD);
         Tabs[index].setTextColor(Color.WHITE);
 
         //Animating the white bar on the left
-        ValueAnimator animation = ValueAnimator.ofFloat(selectedTab.getY(), Tabs[index].getY()+(Tabs[index].getHeight()- selectedTab.getHeight())/2f);
+        ValueAnimator animation = ValueAnimator.ofFloat(selectedTab.getY(), Tabs[index].getY() + (Tabs[index].getHeight() - selectedTab.getHeight()) / 2f);
         animation.setDuration(250);
         animation.addUpdateListener(animation1 -> selectedTab.setY((float) animation1.getAnimatedValue()));
         animation.start();
     }
 
-    protected void initTabs(int activeTab){
+    protected void initTabs(int activeTab) {
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.post(() -> {
             //Do something after 100ms
@@ -278,11 +277,11 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         });
     }
 
-    private void changeLookAndFeel(boolean useOldLook){
+    private void changeLookAndFeel(boolean useOldLook) {
         Guideline guideLine = findViewById(R.id.guidelineLeft);
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
 
-        if(useOldLook || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (useOldLook || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             //UI v1 Style
             //Hide the sidebar
             params.guidePercent = 0; // 0%, range: 0 <-> 1
@@ -295,7 +294,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             //Enlarge the button, but just a bit.
             params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
             params.matchConstraintPercentWidth = 0.35f;
-        }else{
+        } else {
             //UI v2 Style
             //Show the sidebar back
             params.guidePercent = 0.23f; // 23%, range: 0 <-> 1
@@ -316,10 +315,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         //Try to get the notch so it can be taken into account in settings
-        if (Build.VERSION.SDK_INT >= P){
+        if (Build.VERSION.SDK_INT >= P) {
             try {
                 PREF_NOTCH_SIZE = getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0).width();
-            }catch (Exception e){
+            } catch (Exception e) {
                 Log.i("NOTCH DETECTION", "No notch detected, or the device if in split screen mode");
                 PREF_NOTCH_SIZE = -1;
             }
@@ -335,9 +334,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
-        if(count > 0 && viewPager.getCurrentItem() == 3){
+        if (count > 0 && viewPager.getCurrentItem() == 3) {
             getSupportFragmentManager().popBackStack();
-        }else{
+        } else {
             super.onBackPressed();
             //additional code
             ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
