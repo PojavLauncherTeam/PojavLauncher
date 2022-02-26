@@ -185,12 +185,10 @@ public class ImportControlActivity extends Activity {
             String jsonLayoutData = Tools.read(Tools.CTRLMAP_PATH + "/TMP_IMPORT_FILE.json");
             JSONObject layoutJobj = new JSONObject(jsonLayoutData);
             return layoutJobj.has("version") && layoutJobj.has("mControlDataList");
-
         }catch (JSONException | IOException e) {
             e.printStackTrace();
             return false;
         }
-
     }
 
     public String getNameFromURI(Uri uri) {
