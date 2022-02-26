@@ -25,6 +25,8 @@
         <meta-data 
             android:name="android.max_aspect"
             android:value="ratio_float"/>
+
+        <meta-data android:name="WindowManagerPreference:SuppressWindowControlNavigationButton" android:value="true" />
 		
         <activity
             android:exported="true"
