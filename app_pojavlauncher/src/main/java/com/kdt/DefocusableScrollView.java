@@ -5,15 +5,15 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
 
+/**
+    Class allowing to ignore the focusing from an item such an EditText within it.
+    Ignoring it will stop the scrollView from refocusing on the view
+*/
 public class DefocusableScrollView extends ScrollView {
 
-    /*
-        What is this class for ?
-        It allows to ignore the focusing from an item such an EditText.
-        Ignoring it will stop the scrollView from refocusing on the view
-     */
 
-    private boolean keepFocusing = false;
+
+    private boolean mKeepFocusing = false;
 
 
     public DefocusableScrollView(Context context) {
@@ -33,16 +33,16 @@ public class DefocusableScrollView extends ScrollView {
     }
 
     public void setKeepFocusing(boolean shouldKeepFocusing){
-        keepFocusing = shouldKeepFocusing;
+        mKeepFocusing = shouldKeepFocusing;
     }
 
     public boolean isKeepFocusing(){
-        return keepFocusing;
+        return mKeepFocusing;
     }
 
     @Override
     protected int computeScrollDeltaToGetChildRectOnScreen(Rect rect) {
-        if(!keepFocusing) return 0;
+        if(!mKeepFocusing) return 0;
         return super.computeScrollDeltaToGetChildRectOnScreen(rect);
     }
 
