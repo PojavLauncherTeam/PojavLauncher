@@ -14,12 +14,10 @@ import net.objecthunter.exp4j.function.Function;
 
 import org.lwjgl.glfw.*;
 
-import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
+import static net.kdt.pojavlaunch.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import androidx.annotation.Keep;
-
-import com.google.gson.annotations.SerializedName;
 
 @Keep
 public class ControlData {

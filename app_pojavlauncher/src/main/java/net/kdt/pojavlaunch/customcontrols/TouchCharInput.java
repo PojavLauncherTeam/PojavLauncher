@@ -11,13 +11,11 @@ import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.kdt.pojavlaunch.BaseMainActivity;
-import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
+import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
 
 import org.lwjgl.glfw.CallbackBridge;
@@ -51,7 +49,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         if(isDoingInternalChanges)return;
 
         for(int i=0; i< lengthBefore; ++i){
-            CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
+            CallbackBridge.sendKeycode(LwjglGlfwKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
         }
         for(int i=start, count = 0; count < lengthAfter; ++i){
             CallbackBridge.sendChar(text.charAt(i), 0);
@@ -127,7 +125,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * Send the enter key.
      */
     private void sendEnter(){
-        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ENTER);
+        sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ENTER);
         clear();
     }
 

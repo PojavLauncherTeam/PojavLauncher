@@ -30,8 +30,7 @@
 
 package net.kdt.pojavlaunch;
 
-public class LWJGLGLFWKeycode
-{
+public class LwjglGlfwKeycode {
     /** The unknown key. */
     public static final short GLFW_KEY_UNKNOWN = 0; // should be -1
 
