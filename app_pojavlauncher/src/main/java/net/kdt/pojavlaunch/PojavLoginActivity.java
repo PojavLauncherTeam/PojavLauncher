@@ -69,9 +69,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Locale;
 
-public class PojavLoginActivity extends BaseActivity
-// MineActivity
-{
+public class PojavLoginActivity extends BaseActivity {
     private final Object mLockStoragePerm = new Object();
     private final Object mLockSelectJRE = new Object();
     
