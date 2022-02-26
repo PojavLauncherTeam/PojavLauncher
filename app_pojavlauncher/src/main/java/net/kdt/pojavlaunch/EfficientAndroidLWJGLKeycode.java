@@ -4,8 +4,6 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import android.view.KeyEvent;
 
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-
 import org.lwjgl.glfw.CallbackBridge;
 
 import java.util.Arrays;
@@ -16,8 +14,8 @@ public class EfficientAndroidLWJGLKeycode {
     //The key being the android keycode from a KeyEvent
     //The value its LWJGL equivalent.
     private static final int KEYCODE_COUNT = 103;
-    private static final int[] androidKeycodes = new int[KEYCODE_COUNT];
-    private static final short[] LWJGLKeycodes = new short[KEYCODE_COUNT];
+    private static final int[] sAndroidKeycodes = new int[KEYCODE_COUNT];
+    private static final short[] sLwjglKeycodes = new short[KEYCODE_COUNT];
     private static String[] androidKeyNameArray; /* = new String[androidKeycodes.length]; */
 
     static {
@@ -176,7 +174,6 @@ public class EfficientAndroidLWJGLKeycode {
         execKey(keyEvent, getIndexByKey(keyEvent.getKeyCode()));
     }
 
-
     public static void execKey(KeyEvent keyEvent, int valueIndex) {
         //valueIndex points to where the value is stored in the array.
         CallbackBridge.holdingAlt = keyEvent.isAltPressed();
@@ -185,19 +182,14 @@ public class EfficientAndroidLWJGLKeycode {
         CallbackBridge.holdingNumlock = keyEvent.isNumLockOn();
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
-        try {
-            System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
-            char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
-            sendKeyPress(
-                    getValueByIndex(valueIndex),
-                    key,
-                    0,
-                    CallbackBridge.getCurrentMods(),
-                    keyEvent.getAction() == KeyEvent.ACTION_DOWN);
-
-        } catch (Throwable th) {
-            th.printStackTrace();
-        }
+        System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
+        char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
+        sendKeyPress(
+                getValueByIndex(valueIndex),
+                key,
+                0,
+                CallbackBridge.getCurrentMods(),
+                keyEvent.getAction() == KeyEvent.ACTION_DOWN);
     }
 
     public static void execKeyIndex(int index){
@@ -206,24 +198,28 @@ public class EfficientAndroidLWJGLKeycode {
     }
     
     public static int getValueByIndex(int index) {
-        return LWJGLKeycodes[index];
+        return sLwjglKeycodes[index];
     }
 
     public static int getIndexByKey(int key){
-        return Arrays.binarySearch(androidKeycodes, key);
+        return Arrays.binarySearch(sAndroidKeycodes, key);
     }
 
     public static short getValue(int key){
-        return LWJGLKeycodes[Arrays.binarySearch(androidKeycodes, key)];
+        return sLwjglKeycodes[Arrays.binarySearch(sAndroidKeycodes, key)];
     }
 
+    /** @return the index at which the key is in the array, searching linearly */
     public static int getIndexByValue(int lwjglKey) {
-        //Since the LWJGL keycodes aren't sorted, linear search is used.
         //You should avoid using this function on performance critical areas
-        for (int i = 0; i < LWJGLKeycodes.length; i++) {
-            if(LWJGLKeycodes[i] == lwjglKey) return i;
+        for (int i = 0; i < sLwjglKeycodes.length; i++) {
+            if(sLwjglKeycodes[i] == lwjglKey) return i;
         }
-        
         return 0;
+    }
+
+    private static void add(int androidKeycode, short LWJGLKeycode){
+        sAndroidKeycodes[sAndroidKeycodes.length - 1] = androidKeycode;
+        sLwjglKeycodes[sLwjglKeycodes.length - 1] = LWJGLKeycode;
     }
 }
