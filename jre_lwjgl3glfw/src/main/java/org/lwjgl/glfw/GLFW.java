@@ -497,7 +497,7 @@ public class GLFW
     private static ArrayMap<Long, GLFWWindowProperties> mGLFWWindowMap;
 
     public static boolean mGLFWIsGrabbing, mGLFWIsInputReady, mGLFWIsUseStackQueue = false;
-    public static final byte[] keyDownBuffer = new byte[316];
+    public static final byte[] keyDownBuffer = new byte[317];
     private static final String PROP_WINDOW_WIDTH = "glfwstub.windowWidth";
     private static final String PROP_WINDOW_HEIGHT= "glfwstub.windowHeight";
     public static long mainContext = 0;
@@ -1099,7 +1099,7 @@ public class GLFW
                         break;
                     case CallbackBridge.EVENT_TYPE_KEY:
                         if (mGLFWKeyCallback != null) {
-                        	keyDownBuffer[dataArr[1]-32]=(byte)(int)dataArr[3];
+                            keyDownBuffer[Math.max(0, dataArr[1]-31)]=(byte)(int)dataArr[3];
                             mGLFWKeyCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3], dataArr[4]);
                         }
                         break;
@@ -1191,7 +1191,7 @@ public class GLFW
     }
 
     public static int glfwGetKey(@NativeType("GLFWwindow *") long window, int key) {
-        return keyDownBuffer[key-32];
+        return keyDownBuffer[Math.max(0, dataArr[1]-31)];
     }
 
     public static int glfwGetMouseButton(@NativeType("GLFWwindow *") long window, int button) {
