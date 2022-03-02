@@ -892,7 +892,11 @@ public class GLFW
     }
     
     public static int glfwGetWindowAttrib(@NativeType("GLFWwindow *") long window, int attrib) {
-        return internalGetWindow(window).windowAttribs.get(attrib);
+        Object obj = internalGetWindow(window).windowAttribs.get(attrib);
+        if (obj == null) {
+            return 0;
+        }
+        return (int) obj;
     }
 
     public static void glfwSetWindowAttrib(@NativeType("GLFWwindow *") long window, int attrib, int value) {
