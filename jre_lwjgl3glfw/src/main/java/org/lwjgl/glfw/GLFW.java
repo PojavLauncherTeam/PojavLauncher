@@ -995,8 +995,10 @@ public class GLFW
 
         win.width = mGLFWWindowWidth;
         win.height = mGLFWWindowHeight;
-
         win.title = title;
+
+        win.windowAttribs.put(GLFW_HOVERED, 1);
+        win.windowAttribs.put(GLFW_VISIBLE, 1);
 
         mGLFWWindowMap.put(ptr, win);
         mainContext = ptr;

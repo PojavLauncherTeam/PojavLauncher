@@ -363,3 +363,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEn
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
     showingWindow = (long) window;
 }
+
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(JNIEnv* env, jclass clazz, jint attrib, jint value) {
+    if (!showingWindow) {
+        return; // nothing to do yet
+    }
+
+    jclass glfwClazz = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW");
+    assert(glfwClazz != NULL);
+    jmethodID glfwMethod = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, glfwMethod, "glfwSetWindowAttrib", "(JII)V");
+    assert(glfwMethod != NULL);
+
+    (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_JRE,
+        glfwClazz, glfwMethod,
+        (jlong) showingWindow, attrib, value
+    );
+}
+
