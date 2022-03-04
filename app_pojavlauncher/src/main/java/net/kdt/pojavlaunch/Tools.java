@@ -554,7 +554,7 @@ public final class Tools {
                    }catch(IOException e) {
                        throw new RuntimeException("Can't find the source version for "+ versionName +" (req version="+customVer.inheritsFrom+")");
                    }
-                inheritsVer.inheritsFrom = inheritsVer.id;
+                //inheritsVer.inheritsFrom = inheritsVer.id;
                 insertSafety(inheritsVer, customVer,
                              "assetIndex", "assets", "id",
                              "mainClass", "minecraftArguments",
