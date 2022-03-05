@@ -354,6 +354,7 @@ public class PojavLoginActivity extends BaseActivity
             Tools.copyAssetFile(this, "artifacts/mcxr-play-0.1.3+null.jar", DIR_GAME_NEW + "/mods", true);
             Tools.copyAssetFile(this, "artifacts/titleworlds-0.0.1.jar", DIR_GAME_NEW + "/mods", true);
             Tools.copyAssetFile(this, "artifacts/lazydfu-0.1.3-SNAPSHOT.jar", DIR_GAME_NEW + "/mods", true);
+            Tools.copyAssetFile(this, "jsons/fabric-loader-0.13.3.json", DIR_GAME_NEW + "/versions/fabric", true);
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
