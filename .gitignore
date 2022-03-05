@@ -1,7 +1,6 @@
 /.gradle
 /build
 /*/build
-app_pojavlauncher/src/main/assets/components/jre
 local.properties
 .idea/
 app_pojavlauncher/.cxx/
@@ -9,5 +8,4 @@ app_pojavlauncher/.cxx/
 /app_pojavlauncher/libs/OpenXR-SDK/
 .DS_STORE
 app_pojavlauncher/src/main/assets/artifacts/
-
 app_pojavlauncher/src/main/assets/unzippedArtifacts/
