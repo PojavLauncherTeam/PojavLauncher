@@ -374,8 +374,8 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
     jmethodID glfwMethod = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, glfwMethod, "glfwSetWindowAttrib", "(JII)V");
     assert(glfwMethod != NULL);
 
-    (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(
-        runtimeJNIEnvPtr_JRE,
+    (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_ANDROID,
         glfwClazz, glfwMethod,
         (jlong) showingWindow, attrib, value
     );
