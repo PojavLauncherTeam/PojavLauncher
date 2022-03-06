@@ -155,6 +155,17 @@ jobs:
           branch: master
           name: title-worlds
 
+      - name: Collect lazydfu
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/artifacts
+          workflow_conclusion: success
+          repo: QuestCraftPlusPlus/lazydfu
+          branch: master
+          name: lazydfu
+
       - name: Build APK with Gradle
         run: |
           chmod +x scripts/languagelist_updater.sh
