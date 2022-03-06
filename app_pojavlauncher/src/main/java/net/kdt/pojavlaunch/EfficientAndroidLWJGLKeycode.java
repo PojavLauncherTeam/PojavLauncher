@@ -17,6 +17,7 @@ public class EfficientAndroidLWJGLKeycode {
     private static final int[] sAndroidKeycodes = new int[KEYCODE_COUNT];
     private static final short[] sLwjglKeycodes = new short[KEYCODE_COUNT];
     private static String[] androidKeyNameArray; /* = new String[androidKeycodes.length]; */
+    private static int mTmpCount = 0;
 
     static {
 
@@ -219,7 +220,8 @@ public class EfficientAndroidLWJGLKeycode {
     }
 
     private static void add(int androidKeycode, short LWJGLKeycode){
-        sAndroidKeycodes[sAndroidKeycodes.length - 1] = androidKeycode;
-        sLwjglKeycodes[sLwjglKeycodes.length - 1] = LWJGLKeycode;
+        sAndroidKeycodes[mTmpCount] = androidKeycode;
+        sLwjglKeycodes[mTmpCount] = LWJGLKeycode;
+        mTmpCount ++;
     }
 }
