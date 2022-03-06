@@ -31,7 +31,6 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 
 public abstract class HandleView extends View implements ViewPositionListener, View.OnLongClickListener {
     protected Drawable mDrawable;
-    protected Drawable mDrawableLtr;
     protected Drawable mDrawableRtl;
     private final PopupWindow mContainer;
     // Position with respect to the parent TextView
@@ -92,8 +91,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         mContainer.setWindowLayoutType(WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
         mContainer.setContentView(this);
 
-        mDrawableLtr = view.getContext().getDrawable(R.drawable.text_select_handle_left_material);
-        mDrawableRtl = view.getContext().getDrawable(R.drawable.text_select_handle_right_material);
+        mDrawableRtl = view.getContext().getDrawable(R.drawable.view_handle);
         mMinSize = view.getContext().getResources().getDimensionPixelSize(R.dimen.text_handle_min_size);
 
         setOnLongClickListener(this);
@@ -201,7 +199,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
     protected void updateDrawable() {
         // final int offset = getCurrentCursorOffset();
         final boolean isRtlCharAtOffset = true; // mView.getLayout().isRtlCharAt(offset);
-        mDrawable = isRtlCharAtOffset ? mDrawableRtl : mDrawableLtr;
+        mDrawable = mDrawableRtl; //isRtlCharAtOffset ? mDrawableRtl : mDrawableLtr;
         mHotspotX = getHotspotX(mDrawable, isRtlCharAtOffset);
         mHorizontalGravity = getHorizontalGravity(isRtlCharAtOffset);
     }

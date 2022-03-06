@@ -18,11 +18,11 @@
             android:key="hideSidebar"
             android:summary="@string/mcl_setting_subtitle_hide_sidebar"
             android:title="@string/mcl_setting_title_hide_sidebar"
-            app2:icon="@drawable/hide_sidebar" />
+            app2:icon="@drawable/ic_setting_hide_sidebar" />
 
         <SwitchPreference
             android:defaultValue="true"
-            android:icon="@drawable/ic_lib_check"
+            android:icon="@drawable/ic_setting_lib_check"
             android:key="checkLibraries"
             android:summary="@string/mcl_setting_check_libraries_subtitle"
             android:title="@string/mcl_setting_check_libraries" />
