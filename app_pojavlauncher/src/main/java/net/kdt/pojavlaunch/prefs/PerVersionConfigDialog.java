@@ -17,7 +17,10 @@ import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class PerVersionConfigDialog{
@@ -38,7 +41,8 @@ public class PerVersionConfigDialog{
         mJvmSpinner = mRootView.findViewById(R.id.pvc_javaVm);
         mRendererSpinner = mRootView.findViewById(R.id.pvc_renderer);
 
-        List<String> renderList = Arrays.asList(mContext.getResources().getStringArray(R.array.renderer));
+        ArrayList<String> renderList = new ArrayList<>(5);
+        Collections.addAll(renderList, mContext.getResources().getStringArray(R.array.renderer));
         renderList.add("Default");
         mRendererNames = Arrays.asList(mContext.getResources().getStringArray(R.array.renderer_values));
         mRendererSpinner.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, renderList));

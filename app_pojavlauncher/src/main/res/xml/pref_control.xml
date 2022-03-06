@@ -9,7 +9,7 @@
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
-            android:icon="@drawable/ic_disable_gestures"
+            android:icon="@drawable/ic_setting_disable_gestures"
             android:key="disableGestures"
             android:summary="@string/mcl_disable_gestures_subtitle"
             android:title="@string/mcl_disable_gestures" />
@@ -21,7 +21,7 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="10"
-            app2:icon="@drawable/tap_len" />
+            app2:icon="@drawable/ic_setting_tap_length" />
 
     </PreferenceCategory>
 
@@ -35,7 +35,7 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="5"
-            app2:icon="@drawable/btn_scale"/>
+            app2:icon="@drawable/ic_setting_btn_scale"/>
 
         <net.kdt.pojavlaunch.prefs.ControlOffsetPreference/>
 
@@ -48,7 +48,7 @@
             android:key="mousescale"
             android:summary="@string/mcl_setting_subtitle_mousescale"
             android:title="@string/mcl_setting_title_mousescale"
-            app2:icon="@drawable/mouse_pointer_1"
+            app2:icon="@drawable/ic_setting_mouse_pointer"
             app2:selectable="false"
             app2:seekBarIncrement="5"
             app2:showSeekBarValue="true" />
@@ -56,7 +56,7 @@
             android:key="mousespeed"
             android:summary="@string/mcl_setting_subtitle_mousespeed"
             android:title="@string/mcl_setting_title_mousespeed"
-            app2:icon="@drawable/mouse_pointer_spd"
+            app2:icon="@drawable/ic_setting_mouse_pointer_spd"
             app2:selectable="false"
             app2:seekBarIncrement="5"
             app2:showSeekBarValue="true" />
