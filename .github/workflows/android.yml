@@ -116,7 +116,7 @@ jobs:
           workflow_conclusion: success
           repo: QuestCraftPlusPlus/android-openjdk-build-multiarch
           branch: buildjre17
-          name: jre17-aarch64
+          name: jre17-pojav
 
       - name: Clean Artifacts Folder
         run: |
