@@ -47,7 +47,7 @@ public class LoggerView extends ConstraintLayout {
      * Inflate the layout, and add component behaviors
      */
     private void init(){
-        inflate(getContext(), R.layout.loggerview_layout, this);
+        inflate(getContext(), R.layout.view_logger, this);
         mLogTextView = findViewById(R.id.content_log_view);
         mLogTextView.setTypeface(Typeface.MONOSPACE);
         //TODO clamp the max text so it doesn't go oob

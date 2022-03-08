@@ -342,7 +342,7 @@ public class BaseMainActivity extends BaseActivity {
     public void adjustMouseSpeedLive() {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setTitle(R.string.mcl_setting_title_mousespeed);
-        View v = LayoutInflater.from(this).inflate(R.layout.live_mouse_speed_editor,null);
+        View v = LayoutInflater.from(this).inflate(R.layout.dialog_live_mouse_speed_editor,null);
         final SeekBar sb = v.findViewById(R.id.mouseSpeed);
         final TextView tv = v.findViewById(R.id.mouseSpeedTV);
         sb.setMax(275);

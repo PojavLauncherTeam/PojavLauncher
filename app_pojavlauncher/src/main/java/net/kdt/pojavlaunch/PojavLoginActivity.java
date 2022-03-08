@@ -10,10 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -22,7 +19,6 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -171,7 +167,7 @@ public class PojavLoginActivity extends BaseActivity {
         }
     }
     private void uiInit() {
-        setContentView(R.layout.launcher_login_v3);
+        setContentView(R.layout.activity_pojav_login);
 
         Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
 
@@ -494,14 +490,14 @@ public class PojavLoginActivity extends BaseActivity {
 
         final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
-        accountDialog.setContentView(R.layout.simple_account_list_holder);
+        accountDialog.setContentView(R.layout.dialog_select_account);
 
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
-            View child = inflater.inflate(R.layout.simple_account_list_item, accountListLayout,false);
+            View child = inflater.inflate(R.layout.item_minecraft_account, accountListLayout,false);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
             ImageView imageView = child.findViewById(R.id.account_head);

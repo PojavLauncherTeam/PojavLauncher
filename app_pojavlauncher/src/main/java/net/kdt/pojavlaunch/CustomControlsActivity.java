@@ -36,7 +36,7 @@ public class CustomControlsActivity extends BaseActivity {
             // setTheme(androidx.appcompat.R.style.Theme_AppCompat_Translucent);
         }
         
-		setContentView(R.layout.control_mapping);
+		setContentView(R.layout.activity_custom_controls);
 
 		mControlLayout = (ControlLayout) findViewById(R.id.customctrl_controllayout);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);

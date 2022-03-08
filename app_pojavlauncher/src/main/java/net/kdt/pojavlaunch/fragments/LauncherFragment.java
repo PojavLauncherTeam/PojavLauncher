@@ -39,7 +39,7 @@ public class LauncherFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-		mRootView = inflater.inflate(R.layout.lmaintab_news, container, false);
+		mRootView = inflater.inflate(R.layout.fragment_news, container, false);
         return mRootView;
     }
 

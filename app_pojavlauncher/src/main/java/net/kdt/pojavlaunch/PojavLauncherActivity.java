@@ -84,7 +84,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.launcher_main_v4);
+        setContentView(R.layout.activity_pojav_launcher);
 
         //Boilerplate linking/initialisation
         viewPager = findViewById(R.id.launchermainTabPager);

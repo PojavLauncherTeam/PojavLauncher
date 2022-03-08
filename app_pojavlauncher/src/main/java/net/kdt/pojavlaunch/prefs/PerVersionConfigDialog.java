@@ -19,7 +19,6 @@ import net.kdt.pojavlaunch.value.PerVersionConfig;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class PerVersionConfigDialog{
 
     public PerVersionConfigDialog(Context ctx) {
         mContext = ctx;
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.pvc_popup,null);
+        mRootView = LayoutInflater.from(mContext).inflate(R.layout.dialog_per_version_control,null);
         mJvmSpinner = mRootView.findViewById(R.id.pvc_javaVm);
         mRendererSpinner = mRootView.findViewById(R.id.pvc_renderer);
 

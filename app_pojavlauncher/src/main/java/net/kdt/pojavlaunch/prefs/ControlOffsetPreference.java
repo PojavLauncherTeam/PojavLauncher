@@ -115,7 +115,7 @@ public class ControlOffsetPreference extends Preference {
 
         // Prepare Alert dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
-        dialogBuilder.setView(R.layout.control_offset_preference_dialog);
+        dialogBuilder.setView(R.layout.dialog_control_offset_preference);
         dialogBuilder.setTitle(getContext().getString(R.string.control_offset_title));
 
         dialogBuilder.setPositiveButton(android.R.string.ok, null);
