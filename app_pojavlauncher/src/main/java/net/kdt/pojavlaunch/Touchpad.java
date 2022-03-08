@@ -155,7 +155,7 @@ public class Touchpad extends FrameLayout {
 
     private void init(){
         // Setup mouse pointer
-        mMousePointerImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.mouse_pointer, getContext().getTheme()));
+        mMousePointerImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mouse_pointer, getContext().getTheme()));
         mMousePointerImageView.post(() -> {
             ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
             params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);

@@ -117,7 +117,7 @@ public class Gamepad {
 
         Context ctx = contextView.getContext();
         mPointerImageView = new ImageView(contextView.getContext());
-        mPointerImageView.setImageDrawable(ResourcesCompat.getDrawable(ctx.getResources(), R.drawable.gamepad_pointer, ctx.getTheme()));
+        mPointerImageView.setImageDrawable(ResourcesCompat.getDrawable(ctx.getResources(), R.drawable.ic_gamepad_pointer, ctx.getTheme()));
         mPointerImageView.getDrawable().setFilterBitmap(false);
 
         int size = (int) ((22 * getMcScale()) / mScaleFactor);
