@@ -91,7 +91,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         mContainer.setWindowLayoutType(WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
         mContainer.setContentView(this);
 
-        mDrawableRtl = view.getContext().getDrawable(R.drawable.view_handle);
+        mDrawableRtl = view.getContext().getDrawable(R.drawable.ic_view_handle);
         mMinSize = view.getContext().getResources().getDimensionPixelSize(R.dimen.text_handle_min_size);
 
         setOnLongClickListener(this);

@@ -39,7 +39,7 @@
         android:id="@+id/login_image_logo"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/ic_logo"
 
         app:layout_constraintBottom_toTopOf="@+id/login_menu"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"

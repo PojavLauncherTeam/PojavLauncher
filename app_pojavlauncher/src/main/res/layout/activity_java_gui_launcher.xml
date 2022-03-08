@@ -23,7 +23,7 @@
 				android:id="@+id/main_mouse_pointer"
 				android:layout_width="18dp"
 				android:layout_height="27dp"
-				android:src="@drawable/mouse_pointer" />
+				android:src="@drawable/ic_mouse_pointer" />
 
 		</LinearLayout>
 
