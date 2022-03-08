@@ -43,7 +43,7 @@ public class ImportControlActivity extends Activity {
         super.onCreate(savedInstanceState);
         Tools.initContextConstants(getApplicationContext());
 
-        setContentView(R.layout.import_control_layout);
+        setContentView(R.layout.activity_import_control);
         mEditText = findViewById(R.id.editText_import_control_file_name);
     }
 

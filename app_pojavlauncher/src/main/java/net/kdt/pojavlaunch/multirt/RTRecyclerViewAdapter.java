@@ -32,7 +32,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
     @NonNull
     @Override
     public RTViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View recyclableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.multirt_recyclable_view,parent,false);
+        View recyclableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_multirt_runtime,parent,false);
         return new RTViewHolder(recyclableView);
     }
 

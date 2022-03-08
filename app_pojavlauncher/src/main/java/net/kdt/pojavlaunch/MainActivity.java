@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.*;
 
 
-import androidx.annotation.Nullable;
-
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
@@ -15,7 +13,6 @@ import java.io.*;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
-import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 
 public class MainActivity extends BaseMainActivity {
     public static ControlLayout mControlLayout;
@@ -25,7 +22,7 @@ public class MainActivity extends BaseMainActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initLayout(R.layout.main_with_customctrl);
+        initLayout(R.layout.activity_basemain);
 
         // Set the sustained performance mode for available APIs
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)

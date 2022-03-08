@@ -79,7 +79,7 @@ public class EditControlButtonPopup {
     protected void initializeEditDialog(Context ctx){
         //Create the editing dialog
         LayoutInflater layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mRootView = layoutInflater.inflate(R.layout.control_button_setting,null);
+        mRootView = layoutInflater.inflate(R.layout.dialog_control_button_setting,null);
 
         mBuilder = new AlertDialog.Builder(ctx);
         mBuilder.setTitle(ctx.getResources().getString(R.string.customctrl_edit, mProperties.name));

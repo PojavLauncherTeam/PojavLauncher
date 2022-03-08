@@ -19,7 +19,7 @@ public class ConsoleFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.lmaintab_consolelog, container, false);
+        View view = inflater.inflate(R.layout.fragment_console_log, container, false);
 
 		mConsoleView = (TextView) view.findViewById(R.id.lmaintabconsoleLogTextView);
 		mConsoleView.setTypeface(Typeface.MONOSPACE);

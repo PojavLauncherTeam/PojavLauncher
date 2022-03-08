@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.*;
 import android.util.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 
 import java.io.*;
@@ -38,7 +37,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.install_mod);
+        setContentView(R.layout.activity_java_gui_launcher);
 
         Logger.getInstance().reset();
 

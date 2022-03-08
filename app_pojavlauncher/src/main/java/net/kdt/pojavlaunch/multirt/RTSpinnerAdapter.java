@@ -61,7 +61,7 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView != null?
                 convertView:
-                LayoutInflater.from(mContext).inflate(R.layout.multirt_recyclable_view,parent,false);
+                LayoutInflater.from(mContext).inflate(R.layout.item_multirt_runtime,parent,false);
 
         Runtime runtime = mRuntimes.get(position);
 

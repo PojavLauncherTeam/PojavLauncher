@@ -23,7 +23,7 @@ public class CrashFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.lmaintab_crashlog, container, false);
+		return inflater.inflate(R.layout.fragment_crash_log, container, false);
 	}
 
 	@Override
