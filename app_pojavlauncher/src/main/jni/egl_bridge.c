@@ -790,6 +790,9 @@ bool loadSymbolsVirGL() {
 }
 
 int pojavInit() {
+    savedWidth = 1980;
+    savedHeight = 1080;
+
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles3_virgl", renderer, 15) == 0) {
         config_renderer = RENDERER_VIRGL;
@@ -905,7 +908,9 @@ int pojavInit() {
         EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, NULL, ctx_attribs);
         printf("VirGL: created EGL context %p\n", ctx);
 
-        egl_make_current(ctx);
+        pthread_t t;
+        pthread_create(&t, NULL, egl_make_current, (void *)ctx);
+        usleep(100*1000); // need enough time for the server to init
     }
 
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
@@ -1058,6 +1063,21 @@ void pojavMakeCurrent(void* window) {
     }
 }
 
+JNIEXPORT JNICALL jlong
+Java_org_lwjgl_glfw_CallbackBridge_getEGLDisplayPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &potatoBridge.eglDisplay;
+}
+
+JNIEXPORT JNICALL jlong
+Java_org_lwjgl_glfw_CallbackBridge_getEGLContextPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &potatoBridge.eglContext;
+}
+
+JNIEXPORT JNICALL jlong
+Java_org_lwjgl_glfw_CallbackBridge_getEGLConfigPtr(JNIEnv *env, jclass clazz) {
+    return (jlong) &config;
+}
+
 /*
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass clazz) {
@@ -1106,11 +1126,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *e
     printf("regal removed\n");
     abort();
 }
-JNIEXPORT jlong JNICALL
+JNIEXPORT JNICALL jlong
 Java_org_lwjgl_opengl_GL_getGraphicsBufferAddr(JNIEnv *env, jobject thiz) {
     return &gbuffer;
 }
-JNIEXPORT jintArray JNICALL
+JNIEXPORT JNICALL jintArray
 Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, jobject thiz) {
     jintArray ret = (*env)->NewIntArray(env,2);
     jint arr[] = {savedWidth, savedHeight};
@@ -1129,20 +1149,4 @@ void pojavSwapInterval(int interval) {
             // Nothing to do here
         } break;
     }
-}
-
-
-JNIEXPORT jlong JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_getEGLDisplayPtr(JNIEnv *env, jclass clazz) {
-    return (jlong) &potatoBridge.eglDisplay;
-}
-
-JNIEXPORT jlong JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_getEGLContextPtr(JNIEnv *env, jclass clazz) {
-    return (jlong) &potatoBridge.eglContext;
-}
-
-JNIEXPORT jlong JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_getEGLConfigPtr(JNIEnv *env, jclass clazz) {
-    return (jlong) &config;
 }

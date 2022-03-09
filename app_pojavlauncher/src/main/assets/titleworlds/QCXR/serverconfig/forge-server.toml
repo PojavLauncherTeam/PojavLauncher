@@ -1,0 +1,20 @@
+
+#Server configuration settings
+[server]
+	#Set this to true to remove any BlockEntity that throws an error in its update method instead of closing the server and reporting a crash log. BE WARNED THIS COULD SCREW UP EVERYTHING USE SPARINGLY WE ARE NOT RESPONSIBLE FOR DAMAGES.
+	removeErroringBlockEntities = false
+	#Set this to true to check the entire entity's collision bounding box for ladders instead of just the block they are in. Causes noticeable differences in mechanics so default is vanilla behavior. Default: false.
+	fullBoundingBoxLadders = false
+	#Base zombie summoning spawn chance. Allows changing the bonus zombie summoning mechanic.
+	#Range: 0.0 ~ 1.0
+	zombieBaseSummonChance = 0.1
+	#Chance that a zombie (or subclass) is a baby. Allows changing the zombie spawning mechanic.
+	#Range: 0.0 ~ 1.0
+	zombieBabyChance = 0.05
+	#Vanilla will treat crafting recipes using empty tags as air, and allow you to craft with nothing in that slot. This changes empty tags to use BARRIER as the item. To prevent crafting with air.
+	treatEmptyTagsAsAir = false
+	#Fix advancement loading to use a proper topological sort. This may have visibility side-effects and can thus be turned off if needed for data-pack compatibility.
+	fixAdvancementLoading = true
+	#No comment
+	permissionHandler = "forge:default_handler"
+

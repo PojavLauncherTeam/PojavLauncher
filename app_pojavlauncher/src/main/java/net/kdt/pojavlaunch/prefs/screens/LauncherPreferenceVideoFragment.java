@@ -23,6 +23,7 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
 
         CustomSeekBarPreference seek5 = findPreference("resolutionRatio");
         seek5.setMin(25);
+        seek5.setMax(200);
         seek5.setSuffix(" %");
 
         // #724 bug fix

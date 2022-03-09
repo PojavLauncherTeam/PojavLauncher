@@ -482,7 +482,7 @@ public final class Tools {
     public static void updateWindowSize(Activity ctx) {
         currentDisplayMetrics = getDisplayMetrics(ctx);
 
-        CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
+        CallbackBridge.physicalWidth = currentDisplayMetrics.widthPixels;
         CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
     }
 
