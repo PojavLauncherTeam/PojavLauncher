@@ -76,20 +76,11 @@ public class MultiRTUtils {
 
     /** Increment the amount of runtimes being installed  */
     private static void incrementRuntimeBeingInstalled(){
-        /*
-        Integer status =  (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS);
-        if(status == null) status = 0;
-        ExtraCore.setValue(EXTRA_RUNTIME_STATUS, status + 1);*/
-        //ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS, 0, 0) + 1);
         ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getOrDefaultValue(EXTRA_RUNTIME_STATUS, 0) + 1);
     }
 
     /** Decrement the amount of runtimes being installed */
     private static void decrementRuntimeBeingInstalled(){
-        /*Integer status =  (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS);
-        if(status == null) status = 1;
-        ExtraCore.setValue(EXTRA_RUNTIME_STATUS, status - 1);*/
-        //ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS, 0, 0) - 1);
         ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getOrDefaultValue(EXTRA_RUNTIME_STATUS, 1) - 1);
     }
 

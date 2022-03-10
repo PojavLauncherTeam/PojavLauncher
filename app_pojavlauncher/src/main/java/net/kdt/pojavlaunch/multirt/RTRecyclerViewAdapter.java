@@ -57,8 +57,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
 
     @Override
     public int getItemCount() {
-        //return MultiRTUtils.getRuntimes().size();
-        return 3;
+        return MultiRTUtils.getRuntimes().size();
     }
 	
     public class RTViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
