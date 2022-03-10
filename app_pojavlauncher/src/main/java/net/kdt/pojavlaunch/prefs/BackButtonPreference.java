@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.prefs;
 
+import static net.kdt.pojavlaunch.extra.ExtraConstants.EXTRA_PREFERENCE_BACK;
+
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -31,6 +33,6 @@ public class BackButtonPreference extends Preference {
     @Override
     protected void onClick() {
         // It is caught by an ExtraListener in the LauncherActivity
-        ExtraCore.setValue("back_preference", "true");
+        ExtraCore.setValue(EXTRA_PREFERENCE_BACK, "true");
     }
 }

@@ -1,5 +1,8 @@
 package net.kdt.pojavlaunch.extra;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -66,6 +69,12 @@ public final class ExtraCore {
         return getInstance().mValueMap.get(key);
     }
 
+    /** @return Set the value inside the object, returning a default value if an issue arises **/
+    public static Object getOrDefaultValue(String key, @NonNull Object defaultValue){
+        return getInstance().mValueMap.getOrDefault(key, defaultValue);
+        //return new Object();
+    }
+
     /** Remove the key and its value from the valueMap */
     public static void removeValue(String key){
         getInstance().mValueMap.remove(key);
@@ -82,7 +91,6 @@ public final class ExtraCore {
      * @param listener The ExtraListener to link
      */
     public static void addExtraListener(String key, ExtraListener listener){
-        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
         addExtraListener(key, listener, false);
     }
 
@@ -93,7 +101,7 @@ public final class ExtraCore {
      * @param immediateTrigger When true, immediately triggers the listener if a value has been set
      */
     public static void addExtraListener(String key, ExtraListener listener, boolean immediateTrigger){
-        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
+        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
             listenerList = new ConcurrentLinkedQueue<>();
@@ -102,8 +110,8 @@ public final class ExtraCore {
 
         // This is kinda naive, I should look for duplicates
         listenerList.add(new WeakReference<>(listener));
-        if(immediateTrigger && getInstance().valueMap.containsKey(key)){
-            listener.onValueSet(key, getInstance().valueMap.get(key));
+        if(immediateTrigger && getInstance().mValueMap.containsKey(key)){
+            listener.onValueSet(key, getInstance().mValueMap.get(key));
         }
     }
 

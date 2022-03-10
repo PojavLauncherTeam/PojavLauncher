@@ -16,14 +16,12 @@ import net.kdt.pojavlaunch.R;
 import java.util.List;
 
 public class RTSpinnerAdapter implements SpinnerAdapter {
-    final Context mContext;
     List<Runtime> mRuntimes;
-    public RTSpinnerAdapter(@NonNull Context context, List<Runtime> runtimes) {
+    public RTSpinnerAdapter(List<Runtime> runtimes) {
         mRuntimes = runtimes;
         Runtime runtime = new Runtime("<Default>");
         runtime.versionString = "";
         mRuntimes.add(runtime);
-        mContext = context;
     }
 
     @Override
@@ -61,7 +59,7 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView != null?
                 convertView:
-                LayoutInflater.from(mContext).inflate(R.layout.item_multirt_runtime,parent,false);
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_multirt_runtime,parent,false);
 
         Runtime runtime = mRuntimes.get(position);
 
@@ -71,7 +69,7 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
         view.findViewById(R.id.multirt_view_setdefaultbtn).setVisibility(View.GONE);
 
         if(runtime.versionString != null) {
-            javaVersionView.setText(mContext.getString(R.string.multirt_java_ver, runtime.name, runtime.javaVersion));
+            javaVersionView.setText(parent.getContext().getString(R.string.multirt_java_ver, runtime.name, runtime.javaVersion));
             fullJavaVersionView.setText(runtime.versionString);
         }else{
             javaVersionView.setText(runtime.name);

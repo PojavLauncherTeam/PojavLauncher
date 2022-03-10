@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class PerVersionConfigDialog{
-    final Context mContext;
     final AlertDialog mDialog;
     final View mRootView;
     List<Runtime> mRuntimes;
@@ -35,20 +34,19 @@ public class PerVersionConfigDialog{
     String mSelectedGameVersion = null;
 
     public PerVersionConfigDialog(Context ctx) {
-        mContext = ctx;
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.dialog_per_version_control,null);
+        mRootView = LayoutInflater.from(ctx).inflate(R.layout.dialog_per_version_control,null);
         mJvmSpinner = mRootView.findViewById(R.id.pvc_javaVm);
         mRendererSpinner = mRootView.findViewById(R.id.pvc_renderer);
 
         ArrayList<String> renderList = new ArrayList<>(5);
-        Collections.addAll(renderList, mContext.getResources().getStringArray(R.array.renderer));
+        Collections.addAll(renderList, ctx.getResources().getStringArray(R.array.renderer));
         renderList.add("Default");
-        mRendererNames = Arrays.asList(mContext.getResources().getStringArray(R.array.renderer_values));
-        mRendererSpinner.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, renderList));
+        mRendererNames = Arrays.asList(ctx.getResources().getStringArray(R.array.renderer_values));
+        mRendererSpinner.setAdapter(new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_dropdown_item, renderList));
 
         mCustomDirEditText = mRootView.findViewById(R.id.pvc_customDir);
         mJvmArgsEditText = mRootView.findViewById(R.id.pvc_jvmArgs);
-        AlertDialog.Builder builder =   new AlertDialog.Builder(mContext);
+        AlertDialog.Builder builder =   new AlertDialog.Builder(ctx);
         builder.setView(mRootView);
         builder.setTitle(R.string.pvc_title);
         builder.setNegativeButton(android.R.string.cancel, null);
@@ -99,7 +97,7 @@ public class PerVersionConfigDialog{
         }
         PerVersionConfig.VersionConfig versionConfig = PerVersionConfig.configMap.get(mSelectedGameVersion);
         refreshRuntimes();
-        mJvmSpinner.setAdapter(new RTSpinnerAdapter(mContext, mRuntimes));
+        mJvmSpinner.setAdapter(new RTSpinnerAdapter(mRuntimes));
 
         int jvmIndex = mRuntimes.indexOf(new Runtime("<Default>"));
         int rendererIndex = mRendererSpinner.getAdapter().getCount()-1;

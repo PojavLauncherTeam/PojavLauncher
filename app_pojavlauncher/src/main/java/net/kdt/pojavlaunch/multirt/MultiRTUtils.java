@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.multirt;
 
+import static net.kdt.pojavlaunch.extra.ExtraConstants.EXTRA_RUNTIME_STATUS;
+
 import android.content.Context;
 import android.system.Os;
 import android.util.Log;
@@ -25,9 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MultiRTUtils {
-    public interface RuntimeProgressReporter {
-        void reportStringProgress(int resId, Object ... stuff);
-    }
 
     private static final HashMap<String,Runtime> sCache = new HashMap<>();
 
@@ -77,16 +76,25 @@ public class MultiRTUtils {
 
     /** Increment the amount of runtimes being installed  */
     private static void incrementRuntimeBeingInstalled(){
-        Integer status =  (Integer) ExtraCore.getValue("runtime_status");
+        /*
+        Integer status =  (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS);
         if(status == null) status = 0;
-        ExtraCore.setValue("runtime_status", status + 1);
+        ExtraCore.setValue(EXTRA_RUNTIME_STATUS, status + 1);*/
+        //ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS, 0, 0) + 1);
+        ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getOrDefaultValue(EXTRA_RUNTIME_STATUS, 0) + 1);
     }
 
     /** Decrement the amount of runtimes being installed */
     private static void decrementRuntimeBeingInstalled(){
-        Integer status =  (Integer) ExtraCore.getValue("runtime_status");
+        /*Integer status =  (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS);
         if(status == null) status = 1;
-        ExtraCore.setValue("runtime_status", status - 1);
+        ExtraCore.setValue(EXTRA_RUNTIME_STATUS, status - 1);*/
+        //ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS, 0, 0) - 1);
+        ExtraCore.setValue(EXTRA_RUNTIME_STATUS, (Integer) ExtraCore.getOrDefaultValue(EXTRA_RUNTIME_STATUS, 1) - 1);
+    }
+
+    public static boolean areRuntimesInstalling(){
+        return (Integer) ExtraCore.getOrDefaultValue(EXTRA_RUNTIME_STATUS, 0) != 0;
     }
 
     // TODO make a function to deal with checking installation in progress ?
@@ -96,7 +104,7 @@ public class MultiRTUtils {
         // Notify ExtraCore
         incrementRuntimeBeingInstalled();
 
-        File dest = new File(runtimeFolder,"/"+name);
+        File dest = new File(RUNTIME_FOLDER,"/"+name);
         File tmp = new File(dest,"temporary");
         if(dest.exists()) FileUtils.deleteDirectory(dest);
         dest.mkdirs();
@@ -115,7 +123,7 @@ public class MultiRTUtils {
     }
 
     /** Same as installRuntimeNamed, but without removal of the dest file if it exists */
-    private static void __installRuntimeNamed__NoRM(InputStream runtimeInputStream, File dest) throws IOException {
+    private static void installRuntimeNamedNoRemove(InputStream runtimeInputStream, File dest) throws IOException {
         File tmp = new File(dest,"temporary");
         FileOutputStream fos = new FileOutputStream(tmp);
 
@@ -133,7 +141,7 @@ public class MultiRTUtils {
      * @throws IOException
      */
     private static void postPrepare(String libraryPath, String name) throws IOException {
-        File dest = new File(runtimeFolder,"/" + name);
+        File dest = new File(RUNTIME_FOLDER,"/" + name);
         if(!dest.exists()) return;
 
         Runtime runtime = read(name);
@@ -177,16 +185,16 @@ public class MultiRTUtils {
         // Notify ExtraCore
         incrementRuntimeBeingInstalled();
 
-        File dest = new File(runtimeFolder,"/"+name);
+        File dest = new File(RUNTIME_FOLDER,"/"+name);
         if(dest.exists()) FileUtils.deleteDirectory(dest);
         dest.mkdirs();
-        __installRuntimeNamed__NoRM(universalFileInputStream,dest);
-        __installRuntimeNamed__NoRM(platformBinsInputStream,dest);
-        File binpack_verfile = new File(runtimeFolder,"/" + name + "/pojav_version");
+        installRuntimeNamedNoRemove(universalFileInputStream,dest);
+        installRuntimeNamedNoRemove(platformBinsInputStream,dest);
+        File binpack_verfile = new File(RUNTIME_FOLDER,"/" + name + "/pojav_version");
         FileOutputStream fos = new FileOutputStream(binpack_verfile);
         fos.write(binpackVersion.getBytes());
         fos.close();
-        cache.remove(name); // Force reread
+        sCache.remove(name); // Force reread
 
         // Install libraries
         postPrepare(libraryPath, "Internal");
@@ -196,7 +204,7 @@ public class MultiRTUtils {
     }
 
     public static String __internal__readBinpackVersion(String name) {
-        File binpack_version_file = new File(runtimeFolder,"/"+name+"/pojav_version");
+        File binpack_version_file = new File(RUNTIME_FOLDER,"/"+name+"/pojav_version");
         try {
             if (binpack_version_file.exists()) {
                 return Tools.read(binpack_version_file.getAbsolutePath());
@@ -218,7 +226,7 @@ public class MultiRTUtils {
 
     /** Set the default runtime to be the selected one */
     public static void setRuntimeNamed(Context ctx, String name) throws IOException {
-        File dest = new File(runtimeFolder,"/"+name);
+        File dest = new File(RUNTIME_FOLDER,"/"+name);
         if((!dest.exists()) || MultiRTUtils.forceReread(name).versionString == null)
             throw new RuntimeException("Selected runtime is broken!");
 
@@ -237,12 +245,12 @@ public class MultiRTUtils {
     /** @return Runtime, maybe cached */
     public static Runtime read(String name) {
         // Cached runtime verification
-        if(cache.containsKey(name)) return cache.get(name);
+        if(sCache.containsKey(name)) return sCache.get(name);
 
         // Not cached, read from scratch
         Runtime runtime;
-        File release = new File(runtimeFolder,"/" + name + "/release");
->>>>>>> W.I.P runtime installation and component unpacking
+        File release = new File(RUNTIME_FOLDER,"/" + name + "/release");
+
         if(!release.exists()) {
             return new Runtime(name);
         }
@@ -262,7 +270,7 @@ public class MultiRTUtils {
                         javaVersionInt = Integer.parseInt(javaVersionSplit[0]);
                     }
                     Runtime r = new Runtime(name);
-                    r.arch = content.substring(_OS_ARCH_index,content.indexOf('"',_OS_ARCH_index));
+                    r.arch = content.substring(osArchIndex,content.indexOf('"', osArchIndex));
                     r.javaVersion = javaVersionInt;
                     r.versionString = javaVersion;
                     runtime = r;
@@ -272,7 +280,7 @@ public class MultiRTUtils {
         }catch(IOException e) {
             runtime =  new Runtime(name);
         }
-        cache.put(name,runtime);
+        sCache.put(name,runtime);
         return runtime;
     }
 

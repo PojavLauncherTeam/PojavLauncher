@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import static android.os.Build.VERSION_CODES.P;
 import static net.kdt.pojavlaunch.Tools.ignoreNotch;
+import static net.kdt.pojavlaunch.extra.ExtraConstants.EXTRA_PREFERENCE_BACK;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_HIDE_SIDEBAR;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
@@ -123,7 +124,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
             return false;
         };
-        ExtraCore.addExtraListener("back_preference", backPreferenceListener);
+        ExtraCore.addExtraListener(EXTRA_PREFERENCE_BACK, backPreferenceListener);
 
 
         // Try to load the temporary account
@@ -325,7 +326,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }else{
             super.onBackPressed();
             //additional code
-            ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
+            ExtraCore.removeExtraListenerFromValue(EXTRA_PREFERENCE_BACK, backPreferenceListener);
             finish();
         }
     }

@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Tools.getFileName;
+import static net.kdt.pojavlaunch.extra.ExtraConstants.EXTRA_RUNTIME_STATUS;
 
 import android.app.*;
 import android.content.*;
@@ -15,7 +16,6 @@ import java.io.*;
 
 
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
@@ -96,7 +96,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     }
 
     public void launchGame(View v) {
-        Integer runtime_status = (Integer) ExtraCore.getValue("runtime_status");
+        Integer runtime_status = (Integer) ExtraCore.getValue(EXTRA_RUNTIME_STATUS);
         if(runtime_status != null && runtime_status > 0){
             // Don't launch the game while a runtime is being installed
             Toast.makeText(v.getContext(), v.getContext().getText(R.string.wait_runtime_is_being_installed), Toast.LENGTH_SHORT).show();

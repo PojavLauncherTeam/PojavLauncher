@@ -315,7 +315,7 @@ public class PojavLoginActivity extends BaseActivity {
             Log.e("JREAuto", "JRE was not included on this APK.", e);
         }
         if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
-        if(rt_version == null) return false;
+        if(rt_version == null) return false; //TODO a user may use a runtimeless build with a runtime already installed !
 
         //If we already have an integrated one installed, check if it's up-to-date
         if(!rt_version.equals(current_rt_version)) {
