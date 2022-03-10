@@ -208,59 +208,54 @@ public class MultiRTUtils {
         uncompressTarXZ(tmp,dest,progressReporter);
         tmp.delete();
     }
-
     private static void uncompressTarXZ(final File tarFile, final File dest, final RuntimeProgressReporter thingy) throws IOException {
-        dest.mkdirs();
+        final ProgressReporterHelper helper = new ProgressReporterHelper(thingy);
+        try {
+            dest.mkdirs();
 
-        TarArchiveInputStream tarIn = new TarArchiveInputStream(
-                new XZCompressorInputStream(
-                        new BufferedInputStream(
-                                new FileInputStream(tarFile)
-                        )
-                )
-        );
-        TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
-        // tarIn is a TarArchiveInputStream
-        while (tarEntry != null) {
-            /*
-             * Unpacking very small files in short time cause
-             * application to ANR or out of memory, so delay
-             * a little if size is below than 20kb (20480 bytes)
-             */
-            if (tarEntry.getSize() <= 20480) {
-                try {
-                    // 40 small files per second
-                    Thread.sleep(25);
-                } catch (InterruptedException ignored) {}
-            }
-            final String tarEntryName = tarEntry.getName();
-            // publishProgress(null, "Unpacking " + tarEntry.getName());
-            thingy.reportStringProgress(R.string.global_unpacking,tarEntryName);
-            File destPath = new File(dest, tarEntry.getName());
-            if (tarEntry.isSymbolicLink()) {
-                destPath.getParentFile().mkdirs();
-                try {
-                    // android.system.Os
-                    // Libcore one support all Android versions
-                    Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
-                } catch (Throwable e) {
-                    Log.e("MultiRT", e.toString());
+            TarArchiveInputStream tarIn = new TarArchiveInputStream(
+                    new XZCompressorInputStream(
+                            new BufferedInputStream(
+                                    new FileInputStream(tarFile)
+                            )
+                    )
+            );
+            TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
+            // tarIn is a TarArchiveInputStream
+            while (tarEntry != null) {
+                final String tarEntryName = tarEntry.getName();
+                // publishProgress(null, "Unpacking " + tarEntry.getName());
+                helper.reportStringProgress(R.string.global_unpacking, tarEntryName);
+                File destPath = new File(dest, tarEntry.getName());
+                if (tarEntry.isSymbolicLink()) {
+                    destPath.getParentFile().mkdirs();
+                    try {
+                        // android.system.Os
+                        // Libcore one support all Android versions
+                        Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    } catch (Throwable e) {
+                        Log.e("MultiRT", e.toString());
+                    }
+
+                } else if (tarEntry.isDirectory()) {
+                    destPath.mkdirs();
+                    destPath.setExecutable(true);
+                } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
+                    destPath.getParentFile().mkdirs();
+                    destPath.createNewFile();
+
+                    FileOutputStream os = new FileOutputStream(destPath);
+                    IOUtils.copy(tarIn, os);
+                    os.close();
+
                 }
-
-            } else if (tarEntry.isDirectory()) {
-                destPath.mkdirs();
-                destPath.setExecutable(true);
-            } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
-                destPath.getParentFile().mkdirs();
-                destPath.createNewFile();
-
-                FileOutputStream os = new FileOutputStream(destPath);
-                IOUtils.copy(tarIn, os);
-                os.close();
-
+                tarEntry = tarIn.getNextTarEntry();
             }
-            tarEntry = tarIn.getNextTarEntry();
+            tarIn.close();
+        }catch (IOException e) {
+            throw e;
+        }finally {
+            helper.stop();
         }
-        tarIn.close();
     }
 }

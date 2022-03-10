@@ -15,6 +15,7 @@ import java.io.*;
 
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.ProgressReporterHelper;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.tasks.*;
 
