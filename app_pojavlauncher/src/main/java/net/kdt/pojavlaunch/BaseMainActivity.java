@@ -151,7 +151,7 @@ public class BaseMainActivity extends BaseActivity {
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
-        CallbackBridge.nativeSetWindowAttrib(LWJGLGLFWKeycode.GLFW_HOVERED, 1);
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 1);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class BaseMainActivity extends BaseActivity {
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
         }
-        CallbackBridge.nativeSetWindowAttrib(LWJGLGLFWKeycode.GLFW_HOVERED, 0);
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 0);
         mIsResuming = false;
         super.onPause();
     }
@@ -167,12 +167,12 @@ public class BaseMainActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        CallbackBridge.nativeSetWindowAttrib(LWJGLGLFWKeycode.GLFW_VISIBLE, 1);
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 1);
     }
 
     @Override
     protected void onStop() {
-        CallbackBridge.nativeSetWindowAttrib(LWJGLGLFWKeycode.GLFW_VISIBLE, 0);
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 0);
         super.onStop();
     }
 
