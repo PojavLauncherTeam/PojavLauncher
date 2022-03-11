@@ -341,7 +341,7 @@ public class PojavLoginActivity extends BaseActivity
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
-            Tools.copyAssetFile(this, "jsons/fabric-loader-0.13.3.json", Tools.DIR_HOME_VERSION + "/fabric", false);
+            Tools.copyAssetFile(this, "jsons/fabric.json", Tools.DIR_HOME_VERSION + "/fabric", false);
 
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
