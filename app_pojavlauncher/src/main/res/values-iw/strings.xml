@@ -200,6 +200,7 @@
     <string name="mcl_memory_allocation_subtitle">שולט בכמות הזיכרון הניתנת ל- Minecraft</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Java Runtime פגומה</string>
+    <string name="multirt_runtime_incompatiblearch">ארכיטקטורה לא נתמכת: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">הוסף חדש</string>
     <string name="multirt_config_add_subtitle">ייבוא Java VM חדשה</string>
@@ -209,6 +210,8 @@
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
     <string name="multirt_config_removeerror_last">נדרש שיהיה לך לפחות Java Runtime אחת מותקנת</string>
+    <string name="multirt_nocompartiblert">לא ניתן למצוא Java Runtime נתמכת. גרסת Java %d ומעלה נדרשת.</string>
+    <string name="multirt_nojava8rt">לא מצאתי את Java 8. על מנת להשתמש באפשרות זו, עליך להתקין Java 8.</string>
     <string name="compat_117_message">מיינקראפט 21w10a+ דורש את פרופיל הליבה שלOpenGL 3.2. למרבה הצער, המעטפת GL4ES אינה תומכת בו במלואה כרגע, אך ישנם כמה משאבים נוספים שתוכל להתקין להפעלת גרסאות אלה. לחץ על אישור כדי לאשר את ההתקנה ולחץ על ביטול כדי לבטל את ההפעלה.</string>
     <string name="compat_11x_playanyway">הפעל בכל זאת</string>
     <string name="pvc_gameDirectory">תיקיית המשחק</string>
@@ -217,6 +220,7 @@
     <string name="storage_warning_title">שינויי אחסון</string>
     <string name="storage_warning_text"><![CDATA[בשל אכיפות האחסון החדשות של Google שנוספו ב- Android 10 ואילך, עלינו להעביר את ספריית המשחק לתיקייה פרטית לאפליקציות.<br /> התיקיה החדשה לקובצי Pojav היא <b>Android/data/%s/files/</b> (נגיש גם באמצעות ספק אחסון בסייר הקבצים שלך).<br /> אם אתה צריך להעתיק את קבצי המשחק שלך, העתק הכל מהתיקיה המקורית ב <b>games/PojavLauncher</b> באופן ידני.]]></string>
     <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
+    <string name="preference_mouse_start_description">בעת השימוש באפשרות זו, \"תישפטו\" ע\"י Mathias-Boulay</string>
     <string name="preference_video_description">רזולוציה, סוג קנה מידה, ומעבד (וידאו)</string>
     <string name="preference_control_title">התאמה אישית של פקדים</string>
     <string name="preference_control_description">סוגי מחוות, טריגרים, וקנה מידה</string>
@@ -229,6 +233,11 @@
     <string name="preference_sustained_performance_title">הפעל \"מצב מאוזן\"</string>
     <string name="preference_sustained_performance_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
     <string name="preference_back_title">חזרה אל המסך האחרון</string>
+    <string name="gles_hack_title">כיווץ GL4ES</string>
+    <string name="gles_hack_none">אל תכווץ טקסטורות</string>
+    <string name="gles_hack_always">חלק את כל הטקסטורות ב2</string>
+    <string name="gles_hack_sometimes">חלק טקסטורות גדולות ב-2 או 4</string>
     <string name="vbo_hack_description">מסייע בתאימות בגירסאות ישנות</string>
+    <string name="gles_version_hack_title">הכרח openGL 1</string>
     <string name="gles_version_hack_description">מסייע בתאימות בגירסאות ישנות</string>
 </resources>
