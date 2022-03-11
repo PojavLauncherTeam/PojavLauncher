@@ -102,8 +102,8 @@
 
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintStart_toStartOf="@+id/login_switch_local"
-        app:layout_constraintTop_toBottomOf="@+id/login_switch_local" />
+        app:layout_constraintStart_toStartOf="@id/login_switch_remember"
+        app:layout_constraintTop_toBottomOf="@id/login_switch_remember" />
 
     <ProgressBar
         android:id="@+id/launcherAccProgress"
