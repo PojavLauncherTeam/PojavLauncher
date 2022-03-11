@@ -43,6 +43,7 @@ import androidx.core.content.ContextCompat;
 
 import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthTask;
 import net.kdt.pojavlaunch.authenticator.microsoft.ui.MicrosoftLoginGUIActivity;
+import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
 import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
 import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
