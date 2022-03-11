@@ -358,9 +358,6 @@ public class PojavLoginActivity extends BaseActivity
             Tools.copyAssetFile(this, "artifacts/titleworlds-0.0.1.jar", DIR_GAME_NEW + "/mods", false);
             Tools.copyAssetFile(this, "artifacts/lazydfu-0.1.3-SNAPSHOT.jar", DIR_GAME_NEW + "/mods", false);
 
-            // Install titleworld
-            Tools.copyAssetFile(this, "titleworlds", DIR_GAME_NEW, false);
-
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
