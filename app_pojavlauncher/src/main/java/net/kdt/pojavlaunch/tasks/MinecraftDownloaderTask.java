@@ -358,7 +358,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
     }
 
     @Override
-    protected void onPostExecute(Throwable p1)
+    public void onPostExecute(Throwable p1)
     {
         mActivity.mPlayButton.setText("Play");
         mActivity.mPlayButton.setEnabled(true);

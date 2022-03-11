@@ -197,7 +197,7 @@ public final class Tools {
             versionName = versionInfo.inheritsFrom;
         }
         
-        String userType = "mojang";
+        String userType = "msa";
 
         File gameDir = new File(strGameDir);
         gameDir.mkdirs();
