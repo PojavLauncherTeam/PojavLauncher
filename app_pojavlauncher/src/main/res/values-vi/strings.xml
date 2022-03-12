@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email hoặc tên người dùng </string>
-    <string name="login_online_password_hint">Mật khẩu </string>
     <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập </string>
     <string name="login_online_login_label">Đăng nhập</string>
-    <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
     <string name="login_error_invalid_username">Tên người dùng không hợp lệ. Nó phải có từ 3-16 kí tự, và chỉ bao gồm các kí tự A-Z, a-z, 0-9 và dấu gạch dưới.</string>
     <string name="login_error_exist_username">Tên người dùng này đã tồn tại</string>
-    <string name="login_error_offline_password">Không thể đặt mật khẩu cho tài khoản ngoại tuyến!</string>
     <string name="login_microsoft">Đăng nhập Microsoft</string>
     <string name="login_select_account">Chọn tài khoản</string>
     <string name="login_title_no_saved_account">Không tìm thấy tài khoản !</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Đã kết nối</string>
-    <string name="mcl_account_offline">Ngoại tuyến</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Đang làm sạch bộ nhớ đệm</string>
