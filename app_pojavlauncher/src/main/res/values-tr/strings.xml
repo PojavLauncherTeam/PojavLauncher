@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
-    <string name="login_online_password_hint">Şifre</string>
     <string name="login_online_check_keeplogin">Oturumumu açık tut</string>
     <string name="login_online_login_label">Giriş yap</string>
-    <string name="login_offline_label">Çevrimdışı hesapla oturum açın</string>
     <string name="login_error_invalid_username">Geçersiz kullanıcı adı. Kullanıcı adı 3-16 karakter aralığında olmalı, sadece A-Z, a-z, 0-9 ve alt çizgi içermelidir.</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
-    <string name="login_error_offline_password">Çevrimdışı hesaplar şifre içeremez!</string>
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
     <string name="login_title_no_saved_account">Hiç hesap bulunamadı!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Çökme günlüğü</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Bağlandı</string>
-    <string name="mcl_account_offline">Çevrimdışı</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s başlamaya hazır</string>
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
