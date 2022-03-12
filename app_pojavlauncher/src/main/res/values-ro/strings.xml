@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
-    <string name="login_online_password_hint">Parola</string>
     <string name="login_online_check_keeplogin">Ține-mă logat</string>
     <string name="login_online_login_label">Autentificare</string>
-    <string name="login_offline_label">Autentificare ca cont offline</string>
     <string name="login_error_invalid_username">Nume de utilizator invalid. Numele de utilizator trebuie să aibă între 3-16 caractere, trebuie să conțină doar A-Z, a-z, 0-9 și underscore.</string>
     <string name="login_error_exist_username">Acest nume de utilizator există deja</string>
-    <string name="login_error_offline_password">Contul offline nu poate include parolă!</string>
     <string name="login_microsoft">Autentificare Microsoft</string>
     <string name="login_select_account">Selectează contul</string>
     <string name="login_title_no_saved_account">Nu s-a găsit nici un cont!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectat</string>
-    <string name="mcl_account_offline">Deconectat</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
     <string name="mcl_launch_cleancache">Se șterg fișierele cache</string>
