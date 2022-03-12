@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">ایمیل یا یوزرنیم</string>
-    <string name="login_online_password_hint">رمز عبور</string>
     <string name="login_online_check_keeplogin">مرا وارد شده نگه دار</string>
     <string name="login_online_login_label">ورود</string>
-    <string name="login_offline_label">ورود به عنوان اکانت آفلاین</string>
     <string name="login_error_invalid_username">یوزرنیم نامعتبر. یوزرنیم باید بین ۳-۱۶ کاراکتر باشد، و تنها از کاراکترهای A-Z, a-z, 0-9 و _ استفاده شود.</string>
     <string name="login_error_exist_username">این یوزرنیم قبلا استفاده شده</string>
-    <string name="login_error_offline_password">اکانت آفلاین به رمز عبور نیاز ندارد!</string>
     <string name="login_microsoft">ورود با مایکروسافت</string>
     <string name="login_select_account">انتخاب اکانت</string>
     <string name="login_title_no_saved_account">اکانتی پیدا نشد!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">گزارش (لاگ) کرش</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">متصل شد</string>
-    <string name="mcl_account_offline">آفلاین</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">آماده برای اجرای ماینکرفت %s</string>
     <string name="mcl_launch_cleancache">پاکسازی فایل‌های کَش</string>
