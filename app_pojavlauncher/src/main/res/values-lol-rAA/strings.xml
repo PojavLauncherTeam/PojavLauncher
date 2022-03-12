@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Emol or osornoim</string>
-    <string name="login_online_password_hint">passwd</string>
     <string name="login_online_check_keeplogin">kep i kog inside</string>
     <string name="login_online_login_label">logout</string>
-    <string name="login_offline_label">Login as offloin akownt</string>
     <string name="login_error_invalid_username">Invalid catz\' neim. Catz\' neim hav tu be in rein\'g uf 3-16 kerekturs, shud only kontainz A-Z, a-z, 0-9 and undrskore.</string>
     <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
-    <string name="login_error_offline_password">Offline akownt can\'t include pasword!</string>
     <string name="login_microsoft">Microsoft entrunz</string>
     <string name="login_select_account">what acc?</string>
     <string name="login_title_no_saved_account">No akownt findz !</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Crash trunk</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connectd</string>
-    <string name="mcl_account_offline">Offlien</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready 2 pulay minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleanin cache filez</string>
