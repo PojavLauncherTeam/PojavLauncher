@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email eller användarnamn</string>
-    <string name="login_online_password_hint">Lösenord</string>
     <string name="login_online_check_keeplogin">Fortsätt vara inloggad</string>
     <string name="login_online_login_label">Logga in</string>
-    <string name="login_offline_label">Logga in som offlinekonto</string>
     <string name="login_error_invalid_username">Ogiltigt användarnamn. Användarnamnet måste vara i intervallet 3-16 tecken, bör endast innehålla A-Z, a-z, 0-9 och understreck.</string>
     <string name="login_error_exist_username">Detta användarnamn finns redan</string>
-    <string name="login_error_offline_password">Offline-kontot kan inte innehålla lösenord!</string>
     <string name="login_microsoft">Logga in med Microsoft-konto</string>
     <string name="login_select_account">Välj konto</string>
     <string name="login_title_no_saved_account">Inget konto hittades!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Kraschlogg</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Ansluten</string>
-    <string name="mcl_account_offline">Frånkopplad</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Redo att spela Minecraft %s</string>
     <string name="mcl_launch_downloading_progress">"Laddar ner %s (%.2f MB / %.2f MB)"</string>
