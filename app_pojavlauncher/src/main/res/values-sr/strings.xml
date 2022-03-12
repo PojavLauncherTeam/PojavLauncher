@@ -7,13 +7,9 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Е-пошта или ваше Минецрафт име</string>
-    <string name="login_online_password_hint">Шифра</string>
     <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
     <string name="login_online_login_label">Пријава</string>
-    <string name="login_offline_label">Пријавите се као офлајн налог</string>
     <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
-    <string name="login_error_offline_password">Офлајн налог ме може имати лозинку!</string>
     <string name="login_microsoft">Microsoft Пријава</string>
     <string name="login_select_account">Изаберите налог</string>
     <string name="login_title_no_saved_account">Налог није пронађен !</string>
@@ -43,7 +39,6 @@
     <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Повезано</string>
-    <string name="mcl_account_offline">Офлајн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
     <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
