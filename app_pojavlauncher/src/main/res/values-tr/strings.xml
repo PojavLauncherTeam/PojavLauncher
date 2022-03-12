@@ -9,21 +9,21 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
     <string name="login_online_password_hint">Şifre</string>
-    <string name="login_online_check_keeplogin">Oturumu Açık Tut</string>
+    <string name="login_online_check_keeplogin">Oturumumu açık tut</string>
     <string name="login_online_login_label">Giriş yap</string>
-    <string name="login_offline_label">Çevrimdışı hesapla girin</string>
+    <string name="login_offline_label">Çevrimdışı hesapla oturum açın</string>
     <string name="login_error_short_username">Kullanıcı adı en az 3 karakter olmalıdır</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
-    <string name="login_title_no_saved_account">Hiç hesap bulunamadı !</string>
+    <string name="login_title_no_saved_account">Hiç hesap bulunamadı!</string>
     <string name="login_dialog_no_saved_account">Hiçbir kayıtlı hesabın yok.\n&lt;b&gt;\"Beni hatırla\"&lt;b&gt;\'yı seçerek hesaplarını kaydedebilirsin.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java Runtime\'ı kur %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Java Runtime\'ı Kur %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Bir mod yükleyicisi seç</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
@@ -55,9 +55,9 @@
     <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümanlarla)</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
-    <string name="mcl_option_about">Launcher hakkında</string>
+    <string name="mcl_option_about">Hakkında</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime\'ı kaldır</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
     <string name="mcl_setting_title_hide_sidebar">Kenar çubuğunu gizle</string>
@@ -72,14 +72,14 @@
     <string name="mcl_setting_subtitle_backtorightmouse">Bazı cihazlar farenin sağ tıkını geri tuşu olarak algılar. Eğer fiziksel fare kullanıyorsanız, bunu aktifleştirmelisiniz.</string>
     <string name="mcl_setting_title_flat_button_style">Düz düğme tarzı</string>
     <string name="mcl_setting_subtitle_flat_button_style">Düğme tarzını düz yapmak için bunu etkinleştir.</string>
-    <string name="mcl_setting_title_buttonscale">Düğmelerin boyutlayıcısını ayarla</string>
+    <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
     <string name="mcl_setting_subtitle_buttonscale">Eğer düğmeler çok küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
     <string name="mcl_setting_subtitle_mousescale">Sanal farenin boyutunu ayarlayın.</string>
     <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümanları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
-    <string name="mcl_setting_category_scaling">Boyutlama Seçenekleri</string>
+    <string name="mcl_setting_category_scaling">Boyutlandırma Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
@@ -189,7 +189,7 @@
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
     <string name="main_no_news_feed">Haberler bilgileri getirilemedi !</string>
-    <string name="auto_ram_subtitle">Otomatik RAM ayarlayıcısını aktifleştirir</string>
+    <string name="auto_ram_subtitle">Otomatik RAM ayarlayıcısını etkinleştirir</string>
     <string name="auto_ram_title">Otomatik RAM</string>
     <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
     <string name="mcl_setting_check_libraries">İndirmeden sonra kütüphaneleri kontrol et</string>
