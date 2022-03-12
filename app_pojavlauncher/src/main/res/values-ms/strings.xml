@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-mel atau nama pengguna</string>
-    <string name="login_online_password_hint">Kata Laluan</string>
     <string name="login_online_check_keeplogin">Kekalkan saya dilog masuk</string>
     <string name="login_online_login_label">Log masuk</string>
-    <string name="login_offline_label">Log masuk sebagai akaun luar talian</string>
     <string name="login_error_invalid_username">Nama pengguna tidak sah. Nama pengguna mestilah dalam lingkungan 3-16 aksara, hanya boleh mengandungi A-Z, a-z, 0-9 dan garis bawah.</string>
     <string name="login_error_exist_username">Nama pengguna ini sudah diguna</string>
-    <string name="login_error_offline_password">Akaun luar talian tidak boleh dimasukkan kata laluan!</string>
     <string name="login_microsoft">Log masuk Microsoft</string>
     <string name="login_select_account">Pilih akaun</string>
     <string name="login_title_no_saved_account">Tiada akaun dijumpai!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Log ranap</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Tersambung</string>
-    <string name="mcl_account_offline">Luar talian</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Bersedia untuk bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan fail cache</string>
