@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email o pangalan</string>
-    <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Panatilihin akong naka-log in</string>
     <string name="login_online_login_label">Mag log in</string>
-    <string name="login_offline_label">Mag-login bilang offline na account</string>
     <string name="login_error_invalid_username">Invalid username, Ang Username ay dapat may 3-16 characters, dapat lamang A-Z, a-z, 0-9 at underscore.</string>
     <string name="login_error_exist_username">Mayroon nang username na ito</string>
-    <string name="login_error_offline_password">Hinde pwedeng magkaroon ng password ang isang Offline Account!</string>
     <string name="login_microsoft">Log in sa Microsoft</string>
     <string name="login_select_account">Piliin ang account</string>
     <string name="login_title_no_saved_account">Walang nahanap na account!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Nakakonekta</string>
-    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Handa nang maglaro ng Minecraft %s</string>
     <string name="mcl_launch_cleancache">Nililinis ang mga file ng cache</string>
