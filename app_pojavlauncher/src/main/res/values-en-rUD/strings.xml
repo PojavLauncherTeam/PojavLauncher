@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">ǝɯɐuɹǝsn ɹo ꞁᴉɐɯƎ</string>
-    <string name="login_online_password_hint">pɹoʍssɐԀ</string>
     <string name="login_online_check_keeplogin">uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ</string>
     <string name="login_online_login_label">uᴉᵷoꞀ</string>
-    <string name="login_offline_label">ʇunoɔɔɐ ǝuᴉꞁɟɟo sɐ uᴉᵷoꞀ</string>
     <string name="login_error_invalid_username">˙ǝɹoɔsɹǝpun puɐ 6-0 \'z-ɐ \'Z-Ɐ suᴉɐʇuoɔ ʎꞁuo pꞁnoɥs \'sɹǝʇɔɐɹɐɥɔ 9⥝-Ɛ ɟo ǝᵷuɐɹ uᴉ ǝq ʇsnɯ ǝɯɐuɹǝs∩ ˙ǝɯɐuɹǝsn pᴉꞁɐʌuI</string>
     <string name="login_error_exist_username">ʇsᴉxǝ ʎpɐǝɹꞁɐ ǝɯɐuɹǝsn sᴉɥ⟘</string>
-    <string name="login_error_offline_password">¡pɹoʍssɐd ǝpnꞁɔuᴉ ʇ,uɐɔ ʇunoɔɔɐ ǝuᴉꞁɟɟO</string>
     <string name="login_microsoft">uᴉᵷoꞁ ʇɟosoɹɔᴉW</string>
     <string name="login_select_account">ʇunoɔɔɐ ʇɔǝꞁǝS</string>
     <string name="login_title_no_saved_account">¡ punoɟ ʇunoɔɔɐ oN</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">ᵷoꞁ ɥsɐɹƆ</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">pǝʇɔǝuuoƆ</string>
-    <string name="mcl_account_offline">ǝuᴉꞁɟɟO</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">%s ʇɟɐɹɔǝuᴉW ʎɐꞁd oʇ ʎpɐǝᴚ</string>
     <string name="mcl_launch_cleancache">sǝꞁᴉɟ ǝɥɔɐɔ ᵷuᴉuɐǝꞁƆ</string>
