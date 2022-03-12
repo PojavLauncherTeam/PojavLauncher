@@ -7,13 +7,9 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-post eller brukernavn</string>
-    <string name="login_online_password_hint">Passord</string>
     <string name="login_online_check_keeplogin">Hold meg pålogget</string>
     <string name="login_online_login_label">Logg inn</string>
-    <string name="login_offline_label">Logg inn som frakoblet konto</string>
     <string name="login_error_exist_username">Dette brukernavn er allerede i bruk</string>
-    <string name="login_error_offline_password">Frakoblet konto kan ikke inkludere passord!</string>
     <string name="login_microsoft">Logg inn med Microsoft</string>
     <string name="login_select_account">Velg konto</string>
     <string name="login_title_no_saved_account">Ingen konto funnet!</string>
@@ -43,7 +39,6 @@
     <string name="mcl_tab_crash">Krasj logg</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Tilkoblet</string>
-    <string name="mcl_account_offline">Ikke tilkoblet</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Klar til å spille Minecraft %s</string>
     <string name="mcl_launch_cleancache">Tømmer cache-filer</string>
