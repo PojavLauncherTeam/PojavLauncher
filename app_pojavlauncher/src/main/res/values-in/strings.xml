@@ -3,18 +3,14 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Mainkan Minecraft: Java Edition di perangkat Anda!</string>
+    <string name="app_motd">Jalankan Minecraft: Java Edition di perangkat Anda!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email atau nama pengguna</string>
-    <string name="login_online_password_hint">Kata sandi</string>
     <string name="login_online_check_keeplogin">Buat saya tetap masuk</string>
     <string name="login_online_login_label">Masuk</string>
-    <string name="login_offline_label">Masuk sebagai akun offline</string>
     <string name="login_error_invalid_username">Nama pengguna tidak valid. Nama pengguna harus berada dalam jangka 3-16 karakter, dan hanya bisa berisi A-Z, a-z, 0-9, dan garis bawah.</string>
     <string name="login_error_exist_username">Nama pengguna ini sudah ada</string>
-    <string name="login_error_offline_password">Akun offline tidak bisa menyertakan kata sandi!</string>
     <string name="login_microsoft">Login Microsoft</string>
     <string name="login_select_account">Pilih akun</string>
     <string name="login_title_no_saved_account">Tidak ada akun yang ditemukan!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Terhubung</string>
-    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Siap untuk bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan file cache</string>
