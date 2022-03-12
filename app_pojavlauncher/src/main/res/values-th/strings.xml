@@ -7,11 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">อีเมลหรือชื่อผู้ใช้</string>
-    <string name="login_online_password_hint">รหัสผ่าน</string>
     <string name="login_online_check_keeplogin">คงฉันไว้ในระบบ</string>
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
-    <string name="login_offline_label">เข้าสู่ระบบในฐานะบัญชีออฟไลน์</string>
     <string name="login_error_exist_username">ชื่อผู้ใช้นี้มีอยู่แล้ว</string>
     <string name="login_microsoft">เข้าสู่ระบบ Microsoft</string>
     <string name="login_select_account">เลือกบัญชี</string>
@@ -35,7 +32,6 @@
     <string name="mcl_tab_news">ข่าวสาร</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
-    <string name="mcl_account_offline">ออฟไลน์</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">พร้อมที่จะเล่น Minecraft %s</string>
     <string name="mcl_launch_cleancache">กำลังล้างแฟ้มแคช</string>
