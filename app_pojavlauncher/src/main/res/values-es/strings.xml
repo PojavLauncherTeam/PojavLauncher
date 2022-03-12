@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email o nombre de usuario</string>
-    <string name="login_online_password_hint">Contraseña</string>
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
-    <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
     <string name="login_error_invalid_username">Nombre de usuario inválido. Los nombres de usuario deben tener entre 3-16 caracteres, y solo contienen: A-Z, a-z, 0-9 y guión bajo.</string>
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
-    <string name="login_error_offline_password">Las cuentas sin conexión no pueden tener contraseña!</string>
     <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
     <string name="login_title_no_saved_account">No se encontraron cuentas!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectado</string>
-    <string name="mcl_account_offline">Desconectado</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Listo para jugar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Limpiando archivos de caché</string>
