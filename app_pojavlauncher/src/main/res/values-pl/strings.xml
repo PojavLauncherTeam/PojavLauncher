@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-mail lub nazwa użytkownika</string>
-    <string name="login_online_password_hint">Hasło</string>
     <string name="login_online_check_keeplogin">Zapamiętaj dane logowania</string>
     <string name="login_online_login_label">Zaloguj się</string>
-    <string name="login_offline_label">Zaloguj jako konto lokalne</string>
     <string name="login_error_invalid_username">Nieprawidłowa nazwa użytkownika. Nazwa użytkownika musi zawierać od 3 do 16 znaków oraz składać się tylko z: A-Z, a-z, 0-9 oraz znaku podkreślenia.</string>
     <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
-    <string name="login_error_offline_password">Konto lokalne nie może zawierać hasła!</string>
     <string name="login_microsoft">Logowanie Microsoft</string>
     <string name="login_select_account">Wybierz konto</string>
     <string name="login_title_no_saved_account">Nie znaleziono żadnego konta!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Połączono</string>
-    <string name="mcl_account_offline">Brak sieci</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s jest gotowy do uruchomienia</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
