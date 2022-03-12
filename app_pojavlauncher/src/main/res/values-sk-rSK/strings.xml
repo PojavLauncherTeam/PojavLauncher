@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-mail alebo užívateľské meno</string>
-    <string name="login_online_password_hint">Heslo</string>
     <string name="login_online_check_keeplogin">Nechaj ma prihláseného</string>
     <string name="login_online_login_label">Prihlásiť</string>
-    <string name="login_offline_label">Prihlásiť sa za offline účet</string>
     <string name="login_error_invalid_username">Neplatné užívateľské meno. Užívateľské meno musí byť v rozsahu 3-16 znakov, obsahovať iba A-Z, a-z, (bez diakritiky) 0-9 a znak podčiarknutia.</string>
     <string name="login_error_exist_username">Toto užívateľské meno už existuje</string>
-    <string name="login_error_offline_password">Offline účet nemôže obsahovať heslo!</string>
     <string name="login_microsoft">Microsoft prihlásenie</string>
     <string name="login_select_account">Vybrať účet</string>
     <string name="login_title_no_saved_account">Žiadny účet sa nenašiel !</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Pripojené</string>
-    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pripravené na spustenie Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čistenie súborov medzipamäte</string>
