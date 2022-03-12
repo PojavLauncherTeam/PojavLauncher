@@ -7,11 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email йәки ҡулланыусы исеме</string>
-    <string name="login_online_password_hint">Серһүҙ</string>
     <string name="login_online_check_keeplogin">Хәтерҙә ҡалдырырға</string>
     <string name="login_online_login_label">Керергә</string>
-    <string name="login_offline_label">Офлайн хисап яҙмаһы менән кереү</string>
     <string name="login_error_exist_username">Был ҡулланыусы исеме инде бар</string>
     <string name="login_microsoft">Microsoft менән керергә</string>
     <string name="login_select_account">Хисап яҙмалар</string>
@@ -31,7 +28,6 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Яңылыҡтар</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_downloading">Йөкләү %s</string>
     <string name="mcl_options">Опциялар</string>
