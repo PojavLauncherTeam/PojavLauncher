@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email або ім\'я користувача</string>
-    <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_check_keeplogin">Запам\'ятати мене</string>
     <string name="login_online_login_label">Увійти</string>
-    <string name="login_offline_label">Увійти як офлайн обліковий запис</string>
     <string name="login_error_invalid_username">Неправильне ім\'я користувача. Ім\'я користувача має бути в довжині від 3-16 символів, повинно містити лише латинські букви, цифри та знак підкреслення.</string>
     <string name="login_error_exist_username">Це ім\'я користувача вже існує</string>
-    <string name="login_error_offline_password">Офлайн обліковий запис не може мати пароль!</string>
     <string name="login_microsoft">Увійти через Microsoft</string>
     <string name="login_select_account">Виберіть обліковий запис</string>
     <string name="login_title_no_saved_account">Не знайдено облікових записів!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Підключено</string>
-    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готовий до запуску</string>
     <string name="mcl_launch_cleancache">Очищення файлів кешу</string>
