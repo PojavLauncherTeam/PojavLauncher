@@ -7,14 +7,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
-    <string name="login_online_password_hint">كلمة المرور</string>
     <string name="login_online_check_keeplogin">أبق تسجيل دخولي</string>
     <string name="login_online_login_label">تسجيل الدخول</string>
-    <string name="login_offline_label">تسجيل الدخول كحساب غير متصل</string>
     <string name="login_error_invalid_username">اسم المستخدم غير صالح. اسم المستخدم يجب أن يكون في نطاق 3-16 حرفاً، يجب أن يحتوي فقط على A-Z، a-z، 0-9 وتسطير سفلي.</string>
     <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
-    <string name="login_error_offline_password">الحسابات غير المتصلة لا يمكنها تضمن كلمة مرور!</string>
     <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
     <string name="login_select_account">اختر الحساب</string>
     <string name="login_title_no_saved_account">لم يتم العثور على الحساب!</string>
@@ -44,7 +40,6 @@
     <string name="mcl_tab_crash">سجل توقف العمل</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">متصل</string>
-    <string name="mcl_account_offline">غير متصل</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
     <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
