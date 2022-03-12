@@ -7,11 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email uel vos</string>
-    <string name="login_online_password_hint">Signum</string>
     <string name="login_online_check_keeplogin">Custodi me apud log</string>
     <string name="login_online_login_label">Login</string>
-    <string name="login_offline_label">Propter quod login offline</string>
     <string name="login_error_exist_username">Hoc nomen iam exi</string>
     <string name="login_select_account">Ob selectos</string>
     <!-- Hint -->
