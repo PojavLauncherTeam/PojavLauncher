@@ -7,11 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Электрон почтасы яки кулланучы исеме</string>
-    <string name="login_online_password_hint">Серсүз</string>
     <string name="login_online_check_keeplogin">Хәтердә калдырырга</string>
     <string name="login_online_login_label">Керергә</string>
-    <string name="login_offline_label">Офлайн аккаунт белән керу</string>
     <string name="login_error_exist_username">Бу кулланучы исеме бар инде</string>
     <string name="login_microsoft">Microsoft аша керергә</string>
     <string name="login_select_account">Аккаунтлар</string>
@@ -42,7 +39,6 @@
     <string name="mcl_tab_crash">Сафтан чыгарулар журналы</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Тоташкан</string>
-    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s кушылуга әзер</string>
     <string name="mcl_launch_cleancache">Кеш-файллар бетерүе</string>
