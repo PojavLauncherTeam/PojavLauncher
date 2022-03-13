@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Yerel kullanıcı adı</string>
     <string name="login_online_check_keeplogin">Oturumumu açık tut</string>
     <string name="login_online_login_label">Giriş yap</string>
     <string name="login_error_invalid_username">Geçersiz kullanıcı adı. Kullanıcı adı 3-16 karakter aralığında olmalı, sadece A-Z, a-z, 0-9 ve alt çizgi içermelidir.</string>
@@ -40,12 +41,14 @@
     <string name="mcl_tab_crash">Çökme günlüğü</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Bağlandı</string>
+    <string name="mcl_account_local">Yerel</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s başlamaya hazır</string>
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
     <string name="mcl_launch_downloading">%s indiriliyor</string>
     <string name="mcl_launch_downloading_progress">"%s indiriliyor (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
+    <string name="mcl_launch_error_localmode">Yerel bir hesapla giriş yapıldığında Minecraft yasal olarak yüklenemez. Lütfen yüklemek için çevrimiçi bir hesaba giriş yapın.</string>
     <string name="mcl_options">Seçenekler</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
     <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümanlarla)</string>
