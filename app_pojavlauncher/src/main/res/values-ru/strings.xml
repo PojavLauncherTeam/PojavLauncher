@@ -126,7 +126,7 @@
     <string name="mcl_profile_editor_save">сохранить</string>
     <string name="profedit_selected_version">Выбранная версия: %s</string>
     <string name="profedit_selected_profile">Выбранный профиль: %s</string>
-    <string name="global_new">Новое</string>
+    <string name="global_new">Создать</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошел сбой приложения/игры с кодом %d</string>
     <string name="mcn_exit_call">Выйти</string>
