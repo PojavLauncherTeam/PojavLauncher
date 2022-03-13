@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Username lokal</string>
     <string name="login_online_check_keeplogin">Buat saya tetap masuk</string>
     <string name="login_online_login_label">Masuk</string>
     <string name="login_error_invalid_username">Nama pengguna tidak valid. Nama pengguna harus berada dalam jangka 3-16 karakter, dan hanya bisa berisi A-Z, a-z, 0-9, dan garis bawah.</string>
@@ -40,12 +41,14 @@
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Terhubung</string>
+    <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Siap untuk bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan file cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_downloading_progress">"Mengunduh %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bersiap-siap untuk mengunduh sumber</string>
+    <string name="mcl_launch_error_localmode">Minecraft tidak dapat dipasang secara sah dalam hukum dengan sebuah akun lokal. Mohon ganti ke sebuah akun online untuk lanjut.</string>
     <string name="mcl_options">Opsi</string>
     <string name="mcl_option_modinstall">Luncurkan sebuah installer mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Luncurkan sebuah installer mod (dengan argumen buatan sendiri)</string>
