@@ -41,12 +41,14 @@
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connesso</string>
+    <string name="mcl_account_local">Locale</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s pronto</string>
     <string name="mcl_launch_cleancache">Pulizia dei file di cache in corso</string>
     <string name="mcl_launch_downloading">Scaricando %s</string>
     <string name="mcl_launch_downloading_progress">"Scaricando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
+    <string name="mcl_launch_error_localmode">Minecraft non può essere legalmente installato quando loggati con un account locale. Per favore passa ad un account online premium per continuare.</string>
     <string name="mcl_options">Impostazioni</string>
     <string name="mcl_option_modinstall">Avvia un mod installer (Forge, LabyMod, Fabric, ecc...)</string>
     <string name="mcl_option_modinstallwitharg">Avvia un mod installer (personalizzato)</string>
