@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Tên tài khoản nội bộ</string>
     <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập </string>
     <string name="login_online_login_label">Đăng nhập</string>
     <string name="login_error_invalid_username">Tên người dùng không hợp lệ. Nó phải có từ 3-16 kí tự, và chỉ bao gồm các kí tự A-Z, a-z, 0-9 và dấu gạch dưới.</string>
@@ -40,12 +41,14 @@
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Đã kết nối</string>
+    <string name="mcl_account_local">Nội bộ</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Đang làm sạch bộ nhớ đệm</string>
     <string name="mcl_launch_downloading">Đang tải xuống %s</string>
     <string name="mcl_launch_downloading_progress">"Đang tải %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
+    <string name="mcl_launch_error_localmode">Minecraft không thể được cài đặt một cách hợp pháp khi đăng nhập với một tài khoản nội bộ. Chuyển qua một tài khoản đã kết nối để tiếp tục.</string>
     <string name="mcl_options">Tùy chọn</string>
     <string name="mcl_option_modinstall">Chạy một trình cài đặt mod (Forge, LabyMod, Fabric,...)</string>
     <string name="mcl_option_modinstallwitharg">Chạy một trình cài đặt mod (với chỉ số tùy chỉnh)</string>
