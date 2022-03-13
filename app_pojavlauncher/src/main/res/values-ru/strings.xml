@@ -48,7 +48,7 @@
     <string name="mcl_launch_downloading">Загрузка %s</string>
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Подготовка к загрузке ресурсов</string>
-    <string name="mcl_launch_error_localmode">Minecraft не может быть легально установлен при входе в систему с локальной учетной записью. Чтобы продолжить, переключитесь на онлайн-аккаунт.</string>
+    <string name="mcl_launch_error_localmode">Minecraft не может быть легально установлен с локальной учётной записью. Чтобы продолжить, переключитесь на онлайн учётную запись.</string>
     <string name="mcl_options">Опции</string>
     <string name="mcl_option_modinstall">Запустить установщик мода (Forge, LabyMod, Fabric и т. п.)</string>
     <string name="mcl_option_modinstallwitharg">Запустить установщик мода (с пользовательскими аргументами)</string>
@@ -106,7 +106,7 @@
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
     <string name="global_waiting">Подождите</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Приложение/Игра завершилась с кодом %d, проверьте latestlog.txt для получения более подробной информации.</string>
+    <string name="mcn_exit_title">Произошёл собой приложения/игры с кодом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
@@ -141,7 +141,7 @@
     <string name="import_control_label">Импортирование управления</string>
     <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
     <string name="import_control_import_button">импортировать управление</string>
-    <string name="import_control_verifying_file">Идёт проверка файла; пожалуйста, подождите и попробуйте снова…</string>
+    <string name="import_control_verifying_file">Идёт проверка файла. Пожалуйста, подождите и попробуйте снова…</string>
     <string name="import_control_invalid_name">Недопустимое имя файла или файл с таким именем уже существует</string>
     <string name="import_control_done">Импортирование завершено</string>
     <!--
@@ -240,11 +240,11 @@
     <string name="preference_java_title">Корректировка Java</string>
     <string name="preference_java_description">Версии Java, аргументы JVM и объём ОЗУ</string>
     <string name="preference_misc_title">Другие настройки</string>
-    <string name="preference_misc_description">Список версий и проверки библиотек</string>
+    <string name="preference_misc_description">Список версий и проверка библиотек</string>
     <string name="preference_experimental_title">Экспериментальные штуки</string>
     <string name="preference_experimental_description">Используйте эти функции с осторожностью; поддержка не предоставляется.</string>
     <string name="preference_sustained_performance_title">Включить режим стабилизации производительности</string>
-    <string name="preference_sustained_performance_description">Уменьшает троллинг от нагрева путём уменьшения производительности</string>
+    <string name="preference_sustained_performance_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
     <string name="preference_back_title">Вернуться назад</string>
     <string name="gles_hack_title">Сокращение GL4ES</string>
     <string name="gles_hack_none">Не сжимать текстуры</string>
