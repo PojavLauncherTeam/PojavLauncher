@@ -25,8 +25,8 @@ Java_net_sorenon_mcxr_play_MCXRNativeLoad_getJVMPtr(JNIEnv *env, jclass clazz) {
 
 JNIEXPORT JNICALL
 extern "C" void
-Java_net_sorenon_mcxr_play_MCXRNativeLoad_renderImage(JNIEnv *env, jclass clazz, jint colorAttachment) {
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachment, 0);
+Java_net_sorenon_mcxr_play_MCXRNativeLoad_renderImage(JNIEnv *env, jclass clazz, jint colorAttachment, jint index) {
+    glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, colorAttachment, 0, index)
 }
 
 JNIEXPORT JNICALL
