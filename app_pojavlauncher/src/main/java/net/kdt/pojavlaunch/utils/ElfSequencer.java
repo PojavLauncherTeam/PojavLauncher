@@ -8,40 +8,38 @@ import net.fornwall.jelf.ElfDynamicSection;
 import net.fornwall.jelf.ElfFile;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ElfSequencer {
-    static final List<String> EXCLUDED_LIBRARIES = Arrays.asList(
-            "ld-android.so"
-    );
-
-    List<String> alreadyLoadedLibs = new ArrayList<>();
-    List<ArrayMap<String, File>> dirCache = new ArrayList<>();
+    private final List<String> alreadyLoadedLibs = new ArrayList<>(Collections.singletonList( // Automatically include ld-android.so
+            "ld-android.so" //Most system libraries, for some reason, have this file in DYNAMIC, yet it's not loadable due to Android loader namespaces
+    )); // Since it's technically already loaded, we add it here by default
+    private final List<ArrayMap<String, File>> dirCache = new ArrayList<>(); //Directory cache - here are all the files in loader path. Well, they would appear there after class' construction
+    /*
+     * Constructs an ElfSequencer with specified search paths. Search paths should be a list of directory paths separated by :
+     */
     public ElfSequencer(String libraryPaths) {
-        for(String s : libraryPaths.split(":")) {
+        for(String path : libraryPaths.split(":")) {
             ArrayMap<String, File> caching = new ArrayMap<>();
-            File[] filesInDir = new File(s).listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File pathname) {
-                    return pathname.isFile() && pathname.exists();
-                }
-            });
+            File[] filesInDir = new File(path).listFiles((pathname)->pathname.isFile() && pathname.exists());
             if(filesInDir != null) {
-                for (File f : filesInDir) {
-                    caching.put(f.getName(), f);
+                for (File file : filesInDir) {
+                    caching.put(file.getName(), file);
                 }
                 dirCache.add(caching);
             }else{
-                Log.w("ElfLoader","Omitted directory during initialization: "+s);
+                Log.w("ElfLoader","Omitted directory during initialization: "+path);
             }
         }
     }
+    /*
+     * Loads a library by it's name, searching in the specified search paths.
+     */
     public void loadLib(String libName) throws IOException {
-        if(alreadyLoadedLibs.contains(libName) || EXCLUDED_LIBRARIES.contains(libName))
+        if(alreadyLoadedLibs.contains(libName))
             return;
         Log.i("ElfLoader", "Loading library "+libName);
         File library = null;
@@ -56,10 +54,10 @@ public class ElfSequencer {
             return;
         }
         ElfFile file = ElfFile.from(library);
-        ElfDynamicSection section = (ElfDynamicSection) file.firstSectionByType(ElfDynamicSection.class);
+        ElfDynamicSection section = file.firstSectionByType(ElfDynamicSection.class);
         List<String> needed = section.getNeededLibraries();
-        for(String _libName : needed) {
-            loadLib(_libName);
+        for(String neededLibrary : needed) {
+            loadLib(neededLibrary);
         }
         JREUtils.dlopen(library.getAbsolutePath());
         alreadyLoadedLibs.add(libName);

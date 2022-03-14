@@ -70,21 +70,21 @@ public class JREUtils {
     }
 
     public static void initJavaRuntime() {
-        ElfSequencer seq = new ElfSequencer(LD_LIBRARY_PATH+":"+jvmLibraryPath);
+        ElfSequencer sequencer = new ElfSequencer(LD_LIBRARY_PATH+":"+jvmLibraryPath);
         try {
-            seq.loadLib("libjli.so");
-            seq.loadLib("libjvm.so");
-            seq.loadLib("libverify.so");
-            seq.loadLib("libjava.so");
-            // seq.loadLib("libjsig.so");
-            seq.loadLib("libnet.so");
-            seq.loadLib("libnio.so");
-            seq.loadLib("libawt.so");
-            seq.loadLib("libawt_headless.so");
-            seq.loadLib("libfreetype.so");
-            seq.loadLib("libfontmanager.so");
-            for(File f : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
-                seq.loadLib(f.getName());
+            sequencer.loadLib("libjli.so");
+            sequencer.loadLib("libjvm.so");
+            sequencer.loadLib("libverify.so");
+            sequencer.loadLib("libjava.so");
+            // sequencer.loadLib("libjsig.so");
+            sequencer.loadLib("libnet.so");
+            sequencer.loadLib("libnio.so");
+            sequencer.loadLib("libawt.so");
+            sequencer.loadLib("libawt_headless.so");
+            sequencer.loadLib("libfreetype.so");
+            sequencer.loadLib("libfontmanager.so");
+            for(File library : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
+                sequencer.loadLib(library.getName());
             }
         }catch (IOException e) {
             e.printStackTrace();
