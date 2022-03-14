@@ -1083,57 +1083,62 @@ public class GLFW
             }
             
             for (Long ptr : mGLFWWindowMap.keySet()) {
-                switch (dataArr[0]) {
-                    case CallbackBridge.EVENT_TYPE_CHAR:
-                        if (mGLFWCharCallback != null) {
-                            mGLFWCharCallback.invoke(ptr, dataArr[1]);
-                        }
-                        break;
-                    case CallbackBridge.EVENT_TYPE_CHAR_MODS:
-                        if (mGLFWCharModsCallback != null) {
-                            mGLFWCharModsCallback.invoke(ptr, dataArr[1], dataArr[2]);
-                        }
-                        break;
-                    case CallbackBridge.EVENT_TYPE_CURSOR_ENTER:
-                        if (mGLFWCursorEnterCallback != null) {
-                            mGLFWCursorEnterCallback.invoke(ptr, dataArr[1] == 1);
-                        }
-                        break;
-                    case CallbackBridge.EVENT_TYPE_KEY:
-                        if (mGLFWKeyCallback != null) {
-                            keyDownBuffer[Math.max(0, dataArr[1]-31)]=(byte)(int)dataArr[3];
-                            mGLFWKeyCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3], dataArr[4]);
-                        }
-                        break;
-                    case CallbackBridge.EVENT_TYPE_MOUSE_BUTTON:
-                        if (mGLFWMouseButtonCallback != null) {
-                            mGLFWMouseButtonCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3]);
-                        }
-                        break;
-                    case CallbackBridge.EVENT_TYPE_SCROLL:
-                        if (mGLFWScrollCallback != null) {
-                            mGLFWScrollCallback.invoke(ptr, dataArr[1], dataArr[2]);
-                        }
-                        break;
-                    case CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE:
-                    case CallbackBridge.EVENT_TYPE_WINDOW_SIZE:
-                        try {
-                            internalChangeMonitorSize(dataArr[1], dataArr[2]);
-                            glfwSetWindowSize(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                            if (dataArr[0] == CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE && mGLFWFramebufferSizeCallback != null) {
-                                mGLFWFramebufferSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                            } else if (dataArr[0] == CallbackBridge.EVENT_TYPE_WINDOW_SIZE && mGLFWWindowSizeCallback != null) {
-                                mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                            }
-                        } catch (Throwable th) {
-                            // Some Minecraft versions cause a NPE when setting size, so we will have to ignore them to make game alive
-                            th.printStackTrace();
-                        }
-                        break;
-                    default:
-                        System.err.println("GLFWEvent: unknown callback type " + dataArr[0]);
-                        break;
-                }
+            	try {
+					switch (dataArr[0]) {
+						case CallbackBridge.EVENT_TYPE_CHAR:
+							if (mGLFWCharCallback != null) {
+								mGLFWCharCallback.invoke(ptr, dataArr[1]);
+							}
+							break;
+						case CallbackBridge.EVENT_TYPE_CHAR_MODS:
+							if (mGLFWCharModsCallback != null) {
+								mGLFWCharModsCallback.invoke(ptr, dataArr[1], dataArr[2]);
+							}
+							break;
+						case CallbackBridge.EVENT_TYPE_CURSOR_ENTER:
+							if (mGLFWCursorEnterCallback != null) {
+								mGLFWCursorEnterCallback.invoke(ptr, dataArr[1] == 1);
+							}
+							break;
+						case CallbackBridge.EVENT_TYPE_KEY:
+							if (mGLFWKeyCallback != null) {
+								keyDownBuffer[Math.max(0, dataArr[1]-31)]=(byte)(int)dataArr[3];
+								mGLFWKeyCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3], dataArr[4]);
+							}
+							break;
+						case CallbackBridge.EVENT_TYPE_MOUSE_BUTTON:
+							if (mGLFWMouseButtonCallback != null) {
+								mGLFWMouseButtonCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3]);
+							}
+							break;
+						case CallbackBridge.EVENT_TYPE_SCROLL:
+							if (mGLFWScrollCallback != null) {
+								mGLFWScrollCallback.invoke(ptr, dataArr[1], dataArr[2]);
+							}
+							break;
+						case CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE:
+						case CallbackBridge.EVENT_TYPE_WINDOW_SIZE:
+							try {
+								internalChangeMonitorSize(dataArr[1], dataArr[2]);
+								glfwSetWindowSize(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+								if (dataArr[0] == CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE && mGLFWFramebufferSizeCallback != null) {
+									mGLFWFramebufferSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+								} else if (dataArr[0] == CallbackBridge.EVENT_TYPE_WINDOW_SIZE && mGLFWWindowSizeCallback != null) {
+									mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+								}
+							} catch (Throwable th) {
+								// Some Minecraft versions cause a NPE when setting size, so we will have to ignore them to make game alive
+								th.printStackTrace();
+							}
+							break;
+						default:
+							System.err.println("GLFWEvent: unknown callback type " + dataArr[0]);
+							break;
+					}
+				}catch (Throwable throwable){
+            		throwable.printStackTrace();
+				}
+
             }
         }
         
@@ -1142,7 +1147,12 @@ public class GLFW
             mGLFWCursorLastY = mGLFWCursorY;
             for (Long ptr : mGLFWWindowMap.keySet()) {
                 if (!mGLFWIsGrabbing && mGLFWWindowSizeCallback != null) {
-                    mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                	try {
+						mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+					}catch (Throwable throwable){
+                		throwable.printStackTrace();
+					}
+
                 }
                 mGLFWCursorPosCallback.invoke(ptr, mGLFWCursorX, mGLFWCursorY);
             }
