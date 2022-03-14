@@ -159,14 +159,20 @@ void closeGLFWWindow() {
     exit(-1);
 }
 
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_nativeSetUseInputStackQueue(JNIEnv *env, jclass clazz,
+                                                               jboolean use_input_stack_queue) {
+    isUseStackQueueCall = (int) use_input_stack_queue;
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueueBool) {
 #ifdef DEBUG
-    LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueue);
+    LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueueBool);
 #endif
 
     jboolean result;
 
-    isUseStackQueueCall = (int) isUseStackQueueBool;
+    //isUseStackQueueCall = (int) isUseStackQueueBool;
     if (isAndroid) {
         result = attachThread(true, &runtimeJNIEnvPtr_ANDROID);
     } else {
@@ -256,7 +262,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorEnter(
 }
 */
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JNIEnv* env, jclass clazz, jfloat x, jfloat y) {
+#ifdef DEBUG
+    LOGD("Sending cursor position \n");
+#endif
     if (GLFW_invoke_CursorPos && isInputReady) {
+#ifdef DEBUG
+        LOGD("GLFW_invoke_CursorPos && isInputReady \n");
+#endif
         if (!isCursorEntered) {
             if (GLFW_invoke_CursorEnter) {
                 isCursorEntered = true;
@@ -380,4 +392,3 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
         (jlong) showingWindow, attrib, value
     );
 }
-
