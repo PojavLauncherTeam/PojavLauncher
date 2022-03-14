@@ -2,12 +2,24 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 group = 'org.lwjgl.glfw'
-version = '3.2.3'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+//version = '3.2.3'
+//sourceCompatibility = 1.8
+//targetCompatibility = 1.8
 
 jar {
-    baseName = project.name
+    //baseName = project.name
+    baseName = "lwjgl-glfw-classes"
+    destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/components/lwjgl3/"))
+
+    // Auto update the version with a timestamp so the project jar gets updated by Pojav
+    File versionFile = file("../app_pojavlauncher/src/main/assets/components/lwjgl3/version")
+    versionFile.write(String.valueOf(new Date().getTime()))
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
 }
 
 repositories {
