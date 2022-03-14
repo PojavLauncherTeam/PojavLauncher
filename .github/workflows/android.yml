@@ -166,6 +166,17 @@ jobs:
           branch: master
           name: lazydfu
 
+      - name: Collect fabric-api
+          uses: dawidd6/action-download-artifact@v2
+          with:
+            github_token: ${{secrets.GITHUB_TOKEN}}
+            workflow: build.yml
+            path: app_pojavlauncher/src/main/assets/artifacts
+            workflow_conclusion: success
+            repo: QuestCraftPlusPlus/fabric
+            branch: 1.18.2
+            name: fabric-api
+
       - name: Build APK with Gradle
         run: |
           chmod +x scripts/languagelist_updater.sh
