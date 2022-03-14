@@ -131,17 +131,18 @@
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/mineButton3"
-        android:layout_width="307dp"
-        android:layout_height="53dp"
+        android:layout_width="302dp"
+        android:layout_height="41dp"
         android:background="@drawable/mine_button_background"
         android:onClick="loginMicrosoft"
         android:text="@string/login_microsoft"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/login_menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.917" />
+        app:layout_constraintEnd_toEndOf="@+id/login_menu"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/login_menu"
+        app:layout_constraintTop_toTopOf="@+id/login_menu"
+        app:layout_constraintVertical_bias="0.792" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -151,8 +152,10 @@
         android:scaleY="0.5"
         app:layout_constraintBottom_toBottomOf="@+id/login_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.872"
         app:srcCompat="@drawable/questcraftxp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
