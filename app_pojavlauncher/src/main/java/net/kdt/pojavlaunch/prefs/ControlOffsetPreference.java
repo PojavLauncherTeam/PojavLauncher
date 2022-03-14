@@ -20,9 +20,7 @@ import net.kdt.pojavlaunch.R;
 /** Custom preference class displaying a dialog */
 public class ControlOffsetPreference extends Preference {
 
-    private AlertDialog preferenceDialog;
-
-
+    private AlertDialog mPreferenceDialog;
 
     public ControlOffsetPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -34,43 +32,19 @@ public class ControlOffsetPreference extends Preference {
         init();
     }
 
-
-    private void init(){
-        // Setup visual values
-        if(getTitle() == null){
-            setTitle(R.string.preference_control_offset_title);
-            setSummary(R.string.preference_control_offset_description);
-        }
-        if(getIcon() == null){
-            setIcon(android.R.drawable.radiobutton_off_background);
-        }
-
-        // Prepare Alert dialog
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
-        dialogBuilder.setView(R.layout.control_offset_preference_dialog);
-        dialogBuilder.setTitle(getContext().getString(R.string.control_offset_title));
-
-        dialogBuilder.setPositiveButton(android.R.string.ok, null);
-        dialogBuilder.setNegativeButton(android.R.string.cancel, null);
-
-        preferenceDialog = dialogBuilder.create();
-
-
-    }
-
     @Override
     protected void onClick() {
-        preferenceDialog.show();
+        mPreferenceDialog.show();
 
-        SeekBar topOffsetSeekbar = preferenceDialog.findViewById(R.id.control_offset_top_seekbar);
-        SeekBar rightOffsetSeekbar = preferenceDialog.findViewById(R.id.control_offset_right_seekbar);
-        SeekBar bottomOffsetSeekbar = preferenceDialog.findViewById(R.id.control_offset_bottom_seekbar);
-        SeekBar leftOffsetSeekbar = preferenceDialog.findViewById(R.id.control_offset_left_seekbar);
+        SeekBar topOffsetSeekbar = mPreferenceDialog.findViewById(R.id.control_offset_top_seekbar);
+        SeekBar rightOffsetSeekbar = mPreferenceDialog.findViewById(R.id.control_offset_right_seekbar);
+        SeekBar bottomOffsetSeekbar = mPreferenceDialog.findViewById(R.id.control_offset_bottom_seekbar);
+        SeekBar leftOffsetSeekbar = mPreferenceDialog.findViewById(R.id.control_offset_left_seekbar);
 
-        TextView topOffsetTextView = preferenceDialog.findViewById(R.id.control_offset_top_textview);
-        TextView rightOffsetTextView = preferenceDialog.findViewById(R.id.control_offset_right_textview);
-        TextView bottomOffsetTextView = preferenceDialog.findViewById(R.id.control_offset_bottom_textview);
-        TextView leftOffsetTextView = preferenceDialog.findViewById(R.id.control_offset_left_textview);
+        TextView topOffsetTextView = mPreferenceDialog.findViewById(R.id.control_offset_top_textview);
+        TextView rightOffsetTextView = mPreferenceDialog.findViewById(R.id.control_offset_right_textview);
+        TextView bottomOffsetTextView = mPreferenceDialog.findViewById(R.id.control_offset_bottom_textview);
+        TextView leftOffsetTextView = mPreferenceDialog.findViewById(R.id.control_offset_left_textview);
 
         SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -118,15 +92,36 @@ public class ControlOffsetPreference extends Preference {
         seekBarChangeListener.onProgressChanged(leftOffsetSeekbar, PREF_CONTROL_LEFT_OFFSET, false);
 
         // Custom writing to preferences
-        preferenceDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
+        mPreferenceDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
             DEFAULT_PREF.edit().putInt("controlTopOffset", topOffsetSeekbar.getProgress()).apply();
             DEFAULT_PREF.edit().putInt("controlRightOffset", rightOffsetSeekbar.getProgress()).apply();
             DEFAULT_PREF.edit().putInt("controlBottomOffset", bottomOffsetSeekbar.getProgress()).apply();
             DEFAULT_PREF.edit().putInt("controlLeftOffset", leftOffsetSeekbar.getProgress()).apply();
 
 
-            preferenceDialog.dismiss();
+            mPreferenceDialog.dismiss();
         });
+    }
+
+    private void init(){
+        // Setup visual values
+        if(getTitle() == null){
+            setTitle(R.string.preference_control_offset_title);
+            setSummary(R.string.preference_control_offset_description);
+        }
+        if(getIcon() == null){
+            setIcon(android.R.drawable.radiobutton_off_background);
+        }
+
+        // Prepare Alert dialog
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        dialogBuilder.setView(R.layout.dialog_control_offset_preference);
+        dialogBuilder.setTitle(getContext().getString(R.string.control_offset_title));
+
+        dialogBuilder.setPositiveButton(android.R.string.ok, null);
+        dialogBuilder.setNegativeButton(android.R.string.cancel, null);
+
+        mPreferenceDialog = dialogBuilder.create();
     }
 
 }

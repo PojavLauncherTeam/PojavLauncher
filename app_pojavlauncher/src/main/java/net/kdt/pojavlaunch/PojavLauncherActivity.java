@@ -84,7 +84,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.launcher_main_v4);
+        setContentView(R.layout.activity_pojav_launcher);
 
         //Boilerplate linking/initialisation
         viewPager = findViewById(R.id.launchermainTabPager);
@@ -228,7 +228,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             accountFaceImageView.setImageBitmap(mProfile.getSkinFace());
 
             //TODO FULL BACKGROUND LOGIN
-            tvConnectStatus.setText(mProfile.accessToken.equals("0") ? R.string.mcl_account_offline : R.string.mcl_account_connected);
+            tvConnectStatus.setText(mProfile.accessToken.equals("0") ? R.string.mcl_account_local : R.string.mcl_account_connected);
         } catch(Exception e) {
             mProfile = new MinecraftAccount();
             Tools.showError(this, e, true);

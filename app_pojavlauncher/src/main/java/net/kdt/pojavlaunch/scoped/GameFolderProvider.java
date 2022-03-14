@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class GameFolderProvider extends DocumentsProvider {
-    static File baseDir = new File(Tools.DIR_GAME_HOME);
+    static File sBaseDir = new File(Tools.DIR_GAME_HOME);
     private static final String[] DEFAULT_ROOT_PROJECTION = new String[]{
             Root.COLUMN_ROOT_ID,
             Root.COLUMN_MIME_TYPES,
@@ -47,13 +47,13 @@ public class GameFolderProvider extends DocumentsProvider {
     public Cursor queryRoots(String[] projection) throws FileNotFoundException {
         final MatrixCursor result = new MatrixCursor(projection != null ? projection : DEFAULT_ROOT_PROJECTION);
         final MatrixCursor.RowBuilder row = result.newRow();
-        row.add(Root.COLUMN_ROOT_ID, baseDir.getAbsolutePath());
-        row.add(Root.COLUMN_DOCUMENT_ID, baseDir.getAbsolutePath());
+        row.add(Root.COLUMN_ROOT_ID, sBaseDir.getAbsolutePath());
+        row.add(Root.COLUMN_DOCUMENT_ID, sBaseDir.getAbsolutePath());
         row.add(Root.COLUMN_SUMMARY, null);
         row.add(Root.COLUMN_FLAGS, Root.FLAG_SUPPORTS_CREATE | Root.FLAG_SUPPORTS_RECENTS | Root.FLAG_SUPPORTS_SEARCH);
         row.add(Root.COLUMN_TITLE, getContext().getString(R.string.app_name));
         row.add(Root.COLUMN_MIME_TYPES, "*/*");
-        row.add(Root.COLUMN_AVAILABLE_BYTES, baseDir.getFreeSpace());
+        row.add(Root.COLUMN_AVAILABLE_BYTES, sBaseDir.getFreeSpace());
         row.add(Root.COLUMN_ICON, R.mipmap.ic_launcher);
         return result;
     }
@@ -112,7 +112,7 @@ public class GameFolderProvider extends DocumentsProvider {
             final File file = pending.removeFirst();
             boolean isInsideGameDir;
             try {
-                isInsideGameDir = file.getCanonicalPath().startsWith(baseDir.getCanonicalPath());
+                isInsideGameDir = file.getCanonicalPath().startsWith(sBaseDir.getCanonicalPath());
             } catch (IOException e) {
                 isInsideGameDir = true;
             }

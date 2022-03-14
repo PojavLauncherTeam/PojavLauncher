@@ -11,13 +11,11 @@ import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.kdt.pojavlaunch.BaseMainActivity;
-import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
+import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
 
 import org.lwjgl.glfw.CallbackBridge;
@@ -38,7 +36,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     }
 
 
-    private boolean isDoingInternalChanges = false;
+    private boolean mIsDoingInternalChanges = false;
 
     /**
      * We take the new chars, and send them to the game.
@@ -48,10 +46,10 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
-        if(isDoingInternalChanges)return;
+        if(mIsDoingInternalChanges)return;
 
-        for(int i=0; i< lengthBefore; ++i){
-            CallbackBridge.sendKeycode(LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
+        for(int i=0; i < lengthBefore; ++i){
+            CallbackBridge.sendKeycode(LwjglGlfwKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
         }
         for(int i=start, count = 0; count < lengthAfter; ++i){
             CallbackBridge.sendChar(text.charAt(i), 0);
@@ -115,20 +113,12 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      */
     @SuppressLint("SetTextI18n")
     public void clear(){
-        isDoingInternalChanges = true;
+        mIsDoingInternalChanges = true;
         //Braille space, doesn't trigger keyboard auto-complete
         //replacing directly the text without though setText avoids notifying changes
         setText("                              ");
         setSelection(getText().length());
-        isDoingInternalChanges = false;
-    }
-
-    /**
-     * Send the enter key.
-     */
-    private void sendEnter(){
-        sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ENTER);
-        clear();
+        mIsDoingInternalChanges = false;
     }
 
     /**
@@ -152,6 +142,13 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         setEnabled(false);
     }
 
+    /**
+     * Send the enter key.
+     */
+    private void sendEnter(){
+        sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ENTER);
+        clear();
+    }
 
     /**
      * This function deals with anything that has to be executed when the constructor is called

@@ -12,12 +12,12 @@ import java.lang.ref.WeakReference;
  */
 @Keep
 public class Logger {
-    private static Logger loggerSingleton = null;
+    private static Logger sLoggerSingleton = null;
 
     /* Instance variables */
-    private final File logFile;
-    private PrintStream logStream;
-    private WeakReference<eventLogListener> logListenerWeakReference = null;
+    private final File mLogFile;
+    private PrintStream mLogStream;
+    private WeakReference<eventLogListener> mLogListenerWeakReference = null;
 
     /* No public construction */
     private Logger(){
@@ -25,25 +25,25 @@ public class Logger {
     }
 
     private Logger(String fileName){
-        logFile = new File(Tools.DIR_GAME_HOME, fileName);
+        mLogFile = new File(Tools.DIR_GAME_HOME, fileName);
         // Make a new instance of the log file
-        logFile.delete();
+        mLogFile.delete();
         try {
-            logFile.createNewFile();
-            logStream = new PrintStream(logFile.getAbsolutePath());
+            mLogFile.createNewFile();
+            mLogStream = new PrintStream(mLogFile.getAbsolutePath());
         }catch (IOException e){e.printStackTrace();}
 
     }
 
     public static Logger getInstance(){
-        if(loggerSingleton == null){
+        if(sLoggerSingleton == null){
             synchronized(Logger.class){
-                if(loggerSingleton == null){
-                    loggerSingleton = new Logger();
+                if(sLoggerSingleton == null){
+                    sLoggerSingleton = new Logger();
                 }
             }
         }
-        return loggerSingleton;
+        return sLoggerSingleton;
     }
 
 
@@ -55,22 +55,22 @@ public class Logger {
 
     /** Print the text to the log file, no china censoring there */
     public void appendToLogUnchecked(String text){
-        logStream.println(text);
+        mLogStream.println(text);
         notifyLogListener(text);
     }
 
     /** Reset the log file, effectively erasing any previous logs */
     public void reset(){
         try{
-            logFile.delete();
-            logFile.createNewFile();
-            logStream = new PrintStream(logFile.getAbsolutePath());
+            mLogFile.delete();
+            mLogFile.createNewFile();
+            mLogStream = new PrintStream(mLogFile.getAbsolutePath());
         }catch (IOException e){ e.printStackTrace();}
     }
 
     /** Disables the printing */
     public void shutdown(){
-        logStream.close();
+        mLogStream.close();
     }
 
     /**
@@ -91,15 +91,15 @@ public class Logger {
 
     /** Link a log listener to the logger */
     public void setLogListener(eventLogListener logListener){
-        this.logListenerWeakReference = new WeakReference<>(logListener);
+        this.mLogListenerWeakReference = new WeakReference<>(logListener);
     }
 
     /** Notifies the event listener, if it exists */
     private void notifyLogListener(String text){
-        if(logListenerWeakReference == null) return;
-        eventLogListener logListener = logListenerWeakReference.get();
+        if(mLogListenerWeakReference == null) return;
+        eventLogListener logListener = mLogListenerWeakReference.get();
         if(logListener == null){
-            logListenerWeakReference = null;
+            mLogListenerWeakReference = null;
             return;
         }
         logListener.onEventLogged(text);

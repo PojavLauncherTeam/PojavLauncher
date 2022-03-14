@@ -30,8 +30,7 @@
 
 package net.kdt.pojavlaunch;
 
-public class LWJGLGLFWKeycode
-{
+public class LwjglGlfwKeycode {
     /** The unknown key. */
     public static final short GLFW_KEY_UNKNOWN = 0; // should be -1
 
@@ -195,5 +194,8 @@ public class LWJGLGLFWKeycode
     GLFW_MOUSE_BUTTON_LEFT   = GLFW_MOUSE_BUTTON_1,
     GLFW_MOUSE_BUTTON_RIGHT  = GLFW_MOUSE_BUTTON_2,
     GLFW_MOUSE_BUTTON_MIDDLE = GLFW_MOUSE_BUTTON_3;
-    
+
+    public static final int
+    GLFW_VISIBLE                 = 0x20004,
+    GLFW_HOVERED                 = 0x2000B;
 }

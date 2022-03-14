@@ -5,7 +5,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import static android.view.InputDevice.KEYBOARD_TYPE_NON_ALPHABETIC;
-import static android.view.InputDevice.SOURCE_DPAD;
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
 import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
 import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
@@ -14,7 +13,7 @@ import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
 
 public class GamepadDpad {
-    private int lastKeycode = KEYCODE_DPAD_CENTER;
+    private int mLastKeycode = KEYCODE_DPAD_CENTER;
 
     /**
      * Convert the event to a 2 int array: keycode and keyAction, similar to a keyEvent
@@ -30,22 +29,22 @@ public class GamepadDpad {
         // Check if the AXIS_HAT_X value is -1 or 1, and set the D-pad
         // LEFT and RIGHT direction accordingly.
         if (Float.compare(xaxis, -1.0f) == 0) {
-            lastKeycode = KEYCODE_DPAD_LEFT;
+            mLastKeycode = KEYCODE_DPAD_LEFT;
         } else if (Float.compare(xaxis, 1.0f) == 0) {
-            lastKeycode = KEYCODE_DPAD_RIGHT;
+            mLastKeycode = KEYCODE_DPAD_RIGHT;
         }
         // Check if the AXIS_HAT_Y value is -1 or 1, and set the D-pad
         // UP and DOWN direction accordingly.
         else if (Float.compare(yaxis, -1.0f) == 0) {
-            lastKeycode = KEYCODE_DPAD_UP;
+            mLastKeycode = KEYCODE_DPAD_UP;
         } else if (Float.compare(yaxis, 1.0f) == 0) {
-            lastKeycode = KEYCODE_DPAD_DOWN;
+            mLastKeycode = KEYCODE_DPAD_DOWN;
         }else {
             //No keycode change
             action = KeyEvent.ACTION_UP;
         }
 
-        return new int[]{lastKeycode, action};
+        return new int[]{mLastKeycode, action};
 
     }
 

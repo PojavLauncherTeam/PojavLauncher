@@ -1,13 +1,8 @@
 package org.lwjgl.glfw;
-import java.io.*;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.util.*;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.*;
+
 import net.kdt.pojavlaunch.*;
 import android.content.*;
 
@@ -21,6 +16,9 @@ public class CallbackBridge {
     public static volatile int physicalWidth, physicalHeight;
     public static float mouseX, mouseY;
     public static StringBuilder DEBUG_STRING = new StringBuilder();
+    private static boolean threadAttached;
+    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
+            holdingNumlock, holdingShift;
 
 
     public static void putMouseEventWithCoords(int button, float x, float y) {
@@ -35,7 +33,7 @@ public class CallbackBridge {
         sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
     }
 
-    private static boolean threadAttached;
+
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
@@ -159,43 +157,42 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
-        holdingNumlock, holdingShift;
+
     public static int getCurrentMods() {
         int currMods = 0;
         if (holdingAlt) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_ALT;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_ALT;
         } if (holdingCapslock) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_CAPS_LOCK;
         } if (holdingCtrl) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_CONTROL;
         } if (holdingNumlock) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_NUM_LOCK;
         } if (holdingShift) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_SHIFT;
         }
         return currMods;
     }
 
     public static void setModifiers(int keyCode, boolean isDown){
         switch (keyCode){
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT:
                 CallbackBridge.holdingShift = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_CONTROL:
                 CallbackBridge.holdingCtrl = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_ALT:
                 CallbackBridge.holdingAlt = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK:
+            case LwjglGlfwKeycode.GLFW_KEY_CAPS_LOCK:
                 CallbackBridge.holdingCapslock = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK:
+            case LwjglGlfwKeycode.GLFW_KEY_NUM_LOCK:
                 CallbackBridge.holdingNumlock = isDown;
                 return;
         }
@@ -212,6 +209,8 @@ public class CallbackBridge {
     private static native void nativeSendMouseButton(int button, int action, int mods);
     private static native void nativeSendScroll(double xoffset, double yoffset);
     private static native void nativeSendScreenSize(int width, int height);
+    public static native void nativeSetWindowAttrib(int attrib, int value);
+
     public static native boolean nativeIsGrabbing();
     static {
         System.loadLibrary("pojavexec");

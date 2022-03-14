@@ -16,11 +16,11 @@ import net.kdt.pojavlaunch.R;
 public class CustomSeekBarPreference extends SeekBarPreference {
 
     /** The suffix displayed */
-    private String suffix = "";
+    private String mSuffix = "";
     /** Custom minimum value to provide the same behavior as the usual setMin */
     private int mMin;
     /** The textview associated by default to the preference */
-    private TextView textView;
+    private TextView mTextView;
 
 
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -37,7 +37,6 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
     public CustomSeekBarPreference(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.seekBarPreferenceStyle);
-
     }
 
     public CustomSeekBarPreference(Context context) {
@@ -58,8 +57,8 @@ public class CustomSeekBarPreference extends SeekBarPreference {
         TextView titleTextView = (TextView) view.findViewById(android.R.id.title);
         titleTextView.setTextColor(Color.WHITE);
 
-        textView = (TextView) view.findViewById(R.id.seekbar_value);
-        textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+        mTextView = (TextView) view.findViewById(R.id.seekbar_value);
+        mTextView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekbar);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -71,7 +70,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
                 progress = progress * getSeekBarIncrement();
                 progress -= mMin;
 
-                textView.setText(String.valueOf(progress + mMin));
+                mTextView.setText(String.valueOf(progress + mMin));
                 updateTextViewWithSuffix();
             }
 
@@ -94,20 +93,12 @@ public class CustomSeekBarPreference extends SeekBarPreference {
         updateTextViewWithSuffix();
     }
 
-
-    private void updateTextViewWithSuffix(){
-        if(!textView.getText().toString().endsWith(suffix)){
-            textView.setText(String.format("%s%s", textView.getText(), suffix));
-        }
-
-    }
-
     /**
      * Set a suffix to be appended on the TextView associated to the value
      * @param suffix The suffix to append as a String
      */
     public void setSuffix(String suffix) {
-        this.suffix = suffix;
+        this.mSuffix = suffix;
     }
 
     /**
@@ -118,5 +109,12 @@ public class CustomSeekBarPreference extends SeekBarPreference {
     public void setRange(int min, int max){
         setMin(min);
         setMax(max);
+    }
+
+
+    private void updateTextViewWithSuffix(){
+        if(!mTextView.getText().toString().endsWith(mSuffix)){
+            mTextView.setText(String.format("%s%s", mTextView.getText(), mSuffix));
+        }
     }
 }

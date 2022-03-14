@@ -29,10 +29,8 @@ import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 
 
-public abstract class HandleView extends View implements ViewPositionListener, View.OnLongClickListener
- {
+public abstract class HandleView extends View implements ViewPositionListener, View.OnLongClickListener {
     protected Drawable mDrawable;
-    protected Drawable mDrawableLtr;
     protected Drawable mDrawableRtl;
     private final PopupWindow mContainer;
     // Position with respect to the parent TextView
@@ -65,12 +63,19 @@ public abstract class HandleView extends View implements ViewPositionListener, V
     // int mWindowPosX, mWindowPosY;
 
     private PositionListener mPositionListener;
-    public PositionListener getPositionListener() {
-        if (mPositionListener == null) {
-            mPositionListener = new PositionListener(mView);
-        }
-        return mPositionListener;
-    }
+
+    // Touch-up filter: number of previous positions remembered
+    private static final int HISTORY_SIZE = 5;
+    private static final int TOUCH_UP_FILTER_DELAY_AFTER = 150;
+    private static final int TOUCH_UP_FILTER_DELAY_BEFORE = 350;
+    private final long[] mPreviousOffsetsTimes = new long[HISTORY_SIZE];
+    private final int[] mPreviousOffsets = new int[HISTORY_SIZE];
+    private int mPreviousOffsetIndex = 0;
+    private int mNumberPreviousOffsets = 0;
+
+    // Addition
+    private float mDownX, mDownY;
+
 
     public HandleView(ControlButton view) {
         super(view.getContext());
@@ -86,8 +91,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         mContainer.setWindowLayoutType(WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
         mContainer.setContentView(this);
 
-        mDrawableLtr = view.getContext().getDrawable(R.drawable.text_select_handle_left_material);
-        mDrawableRtl = view.getContext().getDrawable(R.drawable.text_select_handle_right_material);
+        mDrawableRtl = view.getContext().getDrawable(R.drawable.ic_view_handle);
         mMinSize = view.getContext().getResources().getDimensionPixelSize(R.dimen.text_handle_min_size);
 
         setOnLongClickListener(this);
@@ -99,11 +103,103 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         mIdealVerticalOffset = 0.7f * handleHeight;
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(getPreferredWidth(), getPreferredHeight());
+    }
+
+    @Override
+    protected void onDraw(Canvas c) {
+        final int drawWidth = mDrawable.getIntrinsicWidth();
+        final int left = getHorizontalOffset();
+
+        mDrawable.setBounds(left, 0, left + drawWidth, mDrawable.getIntrinsicHeight());
+        mDrawable.draw(c);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        ViewGroup.LayoutParams params = mView.getLayoutParams();
+
+        switch (ev.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN: {
+                startTouchUpFilter(getCurrentCursorOffset());
+                mTouchToWindowOffsetX = ev.getRawX() - mPositionX;
+                mTouchToWindowOffsetY = ev.getRawY() - mPositionY;
+
+                final PositionListener positionListener = getPositionListener();
+                mLastParentX = positionListener.getPositionX();
+                mLastParentY = positionListener.getPositionY();
+                mIsDragging = true;
+
+                // MOD: Addition
+                mDownX = ev.getRawX();
+                mDownY = ev.getRawY();
+                mDownWidth = params.width;
+                mDownHeight = params.height;
+
+                break;
+            }
+
+            case MotionEvent.ACTION_MOVE: {
+                final float rawX = ev.getRawX();
+                final float rawY = ev.getRawY();
+
+                // Vertical hysteresis: vertical down movement tends to snap to ideal offset
+                final float previousVerticalOffset = mTouchToWindowOffsetY - mLastParentY;
+                final float currentVerticalOffset = rawY - mPositionY - mLastParentY;
+                float newVerticalOffset;
+                if (previousVerticalOffset < mIdealVerticalOffset) {
+                    newVerticalOffset = Math.min(currentVerticalOffset, mIdealVerticalOffset);
+                    newVerticalOffset = Math.max(newVerticalOffset, previousVerticalOffset);
+                } else {
+                    newVerticalOffset = Math.max(currentVerticalOffset, mIdealVerticalOffset);
+                    newVerticalOffset = Math.min(newVerticalOffset, previousVerticalOffset);
+                }
+                mTouchToWindowOffsetY = newVerticalOffset + mLastParentY;
+
+                final float newPosX = rawX - mTouchToWindowOffsetX + mHotspotX;
+                final float newPosY = rawY - mTouchToWindowOffsetY + mTouchOffsetY;
+
+                int newWidth = (int) (mDownWidth + (rawX - mDownX));
+                int newHeight = (int) (mDownHeight + (rawY - mDownY));
+
+                // mDownX = rawX;
+                // mDownY = rawY;
+
+                params.width = Math.max(50, newWidth);
+                params.height = Math.max(50, newHeight);
+
+                mView.setLayoutParams(params);
+
+                updatePosition(newPosX, newPosY);
+                // break;
+                return true;
+            }
+
+            case MotionEvent.ACTION_UP:
+                filterOnTouchUp();
+                mIsDragging = false;
+                break;
+
+            case MotionEvent.ACTION_CANCEL:
+                mIsDragging = false;
+                break;
+        }
+        return true;
+    }
+
+    public PositionListener getPositionListener() {
+        if (mPositionListener == null) {
+            mPositionListener = new PositionListener(mView);
+        }
+        return mPositionListener;
+    }
 
     protected void updateDrawable() {
         // final int offset = getCurrentCursorOffset();
         final boolean isRtlCharAtOffset = true; // mView.getLayout().isRtlCharAt(offset);
-        mDrawable = isRtlCharAtOffset ? mDrawableRtl : mDrawableLtr;
+        mDrawable = mDrawableRtl; //isRtlCharAtOffset ? mDrawableRtl : mDrawableLtr;
         mHotspotX = getHotspotX(mDrawable, isRtlCharAtOffset);
         mHorizontalGravity = getHorizontalGravity(isRtlCharAtOffset);
     }
@@ -111,14 +207,7 @@ public abstract class HandleView extends View implements ViewPositionListener, V
     protected abstract int getHotspotX(Drawable drawable, boolean isRtlRun);
     protected abstract int getHorizontalGravity(boolean isRtlRun);
 
-    // Touch-up filter: number of previous positions remembered
-    private static final int HISTORY_SIZE = 5;
-    private static final int TOUCH_UP_FILTER_DELAY_AFTER = 150;
-    private static final int TOUCH_UP_FILTER_DELAY_BEFORE = 350;
-    private final long[] mPreviousOffsetsTimes = new long[HISTORY_SIZE];
-    private final int[] mPreviousOffsets = new int[HISTORY_SIZE];
-    private int mPreviousOffsetIndex = 0;
-    private int mNumberPreviousOffsets = 0;
+
 
     private void startTouchUpFilter(int offset) {
         mNumberPreviousOffsets = 0;
@@ -150,11 +239,6 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 
     public boolean offsetHasBeenChanged() {
         return mNumberPreviousOffsets > 1;
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(getPreferredWidth(), getPreferredHeight());
     }
 
     private int getPreferredWidth() {
@@ -283,15 +367,6 @@ public abstract class HandleView extends View implements ViewPositionListener, V
         }
     }
 
-    @Override
-    protected void onDraw(Canvas c) {
-        final int drawWidth = mDrawable.getIntrinsicWidth();
-        final int left = getHorizontalOffset();
-
-        mDrawable.setBounds(left, 0, left + drawWidth, mDrawable.getIntrinsicHeight());
-        mDrawable.draw(c);
-    }
-
     private int getHorizontalOffset() {
         final int width = getPreferredWidth();
         final int drawWidth = mDrawable.getIntrinsicWidth();
@@ -313,81 +388,6 @@ public abstract class HandleView extends View implements ViewPositionListener, V
 
     protected int getCursorOffset() {
         return 0;  
-    }
-
-    // Addition
-    private float mDownX, mDownY;
-    
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        ViewGroup.LayoutParams params = mView.getLayoutParams();
-        
-        switch (ev.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN: {
-                    startTouchUpFilter(getCurrentCursorOffset());
-                    mTouchToWindowOffsetX = ev.getRawX() - mPositionX;
-                    mTouchToWindowOffsetY = ev.getRawY() - mPositionY;
-                    
-                    final PositionListener positionListener = getPositionListener();
-                    mLastParentX = positionListener.getPositionX();
-                    mLastParentY = positionListener.getPositionY();
-                    mIsDragging = true;
-                    
-                    // MOD: Addition
-                    mDownX = ev.getRawX();
-                    mDownY = ev.getRawY();
-                    mDownWidth = params.width;
-                    mDownHeight = params.height;
-                    
-                    break;
-                }
-
-            case MotionEvent.ACTION_MOVE: {
-                    final float rawX = ev.getRawX();
-                    final float rawY = ev.getRawY();
-
-                    // Vertical hysteresis: vertical down movement tends to snap to ideal offset
-                    final float previousVerticalOffset = mTouchToWindowOffsetY - mLastParentY;
-                    final float currentVerticalOffset = rawY - mPositionY - mLastParentY;
-                    float newVerticalOffset;
-                    if (previousVerticalOffset < mIdealVerticalOffset) {
-                        newVerticalOffset = Math.min(currentVerticalOffset, mIdealVerticalOffset);
-                        newVerticalOffset = Math.max(newVerticalOffset, previousVerticalOffset);
-                    } else {
-                        newVerticalOffset = Math.max(currentVerticalOffset, mIdealVerticalOffset);
-                        newVerticalOffset = Math.min(newVerticalOffset, previousVerticalOffset);
-                    }
-                    mTouchToWindowOffsetY = newVerticalOffset + mLastParentY;
-
-                    final float newPosX = rawX - mTouchToWindowOffsetX + mHotspotX;
-                    final float newPosY = rawY - mTouchToWindowOffsetY + mTouchOffsetY;
-
-                    int newWidth = (int) (mDownWidth + (rawX - mDownX));
-                    int newHeight = (int) (mDownHeight + (rawY - mDownY));
-                    
-                    // mDownX = rawX;
-                    // mDownY = rawY;
-                    
-                    params.width = Math.max(50, newWidth);
-                    params.height = Math.max(50, newHeight);
-                    
-                    mView.setLayoutParams(params);
-               
-                    updatePosition(newPosX, newPosY);
-                    // break;
-                    return true;
-                }
-
-            case MotionEvent.ACTION_UP:
-                filterOnTouchUp();
-                mIsDragging = false;
-                break;
-
-            case MotionEvent.ACTION_CANCEL:
-                mIsDragging = false;
-                break;
-        }
-        return true;
     }
 
     public boolean isDragging() {

@@ -6,8 +6,7 @@ import net.kdt.pojavlaunch.value.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-public class PojavMigrator
-{
+public class PojavMigrator {
     public static void migrateAccountData(Context ctx) {
         File oldAccDir = new File(Tools.DIR_ACCOUNT_OLD);
         if (oldAccDir.exists() && oldAccDir.isDirectory()) {

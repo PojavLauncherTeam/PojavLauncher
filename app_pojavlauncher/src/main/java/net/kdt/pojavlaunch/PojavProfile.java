@@ -8,14 +8,11 @@ import android.util.Log;
 import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
-import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
-import net.kdt.pojavlaunch.authenticator.mojang.RefreshTokenTask;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
-public class PojavProfile
-{
-	private static String PROFILE_PREF = "pojav_profile";
-	private static String PROFILE_PREF_FILE = "file";
+public class PojavProfile {
+	private static final String PROFILE_PREF = "pojav_profile";
+	private static final String PROFILE_PREF_FILE = "file";
 	public static String PROFILE_PREF_TEMP_CONTENT = "tempContent";
 
 	public static SharedPreferences getPrefs(Context ctx) {
@@ -33,26 +30,26 @@ public class PojavProfile
 
     public static MinecraftAccount getTempProfileContent() {
 	    try {
-            MinecraftAccount acc = MinecraftAccount.parse(Tools.read(Tools.DIR_DATA+"/cache/tempacc.json"));
-            if (acc.accessToken == null) {
-                acc.accessToken = "0";
+            MinecraftAccount account = MinecraftAccount.parse(Tools.read(Tools.DIR_DATA+"/cache/tempacc.json"));
+            if (account.accessToken == null) {
+                account.accessToken = "0";
             }
-            if (acc.clientToken == null) {
-                acc.clientToken = "0";
+            if (account.clientToken == null) {
+                account.clientToken = "0";
             }
-            if (acc.profileId == null) {
-                acc.profileId = "00000000-0000-0000-0000-000000000000";
+            if (account.profileId == null) {
+                account.profileId = "00000000-0000-0000-0000-000000000000";
             }
-            if (acc.username == null) {
-                acc.username = "0";
+            if (account.username == null) {
+                account.username = "0";
             }
-            if (acc.selectedVersion == null) {
-                acc.selectedVersion = "1.7.10";
+            if (account.selectedVersion == null) {
+                account.selectedVersion = "1.7.10";
             }
-            if (acc.msaRefreshToken == null) {
-                acc.msaRefreshToken = "0";
+            if (account.msaRefreshToken == null) {
+                account.msaRefreshToken = "0";
             }
-            return acc;
+            return account;
         }catch (IOException e) {
             Log.e(MinecraftAccount.class.getName(), "Caught an exception while loading the temporary profile",e);
             return null;
@@ -103,9 +100,5 @@ public class PojavProfile
 
         Intent intent = new Intent(ctx, PojavLauncherActivity.class); //MCLauncherActivity.class);
         ctx.startActivity(intent);
-    }
-
-    public static void updateTokens(final Activity ctx, final String name, RefreshListener listen) throws Exception {
-        new RefreshTokenTask(ctx, listen).execute(name);
     }
 }

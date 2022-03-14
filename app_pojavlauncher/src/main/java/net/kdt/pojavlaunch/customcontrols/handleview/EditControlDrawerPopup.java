@@ -14,62 +14,62 @@ import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 
 public class EditControlDrawerPopup extends EditControlButtonPopup{
-    private Spinner spinnerOrientation;
+    private Spinner mOrientationSpinner;
 
 
-    private ControlDrawer drawer;
-    private ControlDrawerData drawerData;
+    private final ControlDrawer mDrawer;
+    private final ControlDrawerData mDrawerData;
 
     public EditControlDrawerPopup(ControlDrawer editedButton) {
         super(editedButton);
-        drawer = editedButton;
-        drawerData = editedButton.getDrawerData();
+        mDrawer = editedButton;
+        mDrawerData = editedButton.getDrawerData();
     }
 
 
     @Override
     protected void hideUselessViews() {
-        (v.findViewById(R.id.editMapping_textView)).setVisibility(View.GONE);
-        checkPassThrough.setVisibility(View.GONE);
-        checkToggle.setVisibility(View.GONE);
-        checkBoxSwipeable.setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editMapping_textView)).setVisibility(View.GONE);
+        mPassthroughCheckbox.setVisibility(View.GONE);
+        mToggleCheckbox.setVisibility(View.GONE);
+        mSwipeableCheckbox.setVisibility(View.GONE);
 
-        (v.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
-        (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
-        editDynamicX.setVisibility(View.GONE);
-        editDynamicY.setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
+        mDynamicXEditText.setVisibility(View.GONE);
+        mDynamicYEditText.setVisibility(View.GONE);
     }
 
     @Override
     protected void initializeEditDialog(Context ctx) {
         super.initializeEditDialog(ctx);
 
-        spinnerOrientation = v.findViewById(R.id.editOrientation_spinner);
+        mOrientationSpinner = mRootView.findViewById(R.id.editOrientation_spinner);
 
         ArrayAdapter<ControlDrawerData.Orientation> adapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item);
         adapter.addAll(ControlDrawerData.getOrientations());
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 
-        spinnerOrientation.setAdapter(adapter);
+        mOrientationSpinner.setAdapter(adapter);
     }
 
     @Override
     protected void setEditDialogValues() {
         super.setEditDialogValues();
 
-        spinnerOrientation.setSelection(ControlDrawerData.orientationToInt(drawerData.orientation));
+        mOrientationSpinner.setSelection(ControlDrawerData.orientationToInt(mDrawerData.orientation));
 
 
         //Using the dialog to replace the button behavior allows us not to dismiss the window
-        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v -> {
-            ControlLayout layout = (ControlLayout) drawer.getParent();
-            ControlData controlData =  new ControlData(drawerData.properties);
+        mDialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v -> {
+            ControlLayout layout = (ControlLayout) mDrawer.getParent();
+            ControlData controlData =  new ControlData(mDrawerData.properties);
             controlData.name = "new";
-            layout.addSubButton(drawer, controlData);
+            layout.addSubButton(mDrawer, controlData);
 
-            Context ctx = dialog.getContext();
+            Context ctx = mDialog.getContext();
             Toast.makeText(ctx, ctx.getString(R.string.customctrl_add_subbutton_message,
-                    drawer.getDrawerData().buttonProperties.size()), Toast.LENGTH_SHORT).show();
+                    mDrawer.getDrawerData().buttonProperties.size()), Toast.LENGTH_SHORT).show();
         });
 
     }
@@ -78,13 +78,13 @@ public class EditControlDrawerPopup extends EditControlButtonPopup{
     protected void setupDialogButtons() {
         super.setupDialogButtons();
 
-        builder.setNeutralButton(v.getResources().getString(R.string.customctrl_addsubbutton), null);
+        mBuilder.setNeutralButton(mRootView.getResources().getString(R.string.customctrl_addsubbutton), null);
 
     }
 
     @Override
     protected void saveProperties() {
-        drawerData.orientation = ControlDrawerData.intToOrientation(spinnerOrientation.getSelectedItemPosition());
+        mDrawerData.orientation = ControlDrawerData.intToOrientation(mOrientationSpinner.getSelectedItemPosition());
         super.saveProperties();
     }
 }

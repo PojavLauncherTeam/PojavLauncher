@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch.customcontrols.handleview;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -29,103 +27,103 @@ import static net.kdt.pojavlaunch.customcontrols.handleview.ActionPopupWindow.se
 
 public class EditControlButtonPopup {
 
-    protected AlertDialog dialog;
-    protected View v;
-    protected AlertDialog.Builder builder;
+    protected AlertDialog mDialog;
+    protected View mRootView;
+    protected AlertDialog.Builder mBuilder;
 
-    protected EditText editName;
-    protected Spinner[] spinnersKeycode;
+    protected EditText mNameEditText;
+    protected Spinner[] mKeycodeSpinners;
 
-    protected CheckBox checkToggle;
-    protected CheckBox checkPassThrough;
-    protected CheckBox checkBoxSwipeable;
-    protected CheckBox checkDynamicPosition;
+    protected CheckBox mToggleCheckbox;
+    protected CheckBox mPassthroughCheckbox;
+    protected CheckBox mSwipeableCheckbox;
+    protected CheckBox mDynamicPositionCheckbox;
 
-    protected EditText editWidth;
-    protected EditText editHeight;
-    protected EditText editDynamicX;
-    protected EditText editDynamicY;
+    protected EditText mWidthEditText;
+    protected EditText mHeightEditText;
+    protected EditText mDynamicXEditText;
+    protected EditText mDynamicYEditText;
 
-    protected SeekBar seekBarOpacity;
-    protected SeekBar seekBarCornerRadius;
-    protected SeekBar seekBarStrokeWidth;
+    protected SeekBar mOpacitySeekbar;
+    protected SeekBar mCornerRadiusSeekbar;
+    protected SeekBar mStrokeWidthSeekbar;
 
-    protected ImageButton buttonBackgroundColor;
-    protected ImageButton buttonStrokeColor;
+    protected ImageButton mBackgroundColorButton;
+    protected ImageButton mStrokeColorButton;
 
-    protected TextView textOpacity;
-    protected TextView textCornerRadius;
-    protected TextView textStrokeWidth;
-    protected TextView textStrokeColor;
+    protected TextView mOpacityTextView;
+    protected TextView mCornerRadiusTextView;
+    protected TextView mStrokeWidthTextView;
+    protected TextView mStrokeColorTextView;
 
-    protected final ControlButton button;
-    protected final ControlData properties;
+    protected final ControlButton mControlButton;
+    protected final ControlData mProperties;
 
-    protected ArrayAdapter<String> adapter;
-    protected String[] specialArr;
+    protected ArrayAdapter<String> mAdapter;
+    protected String[] mSpecialArray;
 
 
     public EditControlButtonPopup(ControlButton button){
-        this.button = button;
-        this.properties = button.getProperties();
+        this.mControlButton = button;
+        this.mProperties = button.getProperties();
 
         initializeEditDialog(button.getContext());
 
         //Create the finalized dialog
-        dialog = builder.create();
-        dialog.setOnShowListener(dialogInterface -> setEditDialogValues());
+        mDialog = mBuilder.create();
+        mDialog.setOnShowListener(dialogInterface -> setEditDialogValues());
 
-        dialog.show();
+        mDialog.show();
     }
 
     protected void initializeEditDialog(Context ctx){
         //Create the editing dialog
         LayoutInflater layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = layoutInflater.inflate(R.layout.control_button_setting,null);
+        mRootView = layoutInflater.inflate(R.layout.dialog_control_button_setting,null);
 
-        builder = new AlertDialog.Builder(ctx);
-        builder.setTitle(ctx.getResources().getString(R.string.customctrl_edit, properties.name));
-        builder.setView(v);
+        mBuilder = new AlertDialog.Builder(ctx);
+        mBuilder.setTitle(ctx.getResources().getString(R.string.customctrl_edit, mProperties.name));
+        mBuilder.setView(mRootView);
 
         //Linking a lot of stuff
-        editName = v.findViewById(R.id.editName_editText);
+        mNameEditText = mRootView.findViewById(R.id.editName_editText);
 
-        spinnersKeycode = new Spinner[]{
-                v.findViewById(R.id.editMapping_spinner_1),
-                v.findViewById(R.id.editMapping_spinner_2),
-                v.findViewById(R.id.editMapping_spinner_3),
-                v.findViewById(R.id.editMapping_spinner_4)
+        mKeycodeSpinners = new Spinner[]{
+                mRootView.findViewById(R.id.editMapping_spinner_1),
+                mRootView.findViewById(R.id.editMapping_spinner_2),
+                mRootView.findViewById(R.id.editMapping_spinner_3),
+                mRootView.findViewById(R.id.editMapping_spinner_4)
         };
 
-        checkToggle = v.findViewById(R.id.checkboxToggle);
-        checkPassThrough = v.findViewById(R.id.checkboxPassThrough);
-        checkBoxSwipeable = v.findViewById(R.id.checkboxSwipeable);
+        mToggleCheckbox = mRootView.findViewById(R.id.checkboxToggle);
+        mPassthroughCheckbox = mRootView.findViewById(R.id.checkboxPassThrough);
+        mSwipeableCheckbox = mRootView.findViewById(R.id.checkboxSwipeable);
 
-        editWidth = v.findViewById(R.id.editSize_editTextX);
-        editHeight = v.findViewById(R.id.editSize_editTextY);
+        mWidthEditText = mRootView.findViewById(R.id.editSize_editTextX);
+        mHeightEditText = mRootView.findViewById(R.id.editSize_editTextY);
 
-        editDynamicX = v.findViewById(R.id.editDynamicPositionX_editText);
-        editDynamicY = v.findViewById(R.id.editDynamicPositionY_editText);
+        mDynamicXEditText = mRootView.findViewById(R.id.editDynamicPositionX_editText);
+        mDynamicYEditText = mRootView.findViewById(R.id.editDynamicPositionY_editText);
 
-        seekBarOpacity = v.findViewById(R.id.editButtonOpacity_seekbar);
-        seekBarCornerRadius = v.findViewById(R.id.editCornerRadius_seekbar);
-        seekBarStrokeWidth = v.findViewById(R.id.editStrokeWidth_seekbar);
+        mOpacitySeekbar = mRootView.findViewById(R.id.editButtonOpacity_seekbar);
+        mCornerRadiusSeekbar = mRootView.findViewById(R.id.editCornerRadius_seekbar);
+        mStrokeWidthSeekbar = mRootView.findViewById(R.id.editStrokeWidth_seekbar);
 
         SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(seekBar.equals(seekBarCornerRadius)) {
-                    setPercentageText(textCornerRadius, i);
+                if(seekBar.equals(mCornerRadiusSeekbar)) {
+                    setPercentageText(mCornerRadiusTextView, i);
                     return;
                 }
-                if(seekBar.equals(seekBarOpacity)) {
-                    setPercentageText(textOpacity, i);
+                if(seekBar.equals(mOpacitySeekbar)) {
+                    setPercentageText(mOpacityTextView, i);
                     return;
                 }
-                if(seekBar.equals(seekBarStrokeWidth)) {
-                    setPercentageText(textStrokeWidth, i);
-                    textStrokeColor.setVisibility(i == 0 ? View.GONE : View.VISIBLE);
+                if(seekBar.equals(mStrokeWidthSeekbar)) {
+                    setPercentageText(mStrokeWidthTextView, i);
+                    mStrokeColorTextView.setVisibility(i == 0 ? View.GONE : View.VISIBLE);
                 }
             }
 
@@ -136,43 +134,43 @@ public class EditControlButtonPopup {
         };
 
         //Add listeners, too bad I don't need all the methods
-        seekBarOpacity.setOnSeekBarChangeListener(changeListener);
-        seekBarCornerRadius.setOnSeekBarChangeListener(changeListener);
-        seekBarStrokeWidth.setOnSeekBarChangeListener(changeListener);
+        mOpacitySeekbar.setOnSeekBarChangeListener(changeListener);
+        mCornerRadiusSeekbar.setOnSeekBarChangeListener(changeListener);
+        mStrokeWidthSeekbar.setOnSeekBarChangeListener(changeListener);
 
-        buttonBackgroundColor = v.findViewById(R.id.editBackgroundColor_imageButton);
-        buttonStrokeColor = v.findViewById(R.id.editStrokeColor_imageButton);
+        mBackgroundColorButton = mRootView.findViewById(R.id.editBackgroundColor_imageButton);
+        mStrokeColorButton = mRootView.findViewById(R.id.editStrokeColor_imageButton);
 
-        textOpacity = v.findViewById(R.id.editButtonOpacity_textView_percent);
-        textCornerRadius = v.findViewById(R.id.editCornerRadius_textView_percent);
-        textStrokeWidth = v.findViewById(R.id.editStrokeWidth_textView_percent);
-        textStrokeColor = v.findViewById(R.id.editStrokeColor_textView);
+        mOpacityTextView = mRootView.findViewById(R.id.editButtonOpacity_textView_percent);
+        mCornerRadiusTextView = mRootView.findViewById(R.id.editCornerRadius_textView_percent);
+        mStrokeWidthTextView = mRootView.findViewById(R.id.editStrokeWidth_textView_percent);
+        mStrokeColorTextView = mRootView.findViewById(R.id.editStrokeColor_textView);
 
-        checkDynamicPosition = v.findViewById(R.id.checkboxDynamicPosition);
-        checkDynamicPosition.setOnCheckedChangeListener((btn, checked) -> {
-            editDynamicX.setEnabled(checked);
-            editDynamicY.setEnabled(checked);
+        mDynamicPositionCheckbox = mRootView.findViewById(R.id.checkboxDynamicPosition);
+        mDynamicPositionCheckbox.setOnCheckedChangeListener((btn, checked) -> {
+            mDynamicXEditText.setEnabled(checked);
+            mDynamicYEditText.setEnabled(checked);
         });
 
 
         //Initialize adapter for keycodes
-        adapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item);
+        mAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item);
         String[] oldSpecialArr = ControlData.buildSpecialButtonArray();
-        specialArr = new String[oldSpecialArr.length];
-        for (int i = 0; i < specialArr.length; i++) {
-            specialArr[i] = "SPECIAL_" + oldSpecialArr[specialArr.length - i - 1];
+        mSpecialArray = new String[oldSpecialArr.length];
+        for (int i = 0; i < mSpecialArray.length; i++) {
+            mSpecialArray[i] = "SPECIAL_" + oldSpecialArr[mSpecialArray.length - i - 1];
         }
-        adapter.addAll(specialArr);
-        adapter.addAll(EfficientAndroidLWJGLKeycode.generateKeyName());
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        mAdapter.addAll(mSpecialArray);
+        mAdapter.addAll(EfficientAndroidLWJGLKeycode.generateKeyName());
+        mAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 
-        for (Spinner spinner : spinnersKeycode) {
-            spinner.setAdapter(adapter);
+        for (Spinner spinner : mKeycodeSpinners) {
+            spinner.setAdapter(mAdapter);
         }
 
         //Set color imageButton behavior
-        buttonBackgroundColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit background color", true, buttonBackgroundColor));
-        buttonStrokeColor.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit stroke color", false, buttonStrokeColor));
+        mBackgroundColorButton.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit background color", true, mBackgroundColorButton));
+        mStrokeColorButton.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit stroke color", false, mStrokeColorButton));
 
 
         //Set dialog buttons behavior
@@ -187,34 +185,34 @@ public class EditControlButtonPopup {
 
     protected void setupDialogButtons(){
         //Set dialog buttons behavior
-        builder.setPositiveButton(android.R.string.ok, (dialogInterface1, i) -> {
-            if(!hasPropertiesErrors(dialog.getContext())){
+        mBuilder.setPositiveButton(android.R.string.ok, (dialogInterface1, i) -> {
+            if(!hasPropertiesErrors(mDialog.getContext())){
                 saveProperties();
             }
         });
-        builder.setNegativeButton(android.R.string.cancel, null);
+        mBuilder.setNegativeButton(android.R.string.cancel, null);
     }
 
     protected void hideUselessViews(){
-        (v.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
 
-        (v.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
-        (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
-        editDynamicX.setVisibility(View.GONE);
-        editDynamicY.setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
+        mDynamicXEditText.setVisibility(View.GONE);
+        mDynamicYEditText.setVisibility(View.GONE);
 
         //Hide the color choice if the width is 0.
-        textStrokeColor.setVisibility(properties.strokeWidth == 0 ? View.GONE : View.VISIBLE);
+        mStrokeColorTextView.setVisibility(mProperties.strokeWidth == 0 ? View.GONE : View.VISIBLE);
     }
 
     protected void defineDynamicCheckChange(){
-        checkDynamicPosition.setOnCheckedChangeListener((compoundButton, b) -> {
+        mDynamicPositionCheckbox.setOnCheckedChangeListener((compoundButton, b) -> {
             int visibility = b ? View.VISIBLE : View.GONE;
 
-            (v.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(visibility);
-            (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(visibility);
-            editDynamicX.setVisibility(visibility);
-            editDynamicY.setVisibility(visibility);
+            (mRootView.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(visibility);
+            (mRootView.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(visibility);
+            mDynamicXEditText.setVisibility(visibility);
+            mDynamicYEditText.setVisibility(visibility);
         });
 
     }
@@ -226,65 +224,65 @@ public class EditControlButtonPopup {
                 .size((int) Tools.dpToPx(20))
                 .build();
 
-        buttonBackgroundColor.setBackground(drawable);
-        buttonStrokeColor.setBackground(drawable);
+        mBackgroundColorButton.setBackground(drawable);
+        mStrokeColorButton.setBackground(drawable);
     }
 
     protected void setEditDialogValues(){
 
-        editName.setText(properties.name);
+        mNameEditText.setText(mProperties.name);
 
-        checkToggle.setChecked(properties.isToggle);
-        checkPassThrough.setChecked(properties.passThruEnabled);
-        checkBoxSwipeable.setChecked(properties.isSwipeable);
+        mToggleCheckbox.setChecked(mProperties.isToggle);
+        mPassthroughCheckbox.setChecked(mProperties.passThruEnabled);
+        mSwipeableCheckbox.setChecked(mProperties.isSwipeable);
 
-        editWidth.setText(Float.toString(properties.getWidth()));
-        editHeight.setText(Float.toString(properties.getHeight()));
+        mWidthEditText.setText(Float.toString(mProperties.getWidth()));
+        mHeightEditText.setText(Float.toString(mProperties.getHeight()));
 
-        editDynamicX.setEnabled(properties.isDynamicBtn);
-        editDynamicY.setEnabled(properties.isDynamicBtn);
-        editDynamicX.setText(properties.dynamicX);
+        mDynamicXEditText.setEnabled(mProperties.isDynamicBtn);
+        mDynamicYEditText.setEnabled(mProperties.isDynamicBtn);
+        mDynamicXEditText.setText(mProperties.dynamicX);
 
-        editDynamicY.setText(properties.dynamicY);
+        mDynamicYEditText.setText(mProperties.dynamicY);
 
-        seekBarOpacity.setProgress((int) (properties.opacity*100));
-        seekBarStrokeWidth.setProgress(properties.strokeWidth);
-        seekBarCornerRadius.setProgress((int)properties.cornerRadius);
+        mOpacitySeekbar.setProgress((int) (mProperties.opacity*100));
+        mStrokeWidthSeekbar.setProgress(mProperties.strokeWidth);
+        mCornerRadiusSeekbar.setProgress((int) mProperties.cornerRadius);
 
-        buttonBackgroundColor.setImageDrawable(new ColorDrawable(properties.bgColor));
-        buttonStrokeColor.setImageDrawable(new ColorDrawable(properties.strokeColor));
+        mBackgroundColorButton.setImageDrawable(new ColorDrawable(mProperties.bgColor));
+        mStrokeColorButton.setImageDrawable(new ColorDrawable(mProperties.strokeColor));
 
-        setPercentageText(textCornerRadius,seekBarCornerRadius.getProgress());
-        setPercentageText(textOpacity,seekBarOpacity.getProgress());
-        setPercentageText(textStrokeWidth,seekBarStrokeWidth.getProgress());
+        setPercentageText(mCornerRadiusTextView, mCornerRadiusSeekbar.getProgress());
+        setPercentageText(mOpacityTextView, mOpacitySeekbar.getProgress());
+        setPercentageText(mStrokeWidthTextView, mStrokeWidthSeekbar.getProgress());
 
-        checkDynamicPosition.setChecked(properties.isDynamicBtn);
+        mDynamicPositionCheckbox.setChecked(mProperties.isDynamicBtn);
 
-        for(int i=0; i< properties.keycodes.length; i++){
-            if (properties.keycodes[i] < 0) {
-                spinnersKeycode[i].setSelection(properties.keycodes[i] + specialArr.length);
+        for(int i = 0; i< mProperties.keycodes.length; i++){
+            if (mProperties.keycodes[i] < 0) {
+                mKeycodeSpinners[i].setSelection(mProperties.keycodes[i] + mSpecialArray.length);
             } else {
-                spinnersKeycode[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByValue(properties.keycodes[i]) + specialArr.length);
+                mKeycodeSpinners[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByValue(mProperties.keycodes[i]) + mSpecialArray.length);
             }
         }
     }
 
 
     protected boolean hasPropertiesErrors(Context ctx){
-        if (editName.getText().toString().isEmpty()) {
-            editName.setError(ctx.getResources().getString(R.string.global_error_field_empty));
+        if (mNameEditText.getText().toString().isEmpty()) {
+            mNameEditText.setError(ctx.getResources().getString(R.string.global_error_field_empty));
             return true;
         }
 
-        if (properties.isDynamicBtn) {
+        if (mProperties.isDynamicBtn) {
 
             int errorAt = 0;
             try {
-                properties.insertDynamicPos(editDynamicX.getText().toString());
+                mProperties.insertDynamicPos(mDynamicXEditText.getText().toString());
                 errorAt = 1;
-                properties.insertDynamicPos(editDynamicY.getText().toString());
+                mProperties.insertDynamicPos(mDynamicYEditText.getText().toString());
             } catch (Throwable th) {
-                (errorAt == 0 ? editDynamicX : editDynamicY).setError(th.getMessage());
+                (errorAt == 0 ? mDynamicXEditText : mDynamicYEditText).setError(th.getMessage());
 
                 return true;
             }
@@ -295,36 +293,36 @@ public class EditControlButtonPopup {
 
     protected void saveProperties(){
         //This method assumes there are no error.
-        properties.name = editName.getText().toString();
+        mProperties.name = mNameEditText.getText().toString();
 
         //Keycodes
-        for(int i=0; i<spinnersKeycode.length; ++i){
-            if (spinnersKeycode[i].getSelectedItemPosition() < specialArr.length) {
-                properties.keycodes[i] = spinnersKeycode[i].getSelectedItemPosition() - specialArr.length;
+        for(int i = 0; i< mKeycodeSpinners.length; ++i){
+            if (mKeycodeSpinners[i].getSelectedItemPosition() < mSpecialArray.length) {
+                mProperties.keycodes[i] = mKeycodeSpinners[i].getSelectedItemPosition() - mSpecialArray.length;
             } else {
-                properties.keycodes[i] = EfficientAndroidLWJGLKeycode.getValueByIndex(spinnersKeycode[i].getSelectedItemPosition() - specialArr.length);
+                mProperties.keycodes[i] = EfficientAndroidLWJGLKeycode.getValueByIndex(mKeycodeSpinners[i].getSelectedItemPosition() - mSpecialArray.length);
             }
         }
 
-        properties.opacity = seekBarOpacity.getProgress()/100f;
-        properties.strokeWidth = seekBarStrokeWidth.getProgress();
-        properties.cornerRadius = seekBarCornerRadius.getProgress();
+        mProperties.opacity = mOpacitySeekbar.getProgress()/100f;
+        mProperties.strokeWidth = mStrokeWidthSeekbar.getProgress();
+        mProperties.cornerRadius = mCornerRadiusSeekbar.getProgress();
 
-        properties.bgColor = ((ColorDrawable)buttonBackgroundColor.getDrawable()).getColor();
-        properties.strokeColor = ((ColorDrawable) buttonStrokeColor.getDrawable()).getColor();
+        mProperties.bgColor = ((ColorDrawable) mBackgroundColorButton.getDrawable()).getColor();
+        mProperties.strokeColor = ((ColorDrawable) mStrokeColorButton.getDrawable()).getColor();
 
-        properties.isToggle = checkToggle.isChecked();
-        properties.passThruEnabled = checkPassThrough.isChecked();
-        properties.isSwipeable = checkBoxSwipeable.isChecked();
+        mProperties.isToggle = mToggleCheckbox.isChecked();
+        mProperties.passThruEnabled = mPassthroughCheckbox.isChecked();
+        mProperties.isSwipeable = mSwipeableCheckbox.isChecked();
 
-        properties.setWidth(Float.parseFloat(editWidth.getText().toString()));
-        properties.setHeight(Float.parseFloat(editHeight.getText().toString()));
+        mProperties.setWidth(Float.parseFloat(mWidthEditText.getText().toString()));
+        mProperties.setHeight(Float.parseFloat(mHeightEditText.getText().toString()));
 
-        properties.isDynamicBtn = checkDynamicPosition.isChecked();
-        if(!editDynamicX.getText().toString().isEmpty()) properties.dynamicX = editDynamicX.getText().toString();
-        if(!editDynamicY.getText().toString().isEmpty()) properties.dynamicY = editDynamicY.getText().toString();
+        mProperties.isDynamicBtn = mDynamicPositionCheckbox.isChecked();
+        if(!mDynamicXEditText.getText().toString().isEmpty()) mProperties.dynamicX = mDynamicXEditText.getText().toString();
+        if(!mDynamicYEditText.getText().toString().isEmpty()) mProperties.dynamicY = mDynamicYEditText.getText().toString();
 
-        button.updateProperties();
+        mControlButton.updateProperties();
     }
 
 }

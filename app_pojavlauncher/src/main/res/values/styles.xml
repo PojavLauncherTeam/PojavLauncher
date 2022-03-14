@@ -9,23 +9,4 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
-
-    <style name="MenuDialog" parent="@style/AppTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@style/MenuDialogAnimation</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="MenuDialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/translate_left_side</item>
-        <item name="android:windowExitAnimation">@anim/translate_right_side</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
 </resources>

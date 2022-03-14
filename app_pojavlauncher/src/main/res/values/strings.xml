@@ -10,16 +10,12 @@
     <!-- Languages list part -->
 
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email or username</string>
-    <string name="login_online_password_hint">Password</string>
+    <string name="login_online_username_hint">Local username</string>
     <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Mojang Login</string>
 
-    <string name="login_offline_label">Login as offline account</string>
-
     <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
     <string name="login_error_exist_username">This username already exist</string>
-    <string name="login_error_offline_password">Offline account can\'t include password!</string>
 
     <string name="login_microsoft">Microsoft login</string>
 
@@ -58,7 +54,7 @@
     
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connected</string>
-    <string name="mcl_account_offline">Offline</string>
+    <string name="mcl_account_local">Local</string>
 
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
@@ -66,6 +62,7 @@
     <string name="mcl_launch_downloading">Downloading %s</string>
     <string name="mcl_launch_downloading_progress">"Downloading %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
+    <string name="mcl_launch_error_localmode">Minecraft can\'t be legally installed when logged in with a local account. Please switch to an online account to continue.</string>
 
     <string name="mcl_options">Options</string>
     <string name="mcl_option_modinstall">Launch a mod installer (Forge, LabyMod, Fabric, etc...)</string>

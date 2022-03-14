@@ -3,12 +3,9 @@ import android.content.*;
 
 import androidx.annotation.Keep;
 
-import com.google.gson.*;
-
 import java.io.IOException;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
-import org.lwjgl.glfw.*;
 
 @Keep
 public class CustomControls {
@@ -37,22 +34,22 @@ public class CustomControls {
 		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[3])); // Secondary Mouse mControlDataList
 		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[4])); // Virtual mouse toggle
 
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_debug, new int[]{LWJGLGLFWKeycode.GLFW_KEY_F3}, "${margin}", "${margin}", false));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_chat, new int[]{LWJGLGLFWKeycode.GLFW_KEY_T}, "${margin} * 2 + ${width}", "${margin}", false));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_listplayers, new int[]{LWJGLGLFWKeycode.GLFW_KEY_TAB}, "${margin} * 4 + ${width} * 3", "${margin}", false));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_thirdperson, new int[]{LWJGLGLFWKeycode.GLFW_KEY_F5}, "${margin}", "${height} + ${margin}", false));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_debug, new int[]{LwjglGlfwKeycode.GLFW_KEY_F3}, "${margin}", "${margin}", false));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_chat, new int[]{LwjglGlfwKeycode.GLFW_KEY_T}, "${margin} * 2 + ${width}", "${margin}", false));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_listplayers, new int[]{LwjglGlfwKeycode.GLFW_KEY_TAB}, "${margin} * 4 + ${width} * 3", "${margin}", false));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_thirdperson, new int[]{LwjglGlfwKeycode.GLFW_KEY_F5}, "${margin}", "${height} + ${margin}", false));
 
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_up, new int[]{LWJGLGLFWKeycode.GLFW_KEY_W}, "${margin} * 2 + ${width}", "${bottom} - ${margin} * 3 - ${height} * 2", true));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_left, new int[]{LWJGLGLFWKeycode.GLFW_KEY_A}, "${margin}", "${bottom} - ${margin} * 2 - ${height}", true));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_down, new int[]{LWJGLGLFWKeycode.GLFW_KEY_S}, "${margin} * 2 + ${width}", "${bottom} - ${margin}", true));
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_right, new int[]{LWJGLGLFWKeycode.GLFW_KEY_D}, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin} * 2 - ${height}", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_up, new int[]{LwjglGlfwKeycode.GLFW_KEY_W}, "${margin} * 2 + ${width}", "${bottom} - ${margin} * 3 - ${height} * 2", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_left, new int[]{LwjglGlfwKeycode.GLFW_KEY_A}, "${margin}", "${bottom} - ${margin} * 2 - ${height}", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_down, new int[]{LwjglGlfwKeycode.GLFW_KEY_S}, "${margin} * 2 + ${width}", "${bottom} - ${margin}", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_right, new int[]{LwjglGlfwKeycode.GLFW_KEY_D}, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin} * 2 - ${height}", true));
 
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_inventory, new int[]{LWJGLGLFWKeycode.GLFW_KEY_E}, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin}", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_inventory, new int[]{LwjglGlfwKeycode.GLFW_KEY_E}, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin}", true));
         
-        ControlData shiftData = new ControlData(ctx, R.string.control_shift, new int[]{LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT}, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 2 - ${height} * 2", true);
+        ControlData shiftData = new ControlData(ctx, R.string.control_shift, new int[]{LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT}, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 2 - ${height} * 2", true);
         shiftData.isToggle = true;
 		this.mControlDataList.add(shiftData);
-		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, new int[]{LWJGLGLFWKeycode.GLFW_KEY_SPACE}, "${right} - ${margin} * 2 - ${width}", "${bottom} - ${margin} * 2 - ${height}", true));
+		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, new int[]{LwjglGlfwKeycode.GLFW_KEY_SPACE}, "${right} - ${margin} * 2 - ${width}", "${bottom} - ${margin} * 2 - ${height}", true));
 
 		//The default controls are conform to the V2
 		version = 4;
@@ -60,7 +57,7 @@ public class CustomControls {
 
 	
 	public void save(String path) throws IOException {
-		//Current version is the V2.4 so the version as to be marked as 4 !
+		//Current version is the V2.5 so the version as to be marked as 4 !
 		version = 4;
 
 		Tools.write(path, Tools.GLOBAL_GSON.toJson(this));

@@ -14,15 +14,15 @@ public class EditControlSubButtonPopup extends EditControlButtonPopup{
 
     @Override
     protected void hideUselessViews() {
-        (v.findViewById(R.id.editSize_textView)).setVisibility(View.GONE);
-        (v.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editSize_textView)).setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editOrientation_textView)).setVisibility(View.GONE);
 
-        checkDynamicPosition.setVisibility(View.GONE);
+        mDynamicPositionCheckbox.setVisibility(View.GONE);
 
-        (v.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
-        editDynamicX.setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editDynamicPositionX_textView)).setVisibility(View.GONE);
+        mDynamicXEditText.setVisibility(View.GONE);
 
-        (v.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
-        editDynamicY.setVisibility(View.GONE);
+        (mRootView.findViewById(R.id.editDynamicPositionY_textView)).setVisibility(View.GONE);
+        mDynamicYEditText.setVisibility(View.GONE);
     }
 }

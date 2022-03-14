@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.utils;
 
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
-import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GLES_SHRINK_HACK;
@@ -15,7 +14,6 @@ import android.system.*;
 import android.util.*;
 import android.widget.Toast;
 
-import com.kdt.LoggerView;
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
@@ -32,21 +30,20 @@ public class JREUtils {
     private JREUtils() {}
 
     public static String LD_LIBRARY_PATH;
-    private static String nativeLibDir;
     public static Map<String, String> jreReleaseList;
+    public static String jvmLibraryPath;
+    private static String sNativeLibDir;
 
     public static String findInLdLibPath(String libName) {
         if(Os.getenv("LD_LIBRARY_PATH")==null) {
             try {
                 if (LD_LIBRARY_PATH != null) {
                     Os.setenv("LD_LIBRARY_PATH", LD_LIBRARY_PATH, true);
-                }else{
-                    return libName;
                 }
             }catch (ErrnoException e) {
                 e.printStackTrace();
-                return libName;
             }
+            return libName;
         }
         for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
             File f = new File(libPath, libName);
@@ -56,18 +53,22 @@ public class JREUtils {
         }
         return libName;
     }
+
     public static ArrayList<File> locateLibs(File path) {
-        ArrayList<File> ret = new ArrayList<>();
+        ArrayList<File> returnValue = new ArrayList<>();
         File[] list = path.listFiles();
-        if(list != null) {for(File f : list) {
-            if(f.isFile() && f.getName().endsWith(".so")) {
-                ret.add(f);
-            }else if(f.isDirectory()) {
-                ret.addAll(locateLibs(f));
+        if(list != null) {
+            for(File f : list) {
+                if(f.isFile() && f.getName().endsWith(".so")) {
+                    returnValue.add(f);
+                }else if(f.isDirectory()) {
+                    returnValue.addAll(locateLibs(f));
+                }
             }
-        }}
-        return ret;
+        }
+        return returnValue;
     }
+
     public static void initJavaRuntime() {
         dlopen(findInLdLibPath("libjli.so"));
         if(!dlopen("libjvm.so")){
@@ -86,13 +87,13 @@ public class JREUtils {
         for(File f : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
             dlopen(f.getAbsolutePath());
         }
-        dlopen(nativeLibDir + "/libopenal.so");
-
+        dlopen(sNativeLibDir + "/libopenal.so");
     }
 
     public static Map<String, String> readJREReleaseProperties() throws IOException {
         return readJREReleaseProperties(Tools.DIR_HOME_JRE);
     }
+
     public static Map<String, String> readJREReleaseProperties(String name) throws IOException {
         Map<String, String> jreReleaseMap = new ArrayMap<>();
         if (!name.contains("/")) {
@@ -109,11 +110,11 @@ public class JREUtils {
         jreReleaseReader.close();
         return jreReleaseMap;
     }
-    public static String jvmLibraryPath;
-    public static void redirectAndPrintJRELog(final Context ctx) {
+
+    public static void redirectAndPrintJRELog() {
         Log.v("jrelog","Log starts here");
         JREUtils.logToLogger(Logger.getInstance());
-        Thread t = new Thread(new Runnable(){
+        new Thread(new Runnable(){
             int failTime = 0;
             ProcessBuilder logcatPb;
             @Override
@@ -127,16 +128,6 @@ public class JREUtils {
                     new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
                     Log.i("jrelog-logcat","Starting logcat");
                     java.lang.Process p = logcatPb.start();
-
-                    // idk which better, both have a bug that printf(\n) in a single line
-                    /*
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                     String line;
-                     while ((line = reader.readLine()) != null) {
-                     act.appendlnToLog(line);
-                     }
-                     reader.close();
-                     */
 
                     byte[] buf = new byte[1024];
                     int len;
@@ -161,8 +152,7 @@ public class JREUtils {
                     Logger.getInstance().appendToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
                 }
             }
-        });
-        t.start();
+        }).start();
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
@@ -172,7 +162,7 @@ public class JREUtils {
             JRE_ARCHITECTURE = "i386/i486/i586";
         }
         
-        nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
+        sNativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 
         for (String arch : JRE_ARCHITECTURE.split("/")) {
             File f = new File(Tools.DIR_HOME_JRE, "lib/" + arch);
@@ -191,7 +181,7 @@ public class JREUtils {
             "/system/" + libName + ":" +
             "/vendor/" + libName + ":" +
             "/vendor/" + libName + "/hw:" +
-            nativeLibDir
+                    sNativeLibDir
         );
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
@@ -462,7 +452,7 @@ public class JREUtils {
             Log.e("RENDER_LIBRARY","Failed to load renderer " + renderLibrary + ". Falling back to GL4ES 1.1.4");
             LOCAL_RENDERER = "opengles2";
             renderLibrary = "libgl4es_114.so";
-            dlopen(nativeLibDir + "/libgl4es_114.so");
+            dlopen(sNativeLibDir + "/libgl4es_114.so");
         }
         return renderLibrary;
     }

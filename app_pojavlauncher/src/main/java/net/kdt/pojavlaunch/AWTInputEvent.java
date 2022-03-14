@@ -24,8 +24,7 @@ package net.kdt.pojavlaunch;
      * or visit www.oracle.com if you need additional information or have any
      * questions.
      */
-public class AWTInputEvent
-{
+public class AWTInputEvent {
 // InputEvent
     /**
      * This flag indicates that the Shift key was down when the event

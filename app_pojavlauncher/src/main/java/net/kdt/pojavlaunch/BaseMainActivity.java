@@ -11,7 +11,6 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
 import android.view.*;
@@ -152,16 +151,30 @@ public class BaseMainActivity extends BaseActivity {
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 1);
     }
 
    //terremomo was here
     @Override
     protected void onPause() {
         if (CallbackBridge.isGrabbing()){
-            sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
         }
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 0);
         mIsResuming = false;
         super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 1);
+    }
+
+    @Override
+    protected void onStop() {
+        CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 0);
+        super.onStop();
     }
 
     public static void fullyExit() {
@@ -201,7 +214,7 @@ public class BaseMainActivity extends BaseActivity {
             ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
             "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
-        JREUtils.redirectAndPrintJRELog(this);
+        JREUtils.redirectAndPrintJRELog();
         Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
     }
     
@@ -324,7 +337,7 @@ public class BaseMainActivity extends BaseActivity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
             if(event.getAction() != KeyEvent.ACTION_UP) return true; // We eat it anyway
-            sendKeyPress(LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
             return true;
         }
         return super.dispatchKeyEvent(event);
@@ -339,7 +352,7 @@ public class BaseMainActivity extends BaseActivity {
     public void adjustMouseSpeedLive() {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setTitle(R.string.mcl_setting_title_mousespeed);
-        View v = LayoutInflater.from(this).inflate(R.layout.live_mouse_speed_editor,null);
+        View v = LayoutInflater.from(this).inflate(R.layout.dialog_live_mouse_speed_editor,null);
         final SeekBar sb = v.findViewById(R.id.mouseSpeed);
         final TextView tv = v.findViewById(R.id.mouseSpeedTV);
         sb.setMax(275);

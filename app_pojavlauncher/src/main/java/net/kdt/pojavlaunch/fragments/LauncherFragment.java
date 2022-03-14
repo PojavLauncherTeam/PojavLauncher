@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,74 +25,45 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Objects;
 
-public class LauncherFragment extends Fragment
-{
-	private WebView webNews;
-	private View view;
-	private Thread validUrlSelectorThread;
-	private String validChangelog = "/changelog.html";
-	private Handler mainHandler = new Handler(Looper.getMainLooper());
-	private boolean interruptLoad = false;
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-		view = inflater.inflate(R.layout.lmaintab_news, container, false);
-        return view;
-    }
-    public void selectValidUrl() {
-		String lang = LauncherPreferences.PREF_LANGUAGE;
-		if(lang.equals("default")) lang = Locale.getDefault().getLanguage();
-		final String localizedUrl = "/changelog-"+lang+".html";
-		if(!tryUrl(Tools.URL_HOME+localizedUrl)) return;
-		else  {
-			mainHandler.post(()->{
-				interruptLoad = true;
-				validChangelog = localizedUrl;
-				webNews.loadUrl(Tools.URL_HOME+validChangelog);
-			});
-		}
-	}
-	public boolean tryUrl(String url) {
-		Log.i("ChangelogLocale","Trying localized url: "+url);
-		try {
-			HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-			conn.connect();
-			Log.i("ChangelogLocale","Code: "+conn.getResponseCode());
-			return ("" + conn.getResponseCode()).startsWith("2");
-		}catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+public class LauncherFragment extends Fragment {
+
+	private WebView mNewsWebview;
+	private View mRootView;
+	private Thread mValidUrlSelectorThread;
+	private String mValidChangelog = "/changelog.html";
+	private boolean mInterruptLoad = false;
+
 	@Override
-	public void onActivityCreated(Bundle p1)
-	{
-		super.onActivityCreated(p1);
-		mainHandler = new Handler(Looper.myLooper());
-		webNews = (WebView) getView().findViewById(R.id.lmaintabnewsNewsView);
-		webNews.setWebViewClient(new WebViewClient(){
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+		mRootView = inflater.inflate(R.layout.fragment_news, container, false);
+        return mRootView;
+    }
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		mNewsWebview = (WebView) getView().findViewById(R.id.lmaintabnewsNewsView);
+		mNewsWebview.setWebViewClient(new WebViewClient(){
 
 			// API < 23
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				Log.i("WebNews",failingUrl + ": "+description);
-				if(webNews != null){
-					if(validUrlSelectorThread.isAlive()) validUrlSelectorThread.interrupt();
-					removeWebView();
-					//Change the background to match the other pages.
-					//We change it only when the webView is removed to avoid huge overdraw.
-					LauncherFragment.this.view.setBackgroundColor(Color.parseColor("#44000000"));
-				}
+				if(mNewsWebview == null) return;
+
+				if(mValidUrlSelectorThread.isAlive()) mValidUrlSelectorThread.interrupt();
+				removeWebView();
+				//Change the background to match the other pages.
+				//We change it only when the webView is removed to avoid huge overdraw.
+				LauncherFragment.this.mRootView.setBackgroundColor(Color.parseColor("#44000000"));
 			}
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				if(!url.equals(Tools.URL_HOME + validChangelog)){
+				if(!url.equals(Tools.URL_HOME + mValidChangelog)){
 					Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 					startActivity(i);
 					return true;
@@ -104,17 +75,17 @@ public class LauncherFragment extends Fragment
 			@Override
 			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
 				Log.i("WebNews",error.getDescription()+"");
-				if(webNews != null){
-					if(validUrlSelectorThread.isAlive()) validUrlSelectorThread.interrupt();
-					removeWebView();
-					LauncherFragment.this.view.setBackgroundColor(Color.parseColor("#44000000"));
-				}
+				if(mNewsWebview == null) return;
+
+				if(mValidUrlSelectorThread.isAlive()) mValidUrlSelectorThread.interrupt();
+				removeWebView();
+				LauncherFragment.this.mRootView.setBackgroundColor(Color.parseColor("#44000000"));
 			}
 
 			@RequiresApi(23)
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-				if(!request.getUrl().toString().equals(Tools.URL_HOME + validChangelog)){
+				if(!request.getUrl().toString().equals(Tools.URL_HOME + mValidChangelog)){
 					Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
 					startActivity(i);
 					return true;
@@ -122,36 +93,64 @@ public class LauncherFragment extends Fragment
 				return false;
 			}
 		});
-		webNews.clearCache(true);
-		webNews.getSettings().setJavaScriptEnabled(true);
-		validUrlSelectorThread = new Thread(this::selectValidUrl);
-		validUrlSelectorThread.start();
-		if(!interruptLoad)webNews.loadUrl(Tools.URL_HOME + validChangelog);
+
+		mNewsWebview.clearCache(true);
+		mNewsWebview.getSettings().setJavaScriptEnabled(true);
+		mValidUrlSelectorThread = new Thread(this::selectValidUrl);
+		mValidUrlSelectorThread.start();
+		if(!mInterruptLoad) mNewsWebview.loadUrl(Tools.URL_HOME + mValidChangelog);
+	}
+
+	private void selectValidUrl() {
+		String lang = LauncherPreferences.PREF_LANGUAGE;
+		if(lang.equals("default")) lang = Locale.getDefault().getLanguage();
+		final String localizedUrl = "/changelog-" + lang + ".html";
+
+		if(!tryUrl(Tools.URL_HOME+localizedUrl)) return;
+
+		requireActivity().runOnUiThread(() -> {
+			mInterruptLoad = true;
+			mValidChangelog = localizedUrl;
+			mNewsWebview.loadUrl(Tools.URL_HOME + mValidChangelog);
+		});
+	}
+
+	private boolean tryUrl(String url) {
+		Log.i("ChangelogLocale","Trying localized url: "+url);
+		try {
+			HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+			conn.connect();
+			Log.i("ChangelogLocale","Code: "+conn.getResponseCode());
+			return ("" + conn.getResponseCode()).startsWith("2");
+		}catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	private void removeWebView() {
 		//Removing the parent which contain the webView crashes the viewPager.
 		//So I just try to "minimize" its impact on memory instead
 
-		webNews.clearHistory();
-		webNews.clearCache(true);
+		mNewsWebview.clearHistory();
+		mNewsWebview.clearCache(true);
 
 		// Loading a blank page is optional, but will ensure that the WebView isn't doing anything when you destroy it.
-		webNews.loadUrl("about:blank");
+		mNewsWebview.loadUrl("about:blank");
 
-		webNews.onPause();
-		webNews.removeAllViews();
-		webNews.destroyDrawingCache();
+		mNewsWebview.onPause();
+		mNewsWebview.removeAllViews();
+		mNewsWebview.destroyDrawingCache();
 
 		// make sure to call webNews.resumeTimers().
-		webNews.pauseTimers();
+		mNewsWebview.pauseTimers();
 
-		webNews.setVisibility(View.GONE);
+		mNewsWebview.setVisibility(View.GONE);
 
-		webNews.destroy();
+		mNewsWebview.destroy();
 
 		// Null out the reference so that you don't end up re-using it.
-		webNews = null;
+		mNewsWebview = null;
 	}
 
 

@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.multirt;
 
 import android.content.Context;
 import android.system.Os;
+import android.util.Log;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -22,135 +23,102 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class MultiRTUtils {
-    public static HashMap<String,Runtime> cache = new HashMap<>();
-    public static class Runtime {
-        public Runtime(String name) {
-            this.name = name;
-        }
-        public String name;
-        public String versionString;
-        public String arch;
-        public int javaVersion;
+    public interface RuntimeProgressReporter {
+        void reportStringProgress(int resId, Object ... stuff);
+    }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Runtime runtime = (Runtime) o;
-            return name.equals(runtime.name);
-        }
-        @Override
-        public int hashCode() {
-            return Objects.hash(name);
-        }
-    }
-    public static interface ProgressReporterThingy {
-        void reportStringProgress(int resid, Object ... stuff);
-    }
-    private static final File runtimeFolder = new File(Tools.MULTIRT_HOME);
-    private static final String JAVA_VERSION_str = "JAVA_VERSION=\"";
-    private static final String OS_ARCH_str = "OS_ARCH=\"";
+    private static final HashMap<String,Runtime> sCache = new HashMap<>();
+
+    private static final File RUNTIME_FOLDER = new File(Tools.MULTIRT_HOME);
+    private static final String JAVA_VERSION_STR = "JAVA_VERSION=\"";
+    private static final String OS_ARCH_STR = "OS_ARCH=\"";
+
     public static List<Runtime> getRuntimes() {
-        if(!runtimeFolder.exists()) runtimeFolder.mkdirs();
-        ArrayList<Runtime> ret = new ArrayList<>();
+        if(!RUNTIME_FOLDER.exists()) RUNTIME_FOLDER.mkdirs();
+
+        ArrayList<Runtime> runtimes = new ArrayList<>();
         System.out.println("Fetch runtime list");
-        for(File f : runtimeFolder.listFiles()) {
-            ret.add(read(f.getName()));
+        for(File f : RUNTIME_FOLDER.listFiles()) {
+            runtimes.add(read(f.getName()));
         }
 
-        return ret;
+        return runtimes;
     }
-    public static String getExactJREName(int majorVersion) {
+
+    public static String getExactJreName(int majorVersion) {
         List<Runtime> runtimes = getRuntimes();
-        for(Runtime r : runtimes) {
-            if(r.javaVersion == majorVersion) {
-                return r.name;
-            }
-        }
+        for(Runtime r : runtimes)
+            if(r.javaVersion == majorVersion)return r.name;
+
         return null;
     }
-    public static String getNearestJREName(int majorVersion) {
+
+    public static String getNearestJreName(int majorVersion) {
         List<Runtime> runtimes = getRuntimes();
         int diff_factor = Integer.MAX_VALUE;
         String result = null;
         for(Runtime r : runtimes) {
-            if(r.javaVersion >= majorVersion) { // lower - not useful
-                int currentFactor = r.javaVersion - majorVersion;
-                if(diff_factor > currentFactor) {
-                    result = r.name;
-                    diff_factor = currentFactor;
-                }
+            if(r.javaVersion < majorVersion) continue; // lower - not useful
+
+            int currentFactor = r.javaVersion - majorVersion;
+            if(diff_factor > currentFactor) {
+                result = r.name;
+                diff_factor = currentFactor;
             }
         }
+
         return result;
     }
-    public static void installRuntimeNamed(InputStream runtimeInputStream, String name, ProgressReporterThingy thingy) throws IOException {
-        File dest = new File(runtimeFolder,"/"+name);
+
+    public static void installRuntimeNamed(InputStream runtimeInputStream, String name, RuntimeProgressReporter progressReporter) throws IOException {
+        File dest = new File(RUNTIME_FOLDER,"/"+name);
         File tmp = new File(dest,"temporary");
         if(dest.exists()) FileUtils.deleteDirectory(dest);
         dest.mkdirs();
         FileOutputStream fos = new FileOutputStream(tmp);
-        thingy.reportStringProgress(R.string.multirt_progress_caching);
+        progressReporter.reportStringProgress(R.string.multirt_progress_caching);
         IOUtils.copy(runtimeInputStream,fos);
         fos.close();
         runtimeInputStream.close();
-        uncompressTarXZ(tmp,dest,thingy);
+        uncompressTarXZ(tmp,dest,progressReporter);
         tmp.delete();
         read(name);
     }
-    private static void __installRuntimeNamed__NoRM(InputStream runtimeInputStream, File dest, ProgressReporterThingy thingy) throws IOException {
-        File tmp = new File(dest,"temporary");
-        FileOutputStream fos = new FileOutputStream(tmp);
-        thingy.reportStringProgress(R.string.multirt_progress_caching);
-        IOUtils.copy(runtimeInputStream,fos);
-        fos.close();
-        runtimeInputStream.close();
-        uncompressTarXZ(tmp,dest,thingy);
-        tmp.delete();
-    }
+
     public static void postPrepare(Context ctx, String name) throws IOException {
-        File dest = new File(runtimeFolder,"/"+name);
+        File dest = new File(RUNTIME_FOLDER,"/" + name);
         if(!dest.exists()) return;
-        Runtime r = read(name);
+        Runtime runtime = read(name);
         String libFolder = "lib";
-        if(new File(dest,libFolder+"/"+r.arch).exists()) libFolder = libFolder+"/"+r.arch;
-        File ftIn = new File(dest, libFolder+ "/libfreetype.so.6");
+        if(new File(dest,libFolder + "/" + runtime.arch).exists()) libFolder = libFolder + "/" + runtime.arch;
+        File ftIn = new File(dest, libFolder + "/libfreetype.so.6");
         File ftOut = new File(dest, libFolder + "/libfreetype.so");
         if (ftIn.exists() && (!ftOut.exists() || ftIn.length() != ftOut.length())) {
             ftIn.renameTo(ftOut);
         }
 
         // Refresh libraries
-        copyDummyNativeLib(ctx,"libawt_xawt.so",dest,libFolder);
+        copyDummyNativeLib(ctx,"libawt_xawt.so", dest, libFolder);
     }
-    private static void copyDummyNativeLib(Context ctx, String name, File dest, String libFolder) throws IOException {
 
-        File fileLib = new File(dest, "/"+libFolder + "/" + name);
-        fileLib.delete();
-        FileInputStream is = new FileInputStream(new File(ctx.getApplicationInfo().nativeLibraryDir, name));
-        FileOutputStream os = new FileOutputStream(fileLib);
-        IOUtils.copy(is, os);
-        is.close();
-        os.close();
-    }
-    public static Runtime installRuntimeNamedBinpack(InputStream universalFileInputStream, InputStream platformBinsInputStream, String name, String binpackVersion, ProgressReporterThingy thingy) throws IOException {
-        File dest = new File(runtimeFolder,"/"+name);
+    public static Runtime installRuntimeNamedBinpack(InputStream universalFileInputStream, InputStream platformBinsInputStream, String name, String binpackVersion, RuntimeProgressReporter thingy) throws IOException {
+        File dest = new File(RUNTIME_FOLDER,"/"+name);
         if(dest.exists()) FileUtils.deleteDirectory(dest);
         dest.mkdirs();
-        __installRuntimeNamed__NoRM(universalFileInputStream,dest,thingy);
-        __installRuntimeNamed__NoRM(platformBinsInputStream,dest,thingy);
-        File binpack_verfile = new File(runtimeFolder,"/"+name+"/pojav_version");
+        installRuntimeNamedNoRemove(universalFileInputStream,dest,thingy);
+        installRuntimeNamedNoRemove(platformBinsInputStream,dest,thingy);
+        File binpack_verfile = new File(RUNTIME_FOLDER,"/"+name+"/pojav_version");
         FileOutputStream fos = new FileOutputStream(binpack_verfile);
         fos.write(binpackVersion.getBytes());
         fos.close();
-        cache.remove(name); // Force reread
+        sCache.remove(name); // Force reread
         return read(name);
     }
+
     public static String __internal__readBinpackVersion(String name) {
-        File binpack_verfile = new File(runtimeFolder,"/"+name+"/pojav_version");
+        File binpack_verfile = new File(RUNTIME_FOLDER,"/"+name+"/pojav_version");
         try {
             if (binpack_verfile.exists()) {
                 return Tools.read(binpack_verfile.getAbsolutePath());
@@ -162,38 +130,42 @@ public class MultiRTUtils {
             return null;
         }
     }
+
     public static void removeRuntimeNamed(String name) throws IOException {
-        File dest = new File(runtimeFolder,"/"+name);
+        File dest = new File(RUNTIME_FOLDER,"/"+name);
         if(dest.exists()) {
             FileUtils.deleteDirectory(dest);
-            cache.remove(name);
+            sCache.remove(name);
         }
     }
+
     public static void setRuntimeNamed(Context ctx, String name) throws IOException {
-        File dest = new File(runtimeFolder,"/"+name);
+        File dest = new File(RUNTIME_FOLDER,"/"+name);
         if((!dest.exists()) || MultiRTUtils.forceReread(name).versionString == null) throw new RuntimeException("Selected runtime is broken!");
         Tools.DIR_HOME_JRE = dest.getAbsolutePath();
         JREUtils.relocateLibPath(ctx);
     }
+
     public static Runtime forceReread(String name) {
-        cache.remove(name);
+        sCache.remove(name);
         return read(name);
     }
+
     public static Runtime read(String name) {
-        if(cache.containsKey(name)) return cache.get(name);
-        Runtime retur;
-        File release = new File(runtimeFolder,"/"+name+"/release");
+        if(sCache.containsKey(name)) return sCache.get(name);
+        Runtime returnRuntime;
+        File release = new File(RUNTIME_FOLDER,"/"+name+"/release");
         if(!release.exists()) {
             return new Runtime(name);
         }
         try {
             String content = Tools.read(release.getAbsolutePath());
-            int _JAVA_VERSION_index = content.indexOf(JAVA_VERSION_str);
-            int _OS_ARCH_index = content.indexOf(OS_ARCH_str);
-            if(_JAVA_VERSION_index != -1 && _OS_ARCH_index != -1) {
-                _JAVA_VERSION_index += JAVA_VERSION_str.length();
-                _OS_ARCH_index += OS_ARCH_str.length();
-                String javaVersion = content.substring(_JAVA_VERSION_index,content.indexOf('"',_JAVA_VERSION_index));
+            int javaVersionIndex = content.indexOf(JAVA_VERSION_STR);
+            int osArchIndex = content.indexOf(OS_ARCH_STR);
+            if(javaVersionIndex != -1 && osArchIndex != -1) {
+                javaVersionIndex += JAVA_VERSION_STR.length();
+                osArchIndex += OS_ARCH_STR.length();
+                String javaVersion = content.substring(javaVersionIndex,content.indexOf('"', javaVersionIndex));
                     String[] javaVersionSplit = javaVersion.split("\\.");
                     int javaVersionInt;
                     if (javaVersionSplit[0].equals("1")) {
@@ -201,25 +173,46 @@ public class MultiRTUtils {
                     } else {
                         javaVersionInt = Integer.parseInt(javaVersionSplit[0]);
                     }
-                    Runtime r = new Runtime(name);
-                    r.arch = content.substring(_OS_ARCH_index,content.indexOf('"',_OS_ARCH_index));
-                    r.javaVersion = javaVersionInt;
-                    r.versionString = javaVersion;
-                    retur = r;
+                    Runtime runtime = new Runtime(name);
+                    runtime.arch = content.substring(osArchIndex,content.indexOf('"', osArchIndex));
+                    runtime.javaVersion = javaVersionInt;
+                    runtime.versionString = javaVersion;
+                    returnRuntime = runtime;
             }else{
-                retur =  new Runtime(name);
+                returnRuntime =  new Runtime(name);
             }
         }catch(IOException e) {
-            retur =  new Runtime(name);
+            returnRuntime =  new Runtime(name);
         }
-        cache.put(name,retur);
-        return retur;
+        sCache.put(name, returnRuntime);
+        return returnRuntime;
     }
-    private static void uncompressTarXZ(final File tarFile, final File dest, final ProgressReporterThingy thingy) throws IOException {
-        dest.mkdirs();
-        TarArchiveInputStream tarIn = null;
 
-        tarIn = new TarArchiveInputStream(
+    private static void copyDummyNativeLib(Context ctx, String name, File dest, String libFolder) throws IOException {
+        File fileLib = new File(dest, "/"+libFolder + "/" + name);
+        fileLib.delete();
+        FileInputStream is = new FileInputStream(new File(ctx.getApplicationInfo().nativeLibraryDir, name));
+        FileOutputStream os = new FileOutputStream(fileLib);
+        IOUtils.copy(is, os);
+        is.close();
+        os.close();
+    }
+
+    private static void installRuntimeNamedNoRemove(InputStream runtimeInputStream, File dest, RuntimeProgressReporter progressReporter) throws IOException {
+        File tmp = new File(dest,"temporary");
+        FileOutputStream fos = new FileOutputStream(tmp);
+        progressReporter.reportStringProgress(R.string.multirt_progress_caching);
+        IOUtils.copy(runtimeInputStream,fos);
+        fos.close();
+        runtimeInputStream.close();
+        uncompressTarXZ(tmp,dest,progressReporter);
+        tmp.delete();
+    }
+
+    private static void uncompressTarXZ(final File tarFile, final File dest, final RuntimeProgressReporter thingy) throws IOException {
+        dest.mkdirs();
+
+        TarArchiveInputStream tarIn = new TarArchiveInputStream(
                 new XZCompressorInputStream(
                         new BufferedInputStream(
                                 new FileInputStream(tarFile)
@@ -251,7 +244,7 @@ public class MultiRTUtils {
                     // Libcore one support all Android versions
                     Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
                 } catch (Throwable e) {
-                    e.printStackTrace();
+                    Log.e("MultiRT", e.toString());
                 }
 
             } else if (tarEntry.isDirectory()) {

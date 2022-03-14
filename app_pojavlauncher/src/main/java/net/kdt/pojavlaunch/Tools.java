@@ -289,7 +289,7 @@ public final class Tools {
             versionName = versionInfo.inheritsFrom;
         }
         
-        String userType = "mojang";
+        String userType = "msa";
 
         File gameDir = new File(strGameDir);
         gameDir.mkdirs();
@@ -527,42 +527,37 @@ public final class Tools {
     private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         e.printStackTrace();
         
-        Runnable runnable = new Runnable(){
-
-            @Override
-            public void run()
-            {
-                final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
-                AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
-                    .setTitle(titleId)
-                    .setMessage(errMsg)
-                    .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
-                        if(exitIfOk) {
-                            if (ctx instanceof BaseMainActivity) {
-                                BaseMainActivity.fullyExit();
-                            } else if (ctx instanceof Activity) {
-                                ((Activity) ctx).finish();
-                            }
+        Runnable runnable = () -> {
+            final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
+            AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
+                .setTitle(titleId)
+                .setMessage(errMsg)
+                .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
+                    if(exitIfOk) {
+                        if (ctx instanceof BaseMainActivity) {
+                            BaseMainActivity.fullyExit();
+                        } else if (ctx instanceof Activity) {
+                            ((Activity) ctx).finish();
                         }
-                    })
-                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
-                    .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
-                        ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
-                        mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
-                        if(exitIfOk) {
-                            if (ctx instanceof BaseMainActivity) {
-                                BaseMainActivity.fullyExit();
-                            } else {
-                                ((Activity) ctx).finish();
-                            }
+                    }
+                })
+                .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
+                .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
+                    ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+                    mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
+                    if(exitIfOk) {
+                        if (ctx instanceof BaseMainActivity) {
+                            BaseMainActivity.fullyExit();
+                        } else {
+                            ((Activity) ctx).finish();
                         }
-                    })
-                    .setCancelable(!exitIfOk);
-                try {
-                    builder.show();
-                } catch (Throwable th) {
-                    th.printStackTrace();
-                }
+                    }
+                })
+                .setCancelable(!exitIfOk);
+            try {
+                builder.show();
+            } catch (Throwable th) {
+                th.printStackTrace();
             }
         };
 
@@ -573,8 +568,8 @@ public final class Tools {
         }
     }
 
-    public static void dialogOnUiThread(final Activity ctx, final CharSequence title, final CharSequence message) {
-        ctx.runOnUiThread(() -> new AlertDialog.Builder(ctx)
+    public static void dialogOnUiThread(final Activity activity, final CharSequence title, final CharSequence message) {
+        activity.runOnUiThread(() -> new AlertDialog.Builder(activity)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(android.R.string.ok, null)
@@ -646,7 +641,7 @@ public final class Tools {
                    }catch(IOException e) {
                        throw new RuntimeException("Can't find the source version for "+ versionName +" (req version="+customVer.inheritsFrom+")");
                    }
-                inheritsVer.inheritsFrom = inheritsVer.id;
+                //inheritsVer.inheritsFrom = inheritsVer.id;
                 insertSafety(inheritsVer, customVer,
                              "assetIndex", "assets", "id",
                              "mainClass", "minecraftArguments",
@@ -742,23 +737,19 @@ public final class Tools {
     }
     
     public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         int len;
         byte[] buf = new byte[512];
         while((len = inputStream.read(buf))!=-1) {
-            out += new String(buf,0,len,charset);
+            out.append(new String(buf, 0, len, charset));
         }
-        return out;
+        return out.toString();
     }
 
     public static File lastFileModified(String dir) {
         File fl = new File(dir);
 
-        File[] files = fl.listFiles(new FileFilter() {          
-                public boolean accept(File file) {
-                    return file.isFile();
-                }
-            });
+        File[] files = fl.listFiles(File::isFile);
 
         long lastMod = Long.MIN_VALUE;
         File choice = null;
@@ -774,13 +765,13 @@ public final class Tools {
 
 
     public static String read(InputStream is) throws IOException {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         int len;
         byte[] buf = new byte[512];
         while((len = is.read(buf))!=-1) {
-            out += new String(buf,0,len);
+            out.append(new String(buf, 0, len));
         }
-        return out;
+        return out.toString();
     }
 
     public static String read(String path) throws IOException {
@@ -826,6 +817,7 @@ public final class Tools {
     public abstract static class DownloaderFeedback {
         public abstract void updateProgress(int curr, int max);
     }
+
     public static void downloadFileMonitored(String urlInput,String nameOutput, DownloaderFeedback monitor) throws IOException {
         File nameOutputFile = new File(nameOutput);
         if (!nameOutputFile.exists()) {
@@ -860,75 +852,6 @@ public final class Tools {
         }catch (IOException e) {
             Log.i("SHA1","Fake-matching a hash due to a read error",e);
             return true;
-        }
-    }
-    public static class ZipTool
-    {
-        private ZipTool(){}
-        public static void zip(List<File> files, File zipFile) throws IOException {
-            final int BUFFER_SIZE = 2048;
-
-            BufferedInputStream origin = null;
-            ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile)));
-
-            try {
-                byte data[] = new byte[BUFFER_SIZE];
-
-                for (File file : files) {
-                    FileInputStream fileInputStream = new FileInputStream( file );
-
-                    origin = new BufferedInputStream(fileInputStream, BUFFER_SIZE);
-
-                    try {
-                        ZipEntry entry = new ZipEntry(file.getName());
-
-                        out.putNextEntry(entry);
-
-                        int count;
-                        while ((count = origin.read(data, 0, BUFFER_SIZE)) != -1) {
-                            out.write(data, 0, count);
-                        }
-                    }
-                    finally {
-                        origin.close();
-                    }
-                }
-            } finally {
-                out.close();
-            }
-        }
-        public static void unzip(File zipFile, File targetDirectory) throws IOException {
-            final int BUFFER_SIZE = 1024;
-            ZipInputStream zis = new ZipInputStream(
-                new BufferedInputStream(new FileInputStream(zipFile)));
-            try {
-                ZipEntry ze;
-                int count;
-                byte[] buffer = new byte[BUFFER_SIZE];
-                while ((ze = zis.getNextEntry()) != null) {
-                    File file = new File(targetDirectory, ze.getName());
-                    File dir = ze.isDirectory() ? file : file.getParentFile();
-                    if (!dir.isDirectory() && !dir.mkdirs())
-                        throw new FileNotFoundException("Failed to ensure directory: " +
-                                                        dir.getAbsolutePath());
-                    if (ze.isDirectory())
-                        continue;
-                    FileOutputStream fout = new FileOutputStream(file);
-                    try {
-                        while ((count = zis.read(buffer)) != -1)
-                            fout.write(buffer, 0, count);
-                    } finally {
-                        fout.close();
-                    }
-                    /* if time should be restored as well
-                     long time = ze.getTime();
-                     if (time > 0)
-                     file.setLastModified(time);
-                     */
-                }
-            } finally {
-                zis.close();
-            }
         }
     }
 

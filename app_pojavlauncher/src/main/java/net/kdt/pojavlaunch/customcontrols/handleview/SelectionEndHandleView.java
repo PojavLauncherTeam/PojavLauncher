@@ -25,8 +25,7 @@ import android.view.*;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 
 
-public class SelectionEndHandleView extends HandleView
-{
+public class SelectionEndHandleView extends HandleView {
     public SelectionEndHandleView(ControlButton view) {
         super(view);
     }

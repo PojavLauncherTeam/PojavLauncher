@@ -64,12 +64,12 @@
         </activity>
 
         <activity
-            android:theme="@style/MenuDialog"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"
             android:screenOrientation="sensorLandscape"
             android:name=".FatalErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
         <activity
-            android:theme="@style/MenuDialog"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"
             android:screenOrientation="sensorLandscape"
             android:name=".ExitActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>

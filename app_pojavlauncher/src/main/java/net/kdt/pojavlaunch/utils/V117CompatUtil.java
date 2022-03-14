@@ -92,15 +92,17 @@ public class V117CompatUtil {
         Log.i("V117CompatDebug",rawList);
         return new ArrayList<>(Arrays.asList(rawList.split(",")));
     }
+
     private static String regenPackList(List<String> packs) {
         if(packs.size()==0) return "[]";
-        String ret = "["+packs.get(0);
+        StringBuilder ret = new StringBuilder("[" + packs.get(0));
         for(int i = 1; i < packs.size(); i++) {
-            ret += ","+packs.get(i);
+            ret.append(",").append(packs.get(i));
         }
-        ret += "]";
-        return ret;
+        ret.append("]");
+        return ret.toString();
     }
+
     public static void runCheck(String version, Activity ctx) throws Exception{
 
         PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(version);
@@ -115,25 +117,25 @@ public class V117CompatUtil {
         Object lock = new Object();
         AtomicInteger proceed = new AtomicInteger(0);
         ctx.runOnUiThread(() -> {
-            AlertDialog.Builder bldr = new AlertDialog.Builder(ctx);
-            bldr.setTitle(R.string.global_warinng);
-            bldr.setMessage(R.string.compat_117_message);
-            bldr.setPositiveButton(android.R.string.ok, (dialog, which) -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+            builder.setTitle(R.string.global_warinng);
+            builder.setMessage(R.string.compat_117_message);
+            builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
                 proceed.set(1);
                 synchronized (lock) { lock.notifyAll(); }
                 dialog.dismiss();
             });
-            bldr.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+            builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                 synchronized (lock) { lock.notifyAll(); }
                 dialog.dismiss();
             });
-            bldr.setNeutralButton(R.string.compat_11x_playanyway, (dialog, which) -> {
+            builder.setNeutralButton(R.string.compat_11x_playanyway, (dialog, which) -> {
                 proceed.set(2);
                 synchronized (lock) { lock.notifyAll(); }
                 dialog.dismiss();
             });
-            bldr.setCancelable(false);
-            bldr.show();
+            builder.setCancelable(false);
+            builder.show();
         });
 
         synchronized (lock) {
@@ -158,6 +160,7 @@ public class V117CompatUtil {
                 throw new MinecraftDownloaderTask.SilentException();
         }
     }
+
     public static void copyResourcePack(String gameDir, AssetManager am) throws IOException {
         File resourcepacksDir = new File(gameDir,"resourcepacks");
         if(!resourcepacksDir.exists()) resourcepacksDir.mkdirs();

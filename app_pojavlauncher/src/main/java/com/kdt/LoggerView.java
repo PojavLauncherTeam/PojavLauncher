@@ -21,10 +21,10 @@ import net.kdt.pojavlaunch.R;
  * It has support for the Logger class
  */
 public class LoggerView extends ConstraintLayout {
-    private Logger.eventLogListener logListener;
-    private ToggleButton toggleButton;
-    private ScrollView scrollView;
-    private TextView log;
+    private Logger.eventLogListener mLogListener;
+    private ToggleButton mToggleButton;
+    private ScrollView mScrollView;
+    private TextView mLogTextView;
 
 
     public LoggerView(@NonNull Context context) {
@@ -36,50 +36,51 @@ public class LoggerView extends ConstraintLayout {
         init();
     }
 
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        // Triggers the log view shown state by default when viewing it
+        mToggleButton.setChecked(visibility == VISIBLE);
+    }
+
     /**
      * Inflate the layout, and add component behaviors
      */
     private void init(){
-        inflate(getContext(), R.layout.loggerview_layout, this);
-        log = findViewById(R.id.content_log_view);
-        log.setTypeface(Typeface.MONOSPACE);
+        inflate(getContext(), R.layout.view_logger, this);
+        mLogTextView = findViewById(R.id.content_log_view);
+        mLogTextView.setTypeface(Typeface.MONOSPACE);
         //TODO clamp the max text so it doesn't go oob
-        log.setMaxLines(Integer.MAX_VALUE);
-        log.setEllipsize(null);
-        log.setVisibility(GONE);
+        mLogTextView.setMaxLines(Integer.MAX_VALUE);
+        mLogTextView.setEllipsize(null);
+        mLogTextView.setVisibility(GONE);
 
         // Toggle log visibility
-        toggleButton = findViewById(R.id.content_log_toggle_log);
-        toggleButton.setOnCheckedChangeListener(
+        mToggleButton = findViewById(R.id.content_log_toggle_log);
+        mToggleButton.setOnCheckedChangeListener(
                 (compoundButton, isChecked) -> {
-                    log.setVisibility(isChecked ? VISIBLE : GONE);
-                    if(!isChecked) log.setText("");
+                    mLogTextView.setVisibility(isChecked ? VISIBLE : GONE);
+                    if(!isChecked) mLogTextView.setText("");
                 });
-        toggleButton.setChecked(false);
+        mToggleButton.setChecked(false);
 
         // Remove the loggerView from the user View
         ImageButton cancelButton = findViewById(R.id.log_view_cancel);
         cancelButton.setOnClickListener(view -> LoggerView.this.setVisibility(GONE));
 
         // Set the scroll view
-        scrollView = findViewById(R.id.content_log_scroll);
+        mScrollView = findViewById(R.id.content_log_scroll);
 
         // Listen to logs
-        logListener = text -> {
-            if(log.getVisibility() != VISIBLE) return;
+        mLogListener = text -> {
+            if(mLogTextView.getVisibility() != VISIBLE) return;
             post(() -> {
-                log.append(text + '\n');
-                scrollView.fullScroll(View.FOCUS_DOWN);
+                mLogTextView.append(text + '\n');
+                mScrollView.fullScroll(View.FOCUS_DOWN);
             });
 
         };
-        Logger.getInstance().setLogListener(logListener);
+        Logger.getInstance().setLogListener(mLogListener);
     }
 
-    @Override
-    public void setVisibility(int visibility) {
-        super.setVisibility(visibility);
-        // Triggers the log view shown state by default when viewing it
-        toggleButton.setChecked(visibility == VISIBLE);
-    }
 }
