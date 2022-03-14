@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/menu_background"
+        android:background="@drawable/ic_setting_sign_in_background"
         android:gravity="center"
         android:paddingVertical="3dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,8 +114,8 @@
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/mineButton2"
-        android:layout_width="303dp"
-        android:layout_height="62dp"
+        android:layout_width="304dp"
+        android:layout_height="44dp"
         android:background="@drawable/mine_button_background"
         android:onClick="loginSavedAcc"
         android:text="@string/login_select_account"
@@ -123,11 +123,11 @@
         android:textColor="@android:color/white"
 
         app:layout_constraintBottom_toBottomOf="@+id/login_menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.796" />
+        app:layout_constraintEnd_toEndOf="@+id/login_menu"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="@+id/login_menu"
+        app:layout_constraintTop_toTopOf="@+id/login_menu"
+        app:layout_constraintVertical_bias="0.63" />
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/mineButton3"
@@ -155,7 +155,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872"
+        app:layout_constraintVertical_bias="0.842"
         app:srcCompat="@drawable/questcraftxp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
