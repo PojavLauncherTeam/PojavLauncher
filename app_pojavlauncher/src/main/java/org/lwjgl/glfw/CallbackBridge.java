@@ -36,9 +36,10 @@ public class CallbackBridge {
 
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
+            nativeSetUseInputStackQueue(BaseMainActivity.isInputStackCall);
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
-        
+
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
         mouseX = x;
         mouseY = y;
@@ -198,6 +199,7 @@ public class CallbackBridge {
         }
     }
 
+    public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
     public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
 
     private static native boolean nativeSendChar(char codepoint);
