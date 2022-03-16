@@ -67,6 +67,50 @@ jobs:
         git add .
         git commit -am "CI: Update gl4es"
         git push
+        
+    - name: Get gl4es_112 latest commit hash
+      if: github.ref == 'refs/heads/v3_openjdk'
+      id: gl4es_112-sha
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*'))"
+      shell: bash
+      
+    - name: Cache gl4es_112
+      if: github.ref == 'refs/heads/v3_openjdk'
+      uses: actions/cache@v2
+      id: gl4es_112-cache
+      with:
+        path: gl4es/libs
+        key: gl4es-android-shared-nodbg-test1-2-${{ steps.gl4es-sha.outputs.sha }}
+
+    - name: Get gl4es_112
+      if: github.ref == 'refs/heads/v3_openjdk' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        repository: 'LegacyGamerHD/gl4es_112'
+        path: 'gl4es_112'
+
+    - name: Build gl4es_112
+      if: github.ref == 'refs/heads/v3_openjdk' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      continue-on-error: true
+      run: |
+        cd gl4es
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git config --global user.name "github-actions"
+        git remote add upstream https://github.com/LegacyGamerHD/gl4es_112
+        git fetch upstream
+        git checkout legacy_gl4es_pojav
+        git merge --allow-unrelated-histories upstream/legacy_gl4es_pojav || echo "Merge exit code $?"
+        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
+    
+    - name: Install gl4es_112
+      if: github.ref == 'refs/heads/v3_openjdk' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      continue-on-error: true
+      run: |
+        cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
+        mv gl4es_112 ..
+        git add .
+        git commit -am "CI: Update gl4es"
+        git push
     
     - name: Get vgpu latest commit hash
       if: github.ref == 'refs/heads/v3_openjdk'
