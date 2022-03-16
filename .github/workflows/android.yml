@@ -71,7 +71,7 @@ jobs:
     - name: Get gl4es_112 latest commit hash
       if: github.ref == 'refs/heads/v3_openjdk'
       id: gl4es_112-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*'))"
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/LegacyGamerHD/gl4es_112 refs/heads/master | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es_112
