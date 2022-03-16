@@ -436,6 +436,7 @@ public class JREUtils {
         String renderLibrary;
         switch (LOCAL_RENDERER){
             case "opengles2": renderLibrary = "libgl4es_114.so"; break;
+            case "opengles2_3": renderLibrary = "libgl4es_112.so"; break;
             case "opengles2_5":
             case "opengles3": renderLibrary = "libgl4es_115.so"; break;
             case "opengles3_virgl":
