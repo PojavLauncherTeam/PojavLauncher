@@ -334,7 +334,7 @@ public class PojavLoginActivity extends BaseActivity {
             Tools.copyAssetFile(this, "artifacts/mcxr-core-0.2.0+null.jar", DIR_GAME_NEW + "/mods", false);
             Tools.copyAssetFile(this, "artifacts/mcxr-play-0.2.0+null.jar", DIR_GAME_NEW + "/mods", false);
             Tools.copyAssetFile(this, "artifacts/titleworlds-0.0.2.jar", DIR_GAME_NEW + "/mods", false);
-            Tools.copyAssetFile(this, "artifacts/lazydfu-0.1.2.jar", DIR_GAME_NEW + "/mods", false);
+            Tools.copyAssetFile(this, "artifacts/lazydfu-0.1.3-SNAPSHOT.jar", DIR_GAME_NEW + "/mods", false);
             Tools.copyAssetFile(this, "artifacts/fabric-api-0.48.0+1.18.2.jar", DIR_GAME_NEW + "/mods", false);
 
             AssetManager am = this.getAssets();
