@@ -54,6 +54,7 @@ import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
 import org.apache.commons.io.FileUtils;
+import top.defaults.checkerboarddrawable.BuildConfig;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -405,7 +406,7 @@ public class PojavLoginActivity extends BaseActivity {
         if(!firstLaunchPrefs.getBoolean("storageDialogShown",false)) {
             AlertDialog.Builder bldr = new AlertDialog.Builder(this);
             bldr.setTitle(R.string.storage_warning_title);
-            Spanned sp = Html.fromHtml(getString(R.string.storage_warning_text,BuildConfig.APPLICATION_ID));
+            Spanned sp = Html.fromHtml(getString(R.string.storage_warning_text, BuildConfig.APPLICATION_ID));
             bldr.setMessage(sp);
             bldr.setCancelable(false);
             bldr.setPositiveButton(android.R.string.ok, (dialog, which)->{
