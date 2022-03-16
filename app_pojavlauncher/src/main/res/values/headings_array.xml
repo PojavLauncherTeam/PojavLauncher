@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="renderer">
+        <item name="2">@string/mcl_setting_renderer_gles2_3</item>
         <item name="2">@string/mcl_setting_renderer_gles2_4</item>
         <item name="3">@string/mcl_setting_renderer_gles2_5</item>
         <item name="3">@string/mcl_setting_renderer_gles3_5</item>
@@ -11,6 +12,7 @@
     
     <string-array name="renderer_values">
         <item>opengles2</item> <!-- gl4es 1.1.4 with OpenGL ES 2 -->
+        <item>opengles2_3</item> <!-- gl4es 1.1.2 with OpenGL ES 2 -->
         <item>opengles2_5</item>  <!-- gl4es 1.1.5 with OpenGL ES 2 -->
         <item>opengles3</item> <!-- gl4es 1.1.5 with OpenGL ES 3 -->
         <!--<item>vulkan_zink</item> -->
