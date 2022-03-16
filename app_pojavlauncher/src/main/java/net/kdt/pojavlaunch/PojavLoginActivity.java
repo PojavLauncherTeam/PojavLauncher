@@ -378,10 +378,10 @@ public class PojavLoginActivity extends BaseActivity {
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/region/r.-1.-1.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/region", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/00000000-0000-0000-0000-000000000000.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/6b404275-563a-4c56-8f46-c1c0c23df5c8.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/poi/icon.png", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/poi/level.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/poi/level.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/poi/session.lock", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/icon.png", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/level.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/level.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/session.lock", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
 
 
             AssetManager am = this.getAssets();
