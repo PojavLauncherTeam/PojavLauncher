@@ -68,6 +68,45 @@ jobs:
           git commit -am "CI: Update gl4es"
           git push
 
+      - name: Get vgpu latest commit hash
+        if: github.ref == 'refs/heads/v3_openjdk'
+        id: vgpu-sha
+        run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/VGPU refs/heads/main | grep -io '^\S*'))"
+        shell: bash
+
+      - name: Cache vgpu
+        if: github.ref == 'refs/heads/v3_openjdk'
+        uses: actions/cache@v2
+        id: vgpu-cache
+        with:
+          path: vgpu/libs
+          key: vgpu-android-shared-1-${{ steps.vgpu-sha.outputs.sha }}
+
+      - name: Get vgpu
+        if: github.ref == 'refs/heads/v3_openjdk' && steps.vgpu-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v2
+        with:
+          repository: "PojavLauncherTeam/VGPU"
+          path: "vgpu"
+
+      - name: Build vgpu
+        if: github.ref == 'refs/heads/v3_openjdk' && steps.vgpu-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        run: |
+          cd vgpu
+          $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
+
+      - name: Install vgpu
+        if: github.ref == 'refs/heads/v3_openjdk' && steps.vgpu-cache.outputs.cache-hit != 'true'
+        run: |
+          cp -R vgpu/libs/* app_pojavlauncher/src/main/jniLibs/
+          mv vgpu ..
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git config --global user.name "github-actions"
+          git add .
+          git commit -am "CI: Update vgpu"
+          git push
+
       - name: Get JRE17
         uses: dawidd6/action-download-artifact@v2
         with:
