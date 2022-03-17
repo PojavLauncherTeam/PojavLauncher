@@ -27,19 +27,19 @@ import org.lwjgl.glfw.CallbackBridge;
  */
 public class Touchpad extends FrameLayout {
     /* Whether the Touchpad should be displayed */
-    private boolean displayState;
+    private boolean mDisplayState;
     /* Mouse pointer icon used by the touchpad */
-    private final ImageView mousePointer = new ImageView(getContext());
+    private final ImageView mMousePointerImageView = new ImageView(getContext());
     /* Detect a classic android Tap */
-    private final GestureDetector singleTapDetector = new GestureDetector(getContext(), new SingleTapConfirm());
+    private final GestureDetector mSingleTapDetector = new GestureDetector(getContext(), new SingleTapConfirm());
     /* Resolution scaler option, allow downsizing a window */
-    private final float scaleFactor = DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
+    private final float mScaleFactor = DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
     /* Current pointer ID to move the mouse */
-    private int currentPointerID = -1000;
+    private int mCurrentPointerID = -1000;
     /* Previous MotionEvent position, not scale */
-    private float prevX, prevY;
+    private float mPrevX, mPrevY;
     /* Last first pointer positions non-scaled, used to scroll distance */
-    private float scrollLastInitialX, scrollLastInitialY;
+    private float mScrollLastInitialX, mScrollLastInitialY;
 
     public Touchpad(@NonNull Context context) {
         this(context, null);
@@ -48,56 +48,6 @@ public class Touchpad extends FrameLayout {
     public Touchpad(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
-    }
-
-    private void init(){
-        // Setup mouse pointer
-        mousePointer.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.mouse_pointer, getContext().getTheme()));
-        mousePointer.post(() -> {
-            ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
-            params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-            params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-        });
-        addView(mousePointer);
-        setFocusable(false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            setDefaultFocusHighlightEnabled(false);
-        }
-
-        // When the game is grabbing, we should not display the mouse
-        disable();
-        displayState = false;
-        Thread virtualMouseGrabThread = new Thread(() -> {
-            while (true) {
-                if (!CallbackBridge.isGrabbing() && displayState && getVisibility() != VISIBLE) {
-                    post(this::enable);
-                }else{
-                    if ((CallbackBridge.isGrabbing() && getVisibility() != View.GONE) || !displayState && getVisibility() == VISIBLE) {
-                        post(this::disable);
-                    }
-                }
-
-            }
-        }, "VirtualMouseGrabThread");
-        virtualMouseGrabThread.setPriority(Thread.MIN_PRIORITY);
-        virtualMouseGrabThread.start();
-    }
-
-    /** Enable the touchpad */
-    public void enable(){
-        setVisibility(VISIBLE);
-        placeMouseAt(currentDisplayMetrics.widthPixels / 2, currentDisplayMetrics.heightPixels / 2);
-    }
-
-    /** Disable the touchpad and hides the mouse */
-    public void disable(){
-        setVisibility(GONE);
-    }
-
-    /** @return The new state, enabled or disabled */
-    public boolean switchState(){
-        displayState = !displayState;
-        return displayState;
     }
 
     @Override
@@ -114,64 +64,63 @@ public class Touchpad extends FrameLayout {
 
         float x = event.getX();
         float y = event.getY();
-        float mouseX = mousePointer.getX();
-        float mouseY = mousePointer.getY();
+        float mouseX = mMousePointerImageView.getX();
+        float mouseY = mMousePointerImageView.getY();
 
-        if (singleTapDetector.onTouchEvent(event)) {
-            CallbackBridge.mouseX = (mouseX * scaleFactor);
-            CallbackBridge.mouseY = (mouseY * scaleFactor);
+        if (mSingleTapDetector.onTouchEvent(event)) {
+            CallbackBridge.mouseX = (mouseX * mScaleFactor);
+            CallbackBridge.mouseY = (mouseY * mScaleFactor);
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-            CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT);
+            CallbackBridge.sendMouseKeycode(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT);
 
             return true;
         }
 
         switch (action) {
             case MotionEvent.ACTION_POINTER_DOWN: // 5
-                scrollLastInitialX = event.getX();
-                scrollLastInitialY = event.getY();
+                mScrollLastInitialX = event.getX();
+                mScrollLastInitialY = event.getY();
                 break;
 
             case MotionEvent.ACTION_DOWN:
-                prevX = x;
-                prevY = y;
-                currentPointerID = event.getPointerId(0);
+                mPrevX = x;
+                mPrevY = y;
+                mCurrentPointerID = event.getPointerId(0);
                 break;
 
             case MotionEvent.ACTION_MOVE: // 2
                 //Scrolling feature
                 if (!LauncherPreferences.PREF_DISABLE_GESTURES && !CallbackBridge.isGrabbing() && event.getPointerCount() >= 2) {
-                    int hScroll =  ((int) (event.getX() - scrollLastInitialX)) / FINGER_SCROLL_THRESHOLD;
-                    int vScroll = ((int) (event.getY() - scrollLastInitialY)) / FINGER_SCROLL_THRESHOLD;
+                    int hScroll =  ((int) (event.getX() - mScrollLastInitialX)) / FINGER_SCROLL_THRESHOLD;
+                    int vScroll = ((int) (event.getY() - mScrollLastInitialY)) / FINGER_SCROLL_THRESHOLD;
 
                     if(vScroll != 0 || hScroll != 0){
                         CallbackBridge.sendScroll(hScroll, vScroll);
-                        scrollLastInitialX = event.getX();
-                        scrollLastInitialY = event.getY();
+                        mScrollLastInitialX = event.getX();
+                        mScrollLastInitialY = event.getY();
                     }
                     break;
                 }
 
                 // Mouse movement
-                if(currentPointerID == event.getPointerId(0)) {
-                    mouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
-                    mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
+                if(mCurrentPointerID == event.getPointerId(0)) {
+                    mouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mouseX + (x - mPrevX) * LauncherPreferences.PREF_MOUSESPEED));
+                    mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - mPrevY) * LauncherPreferences.PREF_MOUSESPEED));
 
                     placeMouseAt(mouseX, mouseY);
                     CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-                }else currentPointerID = event.getPointerId(0);
+                }else mCurrentPointerID = event.getPointerId(0);
 
-                prevX = x;
-                prevY = y;
+                mPrevX = x;
+                mPrevY = y;
                 break;
 
             case MotionEvent.ACTION_UP:
-                prevX = x;
-                prevY = y;
-                currentPointerID = -1000;
+                mPrevX = x;
+                mPrevY = y;
+                mCurrentPointerID = -1000;
                 break;
         }
-
 
         //debugText.setText(CallbackBridge.DEBUG_STRING.toString());
         CallbackBridge.DEBUG_STRING.setLength(0);
@@ -179,12 +128,62 @@ public class Touchpad extends FrameLayout {
         return true;
     }
 
+    /** Enable the touchpad */
+    public void enable(){
+        setVisibility(VISIBLE);
+        placeMouseAt(currentDisplayMetrics.widthPixels / 2, currentDisplayMetrics.heightPixels / 2);
+    }
+
+    /** Disable the touchpad and hides the mouse */
+    public void disable(){
+        setVisibility(GONE);
+    }
+
+    /** @return The new state, enabled or disabled */
+    public boolean switchState(){
+        mDisplayState = !mDisplayState;
+        return mDisplayState;
+    }
+
     public void placeMouseAt(float x, float y) {
-        mousePointer.setX(x);
-        mousePointer.setY(y);
-        CallbackBridge.mouseX = (x * scaleFactor);
-        CallbackBridge.mouseY = (y * scaleFactor);
+        mMousePointerImageView.setX(x);
+        mMousePointerImageView.setY(y);
+        CallbackBridge.mouseX = (x * mScaleFactor);
+        CallbackBridge.mouseY = (y * mScaleFactor);
         CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+    }
+
+    private void init(){
+        // Setup mouse pointer
+        mMousePointerImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mouse_pointer, getContext().getTheme()));
+        mMousePointerImageView.post(() -> {
+            ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
+            params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+            params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+        });
+        addView(mMousePointerImageView);
+        setFocusable(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            setDefaultFocusHighlightEnabled(false);
+        }
+
+        // When the game is grabbing, we should not display the mouse
+        disable();
+        mDisplayState = false;
+        Thread virtualMouseGrabThread = new Thread(() -> {
+            while (true) {
+                if (!CallbackBridge.isGrabbing() && mDisplayState && getVisibility() != VISIBLE) {
+                    post(this::enable);
+                }else{
+                    if ((CallbackBridge.isGrabbing() && getVisibility() != View.GONE) || !mDisplayState && getVisibility() == VISIBLE) {
+                        post(this::disable);
+                    }
+                }
+
+            }
+        }, "VirtualMouseGrabThread");
+        virtualMouseGrabThread.setPriority(Thread.MIN_PRIORITY);
+        virtualMouseGrabThread.start();
     }
 
 }

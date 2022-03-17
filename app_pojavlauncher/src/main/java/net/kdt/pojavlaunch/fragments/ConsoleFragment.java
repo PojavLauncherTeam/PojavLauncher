@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.fragments;
 
 import android.os.*;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.view.*;
 import android.widget.*;
@@ -12,34 +13,33 @@ import android.graphics.*;
 
 import androidx.fragment.app.Fragment;
 
-public class ConsoleFragment extends Fragment
-{
-	public TextView consoleView;
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.lmaintab_consolelog, container, false);
+public class ConsoleFragment extends Fragment {
+	public TextView mConsoleView;
 
-		consoleView = (TextView) view.findViewById(R.id.lmaintabconsoleLogTextView);
-		consoleView.setTypeface(Typeface.MONOSPACE);
-		consoleView.setHint(this.getText(R.string.main_nolog));
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_console_log, container, false);
+
+		mConsoleView = (TextView) view.findViewById(R.id.lmaintabconsoleLogTextView);
+		mConsoleView.setTypeface(Typeface.MONOSPACE);
+		mConsoleView.setHint(this.getText(R.string.main_nolog));
 		
 		return view;
     }
 
 
 	@Override
-	public void onResume()
-	{
+	public void onResume() {
 		super.onResume();
-		consoleView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogTextView);
+		mConsoleView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogTextView);
 	}
 	
 	public void putLog(String str) {
-		if (consoleView == null) {
-			consoleView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogTextView);
+		if (mConsoleView == null) {
+			mConsoleView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogTextView);
 		}
 		
-		consoleView.append(str);
+		mConsoleView.append(str);
 	}
 }

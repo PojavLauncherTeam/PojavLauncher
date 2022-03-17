@@ -2,16 +2,15 @@ package net.kdt.pojavlaunch.tasks;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.AssetManager;
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
-import com.google.gson.*;
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
@@ -280,7 +279,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             setMax(assets.objects.size());
             zeroProgress();
             try {
-                downloadAssets(assets, verInfo.assets, assets.map_to_resources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+                downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -382,7 +381,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
     }
 
     @Override
-    protected void onPostExecute(Throwable p1)
+    public void onPostExecute(Throwable p1)
     {
         mActivity.mPlayButton.setText("Play");
         mActivity.mPlayButton.setEnabled(true);
@@ -466,7 +465,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 JAssetInfo asset = assetsObjects.get(assetKey);
                 assetsSizeBytes+=asset.size;
                 String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-                File outFile = assets.map_to_resources?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
+                File outFile = assets.mapToResources ?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
                 boolean skip = outFile.exists();// skip if the file exists
                 if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  //if sha checking is enabled
                     if(skip) skip = Tools.compareSHA1(outFile, asset.hash); //check hash
@@ -476,7 +475,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     if(outFile.exists()) publishProgress("0",mActivity.getString(R.string.dl_library_sha_fail,assetKey));
                     executor.execute(()->{
                         try {
-                            if (!assets.map_to_resources) {
+                            if (!assets.mapToResources) {
                                 downloadAsset(asset, objectsDir, downloadedSize);
                             } else {
                                 downloadAssetMapped(asset, assetKey, outputDir, downloadedSize);

@@ -4,8 +4,6 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import android.view.KeyEvent;
 
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-
 import org.lwjgl.glfw.CallbackBridge;
 
 import java.util.Arrays;
@@ -16,168 +14,158 @@ public class EfficientAndroidLWJGLKeycode {
     //The key being the android keycode from a KeyEvent
     //The value its LWJGL equivalent.
     private static final int KEYCODE_COUNT = 103;
-    private static final int[] androidKeycodes = new int[KEYCODE_COUNT];
-    private static final short[] LWJGLKeycodes = new short[KEYCODE_COUNT];
+    private static final int[] sAndroidKeycodes = new int[KEYCODE_COUNT];
+    private static final short[] sLwjglKeycodes = new short[KEYCODE_COUNT];
     private static String[] androidKeyNameArray; /* = new String[androidKeycodes.length]; */
+    private static int mTmpCount = 0;
 
     static {
 
         /*  BINARY SEARCH IS PERFORMED ON THE androidKeycodes ARRAY !
             WHEN ADDING A MAPPING, ADD IT SO THE androidKeycodes ARRAY STAYS SORTED ! */
         // Mapping Android Keycodes to LWJGL Keycodes
-        add(KeyEvent.KEYCODE_UNKNOWN,LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN);
-        add(KeyEvent.KEYCODE_HOME, LWJGLGLFWKeycode.GLFW_KEY_HOME);
+        add(KeyEvent.KEYCODE_UNKNOWN, LwjglGlfwKeycode.GLFW_KEY_UNKNOWN);
+        add(KeyEvent.KEYCODE_HOME, LwjglGlfwKeycode.GLFW_KEY_HOME);
         // Escape key
-        add(KeyEvent.KEYCODE_BACK, LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+        add(KeyEvent.KEYCODE_BACK, LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
 
         // 0-9 keys
-        add(KeyEvent.KEYCODE_0, LWJGLGLFWKeycode.GLFW_KEY_0); //7
-        add(KeyEvent.KEYCODE_1, LWJGLGLFWKeycode.GLFW_KEY_1);
-        add(KeyEvent.KEYCODE_2, LWJGLGLFWKeycode.GLFW_KEY_2);
-        add(KeyEvent.KEYCODE_3, LWJGLGLFWKeycode.GLFW_KEY_3);
-        add(KeyEvent.KEYCODE_4, LWJGLGLFWKeycode.GLFW_KEY_4);
-        add(KeyEvent.KEYCODE_5, LWJGLGLFWKeycode.GLFW_KEY_5);
-        add(KeyEvent.KEYCODE_6, LWJGLGLFWKeycode.GLFW_KEY_6);
-        add(KeyEvent.KEYCODE_7, LWJGLGLFWKeycode.GLFW_KEY_7);
-        add(KeyEvent.KEYCODE_8, LWJGLGLFWKeycode.GLFW_KEY_8);
-        add(KeyEvent.KEYCODE_9, LWJGLGLFWKeycode.GLFW_KEY_9); //16
+        add(KeyEvent.KEYCODE_0, LwjglGlfwKeycode.GLFW_KEY_0); //7
+        add(KeyEvent.KEYCODE_1, LwjglGlfwKeycode.GLFW_KEY_1);
+        add(KeyEvent.KEYCODE_2, LwjglGlfwKeycode.GLFW_KEY_2);
+        add(KeyEvent.KEYCODE_3, LwjglGlfwKeycode.GLFW_KEY_3);
+        add(KeyEvent.KEYCODE_4, LwjglGlfwKeycode.GLFW_KEY_4);
+        add(KeyEvent.KEYCODE_5, LwjglGlfwKeycode.GLFW_KEY_5);
+        add(KeyEvent.KEYCODE_6, LwjglGlfwKeycode.GLFW_KEY_6);
+        add(KeyEvent.KEYCODE_7, LwjglGlfwKeycode.GLFW_KEY_7);
+        add(KeyEvent.KEYCODE_8, LwjglGlfwKeycode.GLFW_KEY_8);
+        add(KeyEvent.KEYCODE_9, LwjglGlfwKeycode.GLFW_KEY_9); //16
 
-        add(KeyEvent.KEYCODE_POUND,LWJGLGLFWKeycode.GLFW_KEY_3);
+        add(KeyEvent.KEYCODE_POUND, LwjglGlfwKeycode.GLFW_KEY_3);
 
         // Arrow keys
-        add(KeyEvent.KEYCODE_DPAD_UP, LWJGLGLFWKeycode.GLFW_KEY_UP); //19
-        add(KeyEvent.KEYCODE_DPAD_DOWN, LWJGLGLFWKeycode.GLFW_KEY_DOWN);
-        add(KeyEvent.KEYCODE_DPAD_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT);
-        add(KeyEvent.KEYCODE_DPAD_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT); //22
+        add(KeyEvent.KEYCODE_DPAD_UP, LwjglGlfwKeycode.GLFW_KEY_UP); //19
+        add(KeyEvent.KEYCODE_DPAD_DOWN, LwjglGlfwKeycode.GLFW_KEY_DOWN);
+        add(KeyEvent.KEYCODE_DPAD_LEFT, LwjglGlfwKeycode.GLFW_KEY_LEFT);
+        add(KeyEvent.KEYCODE_DPAD_RIGHT, LwjglGlfwKeycode.GLFW_KEY_RIGHT); //22
 
         // A-Z keys
-        add(KeyEvent.KEYCODE_A, LWJGLGLFWKeycode.GLFW_KEY_A); //29
-        add(KeyEvent.KEYCODE_B, LWJGLGLFWKeycode.GLFW_KEY_B);
-        add(KeyEvent.KEYCODE_C, LWJGLGLFWKeycode.GLFW_KEY_C);
-        add(KeyEvent.KEYCODE_D, LWJGLGLFWKeycode.GLFW_KEY_D);
-        add(KeyEvent.KEYCODE_E, LWJGLGLFWKeycode.GLFW_KEY_E);
-        add(KeyEvent.KEYCODE_F, LWJGLGLFWKeycode.GLFW_KEY_F);
-        add(KeyEvent.KEYCODE_G, LWJGLGLFWKeycode.GLFW_KEY_G);
-        add(KeyEvent.KEYCODE_H, LWJGLGLFWKeycode.GLFW_KEY_H);
-        add(KeyEvent.KEYCODE_I, LWJGLGLFWKeycode.GLFW_KEY_I);
-        add(KeyEvent.KEYCODE_J, LWJGLGLFWKeycode.GLFW_KEY_J);
-        add(KeyEvent.KEYCODE_K, LWJGLGLFWKeycode.GLFW_KEY_K);
-        add(KeyEvent.KEYCODE_L, LWJGLGLFWKeycode.GLFW_KEY_L);
-        add(KeyEvent.KEYCODE_M, LWJGLGLFWKeycode.GLFW_KEY_M);
-        add(KeyEvent.KEYCODE_N, LWJGLGLFWKeycode.GLFW_KEY_N);
-        add(KeyEvent.KEYCODE_O, LWJGLGLFWKeycode.GLFW_KEY_O);
-        add(KeyEvent.KEYCODE_P, LWJGLGLFWKeycode.GLFW_KEY_P);
-        add(KeyEvent.KEYCODE_Q, LWJGLGLFWKeycode.GLFW_KEY_Q);
-        add(KeyEvent.KEYCODE_R, LWJGLGLFWKeycode.GLFW_KEY_R);
-        add(KeyEvent.KEYCODE_S, LWJGLGLFWKeycode.GLFW_KEY_S);
-        add(KeyEvent.KEYCODE_T, LWJGLGLFWKeycode.GLFW_KEY_T);
-        add(KeyEvent.KEYCODE_U, LWJGLGLFWKeycode.GLFW_KEY_U);
-        add(KeyEvent.KEYCODE_V, LWJGLGLFWKeycode.GLFW_KEY_V);
-        add(KeyEvent.KEYCODE_W, LWJGLGLFWKeycode.GLFW_KEY_W);
-        add(KeyEvent.KEYCODE_X, LWJGLGLFWKeycode.GLFW_KEY_X);
-        add(KeyEvent.KEYCODE_Y, LWJGLGLFWKeycode.GLFW_KEY_Y);
-        add(KeyEvent.KEYCODE_Z, LWJGLGLFWKeycode.GLFW_KEY_Z); //54
+        add(KeyEvent.KEYCODE_A, LwjglGlfwKeycode.GLFW_KEY_A); //29
+        add(KeyEvent.KEYCODE_B, LwjglGlfwKeycode.GLFW_KEY_B);
+        add(KeyEvent.KEYCODE_C, LwjglGlfwKeycode.GLFW_KEY_C);
+        add(KeyEvent.KEYCODE_D, LwjglGlfwKeycode.GLFW_KEY_D);
+        add(KeyEvent.KEYCODE_E, LwjglGlfwKeycode.GLFW_KEY_E);
+        add(KeyEvent.KEYCODE_F, LwjglGlfwKeycode.GLFW_KEY_F);
+        add(KeyEvent.KEYCODE_G, LwjglGlfwKeycode.GLFW_KEY_G);
+        add(KeyEvent.KEYCODE_H, LwjglGlfwKeycode.GLFW_KEY_H);
+        add(KeyEvent.KEYCODE_I, LwjglGlfwKeycode.GLFW_KEY_I);
+        add(KeyEvent.KEYCODE_J, LwjglGlfwKeycode.GLFW_KEY_J);
+        add(KeyEvent.KEYCODE_K, LwjglGlfwKeycode.GLFW_KEY_K);
+        add(KeyEvent.KEYCODE_L, LwjglGlfwKeycode.GLFW_KEY_L);
+        add(KeyEvent.KEYCODE_M, LwjglGlfwKeycode.GLFW_KEY_M);
+        add(KeyEvent.KEYCODE_N, LwjglGlfwKeycode.GLFW_KEY_N);
+        add(KeyEvent.KEYCODE_O, LwjglGlfwKeycode.GLFW_KEY_O);
+        add(KeyEvent.KEYCODE_P, LwjglGlfwKeycode.GLFW_KEY_P);
+        add(KeyEvent.KEYCODE_Q, LwjglGlfwKeycode.GLFW_KEY_Q);
+        add(KeyEvent.KEYCODE_R, LwjglGlfwKeycode.GLFW_KEY_R);
+        add(KeyEvent.KEYCODE_S, LwjglGlfwKeycode.GLFW_KEY_S);
+        add(KeyEvent.KEYCODE_T, LwjglGlfwKeycode.GLFW_KEY_T);
+        add(KeyEvent.KEYCODE_U, LwjglGlfwKeycode.GLFW_KEY_U);
+        add(KeyEvent.KEYCODE_V, LwjglGlfwKeycode.GLFW_KEY_V);
+        add(KeyEvent.KEYCODE_W, LwjglGlfwKeycode.GLFW_KEY_W);
+        add(KeyEvent.KEYCODE_X, LwjglGlfwKeycode.GLFW_KEY_X);
+        add(KeyEvent.KEYCODE_Y, LwjglGlfwKeycode.GLFW_KEY_Y);
+        add(KeyEvent.KEYCODE_Z, LwjglGlfwKeycode.GLFW_KEY_Z); //54
 
 
-        add(KeyEvent.KEYCODE_COMMA, LWJGLGLFWKeycode.GLFW_KEY_COMMA);
-        add(KeyEvent.KEYCODE_PERIOD, LWJGLGLFWKeycode.GLFW_KEY_PERIOD);
+        add(KeyEvent.KEYCODE_COMMA, LwjglGlfwKeycode.GLFW_KEY_COMMA);
+        add(KeyEvent.KEYCODE_PERIOD, LwjglGlfwKeycode.GLFW_KEY_PERIOD);
 
         // Alt keys
-        add(KeyEvent.KEYCODE_ALT_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT);
-        add(KeyEvent.KEYCODE_ALT_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_ALT);
+        add(KeyEvent.KEYCODE_ALT_LEFT, LwjglGlfwKeycode.GLFW_KEY_LEFT_ALT);
+        add(KeyEvent.KEYCODE_ALT_RIGHT, LwjglGlfwKeycode.GLFW_KEY_RIGHT_ALT);
 
         // Shift keys
-        add(KeyEvent.KEYCODE_SHIFT_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT);
-        add(KeyEvent.KEYCODE_SHIFT_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_SHIFT);
+        add(KeyEvent.KEYCODE_SHIFT_LEFT, LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT);
+        add(KeyEvent.KEYCODE_SHIFT_RIGHT, LwjglGlfwKeycode.GLFW_KEY_RIGHT_SHIFT);
 
-        add(KeyEvent.KEYCODE_TAB, LWJGLGLFWKeycode.GLFW_KEY_TAB);
-        add(KeyEvent.KEYCODE_SPACE, LWJGLGLFWKeycode.GLFW_KEY_SPACE);
-        add(KeyEvent.KEYCODE_ENTER, LWJGLGLFWKeycode.GLFW_KEY_ENTER); //66
-        add(KeyEvent.KEYCODE_DEL, LWJGLGLFWKeycode.GLFW_KEY_BACKSPACE); // Backspace
-        add(KeyEvent.KEYCODE_GRAVE, LWJGLGLFWKeycode.GLFW_KEY_GRAVE_ACCENT);
-        add(KeyEvent.KEYCODE_MINUS, LWJGLGLFWKeycode.GLFW_KEY_MINUS);
-        add(KeyEvent.KEYCODE_EQUALS, LWJGLGLFWKeycode.GLFW_KEY_EQUAL);
-        add(KeyEvent.KEYCODE_LEFT_BRACKET, LWJGLGLFWKeycode.GLFW_KEY_LEFT_BRACKET);
-        add(KeyEvent.KEYCODE_RIGHT_BRACKET, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_BRACKET);
-        add(KeyEvent.KEYCODE_BACKSLASH, LWJGLGLFWKeycode.GLFW_KEY_BACKSLASH);
-        add(KeyEvent.KEYCODE_SEMICOLON, LWJGLGLFWKeycode.GLFW_KEY_SEMICOLON); //74
+        add(KeyEvent.KEYCODE_TAB, LwjglGlfwKeycode.GLFW_KEY_TAB);
+        add(KeyEvent.KEYCODE_SPACE, LwjglGlfwKeycode.GLFW_KEY_SPACE);
+        add(KeyEvent.KEYCODE_ENTER, LwjglGlfwKeycode.GLFW_KEY_ENTER); //66
+        add(KeyEvent.KEYCODE_DEL, LwjglGlfwKeycode.GLFW_KEY_BACKSPACE); // Backspace
+        add(KeyEvent.KEYCODE_GRAVE, LwjglGlfwKeycode.GLFW_KEY_GRAVE_ACCENT);
+        add(KeyEvent.KEYCODE_MINUS, LwjglGlfwKeycode.GLFW_KEY_MINUS);
+        add(KeyEvent.KEYCODE_EQUALS, LwjglGlfwKeycode.GLFW_KEY_EQUAL);
+        add(KeyEvent.KEYCODE_LEFT_BRACKET, LwjglGlfwKeycode.GLFW_KEY_LEFT_BRACKET);
+        add(KeyEvent.KEYCODE_RIGHT_BRACKET, LwjglGlfwKeycode.GLFW_KEY_RIGHT_BRACKET);
+        add(KeyEvent.KEYCODE_BACKSLASH, LwjglGlfwKeycode.GLFW_KEY_BACKSLASH);
+        add(KeyEvent.KEYCODE_SEMICOLON, LwjglGlfwKeycode.GLFW_KEY_SEMICOLON); //74
 
-        add(KeyEvent.KEYCODE_SLASH, LWJGLGLFWKeycode.GLFW_KEY_SLASH); //76
-        add(KeyEvent.KEYCODE_AT,LWJGLGLFWKeycode.GLFW_KEY_2);
+        add(KeyEvent.KEYCODE_SLASH, LwjglGlfwKeycode.GLFW_KEY_SLASH); //76
+        add(KeyEvent.KEYCODE_AT, LwjglGlfwKeycode.GLFW_KEY_2);
 
-        add(KeyEvent.KEYCODE_PLUS, LWJGLGLFWKeycode.GLFW_KEY_KP_ADD);
+        add(KeyEvent.KEYCODE_PLUS, LwjglGlfwKeycode.GLFW_KEY_KP_ADD);
 
         // Page keys
-        add(KeyEvent.KEYCODE_PAGE_UP, LWJGLGLFWKeycode.GLFW_KEY_PAGE_UP); //92
-        add(KeyEvent.KEYCODE_PAGE_DOWN, LWJGLGLFWKeycode.GLFW_KEY_PAGE_DOWN);
+        add(KeyEvent.KEYCODE_PAGE_UP, LwjglGlfwKeycode.GLFW_KEY_PAGE_UP); //92
+        add(KeyEvent.KEYCODE_PAGE_DOWN, LwjglGlfwKeycode.GLFW_KEY_PAGE_DOWN);
 
-        add(KeyEvent.KEYCODE_ESCAPE, LWJGLGLFWKeycode.GLFW_KEY_ESCAPE);
+        add(KeyEvent.KEYCODE_ESCAPE, LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
 
         // Control keys
-        add(KeyEvent.KEYCODE_CTRL_LEFT, LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL);
-        add(KeyEvent.KEYCODE_CTRL_RIGHT, LWJGLGLFWKeycode.GLFW_KEY_RIGHT_CONTROL);
+        add(KeyEvent.KEYCODE_CTRL_LEFT, LwjglGlfwKeycode.GLFW_KEY_LEFT_CONTROL);
+        add(KeyEvent.KEYCODE_CTRL_RIGHT, LwjglGlfwKeycode.GLFW_KEY_RIGHT_CONTROL);
 
-        add(KeyEvent.KEYCODE_CAPS_LOCK, LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK);
-        add(KeyEvent.KEYCODE_BREAK, LWJGLGLFWKeycode.GLFW_KEY_PAUSE);
-        add(KeyEvent.KEYCODE_INSERT, LWJGLGLFWKeycode.GLFW_KEY_INSERT);
+        add(KeyEvent.KEYCODE_CAPS_LOCK, LwjglGlfwKeycode.GLFW_KEY_CAPS_LOCK);
+        add(KeyEvent.KEYCODE_BREAK, LwjglGlfwKeycode.GLFW_KEY_PAUSE);
+        add(KeyEvent.KEYCODE_INSERT, LwjglGlfwKeycode.GLFW_KEY_INSERT);
 
         // Fn keys
-        add(KeyEvent.KEYCODE_F1, LWJGLGLFWKeycode.GLFW_KEY_F1); //131
-        add(KeyEvent.KEYCODE_F2, LWJGLGLFWKeycode.GLFW_KEY_F2);
-        add(KeyEvent.KEYCODE_F3, LWJGLGLFWKeycode.GLFW_KEY_F3);
-        add(KeyEvent.KEYCODE_F4, LWJGLGLFWKeycode.GLFW_KEY_F4);
-        add(KeyEvent.KEYCODE_F5, LWJGLGLFWKeycode.GLFW_KEY_F5);
-        add(KeyEvent.KEYCODE_F6, LWJGLGLFWKeycode.GLFW_KEY_F6);
-        add(KeyEvent.KEYCODE_F7, LWJGLGLFWKeycode.GLFW_KEY_F7);
-        add(KeyEvent.KEYCODE_F8, LWJGLGLFWKeycode.GLFW_KEY_F8);
-        add(KeyEvent.KEYCODE_F9, LWJGLGLFWKeycode.GLFW_KEY_F9);
-        add(KeyEvent.KEYCODE_F10, LWJGLGLFWKeycode.GLFW_KEY_F10);
-        add(KeyEvent.KEYCODE_F11, LWJGLGLFWKeycode.GLFW_KEY_F11);
-        add(KeyEvent.KEYCODE_F12, LWJGLGLFWKeycode.GLFW_KEY_F12); //142
+        add(KeyEvent.KEYCODE_F1, LwjglGlfwKeycode.GLFW_KEY_F1); //131
+        add(KeyEvent.KEYCODE_F2, LwjglGlfwKeycode.GLFW_KEY_F2);
+        add(KeyEvent.KEYCODE_F3, LwjglGlfwKeycode.GLFW_KEY_F3);
+        add(KeyEvent.KEYCODE_F4, LwjglGlfwKeycode.GLFW_KEY_F4);
+        add(KeyEvent.KEYCODE_F5, LwjglGlfwKeycode.GLFW_KEY_F5);
+        add(KeyEvent.KEYCODE_F6, LwjglGlfwKeycode.GLFW_KEY_F6);
+        add(KeyEvent.KEYCODE_F7, LwjglGlfwKeycode.GLFW_KEY_F7);
+        add(KeyEvent.KEYCODE_F8, LwjglGlfwKeycode.GLFW_KEY_F8);
+        add(KeyEvent.KEYCODE_F9, LwjglGlfwKeycode.GLFW_KEY_F9);
+        add(KeyEvent.KEYCODE_F10, LwjglGlfwKeycode.GLFW_KEY_F10);
+        add(KeyEvent.KEYCODE_F11, LwjglGlfwKeycode.GLFW_KEY_F11);
+        add(KeyEvent.KEYCODE_F12, LwjglGlfwKeycode.GLFW_KEY_F12); //142
 
         // Num keys
-        add(KeyEvent.KEYCODE_NUM_LOCK, LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK); //143
-        add(KeyEvent.KEYCODE_NUMPAD_0, LWJGLGLFWKeycode.GLFW_KEY_0);
-        add(KeyEvent.KEYCODE_NUMPAD_1, LWJGLGLFWKeycode.GLFW_KEY_1);
-        add(KeyEvent.KEYCODE_NUMPAD_2, LWJGLGLFWKeycode.GLFW_KEY_2);
-        add(KeyEvent.KEYCODE_NUMPAD_3, LWJGLGLFWKeycode.GLFW_KEY_3);
-        add(KeyEvent.KEYCODE_NUMPAD_4, LWJGLGLFWKeycode.GLFW_KEY_4);
-        add(KeyEvent.KEYCODE_NUMPAD_5, LWJGLGLFWKeycode.GLFW_KEY_5);
-        add(KeyEvent.KEYCODE_NUMPAD_6, LWJGLGLFWKeycode.GLFW_KEY_6);
-        add(KeyEvent.KEYCODE_NUMPAD_7, LWJGLGLFWKeycode.GLFW_KEY_7);
-        add(KeyEvent.KEYCODE_NUMPAD_8, LWJGLGLFWKeycode.GLFW_KEY_8);
-        add(KeyEvent.KEYCODE_NUMPAD_9, LWJGLGLFWKeycode.GLFW_KEY_9);
-        add(KeyEvent.KEYCODE_NUMPAD_DIVIDE, LWJGLGLFWKeycode.GLFW_KEY_KP_DIVIDE);
-        add(KeyEvent.KEYCODE_NUMPAD_MULTIPLY, LWJGLGLFWKeycode.GLFW_KEY_KP_MULTIPLY);
-        add(KeyEvent.KEYCODE_NUMPAD_SUBTRACT, LWJGLGLFWKeycode.GLFW_KEY_KP_SUBTRACT);
-        add(KeyEvent.KEYCODE_NUMPAD_ADD, LWJGLGLFWKeycode.GLFW_KEY_KP_ADD);
-        add(KeyEvent.KEYCODE_NUMPAD_DOT, LWJGLGLFWKeycode.GLFW_KEY_PERIOD);
-        add(KeyEvent.KEYCODE_NUMPAD_COMMA, LWJGLGLFWKeycode.GLFW_KEY_COMMA);
-        add(KeyEvent.KEYCODE_NUMPAD_ENTER, LWJGLGLFWKeycode.GLFW_KEY_ENTER);
-        add(KeyEvent.KEYCODE_NUMPAD_EQUALS, LWJGLGLFWKeycode.GLFW_KEY_EQUAL); //161
+        add(KeyEvent.KEYCODE_NUM_LOCK, LwjglGlfwKeycode.GLFW_KEY_NUM_LOCK); //143
+        add(KeyEvent.KEYCODE_NUMPAD_0, LwjglGlfwKeycode.GLFW_KEY_0);
+        add(KeyEvent.KEYCODE_NUMPAD_1, LwjglGlfwKeycode.GLFW_KEY_1);
+        add(KeyEvent.KEYCODE_NUMPAD_2, LwjglGlfwKeycode.GLFW_KEY_2);
+        add(KeyEvent.KEYCODE_NUMPAD_3, LwjglGlfwKeycode.GLFW_KEY_3);
+        add(KeyEvent.KEYCODE_NUMPAD_4, LwjglGlfwKeycode.GLFW_KEY_4);
+        add(KeyEvent.KEYCODE_NUMPAD_5, LwjglGlfwKeycode.GLFW_KEY_5);
+        add(KeyEvent.KEYCODE_NUMPAD_6, LwjglGlfwKeycode.GLFW_KEY_6);
+        add(KeyEvent.KEYCODE_NUMPAD_7, LwjglGlfwKeycode.GLFW_KEY_7);
+        add(KeyEvent.KEYCODE_NUMPAD_8, LwjglGlfwKeycode.GLFW_KEY_8);
+        add(KeyEvent.KEYCODE_NUMPAD_9, LwjglGlfwKeycode.GLFW_KEY_9);
+        add(KeyEvent.KEYCODE_NUMPAD_DIVIDE, LwjglGlfwKeycode.GLFW_KEY_KP_DIVIDE);
+        add(KeyEvent.KEYCODE_NUMPAD_MULTIPLY, LwjglGlfwKeycode.GLFW_KEY_KP_MULTIPLY);
+        add(KeyEvent.KEYCODE_NUMPAD_SUBTRACT, LwjglGlfwKeycode.GLFW_KEY_KP_SUBTRACT);
+        add(KeyEvent.KEYCODE_NUMPAD_ADD, LwjglGlfwKeycode.GLFW_KEY_KP_ADD);
+        add(KeyEvent.KEYCODE_NUMPAD_DOT, LwjglGlfwKeycode.GLFW_KEY_PERIOD);
+        add(KeyEvent.KEYCODE_NUMPAD_COMMA, LwjglGlfwKeycode.GLFW_KEY_COMMA);
+        add(KeyEvent.KEYCODE_NUMPAD_ENTER, LwjglGlfwKeycode.GLFW_KEY_ENTER);
+        add(KeyEvent.KEYCODE_NUMPAD_EQUALS, LwjglGlfwKeycode.GLFW_KEY_EQUAL); //161
 
     }
-
-    private static short index = 0;
-
-    private static void add(int androidKeycode, short LWJGLKeycode){
-        androidKeycodes[index] = androidKeycode;
-        LWJGLKeycodes[index] = LWJGLKeycode;
-        ++index;
-    }
-
 
     public static boolean containsKey(int keycode){
         return getIndexByKey(keycode) >= 0;
     }
 
-
-
     public static String[] generateKeyName() {
         if (androidKeyNameArray == null) {
-            androidKeyNameArray = new String[androidKeycodes.length];
+            androidKeyNameArray = new String[sAndroidKeycodes.length];
             for(int i=0; i < androidKeyNameArray.length; ++i){
-                androidKeyNameArray[i] = KeyEvent.keyCodeToString(androidKeycodes[i]).replace("KEYCODE_", "");
+                androidKeyNameArray[i] = KeyEvent.keyCodeToString(sAndroidKeycodes[i]).replace("KEYCODE_", "");
             }
         }
         return androidKeyNameArray;
@@ -187,7 +175,6 @@ public class EfficientAndroidLWJGLKeycode {
         execKey(keyEvent, getIndexByKey(keyEvent.getKeyCode()));
     }
 
-
     public static void execKey(KeyEvent keyEvent, int valueIndex) {
         //valueIndex points to where the value is stored in the array.
         CallbackBridge.holdingAlt = keyEvent.isAltPressed();
@@ -196,19 +183,14 @@ public class EfficientAndroidLWJGLKeycode {
         CallbackBridge.holdingNumlock = keyEvent.isNumLockOn();
         CallbackBridge.holdingShift = keyEvent.isShiftPressed();
 
-        try {
-            System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
-            char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
-            sendKeyPress(
-                    getValueByIndex(valueIndex),
-                    key,
-                    0,
-                    CallbackBridge.getCurrentMods(),
-                    keyEvent.getAction() == KeyEvent.ACTION_DOWN);
-
-        } catch (Throwable th) {
-            th.printStackTrace();
-        }
+        System.out.println(keyEvent.getKeyCode() + " " +keyEvent.getDisplayLabel());
+        char key = (char)(keyEvent.getUnicodeChar() != 0 ? keyEvent.getUnicodeChar() : '\u0000');
+        sendKeyPress(
+                getValueByIndex(valueIndex),
+                key,
+                0,
+                CallbackBridge.getCurrentMods(),
+                keyEvent.getAction() == KeyEvent.ACTION_DOWN);
     }
 
     public static void execKeyIndex(int index){
@@ -217,24 +199,29 @@ public class EfficientAndroidLWJGLKeycode {
     }
     
     public static int getValueByIndex(int index) {
-        return LWJGLKeycodes[index];
+        return sLwjglKeycodes[index];
     }
 
     public static int getIndexByKey(int key){
-        return Arrays.binarySearch(androidKeycodes, key);
+        return Arrays.binarySearch(sAndroidKeycodes, key);
     }
 
     public static short getValue(int key){
-        return LWJGLKeycodes[Arrays.binarySearch(androidKeycodes, key)];
+        return sLwjglKeycodes[Arrays.binarySearch(sAndroidKeycodes, key)];
     }
 
+    /** @return the index at which the key is in the array, searching linearly */
     public static int getIndexByValue(int lwjglKey) {
-        //Since the LWJGL keycodes aren't sorted, linear search is used.
         //You should avoid using this function on performance critical areas
-        for (int i = 0; i < LWJGLKeycodes.length; i++) {
-            if(LWJGLKeycodes[i] == lwjglKey) return i;
+        for (int i = 0; i < sLwjglKeycodes.length; i++) {
+            if(sLwjglKeycodes[i] == lwjglKey) return i;
         }
-        
         return 0;
+    }
+
+    private static void add(int androidKeycode, short LWJGLKeycode){
+        sAndroidKeycodes[mTmpCount] = androidKeycode;
+        sLwjglKeycodes[mTmpCount] = LWJGLKeycode;
+        mTmpCount ++;
     }
 }

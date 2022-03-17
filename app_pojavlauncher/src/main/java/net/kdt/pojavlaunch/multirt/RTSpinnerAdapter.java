@@ -16,39 +16,39 @@ import net.kdt.pojavlaunch.R;
 import java.util.List;
 
 public class RTSpinnerAdapter implements SpinnerAdapter {
-    final Context ctx;
-    List<MultiRTUtils.Runtime> runtimes;
-    public RTSpinnerAdapter(@NonNull Context context, List<MultiRTUtils.Runtime> runtimes) {
-        this.runtimes = runtimes;
-        MultiRTUtils.Runtime runtime = new MultiRTUtils.Runtime("<Default>");
+    final Context mContext;
+    List<Runtime> mRuntimes;
+    public RTSpinnerAdapter(@NonNull Context context, List<Runtime> runtimes) {
+        mRuntimes = runtimes;
+        Runtime runtime = new Runtime("<Default>");
         runtime.versionString = "";
-        this.runtimes.add(runtime);
-        ctx = context;
+        mRuntimes.add(runtime);
+        mContext = context;
     }
 
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
-
+        //STUB
     }
 
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
-
+        //STUB
     }
 
     @Override
     public int getCount() {
-        return runtimes.size();
+        return mRuntimes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return runtimes.get(position);
+        return mRuntimes.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return runtimes.get(position).name.hashCode();
+        return mRuntimes.get(position).name.hashCode();
     }
 
     @Override
@@ -59,25 +59,25 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View v = convertView!=null?
+        View view = convertView != null?
                 convertView:
-                LayoutInflater.from(ctx).inflate(R.layout.multirt_recyclable_view,parent,false);
+                LayoutInflater.from(mContext).inflate(R.layout.item_multirt_runtime,parent,false);
 
-        MultiRTUtils.Runtime rt = runtimes.get(position);
+        Runtime runtime = mRuntimes.get(position);
 
-        final TextView javaVersionView = v.findViewById(R.id.multirt_view_java_version);
-        final TextView fullJavaVersionView = v.findViewById(R.id.multirt_view_java_version_full);
-        v.findViewById(R.id.multirt_view_removebtn).setVisibility(View.GONE);
-        v.findViewById(R.id.multirt_view_setdefaultbtn).setVisibility(View.GONE);
+        final TextView javaVersionView = view.findViewById(R.id.multirt_view_java_version);
+        final TextView fullJavaVersionView = view.findViewById(R.id.multirt_view_java_version_full);
+        view.findViewById(R.id.multirt_view_removebtn).setVisibility(View.GONE);
+        view.findViewById(R.id.multirt_view_setdefaultbtn).setVisibility(View.GONE);
 
-        if(rt.versionString != null) {
-            javaVersionView.setText(ctx.getString(R.string.multirt_java_ver, rt.name, rt.javaVersion));
-            fullJavaVersionView.setText(rt.versionString);
+        if(runtime.versionString != null) {
+            javaVersionView.setText(mContext.getString(R.string.multirt_java_ver, runtime.name, runtime.javaVersion));
+            fullJavaVersionView.setText(runtime.versionString);
         }else{
-            javaVersionView.setText(rt.name);
+            javaVersionView.setText(runtime.name);
             fullJavaVersionView.setText(R.string.multirt_runtime_corrupt);
         }
-        return v;
+        return view;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
 
     @Override
     public boolean isEmpty() {
-        return runtimes.isEmpty();
+        return mRuntimes.isEmpty();
     }
 
     @Override

@@ -17,24 +17,24 @@ public final class ExtraCore {
     private ExtraCore(){}
 
     // Singleton instance
-    private static ExtraCore extraCoreSingleton = null;
+    private static ExtraCore sExtraCoreSingleton = null;
 
     // Store the key-value pair
-    private final Map<String, Object> valueMap = new ConcurrentHashMap<>();
+    private final Map<String, Object> mValueMap = new ConcurrentHashMap<>();
 
     // Store what each ExtraListener listen to
-    private final Map<String, ConcurrentLinkedQueue<WeakReference<ExtraListener>>> listenerMap = new ConcurrentHashMap<>();
+    private final Map<String, ConcurrentLinkedQueue<WeakReference<ExtraListener>>> mListenerMap = new ConcurrentHashMap<>();
 
     // All public methods will pass through this one
     private static ExtraCore getInstance(){
-        if(extraCoreSingleton == null){
+        if(sExtraCoreSingleton == null){
             synchronized(ExtraCore.class){
-                if(extraCoreSingleton == null){
-                    extraCoreSingleton = new ExtraCore();
+                if(sExtraCoreSingleton == null){
+                    sExtraCoreSingleton = new ExtraCore();
                 }
             }
         }
-        return extraCoreSingleton;
+        return sExtraCoreSingleton;
     }
 
     /**
@@ -45,8 +45,8 @@ public final class ExtraCore {
     public static void setValue(String key, Object value){
         if(value == null || key == null) return; // null values create an NPE on insertion
 
-        getInstance().valueMap.put(key, value);
-        ConcurrentLinkedQueue<WeakReference<ExtraListener>> extraListenerList = getInstance().listenerMap.get(key);
+        getInstance().mValueMap.put(key, value);
+        ConcurrentLinkedQueue<WeakReference<ExtraListener>> extraListenerList = getInstance().mListenerMap.get(key);
         if(extraListenerList == null) return; //No listeners
         for(WeakReference<ExtraListener> listener : extraListenerList){
             if(listener.get() == null){
@@ -63,17 +63,17 @@ public final class ExtraCore {
 
     /** @return The value behind the key */
     public static Object getValue(String key){
-        return getInstance().valueMap.get(key);
+        return getInstance().mValueMap.get(key);
     }
 
     /** Remove the key and its value from the valueMap */
     public static void removeValue(String key){
-        getInstance().valueMap.remove(key);
+        getInstance().mValueMap.remove(key);
     }
 
     /** Remove all values */
     public static void removeAllValues(){
-        getInstance().valueMap.clear();
+        getInstance().mValueMap.clear();
     }
 
     /**
@@ -82,11 +82,11 @@ public final class ExtraCore {
      * @param listener The ExtraListener to link
      */
     public static void addExtraListener(String key, ExtraListener listener){
-        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
+        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
             listenerList = new ConcurrentLinkedQueue<>();
-            getInstance().listenerMap.put(key, listenerList);
+            getInstance().mListenerMap.put(key, listenerList);
         }
 
         // This is kinda naive, I should look for duplicates
@@ -100,11 +100,11 @@ public final class ExtraCore {
      * @param listener The ExtraListener to unlink
      */
     public static void removeExtraListenerFromValue(String key, ExtraListener listener){
-        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
+        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
             listenerList = new ConcurrentLinkedQueue<>();
-            getInstance().listenerMap.put(key, listenerList);
+            getInstance().mListenerMap.put(key, listenerList);
         }
 
         // Removes all occurrences of ExtraListener and all null references
@@ -122,11 +122,11 @@ public final class ExtraCore {
      * @param key The key to which ExtraListener are linked
      */
     public static void removeAllExtraListenersFromValue(String key){
-        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().listenerMap.get(key);
+        ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
         // Look for new sets
         if(listenerList == null){
             listenerList = new ConcurrentLinkedQueue<>();
-            getInstance().listenerMap.put(key, listenerList);
+            getInstance().mListenerMap.put(key, listenerList);
         }
 
         listenerList.clear();
@@ -136,7 +136,7 @@ public final class ExtraCore {
      * Remove all ExtraListeners from listening to any value
      */
     public static void removeAllExtraListeners(){
-        getInstance().listenerMap.clear();
+        getInstance().mListenerMap.clear();
     }
 
 }

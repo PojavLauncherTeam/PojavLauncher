@@ -1,10 +1,9 @@
 package net.kdt.pojavlaunch;
 
-import android.graphics.*;
+import android.annotation.SuppressLint;
 import android.os.*;
 import android.util.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 
 import java.io.*;
@@ -23,169 +22,121 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
     
     private AWTCanvasView mTextureView;
-    private LoggerView loggerView;
+    private LoggerView mLoggerView;
 
-    private LinearLayout touchPad;
-    private ImageView mousePointer;
+    private LinearLayout mTouchPad;
+    private ImageView mMousePointerImageView;
     private GestureDetector gestureDetector;
+
+    private boolean mSkipDetectMod, mIsVirtualMouseEnabled;
+
+    private int mScaleFactor;
+    private int[] mScaleFactors = initScaleFactors();
     
-    private final Object mDialogLock = new Object();
-
-    private boolean mSkipDetectMod, isVirtualMouseEnabled;
-
-    private int scaleFactor;
-    private int[] scaleFactors = initScaleFactors();
-
-    private final int fingerStillThreshold = 8;
-    private int initialX;
-    private int initialY;
-    private static boolean triggeredLeftMouseButton = false;
-    private Handler theHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_LEFT_MOUSE_BUTTON_CHECK: {
-                        float x = CallbackBridge.mouseX;
-                        float y = CallbackBridge.mouseY;
-                        if (CallbackBridge.isGrabbing() &&
-                            Math.abs(initialX - x) < fingerStillThreshold &&
-                            Math.abs(initialY - y) < fingerStillThreshold) {
-                            triggeredLeftMouseButton = true;
-                            AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK, true);
-                        }
-                    } break;
-            }
-        }
-    };
-    
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        setContentView(R.layout.install_mod);
+        setContentView(R.layout.activity_java_gui_launcher);
 
-        Tools.updateWindowSize(this);
         Logger.getInstance().reset();
-        
+
+        mTouchPad = findViewById(R.id.main_touchpad);
+        mLoggerView = findViewById(R.id.launcherLoggerView);
+        mMousePointerImageView = findViewById(R.id.main_mouse_pointer);
+        mTextureView = findViewById(R.id.installmod_surfaceview);
+        gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+        mTouchPad.setFocusable(false);
+        mTouchPad.setVisibility(View.GONE);
+
+        findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
+        findViewById(R.id.installmod_mouse_sec).setOnTouchListener(this);
+
+        mMousePointerImageView.post(() -> {
+            ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
+            params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+            params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+        });
+
+        mTouchPad.setOnTouchListener((v, event) -> {
+            // MotionEvent reports input details from the touch screen
+            // and other input controls. In this case, you are only
+            // interested in events where the touch position changed.
+            // int index = event.getActionIndex();
+            int action = event.getActionMasked();
+
+            float x = event.getX();
+            float y = event.getY();
+            float prevX, prevY, mouseX, mouseY;
+            if(event.getHistorySize() > 0) {
+                prevX = event.getHistoricalX(0);
+                prevY = event.getHistoricalY(0);
+            }else{
+                prevX = x;
+                prevY = y;
+            }
+
+            mouseX = mMousePointerImageView.getX();
+            mouseY = mMousePointerImageView.getY();
+
+            if (gestureDetector.onTouchEvent(event)) {
+                sendScaledMousePosition(mouseX,mouseY);
+                AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
+            } else {
+                if (action == MotionEvent.ACTION_MOVE) { // 2
+                    mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
+                    mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
+                    placeMouseAt(mouseX, mouseY);
+                    sendScaledMousePosition(mouseX, mouseY);
+                }
+            }
+
+            // debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+            CallbackBridge.DEBUG_STRING.setLength(0);
+            return true;
+        });
+
+        mTextureView.setOnTouchListener((v, event) -> {
+            float x = event.getX();
+            float y = event.getY();
+            if (gestureDetector.onTouchEvent(event)) {
+                sendScaledMousePosition(x, y);
+                AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
+                return true;
+            }
+
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_UP: // 1
+                case MotionEvent.ACTION_CANCEL: // 3
+                case MotionEvent.ACTION_POINTER_UP: // 6
+                    break;
+                case MotionEvent.ACTION_MOVE: // 2
+                    sendScaledMousePosition(x, y);
+                    break;
+            }
+            return true;
+        });
+
         try {
             JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties(LauncherPreferences.PREF_DEFAULT_RUNTIME);
             if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
                 MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
             } else {
-                MultiRTUtils.setRuntimeNamed(this,MultiRTUtils.getExactJREName(8));
+                MultiRTUtils.setRuntimeNamed(this,MultiRTUtils.getExactJreName(8));
                 JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
             }
-            
-            loggerView = findViewById(R.id.launcherLoggerView);
-            gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
-            findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
-            findViewById(R.id.installmod_mouse_sec).setOnTouchListener(this);
-            
-            this.touchPad = findViewById(R.id.main_touchpad);
-            touchPad.setFocusable(false);
-            touchPad.setVisibility(View.GONE);
-
-            this.mousePointer = findViewById(R.id.main_mouse_pointer);
-            this.mousePointer.post(() -> {
-                ViewGroup.LayoutParams params = mousePointer.getLayoutParams();
-                params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-                params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-            });
-
-            touchPad.setOnTouchListener(new OnTouchListener(){
-                    private float prevX, prevY;
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        // MotionEvent reports input details from the touch screen
-                        // and other input controls. In this case, you are only
-                        // interested in events where the touch position changed.
-                        // int index = event.getActionIndex();
-
-                        int action = event.getActionMasked();
-
-                        float x = event.getX();
-                        float y = event.getY();
-                        if(event.getHistorySize() > 0) {
-                            prevX = event.getHistoricalX(0);
-                            prevY = event.getHistoricalY(0);
-                        }else{
-                            prevX = x;
-                            prevY = y;
-                        }
-                        float mouseX = mousePointer.getX();
-                        float mouseY = mousePointer.getY();
-
-                        if (gestureDetector.onTouchEvent(event)) {
-
-                            sendScaledMousePosition(mouseX,mouseY);
-
-                            AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
-
-
-                        } else {
-                            switch (action) {
-                                case MotionEvent.ACTION_UP: // 1
-                                case MotionEvent.ACTION_CANCEL: // 3
-                                case MotionEvent.ACTION_POINTER_UP: // 6
-                                    break;
-                                case MotionEvent.ACTION_MOVE: // 2
-                                    mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
-                                    mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
-                                    placeMouseAt(mouseX, mouseY);
-
-                                    sendScaledMousePosition(mouseX,mouseY);
-                                    /*
-                                     if (!CallbackBridge.isGrabbing()) {
-                                     CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, 0, isLeftMouseDown);
-                                     CallbackBridge.sendMouseKeycode(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, 0, isRightMouseDown);
-                                     }
-                                     */
-                                    break;
-                            }
-                        }
-
-                        // debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                        CallbackBridge.DEBUG_STRING.setLength(0);
-
-                        return true;
-                    }
-                });
-                
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
-
-            // this.textLogBehindGL = (TextView) findViewById(R.id.main_log_behind_GL);
-            // this.textLogBehindGL.setTypeface(Typeface.MONOSPACE);
             
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
 
-            mTextureView = findViewById(R.id.installmod_surfaceview);
-            mTextureView.setOnTouchListener((v, event) -> {
-                float x = event.getX();
-                float y = event.getY();
-                if (gestureDetector.onTouchEvent(event)) {
-                    sendScaledMousePosition(x, y);
-                    AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
-                    return true;
-                }
-
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_UP: // 1
-                    case MotionEvent.ACTION_CANCEL: // 3
-                    case MotionEvent.ACTION_POINTER_UP: // 6
-                        break;
-                    case MotionEvent.ACTION_MOVE: // 2
-                        sendScaledMousePosition(x, y);
-                        break;
-                }
-                return true;
-            });
-           
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
             if (mSkipDetectMod) {
                 new Thread(() -> launchJavaRuntime(modFile, javaArgs), "JREMainThread").start();
                 return;
             }
+
             // No skip detection
             openLogOutput(null);
             new Thread(() -> {
@@ -207,6 +158,14 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
@@ -239,18 +198,18 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     public void placeMouseAdd(float x, float y) {
-        this.mousePointer.setX(mousePointer.getX() + x);
-        this.mousePointer.setY(mousePointer.getY() + y);
+        mMousePointerImageView.setX(mMousePointerImageView.getX() + x);
+        mMousePointerImageView.setY(mMousePointerImageView.getY() + y);
     }
 
     public void placeMouseAt(float x, float y) {
-        this.mousePointer.setX(x);
-        this.mousePointer.setY(y);
+        mMousePointerImageView.setX(x);
+        mMousePointerImageView.setY(y);
     }
 
     void sendScaledMousePosition(float x, float y){
-        AWTInputBridge.sendMousePos((int) map(x,0,CallbackBridge.physicalWidth, scaleFactors[0], scaleFactors[2]),
-                (int) map(y,0,CallbackBridge.physicalHeight, scaleFactors[1], scaleFactors[3]));
+        AWTInputBridge.sendMousePos((int) map(x,0,CallbackBridge.physicalWidth, mScaleFactors[0], mScaleFactors[2]),
+                (int) map(y,0,CallbackBridge.physicalHeight, mScaleFactors[1], mScaleFactors[3]));
     }
 
     public void forceClose(View v) {
@@ -258,32 +217,27 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     public void openLogOutput(View v) {
-        loggerView.setVisibility(View.VISIBLE);
+        mLoggerView.setVisibility(View.VISIBLE);
     }
 
     public void closeLogOutput(View view) {
         if (mSkipDetectMod) {
-            loggerView.setVisibility(View.GONE);
+            mLoggerView.setVisibility(View.GONE);
         } else {
             forceClose(null);
         }
     }
 
     public void toggleVirtualMouse(View v) {
-        isVirtualMouseEnabled = !isVirtualMouseEnabled;
-        touchPad.setVisibility(isVirtualMouseEnabled ? View.VISIBLE : View.GONE);
+        mIsVirtualMouseEnabled = !mIsVirtualMouseEnabled;
+        mTouchPad.setVisibility(mIsVirtualMouseEnabled ? View.VISIBLE : View.GONE);
         Toast.makeText(this,
-                isVirtualMouseEnabled ? R.string.control_mouseon : R.string.control_mouseoff,
+                mIsVirtualMouseEnabled ? R.string.control_mouseon : R.string.control_mouseoff,
                 Toast.LENGTH_SHORT).show();
-    }
-    
-    private int doCustomInstall(File modFile, String javaArgs) throws IOException {
-        mSkipDetectMod = true;
-        return launchJavaRuntime(modFile, javaArgs);
     }
 
     public int launchJavaRuntime(File modFile, String javaArgs) {
-        JREUtils.redirectAndPrintJRELog(this);
+        JREUtils.redirectAndPrintJRELog();
         try {
             List<String> javaArgList = new ArrayList<String>();
 
@@ -313,13 +267,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        final View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(uiOptions);
-    }
+
 
     int[] initScaleFactors(){
         return initScaleFactors(true);
@@ -330,37 +278,42 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
         if(autoScale) { //Auto scale
             int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
-            scaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
+            mScaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
         }
 
         int[] scales = new int[4]; //Left, Top, Right, Bottom
 
         scales[0] = (CallbackBridge.physicalWidth/2);
-        scales[0] -= scales[0]/scaleFactor;
+        scales[0] -= scales[0]/ mScaleFactor;
 
         scales[1] = (CallbackBridge.physicalHeight/2);
-        scales[1] -= scales[1]/scaleFactor;
+        scales[1] -= scales[1]/ mScaleFactor;
 
         scales[2] = (CallbackBridge.physicalWidth/2);
-        scales[2] += scales[2]/scaleFactor;
+        scales[2] += scales[2]/ mScaleFactor;
 
         scales[3] = (CallbackBridge.physicalHeight/2);
-        scales[3] += scales[3]/scaleFactor;
+        scales[3] += scales[3]/ mScaleFactor;
 
         return scales;
     }
 
     public void scaleDown(View view) {
-        scaleFactor = Math.max(scaleFactor - 1, 1);
-        scaleFactors = initScaleFactors(false);
-        mTextureView.initScaleFactors(scaleFactor);
-        sendScaledMousePosition(mousePointer.getX(),mousePointer.getY());
+        mScaleFactor = Math.max(mScaleFactor - 1, 1);
+        mScaleFactors = initScaleFactors(false);
+        mTextureView.initScaleFactors(mScaleFactor);
+        sendScaledMousePosition(mMousePointerImageView.getX(), mMousePointerImageView.getY());
     }
 
     public void scaleUp(View view) {
-        scaleFactor = Math.min(scaleFactor + 1, 6);
-        scaleFactors = initScaleFactors(false);
-        mTextureView.initScaleFactors(scaleFactor);
-        sendScaledMousePosition(mousePointer.getX(),mousePointer.getY());
+        mScaleFactor = Math.min(mScaleFactor + 1, 6);
+        mScaleFactors = initScaleFactors(false);
+        mTextureView.initScaleFactors(mScaleFactor);
+        sendScaledMousePosition(mMousePointerImageView.getX(), mMousePointerImageView.getY());
+    }
+
+    private int doCustomInstall(File modFile, String javaArgs) throws IOException {
+        mSkipDetectMod = true;
+        return launchJavaRuntime(modFile, javaArgs);
     }
 }

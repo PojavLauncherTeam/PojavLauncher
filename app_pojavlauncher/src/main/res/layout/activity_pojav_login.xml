@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="-10dp"
-        android:src="@drawable/sign_in_background"
+        android:src="@drawable/ic_setting_sign_in_background"
         android:scaleType="centerCrop"
         />
 
@@ -39,7 +39,7 @@
         android:id="@+id/login_image_logo"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/ic_logo"
 
         app:layout_constraintBottom_toTopOf="@+id/login_menu"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
@@ -82,57 +82,14 @@
         app:layout_constraintTop_toTopOf="@+id/login_menu"
         app:layout_constraintVertical_bias="0.088" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_online_password_hint"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-
-        app:layout_constraintBottom_toBottomOf="@+id/login_menu"
-        app:layout_constraintEnd_toEndOf="@+id/login_edit_email"
-
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/login_edit_email"
-        app:layout_constraintTop_toBottomOf="@+id/login_edit_email"
-        app:layout_constraintVertical_bias="0.08"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@android:color/white">
-
-        <com.kdt.mcgui.MineEditText
-            android:id="@+id/login_edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:imeOptions="flagNoExtractUi"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <CheckBox
         android:id="@+id/login_switch_remember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:text="@string/login_online_check_keeplogin"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-    <CheckBox
-        android:id="@+id/login_switch_offline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:text="@string/login_offline_label"
-        app:layout_constraintStart_toStartOf="@+id/login_switch_remember"
-        app:layout_constraintTop_toBottomOf="@+id/login_switch_remember" />
+        app:layout_constraintStart_toStartOf="@+id/login_edit_email"
+        app:layout_constraintTop_toBottomOf="@+id/login_edit_email" />
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/mineButton"
@@ -145,8 +102,8 @@
 
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintStart_toStartOf="@+id/login_switch_offline"
-        app:layout_constraintTop_toBottomOf="@+id/login_switch_offline" />
+        app:layout_constraintStart_toStartOf="@id/login_switch_remember"
+        app:layout_constraintTop_toBottomOf="@id/login_switch_remember" />
 
     <ProgressBar
         android:id="@+id/launcherAccProgress"
@@ -174,7 +131,7 @@
         android:textColor="@android:color/white"
 
         app:layout_constraintBottom_toBottomOf="@+id/mineButton"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="@+id/login_edit_email"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/mineButton" />
 

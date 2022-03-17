@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:elevation="-10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/sign_in_background" />
+        android:src="@drawable/ic_setting_sign_in_background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

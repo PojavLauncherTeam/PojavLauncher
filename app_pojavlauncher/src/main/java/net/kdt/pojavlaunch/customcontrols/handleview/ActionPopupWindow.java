@@ -43,11 +43,11 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	private TextView mDeleteTextView;
 	private TextView mCloneTextView;
 
-	private final ControlButton editedButton;
+	private final ControlButton mEditedButton;
 
 	public ActionPopupWindow(HandleView handleView, ControlButton button){
 		super(handleView);
-		this.editedButton = button;
+		this.mEditedButton = button;
 	}
 
 	@Override
@@ -97,18 +97,18 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	public void onClick(final View view) {
 		if (view == mEditTextView) {
 
-			if(editedButton instanceof ControlSubButton){
-				new EditControlSubButtonPopup((ControlSubButton) editedButton);
+			if(mEditedButton instanceof ControlSubButton){
+				new EditControlSubButtonPopup((ControlSubButton) mEditedButton);
 				return;
 			}
 
-			if(editedButton instanceof ControlDrawer){
-				new EditControlDrawerPopup((ControlDrawer) editedButton);
+			if(mEditedButton instanceof ControlDrawer){
+				new EditControlDrawerPopup((ControlDrawer) mEditedButton);
 				return;
 			}
 
-			if(editedButton instanceof ControlButton){
-				new EditControlButtonPopup((ControlButton) editedButton);
+			if(mEditedButton instanceof ControlButton){
+				new EditControlButtonPopup((ControlButton) mEditedButton);
 				return;
 			}
 
@@ -121,18 +121,18 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 			alertBuilder.setPositiveButton(R.string.global_remove, (p1, p2) -> {
 				ControlLayout layout = ((ControlLayout) mHandleView.mView.getParent());
 
-				if(editedButton instanceof ControlSubButton){
-					layout.removeControlSubButton((ControlSubButton) editedButton);
+				if(mEditedButton instanceof ControlSubButton){
+					layout.removeControlSubButton((ControlSubButton) mEditedButton);
 					return;
 				}
 
-				if(editedButton instanceof ControlDrawer){
-					layout.removeControlDrawer((ControlDrawer) editedButton);
+				if(mEditedButton instanceof ControlDrawer){
+					layout.removeControlDrawer((ControlDrawer) mEditedButton);
 					return;
 				}
 
-				if(editedButton instanceof ControlButton){
-					layout.removeControlButton((ControlButton) editedButton);
+				if(mEditedButton instanceof ControlButton){
+					layout.removeControlButton((ControlButton) mEditedButton);
 				}
 
 				layout.removeControlButton(mHandleView.mView);
@@ -140,18 +140,18 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 			alertBuilder.setNegativeButton(android.R.string.cancel, null);
 			alertBuilder.show();
 		}else if(view == mCloneTextView) {
-			if(editedButton instanceof ControlDrawer){
-				ControlDrawerData cloneData = new ControlDrawerData(((ControlDrawer)editedButton).getDrawerData());
+			if(mEditedButton instanceof ControlDrawer){
+				ControlDrawerData cloneData = new ControlDrawerData(((ControlDrawer) mEditedButton).getDrawerData());
 				cloneData.properties.dynamicX = "0.5 * ${screen_width}";
 				cloneData.properties.dynamicY = "0.5 * ${screen_height}";
 				((ControlLayout) mHandleView.mView.getParent()).addDrawer(cloneData);
-			}else if(editedButton instanceof ControlSubButton){
-				ControlData cloneData = new ControlData(editedButton.getProperties());
+			}else if(mEditedButton instanceof ControlSubButton){
+				ControlData cloneData = new ControlData(mEditedButton.getProperties());
 				cloneData.dynamicX = "0.5 * ${screen_width}";
 				cloneData.dynamicY = "0.5 * ${screen_height}";
-				((ControlLayout) mHandleView.mView.getParent()).addSubButton(((ControlSubButton) editedButton).parentDrawer, cloneData);
+				((ControlLayout) mHandleView.mView.getParent()).addSubButton(((ControlSubButton) mEditedButton).parentDrawer, cloneData);
 			}else{
-				ControlData cloneData = new ControlData(editedButton.getProperties());
+				ControlData cloneData = new ControlData(mEditedButton.getProperties());
 				cloneData.dynamicX = "0.5 * ${screen_width}";
 				cloneData.dynamicY = "0.5 * ${screen_height}";
 				((ControlLayout) mHandleView.mView.getParent()).addControlButton(cloneData);

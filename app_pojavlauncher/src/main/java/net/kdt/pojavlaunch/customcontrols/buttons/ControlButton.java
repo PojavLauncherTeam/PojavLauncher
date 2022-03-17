@@ -16,11 +16,10 @@ import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
 import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.*;
 
-import static net.kdt.pojavlaunch.LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN;
+import static net.kdt.pojavlaunch.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_BOTTOM_OFFSET;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_LEFT_OFFSET;
@@ -30,19 +29,15 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 
 @SuppressLint("ViewConstructor")
-public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener
-{
-    private final Paint mRectPaint = new Paint();;
-    
+public class ControlButton extends androidx.appcompat.widget.AppCompatButton implements OnLongClickListener {
+    private final Paint mRectPaint = new Paint();
     protected GestureDetector mGestureDetector;
     protected ControlData mProperties;
     protected SelectionEndHandleView mHandleView;
-
     protected boolean mModifiable = false;
     protected boolean mCanTriggerLongClick = true;
-
-    protected boolean isToggled = false;
-    protected boolean isPointerOutOfBounds = false;
+    protected boolean mIsToggled = false;
+    protected boolean mIsPointerOutOfBounds = false;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
@@ -259,7 +254,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (isToggled || (!mProperties.isToggle && isActivated()))
+        if (mIsToggled || (!mProperties.isToggle && isActivated()))
             canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mProperties.cornerRadius, mProperties.cornerRadius, mRectPaint);
     }
 
@@ -304,26 +299,26 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                     //If out of bounds
                     if(event.getX() < getLeft() || event.getX() > getRight() ||
                        event.getY() < getTop()  || event.getY() > getBottom()){
-                        if(mProperties.isSwipeable && !isPointerOutOfBounds){
+                        if(mProperties.isSwipeable && !mIsPointerOutOfBounds){
                             //Remove keys
                             if(!triggerToggle()) {
                                 sendKeyPresses(false);
                             }
                         }
-                        isPointerOutOfBounds = true;
+                        mIsPointerOutOfBounds = true;
                         ((ControlLayout) getParent()).onTouch(this, event);
                         break;
                     }
 
                     //Else if we now are in bounds
-                    if(isPointerOutOfBounds) {
+                    if(mIsPointerOutOfBounds) {
                         ((ControlLayout) getParent()).onTouch(this, event);
                         //RE-press the button
                         if(mProperties.isSwipeable && !mProperties.isToggle){
                             sendKeyPresses(true);
                         }
                     }
-                    isPointerOutOfBounds = false;
+                    mIsPointerOutOfBounds = false;
                     break;
 
                 case MotionEvent.ACTION_DOWN: // 0
@@ -340,8 +335,8 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                         MinecraftGLView v = ((ControlLayout) this.getParent()).findViewById(R.id.main_game_render_view);
                         if (v != null) v.dispatchTouchEvent(event);
                     }
-                    if(isPointerOutOfBounds) ((ControlLayout) getParent()).onTouch(this, event);
-                    isPointerOutOfBounds = false;
+                    if(mIsPointerOutOfBounds) ((ControlLayout) getParent()).onTouch(this, event);
+                    mIsPointerOutOfBounds = false;
 
                     if(!triggerToggle()) {
                         sendKeyPresses(false);
@@ -501,9 +496,9 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     public boolean triggerToggle(){
         //returns true a the toggle system is triggered
         if(mProperties.isToggle){
-            isToggled = !isToggled;
+            mIsToggled = !mIsToggled;
             invalidate();
-            sendKeyPresses(isToggled);
+            sendKeyPresses(mIsToggled);
             return true;
         }
         return false;
@@ -536,15 +531,15 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 break;
 
             case ControlData.SPECIALBTN_MOUSEPRI:
-                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
+                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                 break;
 
             case ControlData.SPECIALBTN_MOUSEMID:
-                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_MIDDLE, isDown);
+                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_MIDDLE, isDown);
                 break;
 
             case ControlData.SPECIALBTN_MOUSESEC:
-                sendMouseButton(LWJGLGLFWKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
+                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                 break;
 
             case ControlData.SPECIALBTN_SCROLLDOWN:

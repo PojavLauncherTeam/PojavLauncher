@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 import net.kdt.pojavlaunch.Tools;
@@ -20,7 +19,7 @@ public class ControlDrawer extends ControlButton {
 
     public ArrayList<ControlSubButton> buttons;
     public ControlDrawerData drawerData;
-    public ControlLayout mLayout;
+    public ControlLayout layout;
     public boolean areButtonsVisible;
 
 
@@ -28,14 +27,14 @@ public class ControlDrawer extends ControlButton {
         super(layout, drawerData.properties);
 
         buttons = new ArrayList<>(drawerData.buttonProperties.size());
-        mLayout = layout;
+        this.layout = layout;
         this.drawerData = drawerData;
         areButtonsVisible = layout.getModifiable();
     }
 
 
     public void addButton(ControlData properties){
-        addButton(new ControlSubButton(mLayout, properties, this));
+        addButton(new ControlSubButton(layout, properties, this));
     }
 
     public void addButton(ControlSubButton button){

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -24,6 +25,7 @@ public class MicrosoftLoginGUIActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CookieManager.getInstance().removeAllCookie();
         waitDialog = new ProgressDialog(this);
         waitDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         waitDialog.setIndeterminate(true);

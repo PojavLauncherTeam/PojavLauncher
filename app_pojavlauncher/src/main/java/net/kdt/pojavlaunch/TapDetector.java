@@ -22,10 +22,10 @@ public class TapDetector {
     private final static int TAP_MAX_DELTA_MS = 300;
     private final static int TAP_SLOP_SQUARE_PX = (int) Math.pow(Tools.dpToPx(100), 2);
 
-    private final int tapNumberToDetect;
-    private int currentTapNumber = 0;
+    private final int mTapNumberToDetect;
+    private int mCurrentTapNumber = 0;
 
-    private final int detectionMethod;
+    private final int mDetectionMethod;
 
     private long mLastEventTime = 0;
     private float mLastX = 9999;
@@ -36,9 +36,9 @@ public class TapDetector {
      * @param detectionMethod Method used to detect touches. See DETECTION_METHOD constants above.
      */
     public TapDetector(int tapNumberToDetect, int detectionMethod){
-        this.detectionMethod = detectionMethod;
+        this.mDetectionMethod = detectionMethod;
         //We expect both ACTION_DOWN and ACTION_UP for the DETECTION_METHOD_BOTH
-        this.tapNumberToDetect = detectBothTouch() ? 2*tapNumberToDetect : tapNumberToDetect;
+        this.mTapNumberToDetect = detectBothTouch() ? 2*tapNumberToDetect : tapNumberToDetect;
     }
 
     /**
@@ -78,17 +78,17 @@ public class TapDetector {
         mLastY = eventY;
 
         //Check for high enough speed and precision
-        if(currentTapNumber > 0){
+        if(mCurrentTapNumber > 0){
             if  ((deltaTime < TAP_MIN_DELTA_MS || deltaTime > TAP_MAX_DELTA_MS) ||
                 ((deltaX*deltaX + deltaY*deltaY) > TAP_SLOP_SQUARE_PX)) {
                 // We invalidate previous taps, not this one though
-                currentTapNumber = 0;
+                mCurrentTapNumber = 0;
             }
         }
 
         //A worthy tap happened
-        currentTapNumber += 1;
-        if(currentTapNumber >= tapNumberToDetect){
+        mCurrentTapNumber += 1;
+        if(mCurrentTapNumber >= mTapNumberToDetect){
            resetTapDetectionState();
            return true;
         }
@@ -101,22 +101,21 @@ public class TapDetector {
      * Reset the double tap values.
      */
    private void resetTapDetectionState(){
-       currentTapNumber = 0;
+       mCurrentTapNumber = 0;
        mLastEventTime = 0;
        mLastX = 9999;
        mLastY = 9999;
    }
 
-
    private boolean detectDownTouch(){
-       return (detectionMethod & DETECTION_METHOD_DOWN) == DETECTION_METHOD_DOWN;
+       return (mDetectionMethod & DETECTION_METHOD_DOWN) == DETECTION_METHOD_DOWN;
    }
 
    private boolean detectUpTouch(){
-       return (detectionMethod & DETECTION_METHOD_UP) == DETECTION_METHOD_UP;
+       return (mDetectionMethod & DETECTION_METHOD_UP) == DETECTION_METHOD_UP;
    }
 
    private boolean detectBothTouch(){
-       return detectionMethod == DETECTION_METHOD_BOTH;
+       return mDetectionMethod == DETECTION_METHOD_BOTH;
    }
 }

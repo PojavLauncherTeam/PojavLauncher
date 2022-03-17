@@ -18,7 +18,7 @@
             android:key="ignoreNotch"
             android:summary="@string/mcl_setting_subtitle_ignore_notch"
             android:title="@string/mcl_setting_title_ignore_notch"
-            app2:icon="@drawable/ignore_notch" />
+            app2:icon="@drawable/ic_setting_ignore_notch" />
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="resolutionRatio"
@@ -27,6 +27,6 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="5"
-            app2:icon="@drawable/resolution_scaler"/>
+            app2:icon="@drawable/ic_setting_resolution_scaler"/>
     </PreferenceCategory>
 </PreferenceScreen>

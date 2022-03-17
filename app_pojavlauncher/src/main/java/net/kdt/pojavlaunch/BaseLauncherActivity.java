@@ -4,22 +4,16 @@ import static net.kdt.pojavlaunch.Tools.getFileName;
 
 import android.app.*;
 import android.content.*;
-import android.database.Cursor;
 import android.net.Uri;
-import android.provider.OpenableColumns;
-import android.text.*;
-import android.text.method.*;
 import android.view.*;
 import android.webkit.MimeTypeMap;
 import android.widget.*;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.*;
-import com.kdt.pickafile.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
-
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.*;
@@ -74,7 +68,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 
     public static final int RUN_MOD_INSTALLER = 2050;
     private void installMod(boolean customJavaArgs) {
-        if (MultiRTUtils.getExactJREName(8) == null) {
+        if (MultiRTUtils.getExactJreName(8) == null) {
             Toast.makeText(this, R.string.multirt_nojava8rt, Toast.LENGTH_LONG).show();
             return;
         }
@@ -118,6 +112,19 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                 if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(mProfile.selectedProfile + "")) {
                     MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile + "");
                     if (prof != null && prof.lastVersionId != null) {
+                        if (mProfile.accessToken.equals("0")) {
+                          File verJsonFile = new File(Tools.DIR_HOME_VERSION,
+                            mProfile.selectedVersion + "/" + mProfile.selectedVersion + ".json");
+                          if (verJsonFile.exists()) {
+                            mTask.onPostExecute(null);
+                          } else {
+                            new AlertDialog.Builder(this)
+                                .setTitle(R.string.global_error)
+                                .setMessage(R.string.mcl_launch_error_localmode)
+                                .setPositiveButton(android.R.string.ok, null)
+                            .show();
+                          }
+                        }
                         mTask.execute(getVersionId(prof.lastVersionId));
                     }
                 }
@@ -300,7 +307,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                     BaseLauncherActivity.this.runOnUiThread(() -> {
                         barrier.dismiss();
                         mRuntimeConfigDialog.refresh();
-                        mRuntimeConfigDialog.dialog.show();
+                        mRuntimeConfigDialog.mDialog.show();
                     });
                 });
                 t.start();
