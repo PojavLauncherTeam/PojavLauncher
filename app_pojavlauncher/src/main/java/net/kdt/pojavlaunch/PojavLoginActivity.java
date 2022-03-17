@@ -357,18 +357,28 @@ public class PojavLoginActivity extends BaseActivity {
             Tools.copyAssetFile(this, "assets-v0.zip", DIR_GAME_NEW + "/resourcepacks", false);
 
             // Install TitleWorlds
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/advancements/00000000-0000-0000-0000-000000000000.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/advancements", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/advancements/6b404275-563a-4c56-8f46-c1c0c23df5c8.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/advancements", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/advancements/7a9e9bdd-7198-414b-88b0-483f4f807b1f.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/advancements", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/advancements/5159d2f9-9457-48fb-be3a-49758504d283.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/advancements", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/advancements/9931de1b-d216-4d8f-a952-4b9d0a77249d.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/advancements", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/advancements/b22ca959-c8a3-4549-bd3e-e143b37fc7ab.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/advancements", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/data/raids.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/data", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/DIM1/data/raids_end.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/DIM1/data", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/DIM-1/data/raids.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/DIM-1/data", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/entities/r.0.0.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/entities", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/entities/r.0.-1.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/entities", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/entities/r.-1.0.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/entities", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/entities/r.-1.-1.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/entities", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/00000000-0000-0000-0000-000000000000.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/00000000-0000-0000-0000-000000000000.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/6b404275-563a-4c56-8f46-c1c0c23df5c8.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/6b404275-563a-4c56-8f46-c1c0c23df5c8.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/7a9e9bdd-7198-414b-88b0-483f4f807b1f.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/7a9e9bdd-7198-414b-88b0-483f4f807b1f.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/5159d2f9-9457-48fb-be3a-49758504d283.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/5159d2f9-9457-48fb-be3a-49758504d283.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/9931de1b-d216-4d8f-a952-4b9d0a77249d.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/9931de1b-d216-4d8f-a952-4b9d0a77249d.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/b22ca959-c8a3-4549-bd3e-e143b37fc7ab.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/playerdata/b22ca959-c8a3-4549-bd3e-e143b37fc7ab.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds/playerdata", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/poi/r.0.0.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/poi", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/poi/r.0.-1.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/poi", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/poi/r.-1.0.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/poi", false);
@@ -377,9 +387,11 @@ public class PojavLoginActivity extends BaseActivity {
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/region/r.0.-1.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/region", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/region/r.-1.0.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/region", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/region/r.-1.-1.mca", DIR_GAME_NEW + "/titleworlds/TitleWorlds/region", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/00000000-0000-0000-0000-000000000000.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/6b404275-563a-4c56-8f46-c1c0c23df5c8.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
-            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/icon.png", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/7a9e9bdd-7198-414b-88b0-483f4f807b1f.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/5159d2f9-9457-48fb-be3a-49758504d283.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/9931de1b-d216-4d8f-a952-4b9d0a77249d.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
+            Tools.copyAssetFile(this, "titleworlds/TitleWorlds/stats/b22ca959-c8a3-4549-bd3e-e143b37fc7ab.json", DIR_GAME_NEW + "/titleworlds/TitleWorlds/stats", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/level.dat", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/level.dat_old", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
             Tools.copyAssetFile(this, "titleworlds/TitleWorlds/session.lock", DIR_GAME_NEW + "/titleworlds/TitleWorlds", false);
