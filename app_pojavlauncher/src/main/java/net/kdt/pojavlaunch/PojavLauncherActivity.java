@@ -37,7 +37,6 @@ import net.kdt.pojavlaunch.fragments.ConsoleFragment;
 import net.kdt.pojavlaunch.fragments.CrashFragment;
 import net.kdt.pojavlaunch.fragments.LauncherFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.prefs.PerVersionConfigDialog;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.profiles.ProfileAdapter;
 import net.kdt.pojavlaunch.profiles.ProfileEditor;
@@ -193,7 +192,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         //mAvailableVersions;
             ProfileAdapter profileAdapter = new ProfileAdapter(this);
-            ProfileEditor editor = new ProfileEditor(this,(name, isNew, deleting)->{
+            ProfileEditor profileEditor = new ProfileEditor(this,(name, isNew, deleting)->{
                 LauncherProfiles.update();
                 if(isNew) {
                     mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(name));
@@ -203,7 +202,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 }
                 profileAdapter.notifyDataSetChanged();
             });
-            mVersionSelector.setOnLongClickListener((v)->editor.show(mProfile.selectedProfile));
+            mVersionSelector.setOnLongClickListener((v)->profileEditor.show(mProfile.selectedProfile));
             mVersionSelector.setAdapter(profileAdapter);
             mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(mProfile.selectedProfile));
             mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -212,7 +211,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 {
                     String profileName = p1.getItemAtPosition(p3).toString();
                     if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
-                        editor.show(profileName);
+                        profileEditor.show(profileName);
                         mVersionSelector.setSelection(0);
                     }else {
                         mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();

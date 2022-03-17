@@ -159,41 +159,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         Tools.updateWindowSize(this);
         System.out.println("call to onPostResume; E");
     }
-    public void setupVersionSelector() {
-        final androidx.appcompat.widget.PopupMenu popup = new PopupMenu(this, mVersionSelector);
-        popup.getMenuInflater().inflate(R.menu.menu_versionopt, popup.getMenu());
-        PerVersionConfigDialog dialog = new PerVersionConfigDialog(this);
-        this.mVersionSelector.setOnLongClickListener((v)->dialog.openConfig(this.mProfile.selectedVersion));
-        this.mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            @Override
-            public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-            {
-                mProfile.selectedVersion = p1.getItemAtPosition(p3).toString();
-
-                PojavProfile.setCurrentProfile(BaseLauncherActivity.this, mProfile);
-                if (PojavProfile.isFileType(BaseLauncherActivity.this)) {
-                    try {
-                        PojavProfile.setCurrentProfile(BaseLauncherActivity.this, mProfile.save());
-                    } catch (IOException e) {
-                        Tools.showError(BaseLauncherActivity.this, e);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> p1)
-            {
-                // TODO: Implement this method
-            }
-        });
-        popup.setOnMenuItemClickListener(item -> true);
-    }
-    ExtraListener<ArrayList<String>> versionListener;
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 
     public static void updateVersionSpinner(Context ctx, ArrayList<String> value, Spinner mVersionSelector, String defaultSelection) {
         if(value != null && value.size() > 0) {
