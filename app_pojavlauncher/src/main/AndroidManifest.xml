@@ -24,8 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:resizeableActivity="true"
         android:hasFragileUserData="true"
-        android:allowNativeHeapPointerTagging="false"
-        android:debuggable="false">
+        android:allowNativeHeapPointerTagging="false">
 
         <meta-data 
             android:name="android.max_aspect"
