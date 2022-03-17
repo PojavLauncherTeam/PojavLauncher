@@ -33,7 +33,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.ConsoleFragment;
-import net.kdt.pojavlaunch.fragments.CrashFragment;
 import net.kdt.pojavlaunch.fragments.LauncherFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
@@ -56,14 +55,13 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         public Fragment createFragment(int position) {
             if (position == 0) return new LauncherFragment();
             if (position == 1) return new ConsoleFragment();
-            if (position == 2) return new CrashFragment();
-            if (position == 3) return new LauncherPreferenceFragment();
+            if (position == 2) return new LauncherPreferenceFragment();
             return null;
         }
 
         @Override
         public int getItemCount() {
-            return 4;
+            return 3;
         }
     }
 
@@ -71,7 +69,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private TextView tvConnectStatus;
     private Spinner accountSelector;
     private ViewPager2 viewPager;
-    private final Button[] Tabs = new Button[4];
+    private final Button[] Tabs = new Button[3];
     private View selectedTab;
     private ImageView accountFaceImageView;
 
@@ -99,8 +97,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         mPlayButton = findViewById(R.id.launchermainPlayButton);
         Tabs[0] = findViewById(R.id.btnTab1);
         Tabs[1] = findViewById(R.id.btnTab2);
-        Tabs[2] = findViewById(R.id.btnTab3);
-        Tabs[3] = findViewById(R.id.btnTab4);
+        Tabs[2] = findViewById(R.id.btnTab4);
 
 
         if (BuildConfig.DEBUG) {
