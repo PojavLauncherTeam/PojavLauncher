@@ -117,25 +117,7 @@ public class V117CompatUtil {
         Object lock = new Object();
         AtomicInteger proceed = new AtomicInteger(0);
         ctx.runOnUiThread(() -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-            builder.setTitle(R.string.global_warinng);
-            builder.setMessage(R.string.compat_117_message);
-            builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                proceed.set(1);
-                synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
-            });
-            builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
-            });
-            builder.setNeutralButton(R.string.compat_11x_playanyway, (dialog, which) -> {
-                proceed.set(2);
-                synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
-            });
-            builder.setCancelable(false);
-            builder.show();
+
         });
 
         synchronized (lock) {
