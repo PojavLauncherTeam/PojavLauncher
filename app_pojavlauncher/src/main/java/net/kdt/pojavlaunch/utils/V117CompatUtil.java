@@ -117,7 +117,8 @@ public class V117CompatUtil {
         Object lock = new Object();
         AtomicInteger proceed = new AtomicInteger(0);
         ctx.runOnUiThread(() -> {
-
+            proceed.set(1);
+            
         });
 
         synchronized (lock) {
