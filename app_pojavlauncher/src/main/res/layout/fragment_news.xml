@@ -22,13 +22,13 @@
 		android:layout_height="wrap_content"
 		android:gravity="center"
 
-		android:text="@string/main_no_news_feed"
+		android:text="For the latest QuestCraft news, please go to discord.gg/QuestCraft"
 		android:textColor="#FFFFFF"
 		android:textSize="24sp"
 		android:textStyle="bold"
 
 		android:visibility="visible"
-		app:drawableBottomCompat="@drawable/ic_menu_no_news"
+		app:drawableBottomCompat="@drawable/qc512"
 		tools:visibility="visible" />
 
 </LinearLayout>
