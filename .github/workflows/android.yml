@@ -16,6 +16,7 @@ jobs:
       GPLAY_KEYSTORE_PASSWORD: "questcraft"
     steps:
       - uses: actions/checkout@v2
+        with:
           fetch-depth: 0
 
       - name: set up JDK 11
