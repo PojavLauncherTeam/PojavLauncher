@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
@@ -25,7 +24,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class V117CompatUtil {
@@ -114,18 +112,11 @@ public class V117CompatUtil {
         List<String> packList =getTexturePackList(MCOptionUtils.get("resourcePacks"));
         String renderer;
         String gamePath;
-        if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
-            PerVersionConfig.update();
-            PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(version);
-            renderer = cfg != null && cfg.renderer != null?cfg.renderer:LauncherPreferences.PREF_RENDERER;
-            gamePath = cfg != null && cfg.gamePath != null?cfg.gamePath:Tools.DIR_GAME_NEW;
-        }else{
             LauncherProfiles.update();
             MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
             if(prof == null) throw new MinecraftDownloaderTask.SilentException();
-            renderer = prof.__P_renderer_name != null?prof.__P_renderer_name:LauncherPreferences.PREF_RENDERER;
+            renderer = prof.pojavRendererName != null?prof.pojavRendererName :LauncherPreferences.PREF_RENDERER;
             gamePath = prof.gameDir != null?prof.gameDir:Tools.DIR_GAME_NEW;
-        }
         //String
 
         if(renderer.equals("vulkan_zink") || renderer.equals("opengles3_virgl")) return; //don't install for zink/virgl users;
@@ -160,25 +151,14 @@ public class V117CompatUtil {
         }
         switch(proceed.get()) {
             case 1:
-                if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
-                    PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(version);
-                    if (cfg == null) {
-                        cfg = new PerVersionConfig.VersionConfig();
-                        PerVersionConfig.configMap.put(version, cfg);
-                    }
-                    cfg.renderer = "opengles3";
-                    PerVersionConfig.update();
-                }else{
-                    MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
-                    if(prof == null) throw new MinecraftDownloaderTask.SilentException();
-                    prof.__P_renderer_name = "opengles3";
+                    MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
+                    if(minecraftProfile == null) throw new MinecraftDownloaderTask.SilentException();
+                    minecraftProfile.pojavRendererName = "opengles3";
                     LauncherProfiles.update();
-                }
                 copyResourcePack(gamePath,ctx.getAssets());
                 if(!packList.contains("\"assets-v0.zip\"")) packList.add(0,"\"assets-v0.zip\"");
                 MCOptionUtils.set("resourcePacks",regenPackList(packList));
                 MCOptionUtils.save();
-                PerVersionConfig.update();
                 break;
             case 0:
                 throw new MinecraftDownloaderTask.SilentException();

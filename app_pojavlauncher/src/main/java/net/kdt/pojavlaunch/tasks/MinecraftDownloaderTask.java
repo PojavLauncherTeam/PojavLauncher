@@ -91,40 +91,19 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 //Now we have the reliable information to check if our runtime settings are good enough
                 if(verInfo.javaVersion != null) { //1.17+
+                    LauncherProfiles.update();
+                    MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(mActivity.mProfile.selectedProfile);
+                    if(minecraftProfile == null) throw new SilentException();
                     String selectedRuntime = null;
-                    if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
-                        PerVersionConfig.update();
-                        PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
-                        if (cfg == null) {
-                            cfg = new PerVersionConfig.VersionConfig();
-                            PerVersionConfig.configMap.put(p1[0], cfg);
-                        }
-                    }else{
-                        LauncherProfiles.update();
-                        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mActivity.mProfile.selectedProfile);
-                        if(prof == null) throw new SilentException();
-                        if(prof.javaDir != null && prof.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
-                            selectedRuntime = prof.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
-                        }
+                    if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+                        selectedRuntime = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
                     }
-                     MultiRTUtils.Runtime r = selectedRuntime != null?MultiRTUtils.read(selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-                     if(r.javaVersion < verInfo.javaVersion.majorVersion) {
-                         String appropriateRuntime = MultiRTUtils.getNearestJREName(verInfo.javaVersion.majorVersion);
+                    Runtime runtime = selectedRuntime != null?MultiRTUtils.read(selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+                    if(runtime.javaVersion < verInfo.javaVersion.majorVersion) {
+                         String appropriateRuntime = MultiRTUtils.getNearestJreName(verInfo.javaVersion.majorVersion);
                          if(appropriateRuntime != null) {
-                             if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
-                                 PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
-                                 if (cfg == null) {
-                                     cfg = new PerVersionConfig.VersionConfig();
-                                     PerVersionConfig.configMap.put(p1[0], cfg);
-                                 }
-                                 cfg.selectedRuntime = appropriateRuntime;
-                                 PerVersionConfig.update();
-                             }else{
-                                 MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mActivity.mProfile.selectedProfile);
-                                 if(prof == null) throw new SilentException();
-                                 prof.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+appropriateRuntime;
-                                 LauncherProfiles.update();
-                             }
+                             minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+appropriateRuntime;
+                             LauncherProfiles.update();
                          }else{
                              mActivity.runOnUiThread(()->{
                                  AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);

@@ -41,6 +41,7 @@ import net.kdt.pojavlaunch.prefs.PerVersionConfigDialog;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.profiles.ProfileAdapter;
 import net.kdt.pojavlaunch.profiles.ProfileEditor;
+import net.kdt.pojavlaunch.profiles.ProfileIconCache;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
@@ -91,7 +92,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     protected void onDestroy() {
         ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
         super.onDestroy();
-        ProfileAdapter.clearIconCache();
+        ProfileIconCache.clearIconCache();
         Log.i("LauncherActivity","Destroyed!");
     }
 
@@ -191,32 +192,27 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         setupBasicList(this);
 
         //mAvailableVersions;
-        if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
-            ArrayAdapter<String> adapterVer = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, basicVersionList);
-            adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-            mVersionSelector.setAdapter(adapterVer);
-        }else{
-            ProfileAdapter pad = new ProfileAdapter(this);
-            ProfileEditor dialog = new ProfileEditor(this,(name, isNew, deleting)->{
+            ProfileAdapter profileAdapter = new ProfileAdapter(this);
+            ProfileEditor editor = new ProfileEditor(this,(name, isNew, deleting)->{
                 LauncherProfiles.update();
                 if(isNew) {
-                    mVersionSelector.setSelection(pad.resolveProfileIndex(name));
+                    mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(name));
                 }
                 if(deleting) {
                     mVersionSelector.setSelection(0);
                 }
-                pad.notifyDataSetChanged();
+                profileAdapter.notifyDataSetChanged();
             });
-            mVersionSelector.setOnLongClickListener((v)->dialog.show(mProfile.selectedProfile));
-            mVersionSelector.setAdapter(pad);
-            mVersionSelector.setSelection(pad.resolveProfileIndex(mProfile.selectedProfile));
+            mVersionSelector.setOnLongClickListener((v)->editor.show(mProfile.selectedProfile));
+            mVersionSelector.setAdapter(profileAdapter);
+            mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(mProfile.selectedProfile));
             mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
                 @Override
                 public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
                 {
                     String profileName = p1.getItemAtPosition(p3).toString();
                     if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
-                        dialog.show(profileName);
+                        editor.show(profileName);
                         mVersionSelector.setSelection(0);
                     }else {
                         mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
@@ -236,7 +232,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                     // TODO: Implement this method
                 }
             });
-        }
         //
         statusIsLaunching(false);
 

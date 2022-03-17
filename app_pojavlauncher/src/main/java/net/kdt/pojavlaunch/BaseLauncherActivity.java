@@ -107,31 +107,28 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         } else if (canBack) {
             v.setEnabled(false);
             mTask = new MinecraftDownloaderTask(this);
-            if(LauncherPreferences.PREF_ENABLE_PROFILES) {
                 LauncherProfiles.update();
                 if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(mProfile.selectedProfile + "")) {
                     MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile + "");
                     if (prof != null && prof.lastVersionId != null) {
                         if (mProfile.accessToken.equals("0")) {
-                          File verJsonFile = new File(Tools.DIR_HOME_VERSION,
-                            mProfile.selectedVersion + "/" + mProfile.selectedVersion + ".json");
-                          if (verJsonFile.exists()) {
-                            mTask.onPostExecute(null);
-                          } else {
-                            new AlertDialog.Builder(this)
-                                .setTitle(R.string.global_error)
-                                .setMessage(R.string.mcl_launch_error_localmode)
-                                .setPositiveButton(android.R.string.ok, null)
-                            .show();
-                          }
+                            String versionId = getVersionId(prof.lastVersionId);
+                            File verJsonFile = new File(Tools.DIR_HOME_VERSION,
+                                versionId + "/" + versionId + ".json");
+                            if (verJsonFile.exists()) {
+                                mTask.onPostExecute(null);
+                            } else {
+                                new AlertDialog.Builder(this)
+                                    .setTitle(R.string.global_error)
+                                    .setMessage(R.string.mcl_launch_error_localmode)
+                                    .setPositiveButton(android.R.string.ok, null)
+                                .show();
+                            }
+                        }else {
+                            mTask.execute(getVersionId(prof.lastVersionId));
                         }
-                        mTask.execute(getVersionId(prof.lastVersionId));
                     }
                 }
-            }else{
-                mTask.execute(mProfile.selectedVersion);
-            }
-
         }
     }
 
@@ -196,7 +193,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if((!LauncherPreferences.PREF_ENABLE_PROFILES) && versionListener != null) ExtraCore.removeExtraListenerFromValue("lac_version_list",versionListener);
     }
 
     public static void updateVersionSpinner(Context ctx, ArrayList<String> value, Spinner mVersionSelector, String defaultSelection) {
@@ -213,22 +209,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     protected void onResume(){
         super.onResume();
         new RefreshVersionListTask(this).execute();
-        if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
-
-            ArrayList<String> vlst = (ArrayList<String>) ExtraCore.getValue("lac_version_list");
-            if(vlst != null) {
-                setupVersionSelector();
-                updateVersionSpinner(this, vlst, mVersionSelector, mProfile.selectedVersion);
-            }
-            versionListener = (key, value) -> {
-                if(value != null) {
-                    setupVersionSelector();
-                    updateVersionSpinner(this, value, mVersionSelector, mProfile.selectedVersion);
-                }
-                return false;
-            };
-            ExtraCore.addExtraListener("lac_version_list",versionListener);
-        }
         if(listRefreshListener != null) {
             LauncherPreferences.DEFAULT_PREF.unregisterOnSharedPreferenceChangeListener(listRefreshListener);
         }
@@ -243,17 +223,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             }
         };
         LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(listRefreshListener);
-        if(profileEnableListener != null) {
-            LauncherPreferences.DEFAULT_PREF.unregisterOnSharedPreferenceChangeListener(profileEnableListener);
-        }
-        profileEnableListener = ((sharedPreferences, key) -> {
-            if(key.equals("enable_profiles")) {
-                LauncherPreferences.PREF_ENABLE_PROFILES = sharedPreferences.getBoolean("enable_profiles",false);
-                this.recreate();
-                profileEnableListener = null;
-            }
-        });
-        LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener(profileEnableListener);
         System.out.println("call to onResume");
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();

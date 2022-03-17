@@ -27,14 +27,12 @@ import java.util.Map;
  */
 public class ProfileAdapter extends BaseAdapter {
     Map<String, MinecraftProfile> profiles;
-    ArrayList<DataSetObserver> observers = new ArrayList<>();
-    static final Map<String, Bitmap> iconCache = new HashMap<>();
-    static final String BASE64_PNG_HEADER = "data:image/png;base64,";
     public static final String CREATE_PROFILE_MAGIC = "___extra____profile-create";
     static final MinecraftProfile DUMMY = new MinecraftProfile();
     static MinecraftProfile CREATE_PROFILE;
     List<String> profileList;
-    public ProfileAdapter(Context ctx) {
+    public ProfileAdapter(Context context) {
+        ProfileIconCache.initDefault(context);
         LauncherProfiles.update();
         profiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
         if(CREATE_PROFILE == null) {
@@ -45,8 +43,7 @@ public class ProfileAdapter extends BaseAdapter {
         profileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
         profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
         profiles.put(CREATE_PROFILE_MAGIC, CREATE_PROFILE);
-        if(!iconCache.containsKey(null))
-            iconCache.put(null,BitmapFactory.decodeResource(ctx.getResources(),R.drawable.ic_menu_java));
+
 
     }
     /*
@@ -56,15 +53,6 @@ public class ProfileAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         return profileList.size();
-    }
-    public static void clearIconCache() {
-        for(String s : iconCache.keySet()) {
-            Bitmap bmp = iconCache.get(s);
-            if(bmp != null) {
-                bmp.recycle();
-            }
-        }
-        iconCache.clear();
     }
     /*
      * Gets the profile at a given index
@@ -115,35 +103,27 @@ public class ProfileAdapter extends BaseAdapter {
         return v;
     }
     public void setViewProfile(View v, String nm) {
-        MinecraftProfile prof = profiles.get(nm);
-        if(prof == null) prof = DUMMY;
-        Bitmap cachedIcon = iconCache.get(nm);
+        MinecraftProfile minecraftProfile = profiles.get(nm);
+        if(minecraftProfile == null) minecraftProfile = DUMMY;
+        Bitmap cachedIcon = ProfileIconCache.getCachedIcon(nm);
         ImageView iconView = v.findViewById(R.id.vprof_icon_view);
-        if(cachedIcon == null && prof.icon != null) {
-            if (prof.icon.startsWith(BASE64_PNG_HEADER)) {
-                byte[] pngBytes = Base64.decode(prof.icon.substring(BASE64_PNG_HEADER.length()), Base64.DEFAULT);
-                cachedIcon = BitmapFactory.decodeByteArray(pngBytes,0,pngBytes.length);
-                iconCache.put(nm,cachedIcon);
-            }else{
-                Log.i("IconParser","Unsupported icon: "+prof.icon);
-                cachedIcon = iconCache.get(null);
-            }
+        if(cachedIcon == null) {
+            cachedIcon = ProfileIconCache.tryResolveIcon(nm,minecraftProfile.icon);
         }
-
         iconView.setImageBitmap(cachedIcon);
-        if(prof.name != null && !prof.name.isEmpty())
-            ((TextView)v.findViewById(R.id.vprof_profile_name_view)).setText(prof.name);
+        if(minecraftProfile.name != null && !minecraftProfile.name.isEmpty())
+            ((TextView)v.findViewById(R.id.vprof_profile_name_view)).setText(minecraftProfile.name);
         else
             ((TextView)v.findViewById(R.id.vprof_profile_name_view)).setText(R.string.unnamed);
 
         TextView tv = v.findViewById(R.id.vprof_version_id_view);
-        if(prof.lastVersionId != null) switch (prof.lastVersionId) {
+        if(minecraftProfile.lastVersionId != null) switch (minecraftProfile.lastVersionId) {
             case "latest-release":
                 tv.setText(R.string.profiles_latest_release);
             case "latest-snapshot":
                 tv.setText(R.string.profiles_latest_snapshot);
             default:
-                tv.setText(prof.lastVersionId);
+                tv.setText(minecraftProfile.lastVersionId);
         } else tv.setText(android.R.string.unknownName);
 
     }

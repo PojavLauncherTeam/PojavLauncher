@@ -120,24 +120,15 @@ public final class Tools {
 
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
         String gamedirPath = Tools.DIR_GAME_NEW;
-        if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
-            PerVersionConfig.update();
-            PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
-            if (pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty())
-                gamedirPath = pvcConfig.gamePath;
-            if (pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty())
-                LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
-        }else{
             if(activity instanceof BaseMainActivity) {
                 LauncherProfiles.update();
-                MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseMainActivity)activity).mProfile.selectedProfile);
-                if(prof == null) throw new Exception("Launching empty Profile");
-                if(prof.gameDir != null && !prof.gameDir.isEmpty())
-                    gamedirPath = prof.gameDir;
-                if(prof.javaArgs != null && !prof.javaArgs.isEmpty())
-                    LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = prof.javaArgs;
+                MinecraftProfile minecraftProfile = ((BaseMainActivity)activity).minecraftProfile;
+                if(minecraftProfile == null) throw new Exception("Launching empty Profile");
+                if(minecraftProfile.gameDir != null && !minecraftProfile.gameDir.isEmpty())
+                    gamedirPath = minecraftProfile.gameDir;
+                if(minecraftProfile.javaArgs != null && !minecraftProfile.javaArgs.isEmpty())
+                    LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = minecraftProfile.javaArgs;
             }
-        }
         PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 
