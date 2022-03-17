@@ -10,8 +10,12 @@
     </string-array>
     
     <string-array name="renderer_values">
-        <item>Please Select The Renderer</item> <!-- just to let people know to select the renderer -->
+        <item>opengles2</item> <!-- gl4es 1.1.4 with OpenGL ES 2 -->
+        <item>opengles2_5</item>  <!-- gl4es 1.1.5 with OpenGL ES 2 -->
         <item>opengles3</item> <!-- gl4es 1.1.5 with OpenGL ES 3 -->
+        <item>vulkan_zink</item>
+        <item>opengles3_vgpu</item> <!-- vgpu with OpenGL ES 3 -->
+        <item>opengles3_virgl</item> <!-- virglrenderer with OpenGL ES 3 -->
     </string-array>
 
     <string-array name="hack_gles_shrink">
