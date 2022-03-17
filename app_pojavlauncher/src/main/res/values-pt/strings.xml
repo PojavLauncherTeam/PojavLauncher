@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Nome do utilizador local</string>
     <string name="login_online_check_keeplogin">Manter a sessão iniciada</string>
     <string name="login_online_login_label">Iniciar sessão</string>
     <string name="login_error_invalid_username">Nome de utilizador inválido. Um nome de utilizador deve ser entre 3 e 16 caracteres, deve conter apenas A-Z, a-z, 0-9 e underscore.</string>
@@ -40,12 +41,14 @@
     <string name="mcl_tab_crash">Registro de falhas</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectado</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
     <string name="mcl_launch_cleancache">A limpar os ficheiros em cache</string>
     <string name="mcl_launch_downloading">A transferir %s</string>
     <string name="mcl_launch_downloading_progress">"A transferir %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">A preparar para transferir os recursos</string>
+    <string name="mcl_launch_error_localmode">Minecraft não pode ser instalado legalmente quando conectado numa conta local. Por favor, mude para uma conta online para continuar.</string>
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modinstall">Executa um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Executa um instalador de mods (com argumentos personalizados)</string>
