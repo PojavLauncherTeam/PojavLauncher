@@ -3,7 +3,7 @@
     <string-array name="renderer">
         <item name="1">@string/mcl_setting_renderer_gles3_5</item>
     </string-array>
-    
+
     <string-array name="renderer_values">
         <item>opengles3</item> <!-- gl4es 1.1.5 with OpenGL ES 3 -->
     </string-array>
