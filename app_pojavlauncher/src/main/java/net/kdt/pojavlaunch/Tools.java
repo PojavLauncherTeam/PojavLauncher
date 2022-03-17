@@ -23,6 +23,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -50,6 +51,7 @@ public final class Tools {
     public static String MULTIRT_HOME;
     public static String LOCAL_RENDERER = null;
     public static int DEVICE_ARCHITECTURE;
+    public static String LAUNCHERPROFILES_RTPREFIX = "pojav://";
 
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
@@ -117,13 +119,25 @@ public final class Tools {
         }
 
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
-        PerVersionConfig.update();
-        PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
-
-        String gamedirPath;
-        if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
-        else gamedirPath = Tools.DIR_GAME_NEW;
-        if(pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
+        String gamedirPath = Tools.DIR_GAME_NEW;
+        if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
+            PerVersionConfig.update();
+            PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
+            if (pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty())
+                gamedirPath = pvcConfig.gamePath;
+            if (pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty())
+                LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
+        }else{
+            if(activity instanceof BaseMainActivity) {
+                LauncherProfiles.update();
+                MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseMainActivity)activity).mProfile.selectedProfile);
+                if(prof == null) throw new Exception("Launching empty Profile");
+                if(prof.gameDir != null && !prof.gameDir.isEmpty())
+                    gamedirPath = prof.gameDir;
+                if(prof.javaArgs != null && !prof.javaArgs.isEmpty())
+                    LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = prof.javaArgs;
+            }
+        }
         PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 

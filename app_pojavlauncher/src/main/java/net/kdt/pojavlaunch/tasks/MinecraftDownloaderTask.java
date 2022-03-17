@@ -14,6 +14,8 @@ import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.*;
 
@@ -89,19 +91,40 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 //Now we have the reliable information to check if our runtime settings are good enough
                 if(verInfo.javaVersion != null) { //1.17+
-                    PerVersionConfig.update();
-                    PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
-                    if(cfg == null) {
-                        cfg = new PerVersionConfig.VersionConfig();
-                        PerVersionConfig.configMap.put(p1[0],cfg);
+                    String selectedRuntime = null;
+                    if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
+                        PerVersionConfig.update();
+                        PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
+                        if (cfg == null) {
+                            cfg = new PerVersionConfig.VersionConfig();
+                            PerVersionConfig.configMap.put(p1[0], cfg);
+                        }
+                    }else{
+                        LauncherProfiles.update();
+                        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mActivity.mProfile.selectedProfile);
+                        if(prof == null) throw new SilentException();
+                        if(prof.javaDir != null && prof.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+                            selectedRuntime = prof.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+                        }
                     }
-
-                     Runtime runtime = cfg.selectedRuntime != null?MultiRTUtils.read(cfg.selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-                     if(runtime.javaVersion < verInfo.javaVersion.majorVersion) {
-                         String appropriateRuntime = MultiRTUtils.getNearestJreName(verInfo.javaVersion.majorVersion);
+                     MultiRTUtils.Runtime r = selectedRuntime != null?MultiRTUtils.read(selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+                     if(r.javaVersion < verInfo.javaVersion.majorVersion) {
+                         String appropriateRuntime = MultiRTUtils.getNearestJREName(verInfo.javaVersion.majorVersion);
                          if(appropriateRuntime != null) {
-                             cfg.selectedRuntime = appropriateRuntime;
-                             PerVersionConfig.update();
+                             if(!LauncherPreferences.PREF_ENABLE_PROFILES) {
+                                 PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
+                                 if (cfg == null) {
+                                     cfg = new PerVersionConfig.VersionConfig();
+                                     PerVersionConfig.configMap.put(p1[0], cfg);
+                                 }
+                                 cfg.selectedRuntime = appropriateRuntime;
+                                 PerVersionConfig.update();
+                             }else{
+                                 MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mActivity.mProfile.selectedProfile);
+                                 if(prof == null) throw new SilentException();
+                                 prof.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+appropriateRuntime;
+                                 LauncherProfiles.update();
+                             }
                          }else{
                              mActivity.runOnUiThread(()->{
                                  AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
@@ -378,6 +401,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
+                mActivity.finish();
+                Log.i("ActCheck","mainActivity finishing="+mActivity.isFinishing()+", destroyed="+mActivity.isDestroyed());
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);
