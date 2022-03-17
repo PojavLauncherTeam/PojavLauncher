@@ -31,6 +31,8 @@
             android:value="ratio_float"/>
         <meta-data android:name="com.oculus.intent.category.VR" android:value="vr_only"/>
         <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2"/>
+        <meta-data android:name="com.oculus.vr.focusaware" android:value="true"/>
+
         <activity
             android:exported="true"
             android:launchMode="singleTop"
