@@ -17,10 +17,13 @@
     <string name="login_microsoft">Microsoft でログイン</string>
     <string name="login_select_account">アカウントを選択</string>
     <string name="login_title_no_saved_account">アカウントが見つかりません！</string>
+    <string name="login_dialog_no_saved_account">保存されたアカウントがありません。\n <b>\"ログイン状態を保持\"</b> オプションを使用して、最初にログインするとアカウントを保存します。</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"右から左にスワイプしてメニューを開きます ◀\nボタンを押してカスタマイズ：編集、サイズ変更、削除。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">このアカウントが削除されます！</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Java Runtime %s (.tar.xz) をインストールします</string>
     <string name="alerttitle_installmod">Mod インストーラーを選択</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher が異常終了しました</string>
@@ -45,8 +48,11 @@
     <string name="mcl_version_msg">Minecraft %s をプレイする準備ができました</string>
     <string name="mcl_launch_cleancache">キャッシュファイルを消去中</string>
     <string name="mcl_launch_downloading">%s をダウンロード中</string>
+    <string name="mcl_launch_downloading_progress">"%s (%.2f MB / %.2f MB) をダウンロードしています"</string>
     <string name="mcl_launch_download_assets">リソースのダウンロードを準備中</string>
     <string name="mcl_options">設定</string>
+    <string name="mcl_option_modinstall">Modインストーラ(Forge、LabyMod、Fabricなど)を起動します</string>
+    <string name="mcl_option_modinstallwitharg">Modインストーラを起動(カスタム引数付き)</string>
     <string name="mcl_option_customcontrol">カスタムコントロール</string>
     <string name="mcl_option_settings">設定</string>
     <string name="mcl_option_about">このアプリについて</string>
@@ -58,13 +64,20 @@
     <string name="mcl_setting_subtitle_hide_sidebar">ノスタルジックな方は昔のバージョン1のUIを好むかもしれません。フルスクリーンのエクスペリエンスを提供します。</string>
     <string name="mcl_setting_title_ignore_notch">ノッチを無視する</string>
     <string name="mcl_setting_subtitle_ignore_notch">ノッチを無視してその下に画面を拡張します。\nより没入感のあるエクスペリエンスを提供します。</string>
+    <string name="mcl_setting_title_resolution_scaler">解像度のスケール</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">ゲームの解像度を下げることができます。 100％がフル解像度です</string>
     <string name="mcl_setting_title_longpresstrigger">長押しとして判定するまでの時間 (ミリ秒)</string>
     <string name="mcl_setting_subtitle_longpresstrigger">長押しでブロックを破壊したりアイテムを捨てたりできますが、タッチし始めてから長押しと判定するまでの時間を変更します。</string>
     <string name="mcl_setting_title_backtorightmouse">戻るボタンをマウスの右クリックとして扱う</string>
     <string name="mcl_setting_subtitle_backtorightmouse">一部のデバイスでは右クリックを戻るボタンとして扱うので、外部マウスを使用している場合はこれを有効にする必要があります。</string>
+    <string name="mcl_setting_title_flat_button_style">デフォルトのボタンスタイル</string>
+    <string name="mcl_setting_subtitle_flat_button_style">コントロールボタンのスタイルをフラットに変更するには、有効にします。</string>
+    <string name="mcl_setting_title_buttonscale">制御ボタンの拡大縮小</string>
+    <string name="mcl_setting_subtitle_buttonscale">ボタンが小さすぎる場合は、それらを上方にスケールしましょう。</string>
     <string name="mcl_setting_title_mousescale">カーソルのサイズ</string>
     <string name="mcl_setting_subtitle_mousescale">仮想カーソルのサイズを変更します。</string>
     <string name="mcl_setting_title_javaargs">JVM 起動引数</string>
+    <string name="mcl_setting_subtitle_javaargs">注意してください, 知識がない場合、ゲームがクラッシュすることがあります。</string>
     <string name="mcl_setting_category_general">一般的な設定</string>
     <string name="mcl_setting_category_scaling">スケーリングの設定</string>
     <string name="mcl_setting_category_renderer">レンダラー</string>
@@ -119,6 +132,7 @@
     <string name="mcn_exit_call">閉じる</string>
     <string name="mcn_exit_confirm">強制終了しますか？</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 がインストールされていません！</string>
+    <string name="mcn_check_fail_incompatiblearch">アーキテクチャ %1$s は、Java Runtime %2$s と互換性がありません。</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">UI</string>
     <string name="control_keyboard">キーボード</string>
