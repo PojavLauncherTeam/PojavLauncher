@@ -44,7 +44,7 @@ public class BaseMainActivity extends BaseActivity {
 
     private boolean mIsResuming = false;
 
-    private MinecraftGLView minecraftGLView;
+    private MinecraftGLSurfaceView minecraftGLView;
     private static Touchpad touchpad;
     private LoggerView loggerView;
 
