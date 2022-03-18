@@ -46,6 +46,7 @@
     <string name="mcl_launch_downloading">Nagda-download %s</string>
     <string name="mcl_launch_downloading_progress">"Pagda-download ng %s (%.2f MB /%.2f MB)"</string>
     <string name="mcl_launch_download_assets">Paghahanda upang mag-download ng mga mapagkukunan</string>
+    <string name="mcl_launch_error_localmode">Ang Minecraft ay di pwede mainstall ng legal pag nakalogin gamit ang local account. Mangyaring gamitin ang online acc para magpatuloy.</string>
     <string name="mcl_options">Mga pagpipilian</string>
     <string name="mcl_option_modinstall">I lunsad ang isang installer ng mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Ilunsad ang isang installer ng mod (na may pasadyang mga argumento)</string>
@@ -126,6 +127,10 @@
     <string name="control_scaleup">Scale up</string>
     <string name="control_scaledown">Scale down</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Mag Import ng controls</string>
+    <string name="import_control_invalid_file">Hindi wasto or sirang file</string>
+    <string name="import_control_import_button">Mag import ng controls</string>
+    <string name="import_control_verifying_file">Ang file ay pinapatunayan pa. maghintay at umilit…</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
