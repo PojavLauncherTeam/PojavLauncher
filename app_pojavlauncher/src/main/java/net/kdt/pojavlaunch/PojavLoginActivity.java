@@ -128,7 +128,7 @@ public class PojavLoginActivity extends BaseActivity {
                             Toast.makeText(PojavLoginActivity.this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
                             return 2;
                         }
-                        requestStoragePermission();
+                        requestPermissions();
 
                         synchronized (mLockStoragePerm) {
                             mLockStoragePerm.wait();
@@ -699,10 +699,12 @@ public class PojavLoginActivity extends BaseActivity {
     }
 
     //Requesting permission
-    private void requestStoragePermission()
+    private void requestPermissions()
     {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.RECORD_AUDIO}, 2);
     }
 
     // This method will be called when the user will tap on allow or deny
