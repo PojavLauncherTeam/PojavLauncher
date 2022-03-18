@@ -48,6 +48,10 @@ class Sync {
 	/** The time to sleep/yield until the next frame */
 	private static long nextFrame = 0;
 
+	/** The time since last frame **/
+	private static long lastFrameTime = 0;
+	private static long lastDelay = 0;
+
 	/** whether the initialisation code has run */
 	private static boolean initialised = false;
 
@@ -67,35 +71,29 @@ class Sync {
 	public static void sync(int fps) {
 		if (fps <= 0)
 			return;
-		if (!initialised)
-			initialise();
 
-		try {
-			// sleep until the average sleep time is greater than the time
-			// remaining till nextFrame
-			for (long t0 = getTime(), t1; (nextFrame - t0) > sleepDurations.avg(); t0 = t1) {
-				Thread.sleep(1);
-				sleepDurations.add((t1 = getTime()) - t0); // update average
-															// sleep time
-			}
-
-			// slowly dampen sleep average if too high to avoid yielding too
-			// much
-			sleepDurations.dampenForLowResTicker();
-
-			// yield until the average yield time is greater than the time
-			// remaining till nextFrame
-			for (long t0 = getTime(), t1; (nextFrame - t0) > yieldDurations.avg(); t0 = t1) {
-				Thread.yield();
-				yieldDurations.add((t1 = getTime()) - t0); // update average
-															// yield time
-			}
-		} catch (InterruptedException e) {
-
+		if (!initialised){
+			initialised = true;
+			lastFrameTime = getTime();
 		}
 
-		// schedule next frame, drop frame(s) if already too late for next frame
-		nextFrame = Math.max(nextFrame + NANOS_IN_SECOND / fps, getTime());
+		// Dumbass implementation I guess
+		long currentFrameTime = getTime();
+		long deltaMs = (currentFrameTime - lastFrameTime)/1000000;
+		long deltaFrame = 1000/fps;
+		if(deltaMs < deltaFrame){  // skip the Thread sleep if the opportunity is available
+			try {
+				Thread.sleep((deltaFrame - deltaMs) + lastDelay);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			lastDelay = 0;
+		}else{
+			// Store how late the device is I guess
+			lastDelay = deltaMs - deltaFrame;
+		}
+
+		lastFrameTime = getTime();
 	}
 
 	/**
