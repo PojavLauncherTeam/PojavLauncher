@@ -71,6 +71,7 @@ public class PojavLoginActivity extends BaseActivity {
 
     private EditText edit2;
     private final int REQUEST_STORAGE_REQUEST_CODE = 1;
+    private final int MY_PERMISSIONS_RECORD_AUDIO = 2;
     private CheckBox sRemember;
     private TextView startupTextView;
     private SharedPreferences firstLaunchPrefs;
@@ -413,6 +414,28 @@ public class PojavLoginActivity extends BaseActivity {
         catch(Throwable e){
             Tools.showError(this, e);
         }
+
+        if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                //When permission is not granted by user, show them message why this permission is needed.
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.RECORD_AUDIO)) {
+                    Toast.makeText(this, "This permission is for voice chat.", Toast.LENGTH_LONG).show();
+
+                    //Give user option to still opt-in the permissions
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.RECORD_AUDIO},
+                            MY_PERMISSIONS_RECORD_AUDIO);
+
+                } else {
+                    // Show user dialog to grant permission to record audio
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.RECORD_AUDIO},
+                            MY_PERMISSIONS_RECORD_AUDIO);
+                }
+            }
     }
     private void showStorageDialog() {
         if(!firstLaunchPrefs.getBoolean("storageDialogShown",false)) {
@@ -703,8 +726,6 @@ public class PojavLoginActivity extends BaseActivity {
     {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.RECORD_AUDIO}, 2);
     }
 
     // This method will be called when the user will tap on allow or deny
