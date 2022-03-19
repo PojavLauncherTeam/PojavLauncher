@@ -11,11 +11,13 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.*;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
 
+import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.*;
 import com.google.android.material.navigation.*;
 import com.kdt.LoggerView;
@@ -44,6 +46,7 @@ public class BaseMainActivity extends BaseActivity {
 
     private boolean mIsResuming = false;
 
+    ControlLayout mControlLayout;
     private MinecraftGLSurfaceView minecraftGLView;
     private static Touchpad touchpad;
     private LoggerView loggerView;
@@ -69,6 +72,7 @@ public class BaseMainActivity extends BaseActivity {
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             touchCharInput = findViewById(R.id.mainTouchCharInput);
             loggerView = findViewById(R.id.mainLoggerView);
+            mControlLayout = findViewById(R.id.main_control_layout);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
             minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile);
@@ -185,6 +189,13 @@ public class BaseMainActivity extends BaseActivity {
     protected void onStop() {
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 0);
         super.onStop();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Tools.getDisplayMetrics(this);
+        minecraftGLView.refreshSize();
     }
 
     public static void fullyExit() {
