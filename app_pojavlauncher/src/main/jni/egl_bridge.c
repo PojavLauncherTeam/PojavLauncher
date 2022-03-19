@@ -674,6 +674,12 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow
     free(ptrStr);
 }
 
+
+JNIEXPORT void JNICALL
+Java_net_kdt_pojavlaunch_utils_JREUtils_releaseBridgeWindow(JNIEnv *env, jclass clazz) {
+    ANativeWindow_release(potatoBridge.androidWindow);
+}
+
 void* pojavGetCurrentContext() {
     switch (config_renderer) {
         case RENDERER_GL4ES:

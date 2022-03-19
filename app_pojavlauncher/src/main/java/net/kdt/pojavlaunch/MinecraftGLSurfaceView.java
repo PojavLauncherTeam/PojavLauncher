@@ -47,10 +47,8 @@ public class MinecraftGLSurfaceView extends SurfaceView {
     private TextView mPointerDebugTextView;
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
-    /* Display properties, such as resolution and DPI */
-    private final DisplayMetrics mDisplayMetrics = Tools.getDisplayMetrics((Activity) getContext());
     /* Sensitivity, adjusted according to screen size */
-    private final double mSensitivityFactor = (1.4 * (1080f/ mDisplayMetrics.heightPixels));
+    private final double mSensitivityFactor = (1.4 * (1080f/ Tools.getDisplayMetrics((Activity) getContext()).heightPixels));
     /* Use to detect simple and double taps */
     private final TapDetector mSingleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
     private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
@@ -140,19 +138,23 @@ public class MinecraftGLSurfaceView extends SurfaceView {
             @Override
             public void surfaceCreated(@NonNull SurfaceHolder holder) {
 
+
                 //Load Minecraft options:
                 MCOptionUtils.load();
+                MCOptionUtils.set("fullscreen", "off");
                 MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
                 MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
                 MCOptionUtils.save();
                 getMcScale();
-                // Should we do that?
-                if(isCalled) return;
+                // Resize stuff
+                if(isCalled){
+                    //getHolder().setFixedSize(windowWidth, windowHeight);
+                    //JREUtils.setupBridgeWindow(getHolder().getSurface());
+                    return;
+                }
                 isCalled = true;
 
-                getHolder().setFixedSize(windowWidth, windowHeight);
-
-
+                refreshSize();
                 JREUtils.setupBridgeWindow(getHolder().getSurface());
 
                 new Thread(() -> {
@@ -169,18 +171,12 @@ public class MinecraftGLSurfaceView extends SurfaceView {
 
             @Override
             public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-                windowWidth = Tools.getDisplayFriendlyRes(mDisplayMetrics.widthPixels, mScaleFactor);
-                windowHeight = Tools.getDisplayFriendlyRes(mDisplayMetrics.heightPixels, mScaleFactor);
-                CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
-                getMcScale();
-                Toast.makeText(getContext(), "width: " + width, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "height: " + height, Toast.LENGTH_SHORT).show();
-                getHolder().setFixedSize(windowWidth, windowHeight);
+                refreshSize();
             }
 
             @Override
             public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-
+                JREUtils.releaseBridgeWindow();
             }
         });
     }
@@ -586,6 +582,26 @@ public class MinecraftGLSurfaceView extends SurfaceView {
     /** Toggle the pointerDebugText visibility state */
     public void togglepointerDebugging() {
         mPointerDebugTextView.setVisibility(mPointerDebugTextView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+    }
+
+    /** Called when the size need to be set at any point during the surface lifecycle **/
+    public void refreshSize(){
+        windowWidth = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.widthPixels, mScaleFactor);
+        windowHeight = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.heightPixels, mScaleFactor);
+        getHolder().setFixedSize(windowWidth, windowHeight);
+
+        // Set the new frame size
+
+        MCOptionUtils.load();
+        MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
+        MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
+        MCOptionUtils.save();
+
+        CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
+        getMcScale();
+        //Toast.makeText(getContext(), "width: " + width, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "height: " + height, Toast.LENGTH_SHORT).show();
+
     }
 
     /** A small interface called when the listener is ready for the first time */
