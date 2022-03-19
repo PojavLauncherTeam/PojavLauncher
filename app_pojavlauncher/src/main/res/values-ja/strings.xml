@@ -165,6 +165,10 @@
     <string name="customctrl_size_width">横幅</string>
     <string name="customctrl_size_height">縦幅</string>
     <string name="customctrl_dynamicpos">動的な位置</string>
+    <string name="customctrl_dynamicpos_x">ダイナミックX</string>
+    <string name="customctrl_dynamicpos_y">ダイナミックY</string>
+    <string name="customctrl_transparency_bg">背景の透明度</string>
+    <string name="customctrl_keycombine">キーの組み合わせ</string>
     <string name="customctrl_addbutton">ボタンを追加</string>
     <string name="customctrl_selectdefault">デフォルトの Control json を選択</string>
     <string name="main_options">設定</string>
@@ -175,10 +179,22 @@
     <string name="main_version">バージョン:</string>
     <string name="main_nocrash">クラッシュは検出されていません</string>
     <string name="main_nolog">ログは空です。</string>
+    <string name="main_no_news_feed">ニュースフィードでニュースを取得できませんでした！！</string>
     <string name="auto_ram_subtitle">メモリの自動調整を有効にする</string>
     <string name="auto_ram_title">自動RAM調整</string>
     <string name="autoram_info_msg">メモリを %d MB に設定しました</string>
     <string name="mcl_setting_check_libraries">ダウンロード後にライブラリを確認する</string>
+    <string name="mcl_setting_check_libraries_subtitle">このオプションは、ランチャーにライブラリハッシュが利用可能であるかどうかをチェックするよう強制します。ダウンロードが壊れているのを防ぎます。</string>
+    <string name="dl_library_sha_fail">ライブラリ %s が破損しているため、再ダウンロードされます</string>
+    <string name="dl_library_sha_unknown">ライブラリ %s が破損しているため、再ダウンロードされます</string>
+    <string name="dl_library_sha_pass">ライブラリ %s は問題なく使用できます</string>
+    <string name="mcl_disable_gestures">ジェスチャーの無効化</string>
+    <string name="mcl_disable_gestures_subtitle">ブロックを壊すためのホールドなどのジェスチャーを無効にしたり、タップしてブロックを配置します。</string>
     <string name="mcl_setting_title_mousespeed">カーソルの速度</string>
     <string name="mcl_setting_subtitle_mousespeed">仮想カーソルの速度を変更します</string>
+    <string name="customctrl_passthru">マウスパススルー</string>
+    <string name="customctrl_rounded">角丸</string>
+    <string name="memory_warning_msg">現在の空きメモリ量(%d)は割り当てられたRAM(%d)よりも低く、クラッシュする可能性があります. ゲームがクラッシュした場合は割り当てを変更します。</string>
+    <string name="mcl_memory_allocation">メモリ割り当て</string>
+    <string name="mcl_memory_allocation_subtitle">Minecraftに与えられるメモリの量を制御します</string>
 </resources>
