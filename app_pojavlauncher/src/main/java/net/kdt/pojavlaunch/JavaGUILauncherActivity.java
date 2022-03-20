@@ -14,8 +14,6 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
-import static net.kdt.pojavlaunch.utils.MathUtils.map;
-
 import com.kdt.LoggerView;
 
 public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouchListener {
@@ -26,12 +24,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     private LinearLayout mTouchPad;
     private ImageView mMousePointerImageView;
-    private GestureDetector gestureDetector;
+    private GestureDetector mGestureDetector;
 
     private boolean mSkipDetectMod, mIsVirtualMouseEnabled;
-
-    private int mScaleFactor;
-    private int[] mScaleFactors = initScaleFactors();
     
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -45,7 +40,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         mLoggerView = findViewById(R.id.launcherLoggerView);
         mMousePointerImageView = findViewById(R.id.main_mouse_pointer);
         mTextureView = findViewById(R.id.installmod_surfaceview);
-        gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+        mGestureDetector = new GestureDetector(this, new SingleTapConfirm());
         mTouchPad.setFocusable(false);
         mTouchPad.setVisibility(View.GONE);
 
@@ -79,7 +74,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             mouseX = mMousePointerImageView.getX();
             mouseY = mMousePointerImageView.getY();
 
-            if (gestureDetector.onTouchEvent(event)) {
+            if (mGestureDetector.onTouchEvent(event)) {
                 sendScaledMousePosition(mouseX,mouseY);
                 AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
             } else {
@@ -99,7 +94,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         mTextureView.setOnTouchListener((v, event) -> {
             float x = event.getX();
             float y = event.getY();
-            if (gestureDetector.onTouchEvent(event)) {
+            if (mGestureDetector.onTouchEvent(event)) {
                 sendScaledMousePosition(x, y);
                 AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
                 return true;
@@ -208,8 +203,14 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     void sendScaledMousePosition(float x, float y){
-        AWTInputBridge.sendMousePos((int) map(x,0,CallbackBridge.physicalWidth, mScaleFactors[0], mScaleFactors[2]),
-                (int) map(y,0,CallbackBridge.physicalHeight, mScaleFactors[1], mScaleFactors[3]));
+        // Clamp positions, then scale them
+        x = androidx.core.math.MathUtils.clamp(x, mTextureView.getX(), mTextureView.getX() + mTextureView.getWidth());
+        y = androidx.core.math.MathUtils.clamp(y, mTextureView.getY(), mTextureView.getY() + mTextureView.getHeight());
+
+        AWTInputBridge.sendMousePos(
+                (int) MathUtils.map(x, mTextureView.getX(), mTextureView.getX() + mTextureView.getWidth(), 0, AWTCanvasView.AWT_CANVAS_WIDTH),
+                (int) MathUtils.map(y, mTextureView.getY(), mTextureView.getY() + mTextureView.getHeight(), 0, AWTCanvasView.AWT_CANVAS_HEIGHT)
+                );
     }
 
     public void forceClose(View v) {
@@ -268,49 +269,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
 
-
-    int[] initScaleFactors(){
-        return initScaleFactors(true);
-    }
-
-    int[] initScaleFactors(boolean autoScale){
-        //Could be optimized
-
-        if(autoScale) { //Auto scale
-            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
-            mScaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
-        }
-
-        int[] scales = new int[4]; //Left, Top, Right, Bottom
-
-        scales[0] = (CallbackBridge.physicalWidth/2);
-        scales[0] -= scales[0]/ mScaleFactor;
-
-        scales[1] = (CallbackBridge.physicalHeight/2);
-        scales[1] -= scales[1]/ mScaleFactor;
-
-        scales[2] = (CallbackBridge.physicalWidth/2);
-        scales[2] += scales[2]/ mScaleFactor;
-
-        scales[3] = (CallbackBridge.physicalHeight/2);
-        scales[3] += scales[3]/ mScaleFactor;
-
-        return scales;
-    }
-
-    public void scaleDown(View view) {
-        mScaleFactor = Math.max(mScaleFactor - 1, 1);
-        mScaleFactors = initScaleFactors(false);
-        mTextureView.initScaleFactors(mScaleFactor);
-        sendScaledMousePosition(mMousePointerImageView.getX(), mMousePointerImageView.getY());
-    }
-
-    public void scaleUp(View view) {
-        mScaleFactor = Math.min(mScaleFactor + 1, 6);
-        mScaleFactors = initScaleFactors(false);
-        mTextureView.initScaleFactors(mScaleFactor);
-        sendScaledMousePosition(mMousePointerImageView.getX(), mMousePointerImageView.getY());
-    }
 
     private int doCustomInstall(File modFile, String javaArgs) throws IOException {
         mSkipDetectMod = true;
