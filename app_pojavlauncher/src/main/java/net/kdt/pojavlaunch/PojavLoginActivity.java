@@ -237,8 +237,6 @@ public class PojavLoginActivity extends BaseActivity {
             public void onNothingSelected(AdapterView<?> adapter) {}
         });
 
-        edit2 = (EditText) findViewById(R.id.login_edit_email);
-
         sRemember = findViewById(R.id.login_switch_remember);
         isSkipInit = true;
     }
