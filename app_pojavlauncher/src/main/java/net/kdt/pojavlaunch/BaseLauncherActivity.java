@@ -20,6 +20,7 @@ import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.profiles.ProfileConstants;
 import net.kdt.pojavlaunch.tasks.*;
 
 import androidx.appcompat.app.AlertDialog;
@@ -133,7 +134,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     }
 
     public static String getVersionId(String input) {
-        Map<String,String> lReleaseMaps = (Map<String,String>)ExtraCore.getValue("release_table");
+        Map<String,String> lReleaseMaps = (Map<String,String>)ExtraCore.getValue(ProfileConstants.RELEASE_TABLE);
         if(lReleaseMaps == null || lReleaseMaps.isEmpty()) return input;
         switch(input) {
             case "latest-release":

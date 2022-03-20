@@ -39,6 +39,7 @@ import net.kdt.pojavlaunch.fragments.LauncherFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.profiles.ProfileAdapter;
+import net.kdt.pojavlaunch.profiles.ProfileConstants;
 import net.kdt.pojavlaunch.profiles.ProfileEditor;
 import net.kdt.pojavlaunch.profiles.ProfileIconCache;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
@@ -273,7 +274,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         } finally {
             basicVersionList = versions.toArray(new String[0]);
-            ExtraCore.setValue("lac_version_list",versions);
+            ExtraCore.setValue(ProfileConstants.VERSION_LIST,versions);
         }
     }
     private void pickAccount() {

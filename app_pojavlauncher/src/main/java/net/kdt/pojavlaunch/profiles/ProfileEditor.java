@@ -114,7 +114,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         javaRuntimeSpinner.setSelection(jvmIndex);
         rendererSpinner.setSelection(rendererIndex);
-        ExtraCore.addExtraListener("lac_version_list",this);
+        ExtraCore.addExtraListener(ProfileConstants.VERSION_LIST,this);
         profileNameView.setText(minecraftProfile.name);
         Bitmap profileIcon = ProfileIconCache.getCachedIcon(profile);
         if(profileIcon == null) {
@@ -124,7 +124,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         if(minecraftProfile.lastVersionId != null && !"latest-release".equals(minecraftProfile.lastVersionId) && !"latest-snapshot".equals(minecraftProfile.lastVersionId))
             selectedVersionId = minecraftProfile.lastVersionId;
         else if(minecraftProfile.lastVersionId != null) {
-            Map<String,String> releaseTable = (Map<String,String>)ExtraCore.getValue("release_table");
+            Map<String,String> releaseTable = (Map<String,String>)ExtraCore.getValue(ProfileConstants.RELEASE_TABLE);
             if(releaseTable != null) {
             switch (minecraftProfile.lastVersionId) {
                 case "latest-release":
@@ -141,7 +141,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
                 selectedVersionId = PojavLauncherActivity.basicVersionList[0];
             }
         }
-        ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue("lac_version_list");
+        ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ProfileConstants.VERSION_LIST);
         BaseLauncherActivity.updateVersionSpinner(context,versions,versionSpinner, selectedVersionId);
         dialog.show();
         return true;
@@ -180,7 +180,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         destroy(dialog);
     }
     public void destroy(@NonNull DialogInterface dialog) {
-        ExtraCore.removeExtraListenerFromValue("lac_version_list",this);
+        ExtraCore.removeExtraListenerFromValue(ProfileConstants.VERSION_LIST,this);
         editingProfile = null;
         selectedVersionId = null;
     }

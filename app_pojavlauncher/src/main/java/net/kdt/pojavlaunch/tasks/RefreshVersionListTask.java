@@ -18,6 +18,7 @@ import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.profiles.ProfileConstants;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
 
@@ -43,8 +44,8 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                     Log.i("ExtVL", "Syncing to external: " + url);
                     list = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString(url), JMinecraftVersionList.class);
                     Log.i("ExtVL","Downloaded the version list, len="+list.versions.length);
-                    if(list.latest != null && ExtraCore.getValue("release_table") == null)
-                        ExtraCore.setValue("release_table",list.latest);
+                    if(list.latest != null && ExtraCore.getValue(ProfileConstants.RELEASE_TABLE) == null)
+                        ExtraCore.setValue(ProfileConstants.RELEASE_TABLE,list.latest);
                     Collections.addAll(versions,list.versions);
                 }
                 mActivity.mVersionList = new JMinecraftVersionList();
@@ -64,7 +65,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     protected void onPostExecute(ArrayList<String> result)
     {
         super.onPostExecute(result);
-        ExtraCore.setValue("lac_version_list",result);
+        ExtraCore.setValue(ProfileConstants.VERSION_LIST,result);
     }
     
     private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {
