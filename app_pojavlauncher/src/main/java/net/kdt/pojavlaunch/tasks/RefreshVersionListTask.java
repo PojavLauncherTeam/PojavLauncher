@@ -1,28 +1,16 @@
 package net.kdt.pojavlaunch.tasks;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.*;
-import androidx.appcompat.widget.*;
 
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
-import android.widget.AdapterView.*;
 
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.extra.ExtraListener;
-import net.kdt.pojavlaunch.multirt.MultiRTUtils;
-import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.profiles.ProfileConstants;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.utils.*;
-import net.kdt.pojavlaunch.value.PerVersionConfig;
-
-import androidx.appcompat.widget.PopupMenu;
 
 public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<String>>
 {
@@ -44,8 +32,8 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
                     Log.i("ExtVL", "Syncing to external: " + url);
                     list = Tools.GLOBAL_GSON.fromJson(DownloadUtils.downloadString(url), JMinecraftVersionList.class);
                     Log.i("ExtVL","Downloaded the version list, len="+list.versions.length);
-                    if(list.latest != null && ExtraCore.getValue(ProfileConstants.RELEASE_TABLE) == null)
-                        ExtraCore.setValue(ProfileConstants.RELEASE_TABLE,list.latest);
+                    if(list.latest != null && ExtraCore.getValue(ExtraConstants.RELEASE_TABLE) == null)
+                        ExtraCore.setValue(ExtraConstants.RELEASE_TABLE,list.latest);
                     Collections.addAll(versions,list.versions);
                 }
                 mActivity.mVersionList = new JMinecraftVersionList();
@@ -65,7 +53,7 @@ public class RefreshVersionListTask extends AsyncTask<Void, Void, ArrayList<Stri
     protected void onPostExecute(ArrayList<String> result)
     {
         super.onPostExecute(result);
-        ExtraCore.setValue(ProfileConstants.VERSION_LIST,result);
+        ExtraCore.setValue(ExtraConstants.VERSION_LIST,result);
     }
     
     private ArrayList<String> filter(JMinecraftVersionList.Version[] list1, File[] list2) {

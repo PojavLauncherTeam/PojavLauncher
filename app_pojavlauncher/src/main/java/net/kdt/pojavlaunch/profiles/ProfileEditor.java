@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,6 +22,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
@@ -114,7 +114,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         javaRuntimeSpinner.setSelection(jvmIndex);
         rendererSpinner.setSelection(rendererIndex);
-        ExtraCore.addExtraListener(ProfileConstants.VERSION_LIST,this);
+        ExtraCore.addExtraListener(ExtraConstants.VERSION_LIST,this);
         profileNameView.setText(minecraftProfile.name);
         Bitmap profileIcon = ProfileIconCache.getCachedIcon(profile);
         if(profileIcon == null) {
@@ -124,7 +124,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         if(minecraftProfile.lastVersionId != null && !"latest-release".equals(minecraftProfile.lastVersionId) && !"latest-snapshot".equals(minecraftProfile.lastVersionId))
             selectedVersionId = minecraftProfile.lastVersionId;
         else if(minecraftProfile.lastVersionId != null) {
-            Map<String,String> releaseTable = (Map<String,String>)ExtraCore.getValue(ProfileConstants.RELEASE_TABLE);
+            Map<String,String> releaseTable = (Map<String,String>)ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
             if(releaseTable != null) {
             switch (minecraftProfile.lastVersionId) {
                 case "latest-release":
@@ -141,7 +141,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
                 selectedVersionId = PojavLauncherActivity.basicVersionList[0];
             }
         }
-        ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ProfileConstants.VERSION_LIST);
+        ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ExtraConstants.VERSION_LIST);
         BaseLauncherActivity.updateVersionSpinner(context,versions,versionSpinner, selectedVersionId);
         dialog.show();
         return true;
@@ -180,7 +180,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         destroy(dialog);
     }
     public void destroy(@NonNull DialogInterface dialog) {
-        ExtraCore.removeExtraListenerFromValue(ProfileConstants.VERSION_LIST,this);
+        ExtraCore.removeExtraListenerFromValue(ExtraConstants.VERSION_LIST,this);
         editingProfile = null;
         selectedVersionId = null;
     }

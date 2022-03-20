@@ -39,7 +39,7 @@ import net.kdt.pojavlaunch.fragments.LauncherFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.profiles.ProfileAdapter;
-import net.kdt.pojavlaunch.profiles.ProfileConstants;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.profiles.ProfileEditor;
 import net.kdt.pojavlaunch.profiles.ProfileIconCache;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
@@ -90,7 +90,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
     @Override
     protected void onDestroy() {
-        ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
+        ExtraCore.removeExtraListenerFromValue(ExtraConstants.BACK_PREFERENCE, backPreferenceListener);
         super.onDestroy();
         ProfileIconCache.clearIconCache();
         Log.i("LauncherActivity","Destroyed!");
@@ -140,7 +140,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
             return false;
         };
-        ExtraCore.addExtraListener("back_preference", backPreferenceListener);
+        ExtraCore.addExtraListener(ExtraConstants.BACK_PREFERENCE, backPreferenceListener);
 
 
         // Try to load the temporary account
@@ -274,7 +274,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         } finally {
             basicVersionList = versions.toArray(new String[0]);
-            ExtraCore.setValue(ProfileConstants.VERSION_LIST,versions);
+            ExtraCore.setValue(ExtraConstants.VERSION_LIST,versions);
         }
     }
     private void pickAccount() {
@@ -395,7 +395,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }else{
             super.onBackPressed();
             //additional code
-            ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
+            ExtraCore.removeExtraListenerFromValue(ExtraConstants.BACK_PREFERENCE, backPreferenceListener);
             finish();
         }
     }

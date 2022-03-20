@@ -15,16 +15,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.extra.ExtraListener;
-import net.kdt.pojavlaunch.fragments.*;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.profiles.ProfileConstants;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.tasks.*;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.PopupMenu;
 
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
@@ -134,7 +131,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     }
 
     public static String getVersionId(String input) {
-        Map<String,String> lReleaseMaps = (Map<String,String>)ExtraCore.getValue(ProfileConstants.RELEASE_TABLE);
+        Map<String,String> lReleaseMaps = (Map<String,String>)ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
         if(lReleaseMaps == null || lReleaseMaps.isEmpty()) return input;
         switch(input) {
             case "latest-release":
