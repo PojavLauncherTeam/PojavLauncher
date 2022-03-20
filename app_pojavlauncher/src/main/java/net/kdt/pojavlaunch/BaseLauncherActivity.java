@@ -116,11 +116,10 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                             if (verJsonFile.exists()) {
                                 mTask.onPostExecute(null);
                             } else {
-                                new AlertDialog.Builder(this)
-                                    .setTitle(R.string.global_error)
-                                    .setMessage(R.string.mcl_launch_error_localmode)
-                                    .setPositiveButton(android.R.string.ok, null)
-                                .show();
+                                Tools.dialogOnUiThread(this,
+                                        getString(R.string.global_error),
+                                        getString(R.string.mcl_launch_error_localmode)
+                                );
                             }
                         }else {
                             mTask.execute(getVersionId(prof.lastVersionId));
@@ -131,16 +130,11 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     }
 
     public static String getVersionId(String input) {
-        Map<String,String> lReleaseMaps = (Map<String,String>)ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
-        if(lReleaseMaps == null || lReleaseMaps.isEmpty()) return input;
-        switch(input) {
-            case "latest-release":
-                return lReleaseMaps.get("release");
-            case "latest-snapshot":
-                return lReleaseMaps.get("snapshot");
-            default:
-                return input;
-        }
+        Map<String,String> releaseTable = (Map<String,String>)ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
+        if(releaseTable == null || releaseTable.isEmpty()) return input;
+        if("latest-release".equals(input)) return releaseTable.get("release");
+        if("latest-snapshot".equals(input)) return releaseTable.get("snapshot");
+        return input;
     }
 
     @Override

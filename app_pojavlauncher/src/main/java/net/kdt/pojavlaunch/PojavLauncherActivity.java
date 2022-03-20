@@ -192,7 +192,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         setupBasicList(this);
 
         //mAvailableVersions;
-            ProfileAdapter profileAdapter = new ProfileAdapter(this);
+            ProfileAdapter profileAdapter = new ProfileAdapter(this, true);
             ProfileEditor profileEditor = new ProfileEditor(this,(name, isNew, deleting)->{
                 LauncherProfiles.update();
                 if(isNew) {

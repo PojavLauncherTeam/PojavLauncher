@@ -1,11 +1,7 @@
 package net.kdt.pojavlaunch.profiles;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,23 +24,23 @@ import java.util.Map;
 public class ProfileAdapter extends BaseAdapter {
     Map<String, MinecraftProfile> profiles;
     public static final String CREATE_PROFILE_MAGIC = "___extra____profile-create";
-    static final MinecraftProfile DUMMY = new MinecraftProfile();
-    static MinecraftProfile CREATE_PROFILE;
+    final MinecraftProfile dummy = new MinecraftProfile();
+    private MinecraftProfile createProfile;
     List<String> profileList;
-    public ProfileAdapter(Context context) {
+    public ProfileAdapter(Context context, boolean enableCreateButton) {
         ProfileIconCache.initDefault(context);
         LauncherProfiles.update();
         profiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
-        if(CREATE_PROFILE == null) {
-            CREATE_PROFILE = new MinecraftProfile();
-            CREATE_PROFILE.name = "Create new profile";
-            CREATE_PROFILE.lastVersionId = "";
+        if(enableCreateButton) {
+            createProfile = new MinecraftProfile();
+            createProfile.name = "Create new profile";
+            createProfile.lastVersionId = "";
         }
         profileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
-        profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
-        profiles.put(CREATE_PROFILE_MAGIC, CREATE_PROFILE);
-
-
+        if(enableCreateButton) {
+            profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
+            profiles.put(CREATE_PROFILE_MAGIC, createProfile);
+        }
     }
     /*
      * Gets how much profiles are loaded in the adapter right now
@@ -91,7 +87,7 @@ public class ProfileAdapter extends BaseAdapter {
         profiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
         profileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
         profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
-        profiles.put(CREATE_PROFILE_MAGIC, CREATE_PROFILE);
+        profiles.put(CREATE_PROFILE_MAGIC, createProfile);
         super.notifyDataSetChanged();
     }
 
@@ -104,7 +100,7 @@ public class ProfileAdapter extends BaseAdapter {
     }
     public void setViewProfile(View v, String nm) {
         MinecraftProfile minecraftProfile = profiles.get(nm);
-        if(minecraftProfile == null) minecraftProfile = DUMMY;
+        if(minecraftProfile == null) minecraftProfile = dummy;
         Bitmap cachedIcon = ProfileIconCache.getCachedIcon(nm);
         ImageView iconView = v.findViewById(R.id.vprof_icon_view);
         if(cachedIcon == null) {
