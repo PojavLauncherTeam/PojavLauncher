@@ -22,24 +22,24 @@ import java.util.Map;
  * Adapter for listing launcher profiles in a Spinner
  */
 public class ProfileAdapter extends BaseAdapter {
-    private Map<String, MinecraftProfile> profiles;
+    private Map<String, MinecraftProfile> mProfiles;
     public static final String CREATE_PROFILE_MAGIC = "___extra____profile-create";
     private final MinecraftProfile dummy = new MinecraftProfile();
-    private MinecraftProfile createProfile;
-    private List<String> profileList;
+    private MinecraftProfile mCreateProfile;
+    private List<String> mProfileList;
     public ProfileAdapter(Context context, boolean enableCreateButton) {
         ProfileIconCache.initDefault(context);
         LauncherProfiles.update();
-        profiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
+        mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
         if(enableCreateButton) {
-            createProfile = new MinecraftProfile();
-            createProfile.name = "Create new profile";
-            createProfile.lastVersionId = "";
+            mCreateProfile = new MinecraftProfile();
+            mCreateProfile.name = "Create new profile";
+            mCreateProfile.lastVersionId = "";
         }
-        profileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
+        mProfileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
         if(enableCreateButton) {
-            profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
-            profiles.put(CREATE_PROFILE_MAGIC, createProfile);
+            mProfileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
+            mProfiles.put(CREATE_PROFILE_MAGIC, mCreateProfile);
         }
     }
     /*
@@ -48,7 +48,7 @@ public class ProfileAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return profileList.size();
+        return mProfileList.size();
     }
     /*
      * Gets the profile at a given index
@@ -58,15 +58,15 @@ public class ProfileAdapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         //safe since the second check in the and statement will be skipped if the first one fails
-        if(position < profileList.size() && profiles.containsKey(profileList.get(position))) {
-            return profileList.get(position);
+        if(position < mProfileList.size() && mProfiles.containsKey(mProfileList.get(position))) {
+            return mProfileList.get(position);
         }else{
             return null;
         }
     }
 
     public int resolveProfileIndex(String name) {
-        return profileList.indexOf(name);
+        return mProfileList.indexOf(name);
     }
 
     public void fireProfileEdit() {
@@ -84,10 +84,10 @@ public class ProfileAdapter extends BaseAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        profiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
-        profileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
-        profileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
-        profiles.put(CREATE_PROFILE_MAGIC, createProfile);
+        mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
+        mProfileList = new ArrayList<>(Arrays.asList(mProfiles.keySet().toArray(new String[0])));
+        mProfileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
+        mProfiles.put(CREATE_PROFILE_MAGIC, mCreateProfile);
         super.notifyDataSetChanged();
     }
 
@@ -95,11 +95,11 @@ public class ProfileAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) v = LayoutInflater.from(parent.getContext()).inflate(R.layout.version_profile_layout,parent,false);
-        setViewProfile(v,profileList.get(position));
+        setViewProfile(v,mProfileList.get(position));
         return v;
     }
     public void setViewProfile(View v, String nm) {
-        MinecraftProfile minecraftProfile = profiles.get(nm);
+        MinecraftProfile minecraftProfile = mProfiles.get(nm);
         if(minecraftProfile == null) minecraftProfile = dummy;
         Bitmap cachedIcon = ProfileIconCache.getCachedIcon(nm);
         ImageView iconView = v.findViewById(R.id.vprof_icon_view);
