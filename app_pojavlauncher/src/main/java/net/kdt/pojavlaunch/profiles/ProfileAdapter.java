@@ -36,7 +36,7 @@ public class ProfileAdapter extends BaseAdapter {
             mCreateProfile.name = "Create new profile";
             mCreateProfile.lastVersionId = "";
         }
-        mProfileList = new ArrayList<>(Arrays.asList(profiles.keySet().toArray(new String[0])));
+        mProfileList = new ArrayList<>(Arrays.asList(mProfiles.keySet().toArray(new String[0])));
         if(enableCreateButton) {
             mProfileList.add(ProfileAdapter.CREATE_PROFILE_MAGIC);
             mProfiles.put(CREATE_PROFILE_MAGIC, mCreateProfile);
