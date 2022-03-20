@@ -5,16 +5,17 @@ import android.graphics.*;
 import android.text.*;
 import android.util.*;
 import android.view.*;
+import android.widget.RelativeLayout;
+
 import java.util.*;
 import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
+    public static final int AWT_CANVAS_WIDTH = 600;
+    public static final int AWT_CANVAS_HEIGHT = 420;
     private final int MAX_SIZE = 100;
     private final double NANOS = 1000000000.0;
-
-    private int mScaleFactor;
-    private int[] mScales;
 
     private int mWidth, mHeight;
     private boolean mIsDestroyed = false;
@@ -35,16 +36,19 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         mFpsPaint = new TextPaint();
         mFpsPaint.setColor(Color.WHITE);
         mFpsPaint.setTextSize(20);
-        
+
+
         setSurfaceTextureListener(this);
-        initScaleFactors();
+
+        post(this::refreshSize);
     }
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture texture, int w, int h) {
+        getSurfaceTexture().setDefaultBufferSize(AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT);
         mWidth = w;
         mHeight = h;
-        
+
         mIsDestroyed = false;
         new Thread(this, "AndroidAWTRenderer").start();
     }
@@ -57,12 +61,14 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int w, int h) {
+        getSurfaceTexture().setDefaultBufferSize(AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT);
         mWidth = w;
         mHeight = h;
     }
 
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture texture) {
+        getSurfaceTexture().setDefaultBufferSize(AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT);
     }
 
     @Override
@@ -83,45 +89,18 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                     if (rgbArray != null) {
 
                         canvas.save();
-                        canvas.scale(mScaleFactor, mScaleFactor);
-                        canvas.translate(-mScales[0], -mScales[1]);
 
-                        canvas.drawBitmap(rgbArray, 0, CallbackBridge.physicalWidth, 0, 0, CallbackBridge.physicalWidth, CallbackBridge.physicalHeight, true, null);
+                        canvas.drawBitmap(rgbArray, 0, AWT_CANVAS_WIDTH, 0, 0, AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT, true, null);
                         canvas.restore();
                     }
                 }
-                canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", attached=" + mAttached + ", drawing=" + mDrawing, 50, 50, mFpsPaint);
+                canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", attached=" + mAttached + ", drawing=" + mDrawing, 0, 20, mFpsPaint);
                 surface.unlockCanvasAndPost(canvas);
             }
         } catch (Throwable throwable) {
             Tools.showError(getContext(), throwable);
         }
         surface.release();
-    }
-
-    /** Computes the scale to better fit the screen */
-    void initScaleFactors(){
-        initScaleFactors(0);
-    }
-
-    void initScaleFactors(int forcedScale){
-        //Could be optimized
-        if(forcedScale < 1) { //Auto scale
-            int minDimension = Math.min(CallbackBridge.physicalHeight, CallbackBridge.physicalWidth);
-            mScaleFactor = Math.max(((3 * minDimension) / 1080) - 1, 1);
-        }else{
-            mScaleFactor = forcedScale;
-        }
-
-        int[] scales = new int[2]; //Left, Top
-
-        scales[0] = (CallbackBridge.physicalWidth/2);
-        scales[0] -= scales[0]/mScaleFactor;
-
-        scales[1] = (CallbackBridge.physicalHeight/2);
-        scales[1] -= scales[1]/mScaleFactor;
-
-        mScales = scales;
     }
 
     /** Calculates and returns frames per second */
@@ -135,4 +114,18 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         }
         return difference > 0 ? mTimes.size() / difference : 0.0;
     }
+
+    /** Make the view fit the proper aspect ratio of the surface */
+    private void refreshSize(){
+        ViewGroup.LayoutParams layoutParams = getLayoutParams();
+
+        if(getHeight() < getWidth()){
+            layoutParams.width = AWT_CANVAS_WIDTH * getHeight() / AWT_CANVAS_HEIGHT;
+        }else{
+            layoutParams.height = AWT_CANVAS_HEIGHT * getWidth() / AWT_CANVAS_WIDTH;
+        }
+
+        setLayoutParams(layoutParams);
+    }
+
 }
