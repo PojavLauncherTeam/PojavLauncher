@@ -22,11 +22,11 @@ import java.util.Map;
  * Adapter for listing launcher profiles in a Spinner
  */
 public class ProfileAdapter extends BaseAdapter {
-    Map<String, MinecraftProfile> profiles;
+    private Map<String, MinecraftProfile> profiles;
     public static final String CREATE_PROFILE_MAGIC = "___extra____profile-create";
-    final MinecraftProfile dummy = new MinecraftProfile();
+    private final MinecraftProfile dummy = new MinecraftProfile();
     private MinecraftProfile createProfile;
-    List<String> profileList;
+    private List<String> profileList;
     public ProfileAdapter(Context context, boolean enableCreateButton) {
         ProfileIconCache.initDefault(context);
         LauncherProfiles.update();
