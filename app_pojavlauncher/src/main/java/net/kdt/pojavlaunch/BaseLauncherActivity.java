@@ -115,12 +115,12 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                                 versionId + "/" + versionId + ".json");
                             if (verJsonFile.exists()) {
                                 mTask.onPostExecute(null);
-                            } else {
-                                Tools.dialogOnUiThread(this,
-                                        getString(R.string.global_error),
-                                        getString(R.string.mcl_launch_error_localmode)
-                                );
+                                return;
                             }
+                            Tools.dialogOnUiThread(this,
+                                    getString(R.string.global_error),
+                                    getString(R.string.mcl_launch_error_localmode)
+                            );
                         }else {
                             mTask.execute(getVersionId(prof.lastVersionId));
                         }
@@ -158,9 +158,9 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
             mVersionSelector.setAdapter(adapter);
             mVersionSelector.setSelection(RefreshVersionListTask.selectAt(value, defaultSelection));
-        } else {
-            mVersionSelector.setSelection(RefreshVersionListTask.selectAt(PojavLauncherActivity.basicVersionList, defaultSelection));
+            return;
         }
+        mVersionSelector.setSelection(RefreshVersionListTask.selectAt(PojavLauncherActivity.basicVersionList, defaultSelection));
     }
     @Override
     protected void onResume(){

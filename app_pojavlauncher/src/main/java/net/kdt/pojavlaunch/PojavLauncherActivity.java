@@ -214,17 +214,18 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                     if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
                         profileEditor.show(profileName);
                         mVersionSelector.setSelection(0);
-                    }else {
-                        mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
-                        PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile);
-                        if (PojavProfile.isFileType(PojavLauncherActivity.this)) {
-                            try {
-                                PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile.save());
-                            } catch (IOException e) {
-                                Tools.showError(PojavLauncherActivity.this, e);
-                            }
+                        return;
+                    }
+                    mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile);
+                    if (PojavProfile.isFileType(PojavLauncherActivity.this)) {
+                        try {
+                             PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile.save());
+                        } catch (IOException e) {
+                             Tools.showError(PojavLauncherActivity.this, e);
                         }
                     }
+
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> p1)
