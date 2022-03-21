@@ -237,8 +237,11 @@
     <string name="gles_hack_none">sǝɹnʇxǝʇ ʞuᴉɹɥs ʇ,uop</string>
     <string name="gles_hack_always">ᄅ ʎq sǝɹnʇxǝʇ llɐ sǝpᴉʌᴉp</string>
     <string name="gles_hack_sometimes">ㄣ/ ɹo ᄅ/ ʎq sǝɹnʇxǝʇ ƃᴉq sǝpᴉʌᴉp</string>
+    <string name="profiles_profile_name">ǝɯɐN</string>
+    <string name="option_enable_profiles">sǝlᴉɟoɹԀ</string>
     <string name="vbo_hack_title">sOqΛ ǝlqɐsᴉp</string>
     <string name="vbo_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
+    <string name="pedit_renderer">ɹǝɹǝpuǝᴚ</string>
     <string name="gles_version_hack_title">Ɩ ˥פuǝdo ǝɔɹoℲ</string>
     <string name="gles_version_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
     <string name="arc_capes_title">sǝdɐƆ ɔɹ∀</string>
