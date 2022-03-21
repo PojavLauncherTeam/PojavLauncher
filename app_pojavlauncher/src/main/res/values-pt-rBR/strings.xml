@@ -247,8 +247,11 @@
     <string name="gles_hack_none">Não encolher texturas</string>
     <string name="gles_hack_always">Dividir todas texturas por 2</string>
     <string name="gles_hack_sometimes">Dividir texturas grandes por 2 ou 4</string>
+    <string name="profiles_profile_name">Nome</string>
+    <string name="option_enable_profiles">Perfis</string>
     <string name="vbo_hack_title">Desativar VBOs</string>
     <string name="vbo_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
+    <string name="pedit_renderer">Renderizador</string>
     <string name="gles_version_hack_title">Forçar OpenGL 1</string>
     <string name="gles_version_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
     <string name="arc_capes_title">E</string>
