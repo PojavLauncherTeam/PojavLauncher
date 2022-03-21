@@ -221,4 +221,7 @@
     <string name="pvc_title">Per-version settings</string>
     <string name="storage_warning_title">Storage changes</string>
     <string name="storage_warning_text"><![CDATA[Due to Google\'s new scoped storage enforcements added in Android 10 and higher, we are required to move the game directory into an app-private folder.<br /> The new folder for Pojav files is <b>Android/data/%s/files/</b> (also accessible using a storage provider in your file explorer).<br /> If you need to copy your game files, please copy everything from the original folder at <b>games/PojavLauncher</b> manually.]]></string>
+    <string name="profiles_profile_name">Name</string>
+    <string name="option_enable_profiles">Profiles</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>
