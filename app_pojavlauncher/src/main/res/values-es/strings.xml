@@ -210,4 +210,7 @@ Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abor
     <string name="pvc_gameDirectory">Directorio del juego</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="pvc_title">Configuración para esta versión</string>
+    <string name="profiles_profile_name">Nombre</string>
+    <string name="option_enable_profiles">Perfiles</string>
+    <string name="pedit_renderer">Renderizador</string>
 </resources>
