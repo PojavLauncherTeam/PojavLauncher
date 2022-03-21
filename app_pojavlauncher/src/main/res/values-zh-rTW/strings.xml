@@ -240,8 +240,11 @@
     <string name="gles_hack_none">不縮小紋理</string>
     <string name="gles_hack_always">將所有紋理除以 2</string>
     <string name="gles_hack_sometimes">將大紋理除以 2 或 4</string>
+    <string name="profiles_profile_name">名稱</string>
+    <string name="option_enable_profiles">安裝檔</string>
     <string name="vbo_hack_title">禁用 VBO</string>
     <string name="vbo_hack_description">相容舊版本</string>
+    <string name="pedit_renderer">渲染器</string>
     <string name="gles_version_hack_title">強制使用OpenGL 1</string>
     <string name="gles_version_hack_description">相容舊版本</string>
     <string name="arc_capes_title">Arc披風</string>
