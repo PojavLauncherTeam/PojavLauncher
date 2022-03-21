@@ -232,7 +232,10 @@
     <string name="gles_hack_none">אל תכווץ טקסטורות</string>
     <string name="gles_hack_always">חלק את כל הטקסטורות ב2</string>
     <string name="gles_hack_sometimes">חלק טקסטורות גדולות ב-2 או 4</string>
+    <string name="profiles_profile_name">שם</string>
+    <string name="option_enable_profiles">פרופילים</string>
     <string name="vbo_hack_description">מסייע בתאימות בגירסאות ישנות</string>
+    <string name="pedit_renderer">רינדור</string>
     <string name="gles_version_hack_title">הכרח openGL 1</string>
     <string name="gles_version_hack_description">מסייע בתאימות בגירסאות ישנות</string>
 </resources>
