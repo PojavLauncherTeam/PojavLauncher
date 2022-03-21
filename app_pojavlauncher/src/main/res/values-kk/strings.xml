@@ -160,4 +160,6 @@
     <string name="mcl_setting_check_libraries">Жүктегеннен кейін кітапханаларды тексереді</string>
     <string name="dl_library_sha_pass">%s кітапханасы жақсы және қолдануға жарамды</string>
     <string name="mcl_setting_title_mousespeed">Тінтуір жылдамдығы</string>
+    <string name="profiles_profile_name">Атауы</string>
+    <string name="pedit_renderer">Рендерер</string>
 </resources>
