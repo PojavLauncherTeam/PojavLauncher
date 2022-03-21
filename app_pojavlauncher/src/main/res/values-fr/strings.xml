@@ -208,4 +208,6 @@
     <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
     <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
     <string name="preference_back_title">Retour au dernier écran</string>
+    <string name="profiles_profile_name">Nom</string>
+    <string name="pedit_renderer">Moteur de rendu</string>
 </resources>
