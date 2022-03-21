@@ -81,4 +81,6 @@
     <string name="main_infodev">Инфо (Эшк.)</string>
     <string name="main_switchuser">Ҡулланыусыны алмаштырырға</string>
     <string name="main_version">Версия:</string>
+    <string name="profiles_profile_name">Исем</string>
+    <string name="pedit_renderer">Рендерер</string>
 </resources>
