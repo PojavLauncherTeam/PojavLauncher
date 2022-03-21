@@ -210,4 +210,6 @@ ang game directory into an app-private folder.<br /> Ang bagong folder para sa P
     <string name="control_offset_title">Offset ng Control</string>
     <string name="preference_mouse_start_title">Mag start ng may virtual mouse on</string>
     <string name="preference_mouse_start_description">Kapag i-gamit ang option na ito ikaw ay ma judge ni Mathias-Boulay</string>
+    <string name="profiles_profile_name">Pangalan</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>
