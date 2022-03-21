@@ -195,4 +195,6 @@
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>
     <string name="pvc_jvmArgs">JVM argumentai</string>
     <string name="pvc_title">Individualios versijos nustatymai</string>
+    <string name="profiles_profile_name">Pavadinimas</string>
+    <string name="pedit_renderer">Vaizdo generatorius</string>
 </resources>
