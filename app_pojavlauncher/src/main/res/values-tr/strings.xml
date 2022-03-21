@@ -250,8 +250,11 @@
     <string name="gles_hack_none">Dokuları sakın küçültme</string>
     <string name="gles_hack_always">Bütün dokuları 2\'ye böler</string>
     <string name="gles_hack_sometimes">Büyük dokuları 2\'ye ya da 4\'e böler</string>
+    <string name="profiles_profile_name">İsim</string>
+    <string name="option_enable_profiles">Profiller</string>
     <string name="vbo_hack_title">VBOs\'u devre dışı bırak</string>
     <string name="vbo_hack_description">Bazı eski sürümler ile uyumluluğu sağlar</string>
+    <string name="pedit_renderer">İşleyici</string>
     <string name="gles_version_hack_title">openGL 1 zorla</string>
     <string name="gles_version_hack_description">Bazı eski sürümler ile uyumluluğu sağlar</string>
     <string name="arc_capes_title">Arc Pelerinleri</string>
