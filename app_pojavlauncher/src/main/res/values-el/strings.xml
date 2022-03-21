@@ -192,4 +192,6 @@
     <string name="pvc_gameDirectory">Κατάλογος παιχνιδιού</string>
     <string name="pvc_jvmArgs">Παράμετροι εκκίνησης JVM</string>
     <string name="pvc_title">Ρυθμίσεις Per-version</string>
+    <string name="profiles_profile_name">Όνομα</string>
+    <string name="pedit_renderer">Απόδοση</string>
 </resources>
