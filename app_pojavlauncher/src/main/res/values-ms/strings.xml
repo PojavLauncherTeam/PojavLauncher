@@ -183,4 +183,7 @@
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
     <string name="gles_hack_always">Membahagi semua textur dengan 2</string>
     <string name="gles_hack_sometimes">Membahagikan tekstur yang besar dengan /2 atau /4</string>
+    <string name="profiles_profile_name">Nama</string>
+    <string name="option_enable_profiles">Profil</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>
