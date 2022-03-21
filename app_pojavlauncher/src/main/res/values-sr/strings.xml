@@ -171,4 +171,6 @@
     <string name="memory_warning_msg">Слободна меморија (%d) је нижа од подешене меморије (%d), то можда заустави функцију игре. Промените подешену меморију ако се то деси.</string>
     <string name="mcl_memory_allocation">Подешена меморија</string>
     <string name="mcl_memory_allocation_subtitle">Колико меморије може да корости Minecraft</string>
+    <string name="profiles_profile_name">Име</string>
+    <string name="pedit_renderer">Рендерер</string>
 </resources>
