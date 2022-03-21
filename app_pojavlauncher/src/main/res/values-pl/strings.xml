@@ -247,8 +247,11 @@
     <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
     <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
     <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
+    <string name="profiles_profile_name">Nazwa</string>
+    <string name="option_enable_profiles">Profile</string>
     <string name="vbo_hack_title">Wyłącz VBO</string>
     <string name="vbo_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
+    <string name="pedit_renderer">Silnik renderujący</string>
     <string name="gles_version_hack_title">Wymuś OpenGL 1</string>
     <string name="gles_version_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
 </resources>
