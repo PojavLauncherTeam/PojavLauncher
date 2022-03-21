@@ -110,4 +110,5 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
+    <string name="profiles_profile_name">Name</string>
 </resources>
