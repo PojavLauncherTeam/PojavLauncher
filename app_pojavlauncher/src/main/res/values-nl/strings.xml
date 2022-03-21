@@ -168,4 +168,6 @@
     <string name="mcl_setting_subtitle_mousespeed">Veranderd de snelheid van de virtuele muis</string>
     <string name="customctrl_passthru">Muis pass-thru</string>
     <string name="customctrl_rounded">Afgerond</string>
+    <string name="profiles_profile_name">Naam</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>
