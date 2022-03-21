@@ -249,8 +249,11 @@
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
     <string name="gles_hack_always">Membagi semua tekstur dengan 2</string>
     <string name="gles_hack_sometimes">Membagi tekstur besar dengan /2 atau /4</string>
+    <string name="profiles_profile_name">Nama</string>
+    <string name="option_enable_profiles">Profil</string>
     <string name="vbo_hack_title">Matikan VBOs</string>
     <string name="vbo_hack_description">Membantu kesesuaian di beberapa versi lama</string>
+    <string name="pedit_renderer">Renderer</string>
     <string name="gles_version_hack_title">Paksa openGL 1</string>
     <string name="gles_version_hack_description">Membantu kesesuaian di beberapa versi lama</string>
     <string name="arc_capes_title">Cape Arc</string>
