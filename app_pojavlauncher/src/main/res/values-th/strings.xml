@@ -103,4 +103,5 @@
     <string name="mcl_setting_title_mousespeed">ความเร็วเมาส์</string>
     <string name="customctrl_rounded">โค้งมน</string>
     <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
+    <string name="profiles_profile_name">ชื่อ</string>
 </resources>
