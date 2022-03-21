@@ -145,4 +145,7 @@
     <string name="multirt_config_title">Java виртуаль машиналар</string>
     <string name="multirt_config_add">Яңаны өстәргә</string>
     <string name="pvc_gameDirectory">Уен папкасы</string>
+    <string name="profiles_profile_name">Исем</string>
+    <string name="option_enable_profiles">Профильләр</string>
+    <string name="pedit_renderer">Рендерер</string>
 </resources>
