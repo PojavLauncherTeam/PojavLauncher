@@ -226,8 +226,11 @@ Infelizmente, o wrapper do GL4ES não suporta totalmente isso no momento, mas ex
     <string name="preference_misc_description">Lista de versões, e verificações das bibliotecas</string>
     <string name="preference_experimental_title">Coisas experimentais</string>
     <string name="preference_experimental_description">Use estas coisas com consideração, sem suporte.</string>
+    <string name="profiles_profile_name">Nome</string>
+    <string name="option_enable_profiles">Perfis</string>
     <string name="vbo_hack_title">Desativar VBOs</string>
     <string name="vbo_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
+    <string name="pedit_renderer">Renderizador</string>
     <string name="gles_version_hack_title">Forçar OpenGL 1</string>
     <string name="gles_version_hack_description">Ajuda com compatibilidade em algumas versões antigas</string>
     <string name="arc_capes_title">Capas Arc</string>
