@@ -177,4 +177,6 @@
     <string name="multirt_progress_caching">Bufrer...</string>
     <string name="multirt_config_setdefault">Sett som standard</string>
     <string name="multirt_config_setdefault_already">Standard</string>
+    <string name="profiles_profile_name">Navn</string>
+    <string name="pedit_renderer">Gjengir</string>
 </resources>
