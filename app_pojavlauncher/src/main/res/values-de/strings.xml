@@ -246,8 +246,11 @@
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
     <string name="gles_hack_always">Teilt alle Texturen durch 2</string>
     <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
+    <string name="profiles_profile_name">Name</string>
+    <string name="option_enable_profiles">Profile</string>
     <string name="vbo_hack_title">Deaktiviere VBOs</string>
     <string name="vbo_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
+    <string name="pedit_renderer">Renderer</string>
     <string name="gles_version_hack_title">Erzwinge openGL 1</string>
     <string name="gles_version_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
     <string name="arc_capes_title">Arc-Capes</string>
