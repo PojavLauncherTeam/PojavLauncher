@@ -249,8 +249,11 @@
     <string name="gles_hack_none">Nezmenšit textury</string>
     <string name="gles_hack_always">Vydělit všechny textury dvěma</string>
     <string name="gles_hack_sometimes">Vydělit velké textury dvěma či čtyřmi</string>
+    <string name="profiles_profile_name">Název</string>
+    <string name="option_enable_profiles">Profily</string>
     <string name="vbo_hack_title">Vypnout VBOy</string>
     <string name="vbo_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
+    <string name="pedit_renderer">Vykreslovač</string>
     <string name="gles_version_hack_title">Vynutit openGL 1</string>
     <string name="gles_version_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
     <string name="arc_capes_title">Arc Kápě</string>
