@@ -6,6 +6,7 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_HIDE_SIDEBAR;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -37,9 +38,15 @@ import net.kdt.pojavlaunch.fragments.CrashFragment;
 import net.kdt.pojavlaunch.fragments.LauncherFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
+import net.kdt.pojavlaunch.profiles.ProfileAdapter;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
+import net.kdt.pojavlaunch.profiles.ProfileEditor;
+import net.kdt.pojavlaunch.profiles.ProfileIconCache;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +86,14 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private ExtraListener backPreferenceListener;
 
     public PojavLauncherActivity() {
+    }
+
+    @Override
+    protected void onDestroy() {
+        ExtraCore.removeExtraListenerFromValue(ExtraConstants.BACK_PREFERENCE, backPreferenceListener);
+        super.onDestroy();
+        ProfileIconCache.clearIconCache();
+        Log.i("LauncherActivity","Destroyed!");
     }
 
     @Override
@@ -125,7 +140,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
             return false;
         };
-        ExtraCore.addExtraListener("back_preference", backPreferenceListener);
+        ExtraCore.addExtraListener(ExtraConstants.BACK_PREFERENCE, backPreferenceListener);
 
 
         // Try to load the temporary account
@@ -174,31 +189,51 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         });
 
         // Setup the minecraft version list
-        List<String> versions = new ArrayList<>();
-        final File fVers = new File(Tools.DIR_HOME_VERSION);
-
-        try {
-            if (fVers.listFiles().length < 1) {
-                throw new Exception(getString(R.string.error_no_version));
-            }
-
-            for (File fVer : fVers.listFiles()) {
-                if (fVer.isDirectory())
-                    versions.add(fVer.getName());
-            }
-        } catch (Exception e) {
-            versions.add(getString(R.string.global_error) + ":");
-            versions.add(e.getMessage());
-
-        } finally {
-            mAvailableVersions = versions.toArray(new String[0]);
-        }
+        setupBasicList(this);
 
         //mAvailableVersions;
-        ArrayAdapter<String> adapterVer = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mAvailableVersions);
-        adapterVer.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        mVersionSelector.setAdapter(adapterVer);
+            ProfileAdapter profileAdapter = new ProfileAdapter(this, true);
+            ProfileEditor profileEditor = new ProfileEditor(this,(name, isNew, deleting)->{
+                LauncherProfiles.update();
+                if(isNew) {
+                    mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(name));
+                }
+                if(deleting) {
+                    mVersionSelector.setSelection(0);
+                }
+                profileAdapter.notifyDataSetChanged();
+            });
+            mVersionSelector.setOnLongClickListener((v)->profileEditor.show(mProfile.selectedProfile));
+            mVersionSelector.setAdapter(profileAdapter);
+            mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(mProfile.selectedProfile));
+            mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+                @Override
+                public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
+                {
+                    String profileName = p1.getItemAtPosition(p3).toString();
+                    if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
+                        profileEditor.show(profileName);
+                        mVersionSelector.setSelection(0);
+                        return;
+                    }
+                    mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
+                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile);
+                    if (PojavProfile.isFileType(PojavLauncherActivity.this)) {
+                        try {
+                             PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile.save());
+                        } catch (IOException e) {
+                             Tools.showError(PojavLauncherActivity.this, e);
+                        }
+                    }
 
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> p1)
+                {
+                    // TODO: Implement this method
+                }
+            });
+        //
         statusIsLaunching(false);
 
 
@@ -216,12 +251,33 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         });
         changeLookAndFeel(PREF_HIDE_SIDEBAR);
     }
-
     private void selectTabPage(int pageIndex){
         viewPager.setCurrentItem(pageIndex);
         setTabActive(pageIndex);
     }
+    public static String[] basicVersionList;
+    public static void setupBasicList(Context ctx) {
+        List<String> versions = new ArrayList<>();
+        final File fVers = new File(Tools.DIR_HOME_VERSION);
 
+        try {
+            if (fVers.listFiles().length < 1) {
+                throw new Exception(ctx.getString(R.string.error_no_version));
+            }
+
+            for (File fVer : fVers.listFiles()) {
+                if (fVer.isDirectory())
+                    versions.add(fVer.getName());
+            }
+        } catch (Exception e) {
+            versions.add(ctx.getString(R.string.global_error) + ":");
+            versions.add(e.getMessage());
+
+        } finally {
+            basicVersionList = versions.toArray(new String[0]);
+            ExtraCore.setValue(ExtraConstants.VERSION_LIST,versions);
+        }
+    }
     private void pickAccount() {
         try {
             mProfile = PojavProfile.getCurrentProfileContent(this);
@@ -340,7 +396,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         }else{
             super.onBackPressed();
             //additional code
-            ExtraCore.removeExtraListenerFromValue("back_preference", backPreferenceListener);
+            ExtraCore.removeExtraListenerFromValue(ExtraConstants.BACK_PREFERENCE, backPreferenceListener);
             finish();
         }
     }

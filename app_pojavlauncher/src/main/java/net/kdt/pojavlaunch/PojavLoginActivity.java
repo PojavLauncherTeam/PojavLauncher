@@ -51,6 +51,9 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.PerVersionConfig;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.FileUtils;
 
@@ -336,6 +339,7 @@ public class PojavLoginActivity extends BaseActivity {
                     mLockSelectJRE.wait();
                 }
             }
+            migrateToProfiles();
             if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
             LauncherPreferences.loadPreferences(getApplicationContext());
         }
@@ -386,6 +390,33 @@ public class PojavLoginActivity extends BaseActivity {
                 //Log.i("MicroLoginWrap","Got microsoft login result:" + data);
                 performMicroLogin(data);
             }
+        }
+    }
+    private void migrateToProfiles() {
+        try {
+            if(!PerVersionConfig.exists()) return;
+            LauncherProfiles.update();
+            PerVersionConfig.update();
+            if(PerVersionConfig.erase()) {
+                for (String version : PerVersionConfig.configMap.keySet()) {
+                    PerVersionConfig.VersionConfig config = PerVersionConfig.configMap.get(version);
+                    if (config != null) {
+                        MinecraftProfile profile = new MinecraftProfile();
+                        profile.lastVersionId = version;
+                        profile.name = getString(R.string.migrated_profile_str, version);
+                        profile.pojavRendererName = config.renderer;
+                        profile.gameDir = config.gamePath;
+                        profile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + config.selectedRuntime;
+                        profile.javaArgs = config.jvmArgs;
+                        LauncherProfiles.mainProfileJson.profiles.put("pvc-migrated-" + version, profile);
+                    }
+                }
+                LauncherProfiles.update();
+            }else{
+                Log.e("ProfileMigrator"," Unable to remove Per Version Config files.");
+            }
+        }catch (IOException e) {
+            Log.e("ProfileMigrator","Failed to migrate!",e);
         }
     }
     private boolean installRuntimeAutomatically(AssetManager am, boolean otherRuntimesAvailable) {

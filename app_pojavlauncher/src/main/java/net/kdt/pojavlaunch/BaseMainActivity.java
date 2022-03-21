@@ -29,6 +29,9 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+
 import org.lwjgl.glfw.*;
 
 public class BaseMainActivity extends BaseActivity {
@@ -45,7 +48,8 @@ public class BaseMainActivity extends BaseActivity {
     private static Touchpad touchpad;
     private LoggerView loggerView;
 
-    private MinecraftAccount mProfile;
+    MinecraftAccount mProfile;
+    MinecraftProfile minecraftProfile;
     
     private DrawerLayout drawerLayout;
     private NavigationView navDrawer;
@@ -55,11 +59,10 @@ public class BaseMainActivity extends BaseActivity {
 
     protected volatile JMinecraftVersionList.Version mVersionInfo;
 
-    private PerVersionConfig.VersionConfig config;
+    //private PerVersionConfig.VersionConfig config;
 
     protected void initLayout(int resId) {
         setContentView(resId);
-
         try {
             Logger.getInstance().reset();
             // FIXME: is it safe fot multi thread?
@@ -68,22 +71,30 @@ public class BaseMainActivity extends BaseActivity {
             loggerView = findViewById(R.id.mainLoggerView);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            mVersionInfo = Tools.getVersionInfo(null,mProfile.selectedVersion);
-            
-            setTitle("Minecraft " + mProfile.selectedVersion);
-            PerVersionConfig.update();
-            config = PerVersionConfig.configMap.get(mProfile.selectedVersion);
+            minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile);
+            if(minecraftProfile == null) {
+                Toast.makeText(this,"Attempted to launch nonexistent profile",Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
             String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-            if(config != null) {
-                if(config.selectedRuntime != null) {
-                    if(MultiRTUtils.forceReread(config.selectedRuntime).versionString != null) {
-                        runtime = config.selectedRuntime;
+                LauncherProfiles.update();
+
+                mVersionInfo = Tools.getVersionInfo(null, BaseLauncherActivity.getVersionId(
+                        minecraftProfile.lastVersionId));
+                if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+                    String runtimeName = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+                    if(MultiRTUtils.forceReread(runtimeName).versionString != null) {
+                        runtime = runtimeName;
                     }
                 }
-                if(config.renderer != null) {
-                    Tools.LOCAL_RENDERER = config.renderer;
+                if(minecraftProfile.pojavRendererName != null) {
+                    Log.i("RdrDebug","__P_renderer="+minecraftProfile.pojavRendererName);
+                    Tools.LOCAL_RENDERER = minecraftProfile.pojavRendererName;
                 }
-            }
+            
+            setTitle("Minecraft " + minecraftProfile.lastVersionId);
+
             MultiRTUtils.setRuntimeNamed(this,runtime);
             // Minecraft 1.13+
             isInputStackCall = mVersionInfo.arguments != null;
@@ -204,8 +215,11 @@ public class BaseMainActivity extends BaseActivity {
             ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
             "" : " (" + mVersionInfo.inheritsFrom + ")"));
 
+
         JREUtils.redirectAndPrintJRELog();
-        Tools.launchMinecraft(this, mProfile, mProfile.selectedVersion);
+            LauncherProfiles.update();
+            Tools.launchMinecraft(this, mProfile, BaseLauncherActivity.getVersionId(
+                    minecraftProfile.lastVersionId));
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {

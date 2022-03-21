@@ -23,6 +23,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -50,6 +51,7 @@ public final class Tools {
     public static String MULTIRT_HOME;
     public static String LOCAL_RENDERER = null;
     public static int DEVICE_ARCHITECTURE;
+    public static String LAUNCHERPROFILES_RTPREFIX = "pojav://";
 
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
@@ -117,13 +119,16 @@ public final class Tools {
         }
 
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
-        PerVersionConfig.update();
-        PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
-
-        String gamedirPath;
-        if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
-        else gamedirPath = Tools.DIR_GAME_NEW;
-        if(pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
+        String gamedirPath = Tools.DIR_GAME_NEW;
+            if(activity instanceof BaseMainActivity) {
+                LauncherProfiles.update();
+                MinecraftProfile minecraftProfile = ((BaseMainActivity)activity).minecraftProfile;
+                if(minecraftProfile == null) throw new Exception("Launching empty Profile");
+                if(minecraftProfile.gameDir != null && !minecraftProfile.gameDir.isEmpty())
+                    gamedirPath = minecraftProfile.gameDir;
+                if(minecraftProfile.javaArgs != null && !minecraftProfile.javaArgs.isEmpty())
+                    LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = minecraftProfile.javaArgs;
+            }
         PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 

@@ -31,6 +31,12 @@ public class PerVersionConfig {
             Tools.write(pvcFile.getAbsolutePath(),Tools.GLOBAL_GSON.toJson(configMap));
         }
     }
+    public static boolean erase() {
+        return new File(Tools.DIR_GAME_HOME,"per-version-config.json").delete();
+    }
+    public static boolean exists() {
+        return new File(Tools.DIR_GAME_HOME,"per-version-config.json").exists();
+    }
     public static class VersionConfig {
         public String jvmArgs;
         public String gamePath;
