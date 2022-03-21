@@ -246,8 +246,11 @@
     <string name="gles_hack_none">Не стискати текстури</string>
     <string name="gles_hack_always">Стиснути всі текстури у 2 рази</string>
     <string name="gles_hack_sometimes">Розділяє великі текстури на 2 або 4</string>
+    <string name="profiles_profile_name">Ім\'я</string>
+    <string name="option_enable_profiles">Профілі</string>
     <string name="vbo_hack_title">Вимкнути VBO</string>
     <string name="vbo_hack_description">Допомагає з сумісністю на деяких старих версій</string>
+    <string name="pedit_renderer">Візуалізатор</string>
     <string name="gles_version_hack_title">Примусове використання openGL 1</string>
     <string name="gles_version_hack_description">Допомагає з сумісністю на деяких старих версій</string>
     <string name="arc_capes_title">Плащі Arc</string>
