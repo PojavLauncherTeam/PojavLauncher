@@ -77,4 +77,5 @@
     <string name="main_version">Dock:</string>
     <string name="main_nocrash">No sunk ship found</string>
     <string name="main_nolog">No Diary.</string>
+    <string name="profiles_profile_name">Title on yer forhead</string>
 </resources>
