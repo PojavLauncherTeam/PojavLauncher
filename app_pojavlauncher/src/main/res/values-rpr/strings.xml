@@ -198,4 +198,7 @@
     <string name="pvc_title">Поверсіонныя опціи</string>
     <string name="storage_warning_title">Измѣненія въ работѣ хранилища</string>
     <string name="storage_warning_text"><![CDATA[Изъ-за новыхъ ограниченій хранилища добавленныхъ компаніей Google въ Android 10, приложенію нужно перемѣстить папку игры во внутреннюю папку приложенія.<br /> Новая папка для файловъ Pojav - <b>Android/data/%s/files/</b> (также доступна изъ провайдера хранилища въ вашемъ проводникѣ).<br /> Если вамъ необходимо перенести файлы игры, пожалуйста скопируйте ихъ вручную изъ папки <b>games/PojavLauncher</b>.]]></string>
+    <string name="profiles_profile_name">Имя</string>
+    <string name="option_enable_profiles">Профили</string>
+    <string name="pedit_renderer">Визуализаторъ</string>
 </resources>
