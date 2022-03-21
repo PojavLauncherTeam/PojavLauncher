@@ -250,8 +250,11 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="gles_hack_none">Non rimpicciolire le textures</string>
     <string name="gles_hack_always">Dividi tutte le texture di 2</string>
     <string name="gles_hack_sometimes">Dividi le texture più grandi di /2 o /4</string>
+    <string name="profiles_profile_name">Nome</string>
+    <string name="option_enable_profiles">Profili</string>
     <string name="vbo_hack_title">Disattiva VBOs</string>
     <string name="vbo_hack_description">Aiuta con la compatibilità di alcune vecchie versioni</string>
+    <string name="pedit_renderer">Renderer</string>
     <string name="gles_version_hack_title">Forza openGL 1</string>
     <string name="gles_version_hack_description">Aiuta con la compatibilità di alcune vecchie versioni</string>
     <string name="arc_capes_title">Mantelli Arc</string>
