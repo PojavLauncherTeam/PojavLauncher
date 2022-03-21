@@ -344,6 +344,9 @@ public class Display {
                 latestResized = true;
                 latestWidth = width;
                 latestHeight = height;
+
+                //System.out.println("Window size callback");
+                if(parent != null) parent.setSize(width, height);
             }
         };
 
