@@ -196,4 +196,7 @@
     <string name="pvc_jvmArgs">CCz’UM argumentz</string>
     <string name="pvc_title">Itch-version settinz’</string>
     <string name="storage_warning_title">Starags changez</string>
+    <string name="profiles_profile_name">Naym</string>
+    <string name="option_enable_profiles">Profilez</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>
