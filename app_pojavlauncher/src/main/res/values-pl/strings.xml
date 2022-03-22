@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Nazwa użytkownika lokalnego</string>
     <string name="login_online_check_keeplogin">Zapamiętaj dane logowania</string>
     <string name="login_online_login_label">Zaloguj się</string>
     <string name="login_error_invalid_username">Nieprawidłowa nazwa użytkownika. Nazwa użytkownika musi zawierać od 3 do 16 znaków oraz składać się tylko z: A-Z, a-z, 0-9 oraz znaku podkreślenia.</string>
@@ -40,12 +41,14 @@
     <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Połączono</string>
+    <string name="mcl_account_local">Lokalne</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s jest gotowy do uruchomienia</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
     <string name="mcl_launch_downloading">Pobieranie %s</string>
     <string name="mcl_launch_downloading_progress">"Pobieranie %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Przygotowywanie do pobrania zasobów</string>
+    <string name="mcl_launch_error_localmode">Nie można legalnie zainstalować Minecraft podczas, gdy używane jest konto lokalne. Zaloguj się na konto online, aby kontynuować.</string>
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modinstall">Zainstaluj modyfikację (Forge, LabyMod, Fabric itp.)</string>
     <string name="mcl_option_modinstallwitharg">Zainstaluj modyfikację (z niestandardowymi argumentami)</string>
@@ -247,11 +250,21 @@
     <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
     <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
     <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
+    <string name="unnamed">Nienazwany</string>
+    <string name="profiles_latest_snapshot">Najnowsza wersja deweloperska</string>
+    <string name="profiles_latest_release">Najnowsze wydanie</string>
+    <string name="profiles_editing">Edytowanie profilu</string>
     <string name="profiles_profile_name">Nazwa</string>
+    <string name="profiles_profile_version">Wersja</string>
     <string name="option_enable_profiles">Profile</string>
+    <string name="option_enable_profiles_descritption">Użyj profilów Minecraft Launcher zamiast zwykłej listy wersji. Wspiera ikony!</string>
     <string name="vbo_hack_title">Wyłącz VBO</string>
     <string name="vbo_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
+    <string name="global_delete">Usuń</string>
+    <string name="pedit_java_runtime">Środowisko wykonawcze Javy</string>
     <string name="pedit_renderer">Silnik renderujący</string>
     <string name="gles_version_hack_title">Wymuś OpenGL 1</string>
     <string name="gles_version_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
+    <string name="arc_capes_title">Peleryny Arc</string>
+    <string name="migrated_profile_str">%s konfiguracja wersji</string>
 </resources>
