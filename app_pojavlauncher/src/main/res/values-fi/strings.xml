@@ -42,4 +42,9 @@
     <string name="main_options">Asetukset</string>
     <string name="main_switchuser">Vaihda käyttäjää</string>
     <string name="main_version">Versio:</string>
+    <string name="unnamed">Nimetön</string>
+    <string name="profiles_latest_snapshot">VIimeisin snapshot</string>
+    <string name="profiles_latest_release">Viimeisin julkaisu</string>
+    <string name="profiles_profile_version">Versio</string>
+    <string name="global_delete">Poista</string>
 </resources>
