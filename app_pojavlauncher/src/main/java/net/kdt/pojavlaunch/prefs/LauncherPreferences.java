@@ -5,8 +5,7 @@ import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 
-public class LauncherPreferences
-{
+public class LauncherPreferences {
     public static SharedPreferences DEFAULT_PREF;
     public static String PREF_RENDERER = "opengles2";
 
@@ -39,6 +38,8 @@ public class LauncherPreferences
     public static boolean PREF_VIRTUAL_MOUSE_START = false;
     public static boolean PREF_OPENGL_VERSION_HACK = false;
     public static boolean PREF_ARC_CAPES = false;
+    public static boolean PREF_USE_ALTERNATE_SURFACE = true;
+    public static int PREF_SCALE_FACTOR = 100;
 
 
     public static void loadPreferences(Context ctx) {
@@ -73,6 +74,8 @@ public class LauncherPreferences
         PREF_VIRTUAL_MOUSE_START = DEFAULT_PREF.getBoolean("mouse_start", false);
         PREF_OPENGL_VERSION_HACK = DEFAULT_PREF.getBoolean("gles_version_hack", false);
         PREF_ARC_CAPES = DEFAULT_PREF.getBoolean("arc_capes",false);
+        PREF_USE_ALTERNATE_SURFACE = DEFAULT_PREF.getBoolean("alternate_surface", false);
+        PREF_SCALE_FACTOR = DEFAULT_PREF.getInt("resolutionRatio", 100);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {

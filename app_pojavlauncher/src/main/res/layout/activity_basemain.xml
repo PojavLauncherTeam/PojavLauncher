@@ -20,7 +20,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-			<net.kdt.pojavlaunch.MinecraftGLSurfaceView
+			<net.kdt.pojavlaunch.MinecraftGLSurface
 				android:id="@+id/main_game_render_view"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"/>
@@ -30,10 +30,11 @@
 				android:layout_width="match_parent"
 				android:orientation="vertical"
 				android:id="@+id/main_touchpad"
+				android:elevation="1dp"
 				android:visibility="gone"/>
 
 
-			<net.kdt.pojavlaunch.customcontrols.TouchCharInput
+			<net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput
 				android:id="@+id/mainTouchCharInput"
 				android:layout_width="1dp"
 				android:layout_height="1dp"

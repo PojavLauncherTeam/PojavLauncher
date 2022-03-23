@@ -26,6 +26,8 @@ import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
+import net.kdt.pojavlaunch.customcontrols.keyboard.LwjglCharSender;
+import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 
 import net.kdt.pojavlaunch.prefs.*;
@@ -47,7 +49,7 @@ public class BaseMainActivity extends BaseActivity {
     private boolean mIsResuming = false;
 
     ControlLayout mControlLayout;
-    private MinecraftGLSurfaceView minecraftGLView;
+    private MinecraftGLSurface minecraftGLView;
     private static Touchpad touchpad;
     private LoggerView loggerView;
 
@@ -71,6 +73,7 @@ public class BaseMainActivity extends BaseActivity {
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             touchCharInput = findViewById(R.id.mainTouchCharInput);
+            touchCharInput.setCharacterSender(new LwjglCharSender());
             loggerView = findViewById(R.id.mainLoggerView);
             mControlLayout = findViewById(R.id.main_control_layout);
             

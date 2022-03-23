@@ -9,21 +9,22 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.SurfaceTexture;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -40,13 +41,13 @@ import org.lwjgl.glfw.CallbackBridge;
 /**
  * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
  */
-public class MinecraftGLSurfaceView extends SurfaceView {
+public class MinecraftGLSurface extends View {
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
     /* Pointer Debug textview, used to show info about the pointer state */
     private TextView mPointerDebugTextView;
     /* Resolution scaler option, allow downsizing a window */
-    private final float mScaleFactor = LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
+    private final float mScaleFactor = LauncherPreferences.PREF_SCALE_FACTOR/100f;
     /* Sensitivity, adjusted according to screen size */
     private final double mSensitivityFactor = (1.4 * (1080f/ Tools.getDisplayMetrics((Activity) getContext()).heightPixels));
     /* Use to detect simple and double taps */
@@ -57,6 +58,8 @@ public class MinecraftGLSurfaceView extends SurfaceView {
     private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> mGuiScale = getMcScale();
     /* Surface ready listener, used by the activity to launch minecraft */
     SurfaceReadyListener mSurfaceReadyListener = null;
+    /* View holding the surface, either a SurfaceView or a TextureView */
+    View mSurface;
 
     /* List of hotbarKeys, used when clicking on the hotbar */
     private static final int[] HOTBAR_KEYS = {
@@ -112,11 +115,11 @@ public class MinecraftGLSurfaceView extends SurfaceView {
 
 
 
-    public MinecraftGLSurfaceView(Context context) {
+    public MinecraftGLSurface(Context context) {
         this(context, null);
     }
 
-    public MinecraftGLSurfaceView(Context context, AttributeSet attributeSet) {
+    public MinecraftGLSurface(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         setFocusable(true);
 
@@ -132,56 +135,66 @@ public class MinecraftGLSurfaceView extends SurfaceView {
         mPointerDebugTextView.setVisibility(GONE);
         ((ViewGroup)getParent()).addView(mPointerDebugTextView);
 
+        if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
+            SurfaceView surfaceView = new SurfaceView(getContext());
+            mSurface = surfaceView;
 
-        getHolder().addCallback(new SurfaceHolder.Callback() {
-            private boolean isCalled = false;
-            @Override
-            public void surfaceCreated(@NonNull SurfaceHolder holder) {
+            surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+                private boolean isCalled = false;
+                @Override
+                public void surfaceCreated(@NonNull SurfaceHolder holder) {
+                    if(isCalled) return;
+                    isCalled = true;
 
-
-                //Load Minecraft options:
-                MCOptionUtils.load();
-                MCOptionUtils.set("fullscreen", "off");
-                MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
-                MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
-                MCOptionUtils.save();
-                getMcScale();
-                // Resize stuff
-                if(isCalled){
-                    //getHolder().setFixedSize(windowWidth, windowHeight);
-                    //JREUtils.setupBridgeWindow(getHolder().getSurface());
-                    return;
+                    realStart(surfaceView.getHolder().getSurface());
                 }
-                isCalled = true;
 
-                refreshSize();
-                JREUtils.setupBridgeWindow(getHolder().getSurface());
+                @Override
+                public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+                    refreshSize();
+                }
 
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(200);
-                        if(mSurfaceReadyListener != null){
-                            mSurfaceReadyListener.isReady();
-                        }
-                    } catch (Throwable e) {
-                        Tools.showError(getContext(), e, true);
-                    }
-                }, "JVM Main thread").start();
-            }
+                @Override
+                public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
+                    JREUtils.releaseBridgeWindow();
+                }
+            });
 
-            @Override
-            public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-                refreshSize();
-            }
+            ((ViewGroup)getParent()).addView(surfaceView);
+        }else{
+            TextureView textureView = new TextureView(getContext());
+            mSurface = textureView;
 
-            @Override
-            public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-                JREUtils.releaseBridgeWindow();
-            }
-        });
+            textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
+                private boolean isCalled = false;
+                @Override
+                public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
+                    if(isCalled) return;
+                    isCalled = true;
+
+                    realStart(new Surface(textureView.getSurfaceTexture()));
+                }
+
+                @Override
+                public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height) {
+                    refreshSize();
+                }
+
+                @Override
+                public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface) {
+                    JREUtils.releaseBridgeWindow();
+                    return true;
+                }
+
+                @Override
+                public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {}
+            });
+
+            ((ViewGroup)getParent()).addView(textureView);
+        }
+
+
     }
-
-
 
 
     /**
@@ -588,20 +601,43 @@ public class MinecraftGLSurfaceView extends SurfaceView {
     public void refreshSize(){
         windowWidth = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.widthPixels, mScaleFactor);
         windowHeight = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.heightPixels, mScaleFactor);
-        getHolder().setFixedSize(windowWidth, windowHeight);
-
-        // Set the new frame size
-
-        MCOptionUtils.load();
-        MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
-        MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
-        MCOptionUtils.save();
+        if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
+            ((SurfaceView)mSurface).getHolder().setFixedSize(windowWidth, windowHeight);
+        }else{
+            ((TextureView)mSurface).getSurfaceTexture().setDefaultBufferSize(windowWidth, windowHeight);
+        }
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
-        getMcScale();
+        //getMcScale();
         //Toast.makeText(getContext(), "width: " + width, Toast.LENGTH_SHORT).show();
         //Toast.makeText(getContext(), "height: " + height, Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void realStart(Surface surface){
+        // Initial size set
+        refreshSize();
+
+        //Load Minecraft options:
+        MCOptionUtils.load();
+        MCOptionUtils.set("fullscreen", "off");
+        MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
+        MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
+        MCOptionUtils.save();
+        getMcScale();
+
+        JREUtils.setupBridgeWindow(surface);
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(200);
+                if(mSurfaceReadyListener != null){
+                    mSurfaceReadyListener.isReady();
+                }
+            } catch (Throwable e) {
+                Tools.showError(getContext(), e, true);
+            }
+        }, "JVM Main thread").start();
     }
 
     /** A small interface called when the listener is ready for the first time */

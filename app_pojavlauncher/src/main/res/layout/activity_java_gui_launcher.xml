@@ -11,6 +11,17 @@
 		android:layout_height="match_parent"
 		android:background="#000000">
 
+		<net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput
+			android:id="@+id/awt_touch_char"
+			android:layout_width="1dp"
+			android:layout_height="1dp"
+			android:background="@android:color/darker_gray"
+			android:ems="10"
+			android:imeOptions="flagNoFullscreen|flagNoExtractUi|flagNoPersonalizedLearning|actionDone"
+			android:inputType="textFilter|textImeMultiLine|textAutoComplete|textAutoCorrect"
+			tools:ignore="TouchTargetSizeCheck"
+			/>
+
 		<net.kdt.pojavlaunch.AWTCanvasView
 			android:id="@+id/installmod_surfaceview"
 			android:layout_width="match_parent"
@@ -73,6 +84,16 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintRight_toLeftOf="@id/installmod_btn3"
 			app:layout_constraintTop_toBottomOf="@+id/installmod_btn3" />
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="2dp"
+			android:background="@drawable/control_button"
+			android:text="Keyboard"
+			android:onClick="toggleKeyboard"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/button2" />
 
 		<Button
 			android:id="@+id/installmod_mouse_pri"
