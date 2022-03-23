@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.customcontrols;
+package net.kdt.pojavlaunch.customcontrols.keyboard;
 
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
@@ -37,6 +37,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
 
     private boolean mIsDoingInternalChanges = false;
+    private CharacterSenderStrategy mCharacterSender;
 
     /**
      * We take the new chars, and send them to the game.
@@ -47,13 +48,15 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
         if(mIsDoingInternalChanges)return;
+        if(mCharacterSender != null){
+            for(int i=0; i < lengthBefore; ++i){
+                mCharacterSender.sendBackspace();
+            }
 
-        for(int i=0; i < lengthBefore; ++i){
-            CallbackBridge.sendKeycode(LwjglGlfwKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
-        }
-        for(int i=start, count = 0; count < lengthAfter; ++i){
-            CallbackBridge.sendChar(text.charAt(i), 0);
-            ++count;
+            for(int i=start, count = 0; count < lengthAfter; ++i){
+                mCharacterSender.sendChar(text.charAt(i));
+                ++count;
+            }
         }
 
         //Reset the keyboard state
@@ -121,9 +124,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         mIsDoingInternalChanges = false;
     }
 
-    /**
-     * Regain ability to exist, take focus and have some text being input
-     */
+    /** Regain ability to exist, take focus and have some text being input */
     public void enable(){
         setEnabled(true);
         setFocusable(true);
@@ -132,9 +133,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
     }
 
-    /**
-     * Lose ability to exist, take focus and have some text being input
-     */
+    /** Lose ability to exist, take focus and have some text being input */
     public void disable(){
         clear();
         setVisibility(GONE);
@@ -142,17 +141,18 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         setEnabled(false);
     }
 
-    /**
-     * Send the enter key.
-     */
+    /** Send the enter key. */
     private void sendEnter(){
-        sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ENTER);
+        mCharacterSender.sendEnter();
         clear();
     }
 
-    /**
-     * This function deals with anything that has to be executed when the constructor is called
-     */
+    /** Just sets the char sender that should be used. */
+    public void setCharacterSender(CharacterSenderStrategy characterSender){
+        mCharacterSender = characterSender;
+    }
+
+    /** This function deals with anything that has to be executed when the constructor is called */
     private void setup(){
         setOnEditorActionListener((textView, i, keyEvent) -> {
             sendEnter();

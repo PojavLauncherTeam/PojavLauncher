@@ -9,6 +9,8 @@ import android.widget.*;
 import java.io.*;
 import java.util.*;
 
+import net.kdt.pojavlaunch.customcontrols.keyboard.AwtCharSender;
+import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -21,6 +23,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     
     private AWTCanvasView mTextureView;
     private LoggerView mLoggerView;
+    private TouchCharInput mTouchCharInput;
 
     private LinearLayout mTouchPad;
     private ImageView mMousePointerImageView;
@@ -35,6 +38,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         setContentView(R.layout.activity_java_gui_launcher);
 
         Logger.getInstance().reset();
+        mTouchCharInput = findViewById(R.id.awt_touch_char);
+        mTouchCharInput.setCharacterSender(new AwtCharSender());
 
         mTouchPad = findViewById(R.id.main_touchpad);
         mLoggerView = findViewById(R.id.launcherLoggerView);
@@ -53,42 +58,41 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
         });
 
-        mTouchPad.setOnTouchListener((v, event) -> {
-            // MotionEvent reports input details from the touch screen
-            // and other input controls. In this case, you are only
-            // interested in events where the touch position changed.
-            // int index = event.getActionIndex();
-            int action = event.getActionMasked();
+        mTouchPad.setOnTouchListener(new View.OnTouchListener() {
+            float prevX, prevY;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // MotionEvent reports input details from the touch screen
+                // and other input controls. In this case, you are only
+                // interested in events where the touch position changed.
+                // int index = event.getActionIndex();
+                int action = event.getActionMasked();
 
-            float x = event.getX();
-            float y = event.getY();
-            float prevX, prevY, mouseX, mouseY;
-            if(event.getHistorySize() > 0) {
-                prevX = event.getHistoricalX(0);
-                prevY = event.getHistoricalY(0);
-            }else{
-                prevX = x;
-                prevY = y;
-            }
+                float x = event.getX();
+                float y = event.getY();
+                float mouseX, mouseY;
 
-            mouseX = mMousePointerImageView.getX();
-            mouseY = mMousePointerImageView.getY();
+                mouseX = mMousePointerImageView.getX();
+                mouseY = mMousePointerImageView.getY();
 
-            if (mGestureDetector.onTouchEvent(event)) {
-                sendScaledMousePosition(mouseX,mouseY);
-                AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
-            } else {
-                if (action == MotionEvent.ACTION_MOVE) { // 2
-                    mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
-                    mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
-                    placeMouseAt(mouseX, mouseY);
-                    sendScaledMousePosition(mouseX, mouseY);
+                if (mGestureDetector.onTouchEvent(event)) {
+                    sendScaledMousePosition(mouseX,mouseY);
+                    AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
+                } else {
+                    if (action == MotionEvent.ACTION_MOVE) { // 2
+                        mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
+                        mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
+                        placeMouseAt(mouseX, mouseY);
+                        sendScaledMousePosition(mouseX, mouseY);
+                    }
                 }
-            }
 
-            // debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-            CallbackBridge.DEBUG_STRING.setLength(0);
-            return true;
+                // debugText.setText(CallbackBridge.DEBUG_STRING.toString());
+                CallbackBridge.DEBUG_STRING.setLength(0);
+                prevY = y;
+                prevX = x;
+                return true;
+            }
         });
 
         mTextureView.setOnTouchListener((v, event) -> {
@@ -203,7 +207,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     void sendScaledMousePosition(float x, float y){
-        // Clamp positions, then scale them
+        // Clamp positions to the borders of the usable view, then scale them
         x = androidx.core.math.MathUtils.clamp(x, mTextureView.getX(), mTextureView.getX() + mTextureView.getWidth());
         y = androidx.core.math.MathUtils.clamp(y, mTextureView.getY(), mTextureView.getY() + mTextureView.getHeight());
 
@@ -273,5 +277,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     private int doCustomInstall(File modFile, String javaArgs) throws IOException {
         mSkipDetectMod = true;
         return launchJavaRuntime(modFile, javaArgs);
+    }
+
+    public void toggleKeyboard(View view) {
+        mTouchCharInput.switchKeyboardState();
     }
 }

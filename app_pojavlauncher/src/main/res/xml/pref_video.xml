@@ -28,5 +28,12 @@
             app2:selectable="false"
             app2:seekBarIncrement="5"
             app2:icon="@drawable/ic_setting_resolution_scaler"/>
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="alternate_surface"
+            android:summary="@string/mcl_setting_subtitle_use_surface_view"
+            android:title="@string/mcl_setting_title_use_surface_view"
+             />
     </PreferenceCategory>
 </PreferenceScreen>
