@@ -57,9 +57,6 @@ scripts\languagelist_updater.bat
 ```
 # Build GLFW stub
 ./gradlew :jre_lwjgl3glfw:build
-# mkdir app_pojavlauncher/src/main/assets/components/internal_libs
-rm app_pojavlauncher/src/main/assets/components/lwjgl3/lwjgl-glfw-classes.jar
-cp jre_lwjgl3glfw/build/libs/jre_lwjgl3glfw-3.2.3.jar app_pojavlauncher/src/main/assets/components/lwjgl3/lwjgl-glfw-classes.jar
         
 # Build the launcher
 ./gradlew :app_pojavlauncher:assembleDebug
