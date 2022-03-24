@@ -99,7 +99,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             float x = event.getX();
             float y = event.getY();
             if (mGestureDetector.onTouchEvent(event)) {
-                sendScaledMousePosition(x, y);
+                sendScaledMousePosition(x + mTextureView.getX(), y);
                 AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
                 return true;
             }
@@ -110,7 +110,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 case MotionEvent.ACTION_POINTER_UP: // 6
                     break;
                 case MotionEvent.ACTION_MOVE: // 2
-                    sendScaledMousePosition(x, y);
+                    sendScaledMousePosition(x + mTextureView.getX(), y);
                     break;
             }
             return true;
