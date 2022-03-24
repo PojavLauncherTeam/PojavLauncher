@@ -12,7 +12,7 @@
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
-    <string name="login_error_short_username">El nombre de usuario debe tener al menos 3 letras o mas</string>
+    <string name="login_error_short_username">El nombre de usuario debe tener al menos 3 letras o más</string>
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
     <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
@@ -46,7 +46,7 @@
     <string name="mcl_account_offline">Desconectado</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Listo para jugar Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Limpiando archivos de caché</string>
+    <string name="mcl_launch_cleancache">Limpiando archivos caché</string>
     <string name="mcl_launch_downloading">Descargando %s</string>
     <string name="mcl_launch_downloading_progress">"Descargando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparando para descargar los recursos</string>
@@ -68,8 +68,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Te permite reducir la resolución del juego. 100% es resolución completa</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia el tiempo de activación durante una pulsación larga en destruir bloques y soltar objetos.</string>
-    <string name="mcl_setting_title_backtorightmouse">Tratar botón atrás como ratón derecho</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Algunos dispositivos tratan el ratón derecho externo como botón atrás. Si está usando ratón externo, debería habilitarlo.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratar el botón de atrás como el ratón derecho</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Algunos dispositivos tratan al ratón derecho externo como el botón de atrás. Si está usando un ratón externo, debería habilitarlo.</string>
     <string name="mcl_setting_title_flat_button_style">Estilo de botón plano</string>
     <string name="mcl_setting_subtitle_flat_button_style">Habilita esto para cambiar el estilo de los botones de control a plano.</string>
     <string name="mcl_setting_title_buttonscale">Escala de botones de control</string>
@@ -84,21 +84,21 @@
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
-    <string name="mcl_setting_veroption_release">Lanzadas</string>
+    <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Alfa-vieja</string>
-    <string name="mcl_setting_veroption_oldbeta">Beta antigua</string>
+    <string name="mcl_setting_veroption_oldalpha">Alphas</string>
+    <string name="mcl_setting_veroption_oldbeta">Betas</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
     <string name="global_error">Error</string>
     <string name="global_load">Cargar</string>
     <string name="global_name">Nombre</string>
-    <string name="global_remove">Remover</string>
+    <string name="global_remove">Eliminar</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Guardar</string>
     <string name="global_unpacking">Descomprimiendo</string>
-    <string name="global_error_field_empty">Este campo es obligarorio</string>
+    <string name="global_error_field_empty">Este campo es obligatorio</string>
     <string name="global_waiting">Espere</string>
     <!--
     <string name="mcl_about">
@@ -153,7 +153,7 @@
     <string name="control_mouseoff">Ratón: Apagado</string>
     <string name="control_mouseon">Ratón: encendido </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Forzar cierre</string>
+    <string name="control_forceclose">Forzar el cierre</string>
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
