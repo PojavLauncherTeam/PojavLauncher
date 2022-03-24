@@ -251,6 +251,13 @@ public class ControlLayout extends FrameLayout {
 		return children;
 	}
 
+	public void refreshControlButtonPositions(){
+		for(ControlButton button : getButtonChildren()){
+			button.setDynamicX(button.getProperties().dynamicX);
+			button.setDynamicY(button.getProperties().dynamicY);
+		}
+	}
+
 	HashMap<View, ControlButton> mapTable = new HashMap<>();
 	//While this is called onTouch, this should only be called from a ControlButton.
 	public boolean onTouch(View v, MotionEvent ev) {

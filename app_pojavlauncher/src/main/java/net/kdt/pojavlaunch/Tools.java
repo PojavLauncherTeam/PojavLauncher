@@ -395,8 +395,8 @@ public final class Tools {
 
     public static DisplayMetrics currentDisplayMetrics;
 
-    public static void updateWindowSize(Activity ctx) {
-        currentDisplayMetrics = getDisplayMetrics(ctx);
+    public static void updateWindowSize(Activity activity) {
+        currentDisplayMetrics = getDisplayMetrics(activity);
 
         CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
         CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
