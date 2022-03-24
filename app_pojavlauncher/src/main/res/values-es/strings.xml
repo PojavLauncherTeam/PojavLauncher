@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Nombre de usuario local</string>
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <string name="login_error_invalid_username">Nombre de usuario inválido. Los nombres de usuario deben tener entre 3-16 caracteres, y solo contienen: A-Z, a-z, 0-9 y guión bajo.</string>
@@ -40,12 +41,14 @@
     <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectado</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Listo para jugar Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Limpiando archivos de caché</string>
+    <string name="mcl_launch_cleancache">Limpiando archivos caché</string>
     <string name="mcl_launch_downloading">Descargando %s</string>
     <string name="mcl_launch_downloading_progress">"Descargando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparando para descargar los recursos</string>
+    <string name="mcl_launch_error_localmode">Minecraft no puede instalarse legalmente debido a que ha iniciado sesión con una cuenta local. Por favor, cambie a una cuenta en línea para continuar.</string>
     <string name="mcl_options">Opciones</string>
     <string name="mcl_option_modinstall">Usar un instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Iniciar un instalador de un mod (con comandos personalizados)</string>
@@ -64,8 +67,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Te permite reducir la resolución del juego. 100% es resolución completa</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia el tiempo de activación durante una pulsación larga en destruir bloques y soltar objetos.</string>
-    <string name="mcl_setting_title_backtorightmouse">Tratar botón atrás como ratón derecho</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Algunos dispositivos tratan el ratón derecho externo como botón atrás. Si está usando ratón externo, debería habilitarlo.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratar el botón de atrás como el ratón derecho</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Algunos dispositivos tratan al ratón derecho externo como el botón de atrás. Si está usando un ratón externo, debería habilitarlo.</string>
     <string name="mcl_setting_title_flat_button_style">Estilo de botón plano</string>
     <string name="mcl_setting_subtitle_flat_button_style">Habilita esto para cambiar el estilo de los botones de control a plano.</string>
     <string name="mcl_setting_title_buttonscale">Escala de botones de control</string>
@@ -81,10 +84,10 @@
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
-    <string name="mcl_setting_veroption_release">Lanzadas</string>
+    <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Alfa-vieja</string>
-    <string name="mcl_setting_veroption_oldbeta">Beta antigua</string>
+    <string name="mcl_setting_veroption_oldalpha">Alphas</string>
+    <string name="mcl_setting_veroption_oldbeta">Betas</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -92,14 +95,15 @@
     <string name="global_warinng">Advertencia</string>
     <string name="global_load">Cargar</string>
     <string name="global_name">Nombre</string>
-    <string name="global_remove">Remover</string>
+    <string name="global_remove">Eliminar</string>
     <string name="global_clone">Clonar</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Guardar</string>
     <string name="global_unpacking">Descomprimiendo</string>
-    <string name="global_error_field_empty">Este campo es obligarorio</string>
+    <string name="global_error_field_empty">Este campo es obligatorio</string>
     <string name="global_waiting">Espere</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d, mira el archivo latestlog.txt para más detalles.</string>
     <string name="mcn_exit_call">Salir</string>
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_lwjgl">¡LWJGL3 no ha sido instalado!</string>
@@ -124,7 +128,7 @@
     <string name="control_mouseoff">Ratón: Apagado</string>
     <string name="control_mouseon">Ratón: encendido </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Forzar cierre</string>
+    <string name="control_forceclose">Forzar el cierre</string>
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
@@ -166,7 +170,9 @@
     <string name="customctrl_addbutton">Añadir botón</string>
     <string name="customctrl_addbutton_drawer">Añadir cajón de botones</string>
     <string name="customctrl_addsubbutton">Añadir sub-botón</string>
+    <string name="customctrl_add_subbutton_message">¡El subbotón n°%d ha sido añadido!</string>
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
+    <string name="main_install_jar_file">Instalar .jar</string>
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
     <string name="main_welcome">Bienvenido, %s</string>
@@ -195,6 +201,7 @@
     <string name="mcl_memory_allocation">Asignación de memoria</string>
     <string name="mcl_memory_allocation_subtitle">Controla cuánta memoria se le da a Minecraft</string>
     <string name="multirt_runtime_corrupt">Java Runtime Corrompido</string>
+    <string name="multirt_runtime_incompatiblearch">Arquitectura incompatible: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Añadir</string>
     <string name="multirt_config_add_subtitle">Importar un Java VM nuevo</string>
@@ -204,13 +211,38 @@
     <string name="multirt_config_setdefault">Establecer como predeterminado</string>
     <string name="multirt_config_setdefault_already">Predeterminado</string>
     <string name="multirt_config_removeerror_last">Debes tener al menos un Java Runtime instalado</string>
+    <string name="multirt_nocompartiblert">No se puede encontrar ningun runtime de Java compatible. Esta versión requiere Java %d o posterior.</string>
+    <string name="multirt_nojava8rt">No se puede encontrar Java 8. Para utilizar esta opción, necesita instalar Java 8.</string>
     <string name="compat_117_message">Las versiones a partir de Minecraft 21w10a en adelante requieren OpenGL 3.2. Lamentablemente, el wrapper de GL4ES no lo soporta totalmente en estos momentos, pero hay varios recursos adicionales que puedes instalar para ejecutar estas versiones.
 Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abortar el lanzamiento.</string>
     <string name="compat_11x_playanyway">Jugar de todas formas</string>
     <string name="pvc_gameDirectory">Directorio del juego</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="pvc_title">Configuración para esta versión</string>
+    <string name="preference_mouse_start_title">Iniciar con el ratón virtual encendido</string>
+    <string name="preference_mouse_start_description">Usando esta opción podrás ser juzgado por Mathias-Boulay</string>
+    <string name="preference_video_title">Video y renderizador</string>
+    <string name="preference_video_description">Resolución, tipo de escalado y renderizador</string>
+    <string name="preference_control_title">Personalización del control</string>
+    <string name="preference_java_title">Ajustes de Java</string>
+    <string name="preference_java_description">Versiones de Java, argumentos JVM y cantidad de RAM</string>
+    <string name="preference_misc_description">Lista de versiones, y comprobación de librerías</string>
+    <string name="preference_experimental_description">Utilice las cosas con consideración, sin apoyo.</string>
+    <string name="preference_back_title">Regresar a la pantalla anterior</string>
+    <string name="unnamed">Sin nombre</string>
+    <string name="profiles_latest_snapshot">Snapshot más reciente</string>
+    <string name="profiles_latest_release">Versión más reciente</string>
+    <string name="profiles_editing">Editando perfil</string>
     <string name="profiles_profile_name">Nombre</string>
+    <string name="profiles_profile_version">Versión</string>
     <string name="option_enable_profiles">Perfiles</string>
+    <string name="option_enable_profiles_descritption">Usa los perfiles de Minecraft Launcher en lugar de la lista de versiones regulares. ¡Soporta iconos!</string>
+    <string name="vbo_hack_title">Deshabilitar VBOs</string>
+    <string name="vbo_hack_description">Ayuda con compatibilidad en algunas versiones antiguas</string>
+    <string name="global_delete">Eliminar</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Renderizador</string>
+    <string name="gles_version_hack_title">Forzar OpenGL 1</string>
+    <string name="gles_version_hack_description">Ayuda con compatibilidad en algunas versiones antiguas</string>
+    <string name="migrated_profile_str">%s Configuración de versión</string>
 </resources>
