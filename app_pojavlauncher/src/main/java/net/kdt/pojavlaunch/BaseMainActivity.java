@@ -197,8 +197,15 @@ public class BaseMainActivity extends BaseActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Tools.getDisplayMetrics(this);
+
+        Tools.updateWindowSize(this);
         minecraftGLView.refreshSize();
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mControlLayout.refreshControlButtonPositions();
+            }
+        }, 1000);
     }
 
     public static void fullyExit() {
