@@ -91,9 +91,7 @@
 			android:layout_marginTop="2dp"
 			android:background="@drawable/control_button"
 			android:text="Keyboard"
-			android:onClick="toggleKeyboard"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/button2" />
+			android:onClick="toggleKeyboard"/>
 
 		<Button
 			android:id="@+id/installmod_mouse_pri"
