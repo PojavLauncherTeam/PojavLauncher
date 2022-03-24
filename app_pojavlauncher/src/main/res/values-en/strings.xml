@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">English</string>
+    <string name="login_online_username_hint">Local username</string>
     <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Login</string>
     <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
@@ -212,7 +212,7 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed</string>
-    <string name="multirt_nocompartiblert">Can\'t find any compartible Java Runtime. This version requires Java %d or newer.</string>
+    <string name="multirt_nocompartiblert">Can\'t find any compatible Java Runtime. This version requires Java %d or newer.</string>
     <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, GL4ES wrapper doesn\'t fully support it at the moment, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
     <string name="compat_11x_playanyway">Play anyway</string>
