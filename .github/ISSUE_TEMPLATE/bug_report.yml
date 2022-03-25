@@ -6,6 +6,16 @@ body:
 - type: textarea
   id: version
   attributes:
+    label: Minecraft Account Confirmation
+    description: >-
+      Due to Mojang migrating into Microsoft Authentication, starting today, we will ask if you have a legitimately bought Minecraft Account.
+    placeholder: 'Have you bought Minecraft? If so, put "yes" into this box.'
+  validations:
+    required: true
+
+- type: textarea
+  id: version
+  attributes:
     label: Describe the bug
     description: >-
       A clear and concise description of what the bug is.
@@ -20,7 +30,7 @@ body:
       The log file called `latestlog.txt` is located under `Android/data/net.kdt.pojavlaunch/files`, `games/PojavLauncher/` or `games/PojavLauncher/.minecraft`. You may need to activate an option in your file explorer to see hidden files and folders. |
       You can also upload here screenshots or videos of the buggy behavior, if possible.
       
-      Tip: You can attach files by clicking this area to highlight it and then dragging files in or select them on 🖼 option at the toolbar.
+      Tip: You can attach files by clicking this area to highlight it and then dragging files in or select them on ðŸ–¼ option at the toolbar.
   validations:
     required: true
 
