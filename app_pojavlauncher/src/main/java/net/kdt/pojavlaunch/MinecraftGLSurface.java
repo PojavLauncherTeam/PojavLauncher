@@ -163,6 +163,7 @@ public class MinecraftGLSurface extends View {
             ((ViewGroup)getParent()).addView(surfaceView);
         }else{
             TextureView textureView = new TextureView(getContext());
+            textureView.setOpaque(true);
             mSurface = textureView;
 
             textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
