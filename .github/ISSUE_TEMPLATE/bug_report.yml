@@ -9,7 +9,7 @@ body:
     label: Minecraft Account Confirmation
     description: >-
       Due to Mojang migrating into Microsoft Authentication, starting today, we will ask if you have a legitimately bought Minecraft Account.
-    placeholder: 'Have you bought Minecraft? If so, put "yes" into this box.'
+    placeholder: 'Have you bought Minecraft? If so, put "yes" into this box. We also need proof, so send a screenshot of you checking your account in Minecraft's website.'
   validations:
     required: true
 
