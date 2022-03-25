@@ -59,7 +59,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         });
 
         mTouchPad.setOnTouchListener(new View.OnTouchListener() {
-            float prevX, prevY;
+            float prevX = 0, prevY = 0;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // MotionEvent reports input details from the touch screen
