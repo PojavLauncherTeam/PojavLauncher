@@ -24,8 +24,8 @@ import java.util.*;
 
 public class GLFW
 {
-	static FloatBuffer joystickData = (FloatBuffer)FloatBuffer.allocate(8).flip();
-	static ByteBuffer buttonData = (ByteBuffer)ByteBuffer.allocate(8).flip();
+    static FloatBuffer joystickData = (FloatBuffer)FloatBuffer.allocate(8).flip();
+    static ByteBuffer buttonData = (ByteBuffer)ByteBuffer.allocate(8).flip();
     /** The major version number of the GLFW library. This is incremented when the API is changed in non-compatible ways. */
     public static final int GLFW_VERSION_MAJOR = 3;
 
@@ -37,8 +37,8 @@ public class GLFW
 
     /** Boolean values. */
     public static final int
-	GLFW_TRUE  = 1,
-	GLFW_FALSE = 0;
+    GLFW_TRUE  = 1,
+    GLFW_FALSE = 0;
 
     /** The key or button was released. */
     public static final int GLFW_RELEASE = 0;
@@ -51,145 +51,145 @@ public class GLFW
 
     /** Joystick hat states. */
     public static final int
-	GLFW_HAT_CENTERED   = 0,
-	GLFW_HAT_UP         = 1,
-	GLFW_HAT_RIGHT      = 2,
-	GLFW_HAT_DOWN       = 4,
-	GLFW_HAT_LEFT       = 8,
-	GLFW_HAT_RIGHT_UP   = (GLFW_HAT_RIGHT | GLFW_HAT_UP),
-	GLFW_HAT_RIGHT_DOWN = (GLFW_HAT_RIGHT | GLFW_HAT_DOWN),
-	GLFW_HAT_LEFT_UP    = (GLFW_HAT_LEFT  | GLFW_HAT_UP),
-	GLFW_HAT_LEFT_DOWN  = (GLFW_HAT_LEFT  | GLFW_HAT_DOWN);
+    GLFW_HAT_CENTERED   = 0,
+    GLFW_HAT_UP         = 1,
+    GLFW_HAT_RIGHT      = 2,
+    GLFW_HAT_DOWN       = 4,
+    GLFW_HAT_LEFT       = 8,
+    GLFW_HAT_RIGHT_UP   = (GLFW_HAT_RIGHT | GLFW_HAT_UP),
+    GLFW_HAT_RIGHT_DOWN = (GLFW_HAT_RIGHT | GLFW_HAT_DOWN),
+    GLFW_HAT_LEFT_UP    = (GLFW_HAT_LEFT  | GLFW_HAT_UP),
+    GLFW_HAT_LEFT_DOWN  = (GLFW_HAT_LEFT  | GLFW_HAT_DOWN);
 
     /** The unknown key. */
     public static final int GLFW_KEY_UNKNOWN = -1;
 
     /** Printable keys. */
     public static final int
-	GLFW_KEY_SPACE         = 32,
-	GLFW_KEY_APOSTROPHE    = 39,
-	GLFW_KEY_COMMA         = 44,
-	GLFW_KEY_MINUS         = 45,
-	GLFW_KEY_PERIOD        = 46,
-	GLFW_KEY_SLASH         = 47,
-	GLFW_KEY_0             = 48,
-	GLFW_KEY_1             = 49,
-	GLFW_KEY_2             = 50,
-	GLFW_KEY_3             = 51,
-	GLFW_KEY_4             = 52,
-	GLFW_KEY_5             = 53,
-	GLFW_KEY_6             = 54,
-	GLFW_KEY_7             = 55,
-	GLFW_KEY_8             = 56,
-	GLFW_KEY_9             = 57,
-	GLFW_KEY_SEMICOLON     = 59,
-	GLFW_KEY_EQUAL         = 61,
-	GLFW_KEY_A             = 65,
-	GLFW_KEY_B             = 66,
-	GLFW_KEY_C             = 67,
-	GLFW_KEY_D             = 68,
-	GLFW_KEY_E             = 69,
-	GLFW_KEY_F             = 70,
-	GLFW_KEY_G             = 71,
-	GLFW_KEY_H             = 72,
-	GLFW_KEY_I             = 73,
-	GLFW_KEY_J             = 74,
-	GLFW_KEY_K             = 75,
-	GLFW_KEY_L             = 76,
-	GLFW_KEY_M             = 77,
-	GLFW_KEY_N             = 78,
-	GLFW_KEY_O             = 79,
-	GLFW_KEY_P             = 80,
-	GLFW_KEY_Q             = 81,
-	GLFW_KEY_R             = 82,
-	GLFW_KEY_S             = 83,
-	GLFW_KEY_T             = 84,
-	GLFW_KEY_U             = 85,
-	GLFW_KEY_V             = 86,
-	GLFW_KEY_W             = 87,
-	GLFW_KEY_X             = 88,
-	GLFW_KEY_Y             = 89,
-	GLFW_KEY_Z             = 90,
-	GLFW_KEY_LEFT_BRACKET  = 91,
-	GLFW_KEY_BACKSLASH     = 92,
-	GLFW_KEY_RIGHT_BRACKET = 93,
-	GLFW_KEY_GRAVE_ACCENT  = 96,
-	GLFW_KEY_WORLD_1       = 161,
-	GLFW_KEY_WORLD_2       = 162;
+    GLFW_KEY_SPACE         = 32,
+    GLFW_KEY_APOSTROPHE    = 39,
+    GLFW_KEY_COMMA         = 44,
+    GLFW_KEY_MINUS         = 45,
+    GLFW_KEY_PERIOD        = 46,
+    GLFW_KEY_SLASH         = 47,
+    GLFW_KEY_0             = 48,
+    GLFW_KEY_1             = 49,
+    GLFW_KEY_2             = 50,
+    GLFW_KEY_3             = 51,
+    GLFW_KEY_4             = 52,
+    GLFW_KEY_5             = 53,
+    GLFW_KEY_6             = 54,
+    GLFW_KEY_7             = 55,
+    GLFW_KEY_8             = 56,
+    GLFW_KEY_9             = 57,
+    GLFW_KEY_SEMICOLON     = 59,
+    GLFW_KEY_EQUAL         = 61,
+    GLFW_KEY_A             = 65,
+    GLFW_KEY_B             = 66,
+    GLFW_KEY_C             = 67,
+    GLFW_KEY_D             = 68,
+    GLFW_KEY_E             = 69,
+    GLFW_KEY_F             = 70,
+    GLFW_KEY_G             = 71,
+    GLFW_KEY_H             = 72,
+    GLFW_KEY_I             = 73,
+    GLFW_KEY_J             = 74,
+    GLFW_KEY_K             = 75,
+    GLFW_KEY_L             = 76,
+    GLFW_KEY_M             = 77,
+    GLFW_KEY_N             = 78,
+    GLFW_KEY_O             = 79,
+    GLFW_KEY_P             = 80,
+    GLFW_KEY_Q             = 81,
+    GLFW_KEY_R             = 82,
+    GLFW_KEY_S             = 83,
+    GLFW_KEY_T             = 84,
+    GLFW_KEY_U             = 85,
+    GLFW_KEY_V             = 86,
+    GLFW_KEY_W             = 87,
+    GLFW_KEY_X             = 88,
+    GLFW_KEY_Y             = 89,
+    GLFW_KEY_Z             = 90,
+    GLFW_KEY_LEFT_BRACKET  = 91,
+    GLFW_KEY_BACKSLASH     = 92,
+    GLFW_KEY_RIGHT_BRACKET = 93,
+    GLFW_KEY_GRAVE_ACCENT  = 96,
+    GLFW_KEY_WORLD_1       = 161,
+    GLFW_KEY_WORLD_2       = 162;
 
     /** Function keys. */
     public static final int
-	GLFW_KEY_ESCAPE        = 256,
-	GLFW_KEY_ENTER         = 257,
-	GLFW_KEY_TAB           = 258,
-	GLFW_KEY_BACKSPACE     = 259,
-	GLFW_KEY_INSERT        = 260,
-	GLFW_KEY_DELETE        = 261,
-	GLFW_KEY_RIGHT         = 262,
-	GLFW_KEY_LEFT          = 263,
-	GLFW_KEY_DOWN          = 264,
-	GLFW_KEY_UP            = 265,
-	GLFW_KEY_PAGE_UP       = 266,
-	GLFW_KEY_PAGE_DOWN     = 267,
-	GLFW_KEY_HOME          = 268,
-	GLFW_KEY_END           = 269,
-	GLFW_KEY_CAPS_LOCK     = 280,
-	GLFW_KEY_SCROLL_LOCK   = 281,
-	GLFW_KEY_NUM_LOCK      = 282,
-	GLFW_KEY_PRINT_SCREEN  = 283,
-	GLFW_KEY_PAUSE         = 284,
-	GLFW_KEY_F1            = 290,
-	GLFW_KEY_F2            = 291,
-	GLFW_KEY_F3            = 292,
-	GLFW_KEY_F4            = 293,
-	GLFW_KEY_F5            = 294,
-	GLFW_KEY_F6            = 295,
-	GLFW_KEY_F7            = 296,
-	GLFW_KEY_F8            = 297,
-	GLFW_KEY_F9            = 298,
-	GLFW_KEY_F10           = 299,
-	GLFW_KEY_F11           = 300,
-	GLFW_KEY_F12           = 301,
-	GLFW_KEY_F13           = 302,
-	GLFW_KEY_F14           = 303,
-	GLFW_KEY_F15           = 304,
-	GLFW_KEY_F16           = 305,
-	GLFW_KEY_F17           = 306,
-	GLFW_KEY_F18           = 307,
-	GLFW_KEY_F19           = 308,
-	GLFW_KEY_F20           = 309,
-	GLFW_KEY_F21           = 310,
-	GLFW_KEY_F22           = 311,
-	GLFW_KEY_F23           = 312,
-	GLFW_KEY_F24           = 313,
-	GLFW_KEY_F25           = 314,
-	GLFW_KEY_KP_0          = 320,
-	GLFW_KEY_KP_1          = 321,
-	GLFW_KEY_KP_2          = 322,
-	GLFW_KEY_KP_3          = 323,
-	GLFW_KEY_KP_4          = 324,
-	GLFW_KEY_KP_5          = 325,
-	GLFW_KEY_KP_6          = 326,
-	GLFW_KEY_KP_7          = 327,
-	GLFW_KEY_KP_8          = 328,
-	GLFW_KEY_KP_9          = 329,
-	GLFW_KEY_KP_DECIMAL    = 330,
-	GLFW_KEY_KP_DIVIDE     = 331,
-	GLFW_KEY_KP_MULTIPLY   = 332,
-	GLFW_KEY_KP_SUBTRACT   = 333,
-	GLFW_KEY_KP_ADD        = 334,
-	GLFW_KEY_KP_ENTER      = 335,
-	GLFW_KEY_KP_EQUAL      = 336,
-	GLFW_KEY_LEFT_SHIFT    = 340,
-	GLFW_KEY_LEFT_CONTROL  = 341,
-	GLFW_KEY_LEFT_ALT      = 342,
-	GLFW_KEY_LEFT_SUPER    = 343,
-	GLFW_KEY_RIGHT_SHIFT   = 344,
-	GLFW_KEY_RIGHT_CONTROL = 345,
-	GLFW_KEY_RIGHT_ALT     = 346,
-	GLFW_KEY_RIGHT_SUPER   = 347,
-	GLFW_KEY_MENU          = 348,
-	GLFW_KEY_LAST          = GLFW_KEY_MENU;
+    GLFW_KEY_ESCAPE        = 256,
+    GLFW_KEY_ENTER         = 257,
+    GLFW_KEY_TAB           = 258,
+    GLFW_KEY_BACKSPACE     = 259,
+    GLFW_KEY_INSERT        = 260,
+    GLFW_KEY_DELETE        = 261,
+    GLFW_KEY_RIGHT         = 262,
+    GLFW_KEY_LEFT          = 263,
+    GLFW_KEY_DOWN          = 264,
+    GLFW_KEY_UP            = 265,
+    GLFW_KEY_PAGE_UP       = 266,
+    GLFW_KEY_PAGE_DOWN     = 267,
+    GLFW_KEY_HOME          = 268,
+    GLFW_KEY_END           = 269,
+    GLFW_KEY_CAPS_LOCK     = 280,
+    GLFW_KEY_SCROLL_LOCK   = 281,
+    GLFW_KEY_NUM_LOCK      = 282,
+    GLFW_KEY_PRINT_SCREEN  = 283,
+    GLFW_KEY_PAUSE         = 284,
+    GLFW_KEY_F1            = 290,
+    GLFW_KEY_F2            = 291,
+    GLFW_KEY_F3            = 292,
+    GLFW_KEY_F4            = 293,
+    GLFW_KEY_F5            = 294,
+    GLFW_KEY_F6            = 295,
+    GLFW_KEY_F7            = 296,
+    GLFW_KEY_F8            = 297,
+    GLFW_KEY_F9            = 298,
+    GLFW_KEY_F10           = 299,
+    GLFW_KEY_F11           = 300,
+    GLFW_KEY_F12           = 301,
+    GLFW_KEY_F13           = 302,
+    GLFW_KEY_F14           = 303,
+    GLFW_KEY_F15           = 304,
+    GLFW_KEY_F16           = 305,
+    GLFW_KEY_F17           = 306,
+    GLFW_KEY_F18           = 307,
+    GLFW_KEY_F19           = 308,
+    GLFW_KEY_F20           = 309,
+    GLFW_KEY_F21           = 310,
+    GLFW_KEY_F22           = 311,
+    GLFW_KEY_F23           = 312,
+    GLFW_KEY_F24           = 313,
+    GLFW_KEY_F25           = 314,
+    GLFW_KEY_KP_0          = 320,
+    GLFW_KEY_KP_1          = 321,
+    GLFW_KEY_KP_2          = 322,
+    GLFW_KEY_KP_3          = 323,
+    GLFW_KEY_KP_4          = 324,
+    GLFW_KEY_KP_5          = 325,
+    GLFW_KEY_KP_6          = 326,
+    GLFW_KEY_KP_7          = 327,
+    GLFW_KEY_KP_8          = 328,
+    GLFW_KEY_KP_9          = 329,
+    GLFW_KEY_KP_DECIMAL    = 330,
+    GLFW_KEY_KP_DIVIDE     = 331,
+    GLFW_KEY_KP_MULTIPLY   = 332,
+    GLFW_KEY_KP_SUBTRACT   = 333,
+    GLFW_KEY_KP_ADD        = 334,
+    GLFW_KEY_KP_ENTER      = 335,
+    GLFW_KEY_KP_EQUAL      = 336,
+    GLFW_KEY_LEFT_SHIFT    = 340,
+    GLFW_KEY_LEFT_CONTROL  = 341,
+    GLFW_KEY_LEFT_ALT      = 342,
+    GLFW_KEY_LEFT_SUPER    = 343,
+    GLFW_KEY_RIGHT_SHIFT   = 344,
+    GLFW_KEY_RIGHT_CONTROL = 345,
+    GLFW_KEY_RIGHT_ALT     = 346,
+    GLFW_KEY_RIGHT_SUPER   = 347,
+    GLFW_KEY_MENU          = 348,
+    GLFW_KEY_LAST          = GLFW_KEY_MENU;
 
     /** If this bit is set one or more Shift keys were held down. */
     public static final int GLFW_MOD_SHIFT = 0x1;
@@ -212,115 +212,115 @@ public class GLFW
 
     /** Mouse buttons. See <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#input_mouse_button">mouse button input</a> for how these are used. */
     public static final int
-	GLFW_MOUSE_BUTTON_1      = 0,
-	GLFW_MOUSE_BUTTON_2      = 1,
-	GLFW_MOUSE_BUTTON_3      = 2,
-	GLFW_MOUSE_BUTTON_4      = 3,
-	GLFW_MOUSE_BUTTON_5      = 4,
-	GLFW_MOUSE_BUTTON_6      = 5,
-	GLFW_MOUSE_BUTTON_7      = 6,
-	GLFW_MOUSE_BUTTON_8      = 7,
-	GLFW_MOUSE_BUTTON_LAST   = GLFW_MOUSE_BUTTON_8,
-	GLFW_MOUSE_BUTTON_LEFT   = GLFW_MOUSE_BUTTON_1,
-	GLFW_MOUSE_BUTTON_RIGHT  = GLFW_MOUSE_BUTTON_2,
-	GLFW_MOUSE_BUTTON_MIDDLE = GLFW_MOUSE_BUTTON_3;
+    GLFW_MOUSE_BUTTON_1      = 0,
+    GLFW_MOUSE_BUTTON_2      = 1,
+    GLFW_MOUSE_BUTTON_3      = 2,
+    GLFW_MOUSE_BUTTON_4      = 3,
+    GLFW_MOUSE_BUTTON_5      = 4,
+    GLFW_MOUSE_BUTTON_6      = 5,
+    GLFW_MOUSE_BUTTON_7      = 6,
+    GLFW_MOUSE_BUTTON_8      = 7,
+    GLFW_MOUSE_BUTTON_LAST   = GLFW_MOUSE_BUTTON_8,
+    GLFW_MOUSE_BUTTON_LEFT   = GLFW_MOUSE_BUTTON_1,
+    GLFW_MOUSE_BUTTON_RIGHT  = GLFW_MOUSE_BUTTON_2,
+    GLFW_MOUSE_BUTTON_MIDDLE = GLFW_MOUSE_BUTTON_3;
 
     /** Joysticks. See <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#joystick">joystick input</a> for how these are used. */
     public static final int
-	GLFW_JOYSTICK_1    = 0,
-	GLFW_JOYSTICK_2    = 1,
-	GLFW_JOYSTICK_3    = 2,
-	GLFW_JOYSTICK_4    = 3,
-	GLFW_JOYSTICK_5    = 4,
-	GLFW_JOYSTICK_6    = 5,
-	GLFW_JOYSTICK_7    = 6,
-	GLFW_JOYSTICK_8    = 7,
-	GLFW_JOYSTICK_9    = 8,
-	GLFW_JOYSTICK_10   = 9,
-	GLFW_JOYSTICK_11   = 10,
-	GLFW_JOYSTICK_12   = 11,
-	GLFW_JOYSTICK_13   = 12,
-	GLFW_JOYSTICK_14   = 13,
-	GLFW_JOYSTICK_15   = 14,
-	GLFW_JOYSTICK_16   = 15,
-	GLFW_JOYSTICK_LAST = GLFW_JOYSTICK_16;
+    GLFW_JOYSTICK_1    = 0,
+    GLFW_JOYSTICK_2    = 1,
+    GLFW_JOYSTICK_3    = 2,
+    GLFW_JOYSTICK_4    = 3,
+    GLFW_JOYSTICK_5    = 4,
+    GLFW_JOYSTICK_6    = 5,
+    GLFW_JOYSTICK_7    = 6,
+    GLFW_JOYSTICK_8    = 7,
+    GLFW_JOYSTICK_9    = 8,
+    GLFW_JOYSTICK_10   = 9,
+    GLFW_JOYSTICK_11   = 10,
+    GLFW_JOYSTICK_12   = 11,
+    GLFW_JOYSTICK_13   = 12,
+    GLFW_JOYSTICK_14   = 13,
+    GLFW_JOYSTICK_15   = 14,
+    GLFW_JOYSTICK_16   = 15,
+    GLFW_JOYSTICK_LAST = GLFW_JOYSTICK_16;
 
     /** Gamepad buttons. See <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#gamepad">gamepad</a> for how these are used. */
     public static final int
-	GLFW_GAMEPAD_BUTTON_A            = 0,
-	GLFW_GAMEPAD_BUTTON_B            = 1,
-	GLFW_GAMEPAD_BUTTON_X            = 2,
-	GLFW_GAMEPAD_BUTTON_Y            = 3,
-	GLFW_GAMEPAD_BUTTON_LEFT_BUMPER  = 4,
-	GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER = 5,
-	GLFW_GAMEPAD_BUTTON_BACK         = 6,
-	GLFW_GAMEPAD_BUTTON_START        = 7,
-	GLFW_GAMEPAD_BUTTON_GUIDE        = 8,
-	GLFW_GAMEPAD_BUTTON_LEFT_THUMB   = 9,
-	GLFW_GAMEPAD_BUTTON_RIGHT_THUMB  = 10,
-	GLFW_GAMEPAD_BUTTON_DPAD_UP      = 11,
-	GLFW_GAMEPAD_BUTTON_DPAD_RIGHT   = 12,
-	GLFW_GAMEPAD_BUTTON_DPAD_DOWN    = 13,
-	GLFW_GAMEPAD_BUTTON_DPAD_LEFT    = 14,
-	GLFW_GAMEPAD_BUTTON_LAST         = GLFW_GAMEPAD_BUTTON_DPAD_LEFT,
-	GLFW_GAMEPAD_BUTTON_CROSS        = GLFW_GAMEPAD_BUTTON_A,
-	GLFW_GAMEPAD_BUTTON_CIRCLE       = GLFW_GAMEPAD_BUTTON_B,
-	GLFW_GAMEPAD_BUTTON_SQUARE       = GLFW_GAMEPAD_BUTTON_X,
-	GLFW_GAMEPAD_BUTTON_TRIANGLE     = GLFW_GAMEPAD_BUTTON_Y;
+    GLFW_GAMEPAD_BUTTON_A            = 0,
+    GLFW_GAMEPAD_BUTTON_B            = 1,
+    GLFW_GAMEPAD_BUTTON_X            = 2,
+    GLFW_GAMEPAD_BUTTON_Y            = 3,
+    GLFW_GAMEPAD_BUTTON_LEFT_BUMPER  = 4,
+    GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER = 5,
+    GLFW_GAMEPAD_BUTTON_BACK         = 6,
+    GLFW_GAMEPAD_BUTTON_START        = 7,
+    GLFW_GAMEPAD_BUTTON_GUIDE        = 8,
+    GLFW_GAMEPAD_BUTTON_LEFT_THUMB   = 9,
+    GLFW_GAMEPAD_BUTTON_RIGHT_THUMB  = 10,
+    GLFW_GAMEPAD_BUTTON_DPAD_UP      = 11,
+    GLFW_GAMEPAD_BUTTON_DPAD_RIGHT   = 12,
+    GLFW_GAMEPAD_BUTTON_DPAD_DOWN    = 13,
+    GLFW_GAMEPAD_BUTTON_DPAD_LEFT    = 14,
+    GLFW_GAMEPAD_BUTTON_LAST         = GLFW_GAMEPAD_BUTTON_DPAD_LEFT,
+    GLFW_GAMEPAD_BUTTON_CROSS        = GLFW_GAMEPAD_BUTTON_A,
+    GLFW_GAMEPAD_BUTTON_CIRCLE       = GLFW_GAMEPAD_BUTTON_B,
+    GLFW_GAMEPAD_BUTTON_SQUARE       = GLFW_GAMEPAD_BUTTON_X,
+    GLFW_GAMEPAD_BUTTON_TRIANGLE     = GLFW_GAMEPAD_BUTTON_Y;
 
     /** Gamepad axes. See <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#gamepad">gamepad</a> for how these are used. */
     public static final int
-	GLFW_GAMEPAD_AXIS_LEFT_X        = 0,
-	GLFW_GAMEPAD_AXIS_LEFT_Y        = 1,
-	GLFW_GAMEPAD_AXIS_RIGHT_X       = 2,
-	GLFW_GAMEPAD_AXIS_RIGHT_Y       = 3,
-	GLFW_GAMEPAD_AXIS_LEFT_TRIGGER  = 4,
-	GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER = 5,
-	GLFW_GAMEPAD_AXIS_LAST          = GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER;
+    GLFW_GAMEPAD_AXIS_LEFT_X        = 0,
+    GLFW_GAMEPAD_AXIS_LEFT_Y        = 1,
+    GLFW_GAMEPAD_AXIS_RIGHT_X       = 2,
+    GLFW_GAMEPAD_AXIS_RIGHT_Y       = 3,
+    GLFW_GAMEPAD_AXIS_LEFT_TRIGGER  = 4,
+    GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER = 5,
+    GLFW_GAMEPAD_AXIS_LAST          = GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER;
 
-	public static final int
-	GLFW_NO_ERROR              = 0,
-	GLFW_NOT_INITIALIZED       = 0x10001,
-	GLFW_NO_CURRENT_CONTEXT    = 0x10002,
-	GLFW_INVALID_ENUM          = 0x10003,
-	GLFW_INVALID_VALUE         = 0x10004,
-	GLFW_OUT_OF_MEMORY         = 0x10005,
-	GLFW_API_UNAVAILABLE       = 0x10006,
-	GLFW_VERSION_UNAVAILABLE   = 0x10007,
-	GLFW_PLATFORM_ERROR        = 0x10008,
-	GLFW_FORMAT_UNAVAILABLE    = 0x10009,
-	GLFW_NO_WINDOW_CONTEXT     = 0x1000A,
-	GLFW_CURSOR_UNAVAILABLE    = 0x1000B,
-	GLFW_FEATURE_UNAVAILABLE   = 0x1000C,
-	GLFW_FEATURE_UNIMPLEMENTED = 0x1000D;
+    public static final int
+    GLFW_NO_ERROR              = 0,
+    GLFW_NOT_INITIALIZED       = 0x10001,
+    GLFW_NO_CURRENT_CONTEXT    = 0x10002,
+    GLFW_INVALID_ENUM          = 0x10003,
+    GLFW_INVALID_VALUE         = 0x10004,
+    GLFW_OUT_OF_MEMORY         = 0x10005,
+    GLFW_API_UNAVAILABLE       = 0x10006,
+    GLFW_VERSION_UNAVAILABLE   = 0x10007,
+    GLFW_PLATFORM_ERROR        = 0x10008,
+    GLFW_FORMAT_UNAVAILABLE    = 0x10009,
+    GLFW_NO_WINDOW_CONTEXT     = 0x1000A,
+    GLFW_CURSOR_UNAVAILABLE    = 0x1000B,
+    GLFW_FEATURE_UNAVAILABLE   = 0x1000C,
+    GLFW_FEATURE_UNIMPLEMENTED = 0x1000D;
 
-	public static final int
-	GLFW_FOCUSED                 = 0x20001,
-	GLFW_ICONIFIED               = 0x20002,
-	GLFW_RESIZABLE               = 0x20003,
-	GLFW_VISIBLE                 = 0x20004,
-	GLFW_DECORATED               = 0x20005,
-	GLFW_AUTO_ICONIFY            = 0x20006,
-	GLFW_FLOATING                = 0x20007,
-	GLFW_MAXIMIZED               = 0x20008,
-	GLFW_CENTER_CURSOR           = 0x20009,
-	GLFW_TRANSPARENT_FRAMEBUFFER = 0x2000A,
-	GLFW_HOVERED                 = 0x2000B,
-	GLFW_FOCUS_ON_SHOW           = 0x2000C;
+    public static final int
+    GLFW_FOCUSED                 = 0x20001,
+    GLFW_ICONIFIED               = 0x20002,
+    GLFW_RESIZABLE               = 0x20003,
+    GLFW_VISIBLE                 = 0x20004,
+    GLFW_DECORATED               = 0x20005,
+    GLFW_AUTO_ICONIFY            = 0x20006,
+    GLFW_FLOATING                = 0x20007,
+    GLFW_MAXIMIZED               = 0x20008,
+    GLFW_CENTER_CURSOR           = 0x20009,
+    GLFW_TRANSPARENT_FRAMEBUFFER = 0x2000A,
+    GLFW_HOVERED                 = 0x2000B,
+    GLFW_FOCUS_ON_SHOW           = 0x2000C;
 
     /** Input options. */
     public static final int
-	GLFW_CURSOR               = 0x33001,
-	GLFW_STICKY_KEYS          = 0x33002,
-	GLFW_STICKY_MOUSE_BUTTONS = 0x33003,
-	GLFW_LOCK_KEY_MODS        = 0x33004,
-	GLFW_RAW_MOUSE_MOTION     = 0x33005;
+    GLFW_CURSOR               = 0x33001,
+    GLFW_STICKY_KEYS          = 0x33002,
+    GLFW_STICKY_MOUSE_BUTTONS = 0x33003,
+    GLFW_LOCK_KEY_MODS        = 0x33004,
+    GLFW_RAW_MOUSE_MOTION     = 0x33005;
 
     /** Cursor state. */
     public static final int
-	GLFW_CURSOR_NORMAL   = 0x34001,
-	GLFW_CURSOR_HIDDEN   = 0x34002,
-	GLFW_CURSOR_DISABLED = 0x34003;
+    GLFW_CURSOR_NORMAL   = 0x34001,
+    GLFW_CURSOR_HIDDEN   = 0x34002,
+    GLFW_CURSOR_DISABLED = 0x34003;
 
     /** The regular arrow cursor shape. */
     public static final int GLFW_ARROW_CURSOR = 0x36001;
@@ -341,7 +341,7 @@ public class GLFW
 
     /**
      * The omni-directional resize cursor/move shape.
-     * 
+     *
      * <p>This is usually either a combined horizontal and vertical double-headed arrow or a grabbing hand.</p>
      */
     public static final int GLFW_RESIZE_ALL_CURSOR = 0x36009;
@@ -359,50 +359,50 @@ public class GLFW
 
     /** Monitor events. */
     public static final int
-	GLFW_CONNECTED    = 0x40001,
-	GLFW_DISCONNECTED = 0x40002;
+    GLFW_CONNECTED    = 0x40001,
+    GLFW_DISCONNECTED = 0x40002;
 
     /** Init hints. */
     public static final int
-	GLFW_JOYSTICK_HAT_BUTTONS  = 0x50001,
-	GLFW_COCOA_CHDIR_RESOURCES = 0x51001,
-	GLFW_COCOA_MENUBAR         = 0x51002;
+    GLFW_JOYSTICK_HAT_BUTTONS  = 0x50001,
+    GLFW_COCOA_CHDIR_RESOURCES = 0x51001,
+    GLFW_COCOA_MENUBAR         = 0x51002;
 
     /** Don't care value. */
     public static final int GLFW_DONT_CARE = -1;
 
     /** PixelFormat hints. */
     public static final int
-	GLFW_RED_BITS         = 0x21001,
-	GLFW_GREEN_BITS       = 0x21002,
-	GLFW_BLUE_BITS        = 0x21003,
-	GLFW_ALPHA_BITS       = 0x21004,
-	GLFW_DEPTH_BITS       = 0x21005,
-	GLFW_STENCIL_BITS     = 0x21006,
-	GLFW_ACCUM_RED_BITS   = 0x21007,
-	GLFW_ACCUM_GREEN_BITS = 0x21008,
-	GLFW_ACCUM_BLUE_BITS  = 0x21009,
-	GLFW_ACCUM_ALPHA_BITS = 0x2100A,
-	GLFW_AUX_BUFFERS      = 0x2100B,
-	GLFW_STEREO           = 0x2100C,
-	GLFW_SAMPLES          = 0x2100D,
-	GLFW_SRGB_CAPABLE     = 0x2100E,
-	GLFW_REFRESH_RATE     = 0x2100F,
-	GLFW_DOUBLEBUFFER     = 0x21010;
+    GLFW_RED_BITS         = 0x21001,
+    GLFW_GREEN_BITS       = 0x21002,
+    GLFW_BLUE_BITS        = 0x21003,
+    GLFW_ALPHA_BITS       = 0x21004,
+    GLFW_DEPTH_BITS       = 0x21005,
+    GLFW_STENCIL_BITS     = 0x21006,
+    GLFW_ACCUM_RED_BITS   = 0x21007,
+    GLFW_ACCUM_GREEN_BITS = 0x21008,
+    GLFW_ACCUM_BLUE_BITS  = 0x21009,
+    GLFW_ACCUM_ALPHA_BITS = 0x2100A,
+    GLFW_AUX_BUFFERS      = 0x2100B,
+    GLFW_STEREO           = 0x2100C,
+    GLFW_SAMPLES          = 0x2100D,
+    GLFW_SRGB_CAPABLE     = 0x2100E,
+    GLFW_REFRESH_RATE     = 0x2100F,
+    GLFW_DOUBLEBUFFER     = 0x21010;
 
-	public static final int
-	GLFW_CLIENT_API               = 0x22001,
-	GLFW_CONTEXT_VERSION_MAJOR    = 0x22002,
-	GLFW_CONTEXT_VERSION_MINOR    = 0x22003,
-	GLFW_CONTEXT_REVISION         = 0x22004,
-	GLFW_CONTEXT_ROBUSTNESS       = 0x22005,
-	GLFW_OPENGL_FORWARD_COMPAT    = 0x22006,
-	GLFW_OPENGL_DEBUG_CONTEXT     = 0x22007,
-	GLFW_OPENGL_PROFILE           = 0x22008,
-	GLFW_CONTEXT_RELEASE_BEHAVIOR = 0x22009,
-	GLFW_CONTEXT_NO_ERROR         = 0x2200A,
-	GLFW_CONTEXT_CREATION_API     = 0x2200B,
-	GLFW_SCALE_TO_MONITOR         = 0x2200C;
+    public static final int
+    GLFW_CLIENT_API               = 0x22001,
+    GLFW_CONTEXT_VERSION_MAJOR    = 0x22002,
+    GLFW_CONTEXT_VERSION_MINOR    = 0x22003,
+    GLFW_CONTEXT_REVISION         = 0x22004,
+    GLFW_CONTEXT_ROBUSTNESS       = 0x22005,
+    GLFW_OPENGL_FORWARD_COMPAT    = 0x22006,
+    GLFW_OPENGL_DEBUG_CONTEXT     = 0x22007,
+    GLFW_OPENGL_PROFILE           = 0x22008,
+    GLFW_CONTEXT_RELEASE_BEHAVIOR = 0x22009,
+    GLFW_CONTEXT_NO_ERROR         = 0x2200A,
+    GLFW_CONTEXT_CREATION_API     = 0x2200B,
+    GLFW_SCALE_TO_MONITOR         = 0x2200C;
 
     /** Specifies whether to use full resolution framebuffers on Retina displays. This is ignored on other platforms. */
     public static final int GLFW_COCOA_RETINA_FRAMEBUFFER = 0x23001;
@@ -422,78 +422,78 @@ public class GLFW
 
     /** The desired ASCII encoded class and instance parts of the ICCCM {@code WM_CLASS} window property. These are set with {@link #glfwWindowHintString WindowHintString}. */
     public static final int
-	GLFW_X11_CLASS_NAME    = 0x24001,
-	GLFW_X11_INSTANCE_NAME = 0x24002;
+    GLFW_X11_CLASS_NAME    = 0x24001,
+    GLFW_X11_INSTANCE_NAME = 0x24002;
 
     /**
      * Specifies whether to allow access to the window menu via the Alt+Space and Alt-and-then-Space keyboard shortcuts.
-     * 
+     *
      * <p>This is ignored on other platforms.</p>
      */
     public static final int GLFW_WIN32_KEYBOARD_MENU = 0x25001;
 
     /** Values for the {@link #GLFW_CLIENT_API CLIENT_API} hint. */
     public static final int
-	GLFW_NO_API        = 0,
-	GLFW_OPENGL_API    = 0x30001,
-	GLFW_OPENGL_ES_API = 0x30002;
+    GLFW_NO_API        = 0,
+    GLFW_OPENGL_API    = 0x30001,
+    GLFW_OPENGL_ES_API = 0x30002;
 
     /** Values for the {@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS} hint. */
     public static final int
-	GLFW_NO_ROBUSTNESS         = 0,
-	GLFW_NO_RESET_NOTIFICATION = 0x31001,
-	GLFW_LOSE_CONTEXT_ON_RESET = 0x31002;
+    GLFW_NO_ROBUSTNESS         = 0,
+    GLFW_NO_RESET_NOTIFICATION = 0x31001,
+    GLFW_LOSE_CONTEXT_ON_RESET = 0x31002;
 
     /** Values for the {@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE} hint. */
     public static final int
-	GLFW_OPENGL_ANY_PROFILE    = 0,
-	GLFW_OPENGL_CORE_PROFILE   = 0x32001,
-	GLFW_OPENGL_COMPAT_PROFILE = 0x32002;
+    GLFW_OPENGL_ANY_PROFILE    = 0,
+    GLFW_OPENGL_CORE_PROFILE   = 0x32001,
+    GLFW_OPENGL_COMPAT_PROFILE = 0x32002;
 
     /** Values for the {@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR} hint. */
     public static final int
-	GLFW_ANY_RELEASE_BEHAVIOR   = 0,
-	GLFW_RELEASE_BEHAVIOR_FLUSH = 0x35001,
-	GLFW_RELEASE_BEHAVIOR_NONE  = 0x35002;
+    GLFW_ANY_RELEASE_BEHAVIOR   = 0,
+    GLFW_RELEASE_BEHAVIOR_FLUSH = 0x35001,
+    GLFW_RELEASE_BEHAVIOR_NONE  = 0x35002;
 
     /** Values for the {@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API} hint. */
     public static final int
-	GLFW_NATIVE_CONTEXT_API = 0x36001,
-	GLFW_EGL_CONTEXT_API    = 0x36002,
-	GLFW_OSMESA_CONTEXT_API = 0x36003;
+    GLFW_NATIVE_CONTEXT_API = 0x36001,
+    GLFW_EGL_CONTEXT_API    = 0x36002,
+    GLFW_OSMESA_CONTEXT_API = 0x36003;
 
-	// GLFW Callbacks
-	/* volatile */ public static GLFWCharCallback mGLFWCharCallback;
-	/* volatile */ public static GLFWCharModsCallback mGLFWCharModsCallback;
-	/* volatile */ public static GLFWCursorEnterCallback mGLFWCursorEnterCallback;
-	/* volatile */ public static GLFWCursorPosCallback mGLFWCursorPosCallback;
-	/* volatile */ public static GLFWDropCallback mGLFWDropCallback;
-	/* volatile */ public static GLFWErrorCallback mGLFWErrorCallback;
-	/* volatile */ public static GLFWFramebufferSizeCallback mGLFWFramebufferSizeCallback;
-	/* volatile */ public static GLFWJoystickCallback mGLFWJoystickCallback;
-	/* volatile */ public static GLFWKeyCallback mGLFWKeyCallback;
-	/* volatile */ public static GLFWMonitorCallback mGLFWMonitorCallback;
-	/* volatile */ public static GLFWMouseButtonCallback mGLFWMouseButtonCallback;
-	/* volatile */ public static GLFWScrollCallback mGLFWScrollCallback;
-	/* volatile */ public static GLFWWindowCloseCallback mGLFWWindowCloseCallback;
-	/* volatile */ public static GLFWWindowContentScaleCallback mGLFWWindowContentScaleCallback;
-	/* volatile */ public static GLFWWindowFocusCallback mGLFWWindowFocusCallback;
-	/* volatile */ public static GLFWWindowIconifyCallback mGLFWWindowIconifyCallback;
-	/* volatile */ public static GLFWWindowMaximizeCallback mGLFWWindowMaximizeCallback;
-	/* volatile */ public static GLFWWindowPosCallback mGLFWWindowPosCallback;
-	/* volatile */ public static GLFWWindowRefreshCallback mGLFWWindowRefreshCallback;
-	/* volatile */ public static GLFWWindowSizeCallback mGLFWWindowSizeCallback;
-  
+    // GLFW Callbacks
+    /* volatile */ public static GLFWCharCallback mGLFWCharCallback;
+    /* volatile */ public static GLFWCharModsCallback mGLFWCharModsCallback;
+    /* volatile */ public static GLFWCursorEnterCallback mGLFWCursorEnterCallback;
+    /* volatile */ public static GLFWCursorPosCallback mGLFWCursorPosCallback;
+    /* volatile */ public static GLFWDropCallback mGLFWDropCallback;
+    /* volatile */ public static GLFWErrorCallback mGLFWErrorCallback;
+    /* volatile */ public static GLFWFramebufferSizeCallback mGLFWFramebufferSizeCallback;
+    /* volatile */ public static GLFWJoystickCallback mGLFWJoystickCallback;
+    /* volatile */ public static GLFWKeyCallback mGLFWKeyCallback;
+    /* volatile */ public static GLFWMonitorCallback mGLFWMonitorCallback;
+    /* volatile */ public static GLFWMouseButtonCallback mGLFWMouseButtonCallback;
+    /* volatile */ public static GLFWScrollCallback mGLFWScrollCallback;
+    /* volatile */ public static GLFWWindowCloseCallback mGLFWWindowCloseCallback;
+    /* volatile */ public static GLFWWindowContentScaleCallback mGLFWWindowContentScaleCallback;
+    /* volatile */ public static GLFWWindowFocusCallback mGLFWWindowFocusCallback;
+    /* volatile */ public static GLFWWindowIconifyCallback mGLFWWindowIconifyCallback;
+    /* volatile */ public static GLFWWindowMaximizeCallback mGLFWWindowMaximizeCallback;
+    /* volatile */ public static GLFWWindowPosCallback mGLFWWindowPosCallback;
+    /* volatile */ public static GLFWWindowRefreshCallback mGLFWWindowRefreshCallback;
+    /* volatile */ public static GLFWWindowSizeCallback mGLFWWindowSizeCallback;
+
     volatile public static int mGLFWWindowWidth, mGLFWWindowHeight;
     volatile public static double mGLFWCursorX, mGLFWCursorY, mGLFWCursorLastX, mGLFWCursorLastY;
-    
-	private static GLFWGammaRamp mGLFWGammaRamp;
+
+    private static GLFWGammaRamp mGLFWGammaRamp;
     private static Map<Integer, String> mGLFWKeyCodes;
     private static GLFWVidMode mGLFWVideoMode;
-	private static long mGLFWWindowMonitor;
-    
+    private static long mGLFWWindowMonitor;
+
     private static double mGLFWInitialTime;
-    
+
     private static ArrayMap<Long, GLFWWindowProperties> mGLFWWindowMap;
 
     public static boolean mGLFWIsGrabbing, mGLFWIsInputReady, mGLFWIsUseStackQueue = false;
@@ -514,7 +514,7 @@ public class GLFW
             mGLFWWindowWidth = Integer.parseInt(windowWidth);
             mGLFWWindowHeight = Integer.parseInt(windowHeight);
         }
-        
+
         // Minecraft triggers a glfwPollEvents() on splash screen, so update window size there.
         // CallbackBridge.receiveCallback(CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE, mGLFWWindowWidth, mGLFWWindowHeight, 0, 0);
         // CallbackBridge.receiveCallback(CallbackBridge.EVENT_TYPE_WINDOW_SIZE, mGLFWWindowWidth, mGLFWWindowHeight, 0, 0);
@@ -524,12 +524,12 @@ public class GLFW
         } catch (UnsatisfiedLinkError e) {
             e.printStackTrace();
         }
-        
+
         mGLFWErrorCallback = GLFWErrorCallback.createPrint();
         mGLFWKeyCodes = new ArrayMap<>();
-        
+
         mGLFWWindowMap = new ArrayMap<>();
-        
+
         mGLFWVideoMode = new GLFWVidMode(ByteBuffer.allocateDirect(GLFWVidMode.SIZEOF));
         memPutInt(mGLFWVideoMode.address() + mGLFWVideoMode.WIDTH, mGLFWWindowWidth);
         memPutInt(mGLFWVideoMode.address() + mGLFWVideoMode.HEIGHT, mGLFWWindowHeight);
@@ -537,16 +537,16 @@ public class GLFW
         memPutInt(mGLFWVideoMode.address() + mGLFWVideoMode.GREENBITS, 8);
         memPutInt(mGLFWVideoMode.address() + mGLFWVideoMode.BLUEBITS, 8);
         memPutInt(mGLFWVideoMode.address() + mGLFWVideoMode.REFRESHRATE, 60);
-        
+
         // A way to generate key code names
         Field[] thisFieldArr = GLFW.class.getFields();
         try {
             for (Field thisField : thisFieldArr) {
                 if (thisField.getName().startsWith("GLFW_KEY_")) {
                     mGLFWKeyCodes.put(
-                        (int) thisField.get(null),
-                        thisField.getName().substring(9, 10).toUpperCase() +
-                        thisField.getName().substring(10).replace("_", " ").toLowerCase()
+                    (int) thisField.get(null),
+                    thisField.getName().substring(9, 10).toUpperCase() +
+                    thisField.getName().substring(10).replace("_", " ").toLowerCase()
                     );
                 }
             }
@@ -567,7 +567,7 @@ public class GLFW
 		 }
 		 };
 		 */
-	}
+    }
 
     private static native long nglfwSetCharCallback(long window, long ptr);
     private static native long nglfwSetCharModsCallback(long window, long ptr);
@@ -580,19 +580,19 @@ public class GLFW
     private static native long nglfwSetWindowSizeCallback(long window, long ptr);
     // private static native void nglfwSetInputReady();
     private static native void nglfwSetShowingWindow(long window);
-    
-	/*
-	 private static void priGlfwSetError(int error) {
-	 mGLFW_currentError = error;
-	 if (error != GLFW_NO_ERROR && mGLFWErrorCallback != null) {
-	 mGLFWErrorCallback.invoke(error, 0);
-	 }
-	 }
 
-	 private static void priGlfwNoError() {
-	 priGlfwSetError(GLFW_NO_ERROR);
-	 }
-	 */
+    /*
+     private static void priGlfwSetError(int error) {
+     mGLFW_currentError = error;
+     if (error != GLFW_NO_ERROR && mGLFWErrorCallback != null) {
+     mGLFWErrorCallback.invoke(error, 0);
+     }
+     }
+
+     private static void priGlfwNoError() {
+     priGlfwSetError(GLFW_NO_ERROR);
+     }
+     */
     protected GLFW() {
         throw new UnsupportedOperationException();
     }
@@ -606,26 +606,26 @@ public class GLFW
 
         /** Function address. */
         public static final long
-            Init = apiGetFunctionAddress(GLFW, "pojavInit"),
-            CreateContext = apiGetFunctionAddress(GLFW, "pojavCreateContext"),
-            GetCurrentContext = apiGetFunctionAddress(GLFW, "pojavGetCurrentContext"),
-            //DetachOnCurrentThread = apiGetFunctionAddress(GLFW, "pojavDetachOnCurrentThread"),
-            MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
-            Terminate = apiGetFunctionAddress(GLFW, "pojavTerminate"),
-            SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
-            SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval");
+        Init = apiGetFunctionAddress(GLFW, "pojavInit"),
+        CreateContext = apiGetFunctionAddress(GLFW, "pojavCreateContext"),
+        GetCurrentContext = apiGetFunctionAddress(GLFW, "pojavGetCurrentContext"),
+        //DetachOnCurrentThread = apiGetFunctionAddress(GLFW, "pojavDetachOnCurrentThread"),
+        MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
+        Terminate = apiGetFunctionAddress(GLFW, "pojavTerminate"),
+        SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
+        SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval");
     }
 
-	public static SharedLibrary getLibrary() {
+    public static SharedLibrary getLibrary() {
         return GLFW;
     }
 
     public static void internalChangeMonitorSize(int width, int height) {
-         mGLFWWindowWidth = width;
-         mGLFWWindowHeight = height;
-         if (mGLFWVideoMode == null) return;
-         memPutInt(mGLFWVideoMode.address() + (long) mGLFWVideoMode.WIDTH, mGLFWWindowWidth);
-         memPutInt(mGLFWVideoMode.address() + (long) mGLFWVideoMode.HEIGHT, mGLFWWindowHeight);
+        mGLFWWindowWidth = width;
+        mGLFWWindowHeight = height;
+        if (mGLFWVideoMode == null) return;
+        memPutInt(mGLFWVideoMode.address() + (long) mGLFWVideoMode.WIDTH, mGLFWWindowWidth);
+        memPutInt(mGLFWVideoMode.address() + (long) mGLFWVideoMode.HEIGHT, mGLFWWindowHeight);
     }
 
     public static GLFWWindowProperties internalGetWindow(long window) {
@@ -636,7 +636,7 @@ public class GLFW
         return win;
     }
 
-// Generated stub callback methods
+    // Generated stub callback methods
     public static GLFWCharCallback glfwSetCharCallback(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWcharfun") GLFWCharCallbackI cbfun) {
         GLFWCharCallback lastCallback = mGLFWCharCallback;
         if (cbfun == null) mGLFWCharCallback = null;
@@ -668,7 +668,7 @@ public class GLFW
 
         return lastCallback;
     }
-    
+
     public static GLFWDropCallback glfwSetDropCallback(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWdropfun") GLFWDropCallbackI cbfun) {
         GLFWDropCallback lastCallback = mGLFWDropCallback;
         if (cbfun == null) mGLFWDropCallback = null;
@@ -815,14 +815,14 @@ public class GLFW
             mGLFWInitialTime = (double) System.nanoTime();
             long __functionAddress = Functions.Init;
             isGLFWReady = invokeI(__functionAddress) != 0;
-	    }
-	    return isGLFWReady;
+        }
+        return isGLFWReady;
     }
 
     public static void glfwTerminate() {
         mGLFWIsInputReady = false;
         CallbackBridge.nativeSetInputReady(false);
-        
+
         long __functionAddress = Functions.Terminate;
         invokeV(__functionAddress);
     }
@@ -848,12 +848,12 @@ public class GLFW
     @NativeType("GLFWmonitor **")
     public static PointerBuffer glfwGetMonitors() {
         PointerBuffer pBuffer = PointerBuffer.allocateDirect(1);
-		pBuffer.put(glfwGetPrimaryMonitor());
-		return pBuffer;
+        pBuffer.put(glfwGetPrimaryMonitor());
+        return pBuffer;
     }
 
     public static long glfwGetPrimaryMonitor() {
-	    // Prevent NULL check
+        // Prevent NULL check
         return 1L;
     }
 
@@ -885,12 +885,12 @@ public class GLFW
     public static long glfwGetWindowMonitor(@NativeType("GLFWwindow *") long window) {
         return mGLFWWindowMonitor;
     }
-	
-	public static void glfwSetWindowMonitor(@NativeType("GLFWwindow *") long window, @NativeType("GLFWmonitor *") long monitor, int xpos, int ypos, int width, int height, int refreshRate) {
-		// weird calculation to fake pointer
+
+    public static void glfwSetWindowMonitor(@NativeType("GLFWwindow *") long window, @NativeType("GLFWmonitor *") long monitor, int xpos, int ypos, int width, int height, int refreshRate) {
+        // weird calculation to fake pointer
         mGLFWWindowMonitor = window * monitor;
     }
-    
+
     public static int glfwGetWindowAttrib(@NativeType("GLFWwindow *") long window, int attrib) {
         return internalGetWindow(window).windowAttribs.getOrDefault(attrib, 0);
     }
@@ -905,21 +905,21 @@ public class GLFW
             checkSafe(minor, 1);
             checkSafe(rev, 1);
         }
-        
+
         major.put(GLFW_VERSION_MAJOR);
-		minor.put(GLFW_VERSION_MINOR);
-		rev.put(GLFW_VERSION_REVISION);
+        minor.put(GLFW_VERSION_MINOR);
+        rev.put(GLFW_VERSION_REVISION);
     }
 
-	public static String glfwGetVersionString() {
+    public static String glfwGetVersionString() {
         return GLFW_VERSION_MAJOR + "." + GLFW_VERSION_MINOR + "." + GLFW_VERSION_REVISION;
     }
 
-	public static int glfwGetError(@Nullable PointerBuffer description) {
-		return GLFW_NO_ERROR;
+    public static int glfwGetError(@Nullable PointerBuffer description) {
+        return GLFW_NO_ERROR;
     }
 
-	@Nullable
+    @Nullable
     @NativeType("GLFWvidmode const *")
     public static GLFWVidMode.Buffer glfwGetVideoModes(@NativeType("GLFWmonitor *") long monitor) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -933,12 +933,12 @@ public class GLFW
         }
     }
 
-	@Nullable
+    @Nullable
     public static GLFWVidMode glfwGetVideoMode(long monitor) {
         return mGLFWVideoMode;
     }
 
-	public static GLFWGammaRamp glfwGetGammaRamp(@NativeType("GLFWmonitor *") long monitor) {
+    public static GLFWGammaRamp glfwGetGammaRamp(@NativeType("GLFWmonitor *") long monitor) {
         return mGLFWGammaRamp;
     }
     public static void glfwSetGammaRamp(@NativeType("GLFWmonitor *") long monitor, @NativeType("const GLFWgammaramp *") GLFWGammaRamp ramp) {
@@ -966,15 +966,15 @@ public class GLFW
         // System.out.println("glfwGetTime");
         return (System.nanoTime() - mGLFWInitialTime) / 1.e9;
     }
-	
+
     public static void glfwSetTime(double time) {
         mGLFWInitialTime = System.nanoTime() - (long) time;
     }
-    
-	public static long glfwGetTimerValue() {
+
+    public static long glfwGetTimerValue() {
         return System.currentTimeMillis();
     }
-    
+
     public static long glfwGetTimerFrequency() {
         // FIXME set correct value!!
         return 60;
@@ -1004,9 +1004,9 @@ public class GLFW
         mainContext = ptr;
         return ptr;
         //Return our context
-	}
+    }
 
-	public static void glfwDestroyWindow(long window) {
+    public static void glfwDestroyWindow(long window) {
         // Check window exists
         try {
             internalGetWindow(window);
@@ -1018,140 +1018,140 @@ public class GLFW
         nglfwSetShowingWindow(mGLFWWindowMap.size() == 0 ? 0 : mGLFWWindowMap.keyAt(mGLFWWindowMap.size() - 1));
     }
 
-	public static void glfwDefaultWindowHints() {}
+    public static void glfwDefaultWindowHints() {}
 
-	public static void glfwGetWindowSize(long window, IntBuffer width, IntBuffer height) {
+    public static void glfwGetWindowSize(long window, IntBuffer width, IntBuffer height) {
         if (width != null) width.put(internalGetWindow(window).width);
-		if (height != null) height.put(internalGetWindow(window).height);
-	}
+        if (height != null) height.put(internalGetWindow(window).height);
+    }
 
-	public static void glfwSetWindowPos(long window, int x, int y) {
+    public static void glfwSetWindowPos(long window, int x, int y) {
         internalGetWindow(window).x = x;
         internalGetWindow(window).y = y;
     }
-    
+
     public static void glfwSetWindowSize(long window, int width, int height) {
         internalGetWindow(window).width = width;
         internalGetWindow(window).height = height;
-        
+
         System.out.println("GLFW: Set size for window " + window + ", width=" + width + ", height=" + height);
     }
-    
-	public static void glfwShowWindow(long window) {
+
+    public static void glfwShowWindow(long window) {
         nglfwSetShowingWindow(window);
     }
-	public static void glfwWindowHint(int hint, int value) {}
-	public static void glfwWindowHintString(int hint, @NativeType("const char *") ByteBuffer value) {}
+    public static void glfwWindowHint(int hint, int value) {}
+    public static void glfwWindowHintString(int hint, @NativeType("const char *") ByteBuffer value) {}
     public static void glfwWindowHintString(int hint, @NativeType("const char *") CharSequence value) {}
 
-	public static boolean glfwWindowShouldClose(long window) {
-		return internalGetWindow(window).shouldClose;
-	}
+    public static boolean glfwWindowShouldClose(long window) {
+        return internalGetWindow(window).shouldClose;
+    }
 
-	public static void glfwSetWindowShouldClose(long window, boolean close) {
-		internalGetWindow(window).shouldClose = close;
-	}
-	
+    public static void glfwSetWindowShouldClose(long window, boolean close) {
+        internalGetWindow(window).shouldClose = close;
+    }
+
 
     public static void glfwSetWindowTitle(@NativeType("GLFWwindow *") long window, @NativeType("char const *") ByteBuffer title) {
-        
+
     }
     public static void glfwSetWindowTitle(@NativeType("GLFWwindow *") long window, @NativeType("char const *") CharSequence title) {
         internalGetWindow(window).title = title;
     }
-	
-	public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
+
+    public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
 
     public static void glfwPollEvents() {
         if (!mGLFWIsInputReady) {
             mGLFWIsInputReady = true;
             mGLFWIsUseStackQueue = CallbackBridge.nativeSetInputReady(true);
         }
-        
-        if (!CallbackBridge.PENDING_EVENT_READY) { 
+
+        if (!CallbackBridge.PENDING_EVENT_READY) {
             CallbackBridge.PENDING_EVENT_READY = true;
             // nglfwSetInputReady();
         }
-        
+
         // Indirect event
         while (CallbackBridge.PENDING_EVENT_LIST.size() > 0) {
             Integer[] dataArr = CallbackBridge.PENDING_EVENT_LIST.remove(0);
-            
+
             if (dataArr == null) { // It should not be null, but still should be catched
                 // System.out.println("GLFW: popped callback is null, skipping");
                 continue;
             }
-            
+
             for (Long ptr : mGLFWWindowMap.keySet()) {
-            	try {
-					switch (dataArr[0]) {
-						case CallbackBridge.EVENT_TYPE_CHAR:
-							if (mGLFWCharCallback != null) {
-								mGLFWCharCallback.invoke(ptr, dataArr[1]);
-							}
-							break;
-						case CallbackBridge.EVENT_TYPE_CHAR_MODS:
-							if (mGLFWCharModsCallback != null) {
-								mGLFWCharModsCallback.invoke(ptr, dataArr[1], dataArr[2]);
-							}
-							break;
-						case CallbackBridge.EVENT_TYPE_CURSOR_ENTER:
-							if (mGLFWCursorEnterCallback != null) {
-								mGLFWCursorEnterCallback.invoke(ptr, dataArr[1] == 1);
-							}
-							break;
-						case CallbackBridge.EVENT_TYPE_KEY:
-							if (mGLFWKeyCallback != null) {
-								keyDownBuffer[Math.max(0, dataArr[1]-31)]=(byte)(int)dataArr[3];
-								mGLFWKeyCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3], dataArr[4]);
-							}
-							break;
-						case CallbackBridge.EVENT_TYPE_MOUSE_BUTTON:
-							if (mGLFWMouseButtonCallback != null) {
-								mGLFWMouseButtonCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3]);
-							}
-							break;
-						case CallbackBridge.EVENT_TYPE_SCROLL:
-							if (mGLFWScrollCallback != null) {
-								mGLFWScrollCallback.invoke(ptr, dataArr[1], dataArr[2]);
-							}
-							break;
-						case CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE:
-						case CallbackBridge.EVENT_TYPE_WINDOW_SIZE:
-							try {
-								internalChangeMonitorSize(dataArr[1], dataArr[2]);
-								glfwSetWindowSize(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-								if (dataArr[0] == CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE && mGLFWFramebufferSizeCallback != null) {
-									mGLFWFramebufferSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-								} else if (dataArr[0] == CallbackBridge.EVENT_TYPE_WINDOW_SIZE && mGLFWWindowSizeCallback != null) {
-									mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-								}
-							} catch (Throwable th) {
-								// Some Minecraft versions cause a NPE when setting size, so we will have to ignore them to make game alive
-								th.printStackTrace();
-							}
-							break;
-						default:
-							System.err.println("GLFWEvent: unknown callback type " + dataArr[0]);
-							break;
-					}
-				}catch (Throwable throwable){
-            		throwable.printStackTrace();
-				}
+                try {
+                    switch (dataArr[0]) {
+                        case CallbackBridge.EVENT_TYPE_CHAR:
+                            if (mGLFWCharCallback != null) {
+                                mGLFWCharCallback.invoke(ptr, dataArr[1]);
+                            }
+                            break;
+                        case CallbackBridge.EVENT_TYPE_CHAR_MODS:
+                            if (mGLFWCharModsCallback != null) {
+                                mGLFWCharModsCallback.invoke(ptr, dataArr[1], dataArr[2]);
+                            }
+                            break;
+                        case CallbackBridge.EVENT_TYPE_CURSOR_ENTER:
+                            if (mGLFWCursorEnterCallback != null) {
+                                mGLFWCursorEnterCallback.invoke(ptr, dataArr[1] == 1);
+                            }
+                            break;
+                        case CallbackBridge.EVENT_TYPE_KEY:
+                            if (mGLFWKeyCallback != null) {
+                                keyDownBuffer[Math.max(0, dataArr[1]-31)]=(byte)(int)dataArr[3];
+                                mGLFWKeyCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3], dataArr[4]);
+                            }
+                            break;
+                        case CallbackBridge.EVENT_TYPE_MOUSE_BUTTON:
+                            if (mGLFWMouseButtonCallback != null) {
+                                mGLFWMouseButtonCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3]);
+                            }
+                            break;
+                        case CallbackBridge.EVENT_TYPE_SCROLL:
+                            if (mGLFWScrollCallback != null) {
+                                mGLFWScrollCallback.invoke(ptr, dataArr[1], dataArr[2]);
+                            }
+                            break;
+                        case CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE:
+                        case CallbackBridge.EVENT_TYPE_WINDOW_SIZE:
+                            try {
+                                internalChangeMonitorSize(dataArr[1], dataArr[2]);
+                                glfwSetWindowSize(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                                if (dataArr[0] == CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE && mGLFWFramebufferSizeCallback != null) {
+                                    mGLFWFramebufferSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                                } else if (dataArr[0] == CallbackBridge.EVENT_TYPE_WINDOW_SIZE && mGLFWWindowSizeCallback != null) {
+                                    mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                                }
+                            } catch (Throwable th) {
+                                // Some Minecraft versions cause a NPE when setting size, so we will have to ignore them to make game alive
+                                th.printStackTrace();
+                            }
+                            break;
+                        default:
+                            System.err.println("GLFWEvent: unknown callback type " + dataArr[0]);
+                            break;
+                    }
+                }catch (Throwable throwable){
+                    throwable.printStackTrace();
+                }
 
             }
         }
-        
+
         if ((mGLFWCursorX != mGLFWCursorLastX || mGLFWCursorY != mGLFWCursorLastY) && mGLFWCursorPosCallback != null) {
             mGLFWCursorLastX = mGLFWCursorX;
             mGLFWCursorLastY = mGLFWCursorY;
             for (Long ptr : mGLFWWindowMap.keySet()) {
                 if (!mGLFWIsGrabbing && mGLFWWindowSizeCallback != null) {
-                	try {
-						mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-					}catch (Throwable throwable){
-                		throwable.printStackTrace();
-					}
+                    try {
+                        mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
+                    }catch (Throwable throwable){
+                        throwable.printStackTrace();
+                    }
 
                 }
                 mGLFWCursorPosCallback.invoke(ptr, mGLFWCursorX, mGLFWCursorY);
@@ -1177,7 +1177,7 @@ public class GLFW
 
     public static void glfwPostEmptyEvent() {}
 
-	public static int glfwGetInputMode(@NativeType("GLFWwindow *") long window, int mode) {
+    public static int glfwGetInputMode(@NativeType("GLFWwindow *") long window, int mode) {
         return internalGetWindow(window).inputModes.get(mode);
     }
 
@@ -1190,9 +1190,9 @@ public class GLFW
                 default: CallbackBridge.sendGrabbing(false, (int) mGLFWCursorX, (int) mGLFWCursorY);
             }
         }
-        
-		internalGetWindow(window).inputModes.put(mode, value);
-	}
+
+        internalGetWindow(window).inputModes.put(mode, value);
+    }
     public static String glfwGetKeyName(int key, int scancode) {
         // TODO keyname list from GLFW
         return mGLFWKeyCodes.get(key);
@@ -1215,18 +1215,18 @@ public class GLFW
             checkSafe(xpos, 1);
             checkSafe(ypos, 1);
         }
-        
-		xpos.put(mGLFWCursorX);
-		ypos.put(mGLFWCursorY);
-	}
-	
+
+        xpos.put(mGLFWCursorX);
+        ypos.put(mGLFWCursorY);
+    }
+
     public static void glfwSetCursorPos(@NativeType("GLFWwindow *") long window, double xpos, double ypos) {
         mGLFWCursorX = mGLFWCursorLastX = xpos;
         mGLFWCursorY = mGLFWCursorLastY = ypos;
-        
+
         CallbackBridge.sendGrabbing(mGLFWIsGrabbing, (int) xpos, (int) ypos);
     }
-	
+
     public static long glfwCreateCursor(@NativeType("const GLFWimage *") GLFWImage image, int xhot, int yhot) {
         return 4L;
     }
@@ -1235,12 +1235,12 @@ public class GLFW
     }
     public static void glfwDestroyCursor(@NativeType("GLFWcursor *") long cursor) {}
     public static void glfwSetCursor(@NativeType("GLFWwindow *") long window, @NativeType("GLFWcursor *") long cursor) {}
-    
+
     public static boolean glfwRawMouseMotionSupported() {
         // Should be not supported?
         return false;
     }
-    
+
     public static void glfwSetClipboardString(@NativeType("GLFWwindow *") long window, @NativeType("char const *") ByteBuffer string) {
         glfwSetClipboardString(window, memUTF8Safe(string));
     }
@@ -1248,7 +1248,7 @@ public class GLFW
     public static void glfwSetClipboardString(@NativeType("GLFWwindow *") long window, @NativeType("char const *") CharSequence string) {
         CallbackBridge.nativeClipboard(CallbackBridge.CLIPBOARD_COPY, string.toString());
     }
-    
+
     public static String glfwGetClipboardString(@NativeType("GLFWwindow *") long window) {
         return CallbackBridge.nativeClipboard(CallbackBridge.CLIPBOARD_PASTE, null);
     }
@@ -1257,51 +1257,51 @@ public class GLFW
     }
 
     public static boolean glfwJoystickPresent(int jid) {
-		if(jid == 0) {
-			return true;
-		}else return false;
-	}
+        if(jid == 0) {
+            return true;
+        }else return false;
+    }
     public static String glfwGetJoystickName(int jid) {
-    	if(jid == 0) {
-			return "AIC event bus controller";
-		}else return null;
-	}
-	public static FloatBuffer glfwGetJoystickAxes(int jid) {
-    	if(jid == 0) {
-    		return joystickData;
-		}else return null;
-	}
-	public static ByteBuffer glfwGetJoystickButtons(int jid) {
-		if(jid == 0) {
-			return buttonData;
-		}else return null;
-	}
-	public static ByteBuffer glfwGetjoystickHats(int jid) {
+        if(jid == 0) {
+            return "AIC event bus controller";
+        }else return null;
+    }
+    public static FloatBuffer glfwGetJoystickAxes(int jid) {
+        if(jid == 0) {
+            return joystickData;
+        }else return null;
+    }
+    public static ByteBuffer glfwGetJoystickButtons(int jid) {
+        if(jid == 0) {
+            return buttonData;
+        }else return null;
+    }
+    public static ByteBuffer glfwGetjoystickHats(int jid) {
         return null;
-	}
-	public static boolean glfwJoystickIsGamepad(int jid) {
-    	if(jid == 0) return true;
-    	else return false;
-	}
-	public static String glfwGetJoystickGUID(int jid) {
-    	if(jid == 0) return "aio0";
-    	else return null;
-	}
-	public static long glfwGetJoystickUserPointer(int jid) {
-    	return 0;
-	}
-	public static void glfwSetJoystickUserPointer(int jid, long pointer) {
+    }
+    public static boolean glfwJoystickIsGamepad(int jid) {
+        if(jid == 0) return true;
+        else return false;
+    }
+    public static String glfwGetJoystickGUID(int jid) {
+        if(jid == 0) return "aio0";
+        else return null;
+    }
+    public static long glfwGetJoystickUserPointer(int jid) {
+        return 0;
+    }
+    public static void glfwSetJoystickUserPointer(int jid, long pointer) {
 
-	}
-	public static boolean glfwUpdateGamepadMappings(ByteBuffer string) {
-return false;
-	}
-	public static String glfwGetGamepadName(int jid) {
-    	return null;
-	}
-	public static boolean glfwGetGamepadState(int jid, GLFWGamepadState state) {
-    	return false;
-	}
+    }
+    public static boolean glfwUpdateGamepadMappings(ByteBuffer string) {
+        return false;
+    }
+    public static String glfwGetGamepadName(int jid) {
+        return null;
+    }
+    public static boolean glfwGetGamepadState(int jid, GLFWGamepadState state) {
+        return false;
+    }
 
     /** Array version of: {@link #glfwGetVersion GetVersion} */
     public static void glfwGetVersion(@Nullable @NativeType("int *") int[] major, @Nullable @NativeType("int *") int[] minor, @Nullable @NativeType("int *") int[] rev) {
