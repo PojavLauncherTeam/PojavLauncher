@@ -282,8 +282,8 @@ public class ControlData {
         keyValueMap.put("bottom", "DUMMY_BOTTOM");
         keyValueMap.put("width", "DUMMY_WIDTH");
         keyValueMap.put("height", "DUMMY_HEIGHT");
-        keyValueMap.put("screen_width", Integer.toString(CallbackBridge.physicalWidth));
-        keyValueMap.put("screen_height", Integer.toString(CallbackBridge.physicalHeight));
+        keyValueMap.put("screen_width", "DUMMY_DATA" );
+        keyValueMap.put("screen_height", "DUMMY_DATA");
         keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
         keyValueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
 
@@ -306,6 +306,8 @@ public class ControlData {
         valueMap.put("bottom", Float.toString(CallbackBridge.physicalHeight - getHeight()));
         valueMap.put("width", Float.toString(getWidth()));
         valueMap.put("height", Float.toString(getHeight()));
+        valueMap.put("screen_width",Integer.toString(CallbackBridge.physicalWidth));
+        valueMap.put("screen_height",Integer.toString(CallbackBridge.physicalHeight));
 
         return valueMap;
     }

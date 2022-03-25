@@ -398,8 +398,8 @@ public final class Tools {
     public static void updateWindowSize(Activity activity) {
         currentDisplayMetrics = getDisplayMetrics(activity);
 
-        CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
-        CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
+        CallbackBridge.physicalWidth = currentDisplayMetrics.widthPixels;
+        CallbackBridge.physicalHeight = currentDisplayMetrics.heightPixels;
     }
 
     public static float dpToPx(float dp) {
