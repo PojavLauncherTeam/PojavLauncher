@@ -4,7 +4,7 @@ title: "[BUG] <Short description>"
 labels: [bug]
 body:
 - type: textarea
-  id: version
+  id: mcaccverify
   attributes:
     label: Minecraft Account Confirmation
     description: >-
