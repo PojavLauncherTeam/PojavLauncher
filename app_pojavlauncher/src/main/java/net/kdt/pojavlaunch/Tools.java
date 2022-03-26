@@ -663,6 +663,9 @@ public final class Tools {
         File fl = new File(dir);
 
         File[] files = fl.listFiles(File::isFile);
+        if (files == null) {
+            return null;
+        }
 
         long lastMod = Long.MIN_VALUE;
         File choice = null;
