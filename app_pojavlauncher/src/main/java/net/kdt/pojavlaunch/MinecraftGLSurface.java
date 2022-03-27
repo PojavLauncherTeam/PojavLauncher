@@ -155,9 +155,7 @@ public class MinecraftGLSurface extends View {
                 }
 
                 @Override
-                public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-                    JREUtils.releaseBridgeWindow();
-                }
+                public void surfaceDestroyed(@NonNull SurfaceHolder holder) {}
             });
 
             ((ViewGroup)getParent()).addView(surfaceView);
@@ -183,7 +181,6 @@ public class MinecraftGLSurface extends View {
 
                 @Override
                 public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface) {
-                    JREUtils.releaseBridgeWindow();
                     return true;
                 }
 
@@ -521,7 +518,7 @@ public class MinecraftGLSurface extends View {
                 return true;
             }
         }
-        System.out.println(event);
+        //System.out.println(event);
 
         if(Gamepad.isGamepadEvent(event)){
 
