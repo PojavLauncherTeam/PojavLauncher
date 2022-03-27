@@ -266,5 +266,6 @@
     <string name="gles_version_hack_title">Wymuś OpenGL 1</string>
     <string name="gles_version_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
     <string name="arc_capes_title">Peleryny Arc</string>
+    <string name="arc_capes_desc">Włącza pelerynki Arc. Po więcej informacji odwiedź https://arccapes.com. Wymaga OptiFine.</string>
     <string name="migrated_profile_str">%s konfiguracja wersji</string>
 </resources>
