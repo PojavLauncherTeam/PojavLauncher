@@ -249,10 +249,15 @@
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
     <string name="gles_hack_always">Chia tất cả các kết cấu cho 2</string>
     <string name="gles_hack_sometimes">Chia những kết cấu lớn cho 2 hoặc 4</string>
+    <string name="unnamed">Chưa đặt tên</string>
+    <string name="profiles_latest_snapshot">Bản thử nghiệm mới nhất</string>
+    <string name="profiles_latest_release">Phiên bản mới nhất</string>
     <string name="profiles_profile_name">Tên</string>
+    <string name="profiles_profile_version">Phiên bản</string>
     <string name="option_enable_profiles">Hồ sơ</string>
     <string name="vbo_hack_title">Tắt VBO</string>
     <string name="vbo_hack_description">Có thể giúp tương thích với một số phiên bản cũ</string>
+    <string name="global_delete">Xóa</string>
     <string name="pedit_renderer">Trình kết xuất</string>
     <string name="gles_version_hack_title">Bắt buộc OpenGL 1</string>
     <string name="gles_version_hack_description">Có thể giúp tương thích với một số phiên bản cũ</string>
