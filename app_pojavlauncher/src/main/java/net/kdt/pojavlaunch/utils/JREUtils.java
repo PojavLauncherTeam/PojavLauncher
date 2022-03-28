@@ -13,7 +13,7 @@ import android.os.Build;
 import android.system.*;
 import android.util.*;
 import android.widget.Toast;
-
+import androidx.collection.ArrayMap;
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
@@ -35,17 +35,17 @@ public class JREUtils {
     private static String sNativeLibDir;
 
     public static String findInLdLibPath(String libName) {
-        if(Os.getenv("LD_LIBRARY_PATH")==null) {
+        if(NativeOs.getenv("LD_LIBRARY_PATH")==null) {
             try {
                 if (LD_LIBRARY_PATH != null) {
-                    Os.setenv("LD_LIBRARY_PATH", LD_LIBRARY_PATH, true);
+                    NativeOs.setenv("LD_LIBRARY_PATH", LD_LIBRARY_PATH, true);
                 }
-            }catch (ErrnoException e) {
+            }catch (Exception e) {
                 e.printStackTrace();
             }
             return libName;
         }
-        for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
+        for (String libPath : NativeOs.getenv("LD_LIBRARY_PATH").split(":")) {
             File f = new File(libPath, libName);
             if (f.exists() && f.isFile()) {
                 return f.getAbsolutePath();
@@ -221,7 +221,7 @@ public class JREUtils {
         envMap.put("VTEST_SOCKET_NAME", activity.getCacheDir().getAbsolutePath() + "/.virgl_test");
 
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
-        envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
+        envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + NativeOs.getenv("PATH"));
         
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");
@@ -260,7 +260,7 @@ public class JREUtils {
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             Logger.getInstance().appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
-            Os.setenv(env.getKey(), env.getValue(), true);
+            NativeOs.setenv(env.getKey(), env.getValue(), true);
         }
 
         File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
@@ -553,7 +553,7 @@ public class JREUtils {
     static {
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");
-        dlopen("libxhook.so");
+        System.loadLibrary("xhook");
         System.loadLibrary("istdio");
     }
 }

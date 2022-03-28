@@ -25,6 +25,11 @@ LOCAL_LDLIBS     := -llog
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := nativeos
+LOCAL_SRC_FILES := nativeos.c
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
 # Link GLESv2 for test
 LOCAL_LDLIBS := -ldl -llog -landroid
 # -lGLESv2

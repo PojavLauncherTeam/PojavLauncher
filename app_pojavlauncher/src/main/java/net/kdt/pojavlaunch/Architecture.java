@@ -19,7 +19,11 @@ public class Architecture {
 	 * @return If the device supports 64 bits architecture
 	 */
 	public static boolean is64BitsDevice(){
-		return Build.SUPPORTED_64_BIT_ABIS.length != 0;
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				return Build.SUPPORTED_64_BIT_ABIS.length != 0;
+			}else{
+				return false;
+			}
 	}
 
 	/**
@@ -52,7 +56,7 @@ public class Architecture {
 	public static boolean isx86Device(){
 		//We check the whole range of supported ABIs,
 		//Since asus zenfones can place arm before their native instruction set.
-		String[] ABI = is64BitsDevice() ? Build.SUPPORTED_64_BIT_ABIS : Build.SUPPORTED_32_BIT_ABIS;
+		String[] ABI = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? is64BitsDevice() ? Build.SUPPORTED_64_BIT_ABIS : Build.SUPPORTED_32_BIT_ABIS:new String[] {Build.CPU_ABI, Build.CPU_ABI2};
 		int comparedArch = is64BitsDevice() ? ARCH_X86_64 : ARCH_X86;
 		for (String str : ABI) {
 			if (archAsInt(str) == comparedArch) return true;

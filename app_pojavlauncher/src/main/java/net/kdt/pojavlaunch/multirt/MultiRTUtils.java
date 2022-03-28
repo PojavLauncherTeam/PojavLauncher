@@ -1,9 +1,9 @@
 package net.kdt.pojavlaunch.multirt;
 
 import android.content.Context;
-import android.system.Os;
 import android.util.Log;
 
+import net.kdt.pojavlaunch.NativeOs;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.utils.JREUtils;
@@ -242,7 +242,7 @@ public class MultiRTUtils {
                 try {
                     // android.system.Os
                     // Libcore one support all Android versions
-                    Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    NativeOs.symlink(tarEntry.getName(), tarEntry.getLinkName());
                 } catch (Throwable e) {
                     Log.e("MultiRT", e.toString());
                 }

@@ -18,6 +18,7 @@ import java.nio.charset.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.zip.*;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
@@ -207,7 +208,7 @@ public final class Tools {
         File gameDir = new File(strGameDir);
         gameDir.mkdirs();
 
-        Map<String, String> varArgMap = new ArrayMap<>();
+        Map<String, String> varArgMap = new HashMap<>();
         varArgMap.put("auth_access_token", profile.accessToken);
         varArgMap.put("auth_player_name", username);
         varArgMap.put("auth_uuid", profile.profileId);
@@ -360,8 +361,10 @@ public final class Tools {
         }else{
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 activity.getDisplay().getRealMetrics(displayMetrics);
-            } else {
+            } else if(SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                  activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+            }else {
+                activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
@@ -779,19 +782,54 @@ public final class Tools {
             Tools.updateWindowSize(ctx);
         }
     }
-
     public static int getTotalDeviceMemory(Context ctx){
-        ActivityManager actManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-        actManager.getMemoryInfo(memInfo);
-        return (int) (memInfo.totalMem / 1048576L);
+        if(SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ActivityManager actManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+            actManager.getMemoryInfo(memInfo);
+            return (int) (memInfo.totalMem / 1048576L);
+        }else{
+            try {
+                RandomAccessFile memInfo = new RandomAccessFile("/proc/meminfo", "r");
+                Pattern numberSearcher = Pattern.compile("(\\d+)");
+                String line = "";
+                while (!line.startsWith("MemTotal:")) {
+                    line = memInfo.readLine();
+                }
+                int mem = (int) (Long.parseLong(numberSearcher.matcher(line).group(1)) / 1048576L);
+                if (mem < 1) {
+                    return 1;
+                } else return mem;
+            }catch (Exception e) {
+                e.printStackTrace();
+                return 1;
+            }
+        }
     }
 
     public static int getFreeDeviceMemory(Context ctx){
-        ActivityManager actManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-        actManager.getMemoryInfo(memInfo);
-        return (int) (memInfo.availMem / 1048576L);
+        if(SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ActivityManager actManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+            actManager.getMemoryInfo(memInfo);
+            return (int) (memInfo.availMem / 1048576L);
+        }else{
+        try {
+            RandomAccessFile memInfo = new RandomAccessFile("/proc/meminfo", "r");
+            Pattern numberSearcher = Pattern.compile("(\\d+)");
+            String line = "";
+            while (!line.startsWith("MemFree:")) {
+                line = memInfo.readLine();
+            }
+            int mem = (int) (Long.parseLong(numberSearcher.matcher(line).group(1)) / 1048576L);
+            if (mem < 1) {
+                return 1;
+            } else return mem;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
     }
 
     public static int getDisplayFriendlyRes(int displaySideRes, float scaling){

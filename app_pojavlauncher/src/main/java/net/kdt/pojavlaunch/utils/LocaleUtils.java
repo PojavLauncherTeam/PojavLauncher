@@ -2,6 +2,8 @@ package net.kdt.pojavlaunch.utils;
 
 import android.content.*;
 import android.content.res.*;
+import android.os.Build;
+
 import androidx.preference.*;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
@@ -30,8 +32,13 @@ public class LocaleUtils {
 
         Resources res = context.getResources();
         Configuration config = new Configuration(res.getConfiguration());
-        config.setLocale(locale);
-        context = context.createConfigurationContext(config);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            config.setLocale(locale);
+            context = context.createConfigurationContext(config);
+        }else {
+            config.locale = locale;
+            res.updateConfiguration(config,res.getDisplayMetrics());
+        }
         return context;
     }
 }
