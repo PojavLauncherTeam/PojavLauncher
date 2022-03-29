@@ -71,8 +71,27 @@ public class JREUtils {
     }
 
     public static void initJavaRuntime() {
-        dlopen(findInLdLibPath("libjli.so"));
-        if(!dlopen("libjvm.so")){
+        ElfSequencer sequencer = new ElfSequencer(LD_LIBRARY_PATH+":"+jvmLibraryPath);
+        try {
+            sequencer.loadLib("libjli.so");
+            sequencer.loadLib("libjvm.so");
+            sequencer.loadLib("libverify.so");
+            sequencer.loadLib("libjava.so");
+            // sequencer.loadLib("libjsig.so");
+            sequencer.loadLib("libnet.so");
+            sequencer.loadLib("libnio.so");
+            sequencer.loadLib("libawt.so");
+            sequencer.loadLib("libawt_headless.so");
+            sequencer.loadLib("libfreetype.so");
+            sequencer.loadLib("libfontmanager.so");
+            for(File library : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
+                sequencer.loadLib(library.getName());
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        //dlopen(findInLdLibPath("libjli.so"));
+        /*if(!dlopen("libjvm.so")){
             Log.w("DynamicLoader","Failed to load with no path, trying with full path");
             dlopen(jvmLibraryPath+"/libjvm.so");
         }
@@ -87,10 +106,9 @@ public class JREUtils {
         dlopen(findInLdLibPath("libfontmanager.so"));
         for(File f : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
             dlopen(f.getAbsolutePath());
-        }
+        }*/
         dlopen(sNativeLibDir + "/libopenal.so");
     }
-
     public static Map<String, String> readJREReleaseProperties() throws IOException {
         return readJREReleaseProperties(Tools.DIR_HOME_JRE);
     }
