@@ -81,6 +81,7 @@ public class UnifiedSelector {
             fileListView.setFileSelectedListener(new FileSelectedListener() {
                 @Override
                 public void onFileSelected(File file, String path) {
+                    mSelectorDialog.dismiss();
                     try {
                         Log.i("UnifiedSelector","fName[REG_NAT]: "+file.getName());
                         FileInputStream fis = new FileInputStream(file);

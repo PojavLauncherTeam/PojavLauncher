@@ -26,16 +26,16 @@ public class MultiRTConfigDialog {
     public static final int MULTIRT_PICK_RUNTIME_STARTUP = 2049;
     public AlertDialog mDialog;
     public RecyclerView mDialogView;
-
+    public UnifiedSelector runtimeSelector;
     public void prepare(BaseLauncherActivity activity) {
         mDialogView = new RecyclerView(activity);
         mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         mDialogView.setAdapter(new RTRecyclerViewAdapter(this));
-
+        activity.mRuntimeSelector.setSelectionCallback(new RuntimeInstallationCallback());
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.multirt_config_title);
         builder.setView(mDialogView);
-        builder.setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,new RuntimeInstallationCallback()));
+        builder.setPositiveButton(R.string.multirt_config_add, (dialog, which) -> activity.mRuntimeSelector.openSelector("xz"));
         builder.setNegativeButton(R.string.mcn_exit_call, (dialog, which) -> dialog.cancel());
         mDialog = builder.create();
     }
@@ -76,11 +76,5 @@ public class MultiRTConfigDialog {
         public void onError(Throwable th) {
             Tools.showError(mDialog.getContext(),th);
         }
-    }
-
-    public static void openRuntimeSelector(AppCompatActivity activity, UnifiedSelectorCallback callback) {
-        UnifiedSelector selector = new UnifiedSelector(activity);
-        selector.setSelectionCallback(callback);
-        selector.openSelector("xz");
     }
 }

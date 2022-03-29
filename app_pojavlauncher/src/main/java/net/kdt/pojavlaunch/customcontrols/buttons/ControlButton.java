@@ -11,6 +11,7 @@ import android.widget.*;
 
 
 import androidx.core.math.MathUtils;
+import androidx.core.view.ViewCompat;
 
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
@@ -103,8 +104,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
         gd.setColor(mProperties.bgColor);
         gd.setStroke(computeStrokeWidth(mProperties.strokeWidth), mProperties.strokeColor);
         gd.setCornerRadius(computeCornerRadius(mProperties.cornerRadius));
-
-        setBackground(gd);
+        ViewCompat.setBackground(this,gd);
     }
 
     public void setModifiable(boolean isModifiable) {
@@ -255,7 +255,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mIsToggled || (!mProperties.isToggle && isActivated()))
-            canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mProperties.cornerRadius, mProperties.cornerRadius, mRectPaint);
+            canvas.drawRoundRect(new RectF(0, 0, getWidth(), getHeight()), mProperties.cornerRadius, mProperties.cornerRadius, mRectPaint);
     }
 
     @Override

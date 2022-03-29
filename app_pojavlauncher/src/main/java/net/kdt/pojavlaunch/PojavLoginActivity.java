@@ -49,6 +49,7 @@ import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.selector.UnifiedSelector;
 import net.kdt.pojavlaunch.selector.UnifiedSelectorCallback;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
@@ -338,36 +339,40 @@ public class PojavLoginActivity extends BaseActivity {
             unpackComponent(am, "caciocavallo");
             unpackComponent(am, "lwjgl3");
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
-               MultiRTConfigDialog.openRuntimeSelector(this, new UnifiedSelectorCallback() {
-                   @Override
-                   public void onSelected(InputStream stream, String name) {
-                       Thread t = new Thread(() -> {
-                           try {
-                               MultiRTUtils.installRuntimeNamed(stream, name,
-                                       (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
-                                               () -> {
-                                                   if (startupTextView != null)
-                                                       startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
-                                               }));
-                               synchronized (mLockSelectJRE) {
-                                   mLockSelectJRE.notifyAll();
-                               }
-                           } catch (IOException e) {
-                               Tools.showError(PojavLoginActivity.this
-                                       , e);
-                           }
-                       });
-                       t.start();
-                   }
-
-                   @Override
-                   public void onError(Throwable th) {
-                        Tools.showError(PojavLoginActivity.this, th);
-                        synchronized (mLockSelectJRE) {
-                           mLockSelectJRE.notifyAll();
+                runOnUiThread(()->{
+                    UnifiedSelector runtimeSelector = new UnifiedSelector(this);
+                    runtimeSelector.setSelectionCallback(new UnifiedSelectorCallback() {
+                        @Override
+                        public void onSelected(InputStream stream, String name) {
+                            Thread t = new Thread(() -> {
+                                try {
+                                    MultiRTUtils.installRuntimeNamed(stream, name,
+                                            (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
+                                                    () -> {
+                                                        if (startupTextView != null)
+                                                            startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
+                                                    }));
+                                    synchronized (mLockSelectJRE) {
+                                        mLockSelectJRE.notifyAll();
+                                    }
+                                } catch (IOException e) {
+                                    Tools.showError(PojavLoginActivity.this
+                                            , e);
+                                }
+                            });
+                            t.start();
                         }
-                   }
-               });
+
+                        @Override
+                        public void onError(Throwable th) {
+                            Tools.showError(PojavLoginActivity.this, th);
+                            synchronized (mLockSelectJRE) {
+                                mLockSelectJRE.notifyAll();
+                            }
+                        }
+                    });
+                    runtimeSelector.openSelector("xz");
+                });
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();
                 }

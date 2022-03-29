@@ -7,7 +7,6 @@ import android.content.*;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.*;
-import android.webkit.MimeTypeMap;
 import android.widget.*;
 
 import androidx.annotation.Nullable;
@@ -42,7 +41,8 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public JMinecraftVersionList mVersionList;
 	public MinecraftDownloaderTask mTask;
 	public MinecraftAccount mProfile;
-	public UnifiedSelector mSelector;
+	public UnifiedSelector mJarSelector;
+	public UnifiedSelector mRuntimeSelector;
 	//public String[] mAvailableVersions;
     
 	public boolean mIsAssetsProcessing = false;
@@ -51,8 +51,9 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSelector = new UnifiedSelector(this);
-        mSelector.setSelectionCallback(new UnifiedSelectorCallback() {
+        mRuntimeSelector = new UnifiedSelector(this);
+        mJarSelector = new UnifiedSelector(this);
+        mJarSelector.setSelectionCallback(new UnifiedSelectorCallback() {
             @Override
             public void onSelected(InputStream stream, String name) {
                 final ProgressDialog barrier = new ProgressDialog(BaseLauncherActivity.this);
@@ -131,7 +132,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             dialog.setView(edit);
             dialog.show();
         } else {
-            mSelector.openSelector("jar");
+            mJarSelector.openSelector("jar");
         }
 
     }

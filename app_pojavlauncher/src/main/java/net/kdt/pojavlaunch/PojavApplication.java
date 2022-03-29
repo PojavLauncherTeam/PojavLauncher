@@ -1,25 +1,55 @@
 package net.kdt.pojavlaunch;
 
-import android.app.*;
-import android.content.*;
-import android.content.pm.*;
-import android.content.res.*;
-import android.os.*;
-import androidx.core.app.*;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.os.Build;
+import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 import androidx.multidex.MultiDexApplication;
 
-import android.util.*;
-import java.io.*;
-import java.text.*;
-import java.util.*;
+import net.kdt.pojavlaunch.utils.LocaleUtils;
 
-import net.kdt.pojavlaunch.utils.*;
+import java.io.File;
+import java.io.PrintStream;
+import java.text.DateFormat;
+import java.util.Date;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 public class PojavApplication extends MultiDexApplication {
 	public static String CRASH_REPORT_TAG = "PojavCrashReport";
 	
 	@Override
 	public void onCreate() {
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+			try {
+				SSLContext ctx = SSLContext.getInstance("TLSv1");
+				ctx.init(null,new TrustManager[] { new X509TrustManager() {
+					public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+						return new java.security.cert.X509Certificate[]{};
+					}
+
+					public void checkClientTrusted(X509Certificate[] chain,
+												   String authType) throws CertificateException {
+					}
+
+					public void checkServerTrusted(X509Certificate[] chain,
+												   String authType) throws CertificateException {
+					}
+				} },null);
+				HttpsURLConnection.setDefaultSSLSocketFactory(ctx.getSocketFactory());
+			}catch (Exception e) {
+				Log.i("Unsecure","Can't ignore SSL",e);
+			}
+		}
 		Thread.setDefaultUncaughtExceptionHandler((thread, th) -> {
 			th.printStackTrace();
 			boolean storagePermAllowed = Build.VERSION.SDK_INT < 23 ||
