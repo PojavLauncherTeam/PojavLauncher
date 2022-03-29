@@ -49,6 +49,7 @@ import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.selector.UnifiedSelectorCallback;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
@@ -85,6 +86,7 @@ public class PojavLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false;
+
         if(savedInstanceState != null) {
             isStarting = savedInstanceState.getBoolean("isStarting");
             isSkipInit = savedInstanceState.getBoolean("isSkipInit");
@@ -169,7 +171,9 @@ public class PojavLoginActivity extends BaseActivity {
     }
     private void uiInit() {
         setContentView(R.layout.activity_pojav_login);
-
+        findViewById(R.id.mineButton).setOnClickListener(this::loginMC);
+        findViewById(R.id.mineButton2).setOnClickListener(this::loginSavedAcc);
+        findViewById(R.id.mineButton3).setOnClickListener(this::loginMicrosoft);
         Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
 
         String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
@@ -334,7 +338,36 @@ public class PojavLoginActivity extends BaseActivity {
             unpackComponent(am, "caciocavallo");
             unpackComponent(am, "lwjgl3");
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
-               MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
+               MultiRTConfigDialog.openRuntimeSelector(this, new UnifiedSelectorCallback() {
+                   @Override
+                   public void onSelected(InputStream stream, String name) {
+                       Thread t = new Thread(() -> {
+                           try {
+                               MultiRTUtils.installRuntimeNamed(stream, name,
+                                       (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
+                                               () -> {
+                                                   if (startupTextView != null)
+                                                       startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
+                                               }));
+                               synchronized (mLockSelectJRE) {
+                                   mLockSelectJRE.notifyAll();
+                               }
+                           } catch (IOException e) {
+                               Tools.showError(PojavLoginActivity.this
+                                       , e);
+                           }
+                       });
+                       t.start();
+                   }
+
+                   @Override
+                   public void onError(Throwable th) {
+                        Tools.showError(PojavLoginActivity.this, th);
+                        synchronized (mLockSelectJRE) {
+                           mLockSelectJRE.notifyAll();
+                        }
+                   }
+               });
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();
                 }
@@ -365,28 +398,7 @@ public class PojavLoginActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
-            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP) {
-                if (data != null) {
-                    final Uri uri = data.getData();
-                    Thread t = new Thread(() -> {
-                        try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(this, uri),
-                                    (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
-                                            () -> {
-                                                if (startupTextView != null)
-                                                    startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
-                                            }));
-                            synchronized (mLockSelectJRE) {
-                                mLockSelectJRE.notifyAll();
-                            }
-                        } catch (IOException e) {
-                            Tools.showError(PojavLoginActivity.this
-                                    , e);
-                        }
-                    });
-                    t.start();
-                }
-            }else if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
+            if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
                 //Log.i("MicroLoginWrap","Got microsoft login result:" + data);
                 performMicroLogin(data);
             }

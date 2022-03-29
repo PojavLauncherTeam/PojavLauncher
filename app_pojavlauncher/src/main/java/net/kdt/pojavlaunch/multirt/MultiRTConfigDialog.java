@@ -1,26 +1,25 @@
 package net.kdt.pojavlaunch.multirt;
 
-import android.app.Activity;
 import androidx.appcompat.app.AlertDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.webkit.MimeTypeMap;
 
-import androidx.core.content.FileProvider;
+import android.app.ProgressDialog;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kdt.pickafile.FileListView;
-import com.kdt.pickafile.FileSelectedListener;
-
 import net.kdt.pojavlaunch.BaseLauncherActivity;
-import net.kdt.pojavlaunch.BuildConfig;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.selector.UnifiedSelector;
+import net.kdt.pojavlaunch.selector.UnifiedSelectorCallback;
 
-import java.io.File;
-import java.lang.reflect.Method;
+import java.io.IOException;
+import java.io.InputStream;
+
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 public class MultiRTConfigDialog {
     public static final int MULTIRT_PICK_RUNTIME = 2048;
@@ -36,7 +35,7 @@ public class MultiRTConfigDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.multirt_config_title);
         builder.setView(mDialogView);
-        builder.setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,MULTIRT_PICK_RUNTIME));
+        builder.setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,new RuntimeInstallationCallback()));
         builder.setNegativeButton(R.string.mcn_exit_call, (dialog, which) -> dialog.cancel());
         mDialog = builder.create();
     }
@@ -46,48 +45,42 @@ public class MultiRTConfigDialog {
         if(adapter != null) mDialogView.getAdapter().notifyDataSetChanged();
     }
 
-    public static void openRuntimeSelector(Activity activity, int code) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("xz");
-            if (mimeType == null) mimeType = "*/*";
-            intent.setType(mimeType);
-            activity.startActivityForResult(intent, code);
-        }else{
-            activity.runOnUiThread(()->{
-                AlertDialog.Builder bldr = new AlertDialog.Builder(activity);
-                bldr.setCancelable(false);
-                final AlertDialog dialog = bldr.create();
-                FileListView view = new FileListView(dialog,"tar.xz");
-
-                view.setFileSelectedListener(new FileSelectedListener() {
-
-                    @Override
-                    public void onFileSelected(File file, String path) {
-                        dialog.dismiss();
-                        try {
-                            Class<Activity> clazz = Activity.class;
-                            Method m = clazz.getDeclaredMethod("onActivityResult", int.class, int.class, Intent.class);
-                            m.setAccessible(true);
-                            Intent intent = new Intent();
-                            intent.setData(
-                                    Uri.fromFile(file)
-                            );
-                            m.invoke(activity,
-                                    code,
-                                    Activity.RESULT_OK,
-                                    intent
-                            );
-                        }catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+    class RuntimeInstallationCallback implements UnifiedSelectorCallback {
+        @Override
+        public void onSelected(InputStream stream, String name) {
+            Context context = mDialog.getContext();
+            ProgressDialog barrier = new ProgressDialog(context);
+            barrier.setMessage(context.getString(R.string.global_waiting));
+            barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            barrier.setCancelable(false);
+            Handler uiThreadHandler = new Handler(Looper.getMainLooper());
+            Thread t = new Thread(() -> {
+                try {
+                    MultiRTUtils.installRuntimeNamed(stream, name,
+                            (resid, stuff) ->uiThreadHandler.post(
+                                    () -> barrier.setMessage(context.getString(resid, stuff))));
+                    MultiRTUtils.postPrepare(context, name);
+                } catch (IOException e) {
+                    Tools.showError(context, e);
+                }
+            uiThreadHandler.post(() -> {
+                    barrier.dismiss();
+                    refresh();
+                    mDialog.show();
                 });
-                view.listFileAt(Environment.getExternalStorageDirectory().getAbsolutePath());
-                dialog.setView(view);
-                dialog.show();
             });
+            t.start();
         }
+
+        @Override
+        public void onError(Throwable th) {
+            Tools.showError(mDialog.getContext(),th);
+        }
+    }
+
+    public static void openRuntimeSelector(AppCompatActivity activity, UnifiedSelectorCallback callback) {
+        UnifiedSelector selector = new UnifiedSelector(activity);
+        selector.setSelectionCallback(callback);
+        selector.openSelector("xz");
     }
 }

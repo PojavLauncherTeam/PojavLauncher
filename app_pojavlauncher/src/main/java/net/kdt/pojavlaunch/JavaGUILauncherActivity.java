@@ -40,7 +40,11 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         setContentView(R.layout.activity_java_gui_launcher);
 
         Logger.getInstance().reset();
-
+        findViewById(R.id.installmod_btn2).setOnClickListener(this::forceClose);
+        findViewById(R.id.installmod_btn3).setOnClickListener(this::openLogOutput);
+        findViewById(R.id.installmod_btn4).setOnClickListener(this::toggleVirtualMouse);
+        findViewById(R.id.installmod_scale_down).setOnClickListener(this::scaleDown);
+        findViewById(R.id.installmod_scale_up).setOnClickListener(this::scaleUp);
         mTouchPad = findViewById(R.id.main_touchpad);
         mLoggerView = findViewById(R.id.launcherLoggerView);
         mMousePointerImageView = findViewById(R.id.main_mouse_pointer);

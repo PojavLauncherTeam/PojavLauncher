@@ -6,7 +6,7 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_LEFT_OF
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_RIGHT_OFFSET;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_CONTROL_TOP_OFFSET;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;

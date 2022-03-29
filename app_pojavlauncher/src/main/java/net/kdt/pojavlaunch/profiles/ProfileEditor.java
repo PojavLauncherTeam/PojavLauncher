@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch.profiles;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;

@@ -40,7 +40,7 @@ Java_net_kdt_pojavlaunch_NativeOs_setenv(JNIEnv *env, jclass clazz, jstring name
         return;
     }
     const char* c_name = (*env)->GetStringUTFChars(env, name, NULL);
-    const char* c_value = (*env)->GetStringUTFChars(env, name, NULL);
+    const char* c_value = (*env)->GetStringUTFChars(env, value, NULL);
     if(setenv(c_name, c_value, force)) {
         (*env)->ThrowNew(env,exception,"Can't setenv");
     }

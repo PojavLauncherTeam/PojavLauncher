@@ -94,6 +94,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setLdLibraryPath(
 		if (updateLdLibPath == NULL) {
 			char *dl_error_c = dlerror();
 			LOGE("Error getting symbol android_update_LD_LIBRARY_PATH: %s", dl_error_c);
+			return;
 			// (*env)->ThrowNew(env, exception_cls, dl_error_c);
 		}
 	}

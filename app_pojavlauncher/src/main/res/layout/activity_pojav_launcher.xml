@@ -82,7 +82,6 @@
         android:drawableStart="@drawable/ic_menu_news"
         android:focusable="true"
         android:gravity="center"
-        android:onClick="onTabClicked"
 
         android:paddingStart="12dp"
         android:paddingTop="10dp"
@@ -111,7 +110,6 @@
         android:focusable="true"
 
         android:gravity="center"
-        android:onClick="onTabClicked"
 
         android:paddingStart="12dp"
         android:paddingTop="10dp"
@@ -140,7 +138,6 @@
         android:focusable="true"
 
         android:gravity="center"
-        android:onClick="onTabClicked"
 
         android:paddingStart="12dp"
         android:paddingTop="10dp"
@@ -170,7 +167,6 @@
         android:focusable="true"
         android:gravity="center"
 
-        android:onClick="onTabClicked"
         android:paddingStart="12dp"
         android:paddingTop="10dp"
         android:paddingEnd="0dp"
@@ -232,13 +228,12 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
     <Button
-
+        android:id="@+id/launchermainControlsButton"
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/selectableItemBackground"
 
-        android:onClick="launchCustomControlsActivity"
         android:text="@string/mcl_option_customcontrol"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -252,7 +247,6 @@
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/mine_button_background"
-        android:onClick="launchGame"
         android:text="@string/main_play"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -271,7 +265,6 @@
 
         android:layout_height="0dp"
         android:background="?attr/selectableItemBackground"
-        android:onClick="installJarFile"
         android:text="@string/main_install_jar_file"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"

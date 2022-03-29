@@ -97,7 +97,6 @@
         android:layout_height="42dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/mine_button_background"
-        android:onClick="loginMC"
         android:text="@string/login_online_login_label"
 
         android:textColor="@android:color/white"
@@ -125,7 +124,6 @@
         android:layout_height="42dp"
         android:layout_marginLeft="5dp"
         android:background="@drawable/mine_button_background"
-        android:onClick="loginSavedAcc"
         android:text="@string/login_select_account"
 
         android:textColor="@android:color/white"
@@ -136,10 +134,10 @@
         app:layout_constraintTop_toTopOf="@+id/mineButton" />
 
     <com.kdt.mcgui.MineButton
+        android:id="@+id/mineButton3"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:background="@drawable/mine_button_background"
-        android:onClick="loginMicrosoft"
         android:text="@string/login_microsoft"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/login_menu"

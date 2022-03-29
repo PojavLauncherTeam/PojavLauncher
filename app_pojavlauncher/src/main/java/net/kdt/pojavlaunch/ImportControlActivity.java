@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import net.kdt.pojavlaunch.selector.UnifiedSelector;
 import net.kdt.pojavlaunch.utils.FileUtils;
 
 import org.json.JSONException;
@@ -42,7 +43,7 @@ public class ImportControlActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Tools.initContextConstants(getApplicationContext());
-
+        findViewById(R.id.mineButton_import_control).setOnClickListener(this::startImport);
         setContentView(R.layout.activity_import_control);
         mEditText = findViewById(R.id.editText_import_control_file_name);
     }
@@ -66,7 +67,7 @@ public class ImportControlActivity extends Activity {
         if(!mHasIntentChanged) return;
         mIsFileVerified = false;
         getUriData();
-        mEditText.setText(getNameFromURI(mUriData));
+        mEditText.setText(UnifiedSelector.getNameFromURI(getContentResolver(),mUriData));
         mHasIntentChanged = false;
 
         //Import and verify thread
@@ -189,14 +190,6 @@ public class ImportControlActivity extends Activity {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public String getNameFromURI(Uri uri) {
-        Cursor c = getContentResolver().query(uri, null, null, null, null);
-        c.moveToFirst();
-        String fileName = c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-        c.close();
-        return trimFileName(fileName);
     }
 
 }

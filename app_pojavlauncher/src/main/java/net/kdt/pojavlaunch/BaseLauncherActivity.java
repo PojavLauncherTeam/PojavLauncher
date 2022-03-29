@@ -5,6 +5,7 @@ import static net.kdt.pojavlaunch.Tools.getFileName;
 import android.app.*;
 import android.content.*;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.*;
 import android.webkit.MimeTypeMap;
 import android.widget.*;
@@ -19,6 +20,8 @@ import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
+import net.kdt.pojavlaunch.selector.UnifiedSelector;
+import net.kdt.pojavlaunch.selector.UnifiedSelectorCallback;
 import net.kdt.pojavlaunch.tasks.*;
 
 import androidx.appcompat.app.AlertDialog;
@@ -39,11 +42,51 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     public JMinecraftVersionList mVersionList;
 	public MinecraftDownloaderTask mTask;
 	public MinecraftAccount mProfile;
+	public UnifiedSelector mSelector;
 	//public String[] mAvailableVersions;
     
 	public boolean mIsAssetsProcessing = false;
     protected boolean canBack = false;
-    
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mSelector = new UnifiedSelector(this);
+        mSelector.setSelectionCallback(new UnifiedSelectorCallback() {
+            @Override
+            public void onSelected(InputStream stream, String name) {
+                final ProgressDialog barrier = new ProgressDialog(BaseLauncherActivity.this);
+                barrier.setMessage(getString(R.string.global_waiting));
+                barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                barrier.setCancelable(false);
+                barrier.show();
+                barrier.setMessage(BaseLauncherActivity.this.getString(R.string.multirt_progress_caching));
+                Thread t = new Thread(()->{
+                    try {
+                        final File modInstallerFile = new File(getCacheDir(), name);
+                        FileOutputStream fos = new FileOutputStream(modInstallerFile);
+                        IOUtils.copy(stream, fos);
+                        fos.close();
+                        BaseLauncherActivity.this.runOnUiThread(() -> {
+                            barrier.dismiss();
+                            Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
+                            intent.putExtra("modFile", modInstallerFile);
+                            startActivity(intent);
+                        });
+                    }catch(IOException e) {
+                        Tools.showError(BaseLauncherActivity.this,e);
+                    }
+                });
+                t.start();
+            }
+
+            @Override
+            public void onError(Throwable th) {
+                Tools.showError(BaseLauncherActivity.this, th);
+            }
+        });
+    }
+
     public abstract void statusIsLaunching(boolean isLaunching);
 
 
@@ -88,12 +131,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             dialog.setView(edit);
             dialog.show();
         } else {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("jar");
-            if(mimeType == null) mimeType = "*/*";
-            intent.setType(mimeType);
-            startActivityForResult(intent,RUN_MOD_INSTALLER);
+            mSelector.openSelector("jar");
         }
 
     }
@@ -214,31 +252,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             barrier.setProgressStyle(barrier.STYLE_SPINNER);
             barrier.setCancelable(false);
             barrier.show();
-
-            // Install the runtime
-            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME) {
-                if (data == null) return;
-
-                final Uri uri = data.getData();
-                Thread t = new Thread(() -> {
-                    try {
-                        String name = getFileName(this, uri);
-                        MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), name,
-                                (resid, stuff) -> BaseLauncherActivity.this.runOnUiThread(
-                                        () -> barrier.setMessage(BaseLauncherActivity.this.getString(resid, stuff))));
-                        MultiRTUtils.postPrepare(BaseLauncherActivity.this, name);
-                    } catch (IOException e) {
-                        Tools.showError(BaseLauncherActivity.this, e);
-                    }
-                    BaseLauncherActivity.this.runOnUiThread(() -> {
-                        barrier.dismiss();
-                        mRuntimeConfigDialog.refresh();
-                        mRuntimeConfigDialog.mDialog.show();
-                    });
-                });
-                t.start();
-            }
-
             // Run a mod installer
             if (requestCode == RUN_MOD_INSTALLER) {
                 if (data == null) return;

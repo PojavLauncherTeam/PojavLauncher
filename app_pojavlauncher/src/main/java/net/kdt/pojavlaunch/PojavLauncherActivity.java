@@ -117,6 +117,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         Tabs[2] = findViewById(R.id.btnTab3);
         Tabs[3] = findViewById(R.id.btnTab4);
 
+        mPlayButton.setOnClickListener(this::launchGame);
+        logoutBtn.setOnClickListener(this::installJarFile);
+        findViewById(R.id.launchermainControlsButton).setOnClickListener(this::launchCustomControlsActivity);
+        for(View v : Tabs) {
+            v.setOnClickListener(this::onTabClicked);
+        }
 
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();

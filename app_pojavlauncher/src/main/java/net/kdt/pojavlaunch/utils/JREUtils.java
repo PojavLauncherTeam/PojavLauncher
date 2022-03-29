@@ -35,6 +35,7 @@ public class JREUtils {
     private static String sNativeLibDir;
 
     public static String findInLdLibPath(String libName) {
+        Log.i("jrelog",NativeOs.getenv("LD_LIBRARY_PATH"));
         if(NativeOs.getenv("LD_LIBRARY_PATH")==null) {
             try {
                 if (LD_LIBRARY_PATH != null) {
