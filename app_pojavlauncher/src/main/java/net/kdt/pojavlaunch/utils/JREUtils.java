@@ -453,6 +453,7 @@ public class JREUtils {
      */
     public static String loadGraphicsLibrary(){
         if(LOCAL_RENDERER == null) return null;
+        dlopen(sNativeLibDir+"/libnativeos.so");
         String renderLibrary;
         switch (LOCAL_RENDERER){
             case "opengles2": renderLibrary = "libgl4es_114.so"; break;

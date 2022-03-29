@@ -258,7 +258,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             setMax(assets.objects.size());
             zeroProgress();
             try {
-                downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+                //downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
             } catch (Exception e) {
                 e.printStackTrace();
 
