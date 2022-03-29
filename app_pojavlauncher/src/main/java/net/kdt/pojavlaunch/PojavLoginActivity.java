@@ -78,7 +78,7 @@ public class PojavLoginActivity extends BaseActivity {
     private TextView startupTextView;
     private SharedPreferences firstLaunchPrefs;
     private MinecraftAccount mProfile = null;
-    
+    private UnifiedSelector mRuntimeSelector;
     private boolean isSkipInit = false;
     private boolean isStarting = false;
 
@@ -87,7 +87,7 @@ public class PojavLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false;
-
+        mRuntimeSelector = new UnifiedSelector(this);
         if(savedInstanceState != null) {
             isStarting = savedInstanceState.getBoolean("isStarting");
             isSkipInit = savedInstanceState.getBoolean("isSkipInit");
@@ -340,8 +340,8 @@ public class PojavLoginActivity extends BaseActivity {
             unpackComponent(am, "lwjgl3");
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
                 runOnUiThread(()->{
-                    UnifiedSelector runtimeSelector = new UnifiedSelector(this);
-                    runtimeSelector.setSelectionCallback(new UnifiedSelectorCallback() {
+
+                    mRuntimeSelector.setSelectionCallback(new UnifiedSelectorCallback() {
                         @Override
                         public void onSelected(InputStream stream, String name) {
                             Thread t = new Thread(() -> {
@@ -371,7 +371,7 @@ public class PojavLoginActivity extends BaseActivity {
                             }
                         }
                     });
-                    runtimeSelector.openSelector("xz");
+                    mRuntimeSelector.openSelector("xz");
                 });
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();

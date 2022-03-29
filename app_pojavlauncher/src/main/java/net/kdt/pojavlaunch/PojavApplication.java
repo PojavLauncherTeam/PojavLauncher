@@ -29,7 +29,7 @@ public class PojavApplication extends MultiDexApplication {
 	
 	@Override
 	public void onCreate() {
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
 			try {
 				SSLContext ctx = SSLContext.getInstance("TLSv1");
 				ctx.init(null,new TrustManager[] { new X509TrustManager() {
