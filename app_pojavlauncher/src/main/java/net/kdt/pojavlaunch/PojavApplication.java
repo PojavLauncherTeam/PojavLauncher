@@ -6,6 +6,7 @@ import android.content.pm.*;
 import android.content.res.*;
 import android.os.*;
 import androidx.core.app.*;
+import androidx.multidex.MultiDexApplication;
 
 import android.util.*;
 import java.io.*;
@@ -14,12 +15,13 @@ import java.util.*;
 
 import net.kdt.pojavlaunch.utils.*;
 
-public class PojavApplication extends Application {
+public class PojavApplication extends MultiDexApplication {
 	public static String CRASH_REPORT_TAG = "PojavCrashReport";
 	
 	@Override
 	public void onCreate() {
 		Thread.setDefaultUncaughtExceptionHandler((thread, th) -> {
+			th.printStackTrace();
 			boolean storagePermAllowed = Build.VERSION.SDK_INT < 23 ||
 					ActivityCompat.checkSelfPermission(PojavApplication.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
 			File crashFile = new File(storagePermAllowed ? Tools.DIR_GAME_HOME : Tools.DIR_DATA, "latestcrash.txt");
@@ -68,6 +70,7 @@ public class PojavApplication extends Application {
 			}
 
 		} catch (Throwable throwable) {
+			throwable.printStackTrace();
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", throwable);
 			startActivity(ferrorIntent);

@@ -18,6 +18,11 @@
             android:defaultValue="false"
             android:key="vbo_disable_hack"
             />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="enable_profiles"
+            android:title="@string/option_enable_profiles"
+            android:summary="@string/option_enable_profiles_descritption"/>
 
         <SwitchPreference
             android:title="@string/gles_version_hack_title"

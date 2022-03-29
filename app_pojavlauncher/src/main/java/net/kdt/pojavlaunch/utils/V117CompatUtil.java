@@ -1,17 +1,19 @@
 package net.kdt.pojavlaunch.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
+import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.tasks.MinecraftDownloaderTask;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.IOUtils;
 
@@ -22,7 +24,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class V117CompatUtil {
@@ -105,11 +106,18 @@ public class V117CompatUtil {
 
     public static void runCheck(String version, Activity ctx) throws Exception{
 
-        PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(version);
+
         MCOptionUtils.load();
 
         List<String> packList =getTexturePackList(MCOptionUtils.get("resourcePacks"));
-        String renderer = cfg != null && cfg.renderer != null?cfg.renderer:LauncherPreferences.PREF_RENDERER;
+        String renderer;
+        String gamePath;
+            LauncherProfiles.update();
+            MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
+            if(prof == null) throw new MinecraftDownloaderTask.SilentException();
+            renderer = prof.pojavRendererName != null?prof.pojavRendererName :LauncherPreferences.PREF_RENDERER;
+            gamePath = prof.gameDir != null?prof.gameDir:Tools.DIR_GAME_NEW;
+        //String
 
         if(renderer.equals("vulkan_zink") || renderer.equals("opengles3_virgl")) return; //don't install for zink/virgl users;
         if(packList.contains("\"assets-v0.zip\"") && renderer.equals("opengles3")) return;
@@ -143,18 +151,14 @@ public class V117CompatUtil {
         }
         switch(proceed.get()) {
             case 1:
-                if (cfg == null) {
-                    cfg = new PerVersionConfig.VersionConfig();
-                    PerVersionConfig.configMap.put(version, cfg);
-                }
-                cfg.renderer = "opengles3";
-                String path = Tools.DIR_GAME_NEW;
-                if(cfg.gamePath != null && !cfg.gamePath.isEmpty()) path = cfg.gamePath;
-                copyResourcePack(path,ctx.getAssets());
+                    MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
+                    if(minecraftProfile == null) throw new MinecraftDownloaderTask.SilentException();
+                    minecraftProfile.pojavRendererName = "opengles3";
+                    LauncherProfiles.update();
+                copyResourcePack(gamePath,ctx.getAssets());
                 if(!packList.contains("\"assets-v0.zip\"")) packList.add(0,"\"assets-v0.zip\"");
                 MCOptionUtils.set("resourcePacks",regenPackList(packList));
                 MCOptionUtils.save();
-                PerVersionConfig.update();
                 break;
             case 0:
                 throw new MinecraftDownloaderTask.SilentException();

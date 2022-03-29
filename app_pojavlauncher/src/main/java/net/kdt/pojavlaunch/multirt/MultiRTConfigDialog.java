@@ -1,15 +1,25 @@
 package net.kdt.pojavlaunch.multirt;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.webkit.MimeTypeMap;
+import androidx.appcompat.app.AlertDialog;
 
+import android.app.ProgressDialog;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.selector.UnifiedSelector;
+import net.kdt.pojavlaunch.selector.UnifiedSelectorCallback;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 public class MultiRTConfigDialog {
     public static final int MULTIRT_PICK_RUNTIME = 2048;
@@ -19,13 +29,13 @@ public class MultiRTConfigDialog {
 
     public void prepare(BaseLauncherActivity activity) {
         mDialogView = new RecyclerView(activity);
-        mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         mDialogView.setAdapter(new RTRecyclerViewAdapter(this));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.multirt_config_title);
         builder.setView(mDialogView);
-        builder.setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,MULTIRT_PICK_RUNTIME));
+        builder.setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,new RuntimeInstallationCallback()));
         builder.setNegativeButton(R.string.mcn_exit_call, (dialog, which) -> dialog.cancel());
         mDialog = builder.create();
     }
@@ -35,12 +45,42 @@ public class MultiRTConfigDialog {
         if(adapter != null) mDialogView.getAdapter().notifyDataSetChanged();
     }
 
-    public static void openRuntimeSelector(Activity activity, int code) {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("xz");
-        if(mimeType == null) mimeType = "*/*";
-        intent.setType(mimeType);
-        activity.startActivityForResult(intent,code);
+    class RuntimeInstallationCallback implements UnifiedSelectorCallback {
+        @Override
+        public void onSelected(InputStream stream, String name) {
+            Context context = mDialog.getContext();
+            ProgressDialog barrier = new ProgressDialog(context);
+            barrier.setMessage(context.getString(R.string.global_waiting));
+            barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            barrier.setCancelable(false);
+            Handler uiThreadHandler = new Handler(Looper.getMainLooper());
+            Thread t = new Thread(() -> {
+                try {
+                    MultiRTUtils.installRuntimeNamed(stream, name,
+                            (resid, stuff) ->uiThreadHandler.post(
+                                    () -> barrier.setMessage(context.getString(resid, stuff))));
+                    MultiRTUtils.postPrepare(context, name);
+                } catch (IOException e) {
+                    Tools.showError(context, e);
+                }
+            uiThreadHandler.post(() -> {
+                    barrier.dismiss();
+                    refresh();
+                    mDialog.show();
+                });
+            });
+            t.start();
+        }
+
+        @Override
+        public void onError(Throwable th) {
+            Tools.showError(mDialog.getContext(),th);
+        }
+    }
+
+    public static void openRuntimeSelector(AppCompatActivity activity, UnifiedSelectorCallback callback) {
+        UnifiedSelector selector = new UnifiedSelector(activity);
+        selector.setSelectionCallback(callback);
+        selector.openSelector("xz");
     }
 }

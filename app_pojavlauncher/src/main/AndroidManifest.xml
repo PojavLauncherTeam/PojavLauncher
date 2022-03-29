@@ -91,7 +91,9 @@
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"/>
-        <provider
+
+
+        <!--<provider
             android:name=".scoped.GameFolderProvider"
             android:authorities="@string/storageProviderAuthorities"
             android:exported="true"
@@ -101,8 +103,7 @@
             <intent-filter>
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
-        </provider>
-
+        </provider>-->
     </application>
 
 </manifest>

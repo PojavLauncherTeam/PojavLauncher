@@ -283,11 +283,22 @@
     <string name="gles_hack_none">Don\'t shrink textures</string>
     <string name="gles_hack_always">Divides all textures by 2</string>
     <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>
-
+    <string name="unnamed">Unnamed</string>
+    <string name="profiles_latest_snapshot">Latest snapshot</string>
+    <string name="profiles_latest_release">Latest release</string>
+    <string name="profiles_editing">Editing profile</string>
+    <string name="profiles_profile_name">Name</string>
+    <string name="profiles_profile_version">Version</string>
+    <string name="option_enable_profiles">Profiles</string>
+    <string name="option_enable_profiles_descritption">Use Minecraft Launcher profiles instead of the regular version list. Supports icons!</string>
     <string name="vbo_hack_title">Disable VBOs</string>
     <string name="vbo_hack_description">Help with compatibility on some old versions</string>
+    <string name="global_delete">Delete</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">Renderer</string>
     <string name="gles_version_hack_title">Force openGL 1</string>
     <string name="gles_version_hack_description">Help with compatibility on some old versions</string>
     <string name="arc_capes_title">Arc Capes</string>
     <string name="arc_capes_desc">Enables capes from Arc. For more information please visit https://arccapes.com. Requires OptiFine.</string>
+    <string name="migrated_profile_str">%s version configuration</string>
 </resources>

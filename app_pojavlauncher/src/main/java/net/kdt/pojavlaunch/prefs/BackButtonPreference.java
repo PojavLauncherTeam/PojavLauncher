@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import androidx.preference.Preference;
 
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 
 public class BackButtonPreference extends Preference {
@@ -31,6 +32,6 @@ public class BackButtonPreference extends Preference {
     @Override
     protected void onClick() {
         // It is caught by an ExtraListener in the LauncherActivity
-        ExtraCore.setValue("back_preference", "true");
+        ExtraCore.setValue(ExtraConstants.BACK_PREFERENCE, "true");
     }
 }

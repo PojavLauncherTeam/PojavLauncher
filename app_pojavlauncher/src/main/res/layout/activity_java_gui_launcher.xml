@@ -33,7 +33,6 @@
 			android:background="@drawable/control_button"
 			android:layout_alignParentRight="true"
 			android:text="@string/control_forceclose"
-			android:onClick="forceClose"
 			android:id="@+id/installmod_btn2"/>
 
 		<Button
@@ -41,7 +40,6 @@
 			android:layout_width="wrap_content"
 			android:background="@drawable/control_button"
 			android:text="@string/control_viewout"
-			android:onClick="openLogOutput"
 			android:layout_toLeftOf="@id/installmod_btn2"
 			android:id="@+id/installmod_btn3"/>
 
@@ -50,7 +48,7 @@
 			android:layout_width="wrap_content"
 			android:background="@drawable/control_button"
 			android:text="@string/control_mouse"
-			android:onClick="toggleVirtualMouse"
+			android:id="@+id/installmod_btn4"
 			android:layout_toLeftOf="@id/installmod_btn3"/>
 
 		<Button
@@ -59,7 +57,6 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentStart="true"
 			android:background="@drawable/control_button"
-			android:onClick="scaleDown"
 			android:text="@string/control_scaledown" />
 
 		<Button
@@ -68,7 +65,6 @@
 			android:layout_height="wrap_content"
 			android:layout_toEndOf="@+id/installmod_scale_down"
 			android:background="@drawable/control_button"
-			android:onClick="scaleUp"
 			android:text="@string/control_scaleup" />
 
 		<Button

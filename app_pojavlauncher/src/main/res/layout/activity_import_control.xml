@@ -55,7 +55,6 @@
             android:layout_marginHorizontal="15dp"
 
             android:background="@drawable/mine_button_background"
-            android:onClick="startImport"
 
             android:text="@string/import_control_import_button"
             android:textColor="@android:color/white"

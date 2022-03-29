@@ -49,8 +49,12 @@ import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.selector.UnifiedSelectorCallback;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.PerVersionConfig;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.FileUtils;
 
@@ -82,6 +86,7 @@ public class PojavLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState); // false;
+
         if(savedInstanceState != null) {
             isStarting = savedInstanceState.getBoolean("isStarting");
             isSkipInit = savedInstanceState.getBoolean("isSkipInit");
@@ -166,7 +171,9 @@ public class PojavLoginActivity extends BaseActivity {
     }
     private void uiInit() {
         setContentView(R.layout.activity_pojav_login);
-
+        findViewById(R.id.mineButton).setOnClickListener(this::loginMC);
+        findViewById(R.id.mineButton2).setOnClickListener(this::loginSavedAcc);
+        findViewById(R.id.mineButton3).setOnClickListener(this::loginMicrosoft);
         Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
 
         String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
@@ -331,11 +338,41 @@ public class PojavLoginActivity extends BaseActivity {
             unpackComponent(am, "caciocavallo");
             unpackComponent(am, "lwjgl3");
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
-               MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
+               MultiRTConfigDialog.openRuntimeSelector(this, new UnifiedSelectorCallback() {
+                   @Override
+                   public void onSelected(InputStream stream, String name) {
+                       Thread t = new Thread(() -> {
+                           try {
+                               MultiRTUtils.installRuntimeNamed(stream, name,
+                                       (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
+                                               () -> {
+                                                   if (startupTextView != null)
+                                                       startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
+                                               }));
+                               synchronized (mLockSelectJRE) {
+                                   mLockSelectJRE.notifyAll();
+                               }
+                           } catch (IOException e) {
+                               Tools.showError(PojavLoginActivity.this
+                                       , e);
+                           }
+                       });
+                       t.start();
+                   }
+
+                   @Override
+                   public void onError(Throwable th) {
+                        Tools.showError(PojavLoginActivity.this, th);
+                        synchronized (mLockSelectJRE) {
+                           mLockSelectJRE.notifyAll();
+                        }
+                   }
+               });
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();
                 }
             }
+            migrateToProfiles();
             if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
             LauncherPreferences.loadPreferences(getApplicationContext());
         }
@@ -361,31 +398,37 @@ public class PojavLoginActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
-            if (requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP) {
-                if (data != null) {
-                    final Uri uri = data.getData();
-                    Thread t = new Thread(() -> {
-                        try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(this, uri),
-                                    (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
-                                            () -> {
-                                                if (startupTextView != null)
-                                                    startupTextView.setText(PojavLoginActivity.this.getString(resid, stuff));
-                                            }));
-                            synchronized (mLockSelectJRE) {
-                                mLockSelectJRE.notifyAll();
-                            }
-                        } catch (IOException e) {
-                            Tools.showError(PojavLoginActivity.this
-                                    , e);
-                        }
-                    });
-                    t.start();
-                }
-            }else if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
+            if(requestCode == MicrosoftLoginGUIActivity.AUTHENTICATE_MICROSOFT_REQUEST) {
                 //Log.i("MicroLoginWrap","Got microsoft login result:" + data);
                 performMicroLogin(data);
             }
+        }
+    }
+    private void migrateToProfiles() {
+        try {
+            if(!PerVersionConfig.exists()) return;
+            LauncherProfiles.update();
+            PerVersionConfig.update();
+            if(PerVersionConfig.erase()) {
+                for (String version : PerVersionConfig.configMap.keySet()) {
+                    PerVersionConfig.VersionConfig config = PerVersionConfig.configMap.get(version);
+                    if (config != null) {
+                        MinecraftProfile profile = new MinecraftProfile();
+                        profile.lastVersionId = version;
+                        profile.name = getString(R.string.migrated_profile_str, version);
+                        profile.pojavRendererName = config.renderer;
+                        profile.gameDir = config.gamePath;
+                        profile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + config.selectedRuntime;
+                        profile.javaArgs = config.jvmArgs;
+                        LauncherProfiles.mainProfileJson.profiles.put("pvc-migrated-" + version, profile);
+                    }
+                }
+                LauncherProfiles.update();
+            }else{
+                Log.e("ProfileMigrator"," Unable to remove Per Version Config files.");
+            }
+        }catch (IOException e) {
+            Log.e("ProfileMigrator","Failed to migrate!",e);
         }
     }
     private boolean installRuntimeAutomatically(AssetManager am, boolean otherRuntimesAvailable) {
