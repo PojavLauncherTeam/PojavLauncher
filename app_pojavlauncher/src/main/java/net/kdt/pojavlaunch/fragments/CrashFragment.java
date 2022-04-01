@@ -30,7 +30,7 @@ public class CrashFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		mCrashView = (TextView) getView().findViewById(R.id.lmaintabconsoleLogCrashTextView);
+		mCrashView = (TextView) view.findViewById(R.id.lmaintabconsoleLogCrashTextView);
 		mCrashView.setTypeface(Typeface.MONOSPACE);
 		mCrashView.setHint(this.getText(R.string.main_nocrash));
 	}
@@ -67,9 +67,10 @@ public class CrashFragment extends Fragment {
 		}
 	}
 
-	private static boolean isNewCrash(File crashLog) throws IOException {
+	private static boolean isNewCrash(@Nullable File crashLog) throws IOException {
+		if(crashLog == null) return false;
 		String content = Tools.read(crashLog.getAbsolutePath());
-		return crashLog != null && content.startsWith("---- Minecraft Crash Report ----");
+		return content.startsWith("---- Minecraft Crash Report ----");
 	}
 
 	private void setLastCrash(String newValue) {

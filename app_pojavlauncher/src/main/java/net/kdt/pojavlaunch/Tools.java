@@ -663,20 +663,20 @@ public final class Tools {
         File fl = new File(dir);
 
         File[] files = fl.listFiles(File::isFile);
-
+        if(files == null) {
+            return null;
+            // The patch was a bit wrong...
+            // So, this may be null, why? Because this folder may not exist yet
+            // Or it may not have any files...
+            // Doesn't matter. We must check for that in the crash fragment.
+        }
         long lastMod = Long.MIN_VALUE;
         File choice = null;
-        try {
-            for (File file : files) {
-                if (file.lastModified() > lastMod) {
-                    choice = file;
-                    lastMod = file.lastModified();
-                }
+        for (File file : files) {
+             if (file.lastModified() > lastMod) {
+                 choice = file;
+                 lastMod = file.lastModified();
             }
-        } catch (NullPointerException e) {
-            // fine, let's just return null
-            // if (files == null) didn't work for some reasons
-            e.printStackTrace();
         }
         return choice;
     }
