@@ -4,7 +4,9 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import static android.view.InputDevice.KEYBOARD_TYPE_ALPHABETIC;
 import static android.view.InputDevice.KEYBOARD_TYPE_NON_ALPHABETIC;
+import static android.view.InputDevice.SOURCE_GAMEPAD;
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
 import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
 import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
@@ -55,6 +57,7 @@ public class GamepadDpad {
     }
 
     public static boolean isDpadEvent(KeyEvent event){
-        return ((event.getSource() & InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) && (event.getDevice().getKeyboardType() == KEYBOARD_TYPE_NON_ALPHABETIC);
+        //return ((event.getSource() & InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) && (event.getDevice().getKeyboardType() == KEYBOARD_TYPE_NON_ALPHABETIC);
+        return event.isFromSource(SOURCE_GAMEPAD) && event.getDevice().getKeyboardType() != KEYBOARD_TYPE_ALPHABETIC;
     }
 }
