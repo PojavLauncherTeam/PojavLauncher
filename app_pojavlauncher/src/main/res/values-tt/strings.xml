@@ -7,6 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Локаль кулланучының исеме</string>
     <string name="login_online_check_keeplogin">Хәтердә калдырырга</string>
     <string name="login_online_login_label">Керергә</string>
     <string name="login_error_exist_username">Бу кулланучы исеме бар инде</string>
@@ -39,6 +40,7 @@
     <string name="mcl_tab_crash">Сафтан чыгарулар журналы</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Тоташкан</string>
+    <string name="mcl_account_local">Локаль</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s кушылуга әзер</string>
     <string name="mcl_launch_cleancache">Кеш-файллар бетерүе</string>
@@ -58,8 +60,11 @@
     <string name="mcl_setting_title_hide_sidebar">Кырый панелен яшерү</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы кешеләргә бу иске v1 интерфейсы ошауы кирәк. Күбрәк тулы экран тәҗрибәсен бирелде.</string>
     <string name="mcl_setting_title_flat_button_style">Тигез төймә стиле</string>
+    <string name="mcl_setting_title_mousescale">Курсор масштабы</string>
+    <string name="mcl_setting_subtitle_mousescale">Тычкан курсор зурлыгын үзгәртә.</string>
     <string name="mcl_setting_title_javaargs">JVM кушу аргументлары</string>
     <string name="mcl_setting_category_general">Төп көйләүләр</string>
+    <string name="mcl_setting_category_scaling">Масштаб көйләүләр</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
     <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
     <string name="mcl_setting_veroption_release">Чыгарылыш</string>
@@ -108,6 +113,7 @@
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Кертү төзәтүе</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_done">Импортлау тәмамланды</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -145,7 +151,11 @@
     <string name="multirt_config_title">Java виртуаль машиналар</string>
     <string name="multirt_config_add">Яңаны өстәргә</string>
     <string name="pvc_gameDirectory">Уен папкасы</string>
+    <string name="unnamed">Исемсез</string>
+    <string name="profiles_latest_snapshot">Соңгы ярдәмче версия</string>
     <string name="profiles_profile_name">Исем</string>
+    <string name="profiles_profile_version">Версия</string>
     <string name="option_enable_profiles">Профильләр</string>
+    <string name="global_delete">Бетерү</string>
     <string name="pedit_renderer">Рендерер</string>
 </resources>
