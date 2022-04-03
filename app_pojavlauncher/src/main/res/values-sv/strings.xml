@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email eller användarnamn</string>
+    <string name="login_online_password_hint">Lösenord</string>
     <string name="login_online_check_keeplogin">Fortsätt vara inloggad</string>
     <string name="login_online_login_label">Logga in</string>
     <string name="login_error_invalid_username">Ogiltigt användarnamn. Användarnamnet måste vara i intervallet 3-16 tecken, bör endast innehålla A-Z, a-z, 0-9 och understreck.</string>
