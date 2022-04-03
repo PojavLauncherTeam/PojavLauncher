@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">ईमेल या उपयोगकर्ता का नाम</string>
+    <string name="login_online_password_hint">पासवर्ड/कुंजिका</string>
     <string name="login_online_check_keeplogin">मुझे लोग्ड इन रखें</string>
     <string name="login_online_login_label">लॉगिन</string>
     <string name="login_error_invalid_username">लॉगिन समस्या अवैध वापरकर्ता नाम</string>
