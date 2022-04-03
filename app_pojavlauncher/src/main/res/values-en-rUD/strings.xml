@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">ǝɯɐuɹǝsn ɹo ꞁᴉɐɯƎ</string>
+    <string name="login_online_password_hint">pɹoʍssɐԀ</string>
     <string name="login_online_check_keeplogin">uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ</string>
     <string name="login_online_login_label">uᴉᵷoꞀ</string>
     <string name="login_error_invalid_username">˙ǝɹoɔsɹǝpun puɐ 6-0 \'z-ɐ \'Z-Ɐ suᴉɐʇuoɔ ʎꞁuo pꞁnoɥs \'sɹǝʇɔɐɹɐɥɔ 9⥝-Ɛ ɟo ǝᵷuɐɹ uᴉ ǝq ʇsnɯ ǝɯɐuɹǝs∩ ˙ǝɯɐuɹǝsn pᴉꞁɐʌuI</string>
