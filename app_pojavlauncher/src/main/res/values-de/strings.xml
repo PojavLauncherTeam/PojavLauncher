@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">E-Mail oder Benutzername</string>
+    <string name="login_online_password_hint">Passwort</string>
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
     <string name="login_error_invalid_username">Ungültiger Benutzername. Der Benutzername muss zwischen 3-16 Zeichen lang sein und sollte nur A-Z, a-z, 0-9 und Unterstriche enthalten.</string>
