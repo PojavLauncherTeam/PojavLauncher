@@ -7,7 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Username lokal</string>
+    <string name="login_online_username_hint">Email atau nama pengguna</string>
+    <string name="login_online_password_hint">Kata sandi</string>
     <string name="login_online_check_keeplogin">Buat saya tetap masuk</string>
     <string name="login_online_login_label">Masuk</string>
     <string name="login_error_invalid_username">Nama pengguna tidak valid. Nama pengguna harus berada dalam jangka 3-16 karakter, dan hanya bisa berisi A-Z, a-z, 0-9, dan garis bawah.</string>
