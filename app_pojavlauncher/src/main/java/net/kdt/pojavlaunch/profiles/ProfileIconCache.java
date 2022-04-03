@@ -13,28 +13,28 @@ import java.util.Map;
 
 public class ProfileIconCache {
     private static final String BASE64_PNG_HEADER = "data:image/png;base64,";
-    private static final Map<String, Bitmap> iconCache = new HashMap<>();
-    private static Bitmap defaultIcon;
+    private static final Map<String, Bitmap> sIconCache = new HashMap<>();
+    private static Bitmap sDefaultIcon;
     public static void initDefault(Context context) {
-        if(defaultIcon == null)
-            defaultIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_java);
+        if(sDefaultIcon == null)
+            sDefaultIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_java);
     }
     public static void clearIconCache() {
-        for(String key : iconCache.keySet()) {
-            Bitmap bitmap = iconCache.get(key);
-            if(bitmap != defaultIcon && bitmap != null) {
+        for(String key : sIconCache.keySet()) {
+            Bitmap bitmap = sIconCache.get(key);
+            if(bitmap != sDefaultIcon && bitmap != null) {
                 bitmap.recycle();
             }
         }
-        iconCache.clear();
+        sIconCache.clear();
     }
     public static Bitmap getCachedIcon(String key) {
-        return iconCache.get(key);
+        return sIconCache.get(key);
     }
     public static Bitmap submitIcon(String key, String base64) {
         byte[] pngBytes = Base64.decode(base64, Base64.DEFAULT);
         Bitmap cachedIcon = BitmapFactory.decodeByteArray(pngBytes,0,pngBytes.length);
-        iconCache.put(key, cachedIcon);
+        sIconCache.put(key, cachedIcon);
         return cachedIcon;
     }
     public static Bitmap tryResolveIcon(String profileName, String b64Icon) {
@@ -48,7 +48,7 @@ public class ProfileIconCache {
         return icon;
     }
     public static Bitmap pushDefaultIcon(String key) {
-        iconCache.put(key, defaultIcon);
-        return defaultIcon;
+        sIconCache.put(key, sDefaultIcon);
+        return sDefaultIcon;
     }
 }

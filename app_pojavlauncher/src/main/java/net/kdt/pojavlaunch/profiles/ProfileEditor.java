@@ -37,135 +37,137 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ProfileEditor implements ExtraListener<ArrayList<String>> {
-    private final View mainView;
-    private final TextView profileNameView;
-    private final ImageView profileIconView;
-    private final Spinner versionSpinner;
-    private final Spinner javaRuntimeSpinner;
-    private final Spinner rendererSpinner;
-    private final List<String> renderNames;
-    private final AlertDialog dialog;
-    private String selectedVersionId;
-    private String editingProfile;
-    private final EditSaveCallback editSaveCallback;
-    private final Handler uiThreadHandler;
+    private final View mMainView;
+    private final TextView mProfileNameTextView;
+    private final ImageView mProfileIconImageView;
+    private final Spinner mVersionSpinner;
+    private final Spinner mJavaRuntimeSpinner;
+    private final Spinner mRendererSpinner;
+    private final List<String> mRenderNames;
+    private final AlertDialog mDialog;
+    private String mSelectedVersionId;
+    private String mEditingProfile;
+    private final EditSaveCallback mEditSaveCallback;
+    private final Handler mUiThreadHandler;
     public static MinecraftProfile generateTemplate() {
         MinecraftProfile TEMPLATE = new MinecraftProfile();
         TEMPLATE.name = "New";
         TEMPLATE.lastVersionId = "latest-release";
         return TEMPLATE;
     }
-    public ProfileEditor(Context _ctx, EditSaveCallback editSaveCallback) {
-        this.editSaveCallback = editSaveCallback;
-        uiThreadHandler = new Handler(Looper.getMainLooper());
-        LayoutInflater inflater = LayoutInflater.from(_ctx);
-        mainView = inflater.inflate(R.layout.version_profile_editor,null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(_ctx);
-        builder.setView(mainView);
-        profileNameView = mainView.findViewById(R.id.vprof_editior_profile_name);
-        versionSpinner = mainView.findViewById(R.id.vprof_editor_version_spinner);
-        javaRuntimeSpinner = mainView.findViewById(R.id.vprof_editor_spinner_runtime);
-        rendererSpinner = mainView.findViewById(R.id.vprof_editor_profile_renderer);
+    public ProfileEditor(Context ctx, EditSaveCallback editSaveCallback) {
+        this.mEditSaveCallback = editSaveCallback;
+        mUiThreadHandler = new Handler(Looper.getMainLooper());
+        LayoutInflater inflater = LayoutInflater.from(ctx);
+        mMainView = inflater.inflate(R.layout.version_profile_editor,null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+        builder.setView(mMainView);
+        mProfileNameTextView = mMainView.findViewById(R.id.vprof_editior_profile_name);
+        mVersionSpinner = mMainView.findViewById(R.id.vprof_editor_version_spinner);
+        mJavaRuntimeSpinner = mMainView.findViewById(R.id.vprof_editor_spinner_runtime);
+        mRendererSpinner = mMainView.findViewById(R.id.vprof_editor_profile_renderer);
         {
-            Context context = rendererSpinner.getContext();
+            Context context = mRendererSpinner.getContext();
             List<String> renderList = new ArrayList<>();
             Collections.addAll(renderList, context.getResources().getStringArray(R.array.renderer));
             renderList.add("Default");
-            renderNames = Arrays.asList(context.getResources().getStringArray(R.array.renderer_values));
-            rendererSpinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,renderList));
+            mRenderNames = Arrays.asList(context.getResources().getStringArray(R.array.renderer_values));
+            mRendererSpinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,renderList));
         }
-        profileIconView = mainView.findViewById(R.id.vprof_editor_icon);
+        mProfileIconImageView = mMainView.findViewById(R.id.vprof_editor_icon);
         builder.setPositiveButton(R.string.global_save,this::save);
         builder.setNegativeButton(android.R.string.cancel,(dialog,which)->destroy(dialog));
         builder.setNeutralButton(R.string.global_delete,(dialogInterface, i) -> {
-            LauncherProfiles.mainProfileJson.profiles.remove(editingProfile);
-            this.editSaveCallback.onSave(editingProfile,false, true);
+            LauncherProfiles.mainProfileJson.profiles.remove(mEditingProfile);
+            this.mEditSaveCallback.onSave(mEditingProfile,false, true);
         });
         builder.setOnDismissListener(this::destroy);
-        dialog = builder.create();
+        mDialog = builder.create();
     }
+
     public boolean show(@NonNull String profile) {
         MinecraftProfile minecraftProfile;
         if(!ProfileAdapter.CREATE_PROFILE_MAGIC.equals(profile)) {
             minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(profile);
             if (minecraftProfile == null) return true;
-            editingProfile = profile;
+            mEditingProfile = profile;
         }else{
             minecraftProfile = generateTemplate();
             String uuid = UUID.randomUUID().toString();
             while(LauncherProfiles.mainProfileJson.profiles.containsKey(uuid)) {
                 uuid = UUID.randomUUID().toString();
             }
-            editingProfile = uuid;
+            mEditingProfile = uuid;
         }
+
         List<Runtime> runtimes = MultiRTUtils.getRuntimes();
-        Context context = javaRuntimeSpinner.getContext();
-        javaRuntimeSpinner.setAdapter(new RTSpinnerAdapter(context, runtimes));
+        Context context = mJavaRuntimeSpinner.getContext();
+        mJavaRuntimeSpinner.setAdapter(new RTSpinnerAdapter(context, runtimes));
         int jvmIndex = runtimes.indexOf(new Runtime("<Default>"));
-        int rendererIndex = rendererSpinner.getAdapter().getCount()-1;
+        int rendererIndex = mRendererSpinner.getAdapter().getCount()-1;
         if (minecraftProfile.javaDir != null) {
             String selectedRuntime = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
             int nindex = runtimes.indexOf(new Runtime(selectedRuntime));
             if (nindex != -1) jvmIndex = nindex;
         }
         if(minecraftProfile.pojavRendererName != null) {
-            int nindex = renderNames.indexOf(minecraftProfile.pojavRendererName);
+            int nindex = mRenderNames.indexOf(minecraftProfile.pojavRendererName);
             if(nindex != -1) rendererIndex = nindex;
         }
-        javaRuntimeSpinner.setSelection(jvmIndex);
-        rendererSpinner.setSelection(rendererIndex);
+        mJavaRuntimeSpinner.setSelection(jvmIndex);
+        mRendererSpinner.setSelection(rendererIndex);
         ExtraCore.addExtraListener(ExtraConstants.VERSION_LIST,this);
-        profileNameView.setText(minecraftProfile.name);
+        mProfileNameTextView.setText(minecraftProfile.name);
         Bitmap profileIcon = ProfileIconCache.getCachedIcon(profile);
         if(profileIcon == null) {
             profileIcon = ProfileIconCache.tryResolveIcon(profile,minecraftProfile.icon);
         }
-        profileIconView.setImageBitmap(profileIcon);
+        mProfileIconImageView.setImageBitmap(profileIcon);
         if(minecraftProfile.lastVersionId != null && !"latest-release".equals(minecraftProfile.lastVersionId) && !"latest-snapshot".equals(minecraftProfile.lastVersionId))
-            selectedVersionId = minecraftProfile.lastVersionId;
+            mSelectedVersionId = minecraftProfile.lastVersionId;
         else if(minecraftProfile.lastVersionId != null) {
             Map<String,String> releaseTable = (Map<String,String>)ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
             if(releaseTable != null) {
             switch (minecraftProfile.lastVersionId) {
                 case "latest-release":
-                    selectedVersionId = releaseTable.get("release");
+                    mSelectedVersionId = releaseTable.get("release");
                 case "latest-snapshot":
-                    selectedVersionId = releaseTable.get("snapshot");
+                    mSelectedVersionId = releaseTable.get("snapshot");
             }
         }else{
-                selectedVersionId = null;
+                mSelectedVersionId = null;
             }
         }
         else{
             if(PojavLauncherActivity.basicVersionList.length > 0) {
-                selectedVersionId = PojavLauncherActivity.basicVersionList[0];
+                mSelectedVersionId = PojavLauncherActivity.basicVersionList[0];
             }
         }
         ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ExtraConstants.VERSION_LIST);
-        BaseLauncherActivity.updateVersionSpinner(context,versions,versionSpinner, selectedVersionId);
-        dialog.show();
+        BaseLauncherActivity.updateVersionSpinner(context,versions, mVersionSpinner, mSelectedVersionId);
+        mDialog.show();
         return true;
     }
     public void save(DialogInterface dialog, int which) {
-        System.out.println(editingProfile);
+        System.out.println(mEditingProfile);
         MinecraftProfile profile;
         boolean isNew;
-        if(LauncherProfiles.mainProfileJson.profiles.containsKey(editingProfile)) {
-            profile = LauncherProfiles.mainProfileJson.profiles.get(editingProfile);
+        if(LauncherProfiles.mainProfileJson.profiles.containsKey(mEditingProfile)) {
+            profile = LauncherProfiles.mainProfileJson.profiles.get(mEditingProfile);
             if(profile == null) {
                 profile = new MinecraftProfile();
                 isNew = true;
             }else{
                 isNew = false;
             }
-            LauncherProfiles.mainProfileJson.profiles.remove(editingProfile);
+            LauncherProfiles.mainProfileJson.profiles.remove(mEditingProfile);
         }else{
             profile = new MinecraftProfile();
             isNew = true;
         }
-        profile.name = profileNameView.getText().toString();
-        profile.lastVersionId = (String)versionSpinner.getSelectedItem();
-        Runtime selectedRuntime = (Runtime) javaRuntimeSpinner.getSelectedItem();
+        profile.name = mProfileNameTextView.getText().toString();
+        profile.lastVersionId = (String) mVersionSpinner.getSelectedItem();
+        Runtime selectedRuntime = (Runtime) mJavaRuntimeSpinner.getSelectedItem();
         if(selectedRuntime.name.equals("<Default>")) {
             profile.javaDir = null;
         }else if(selectedRuntime.versionString == null) {
@@ -173,21 +175,21 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }else{
             profile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+selectedRuntime.name;
         }
-        if(rendererSpinner.getSelectedItemPosition() == renderNames.size()) profile.pojavRendererName = null;
-        else profile.pojavRendererName = renderNames.get(rendererSpinner.getSelectedItemPosition());
-        LauncherProfiles.mainProfileJson.profiles.put(editingProfile,profile);
-        editSaveCallback.onSave(editingProfile,isNew, false);
+        if(mRendererSpinner.getSelectedItemPosition() == mRenderNames.size()) profile.pojavRendererName = null;
+        else profile.pojavRendererName = mRenderNames.get(mRendererSpinner.getSelectedItemPosition());
+        LauncherProfiles.mainProfileJson.profiles.put(mEditingProfile,profile);
+        mEditSaveCallback.onSave(mEditingProfile,isNew, false);
         destroy(dialog);
     }
     public void destroy(@NonNull DialogInterface dialog) {
         ExtraCore.removeExtraListenerFromValue(ExtraConstants.VERSION_LIST,this);
-        editingProfile = null;
-        selectedVersionId = null;
+        mEditingProfile = null;
+        mSelectedVersionId = null;
     }
     @Override
     public boolean onValueSet(String key, @Nullable ArrayList<String> value) {
         if(value != null) {
-            uiThreadHandler.post(() -> BaseLauncherActivity.updateVersionSpinner(mainView.getContext(), value, versionSpinner, selectedVersionId));
+            mUiThreadHandler.post(() -> BaseLauncherActivity.updateVersionSpinner(mMainView.getContext(), value, mVersionSpinner, mSelectedVersionId));
         }
         return false;
     }
