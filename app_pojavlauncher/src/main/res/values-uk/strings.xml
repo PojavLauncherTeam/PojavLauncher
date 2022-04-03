@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email або ім\'я користувача</string>
+    <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_check_keeplogin">Запам\'ятати мене</string>
     <string name="login_online_login_label">Увійти</string>
     <string name="login_error_invalid_username">Неправильне ім\'я користувача. Ім\'я користувача має бути в довжині від 3-16 символів, повинно містити лише латинські букви, цифри та знак підкреслення.</string>
