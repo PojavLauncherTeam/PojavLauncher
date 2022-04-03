@@ -7,7 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">ローカルユーザー名</string>
+    <string name="login_online_username_hint">メールアドレスまたはユーザー名</string>
+    <string name="login_online_password_hint">パスワード</string>
     <string name="login_online_check_keeplogin">ログインを保持する</string>
     <string name="login_online_login_label">ログイン</string>
     <string name="login_error_invalid_username">ユーザー名が無効です。ユーザー名は 3〜16 文字でなければなりません。半角英数字 (A-Z, a-z, 0-9) およびアンダースコア (_) のみで構成されてる必要があります。</string>
@@ -55,6 +56,8 @@
     <string name="mcl_option_customcontrol">カスタムコントロール</string>
     <string name="mcl_option_settings">設定</string>
     <string name="mcl_option_about">このアプリについて</string>
+    <string name="mcl_setting_title_use_surface_view">別のサーフェスレンダリングを使用する</string>
+    <string name="mcl_setting_subtitle_use_surface_view">GPUバインドシナリオでのパフォーマンスに役立つ可能性があります</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime をアンインストールする</string>
     <string name="mcl_setting_subtitle_uninstalljre">[ランチャー再起動必須] Java Runtime を再インストールできます</string>
     <string name="mcl_setting_title_freeform">Freeform モードで Minecraft を起動</string>
