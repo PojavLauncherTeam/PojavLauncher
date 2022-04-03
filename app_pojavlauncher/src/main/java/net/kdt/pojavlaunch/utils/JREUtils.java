@@ -429,11 +429,7 @@ public class JREUtils {
         String renderLibrary;
         switch (LOCAL_RENDERER){
             case "opengles2": renderLibrary = "libgl4es_114.so"; break;
-            case "opengles2_5":
-            case "opengles3": renderLibrary = "libgl4es_115.so"; break;
-            case "opengles3_virgl":
             case "vulkan_zink": renderLibrary = "libOSMesa_8.so"; break;
-            case "opengles3_vgpu" : renderLibrary = "libvgpu.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
                 renderLibrary = "libgl4es_114.so";
@@ -478,7 +474,8 @@ public class JREUtils {
         }
         return false;
     }
-    private static int getDetectedVersion() {
+
+    public static int getDetectedVersion() {
         /*
          * Get all the device configurations and check the EGL_RENDERABLE_TYPE attribute
          * to determine the highest ES version supported by any config. The

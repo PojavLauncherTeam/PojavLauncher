@@ -104,7 +104,7 @@ public class V117CompatUtil {
         return ret.toString();
     }
 
-    public static void runCheck(String version, Activity ctx) throws Exception{
+    public static void runCheck(String version, Activity activity) throws Exception{
 
 
         MCOptionUtils.load();
@@ -112,35 +112,33 @@ public class V117CompatUtil {
         List<String> packList =getTexturePackList(MCOptionUtils.get("resourcePacks"));
         String renderer;
         String gamePath;
-            LauncherProfiles.update();
-            MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
-            if(prof == null) throw new MinecraftDownloaderTask.SilentException();
-            renderer = prof.pojavRendererName != null?prof.pojavRendererName :LauncherPreferences.PREF_RENDERER;
-            gamePath = prof.gameDir != null?prof.gameDir:Tools.DIR_GAME_NEW;
+        LauncherProfiles.update();
+        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)activity).mProfile.selectedProfile);
+        if(prof == null) throw new MinecraftDownloaderTask.SilentException();
+        renderer = prof.pojavRendererName != null ? prof.pojavRendererName : LauncherPreferences.PREF_RENDERER;
+        gamePath = prof.gameDir != null ? prof.gameDir : Tools.DIR_GAME_NEW;
         //String
 
         if(renderer.equals("vulkan_zink") || renderer.equals("opengles3_virgl")) return; //don't install for zink/virgl users;
-        if(packList.contains("\"assets-v0.zip\"") && renderer.equals("opengles3")) return;
+        if(packList.contains("\"assets-v0.zip\"")) return;
+        if(JREUtils.getDetectedVersion() >= 3) return; // GL4ES_extra supports 1.17+
 
         Object lock = new Object();
         AtomicInteger proceed = new AtomicInteger(0);
-        ctx.runOnUiThread(() -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+        activity.runOnUiThread(() -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle(R.string.global_warinng);
             builder.setMessage(R.string.compat_117_message);
             builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
                 proceed.set(1);
                 synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
             });
             builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                 synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
             });
             builder.setNeutralButton(R.string.compat_11x_playanyway, (dialog, which) -> {
                 proceed.set(2);
                 synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
             });
             builder.setCancelable(false);
             builder.show();
@@ -151,11 +149,11 @@ public class V117CompatUtil {
         }
         switch(proceed.get()) {
             case 1:
-                    MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
-                    if(minecraftProfile == null) throw new MinecraftDownloaderTask.SilentException();
-                    minecraftProfile.pojavRendererName = "opengles3";
-                    LauncherProfiles.update();
-                copyResourcePack(gamePath,ctx.getAssets());
+                MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)activity).mProfile.selectedProfile);
+                if(minecraftProfile == null) throw new MinecraftDownloaderTask.SilentException();
+                minecraftProfile.pojavRendererName = "opengles2";
+                LauncherProfiles.update();
+                copyResourcePack(gamePath,activity.getAssets());
                 if(!packList.contains("\"assets-v0.zip\"")) packList.add(0,"\"assets-v0.zip\"");
                 MCOptionUtils.set("resourcePacks",regenPackList(packList));
                 MCOptionUtils.save();
