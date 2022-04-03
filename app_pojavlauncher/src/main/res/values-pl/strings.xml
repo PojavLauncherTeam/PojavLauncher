@@ -7,7 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Nazwa użytkownika lokalnego</string>
+    <string name="login_online_username_hint">E-mail lub nazwa użytkownika</string>
+    <string name="login_online_password_hint">Hasło</string>
     <string name="login_online_check_keeplogin">Zapamiętaj dane logowania</string>
     <string name="login_online_login_label">Zaloguj się</string>
     <string name="login_error_invalid_username">Nieprawidłowa nazwa użytkownika. Nazwa użytkownika musi zawierać od 3 do 16 znaków oraz składać się tylko z: A-Z, a-z, 0-9 oraz znaku podkreślenia.</string>
