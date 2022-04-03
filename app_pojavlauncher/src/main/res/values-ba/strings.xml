@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email йәки ҡулланыусы исеме</string>
+    <string name="login_online_password_hint">Серһүҙ</string>
     <string name="login_online_check_keeplogin">Хәтерҙә ҡалдырырға</string>
     <string name="login_online_login_label">Керергә</string>
     <string name="login_error_exist_username">Был ҡулланыусы исеме инде бар</string>
