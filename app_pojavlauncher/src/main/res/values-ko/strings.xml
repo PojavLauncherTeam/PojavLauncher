@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">이메일 또는 사용자 이름</string>
+    <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
     <string name="login_error_invalid_username">잘못된 사용자 이름입니다. 사용자 이름은 3~16글자여야 하며, 대/소문자 알파벳과 숫자, _로 구성되어야 합니다.</string>
