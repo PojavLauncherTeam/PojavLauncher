@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">อีเมลหรือชื่อผู้ใช้</string>
+    <string name="login_online_password_hint">รหัสผ่าน</string>
     <string name="login_online_check_keeplogin">คงฉันไว้ในระบบ</string>
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
     <string name="login_error_exist_username">ชื่อผู้ใช้นี้มีอยู่แล้ว</string>
