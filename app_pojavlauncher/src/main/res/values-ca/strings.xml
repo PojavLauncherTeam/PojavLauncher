@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email o usuari</string>
+    <string name="login_online_password_hint">Contrasenya</string>
     <string name="login_online_check_keeplogin">Mantenir-me connectat</string>
     <string name="login_online_login_label">Iniciar sessió</string>
     <string name="login_error_exist_username">Aquet nom d’usuari ja existeix</string>
