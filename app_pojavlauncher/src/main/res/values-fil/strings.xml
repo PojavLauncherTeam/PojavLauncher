@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email o pangalan</string>
+    <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Panatilihin akong naka-log in</string>
     <string name="login_online_login_label">Mag log in</string>
     <string name="login_error_invalid_username">Invalid username, Ang Username ay dapat may 3-16 characters, dapat lamang A-Z, a-z, 0-9 at underscore.</string>
