@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Adresse e-mail ou nom d\'utilisateur</string>
+    <string name="login_online_password_hint">Mot de passe</string>
     <string name="login_online_check_keeplogin">Rester connecté</string>
     <string name="login_online_login_label">Se connecter</string>
     <string name="login_error_invalid_username">Nom d\'utilisateur invalide. Le nom d\'utilisateur doit être compris entre 3 et 16 caractères, ne doit contenir que A-Z, a-z, 0-9 et underscore.</string>
