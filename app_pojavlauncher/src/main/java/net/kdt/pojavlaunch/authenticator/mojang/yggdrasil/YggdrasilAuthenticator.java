@@ -89,6 +89,31 @@ public class YggdrasilAuthenticator {
             throw th;
         }
     }
+    public AuthenticateResponse authenticate(String username, String password, UUID clientId) throws IOException, Throwable {
+        NetworkResponse obj = makeRequest("authenticate", new net.kdt.pojavlaunch.authenticator.mojang.yggdrasil.AuthenticateRequest(username, password, clientId, this.clientName, this.clientVersion), AuthenticateResponse.class);
+        /*
+        if (obj.statusCode != 200) {
+            throw new RuntimeException("Invalid username or password, status code: " + obj.statusCode);
+        }
+        */
+        obj.throwExceptionIfNeed();
+        return (AuthenticateResponse) obj.response;
+    }
+
+    public RefreshResponse refresh(String authToken, UUID clientId) throws IOException, Throwable {
+        NetworkResponse obj = makeRequest("refresh", new RefreshRequest(authToken, clientId), RefreshResponse.class);
+        if (obj == null) {
+            return null;
+        } else {
+            obj.throwExceptionIfNeed(); // "Invalid username or password, status code: " + obj.statusCode);
+            return (RefreshResponse) obj.response;
+        }
+    }
+
+    public NetworkResponse validate(String authToken) throws Throwable {
+        return makeRequest("validate", new RefreshRequest(authToken, null), null);
+    }
+
 
     public NetworkResponse invalidate(String authToken, UUID clientId) throws Throwable {
         return makeRequest("invalidate", new RefreshRequest(authToken, clientId), null);
