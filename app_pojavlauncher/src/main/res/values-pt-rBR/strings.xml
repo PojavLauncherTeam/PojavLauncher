@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">E-mail ou nome de usuário</string>
+    <string name="login_online_password_hint">Senha</string>
     <string name="login_online_check_keeplogin">Manter conectado</string>
     <string name="login_online_login_label">Entrar</string>
     <string name="login_error_invalid_username">Nome de usuário inválido. O nome de usuário deve conter 3-16 caracteres, contendo apenas A-Z, a-z, 0-9 e o sublinhado.</string>
