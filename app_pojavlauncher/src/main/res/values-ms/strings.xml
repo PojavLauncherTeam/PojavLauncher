@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">E-mel atau nama pengguna</string>
+    <string name="login_online_password_hint">Kata Laluan</string>
     <string name="login_online_check_keeplogin">Kekalkan saya dilog masuk</string>
     <string name="login_online_login_label">Log masuk</string>
     <string name="login_error_invalid_username">Nama pengguna tidak sah. Nama pengguna mestilah dalam lingkungan 3-16 aksara, hanya boleh mengandungi A-Z, a-z, 0-9 dan garis bawah.</string>
