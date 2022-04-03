@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
+    <string name="login_online_password_hint">Parola</string>
     <string name="login_online_check_keeplogin">Ține-mă logat</string>
     <string name="login_online_login_label">Autentificare</string>
     <string name="login_error_invalid_username">Nume de utilizator invalid. Numele de utilizator trebuie să aibă între 3-16 caractere, trebuie să conțină doar A-Z, a-z, 0-9 și underscore.</string>
