@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">E-post eller brukernavn</string>
+    <string name="login_online_password_hint">Passord</string>
     <string name="login_online_check_keeplogin">Hold meg pålogget</string>
     <string name="login_online_login_label">Logg inn</string>
     <string name="login_error_exist_username">Dette brukernavn er allerede i bruk</string>
