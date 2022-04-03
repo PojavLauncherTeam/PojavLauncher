@@ -399,6 +399,7 @@ public class PojavLoginActivity extends BaseActivity {
             }
         }
     }
+
     private void migrateToProfiles() {
         try {
             if(!PerVersionConfig.exists()) return;
@@ -407,16 +408,22 @@ public class PojavLoginActivity extends BaseActivity {
             if(PerVersionConfig.erase()) {
                 for (String version : PerVersionConfig.configMap.keySet()) {
                     PerVersionConfig.VersionConfig config = PerVersionConfig.configMap.get(version);
-                    if (config != null) {
-                        MinecraftProfile profile = new MinecraftProfile();
-                        profile.lastVersionId = version;
-                        profile.name = getString(R.string.migrated_profile_str, version);
-                        profile.pojavRendererName = config.renderer;
-                        profile.gameDir = config.gamePath;
-                        profile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + config.selectedRuntime;
-                        profile.javaArgs = config.jvmArgs;
-                        LauncherProfiles.mainProfileJson.profiles.put("pvc-migrated-" + version, profile);
+                    if(config == null) continue; // Skip the version
+                    // Replaced by gl4es_extra
+                    if(config.renderer.contains("opengles")) config.renderer = null;
+                    if(config.renderer == null && config.gamePath == null &&
+                        config.jvmArgs == null && config.selectedRuntime == null){
+                        continue; // Empty pvc, skip it.
                     }
+
+                    MinecraftProfile profile = new MinecraftProfile();
+                    profile.lastVersionId = version;
+                    profile.name = getString(R.string.migrated_profile_str, version);
+                    profile.pojavRendererName = config.renderer;
+                    profile.gameDir = config.gamePath;
+                    profile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + config.selectedRuntime;
+                    profile.javaArgs = config.jvmArgs;
+                    LauncherProfiles.mainProfileJson.profiles.put("pvc-migrated-" + version, profile);
                 }
                 LauncherProfiles.update();
             }else{
@@ -426,6 +433,7 @@ public class PojavLoginActivity extends BaseActivity {
             Log.e("ProfileMigrator","Failed to migrate!",e);
         }
     }
+
     private boolean installRuntimeAutomatically(AssetManager am, boolean otherRuntimesAvailable) {
         /* Check if JRE is included */
         String rt_version = null;
