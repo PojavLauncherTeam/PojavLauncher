@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Emol or osornoim</string>
+    <string name="login_online_password_hint">passwd</string>
     <string name="login_online_check_keeplogin">kep i kog inside</string>
     <string name="login_online_login_label">logout</string>
     <string name="login_error_invalid_username">Invalid catz\' neim. Catz\' neim hav tu be in rein\'g uf 3-16 kerekturs, shud only kontainz A-Z, a-z, 0-9 and undrskore.</string>
