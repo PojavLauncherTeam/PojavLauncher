@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Ηλεκτρονικό ταχυδρομείο ή όνομα χρήστη</string>
+    <string name="login_online_password_hint">Κωδικός Πρόσβασης</string>
     <string name="login_online_check_keeplogin">Να παραμείνω συνδεδεμένος</string>
     <string name="login_online_login_label">Είσοδος</string>
     <string name="login_error_exist_username">Αυτό το όνομα χρήστη υπάρχει ήδη</string>
