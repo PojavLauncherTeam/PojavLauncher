@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
+    <string name="login_online_password_hint">كلمة المرور</string>
     <string name="login_online_check_keeplogin">أبق تسجيل دخولي</string>
     <string name="login_online_login_label">تسجيل الدخول</string>
     <string name="login_error_invalid_username">اسم المستخدم غير صالح. اسم المستخدم يجب أن يكون في نطاق 3-16 حرفاً، يجب أن يحتوي فقط على A-Z، a-z، 0-9 وتسطير سفلي.</string>
