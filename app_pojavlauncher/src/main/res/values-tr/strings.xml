@@ -7,7 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Yerel kullanıcı adı</string>
+    <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
+    <string name="login_online_password_hint">Şifre</string>
     <string name="login_online_check_keeplogin">Oturumumu açık tut</string>
     <string name="login_online_login_label">Giriş yap</string>
     <string name="login_error_invalid_username">Geçersiz kullanıcı adı. Kullanıcı adı 3-16 karakter aralığında olmalı, sadece A-Z, a-z, 0-9 ve alt çizgi içermelidir.</string>
@@ -55,6 +56,8 @@
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
     <string name="mcl_option_about">Hakkında</string>
+    <string name="mcl_setting_title_use_surface_view">Alternatif yüzey renderlama kullan</string>
+    <string name="mcl_setting_subtitle_use_surface_view">GPU\'ya bağlı durumlarda performansı arttırabilir</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime\'ı kaldır</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
