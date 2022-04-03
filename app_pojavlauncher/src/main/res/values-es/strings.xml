@@ -7,7 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Nombre de usuario local</string>
+    <string name="login_online_username_hint">Correo o nombre de usuario</string>
+    <string name="login_online_password_hint">Contraseña</string>
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <string name="login_error_invalid_username">Nombre de usuario inválido. Los nombres de usuario deben tener entre 3-16 caracteres, y solo contienen: A-Z, a-z, 0-9 y guión bajo.</string>
