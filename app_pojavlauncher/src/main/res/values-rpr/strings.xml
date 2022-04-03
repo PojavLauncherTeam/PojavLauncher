@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Почта или имя пользователя</string>
+    <string name="login_online_password_hint">Ключъ-фраза</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
     <string name="login_error_invalid_username">Невѣрное имя пользователя. Имя пользователя должно состоять изъ 3-16 символовъ, должно содержать только A-Z, a-z, 0-9 и подчеркиваніе.</string>
