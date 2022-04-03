@@ -7,6 +7,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">El. paštas arba slapyvardis</string>
+    <string name="login_online_password_hint">Slaptažodis</string>
     <string name="login_online_check_keeplogin">Likti prisijungus</string>
     <string name="login_online_login_label">Prisijungti</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
