@@ -27,7 +27,7 @@ jobs:
     - name: Get gl4es latest commit hash
       if: github.ref == 'refs/heads/v3_openjdk'
       id: gl4es-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es refs/heads/master | grep -io '^\S*'))"
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es-114-extra refs/heads/master | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es
@@ -52,7 +52,7 @@ jobs:
         cd gl4es
         git config --global user.email "github-actions@users.noreply.github.com"
         git config --global user.name "github-actions"
-        git remote add upstream https://github.com/PojavLauncherTeam/gl4es
+        git remote add upstream https://github.com/PojavLauncherTeam/gl4es-114-extra
         git fetch upstream
         git checkout master
         git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
@@ -68,45 +68,6 @@ jobs:
         git commit -am "CI: Update gl4es"
         git push
     
-    - name: Get vgpu latest commit hash
-      if: github.ref == 'refs/heads/v3_openjdk'
-      id: vgpu-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/VGPU refs/heads/main | grep -io '^\S*'))"
-      shell: bash
-    
-    - name: Cache vgpu
-      if: github.ref == 'refs/heads/v3_openjdk'
-      uses: actions/cache@v2
-      id: vgpu-cache
-      with:
-        path: vgpu/libs
-        key: vgpu-android-shared-1-${{ steps.vgpu-sha.outputs.sha }}
-        
-    - name: Get vgpu
-      if: github.ref == 'refs/heads/v3_openjdk' && steps.vgpu-cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: 'PojavLauncherTeam/VGPU'
-        path: 'vgpu'
-        
-    - name: Build vgpu
-      if: github.ref == 'refs/heads/v3_openjdk' && steps.vgpu-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
-        cd vgpu
-        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
-    
-    - name: Install vgpu
-      if: github.ref == 'refs/heads/v3_openjdk' && steps.vgpu-cache.outputs.cache-hit != 'true'
-      run: |
-        cp -R vgpu/libs/* app_pojavlauncher/src/main/jniLibs/
-        mv vgpu ..
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global user.name "github-actions"
-        git add .
-        git commit -am "CI: Update vgpu"
-        git push
-    
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
       with:
@@ -118,7 +79,7 @@ jobs:
           branch: buildjre8
           name: jre8-pojav
     
-    - name: Build APK with Gradle
+    - name: Build JRE JAR files
       run: |
         chmod +x scripts/languagelist_updater.sh
         bash scripts/languagelist_updater.sh
@@ -129,25 +90,32 @@ jobs:
         # Build JRE JAR files (security manager, etc...)
         ./gradlew :jre_lwjgl3glfw:build
         
+    - name: Build Google Play .aab
+      if: ${{ github.event_name == "push" && github.ref_name == "v3_openjdk" }}
+      run: |
         ./gradlew :app_pojavlauncher:bundleGplay
         mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
-        
+    
+    - name: Build Debug .apk
+      run: |
         # Build the launcher
         ./gradlew :app_pojavlauncher:assembleDebug
         mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
-        # mv app_pojavlauncher/build/intermediates/merged_native_libs/debug/out/lib out/debug_lib
+        
     - name: Build APK without runtime
       run: | 
         rm -r app_pojavlauncher/src/main/assets/components/jre
         ./gradlew assembleDebug
         mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
+        
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
           name: app-debug
           path: out/app-debug.apk
+          
     - name: Upload onto the Google Play testing track
-      if: github.ref == 'refs/heads/v3_openjdk'
+      if: github.ref == 'refs/heads/v3_openjdk' && github.event_name == "push"
       uses: r0adkll/upload-google-play@v1.0.15
       with:
         serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
@@ -155,6 +123,7 @@ jobs:
         releaseFiles: out/app-gplay.aab
         track: internal
         inAppUpdatePriority: 5
+        
     - name: Upload APK (without runtime)
       uses: actions/upload-artifact@v2
       with:
