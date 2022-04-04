@@ -253,13 +253,22 @@
     <string name="gles_hack_none">Dokuları sakın küçültme</string>
     <string name="gles_hack_always">Bütün dokuları 2\'ye böler</string>
     <string name="gles_hack_sometimes">Büyük dokuları 2\'ye ya da 4\'e böler</string>
+    <string name="unnamed">Adsız</string>
+    <string name="profiles_latest_snapshot">En son test sürümü</string>
+    <string name="profiles_latest_release">En son sürüm</string>
+    <string name="profiles_editing">Profili düzenle</string>
     <string name="profiles_profile_name">İsim</string>
+    <string name="profiles_profile_version">Sürüm</string>
     <string name="option_enable_profiles">Profiller</string>
+    <string name="option_enable_profiles_descritption">Sıradan sürüm listesi yerine Minecraft Başlatıcısının profilini kullan. İkonları destekler!</string>
     <string name="vbo_hack_title">VBOs\'u devre dışı bırak</string>
     <string name="vbo_hack_description">Bazı eski sürümler ile uyumluluğu sağlar</string>
+    <string name="global_delete">Sil</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">İşleyici</string>
     <string name="gles_version_hack_title">openGL 1 zorla</string>
     <string name="gles_version_hack_description">Bazı eski sürümler ile uyumluluğu sağlar</string>
     <string name="arc_capes_title">Arc Pelerinleri</string>
     <string name="arc_capes_desc">Arc\'ın Pelerinlerini aktifleştirir. Daha fazla bilgi için lütfen https://arccapes.com\'u ziyaret edin. OptiFine gerektirir.</string>
+    <string name="migrated_profile_str">%s sürüm ayarlaması</string>
 </resources>
