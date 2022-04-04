@@ -59,7 +59,7 @@ jobs:
         mv gl4es ..
     
     - name: Push gl4es
-      if: github.event != "pull_request" && steps.gl4es-cache.outputs.cache-hit != 'true'
+      if: github.event != 'pull_request' && steps.gl4es-cache.outputs.cache-hit != 'true'
       continue-on-error: true
       run: |
         git add .
@@ -89,7 +89,7 @@ jobs:
         ./gradlew :jre_lwjgl3glfw:build
         
     - name: Build Google Play .aab
-      if: github.repository_owner == "PojavLauncherTeam" && github.ref_name == "v3_openjdk"
+      if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
       run: |
         ./gradlew :app_pojavlauncher:bundleGplay
         mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
