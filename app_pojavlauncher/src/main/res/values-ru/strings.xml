@@ -56,7 +56,7 @@
     <string name="mcl_option_customcontrol">Пользовательское управление</string>
     <string name="mcl_option_settings">Настройки</string>
     <string name="mcl_option_about">О лаунчере</string>
-    <string name="mcl_setting_title_use_surface_view">Используйте альтернативный рендеринг поверхности</string>
+    <string name="mcl_setting_title_use_surface_view">Использовать альтернативный визуализатор</string>
     <string name="mcl_setting_subtitle_use_surface_view">Может повысить производительность в сценариях, связанных с графическим процессором</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
@@ -249,7 +249,7 @@
     <string name="preference_sustained_performance_title">Включить режим стабилизации производительности</string>
     <string name="preference_sustained_performance_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
     <string name="preference_back_title">Вернуться назад</string>
-    <string name="gles_hack_title">Сокращение GL4ES</string>
+    <string name="gles_hack_title">Сжатие GL4ES</string>
     <string name="gles_hack_none">Не сжимать текстуры</string>
     <string name="gles_hack_always">Сжимать все текстуры в 2 раза</string>
     <string name="gles_hack_sometimes">Сжимать большие текстуры в 2 или 4 раза</string>
@@ -260,15 +260,15 @@
     <string name="profiles_profile_name">Имя</string>
     <string name="profiles_profile_version">Версия</string>
     <string name="option_enable_profiles">Профили</string>
-    <string name="option_enable_profiles_descritption">Используйте профили запуска Minecraft вместо обычного списка версий. Поддерживает иконки!</string>
+    <string name="option_enable_profiles_descritption">Использует профили Minecraft Launcher вместо обычного списка версий. Поддерживает иконки!</string>
     <string name="vbo_hack_title">Отключить VBO</string>
     <string name="vbo_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
     <string name="global_delete">Удалить</string>
-    <string name="pedit_java_runtime">Среда выполнения Java</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Визуализатор</string>
     <string name="gles_version_hack_title">Принудительное использование openGL 1</string>
     <string name="gles_version_hack_description">Помогает с совместимостью на некоторых старых версиях</string>
     <string name="arc_capes_title">Плащи Arc</string>
     <string name="arc_capes_desc">Включает плащи от Arc. Для получения дополнительной информации, пожалуйста, посетите https://arccapes.com. Требуется OptiFine.</string>
-    <string name="migrated_profile_str">%sКонфигурация версии</string>
+    <string name="migrated_profile_str">Конфигурация версии %s</string>
 </resources>
