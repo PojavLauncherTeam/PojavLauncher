@@ -51,8 +51,8 @@ jobs:
         git config --global user.email "github-actions@users.noreply.github.com"
         git config --global user.name "github-actions"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
-        cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
-        mv gl4es ..
+        cp -R gl4es-114-extra/libs/* app_pojavlauncher/src/main/jniLibs/
+        mv gl4es-114-extra ..
     
     - name: Push gl4es
       if: github.event != 'pull_request' && steps.gl4es-cache.outputs.cache-hit != 'true'
