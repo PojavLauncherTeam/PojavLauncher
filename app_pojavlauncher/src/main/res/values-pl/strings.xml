@@ -56,6 +56,8 @@
     <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">Informacje</string>
+    <string name="mcl_setting_title_use_surface_view">Użyj alternatywnego renderowania powierzchni</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Może pomóc z wydajnością w sytuacjach uzależnionych od GPU</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagane ponowne uruchomienie launchera] Umożliwi to ponowną instalację środowiska wykonawczego Java</string>
     <string name="mcl_setting_title_freeform">Funkcja \"Obraz w obrazie\"</string>
