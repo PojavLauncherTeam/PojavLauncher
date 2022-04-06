@@ -25,45 +25,39 @@ jobs:
         java-version: 1.8
 
     - name: Get gl4es latest commit hash
-      if: github.ref == 'refs/heads/v3_openjdk'
       id: gl4es-sha
       run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es-114-extra refs/heads/master | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es
-      if: github.ref == 'refs/heads/v3_openjdk'
       uses: actions/cache@v2
       id: gl4es-cache
       with:
         path: gl4es/libs
-        key: gl4es-android-shared-nodbg-test1-2-${{ steps.gl4es-sha.outputs.sha }}
+        key: gl4es-holy-android-shared-${{ steps.gl4es-sha.outputs.sha }}
 
     - name: Get gl4es
-      if: github.ref == 'refs/heads/v3_openjdk' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
-        repository: 'ptitSeb/gl4es'
+        repository: 'PojavLauncherTeam/gl4es-114-extra'
         path: 'gl4es'
 
     - name: Build gl4es
-      if: github.ref == 'refs/heads/v3_openjdk' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      if: steps.gl4es-cache.outputs.cache-hit != 'true'
       continue-on-error: true
       run: |
         cd gl4es
         git config --global user.email "github-actions@users.noreply.github.com"
         git config --global user.name "github-actions"
-        git remote add upstream https://github.com/PojavLauncherTeam/gl4es-114-extra
-        git fetch upstream
-        git checkout master
-        git merge --allow-unrelated-histories upstream/master || echo "Merge exit code $?"
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
-    
-    - name: Install gl4es
-      if: github.ref == 'refs/heads/v3_openjdk' && steps.gl4es-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         mv gl4es ..
+    
+    - name: Push gl4es
+      if: github.event != 'pull_request' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      continue-on-error: true
+      run: |
         git add .
         git commit -am "CI: Update gl4es"
         git push
@@ -91,7 +85,7 @@ jobs:
         ./gradlew :jre_lwjgl3glfw:build
         
     - name: Build Google Play .aab
-      if: ${{ github.event_name == "push" && github.ref_name == "v3_openjdk" }}
+      if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
       run: |
         ./gradlew :app_pojavlauncher:bundleGplay
         mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
@@ -115,7 +109,7 @@ jobs:
           path: out/app-debug.apk
           
     - name: Upload onto the Google Play testing track
-      if: github.ref == 'refs/heads/v3_openjdk' && github.event_name == "push"
+      if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
       uses: r0adkll/upload-google-play@v1.0.15
       with:
         serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
