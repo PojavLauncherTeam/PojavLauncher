@@ -42,18 +42,22 @@
     <string name="mcl_tab_crash">Crash trunk</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connectd</string>
+    <string name="mcl_account_local">LOCAL</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready 2 pulay minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleanin cache filez</string>
     <string name="mcl_launch_downloading">Downloadin %s</string>
     <string name="mcl_launch_downloading_progress">"Downloadin %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparin 2 download resourcez</string>
+    <string name="mcl_launch_error_localmode">MINECRAFT CANT BE LEGALLY INSTALLD WHEN LOGGD IN WIF LOCAL AKOWNT. PLZ SWITCH 2 AN ONLINE AKOWNT 2 CONTINUE.</string>
     <string name="mcl_options">Opshuns</string>
     <string name="mcl_option_modinstall">L’unch mod installr (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">L’unch mod installr (wif cuztoum argumentz)</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_option_settings">Settinz</string>
     <string name="mcl_option_about">Bout</string>
+    <string name="mcl_setting_title_use_surface_view">USE ALTERNATE SURFACE RENDERIN</string>
+    <string name="mcl_setting_subtitle_use_surface_view">CUD HALP PERFORMANCE IN GPU BOUND SCENARIOS</string>
     <string name="mcl_setting_title_uninstalljre">Uninstall Coffee Cupz’ Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launchah restart requird] dis letz u re-install Coffee Cupz’ Runtime</string>
     <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform moed</string>
@@ -81,6 +85,7 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): givez OpenGL 2.1</string>
     <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): givez OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_gles3_5">gl4ez 1.1.5 (Opengl ez 3): iksportz Opengl 2.1 + partial 3.2</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): iksportz OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): givez OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
