@@ -254,7 +254,11 @@ public class JREUtils {
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             Logger.getInstance().appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
-            Os.setenv(env.getKey(), env.getValue(), true);
+            try {
+                Os.setenv(env.getKey(), env.getValue(), true);
+            }catch (NullPointerException exception){
+                Log.e("JREUtils", exception.toString());
+            }
         }
 
         File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
