@@ -42,18 +42,22 @@
     <string name="mcl_tab_crash">ᵷoꞁ ɥsɐɹƆ</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">pǝʇɔǝuuoƆ</string>
+    <string name="mcl_account_local">lɐɔo˥</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">%s ʇɟɐɹɔǝuᴉW ʎɐꞁd oʇ ʎpɐǝᴚ</string>
     <string name="mcl_launch_cleancache">sǝꞁᴉɟ ǝɥɔɐɔ ᵷuᴉuɐǝꞁƆ</string>
     <string name="mcl_launch_downloading">%s ᵷuᴉpɐoꞁuʍoᗡ</string>
     <string name="mcl_launch_downloading_progress">"(ᗺW %.2f / ᗺW %.2f) %s ᵷuᴉpɐoꞁuʍoᗡ"</string>
     <string name="mcl_launch_download_assets">sǝɔɹnosǝɹ pɐoꞁuʍop oʇ ᵷuᴉɹɐdǝɹԀ</string>
+    <string name="mcl_launch_error_localmode">˙ǝnuᴉʇuoɔ oʇ ʇunoɔɔɐ ǝuᴉluo uɐ oʇ ɥɔʇᴉʍs ǝsɐǝlԀ ˙ʇunoɔɔɐ lɐɔol ɐ ɥʇᴉʍ uᴉ pǝƃƃol uǝɥʍ pǝllɐʇsuᴉ ʎllɐƃǝl ǝq ʇ,uɐɔ ʇɟɐɹɔǝuᴉW</string>
     <string name="mcl_options">suoᴉʇdO</string>
     <string name="mcl_option_modinstall">(˙˙˙ɔʇǝ \'ɔᴉɹqɐℲ \'poWʎqɐꞀ \'ǝᵷɹoℲ) ɹǝꞁꞁɐʇsuᴉ poɯ ɐ ɥɔunɐꞀ</string>
     <string name="mcl_option_modinstallwitharg">(sʇuǝɯnᵷɹɐ ɯoʇsnɔ ɥʇᴉʍ) ɹǝꞁꞁɐʇsuᴉ poɯ ɐ ɥɔunɐꞀ</string>
     <string name="mcl_option_customcontrol">sꞁoɹʇuoɔ ɯoʇsnƆ</string>
     <string name="mcl_option_settings">sᵷuᴉʇʇǝS</string>
     <string name="mcl_option_about">ʇnoqⱯ</string>
+    <string name="mcl_setting_title_use_surface_view">ƃuᴉɹǝpuǝɹ ǝɔɐɟɹns ǝʇɐuɹǝʇlɐ ǝs∩</string>
+    <string name="mcl_setting_subtitle_use_surface_view">soᴉɹɐuǝɔs punoq ndƃ uᴉ ǝɔuɐɯɹoɟɹǝd dlǝɥ ʎɐW</string>
     <string name="mcl_setting_title_uninstalljre">ǝɯᴉʇunᴚ ɐʌɐՐ ꞁꞁɐʇsuᴉu∩</string>
     <string name="mcl_setting_subtitle_uninstalljre">ǝɯᴉʇunᴚ ɐʌɐՐ ꞁꞁɐʇsuᴉ-ǝɹ noʎ ʇǝꞁ sᴉɥ⟘ [pǝɹᴉnbǝɹ ʇɹɐʇsǝɹ ɹǝɥɔunɐꞀ]</string>
     <string name="mcl_setting_title_freeform">ǝpoɯ ɯɹoɟǝǝɹℲ uᴉ ʇɟɐɹɔǝuᴉW ɥɔunɐꞀ</string>
@@ -239,13 +243,22 @@
     <string name="gles_hack_none">sǝɹnʇxǝʇ ʞuᴉɹɥs ʇ,uop</string>
     <string name="gles_hack_always">ᄅ ʎq sǝɹnʇxǝʇ llɐ sǝpᴉʌᴉp</string>
     <string name="gles_hack_sometimes">ㄣ/ ɹo ᄅ/ ʎq sǝɹnʇxǝʇ ƃᴉq sǝpᴉʌᴉp</string>
+    <string name="unnamed">pǝɯɐuu∩</string>
+    <string name="profiles_latest_snapshot">ʇoɥsdɐus ʇsǝʇɐ˥</string>
+    <string name="profiles_latest_release">ǝsɐǝlǝɹ ʇsǝʇɐ˥</string>
+    <string name="profiles_editing">ǝlᴉɟoɹd ƃuᴉʇᴉpƎ</string>
     <string name="profiles_profile_name">ǝɯɐN</string>
+    <string name="profiles_profile_version">uoᴉsɹǝΛ</string>
     <string name="option_enable_profiles">sǝlᴉɟoɹԀ</string>
+    <string name="option_enable_profiles_descritption">¡suoɔᴉ sʇɹoddnS ˙ʇsᴉl uoᴉsɹǝʌ ɹɐlnƃǝɹ ǝɥʇ ɟo pɐǝʇsuᴉ sǝlᴉɟoɹd ɹǝɥɔunɐ˥ ʇɟɐɹɔǝuᴉW ǝs∩</string>
     <string name="vbo_hack_title">sOqΛ ǝlqɐsᴉp</string>
     <string name="vbo_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
+    <string name="global_delete">ǝʇǝlǝp</string>
+    <string name="pedit_java_runtime">ǝɯᴉʇunɹ ɐʌɐſ</string>
     <string name="pedit_renderer">ɹǝɹǝpuǝᴚ</string>
     <string name="gles_version_hack_title">Ɩ ˥פuǝdo ǝɔɹoℲ</string>
     <string name="gles_version_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
     <string name="arc_capes_title">sǝdɐƆ ɔɹ∀</string>
     <string name="arc_capes_desc">˙ǝuᴉℲᴉʇdO sǝɹᴉnbǝɹ ˙ɯoɔ˙sǝdɐɔɔɹɐ//:sdʇʇɥ ʇᴉsᴉʌ ǝsɐǝld uoᴉʇɐɯɹoɟuᴉ ǝɹoɯ ɹoℲ ˙ɔɹ∀ ɯoɹɟ sǝdɐɔ sǝlqɐuƎ</string>
+    <string name="migrated_profile_str">uoᴉʇɐɹnƃᴉɟuoɔ uoᴉsɹǝʌ %s</string>
 </resources>
