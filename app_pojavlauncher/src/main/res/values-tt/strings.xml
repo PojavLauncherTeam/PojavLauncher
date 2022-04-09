@@ -63,6 +63,7 @@
     <string name="mcl_setting_title_hide_sidebar">Кырый панелен яшерү</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы кешеләргә бу иске v1 интерфейсы ошауы кирәк. Күбрәк тулы экран тәҗрибәсен бирелде.</string>
     <string name="mcl_setting_title_flat_button_style">Тигез төймә стиле</string>
+    <string name="mcl_setting_title_buttonscale">Төймәләр масштабы</string>
     <string name="mcl_setting_title_mousescale">Курсор масштабы</string>
     <string name="mcl_setting_subtitle_mousescale">Тычкан курсор зурлыгын үзгәртә.</string>
     <string name="mcl_setting_title_javaargs">JVM кушу аргументлары</string>
@@ -116,9 +117,11 @@
     <string name="profedit_selected_profile">Сайланган профиль: %s</string>
     <string name="global_new">Яңа</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">%d коды белән кушымта/уен сафтан чыкты</string>
     <string name="mcn_exit_call">Чыгу</string>
     <string name="mcn_exit_confirm">Сез мәҗбүри ябырга телисезме?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 утыртмалды!</string>
+    <string name="mcn_check_fail_incompatiblearch">%2$s Java Runtime өчен %1$s архитектурасы яраксыз.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Төймәсар</string>
