@@ -33,7 +33,6 @@ public class LauncherPreferences {
     public static int PREF_CONTROL_BOTTOM_OFFSET = 0;
     public static int PREF_CONTROL_LEFT_OFFSET = 0;
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
-    public static String PREF_GLES_SHRINK_HACK = "0";
     public static boolean PREF_VIRTUAL_MOUSE_START = false;
     public static boolean PREF_ARC_CAPES = false;
     public static boolean PREF_USE_ALTERNATE_SURFACE = true;
@@ -67,7 +66,6 @@ public class LauncherPreferences {
         PREF_CONTROL_BOTTOM_OFFSET = DEFAULT_PREF.getInt("controlBottomOffset", 0);
         PREF_CONTROL_LEFT_OFFSET = DEFAULT_PREF.getInt("controlLeftOffset", 0);
         PREF_SUSTAINED_PERFORMANCE = DEFAULT_PREF.getBoolean("sustainedPerformance", false);
-        PREF_GLES_SHRINK_HACK = DEFAULT_PREF.getString("gl4es_shrink_hack", "0");
         PREF_VIRTUAL_MOUSE_START = DEFAULT_PREF.getBoolean("mouse_start", false);
         PREF_ARC_CAPES = DEFAULT_PREF.getBoolean("arc_capes",false);
         PREF_USE_ALTERNATE_SURFACE = DEFAULT_PREF.getBoolean("alternate_surface", false);

@@ -132,6 +132,9 @@ public final class Tools {
         PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 
+        // Select the appropriate openGL version
+        OldVersionsUtils.selectOpenGlVersion(versionInfo);
+
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
         String launchClassPath = generateLaunchClassPath(versionInfo,versionName);
