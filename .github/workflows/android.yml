@@ -74,6 +74,7 @@ jobs:
     
     - name: Build JRE JAR files
       run: |
+        cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
         chmod +x scripts/languagelist_updater.sh
         bash scripts/languagelist_updater.sh
       
