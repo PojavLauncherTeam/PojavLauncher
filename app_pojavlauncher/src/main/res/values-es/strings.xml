@@ -56,6 +56,8 @@
     <string name="mcl_option_customcontrol">Controles personalizados</string>
     <string name="mcl_option_settings">Ajustes</string>
     <string name="mcl_option_about">Acerca de</string>
+    <string name="mcl_setting_title_use_surface_view">Usar representación de superficie alternativa</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Puede ayudar al rendimiento en escenarios enlazados por tarjeta gráfica</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reiniciar el lanzador] Esto te permitirá reinstalar Java Runtime</string>
     <string name="mcl_setting_title_freeform">Lanzar Minecraft en ventana flotante</string>
