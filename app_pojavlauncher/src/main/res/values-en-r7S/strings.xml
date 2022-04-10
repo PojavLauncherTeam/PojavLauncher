@@ -59,7 +59,9 @@
     <string name="global_warinng">Beware</string>
     <string name="global_name">Title on yer forhead</string>
     <string name="global_restart">Yar ship needs a lookover</string>
+    <string name="global_waiting">Stay Here</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Your boat drown with number %d, check debris for more detail (lastestlog.txt).</string>
     <string name="mcn_exit_call">True Story</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_keyboard">Keyboard</string>
@@ -80,4 +82,5 @@
     <string name="main_nocrash">No sunk ship found</string>
     <string name="main_nolog">No Diary.</string>
     <string name="profiles_profile_name">Title on yer forhead</string>
+    <string name="option_enable_profiles">Yer ships</string>
 </resources>
