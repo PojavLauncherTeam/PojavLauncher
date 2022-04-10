@@ -108,6 +108,7 @@
     <string name="global_error_field_empty">Dis field can\'t bees empty</string>
     <string name="global_waiting">Waitin’, meow~</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Applicashun/game exitd wif code %d, chek lastestlog.txt 4 moar details.</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
@@ -133,6 +134,12 @@
     <string name="control_scaleup">Bigging go up</string>
     <string name="control_scaledown">Bigging go down</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import controls</string>
+    <string name="import_control_invalid_file">Invalid or coruptd file</string>
+    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">File iz bean verifid plz wait an try again…</string>
+    <string name="import_control_invalid_name">Invalid naym ir file alerdy exists</string>
+    <string name="import_control_done">Importatshun dun</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -159,7 +166,9 @@
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_addbutton_drawer">Add buton drawr’</string>
     <string name="customctrl_addsubbutton">Add b’low-buton</string>
+    <string name="customctrl_add_subbutton_message">Sub-butn %d haz bean addd !</string>
     <string name="customctrl_selectdefault">Select defaul Control json</string>
+    <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Opshuns</string>
     <string name="main_play">Pulay</string>
     <string name="main_welcome">Welcom, catz %s</string>
@@ -188,6 +197,7 @@
     <string name="mcl_memory_allocation">RAM allocasion</string>
     <string name="mcl_memory_allocation_subtitle">Controls how mutch RAM iz given 2 Minecraft</string>
     <string name="multirt_runtime_corrupt">Derti Coffee Cup</string>
+    <string name="multirt_runtime_incompatiblearch">Incompatible architecchur: %s</string>
     <string name="multirt_config_title">Coffee Cupz’ Unreal Machinez</string>
     <string name="multirt_config_add">Add new</string>
     <string name="multirt_config_add_subtitle">Add new Coffee Cupz’ Unreal Machine</string>
@@ -197,13 +207,52 @@
     <string name="multirt_config_setdefault">Set favoritz</string>
     <string name="multirt_config_setdefault_already">My favritz</string>
     <string name="multirt_config_removeerror_last">Catz cant’ si any Coffee Cup’s Runtime in kleksion</string>
+    <string name="multirt_nocompartiblert">Ken´t find any compatibl Java Runtime. Dis vershun reqirez Java %d or newr.</string>
+    <string name="multirt_nojava8rt">Ken´t find Java 8. In ordr 2 use dis opshun, u ned 2 install Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a ur newer needz OpenGL 3.2 Core Profile (ur newer). GL4ES wrapper doeznt’ furly surport it at momentz, but their iz sume additivz resourcez catz can inztall tu run the’z version. Scratch OK tu confurm inztallursion, ur Cancel to abort l’unch.</string>
     <string name="compat_11x_playanyway">Cat stil\' won tu play</string>
     <string name="pvc_gameDirectory">Gamez’ direktory</string>
     <string name="pvc_jvmArgs">CCz’UM argumentz</string>
     <string name="pvc_title">Itch-version settinz’</string>
     <string name="storage_warning_title">Starags changez</string>
+    <string name="storage_warning_text"><![CDATA[Due 2 Google/´s new scopd storge enforcements addd in android 10 an highr, we r requird 2 moov teh game directory into an app-private foldr.<br /> Teh new foldr 4 pojav filez iz <b> Android/data/%s/filez/</b> (Also akcesible usin storage providr in ur file explorr).<br /> If u ned 2 copy ur game filez, plz copy evrythin frum teh original foldr at <b>gamez/pojavlaunchr</b> manually.]]></string>
+    <string name="control_offset_title">Control offset</string>
+    <string name="control_top_offset">Top offset: </string>
+    <string name="control_right_offset">right offset: </string>
+    <string name="control_bottom_offset">bottom offset: </string>
+    <string name="control_left_offset">left offset: </string>
+    <string name="preference_control_offset_title">Control side offsetz</string>
+    <string name="preference_control_offset_description">Set a custom offset 2 each side ov teh screen</string>
+    <string name="preference_control_description">Gesturez typez, triggers, an scalin</string>
+    <string name="preference_java_title">Java Tweakz</string>
+    <string name="preference_java_description">Java vershuns, jvm arguments, an ram amount</string>
+    <string name="preference_misc_title">Miscellaneous settings</string>
+    <string name="preference_misc_description">Vershun list, an libz checkz</string>
+    <string name="preference_experimental_title">Experimental Stuff</string>
+    <string name="preference_experimental_description">Use things thar wif considerashun, no support.</string>
+    <string name="preference_sustained_performance_title">Enable sustaind performance mode</string>
+    <string name="preference_sustained_performance_description">Limit thermal thrittlin by limitin peak performance</string>
+    <string name="preference_back_title">Bak 2 teh last screen</string>
+    <string name="gles_hack_title">GL4ES Shrink heck</string>
+    <string name="gles_hack_none">Doan shrink texturez</string>
+    <string name="gles_hack_always">Dividez all texturez by 2</string>
+    <string name="gles_hack_sometimes">Dividez big texturez by /2 or /4</string>
+    <string name="unnamed">No named</string>
+    <string name="profiles_latest_snapshot">last snap shot</string>
+    <string name="profiles_latest_release">latest releez</string>
+    <string name="profiles_editing">Editin cat</string>
     <string name="profiles_profile_name">Naym</string>
+    <string name="profiles_profile_version">Type of cat</string>
     <string name="option_enable_profiles">Profilez</string>
+    <string name="option_enable_profiles_descritption">Use minecraft launchr profilez instead ov teh regular vershun list. Supports inconz!</string>
+    <string name="vbo_hack_title">Disable VBOz</string>
+    <string name="vbo_hack_description">Halp wif compatibility on sum old vershuns</string>
+    <string name="global_delete">Delete</string>
+    <string name="pedit_java_runtime">Java runtime</string>
     <string name="pedit_renderer">Renderer</string>
+    <string name="gles_version_hack_title">Force openGL 1</string>
+    <string name="gles_version_hack_description">Halp wif compatibility on sum old vershuns</string>
+    <string name="arc_capes_title">Arc Capez</string>
+    <string name="arc_capes_desc">Enablez capez frum arc. 4 moar informashun plz visit https://arccapes.com. Requirez optifine.</string>
+    <string name="migrated_profile_str">%s vershun configuration</string>
 </resources>
