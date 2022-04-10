@@ -11,7 +11,7 @@
     <string name="login_online_password_hint">Heslo</string>
     <string name="login_online_check_keeplogin">Zůstat přihlášen/a</string>
     <string name="login_online_login_label">Přihlásit se</string>
-    <string name="login_error_invalid_username">Neplatné uživatelské jméno. Uživatelské jméno musejíc být v rozsahu 3-16 znaků, musí obsahovat pouze A-Z, a-z, (bez diakritiky) 0-9 a podtržítko.</string>
+    <string name="login_error_invalid_username">Neplatné uživatelské jméno. Uživatelské jméno musí být v rozsahu 3-16 znaků, musí obsahovat pouze A-Z, a-z, (bez diakritiky) 0-9 a podtržítko.</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
     <string name="login_microsoft">Microsoft přihlášení</string>
     <string name="login_select_account">Vybrat účet</string>
@@ -56,11 +56,13 @@
     <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
     <string name="mcl_option_settings">Nastavení</string>
     <string name="mcl_option_about">O aplikaci</string>
+    <string name="mcl_setting_title_use_surface_view">Použít jiné vykreslování povrchu</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Může pomoci výkonu ve scénářích vázaných na Grafickém Procesoru (GPU)</string>
     <string name="mcl_setting_title_uninstalljre">Odinstalovat Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Restart launcheru vyžadován] Toto vám umožní přeinstalovat Java Prostředí</string>
     <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Volného okna</string>
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Skrýt bočnípanel</string>
+    <string name="mcl_setting_title_hide_sidebar">Skrýt boční panel</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňujíce v1 rozhraní, možná budou mít tuto možnost rádi. Dává více celo-obrazné prostředí.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorovat výřez</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignorovat výřez a rozšířit obrazovku pod ním.\nDá vám více celo-obrazný zážitek.</string>
@@ -250,13 +252,22 @@
     <string name="gles_hack_none">Nezmenšit textury</string>
     <string name="gles_hack_always">Vydělit všechny textury dvěma</string>
     <string name="gles_hack_sometimes">Vydělit velké textury dvěma či čtyřmi</string>
+    <string name="unnamed">Bez názvu</string>
+    <string name="profiles_latest_snapshot">Poslední Snapshot</string>
+    <string name="profiles_latest_release">Poslední Release</string>
+    <string name="profiles_editing">Upravování profilu</string>
     <string name="profiles_profile_name">Název</string>
+    <string name="profiles_profile_version">Verze</string>
     <string name="option_enable_profiles">Profily</string>
+    <string name="option_enable_profiles_descritption">Používejte profily spouštěče Minecraftu namísto běžného seznamu verzí. Podporujeme ikony!</string>
     <string name="vbo_hack_title">Vypnout VBOy</string>
     <string name="vbo_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
+    <string name="global_delete">Odstranit</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Vykreslovač</string>
     <string name="gles_version_hack_title">Vynutit openGL 1</string>
     <string name="gles_version_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
     <string name="arc_capes_title">Arc Kápě</string>
     <string name="arc_capes_desc">Vyžadujíc OptiFine, zapne kápě z Arcu. Pro více informací navštivte https://arccapes.com.</string>
+    <string name="migrated_profile_str">Konfigurace verze %s</string>
 </resources>
