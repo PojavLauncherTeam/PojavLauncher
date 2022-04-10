@@ -56,11 +56,14 @@
     <string name="mcl_setting_title_ignore_notch">Don\'t see notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Don\'t see notch and make big the sail under it.\nGives you more treasure.</string>
     <string name="mcl_setting_title_resolution_scaler">Map size scaler</string>
+    <string name="mcl_setting_renderer_gles2">OpenGL ES 3</string>
+    <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <!-- Global strings -->
     <string name="global_name">Title on yer forhead</string>
     <string name="global_restart">Yar ship needs a lookover</string>
+    <string name="global_waiting">Stay Here</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -78,7 +81,18 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">Lastest Titanic</string>
+    <string name="vp_latest_release">Lastest ship</string>
+    <string name="mcl_tab_profiles">Yer ships</string>
+    <string name="mcl_profile_editor_title_profile">SHIPS</string>
+    <string name="mcl_profile_editor_title_version">CAPTAINS</string>
+    <string name="mcl_profile_editor_edit_text_title">Ship title</string>
+    <string name="mcl_profile_editor_save">Salvar</string>
+    <string name="profedit_selected_version">Selected Captain: %s</string>
+    <string name="profedit_selected_profile">Selected boat: %s</string>
+    <string name="global_new">New</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Your boat drown with number %d</string>
     <string name="mcn_exit_call">True Story</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_keyboard">Keyboard</string>
