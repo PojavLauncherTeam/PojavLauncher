@@ -19,7 +19,7 @@ public class OldVersionsUtils {
      */
     public static void selectOpenGlVersion(JMinecraftVersionList.Version version){
         // 1309989600 is 2011-07-07  2011-07-07T22:00:00+00:00
-        String creationDate = version.releaseTime;
+        String creationDate = version.time;
         if(creationDate == null || creationDate.isEmpty()){
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
             return;
