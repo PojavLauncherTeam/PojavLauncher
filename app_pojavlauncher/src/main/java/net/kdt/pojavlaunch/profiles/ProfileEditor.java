@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
     private final Spinner versionSpinner;
     private final Spinner javaRuntimeSpinner;
     private final Spinner rendererSpinner;
+    private final EditText pathSelectionEditor;
     private final List<String> renderNames;
     private final AlertDialog dialog;
     private String selectedVersionId;
@@ -75,6 +77,8 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
             rendererSpinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,renderList));
         }
         profileIconView = mainView.findViewById(R.id.vprof_editor_icon);
+        ((TextView)mainView.findViewById(R.id.vprof_editor_beginPathView)).setText(Tools.DIR_GAME_HOME+"/");
+        pathSelectionEditor = mainView.findViewById(R.id.vprof_editor_path);
         builder.setPositiveButton(R.string.global_save,this::save);
         builder.setNegativeButton(android.R.string.cancel,(dialog,which)->destroy(dialog));
         builder.setNeutralButton(R.string.global_delete,(dialogInterface, i) -> {
@@ -143,6 +147,9 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ExtraConstants.VERSION_LIST);
         BaseLauncherActivity.updateVersionSpinner(context,versions,versionSpinner, selectedVersionId);
+        if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+            pathSelectionEditor.setText(minecraftProfile.gameDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length()));
+        }
         dialog.show();
         return true;
     }
@@ -175,6 +182,10 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         if(rendererSpinner.getSelectedItemPosition() == renderNames.size()) profile.pojavRendererName = null;
         else profile.pojavRendererName = renderNames.get(rendererSpinner.getSelectedItemPosition());
+        String selectedPath = pathSelectionEditor.getText().toString();
+        if(!selectedPath.isEmpty()) {
+            profile.gameDir = Tools.LAUNCHERPROFILES_RTPREFIX+selectedPath;
+        }
         LauncherProfiles.mainProfileJson.profiles.put(editingProfile,profile);
         editSaveCallback.onSave(editingProfile,isNew, false);
         destroy(dialog);

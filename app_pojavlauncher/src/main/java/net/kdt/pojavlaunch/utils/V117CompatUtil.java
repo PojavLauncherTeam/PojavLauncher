@@ -116,7 +116,7 @@ public class V117CompatUtil {
             MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
             if(prof == null) throw new MinecraftDownloaderTask.SilentException();
             renderer = prof.pojavRendererName != null?prof.pojavRendererName :LauncherPreferences.PREF_RENDERER;
-            gamePath = prof.gameDir != null?prof.gameDir:Tools.DIR_GAME_NEW;
+            gamePath = prof.gameDir != null && prof.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)?prof.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/"):Tools.DIR_GAME_NEW;
         //String
 
         if(renderer.equals("vulkan_zink") || renderer.equals("opengles3_virgl")) return; //don't install for zink/virgl users;
