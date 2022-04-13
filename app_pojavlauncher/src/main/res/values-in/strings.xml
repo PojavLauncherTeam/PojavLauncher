@@ -56,6 +56,8 @@
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_option_settings">Pengaturan</string>
     <string name="mcl_option_about">Tentang</string>
+    <string name="mcl_setting_title_use_surface_view">Gunakan alternatif rendering surface</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Mungkin membantu perfoma dalam skenario gpu bound</string>
     <string name="mcl_setting_title_uninstalljre">Copot Runtime Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Peluncur butuh di buka ulang] Ini membiarkan kamu memasang ulang Runtime Java</string>
     <string name="mcl_setting_title_freeform">Luncurkan Minecraft dalam mode freeform</string>
@@ -250,13 +252,22 @@
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
     <string name="gles_hack_always">Membagi semua tekstur dengan 2</string>
     <string name="gles_hack_sometimes">Membagi tekstur besar dengan /2 atau /4</string>
+    <string name="unnamed">Tidak dinamai</string>
+    <string name="profiles_latest_snapshot">Snapshot terbaru</string>
+    <string name="profiles_latest_release">Rilis terbaru</string>
+    <string name="profiles_editing">Mengubah profil</string>
     <string name="profiles_profile_name">Nama</string>
+    <string name="profiles_profile_version">Versi</string>
     <string name="option_enable_profiles">Profil</string>
+    <string name="option_enable_profiles_descritption">Gunakan profil Minecraft Launcher daripada daftar versi. Mendukung icon!</string>
     <string name="vbo_hack_title">Matikan VBOs</string>
     <string name="vbo_hack_description">Membantu kesesuaian di beberapa versi lama</string>
+    <string name="global_delete">Hapus</string>
+    <string name="pedit_java_runtime">Runtime Java</string>
     <string name="pedit_renderer">Renderer</string>
     <string name="gles_version_hack_title">Paksa openGL 1</string>
     <string name="gles_version_hack_description">Membantu kesesuaian di beberapa versi lama</string>
     <string name="arc_capes_title">Cape Arc</string>
     <string name="arc_capes_desc">Menyalakan capes dari Arc. Informasi lebih lanjut kunjungi https://arccapes.com. Membutuhkan OptiFine.</string>
+    <string name="migrated_profile_str">Versi konfigurasi %s</string>
 </resources>
