@@ -128,8 +128,8 @@ public final class Tools {
                 LauncherProfiles.update();
                 MinecraftProfile minecraftProfile = ((BaseMainActivity)activity).minecraftProfile;
                 if(minecraftProfile == null) throw new Exception("Launching empty Profile");
-                if(minecraftProfile.gameDir != null && !minecraftProfile.gameDir.isEmpty())
-                    gamedirPath = minecraftProfile.gameDir;
+                if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
+                    gamedirPath = minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/");
                 if(minecraftProfile.javaArgs != null && !minecraftProfile.javaArgs.isEmpty())
                     LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = minecraftProfile.javaArgs;
             }

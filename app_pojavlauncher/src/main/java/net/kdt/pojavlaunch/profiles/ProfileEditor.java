@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,12 +44,14 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
     private final Spinner mVersionSpinner;
     private final Spinner mJavaRuntimeSpinner;
     private final Spinner mRendererSpinner;
+    private final EditText mPathSelectionEditText;
     private final List<String> mRenderNames;
     private final AlertDialog mDialog;
     private String mSelectedVersionId;
     private String mEditingProfile;
     private final EditSaveCallback mEditSaveCallback;
     private final Handler mUiThreadHandler;
+  
     public static MinecraftProfile generateTemplate() {
         MinecraftProfile TEMPLATE = new MinecraftProfile();
         TEMPLATE.name = "New";
@@ -75,6 +78,9 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
             mRendererSpinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,renderList));
         }
         mProfileIconImageView = mMainView.findViewById(R.id.vprof_editor_icon);
+        ((TextView)mMainView.findViewById(R.id.vprof_editor_beginPathView)).setText(Tools.DIR_GAME_HOME+"/");
+        mPathSelectionEditText = mainView.findViewById(R.id.vprof_editor_path);
+
         builder.setPositiveButton(R.string.global_save,this::save);
         builder.setNegativeButton(android.R.string.cancel,(dialog,which)->destroy(dialog));
         builder.setNeutralButton(R.string.global_delete,(dialogInterface, i) -> {
@@ -144,8 +150,12 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
             }
         }
         ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ExtraConstants.VERSION_LIST);
-        BaseLauncherActivity.updateVersionSpinner(context,versions, mVersionSpinner, mSelectedVersionId);
-        mDialog.show();
+
+        BaseLauncherActivity.updateVersionSpinner(context,versions,versionSpinner, selectedVersionId);
+        if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+            pathSelectionEditor.setText(minecraftProfile.gameDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length()));
+        }
+        dialog.show();
         return true;
     }
     public void save(DialogInterface dialog, int which) {
@@ -175,8 +185,13 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }else{
             profile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+selectedRuntime.name;
         }
+
         if(mRendererSpinner.getSelectedItemPosition() == mRenderNames.size()) profile.pojavRendererName = null;
         else profile.pojavRendererName = mRenderNames.get(mRendererSpinner.getSelectedItemPosition());
+        String selectedPath = mPathSelectionEditText.getText().toString();
+        if(!selectedPath.isEmpty()) {
+            profile.gameDir = Tools.LAUNCHERPROFILES_RTPREFIX+selectedPath;
+        }
         LauncherProfiles.mainProfileJson.profiles.put(mEditingProfile,profile);
         mEditSaveCallback.onSave(mEditingProfile,isNew, false);
         destroy(dialog);
