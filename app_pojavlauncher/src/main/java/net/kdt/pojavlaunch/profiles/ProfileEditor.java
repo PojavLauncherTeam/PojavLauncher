@@ -79,7 +79,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         mProfileIconImageView = mMainView.findViewById(R.id.vprof_editor_icon);
         ((TextView)mMainView.findViewById(R.id.vprof_editor_beginPathView)).setText(Tools.DIR_GAME_HOME+"/");
-        mPathSelectionEditText = mainView.findViewById(R.id.vprof_editor_path);
+        mPathSelectionEditText = mMainView.findViewById(R.id.vprof_editor_path);
 
         builder.setPositiveButton(R.string.global_save,this::save);
         builder.setNegativeButton(android.R.string.cancel,(dialog,which)->destroy(dialog));
@@ -151,11 +151,11 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         }
         ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ExtraConstants.VERSION_LIST);
 
-        BaseLauncherActivity.updateVersionSpinner(context,versions,versionSpinner, selectedVersionId);
+        BaseLauncherActivity.updateVersionSpinner(context,versions,mVersionSpinner, mSelectedVersionId);
         if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
-            pathSelectionEditor.setText(minecraftProfile.gameDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length()));
+            mPathSelectionEditText.setText(minecraftProfile.gameDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length()));
         }
-        dialog.show();
+        mDialog.show();
         return true;
     }
     public void save(DialogInterface dialog, int which) {

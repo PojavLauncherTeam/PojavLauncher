@@ -113,7 +113,7 @@ public class V117CompatUtil {
         String renderer;
         String gamePath;
         LauncherProfiles.update();
-        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)ctx).mProfile.selectedProfile);
+        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)activity).mProfile.selectedProfile);
         if(prof == null) throw new MinecraftDownloaderTask.SilentException();
         renderer = prof.pojavRendererName != null ? prof.pojavRendererName : LauncherPreferences.PREF_RENDERER;
         gamePath = prof.gameDir != null && prof.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX) ? prof.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME + "/") : Tools.DIR_GAME_NEW;
