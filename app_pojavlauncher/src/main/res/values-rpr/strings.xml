@@ -80,7 +80,6 @@
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Визуализаторъ</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортируетъ OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): экспортируетъ OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортируетъ OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортируетъ OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
@@ -201,6 +200,5 @@
     <string name="storage_warning_title">Измѣненія въ работѣ хранилища</string>
     <string name="storage_warning_text"><![CDATA[Изъ-за новыхъ ограниченій хранилища добавленныхъ компаніей Google въ Android 10, приложенію нужно перемѣстить папку игры во внутреннюю папку приложенія.<br /> Новая папка для файловъ Pojav - <b>Android/data/%s/files/</b> (также доступна изъ провайдера хранилища въ вашемъ проводникѣ).<br /> Если вамъ необходимо перенести файлы игры, пожалуйста скопируйте ихъ вручную изъ папки <b>games/PojavLauncher</b>.]]></string>
     <string name="profiles_profile_name">Имя</string>
-    <string name="option_enable_profiles">Профили</string>
     <string name="pedit_renderer">Визуализаторъ</string>
 </resources>
