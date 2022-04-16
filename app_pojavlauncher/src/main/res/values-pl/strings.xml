@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Silnik renderujący</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksportuje OpenGL 2.1 + częściowo 3.2</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): eksportuje OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): eksportuje OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuje OpenGL 4.6</string>
@@ -259,15 +257,9 @@
     <string name="profiles_editing">Edytowanie profilu</string>
     <string name="profiles_profile_name">Nazwa</string>
     <string name="profiles_profile_version">Wersja</string>
-    <string name="option_enable_profiles">Profile</string>
-    <string name="option_enable_profiles_descritption">Użyj profilów Minecraft Launcher zamiast zwykłej listy wersji. Wspiera ikony!</string>
-    <string name="vbo_hack_title">Wyłącz VBO</string>
-    <string name="vbo_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
     <string name="global_delete">Usuń</string>
     <string name="pedit_java_runtime">Środowisko wykonawcze Javy</string>
     <string name="pedit_renderer">Silnik renderujący</string>
-    <string name="gles_version_hack_title">Wymuś OpenGL 1</string>
-    <string name="gles_version_hack_description">Pomaga ze zgodnością na niektórych ze starszych wersji</string>
     <string name="arc_capes_title">Peleryny Arc</string>
     <string name="arc_capes_desc">Włącza pelerynki Arc. Po więcej informacji odwiedź https://arccapes.com. Wymaga OptiFine.</string>
     <string name="migrated_profile_str">%s konfiguracja wersji</string>
