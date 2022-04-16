@@ -80,7 +80,6 @@
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksport OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksport OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): eksport OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksport OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
@@ -186,6 +185,5 @@
     <string name="gles_hack_always">Membahagi semua textur dengan 2</string>
     <string name="gles_hack_sometimes">Membahagikan tekstur yang besar dengan /2 atau /4</string>
     <string name="profiles_profile_name">Nama</string>
-    <string name="option_enable_profiles">Profil</string>
     <string name="pedit_renderer">Renderer</string>
 </resources>
