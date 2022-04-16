@@ -80,8 +80,6 @@
     <string name="mcl_setting_category_scaling">Налаштування масштабування</string>
     <string name="mcl_setting_category_renderer">Візуалізатор</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): експортує OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): експортує OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): експортує OpenGL 2.1 + частково  3.2</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): експортує OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): експортує OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): експортує OpenGL 4.6</string>
@@ -249,12 +247,7 @@
     <string name="gles_hack_always">Стиснути всі текстури у 2 рази</string>
     <string name="gles_hack_sometimes">Розділяє великі текстури на 2 або 4</string>
     <string name="profiles_profile_name">Ім\'я</string>
-    <string name="option_enable_profiles">Профілі</string>
-    <string name="vbo_hack_title">Вимкнути VBO</string>
-    <string name="vbo_hack_description">Допомагає з сумісністю на деяких старих версій</string>
     <string name="pedit_renderer">Візуалізатор</string>
-    <string name="gles_version_hack_title">Примусове використання openGL 1</string>
-    <string name="gles_version_hack_description">Допомагає з сумісністю на деяких старих версій</string>
     <string name="arc_capes_title">Плащі Arc</string>
     <string name="arc_capes_desc">Вмикаю плащі від Arc. Для більш детальної інформації, відвідайте https://arccapes.com. Потребує OptiFine.</string>
 </resources>
