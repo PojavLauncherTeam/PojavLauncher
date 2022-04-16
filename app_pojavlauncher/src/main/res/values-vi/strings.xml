@@ -82,8 +82,6 @@
     <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): xuất ra OpenGL 2.1+partial 3.2</string>
     <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): xuất ra OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): xuất ra OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): xuất ra OpenGL 4.6</string>
@@ -255,13 +253,8 @@
     <string name="profiles_latest_release">Phiên bản mới nhất</string>
     <string name="profiles_profile_name">Tên</string>
     <string name="profiles_profile_version">Phiên bản</string>
-    <string name="option_enable_profiles">Hồ sơ</string>
-    <string name="vbo_hack_title">Tắt VBO</string>
-    <string name="vbo_hack_description">Có thể giúp tương thích với một số phiên bản cũ</string>
     <string name="global_delete">Xóa</string>
     <string name="pedit_renderer">Trình kết xuất</string>
-    <string name="gles_version_hack_title">Bắt buộc OpenGL 1</string>
-    <string name="gles_version_hack_description">Có thể giúp tương thích với một số phiên bản cũ</string>
     <string name="arc_capes_title">Áo choàng từ Arc</string>
     <string name="arc_capes_desc">Sử dụng áo choàng từ dịch vụ Arc. Để biết thêm thông tin, truy cập https://arccapes.com. Yêu cầu có OptiFine.</string>
 </resources>
