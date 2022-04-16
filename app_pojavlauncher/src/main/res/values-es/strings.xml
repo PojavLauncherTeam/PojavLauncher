@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exporta OpenGL 2.1 + 3.2 (parcial)</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
@@ -259,15 +257,9 @@ Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abor
     <string name="profiles_editing">Editando perfil</string>
     <string name="profiles_profile_name">Nombre</string>
     <string name="profiles_profile_version">Versión</string>
-    <string name="option_enable_profiles">Perfiles</string>
-    <string name="option_enable_profiles_descritption">Usa los perfiles de Minecraft Launcher en lugar de la lista de versiones regulares. ¡Soporta iconos!</string>
-    <string name="vbo_hack_title">Deshabilitar VBOs</string>
-    <string name="vbo_hack_description">Ayuda con compatibilidad en algunas versiones antiguas</string>
     <string name="global_delete">Eliminar</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Renderizador</string>
-    <string name="gles_version_hack_title">Forzar OpenGL 1</string>
-    <string name="gles_version_hack_description">Ayuda con compatibilidad en algunas versiones antiguas</string>
     <string name="arc_capes_title">Capas de Arc</string>
     <string name="arc_capes_desc">Habilita las capas de Arc. Para más información visite https://arccapes.com. Requiere OptiFine.</string>
     <string name="migrated_profile_str">%s Configuración de la versión</string>
