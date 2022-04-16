@@ -4,10 +4,6 @@ import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GLES_SHRINK_HACK;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_OPENGL_VERSION_HACK;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VBO_DISABLE_HACK;
 
 import android.app.*;
 import android.content.*;
@@ -20,6 +16,8 @@ import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
+import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
 
@@ -199,17 +197,11 @@ public class JREUtils {
         // On certain GLES drivers, overloading default functions shader hack fails, so disable it
         envMap.put("LIBGL_NOINTOVLHACK", "1");
 
-        // The shrink hack can be enabled from the experimental settings
-        envMap.put("LIBGL_SHRINK", PREF_GLES_SHRINK_HACK);
-
-        // VBO disable hack
-        if (PREF_VBO_DISABLE_HACK) envMap.put("LIBGL_USEVBO","0");
-
-        // openGL version hack
-        if (PREF_OPENGL_VERSION_HACK) envMap.put("LIBGL_ES", "1");
-        
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
+
+        // The OPEN GL version is changed according
+        envMap.put("LIBGL_ES", (String) ExtraCore.getValue(ExtraConstants.OPEN_GL_VERSION));
    
         envMap.put("MESA_GLSL_CACHE_DIR", activity.getCacheDir().getAbsolutePath());
         if (LOCAL_RENDERER != null) {
@@ -262,7 +254,11 @@ public class JREUtils {
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             Logger.getInstance().appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
-            Os.setenv(env.getKey(), env.getValue(), true);
+            try {
+                Os.setenv(env.getKey(), env.getValue(), true);
+            }catch (NullPointerException exception){
+                Log.e("JREUtils", exception.toString());
+            }
         }
 
         File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
@@ -438,11 +434,8 @@ public class JREUtils {
         String renderLibrary;
         switch (LOCAL_RENDERER){
             case "opengles2": renderLibrary = "libgl4es_114.so"; break;
-            case "opengles2_5":
-            case "opengles3": renderLibrary = "libgl4es_115.so"; break;
             case "opengles3_virgl":
             case "vulkan_zink": renderLibrary = "libOSMesa_8.so"; break;
-            case "opengles3_vgpu" : renderLibrary = "libvgpu.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
                 renderLibrary = "libgl4es_114.so";
@@ -487,7 +480,8 @@ public class JREUtils {
         }
         return false;
     }
-    private static int getDetectedVersion() {
+
+    public static int getDetectedVersion() {
         /*
          * Get all the device configurations and check the EGL_RENDERABLE_TYPE attribute
          * to determine the highest ES version supported by any config. The

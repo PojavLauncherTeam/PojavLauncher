@@ -33,10 +33,7 @@ public class LauncherPreferences {
     public static int PREF_CONTROL_BOTTOM_OFFSET = 0;
     public static int PREF_CONTROL_LEFT_OFFSET = 0;
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
-    public static String PREF_GLES_SHRINK_HACK = "0";
-    public static boolean PREF_VBO_DISABLE_HACK = false;
     public static boolean PREF_VIRTUAL_MOUSE_START = false;
-    public static boolean PREF_OPENGL_VERSION_HACK = false;
     public static boolean PREF_ARC_CAPES = false;
     public static boolean PREF_USE_ALTERNATE_SURFACE = true;
     public static int PREF_SCALE_FACTOR = 100;
@@ -69,10 +66,7 @@ public class LauncherPreferences {
         PREF_CONTROL_BOTTOM_OFFSET = DEFAULT_PREF.getInt("controlBottomOffset", 0);
         PREF_CONTROL_LEFT_OFFSET = DEFAULT_PREF.getInt("controlLeftOffset", 0);
         PREF_SUSTAINED_PERFORMANCE = DEFAULT_PREF.getBoolean("sustainedPerformance", false);
-        PREF_GLES_SHRINK_HACK = DEFAULT_PREF.getString("gl4es_shrink_hack", "0");
-        PREF_VBO_DISABLE_HACK = DEFAULT_PREF.getBoolean("vbo_disable_hack", false);
         PREF_VIRTUAL_MOUSE_START = DEFAULT_PREF.getBoolean("mouse_start", false);
-        PREF_OPENGL_VERSION_HACK = DEFAULT_PREF.getBoolean("gles_version_hack", false);
         PREF_ARC_CAPES = DEFAULT_PREF.getBoolean("arc_capes",false);
         PREF_USE_ALTERNATE_SURFACE = DEFAULT_PREF.getBoolean("alternate_surface", false);
         PREF_SCALE_FACTOR = DEFAULT_PREF.getInt("resolutionRatio", 100);
@@ -105,9 +99,6 @@ public class LauncherPreferences {
         }
 */
 
-        if (PREF_RENDERER.equals("2") || PREF_RENDERER.equals("3")) {
-            PREF_RENDERER = "opengles" + PREF_RENDERER;
-	    }
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {
             if (arg.startsWith(argLwjglLibname)) {

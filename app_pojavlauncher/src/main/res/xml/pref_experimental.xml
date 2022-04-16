@@ -12,24 +12,5 @@
             android:entries="@array/hack_gles_shrink"
             app2:useSimpleSummaryProvider="true"/>
 
-        <SwitchPreference
-            android:title="@string/vbo_hack_title"
-            android:summary="@string/vbo_hack_description"
-            android:defaultValue="false"
-            android:key="vbo_disable_hack"
-            />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="enable_profiles"
-            android:title="@string/option_enable_profiles"
-            android:summary="@string/option_enable_profiles_descritption"/>
-
-        <SwitchPreference
-            android:title="@string/gles_version_hack_title"
-            android:summary="@string/gles_version_hack_description"
-            android:defaultValue="false"
-            android:key="gles_version_hack"
-            />
-
     </PreferenceCategory>
 </PreferenceScreen>

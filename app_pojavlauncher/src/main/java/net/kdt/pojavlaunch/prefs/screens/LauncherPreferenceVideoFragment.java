@@ -19,7 +19,7 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
         addPreferencesFromResource(R.xml.pref_video);
 
         //Disable notch checking behavior on android 8.1 and below.
-        findPreference("ignoreNotch").setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && PREF_NOTCH_SIZE != 0);
+        findPreference("ignoreNotch").setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && PREF_NOTCH_SIZE > 0);
 
         CustomSeekBarPreference seek5 = findPreference("resolutionRatio");
         seek5.setMin(25);
