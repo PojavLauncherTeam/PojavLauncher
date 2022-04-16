@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">スケーリングの設定</string>
     <string name="mcl_setting_category_renderer">レンダラー</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
@@ -248,15 +246,9 @@
     <string name="profiles_editing">プロファイルを編集</string>
     <string name="profiles_profile_name">名前</string>
     <string name="profiles_profile_version">バージョン</string>
-    <string name="option_enable_profiles">プロファイル</string>
-    <string name="option_enable_profiles_descritption">通常のバージョンリストの代わりにMinecraftランチャープロファイルを使用します。アイコンをサポートします！</string>
-    <string name="vbo_hack_title">VBOを無効にする</string>
-    <string name="vbo_hack_description">一部の古いバージョンでの互換性に関するヘルプ</string>
     <string name="global_delete">削除</string>
     <string name="pedit_java_runtime">Javaランタイム</string>
     <string name="pedit_renderer">レンダラー</string>
-    <string name="gles_version_hack_title">強制的にopenGL 1</string>
-    <string name="gles_version_hack_description">一部の古いバージョンでの互換性に関するヘルプ</string>
     <string name="arc_capes_title">アークケープ (Arc Capes)</string>
     <string name="arc_capes_desc">Arcからのマントを有効にします。詳細については、https：//arccapes.comをご覧ください。 OptiFineが必要です。</string>
     <string name="migrated_profile_str">%s バージョンの設定</string>
