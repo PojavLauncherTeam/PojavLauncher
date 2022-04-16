@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（尚未支持）</string>
     <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
@@ -258,15 +256,9 @@
     <string name="profiles_editing">编辑档案</string>
     <string name="profiles_profile_name">名称</string>
     <string name="profiles_profile_version">版本</string>
-    <string name="option_enable_profiles">配置</string>
-    <string name="option_enable_profiles_descritption">使用 Minecraft Launcher 配置文件而不是普通版本列表。支持图标！</string>
-    <string name="vbo_hack_title">禁用 VBO</string>
-    <string name="vbo_hack_description">兼容旧版本</string>
     <string name="global_delete">删除</string>
     <string name="pedit_java_runtime">Java 运行时</string>
     <string name="pedit_renderer">渲染器</string>
-    <string name="gles_version_hack_title">强制使用 OpenGL 1</string>
-    <string name="gles_version_hack_description">兼容旧版本</string>
     <string name="arc_capes_title">Arc 披风</string>
     <string name="arc_capes_desc">启用来自 Arc 的披风。欲了解更多信息，请访问 https://arcapes.com。需要OptiFine。</string>
     <string name="migrated_profile_str">%s 版本配置</string>
