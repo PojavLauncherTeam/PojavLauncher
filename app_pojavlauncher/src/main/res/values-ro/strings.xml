@@ -80,7 +80,6 @@
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
     <string name="mcl_setting_category_renderer">Randator</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportă OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exportsă OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportă OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportă OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipul de versiune va fi în lista de versiuni</string>
@@ -212,6 +211,5 @@
     <string name="storage_warning_text"><![CDATA[Din cauza noilor reglementări de stocare cu domeniu de aplicare ale Google adăugate în Android 10 și versiunile ulterioare, trebuie să mutăm directorul de joc într-un dosar privat al aplicației.<br /> Noul dosar pentru fișierele Pojav este <b>Android/data/%s/files/</b> (accesibil și prin intermediul unui furnizor de stocare în exploratorul de fișiere).<br /> Dacă trebuie să copiați fișierele de joc, vă rugăm să copiați manual totul din dosarul original de la <b>games/PojavLauncher</b>.]]></string>
     <string name="control_offset_title">Decalaj de control</string>
     <string name="profiles_profile_name">Nume</string>
-    <string name="option_enable_profiles">Profiluri</string>
     <string name="pedit_renderer">Randator</string>
 </resources>
