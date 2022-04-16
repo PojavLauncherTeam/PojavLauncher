@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): esporta OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): esporta OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): esporta OpenGL 2.1 + parziale 3.2</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): esporta OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): esporta OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): esporta OpenGL 4.6</string>
@@ -259,15 +257,9 @@ Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="profiles_editing">Modifica profilo</string>
     <string name="profiles_profile_name">Nome</string>
     <string name="profiles_profile_version">Versione</string>
-    <string name="option_enable_profiles">Profili</string>
-    <string name="option_enable_profiles_descritption">Usa i profili del Launcher Minecraft invece della solita versione a liste. Supporta le icone!</string>
-    <string name="vbo_hack_title">Disattiva VBOs</string>
-    <string name="vbo_hack_description">Aiuta con la compatibilità di alcune vecchie versioni</string>
     <string name="global_delete">Elimina</string>
     <string name="pedit_java_runtime">Runtime Java</string>
     <string name="pedit_renderer">Renderer</string>
-    <string name="gles_version_hack_title">Forza openGL 1</string>
-    <string name="gles_version_hack_description">Aiuta con la compatibilità di alcune vecchie versioni</string>
     <string name="arc_capes_title">Mantelli Arc</string>
     <string name="arc_capes_desc">Abilità i mantelli da Arc. Per maggiori informazioni per favore visitare https://arccapes.com. Necessità della Optifine.</string>
     <string name="migrated_profile_str">%s configurazione versione</string>
