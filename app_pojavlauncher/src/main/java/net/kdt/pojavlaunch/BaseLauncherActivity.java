@@ -106,8 +106,9 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             v.setEnabled(false);
             mTask = new MinecraftDownloaderTask(this);
                 LauncherProfiles.update();
-                if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(mProfile.selectedProfile + "")) {
-                    MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile + "");
+                String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
+                if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)) {
+                    MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
                     if (prof != null && prof.lastVersionId != null) {
                         if (mProfile.accessToken.equals("0")) {
                             String versionId = getVersionId(prof.lastVersionId);

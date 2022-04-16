@@ -6,6 +6,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 
 public class LauncherPreferences {
+    public static final String PREF_KEY_CURRENT_PROFILE = "currentProfile";
     public static SharedPreferences DEFAULT_PREF;
     public static String PREF_RENDERER = "opengles2";
 

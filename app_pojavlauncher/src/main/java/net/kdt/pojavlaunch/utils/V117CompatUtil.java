@@ -113,7 +113,8 @@ public class V117CompatUtil {
         String renderer;
         String gamePath;
         LauncherProfiles.update();
-        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)activity).mProfile.selectedProfile);
+        String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
+        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
         if(prof == null) throw new MinecraftDownloaderTask.SilentException();
         renderer = prof.pojavRendererName != null ? prof.pojavRendererName : LauncherPreferences.PREF_RENDERER;
         gamePath = prof.gameDir != null && prof.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX) ? prof.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME + "/") : Tools.DIR_GAME_NEW;
@@ -150,7 +151,7 @@ public class V117CompatUtil {
         }
         switch(proceed.get()) {
             case 1:
-                MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(((BaseLauncherActivity)activity).mProfile.selectedProfile);
+                MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
                 if(minecraftProfile == null) throw new MinecraftDownloaderTask.SilentException();
                 minecraftProfile.pojavRendererName = "opengles2";
                 LauncherProfiles.update();

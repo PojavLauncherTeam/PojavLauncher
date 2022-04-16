@@ -92,7 +92,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 //Now we have the reliable information to check if our runtime settings are good enough
                 if(verInfo.javaVersion != null) { //1.17+
                     LauncherProfiles.update();
-                    MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(mActivity.mProfile.selectedProfile);
+                    MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
                     if(minecraftProfile == null) throw new SilentException();
                     String selectedRuntime = null;
                     if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {

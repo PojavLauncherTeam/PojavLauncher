@@ -78,7 +78,7 @@ public class BaseMainActivity extends BaseActivity {
             mControlLayout = findViewById(R.id.main_control_layout);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(mProfile.selectedProfile);
+            minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
             if(minecraftProfile == null) {
                 Toast.makeText(this,"Attempted to launch nonexistent profile",Toast.LENGTH_SHORT).show();
                 finish();

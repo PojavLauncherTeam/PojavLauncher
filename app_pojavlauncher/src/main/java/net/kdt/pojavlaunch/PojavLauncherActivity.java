@@ -203,9 +203,9 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 }
                 profileAdapter.notifyDataSetChanged();
             });
-            mVersionSelector.setOnLongClickListener((v)->profileEditor.show(mProfile.selectedProfile));
+            mVersionSelector.setOnLongClickListener((v)->profileEditor.show(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"")));
             mVersionSelector.setAdapter(profileAdapter);
-            mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(mProfile.selectedProfile));
+            mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"")));
             mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
                 @Override
                 public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
@@ -216,16 +216,11 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                         mVersionSelector.setSelection(0);
                         return;
                     }
-                    mProfile.selectedProfile = p1.getItemAtPosition(p3).toString();
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile);
-                    if (PojavProfile.isFileType(PojavLauncherActivity.this)) {
-                        try {
-                             PojavProfile.setCurrentProfile(PojavLauncherActivity.this, mProfile.save());
-                        } catch (IOException e) {
-                             Tools.showError(PojavLauncherActivity.this, e);
-                        }
-                    }
-
+                    LauncherPreferences.DEFAULT_PREF.edit()
+                            .putString(
+                                    LauncherPreferences.PREF_KEY_CURRENT_PROFILE,
+                                    p1.getItemAtPosition(p3).toString())
+                            .commit();
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> p1)
