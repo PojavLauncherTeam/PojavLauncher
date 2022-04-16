@@ -433,7 +433,10 @@ public class JREUtils {
         if(LOCAL_RENDERER == null) return null;
         String renderLibrary;
         switch (LOCAL_RENDERER){
-            case "opengles2": renderLibrary = "libgl4es_114.so"; break;
+            case "opengles2":
+            case "opengles2_5":
+            case "opengles3":
+                renderLibrary = "libgl4es_114.so"; break;
             case "opengles3_virgl":
             case "vulkan_zink": renderLibrary = "libOSMesa_8.so"; break;
             default:
