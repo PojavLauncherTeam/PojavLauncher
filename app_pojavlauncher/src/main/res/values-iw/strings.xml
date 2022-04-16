@@ -80,8 +80,6 @@
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
     <string name="mcl_setting_category_renderer">רינדור</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.15 (OpenGL ES 3): מייצא OpenGL 2.1 + 3.2 (חלקי)</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): מייצא את OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): מייצא את OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): מייצא את OpenGL 4.6</string>
@@ -235,9 +233,5 @@
     <string name="gles_hack_always">חלק את כל הטקסטורות ב2</string>
     <string name="gles_hack_sometimes">חלק טקסטורות גדולות ב-2 או 4</string>
     <string name="profiles_profile_name">שם</string>
-    <string name="option_enable_profiles">פרופילים</string>
-    <string name="vbo_hack_description">מסייע בתאימות בגירסאות ישנות</string>
     <string name="pedit_renderer">רינדור</string>
-    <string name="gles_version_hack_title">הכרח openGL 1</string>
-    <string name="gles_version_hack_description">מסייע בתאימות בגירסאות ישנות</string>
 </resources>
