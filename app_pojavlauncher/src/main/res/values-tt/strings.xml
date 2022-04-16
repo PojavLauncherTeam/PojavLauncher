@@ -185,8 +185,6 @@
     <string name="profiles_editing">Профиль үзгәртү</string>
     <string name="profiles_profile_name">Исем</string>
     <string name="profiles_profile_version">Версия</string>
-    <string name="option_enable_profiles">Профильләр</string>
-    <string name="vbo_hack_title">VBO сүндерү</string>
     <string name="global_delete">Бетерү</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Рендерер</string>
