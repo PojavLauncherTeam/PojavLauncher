@@ -126,5 +126,4 @@
     <string name="pvc_gameDirectory">Spelkatalog</string>
     <string name="pvc_jvmArgs">JVM argument</string>
     <string name="pvc_title">Inställningar för per-version</string>
-    <string name="option_enable_profiles">Profiler</string>
 </resources>
