@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exportuje OpenGL 2.1 + částečně 3.2</string>
     <string name="mcl_setting_renderer_virgl">virglvykreslovač (OpenGL ES 3): exportuje OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportuje OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
@@ -258,15 +256,9 @@
     <string name="profiles_editing">Upravování profilu</string>
     <string name="profiles_profile_name">Název</string>
     <string name="profiles_profile_version">Verze</string>
-    <string name="option_enable_profiles">Profily</string>
-    <string name="option_enable_profiles_descritption">Používejte profily spouštěče Minecraftu namísto běžného seznamu verzí. Podporujeme ikony!</string>
-    <string name="vbo_hack_title">Vypnout VBOy</string>
-    <string name="vbo_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
     <string name="global_delete">Odstranit</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Vykreslovač</string>
-    <string name="gles_version_hack_title">Vynutit openGL 1</string>
-    <string name="gles_version_hack_description">Pomůže s kompatibilitou na některých starých verzí</string>
     <string name="arc_capes_title">Arc Kápě</string>
     <string name="arc_capes_desc">Vyžadujíc OptiFine, zapne kápě z Arcu. Pro více informací navštivte https://arccapes.com.</string>
     <string name="migrated_profile_str">Konfigurace verze %s</string>
