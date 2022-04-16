@@ -80,8 +80,6 @@
     <string name="mcl_setting_category_scaling">Nastavenie mierky</string>
     <string name="mcl_setting_category_renderer">Vykresľovač</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exportuje OpenGL 2.1 + čiastočne 3.2</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportuje OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
@@ -232,6 +230,5 @@
     <string name="gles_hack_always">Vydeliť všetky textúry dvoma</string>
     <string name="gles_hack_sometimes">Vydeliť veľké textúry dvoma alebo štyrmi</string>
     <string name="profiles_profile_name">Názov</string>
-    <string name="option_enable_profiles">Profily</string>
     <string name="pedit_renderer">Vykresľovač</string>
 </resources>
