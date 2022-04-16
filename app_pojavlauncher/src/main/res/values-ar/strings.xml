@@ -80,8 +80,6 @@
     <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
     <string name="mcl_setting_category_renderer">العارض</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
@@ -207,9 +205,7 @@
     <string name="storage_warning_title">تغييرات التخزين</string>
     <string name="storage_warning_text"><![CDATA[بسبب تطبيق Google الجديد لتخزين النطاق المضاف في أندرويد 10 وما فوق، نحن مطالبون بنقل ملفات اللعبة إلى مجلد تطبيق-خاص.<br /> المجلد الجديد لملفات Pojav هو <b>Android/data/%s/files/</b> (يمكن الوصول إليه أيضًا باستخدام موفر تخزين في مستكشف الملفات الخاص بك).<br /> إذا كنت بحاجة إلى نسخ ملفات اللعبة الخاصة بك، يرجى نسخ كل شيء من المجلد الأصلي في <b>الألعاب/ojavLauncher</b> يدويا.]]></string>
     <string name="profiles_profile_name">الاسم</string>
-    <string name="option_enable_profiles">المستخدمين</string>
     <string name="pedit_renderer">العارض</string>
-    <string name="gles_version_hack_title">فرض OpenGL 1</string>
     <string name="arc_capes_title">أوشحة من Arc</string>
     <string name="arc_capes_desc">يفعل أوشحه من Arc. لمزيد من المعلومات، يرجى زيارة https://arccapes.com. يتطلب OptiFine.</string>
 </resources>
