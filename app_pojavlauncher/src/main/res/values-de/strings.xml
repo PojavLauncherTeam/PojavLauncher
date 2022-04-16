@@ -80,8 +80,6 @@
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): Gibt OpenGL 2.1 aus</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): Gibt OpenGL 2.1 aus</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): Gibt OpenGL 2.1 + partial 3.2 aus</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Gibt OpenGL 4.3 aus</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): Gibt OpenGL 3.0 aus</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): Gibt OpenGL 4.6 aus</string>
@@ -249,12 +247,7 @@
     <string name="gles_hack_always">Teilt alle Texturen durch 2</string>
     <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
     <string name="profiles_profile_name">Name</string>
-    <string name="option_enable_profiles">Profile</string>
-    <string name="vbo_hack_title">Deaktiviere VBOs</string>
-    <string name="vbo_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
     <string name="pedit_renderer">Renderer</string>
-    <string name="gles_version_hack_title">Erzwinge openGL 1</string>
-    <string name="gles_version_hack_description">Hilfe zur Kompatibilität einiger alter Versionen</string>
     <string name="arc_capes_title">Arc-Capes</string>
     <string name="arc_capes_desc">Aktiviert Umhänge von Arc. Weitere Informationen sind auf https://arccapes.com zu finden. OptiFine wird benötigt.</string>
 </resources>
