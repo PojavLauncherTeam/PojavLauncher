@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">Scalin settingz</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): givez OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): givez OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4ez 1.1.5 (Opengl ez 3): iksportz Opengl 2.1 + partial 3.2</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): iksportz OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): givez OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
@@ -243,15 +241,9 @@
     <string name="profiles_editing">Editin cat</string>
     <string name="profiles_profile_name">Naym</string>
     <string name="profiles_profile_version">Type of cat</string>
-    <string name="option_enable_profiles">Profilez</string>
-    <string name="option_enable_profiles_descritption">Use minecraft launchr profilez instead ov teh regular vershun list. Supports inconz!</string>
-    <string name="vbo_hack_title">Disable VBOz</string>
-    <string name="vbo_hack_description">Halp wif compatibility on sum old vershuns</string>
     <string name="global_delete">Delete</string>
     <string name="pedit_java_runtime">Java runtime</string>
     <string name="pedit_renderer">Renderer</string>
-    <string name="gles_version_hack_title">Force openGL 1</string>
-    <string name="gles_version_hack_description">Halp wif compatibility on sum old vershuns</string>
     <string name="arc_capes_title">Arc Capez</string>
     <string name="arc_capes_desc">Enablez capez frum arc. 4 moar informashun plz visit https://arccapes.com. Requirez optifine.</string>
     <string name="migrated_profile_str">%s vershun configuration</string>
