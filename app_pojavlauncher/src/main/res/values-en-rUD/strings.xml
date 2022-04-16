@@ -84,8 +84,6 @@
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
     <string name="mcl_setting_renderer_gles2_4">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ߈˙⥝˙⥝ sǝ߈ꞁᵷ</string>
-    <string name="mcl_setting_renderer_gles2_5">⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(ᘔ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
-    <string name="mcl_setting_renderer_gles3_5">ᘔ˙Ɛ ꞁɐᴉʇɹɐd + ⥝˙ᘔ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ϛ˙⥝˙⥝ sǝ߈ꞁᵷ</string>
     <string name="mcl_setting_renderer_virgl">Ɛ˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ɹǝɹǝpuǝɹꞁᵷɹᴉʌ</string>
     <string name="mcl_setting_renderer_vgpu">0˙Ɛ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ndᵷʌ</string>
     <string name="mcl_setting_renderer_vulkan_zink">9˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(uɐʞꞁnɅ) ʞuᴉz</string>
@@ -249,15 +247,9 @@
     <string name="profiles_editing">ǝlᴉɟoɹd ƃuᴉʇᴉpƎ</string>
     <string name="profiles_profile_name">ǝɯɐN</string>
     <string name="profiles_profile_version">uoᴉsɹǝΛ</string>
-    <string name="option_enable_profiles">sǝlᴉɟoɹԀ</string>
-    <string name="option_enable_profiles_descritption">¡suoɔᴉ sʇɹoddnS ˙ʇsᴉl uoᴉsɹǝʌ ɹɐlnƃǝɹ ǝɥʇ ɟo pɐǝʇsuᴉ sǝlᴉɟoɹd ɹǝɥɔunɐ˥ ʇɟɐɹɔǝuᴉW ǝs∩</string>
-    <string name="vbo_hack_title">sOqΛ ǝlqɐsᴉp</string>
-    <string name="vbo_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
     <string name="global_delete">ǝʇǝlǝp</string>
     <string name="pedit_java_runtime">ǝɯᴉʇunɹ ɐʌɐſ</string>
     <string name="pedit_renderer">ɹǝɹǝpuǝᴚ</string>
-    <string name="gles_version_hack_title">Ɩ ˥פuǝdo ǝɔɹoℲ</string>
-    <string name="gles_version_hack_description">suoᴉsɹǝʌ plo ǝɯos uo ʎʇᴉlᴉqᴉʇɐdɯoɔ ɥʇᴉʍ dlǝH</string>
     <string name="arc_capes_title">sǝdɐƆ ɔɹ∀</string>
     <string name="arc_capes_desc">˙ǝuᴉℲᴉʇdO sǝɹᴉnbǝɹ ˙ɯoɔ˙sǝdɐɔɔɹɐ//:sdʇʇɥ ʇᴉsᴉʌ ǝsɐǝld uoᴉʇɐɯɹoɟuᴉ ǝɹoɯ ɹoℲ ˙ɔɹ∀ ɯoɹɟ sǝdɐɔ sǝlqɐuƎ</string>
     <string name="migrated_profile_str">uoᴉʇɐɹnƃᴉɟuoɔ uoᴉsɹǝʌ %s</string>
