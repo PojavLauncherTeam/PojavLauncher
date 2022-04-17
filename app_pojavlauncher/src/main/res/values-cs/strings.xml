@@ -60,7 +60,7 @@
     <string name="mcl_setting_subtitle_uninstalljre">[Restart launcheru vyžadován] Toto vám umožní přeinstalovat Java Prostředí</string>
     <string name="mcl_setting_title_freeform">Spustit Minecraft v režimu Volného okna</string>
     <string name="mcl_setting_subtitle_freeform">Spustit Minecraft v plovoucím okně. Vyžaduje Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Skrýt bočnípanel</string>
+    <string name="mcl_setting_title_hide_sidebar">Skrýt boční panel</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgičtí lidé upřednostňujíce v1 rozhraní, možná budou mít tuto možnost rádi. Dává více celo-obrazné prostředí.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorovat výřez</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignorovat výřez a rozšířit obrazovku pod ním.\nDá vám více celo-obrazný zážitek.</string>
