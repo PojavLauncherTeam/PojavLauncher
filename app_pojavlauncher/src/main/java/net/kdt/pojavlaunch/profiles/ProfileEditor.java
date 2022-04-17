@@ -45,6 +45,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
     private final Spinner mJavaRuntimeSpinner;
     private final Spinner mRendererSpinner;
     private final EditText mPathSelectionEditText;
+    private final EditText mArgChangerEditText;
     private final List<String> mRenderNames;
     private final AlertDialog mDialog;
     private String mSelectedVersionId;
@@ -80,6 +81,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         mProfileIconImageView = mMainView.findViewById(R.id.vprof_editor_icon);
         ((TextView)mMainView.findViewById(R.id.vprof_editor_beginPathView)).setText(Tools.DIR_GAME_HOME+"/");
         mPathSelectionEditText = mMainView.findViewById(R.id.vprof_editor_path);
+        mArgChangerEditText = mMainView.findViewById(R.id.vprof_editor_jre_args);
 
         builder.setPositiveButton(R.string.global_save,this::save);
         builder.setNegativeButton(android.R.string.cancel,(dialog,which)->destroy(dialog));
@@ -152,9 +154,12 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         ArrayList<String> versions = (ArrayList<String>) ExtraCore.getValue(ExtraConstants.VERSION_LIST);
 
         BaseLauncherActivity.updateVersionSpinner(context,versions,mVersionSpinner, mSelectedVersionId);
-        if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+        if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
             mPathSelectionEditText.setText(minecraftProfile.gameDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length()));
-        }
+        else mPathSelectionEditText.setText("");
+
+        if(minecraftProfile.javaArgs != null) mArgChangerEditText.setText(minecraftProfile.javaArgs);
+        else mArgChangerEditText.setText("");
         mDialog.show();
         return true;
     }
@@ -189,9 +194,11 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         if(mRendererSpinner.getSelectedItemPosition() == mRenderNames.size()) profile.pojavRendererName = null;
         else profile.pojavRendererName = mRenderNames.get(mRendererSpinner.getSelectedItemPosition());
         String selectedPath = mPathSelectionEditText.getText().toString();
-        if(!selectedPath.isEmpty()) {
-            profile.gameDir = Tools.LAUNCHERPROFILES_RTPREFIX+selectedPath;
-        }
+        String arguments = mArgChangerEditText.getText().toString();
+        if(!selectedPath.isEmpty()) profile.gameDir = Tools.LAUNCHERPROFILES_RTPREFIX+selectedPath;
+        else profile.gameDir = null;
+        if(!arguments.isEmpty()) profile.javaArgs = arguments;
+        else profile.javaArgs = null;
         LauncherProfiles.mainProfileJson.profiles.put(mEditingProfile,profile);
         mEditSaveCallback.onSave(mEditingProfile,isNew, false);
         destroy(dialog);

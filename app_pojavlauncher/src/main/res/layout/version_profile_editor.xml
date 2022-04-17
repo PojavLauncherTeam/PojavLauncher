@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_path" />
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_jre_args" />
 
     <TextView
         android:id="@+id/textView4"
@@ -119,8 +119,9 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint=".minecraft"
-        android:inputType="textPersonName"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vprof_editior_profile_name" />
 
@@ -130,6 +131,28 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/vprof_editor_path"
         app:layout_constraintStart_toStartOf="@+id/vprof_editor_path" />
+
+    <EditText
+        android:id="@+id/vprof_editor_jre_args"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_path" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pvc_jvmArgs"
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editor_jre_args"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_jre_args" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
