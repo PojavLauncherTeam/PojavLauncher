@@ -4,7 +4,7 @@ import android.view.InputDevice;
 import android.view.MotionEvent;
 
 
-import com.google.android.material.math.MathUtils;
+import net.kdt.pojavlaunch.utils.MathUtils;
 
 public class GamepadJoystick {
 

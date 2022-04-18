@@ -25,11 +25,11 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-
-import com.google.android.material.math.MathUtils;
+import net.kdt.pojavlaunch.utils.MathUtils;
 
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
