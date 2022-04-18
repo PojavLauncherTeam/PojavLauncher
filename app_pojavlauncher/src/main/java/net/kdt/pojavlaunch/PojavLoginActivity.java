@@ -411,8 +411,11 @@ public class PojavLoginActivity extends BaseActivity {
                     if(config == null) continue; // Skip the version
 
                     // Replaced by gl4es_extra
-                    if(config.renderer.contains("zink")) config.renderer = "opengles3_virgl";
-                    if(!config.renderer.contains("virgl")) config.renderer = null;
+                    if(config.renderer != null) {
+                        if (config.renderer.contains("zink")) config.renderer = "opengles3_virgl";
+                        if (!config.renderer.contains("virgl")) config.renderer = null;
+                    }
+
                     if(config.renderer == null && config.gamePath == null &&
                         config.jvmArgs == null && config.selectedRuntime == null){
                         continue; // Empty pvc, skip it.
