@@ -1,5 +1,5 @@
 package net.kdt.pojavlaunch.colorselector;
 
 public interface RectangleSelectionListener {
-    void onLuminosityIntensityChanged(float luminosity, float intensity);
+    void onLuminosityIntensityChanged(float luminosity, float intensity, boolean tapping);
 }

@@ -5,8 +5,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,9 +51,16 @@ public class SVRectangleView extends View {
         if(mFingerPosY < 0) mFingerPosY = 0;
         else if(mFingerPosY > 1) mFingerPosY = 1;
 
-        if(mRectSeelctionListener != null) mRectSeelctionListener.onLuminosityIntensityChanged(mFingerPosY,mFingerPosX);
+        if(mRectSeelctionListener != null) mRectSeelctionListener.onLuminosityIntensityChanged(mFingerPosY,mFingerPosX, true);
         invalidate();
         return true;
+    }
+
+    public void setLuminosityIntensity(float luminosity, float intensity) {
+        mFingerPosX = intensity;
+        mFingerPosY = luminosity;
+        if(mRectSeelctionListener != null) mRectSeelctionListener.onLuminosityIntensityChanged(mFingerPosY,mFingerPosX, false);
+        invalidate();
     }
 
     public void setColor(int color) {
@@ -62,7 +71,6 @@ public class SVRectangleView extends View {
     public void setRectSelectionListener(RectangleSelectionListener listener) {
         mRectSeelctionListener = listener;
     }
-
     protected void drawCrosshair(Canvas canvas, float x, float y) {
         canvas.drawLine(mCrosshairSize * 2 + x, y, mCrosshairSize + x, y, mCrosshairPaint);
         canvas.drawLine(x - mCrosshairSize * 2, y, x - mCrosshairSize, y, mCrosshairPaint);
@@ -94,13 +102,14 @@ public class SVRectangleView extends View {
         if(mSvRectangle != null)
             mSvRectangle.recycle();
         mSvRectangle = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        float intensityRatio = 255f / h;
-        float luminosityRatio = 255f / w;
-        for(int x = 0; x < w; x++) {
-            for(int y = 0; y < h; y++) {
-                int intensity = (int)(y * intensityRatio);
-                mSvRectangle.setPixel(x,y,Color.argb((int)(x * luminosityRatio), intensity, intensity, intensity));
-            }
-        }
+        Paint rectPaint = new Paint();
+        Canvas canvas = new Canvas(mSvRectangle);
+        float h2f = h/2f;
+        float w2f = w/2f;
+        rectPaint.setShader(new LinearGradient(0,h2f, w, h2f, Color.WHITE,0, Shader.TileMode.CLAMP));
+        canvas.drawRect(mViewSize, rectPaint);
+        rectPaint.setShader(new LinearGradient(w2f,0, w2f, h, Color.BLACK,0, Shader.TileMode.CLAMP));
+        canvas.drawRect(mViewSize, rectPaint);
+
     }
 }

@@ -34,13 +34,18 @@ public class HueView extends View {
     public void setHueSelectionListener(HueSelectionListener listener) {
         mHueSelectionListener = listener;
     }
+    public void setHue(float hue) {
+        mSelectionHue = hue;
+        if(mHueSelectionListener != null) mHueSelectionListener.onHueSelected(mSelectionHue, false);
+        invalidate();
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mSelectionHue = event.getX() * mWidthHueRatio;
         invalidate();
-        if(mHueSelectionListener != null) mHueSelectionListener.onHueSelected(mSelectionHue);
+        if(mHueSelectionListener != null) mHueSelectionListener.onHueSelected(mSelectionHue, true);
         return true;
     }
 
