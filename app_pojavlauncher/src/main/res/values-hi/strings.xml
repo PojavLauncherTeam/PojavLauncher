@@ -36,6 +36,7 @@
     <string name="mcl_tab_console">विकास कंसोल</string>
     <string name="mcl_tab_crash">क्रैश लॉग</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_offline">ऑफलाइन</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft  खेलने के लिए तैयार %s</string>
     <string name="mcl_launch_cleancache">कैशे फ़ाइलों की सफाई</string>
