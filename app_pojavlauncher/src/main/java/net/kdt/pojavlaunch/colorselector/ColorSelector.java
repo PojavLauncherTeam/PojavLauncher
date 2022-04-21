@@ -12,11 +12,10 @@ import android.widget.TextView;
 
 import net.kdt.pojavlaunch.R;
 
-public class ColorSelector implements HueSelectionListener, RectangleSelectionListener{
+public class ColorSelector implements HueSelectionListener, RectangleSelectionListener, AlphaSelectionListener{
     HueView mHueView;
     SVRectangleView mLuminosityIntensityView;
     EditText mTextView;
-    ColorSelectionListener mColorSelectionListener;
     float[] mHueTemplate = new float[] {0,1,1};
     float[] mHsvSelected = new float[] {360,1,1};
     AlertDialog mDialog;
@@ -28,11 +27,11 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
         mLuminosityIntensityView = view.findViewById(R.id.color_selector_rectangle_view);
         mLuminosityIntensityView.setRectSelectionListener(this);
         mLuminosityIntensityView.setLuminosityIntensity(1,1);
-        mTextView = view.findViewById(R.id.color_selector_hex_edit);
-        mColorSelectionListener = (color)->{
-            mTextView.setTextColor(color);
-        };
+        //mTextView = view.findViewById(R.id.color_selector_hex_edit);
         bldr.setView(view);
+        bldr.setPositiveButton(android.R.string.ok,(dialog,which)->{
+
+        });
         mDialog = bldr.create();
     }
 
@@ -54,7 +53,12 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
         dispatchColorChange(Color.HSVToColor(mHsvSelected),tapping);
     }
 
+    @Override
+    public void onAlphaSelected(int alpha, boolean tapping) {
+
+    }
+
     protected void dispatchColorChange(int color, boolean tapping) {
-        if(mColorSelectionListener != null) mColorSelectionListener.onColorSelected(Color.HSVToColor(mHsvSelected));
+
     }
 }

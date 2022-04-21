@@ -82,9 +82,8 @@ public class SVRectangleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawRect(mViewSize, mColorPaint);
-        drawCrosshair(canvas, mViewSize.right * mFingerPosX, mViewSize.bottom * mFingerPosY);
-        if(mSvRectangle != null)
         canvas.drawBitmap(mSvRectangle, 0,0, null);
+        drawCrosshair(canvas, mViewSize.right * mFingerPosX, mViewSize.bottom * mFingerPosY);
     }
 
     @Override

@@ -21,6 +21,7 @@ public class HueView extends View {
     Paint blackPaint = new Paint();
     float mSelectionHue;
     float mWidthHueRatio;
+    float mHueWidthRatio;
     float mWidth;
     float mHeight;
     float mHeightThird;
@@ -52,7 +53,7 @@ public class HueView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(mGamma, 0, 0 ,null);
-        float linePos = mSelectionHue / mWidthHueRatio;
+        float linePos = mSelectionHue * mHueWidthRatio;
         canvas.drawLine(linePos, 0 ,linePos, mHeightThird, blackPaint);
         canvas.drawLine(linePos, mHeightThird * 2 ,linePos, mHeight, blackPaint);
     }
@@ -72,7 +73,8 @@ public class HueView extends View {
         Paint paint = new Paint();
         Canvas canvas = new Canvas(mGamma);
         mWidthHueRatio = 360/ mWidth;
-        float[] hsvFiller = new float[] {0,1,1};
+        mHueWidthRatio = mWidth / 360;
+        float[] hsvFiller = new float[] {0, 1, 1};
         for(float i = 0; i < mWidth; i++) {
             hsvFiller[0] = i * mWidthHueRatio;
             paint.setColor(Color.HSVToColor(hsvFiller));
