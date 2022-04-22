@@ -1,5 +1,5 @@
 package net.kdt.pojavlaunch.colorselector;
 
 public interface HueSelectionListener {
-   void onHueSelected(float hue, boolean tappng);
+   void onHueSelected(float hue);
 }

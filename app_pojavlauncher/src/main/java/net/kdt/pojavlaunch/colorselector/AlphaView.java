@@ -35,25 +35,32 @@ public class AlphaView extends View {
         mBlackPaint.setColor(Color.BLACK);
     }
 
+    public void setAlphaSelectionListener(AlphaSelectionListener alphaSelectionListener) {
+        mAlphaSelectionListener = alphaSelectionListener;
+    }
+
     public void setAlpha(int alpha) {
-        if(mAlphaSelectionListener != null) mAlphaSelectionListener.onAlphaSelected(mSelectedAlpha,false);
+        mSelectedAlpha = alpha;
+        invalidate();
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mSelectedAlpha = (int) (mAlphaDiv * event.getX());
-        if(mAlphaSelectionListener != null) mAlphaSelectionListener.onAlphaSelected(mSelectedAlpha,true);
+        if(mSelectedAlpha < 0) mSelectedAlpha = 0;
+        if(mSelectedAlpha > 0xff) mSelectedAlpha = 0xff;
+        if(mAlphaSelectionListener != null) mAlphaSelectionListener.onAlphaSelected(mSelectedAlpha);
         invalidate();
         return true;
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int old_w, int old_h) {
         mViewSize.right = w;
         mViewSize.bottom = h;
         float h2 = mViewSize.bottom / 2f;
-        mShaderPaint.setShader(new LinearGradient(0,h2,w,h2, Color.BLACK, 0, Shader.TileMode.REPEAT));
+        mShaderPaint.setShader(new LinearGradient(0,h2,w,h2, 0, Color.BLACK, Shader.TileMode.REPEAT));
         mAlphaDiv = 255f / mViewSize.right;
         mScreenDiv = mViewSize.right / 255f;
         mHeightThird = mViewSize.bottom / 3f;
@@ -61,11 +68,9 @@ public class AlphaView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.i("onDraw","onDraw");
         mCheckerboardDrawable.draw(canvas);
         canvas.drawRect(mViewSize, mShaderPaint);
         float linePos = mSelectedAlpha * mScreenDiv;
-        Log.i("onDraw",linePos+"");
         canvas.drawLine(linePos, 0 ,linePos, mHeightThird, mBlackPaint);
         canvas.drawLine(linePos, mHeightThird * 2 ,linePos, mViewSize.bottom, mBlackPaint);
     }

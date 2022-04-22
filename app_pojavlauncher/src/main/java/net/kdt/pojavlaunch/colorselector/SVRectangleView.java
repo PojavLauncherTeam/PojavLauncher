@@ -20,21 +20,21 @@ import net.kdt.pojavlaunch.Tools;
 public class SVRectangleView extends View {
     Bitmap mSvRectangle;
     Paint mColorPaint = new Paint();
-    Paint mCrosshairPaint = new Paint();
+    Paint mPointerPaint = new Paint();
     RectF mViewSize;
     float mHeightInverted;
     float mWidthInverted;
-    float mCrosshairSize;
+    float mPointerSize;
     float mFingerPosX;
     float mFingerPosY;
-    RectangleSelectionListener mRectSeelctionListener;
+    RectangleSelectionListener mRectSelectionListener;
     public SVRectangleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mColorPaint.setColor(Color.BLACK);
         mColorPaint.setStyle(Paint.Style.FILL);
-        mCrosshairSize = Tools.dpToPx(6);
-        mCrosshairPaint.setColor(Color.BLACK);
-        mCrosshairPaint.setStrokeWidth(Tools.dpToPx(3));
+        mPointerSize = Tools.dpToPx(6);
+        mPointerPaint.setColor(Color.BLACK);
+        mPointerPaint.setStrokeWidth(Tools.dpToPx(3));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -51,7 +51,7 @@ public class SVRectangleView extends View {
         if(mFingerPosY < 0) mFingerPosY = 0;
         else if(mFingerPosY > 1) mFingerPosY = 1;
 
-        if(mRectSeelctionListener != null) mRectSeelctionListener.onLuminosityIntensityChanged(mFingerPosY,mFingerPosX, true);
+        if(mRectSelectionListener != null) mRectSelectionListener.onLuminosityIntensityChanged(mFingerPosY,mFingerPosX);
         invalidate();
         return true;
     }
@@ -59,7 +59,6 @@ public class SVRectangleView extends View {
     public void setLuminosityIntensity(float luminosity, float intensity) {
         mFingerPosX = intensity;
         mFingerPosY = luminosity;
-        if(mRectSeelctionListener != null) mRectSeelctionListener.onLuminosityIntensityChanged(mFingerPosY,mFingerPosX, false);
         invalidate();
     }
 
@@ -69,13 +68,13 @@ public class SVRectangleView extends View {
     }
 
     public void setRectSelectionListener(RectangleSelectionListener listener) {
-        mRectSeelctionListener = listener;
+        mRectSelectionListener = listener;
     }
-    protected void drawCrosshair(Canvas canvas, float x, float y) {
-        canvas.drawLine(mCrosshairSize * 2 + x, y, mCrosshairSize + x, y, mCrosshairPaint);
-        canvas.drawLine(x - mCrosshairSize * 2, y, x - mCrosshairSize, y, mCrosshairPaint);
-        canvas.drawLine(x, mCrosshairSize * 2 + y, x, mCrosshairSize + y, mCrosshairPaint);
-        canvas.drawLine(x, y - mCrosshairSize * 2, x, y - mCrosshairSize, mCrosshairPaint);
+    protected void drawPointer(Canvas canvas, float x, float y) {
+        canvas.drawLine(mPointerSize * 2 + x, y, mPointerSize + x, y, mPointerPaint);
+        canvas.drawLine(x - mPointerSize * 2, y, x - mPointerSize, y, mPointerPaint);
+        canvas.drawLine(x, mPointerSize * 2 + y, x, mPointerSize + y, mPointerPaint);
+        canvas.drawLine(x, y - mPointerSize * 2, x, y - mPointerSize, mPointerPaint);
     }
 
     @Override
@@ -83,11 +82,11 @@ public class SVRectangleView extends View {
         super.onDraw(canvas);
         canvas.drawRect(mViewSize, mColorPaint);
         canvas.drawBitmap(mSvRectangle, 0,0, null);
-        drawCrosshair(canvas, mViewSize.right * mFingerPosX, mViewSize.bottom * mFingerPosY);
+        drawPointer(canvas, mViewSize.right * mFingerPosX, mViewSize.bottom * mFingerPosY);
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int old_w, int old_h) {
         mViewSize = new RectF(0,0, w,h);
         mWidthInverted = 1/mViewSize.right;
         mHeightInverted = 1/mViewSize.bottom;

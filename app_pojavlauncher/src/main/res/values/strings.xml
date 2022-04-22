@@ -297,4 +297,5 @@
     <string name="arc_capes_title">Arc Capes</string>
     <string name="arc_capes_desc">Enables capes from Arc. For more information please visit https://arccapes.com. Requires OptiFine.</string>
     <string name="migrated_profile_str">%s version configuration</string>
+    <string name="color_default_hex" translatable="false">FFFF0000</string>
 </resources>

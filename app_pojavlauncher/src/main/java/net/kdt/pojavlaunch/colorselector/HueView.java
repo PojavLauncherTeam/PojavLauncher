@@ -37,7 +37,6 @@ public class HueView extends View {
     }
     public void setHue(float hue) {
         mSelectionHue = hue;
-        if(mHueSelectionListener != null) mHueSelectionListener.onHueSelected(mSelectionHue, false);
         invalidate();
     }
 
@@ -46,7 +45,7 @@ public class HueView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         mSelectionHue = event.getX() * mWidthHueRatio;
         invalidate();
-        if(mHueSelectionListener != null) mHueSelectionListener.onHueSelected(mSelectionHue, true);
+        if(mHueSelectionListener != null) mHueSelectionListener.onHueSelected(mSelectionHue);
         return true;
     }
 
@@ -59,7 +58,7 @@ public class HueView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int old_w, int old_h) {
         mWidth = w;
         mHeight = h;
         mHeightThird = mHeight / 3;
