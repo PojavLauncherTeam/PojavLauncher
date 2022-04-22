@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.colorselector;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,18 +13,20 @@ import android.widget.EditText;
 import net.kdt.pojavlaunch.R;
 
 public class ColorSelector implements HueSelectionListener, RectangleSelectionListener, AlphaSelectionListener, TextWatcher{
-    static final int ALPHA_MASK = ~(0xFF << 24);
-    HueView mHueView;
-    SVRectangleView mLuminosityIntensityView;
-    AlphaView mAlphaView;
-    ColorSideBySideView mColorView;
-    EditText mTextView;
-    ColorSelectionListener mColorSelectionListener;
-    float[] mHueTemplate = new float[] {0,1,1};
-    float[] mHsvSelected = new float[] {360,1,1};
-    int mAlphaSelected = 0xff;
-    boolean mWatch = true;
-    AlertDialog mDialog;
+    private static final int ALPHA_MASK = ~(0xFF << 24);
+    private final HueView mHueView;
+    private final SVRectangleView mLuminosityIntensityView;
+    private final AlphaView mAlphaView;
+    private final ColorSideBySideView mColorView;
+    private final EditText mTextView;
+    private final AlertDialog mDialog;
+    private ColorSelectionListener mColorSelectionListener;
+    private float[] mHueTemplate = new float[] {0,1,1};
+    private float[] mHsvSelected = new float[] {360,1,1};
+    private int mAlphaSelected = 0xff;
+    private ColorStateList mTextColors;
+    private boolean mWatch = true;
+
 
     /**
      * Creates a color selector dialog for this Context.
@@ -43,6 +46,7 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
         mLuminosityIntensityView.setRectSelectionListener(this);
         mAlphaView.setAlphaSelectionListener(this);
         mTextView.addTextChangedListener(this);
+        mTextColors = mTextView.getTextColors();
         builder.setView(view);
         builder.setPositiveButton(android.R.string.ok,(dialog,which)->{
             if (mColorSelectionListener != null) {
@@ -134,8 +138,10 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
         if(mWatch) {
             try {
                 int color = Integer.parseInt(s.toString(), 16);
+                mTextView.setTextColor(mTextColors);
                 runColor(color);
-            }catch (NumberFormatException ignored) {
+            }catch (NumberFormatException exception) {
+                mTextView.setTextColor(Color.RED);
             }
         }else{
             mWatch = true;

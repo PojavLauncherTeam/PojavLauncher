@@ -17,15 +17,15 @@ import net.kdt.pojavlaunch.Tools;
 
 
 public class HueView extends View {
-    Bitmap mGamma;
-    Paint blackPaint = new Paint();
-    float mSelectionHue;
-    float mWidthHueRatio;
-    float mHueWidthRatio;
-    float mWidth;
-    float mHeight;
-    float mHeightThird;
-    HueSelectionListener mHueSelectionListener;
+    private final Paint blackPaint = new Paint();
+    private Bitmap mGamma;
+    private HueSelectionListener mHueSelectionListener;
+    private float mSelectionHue;
+    private float mWidthHueRatio;
+    private float mHueWidthRatio;
+    private float mWidth;
+    private float mHeight;
+    private float mHeightThird;
     public HueView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         blackPaint.setColor(Color.BLACK);

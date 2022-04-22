@@ -176,8 +176,8 @@ public class EditControlButtonPopup {
         mColorSelector = new ColorSelector(ctx,color -> mEditingView.setImageDrawable(new ColorDrawable(color)));
 
         //Set color imageButton behavior
-        mBackgroundColorButton.setOnClickListener(this::colorButtonHandler);
-        mStrokeColorButton.setOnClickListener(this::colorButtonHandler);
+        mBackgroundColorButton.setOnClickListener(view -> showColorEditor((ImageView) view));
+        mStrokeColorButton.setOnClickListener(view -> showColorEditor((ImageView) view));
 
 
         //Set dialog buttons behavior
@@ -190,8 +190,7 @@ public class EditControlButtonPopup {
         setupCheckerboards();
     }
 
-    protected void colorButtonHandler(View view) {
-        ImageView imgView = (ImageView) view;
+    protected void showColorEditor(ImageView imgView) {
         mEditingView = imgView;
         mColorSelector.show(((ColorDrawable)(imgView.getDrawable())).getColor());
     }

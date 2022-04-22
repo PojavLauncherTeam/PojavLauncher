@@ -18,15 +18,15 @@ import androidx.annotation.Nullable;
 import net.kdt.pojavlaunch.Tools;
 
 public class SVRectangleView extends View {
-    Bitmap mSvRectangle;
-    Paint mColorPaint = new Paint();
-    Paint mPointerPaint = new Paint();
-    RectF mViewSize;
-    float mHeightInverted;
-    float mWidthInverted;
-    float mPointerSize;
-    float mFingerPosX;
-    float mFingerPosY;
+    private final Paint mColorPaint = new Paint();
+    private final Paint mPointerPaint = new Paint();
+    private final float mPointerSize;
+    private Bitmap mSvRectangle;
+    private RectF mViewSize;
+    private float mHeightInverted;
+    private float mWidthInverted;
+    private float mFingerPosX;
+    private float mFingerPosY;
     RectangleSelectionListener mRectSelectionListener;
     public SVRectangleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

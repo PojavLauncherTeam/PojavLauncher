@@ -11,13 +11,13 @@ import androidx.annotation.Nullable;
 import top.defaults.checkerboarddrawable.CheckerboardDrawable;
 
 public class ColorSideBySideView extends View {
-    Paint mPaint;
-    CheckerboardDrawable mCheckerboardDrawable = CheckerboardDrawable.create();
-    int mColor;
-    int mAlphaColor;
-    float mWidth;
-    float mHeight;
-    float mHalfHeight;
+    private final Paint mPaint;
+    private final CheckerboardDrawable mCheckerboardDrawable = CheckerboardDrawable.create();
+    private int mColor;
+    private int mAlphaColor;
+    private float mWidth;
+    private float mHeight;
+    private float mHalfHeight;
     public ColorSideBySideView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mPaint = new Paint();

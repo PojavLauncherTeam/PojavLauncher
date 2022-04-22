@@ -18,15 +18,15 @@ import net.kdt.pojavlaunch.Tools;
 import top.defaults.checkerboarddrawable.CheckerboardDrawable;
 
 public class AlphaView extends View {
-    Drawable mCheckerboardDrawable = CheckerboardDrawable.create();
-    Paint mShaderPaint = new Paint();
-    Paint mBlackPaint;
-    RectF mViewSize = new RectF(0,0,0,0);
-    AlphaSelectionListener mAlphaSelectionListener;
-    int mSelectedAlpha;
-    float mAlphaDiv; // for quick pos->alpha multiplication
-    float mScreenDiv; // for quick alpha->pos multiplication
-    float mHeightThird; // 1/3 of the view size for cursor
+    private final Drawable mCheckerboardDrawable = CheckerboardDrawable.create();
+    private final Paint mShaderPaint = new Paint();
+    private final Paint mBlackPaint;
+    private final RectF mViewSize = new RectF(0,0,0,0);
+    private AlphaSelectionListener mAlphaSelectionListener;
+    private int mSelectedAlpha;
+    private float mAlphaDiv; // for quick pos->alpha multiplication
+    private float mScreenDiv; // for quick alpha->pos multiplication
+    private float mHeightThird; // 1/3 of the view size for cursor
     public AlphaView(Context ctx, AttributeSet attrs) {
         super(ctx,attrs);
         mBlackPaint = new Paint();
