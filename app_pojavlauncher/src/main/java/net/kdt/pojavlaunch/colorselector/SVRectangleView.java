@@ -62,9 +62,9 @@ public class SVRectangleView extends View {
         invalidate();
     }
 
-    public void setColor(int color) {
+    public void setColor(int color, boolean invalidate) {
         mColorPaint.setColor(color);
-        invalidate();
+        if(invalidate) invalidate();
     }
 
     public void setRectSelectionListener(RectangleSelectionListener listener) {
