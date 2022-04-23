@@ -35,8 +35,6 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 
 import androidx.appcompat.app.*;
 
-import com.rarepebble.colorpicker.ColorPickerView;
-
 public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListener {
 
 	private TextView mEditTextView;
@@ -175,23 +173,6 @@ public class ActionPopupWindow extends PinnedPopupWindow implements OnClickListe
 	@Override
 	protected int clipVertically(int positionY) {
 		return positionY;
-	}
-
-
-	public static void showColorPicker(Context ctx,String title, boolean showAlpha, ImageView v){
-		int startColor = ((ColorDrawable)v.getDrawable()).getColor();
-
-		ColorPickerView picker = new ColorPickerView(ctx);
-		picker.setColor(startColor);
-		picker.showAlpha(showAlpha);
-
-		AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-		dialog.setTitle(title);
-		dialog.setView(picker);
-		dialog.setNegativeButton(android.R.string.cancel, null);
-		dialog.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> v.setImageDrawable(new ColorDrawable(picker.getColor())));
-
-		dialog.show();
 	}
 
 	public static void setPercentageText(TextView textView, int progress){
