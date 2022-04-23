@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import net.kdt.pojavlaunch.EfficientAndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.colorselector.ColorSelector;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 
@@ -55,6 +57,9 @@ public class EditControlButtonPopup {
     protected TextView mCornerRadiusTextView;
     protected TextView mStrokeWidthTextView;
     protected TextView mStrokeColorTextView;
+
+    protected ColorSelector mColorSelector;
+    protected ImageView mEditingView;
 
     protected final ControlButton mControlButton;
     protected final ControlData mProperties;
@@ -168,9 +173,11 @@ public class EditControlButtonPopup {
             spinner.setAdapter(mAdapter);
         }
 
+        mColorSelector = new ColorSelector(ctx,color -> mEditingView.setImageDrawable(new ColorDrawable(color)));
+
         //Set color imageButton behavior
-        mBackgroundColorButton.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit background color", true, mBackgroundColorButton));
-        mStrokeColorButton.setOnClickListener(view -> ActionPopupWindow.showColorPicker(ctx, "Edit stroke color", false, mStrokeColorButton));
+        mBackgroundColorButton.setOnClickListener(view -> showColorEditor((ImageView) view));
+        mStrokeColorButton.setOnClickListener(view -> showColorEditor((ImageView) view));
 
 
         //Set dialog buttons behavior
@@ -181,6 +188,11 @@ public class EditControlButtonPopup {
         defineDynamicCheckChange();
 
         setupCheckerboards();
+    }
+
+    protected void showColorEditor(ImageView imgView) {
+        mEditingView = imgView;
+        mColorSelector.show(((ColorDrawable)(imgView.getDrawable())).getColor());
     }
 
     protected void setupDialogButtons(){
