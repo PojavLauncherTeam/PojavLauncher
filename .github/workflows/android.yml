@@ -71,6 +71,7 @@ jobs:
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
           branch: buildjre8
           name: jre8-pojav
+          run_id: 2140559381
     
     - name: Build JRE JAR files
       run: |
