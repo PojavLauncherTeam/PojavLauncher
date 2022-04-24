@@ -42,18 +42,22 @@
     <string name="mcl_tab_crash">Absturzbericht</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Verbunden</string>
+    <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Bereit um Minecraft Version %s zu spielen</string>
     <string name="mcl_launch_cleancache">Säuberung von Cachedateien</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
     <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bereite das Herunterladen der Resourcen vor</string>
+    <string name="mcl_launch_error_localmode">Minecraft kann nicht legal installiert werden, wenn du mit einem lokalen Konto angemeldet sind. Bitte wechsel zu einem Online-Konto, um fortzufahren.</string>
     <string name="mcl_options">Optionen</string>
     <string name="mcl_option_modinstall">Starte einen Mod-Installer (Forge, LabyMod, Fabric, u.s.w.)</string>
     <string name="mcl_option_modinstallwitharg">Starte einen Mod-Installer (Mit eigenen Argumenten)</string>
     <string name="mcl_option_customcontrol">Benutzerdefinierte Steuerung</string>
     <string name="mcl_option_settings">Einstellungen</string>
     <string name="mcl_option_about">Über</string>
+    <string name="mcl_setting_title_use_surface_view">Verwende alternatives Oberflächen-Rendering</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Kann die Leistung in GPU-gebundenen Szenarien verbessern</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime deinstallieren</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher Neustart erforderlich] Mit dieser Option können Sie Java Runtime erneut installieren</string>
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
@@ -246,8 +250,16 @@
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
     <string name="gles_hack_always">Teilt alle Texturen durch 2</string>
     <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
+    <string name="unnamed">Unbenannt</string>
+    <string name="profiles_latest_snapshot">Neuste Entwicklungsversion</string>
+    <string name="profiles_latest_release">Neuste Vollversion</string>
+    <string name="profiles_editing">Profil bearbeiten</string>
     <string name="profiles_profile_name">Name</string>
+    <string name="profiles_profile_version">Version</string>
+    <string name="global_delete">Löschen</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Renderer</string>
     <string name="arc_capes_title">Arc-Capes</string>
     <string name="arc_capes_desc">Aktiviert Umhänge von Arc. Weitere Informationen sind auf https://arccapes.com zu finden. OptiFine wird benötigt.</string>
+    <string name="migrated_profile_str">%s Versionskonfiguration</string>
 </resources>
