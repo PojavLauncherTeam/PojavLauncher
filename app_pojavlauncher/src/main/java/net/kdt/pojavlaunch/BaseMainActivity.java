@@ -200,13 +200,16 @@ public class BaseMainActivity extends BaseActivity {
 
         Tools.updateWindowSize(this);
         minecraftGLView.refreshSize();
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mControlLayout.refreshControlButtonPositions();
-            }
-        }, 1000);
+        runOnUiThread(() -> mControlLayout.refreshControlButtonPositions());
     }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(minecraftGLView != null)  // Useful when backing out of the app
+            new Handler(Looper.getMainLooper()).postDelayed(() -> minecraftGLView.refreshSize(), 500);
+    }
+
 
     public static void fullyExit() {
         android.os.Process.killProcess(android.os.Process.myPid());
