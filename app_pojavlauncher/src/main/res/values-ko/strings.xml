@@ -218,6 +218,7 @@
     <string name="pvc_gameDirectory">게임 디렉토리</string>
     <string name="pvc_jvmArgs">JVM 실행 설정</string>
     <string name="pvc_title">버전마다 설정</string>
+    <string name="storage_warning_text"><![CDATA[Android 10 이상에 추가된 Google\의 새로운 스토리지 적용 범위로 인해, 게임 폴더를 내부 저장소 폴더로 이동해야 합니다.<br /> Pojav 파일의 새 폴더는 <b>Android/data/%s/files/</b> 입니다 (파일 탐색기의 콘텐츠 제공자를 사용하여 액세스할 수도 있습니다).<br /> 게임 파일을 복사해야 하는 경우, 원래 폴더인 <b>games/PojavLauncher</b> 에서 모든 파일을 수동으로 복사하십시오.]]></string>
     <string name="control_offset_title">조작 오프셋</string>
     <string name="control_top_offset">상단 시작점: </string>
     <string name="control_right_offset">우측 시작점: </string>
@@ -240,8 +241,14 @@
     <string name="gles_hack_none">텍스쳐 축소하지 않기</string>
     <string name="gles_hack_always">모든 텍스쳐를 반으로 줄이기</string>
     <string name="gles_hack_sometimes">큰 텍스쳐를 반 또는 반의 반으로 줄이기</string>
+    <string name="profiles_latest_snapshot">최신 스냅샷</string>
+    <string name="profiles_latest_release">최신 버전</string>
+    <string name="profiles_editing">프로필 편집</string>
     <string name="profiles_profile_name">이름</string>
+    <string name="profiles_profile_version">버전</string>
+    <string name="pedit_java_runtime">자바 런타임</string>
     <string name="pedit_renderer">렌더러</string>
     <string name="arc_capes_title">아크 망토</string>
     <string name="arc_capes_desc">아크에서 망토를 활성화하세요. 더 많은 정보는 https://arccapes.com 에서 확인하세요. OptiFine이 필요합니다.</string>
+    <string name="migrated_profile_str">%s 버전 설정</string>
 </resources>
