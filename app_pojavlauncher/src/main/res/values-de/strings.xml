@@ -46,7 +46,7 @@
     <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Bereit um Minecraft Version %s zu spielen</string>
-    <string name="mcl_launch_cleancache">Säuberung von Cachedateien</string>
+    <string name="mcl_launch_cleancache">Löschen von Cachedateien</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
     <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bereite das Herunterladen der Resourcen vor</string>
@@ -66,7 +66,7 @@
     <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Einbuchtung im Bildschirm und erweitert das Bild unter ihr.\nDie Spielerfahrung wird dadurch immersiver.</string>
     <string name="mcl_setting_title_resolution_scaler">Auflösungsskalator</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht es dir die Spielauflösung zu verringern. 100% ist die normale Auflösung</string>
-    <string name="mcl_setting_title_longpresstrigger">Wie lange wird nach langem Drücken ausgelöst</string>
+    <string name="mcl_setting_title_longpresstrigger">Auslösezeit für langes Drücken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
     <string name="mcl_setting_title_backtorightmouse">Die Zurück-Taste als Rechte Maustaste werten</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Manche Geräte werten den Rechtsklick einer externen Maus als Zurück-Taste. Solltest du eine externe Maus verwenden, solltest du diese Einstellung aktivieren.</string>
@@ -86,8 +86,8 @@
     <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Vollversionen</string>
     <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
+    <string name="mcl_setting_veroption_oldalpha">Alte Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Alte Beta</string>
     <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
     <string name="global_edit">Bearbeiten</string>
@@ -130,7 +130,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Anwendung/Spiel mit Code %d beendet</string>
     <string name="mcn_exit_call">Beenden</string>
-    <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie die Beendung erzwingen möchten?</string>
+    <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie das Beenden erzwingen möchten?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wurde nicht installiert!</string>
     <string name="mcn_check_fail_incompatiblearch">Architektur %1$s ist inkompatibel mit Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
@@ -179,7 +179,7 @@
     <string name="customctrl_keycombine_control">Strg</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Button hinzufügen</string>
-    <string name="customctrl_selectdefault">Wähle die standard Conroll json</string>
+    <string name="customctrl_selectdefault">Wähle die standard Control json</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
     <string name="main_welcome">Willkommen, %s</string>
