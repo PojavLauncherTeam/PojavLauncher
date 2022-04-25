@@ -31,7 +31,7 @@
     <string name="error_show_more">Mehr anzeigen</string>
     <string name="error_show_less">Weniger anzeigen</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Die Schreib-/Lese-Berechtigung für den Speicher ist erforderlich!</string>
+    <string name="toast_permission_denied">Die Lese-/Schreib-Berechtigung für den Speicher ist erforderlich!</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
     <string name="toast_uninstalljre_done">Deinstallation der Java Runtime fertiggestellt</string>
     <!--
@@ -45,7 +45,7 @@
     <string name="mcl_account_connected">Verbunden</string>
     <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Bereit um Minecraft Version %s zu spielen</string>
+    <string name="mcl_version_msg">Bereit um Minecraft %s zu spielen</string>
     <string name="mcl_launch_cleancache">Löschen von Cachedateien</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
     <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
@@ -64,7 +64,7 @@
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgiker, die die alte v1-Benutzeroberfläche bevorzugen, könnten dies mögen. Gibt dir ein besseres Vollbild-Erlebnis.</string>
     <string name="mcl_setting_title_ignore_notch">Ignoriere die Kameraeinkerbung</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Einbuchtung im Bildschirm und erweitert das Bild unter ihr.\nDie Spielerfahrung wird dadurch immersiver.</string>
-    <string name="mcl_setting_title_resolution_scaler">Auflösungsskalator</string>
+    <string name="mcl_setting_title_resolution_scaler">Auflösungsskalierung</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht es dir die Spielauflösung zu verringern. 100% ist die normale Auflösung</string>
     <string name="mcl_setting_title_longpresstrigger">Auslösezeit für langes Drücken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
@@ -165,7 +165,7 @@
 -->
     <string name="customctrl_edit">Editiere %s</string>
     <string name="customctrl_remove">Soll %s entfernt werden?</string>
-    <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_keyname">Tastaturcode</string>
     <string name="customctrl_toggle">Umschaltbar</string>
     <string name="customctrl_size">Größe</string>
     <string name="customctrl_size_width">Breite</string>
@@ -195,7 +195,7 @@
     <string name="mcl_setting_check_libraries">Bibliotheken nach dem Download überprüfen</string>
     <string name="mcl_setting_check_libraries_subtitle">Diese Option zwingt den Launcher dazu, den Hash der Bibliothek zu überprüfen, falls er verfügbar ist. Verhindert fehlerhafte Downloads.</string>
     <string name="dl_library_sha_fail">Die Bibliothek %s ist beschädigt und wird erneut heruntergeladen</string>
-    <string name="dl_library_sha_unknown">Die Bibliothek %s konnte nicht überprüft werden. Wir gehen davon aus, dass sie nicht beechädigt ist</string>
+    <string name="dl_library_sha_unknown">Die Bibliothek %s konnte nicht überprüft werden. Wir gehen davon aus, dass sie nicht beschädigt ist</string>
     <string name="dl_library_sha_pass">Die Bibliothek %s ist unbeschädigt und verwendbar</string>
     <string name="mcl_disable_gestures">Gesten deaktivieren</string>
     <string name="mcl_disable_gestures_subtitle">Diese Einstellung deaktiviert Gesten, wie zum Beispiel gedrückt halten, um einen Block zu zerstören und eine kurze Berührung, um einen Block zu platzieren.</string>
