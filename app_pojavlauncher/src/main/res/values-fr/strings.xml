@@ -48,6 +48,7 @@
     <string name="mcl_launch_downloading">Téléchargement de %s</string>
     <string name="mcl_launch_downloading_progress">"Téléchargement de %s (%.2f Mo / %.2f Mo)"</string>
     <string name="mcl_launch_download_assets">Préparation du téléchargement des ressources</string>
+    <string name="mcl_launch_error_localmode">Minecraft ne peut pas être installé légalement en étant connecté avec un compte local. S\'il vous plaît changez vers un compte en ligne pour continuer.</string>
     <string name="mcl_options">Options</string>
     <string name="mcl_option_modinstall">Lancer un installateur de mods (Forge, LabyMod, Fabric, etc.)</string>
     <string name="mcl_option_modinstallwitharg">Lancer un installateur de mods (avec des arguments personnalisés)</string>
@@ -205,9 +206,20 @@
     <string name="multirt_config_setdefault_already">Par défaut</string>
     <string name="multirt_config_removeerror_last">Vous devez avoir au moins un Java Runtime installé</string>
     <string name="compat_11x_playanyway">Jouer quand même</string>
+    <string name="preference_mouse_start_title">Démarrer avec la souris virtuelle activée</string>
+    <string name="preference_mouse_start_description">Utiliser cette option vous fera être jugé par Mathias-Boulay</string>
+    <string name="preference_control_title">Contrôlez la customisation</string>
+    <string name="preference_java_title">Réglages Java</string>
+    <string name="preference_java_description">Versions de Java, Arguments de la JVM, et montant de RAM</string>
+    <string name="preference_misc_title">Paramètres divers</string>
+    <string name="preference_misc_description">Liste des versions, et vérifications des librairies</string>
+    <string name="preference_experimental_title">Trucs Expérimentaux</string>
     <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
     <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
     <string name="preference_back_title">Retour au dernier écran</string>
+    <string name="gles_hack_always">Divise toutes les textures par 2</string>
+    <string name="gles_hack_sometimes">Divise les grosses textures par 2 ou par 4</string>
     <string name="profiles_profile_name">Nom</string>
     <string name="pedit_renderer">Moteur de rendu</string>
+    <string name="arc_capes_desc">Active les capes par Arc. Pour plus d\'informations visitez https://arccapes.com. Nécessite OptiFine.</string>
 </resources>
