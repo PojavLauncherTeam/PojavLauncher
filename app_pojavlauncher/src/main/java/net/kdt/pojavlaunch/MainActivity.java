@@ -3,6 +3,9 @@ package net.kdt.pojavlaunch;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.*;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 
 import net.kdt.pojavlaunch.customcontrols.*;
@@ -22,34 +25,32 @@ public class MainActivity extends BaseMainActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initLayout(R.layout.activity_basemain);
 
         // Set the sustained performance mode for available APIs
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             getWindow().setSustainedPerformanceMode(PREF_SUSTAINED_PERFORMANCE);
-
-        super.ingameControlsEditorListener = menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.menu_ctrl_load:
-                    CustomControlsActivity.load(mControlLayout);
-                    break;
-                case R.id.menu_ctrl_add:
+        ingameControlsEditorArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menu_customcontrol));
+        ingameControlsEditorListener = (parent, view, position, id) -> {
+            switch(position) {
+                case 0:
                     mControlLayout.addControlButton(new ControlData("New"));
                     break;
-                case R.id.menu_ctrl_add_drawer:
+                case 1:
                     mControlLayout.addDrawer(new ControlDrawerData());
                     break;
-                case R.id.menu_ctrl_selectdefault:
-                    CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
+                case 2:
+                    CustomControlsActivity.load(mControlLayout);
                     break;
-                case R.id.menu_ctrl_save:
+                case 3:
                     CustomControlsActivity.save(true,mControlLayout);
                     break;
+                case 4:
+                    CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
+                    break;
             }
-            //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-            return true;
         };
-
         // Recompute the gui scale when options are changed
         optionListener = MCOptionUtils::getMcScale;
         MCOptionUtils.addMCOptionListener(optionListener);
