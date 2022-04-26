@@ -26,13 +26,13 @@
 
 	</RelativeLayout>
 
-	<com.google.android.material.navigation.NavigationView
+	<ListView
+		android:id="@+id/customctrl_navigation_view"
 		android:layout_width="200dp"
 		android:layout_height="match_parent"
 		android:layout_gravity="right"
-		android:fitsSystemWindows="true"
-		app:menu="@menu/menu_customctrl"
-		android:id="@+id/customctrl_navigation_view"/>
+		android:background="?attr/colorBackgroundFloating"
+		android:fitsSystemWindows="false" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
 

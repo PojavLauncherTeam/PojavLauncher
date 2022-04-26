@@ -19,7 +19,7 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.*;
-import com.google.android.material.navigation.*;
+
 import com.kdt.LoggerView;
 
 import java.io.*;
@@ -57,10 +57,13 @@ public class BaseMainActivity extends BaseActivity {
     MinecraftProfile minecraftProfile;
     
     private DrawerLayout drawerLayout;
-    private NavigationView navDrawer;
+    private ListView navDrawer;
 
-    private NavigationView.OnNavigationItemSelectedListener gameActionListener;
-    public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
+    private ArrayAdapter<String> gameActionArrayAdapter;
+    private AdapterView.OnItemClickListener gameActionClickListener;
+    public ArrayAdapter<String> ingameControlsEditorArrayAdapter;
+    public AdapterView.OnItemClickListener ingameControlsEditorListener;
+    //public NavigationView.OnNavigationItemSelectedListener ingameControlsEditorListener;
 
     protected volatile JMinecraftVersionList.Version mVersionInfo;
 
@@ -116,26 +119,32 @@ public class BaseMainActivity extends BaseActivity {
             drawerLayout = findViewById(R.id.main_drawer_options);
 
             navDrawer = findViewById(R.id.main_navigation_view);
-            gameActionListener = menuItem -> {
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_forceclose: dialogForceClose(BaseMainActivity.this);
-                        break;
-                    case R.id.nav_viewlog: openLogOutput();
-                        break;
-                    case R.id.nav_debug: minecraftGLView.togglepointerDebugging();
-                        break;
-                    case R.id.nav_customkey: dialogSendCustomKey();
-                        break;
-                    case R.id.nav_mousespd: adjustMouseSpeedLive();
-                        break;
-                    case R.id.nav_customctrl: openCustomControls();
-                        break;
-                }
 
+            gameActionArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menu_ingame));
+            gameActionClickListener = (parent, view, position, id) -> {
+                switch(position) {
+                    case 0:
+                        dialogForceClose(BaseMainActivity.this);
+                        break;
+                    case 1:
+                        openLogOutput();
+                        break;
+                    case 2:
+                        minecraftGLView.togglepointerDebugging();
+                        break;
+                    case 3:
+                        dialogSendCustomKey();
+                        break;
+                    case 4:
+                        adjustMouseSpeedLive();
+                        break;
+                    case 5:
+                        openCustomControls();
+                }
                 drawerLayout.closeDrawers();
-                return true;
             };
-            navDrawer.setNavigationItemSelectedListener(gameActionListener);
+            navDrawer.setAdapter(gameActionArrayAdapter);
+            navDrawer.setOnItemClickListener(gameActionClickListener);
 
             touchpad = findViewById(R.id.main_touchpad);
 
@@ -299,12 +308,11 @@ public class BaseMainActivity extends BaseActivity {
 
     boolean isInEditor;
     private void openCustomControls() {
-        if(ingameControlsEditorListener == null) return;
+        if(ingameControlsEditorListener == null || ingameControlsEditorArrayAdapter == null) return;
 
         ((MainActivity)this).mControlLayout.setModifiable(true);
-        navDrawer.getMenu().clear();
-        navDrawer.inflateMenu(R.menu.menu_customctrl);
-        navDrawer.setNavigationItemSelectedListener(ingameControlsEditorListener);
+        navDrawer.setAdapter(ingameControlsEditorArrayAdapter);
+        navDrawer.setOnItemClickListener(ingameControlsEditorListener);
         isInEditor = true;
     }
 
@@ -321,9 +329,8 @@ public class BaseMainActivity extends BaseActivity {
             }
             //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
         }
-        navDrawer.getMenu().clear();
-        navDrawer.inflateMenu(R.menu.menu_runopt);
-        navDrawer.setNavigationItemSelectedListener(gameActionListener);
+        navDrawer.setAdapter(gameActionArrayAdapter);
+        navDrawer.setOnItemClickListener(gameActionClickListener);
         isInEditor = false;
     }
     private void openLogOutput() {
