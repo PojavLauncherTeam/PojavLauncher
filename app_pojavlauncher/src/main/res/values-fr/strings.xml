@@ -221,5 +221,4 @@
     <string name="gles_hack_sometimes">Divise les grosses textures par 2 ou par 4</string>
     <string name="profiles_profile_name">Nom</string>
     <string name="pedit_renderer">Moteur de rendu</string>
-    <string name="arc_capes_desc">Active les capes par Arc. Pour plus d\'informations visitez https://arccapes.com. Nécessite OptiFine.</string>
 </resources>
