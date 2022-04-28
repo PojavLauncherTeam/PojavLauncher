@@ -260,7 +260,5 @@
     <string name="global_delete">Sil</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">İşleyici</string>
-    <string name="arc_capes_title">Arc Pelerinleri</string>
-    <string name="arc_capes_desc">Arc\'ın Pelerinlerini aktifleştirir. Daha fazla bilgi için lütfen https://arccapes.com\'u ziyaret edin. OptiFine gerektirir.</string>
     <string name="migrated_profile_str">%s sürüm ayarlaması</string>
 </resources>
