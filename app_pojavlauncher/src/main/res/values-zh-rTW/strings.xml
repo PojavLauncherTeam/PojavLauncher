@@ -242,6 +242,4 @@
     <string name="gles_hack_sometimes">將大紋理除以 2 或 4</string>
     <string name="profiles_profile_name">名稱</string>
     <string name="pedit_renderer">渲染器</string>
-    <string name="arc_capes_title">Arc披風</string>
-    <string name="arc_capes_desc">啟用Arc披風。更多訊息請至 https://arccapes.com 。需要Optifine。</string>
 </resources>
