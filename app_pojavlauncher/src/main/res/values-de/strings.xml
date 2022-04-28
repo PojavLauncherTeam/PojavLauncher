@@ -30,7 +30,7 @@
     <string name="error_show_more">Mehr anzeigen</string>
     <string name="error_show_less">Weniger anzeigen</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Die Schreib-/Lese-Berechtigung für den Speicher ist erforderlich!</string>
+    <string name="toast_permission_denied">Die Lese-/Schreib-Berechtigung für den Speicher ist erforderlich!</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
     <string name="toast_uninstalljre_done">Deinstallation der Java Runtime fertiggestellt</string>
     <!--
@@ -44,11 +44,11 @@
     <string name="mcl_account_connected">Verbunden</string>
     <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Bereit um Minecraft Version %s zu spielen</string>
-    <string name="mcl_launch_cleancache">Löschen von Cachedateien</string>
+    <string name="mcl_version_msg">Bereit um Minecraft %s zu spielen</string>
+    <string name="mcl_launch_cleancache">Cache-Dateien bereinigen</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
     <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
-    <string name="mcl_launch_download_assets">Bereite das Herunterladen der Resourcen vor</string>
+    <string name="mcl_launch_download_assets">Bereite das Herunterladen der Ressourcen vor</string>
     <string name="mcl_launch_error_localmode">Minecraft kann nicht legal installiert werden, wenn du mit einem lokalen Konto angemeldet sind. Bitte wechsel zu einem Online-Konto, um fortzufahren.</string>
     <string name="mcl_options">Optionen</string>
     <string name="mcl_option_modinstall">Starte einen Mod-Installer (Forge, LabyMod, Fabric, u.s.w.)</string>
@@ -87,11 +87,11 @@
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Gibt OpenGL 4.3 aus</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): Gibt OpenGL 3.0 aus</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): Gibt OpenGL 4.6 aus</string>
-    <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
+    <string name="mcl_setting_category_veroption">Versionsarten, welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Vollversionen</string>
     <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
-    <string name="mcl_setting_veroption_oldalpha">Alte Alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Alte Beta</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
     <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
     <string name="global_edit">Bearbeiten</string>
@@ -113,7 +113,7 @@
     <string name="mcn_check_fail_lwjgl">LWJGL3 wurde nicht installiert!</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink-Renderer wird auf diesem Gerät nicht unterstützt!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">Benutzeroberfläche</string>
+    <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatur</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
@@ -151,7 +151,7 @@
 -->
     <string name="customctrl_edit">Editiere %s</string>
     <string name="customctrl_remove">Soll %s entfernt werden?</string>
-    <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_keyname">Tastencode</string>
     <string name="customctrl_toggle">Umschaltbar</string>
     <string name="customctrl_size">Größe</string>
     <string name="customctrl_size_width">Breite</string>
@@ -171,11 +171,11 @@
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Strg</string>
     <string name="customctrl_keycombine_shift">Shift</string>
-    <string name="customctrl_addbutton">Button hinzufügen</string>
+    <string name="customctrl_addbutton">Taste hinzufügen</string>
     <string name="customctrl_addbutton_drawer">Schaltflächengruppe hinzufügen</string>
     <string name="customctrl_addsubbutton">Sub-Schaltfläche hinzufügen</string>
     <string name="customctrl_add_subbutton_message">Unter-Schaltfläche Nr. %d wurde hinzugefügt!</string>
-    <string name="customctrl_selectdefault">Wähle die standard Control json</string>
+    <string name="customctrl_selectdefault">Wähle die Standardsteuerung</string>
     <string name="main_install_jar_file">.jar installieren</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
@@ -259,7 +259,5 @@
     <string name="global_delete">Löschen</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Renderer</string>
-    <string name="arc_capes_title">Arc-Capes</string>
-    <string name="arc_capes_desc">Aktiviert Umhänge von Arc. Weitere Informationen sind auf https://arccapes.com zu finden. OptiFine wird benötigt.</string>
     <string name="migrated_profile_str">%s Versionskonfiguration</string>
 </resources>
