@@ -248,7 +248,5 @@
     <string name="profiles_profile_version">버전</string>
     <string name="pedit_java_runtime">자바 런타임</string>
     <string name="pedit_renderer">렌더러</string>
-    <string name="arc_capes_title">아크 망토</string>
-    <string name="arc_capes_desc">아크에서 망토를 활성화하세요. 더 많은 정보는 https://arccapes.com 에서 확인하세요. OptiFine이 필요합니다.</string>
     <string name="migrated_profile_str">%s 버전 설정</string>
 </resources>
