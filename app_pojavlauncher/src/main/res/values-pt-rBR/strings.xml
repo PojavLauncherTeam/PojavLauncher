@@ -249,6 +249,4 @@
     <string name="gles_hack_sometimes">Dividir texturas grandes por 2 ou 4</string>
     <string name="profiles_profile_name">Nome</string>
     <string name="pedit_renderer">Renderizador</string>
-    <string name="arc_capes_title">E</string>
-    <string name="arc_capes_desc">Habilita as capas do Arc. Para mais informações, visite https://arccapes.com. Requer OptiFine.</string>
 </resources>
