@@ -249,7 +249,5 @@
     <string name="global_delete">削除</string>
     <string name="pedit_java_runtime">Javaランタイム</string>
     <string name="pedit_renderer">レンダラー</string>
-    <string name="arc_capes_title">アークケープ (Arc Capes)</string>
-    <string name="arc_capes_desc">Arcからのマントを有効にします。詳細については、https：//arccapes.comをご覧ください。 OptiFineが必要です。</string>
     <string name="migrated_profile_str">%s バージョンの設定</string>
 </resources>
