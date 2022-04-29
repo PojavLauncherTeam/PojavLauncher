@@ -259,5 +259,7 @@
     <string name="global_delete">Löschen</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Renderer</string>
+    <string name="arc_capes_title">Cosmetica-Umhänge</string>
+    <string name="arc_capes_desc">Aktiviert Umhänge von Cosmetica (früher Arc). Für weitere Informationen https://cosmetica.cc besuchen. OptiFine wird benötigt.</string>
     <string name="migrated_profile_str">%s Versionskonfiguration</string>
 </resources>
