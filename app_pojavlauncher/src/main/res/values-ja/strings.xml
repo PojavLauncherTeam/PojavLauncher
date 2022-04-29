@@ -199,6 +199,7 @@
     <string name="multirt_runtime_incompatiblearch">互換性のないアーキテクチャ: %s</string>
     <string name="multirt_config_title">Java仮想マシン</string>
     <string name="multirt_config_add">新規追加</string>
+    <string name="multirt_config_add_subtitle">新しいJava VMをインポート</string>
     <string name="multirt_title">ランタイムマネージャ</string>
     <string name="multirt_subtitle">インストールされている Java VM を管理</string>
     <string name="multirt_progress_caching">キャッシュ中...</string>
@@ -249,5 +250,6 @@
     <string name="global_delete">削除</string>
     <string name="pedit_java_runtime">Javaランタイム</string>
     <string name="pedit_renderer">レンダラー</string>
+    <string name="arc_capes_title">コスメチカ・ケープズ</string>
     <string name="migrated_profile_str">%s バージョンの設定</string>
 </resources>
