@@ -10,7 +10,6 @@ import android.widget.*;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.gson.JsonSyntaxException;
 import com.kdt.pickafile.*;
 import java.io.*;
@@ -21,7 +20,7 @@ import net.kdt.pojavlaunch.customcontrols.*;
 
 public class CustomControlsActivity extends BaseActivity {
 	private DrawerLayout mDrawerLayout;
-    private NavigationView mDrawerNavigationView;
+    private ListView mDrawerNavigationView;
 	private ControlLayout mControlLayout;
 
 	public boolean isModified = false;
@@ -40,9 +39,30 @@ public class CustomControlsActivity extends BaseActivity {
 
 		mControlLayout = (ControlLayout) findViewById(R.id.customctrl_controllayout);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
-		mDrawerNavigationView = (NavigationView) findViewById(R.id.customctrl_navigation_view);
+		mDrawerNavigationView = (ListView) findViewById(R.id.customctrl_navigation_view);
 
-		mDrawerNavigationView.setNavigationItemSelectedListener(
+		mDrawerNavigationView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.menu_customcontrol)));
+		mDrawerNavigationView.setOnItemClickListener((parent, view, position, id) -> {
+			switch(position) {
+				case 0:
+					mControlLayout.addControlButton(new ControlData("New"));
+					break;
+				case 1:
+					mControlLayout.addDrawer(new ControlDrawerData());
+					break;
+				case 2:
+					load(mControlLayout);
+					break;
+				case 3:
+					save(false, mControlLayout);
+					break;
+				case 4:
+					dialogSelectDefaultCtrl(mControlLayout);
+					break;
+			}
+			mDrawerLayout.closeDrawers();
+		});
+		/*mDrawerNavigationView.setNavigationItemSelectedListener(
 				menuItem -> {
 					switch (menuItem.getItemId()) {
 						case R.id.menu_ctrl_load:
@@ -66,7 +86,7 @@ public class CustomControlsActivity extends BaseActivity {
 					mDrawerLayout.closeDrawers();
 					return true;
 				});
-
+		*/
 		mControlLayout.setActivity(this);
 		mControlLayout.setModifiable(true);
 

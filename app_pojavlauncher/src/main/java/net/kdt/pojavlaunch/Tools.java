@@ -38,10 +38,6 @@ import static android.os.Build.VERSION_CODES.Q;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
-
 public final class Tools {
     public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
 
