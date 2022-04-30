@@ -70,7 +70,7 @@
             android:name=".ExitActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
         <activity
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="sensorPortrait"
             android:name=".PojavLauncherActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
         

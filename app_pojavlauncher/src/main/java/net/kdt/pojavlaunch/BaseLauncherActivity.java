@@ -46,57 +46,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     
     public abstract void statusIsLaunching(boolean isLaunching);
 
-
-    /**
-     * Used by the custom control button from the layout_main_v4
-     * @param view The view triggering the function
-     */
-    public void launchCustomControlsActivity(View view){
-        startActivity(new Intent(BaseLauncherActivity.this, CustomControlsActivity.class));
-    }
-
-    /**
-     * Used by the install button from the layout_main_v4
-     * @param view The view triggering the function
-     */
-    public void installJarFile(View view){
-        installMod(false);
-    }
-
-
     public static final int RUN_MOD_INSTALLER = 2050;
-    private void installMod(boolean customJavaArgs) {
-        if (MultiRTUtils.getExactJreName(8) == null) {
-            Toast.makeText(this, R.string.multirt_nojava8rt, Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (customJavaArgs) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.alerttitle_installmod);
-            builder.setNegativeButton(android.R.string.cancel, null);
-            final AlertDialog dialog;
-            final EditText edit = new EditText(this);
-            edit.setSingleLine();
-            edit.setHint("-jar/-cp /path/to/file.jar ...");
-            builder.setPositiveButton(android.R.string.ok, (di, i) -> {
-                Intent intent = new Intent(BaseLauncherActivity.this, JavaGUILauncherActivity.class);
-                intent.putExtra("skipDetectMod", true);
-                intent.putExtra("javaArgs", edit.getText().toString());
-                startActivity(intent);
-            });
-            dialog = builder.create();
-            dialog.setView(edit);
-            dialog.show();
-        } else {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("jar");
-            if(mimeType == null) mimeType = "*/*";
-            intent.setType(mimeType);
-            startActivityForResult(intent,RUN_MOD_INSTALLER);
-        }
-
-    }
 
     public void launchGame(View v) {
         if (!canBack && mIsAssetsProcessing) {
@@ -196,12 +146,6 @@ public abstract class BaseLauncherActivity extends BaseActivity {
         System.out.println("call to onResumeFragments");
         mRuntimeConfigDialog = new MultiRTConfigDialog();
         mRuntimeConfigDialog.prepare(this);
-
-        ((Button)findViewById(R.id.installJarButton)).setOnLongClickListener(view -> {
-            installMod(true);
-            return true;
-        });
-
         //TODO ADD CRASH CHECK AND FOCUS
         System.out.println("call to onResumeFragments; E");
     }
@@ -268,6 +212,4 @@ public abstract class BaseLauncherActivity extends BaseActivity {
 
         }
     }
-
-    protected abstract void initTabs(int pageIndex);
 }

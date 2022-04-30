@@ -28,6 +28,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -53,33 +54,9 @@ import java.util.List;
 public class PojavLauncherActivity extends BaseLauncherActivity
 {
 
-    // An equivalent ViewPager2 adapter class
-    private static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
-        public ScreenSlidePagerAdapter(FragmentActivity fa) {
-            super(fa);
-        }
-
-        @Override
-        public Fragment createFragment(int position) {
-            if (position == 0) return new LauncherFragment();
-            if (position == 1) return new ConsoleFragment();
-            if (position == 2) return new CrashFragment();
-            if (position == 3) return new LauncherPreferenceFragment();
-            return null;
-        }
-
-        @Override
-        public int getItemCount() {
-            return 4;
-        }
-    }
-
 
     private TextView tvConnectStatus;
     private Spinner accountSelector;
-    private ViewPager2 viewPager;
-    private final Button[] Tabs = new Button[4];
-    private View selectedTab;
     private ImageView accountFaceImageView;
 
     private Button logoutBtn; // MineButtons
@@ -102,35 +79,18 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         setContentView(R.layout.activity_pojav_launcher);
 
         //Boilerplate linking/initialisation
-        viewPager = findViewById(R.id.launchermainTabPager);
-        selectedTab = findViewById(R.id.viewTabSelected);
         tvConnectStatus = findViewById(R.id.launchermain_text_accountstatus);
         accountFaceImageView = findViewById(R.id.launchermain_account_image);
         accountSelector = findViewById(R.id.launchermain_spinner_account);
         mVersionSelector = findViewById(R.id.launchermain_spinner_version);
         mLaunchProgress = findViewById(R.id.progressDownloadBar);
         mLaunchTextStatus = findViewById(R.id.progressDownloadText);
-        logoutBtn = findViewById(R.id.installJarButton);
         mPlayButton = findViewById(R.id.launchermainPlayButton);
-        Tabs[0] = findViewById(R.id.btnTab1);
-        Tabs[1] = findViewById(R.id.btnTab2);
-        Tabs[2] = findViewById(R.id.btnTab3);
-        Tabs[3] = findViewById(R.id.btnTab4);
 
 
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Launcher process id: " + android.os.Process.myPid(), Toast.LENGTH_LONG).show();
         }
-
-        // Setup the viewPager to slide across fragments
-        viewPager.setAdapter(new ScreenSlidePagerAdapter(this));
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                setTabActive(position);
-            }
-        });
-        initTabs(0);
 
         //Setup listener to the backPreference system
         backPreferenceListener = (key, value) -> {
@@ -235,7 +195,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         //Add the preference changed listener
         LauncherPreferences.DEFAULT_PREF.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> {
             if(key.equals("hideSidebar")){
-                changeLookAndFeel(sharedPreferences.getBoolean("hideSidebar",false));
+                //changeLookAndFeel(sharedPreferences.getBoolean("hideSidebar",false));
                 return;
             }
 
@@ -244,12 +204,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 return;
             }
         });
-        changeLookAndFeel(PREF_HIDE_SIDEBAR);
     }
-    private void selectTabPage(int pageIndex){
-        viewPager.setCurrentItem(pageIndex);
-        setTabActive(pageIndex);
-    }
+
     public static String[] basicVersionList;
     public static void setupBasicList(Context ctx) {
         List<String> versions = new ArrayList<>();
@@ -292,76 +248,11 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         mLaunchTextStatus.setVisibility(launchVisibility);
 
 
-        logoutBtn.setEnabled(!isLaunching);
+        //logoutBtn.setEnabled(!isLaunching);
         mVersionSelector.setEnabled(!isLaunching);
         canBack = !isLaunching;
     }
 
-    public void onTabClicked(View view) {
-        for(int i=0; i<Tabs.length;i++){
-            if(view.getId() == Tabs[i].getId()) {
-                selectTabPage(i);
-                return;
-            }
-        }
-    }
-
-    private void setTabActive(int index){
-        for (Button tab : Tabs) {
-            tab.setTypeface(null, Typeface.NORMAL);
-            tab.setTextColor(Color.rgb(220,220,220)); //Slightly less bright white.
-        }
-        Tabs[index].setTypeface(Tabs[index].getTypeface(), Typeface.BOLD);
-        Tabs[index].setTextColor(Color.WHITE);
-
-        //Animating the white bar on the left
-        ValueAnimator animation = ValueAnimator.ofFloat(selectedTab.getY(), Tabs[index].getY()+(Tabs[index].getHeight()- selectedTab.getHeight())/2f);
-        animation.setDuration(250);
-        animation.addUpdateListener(animation1 -> selectedTab.setY((float) animation1.getAnimatedValue()));
-        animation.start();
-    }
-
-    protected void initTabs(int activeTab){
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> {
-            //Do something after 100ms
-            selectTabPage(activeTab);
-        });
-    }
-
-    private void changeLookAndFeel(boolean useOldLook){
-        Guideline guideLine = findViewById(R.id.guidelineLeft);
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
-
-        if(useOldLook || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            //UI v1 Style
-            //Hide the sidebar
-            params.guidePercent = 0; // 0%, range: 0 <-> 1
-            guideLine.setLayoutParams(params);
-
-            //Remove the selected Tab and the head image
-            selectedTab.setVisibility(View.GONE);
-            accountFaceImageView.setVisibility(View.GONE);
-
-            //Enlarge the button, but just a bit.
-            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
-            params.matchConstraintPercentWidth = 0.35f;
-        }else{
-            //UI v2 Style
-            //Show the sidebar back
-            params.guidePercent = 0.23f; // 23%, range: 0 <-> 1
-            guideLine.setLayoutParams(params);
-
-            //Show the selected Tab
-            selectedTab.setVisibility(View.VISIBLE);
-            accountFaceImageView.setVisibility(View.VISIBLE);
-
-            //Set the default button size
-            params = (ConstraintLayout.LayoutParams) mPlayButton.getLayoutParams();
-            params.matchConstraintPercentWidth = 0.25f;
-        }
-        mPlayButton.setLayoutParams(params);
-    }
 
     @Override
     public void onAttachedToWindow() {
@@ -385,8 +276,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-
-        if(count > 0 && viewPager.getCurrentItem() == 3){
+        if(count > 0){
             getSupportFragmentManager().popBackStack();
         }else{
             super.onBackPressed();
