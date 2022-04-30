@@ -1,3 +1,4 @@
+[test](https://img.shields.io/badge/<Codename>-<Tusk>-<blue>?style=flat)
 # PojavLauncher
 A Minecraft: Java Edition launcher for Android and iOS based from Boardwalk. Supports up-to Minecraft 1.18
 
