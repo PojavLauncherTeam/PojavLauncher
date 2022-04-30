@@ -6,5 +6,5 @@
 
 </p>
 
-**PojavLauncher: gh-pages**
+**PojavLauncher: gh-pages**<br>
 This is the branch for the launcher's changelog page, and translated changelog files used in the launcher.
