@@ -13,6 +13,8 @@
 * PojavLauncher is a launcher that allows you to play Minecraft:Java Editions on your Android device!
 
 * It can run **almost** every version of the Minecraft, allowing you to install (.jar only) installers to install modloaders like [forge](https://files.minecraftforge.net/), [fabric](http://fabricmc.net/), [optifine](https://optifine.net), hack clients and much more!
+
+* For more details [check out our wiki](https://github.com/CriticalRange/PojavLauncher/wiki)
 ## Some notes to start with
 - We do not exist on TikTok. No one from the dev team makes TikTok videos. 
 - The official Twitter for PojavLauncher is [@PLaunchTeam](https://twitter.com/PLaunchTeam). Any others (most notably @PojavLauncher) are fake, please report them to Twitter's moderation team.
