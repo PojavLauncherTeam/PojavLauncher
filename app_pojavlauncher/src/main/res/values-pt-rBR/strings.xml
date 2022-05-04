@@ -42,18 +42,22 @@
     <string name="mcl_tab_crash">Log de falha</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectado</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
     <string name="mcl_launch_downloading">Baixando %s</string>
     <string name="mcl_launch_downloading_progress">"Baixando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparando para baixar os recursos</string>
+    <string name="mcl_launch_error_localmode">O Minecraft não pode ser normalmente instalado com uma conta local. Entre com uma conta online para continuar.</string>
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modinstall">Iniciar um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Iniciar um instalador de mods (com argumentos personalizados)</string>
     <string name="mcl_option_customcontrol">Controles personalizados</string>
     <string name="mcl_option_settings">Config</string>
     <string name="mcl_option_about">Sobre</string>
+    <string name="mcl_setting_title_use_surface_view">Usar renderização de superfície alternativa</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar na performance em cenários de gpu limitada</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reinicialização necessária] Isso permite você reinstalar o Java Runtime</string>
     <string name="mcl_setting_title_freeform">Iniciar o Minecraft no modo Livre</string>
@@ -247,6 +251,16 @@
     <string name="gles_hack_none">Não encolher texturas</string>
     <string name="gles_hack_always">Dividir todas texturas por 2</string>
     <string name="gles_hack_sometimes">Dividir texturas grandes por 2 ou 4</string>
+    <string name="unnamed">Sem nome</string>
+    <string name="profiles_latest_snapshot">Snapshot mais recente</string>
+    <string name="profiles_latest_release">Versão mais recente</string>
+    <string name="profiles_editing">Editando perfil</string>
     <string name="profiles_profile_name">Nome</string>
+    <string name="profiles_profile_version">Versão</string>
+    <string name="global_delete">Apagar</string>
+    <string name="pedit_java_runtime">Versão do Java</string>
     <string name="pedit_renderer">Renderizador</string>
+    <string name="arc_capes_title">Capas da Cosmetica</string>
+    <string name="arc_capes_desc">Ativa capas da Cosmetica (anteriormente Arc). Para mais informações visite https://cosmetica.cc. Requer OptiFine.</string>
+    <string name="migrated_profile_str">Configuração da versão %s</string>
 </resources>
