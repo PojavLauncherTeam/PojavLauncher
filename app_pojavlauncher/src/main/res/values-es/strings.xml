@@ -16,7 +16,7 @@
     <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
     <string name="login_title_no_saved_account">No se encontraron cuentas!</string>
-    <string name="login_dialog_no_saved_account">Tu no tienes ninguna cuenta guardada.\nUsa la opción <b>\"Mantenme conectado\"</b> para guardar una cuenta al iniciar sesión por primera vez.</string>
+    <string name="login_dialog_no_saved_account">No tienes ninguna cuenta guardada.\nUsa la opción <b>\"Mantenme conectado\"</b> para guardar una cuenta al iniciar sesión por primera vez.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Desliza de derecha a izquierda para abrir el menú ◀\nMantén pulsado un botón para personalizar: editar, cambiar de tamaño o eliminar."</string>
     <!-- Warnings -->
@@ -83,10 +83,10 @@
     <string name="mcl_setting_category_general">Configuración general</string>
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exporta a OpenGL 2.1</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta a OpenGL 4.3</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta a OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta a OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
@@ -260,5 +260,7 @@ Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abor
     <string name="global_delete">Eliminar</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Renderizador</string>
+    <string name="arc_capes_title">Capas de Comestica</string>
+    <string name="arc_capes_desc">Activa las capas de Cosmetica (anteriormente Arc). Para más información ve a esta página https://cosmetica.cc. Necesitas Optifine.</string>
     <string name="migrated_profile_str">%s Configuración de la versión</string>
 </resources>
