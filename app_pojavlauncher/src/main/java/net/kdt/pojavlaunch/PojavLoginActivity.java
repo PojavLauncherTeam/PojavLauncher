@@ -449,8 +449,8 @@ public class PojavLoginActivity extends BaseActivity {
         } catch (IOException e) {
             Log.e("JREAuto", "JRE was not included on this APK.", e);
         }
-        if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
-        if(rt_version == null) return false;
+        if(current_rt_version == null && MultiRTUtils.getExactJreName(8) != null) return true; //Assume user maintains his own runtime
+        if(rt_version == null) return otherRuntimesAvailable; // On noruntime builds, skip if there is at least 1 runtime installed (no matter if it is 8 or not)
         if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
             try {
                 MultiRTUtils.installRuntimeNamedBinpack(getApplicationInfo().nativeLibraryDir, am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + archAsString(Tools.DEVICE_ARCHITECTURE) + ".tar.xz"), "Internal", rt_version,
