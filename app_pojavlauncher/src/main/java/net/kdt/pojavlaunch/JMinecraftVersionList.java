@@ -73,6 +73,12 @@ public class JMinecraftVersionList {
             public static class ArgRules {
                 public String action;
                 public String features;
+                public ArgOS os;
+
+                public static class ArgOS {
+                    public String name;
+                    public String version;
+                }
             }
         }
     }
