@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
@@ -59,6 +60,7 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         TEMPLATE.lastVersionId = "latest-release";
         return TEMPLATE;
     }
+
     public ProfileEditor(Context ctx, EditSaveCallback editSaveCallback) {
         this.mEditSaveCallback = editSaveCallback;
         mUiThreadHandler = new Handler(Looper.getMainLooper());
@@ -126,11 +128,11 @@ public class ProfileEditor implements ExtraListener<ArrayList<String>> {
         mRendererSpinner.setSelection(rendererIndex);
         ExtraCore.addExtraListener(ExtraConstants.VERSION_LIST,this);
         mProfileNameTextView.setText(minecraftProfile.name);
-        Bitmap profileIcon = ProfileIconCache.getCachedIcon(profile);
+        BitmapDrawable profileIcon = ProfileIconCache.getCachedIcon(profile);
         if(profileIcon == null) {
             profileIcon = ProfileIconCache.tryResolveIcon(profile,minecraftProfile.icon);
         }
-        mProfileIconImageView.setImageBitmap(profileIcon);
+        mProfileIconImageView.setImageDrawable(profileIcon);
         if(minecraftProfile.lastVersionId != null && !"latest-release".equals(minecraftProfile.lastVersionId) && !"latest-snapshot".equals(minecraftProfile.lastVersionId))
             mSelectedVersionId = minecraftProfile.lastVersionId;
         else if(minecraftProfile.lastVersionId != null) {

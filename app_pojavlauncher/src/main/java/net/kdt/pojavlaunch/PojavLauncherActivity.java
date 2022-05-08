@@ -55,9 +55,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 {
 
 
-    private TextView tvConnectStatus;
+
     private Spinner accountSelector;
-    private ImageView accountFaceImageView;
 
     private Button logoutBtn; // MineButtons
     private ExtraListener backPreferenceListener;
@@ -79,8 +78,6 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         setContentView(R.layout.activity_pojav_launcher);
 
         //Boilerplate linking/initialisation
-        tvConnectStatus = findViewById(R.id.launchermain_text_accountstatus);
-        accountFaceImageView = findViewById(R.id.launchermain_account_image);
         accountSelector = findViewById(R.id.launchermain_spinner_account);
         mVersionSelector = findViewById(R.id.launchermain_spinner_version);
         mLaunchProgress = findViewById(R.id.progressDownloadBar);
@@ -232,10 +229,8 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     private void pickAccount() {
         try {
             mProfile = PojavProfile.getCurrentProfileContent(this);
-            accountFaceImageView.setImageBitmap(mProfile.getSkinFace());
 
             //TODO FULL BACKGROUND LOGIN
-            tvConnectStatus.setText(mProfile.accessToken.equals("0") ? R.string.mcl_account_local : R.string.mcl_account_connected);
         } catch(Exception e) {
             mProfile = new MinecraftAccount();
             Tools.showError(this, e, true);

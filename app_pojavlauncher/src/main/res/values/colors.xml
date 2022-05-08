@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background">#F5F3F4</color>
+    <color name="text_on_background">#080605</color>
+
+    <color name="version_background">#710F10</color>
+    <color name="text_on_version_background">@android:color/white</color>
+
     <color name="control_button_color">#4CC4C4C4</color>
     <color name="control_button_pressed_color">#4D000000</color>
 </resources>

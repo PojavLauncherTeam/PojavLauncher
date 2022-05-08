@@ -44,6 +44,7 @@ public class MainFragment extends Fragment{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        /*
         mButton1 = view.findViewById(R.id.btnTab1);
         mButton2 = view.findViewById(R.id.btnTab2);
         mButton3 = view.findViewById(R.id.btnTab3);
@@ -59,7 +60,7 @@ public class MainFragment extends Fragment{
         mInstallJarButton.setOnLongClickListener(v -> {
             installMod(true);
             return true;
-        });
+        });*/
     }
 
 

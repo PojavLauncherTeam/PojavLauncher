@@ -2,9 +2,11 @@ package net.kdt.pojavlaunch.profiles;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -93,34 +95,37 @@ public class ProfileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        if (v == null) v = LayoutInflater.from(parent.getContext()).inflate(R.layout.version_profile_layout,parent,false);
-        setViewProfile(v,mProfileList.get(position));
-        return v;
+        if (convertView == null)
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.version_profile_layout, parent,false);
+        setViewProfile(convertView, mProfileList.get(position));
+        return convertView;
     }
-    public void setViewProfile(View v, String nm) {
+
+    public void setViewProfile(View view, String nm) {
         MinecraftProfile minecraftProfile = mProfiles.get(nm);
         if(minecraftProfile == null) minecraftProfile = dummy;
-        Bitmap cachedIcon = ProfileIconCache.getCachedIcon(nm);
-        ImageView iconView = v.findViewById(R.id.vprof_icon_view);
+        BitmapDrawable cachedIcon = ProfileIconCache.getCachedIcon(nm);
         if(cachedIcon == null) {
-            cachedIcon = ProfileIconCache.tryResolveIcon(nm,minecraftProfile.icon);
+            cachedIcon = ProfileIconCache.tryResolveIcon(nm, minecraftProfile.icon);
         }
-        iconView.setImageBitmap(cachedIcon);
-        if(minecraftProfile.name != null && !minecraftProfile.name.isEmpty())
-            ((TextView)v.findViewById(R.id.vprof_profile_name_view)).setText(minecraftProfile.name);
-        else
-            ((TextView)v.findViewById(R.id.vprof_profile_name_view)).setText(R.string.unnamed);
 
-        TextView tv = v.findViewById(R.id.vprof_version_id_view);
+        TextView textView = (TextView) view;
+
+        textView.setCompoundDrawablesRelative(cachedIcon, null, null, null);
+        if(minecraftProfile.name != null && !minecraftProfile.name.isEmpty())
+            ((TextView)view).setText(minecraftProfile.name);
+        else
+            ((TextView)view).setText(R.string.unnamed);
+
+
         if(minecraftProfile.lastVersionId != null) switch (minecraftProfile.lastVersionId) {
             case "latest-release":
-                tv.setText(R.string.profiles_latest_release);
+                textView.setText(R.string.profiles_latest_release);
             case "latest-snapshot":
-                tv.setText(R.string.profiles_latest_snapshot);
+                textView.setText(R.string.profiles_latest_snapshot);
             default:
-                tv.setText(minecraftProfile.lastVersionId);
-        } else tv.setText(android.R.string.unknownName);
+                textView.setText(minecraftProfile.lastVersionId);
+        } else textView.setText(android.R.string.unknownName);
 
     }
 }

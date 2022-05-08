@@ -5,61 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/launchermain_account_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="3dp"
-
-        android:src="@mipmap/ic_launcher"
-
-        app:layout_constraintEnd_toEndOf="@id/launchermain_spinner_account"
-        app:layout_constraintHorizontal_bias="0.00"
-
-        app:layout_constraintStart_toStartOf="@id/launchermain_spinner_account"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Spinner
         android:id="@+id/launchermain_spinner_account"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="@dimen/_70sdp"
 
         android:background="@android:color/transparent"
-        android:paddingLeft="43dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="@+id/launchermain_account_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/launchermain_account_image" />
 
-    <TextView
-        android:id="@+id/launchermain_text_accountstatus"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="@string/global_waiting"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@id/launchermain_setting_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/launchermain_spinner_account" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.kdt.extended.ExtendedButton
+        android:id="@+id/launchermain_setting_button"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:background="?attr/selectableItemBackground"
+
+
+        app:layout_constraintBottom_toBottomOf="@+id/launchermain_spinner_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/launchermainFragmentContainer"
         android:name="net.kdt.pojavlaunch.fragments.MainFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/progressDownloadBar"
+
+
+        app:layout_constraintBottom_toTopOf="@+id/launchermain_spinner_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/launchermain_text_accountstatus" />
+        app:layout_constraintTop_toBottomOf="@+id/launchermain_spinner_account" />
 
     <ProgressBar
         android:id="@+id/progressDownloadBar"
@@ -93,29 +75,53 @@
     <Spinner
         android:id="@+id/launchermain_spinner_version"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="0dp"
+        android:dropDownWidth="999dp"
+        android:popupBackground="@drawable/ic_menu_java"
+        android:dropDownSelector="@drawable/ic_menu_java"
+        android:background="@drawable/ic_menu_java"
+
+        app:layout_constraintHeight_percent="0.164"
+
+
         app:layout_constraintBottom_toTopOf="@+id/launchermainPlayButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/launchermainPlayButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="@dimen/_195sdp"
+        android:layout_height="@dimen/_62sdp"
         android:background="@drawable/mine_button_background"
         android:onClick="launchGame"
+
         android:text="@string/main_play"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/_25ssp"
+
+        app:layout_constraintBottom_toTopOf="@id/launchermain_pojav_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/launchermain_pojav_version"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36sdp"
+
+        android:background="@color/version_background"
+        android:textColor="@color/text_on_version_background"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:lineSpacingExtra="0dp"
+
+        android:fontFamily="@font/pojav_launcher"
+        android:gravity="center"
+        android:text="pojavlauncher"
+        android:textAllCaps="true"
+        android:textSize="@dimen/_25ssp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
