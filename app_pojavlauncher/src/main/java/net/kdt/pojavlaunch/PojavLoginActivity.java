@@ -295,22 +295,7 @@ public class PojavLoginActivity extends BaseActivity {
             }
         }
     }
-    public static void disableSplash(String dir) {
-        mkdirs(dir + "/config");
-        File forgeSplashFile = new File(dir, "config/splash.properties");
-        String forgeSplashContent = "enabled=true";
-        try {
-            if (forgeSplashFile.exists()) {
-                forgeSplashContent = Tools.read(forgeSplashFile.getAbsolutePath());
-            }
-            if (forgeSplashContent.contains("enabled=true")) {
-                Tools.write(forgeSplashFile.getAbsolutePath(),
-                        forgeSplashContent.replace("enabled=true", "enabled=false"));
-            }
-        } catch (IOException e) {
-            Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
-        }
-    }
+
     private void initMain() throws Throwable {
         mkdirs(Tools.DIR_ACCOUNT_NEW);
         PojavMigrator.migrateAccountData(this);

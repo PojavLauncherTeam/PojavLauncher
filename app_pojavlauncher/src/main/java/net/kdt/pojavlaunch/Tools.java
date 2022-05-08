@@ -129,7 +129,7 @@ public final class Tools {
                 if(minecraftProfile.javaArgs != null && !minecraftProfile.javaArgs.isEmpty())
                     LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = minecraftProfile.javaArgs;
             }
-        PojavLoginActivity.disableSplash(gamedirPath);
+        Tools.disableForgeSplashScreen(gamedirPath);
         String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
 
         // Select the appropriate openGL version
@@ -827,5 +827,29 @@ public final class Tools {
             }
         }
         return result;
+    }
+
+    /**
+     * Disable the forge splash screen
+     * @param dir The .minecraft folder.
+     * @return Whether it succeeded.
+     */
+    public static boolean disableForgeSplashScreen(String dir) {
+        File forgeSplashFile = new File(dir, "config/splash.properties");
+        forgeSplashFile.getParentFile().mkdirs();
+        String forgeSplashContent = "enabled=true";
+        try {
+            if (forgeSplashFile.exists()) {
+                forgeSplashContent = Tools.read(forgeSplashFile.getAbsolutePath());
+            }
+            if (forgeSplashContent.contains("enabled=true")) {
+                Tools.write(forgeSplashFile.getAbsolutePath(),
+                forgeSplashContent.replace("enabled=true", "enabled=false"));
+            }
+        } catch (IOException e) {
+            Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
+            return false;
+        }
+        return true;
     }
 }
